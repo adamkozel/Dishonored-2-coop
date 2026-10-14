@@ -35,7 +35,8 @@ Under an active goal, keep working until its exit criteria are met. There are no
 The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and manage the board without asking. The loop must not slow the lab work: per result it adds about 15 s, and nothing ever waits on CI.
 
 1. **Pick.**
-   - Take the next Todo card on the [board](https://github.com/users/adamkozel/projects/3/views/2) in stage order: `gh project item-list 3 --owner adamkozel --format json`.
+   - First run `gh pr list --state open`. Merge every ready PR whose checks are green (step 5). Push any unrecorded result to its draft.
+   - Then take the next Todo card on the [board](https://github.com/users/adamkozel/projects/3/views/2) in stage order: `gh project item-list 3 --owner adamkozel --format json`.
    - Set the card to In Progress.
    - Run `git switch main && git pull --ff-only && git switch -c stage<N>/<short-slug>`.
 2. **Work** exactly as the runbooks say: build, archive the candidate, deploy, run the take, audit, then update the docs, `work/current-task-state.json` and the catalog. The lab procedure is unchanged.
@@ -92,4 +93,4 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
 - **gh:** `C:\Program Files\GitHub CLI\gh.exe` (2.102+). Prompts are disabled; the token has the repo, workflow and project scopes.
 - **Message text:** in PowerShell, pass commit and PR text through files (`-F`, `--body-file`). Here-strings piped as `-F -` do not work.
 - **Git Bash:** drop the leading `/` from `gh api` paths.
-- **Do not:** enable GitHub auto-merge (there are no required checks, so it merges at once), force-push `main`, or commit lab instances, game copies, binaries or videos (the manifest and hook enforce this).
+- **Do not:** enable GitHub auto-merge (a private repo on the free plan can't have required checks or rulesets, so it would merge at once), force-push `main`, or commit lab instances, game copies, binaries or videos (the manifest and hook enforce this).
