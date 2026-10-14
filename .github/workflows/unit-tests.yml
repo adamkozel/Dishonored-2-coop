@@ -1,25 +1,42 @@
-# Builds every target of the lab project (mod DLL, probes, tests) with MSVC and
-# runs the self-contained unit tests. authoring_clip_tests needs a game-derived
-# clip as input, so it is built but only run locally.
+# Builds the self-contained unit tests of the lab project with MSVC and runs
+# them, for a PR that is ready to merge and changes the build inputs (drafts
+# are skipped). Kept lean for the free plan's Actions minutes: sparse checkout
+# of the lab project, test targets only. The mod DLL is built locally for every
+# candidate, and the Linux checks job verifies every build input is committed
+# (tools/repo/check-sources.sh). authoring_clip_tests needs a game-derived clip
+# as input, so it is built but only run locally.
 name: unit-tests
 on:
   pull_request:
-    paths: ['outputs/d2-coop-lab/**', '.github/workflows/unit-tests.yml']
-  push:
-    branches: [main]
-    paths: ['outputs/d2-coop-lab/**', '.github/workflows/unit-tests.yml']
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - 'outputs/d2-coop-lab/src/**'
+      - 'outputs/d2-coop-lab/third_party/**'
+      - 'outputs/d2-coop-lab/CMakeLists.txt'
+      - '.github/workflows/unit-tests.yml'
 permissions:
   contents: read
+concurrency:
+  group: unit-tests-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 jobs:
   build-and-test:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: outputs/d2-coop-lab
       - name: Configure
         run: cmake -S outputs/d2-coop-lab -B build -A x64
-      - name: Build
-        run: cmake --build build --config Release --parallel
+      - name: Build test targets
+        shell: pwsh
+        run: |
+          $targets = Select-String -Path outputs/d2-coop-lab/CMakeLists.txt -Pattern 'add_executable\((d2_\w+_tests)\b' | ForEach-Object { $_.Matches[0].Groups[1].Value }
+          if ($targets.Count -lt 10) { throw "Expected the unit-test targets, found $($targets.Count)" }
+          cmake --build build --config Release --parallel --target @targets
+          if ($LASTEXITCODE) { throw "Build failed ($LASTEXITCODE)" }
       - name: Run unit tests
         shell: pwsh
         run: |

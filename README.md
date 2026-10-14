@@ -22,16 +22,17 @@ These stay on the development machine:
 - Copies of the game (`work/asset-game`, `work/lab-game`), lab instances and save profiles.
 - Game-derived partner assets and release packages. Rebuild packages with `work/release/build_release_*.py` from a local game copy.
 - Videos, movement banks and other binaries.
-- Data dumps over 256 KB.
+- Data dumps over 256 KB. The exceptions are the live `work/current-task-state.json` and `work/natural-moveset/review-catalog.json`, which are tracked up to 45 MB (GitHub warns at 50 MB).
 - Ghidra databases and installed tools.
 
-[`tools/repo/build_repo_manifest.py`](tools/repo/build_repo_manifest.py) defines exactly what is tracked:
+[`tools/repo/build_repo_manifest.py`](tools/repo/build_repo_manifest.py) defines exactly what is tracked. It writes the oversized files into a generated section of `.gitignore`, so `git add -A` stages exactly the selection (about 10 s):
 
 ```
-python tools/repo/build_repo_manifest.py --report
-python tools/repo/build_repo_manifest.py --write files.txt --write-exclude .git/info/exclude
-git add --pathspec-from-file=files.txt
+python tools/repo/build_repo_manifest.py --update-gitignore
+git add -A
 ```
+
+`--report` summarizes what is included and skipped. `--write files.txt` lists the selection.
 
 `.gitignore` denies by default. [`tools/repo/pre-commit`](tools/repo/pre-commit) rejects binaries, oversized files, never-committed folders and any SteamID. Install it with `cp tools/repo/pre-commit .git/hooks/pre-commit`.
 
@@ -45,19 +46,24 @@ Each PR includes:
 - the audit;
 - the updated handoff chapters.
 
-The agent runs the whole cycle without approval pauses:
-1. branch;
-2. commit;
-3. push;
-4. `gh pr create`;
-5. wait for the checks;
-6. `gh pr merge --squash` (the branch is then deleted);
-7. fast-forward local `main`.
+The agent runs the whole cycle without approval pauses. The exact loop is in [CLAUDE.md](CLAUDE.md):
+1. Branch per board card.
+2. Commit and push after every result, to a **draft** PR. Drafts run no CI; the pre-commit hook has already checked each commit.
+3. `gh pr ready` when the card is done.
+4. Squash-merge once the checks are green. Work continues while they run; nothing waits on CI.
 
-PR checks:
-- **guard** runs `tools/repo/pre-commit --all` over every tracked file.
-- **unit-tests** builds the lab project with MSVC and runs the self-contained unit tests. It runs only when `outputs/d2-coop-lab/` changes.
-- **evidence** keeps recorded takes and candidate archives append-only:
+PR checks run when a PR is ready to merge:
+- **checks / repo** (ubuntu, about 1 min):
+  - the guard: `tools/repo/pre-commit --all` over every tracked file;
+  - `tools/repo/check-sources.sh`, which confirms every build input of the lab project is committed;
+  - the evidence self-test and the evidence check.
+- **unit-tests** (windows, about 3–4 min): a sparse checkout that builds only the test targets with MSVC and runs the self-contained unit tests.
+  - It runs only when `src/`, `third_party/` or `CMakeLists.txt` of the lab project change.
+  - The mod DLL is built locally for every candidate.
+
+Both are kept lean for the free plan's 2,000 Actions minutes a month.
+
+New pushes cancel superseded runs. The evidence check works like this:
   - It covers every folder holding `result.json` or `run-script.ps1`, and `work/movement-integration/candidate-*/`.
   - A PR may add files there but not modify, delete or rename existing ones.
   - The pre-commit hook runs the same check (`tools/repo/check-evidence.sh`) locally.

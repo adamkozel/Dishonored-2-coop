@@ -10,6 +10,7 @@ All commands below assume PowerShell at `C:\Users\adako\Documents\Codex\2026-10-
 4. Check the current protected-file manifest [protected-save-hashes-before-v4.json](../../work/movement-integration/protected-save-hashes-before-v4.json). It records 14 original save/config hashes; do not overwrite them to make a test pass.
 5. Allow any active recording/fixture/deployment to finish before starting another. Finalize recordings before validation, frame extraction or dashboard indexing.
 6. Keep the two game windows windowed and side by side. Automated input is role-specific; concurrent physical input invalidates controlled comparisons.
+7. Check `git status` and the current branch. Record any uncommitted result before starting the next card. Then take the next card from the [roadmap board](https://github.com/users/adamkozel/projects/3/views/2) (see [CLAUDE.md](../../CLAUDE.md)).
 
 ## Build
 
@@ -31,7 +32,7 @@ Relevant additional targets include `d2_movement_bank_tests` and `d2_shadow_acti
 
 ## Archive and deploy
 
-Before deploying, preserve the source, DLL, relevant banks/assets, manifests and exact hashes in a new uniquely named candidate directory. Keep the previous compatible binary/source/bank set. There is no project Git history to substitute for those archives in this workspace.
+Before deploying, preserve the source, DLL, relevant banks/assets, manifests and exact hashes in a new uniquely named candidate directory. Keep the previous compatible binary/source/bank set. Since 14 October 2026 the workspace is also a Git repository (private GitHub repo `adamkozel/Dishonored-2-coop`). Git does not replace these archives: DLLs, banks and game-derived assets stay local, and candidate folders are append-only evidence. After each result, record it through the GitHub loop in [CLAUDE.md](../../CLAUDE.md): commit and push to the card's draft PR (about 15 s, never waiting on CI).
 
 [Deploy-SourceClock.ps1](../../work/movement-integration/Deploy-SourceClock.ps1) checks the physical target and protected saves, stops only validated isolated processes, launches both roles with `-AssetExperiment`, restores the fixture and rechecks hashes. It is an active mutation script, not a read-only check. The launcher stages the built proxy; use the archived compatible set for deliberate rollback and verify it afterward. Do not copy a DLL over a running process or blindly rerun obsolete deploy/index scripts.
 
