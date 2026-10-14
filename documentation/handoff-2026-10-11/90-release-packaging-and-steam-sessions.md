@@ -158,6 +158,26 @@ Results:
 - Install/rollback passes all six scratch cases ([result](../../work/release/release-install-v1216/result.json)).
 - The product-mode boot passes again on 1213b ([1217](../../work/release/product-boot-v1217/result.json)): Steam ready at boot, no loopback, idle, cleaned up.
 
+## Two-account connection through the lab VM (take 1221)
+
+The second Steam account runs in the Hyper-V lab VM `D2CoopVM`. It has its own Dishonored 2 install, and its `Dishonored2.exe` is byte-identical to the lab copy. The two accounts are Steam friends. `tools/vm/Sync-D2LabVMWorkspace.ps1` mirrors the lab into the guest, and `tools/vm/D2LabVM.Lab.ps1` drives the guest instance from the host.
+
+**Result** (confirmed runtime, [take](../../work/natural-moveset/two-account-session-v1221/result.json)):
+- **Host:** the host lab instance (1213d, main account, Dunwall fixture) ran `coop_session host` and got a friends-only lobby.
+- **Join:** the VM lab instance (same DLL, second account, same fixture) ran `coop_session join <lobby>`.
+- **Link:** Steam P2P connected on both sides: phase 5, connection state 3, packets both ways, `remoteFresh`.
+- **Movement:** the host saw the VM player walk 1.55 m, and the VM saw the host player walk 5.47 m.
+- Visual acceptance was not assessed.
+
+**Findings**
+- **Lab mode keeps a stale loopback connection (confirmed static and runtime, #23).** `coop_session host` started from lab mode leaves the loopback connection handle in place, because `stopOnlineSession` resets the transport only when an online session is already active. While the host's local client exists, every lobby partner is refused. The take restarted the host instance alone. Product mode is unaffected.
+- **The VM has no controller device (confirmed runtime, #24).** The simulated controller is ignored inside the VM. The Hyper-V keyboard drives the VM role meanwhile.
+- **The release needs the VC++ runtime (#22).** The DLL and probe need the VC++ 2015–2022 runtime, which a clean Windows install such as the VM lacks. The lab copies it app-local; the release must solve it too.
+
+**Not run yet:**
+- F7 product hosting with the invite overlay / Steam Join Game, from the release package installed in the VM;
+- disconnect and reconnect.
+
 ## What stage 7 still needs
 
 - **Two-account online validation** (host, join, invite, disconnect and reconnect) needs a second Steam account and the user. It remains outstanding until it is actually performed.

@@ -8,6 +8,9 @@
 Updated 2026-10-14. Live candidate-npc-combat-v1213b ([identity](../../work/movement-integration/candidate-npc-combat-v1213b/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
 - A native use (player state 75, plus the focused entity) now plays an authored reach-and-operate interaction on the partner's body, for both roles (1214c, [chapter 92](92-native-use-interactions.md)). `lever_button_crank_wheel` is runtime-bound for the generic reach.
 - Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
+- Two machines (stage 2, 2026-10-15): the lab VM `D2CoopVM` now runs the user's second Steam account ([tools/vm](../../tools/vm/README.md)).
+  - The first two-account connection passed in take [two-account-session-v1221](../../work/natural-moveset/two-account-session-v1221/result.json). The host lab instance on the main account opened a friends-only lobby, and the VM instance on the second account joined over Steam P2P. Movement synced both ways.
+  - Deployed DLL: `outputs/d2-coop-lab/bin/dinput8.dll` is hash-identical to candidate-npc-combat-v1213d. See [chapter 90](90-release-packaging-and-steam-sessions.md#two-account-connection-through-the-lab-vm-take-1221).
 
 Previous header (1203f, history): Live candidate-npc-combat-v1203f ([identity](../../work/movement-integration/candidate-npc-combat-v1203f/identity.json)). Latest (stage 3 gate 4, product presentation):
 - In product mode the partner presentation now recovers by itself after pause menus and the tutorial modal (1204f).
