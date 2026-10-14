@@ -68,6 +68,30 @@ function Start-D2LabVMInteractive {
     }
 }
 
+function Start-D2LabVMHidden {
+    # Like Start-D2LabVMInteractive, but through wscript (no console, window style 0), so the
+    # started process never takes focus from the game. A powershell.exe start stole focus and
+    # Dishonored 2 paused (first FPS measurement, 2026-10-14).
+    param([Parameter(Mandatory)][string]$CommandLine)
+    $vbs = 'C:\D2Lab\run-hidden.vbs'
+    Invoke-D2LabVM -ArgumentList $vbs -ScriptBlock { param($p) Set-Content -LiteralPath $p -Encoding ASCII -Value 'CreateObject("WScript.Shell").Run WScript.Arguments(0), 0, False' }
+    Start-D2LabVMInteractive -FilePath 'wscript.exe' -Arguments "`"$vbs`" `"$($CommandLine.Replace('"', '""'))`""
+}
+
+function Start-D2LabVMGame {
+    # Launches Dishonored 2 in the VM through Steam (second account) on the visible desktop, with
+    # the lab's low-load settings also passed as +set arguments, as Start-D2Lab does for the host
+    # instances: the config file alone did not stop the game pausing on focus loss.
+    param([switch]$ShowFps, [ValidateRange(0, 4)][int]$SwapInterval = 1)
+    $set = [ordered]@{ com_showLoadingScreen = 0; r_renderQualityPresets = 6; r_maxDynamicDecalsPreset = 0; r_textureDetailsPreset = 0; r_viewDistPreset = 0
+        r_modelsQualityPreset = 0; r_oceanQualityPreset = 0; r_shadowQualityPreset = 0; r_downsampleQualityPreset = 0; r_AntiAliasingPreset = 0
+        r_skipCameraMotionBlur = 1; r_skipSSAO = 1; r_fullscreen = 0; r_windowWidth = 944; r_windowHeight = 540; r_swapInterval = $SwapInterval; win_pauseOnFocusLoss = 0 }
+    if ($ShowFps) { $set.com_showFPS = 1 }
+    $args = '-applaunch 403640 ' + (($set.GetEnumerator() | ForEach-Object { "+set $($_.Key) $($_.Value)" }) -join ' ')
+    if (Invoke-D2LabVM { [bool](Get-Process Dishonored2 -ErrorAction SilentlyContinue) }) { throw 'Dishonored 2 is already running in the VM' }
+    Start-D2LabVMInteractive -FilePath 'C:\Program Files (x86)\Steam\steam.exe' -Arguments $args
+}
+
 function Save-D2LabVMScreen {
     # Host-side screenshot of the VM console (no viewer window, no guest access needed):
     # Msvm_VirtualSystemManagementService.GetVirtualSystemThumbnailImage returns RGB565 pixels.
@@ -89,9 +113,51 @@ function Save-D2LabVMScreen {
 }
 
 function Send-D2LabVMKey {
-    # Type a key into the VM console (Msvm_Keyboard); used for "Press any key to boot from CD or DVD".
-    param([int]$VirtualKey = 0x0D, [int]$Count = 1)
+    # Type a key into the VM console (Msvm_Keyboard), e.g. "Press any key to boot from CD or DVD".
+    # -HoldMs presses and holds (walking, hold-to-skip), then releases.
+    param([int]$VirtualKey = 0x0D, [int]$Count = 1, [int]$HoldMs = 0)
     $vm = Get-CimInstance -Namespace root/virtualization/v2 -ClassName Msvm_ComputerSystem -Filter "ElementName='$VmName'"
     $kb = Get-CimAssociatedInstance -InputObject $vm -ResultClassName Msvm_Keyboard
-    for ($i = 0; $i -lt $Count; $i++) { Invoke-CimMethod -InputObject $kb -MethodName TypeKey -Arguments @{ keyCode = $VirtualKey } | Out-Null; Start-Sleep -Milliseconds 400 }
+    for ($i = 0; $i -lt $Count; $i++) {
+        if ($HoldMs -gt 0) {
+            Invoke-CimMethod -InputObject $kb -MethodName PressKey -Arguments @{ keyCode = $VirtualKey } | Out-Null
+            Start-Sleep -Milliseconds $HoldMs
+            Invoke-CimMethod -InputObject $kb -MethodName ReleaseKey -Arguments @{ keyCode = $VirtualKey } | Out-Null
+        } else { Invoke-CimMethod -InputObject $kb -MethodName TypeKey -Arguments @{ keyCode = $VirtualKey } | Out-Null }
+        Start-Sleep -Milliseconds 400
+    }
+}
+
+function Get-D2LabVMFps {
+    # Records the VM game window for -Seconds (guest/Measure-D2Fps.ps1 on the interactive desktop)
+    # and returns delivered-frame statistics from the clip's frame timestamps.
+    # -During runs on the host while the capture records (e.g. holding W to walk).
+    param([string]$Name = 'fps', [int]$Seconds = 10, [scriptblock]$During)
+    $guestScript = Join-Path $PSScriptRoot 'guest/Measure-D2Fps.ps1'
+    $s = New-PSSession -VMName $VmName -Credential (Get-D2LabGuestCredential)
+    try { Copy-Item -ToSession $s -Path $guestScript -Destination 'C:\D2Lab\Measure-D2Fps.ps1' -Force } finally { Remove-PSSession $s }
+    Start-D2LabVMHidden -CommandLine "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\D2Lab\Measure-D2Fps.ps1 -Name $Name -Seconds $Seconds"
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    if ($During) { & $During }
+    $left = ($Seconds + 4) - $sw.Elapsed.TotalSeconds; if ($left -gt 0) { Start-Sleep -Seconds ([math]::Ceiling($left)) }
+    Invoke-D2LabVM -ArgumentList $Name -ScriptBlock {
+        param($n)
+        $done = "C:\D2Lab\fps\$n.done"
+        for ($i = 0; $i -lt 30 -and !(Test-Path $done); $i++) { Start-Sleep -Seconds 1 }
+        $status = if (Test-Path $done) { (Get-Content $done) } else { 'no result' }
+        $mp4 = "C:\D2Lab\fps\$n.mp4"
+        if (!(Test-Path $mp4)) { return [pscustomobject]@{ status = $status; log = (Get-Content "C:\D2Lab\fps\$n.log" -ErrorAction SilentlyContinue) -join ' ' } }
+        $t = & C:\D2Lab\tools\ffprobe.exe -v error -select_streams v:0 -show_entries packet=pts_time -of csv=p=0 $mp4 | ForEach-Object { [double]$_ } | Sort-Object
+        $d = for ($i = 1; $i -lt $t.Count; $i++) { ($t[$i] - $t[$i - 1]) * 1000 }
+        $span = $t[-1] - $t[0]; $sorted = $d | Sort-Object
+        [pscustomobject]@{
+            status = $status; frames = $t.Count; seconds = [math]::Round($span, 2)
+            avgFps = [math]::Round(($t.Count - 1) / $span, 1)
+            medianFrameMs = [math]::Round($sorted[[int]($sorted.Count / 2)], 1)
+            p99FrameMs = [math]::Round($sorted[[int]($sorted.Count * 0.99)], 1)
+            maxFrameMs = [math]::Round($sorted[-1], 1)
+            onePercentLowFps = [math]::Round(1000 / (($sorted | Select-Object -Last ([math]::Max(1, [int]($sorted.Count / 100)))) | Measure-Object -Average).Average, 1)
+            hitches50ms = @($d | Where-Object { $_ -gt 50 }).Count
+        }
+    }
 }
