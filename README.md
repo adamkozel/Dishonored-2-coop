@@ -65,4 +65,11 @@ PR checks:
 
 Lab takes and visual acceptance still happen on the local two-instance lab. CI does not replace them.
 
+The [roadmap board](https://github.com/users/adamkozel/projects/3/views/2) shows the work at a glance:
+- **Columns:** Todo, In Progress, Needs you, Done.
+- **Stage field:** 1–7.
+- **Cards:** one issue per open item at working size, plus one umbrella issue per later stage. The 105-item movement checklist stays in [movement-requirements.md](documentation/handoff-2026-10-11/generated/movement-requirements.md).
+- **Updates:** a PR says `Closes #n`, so merging it moves the card to Done. "Needs you" holds items that only the user can do.
+- **Source of truth:** the roadmap and handoff docs; the board is a view of them.
+
 Line endings are committed as-is (`core.autocrlf=false`), so script hashes recorded in the evidence stay valid.
