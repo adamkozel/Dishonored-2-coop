@@ -57,6 +57,11 @@ The agent runs the whole cycle without approval pauses:
 PR checks:
 - **guard** runs `tools/repo/pre-commit --all` over every tracked file.
 - **unit-tests** builds the lab project with MSVC and runs the self-contained unit tests. It runs only when `outputs/d2-coop-lab/` changes.
+- **evidence** keeps recorded takes and candidate archives append-only:
+  - It covers every folder holding `result.json` or `run-script.ps1`, and `work/movement-integration/candidate-*/`.
+  - A PR may add files there but not modify, delete or rename existing ones.
+  - The pre-commit hook runs the same check (`tools/repo/check-evidence.sh`) locally.
+  - A deliberate amendment, such as a privacy scrub, needs `EVIDENCE_AMEND=1` locally, the `evidence-amend` label on the PR, and the reason in the PR description.
 
 Lab takes and visual acceptance still happen on the local two-instance lab. CI does not replace them.
 
