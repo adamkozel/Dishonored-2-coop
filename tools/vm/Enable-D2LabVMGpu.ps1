@@ -1,6 +1,11 @@
 # Attaches a partition of the host GPU (RTX 5080) to the lab VM (GPU-P) and copies the host
 # NVIDIA driver into the guest, which GPU-P requires (guest uses the host's driver store).
 # Re-run after every host NVIDIA driver update. pwsh 7, member of "Hyper-V Administrators".
+# -Share: fraction of the GPU (VRAM, compute, encode, decode) given to the VM. The first build used
+# 8-10%; the VM's default-quality game then hung its slice (LiveKernelEvent 0x141) and the host
+# NVIDIA driver bugchecked in its recovery (0x50 in nvlddmkm.sys, dump read 2026-10-14). 40% leaves
+# the host lab instances ample room at their low settings.
+param([ValidateRange(0.05, 0.9)][double]$Share = 0.4)
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'D2LabVM.Common.ps1')
 
@@ -16,11 +21,12 @@ Write-Host "Host GPU: $($gpu.Name), driver $($gpu.DriverVersion), store $folderN
 # GPU partition (VM must be off).
 if ((Get-VM $VmName).State -ne 'Off') { Stop-VM -Name $VmName -Force }
 if (!(Get-VMGpuPartitionAdapter -VMName $VmName -ErrorAction SilentlyContinue)) { Add-VMGpuPartitionAdapter -VMName $VmName }
+$v = [uint64]([math]::Round($Share * 1000000000))   # partition units: 1e9 = the whole GPU
 Set-VMGpuPartitionAdapter -VMName $VmName `
-    -MinPartitionVRAM 80000000 -MaxPartitionVRAM 100000000 -OptimalPartitionVRAM 100000000 `
-    -MinPartitionEncode 80000000 -MaxPartitionEncode 100000000 -OptimalPartitionEncode 100000000 `
-    -MinPartitionDecode 80000000 -MaxPartitionDecode 100000000 -OptimalPartitionDecode 100000000 `
-    -MinPartitionCompute 80000000 -MaxPartitionCompute 100000000 -OptimalPartitionCompute 100000000
+    -MinPartitionVRAM $v -MaxPartitionVRAM $v -OptimalPartitionVRAM $v `
+    -MinPartitionEncode $v -MaxPartitionEncode $v -OptimalPartitionEncode $v `
+    -MinPartitionDecode $v -MaxPartitionDecode $v -OptimalPartitionDecode $v `
+    -MinPartitionCompute $v -MaxPartitionCompute $v -OptimalPartitionCompute $v
 Start-VM -Name $VmName
 Wait-D2LabVMReady -TimeoutMin 10 | Out-Null
 
