@@ -52,6 +52,22 @@ function Wait-D2LabVMReady {
     throw "Guest not ready through PowerShell Direct within $TimeoutMin min"
 }
 
+function Start-D2LabVMInteractive {
+    # Start a program on the guest's signed-in console desktop (d2lab), not in PowerShell Direct's
+    # hidden logon session: a one-shot interactive scheduled task (/IT) run immediately.
+    param([Parameter(Mandatory)][string]$FilePath, [string]$Arguments = '', [string]$WorkingDirectory = '')
+    Invoke-D2LabVM -ArgumentList $FilePath, $Arguments, $WorkingDirectory -ScriptBlock {
+        param($f, $a, $w)
+        $action = if ($w) { New-ScheduledTaskAction -Execute $f -Argument $a -WorkingDirectory $w } elseif ($a) { New-ScheduledTaskAction -Execute $f -Argument $a } else { New-ScheduledTaskAction -Execute $f }
+        $principal = New-ScheduledTaskPrincipal -UserId "$env:COMPUTERNAME\d2lab" -LogonType Interactive -RunLevel Highest
+        $name = 'D2Lab-Interactive-' + [guid]::NewGuid().ToString('N').Substring(0, 8)
+        Register-ScheduledTask -TaskName $name -Action $action -Principal $principal -Settings (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -ExecutionTimeLimit 0) | Out-Null
+        Start-ScheduledTask -TaskName $name
+        Start-Sleep -Seconds 2
+        Unregister-ScheduledTask -TaskName $name -Confirm:$false
+    }
+}
+
 function Save-D2LabVMScreen {
     # Host-side screenshot of the VM console (no viewer window, no guest access needed):
     # Msvm_VirtualSystemManagementService.GetVirtualSystemThumbnailImage returns RGB565 pixels.

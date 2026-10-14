@@ -30,3 +30,9 @@ All state lives in `work/vm-lab/`, which is never committed:
 - `guest-credential.xml`.
 
 The guest account `d2lab` has a random password that is stored only DPAPI-encrypted for this Windows user. The answer ISO that carried it is deleted after setup.
+
+Programs that must appear on the guest's signed-in desktop, such as Steam and the game, start through `Start-D2LabVMInteractive`. That helper runs a one-shot interactive scheduled task. PowerShell Direct alone runs in a hidden logon session.
+
+Hyper-V's enhanced session mode is switched off on this host (`Set-VMHost -EnableEnhancedSessionMode $false`), for two reasons:
+- VMConnect then shows the console the game renders in, and doesn't ask for the guest password over RDP.
+- The autologon console session is never taken over.
