@@ -3,9 +3,10 @@
 # Rejects staged binaries, oversized files, files under never-committed folders
 # and any staged text containing a SteamID64 (7656119 + 10 digits).
 # Batched: a handful of git calls regardless of how many files are staged.
+# "pre-commit --all" checks every tracked file instead (CI guard).
 list=$(mktemp) || exit 1
 trap 'rm -f "$list" "$list.size"' EXIT
-git diff --cached --name-only --diff-filter=AM > "$list"
+if [ "$1" = "--all" ]; then git ls-files > "$list"; else git diff --cached --name-only --diff-filter=AM > "$list"; fi
 [ -s "$list" ] || exit 0
 fail=0
 if grep -E '^(work/(asset-game|lab-game|lab-instances|build|tools)/|outputs/d2-coop-lab/(bin|assets)/|work/release/online-session-v1179/)|/profile/' "$list" >&2; then
