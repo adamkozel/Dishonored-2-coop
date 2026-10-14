@@ -44,9 +44,10 @@ Add-VMDvdDrive -VMName $VmName -Path $answerIso
 Set-VMFirmware -VMName $VmName -FirstBootDevice $dvd
 Log "VM created ($ProcessorCount vCPU, $([math]::Round($MemoryBytes/1GB)) GB, $([math]::Round($DiskBytes/1GB)) GB disk)"
 
-# 3. Boot; answer "Press any key to boot from CD or DVD" by typing Enter for ~25 s.
+# 3. Boot; answer "Press any key to boot from CD or DVD" (shown ~5 s) by typing Enter for 8 s only.
+#    Longer reaches Setup's window, whose focused Cancel button then asks "quit?" (seen in the first build).
 Start-VM -Name $VmName
-for ($i = 0; $i -lt 25; $i++) { Start-Sleep -Seconds 1; try { Send-D2LabVMKey -VirtualKey 0x0D } catch { } }
+for ($i = 0; $i -lt 8; $i++) { Start-Sleep -Seconds 1; try { Send-D2LabVMKey -VirtualKey 0x0D } catch { } }
 Log "setup started; waiting for the unattended install and autologon"
 
 # 4. Wait for the installed guest (several reboots), then detach the install media.

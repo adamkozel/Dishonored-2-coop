@@ -43,6 +43,26 @@ function Wait-D2LabVMReady {
     throw "Guest not reachable through PowerShell Direct within $TimeoutMin min"
 }
 
+function Save-D2LabVMScreen {
+    # Host-side screenshot of the VM console (no viewer window, no guest access needed):
+    # Msvm_VirtualSystemManagementService.GetVirtualSystemThumbnailImage returns RGB565 pixels.
+    param([Parameter(Mandatory)][string]$Path, [int]$Width = 1280, [int]$Height = 720)
+    $vm = Get-CimInstance -Namespace root/virtualization/v2 -ClassName Msvm_ComputerSystem -Filter "ElementName='$VmName'"
+    $settings = Get-CimAssociatedInstance -InputObject $vm -ResultClassName Msvm_VirtualSystemSettingData | Where-Object VirtualSystemType -eq 'Microsoft:Hyper-V:System:Realized'
+    $svc = Get-CimInstance -Namespace root/virtualization/v2 -ClassName Msvm_VirtualSystemManagementService
+    $r = Invoke-CimMethod -InputObject $svc -MethodName GetVirtualSystemThumbnailImage -Arguments @{ TargetSystem = $settings; WidthPixels = [uint16]$Width; HeightPixels = [uint16]$Height }
+    if ($r.ReturnValue -ne 0 -or !$r.ImageData) { throw "Thumbnail failed ($($r.ReturnValue))" }
+    Add-Type -AssemblyName System.Drawing
+    $bmp = [Drawing.Bitmap]::new($Width, $Height, [Drawing.Imaging.PixelFormat]::Format16bppRgb565)
+    $rect = [Drawing.Rectangle]::new(0, 0, $Width, $Height)
+    $data = $bmp.LockBits($rect, [Drawing.Imaging.ImageLockMode]::WriteOnly, $bmp.PixelFormat)
+    # ImageData carries 4 bytes past the pixels; copy exactly width*height*2 (stride is 4-byte aligned for even widths).
+    if ($Width % 2) { throw 'Width must be even' }
+    [Runtime.InteropServices.Marshal]::Copy([byte[]]$r.ImageData, 0, $data.Scan0, $Width * $Height * 2)
+    $bmp.UnlockBits($data); $bmp.Save([IO.Path]::GetFullPath($Path), [Drawing.Imaging.ImageFormat]::Png); $bmp.Dispose()
+    Get-Item $Path
+}
+
 function Send-D2LabVMKey {
     # Type a key into the VM console (Msvm_Keyboard); used for "Press any key to boot from CD or DVD".
     param([int]$VirtualKey = 0x0D, [int]$Count = 1)
