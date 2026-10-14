@@ -20,10 +20,11 @@ if grep -Ei '\.(mp4|bin|dll|exe|pdb|lib|obj|zip|7z|gz|png|jpg|jpeg|ndjson|resour
   echo "pre-commit: files above are binary/media types" >&2; fail=1
 fi
 # Staged blob sizes, one batched call; caps: 256 KB for data/text, 2 MB otherwise
-# (documentation/ up to 16 MB).
+# (documentation/ and the two live state files up to 16 MB).
 sed 's/^/:/' "$list" | git cat-file --batch-check='%(objectsize)' > "$list.size"
 if paste -d ' ' "$list.size" "$list" | awk '{size=$1;$1="";f=substr($0,2);
     cap=2097152; if (f ~ /\.(json|log|txt|csv|md|html|xml)$/) cap=262144; if (f ~ /^documentation\//) cap=16777216;
+    if (f == "work/current-task-state.json" || f == "work/natural-moveset/review-catalog.json") cap=16777216;  # LIVE in build_repo_manifest.py
     if (size+0>cap) {print "pre-commit: " f " is " size " bytes (cap " cap ")"; bad=1}} END{exit bad?0:1}' >&2; then
   fail=1
 fi

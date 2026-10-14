@@ -1,0 +1,36 @@
+# Repository checks for a PR that is ready to merge (drafts are skipped: the
+# pre-commit hook already runs the same checks on every local commit).
+# - guard: tools/repo/pre-commit --all over every tracked file (never-committed
+#   folders, binary/media types, size caps, SteamID64).
+# - evidence: recorded takes and candidate archives are append-only
+#   (tools/repo/check-evidence.sh); the evidence-amend label allows a
+#   deliberate amendment explained in the PR.
+name: checks
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  repo:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          filter: blob:none
+      - name: Guard (every tracked file)
+        run: sh tools/repo/pre-commit --all
+      - name: Evidence self-test
+        run: sh tools/repo/test-check-evidence.sh
+      - name: Takes and candidate archives are append-only
+        run: sh tools/repo/check-evidence.sh "$BASE_SHA" "$HEAD_SHA"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EVIDENCE_AMEND: ${{ contains(github.event.pull_request.labels.*.name, 'evidence-amend') && '1' || '0' }}

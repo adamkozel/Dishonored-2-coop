@@ -25,8 +25,12 @@ TEXT={'.md','.txt','.json','.log','.csv','.html','.css','.xml','.yml','.yaml','.
 NAMES={'CMakeLists.txt','.gitignore','.gitattributes','LICENSE','README','pre-commit'}
 CAP_TEXT=256*1024       # data/text files above 256 KB stay local (sample dumps, big catalogs); keeps the repo ~0.5 GB
 CAP_CODE=2*1024*1024
+# Live project state updated after every result: tracked despite CAP_TEXT (up to CAP_DOCS).
+# Keep in sync with LIVE in tools/repo/pre-commit.
+LIVE={'work/current-task-state.json','work/natural-moveset/review-catalog.json'}
 def wanted(rel,name,size):
     low=name.lower();ext=os.path.splitext(low)[1]
+    if rel in LIVE:return size<=CAP_DOCS
     if rel.startswith('outputs/release/'):
         # Keep each package's installer, uninstaller, manifest and README only.
         return ext in {'.ps1','.md','.txt'} or low=='manifest.json' or low=='superseded.json'
