@@ -36,3 +36,19 @@ Programs that must appear on the guest's signed-in desktop, such as Steam and th
 Hyper-V's enhanced session mode is switched off on this host (`Set-VMHost -EnableEnhancedSessionMode $false`), for two reasons:
 - VMConnect then shows the console the game renders in, and doesn't ask for the guest password over RDP.
 - The autologon console session is never taken over.
+
+## GPU load: why the VM game runs at the lab's low settings
+
+The VM's first Dishonored 2 launch (2026-10-14) bugchecked the host (`0x50`).
+- **Setup at the time:** the game ran on its defaults (fullscreen 1920×1080, auto quality) inside an 8–10% GPU slice, next to both host lab instances.
+- **Evidence:**
+  - a GPU-engine timeout (LiveKernelEvent `0x141`) was reported first;
+  - `tools/diag/read_kernel_minidump.py` places the fault in the host NVIDIA driver: `nvlddmkm.sys+0x196481E`, with a stack through `dxgmms2.sys` and `dxgkrnl.sys`.
+- **Fix:**
+  - `Set-D2LabVMGameSettings.ps1` applies the same 944×540 windowed, lowest-preset settings the host instances use, plus vsync;
+  - `Enable-D2LabVMGpu.ps1` now gives the VM 40%.
+- **Result:**
+  - the VM game ran alone for 3 minutes with no GPU or driver events;
+  - all three games ran together (host and client lab plus the VM): about 53% GPU load, 4.4 of 16 GB VRAM, 54 °C, no events.
+
+Never launch the VM game at its defaults. Re-run `Set-D2LabVMGameSettings.ps1` if its config is ever reset.
