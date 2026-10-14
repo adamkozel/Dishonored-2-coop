@@ -2,20 +2,28 @@
 # Dishonored 2 co-op repository guard (install: cp tools/repo/pre-commit .git/hooks/pre-commit).
 # Rejects staged binaries, oversized files, files under never-committed folders
 # and any staged text containing a SteamID64 (7656119 + 10 digits).
+# Batched: a handful of git calls regardless of how many files are staged.
+list=$(mktemp) || exit 1
+trap 'rm -f "$list" "$list.size"' EXIT
+git diff --cached --name-only --diff-filter=AM > "$list"
+[ -s "$list" ] || exit 0
 fail=0
-git diff --cached --name-only --diff-filter=AM -z | while IFS= read -r -d '' f; do
-  case "$f" in
-    work/asset-game/*|work/lab-game/*|work/lab-instances/*|work/build/*|work/tools/*|outputs/d2-coop-lab/bin/*|outputs/d2-coop-lab/assets/*|work/release/online-session-v1179/*|*/profile/*)
-      echo "pre-commit: never-committed folder: $f" >&2; exit 1;;
-    *.mp4|*.bin|*.dll|*.exe|*.pdb|*.lib|*.obj|*.zip|*.7z|*.gz|*.png|*.jpg|*.jpeg|*.ndjson|*.resources|*.index|*.pck|*.bk2|*.blend|*.voidIndex|*.voidRessources|*.md6*)
-      echo "pre-commit: binary/media type: $f" >&2; exit 1;;
-  esac
-  size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
-  case "$f" in
-    *.json|*.log|*.txt|*.csv|*.md|*.html|*.xml) cap=262144;;
-    *) cap=2097152;;
-  esac
-  if [ "$size" -gt "$cap" ]; then echo "pre-commit: $f is $size bytes (cap $cap)" >&2; exit 1; fi
-  if git show ":$f" 2>/dev/null | grep -Eq '7656119[0-9]{10}'; then echo "pre-commit: $f contains a SteamID64" >&2; exit 1; fi
-done || fail=1
+if grep -E '^(work/(asset-game|lab-game|lab-instances|build|tools)/|outputs/d2-coop-lab/(bin|assets)/|work/release/online-session-v1179/)|/profile/' "$list" >&2; then
+  echo "pre-commit: files above are under never-committed folders" >&2; fail=1
+fi
+if grep -Ei '\.(mp4|bin|dll|exe|pdb|lib|obj|zip|7z|gz|png|jpg|jpeg|ndjson|resources|index|pck|bk2|blend|voidindex|voidressources|md6[a-z]*)$' "$list" >&2; then
+  echo "pre-commit: files above are binary/media types" >&2; fail=1
+fi
+# Staged blob sizes, one batched call; caps: 256 KB for data/text, 2 MB otherwise
+# (documentation/ up to 16 MB).
+sed 's/^/:/' "$list" | git cat-file --batch-check='%(objectsize)' > "$list.size"
+if paste -d ' ' "$list.size" "$list" | awk '{size=$1;$1="";f=substr($0,2);
+    cap=2097152; if (f ~ /\.(json|log|txt|csv|md|html|xml)$/) cap=262144; if (f ~ /^documentation\//) cap=16777216;
+    if (size+0>cap) {print "pre-commit: " f " is " size " bytes (cap " cap ")"; bad=1}} END{exit bad?0:1}' >&2; then
+  fail=1
+fi
+# SteamID64 anywhere in the staged index content (one git grep over the index).
+if git grep --cached -l -E '7656119[0-9]{10}' >&2; then
+  echo "pre-commit: files above contain a SteamID64" >&2; fail=1
+fi
 exit $fail
