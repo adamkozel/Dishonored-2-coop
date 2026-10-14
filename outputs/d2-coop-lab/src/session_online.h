@@ -98,7 +98,11 @@ void stopOnlineSession(const char* reason){
 }
 void startOnlineHost(){
     if(!acquireOnlineSteam()){onlineSession.result="steam_interfaces_unavailable";return;}
-    stopOnlineSession("restart");if(listener){sockets->CloseListenSocket(listener);listener=0;}
+    // 1213e: stopOnlineSession() resets the transport only when an online session
+    // was active. Coming from lab mode, the one-PC loopback peer stayed in
+    // `connection`, so the host refused every lobby partner (take 1221, #23).
+    stopOnlineSession("restart");closeOnlineTransport("online session replaces the lab link");
+    if(listener){sockets->CloseListenSocket(listener);listener=0;}
     auto& o=onlineSession;o.active=true;o.host=true;o.phase=OnlinePhase::Creating;o.self=onlineSteam.getSteamID(onlineSteam.user);
     localRole=0;outgoing.role=0;
     o.call=onlineSteam.createLobby(onlineSteam.matchmaking,1/*friends only*/,2);o.result=o.call?"creating_lobby":"create_lobby_refused";
@@ -106,7 +110,8 @@ void startOnlineHost(){
 }
 void startOnlineJoin(std::uint64_t lobby){
     if(!acquireOnlineSteam()||!lobby){onlineSession.result="join_refused";return;}
-    stopOnlineSession("restart");if(listener){sockets->CloseListenSocket(listener);listener=0;}
+    stopOnlineSession("restart");closeOnlineTransport("online session replaces the lab link");
+    if(listener){sockets->CloseListenSocket(listener);listener=0;}
     auto& o=onlineSession;o.active=true;o.host=false;o.phase=OnlinePhase::Joining;o.self=onlineSteam.getSteamID(onlineSteam.user);
     localRole=1;outgoing.role=1;
     o.call=onlineSteam.joinLobby(onlineSteam.matchmaking,lobby);o.result=o.call?"joining_lobby":"join_lobby_refused";

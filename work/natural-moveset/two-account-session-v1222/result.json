@@ -1,0 +1,140 @@
+{
+  "passed": false,
+  "failure": "restore: Operation did not complete successfully because the file contains a virus or potentially unwanted software. : 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\bin\\dinput8.dll'.",
+  "notes": {
+    "localClientConnectedBefore": true,
+    "identity": {
+      "hostDll": "2105D57A2122A076F905B7D05E8C3C7E088FCA1C782B0F39DBF709CB396B8636",
+      "guestDllMatches": true
+    },
+    "join": {
+      "connected": true,
+      "state": {
+        "tag": "join",
+        "at": "2026-10-15T01:54:47.6861252+02:00",
+        "hostOnline": {
+          "active": true,
+          "host": true,
+          "phase": 5,
+          "result": "connected",
+          "connectionState": 3,
+          "joinRequests": 0,
+          "role": 0,
+          "inviteOpened": true,
+          "lobbyMembers": 2
+        },
+        "guestOnline": {
+          "active": true,
+          "host": false,
+          "phase": 5,
+          "result": "connected",
+          "connectionState": 3,
+          "joinRequests": 0,
+          "role": 1,
+          "inviteOpened": false,
+          "lobbyMembers": 2
+        },
+        "host": {
+          "connectionState": 3,
+          "remoteFresh": true,
+          "sent": 3589,
+          "received": 3585
+        },
+        "guest": {
+          "connectionState": 3,
+          "remoteFresh": true,
+          "sent": 159,
+          "received": 184
+        }
+      }
+    },
+    "movement": {
+      "hostSeesVmMove_m": 6.39,
+      "vmSeesHostMove_m": 4.28
+    },
+    "disconnect": {
+      "hostReleased": true,
+      "state": {
+        "tag": "after-leave",
+        "at": "2026-10-15T01:55:07.4095476+02:00",
+        "hostOnline": {
+          "active": true,
+          "host": true,
+          "phase": 5,
+          "result": "connected",
+          "connectionState": 4,
+          "joinRequests": 0,
+          "role": 0,
+          "inviteOpened": true,
+          "lobbyMembers": 1
+        },
+        "guestOnline": {
+          "active": false,
+          "host": false,
+          "phase": 0,
+          "result": "disabled",
+          "connectionState": 1,
+          "joinRequests": 0,
+          "role": 1,
+          "inviteOpened": false,
+          "lobbyMembers": 0
+        },
+        "host": {
+          "connectionState": 4,
+          "remoteFresh": false,
+          "sent": 3959,
+          "received": 3919
+        },
+        "guest": {
+          "connectionState": 1,
+          "remoteFresh": false,
+          "sent": 454,
+          "received": 508
+        }
+      }
+    },
+    "reconnect": {
+      "connected": true,
+      "state": {
+        "tag": "rejoin",
+        "at": "2026-10-15T01:55:18.4391528+02:00",
+        "hostOnline": {
+          "active": true,
+          "host": true,
+          "phase": 5,
+          "result": "partner_connecting",
+          "connectionState": 3,
+          "joinRequests": 0,
+          "role": 0,
+          "inviteOpened": true,
+          "lobbyMembers": 2
+        },
+        "guestOnline": {
+          "active": true,
+          "host": false,
+          "phase": 5,
+          "result": "connected",
+          "connectionState": 3,
+          "joinRequests": 0,
+          "role": 1,
+          "inviteOpened": false,
+          "lobbyMembers": 2
+        },
+        "host": {
+          "connectionState": 3,
+          "remoteFresh": true,
+          "sent": 4048,
+          "received": 3996
+        },
+        "guest": {
+          "connectionState": 3,
+          "remoteFresh": true,
+          "sent": 566,
+          "received": 637
+        }
+      },
+      "hostSeesVmMove_m": 4.32
+    }
+  },
+  "scope": "Two-account two-machine session with the host local lab client connected (#23 on 1213e), plus disconnect/reconnect without stale ownership (#12). Host lab instance = main account; VM lab instance = second account; Steam friends-only lobby + P2P."
+}
