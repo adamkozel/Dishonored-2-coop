@@ -1,0 +1,16 @@
+# Repository guard: the pre-commit checks over every tracked file
+# (never-committed folders, binary/media types, size caps, SteamID64).
+name: guard
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: sh tools/repo/pre-commit --all

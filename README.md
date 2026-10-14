@@ -45,4 +45,19 @@ Each PR includes:
 - the audit;
 - the updated handoff chapters.
 
+The agent runs the whole cycle without approval pauses:
+1. branch;
+2. commit;
+3. push;
+4. `gh pr create`;
+5. wait for the checks;
+6. `gh pr merge --squash` (the branch is then deleted);
+7. fast-forward local `main`.
+
+PR checks:
+- **guard** runs `tools/repo/pre-commit --all` over every tracked file.
+- **unit-tests** builds the lab project with MSVC and runs the self-contained unit tests. It runs only when `outputs/d2-coop-lab/` changes.
+
+Lab takes and visual acceptance still happen on the local two-instance lab. CI does not replace them.
+
 Line endings are committed as-is (`core.autocrlf=false`), so script hashes recorded in the evidence stay valid.
