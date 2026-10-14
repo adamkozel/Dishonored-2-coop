@@ -15,7 +15,7 @@ ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
 DIR_EXCLUDE={'asset-game','lab-game','lab-instances','build','asset-install-stage','animgen-feasibility',
     'node_modules','.venv','venv','__pycache__','.git','GameNetworkingSockets','Dishonored2-Debug','dist',
     'online-session-v1179','profile','bin','assets','files','research','.vs','Intermediate','Saved','DerivedDataCache',
-    'tool-evaluation-2026-10-12'}
+    'tool-evaluation-2026-10-12','vm-lab'}  # vm-lab: VM ISO, VHDX and the guest credential
 # Path prefixes (relative, forward slashes) excluded.
 # sites/ is the separately published dashboard snapshot (own hosting metadata).
 PREFIX_EXCLUDE=('outputs/d2-coop-lab/analysis/ghidra/input','sites/')

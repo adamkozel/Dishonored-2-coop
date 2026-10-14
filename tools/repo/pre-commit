@@ -13,7 +13,7 @@ if [ "$1" != "--all" ]; then
   sh "$(git rev-parse --show-toplevel)/tools/repo/check-evidence.sh" --staged || fail=1
 fi
 [ -s "$list" ] || exit $fail
-if grep -E '^(work/(asset-game|lab-game|lab-instances|build|tools)/|outputs/d2-coop-lab/(bin|assets)/|work/release/online-session-v1179/)|/profile/' "$list" >&2; then
+if grep -E '^(work/(asset-game|lab-game|lab-instances|build|tools|vm-lab)/|outputs/d2-coop-lab/(bin|assets)/|work/release/online-session-v1179/)|/profile/' "$list" >&2; then
   echo "pre-commit: files above are under never-committed folders" >&2; fail=1
 fi
 if grep -Ei '\.(mp4|bin|dll|exe|pdb|lib|obj|zip|7z|gz|png|jpg|jpeg|ndjson|resources|index|pck|bk2|blend|voidindex|voidressources|md6[a-z]*)$' "$list" >&2; then
