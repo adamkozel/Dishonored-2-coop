@@ -7,8 +7,12 @@
 list=$(mktemp) || exit 1
 trap 'rm -f "$list" "$list.size"' EXIT
 if [ "$1" = "--all" ]; then git ls-files > "$list"; else git diff --cached --name-only --diff-filter=AM > "$list"; fi
-[ -s "$list" ] || exit 0
 fail=0
+# Recorded takes and candidate archives are append-only (also catches deletions).
+if [ "$1" != "--all" ]; then
+  sh "$(git rev-parse --show-toplevel)/tools/repo/check-evidence.sh" --staged || fail=1
+fi
+[ -s "$list" ] || exit $fail
 if grep -E '^(work/(asset-game|lab-game|lab-instances|build|tools)/|outputs/d2-coop-lab/(bin|assets)/|work/release/online-session-v1179/)|/profile/' "$list" >&2; then
   echo "pre-commit: files above are under never-committed folders" >&2; fail=1
 fi
