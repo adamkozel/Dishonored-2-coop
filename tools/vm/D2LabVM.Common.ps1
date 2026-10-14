@@ -33,14 +33,23 @@ function Invoke-D2LabVM {
 }
 
 function Wait-D2LabVMReady {
-    # Wait until PowerShell Direct answers (guest booted, autologon account ready).
-    param([int]$TimeoutMin = 75)
+    # Wait until PowerShell Direct answers. -Desktop also requires Windows setup/OOBE to be
+    # finished and the autologon desktop (explorer.exe for d2lab) to be up: PowerShell Direct
+    # already answers during the post-install "Installing x%" phase (first build).
+    param([int]$TimeoutMin = 75, [switch]$Desktop)
     $deadline = (Get-Date).AddMinutes($TimeoutMin)
     while ((Get-Date) -lt $deadline) {
-        try { $n = Invoke-D2LabVM { $env:COMPUTERNAME }; if ($n) { return $n } } catch { }
+        try {
+            $r = Invoke-D2LabVM {
+                $s = Get-ItemProperty 'HKLM:\SYSTEM\Setup'
+                [pscustomobject]@{ name = $env:COMPUTERNAME; setupDone = ($s.SystemSetupInProgress -eq 0 -and $s.OOBEInProgress -eq 0)
+                    desktop = @(Get-Process explorer -IncludeUserName -ErrorAction SilentlyContinue | Where-Object UserName -like '*\d2lab').Count -gt 0 }
+            }
+            if ($r.name -and (!$Desktop -or ($r.setupDone -and $r.desktop))) { return $r.name }
+        } catch { }
         Start-Sleep -Seconds 20
     }
-    throw "Guest not reachable through PowerShell Direct within $TimeoutMin min"
+    throw "Guest not ready through PowerShell Direct within $TimeoutMin min"
 }
 
 function Save-D2LabVMScreen {

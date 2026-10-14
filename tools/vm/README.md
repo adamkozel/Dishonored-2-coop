@@ -10,6 +10,7 @@ A Hyper-V VM (`D2CoopVM`) running Windows 11 Pro gives Claude a second computer 
 | Create the VM and install Windows unattended (about 40 min) | Claude | `New-D2LabVM.ps1 -IsoPath work/vm-lab/<windows 11 iso>` |
 | Guest settings: no sleep, lock or update reboots | Claude | `Initialize-D2LabGuest.ps1` |
 | GPU partition plus host NVIDIA driver (re-run after host driver updates) | Claude | `Enable-D2LabVMGpu.ps1` |
+| Everything after the install in one run: wait for the desktop, guest settings, GPU partition, Steam | Claude | `Complete-D2LabVM.ps1` |
 | Steam client, a silent install from Valve's CDN with the Authenticode signature checked | Claude | `Install-D2LabSteam.ps1` |
 | Open the VM window | Claude | `Show-D2LabVM.ps1` |
 | Steam login with the second account, install Dishonored 2 | user, in the VM window | — |

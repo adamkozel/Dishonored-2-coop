@@ -51,7 +51,7 @@ for ($i = 0; $i -lt 8; $i++) { Start-Sleep -Seconds 1; try { Send-D2LabVMKey -Vi
 Log "setup started; waiting for the unattended install and autologon"
 
 # 4. Wait for the installed guest (several reboots), then detach the install media.
-$name = Wait-D2LabVMReady -TimeoutMin 90
+$name = Wait-D2LabVMReady -TimeoutMin 90 -Desktop
 Log "guest reachable via PowerShell Direct as $name"
 Get-VMDvdDrive -VMName $VmName | Remove-VMDvdDrive
 Remove-Item -Force $answerIso
