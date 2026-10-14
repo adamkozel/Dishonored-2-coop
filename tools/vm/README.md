@@ -52,3 +52,31 @@ The VM's first Dishonored 2 launch (2026-10-14) bugchecked the host (`0x50`).
   - all three games ran together (host and client lab plus the VM): about 53% GPU load, 4.4 of 16 GB VRAM, 54 °C, no events.
 
 Never launch the VM game at its defaults. Re-run `Set-D2LabVMGameSettings.ps1` if its config is ever reset.
+
+## Running a lab role inside the VM
+
+`Sync-D2LabVMWorkspace.ps1 [-Role client]` mirrors the lab into `C:\D2Lab\ws`, so the lab's own scripts run there unchanged. It copies:
+- the pinned pwsh 7 runtime (`C:\D2Lab\pwsh`);
+- `outputs/d2-coop-lab/{*.ps1, tooling, bin}`, with the VC++ runtime DLLs app-local (#22);
+- a physical game copy made from the guest's own Steam install, plus the lab's voidmod resources and `master.index`;
+- the role's instance seed (saves, config, movement bank).
+
+`D2LabVM.Lab.ps1` (dot-source it after `D2LabVM.Common.ps1`) drives the guest instance through PowerShell Direct:
+
+| Function | What it does |
+|---|---|
+| `Start-D2LabVMRole -Role client` | Runs `Start-D2Lab.ps1 -AssetExperiment` on the guest's visible desktop |
+| `Stop-D2LabVMRole` | Stops the guest instance |
+| `Send-D2LabVMCommand`, `Send-D2LabVMInput` | The guest's own `Send-D2Command.ps1` / `Send-D2Input.ps1` |
+| `Get-D2LabVMStatus [-Sidecar online]` | Reads the guest's `coop-status.json` or a sidecar |
+| `Invoke-D2LabVMProbe -Mode --player` | Runs `d2_runtime_probe.exe` against the guest instance |
+| `Invoke-D2LabVMLabScript` | Runs any lab script in the guest |
+
+The packet expiry clocks match because Hyper-V time synchronization is on.
+
+Lab mode's peer is hard-coded to `127.0.0.1`, so a host instance and the VM instance meet through the Steam lobby instead:
+1. On the host: `coop_session host`.
+2. Read the lobby id from `host/coop-status.json.online.json`.
+3. On the VM: `coop_session join <id>`.
+
+The two accounts are Steam friends, as the friends-only lobby requires. Scripts that drive both roles at once, such as `PrepareShadowSword`, `Restore-D2Lab` and most `Test-*`, assume one machine. Split them into per-machine calls with these functions.

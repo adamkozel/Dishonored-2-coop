@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "scope": "First two-account, two-machine co-op connection: host lab instance (main account) coop_session host -> friends-only lobby; VM lab instance (second account) coop_session join <lobby> -> Steam P2P.",
+  "results": {
+    "hostOnline": "phase 5 connected, connectionState 3",
+    "guestOnline": "phase 5 connected, connectionState 3",
+    "packets": "host sent 76 / received 74; guest sent 74 / received 76",
+    "remoteFresh": "both true",
+    "hostSeesVmPlayerMove_m": 1.55,
+    "vmSeesHostPlayerMove_m": 5.47
+  },
+  "method": "Host lab instance restarted alone (no local client), A + LoadGame 81 into the Dunwall fixture; VM instance already in the same fixture. VM movement via the Hyper-V keyboard (W 1.5 s); host movement via the simulated stick (1.5 s).",
+  "findings": [
+    "Lab-mode coop_session host keeps the stale loopback connection handle (startOnlineHost only resets transport when an online session was already active), so with a local client the host rejects every lobby partner: confirmed static (session_online.h startOnlineHost/stopOnlineSession) and runtime (two rejected joins before this take).",
+    "Inside the VM the simulated controller packets are consumed but ignored by the game (0.00 m stick walk vs 6.27 m keyboard): the guest has no game-controller device; confirmed runtime.",
+    "At the title menu (state 6) LoadGame must follow an A press (Restore-D2Lab timing); an immediate LoadGame is ignored."
+  ],
+  "notRunYet": [
+    "F7 product hosting + invite overlay / Steam Join Game",
+    "disconnect and reconnect without stale ownership",
+    "release package install in the VM"
+  ],
+  "visualAcceptance": "not assessed"
+}

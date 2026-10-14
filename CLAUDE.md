@@ -30,6 +30,31 @@ Under an active goal, keep working until its exit criteria are met. There are no
   - Commits are authored as `adamkozel <adamkozel@users.noreply.github.com>`, already the repo-local config.
   - Release packages and game-derived assets stay local.
 
+## Second computer: the lab VM
+
+Hyper-V VM `D2CoopVM` is a second PC signed in to the user's **second Steam account**, which is a Steam friend of the main one. It is for two-account work: host on this PC, join from the VM over the friends-only Steam lobby. Everything is in [tools/vm/README.md](tools/vm/README.md).
+
+- Dot-source `tools/vm/D2LabVM.Common.ps1`, then `tools/vm/D2LabVM.Lab.ps1`.
+- The guest mirrors the lab at `C:\D2Lab\ws`. `Sync-D2LabVMWorkspace.ps1` refreshes it after a DLL, probe or script change.
+- Guest control functions:
+  - `Start-D2LabVMRole` and `Stop-D2LabVMRole`;
+  - `Send-D2LabVMCommand` and `Send-D2LabVMInput`;
+  - `Get-D2LabVMStatus` (`-Sidecar online` gives the lobby state);
+  - `Invoke-D2LabVMProbe`;
+  - `Save-D2LabVMScreen` and `Get-D2LabVMFps`.
+- **Two-account session:**
+  1. Host lab: `Send-D2Command -Role host -Command 'coop_session host'`.
+  2. Read `.lobby` from `work/lab-instances/host/coop-status.json.online.json`.
+  3. VM: `Send-D2LabVMCommand -Command "coop_session join <lobby>"`.
+
+  Lab mode alone cannot cross machines: its peer is hard-coded to `127.0.0.1`.
+- **GPU safety:**
+  - Never run the VM game at its defaults: the first such launch bugchecked the host (`0x50` in `nvlddmkm.sys`). Always use the lab settings, which `Start-D2LabVMRole` and `Start-D2LabVMGame` apply.
+  - After a host NVIDIA driver update, re-run `Enable-D2LabVMGpu.ps1`.
+- **Availability:**
+  - The VM starts with the host. Check it with `Test-D2LabVM.ps1`.
+  - If its Steam login is ever lost, that is a Needs-you step; continue with other work.
+
 ## GitHub loop
 
 The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and manage the board without asking. The loop must not slow the lab work: per result it adds about 15 s, and nothing ever waits on CI.
@@ -68,7 +93,7 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
    - keep working and committing locally;
    - push and merge when GitHub is reachable again;
    - when checks can't run, verify locally (hook, `tools/repo/check-sources.sh`, the local unit-test executables), say so in the PR, and merge.
-8. **Needs-you items** (for example two-account validation, #12) need an action only the user can take.
+8. **Needs-you items** (for example a lost Steam login in the VM, or a Windows/driver setting) need an action only the user can take. Two-account validation (#12) no longer does: the VM provides the second account.
    - Move the card to Needs you and continue with the next card.
    - They never stop the goal, and they are never marked done without the user.
 9. **New work found:** open an issue, add it to the board with Stage set, and leave it in Todo. The 105-item movement checklist stays in `documentation/.../generated/movement-requirements.md`, not in issues.

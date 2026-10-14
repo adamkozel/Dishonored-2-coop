@@ -72,10 +72,17 @@ function Start-D2LabVMHidden {
     # Like Start-D2LabVMInteractive, but through wscript (no console, window style 0), so the
     # started process never takes focus from the game. A powershell.exe start stole focus and
     # Dishonored 2 paused (first FPS measurement, 2026-10-14).
+    # The command line goes into a guest .cmd file: quotes passed through wscript's own argument
+    # parsing were mangled (Start-D2Lab never ran, 2026-10-15).
     param([Parameter(Mandatory)][string]$CommandLine)
     $vbs = 'C:\D2Lab\run-hidden.vbs'
-    Invoke-D2LabVM -ArgumentList $vbs -ScriptBlock { param($p) Set-Content -LiteralPath $p -Encoding ASCII -Value 'CreateObject("WScript.Shell").Run WScript.Arguments(0), 0, False' }
-    Start-D2LabVMInteractive -FilePath 'wscript.exe' -Arguments "`"$vbs`" `"$($CommandLine.Replace('"', '""'))`""
+    $cmd = 'C:\D2Lab\run-' + [guid]::NewGuid().ToString('N').Substring(0, 8) + '.cmd'
+    Invoke-D2LabVM -ArgumentList $vbs, $cmd, $CommandLine -ScriptBlock {
+        param($v, $c, $line)
+        Set-Content -LiteralPath $v -Encoding ASCII -Value 'CreateObject("WScript.Shell").Run WScript.Arguments(0), 0, False'
+        Set-Content -LiteralPath $c -Encoding ASCII -Value "@echo off`r`n$line`r`ndel `"%~f0`""
+    }
+    Start-D2LabVMInteractive -FilePath 'wscript.exe' -Arguments "$vbs $cmd"
 }
 
 function Start-D2LabVMGame {
