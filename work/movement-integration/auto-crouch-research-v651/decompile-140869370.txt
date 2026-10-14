@@ -1,0 +1,22 @@
+ulonglong FUN_140869370(longlong param_1)
+
+{
+  ulonglong uVar1;
+  undefined8 uVar2;
+  longlong lVar3;
+  char cVar4;
+  
+  if ((-1 < *(int *)(param_1 + 0x60)) &&
+     (uVar1 = *(ulonglong *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x330) + 0x48),
+     *(float *)(uVar1 + 0x24 + (longlong)*(int *)(param_1 + 0x60) * 0x28) == 0.0)) {
+    return uVar1 & 0xffffffffffffff00;
+  }
+  uVar2 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x308);
+  lVar3 = *(longlong *)(param_1 + 0x18);
+  cVar4 = FUN_140854890();
+  if ((cVar4 != '\0') && (cVar4 = FUN_1407ff1d0(uVar2,*(undefined4 *)(lVar3 + 0x70)), cVar4 != '\0')
+     ) {
+    return 1;
+  }
+  return 0;
+}

@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "failure": "Jump interruption not observed",
+  "source": "host",
+  "character": "corvo",
+  "exit": "jump",
+  "holstered": true,
+  "layout": 2,
+  "checks": [
+    "Exact bank and native Steam stream ready in requested sword state",
+    "Native sprint-to-slide state drives remote whole-body slide through Steam"
+  ],
+  "events": [
+    {
+      "seconds": 1.261,
+      "action": "Native sprint input"
+    },
+    {
+      "seconds": 1.67,
+      "action": "Native crouch while sprinting"
+    },
+    {
+      "seconds": 2.077,
+      "action": "Native jump interrupts slide"
+    }
+  ],
+  "dll": "D662AA6718B0F42A643CA1B53D310B3B58C45671F248C937CE2E36974E29A2EB",
+  "bankSha256": "B2952CF40CE94B9FB90FF3914492E10D5465DC6C923C9561D8EA1D13BB55EA27",
+  "recorded": true,
+  "scope": "Native sprint-to-slide in isolated Dunwall with one explicit equipment and recovery/interruption context. Source POV and remote full-body recording. No combat/victim contact, slopes, low ceilings or arbitrary interruption acceptance."
+}

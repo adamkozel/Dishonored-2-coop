@@ -1,0 +1,479 @@
+# doppelganger-graph-selection.json
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/doppelganger-graph-selection.json](<../../../../outputs/d2-coop-lab/analysis/ghidra/doppelganger-graph-selection.json>)
+
+SHA-256: `D8872F29C703EA75BC37B95582DF37338B22A79D5F3AD8D575DB5B0109621A91`; 15975 bytes.
+
+## Original saved record
+
+````json
+{
+  "date": "2026-10-09",
+  "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "loader": "97D9EC98AA3882B26FE04F0FDF4F2039487CCAC17B1DD73971CC63DAEEAD0BE6",
+  "confirmed": [
+    "C459 retained Relaxed/Empty pending graph during a repeated Combat/Sword graph transition.",
+    "Native immediate flags: request+0xc8 bits 2/3; stance/equipment indices +0xa4/+0xa8.",
+    "97D9 uses immediate requests only for scoped clones. Corvo passes all five unchanged locomotion stages.",
+    "Emily has zero idle root output but still fails the foot-motion threshold; short direct native sword_idle playback also measures about 0.11 excursion."
+  ],
+  "hypotheses": [
+    "Emily foot motion may be authored idle shifting. No threshold waiver or full gait pass.",
+    "Not proof of every state-machine history or a full player moveset."
+  ],
+  "evidence": [
+    "research/doppelganger-combat-locomotion-C459-graph-trace.json",
+    "research/doppelganger-combat-locomotion-verification.json",
+    "research/doppelganger-idle-reference.json"
+  ],
+  "functions": {
+    "140484760": {
+      "result": "\r\nvoid FUN_140484760(longlong param_1,longlong param_2,float param_3)\r\n\r\n{\r\n  longlong *plVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  longlong lVar5;\r\n  undefined4 *puVar6;\r\n  undefined1 auStackX_8 [8];\r\n  longlong lStackX_10;\r\n  float fStackX_18;\r\n  undefined8 uStack_48;\r\n  undefined4 uStack_40;\r\n  undefined1 uStack_3c;\r\n  undefined4 uStack_38;\r\n  undefined4 uStack_34;\r\n  undefined4 uStack_30;\r\n  undefined1 uStack_2c;\r\n  \r\n  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) & 0xfd;\r\n  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) | 1;\r\n  lStackX_10 = param_2;\r\n  fStackX_18 = param_3;\r\n  FUN_1404791c0(param_2,*(undefined4 *)(param_1 + 0x2e0),0);\r\n  if ((*(uint *)(param_1 + 0x288) & 0xffffff) == 0) {\r\n    FUN_1408918f0(param_1 + 0x280,&lStackX_10);\r\n    *(undefined8 *)(param_1 + 0x2b0) = 0;\r\n    return;\r\n  }\r\n  if (fStackX_18 <= 0.0) {\r\n    plVar1 = (longlong *)(param_1 + 0x280);\r\n    if ((*(byte *)(param_1 + 0x28c) & 0x40) == 0) {\r\n      lVar3 = *plVar1;\r\n      if (lVar3 != 0) {\r\n        plVar4 = (longlong *)FUN_1401548e0();\r\n        (**(code **)(*plVar4 + 0x10))\r\n                  (plVar4,\r\n                   \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                   ,0x1ec,lVar3,0x10);\r\n      }\r\n      *(uint *)(param_1 + 0x28c) = *(uint *)(param_1 + 0x28c) & 0xff;\r\n      *plVar1 = 0;\r\n    }\r\n    *(uint *)(param_1 + 0x288) = *(uint *)(param_1 + 0x288) & 0xff000000;\r\n    FUN_1408918f0(plVar1,&lStackX_10);\r\n    *(undefined8 *)(param_1 + 0x2b0) = 0;\r\n    return;\r\n  }\r\n  lVar3 = **(longlong **)(param_1 + 0x280);\r\n  lVar5 = FUN_140485000(param_1,lVar3,param_2);\r\n  if (lVar5 == 0) {\r\n    *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfd;\r\n    *(float *)(param_1 + 700) = fStackX_18;\r\n    if (fStackX_18 <= 1.1920929e-07) {\r\n      FUN_1402aea10(param_1 + 0x280,1);\r\n    }\r\n  }\r\n  else {\r\n    *(longlong *)(param_1 + 0x2b0) = lVar5;\r\n    func_0x0001404704b0(lVar5);\r\n    puVar6 = (undefined4 *)\r\n             (**(code **)(**(longlong **)(param_1 + 0x2b0) + 0x18))\r\n                       (*(longlong **)(param_1 + 0x2b0),auStackX_8);\r\n    lVar2 = param_1 + 0x1f0;\r\n    *(undefined4 *)(param_1 + 700) = *puVar6;\r\n    *(undefined4 *)(param_1 + 0x2c0) = *(undefined4 *)(lVar5 + 0x70);\r\n    *(undefined4 *)(param_1 + 0x2c4) = *(undefined4 *)(lVar5 + 0x74);\r\n    *(byte *)(param_1 + 0x2cc) =\r\n         *(byte *)(param_1 + 0x2cc) ^ (*(byte *)(param_1 + 0x2cc) ^ *(byte *)(lVar5 + 0x7c)) & 2;\r\n    FUN_141113d10(lVar2,*(undefined8 *)(param_1 + 0x2b0));\r\n    FUN_14046cd30(lVar2);\r\n    func_0x00014046cd20(lVar2);\r\n    if ((*(byte *)(lVar5 + 0x7c) & 1) == 0) {\r\n      uStack_48 = 0x3f800000;\r\n      uStack_40 = 1;\r\n      uStack_3c = 0;\r\n      uStack_38 = 0x3f800000;\r\n      uStack_34 = 0;\r\n      uStack_30 = 1;\r\n      uStack_2c = 1;\r\n      FUN_14046bb00(lVar2,&uStack_48);\r\n      FUN_14046bb00(lVar2,&uStack_38);\r\n      *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfe;\r\n    }\r\n    else {\r\n      uStack_34 = 0;\r\n      uStack_30 = 0;\r\n      uStack_38 = 0x3f800000;\r\n      uStack_2c = 0;\r\n      FUN_14046bb00(lVar2,&uStack_38);\r\n      *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfe;\r\n    }\r\n  }\r\n  *(undefined4 *)(param_1 + 0x2b8) = 0;\r\n  FUN_140160b50(param_1 + 0x280,&lStackX_10,0);\r\n  FUN_14047ac40(param_2,lVar3);\r\n  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) | 2;\r\n  *(byte *)(lVar3 + 0xd88) = *(byte *)(lVar3 + 0xd88) | 2;\r\n  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) & 0xfe;\r\n  *(byte *)(lVar3 + 0xd88) = *(byte *)(lVar3 + 0xd88) & 0xfe;\r\n  return;\r\n}\r\n\r\n"
+    },
+    "140486690": {
+      "result": "\r\nvoid FUN_140486690(longlong param_1,undefined8 param_2,float param_3)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  char cVar2;\r\n  int iVar3;\r\n  longlong lVar4;\r\n  byte bVar5;\r\n  float fVar6;\r\n  float fVar7;\r\n  \r\n  if (1 < (*(uint *)(param_1 + 0x288) & 0xffffff)) {\r\n    if (*(float *)(param_1 + 0x2b8) <= *(float *)(param_1 + 700)) {\r\n      param_3 = *(float *)(param_1 + 0x2b8) + param_3;\r\n      *(float *)(param_1 + 0x2b8) = param_3;\r\n      if (*(longlong *)(param_1 + 0x2b0) != 0) {\r\n        fVar7 = *(float *)(param_1 + 0x2c0);\r\n        *(undefined4 *)(param_1 + 0x2c8) = 0x3f800000;\r\n        if (fVar7 < param_3) {\r\n          fVar7 = *(float *)(param_1 + 0x2c4);\r\n          fVar6 = *(float *)(param_1 + 700) - fVar7;\r\n          if ((fVar6 <= param_3) && (1.1920929e-07 < fVar7)) {\r\n            fVar7 = 1.0 - (param_3 - fVar6) / fVar7;\r\n            if (fVar7 <= 0.0) {\r\n              fVar7 = 0.0;\r\n            }\r\n            *(float *)(param_1 + 0x2c8) = fVar7;\r\n          }\r\n        }\r\n        else if (1.1920929e-07 < fVar7) {\r\n          param_3 = param_3 / fVar7;\r\n          if (1.0 <= param_3) {\r\n            param_3 = 1.0;\r\n          }\r\n          *(float *)(param_1 + 0x2c8) = param_3;\r\n        }\r\n        if ((1.1920929e-07 <= ABS(*(float *)(param_1 + 0x2c8) - 1.0)) ||\r\n           (cVar2 = func_0x000140485dc0(), cVar2 != '\\x01')) {\r\n          bVar5 = 0;\r\n        }\r\n        else {\r\n          bVar5 = 1;\r\n        }\r\n        if ((*(byte *)(param_1 + 0x2cc) >> 2 & 1) != bVar5) {\r\n          if (bVar5 == 0) {\r\n            FUN_1404718c0(param_1 + 0x2e8);\r\n            uVar1 = **(undefined8 **)(param_1 + 0x280);\r\n            FUN_14047a400(uVar1,param_2);\r\n            iVar3 = 1;\r\n            if (1 < (*(uint *)(param_1 + 0x288) & 0xffffff)) {\r\n              lVar4 = 8;\r\n              do {\r\n                FUN_14047ac40(*(undefined8 *)(lVar4 + *(longlong *)(param_1 + 0x280)),uVar1);\r\n                iVar3 = iVar3 + 1;\r\n                lVar4 = lVar4 + 8;\r\n              } while (iVar3 < (int)(*(uint *)(param_1 + 0x288) & 0xffffff));\r\n            }\r\n          }\r\n          *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfb;\r\n          *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) | bVar5 << 2;\r\n        }\r\n      }\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    },
+    "140486c50": {
+      "result": "\r\n/* [static-confirmed, runtime applicability under test] Static verified leaf: request+0xa4 index;\r\n   bit 2 immediate. Model locomotion declaration stance names must resolve. Exact EXE B671F824;\r\n   analyst-assigned labels. */\r\n\r\nvoid D2_LocoRequest_SetStance(longlong param_1,undefined4 param_2,byte param_3)\r\n\r\n{\r\n  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) & 0xfb;\r\n  *(undefined4 *)(param_1 + 0xa4) = param_2;\r\n  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) | (param_3 & 1) << 2;\r\n  return;\r\n}\r\n\r\n"
+    },
+    "140486b00": {
+      "result": "\r\n/* [static-confirmed, runtime applicability under test] Static verified leaf: request+0xa8 index;\r\n   bit 3 immediate. Model locomotion declaration equipment names must resolve. Exact EXE B671F824;\r\n   analyst-assigned labels. */\r\n\r\nvoid D2_LocoRequest_SetEquipment(longlong param_1,undefined4 param_2,byte param_3)\r\n\r\n{\r\n  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) & 0xf7;\r\n  *(undefined4 *)(param_1 + 0xa8) = param_2;\r\n  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) | (param_3 & 1) << 3;\r\n  return;\r\n}\r\n\r\n"
+    },
+    "140485ea0": {
+      "result": "\r\nvoid FUN_140485ea0(undefined8 param_1,undefined4 *param_2,undefined8 param_3,float param_4,\r\n                  longlong param_5)\r\n\r\n{\r\n  char cVar1;\r\n  undefined8 uVar2;\r\n  undefined8 uVar3;\r\n  float fVar4;\r\n  undefined1 auStack_48 [16];\r\n  undefined4 uStack_38;\r\n  float fStack_34;\r\n  undefined4 uStack_30;\r\n  undefined4 uStack_2c;\r\n  undefined4 uStack_28;\r\n  undefined4 uStack_24;\r\n  undefined4 uStack_20;\r\n  \r\n  *(uint *)(param_5 + 8) = *(uint *)(param_5 + 8) & 0xff000000;\r\n  uStack_38 = *param_2;\r\n  fStack_34 = (float)param_2[1];\r\n  uStack_30 = param_2[2];\r\n  uStack_2c = param_2[3];\r\n  uStack_28 = param_2[4];\r\n  uStack_20 = param_2[6];\r\n  uStack_24 = param_2[5];\r\n  cVar1 = func_0x000140486aa0(param_3);\r\n  if (cVar1 == '\\x01') {\r\n    uVar2 = FUN_140486a00();\r\n    uVar3 = FUN_1404869d0(param_3);\r\n    FUN_140487410(&uStack_38,uVar3,uVar2);\r\n  }\r\n  else {\r\n    uVar2 = FUN_1404869d0(param_3);\r\n    FUN_140487470(&uStack_38,uVar2);\r\n  }\r\n  uVar2 = func_0x000140487330(auStack_48,0,fStack_34,fStack_34 - (float)param_2[1],\r\n                              (fStack_34 - (float)param_2[1]) * param_4);\r\n  FUN_1402047f0(param_5,uVar2);\r\n  if (0.0 < fStack_34) {\r\n    fVar4 = (float)func_0x0001404874a0(uStack_38,*param_2);\r\n    uVar2 = func_0x000140487330(auStack_48,1,uStack_38,fVar4,fVar4 * param_4);\r\n    FUN_1402047f0(param_5,uVar2);\r\n  }\r\n  cVar1 = func_0x000140486aa0(param_3);\r\n  if (cVar1 == '\\x01') {\r\n    fVar4 = (float)func_0x0001404874a0(uStack_2c,param_2[3]);\r\n    uVar2 = func_0x000140487330(auStack_48,2,uStack_2c,fVar4,fVar4 * param_4);\r\n    FUN_1402047f0(param_5,uVar2);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    },
+    "14047ad20": {
+      "result": "\r\nvoid FUN_14047ad20(longlong param_1,undefined8 param_2,longlong param_3,longlong param_4,\r\n                  undefined4 param_5)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 *puVar2;\r\n  longlong *plVar3;\r\n  char cVar4;\r\n  int iVar5;\r\n  uint uVar6;\r\n  undefined4 *puVar7;\r\n  undefined8 uVar8;\r\n  longlong lVar9;\r\n  longlong *plVar10;\r\n  longlong *plVar11;\r\n  uint uVar12;\r\n  longlong *plVar13;\r\n  float fVar14;\r\n  float fVar15;\r\n  undefined4 auStackX_8 [2];\r\n  undefined8 in_stack_ffffffffffffff98;\r\n  undefined4 uVar16;\r\n  longlong alStack_58 [4];\r\n  \r\n  uVar16 = (undefined4)((ulonglong)in_stack_ffffffffffffff98 >> 0x20);\r\n  lVar9 = param_4 + 0x118;\r\n  cVar4 = func_0x000140486ac0(lVar9);\r\n  plVar11 = (longlong *)0x0;\r\n  if (cVar4 == '\\x01') {\r\n    if ((*(byte *)(param_1 + 0xd88) & 1) == 0) goto code_r0x00014047af90;\r\n    iVar5 = FUN_140486a40(lVar9);\r\n    plVar10 = *(longlong **)(param_1 + 0x1b0 + (longlong)iVar5 * 8);\r\n    if (plVar10 == (longlong *)0x0) goto code_r0x00014047af90;\r\n    cVar4 = FUN_14047a980(param_1,plVar10);\r\n    if (cVar4 != '\\x01') goto code_r0x00014047af90;\r\n    lVar1 = *plVar10;\r\n    puVar7 = (undefined4 *)func_0x000140568690(lVar9,auStackX_8);\r\n    uVar8 = func_0x000140486a30(lVar9);\r\n    (**(code **)(lVar1 + 0x88))(plVar10,param_2,param_4,uVar8,CONCAT44(uVar16,*puVar7));\r\n    lVar9 = FUN_140479040(param_1);\r\n    auStackX_8[0] = 0x3dcccccd;\r\n    *(undefined4 *)(lVar9 + 0x74) = 0x3dcccccd;\r\n    goto code_r0x00014047af80;\r\n  }\r\n  if ((*(uint *)(param_3 + 8) & 0xffffff) == 0) goto code_r0x00014047af90;\r\n  fVar15 = 1e+30;\r\n  plVar13 = plVar11;\r\n  plVar10 = plVar11;\r\n  do {\r\n    plVar3 = *(longlong **)(param_1 + (longlong)plVar13 * 8);\r\n    if ((plVar3 != (longlong *)0x0) &&\r\n       (fVar14 = (float)(**(code **)(*plVar3 + 0x20))(plVar3,param_2,param_3), fVar14 < fVar15)) {\r\n      plVar10 = plVar3;\r\n      fVar15 = fVar14;\r\n    }\r\n    plVar13 = (longlong *)((longlong)plVar13 + 1);\r\n  } while ((longlong)plVar13 < 4);\r\n  if (plVar10 == (longlong *)0x0) goto code_r0x00014047af90;\r\n  cVar4 = FUN_14047a980(param_1,plVar10);\r\n  if (cVar4 == '\\x01') {\r\n    alStack_58[0] = 0;\r\n    if ((*(byte *)(param_4 + 0x110) & 1) != 0) {\r\n      for (puVar2 = *(undefined8 **)\r\n                     (*(longlong *)(param_1 + 0x170) +\r\n                     (longlong)(int)((uint)((ulonglong)plVar10 / 0x18) & *(uint *)(param_1 + 0x180))\r\n                     * 8); puVar2 != (undefined8 *)0x0; puVar2 = (undefined8 *)puVar2[2]) {\r\n        if (plVar10 <= (longlong *)*puVar2) {\r\n          if ((longlong *)*puVar2 <= plVar10) {\r\n            lVar9 = puVar2[1];\r\n            goto code_r0x00014047aefb;\r\n          }\r\n          break;\r\n        }\r\n      }\r\n      FUN_140479780(param_1,param_2,param_3,alStack_58,auStackX_8);\r\n      lVar9 = alStack_58[0];\r\ncode_r0x00014047aefb:\r\n      if (lVar9 != 0) {\r\n        cVar4 = func_0x00014047a200(param_1,lVar9);\r\n        if (cVar4 != '\\0') goto code_r0x00014047af90;\r\n        goto code_r0x00014047af80;\r\n      }\r\n    }\r\n    lVar9 = FUN_140479040(param_1);\r\n  }\r\n  else {\r\n    cVar4 = func_0x00014047b500(*(undefined8 *)(param_1 + 0x2e8));\r\n    if ((((cVar4 != '\\0') || (iVar5 = FUN_1404795d0(param_1,param_2,param_3), iVar5 != 5)) ||\r\n        (lVar9 = FUN_140479490(param_1,5,param_2,param_3), lVar9 == 0)) ||\r\n       (cVar4 = func_0x00014047a200(param_1,lVar9), cVar4 != '\\0')) goto code_r0x00014047af90;\r\n    plVar10 = *(longlong **)(param_1 + 0x2e8);\r\n  }\r\ncode_r0x00014047af80:\r\n  FUN_14047aac0(param_1,lVar9,plVar10);\r\ncode_r0x00014047af90:\r\n  plVar10 = plVar11;\r\n  plVar13 = plVar11;\r\n  if ((*(uint *)(param_1 + 0x2e0) & 0xffffff) != 0) {\r\n    do {\r\n      plVar3 = *(longlong **)((longlong)plVar10 + *(longlong *)(param_1 + 0x2d8));\r\n      (**(code **)(*plVar3 + 0x18))(plVar3,param_2,param_3,param_4,param_5);\r\n      uVar12 = (int)plVar13 + 1;\r\n      plVar10 = plVar10 + 1;\r\n      plVar13 = (longlong *)(ulonglong)uVar12;\r\n    } while ((int)uVar12 < (int)(*(uint *)(param_1 + 0x2e0) & 0xffffff));\r\n  }\r\n  if ((*(uint *)(param_1 + 0x2e0) & 0xffffff) != 0) {\r\n    plVar10 = plVar11;\r\n    do {\r\n      plVar13 = *(longlong **)((longlong)plVar10 + *(longlong *)(param_1 + 0x2d8));\r\n      cVar4 = func_0x00014047b500(plVar13);\r\n      uVar12 = (uint)plVar11;\r\n      if ((cVar4 == '\\x01') && (cVar4 = (**(code **)(*plVar13 + 0x88))(plVar13), cVar4 == '\\x01')) {\r\n        (**(code **)(*plVar13 + 0x10))(plVar13,param_1);\r\n        if (((int)uVar12 <= (int)(*(uint *)(param_1 + 0x2e4) >> 8)) ||\r\n           (cVar4 = FUN_14016a4a0((longlong *)(param_1 + 0x2d8),plVar11), cVar4 != '\\0')) {\r\n          *(uint *)(param_1 + 0x2e0) = *(uint *)(param_1 + 0x2e0) & 0xff000000;\r\n          uVar6 = *(uint *)(param_1 + 0x2e4) >> 8;\r\n          if ((int)uVar12 < (int)uVar6) {\r\n            uVar6 = uVar12;\r\n          }\r\n          *(uint *)(param_1 + 0x2e0) = *(uint *)(param_1 + 0x2e0) | uVar6 & 0xffffff;\r\n        }\r\n        if (plVar13 == *(longlong **)(param_1 + 0x2e8)) {\r\n          *(longlong *)(param_1 + 0x2e8) = plVar13[4];\r\n        }\r\n        break;\r\n      }\r\n      plVar11 = (longlong *)(ulonglong)(uVar12 + 1);\r\n      plVar10 = plVar10 + 1;\r\n    } while ((int)(uVar12 + 1) < (int)(*(uint *)(param_1 + 0x2e0) & 0xffffff));\r\n  }\r\n  FUN_14047b0d0(param_1,param_2,param_4,param_5);\r\n  return;\r\n}\r\n\r\n"
+    }
+  }
+}
+````
+
+## Unescaped text fields for reading
+
+### result
+
+````text
+
+void FUN_140484760(longlong param_1,longlong param_2,float param_3)
+
+{
+  longlong *plVar1;
+  longlong lVar2;
+  longlong lVar3;
+  longlong *plVar4;
+  longlong lVar5;
+  undefined4 *puVar6;
+  undefined1 auStackX_8 [8];
+  longlong lStackX_10;
+  float fStackX_18;
+  undefined8 uStack_48;
+  undefined4 uStack_40;
+  undefined1 uStack_3c;
+  undefined4 uStack_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined1 uStack_2c;
+  
+  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) & 0xfd;
+  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) | 1;
+  lStackX_10 = param_2;
+  fStackX_18 = param_3;
+  FUN_1404791c0(param_2,*(undefined4 *)(param_1 + 0x2e0),0);
+  if ((*(uint *)(param_1 + 0x288) & 0xffffff) == 0) {
+    FUN_1408918f0(param_1 + 0x280,&lStackX_10);
+    *(undefined8 *)(param_1 + 0x2b0) = 0;
+    return;
+  }
+  if (fStackX_18 <= 0.0) {
+    plVar1 = (longlong *)(param_1 + 0x280);
+    if ((*(byte *)(param_1 + 0x28c) & 0x40) == 0) {
+      lVar3 = *plVar1;
+      if (lVar3 != 0) {
+        plVar4 = (longlong *)FUN_1401548e0();
+        (**(code **)(*plVar4 + 0x10))
+                  (plVar4,
+                   "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+                   ,0x1ec,lVar3,0x10);
+      }
+      *(uint *)(param_1 + 0x28c) = *(uint *)(param_1 + 0x28c) & 0xff;
+      *plVar1 = 0;
+    }
+    *(uint *)(param_1 + 0x288) = *(uint *)(param_1 + 0x288) & 0xff000000;
+    FUN_1408918f0(plVar1,&lStackX_10);
+    *(undefined8 *)(param_1 + 0x2b0) = 0;
+    return;
+  }
+  lVar3 = **(longlong **)(param_1 + 0x280);
+  lVar5 = FUN_140485000(param_1,lVar3,param_2);
+  if (lVar5 == 0) {
+    *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfd;
+    *(float *)(param_1 + 700) = fStackX_18;
+    if (fStackX_18 <= 1.1920929e-07) {
+      FUN_1402aea10(param_1 + 0x280,1);
+    }
+  }
+  else {
+    *(longlong *)(param_1 + 0x2b0) = lVar5;
+    func_0x0001404704b0(lVar5);
+    puVar6 = (undefined4 *)
+             (**(code **)(**(longlong **)(param_1 + 0x2b0) + 0x18))
+                       (*(longlong **)(param_1 + 0x2b0),auStackX_8);
+    lVar2 = param_1 + 0x1f0;
+    *(undefined4 *)(param_1 + 700) = *puVar6;
+    *(undefined4 *)(param_1 + 0x2c0) = *(undefined4 *)(lVar5 + 0x70);
+    *(undefined4 *)(param_1 + 0x2c4) = *(undefined4 *)(lVar5 + 0x74);
+    *(byte *)(param_1 + 0x2cc) =
+         *(byte *)(param_1 + 0x2cc) ^ (*(byte *)(param_1 + 0x2cc) ^ *(byte *)(lVar5 + 0x7c)) & 2;
+    FUN_141113d10(lVar2,*(undefined8 *)(param_1 + 0x2b0));
+    FUN_14046cd30(lVar2);
+    func_0x00014046cd20(lVar2);
+    if ((*(byte *)(lVar5 + 0x7c) & 1) == 0) {
+      uStack_48 = 0x3f800000;
+      uStack_40 = 1;
+      uStack_3c = 0;
+      uStack_38 = 0x3f800000;
+      uStack_34 = 0;
+      uStack_30 = 1;
+      uStack_2c = 1;
+      FUN_14046bb00(lVar2,&uStack_48);
+      FUN_14046bb00(lVar2,&uStack_38);
+      *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfe;
+    }
+    else {
+      uStack_34 = 0;
+      uStack_30 = 0;
+      uStack_38 = 0x3f800000;
+      uStack_2c = 0;
+      FUN_14046bb00(lVar2,&uStack_38);
+      *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfe;
+    }
+  }
+  *(undefined4 *)(param_1 + 0x2b8) = 0;
+  FUN_140160b50(param_1 + 0x280,&lStackX_10,0);
+  FUN_14047ac40(param_2,lVar3);
+  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) | 2;
+  *(byte *)(lVar3 + 0xd88) = *(byte *)(lVar3 + 0xd88) | 2;
+  *(byte *)(param_2 + 0xd88) = *(byte *)(param_2 + 0xd88) & 0xfe;
+  *(byte *)(lVar3 + 0xd88) = *(byte *)(lVar3 + 0xd88) & 0xfe;
+  return;
+}
+
+
+````
+
+### result
+
+````text
+
+void FUN_140486690(longlong param_1,undefined8 param_2,float param_3)
+
+{
+  undefined8 uVar1;
+  char cVar2;
+  int iVar3;
+  longlong lVar4;
+  byte bVar5;
+  float fVar6;
+  float fVar7;
+  
+  if (1 < (*(uint *)(param_1 + 0x288) & 0xffffff)) {
+    if (*(float *)(param_1 + 0x2b8) <= *(float *)(param_1 + 700)) {
+      param_3 = *(float *)(param_1 + 0x2b8) + param_3;
+      *(float *)(param_1 + 0x2b8) = param_3;
+      if (*(longlong *)(param_1 + 0x2b0) != 0) {
+        fVar7 = *(float *)(param_1 + 0x2c0);
+        *(undefined4 *)(param_1 + 0x2c8) = 0x3f800000;
+        if (fVar7 < param_3) {
+          fVar7 = *(float *)(param_1 + 0x2c4);
+          fVar6 = *(float *)(param_1 + 700) - fVar7;
+          if ((fVar6 <= param_3) && (1.1920929e-07 < fVar7)) {
+            fVar7 = 1.0 - (param_3 - fVar6) / fVar7;
+            if (fVar7 <= 0.0) {
+              fVar7 = 0.0;
+            }
+            *(float *)(param_1 + 0x2c8) = fVar7;
+          }
+        }
+        else if (1.1920929e-07 < fVar7) {
+          param_3 = param_3 / fVar7;
+          if (1.0 <= param_3) {
+            param_3 = 1.0;
+          }
+          *(float *)(param_1 + 0x2c8) = param_3;
+        }
+        if ((1.1920929e-07 <= ABS(*(float *)(param_1 + 0x2c8) - 1.0)) ||
+           (cVar2 = func_0x000140485dc0(), cVar2 != '\x01')) {
+          bVar5 = 0;
+        }
+        else {
+          bVar5 = 1;
+        }
+        if ((*(byte *)(param_1 + 0x2cc) >> 2 & 1) != bVar5) {
+          if (bVar5 == 0) {
+            FUN_1404718c0(param_1 + 0x2e8);
+            uVar1 = **(undefined8 **)(param_1 + 0x280);
+            FUN_14047a400(uVar1,param_2);
+            iVar3 = 1;
+            if (1 < (*(uint *)(param_1 + 0x288) & 0xffffff)) {
+              lVar4 = 8;
+              do {
+                FUN_14047ac40(*(undefined8 *)(lVar4 + *(longlong *)(param_1 + 0x280)),uVar1);
+                iVar3 = iVar3 + 1;
+                lVar4 = lVar4 + 8;
+              } while (iVar3 < (int)(*(uint *)(param_1 + 0x288) & 0xffffff));
+            }
+          }
+          *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) & 0xfb;
+          *(byte *)(param_1 + 0x2cc) = *(byte *)(param_1 + 0x2cc) | bVar5 << 2;
+        }
+      }
+    }
+  }
+  return;
+}
+
+
+````
+
+### result
+
+````text
+
+/* [static-confirmed, runtime applicability under test] Static verified leaf: request+0xa4 index;
+   bit 2 immediate. Model locomotion declaration stance names must resolve. Exact EXE B671F824;
+   analyst-assigned labels. */
+
+void D2_LocoRequest_SetStance(longlong param_1,undefined4 param_2,byte param_3)
+
+{
+  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) & 0xfb;
+  *(undefined4 *)(param_1 + 0xa4) = param_2;
+  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) | (param_3 & 1) << 2;
+  return;
+}
+
+
+````
+
+### result
+
+````text
+
+/* [static-confirmed, runtime applicability under test] Static verified leaf: request+0xa8 index;
+   bit 3 immediate. Model locomotion declaration equipment names must resolve. Exact EXE B671F824;
+   analyst-assigned labels. */
+
+void D2_LocoRequest_SetEquipment(longlong param_1,undefined4 param_2,byte param_3)
+
+{
+  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) & 0xf7;
+  *(undefined4 *)(param_1 + 0xa8) = param_2;
+  *(byte *)(param_1 + 200) = *(byte *)(param_1 + 200) | (param_3 & 1) << 3;
+  return;
+}
+
+
+````
+
+### result
+
+````text
+
+void FUN_140485ea0(undefined8 param_1,undefined4 *param_2,undefined8 param_3,float param_4,
+                  longlong param_5)
+
+{
+  char cVar1;
+  undefined8 uVar2;
+  undefined8 uVar3;
+  float fVar4;
+  undefined1 auStack_48 [16];
+  undefined4 uStack_38;
+  float fStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
+  undefined4 uStack_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  
+  *(uint *)(param_5 + 8) = *(uint *)(param_5 + 8) & 0xff000000;
+  uStack_38 = *param_2;
+  fStack_34 = (float)param_2[1];
+  uStack_30 = param_2[2];
+  uStack_2c = param_2[3];
+  uStack_28 = param_2[4];
+  uStack_20 = param_2[6];
+  uStack_24 = param_2[5];
+  cVar1 = func_0x000140486aa0(param_3);
+  if (cVar1 == '\x01') {
+    uVar2 = FUN_140486a00();
+    uVar3 = FUN_1404869d0(param_3);
+    FUN_140487410(&uStack_38,uVar3,uVar2);
+  }
+  else {
+    uVar2 = FUN_1404869d0(param_3);
+    FUN_140487470(&uStack_38,uVar2);
+  }
+  uVar2 = func_0x000140487330(auStack_48,0,fStack_34,fStack_34 - (float)param_2[1],
+                              (fStack_34 - (float)param_2[1]) * param_4);
+  FUN_1402047f0(param_5,uVar2);
+  if (0.0 < fStack_34) {
+    fVar4 = (float)func_0x0001404874a0(uStack_38,*param_2);
+    uVar2 = func_0x000140487330(auStack_48,1,uStack_38,fVar4,fVar4 * param_4);
+    FUN_1402047f0(param_5,uVar2);
+  }
+  cVar1 = func_0x000140486aa0(param_3);
+  if (cVar1 == '\x01') {
+    fVar4 = (float)func_0x0001404874a0(uStack_2c,param_2[3]);
+    uVar2 = func_0x000140487330(auStack_48,2,uStack_2c,fVar4,fVar4 * param_4);
+    FUN_1402047f0(param_5,uVar2);
+  }
+  return;
+}
+
+
+````
+
+### result
+
+````text
+
+void FUN_14047ad20(longlong param_1,undefined8 param_2,longlong param_3,longlong param_4,
+                  undefined4 param_5)
+
+{
+  longlong lVar1;
+  undefined8 *puVar2;
+  longlong *plVar3;
+  char cVar4;
+  int iVar5;
+  uint uVar6;
+  undefined4 *puVar7;
+  undefined8 uVar8;
+  longlong lVar9;
+  longlong *plVar10;
+  longlong *plVar11;
+  uint uVar12;
+  longlong *plVar13;
+  float fVar14;
+  float fVar15;
+  undefined4 auStackX_8 [2];
+  undefined8 in_stack_ffffffffffffff98;
+  undefined4 uVar16;
+  longlong alStack_58 [4];
+  
+  uVar16 = (undefined4)((ulonglong)in_stack_ffffffffffffff98 >> 0x20);
+  lVar9 = param_4 + 0x118;
+  cVar4 = func_0x000140486ac0(lVar9);
+  plVar11 = (longlong *)0x0;
+  if (cVar4 == '\x01') {
+    if ((*(byte *)(param_1 + 0xd88) & 1) == 0) goto code_r0x00014047af90;
+    iVar5 = FUN_140486a40(lVar9);
+    plVar10 = *(longlong **)(param_1 + 0x1b0 + (longlong)iVar5 * 8);
+    if (plVar10 == (longlong *)0x0) goto code_r0x00014047af90;
+    cVar4 = FUN_14047a980(param_1,plVar10);
+    if (cVar4 != '\x01') goto code_r0x00014047af90;
+    lVar1 = *plVar10;
+    puVar7 = (undefined4 *)func_0x000140568690(lVar9,auStackX_8);
+    uVar8 = func_0x000140486a30(lVar9);
+    (**(code **)(lVar1 + 0x88))(plVar10,param_2,param_4,uVar8,CONCAT44(uVar16,*puVar7));
+    lVar9 = FUN_140479040(param_1);
+    auStackX_8[0] = 0x3dcccccd;
+    *(undefined4 *)(lVar9 + 0x74) = 0x3dcccccd;
+    goto code_r0x00014047af80;
+  }
+  if ((*(uint *)(param_3 + 8) & 0xffffff) == 0) goto code_r0x00014047af90;
+  fVar15 = 1e+30;
+  plVar13 = plVar11;
+  plVar10 = plVar11;
+  do {
+    plVar3 = *(longlong **)(param_1 + (longlong)plVar13 * 8);
+    if ((plVar3 != (longlong *)0x0) &&
+       (fVar14 = (float)(**(code **)(*plVar3 + 0x20))(plVar3,param_2,param_3), fVar14 < fVar15)) {
+      plVar10 = plVar3;
+      fVar15 = fVar14;
+    }
+    plVar13 = (longlong *)((longlong)plVar13 + 1);
+  } while ((longlong)plVar13 < 4);
+  if (plVar10 == (longlong *)0x0) goto code_r0x00014047af90;
+  cVar4 = FUN_14047a980(param_1,plVar10);
+  if (cVar4 == '\x01') {
+    alStack_58[0] = 0;
+    if ((*(byte *)(param_4 + 0x110) & 1) != 0) {
+      for (puVar2 = *(undefined8 **)
+                     (*(longlong *)(param_1 + 0x170) +
+                     (longlong)(int)((uint)((ulonglong)plVar10 / 0x18) & *(uint *)(param_1 + 0x180))
+                     * 8); puVar2 != (undefined8 *)0x0; puVar2 = (undefined8 *)puVar2[2]) {
+        if (plVar10 <= (longlong *)*puVar2) {
+          if ((longlong *)*puVar2 <= plVar10) {
+            lVar9 = puVar2[1];
+            goto code_r0x00014047aefb;
+          }
+          break;
+        }
+      }
+      FUN_140479780(param_1,param_2,param_3,alStack_58,auStackX_8);
+      lVar9 = alStack_58[0];
+code_r0x00014047aefb:
+      if (lVar9 != 0) {
+        cVar4 = func_0x00014047a200(param_1,lVar9);
+        if (cVar4 != '\0') goto code_r0x00014047af90;
+        goto code_r0x00014047af80;
+      }
+    }
+    lVar9 = FUN_140479040(param_1);
+  }
+  else {
+    cVar4 = func_0x00014047b500(*(undefined8 *)(param_1 + 0x2e8));
+    if ((((cVar4 != '\0') || (iVar5 = FUN_1404795d0(param_1,param_2,param_3), iVar5 != 5)) ||
+        (lVar9 = FUN_140479490(param_1,5,param_2,param_3), lVar9 == 0)) ||
+       (cVar4 = func_0x00014047a200(param_1,lVar9), cVar4 != '\0')) goto code_r0x00014047af90;
+    plVar10 = *(longlong **)(param_1 + 0x2e8);
+  }
+code_r0x00014047af80:
+  FUN_14047aac0(param_1,lVar9,plVar10);
+code_r0x00014047af90:
+  plVar10 = plVar11;
+  plVar13 = plVar11;
+  if ((*(uint *)(param_1 + 0x2e0) & 0xffffff) != 0) {
+    do {
+      plVar3 = *(longlong **)((longlong)plVar10 + *(longlong *)(param_1 + 0x2d8));
+      (**(code **)(*plVar3 + 0x18))(plVar3,param_2,param_3,param_4,param_5);
+      uVar12 = (int)plVar13 + 1;
+      plVar10 = plVar10 + 1;
+      plVar13 = (longlong *)(ulonglong)uVar12;
+    } while ((int)uVar12 < (int)(*(uint *)(param_1 + 0x2e0) & 0xffffff));
+  }
+  if ((*(uint *)(param_1 + 0x2e0) & 0xffffff) != 0) {
+    plVar10 = plVar11;
+    do {
+      plVar13 = *(longlong **)((longlong)plVar10 + *(longlong *)(param_1 + 0x2d8));
+      cVar4 = func_0x00014047b500(plVar13);
+      uVar12 = (uint)plVar11;
+      if ((cVar4 == '\x01') && (cVar4 = (**(code **)(*plVar13 + 0x88))(plVar13), cVar4 == '\x01')) {
+        (**(code **)(*plVar13 + 0x10))(plVar13,param_1);
+        if (((int)uVar12 <= (int)(*(uint *)(param_1 + 0x2e4) >> 8)) ||
+           (cVar4 = FUN_14016a4a0((longlong *)(param_1 + 0x2d8),plVar11), cVar4 != '\0')) {
+          *(uint *)(param_1 + 0x2e0) = *(uint *)(param_1 + 0x2e0) & 0xff000000;
+          uVar6 = *(uint *)(param_1 + 0x2e4) >> 8;
+          if ((int)uVar12 < (int)uVar6) {
+            uVar6 = uVar12;
+          }
+          *(uint *)(param_1 + 0x2e0) = *(uint *)(param_1 + 0x2e0) | uVar6 & 0xffffff;
+        }
+        if (plVar13 == *(longlong **)(param_1 + 0x2e8)) {
+          *(longlong *)(param_1 + 0x2e8) = plVar13[4];
+        }
+        break;
+      }
+      plVar11 = (longlong *)(ulonglong)(uVar12 + 1);
+      plVar10 = plVar10 + 1;
+    } while ((int)(uVar12 + 1) < (int)(*(uint *)(param_1 + 0x2e0) & 0xffffff));
+  }
+  FUN_14047b0d0(param_1,param_2,param_4,param_5);
+  return;
+}
+
+
+````

@@ -1,0 +1,16 @@
+from pathlib import Path
+import json,subprocess,sys
+R=Path(__file__).resolve().parents[2];W=R/'work/movement-integration';P=R/'work/natural-moveset';T=P/'possession-holstered-network-v367'
+r=json.loads((T/'result.json').read_text(encoding='utf-8-sig'));assert not r['passed']
+review=dict(inspected=True,method='Viewed paired game temporal sheets at1/2.1/2.3/2.6/3/4.5s',evidence=['peer-sheet.jpg','source-sheet.jpg'],complete=False,visual_accepted=False,notes='Native source draws sword and casts. Peer also draws/casts, but a brief startup physical refusal still drops body weight.21 native and12 peer overlapping draw samples prove contact and cast channels; one receiver eligibility refusal has invalid physical motion, no clock rejection. Slower external observations miss the offending native combination.368 adds a bounded32-record in-engine refusal diagnostic without relaxing physical or semantic validation. Dark medium-distance footage limits fine hand/anatomy judgment. Checkpoint health/full inventories and protected14 restore. No audio.')
+(T/'visual-review.json').write_text(json.dumps(review,indent=2))
+subprocess.run([sys.executable,str(W/'record_reviewed_possession_take.py'),T.name,'--label','FAILED transient draw context367','--notes','367 draw/cast overlap and contact pass but one startup physical refusal still resets body weight.368 records exact refused source states on the engine thread, retaining existing policy. Checkpoints and protected14 restored. No complete movement, visual acceptance or shared NPC authority claim.'],check=True)
+(W/'candidate-possession-draw-v367/runtime-verification-failed.json').write_text(json.dumps(dict(result=r,visualReview=review,complete=False),indent=2))
+p=R/'documentation/handoff-2026-10-11/32-native-possession-investigation.md';s=p.read_text();h='## Source-thread diagnostic for the remaining draw gap,367–368';assert h not in s
+s+='\n\n'+h+'''
+
+[367 runtime fails continuity](../../work/natural-moveset/possession-holstered-network-v367/result.json) despite21 native and12 peer draw/cast overlap samples and correct sword contact. The receiver records exactly one eligibility refusal with physical motion invalid. No presentation-clock rejection occurs. The external strict watcher sees only0,0+63,0+63+53, so it cannot establish the transient source combination. Do not assume that this is the already-corrected three-state Draw65 case. Both full checkpoint inventories/health and protected14 restore. Paired recordings were inspected and indexed with their failed status.
+
+368 adds32 bounded native-motion refusal records inside the existing engine-thread source sampler: exact sample time/epoch, stance, reason, default-mode flag, active IDs/classes (up to8). Reason1 is an incoherent native read,2 player/game identity mismatch,3 stance mismatch,4 known-reader physical classification refusal. No native writes, pose-policy change, widened lease or guessed fallback is introduced. Records are serialized at the existing250ms status cadence and copied before checkpoint restoration. This is diagnostic evidence, not a completed fix. Build/ownership/protocol/bank/smoke checks pass. [Candidate source](../../work/movement-integration/candidate-possession-draw-v368/identity.json).
+''';p.write_text(s)
+print('367 failure retained;368 source-thread diagnostic documented')

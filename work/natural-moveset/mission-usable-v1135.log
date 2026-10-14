@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "scope": "Mission usable census and shared two-state toggle by ordinary native use (host open, client close); Dunwall fixture restored.",
+  "failure": "Ordinary native use did not reach 0 on client",
+  "cases": []
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionUsable-v1135.ps1:145[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 145 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mOrdinary native use did not reach 0 on client[0m

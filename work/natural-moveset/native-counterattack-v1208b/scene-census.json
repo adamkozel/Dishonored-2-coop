@@ -1,0 +1,73 @@
+{
+  "scenes": {
+    "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene": {
+      "duration": 2133,
+      "variant": 11,
+      "count": 5,
+      "firstMs": 1141,
+      "state": 44
+    },
+    "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene": {
+      "duration": 266,
+      "variant": 12,
+      "count": 2,
+      "firstMs": 6281,
+      "state": 44
+    },
+    "midnight/gameplay/player/base/combat/sword_parry_hit_1.midnightscene": {
+      "duration": 533,
+      "variant": 19,
+      "count": 2,
+      "firstMs": 7625,
+      "state": 44
+    },
+    "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene": {
+      "duration": 533,
+      "variant": 10,
+      "count": 9,
+      "firstMs": 610,
+      "state": 44
+    },
+    "midnight/gameplay/player/base/combat/sword_parry_hit_2.midnightscene": {
+      "duration": 533,
+      "variant": 20,
+      "count": 3,
+      "firstMs": 2485,
+      "state": 44
+    },
+    "midnight/gameplay/player/base/combat/sword_parry_win.midnightscene": {
+      "duration": 500,
+      "variant": 21,
+      "count": 1,
+      "firstMs": 9844,
+      "state": 44
+    }
+  },
+  "counters": [
+    {
+      "after": "block",
+      "ms": 3002
+    },
+    {
+      "after": "block",
+      "ms": 4551
+    },
+    {
+      "after": "block",
+      "ms": 7773
+    },
+    {
+      "after": "parry",
+      "ms": 10187
+    },
+    {
+      "after": "block",
+      "ms": 11793
+    }
+  ],
+  "native": {
+    "parryWin": 0,
+    "block": 5,
+    "parryLose": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "stance": "standing",
+  "initiallyHolstered": true,
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets",
+    "Native grounded cast from sheathed sword independently observed with reciprocal In/Loop/Out scenes; actual equipment behavior recorded without assuming auto-draw or empty-hand support",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.912,
+      "input": "Native Emily LT1800 from initially holstered ground stance then release"
+    }
+  ],
+  "dll": "BE75B35BE849187A755222F02BAF3729E8CB76C9158426B496B6D946A5802E4A",
+  "probe": "91953438AABEBB1D6FAD1D44751B7D595A703AC241F5E0496F2B47F95673D0B6",
+  "scope": "Native source initially holstered Emily Doppelganger acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+}

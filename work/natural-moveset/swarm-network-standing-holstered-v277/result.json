@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "failure": "Native/remote stance and equipment context not ready",
+  "source": "host",
+  "stance": "standing",
+  "holstered": true,
+  "move": 0,
+  "checks": [
+    "Exact Corvo Swarm item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Remote Corvo uses exact bank50/313 and native Steam pose transport",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Swarm entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [],
+  "dll": "A495E1224C383E39AF2106D1597B347A48653A322BE79AF74413740139D287FE",
+  "probe": "CE0A54F1D042D4A0C51BF6BBA2FFA9E5E08151247BE330CDE02302AAA92A6382",
+  "bankSha256": "1769ADCA5B033E33E81770908BDA923A8073EEFCAF1A2CD7CCF81016273030EE",
+  "scope": "Native grounded Corvo Swarm phases in the specified stance/equipment context drive remote full-body bank50 poses through native Steam in isolated AI-held Dunwall. Local first-person remains native; peer animation does not execute rat, VFX or damage events. Remote world/rat behavior, aerial/slide contexts and visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+}

@@ -1,0 +1,103 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407E79B0: add         byte ptr [rax],al
+  00000001407E79B2: add         ah,cl
+  00000001407E79B4: int         3
+  00000001407E79B5: int         3
+  00000001407E79B6: int         3
+  00000001407E79B7: int         3
+  00000001407E79B8: int         3
+  00000001407E79B9: int         3
+  00000001407E79BA: int         3
+  00000001407E79BB: int         3
+  00000001407E79BC: int         3
+  00000001407E79BD: int         3
+  00000001407E79BE: int         3
+  00000001407E79BF: int         3
+  00000001407E79C0: mov         qword ptr [rsp+8],rbx
+  00000001407E79C5: mov         qword ptr [rsp+10h],rsi
+  00000001407E79CA: push        rdi
+  00000001407E79CB: sub         rsp,20h
+  00000001407E79CF: mov         rsi,rdx
+  00000001407E79D2: xor         edx,edx
+  00000001407E79D4: mov         rbx,rcx
+  00000001407E79D7: lea         r8d,[rdx+1]
+  00000001407E79DB: lea         rcx,[rsi+0000000000000C08h]
+  00000001407E79E2: call        00000001401581C0
+  00000001407E79E7: cmp         eax,1
+  00000001407E79EA: jne         00000001407E7A09
+  00000001407E79EC: nop         dword ptr [rax]
+  00000001407E79F0: pause
+  00000001407E79F2: xor         edx,edx
+  00000001407E79F4: lea         rcx,[rsi+0000000000000C08h]
+  00000001407E79FB: lea         r8d,[rdx+1]
+  00000001407E79FF: call        00000001401581C0
+  00000001407E7A04: cmp         eax,1
+  00000001407E7A07: je          00000001407E79F0
+  00000001407E7A09: mov         ecx,dword ptr [rbx+1Ch]
+  00000001407E7A0C: mov         eax,ecx
+  00000001407E7A0E: and         al,0Ch
+  00000001407E7A10: cmp         al,8
+  00000001407E7A12: jb          00000001407E7A79
+  00000001407E7A14: mov         eax,ecx
+  00000001407E7A16: shr         eax,6
+  00000001407E7A19: test        eax,1FFFFFh
+  00000001407E7A1E: jbe         00000001407E7A90
+  00000001407E7A20: dec         eax
+  00000001407E7A22: shl         eax,6
+  00000001407E7A25: xor         eax,ecx
+  00000001407E7A27: and         eax,7FFFFC0h
+  00000001407E7A2C: xor         eax,ecx
+  00000001407E7A2E: mov         dword ptr [rbx+1Ch],eax
+  00000001407E7A31: test        eax,7FFFFC0h
+  00000001407E7A36: jne         00000001407E7A90
+  00000001407E7A38: shr         eax,4
+  00000001407E7A3B: and         eax,3
+  00000001407E7A3E: cmp         eax,3
+  00000001407E7A41: je          00000001407E7A90
+  00000001407E7A43: cmp         eax,1
+  00000001407E7A46: jne         00000001407E7A5B
+  00000001407E7A48: mov         rdx,rbx
+  00000001407E7A4B: mov         rcx,rsi
+  00000001407E7A4E: call        00000001407EC3E0
+  00000001407E7A53: test        al,al
+  00000001407E7A55: je          00000001407E7A5B
+  00000001407E7A57: and         dword ptr [rbx+1Ch],0FFFFFFCFh
+  00000001407E7A5B: mov         ecx,dword ptr [rbx+1Ch]
+  00000001407E7A5E: mov         eax,ecx
+  00000001407E7A60: and         al,30h
+  00000001407E7A62: cmp         al,20h
+  00000001407E7A64: jne         00000001407E7A90
+  00000001407E7A66: or          ecx,30h
+  00000001407E7A69: mov         rdx,rbx
+  00000001407E7A6C: mov         dword ptr [rbx+1Ch],ecx
+  00000001407E7A6F: mov         rcx,rsi
+  00000001407E7A72: call        00000001407EB3E0
+  00000001407E7A77: jmp         00000001407E7A90
+  00000001407E7A79: mov         rax,qword ptr [rbx]
+  00000001407E7A7C: mov         rcx,rbx
+  00000001407E7A7F: call        qword ptr [rax]
+  00000001407E7A81: lea         rcx,[0000000141C70F00h]
+  00000001407E7A88: mov         rdx,qword ptr [rax]
+  00000001407E7A8B: call        0000000140166830
+  00000001407E7A90: lea         rcx,[rsi+0000000000000C08h]
+  00000001407E7A97: xor         edx,edx
+  00000001407E7A99: mov         rbx,qword ptr [rsp+30h]
+  00000001407E7A9E: mov         rsi,qword ptr [rsp+38h]
+  00000001407E7AA3: add         rsp,20h
+  00000001407E7AA7: pop         rdi
+  00000001407E7AA8: jmp         00000001401581E0
+  00000001407E7AAD: int         3
+  00000001407E7AAE: int         3
+  00000001407E7AAF: int         3
+  00000001407E7AB0: 81
+
+  Summary
+
+     1A7D000 .text

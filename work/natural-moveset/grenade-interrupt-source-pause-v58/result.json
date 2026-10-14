@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "interruption": "source-pause",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking before interruption and clears afterward",
+    "Live cooking presentation interrupted through native pause or explicit stream stop",
+    "Both native cooking phases drove the remote body before interruption",
+    "Interrupted presentation retires stream ownership and hides its cosmetic prop",
+    "Duplicate packet sent during native cook; prop remains one cached native entity",
+    "Exact six-joint native mechanism changes from idle to cook and stops writing after release without animation events",
+    "One owned native in-hand spark/light/audio effect follows the remote cosmetic grenade and stops at release; duplicate packet does not restart it",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.991,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0,
+      "actualPitch": -0.014844248018093871
+    },
+    {
+      "videoTime": 1.953,
+      "input": "source-pause"
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene"
+  ],
+  "dll": "129137DA59399401ACFFC7CF9CD41244C43D18FD737DC37A3BA6CA2D5D411DB2",
+  "probe": "8B523CB6A7B5960C08AAAD33237104FE418DE7A3F68225A11C68E2C49FD7E167",
+  "finalDll": "129137DA59399401ACFFC7CF9CD41244C43D18FD737DC37A3BA6CA2D5D411DB2",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}

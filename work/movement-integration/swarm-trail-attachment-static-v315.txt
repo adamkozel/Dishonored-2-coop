@@ -1,0 +1,63 @@
+140875e80
+
+void FUN_140875e80(longlong param_1,longlong param_2,undefined8 param_3,undefined8 param_4,
+                  undefined8 param_5,undefined1 param_6)
+
+{
+  char cVar1;
+  undefined8 uVar2;
+  undefined8 uVar3;
+  
+  if (param_2 != param_1) {
+    if ((*(longlong *)(param_1 + 0x358) != 0) &&
+       (*(longlong *)(*(longlong *)(param_1 + 0x358) + 0x3c8) != 0)) {
+      cVar1 = FUN_140878cd0(param_2);
+      if (cVar1 != '\0') goto LAB_140875f0e;
+    }
+    if (*(longlong *)(param_2 + 0x358) == 0) {
+      uVar2 = FUN_1408749e0(param_2,1);
+      *(undefined8 *)(param_2 + 0x358) = uVar2;
+    }
+    FUN_140752900(*(undefined8 *)(param_2 + 0x358),param_1,param_3,param_4,param_5,param_6);
+    return;
+  }
+LAB_140875f0e:
+  uVar2 = D2_InternedName_Resolve(param_1 + 0x20);
+  uVar3 = D2_InternedName_Resolve(param_2 + 0x20);
+                    /* WARNING: Subroutine does not return */
+  FUN_140166830("Cancelled attachment of \'%s\' on \'%s\' due to cyclic parenting\n",uVar3,uVar2);
+}
+
+
+
+1404903b0
+
+void FUN_1404903b0(undefined8 param_1,undefined1 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  longlong *plVar1;
+  undefined8 uVar2;
+  
+  uVar2 = 0xfffffffffffffffe;
+  if (DAT_143a1abc8 == 0) {
+    plVar1 = (longlong *)FUN_1401548e0();
+    (**(code **)(*plVar1 + 0x48))(plVar1,0,*plVar1,param_4,uVar2);
+    DAT_143a1abc8 = (**(code **)(DAT_143a1aad0 + 0x30))(&DAT_143a1aad0);
+    plVar1 = (longlong *)FUN_1401548e0();
+    (**(code **)(*plVar1 + 0x50))(plVar1,0);
+  }
+  FUN_140875d50(param_1,DAT_143a1abc8,param_2);
+  return;
+}
+
+
+
+14090faf0
+
+longlong FUN_14090faf0(longlong param_1)
+
+{
+  return param_1 + 0x28;
+}
+
+

@@ -1,0 +1,76 @@
+
+undefined1 * FUN_1408dbc90(longlong *param_1,undefined1 *param_2,longlong param_3,longlong param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  char cVar3;
+  undefined8 uVar4;
+  undefined1 auStackX_8 [8];
+  undefined1 uStack_28;
+  undefined1 uStack_27;
+  undefined1 uStack_26;
+  undefined1 uStack_25;
+  undefined1 uStack_24;
+  undefined1 auStack_23 [3];
+  undefined4 uStack_20;
+  
+  uStack_20 = 0;
+  cVar3 = (**(code **)(*param_1 + 0x30))(param_1,param_3);
+  if (cVar3 == '\0') {
+    switch(*(undefined4 *)(param_3 + 0x2c)) {
+    case 0x122:
+      uVar4 = FUN_1408832c0(param_4);
+      FUN_1407ac710(param_1,auStackX_8,uVar4);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x123:
+      iVar1 = *(int *)(param_4 + 0x38);
+      iVar2 = *(int *)(param_4 + 0x20);
+      uVar4 = FUN_1408832c0(param_4);
+      FUN_1407ac710(param_1,&uStack_28,uVar4,iVar2 != 0,iVar1 != 0);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x124:
+      iVar1 = *(int *)(param_4 + 0x38);
+      iVar2 = *(int *)(param_4 + 0x20);
+      uVar4 = FUN_1408832c0(param_4);
+      FUN_1407ac710(param_1,&uStack_27,uVar4,iVar2 != 0,iVar1 != 0);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x125:
+      uVar4 = FUN_1408832c0(param_4);
+      FUN_1407ac710(param_1,&uStack_26,uVar4);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x126:
+      uVar4 = FUN_1408832c0(param_4);
+      FUN_1407ac710(param_1,&uStack_25,uVar4);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x127:
+      FUN_1407ac710(param_1,&uStack_24,*(int *)(param_4 + 8) != 0);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    case 0x128:
+      FUN_1407ac710(param_1,auStack_23,*(int *)(param_4 + 8) != 0);
+      *param_2 = 0;
+      *(undefined8 *)(param_2 + 8) = 0;
+      break;
+    default:
+      FUN_140914fb0(param_1,param_2,param_3,param_4);
+    }
+  }
+  else {
+    (**(code **)(*param_1 + 0x28))(param_1,param_2,param_3,param_4);
+  }
+  return param_2;
+}
+
+

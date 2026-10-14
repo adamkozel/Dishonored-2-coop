@@ -1,0 +1,154 @@
+# ghidra-domino-entry-v174.json
+
+Original: [work/ghidra-domino-entry-v174.json](<../../../../work/ghidra-domino-entry-v174.json>)
+
+SHA-256: `DE4A4CB934FF2DEA7A8137C548C1E67DC8C7FCEB6C52897E31837CF62ED74B8A`; 5629 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "14068ea10",
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nvoid FUN_14068ea10(undefined8 param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 uVar2;\r\n  undefined8 uStack_18;\r\n  undefined1 *puStack_10;\r\n  \r\n  FUN_140854fd0();\r\n  uVar1 = FUN_140854880(param_1);\r\n  puStack_10 = &LAB_14068eee0;\r\n  uStack_18 = param_1;\r\n  uVar2 = FUN_140810240();\r\n  FUN_140810810(uVar2,uVar1,0x1a9,&uStack_18);\r\n  return;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nvoid FUN_14068ea10(undefined8 param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 uVar2;\r\n  undefined8 uStack_18;\r\n  undefined1 *puStack_10;\r\n  \r\n  FUN_140854fd0();\r\n  uVar1 = FUN_140854880(param_1);\r\n  puStack_10 = &LAB_14068eee0;\r\n  uStack_18 = param_1;\r\n  uVar2 = FUN_140810240();\r\n  FUN_140810810(uVar2,uVar1,0x1a9,&uStack_18);\r\n  return;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "14068ebb0",
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nulonglong FUN_14068ebb0(undefined8 param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  ulonglong uVar2;\r\n  \r\n  lVar1 = FUN_140856800();\r\n  uVar2 = 0;\r\n  if ((lVar1 != 0) && (uVar2 = *(ulonglong *)(lVar1 + 8), *(int *)(uVar2 + 400) == 0xc)) {\r\n    uVar2 = FUN_140856a60(param_1);\r\n    return uVar2;\r\n  }\r\n  return uVar2 & 0xffffffffffffff00;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nulonglong FUN_14068ebb0(undefined8 param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  ulonglong uVar2;\r\n  \r\n  lVar1 = FUN_140856800();\r\n  uVar2 = 0;\r\n  if ((lVar1 != 0) && (uVar2 = *(ulonglong *)(lVar1 + 8), *(int *)(uVar2 + 400) == 0xc)) {\r\n    uVar2 = FUN_140856a60(param_1);\r\n    return uVar2;\r\n  }\r\n  return uVar2 & 0xffffffffffffff00;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "1407e7410",
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nvoid FUN_1407e7410(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  undefined8 uVar3;\r\n  longlong lVar4;\r\n  \r\n  lVar2 = (**(code **)**(undefined8 **)(param_1 + 0x10))();\r\n  if ((DAT_1439ce2c0 <= *(int *)(lVar2 + 0x60)) && (*(int *)(lVar2 + 0x60) <= DAT_1439ce2c4)) {\r\n    lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439dc670,2);\r\n    if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0x7cc) & 1) != 0)) {\r\n      cVar1 = FUN_1403ed560(lVar2);\r\n      if (cVar1 == '\\0') {\r\n        lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439e2a00,1);\r\n        if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0xd58) & 1) != 0)) {\r\n          FUN_14087d1e0(*(longlong *)(param_1 + 0x10),lVar2 + 0xd4c,\r\n                        *(longlong *)(param_1 + 0x10) + 0x30c,1);\r\n          return;\r\n        }\r\n        return;\r\n      }\r\n    }\r\n  }\r\n  lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x88))();\r\n  lVar4 = *(longlong *)(param_1 + 0x10) + 0x20;\r\n  if ((*(byte *)(lVar2 + 8) & 0x40) == 0) {\r\n    uVar3 = D2_InternedName_Resolve(lVar4);\r\n                    /* WARNING: Subroutine does not return */\r\n    FUN_140166830(\"Body from \\'%s\\' exited broad phase, removing it now. Make sure you don\\'t set physics on entities outside world limits.\"\r\n                  ,uVar3);\r\n  }\r\n  uVar3 = D2_InternedName_Resolve(lVar4);\r\n                    /* WARNING: Subroutine does not return */\r\n  FUN_140166830(\"Body from \\'%s\\' exited broad phase. Make sure you don\\'t set physics on entities outside world limits. Not removing it as you are in preview\"\r\n                ,uVar3);\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nvoid FUN_1407e7410(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  undefined8 uVar3;\r\n  longlong lVar4;\r\n  \r\n  lVar2 = (**(code **)**(undefined8 **)(param_1 + 0x10))();\r\n  if ((DAT_1439ce2c0 <= *(int *)(lVar2 + 0x60)) && (*(int *)(lVar2 + 0x60) <= DAT_1439ce2c4)) {\r\n    lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439dc670,2);\r\n    if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0x7cc) & 1) != 0)) {\r\n      cVar1 = FUN_1403ed560(lVar2);\r\n      if (cVar1 == '\\0') {\r\n        lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439e2a00,1);\r\n        if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0xd58) & 1) != 0)) {\r\n          FUN_14087d1e0(*(longlong *)(param_1 + 0x10),lVar2 + 0xd4c,\r\n                        *(longlong *)(param_1 + 0x10) + 0x30c,1);\r\n          return;\r\n        }\r\n        return;\r\n      }\r\n    }\r\n  }\r\n  lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x88))();\r\n  lVar4 = *(longlong *)(param_1 + 0x10) + 0x20;\r\n  if ((*(byte *)(lVar2 + 8) & 0x40) == 0) {\r\n    uVar3 = D2_InternedName_Resolve(lVar4);\r\n                    /* WARNING: Subroutine does not return */\r\n    FUN_140166830(\"Body from \\'%s\\' exited broad phase, removing it now. Make sure you don\\'t set physics on entities outside world limits.\"\r\n                  ,uVar3);\r\n  }\r\n  uVar3 = D2_InternedName_Resolve(lVar4);\r\n                    /* WARNING: Subroutine does not return */\r\n  FUN_140166830(\"Body from \\'%s\\' exited broad phase. Make sure you don\\'t set physics on entities outside world limits. Not removing it as you are in preview\"\r\n                ,uVar3);\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  }
+]
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+void FUN_14068ea10(undefined8 param_1)
+
+{
+  undefined8 uVar1;
+  undefined8 uVar2;
+  undefined8 uStack_18;
+  undefined1 *puStack_10;
+  
+  FUN_140854fd0();
+  uVar1 = FUN_140854880(param_1);
+  puStack_10 = &LAB_14068eee0;
+  uStack_18 = param_1;
+  uVar2 = FUN_140810240();
+  FUN_140810810(uVar2,uVar1,0x1a9,&uStack_18);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+ulonglong FUN_14068ebb0(undefined8 param_1)
+
+{
+  longlong lVar1;
+  ulonglong uVar2;
+  
+  lVar1 = FUN_140856800();
+  uVar2 = 0;
+  if ((lVar1 != 0) && (uVar2 = *(ulonglong *)(lVar1 + 8), *(int *)(uVar2 + 400) == 0xc)) {
+    uVar2 = FUN_140856a60(param_1);
+    return uVar2;
+  }
+  return uVar2 & 0xffffffffffffff00;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_1407e7410(longlong param_1)
+
+{
+  char cVar1;
+  longlong lVar2;
+  undefined8 uVar3;
+  longlong lVar4;
+  
+  lVar2 = (**(code **)**(undefined8 **)(param_1 + 0x10))();
+  if ((DAT_1439ce2c0 <= *(int *)(lVar2 + 0x60)) && (*(int *)(lVar2 + 0x60) <= DAT_1439ce2c4)) {
+    lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439dc670,2);
+    if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0x7cc) & 1) != 0)) {
+      cVar1 = FUN_1403ed560(lVar2);
+      if (cVar1 == '\0') {
+        lVar2 = FUN_140877720(*(undefined8 *)(param_1 + 0x10),&DAT_1439e2a00,1);
+        if ((lVar2 != 0) && ((*(byte *)(lVar2 + 0xd58) & 1) != 0)) {
+          FUN_14087d1e0(*(longlong *)(param_1 + 0x10),lVar2 + 0xd4c,
+                        *(longlong *)(param_1 + 0x10) + 0x30c,1);
+          return;
+        }
+        return;
+      }
+    }
+  }
+  lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x88))();
+  lVar4 = *(longlong *)(param_1 + 0x10) + 0x20;
+  if ((*(byte *)(lVar2 + 8) & 0x40) == 0) {
+    uVar3 = D2_InternedName_Resolve(lVar4);
+                    /* WARNING: Subroutine does not return */
+    FUN_140166830("Body from \'%s\' exited broad phase, removing it now. Make sure you don\'t set physics on entities outside world limits."
+                  ,uVar3);
+  }
+  uVar3 = D2_InternedName_Resolve(lVar4);
+                    /* WARNING: Subroutine does not return */
+  FUN_140166830("Body from \'%s\' exited broad phase. Make sure you don\'t set physics on entities outside world limits. Not removing it as you are in preview"
+                ,uVar3);
+}
+
+
+````

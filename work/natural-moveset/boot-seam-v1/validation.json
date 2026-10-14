@@ -1,0 +1,79 @@
+{
+  "version": "corvo-shin-anchors-v1",
+  "passed": true,
+  "scope": "Same anatomy, skin weights and camera; old preview vs corrected anchors vs captured native helper transforms. Axial twist remains approximate.",
+  "cases": [
+    {
+      "alias": "sword_walk_e_add",
+      "vertices": 1603,
+      "skin_error_m": {
+        "before": {
+          "mean": 0.036451568513026035,
+          "max": 0.1007892628357615
+        },
+        "corrected": {
+          "mean": 0.001836015955578699,
+          "max": 0.003920753975503685
+        }
+      },
+      "corrected_anchor_error_m": 0.0,
+      "frame": 17,
+      "capture": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\boot-seam-native-test-1/fed97f3f88913a22-corvo-hold.json",
+      "passed": true
+    },
+    {
+      "alias": "crouch_idle",
+      "vertices": 1603,
+      "skin_error_m": {
+        "before": {
+          "mean": 0.07932509283376162,
+          "max": 0.17343545496466306
+        },
+        "corrected": {
+          "mean": 0.003074361750601443,
+          "max": 0.009283204623348787
+        }
+      },
+      "corrected_anchor_error_m": 0.0,
+      "frame": 75,
+      "capture": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\stance-pose-test-1/crouch_idle-corvo-hold.json",
+      "passed": true
+    },
+    {
+      "alias": "standing_jump_sequence",
+      "vertices": 1603,
+      "skin_error_m": {
+        "before": {
+          "mean": 0.08559175725570445,
+          "max": 0.17102944038395945
+        },
+        "corrected": {
+          "mean": 0.0019826634158620292,
+          "max": 0.004580995474869262
+        }
+      },
+      "corrected_anchor_error_m": 0.0,
+      "frame": 70,
+      "capture": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\jumps-v3-pose-test-1/standing_jump_sequence-corvo-hold.json",
+      "passed": true
+    },
+    {
+      "alias": "carry_body_drop_low_sequence",
+      "vertices": 1603,
+      "skin_error_m": {
+        "before": {
+          "mean": 0.05584444862446986,
+          "max": 0.1262571957220659
+        },
+        "corrected": {
+          "mean": 0.0033749042978948977,
+          "max": 0.007545070431435496
+        }
+      },
+      "corrected_anchor_error_m": 0.0,
+      "frame": 66,
+      "capture": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\carry-release-v3-pose-test-1/carry_body_drop_low_sequence-corvo-hold.json",
+      "passed": true
+    }
+  ]
+}

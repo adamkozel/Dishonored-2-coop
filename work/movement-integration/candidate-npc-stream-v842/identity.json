@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-13T20:38:26.462758+02:00",
+  "dll": "F2331469DC16DBB1B226EECAD68988129B03CE30F3C38EDA0EC6D2CB1E8F6747",
+  "probe": "EA5444F1ECEDED2937AEE80E21AA7F5609AA03536B797D82B92FF27C28944489",
+  "previous": "candidate-npc-stream-v840",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Extends840 multi-NPC root/body authority with protocol2 compact14byte native joints (3312byte224-joint packet), per-connection native Steam512KiB/s budget and queue/decode diagnostics. Preserves full rig,80ms source-timed root/body interpolation, native local first person and owned client AI. General combat/outcomes, spawn/checkpoint lifecycle and runtime verification pending.",
+  "runtimeAudit": "../npc-stream-audit-v846.json",
+  "runtimeScope": "Five authored Dunwall NPC rigs negotiated and streamed over native Steam, host AI retained, client roots owned and ten AI references released cleanly. Two visible 223-joint guards received fresh body callbacks. Paired footage shows one guard idle-to-patrol movement; three other NPCs including224-joint Ramsey have packet/root coverage only. No general damage/death, equipment, spawning, campaign or online-account certification."
+}

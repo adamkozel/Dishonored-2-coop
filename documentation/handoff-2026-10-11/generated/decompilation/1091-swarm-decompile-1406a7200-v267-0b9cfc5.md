@@ -1,0 +1,49 @@
+# swarm-decompile-1406a7200-v267.txt
+
+Original: [work/movement-integration/swarm-decompile-1406a7200-v267.txt](<../../../../work/movement-integration/swarm-decompile-1406a7200-v267.txt>)
+
+SHA-256: `3BF0CA3A8AFC942F4C653A050FE47F214DB40E82546539D74E7CB56BB952BE91`; 1060 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_1406a7200(longlong param_1,undefined4 *param_2,undefined8 param_3,int param_4)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  undefined1 uVar3;
+  undefined4 uVar4;
+  float fVar5;
+  
+  lVar1 = *(longlong *)(param_1 + 8);
+  *param_2 = 0x3fff0010;
+  lVar2 = *(longlong *)(param_1 + 0x10);
+  uVar3 = 0;
+  param_2[1] = *(undefined4 *)(lVar2 + 0x78);
+  param_2[2] = *(undefined4 *)(lVar2 + 0x7c);
+  param_2[3] = *(undefined4 *)(lVar2 + 0x80);
+  *(undefined8 *)(param_2 + 5) = 0;
+  param_2[4] = 0;
+  uVar4 = FUN_1408ac000(0x43b40000);
+  param_2[7] = 0;
+  param_2[9] = 0;
+  param_2[8] = uVar4;
+  fVar5 = (float)FUN_1406dd680(lVar1 + 0x98);
+  param_2[10] = fVar5 * 0.01;
+  if ((((*(byte *)(param_1 + 0xcc) & 1) != 0) && ((*(byte *)(param_1 + 0xcc) & 8) != 0)) &&
+     (param_4 < *(int *)(lVar1 + 200))) {
+    uVar3 = 1;
+  }
+  *(undefined1 *)(param_2 + 0xb) = uVar3;
+  *(undefined2 *)((longlong)param_2 + 0x2d) = 0;
+  if ((*(int *)(param_1 + 0x50) != 0x3fff0010) && ((*(byte *)(param_1 + 0xcc) & 8) != 0)) {
+    FUN_1406a7110(param_1,param_2 + 1);
+  }
+  return;
+}
+
+
+
+````

@@ -1,0 +1,200 @@
+{
+  "alias": "grenade_high_sequence",
+  "family": "ranged_and_items",
+  "identity": "51a5a49571009629534b78e904bc2ac91e719b4d85f6d487f0068e63c7821206",
+  "video": "grenade-videos-v55\\grenade_high_sequence.mp4",
+  "frames": 143,
+  "fps": 30,
+  "duration": 4.766666666666667,
+  "render_seconds": 20.680709838867188,
+  "roles": {
+    "corvo": "grenade_high_sequence-corvo",
+    "emily": "grenade_high_sequence-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "Emily LOD3 preview; runtime cloth/correctives checked separately",
+  "equipment": "sword_ready",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "Original review bodies; Emily LOD3",
+  "model_sha256": {},
+  "native_props": true,
+  "skin_preview_version": "corvo-shin-anchors-v1",
+  "skin_preview_limit": "Corvo calf anchors corrected; small native axial helper twist and other runtime correctives remain approximate.",
+  "render_identity": "8db0bf522e8d585c562f657092b9607965fe3ab3f60f25539e8fb86bc2014fcd",
+  "render_inputs": {
+    "data_identity": "2adfeb34038fb8ff759b6fdc9d89df1b23f72494e57cd1d9a9561883563b696c",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "moveset-growth\\emily-body.json",
+        "sha256": "2a5ff2cfa65a351b586738af012c2f1050c026aeb6451eb361cd3c2cae903ea3"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      },
+      "corvo-grenade-model": {
+        "path": "natural-moveset\\item-models\\grenade.json",
+        "sha256": "8b0cbcad91e3b2ea22ae4e9f8abb4aed531b1c4ff6a43d850f52592c05496201"
+      },
+      "corvo-grenade-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\grenade-skeleton.json",
+        "sha256": "a251c02b30dd61305d79a3b0510a6a38f1438ddefd45e1a84b0d9380af8c800c"
+      },
+      "corvo-grenade_idle": {
+        "mechanism": {
+          "id": "grenade_idle",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_idle.md6anim",
+          "asset_sha256": "E60D2999229D8A1872A426FF1967FCA75C15D3572C10E57227CCCEFDD91E4630",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 101,
+            "fps": 30,
+            "animation_sha256": "e60d2999229d8a1872a426ff1967fca75c15d3572c10e57227cccefdd91e4630",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_idle.edgepose",
+          "sample_sha256": "5c4d5af293bc4c8e4fe9cefe8545f87dd4c9286505ae1daed35d572cc8787afb",
+          "events": false
+        }
+      },
+      "corvo-grenade_cooking_in": {
+        "mechanism": {
+          "id": "grenade_cooking_in",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_cooking_in.md6anim",
+          "asset_sha256": "2B6A16363328B0D8FF86509DFF0450CA82D98ED127AD62B2C91E6EE9A03C808D",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 16,
+            "fps": 30,
+            "animation_sha256": "2b6a16363328b0d8ff86509dff0450ca82d98ed127ad62b2c91e6ee9a03c808d",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_cooking_in.edgepose",
+          "sample_sha256": "2dcf704ae7ebd12f041725fea7bddc1fabef9ba4773a70c0b3413005263011e8",
+          "events": false
+        }
+      },
+      "corvo-grenade_cooking_idle": {
+        "mechanism": {
+          "id": "grenade_cooking_idle",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_cooking_idle.md6anim",
+          "asset_sha256": "1105A3ABFB978406950F93D38B947CDE228B760799A4E41E93EE786808817944",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 41,
+            "fps": 30,
+            "animation_sha256": "1105a3abfb978406950f93d38b947cde228b760799a4e41e93ee786808817944",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_cooking_idle.edgepose",
+          "sample_sha256": "9a55ab2eb21b30eadb3616d3393099936e02686a47aa9f6e2f76b48b8c10d479",
+          "events": false
+        }
+      },
+      "emily-grenade-model": {
+        "path": "natural-moveset\\item-models\\grenade.json",
+        "sha256": "8b0cbcad91e3b2ea22ae4e9f8abb4aed531b1c4ff6a43d850f52592c05496201"
+      },
+      "emily-grenade-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\grenade-skeleton.json",
+        "sha256": "a251c02b30dd61305d79a3b0510a6a38f1438ddefd45e1a84b0d9380af8c800c"
+      },
+      "emily-grenade_idle": {
+        "mechanism": {
+          "id": "grenade_idle",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_idle.md6anim",
+          "asset_sha256": "E60D2999229D8A1872A426FF1967FCA75C15D3572C10E57227CCCEFDD91E4630",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 101,
+            "fps": 30,
+            "animation_sha256": "e60d2999229d8a1872a426ff1967fca75c15d3572c10e57227cccefdd91e4630",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_idle.edgepose",
+          "sample_sha256": "5c4d5af293bc4c8e4fe9cefe8545f87dd4c9286505ae1daed35d572cc8787afb",
+          "events": false
+        }
+      },
+      "emily-grenade_cooking_in": {
+        "mechanism": {
+          "id": "grenade_cooking_in",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_cooking_in.md6anim",
+          "asset_sha256": "2B6A16363328B0D8FF86509DFF0450CA82D98ED127AD62B2C91E6EE9A03C808D",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 16,
+            "fps": 30,
+            "animation_sha256": "2b6a16363328b0d8ff86509dff0450ca82d98ed127ad62b2c91e6ee9a03c808d",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_cooking_in.edgepose",
+          "sample_sha256": "2dcf704ae7ebd12f041725fea7bddc1fabef9ba4773a70c0b3413005263011e8",
+          "events": false
+        }
+      },
+      "emily-grenade_cooking_idle": {
+        "mechanism": {
+          "id": "grenade_cooking_idle",
+          "kind": "grenade",
+          "asset": "models/weapons/grenade/animations/grenade_cooking_idle.md6anim",
+          "asset_sha256": "1105A3ABFB978406950F93D38B947CDE228B760799A4E41E93EE786808817944",
+          "skeleton": "models/weapons/grenade/grenade.md6skl",
+          "skeleton_sha256": "1231D9C74D9BE8C3A0D5458CD49F00998D1D1897081C15B03EFEC0C6777216F9",
+          "sampling": {
+            "joints": 6,
+            "frames": 41,
+            "fps": 30,
+            "animation_sha256": "1105a3abfb978406950f93d38b947cde228b760799a4e41e93ee786808817944",
+            "skeleton_sha256": "1231d9c74d9be8c3a0d5458cd49f00998d1d1897081c15b03efec0c6777216f9",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "grenade-mechanisms-v55\\grenade_cooking_idle.edgepose",
+          "sample_sha256": "9a55ab2eb21b30eadb3616d3393099936e02686a47aa9f6e2f76b48b8c10d479",
+          "events": false
+        }
+      }
+    },
+    "scripts": {
+      "render_library.py": "319e587a7df3ca37e251cd018a9e9a2e5a17a7ceb16d9557f0f3be3aa5e5b5dd",
+      "preview_natural_walk.py": "3589b51ed9479c2c05b0b0fed568d2fa1865834bd7bdd8c32db61455d60524fb",
+      "preview_skin.py": "cac45f58ae3739ffe007db6b81ebd7cf4d8bfe90801015977eac5952ddd26a71",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b8aac937837fcf08075080bf1de6c6461906d74703256291db166a7148ba8a3b"
+    }
+  }
+}

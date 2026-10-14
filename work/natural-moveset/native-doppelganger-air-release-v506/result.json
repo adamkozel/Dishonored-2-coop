@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "airborne": true,
+  "releaseAfterJumpMs": 180,
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets",
+    "Native Jump/Fall directly overlaps reciprocal666ms Doppelganger release; bounded jump returns to the same floor",
+    "Native source mana decreases after successful cast; replenishment means this is not an exact cost measurement",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.787,
+      "input": "Native Emily LT1800 aim; bounded jump input will override duration"
+    },
+    {
+      "videoTime": 3.135,
+      "input": "Native A+LT; release LT 180 ms after jump"
+    }
+  ],
+  "dll": "1A3F5720DA7431418D613A9DF932B953B2AE304BF75826DD77D8FF82B2887279",
+  "probe": "AEAEAEEB2E85620D2599EF946E8C8076C326C1DAF6452FA4153AF0A7C82F3EB9",
+  "scope": "Native source Emily Doppelganger aim then bounded jump/release observation. Native acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+}

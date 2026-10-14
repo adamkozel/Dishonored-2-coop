@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "source": "host",
+  "character": "corvo",
+  "crouched": true,
+  "holstered": false,
+  "moving": false,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v41 stance/equipment bank ready before the cast",
+    "Two native toggles produce four start/release phases driving the remote body through Steam",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Full-body cast retains original native crouch/standing stance throughout",
+    "Native cleanup restores original power quantity and selection",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "All 14 protected original settings/save and isolated checkpoint file hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.777,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.266,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "5",
+    "6",
+    "3"
+  ],
+  "nativeScenes": [
+    "221",
+    "220",
+    "219",
+    "222"
+  ],
+  "dll": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+  "bankSha256": "4B3387254E18F7AD23E6F0FF0CB7ECB7C63C646D67916CDB1E2B4738FE2FCCA2",
+  "recorded": true,
+  "scope": "Corvo Bend Time ground stance/equipment/travel context integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
+}

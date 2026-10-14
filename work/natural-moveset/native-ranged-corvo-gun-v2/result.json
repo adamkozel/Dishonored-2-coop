@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "source": "host",
+  "kind": "gun",
+  "crouched": false,
+  "holstered": false,
+  "failure": "Inventory quantities changed after cleanup",
+  "checks": [
+    "Exact native requested character/ranged equipment acquired and selected",
+    "Normal controller casting produced native ranged fire/out-of-ammo scene observations"
+  ],
+  "events": [
+    {
+      "seconds": 1.768,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.799,
+      "action": "Native LT press 250ms",
+      "index": 1
+    }
+  ],
+  "dll": "73CA05FDDE043718AFEFF084B481BB7771983EB2A4F168A1F601777B7EA30ABE",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native ranged weapon investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

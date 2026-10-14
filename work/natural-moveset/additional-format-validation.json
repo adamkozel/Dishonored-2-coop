@@ -1,0 +1,23 @@
+[
+  {
+    "manifest": "interaction-retarget-manifest.json",
+    "clips": 44,
+    "passed": true,
+    "failures": []
+  },
+  {
+    "manifest": "mixamo-retarget-manifest-v2.json",
+    "clips": 56,
+    "passed": false,
+    "failures": [
+      {
+        "id": "mixamo_freehang_climb-corvo",
+        "error": "real authored asset rejected"
+      },
+      {
+        "id": "mixamo_freehang_climb-emily",
+        "error": "real authored asset rejected"
+      }
+    ]
+  }
+]

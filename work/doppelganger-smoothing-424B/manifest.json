@@ -1,0 +1,1269 @@
+{
+  "At": "2026-10-09T12:46:08.7858317+02:00",
+  "Loader": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D",
+  "CompleteCoop": false,
+  "Scope": "80ms remote XYZ/orientation interpolation; matched animation transition delay; native airborne/landing, sword, pause and fixed Dunwall recovery regressions. Local first-person unchanged. Original Steam and baseline saves preserved.",
+  "MotionComparisonBuild": "80078F9F68B055D7F8A5D918ACB8D1F548252378A08CF53AD8A51FE834BF073A",
+  "MotionComparisonScope": "Identical root interpolation code before 424B added animation-transition delay. Transform callback cadence, not display FPS.",
+  "Assets": [
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game1voidmod.index",
+      "Hash": "631AB55E3CB0BF1E697F8BB9D05A1D4A3D1F516D853178B74FD5F84378554AA7",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game1voidmod.index"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game1voidmod.resources",
+      "Hash": "19135944CCF3242D2F6568E4D4FD854860557E46763DD867C8E094B731D16647",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game1voidmod.resources"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game2voidmod.index",
+      "Hash": "25F74D3F1FCF7D4E8889C008E4CE885A13A4932564923874A6901855AFF57936",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game2voidmod.index"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game2voidmod.resources",
+      "Hash": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game2voidmod.resources"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game3voidmod.index",
+      "Hash": "9268D81FA6EB00E3DC0F0B08E50B3BE0D12BEB3D128941BD85F41371CFDE015A",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game3voidmod.index"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game3voidmod.resources",
+      "Hash": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game3voidmod.resources"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game4voidmod.index",
+      "Hash": "C65204710727D136E6D05E3B66D762DFDF44D91F26473E8B38B1A736BE6524C8",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game4voidmod.index"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\game4voidmod.resources",
+      "Hash": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\game4voidmod.resources"
+    },
+    {
+      "Path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\base\\master.index",
+      "Hash": "DF8FF7ED1FD727EC68E93866D5912E341C1A068E9D4F34783B1B478EC047BBB4",
+      "Backup": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\doppelganger-airborne-7D7A\\installed-assets\\master.index"
+    }
+  ],
+  "AssetsBackup": "work/doppelganger-airborne-7D7A/installed-assets",
+  "Reports": [
+    "doppelganger-airborne-424B.json",
+    "doppelganger-first-person-424B.json",
+    "doppelganger-sword-stream-424B.json",
+    "doppelganger-airborne-guards-424B.json",
+    "doppelganger-native-actions-424B.json",
+    "doppelganger-recovery-424B.json",
+    "doppelganger-final-fixture-424B.json",
+    "baseline-integrity-verification.json",
+    "pose-smoothing-verification.json"
+  ],
+  "Files": [
+    {
+      "Path": "Build-D2DoppelgangerAssets.ps1",
+      "Sha256": "73A538CEB6E22276ACEBE16DC7414CD4F29B7CDDB6E75E4FD38A3E62B24BE5E1"
+    },
+    {
+      "Path": "Build-D2Lab.ps1",
+      "Sha256": "75528C93E56DD29D72955E23D48EC30785DB850BB5F2FD014651FCDE61452FD7"
+    },
+    {
+      "Path": "Build-D2PartnerAssets.ps1",
+      "Sha256": "BFB6CD1B019471A7C971D73515C35D3F61B95A6DC4EC47A06BBC3DE69DF4A043"
+    },
+    {
+      "Path": "CMakeLists.txt",
+      "Sha256": "C7659BD1B1DE143C63C8167BAF5FE77D3963E1F07407D9238691EA1B25082AC4"
+    },
+    {
+      "Path": "current-task-state.json",
+      "Sha256": "A5DF5F370E19BCA2AAF36311F410B54ADDD9AEC2CBC799693962EE120C61170B"
+    },
+    {
+      "Path": "Read-D2Assets.ps1",
+      "Sha256": "8F93096F634AC9BA5BA1CB8D7A3846B9219D5DFC366DB6C3FDC65AC53F036B96"
+    },
+    {
+      "Path": "Restart-D2Lab.ps1",
+      "Sha256": "3403711ACCA15B704BE65AC90C6542A429F3AE787A9587FDB2ED2FCD43B138C3"
+    },
+    {
+      "Path": "Restore-D2Lab.ps1",
+      "Sha256": "CBF4149E31E323104A327FD70F9DA0DF98392AAF449ED7D2274501BDDD0AFDED"
+    },
+    {
+      "Path": "Send-D2Command.ps1",
+      "Sha256": "9CD93426FDA8038E93A8FC54C89DDF35E8E514F512703889674F90D96116DEE9"
+    },
+    {
+      "Path": "Send-D2Input.ps1",
+      "Sha256": "96CBD643602ECF1146698A3C1FB804DCF9C310ECBBA36E911BF2D9F23300C426"
+    },
+    {
+      "Path": "Start-D2Lab.ps1",
+      "Sha256": "7A6E7A514AAB88C17CB6D02363ADC666B60FA0A251507C98BC47C9641A34D92A"
+    },
+    {
+      "Path": "Test-D2ActorPose.ps1",
+      "Sha256": "FE6DF4E44DDA077F73C985DA3418793F8E543C700CBD7FA10988812A32C40C92"
+    },
+    {
+      "Path": "Test-D2AiDecisionHold.ps1",
+      "Sha256": "FDAF44073700B9AC14D850ED6789FB6FC0472191087B44F68E08368911EE9379"
+    },
+    {
+      "Path": "Test-D2AnimatedBodies.ps1",
+      "Sha256": "702340310887FC751D60C1E09CCF65E462DBE469600BD37780A70578129E9454"
+    },
+    {
+      "Path": "Test-D2ArmProbe.ps1",
+      "Sha256": "E31A922762F75B863EFB21C96D9B1B985464A004C2A861C7F95F3254F90D5C40"
+    },
+    {
+      "Path": "Test-D2ArmStream.ps1",
+      "Sha256": "6B7D02503376AD4EC7D7D449108380447828F7FDC59BF5A12B3EBE28CAEA5D0B"
+    },
+    {
+      "Path": "Test-D2ArmStreamGuards.ps1",
+      "Sha256": "B8709A5B8B663357B9A894DE2740ED039B55E8876BD74BB0FEE4AC00265ADB53"
+    },
+    {
+      "Path": "Test-D2AssetRigAgreement.ps1",
+      "Sha256": "B31073B7DB5364C456F5C62BF6178A9E4B51A58C287DF2DAE0E692AD3B3AE5C8"
+    },
+    {
+      "Path": "Test-D2AvatarAi.ps1",
+      "Sha256": "B6E0748136F786DD65BE458D6EF3B184AF62792D86F8DFF4571059A4946DE7A2"
+    },
+    {
+      "Path": "Test-D2AvatarSword.ps1",
+      "Sha256": "AA97F678DA99AF9905861C33781D9EAC7F44C53A93AE65FCAE96CB0D6D68156B"
+    },
+    {
+      "Path": "Test-D2AvatarSwordGuards.ps1",
+      "Sha256": "5BBA4C589D0731F131DEC3F6388454B7EB8DB712AF509CE68F684B474D1A21D9"
+    },
+    {
+      "Path": "Test-D2AvatarWeapon.ps1",
+      "Sha256": "09A5E0BA95ED1BAC77A012E25661A7BFE70B1E29A5EC5900E26F47D4DF6C800F"
+    },
+    {
+      "Path": "Test-D2AvatarWeaponDeath.ps1",
+      "Sha256": "8D40AF8F3128D4F5619882714118EB0D8551F4E402E56DFBC4BD62F051A2B49D"
+    },
+    {
+      "Path": "Test-D2AvatarWeaponGuards.ps1",
+      "Sha256": "62AFB77E28EBCD69303440E7875EEE1263646CF7E2399546A80D33FD2FEF432D"
+    },
+    {
+      "Path": "Test-D2Baseline.ps1",
+      "Sha256": "23160865C969829A3A944F38F534B5CDCE885A6D9DBAA15F110AF7EAA91BF0B3"
+    },
+    {
+      "Path": "Test-D2BodyStream.ps1",
+      "Sha256": "AB901D1B66402DBAC986E5DB97795BCEC264512DA44BBCD7DD9CF61EE1E82DEC"
+    },
+    {
+      "Path": "Test-D2BodyStreamGuards.ps1",
+      "Sha256": "B7DE9C368E723434FABA527FB25B515A7F3CB3F82D216D7146A7F08022D7FC66"
+    },
+    {
+      "Path": "Test-D2CharacterRestore.ps1",
+      "Sha256": "291AB6B466641017DA19EA288E50625441E92978EE4E8B401B35827E75C3CC43"
+    },
+    {
+      "Path": "Test-D2CheckpointDisconnect.ps1",
+      "Sha256": "71F2004D0E065E31EE9BF45896EAD3E2478C52275BE36B8480466E74BE53FCF3"
+    },
+    {
+      "Path": "Test-D2CheckpointMismatch.ps1",
+      "Sha256": "9F33F2196F98DB58B8985D26721E2DF0664D7236AC42D978A78D5AD410E0749A"
+    },
+    {
+      "Path": "Test-D2CinematicHold.ps1",
+      "Sha256": "6A92A847C7086CCF8903ADA89CDEF50412411E3059AC05B762BA2471E80FE0DE"
+    },
+    {
+      "Path": "Test-D2CinematicIdentity.ps1",
+      "Sha256": "4E7DE6AE9C0E216B8925DD7DB933D1EE936683E0341779FE5D8BFF39B34E0EC4"
+    },
+    {
+      "Path": "Test-D2CombatGuard.ps1",
+      "Sha256": "8A7F027E9773BFF7D6B28549204A6EA29176DE6BBFAA9B2201611DAC8B40D688"
+    },
+    {
+      "Path": "Test-D2EnemyDamage.ps1",
+      "Sha256": "4914BC505FBEE79E3DD407235579061BC1F68343B115EF1920C473E70ED0E7AB"
+    },
+    {
+      "Path": "Test-D2EnemyMelee.ps1",
+      "Sha256": "C2D8B67A22CEFBEF6631628F3F197A9C992E7BDC26473779FABB25BA6AFD7859"
+    },
+    {
+      "Path": "Test-D2EnemyMeleeGuards.ps1",
+      "Sha256": "CE147170BC9C84000797153B4C8885F3BD68227F52C4F5C8D4671836BF0E2D09"
+    },
+    {
+      "Path": "Test-D2EnemyOutcome.ps1",
+      "Sha256": "C80698A705FE8B982FFADB79153A3805E7210A3E7A0AEE7F08530B500B4948DF"
+    },
+    {
+      "Path": "Test-D2EnemyOutcomeGuards.ps1",
+      "Sha256": "4BC17F146546A44127D2971FCB0CEDECE4EC39147889ACA6440DA06E72B67256"
+    },
+    {
+      "Path": "Test-D2GuardBody.ps1",
+      "Sha256": "7F098B324028DAEBF5E0997FB19D6F8E89FC9841413C873F77A077EE3A24EA36"
+    },
+    {
+      "Path": "Test-D2GuardBodyGuards.ps1",
+      "Sha256": "A8385814602681D9941F3AF2B005934E6E52A26D1F5DDCF37B5C0DCA9485AB02"
+    },
+    {
+      "Path": "Test-D2GuardEquipment.ps1",
+      "Sha256": "D2A8C9B54C2E67F3BCB45C600A6EFEA28A20C5C33885DA384A762DB2368FD4DC"
+    },
+    {
+      "Path": "Test-D2GuardEquipmentGuards.ps1",
+      "Sha256": "1E45B0FA7C907DB142CC17FD55D0BF7D83FC0C9419EBC03264109F7A5AA2DC9E"
+    },
+    {
+      "Path": "Test-D2GuardHealth.ps1",
+      "Sha256": "5A4770D33C396701E405DEBBBBA3CF020B1A0AE5F75C0A155453FB558CBEA82C"
+    },
+    {
+      "Path": "Test-D2GuardLink.ps1",
+      "Sha256": "84DA86C0BBC0CFCA252DCABCF7A962136F001948B431FD326E8C23E22840AD6F"
+    },
+    {
+      "Path": "Test-D2GuardWeapon.ps1",
+      "Sha256": "6FDC19E421D96E03C6B4207AEF48DB7F46A69E60885CAC61587F94B03A429FBD"
+    },
+    {
+      "Path": "Test-D2Lab.ps1",
+      "Sha256": "98F379241FC1710425379003F467A9DA9FE13EE8EE1F1D05B0769ECAA1F73408"
+    },
+    {
+      "Path": "Test-D2LoadingCharacter.ps1",
+      "Sha256": "CE9ECDEDEC65AF3407833AB2DB3AA3378ED6A4C54A7D1E9FE22EC7A36981F065"
+    },
+    {
+      "Path": "Test-D2LoadingHold.ps1",
+      "Sha256": "879F1BB5F84D332DD0C0A383AA146E014BF5870E3D78CB5F4CDFD8F44AD0C505"
+    },
+    {
+      "Path": "Test-D2Locomotion.ps1",
+      "Sha256": "1671A57A3E71CEC8A7206417D3D47F6A9E7C4644E68A3ED51BA0BDAAC44A0B50"
+    },
+    {
+      "Path": "Test-D2LocomotionGuards.ps1",
+      "Sha256": "E044E20DCBF56B007F33BB5B4FFF10C4ECB80DE5E6FE24579CA973D9C541542B"
+    },
+    {
+      "Path": "Test-D2LogicGuard.ps1",
+      "Sha256": "F127ACC57519FF97A5539930183E65B1F3D707DB42BAC0D8E2F08A98E1EF2AB8"
+    },
+    {
+      "Path": "Test-D2MovieTransport.ps1",
+      "Sha256": "CE962F8C3FF751DBFFB08E07B08925A780493F02DF2ACD09826299FA1EA8AB11"
+    },
+    {
+      "Path": "Test-D2NativeSwordDamage.ps1",
+      "Sha256": "17939C75BE1D1C967D0DEF52FAA0001F18D7C94B741BFC40735444DD7B06F8D7"
+    },
+    {
+      "Path": "Test-D2NativeTransform.ps1",
+      "Sha256": "322FBE1CB9F5C346BBB49AFA367AC23C98E77992192731DDDD05B7FF26177382"
+    },
+    {
+      "Path": "Test-D2ObserverIsolation.ps1",
+      "Sha256": "EB6892EA1EDC0057B280543A2AC42AD0EF9E28F2C509FE8648A523EAF6701C26"
+    },
+    {
+      "Path": "Test-D2OpeningBarrier.ps1",
+      "Sha256": "0C3A519389BAE32208EA63F0EED1FD6048B43C652AA42FDBF30F317387F36F27"
+    },
+    {
+      "Path": "Test-D2PacketPublication.ps1",
+      "Sha256": "B70C2D8038545F98CF01CECAA98DCB56886F9D7EFE9C221F33F5CCBA67433987"
+    },
+    {
+      "Path": "Test-D2PartnerInventory.ps1",
+      "Sha256": "9CAB7B7C18CB57050941C9135539C79E95F2ED2EE9C935B34D38596E00404342"
+    },
+    {
+      "Path": "Test-D2PartnerPerception.ps1",
+      "Sha256": "8DCF7AAD84F7FC1A25C437A47E946AE8EFBA2D10C98FCEE4F04F76440752C54F"
+    },
+    {
+      "Path": "Test-D2PartnerRelationship.ps1",
+      "Sha256": "439C4A9206773D6810820F2213C9F9AF2968868420FD860CF356AB2DEEE33664"
+    },
+    {
+      "Path": "Test-D2PartnerWeapon.ps1",
+      "Sha256": "3EBC37D55DFAAB180963241F052E277F6937003CD79246F55F91A98275846AF8"
+    },
+    {
+      "Path": "Test-D2PartnerWeaponDeath.ps1",
+      "Sha256": "3FEAECA0653CF87870445519B11F905C959FC1EFB32C1F424EF19430E6B28A95"
+    },
+    {
+      "Path": "Test-D2PartnerWeaponGuards.ps1",
+      "Sha256": "D52ED5CD109F9457CFF1B3458A684B73DAEFF4B61CC28AC9A327358295C9225C"
+    },
+    {
+      "Path": "Test-D2PlayerArms.ps1",
+      "Sha256": "1EC2411132717CC3DE98D9A9DFAC23795B05FB1B0018DEC78CCB7571BBCCA364"
+    },
+    {
+      "Path": "Test-D2PlayerMotion.ps1",
+      "Sha256": "2CB594E8034314F819B93C5ECE15584394344822EF4D53097341D5D4E4A7E401"
+    },
+    {
+      "Path": "Test-D2PlayerStance.ps1",
+      "Sha256": "52A2ECC90D774E5D9BCD79F0C26D6EA98C57486B64037B9E5A8C0E37AA914EF3"
+    },
+    {
+      "Path": "Test-D2PlayerSword.ps1",
+      "Sha256": "C98F2C378C693434B2905D6CC20FB9BCE97809796A9B425C0281E1B8A1343B46"
+    },
+    {
+      "Path": "Test-D2PoseSmoothing.ps1",
+      "Sha256": "4DF389ED03B9EA1ADC2C7C082DEB2DDE4371406AF00BDA90EDE452D6FE166E74"
+    },
+    {
+      "Path": "Test-D2PostOpeningSpawn.ps1",
+      "Sha256": "48C9DDD8A8DA78F96117DA2CEB9E94E240449F2479D66A843A6B24B23C2C0963"
+    },
+    {
+      "Path": "Test-D2Reconnect.ps1",
+      "Sha256": "2C65DE3E4CF9475F052E761ABCC70AAC5258576C756B28CD2400FE590A36D23C"
+    },
+    {
+      "Path": "Test-D2SequenceIdentity.ps1",
+      "Sha256": "DF28C3D7EC4C07BA30BC93109CA9BBBC563AB359F9C4D6FE7514107BDA1F1108"
+    },
+    {
+      "Path": "Test-D2SessionDisconnect.ps1",
+      "Sha256": "2D9AC70E8B47B1BF355692024BEFD76B97B485B6E305DC285CC097FD9EA684B7"
+    },
+    {
+      "Path": "Test-D2ShadowActions.ps1",
+      "Sha256": "132BE1B7BE41EA635EFD03D811FF05C2FB41DD30964A19412C2836500AE05B1F"
+    },
+    {
+      "Path": "Test-D2ShadowAirborne.ps1",
+      "Sha256": "61F6F403043BC6DCC1ABA15A7E48754FEEDA097E65F64BA649974721C91643B9"
+    },
+    {
+      "Path": "Test-D2ShadowRecovery.ps1",
+      "Sha256": "0D140B0E3203CB7A11F796ACCF44C2C55A2560A5F796D05C48F1A0F4013817E2"
+    },
+    {
+      "Path": "Test-D2ShadowStream.ps1",
+      "Sha256": "C7FA59404C729A21FD3F5DB85ECF8B90B8BAF521A967A75EE497298545AABD0E"
+    },
+    {
+      "Path": "Test-D2ShadowStreamGuards.ps1",
+      "Sha256": "86106442AB470E88C6E268271C876BD68EA5D75E628DBC280B2FAD3655449077"
+    },
+    {
+      "Path": "Test-D2SharedCheckpoint.ps1",
+      "Sha256": "866FA4B95BC402C2235CE4C46771B218DDAF7E53F8BEE4D6D72A2ADEDE01CC4F"
+    },
+    {
+      "Path": "Test-D2SharedDeath.ps1",
+      "Sha256": "427D50350B2FB3029BC70033523939422ECD536E5354D9002F320783D54A0373"
+    },
+    {
+      "Path": "Test-D2SharedSkip.ps1",
+      "Sha256": "072D15C874DA97D90BB339AC503F0EA1DD26ADF89EDEC80CB79282B267564027"
+    },
+    {
+      "Path": "Test-D2SkipBoundaryGuard.ps1",
+      "Sha256": "A4545476985A2CE056FB71909EE757ABDB1F8A4F4A32294E939AD682A7290AB7"
+    },
+    {
+      "Path": "Test-D2SourceIsolation.ps1",
+      "Sha256": "95D47557D74D1D7CE5B3B57A6DDA1C02EF60A21F51C90C7D269EB61DFB5ECEAD"
+    },
+    {
+      "Path": "Test-D2Steam.ps1",
+      "Sha256": "B19DD4F3A5E1A969478F9A9BBF9663433C9F2E98E1E7C9017BF6B224E844A1BC"
+    },
+    {
+      "Path": "Test-D2SwordDeath.ps1",
+      "Sha256": "72AC02548BBBD56176743A87B1405103BEC853825DD94D603468B06FBFCCC7B2"
+    },
+    {
+      "Path": "Test-D2SwordRelay.ps1",
+      "Sha256": "432EB8352AA7433981065ECF64559EEEF05685398ACC3AAFA34964F0A531E435"
+    },
+    {
+      "Path": "Test-D2SwordRelayGuards.ps1",
+      "Sha256": "C473F6806FCD1C6695D98F629216B456D1C4D2D8B230D2C37042ABBA1629934C"
+    },
+    {
+      "Path": "Test-D2VisualProbe.ps1",
+      "Sha256": "54387C65DA936FFD825676CDC2CEC5380574A14922B8F572044194A2867B0D68"
+    },
+    {
+      "Path": "Test-D2WorldGuard.ps1",
+      "Sha256": "16B1E72E09EC91B5900DD0F24B8354EED8C7889E01787530BF5A6B557A2F0E77"
+    },
+    {
+      "Path": "Test-D2WorldObservation.ps1",
+      "Sha256": "AAC03E4C7394B624D9BA7DBA12E74521B533E563DFDA3B4FEA6C4003563C6378"
+    },
+    {
+      "Path": "analysis\\ghidra\\doppelganger-airborne-and-presentation.json",
+      "Sha256": "CD91436B20CFA72745B1D37BC0575F207BD67368D8E940593D48F8A27DD8D480"
+    },
+    {
+      "Path": "analysis\\void-tools\\doppelganger-airborne-assets.json",
+      "Sha256": "723FA93821897B6D1F6B8414ED6139D13A5924321A458966DE6FF74B4D7A02CE"
+    },
+    {
+      "Path": "analysis\\void-tools\\doppelganger-investigation.md",
+      "Sha256": "5736CDB8675DB52F4E9FB0BB96B93A4C0E9AFAE5FA1B1A10167215C44E9952BC"
+    },
+    {
+      "Path": "analysis\\void-tools\\shadow-crouch-asset-catalog.json",
+      "Sha256": "9F10079F0753CAADD84A486438C6FE9C00E0DC4A70E007CE19492764789DA818"
+    },
+    {
+      "Path": "analysis\\void-tools\\shadow-movement-asset-catalog.json",
+      "Sha256": "341B22FAF8DD1966A83F040F0735CC20E5DA787A7211BED7024FFCD101D49094"
+    },
+    {
+      "Path": "analysis\\void-tools\\toolchain-lock.json",
+      "Sha256": "536AFEF2F5F82E4B562543EC13F85F3229A8586694FC909F20E8979356A44238"
+    },
+    {
+      "Path": "assets\\d2coop_shadow.animtree",
+      "Sha256": "847017B8CAA30771413C411D28C3824BF15102236791CABB62DEB7FBE4C4BC09"
+    },
+    {
+      "Path": "assets\\doppelganger_corvo.def",
+      "Sha256": "81770DDC3EF5E0C3A5666870BCBF6CEF77948E6C1F22D83AF549D9EA8CB3FF77"
+    },
+    {
+      "Path": "assets\\doppelganger_corvo.md6",
+      "Sha256": "53E88A8482D96E586D82E3EE3E8F27FF9EBE1BDA9FA1CED221DBBD5D30EDBB70"
+    },
+    {
+      "Path": "assets\\doppelganger_emily.def",
+      "Sha256": "2EFE1B52C04EEE99FD403266AFEFA3718BA199411CDA064794F482F195163A08"
+    },
+    {
+      "Path": "assets\\doppelganger_emily.md6",
+      "Sha256": "98DF124E16B230781102BA99B2CBBD1E90C944C6C8E5B27BB33DC6B9B02D66DB"
+    },
+    {
+      "Path": "assets\\emily_partner.def",
+      "Sha256": "D08330BAEF6CDDBB0749F99AE401C567F740348CA4E36A38422ECD0313E4B46E"
+    },
+    {
+      "Path": "assets\\shadow_actions.animbasic",
+      "Sha256": "64D82C21BED4D205F88D0B65C144D1FCDD4E158B72D64ED52805EFBBDAC3B3E9"
+    },
+    {
+      "Path": "assets\\doppelganger-partner\\ModInfo.xml",
+      "Sha256": "050387008247690E07F0DCDA1DB97E1030DEEF4D39A5A2F930EDCE4A3669A562"
+    },
+    {
+      "Path": "assets\\doppelganger-partner\\Resources\\game1.voidIndex",
+      "Sha256": "B8B2A7CB8B9130467791040FED76000F362F4BCA67F00E407CA53403457EEA0C"
+    },
+    {
+      "Path": "assets\\doppelganger-partner\\Resources\\game1.voidRessources",
+      "Sha256": "DB6852F0C48B875373172EC7C41D27FF5014FFB25684CB02F70E66B7E7ECFC1E"
+    },
+    {
+      "Path": "assets\\emily-partner\\ModInfo.xml",
+      "Sha256": "6B264B85F2A444ED4841B481E8B3C05853B5084B4D4BA9466F9AA1D82E7F7F41"
+    },
+    {
+      "Path": "assets\\emily-partner\\Resources\\game1.voidIndex",
+      "Sha256": "82C1D0041C0B2D15B4EE0F4B8CEFB7E8100CA1F7D4C861127C153EC653390B09"
+    },
+    {
+      "Path": "assets\\emily-partner\\Resources\\game1.voidRessources",
+      "Sha256": "D08330BAEF6CDDBB0749F99AE401C567F740348CA4E36A38422ECD0313E4B46E"
+    },
+    {
+      "Path": "bin\\d2_proxy_smoke.exe",
+      "Sha256": "29913AF5F9078C2223FEC1F145CF9207E6AE545E5121AE0DBA3B24A724DE109E"
+    },
+    {
+      "Path": "bin\\d2_runtime_probe.exe",
+      "Sha256": "28EC6B1B32C586762CA7BB5FCFA395CAEDBFF6E0D3985D1A315329C33D08AF10"
+    },
+    {
+      "Path": "bin\\d2_steam_probe.exe",
+      "Sha256": "19CE483287F4B1886AFACEF3C0AE236DBA3FF1B33301F4BA4BF4C790E1EA7E18"
+    },
+    {
+      "Path": "bin\\dinput8.dll",
+      "Sha256": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D"
+    },
+    {
+      "Path": "evidence\\baseline-integrity-verification.json",
+      "Sha256": "F0D5B7FBE76F3FB465A35037BF9D433D81DF12DA9EDAF92F7AFF44213452B1DE"
+    },
+    {
+      "Path": "evidence\\doppelganger-airborne-424B-initial-sampling-failure.json",
+      "Sha256": "75773A6596274269386A287B725F8832A38CD320236C0124837CFFBCC7095358"
+    },
+    {
+      "Path": "evidence\\doppelganger-airborne-424B.json",
+      "Sha256": "0060018321EBB064927631E0D514EDEA33FC5F9D12B241850133C00A683C0D52"
+    },
+    {
+      "Path": "evidence\\doppelganger-airborne-guards-424B.json",
+      "Sha256": "AE100EF1BF76612348D5BF1BF97BBBFDF8A7A2D8FB17CE4A8320C2E399FD7F66"
+    },
+    {
+      "Path": "evidence\\doppelganger-asset-install.json",
+      "Sha256": "11DFA9F2D80C9C4CA2410F000F1B7E8DB0B62F7F7A6412811F595E628E9C6C1E"
+    },
+    {
+      "Path": "evidence\\doppelganger-final-fixture-424B.json",
+      "Sha256": "AD3D8D48FF1D5B468428E143AB1DA28BE05918539FB3D48CC0395E27DDB24BB7"
+    },
+    {
+      "Path": "evidence\\doppelganger-first-person-424B.json",
+      "Sha256": "51AE2375B7ADA415627EA0F0A75B6EB52A9CC2B85092B5D7ADCE72D1DB696424"
+    },
+    {
+      "Path": "evidence\\doppelganger-native-actions-424B-initial-sampling-failure.json",
+      "Sha256": "D4B5FDBA443661712359596214D6A965AEBF83F998FBD614705BB8CE126CB1ED"
+    },
+    {
+      "Path": "evidence\\doppelganger-native-actions-424B.json",
+      "Sha256": "A364F8F6B11A622380E949E55138EA64E7428B746AEFA32A59B1B8F2705974B2"
+    },
+    {
+      "Path": "evidence\\doppelganger-recovery-424B.json",
+      "Sha256": "906236CB601EA4726C9C6EABA251C7213847364FA1B3A2CA7696D4E80BDE99B2"
+    },
+    {
+      "Path": "evidence\\doppelganger-recovery-deathclient-native.json",
+      "Sha256": "9E05E81AF9B4DF610D611EA9FEF72E7D804EAAE628E099EF081562568EE0A08D"
+    },
+    {
+      "Path": "evidence\\doppelganger-recovery-deathhost-native.json",
+      "Sha256": "A33191E25848CD2E0588B73329DD3337E7252BDAC98619641DF001869681A37F"
+    },
+    {
+      "Path": "evidence\\doppelganger-recovery-reloadclient-native.json",
+      "Sha256": "59080E4A0A5102F997418A610A80677B681EA4D56B7C3186B5939A8AA67BC658"
+    },
+    {
+      "Path": "evidence\\doppelganger-recovery-reloadhost-native.json",
+      "Sha256": "9C544004849B2B7E80DFE03D336E4334CF4AECFDF50E02A9EAC61E52A96BD836"
+    },
+    {
+      "Path": "evidence\\doppelganger-sword-stream-424B.json",
+      "Sha256": "5715D2A43F951E7C744E9713C5963A9C983A9FB8EDB35AE491010996820037DA"
+    },
+    {
+      "Path": "evidence\\FinalizePoseSmoothing.ps1",
+      "Sha256": "2C01B337BE117EEA343CCFA4CEEB1B79DB7E1088EB61DEB03760A70AE1943B92"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-diagonal-off.json",
+      "Sha256": "4D9169FE09E68E51948301DD8CDA2E97FB9FA7154583D3A66231D07CBDED8971"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-diagonal-on.json",
+      "Sha256": "12F70258878BFFD2486935C52E4A7910C1EA5578AA71BF9D48382F43DD287CAC"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-horizontal-off.json",
+      "Sha256": "4D1F0FF5808CF7F8B33B712AC36A610F38B38927ACE9F3B5434282A4BE4A0881"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-horizontal-on.json",
+      "Sha256": "B7C3BAC8ABDD4773062D15D45A8F66D0BF99884F018859A95E5BAFB3F9B48BF3"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-vertical-off.json",
+      "Sha256": "39B98959E30DB211EB67EB76EEEAEB12EC2C7866AA47DA4E6FA46C1DE1C09860"
+    },
+    {
+      "Path": "evidence\\pose-cadence-client-vertical-on.json",
+      "Sha256": "352A6EFFB7A192B44404AEB59F1CA4747576DDC6A61CC66DFAF87E13AE4DF229"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-diagonal-off.json",
+      "Sha256": "D073EE7F8FCC9EAB99C8BAE8CC41EEA2C429C9B08036D12C3EF42817B1A346EC"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-diagonal-on.json",
+      "Sha256": "FC4C09FF588B7B77DBC9E3C2F75289082AC03B70794AD2A1BC96D4B180AC35B2"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-horizontal-off.json",
+      "Sha256": "CF91F89226ECDBFE899451AFFD6E18698FB4DA0C21B3DF1DAE9491813004F7EE"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-horizontal-on.json",
+      "Sha256": "2C58DF403A4C95EC1126AA47E631802F2F00C0681A7AEC8ADE3BA12DAEAB33BC"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-vertical-off.json",
+      "Sha256": "DE2F2F0B875C9926D20C7A99D91CDDA24D991DEC44DCB518FE6815D475B158FD"
+    },
+    {
+      "Path": "evidence\\pose-cadence-host-vertical-on.json",
+      "Sha256": "581A1A582C86E90A64EA23EE22CD1A617557B1780FCDF9D81C02B31DDD0711D1"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-airborne.log",
+      "Sha256": "C39196189B0892C6F4C05879C81380AB6D59286029D5D8C4FF04E63810DF33D5"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-aligned-build.log",
+      "Sha256": "E868619852E5A3699B0B018BED408DD8F07D48D294AD3EBB2BACFF2A602C4012"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-baseline.log",
+      "Sha256": "7CA8BE3594E08576E5BBF081606C61985A80A86877E275E7312517F57A670669"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-build.log",
+      "Sha256": "82FEAFB69EE42285E65B0F13065AC0AB3A32F9842B5250EB7A53C19A5091F09E"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-first-person.log",
+      "Sha256": "DD27073C7AB7A267D22247F35CE288901BD766E2431422ACC58F9A975859ED45"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-guards.log",
+      "Sha256": "DCBACBC1965CFFA9A439ABBA2075DC90ABB8F2E2AFF7533D3450A5B60BCC2D81"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-native-actions.log",
+      "Sha256": "2C563D27F2383660FF083A76A9DFA6E8F2B09E7BE121A56782430F357D3BE60B"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-recovery.log",
+      "Sha256": "ABF09DF26D6F28C16C2C95A0FAFA6A7CE0B24EBCBB8EB8F9580D756B39594A6A"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-restore.log",
+      "Sha256": "D5B994D2DC00340255A2CC7CE823E8D07D7D1F489A0B8E3050A8CE0835A0A663"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-runtime.log",
+      "Sha256": "1B8F2065289D32D764861B7DE360C3697C73ADAB0987418322256ABBB9ABCF0C"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-sword.log",
+      "Sha256": "8CFDA464DA0A9A3136C1C480F9A872A14F94B25434EB0FE8253882C74B47BC7C"
+    },
+    {
+      "Path": "evidence\\pose-smoothing-verification.json",
+      "Sha256": "4E163CFBE4D6CC4A129BBEF21D0D7D21018D9A229F168F849B4CDA3BC422C993"
+    },
+    {
+      "Path": "evidence\\PreservePoseSmoothing.ps1",
+      "Sha256": "4F73CCDF294F0BC409BF867B6AFF5565F1514C25890E3487C4555E4778DA47CA"
+    },
+    {
+      "Path": "isolated-profiles\\client\\launch.json",
+      "Sha256": "3C9E7E669909393F4BE4D7D08C4B79230ABF21D03DF8DFB0E5F8A517B5DFAE14"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\dishonored2Config.cfg",
+      "Sha256": "CB50E5EEDECC97EE6CA74CA7B798F40CD762DF1603CDB19A72897EE244DE5734"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\profile.bin",
+      "Sha256": "0D1D18E7639AAB25848BBF5D4390B5FAE53A1F43EE63D4FC92C1E7A1E15B9C59"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\steam_autocloud.vdf",
+      "Sha256": "C79C49DE98E7D4AE3836A61830CF263705F72D809CDAADDD1936FCD354595085"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT00\\checkpoint.dat",
+      "Sha256": "77CAFBD202ED469D47CEBFCC22C888F3CDF103F6EC122CEA0BDED0BBEB81DD9C"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT00\\game.details",
+      "Sha256": "67B115D56CD3330E52C3A80F129F730F9AEDF9A39F0DD27840F4B891EFC0C1C1"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT21\\checkpoint.dat",
+      "Sha256": "AE0ED6C8844C91EB97FA6D24F11AADAC216E0C1821A4915C967D810B536C33E2"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT21\\game.details",
+      "Sha256": "C690B99BC691C9EF86299A0018E793DB1DB5763987142F4210963E9E486534A2"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT21\\screenshot.png",
+      "Sha256": "E984F64FE0B55D07D15CEDECDE782B5D9BD274031F38539C9E0557238785FEB3"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT61\\checkpoint.dat",
+      "Sha256": "DEEF9E821D7FCE4BDACD4F510402EA92C215C6EA1AE8058D2A7AFC0E80E7E7B1"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT61\\game.details",
+      "Sha256": "40475871D41E996148AEC450EABF896D5D725C093AE70F45476907AE7E3E313C"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT61\\screenshot.png",
+      "Sha256": "5E82867676AD54026675866685EDB1B95D17C660BA5A1CE2748DB97278818194"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT62\\checkpoint.dat",
+      "Sha256": "535EFF48646086F25505B868A39BCC5B6A00BCB1EB082D442D10083B5FD7086C"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT62\\game.details",
+      "Sha256": "0B92170183A350A003D3A856A684AD3F70352052F840B9666E541FAD78B26058"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT62\\screenshot.png",
+      "Sha256": "AA87ECF863CFC6A99834148ACC4CBF8817955631F8BEA1F0388B0C27353DB1C2"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT81\\checkpoint.dat",
+      "Sha256": "5917CA8299F887441DA1DD216AF56082F9044732E8E837AB5461793386DA90EC"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT81\\game.details",
+      "Sha256": "8F34156F3C80F2E301C276FDD7F11AAAD9E4FEFCC5DE6007FB3A47A8C3FAD711"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT81\\screenshot.png",
+      "Sha256": "3492258ECEF616A0038AFE531D9ECD0C562505A765F9098D35F06B67D2D1076A"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT82\\checkpoint.dat",
+      "Sha256": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT82\\game.details",
+      "Sha256": "FD8E89DC59CBE8503150BD933A28C6F88095385CB60A1087FEDF466C92453194"
+    },
+    {
+      "Path": "isolated-profiles\\client\\base\\savegame\\SLOT82\\screenshot.png",
+      "Sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D"
+    },
+    {
+      "Path": "isolated-profiles\\host\\launch.json",
+      "Sha256": "3A52F162BDE6C07547151FC959749FD3446E2FC69BA9FA3A44F5A6510BBA0500"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\dishonored2Config.cfg",
+      "Sha256": "0E045F0B6BEC6566F02B0F22EB66E7C6F8B2AB79624E8769212471DA6100C239"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\profile.bin",
+      "Sha256": "172CD84FAE252B8070F8F4477181AA3B39392160BA167E51899B78E99AB812DB"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\steam_autocloud.vdf",
+      "Sha256": "C79C49DE98E7D4AE3836A61830CF263705F72D809CDAADDD1936FCD354595085"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT00\\checkpoint.dat",
+      "Sha256": "77CAFBD202ED469D47CEBFCC22C888F3CDF103F6EC122CEA0BDED0BBEB81DD9C"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT00\\game.details",
+      "Sha256": "67B115D56CD3330E52C3A80F129F730F9AEDF9A39F0DD27840F4B891EFC0C1C1"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT21\\checkpoint.dat",
+      "Sha256": "AE0ED6C8844C91EB97FA6D24F11AADAC216E0C1821A4915C967D810B536C33E2"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT21\\game.details",
+      "Sha256": "C690B99BC691C9EF86299A0018E793DB1DB5763987142F4210963E9E486534A2"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT21\\screenshot.png",
+      "Sha256": "E984F64FE0B55D07D15CEDECDE782B5D9BD274031F38539C9E0557238785FEB3"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT61\\checkpoint.dat",
+      "Sha256": "B880AA9D0E6DD04463556FBD96FA289186DF5CF41C9420353391E655880549EF"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT61\\game.details",
+      "Sha256": "0BB9000FFFA201E46105C880710047DF130087EE358479DB33CC8CF8A0AC1E91"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT61\\screenshot.png",
+      "Sha256": "793C92988B328947B2E69DA776F30167665B5B33A2F1344BDD4588CF231FE5FE"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT62\\checkpoint.dat",
+      "Sha256": "FC4A148FF4640F6A9B05E50CE14EE0767D29F2F0EDE5449CCBB51A2FDA303BF2"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT62\\game.details",
+      "Sha256": "591AB8991012CA00CBD07F8C5D12374A1B462841BEAB9D0C1987332F02849F45"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT62\\screenshot.png",
+      "Sha256": "3056F2A4F73BFF42038AAF77944E23C7C81D833D89FC1948E591C0398A52692C"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT81\\checkpoint.dat",
+      "Sha256": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT81\\game.details",
+      "Sha256": "FD8E89DC59CBE8503150BD933A28C6F88095385CB60A1087FEDF466C92453194"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT81\\screenshot.png",
+      "Sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT82\\checkpoint.dat",
+      "Sha256": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT82\\game.details",
+      "Sha256": "FD8E89DC59CBE8503150BD933A28C6F88095385CB60A1087FEDF466C92453194"
+    },
+    {
+      "Path": "isolated-profiles\\host\\base\\savegame\\SLOT82\\screenshot.png",
+      "Sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D"
+    },
+    {
+      "Path": "src\\animation_probe.h",
+      "Sha256": "9958DAEDC2155846D367F05C8381ABC03F5F8D6A636636DDEAE10A279511F80A"
+    },
+    {
+      "Path": "src\\arm_probe.h",
+      "Sha256": "14D7FAD52CC8999CEC249365F24F82B3E7FE97FCC8276D1E79ED0AD842D6162A"
+    },
+    {
+      "Path": "src\\arm_protocol_tests.cpp",
+      "Sha256": "FD3E5FC7D9EFFE0079661EEE3D9402D7F07A2C505933789538F3F78BFBB661E9"
+    },
+    {
+      "Path": "src\\arm_protocol.h",
+      "Sha256": "C32CE6CD05D2DDCA02E831B7159BB41F51B1129F8F774D495F64F4843FD9BC7E"
+    },
+    {
+      "Path": "src\\arm_retarget.h",
+      "Sha256": "94209A72DF4547623D5A57E3EE325CBE7E0BAE39CF7185844DCFB30496ECFCDD"
+    },
+    {
+      "Path": "src\\arm_stream.h",
+      "Sha256": "7C05AA272795F927FF2631B32C2D5C01C96AEDCE85EB7C559A1E16D70C427A4C"
+    },
+    {
+      "Path": "src\\avatar_ai.h",
+      "Sha256": "8267F38914DF3E43100D4D3C7FA6EDC66DBD111BE5DD437DB4A6510CF45E08EB"
+    },
+    {
+      "Path": "src\\avatar_sword.h",
+      "Sha256": "DCCD9180AC0287E6B8B061352EC040325B9DEE3ED9B9C6C229D1FBEDA02C46D0"
+    },
+    {
+      "Path": "src\\avatar_weapon_protocol_tests.cpp",
+      "Sha256": "D6FB29578468765AC9F89605C4D6D5C5A4FB74EF0472F9BD7C449B4F5F70D659"
+    },
+    {
+      "Path": "src\\avatar_weapon_protocol.h",
+      "Sha256": "0AAE085F262FC7688C6188D8F500EEF6C2B12E9F7D605B6FCDAE9E262B05F076"
+    },
+    {
+      "Path": "src\\avatar_weapon.h",
+      "Sha256": "1D13E7B9095F0B3B7C84D28BAEBC3818AE68D653CB77679D74F2A16E53000E73"
+    },
+    {
+      "Path": "src\\body_probe.h",
+      "Sha256": "74379397D3BCD552F015E7645A4CEF4B172B25D2AE43EC82CA5C6473310BA53C"
+    },
+    {
+      "Path": "src\\body_retarget.h",
+      "Sha256": "5A7C4297A11F9BD978CD20C8CB3C5138A33BB2E6E75C083679C372534EE53EBD"
+    },
+    {
+      "Path": "src\\bone_probe.h",
+      "Sha256": "66217FE2DA5381CB7F788BB003E9E034B61E338FADF797F098AB78831CB21FF1"
+    },
+    {
+      "Path": "src\\character_probe.h",
+      "Sha256": "E9BFF5067DB816C7AA8A75C6298D14F05B48FAE00A011219C437B0BB6EF9BB07"
+    },
+    {
+      "Path": "src\\checkpoint_fixture.h",
+      "Sha256": "3D4F0FC477E2F1CC967DACAE9CB0F760E291E735650C9ABECE0F83C01D3B56A9"
+    },
+    {
+      "Path": "src\\checkpoint_protocol_tests.cpp",
+      "Sha256": "CF1452D80AF7E870D206450B9B68A2C666905F73152AE8F7237E384792DD3A12"
+    },
+    {
+      "Path": "src\\checkpoint_protocol.h",
+      "Sha256": "63EBF8925853EFE61D5595818F01881580964CC2D7213BB8D6EDE888989D1920"
+    },
+    {
+      "Path": "src\\checkpoint_sync.h",
+      "Sha256": "2EEA2CEB3D6DE7564BB84C1C2A3AD9F697FC5EF6C61A87688D7B9B1BD70DD2E1"
+    },
+    {
+      "Path": "src\\checkpoint_trace.h",
+      "Sha256": "79666EFE2C0455515C62830D3DF228B4C808F77A3B6C4D55AF8BB77895578077"
+    },
+    {
+      "Path": "src\\coop_protocol.h",
+      "Sha256": "1A9493127C68414CB9048723F06068688DD15088C4A3DB3DA33B69F6A8EE121E"
+    },
+    {
+      "Path": "src\\damage_observer.h",
+      "Sha256": "9ED47B4D92D50D605372BFFCC015679992157414186DFC3BC73954EB5DE164D7"
+    },
+    {
+      "Path": "src\\damage_protocol_tests.cpp",
+      "Sha256": "D927C9AC8F9D36CADBCCCA69AC8D0AC9C13B49553F528840800544414D0EBE60"
+    },
+    {
+      "Path": "src\\damage_protocol.h",
+      "Sha256": "60A4D99BCCCC16B9A156487C470D39D8ECDB6E58E954D0BEB950DD5FC82E53FF"
+    },
+    {
+      "Path": "src\\enemy_melee_protocol.h",
+      "Sha256": "7D6BAAD516377F459F8D6772D7635F6DDA084FF98244297BB6345A9CB3ABFEC1"
+    },
+    {
+      "Path": "src\\enemy_melee_tests.cpp",
+      "Sha256": "F58E565CE5DF023343D1948C0957C595B92F0944DA247518B5BBAE383E4159EB"
+    },
+    {
+      "Path": "src\\enemy_melee.h",
+      "Sha256": "CE5E071B8B52518E035A47099F9BA74A7C22556141480D432E5EE2B80744CA89"
+    },
+    {
+      "Path": "src\\enemy_outcome_protocol.h",
+      "Sha256": "17BA876D6FC0683664089638C3D41C66302CC1AD3F75D952DA79D275CF368A7F"
+    },
+    {
+      "Path": "src\\enemy_outcome_tests.cpp",
+      "Sha256": "29B1BD48C28EE75FCFA2C00969BE2A684F28A1E309498F0CD8E8B156649186DF"
+    },
+    {
+      "Path": "src\\enemy_outcome.h",
+      "Sha256": "311E84FD92A555B2862BC2CC3E0CC90C5FC8DAA0762CD5FE0E01B39579337AF2"
+    },
+    {
+      "Path": "src\\engine_bridge.cpp",
+      "Sha256": "C2846281BE61DC868E5248FE78D0762FE4AB95C5756000C8FE6DF81FB04CD0FF"
+    },
+    {
+      "Path": "src\\engine_bridge.h",
+      "Sha256": "B73A3458A513434D9308DE8B622ECB18D2A299334250387E2CEFE85D3E77FD63"
+    },
+    {
+      "Path": "src\\gameover_probe.h",
+      "Sha256": "BBA3B35B9EA691858BBEB416369F8939443CC0F00EDFC9CDD1468ECC658EC438"
+    },
+    {
+      "Path": "src\\guard_body_protocol.h",
+      "Sha256": "B966C0125CFED2779E764BD88BFA444B58439F23798A5B552DCBED7CD0A466E9"
+    },
+    {
+      "Path": "src\\guard_body_tests.cpp",
+      "Sha256": "2EAFA20DAFDF971B4EB541357B214E1DCB5537AEC679FCCC51B9684850CED0DC"
+    },
+    {
+      "Path": "src\\guard_body.h",
+      "Sha256": "0F6F62F1DDB09F93972FB15BACBB61397B1246304674A01C910E72F4596BC207"
+    },
+    {
+      "Path": "src\\guard_equipment.h",
+      "Sha256": "FE57AA23C2A266CF55195D5CD7E5A1FCEF0460EA9057E4159D397F983A8EE335"
+    },
+    {
+      "Path": "src\\guard_link.h",
+      "Sha256": "E9B3A210F9009E86DA8E189E0DF1890F76557DDB108AF608A5C8DB3854FCA50F"
+    },
+    {
+      "Path": "src\\guard_protocol_tests.cpp",
+      "Sha256": "CA3826C1C4603A21E1E7FD6666EB4E7B055AB3B5CD08263192DE5B82AC717FE4"
+    },
+    {
+      "Path": "src\\guard_protocol.h",
+      "Sha256": "99897171D7C797D861362ADD5DF73F424CF19D942D2313B7D1E395EC7A610D4E"
+    },
+    {
+      "Path": "src\\guard_weapon_protocol.h",
+      "Sha256": "89008711C2AF12FBA7E5330C2D7CCAE6804CFBE07CA4D349944A45D70428A526"
+    },
+    {
+      "Path": "src\\guard_weapon_tests.cpp",
+      "Sha256": "314B7B1BCAFC3E1CDD2E9A1FCBE439268A20B8464C7FB10A8406244B4068A189"
+    },
+    {
+      "Path": "src\\guard_weapon.h",
+      "Sha256": "87B6C03C10C5447ABDA6E6EF5A796FE45899DAACA2FF9C6EAF6B4EF94FD0E257"
+    },
+    {
+      "Path": "src\\lab_input.h",
+      "Sha256": "0312B14EA06E2438025CEBEEBA4BA3FED063B4C3348B294DA303CCB768984AA7"
+    },
+    {
+      "Path": "src\\lab_policy.h",
+      "Sha256": "C2BDB52B407DAAE3E06BE94EE1453602383AA09E0ED4265C258A910A3D7E643B"
+    },
+    {
+      "Path": "src\\lab_proxy.cpp",
+      "Sha256": "0BC0153D6AC7102F0D9A3260CBE4FB8CA9DBAAB920D6F5EA1C2A4E1407F8614D"
+    },
+    {
+      "Path": "src\\loading_queue_trace.h",
+      "Sha256": "A8E92AD667C07BC4EA1AC9A68B1CBD20EB3424BFE2A8476D36D68FCA5AA3E852"
+    },
+    {
+      "Path": "src\\loading_trace.h",
+      "Sha256": "EA26C47CA8966263C6ACEF63EA51D546E509F4ED76A502C6BC1EEACD99909E60"
+    },
+    {
+      "Path": "src\\native_ai_hold.h",
+      "Sha256": "886E9EEDEB6F447F691115C9AD7FE04F6F9C58F12D70E0FC729255CE09BCF81E"
+    },
+    {
+      "Path": "src\\native_ai_retirement.h",
+      "Sha256": "7EF52EE57BFA877E4F605E39308839E0F9C43DE72DEDFF643C23C3654B61549D"
+    },
+    {
+      "Path": "src\\native_ai_state.h",
+      "Sha256": "A54B475D84E24BE6A3AC43E6AE05D378D84A44ED7B978A2EB82F6AA459225653"
+    },
+    {
+      "Path": "src\\native_ai_targets.h",
+      "Sha256": "17FCEC2E452182349A05DD33A577A9A9286607683333EBA0DA6629A59E0DC17D"
+    },
+    {
+      "Path": "src\\native_character.h",
+      "Sha256": "DA32011458E1EA1B18C7EFFBFD4B3935F6EFBD4849BBEA2F7F029578A2F7FE76"
+    },
+    {
+      "Path": "src\\native_child_frames.h",
+      "Sha256": "B7F31777239F0447A03A3A2FDD476A005A822191260DF0EFE4D3262676287D4A"
+    },
+    {
+      "Path": "src\\native_enemy_damage.h",
+      "Sha256": "345923B2617A8238758F02514A9F793E9B095EA955160A4F841F2A8587C81888"
+    },
+    {
+      "Path": "src\\native_faction.h",
+      "Sha256": "0007A0A1D81C19AC10E59FD5B2B815A6DB426442372F8CF2CBCA10A586A74130"
+    },
+    {
+      "Path": "src\\native_gameover.h",
+      "Sha256": "F3640935AFA0AC32119E3087A6445A4C96CCB77A941D8FF9A7642308FAC0D359"
+    },
+    {
+      "Path": "src\\native_health.h",
+      "Sha256": "69A14292942621F6ED6FDBEB83A08BFFE340BBFC02FC11BAE73779BCB486FE0A"
+    },
+    {
+      "Path": "src\\native_locomotion.h",
+      "Sha256": "1BEDC7EE4399AA0FDB531E1589561BDB1D8DCCA18D3A61CE661BDEA0CCC13425"
+    },
+    {
+      "Path": "src\\native_player_action.h",
+      "Sha256": "5C3839C9FF8D1E8480B00A2E5E906D549564B79999A954DC11508EA56DFB6232"
+    },
+    {
+      "Path": "src\\native_player_arm.h",
+      "Sha256": "AB3F386B930805A586A2DE056BCEB8E2B1992D15D24EE7ADF0A8C6AA2F50D992"
+    },
+    {
+      "Path": "src\\native_player_stance.h",
+      "Sha256": "6FCE28688F281045EC2CB38922366413212EBFE2013DEF51A25D1D6A276DFD28"
+    },
+    {
+      "Path": "src\\native_player_states.h",
+      "Sha256": "E780094BF0478E56E283B9DF166136E10D930F4D677DD5A5C263DF4F1E78CC02"
+    },
+    {
+      "Path": "src\\native_player_sword_damage.h",
+      "Sha256": "F486FD426289D12818DC22B15EA20705C299B7FA599B0F531AD21CAE6C45510E"
+    },
+    {
+      "Path": "src\\native_player_sword.h",
+      "Sha256": "28D58FA8A27FF3FE3D70E2CB427ECCBB9F73127EBC1FD8536BB57B95EFF8EC04"
+    },
+    {
+      "Path": "src\\native_skeleton_tests.cpp",
+      "Sha256": "A3CF00534FB4D7A26D076E06B15A2AB9DC0FCCDC75E40FE9D4AB66F3DF68D6F0"
+    },
+    {
+      "Path": "src\\native_skeleton.h",
+      "Sha256": "5183B8B410C9D3BB1B6CC776A3A19FBCB95F4B10F5D6D8D65EAC7107CEAB0574"
+    },
+    {
+      "Path": "src\\native_sword_damage.h",
+      "Sha256": "6E53469559AE2DEF536225DE5F6ADD816C24B9FF94AD26BD9101F283A1832DAB"
+    },
+    {
+      "Path": "src\\native_sword_equipment.h",
+      "Sha256": "53CFC43AD6A521299616BADFA5277E8DE8016C31D799FFD19E560F7AA5B9112F"
+    },
+    {
+      "Path": "src\\native_sword_retirement.h",
+      "Sha256": "BAC87EF7185EC537194960B4A9651CC7B6DD3D0BEAEA3F813575FD44B3A6ECA5"
+    },
+    {
+      "Path": "src\\observer_isolation.h",
+      "Sha256": "44835EF55C82150142279B4E43A81E20C904AFD0BF939367A3C3CC2DC3EB9658"
+    },
+    {
+      "Path": "src\\partner_ai.h",
+      "Sha256": "ECE6575DD35B308CC9A09B490B8BB2AD99D4E84F2BEE070658A7D4BF6F84CA36"
+    },
+    {
+      "Path": "src\\pose_interpolation_tests.cpp",
+      "Sha256": "5AB250F90F8B293B1786EFC4477B43AE7C41CCA4989824B525769EE5B2480C59"
+    },
+    {
+      "Path": "src\\pose_interpolation.h",
+      "Sha256": "050DBA26B7F3CD9BCB003C23C37293D2B7E78C76A8A420E906A4179172EA32FA"
+    },
+    {
+      "Path": "src\\proxy_smoke.cpp",
+      "Sha256": "CA159A6F875CFAF157423B438BF40098448A2B700CFE05D4C27F560BEF0E4846"
+    },
+    {
+      "Path": "src\\runtime_probe.cpp",
+      "Sha256": "D4F02FAD207E8CDD6BDE69CE83730CF144F70669F3EE33548E07E7E57BFEF140"
+    },
+    {
+      "Path": "src\\shadow_action_protocol_tests.cpp",
+      "Sha256": "25BA0FF7B0202B8BC3E1BA55B65CF26BFB1AF3816A2E7C8481F1537A07C83FE4"
+    },
+    {
+      "Path": "src\\shadow_action_protocol.h",
+      "Sha256": "C33A65AA158719C49C10E46BBDB575F99747FB4964506263AF68FFEDFCD555B3"
+    },
+    {
+      "Path": "src\\shadow_action.h",
+      "Sha256": "5D4AFD6F2F4D977194C0C1E5D7816A0C9F4DB59A239F8169FA85801626EE658C"
+    },
+    {
+      "Path": "src\\shadow_damage.h",
+      "Sha256": "670B1FB6B93D7E712C0BE50489C090DD084A144847AE3CB7BE0D56F3BE887BCA"
+    },
+    {
+      "Path": "src\\shadow_stream.h",
+      "Sha256": "2515AF331784A39FD3A114DD7FBFE1EA02A7EC8C0D380B02FAB65DE7B36E32DC"
+    },
+    {
+      "Path": "src\\steam_probe.cpp",
+      "Sha256": "69ECF4617A2A50A354157C1AFD5CB639A3337BA1B777DC14E3917D6D88A3B88B"
+    },
+    {
+      "Path": "src\\sword_link.h",
+      "Sha256": "70333C8D03A76732F4C96CD075167ED88251D325336AAC7ADEE1FD1C0180AA1E"
+    },
+    {
+      "Path": "src\\world_identity_tests.cpp",
+      "Sha256": "C699651BE23C9E3003A74B35E7464E581D8D02DBCB63A0249C73CC4BB435E84B"
+    },
+    {
+      "Path": "src\\world_identity.h",
+      "Sha256": "E7436C499704AD031E0CFD3EC5593AD1250EB70B35E1DB761C0FB866FB752191"
+    },
+    {
+      "Path": "src\\world_observer.h",
+      "Sha256": "277B37AD81C61C99C8E7F21AD8A853C6FD6F7BE9141309C5534AF9912337A1FE"
+    },
+    {
+      "Path": "src\\world_protocol.h",
+      "Sha256": "97DB8FA0E9A4BEBA6D90D1AE55831E916B21FA722B3A91B8F5C076EAE1CDAD49"
+    },
+    {
+      "Path": "third_party\\valve\\isteamnetworkingsockets.h",
+      "Sha256": "EB33B1F50A8EB8D1068AB7721EF5472E91C10E48C19D68B740EBB1386B542FA2"
+    },
+    {
+      "Path": "third_party\\valve\\LICENSE",
+      "Sha256": "6DD96E4552E5BA087A7701427321D659440882C7B872F2DD0AEB1D16327CDA82"
+    },
+    {
+      "Path": "third_party\\valve\\PROVENANCE.txt",
+      "Sha256": "8DDAE8C3609B83FE29FE3C1478558B77316B6805D2282C34A0A4D2514C34DCF3"
+    },
+    {
+      "Path": "third_party\\valve\\steam_api_common.h",
+      "Sha256": "E3AC98301A87A05D6255023BC848E9B593DCA3DD1E6C80C5D9C852DD0E93A76A"
+    },
+    {
+      "Path": "third_party\\valve\\steamclientpublic.h",
+      "Sha256": "8149370DDFD9A8E3ABC050D2217321AB8B6D42D8F499638C8C03E1971796BC33"
+    },
+    {
+      "Path": "third_party\\valve\\steamnetworkingtypes.h",
+      "Sha256": "C31B9F7CA0D9B7AD80C3E168BC523F6C360FE138E23A7450322CBF1E9F978466"
+    },
+    {
+      "Path": "third_party\\valve\\steamtypes.h",
+      "Sha256": "365A37467D4B3C244732F89370F39128E2CC3C07D5220B9F34BC069EB15D4923"
+    },
+    {
+      "Path": "third_party\\valve\\steamuniverse.h",
+      "Sha256": "91B43F660BE112F6496EB26480732B28A9981FC7A48C78A41C90966E802B05A3"
+    },
+    {
+      "Path": "tooling\\analyze-arm-render-phase.cjs",
+      "Sha256": "A3E55AD58CD1CB5601B240ABC016A4D2FF755E018A4C3569F9761392573FF241"
+    },
+    {
+      "Path": "tooling\\analyze-hand-geometry.cjs",
+      "Sha256": "63432B68192B375FFA2753D5127367027D7C6818B5112316C92468166F4D0B63"
+    },
+    {
+      "Path": "tooling\\Publish-D2Packet.ps1",
+      "Sha256": "EF59E37EBF829BB0945475989F6E3F7F2A1B9C1FE64051401E8366D90AD44B89"
+    },
+    {
+      "Path": "tooling\\run-clean.cjs",
+      "Sha256": "6FA56B97D0C81617B2312997ADC773123E2B5AA854447AB774A951F33652D7EF"
+    },
+    {
+      "Path": "tooling\\verify-arm-stream.cjs",
+      "Sha256": "F58F7CBBEA6F6911730D985AF36B5D68300D02F4910FB024DB3B313B87458F78"
+    },
+    {
+      "Path": "tooling\\verify-avatar-sword.cjs",
+      "Sha256": "0414DAC6F5F8316D515EED218AA8A751E03745035792FAA30F4E9EDE1749257B"
+    },
+    {
+      "Path": "tooling\\verify-guard-attachment.cjs",
+      "Sha256": "53BF5D2FA56EDACA204690E137E2DCB2BEE1CC6FF0A8E47AA4482AE9BACC1AB6"
+    },
+    {
+      "Path": "tooling\\verify-guard-body.cjs",
+      "Sha256": "775187BFCDA928B40D21AAFF95FC634843257B92E9D995707D35167EE41767EA"
+    },
+    {
+      "Path": "tooling\\verify-local-arm.cjs",
+      "Sha256": "E6DD0469C03CDD6CFA98B17B0A2C26EEB45A88743F657027CC5C65CD730D5C0F"
+    },
+    {
+      "Path": "tooling\\verify-partner-weapon.cjs",
+      "Sha256": "AC73EB5D9A623427FAC8101A74EA66963842CE0F6D554B950C067A128A9CE316"
+    }
+  ]
+}

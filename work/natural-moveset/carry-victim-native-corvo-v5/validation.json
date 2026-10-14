@@ -1,0 +1,96 @@
+{
+  "identity": {
+    "character": "corvo",
+    "role": "host",
+    "peer": "client",
+    "dllSha256": "3846D439EBD12909B402021D627C904F8869AE46FFF6B9CE3EDFC51735A101EF",
+    "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "bankSha256": "3D3F10DC03CFB93C71679A6246D0BAE9CA6BCF3FC0500F2DAB6515521472234B",
+    "healthBefore": {
+      "tick": 277405015,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x20533a08fe0",
+      "actor": "0x2052d416f10",
+      "attributes": "0x2053388c7b0",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "victimSceneRequested": true,
+    "scope": "Eight-second explicitly armed native attachment experiment on the authored Mayhew corpse. Requested victim-only animation is recorded separately; shoulder pose and ragdoll outcome require visual inspection.",
+    "corpseMutations": true
+  },
+  "samples": 120,
+  "held_samples": 54,
+  "checks": [
+    {
+      "check": "harness completed",
+      "passed": true
+    },
+    {
+      "check": "strict reciprocal attachment observed",
+      "passed": true
+    },
+    {
+      "check": "one exact mapped corpse generation",
+      "passed": true
+    },
+    {
+      "check": "native release empties attachment list",
+      "passed": true
+    },
+    {
+      "check": "local first-person health preserved",
+      "passed": true
+    },
+    {
+      "check": "at least 24 captured frames per second",
+      "passed": true
+    },
+    {
+      "check": "victim-only native scene owns exactly the corpse",
+      "passed": true
+    },
+    {
+      "check": "victim scene retired on release",
+      "passed": true
+    },
+    {
+      "check": "corpse remains dead",
+      "passed": true
+    },
+    {
+      "check": "native physics changes ragdoll to animated and back",
+      "passed": true
+    },
+    {
+      "check": "native carried flag is claimed and restored",
+      "passed": true
+    }
+  ],
+  "mechanical_checks_passed": true,
+  "root_follows_carrier": false,
+  "carrier_displacement_m": 2.0614389985311194,
+  "corpse_displacement_m": 2.9493576384386864,
+  "maximum_carrier_root_separation_m": 2.0497239023976306,
+  "actual_capture_hz": 26.789473684210527,
+  "video_sha256": "5C247AE53A20765AD1900EC46837D0DF06815893642B06A110304314342BA8EA",
+  "native_victim_scene_active": true,
+  "victim_animation_input_count": 1,
+  "native_victim_animation": true,
+  "visual_accepted": false,
+  "complete": false,
+  "scope": "Explicitly armed attachment mechanics only. Root movement, corpse pose and physics handoff must be judged separately."
+}

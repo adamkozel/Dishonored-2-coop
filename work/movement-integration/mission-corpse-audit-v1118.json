@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-14T13:45:56.103997+02:00",
+  "candidate": "candidate-npc-combat-v1113d",
+  "dll": "9995981FA8EA0258E88685B1E353C3A82E2C3AF8DD9EFCD5F49890A88732B444",
+  "harnesses": [
+    "../natural-moveset/Test-MissionCombat-v1117.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-combat-v1114",
+      "candidate": "candidate-npc-combat-v1113",
+      "scope": "1113: NPC combat pre-death release stopped the stream channel (combat_native_death) before corpse mode; corpses 0.90 m apart.",
+      "corpseDeviationM": [
+        0.899,
+        0.907,
+        0.904,
+        0.904,
+        0.904,
+        0.904,
+        0.904,
+        0.904
+      ]
+    },
+    {
+      "take": "mission-combat-v1115",
+      "candidate": "candidate-npc-combat-v1113b",
+      "scope": "1113b (channel kept as corpse): client re-acquired AI on the next host hello -> ai_acquire_failed; corpses 1.08 m apart.",
+      "corpseDeviationM": [
+        1.113,
+        1.097,
+        1.087,
+        1.081,
+        1.08,
+        1.08,
+        1.08,
+        1.08
+      ]
+    },
+    {
+      "take": "mission-combat-v1116",
+      "candidate": "candidate-npc-combat-v1113c",
+      "scope": "1113c (no re-acquisition for corpses): corpses matched exactly (0.0 m) during the 8 s corpse stream; releasing the client ragdoll moved it 0.86 m then 0.27 m.",
+      "corpseDeviationM": [
+        0.0,
+        0.001,
+        0.0,
+        0.856,
+        0.273,
+        0.273,
+        0.272,
+        0.272
+      ]
+    },
+    {
+      "take": "mission-combat-v1117",
+      "candidate": "candidate-npc-combat-v1113d",
+      "scope": "1113d (corpse stays host-streamed for the stream lifetime): client-sourced native fatality, one death on both peers, corpses identical (0.0 m) for the whole take; client video: kill, collapse, natural slumped corpse against the railing.",
+      "corpseDeviationM": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: after a shared native death each world settles its own ragdoll (0.9-1.4 m apart without authority).",
+    "1113d: the bound NPC channel becomes a corpse stream (pose health 0 allowed; pose health is never applied - death only comes from the native combat outcome); the client holds its corpse animated (native physics 736ef0) and applies host corpse poses; releasing to ragdoll mid-session (734d90/734a10) moves it, so release happens only at channel stop.",
+    "Confirmed runtime: client-sourced native fatality on a mission guard yields one death and an identical corpse (0.0 m) on both peers."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Corpse streams persist for the stream lifetime (bandwidth bounded by the 1097 budget); dynamic relevance/rebinding should retire distant corpses.",
+    "Physics interaction with client corpses (bumping/explosions) while held animated; body carry of a streamed corpse.",
+    "Guards engaging the client player (partner perception) and relayed player damage; shared death/checkpoint on missions."
+  ]
+}

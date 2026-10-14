@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-13T02:22:45.013257+02:00",
+  "candidate": "candidate-choke-network-v584",
+  "dll": "AC631D0F1AE86CC2C9191F8F86F6F159ADE97C29C3E5B2104483256CB9CF4088",
+  "probe": "1530C381B9AF0C615B269FCF1AFBA6956CD537D2CF84CBAC5469C2CD491632B2",
+  "protocol": 63,
+  "bankVersion": 63,
+  "clips": 351,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\choke-network-corvo-v585\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase3 read independently",
+        "Steam remote whole-body choke phase3 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native RightShoulder held6500ms behind exact authored guard2; paired scene owner verification and visual review remain required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\choke-network-emily-v586\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase3 read independently",
+        "Steam remote whole-body choke phase3 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native RightShoulder held6500ms behind exact authored guard2; paired scene owner verification and visual review remain required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    }
+  ],
+  "complete": false,
+  "visualAccepted": false,
+  "runtimeVerified": true,
+  "limitations": [
+    "Actor presentation only: receiver victim remains native/independent; no shared struggle, knockout/death/corpse outcome or native choke gameplay events added.",
+    "Fine hand/contact/footwork polish deferred and visuals not accepted.",
+    "Native cancel, interruptions, crouched entries, target dragging, front/side/aerial/slide takedowns and wider character contacts remain unverified.",
+    "Previous Corvo trap576 intermittent250ms semantic freshness fade remains open; unchanged578 passed.",
+    "Emily586 passes12 numerical/native/Steam/root/restoration checks, but the inspected observer video is below the balcony and does not show her body. This is not visual coverage. Correct camera recording is required; visualAccepted and complete remain false."
+  ]
+}

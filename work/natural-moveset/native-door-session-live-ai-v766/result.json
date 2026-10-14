@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "failure": "Health changed during neutral targeting observation",
+  "dll": "0C500AFF27B7D7EEA4D403CBFFD0A599B375C1AADD8232D9FDD5B020E97D6377",
+  "checks": [
+    "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+    "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "stance": 0,
+        "name": "unlocked-door-tap",
+        "yaw": 270,
+        "distance": 1.0
+      },
+      "key": "host-unlocked-door-tap",
+      "count": 124,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "door": "ld_door_350cm_int_rich_wood_01_2",
+  "initialOpen": true,
+  "scope": "Explicit door session with native AI active from initial arming; no movement-isolation fixture. Native input during received closing is not accepted as a reversal; both finish the same ordered close. The other player then uses the completed door and both reopen at revision3. Explicit input/state observations; no assumed busy-input buffering or reversal."
+}

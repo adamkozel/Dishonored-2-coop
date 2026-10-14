@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-10T14:28:49.901767+02:00",
+  "complete": false,
+  "first_person_wrist_constraints": false,
+  "live_dll_changed": false,
+  "guard": {
+    "format_clips": 16,
+    "pose_cases": 12,
+    "roundtrip": "guard-v1-roundtrip.json",
+    "videos": 8,
+    "scope": "Native quadrant codes retained; held body acting and counter recovery. Impact and gameplay timing pending."
+  },
+  "mechanisms": {
+    "revision": 4,
+    "format_clips": 10,
+    "pose_cases": 10,
+    "roundtrip": "mechanisms-v4-roundtrip.json",
+    "videos": 5,
+    "scope": "Neutral offline contact fixtures; palm target errors below 1mm. Button fingertip geometry, key visibility/inventory, continuous wheel regrips and native interaction binding pending."
+  },
+  "carry_body": {
+    "revision": 3,
+    "pose_cases": 4,
+    "roundtrip": "carry-v3-roundtrip.json",
+    "videos": 2,
+    "scope": "Idle and walking only; native victim sag and leg support. Fine shoulder/head clearance, lift/drop/throw and native attachment pending."
+  },
+  "objects": {
+    "revision": 2,
+    "pose_cases_unchanged_pickup_walk_place": 6,
+    "roundtrip": "object-carry-v1-roundtrip.json",
+    "videos": 5,
+    "scope": "Two-palm neutral box pickup/carry/place/throw. Throw improved with windup/followthrough; not runtime-verified. Place reverses lift; illustrative trajectory only."
+  },
+  "shadow_walk": {
+    "revision": 1,
+    "pose_cases": 6,
+    "roundtrip": "shadow-v1-roundtrip.json",
+    "videos": 5,
+    "scope": "Human-rig crawl study only. Native morphology/effects, contact attack, wall/rathole and gameplay binding missing."
+  },
+  "nonlethal_approaches": {
+    "videos": 9,
+    "alignment": "Inferred from native entry-end neck position and spine facing; no engine verification. Actor placement kept in preview metadata only.",
+    "observed": "Left entry aligns into a coherent hold; initial grasp is weak. Native victim finish/release clips stop before full ragdoll or standing recovery.",
+    "runtime_verified": false
+  },
+  "render_environment": {
+    "observation": "Sandboxed headless Blender intermittently failed in ntdll even with factory settings. Elevated factory-startup renders completed. Earlier addon-only explanation is not established.",
+    "settings": "--factory-startup -b -t 4; no user preference changes"
+  },
+  "research": {
+    "blink": "Exact assets confirm blink_assault upgrade with ARK_ATTRIBUTE_BLINK_ASSAULT. No pull variant confirmed. Original checklist wording remains under investigation.",
+    "ghidra": "141c46af0 TIProvide_ProvideBlinkAttack -> data xref1423a3860. arkCpntPowerBlink string141cdc1d0 ->14148069b in registration function141413800. These are identifiers, not verified runtime action hooks."
+  }
+}

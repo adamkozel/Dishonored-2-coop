@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(ArmProbeDebug LANGUAGES CXX)
+add_executable(arm_probe_debug runtime_probe.cpp)
+target_compile_features(arm_probe_debug PRIVATE cxx_std_17)
+target_compile_definitions(arm_probe_debug PRIVATE UNICODE _UNICODE)

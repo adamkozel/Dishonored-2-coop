@@ -1,0 +1,90 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014087E040: mov         rax,qword ptr [rcx+0000000000000358h]
+  000000014087E047: xor         dl,dl
+  000000014087E049: mov         r8b,1
+  000000014087E04C: xorps       xmm3,xmm3
+  000000014087E04F: test        rax,rax
+  000000014087E052: je          000000014087E09A
+  000000014087E054: mov         rax,qword ptr [rax+00000000000003C8h]
+  000000014087E05B: test        rax,rax
+  000000014087E05E: je          000000014087E09A
+  000000014087E060: movzx       edx,byte ptr [rax+00000000000000D0h]
+  000000014087E067: mov         rax,qword ptr [rax+00000000000000F0h]
+  000000014087E06E: shr         dl,1
+  000000014087E070: and         dl,r8b
+  000000014087E073: test        rax,rax
+  000000014087E076: je          000000014087E08A
+  000000014087E078: movzx       r8d,byte ptr [rax+00000000000018BCh]
+  000000014087E080: shr         r8b,3
+  000000014087E084: and         r8b,1
+  000000014087E088: jmp         000000014087E08D
+  000000014087E08A: mov         r8b,1
+  000000014087E08D: test        rax,rax
+  000000014087E090: je          000000014087E09A
+  000000014087E092: movss       xmm3,dword ptr [rax+00000000000018B8h]
+  000000014087E09A: jmp         000000014087E0A0
+  000000014087E09F: int         3
+  000000014087E0A0: mov         qword ptr [rsp+20h],rsi
+  000000014087E0A5: push        rdi
+  000000014087E0A6: sub         rsp,40h
+  000000014087E0AA: movzx       eax,byte ptr [rcx+00000000000000D0h]
+  000000014087E0B1: movss       xmm0,dword ptr [rcx+00000000000000C8h]
+  000000014087E0B9: movaps      xmmword ptr [rsp+30h],xmm6
+  000000014087E0BE: and         al,1
+  000000014087E0C0: movaps      xmmword ptr [rsp+20h],xmm7
+  000000014087E0C5: movaps      xmm6,xmm3
+  000000014087E0C8: or          al,dl
+  000000014087E0CA: mov         rdi,rcx
+  000000014087E0CD: mov         byte ptr [rsp+58h],al
+  000000014087E0D1: xorps       xmm7,xmm7
+  000000014087E0D4: ucomiss     xmm0,xmm7
+  000000014087E0D7: jp          000000014087E0DB
+  000000014087E0D9: je          000000014087E0DE
+  000000014087E0DB: movaps      xmm6,xmm0
+  000000014087E0DE: ucomiss     xmm6,xmm7
+  000000014087E0E1: mov         qword ptr [rsp+50h],rbx
+  000000014087E0E6: jp          000000014087E103
+  000000014087E0E8: jne         000000014087E103
+  000000014087E0EA: lea         rsi,[rcx+00000000000000F0h]
+  000000014087E0F1: test        rsi,rsi
+  000000014087E0F4: je          000000014087E0FF
+  000000014087E0F6: movzx       ebx,byte ptr [rsi+10h]
+  000000014087E0FA: and         bl,1
+  000000014087E0FD: jmp         000000014087E11D
+  000000014087E0FF: mov         bl,1
+  000000014087E101: jmp         000000014087E11D
+  000000014087E103: lea         rsi,[rcx+00000000000000F0h]
+  000000014087E10A: test        rsi,rsi
+  000000014087E10D: je          000000014087E118
+  000000014087E10F: movzx       ebx,byte ptr [rsi+10h]
+  000000014087E113: and         bl,1
+  000000014087E116: jmp         000000014087E11A
+  000000014087E118: mov         bl,1
+  000000014087E11A: and         bl,r8b
+  000000014087E11D: test        al,al
+  000000014087E11F: mov         rax,qword ptr [rcx]
+  000000014087E122: je          000000014087E12C
+  000000014087E124: call        qword ptr [rax+0000000000000090h]
+  000000014087E12A: jmp         000000014087E132
+  000000014087E12C: call        qword ptr [rax+0000000000000098h]
+  000000014087E132: mov         rcx,qword ptr [rsi]
+  000000014087E135: test        rcx,rcx
+  000000014087E138: je          000000014087E14F
+  000000014087E13A: and         byte ptr [rcx+00000000000018BCh],0F7h
+  000000014087E141: movzx       eax,bl
+  000000014087E144: and         al,1
+  000000014087E146: shl         al,3
+  000000014087E149: or          byte ptr [rcx+00000000000018BCh],al
+  000000014087E14F: 48
+  000000014087E150: 8B
+
+  Summary
+
+     1A7D000 .text

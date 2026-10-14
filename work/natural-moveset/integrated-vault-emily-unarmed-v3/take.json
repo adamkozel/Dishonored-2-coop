@@ -1,0 +1,77 @@
+{
+  "character": "emily",
+  "source": "client",
+  "observer": "host",
+  "start": 1791667119001,
+  "captureStart": 1791667117880,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Standing before native obstacle",
+      "seconds": 1.124,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Sprint toward native vault sensor",
+      "seconds": 2.674,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native vault: geometry drives whole-body traversal",
+      "seconds": 3.211
+    },
+    {
+      "name": "Native vault recovery",
+      "seconds": 5.658,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 8.625,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing before native obstacle"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1500,
+      "LeftThumb",
+      0,
+      "Sprint toward native vault sensor"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Native vault recovery"
+    ],
+    [
+      7500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "B1CB32BAF8E581F46759DCFA019D84BD59229DBFE13E546FF36C1459ACC0CF31",
+  "bank": "D426CEB92E21657F30091DD5E602756D809853CA4218B03D6B3AAFF1C1990C05",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual native weaponless movement over Steam selects authored hands-free full-body variants. Native sword remains holstered throughout; donor motion retains native foot paths and bone lengths. Whole-family visual acceptance remains pending.",
+  "unarmed": true
+}

@@ -1,0 +1,19 @@
+# ghidra-bookmarks-additions-v362.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v362.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v362.json>)
+
+SHA-256: `93B409EBE93E9F3210E6EF54881407822D2CCAB951814112C8BA73471B1D53D6`; 1011 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "1404c4e10",
+    "category": "D2Coop/Possession-target-FX-v350",
+    "comment": "Confirmed exact executable: target NPC highlight is separate from player controller FX. Scoped reader follows Possession equipment->generation-checked selected human NPC->exact cpntnpcpossession component->temporary FXactor+28/id+30. 351 cosmetic derivative transmits exact native matrix over Steam;358 visually confirms halo/streaks and source cancel,16 independently observed receiver matrices within7.43mm nearest source samples (not latency). 359 receiver stream stop,360 receiver native pause,362 source native pause each PASS7 incl checkpoint/protected14.362 cleanup checks native UsePower63 before cancellation;360 unnecessary cleanup X+LT started a fresh cast, corrected in362. NPC positions still simulate independently; cosmetic mark does not establish shared target control. DLL351/probe355 preserved in candidate-possession-fx-probe-v355/runtime-verification-v362.json.",
+    "type": "Note"
+  }
+]
+
+````

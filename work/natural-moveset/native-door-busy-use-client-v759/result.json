@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+  "checks": [
+    "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+    "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+    "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "name": "unlocked-door-tap",
+        "distance": 1.0,
+        "yaw": 270,
+        "stance": 0
+      },
+      "key": "client-unlocked-door-tap",
+      "count": 132,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "door": "ld_door_350cm_int_rich_wood_01_2",
+  "initialOpen": true,
+  "scope": "Native input during received closing is not accepted as a reversal; both finish the same ordered close. The other player then uses the completed door and both reopen at revision3. Explicit input/state observations; no assumed busy-input buffering or reversal."
+}

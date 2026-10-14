@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-13T11:40:03.201412+02:00",
+  "passed": true,
+  "candidate": "candidate-readable-body-v681",
+  "dll": "10487E1F5F5DBC07F787996144D7A75CD290E8C5A61F05EBD0D02693075BC6D1",
+  "probe": "FE149B345CCA91B0285D0CC6AE7BBF115F3877A5DC56FE189F560B4FD98AFB09",
+  "cases": [
+    {
+      "take": "native-interactions-corvo-note-v685",
+      "role": "host",
+      "checks": [
+        "Exact build completed with both inventories, health and14 protected files restored",
+        "Actual native ReadNote4 and exact RTTI/vtable observed for sustained UI interval",
+        "Ordinary gameplay and live presentation preceded reading",
+        "Both actor handles, world epochs and maps retained through native UI and recovery",
+        "Movement/action presentation remained suspended while native note UI was open",
+        "Both streams and receiver movement resumed automatically after closing native UI",
+        "Recovery uses fresh source and receiver handshake tokens",
+        "Unchanged bank67 recovered to full standing presentation",
+        "No resume fault or substituted animation bank",
+        "Exact source note collected through native UI interaction",
+        "Remote native body remained visible and its health unchanged throughout capture",
+        "NPC test isolation and registered remote follow retained throughout pause/recovery",
+        "During native reading, held remote root stays within2cm of stationary source and drifts less than1cm",
+        "Ordinary backward input after reading drives native source and remote full-body movement to matching final roots"
+      ],
+      "samples": 108,
+      "nativeNoteSamples": 35,
+      "bodyResumeAfterFirstGameplayMs": 2927,
+      "fullWeightAfterFirstGameplayMs": 3705,
+      "pauseRootError": 0.0,
+      "pauseRootTravel": 0.0,
+      "bodyVisibilityVerified": true,
+      "passed": true
+    },
+    {
+      "take": "native-interactions-emily-note-v683",
+      "role": "client",
+      "checks": [
+        "Exact build completed with both inventories, health and14 protected files restored",
+        "Actual native ReadNote4 and exact RTTI/vtable observed for sustained UI interval",
+        "Ordinary gameplay and live presentation preceded reading",
+        "Both actor handles, world epochs and maps retained through native UI and recovery",
+        "Movement/action presentation remained suspended while native note UI was open",
+        "Both streams and receiver movement resumed automatically after closing native UI",
+        "Recovery uses fresh source and receiver handshake tokens",
+        "Unchanged bank67 recovered to full standing presentation",
+        "No resume fault or substituted animation bank",
+        "Exact source note collected through native UI interaction",
+        "Remote native body remained visible and its health unchanged throughout capture",
+        "NPC test isolation and registered remote follow retained throughout pause/recovery",
+        "During native reading, held remote root stays within2cm of stationary source and drifts less than1cm",
+        "Ordinary backward input after reading drives native source and remote full-body movement to matching final roots"
+      ],
+      "samples": 109,
+      "nativeNoteSamples": 32,
+      "bodyResumeAfterFirstGameplayMs": 2748,
+      "fullWeightAfterFirstGameplayMs": 3619,
+      "pauseRootError": 0.0,
+      "pauseRootTravel": 0.0,
+      "bodyVisibilityVerified": true,
+      "passed": true
+    }
+  ],
+  "checks": 28,
+  "bodyVisibilityVerified": true,
+  "complete": false,
+  "visualAccepted": false,
+  "scope": "Ordinary native note UI and same-world automatic body recovery only. No authored reading gesture, document-state replication, shared UI, load/death recovery or complete movement claim."
+}

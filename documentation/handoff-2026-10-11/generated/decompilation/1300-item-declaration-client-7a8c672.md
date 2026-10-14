@@ -1,0 +1,785 @@
+# item-declaration-client.json
+
+Original: [work/natural-moveset/native-pickup-research-v785/item-declaration-client.json](<../../../../work/natural-moveset/native-pickup-research-v785/item-declaration-client.json>)
+
+SHA-256: `72695DAEAAE1605DCC2026335406577B7DAFA856C4C9B0E0C87A4AE5185AD5F3`; 16083 bytes.
+
+## Original saved record
+
+````json
+{
+  "pointer": "0x238224f5d20",
+  "type": ".?AVarkDeclInventoryItem@@",
+  "words": [
+    {
+      "offset": "0x0",
+      "word": "0x7ff7c72eea48",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x8",
+      "word": "0x2385c29d2a8",
+      "pointerType": "",
+      "pointerText": "models/interactive/valuables/coins/coin1_lowvalue.inventoryitem"
+    },
+    {
+      "offset": "0x10",
+      "word": "0x7ff7c90d8320",
+      "pointerType": ".?AV?$idDeclInfoTemplate@VarkDeclInventoryItem@@@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x18",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x20",
+      "word": "0x200000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x28",
+      "word": "0x12fed06d9",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x30",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x38",
+      "word": "0x8344f6b000000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x40",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x48",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x50",
+      "word": "0x1",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x58",
+      "word": "0x238224f5d01",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x60",
+      "word": "0xb75cf4ec00000001",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x68",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x70",
+      "word": "0xb75cf4ec",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x78",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x80",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x88",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x90",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x98",
+      "word": "0x3f41000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xa0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xa8",
+      "word": "0x3f41000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xb0",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xb8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xc0",
+      "word": "0xffffffff00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xc8",
+      "word": "0x1",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xd0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xd8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xe0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xe8",
+      "word": "0x1",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xf0",
+      "word": "0x238224f5e20",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xf8",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x100",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x108",
+      "word": "0x23827ee3fc0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x110",
+      "word": "0x23866fbd000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x118",
+      "word": "0x238224f5e48",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x120",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x128",
+      "word": "0x23866ffa000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x130",
+      "word": "0x1",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x138",
+      "word": "0x238e5842840",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x140",
+      "word": "0x238224f5e70",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x148",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x150",
+      "word": "0x23827ee3f00",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x158",
+      "word": "0x23866fbd000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x160",
+      "word": "0x7f0700000001",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x168",
+      "word": "0x238224f5e98",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x170",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x178",
+      "word": "0x4403bc400070000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x180",
+      "word": "0x2382ebc93b0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x188",
+      "word": "0x23866ffa000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x190",
+      "word": "0x238224f5ec0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x198",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1a0",
+      "word": "0x23866fbd000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1a8",
+      "word": "0x10001",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1b0",
+      "word": "0x238e5842840",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1b8",
+      "word": "0x238224f5ee8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1c0",
+      "word": "0x1800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1c8",
+      "word": "0x23827ee3f00",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1d0",
+      "word": "0x23866fbd000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1d8",
+      "word": "0x700001",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1e0",
+      "word": "0x225f7ac8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1e8",
+      "word": "0x700000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1f0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1f8",
+      "word": "0x880035001c8a6a2e",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x200",
+      "word": "0x225f01fc0010005d",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x208",
+      "word": "0x1e4",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x210",
+      "word": "0xa2b0a2a0a290a28",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x218",
+      "word": "0xa320a310a2f0a2d",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x220",
+      "word": "0xa3c0a3b0a390a37",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x228",
+      "word": "0xa440a430a3e0a3d",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x230",
+      "word": "0xf000900060a45",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x238",
+      "word": "0x2a002900250271",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x240",
+      "word": "0x56003600340033",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x248",
+      "word": "0xc900b200710059",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x250",
+      "word": "0x11f00db00cb00ca",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x258",
+      "word": "0x13f013e013c0120",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x260",
+      "word": "0x147014601450141",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x268",
+      "word": "0x158014e014d014c",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x270",
+      "word": "0x1620160015b0159",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x278",
+      "word": "0x169016801670163",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x280",
+      "word": "0x1a1016c016b016a",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x288",
+      "word": "0x1f601bf01be01a2",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x290",
+      "word": "0x21d020501fd01fa",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x298",
+      "word": "0x23a022902230221",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2a0",
+      "word": "0x25f025e0243023b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2a8",
+      "word": "0x263026202610260",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2b0",
+      "word": "0x2940293028d0264",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2b8",
+      "word": "0x29a029902960295",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2c0",
+      "word": "0x2b102b002af029d",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2c8",
+      "word": "0x2b502b402b302b2",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2d0",
+      "word": "0x2b902b802b702b6",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2d8",
+      "word": "0x612061102660265",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2e0",
+      "word": "0x63f063d06170614",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2e8",
+      "word": "0x6a6069d0685067c",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2f0",
+      "word": "0x6fb06e406d706bb",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2f8",
+      "word": "0x7110710070f070e",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x300",
+      "word": "0x807080308010800",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x308",
+      "word": "0x80e080408080805",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x310",
+      "word": "0x68906590687062b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x318",
+      "word": "0xaef0ab40ab906d5",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x320",
+      "word": "0xaf70ae20af00af9",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x328",
+      "word": "0xaf40ae30b050acb",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x330",
+      "word": "0xb2b0b060af10af5",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x338",
+      "word": "0xb010b000b070aff",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x340",
+      "word": "0xac70b350b080b02",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x348",
+      "word": "0xb0c0b0b0b0a0b09",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x350",
+      "word": "0xac60b0f0b0e0b0d",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x358",
+      "word": "0xad00ad70ad50ad8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x360",
+      "word": "0xad60ad10af20acf",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x368",
+      "word": "0xb030b100ad30ad4",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x370",
+      "word": "0xb130b120ae40b11",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x378",
+      "word": "0xae50b160b150b14",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x380",
+      "word": "0xb1a0b190b180b17",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x388",
+      "word": "0xb1d0b1c0b1b0ae6",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x390",
+      "word": "0xb200ae70b1f0b1e",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x398",
+      "word": "0xae80b230b220b21",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3a0",
+      "word": "0xb2e0b2d0b2c0b24",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3a8",
+      "word": "0xb320b310b300b2f",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3b0",
+      "word": "0xac00ad20ad90ab7",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3b8",
+      "word": "0xade0add0aea0aee",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3c0",
+      "word": "0xb040aed0aec0aeb",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3c8",
+      "word": "0xab60ab50adf0af3",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3d0",
+      "word": "0xb260acd0b250b34",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3d8",
+      "word": "0xae00adb0b280b27",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3e0",
+      "word": "0xb290ac40adc0ae1",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3e8",
+      "word": "0xb2a0abb0abc0af6",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3f0",
+      "word": "0x225f01fc0ac80af8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3f8",
+      "word": "0x581e2aa97b621d4e",
+      "pointerType": "",
+      "pointerText": ""
+    }
+  ]
+}
+
+````

@@ -1,0 +1,58 @@
+
+void FUN_140719d20(longlong param_1,longlong param_2,float *param_3)
+
+{
+  ulonglong uVar1;
+  bool bVar2;
+  char cVar3;
+  longlong lVar4;
+  undefined4 *puVar5;
+  int *piVar6;
+  uint uVar7;
+  undefined1 local_res8 [8];
+  
+  lVar4 = 0;
+  uVar7 = *(uint *)(*(longlong *)(param_1 + 8) + 0xc0) & 0xffffff;
+  if (uVar7 == 0) {
+    return;
+  }
+  piVar6 = *(int **)(*(longlong *)(param_1 + 8) + 0xb8);
+  while (*piVar6 != *(int *)(param_2 + 0x4c)) {
+    lVar4 = lVar4 + 1;
+    piVar6 = piVar6 + 10;
+    if ((longlong)(ulonglong)uVar7 <= lVar4) {
+      return;
+    }
+  }
+  if (piVar6 == (int *)0x0) {
+    return;
+  }
+  uVar1 = *(ulonglong *)(param_2 + 0x10);
+  if ((~*(ulonglong *)(piVar6 + 2) & uVar1) != uVar1) {
+    *param_3 = 0.0;
+    return;
+  }
+  puVar5 = (undefined4 *)FUN_14039eec0(param_2,local_res8);
+  lVar4 = FUN_1406dc560(*puVar5);
+  if ((lVar4 == 0) || (cVar3 = FUN_1405bf1f0(lVar4), cVar3 == '\0')) {
+    bVar2 = false;
+  }
+  else {
+    bVar2 = true;
+  }
+  cVar3 = FUN_1405bf560(*(undefined8 *)(param_1 + 0x10));
+  if ((bVar2) && (cVar3 != '\0')) {
+    bVar2 = true;
+  }
+  else {
+    bVar2 = false;
+  }
+  if (((*(ulonglong *)(piVar6 + 4) & uVar1) == 0) &&
+     ((!bVar2 || ((*(ulonglong *)(piVar6 + 6) & uVar1) == 0)))) {
+    *param_3 = *param_3 * 1.0;
+    return;
+  }
+  *param_3 = (float)piVar6[8] * *param_3;
+  return;
+}
+

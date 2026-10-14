@@ -1,0 +1,194 @@
+# disasm-49ae0.txt
+
+Original: [work/disasm-49ae0.txt](<../../../../work/disasm-49ae0.txt>)
+
+SHA-256: `A2152A94490DCA7AF15BEA075E9F965D0DF052CC894957BDE488D87BBA6043BD`; 8555 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140049AE0: mov         rax,rsp
+  0000000140049AE3: push        r12
+  0000000140049AE5: push        r14
+  0000000140049AE7: push        r15
+  0000000140049AE9: sub         rsp,0C90h
+  0000000140049AF0: mov         qword ptr [rsp+58h],0FFFFFFFFFFFFFFFEh
+  0000000140049AF9: mov         qword ptr [rax+8],rbx
+  0000000140049AFD: mov         qword ptr [rax+10h],rbp
+  0000000140049B01: mov         qword ptr [rax+18h],rsi
+  0000000140049B05: mov         qword ptr [rax+20h],rdi
+  0000000140049B09: mov         rbx,rcx
+  0000000140049B0C: mov         eax,dword ptr [rcx]
+  0000000140049B0E: cmp         eax,1
+  0000000140049B11: jg          0000000140049B24
+  0000000140049B13: lea         rcx,[0000000141AC7A38h]
+  0000000140049B1A: call        0000000140166830
+  0000000140049B1F: jmp         0000000140049D73
+  0000000140049B24: lea         rdi,[0000000141AB2848h]
+  0000000140049B2B: cmp         eax,1
+  0000000140049B2E: jle         0000000140049B36
+  0000000140049B30: mov         rdx,qword ptr [rcx+10h]
+  0000000140049B34: jmp         0000000140049B39
+  0000000140049B36: mov         rdx,rdi
+  0000000140049B39: lea         rcx,[rsp+60h]
+  0000000140049B3E: call        000000014013F9D0
+  0000000140049B43: nop
+  0000000140049B44: lea         rcx,[rsp+60h]
+  0000000140049B49: call        00000001401D9090
+  0000000140049B4E: test        rax,rax
+  0000000140049B51: je          0000000140049D5C
+  0000000140049B57: xor         r9d,r9d
+  0000000140049B5A: mov         r8b,1
+  0000000140049B5D: mov         rdx,rax
+  0000000140049B60: lea         rcx,[000000014398FD40h]
+  0000000140049B67: call        000000014001E030
+  0000000140049B6C: mov         rbp,rax
+  0000000140049B6F: test        rax,rax
+  0000000140049B72: je          0000000140049D5C
+  0000000140049B78: xor         sil,sil
+  0000000140049B7B: xor         r14b,r14b
+  0000000140049B7E: mov         eax,dword ptr [rbx]
+  0000000140049B80: xor         r12d,r12d
+  0000000140049B83: lea         r15d,[r12+1]
+  0000000140049B88: cmp         eax,3
+  0000000140049B8B: jl          0000000140049BFD
+  0000000140049B8D: cmp         eax,2
+  0000000140049B90: jle         0000000140049B98
+  0000000140049B92: mov         rcx,qword ptr [rbx+18h]
+  0000000140049B96: jmp         0000000140049B9B
+  0000000140049B98: mov         rcx,rdi
+  0000000140049B9B: mov         dword ptr [rsp+28h],0FFFFFFFFh
+  0000000140049BA3: mov         dword ptr [rsp+20h],r12d
+  0000000140049BA8: movzx       r9d,r15b
+  0000000140049BAC: xor         r8d,r8d
+  0000000140049BAF: lea         rdx,[0000000141AC7A88h]
+  0000000140049BB6: call        0000000140142690
+  0000000140049BBB: movzx       esi,sil
+  0000000140049BBF: test        eax,eax
+  0000000140049BC1: cmovns      esi,r15d
+  0000000140049BC5: cmp         dword ptr [rbx],2
+  0000000140049BC8: jle         0000000140049BD0
+  0000000140049BCA: mov         rcx,qword ptr [rbx+18h]
+  0000000140049BCE: jmp         0000000140049BD3
+  0000000140049BD0: mov         rcx,rdi
+  0000000140049BD3: mov         dword ptr [rsp+28h],0FFFFFFFFh
+  0000000140049BDB: mov         dword ptr [rsp+20h],r12d
+  0000000140049BE0: movzx       r9d,r15b
+  0000000140049BE4: xor         r8d,r8d
+  0000000140049BE7: lea         rdx,[0000000141AC7A90h]
+  0000000140049BEE: call        0000000140142690
+  0000000140049BF3: movzx       r14d,r14b
+  0000000140049BF7: test        eax,eax
+  0000000140049BF9: cmovns      r14d,r15d
+  0000000140049BFD: mov         eax,dword ptr [rbx]
+  0000000140049BFF: cmp         eax,4
+  0000000140049C02: jl          0000000140049C6C
+  0000000140049C04: cmp         eax,3
+  0000000140049C07: jle         0000000140049C0F
+  0000000140049C09: mov         rcx,qword ptr [rbx+20h]
+  0000000140049C0D: jmp         0000000140049C12
+  0000000140049C0F: mov         rcx,rdi
+  0000000140049C12: mov         dword ptr [rsp+28h],0FFFFFFFFh
+  0000000140049C1A: mov         dword ptr [rsp+20h],r12d
+  0000000140049C1F: movzx       r9d,r15b
+  0000000140049C23: xor         r8d,r8d
+  0000000140049C26: lea         rdx,[0000000141AC7A88h]
+  0000000140049C2D: call        0000000140142690
+  0000000140049C32: movzx       esi,sil
+  0000000140049C36: test        eax,eax
+  0000000140049C38: cmovns      esi,r15d
+  0000000140049C3C: cmp         dword ptr [rbx],3
+  0000000140049C3F: jle         0000000140049C45
+  0000000140049C41: mov         rdi,qword ptr [rbx+20h]
+  0000000140049C45: mov         dword ptr [rsp+28h],0FFFFFFFFh
+  0000000140049C4D: mov         dword ptr [rsp+20h],r12d
+  0000000140049C52: movzx       r9d,r15b
+  0000000140049C56: xor         r8d,r8d
+  0000000140049C59: lea         rdx,[0000000141AC7A90h]
+  0000000140049C60: mov         rcx,rdi
+  0000000140049C63: call        0000000140142690
+  0000000140049C68: test        eax,eax
+  0000000140049C6A: jns         0000000140049C71
+  0000000140049C6C: test        r14b,r14b
+  0000000140049C6F: je          0000000140049C8D
+  0000000140049C71: movzx       r8d,r15b
+  0000000140049C75: mov         edx,r15d
+  0000000140049C78: lea         rcx,[00000001439A5F60h]
+  0000000140049C7F: call        00000001401028E0
+  0000000140049C84: mov         dword ptr [0000000142280A7Ch],r15d
+  0000000140049C8B: jmp         0000000140049CA9
+  0000000140049C8D: movzx       r8d,r15b
+  0000000140049C91: mov         edx,2
+  0000000140049C96: lea         rcx,[00000001439A5F60h]
+  0000000140049C9D: call        00000001401028E0
+  0000000140049CA2: mov         dword ptr [0000000142280A7Ch],r12d
+  0000000140049CA9: lea         rcx,[rsp+30h]
+  0000000140049CAE: call        000000014013FB30
+  0000000140049CB3: nop
+  0000000140049CB4: mov         r8b,1
+  0000000140049CB7: lea         rcx,[00000001439A5FE0h]
+  0000000140049CBE: test        sil,sil
+  0000000140049CC1: je          0000000140049CD4
+  0000000140049CC3: mov         edx,r15d
+  0000000140049CC6: call        00000001401028E0
+  0000000140049CCB: lea         rdx,[rbp+00000000000000B8h]
+  0000000140049CD2: jmp         0000000140049CE2
+  0000000140049CD4: xor         edx,edx
+  0000000140049CD6: call        00000001401028E0
+  0000000140049CDB: lea         rdx,[rbp+0000000000000090h]
+  0000000140049CE2: lea         rcx,[rsp+30h]
+  0000000140049CE7: call        000000014013FD70
+  0000000140049CEC: lea         rdx,[0000000141AB3BC8h]
+  0000000140049CF3: lea         rcx,[rsp+30h]
+  0000000140049CF8: call        0000000140145120
+  0000000140049CFD: mov         rcx,qword ptr [0000000142274420h]
+  0000000140049D04: mov         rax,qword ptr [rcx]
+  0000000140049D07: mov         rdx,rbp
+  0000000140049D0A: call        qword ptr [rax+00000000000001C8h]
+  0000000140049D10: lea         rcx,[rsp+30h]
+  0000000140049D15: call        00000001401D9090
+  0000000140049D1A: mov         r8,rax
+  0000000140049D1D: lea         rdx,[0000000141AC7A98h]
+  0000000140049D24: lea         rcx,[rsp+0000000000000088h]
+  0000000140049D2C: call        0000000140004B80
+  0000000140049D31: mov         rcx,qword ptr [000000014228BAE0h]
+  0000000140049D38: mov         r8,qword ptr [rcx]
+  0000000140049D3B: mov         rdx,rax
+  0000000140049D3E: call        qword ptr [r8+48h]
+  0000000140049D42: mov         rcx,qword ptr [000000014228BAE0h]
+  0000000140049D49: mov         rax,qword ptr [rcx]
+  0000000140049D4C: call        qword ptr [rax+50h]
+  0000000140049D4F: nop
+  0000000140049D50: lea         rcx,[rsp+30h]
+  0000000140049D55: call        000000014013FD10
+  0000000140049D5A: jmp         0000000140049D69
+  0000000140049D5C: lea         rcx,[0000000141AC7A70h]
+  0000000140049D63: call        0000000140166830
+  0000000140049D68: nop
+  0000000140049D69: lea         rcx,[rsp+60h]
+  0000000140049D6E: call        000000014013FD10
+  0000000140049D73: lea         r11,[rsp+0000000000000C90h]
+  0000000140049D7B: mov         rbx,qword ptr [r11+20h]
+  0000000140049D7F: mov         rbp,qword ptr [r11+28h]
+  0000000140049D83: mov         rsi,qword ptr [r11+30h]
+  0000000140049D87: mov         rdi,qword ptr [r11+38h]
+  0000000140049D8B: mov         rsp,r11
+  0000000140049D8E: pop         r15
+  0000000140049D90: pop         r14
+  0000000140049D92: pop         r12
+  0000000140049D94: ret
+  0000000140049D95: int         3
+
+  Summary
+
+     1A7D000 .text
+
+````

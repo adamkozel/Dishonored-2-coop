@@ -1,0 +1,134 @@
+{
+  "cases": [
+    {
+      "take": "possession-holstered-network-v368",
+      "result": {
+        "passed": false,
+        "failure": "Phase 27 strict-native scene IDs differ from actual sent scene IDs",
+        "source": "host",
+        "checks": [
+          "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+          "Native stance and holstered sword verified before draw/cast input",
+          "Remote Corvo uses exact bank53/318 and native Steam pose transport",
+          "Both observed native phases with reciprocal Corvo left-arm/equipment ownership drive remote full-body phases",
+          "Independent owned native sword draw overlaps remote Possession and crosses native-authored sword contact timing",
+          "Both isolated checkpoints restore complete original health/inventory and clear the native Possession acquisition",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.915,
+            "input": "Native Corvo LT1800 then release at grounded floor"
+          }
+        ],
+        "dll": "13CB5C21F73E1AA14D8B7EEB9A11EBDC5FDDFAF920E9B3B974D030832448C963",
+        "probe": "8CBE77B49297952A682397318140DB75A8F317D724B6FA53EB9F165592D1A09A",
+        "bankSha256": "4C6D26FB6BED7E49CC2A15763924D79FD57131A1E30415F59559A59D09E5730F",
+        "stance": "standing",
+        "scope": "Initially holstered native Corvo empty-target Possession entry333ms/aim200ms drive remote full-body bank53/318 through native Steam protocol51. Source scene retirement drives idle recovery; no invented successful-target release. Local first-person remains native; peer animation executes no transfer, VFX or damage event. Standing human-target lifecycle and target particles have separate evidence. This take tests the recorded standing/crouched context with initially holstered empty-target entry/aim and recovery only; crouched successful-host release, shared NPC authority and overall visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+      },
+      "visualReview": {
+        "inspected": true,
+        "method": "Viewed paired temporal game sheets at1/2.1/2.3/2.6/3/4.5s",
+        "evidence": [
+          "peer-sheet.jpg",
+          "source-sheet.jpg"
+        ],
+        "complete": false,
+        "visual_accepted": false,
+        "notes": "Standing body/draw/cast is continuous in all79 measured samples, with no source motion refusals or receiver clock rejections. Native and peer draw overlap/contact pass. Test fails because the external watcher misses final loop scene238, which is present in both sent and accepted histories. No claim that external observation saw it. Paired sheets show draw, cast, recovery; no body fallback apparent in sampled frames. Native local first-person remains unchanged. Dark medium-distance shots do not establish fine grip/anatomy acceptance. Both checkpoint full inventories/health and protected14 restored. No audio."
+      }
+    },
+    {
+      "take": "possession-holstered-network-v369",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "host",
+        "checks": [
+          "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+          "Native stance and holstered sword verified before draw/cast input",
+          "Remote Corvo uses exact bank53/318 and native Steam pose transport",
+          "Both observed native phases with reciprocal Corvo left-arm/equipment ownership drive remote full-body phases",
+          "Independent owned native sword draw overlaps remote Possession and crosses native-authored sword contact timing",
+          "All independently observed phase incarnations match sent events; complete sent/accepted histories agree; any unobserved final aim incarnation is recorded separately",
+          "Possession cast preserves root/body continuity without rejected presentation clocks",
+          "Source and remote retain matching native stance during draw/cast",
+          "Remote body recovers to its original stance with native sword selection retained",
+          "Empty-target source keeps mana and peer acquires no native Possession component; animation executes no native transfer",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore complete original health/inventory and clear the native Possession acquisition",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.977,
+            "input": "Native Corvo LT1800 then release at grounded floor"
+          }
+        ],
+        "dll": "13CB5C21F73E1AA14D8B7EEB9A11EBDC5FDDFAF920E9B3B974D030832448C963",
+        "probe": "8CBE77B49297952A682397318140DB75A8F317D724B6FA53EB9F165592D1A09A",
+        "bankSha256": "4C6D26FB6BED7E49CC2A15763924D79FD57131A1E30415F59559A59D09E5730F",
+        "stance": "standing",
+        "scope": "Initially holstered native Corvo empty-target Possession entry333ms/aim200ms drive remote full-body bank53/318 through native Steam protocol51. Source scene retirement drives idle recovery; no invented successful-target release. Local first-person remains native; peer animation executes no transfer, VFX or damage event. Standing human-target lifecycle and target particles have separate evidence. This take tests the recorded standing/crouched context with initially holstered empty-target entry/aim and recovery only; crouched successful-host release, shared NPC authority and overall visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+      },
+      "visualReview": {
+        "inspected": true,
+        "method": "Viewed paired temporal game sheets at1/2.1/2.3/2.6/3/4.5s",
+        "evidence": [
+          "peer-sheet.jpg",
+          "source-sheet.jpg"
+        ],
+        "complete": false,
+        "visual_accepted": false,
+        "notes": "Standing complete-body draw/cast and armed idle recovery visible.13 checks pass;70 continuity samples have weight1 and no rejected clocks; no source-thread motion refusal. Every independent scene matches source and peer histories, with no source-only tail this take. Native local first-person remains unchanged. Dark medium-distance shots do not establish fine grip/anatomy acceptance. Both checkpoint full inventories/health and protected14 restored. No audio."
+      }
+    },
+    {
+      "take": "possession-crouch-holstered-network-v369",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "host",
+        "checks": [
+          "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+          "Native stance and holstered sword verified before draw/cast input",
+          "Remote Corvo uses exact bank53/318 and native Steam pose transport",
+          "Both observed native phases with reciprocal Corvo left-arm/equipment ownership drive remote full-body phases",
+          "Independent owned native sword draw overlaps remote Possession and crosses native-authored sword contact timing",
+          "All independently observed phase incarnations match sent events; complete sent/accepted histories agree; any unobserved final aim incarnation is recorded separately",
+          "Possession cast preserves root/body continuity without rejected presentation clocks",
+          "Source and remote retain matching native stance during draw/cast",
+          "Remote body recovers to its original stance with native sword selection retained",
+          "Empty-target source keeps mana and peer acquires no native Possession component; animation executes no native transfer",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore complete original health/inventory and clear the native Possession acquisition",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.885,
+            "input": "Native Corvo LT1800 then release at grounded floor"
+          }
+        ],
+        "dll": "13CB5C21F73E1AA14D8B7EEB9A11EBDC5FDDFAF920E9B3B974D030832448C963",
+        "probe": "8CBE77B49297952A682397318140DB75A8F317D724B6FA53EB9F165592D1A09A",
+        "bankSha256": "4C6D26FB6BED7E49CC2A15763924D79FD57131A1E30415F59559A59D09E5730F",
+        "stance": "crouched",
+        "scope": "Initially holstered native Corvo empty-target Possession entry333ms/aim200ms drive remote full-body bank53/318 through native Steam protocol51. Source scene retirement drives idle recovery; no invented successful-target release. Local first-person remains native; peer animation executes no transfer, VFX or damage event. Standing human-target lifecycle and target particles have separate evidence. This take tests the recorded standing/crouched context with initially holstered empty-target entry/aim and recovery only; crouched successful-host release, shared NPC authority and overall visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+      },
+      "visualReview": {
+        "inspected": true,
+        "method": "Viewed paired temporal game sheets at1/2.1/2.3/2.6/3/4.5s",
+        "evidence": [
+          "peer-sheet.jpg",
+          "source-sheet.jpg"
+        ],
+        "complete": false,
+        "visual_accepted": false,
+        "notes": "Peer stays crouched, draws the sword while left hand casts, and returns to crouched armed idle.13 checks pass;80 continuity samples have weight1 and no rejected clocks.34 native and18 peer overlapping draw samples cross contact timing. Source-thread diagnostic catches one four-state Sneaking6+Draw65+EquipChange53+UsePower63 refusal which did not appear at receiver cadence;370 addresses this exact observed combination. A nearby ordinary guard is visible only in the source view; no transfer occurs and mana stays unchanged. Native local first-person remains unchanged. Dark medium-distance shots do not establish fine grip/anatomy acceptance. Both checkpoint full inventories/health and protected14 restored. No audio."
+      }
+    }
+  ],
+  "complete": false
+}

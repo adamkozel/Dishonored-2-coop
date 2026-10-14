@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "failure": "Native owned hit-recovery scene absent",
+  "dll": "5EB246B053AA538C8E8D3395643A6F7E1DDAF8D9C14AA72D50421219F896A2B0",
+  "checks": [
+    "Ordinary crouched sword input produces native three-actor targeted slash",
+    "Independent reader validates exact player, right arm and native enemy target",
+    "Native sword equipped and started during targeted slash",
+    "Existing full-body combat clip plays through native Steam source semantics",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [],
+  "scope": "Existing combat pipeline extended to observed ordinary target-bearing sword scenes. Read-only native source, protocol66 and unchanged bank65/353clips; owned hit follow-through and native stance recovery. Actor presentation only; no native victim events or damage replay. All inventories, health and14 protected files restored."
+}

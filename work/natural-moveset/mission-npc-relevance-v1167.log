@@ -1,0 +1,92 @@
+{
+  "scope": "Dynamic NPC relevance across a ~205 m move and back, host-owned set followed by the client; Dunwall fixture restored.",
+  "cases": [
+    {
+      "hostResult": "active",
+      "hostBound": [
+        "models/characters/def/generic/worker_male_small_01.def_10731",
+        "models/characters/def/generic/worker_male_small_01.def_10732",
+        "models/characters/def/generic/worker_male_small_01.def_10734",
+        "models/characters/def/generic/worker_male_small_01.def_10754",
+        "models/characters/def/generic/worker_male_small_01.def_10755",
+        "models/characters/def/generic/worker_male_small_01.def_10756",
+        "models/characters/def/generic/worker_male_small_01.def_10823",
+        "models/characters/def/generic/worker_male_small_01.def_10825",
+        "models/characters/def/generic/worker_male_small_01.def_10828"
+      ],
+      "hostPlayer": [
+        -30.814,
+        192.748,
+        1.25397
+      ],
+      "hostRelevance": {
+        "bound": 9,
+        "scans": 2,
+        "added": 0,
+        "dropped": 0,
+        "clientBound": 0,
+        "clientRefused": 0
+      },
+      "clientResult": "active",
+      "clientBound": [
+        "models/characters/def/generic/worker_male_small_01.def_10731",
+        "models/characters/def/generic/worker_male_small_01.def_10732",
+        "models/characters/def/generic/worker_male_small_01.def_10734",
+        "models/characters/def/generic/worker_male_small_01.def_10754",
+        "models/characters/def/generic/worker_male_small_01.def_10755",
+        "models/characters/def/generic/worker_male_small_01.def_10756",
+        "models/characters/def/generic/worker_male_small_01.def_10823",
+        "models/characters/def/generic/worker_male_small_01.def_10825",
+        "models/characters/def/generic/worker_male_small_01.def_10828"
+      ],
+      "tag": "spawn",
+      "clientRelevance": {
+        "bound": 9,
+        "scans": 0,
+        "added": 0,
+        "dropped": 0,
+        "clientBound": 9,
+        "clientRefused": 0
+      },
+      "matched": true,
+      "ms": 1127
+    },
+    {
+      "hostResult": "session_pose_stale",
+      "hostBound": [],
+      "hostPlayer": [
+        62.222,
+        4.47204,
+        33.495
+      ],
+      "hostRelevance": {
+        "bound": 0,
+        "scans": 3,
+        "added": 11,
+        "dropped": 9,
+        "clientBound": 0,
+        "clientRefused": 0
+      },
+      "clientResult": "no_bound_npcs",
+      "clientBound": [],
+      "tag": "far",
+      "clientRelevance": {
+        "bound": 0,
+        "scans": 0,
+        "added": 0,
+        "dropped": 0,
+        "clientBound": 20,
+        "clientRefused": 0
+      },
+      "matched": false,
+      "ms": 30422
+    }
+  ],
+  "passed": false,
+  "failure": "NPC sets did not converge (far): host=0 client=0"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionNpcRelevance-v1167.ps1:106[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 106 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mNPC sets did not converge (far): host=0 client=0[0m

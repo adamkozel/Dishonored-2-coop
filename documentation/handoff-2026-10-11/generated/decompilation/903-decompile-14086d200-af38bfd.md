@@ -1,0 +1,63 @@
+# decompile-14086d200.txt
+
+Original: [work/movement-integration/native-kick-research-v624/decompile-14086d200.txt](<../../../../work/movement-integration/native-kick-research-v624/decompile-14086d200.txt>)
+
+SHA-256: `C70653963061672208B5B2AB9C5FD91459E96EB8607E550C554E9034D3D1AD2D`; 1572 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_14086d200(longlong param_1)
+
+{
+  undefined4 uVar1;
+  undefined8 uVar2;
+  longlong lVar3;
+  longlong lVar4;
+  undefined8 *puVar5;
+  undefined4 local_res8 [2];
+  undefined4 local_38;
+  undefined4 uStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
+  undefined8 local_28;
+  undefined8 local_20;
+  undefined8 local_18;
+  
+  if ((((*(char *)(param_1 + 0xda) == '\0') && (*(char *)(param_1 + 0xd5) != '\0')) &&
+      (*(char *)(param_1 + 0xd2) == '\0')) &&
+     (((*(char *)(param_1 + 0xd1) == '\0' && (*(char *)(param_1 + 0xd3) == '\0')) &&
+      (*(char *)(param_1 + 0xd9) == '\0')))) {
+    uVar2 = FUN_140777b90(*(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x338),0x21);
+    lVar3 = FUN_1403b8020(uVar2,0);
+    if (lVar3 != 0) {
+      lVar4 = FUN_140854880(param_1);
+      local_38 = *(undefined4 *)(param_1 + 0x78);
+      uStack_34 = *(undefined4 *)(param_1 + 0x7c);
+      uStack_30 = *(undefined4 *)(param_1 + 0x80);
+      uStack_2c = *(undefined4 *)(param_1 + 0x84);
+      if (lVar4 == 0) {
+        local_res8[0] = 0x3fff0010;
+      }
+      else {
+        local_res8[0] = *(undefined4 *)(lVar4 + 0xa8);
+      }
+      FUN_1405968d0(&local_28,local_res8,*(undefined4 *)(param_1 + 0xb0),&local_38);
+      uVar1 = *(undefined4 *)(lVar3 + 0xa8);
+      lVar3 = FUN_140810240();
+      puVar5 = (undefined8 *)FUN_1408112c0(lVar3 + 0xc8e8,0x3e,0x18,uVar1);
+      if (puVar5 != (undefined8 *)0x0) {
+        *puVar5 = local_28;
+        puVar5[1] = local_20;
+        puVar5[2] = local_18;
+      }
+      *(undefined1 *)(param_1 + 0xda) = 1;
+    }
+  }
+  return;
+}
+
+
+
+````

@@ -1,0 +1,32 @@
+{
+  "passed": false,
+  "failure": "Remote grenade phase 3 absent",
+  "source": "host",
+  "pitch": 0,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.935,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene"
+  ],
+  "dll": "90B403EC9DD37CC4EBE2B5A95F27EC386CE76774529267473B3FBAEE725DBD59",
+  "probe": "A524D3F96EA9368F2FF0F74C5FD8AE7689FEBA73DCCAF156D1C7DB54C2D251FD",
+  "finalDll": "90B403EC9DD37CC4EBE2B5A95F27EC386CE76774529267473B3FBAEE725DBD59",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Both checkpoints restored after firing. Visual acceptance separate."
+}

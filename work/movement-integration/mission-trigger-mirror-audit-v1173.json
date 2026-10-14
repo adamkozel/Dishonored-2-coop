@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-14T17:13:31.131124+02:00",
+  "candidate": "candidate-npc-combat-v1171",
+  "dll": "C532DE0B0B32ECD2C2D6159324EE2B3429C6E83DC06AC932348A110CD76454AC",
+  "harnesses": [
+    "../natural-moveset/Test-TriggerMirror-v1172.ps1",
+    "../natural-moveset/Probe-TriggerComponents-v1170.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-trigger-components-v1170",
+      "passed": true,
+      "scope": "Read-only: every arkTrigger volume has exactly one native component, arkCpntTrigger (vtable 0x1c5bae8; interfaces 0x1c5bbc8 at +0x20, 0x1c5ba98 at +0x40).",
+      "cases": [
+        {
+          "types": [
+            ".?AVarkCpntTrigger@@"
+          ],
+          "triggers": [
+            "env_trigger_1",
+            "script_trigger_64",
+            "script_trigger_objectives_a_02",
+            "script_trigger_docks_oh_workers_dreadfulwale"
+          ]
+        }
+      ]
+    },
+    {
+      "take": "mission-trigger-mirror-v1172",
+      "passed": true,
+      "scope": "Pass: with coop_trigger_mirror on, the host walked into three script trigger volumes (and crossed others on the way) while the client stayed at the docks spawn ~80 m away; all 9 host-local script-trigger enter/exit events replayed natively in the client world for Emily's player (none missing/rejected); audio volumes were not mirrored; the Wall of Light tutorial trigger raised the native tutorial modal (logic 12) on both peers; the client HUD then showed the native Objective updated banner and HOSTILE TERRITORY indicator.",
+      "cases": [
+        {
+          "clientNotFound": 0,
+          "clientApplied": 9,
+          "hostLocalEvents": [
+            "script_trigger_docks_photograph_area:True",
+            "script_trigger_docks_oh_workers_dreadfulwale:True",
+            "script_trigger_docks_photograph_area:False",
+            "audio_water_water_volume:True",
+            "audio_exteriors_area_volume_360:False",
+            "script_trigger_docks_oh_workers_dreadfulwale:False",
+            "audio_exteriors_area_volume_300:True",
+            "script_trigger_streets_wol_tutorial:True",
+            "script_trigger_streets_beforesquare_wol_speaker_01:True",
+            "script_trigger_streets_wol_area:True",
+            "script_trigger_streets_hostilezone_wol:True",
+            "audio_water_water_volume:False",
+            "script_trigger_neutralzone:False"
+          ],
+          "tutorial": [
+            {
+              "client": 12,
+              "host": 12
+            }
+          ],
+          "hostSent": 9,
+          "clientRejected": 0,
+          "clientMirroredEvents": [
+            "script_trigger_docks_photograph_area:True:0x1",
+            "script_trigger_docks_oh_workers_dreadfulwale:True:0x1",
+            "script_trigger_docks_photograph_area:False:0x1",
+            "script_trigger_docks_oh_workers_dreadfulwale:False:0x1",
+            "script_trigger_streets_wol_tutorial:True:0x1",
+            "script_trigger_streets_beforesquare_wol_speaker_01:True:0x1",
+            "script_trigger_streets_wol_area:True:0x1",
+            "script_trigger_streets_hostilezone_wol:True:0x1",
+            "script_trigger_neutralzone:False:0x1"
+          ]
+        }
+      ]
+    }
+  ],
+  "native": {
+    "triggerHandler": "0x140779e00 arkCpntTrigger enter/exit (component, entity, enter): posts the trigger script event (FUN_1408848a0 with onEnter/onExit), once-trigger early-out (component+0xd0 and entity+0xd4&4), messages 0xd2/0xd3",
+    "registration": "0x140779980 registers arkCpntTrigger::OnTriggerEvent with the physics trigger system",
+    "component": "arkCpntTrigger vtable 0x1c5bae8; arkTrigger entity vtable 0x1c5eae8"
+  },
+  "findings": [
+    "Confirmed runtime: replaying the native arkCpntTrigger enter/exit handler for the partner's own player advances the partner's mission script (tutorial modal, objective update, hostile territory) without the partner entering the volume.",
+    "Mirroring is limited to script_trigger* volumes (not hideout/noswim/audio volumes, which describe the local player's own position)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Bidirectional run (client-originated triggers) and a full mission walk.",
+    "Triggers whose scripts depend on the entering player's position (e.g. spawn-on-player) may need per-trigger review.",
+    "Mission end / level transition (arkKisculeNodeLevelTransition) via the same mirror and a both-ready barrier."
+  ]
+}

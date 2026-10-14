@@ -1,0 +1,35 @@
+{
+  "target": {
+    "handle": "0xb570773",
+    "spawnerHandle": "0x4cb00e5",
+    "spawnerName": "ld_spawner_guard_tutorial_1",
+    "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+    "childCount": 1,
+    "reciprocal": true,
+    "unique": true,
+    "position": [
+      -57.7816,
+      -148.599,
+      64.2387
+    ],
+    "orientation": [
+      -0.00341237,
+      0.999994,
+      0,
+      -0.999994,
+      -0.00341237,
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "source": [
+    -57.7816,
+    -152.099,
+    65.9387
+  ],
+  "yaw": 90,
+  "pitch": 0,
+  "note": "Source-only test moves near exact second guard, validates stable native ground and uses independent native camera/target yaw and elevation feedback. Guard may occupy the stairs above source. No active body stream and no NPC mutation. Movement fixture owns reversible AI holds."
+}

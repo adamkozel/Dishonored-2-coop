@@ -1,0 +1,121 @@
+{
+  "pointer": "0x17d6a1080b0",
+  "listOffset": "0x0",
+  "id": 230,
+  "state": 3,
+  "playerChannel": -1,
+  "asset": "midnight/gameplay/human/common/doppelganger/doppelganger_spawn.midnightscene",
+  "subscene": "Scene_1",
+  "sceneDurationMs": 1000,
+  "clockWords": [
+    8,
+    8,
+    0,
+    967754560,
+    1065353216,
+    1065353216
+  ],
+  "bindingsResearch": [
+    {
+      "actor": "0x17d1121b000",
+      "handle": 210244167,
+      "reciprocal": true,
+      "fxResearch": {
+        "group": "0x17d4b5b84d0",
+        "trackCount": 5,
+        "tracks": [
+          {
+            "track": "0x17d478a64e0",
+            "type": ".?AVarkMidnightTrackInstFaceFX@@"
+          },
+          {
+            "track": "0x17ca3a8dca0",
+            "type": ".?AVarkMidnightTrackInstAnim@@"
+          },
+          {
+            "track": "0x17d478a86e0",
+            "type": ".?AVarkMidnightTrackInstFx@@",
+            "keyCount": 5,
+            "records": [
+              {
+                "keyId": 67428353,
+                "helperHandle": 210309704,
+                "stopMode": 1,
+                "helper": "0x17d6fc0c890",
+                "helperType": ".?AVidEntity@@",
+                "keyResolved": true,
+                "key": "0x17caba16c10",
+                "property": "0x17d0f1751a0",
+                "declaration": "0x17cf6186290",
+                "effect": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_01.fx",
+                "socket": "decoy_root"
+              },
+              {
+                "keyId": 67428354,
+                "helperHandle": 210375241,
+                "stopMode": 1,
+                "helper": "0x17d6fc0ac10",
+                "helperType": ".?AVidEntity@@",
+                "keyResolved": true,
+                "key": "0x17caba16c48",
+                "property": "0x17d0f175750",
+                "declaration": "0x17cf6185a70",
+                "effect": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_body_01.fx",
+                "socket": "sl_l_arm"
+              },
+              {
+                "keyId": 67428355,
+                "helperHandle": 210440778,
+                "stopMode": 1,
+                "helper": "0x17d6fc0cc20",
+                "helperType": ".?AVidEntity@@",
+                "keyResolved": true,
+                "key": "0x17caba16c80",
+                "property": "0x17d0f176e10",
+                "declaration": "0x17cf6185a70",
+                "effect": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_body_01.fx",
+                "socket": "sl_r_arm"
+              },
+              {
+                "keyId": 67428356,
+                "helperHandle": 210506315,
+                "stopMode": 1,
+                "helper": "0x17d6fc0b330",
+                "helperType": ".?AVidEntity@@",
+                "keyResolved": true,
+                "key": "0x17caba16cb8",
+                "property": "0x17d0f176d30",
+                "declaration": "0x17cf6185a70",
+                "effect": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_body_01.fx",
+                "socket": "decoy_spawn_l_hand"
+              },
+              {
+                "keyId": 67428357,
+                "helperHandle": 210571852,
+                "stopMode": 1,
+                "helper": "0x17d6fc0ddf0",
+                "helperType": ".?AVidEntity@@",
+                "keyResolved": true,
+                "key": "0x17caba16cf0",
+                "property": "0x17d0f1762b0",
+                "declaration": "0x17cf6185a70",
+                "effect": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_body_01.fx",
+                "socket": "decoy_spawn_r_hand"
+              }
+            ]
+          },
+          {
+            "track": "0x17d478a5de0",
+            "type": ".?AVarkMidnightTrackInstSfx@@"
+          },
+          {
+            "track": "0x17d62beda30",
+            "type": ".?AVarkMidnightTrackInstMaterialRenderParm@@"
+          }
+        ],
+        "valid": true,
+        "failureLine": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "passed": false,
+  "failure": "Receipt unconfirmed for client command sequence 638795242; it may still execute before its original expiry.",
+  "manifest": "window-choke-manifest-v2.json",
+  "cases": [
+    {
+      "id": "window_nonlethal_hold_sequence-corvo",
+      "role": "corvo",
+      "alias": "window_nonlethal_hold_sequence",
+      "frame": 120,
+      "hold": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": true,
+        "start": 197155859,
+        "end": 197165859,
+        "seconds": 2.0,
+        "fixed": 2.0,
+        "joints": 215,
+        "frames": 241,
+        "checksum": 7726341242602917509,
+        "applied": 69,
+        "refused": 0
+      },
+      "finished": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": false,
+        "start": 197158828,
+        "end": 0,
+        "seconds": 4.293,
+        "fixed": -1.0,
+        "joints": 215,
+        "frames": 241,
+        "checksum": 7726341242602917509,
+        "applied": 499,
+        "refused": 0
+      },
+      "rootTravel": 0.0,
+      "poseFile": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\window-choke-v2-pose-test-1/window_nonlethal_hold_sequence-corvo-hold.json",
+      "bankSha": "3595BE1B536EF96A9E88368BD62B3C836BE0FF79B598B7E54BAB58ABB38432DD"
+    }
+  ],
+  "checks": [],
+  "scope": "Pose-only library review: fixed frame, native final publication, original root, cancellation, expiry and pause. No gameplay action binding or visual acceptance claim. Hands-free donor equipment has not been bound by this test.",
+  "dll": "CF60C5EAB9A08573F128F2EF3958F9237BC92FCDC5B551682601DF44C6BDBD46"
+}

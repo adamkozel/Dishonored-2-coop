@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "source": "host",
+  "character": "corvo",
+  "crouched": true,
+  "holstered": false,
+  "moving": false,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+    "Two native cast events drive remote whole-body Windblast animation through Steam",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Full-body cast retains original native crouch/standing stance throughout",
+    "Native cleanup restores original power quantity and selection",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "Protected original executable, Steam API and save hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 2.019,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.318,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "4"
+  ],
+  "nativeScenes": [
+    "222",
+    "221"
+  ],
+  "dll": "EACAC52D7BD6F8753AB04D5E4B74EAFDFF7574A82BD751C811AA49E91D2D0A35",
+  "bankSha256": "4513376928E29E168962CA17DF6EB1F17631D8AA8F1F027CF18029BB9FC87F58",
+  "recorded": true,
+  "scope": "Corvo Windblast ground stance/equipment/travel body integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote world VFX, impacts, other contexts and broader lifecycle are not yet implemented or certified."
+}

@@ -1,0 +1,60 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140490320: mov         qword ptr [rsp+8],rbx
+  0000000140490325: mov         qword ptr [rsp+10h],rdi
+  000000014049032A: mov         r9d,dword ptr [rcx+28h]
+  000000014049032E: mov         rbx,qword ptr [rcx]
+  0000000140490331: xor         edi,edi
+  0000000140490333: movzx       r11d,dx
+  0000000140490337: mov         r10d,edi
+  000000014049033A: dec         r9d
+  000000014049033D: nop         dword ptr [rax]
+  0000000140490340: lea         r8d,[r9+r10]
+  0000000140490344: shr         r8d,1
+  0000000140490347: movzx       edx,word ptr [rbx+r8*2]
+  000000014049034C: cmp         dx,r11w
+  0000000140490350: jae         0000000140490358
+  0000000140490352: lea         r10d,[r8+1]
+  0000000140490356: jmp         000000014049035E
+  0000000140490358: jbe         0000000140490365
+  000000014049035A: lea         r9d,[r8-1]
+  000000014049035E: cmp         r10d,r9d
+  0000000140490361: jbe         0000000140490340
+  0000000140490363: jmp         0000000140490369
+  0000000140490365: lea         rdi,[rbx+r8*2]
+  0000000140490369: lea         rax,[rdi+2]
+  000000014049036D: cmp         rax,qword ptr [rcx+10h]
+  0000000140490371: jae         0000000140490390
+  0000000140490373: movzx       edx,word ptr [rax]
+  0000000140490376: cmp         rax,qword ptr [rcx+18h]
+  000000014049037A: jb          0000000140490382
+  000000014049037C: cmp         dx,r11w
+  0000000140490380: jae         0000000140490390
+  0000000140490382: mov         word ptr [rax-2],dx
+  0000000140490386: add         rax,2
+  000000014049038A: cmp         rax,qword ptr [rcx+10h]
+  000000014049038E: jb          0000000140490373
+  0000000140490390: mov         rbx,qword ptr [rsp+8]
+  0000000140490395: mov         rdi,qword ptr [rsp+10h]
+  000000014049039A: mov         word ptr [rax-2],r11w
+  000000014049039F: add         qword ptr [rcx+18h],0FFFFFFFFFFFFFFFEh
+  00000001404903A4: dec         dword ptr [rcx+28h]
+  00000001404903A7: mov         al,1
+  00000001404903A9: ret
+  00000001404903AA: int         3
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140490280: sub         rsp,8
+  0000000140490284: mov         r9d,dword ptr [rcx+20h]
+  0000000140490288: mov         r10d,dword ptr [rcx+28h]
+  000000014049028C: 48

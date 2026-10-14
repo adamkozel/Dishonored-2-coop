@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "B6F17E91D00E50160AC50B79F0F0EF8D196CB5A16804631B1D8B2E160439C2F5",
+  "checks": [
+    "Ordinary crouched sword input produces native three-actor targeted slash",
+    "Independent reader validates exact player, right arm and native enemy target",
+    "Native sword equipped and started during targeted slash",
+    "Existing full-body combat clip plays through native Steam source semantics",
+    "Native stance locomotion resumes after targeted attack",
+    "Independent network root retained through target-bearing attack",
+    "Remote body playback did not duplicate damage on the receiver victim",
+    "Native crouched RT250ms facing guard2; target-bearing slash, native stance recovery and optional owned recovery when observed, no shared victim outcome.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "name": "crouched-slash",
+        "stance": 1,
+        "yaw": 90,
+        "distance": 1.15
+      },
+      "key": "host-crouched-slash",
+      "count": 232,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Existing combat pipeline extended to observed ordinary target-bearing sword scenes. Read-only native source, protocol66 and unchanged bank65/353clips; native stance recovery and optional owned hit follow-through. A missing optional scene is not counted as verified. Actor presentation only; no native victim events or damage replay. All inventories, health and14 protected files restored."
+}

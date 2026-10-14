@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-14T09:44:18.601157+02:00",
+  "dll": "5C92A2018AD84D578B1F28EE5BC5FB825EB7BCDB9D1C5B9F4E28787F010A8342",
+  "probe": "A93C4067120C950B44834E7D2800E679131221078F3E0B7290292180208B0CAA",
+  "previous": "candidate-npc-combat-v1033",
+  "protocol": 71,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 69,
+  "clips": 365,
+  "banks": [
+    {
+      "path": "work/natural-moveset/swim-banks-v1037/corvo-choke-bank.bin",
+      "sha256": "DEB1742EF3FEC6E37421C027BD0D4F6D1066C8677D845DE64E87F2A448B40517"
+    },
+    {
+      "path": "work/natural-moveset/swim-banks-v1037/emily-choke-bank.bin",
+      "sha256": "0FBFA4304E4862B78CA380B5B3A850274BCBC077610D1D836F5318426D4F7FBC"
+    }
+  ],
+  "runtimeVerified": false,
+  "scope": "Experimental1037 on 1033: native swimming (alternate mode, state0 arkPlayerStateSwimming 1c7dc68) becomes action state22 over protocol71; receiver bank69/365 presents authored tread/stroke/up/down blended by replicated horizontal speed and vertical velocity; root/depth stay network-owned. Retains campaign fixture command, defense presentation and relay. Runtime pending.",
+  "runtimeEvidence": "../mission-swim-audit-v1040.json",
+  "result": "1038/1038b failed: action stream restricted to the Dunwall map"
+}

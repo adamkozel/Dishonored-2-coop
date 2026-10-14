@@ -1,0 +1,103 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140425F30: mov         qword ptr [rsp+10h],rbx
+  0000000140425F35: push        rdi
+  0000000140425F36: sub         rsp,20h
+  0000000140425F3A: mov         rax,qword ptr [rcx+10h]
+  0000000140425F3E: mov         rdi,rcx
+  0000000140425F41: mov         ebx,dword ptr [rax+00000000000000A8h]
+  0000000140425F47: call        0000000140810240
+  0000000140425F4C: mov         r8d,ebx
+  0000000140425F4F: mov         rcx,rax
+  0000000140425F52: mov         edx,4Dh
+  0000000140425F57: call        00000001408103F0
+  0000000140425F5C: lea         rcx,[rdi+0000000000000090h]
+  0000000140425F63: mov         dl,1
+  0000000140425F65: call        00000001407C84D0
+  0000000140425F6A: mov         rcx,qword ptr [rdi+38h]
+  0000000140425F6E: call        000000014092E460
+  0000000140425F73: lea         rdx,[rsp+30h]
+  0000000140425F78: mov         byte ptr [rsp+30h],0
+  0000000140425F7D: mov         rcx,rax
+  0000000140425F80: call        0000000140565130
+  0000000140425F85: mov         rcx,qword ptr [rdi+28h]
+  0000000140425F89: call        000000014054EBE0
+  0000000140425F8E: and         byte ptr [rdi+000000000000011Ah],0FEh
+  0000000140425F95: mov         rbx,qword ptr [rsp+38h]
+  0000000140425F9A: mov         qword ptr [rdi+0000000000000110h],0FFFFFFFFFFFFFFFFh
+  0000000140425FA5: add         rsp,20h
+  0000000140425FA9: pop         rdi
+  0000000140425FAA: ret
+  0000000140425FAB: int         3
+  0000000140425FAC: int         3
+  0000000140425FAD: int         3
+  0000000140425FAE: int         3
+  0000000140425FAF: int         3
+  0000000140425FB0: mov         qword ptr [rsp+18h],rbx
+  0000000140425FB5: push        rbp
+  0000000140425FB6: sub         rsp,30h
+  0000000140425FBA: mov         rbp,qword ptr [rcx+0000000000000080h]
+  0000000140425FC1: mov         rbx,rcx
+  0000000140425FC4: mov         rcx,rbp
+  0000000140425FC7: call        0000000140416B60
+  0000000140425FCC: test        al,al
+  0000000140425FCE: je          000000014042605E
+  0000000140425FD4: mov         rcx,rbp
+  0000000140425FD7: mov         qword ptr [rsp+40h],rsi
+  0000000140425FDC: call        0000000140417120
+  0000000140425FE1: mov         rdx,qword ptr [rbx+10h]
+  0000000140425FE5: lea         rcx,[rsp+20h]
+  0000000140425FEA: mov         rsi,rax
+  0000000140425FED: call        00000001405BED20
+  0000000140425FF2: mov         ebx,dword ptr [rsi+8]
+  0000000140425FF5: and         ebx,0FFFFFFh
+  0000000140425FFB: xor         dl,dl
+  0000000140425FFD: dec         ebx
+  0000000140425FFF: movsxd      rax,ebx
+  0000000140426002: js          000000014042603B
+  0000000140426004: mov         qword ptr [rsp+48h],rdi
+  0000000140426009: lea         rdi,[rax+rax*2]
+  000000014042600D: shl         rdi,3
+  0000000140426011: mov         rax,qword ptr [rsi]
+  0000000140426014: movsd       xmm0,mmword ptr [rsp+20h]
+  000000014042601A: comisd      xmm0,mmword ptr [rax+rdi+8]
+  0000000140426020: jbe         000000014042602E
+  0000000140426022: mov         edx,ebx
+  0000000140426024: mov         rcx,rsi
+  0000000140426027: call        0000000140425AF0
+  000000014042602C: mov         dl,1
+  000000014042602E: sub         rdi,18h
+  0000000140426032: dec         ebx
+  0000000140426034: jns         0000000140426011
+  0000000140426036: mov         rdi,qword ptr [rsp+48h]
+  000000014042603B: test        dword ptr [rsi+8],0FFFFFFh
+  0000000140426042: mov         rcx,rbp
+  0000000140426045: sete        bl
+  0000000140426048: call        0000000140417880
+  000000014042604D: mov         rsi,qword ptr [rsp+40h]
+  0000000140426052: test        bl,bl
+  0000000140426054: je          000000014042605E
+  0000000140426056: mov         rcx,rbp
+  0000000140426059: call        00000001404165C0
+  000000014042605E: mov         rbx,qword ptr [rsp+50h]
+  0000000140426063: add         rsp,30h
+  0000000140426067: pop         rbp
+  0000000140426068: ret
+  0000000140426069: int         3
+  000000014042606A: int         3
+  000000014042606B: int         3
+  000000014042606C: int         3
+  000000014042606D: int         3
+  000000014042606E: int         3
+  000000014042606F: int         3
+  0000000140426070: 40
+
+  Summary
+
+     1A7D000 .text

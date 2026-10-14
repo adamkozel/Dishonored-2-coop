@@ -1,0 +1,37 @@
+{
+  "scenes": [
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_in.midnightscene, Scene_1",
+      "samples": 10,
+      "durationMs": [
+        400
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_loop.midnightscene, Scene_1",
+      "samples": 46,
+      "durationMs": [
+        333
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_out.midnightscene, Scene_1",
+      "samples": 51,
+      "durationMs": [
+        1600
+      ]
+    }
+  ],
+  "manaBefore": 100.0,
+  "manaAfter": 80.0,
+  "nativeStateSets": [
+    "0",
+    "0,63"
+  ],
+  "observedEntityDefinitions": [
+    "ai/aicue_power_devouring_swarm.def",
+    "models/characters/animals/rat/devouring_swarm.def",
+    "models/powers/devouring_swarm/devouring_swarm.def"
+  ],
+  "scope": "Source-only native phase/lifecycle observation in isolated AI-held Dunwall; no remote gameplay or body binding"
+}

@@ -1,0 +1,11 @@
+{
+  "cases": [],
+  "scope": "Mission checkpoint mode: shared native death and one shared restart from each peer own mission autosave; Dunwall fixture restored.",
+  "failure": "Mission checkpoint arm failed host=awaiting_peer client=awaiting_peer",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionCheckpoint-v1148.ps1:119[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 119 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mMission checkpoint arm failed host=awaiting_peer client=awaiting_peer[0m

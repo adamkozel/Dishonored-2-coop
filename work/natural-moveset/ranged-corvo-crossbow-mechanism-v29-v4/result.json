@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "source": "host",
+  "kind": "crossbow",
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Independent source/remote skeleton observations captured; exact cosmetic crossbow phase callback applied without refusals",
+    "All five source-owned ranged phases reached the remote body through Steam",
+    "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 1.875,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.825,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.963,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.868,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.992,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.791,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "516514DBAD937431396C0A41105D2B22515F71395FB1DA4483D434A38482E0D4",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

@@ -1,0 +1,12 @@
+# ld_door_350cm_int_rich_wood_01-components.json
+
+Original: [work/movement-integration/door-research-v639/ld_door_350cm_int_rich_wood_01-components.json](<../../../../work/movement-integration/door-research-v639/ld_door_350cm_int_rich_wood_01-components.json>)
+
+SHA-256: `EC6990B4BB7DF3711F8067A7B312512B9B4D8AE78940166D90BFE0EE8EC33455`; 1879 bytes.
+
+## Original saved record
+
+````json
+{"handle":"0x54b0165","components":[{"pointer":"0x205594f36d0","vtableRva":"0x1c5cd48","owner":"0x203a60d6650","flags":"0x2800006a","type":".?AVarkCpntNavmeshToggle@@"},{"pointer":"0x205594f6170","vtableRva":"0x1b4f578","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntAITampering@@"},{"pointer":"0x205594fa370","vtableRva":"0x1c54908","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntSoundVolumeControl@@"},{"pointer":"0x20520b54330","vtableRva":"0x1b94a68","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntAIAttentionSource@@"},{"pointer":"0x20559511840","vtableRva":"0x1c71a88","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntBreakable@@"},{"pointer":"0x20520bd48c0","vtableRva":"0x1b98078","owner":"0x203a60d6650","flags":"0x28000002","type":".?AVarkCpntObservable@@"},{"pointer":"0x20520bd4908","vtableRva":"0x1b98078","owner":"0x203a60d6650","flags":"0x2800006a","type":".?AVarkCpntObservable@@"},{"pointer":"0x20520ad9770","vtableRva":"0x1c4e588","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntAudio@@"},{"pointer":"0x20533d75280","vtableRva":"0x1c573e8","owner":"0x203a60d6650","flags":"0xa","type":".?AVarkCpntReferenceFrame@@"},{"pointer":"0x2055952c250","vtableRva":"0x1c5c7c8","owner":"0x203a60d6650","flags":"0x20000002","type":".?AVarkCpntNavmeshUserEdges@@"},{"pointer":"0x205594df850","vtableRva":"0x1c745c8","owner":"0x203a60d6650","flags":"0x2000006a","type":".?AVarkCpntRigidBody@@"},{"pointer":"0x20559506070","vtableRva":"0x1c569c8","owner":"0x203a60d6650","flags":"0x2800006a","type":".?AVarkCpntOpenable@@"},{"pointer":"0x2055952e4e0","vtableRva":"0x1cb5858","owner":"0x203a60d6650","flags":"0x2000000a","type":".?AVarkCpntHealthDoor@@"},{"pointer":"0x205348a1150","vtableRva":"0x1cecfb8","owner":"0x203a60d6650","flags":"0x2800006a","type":".?AVarkCpntAIInvestigateSpot@@"}]}
+
+````

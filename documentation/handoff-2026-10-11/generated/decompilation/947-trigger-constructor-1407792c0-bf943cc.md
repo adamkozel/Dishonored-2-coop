@@ -1,0 +1,29 @@
+# trigger-constructor-1407792c0.txt
+
+Original: [work/movement-integration/npc-damage-research-v917/trigger-constructor-1407792c0.txt](<../../../../work/movement-integration/npc-damage-research-v917/trigger-constructor-1407792c0.txt>)
+
+SHA-256: `393B7828A26A4D9E60C50A4EA535E2FF60EC7A3202FBE3693176022AD4A6FE35`; 368 bytes.
+
+## Original saved record
+
+````text
+
+undefined8 * FUN_1407792c0(undefined8 *param_1)
+
+{
+  FUN_1407e71e0();
+  param_1[5] = 0;
+  *param_1 = &PTR_LAB_141c5bae8;
+  param_1[4] = &PTR_LAB_141c5bbc8;
+  *(undefined4 *)(param_1 + 6) = 0xffffff;
+  FUN_14018cb90(param_1 + 8);
+  param_1[8] = &PTR_FUN_141c5ba98;
+  param_1[0x18] = 0;
+  param_1[0x19] = 0;
+  *(undefined1 *)(param_1 + 0x1a) = 0;
+  return param_1;
+}
+
+
+
+````

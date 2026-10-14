@@ -1,0 +1,14 @@
+[
+  {
+    "address": "14074d7a0",
+    "category": "D2Coop Native Door Authority",
+    "comment": "Exact Steam exe B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180.706 static initially suggested stable target request, but711 runtime disproves fresh stable use: initial Moving+0x30 (Openable+0xb0) is0xffffffff; this function unconditionally calls74adf0 then6df740, finalizing stale target toOpen before newMoving. First requested open returnsClosed; second opens normally. Do not use as stable-door API.713 tests74a400 native state queue instead.708 refused before any call due corrected AnimBase VT;709 actual door AnimBaseVT1b7f408.",
+    "type": "Note"
+  },
+  {
+    "address": "14074a400",
+    "category": "D2Coop Native Door Authority",
+    "comment": "712 static +713 runtime: native Moving queue(Openable+0x40,bytes[opening,reverse,side,clip]) returnsAL bool and honors CanTransition. Ordinary74b6e0 inlines same, auto-close74ac50 calls then resumes AnimBase/Openable via7e79a0. Opening entries1e0/1e1 byside; closing preservesopenSide but uses1e3 for0/1e2 for1.714 Corvo and715 Emily local proofs PASS: exactly2calls+2duplicate no-ops,0->1->2->1->0; peer unchanged. Both source/observer sheets inspected. No collision/sound/script payload validation; explicit queue retains stored interactor. Native Steam716 experiment implemented, runtime not yet verified.",
+    "type": "Note"
+  }
+]

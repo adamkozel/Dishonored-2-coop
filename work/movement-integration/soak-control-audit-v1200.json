@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-14T18:51:34.314154+02:00",
+  "candidate": "candidate-npc-combat-v1193",
+  "control": {
+    "take": "../natural-moveset/mission-soak-control-v1198",
+    "passed": true,
+    "failure": null,
+    "restoration": true,
+    "deaths": 3,
+    "memory": {
+      "host": {
+        "startMB": 6127.1,
+        "baselineMB": 6132.8,
+        "endMB": 6391.7,
+        "growthMB": 258.9,
+        "slopeMBPerMin": 14.2,
+        "withinSegmentMBPerMin": 4.92,
+        "restartStepsMB": 187.4,
+        "handles": [
+          1466,
+          1459
+        ],
+        "samples": 118
+      },
+      "client": {
+        "startMB": 6131.3,
+        "baselineMB": 6138.1,
+        "endMB": 6401.7,
+        "growthMB": 263.6,
+        "slopeMBPerMin": 14.24,
+        "withinSegmentMBPerMin": 5.25,
+        "restartStepsMB": 187.4,
+        "handles": [
+          1483,
+          1483
+        ],
+        "samples": 118
+      }
+    }
+  },
+  "product": {
+    "take": "../natural-moveset/mission-soak-v1186",
+    "candidate": "candidate-npc-combat-v1181",
+    "deaths": 3,
+    "memory": {
+      "host": {
+        "startMB": 6430.3,
+        "baselineMB": 6455.6,
+        "endMB": 6559.1,
+        "growthMB": 103.5,
+        "slopeMBPerMin": 6.25,
+        "withinSegmentMBPerMin": 5.97,
+        "restartStepsMB": 17.4,
+        "handles": [
+          1474,
+          1463
+        ],
+        "samples": 117
+      },
+      "client": {
+        "startMB": 6412.3,
+        "baselineMB": 6440.4,
+        "endMB": 6662.2,
+        "growthMB": 221.9,
+        "slopeMBPerMin": 8.54,
+        "withinSegmentMBPerMin": 7.14,
+        "restartStepsMB": 119.0,
+        "handles": [
+          1480,
+          1478
+        ],
+        "samples": 117
+      }
+    }
+  },
+  "slopeRatioProductOverControl": {
+    "host": 0.44,
+    "client": 0.6
+  },
+  "method": "Same mission, route (3 spots, 30 s moves), 20 minutes and three death/restart cycles. Control: every co-op system off (bridge transport/status only), both peers die together and restart natively. Slope = least-squares private-memory MB/min after the 2-minute baseline; within-segment rate excludes the restart steps and the first minute after each restart (transient load peak).",
+  "findings": [
+    "Confirmed runtime: with every co-op system off (bridge transport/status writers only) private memory still grows ~5 MB/min at steady state on both peers (host 4.92, client 5.25) plus ~187 MB across three native restarts.",
+    "With the product controller (1186) the steady rate is 5.97/7.14 MB/min: the co-op systems add at most ~1-2 MB/min over the control; most growth is present without them.",
+    "Handles stayed flat in both runs; no crash; transport fresh throughout."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Vanilla baseline without the proxy DLL (requires relaunching a lab instance without dinput8) to separate the game from the always-on bridge.",
+    "Longer (2 h) soak to see whether growth plateaus (native streaming caches) or continues."
+  ]
+}

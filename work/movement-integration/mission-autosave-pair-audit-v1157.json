@@ -1,0 +1,209 @@
+{
+  "at": "2026-10-14T16:32:24.441284+02:00",
+  "candidate": "candidate-npc-combat-v1153",
+  "dll": "215BFC8B850B0A4EE0F109540F4E2AA9141ECE91ACB41F1AB0E82883CC23D9F7",
+  "harnesses": [
+    "../natural-moveset/Test-MissionAutosavePair-v1156.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-autosave-pair-v1154",
+      "passed": false,
+      "scope": "coop_autosave_probe was outside the lab command allowlist (Send-D2Command); restoration hit the known native inventory read flake, repaired by Restore-LabNoteInventory (note-restoration-repair passed).",
+      "failure": "Command is outside the bounded native research command set.",
+      "cases": []
+    },
+    {
+      "take": "mission-autosave-pair-v1155",
+      "passed": false,
+      "scope": "Pairing worked (host native autosave mirrored by the client in 1.9 s, both settled at one save); the post-restart check crashed on a harness bug ($p and $P are the same PowerShell variable).",
+      "failure": "Cannot index into a null array.",
+      "cases": []
+    },
+    {
+      "take": "mission-autosave-pair-v1156",
+      "passed": true,
+      "scope": "Pass, both origins: one peer makes a native autosave mid-mission (docks apartment), the other mirrors it natively in 1.6-1.9 s; both walk away; the other peer dies; one shared restart returns BOTH players to their own paired autosave position (<= 0.09 m) 57-60 m from the mission start; exactly one load/completion each, correct characters; pair counters reset and resettle after each restart.",
+      "failure": null,
+      "cases": [
+        {
+          "armDigest": "e02f298c586429533769209879e73a13201a0560f21c8e3988dfbd17a2c600ea",
+          "cycles": [
+            {
+              "pairSettleMs": 1593,
+              "checks": {
+                "host": {
+                  "spawnDistance": 56.86797163427669,
+                  "epochChanged": true,
+                  "completed": 1,
+                  "character": 1,
+                  "loads": 1,
+                  "pairAfter": {
+                    "active": true,
+                    "ready": true,
+                    "saves": 0,
+                    "originated": 0,
+                    "mirrored": 0,
+                    "pending": false,
+                    "peerSaves": 0,
+                    "peerOriginated": 0,
+                    "peerMirrored": 0,
+                    "peerPending": false,
+                    "requests": 0,
+                    "refused": 0,
+                    "resets": 2,
+                    "received": 97,
+                    "rejected": 0,
+                    "slot": 62,
+                    "result": "world_epoch_renewed",
+                    "probeCalls": 2,
+                    "probeRefused": 0
+                  },
+                  "saveDistance": 0.0,
+                  "aborted": 0
+                },
+                "client": {
+                  "spawnDistance": 60.5360998810338,
+                  "epochChanged": true,
+                  "completed": 1,
+                  "character": 2,
+                  "loads": 1,
+                  "pairAfter": {
+                    "active": true,
+                    "ready": true,
+                    "saves": 0,
+                    "originated": 0,
+                    "mirrored": 0,
+                    "pending": false,
+                    "peerSaves": 0,
+                    "peerOriginated": 0,
+                    "peerMirrored": 0,
+                    "peerPending": false,
+                    "requests": 1,
+                    "refused": 0,
+                    "resets": 2,
+                    "received": 97,
+                    "rejected": 0,
+                    "slot": 62,
+                    "result": "world_epoch_renewed",
+                    "probeCalls": 0,
+                    "probeRefused": 0
+                  },
+                  "saveDistance": 0.03996285900683127,
+                  "aborted": 0
+                }
+              },
+              "dying": "client",
+              "origin": "host",
+              "positions": {
+                "host": [
+                  -6.758,
+                  142.542,
+                  12.8571
+                ],
+                "client": [
+                  -3.56555,
+                  140.126,
+                  13.5968
+                ]
+              }
+            },
+            {
+              "pairSettleMs": 1880,
+              "checks": {
+                "host": {
+                  "spawnDistance": 60.5189327955682,
+                  "epochChanged": true,
+                  "completed": 1,
+                  "character": 1,
+                  "loads": 1,
+                  "pairAfter": {
+                    "active": true,
+                    "ready": true,
+                    "saves": 0,
+                    "originated": 0,
+                    "mirrored": 0,
+                    "pending": false,
+                    "peerSaves": 0,
+                    "peerOriginated": 0,
+                    "peerMirrored": 0,
+                    "peerPending": false,
+                    "requests": 1,
+                    "refused": 0,
+                    "resets": 4,
+                    "received": 186,
+                    "rejected": 0,
+                    "slot": 61,
+                    "result": "world_epoch_renewed",
+                    "probeCalls": 2,
+                    "probeRefused": 0
+                  },
+                  "saveDistance": 0.08660590337846354,
+                  "aborted": 0
+                },
+                "client": {
+                  "spawnDistance": 56.86797163427669,
+                  "epochChanged": true,
+                  "completed": 1,
+                  "character": 2,
+                  "loads": 1,
+                  "pairAfter": {
+                    "active": true,
+                    "ready": true,
+                    "saves": 0,
+                    "originated": 0,
+                    "mirrored": 0,
+                    "pending": false,
+                    "peerSaves": 0,
+                    "peerOriginated": 0,
+                    "peerMirrored": 0,
+                    "peerPending": false,
+                    "requests": 1,
+                    "refused": 0,
+                    "resets": 4,
+                    "received": 186,
+                    "rejected": 0,
+                    "slot": 61,
+                    "result": "world_epoch_renewed",
+                    "probeCalls": 1,
+                    "probeRefused": 0
+                  },
+                  "saveDistance": 0.0,
+                  "aborted": 0
+                }
+              },
+              "dying": "host",
+              "origin": "client",
+              "positions": {
+                "host": [
+                  -3.56671,
+                  140.127,
+                  13.6391
+                ],
+                "client": [
+                  -6.758,
+                  142.542,
+                  12.8571
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "native": {
+    "requestSave": "0x14065cc50(manager game+0x2e75d8, slotType 3, slotNumber -1 -> rotating autosave slot via 0x140656b80, isMissionStart false, autoRetry true, securityDelay 0); queues one of three asynchronous save requests; gates: map running, savegame_enabled, autosave enabled byte 0x142317d88"
+  },
+  "findings": [
+    "Confirmed runtime: a native RequestSave(slotType 3) issued on the engine thread writes a genuine per-character autosave (rotating SLOT61/62) within about 1.6-1.9 s.",
+    "Confirmed runtime: paired autosaves keep both peers' mission checkpoints at the same moment; a shared restart returns each player to its own paired mid-mission autosave.",
+    "The one-peer origin is the coop_autosave_probe developer fixture standing in for a script autosave trigger; a real script trigger (arkKisculeNodeActionAutosave) is observed by the same reader but was not exercised in this take."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Exercise a real mission-script autosave trigger crossed by one player.",
+    "Partner avatar restoration and door/coin/NPC renewal across mission restarts.",
+    "Map transitions, manual save/load, disconnect/rejoin."
+  ]
+}

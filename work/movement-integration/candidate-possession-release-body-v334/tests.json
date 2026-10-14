@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "commands": [
+    "cmake build Release d2_lab_proxy d2_proxy_smoke d2_runtime_probe d2_shadow_action_tests d2_movement_bank_tests",
+    "d2_shadow_action_tests.exe",
+    "d2_movement_bank_tests.exe corvo-possession-bank.bin emily-possession-bank.bin",
+    "d2_proxy_smoke.exe dinput8.dll"
+  ],
+  "scope": "Compilation, semantic protocol49, actual two bank52 payloads, proxy/Steam pose/skip protocol smoke; native deployment pending"
+}

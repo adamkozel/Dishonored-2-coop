@@ -1,0 +1,36 @@
+# swarm-decompile-14048e6f0-v291.txt
+
+Original: [work/movement-integration/swarm-decompile-14048e6f0-v291.txt](<../../../../work/movement-integration/swarm-decompile-14048e6f0-v291.txt>)
+
+SHA-256: `071201EAE9AC82FEFB3B14BDBAEB9E0F5CBB8F443B2F64A772B0E1477E5B263F`; 555 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_14048e6f0(longlong param_1,longlong param_2)
+
+{
+  byte bVar1;
+  longlong lVar2;
+  char cVar3;
+  undefined1 uVar4;
+  
+  FUN_14048f020();
+  lVar2 = *(longlong *)(param_2 + 0x18);
+  cVar3 = FUN_1406a2bb0(lVar2);
+  if (((cVar3 != '\0') && (bVar1 = *(byte *)(lVar2 + 0xcc), (bVar1 & 1) != 0)) && ((bVar1 & 8) != 0)
+     ) {
+    if (7 < ((byte)*(undefined4 *)(param_1 + 0x1c) & 0xc)) {
+      uVar4 = FUN_1408ac110(0,3);
+      FUN_14048f860(param_1,uVar4,0,0x3f800000,0);
+      return;
+    }
+    *(undefined1 *)(param_1 + 0x478) = 1;
+  }
+  return;
+}
+
+
+
+````

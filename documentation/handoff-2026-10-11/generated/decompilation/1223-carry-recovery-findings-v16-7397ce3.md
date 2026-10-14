@@ -1,0 +1,77 @@
+# carry-recovery-findings-v16.json
+
+Original: [work/natural-moveset/carry-recovery-findings-v16.json](<../../../../work/natural-moveset/carry-recovery-findings-v16.json>)
+
+SHA-256: `586E0EB3EE4C70FF2F614282B87D89B141BFC80AA53F5C1CD57C5AF6C86C82D7`; 2793 bytes.
+
+## Original saved record
+
+````json
+{
+  "build": "BF72043B184CD96B22703ADDF10833EF1F1DA1B07015E2B236421AE68620AEFE",
+  "cases": {
+    "corvo": {
+      "video": "carry-cleanup-stream-corvo-v16/native.mp4",
+      "evidence": "carry-cleanup-stream-corvo-v16/validation.json",
+      "checks": 18,
+      "samples": 141,
+      "avatar_health_after": 40,
+      "impact_blocks": 1,
+      "root_follow_passed": false
+    },
+    "emily": {
+      "video": "carry-cleanup-stream-emily-v16/native.mp4",
+      "evidence": "carry-cleanup-stream-emily-v16/validation.json",
+      "checks": 18,
+      "samples": 144,
+      "avatar_health_after": 40,
+      "impact_blocks": 1,
+      "root_follow_passed": false
+    }
+  },
+  "pickup_sources": {
+    "corvo": {
+      "video": "native-pickup-geometry-corvo-v1/native.mp4",
+      "evidence": "native-pickup-geometry-corvo-v1/geometry-analysis.json",
+      "checks": {
+        "harness_complete": true,
+        "confirmed_preparation": true,
+        "confirmed_native_lift": true,
+        "confirmed_loop": true,
+        "one_corpse_generation": true,
+        "first_person_health_preserved": true,
+        "capture_at_least_24hz": true
+      }
+    },
+    "emily": {
+      "video": "native-pickup-geometry-emily-v1/native.mp4",
+      "evidence": "native-pickup-geometry-emily-v1/geometry-analysis.json",
+      "checks": {
+        "harness_complete": true,
+        "confirmed_preparation": true,
+        "confirmed_native_lift": true,
+        "confirmed_loop": true,
+        "one_corpse_generation": true,
+        "first_person_health_preserved": true,
+        "capture_at_least_24hz": true
+      }
+    }
+  },
+  "regressions": {
+    "friendly-fire-native": "carry-impact-v16-regression\\friendly-fire-native.json",
+    "friendly-fire-strikes": "carry-impact-v16-regression\\friendly-fire-strikes.json",
+    "native-sword-damage-verification": "carry-impact-v16-regression\\native-sword-damage-verification.json"
+  },
+  "fixes": [
+    "Fresh action handshake allows the same verified living clone after nonlethal damage without writing health.",
+    "Exact leased replicated body impacts are suppressed during presentation and for a two-second release tail; native reclaims and stale identities terminate exclusion."
+  ],
+  "failures_retained": [
+    "v14b: health 39 prevented fresh handshake.",
+    "v15: handshake recovered but native impact from the released body still caused one point of avatar damage. Updated health validation correctly marks this case failed."
+  ],
+  "complete": false,
+  "visual_accepted": false,
+  "next": "Connect a source-timed, visually continuous floor pickup. Native snapshot recovery blend is a research candidate; not yet tested. Improve loaded torso/contact, initial attachment continuity and throw."
+}
+````

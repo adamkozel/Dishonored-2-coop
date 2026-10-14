@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T09:02:42.240648+02:00",
+  "dll": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+  "probe": "6B37A9DBCE64BB743EB01E02F4D28FBCA0A7C1E55C1B83B0CA3CD7FEAE8B3423",
+  "previous": "candidate-npc-combat-v1022",
+  "protocol": 70,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 68,
+  "clips": 359,
+  "banks": [
+    {
+      "path": "work/natural-moveset/parry-banks-v1022/corvo-choke-bank.bin",
+      "sha256": "0750303AFD7852CAFAE45C4D2655013E3205D7686106F84342EE088478DAA608"
+    },
+    {
+      "path": "work/natural-moveset/parry-banks-v1022/emily-choke-bank.bin",
+      "sha256": "D0C8CC534036E948C860A8956E13B1F1FFC7D544CB26533193D5486BA9F79F3A"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "1026 (live): 1022 remote-body presentation of receiver native defense scenes (variants19-21 -> bank68 clips357/358; protocol70) verified 1023/1025/1028c, plus lab-only observer camera (render-view hold) verified 1027c and used for the host view in 1028c. Relay/timed parry from 1018 retained.",
+  "scopedDefensePresentationVerified": true,
+  "scopedObserverCameraVerified": true,
+  "runtimeEvidence": "../npc-defense-presentation-audit-v1029.json",
+  "scopedDefensePresentationBothRoles": true,
+  "runtimeEvidence2": "../defense-parity-audit-v1031.json"
+}

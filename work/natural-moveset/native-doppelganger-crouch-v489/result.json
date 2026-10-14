@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets",
+    "Native crouch6 plus power63 independently observed with reciprocal In/Loop/Out scenes; current standing-only reader refuses unsupported crouch",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.853,
+      "input": "Native crouched Emily LT1800 then release at grounded floor"
+    }
+  ],
+  "dll": "E196E15A1071B09675FABF0D4F9F97D8E81078F1A24E7E55489E480B8E3F753E",
+  "probe": "047494368B6D7CE75CF4BA8DB2DEA6283B7F40F1F06EAD6A815789DD2211F3F6",
+  "scope": "Native source crouched Emily Doppelganger acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+}

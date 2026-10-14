@@ -1,0 +1,38 @@
+{
+  "passed": false,
+  "source": "host",
+  "character": "corvo",
+  "crouched": false,
+  "holstered": false,
+  "moving": false,
+  "failure": "Expected four independently identified native/remote start/release phases and native active/inactive cycle, found 3/3",
+  "checks": [
+    "Native Steam stream and exact v38 stance/equipment bank ready before the cast"
+  ],
+  "events": [
+    {
+      "seconds": 2.011,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.512,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "3",
+    "6"
+  ],
+  "nativeScenes": [
+    "220",
+    "222",
+    "219"
+  ],
+  "dll": "CD3FB5F65FEB36951BFDCE98A7D51BC4F1914E01AA9C31287B4BDEC5BC92F337",
+  "bankSha256": "4A41D289364CBC0E91A39463AF572832CC840EC36AE33AACD5A564B0508FFC43",
+  "recorded": true,
+  "scope": "Standing armed Corvo BendTime body integration only. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
+}

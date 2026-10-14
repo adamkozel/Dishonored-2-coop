@@ -1,0 +1,77 @@
+DISHONORED 2 CO-OP - FULL-BODY ANIMATION REVIEW, PASS 07
+
+Open review.html from this directory. The running local review server is also
+available at http://127.0.0.1:8769/review.html . To start it again, run the
+existing review_server.py with Python. It listens only on this computer.
+
+482 paired Corvo/Emily authoring recordings and 7 actual D2 recordings are
+indexed. Total video duration is approximately 19.5 minutes. These include
+source phases and alternatives, not 482 finished gameplay actions.
+
+The original 105 functional requirements remain visible. 100 have candidate
+animations, with incomplete sub-actions and variants called out individually.
+Four are runtime ownership/lifecycle transitions, not standalone clips. The
+conditional rescue requirement is excluded by the requested shared-death policy.
+The complete production moveset is NOT finished.
+
+HOW TO REVIEW
+Use Requirements for one movement group, Clips for the entire recorded library,
+or D2 for actual engine captures. Filter by movement family or search. Previous
+and Next Clip walk through the current view. Play Next Automatically plays the
+recorded clips in that view in sequence. Use quarter/half speed and frame steps
+for contact checks. Character labels follow the camera orientation.
+
+Choose Corvo, Emily or Both before writing feedback. Add Current Timestamp helps
+identify the precise pose. Saved notes stay in this browser; Export Feedback
+JSON preserves them outside the browser. Feedback keys include animation hashes
+so a later revision does not silently reuse comments on different poses.
+
+NEW IN THIS PASS
+- Native stun-mine and spring-razor surface reach, placement and detachment studies.
+- Low, high and soft carried-body releases at native ragdoll phase boundaries.
+- Top-of-ladder descent entry with a neutral platform/rail fixture.
+- Floor-to-shoulder body lift, revision 2, with complete-body lowering and recovery.
+- Shoulder throw with a labelled illustrative target flight.
+- Actual D2 Emily wall-placement body recording; native trap spawning is absent.
+
+VALIDATION AND LIMITS
+All 489 selected videos decode completely and match their saved animation bytes.
+104 paired candidates have matching both-role fixed-frame D2 publication evidence
+in the catalog. Additional gait tests cover input/network-driven travel. The new
+18 role clips passed pose publication, cancellation, expiry and peer-pause checks.
+These numerical checks do not establish visual quality or gameplay binding.
+
+Authoring recordings are 30 fps. Animation data uses the source/declared timing.
+Actual game captures preserve their measured intervals; capture rates are shown
+in the viewer and are lower than the game's rendering rate. Do not judge in-game
+motion smoothness from a 7-11 Hz capture as though it were a 30 fps recording.
+
+KNOWN WORK STILL REQUIRED
+- Floor lift gathering has actor/head-to-target overlap and imperfect weight transfer.
+- Throw anticipation/follow-through and target settling need refinement.
+- Aerial/sliding pairs have known impact/contact and recovery issues.
+- Fine hand, blade, equipment and obstacle contact needs visual revision.
+- Elixirs still use an NPC drinking donor; player-use behavior and correct held
+  props are unverified. Generic donor names do not establish native action coverage.
+- No-mana failure, arbitrary interruptions, power upgrades, native Shadow Walk
+  morphology, extra enemy body sizes and several contextual variants are incomplete.
+- Native physics, target ownership, equipment, action-state and campaign bindings
+  need further implementation and testing. Grey targets/neutral fixtures are offline
+  references. Ragdoll-time freezes and illustrative flights are visibly labelled.
+
+PROTECTION AND REPRODUCIBILITY
+The stable CF60 DLL, original Steam installation, original saves and SLOT81 test
+fixtures are preserved. No new gameplay DLL was deployed in this pass. Local
+first-person rigs, animations and controls remain native; wrists in the authored
+third-person library follow the full body, not fixed camera-space anchors.
+Each recording includes exact animation/model hashes and conversion provenance.
+authoring-pass-07/review-package.zip preserves this reviewed pass and evidence.
+quality-review-pass07.json records selected/superseded experiments and known gaps.
+
+CORVO CALF CORRECTION
+The user identified a shared offline calf/boot deformation after the initial
+recordings. The preview mistakenly drove calf helpers from the foot pivot.
+The corrected preview anchors them to the shin, matching native D2 position.
+See boot-seam-v1/FINDINGS.txt and comparison-grid.jpg. The corrected recordings
+retain the same animation bytes and native mesh weights. Native axial twist is
+still approximated. rebuild-status.json identifies the rebuild's completion.

@@ -1,0 +1,172 @@
+{
+  "at": "2026-10-14T00:56:27.647315+02:00",
+  "candidate": "candidate-npc-combat-v948",
+  "dll": "5433FCD5CE5E191BEE5741DEC9F2A1AA86E635FB99CBF2D53238862552BEA4F9",
+  "combatProtocol": 5,
+  "combatPacketBytes": 276,
+  "complete": false,
+  "cases": [
+    {
+      "take": "npc-ranged-host-v935",
+      "candidate": "candidate-npc-combat-v934",
+      "dll": "E578139A285835F66E913E272427F70894951C7AF716D36915F36E8EFD01441C",
+      "passed": false,
+      "source": "host",
+      "failure": "Native contact failed: all_bound_actors_retired / native_replay_failed",
+      "restored": true,
+      "scope": "Failed replay retained: inactive remote cosmetic gun incorrectly blocked reliable spread damage. No acceptance; independently restored.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-ranged-host-v937",
+      "candidate": "candidate-npc-combat-v936",
+      "dll": "0909E648EC870EDACFD21CC2EEF78BA3B58C982D4A1836D0CF98D872789B3480",
+      "passed": true,
+      "source": "host",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 0,
+      "worldOutcomes": {
+        "host": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 0,
+        "client": 0
+      },
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "method": "Viewed labelled stills extracted at 0.4, 0.9, 1.4, 2.3, 3.6 and 5.0 seconds from each unretimed 36-second game recording.",
+        "host": "Native first-person pistol, firing smoke and victim collapse are visible. The victim falls forward and remains on the floor. Local native HUD and hands remain present.",
+        "client": "Matching victim collapse is visible from the other viewpoint, partly occluded by remote Corvo. Corvo remains in a neutral sword posture; this combat fixture did not enable the ranged movement/prop presentation. Muzzle and wall-impact VFX are not visually matched. Corpse orientation/limb pose differs.",
+        "completeVisualAcceptance": false,
+        "scope": "Numeric native damage/death synchronization is supported separately by receipts. These frames do not establish finished remote shooting animation, matched impact effects or authoritative corpse physics."
+      }
+    },
+    {
+      "take": "npc-ranged-client-v938",
+      "candidate": "candidate-npc-combat-v936",
+      "dll": "0909E648EC870EDACFD21CC2EEF78BA3B58C982D4A1836D0CF98D872789B3480",
+      "passed": true,
+      "source": "client",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 2,
+      "worldOutcomes": {
+        "host": 0,
+        "client": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 0
+      },
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "method": "Viewed labelled stills at 0.4, 0.9, 1.4, 2.3, 3.6 and 5.0 seconds from both unretimed recordings.",
+        "client": "Emily's native first-person pistol firing and smoke are visible. The guard reacts, pitches forward and falls to the floor; native dead-body prompt appears. Hands and HUD remain native.",
+        "host": "The same victim reacts and falls. Remote Emily remains in a neutral stance with no visible firing gun in this damage-only fixture. The body and dropped weapon settle differently from the source; impact particles are not matched.",
+        "completeVisualAcceptance": false,
+        "scope": "Numeric native health/death and two outstanding ordered requests pass separately. Paired ranged animation/prop presentation must be enabled and tested together; complete VFX and corpse physics remain outstanding."
+      }
+    },
+    {
+      "take": "npc-combat-fixture-v940",
+      "candidate": "candidate-npc-combat-v936",
+      "dll": "0909E648EC870EDACFD21CC2EEF78BA3B58C982D4A1836D0CF98D872789B3480",
+      "passed": true,
+      "source": "host",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 0,
+      "worldOutcomes": {
+        "replicaSuppressed": 1,
+        "client": 2,
+        "host": 2,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only."
+      },
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established. Reconstructed native ignition and burning death; no secondary corpse contact in this take and no natural trigger-activation proof.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-ranged-host-presentation-v941",
+      "candidate": "candidate-npc-combat-v936",
+      "dll": "0909E648EC870EDACFD21CC2EEF78BA3B58C982D4A1836D0CF98D872789B3480",
+      "passed": true,
+      "source": "host",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 0,
+      "worldOutcomes": {
+        "replicaSuppressed": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "client": 0,
+        "host": 0
+      },
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established. Presentation attempt incomplete: equipment returned prematurely after death, muzzle effect scope refused, initial teleport caused one movement rejection. Gameplay assertions alone passed.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-ranged-host-presentation-v945",
+      "candidate": "candidate-npc-combat-v944",
+      "dll": "4A1CDED63F54FEEDEAB327680ABCD5845FDF20EB3266C9685E53413E8995A19E",
+      "passed": false,
+      "source": "host",
+      "failure": "Combined firing body/prop/muzzle did not remain valid through native damage",
+      "restored": true,
+      "scope": "Failed replay retained: legitimate native spread region maskFE rejected by earlier FF-only geometry validation. No acceptance; independently restored.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-ranged-host-presentation-v949",
+      "candidate": "candidate-npc-combat-v948",
+      "dll": "5433FCD5CE5E191BEE5741DEC9F2A1AA86E635FB99CBF2D53238862552BEA4F9",
+      "passed": true,
+      "source": "host",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 0,
+      "worldOutcomes": {
+        "client": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "host": 0,
+        "replicaSuppressed": 0
+      },
+      "scopedPresentationCountersPassed": true,
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "host": "Viewed six frames0.4-5s. Native first-person shot smoke and victim death visible; corpse remains. Fine muzzle alignment and whole paired corpse motion not accepted from sparse frames.",
+        "client": "Viewed six broad frames plus nine0.6-2.0s detail frames. Corvo extends the gun arm for firing, native flash illumination/particles appear around0.6-0.7s and the gun remains attached during recovery. Throne furniture obscures the victim and lower legs; this is limited shooter presentation evidence, not complete paired visual acceptance.",
+        "method": "Manual image inspection of extracted native wall-time video contact sheets, plus separate runtime counters.",
+        "completeVisualAcceptance": false
+      }
+    },
+    {
+      "take": "npc-ranged-client-presentation-v951",
+      "candidate": "candidate-npc-combat-v948",
+      "dll": "5433FCD5CE5E191BEE5741DEC9F2A1AA86E635FB99CBF2D53238862552BEA4F9",
+      "passed": true,
+      "source": "client",
+      "failure": null,
+      "restored": true,
+      "commits": 2,
+      "pendingHighWater": 2,
+      "worldOutcomes": {
+        "host": 0,
+        "replicaSuppressed": 0,
+        "client": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only."
+      },
+      "scopedPresentationCountersPassed": true,
+      "scope": "Scoped native damage/death, duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "client": "Viewed eight frames0.4-5s. Native first-person muzzle flash/smoke and the guard death/dismemberment are visible; victim falls and a severed limb remains. Paired limb/corpse physics remains unverified.",
+        "host": "Viewed eight frames0.4-5s. Emily extends her gun arm, the scene briefly lights at firing and particle streaks are visible; arm recovers with the prop retained. Furniture obscures much of the victim and feet. Limited firing presentation observed; full paired choreography and exact gun alignment are not accepted.",
+        "method": "Manual image inspection of extracted native wall-time video contact sheets, plus separate runtime counters.",
+        "completeVisualAcceptance": false
+      }
+    }
+  ],
+  "diagnosticFailure": "npc-ranged-inspect-v933",
+  "limitations": "Broader projectile families, source-class/AI-dependent damage modifiers, protected regions, wall impacts, authoritative limb/corpse physics, active enemy targeting both players and automatic full-world combat remain incomplete. Independent Steam-account online testing and complete movement/campaign/native session UI also remain open."
+}

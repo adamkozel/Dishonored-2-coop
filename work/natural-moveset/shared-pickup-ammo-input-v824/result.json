@@ -1,0 +1,57 @@
+{
+  "scope": "Ordinary controller X source input for one representative native pickup family; exact installed reward observation, one Steam recipient native award/removal, no API source exercise, duplicates and unrelated inventory checks. Full baseline/protected-file restoration. Source camera and per-entry outcomes preserved. NPC isolation is recorded as context; normal gameplay does not require the developer fixture. Family batch coverage is separate.",
+  "passed": true,
+  "cases": [
+    {
+      "receipt": {
+        "name": "pickups_ammo_bullet_regular_1",
+        "item": "components/equipment/ammo/bullet.inventoryitem",
+        "family": 4,
+        "maximum": 10,
+        "accepted": 1,
+        "quantity": 1,
+        "arm": 262,
+        "peerArm": 262,
+        "revision": 1,
+        "ack": 1,
+        "attempted": true,
+        "awarded": true,
+        "nativeSource": true,
+        "before": 0,
+        "after": 1,
+        "nativeCalls": 0,
+        "observations": 1,
+        "exerciseCalls": 0,
+        "result": "coin_committed_once"
+      },
+      "passed": true,
+      "role": "host"
+    },
+    {
+      "receipt": {
+        "name": "pickups_ammo_bullet_regular_1",
+        "item": "components/equipment/ammo/bullet.inventoryitem",
+        "family": 4,
+        "maximum": 10,
+        "accepted": 1,
+        "quantity": 1,
+        "arm": 262,
+        "peerArm": 262,
+        "revision": 1,
+        "ack": 1,
+        "attempted": true,
+        "awarded": true,
+        "nativeSource": false,
+        "before": 0,
+        "after": 1,
+        "nativeCalls": 5,
+        "observations": 0,
+        "exerciseCalls": 0,
+        "result": "coin_committed_once"
+      },
+      "passed": true,
+      "role": "client"
+    }
+  ],
+  "failure": null
+}

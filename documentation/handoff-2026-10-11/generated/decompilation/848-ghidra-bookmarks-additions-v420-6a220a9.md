@@ -1,0 +1,24 @@
+# ghidra-bookmarks-additions-v420.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v420.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v420.json>)
+
+SHA-256: `6A756382900CE945C022DF4C29B6187422063CD50F9C572EF7F7E4AD50FDB9FC`; 751 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "14043c950",
+    "category": "D2Coop_Doppelganger",
+    "type": "Note",
+    "comment": "417:290 owned native clone samples,134 explicit registry-retired samples with retained equipment array. Native43c950 prunes stale handles later. Cached416 live mean0.353ms; failed reads remain unknown. Checkpoint/protected14 restored. Retirement cause unproven. See chapter35."
+  },
+  {
+    "address": "14039e140",
+    "category": "D2Coop_Doppelganger",
+    "type": "Note",
+    "comment": "Do not apply helper+a0 state2 layout to arkCpntDecoy. Runtime415/417 Decoy+a0 is raw128. Equipment43e320 resolves another helper via43dcb0/875d50. Helper type remains unverified; native world observer uses registry lifetime instead."
+  }
+]
+````

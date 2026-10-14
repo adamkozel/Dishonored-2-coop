@@ -1,0 +1,167 @@
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Traceback (most recent call last):
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\modules\addon_utils.py", line 457, in enable
+    mod = importlib.import_module(module_name)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\__init__.py", line 66, in <module>
+    from . import ops
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\ops.py", line 73, in <module>
+    from .. ui import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\__init__.py", line 74, in <module>
+    from . import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_templates.py", line 77, in <module>
+    from . ui_menus import SCATTER5_PT_docs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_menus.py", line 77, in <module>
+    from ... __init__ import addon_prefs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\__init__.py", line 98, in <module>
+    from . import gatekeeper
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\gatekeeper.py", line 65, in <module>
+    from . import override
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\override.py", line 69, in <module>
+    from . import engine
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\engine.py", line 72, in <module>
+    from . import core
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\core.py", line 61, in <module>
+    import pybullet
+ModuleNotFoundError: No module named 'pybullet'
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Extensions: writing cache failed ([Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.cache\\compat.dat').
+Error: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Failed to extract path: C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\.local\lib\python3.13\site-packages\.DS_Store error [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Unable to set stale files pending: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\config\\stale-pending'
+Octane Addon Client is enabled
+OctaneBlender.init: opts = {'server': None, 'port': None, 'cert': None}
+Octane Ocio Management Update Start
+Octane Ocio Management Update End. Time cost: 0.03 secs
+AUTHORED power_windblast_fire corvo 61
+AUTHORED power_windblast_sequence corvo 61
+AUTHORED power_doppelganger_fire_in corvo 41
+AUTHORED power_doppelganger_fire_loop corvo 73
+AUTHORED power_doppelganger_fire_out corvo 41
+AUTHORED power_doppelganger_sequence corvo 153
+AUTHORED power_doppelganger_cancel corvo 25
+AUTHORED power_mesmerize_fire_in corvo 29
+AUTHORED power_mesmerize_fire_loop corvo 73
+AUTHORED power_mesmerize_fire_out corvo 41
+AUTHORED power_mesmerize_sequence corvo 141
+AUTHORED power_mesmerize_cancel corvo 25
+AUTHORED power_bend_time_fire_in corvo 33
+AUTHORED power_bend_time_fire_loop corvo 19
+AUTHORED power_bend_time_fire_out corvo 27
+AUTHORED power_bend_time_sequence corvo 77
+AUTHORED power_bend_time_cancel corvo 25
+AUTHORED power_devouring_swarm_fire_in corvo 25
+AUTHORED power_devouring_swarm_fire_loop corvo 21
+AUTHORED power_devouring_swarm_fire_out corvo 97
+AUTHORED power_devouring_swarm_sequence corvo 141
+AUTHORED power_devouring_swarm_cancel corvo 25
+AUTHORED power_dark_vision_fire corvo 57
+AUTHORED power_dark_vision_sequence corvo 57
+AUTHORED power_blink_fire_in corvo 21
+AUTHORED power_blink_fire_loop corvo 21
+AUTHORED power_blink_fire_out corvo 21
+AUTHORED power_blink_sequence corvo 61
+AUTHORED power_blink_cancel corvo 25
+AUTHORED power_possession_fire_in corvo 21
+AUTHORED power_possession_fire_loop corvo 13
+AUTHORED power_possession_fire_out corvo 25
+AUTHORED power_possession_sequence corvo 57
+AUTHORED power_possession_cancel corvo 25
+AUTHORED power_far_reach_fire_in corvo 13
+AUTHORED power_far_reach_fire_in_loop corvo 13
+AUTHORED power_far_reach_fire_out corvo 9
+AUTHORED power_far_reach_fire_out_loop corvo 29
+AUTHORED power_far_reach_pull_in corvo 17
+AUTHORED power_far_reach_pull_loop corvo 7
+AUTHORED power_far_reach_pull_out corvo 23
+AUTHORED power_far_reach_sequence corvo 105
+AUTHORED power_far_reach_cancel corvo 25
+AUTHORED power_domino_select_in corvo 17
+AUTHORED power_domino_select_loop corvo 81
+AUTHORED power_domino_fire corvo 31
+AUTHORED power_domino_select_out corvo 25
+AUTHORED power_domino_sequence corvo 151
+AUTHORED power_domino_cancel corvo 25
+AUTHORED power_windblast_fire emily 61
+AUTHORED power_windblast_sequence emily 61
+AUTHORED power_doppelganger_fire_in emily 41
+AUTHORED power_doppelganger_fire_loop emily 73
+AUTHORED power_doppelganger_fire_out emily 41
+AUTHORED power_doppelganger_sequence emily 153
+AUTHORED power_doppelganger_cancel emily 25
+AUTHORED power_mesmerize_fire_in emily 29
+AUTHORED power_mesmerize_fire_loop emily 73
+AUTHORED power_mesmerize_fire_out emily 41
+AUTHORED power_mesmerize_sequence emily 141
+AUTHORED power_mesmerize_cancel emily 25
+AUTHORED power_bend_time_fire_in emily 33
+AUTHORED power_bend_time_fire_loop emily 19
+AUTHORED power_bend_time_fire_out emily 27
+AUTHORED power_bend_time_sequence emily 77
+AUTHORED power_bend_time_cancel emily 25
+AUTHORED power_devouring_swarm_fire_in emily 25
+AUTHORED power_devouring_swarm_fire_loop emily 21
+AUTHORED power_devouring_swarm_fire_out emily 97
+AUTHORED power_devouring_swarm_sequence emily 141
+AUTHORED power_devouring_swarm_cancel emily 25
+AUTHORED power_dark_vision_fire emily 57
+AUTHORED power_dark_vision_sequence emily 57
+AUTHORED power_blink_fire_in emily 21
+AUTHORED power_blink_fire_loop emily 21
+AUTHORED power_blink_fire_out emily 21
+AUTHORED power_blink_sequence emily 61
+AUTHORED power_blink_cancel emily 25
+AUTHORED power_possession_fire_in emily 21
+AUTHORED power_possession_fire_loop emily 13
+AUTHORED power_possession_fire_out emily 25
+AUTHORED power_possession_sequence emily 57
+AUTHORED power_possession_cancel emily 25
+AUTHORED power_far_reach_fire_in emily 13
+AUTHORED power_far_reach_fire_in_loop emily 13
+AUTHORED power_far_reach_fire_out emily 9
+AUTHORED power_far_reach_fire_out_loop emily 29
+AUTHORED power_far_reach_pull_in emily 17
+AUTHORED power_far_reach_pull_loop emily 7
+AUTHORED power_far_reach_pull_out emily 23
+AUTHORED power_far_reach_sequence emily 105
+AUTHORED power_far_reach_cancel emily 25
+AUTHORED power_domino_select_in emily 17
+AUTHORED power_domino_select_loop emily 81
+AUTHORED power_domino_fire emily 31
+AUTHORED power_domino_select_out emily 25
+AUTHORED power_domino_sequence emily 151
+AUTHORED power_domino_cancel emily 25
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+
+Blender quit

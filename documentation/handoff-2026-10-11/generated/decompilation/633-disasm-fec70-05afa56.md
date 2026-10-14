@@ -1,0 +1,66 @@
+# disasm-fec70.txt
+
+Original: [work/disasm-fec70.txt](<../../../../work/disasm-fec70.txt>)
+
+SHA-256: `033825821CA6B20FE4F2AFA008E15DA74490ECF75BEA024F8903FB9391A22991`; 2240 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001400FEC70: add         rcx,18h
+  00000001400FEC74: jmp         0000000140140530
+  00000001400FEC79: int         3
+  00000001400FEC7A: int         3
+  00000001400FEC7B: int         3
+  00000001400FEC7C: int         3
+  00000001400FEC7D: int         3
+  00000001400FEC7E: int         3
+  00000001400FEC7F: int         3
+  00000001400FEC80: sub         rsp,38h
+  00000001400FEC84: mov         rdx,rcx
+  00000001400FEC87: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FEC8E: lea         r9,[0000000141AE6614h]
+  00000001400FEC95: mov         rax,qword ptr [rcx]
+  00000001400FEC98: lea         r8,[0000000141AB3128h]
+  00000001400FEC9F: mov         byte ptr [rsp+20h],1
+  00000001400FECA4: call        qword ptr [rax+0000000000000088h]
+  00000001400FECAA: add         rsp,38h
+  00000001400FECAE: ret
+  00000001400FECAF: int         3
+  00000001400FECB0: sub         rsp,38h
+  00000001400FECB4: mov         rdx,rcx
+  00000001400FECB7: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FECBE: lea         r9,[0000000141AE2F04h]
+  00000001400FECC5: mov         rax,qword ptr [rcx]
+  00000001400FECC8: lea         r8,[0000000141AB3128h]
+  00000001400FECCF: mov         byte ptr [rsp+20h],1
+  00000001400FECD4: call        qword ptr [rax+0000000000000088h]
+  00000001400FECDA: add         rsp,38h
+  00000001400FECDE: ret
+  00000001400FECDF: int         3
+  00000001400FECE0: sub         rsp,38h
+  00000001400FECE4: mov         rdx,rcx
+  00000001400FECE7: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FECEE: lea         r9,[0000000141AB2848h]
+  00000001400FECF5: mov         rax,qword ptr [rcx]
+  00000001400FECF8: lea         r8,[0000000141AB3128h]
+  00000001400FECFF: mov         byte ptr [rsp+20h],1
+  00000001400FED04: call        qword ptr [rax+0000000000000088h]
+  00000001400FED0A: add         rsp,38h
+  00000001400FED0E: ret
+  00000001400FED0F: int         3
+  00000001400FED10: 48
+
+  Summary
+
+     1A7D000 .text
+
+````

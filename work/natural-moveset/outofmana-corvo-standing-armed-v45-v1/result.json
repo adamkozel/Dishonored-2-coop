@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "source": "host",
+  "noManaExperiment": true,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Exact v40 bank active on the native Steam remote avatar",
+    "Normal native activation consumes mana; the next activation attempt has less than the measured expenditure",
+    "Both failed requests produce distinct native out-of-mana scenes",
+    "All four controller requests are consumed; failed requests produce no power activation or BendTime scene",
+    "Failed request spends no further measured native mana",
+    "Normal controller casting produced native BendTime scene observations",
+    "Two distinct owned native failure scenes each drive one remote body event over Steam",
+    "Remote failure recovers to standing with original sword, health and no observer screen effect",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.872,
+      "action": "Native LT press 250ms",
+      "index": 0,
+      "ms": 1132,
+      "inputSequence": 746538236
+    },
+    {
+      "seconds": 3.807,
+      "action": "Native LT press 250ms",
+      "index": 1,
+      "ms": 3067,
+      "inputSequence": 746540172
+    },
+    {
+      "seconds": 6.98,
+      "action": "Native LT press 250ms",
+      "index": 2,
+      "ms": 6240,
+      "inputSequence": 746543345
+    },
+    {
+      "seconds": 8.807,
+      "action": "Native LT press 250ms",
+      "index": 3,
+      "ms": 8067,
+      "inputSequence": 746545172
+    }
+  ],
+  "dll": "296BC0E7ACCB700A86D0D4BCCC7E7EAE1926B813D07892627A219511EB2E74F7",
+  "bankSha256": "1B97B5989EC715B2898FB6AED3F0F45AB170DFA8A9949C4D729B32A8849258B8",
+  "capture": "Paired actual D2 source and remote body videos with native scene, Steam and presentation evidence",
+  "scope": "Corvo standing armed Bend Time failure response from exact native scene ownership. No generic failure, crouch/air/slide, other powers or Emily binding claimed. Native time dilation remains source-local; no remote power activation or animation damage. Original files unchanged."
+}

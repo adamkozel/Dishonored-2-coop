@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "check": "base ownership and restoration checks pass",
+      "passed": true
+    },
+    {
+      "check": "native snapshot bound during early blend",
+      "passed": true
+    },
+    {
+      "check": "retarget setup waits until blend completes",
+      "passed": true
+    },
+    {
+      "check": "early victim root stays within 12 cm of intended carrier root",
+      "passed": true
+    },
+    {
+      "check": "recorded activation follows snapshot restoration and 850ms gate",
+      "passed": true
+    },
+    {
+      "check": "final fixture and snapshot bindings retired",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "early_samples": 4,
+  "early_root_vertical_deviation_m": 3.9999999046358425e-07,
+  "raw_root_shift_from_ragdoll_origin_m": 0.16915130000001,
+  "first_attachment_status_age_ms": 609,
+  "transition_stamps": [
+    {
+      "restored_ms": 812,
+      "attached_ms": 859
+    }
+  ],
+  "video_sha256": "99DAD532F2D3ACC9635C09D80E6B98B35CD06E2A76D77AD22F2F6B37D867A785",
+  "actual_capture_hz": 26.454545454545453,
+  "complete": false,
+  "visual_accepted": false,
+  "scope": "Native pose blend and deferred attachment only. Carrier lift acting and automatic native pickup timing remain unimplemented."
+}

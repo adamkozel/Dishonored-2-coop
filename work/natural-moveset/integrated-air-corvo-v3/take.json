@@ -1,0 +1,156 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791654077477,
+  "captureStart": 1791654076358,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.122,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing jump",
+      "seconds": 2.635,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Held jump",
+      "seconds": 6.137,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch",
+      "seconds": 10.142,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched jump and landing",
+      "seconds": 12.129,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 16.123,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Move into jump",
+      "seconds": 18.126,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Moving jump",
+      "seconds": 18.42,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Landing recovery",
+      "seconds": 22.163,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 24.165,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      0,
+      180,
+      "A",
+      0,
+      "Standing jump"
+    ],
+    [
+      5000,
+      0,
+      0,
+      800,
+      "A",
+      0,
+      "Held jump"
+    ],
+    [
+      9000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch"
+    ],
+    [
+      11000,
+      0,
+      0,
+      180,
+      "A",
+      0,
+      "Crouched jump and landing"
+    ],
+    [
+      15000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Standing recovery"
+    ],
+    [
+      17000,
+      0,
+      18000,
+      500,
+      "Neutral",
+      0,
+      "Move into jump"
+    ],
+    [
+      17300,
+      0,
+      18000,
+      180,
+      "A",
+      0,
+      "Moving jump"
+    ],
+    [
+      21000,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Landing recovery"
+    ],
+    [
+      23000,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
+  "bank": "3FAC85F7CF38B8F8DAF40281EF09FC3859E65ED7C4DB4732BDD73C906FC54A59",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

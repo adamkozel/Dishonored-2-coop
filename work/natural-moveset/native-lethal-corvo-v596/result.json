@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "52ADA3D0CCAF40919300F0CB43151250CBE65508FF150CCA2352FAE0BD424963",
+  "checks": [
+    "Ordinary RT behind native guard starts assassination scene; exact state/ownership still requires analysis",
+    "Native ordinary RT250ms behind exact authored guard2; source-only action research, not a remote lethal binding.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "name": "rear-lethal",
+        "yaw": 90,
+        "distance": 1.15,
+        "stance": 0
+      },
+      "key": "host-rear-lethal",
+      "count": 92,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Source-only native lethal takedown observation, ordinary RT250ms. Captures exact source phases/state/target and actual game video. No new remote lethal binding or shared victim outcome is claimed. All checkpoint inventory/health and14 protected files restored."
+}

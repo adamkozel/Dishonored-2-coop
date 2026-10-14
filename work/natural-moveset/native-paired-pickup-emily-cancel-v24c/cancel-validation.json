@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": {
+    "carrier_checks": true,
+    "cancel_during_transfer": true,
+    "no_attachment_created": true,
+    "one_release": true,
+    "retired_within_1200ms": true,
+    "retarget_absent": true,
+    "native_ragdoll_restored": true,
+    "corpse_dead": true,
+    "corpse_remains_local": true,
+    "movement_and_stream_retired": true
+  },
+  "snapshot_samples": 8,
+  "cancel_ms": 2590,
+  "corpse_root_displacement_m": 0.1433411215025684,
+  "video_sha256": "A63D53E9217FEC58F8E33A3C99D140A94E10EF85382BEBFFF5C14320A0E6B71B",
+  "actual_capture_hz": 27.53846153846154,
+  "scope": "Cancel the source-timed Mayhew victim transfer before reciprocal attachment, while native player pickup continues. Tests restoration of native ragdoll and snapshot ownership only; no complete gameplay pickup claim.",
+  "complete": false,
+  "visual_accepted": false
+}

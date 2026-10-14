@@ -1,0 +1,51 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001408761D0: push        rdi
+  00000001408761D2: sub         rsp,30h
+  00000001408761D6: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001408761DF: mov         qword ptr [rsp+48h],rbx
+  00000001408761E4: mov         rdi,rdx
+  00000001408761E7: mov         rbx,rcx
+  00000001408761EA: mov         rax,qword ptr [rcx]
+  00000001408761ED: call        qword ptr [rax]
+  00000001408761EF: mov         ecx,dword ptr [rax+60h]
+  00000001408761F2: cmp         ecx,dword ptr [00000001439F1C10h]
+  00000001408761F8: jl          0000000140876227
+  00000001408761FA: cmp         ecx,dword ptr [00000001439F1C14h]
+  0000000140876200: jg          0000000140876227
+  0000000140876202: mov         ecx,28h
+  0000000140876207: call        00000001400F13F0
+  000000014087620C: mov         qword ptr [rsp+40h],rax
+  0000000140876211: test        rax,rax
+  0000000140876214: je          0000000140876225
+  0000000140876216: mov         r8,rbx
+  0000000140876219: mov         rdx,rdi
+  000000014087621C: mov         rcx,rax
+  000000014087621F: call        000000014087F2E0
+  0000000140876224: nop
+  0000000140876225: jmp         000000014087624A
+  0000000140876227: mov         ecx,28h
+  000000014087622C: call        00000001400F13F0
+  0000000140876231: mov         qword ptr [rsp+40h],rax
+  0000000140876236: test        rax,rax
+  0000000140876239: je          000000014087624A
+  000000014087623B: mov         r8,rbx
+  000000014087623E: mov         rdx,rdi
+  0000000140876241: mov         rcx,rax
+  0000000140876244: call        0000000140873540
+  0000000140876249: nop
+  000000014087624A: mov         rbx,qword ptr [rsp+48h]
+  000000014087624F: add         rsp,30h
+  0000000140876253: pop         rdi
+  0000000140876254: ret
+  0000000140876255: int         3
+
+  Summary
+
+     1A7D000 .text

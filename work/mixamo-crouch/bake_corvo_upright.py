@@ -1,0 +1,10 @@
+from pathlib import Path
+root=Path(r'C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/mixamo-crouch')
+code=(root/'bake_corvo.py').read_text()
+code=code.replace("scenes['D2_Mixamo_Source']","scenes['D2_Mixamo_Corvo_Upright']")
+code=code.replace("objects['Armature']","objects['D2_Mixamo_Corvo_Upright_Rig']")
+code=code.replace("'corvo-clip.json'","'corvo-upright-clip.json'")
+code=code.replace("'mixamo_corvo_clip.h'","'mixamo_corvo_upright_clip.h'")
+code=code.replace("'crouched-walking-source.blend'","'crouched-walking-corvo-upright.blend'")
+code=code.replace('D2_Mixamo_ProofCamera','D2_Mixamo_Corvo_Upright_Camera')
+exec(compile(code,str(root/'bake_corvo.py'),'exec'))

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host: armed=True stance=0 native vertical peek selects a complete body pose",
+    "host: armed=True stance=0 side transition, lower and native movement/turn exit preserve equipment",
+    "host: armed=True stance=1 native vertical peek selects a complete body pose",
+    "host: armed=True stance=1 side transition, lower and native movement/turn exit preserve equipment",
+    "host: armed=False stance=0 native vertical peek selects a complete body pose",
+    "host: armed=False stance=0 side transition, lower and native movement/turn exit preserve equipment",
+    "host: armed=False stance=1 native vertical peek selects a complete body pose",
+    "host: armed=False stance=1 side transition, lower and native movement/turn exit preserve equipment",
+    "host: native armed recovery and both player/avatar health preserved",
+    "client: armed=True stance=0 native vertical peek selects a complete body pose",
+    "client: armed=True stance=0 side transition, lower and native movement/turn exit preserve equipment",
+    "client: armed=True stance=1 native vertical peek selects a complete body pose",
+    "client: armed=True stance=1 side transition, lower and native movement/turn exit preserve equipment",
+    "client: armed=False stance=0 native vertical peek selects a complete body pose",
+    "client: armed=False stance=0 side transition, lower and native movement/turn exit preserve equipment",
+    "client: armed=False stance=1 native vertical peek selects a complete body pose",
+    "client: armed=False stance=1 side transition, lower and native movement/turn exit preserve equipment",
+    "client: native armed recovery and both player/avatar health preserved"
+  ],
+  "dll": "5347B627587550169E79C04A2E1A99A12ED89B520D9E90D23A43C408A5CF859B",
+  "scope": "Native vertical/lateral peek input, Steam state replication, full-body bank, equipment recovery and health. Visual posture, arbitrary geometry and complete movement acceptance remain separate."
+}

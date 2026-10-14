@@ -1,0 +1,237 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  00000001407BE410: push        rbx
+  00000001407BE412: sub         rsp,20h
+  00000001407BE416: mov         rcx,qword ptr [rcx+28h]
+  00000001407BE41A: mov         rbx,rdx
+  00000001407BE41D: call        00000001404C17A0
+  00000001407BE422: test        rax,rax
+  00000001407BE425: je          00000001407BE43D
+  00000001407BE427: mov         r9b,1
+  00000001407BE42A: xor         r8d,r8d
+  00000001407BE42D: mov         rdx,rbx
+  00000001407BE430: mov         rcx,rax
+  00000001407BE433: add         rsp,20h
+  00000001407BE437: pop         rbx
+  00000001407BE438: jmp         00000001407C37B0
+  00000001407BE43D: add         rsp,20h
+  00000001407BE441: pop         rbx
+  00000001407BE442: ret
+  00000001407BE443: int         3
+  00000001407BE444: int         3
+  00000001407BE445: int         3
+  00000001407BE446: int         3
+  00000001407BE447: int         3
+  00000001407BE448: int         3
+  00000001407BE449: int         3
+  00000001407BE44A: int         3
+  00000001407BE44B: int         3
+  00000001407BE44C: int         3
+  00000001407BE44D: int         3
+  00000001407BE44E: int         3
+  00000001407BE44F: int         3
+  00000001407BE450: mov         qword ptr [rsp+18h],rbp
+  00000001407BE455: push        rsi
+  00000001407BE456: sub         rsp,20h
+  00000001407BE45A: mov         rsi,rcx
+  00000001407BE45D: mov         rcx,qword ptr [rcx+28h]
+  00000001407BE461: mov         rbp,rdx
+  00000001407BE464: call        00000001404C17A0
+  00000001407BE469: test        rax,rax
+  00000001407BE46C: je          00000001407BE4C7
+  00000001407BE46E: mov         qword ptr [rsp+38h],rdi
+  00000001407BE473: lea         rdi,[rax+8]
+  00000001407BE477: mov         rax,qword ptr [rax+8]
+  00000001407BE47B: cmp         byte ptr [rax],0
+  00000001407BE47E: je          00000001407BE4C2
+  00000001407BE480: mov         rcx,qword ptr [rsi+20h]
+  00000001407BE484: mov         qword ptr [rsp+30h],rbx
+  00000001407BE489: mov         rbx,qword ptr [00000001439A5290h]
+  00000001407BE490: call        00000001407BBF20
+  00000001407BE495: lea         rcx,[rbx+00000000001F6E48h]
+  00000001407BE49C: mov         rdx,rdi
+  00000001407BE49F: mov         r8,rax
+  00000001407BE4A2: call        00000001407BF760
+  00000001407BE4A7: mov         rbx,qword ptr [rsp+30h]
+  00000001407BE4AC: test        rax,rax
+  00000001407BE4AF: je          00000001407BE4C2
+  00000001407BE4B1: mov         r9b,1
+  00000001407BE4B4: xor         r8d,r8d
+  00000001407BE4B7: mov         rdx,rbp
+  00000001407BE4BA: mov         rcx,rax
+  00000001407BE4BD: call        00000001407916B0
+  00000001407BE4C2: mov         rdi,qword ptr [rsp+38h]
+  00000001407BE4C7: mov         rbp,qword ptr [rsp+40h]
+  00000001407BE4CC: add         rsp,20h
+  00000001407BE4D0: pop         rsi
+  00000001407BE4D1: ret
+  00000001407BE4D2: int         3
+  00000001407BE4D3: int         3
+  00000001407BE4D4: int         3
+  00000001407BE4D5: int         3
+  00000001407BE4D6: int         3
+  00000001407BE4D7: int         3
+  00000001407BE4D8: int         3
+  00000001407BE4D9: int         3
+  00000001407BE4DA: int         3
+  00000001407BE4DB: int         3
+  00000001407BE4DC: int         3
+  00000001407BE4DD: int         3
+  00000001407BE4DE: int         3
+  00000001407BE4DF: int         3
+  00000001407BE4E0: mov         rcx,qword ptr [rcx+28h]
+  00000001407BE4E4: jmp         00000001404C17A0
+  00000001407BE4E9: int         3
+  00000001407BE4EA: int         3
+  00000001407BE4EB: int         3
+  00000001407BE4EC: int         3
+  00000001407BE4ED: int         3
+  00000001407BE4EE: int         3
+  00000001407BE4EF: int         3
+  00000001407BE4F0: 48
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  00000001407185B0: mov         rax,rsp
+  00000001407185B3: mov         qword ptr [rax+8],rbx
+  00000001407185B7: push        rdi
+  00000001407185B8: sub         rsp,0A0h
+  00000001407185BF: movaps      xmmword ptr [rax-18h],xmm6
+  00000001407185C3: movaps      xmmword ptr [rax-28h],xmm7
+  00000001407185C7: mov         rax,qword ptr [rcx]
+  00000001407185CA: mov         rbx,rcx
+  00000001407185CD: movaps      xmm6,xmm1
+  00000001407185D0: call        qword ptr [rax+00000000000000D8h]
+  00000001407185D6: movaps      xmm7,xmm0
+  00000001407185D9: movss       xmm0,dword ptr [rbx+20h]
+  00000001407185DE: addss       xmm0,dword ptr [0000000141AB3764h]
+  00000001407185E6: call        00000001411AD95C
+  00000001407185EB: cvttss2si   edi,xmm0
+  00000001407185EF: xorps       xmm0,xmm0
+  00000001407185F2: comiss      xmm0,xmm6
+  00000001407185F5: ja          0000000140718604
+  00000001407185F7: comiss      xmm6,xmm7
+  00000001407185FA: jbe         0000000140718601
+  00000001407185FC: movaps      xmm0,xmm7
+  00000001407185FF: jmp         0000000140718604
+  0000000140718601: movaps      xmm0,xmm6
+  0000000140718604: movss       dword ptr [rbx+20h],xmm0
+  0000000140718609: addss       xmm0,dword ptr [0000000141AB3764h]
+  0000000140718611: call        00000001411AD95C
+  0000000140718616: cvttss2si   eax,xmm0
+  000000014071861A: cmp         edi,eax
+  000000014071861C: je          000000014071865E
+  000000014071861E: mov         rcx,qword ptr [rbx+10h]
+  0000000140718622: mov         dword ptr [rsp+38h],eax
+  0000000140718626: lea         rax,[rsp+30h]
+  000000014071862B: lea         r9,[rsp+48h]
+  0000000140718630: lea         r8,[00000001439AB030h]
+  0000000140718637: lea         rdx,[rsp+60h]
+  000000014071863C: mov         qword ptr [rsp+20h],rax
+  0000000140718641: mov         byte ptr [rsp+30h],69h
+  0000000140718646: mov         byte ptr [rsp+48h],69h
+  000000014071864B: mov         dword ptr [rsp+50h],edi
+  000000014071864F: call        00000001408848A0
+  0000000140718654: lea         rcx,[rsp+60h]
+  0000000140718659: call        0000000140882FC0
+  000000014071865E: lea         r11,[rsp+00000000000000A0h]
+  0000000140718666: mov         rbx,qword ptr [r11+10h]
+  000000014071866A: movaps      xmm6,xmmword ptr [r11-10h]
+  000000014071866F: movaps      xmm7,xmmword ptr [r11-20h]
+  0000000140718674: mov         rsp,r11
+  0000000140718677: pop         rdi
+  0000000140718678: ret
+  0000000140718679: int         3
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140717C80: mov         qword ptr [rsp+8],rbx
+  0000000140717C85: mov         qword ptr [rsp+10h],rsi
+  0000000140717C8A: push        rdi
+  0000000140717C8B: sub         rsp,20h
+  0000000140717C8F: mov         rdi,rcx
+  0000000140717C92: call        00000001407E7380
+  0000000140717C97: xor         edx,edx
+  0000000140717C99: lea         r8d,[rdx+1]
+  0000000140717C9D: lea         rcx,[rax+0000000000000C0Ch]
+  0000000140717CA4: mov         rsi,rax
+  0000000140717CA7: call        00000001401581C0
+  0000000140717CAC: cmp         eax,1
+  0000000140717CAF: jne         0000000140717CCA
+  0000000140717CB1: pause
+  0000000140717CB3: xor         edx,edx
+  0000000140717CB5: lea         rcx,[rsi+0000000000000C0Ch]
+  0000000140717CBC: lea         r8d,[rdx+1]
+  0000000140717CC0: call        00000001401581C0
+  0000000140717CC5: cmp         eax,1
+  0000000140717CC8: je          0000000140717CB1
+  0000000140717CCA: mov         rcx,qword ptr [rsi+00000000000001D8h]
+  0000000140717CD1: mov         rdx,rdi
+  0000000140717CD4: call        000000014048FF20
+  0000000140717CD9: lea         rcx,[rsi+0000000000000C0Ch]
+  0000000140717CE0: xor         edx,edx
+  0000000140717CE2: call        00000001401581E0
+  0000000140717CE7: call        00000001407E7380
+  0000000140717CEC: mov         rdx,rdi
+  0000000140717CEF: mov         rcx,rax
+  0000000140717CF2: mov         rbx,qword ptr [rsp+30h]
+  0000000140717CF7: mov         rsi,qword ptr [rsp+38h]
+  0000000140717CFC: add         rsp,20h
+  0000000140717D00: pop         rdi
+  0000000140717D01: jmp         00000001407EC5A0
+  0000000140717D06: int         3
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140719660: mov         qword ptr [rsp+8],rbx
+  0000000140719665: mov         qword ptr [rsp+10h],rsi
+  000000014071966A: push        rdi
+  000000014071966B: sub         rsp,20h
+  000000014071966F: mov         rdi,rcx
+  0000000140719672: call        00000001407E7380
+  0000000140719677: xor         edx,edx
+  0000000140719679: lea         r8d,[rdx+1]
+  000000014071967D: lea         rcx,[rax+0000000000000C0Ch]
+  0000000140719684: mov         rsi,rax
+  0000000140719687: call        00000001401581C0
+  000000014071968C: cmp         eax,1
+  000000014071968F: jne         00000001407196AA
+  0000000140719691: pause
+  0000000140719693: xor         edx,edx
+  0000000140719695: lea         rcx,[rsi+0000000000000C0Ch]
+  000000014071969C: lea         r8d,[rdx+1]
+  00000001407196A0: call        00000001401581C0
+  00000001407196A5: cmp         eax,1
+  00000001407196A8: je          0000000140719691
+  00000001407196AA: mov         rcx,qword ptr [rsi+0000000000000088h]
+  00000001407196B1: mov         rdx,rdi
+  00000001407196B4: call        000000014048FF20
+  00000001407196B9: lea         rcx,[rsi+0000000000000C0Ch]
+  00000001407196C0: xor         edx,edx
+  00000001407196C2: call        00000001401581E0
+  00000001407196C7: call        00000001407E7380
+  00000001407196CC: mov         rdx,rdi
+  00000001407196CF: mov         rcx,rax
+  00000001407196D2: mov         rbx,qword ptr [rsp+30h]
+  00000001407196D7: mov         rsi,qword ptr [rsp+38h]
+  00000001407196DC: add         rsp,20h
+  00000001407196E0: pop         rdi
+  00000001407196E1: jmp         00000001407EC5A0
+  00000001407196E6: int         3

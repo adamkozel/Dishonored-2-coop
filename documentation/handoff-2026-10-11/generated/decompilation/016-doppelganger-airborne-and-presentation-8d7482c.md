@@ -1,0 +1,215 @@
+# doppelganger-airborne-and-presentation.json
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/doppelganger-airborne-and-presentation.json](<../../../../outputs/d2-coop-lab/analysis/ghidra/doppelganger-airborne-and-presentation.json>)
+
+SHA-256: `CD91436B20CFA72745B1D37BC0575F207BD67368D8E940593D48F8A27DD8D480`; 7187 bytes.
+
+## Original saved record
+
+````json
+{
+  "ExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "At": "2026-10-09T10:33:20.462Z",
+  "PlayDecompilation": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\n/* Confirmed static trace for exact B671 executable. Native AnimBasic model-declared entries; owned\r\n   Doppelganger full-body experiment only. No assertion of replicated player combat. Play params:\r\n   component, channel, signed char index, float weight, int mode (0 once / 1 stay / 2 loop), float\r\n   rate, int startTime, bool waitCurrentEnd. */\r\n\r\nundefined8\r\nD2_AnimBasic_Play(longlong param_1,int param_2,char param_3,float param_4,undefined4 param_5,\r\n                 undefined4 param_6,undefined4 param_7,undefined1 param_8)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined4 local_48;\r\n  undefined1 uStack_31;\r\n  undefined4 local_28;\r\n  float fStack_24;\r\n  undefined4 uStack_20;\r\n  undefined4 uStack_1c;\r\n  undefined8 local_18;\r\n  \r\n  if ((-1 < param_3) && (0.0 < param_4)) {\r\n    lVar1 = *(longlong *)(param_1 + 0x390 + (longlong)param_2 * 8);\r\n    if (lVar1 != 0) {\r\n      local_48 = CONCAT31(local_48._1_3_,param_3);\r\n      local_28 = local_48;\r\n      uStack_20 = param_5;\r\n      uStack_1c = param_6;\r\n      local_18 = CONCAT17(uStack_31,CONCAT25(1,CONCAT14(param_8,param_7)));\r\n      fStack_24 = param_4;\r\n      FUN_1406e1fe0(param_1 + 0x338,lVar1,&local_28);\r\n      return 1;\r\n    }\r\n  }\r\n  return 0;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\n/* Confirmed static trace for exact B671 executable. Native AnimBasic model-declared entries; owned\r\n   Doppelganger full-body experiment only. No assertion of replicated player combat. Play params:\r\n   component, channel, signed char index, float weight, int mode (0 once / 1 stay / 2 loop), float\r\n   rate, int startTime, bool waitCurrentEnd. */\r\n\r\nundefined8\r\nD2_AnimBasic_Play(longlong param_1,int param_2,char param_3,float param_4,undefined4 param_5,\r\n                 undefined4 param_6,undefined4 param_7,undefined1 param_8)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined4 local_48;\r\n  undefined1 uStack_31;\r\n  undefined4 local_28;\r\n  float fStack_24;\r\n  undefined4 uStack_20;\r\n  undefined4 uStack_1c;\r\n  undefined8 local_18;\r\n  \r\n  if ((-1 < param_3) && (0.0 < param_4)) {\r\n    lVar1 = *(longlong *)(param_1 + 0x390 + (longlong)param_2 * 8);\r\n    if (lVar1 != 0) {\r\n      local_48 = CONCAT31(local_48._1_3_,param_3);\r\n      local_28 = local_48;\r\n      uStack_20 = param_5;\r\n      uStack_1c = param_6;\r\n      local_18 = CONCAT17(uStack_31,CONCAT25(1,CONCAT14(param_8,param_7)));\r\n      fStack_24 = param_4;\r\n      FUN_1406e1fe0(param_1 + 0x338,lVar1,&local_28);\r\n      return 1;\r\n    }\r\n  }\r\n  return 0;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  "ModeRegistration": {
+    "result": "\r\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\r\n\r\nvoid FUN_1415e6690(void)\r\n\r\n{\r\n  FUN_140131f90(&DAT_143b76d70,\"arkAnimBasic\",0);\r\n  FUN_140131f90(&DAT_143b76d78,&DAT_141ab3cc8,0);\r\n  FUN_140131f90(&DAT_143b76d80,\"m_animBasic\",0);\r\n  _DAT_143b76d90 = 0;\r\n  uRam0000000143b76d98 = 1;\r\n  _DAT_143b76d88 = 0;\r\n  _DAT_143b76d8c = 8;\r\n  _DAT_143b76da0 = 0;\r\n  _DAT_143b76da8 = 0;\r\n  _DAT_143b76db0 = 0;\r\n  FUN_140131f90(&DAT_143b76db8,\"float\",0);\r\n  FUN_140131ae0(&DAT_143b76dc0);\r\n  FUN_140131f90(&DAT_143b76dc8,\"m_maxWeight\",0);\r\n  _DAT_143b76dd8 = &PTR_PTR_1422fff20;\r\n  _DAT_143b76dd0 = 8;\r\n  _DAT_143b76dd4 = 4;\r\n  _DAT_143b76de0 = 0;\r\n  _DAT_143b76de8 = 0;\r\n  _DAT_143b76df0 = 0;\r\n  _DAT_143b76df8 = 0;\r\n  FUN_140131f90(&DAT_143b76e00,\"float\",0);\r\n  FUN_140131ae0(&DAT_143b76e08);\r\n  FUN_140131f90(&DAT_143b76e10,\"m_curWeight\",0);\r\n  _DAT_143b76e18 = 0xc;\r\n  _DAT_143b76e1c = 4;\r\n  _DAT_143b76e20 = &PTR_PTR_1422fff20;\r\n  _DAT_143b76e28 = 0;\r\n  _DAT_143b76e30 = 0;\r\n  _DAT_143b76e38 = 0;\r\n  _DAT_143b76e40 = 0;\r\n  FUN_140131f90(&DAT_143b76e48,\"float\",0);\r\n  FUN_140131ae0(&DAT_143b76e50);\r\n  FUN_140131f90(&DAT_143b76e58,\"m_playRate\",0);\r\n  _DAT_143b76e60 = 0x10;\r\n  _DAT_143b76e64 = 4;\r\n  _DAT_143b76e68 = &PTR_PTR_1422fff20;\r\n  _DAT_143b76e70 = 0;\r\n  _DAT_143b76e78 = 0;\r\n  _DAT_143b76e80 = 0;\r\n  _DAT_143b76e88 = 0;\r\n  FUN_140131f90(&DAT_143b76e90,\"durationTime_t\",0);\r\n  FUN_140131ae0(&DAT_143b76e98);\r\n  FUN_140131f90(&DAT_143b76ea0,\"m_curTime\",0);\r\n  _DAT_143b76eb0 = &PTR_PTR_1423002a0;\r\n  _DAT_143b76ea8 = 0x14;\r\n  _DAT_143b76eac = 4;\r\n  _DAT_143b76eb8 = 0;\r\n  _DAT_143b76ec0 = 0;\r\n  _DAT_143b76ec8 = 0;\r\n  _DAT_143b76ed0 = 0;\r\n  FUN_140131f90(&DAT_143b76ed8,\"durationTime_t\",0);\r\n  FUN_140131ae0(&DAT_143b76ee0);\r\n  FUN_140131f90(&DAT_143b76ee8,\"m_curBlendDuration\",0);\r\n  _DAT_143b76ef0 = 0x18;\r\n  _DAT_143b76ef4 = 4;\r\n  _DAT_143b76ef8 = &PTR_PTR_1423002a0;\r\n  _DAT_143b76f00 = 0;\r\n  _DAT_143b76f08 = 0;\r\n  _DAT_143b76f10 = 0;\r\n  _DAT_143b76f18 = 0;\r\n  FUN_140131f90(&DAT_143b76f20,\"arkAnimBasicPlayMode_t\",0);\r\n  FUN_140131ae0(&DAT_143b76f28);\r\n  FUN_140131f90(&DAT_143b76f30,\"m_playMode\",0);\r\n  _DAT_143b76f40 = &PTR_PTR_14235f3f0;\r\n  _DAT_143b76f38 = 0x1c;\r\n  _DAT_143b76f3c = 4;\r\n  _DAT_143b76f48 = 0;\r\n  _DAT_143b76f50 = 0;\r\n  _DAT_143b76f58 = 0;\r\n  _DAT_143b76f60 = 0;\r\n  FUN_140131f90(&DAT_143b76f68,\"arkAnimTreeNodeBasicProp::blendType_t\",0);\r\n  FUN_140131ae0(&DAT_143b76f70);\r\n  FUN_140131f90(&DAT_143b76f78,\"m_curBlendType\",0);\r\n  _DAT_143b76f80 = 0x20;\r\n  _DAT_143b76f84 = 4;\r\n  _DAT_143b76f88 = 0;\r\n  _DAT_143b76f90 = 0;\r\n  _DAT_143b76f98 = 0;\r\n  _DAT_143b76fa0 = 0;\r\n  _DAT_143b76fa8 = 0;\r\n  FUN_140131f90(&DAT_143b76fb0,&DAT_141ab3d94,0);\r\n  FUN_140131ae0(&DAT_143b76fb8);\r\n  FUN_140131f90(&DAT_143b76fc0,\"m_isPlaying\",0);\r\n  _DAT_143b76fd0 = &PTR_PTR_1422fff38;\r\n  _DAT_143b76fc8 = 0x24;\r\n  _DAT_143b76fcc = 1;\r\n  _DAT_143b76fd8 = 0;\r\n  _DAT_143b76fe0 = 0;\r\n  _DAT_143b76fe8 = 0;\r\n  _DAT_143b76ff0 = 0;\r\n  FUN_140131ae0(&DAT_143b76ff8);\r\n  FUN_140131ae0(&DAT_143b77000);\r\n  FUN_140131ae0(&DAT_143b77008);\r\n  _DAT_143b77010 = 0;\r\n  _DAT_143b77018 = 0;\r\n  _DAT_143b77020 = 0;\r\n  _DAT_143b77028 = 0;\r\n  _DAT_143b77030 = 0;\r\n  _DAT_143b77038 = 0;\r\n  return;\r\n}\r\n\r\n"
+  },
+  "SavedNotes": {
+    "result": "=== GHIDRA SCRIPT EXECUTION ===\nScript: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\SaveAirborneEvidence.java\nProgram: Dishonored2.exe\nTime: Fri Oct 09 12:33:17 CEST 2026\n\nFound script: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\SaveAirborneEvidence.java\nSize: 1731 bytes\n\nScript provider: JavaScriptProvider\n\n--- SCRIPT OUTPUT ---\nSaved evidence at 14053eef0\r\nSaved evidence at 14087d200\r\n\n\n=== SCRIPT COMPLETED SUCCESSFULLY ==="
+  },
+  "Runtime": "7D7A airborne 4 episodes / two pause guards, 8007 six interpolation A/B cases; reports under research"
+}
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+/* Confirmed static trace for exact B671 executable. Native AnimBasic model-declared entries; owned
+   Doppelganger full-body experiment only. No assertion of replicated player combat. Play params:
+   component, channel, signed char index, float weight, int mode (0 once / 1 stay / 2 loop), float
+   rate, int startTime, bool waitCurrentEnd. */
+
+undefined8
+D2_AnimBasic_Play(longlong param_1,int param_2,char param_3,float param_4,undefined4 param_5,
+                 undefined4 param_6,undefined4 param_7,undefined1 param_8)
+
+{
+  longlong lVar1;
+  undefined4 local_48;
+  undefined1 uStack_31;
+  undefined4 local_28;
+  float fStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined8 local_18;
+  
+  if ((-1 < param_3) && (0.0 < param_4)) {
+    lVar1 = *(longlong *)(param_1 + 0x390 + (longlong)param_2 * 8);
+    if (lVar1 != 0) {
+      local_48 = CONCAT31(local_48._1_3_,param_3);
+      local_28 = local_48;
+      uStack_20 = param_5;
+      uStack_1c = param_6;
+      local_18 = CONCAT17(uStack_31,CONCAT25(1,CONCAT14(param_8,param_7)));
+      fStack_24 = param_4;
+      FUN_1406e1fe0(param_1 + 0x338,lVar1,&local_28);
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+````
+
+### result
+
+````text
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_1415e6690(void)
+
+{
+  FUN_140131f90(&DAT_143b76d70,"arkAnimBasic",0);
+  FUN_140131f90(&DAT_143b76d78,&DAT_141ab3cc8,0);
+  FUN_140131f90(&DAT_143b76d80,"m_animBasic",0);
+  _DAT_143b76d90 = 0;
+  uRam0000000143b76d98 = 1;
+  _DAT_143b76d88 = 0;
+  _DAT_143b76d8c = 8;
+  _DAT_143b76da0 = 0;
+  _DAT_143b76da8 = 0;
+  _DAT_143b76db0 = 0;
+  FUN_140131f90(&DAT_143b76db8,"float",0);
+  FUN_140131ae0(&DAT_143b76dc0);
+  FUN_140131f90(&DAT_143b76dc8,"m_maxWeight",0);
+  _DAT_143b76dd8 = &PTR_PTR_1422fff20;
+  _DAT_143b76dd0 = 8;
+  _DAT_143b76dd4 = 4;
+  _DAT_143b76de0 = 0;
+  _DAT_143b76de8 = 0;
+  _DAT_143b76df0 = 0;
+  _DAT_143b76df8 = 0;
+  FUN_140131f90(&DAT_143b76e00,"float",0);
+  FUN_140131ae0(&DAT_143b76e08);
+  FUN_140131f90(&DAT_143b76e10,"m_curWeight",0);
+  _DAT_143b76e18 = 0xc;
+  _DAT_143b76e1c = 4;
+  _DAT_143b76e20 = &PTR_PTR_1422fff20;
+  _DAT_143b76e28 = 0;
+  _DAT_143b76e30 = 0;
+  _DAT_143b76e38 = 0;
+  _DAT_143b76e40 = 0;
+  FUN_140131f90(&DAT_143b76e48,"float",0);
+  FUN_140131ae0(&DAT_143b76e50);
+  FUN_140131f90(&DAT_143b76e58,"m_playRate",0);
+  _DAT_143b76e60 = 0x10;
+  _DAT_143b76e64 = 4;
+  _DAT_143b76e68 = &PTR_PTR_1422fff20;
+  _DAT_143b76e70 = 0;
+  _DAT_143b76e78 = 0;
+  _DAT_143b76e80 = 0;
+  _DAT_143b76e88 = 0;
+  FUN_140131f90(&DAT_143b76e90,"durationTime_t",0);
+  FUN_140131ae0(&DAT_143b76e98);
+  FUN_140131f90(&DAT_143b76ea0,"m_curTime",0);
+  _DAT_143b76eb0 = &PTR_PTR_1423002a0;
+  _DAT_143b76ea8 = 0x14;
+  _DAT_143b76eac = 4;
+  _DAT_143b76eb8 = 0;
+  _DAT_143b76ec0 = 0;
+  _DAT_143b76ec8 = 0;
+  _DAT_143b76ed0 = 0;
+  FUN_140131f90(&DAT_143b76ed8,"durationTime_t",0);
+  FUN_140131ae0(&DAT_143b76ee0);
+  FUN_140131f90(&DAT_143b76ee8,"m_curBlendDuration",0);
+  _DAT_143b76ef0 = 0x18;
+  _DAT_143b76ef4 = 4;
+  _DAT_143b76ef8 = &PTR_PTR_1423002a0;
+  _DAT_143b76f00 = 0;
+  _DAT_143b76f08 = 0;
+  _DAT_143b76f10 = 0;
+  _DAT_143b76f18 = 0;
+  FUN_140131f90(&DAT_143b76f20,"arkAnimBasicPlayMode_t",0);
+  FUN_140131ae0(&DAT_143b76f28);
+  FUN_140131f90(&DAT_143b76f30,"m_playMode",0);
+  _DAT_143b76f40 = &PTR_PTR_14235f3f0;
+  _DAT_143b76f38 = 0x1c;
+  _DAT_143b76f3c = 4;
+  _DAT_143b76f48 = 0;
+  _DAT_143b76f50 = 0;
+  _DAT_143b76f58 = 0;
+  _DAT_143b76f60 = 0;
+  FUN_140131f90(&DAT_143b76f68,"arkAnimTreeNodeBasicProp::blendType_t",0);
+  FUN_140131ae0(&DAT_143b76f70);
+  FUN_140131f90(&DAT_143b76f78,"m_curBlendType",0);
+  _DAT_143b76f80 = 0x20;
+  _DAT_143b76f84 = 4;
+  _DAT_143b76f88 = 0;
+  _DAT_143b76f90 = 0;
+  _DAT_143b76f98 = 0;
+  _DAT_143b76fa0 = 0;
+  _DAT_143b76fa8 = 0;
+  FUN_140131f90(&DAT_143b76fb0,&DAT_141ab3d94,0);
+  FUN_140131ae0(&DAT_143b76fb8);
+  FUN_140131f90(&DAT_143b76fc0,"m_isPlaying",0);
+  _DAT_143b76fd0 = &PTR_PTR_1422fff38;
+  _DAT_143b76fc8 = 0x24;
+  _DAT_143b76fcc = 1;
+  _DAT_143b76fd8 = 0;
+  _DAT_143b76fe0 = 0;
+  _DAT_143b76fe8 = 0;
+  _DAT_143b76ff0 = 0;
+  FUN_140131ae0(&DAT_143b76ff8);
+  FUN_140131ae0(&DAT_143b77000);
+  FUN_140131ae0(&DAT_143b77008);
+  _DAT_143b77010 = 0;
+  _DAT_143b77018 = 0;
+  _DAT_143b77020 = 0;
+  _DAT_143b77028 = 0;
+  _DAT_143b77030 = 0;
+  _DAT_143b77038 = 0;
+  return;
+}
+
+
+````
+
+### result
+
+````text
+=== GHIDRA SCRIPT EXECUTION ===
+Script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\SaveAirborneEvidence.java
+Program: Dishonored2.exe
+Time: Fri Oct 09 12:33:17 CEST 2026
+
+Found script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\SaveAirborneEvidence.java
+Size: 1731 bytes
+
+Script provider: JavaScriptProvider
+
+--- SCRIPT OUTPUT ---
+Saved evidence at 14053eef0
+Saved evidence at 14087d200
+
+
+=== SCRIPT COMPLETED SUCCESSFULLY ===
+````

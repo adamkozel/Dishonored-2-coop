@@ -1,0 +1,245 @@
+{
+  "at": "2026-10-14T18:09:55.581036+02:00",
+  "candidate": "candidate-npc-combat-v1181",
+  "harness": "../natural-moveset/Test-MissionSoak-v1186.ps1",
+  "result": {
+    "minutes": 20,
+    "samples": 117,
+    "deaths": [
+      {
+        "dying": "host",
+        "restarted": true,
+        "ms": 360197,
+        "deathScreens": true
+      },
+      {
+        "dying": "client",
+        "restarted": true,
+        "ms": 738846,
+        "deathScreens": true
+      },
+      {
+        "dying": "host",
+        "restarted": true,
+        "ms": 1116434,
+        "deathScreens": true
+      }
+    ],
+    "memory": {
+      "host": {
+        "startPriv": 6742609920,
+        "handlesEnd": 1463,
+        "endPriv": 6877687808,
+        "baselinePriv": 6769188864,
+        "handlesStart": 1474,
+        "growthMB": 103.5
+      },
+      "client": {
+        "startPriv": 6723735552,
+        "handlesEnd": 1478,
+        "endPriv": 6985867264,
+        "baselinePriv": 6753234944,
+        "handlesStart": 1480,
+        "growthMB": 221.9
+      }
+    },
+    "armedEnd": {
+      "host": {
+        "npc": "renewed_after_shared_checkpoint",
+        "product": "armed",
+        "door": "renewed_after_shared_checkpoint",
+        "usable": "renewed_after_shared_checkpoint",
+        "checkpoint": "armed",
+        "fresh": true
+      },
+      "client": {
+        "npc": "renewed_after_shared_checkpoint",
+        "product": "armed",
+        "door": "renewed_after_shared_checkpoint",
+        "usable": "renewed_after_shared_checkpoint",
+        "checkpoint": "armed",
+        "fresh": true
+      }
+    },
+    "privateMemoryMBByMinute": {
+      "host": [
+        [
+          0,
+          6430
+        ],
+        [
+          0,
+          6441
+        ],
+        [
+          1,
+          6455
+        ],
+        [
+          2,
+          6465
+        ],
+        [
+          3,
+          6467
+        ],
+        [
+          4,
+          6472
+        ],
+        [
+          5,
+          6479
+        ],
+        [
+          7,
+          6476
+        ],
+        [
+          8,
+          6490
+        ],
+        [
+          9,
+          6491
+        ],
+        [
+          10,
+          6504
+        ],
+        [
+          11,
+          6504
+        ],
+        [
+          12,
+          6507
+        ],
+        [
+          13,
+          6525
+        ],
+        [
+          14,
+          6531
+        ],
+        [
+          15,
+          6538
+        ],
+        [
+          16,
+          6543
+        ],
+        [
+          17,
+          6551
+        ],
+        [
+          18,
+          6556
+        ],
+        [
+          19,
+          6558
+        ]
+      ],
+      "client": [
+        [
+          0,
+          6412
+        ],
+        [
+          0,
+          6436
+        ],
+        [
+          1,
+          6439
+        ],
+        [
+          2,
+          6447
+        ],
+        [
+          3,
+          6456
+        ],
+        [
+          4,
+          6460
+        ],
+        [
+          5,
+          6465
+        ],
+        [
+          7,
+          6462
+        ],
+        [
+          8,
+          6474
+        ],
+        [
+          9,
+          6485
+        ],
+        [
+          10,
+          6485
+        ],
+        [
+          11,
+          6491
+        ],
+        [
+          12,
+          6499
+        ],
+        [
+          13,
+          6503
+        ],
+        [
+          14,
+          6522
+        ],
+        [
+          15,
+          6524
+        ],
+        [
+          16,
+          6528
+        ],
+        [
+          17,
+          6541
+        ],
+        [
+          18,
+          6543
+        ],
+        [
+          19,
+          6662
+        ]
+      ]
+    },
+    "maxNpcQueueUs": {
+      "host": 902511,
+      "client": 1014785
+    },
+    "staleSamples": 0
+  },
+  "findings": [
+    "Confirmed runtime: 20 minutes on Edge of the World with the product controller - movement across the map every 30 s, three shared deaths/restarts (both roles) - no crash, transport never stale, every session armed at the end, handles flat.",
+    "Private memory grew steadily ~6-7 MB/min on both peers (+104 MB host, +222 MB client after the 2-minute baseline; one +119 MB step at the last restart). Not yet attributed: a control soak without co-op systems is needed to separate the game's own streaming growth from the mod."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Control soak (lab baseline without co-op systems) to attribute memory growth; longer soak (2 h).",
+    "NPC transport queue reached ~1 s during teleports/restarts (no stale state)."
+  ]
+}

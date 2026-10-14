@@ -1,0 +1,72 @@
+
+void FUN_14086b900(longlong param_1)
+
+{
+  undefined8 *puVar1;
+  undefined4 uVar2;
+  undefined8 uVar3;
+  longlong lVar4;
+  undefined8 uVar5;
+  undefined8 uVar6;
+  undefined4 *puVar7;
+  undefined8 *puVar8;
+  undefined1 auStackX_8 [8];
+  longlong lStack_18;
+  undefined1 *puStack_10;
+  
+  FUN_140854fd0();
+  uVar3 = FUN_140854880(param_1);
+  lVar4 = *(longlong *)(*(longlong *)(param_1 + 0x18) + 0x98);
+  if (lVar4 == 0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_140166830("arkPlayerStateSlash::Attached - No slash rules provided");
+  }
+  lVar4 = FUN_1408947f0(lVar4,uVar3);
+  *(longlong *)(param_1 + 0xa0) = lVar4;
+  puVar8 = *(undefined8 **)(lVar4 + 0x20);
+  puVar1 = puVar8 + (*(uint *)(lVar4 + 0x28) & 0xffffff);
+  for (; puVar8 != puVar1; puVar8 = puVar8 + 1) {
+    FUN_1403ae180(*puVar8,param_1);
+  }
+  uVar2 = FUN_1407f8870(*(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x2f8),0x2c);
+  *(undefined4 *)(param_1 + 0xdc) = uVar2;
+  uVar6 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x338);
+  uVar5 = FUN_140877720(uVar3,&DAT_1439c5be0,0);
+  *(undefined8 *)(param_1 + 0x88) = uVar5;
+  uVar5 = FUN_140877720(uVar3,&DAT_1439bff90,0);
+  *(undefined8 *)(param_1 + 0x90) = uVar5;
+  uVar6 = FUN_140777b90(uVar6,0x16);
+  *(undefined8 *)(param_1 + 0x98) = uVar6;
+  puStack_10 = &LAB_14086d3a0;
+  lStack_18 = param_1;
+  uVar6 = FUN_140810240();
+  FUN_140810810(uVar6,uVar3,0xa2,&lStack_18);
+  puStack_10 = &LAB_14086d380;
+  lStack_18 = param_1;
+  uVar6 = FUN_140810240();
+  FUN_140810810(uVar6,uVar3,0xe7,&lStack_18);
+  puStack_10 = &LAB_14086d390;
+  lStack_18 = param_1;
+  uVar6 = FUN_140810240();
+  FUN_140810810(uVar6,uVar3,0xe8,&lStack_18);
+  puStack_10 = &LAB_14086d3d0;
+  lStack_18 = param_1;
+  uVar6 = FUN_140810240();
+  FUN_140810810(uVar6,uVar3,0x154,&lStack_18);
+  uVar3 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x330);
+  puVar7 = (undefined4 *)FUN_14060ce50(uVar3,auStackX_8,&DAT_143996828);
+  if ((undefined4 *)(param_1 + 0x104) != puVar7) {
+    *(undefined4 *)(param_1 + 0x104) = *puVar7;
+  }
+  puVar7 = (undefined4 *)FUN_14060ce50(uVar3,auStackX_8,&DAT_143996830);
+  if ((undefined4 *)(param_1 + 0x108) != puVar7) {
+    *(undefined4 *)(param_1 + 0x108) = *puVar7;
+  }
+  puVar7 = (undefined4 *)FUN_14060ce50(uVar3,auStackX_8,&DAT_143996838);
+  if ((undefined4 *)(param_1 + 0x10c) != puVar7) {
+    *(undefined4 *)(param_1 + 0x10c) = *puVar7;
+  }
+  return;
+}
+
+

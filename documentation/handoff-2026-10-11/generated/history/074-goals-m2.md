@@ -1,0 +1,29 @@
+# Historical note: work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M2.md
+
+Original: [work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M2.md](<../../../../work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M2.md>)
+
+SHA-256: `9FA4B53ABFE42912702C70CA2EF2A3CF659DE124A20824DBEB448B44DDB82DD6`; 2097 bytes.
+
+````markdown
+# M2 — Cloud playground
+
+A browser-accessible playground that runs the linter on user-pasted or uploaded files. The point is to lower the install barrier from "clone the repo, install Go, run a CLI" to "open a URL, paste a file, see diagnostics." Success looks like: the playground is publicly reachable, lints typical game-file inputs in under a second, and survives basic abuse (rate limit, body size cap).
+
+**Scope:** `internal/server/`, the React frontend, container image, CI/CD, Cloudflare Worker / Pages glue, deploy-time docs. Excludes the linter engine itself (M1) and any LSP work (M3).
+
+**Status:** done.
+
+## Retrospective
+
+**What shipped.**
+- A working browser playground for linting `.entities`/`.decl`/`.entitydef` files: HTTP server with CORS, rate limits, and health check; React + Vite + CodeMirror frontend; distroless container; GitHub Actions + Wrangler CI/CD.
+- Validated the Cloudflare-WASM path end-to-end: the compile spike confirmed `wasip1/wasm` viability and the resource profile showed the linter fits within Workers limits.
+- Production deployment was absorbed by [M6](M6.md)'s PR + preview pipeline rather than landing as a standalone push.
+
+**What surprised us.** Three of the nine M2 tickets closed as won't-do once the WASM-on-Workers runtime path was confirmed: k3d (M2.9) was no longer relevant, the standalone production-deploy ticket (M2.5) collapsed into M6's pipeline, and the docs-polish sweep (M2.6) was cut as low-leverage. The deploy story turned out to be a single pipeline, not the L1–L4 ladder the original plan assumed.
+
+**Worth remembering.**
+- Don't pre-scope deploy tickets before the runtime decision is made. M2.5 and M2.9 both trace back to scoping deploy work before the WASM spike (M2.7) had run; doing the spike first would have saved the planning churn.
+- Defer polish work until there's a concrete reader to justify it. M2.6 (landing-page README, dedicated LSP design section) was cancelled as a waste of time: there's no audience yet, and the LSP design section will write itself when [M3](M3.md) actually starts.
+
+````

@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T00:59:21.426594+02:00",
+  "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+  "probe": "EA5444F1ECEDED2937AEE80E21AA7F5609AA03536B797D82B92FF27C28944489",
+  "previous": "candidate-npc-combat-v948",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": false,
+  "scope": "Shared ranged profile table adds native regular crossbow contact observed953: bolt.damage, flags100, base15, reactions2/2, owned arkProjectile and selected native crossbow. Combat wire6/276 rejects older pistol-only peers. Retains948 pistol/body/prop/muzzle milestone; native source modifier equivalence and projectile embedding/impact visuals remain unverified. Runtime pending.",
+  "scopedNativeCrossbowBothRolesVerified": true,
+  "scopedCrossbowBodyPropVerified": true,
+  "runtimeEvidence": "../npc-crossbow-audit-v959.json",
+  "runtimeScope": "Broader projectile families, source-class/AI-dependent damage modifiers, protected regions, wall impacts, authoritative limb/corpse physics, active enemy targeting both players and automatic full-world combat remain incomplete. Independent Steam-account online testing and complete movement/campaign/native session UI also remain open.",
+  "combatProtocol": 6,
+  "combatPacketBytes": 276
+}

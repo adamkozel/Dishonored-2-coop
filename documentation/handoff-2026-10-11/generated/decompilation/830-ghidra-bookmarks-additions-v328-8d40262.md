@@ -1,0 +1,19 @@
+# ghidra-bookmarks-additions-v328.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v328.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v328.json>)
+
+SHA-256: `133F988D8E658D5DD359764EF4030C4CE0FE1A8693C21028AE660D06591930E9`; 752 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "140824e40",
+    "category": "D2Coop/Possession-state-sentinel-v326",
+    "comment": "Confirmed static internal controller+1C0 (mode+5D0) uses14 INACTIVE, not physics stance/active-state ID. Runtime328 source human host passes9 checks:186 owned target samples159 occupied; native states0/1/8/14, physics18, exact NPCPossession1b641a8 generation/entity/membership; normal LT exit. Fixture keeps quantity1 through occupation and defers native rollback until inactive/default mode. Both checkpoint/protected14 pass. VFX observed only locally.327 passed narrower checks but removed power early when AI isolation retired; retained without clean-lifecycle claim. Remote host presentation/authority incomplete.",
+    "type": "Note"
+  }
+]
+
+````

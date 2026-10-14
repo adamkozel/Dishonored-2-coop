@@ -1,0 +1,342 @@
+{
+  "at": "2026-10-12T19:05:29.074898+02:00",
+  "dll": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "partnerCases": [
+    {
+      "role": "host",
+      "take": "partner-sword-contexts-host-v398",
+      "case": {
+        "yaw": 270,
+        "stance": 0,
+        "distance": 1.15,
+        "name": "front-standing"
+      },
+      "samples": 16,
+      "swordRejected": 66,
+      "fatalityRejected": 2738,
+      "refused": 0,
+      "maxReadUs": 840,
+      "passed": true
+    },
+    {
+      "role": "host",
+      "take": "partner-sword-contexts-host-v398",
+      "case": {
+        "yaw": 90,
+        "stance": 0,
+        "distance": 1.15,
+        "name": "rear-standing"
+      },
+      "samples": 16,
+      "swordRejected": 69,
+      "fatalityRejected": 2823,
+      "refused": 0,
+      "maxReadUs": 840,
+      "passed": true
+    },
+    {
+      "role": "host",
+      "take": "partner-sword-contexts-host-v398",
+      "case": {
+        "yaw": 270,
+        "stance": 1,
+        "distance": 1.15,
+        "name": "front-crouched"
+      },
+      "samples": 16,
+      "swordRejected": 62,
+      "fatalityRejected": 2688,
+      "refused": 0,
+      "maxReadUs": 840,
+      "passed": true
+    },
+    {
+      "role": "host",
+      "take": "partner-sword-contexts-host-v398",
+      "case": {
+        "yaw": 90,
+        "stance": 1,
+        "distance": 1.15,
+        "name": "rear-crouched"
+      },
+      "samples": 16,
+      "swordRejected": 63,
+      "fatalityRejected": 2658,
+      "refused": 0,
+      "maxReadUs": 840,
+      "passed": true
+    },
+    {
+      "role": "client",
+      "take": "partner-sword-contexts-client-v400",
+      "case": {
+        "distance": 1.15,
+        "name": "front-standing",
+        "yaw": 270,
+        "stance": 0
+      },
+      "samples": 16,
+      "swordRejected": 60,
+      "fatalityRejected": 2553,
+      "refused": 0,
+      "maxReadUs": 852,
+      "passed": true
+    },
+    {
+      "role": "client",
+      "take": "partner-sword-contexts-client-v400",
+      "case": {
+        "distance": 1.15,
+        "name": "rear-standing",
+        "yaw": 90,
+        "stance": 0
+      },
+      "samples": 17,
+      "swordRejected": 62,
+      "fatalityRejected": 2608,
+      "refused": 0,
+      "maxReadUs": 852,
+      "passed": true
+    },
+    {
+      "role": "client",
+      "take": "partner-sword-contexts-client-v400",
+      "case": {
+        "distance": 1.15,
+        "name": "front-crouched",
+        "yaw": 270,
+        "stance": 1
+      },
+      "samples": 16,
+      "swordRejected": 59,
+      "fatalityRejected": 2733,
+      "refused": 0,
+      "maxReadUs": 852,
+      "passed": true
+    },
+    {
+      "role": "client",
+      "take": "partner-sword-contexts-client-v400",
+      "case": {
+        "distance": 1.15,
+        "name": "rear-crouched",
+        "yaw": 90,
+        "stance": 1
+      },
+      "samples": 16,
+      "swordRejected": 59,
+      "fatalityRejected": 2583,
+      "refused": 0,
+      "maxReadUs": 852,
+      "passed": true
+    }
+  ],
+  "ordinaryGuard": {
+    "target": "0xb480764",
+    "pairedScenes": 5,
+    "assets": [
+      "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene",
+      "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene"
+    ],
+    "otherReturned": 5166,
+    "healthAfter": 30
+  },
+  "videos": [
+    {
+      "video": "partner-sword-contexts-host-v398/host-front-standing.mp4",
+      "character": "corvo",
+      "label": "Partner sword exclusion \u00b7 host front-standing",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-host-v398/result.json",
+      "visual_review": "partner-sword-contexts-host-v398/host-front-standing-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 26.2,
+      "video_sha256": "D74E89F190BB1FF862431F816963B7D7C9623601209F911213DEF022E3C868AB",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-host-v398/host-rear-standing.mp4",
+      "character": "corvo",
+      "label": "Partner sword exclusion \u00b7 host rear-standing",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-host-v398/result.json",
+      "visual_review": "partner-sword-contexts-host-v398/host-rear-standing-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 26.0,
+      "video_sha256": "A460BB539F9924018D7B48414E76B9ECE1F17BECB699E04E1B5DB4CBD0EF64AF",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-host-v398/host-front-crouched.mp4",
+      "character": "corvo",
+      "label": "Partner sword exclusion \u00b7 host front-crouched",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides",
+        "crouched_takedown"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-host-v398/result.json",
+      "visual_review": "partner-sword-contexts-host-v398/host-front-crouched-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 26.2,
+      "video_sha256": "FA86E3C248E71F29AD96A868EC99FFC500D5ACBF7FE8AA6809B897E7145F070C",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-host-v398/host-rear-crouched.mp4",
+      "character": "corvo",
+      "label": "Partner sword exclusion \u00b7 host rear-crouched",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides",
+        "crouched_takedown"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-host-v398/result.json",
+      "visual_review": "partner-sword-contexts-host-v398/host-rear-crouched-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 25.8,
+      "video_sha256": "1716A79539776FBE4F2D4C343220096A324D01ED7B16E7D8E98A93C64D1A182E",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-client-v400/client-front-standing.mp4",
+      "character": "emily",
+      "label": "Partner sword exclusion \u00b7 client front-standing",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-client-v400/result.json",
+      "visual_review": "partner-sword-contexts-client-v400/client-front-standing-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 25.36912581415263,
+      "video_sha256": "8EC60F990CFC6939ABE9E88C24127AF28EDF02B32F1A5679BCACD5FED6128833",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-client-v400/client-rear-standing.mp4",
+      "character": "emily",
+      "label": "Partner sword exclusion \u00b7 client rear-standing",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-client-v400/result.json",
+      "visual_review": "partner-sword-contexts-client-v400/client-rear-standing-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 26.4,
+      "video_sha256": "66EC85D6848F9E8A472CC6550688A37C4A3682A3DE07E31E5C1BC357CA356E11",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-client-v400/client-front-crouched.mp4",
+      "character": "emily",
+      "label": "Partner sword exclusion \u00b7 client front-crouched",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides",
+        "crouched_takedown"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-client-v400/result.json",
+      "visual_review": "partner-sword-contexts-client-v400/client-front-crouched-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 25.4,
+      "video_sha256": "83003B62BCD3325BACCB690AF31597B6B7A77C6D180B39A3556153DE2496CB16",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "partner-sword-contexts-client-v400/client-rear-crouched.mp4",
+      "character": "emily",
+      "label": "Partner sword exclusion \u00b7 client rear-crouched",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides",
+        "crouched_takedown"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-client-v400/result.json",
+      "visual_review": "partner-sword-contexts-client-v400/client-rear-crouched-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 25.4,
+      "video_sha256": "F15B1666DB68FE48D9885A5D68868A0AEF9599968321121A3292A4640E39A164",
+      "checks_passed": true,
+      "scope": "Viewed temporal sheet: ordinary standing/crouched first-person sword swing, partner stays free, no finisher grab or prior blood/impact effects. Both native target getters reject the current partner; state39 input proved; no reciprocal paired partner scene and zero global partner targets. Health/inventory/14 protected hashes restore. Scoped case only; full movement, every takedown and world authority remain incomplete."
+    },
+    {
+      "video": "ordinary-guard-sword-control-v399/host-front-sword.mp4",
+      "character": "corvo",
+      "label": "Ordinary guard sword control \u00b7 399",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "ordinary-guard-sword-control-v399/result.json",
+      "visual_review": "ordinary-guard-sword-control-v399/host-front-sword-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 26.125,
+      "video_sha256": "9577CB39E5C843B291C1278416E5DC155F6BE2AD4B6FD8F29843311AA39B433F",
+      "checks_passed": true,
+      "scope": "Viewed native sword impact and blood against ordinary guard2; reciprocal player/guard slash scenes and final guard health30. Target getters return ordinary NPC, both checkpoint inventories/player/partner health and14 protected hashes restore. This proves normal NPC sword targeting/contact, not an ordinary NPC fatality or shared combat authority."
+    },
+    {
+      "video": "partner-sword-contexts-host-v397/host-front-standing.mp4",
+      "character": "corvo",
+      "label": "Retained overstrict test assertion \u00b7 397",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "lethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-sword-contexts-host-v397/result.json",
+      "visual_review": "partner-sword-contexts-host-v397/host-front-standing-visual-review.json",
+      "proxy_sha256": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+      "actual_capture_hz": 24.6,
+      "video_sha256": "93131660537A366FE66AC737A3A0221BD93842A5BAAB925B6C6DCCF3E4011972",
+      "checks_passed": false,
+      "scope": "Viewed ordinary swing with partner unaffected. Harness fails because it required downstream assassination rejection counter growth even after the earlier interaction-sensor filter removed that target. Preserved failure;398 corrects the assertion by checking actual global target records, both getter counters and paired scene bindings. Cleanup passes."
+    }
+  ],
+  "scope": "Eight standing/crouched front/rear partner sword cases plus normal NPC sword target control. Both-role health/inventory and protected files restored. General interaction/power/drop/slide/window coverage remains deferred; native collision retained."
+}

@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "source": "host",
+  "character": "corvo",
+  "airborne": true,
+  "crouched": false,
+  "holstered": false,
+  "moving": false,
+  "failure": "No confirmed simultaneous native and remote air cast: 1/6",
+  "checks": [
+    "Native Steam stream and exact v26 stance/equipment bank ready before the cast",
+    "Two native cast events drive remote whole-body Dark Vision animation through Steam",
+    "Native source vision overlay manager toggles on/off; observer vision and loadout remain untouched",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Native physics remains standing while jumping and casting"
+  ],
+  "events": [
+    {
+      "seconds": 1.978,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.372,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "4"
+  ],
+  "nativeScenes": [
+    "227",
+    "226"
+  ],
+  "dll": "48A0E8F493C17097455CECF5416AD1DDC095DFC02885FD0DCBC79C50EEB337FD",
+  "bankSha256": "9EFA9300789B672F23EE45D507846E209D5B67829BC801EE8AC31C6064A6807A",
+  "recorded": true,
+  "scope": "Scoped native Dark Vision on/off casts during two ordinary jumps in the explicitly recorded sword and travel context. Source POV and remote whole-body observer, native private reveal, controls and camera. No remote damage, mana or VFX events. Double-jump, other contexts and broader lifecycle remain unverified."
+}

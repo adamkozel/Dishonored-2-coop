@@ -1,0 +1,27 @@
+{
+  "executable_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "complete": false,
+  "confirmed": {
+    "native_character": "Emily is native character 2; Steam role 1. These are different identifiers.",
+    "beam_declaration": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_body_01.fx",
+    "impact_declaration": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_impact_01.fx",
+    "beam_start": "RVA 774d90: PlayerBody declaration+1e0, FX create 19d100 and queue 1a2ff0; record+38 origin and +80 endpoint.",
+    "beam_update": "RVA 776490: advance endpoint toward body+e74 target at body+e8c speed, hand from native FP joint query; write record+38/+80.",
+    "beam_callback": "Record+128 points to body+20. Single method 7724b0 clears body+e90 upon record release. It does not drive the endpoints.",
+    "beam_stop": "RVA 775210 clears release callback and stops owned FX record; the remote wrapper has no player-body callback.",
+    "native_message": "Cast beam 0x157 -> 441150 -> 774d90. Pull 0x158 -> 441220 spawns target-specific impact and continues native player state.",
+    "runtime_reader": "native-grapple-reader-v3: 114 valid snapshots, five present beam snapshots spanning extension/pull, owner 1, native resource identity and record callback confirmed.",
+    "manual_native_playback": "native-grapple-fx-v1: five checks, actual native tether visibly rendered, finite cleanup and explicit stop; player/avatar health and protected files unchanged.",
+    "network_candidate": "393405CF5C8560F398F93971A4E6C8954CFF967FAC584935D0745A044FB3B627: two eight-check real-cast tests; one tether and impact, no effects on cancellation, duplicate end rejected. Both stream-stop and pause/resume passed 11 lifecycle checks.",
+    "attachment_timing_issue": "8E83 moves updates after root presentation on every native frame. integrated-grapple-hand-v2 uses completed pose publications and live FX registry membership: two fast-pull samples match the wrist exactly; a recovery-boundary sample differs by 0.114 m and remains a transition-tolerance question. Earlier probes admitted intermediate poses and already-stopped records and must not establish final attachment quality.",
+    "current_build_regression": "8E83: native Blink and Far Reach eight checks each; both-character v15 combat/guard/crouch/air-priority regression passes 16 checks. Two new inspected real-time D2 recordings indexed; dashboard now35 actual game videos."
+  },
+  "implementation_scope": "Standing, sword-equipped Emily, known static floor target in isolated Dunwall. Native source controls pull and gameplay; reliable native Steam carries semantic phase, geometry and normalized extension. Remote authored hand drives native particles. No native player-body function or damage callback is invoked remotely.",
+  "pending": [
+    "Verify corrected per-frame attachment timing, including rendered pose cache and visual recording.",
+    "Crouched/moving/airborne and weaponless variants, long/vertical pulls.",
+    "NPC, pickup and movable-target ownership, their native impact variants and outcomes.",
+    "Death, checkpoint/map transitions, peer-loss recovery and general session activation.",
+    "Final visual acceptance and all remaining movement requirements."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nvoid FUN_140635bf0(undefined8 param_1,undefined8 param_2,longlong param_3)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  \r\n  if (*(longlong *)(param_3 + 8) != 0) {\r\n    uVar1 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                      (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,0);\r\n    FUN_14087e7e0(uVar1,1);\r\n    FUN_140875e80(param_2,uVar1,param_3,&DAT_1431af668,&DAT_14228a780,1);\r\n    FUN_14087e9e0(uVar1,*(undefined8 *)(param_3 + 8));\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nvoid FUN_140635bf0(undefined8 param_1,undefined8 param_2,longlong param_3)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  \r\n  if (*(longlong *)(param_3 + 8) != 0) {\r\n    uVar1 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                      (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,0);\r\n    FUN_14087e7e0(uVar1,1);\r\n    FUN_140875e80(param_2,uVar1,param_3,&DAT_1431af668,&DAT_14228a780,1);\r\n    FUN_14087e9e0(uVar1,*(undefined8 *)(param_3 + 8));\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

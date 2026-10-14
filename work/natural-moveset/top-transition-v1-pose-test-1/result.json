@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "failure": null,
+  "manifest": "top-transitions-manifest-v1.json",
+  "cases": [
+    {
+      "id": "ladder_top_exit_sequence-corvo",
+      "role": "corvo",
+      "alias": "ladder_top_exit_sequence",
+      "frame": 144,
+      "hold": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": true,
+        "start": 197745218,
+        "end": 197755218,
+        "seconds": 2.4,
+        "fixed": 2.4,
+        "joints": 215,
+        "frames": 289,
+        "checksum": 17992673944365589920,
+        "applied": 76,
+        "refused": 0
+      },
+      "finished": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": false,
+        "start": 197748234,
+        "end": 0,
+        "seconds": 5.091,
+        "fixed": -1.0,
+        "joints": 215,
+        "frames": 289,
+        "checksum": 17992673944365589920,
+        "applied": 589,
+        "refused": 0
+      },
+      "rootTravel": 0.0,
+      "poseFile": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\top-transition-v1-pose-test-1/ladder_top_exit_sequence-corvo-hold.json",
+      "bankSha": "308B5EE78659653C25127FEFDE8C44904F621DF14E2AFCA213CC63E0CEEE2CFB"
+    },
+    {
+      "id": "ladder_top_exit_sequence-emily",
+      "role": "emily",
+      "alias": "ladder_top_exit_sequence",
+      "frame": 144,
+      "hold": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": true,
+        "start": 197754875,
+        "end": 197764875,
+        "seconds": 2.4,
+        "fixed": 2.4,
+        "joints": 219,
+        "frames": 289,
+        "checksum": 17756123549534533011,
+        "applied": 76,
+        "refused": 0
+      },
+      "finished": {
+        "experimental": true,
+        "purpose": "visual review only",
+        "active": false,
+        "start": 197757906,
+        "end": 0,
+        "seconds": 5.09,
+        "fixed": -1.0,
+        "joints": 219,
+        "frames": 289,
+        "checksum": 17756123549534533011,
+        "applied": 570,
+        "refused": 0
+      },
+      "rootTravel": 0.0,
+      "poseFile": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\top-transition-v1-pose-test-1/ladder_top_exit_sequence-emily-hold.json",
+      "bankSha": "E79F9D14340EAD5CAB7C2A19564B2123291B70F1092FB100B622C891983E658B"
+    }
+  ],
+  "checks": [
+    "Peer native pause retires review playback",
+    "Native resume leaves review disabled"
+  ],
+  "scope": "Pose-only library review: fixed frame, native final publication, original root, cancellation, expiry and pause. No gameplay action binding or visual acceptance claim. Hands-free donor equipment has not been bound by this test.",
+  "dll": "CF60C5EAB9A08573F128F2EF3958F9237BC92FCDC5B551682601DF44C6BDBD46"
+}

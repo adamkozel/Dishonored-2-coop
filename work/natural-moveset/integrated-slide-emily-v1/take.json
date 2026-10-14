@@ -1,0 +1,212 @@
+{
+  "character": "emily",
+  "source": "client",
+  "observer": "host",
+  "start": 1791652383248,
+  "captureStart": 1791652382135,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.113,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint",
+      "seconds": 2.636,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slide",
+      "seconds": 2.979,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Full-body recovery to crouch",
+      "seconds": 5.623,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand after slide",
+      "seconds": 7.133,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Run backward",
+      "seconds": 8.931,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Second sprint",
+      "seconds": 12.64,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Second slide",
+      "seconds": 12.964,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native jump interrupts slide",
+      "seconds": 13.307,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Landing and stance recovery",
+      "seconds": 16.64,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Run backward",
+      "seconds": 18.653,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native block",
+      "seconds": 22.126,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slash",
+      "seconds": 25.144,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 28.17,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1000,
+      "LeftThumb",
+      0,
+      "Native sprint"
+    ],
+    [
+      1850,
+      0,
+      32767,
+      500,
+      "B",
+      0,
+      "Native slide"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Full-body recovery to crouch"
+    ],
+    [
+      6000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand after slide"
+    ],
+    [
+      7800,
+      0,
+      -32767,
+      1400,
+      "Neutral",
+      0,
+      "Run backward"
+    ],
+    [
+      11500,
+      0,
+      32767,
+      1000,
+      "LeftThumb",
+      0,
+      "Second sprint"
+    ],
+    [
+      11850,
+      0,
+      32767,
+      500,
+      "B",
+      0,
+      "Second slide"
+    ],
+    [
+      12180,
+      0,
+      20000,
+      180,
+      "A",
+      0,
+      "Native jump interrupts slide"
+    ],
+    [
+      15500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Landing and stance recovery"
+    ],
+    [
+      17500,
+      0,
+      -32767,
+      1400,
+      "Neutral",
+      0,
+      "Run backward"
+    ],
+    [
+      21000,
+      0,
+      0,
+      800,
+      "RightShoulder",
+      0,
+      "Native block"
+    ],
+    [
+      24000,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Native slash"
+    ],
+    [
+      27000,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing recovery"
+    ]
+  ],
+  "dll": "0A68D333DB365AF68C6AEDE7731D8D4E0B4E3D51F957A0407E0998E7BFD4F37B",
+  "bank": "1BAB98551563977642DC338D3C15F1BBA9F5EDA8BFD7AEE228751CC626E6B713",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

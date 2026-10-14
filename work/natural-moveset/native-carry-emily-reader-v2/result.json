@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "complete": false,
+  "remote_gameplay_bound": false,
+  "visual_accepted": false,
+  "scope": "Native source-reader proof only. Remote full-body/corpse attachment, physics and release binding remain incomplete.",
+  "character": "emily",
+  "take": "native-carry-emily-reader-v2",
+  "checks": [
+    "Exact verified Steam executable identity",
+    "Existing BD99 proxy preserved; only the read-only probe changed",
+    "Owned native pickup, idle, walk and selected release each sampled at least three times",
+    "All accepted scenes resolve to the intended native character",
+    "Carry walking independently observed while standing and crouched",
+    "Pickup, carry and drop retain the same source corpse generation",
+    "At least 95% of accepted samples agree with a subsequent independent scene and binding read",
+    "Carry reader refuses samples outside native carry/drop states",
+    "Native pickup begins from free movement and release returns to free movement",
+    "Native source player health and identity preserved",
+    "Real-time native recording retains at least 24 captured frames per second"
+  ],
+  "samples": 280,
+  "accepted_samples": 219,
+  "variants": {
+    "1": 13,
+    "2": 162,
+    "3": 32,
+    "6": 12
+  },
+  "independent_scene_matches": 218,
+  "serial_probe_retirement_boundaries": [],
+  "actual_capture_hz": 27.583333333333332,
+  "video_sha256": "ED0572DCDD6F1C34DFA93E5928FCE72F2C8CFE9D3C29130BD20E20670DDD178C",
+  "observations_sha256": "D86D6349BD91395DEE4D1F920B06AF3A7AB7BBFA9FC38A4FED3D8EE046805CF8",
+  "identity": {
+    "role": "client",
+    "pid": 72124,
+    "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "proxySha256": "BD99C7A6E327292B2493DC354538EFD2F35C06C4800297BFE5476BC848D1A706",
+    "probeSha256": "491DFAE92B965DF0812B5EEFF0508F9314B0DF90D2F7C03FC209519FC6674DC4",
+    "readerSha256": "2707A9390884AAE72E466D768228C9536C57261C1DC89EAFA0DB767D9A017C79",
+    "harnessSha256": "969CF8228EB6D884965E8067D35A8559606B6011B5AF0239E47221CF780946D9",
+    "healthBefore": {
+      "tick": 271512937,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x178b5e18370",
+      "actor": "0x178b0a32950",
+      "attributes": "0x178b5c99b30",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

@@ -1,0 +1,109 @@
+# disasm-844bf0.txt
+
+Original: [work/disasm-844bf0.txt](<../../../../work/disasm-844bf0.txt>)
+
+SHA-256: `8BA71A95121F4CC0BE3B48FE03FC4DAFC6CD9F898B07B0D8951C8AEE0339449B`; 4469 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140844BF0: mov         qword ptr [rsp+8],rbx
+  0000000140844BF5: mov         qword ptr [rsp+18h],rbp
+  0000000140844BFA: mov         qword ptr [rsp+20h],rsi
+  0000000140844BFF: push        rdi
+  0000000140844C00: sub         rsp,60h
+  0000000140844C04: mov         rbx,rdx
+  0000000140844C07: mov         rsi,rcx
+  0000000140844C0A: call        00000001409FFC00
+  0000000140844C0F: lea         rcx,[rbx+8]
+  0000000140844C13: mov         edx,2
+  0000000140844C18: call        00000001403DA910
+  0000000140844C1D: lea         r9,[rsp+48h]
+  0000000140844C22: lea         rdx,[00000001439ACD40h]
+  0000000140844C29: xorps       xmm0,xmm0
+  0000000140844C2C: mov         rbp,qword ptr [rax+10h]
+  0000000140844C30: mov         rbx,qword ptr [rax+8]
+  0000000140844C34: movss       dword ptr [rsp+78h],xmm0
+  0000000140844C3A: mov         r8d,dword ptr [rsp+78h]
+  0000000140844C3F: lea         rax,[rsp+30h]
+  0000000140844C44: mov         rcx,rbp
+  0000000140844C47: mov         byte ptr [rsp+30h],69h
+  0000000140844C4C: mov         dword ptr [rsp+38h],0
+  0000000140844C54: mov         byte ptr [rsp+48h],69h
+  0000000140844C59: mov         dword ptr [rsp+50h],1
+  0000000140844C61: mov         qword ptr [rsp+20h],rax
+  0000000140844C66: call        0000000140883F80
+  0000000140844C6B: mov         rdi,qword ptr [rbx+00000000000000F8h]
+  0000000140844C72: test        rdi,rdi
+  0000000140844C75: je          0000000140844D4A
+  0000000140844C7B: cmp         dword ptr [rdi+00000000000000C4h],0FFFFFFFFh
+  0000000140844C82: jne         0000000140844C93
+  0000000140844C84: mov         eax,dword ptr [rdi+60h]
+  0000000140844C87: sub         eax,18h
+  0000000140844C8A: cmp         eax,1
+  0000000140844C8D: ja          0000000140844D4A
+  0000000140844C93: mov         rax,qword ptr [rsi+10h]
+  0000000140844C97: mov         r8d,1
+  0000000140844C9D: mov         rdx,rdi
+  0000000140844CA0: mov         rcx,qword ptr [rax+0000000000000328h]
+  0000000140844CA7: call        00000001406156E0
+  0000000140844CAC: mov         ebx,eax
+  0000000140844CAE: test        eax,eax
+  0000000140844CB0: jle         0000000140844D27
+  0000000140844CB2: mov         r8d,eax
+  0000000140844CB5: mov         rdx,rdi
+  0000000140844CB8: mov         rcx,rsi
+  0000000140844CBB: call        0000000140845000
+  0000000140844CC0: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140844CC7: mov         rcx,qword ptr [rcx+00000000001F6EE8h]
+  0000000140844CCE: test        rcx,rcx
+  0000000140844CD1: je          0000000140844CF4
+  0000000140844CD3: mov         rcx,qword ptr [rcx+58h]
+  0000000140844CD7: test        rcx,rcx
+  0000000140844CDA: je          0000000140844CF4
+  0000000140844CDC: lea         r9,[rsp+78h]
+  0000000140844CE1: mov         r8d,ebx
+  0000000140844CE4: mov         rdx,rdi
+  0000000140844CE7: mov         dword ptr [rsp+78h],0
+  0000000140844CEF: call        00000001406734B0
+  0000000140844CF4: cmp         byte ptr [rdi+00000000000000E8h],0
+  0000000140844CFB: je          0000000140844D27
+  0000000140844CFD: lea         rdx,[00000001439C5A30h]
+  0000000140844D04: mov         r8d,2
+  0000000140844D0A: mov         rcx,rbp
+  0000000140844D0D: call        0000000140877720
+  0000000140844D12: mov         rcx,rax
+  0000000140844D15: mov         rbx,rax
+  0000000140844D18: call        000000014076E2B0
+  0000000140844D1D: mov         dl,1
+  0000000140844D1F: mov         rcx,rbx
+  0000000140844D22: call        000000014076EC20
+  0000000140844D27: mov         rdx,rdi
+  0000000140844D2A: mov         rcx,rsi
+  0000000140844D2D: call        00000001408450B0
+  0000000140844D32: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140844D39: mov         edx,4
+  0000000140844D3E: add         rcx,1F6EC8h
+  0000000140844D45: call        00000001407885B0
+  0000000140844D4A: lea         r11,[rsp+60h]
+  0000000140844D4F: mov         rbx,qword ptr [r11+10h]
+  0000000140844D53: mov         rbp,qword ptr [r11+20h]
+  0000000140844D57: mov         rsi,qword ptr [r11+28h]
+  0000000140844D5B: mov         rsp,r11
+  0000000140844D5E: pop         rdi
+  0000000140844D5F: ret
+  0000000140844D60: 40
+
+  Summary
+
+     1A7D000 .text
+
+````

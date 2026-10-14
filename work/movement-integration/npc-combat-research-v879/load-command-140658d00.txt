@@ -1,0 +1,124 @@
+void FUN_140658d00(int *param_1)
+
+{
+  longlong *plVar1;
+  longlong *plVar2;
+  uint uVar3;
+  char cVar4;
+  int iVar5;
+  int iVar6;
+  longlong lVar7;
+  longlong lVar8;
+  undefined8 uVar9;
+  undefined *puVar10;
+  ulonglong uVar11;
+  undefined *puVar12;
+  longlong *plVar13;
+  longlong lVar14;
+  undefined1 *puStack_118;
+  uint uStack_110;
+  uint uStack_10c;
+  undefined1 auStack_108 [24];
+  undefined1 auStack_f0 [232];
+  
+  plVar2 = D2_GameSingletonPtr;
+  if ((D2_GameSingletonPtr != (longlong *)0x0) &&
+     (plVar1 = D2_GameSingletonPtr + 0x5cebb, plVar1 != (longlong *)0x0)) {
+    iVar5 = *param_1;
+    if (3 < iVar5) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830(&UNK_141c34890);
+    }
+    lVar14 = -1;
+    puVar12 = &DAT_141ab2848;
+    if (iVar5 < 2) {
+      iVar5 = -1;
+    }
+    else {
+      if (iVar5 < 2) {
+        puVar10 = &DAT_141ab2848;
+      }
+      else {
+        puVar10 = *(undefined **)(param_1 + 4);
+      }
+      iVar5 = FUN_1411ada38(puVar10);
+    }
+    if (*param_1 == 3) {
+      puVar12 = *(undefined **)(param_1 + 6);
+    }
+    FUN_14013fb30(&puStack_118);
+    FUN_1411ad450(auStack_f0,0,0xe8);
+    auStack_108[0] = 0;
+    puStack_118 = auStack_108;
+    uStack_110 = uStack_110 & 0xe0000000;
+    uStack_10c = uStack_10c & 0xc0000100 | 0x80000100;
+    FUN_14013ff40(&puStack_118,puVar12);
+    if (iVar5 == -1) {
+      FUN_140658950(plVar1,0);
+      iVar5 = -1;
+      iVar6 = FUN_140657400(plVar1);
+      plVar13 = (longlong *)plVar2[0x5cebf];
+      uVar3 = *(uint *)(plVar2 + 0x5cec0);
+      if (iVar6 == 0) {
+        plVar2 = plVar13 + (uVar3 & 0xffffff);
+code_r0x000140658e90:
+        if (plVar13 != plVar2) {
+          iVar6 = FUN_140657a10(plVar13);
+          if (iVar6 != 1) goto code_r0x000140658ea2;
+          lVar8 = D2_InternedName_Resolve(*plVar13 + 0x50);
+          uVar11 = 0xffffffffffffffff;
+          do {
+            uVar11 = uVar11 + 1;
+          } while (*(char *)(lVar8 + uVar11) != '\0');
+          if (uVar11 < 3) {
+            iVar5 = -1;
+          }
+          else {
+            do {
+              lVar14 = lVar14 + 1;
+            } while (*(char *)(lVar8 + lVar14) != '\0');
+            iVar5 = FUN_1411ada38(lVar8 + -2 + lVar14);
+          }
+        }
+        goto code_r0x000140658ee1;
+      }
+      plVar2 = plVar13 + (uVar3 & 0xffffff);
+      for (; plVar13 != plVar2; plVar13 = plVar13 + 1) {
+        iVar6 = FUN_140657a10(plVar13);
+        if (iVar6 == 1) {
+          lVar14 = D2_InternedName_Resolve(*plVar13 + 0x50);
+          uVar11 = 0xffffffffffffffff;
+          do {
+            uVar11 = uVar11 + 1;
+          } while (*(char *)(lVar14 + uVar11) != '\0');
+          if (uVar11 < 3) {
+            iVar5 = -1;
+          }
+          else {
+            lVar8 = -1;
+            do {
+              lVar7 = lVar8;
+              lVar8 = lVar7 + 1;
+            } while (*(char *)(lVar14 + lVar8) != '\0');
+            iVar5 = FUN_1411ada38(lVar7 + -1 + lVar14);
+          }
+        }
+      }
+code_r0x000140658ee1:
+      if (iVar5 == -1) {
+                    /* WARNING: Subroutine does not return */
+        FUN_140166830(&UNK_141c348c8);
+      }
+    }
+    iVar6 = FUN_140657400(plVar1);
+    if ((iVar6 != 2) || (cVar4 = (**(code **)(*D2_GameSingletonPtr + 0xf8))(), cVar4 != '\0')) {
+      uVar9 = D2_InternedName_Resolve(&puStack_118);
+      FUN_140659190(plVar1,0,iVar5,uVar9);
+    }
+    FUN_14013fd10(&puStack_118);
+  }
+  return;
+code_r0x000140658ea2:
+  plVar13 = plVar13 + 1;
+  goto code_r0x000140658e90;
+}

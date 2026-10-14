@@ -1,0 +1,14 @@
+[
+  {
+    "address": "140447db0",
+    "category": "D2Coop/Possession-transfer-static-v324",
+    "comment": "Exact B671F8... target component weak ref equipment+B8(generation)/C0(pointer); 3da910 matches component+18 and 7e7390 policy. 447db0 passes it to822a70 on [equipment+E8]+2F8+410. Internal+5D0 uses14 INACTIVE sentinel (824e40), separate from physics stance18. Void possession_parasite TYPE_POWER_UPGRADE20 enables ALLOW_HUMANS. Runtime326 validates exact NPCPossession1b641a8 target generation/entity/membership, observed states0/1/8/9 then14 and normal exit. Run failed fixture quantity cleanup; checkpoints/protected14 passed; no peer transfer/hide/VFX implemented.",
+    "type": "Note"
+  },
+  {
+    "address": "140824e40",
+    "category": "D2Coop/Possession-state-sentinel-v326",
+    "comment": "Confirmed static: internal Possession controller param+1C0 (mode+5D0) uses14 as inactive sentinel, skipping state callbacks and clearing effects. This is NOT physics stance/active-state ID. Prior324 test incorrectly expected stance14; failed receipt retained. Runtime324 shows physics18, nondefault mode, targetNPCPossession1b641a8 and native400ms release with visible host entry. 325 watcher failed unregistered CLI and its target missed. 326 registers/preflights diagnostic and separates internal state/target weak ref; occupied semantics pending.",
+    "type": "Note"
+  }
+]

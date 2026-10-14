@@ -1,0 +1,71 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014087D8E0: movss       xmm10,dword ptr [rsp+4Ch]
+  000000014087D8E7: movss       xmm9,dword ptr [rsp+48h]
+  000000014087D8EE: movss       xmm5,dword ptr [rsp+44h]
+  000000014087D8F4: movss       xmm4,dword ptr [rsp+40h]
+  000000014087D8FA: movss       xmm3,dword ptr [rsp+3Ch]
+  000000014087D900: movss       xmm6,dword ptr [rsp+38h]
+  000000014087D906: movss       xmm7,dword ptr [rsp+34h]
+  000000014087D90C: movss       xmm8,dword ptr [rsp+30h]
+  000000014087D913: add         rbx,8
+  000000014087D917: cmp         rbx,rdi
+  000000014087D91A: jne         000000014087D770
+  000000014087D920: xor         edi,edi
+  000000014087D922: test        dword ptr [rsi+0000000000000270h],0FFFFFFh
+  000000014087D92C: jle         000000014087D98F
+  000000014087D92E: mov         rbx,rdi
+  000000014087D931: mov         rdi,qword ptr [rbp+00000000000000F8h]
+  000000014087D938: nop         dword ptr [rax+rax+0000000000000000h]
+  000000014087D940: mov         rax,qword ptr [rsi+0000000000000268h]
+  000000014087D947: mov         rcx,qword ptr [rbx+rax]
+  000000014087D94B: test        rcx,rcx
+  000000014087D94E: je          000000014087D972
+  000000014087D950: mov         eax,dword ptr [rcx+1Ch]
+  000000014087D953: and         al,0Ch
+  000000014087D955: cmp         al,8
+  000000014087D957: jb          000000014087D972
+  000000014087D959: mov         rax,qword ptr [rcx]
+  000000014087D95C: movzx       r9d,byte ptr [rbp+0000000000000108h]
+  000000014087D964: lea         r8,[rsp+58h]
+  000000014087D969: mov         rdx,rdi
+  000000014087D96C: call        qword ptr [rax+00000000000000B0h]
+  000000014087D972: mov         rcx,qword ptr [rbp-38h]
+  000000014087D976: inc         ecx
+  000000014087D978: mov         qword ptr [rbp-38h],rcx
+  000000014087D97C: add         rbx,8
+  000000014087D980: mov         eax,dword ptr [rsi+0000000000000270h]
+  000000014087D986: and         eax,0FFFFFFh
+  000000014087D98B: cmp         ecx,eax
+  000000014087D98D: jl          000000014087D940
+  000000014087D98F: lea         rcx,[rsp+58h]
+  000000014087D994: call        000000014000F2C0
+  000000014087D999: movss       xmm0,dword ptr [rsp+58h]
+  000000014087D99F: movss       dword ptr [rsi+000000000000030Ch],xmm0
+  000000014087D9A7: movss       xmm1,dword ptr [rsp+5Ch]
+  000000014087D9AD: movss       dword ptr [rsi+0000000000000310h],xmm1
+  000000014087D9B5: movss       xmm0,dword ptr [rsp+60h]
+  000000014087D9BB: movss       dword ptr [rsi+0000000000000314h],xmm0
+  000000014087D9C3: movss       xmm1,dword ptr [rsp+64h]
+  000000014087D9C9: movss       dword ptr [rsi+0000000000000318h],xmm1
+  000000014087D9D1: movss       xmm0,dword ptr [rsp+68h]
+  000000014087D9D7: movss       dword ptr [rsi+000000000000031Ch],xmm0
+  000000014087D9DF: movss       xmm1,dword ptr [rsp+6Ch]
+  000000014087D9E5: movss       dword ptr [rsi+0000000000000320h],xmm1
+  000000014087D9ED: movss       xmm0,dword ptr [rsp+70h]
+  000000014087D9F3: movss       dword ptr [rsi+0000000000000324h],xmm0
+  000000014087D9FB: movss       xmm1,dword ptr [rsp+74h]
+  000000014087DA01: movss       dword ptr [rsi+0000000000000328h],xmm1
+  000000014087DA09: movss       xmm0,dword ptr [rsp+78h]
+  000000014087DA0F: F3
+  000000014087DA10: 0F
+
+  Summary
+
+     1A7D000 .text

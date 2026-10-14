@@ -1,0 +1,11 @@
+{
+  "cases": [],
+  "passed": false,
+  "failure": "Cannot index into a null array.",
+  "scope": "Paired mission autosaves: one-peer native autosave mirrored natively; shared restart returns both players to their own mid-mission autosave; both origins; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionAutosavePair-v1155.ps1:166[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 166 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCannot index into a null array.[0m

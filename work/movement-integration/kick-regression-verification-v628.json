@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-13T08:53:45.466026+02:00",
+  "candidate": "candidate-kick-v625",
+  "dll": "0FB8A544BA79339F697C1068BEFE4E793DC061467E9CEFABEF2E1311AA601404",
+  "probe": "3506DCAAA894C8D8293FDE7C2632DB56C8E8B225B62CC2E3F7C9D9F664842B95",
+  "protocol": 67,
+  "bankVersion": 66,
+  "clips": 354,
+  "regressionVerified": true,
+  "kickRuntimeVerified": false,
+  "rightHitRecoveryVerified": true,
+  "leftHitRecoveryVerified": false,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\crouch-regression-corvo-v627\\result.json",
+      "sha256": "11AFA57BA5D1E2D7FA388AEB9DF507A1DF849C8AABC579760884908CD56D8CA1",
+      "checks": [
+        "Ordinary crouched sword input produces native three-actor targeted slash",
+        "Independent reader validates exact player, right arm and native enemy target",
+        "Native sword equipped and started during targeted slash",
+        "Existing full-body combat clip plays through native Steam source semantics",
+        "Native stance locomotion resumes after targeted attack",
+        "Independent network root retained through target-bearing attack",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native crouched RT250ms facing guard2; target-bearing slash, native stance recovery and optional owned recovery when observed, no shared victim outcome.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "coverage": {
+        "ownedHitRecoverySamples": 0,
+        "sourceRiseSamples": 1,
+        "required": "Native targeted crouched strike and locomotion recovery",
+        "optional": "Separate native hit-recovery scenes only when actually observed"
+      }
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\crouch-regression-emily-v627\\result.json",
+      "sha256": "DBBC8194589006A3E8E7898861F4C90FF24B633380C8FF557214F073CAAA83B1",
+      "checks": [
+        "Ordinary crouched sword input produces native three-actor targeted slash",
+        "Independent reader validates exact player, right arm and native enemy target",
+        "Native sword equipped and started during targeted slash",
+        "Existing full-body combat clip plays through native Steam source semantics",
+        "Independent reader observes an optional owned hit-recovery scene",
+        "Observed hit-recovery scene drives existing authored follow-through",
+        "Hit recovery remains inside the preserved attack follow-through interval",
+        "Native stance locomotion resumes after targeted attack",
+        "Independent network root retained through target-bearing attack",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native crouched RT250ms facing guard2; target-bearing slash, native stance recovery and optional owned recovery when observed, no shared victim outcome.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "coverage": {
+        "ownedHitRecoverySamples": 10,
+        "sourceRiseSamples": 0,
+        "required": "Native targeted crouched strike and locomotion recovery",
+        "optional": "Separate native hit-recovery scenes only when actually observed"
+      }
+    }
+  ],
+  "retainedKickFailure": "work/natural-moveset/native-kick-emily-v626/result.json",
+  "complete": false,
+  "visualAccepted": false,
+  "limitations": [
+    "Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged.",
+    "Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified.",
+    "Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance.",
+    "All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished."
+  ]
+}

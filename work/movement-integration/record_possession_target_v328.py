@@ -1,0 +1,33 @@
+from pathlib import Path
+import json,hashlib,datetime,subprocess
+R=Path(__file__).resolve().parents[2];P=R/'work/natural-moveset';W=R/'work/movement-integration';take='possession-human-v328';t=P/take
+read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
+def write(p,v):p.write_text(json.dumps(v,indent=2),encoding='utf-8')
+r=read(t/'result.json');assert r['passed'] and len(r['checks'])==9 and (t/'source-sheet.jpg').is_file()
+summary=read(t/'target-observation-summary.json');rows=read(t/'states.json');occupied=[x for x in rows if x['player']['stance']==18 and not x['player']['defaultMode']]
+assert occupied and all(x['power']['quantity']==1 and x['fixture']['active']for x in occupied)
+review=dict(inspected=True,at=datetime.datetime.now().astimezone().isoformat(),method='Viewed source temporal sheet at0.8/2.2/2.8/3.4/4/6/8.6/9.4/12s',evidence=['source-sheet.jpg'],visual_accepted=False,complete=False,notes='Actual native source shows human target highlight, hand cast, travel/tunnel flash, altered host vision with Leave Host Body prompt, normal exit and guard recovery with the sword restored. These effects and host entry are local native behavior; remote body/target ownership and replicated VFX remain unimplemented. No audio captured. AI isolation begins active and retires on native host ownership change; it is not held throughout the transfer.')
+write(t/'visual-review.json',review)
+video=P/(take+'.mp4');info=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_entries','stream=avg_frame_rate','-of','json',str(video)],text=True));n,d=map(float,info['streams'][0]['avg_frame_rate'].split('/'))
+with video.open('rb')as f:digest=hashlib.file_digest(f,'sha256').hexdigest().upper()
+row=dict(video=video.name,character='corvo',label='Possession · native human host entry and exit · v328',alias='native_possession_in',requirements=['corvo_possession_enter_loop_exit'],gameplay_bound=False,complete=False,visual_accepted=False,evidence=f'{take}/result.json',visual_review=f'{take}/visual-review.json',proxy_sha256=r['dll'],actual_capture_hz=n/d,video_sha256=digest,checks_passed=True,scope='Source-only native human-target Possession lifecycle and deferred acquisition rollback. Remote presentation remains limited to empty-target entry/aim. See result and review for isolation retirement and unresolved networking/VFX.')
+videos=read(P/'runtime-video-manifest.json');videos=[v for v in videos if v['video']!=video.name];videos.append(row);write(P/'runtime-video-manifest.json',videos)
+ann=read(P/'review-evidence-annotations.json');item=ann['items']['corvo_possession_enter_loop_exit'];item.setdefault('native_integration',{})[video.name]=row
+item['notes']='323 passes10 two-instance checks for native333ms entry/200ms aim driving remote Corvo full-body bank51/315 over Steam protocol48, with exact scene incarnations and75 full-weight samples.328 source-only human-target Possession passes9 checks: target generation/entity/component ownership, native400ms release, acquired power retained through occupation, normal-input exit, native inventory rollback, both isolated checkpoints and protected14. Native target/travel/vision/exit effects are visually recorded locally. Internal states0/1/8 and inactive14 are distinct from physics stance18; AI isolation retires at host entry. Remote release, body disappearance/reappearance, shared target control, VFX, alternate contexts and visual acceptance remain incomplete.'
+write(P/'review-evidence-annotations.json',ann)
+write(W/'candidate-possession-lifecycle-v328/runtime-verification.json',dict(result=r,targetObservation=summary,occupiedRows=len(occupied),visualReview=review,complete=False))
+f=R/'documentation/handoff-2026-10-11/32-native-possession-investigation.md';s=f.read_text();heading='## Clean native human-host lifecycle, candidate328'
+if heading not in s:
+ s+='\n\n'+heading+'''
+
+327 passes its8 checks and restores quantities, but later telemetry shows it did so during occupation: host entry retires the NPC AI-isolation lease, which triggered cleanup. That passing receipt is narrower than a clean native lifecycle and is not indexed as such.328 defers inventory rollback until generation-checked inactive internal state14, no target, restored default mode and ground/crouch physics stance. If exit cannot be verified by the original finite lease plus5 seconds, it fails closed and requires the checkpoint reset; it does not revoke powers from inside an occupied host.
+
+[328 passes9 checks](../../work/natural-moveset/possession-human-v328/result.json).186 owned-target samples include159 occupied-context samples. All11 slower occupied-player samples retain power quantity1 and an active acquisition fixture. Native leave-host input restores default standing mode; both native quantities and health return to baseline, both isolated checkpoints restore, and protected14 pass. Final native process exit0 was consumed before further native work.
+
+[Viewed source recording receipt](../../work/natural-moveset/possession-human-v328/visual-review.json) documents local target highlight, travel/tunnel, host vision and normal exit with guard recovery. This is source-only behavior, not remote VFX or target control. The AI isolation lease is intentionally not treated as held during host ownership changes. Earlier generic scope strings saying AI-held describe initial fixture setup only.
+
+[Exact NPC RTTI](../../work/movement-integration/possession-npc-rtti-v327.json) confirms1b641a8. [NPC lifecycle decompilation](../../work/movement-integration/possession-npc-lifecycle-decompile-v327.txt) records eligibility, native ownership/context and visibility-related branches as static evidence only. [Fifteen exact effect definitions](../../outputs/d2-coop-lab/research/asset-exports/possession-fx-v327/manifest.json) are read-only exports; screen-space host vision/tunnel effects must not be indiscriminately applied to the remote observer. Audio is referenced by assets but was not recorded.
+
+[Non-atomic release correlation](../../work/natural-moveset/possession-human-v326/release-correlations.json) has13 raw release samples and nearest watcher offsets at most16ms. Most correlate to EnterPossessedHost26/internal0; transition samples are invalid.329 adds a probe-only release reader requiring exact target generation/membership, Corvo left-arm binding, native400ms scene and exact entry context. Runtime entry/aim transport remains unchanged until that new reader is independently verified. Full movement and playable co-op remain incomplete.
+''';f.write_text(s,encoding='utf-8')
+print(json.dumps(dict(videos=len(videos),checks=len(r['checks']),occupiedSamples=len(occupied))))

@@ -1,0 +1,193 @@
+# ghidra-dominoConnectionFxUpdate-v220.json
+
+Original: [work/ghidra-dominoConnectionFxUpdate-v220.json](<../../../../work/ghidra-dominoConnectionFxUpdate-v220.json>)
+
+SHA-256: `86849DAF9B34C167D3F8CF39672B3057FE1DDA755F951A36E617C35D40FF442B`; 7184 bytes.
+
+## Original saved record
+
+````json
+{
+  "addresses": [
+    "1404dbb00",
+    "1404dbc10",
+    "1404dbe90"
+  ],
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nfloat * FUN_1404dbb00(longlong param_1,float *param_2,float param_3)\r\n\r\n{\r\n  longlong lVar1;\r\n  float fVar2;\r\n  float fVar3;\r\n  float fVar4;\r\n  float fVar5;\r\n  float fVar6;\r\n  float fVar7;\r\n  float fVar8;\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  fVar5 = *(float *)(lVar1 + 0x38);\r\n  fVar3 = *(float *)(lVar1 + 0x3c);\r\n  fVar4 = *(float *)(lVar1 + 0x40);\r\n  lVar1 = *(longlong *)(param_1 + 8);\r\n  fVar7 = *(float *)(lVar1 + 0x38);\r\n  fVar8 = *(float *)(lVar1 + 0x3c);\r\n  fVar6 = *(float *)(lVar1 + 0x40);\r\n  if (ABS(fVar5) <= 1e-18) {\r\n    fVar5 = 0.0;\r\n  }\r\n  if (ABS(fVar3) <= 1e-18) {\r\n    fVar3 = 0.0;\r\n  }\r\n  if (ABS(fVar4) <= 1e-18) {\r\n    fVar4 = 0.0;\r\n  }\r\n  if (ABS(fVar7) <= 1e-18) {\r\n    fVar7 = 0.0;\r\n  }\r\n  if (ABS(fVar8) <= 1e-18) {\r\n    fVar8 = 0.0;\r\n  }\r\n  if (ABS(fVar6) <= 1e-18) {\r\n    fVar6 = 0.0;\r\n  }\r\n  fVar2 = 1.0 - param_3;\r\n  param_2[2] = fVar2 * fVar6 + fVar4 * param_3;\r\n  *param_2 = fVar2 * fVar7 + fVar5 * param_3;\r\n  param_2[1] = fVar2 * fVar8 + fVar3 * param_3;\r\n  return param_2;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nfloat * FUN_1404dbb00(longlong param_1,float *param_2,float param_3)\r\n\r\n{\r\n  longlong lVar1;\r\n  float fVar2;\r\n  float fVar3;\r\n  float fVar4;\r\n  float fVar5;\r\n  float fVar6;\r\n  float fVar7;\r\n  float fVar8;\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  fVar5 = *(float *)(lVar1 + 0x38);\r\n  fVar3 = *(float *)(lVar1 + 0x3c);\r\n  fVar4 = *(float *)(lVar1 + 0x40);\r\n  lVar1 = *(longlong *)(param_1 + 8);\r\n  fVar7 = *(float *)(lVar1 + 0x38);\r\n  fVar8 = *(float *)(lVar1 + 0x3c);\r\n  fVar6 = *(float *)(lVar1 + 0x40);\r\n  if (ABS(fVar5) <= 1e-18) {\r\n    fVar5 = 0.0;\r\n  }\r\n  if (ABS(fVar3) <= 1e-18) {\r\n    fVar3 = 0.0;\r\n  }\r\n  if (ABS(fVar4) <= 1e-18) {\r\n    fVar4 = 0.0;\r\n  }\r\n  if (ABS(fVar7) <= 1e-18) {\r\n    fVar7 = 0.0;\r\n  }\r\n  if (ABS(fVar8) <= 1e-18) {\r\n    fVar8 = 0.0;\r\n  }\r\n  if (ABS(fVar6) <= 1e-18) {\r\n    fVar6 = 0.0;\r\n  }\r\n  fVar2 = 1.0 - param_3;\r\n  param_2[2] = fVar2 * fVar6 + fVar4 * param_3;\r\n  *param_2 = fVar2 * fVar7 + fVar5 * param_3;\r\n  param_2[1] = fVar2 * fVar8 + fVar3 * param_3;\r\n  return param_2;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1404dbc10(longlong param_1,char param_2)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  longlong lVar4;\r\n  undefined4 *puVar5;\r\n  ulonglong in_stack_ffffffffffffffd0;\r\n  \r\n  lVar2 = FUN_1403da910(param_1 + 8,1);\r\n  lVar4 = 0;\r\n  if ((lVar2 != 0) && (lVar4 = *(longlong *)(lVar2 + 0x10), lVar4 != 0)) {\r\n    *(byte *)(lVar4 + 0x369) = *(byte *)(lVar4 + 0x369) & 0xfb;\r\n  }\r\n  cVar1 = FUN_1404e2710(param_1 + 0x90);\r\n  if (cVar1 != '\\0') {\r\n    FUN_1404e3050(param_1 + 0x90);\r\n  }\r\n  if (param_2 != '\\0') {\r\n    lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                      (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,\r\n                       in_stack_ffffffffffffffd0 & 0xffffffffffffff00);\r\n    if (lVar2 != 0) {\r\n      lVar3 = FUN_1404bd860();\r\n      puVar5 = &DAT_14228a780;\r\n      FUN_140875e80(lVar4,lVar2,lVar3 + 0x80,&DAT_1431af668,&DAT_14228a780,1);\r\n      FUN_14087e840(lVar2,1);\r\n      FUN_14087e7e0(lVar2,1);\r\n      lVar4 = FUN_1404bd860();\r\n      FUN_1404e2940(param_1 + 0xb8,*(undefined8 *)(lVar4 + 0x90),lVar2,0,\r\n                    (ulonglong)puVar5 & 0xffffffff00000000,0,0);\r\n    }\r\n  }\r\n  cVar1 = FUN_1404e2710(param_1 + 0x108);\r\n  if (cVar1 != '\\0') {\r\n    FUN_1404e3050(param_1 + 0x108);\r\n  }\r\n  *(int *)(param_1 + 0x84) = *(int *)(param_1 + 0x84) + -1;\r\n  *(undefined4 *)(param_1 + 0x88) = 0;\r\n  *(undefined4 *)(param_1 + 0x7c) = 0xbf800000;\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1404dbc10(longlong param_1,char param_2)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  longlong lVar4;\r\n  undefined4 *puVar5;\r\n  ulonglong in_stack_ffffffffffffffd0;\r\n  \r\n  lVar2 = FUN_1403da910(param_1 + 8,1);\r\n  lVar4 = 0;\r\n  if ((lVar2 != 0) && (lVar4 = *(longlong *)(lVar2 + 0x10), lVar4 != 0)) {\r\n    *(byte *)(lVar4 + 0x369) = *(byte *)(lVar4 + 0x369) & 0xfb;\r\n  }\r\n  cVar1 = FUN_1404e2710(param_1 + 0x90);\r\n  if (cVar1 != '\\0') {\r\n    FUN_1404e3050(param_1 + 0x90);\r\n  }\r\n  if (param_2 != '\\0') {\r\n    lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                      (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,\r\n                       in_stack_ffffffffffffffd0 & 0xffffffffffffff00);\r\n    if (lVar2 != 0) {\r\n      lVar3 = FUN_1404bd860();\r\n      puVar5 = &DAT_14228a780;\r\n      FUN_140875e80(lVar4,lVar2,lVar3 + 0x80,&DAT_1431af668,&DAT_14228a780,1);\r\n      FUN_14087e840(lVar2,1);\r\n      FUN_14087e7e0(lVar2,1);\r\n      lVar4 = FUN_1404bd860();\r\n      FUN_1404e2940(param_1 + 0xb8,*(undefined8 *)(lVar4 + 0x90),lVar2,0,\r\n                    (ulonglong)puVar5 & 0xffffffff00000000,0,0);\r\n    }\r\n  }\r\n  cVar1 = FUN_1404e2710(param_1 + 0x108);\r\n  if (cVar1 != '\\0') {\r\n    FUN_1404e3050(param_1 + 0x108);\r\n  }\r\n  *(int *)(param_1 + 0x84) = *(int *)(param_1 + 0x84) + -1;\r\n  *(undefined4 *)(param_1 + 0x88) = 0;\r\n  *(undefined4 *)(param_1 + 0x7c) = 0xbf800000;\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nulonglong FUN_1404dbe90(longlong param_1)\r\n\r\n{\r\n  int iVar1;\r\n  ulonglong uVar2;\r\n  \r\n  uVar2 = FUN_1403da910(param_1 + 0x68,1);\r\n  if (((uVar2 != 0) && (iVar1 = *(int *)(param_1 + 0x78), -1 < iVar1)) &&\r\n     (uVar2 = *(ulonglong *)(uVar2 + 0x48),\r\n     *(float *)(uVar2 + 0x24 + (longlong)iVar1 * 0x28) !=\r\n     *(float *)(uVar2 + 8 + (longlong)iVar1 * 0x28))) {\r\n    return CONCAT71((int7)(uVar2 >> 8),1);\r\n  }\r\n  return uVar2 & 0xffffffffffffff00;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nulonglong FUN_1404dbe90(longlong param_1)\r\n\r\n{\r\n  int iVar1;\r\n  ulonglong uVar2;\r\n  \r\n  uVar2 = FUN_1403da910(param_1 + 0x68,1);\r\n  if (((uVar2 != 0) && (iVar1 = *(int *)(param_1 + 0x78), -1 < iVar1)) &&\r\n     (uVar2 = *(ulonglong *)(uVar2 + 0x48),\r\n     *(float *)(uVar2 + 0x24 + (longlong)iVar1 * 0x28) !=\r\n     *(float *)(uVar2 + 8 + (longlong)iVar1 * 0x28))) {\r\n    return CONCAT71((int7)(uVar2 >> 8),1);\r\n  }\r\n  return uVar2 & 0xffffffffffffff00;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ]
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+float * FUN_1404dbb00(longlong param_1,float *param_2,float param_3)
+
+{
+  longlong lVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  
+  lVar1 = *(longlong *)(param_1 + 0x10);
+  fVar5 = *(float *)(lVar1 + 0x38);
+  fVar3 = *(float *)(lVar1 + 0x3c);
+  fVar4 = *(float *)(lVar1 + 0x40);
+  lVar1 = *(longlong *)(param_1 + 8);
+  fVar7 = *(float *)(lVar1 + 0x38);
+  fVar8 = *(float *)(lVar1 + 0x3c);
+  fVar6 = *(float *)(lVar1 + 0x40);
+  if (ABS(fVar5) <= 1e-18) {
+    fVar5 = 0.0;
+  }
+  if (ABS(fVar3) <= 1e-18) {
+    fVar3 = 0.0;
+  }
+  if (ABS(fVar4) <= 1e-18) {
+    fVar4 = 0.0;
+  }
+  if (ABS(fVar7) <= 1e-18) {
+    fVar7 = 0.0;
+  }
+  if (ABS(fVar8) <= 1e-18) {
+    fVar8 = 0.0;
+  }
+  if (ABS(fVar6) <= 1e-18) {
+    fVar6 = 0.0;
+  }
+  fVar2 = 1.0 - param_3;
+  param_2[2] = fVar2 * fVar6 + fVar4 * param_3;
+  *param_2 = fVar2 * fVar7 + fVar5 * param_3;
+  param_2[1] = fVar2 * fVar8 + fVar3 * param_3;
+  return param_2;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_1404dbc10(longlong param_1,char param_2)
+
+{
+  char cVar1;
+  longlong lVar2;
+  longlong lVar3;
+  longlong lVar4;
+  undefined4 *puVar5;
+  ulonglong in_stack_ffffffffffffffd0;
+  
+  lVar2 = FUN_1403da910(param_1 + 8,1);
+  lVar4 = 0;
+  if ((lVar2 != 0) && (lVar4 = *(longlong *)(lVar2 + 0x10), lVar4 != 0)) {
+    *(byte *)(lVar4 + 0x369) = *(byte *)(lVar4 + 0x369) & 0xfb;
+  }
+  cVar1 = FUN_1404e2710(param_1 + 0x90);
+  if (cVar1 != '\0') {
+    FUN_1404e3050(param_1 + 0x90);
+  }
+  if (param_2 != '\0') {
+    lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))
+                      (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,
+                       in_stack_ffffffffffffffd0 & 0xffffffffffffff00);
+    if (lVar2 != 0) {
+      lVar3 = FUN_1404bd860();
+      puVar5 = &DAT_14228a780;
+      FUN_140875e80(lVar4,lVar2,lVar3 + 0x80,&DAT_1431af668,&DAT_14228a780,1);
+      FUN_14087e840(lVar2,1);
+      FUN_14087e7e0(lVar2,1);
+      lVar4 = FUN_1404bd860();
+      FUN_1404e2940(param_1 + 0xb8,*(undefined8 *)(lVar4 + 0x90),lVar2,0,
+                    (ulonglong)puVar5 & 0xffffffff00000000,0,0);
+    }
+  }
+  cVar1 = FUN_1404e2710(param_1 + 0x108);
+  if (cVar1 != '\0') {
+    FUN_1404e3050(param_1 + 0x108);
+  }
+  *(int *)(param_1 + 0x84) = *(int *)(param_1 + 0x84) + -1;
+  *(undefined4 *)(param_1 + 0x88) = 0;
+  *(undefined4 *)(param_1 + 0x7c) = 0xbf800000;
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+ulonglong FUN_1404dbe90(longlong param_1)
+
+{
+  int iVar1;
+  ulonglong uVar2;
+  
+  uVar2 = FUN_1403da910(param_1 + 0x68,1);
+  if (((uVar2 != 0) && (iVar1 = *(int *)(param_1 + 0x78), -1 < iVar1)) &&
+     (uVar2 = *(ulonglong *)(uVar2 + 0x48),
+     *(float *)(uVar2 + 0x24 + (longlong)iVar1 * 0x28) !=
+     *(float *)(uVar2 + 8 + (longlong)iVar1 * 0x28))) {
+    return CONCAT71((int7)(uVar2 >> 8),1);
+  }
+  return uVar2 & 0xffffffffffffff00;
+}
+
+
+````

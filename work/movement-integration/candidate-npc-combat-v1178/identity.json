@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-14T17:27:32.140580+02:00",
+  "dll": "AEB10289B333B366DDF036F01C6062AA143F325230D5FFD86C000748CA8D7464",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1171",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1178 on 1171: online session flow through native Steam (game steam_api64; SteamFriends015/MatchMaking009/User019/Utils008): coop_session host creates a friends-only 2-member lobby with lobby data and rich presence connect, opens the native overlay invite dialog and listens P2P (virtual port 0); joins via GameLobbyJoinRequested_t, +connect_lobby or coop_session join <id> -> JoinLobby -> ConnectP2P to the owner; host role 0 Corvo, joiner role 1 Emily; lab loopback unchanged unless a session command is used. Runtime pending; two-account validation outstanding.",
+  "scopedOnlineLobbyVerified": true,
+  "runtimeEvidence": "../stage7-release-session-audit-v1180.json"
+}

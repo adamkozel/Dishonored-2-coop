@@ -1,0 +1,118 @@
+{
+  "at": "2026-10-14T20:13:37.877381+02:00",
+  "candidate": "candidate-npc-combat-v1213b",
+  "dll": "A73840A6B9267EC77926138921FC3B2EB8FEA5B4AD65F575AA6251211D1EAF58",
+  "bank": {
+    "version": 71,
+    "clips": 374,
+    "manifest": "../natural-moveset/use-bank-manifest-v1212.json",
+    "added": "369 button/generic, 370 lever, 371 crank, 372 wheel/valve, 373 key (mechanisms-v4 authored sequences)"
+  },
+  "cases": [
+    {
+      "take": "../natural-moveset/use-interaction-v1214",
+      "candidate": "candidate-npc-combat-v1213",
+      "passed": false,
+      "failure": "Native use did not change the window (client)",
+      "cases": [
+        {
+          "observer": "client",
+          "sourceUsesBefore": 0,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "observerSamples": 107,
+          "bankVersion": 71,
+          "maxAmount": 1.0,
+          "usableChanged": true,
+          "shownSamples": 31,
+          "sourceUnfocused": 0,
+          "source": "host",
+          "sourceUsesAfter": 1,
+          "maxWeight": 0.9999999
+        },
+        {
+          "observer": "host",
+          "sourceUsesBefore": 0,
+          "sourceUseName": "",
+          "observerSamples": 122,
+          "bankVersion": 71,
+          "maxAmount": 0.0,
+          "usableChanged": false,
+          "shownSamples": 0,
+          "sourceUnfocused": 0,
+          "source": "client",
+          "sourceUsesAfter": 0,
+          "maxWeight": 0.0
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/use-interaction-v1214b",
+      "candidate": "candidate-npc-combat-v1213",
+      "passed": false,
+      "failure": "Source did not register the native use state 75 (client)",
+      "cases": [
+        {
+          "observer": "host",
+          "observerSamples": 120,
+          "maxAmount": 0.0,
+          "shownSamples": 0,
+          "sourceUnfocused": 0,
+          "source": "client",
+          "maxWeight": 0.0,
+          "sourceUsesBefore": 0,
+          "usableChanged": true,
+          "sourceUsesAfter": 0,
+          "bankVersion": 71,
+          "sourceUseName": ""
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/use-interaction-v1214c",
+      "candidate": "candidate-npc-combat-v1213b",
+      "passed": true,
+      "failure": null,
+      "cases": [
+        {
+          "bankVersion": 71,
+          "shownSamples": 36,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "observer": "host",
+          "observerSamples": 123,
+          "source": "client",
+          "maxWeight": 0.9999999,
+          "sourceUsesAfter": 1,
+          "sourceUnfocused": 0,
+          "maxAmount": 1.0,
+          "sourceUsesBefore": 0,
+          "usableChanged": true
+        },
+        {
+          "bankVersion": 71,
+          "shownSamples": 8,
+          "sourceUseName": "ld_rich_small_01_sndctr_4",
+          "observer": "client",
+          "observerSamples": 106,
+          "source": "host",
+          "maxWeight": 0.9870926,
+          "sourceUsesAfter": 1,
+          "sourceUnfocused": 0,
+          "maxAmount": 0.2396356,
+          "sourceUsesBefore": 0,
+          "usableChanged": true
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1214c, both roles): a native use (player state 75, one engine frame) is detected at the source with the focused entity (interaction sensor +0x80) and plays the authored generic interaction (clip 369) on the partner body through protocol 74; Emily reach visually accepted.",
+    "1213 sampled state 75 only at the 33 ms packet cadence and missed uses (1214b); 1213b samples every engine frame.",
+    "Host-source presentation in 1214c ended at 24% of the clip (the source ends a use on any other action or >0.6 m movement); cause not isolated."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Lever/crank/wheel/key variants are classified by entity name and loaded (clips 370-373) but untested on real levers/cranks/wheels/locks.",
+    "Early end of the host-source use (24%).",
+    "Hand targeting to the actual handle/lever geometry (clips are stand-ins)."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "A1860B6C37F649281A1312A40EAF270EE37E65B497F64804B4169523A682B6F5",
+  "checks": [
+    "Ordinary sword input produces native three-actor targeted slash",
+    "Independent reader validates exact player, right arm and native enemy target",
+    "Native sword equipped and started during targeted slash",
+    "Existing full-body combat clip plays through native Steam source semantics",
+    "Native standing recovery restores movement after targeted attack",
+    "Independent network root retained through target-bearing attack",
+    "Remote body playback did not duplicate damage on the receiver victim",
+    "Native ordinary RT250ms facing guard2; validated target-bearing sword animation, no shared victim outcome.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "name": "targeted-slash",
+        "stance": 0,
+        "distance": 1.15,
+        "yaw": 90
+      },
+      "key": "client-targeted-slash",
+      "count": 233,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Existing combat pipeline extended to observed ordinary target-bearing sword scenes. Read-only native source, unchanged protocol65/bank65/353clips. Actor presentation only; no native victim events or damage replay. All inventories, health and14 protected files restored."
+}

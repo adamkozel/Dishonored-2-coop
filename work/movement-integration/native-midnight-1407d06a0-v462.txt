@@ -1,0 +1,49 @@
+
+void FUN_1407d06a0(longlong param_1,int param_2)
+
+{
+  undefined8 uVar1;
+  undefined8 *puVar2;
+  uint uVar3;
+  ulonglong uVar4;
+  ulonglong uVar5;
+  ulonglong uVar6;
+  double dStackX_8;
+  
+  if (0 < param_2) {
+    puVar2 = (undefined8 *)
+             (**(code **)(*D2_GameSingletonPtr + 0xd0))(D2_GameSingletonPtr,&dStackX_8,3);
+    uVar1 = *puVar2;
+    *(undefined4 *)(param_1 + 0x2a8) = 3;
+    *(undefined8 *)(param_1 + 0x298) = uVar1;
+    dStackX_8 = (double)((float)param_2 * 0.001) + *(double *)(param_1 + 0x298);
+    *(double *)(param_1 + 0x2a0) = dStackX_8;
+  }
+  uVar5 = 0;
+  uVar4 = uVar5;
+  uVar6 = uVar5;
+  if ((*(uint *)(param_1 + 0xe8) & 0xffffff) != 0) {
+    do {
+      FUN_1407dd690(*(undefined8 *)(uVar6 + *(longlong *)(param_1 + 0xe0)));
+      uVar3 = (int)uVar4 + 1;
+      uVar4 = (ulonglong)uVar3;
+      uVar6 = uVar6 + 8;
+    } while ((int)uVar3 < (int)(*(uint *)(param_1 + 0xe8) & 0xffffff));
+  }
+  uVar4 = uVar5;
+  if ((*(uint *)(param_1 + 0x138) & 0xffffff) != 0) {
+    do {
+      FUN_1407dd690(*(undefined8 *)(*(longlong *)(param_1 + 0x130) + uVar5));
+      uVar3 = (int)uVar4 + 1;
+      uVar5 = uVar5 + 8;
+      uVar4 = (ulonglong)uVar3;
+    } while ((int)uVar3 < (int)(*(uint *)(param_1 + 0x138) & 0xffffff));
+  }
+  if (*(longlong *)(param_1 + 0x150) != 0) {
+    FUN_1407dd690();
+  }
+  *(undefined4 *)(param_1 + 0x27c) = 3;
+  return;
+}
+
+

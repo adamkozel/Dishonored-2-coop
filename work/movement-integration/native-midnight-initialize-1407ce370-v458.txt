@@ -1,0 +1,73 @@
+
+void FUN_1407ce370(undefined8 *param_1,undefined8 param_2,undefined4 param_3,int *param_4,
+                  undefined8 param_5,undefined8 param_6)
+
+{
+  longlong *plVar1;
+  byte bVar2;
+  int iVar3;
+  char cVar4;
+  longlong lVar5;
+  byte bVar6;
+  longlong *plVar7;
+  undefined4 uVar8;
+  undefined4 local_res18 [2];
+  
+  if (param_1 + 0x2b != (undefined8 *)local_res18) {
+    *(undefined4 *)(param_1 + 0x2b) = param_3;
+  }
+  *param_1 = param_2;
+  *(undefined1 *)(param_1 + 0x56) = 0;
+  param_1[0x52] = param_5;
+  *(char *)((longlong)param_1 + 0x2b4) = (char)param_4[1];
+  iVar3 = *param_4;
+  *(int *)(param_1 + 0x50) = iVar3;
+  if (iVar3 == 0) {
+    uVar8 = 0x3f800000;
+  }
+  else {
+    uVar8 = 0xbf800000;
+  }
+  *(undefined4 *)(param_1 + 0x2e) = uVar8;
+  *(undefined1 *)((longlong)param_1 + 0x2b6) = *(undefined1 *)((longlong)param_4 + 5);
+  local_res18[0] = param_3;
+  FUN_1407cee60(param_1);
+  FUN_1407ce5f0(param_1);
+  FUN_1407ce7e0(param_1,param_6);
+  *(undefined4 *)((longlong)param_1 + 0x27c) = 1;
+  FUN_1407cf070(param_1);
+  cVar4 = FUN_140195de0();
+  if (cVar4 == '\0') {
+    if (((*(uint *)(param_1 + 0x1d) & 0xffffff) == 0) && (param_1[0x2a] != 0)) {
+      bVar6 = 1;
+    }
+    else {
+      bVar6 = 0;
+    }
+  }
+  else {
+    bVar6 = 1;
+  }
+  *(byte *)((longlong)param_1 + 0x2b2) = bVar6;
+  bVar2 = *(byte *)(param_4 + 1);
+  *(byte *)((longlong)param_1 + 0x2b2) = bVar2 | bVar6;
+  if ((bVar2 | bVar6) == 0) {
+    plVar7 = (longlong *)param_1[0x1c];
+    plVar1 = plVar7 + (*(uint *)(param_1 + 0x1d) & 0xffffff);
+    for (; plVar7 != plVar1; plVar7 = plVar7 + 1) {
+      lVar5 = *plVar7;
+      FUN_1400998b0(lVar5);
+      lVar5 = (**(code **)**(undefined8 **)(lVar5 + 0xd0))();
+      if ((*(int *)(lVar5 + 0x60) < DAT_1439ce2c0) || (DAT_1439ce2c4 < *(int *)(lVar5 + 0x60))) {
+        bVar6 = 0;
+      }
+      else {
+        bVar6 = 1;
+      }
+      *(byte *)((longlong)param_1 + 0x2b2) = *(byte *)((longlong)param_1 + 0x2b2) | bVar6;
+    }
+  }
+  return;
+}
+
+

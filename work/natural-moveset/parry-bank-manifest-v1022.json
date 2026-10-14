@@ -1,0 +1,72 @@
+[
+  {
+    "role": "corvo",
+    "bank": "parry-banks-v1022\\corvo-choke-bank.bin",
+    "sha256": "0750303AFD7852CAFAE45C4D2655013E3205D7686106F84342EE088478DAA608",
+    "version": 68,
+    "clips": 359,
+    "prior357PayloadsUnchanged": true,
+    "source_bank_sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159",
+    "added": [
+      {
+        "clip": 357,
+        "donor": "native-retargeted\\9089de2b61127bab-corvo.bin",
+        "donorSha256": "6ebc7002bd9f5202652d71c1672befa78cf630c2683945a5def880b8355241ba",
+        "donorAsset": "models/characters/tall/_animations_/high/sword/sword_parry_ll_out.md6anim",
+        "donorDuration": 0.5666666666666667,
+        "nativeScene": "native block impact sword_parry_hit_1/hit_2 Scene_1/533",
+        "duration": 0.533
+      },
+      {
+        "clip": 358,
+        "donor": "native-retargeted\\31f39731b12af7ee-corvo.bin",
+        "donorSha256": "5307798d1bc28cdf8e1156b4b779d8b4cfa8e73d251c6153e7176cf6efdc5794",
+        "donorAsset": "models/characters/tall/_animations_/high/sword/sword_parry_rl_out.md6anim",
+        "donorDuration": 0.5666666666666667,
+        "nativeScene": "native defender timed parry sword_parry_win Scene_1/500",
+        "duration": 0.5
+      }
+    ],
+    "conversion": "Existing retargeted native NPC parry deflection (_out) donors resampled to 120 frames plus guard and played on the native defender scene clock. Functional-first donor choice; direction-specific acting, transition from the authored block idle and contact are unreviewed.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  },
+  {
+    "role": "emily",
+    "bank": "parry-banks-v1022\\emily-choke-bank.bin",
+    "sha256": "D0C8CC534036E948C860A8956E13B1F1FFC7D544CB26533193D5486BA9F79F3A",
+    "version": 68,
+    "clips": 359,
+    "prior357PayloadsUnchanged": true,
+    "source_bank_sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732",
+    "added": [
+      {
+        "clip": 357,
+        "donor": "native-retargeted\\9089de2b61127bab-emily.bin",
+        "donorSha256": "5754a8d46bcb1a313d6476de085f0b1424ff9f26cb0544700b1155d9749766e9",
+        "donorAsset": "models/characters/tall/_animations_/high/sword/sword_parry_ll_out.md6anim",
+        "donorDuration": 0.5666666666666667,
+        "nativeScene": "native block impact sword_parry_hit_1/hit_2 Scene_1/533",
+        "duration": 0.533
+      },
+      {
+        "clip": 358,
+        "donor": "native-retargeted\\31f39731b12af7ee-emily.bin",
+        "donorSha256": "0b30fd023bb39b921fbf8db0207c75d95b0c9c01532a3d32b32567046f123e36",
+        "donorAsset": "models/characters/tall/_animations_/high/sword/sword_parry_rl_out.md6anim",
+        "donorDuration": 0.5666666666666667,
+        "nativeScene": "native defender timed parry sword_parry_win Scene_1/500",
+        "duration": 0.5
+      }
+    ],
+    "conversion": "Existing retargeted native NPC parry deflection (_out) donors resampled to 120 frames plus guard and played on the native defender scene clock. Functional-first donor choice; direction-specific acting, transition from the authored block idle and contact are unreviewed.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  }
+]

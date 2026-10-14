@@ -1,0 +1,411 @@
+{
+  "Passed": false,
+  "Failure": "Streamed arm rotation differs from native result: host",
+  "ObservedAt": "2026-10-09T04:42:09.252Z",
+  "DllSha256": "770F249AFA4CDB2618D9EBE3817D22160CA1B899DCEF9D60625B9F63631BA725",
+  "ProbeSha256": "F4A4AEB79C51D7DAE0176834E775711D2FE6EF85CFCF3046C4034A8C51ECEE13",
+  "Scope": "Independent numeric comparison of actual native counterpart arm poses to received Steam semantic joint history in both directions. No weapon attachment, fingers, aim, physics, damage or render parity claim.",
+  "Checks": [],
+  "Measurements": [
+    {
+      "Role": "host",
+      "Observer": "client",
+      "NativeSamples": 61,
+      "JointsCompared": 305,
+      "MaximumRotationError": 0.003163566276049412,
+      "MaximumNativeLengthDifference": 0.0000210710641735945,
+      "SourceMotion": 1.946159303,
+      "CrouchedBodySamples": 24,
+      "Stages": [
+        {
+          "Stage": "Idle",
+          "Samples": 8,
+          "MaximumError": 0.000037907691142202715
+        },
+        {
+          "Stage": "StandingSlash",
+          "Samples": 24,
+          "MaximumError": 0.000038503738719386504
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Samples": 21,
+          "MaximumError": 0.00015247188662137479
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Samples": 8,
+          "MaximumError": 0.003163566276049412
+        }
+      ],
+      "Samples": [
+        {
+          "Stage": "Idle",
+          "Index": 0,
+          "Sequence": 30,
+          "Error": 0.000031052628109984326
+        },
+        {
+          "Stage": "Idle",
+          "Index": 1,
+          "Sequence": 34,
+          "Error": 0.000037907691142202715
+        },
+        {
+          "Stage": "Idle",
+          "Index": 2,
+          "Sequence": 38,
+          "Error": 0.000033138765730966746
+        },
+        {
+          "Stage": "Idle",
+          "Index": 3,
+          "Sequence": 40,
+          "Error": 0.00003188779552509846
+        },
+        {
+          "Stage": "Idle",
+          "Index": 4,
+          "Sequence": 44,
+          "Error": 0.00002670184857189728
+        },
+        {
+          "Stage": "Idle",
+          "Index": 5,
+          "Sequence": 47,
+          "Error": 0.00003540387645695198
+        },
+        {
+          "Stage": "Idle",
+          "Index": 6,
+          "Sequence": 51,
+          "Error": 0.00003588090238060282
+        },
+        {
+          "Stage": "Idle",
+          "Index": 7,
+          "Sequence": 55,
+          "Error": 0.00003677490924947069
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 0,
+          "Sequence": 59,
+          "Error": 0.00003427089500229741
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 1,
+          "Sequence": 62,
+          "Error": 0.00003834180645678753
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 2,
+          "Sequence": 64,
+          "Error": 0.000026521912054655594
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 3,
+          "Sequence": 67,
+          "Error": 0.000026171801878804857
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 4,
+          "Sequence": 71,
+          "Error": 0.00003825930141287959
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 5,
+          "Sequence": 72,
+          "Error": 0.000019831961643013152
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 6,
+          "Sequence": 77,
+          "Error": 0.00003248818534606901
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 7,
+          "Sequence": 81,
+          "Error": 0.000038503738719386504
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 8,
+          "Sequence": 83,
+          "Error": 0.000036417786546061315
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 9,
+          "Sequence": 88,
+          "Error": 0.000013553896358042827
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 10,
+          "Sequence": 91,
+          "Error": 0.000006252527984029754
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 11,
+          "Sequence": 93,
+          "Error": 0.00002109743111278206
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 12,
+          "Sequence": 96,
+          "Error": 0.000006904501481885816
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 13,
+          "Sequence": 99,
+          "Error": 0.000031004695645098224
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 14,
+          "Sequence": 104,
+          "Error": 0.000027140371532508034
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 15,
+          "Sequence": 104,
+          "Error": 0.000027021371532542915
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 16,
+          "Sequence": 109,
+          "Error": 0.00002223357500374945
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 17,
+          "Sequence": 113,
+          "Error": 0.000009622982013568482
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 18,
+          "Sequence": 115,
+          "Error": 0.000025493198668402606
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 19,
+          "Sequence": 120,
+          "Error": 0.00001699754656947494
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 20,
+          "Sequence": 123,
+          "Error": 0.000013160687974966834
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 21,
+          "Sequence": 126,
+          "Error": 0.00002472074337911412
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 22,
+          "Sequence": 130,
+          "Error": 0.000020345696804646707
+        },
+        {
+          "Stage": "StandingSlash",
+          "Index": 23,
+          "Sequence": 133,
+          "Error": 0.000036296708923133636
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 0,
+          "Sequence": 152,
+          "Error": 0.00013607793687653302
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 1,
+          "Sequence": 155,
+          "Error": 0.000013410496688459617
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 2,
+          "Sequence": 158,
+          "Error": 0.000007971394878958371
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 3,
+          "Sequence": 161,
+          "Error": 0.00010442690287459921
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 4,
+          "Sequence": 164,
+          "Error": 0.00014227565726410152
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 5,
+          "Sequence": 168,
+          "Error": 0.00013298281584672722
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 6,
+          "Sequence": 171,
+          "Error": 0.00011694912470083807
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 7,
+          "Sequence": 174,
+          "Error": 0.00011962802328613353
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 8,
+          "Sequence": 177,
+          "Error": 0.00012528996887184451
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 10,
+          "Sequence": 182,
+          "Error": 0.00001347236131077345
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 11,
+          "Sequence": 187,
+          "Error": 0.00010859823754083564
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 12,
+          "Sequence": 190,
+          "Error": 0.00012022066326611291
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 13,
+          "Sequence": 192,
+          "Error": 0.00011843872910377584
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 14,
+          "Sequence": 195,
+          "Error": 0.00013137245388927798
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 15,
+          "Sequence": 198,
+          "Error": 0.0001223702203938526
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 16,
+          "Sequence": 200,
+          "Error": 0.00012427690737837338
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 17,
+          "Sequence": 205,
+          "Error": 0.00001882796162466782
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 19,
+          "Sequence": 211,
+          "Error": 0.00014126274459613786
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 20,
+          "Sequence": 215,
+          "Error": 0.00011759847554371206
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 22,
+          "Sequence": 222,
+          "Error": 0.00015247188662137479
+        },
+        {
+          "Stage": "CrouchSlash",
+          "Index": 23,
+          "Sequence": 225,
+          "Error": 0.00014310200427825048
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 0,
+          "Sequence": 242,
+          "Error": 0.00001655562569846669
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 1,
+          "Sequence": 243,
+          "Error": 0.00001168239382587366
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 2,
+          "Sequence": 248,
+          "Error": 0.00001984786608855149
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 3,
+          "Sequence": 251,
+          "Error": 0.000012200723947808356
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 4,
+          "Sequence": 253,
+          "Error": 0.000014839900701169029
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 5,
+          "Sequence": 256,
+          "Error": 0.000011978458925421265
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 6,
+          "Sequence": 259,
+          "Error": 0.00001305190447753457
+        },
+        {
+          "Stage": "ReturnedIdle",
+          "Index": 7,
+          "Sequence": 260,
+          "Error": 0.003163566276049412
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+# disasm-8a6c40.txt
+
+Original: [work/disasm-8a6c40.txt](<../../../../work/disasm-8a6c40.txt>)
+
+SHA-256: `491AC9D9AF1C045060E2781EF8DA8D77E5A55332F8C8DB9DDEA9C179470595E2`; 5792 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001408A6C40: mov         qword ptr [rsp+8],rbx
+  00000001408A6C45: push        rdi
+  00000001408A6C46: sub         rsp,20h
+  00000001408A6C4A: mov         rbx,rcx
+  00000001408A6C4D: mov         ecx,dword ptr [rcx+0Ch]
+  00000001408A6C50: mov         rdi,rdx
+  00000001408A6C53: mov         eax,dword ptr [rbx+8]
+  00000001408A6C56: mov         r8d,ecx
+  00000001408A6C59: shr         r8d,8
+  00000001408A6C5D: and         eax,0FFFFFFh
+  00000001408A6C62: cmp         eax,r8d
+  00000001408A6C65: jne         00000001408A6CC6
+  00000001408A6C67: mov         eax,ecx
+  00000001408A6C69: and         eax,0C0h
+  00000001408A6C6E: cmp         al,0C0h
+  00000001408A6C70: jne         00000001408A6D4B
+  00000001408A6C76: cmp         byte ptr [00000001431AEE98h],0
+  00000001408A6C7D: je          00000001408A6C85
+  00000001408A6C7F: lea         edx,[r8+1]
+  00000001408A6C83: jmp         00000001408A6CBE
+  00000001408A6C85: and         ecx,3Fh
+  00000001408A6C88: cmp         ecx,3Fh
+  00000001408A6C8B: jne         00000001408A6CAD
+  00000001408A6C8D: test        r8d,r8d
+  00000001408A6C90: jne         00000001408A6C97
+  00000001408A6C92: lea         edx,[rcx-3Eh]
+  00000001408A6C95: jmp         00000001408A6CBE
+  00000001408A6C97: cmp         r8d,40000000h
+  00000001408A6C9E: jb          00000001408A6CA7
+  00000001408A6CA0: mov         edx,7FFFFFFFh
+  00000001408A6CA5: jmp         00000001408A6CBE
+  00000001408A6CA7: lea         edx,[r8+r8]
+  00000001408A6CAB: jmp         00000001408A6CBE
+  00000001408A6CAD: mov         edx,1
+  00000001408A6CB2: shl         edx,cl
+  00000001408A6CB4: lea         eax,[rdx-1]
+  00000001408A6CB7: add         edx,r8d
+  00000001408A6CBA: and         eax,edx
+  00000001408A6CBC: sub         edx,eax
+  00000001408A6CBE: mov         rcx,rbx
+  00000001408A6CC1: call        00000001408AB020
+  00000001408A6CC6: mov         edx,dword ptr [rbx+8]
+  00000001408A6CC9: mov         eax,dword ptr [rbx+0Ch]
+  00000001408A6CCC: mov         ecx,edx
+  00000001408A6CCE: shr         eax,8
+  00000001408A6CD1: and         ecx,0FFFFFFh
+  00000001408A6CD7: cmp         ecx,eax
+  00000001408A6CD9: jae         00000001408A6DB1
+  00000001408A6CDF: mov         rcx,qword ptr [rbx]
+  00000001408A6CE2: mov         rax,qword ptr [rdi]
+  00000001408A6CE5: and         edx,0FFFFFFh
+  00000001408A6CEB: lea         rdx,[rdx+rdx*4]
+  00000001408A6CEF: mov         qword ptr [rcx+rdx*8],rax
+  00000001408A6CF3: mov         rax,qword ptr [rdi+8]
+  00000001408A6CF7: mov         qword ptr [rcx+rdx*8+8],rax
+  00000001408A6CFC: mov         eax,dword ptr [rdi+10h]
+  00000001408A6CFF: mov         dword ptr [rcx+rdx*8+10h],eax
+  00000001408A6D03: mov         eax,dword ptr [rdi+14h]
+  00000001408A6D06: mov         dword ptr [rcx+rdx*8+14h],eax
+  00000001408A6D0A: mov         eax,dword ptr [rdi+18h]
+  00000001408A6D0D: mov         dword ptr [rcx+rdx*8+18h],eax
+  00000001408A6D11: mov         eax,dword ptr [rdi+1Ch]
+  00000001408A6D14: mov         dword ptr [rcx+rdx*8+1Ch],eax
+  00000001408A6D18: mov         eax,dword ptr [rdi+20h]
+  00000001408A6D1B: mov         dword ptr [rcx+rdx*8+20h],eax
+  00000001408A6D1F: mov         eax,dword ptr [rdi+24h]
+  00000001408A6D22: mov         dword ptr [rcx+rdx*8+24h],eax
+  00000001408A6D26: mov         edx,dword ptr [rbx+8]
+  00000001408A6D29: lea         ecx,[rdx+1]
+  00000001408A6D2C: mov         eax,edx
+  00000001408A6D2E: xor         ecx,edx
+  00000001408A6D30: and         eax,0FFFFFFh
+  00000001408A6D35: and         ecx,0FFFFFFh
+  00000001408A6D3B: xor         ecx,edx
+  00000001408A6D3D: mov         dword ptr [rbx+8],ecx
+  00000001408A6D40: mov         rbx,qword ptr [rsp+30h]
+  00000001408A6D45: add         rsp,20h
+  00000001408A6D49: pop         rdi
+  00000001408A6D4A: ret
+  00000001408A6D4B: cmp         byte ptr [00000001431AEE98h],0
+  00000001408A6D52: je          00000001408A6D5A
+  00000001408A6D54: lea         edx,[r8+1]
+  00000001408A6D58: jmp         00000001408A6D93
+  00000001408A6D5A: and         ecx,3Fh
+  00000001408A6D5D: cmp         ecx,3Fh
+  00000001408A6D60: jne         00000001408A6D82
+  00000001408A6D62: test        r8d,r8d
+  00000001408A6D65: jne         00000001408A6D6C
+  00000001408A6D67: lea         edx,[rcx-3Eh]
+  00000001408A6D6A: jmp         00000001408A6D93
+  00000001408A6D6C: cmp         r8d,40000000h
+  00000001408A6D73: jb          00000001408A6D7C
+  00000001408A6D75: mov         edx,7FFFFFFFh
+  00000001408A6D7A: jmp         00000001408A6D93
+  00000001408A6D7C: lea         edx,[r8+r8]
+  00000001408A6D80: jmp         00000001408A6D93
+  00000001408A6D82: mov         edx,1
+  00000001408A6D87: shl         edx,cl
+  00000001408A6D89: lea         eax,[rdx-1]
+  00000001408A6D8C: add         edx,r8d
+  00000001408A6D8F: and         eax,edx
+  00000001408A6D91: sub         edx,eax
+  00000001408A6D93: mov         rcx,rbx
+  00000001408A6D96: call        00000001408AC980
+  00000001408A6D9B: test        al,al
+  00000001408A6D9D: jne         00000001408A6CC6
+  00000001408A6DA3: or          eax,0FFFFFFFFh
+  00000001408A6DA6: mov         rbx,qword ptr [rsp+30h]
+  00000001408A6DAB: add         rsp,20h
+  00000001408A6DAF: pop         rdi
+  00000001408A6DB0: ret
+  00000001408A6DB1: lea         eax,[rcx-1]
+  00000001408A6DB4: mov         rbx,qword ptr [rsp+30h]
+  00000001408A6DB9: add         rsp,20h
+  00000001408A6DBD: pop         rdi
+  00000001408A6DBE: ret
+  00000001408A6DBF: int         3
+
+  Summary
+
+     1A7D000 .text
+
+````

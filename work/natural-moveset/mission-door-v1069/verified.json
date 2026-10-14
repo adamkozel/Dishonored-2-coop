@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "yawOffset": -20,
+      "source": "host",
+      "door": "env_interiors_door_interior_350cm_01_19",
+      "peerConverged": true
+    },
+    {
+      "skipped": "not_closed host 2 client 2",
+      "source": "client",
+      "door": "env_door_glass_350cm_01_1"
+    },
+    {
+      "skipped": "not_closed host 2 client 2",
+      "source": "client",
+      "door": "script_door_grid_metal_350_01_1"
+    },
+    {
+      "skipped": "not_closed host 2 client 2",
+      "source": "client",
+      "door": "env_interiors_door_metal_kar_350_01"
+    },
+    {
+      "skipped": "not_closed host 2 client 2",
+      "source": "client",
+      "door": "env_interiors_door_interior_350cm_01_9"
+    },
+    {
+      "skipped": "not_closed host 2 client 2",
+      "source": "client",
+      "door": "env_interiors_door_interior_350cm_01_8"
+    },
+    {
+      "yawOffset": 40,
+      "source": "client",
+      "door": "env_interiors_door_medium_template_19",
+      "peerConverged": true
+    }
+  ],
+  "passed": true,
+  "scope": "Shared native doors: host ordinary open of door A converges natively on the client; client ordinary open of door B converges natively on the host, on Edge of the World (door sync has no map gate; per-door pairing).",
+  "paired": 16
+}

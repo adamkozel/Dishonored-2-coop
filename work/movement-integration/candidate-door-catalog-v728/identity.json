@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-13T13:27:30.605581+02:00",
+  "dll": "A03BD0627788F8DA6778CB14C491E8782F2591BC61A1CBDA55885486C2CFB389",
+  "probe": "1ECB428D77B93915EA0417F3531E9103BB8E24DEC2336E874A809BA827810B22",
+  "previous": "candidate-door-catalog-v725",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Authored ordinary-door catalog: unique native names and definitions, per-door native Steam host ordering, per-door lifetime and animation-generation pins, bounded round-robin service. No hardcoded door or map name. Locked/blocked/linked/broken/ambiguous doors excluded at arm; explicit isolated fixture still required. Runtime pending. Protocol69 and bank67/357 unchanged.",
+  "runtimeAudit": "../native-door-catalog-audit-v735.json",
+  "runtimeScope": "Six ordinary Dunwall channels; two actually operated doors; both source roles and both sequential operator orders. Explicit fixture only. Locked/linked/campaign/save-load/conflict cases incomplete."
+}

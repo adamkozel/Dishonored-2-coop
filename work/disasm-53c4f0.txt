@@ -1,0 +1,52 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014053C4F0: sub         rsp,18h
+  000000014053C4F4: movss       xmm0,dword ptr [rcx+00000000000003BCh]
+  000000014053C4FC: ucomiss     xmm0,dword ptr [00000001431AF620h]
+  000000014053C503: jp          000000014053C569
+  000000014053C505: jne         000000014053C569
+  000000014053C507: movss       xmm0,dword ptr [rcx+00000000000003C0h]
+  000000014053C50F: ucomiss     xmm0,dword ptr [00000001431AF624h]
+  000000014053C516: jp          000000014053C569
+  000000014053C518: jne         000000014053C569
+  000000014053C51A: movss       xmm0,dword ptr [rcx+00000000000003C4h]
+  000000014053C522: ucomiss     xmm0,dword ptr [00000001431AF628h]
+  000000014053C529: jp          000000014053C569
+  000000014053C52B: jne         000000014053C569
+  000000014053C52D: movss       xmm0,dword ptr [rcx+00000000000003B0h]
+  000000014053C535: movss       xmm1,dword ptr [rcx+00000000000003B4h]
+  000000014053C53D: addss       xmm0,dword ptr [r8]
+  000000014053C542: addss       xmm1,dword ptr [r8+4]
+  000000014053C548: movss       dword ptr [rsp],xmm0
+  000000014053C54D: movss       xmm0,dword ptr [rcx+00000000000003B8h]
+  000000014053C555: movss       dword ptr [rsp+4],xmm1
+  000000014053C55B: addss       xmm0,dword ptr [r8+8]
+  000000014053C561: movss       dword ptr [rsp+8],xmm0
+  000000014053C567: jmp         000000014053C586
+  000000014053C569: mov         eax,dword ptr [rcx+00000000000003BCh]
+  000000014053C56F: mov         dword ptr [rsp],eax
+  000000014053C572: mov         eax,dword ptr [rcx+00000000000003C0h]
+  000000014053C578: mov         dword ptr [rsp+4],eax
+  000000014053C57C: mov         eax,dword ptr [rcx+00000000000003C4h]
+  000000014053C582: mov         dword ptr [rsp+8],eax
+  000000014053C586: lea         rcx,[rsp]
+  000000014053C58A: mov         eax,dword ptr [rcx]
+  000000014053C58C: mov         dword ptr [rdx],eax
+  000000014053C58E: mov         eax,dword ptr [rcx+4]
+  000000014053C591: mov         dword ptr [rdx+4],eax
+  000000014053C594: mov         eax,dword ptr [rcx+8]
+  000000014053C597: mov         dword ptr [rdx+8],eax
+  000000014053C59A: mov         rax,rdx
+  000000014053C59D: add         rsp,18h
+  000000014053C5A1: ret
+  000000014053C5A2: int         3
+
+  Summary
+
+     1A7D000 .text

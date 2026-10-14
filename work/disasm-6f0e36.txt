@@ -1,0 +1,75 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406F0E1F: mov         qword ptr [rsp+0000000000000120h],rsi
+  00000001406F0E27: call        00000001402430F0
+  00000001406F0E2C: lea         rdx,[rbp+48h]
+  00000001406F0E30: mov         rcx,rax
+  00000001406F0E33: mov         rsi,rax
+  00000001406F0E36: call        0000000140242C90
+  00000001406F0E3B: cmp         qword ptr [rsi+30h],r15
+  00000001406F0E3F: je          00000001406F0F4F
+  00000001406F0E45: comiss      xmm7,dword ptr [rbp+48h]
+  00000001406F0E49: jae         00000001406F0F4F
+  00000001406F0E4F: lea         rcx,[rdi+0000000000000BF8h]
+  00000001406F0E56: mov         rdx,rsi
+  00000001406F0E59: call        0000000140243060
+  00000001406F0E5E: mov         dword ptr [rbp-40h],r15d
+  00000001406F0E62: mov         qword ptr [rbp-3Ch],2
+  00000001406F0E6A: xorps       xmm0,xmm0
+  00000001406F0E6D: xorps       xmm1,xmm1
+  00000001406F0E70: movdqa      xmmword ptr [rbp-60h],xmm0
+  00000001406F0E75: movdqa      xmmword ptr [rbp-50h],xmm1
+  00000001406F0E7A: mov         qword ptr [rbp-34h],r15
+  00000001406F0E7E: mov         rcx,rax
+  00000001406F0E81: mov         byte ptr [rbp-2Ch],1
+  00000001406F0E85: mov         byte ptr [rbp-20h],r15b
+  00000001406F0E89: mov         byte ptr [rbp-14h],r15b
+  00000001406F0E8D: test        rax,rax
+  00000001406F0E90: je          00000001406F0F18
+  00000001406F0E96: movss       xmm0,dword ptr [0000000141AB3814h]
+  00000001406F0E9E: movss       xmm3,dword ptr [rdi+0000000000000CFCh]
+  00000001406F0EA6: movss       xmm2,dword ptr [rdi+0000000000000E48h]
+  00000001406F0EAE: mov         byte ptr [rsp+78h],r15b
+  00000001406F0EB3: mov         byte ptr [rsp+70h],r15b
+  00000001406F0EB8: mov         byte ptr [rsp+68h],r15b
+  00000001406F0EBD: mov         byte ptr [rsp+60h],r15b
+  00000001406F0EC2: lea         rax,[rbp-80h]
+  00000001406F0EC6: lea         rdx,[00000001431AF668h]
+  00000001406F0ECD: movss       dword ptr [rsp+58h],xmm0
+  00000001406F0ED3: movss       xmm0,dword ptr [rdi+0000000000000BE8h]
+  00000001406F0EDB: movss       dword ptr [rsp+50h],xmm6
+  00000001406F0EE1: mov         qword ptr [rsp+48h],rdx
+  00000001406F0EE6: mov         qword ptr [rbp-80h],r15
+  00000001406F0EEA: mov         qword ptr [rbp-78h],r15
+  00000001406F0EEE: movss       dword ptr [rsp+40h],xmm7
+  00000001406F0EF4: mov         qword ptr [rsp+38h],rax
+  00000001406F0EF9: mov         eax,dword ptr [rbp+48h]
+  00000001406F0EFC: movss       dword ptr [rsp+30h],xmm0
+  00000001406F0F02: mov         dword ptr [rsp+28h],eax
+  00000001406F0F06: mov         qword ptr [rsp+20h],rcx
+  00000001406F0F0B: lea         rcx,[rbp-60h]
+  00000001406F0F0F: call        00000001406F2380
+  00000001406F0F14: test        al,al
+  00000001406F0F16: jne         00000001406F0F21
+  00000001406F0F18: cmp         byte ptr [rdi+0000000000000AC4h],r15b
+  00000001406F0F1F: je          00000001406F0F4F
+  00000001406F0F21: movss       xmm0,dword ptr [rdi+0000000000000CFCh]
+  00000001406F0F29: movzx       r9d,byte ptr [rdi+0000000000000D4Ch]
+  00000001406F0F31: movzx       r8d,byte ptr [rdi+0000000000000D49h]
+  00000001406F0F39: movss       dword ptr [rsp+28h],xmm0
+  00000001406F0F3F: lea         rdx,[rbp-60h]
+  00000001406F0F43: mov         rcx,rdi
+  00000001406F0F46: mov         byte ptr [rsp+20h],bl
+  00000001406F0F4A: call        00000001406F3BF0
+  00000001406F0F4F: mov         rsi,qword ptr [rsp+0000000000000120h]
+  00000001406F0F57: 4C
+
+  Summary
+
+     1A7D000 .text

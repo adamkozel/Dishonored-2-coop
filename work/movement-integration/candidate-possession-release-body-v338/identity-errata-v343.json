@@ -1,0 +1,63 @@
+{
+  "note": "Original identity.json inherited stale bank paths/references from328 despite actual banks/ containing52/316. Do not use those inherited paths to reconstruct338. Actual archived files and authoritative source manifest are listed here; original archive retained.",
+  "actualBanks": [
+    {
+      "role": "corvo",
+      "bank": "possession-banks-v334\\corvo-possession-bank.bin",
+      "sha256": "EF810F732CEC8BAF4938B274BDE737233864161308C1ED71A00919BF60138946",
+      "format": "D2MOVE52",
+      "clips": 316,
+      "prior_payload_unchanged": true,
+      "sources": [
+        {
+          "variant": 28,
+          "clip": 315,
+          "phase": "out",
+          "duration_ms": 400,
+          "source": {
+            "body": "b43fcd9e0af9ad3fc024c1488672b3e7c519493422a7f6dd3aad3e6335c59f6a",
+            "native_take": "possession-release-v332",
+            "native_take_passed": false,
+            "native_release_reader_verified": true,
+            "asset": "midnight/gameplay/player/base/powers/power_possession_cast_out.midnightscene"
+          }
+        }
+      ],
+      "native_character": "corvo",
+      "visual_accepted": false,
+      "runtime_verified": false
+    },
+    {
+      "role": "emily",
+      "bank": "possession-banks-v334\\emily-possession-bank.bin",
+      "sha256": "BDD9FCA4946A1723F6E2A2DCABE72DAB4CA71A229839348599CE02A020DD76B7",
+      "format": "D2MOVE52",
+      "clips": 316,
+      "prior_payload_unchanged": true,
+      "sources": [
+        {
+          "variant": 28,
+          "clip": 315,
+          "phase": "out",
+          "duration_ms": 400,
+          "source": {
+            "body": "3e128e778c6393c82167b50e551657e4500b9ecaad650ae42a20b0978b1d9aa1",
+            "native_take": "possession-release-v332",
+            "native_take_passed": false,
+            "native_release_reader_verified": true,
+            "asset": "midnight/gameplay/player/base/powers/power_possession_cast_out.midnightscene"
+          }
+        }
+      ],
+      "native_character": "corvo",
+      "visual_accepted": false,
+      "runtime_verified": false
+    }
+  ],
+  "banksDirectory": "banks",
+  "runtimeEvidence": [
+    "../../natural-moveset/possession-visibility-network-v339/result.json",
+    "../../natural-moveset/possession-visibility-return-v342/result.json"
+  ],
+  "complete": false
+}

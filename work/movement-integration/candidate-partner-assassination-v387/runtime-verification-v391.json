@@ -1,0 +1,160 @@
+{
+  "created": "2026-10-12T18:42:31.100114+02:00",
+  "dll": "440B0F9FD8BE7D24D22B62DE0BD7FB43C2E9C85FE6AB3551DA9A988AA273C6CD",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "cases": {
+    "partner-takedown-exclusion-host-v388": {
+      "role": "host",
+      "take": "partner-takedown-exclusion-host-v388",
+      "passed": true,
+      "samples": 27,
+      "blocked": 1668,
+      "readFailures": 0,
+      "partnerTargetSamples": 0,
+      "nativeStates": [
+        0,
+        44
+      ],
+      "readMaxUs": 328
+    },
+    "partner-takedown-exclusion-client-v389": {
+      "role": "client",
+      "take": "partner-takedown-exclusion-client-v389",
+      "passed": true,
+      "samples": 27,
+      "blocked": 1644,
+      "readFailures": 0,
+      "partnerTargetSamples": 0,
+      "nativeStates": [
+        0,
+        44
+      ],
+      "readMaxUs": 335
+    },
+    "ordinary-guard-choke-control-v390": {
+      "take": "ordinary-guard-choke-control-v390",
+      "passed": true,
+      "target": "0xb480764",
+      "nativeState41Samples": 22,
+      "targetBoundScenes": 22,
+      "nativeOtherAccepted": 1662
+    }
+  },
+  "videos": [
+    {
+      "video": "partner-takedown-exclusion-host-v388/host-rear-choke.mp4",
+      "character": "corvo",
+      "label": "Partner rear choke excluded \u00b7 host \u00b7 388",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-takedown-exclusion-host-v388/result.json",
+      "visual_review": "partner-takedown-exclusion-host-v388/host-rear-choke-visual-review.json",
+      "proxy_sha256": "440B0F9FD8BE7D24D22B62DE0BD7FB43C2E9C85FE6AB3551DA9A988AA273C6CD",
+      "actual_capture_hz": 25.5,
+      "video_sha256": "7180E6E9B0785CB303B60C5B3955C8331810253799ADCC6B2814E439F24D32BC",
+      "checks_passed": true,
+      "scope": "Viewed1/2/3/4/5/6s. Native block replaces the previously possible partner choke; no paired hold or choke/throw HUD. 1668 exact partner eligibility rejections,0 refusal,0 partner target records across27 samples. Both checkpoint inventories/health and14 protected hashes restore. Scope is this standing rear input only; other contexts and full movement remain incomplete."
+    },
+    {
+      "video": "partner-takedown-exclusion-client-v389/client-rear-choke.mp4",
+      "character": "emily",
+      "label": "Partner rear choke excluded \u00b7 client \u00b7 389",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-takedown-exclusion-client-v389/result.json",
+      "visual_review": "partner-takedown-exclusion-client-v389/client-rear-choke-visual-review.json",
+      "proxy_sha256": "440B0F9FD8BE7D24D22B62DE0BD7FB43C2E9C85FE6AB3551DA9A988AA273C6CD",
+      "actual_capture_hz": 25.375,
+      "video_sha256": "F8B36478459039C162F4E872AC66FCDC34EAAA487F687A5ECE8E4D4DD64D766E",
+      "checks_passed": true,
+      "scope": "Viewed1/2/3/4/5/6s. Native block replaces the previously possible partner choke; no paired hold or choke/throw HUD. 1644 exact partner eligibility rejections,0 refusal,0 partner target records across27 samples. Both checkpoint inventories/health and14 protected hashes restore. Scope is this standing rear input only; other contexts and full movement remain incomplete."
+    },
+    {
+      "video": "ordinary-guard-choke-control-v390/host-rear-choke.mp4",
+      "character": "corvo",
+      "label": "Ordinary guard choke control \u00b7 390",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "ordinary-guard-choke-control-v390/result.json",
+      "visual_review": "ordinary-guard-choke-control-v390/host-rear-choke-visual-review.json",
+      "proxy_sha256": "440B0F9FD8BE7D24D22B62DE0BD7FB43C2E9C85FE6AB3551DA9A988AA273C6CD",
+      "actual_capture_hz": 25.25,
+      "video_sha256": "81D13EC0B11EFB7A2EFB2E703C19173DD9E7FBABF9A2C0AA632CFA6633059FBE",
+      "checks_passed": true,
+      "scope": "Viewed1/2/3/4/5/6s. Native guard prompts, first-person grab and choke/throw HUD remain. Exact authored guard2 appears reciprocally in native choke_back/loop scene bindings; state41 present and ordinary eligibility accepted. Both checkpoint inventories/health and14 protected hashes restore. This is native source positive-control footage, not an authored remote full-body movement approval."
+    },
+    {
+      "video": "partner-rear-choke-host-v386/host-rear-choke.mp4",
+      "character": "corvo",
+      "label": "Baseline partner choke defect \u00b7 386",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-rear-choke-host-v386/result.json",
+      "visual_review": "partner-rear-choke-host-v386/host-rear-choke-visual-review.json",
+      "proxy_sha256": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+      "actual_capture_hz": 26.0,
+      "video_sha256": "FC3C1D3825B1046223F045B711496F2CD821EDB860A2F30CF63F5AD6DE25E519",
+      "checks_passed": false,
+      "scope": "Retained failing baseline. Viewed1/2/3/4/5/6s: real native partner grab and choke/throw HUD. State41 in23/28 samples, paired choke_back/loop. Health protection alone did not prevent interaction. Collection and restoration passed; interaction exclusion failed."
+    },
+    {
+      "video": "partner-context-targeting-v385/host-rear.mp4",
+      "character": "corvo",
+      "label": "Partner targeting baseline \u00b7 host \u00b7 385",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-context-targeting-v385/result.json",
+      "visual_review": "partner-context-targeting-v385/host-rear-visual-review.json",
+      "proxy_sha256": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+      "actual_capture_hz": 27.0,
+      "video_sha256": "1305A5DD51610146D0E20666CC92B5386EB9AEE8F43EBD7AE37D72C7D1263545",
+      "checks_passed": false,
+      "scope": "Viewed rear-view frame1.2s. Partner appears without a prompt although native global assassination sensor records select it. Neutral observation only; actual choke386 establishes the functional gap. Other four neutral clips are retained but not marked visually reviewed."
+    },
+    {
+      "video": "partner-context-targeting-v385/client-rear.mp4",
+      "character": "emily",
+      "label": "Partner targeting baseline \u00b7 client \u00b7 385",
+      "alias": "native_partner_interaction_exclusion",
+      "requirements": [
+        "nonlethal_takedown_front_back_sides"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "partner-context-targeting-v385/result.json",
+      "visual_review": "partner-context-targeting-v385/client-rear-visual-review.json",
+      "proxy_sha256": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+      "actual_capture_hz": 26.635055239081648,
+      "video_sha256": "6BA363D0B7BDE437E2677C4DD8E3B6B45A042A4CEDCA62DD5FE420518FEC9001",
+      "checks_passed": false,
+      "scope": "Viewed rear-view frame1.2s. Partner appears without a prompt although native global assassination sensor records select it. Neutral observation only; actual choke386 establishes the functional gap. Other four neutral clips are retained but not marked visually reviewed."
+    }
+  ],
+  "scope": "Scoped rear choke partner exclusion in both directions plus ordinary guard positive control. Normal movement collision retained. Other contextual actions, power paths, lifetime contexts, full movement and playable co-op remain incomplete."
+}

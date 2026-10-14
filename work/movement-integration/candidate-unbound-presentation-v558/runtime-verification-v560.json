@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-13T01:15:45.149085+02:00",
+  "candidate": "candidate-unbound-presentation-v558",
+  "dll": "5E1E2EC5BC3961B463A1A66635DE23D04B9639028F542FE0A5BCAC8A23A4DCDC",
+  "probe": "EFDD57EB2F79A2023BD18E63DDA8729E732C9D263D882639054D225B4CC0A54B",
+  "protocol": 59,
+  "bankVersion": 59,
+  "clips": 336,
+  "test": "work/natural-moveset/unbound-presentation-v559c/result.json",
+  "checks": [
+    "host: stance 0 holster deliberately missing binding uses explicit Steam state18 and continuous ground body; settles to matching native sword and visibility",
+    "host: stance 0 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "host: stance 0 draw returns to existing native authored binding; settles to matching native sword and visibility",
+    "host: stance 1 holster deliberately missing binding uses explicit Steam state18 and continuous ground body; settles to matching native sword and visibility",
+    "host: stance 1 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "host: stance 1 draw returns to existing native authored binding; settles to matching native sword and visibility",
+    "host: original visible drawn sword restored, no visibility refusal or lost lease; health unchanged",
+    "client: stance 0 holster deliberately missing binding uses explicit Steam state18 and continuous ground body; settles to matching native sword and visibility",
+    "client: stance 0 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "client: stance 0 draw returns to existing native authored binding; settles to matching native sword and visibility",
+    "client: stance 1 holster deliberately missing binding uses explicit Steam state18 and continuous ground body; settles to matching native sword and visibility",
+    "client: stance 1 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "client: stance 1 draw returns to existing native authored binding; settles to matching native sword and visibility",
+    "client: original visible drawn sword restored, no visibility refusal or lost lease; health unchanged",
+    "All fourteen protected settings/save hashes unchanged",
+    "Both isolated checkpoints restore; all14 protected save/settings hashes retained"
+  ],
+  "fallbackRows": {
+    "host/holster-0": 16,
+    "host/holster-1": 16,
+    "client/holster-0": 13,
+    "client/holster-1": 9,
+    "client/draw-1": 3
+  },
+  "scope": "Both-role standing/crouching missing-equipment-binding fault injection, explicit Steam state18, body continuity, four holstered directions and normal authored draw recovery. Native first-person and protected saves preserved; checkpoints restored.",
+  "limitations": [
+    "Fallback is locomotion continuity, not a completed action animation.",
+    "Only independently recognized native default ground motion is eligible; unknown physical states still need binding.",
+    "Continuous motion/contact quality and final visual acceptance remain open.",
+    "509 airborne landing and540 initial freshness issues remain separate."
+  ],
+  "runtimeVerified": true,
+  "visualAccepted": false,
+  "complete": false
+}

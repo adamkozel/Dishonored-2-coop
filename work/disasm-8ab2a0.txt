@@ -1,0 +1,63 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001408AB2A0: mov         qword ptr [rsp+18h],rbx
+  00000001408AB2A5: push        rbp
+  00000001408AB2A6: sub         rsp,60h
+  00000001408AB2AA: mov         eax,dword ptr [rcx+0000000000060278h]
+  00000001408AB2B0: mov         rbx,qword ptr [rcx+0000000000060270h]
+  00000001408AB2B7: mov         qword ptr [rsp+78h],rdi
+  00000001408AB2BC: and         eax,0FFFFFFh
+  00000001408AB2C1: mov         rbp,rcx
+  00000001408AB2C4: lea         rax,[rax+rax*4]
+  00000001408AB2C8: lea         rdi,[rbx+rax*8]
+  00000001408AB2CC: cmp         rbx,rdi
+  00000001408AB2CF: je          00000001408AB30E
+  00000001408AB2D1: mov         qword ptr [rsp+70h],rsi
+  00000001408AB2D6: nop         word ptr [rax+rax+0000000000000000h]
+  00000001408AB2E0: lea         rcx,[rbx+1Ch]
+  00000001408AB2E4: lea         rdx,[rsp+30h]
+  00000001408AB2E9: call        000000014010D490
+  00000001408AB2EE: mov         rcx,qword ptr [rbx]
+  00000001408AB2F1: lea         rdx,[rbx+10h]
+  00000001408AB2F5: mov         r8,rax
+  00000001408AB2F8: xor         r9d,r9d
+  00000001408AB2FB: call        000000014087D1E0
+  00000001408AB300: add         rbx,28h
+  00000001408AB304: cmp         rbx,rdi
+  00000001408AB307: jne         00000001408AB2E0
+  00000001408AB309: mov         rsi,qword ptr [rsp+70h]
+  00000001408AB30E: test        byte ptr [rbp+000000000006027Ch],40h
+  00000001408AB315: mov         rdi,qword ptr [rsp+78h]
+  00000001408AB31A: jne         00000001408AB365
+  00000001408AB31C: mov         rbx,qword ptr [rbp+0000000000060270h]
+  00000001408AB323: test        rbx,rbx
+  00000001408AB326: je          00000001408AB350
+  00000001408AB328: call        00000001401548E0
+  00000001408AB32D: lea         rdx,[0000000141AB2230h]
+  00000001408AB334: mov         r9,rbx
+  00000001408AB337: mov         r10,qword ptr [rax]
+  00000001408AB33A: mov         r8d,1ECh
+  00000001408AB340: mov         rcx,rax
+  00000001408AB343: mov         qword ptr [rsp+20h],10h
+  00000001408AB34C: call        qword ptr [r10+10h]
+  00000001408AB350: and         dword ptr [rbp+000000000006027Ch],0FFh
+  00000001408AB35A: mov         qword ptr [rbp+0000000000060270h],0
+  00000001408AB365: and         dword ptr [rbp+0000000000060278h],0FF000000h
+  00000001408AB36F: mov         rbx,qword ptr [rsp+0000000000000080h]
+  00000001408AB377: add         rsp,60h
+  00000001408AB37B: pop         rbp
+  00000001408AB37C: ret
+  00000001408AB37D: int         3
+  00000001408AB37E: int         3
+  00000001408AB37F: int         3
+  00000001408AB380: 48
+
+  Summary
+
+     1A7D000 .text

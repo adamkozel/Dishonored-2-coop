@@ -1,0 +1,116 @@
+{
+  "at": "2026-10-13T02:44:52.239826+02:00",
+  "candidate": "candidate-choke-breakout-v592",
+  "dll": "52ADA3D0CCAF40919300F0CB43151250CBE65508FF150CCA2352FAE0BD424963",
+  "probe": "60C24F0D4848D15E1FD26FC00C0B91857B21E66E55B1DC80A4BBE061D4A882E5",
+  "protocol": 64,
+  "bankVersion": 64,
+  "clips": 352,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\choke-breakout-corvo-v593\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase4 read independently",
+        "Steam remote whole-body choke phase4 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "visualReview": "work\\natural-moveset\\choke-breakout-corvo-v593\\observer-visual-review.json"
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\choke-breakout-emily-v595\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase4 read independently",
+        "Steam remote whole-body choke phase4 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "visualReview": "work\\natural-moveset\\choke-breakout-emily-v595\\observer-visual-review.json"
+    },
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\choke-breakout-corvo-v597\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase4 read independently",
+        "Steam remote whole-body choke phase4 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "visualReview": "work\\natural-moveset\\choke-breakout-corvo-v597\\observer-visual-review.json"
+    },
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\choke-finish-corvo-v598\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase3 read independently",
+        "Steam remote whole-body choke phase3 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "visualReview": "work\\natural-moveset\\choke-finish-corvo-v598\\observer-visual-review.json"
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\choke-finish-emily-v598\\result.json",
+      "checks": [
+        "Owned native choke phase1 read independently",
+        "Steam remote whole-body choke phase1 observed",
+        "Owned native choke phase2 read independently",
+        "Steam remote whole-body choke phase2 observed",
+        "Owned native choke phase3 read independently",
+        "Steam remote whole-body choke phase3 observed",
+        "Native standing recovery restores existing locomotion",
+        "Remote actor follows independent native source root during choke",
+        "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+        "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "visualReview": "work\\natural-moveset\\choke-finish-emily-v598\\observer-visual-review.json"
+    }
+  ],
+  "complete": false,
+  "visualAccepted": false,
+  "runtimeVerified": true,
+  "limitations": [
+    "Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change.",
+    "Native cancel400 still unverified; combat_lose1500 is a separate branch.",
+    "Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings.",
+    "Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim.",
+    "Earlier trap576 freshness fade and other archived intermittent cases remain unresolved."
+  ]
+}

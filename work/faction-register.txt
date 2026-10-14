@@ -1,0 +1,155 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140605C20: mov         rax,rsp
+  0000000140605C23: push        rdi
+  0000000140605C24: push        r14
+  0000000140605C26: push        r15
+  0000000140605C28: sub         rsp,50h
+  0000000140605C2C: mov         qword ptr [rax-38h],0FFFFFFFFFFFFFFFEh
+  0000000140605C34: mov         qword ptr [rax+10h],rbx
+  0000000140605C38: mov         qword ptr [rax+18h],rbp
+  0000000140605C3C: mov         qword ptr [rax+20h],rsi
+  0000000140605C40: mov         rsi,rdx
+  0000000140605C43: mov         r14,rcx
+  0000000140605C46: movzx       ebx,byte ptr [rdx+20h]
+  0000000140605C4A: mov         rax,qword ptr [rdx+10h]
+  0000000140605C4E: test        rax,rax
+  0000000140605C51: mov         edi,3FFF0010h
+  0000000140605C56: je          0000000140605C5E
+  0000000140605C58: mov         edi,dword ptr [rax+00000000000000A8h]
+  0000000140605C5E: mov         byte ptr [rsp+38h],0FFh
+  0000000140605C63: lea         rcx,[rsp+40h]
+  0000000140605C68: call        0000000140603860
+  0000000140605C6D: nop
+  0000000140605C6E: mov         byte ptr [rsp+38h],bl
+  0000000140605C72: mov         dword ptr [rsp+70h],edi
+  0000000140605C76: lea         r15,[r14+20h]
+  0000000140605C7A: lea         r8,[rsp+38h]
+  0000000140605C7F: lea         rdx,[rsp+70h]
+  0000000140605C84: mov         rcx,r15
+  0000000140605C87: call        0000000140607090
+  0000000140605C8C: mov         rax,qword ptr [rsi+10h]
+  0000000140605C90: test        rax,rax
+  0000000140605C93: jne         0000000140605C9F
+  0000000140605C95: mov         dword ptr [rsp+70h],3FFF0010h
+  0000000140605C9D: jmp         0000000140605CA9
+  0000000140605C9F: mov         eax,dword ptr [rax+00000000000000A8h]
+  0000000140605CA5: mov         dword ptr [rsp+70h],eax
+  0000000140605CA9: movsx       rbx,bl
+  0000000140605CAD: imul        rbx,rbx,38h
+  0000000140605CB1: mov         rcx,qword ptr [r14]
+  0000000140605CB4: add         rcx,rbx
+  0000000140605CB7: lea         rdx,[rsp+70h]
+  0000000140605CBC: call        000000014052E460
+  0000000140605CC1: mov         rax,qword ptr [rsi+8]
+  0000000140605CC5: cmp         byte ptr [rax+0000000000000090h],0
+  0000000140605CCC: je          0000000140605E45
+  0000000140605CD2: mov         rax,qword ptr [r14]
+  0000000140605CD5: mov         rcx,qword ptr [rbx+rax]
+  0000000140605CD9: mov         ebx,dword ptr [rcx]
+  0000000140605CDB: cmp         ebx,edi
+  0000000140605CDD: je          0000000140605E45
+  0000000140605CE3: xor         ebp,ebp
+  0000000140605CE5: mov         esi,ebp
+  0000000140605CE7: cmp         dword ptr [r14+2Ch],ebp
+  0000000140605CEB: jle         0000000140605D9A
+  0000000140605CF1: test        esi,esi
+  0000000140605CF3: js          0000000140605D3B
+  0000000140605CF5: cmp         esi,dword ptr [r15+0Ch]
+  0000000140605CF9: jg          0000000140605D3B
+  0000000140605CFB: mov         ecx,ebp
+  0000000140605CFD: mov         r8d,ebp
+  0000000140605D00: mov         r9d,dword ptr [r15+8]
+  0000000140605D04: test        r9d,r9d
+  0000000140605D07: jle         0000000140605D3B
+  0000000140605D09: mov         rdx,qword ptr [r15]
+  0000000140605D0C: nop         dword ptr [rax]
+  0000000140605D10: mov         rax,qword ptr [rdx]
+  0000000140605D13: test        rax,rax
+  0000000140605D16: je          0000000140605D27
+  0000000140605D18: cmp         ecx,esi
+  0000000140605D1A: je          0000000140605D35
+  0000000140605D1C: inc         ecx
+  0000000140605D1E: mov         rax,qword ptr [rax+20h]
+  0000000140605D22: test        rax,rax
+  0000000140605D25: jne         0000000140605D18
+  0000000140605D27: inc         r8d
+  0000000140605D2A: add         rdx,8
+  0000000140605D2E: cmp         r8d,r9d
+  0000000140605D31: jge         0000000140605D3B
+  0000000140605D33: jmp         0000000140605D10
+  0000000140605D35: add         rax,8
+  0000000140605D39: jmp         0000000140605D3E
+  0000000140605D3B: mov         rax,rbp
+  0000000140605D3E: mov         ecx,ebp
+  0000000140605D40: mov         rdx,rbp
+  0000000140605D43: mov         r8d,dword ptr [rax+10h]
+  0000000140605D47: and         r8d,0FFFFFFh
+  0000000140605D4E: jle         0000000140605D8E
+  0000000140605D50: lea         r9,[rax+8]
+  0000000140605D54: mov         r10,qword ptr [r9]
+  0000000140605D57: mov         rax,r10
+  0000000140605D5A: nop         word ptr [rax+rax]
+  0000000140605D60: cmp         dword ptr [rax],ebx
+  0000000140605D62: je          0000000140605D74
+  0000000140605D64: inc         ecx
+  0000000140605D66: inc         rdx
+  0000000140605D69: add         rax,8
+  0000000140605D6D: cmp         ecx,r8d
+  0000000140605D70: jl          0000000140605D60
+  0000000140605D72: jmp         0000000140605D8E
+  0000000140605D74: mov         dword ptr [rsp+70h],edi
+  0000000140605D78: mov         eax,dword ptr [r10+rdx*8+4]
+  0000000140605D7D: mov         dword ptr [rsp+74h],eax
+  0000000140605D81: lea         rdx,[rsp+70h]
+  0000000140605D86: mov         rcx,r9
+  0000000140605D89: call        0000000140603CF0
+  0000000140605D8E: inc         esi
+  0000000140605D90: cmp         esi,dword ptr [r14+2Ch]
+  0000000140605D94: jl          0000000140605CF1
+  0000000140605D9A: mov         eax,edi
+  0000000140605D9C: and         eax,dword ptr [r15+10h]
+  0000000140605DA0: movsxd      rcx,eax
+  0000000140605DA3: mov         rax,qword ptr [r15]
+  0000000140605DA6: mov         r14,qword ptr [rax+rcx*8]
+  0000000140605DAA: test        r14,r14
+  0000000140605DAD: je          0000000140605DE9
+  0000000140605DAF: mov         ecx,dword ptr [r14]
+  0000000140605DB2: call        00000001406DC560
+  0000000140605DB7: mov         rsi,rax
+  0000000140605DBA: mov         ecx,edi
+  0000000140605DBC: call        00000001406DC560
+  0000000140605DC1: cmp         rsi,rax
+  0000000140605DC4: jae         0000000140605DCC
+  0000000140605DC6: mov         r14,qword ptr [r14+20h]
+  0000000140605DCA: jmp         0000000140605DAA
+  0000000140605DCC: mov         ecx,dword ptr [r14]
+  0000000140605DCF: call        00000001406DC560
+  0000000140605DD4: mov         rsi,rax
+  0000000140605DD7: mov         ecx,edi
+  0000000140605DD9: call        00000001406DC560
+  0000000140605DDE: cmp         rsi,rax
+  0000000140605DE1: ja          0000000140605DE9
+  0000000140605DE3: add         r14,8
+  0000000140605DE7: jmp         0000000140605DEC
+  0000000140605DE9: mov         r14,rbp
+  0000000140605DEC: mov         eax,ebx
+  0000000140605DEE: and         eax,dword ptr [r15+10h]
+  0000000140605DF2: movsxd      rcx,eax
+  0000000140605DF5: mov         rax,qword ptr [r15]
+  0000000140605DF8: mov         rsi,qword ptr [rax+rcx*8]
+  0000000140605DFC: test        rsi,rsi
+  0000000140605DFF: je          0000000140605E37
+  0000000140605E01: mov         ecx,dword ptr [rsi]
+  0000000140605E03: call        00000001406DC560
+  0000000140605E08: mov         rdi,rax
+  0000000140605E0B: mov         ecx,ebx
+  0000000140605E0D: E8
+  0000000140605E0E: 4E
+  0000000140605E0F: 67
+  0000000140605E10: 0D

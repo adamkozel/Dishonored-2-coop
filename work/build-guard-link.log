@@ -1,0 +1,23 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- Configuring done (0.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/build
+MSBuild version 17.14.60+43b635718 for .NET Framework
+
+  engine_bridge.cpp
+     Creating library C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/build/Release/dinput8.lib and object C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/build/Release/dinput8.exp
+  d2_lab_proxy.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\dinput8.dll
+  d2_proxy_smoke.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_proxy_smoke.exe
+  d2_runtime_probe.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_runtime_probe.exe
+  d2_steam_probe.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_steam_probe.exe
+  d2_world_identity_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_world_identity_tests.exe
+PASS: game mutex scoped, unrelated mutex unchanged, system DirectInput forwarded
+PASS: simulated input preserves controls; expired, malformed, and excessive leases release input
+PASS: pose protocol rejects incompatible builds, own role, NaNs, wrong size, invalid flags and malformed rotation bases
+PASS: native cinematic, pause, and pending state transitions block movement follow
+PASS: cinematic identities ignore observer order, distinguish native nodes, and reject inconsistent metadata
+PASS: skip relay rejects mismatched scenes, sessions, world epochs, cinematic epochs, and disabled peers
+PASS: active sequence boundaries distinguish subscenes and channels; branch equivalence is limited to the observed opening pair
+PASS: opening rendezvous requires both native holds and rejects releases for another role, session, epoch, or segment
+PASS: AI scheduler pool membership, inactive partition, lifetime checks, bounds and concurrent-change refusal
+PASS: reciprocal NPC identity, unrelated local handles, stale generations, ambiguous spawners, world packet scope and transform validation

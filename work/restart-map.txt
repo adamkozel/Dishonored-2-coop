@@ -1,0 +1,67 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014004B720: push        rbx
+  000000014004B722: mov         eax,1430h
+  000000014004B727: call        00000001411AD7C0
+  000000014004B72C: sub         rsp,rax
+  000000014004B72F: mov         rax,qword ptr [rcx]
+  000000014004B732: mov         rbx,rcx
+  000000014004B735: call        qword ptr [rax+0000000000000190h]
+  000000014004B73B: test        rax,rax
+  000000014004B73E: jne         000000014004B757
+  000000014004B740: lea         rcx,[0000000141AC7BA8h]
+  000000014004B747: call        0000000140166830
+  000000014004B74C: xor         al,al
+  000000014004B74E: add         rsp,1430h
+  000000014004B755: pop         rbx
+  000000014004B756: ret
+  000000014004B757: mov         rax,qword ptr [rbx]
+  000000014004B75A: mov         rcx,rbx
+  000000014004B75D: call        qword ptr [rax+0000000000000190h]
+  000000014004B763: mov         rcx,rax
+  000000014004B766: mov         rdx,qword ptr [rax]
+  000000014004B769: call        qword ptr [rdx+40h]
+  000000014004B76C: test        al,al
+  000000014004B76E: jne         000000014004B787
+  000000014004B770: lea         rcx,[0000000141AC7BD0h]
+  000000014004B777: call        0000000140166830
+  000000014004B77C: xor         al,al
+  000000014004B77E: add         rsp,1430h
+  000000014004B785: pop         rbx
+  000000014004B786: ret
+  000000014004B787: mov         rcx,qword ptr [000000014228BAE8h]
+  000000014004B78E: lea         rdx,[0000000141AC7C00h]
+  000000014004B795: xor         r9d,r9d
+  000000014004B798: mov         rax,qword ptr [rcx]
+  000000014004B79B: xor         r8d,r8d
+  000000014004B79E: call        qword ptr [rax+40h]
+  000000014004B7A1: lea         rdx,[0000000141AB3AC8h]
+  000000014004B7A8: lea         rcx,[rsp+20h]
+  000000014004B7AD: mov         dword ptr [rsp+20h],0
+  000000014004B7B5: call        00000001401323E0
+  000000014004B7BA: mov         rax,qword ptr [rbx]
+  000000014004B7BD: mov         rcx,rbx
+  000000014004B7C0: call        qword ptr [rax+0000000000000190h]
+  000000014004B7C6: mov         rcx,rax
+  000000014004B7C9: mov         rdx,qword ptr [rax]
+  000000014004B7CC: call        qword ptr [rdx+0000000000000088h]
+  000000014004B7D2: lea         rcx,[rax+10h]
+  000000014004B7D6: call        00000001401D9090
+  000000014004B7DB: lea         rcx,[rsp+20h]
+  000000014004B7E0: mov         rdx,rax
+  000000014004B7E3: call        00000001401323E0
+  000000014004B7E8: lea         rcx,[rsp+20h]
+  000000014004B7ED: call        000000014004A9F0
+  000000014004B7F2: mov         al,1
+  000000014004B7F4: add         rsp,1430h
+  000000014004B7FB: pop         rbx
+  000000014004B7FC: ret
+  000000014004B7FD: int         3
+  000000014004B7FE: int         3
+  000000014004B7FF: int         3
+  000000014004B800: B8

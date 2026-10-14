@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-14T16:16:27.638571+02:00",
+  "candidate": "candidate-npc-combat-v1147b",
+  "dll": "195043748E994363278C61899181F3918E62F143B4F5488FEDE1C89F7AB75354",
+  "harnesses": [
+    "../natural-moveset/Probe-MissionDeath-v1146.ps1",
+    "../natural-moveset/Test-MissionCheckpoint-v1151.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-death-v1146",
+      "passed": true,
+      "candidate": "candidate-npc-combat-v1123e",
+      "scope": "Discovery (1123e, checkpoint sync off): the host dies by a native fall on Edge of the World; native GameOver \"Restart From Last Checkpoint\" issues RestartFromCheckpoint (kind 0), which caches the last autosave slot (61, the mission-start autosave), then RestartFromMemoryCheckpoint (kind 1) accepted for that slot.",
+      "failure": null,
+      "cases": [
+        {
+          "finalLogic": 1,
+          "clientCommands": 0,
+          "hostCommands": [
+            {
+              "kind": 0,
+              "requestedSlot": -1,
+              "lastSlot": 61,
+              "logic": 13,
+              "returnLow": 0,
+              "cachedSlot": -1
+            },
+            {
+              "kind": 1,
+              "requestedSlot": -1,
+              "lastSlot": 61,
+              "logic": 13,
+              "returnLow": 1,
+              "cachedSlot": 61
+            }
+          ]
+        }
+      ],
+      "restoration": true,
+      "recovery": null
+    },
+    {
+      "take": "mission-checkpoint-v1148",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1147",
+      "scope": "1147: arm refused to pair: the client last autosave was still its Dunwall autosave (mission-start autosave not yet written) and the autosave write generation differed by timing -> 1147b.",
+      "failure": "Mission checkpoint arm failed host=awaiting_peer client=awaiting_peer",
+      "cases": [],
+      "restoration": true,
+      "recovery": null
+    },
+    {
+      "take": "mission-checkpoint-v1149",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1147b",
+      "scope": "1147b: armed after re-arm; shared death reached; restart aborted (host timeout, client peer_aborted) while the client sat at the load prompt; the harness pressed A on a shared timer and lost its timeline on failure. Cleanup could not disable the client session (load boundary pending); manual recovery: A on the client, sessions off, B out of pause, Recover-InterruptedTake (attempt 1 failed on the pause menu, kept as recovery-attempt1.json; attempt 2 passed).",
+      "failure": "Restart failed client peer_aborted",
+      "cases": [],
+      "restoration": false,
+      "recovery": true
+    },
+    {
+      "take": "mission-checkpoint-v1150",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1147b",
+      "scope": "Diagnostic rerun: shared death -> both native GameOver -> host restart -> both loading -> both held at the barrier -> released -> gameplay in about 8 s; each peer loaded its own slot 61 at its exact spawn; usable session renewed. Marked failed only by a cumulative count check that included 1149's abort.",
+      "failure": "Unexpected restart counts/role on host",
+      "cases": [],
+      "restoration": true,
+      "recovery": null
+    },
+    {
+      "take": "mission-checkpoint-v1151",
+      "passed": true,
+      "candidate": "candidate-npc-combat-v1147b",
+      "scope": "Pass, two cycles: host death + host restart request, then client death + client restart request (the other peer presses as a duplicate). Each cycle: both native GameOver screens, exactly one load and one completion per peer, no abort, new world epochs, correct characters (1/2), exact mission-start spawn, usable session renewed after the shared checkpoint.",
+      "failure": null,
+      "cases": [
+        {
+          "armDigest": "e02f298c586429533769209879e73a13201a0560f21c8e3988dfbd17a2c600ea",
+          "cycles": [
+            {
+              "dying": "host",
+              "checks": {
+                "client": {
+                  "spawnDistance": 0.0,
+                  "aborted": 0,
+                  "completed": 1,
+                  "epochChanged": true,
+                  "rearms": 1,
+                  "usable": "renewed_after_shared_checkpoint",
+                  "loads": 1,
+                  "character": 2
+                },
+                "host": {
+                  "spawnDistance": 0.0,
+                  "aborted": 0,
+                  "completed": 1,
+                  "epochChanged": true,
+                  "rearms": 1,
+                  "usable": "renewed_after_shared_checkpoint",
+                  "loads": 1,
+                  "character": 1
+                }
+              }
+            },
+            {
+              "dying": "client",
+              "checks": {
+                "client": {
+                  "spawnDistance": 0.0,
+                  "aborted": 0,
+                  "completed": 1,
+                  "epochChanged": true,
+                  "rearms": 1,
+                  "usable": "renewed_after_shared_checkpoint",
+                  "loads": 1,
+                  "character": 2
+                },
+                "host": {
+                  "spawnDistance": 0.0,
+                  "aborted": 0,
+                  "completed": 1,
+                  "epochChanged": true,
+                  "rearms": 1,
+                  "usable": "renewed_after_shared_checkpoint",
+                  "loads": 1,
+                  "character": 1
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "restoration": true,
+      "recovery": null
+    }
+  ],
+  "native": {
+    "commands": {
+      "RestartFromCheckpoint": "0x65da50 (Restart from the last save)",
+      "RestartFromMemoryCheckpoint": "0x65db00",
+      "LoadGame": "0x658d00",
+      "SaveGame": "0x65f520 (quick save)"
+    },
+    "requestSave": "0x14065cc50(manager=game+0x2e75d8, slotType, slotNumber, isMissionStart, autoRetry, securityDelay); slotType 1 quick, 2 manual/mission start, 3 autosave",
+    "lastAutosaveSlot": "game+0x2e75d8+0x1c",
+    "autosaveNode": "arkKisculeNodeActionAutosave (vtable 0x141b7c9e8), mission-script driven",
+    "slots": "autosaves rotate SLOT61/SLOT62 per instance in the isolated fs_savepath; game.details holds mapName/chapter/mission/character/slotType"
+  },
+  "findings": [
+    "Confirmed runtime (1146): on a mission, native GameOver restart = RestartFromCheckpoint -> last autosave slot (cached) -> memory continuation; each instance owns its own per-character autosaves.",
+    "Confirmed runtime (1151): mission checkpoint mode (1147b) turns either player's native death into a shared death (both native GameOver screens), deduplicates restart presses, and restarts each peer exactly once from its own mission autosave behind the existing both-ready barrier; usable sessions renew after the shared checkpoint.",
+    "Identity: autosave mapName/chapter/mission of the current map; arming waits for each peer's mission-start autosave."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Mid-mission autosaves are per-player script events: a peer that crossed an autosave trigger alone holds a later checkpoint than the other (identity still matches by map). Pairing them needs the native RequestSave (slotType 3) issued on the peer when the host autosaves (hypothesis, not yet built).",
+    "Partner avatar (probe follow) restoration after a mission restart was not armed in these takes.",
+    "Door/coin/NPC stream renewal across a mission restart not yet exercised (usable renewal verified).",
+    "Map transitions between missions, manual save/load selection, disconnect/rejoin."
+  ]
+}

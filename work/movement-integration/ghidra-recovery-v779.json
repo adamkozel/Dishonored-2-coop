@@ -1,0 +1,67 @@
+{
+  "program": "Dishonored2.exe",
+  "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "confidence": "Targeted static evidence; native quantity restoration pending candidate779 verification",
+  "findings": {
+    "quantityLookup": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nundefined4 FUN_140618de0(longlong param_1,undefined8 param_2,undefined4 param_3)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  int iVar2;\r\n  undefined4 uVar3;\r\n  longlong lVar4;\r\n  undefined **local_res8;\r\n  undefined8 local_40;\r\n  undefined4 local_38;\r\n  undefined8 local_30;\r\n  undefined8 local_28;\r\n  undefined8 local_20;\r\n  undefined1 local_18;\r\n  undefined4 local_14;\r\n  undefined1 local_b;\r\n  \r\n  local_res8 = &PTR_FUN_141b9a840;\r\n  local_38 = 0x3fff0010;\r\n  local_30 = 0;\r\n  local_28 = 0;\r\n  local_20 = 0;\r\n  local_18 = 0;\r\n  local_14 = 0;\r\n  local_b = 1;\r\n  local_40 = param_2;\r\n  iVar2 = FUN_140618af0(&local_res8,*(undefined8 *)(param_1 + 0x38),\r\n                        *(uint *)(param_1 + 0x40) & 0xffffff,&local_40,0xfffffffffffffffe);\r\n  local_res8 = &PTR_FUN_141b9a808;\r\n  if (iVar2 < 0) {\r\n    uVar3 = 0;\r\n  }\r\n  else {\r\n    lVar4 = (longlong)iVar2 * 0x38 + *(longlong *)(param_1 + 0x38);\r\n    uVar1 = *(undefined4 *)(lVar4 + 0x20);\r\n    uVar3 = FUN_14063cc00(lVar4,param_3);\r\n    FUN_1406170b0(param_1,lVar4,uVar1,uVar3);\r\n  }\r\n  return uVar3;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nundefined4 FUN_140618de0(longlong param_1,undefined8 param_2,undefined4 param_3)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  int iVar2;\r\n  undefined4 uVar3;\r\n  longlong lVar4;\r\n  undefined **local_res8;\r\n  undefined8 local_40;\r\n  undefined4 local_38;\r\n  undefined8 local_30;\r\n  undefined8 local_28;\r\n  undefined8 local_20;\r\n  undefined1 local_18;\r\n  undefined4 local_14;\r\n  undefined1 local_b;\r\n  \r\n  local_res8 = &PTR_FUN_141b9a840;\r\n  local_38 = 0x3fff0010;\r\n  local_30 = 0;\r\n  local_28 = 0;\r\n  local_20 = 0;\r\n  local_18 = 0;\r\n  local_14 = 0;\r\n  local_b = 1;\r\n  local_40 = param_2;\r\n  iVar2 = FUN_140618af0(&local_res8,*(undefined8 *)(param_1 + 0x38),\r\n                        *(uint *)(param_1 + 0x40) & 0xffffff,&local_40,0xfffffffffffffffe);\r\n  local_res8 = &PTR_FUN_141b9a808;\r\n  if (iVar2 < 0) {\r\n    uVar3 = 0;\r\n  }\r\n  else {\r\n    lVar4 = (longlong)iVar2 * 0x38 + *(longlong *)(param_1 + 0x38);\r\n    uVar1 = *(undefined4 *)(lVar4 + 0x20);\r\n    uVar3 = FUN_14063cc00(lVar4,param_3);\r\n    FUN_1406170b0(param_1,lVar4,uVar1,uVar3);\r\n  }\r\n  return uVar3;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    },
+    "quantityClamp": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nint FUN_14063cc00(longlong param_1,int param_2)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n  iVar1 = *(int *)(param_1 + 0x20);\r\n  if (param_2 < 0) {\r\n    param_2 = 0;\r\n  }\r\n  else if (*(int *)(param_1 + 0x24) < param_2) {\r\n    param_2 = *(int *)(param_1 + 0x24);\r\n  }\r\n  *(int *)(param_1 + 0x20) = param_2;\r\n  if ((iVar1 == 0) && (0 < param_2)) {\r\n    *(undefined1 *)(param_1 + 0x28) = 1;\r\n    return param_2;\r\n  }\r\n  *(undefined1 *)(param_1 + 0x28) = 0;\r\n  return param_2;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nint FUN_14063cc00(longlong param_1,int param_2)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n  iVar1 = *(int *)(param_1 + 0x20);\r\n  if (param_2 < 0) {\r\n    param_2 = 0;\r\n  }\r\n  else if (*(int *)(param_1 + 0x24) < param_2) {\r\n    param_2 = *(int *)(param_1 + 0x24);\r\n  }\r\n  *(int *)(param_1 + 0x20) = param_2;\r\n  if ((iVar1 == 0) && (0 < param_2)) {\r\n    *(undefined1 *)(param_1 + 0x28) = 1;\r\n    return param_2;\r\n  }\r\n  *(undefined1 *)(param_1 + 0x28) = 0;\r\n  return param_2;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    },
+    "quantitySignature": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"address\":\"140618de0\",\"length\":32,\"data\":[76,139,220,87,72,131,236,96,73,199,67,184,254,255,255,255,73,137,91,16,73,137,107,24,73,137,115,32,65,139,248,72],\"hex\":\"4c8bdc574883ec6049c743b8feffffff49895b1049896b1849897320418bf848\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"address\":\"140618de0\",\"length\":32,\"data\":[76,139,220,87,72,131,236,96,73,199,67,184,254,255,255,255,73,137,91,16,73,137,107,24,73,137,115,32,65,139,248,72],\"hex\":\"4c8bdc574883ec6049c743b8feffffff49895b1049896b1849897320418bf848\"}"
+      },
+      "isError": false
+    },
+    "gameOverVtable": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"address\":\"141b6aab8\",\"length\":32,\"data\":[64,36,79,64,1,0,0,0,0,236,78,64,1,0,0,0,208,151,120,64,1,0,0,0,112,70,79,64,1,0,0,0],\"hex\":\"40244f400100000000ec4e4001000000d09778400100000070464f4001000000\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"address\":\"141b6aab8\",\"length\":32,\"data\":[64,36,79,64,1,0,0,0,0,236,78,64,1,0,0,0,208,151,120,64,1,0,0,0,112,70,79,64,1,0,0,0],\"hex\":\"40244f400100000000ec4e4001000000d09778400100000070464f4001000000\"}"
+      },
+      "isError": false
+    },
+    "stateNames": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"matches\":[{\"address\":\"141c5f628\",\"value\":\"arkGameLogicStateIds_t\",\"encoding\":\"ascii\"},{\"address\":\"141d40620\",\"value\":\"arkGameLogicStateInGame\",\"encoding\":\"ascii\"},{\"address\":\"141d40638\",\"value\":\"arkGameLogicState\",\"encoding\":\"ascii\"},{\"address\":\"141d40ff0\",\"value\":\"arkGameLogicStateJournal\",\"encoding\":\"ascii\"},{\"address\":\"141d41010\",\"value\":\"arkGameLogicStateWithFX\",\"encoding\":\"ascii\"},{\"address\":\"141d411f8\",\"value\":\"arkGameLogicStateMainMenu\",\"encoding\":\"ascii\"},{\"address\":\"141d41ab8\",\"value\":\"arkGameLogicStateInGame::keyBindingInformation_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41af0\",\"value\":\"arkGameLogicStatePauseBase\",\"encoding\":\"ascii\"},{\"address\":\"141d41b10\",\"value\":\"arkGameLogicStatePause\",\"encoding\":\"ascii\"},{\"address\":\"141d41b28\",\"value\":\"arkGameLogicStatePause::StatisticsData\",\"encoding\":\"ascii\"},{\"address\":\"141d41b50\",\"value\":\"arkGameLogicStatePause::StatisticsArray\",\"encoding\":\"ascii\"},{\"address\":\"141d41b78\",\"value\":\"arkGameLogicStateNotification\",\"encoding\":\"ascii\"},{\"address\":\"141d41b98\",\"value\":\"arkGameLogicStateReadNote\",\"encoding\":\"ascii\"},{\"address\":\"141d41bb8\",\"value\":\"arkGameLogicStateCinematic\",\"encoding\":\"ascii\"},{\"address\":\"141d41c08\",\"value\":\"arkGameLogicStatePowerwheel\",\"encoding\":\"ascii\"},{\"address\":\"141d41c28\",\"value\":\"arkGameLogicStatePowerwheel::itemInfo_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41c50\",\"value\":\"arkGameLogicStateConversation\",\"encoding\":\"ascii\"},{\"address\":\"141d41ca8\",\"value\":\"arkGameLogicStateBlackMarket\",\"encoding\":\"ascii\"},{\"address\":\"141d41cc8\",\"value\":\"arkGameLogicStateBlackMarket::itemDefinition_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41cf8\",\"value\":\"arkGameLogicStateBlackMarket::unlockedUpgrades_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d30\",\"value\":\"arkGameLogicStateBlackMarket::tileDefinition_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d60\",\"value\":\"arkGameLogicStateBlackMarket::favorSlot_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d90\",\"value\":\"arkGameLogicStateBlackMarket::FlashDataStructure\",\"encoding\":\"ascii\"},{\"address\":\"141d41dc8\",\"value\":\"arkGameLogicStateBlackMarket::FlashDataStructure::upgrade_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41e08\",\"value\":\"arkGameLogicStateBlackMarket::upgradeTab_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41e38\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeNode\",\"encoding\":\"ascii\"},{\"address\":\"141d41e68\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeTree\",\"encoding\":\"ascii\"},{\"address\":\"141d41e98\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeRoot\",\"encoding\":\"ascii\"},{\"address\":\"141d41f00\",\"value\":\"arkGameLogicStateResults\",\"encoding\":\"ascii\"},{\"address\":\"141d41f20\",\"value\":\"arkGameLogicStateTutorial\",\"encoding\":\"ascii\"}],\"total\":45,\"offset\":0,\"limit\":30}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"matches\":[{\"address\":\"141c5f628\",\"value\":\"arkGameLogicStateIds_t\",\"encoding\":\"ascii\"},{\"address\":\"141d40620\",\"value\":\"arkGameLogicStateInGame\",\"encoding\":\"ascii\"},{\"address\":\"141d40638\",\"value\":\"arkGameLogicState\",\"encoding\":\"ascii\"},{\"address\":\"141d40ff0\",\"value\":\"arkGameLogicStateJournal\",\"encoding\":\"ascii\"},{\"address\":\"141d41010\",\"value\":\"arkGameLogicStateWithFX\",\"encoding\":\"ascii\"},{\"address\":\"141d411f8\",\"value\":\"arkGameLogicStateMainMenu\",\"encoding\":\"ascii\"},{\"address\":\"141d41ab8\",\"value\":\"arkGameLogicStateInGame::keyBindingInformation_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41af0\",\"value\":\"arkGameLogicStatePauseBase\",\"encoding\":\"ascii\"},{\"address\":\"141d41b10\",\"value\":\"arkGameLogicStatePause\",\"encoding\":\"ascii\"},{\"address\":\"141d41b28\",\"value\":\"arkGameLogicStatePause::StatisticsData\",\"encoding\":\"ascii\"},{\"address\":\"141d41b50\",\"value\":\"arkGameLogicStatePause::StatisticsArray\",\"encoding\":\"ascii\"},{\"address\":\"141d41b78\",\"value\":\"arkGameLogicStateNotification\",\"encoding\":\"ascii\"},{\"address\":\"141d41b98\",\"value\":\"arkGameLogicStateReadNote\",\"encoding\":\"ascii\"},{\"address\":\"141d41bb8\",\"value\":\"arkGameLogicStateCinematic\",\"encoding\":\"ascii\"},{\"address\":\"141d41c08\",\"value\":\"arkGameLogicStatePowerwheel\",\"encoding\":\"ascii\"},{\"address\":\"141d41c28\",\"value\":\"arkGameLogicStatePowerwheel::itemInfo_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41c50\",\"value\":\"arkGameLogicStateConversation\",\"encoding\":\"ascii\"},{\"address\":\"141d41ca8\",\"value\":\"arkGameLogicStateBlackMarket\",\"encoding\":\"ascii\"},{\"address\":\"141d41cc8\",\"value\":\"arkGameLogicStateBlackMarket::itemDefinition_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41cf8\",\"value\":\"arkGameLogicStateBlackMarket::unlockedUpgrades_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d30\",\"value\":\"arkGameLogicStateBlackMarket::tileDefinition_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d60\",\"value\":\"arkGameLogicStateBlackMarket::favorSlot_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41d90\",\"value\":\"arkGameLogicStateBlackMarket::FlashDataStructure\",\"encoding\":\"ascii\"},{\"address\":\"141d41dc8\",\"value\":\"arkGameLogicStateBlackMarket::FlashDataStructure::upgrade_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41e08\",\"value\":\"arkGameLogicStateBlackMarket::upgradeTab_t\",\"encoding\":\"ascii\"},{\"address\":\"141d41e38\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeNode\",\"encoding\":\"ascii\"},{\"address\":\"141d41e68\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeTree\",\"encoding\":\"ascii\"},{\"address\":\"141d41e98\",\"value\":\"arkGameLogicStateBlackMarket::UpgradeRoot\",\"encoding\":\"ascii\"},{\"address\":\"141d41f00\",\"value\":\"arkGameLogicStateResults\",\"encoding\":\"ascii\"},{\"address\":\"141d41f20\",\"value\":\"arkGameLogicStateTutorial\",\"encoding\":\"ascii\"}],\"total\":45,\"offset\":0,\"limit\":30}"
+      },
+      "isError": false
+    }
+  }
+}

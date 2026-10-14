@@ -1,0 +1,91 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014078A5B0: push        rdi
+  000000014078A5B2: sub         rsp,50h
+  000000014078A5B6: or          byte ptr [rcx+00000000000009C0h],8
+  000000014078A5BD: mov         r8,qword ptr [rcx+10h]
+  000000014078A5C1: movzx       eax,byte ptr [rcx+00000000000009C0h]
+  000000014078A5C8: mov         rdi,qword ptr [r8+0000000000000098h]
+  000000014078A5CF: test        rdi,rdi
+  000000014078A5D2: je          000000014078A620
+  000000014078A5D4: mov         qword ptr [rsp+60h],rbx
+  000000014078A5D9: lea         rbx,[rcx+48h]
+  000000014078A5DD: mov         rcx,qword ptr [00000001439A5290h]
+  000000014078A5E4: movaps      xmmword ptr [rsp+40h],xmm6
+  000000014078A5E9: movss       xmm6,dword ptr [r8+000000000000008Ch]
+  000000014078A5F2: call        00000001408A8F70
+  000000014078A5F7: mov         r9d,4
+  000000014078A5FD: mov         rdx,rdi
+  000000014078A600: movaps      xmm2,xmm6
+  000000014078A603: mov         rcx,rax
+  000000014078A606: mov         qword ptr [rsp+20h],rbx
+  000000014078A60B: call        0000000140166F60
+  000000014078A610: mov         rbx,qword ptr [rsp+60h]
+  000000014078A615: movaps      xmm6,xmmword ptr [rsp+40h]
+  000000014078A61A: add         rsp,50h
+  000000014078A61E: pop         rdi
+  000000014078A61F: ret
+  000000014078A620: movss       xmm0,dword ptr [0000000141F697B0h]
+  000000014078A628: or          al,10h
+  000000014078A62A: mov         dword ptr [rcx+00000000000009CCh],3
+  000000014078A634: mov         byte ptr [rcx+00000000000009C0h],al
+  000000014078A63A: mov         rcx,qword ptr [00000001439A5290h]
+  000000014078A641: mov         qword ptr [rsp+30h],0
+  000000014078A64A: movss       dword ptr [rsp+3Ch],xmm0
+  000000014078A650: mov         dword ptr [rsp+38h],0
+  000000014078A658: call        00000001408A8F70
+  000000014078A65D: lea         rdx,[rsp+30h]
+  000000014078A662: mov         rcx,rax
+  000000014078A665: mov         r8d,4
+  000000014078A66B: call        0000000140167050
+  000000014078A670: add         rsp,50h
+  000000014078A674: pop         rdi
+  000000014078A675: ret
+  000000014078A676: int         3
+  000000014078A677: int         3
+  000000014078A678: int         3
+  000000014078A679: int         3
+  000000014078A67A: int         3
+  000000014078A67B: int         3
+  000000014078A67C: int         3
+  000000014078A67D: int         3
+  000000014078A67E: int         3
+  000000014078A67F: int         3
+  000000014078A680: and         byte ptr [rcx+00000000000009C0h],0FBh
+  000000014078A687: ret
+  000000014078A688: int         3
+  000000014078A689: int         3
+  000000014078A68A: int         3
+  000000014078A68B: int         3
+  000000014078A68C: int         3
+  000000014078A68D: int         3
+  000000014078A68E: int         3
+  000000014078A68F: int         3
+  000000014078A690: mov         qword ptr [rsp+10h],rdx
+  000000014078A695: sub         rsp,38h
+  000000014078A699: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014078A6A2: mov         qword ptr [rsp+50h],rdx
+  000000014078A6A7: test        rdx,rdx
+  000000014078A6AA: je          000000014078A6B5
+  000000014078A6AC: mov         rcx,rdx
+  000000014078A6AF: call        0000000140789CC0
+  000000014078A6B4: nop
+  000000014078A6B5: add         rsp,38h
+  000000014078A6B9: ret
+  000000014078A6BA: int         3
+  000000014078A6BB: int         3
+  000000014078A6BC: int         3
+  000000014078A6BD: int         3
+  000000014078A6BE: int         3
+  000000014078A6BF: int         3
+  000000014078A6C0: 48
+
+  Summary
+
+     1A7D000 .text

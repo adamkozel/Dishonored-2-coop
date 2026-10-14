@@ -1,0 +1,43 @@
+
+void FUN_14074c100(longlong param_1)
+
+{
+  longlong lVar1;
+  char cVar2;
+  longlong lVar3;
+  undefined8 uVar4;
+  longlong *plVar5;
+  uint uVar6;
+  undefined4 local_res10 [6];
+  
+  if ((*(longlong *)(D2_GameSingletonPtr + 0x1f6ee8) != 0) &&
+     (lVar1 = *(longlong *)(*(longlong *)(D2_GameSingletonPtr + 0x1f6ee8) + 0xd8), lVar1 != 0)) {
+    if (*(char *)(param_1 + 0x118) != '\0') {
+      FUN_14038e820(lVar1,7);
+      return;
+    }
+    if ((*(char *)(param_1 + 0x1e8) != '\0') && (cVar2 = FUN_14074bea0(param_1), cVar2 == '\0')) {
+      lVar3 = 0;
+      uVar6 = *(uint *)(param_1 + 0x148) & 0xffffff;
+      if (uVar6 != 0) {
+        plVar5 = *(longlong **)(param_1 + 0x140);
+        do {
+          if (*plVar5 != 0) {
+            local_res10[0] = *(undefined4 *)(*plVar5 + 100);
+            FUN_14038e6f0(lVar1,6,local_res10);
+            return;
+          }
+          lVar3 = lVar3 + 1;
+          plVar5 = plVar5 + 1;
+        } while (lVar3 < (longlong)(ulonglong)uVar6);
+      }
+      uVar4 = D2_InternedName_Resolve(*(longlong *)(param_1 + 0x10) + 0x20);
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830("[ arkCpntOpenable::NotifyHUDInformationMessage ] Could not find a key for %s when trying to notify."
+                    ,uVar4);
+    }
+  }
+  return;
+}
+
+

@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-10T15:13:17.987829+02:00",
+  "complete": false,
+  "first_person_wrist_constraints": false,
+  "live_dll_changed": false,
+  "review_queue": {
+    "filtered_next_previous": true,
+    "automatic_advance_verified": true,
+    "stops_at_end": true,
+    "feedback_unchanged": true
+  },
+  "new_families": {
+    "item_transitions": {
+      "roundtrip": "item-transitions-v1-roundtrip.json",
+      "passed": true,
+      "note": "Native item switches and two cancellation phases. One active left prop; game inventory and actual prop binding unverified."
+    },
+    "ladder": {
+      "roundtrip": "ladder-v2-roundtrip.json",
+      "passed": true,
+      "note": "Ascent/descent and bottom connections against a neutral rung fixture. Descent/exit reverse donors; fine palm contact and top connections pending."
+    },
+    "water": {
+      "roundtrip": "water-v1-roundtrip.json",
+      "passed": true,
+      "note": "Ten full-body movement/transition studies; water physics and exit absent."
+    },
+    "aerial_pairs": {
+      "roundtrip": "contextual-v1-roundtrip.json",
+      "passed": true,
+      "note": "v3: native target handoff clocks respected. Initial body overlap, weight transfer and feet/target clearance require revision. Held target pose is not physics."
+    },
+    "crouched_pairs": {
+      "roundtrip": "crouched-pairs-v1-roundtrip.json",
+      "passed": true,
+      "note": "Whole-body crouched approach rises into existing rear paired action; no attack entirely at crouch height."
+    },
+    "blink_assault": {
+      "roundtrip": "blink-assault-v1-roundtrip.json",
+      "passed": true,
+      "note": "Native full-body kick/slash acting joins free caster anticipation. Exact Blink Assault attribute confirmed; teleport/outcome binding absent."
+    }
+  },
+  "sliding_pair": {
+    "version": 4,
+    "recorded": true,
+    "runtime_tested": false,
+    "max_contact_error_m": {
+      "corvo": 0.0392531937,
+      "emily": 0.0002495074
+    },
+    "observed": "Improved reach, but initial body overlap/sweep, hand shape, weight transfer and recovery still need revision. Native target remains held at ragdoll event; no physics."
+  },
+  "native_recording": {
+    "file": "blink-assault-emily-video-1.mp4",
+    "scope": "Actual native D2 body publication only. No teleport or damage.",
+    "original_timing": true,
+    "gameplay_bound": false
+  },
+  "research": {
+    "event_times": "pair-research/native-drop-event-times.json",
+    "additional_event_times": "pair-research/native-context-event-times.json",
+    "ghidra": "141437f86 PRE comment added; program saved. Registration reference, not a verified runtime ragdoll handler.",
+    "animated_anchor": "Candidate animated partner transform failed comparison with existing native actor roots (up to 0.97m). Do not use it as a verified root path.",
+    "pinned_native_assets": "pair-research/native-scenes/manifest.json"
+  },
+  "rejected_or_superseded": [
+    "drop-pairs-videos-v1",
+    "slide-pair-videos-v1",
+    "aerial-donor-videos-v1"
+  ],
+  "aerial_solo": {
+    "recorded": true,
+    "promoted": false,
+    "reason": "Sword follow-through/landing is awkward; paired native-preparation study supersedes its purpose."
+  }
+}

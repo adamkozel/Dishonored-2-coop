@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-13T09:01:18.696447+02:00",
+  "tests": [
+    {
+      "role": "corvo",
+      "take": "native-heavy-corvo-v629",
+      "originalPassed": false,
+      "failure": "Ordinary native target eligibility not accepted",
+      "observedNativeRelease": {
+        "subscene": "Scene_2",
+        "durationMs": 1000,
+        "stateSamples": 8,
+        "sceneIds": [
+          223
+        ]
+      },
+      "resultSha256": "9F1E8714F8425F48BF2DB75E341C2A2147970614E6AC35396DCF975DC66735E1",
+      "remoteBindingVerified": false
+    },
+    {
+      "role": "emily",
+      "take": "native-heavy-emily-v630",
+      "originalPassed": false,
+      "failure": "restore: Final host state does not match the lab fixture.",
+      "observedNativeRelease": {
+        "subscene": "Scene_1",
+        "durationMs": 833,
+        "stateSamples": 7,
+        "sceneIds": [
+          211
+        ]
+      },
+      "resultSha256": "A7AF11BB1717340BFF5FC97B4EC4C5DCC07B40D9B80CEA0435F2102CF2627931",
+      "remoteBindingVerified": false
+    }
+  ],
+  "restoration": "work/movement-integration/heavy-fixture-recovery-v631/result.json",
+  "sourceObserved": true,
+  "remoteBindingVerified": false,
+  "complete": false
+}

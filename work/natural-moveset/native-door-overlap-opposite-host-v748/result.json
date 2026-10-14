@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "failure": "Native Steam door ordering, application, duplicate handling or rejection delta differs",
+  "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+  "checks": [
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [],
+  "door": "ld_door_350cm_int_rich_wood_01_3",
+  "initialOpen": false,
+  "scope": "Overlapping native use of an ordinary door: second player presses X during a received Moving transition. Host orders the newer closed target; native animation handles reversal; both converge without channel retirement. Success is not assumed; inspect result and native-at-overlap."
+}

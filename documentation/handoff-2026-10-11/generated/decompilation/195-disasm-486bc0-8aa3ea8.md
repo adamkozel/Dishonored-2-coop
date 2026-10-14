@@ -1,0 +1,237 @@
+# disasm-486bc0.txt
+
+Original: [work/disasm-486bc0.txt](<../../../../work/disasm-486bc0.txt>)
+
+SHA-256: `674B3624617EF48A406DDAD41D79663182D7EE73DC1993F55DDE1A96AB470097`; 10274 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140486BC0: mov         eax,dword ptr [rdx]
+  0000000140486BC2: mov         dword ptr [rcx+0Ch],eax
+  0000000140486BC5: mov         eax,dword ptr [rdx+4]
+  0000000140486BC8: mov         dword ptr [rcx+10h],eax
+  0000000140486BCB: mov         eax,dword ptr [rdx+8]
+  0000000140486BCE: mov         dword ptr [rcx+14h],eax
+  0000000140486BD1: or          byte ptr [rcx+00000000000000C8h],1
+  0000000140486BD8: ret
+  0000000140486BD9: int         3
+  0000000140486BDA: int         3
+  0000000140486BDB: int         3
+  0000000140486BDC: int         3
+  0000000140486BDD: int         3
+  0000000140486BDE: int         3
+  0000000140486BDF: int         3
+  0000000140486BE0: mov         eax,dword ptr [rdx]
+  0000000140486BE2: mov         dword ptr [rcx+24h],eax
+  0000000140486BE5: mov         eax,dword ptr [rdx+4]
+  0000000140486BE8: mov         dword ptr [rcx+28h],eax
+  0000000140486BEB: mov         eax,dword ptr [rdx+8]
+  0000000140486BEE: mov         dword ptr [rcx+2Ch],eax
+  0000000140486BF1: mov         eax,dword ptr [rdx+0Ch]
+  0000000140486BF4: mov         dword ptr [rcx+20h],0
+  0000000140486BFB: mov         dword ptr [rcx+1Ch],eax
+  0000000140486BFE: mov         eax,dword ptr [r8]
+  0000000140486C01: mov         dword ptr [rcx+30h],eax
+  0000000140486C04: mov         eax,dword ptr [r8+4]
+  0000000140486C08: mov         dword ptr [rcx+34h],eax
+  0000000140486C0B: mov         eax,dword ptr [r8+8]
+  0000000140486C0F: mov         dword ptr [rcx+38h],eax
+  0000000140486C12: or          byte ptr [rcx+00000000000000C8h],2
+  0000000140486C19: ret
+  0000000140486C1A: int         3
+  0000000140486C1B: int         3
+  0000000140486C1C: int         3
+  0000000140486C1D: int         3
+  0000000140486C1E: int         3
+  0000000140486C1F: int         3
+  0000000140486C20: mov         eax,dword ptr [rdx]
+  0000000140486C22: mov         dword ptr [rcx+24h],eax
+  0000000140486C25: mov         eax,dword ptr [rdx+4]
+  0000000140486C28: mov         dword ptr [rcx+28h],eax
+  0000000140486C2B: mov         eax,dword ptr [rdx+8]
+  0000000140486C2E: mov         dword ptr [rcx+2Ch],eax
+  0000000140486C31: mov         eax,dword ptr [rdx+0Ch]
+  0000000140486C34: and         byte ptr [rcx+00000000000000C8h],0FDh
+  0000000140486C3B: mov         dword ptr [rcx+1Ch],eax
+  0000000140486C3E: mov         dword ptr [rcx+20h],r8d
+  0000000140486C42: ret
+  0000000140486C43: int         3
+  0000000140486C44: int         3
+  0000000140486C45: int         3
+  0000000140486C46: int         3
+  0000000140486C47: int         3
+  0000000140486C48: int         3
+  0000000140486C49: int         3
+  0000000140486C4A: int         3
+  0000000140486C4B: int         3
+  0000000140486C4C: int         3
+  0000000140486C4D: int         3
+  0000000140486C4E: int         3
+  0000000140486C4F: int         3
+  0000000140486C50: and         byte ptr [rcx+00000000000000C8h],0FBh
+  0000000140486C57: and         r8b,1
+  0000000140486C5B: mov         dword ptr [rcx+00000000000000A4h],edx
+  0000000140486C61: shl         r8b,2
+  0000000140486C65: or          byte ptr [rcx+00000000000000C8h],r8b
+  0000000140486C6C: ret
+  0000000140486C6D: int         3
+  0000000140486C6E: int         3
+  0000000140486C6F: int         3
+  0000000140486C70: mov         eax,dword ptr [rdx]
+  0000000140486C72: mov         dword ptr [rcx+24h],eax
+  0000000140486C75: mov         eax,dword ptr [rdx+4]
+  0000000140486C78: mov         dword ptr [rcx+28h],eax
+  0000000140486C7B: mov         eax,dword ptr [rdx+8]
+  0000000140486C7E: mov         dword ptr [rcx+2Ch],eax
+  0000000140486C81: mov         eax,dword ptr [rdx+0Ch]
+  0000000140486C84: and         byte ptr [rcx+00000000000000C8h],0FDh
+  0000000140486C8B: mov         dword ptr [rcx+1Ch],eax
+  0000000140486C8E: mov         dword ptr [rcx+20h],0
+  0000000140486C95: ret
+  0000000140486C96: int         3
+  0000000140486C97: int         3
+  0000000140486C98: int         3
+  0000000140486C99: int         3
+  0000000140486C9A: int         3
+  0000000140486C9B: int         3
+  0000000140486C9C: int         3
+  0000000140486C9D: int         3
+  0000000140486C9E: int         3
+  0000000140486C9F: int         3
+  0000000140486CA0: mov         eax,dword ptr [rdx]
+  0000000140486CA2: mov         dword ptr [rcx+60h],eax
+  0000000140486CA5: cmp         dword ptr [rdx],6
+  0000000140486CA8: je          0000000140486D35
+  0000000140486CAE: mov         eax,dword ptr [r8]
+  0000000140486CB1: mov         dword ptr [rcx+64h],eax
+  0000000140486CB4: mov         eax,dword ptr [r8+4]
+  0000000140486CB8: mov         dword ptr [rcx+68h],eax
+  0000000140486CBB: mov         eax,dword ptr [r8+8]
+  0000000140486CBF: mov         dword ptr [rcx+6Ch],eax
+  0000000140486CC2: mov         eax,dword ptr [r8+0Ch]
+  0000000140486CC6: mov         dword ptr [rcx+70h],eax
+  0000000140486CC9: mov         eax,dword ptr [r8+10h]
+  0000000140486CCD: mov         dword ptr [rcx+74h],eax
+  0000000140486CD0: mov         eax,dword ptr [r8+14h]
+  0000000140486CD4: mov         dword ptr [rcx+78h],eax
+  0000000140486CD7: mov         eax,dword ptr [r8+18h]
+  0000000140486CDB: mov         dword ptr [rcx+7Ch],eax
+  0000000140486CDE: mov         eax,dword ptr [r8+1Ch]
+  0000000140486CE2: mov         dword ptr [rcx+0000000000000080h],eax
+  0000000140486CE8: mov         eax,dword ptr [r8+20h]
+  0000000140486CEC: mov         dword ptr [rcx+0000000000000084h],eax
+  0000000140486CF2: mov         eax,dword ptr [r8+24h]
+  0000000140486CF6: mov         dword ptr [rcx+0000000000000088h],eax
+  0000000140486CFC: mov         eax,dword ptr [r8+28h]
+  0000000140486D00: mov         dword ptr [rcx+000000000000008Ch],eax
+  0000000140486D06: mov         eax,dword ptr [r8+2Ch]
+  0000000140486D0A: mov         dword ptr [rcx+0000000000000090h],eax
+  0000000140486D10: mov         eax,dword ptr [r8+30h]
+  0000000140486D14: mov         dword ptr [rcx+0000000000000094h],eax
+  0000000140486D1A: mov         eax,dword ptr [r8+34h]
+  0000000140486D1E: mov         dword ptr [rcx+0000000000000098h],eax
+  0000000140486D24: mov         eax,dword ptr [r8+38h]
+  0000000140486D28: mov         dword ptr [rcx+000000000000009Ch],eax
+  0000000140486D2E: mov         dword ptr [rcx+00000000000000A0h],r9d
+  0000000140486D35: rep ret
+  0000000140486D37: int         3
+  0000000140486D38: int         3
+  0000000140486D39: int         3
+  0000000140486D3A: int         3
+  0000000140486D3B: int         3
+  0000000140486D3C: int         3
+  0000000140486D3D: int         3
+  0000000140486D3E: int         3
+  0000000140486D3F: int         3
+  0000000140486D40: mov         eax,dword ptr [rdx]
+  0000000140486D42: mov         dword ptr [rcx],eax
+  0000000140486D44: mov         eax,dword ptr [rdx+4]
+  0000000140486D47: mov         dword ptr [rcx+4],eax
+  0000000140486D4A: mov         eax,dword ptr [rdx+8]
+  0000000140486D4D: mov         dword ptr [rcx+8],eax
+  0000000140486D50: ret
+  0000000140486D51: int         3
+  0000000140486D52: int         3
+  0000000140486D53: int         3
+  0000000140486D54: int         3
+  0000000140486D55: int         3
+  0000000140486D56: int         3
+  0000000140486D57: int         3
+  0000000140486D58: int         3
+  0000000140486D59: int         3
+  0000000140486D5A: int         3
+  0000000140486D5B: int         3
+  0000000140486D5C: int         3
+  0000000140486D5D: int         3
+  0000000140486D5E: int         3
+  0000000140486D5F: int         3
+  0000000140486D60: movzx       eax,byte ptr [rcx+00000000000000C8h]
+  0000000140486D67: shr         al,3
+  0000000140486D6A: and         al,1
+  0000000140486D6C: ret
+  0000000140486D6D: int         3
+  0000000140486D6E: int         3
+  0000000140486D6F: int         3
+  0000000140486D70: movzx       eax,byte ptr [rcx+00000000000000C8h]
+  0000000140486D77: shr         al,2
+  0000000140486D7A: and         al,1
+  0000000140486D7C: ret
+  0000000140486D7D: int         3
+  0000000140486D7E: int         3
+  0000000140486D7F: int         3
+  0000000140486D80: mov         edx,dword ptr [rcx+00000000000000B0h]
+  0000000140486D86: dec         edx
+  0000000140486D88: cmp         edx,1
+  0000000140486D8B: setbe       al
+  0000000140486D8E: ret
+  0000000140486D8F: int         3
+  0000000140486D90: xor         eax,eax
+  0000000140486D92: mov         qword ptr [rcx],rdx
+  0000000140486D95: mov         qword ptr [rcx+8],rax
+  0000000140486D99: mov         qword ptr [rcx+10h],rax
+  0000000140486D9D: mov         qword ptr [rcx+18h],rax
+  0000000140486DA1: mov         qword ptr [rcx+20h],rax
+  0000000140486DA5: mov         dword ptr [rcx+28h],eax
+  0000000140486DA8: mov         rax,rcx
+  0000000140486DAB: ret
+  0000000140486DAC: int         3
+  0000000140486DAD: int         3
+  0000000140486DAE: int         3
+  0000000140486DAF: int         3
+  0000000140486DB0: xor         eax,eax
+  0000000140486DB2: mov         qword ptr [rcx],rdx
+  0000000140486DB5: mov         qword ptr [rcx+8],rax
+  0000000140486DB9: mov         dword ptr [rcx+10h],eax
+  0000000140486DBC: mov         rax,rcx
+  0000000140486DBF: ret
+  0000000140486DC0: mov         rax,rsp
+  0000000140486DC3: mov         qword ptr [rax+8],rbx
+  0000000140486DC7: push        rdi
+  0000000140486DC8: sub         rsp,0F0h
+  0000000140486DCF: mov         rdx,qword ptr [r8+40h]
+  0000000140486DD3: movaps      xmmword ptr [rax-18h],xmm6
+  0000000140486DD7: movaps      xmmword ptr [rax-28h],xmm8
+  0000000140486DDC: mov         rdi,rcx
+  0000000140486DDF: mov         rcx,qword ptr [rcx]
+  0000000140486DE2: lea         r9,[rsp+50h]
+  0000000140486DE7: movaps      xmmword ptr [rax-38h],xmm9
+  0000000140486DEC: movaps      xmmword ptr [rax-48h],xmm10
+  0000000140486DF1: movaps      xmmword ptr [rax-58h],xmm11
+  0000000140486DF6: mov         rbx,r8
+  0000000140486DF9: movaps      xmm2,xmm3
+  0000000140486DFC: movaps      xmmword ptr [rax-68h],xmm12
+
+  Summary
+
+     1A7D000 .text
+
+````

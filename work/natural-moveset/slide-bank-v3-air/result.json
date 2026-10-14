@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "failure": "Native jump did not interrupt slide presentation",
+  "checks": [
+    "host natural-crouch-recovery exact native slide selects authored slide without changing root ownership",
+    "host natural-crouch-recovery recovery or interruption returns to native-driven movement",
+    "host jump-interruption exact native slide selects authored slide without changing root ownership"
+  ],
+  "dll": "8491AD337365F8C607CADC04E9C0B05AF0A61419DEB254C16AF6A12A6713F453",
+  "scope": "Native sprint-to-slide, default crouch recovery and jump interruption on both characters. Low ceilings, slopes, combat, victim contact and visual acceptance remain separate."
+}

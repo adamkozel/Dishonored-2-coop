@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "failure": "Swarm root/body continuity failed",
+  "source": "host",
+  "stance": "standing",
+  "holstered": false,
+  "move": 0,
+  "checks": [
+    "Exact Corvo Swarm item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Remote Corvo uses exact bank50/313 and native Steam pose transport",
+    "Native controller stance and holster inputs establish the same complete-body remote context before casting",
+    "All three exact native phases with reciprocal Corvo arm/body ownership drive remote full-body phases",
+    "Bounded send/accept histories exactly match strict native scene incarnations, including sub-status-interval final aim loops",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Swarm entities and peer world presentation",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.003,
+      "input": "Native Corvo standing LT1800 then release; LeftY=0; holstered=False"
+    },
+    {
+      "videoTime": 7.414,
+      "input": "Native standing recovery after cast"
+    }
+  ],
+  "dll": "7BFF5AB49C2DDB38E4F9278018AE4485B98E7EED7202F7B07C1F713161D2E23D",
+  "probe": "19DF1046E165531BD1E721DFE5AD9BA1418E5478B829F10846622FA4CA35FDBF",
+  "bankSha256": "1769ADCA5B033E33E81770908BDA923A8073EEFCAF1A2CD7CCF81016273030EE",
+  "scope": "Native grounded Corvo Swarm phases in the specified stance/equipment context drive remote full-body bank50 poses through native Steam in isolated AI-held Dunwall. Local first-person remains native; peer animation does not execute rat, VFX or damage events. Strict source rat transforms also travel over native Steam with exact wire comparisons and stream/checkpoint retirement. A bounded cached cosmetic pool receives live transforms through guarded native dispatch with actual position readback. A dedicated native walking animleaf is tested with joint-local motion thresholds; visual acceptance remains separately assessed. Upgraded100-rat capacity, source-specific animation phase/state, color, subjective gait/interpolation quality, VFX, damage/AI and visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+}

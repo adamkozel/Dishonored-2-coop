@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "source": "client",
+  "character": "emily",
+  "airborne": true,
+  "crouched": false,
+  "holstered": true,
+  "moving": false,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v26 stance/equipment bank ready before the cast",
+    "Two native cast events drive remote whole-body Dark Vision animation through Steam",
+    "Native source vision overlay manager toggles on/off; observer vision and loadout remain untouched",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Native physics remains standing while jumping and casting",
+    "Confirmed native Jump/Fall casts preserve remote airborne body animation with the power gesture",
+    "Both jumping casts keep one native power event through landing; no cast restart",
+    "Native landing recovers remote standing body without dropping network ownership",
+    "Native cleanup restores quantity, selection and inactive vision",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "Protected original executable, Steam API and save hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.786,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.242,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "4",
+    "2"
+  ],
+  "nativeScenes": [
+    "218",
+    "217"
+  ],
+  "dll": "48A0E8F493C17097455CECF5416AD1DDC095DFC02885FD0DCBC79C50EEB337FD",
+  "bankSha256": "32855C47F72ACDEA12F41086E9A9C3A474AC850F0ACE95934EBB69B323137F26",
+  "recorded": true,
+  "scope": "Scoped native Dark Vision on/off casts during two ordinary jumps in the explicitly recorded sword and travel context. Source POV and remote whole-body observer, native private reveal, controls and camera. No remote damage, mana or VFX events. Double-jump, other contexts and broader lifecycle remain unverified."
+}

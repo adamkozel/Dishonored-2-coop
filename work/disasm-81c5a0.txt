@@ -1,0 +1,98 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014081C5A0: mov         qword ptr [rsp+8],rbx
+  000000014081C5A5: push        rdi
+  000000014081C5A6: sub         rsp,20h
+  000000014081C5AA: cmp         byte ptr [rcx+58h],0
+  000000014081C5AE: mov         rdi,rdx
+  000000014081C5B1: mov         rbx,rcx
+  000000014081C5B4: jne         000000014081C62A
+  000000014081C5B6: cmp         dword ptr [rcx+54h],0
+  000000014081C5BA: jne         000000014081C61E
+  000000014081C5BC: mov         rcx,qword ptr [rcx+48h]
+  000000014081C5C0: call        0000000140802DE0
+  000000014081C5C5: cmp         eax,3
+  000000014081C5C8: je          000000014081C61E
+  000000014081C5CA: mov         rax,qword ptr [rdi]
+  000000014081C5CD: mov         rcx,rbx
+  000000014081C5D0: mov         qword ptr [rbx+8],rax
+  000000014081C5D4: mov         rax,qword ptr [rdi+8]
+  000000014081C5D8: mov         qword ptr [rbx+10h],rax
+  000000014081C5DC: mov         rax,qword ptr [rdi+10h]
+  000000014081C5E0: mov         qword ptr [rbx+18h],rax
+  000000014081C5E4: mov         rax,qword ptr [rdi+18h]
+  000000014081C5E8: mov         qword ptr [rbx+20h],rax
+  000000014081C5EC: mov         rax,qword ptr [rdi+20h]
+  000000014081C5F0: mov         qword ptr [rbx+28h],rax
+  000000014081C5F4: mov         rax,qword ptr [rdi+28h]
+  000000014081C5F8: mov         qword ptr [rbx+30h],rax
+  000000014081C5FC: mov         rax,qword ptr [rdi+30h]
+  000000014081C600: mov         qword ptr [rbx+38h],rax
+  000000014081C604: mov         rax,qword ptr [rdi+38h]
+  000000014081C608: mov         qword ptr [rbx+40h],rax
+  000000014081C60C: call        000000014081CB40
+  000000014081C611: mov         al,1
+  000000014081C613: mov         rbx,qword ptr [rsp+30h]
+  000000014081C618: add         rsp,20h
+  000000014081C61C: pop         rdi
+  000000014081C61D: ret
+  000000014081C61E: lea         rcx,[0000000141C76630h]
+  000000014081C625: call        0000000140166830
+  000000014081C62A: xor         al,al
+  000000014081C62C: mov         rbx,qword ptr [rsp+30h]
+  000000014081C631: add         rsp,20h
+  000000014081C635: pop         rdi
+  000000014081C636: ret
+  000000014081C637: int         3
+  000000014081C638: int         3
+  000000014081C639: int         3
+  000000014081C63A: int         3
+  000000014081C63B: int         3
+  000000014081C63C: int         3
+  000000014081C63D: int         3
+  000000014081C63E: int         3
+  000000014081C63F: int         3
+  000000014081C640: mov         qword ptr [rsp+10h],rbx
+  000000014081C645: mov         qword ptr [rsp+18h],rsi
+  000000014081C64A: push        rdi
+  000000014081C64B: sub         rsp,30h
+  000000014081C64F: mov         rbx,rcx
+  000000014081C652: mov         rcx,qword ptr [rcx+48h]
+  000000014081C656: call        0000000140802DE0
+  000000014081C65B: xor         edi,edi
+  000000014081C65D: mov         dword ptr [rbx+50h],eax
+  000000014081C660: cmp         eax,1
+  000000014081C663: jne         000000014081C668
+  000000014081C665: mov         dword ptr [rbx+50h],edi
+  000000014081C668: cmp         byte ptr [rbx+0Eh],dil
+  000000014081C66C: jne         000000014081C67C
+  000000014081C66E: mov         rcx,qword ptr [rbx+48h]
+  000000014081C672: mov         edx,4Bh
+  000000014081C677: call        0000000140802BC0
+  000000014081C67C: mov         rcx,qword ptr [rbx+48h]
+  000000014081C680: mov         edx,3
+  000000014081C685: call        0000000140805F70
+  000000014081C68A: mov         word ptr [rbx+5Bh],100h
+  000000014081C690: mov         dword ptr [rbx+54h],2
+  000000014081C697: mov         dword ptr [rbx+78h],edi
+  000000014081C69A: mov         rdi,qword ptr [00000001439A5290h]
+  000000014081C6A1: lea         rcx,[rdi+00000000001F6EC8h]
+  000000014081C6A8: call        0000000140787900
+  000000014081C6AD: mov         rcx,qword ptr [00000001439A5290h]
+  000000014081C6B4: cmp         eax,5
+  000000014081C6B7: sete        sil
+  000000014081C6BB: call        00000001408A8BA0
+  000000014081C6C0: lea         rdx,[00000001439E2F10h]
+  000000014081C6C7: mov         rcx,rax
+  000000014081C6CA: mov         r8d,2
+  000000014081C6D0: E8
+
+  Summary
+
+     1A7D000 .text

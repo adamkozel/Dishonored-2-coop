@@ -1,0 +1,93 @@
+{
+  "passed": false,
+  "checks": {
+    "harness_passed": true,
+    "preparation_transmitted": true,
+    "native_hoist_observed": true,
+    "stream_ready_throughout": true,
+    "no_stream_rearm": true,
+    "steam_connected": true,
+    "bank_active_throughout": true,
+    "no_bank_refusals": false,
+    "unique_mapped_body": true,
+    "one_source_corpse_generation": true,
+    "loaded_pose_reached": true,
+    "health_preserved": true,
+    "gather_played": true,
+    "gather_precedes_hoist": true,
+    "hoist_played": true,
+    "semantic_holster_followed": true,
+    "native_holster_observed": true,
+    "authored_hoist_advances": true,
+    "hoist_never_rewinds": true,
+    "supported_settle_observed": true,
+    "supported_settle_finishes": true,
+    "no_settle_replay_on_native_loop": true,
+    "capture_at_least_24hz": true
+  },
+  "samples": 153,
+  "preparation_samples": 6,
+  "lift_samples": 15,
+  "loop_samples": 71,
+  "actual_capture_hz": 27.266666666666666,
+  "transitions": [
+    {
+      "ms": 1,
+      "remote": 0,
+      "playing": 0,
+      "amount": 0.0
+    },
+    {
+      "ms": 1813,
+      "remote": 7,
+      "playing": 0,
+      "amount": 0.0
+    },
+    {
+      "ms": 1940,
+      "remote": 7,
+      "playing": 7,
+      "amount": 0.199122
+    },
+    {
+      "ms": 2240,
+      "remote": 7,
+      "playing": 1,
+      "amount": 0.0649431
+    },
+    {
+      "ms": 2302,
+      "remote": 1,
+      "playing": 1,
+      "amount": 0.1221516
+    },
+    {
+      "ms": 3207,
+      "remote": 1,
+      "playing": 2,
+      "amount": 0.020334
+    },
+    {
+      "ms": 3268,
+      "remote": 2,
+      "playing": 2,
+      "amount": 0.0407874
+    },
+    {
+      "ms": 8702,
+      "remote": 5,
+      "playing": 2,
+      "amount": 0.8482779
+    },
+    {
+      "ms": 9423,
+      "remote": 0,
+      "playing": 2,
+      "amount": 0.8482779
+    }
+  ],
+  "video_sha256": "3D6B34D982E701A9E7334D08724DCCE74A4D336B194585020FD64D4FB1C4DF6D",
+  "scope": "Explicit bounded Mayhew paired experiment: ordinary native X pickup drives the carrier through Steam and the victim snapshot blend through the same source hoist clock. Late native retargeting supports the load. Source walks and requests native high throw using RT; source-only release inspection; remote fallback playback is not yet bound; native first-person is unchanged. Contacts and full pickup quality unaccepted.",
+  "complete": false,
+  "visual_accepted": false
+}

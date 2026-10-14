@@ -1,0 +1,91 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014081C640: mov         qword ptr [rsp+10h],rbx
+  000000014081C645: mov         qword ptr [rsp+18h],rsi
+  000000014081C64A: push        rdi
+  000000014081C64B: sub         rsp,30h
+  000000014081C64F: mov         rbx,rcx
+  000000014081C652: mov         rcx,qword ptr [rcx+48h]
+  000000014081C656: call        0000000140802DE0
+  000000014081C65B: xor         edi,edi
+  000000014081C65D: mov         dword ptr [rbx+50h],eax
+  000000014081C660: cmp         eax,1
+  000000014081C663: jne         000000014081C668
+  000000014081C665: mov         dword ptr [rbx+50h],edi
+  000000014081C668: cmp         byte ptr [rbx+0Eh],dil
+  000000014081C66C: jne         000000014081C67C
+  000000014081C66E: mov         rcx,qword ptr [rbx+48h]
+  000000014081C672: mov         edx,4Bh
+  000000014081C677: call        0000000140802BC0
+  000000014081C67C: mov         rcx,qword ptr [rbx+48h]
+  000000014081C680: mov         edx,3
+  000000014081C685: call        0000000140805F70
+  000000014081C68A: mov         word ptr [rbx+5Bh],100h
+  000000014081C690: mov         dword ptr [rbx+54h],2
+  000000014081C697: mov         dword ptr [rbx+78h],edi
+  000000014081C69A: mov         rdi,qword ptr [00000001439A5290h]
+  000000014081C6A1: lea         rcx,[rdi+00000000001F6EC8h]
+  000000014081C6A8: call        0000000140787900
+  000000014081C6AD: mov         rcx,qword ptr [00000001439A5290h]
+  000000014081C6B4: cmp         eax,5
+  000000014081C6B7: sete        sil
+  000000014081C6BB: call        00000001408A8BA0
+  000000014081C6C0: lea         rdx,[00000001439E2F10h]
+  000000014081C6C7: mov         rcx,rax
+  000000014081C6CA: mov         r8d,2
+  000000014081C6D0: call        0000000140877720
+  000000014081C6D5: test        rax,rax
+  000000014081C6D8: je          000000014081C6E3
+  000000014081C6DA: lea         rcx,[rax+48h]
+  000000014081C6DE: call        00000001404E7F40
+  000000014081C6E3: cmp         byte ptr [rbx+0Dh],0
+  000000014081C6E7: je          000000014081C6FF
+  000000014081C6E9: test        sil,sil
+  000000014081C6EC: jne         000000014081C6FF
+  000000014081C6EE: lea         rcx,[rdi+00000000001F6EC8h]
+  000000014081C6F5: mov         edx,5
+  000000014081C6FA: call        00000001407885B0
+  000000014081C6FF: cmp         byte ptr [rbx+10h],0
+  000000014081C703: mov         rax,qword ptr [rbx+48h]
+  000000014081C707: movss       xmm0,dword ptr [0000000141AB3B34h]
+  000000014081C70F: mov         rdi,qword ptr [rax+0000000000000310h]
+  000000014081C716: movss       dword ptr [rsp+40h],xmm0
+  000000014081C71C: mov         r8d,dword ptr [rsp+40h]
+  000000014081C721: mov         rcx,rdi
+  000000014081C724: je          000000014081C779
+  000000014081C726: mov         edx,0Ah
+  000000014081C72B: call        00000001407F43B0
+  000000014081C730: lea         rcx,[rsp+20h]
+  000000014081C735: call        00000001407EFC40
+  000000014081C73A: lea         rcx,[rdi+00000000000251C0h]
+  000000014081C741: lea         rdx,[rsp+20h]
+  000000014081C746: movss       xmm0,dword ptr [rbx+14h]
+  000000014081C74B: movss       xmm1,dword ptr [rbx+18h]
+  000000014081C750: movss       dword ptr [rsp+20h],xmm0
+  000000014081C756: movss       xmm0,dword ptr [rbx+1Ch]
+  000000014081C75B: movss       dword ptr [rsp+24h],xmm1
+  000000014081C761: movss       xmm1,dword ptr [rbx+20h]
+  000000014081C766: movss       dword ptr [rsp+28h],xmm0
+  000000014081C76C: movss       dword ptr [rsp+2Ch],xmm1
+  000000014081C772: call        00000001407F01E0
+  000000014081C777: jmp         000000014081C783
+  000000014081C779: mov         edx,2
+  000000014081C77E: call        00000001407F43B0
+  000000014081C783: xor         edx,edx
+  000000014081C785: mov         rcx,rdi
+  000000014081C788: mov         rbx,qword ptr [rsp+48h]
+  000000014081C78D: mov         rsi,qword ptr [rsp+50h]
+  000000014081C792: add         rsp,30h
+  000000014081C796: pop         rdi
+  000000014081C797: jmp         00000001407F4390
+  000000014081C79C: int         3
+
+  Summary
+
+     1A7D000 .text

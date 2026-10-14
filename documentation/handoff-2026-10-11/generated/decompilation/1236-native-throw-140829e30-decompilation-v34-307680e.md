@@ -1,0 +1,66 @@
+# native-throw-140829e30-decompilation-v34.json
+
+Original: [work/natural-moveset/carry-research/native-throw-140829e30-decompilation-v34.json](<../../../../work/natural-moveset/carry-research/native-throw-140829e30-decompilation-v34.json>)
+
+SHA-256: `9BAE8E0B06B938AB86AE89F831E4D0C7D9D9AF9B4AF715FADA91A36D2CE763B0`; 2211 bytes.
+
+## Original saved record
+
+````json
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nvoid FUN_140829e30(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  \r\n  lVar2 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar2 == 0) {\r\n    FUN_140828440(param_1,\"Corpse destroyed\",0,1);\r\n    return;\r\n  }\r\n  lVar1 = *(longlong *)(param_1 + 0x18);\r\n  FUN_140854d80(param_1);\r\n  FUN_140829aa0(param_1);\r\n  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar3 != 0) {\r\n    plVar4 = (longlong *)FUN_140877720(lVar3,&DAT_1439b4630,2);\r\n    if (plVar4 != (longlong *)0x0) {\r\n      (**(code **)(*plVar4 + 0x110))(plVar4);\r\n    }\r\n  }\r\n  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar3 != 0) {\r\n    FUN_14087b6b0(lVar3,1);\r\n  }\r\n  FUN_140770860(*(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x300));\r\n  FUN_140828e80(param_1);\r\n  FUN_140829180(param_1,lVar2,*(undefined8 *)(lVar1 + 0xa0),lVar1 + 0x90);\r\n  *(undefined4 *)(param_1 + 0x110) = 5;\r\n  return;\r\n}\r\n\r\n"
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nvoid FUN_140829e30(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  \r\n  lVar2 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar2 == 0) {\r\n    FUN_140828440(param_1,\"Corpse destroyed\",0,1);\r\n    return;\r\n  }\r\n  lVar1 = *(longlong *)(param_1 + 0x18);\r\n  FUN_140854d80(param_1);\r\n  FUN_140829aa0(param_1);\r\n  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar3 != 0) {\r\n    plVar4 = (longlong *)FUN_140877720(lVar3,&DAT_1439b4630,2);\r\n    if (plVar4 != (longlong *)0x0) {\r\n      (**(code **)(*plVar4 + 0x110))(plVar4);\r\n    }\r\n  }\r\n  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));\r\n  if (lVar3 != 0) {\r\n    FUN_14087b6b0(lVar3,1);\r\n  }\r\n  FUN_140770860(*(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x300));\r\n  FUN_140828e80(param_1);\r\n  FUN_140829180(param_1,lVar2,*(undefined8 *)(lVar1 + 0xa0),lVar1 + 0x90);\r\n  *(undefined4 *)(param_1 + 0x110) = 5;\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+void FUN_140829e30(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  longlong lVar3;
+  longlong *plVar4;
+  
+  lVar2 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));
+  if (lVar2 == 0) {
+    FUN_140828440(param_1,"Corpse destroyed",0,1);
+    return;
+  }
+  lVar1 = *(longlong *)(param_1 + 0x18);
+  FUN_140854d80(param_1);
+  FUN_140829aa0(param_1);
+  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));
+  if (lVar3 != 0) {
+    plVar4 = (longlong *)FUN_140877720(lVar3,&DAT_1439b4630,2);
+    if (plVar4 != (longlong *)0x0) {
+      (**(code **)(*plVar4 + 0x110))(plVar4);
+    }
+  }
+  lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xf8));
+  if (lVar3 != 0) {
+    FUN_14087b6b0(lVar3,1);
+  }
+  FUN_140770860(*(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x300));
+  FUN_140828e80(param_1);
+  FUN_140829180(param_1,lVar2,*(undefined8 *)(lVar1 + 0xa0),lVar1 + 0x90);
+  *(undefined4 *)(param_1 + 0x110) = 5;
+  return;
+}
+
+
+````

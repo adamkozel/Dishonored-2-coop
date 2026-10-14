@@ -1,0 +1,20 @@
+from pathlib import Path
+import json,subprocess,sys
+R=Path(__file__).resolve().parents[2]; W=R/'work/movement-integration'; P=R/'work/natural-moveset'
+take='possession-crouch-target-network-v370';T=P/take
+r=json.loads((T/'result.json').read_text(encoding='utf-8-sig'));assert not r['passed']
+review=dict(inspected=True,complete=False,visual_accepted=False,
+ method='Viewed paired temporal game sheets at2.9/3.5/4.2/5/6.8/8.5s',evidence=['peer-sheet.jpg','source-sheet.jpg'],
+ notes='FAILED: standing-only harness never reframes after actual crouched native exit. Source view shows crouched casting, native human transfer/occupation and return to crouch. Peer target halo/streaks appear then retire; caster lies outside usable frame, so no body-release visual acceptance. Raw clocks and strict reader demonstrate an actual standing-only release/context gap as well. Both complete checkpoint inventories/health and protected14 restored. No audio.')
+(T/'visual-review.json').write_text(json.dumps(review,indent=2))
+subprocess.run([sys.executable,str(W/'record_reviewed_possession_take.py'),take,'--label','FAILED crouched transfer370','--notes',
+ '370 successful native crouched transfer exposed release/internal0 and transfer/internal1 retaining stance1, followed by crouched sword1133/power333 draw.371 candidate addresses strict contexts and full-body release. Prior370 empty-target draw test passes13 checks. Shared NPC gameplay remains unfinished.'],check=True)
+(W/'candidate-possession-draw-v370/runtime-crouched-transfer-failure.json').write_text(json.dumps(dict(result=r,visualReview=review),indent=2))
+p=R/'documentation/handoff-2026-10-11/32-native-possession-investigation.md';s=p.read_text();h='## Native crouched human transfer exposes retained stance,370–371';assert h not in s
+s+='\n\n'+h+'\n\n'+(
+ '[Failed native target370](../../work/natural-moveset/possession-crouch-target-network-v370/result.json) successfully enters the tutorial guard, but the old harness requires standing on return and fails camera reframing. This is also a production coverage gap: strict release reading accepts only physics0, while raw native entry26 keeps physics1 through internal0 release and internal1 transfer. The read-only target watcher records13 valid samples in each context with the generation-validated human target. Midnight records Scene_1/400ms release12 times. Native LT exit restores Sneaking6/physics1 with independent sword_equip_sneak Scene_2/1133ms (37 raw observations) and power_equip Scene_1/333ms (10). Occupation is internal8/physics18.\n\n'
+ 'Both recordings were viewed. Native source transfer/occupation/exit and peer target particles are visible, but the caster is outside a usable peer frame. No body-quality conclusion follows. Full checkpoint health/inventory and protected14 hashes restore. The failed take remains failed and indexed.\n\n'
+ '[371 archive](../../work/movement-integration/candidate-possession-crouch-release-v371/identity.json) admits only the observed standing/crouched exact entry class, with unchanged native target generation, arm/equipment ownership, repeated identity and400ms timing checks. It admits the exact Corvo crouched dual draw1133/333 and appends bank54 clip318 for whole-body crouched release. All318 prior clip payloads are byte-identical. The new clip adapts complete body acting into Posture100 crouch, retains native bone lengths/correctives and empty-hand fingers, and contains no root, AI, damage or VFX events. Corvo/Emily banks are authored, with Emily an offline skeleton comparison only. Numeric foot-target error is below0.000001m; this is not visual approval. Native ownership/context/protocol/actual-bank/proxy smoke tests pass. Runtime candidate validation is pending.\n\n'
+ 'Ghidra bookmarks were saved at141c78a68 (`D2Coop/Possession-draw-v367`, updated370 result) and141c79878 (`D2Coop/Possession-crouch-release-v371`). New findings are runtime observations associated with exact classes, not new claims from decompilation. Shared NPC authority remains unfinished.\n')
+p.write_text(s)
+print('370 failed transfer retained;371 candidate documented')

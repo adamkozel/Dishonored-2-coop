@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T19:14:14.157985+02:00",
+  "dll": "B3E6F3C2658E259C119BC9CA8F3152B17CED262C0A1E64405B84C243C1B70B09",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203c",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1203d on 1203c: product-only partner-presentation freshness - under the product controller the arm-probe pair, movement bank lease/commit, movement resume and shadow stream state tolerate 1 s pose/state gaps and 1.5 s hello gaps (lab keeps 250/350 ms), so ordinary jitter holds the last partner pose instead of retiring the stream/bank. Keeps 1203c handshake re-pin/peer-hello restart, 1203b bank reactivation and worker bind check. Runtime pending.",
+  "result": "1204d failed on a post-arming 60 m harness warp; 1204e (players staged before arming) armed, faced live and passed the client-pause case (watchdog repair), but failed the host-pause case: the client saw 1 s+ stale gaps from the host (send queue p50 104 ms/p90 285 ms in soak 1186: bulk NPC/world traffic over the 512 KB/s cap) and its follow repair backoff had grown to 48 s. Superseded by 1203e (bulk congestion gate, 3-15 s backoff).",
+  "runtimeEvidence": "../../natural-moveset/mission-presentation-resume-v1204e/result.json",
+  "auditEvidence": "../presentation-recovery-audit-v1205.json"
+}

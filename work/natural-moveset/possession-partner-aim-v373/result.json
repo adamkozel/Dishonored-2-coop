@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "failure": "Native cancel did not retain standing player",
+  "source": "host",
+  "stance": "standing",
+  "holstered": false,
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Requested native stance/sword context confirmed before input; cast may natively change stance",
+    "Native selected-target references and partner component membership recorded; eligibility remains an observation, not an exclusion claim",
+    "Raw native scenes and accepted/rejected ownership reader samples recorded without assuming context support",
+    "Native input produces reciprocal Possession cast scenes; observed phase set recorded without assuming complete coverage",
+    "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.11,
+      "input": "Native Corvo LT held toward exact partner, cancellation before release"
+    },
+    {
+      "videoTime": 4.798,
+      "input": "Native B cancel while LT held, then neutral"
+    }
+  ],
+  "dll": "1197F87B1109C474BE89E96C82C9C900DE537D04E5A4BE5CBE8337C8AD570550",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; Partner aim observation with native human upgrade and B cancellation before release. No partner exclusion implemented by this test. Existing standing human-target remote evidence is separate; no new remote context or gameplay claim. Checkpoint and protected save restoration mandatory."
+}

@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "ABC31A940B5F061B50EE32E66A2F2FDE4E7D792A9CF4A6FE46D62A85306B62C1",
+  "checks": [
+    "Native forward jump onto window sill and backward exit recorded; exact source/receiver binding requires independent audit",
+    "Native source observation only; no forced door state, native scene, inventory grant or new binding claim.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "stance": 0,
+        "name": "auto-crouch-sill",
+        "distance": 1.0,
+        "yaw": 0
+      },
+      "key": "host-auto-crouch-sill",
+      "count": 160,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Ordinary native low mantle into automatic crouch on closed window sill, sword recovery and backward exit. Both actual views and scene/state/root evidence. Not an open window traversal. Independent audit required for binding; restoration only established by checks/failure."
+}

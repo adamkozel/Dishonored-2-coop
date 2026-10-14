@@ -1,0 +1,116 @@
+{
+  "at": "2026-10-13T12:02:33.117024+02:00",
+  "passed": true,
+  "candidate": "candidate-crouch-loot-v693",
+  "dll": "E3DAB14778127A9F3A12432A0FB69D6A2E7E866627BC12F62C7B616A7F70E437",
+  "probe": "1ECB428D77B93915EA0417F3531E9103BB8E24DEC2336E874A809BA827810B22",
+  "cases": [
+    {
+      "take": "native-interactions-corvo-food-v696",
+      "role": "host",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed with both inventories, health and14 protected files restored",
+        "Compact native state reader remained valid for the entire14-second observation",
+        "Native LootObject47 overlaps the matching actual ground stance",
+        "Native movement remains recognized throughout loot, undraw and recovery",
+        "Source remains in active native gameplay",
+        "Both native Steam presentation streams remain ready throughout",
+        "Remote complete-body bank remains active and fully weighted",
+        "Remote body preserves the source ground stance",
+        "Exact source pickup is removed by ordinary native interaction",
+        "Native source returns to its original ground state",
+        "Source health stays valid and peer health is unchanged"
+      ],
+      "failures": [],
+      "samples": 125,
+      "compactSamples": 893,
+      "minimumBodyWeight": 0.999892,
+      "bodyWeightDips": [],
+      "sourceHealthBefore": 56,
+      "sourceHealthAfter": 61,
+      "nativeLootStates": [
+        [
+          {
+            "id": 0,
+            "vtableRva": "0x1c85628"
+          },
+          {
+            "id": 47,
+            "vtableRva": "0x1c7bcc8"
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "vtableRva": "0x1c85628"
+          },
+          {
+            "id": 47,
+            "vtableRva": "0x1c7bcc8"
+          },
+          {
+            "id": 81,
+            "vtableRva": "0x1c7df88"
+          }
+        ]
+      ]
+    },
+    {
+      "take": "native-interactions-emily-food-v697",
+      "role": "client",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed with both inventories, health and14 protected files restored",
+        "Compact native state reader remained valid for the entire14-second observation",
+        "Native LootObject47 overlaps the matching actual ground stance",
+        "Native movement remains recognized throughout loot, undraw and recovery",
+        "Source remains in active native gameplay",
+        "Both native Steam presentation streams remain ready throughout",
+        "Remote complete-body bank remains active and fully weighted",
+        "Remote body preserves the source ground stance",
+        "Exact source pickup is removed by ordinary native interaction",
+        "Native source returns to its original ground state",
+        "Source health stays valid and peer health is unchanged"
+      ],
+      "failures": [],
+      "samples": 127,
+      "compactSamples": 891,
+      "minimumBodyWeight": 0.999998,
+      "bodyWeightDips": [],
+      "sourceHealthBefore": 56,
+      "sourceHealthAfter": 61,
+      "nativeLootStates": [
+        [
+          {
+            "id": 0,
+            "vtableRva": "0x1c85628"
+          },
+          {
+            "id": 47,
+            "vtableRva": "0x1c7bcc8"
+          }
+        ],
+        [
+          {
+            "id": 0,
+            "vtableRva": "0x1c85628"
+          },
+          {
+            "id": 47,
+            "vtableRva": "0x1c7bcc8"
+          },
+          {
+            "id": 81,
+            "vtableRva": "0x1c7df88"
+          }
+        ]
+      ]
+    }
+  ],
+  "checks": 22,
+  "failedChecks": 0,
+  "complete": false,
+  "visualAccepted": false,
+  "scope": "Exact native crouched coin pickup or standing grapes consumption, as selected; existing body continuity only. No new reach/eating gesture, shared inventory, shared healing, receiver item removal, general stealing or complete movement claim."
+}

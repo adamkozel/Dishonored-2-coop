@@ -1,0 +1,105 @@
+void FUN_1408310a0(longlong param_1)
+
+{
+  longlong lVar1;
+  undefined1 *puVar2;
+  char cVar3;
+  longlong lVar4;
+  longlong lVar5;
+  longlong lVar6;
+  longlong *plVar7;
+  float fVar8;
+  float fVar9;
+  undefined4 auStackX_8 [2];
+  undefined4 auStackX_10 [2];
+  undefined4 auStackX_18 [4];
+  undefined8 in_stack_fffffffffffff978;
+  undefined4 uVar11;
+  undefined8 uVar10;
+  undefined4 uStack_668;
+  undefined4 uStack_664;
+  undefined4 uStack_660;
+  undefined4 uStack_658;
+  undefined4 uStack_654;
+  undefined4 uStack_650;
+  undefined8 uStack_648;
+  undefined1 *puStack_638;
+  undefined4 uStack_630;
+  uint uStack_62c;
+  undefined1 auStack_628 [1536];
+  
+  uVar11 = (undefined4)((ulonglong)in_stack_fffffffffffff978 >> 0x20);
+  uStack_648 = 0xfffffffffffffffe;
+  lVar4 = *(longlong *)(*(longlong *)(param_1 + 0x10) + 0x300);
+  cVar3 = FUN_140803180(*(longlong *)(param_1 + 0x10),0x3f);
+  FUN_140774a10(lVar4 + 0x370,cVar3 != '\0');
+  FUN_140774a10(lVar4 + 0x680,0);
+  uStack_630 = 0x5000000;
+  puStack_638 = auStack_628;
+  uStack_62c = 0x8040;
+  lVar4 = FUN_1403da910(param_1 + 0x220,2);
+  if ((lVar4 == 0) || ((*(uint *)(param_1 + 0xe8) & 0xffffff) < 2)) {
+    FUN_140854190(param_1);
+  }
+  else {
+    FUN_140830640(param_1,lVar4,&puStack_638);
+    lVar4 = *(longlong *)(param_1 + 0x10);
+    lVar6 = *(longlong *)(lVar4 + 0x2f8);
+    lVar1 = *(longlong *)(param_1 + 0x18);
+    if (*(char *)(lVar6 + 0xdc) == '\0') {
+      fVar9 = 1e+30;
+      uVar10 = CONCAT44(uVar11,0x7149f2ca);
+    }
+    else {
+      fVar8 = DAT_143991f5c;
+      if (DAT_143991f5c <= DAT_143991fdc) {
+        fVar8 = DAT_143991fdc;
+      }
+      fVar9 = fVar8 * *(float *)(lVar1 + 0xbc);
+      uVar10 = CONCAT44(uVar11,fVar8 * *(float *)(lVar1 + 0xc0));
+    }
+    FUN_1407ff0a0(*(undefined8 *)(lVar4 + 0x308),*(undefined4 *)(lVar1 + 0xb4),
+                  *(undefined4 *)(lVar1 + 0xb8),fVar9,uVar10);
+    lVar5 = *(longlong *)(lVar4 + 0x300);
+    uVar11 = *(undefined4 *)(lVar1 + 0x70);
+    *(undefined4 *)(lVar5 + 0xd98) = *(undefined4 *)(lVar1 + 0x74);
+    *(undefined4 *)(lVar5 + 0xd9c) = 0;
+    *(undefined4 *)(lVar5 + 0xda0) = uVar11;
+    *(undefined4 *)(lVar5 + 0xda4) = 0;
+    uStack_668 = DAT_1431af668;
+    uStack_664 = DAT_1431af66c;
+    uStack_660 = DAT_1431af670;
+    lVar5 = FUN_140854880(param_1);
+    uStack_658 = *(undefined4 *)(lVar5 + 0x348);
+    uStack_654 = *(undefined4 *)(lVar5 + 0x34c);
+    uStack_650 = *(undefined4 *)(lVar5 + 0x350);
+    FUN_1407f04a0(*(undefined8 *)(lVar4 + 0x310),*(undefined4 *)(lVar1 + 0xac),
+                  *(undefined4 *)(lVar1 + 0xb0),&uStack_658);
+    auStackX_10[0] = 0xffffffff;
+    auStackX_8[0] = 0;
+    FUN_14082fd40(param_1,&puStack_638,*(undefined4 *)(lVar1 + 0x70),*(undefined4 *)(lVar1 + 0x74),
+                  &uStack_668,auStackX_18,auStackX_10,auStackX_8);
+    FUN_1408313e0(param_1,lVar1,auStackX_8[0]);
+    FUN_14082fa60(param_1,lVar1,auStackX_10[0],auStackX_18[0]);
+    uVar10 = *(undefined8 *)(lVar4 + 800);
+    FUN_140752870(uVar10,"arkPlayerStateClimb",0,&uStack_668);
+    FUN_1407527e0(uVar10,"arkPlayerStateClimb",0,&uStack_658);
+    if (((byte)(*(uint *)(lVar6 + 0x88) >> 0xe) & (byte)(*(uint *)(lVar6 + 0x80) >> 0xe) & 1) != 0)
+    {
+      lVar6 = FUN_140854880(param_1);
+      if ((*(longlong *)(lVar6 + 0x3a0) == 0) ||
+         (*(char *)(*(longlong *)(lVar6 + 0x3a0) + 0xd2) == '\0')) {
+        FUN_140805fc0(lVar4,*(undefined4 *)(*(longlong *)(lVar4 + 8) + 0x68),2);
+      }
+    }
+  }
+  puVar2 = puStack_638;
+  if (((uStack_62c & 0x40) == 0) && (puStack_638 != (undefined1 *)0x0)) {
+    plVar7 = (longlong *)FUN_1401548e0();
+    (**(code **)(*plVar7 + 0x10))
+              (plVar7,
+               "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+               ,0x1ec,puVar2,0x10);
+  }
+  return;
+}

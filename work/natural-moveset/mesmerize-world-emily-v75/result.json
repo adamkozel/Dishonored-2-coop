@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Strict scene reader validates all three native phases with reciprocal owned Emily left arm; native ownership validated",
+    "Native cast spends source mana without resource writes",
+    "Exact native world body effect exists after source cast; presentation/AI ownership still under investigation",
+    "Strict committed world identity observes native spawn state1 and active state3 independently of caster animation",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.065,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "1AF1B4D81619C1E2E51BD5C95C45D82F4EF410FB708D238C6006F867E2EBD915",
+  "probe": "78CB1FF932D8E59DB825F32F8DB34C735A8AD888D40D129CE5E218B015BCFE95",
+  "scope": "Bounded read-only committed world investigation with finite20s native equipment fixture. Preview entities do not establish commitment; late despawn may be fixture-driven. Native source Mesmerize acquisition, controller casting, scenes and effects only. No remote body, VFX, AI or gameplay outcome replication. Mandatory isolated checkpoint reload retires world effects; original assets and saves unchanged."
+}

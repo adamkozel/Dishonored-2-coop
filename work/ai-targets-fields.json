@@ -1,0 +1,854 @@
+[
+  {
+    "name": "m_playerVisionInfo",
+    "metadata": "0x3b87a30",
+    "offset": 0,
+    "bytes": 272
+  },
+  {
+    "name": "m_seenOjectsList",
+    "metadata": "0x3b87a78",
+    "offset": 272,
+    "bytes": 16
+  },
+  {
+    "name": "m_seenCuesList",
+    "metadata": "0x3b87ac0",
+    "offset": 288,
+    "bytes": 16
+  },
+  {
+    "name": "m_seenNPCList",
+    "metadata": "0x3b87b08",
+    "offset": 304,
+    "bytes": 16
+  },
+  {
+    "name": "m_patrolRoute",
+    "metadata": "0x3b87b50",
+    "offset": 320,
+    "bytes": 4
+  },
+  {
+    "name": "m_attentionTargets",
+    "metadata": "0x3b87b98",
+    "offset": 328,
+    "bytes": 16
+  },
+  {
+    "name": "m_formerAttentionTarget",
+    "metadata": "0x3b87be0",
+    "offset": 344,
+    "bytes": 376
+  },
+  {
+    "name": "m_previousBehaviorTag",
+    "metadata": "0x3b87c28",
+    "offset": 720,
+    "bytes": 8
+  },
+  {
+    "name": "m_currentBehaviorTag",
+    "metadata": "0x3b87c70",
+    "offset": 728,
+    "bytes": 8
+  },
+  {
+    "name": "m_behaviorTags",
+    "metadata": "0x3b87cb8",
+    "offset": 736,
+    "bytes": 16
+  },
+  {
+    "name": "m_attentionMeter",
+    "metadata": "0x3b87d00",
+    "offset": 752,
+    "bytes": 72
+  },
+  {
+    "name": "m_playerTouchInfo",
+    "metadata": "0x3b87d48",
+    "offset": 824,
+    "bytes": 184
+  },
+  {
+    "name": "m_lastDamagedInfo",
+    "metadata": "0x3b87d90",
+    "offset": 1008,
+    "bytes": 192
+  },
+  {
+    "name": "m_delayedDamagedInfo",
+    "metadata": "0x3b87dd8",
+    "offset": 1200,
+    "bytes": 192
+  },
+  {
+    "name": "m_damagedInfos",
+    "metadata": "0x3b87e20",
+    "offset": 1392,
+    "bytes": 16
+  },
+  {
+    "name": "m_corpsesInfos",
+    "metadata": "0x3b87e68",
+    "offset": 1408,
+    "bytes": 16
+  },
+  {
+    "name": "m_handledAttSources",
+    "metadata": "0x3b87eb0",
+    "offset": 1424,
+    "bytes": 16
+  },
+  {
+    "name": "m_toBehandledAttSources",
+    "metadata": "0x3b87ef8",
+    "offset": 1440,
+    "bytes": 16
+  },
+  {
+    "name": "m_heardSounds",
+    "metadata": "0x3b87f40",
+    "offset": 1456,
+    "bytes": 16
+  },
+  {
+    "name": "m_lastHeardSound",
+    "metadata": "0x3b87f88",
+    "offset": 1472,
+    "bytes": 200
+  },
+  {
+    "name": "m_suscpicionState",
+    "metadata": "0x3b87fd0",
+    "offset": 1672,
+    "bytes": 4
+  },
+  {
+    "name": "m_hasBeenAttacked",
+    "metadata": "0x3b88018",
+    "offset": 1676,
+    "bytes": 1
+  },
+  {
+    "name": "m_playerExposedTimeStamp",
+    "metadata": "0x3b88060",
+    "offset": 1680,
+    "bytes": 16
+  },
+  {
+    "name": "m_lastNpcSeen",
+    "metadata": "0x3b880a8",
+    "offset": 1696,
+    "bytes": 4
+  },
+  {
+    "name": "m_closestAllySeen",
+    "metadata": "0x3b880f0",
+    "offset": 1700,
+    "bytes": 4
+  },
+  {
+    "name": "m_psychicPerception",
+    "metadata": "0x3b88138",
+    "offset": 1704,
+    "bytes": 16
+  },
+  {
+    "name": "m_warnDuration",
+    "metadata": "0x3b88180",
+    "offset": 1720,
+    "bytes": 4
+  },
+  {
+    "name": "m_forcedDistraction",
+    "metadata": "0x3b881c8",
+    "offset": 1724,
+    "bytes": 4
+  },
+  {
+    "name": "m_currentSearchProxy",
+    "metadata": "0x3b88210",
+    "offset": 1728,
+    "bytes": 4
+  },
+  {
+    "name": "m_searchTimerElapsed",
+    "metadata": "0x3b88258",
+    "offset": 1736,
+    "bytes": 16
+  },
+  {
+    "name": "m_searchLastTime",
+    "metadata": "0x3b882a0",
+    "offset": 1752,
+    "bytes": 16
+  },
+  {
+    "name": "m_currentSearchLocation",
+    "metadata": "0x3b882e8",
+    "offset": 1768,
+    "bytes": 20
+  },
+  {
+    "name": "m_fleeLocation",
+    "metadata": "0x3b88330",
+    "offset": 1788,
+    "bytes": 12
+  },
+  {
+    "name": "m_fleeRemaining",
+    "metadata": "0x3b88378",
+    "offset": 1800,
+    "bytes": 4
+  },
+  {
+    "name": "m_panicStoppedDuration",
+    "metadata": "0x3b883c0",
+    "offset": 1808,
+    "bytes": 16
+  },
+  {
+    "name": "m_shouldWarn",
+    "metadata": "0x3b88408",
+    "offset": 1824,
+    "bytes": 1
+  },
+  {
+    "name": "m_isFrightened",
+    "metadata": "0x3b88450",
+    "offset": 1825,
+    "bytes": 1
+  },
+  {
+    "name": "m_panicInformation",
+    "metadata": "0x3b88498",
+    "offset": 1832,
+    "bytes": 40
+  },
+  {
+    "name": "m_decoyFleeLoc",
+    "metadata": "0x3b884e0",
+    "offset": 1872,
+    "bytes": 12
+  },
+  {
+    "name": "m_smartObject",
+    "metadata": "0x3b88528",
+    "offset": 1888,
+    "bytes": 24
+  },
+  {
+    "name": "m_witnessNpcChokeRelationship",
+    "metadata": "0x3b88570",
+    "offset": 1912,
+    "bytes": 4
+  },
+  {
+    "name": "m_witnessNpcChokeGender",
+    "metadata": "0x3b885b8",
+    "offset": 1916,
+    "bytes": 4
+  },
+  {
+    "name": "m_witnessNpcDeathRelationship",
+    "metadata": "0x3b88600",
+    "offset": 1920,
+    "bytes": 4
+  },
+  {
+    "name": "m_witnessNpcDeathInstantKill",
+    "metadata": "0x3b88648",
+    "offset": 1924,
+    "bytes": 1
+  },
+  {
+    "name": "m_lastLimbLost",
+    "metadata": "0x3b88690",
+    "offset": 1928,
+    "bytes": 4
+  },
+  {
+    "name": "m_lastRelationshipChangeEvidence",
+    "metadata": "0x3b886d8",
+    "offset": 1932,
+    "bytes": 4
+  },
+  {
+    "name": "m_volleyList",
+    "metadata": "0x3b88720",
+    "offset": 1936,
+    "bytes": 16
+  },
+  {
+    "name": "m_ambientList",
+    "metadata": "0x3b88768",
+    "offset": 1952,
+    "bytes": 16
+  },
+  {
+    "name": "m_impactList",
+    "metadata": "0x3b887b0",
+    "offset": 1968,
+    "bytes": 16
+  },
+  {
+    "name": "m_damageSpamList",
+    "metadata": "0x3b887f8",
+    "offset": 1984,
+    "bytes": 16
+  },
+  {
+    "name": "m_footsteps_run_low",
+    "metadata": "0x3b88840",
+    "offset": 2000,
+    "bytes": 16
+  },
+  {
+    "name": "m_footsteps_run_high",
+    "metadata": "0x3b88888",
+    "offset": 2016,
+    "bytes": 16
+  },
+  {
+    "name": "m_footsteps_sprint_low",
+    "metadata": "0x3b888d0",
+    "offset": 2032,
+    "bytes": 16
+  },
+  {
+    "name": "m_footsteps_sprint_high",
+    "metadata": "0x3b88918",
+    "offset": 2048,
+    "bytes": 16
+  },
+  {
+    "name": "m_AIAttemptedAgression",
+    "metadata": "0x3b88960",
+    "offset": 2064,
+    "bytes": 160
+  },
+  {
+    "name": "m_mdntInterlocutorMissingRecord",
+    "metadata": "0x3b889a8",
+    "offset": 2224,
+    "bytes": 16
+  },
+  {
+    "name": "m_desiredEquipState",
+    "metadata": "0x3b889f0",
+    "offset": 2240,
+    "bytes": 24
+  },
+  {
+    "name": "m_lastPerceivedHideout",
+    "metadata": "0x3b88a38",
+    "offset": 2264,
+    "bytes": 16
+  },
+  {
+    "name": "m_wallOfLightList",
+    "metadata": "0x3b88a80",
+    "offset": 2280,
+    "bytes": 16
+  },
+  {
+    "name": "m_currentAreaTags",
+    "metadata": "0x3b88ac8",
+    "offset": 2296,
+    "bytes": 16
+  },
+  {
+    "name": "m_affectedByDustStorm",
+    "metadata": "0x3b88b10",
+    "offset": 2312,
+    "bytes": 1
+  },
+  {
+    "name": "m_distanceToNearestNest",
+    "metadata": "0x3b88b58",
+    "offset": 2316,
+    "bytes": 4
+  },
+  {
+    "name": "m_angleToNearestNest",
+    "metadata": "0x3b88ba0",
+    "offset": 2320,
+    "bytes": 4
+  },
+  {
+    "name": "m_targetAttackableByBloodflies",
+    "metadata": "0x3b88be8",
+    "offset": 2324,
+    "bytes": 1
+  },
+  {
+    "name": "m_npcDeathIgnored",
+    "metadata": "0x3b88c30",
+    "offset": 2328,
+    "bytes": 16
+  },
+  {
+    "name": "m_odors",
+    "metadata": "0x3b88c78",
+    "offset": 2344,
+    "bytes": 16
+  },
+  {
+    "name": "m_proximityPerceptions",
+    "metadata": "0x3b88cc0",
+    "offset": 2360,
+    "bytes": 16
+  },
+  {
+    "name": "m_fleeMode",
+    "metadata": "0x3b88d08",
+    "offset": 2376,
+    "bytes": 4
+  },
+  {
+    "name": "m_idleBreakPlaying",
+    "metadata": "0x3b88d50",
+    "offset": 2380,
+    "bytes": 1
+  },
+  {
+    "name": "m_slaughterInfo",
+    "metadata": "0x3b88d98",
+    "offset": 2384,
+    "bytes": 32
+  },
+  {
+    "name": "m_witchSkills",
+    "metadata": "0x3b88de0",
+    "offset": 2416,
+    "bytes": 2
+  },
+  {
+    "name": "m_delilahSkills",
+    "metadata": "0x3b88e28",
+    "offset": 2418,
+    "bytes": 1
+  },
+  {
+    "name": "m_personalSpaceInfo",
+    "metadata": "0x3b88e70",
+    "offset": 2420,
+    "bytes": 16
+  },
+  {
+    "name": "m_closeTarget",
+    "metadata": "0x3b88eb8",
+    "offset": 2436,
+    "bytes": 4
+  },
+  {
+    "name": "m_currentBehaviorGoal",
+    "metadata": "0x3b88f00",
+    "offset": 2440,
+    "bytes": 4
+  },
+  {
+    "name": "m_previousBehaviorGoal",
+    "metadata": "0x3b88f48",
+    "offset": 2444,
+    "bytes": 4
+  },
+  {
+    "name": "m_fleeRecoverInfo",
+    "metadata": "0x3b88f90",
+    "offset": 2448,
+    "bytes": 1
+  },
+  {
+    "name": "m_greetingsInfo",
+    "metadata": "0x3b88fd8",
+    "offset": 2452,
+    "bytes": 12
+  },
+  {
+    "name": "m_postureToIndex",
+    "metadata": "0x3b89020",
+    "offset": 2464,
+    "bytes": 48
+  },
+  {
+    "name": "m_currentFootOnGroud",
+    "metadata": "0x3b89068",
+    "offset": 2512,
+    "bytes": 4
+  },
+  {
+    "name": "m_canAddLocoDecorator",
+    "metadata": "0x3b890b0",
+    "offset": 2516,
+    "bytes": 1
+  },
+  {
+    "name": "m_alliesInVicinity",
+    "metadata": "0x3b890f8",
+    "offset": 2520,
+    "bytes": 16
+  },
+  {
+    "name": "m_herdDestination",
+    "metadata": "0x3b89140",
+    "offset": 2536,
+    "bytes": 28
+  },
+  {
+    "name": "m_preventSearchAggregation",
+    "metadata": "0x3b89188",
+    "offset": 2564,
+    "bytes": 1
+  },
+  {
+    "name": "m_goToEdgeFilterMask",
+    "metadata": "0x3b891d0",
+    "offset": 2568,
+    "bytes": 8
+  },
+  {
+    "name": "m_ignoreDeniedMidnightPriority",
+    "metadata": "0x3b89218",
+    "offset": 2576,
+    "bytes": 1
+  },
+  {
+    "name": "m_acknowledgedTargets",
+    "metadata": "0x3b89260",
+    "offset": 2584,
+    "bytes": 16
+  },
+  {
+    "name": "m_nearbyCharacter",
+    "metadata": "0x3b892a8",
+    "offset": 2600,
+    "bytes": 16
+  },
+  {
+    "name": "m_isPickpocketed",
+    "metadata": "0x3b892f0",
+    "offset": 2616,
+    "bytes": 1
+  },
+  {
+    "name": "m_pickpocketedItemType",
+    "metadata": "0x3b89338",
+    "offset": 2620,
+    "bytes": 4
+  },
+  {
+    "name": "m_pickpocketedItemTag",
+    "metadata": "0x3b89380",
+    "offset": 2624,
+    "bytes": 8
+  },
+  {
+    "name": "m_weaponInventory",
+    "metadata": "0x3b893c8",
+    "offset": 2632,
+    "bytes": 12
+  },
+  {
+    "name": "m_lastPanicAttention",
+    "metadata": "0x3b89410",
+    "offset": 2644,
+    "bytes": 4
+  },
+  {
+    "name": "m_attackObstruction",
+    "metadata": "0x3b89458",
+    "offset": 2648,
+    "bytes": 16
+  },
+  {
+    "name": "m_spinLockAttackObstruction",
+    "metadata": "0x3b894a0",
+    "offset": 2664,
+    "bytes": 4
+  },
+  {
+    "name": "m_corpsesFirstSeen",
+    "metadata": "0x3b894e8",
+    "offset": 2672,
+    "bytes": 16
+  },
+  {
+    "name": "m_isInHostileArea",
+    "metadata": "0x3b89530",
+    "offset": 2688,
+    "bytes": 1
+  },
+  {
+    "name": "m_warnPerception",
+    "metadata": "0x3b89578",
+    "offset": 2696,
+    "bytes": 160
+  },
+  {
+    "name": "m_combatLastAttackFamily",
+    "metadata": "0x3b895c0",
+    "offset": 2856,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatLastAttackTag",
+    "metadata": "0x3b89608",
+    "offset": 2864,
+    "bytes": 8
+  },
+  {
+    "name": "m_combatAttackTag",
+    "metadata": "0x3b89650",
+    "offset": 2872,
+    "bytes": 8
+  },
+  {
+    "name": "m_combatLastAttackChainCounter",
+    "metadata": "0x3b89698",
+    "offset": 2880,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatInAttackChain",
+    "metadata": "0x3b896e0",
+    "offset": 2884,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatTargetAttacked",
+    "metadata": "0x3b89728",
+    "offset": 2888,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatIsAttacking",
+    "metadata": "0x3b89770",
+    "offset": 2892,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatIsGivingUp",
+    "metadata": "0x3b897b8",
+    "offset": 2893,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatAttackHits",
+    "metadata": "0x3b89800",
+    "offset": 2896,
+    "bytes": 16
+  },
+  {
+    "name": "m_combatAttackCount",
+    "metadata": "0x3b89848",
+    "offset": 2912,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatOccupiedMeleeSlot",
+    "metadata": "0x3b89890",
+    "offset": 2920,
+    "bytes": 24
+  },
+  {
+    "name": "m_combatReservedMeleeSlot",
+    "metadata": "0x3b898d8",
+    "offset": 2944,
+    "bytes": 24
+  },
+  {
+    "name": "m_combatObstructingMeleeSlot",
+    "metadata": "0x3b89920",
+    "offset": 2968,
+    "bytes": 24
+  },
+  {
+    "name": "m_combatProjectile",
+    "metadata": "0x3b89968",
+    "offset": 2992,
+    "bytes": 20
+  },
+  {
+    "name": "m_combatProjectileIntentionalMiss",
+    "metadata": "0x3b899b0",
+    "offset": 3012,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatProjectileMissRejection",
+    "metadata": "0x3b899f8",
+    "offset": 3016,
+    "bytes": 16
+  },
+  {
+    "name": "m_combatProximityInfo",
+    "metadata": "0x3b89a40",
+    "offset": 3032,
+    "bytes": 160
+  },
+  {
+    "name": "m_combatPreviousSwarms",
+    "metadata": "0x3b89a88",
+    "offset": 3192,
+    "bytes": 16
+  },
+  {
+    "name": "m_combatAttacksRemainingInSpace",
+    "metadata": "0x3b89ad0",
+    "offset": 3208,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatMoveDirection",
+    "metadata": "0x3b89b18",
+    "offset": 3212,
+    "bytes": 12
+  },
+  {
+    "name": "m_combatCanHoldToken",
+    "metadata": "0x3b89b60",
+    "offset": 3224,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatCurrentSwarms",
+    "metadata": "0x3b89ba8",
+    "offset": 3232,
+    "bytes": 16
+  },
+  {
+    "name": "m_combatTarget",
+    "metadata": "0x3b89bf0",
+    "offset": 3248,
+    "bytes": 304
+  },
+  {
+    "name": "m_combatMode",
+    "metadata": "0x3b89c38",
+    "offset": 3552,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatModeTime",
+    "metadata": "0x3b89c80",
+    "offset": 3556,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatModeFrames",
+    "metadata": "0x3b89cc8",
+    "offset": 3560,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatDestination",
+    "metadata": "0x3b89d10",
+    "offset": 3564,
+    "bytes": 24
+  },
+  {
+    "name": "m_combatSpeed",
+    "metadata": "0x3b89d58",
+    "offset": 3588,
+    "bytes": 8
+  },
+  {
+    "name": "m_combatTetherState",
+    "metadata": "0x3b89da0",
+    "offset": 3596,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatDefensiveMode",
+    "metadata": "0x3b89de8",
+    "offset": 3600,
+    "bytes": 24
+  },
+  {
+    "name": "m_combatCurrentEngageSpace",
+    "metadata": "0x3b89e30",
+    "offset": 3624,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatPreferredEngageSpace",
+    "metadata": "0x3b89e78",
+    "offset": 3628,
+    "bytes": 4
+  },
+  {
+    "name": "m_combatHitStreak",
+    "metadata": "0x3b89ec0",
+    "offset": 3632,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatDamagedStreak",
+    "metadata": "0x3b89f08",
+    "offset": 3633,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatInPlayerBlindSpot",
+    "metadata": "0x3b89f50",
+    "offset": 3634,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatMeleeUnreachableForSelf",
+    "metadata": "0x3b89f98",
+    "offset": 3635,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatStealthModeWanted",
+    "metadata": "0x3b89fe0",
+    "offset": 3636,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatOverheatWanted",
+    "metadata": "0x3b8a028",
+    "offset": 3637,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatConfidentWanted",
+    "metadata": "0x3b8a070",
+    "offset": 3638,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatDirectedDestination",
+    "metadata": "0x3b8a0b8",
+    "offset": 3640,
+    "bytes": 28
+  },
+  {
+    "name": "m_combatAttackFilter",
+    "metadata": "0x3b8a100",
+    "offset": 3672,
+    "bytes": 32
+  },
+  {
+    "name": "m_combatMechBehead",
+    "metadata": "0x3b8a148",
+    "offset": 3704,
+    "bytes": 1
+  },
+  {
+    "name": "m_combatLostTarget",
+    "metadata": "0x3b8a190",
+    "offset": 3712,
+    "bytes": 168
+  },
+  {
+    "name": "m_combatLookAtInfluenceOverride",
+    "metadata": "0x3b8a1d8",
+    "offset": 3880,
+    "bytes": 4
+  }
+]

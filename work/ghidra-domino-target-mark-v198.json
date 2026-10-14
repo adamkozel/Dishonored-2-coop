@@ -1,0 +1,64 @@
+[
+  {
+    "program": "Dishonored2.exe",
+    "addresses": [
+      "1404dcfa0",
+      "1407e7390"
+    ],
+    "results": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "\r\nvoid FUN_1404dcfa0(undefined4 *param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  longlong lVar2;\r\n  undefined4 local_res8 [2];\r\n  \r\n  local_res8[0] = *param_1;\r\n  uVar1 = FUN_1407b5e00(D2_GameSingletonPtr + 0x3130b0,local_res8);\r\n  lVar2 = FUN_1404bd860();\r\n  FUN_1404db600(param_1,uVar1,lVar2 + 0x80);\r\n  FUN_1404ddf10(param_1);\r\n  FUN_1404db360(param_1);\r\n  return;\r\n}\r\n\r\n"
+            }
+          ],
+          "structuredContent": {
+            "result": "\r\nvoid FUN_1404dcfa0(undefined4 *param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  longlong lVar2;\r\n  undefined4 local_res8 [2];\r\n  \r\n  local_res8[0] = *param_1;\r\n  uVar1 = FUN_1407b5e00(D2_GameSingletonPtr + 0x3130b0,local_res8);\r\n  lVar2 = FUN_1404bd860();\r\n  FUN_1404db600(param_1,uVar1,lVar2 + 0x80);\r\n  FUN_1404ddf10(param_1);\r\n  FUN_1404db360(param_1);\r\n  return;\r\n}\r\n\r\n"
+          },
+          "isError": false
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "\r\nundefined8 FUN_1407e7390(longlong param_1,int param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  uint uVar2;\r\n  \r\n  uVar2 = *(uint *)(param_1 + 0x1c);\r\n  lVar1 = (longlong)param_2 * 8;\r\n  uVar2 = (uVar2 >> 2 & 3 | (uVar2 & 3) << 2) << 2 | uVar2 >> 4 & 3;\r\n  if (((*(uint *)(&UNK_141c70e88 + lVar1) & uVar2) == *(uint *)(&UNK_141c70e88 + lVar1)) &&\r\n     ((*(uint *)(&UNK_141c70e8c + lVar1) & uVar2) == 0)) {\r\n    return 1;\r\n  }\r\n  return 0;\r\n}\r\n\r\n"
+            }
+          ],
+          "structuredContent": {
+            "result": "\r\nundefined8 FUN_1407e7390(longlong param_1,int param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  uint uVar2;\r\n  \r\n  uVar2 = *(uint *)(param_1 + 0x1c);\r\n  lVar1 = (longlong)param_2 * 8;\r\n  uVar2 = (uVar2 >> 2 & 3 | (uVar2 & 3) << 2) << 2 | uVar2 >> 4 & 3;\r\n  if (((*(uint *)(&UNK_141c70e88 + lVar1) & uVar2) == *(uint *)(&UNK_141c70e88 + lVar1)) &&\r\n     ((*(uint *)(&UNK_141c70e8c + lVar1) & uVar2) == 0)) {\r\n    return 1;\r\n  }\r\n  return 0;\r\n}\r\n\r\n"
+          },
+          "isError": false
+        }
+      }
+    ]
+  },
+  {
+    "program": "Dishonored2.exe",
+    "addresses": [
+      "1404db360"
+    ],
+    "results": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "\r\nvoid FUN_1404db360(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  undefined4 *puVar4;\r\n  ulonglong in_stack_ffffffffffffffe0;\r\n  \r\n  lVar1 = FUN_1403da910(param_1 + 8,1);\r\n  if (lVar1 == 0) {\r\n    lVar1 = 0;\r\n  }\r\n  else {\r\n    lVar1 = *(longlong *)(lVar1 + 0x10);\r\n  }\r\n  *(byte *)(lVar1 + 0x369) = *(byte *)(lVar1 + 0x369) | 4;\r\n  lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                    (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,\r\n                     in_stack_ffffffffffffffe0 & 0xffffffffffffff00);\r\n  if (lVar2 != 0) {\r\n    lVar3 = FUN_1404bd860();\r\n    puVar4 = &DAT_14228a780;\r\n    FUN_140875e80(lVar1,lVar2,lVar3 + 0x80,&DAT_1431af668,&DAT_14228a780,1);\r\n    FUN_14087e840(lVar2,1);\r\n    FUN_14087e7e0(lVar2,1);\r\n    lVar1 = FUN_1404bd860();\r\n    FUN_1404e2940(param_1 + 0x90,*(undefined8 *)(lVar1 + 0x88),lVar2,0,\r\n                  (ulonglong)puVar4 & 0xffffffff00000000,0,0);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+            }
+          ],
+          "structuredContent": {
+            "result": "\r\nvoid FUN_1404db360(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  undefined4 *puVar4;\r\n  ulonglong in_stack_ffffffffffffffe0;\r\n  \r\n  lVar1 = FUN_1403da910(param_1 + 8,1);\r\n  if (lVar1 == 0) {\r\n    lVar1 = 0;\r\n  }\r\n  else {\r\n    lVar1 = *(longlong *)(lVar1 + 0x10);\r\n  }\r\n  *(byte *)(lVar1 + 0x369) = *(byte *)(lVar1 + 0x369) | 4;\r\n  lVar2 = (**(code **)(*D2_GameSingletonPtr + 0x1c8))\r\n                    (D2_GameSingletonPtr,&DAT_1439cf460,0,&DAT_1431af668,&DAT_14228a780,\r\n                     in_stack_ffffffffffffffe0 & 0xffffffffffffff00);\r\n  if (lVar2 != 0) {\r\n    lVar3 = FUN_1404bd860();\r\n    puVar4 = &DAT_14228a780;\r\n    FUN_140875e80(lVar1,lVar2,lVar3 + 0x80,&DAT_1431af668,&DAT_14228a780,1);\r\n    FUN_14087e840(lVar2,1);\r\n    FUN_14087e7e0(lVar2,1);\r\n    lVar1 = FUN_1404bd860();\r\n    FUN_1404e2940(param_1 + 0x90,*(undefined8 *)(lVar1 + 0x88),lVar2,0,\r\n                  (ulonglong)puVar4 & 0xffffffff00000000,0,0);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+          },
+          "isError": false
+        }
+      }
+    ]
+  }
+]

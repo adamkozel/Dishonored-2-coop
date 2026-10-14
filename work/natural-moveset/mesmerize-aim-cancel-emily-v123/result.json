@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native Steam transport and exact bank45/276 remote Emily standing armed context ready",
+    "Native Emily enter and aim scenes drive corresponding complete-body remote phases through Steam",
+    "Native X while LT remains held cancels the aim; remote body returns to its normal movement bank without stale power weight",
+    "Cancelled aim consumes no source mana; no resource writes are used",
+    "Cancelled aim creates neither source-native nor cosmetic world, target links or particles; native players and avatars retain health",
+    "Native and remote sword selections remain equipped after cancellation",
+    "Both native inventory quantities restore exactly before checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.679,
+      "input": "Native LT hold begins; no release-to-cast"
+    },
+    {
+      "videoTime": 4.285,
+      "input": "Native X cancel while LT held, followed by neutral"
+    }
+  ],
+  "dll": "EA18C121334B5A90FE125EC73137071F3471A0840B8C0A6200634870B1E07FA4",
+  "probe": "306EA2FBB6B5645CFEC548566C1D09109FE1EB4D2458A308CADDD3E3C4069F0B",
+  "bankSha256": "8F1BF256B5C2CA6122F2F85A40E4D69F212B9983E939BA085A477027F7626B53",
+  "scope": "Standing armed Emily Mesmerize native aim cancellation via controller X while LT remains held. Confirms native first-person enter/aim provenance, remote body recovery and absence of a committed native/cosmetic power or mana cost. Visual acceptance, other stances, natural lifetime and shared NPC outcomes remain separate. Both isolated checkpoints restore and protected originals remain unchanged."
+}

@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "source": "host",
+  "failure": "Dark Vision cleanup unconfirmed: restore_unconfirmed_reload_isolated_checkpoint",
+  "checks": [
+    "Exact native Dark Vision equipment acquired and selected only on source",
+    "Native controller casting starts the source vision manager; peer remains unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.977,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.441,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 8.831,
+      "action": "Native LT press 250ms",
+      "index": 2
+    }
+  ],
+  "dll": "0C0DAB7EEE3DD541D31D154C88D146389B3ECC3252F2C3FE910C69E9495FAFFE",
+  "capture": "Actual native source POV and read-only state/scene observations",
+  "scope": "Native Dark Vision investigation only; remote body and world-visible effects are not certified. Runtime acquired entity and discovery metadata require isolated checkpoint reload for exact baseline restoration."
+}

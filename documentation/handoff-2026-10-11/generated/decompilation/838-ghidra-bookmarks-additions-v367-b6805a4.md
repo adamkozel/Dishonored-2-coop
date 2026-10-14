@@ -1,0 +1,19 @@
+# ghidra-bookmarks-additions-v367.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v367.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v367.json>)
+
+SHA-256: `7961F5D882837C029C31437A7462E8CF090B615F41D2576F0D138E1058E91B37`; 1023 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "141c78a68",
+    "category": "D2Coop/Possession-draw-v367",
+    "comment": "CONFIRMED exact B671 runtime possession-holstered-network-v366: native Draw65 uses this vtable alongside Running0 and EquipChange53(VT1c79cf8) before UsePower63. At1154ms source physical stance0/default mode, strict motion was false; at1218ms Running0+UsePower63+EquipChange53 becomes valid. Remote body dropped weight0 during delayed invalid precursor, while21 native and11 remote simultaneous draw/cast samples later passed contact transition.367 candidate recognizes this exact preparatory ground state and requires separately owned Corvo sword Scene_2/1066ms (crouched1133 candidate) and right-arm+sword bindings; tests reject foreign binding/class/slot/duration/stance and concurrent rebind. Runtime367 pending. Xrefs from1408d3006/1408d3014 found, Ghidra has no function at1408d3006; no constructor semantics claimed. Full checkpoint inventory/health and protected14 restored after failed366.",
+    "type": "Note"
+  }
+]
+
+````

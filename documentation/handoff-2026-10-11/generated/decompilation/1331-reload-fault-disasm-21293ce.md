@@ -1,0 +1,66 @@
+# reload-fault-disasm.txt
+
+Original: [work/reload-fault-disasm.txt](<../../../../work/reload-fault-disasm.txt>)
+
+SHA-256: `9760BB70A6109EF8123233957C41B436602FE4E35FC752ADC6135D4CFF8364CF`; 2624 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140658540: nop
+  0000000140658541: add         dword ptr [rax],eax
+  0000000140658543: add         byte ptr [rax-73h],cl
+  0000000140658546: xchg        eax,esp
+  0000000140658547: and         al,90h
+  0000000140658549: add         dword ptr [rax],eax
+  000000014065854B: add         byte ptr [rax-75h],cl
+  000000014065854E: or          al,r13b
+  0000000140658551: pop         rbx
+  0000000140658552: mov         eax,0F08B000Ch
+  0000000140658557: jmp         0000000140658567
+  0000000140658559: mov         ebx,dword ptr [r15+0000000000000210h]
+  0000000140658560: mov         esi,dword ptr [r15+000000000000020Ch]
+  0000000140658567: test        ebx,ebx
+  0000000140658569: sete        al
+  000000014065856C: lea         rdx,[0000000141C350D0h]
+  0000000140658573: movzx       ecx,al
+  0000000140658576: call        00000001401668E0
+  000000014065857B: mov         rax,qword ptr [r14]
+  000000014065857E: mov         rcx,qword ptr [rax+00000000001F7BA0h]
+  0000000140658585: mov         r8d,dword ptr [rcx+60h]
+  0000000140658589: mov         rdx,qword ptr [0000000142318168h]
+  0000000140658590: mov         rcx,rdi
+  0000000140658593: call        00000001400D6870
+  0000000140658598: mov         r8d,dword ptr [r15+0000000000000080h]
+  000000014065859F: mov         rdx,qword ptr [0000000142318160h]
+  00000001406585A6: mov         rcx,rdi
+  00000001406585A9: call        00000001400D6870
+  00000001406585AE: mov         r8d,r12d
+  00000001406585B1: mov         rdx,qword ptr [0000000142318140h]
+  00000001406585B8: mov         rcx,rdi
+  00000001406585BB: call        00000001400D6870
+  00000001406585C0: mov         r8d,dword ptr [r13+00000000000003F0h]
+  00000001406585C7: mov         rdx,qword ptr [0000000142318148h]
+  00000001406585CE: mov         rcx,rdi
+  00000001406585D1: call        00000001400D6870
+  00000001406585D6: mov         r8d,ebx
+  00000001406585D9: mov         rdx,qword ptr [0000000142318150h]
+  00000001406585E0: mov         rcx,rdi
+  00000001406585E3: call        00000001400D6870
+  00000001406585E8: mov         r8d,esi
+  00000001406585EB: mov         rdx,qword ptr [0000000142318158h]
+  00000001406585F2: mov         rcx,rdi
+  00000001406585F5: call        00000001400D6870
+  00000001406585FA: 44
+  00000001406585FB: 8B
+  00000001406585FC: test        byte ptr [rax+rbx*4],ah
+  00000001406585FF: add         dword ptr [rax],eax
+
+````

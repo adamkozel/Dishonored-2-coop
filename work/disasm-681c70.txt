@@ -1,0 +1,166 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140681C70: or          byte ptr [r8+000000005C8B4801h],sil
+  0000000140681C77: and         al,40h
+  0000000140681C79: add         rsp,30h
+  0000000140681C7D: pop         rdi
+  0000000140681C7E: ret
+  0000000140681C7F: int         3
+  0000000140681C80: mov         byte ptr [rcx+58h],dl
+  0000000140681C83: ret
+  0000000140681C84: int         3
+  0000000140681C85: int         3
+  0000000140681C86: int         3
+  0000000140681C87: int         3
+  0000000140681C88: int         3
+  0000000140681C89: int         3
+  0000000140681C8A: int         3
+  0000000140681C8B: int         3
+  0000000140681C8C: int         3
+  0000000140681C8D: int         3
+  0000000140681C8E: int         3
+  0000000140681C8F: int         3
+  0000000140681C90: sub         rsp,28h
+  0000000140681C94: mov         r8d,dword ptr [rcx+3Ch]
+  0000000140681C98: add         rcx,30h
+  0000000140681C9C: mov         r9,rdx
+  0000000140681C9F: mov         eax,r8d
+  0000000140681CA2: shr         eax,6
+  0000000140681CA5: and         eax,3
+  0000000140681CA8: je          0000000140681CC8
+  0000000140681CAA: cmp         eax,3
+  0000000140681CAD: je          0000000140681CC8
+  0000000140681CAF: mov         edx,dword ptr [rcx+8]
+  0000000140681CB2: xor         eax,eax
+  0000000140681CB4: shr         r8d,8
+  0000000140681CB8: and         edx,0FFFFFFh
+  0000000140681CBE: cmp         edx,r8d
+  0000000140681CC1: setae       al
+  0000000140681CC4: test        al,al
+  0000000140681CC6: jne         0000000140681CDC
+  0000000140681CC8: mov         rdx,r9
+  0000000140681CCB: call        0000000140681450
+  0000000140681CD0: cmp         eax,0FFFFFFFFh
+  0000000140681CD3: jle         0000000140681CDC
+  0000000140681CD5: mov         al,1
+  0000000140681CD7: add         rsp,28h
+  0000000140681CDB: ret
+  0000000140681CDC: xor         al,al
+  0000000140681CDE: add         rsp,28h
+  0000000140681CE2: ret
+  0000000140681CE3: int         3
+  0000000140681CE4: int         3
+  0000000140681CE5: int         3
+  0000000140681CE6: int         3
+  0000000140681CE7: int         3
+  0000000140681CE8: int         3
+  0000000140681CE9: int         3
+  0000000140681CEA: int         3
+  0000000140681CEB: int         3
+  0000000140681CEC: int         3
+  0000000140681CED: int         3
+  0000000140681CEE: int         3
+  0000000140681CEF: int         3
+  0000000140681CF0: push        rbx
+  0000000140681CF2: sub         rsp,20h
+  0000000140681CF6: cmp         byte ptr [rcx+58h],1
+  0000000140681CFA: mov         rbx,rcx
+  0000000140681CFD: jne         0000000140681E38
+  0000000140681D03: mov         rax,qword ptr [00000001439A5290h]
+  0000000140681D0A: mov         qword ptr [rsp+38h],rsi
+  0000000140681D0F: mov         qword ptr [rsp+40h],rdi
+  0000000140681D14: mov         rsi,qword ptr [rax+00000000001F6F50h]
+  0000000140681D1B: mov         dword ptr [rsp+30h],0
+  0000000140681D23: mov         edi,dword ptr [rsi+48h]
+  0000000140681D26: mov         rcx,rsi
+  0000000140681D29: call        00000001404F0450
+  0000000140681D2E: cmp         al,1
+  0000000140681D30: jne         0000000140681D9E
+  0000000140681D32: mov         byte ptr [rbx+58h],0
+  0000000140681D36: test        edi,edi
+  0000000140681D38: jne         0000000140681D56
+  0000000140681D3A: lea         r8d,[rdi+3]
+  0000000140681D3E: lea         rdx,[000000014398A8A0h]
+  0000000140681D45: mov         rcx,rbx
+  0000000140681D48: call        0000000140854D50
+  0000000140681D4D: lea         rdx,[000000014398A8B0h]
+  0000000140681D54: jmp         0000000140681D75
+  0000000140681D56: cmp         edi,1
+  0000000140681D59: jne         0000000140681D7D
+  0000000140681D5B: lea         r8d,[rdi+1]
+  0000000140681D5F: lea         rdx,[000000014398A8A0h]
+  0000000140681D66: mov         rcx,rbx
+  0000000140681D69: call        0000000140854D50
+  0000000140681D6E: lea         rdx,[000000014398A8A8h]
+  0000000140681D75: mov         rcx,rbx
+  0000000140681D78: call        0000000140854D20
+  0000000140681D7D: xor         r8d,r8d
+  0000000140681D80: xor         edx,edx
+  0000000140681D82: mov         rcx,rsi
+  0000000140681D85: call        00000001404F05E0
+  0000000140681D8A: xor         r8d,r8d
+  0000000140681D8D: mov         rcx,rsi
+  0000000140681D90: lea         edx,[r8+1]
+  0000000140681D94: call        00000001404F05E0
+  0000000140681D99: jmp         0000000140681E2E
+  0000000140681D9E: lea         rdx,[rsp+30h]
+  0000000140681DA3: mov         rcx,rbx
+  0000000140681DA6: call        0000000140681760
+  0000000140681DAB: cmp         al,1
+  0000000140681DAD: jne         0000000140681E18
+  0000000140681DAF: mov         eax,dword ptr [rsp+30h]
+  0000000140681DB3: cmp         eax,1
+  0000000140681DB6: jne         0000000140681DE6
+  0000000140681DB8: test        edi,edi
+  0000000140681DBA: jne         0000000140681E2E
+  0000000140681DBC: mov         byte ptr [rbx+58h],dil
+  0000000140681DC0: lea         rdx,[000000014398A8A0h]
+  0000000140681DC7: mov         r8d,eax
+  0000000140681DCA: mov         rcx,rbx
+  0000000140681DCD: mov         dword ptr [rsi+48h],eax
+  0000000140681DD0: call        0000000140854D50
+  0000000140681DD5: lea         rdx,[000000014398A8B0h]
+  0000000140681DDC: mov         rcx,rbx
+  0000000140681DDF: call        0000000140854D20
+  0000000140681DE4: jmp         0000000140681E2E
+  0000000140681DE6: test        eax,eax
+  0000000140681DE8: jne         0000000140681E2E
+  0000000140681DEA: cmp         edi,1
+  0000000140681DED: jne         0000000140681E2E
+  0000000140681DEF: mov         byte ptr [rbx+58h],al
+  0000000140681DF2: lea         rdx,[000000014398A8A0h]
+  0000000140681DF9: xor         r8d,r8d
+  0000000140681DFC: mov         rcx,rbx
+  0000000140681DFF: mov         dword ptr [rsi+48h],eax
+  0000000140681E02: call        0000000140854D50
+  0000000140681E07: lea         rdx,[000000014398A8A8h]
+  0000000140681E0E: mov         rcx,rbx
+  0000000140681E11: call        0000000140854D20
+  0000000140681E16: jmp         0000000140681E2E
+  0000000140681E18: mov         rcx,rbx
+  0000000140681E1B: call        00000001406818B0
+  0000000140681E20: cmp         al,1
+  0000000140681E22: jne         0000000140681E2E
+  0000000140681E24: mov         edx,edi
+  0000000140681E26: mov         rcx,rsi
+  0000000140681E29: call        00000001404F04B0
+  0000000140681E2E: mov         rsi,qword ptr [rsp+38h]
+  0000000140681E33: mov         rdi,qword ptr [rsp+40h]
+  0000000140681E38: mov         rcx,rbx
+  0000000140681E3B: call        0000000140854920
+  0000000140681E40: test        al,al
+  0000000140681E42: je          0000000140681E51
+  0000000140681E44: mov         rcx,rbx
+  0000000140681E47: add         rsp,20h
+  0000000140681E4B: pop         rbx
+  0000000140681E4C: jmp         0000000140854190
+
+  Summary
+
+     1A7D000 .text

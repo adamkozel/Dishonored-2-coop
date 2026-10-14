@@ -1,0 +1,1173 @@
+{
+  "at": "2026-10-14T13:28:53.956320+02:00",
+  "candidate": "candidate-npc-combat-v1108",
+  "dll": "7A787B29D8084CA91AAAA1AACF027EB10DD86679D688B5FE5869E3BE632F7C41",
+  "npcCombatWire": 7,
+  "harnesses": [
+    "../natural-moveset/Test-MissionCombat-v1109.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-combat-v1101",
+      "candidate": "candidate-npc-combat-v1097",
+      "scope": "1097: host faced the guard (RT strikes, RB block); guard health 30 -> 10 on the host only; guard channel retired native_lifecycle_changed; client NPC combat all_bound_actors_retired; replica diverged.",
+      "combat": {
+        "host": {
+          "result": "hit_damage_parameters",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 13,
+          "deaths": 0
+        },
+        "client": {
+          "result": "all_bound_actors_retired",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 12,
+          "deaths": 0
+        }
+      },
+      "timeline": [
+        {
+          "guard_client": {
+            "position": [
+              -35.0027,
+              112.969,
+              14.9231
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.0037,
+              112.975,
+              14.9222
+            ],
+            "health": 10
+          },
+          "k": 0,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -37.3166,
+              113.331,
+              14.2344
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.3562,
+              112.751,
+              12.0331
+            ],
+            "health": 10
+          },
+          "k": 1,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -39.1127,
+              113.586,
+              11.391
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.632,
+              112.665,
+              10.6344
+            ],
+            "health": 10
+          },
+          "k": 2,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -39.0721,
+              113.82,
+              11.3034
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.6307,
+              112.665,
+              10.6342
+            ],
+            "health": 10
+          },
+          "k": 3,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -39.1059,
+              113.658,
+              11.3563
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.6302,
+              112.665,
+              10.6341
+            ],
+            "health": 10
+          },
+          "k": 4,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -39.1191,
+              113.549,
+              11.4014
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.629,
+              112.665,
+              10.6341
+            ],
+            "health": 10
+          },
+          "k": 5,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -38.5397,
+              113.651,
+              11.0367
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.629,
+              112.665,
+              10.6341
+            ],
+            "health": 10
+          },
+          "k": 6,
+          "hostHealth": 70
+        },
+        {
+          "guard_client": {
+            "position": [
+              -37.6584,
+              113.816,
+              10.5618
+            ],
+            "health": 30
+          },
+          "clientHealth": 70,
+          "guard_host": {
+            "position": [
+              -35.629,
+              112.665,
+              10.6341
+            ],
+            "health": 10
+          },
+          "k": 7,
+          "hostHealth": 70
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1103",
+      "candidate": "candidate-npc-combat-v1102",
+      "scope": "1102 diagnostic: lifecycleDiff 0x40000200 - decision AI behaviour tree swapped into combat (0x200), then the guard died (not living).",
+      "combat": {
+        "host": {
+          "result": "hit_damage_parameters",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 13,
+          "deaths": 0
+        },
+        "client": {
+          "result": "all_bound_actors_retired",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 12,
+          "deaths": 0
+        }
+      },
+      "timeline": [
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.6889,
+              113.226,
+              11.7631
+            ],
+            "health": 20
+          },
+          "k": 0,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -33.7412,
+              113.248,
+              12.0388
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2117,
+              113.261,
+              10.5881
+            ],
+            "health": 0
+          },
+          "k": 1,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -33.5732,
+              113.774,
+              10.4653
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2111,
+              113.262,
+              10.5865
+            ],
+            "health": 0
+          },
+          "k": 2,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -34.0155,
+              115.438,
+              10.2239
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.209,
+              113.264,
+              10.5844
+            ],
+            "health": 0
+          },
+          "k": 3,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -35.4057,
+              120.812,
+              10.3962
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2084,
+              113.264,
+              10.5837
+            ],
+            "health": 0
+          },
+          "k": 4,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -35.4973,
+              121.513,
+              10.3881
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2076,
+              113.264,
+              10.5837
+            ],
+            "health": 0
+          },
+          "k": 5,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -35.4987,
+              121.53,
+              10.3878
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2076,
+              113.264,
+              10.5837
+            ],
+            "health": 0
+          },
+          "k": 6,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -35.6465,
+              121.78,
+              10.3901
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "guard_host": {
+            "position": [
+              -33.2076,
+              113.264,
+              10.5837
+            ],
+            "health": 0
+          },
+          "k": 7,
+          "clientHealth": 70,
+          "guard_client": {
+            "position": [
+              -35.6465,
+              121.78,
+              10.3901
+            ],
+            "health": 30
+          }
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1105",
+      "candidate": "candidate-npc-combat-v1104",
+      "scope": "1104 (tree swap tolerated on ongoing channels): channel survived until death; host combat refused the first hit as hit_damage_parameters - native player_kick.damage (inflictor = player, not the sword) was an unbound family.",
+      "combat": {
+        "host": {
+          "result": "hit_damage_parameters",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 13,
+          "deaths": 0
+        },
+        "client": {
+          "result": "all_bound_actors_retired",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 12,
+          "deaths": 0
+        }
+      },
+      "timeline": [
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -35.5303,
+              113.919,
+              15.1475
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 20,
+            "position": [
+              -35.5588,
+              113.925,
+              15.113
+            ]
+          },
+          "k": 0
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -36.3255,
+              113.834,
+              10.6364
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2624,
+              113.806,
+              10.6271
+            ]
+          },
+          "k": 1
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.0566,
+              113.031,
+              10.541
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2621,
+              113.807,
+              10.6265
+            ]
+          },
+          "k": 2
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.1599,
+              112.786,
+              10.5628
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2617,
+              113.808,
+              10.6258
+            ]
+          },
+          "k": 3
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.148,
+              112.826,
+              10.5596
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.261,
+              113.809,
+              10.6259
+            ]
+          },
+          "k": 4
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.0545,
+              113.038,
+              10.541
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2582,
+              113.809,
+              10.6257
+            ]
+          },
+          "k": 5
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.0545,
+              113.038,
+              10.541
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2586,
+              113.81,
+              10.6251
+            ]
+          },
+          "k": 6
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.0545,
+              113.038,
+              10.541
+            ]
+          },
+          "hostHealth": 70,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -36.2577,
+              113.81,
+              10.6252
+            ]
+          },
+          "k": 7
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1107",
+      "candidate": "candidate-npc-combat-v1106",
+      "scope": "1106 (Kick family): still refused - kick hit has a zero normal, rejected by the unit-normal melee geometry rule; channel survived (diff 0).",
+      "combat": {
+        "host": {
+          "result": "hit_damage_parameters",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 13,
+          "deaths": 0
+        },
+        "client": {
+          "result": "all_bound_actors_retired",
+          "committed": 0,
+          "applied": 0,
+          "rejected": 12,
+          "deaths": 0
+        }
+      },
+      "timeline": [
+        {
+          "clientHealth": 70,
+          "k": 0,
+          "guard_host": {
+            "position": [
+              -33.4726,
+              114.119,
+              10.5264
+            ],
+            "health": 20
+          },
+          "hostHealth": 70,
+          "guard_client": {
+            "position": [
+              -33.596,
+              114.223,
+              10.6468
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 1,
+          "guard_host": {
+            "position": [
+              -33.0012,
+              113.76,
+              10.2463
+            ],
+            "health": 20
+          },
+          "hostHealth": 70,
+          "guard_client": {
+            "position": [
+              -33.0012,
+              113.76,
+              10.2448
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 2,
+          "guard_host": {
+            "position": [
+              -32.9751,
+              112.384,
+              10.3918
+            ],
+            "health": 20
+          },
+          "hostHealth": 70,
+          "guard_client": {
+            "position": [
+              -32.9829,
+              112.358,
+              10.3923
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 3,
+          "guard_host": {
+            "position": [
+              -33.0689,
+              112.286,
+              10.3962
+            ],
+            "health": 20
+          },
+          "hostHealth": 70,
+          "guard_client": {
+            "position": [
+              -33.0689,
+              112.286,
+              10.3962
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 4,
+          "guard_host": {
+            "position": [
+              -33.0689,
+              112.286,
+              10.3962
+            ],
+            "health": 20
+          },
+          "hostHealth": 64.75,
+          "guard_client": {
+            "position": [
+              -33.0689,
+              112.286,
+              10.3962
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 5,
+          "guard_host": {
+            "position": [
+              -32.6181,
+              112.013,
+              10.2991
+            ],
+            "health": 20
+          },
+          "hostHealth": 64.75,
+          "guard_client": {
+            "position": [
+              -32.6163,
+              112.012,
+              10.2991
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 6,
+          "guard_host": {
+            "position": [
+              -34.8225,
+              113.983,
+              10.3991
+            ],
+            "health": 20
+          },
+          "hostHealth": 60.25,
+          "guard_client": {
+            "position": [
+              -34.8225,
+              113.983,
+              10.3991
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 7,
+          "guard_host": {
+            "position": [
+              -36.5735,
+              117.75,
+              10.4887
+            ],
+            "health": 20
+          },
+          "hostHealth": 56.5,
+          "guard_client": {
+            "position": [
+              -36.5735,
+              117.75,
+              10.4887
+            ],
+            "health": 30
+          }
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1109",
+      "candidate": "candidate-npc-combat-v1108",
+      "scope": "1108 (kick geometry rule): host committed 2 outcomes (kick + sword), client applied 2; guard health 30 -> 10 on BOTH peers; NPC combat active on both; host native block (RB) took chip damage only.",
+      "combat": {
+        "host": {
+          "result": "active_native_melee",
+          "committed": 2,
+          "applied": 0,
+          "rejected": 0,
+          "deaths": 0
+        },
+        "client": {
+          "result": "active_native_melee",
+          "committed": 0,
+          "applied": 2,
+          "rejected": 12,
+          "deaths": 0
+        }
+      },
+      "timeline": [
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.6371,
+              116.492,
+              15.6641
+            ]
+          },
+          "hostHealth": 70,
+          "k": 0,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.6461,
+              116.694,
+              15.6648
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -37.0135,
+              116.55,
+              15.6614
+            ]
+          },
+          "hostHealth": 70,
+          "k": 1,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -37.0263,
+              116.506,
+              15.6611
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -37.0626,
+              116.755,
+              15.662
+            ]
+          },
+          "hostHealth": 70,
+          "k": 2,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.9268,
+              117.32,
+              15.6649
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.5028,
+              116.355,
+              15.6641
+            ]
+          },
+          "hostHealth": 70,
+          "k": 3,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.7589,
+              116.364,
+              15.6618
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.5753,
+              116.345,
+              15.6645
+            ]
+          },
+          "hostHealth": 65.5,
+          "k": 4,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.5782,
+              116.359,
+              15.6645
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.8626,
+              116.746,
+              15.6631
+            ]
+          },
+          "hostHealth": 65.5,
+          "k": 5,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.8279,
+              116.577,
+              15.6629
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.7737,
+              116.164,
+              15.6622
+            ]
+          },
+          "hostHealth": 65.5,
+          "k": 6,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.7601,
+              116.161,
+              15.6623
+            ]
+          }
+        },
+        {
+          "clientHealth": 70,
+          "guard_client": {
+            "health": 10,
+            "position": [
+              -36.7894,
+              116.017,
+              15.6613
+            ]
+          },
+          "hostHealth": 65.5,
+          "k": 7,
+          "guard_host": {
+            "health": 10,
+            "position": [
+              -36.8015,
+              116.1,
+              15.6615
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1111",
+      "candidate": "candidate-npc-combat-v1108",
+      "striker": "client",
+      "scope": "Client player native fatality (generic_fatality.damage) on the host-authoritative guard: client request -> host commit -> client apply; one death on both peers; guard health 0 on both. Corpses settle 1.38 m apart (channel retires at death; no corpse authority yet).",
+      "combat": {
+        "host": {
+          "result": "active_native_melee",
+          "requests": 1,
+          "committed": 1,
+          "applied": 0,
+          "rejected": 0,
+          "deaths": 1
+        },
+        "client": {
+          "result": "active_native_melee",
+          "requests": 1,
+          "committed": 0,
+          "applied": 1,
+          "rejected": 12,
+          "deaths": 1
+        }
+      },
+      "timeline": [
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4872,
+              116.153,
+              15.8396
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 0,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.604,
+              117.526,
+              15.8434
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4856,
+              116.152,
+              15.8391
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 1,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8429
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4857,
+              116.152,
+              15.8386
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 2,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6042,
+              117.525,
+              15.8427
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4864,
+              116.152,
+              15.8382
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 3,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8427
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4858,
+              116.153,
+              15.8381
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 4,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8427
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4858,
+              116.153,
+              15.8381
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 5,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8427
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4858,
+              116.153,
+              15.8381
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 6,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8427
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 0,
+            "position": [
+              -37.4858,
+              116.153,
+              15.8381
+            ]
+          },
+          "clientHealth": 70,
+          "hostHealth": 70,
+          "k": 7,
+          "guard_host": {
+            "health": 0,
+            "position": [
+              -37.6041,
+              117.525,
+              15.8427
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: entering combat swaps the native decision behaviour tree; ongoing NPC channels must not treat that as a new incarnation (1104; acquisition stays strict).",
+    "Confirmed runtime: the native player kick is player_kick.damage (amount10, type0x80, reactions1/1) with the kicking player as inflictor and a zero hit normal (region1/regions2).",
+    "Confirmed runtime (stage 4 acceptance slice): on a mission map the host player kick and sword hit on a host-authoritative guard each commit once and apply once on the client; guard health converges (30 -> 10 on both peers).",
+    "Confirmed runtime: a client-sourced native fatality on a host-authoritative mission guard is requested once, committed once on the host and applied once on the client; the death is shared (1111)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Guard death/body replication on missions (1105 kill retired the channel before a death outcome).",
+    "Guards engaging the client player (partner perception) and enemy hits on the client relayed as player damage.",
+    "Shared death/checkpoint on missions; tutorial-modal tolerance.",
+    "Corpse/ragdoll authority after death (bodies 1.38 m apart in 1111)."
+  ]
+}

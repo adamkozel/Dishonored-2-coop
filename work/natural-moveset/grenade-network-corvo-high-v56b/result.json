@@ -1,0 +1,30 @@
+{
+  "passed": false,
+  "failure": "Checkpoint restoration failed: Both native Mayhew scenes did not complete",
+  "source": "host",
+  "pitch": 0,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.999,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene"
+  ],
+  "dll": "5F343F24675304F5D78E5B581CFAA8766ABE062B6113A7932FF2B87C0CC8FFC9",
+  "probe": "C1AC9541B2D1106A5CBA3DF680A55C2BCB0910B9C22CAC97C1AD1FF06BC768DB",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Both checkpoints restored after firing. Visual acceptance separate."
+}

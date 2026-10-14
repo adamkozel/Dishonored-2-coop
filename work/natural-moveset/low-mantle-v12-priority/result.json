@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host Slash retains native motion=0 and selects the intended combat presentation (authored=True)",
+    "host standing Block retains motion=0 and selects the intended guard presentation (authored=True)",
+    "host Slash retains native motion=1 and selects the intended combat presentation (authored=True)",
+    "host crouched Block retains motion=1; standing bank does not override crouch",
+    "host native jump/fall selects authored airborne motion without competing clone action",
+    "host pause retires bank, rejects rearm, and resume does not replay it",
+    "client Slash retains native motion=0 and selects the intended combat presentation (authored=True)",
+    "client standing Block retains motion=0 and selects the intended guard presentation (authored=True)",
+    "client Slash retains native motion=1 and selects the intended combat presentation (authored=True)",
+    "client crouched Block retains motion=1; standing bank does not override crouch",
+    "client native jump/fall selects authored airborne motion without competing clone action",
+    "client pause retires bank, rejects rearm, and resume does not replay it",
+    "Both players retain native checkpoint health 56; both independent avatars retain 40"
+  ],
+  "dll": "5830AE3E10EE6AC802D4BFD7C14AEB6096555ECC766F19C4DC061A308D4BA390",
+  "scope": "Native Block/movement coexistence, action/stance/airborne priority and pause for the experimental bank; no new combat outcomes or whole-family visual acceptance."
+}

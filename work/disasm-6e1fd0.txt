@@ -1,0 +1,196 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406E1FD0: and         al,58h
+  00000001406E1FD2: mov         rax,rbx
+  00000001406E1FD5: add         rsp,68h
+  00000001406E1FD9: pop         rbp
+  00000001406E1FDA: pop         rbx
+  00000001406E1FDB: ret
+  00000001406E1FDC: int         3
+  00000001406E1FDD: int         3
+  00000001406E1FDE: int         3
+  00000001406E1FDF: int         3
+  00000001406E1FE0: sub         rsp,28h
+  00000001406E1FE4: mov         rax,qword ptr [rcx]
+  00000001406E1FE7: movsd       xmm1,mmword ptr [r8+10h]
+  00000001406E1FED: movups      xmm0,xmmword ptr [r8]
+  00000001406E1FF1: movsxd      r8,dword ptr [rdx+4]
+  00000001406E1FF5: add         r8,qword ptr [rax]
+  00000001406E1FF8: lea         rax,[rsp+30h]
+  00000001406E1FFD: movsd       mmword ptr [rsp+10h],xmm1
+  00000001406E2003: movaps      xmmword ptr [rsp],xmm0
+  00000001406E2007: mov         rcx,qword ptr [rsp+10h]
+  00000001406E200C: shr         rcx,20h
+  00000001406E2010: cmp         r8,rax
+  00000001406E2013: je          00000001406E201C
+  00000001406E2015: movzx       eax,byte ptr [rsp]
+  00000001406E2019: mov         byte ptr [r8],al
+  00000001406E201C: mov         eax,dword ptr [rsp+8]
+  00000001406E2020: movss       xmm0,dword ptr [rsp+4]
+  00000001406E2026: inc         byte ptr [r8+16h]
+  00000001406E202A: mov         dword ptr [r8+8],eax
+  00000001406E202E: mov         eax,dword ptr [rsp+10h]
+  00000001406E2032: movss       dword ptr [r8+4],xmm0
+  00000001406E2038: movss       xmm0,dword ptr [rsp+0Ch]
+  00000001406E203E: movss       dword ptr [r8+0Ch],xmm0
+  00000001406E2044: mov         byte ptr [r8+14h],cl
+  00000001406E2048: mov         byte ptr [r8+15h],1
+  00000001406E204D: mov         dword ptr [r8+10h],eax
+  00000001406E2051: add         rsp,28h
+  00000001406E2055: ret
+  00000001406E2056: int         3
+  00000001406E2057: int         3
+  00000001406E2058: int         3
+  00000001406E2059: int         3
+  00000001406E205A: int         3
+  00000001406E205B: int         3
+  00000001406E205C: int         3
+  00000001406E205D: int         3
+  00000001406E205E: int         3
+  00000001406E205F: int         3
+  00000001406E2060: mov         rax,qword ptr [rcx]
+  00000001406E2063: movsxd      r9,dword ptr [rdx+4]
+  00000001406E2067: mov         rcx,qword ptr [rax]
+  00000001406E206A: mov         qword ptr [r9+rcx],r8
+  00000001406E206E: ret
+  00000001406E206F: int         3
+  00000001406E2070: mov         rax,qword ptr [rcx]
+  00000001406E2073: movsxd      r9,dword ptr [rdx+4]
+  00000001406E2077: mov         rcx,qword ptr [rax]
+  00000001406E207A: mov         byte ptr [r9+rcx],r8b
+  00000001406E207E: ret
+  00000001406E207F: int         3
+  00000001406E2080: mov         rax,qword ptr [rcx]
+  00000001406E2083: movsxd      r8,dword ptr [rdx+4]
+  00000001406E2087: mov         rcx,qword ptr [rax]
+  00000001406E208A: movss       dword ptr [r8+rcx],xmm2
+  00000001406E2090: ret
+  00000001406E2091: int         3
+  00000001406E2092: int         3
+  00000001406E2093: int         3
+  00000001406E2094: int         3
+  00000001406E2095: int         3
+  00000001406E2096: int         3
+  00000001406E2097: int         3
+  00000001406E2098: int         3
+  00000001406E2099: int         3
+  00000001406E209A: int         3
+  00000001406E209B: int         3
+  00000001406E209C: int         3
+  00000001406E209D: int         3
+  00000001406E209E: int         3
+  00000001406E209F: int         3
+  00000001406E20A0: movsxd      r9,dword ptr [rdx+4]
+  00000001406E20A4: mov         rax,qword ptr [rcx]
+  00000001406E20A7: add         r9,qword ptr [rax]
+  00000001406E20AA: movzx       eax,byte ptr [r8]
+  00000001406E20AE: mov         byte ptr [r9],al
+  00000001406E20B1: movzx       eax,byte ptr [r8+1]
+  00000001406E20B6: mov         byte ptr [r9+1],al
+  00000001406E20BA: mov         rax,qword ptr [r8+8]
+  00000001406E20BE: mov         qword ptr [r9+8],rax
+  00000001406E20C2: mov         rax,qword ptr [r8+10h]
+  00000001406E20C6: mov         qword ptr [r9+10h],rax
+  00000001406E20CA: mov         rax,qword ptr [r8+18h]
+  00000001406E20CE: mov         qword ptr [r9+18h],rax
+  00000001406E20D2: mov         rax,qword ptr [r8+20h]
+  00000001406E20D6: mov         qword ptr [r9+20h],rax
+  00000001406E20DA: mov         rax,qword ptr [r8+28h]
+  00000001406E20DE: mov         qword ptr [r9+28h],rax
+  00000001406E20E2: mov         rax,qword ptr [r8+30h]
+  00000001406E20E6: mov         qword ptr [r9+30h],rax
+  00000001406E20EA: mov         rax,qword ptr [r8+38h]
+  00000001406E20EE: mov         qword ptr [r9+38h],rax
+  00000001406E20F2: mov         rax,qword ptr [r8+40h]
+  00000001406E20F6: mov         qword ptr [r9+40h],rax
+  00000001406E20FA: mov         rax,qword ptr [r8+48h]
+  00000001406E20FE: mov         qword ptr [r9+48h],rax
+  00000001406E2102: mov         eax,dword ptr [r8+50h]
+  00000001406E2106: mov         dword ptr [r9+50h],eax
+  00000001406E210A: mov         eax,dword ptr [r8+54h]
+  00000001406E210E: mov         dword ptr [r9+54h],eax
+  00000001406E2112: mov         eax,dword ptr [r8+58h]
+  00000001406E2116: mov         dword ptr [r9+58h],eax
+  00000001406E211A: mov         eax,dword ptr [r8+5Ch]
+  00000001406E211E: mov         dword ptr [r9+5Ch],eax
+  00000001406E2122: mov         eax,dword ptr [r8+60h]
+  00000001406E2126: mov         dword ptr [r9+60h],eax
+  00000001406E212A: movzx       eax,byte ptr [r8+64h]
+  00000001406E212F: mov         byte ptr [r9+64h],al
+  00000001406E2133: movzx       eax,byte ptr [r8+65h]
+  00000001406E2138: mov         byte ptr [r9+65h],al
+  00000001406E213C: movzx       eax,byte ptr [r8+66h]
+  00000001406E2141: mov         byte ptr [r9+66h],al
+  00000001406E2145: movzx       eax,byte ptr [r8+67h]
+  00000001406E214A: mov         byte ptr [r9+67h],al
+  00000001406E214E: ret
+  00000001406E214F: int         3
+  00000001406E2150: mov         rax,qword ptr [rcx]
+  00000001406E2153: movsxd      r9,dword ptr [rdx+4]
+  00000001406E2157: mov         byte ptr [rsp+18h],r8b
+  00000001406E215C: add         r9,qword ptr [rax]
+  00000001406E215F: lea         rax,[rsp+18h]
+  00000001406E2164: cmp         r9,rax
+  00000001406E2167: je          00000001406E216C
+  00000001406E2169: mov         byte ptr [r9],r8b
+  00000001406E216C: rep ret
+  00000001406E216E: int         3
+  00000001406E216F: int         3
+  00000001406E2170: mov         rax,qword ptr [rcx]
+  00000001406E2173: movsxd      r9,dword ptr [rdx+4]
+  00000001406E2177: mov         rdx,r8
+  00000001406E217A: add         r9,qword ptr [rax]
+  00000001406E217D: mov         rcx,r9
+  00000001406E2180: jmp         0000000140469040
+  00000001406E2185: int         3
+  00000001406E2186: int         3
+  00000001406E2187: int         3
+  00000001406E2188: int         3
+  00000001406E2189: int         3
+  00000001406E218A: int         3
+  00000001406E218B: int         3
+  00000001406E218C: int         3
+  00000001406E218D: int         3
+  00000001406E218E: int         3
+  00000001406E218F: int         3
+  00000001406E2190: push        rdi
+  00000001406E2192: sub         rsp,30h
+  00000001406E2196: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001406E219F: mov         qword ptr [rsp+50h],rbx
+  00000001406E21A4: mov         qword ptr [rsp+58h],rsi
+  00000001406E21A9: mov         rdi,r9
+  00000001406E21AC: mov         rsi,r8
+  00000001406E21AF: mov         rax,qword ptr [rcx]
+  00000001406E21B2: movsxd      rbx,dword ptr [rdx+4]
+  00000001406E21B6: add         rbx,qword ptr [rax]
+  00000001406E21B9: mov         qword ptr [rsp+40h],rbx
+  00000001406E21BE: mov         qword ptr [rsp+48h],rbx
+  00000001406E21C3: je          00000001406E21EE
+  00000001406E21C5: mov         rcx,rbx
+  00000001406E21C8: call        00000001406DFE50
+  00000001406E21CD: nop
+  00000001406E21CE: mov         qword ptr [rbx+00000000000001A0h],0FFFFFFFFFFFFFFFFh
+  00000001406E21D9: movzx       r9d,byte ptr [rsp+60h]
+  00000001406E21DF: mov         r8,rdi
+  00000001406E21E2: mov         rdx,rsi
+  00000001406E21E5: mov         rcx,rbx
+  00000001406E21E8: call        00000001406EB410
+  00000001406E21ED: nop
+  00000001406E21EE: mov         rbx,qword ptr [rsp+50h]
+  00000001406E21F3: mov         rsi,qword ptr [rsp+58h]
+  00000001406E21F8: add         rsp,30h
+  00000001406E21FC: pop         rdi
+  00000001406E21FD: ret
+  00000001406E21FE: int         3
+  00000001406E21FF: int         3
+  00000001406E2200: 41
+
+  Summary
+
+     1A7D000 .text

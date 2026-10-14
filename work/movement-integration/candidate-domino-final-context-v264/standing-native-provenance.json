@@ -1,0 +1,54 @@
+{
+  "take": "domino-holstered-standing-final-observe-v263",
+  "stance": "standing",
+  "holstered": true,
+  "rawFinalSamples": 12,
+  "rawClockMs": [
+    25,
+    366
+  ],
+  "independentFinalRows": [
+    {
+      "timeMs": 191,
+      "durationMs": 400,
+      "states": [
+        0
+      ],
+      "holstered": true,
+      "scene": {
+        "pointer": "0x18556ba4e28",
+        "listOffset": "0x0",
+        "id": 211,
+        "state": 3,
+        "playerChannel": -1,
+        "asset": "midnight/gameplay/player/base/powers/power_phantasmal_cast.midnightscene",
+        "subscene": "Cast_final_Select",
+        "sceneDurationMs": 400,
+        "clockWords": [
+          1994,
+          191,
+          1803,
+          976143360,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x185321f8bc0",
+            "handle": 67225,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x18522422690",
+            "handle": 1,
+            "reciprocal": true
+          }
+        ]
+      }
+    }
+  ],
+  "groundState": 0,
+  "passed": true,
+  "complete": false,
+  "scope": "Native source provenance. Independent state/scene probes are sequential, not atomic. Reader must keep reciprocal ownership, equipment rereads, exact ground state and400ms bound. No peer proof in this observation."
+}

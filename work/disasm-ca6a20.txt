@@ -1,0 +1,49 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140CA6A20: movaps      xmm1,xmmword ptr [rdx]
+  0000000140CA6A23: movaps      xmm0,xmm1
+  0000000140CA6A26: unpckhps    xmm0,xmmword ptr [rcx]
+  0000000140CA6A29: shufps      xmm1,xmm0,0C4h
+  0000000140CA6A2D: movaps      xmmword ptr [rcx],xmm1
+  0000000140CA6A30: movaps      xmm2,xmmword ptr [rdx+10h]
+  0000000140CA6A34: movaps      xmm1,xmmword ptr [rdx+20h]
+  0000000140CA6A38: movaps      xmm0,xmm2
+  0000000140CA6A3B: unpckhps    xmm0,xmmword ptr [rcx+10h]
+  0000000140CA6A3F: shufps      xmm2,xmm0,0C4h
+  0000000140CA6A43: movaps      xmm0,xmm1
+  0000000140CA6A46: unpckhps    xmm0,xmmword ptr [rcx+20h]
+  0000000140CA6A4A: movaps      xmmword ptr [rcx+10h],xmm2
+  0000000140CA6A4E: movaps      xmm2,xmmword ptr [rdx+30h]
+  0000000140CA6A52: shufps      xmm1,xmm0,0C4h
+  0000000140CA6A56: movaps      xmm0,xmm2
+  0000000140CA6A59: movaps      xmmword ptr [rcx+20h],xmm1
+  0000000140CA6A5D: unpckhps    xmm0,xmmword ptr [rcx+30h]
+  0000000140CA6A61: shufps      xmm2,xmm0,0C4h
+  0000000140CA6A65: movaps      xmmword ptr [rcx+30h],xmm2
+  0000000140CA6A69: ret
+  0000000140CA6A6A: int         3
+  0000000140CA6A6B: int         3
+  0000000140CA6A6C: int         3
+  0000000140CA6A6D: int         3
+  0000000140CA6A6E: int         3
+  0000000140CA6A6F: int         3
+  0000000140CA6A70: movaps      xmm2,xmmword ptr [rdx]
+  0000000140CA6A73: movaps      xmm1,xmm2
+  0000000140CA6A76: movss       dword ptr [rcx+0Ch],xmm2
+  0000000140CA6A7B: shufps      xmm1,xmm2,55h
+  0000000140CA6A7F: movss       xmm2,dword ptr [rdx+8]
+  0000000140CA6A84: movss       dword ptr [rcx+1Ch],xmm1
+  0000000140CA6A89: movss       dword ptr [rcx+2Ch],xmm2
+  0000000140CA6A8E: ret
+  0000000140CA6A8F: int         3
+  0000000140CA6A90: int         3
+
+  Summary
+
+     1A7D000 .text

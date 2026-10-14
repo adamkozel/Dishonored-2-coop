@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-12T09:21:24.849347+02:00",
+  "nativeSource": [
+    {
+      "take": "domino-holstered-standing-observe-v253",
+      "passed": true,
+      "failure": null,
+      "stance": "standing",
+      "castingHolstered": 4,
+      "castingDrawn": 0,
+      "phases": [
+        {
+          "name": "Cast_In",
+          "samples": 8,
+          "duration": [
+            266
+          ]
+        },
+        {
+          "name": "Cast_Loop",
+          "samples": 33,
+          "duration": [
+            1333
+          ]
+        },
+        {
+          "name": "Cast_Select",
+          "samples": 14,
+          "duration": [
+            400
+          ]
+        },
+        {
+          "name": "Cast_Select_out",
+          "samples": 9,
+          "duration": [
+            266
+          ]
+        }
+      ]
+    },
+    {
+      "take": "domino-holstered-crouched-observe-v253",
+      "passed": false,
+      "failure": "Inventory quantities differ",
+      "stance": "crouched",
+      "castingHolstered": 4,
+      "castingDrawn": 0,
+      "phases": [
+        {
+          "name": "Cast_In",
+          "samples": 8,
+          "duration": [
+            266
+          ]
+        },
+        {
+          "name": "Cast_Loop",
+          "samples": 35,
+          "duration": [
+            1333
+          ]
+        },
+        {
+          "name": "Cast_Select",
+          "samples": 13,
+          "duration": [
+            400
+          ]
+        },
+        {
+          "name": "Cast_Select_out",
+          "samples": 9,
+          "duration": [
+            266
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "result": {
+        "passed": false,
+        "failure": "Native transport/presentation retired: native_state_stale",
+        "source": "client",
+        "stance": "standing",
+        "holstered": true,
+        "move": 0,
+        "checks": [
+          "Exact native Emily Domino item acquired and selected without directly invoking power or VFX",
+          "Native Steam transport and exact bank48/301 remote Emily standing armed context ready",
+          "Native controller stance and holster inputs establish the same complete-body remote context before casting",
+          "Both isolated checkpoints restore clean health/inventory and retire native Domino effects",
+          "All fourteen protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.798,
+            "input": "Native standing LT1800 with LeftY=0; holstered=True"
+          }
+        ],
+        "dll": "726A819E5EFC61CC5C8858940ECA41AC1B82B5AD6EC79A66747DB227E9B10E83",
+        "probe": "F3AB49AE6D1400E5236A1F4D46C69A141E1E707094ABFECCD9975C258E4AF6D2",
+        "bankSha256": "579206202F65A1C2349F15F3CC32337B79EF171ED100C804DD6C363842BF3277",
+        "scope": "Native source Domino acquisition and native controller casting drives observed Emily complete-body stance/equipment phases then standing recovery through native Steam, with source scene timing and preserved sword grip/attachment. One native scene incarnation changes subscenes. Explicit stance/holstered/move parameters define this take. It permits native target selection and records its effects. Holstered final selection is still unobserved and refused. Earlier scoped mark/beam presentation proofs remain separate; NPC AI and shared outcomes are unfinished. No claim of complete Domino support or visual acceptance. Mandatory isolated checkpoint reload retires world effects; original assets and saves unchanged."
+      },
+      "summary": {
+        "take": "domino-context-standing-holstered-v258",
+        "passed": false,
+        "failure": "Native transport/presentation retired: native_state_stale",
+        "stance": "standing",
+        "holstered": true,
+        "move": 0,
+        "rows": 18,
+        "minimumRootWeight": 0.0,
+        "clockRejections": [
+          0
+        ],
+        "complete": false,
+        "visualAccepted": false
+      }
+    }
+  ],
+  "complete": false
+}

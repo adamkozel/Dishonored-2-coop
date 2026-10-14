@@ -1,0 +1,37 @@
+
+void FUN_1406ba310(longlong *param_1,int param_2)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  undefined1 auStack_98 [36];
+  undefined4 uStack_74;
+  undefined4 uStack_70;
+  undefined4 uStack_6c;
+  undefined4 uStack_68;
+  undefined4 uStack_64;
+  undefined4 uStack_60;
+  undefined4 uStack_48;
+  
+  (**(code **)(*param_1 + 0x80))(param_1,1);
+  lVar1 = *(longlong *)(param_1[3] + 0x138);
+  FUN_1406a79e0(param_1[3],
+                ((longlong)param_1 - *(longlong *)(lVar1 + 0x1a8)) /
+                (longlong)*(int *)(lVar1 + 0x1b0),param_2 == 3);
+  lVar2 = FUN_1408a8ba0(D2_GameSingletonPtr);
+  D2_DamageParams_Construct(auStack_98,DAT_14231f330);
+  lVar1 = param_1[2];
+  uStack_70 = *(undefined4 *)(lVar1 + 0x304);
+  uStack_6c = *(undefined4 *)(lVar1 + 0x308);
+  uStack_74 = *(undefined4 *)(lVar1 + 0x300);
+  uStack_68 = *(undefined4 *)(lVar2 + 0x30c);
+  uStack_64 = *(undefined4 *)(lVar2 + 0x310);
+  uStack_60 = *(undefined4 *)(lVar2 + 0x314);
+  uStack_48 = *(undefined4 *)(lVar2 + 0xa8);
+  if ((param_2 == 1) || (param_2 == 2)) {
+    FUN_1406b8b70(param_1,auStack_98,param_2);
+  }
+  return;
+}
+
+

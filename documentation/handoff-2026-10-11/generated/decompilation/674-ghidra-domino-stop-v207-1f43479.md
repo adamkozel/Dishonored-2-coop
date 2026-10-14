@@ -1,0 +1,331 @@
+# ghidra-domino-stop-v207.json
+
+Original: [work/ghidra-domino-stop-v207.json](<../../../../work/ghidra-domino-stop-v207.json>)
+
+SHA-256: `DD34B2A39F91963E9BCE9E4870A5D0EC8B1966ED53A91306C27E07D5CC8A5E98`; 14978 bytes.
+
+## Original saved record
+
+````json
+{
+  "program": "Dishonored2.exe",
+  "addresses": [
+    "1401a31f0",
+    "1401a3250"
+  ],
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1401a31f0(longlong param_1,undefined4 param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1401a04a0();\r\n  if (lVar1 != 0) {\r\n    FUN_140223c20(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);\r\n    FUN_1401a1880(param_1,lVar1);\r\n  }\r\n  FUN_1401a1990(param_1,param_2);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1401a31f0(longlong param_1,undefined4 param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1401a04a0();\r\n  if (lVar1 != 0) {\r\n    FUN_140223c20(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);\r\n    FUN_1401a1880(param_1,lVar1);\r\n  }\r\n  FUN_1401a1990(param_1,param_2);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1401a3250(longlong param_1,undefined4 param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1401a04a0();\r\n  if (lVar1 != 0) {\r\n    FUN_140223dd0(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);\r\n    FUN_1401a1880(param_1,lVar1);\r\n  }\r\n  FUN_1401a1990(param_1,param_2);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1401a3250(longlong param_1,undefined4 param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1401a04a0();\r\n  if (lVar1 != 0) {\r\n    FUN_140223dd0(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);\r\n    FUN_1401a1880(param_1,lVar1);\r\n  }\r\n  FUN_1401a1990(param_1,param_2);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "internals": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140223c20(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)\r\n\r\n{\r\n  FUN_140220ca0(*param_1,param_4,param_2,param_3);\r\n  FUN_140220c00(param_1[1],param_4 + 0x36828,param_2,param_3);\r\n  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);\r\n  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);\r\n  FUN_1402207a0(param_1[4],param_4 + 0x64da0,param_2,param_3);\r\n  FUN_140220e80(param_1[5],param_4 + 0x727c8,param_2,param_3);\r\n  FUN_140220a20(param_1[6],param_4 + 0x72c70,param_2,param_3);\r\n  FUN_140220980(param_1[7],param_4 + 0x730b8,param_2,param_3);\r\n  FUN_140220b60(param_1[8],param_4 + 0x8a960,param_2,param_3);\r\n  FUN_140220840(param_1[9],param_4 + 0x8b2c8,param_2,param_3);\r\n  FUN_140220de0(param_1[10],param_4 + 0x8c970,param_2,param_3);\r\n  FUN_140220700(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);\r\n  FUN_140220d40(param_1[0xc],param_4 + 0x8f440,param_2,param_3);\r\n  FUN_1402208e0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);\r\n  FUN_1402208e0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);\r\n  FUN_140220ac0(param_1[0xf],param_4 + 0x93af8,param_2,param_3);\r\n  FUN_140220fc0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140223c20(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)\r\n\r\n{\r\n  FUN_140220ca0(*param_1,param_4,param_2,param_3);\r\n  FUN_140220c00(param_1[1],param_4 + 0x36828,param_2,param_3);\r\n  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);\r\n  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);\r\n  FUN_1402207a0(param_1[4],param_4 + 0x64da0,param_2,param_3);\r\n  FUN_140220e80(param_1[5],param_4 + 0x727c8,param_2,param_3);\r\n  FUN_140220a20(param_1[6],param_4 + 0x72c70,param_2,param_3);\r\n  FUN_140220980(param_1[7],param_4 + 0x730b8,param_2,param_3);\r\n  FUN_140220b60(param_1[8],param_4 + 0x8a960,param_2,param_3);\r\n  FUN_140220840(param_1[9],param_4 + 0x8b2c8,param_2,param_3);\r\n  FUN_140220de0(param_1[10],param_4 + 0x8c970,param_2,param_3);\r\n  FUN_140220700(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);\r\n  FUN_140220d40(param_1[0xc],param_4 + 0x8f440,param_2,param_3);\r\n  FUN_1402208e0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);\r\n  FUN_1402208e0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);\r\n  FUN_140220ac0(param_1[0xf],param_4 + 0x93af8,param_2,param_3);\r\n  FUN_140220fc0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140223dd0(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)\r\n\r\n{\r\n  FUN_140221690(*param_1,param_4,param_2,param_3);\r\n  FUN_1402215e0(param_1[1],param_4 + 0x36828,param_2,param_3);\r\n  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);\r\n  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);\r\n  FUN_140221110(param_1[4],param_4 + 0x64da0,param_2,param_3);\r\n  FUN_1402213d0(param_1[6],param_4 + 0x72c70,param_2,param_3);\r\n  FUN_140221320(param_1[7],param_4 + 0x730b8,param_2,param_3);\r\n  FUN_140221530(param_1[8],param_4 + 0x8a960,param_2,param_3);\r\n  FUN_140221270(param_1[9],param_4 + 0x8b2c8,param_2,param_3);\r\n  FUN_1402217f0(param_1[10],param_4 + 0x8c970,param_2,param_3);\r\n  FUN_140221060(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);\r\n  FUN_140221740(param_1[0xc],param_4 + 0x8f440,param_2,param_3);\r\n  FUN_1402211c0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);\r\n  FUN_1402211c0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);\r\n  FUN_140221480(param_1[0xf],param_4 + 0x93af8,param_2,param_3);\r\n  FUN_1402218a0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140223dd0(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)\r\n\r\n{\r\n  FUN_140221690(*param_1,param_4,param_2,param_3);\r\n  FUN_1402215e0(param_1[1],param_4 + 0x36828,param_2,param_3);\r\n  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);\r\n  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);\r\n  FUN_140221110(param_1[4],param_4 + 0x64da0,param_2,param_3);\r\n  FUN_1402213d0(param_1[6],param_4 + 0x72c70,param_2,param_3);\r\n  FUN_140221320(param_1[7],param_4 + 0x730b8,param_2,param_3);\r\n  FUN_140221530(param_1[8],param_4 + 0x8a960,param_2,param_3);\r\n  FUN_140221270(param_1[9],param_4 + 0x8b2c8,param_2,param_3);\r\n  FUN_1402217f0(param_1[10],param_4 + 0x8c970,param_2,param_3);\r\n  FUN_140221060(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);\r\n  FUN_140221740(param_1[0xc],param_4 + 0x8f440,param_2,param_3);\r\n  FUN_1402211c0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);\r\n  FUN_1402211c0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);\r\n  FUN_140221480(param_1[0xf],param_4 + 0x93af8,param_2,param_3);\r\n  FUN_1402218a0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1401a1880(longlong param_1,longlong param_2)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  int iVar2;\r\n  uint uVar3;\r\n  ulonglong uVar4;\r\n  uint uVar5;\r\n  longlong lVar6;\r\n  longlong *plVar7;\r\n  \r\n  iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);\r\n  while (iVar2 == 1) {\r\n    iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);\r\n  }\r\n  uVar5 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;\r\n  lVar6 = (longlong)(int)uVar5;\r\n  if (-1 < (int)uVar5) {\r\n    plVar7 = (longlong *)(*(longlong *)(param_1 + 0xeef50) + lVar6 * 0x18);\r\n    do {\r\n      if (*plVar7 == param_2) {\r\n        if ((-1 < (int)uVar5) &&\r\n           (uVar3 = *(uint *)(param_1 + 0xeef58), (int)uVar5 < (int)(uVar3 & 0xffffff))) {\r\n          uVar3 = (uVar3 - 1 ^ uVar3) & 0xffffff ^ uVar3;\r\n          *(uint *)(param_1 + 0xeef58) = uVar3;\r\n          if (uVar5 != (uVar3 & 0xffffff)) {\r\n            lVar6 = *(longlong *)(param_1 + 0xeef50);\r\n            uVar4 = (ulonglong)(uVar3 & 0xffffff);\r\n            puVar1 = (undefined8 *)(lVar6 + (longlong)(int)uVar5 * 0x18);\r\n            *puVar1 = *(undefined8 *)(lVar6 + uVar4 * 0x18);\r\n            puVar1[1] = *(undefined8 *)(lVar6 + 8 + uVar4 * 0x18);\r\n            puVar1[2] = *(undefined8 *)(lVar6 + 0x10 + uVar4 * 0x18);\r\n          }\r\n        }\r\n        break;\r\n      }\r\n      uVar5 = uVar5 - 1;\r\n      plVar7 = plVar7 + -3;\r\n      lVar6 = lVar6 + -1;\r\n    } while (-1 < lVar6);\r\n  }\r\n  FUN_1401581e0(param_1 + 0xeef4c,0);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1401a1880(longlong param_1,longlong param_2)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  int iVar2;\r\n  uint uVar3;\r\n  ulonglong uVar4;\r\n  uint uVar5;\r\n  longlong lVar6;\r\n  longlong *plVar7;\r\n  \r\n  iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);\r\n  while (iVar2 == 1) {\r\n    iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);\r\n  }\r\n  uVar5 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;\r\n  lVar6 = (longlong)(int)uVar5;\r\n  if (-1 < (int)uVar5) {\r\n    plVar7 = (longlong *)(*(longlong *)(param_1 + 0xeef50) + lVar6 * 0x18);\r\n    do {\r\n      if (*plVar7 == param_2) {\r\n        if ((-1 < (int)uVar5) &&\r\n           (uVar3 = *(uint *)(param_1 + 0xeef58), (int)uVar5 < (int)(uVar3 & 0xffffff))) {\r\n          uVar3 = (uVar3 - 1 ^ uVar3) & 0xffffff ^ uVar3;\r\n          *(uint *)(param_1 + 0xeef58) = uVar3;\r\n          if (uVar5 != (uVar3 & 0xffffff)) {\r\n            lVar6 = *(longlong *)(param_1 + 0xeef50);\r\n            uVar4 = (ulonglong)(uVar3 & 0xffffff);\r\n            puVar1 = (undefined8 *)(lVar6 + (longlong)(int)uVar5 * 0x18);\r\n            *puVar1 = *(undefined8 *)(lVar6 + uVar4 * 0x18);\r\n            puVar1[1] = *(undefined8 *)(lVar6 + 8 + uVar4 * 0x18);\r\n            puVar1[2] = *(undefined8 *)(lVar6 + 0x10 + uVar4 * 0x18);\r\n          }\r\n        }\r\n        break;\r\n      }\r\n      uVar5 = uVar5 - 1;\r\n      plVar7 = plVar7 + -3;\r\n      lVar6 = lVar6 + -1;\r\n    } while (-1 < lVar6);\r\n  }\r\n  FUN_1401581e0(param_1 + 0xeef4c,0);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1401a1990(longlong param_1,int param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 *puVar2;\r\n  int iVar3;\r\n  uint uVar4;\r\n  int *piVar5;\r\n  ulonglong uVar6;\r\n  longlong lVar7;\r\n  uint uVar8;\r\n  longlong lVar9;\r\n  undefined1 local_res8 [8];\r\n  int local_res10;\r\n  longlong local_res18;\r\n  undefined8 uVar10;\r\n  \r\n  uVar10 = 0xfffffffffffffffe;\r\n  lVar1 = param_1 + 0xeef4c;\r\n  local_res10 = param_2;\r\n  local_res18 = lVar1;\r\n  iVar3 = FUN_1401581c0(lVar1,0,1,param_4,0xfffffffffffffffe);\r\n  while (iVar3 == 1) {\r\n    iVar3 = FUN_1401581c0(lVar1,0,1,param_4,uVar10);\r\n  }\r\n  uVar8 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;\r\n  lVar7 = (longlong)(int)uVar8;\r\n  if (-1 < (int)uVar8) {\r\n    lVar9 = lVar7 * 0x18;\r\n    do {\r\n      piVar5 = (int *)FUN_140167a00(*(undefined8 *)(lVar9 + *(longlong *)(param_1 + 0xeef50)),\r\n                                    local_res8);\r\n      if (*piVar5 == local_res10) {\r\n        if ((-1 < (int)uVar8) &&\r\n           (uVar4 = *(uint *)(param_1 + 0xeef58), (int)uVar8 < (int)(uVar4 & 0xffffff))) {\r\n          uVar4 = (uVar4 - 1 ^ uVar4) & 0xffffff ^ uVar4;\r\n          *(uint *)(param_1 + 0xeef58) = uVar4;\r\n          if (uVar8 != (uVar4 & 0xffffff)) {\r\n            lVar7 = *(longlong *)(param_1 + 0xeef50);\r\n            uVar6 = (ulonglong)(uVar4 & 0xffffff);\r\n            puVar2 = (undefined8 *)(lVar7 + (longlong)(int)uVar8 * 0x18);\r\n            *puVar2 = *(undefined8 *)(lVar7 + uVar6 * 0x18);\r\n            puVar2[1] = *(undefined8 *)(lVar7 + 8 + uVar6 * 0x18);\r\n            puVar2[2] = *(undefined8 *)(lVar7 + 0x10 + uVar6 * 0x18);\r\n          }\r\n        }\r\n        break;\r\n      }\r\n      uVar8 = uVar8 - 1;\r\n      lVar9 = lVar9 + -0x18;\r\n      lVar7 = lVar7 + -1;\r\n    } while (-1 < lVar7);\r\n  }\r\n  FUN_1401581e0(lVar1,0);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1401a1990(longlong param_1,int param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 *puVar2;\r\n  int iVar3;\r\n  uint uVar4;\r\n  int *piVar5;\r\n  ulonglong uVar6;\r\n  longlong lVar7;\r\n  uint uVar8;\r\n  longlong lVar9;\r\n  undefined1 local_res8 [8];\r\n  int local_res10;\r\n  longlong local_res18;\r\n  undefined8 uVar10;\r\n  \r\n  uVar10 = 0xfffffffffffffffe;\r\n  lVar1 = param_1 + 0xeef4c;\r\n  local_res10 = param_2;\r\n  local_res18 = lVar1;\r\n  iVar3 = FUN_1401581c0(lVar1,0,1,param_4,0xfffffffffffffffe);\r\n  while (iVar3 == 1) {\r\n    iVar3 = FUN_1401581c0(lVar1,0,1,param_4,uVar10);\r\n  }\r\n  uVar8 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;\r\n  lVar7 = (longlong)(int)uVar8;\r\n  if (-1 < (int)uVar8) {\r\n    lVar9 = lVar7 * 0x18;\r\n    do {\r\n      piVar5 = (int *)FUN_140167a00(*(undefined8 *)(lVar9 + *(longlong *)(param_1 + 0xeef50)),\r\n                                    local_res8);\r\n      if (*piVar5 == local_res10) {\r\n        if ((-1 < (int)uVar8) &&\r\n           (uVar4 = *(uint *)(param_1 + 0xeef58), (int)uVar8 < (int)(uVar4 & 0xffffff))) {\r\n          uVar4 = (uVar4 - 1 ^ uVar4) & 0xffffff ^ uVar4;\r\n          *(uint *)(param_1 + 0xeef58) = uVar4;\r\n          if (uVar8 != (uVar4 & 0xffffff)) {\r\n            lVar7 = *(longlong *)(param_1 + 0xeef50);\r\n            uVar6 = (ulonglong)(uVar4 & 0xffffff);\r\n            puVar2 = (undefined8 *)(lVar7 + (longlong)(int)uVar8 * 0x18);\r\n            *puVar2 = *(undefined8 *)(lVar7 + uVar6 * 0x18);\r\n            puVar2[1] = *(undefined8 *)(lVar7 + 8 + uVar6 * 0x18);\r\n            puVar2[2] = *(undefined8 *)(lVar7 + 0x10 + uVar6 * 0x18);\r\n          }\r\n        }\r\n        break;\r\n      }\r\n      uVar8 = uVar8 - 1;\r\n      lVar9 = lVar9 + -0x18;\r\n      lVar7 = lVar7 + -1;\r\n    } while (-1 < lVar7);\r\n  }\r\n  FUN_1401581e0(lVar1,0);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ]
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+void FUN_1401a31f0(longlong param_1,undefined4 param_2)
+
+{
+  longlong lVar1;
+  
+  lVar1 = FUN_1401a04a0();
+  if (lVar1 != 0) {
+    FUN_140223c20(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);
+    FUN_1401a1880(param_1,lVar1);
+  }
+  FUN_1401a1990(param_1,param_2);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_1401a3250(longlong param_1,undefined4 param_2)
+
+{
+  longlong lVar1;
+  
+  lVar1 = FUN_1401a04a0();
+  if (lVar1 != 0) {
+    FUN_140223dd0(lVar1 + 0x10,*(undefined4 *)(lVar1 + 0x34),param_1 + 0xeedf0,param_1 + 0x50828);
+    FUN_1401a1880(param_1,lVar1);
+  }
+  FUN_1401a1990(param_1,param_2);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_140223c20(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)
+
+{
+  FUN_140220ca0(*param_1,param_4,param_2,param_3);
+  FUN_140220c00(param_1[1],param_4 + 0x36828,param_2,param_3);
+  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);
+  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);
+  FUN_1402207a0(param_1[4],param_4 + 0x64da0,param_2,param_3);
+  FUN_140220e80(param_1[5],param_4 + 0x727c8,param_2,param_3);
+  FUN_140220a20(param_1[6],param_4 + 0x72c70,param_2,param_3);
+  FUN_140220980(param_1[7],param_4 + 0x730b8,param_2,param_3);
+  FUN_140220b60(param_1[8],param_4 + 0x8a960,param_2,param_3);
+  FUN_140220840(param_1[9],param_4 + 0x8b2c8,param_2,param_3);
+  FUN_140220de0(param_1[10],param_4 + 0x8c970,param_2,param_3);
+  FUN_140220700(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);
+  FUN_140220d40(param_1[0xc],param_4 + 0x8f440,param_2,param_3);
+  FUN_1402208e0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);
+  FUN_1402208e0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);
+  FUN_140220ac0(param_1[0xf],param_4 + 0x93af8,param_2,param_3);
+  FUN_140220fc0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_140223dd0(undefined2 *param_1,undefined4 param_2,undefined8 param_3,longlong param_4)
+
+{
+  FUN_140221690(*param_1,param_4,param_2,param_3);
+  FUN_1402215e0(param_1[1],param_4 + 0x36828,param_2,param_3);
+  FUN_140220f20(param_1[2],param_4 + 0x42550,param_2,param_3);
+  FUN_140220f20(param_1[3],param_4 + 0x53978,param_2,param_3);
+  FUN_140221110(param_1[4],param_4 + 0x64da0,param_2,param_3);
+  FUN_1402213d0(param_1[6],param_4 + 0x72c70,param_2,param_3);
+  FUN_140221320(param_1[7],param_4 + 0x730b8,param_2,param_3);
+  FUN_140221530(param_1[8],param_4 + 0x8a960,param_2,param_3);
+  FUN_140221270(param_1[9],param_4 + 0x8b2c8,param_2,param_3);
+  FUN_1402217f0(param_1[10],param_4 + 0x8c970,param_2,param_3);
+  FUN_140221060(param_1[0xb],param_4 + 0x8d9d8,param_2,param_3);
+  FUN_140221740(param_1[0xc],param_4 + 0x8f440,param_2,param_3);
+  FUN_1402211c0(param_1[0xd],param_4 + 0x906a8,param_2,param_3);
+  FUN_1402211c0(param_1[0xe],param_4 + 0x920d0,param_2,param_3);
+  FUN_140221480(param_1[0xf],param_4 + 0x93af8,param_2,param_3);
+  FUN_1402218a0(param_1[0x10],param_4 + 0x941a0,param_2,param_3);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_1401a1880(longlong param_1,longlong param_2)
+
+{
+  undefined8 *puVar1;
+  int iVar2;
+  uint uVar3;
+  ulonglong uVar4;
+  uint uVar5;
+  longlong lVar6;
+  longlong *plVar7;
+  
+  iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);
+  while (iVar2 == 1) {
+    iVar2 = FUN_1401581c0(param_1 + 0xeef4c,0,1);
+  }
+  uVar5 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;
+  lVar6 = (longlong)(int)uVar5;
+  if (-1 < (int)uVar5) {
+    plVar7 = (longlong *)(*(longlong *)(param_1 + 0xeef50) + lVar6 * 0x18);
+    do {
+      if (*plVar7 == param_2) {
+        if ((-1 < (int)uVar5) &&
+           (uVar3 = *(uint *)(param_1 + 0xeef58), (int)uVar5 < (int)(uVar3 & 0xffffff))) {
+          uVar3 = (uVar3 - 1 ^ uVar3) & 0xffffff ^ uVar3;
+          *(uint *)(param_1 + 0xeef58) = uVar3;
+          if (uVar5 != (uVar3 & 0xffffff)) {
+            lVar6 = *(longlong *)(param_1 + 0xeef50);
+            uVar4 = (ulonglong)(uVar3 & 0xffffff);
+            puVar1 = (undefined8 *)(lVar6 + (longlong)(int)uVar5 * 0x18);
+            *puVar1 = *(undefined8 *)(lVar6 + uVar4 * 0x18);
+            puVar1[1] = *(undefined8 *)(lVar6 + 8 + uVar4 * 0x18);
+            puVar1[2] = *(undefined8 *)(lVar6 + 0x10 + uVar4 * 0x18);
+          }
+        }
+        break;
+      }
+      uVar5 = uVar5 - 1;
+      plVar7 = plVar7 + -3;
+      lVar6 = lVar6 + -1;
+    } while (-1 < lVar6);
+  }
+  FUN_1401581e0(param_1 + 0xeef4c,0);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_1401a1990(longlong param_1,int param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  longlong lVar1;
+  undefined8 *puVar2;
+  int iVar3;
+  uint uVar4;
+  int *piVar5;
+  ulonglong uVar6;
+  longlong lVar7;
+  uint uVar8;
+  longlong lVar9;
+  undefined1 local_res8 [8];
+  int local_res10;
+  longlong local_res18;
+  undefined8 uVar10;
+  
+  uVar10 = 0xfffffffffffffffe;
+  lVar1 = param_1 + 0xeef4c;
+  local_res10 = param_2;
+  local_res18 = lVar1;
+  iVar3 = FUN_1401581c0(lVar1,0,1,param_4,0xfffffffffffffffe);
+  while (iVar3 == 1) {
+    iVar3 = FUN_1401581c0(lVar1,0,1,param_4,uVar10);
+  }
+  uVar8 = (*(uint *)(param_1 + 0xeef58) & 0xffffff) - 1;
+  lVar7 = (longlong)(int)uVar8;
+  if (-1 < (int)uVar8) {
+    lVar9 = lVar7 * 0x18;
+    do {
+      piVar5 = (int *)FUN_140167a00(*(undefined8 *)(lVar9 + *(longlong *)(param_1 + 0xeef50)),
+                                    local_res8);
+      if (*piVar5 == local_res10) {
+        if ((-1 < (int)uVar8) &&
+           (uVar4 = *(uint *)(param_1 + 0xeef58), (int)uVar8 < (int)(uVar4 & 0xffffff))) {
+          uVar4 = (uVar4 - 1 ^ uVar4) & 0xffffff ^ uVar4;
+          *(uint *)(param_1 + 0xeef58) = uVar4;
+          if (uVar8 != (uVar4 & 0xffffff)) {
+            lVar7 = *(longlong *)(param_1 + 0xeef50);
+            uVar6 = (ulonglong)(uVar4 & 0xffffff);
+            puVar2 = (undefined8 *)(lVar7 + (longlong)(int)uVar8 * 0x18);
+            *puVar2 = *(undefined8 *)(lVar7 + uVar6 * 0x18);
+            puVar2[1] = *(undefined8 *)(lVar7 + 8 + uVar6 * 0x18);
+            puVar2[2] = *(undefined8 *)(lVar7 + 0x10 + uVar6 * 0x18);
+          }
+        }
+        break;
+      }
+      uVar8 = uVar8 - 1;
+      lVar9 = lVar9 + -0x18;
+      lVar7 = lVar7 + -1;
+    } while (-1 < lVar7);
+  }
+  FUN_1401581e0(lVar1,0);
+  return;
+}
+
+
+````

@@ -1,0 +1,104 @@
+# carry-crouch-findings-v21.json
+
+Original: [work/natural-moveset/carry-crouch-findings-v21.json](<../../../../work/natural-moveset/carry-crouch-findings-v21.json>)
+
+SHA-256: `DD575DDBE367509D9D516FD258ECE199E8664719623F8297C5645037F2A70B87`; 3231 bytes.
+
+## Original saved record
+
+````json
+{
+  "build": "4BAC18132571484683021D82F72853E27C3AA53ABF58B85FF004DB18A5C1A060",
+  "source_cases": {
+    "corvo": {
+      "video": "native-pickup-crouched-corvo-v21b/native.mp4",
+      "evidence": "native-pickup-crouched-corvo-v21b/stream-validation.json",
+      "checks": 10,
+      "transitions": [
+        {
+          "ms": 1,
+          "ready": true,
+          "result": "ready",
+          "state": 0,
+          "carry": 0
+        },
+        {
+          "ms": 1856,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 1
+        },
+        {
+          "ms": 2877,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 2
+        }
+      ]
+    },
+    "emily": {
+      "video": "native-pickup-crouched-emily-v21/native.mp4",
+      "evidence": "native-pickup-crouched-emily-v21/stream-validation.json",
+      "checks": 10,
+      "transitions": [
+        {
+          "ms": 1,
+          "ready": true,
+          "result": "ready",
+          "state": 0,
+          "carry": 0
+        },
+        {
+          "ms": 1783,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 1
+        },
+        {
+          "ms": 2880,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 2
+        }
+      ]
+    }
+  },
+  "cancel_cases": {
+    "corvo": {
+      "video": "carry-snapshot-cancel-corvo-v21/native.mp4",
+      "evidence": "carry-snapshot-cancel-corvo-v21/snapshot-cancel-validation.json",
+      "checks": 13,
+      "cleanup_delay_ms": 279,
+      "visual_observations": "Corvo falls and settles without the v20 large upward launch; a small pose discontinuity remains.",
+      "visual_accepted": false
+    },
+    "emily": {
+      "video": "carry-snapshot-cancel-emily-v21/native.mp4",
+      "evidence": "carry-snapshot-cancel-emily-v21/snapshot-cancel-validation.json",
+      "checks": 13,
+      "cleanup_delay_ms": 293,
+      "visual_observations": "Emily still launches upward and sideways at 2.6-2.9 seconds. Mechanical cleanup passes but the visual handoff fails.",
+      "visual_accepted": false
+    }
+  },
+  "baseline_failure": "native-pickup-crouched-corvo-v20/stream-validation.json",
+  "visual_failure": "carry-snapshot-cancel-corvo-v20/visual-review.json",
+  "confirmed": [
+    "Exact crouched preparation has stance1 and Sneaking6/Carry45/Equip53 before a scene exists.",
+    "Matching stance/base-state recognition keeps both source and receiver streams ready; existing timeout and target identity checks remain.",
+    "During early cancellation, preserve the current snapshot weight until PhysicsSystem mode0 has applied, then remove scene and snapshot bindings.",
+    "Native ownership cleanup and health checks pass for both cancellation cases; Corvo settles, but Emily still launches upward."
+  ],
+  "incomplete": [
+    "Full-body carrier pickup acting and exact body/hand contact.",
+    "Automatic native pickup timing and general target authority.",
+    "Crouch contact polish, throw and remaining releases."
+  ],
+  "complete": false,
+  "visual_accepted": false
+}
+````

@@ -1,0 +1,144 @@
+D2 COMPLETE REMOTE MOVESET COVERAGE
+
+Broad functional coverage plus every alias in the 12 exported base/Corvo/Emily body, left/right arm and camera sets. Situational variants are retained in references; availability is not runtime coverage.
+
+105 functional work items; 1942 distinct source aliases.
+Reference availability, authored clips, runtime binding and visual acceptance are separate states.
+
+Existing 092E Corvo proof remains preserved; its forward/guard/recovery result is not full family coverage.
+
+LOCOMOTION
+  stand_idle: authored=not_started; runtime=not_verified; visual=not_verified
+  armed_idle: authored=two_native_rig_candidates; runtime=both_roles_flat_Dunwall_verified; visual=recorded_candidate_polish_remaining
+    D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset.
+  walk_8_directions: authored=two_native_rig_candidates; runtime=both_roles_flat_Dunwall_verified; visual=recorded_candidate_polish_remaining
+    D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset.
+  run_8_directions: authored=donors_generated_but_not_accepted_as_gait; runtime=not_verified; visual=not_verified
+    Both pretrained sample controllers clamp controls to their training distributions. Forward requests of 3 and 5 m/s produce about 2.1 m/s on Character, 1.95 m/s on NPC. Need suitable running/sprinting source motion or broader training; these are not accepted running/sprint clips.
+  sprint_forward_and_diagonals: authored=donors_generated_but_not_accepted_as_gait; runtime=not_verified; visual=not_verified
+    Both pretrained sample controllers clamp controls to their training distributions. Forward requests of 3 and 5 m/s produce about 2.1 m/s on Character, 1.95 m/s on NPC. Need suitable running/sprinting source motion or broader training; these are not accepted running/sprint clips.
+  start_stop_each_gait: authored=walking_blends_only; runtime=walking_only_both_roles; visual=needs_polish
+    Walking idle/cycle and adjacent-direction interpolation implemented. No dedicated authored start, brake, pivot or running transitions; turns and foot planting need refinement.
+  gait_speed_changes: authored=not_started; runtime=not_verified; visual=not_verified
+  turn_in_place_90_180: authored=root_feedback_donors_only; runtime=not_verified; visual=not_verified
+    Fixed generator control-root feedback. Four turn requests now end within 0.3 degrees of their requested heading. Not retargeted or played in D2; original open-loop turn donors are rejected.
+  moving_turns: authored=not_started; runtime=not_verified; visual=not_verified
+  reverse_and_direction_changes: authored=walking_blends_only; runtime=walking_only_both_roles; visual=needs_polish
+    Walking idle/cycle and adjacent-direction interpolation implemented. No dedicated authored start, brake, pivot or running transitions; turns and foot planting need refinement.
+  slopes_and_stairs: authored=not_started; runtime=not_verified; visual=not_verified
+
+STANCE
+  crouch_idle: authored=not_started; runtime=not_verified; visual=not_verified
+  crouch_8_directions: authored=not_started; runtime=not_verified; visual=not_verified
+  stand_to_crouch: authored=not_started; runtime=not_verified; visual=not_verified
+  crouch_to_stand: authored=not_started; runtime=not_verified; visual=not_verified
+  crouched_turns: authored=not_started; runtime=not_verified; visual=not_verified
+  crouch_stop_start: authored=not_started; runtime=not_verified; visual=not_verified
+  stand_lean_left_right: authored=not_started; runtime=not_verified; visual=not_verified
+  crouch_lean_left_right: authored=not_started; runtime=not_verified; visual=not_verified
+  ledge_peek: authored=not_started; runtime=not_verified; visual=not_verified
+  keyhole_enter_look_exit: authored=not_started; runtime=not_verified; visual=not_verified
+
+TRAVERSAL
+  standing_jump_takeoff: authored=not_started; runtime=existing_airborne_priority_verified; visual=not_verified
+    Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.
+  running_jump_takeoff: authored=not_started; runtime=not_verified; visual=not_verified
+  crouch_jump_transition: authored=not_started; runtime=not_verified; visual=not_verified
+  double_jump: authored=not_started; runtime=not_verified; visual=not_verified
+  rising_airborne: authored=not_started; runtime=existing_airborne_priority_verified; visual=not_verified
+    Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.
+  fall_loop: authored=not_started; runtime=existing_airborne_priority_verified; visual=not_verified
+    Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.
+  soft_landing: authored=not_started; runtime=not_verified; visual=not_verified
+  hard_landing: authored=not_started; runtime=not_verified; visual=not_verified
+  moving_landing: authored=not_started; runtime=not_verified; visual=not_verified
+  vault_low_obstacle: authored=not_started; runtime=not_verified; visual=not_verified
+  climb_high_ledge: authored=not_started; runtime=not_verified; visual=not_verified
+  ledge_hang_and_pull_up: authored=not_started; runtime=not_verified; visual=not_verified
+  window_enter_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  slide_enter_loop_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  slide_to_crouch_or_stand: authored=not_started; runtime=not_verified; visual=not_verified
+  ladder_up_down_entry_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  chain_rope_climb: authored=not_started; runtime=not_verified; visual=not_verified
+  swim_idle_directions: authored=not_started; runtime=not_verified; visual=not_verified
+  dive_surface_water_exit: authored=not_started; runtime=not_verified; visual=not_verified
+
+COMBAT
+  sword_draw_holster: authored=not_started; runtime=not_verified; visual=not_verified
+  sword_ready_idle: authored=two_native_rig_candidates; runtime=both_roles_flat_Dunwall_verified; visual=recorded_candidate_polish_remaining
+    D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset.
+  light_attack_variants: authored=not_started; runtime=existing_native_action_priority_verified; visual=not_verified
+    Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.
+  heavy_attack_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  moving_attack: authored=not_started; runtime=not_verified; visual=not_verified
+  crouched_attack: authored=not_started; runtime=existing_native_action_priority_verified; visual=not_verified
+    Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.
+  airborne_attack: authored=not_started; runtime=not_verified; visual=not_verified
+  block_enter_hold_exit: authored=not_started; runtime=existing_native_action_priority_verified; visual=not_verified
+    Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.
+  parry_directions: authored=not_started; runtime=not_verified; visual=not_verified
+  parry_recovery: authored=not_started; runtime=not_verified; visual=not_verified
+  counterattack: authored=not_started; runtime=not_verified; visual=not_verified
+  hit_reactions_directions: authored=not_started; runtime=not_verified; visual=not_verified
+  stagger_knockdown_recovery: authored=not_started; runtime=not_verified; visual=not_verified
+  kick_or_shove_if_present: authored=not_started; runtime=not_verified; visual=not_verified
+  death_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  ragdoll_handoff: authored=not_started; runtime=not_verified; visual=not_verified
+
+RANGED_AND_ITEMS
+  pistol_draw_aim_fire_reload_holster: authored=not_started; runtime=not_verified; visual=not_verified
+  crossbow_draw_aim_fire_reload_holster: authored=not_started; runtime=not_verified; visual=not_verified
+  bolt_or_ammo_switch: authored=not_started; runtime=not_verified; visual=not_verified
+  grenade_equip_aim_throw: authored=not_started; runtime=not_verified; visual=not_verified
+  mine_or_razor_place: authored=not_started; runtime=not_verified; visual=not_verified
+  heart_equip_use_holster: authored=not_started; runtime=not_verified; visual=not_verified
+  health_elixir: authored=not_started; runtime=not_verified; visual=not_verified
+  mana_elixir: authored=not_started; runtime=not_verified; visual=not_verified
+  item_switch_interruptions: authored=not_started; runtime=not_verified; visual=not_verified
+
+PAIRED_ACTIONS
+  lethal_takedown_front_back_sides: authored=not_started; runtime=not_verified; visual=not_verified
+  nonlethal_takedown_front_back_sides: authored=not_started; runtime=not_verified; visual=not_verified
+  crouched_takedown: authored=not_started; runtime=not_verified; visual=not_verified
+  aerial_drop_kill: authored=not_started; runtime=not_verified; visual=not_verified
+  aerial_nonlethal_takedown: authored=not_started; runtime=not_verified; visual=not_verified
+  sliding_takedown: authored=not_started; runtime=not_verified; visual=not_verified
+  wall_and_window_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  enemy_body_size_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  paired_victim_alignment: authored=not_started; runtime=not_verified; visual=not_verified
+  struggle_and_escape: authored=not_started; runtime=not_verified; visual=not_verified
+  carry_body_lift_idle_move_drop_throw: authored=not_started; runtime=not_verified; visual=not_verified
+
+POWERS
+  corvo_blink_aim_cancel_release_arrive: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_blink_pull_and_kick_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_dark_vision_cast_end: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_possession_enter_loop_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_bend_time_cast_end: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_windblast_cast: authored=not_started; runtime=not_verified; visual=not_verified
+  corvo_devouring_swarm_cast: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_far_reach_aim_cancel_release_arrive: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_far_reach_pull_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_dark_vision_cast_end: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_domino_mark_link_cancel: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_doppelganger_cast: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_mesmerize_cast: authored=not_started; runtime=not_verified; visual=not_verified
+  emily_shadow_walk_enter_move_attack_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  power_upgrade_variants: authored=not_started; runtime=not_verified; visual=not_verified
+  power_interruptions_and_no_mana: authored=not_started; runtime=not_verified; visual=not_verified
+
+INTERACTIONS
+  door_open_close_locked: authored=not_started; runtime=not_verified; visual=not_verified
+  lever_button_crank_wheel: authored=not_started; runtime=not_verified; visual=not_verified
+  pickup_loot_steal: authored=not_started; runtime=not_verified; visual=not_verified
+  key_use: authored=not_started; runtime=not_verified; visual=not_verified
+  read_object_or_note: authored=not_started; runtime=not_verified; visual=not_verified
+  eat_drink: authored=not_started; runtime=not_verified; visual=not_verified
+  carry_object_place_throw: authored=not_started; runtime=not_verified; visual=not_verified
+  shop_dialogue_gestures: authored=not_started; runtime=not_verified; visual=not_verified
+  sit_stand: authored=not_started; runtime=not_verified; visual=not_verified
+  scripted_scene_pose_handoff: authored=not_started; runtime=not_verified; visual=not_verified
+  cutscene_enter_exit: authored=not_started; runtime=not_verified; visual=not_verified
+  map_load_checkpoint_recovery: authored=not_started; runtime=not_verified; visual=not_verified
+  incapacitation_and_rescue_if_supported: authored=not_started; runtime=not_verified; visual=not_verified
+

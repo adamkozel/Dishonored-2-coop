@@ -1,0 +1,51 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407E7750: push        rbx
+  00000001407E7752: sub         rsp,20h
+  00000001407E7756: and         dword ptr [rcx+1Ch],0FFFFFFF3h
+  00000001407E775A: mov         eax,dword ptr [rcx+1Ch]
+  00000001407E775D: mov         rbx,rcx
+  00000001407E7760: bt          eax,1Ch
+  00000001407E7764: jb          00000001407E77D3
+  00000001407E7766: and         al,30h
+  00000001407E7768: cmp         al,20h
+  00000001407E776A: jae         00000001407E7780
+  00000001407E776C: mov         rax,qword ptr [rcx]
+  00000001407E776F: call        qword ptr [rax+0000000000000088h]
+  00000001407E7775: mov         rdx,rbx
+  00000001407E7778: mov         rcx,rax
+  00000001407E777B: call        000000014048FF60
+  00000001407E7780: mov         eax,dword ptr [rbx+1Ch]
+  00000001407E7783: shr         eax,4
+  00000001407E7786: and         eax,3
+  00000001407E7789: cmp         eax,1
+  00000001407E778C: jne         00000001407E77B1
+  00000001407E778E: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407E7795: mov         rdx,rbx
+  00000001407E7798: mov         rcx,qword ptr [rcx+00000000001E8960h]
+  00000001407E779F: call        00000001407EC3E0
+  00000001407E77A4: and         dword ptr [rbx+1Ch],0F800000Fh
+  00000001407E77AB: add         rsp,20h
+  00000001407E77AF: pop         rbx
+  00000001407E77B0: ret
+  00000001407E77B1: cmp         eax,3
+  00000001407E77B4: jne         00000001407E77CC
+  00000001407E77B6: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407E77BD: mov         rdx,rbx
+  00000001407E77C0: mov         rcx,qword ptr [rcx+00000000001E8960h]
+  00000001407E77C7: call        00000001407EC450
+  00000001407E77CC: and         dword ptr [rbx+1Ch],0F800000Fh
+  00000001407E77D3: add         rsp,20h
+  00000001407E77D7: pop         rbx
+  00000001407E77D8: ret
+  00000001407E77D9: int         3
+
+  Summary
+
+     1A7D000 .text

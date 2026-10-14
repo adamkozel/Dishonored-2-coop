@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "failure": "Direct native and remote airborne phase coverage or same-floor recovery missing",
+  "source": "client",
+  "stance": "standing",
+  "holstered": false,
+  "move": 0,
+  "airCase": "entry",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native Steam transport and exact bank46/285 remote Emily standing armed context ready",
+    "Native controller stance and sword selection drive the same remote stance/equipment context before the cast",
+    "Strict scene reader validates all three native phases with reciprocal owned Emily left arm",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.772,
+      "input": "Native air-entry case: A with LT held1800ms"
+    },
+    {
+      "videoTime": 6.877,
+      "input": "Standing recovery observation; no stance input"
+    }
+  ],
+  "dll": "9450A558099B8227A002FBB7F9A484678B86310118667E834C9528C5FB684C5B",
+  "probe": "964433461EBAE095F91E13479DE3AF2DA5C38B052DA778394D4AF024C376DCCA",
+  "bankSha256": "367CE7FFDB05CFCDEEE4FD4B45C99C8DF58AD60560C7CF3137ED8214E60FE182",
+  "scope": "Armed native Emily Mesmerize air entry or air release drives whole-body cast and air locomotion through Steam. The airCase field identifies the bounded in-place jump sequence. Explicit stance, holstered and move parameters identify this take. Native source power owns mana, targets and gameplay. Remote world/model/effects are cosmetic; positive NPC and repeatedly valid empty-target cases have distinct checks. Standing recovery, native sword selection, inventory/health, checkpoint cleanup and protected saves are verified separately from visual acceptance. Shared NPC authority and broader movement remain incomplete."
+}

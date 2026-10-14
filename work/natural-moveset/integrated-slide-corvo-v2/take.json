@@ -1,0 +1,100 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791652553078,
+  "captureStart": 1791652551955,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.126,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint",
+      "seconds": 2.668,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slide",
+      "seconds": 3.011,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Full-body recovery to crouch",
+      "seconds": 5.652,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand after slide",
+      "seconds": 7.167,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 10.638,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1000,
+      "LeftThumb",
+      0,
+      "Native sprint"
+    ],
+    [
+      1850,
+      0,
+      32767,
+      500,
+      "B",
+      0,
+      "Native slide"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Full-body recovery to crouch"
+    ],
+    [
+      6000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand after slide"
+    ],
+    [
+      9500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing recovery"
+    ]
+  ],
+  "dll": "0A68D333DB365AF68C6AEDE7731D8D4E0B4E3D51F957A0407E0998E7BFD4F37B",
+  "bank": "36BF91434E2F71D9046362E8962C4B5312A7B370B4FD0CFD2B2A84691AA1D579",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

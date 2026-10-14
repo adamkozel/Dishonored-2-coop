@@ -1,0 +1,34 @@
+
+/* [confirmed-runtime] RVA 0x8a78f0
+   Counterpart spawn uses existing declarations and native spawner registration.
+   Evidence: src/engine_bridge.cpp
+   Names are analyst-assigned semantic labels, not recovered official symbols. */
+
+longlong D2_Game_SpawnActor(longlong *param_1,longlong param_2,undefined8 param_3,undefined8 param_4
+                           )
+
+{
+  longlong lVar1;
+  undefined1 local_res10 [8];
+  
+  FUN_1408a2dc0(local_res10,param_1,1,param_4,0xfffffffffffffffe);
+  if (param_2 != 0) {
+    lVar1 = FUN_1405be480(param_2);
+    if ((*(byte *)(lVar1 + 0x98) & 0x20) == 0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830(&DAT_141c956d8,*(undefined8 *)(param_2 + 8));
+    }
+    lVar1 = FUN_1408a79b0(param_1,param_2);
+    if (lVar1 != 0) {
+      (**(code **)(*param_1 + 0x1b8))(param_1,lVar1,param_2,param_3);
+      FUN_140877570(lVar1);
+      goto LAB_1408a7984;
+    }
+  }
+  lVar1 = 0;
+LAB_1408a7984:
+  FUN_1408a2de0(local_res10);
+  return lVar1;
+}
+
+

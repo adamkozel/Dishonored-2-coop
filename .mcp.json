@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "d2-ghidra": {
+      "type": "stdio",
+      "command": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-mcp-6.0.0\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\analysis\\ghidra\\codex_bridge.py"
+      ],
+      "env": {
+        "GHIDRA_MCP_URL": "http://127.0.0.1:8089",
+        "MCP_TIMEOUT": "60000",
+        "MCP_TOOL_TIMEOUT": "180000"
+      }
+    },
+    "blender": {
+      "type": "stdio",
+      "command": "C:\\Users\\adako\\Documents\\Codex\\2026-08-21\\ho\\work\\blender_mcp_venv\\Scripts\\blender-mcp.exe",
+      "cwd": "C:\\Users\\adako\\Documents\\Codex\\2026-08-21\\ho\\work\\blender_mcp_official\\mcp",
+      "env": {
+        "BLENDER_PATH": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe"
+      }
+    },
+    "unreal-mcp": {
+      "type": "http",
+      "url": "http://127.0.0.1:8000/mcp"
+    }
+  }
+}

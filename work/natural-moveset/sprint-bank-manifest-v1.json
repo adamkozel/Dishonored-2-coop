@@ -1,0 +1,86 @@
+[
+  {
+    "role": "corvo",
+    "bank": "sprint-banks-v1\\corvo-sprint-bank.bin",
+    "sha256": "036889b341006bc6d14302a9622137e177f0895e226c2cb5f070bbc86c62d9f5",
+    "format": "D2MOVE04",
+    "joints": 215,
+    "clips": 29,
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "alias": "sprint_forward",
+        "source_binary": "dynamics-armed-v3\\sprint_forward-corvo.bin",
+        "sha256": "7398f8ecf7fe15cf422d6d57a40a7fd15bfe5ff3499a57eed2bb53b4f2e8bc11",
+        "stride_m": 3.3398357033729553,
+        "phase_offset": 0.9583333333333334,
+        "source_cycles": 2,
+        "source_period_frames": 36.43457130952315
+      },
+      {
+        "alias": "sprint_forward_left",
+        "source_binary": "dynamics-armed-v3\\sprint_forward_left-corvo.bin",
+        "sha256": "ad520198244b2f1622293fe95642e53a6fd549edfb7cefa1f0d695a2516204cb",
+        "stride_m": 3.3398357033729553,
+        "phase_offset": 0.9583333333333334,
+        "source_cycles": 2,
+        "source_period_frames": 36.43457130952315
+      },
+      {
+        "alias": "sprint_forward_right",
+        "source_binary": "dynamics-armed-v3\\sprint_forward_right-corvo.bin",
+        "sha256": "6439f113a5428c1450a545a98b56bd414aa6f009dd5a195594be303c817a2120",
+        "stride_m": 3.3398357033729553,
+        "phase_offset": 0.9583333333333334,
+        "source_cycles": 2,
+        "source_period_frames": 36.43457130952315
+      }
+    ],
+    "events": false,
+    "root_writes": false,
+    "visual_accepted": false,
+    "gameplay_verified": false
+  },
+  {
+    "role": "emily",
+    "bank": "sprint-banks-v1\\emily-sprint-bank.bin",
+    "sha256": "094a571f60c8d13297e3483c2a6633446da83c84323cca73dc001ca79154a83a",
+    "format": "D2MOVE04",
+    "joints": 219,
+    "clips": 29,
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "alias": "sprint_forward",
+        "source_binary": "dynamics-armed-v3\\sprint_forward-emily.bin",
+        "sha256": "9fbe768eed5da99c889df6d4decf38c7f6af433402b473c201a4dc437c645648",
+        "stride_m": 3.167884945869446,
+        "phase_offset": 0.95,
+        "source_cycles": 2,
+        "source_period_frames": 34.55874486403032
+      },
+      {
+        "alias": "sprint_forward_left",
+        "source_binary": "dynamics-armed-v3\\sprint_forward_left-emily.bin",
+        "sha256": "506c90ce5c4caf3b9970a3c9172f59997f61844a0d36b25ae7f3e15bfaafc062",
+        "stride_m": 3.167884945869446,
+        "phase_offset": 0.95,
+        "source_cycles": 2,
+        "source_period_frames": 34.55874486403032
+      },
+      {
+        "alias": "sprint_forward_right",
+        "source_binary": "dynamics-armed-v3\\sprint_forward_right-emily.bin",
+        "sha256": "c305fa451486c903b7324651d136c457f79ac7e530cea20f828526b99fd4b3c0",
+        "stride_m": 3.167884945869446,
+        "phase_offset": 0.95,
+        "source_cycles": 2,
+        "source_period_frames": 34.55874486403032
+      }
+    ],
+    "events": false,
+    "root_writes": false,
+    "visual_accepted": false,
+    "gameplay_verified": false
+  }
+]

@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-10T16:44:19.783256+02:00",
+  "complete": false,
+  "first_person_wrist_constraints": false,
+  "live_dll_changed": false,
+  "evidence": [
+    {
+      "report": "trap-surface-v1-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "carry-release-v3-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "ladder-top-entry-v1-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "body-lift-v2-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "body-throw-v1-roundtrip.json",
+      "passed": true
+    }
+  ],
+  "visual_inspection": {
+    "trap_wall": "Native stun-mine and spring-razor props reach and detach onto a neutral wall. Exact native phase/fire timing is retained. Fine finger/blade alignment and real gameplay placement remain pending. Emily D2 body-only footage confirms free torso/arm motion and recovery, with no trap spawned.",
+    "carry_release": "v3 corrects high-release shoulder reach and begins low-drop weight transfer earlier. Native targets freeze at the exact ragdoll boundaries; the caption explicitly identifies absent physical continuation.",
+    "ladder_top_entry": "v1 reverses the contacted top climb at a slower pace. Standing, bracing and transfer onto the ladder are visible. Direction-specific downward weight and fine rail/rung contact need refinement.",
+    "body_lift": "v2 uses complete-body lowering, two-hand gathering, leg drive, shoulder loading and stepping recovery. Corrected v1 knee folding and foot sliding. Head/target overlap during gathering, exact hand surface fit and weight transfer still need revision. No live NPC attachment, damage or physics.",
+    "body_throw": "v1 has loaded wind-up, stepping drive, hand release and armed recovery. Target follows a labelled illustrative arc and freezes at first floor contact. Stronger anticipation/follow-through, final target settling and actual native physics remain pending."
+  },
+  "rejected_or_superseded": [
+    {
+      "path": "body-lift-videos-v1",
+      "reason": "Collapsed knee direction, excessively low hip and sliding recovery; replaced for review by v2"
+    },
+    {
+      "path": "carry-release-videos-v2",
+      "reason": "High-release supporting arm out of reach by about 16cm; replaced by v3"
+    }
+  ],
+  "research": {
+    "elixirs": "Exact inventory definitions confirm health/mana quantities and native drink sounds. Sampled animation catalog contains NPC flask donor. No confirmed player potion animation or hand-held mana bottle yet; do not treat name matching as proof. Ghidra _quickPotion xref 1406745d4 is a binding/registration lead, not consumption implementation."
+  },
+  "remaining": [
+    "Authoring candidates still need visual revision and feedback.",
+    "Aerial/sliding contact and several paired-action body intersections are known issues.",
+    "Elixir grip/prop and actual native use behavior remain unverified.",
+    "No-mana reactions, arbitrary interruption, power upgrades, native Shadow Walk morphology and contextual body-size variants remain incomplete.",
+    "Native lifecycle/physics, item and world-action binding are separate uncompleted integration work."
+  ],
+  "retained_milestone": "milestone-CF60",
+  "review": "review.html",
+  "browser_retention": "Automatic approval review rejected marking unfinished browser tabs for retention; local artifacts retained instead.",
+  "corvo_calf_correction": {
+    "user_report": "Persistent chicken-leg deformation at the boot/trouser seam",
+    "cause": "Offline calf helpers followed the foot pivot",
+    "fix": "Shin-relative calf helper anchoring in all review renderers; original weights and animation bytes retained",
+    "validation": "boot-seam-v1/validation.json",
+    "rebuild": "boot-seam-v1/rebuild-audit.json",
+    "visual_comparison": "boot-seam-v1/comparison-grid.jpg",
+    "native_capture": "boot-seam-native-test-1/result.json",
+    "limits": "Native axial twist remains approximate; not full movement acceptance",
+    "finished": "2026-10-10T17:52:04.277226+02:00"
+  }
+}

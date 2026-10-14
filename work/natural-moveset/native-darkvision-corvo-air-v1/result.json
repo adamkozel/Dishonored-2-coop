@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "source": "host",
+  "airborneExperiment": true,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Dark Vision equipment acquired and selected only on source",
+    "Native jumping and controller casting observed; source vision manager activates and peer remains unchanged",
+    "Native cleanup restores inventory quantities and selection; vision manager inactive",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.854,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.432,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 8.766,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 2
+    }
+  ],
+  "dll": "E8E73BE946D2DC0C7E9801B04E70A6ED264FDE7A8E7FCBFF794B75FF22A1C99A",
+  "capture": "Actual native source POV and read-only state/scene observations",
+  "scope": "Native Dark Vision investigation only; remote body and world-visible effects are not certified. Runtime acquired entity and discovery metadata require isolated checkpoint reload for exact baseline restoration."
+}

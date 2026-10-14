@@ -1,0 +1,70 @@
+{
+  "passed": false,
+  "checks": {
+    "native_lift_observed": true,
+    "native_loaded_observed": true,
+    "right_trigger_sent": true,
+    "high_scene_observed": true,
+    "high_duration_666ms": true,
+    "drop46_correlated": false,
+    "carry_retired": true,
+    "health_preserved": true,
+    "capture_24hz": true
+  },
+  "role": "host",
+  "source": "Native first-person source observation only",
+  "highSamples": 8,
+  "highObservedMs": [
+    7124,
+    7726
+  ],
+  "highDurations": [
+    666
+  ],
+  "highSubscenes": [
+    "Scene_1"
+  ],
+  "nativeDropVariantsExplicitlyUnrecognized": true,
+  "actual_capture_hz": 27.785714285714285,
+  "video_sha256": "EBDF797F904DD17FE08AB857B28C29EB121445D62F0CF8004A6A59BC73831C9F",
+  "proxy_sha256": "891A60B35E162DEE695B7D9C0E7ED67EC5F1CE5C9A05DA4BCD932D4989BD7727",
+  "probe_sha256": "CDD8D1C8BA56516EACB688F307E78D0AD009EAE891D4B57A0C010C23C5D146AF",
+  "example": {
+    "pointer": "0x176d0fb80f0",
+    "listOffset": "0x0",
+    "id": 222,
+    "state": 3,
+    "playerChannel": -1,
+    "asset": "midnight/gameplay/player/base/carrycorpse/carry_corpse_drop_high.midnightscene",
+    "subscene": "Scene_1",
+    "sceneDurationMs": 666,
+    "clockWords": [
+      16,
+      16,
+      0,
+      976143168,
+      1065353216,
+      1065353216
+    ],
+    "bindingsResearch": [
+      {
+        "actor": "0x176987838f0",
+        "handle": 1,
+        "reciprocal": true
+      },
+      {
+        "actor": "0x176c555de10",
+        "handle": 133399,
+        "reciprocal": true
+      },
+      {
+        "actor": "0x176d8fa45b0",
+        "handle": 190449526,
+        "reciprocal": true
+      }
+    ]
+  },
+  "complete": false,
+  "remoteThrowImplemented": false,
+  "scope": "Normal X pickup followed by RT from standing carry on the known Mayhew fixture; source scene identity/timing correlation, not replicated throw physics or full native state phase validation."
+}

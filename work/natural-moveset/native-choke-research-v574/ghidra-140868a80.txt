@@ -1,0 +1,81 @@
+
+void FUN_140868a80(longlong param_1,float param_2,float param_3,float param_4,float *param_5)
+
+{
+  float fVar1;
+  longlong lVar2;
+  longlong lVar3;
+  float *pfVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  float fVar9;
+  float fVar10;
+  
+  lVar2 = *(longlong *)(*(longlong *)(param_1 + 0x10) + 0x2f8);
+  pfVar4 = (float *)(lVar2 + 0xc4);
+  lVar3 = FUN_140854880();
+  fVar6 = *(float *)(lVar2 + 200);
+  fVar7 = fVar6 * *(float *)(lVar3 + 0x318) * param_4;
+  fVar8 = fVar6 * *(float *)(lVar3 + 0x31c) * param_4;
+  fVar5 = fVar6 * *(float *)(lVar3 + 800) * param_4;
+  *param_5 = fVar7;
+  param_5[1] = fVar8;
+  param_5[2] = fVar5;
+  fVar6 = *pfVar4;
+  fVar10 = *(float *)(lVar3 + 0x30c);
+  fVar9 = *(float *)(lVar3 + 0x310);
+  fVar1 = param_3;
+  if (0.0 < fVar6) {
+    fVar1 = param_2;
+  }
+  param_5[2] = fVar6 * *(float *)(lVar3 + 0x314) * fVar1 + fVar5;
+  *param_5 = fVar6 * fVar10 * fVar1 + fVar7;
+  param_5[1] = fVar6 * fVar9 * fVar1 + fVar8;
+  fVar6 = *(float *)(lVar2 + 200);
+  fVar10 = *pfVar4;
+  fVar9 = SQRT(fVar10 * fVar10 + fVar6 * fVar6 + *(float *)(lVar2 + 0xcc) * *(float *)(lVar2 + 0xcc)
+              );
+  if (0.1 < fVar9) {
+    if (0.9 < fVar9) {
+      fVar9 = 1.0;
+    }
+    if (ABS(fVar10) < *(float *)(param_1 + 0x40) || ABS(fVar10) == *(float *)(param_1 + 0x40)) {
+      if (ABS(fVar6) < *(float *)(param_1 + 0x44) || ABS(fVar6) == *(float *)(param_1 + 0x44)) {
+        return;
+      }
+      FUN_1400b8670(param_5);
+      fVar9 = fVar9 * param_4;
+      fVar10 = fVar9 * param_5[2];
+      fVar6 = fVar9 * *param_5;
+      fVar9 = fVar9 * param_5[1];
+    }
+    else {
+      fVar6 = param_5[1] * param_5[1] + *param_5 * *param_5 + param_5[2] * param_5[2];
+      if (fVar6 <= 1.1754944e-38) {
+        fVar6 = 1.1754944e-38;
+      }
+      fVar7 = 1.0 / SQRT(fVar6);
+      fVar6 = param_5[2];
+      fVar1 = *param_5;
+      fVar5 = param_5[1];
+      param_5[2] = fVar7 * fVar6;
+      *param_5 = fVar7 * fVar1;
+      param_5[1] = fVar7 * fVar5;
+      if (0.0 < *pfVar4) {
+        param_3 = param_2;
+      }
+      fVar9 = fVar9 * param_3;
+      fVar10 = fVar9 * fVar7 * fVar6;
+      fVar6 = fVar9 * fVar7 * fVar1;
+      fVar9 = fVar9 * fVar7 * fVar5;
+    }
+    *param_5 = fVar6;
+    param_5[1] = fVar9;
+    param_5[2] = fVar10;
+  }
+  return;
+}
+
+

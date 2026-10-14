@@ -1,0 +1,59 @@
+# pickup-settle-findings-v25.json
+
+Original: [work/natural-moveset/pickup-settle-findings-v25.json](<../../../../work/natural-moveset/pickup-settle-findings-v25.json>)
+
+SHA-256: `C06DFDA66DA542E274F42AF9CA8A3753A3C440F05999ED80A3B1613BC676C127`; 2336 bytes.
+
+## Original saved record
+
+````json
+{
+  "build": "E42F7EECFDB0643EAD3CDC141ECBA462A3AEE29527BB90143EE914BFEF7E4890",
+  "bank_version": 34,
+  "cases": {
+    "native-paired-pickup-corvo-settle-v25": {
+      "video": "native-paired-pickup-corvo-settle-v25/native.mp4",
+      "evidence": "native-paired-pickup-corvo-settle-v25/validation.json",
+      "paired_evidence": "native-paired-pickup-corvo-settle-v25/paired-validation.json",
+      "visual_review": "native-paired-pickup-corvo-settle-v25/visual-review.json",
+      "checks": 34,
+      "bank_sha256": "CA5F15FC627DF5E04493F6E6B393E5FDE3BD60DFE18E40FF53F3B6B3DCA73147",
+      "video_sha256": "36020167E82FBB6E484FBD4EA2504B87378DC6AADB7C5FD0E6DB58E9BF99564E",
+      "role": "corvo",
+      "complete": false,
+      "visual_accepted": false
+    },
+    "native-paired-pickup-emily-settle-v25": {
+      "video": "native-paired-pickup-emily-settle-v25/native.mp4",
+      "evidence": "native-paired-pickup-emily-settle-v25/validation.json",
+      "paired_evidence": "native-paired-pickup-emily-settle-v25/paired-validation.json",
+      "visual_review": "native-paired-pickup-emily-settle-v25/visual-review.json",
+      "checks": 34,
+      "bank_sha256": "E73A7AB744CF6836CE74B600A3E754375BC0C17A4D24B5F3DA94B6E9ED712FF3",
+      "video_sha256": "9FE31159559887D876ECC3021C055A8AB6D5EC4D38162B33FC99332A98D77EF5",
+      "role": "emily",
+      "complete": false,
+      "visual_accepted": false
+    }
+  },
+  "tests": [
+    "carry-settle-v25-bank-tests.log",
+    "carry-settle-v25-bank-regression.log",
+    "carry-settle-v25-smoke.log",
+    "deploy-carry-settle-v25.log"
+  ],
+  "implementation": [
+    "Old bank versions keep their existing transitions.",
+    "v34 retains left support at the authored hoist endpoint, then blends once to the loaded pose over350ms.",
+    "The transition does not restart on native carry-loop wraps.",
+    "Root/network position, first-person controls and native victim ownership routines are unchanged."
+  ],
+  "limitations": [
+    "Measured single-fixture Mayhew contact, not general corpse adaptation.",
+    "Visual quality remains unaccepted; right hand, shoulder fit and static holstered blade need refinement.",
+    "Crouched pickup, arbitrary bodies and complete throws remain incomplete."
+  ],
+  "complete": false,
+  "visual_accepted": false
+}
+````

@@ -1,0 +1,1459 @@
+{
+  "at": "2026-10-10T09:52:06.487154+02:00",
+  "source_sets": 12,
+  "reference_aliases": 1942,
+  "reference_channel_entries": 2221,
+  "game_executable_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "scope": "Broad functional coverage plus every alias in the 12 exported base/Corvo/Emily body, left/right arm and camera sets. Situational variants are retained in references; availability is not runtime coverage.",
+  "source_files": [
+    {
+      "name": "models/characters/player/base/left_arm.animset",
+      "sha256": "7ab746573bfb765c843e39951e88de25be6c033d47bdd767b97a4bfb3064d102"
+    },
+    {
+      "name": "models/characters/player/emily/animsets/left_arm.animset",
+      "sha256": "c30b26b58cc17cc66428b0dd82b9973f0474266aa2a7292154f743488aac4e0f"
+    },
+    {
+      "name": "models/characters/player/corvo/animsets/left_arm.animset",
+      "sha256": "04517e26fd55df4e75f5bc70854b717753c52711599451263f5e4480facf5ac2"
+    },
+    {
+      "name": "models/characters/player/base/right_arm.animset",
+      "sha256": "70aeb2207e0529cb199777484d79b46a9b387bfbb8e4e37a13a39f62acf83038"
+    },
+    {
+      "name": "models/characters/player/emily/animsets/right_arm.animset",
+      "sha256": "4ee918367834b9de2f3aba1bf514f12704debb44fd69ae5bf609f993f7abeed8"
+    },
+    {
+      "name": "models/characters/player/corvo/animsets/right_arm.animset",
+      "sha256": "5d6f6a304b4b27995a3d765594a3351449ecb9de9768005a44c4e463e28c6f99"
+    },
+    {
+      "name": "models/characters/player/base/body.animset",
+      "sha256": "f96ff4e221b24047923d05b1b92154ab6baf6059a27b8974b65269fda5931127"
+    },
+    {
+      "name": "models/characters/player/base/camera.animset",
+      "sha256": "df9c49bba3c4259b9b3f2f41d94f2fea52f7daa8ee9b402cf1a167db3b90f65f"
+    },
+    {
+      "name": "models/characters/player/emily/animsets/body.animset",
+      "sha256": "1128065e7a0ce8e32c96cc78318dea87541e957114386ecdb85460f04d235c27"
+    },
+    {
+      "name": "models/characters/player/emily/animsets/camera.animset",
+      "sha256": "7c6875fc108ae996d7ba518016b4a1841f5631e13391cf9875a6f4e9ad5a29ee"
+    },
+    {
+      "name": "models/characters/player/corvo/animsets/body.animset",
+      "sha256": "c45f6beca633b013a29e611041690ac10330541dbf6bf6fcd192b19cdcf5ef8d"
+    },
+    {
+      "name": "models/characters/player/corvo/animsets/camera.animset",
+      "sha256": "8a7a0c7433f7baaf1756bc6ba1a314902d0eb71fb8d4b68acf894fbd63fb9750"
+    }
+  ],
+  "items": [
+    {
+      "id": "stand_idle",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1
+    },
+    {
+      "id": "armed_idle",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "two_native_rig_candidates",
+      "runtime_binding": "both_roles_flat_Dunwall_verified",
+      "visual_validation": "recorded_candidate_polish_remaining",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "evidence": [
+        "walk-test-3/result.json",
+        "corvo-walking.mp4",
+        "emily-walking.mp4"
+      ],
+      "notes": "D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset."
+    },
+    {
+      "id": "walk_8_directions",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "two_native_rig_candidates",
+      "runtime_binding": "both_roles_flat_Dunwall_verified",
+      "visual_validation": "recorded_candidate_polish_remaining",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "evidence": [
+        "walk-test-3/result.json",
+        "corvo-walking.mp4",
+        "emily-walking.mp4"
+      ],
+      "notes": "D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset."
+    },
+    {
+      "id": "run_8_directions",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "donors_generated_but_not_accepted_as_gait",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "notes": "Both pretrained sample controllers clamp controls to their training distributions. Forward requests of 3 and 5 m/s produce about 2.1 m/s on Character, 1.95 m/s on NPC. Need suitable running/sprinting source motion or broader training; these are not accepted running/sprint clips."
+    },
+    {
+      "id": "sprint_forward_and_diagonals",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "donors_generated_but_not_accepted_as_gait",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "notes": "Both pretrained sample controllers clamp controls to their training distributions. Forward requests of 3 and 5 m/s produce about 2.1 m/s on Character, 1.95 m/s on NPC. Need suitable running/sprinting source motion or broader training; these are not accepted running/sprint clips."
+    },
+    {
+      "id": "start_stop_each_gait",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "walking_blends_only",
+      "runtime_binding": "walking_only_both_roles",
+      "visual_validation": "needs_polish",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "notes": "Walking idle/cycle and adjacent-direction interpolation implemented. No dedicated authored start, brake, pivot or running transitions; turns and foot planting need refinement."
+    },
+    {
+      "id": "gait_speed_changes",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1
+    },
+    {
+      "id": "turn_in_place_90_180",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "root_feedback_donors_only",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "notes": "Fixed generator control-root feedback. Four turn requests now end within 0.3 degrees of their requested heading. Not retargeted or played in D2; original open-loop turn donors are rejected."
+    },
+    {
+      "id": "moving_turns",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1
+    },
+    {
+      "id": "reverse_and_direction_changes",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "walking_blends_only",
+      "runtime_binding": "walking_only_both_roles",
+      "visual_validation": "needs_polish",
+      "native_reference_family_count": 90,
+      "priority": 1,
+      "notes": "Walking idle/cycle and adjacent-direction interpolation implemented. No dedicated authored start, brake, pivot or running transitions; turns and foot planting need refinement."
+    },
+    {
+      "id": "slopes_and_stairs",
+      "family": "locomotion",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 90,
+      "priority": 1
+    },
+    {
+      "id": "crouch_idle",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "crouch_8_directions",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "stand_to_crouch",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "crouch_to_stand",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "crouched_turns",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "crouch_stop_start",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "stand_lean_left_right",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "crouch_lean_left_right",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "ledge_peek",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "keyhole_enter_look_exit",
+      "family": "stance",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 142,
+      "priority": 1
+    },
+    {
+      "id": "standing_jump_takeoff",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_airborne_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2,
+      "notes": "Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "running_jump_takeoff",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "crouch_jump_transition",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "double_jump",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "rising_airborne",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_airborne_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2,
+      "notes": "Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "fall_loop",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_airborne_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2,
+      "notes": "Native Jump/Fall suppresses walking bank. No newly authored jumping/falling sequence is claimed.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "soft_landing",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "hard_landing",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "moving_landing",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "vault_low_obstacle",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "climb_high_ledge",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "ledge_hang_and_pull_up",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "window_enter_exit",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "slide_enter_loop_exit",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "slide_to_crouch_or_stand",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "ladder_up_down_entry_exit",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "chain_rope_climb",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "swim_idle_directions",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "dive_surface_water_exit",
+      "family": "traversal",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 155,
+      "priority": 2
+    },
+    {
+      "id": "sword_draw_holster",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "sword_ready_idle",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "two_native_rig_candidates",
+      "runtime_binding": "both_roles_flat_Dunwall_verified",
+      "visual_validation": "recorded_candidate_polish_remaining",
+      "native_reference_family_count": 195,
+      "priority": 2,
+      "evidence": [
+        "walk-test-3/result.json",
+        "corvo-walking.mp4",
+        "emily-walking.mp4"
+      ],
+      "notes": "D2MOVE01 bank: sword-ready idle and eight single-cycle walks; constant native bone lengths, native helpers and rig-specific grips. Distance controls gait phase. Experimental 60-second lease with native Steam action eligibility; not a production moveset."
+    },
+    {
+      "id": "light_attack_variants",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_native_action_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2,
+      "notes": "Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "heavy_attack_variants",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "moving_attack",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "crouched_attack",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_native_action_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2,
+      "notes": "Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "airborne_attack",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "block_enter_hold_exit",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "existing_native_action_priority_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2,
+      "notes": "Real standing/crouched Slash and Block retain native motion identity. Generated walking yields to existing native action playback. Does not cover every attack/parry variant or validate new combat outcomes.",
+      "evidence": [
+        "priority-2/result.json"
+      ]
+    },
+    {
+      "id": "parry_directions",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "parry_recovery",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "counterattack",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "hit_reactions_directions",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "stagger_knockdown_recovery",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "kick_or_shove_if_present",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "death_variants",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "ragdoll_handoff",
+      "family": "combat",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 195,
+      "priority": 2
+    },
+    {
+      "id": "pistol_draw_aim_fire_reload_holster",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "crossbow_draw_aim_fire_reload_holster",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "bolt_or_ammo_switch",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "grenade_equip_aim_throw",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "mine_or_razor_place",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "heart_equip_use_holster",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "health_elixir",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "mana_elixir",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "item_switch_interruptions",
+      "family": "ranged_and_items",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 251,
+      "priority": 3
+    },
+    {
+      "id": "lethal_takedown_front_back_sides",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "nonlethal_takedown_front_back_sides",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "crouched_takedown",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "aerial_drop_kill",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "aerial_nonlethal_takedown",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "sliding_takedown",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "wall_and_window_variants",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "enemy_body_size_variants",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "paired_victim_alignment",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "struggle_and_escape",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "carry_body_lift_idle_move_drop_throw",
+      "family": "paired_actions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 927,
+      "priority": 3
+    },
+    {
+      "id": "corvo_blink_aim_cancel_release_arrive",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_blink_pull_and_kick_variants",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_dark_vision_cast_end",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_possession_enter_loop_exit",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_bend_time_cast_end",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_windblast_cast",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "corvo_devouring_swarm_cast",
+      "family": "powers",
+      "characters": [
+        "corvo"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_far_reach_aim_cancel_release_arrive",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_far_reach_pull_variants",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_dark_vision_cast_end",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_domino_mark_link_cancel",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_doppelganger_cast",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_mesmerize_cast",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "emily_shadow_walk_enter_move_attack_exit",
+      "family": "powers",
+      "characters": [
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "power_upgrade_variants",
+      "family": "powers",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "power_interruptions_and_no_mana",
+      "family": "powers",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 217,
+      "priority": 3
+    },
+    {
+      "id": "door_open_close_locked",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "lever_button_crank_wheel",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "pickup_loot_steal",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "key_use",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "read_object_or_note",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "eat_drink",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "carry_object_place_throw",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "shop_dialogue_gestures",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "sit_stand",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "scripted_scene_pose_handoff",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "cutscene_enter_exit",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "map_load_checkpoint_recovery",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    },
+    {
+      "id": "incapacitation_and_rescue_if_supported",
+      "family": "interactions",
+      "characters": [
+        "corvo",
+        "emily"
+      ],
+      "authoring": "not_started",
+      "runtime_binding": "not_verified",
+      "visual_validation": "not_verified",
+      "native_reference_family_count": 47,
+      "priority": 3
+    }
+  ],
+  "updated_at": "2026-10-10T09:52:54.512861+02:00"
+}

@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "source": "host",
+  "character": "corvo",
+  "crouched": true,
+  "holstered": false,
+  "moving": false,
+  "failure": "Presentation trace did not finalize",
+  "checks": [
+    "Native Steam stream and exact v39 stance/equipment bank ready before the cast"
+  ],
+  "events": [
+    {
+      "seconds": 1.784,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.444,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "6",
+    "5",
+    "3"
+  ],
+  "nativeScenes": [
+    "221",
+    "223",
+    "222",
+    "224"
+  ],
+  "dll": "459C82C0A41C9EA11DDB1C91A4AF673724DFF5ABA3B47793BB262C2CB4A7F1F7",
+  "bankSha256": "F72E01750AC8EFA2A4F4B37FAD0BBC14BA3C7C35FCE5AC7652C82E8EA95700E3",
+  "recorded": true,
+  "scope": "Corvo Bend Time ground stance/equipment/travel context integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
+}

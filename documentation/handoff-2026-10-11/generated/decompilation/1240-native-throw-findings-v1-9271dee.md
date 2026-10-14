@@ -1,0 +1,209 @@
+# native-throw-findings-v1.json
+
+Original: [work/natural-moveset/carry-research/native-throw-findings-v1.json](<../../../../work/natural-moveset/carry-research/native-throw-findings-v1.json>)
+
+SHA-256: `6FEDB41DF46B0A087C7E334835CD9142FC29037A1EB4B1641EF9C6DC11D9FFEF`; 6484 bytes.
+
+## Original saved record
+
+````json
+{
+  "at": "2026-10-11T19:00:08.994325+02:00",
+  "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "confirmedObservation": "Both normal standing native RT releases use carry_corpse_drop_high, Scene_1, duration666ms; loaded loop precedes release and Carry45/Drop46 retire afterward. Player health unchanged.",
+  "staticFinding": "140832770 calls1403a6f10 to choose declaration field+70/+78/+80/+88 array/+98 by index0/1/2/3/other. Stores selector in Drop46+54, uses corpse handle+38, starts native Midnight and modifies corpse/physics flags. The scene-name-to-index mapping and native throw impulse still require further evidence.",
+  "hypotheses": [
+    "High-drop corresponds to selector2; do not extend whitelist based on this unverified mapping",
+    "Remote throw trajectory/physics release requires source/victim ownership and independent observations"
+  ],
+  "cases": [
+    {
+      "take": "native-body-throw-corvo-v1",
+      "role": "host",
+      "scope": "Normal X pickup followed by RT from standing carry on the known Mayhew fixture; source scene identity/timing correlation, not replicated throw physics or full native state phase validation.",
+      "passedAllChecks": false,
+      "checks": {
+        "native_lift_observed": true,
+        "native_loaded_observed": true,
+        "right_trigger_sent": true,
+        "high_scene_observed": true,
+        "high_duration_666ms": true,
+        "drop46_correlated": false,
+        "carry_retired": true,
+        "health_preserved": true,
+        "capture_24hz": true
+      },
+      "sequentialStateSceneObservations": [
+        {
+          "ms": 7124,
+          "stateIds": [
+            0,
+            45
+          ],
+          "sceneTime": 16
+        },
+        {
+          "ms": 7202,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 91
+        },
+        {
+          "ms": 7281,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 166
+        },
+        {
+          "ms": 7370,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 241
+        },
+        {
+          "ms": 7454,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 341
+        },
+        {
+          "ms": 7545,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 433
+        },
+        {
+          "ms": 7626,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 516
+        },
+        {
+          "ms": 7726,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 616
+        }
+      ],
+      "video_sha256": "EBDF797F904DD17FE08AB857B28C29EB121445D62F0CF8004A6A59BC73831C9F",
+      "actual_capture_hz": 27.785714285714285,
+      "visualReview": {
+        "inspected": true,
+        "accepted": false,
+        "complete": false,
+        "method": "Actual source first-person D2 temporal sheet at 6.7/7.1/7.3/7.5/7.7/8.2 seconds",
+        "observations": "The native Throw RT prompt precedes forward body release and sword recovery. This fixture faces a nearby wall: it is not an unobstructed trajectory or remote full-body validation. Native high-drop scene lasts666ms. First sequential state/scene row crosses Carry45->Drop46; later rows correlate Drop46. Strict all-row correlation remains failed and is retained."
+      }
+    },
+    {
+      "take": "native-body-throw-emily-v1",
+      "role": "client",
+      "scope": "Normal X pickup followed by RT from standing carry on the known Mayhew fixture; source scene identity/timing correlation, not replicated throw physics or full native state phase validation.",
+      "passedAllChecks": false,
+      "checks": {
+        "native_lift_observed": true,
+        "native_loaded_observed": true,
+        "right_trigger_sent": true,
+        "high_scene_observed": true,
+        "high_duration_666ms": true,
+        "drop46_correlated": false,
+        "carry_retired": true,
+        "health_preserved": true,
+        "capture_24hz": true
+      },
+      "sequentialStateSceneObservations": [
+        {
+          "ms": 7105,
+          "stateIds": [
+            0,
+            45
+          ],
+          "sceneTime": 16
+        },
+        {
+          "ms": 7199,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 124
+        },
+        {
+          "ms": 7293,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 208
+        },
+        {
+          "ms": 7388,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 308
+        },
+        {
+          "ms": 7464,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 383
+        },
+        {
+          "ms": 7541,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 458
+        },
+        {
+          "ms": 7626,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 516
+        },
+        {
+          "ms": 7712,
+          "stateIds": [
+            0,
+            46
+          ],
+          "sceneTime": 633
+        }
+      ],
+      "video_sha256": "FEB20CF658B9F0CE273555E9AFCC09FF443B4572760825F3F3F56659458E8BA5",
+      "actual_capture_hz": 27.56563245823389,
+      "visualReview": {
+        "inspected": true,
+        "accepted": false,
+        "complete": false,
+        "method": "Actual source first-person D2 temporal sheet at 6.7/7.1/7.3/7.5/7.7/8.2 seconds",
+        "observations": "The native Throw RT prompt precedes forward body release and sword recovery. This fixture faces a nearby wall: it is not an unobstructed trajectory or remote full-body validation. Native high-drop scene lasts666ms. First sequential state/scene row crosses Carry45->Drop46; later rows correlate Drop46. Strict all-row correlation remains failed and is retained."
+      }
+    }
+  ],
+  "remoteThrowImplemented": false,
+  "complete": false,
+  "next": "Bracket native states and scene identity in one read-only probe; verify selector, binding count and release/impulse paths; add source semantics with explicit guards before isolated remote experiment."
+}
+````

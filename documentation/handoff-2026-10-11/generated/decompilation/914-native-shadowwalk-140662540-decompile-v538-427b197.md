@@ -1,0 +1,45 @@
+# native-shadowwalk-140662540-decompile-v538.txt
+
+Original: [work/movement-integration/native-shadowwalk-140662540-decompile-v538.txt](<../../../../work/movement-integration/native-shadowwalk-140662540-decompile-v538.txt>)
+
+SHA-256: `44B63594D9973B3E2F6989CA7964416467B67107735C1B4CF04E65D851D2E91E`; 938 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_140662540(longlong param_1,longlong param_2)
+
+{
+  undefined8 uVar1;
+  longlong *plVar2;
+  int iVar3;
+  longlong lVar4;
+  
+  if (((*(uint *)(param_2 + 8) & 0xffffff) != 0) || ((*(uint *)(param_2 + 0x128) & 0xffffff) != 0))
+  {
+    lVar4 = *(longlong *)(param_1 + 0x10);
+    FUN_1400998b0(lVar4);
+    uVar1 = *(undefined8 *)(lVar4 + 0xd0);
+    FUN_140876030(uVar1,param_2,param_2 + 0x120);
+    if (((*(uint *)(param_2 + 0x98) & 0xffffff) != 0) ||
+       ((*(uint *)(param_2 + 0x2b8) & 0xffffff) != 0)) {
+      plVar2 = (longlong *)FUN_140878e20(uVar1);
+      iVar3 = 0;
+      if ((*(uint *)(plVar2 + 1) & 0xffffff) != 0) {
+        lVar4 = 0;
+        do {
+          FUN_140876030(*(undefined8 *)(*plVar2 + lVar4),param_2 + 0x90,param_2 + 0x2b0);
+          iVar3 = iVar3 + 1;
+          lVar4 = lVar4 + 8;
+        } while (iVar3 < (int)(*(uint *)(plVar2 + 1) & 0xffffff));
+      }
+      FUN_1408794a0(uVar1);
+    }
+  }
+  return;
+}
+
+
+
+````

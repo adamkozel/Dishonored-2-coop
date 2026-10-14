@@ -1,0 +1,31 @@
+# partner-context-1403b1090-decompile-v384.txt
+
+Original: [work/movement-integration/partner-context-1403b1090-decompile-v384.txt](<../../../../work/movement-integration/partner-context-1403b1090-decompile-v384.txt>)
+
+SHA-256: `96B8A6D1ACB5698FA4EB5B6DA2223634E74895268CA54F3ABEBDAEEBEC399B5F`; 544 bytes.
+
+## Original saved record
+
+````text
+
+undefined8 FUN_1403b1090(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  
+  lVar1 = FUN_1403da910(param_1 + 0x158,1);
+  lVar2 = FUN_1406dc560(*(undefined4 *)
+                         ((longlong)(int)(&DAT_1422ffed8)[*(int *)(param_1 + 0x1d8)] * 0x38 + 0x60 +
+                         param_1));
+  if (((lVar1 == 0) ||
+      (((*(longlong *)(lVar1 + 0xd0) != 0 && ((*(byte *)(lVar1 + 0x150) & 8) != 0)) &&
+       (*(longlong *)(lVar1 + 0x10) == lVar2)))) && (*(longlong *)(param_1 + 0x1d0) != 0)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+````

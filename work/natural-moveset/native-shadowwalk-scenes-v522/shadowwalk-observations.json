@@ -1,0 +1,57 @@
+{
+  "scenes": [
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_equip.midnightscene, Scene_1",
+      "samples": 11,
+      "durationMs": [
+        333
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_hide_left_arm.midnightscene, Scene_1",
+      "samples": 14,
+      "durationMs": [
+        3666
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene, emily",
+      "samples": 30,
+      "durationMs": [
+        1000
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene, Emily",
+      "samples": 35,
+      "durationMs": [
+        1133
+      ]
+    }
+  ],
+  "manaBefore": 100.0,
+  "manaAfter": 80.0,
+  "nativeStateSets": [
+    "0",
+    "0,53",
+    "6",
+    "6,53"
+  ],
+  "stances": [
+    0,
+    1,
+    2
+  ],
+  "formSamples": 31,
+  "forwardInput": true,
+  "backwardInput": true,
+  "observedEntityDefinitions": [
+    "ai/aicue_power_shadow_walk.def",
+    "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def",
+    "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def",
+    "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def",
+    "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def",
+    "models/powers/shadow_walk/shadow_walk"
+  ],
+  "scope": "Source-only native activation/form/movement/exit observation. No phase enum meaning, remote presentation or gameplay authority assumed."
+}

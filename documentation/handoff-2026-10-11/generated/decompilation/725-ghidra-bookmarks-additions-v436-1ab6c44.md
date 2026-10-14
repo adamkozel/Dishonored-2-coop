@@ -1,0 +1,19 @@
+# ghidra-bookmarks-additions-v436.json
+
+Original: [work/movement-integration/candidate-doppelganger-fx-probe-v434/ghidra-bookmarks-additions-v436.json](<../../../../work/movement-integration/candidate-doppelganger-fx-probe-v434/ghidra-bookmarks-additions-v436.json>)
+
+SHA-256: `F30177CB1610E58D83B4E28358DFCE3732B4F8A453BC99B962B56E3AAFA7EF56`; 844 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "14084c810",
+    "category": "D2Coop_Doppelganger",
+    "type": "Note",
+    "comment": "Static436: arkMidnightTrackInstFx vtable1c7f5a8.84c7a0 starts keys via84c810;84c810 resolves group at track+10, bound actor at group+d0, key property at key+28, FX declaration at prop+8. Creates helper idEntity, attaches via875e80 using socket prop+10, adds12-byte record {keyId at key+8,helperHandle,stopMode prop+38} to track+c0/count+c8.84c9e0 resolves helper and stops FX according to record+8, then removes record. Runtime435: native clone spawn/despawn effects are owned by separate idEntity helpers with invalid parent handle, so FX owner/parent is not clone ownership. A reciprocal scene/group/track/key/helper reader remains pending. Four exact native FX exports and435 records preserved; no receiver VFX playback yet."
+  }
+]
+
+````

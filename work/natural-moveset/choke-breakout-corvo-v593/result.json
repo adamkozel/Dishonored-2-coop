@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "52ADA3D0CCAF40919300F0CB43151250CBE65508FF150CCA2352FAE0BD424963",
+  "checks": [
+    "Owned native choke phase1 read independently",
+    "Steam remote whole-body choke phase1 observed",
+    "Owned native choke phase2 read independently",
+    "Steam remote whole-body choke phase2 observed",
+    "Owned native choke phase4 read independently",
+    "Steam remote whole-body choke phase4 observed",
+    "Native standing recovery restores existing locomotion",
+    "Remote actor follows independent native source root during choke",
+    "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+    "Native ordinary RightShoulder behind exact authored guard2; selected finish/breakout outcome observed independently. Visual review remains required.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "yaw": 90,
+        "stance": 0,
+        "distance": 1.15,
+        "name": "rear-choke"
+      },
+      "key": "host-rear-choke",
+      "count": 93,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Native rear choke phase and target-binding observation using existing ordinary guard fixture; standard controller input only. Captures source scenes, native root/stance/state and actual recording. Source-timed remote actor body through native Steam, with distinct1500ms combat-lose branch. Native cancellation400 is not represented. Remote victim animation/alignment and shared knockout outcomes are not implemented by this binding. Restore checkpoint inventory/health and14 protected files."
+}

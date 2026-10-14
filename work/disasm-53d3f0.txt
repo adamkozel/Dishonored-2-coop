@@ -1,0 +1,165 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014053D3F0: mov         qword ptr [rsp+8],rbx
+  000000014053D3F5: push        rdi
+  000000014053D3F6: sub         rsp,0C0h
+  000000014053D3FD: mov         rdi,r9
+  000000014053D400: mov         rbx,rcx
+  000000014053D403: cmp         r8w,0FFFFh
+  000000014053D408: jne         000000014053D4CB
+  000000014053D40E: movss       xmm0,dword ptr [00000001431AF668h]
+  000000014053D416: mov         rax,qword ptr [rsp+00000000000000F8h]
+  000000014053D41E: movss       dword ptr [rax],xmm0
+  000000014053D422: movss       xmm1,dword ptr [00000001431AF66Ch]
+  000000014053D42A: movss       dword ptr [rax+4],xmm1
+  000000014053D42F: movss       xmm0,dword ptr [00000001431AF670h]
+  000000014053D437: movss       dword ptr [rax+8],xmm0
+  000000014053D43C: movss       xmm1,dword ptr [000000014228A780h]
+  000000014053D444: mov         rax,qword ptr [rsp+0000000000000100h]
+  000000014053D44C: movss       dword ptr [rax],xmm1
+  000000014053D450: movss       xmm0,dword ptr [000000014228A784h]
+  000000014053D458: movss       dword ptr [rax+4],xmm0
+  000000014053D45D: movss       xmm1,dword ptr [000000014228A788h]
+  000000014053D465: movss       dword ptr [rax+8],xmm1
+  000000014053D46A: movss       xmm0,dword ptr [000000014228A78Ch]
+  000000014053D472: movss       dword ptr [rax+0Ch],xmm0
+  000000014053D477: movss       xmm1,dword ptr [000000014228A790h]
+  000000014053D47F: movss       dword ptr [rax+10h],xmm1
+  000000014053D484: movss       xmm0,dword ptr [000000014228A794h]
+  000000014053D48C: movss       dword ptr [rax+14h],xmm0
+  000000014053D491: movss       xmm1,dword ptr [000000014228A798h]
+  000000014053D499: movss       dword ptr [rax+18h],xmm1
+  000000014053D49E: movss       xmm0,dword ptr [000000014228A79Ch]
+  000000014053D4A6: movss       dword ptr [rax+1Ch],xmm0
+  000000014053D4AB: movss       xmm1,dword ptr [000000014228A7A0h]
+  000000014053D4B3: movss       dword ptr [rax+20h],xmm1
+  000000014053D4B8: xor         al,al
+  000000014053D4BA: mov         rbx,qword ptr [rsp+00000000000000D0h]
+  000000014053D4C2: add         rsp,0C0h
+  000000014053D4C9: pop         rdi
+  000000014053D4CA: ret
+  000000014053D4CB: test        r8w,r8w
+  000000014053D4CF: js          000000014053D4B8
+  000000014053D4D1: mov         rax,qword ptr [rcx+38h]
+  000000014053D4D5: mov         rcx,qword ptr [rax+0000000000001FE8h]
+  000000014053D4DC: mov         rax,qword ptr [rcx+50h]
+  000000014053D4E0: movzx       ecx,word ptr [rax+78h]
+  000000014053D4E4: movsx       eax,r8w
+  000000014053D4E8: cmp         eax,ecx
+  000000014053D4EA: jge         000000014053D4B8
+  000000014053D4EC: movsxd      rax,edx
+  000000014053D4EF: shl         rax,4
+  000000014053D4F3: add         rax,qword ptr [rbx+00000000000002E8h]
+  000000014053D4FA: test        dword ptr [rax+8],0FFFFFFh
+  000000014053D501: jbe         000000014053D4B8
+  000000014053D503: mov         rax,qword ptr [rax]
+  000000014053D506: movsx       rcx,r8w
+  000000014053D50A: lea         rdx,[rsp+30h]
+  000000014053D50F: movaps      xmmword ptr [rsp+00000000000000B0h],xmm6
+  000000014053D517: movaps      xmmword ptr [rsp+00000000000000A0h],xmm7
+  000000014053D51F: movsx       rcx,word ptr [rax+rcx*2]
+  000000014053D524: lea         r8,[rsp+20h]
+  000000014053D529: shl         rcx,6
+  000000014053D52D: add         rcx,qword ptr [rbx+00000000000002D8h]
+  000000014053D534: call        000000014009B900
+  000000014053D539: mov         rax,qword ptr [rbx+38h]
+  000000014053D53D: mov         rcx,qword ptr [rsp+00000000000000F0h]
+  000000014053D545: movss       xmm0,dword ptr [rsp+30h]
+  000000014053D54B: movss       xmm1,dword ptr [rsp+48h]
+  000000014053D551: movss       xmm7,dword ptr [rsp+3Ch]
+  000000014053D557: lea         rdx,[rsp+58h]
+  000000014053D55C: movss       xmm2,dword ptr [rax+0000000000001894h]
+  000000014053D564: movss       xmm6,dword ptr [rax+0000000000001890h]
+  000000014053D56C: movss       xmm5,dword ptr [rax+0000000000001898h]
+  000000014053D574: mov         rax,qword ptr [rsp+00000000000000F8h]
+  000000014053D57C: mulss       xmm2,dword ptr [rdi+4]
+  000000014053D581: mulss       xmm6,dword ptr [rdi]
+  000000014053D585: mulss       xmm5,dword ptr [rdi+8]
+  000000014053D58A: movss       xmm4,dword ptr [rsp+40h]
+  000000014053D590: movss       xmm3,dword ptr [rsp+44h]
+  000000014053D596: mulss       xmm0,xmm6
+  000000014053D59A: mulss       xmm1,xmm5
+  000000014053D59E: mulss       xmm7,xmm2
+  000000014053D5A2: addss       xmm7,xmm0
+  000000014053D5A6: movss       xmm0,dword ptr [rsp+34h]
+  000000014053D5AC: addss       xmm7,xmm1
+  000000014053D5B0: movss       xmm1,dword ptr [rsp+4Ch]
+  000000014053D5B6: mulss       xmm0,xmm6
+  000000014053D5BA: mulss       xmm4,xmm2
+  000000014053D5BE: mulss       xmm3,xmm2
+  000000014053D5C2: movss       xmm2,dword ptr [rsp+20h]
+  000000014053D5C8: addss       xmm4,xmm0
+  000000014053D5CC: movss       xmm0,dword ptr [rsp+38h]
+  000000014053D5D2: mulss       xmm1,xmm5
+  000000014053D5D6: mulss       xmm0,xmm6
+  000000014053D5DA: addss       xmm4,xmm1
+  000000014053D5DE: movss       xmm1,dword ptr [rsp+50h]
+  000000014053D5E4: addss       xmm3,xmm0
+  000000014053D5E8: mulss       xmm1,xmm5
+  000000014053D5EC: movss       xmm0,dword ptr [rsp+28h]
+  000000014053D5F2: addss       xmm3,xmm1
+  000000014053D5F6: movss       xmm1,dword ptr [rsp+24h]
+  000000014053D5FC: addss       xmm1,xmm4
+  000000014053D600: addss       xmm0,xmm3
+  000000014053D604: addss       xmm2,xmm7
+  000000014053D608: movss       dword ptr [rax+4],xmm1
+  000000014053D60D: movss       dword ptr [rax+8],xmm0
+  000000014053D612: movss       dword ptr [rax],xmm2
+  000000014053D616: call        0000000140111410
+  000000014053D61B: lea         r8,[rsp+30h]
+  000000014053D620: lea         rdx,[rsp+7Ch]
+  000000014053D625: mov         rcx,rax
+  000000014053D628: call        000000014000DCE0
+  000000014053D62D: mov         rdx,qword ptr [rsp+0000000000000100h]
+  000000014053D635: movaps      xmm7,xmmword ptr [rsp+00000000000000A0h]
+  000000014053D63D: movaps      xmm6,xmmword ptr [rsp+00000000000000B0h]
+  000000014053D645: mov         ecx,dword ptr [rax]
+  000000014053D647: mov         r8,rax
+  000000014053D64A: mov         dword ptr [rdx],ecx
+  000000014053D64C: mov         ecx,dword ptr [rax+4]
+  000000014053D64F: mov         dword ptr [rdx+4],ecx
+  000000014053D652: mov         ecx,dword ptr [rax+8]
+  000000014053D655: mov         dword ptr [rdx+8],ecx
+  000000014053D658: mov         ecx,dword ptr [rax+0Ch]
+  000000014053D65B: mov         dword ptr [rdx+0Ch],ecx
+  000000014053D65E: mov         ecx,dword ptr [rax+10h]
+  000000014053D661: mov         dword ptr [rdx+10h],ecx
+  000000014053D664: mov         ecx,dword ptr [rax+14h]
+  000000014053D667: mov         dword ptr [rdx+14h],ecx
+  000000014053D66A: mov         eax,dword ptr [rax+18h]
+  000000014053D66D: mov         dword ptr [rdx+18h],eax
+  000000014053D670: mov         eax,dword ptr [r8+1Ch]
+  000000014053D674: mov         dword ptr [rdx+1Ch],eax
+  000000014053D677: mov         eax,dword ptr [r8+20h]
+  000000014053D67B: mov         dword ptr [rdx+20h],eax
+  000000014053D67E: mov         al,1
+  000000014053D680: mov         rbx,qword ptr [rsp+00000000000000D0h]
+  000000014053D688: add         rsp,0C0h
+  000000014053D68F: pop         rdi
+  000000014053D690: ret
+  000000014053D691: int         3
+  000000014053D692: int         3
+  000000014053D693: int         3
+  000000014053D694: int         3
+  000000014053D695: int         3
+  000000014053D696: int         3
+  000000014053D697: int         3
+  000000014053D698: int         3
+  000000014053D699: int         3
+  000000014053D69A: int         3
+  000000014053D69B: int         3
+  000000014053D69C: int         3
+  000000014053D69D: int         3
+  000000014053D69E: int         3
+  000000014053D69F: int         3
+  000000014053D6A0: 48
+
+  Summary
+
+     1A7D000 .text

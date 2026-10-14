@@ -1,0 +1,37 @@
+# combat-ghidra-bookmarks-v631.json
+
+Original: [work/combat-ghidra-bookmarks-v631.json](<../../../../work/combat-ghidra-bookmarks-v631.json>)
+
+SHA-256: `BFBBDEE773DC8D11AAD70D8E8C6EE80B70EEAE44DCA4FC6389A31F084705D6E6`; 4625 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "141c85d28",
+    "category": "D2Coop targeted sword scene ownership",
+    "comment": "Exact B671F824 runtime607 both roles: standing0 Running0+Slash39; sword_slash_right/rightb, Scene_2 Corvo / Scene_1 Emily,1000ms, player+owned right arm+reciprocal guard. Old two-binding cap dropped these actions. Candidate610 fixes read-only optional target validation and excludes partner; unchanged protocol65/bank65/353. Corvo611 and Emily614 pass10 checks each (receipt615): owned scene, native sword, Steam remote body/root/recovery, receiver victim HP unchanged, full checkpoint/14file restoration. Emily body visible; Corvo611 view occluded. Retained failed Emily611 instead observed crouched throwhit/kick800 with right arm+player+player (not target-bearing). Emily612 one source sample failed minimum2; faster614 sampling removed unused sensor reads, retained assertions. Corvo614 could not stand near obstruction; no action and no visual proof. No victim events/damage replay or shared NPC outcomes. Native close-range/crouched613 observations pending.",
+    "type": "Note"
+  },
+  {
+    "address": "141c85d28",
+    "category": "D2Coop native kick scene",
+    "comment": "ExactB671F824 Emily611 native throwhit/kick800: Slash39+Sneaking6 physical1; owned rightarm+player+sameplayer. Void624 PlayerRightArm/PlayerCamera/PlayerBody corroborates duplicate references; closecombat activeframes163-667. Slash rulehandler selects throwhit if isThrowHitAvailable plus previous left/right; upstream availability cause unknown. 14086b900 obtains handler at state+A0.625 reader accepts exact kick exception only, no NPC/partner target; protocol67,bank66/354 existing kick donor1.5s normalized800ms, prior353 unchanged, no root/events. Build/native/wire/bank/smoke pass. Emily626 FAILED native kick selection: source instead crouched right933 then right hit866. Kick remains runtime-unverified; do not random-repeat fixture.625 regressions627 CorvoPASS10/EmilyPASS13 include existing crouched strikes, Emily right recovery15, monotonic followthrough, receiver victimhealth unchanged, complete inventories/playerpartnerhealth/14hash restoration. Left16 remains unverified. Receipt628 and actual observer sheets, no visual acceptance. Next sourceheavy629/630, existing pipeline only.",
+    "type": "Note"
+  },
+  {
+    "address": "141c85d28",
+    "category": "D2Coop crouched heavy phases",
+    "comment": "Exact625 native source629 Corvo/630 Emily, ordinary crouched RT1500ms central room(-33.5,-153,68.1 yaw0): focus_in/In266 thenLoop2000; release sword_attack_focus_sneak_out, CorvoScene_2/1000, EmilyScene_1/833. Two reciprocal bindings rightarm+player, Sneaking6+Slash39/physical1. Release absent from reader; no new remote binding yet. Reuse existing full-body heavy50/51/52 and crouch adaptation to create whole-body crouched phases; no first-person anchors/root/event export. Corvo629 FAILED irrelevant inherited guard eligibility assertion; inventory/health14files restored. Emily630 corrected source checks passed but cleanup FAILED absent host avatar. Separate631 recovery PASS: both fresh active partners, complete inventories, player/partner health56/40 and14 protected hashes. Preserve original failures. Kick17 remains unverified;625/628 verifies crouched strikes and Emily right recovery15. Continue focused crouched-heavy binding through existing pipeline.",
+    "type": "Note"
+  },
+  {
+    "address": "141c85d28",
+    "category": "D2Coop crouched hit recovery",
+    "comment": "ExactB671F824 native613 both roles: Sneaking6+Slash39 physical1 scene handle state+24. Crouched right/left Scene_1/933 bind owned rightarm+player+uniqueguard. Optional Corvo left_hit Scene_2/666 arm+player becomesRunning0/physical0; Emily hit Scene_1/866 arm+player crouched. Selection cause unknown.619/621 show same-scene rise with no separate hit;620 accepted observed ground stance.620/622 both rolesPASS10; neither621 selected15/16. Later625/628 regressions: Corvo627PASS10, Emily627PASS13 including owned right recovery15 through Steam, monotonic authored followthrough, native stance return, unchanged receiver victimhealth, checkpoint inventories/playerpartnerhealth14protected hashes. Right15 now verified; left16 remains runtime-unverified.626 failed required kick selection but contains right15 and narrower independent audit628; failed result unchanged. Existing bank attack48/49 reused. Late entry .5 authored progress fallback is heuristic, not source fact. Observer sheets show body strike/recovery; fine contact/grip deferred, no visual acceptance. Shared enemy outcomes unfinished.",
+    "type": "Note"
+  }
+]
+
+````

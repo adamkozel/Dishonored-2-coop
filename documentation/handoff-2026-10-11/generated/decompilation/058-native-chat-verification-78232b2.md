@@ -1,0 +1,185 @@
+# native-chat-verification.json
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/native-chat-verification.json](<../../../../outputs/d2-coop-lab/analysis/ghidra/native-chat-verification.json>)
+
+SHA-256: `6317866972649F829D9B2AC1AAE85292E89A4C8654A1AEDC41586A9C1CC69AF1`; 8368 bytes.
+
+## Original saved record
+
+````json
+{
+  "ObservedAt": "2026-10-09T06:23:36.689Z",
+  "Passed": true,
+  "NativeChatToolsLoaded": true,
+  "RegisteredServer": "d2-ghidra",
+  "ToolCount": 244,
+  "ExpectedExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "Identity": {
+    "content": [
+      {
+        "type": "text",
+        "text": "=== GHIDRA SCRIPT EXECUTION ===\nScript: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\VerifyD2Identity.java\nProgram: Dishonored2.exe\nTime: Fri Oct 09 08:23:24 CEST 2026\n\nFound script: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\VerifyD2Identity.java\nSize: 368 bytes\n\nScript provider: JavaScriptProvider\n\n--- SCRIPT OUTPUT ---\nProgram=Dishonored2.exe\r\nSHA256=b671f8249422862bf557d00aab2f4bb671ed4515cc10ad8a8a9decad84516180\r\nImageBase=140000000\r\nDomainFile=/Dishonored2.exe\r\n\n\n=== SCRIPT COMPLETED SUCCESSFULLY ===\n\n--- CONSOLE OUTPUT ---\nSLF4J: Class path contains multiple SLF4J bindings.\r\nSLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Base/lib/slf4j-nop-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]\r\nSLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/GhidraServer/data/yajsw-stable-13.18/lib/extended/slf4j/slf4j-simple-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]\r\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\r\nSLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]"
+      }
+    ],
+    "structuredContent": {
+      "result": "=== GHIDRA SCRIPT EXECUTION ===\nScript: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\VerifyD2Identity.java\nProgram: Dishonored2.exe\nTime: Fri Oct 09 08:23:24 CEST 2026\n\nFound script: C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\tools\\ghidra-runtime\\ghidra_scripts\\VerifyD2Identity.java\nSize: 368 bytes\n\nScript provider: JavaScriptProvider\n\n--- SCRIPT OUTPUT ---\nProgram=Dishonored2.exe\r\nSHA256=b671f8249422862bf557d00aab2f4bb671ed4515cc10ad8a8a9decad84516180\r\nImageBase=140000000\r\nDomainFile=/Dishonored2.exe\r\n\n\n=== SCRIPT COMPLETED SUCCESSFULLY ===\n\n--- CONSOLE OUTPUT ---\nSLF4J: Class path contains multiple SLF4J bindings.\r\nSLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Base/lib/slf4j-nop-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]\r\nSLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/GhidraServer/data/yajsw-stable-13.18/lib/extended/slf4j/slf4j-simple-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]\r\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\r\nSLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]"
+    },
+    "isError": false
+  },
+  "Checks": [
+    {
+      "check": "program",
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"name\":\"Dishonored2.exe\",\"path\":\"/Dishonored2.exe\",\"executable_path\":\"/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/outputs/d2-coop-lab/analysis/ghidra/input/Dishonored2.exe\",\"executable_format\":\"Portable Executable (PE)\",\"language\":\"x86:LE:64:default\",\"compiler\":\"windows\",\"address_size\":64,\"image_base\":\"140000000\",\"min_address\":\"140000000\",\"max_address\":\"1441ca7ff\",\"memory_size\":68968576,\"function_count\":83324,\"symbol_count\":83934,\"data_type_count\":93,\"creation_date\":\"Fri Oct 09 07:39:39 CEST 2026\",\"memory_block_count\":10,\"address_spaces\":[{\"name\":\"ram\",\"start\":\"00000000\",\"end\":\"ffffffffffffffff\",\"size\":9223372036854775807,\"addressable_unit_size\":1,\"size_bytes\":9223372036854775807,\"address_size_bits\":64,\"is_default\":true,\"is_overlay\":false}],\"has_multiple_address_spaces\":false,\"has_overlay_spaces\":false,\"overlay_space_count\":0}"
+          }
+        ],
+        "structuredContent": {
+          "result": "{\"name\":\"Dishonored2.exe\",\"path\":\"/Dishonored2.exe\",\"executable_path\":\"/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/outputs/d2-coop-lab/analysis/ghidra/input/Dishonored2.exe\",\"executable_format\":\"Portable Executable (PE)\",\"language\":\"x86:LE:64:default\",\"compiler\":\"windows\",\"address_size\":64,\"image_base\":\"140000000\",\"min_address\":\"140000000\",\"max_address\":\"1441ca7ff\",\"memory_size\":68968576,\"function_count\":83324,\"symbol_count\":83934,\"data_type_count\":93,\"creation_date\":\"Fri Oct 09 07:39:39 CEST 2026\",\"memory_block_count\":10,\"address_spaces\":[{\"name\":\"ram\",\"start\":\"00000000\",\"end\":\"ffffffffffffffff\",\"size\":9223372036854775807,\"addressable_unit_size\":1,\"size_bytes\":9223372036854775807,\"address_size_bits\":64,\"is_default\":true,\"is_overlay\":false}],\"has_multiple_address_spaces\":false,\"has_overlay_spaces\":false,\"overlay_space_count\":0}"
+        },
+        "isError": false
+      }
+    },
+    {
+      "check": "function",
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Function: D2_Health_GetRatio at 140717d50\nSignature: float __fastcall D2_Health_GetRatio(D2_HealthPartial * health)\nEntry: 140717d50\nBody: 140717d50 - 140717d93"
+          }
+        ],
+        "structuredContent": {
+          "result": "Function: D2_Health_GetRatio at 140717d50\nSignature: float __fastcall D2_Health_GetRatio(D2_HealthPartial * health)\nEntry: 140717d50\nBody: 140717d50 - 140717d93"
+        },
+        "isError": false
+      }
+    },
+    {
+      "check": "xrefs",
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "From 143f1a320 [DATA]\nFrom 14211a4fc [DATA]\nFrom 14211a51c [DATA]\nFrom 14211a534 [DATA]\nFrom 14211a544 [DATA]\nFrom 1406183ff in D2_Inventory_ApplySavedItems_Hypothesis [UNCONDITIONAL_CALL]"
+          }
+        ],
+        "structuredContent": {
+          "result": "From 143f1a320 [DATA]\nFrom 14211a4fc [DATA]\nFrom 14211a51c [DATA]\nFrom 14211a534 [DATA]\nFrom 14211a544 [DATA]\nFrom 1406183ff in D2_Inventory_ApplySavedItems_Hypothesis [UNCONDITIONAL_CALL]"
+        },
+        "isError": false
+      }
+    },
+    {
+      "check": "decompilation",
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\n/* Project scope: exact retail executable only. Confirmed findings have bounded static/runtime\r\n   evidence; imported hypotheses are unverified. See analysis/ghidra/native-findings.json. No\r\n   complete campaign, general combat, Emily equipment, or online session claim. */\r\n\r\nfloat D2_Health_GetRatio(D2_HealthPartial *health)\r\n\r\n{\r\n  float fVar1;\r\n  \r\n  fVar1 = (float)(**(code **)(health->vtable + 0xd8))();\r\n  if (0.0 < fVar1) {\r\n    return health->currentHealth / fVar1;\r\n  }\r\n  return 0.0;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\n/* Project scope: exact retail executable only. Confirmed findings have bounded static/runtime\r\n   evidence; imported hypotheses are unverified. See analysis/ghidra/native-findings.json. No\r\n   complete campaign, general combat, Emily equipment, or online session claim. */\r\n\r\nfloat D2_Health_GetRatio(D2_HealthPartial *health)\r\n\r\n{\r\n  float fVar1;\r\n  \r\n  fVar1 = (float)(**(code **)(health->vtable + 0xd8))();\r\n  if (0.0 < fVar1) {\r\n    return health->currentHealth / fVar1;\r\n  }\r\n  return 0.0;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "RestartSideEffect": "Both lab game processes closed when Codex restarted despite exclusion from restart target list. Restoring preserved isolated fixtures; exact cause not yet established.",
+  "LabRestored": true,
+  "LabRestorationRecord": "../../research/lab-restoration-verification.json",
+  "LabPids": [
+    3148,
+    48124
+  ]
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+=== GHIDRA SCRIPT EXECUTION ===
+Script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\VerifyD2Identity.java
+Program: Dishonored2.exe
+Time: Fri Oct 09 08:23:24 CEST 2026
+
+Found script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\VerifyD2Identity.java
+Size: 368 bytes
+
+Script provider: JavaScriptProvider
+
+--- SCRIPT OUTPUT ---
+Program=Dishonored2.exe
+SHA256=b671f8249422862bf557d00aab2f4bb671ed4515cc10ad8a8a9decad84516180
+ImageBase=140000000
+DomainFile=/Dishonored2.exe
+
+
+=== SCRIPT COMPLETED SUCCESSFULLY ===
+
+--- CONSOLE OUTPUT ---
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Base/lib/slf4j-nop-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/GhidraServer/data/yajsw-stable-13.18/lib/extended/slf4j/slf4j-simple-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]
+````
+
+### text
+
+````text
+{"name":"Dishonored2.exe","path":"/Dishonored2.exe","executable_path":"/C:/Users/adako/Documents/Codex/2026-10-08/i-x20/outputs/d2-coop-lab/analysis/ghidra/input/Dishonored2.exe","executable_format":"Portable Executable (PE)","language":"x86:LE:64:default","compiler":"windows","address_size":64,"image_base":"140000000","min_address":"140000000","max_address":"1441ca7ff","memory_size":68968576,"function_count":83324,"symbol_count":83934,"data_type_count":93,"creation_date":"Fri Oct 09 07:39:39 CEST 2026","memory_block_count":10,"address_spaces":[{"name":"ram","start":"00000000","end":"ffffffffffffffff","size":9223372036854775807,"addressable_unit_size":1,"size_bytes":9223372036854775807,"address_size_bits":64,"is_default":true,"is_overlay":false}],"has_multiple_address_spaces":false,"has_overlay_spaces":false,"overlay_space_count":0}
+````
+
+### text
+
+````text
+Function: D2_Health_GetRatio at 140717d50
+Signature: float __fastcall D2_Health_GetRatio(D2_HealthPartial * health)
+Entry: 140717d50
+Body: 140717d50 - 140717d93
+````
+
+### text
+
+````text
+From 143f1a320 [DATA]
+From 14211a4fc [DATA]
+From 14211a51c [DATA]
+From 14211a534 [DATA]
+From 14211a544 [DATA]
+From 1406183ff in D2_Inventory_ApplySavedItems_Hypothesis [UNCONDITIONAL_CALL]
+````
+
+### text
+
+````text
+
+/* Project scope: exact retail executable only. Confirmed findings have bounded static/runtime
+   evidence; imported hypotheses are unverified. See analysis/ghidra/native-findings.json. No
+   complete campaign, general combat, Emily equipment, or online session claim. */
+
+float D2_Health_GetRatio(D2_HealthPartial *health)
+
+{
+  float fVar1;
+  
+  fVar1 = (float)(**(code **)(health->vtable + 0xd8))();
+  if (0.0 < fVar1) {
+    return health->currentHealth / fVar1;
+  }
+  return 0.0;
+}
+
+
+````

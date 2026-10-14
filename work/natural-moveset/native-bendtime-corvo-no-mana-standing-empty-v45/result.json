@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "source": "host",
+  "noManaExperiment": true,
+  "crouched": false,
+  "holstered": true,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Normal native activation consumes mana; the next activation attempt has less than the measured expenditure",
+    "Both failed requests produce distinct native out-of-mana scenes",
+    "All four controller requests are consumed; failed requests produce no power activation or BendTime scene",
+    "Failed request spends no further measured native mana",
+    "Normal controller casting produced native BendTime scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.822,
+      "action": "Native LT press 250ms",
+      "index": 0,
+      "ms": 1104,
+      "inputSequence": 747055993
+    },
+    {
+      "seconds": 3.846,
+      "action": "Native LT press 250ms",
+      "index": 1,
+      "ms": 3129,
+      "inputSequence": 747058018
+    },
+    {
+      "seconds": 6.865,
+      "action": "Native LT press 250ms",
+      "index": 2,
+      "ms": 6147,
+      "inputSequence": 747061036
+    },
+    {
+      "seconds": 8.927,
+      "action": "Native LT press 250ms",
+      "index": 3,
+      "ms": 8210,
+      "inputSequence": 747063099
+    }
+  ],
+  "dll": "296BC0E7ACCB700A86D0D4BCCC7E7EAE1926B813D07892627A219511EB2E74F7",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native BendTime insufficient-mana investigation only; no remote body/effect integration claimed. Native time dilation remains source-local in this research take; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

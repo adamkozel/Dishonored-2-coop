@@ -1,0 +1,45 @@
+
+void FUN_1407e0c40(longlong *param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  char cVar1;
+  undefined8 *puVar2;
+  longlong *plVar3;
+  int iVar4;
+  undefined8 *local_158;
+  undefined4 local_150;
+  uint local_14c;
+  undefined8 local_148;
+  undefined4 local_140 [78];
+  
+  if (((param_1[1] != 0) && ((short)param_1[0x17] != 1)) &&
+     (1 < (ushort)((short)param_1[0x17] - 8U))) {
+    local_150 = 0x5000000;
+    local_158 = &local_148;
+    local_14c = 0x14ff;
+    puVar2 = &local_148;
+    iVar4 = 0x13;
+    do {
+      *puVar2 = 0;
+      *(undefined4 *)(puVar2 + 1) = 0;
+      puVar2 = puVar2 + 2;
+      iVar4 = iVar4 + -1;
+    } while (-1 < iVar4);
+    cVar1 = FUN_1407dfbd0(param_1,param_2,param_3,&local_158);
+    if (cVar1 != '\0') {
+      (**(code **)(*param_1 + 0x80))(param_1,&local_158);
+      FUN_1407df4f0(param_1,param_2,&local_158);
+    }
+    puVar2 = local_158;
+    if (((local_14c & 0x40) == 0) && (local_158 != (undefined8 *)0x0)) {
+      plVar3 = (longlong *)FUN_1401548e0();
+      (**(code **)(*plVar3 + 0x10))
+                (plVar3,
+                 "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+                 ,0x1ec,puVar2,0x10);
+    }
+  }
+  return;
+}
+
+

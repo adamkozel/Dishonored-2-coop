@@ -1,0 +1,36 @@
+#pragma once
+// Presentation damage firewall. No packet can nominate an arbitrary target:
+// only this locally spawned, reciprocal custom clone incarnation is excluded.
+std::atomic<std::uintptr_t> shadowDamageActor{0},shadowDamageGame{0};
+std::atomic<std::uint32_t> shadowDamageHandle{0};
+std::atomic<std::uint64_t> shadowDamageBlocked{0};
+bool shadowOwnedDamageSource(std::uint32_t handle){
+    const auto actor=shadowDamageActor.load(std::memory_order_acquire);
+    const auto game=shadowDamageGame.load();const auto ownedHandle=shadowDamageHandle.load();
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    std::uintptr_t activeGame=0,vt=0,definition=0,name=0;std::string path;
+    if(!actor||!game||!ownedHandle||!memoryRead(base+0x39a5290,&activeGame,8)||activeGame!=game||
+       worldIdentityEntity(memoryRead,game,ownedHandle)!=actor||!memoryRead(actor,&vt,8)||vt!=base+0x1c5e108||
+       !memoryRead(actor+0x2e8,&definition,8)||!definition||!memoryRead(definition+8,&name,8)||
+       !worldIdentityString(memoryRead,name,path)||(path!="models/characters/def/d2coop/doppelganger_emily.def"&&path!="models/characters/def/d2coop/doppelganger_corvo.def"))return false;
+    if(handle==ownedHandle)return true;
+    // Bound parent walk, resolving generation-bearing handles at each step.
+    for(unsigned depth=0;depth<4&&handle&&handle!=1;++depth){
+        const auto child=worldIdentityEntity(memoryRead,game,handle);std::uint32_t parent=0;
+        if(!child||!memoryRead(child+0xac,&parent,4)||parent==handle)return false;
+        if(parent==ownedHandle)return true;
+        handle=parent;
+    }
+    return false;
+}
+bool suppressShadowDamage(void* info,void* result){
+    std::uint32_t handles[2]{};
+    const unsigned char ctor[]={0x33,0xc0,0x48,0x89,0x01,0x89,0x41,0x08,0x48,0x89,0x41,0x10};
+    if(!info||!result||std::memcmp(gameImage+0x780470,ctor,sizeof(ctor))||
+       !memoryRead(reinterpret_cast<std::uintptr_t>(info)+0x50,handles,sizeof(handles))||
+       (!shadowOwnedDamageSource(handles[0])&&!shadowOwnedDamageSource(handles[1])))return false;
+    // Use the native result constructor; skip health, reactions, death and
+    // queued damage entirely. Authoritative actual-player damage remains native.
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result);
+    ++shadowDamageBlocked;return true;
+}

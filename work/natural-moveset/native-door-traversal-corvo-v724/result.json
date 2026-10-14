@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "4A7F99EE4FB143EB4892BAAA13C0122EF3B0E5C1DE7345B2C45C9C7F4D81531D",
+  "checks": [
+    "Native forward input is blocked by the closed and reclosed peer door and crosses the remotely opened doorway on the same floor",
+    "Two ordinary native X interactions replicate both0->1->2->1->0 door cycles; exactly two remote native calls; no rejected packets during measured actions; both finish host revision3",
+    "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "distance": 1.0,
+        "name": "unlocked-door-tap",
+        "yaw": 270,
+        "stance": 0
+      },
+      "key": "client-unlocked-door-tap",
+      "count": 134,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Native Steam door traversal: receiver native forward movement is blocked before/after and crosses while remotely opened. Source uses real native X inputs; receiver uses74a400 queue. Both engine state cycles and host revision/duplicate counters verified; collision traversal is measured here; locks/scripts/campaign-wide doors remain unverified."
+}

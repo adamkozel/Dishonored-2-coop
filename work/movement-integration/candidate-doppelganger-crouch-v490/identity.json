@@ -1,0 +1,114 @@
+{
+  "created": "2026-10-12T22:33:14.444687+02:00",
+  "dll": "BE75B35BE849187A755222F02BAF3729E8CB76C9158426B496B6D946A5802E4A",
+  "probe": "91953438AABEBB1D6FAD1D44751B7D595A703AC241F5E0496F2B47F95673D0B6",
+  "runtimeVerified": false,
+  "previous": "candidate-doppelganger-fx-v481",
+  "protocol": 52,
+  "bankVersion": 56,
+  "clips": 325,
+  "cloneWireVersion": 4,
+  "scope": "489 native Sneaking6 plus UsePower63 and exact466/1200/666ms scenes drive full-body armed crouch clips322-324. Original322 payloads unchanged. Supported feet, native rig lengths, grip/socket; no root/FP/event changes.481 clone marker and FX fixes retained. Runtime and visual comparison pending",
+  "banks": [
+    {
+      "path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\movement-integration\\candidate-doppelganger-crouch-v490\\banks\\corvo-doppelganger-crouch-bank.bin",
+      "sha256": "C695C87300F163BACD938F580661346F0D3758525EF80484237FE7234DDD3BA5"
+    },
+    {
+      "path": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\movement-integration\\candidate-doppelganger-crouch-v490\\banks\\emily-doppelganger-crouch-bank.bin",
+      "sha256": "2E38F9234205BF0009BC7C9DAEF96F2E9263C7EC3B6B2DE94537A1AB92BFB795"
+    }
+  ],
+  "assets": [
+    {
+      "resource": "models/effects/d2coop/doppelganger_spawn_remote.fx",
+      "generated": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\assets\\doppelganger_spawn_remote.fx",
+      "sha256": "5083F005AD5FD92E6155F8C7505E82FDF633CDAB56FB6ECA574AE7C481440A92",
+      "source": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\research\\asset-exports\\native-doppelganger-fx-v436\\game1_patch\\generated.decls.fx.models.effects.gameplay.powers.doppelganger.decoy.spawn_despawn.decoy_spawn_01..fx.decl",
+      "source_sha256": "9FF273CF05F37DA0A52943003A05960C2062281ADC8B56928D984CF47310FC86",
+      "kind": "fx",
+      "classname": "fx",
+      "runtime_verified": false,
+      "removed": [
+        "m_rumbles",
+        "sound_events/game_defined/bsp_ai_properties_02"
+      ],
+      "native_particles_unchanged": true
+    },
+    {
+      "resource": "midnight/d2coop/doppelganger_fx_spawn.midnightscene",
+      "generated": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\assets\\doppelganger_fx_spawn.midnightscene",
+      "sha256": "D080A1E1AF76093AB88995B71A0511A0206E46B51CDEB9D2601A2FEC087A3A5A",
+      "source": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\research\\asset-exports\\native-doppelganger-v403\\game1_patch\\generated.decls.midnightscene.midnight.gameplay.human.common.doppelganger.doppelganger_spawn..midnightscene.decl",
+      "source_sha256": "11683936C802FBD2567B625D70F4C040A9D7E87240E1A0C7F80021027EC72B87",
+      "kind": "midnightscene",
+      "classname": "midnightScene",
+      "runtime_verified": false,
+      "removed_tracks": [
+        "EMTT_FACEFX",
+        "EMTT_ANIM",
+        "EMTT_SFX"
+      ],
+      "sockets": [
+        "decoy_root",
+        "sl_l_arm",
+        "sl_r_arm",
+        "decoy_spawn_l_hand",
+        "decoy_spawn_r_hand"
+      ],
+      "scenes": [
+        {
+          "m_length": 1000,
+          "m_name": "Scene_1",
+          "m_speechChecksum": 0,
+          "m_forbidHoldToSkipScene": "false"
+        }
+      ],
+      "animation_tracks": 0,
+      "gameplay_event_tracks": 0
+    },
+    {
+      "resource": "models/effects/d2coop/doppelganger_despawn_remote.fx",
+      "generated": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\assets\\doppelganger_despawn_remote.fx",
+      "sha256": "8F5FF5B1A947156834C57B45D53B50F706CB7EEBF44552A2B257B1D2E072617A",
+      "source": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\research\\asset-exports\\native-doppelganger-fx-v436\\game1_patch\\generated.decls.fx.models.effects.gameplay.powers.doppelganger.decoy.spawn_despawn.decoy_despawn_01..fx.decl",
+      "source_sha256": "6CF35F30E3577645308FDEDA3D0579D09B7D6D20672C1FBCB2A4FE6404A45F0D",
+      "kind": "fx",
+      "classname": "fx",
+      "runtime_verified": false,
+      "removed": [],
+      "native_particles_unchanged": true
+    },
+    {
+      "resource": "midnight/d2coop/doppelganger_fx_despawn.midnightscene",
+      "generated": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\assets\\doppelganger_fx_despawn.midnightscene",
+      "sha256": "AF2E6038672C6FD47F1CCD6A812A35415F50DF2288B754F97F5B6E01AAD86E46",
+      "source": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\d2-coop-lab\\research\\asset-exports\\native-doppelganger-v403\\game1_patch\\generated.decls.midnightscene.midnight.gameplay.human.common.doppelganger.doppelganger_dispawn..midnightscene.decl",
+      "source_sha256": "69200A51EC22B2C3312208A96CB2EA132E6E86D994C0690ED5099C3F3D5A1281",
+      "kind": "midnightscene",
+      "classname": "midnightScene",
+      "runtime_verified": false,
+      "removed_tracks": [
+        "EMTT_FACEFX",
+        "EMTT_ANIM"
+      ],
+      "sockets": [
+        "decoy_spawn_r_hand",
+        "decoy_spawn_l_hand",
+        "decoy_root",
+        "sl_l_arm",
+        "sl_r_arm"
+      ],
+      "scenes": [
+        {
+          "m_length": 466,
+          "m_name": "Scene_1",
+          "m_speechChecksum": 0,
+          "m_forbidHoldToSkipScene": "false"
+        }
+      ],
+      "animation_tracks": 0,
+      "gameplay_event_tracks": 0
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-12T21:29:06.273380+02:00",
+  "complete": false,
+  "diagnosticBuild": true,
+  "takes": [
+    {
+      "take": "doppelganger-fx-v450",
+      "passed": false,
+      "failure": "Accepted clone payload has no exact sender digest",
+      "checks": 13,
+      "dll": "745D8692D7B2839F8E8E08842C9B7F4F53E805914F8FAEA1D18EBB31335A003F"
+    },
+    {
+      "take": "doppelganger-fx-v453",
+      "passed": false,
+      "failure": "Remote cosmetic effect scene lacks independent native binding",
+      "checks": 15,
+      "dll": "4435CA88EFB9A9764EE7F0CD29A43BD03AD6DCFBAB13AFBACFAB38E75D3DAE5E"
+    },
+    {
+      "take": "doppelganger-fx-v455",
+      "passed": false,
+      "failure": "Native transport/presentation retired: native_state_stale",
+      "checks": 5,
+      "dll": "4435CA88EFB9A9764EE7F0CD29A43BD03AD6DCFBAB13AFBACFAB38E75D3DAE5E"
+    },
+    {
+      "take": "doppelganger-fx-v457",
+      "passed": false,
+      "failure": "Strict helper handle missing from same-snapshot native FX map",
+      "checks": 12,
+      "dll": "4435CA88EFB9A9764EE7F0CD29A43BD03AD6DCFBAB13AFBACFAB38E75D3DAE5E"
+    },
+    {
+      "take": "doppelganger-fx-v460",
+      "passed": false,
+      "failure": "Clone visible pose, interpolation, exact transform or retirement check failed",
+      "checks": 14,
+      "dll": "C5DA1C86E4CA155C58C8C330A70AD29A5EE0861CA966CB2A524D294887D8DD46"
+    }
+  ],
+  "pauseTrace": [],
+  "live": "C5DA1C86E4CA155C58C8C330A70AD29A5EE0861CA966CB2A524D294887D8DD46",
+  "probe": "BB182DF6AB560D30981E40756A9C52231B5E9FB7BB1D5C6C9CE2B6E810ABF378",
+  "bodyBaseline": "candidate-doppelganger-visual-v427/runtime-verification-v431.json",
+  "scope": "Native summon FX now visible over Steam; default Emily clone still presentation-only. Disappearance stalls in native paused state5 and must be resolved before promotion. Same-world reuse not completed."
+}

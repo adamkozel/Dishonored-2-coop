@@ -1,0 +1,43 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140659910: test        r12d,r12d
+  0000000140659913: jne         0000000140659925
+  0000000140659915: mov         r8,rbx
+  0000000140659918: mov         edx,r14d
+  000000014065991B: mov         rcx,r15
+  000000014065991E: call        000000014065ACB0
+  0000000140659923: jmp         000000014065993F
+  0000000140659925: cmp         r12d,2
+  0000000140659929: jne         000000014065993F
+  000000014065992B: mov         rcx,qword ptr [000000014228BAE0h]
+  0000000140659932: mov         rax,qword ptr [rcx]
+  0000000140659935: lea         rdx,[0000000141C34788h]
+  000000014065993C: call        qword ptr [rax+70h]
+  000000014065993F: mov         rcx,qword ptr [000000014228BAE0h]
+  0000000140659946: mov         rax,qword ptr [rcx]
+  0000000140659949: lea         rdx,[0000000141C35114h]
+  0000000140659950: call        qword ptr [rax+70h]
+  0000000140659953: mov         rcx,qword ptr [r15+0000000000027980h]
+  000000014065995A: cmp         dword ptr [rcx],3
+  000000014065995D: jne         000000014065997C
+  000000014065995F: movzx       eax,byte ptr [rcx+10h]
+  0000000140659963: test        al,1
+  0000000140659965: je          000000014065997C
+  0000000140659967: movsd       xmm1,mmword ptr [rcx+18h]
+  000000014065996C: xorps       xmm0,xmm0
+  000000014065996F: ucomisd     xmm1,xmm0
+  0000000140659973: jp          000000014065997C
+  0000000140659975: jne         000000014065997C
+  0000000140659977: or          al,2
+  0000000140659979: mov         byte ptr [rcx+10h],al
+  000000014065997C: 32
+
+  Summary
+
+     1A7D000 .text

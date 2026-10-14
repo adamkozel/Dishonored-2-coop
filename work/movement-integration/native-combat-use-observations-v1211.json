@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-14T19:56:29.748869+02:00",
+  "observations": [
+    {
+      "takes": [
+        "../natural-moveset/native-counterattack-v1208",
+        "../natural-moveset/native-counterattack-v1208b"
+      ],
+      "item": "counterattack",
+      "finding": "Host Corvo vs arena guards/Ramsey: block/timed-parry scenes (sword_parry_in/idle/out/hit_1/hit_2/win) and slashes recorded; one timed parry (parry-lose for the attacker, off-balance) occurred in 1208b but the reactive attack collided with the block driver input (two input owners) and no follow-up scene was captured. In this save the player parry-win chance is 0% (chapter 80), so a parry never knocks the enemy down; the native knockdown finisher (ply_*_generic_fatality_knockdown*) needs a knocked-down enemy."
+    },
+    {
+      "takes": [
+        "../natural-moveset/native-player-knockdown-v1209"
+      ],
+      "item": "stagger_knockdown_recovery",
+      "finding": "Attack spree (single input owner): 10 native slashes/focus scenes recorded, no player knockdown in 7.3 s before the health safety stop (three attackers). Native player knockdown assets exist (Corvo ply_body_generic_knockdown_fall/front/land/recovery) and are triggered by PLAYER_HITREACT_KNOCKDOWN blowback (NPC parry-win of the player attack, chapter 80); not provoked yet."
+    },
+    {
+      "takes": [
+        "../natural-moveset/native-use-state-v1210",
+        "../natural-moveset/native-use-state-v1210b",
+        "../natural-moveset/native-use-state-v1210c"
+      ],
+      "item": "lever_button_crank_wheel/key_use",
+      "finding": "Confirmed runtime (1210c): each successful native use of the Dunwall window handle (open, then close) produced a brief native player state 75 (vtable 0x1c86ab8) for one ~15 ms sample. No first-person player animation exists for levers/buttons/cranks/wheels/keys in the native library (reference-index census), so the native source is the use event (state 75 + the focused usable) and the remote body needs an authored reach/operate clip. 1210 (pending not checked) and 1210b (watcher >15 s limit) are harness failures, retained."
+    }
+  ],
+  "complete": false
+}

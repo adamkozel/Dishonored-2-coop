@@ -1,0 +1,954 @@
+[
+  {
+    "rva": "0x1ac31f8",
+    "text": "QUICK_USE_HEALTH_POTION"
+  },
+  {
+    "rva": "0x1ac3210",
+    "text": "<GBA_QUICK_USE_HEALTH_POTION>"
+  },
+  {
+    "rva": "0x1af85f0",
+    "text": "ARK_ATTRIBUTE_HEALTH_GAIN_ON_SWORD_HIT"
+  },
+  {
+    "rva": "0x1af86b8",
+    "text": "ARK_ATTRIBUTE_CRITICAL_STATE_HEALTH_THRESHOLD"
+  },
+  {
+    "rva": "0x1af8728",
+    "text": "ARK_ATTRIBUTE_HEALTH_GAIN_ON_SHADOW_WALK_ASSASSINATION"
+  },
+  {
+    "rva": "0x1af8968",
+    "text": "ARK_ATTRIBUTE_HEALTH_CONSUME_DISABLE"
+  },
+  {
+    "rva": "0x1af8990",
+    "text": "ARK_ATTRIBUTE_HEALTH_CONSUMABLE_BONUS"
+  },
+  {
+    "rva": "0x1af9438",
+    "text": "ARK_ATTRIBUTE_POTION_HEALTH_FACTOR"
+  },
+  {
+    "rva": "0x1af9480",
+    "text": "ARK_ATTRIBUTE_POTION_HEALTH_GAIN"
+  },
+  {
+    "rva": "0x1af97e8",
+    "text": "ARK_ATTRIBUTE_DROP_ASSASSINATE_HEALTH_GAIN"
+  },
+  {
+    "rva": "0x1af9818",
+    "text": "ARK_ATTRIBUTE_ASSASSINATE_HEALTH_GAIN"
+  },
+  {
+    "rva": "0x1af9878",
+    "text": "ARK_ATTRIBUTE_DOPPELGANGER_EXTRA_HEALTH"
+  },
+  {
+    "rva": "0x1af9a50",
+    "text": "ARK_ATTRIBUTE_HEALTH_PER_RAT_BLOODFLY_KILLED"
+  },
+  {
+    "rva": "0x1afa028",
+    "text": "ARK_ATTRIBUTE_PLAYER_MELEE_WEAPON_DAMAGE_TO_HEALTH_FACTOR"
+  },
+  {
+    "rva": "0x1afaa38",
+    "text": "ARK_ATTRIBUTE_HEALTH_MAX"
+  },
+  {
+    "rva": "0x1afaa58",
+    "text": "ARK_ATTRIBUTE_HEALTH_MAX_SUPPRESSED"
+  },
+  {
+    "rva": "0x1afaa80",
+    "text": "ARK_ATTRIBUTE_HEALTH_REGEN_AMOUNT"
+  },
+  {
+    "rva": "0x1afaaa8",
+    "text": "ARK_ATTRIBUTE_HEALTH_REGEN_DELAY"
+  },
+  {
+    "rva": "0x1afaad0",
+    "text": "ARK_ATTRIBUTE_HEALTH_REGEN_RATE_FACTOR"
+  },
+  {
+    "rva": "0x1afaaf8",
+    "text": "ARK_ATTRIBUTE_MALUS_HEALTH_TO_MANA_DAMAGES"
+  },
+  {
+    "rva": "0x1afab50",
+    "text": "ARK_ATTRIBUTE_HEALTH_BY_FOUNTAIN_USE"
+  },
+  {
+    "rva": "0x1b48e00",
+    "text": "Teleport skill: Entity [%s] is trying to teleport but doesn't have the skill activated in its decl. Teleport will not occur."
+  },
+  {
+    "rva": "0x1b4ffd8",
+    "text": "to register to the wearer's health component"
+  },
+  {
+    "rva": "0x1b6b9f8",
+    "text": "canConsumeHealthPotion"
+  },
+  {
+    "rva": "0x1b6ba28",
+    "text": "healthPotionCount"
+  },
+  {
+    "rva": "0x1b6bb30",
+    "text": "ConsumeHealthPotion"
+  },
+  {
+    "rva": "0x1b749f0",
+    "text": "healthElixirsCount"
+  },
+  {
+    "rva": "0x1b76144",
+    "text": "Health"
+  },
+  {
+    "rva": "0x1b76150",
+    "text": "Health Updated"
+  },
+  {
+    "rva": "0x1b76580",
+    "text": "Max Health"
+  },
+  {
+    "rva": "0x1b76a50",
+    "text": "m_damageAmount"
+  },
+  {
+    "rva": "0x1b76eb0",
+    "text": "m_health"
+  },
+  {
+    "rva": "0x1b882d0",
+    "text": "To manage health steps."
+  },
+  {
+    "rva": "0x1b93bc8",
+    "text": "To cache the health component on start."
+  },
+  {
+    "rva": "0x1b94f48",
+    "text": "To provide rules with the owner health ratio"
+  },
+  {
+    "rva": "0x1ba20a8",
+    "text": "difficultyHealthRegen"
+  },
+  {
+    "rva": "0x1ba20d8",
+    "text": "difficultyMergeHealthMana"
+  },
+  {
+    "rva": "0x1c395f8",
+    "text": "arkDeclHUDElementHealth"
+  },
+  {
+    "rva": "0x1c39610",
+    "text": "UI_HUDElementHealth"
+  },
+  {
+    "rva": "0x1c39628",
+    "text": "_C_FillHealthGauge"
+  },
+  {
+    "rva": "0x1c48230",
+    "text": "attack.healthRatio"
+  },
+  {
+    "rva": "0x1c48248",
+    "text": "TIProvide_ProvideHealthRatio"
+  },
+  {
+    "rva": "0x1c48620",
+    "text": "attack.npc.skills.delilah.isInvulnerable"
+  },
+  {
+    "rva": "0x1c48650",
+    "text": "TIProvide_ProvideDelilahIsInvulnerable"
+  },
+  {
+    "rva": "0x1c48b80",
+    "text": "bark.base.healthRatio"
+  },
+  {
+    "rva": "0x1c49960",
+    "text": "bark.npc.lastdamage.amount"
+  },
+  {
+    "rva": "0x1c49980",
+    "text": "m_lastDamageAmount"
+  },
+  {
+    "rva": "0x1c51988",
+    "text": "to find health potions"
+  },
+  {
+    "rva": "0x1c519c0",
+    "text": "to get the maximum health"
+  },
+  {
+    "rva": "0x1c519e0",
+    "text": "A script didn't restore the player health lock to zero before the map transition (%i)"
+  },
+  {
+    "rva": "0x1c60560",
+    "text": "Display health/mana/breath span meters: 0 = off, 1 = fade-out when inactive, 2 = always"
+  },
+  {
+    "rva": "0x1c7fca0",
+    "text": "TELEPORT_SKILL is used with 'ARK_SKILL_TELEPORT_POSITION_DIRECTED' but we couldn't fetch the target entity '%s'. If it's not empty and valid, make sure this event is NOT used in a fastout as the target entities are already unloaded."
+  },
+  {
+    "rva": "0x1c8a2c0",
+    "text": "Must pass in an entity name to kill, optionally pass in all and an entity name to kill of of that type (does not apply to the player)"
+  },
+  {
+    "rva": "0x1c8a4a0",
+    "text": "usage: damage <name of entity to damage> <damageAmount>"
+  },
+  {
+    "rva": "0x1c8a900",
+    "text": "removes the entity with the given name, 'kill entityname' will remove that single entity, 'kill all entityname' removes all entities matching the class of the given name"
+  },
+  {
+    "rva": "0x1c8a9b0",
+    "text": "killEntity"
+  },
+  {
+    "rva": "0x1c8af90",
+    "text": "reduces damage taken based on percentage of health vs maxhealth"
+  },
+  {
+    "rva": "0x1c8b960",
+    "text": "seconds we wait after last damage to give health back to player"
+  },
+  {
+    "rva": "0x1c8b9a0",
+    "text": "g_playerHealthRegenDelay"
+  },
+  {
+    "rva": "0x1c8b9c0",
+    "text": "once regenerating health, how much we give per second"
+  },
+  {
+    "rva": "0x1c8b9f8",
+    "text": "g_playerHealthRegenRate"
+  },
+  {
+    "rva": "0x1c8ba10",
+    "text": "once regenerating health how often to increment"
+  },
+  {
+    "rva": "0x1c8ba40",
+    "text": "g_playerHealthRegenInterval"
+  },
+  {
+    "rva": "0x1c8d020",
+    "text": "enables drawing of Player Information elements in the HUD (e.g. name and health)."
+  },
+  {
+    "rva": "0x1c98c40",
+    "text": "notice_EV_HealthUpdated"
+  },
+  {
+    "rva": "0x1c9a8b8",
+    "text": "_previousHealth;_newHealth;"
+  },
+  {
+    "rva": "0x1c9a8e8",
+    "text": "healthUpdated"
+  },
+  {
+    "rva": "0x1ca2e58",
+    "text": "arkCpntHealth"
+  },
+  {
+    "rva": "0x1ca2e68",
+    "text": "arkCpntHealthEvolved"
+  },
+  {
+    "rva": "0x1ca35e8",
+    "text": "arkKisculeNodeGetHealth"
+  },
+  {
+    "rva": "0x1ca3650",
+    "text": "arkKisculeNodeHealthNotificationParameters"
+  },
+  {
+    "rva": "0x1cb1940",
+    "text": "arkKisculeNodeGetMaxHealth"
+  },
+  {
+    "rva": "0x1cb1980",
+    "text": "arkKisculeNodeHealth"
+  },
+  {
+    "rva": "0x1cb8b80",
+    "text": "arkCpntHealthDoor"
+  },
+  {
+    "rva": "0x1cb8cd0",
+    "text": "arkHUDElementHealth"
+  },
+  {
+    "rva": "0x1cb91b0",
+    "text": "arkKisculeNodeGetMaxHealthParameters"
+  },
+  {
+    "rva": "0x1cb9200",
+    "text": "arkKisculeNodeHealthNotification"
+  },
+  {
+    "rva": "0x1cc00c8",
+    "text": "arkKisculeNodeGetHealthParameters"
+  },
+  {
+    "rva": "0x1cc0138",
+    "text": "arkKisculeNodeHealthParameters"
+  },
+  {
+    "rva": "0x1cf7230",
+    "text": "size of the pool for arkCpntHealthEvolvedFactory when the game start"
+  },
+  {
+    "rva": "0x1cf7278",
+    "text": "cpnt_poolsize_arkCpntHealthEvolved"
+  },
+  {
+    "rva": "0x1cf84a0",
+    "text": "size of the pool for arkCpntHealthFactory when the game start"
+  },
+  {
+    "rva": "0x1cf84e0",
+    "text": "cpnt_poolsize_arkCpntHealth"
+  },
+  {
+    "rva": "0x1cf8500",
+    "text": "size of the pool for arkCpntHealthDoorFactory when the game start"
+  },
+  {
+    "rva": "0x1cf8548",
+    "text": "cpnt_poolsize_arkCpntHealthDoor"
+  },
+  {
+    "rva": "0x1d28270",
+    "text": "arkDeclCpntHealth"
+  },
+  {
+    "rva": "0x1d28288",
+    "text": "cpntHealth"
+  },
+  {
+    "rva": "0x1d28298",
+    "text": "arkDeclCpntHealthDoor"
+  },
+  {
+    "rva": "0x1d282b0",
+    "text": "cpntHealthDoor"
+  },
+  {
+    "rva": "0x1d282c0",
+    "text": "arkDeclCpntHealthEvolved"
+  },
+  {
+    "rva": "0x1d282e0",
+    "text": "cpntHealthEvolved"
+  },
+  {
+    "rva": "0x1d407b8",
+    "text": "arkHUDElementHealth::arkHealthInfo_t"
+  },
+  {
+    "rva": "0x1d44610",
+    "text": "arkCpntHealthEvolved::immunityInfo"
+  },
+  {
+    "rva": "0x1d44638",
+    "text": "arkCpntHealthEvolved::delayedDamageInfo_t"
+  },
+  {
+    "rva": "0x1d44668",
+    "text": "arkCpntHealthEvolved::irrelevantOnDeathData_t"
+  },
+  {
+    "rva": "0x1d44698",
+    "text": "arkDeclCpntHealthEvolved::bodyRegionConfig"
+  },
+  {
+    "rva": "0x1d4b830",
+    "text": "arkAIDelilahInvulnerableSkillSettings"
+  },
+  {
+    "rva": "0x1d4b858",
+    "text": "arkAIDelilahInvulnerableSkill"
+  },
+  {
+    "rva": "0x1d5f1e8",
+    "text": "arkCheckedCpntPtr < arkCpntHealthEvolved , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d60170",
+    "text": "arkValidCpntPtr < arkCpntHealthEvolved , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d606f0",
+    "text": "idList < arkCpntHealthEvolved::irrelevantOnDeathData_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d60750",
+    "text": "idListBase < arkCpntHealthEvolved::irrelevantOnDeathData_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d60b78",
+    "text": "arkValidCpntPtr < arkCpntHealthEvolved , CF_ATTACHED >"
+  },
+  {
+    "rva": "0x1d66878",
+    "text": "arkValidCpntPtr < arkCpntHealthEvolved , CF_ANY >"
+  },
+  {
+    "rva": "0x1d68f90",
+    "text": "idList < arkDeclCpntHealthEvolved::bodyRegionConfig , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d68ff0",
+    "text": "idListBase < arkDeclCpntHealthEvolved::bodyRegionConfig , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6c470",
+    "text": "arkCheckedCpntPtr < arkCpntHealth , CF_ANY >"
+  },
+  {
+    "rva": "0x1d6fda8",
+    "text": "arkCheckedCpntPtr < arkCpntHealth , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d730f0",
+    "text": "arkValidCpntPtr < arkCpntHealth , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d75350",
+    "text": "arkValidCpntPtr < arkCpntHealth , CF_ATTACHED >"
+  },
+  {
+    "rva": "0x1d79410",
+    "text": "arkValidCpntPtr < const arkCpntHealthEvolved , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d97fc8",
+    "text": "m_skipInflictedDamageClampingToHealth"
+  },
+  {
+    "rva": "0x1d98c68",
+    "text": "m_ownerHealth"
+  },
+  {
+    "rva": "0x1d98d20",
+    "text": "m_healthConsumableBonusAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a7e8",
+    "text": "m_healthMaxAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a808",
+    "text": "m_healthMaxSuppressedAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a830",
+    "text": "m_healthRegenAmountAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a858",
+    "text": "m_healthRegenDelayAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a880",
+    "text": "m_healthRegenRateFactorAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a8f8",
+    "text": "m_healthPotionFactorAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a920",
+    "text": "m_healthPotionGainAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a948",
+    "text": "m_healthPerRatsBloodlyKilledAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a978",
+    "text": "m_criticalStateHealthThresholdAttributeIndex"
+  },
+  {
+    "rva": "0x1d9a9a8",
+    "text": "m_healthPotionIndex"
+  },
+  {
+    "rva": "0x1d9a9d8",
+    "text": "m_suppressedHealth"
+  },
+  {
+    "rva": "0x1d9aa08",
+    "text": "m_cannotLoseHealth"
+  },
+  {
+    "rva": "0x1d9aa68",
+    "text": "arkCpntHealthEvolved::healthType_t"
+  },
+  {
+    "rva": "0x1d9aa90",
+    "text": "m_currentHealthType"
+  },
+  {
+    "rva": "0x1d9aaa8",
+    "text": "m_healthBeforeSwitch"
+  },
+  {
+    "rva": "0x1d9ab00",
+    "text": "m_playerMapTransitionInvulnerabilityTimeout"
+  },
+  {
+    "rva": "0x1d9ab40",
+    "text": "m_healthRegenPaused"
+  },
+  {
+    "rva": "0x1d9add0",
+    "text": "m_cachedHealth"
+  },
+  {
+    "rva": "0x1d9adf0",
+    "text": "m_cachedHealthInfo"
+  },
+  {
+    "rva": "0x1d9ae08",
+    "text": "m_cachedHealthMethod"
+  },
+  {
+    "rva": "0x1d9ae90",
+    "text": "m_spriteHealth"
+  },
+  {
+    "rva": "0x1d9af30",
+    "text": "m_healthPoints"
+  },
+  {
+    "rva": "0x1d9af60",
+    "text": "m_lowHealth"
+  },
+  {
+    "rva": "0x1d9b850",
+    "text": "m_cpntHealth"
+  },
+  {
+    "rva": "0x1d9e500",
+    "text": "m_malusHealthToManaDamagesAttributeIndex"
+  },
+  {
+    "rva": "0x1d9f758",
+    "text": "m_cachedPlayerHealth"
+  },
+  {
+    "rva": "0x1d9f7b0",
+    "text": "m_cachedHealthElixirsCount"
+  },
+  {
+    "rva": "0x1da1af8",
+    "text": "m_objectMCanConsumeHealthPotion"
+  },
+  {
+    "rva": "0x1da1b38",
+    "text": "m_objectMHealthPotionCount"
+  },
+  {
+    "rva": "0x1da9568",
+    "text": "m_healthEvolved"
+  },
+  {
+    "rva": "0x1dacea8",
+    "text": "m_infiniteHealth"
+  },
+  {
+    "rva": "0x1dad480",
+    "text": "m_asleepHealth"
+  },
+  {
+    "rva": "0x1db1000",
+    "text": "m_oilBatteryHealth"
+  },
+  {
+    "rva": "0x1db11e0",
+    "text": "m_resetWobHealth"
+  },
+  {
+    "rva": "0x1db1a10",
+    "text": "m_healthCpnt"
+  },
+  {
+    "rva": "0x1db1ad8",
+    "text": "m_playerDoppelgangerExtraHealthAttributeIndex"
+  },
+  {
+    "rva": "0x1db55c0",
+    "text": "m_isInvulnerable"
+  },
+  {
+    "rva": "0x1db8f40",
+    "text": "m_cachedHealthCpnt"
+  },
+  {
+    "rva": "0x1dbab38",
+    "text": "m_jointHealth"
+  },
+  {
+    "rva": "0x1dbb3e0",
+    "text": "m_damageAmountScaleForPlayer"
+  },
+  {
+    "rva": "0x1dbc0e8",
+    "text": "m_healthThreshold"
+  },
+  {
+    "rva": "0x1dbd630",
+    "text": "m_healthQuantity"
+  },
+  {
+    "rva": "0x1dbe020",
+    "text": "m_playerDamageAmount"
+  },
+  {
+    "rva": "0x1dbedb0",
+    "text": "m_killedStrickenEntity"
+  },
+  {
+    "rva": "0x1dbf218",
+    "text": "m_playerMeleeWeaponDamageToHealthFactorAttributeIndex"
+  },
+  {
+    "rva": "0x1dbfb70",
+    "text": "m_killCamEntityDef"
+  },
+  {
+    "rva": "0x1dc4208",
+    "text": "m_canResurrect"
+  },
+  {
+    "rva": "0x1dc4218",
+    "text": "m_resurrectMidnightHandle"
+  },
+  {
+    "rva": "0x1dc45b8",
+    "text": "m_resurrectionTeleport"
+  },
+  {
+    "rva": "0x1dc45d0",
+    "text": "m_invulnerability"
+  },
+  {
+    "rva": "0x1dc4648",
+    "text": "m_invulnerableSkill"
+  },
+  {
+    "rva": "0x1dc5e70",
+    "text": "m_cachedHUDElementHealth"
+  },
+  {
+    "rva": "0x1dc7d68",
+    "text": "m_healthScreenFX"
+  },
+  {
+    "rva": "0x1dc7dc8",
+    "text": "m_healthInstanceId"
+  },
+  {
+    "rva": "0x1dcaeb0",
+    "text": "m_basicDamageAmount"
+  },
+  {
+    "rva": "0x1dcaec8",
+    "text": "m_overchargedDamageAmount"
+  },
+  {
+    "rva": "0x1dce080",
+    "text": "m_healthGainOnSwordHitAttributeIndex"
+  },
+  {
+    "rva": "0x1dcf000",
+    "text": "m_killedEntity"
+  },
+  {
+    "rva": "0x1dcf0b8",
+    "text": "m_healthGainOnShadowWalkAssassinationAttributeIndex"
+  },
+  {
+    "rva": "0x1dcf120",
+    "text": "m_healthGainOnDropAssassinationAttributeIndex"
+  },
+  {
+    "rva": "0x1dcf150",
+    "text": "m_healthGainOnAssassinationAttributeIndex"
+  },
+  {
+    "rva": "0x1dd0260",
+    "text": "m_healthConsumeDisableAttributeIndex"
+  },
+  {
+    "rva": "0x1dd6218",
+    "text": "m_killEntityAtEnd"
+  },
+  {
+    "rva": "0x1dd6e88",
+    "text": "m_maxHealth"
+  },
+  {
+    "rva": "0x1ddb4d0",
+    "text": "m_healthRegen"
+  },
+  {
+    "rva": "0x1ddb558",
+    "text": "m_mergeHealthMana"
+  },
+  {
+    "rva": "0x1ddb628",
+    "text": "m_damageAmountFront"
+  },
+  {
+    "rva": "0x1ddb640",
+    "text": "m_damageAmountBack"
+  },
+  {
+    "rva": "0x1ddb688",
+    "text": "m_healthPotionEffect"
+  },
+  {
+    "rva": "0x1ddb768",
+    "text": "m_healthRegenAmountScale"
+  },
+  {
+    "rva": "0x1ddb880",
+    "text": "m_limitHealthRegen"
+  },
+  {
+    "rva": "0x1ddbda8",
+    "text": "m_instantKillHomingEntity"
+  },
+  {
+    "rva": "0x1df1b40",
+    "text": "ARK_HUD_ELEMENT_HEALTH"
+  },
+  {
+    "rva": "0x1dff4d8",
+    "text": "ARK_MSG_RESURRECTED"
+  },
+  {
+    "rva": "0x1e07450",
+    "text": "RELIABLE_PLAYER_COMMAND_INFINITE_HEALTH"
+  },
+  {
+    "rva": "0x1e0f3f8",
+    "text": "AIPLAYER_LOWEST_HEALTH"
+  },
+  {
+    "rva": "0x1e0f548",
+    "text": "AIPLAYER_HIGHEST_HEALTH"
+  },
+  {
+    "rva": "0x1e14bd8",
+    "text": "ARK_MSG_PLAYER_CONSUME_HEALTH_POTION"
+  },
+  {
+    "rva": "0x1e192a0",
+    "text": "ARK_CONTROLSETTING_KEY_QUICK_USE_HEALTH_POTION"
+  },
+  {
+    "rva": "0x1e1a730",
+    "text": "arkCpntHealthEvolved::HEALTH_NORMAL"
+  },
+  {
+    "rva": "0x1e1a860",
+    "text": "arkCpntHealthEvolved::HEALTH_ASLEEP"
+  },
+  {
+    "rva": "0x1e1a968",
+    "text": "arkCpntHealthEvolved::HEALTH_COUNT"
+  },
+  {
+    "rva": "0x1e203b8",
+    "text": "ARK_ENHANCEMENT_VITALITY_EXTEND_HEALTH"
+  },
+  {
+    "rva": "0x1e204b8",
+    "text": "ARK_ENHANCEMENT_VITALITY_IMPROVED_HEALTH_REGEN"
+  },
+  {
+    "rva": "0x1e29d68",
+    "text": "ARK_PLAYER_STATISTIC_USE_HEALTH_POTION"
+  },
+  {
+    "rva": "0x1e2db38",
+    "text": "ACTION_QUICK_USE_HEALTH_POTION"
+  },
+  {
+    "rva": "0x1e34198",
+    "text": "HEALTH_NORMAL"
+  },
+  {
+    "rva": "0x1e341a8",
+    "text": "HEALTH_ASLEEP"
+  },
+  {
+    "rva": "0x1e341b8",
+    "text": "HEALTH_COUNT"
+  },
+  {
+    "rva": "0x1e40630",
+    "text": "arkHUDElementHealth::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42870",
+    "text": "arkCpntHealthEvolved::_InnerClassType"
+  },
+  {
+    "rva": "0x1e429e0",
+    "text": "arkCpntHealthEvolved::irrelevantOnDeathList"
+  },
+  {
+    "rva": "0x1e42ae8",
+    "text": "idList < arkCpntHealthEvolved::irrelevantOnDeathData_t >"
+  },
+  {
+    "rva": "0x1e47580",
+    "text": "arkCpntAISensor_Combat::healthCpntPtr"
+  },
+  {
+    "rva": "0x1e48c70",
+    "text": "arkCpntMusicBox::healthPtr"
+  },
+  {
+    "rva": "0x1f161f0",
+    "text": "TtResurrect constraints"
+  },
+  {
+    "rva": "0x2302260",
+    "text": ".?AVarkAIDelilahInvulnerableSkill@@"
+  },
+  {
+    "rva": "0x2318ad0",
+    "text": ".?AVarkHUDElementHealth@@"
+  },
+  {
+    "rva": "0x2318b00",
+    "text": ".?AVarkDeclHUDElementHealth@@"
+  },
+  {
+    "rva": "0x2318b30",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclHUDElementHealth@@@@"
+  },
+  {
+    "rva": "0x231d5d0",
+    "text": ".?AVarkDeclCpntHealth@@"
+  },
+  {
+    "rva": "0x231d5f8",
+    "text": ".?AVarkCpntHealth@@"
+  },
+  {
+    "rva": "0x231d620",
+    "text": ".?AVarkCpntHealthEvolved@@"
+  },
+  {
+    "rva": "0x231d650",
+    "text": ".?AVarkDeclCpntHealthEvolved@@"
+  },
+  {
+    "rva": "0x2320e48",
+    "text": ".?AVarkKisculeNodeHealthParameters@@"
+  },
+  {
+    "rva": "0x2320e80",
+    "text": ".?AVarkKisculeNodeHealth@@"
+  },
+  {
+    "rva": "0x2320eb0",
+    "text": ".?AVarkKisculeNodeHealthNotificationParameters@@"
+  },
+  {
+    "rva": "0x23214c0",
+    "text": ".?AVarkKisculeNodeGetHealthParameters@@"
+  },
+  {
+    "rva": "0x2321548",
+    "text": ".?AVarkKisculeNodeGetMaxHealthParameters@@"
+  },
+  {
+    "rva": "0x232c328",
+    "text": ".?AVarkKisculeNodeGetHealth@@"
+  },
+  {
+    "rva": "0x232fcf0",
+    "text": ".?AVarkKisculeNodeGetMaxHealth@@"
+  },
+  {
+    "rva": "0x2331cd8",
+    "text": ".?AVarkKisculeNodeHealthNotification@@"
+  },
+  {
+    "rva": "0x2332cc0",
+    "text": ".?AVarkCpntHealthDoor@@"
+  },
+  {
+    "rva": "0x233ca00",
+    "text": ".?AVarkCpntHealthEvolvedFactory@@"
+  },
+  {
+    "rva": "0x233d2b8",
+    "text": ".?AVarkCpntHealthFactory@@"
+  },
+  {
+    "rva": "0x233d2e8",
+    "text": ".?AVarkCpntHealthDoorFactory@@"
+  },
+  {
+    "rva": "0x23424a0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntHealth@@@@"
+  },
+  {
+    "rva": "0x23424f0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntHealth@@@@"
+  },
+  {
+    "rva": "0x2342530",
+    "text": ".?AVarkDeclCpntHealthDoor@@"
+  },
+  {
+    "rva": "0x2342560",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntHealthDoor@@@@"
+  },
+  {
+    "rva": "0x23425b0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntHealthDoor@@@@"
+  },
+  {
+    "rva": "0x2342600",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntHealthEvolved@@@@"
+  },
+  {
+    "rva": "0x2342650",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntHealthEvolved@@@@"
+  },
+  {
+    "rva": "0x236ae38",
+    "text": ".?AVarkAIDelilahInvulnerableSkillSettings@@"
+  }
+]

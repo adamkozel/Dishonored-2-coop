@@ -1,0 +1,58 @@
+{
+  "At": "2026-10-09T15:39:33.2954089+02:00",
+  "Dll": "345CD1D409BE275C6817C96C5E5C8F5CB64FDCFAF88715B2E4DFBAB5E82CE303",
+  "Live": [
+    {
+      "Role": "host",
+      "Pid": 50056,
+      "Epoch": 26,
+      "Handle": 209916411,
+      "Follow": true,
+      "Exact": true,
+      "Fresh": true,
+      "BodyStream": true,
+      "Upright": true,
+      "NativeCrouchReferenceReady": true,
+      "NativeInterface": "SteamNetworkingSockets012",
+      "PlayerHealth": 56,
+      "CloneHealth": 40,
+      "FriendlyFireLocalBlocked": 21,
+      "FriendlyFirePartnerBlocked": 6,
+      "OwnedAvatarValid": true
+    },
+    {
+      "Role": "client",
+      "Pid": 49096,
+      "Epoch": 26,
+      "Handle": 209916391,
+      "Follow": true,
+      "Exact": true,
+      "Fresh": true,
+      "BodyStream": true,
+      "Upright": true,
+      "NativeCrouchReferenceReady": true,
+      "NativeInterface": "SteamNetworkingSockets012",
+      "PlayerHealth": 56,
+      "CloneHealth": 40,
+      "FriendlyFireLocalBlocked": 12,
+      "FriendlyFirePartnerBlocked": 6,
+      "OwnedAvatarValid": true
+    }
+  ],
+  "ResearchOnly": true,
+  "Scope": "Owned-player damage attribution firewall before native health handling, including real sword-contact checks in both roles. Every power/indirect hazard and pre-damage incapacitation remain unverified.",
+  "StableMilestone": "work/doppelganger-smoothing-424B",
+  "Previous": "work/doppelganger-crouch-upright-303A-research",
+  "IdenticalPreservedAssets": "work/doppelganger-crouch-relative-6FDE-research/installed-assets",
+  "Reports": [
+    "friendly-fire-native-first-345C.json",
+    "friendly-fire-native.json",
+    "friendly-fire-strikes.json",
+    "native-sword-damage-verification.json",
+    "native-enemy-damage-verification.json",
+    "baseline-integrity-verification.json",
+    "doppelganger-crouch-live-enable.json",
+    "mixamo-crouch-feasibility.json",
+    "blender-mcp-working-versions.json"
+  ]
+}

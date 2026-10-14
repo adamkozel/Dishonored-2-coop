@@ -1,0 +1,100 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791652575566,
+  "captureStart": 1791652574452,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.114,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint",
+      "seconds": 2.623,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slide",
+      "seconds": 2.966,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native jump interrupts slide",
+      "seconds": 3.31,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Landing and stance recovery",
+      "seconds": 5.62,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 10.657,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1000,
+      "LeftThumb",
+      0,
+      "Native sprint"
+    ],
+    [
+      1850,
+      0,
+      32767,
+      500,
+      "B",
+      0,
+      "Native slide"
+    ],
+    [
+      2180,
+      0,
+      20000,
+      180,
+      "A",
+      0,
+      "Native jump interrupts slide"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Landing and stance recovery"
+    ],
+    [
+      9500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "0A68D333DB365AF68C6AEDE7731D8D4E0B4E3D51F957A0407E0998E7BFD4F37B",
+  "bank": "36BF91434E2F71D9046362E8962C4B5312A7B370B4FD0CFD2B2A84691AA1D579",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

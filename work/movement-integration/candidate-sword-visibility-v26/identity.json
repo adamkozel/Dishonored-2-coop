@@ -1,0 +1,38 @@
+{
+  "sha256": "A3A1542B9245DBCE5D33FC89952FAD0CC3C90656F8F727C715A6150145130D86",
+  "probeSha256": "CDD8D1C8BA56516EACB688F307E78D0AD009EAE891D4B57A0C010C23C5D146AF",
+  "parent": "E42F7EECFDB0643EAD3CDC141ECBA462A3AEE29527BB90143EE914BFEF7E4890",
+  "runtimeValidated": true,
+  "scope": "Native explicit visibility for the exact clone sword inventory child, driven by confirmed equip state; restore prior visibility on lease cleanup. Does not animate sword folding.",
+  "tests": [
+    "equipment-visibility-v26/result.json",
+    "equipment-visibility-pause-v26/result.json"
+  ],
+  "cases": {
+    "native-paired-pickup-corvo-visibility-v26": {
+      "video": "native-paired-pickup-corvo-visibility-v26/native.mp4",
+      "evidence": "native-paired-pickup-corvo-visibility-v26/validation.json",
+      "paired_evidence": "native-paired-pickup-corvo-visibility-v26/paired-validation.json",
+      "sword_evidence": "native-paired-pickup-corvo-visibility-v26/sword-visibility-validation.json",
+      "visual_review": "native-paired-pickup-corvo-visibility-v26/visual-review.json",
+      "checks": 44,
+      "video_sha256": "5D083A9A68D6E9C70834432C349CF0A5F7D9429F3060CCA04AB65B86D3A20240",
+      "role": "corvo",
+      "complete": false,
+      "visual_accepted": false
+    },
+    "native-paired-pickup-emily-visibility-v26": {
+      "video": "native-paired-pickup-emily-visibility-v26/native.mp4",
+      "evidence": "native-paired-pickup-emily-visibility-v26/validation.json",
+      "paired_evidence": "native-paired-pickup-emily-visibility-v26/paired-validation.json",
+      "sword_evidence": "native-paired-pickup-emily-visibility-v26/sword-visibility-validation.json",
+      "visual_review": "native-paired-pickup-emily-visibility-v26/visual-review.json",
+      "checks": 44,
+      "video_sha256": "50D60A38EAC36841F9E712E0881B6DBC9F47CFF2448073F1E5F80F67E56267E3",
+      "role": "emily",
+      "complete": false,
+      "visual_accepted": false
+    }
+  },
+  "validation_scope": "Native sword visibility and restoration, scoped paired pickup; not complete carry or moveset acceptance."
+}

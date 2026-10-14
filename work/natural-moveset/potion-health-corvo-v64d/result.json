@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "kind": "health",
+  "wheelButton": "B",
+  "checks": [
+    "Exactly one scalar native potion granted without equipping or invoking consumption",
+    "Native input consumed one potion",
+    "Native health increases after consumption without a health setter",
+    "Both inventories restore exactly after finite native grant",
+    "Both native isolated checkpoints restore health and unowned potion state",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.987,
+      "input": "Native LeftShoulder item wheel"
+    },
+    {
+      "videoTime": 2.285,
+      "input": "Native item wheel plus B"
+    }
+  ],
+  "dll": "0570A9AD817651C0C10CEDD389EF75EE42EB80073D6F1D0536DE0A9DDC0206C9",
+  "probe": "98AF22AF95FD0F265F62B757958EBB9458D475A32A2DB79E5512D2D3BEA8B359",
+  "finalDll": "0570A9AD817651C0C10CEDD389EF75EE42EB80073D6F1D0536DE0A9DDC0206C9",
+  "scope": "Source-only native potion and item-wheel observation. No remote animation or shared healing is claimed; all native effects are reset through isolated checkpoints."
+}

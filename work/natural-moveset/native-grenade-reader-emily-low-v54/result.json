@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "pitch": 35,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.12,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 35
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_low.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_low_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene"
+  ],
+  "dll": "C43B0FB0FD03AECF8D85A7312282F688879BF725DE4ACD5BD7AB6584C15634E1",
+  "probe": "C1AC9541B2D1106A5CBA3DF680A55C2BCB0910B9C22CAC97C1AD1FF06BC768DB",
+  "scope": "Source native one-grenade action observation only. Real native projectile/world effects are reset through the isolated checkpoints. No remote grenade animation, damage authority or projectile replication is claimed."
+}

@@ -1,0 +1,134 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014003F3A0: lea         rcx,[00000001425AEA90h]
+  000000014003F3A7: mov         r8b,1
+  000000014003F3AA: jmp         0000000140102520
+  000000014003F3AF: int         3
+  000000014003F3B0: mov         qword ptr [rsp+8],rbx
+  000000014003F3B5: push        rdi
+  000000014003F3B6: sub         rsp,50h
+  000000014003F3BA: cmp         qword ptr [rcx],0
+  000000014003F3BE: mov         edi,edx
+  000000014003F3C0: mov         rbx,rcx
+  000000014003F3C3: je          000000014003F3ED
+  000000014003F3C5: call        00000001401548E0
+  000000014003F3CA: mov         r9,qword ptr [rbx]
+  000000014003F3CD: lea         rdx,[0000000141AB3770h]
+  000000014003F3D4: mov         r10,qword ptr [rax]
+  000000014003F3D7: mov         r8d,138h
+  000000014003F3DD: mov         rcx,rax
+  000000014003F3E0: mov         qword ptr [rsp+20h],10h
+  000000014003F3E9: call        qword ptr [r10+10h]
+  000000014003F3ED: mov         dword ptr [rbx+8],edi
+  000000014003F3F0: call        00000001401548E0
+  000000014003F3F5: mov         dword ptr [rsp+40h],0FFFFFFFFh
+  000000014003F3FD: mov         r10,qword ptr [rax]
+  000000014003F400: mov         qword ptr [rsp+38h],10h
+  000000014003F409: mov         byte ptr [rsp+30h],0
+  000000014003F40E: lea         r9,[0000000141AB3808h]
+  000000014003F415: lea         rdx,[0000000141AB3770h]
+  000000014003F41C: mov         r8d,13Bh
+  000000014003F422: mov         rcx,rax
+  000000014003F425: mov         dword ptr [rsp+28h],6
+  000000014003F42D: mov         qword ptr [rsp+20h],rdi
+  000000014003F432: call        qword ptr [r10+8]
+  000000014003F436: mov         byte ptr [rbx+0Ch],1
+  000000014003F43A: mov         qword ptr [rbx],rax
+  000000014003F43D: mov         rbx,qword ptr [rsp+60h]
+  000000014003F442: add         rsp,50h
+  000000014003F446: pop         rdi
+  000000014003F447: ret
+  000000014003F448: int         3
+  000000014003F449: int         3
+  000000014003F44A: int         3
+  000000014003F44B: int         3
+  000000014003F44C: int         3
+  000000014003F44D: int         3
+  000000014003F44E: int         3
+  000000014003F44F: int         3
+  000000014003F450: push        rbp
+  000000014003F452: push        r14
+  000000014003F454: push        r15
+  000000014003F456: lea         rbp,[rsp+FFFFFFFFFFFF6190h]
+  000000014003F45E: mov         eax,9F70h
+  000000014003F463: call        00000001411AD7C0
+  000000014003F468: sub         rsp,rax
+  000000014003F46B: mov         qword ptr [rsp+68h],0FFFFFFFFFFFFFFFEh
+  000000014003F474: mov         qword ptr [rsp+0000000000009F90h],rbx
+  000000014003F47C: mov         qword ptr [rsp+0000000000009F98h],rsi
+  000000014003F484: mov         qword ptr [rsp+0000000000009FA0h],rdi
+  000000014003F48C: mov         rsi,r9
+  000000014003F48F: mov         r14,r8
+  000000014003F492: mov         r15,rdx
+  000000014003F495: lea         rcx,[rsp+70h]
+  000000014003F49A: call        000000014013FB30
+  000000014003F49F: nop
+  000000014003F4A0: xor         edx,edx
+  000000014003F4A2: mov         r8d,0ECh
+  000000014003F4A8: lea         rcx,[rbp-68h]
+  000000014003F4AC: call        00000001411AD450
+  000000014003F4B1: mov         byte ptr [rbp-80h],0
+  000000014003F4B5: lea         rax,[rbp-80h]
+  000000014003F4B9: mov         qword ptr [rsp+70h],rax
+  000000014003F4BE: and         dword ptr [rsp+78h],0E0000000h
+  000000014003F4C6: mov         eax,dword ptr [rsp+7Ch]
+  000000014003F4CA: and         eax,40000000h
+  000000014003F4CF: or          eax,104h
+  000000014003F4D4: mov         dword ptr [rsp+7Ch],eax
+  000000014003F4D8: lea         rdx,[0000000141AB3BC8h]
+  000000014003F4DF: lea         rcx,[rsp+70h]
+  000000014003F4E4: call        000000014013FF40
+  000000014003F4E9: nop
+  000000014003F4EA: mov         rdi,qword ptr [rbp+0000000000009EB0h]
+  000000014003F4F1: lea         rdx,[rdi+10h]
+  000000014003F4F5: lea         rcx,[rsp+70h]
+  000000014003F4FA: call        0000000140140390
+  000000014003F4FF: lea         rcx,[rdi+10h]
+  000000014003F503: call        0000000140143FF0
+  000000014003F508: test        eax,eax
+  000000014003F50A: jne         000000014003F56B
+  000000014003F50C: mov         rcx,qword ptr [0000000142274420h]
+  000000014003F513: mov         rax,qword ptr [rcx]
+  000000014003F516: mov         r8d,1
+  000000014003F51C: lea         rdx,[rbp+0000000000000090h]
+  000000014003F523: call        qword ptr [rax+0000000000000198h]
+  000000014003F529: mov         rcx,qword ptr [000000014232A050h]
+  000000014003F530: mov         r10,qword ptr [rcx]
+  000000014003F533: mov         rdx,qword ptr [rbp+0000000000009EB8h]
+  000000014003F53A: mov         qword ptr [rsp+30h],rdx
+  000000014003F53F: mov         qword ptr [rsp+28h],rax
+  000000014003F544: mov         qword ptr [rsp+20h],rdi
+  000000014003F549: mov         r9,rsi
+  000000014003F54C: mov         r8,r14
+  000000014003F54F: mov         rdx,r15
+  000000014003F552: call        qword ptr [r10+18h]
+  000000014003F556: movzx       ebx,al
+  000000014003F559: lea         rcx,[rsp+70h]
+  000000014003F55E: call        000000014013FD10
+  000000014003F563: movzx       eax,bl
+  000000014003F566: jmp         000000014003F6F5
+  000000014003F56B: mov         edx,35h
+  000000014003F570: mov         ecx,0C8h
+  000000014003F575: call        00000001400F1450
+  000000014003F57A: mov         qword ptr [rbp+0000000000009EB0h],rax
+  000000014003F581: test        rax,rax
+  000000014003F584: je          000000014003F593
+  000000014003F586: mov         rcx,rax
+  000000014003F589: call        00000001400AB780
+  000000014003F58E: mov         rbx,rax
+  000000014003F591: jmp         000000014003F595
+  000000014003F593: xor         ebx,ebx
+  000000014003F595: lea         rdx,[rsp+70h]
+  000000014003F59A: lea         rcx,[rsp+40h]
+  000000014003F59F: E8
+  000000014003F5A0: in          al,dx
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Domino item acquired and selected without directly invoking power or VFX",
+    "Controller input produces recorded native PhantasmalLink scenes with reciprocal bindings; phase names and counts are observed, not inferred",
+    "Native holster before LT and stance confirmed; raw scene, sword selection, state and strict-reader acceptance during actual casting recorded without assuming automatic draw",
+    "Native player state, equipment, raw component/entity and filtered effect samples retained; mana change and targeting outcome remain observations",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and no filtered native Domino effects remain",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.13,
+      "input": "Native X held1000ms to holster equipment"
+    },
+    {
+      "videoTime": 5.415,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "8AC3107982810EC3C2AD8D854FFF3B36DED8107E34D2487DDE7051CD0BBB91C9",
+  "probe": "F46B3D2676101759DD39DEF3102FB958888972D8F8B66BF0727DAA279811AD9A",
+  "stance": "standing",
+  "scope": "Targeted native Domino holster and cast observation (no remote binding): exact Emily inventory acquisition, one native LT hold/release, raw PhantasmalLink subscenes, state/equipment/target and filtered effect data. A recorded scene is not proof of successful linking, mana spending or target outcomes. No remote body/VFX or gameplay replication. Full isolated inventory/health and checkpoint recovery plus protected hashes are required."
+}

@@ -1,0 +1,64 @@
+
+void FUN_14061bea0(longlong *param_1)
+
+{
+  char cVar1;
+  longlong *plVar2;
+  undefined8 uVar3;
+  uint uVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  undefined4 uVar8;
+  undefined1 local_res8 [8];
+  
+  plVar2 = (longlong *)FUN_140878030(param_1[2],local_res8);
+  param_1[0xe] = *plVar2;
+  uVar3 = FUN_1406dc560(*(undefined4 *)(param_1[2] + 0xac));
+  uVar3 = FUN_140877720(uVar3,&DAT_1439d13b0,2);
+  fVar5 = (float)(**(code **)(*param_1 + 0x160))(param_1);
+  if (*(int *)((longlong)param_1 + 0x9c) < 0) {
+    fVar6 = 0.0;
+  }
+  else {
+    fVar6 = *(float *)(*(longlong *)(param_1[6] + 0x48) + 0x24 +
+                      (longlong)*(int *)((longlong)param_1 + 0x9c) * 0x28);
+  }
+  if ((int)param_1[0x13] < 0) {
+    fVar7 = 0.0;
+  }
+  else {
+    fVar7 = *(float *)(*(longlong *)(param_1[6] + 0x48) + 0x24 + (longlong)(int)param_1[0x13] * 0x28
+                      );
+  }
+  if ((int)fVar6 == 0) {
+LAB_14061bfb0:
+    if ((int)fVar7 != 0) {
+      uVar4 = *(int *)(D2_GameSingletonPtr + 0x600f8) * 0x19660d + 0x3c6ef35f;
+      *(uint *)(D2_GameSingletonPtr + 0x600f8) = uVar4;
+      if ((int)((uVar4 >> 10 & 0x7fff) % 0x65) < (int)fVar7) goto LAB_14061c030;
+    }
+  }
+  else {
+    uVar4 = *(int *)(D2_GameSingletonPtr + 0x600f8) * 0x19660d + 0x3c6ef35f;
+    *(uint *)(D2_GameSingletonPtr + 0x600f8) = uVar4;
+    if ((int)fVar6 <= (int)((uVar4 >> 10 & 0x7fff) % 0x65)) goto LAB_14061bfb0;
+    fVar5 = fVar5 * 2.0;
+  }
+  if (0.0 < fVar5) {
+    cVar1 = FUN_140647ed0(D2_GameSingletonPtr + 0x1f7b90);
+    if (cVar1 == '\0') {
+      uVar8 = 0;
+    }
+    else {
+      uVar8 = *(undefined4 *)(param_1[1] + 0x158);
+    }
+    FUN_140746cf0(uVar3,fVar5,uVar8);
+  }
+LAB_14061c030:
+  *(int *)((longlong)param_1 + 100) = *(int *)((longlong)param_1 + 100) + 1;
+  *(undefined1 *)((longlong)param_1 + 0xa5) = 1;
+  return;
+}
+
+

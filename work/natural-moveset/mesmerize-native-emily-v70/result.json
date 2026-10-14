@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "failure": "Native Mesmerize in phase not observed",
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.97,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "1E25A8A6E73E5E922C5E6BAE3214F3F0E5ED31D3D8271FBF1F09179171AD7F2D",
+  "probe": "5381EBAAA9B5C3263805A10F55848BC3C897A71BE4C76E85FE5DC7B731078783",
+  "scope": "Native source Mesmerize acquisition, controller casting, scenes and effects only. No remote body, VFX, AI or gameplay outcome replication. Mandatory isolated checkpoint reload retires world effects; original assets and saves unchanged."
+}

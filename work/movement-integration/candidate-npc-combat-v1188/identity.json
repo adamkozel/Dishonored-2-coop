@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-14T18:10:57.133465+02:00",
+  "dll": "8E72491F3B5CB364A9A4EE7265DB6BD93A552F525C532E68104CF7C982D27285",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1181",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1188 on 1181: join-follow - the host publishes its current mission (idCommonLocal+0x2b8 idDeclMapInfo name, chaos from the map name) on D2MF packets; a joiner on another map loads the same mission natively with campaign <mapinfo> <chaos> emily (product mode automatic; lab: coop_follow_host on). Host plays Corvo. Runtime pending.",
+  "scopedJoinFollowVerified": true,
+  "runtimeEvidence": "../join-follow-audit-v1192.json"
+}

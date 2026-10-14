@@ -1,0 +1,231 @@
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Traceback (most recent call last):
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\modules\addon_utils.py", line 457, in enable
+    mod = importlib.import_module(module_name)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\__init__.py", line 66, in <module>
+    from . import ops
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\ops.py", line 73, in <module>
+    from .. ui import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\__init__.py", line 74, in <module>
+    from . import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_templates.py", line 77, in <module>
+    from . ui_menus import SCATTER5_PT_docs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_menus.py", line 77, in <module>
+    from ... __init__ import addon_prefs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\__init__.py", line 98, in <module>
+    from . import gatekeeper
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\gatekeeper.py", line 65, in <module>
+    from . import override
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\override.py", line 69, in <module>
+    from . import engine
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\engine.py", line 72, in <module>
+    from . import core
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\core.py", line 61, in <module>
+    import pybullet
+ModuleNotFoundError: No module named 'pybullet'
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Extensions: writing cache failed ([Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.cache\\compat.dat').
+Error: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Failed to extract path: C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\.local\lib\python3.13\site-packages\.DS_Store error [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Unable to set stale files pending: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\config\\stale-pending'
+Octane Addon Client is enabled
+OctaneBlender.init: opts = {'server': None, 'port': None, 'cert': None}
+Octane Ocio Management Update Start
+Octane Ocio Management Update End. Time cost: 0.03 secs
+{
+  "passed": true,
+  "scope": "Fixed-frame conversion and final native publication only; visual quality, native weapon attachment and action-state binding remain separate.",
+  "cases": [
+    {
+      "id": "crossbow_fire-corvo",
+      "samples": 40,
+      "rejected": 8,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "crossbow_sequence-corvo",
+      "samples": 39,
+      "rejected": 11,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "heart_use-corvo",
+      "samples": 39,
+      "rejected": 11,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "heart_sequence-corvo",
+      "samples": 34,
+      "rejected": 14,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.03956468205889273,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "stunmine_place-corvo",
+      "samples": 41,
+      "rejected": 7,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "stunmine_sequence-corvo",
+      "samples": 38,
+      "rejected": 10,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "crossbow_fire-emily",
+      "samples": 39,
+      "rejected": 8,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.03956468205889273,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "crossbow_sequence-emily",
+      "samples": 38,
+      "rejected": 10,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "heart_use-emily",
+      "samples": 34,
+      "rejected": 15,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "heart_sequence-emily",
+      "samples": 40,
+      "rejected": 8,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.03956468205889273,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "stunmine_place-emily",
+      "samples": 40,
+      "rejected": 9,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.03956468205889273,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    },
+    {
+      "id": "stunmine_sequence-emily",
+      "samples": 34,
+      "rejected": 14,
+      "checked_joints": 57,
+      "fingers_and_weapon_socket_included": true,
+      "max_anatomical_angle_degrees": 0.0,
+      "max_anatomical_translation_m": 0.0,
+      "root_travel": 0.0,
+      "native_helpers_excluded": true,
+      "visual_accepted": false,
+      "passed": true
+    }
+  ]
+}
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+
+Blender quit

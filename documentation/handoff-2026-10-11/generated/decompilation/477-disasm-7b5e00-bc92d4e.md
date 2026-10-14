@@ -1,0 +1,100 @@
+# disasm-7b5e00.txt
+
+Original: [work/disasm-7b5e00.txt](<../../../../work/disasm-7b5e00.txt>)
+
+SHA-256: `1F2628B7AEB64509E80FDFBC8F4BA266676EE0B871301F4141BCA24ADA9A0C9E`; 3925 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407B5E00: mov         r8d,dword ptr [rdx]
+  00000001407B5E03: cmp         r8d,3FFF0010h
+  00000001407B5E0A: je          00000001407B5E26
+  00000001407B5E0C: mov         eax,r8d
+  00000001407B5E0F: sar         eax,10h
+  00000001407B5E12: cdqe
+  00000001407B5E14: mov         rax,qword ptr [rcx+rax*8]
+  00000001407B5E18: test        rax,rax
+  00000001407B5E1B: je          00000001407B5E26
+  00000001407B5E1D: cmp         dword ptr [rax+00000000000000A8h],r8d
+  00000001407B5E24: je          00000001407B5E28
+  00000001407B5E26: xor         eax,eax
+  00000001407B5E28: rep ret
+  00000001407B5E2A: int         3
+  00000001407B5E2B: int         3
+  00000001407B5E2C: int         3
+  00000001407B5E2D: int         3
+  00000001407B5E2E: int         3
+  00000001407B5E2F: int         3
+  00000001407B5E30: sub         rsp,28h
+  00000001407B5E34: mov         eax,dword ptr [rcx+0000000000024000h]
+  00000001407B5E3A: mov         r9d,r8d
+  00000001407B5E3D: mov         r10d,edx
+  00000001407B5E40: cmp         eax,edx
+  00000001407B5E42: jl          00000001407B5E49
+  00000001407B5E44: cmp         eax,r8d
+  00000001407B5E47: jl          00000001407B5E4F
+  00000001407B5E49: mov         dword ptr [rcx+0000000000024000h],edx
+  00000001407B5E4F: mov         r8d,dword ptr [rcx+0000000000024000h]
+  00000001407B5E56: cmp         r8d,r9d
+  00000001407B5E59: jge         00000001407B5E86
+  00000001407B5E5B: nop         dword ptr [rax+rax]
+  00000001407B5E60: movsxd      rdx,dword ptr [rcx+0000000000024000h]
+  00000001407B5E67: cmp         qword ptr [rcx+rdx*8],0
+  00000001407B5E6C: jne         00000001407B5E78
+  00000001407B5E6E: cmp         byte ptr [rdx+rcx+0000000000020000h],0
+  00000001407B5E76: je          00000001407B5E86
+  00000001407B5E78: lea         eax,[rdx+1]
+  00000001407B5E7B: mov         dword ptr [rcx+0000000000024000h],eax
+  00000001407B5E81: cmp         eax,r9d
+  00000001407B5E84: jl          00000001407B5E60
+  00000001407B5E86: mov         eax,dword ptr [rcx+0000000000024000h]
+  00000001407B5E8C: cmp         eax,r9d
+  00000001407B5E8F: jl          00000001407B5EE0
+  00000001407B5E91: mov         dword ptr [rcx+0000000000024000h],r10d
+  00000001407B5E98: cmp         r10d,r8d
+  00000001407B5E9B: jge         00000001407B5EC6
+  00000001407B5E9D: nop         dword ptr [rax]
+  00000001407B5EA0: movsxd      rdx,dword ptr [rcx+0000000000024000h]
+  00000001407B5EA7: cmp         qword ptr [rcx+rdx*8],0
+  00000001407B5EAC: jne         00000001407B5EB8
+  00000001407B5EAE: cmp         byte ptr [rdx+rcx+0000000000020000h],0
+  00000001407B5EB6: je          00000001407B5EC6
+  00000001407B5EB8: lea         eax,[rdx+1]
+  00000001407B5EBB: mov         dword ptr [rcx+0000000000024000h],eax
+  00000001407B5EC1: cmp         eax,r8d
+  00000001407B5EC4: jl          00000001407B5EA0
+  00000001407B5EC6: mov         eax,dword ptr [rcx+0000000000024000h]
+  00000001407B5ECC: cmp         eax,r8d
+  00000001407B5ECF: jl          00000001407B5EE0
+  00000001407B5ED1: lea         rcx,[0000000141C69328h]
+  00000001407B5ED8: call        0000000140166830
+  00000001407B5EDD: or          eax,0FFFFFFFFh
+  00000001407B5EE0: add         rsp,28h
+  00000001407B5EE4: ret
+  00000001407B5EE5: int         3
+  00000001407B5EE6: int         3
+  00000001407B5EE7: int         3
+  00000001407B5EE8: int         3
+  00000001407B5EE9: int         3
+  00000001407B5EEA: int         3
+  00000001407B5EEB: int         3
+  00000001407B5EEC: int         3
+  00000001407B5EED: int         3
+  00000001407B5EEE: int         3
+  00000001407B5EEF: int         3
+  00000001407B5EF0: 48
+
+  Summary
+
+     1A7D000 .text
+
+````

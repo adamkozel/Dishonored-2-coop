@@ -1,0 +1,35 @@
+{
+  "candidate": "candidate-recovery-v779",
+  "scope": "Four continuous same-map fixed-SLOT82 recoveries without rearming checkpoint/door sessions. Real native fall deaths and survivor pause; both native game-over UI, one retry, restored roles/counterparts, fresh shared doors. Finite NPC isolation used between stimuli, independently released/rechecked after each load. No general campaign/save or shared enemy authority claim.",
+  "passed": false,
+  "failure": "Shared death did not retain session intent without harming survivor or loading early",
+  "dll": "77E41C1A1957D6CEC174D88B1EFB262BFA1B20471FD40EEED81F04CDF2F02F3D",
+  "checks": [
+    "Complete inventories and player/counterpart health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cycles": [
+    {
+      "id": "01-host-reload",
+      "clientEpoch": 16,
+      "death": false,
+      "passed": true,
+      "rearms": 1,
+      "pauseSurvivor": false,
+      "source": "host",
+      "hostEpoch": 16,
+      "transaction": 1
+    },
+    {
+      "id": "02-client-reload",
+      "clientEpoch": 21,
+      "death": false,
+      "passed": true,
+      "rearms": 2,
+      "pauseSurvivor": false,
+      "source": "client",
+      "hostEpoch": 21,
+      "transaction": 2
+    }
+  ]
+}

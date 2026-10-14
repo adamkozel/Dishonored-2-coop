@@ -1,0 +1,39 @@
+{
+  "sha256": "82E7775D2AE3752887750E2A48AEFCD22D6E978368AAF2B1DD9B0C85240DE99D",
+  "reason": "Deferred snapshot attachment with exact restore/activation timestamps; removes unreachable old snapshot offset branch. Stable attachment path retained.",
+  "runtimeValidated": true,
+  "cases": {
+    "corvo": {
+      "video": "carry-snapshot-corvo-v20/native.mp4",
+      "evidence": "carry-snapshot-corvo-v20/snapshot-validation.json",
+      "root_follow": true,
+      "transition_stamps": [
+        {
+          "restored_ms": 812,
+          "attached_ms": 859
+        }
+      ],
+      "checks": 20
+    },
+    "emily": {
+      "video": "carry-snapshot-emily-v20/native.mp4",
+      "evidence": "carry-snapshot-emily-v20/snapshot-validation.json",
+      "root_follow": true,
+      "transition_stamps": [
+        {
+          "restored_ms": 813,
+          "attached_ms": 859
+        }
+      ],
+      "checks": 20
+    },
+    "cancel": {
+      "video": "carry-snapshot-cancel-corvo-v20/native.mp4",
+      "evidence": "carry-snapshot-cancel-corvo-v20/snapshot-cancel-validation.json",
+      "checks": 13,
+      "cleanup_delay_ms": 593,
+      "visual_failure": "Body launches upward before settling; mechanical cleanup passes but pose-to-physics handoff is not accepted."
+    }
+  },
+  "scope": "Both-role native pose blending and deferred attachment; cancellation before activation. Carrier acting, automatic native pickup and overall movement remain incomplete."
+}

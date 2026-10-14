@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "bankVersion": 30,
+  "bankRevision": 4,
+  "bankSha256": "9030B30E348631CBA1617028D13CEFC93F77650A05203CE9510010A7064B7CBF",
+  "source": "host",
+  "kind": "gun",
+  "cameraView": "oblique",
+  "stanceTransitions": false,
+  "emptyOnly": false,
+  "airborne": false,
+  "airReload": false,
+  "compactMuzzle": true,
+  "assetManifest": "work/natural-moveset/remote-muzzle-asset-manifest-v1.json",
+  "travelling": true,
+  "crouched": true,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam scene stream, v30 body bank and automatic cosmetic weapon attach ready",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Both source motion and complete remote body remain crouched through all ranged phases",
+    "Native directional travel and firing overlap; distance-controlled remote gait advances (6.987 m source path)",
+    "All 5 expected source-owned ranged phases reached the remote body through Steam",
+    "Independent native FX map confirms two remote-only declaration IDs owned by the current avatar; source first-person flash identity unchanged",
+    "Two source native flashes produce exactly two finite remote muzzle effects; empty triggers and duplicate packet do not add flashes",
+    "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 2.091,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.817,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.977,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.873,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.912,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.947,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "BD99C7A6E327292B2493DC354538EFD2F35C06C4800297BFE5476BC848D1A706",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Two-round native ranged body/hand attachment integration candidate. Muzzle checks, when explicitly listed, validate source-confirmed finite native effects. Visual acceptance, remote projectile/impact synchronization, audio validation, upgrades and unlisted stance/movement contexts remain unfinished. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

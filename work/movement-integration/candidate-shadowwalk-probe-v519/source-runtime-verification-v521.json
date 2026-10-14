@@ -1,0 +1,201 @@
+{
+  "at": "2026-10-12T23:37:55.133259+02:00",
+  "sourcePassed": true,
+  "complete": false,
+  "cases": [
+    {
+      "take": "native-shadowwalk-standing-v516b",
+      "passed": true,
+      "checks": 8,
+      "observations": {
+        "scenes": [
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_equip.midnightscene, Scene_1",
+            "samples": 12,
+            "durationMs": [
+              333
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_hide_left_arm.midnightscene, Scene_1",
+            "samples": 13,
+            "durationMs": [
+              3666
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene, emily",
+            "samples": 30,
+            "durationMs": [
+              1000
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene, Emily",
+            "samples": 35,
+            "durationMs": [
+              1133
+            ]
+          }
+        ],
+        "manaBefore": 100.0,
+        "manaAfter": 80.0,
+        "nativeStateSets": [
+          "0",
+          "0,53",
+          "6",
+          "6,53"
+        ],
+        "stances": [
+          0,
+          1,
+          2
+        ],
+        "formSamples": 113,
+        "forwardInput": true,
+        "backwardInput": true,
+        "observedEntityDefinitions": [
+          "ai/aicue_power_shadow_walk.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def",
+          "models/powers/shadow_walk/shadow_walk"
+        ],
+        "scope": "Source-only native activation/form/movement/exit observation. No phase enum meaning, remote presentation or gameplay authority assumed."
+      },
+      "strict": null,
+      "formPositionSpan": [
+        0.0,
+        0.5155029999999954,
+        0.0
+      ],
+      "fxSnapshots": {},
+      "fxOwnerDefinitions": []
+    },
+    {
+      "take": "native-shadowwalk-state-v520",
+      "passed": true,
+      "checks": 9,
+      "observations": {
+        "scenes": [
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_cast_in.midnightscene, Scene_1",
+            "samples": 2,
+            "durationMs": [
+              1000
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_equip.midnightscene, Scene_1",
+            "samples": 8,
+            "durationMs": [
+              333
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_hide_left_arm.midnightscene, Scene_1",
+            "samples": 12,
+            "durationMs": [
+              3666
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene, emily",
+            "samples": 31,
+            "durationMs": [
+              1000
+            ]
+          },
+          {
+            "scene": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene, Emily",
+            "samples": 36,
+            "durationMs": [
+              1133
+            ]
+          }
+        ],
+        "manaBefore": 100.0,
+        "manaAfter": 80.0,
+        "nativeStateSets": [
+          "0",
+          "0,53",
+          "6",
+          "6,53"
+        ],
+        "stances": [
+          0,
+          1,
+          2
+        ],
+        "formSamples": 102,
+        "forwardInput": true,
+        "backwardInput": true,
+        "observedEntityDefinitions": [
+          "ai/aicue_power_shadow_walk.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def",
+          "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def",
+          "models/powers/shadow_walk/shadow_walk"
+        ],
+        "scope": "Source-only native activation/form/movement/exit observation. No phase enum meaning, remote presentation or gameplay authority assumed."
+      },
+      "strict": {
+        "samples": 863,
+        "accepted": 857,
+        "phases": [
+          0,
+          2,
+          3,
+          4,
+          5
+        ],
+        "formSamples": 639,
+        "effectNames": [
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_arm_idle_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_hand_idle_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_02.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_hand_loco_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_pp/swalk_end_01.fx",
+          "models/effects/gameplay/powers/shadow_walk/ply_pp/swalk_vision_01.fx"
+        ],
+        "effectOwners": [
+          1,
+          210440752,
+          210506289,
+          210571826,
+          210637363
+        ],
+        "scope": "Read-only exact equipment, reciprocal state-machine owner, native alternate mode and phase guards. FX records independently enumerated; no attribution or remote binding inferred.",
+        "summaryCorrection": "Original520 summary read effects.records; actual probe data is effects.effects. Full snapshots are unchanged. Corrected offline521, without rerunning native inputs."
+      },
+      "formPositionSpan": [
+        0.0,
+        0.5409700000000157,
+        0.0
+      ],
+      "fxSnapshots": {
+        "models/effects/gameplay/powers/shadow_walk/ply_pp/swalk_vision_01.fx": 103,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_hand_idle_01.fx": 204,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_arm_idle_01.fx": 392,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx": 25,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx": 26,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_hand_loco_01.fx": 18,
+        "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_02.fx": 44,
+        "models/effects/gameplay/powers/shadow_walk/ply_pp/swalk_end_01.fx": 28
+      },
+      "fxOwnerDefinitions": [
+        "",
+        "models/characters/player/emily/body.def"
+      ]
+    }
+  ],
+  "dll": "F461D7477AAF7E24052D29985C1820DEEF103E366744981292C44109949A4C2F",
+  "probe": "FF0ED6C9C00BC1B9EBD6CC314E519B68757020CB5CB9D804EFE4D223E00ED897",
+  "nativeFirstPersonChanged": false,
+  "partnerEdgeCasesDeferred": true,
+  "next": "Bind exact native mode and owned entry/exit scenes to remote full-body presentation; calibrate low-body motion against replicated displacement, then native cosmetic ash/limb effects. Keep owner camera/postprocessing local. Attacks and shared gameplay remain separate authority work."
+}

@@ -1,0 +1,32 @@
+# partner-context-1403af9b0-decompile-v384.txt
+
+Original: [work/movement-integration/partner-context-1403af9b0-decompile-v384.txt](<../../../../work/movement-integration/partner-context-1403af9b0-decompile-v384.txt>)
+
+SHA-256: `37FCC5EFE111D738E01AF571E15561576444587D5CF38D3639B89ABB264A879D`; 405 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_1403af9b0(undefined8 param_1)
+
+{
+  undefined8 uVar1;
+  int iVar2;
+  longlong lVar3;
+  
+  lVar3 = FUN_1407e7380();
+  iVar2 = FUN_1401581c0(lVar3 + 0xc0c,0,1);
+  while (iVar2 == 1) {
+    iVar2 = FUN_1401581c0(lVar3 + 0xc0c,0,1);
+  }
+  FUN_14048ff20(*(undefined8 *)(lVar3 + 0x988),param_1);
+  FUN_1401581e0(lVar3 + 0xc0c,0);
+  uVar1 = FUN_1407e7380();
+  FUN_1407ec5a0(uVar1,param_1);
+  return;
+}
+
+
+
+````

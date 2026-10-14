@@ -1,0 +1,571 @@
+{
+  "at": "2026-10-14T13:07:06.850545+02:00",
+  "candidate": "candidate-npc-combat-v1097",
+  "dll": "C606A5568C204F63FACDEEBD5BE7992EF74B1C3EA736B13FCEA12BDAE6FCD3E3",
+  "harnesses": [
+    "../natural-moveset/Test-MissionCombat-v1099.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-combat-v1094",
+      "candidate": "candidate-npc-combat-v1091",
+      "harnessPassed": false,
+      "failure": "Native query failed host --health",
+      "scope": "Wall of Light guards: native tutorial modal (logic12, Play Your Way #2) opened on placement; NPC stream refused and the health read failed.",
+      "timeline": null
+    },
+    {
+      "take": "mission-combat-v1095",
+      "candidate": "candidate-npc-combat-v1091",
+      "harnessPassed": false,
+      "failure": "Placement left a player outside gameplay",
+      "scope": "Windmill guard: placement diagnostics captured the tutorial modal on both roles.",
+      "timeline": null
+    },
+    {
+      "take": "mission-combat-v1096",
+      "candidate": "candidate-npc-combat-v1091",
+      "harnessPassed": true,
+      "failure": null,
+      "scope": "Modal closed with B: NPC stream 12 channels and NPC combat (active_native_melee) on both; the guard fought the host natively (70 -> 32.5); every client replica went client_pose_stale - host send queue ~970 ms (pose bandwidth 20 Hz x 12 NPCs).",
+      "timeline": [
+        {
+          "clientHealth": 70,
+          "k": 0,
+          "hostHealth": 55,
+          "guard_host": {
+            "position": [
+              -36.7485,
+              116.466,
+              15.6632
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 1,
+          "hostHealth": 40,
+          "guard_host": {
+            "position": [
+              -36.8387,
+              116.512,
+              15.6635
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 2,
+          "hostHealth": 40,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6583
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 3,
+          "hostHealth": 40,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6583
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 4,
+          "hostHealth": 40,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6583
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 5,
+          "hostHealth": 40,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6583
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 6,
+          "hostHealth": 32.5,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6584
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        },
+        {
+          "clientHealth": 70,
+          "k": 7,
+          "hostHealth": 32.5,
+          "guard_host": {
+            "position": [
+              -37.2054,
+              116.249,
+              15.6583
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -36.5733,
+              116.966,
+              15.6602
+            ],
+            "health": 30
+          }
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1098",
+      "candidate": "candidate-npc-combat-v1097",
+      "harnessPassed": true,
+      "failure": null,
+      "scope": "1097 pose budget (interval 241 ms, queue 0): client guard replica tracks the host guard through the fight; the guard killed the host (70 -> 0) - no shared death on missions yet; NPC attack unavailable (partner follow/stream not re-armed after the modal).",
+      "timeline": [
+        {
+          "hostHealth": 70,
+          "clientHealth": 70,
+          "k": 0,
+          "guard_host": {
+            "position": [
+              -46.4374,
+              112.979,
+              15.575
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.601,
+              112.56,
+              15.5789
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "clientHealth": 70,
+          "k": 1,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5844
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 70,
+          "clientHealth": 70,
+          "k": 2,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 55,
+          "clientHealth": 70,
+          "k": 3,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 25,
+          "clientHealth": 70,
+          "k": 4,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 10,
+          "clientHealth": 70,
+          "k": 5,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 10,
+          "clientHealth": 70,
+          "k": 6,
+          "guard_host": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -46.2913,
+              111.054,
+              15.5845
+            ],
+            "health": 30
+          }
+        },
+        {
+          "hostHealth": 0,
+          "clientHealth": 70,
+          "k": 7,
+          "guard_host": {
+            "position": [
+              -43.6179,
+              111.488,
+              14.7634
+            ],
+            "health": 30
+          },
+          "guard_client": {
+            "position": [
+              -43.6179,
+              111.488,
+              14.7634
+            ],
+            "health": 30
+          }
+        }
+      ]
+    },
+    {
+      "take": "mission-combat-v1099",
+      "candidate": "candidate-npc-combat-v1097",
+      "harnessPassed": true,
+      "failure": null,
+      "scope": "Partner presentation re-armed after the modal; NPC attack active_native_sword on both; host blocking takes chip damage (70 -> 64.75 -> 59.5); replica tracks the host guard; host strikes did not change guard health (host combat hit_damage_parameters); client combat all_bound_actors_retired; guard engaged only the host.",
+      "timeline": [
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -39.2388,
+              118.555,
+              15.6477
+            ]
+          },
+          "hostHealth": 70,
+          "k": 0,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -39.2388,
+              118.555,
+              15.6477
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -39.0123,
+              118.244,
+              15.6487
+            ]
+          },
+          "hostHealth": 64.75,
+          "k": 1,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -39.0205,
+              118.253,
+              15.6487
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.171,
+              115.702,
+              15.656
+            ]
+          },
+          "hostHealth": 64.75,
+          "k": 2,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.1549,
+              115.708,
+              15.6561
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          },
+          "hostHealth": 64.75,
+          "k": 3,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          },
+          "hostHealth": 64.75,
+          "k": 4,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          },
+          "hostHealth": 64.75,
+          "k": 5,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.026,
+              115.762,
+              15.6583
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.547,
+              115.514,
+              15.6527
+            ]
+          },
+          "hostHealth": 59.5,
+          "k": 6,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.535,
+              115.535,
+              15.653
+            ]
+          }
+        },
+        {
+          "guard_client": {
+            "health": 30,
+            "position": [
+              -37.547,
+              115.514,
+              15.6527
+            ]
+          },
+          "hostHealth": 59.5,
+          "k": 7,
+          "clientHealth": 70,
+          "guard_host": {
+            "health": 30,
+            "position": [
+              -37.547,
+              115.514,
+              15.6527
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "discovery": true,
+  "findings": [
+    "Confirmed runtime: mission areas raise native tutorial modals (logic12) that invalidate follow and retire presentation; harnesses close them with B and re-arm (gameplay needs automatic re-arm or modal tolerance).",
+    "Confirmed runtime: NPC body pose bandwidth must be budgeted - 20 Hz x 12 NPCs saturated the 512 KB/s Steam send rate; 1097 budget (~160 KB/s, 241 ms interval) keeps queue at 0 and replicas exact during combat.",
+    "Confirmed runtime: on a mission map a guard natively engages and damages the host, block reduces damage, and the client replica of the guard follows host authority."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Host player strikes on the bound guard did not change its health (blocked or rejected) - investigate npc_combat outcome path on missions.",
+    "Client NPC combat retires all bound actors once the guard enters combat.",
+    "Guards perceive/engage only the host; partner (clone) perception on missions.",
+    "Shared death/checkpoint on missions (host died in 1098).",
+    "Modal tolerance/automatic re-arm for tutorial modals."
+  ]
+}

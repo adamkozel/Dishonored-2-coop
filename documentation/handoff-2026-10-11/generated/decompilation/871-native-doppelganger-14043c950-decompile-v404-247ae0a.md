@@ -1,0 +1,103 @@
+# native-doppelganger-14043c950-decompile-v404.txt
+
+Original: [work/movement-integration/native-doppelganger-14043c950-decompile-v404.txt](<../../../../work/movement-integration/native-doppelganger-14043c950-decompile-v404.txt>)
+
+SHA-256: `EC9C7225417E3F98AF6666C1BC4D6299158A664079A6EA4D3EEF5FED6D4E5ED6`; 2899 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_14043c950(longlong *param_1)
+
+{
+  char cVar1;
+  uint uVar2;
+  longlong lVar3;
+  longlong lVar4;
+  int iVar5;
+  ulonglong uVar6;
+  int iVar7;
+  longlong lVar8;
+  undefined4 local_res8 [2];
+  longlong local_res10;
+  undefined4 local_48;
+  undefined4 local_44;
+  undefined4 local_40;
+  undefined4 local_3c;
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined4 local_30;
+  undefined4 local_2c;
+  undefined4 local_28;
+  
+  cVar1 = (**(code **)(*(longlong *)param_1[0x19] + 0xd0))();
+  if (cVar1 == '\0') {
+    FUN_14061bcb0(param_1);
+    return;
+  }
+  FUN_14061bea0();
+  iVar5 = (*(uint *)(param_1 + 0x18) & 0xffffff) - 1;
+  if (-1 < iVar5) {
+    lVar4 = (longlong)iVar5 * 4;
+    lVar8 = lVar4;
+    do {
+      lVar3 = FUN_1406dc560(*(undefined4 *)(lVar8 + param_1[0x17]));
+      if ((((lVar3 == 0) && (-1 < iVar5)) &&
+          (uVar2 = *(uint *)(param_1 + 0x18), iVar5 < (int)(uVar2 & 0xffffff))) &&
+         (uVar2 = (uVar2 - 1 ^ uVar2) & 0xffffff ^ uVar2, *(uint *)(param_1 + 0x18) = uVar2,
+         lVar3 = lVar4, iVar7 = iVar5, iVar5 < (int)(uVar2 & 0xffffff))) {
+        do {
+          iVar7 = iVar7 + 1;
+          *(undefined4 *)(lVar3 + param_1[0x17]) = *(undefined4 *)(lVar3 + 4 + param_1[0x17]);
+          lVar3 = lVar3 + 4;
+        } while (iVar7 < (int)(*(uint *)(param_1 + 0x18) & 0xffffff));
+      }
+      lVar8 = lVar8 + -4;
+      lVar4 = lVar4 + -4;
+      iVar5 = iVar5 + -1;
+    } while (-1 < iVar5);
+  }
+  iVar5 = (**(code **)(*param_1 + 0x1a8))(param_1);
+  if (iVar5 <= (int)(*(uint *)(param_1 + 0x18) & 0xffffff)) {
+    uVar6 = (ulonglong)(((*(uint *)(param_1 + 0x18) & 0xffffff) - iVar5) + 1);
+    do {
+      (**(code **)(*param_1 + 400))(param_1);
+      uVar6 = uVar6 - 1;
+    } while (uVar6 != 0);
+  }
+  lVar4 = param_1[0x19];
+  lVar8 = FUN_1406dc560(*(undefined4 *)(param_1[2] + 0xac));
+  local_48 = *(undefined4 *)(lVar8 + 0x30c);
+  local_44 = *(undefined4 *)(lVar8 + 0x310);
+  local_40 = *(undefined4 *)(lVar8 + 0x314);
+  local_3c = *(undefined4 *)(lVar8 + 0x318);
+  local_38 = *(undefined4 *)(lVar8 + 0x31c);
+  local_34 = *(undefined4 *)(lVar8 + 800);
+  local_30 = *(undefined4 *)(lVar8 + 0x324);
+  local_2c = *(undefined4 *)(lVar8 + 0x328);
+  local_28 = *(undefined4 *)(lVar8 + 0x32c);
+  FUN_14010fae0(&local_48,&DAT_14228a940,0x40490fdb);
+  local_res10 = 0;
+  lVar8 = FUN_1406dc560((int)param_1[0x16]);
+  if (lVar8 == 0) {
+    lVar8 = (**(code **)(*param_1 + 0x178))(param_1,lVar4 + 0x94,&local_48);
+  }
+  if ((lVar8 != 0) &&
+     (local_res10 = lVar8, (**(code **)(*param_1 + 0x188))(param_1,&local_res10), local_res10 != 0))
+  {
+    local_res8[0] = *(undefined4 *)(local_res10 + 0xa8);
+    FUN_14052e460(param_1 + 0x17,local_res8);
+    if (local_res10 != 0) {
+      *(undefined4 *)((longlong)param_1 + 0xd4) = *(undefined4 *)(local_res10 + 0xa8);
+      return;
+    }
+    *(undefined4 *)((longlong)param_1 + 0xd4) = 0x3fff0010;
+    return;
+  }
+  return;
+}
+
+
+
+````

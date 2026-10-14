@@ -1,0 +1,39 @@
+{
+  "scenes": [
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_decoy_cast_in.midnightscene, Scene_1",
+      "samples": 12,
+      "durationMs": [
+        466
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_decoy_cast_loop.midnightscene, Scene_1",
+      "samples": 10,
+      "durationMs": [
+        1200
+      ]
+    },
+    {
+      "scene": "midnight/gameplay/player/base/powers/power_decoy_cast_out.midnightscene, Scene_1",
+      "samples": 21,
+      "durationMs": [
+        666
+      ]
+    }
+  ],
+  "manaBefore": 100.0,
+  "manaAfter": 80.0,
+  "nativeStateSets": [
+    "0",
+    "0,63",
+    "2,63",
+    "3,63"
+  ],
+  "observedEntityDefinitions": [
+    "models/characters/def/d2coop/doppelganger_corvo.def",
+    "models/powers/doppelganger/decoy_entity.def",
+    "models/powers/doppelganger/doppelganger.def"
+  ],
+  "scope": "Source-only native phase/lifecycle observation in isolated AI-held Dunwall; no remote gameplay or body binding"
+}

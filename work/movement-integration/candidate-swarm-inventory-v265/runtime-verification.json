@@ -1,0 +1,130 @@
+{
+  "at": "2026-10-12T09:25:25.019744+02:00",
+  "failedBeforeAcquisition": {
+    "passed": false,
+    "failure": "Command is outside the bounded native research command set.",
+    "source": "host",
+    "checks": [
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [],
+    "dll": "20731DE29FEC1EAE6164A9487222A16F00B6606DAE65EFCEB87FF92B392A9F1F",
+    "probe": "246C724C97B8D66B78F242BDF382BD4ECA679066992F7C1F7FF34CCB273E16D6",
+    "scope": "Native source Corvo Swarm acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general swarm behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+  },
+  "sourceObservation": {
+    "result": {
+      "passed": true,
+      "failure": null,
+      "source": "host",
+      "checks": [
+        "Exact Corvo Swarm item acquired through native inventory API; no direct spawn, AI or damage invocation",
+        "Native input produces reciprocal Swarm entry/loop/out scenes with observed clocks and state sets",
+        "Both original inventory quantities and player/partner health retained; world reset still required",
+        "Both isolated checkpoints restore original health/inventory and retire spawned Swarm entities",
+        "All14 protected save/settings hashes retained"
+      ],
+      "events": [
+        {
+          "videoTime": 1.951,
+          "input": "Native Corvo LT1800 then release at grounded floor"
+        }
+      ],
+      "dll": "20731DE29FEC1EAE6164A9487222A16F00B6606DAE65EFCEB87FF92B392A9F1F",
+      "probe": "246C724C97B8D66B78F242BDF382BD4ECA679066992F7C1F7FF34CCB273E16D6",
+      "scope": "Native source Corvo Swarm acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general swarm behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+    },
+    "observations": {
+      "scenes": [
+        {
+          "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_in.midnightscene, Scene_1",
+          "samples": 10,
+          "durationMs": [
+            400
+          ]
+        },
+        {
+          "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_loop.midnightscene, Scene_1",
+          "samples": 48,
+          "durationMs": [
+            333
+          ]
+        },
+        {
+          "scene": "midnight/gameplay/player/base/powers/power_swarm_cast_out.midnightscene, Scene_1",
+          "samples": 51,
+          "durationMs": [
+            1600
+          ]
+        }
+      ],
+      "manaBefore": 100.0,
+      "manaAfter": 80.0,
+      "nativeStateSets": [
+        "0",
+        "0,63"
+      ],
+      "observedEntityDefinitions": [
+        "ai/aicue_power_devouring_swarm.def",
+        "models/characters/animals/rat/devouring_swarm.def",
+        "models/powers/devouring_swarm/devouring_swarm.def"
+      ],
+      "scope": "Source-only native phase/lifecycle observation in isolated AI-held Dunwall; no remote gameplay or body binding"
+    },
+    "rows": 33,
+    "swordDrawnSamples": 33,
+    "castingStates": [
+      [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 63,
+          "vtableRva": "0x1c80ed8",
+          "type": ".?AVarkPlayerStateUsePower@@"
+        }
+      ],
+      [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 63,
+          "vtableRva": "0x1c80ed8",
+          "type": ".?AVarkPlayerStateUsePower@@"
+        }
+      ],
+      [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 63,
+          "vtableRva": "0x1c80ed8",
+          "type": ".?AVarkPlayerStateUsePower@@"
+        }
+      ],
+      [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 63,
+          "vtableRva": "0x1c80ed8",
+          "type": ".?AVarkPlayerStateUsePower@@"
+        }
+      ]
+    ],
+    "complete": false,
+    "visualAccepted": false
+  },
+  "complete": false
+}

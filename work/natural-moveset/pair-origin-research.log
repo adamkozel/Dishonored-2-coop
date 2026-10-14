@@ -1,0 +1,77 @@
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Traceback (most recent call last):
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\modules\addon_utils.py", line 457, in enable
+    mod = importlib.import_module(module_name)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\__init__.py", line 66, in <module>
+    from . import ops
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\ops.py", line 73, in <module>
+    from .. ui import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\__init__.py", line 74, in <module>
+    from . import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_templates.py", line 77, in <module>
+    from . ui_menus import SCATTER5_PT_docs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_menus.py", line 77, in <module>
+    from ... __init__ import addon_prefs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\__init__.py", line 98, in <module>
+    from . import gatekeeper
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\gatekeeper.py", line 65, in <module>
+    from . import override
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\override.py", line 69, in <module>
+    from . import engine
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\engine.py", line 72, in <module>
+    from . import core
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\core.py", line 61, in <module>
+    import pybullet
+ModuleNotFoundError: No module named 'pybullet'
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Extensions: writing cache failed ([Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.cache\\compat.dat').
+Error: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Failed to extract path: C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\.local\lib\python3.13\site-packages\.DS_Store error [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Unable to set stale files pending: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\config\\stale-pending'
+Octane Addon Client is enabled
+OctaneBlender.init: opts = {'server': None, 'port': None, 'cert': None}
+Octane Ocio Management Update Start
+Octane Ocio Management Update End. Time cost: 0.03 secs
+{"attacker": "corvo", "victim": "corvo", "direction": "front", "attacker_duration": 1.3, "victim_duration": 1.3, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -2.1576881408691406e-05, 1.1999999284744263, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": {"2": [0.018, 0.034, 1.011], "9": [-0.332, 0.344, 1.064], "12": [0.032, 0.048, 1.738], "16": [0.296, -0.279, 1.046], "21": [-0.296, 0.076, 0.139], "25": [0.226, -0.163, 0.14]}, "victim_positions": {"2": [-0.007, -0.0, 1.043], "9": [0.027, 0.3, 1.027], "12": [-0.008, -0.008, 1.77], "16": [0.018, -0.299, 1.019], "21": [-0.08, 0.127, 0.14], "25": [-0.065, -0.127, 0.14]}}
+{"attacker": "corvo", "victim": "emily", "direction": "front", "attacker_duration": 1.3, "victim_duration": 1.3, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -2.1576881408691406e-05, 1.1999999284744263, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": null, "victim_positions": {"2": [-0.007, -0.031, 1.068], "9": [-0.017, 0.22, 0.959], "12": [-0.011, -0.02, 1.627], "16": [0.015, -0.242, 0.967], "21": [-0.092, 0.07, 0.118], "25": [-0.046, -0.074, 0.118]}}
+{"attacker": "corvo", "victim": "corvo", "direction": "back", "attacker_duration": 1.3333333333333333, "victim_duration": 1.1, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -1.2024317979812622, 0.006955001037567854, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": {"2": [0.018, 0.034, 1.011], "9": [-0.332, 0.344, 1.064], "12": [0.032, 0.048, 1.738], "16": [0.296, -0.279, 1.046], "21": [-0.296, 0.076, 0.139], "25": [0.226, -0.163, 0.14]}, "victim_positions": {"2": [-0.009, -0.0, 1.037], "9": [-0.02, 0.34, 1.032], "12": [0.035, -0.003, 1.761], "16": [-0.027, -0.332, 1.027], "21": [-0.08, 0.142, 0.14], "25": [-0.05, -0.142, 0.14]}}
+{"attacker": "corvo", "victim": "emily", "direction": "back", "attacker_duration": 1.3333333333333333, "victim_duration": 1.1, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -1.2024317979812622, 0.006955001037567854, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": null, "victim_positions": {"2": [0.088, -0.03, 1.065], "9": [0.065, 0.215, 0.957], "12": [0.072, -0.018, 1.622], "16": [0.061, -0.266, 0.965], "21": [-0.031, 0.115, 0.118], "25": [-0.003, -0.119, 0.118]}}
+{"attacker": "emily", "victim": "corvo", "direction": "front", "attacker_duration": 1.2333333333333334, "victim_duration": 1.2333333333333334, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": null, "victim_positions": {"2": [-0.007, -0.0, 1.043], "9": [0.027, 0.3, 1.027], "12": [-0.008, -0.008, 1.77], "16": [0.018, -0.299, 1.019], "21": [-0.08, 0.127, 0.14], "25": [-0.065, -0.127, 0.14]}}
+{"attacker": "emily", "victim": "emily", "direction": "front", "attacker_duration": 1.2333333333333334, "victim_duration": 1.2333333333333334, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [-2.1576881408691406e-05, -2.1576881408691406e-05, 1.0, -2.1576881408691406e-05, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": {"2": [-0.027, -0.032, 0.978], "9": [-0.301, 0.157, 0.974], "12": [0.102, 0.002, 1.513], "16": [0.3, -0.004, 0.958], "21": [-0.389, 0.122, 0.118], "25": [0.252, -0.224, 0.118]}, "victim_positions": {"2": [-0.007, -0.031, 1.068], "9": [-0.017, 0.22, 0.959], "12": [-0.011, -0.02, 1.627], "16": [0.015, -0.242, 0.967], "21": [-0.092, 0.07, 0.118], "25": [-0.046, -0.074, 0.118]}}
+{"attacker": "emily", "victim": "corvo", "direction": "back", "attacker_duration": 1.3333333333333333, "victim_duration": 1.1, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_anchor": [0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": null, "victim_positions": {"2": [-0.007, -0.0, 1.043], "9": [0.027, 0.3, 1.027], "12": [-0.008, -0.008, 1.77], "16": [0.018, -0.299, 1.019], "21": [-0.08, 0.127, 0.14], "25": [-0.065, -0.127, 0.14]}}
+{"attacker": "emily", "victim": "emily", "direction": "back", "attacker_duration": 1.3333333333333333, "victim_duration": 1.1, "attacker_root": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "victim_root": [0.0, 0.0, 0.0, 1.0, -0.0, -0.0, -0.0], "victim_anchor": [0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0], "attacker_positions": {"2": [-0.027, -0.032, 0.978], "9": [-0.301, 0.157, 0.974], "12": [0.102, 0.002, 1.513], "16": [0.3, -0.004, 0.958], "21": [-0.389, 0.122, 0.118], "25": [0.252, -0.224, 0.118]}, "victim_positions": {"2": [0.088, -0.03, 1.065], "9": [0.065, 0.215, 0.957], "12": [0.072, -0.018, 1.622], "16": [0.061, -0.266, 0.965], "21": [-0.031, 0.115, 0.118], "25": [-0.003, -0.119, 0.118]}}
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+
+Blender quit

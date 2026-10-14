@@ -1,0 +1,67 @@
+{
+  "failure": null,
+  "scope": "20-minute CONTROL soak with every co-op system off: same route/moves, both peers die together and restart natively, transport/memory sampling; Dunwall fixture restored.",
+  "cases": [
+    {
+      "samples": 118,
+      "soakMinutes": 20,
+      "armedEnd": {
+        "client": {
+          "usable": "disabled",
+          "product": "disabled",
+          "checkpoint": "disabled",
+          "npc": "uncoordinated_native_load",
+          "door": "disabled",
+          "fresh": true
+        },
+        "host": {
+          "usable": "disabled",
+          "product": "disabled",
+          "checkpoint": "disabled",
+          "npc": "uncoordinated_native_load",
+          "door": "disabled",
+          "fresh": true
+        }
+      },
+      "deaths": [
+        {
+          "deathScreens": true,
+          "dying": "host",
+          "restarted": true,
+          "ms": 360452
+        },
+        {
+          "deathScreens": true,
+          "dying": "client",
+          "restarted": true,
+          "ms": 735931
+        },
+        {
+          "deathScreens": true,
+          "dying": "host",
+          "restarted": true,
+          "ms": 1111367
+        }
+      ],
+      "memory": {
+        "client": {
+          "growthMB": 263.6,
+          "handlesEnd": 1483,
+          "endPriv": 6712700928,
+          "startPriv": 6429106176,
+          "baselinePriv": 6436298752,
+          "handlesStart": 1483
+        },
+        "host": {
+          "growthMB": 258.9,
+          "handlesEnd": 1459,
+          "endPriv": 6702198784,
+          "startPriv": 6424678400,
+          "baselinePriv": 6430748672,
+          "handlesStart": 1466
+        }
+      }
+    }
+  ],
+  "passed": true
+}

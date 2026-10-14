@@ -1,0 +1,33 @@
+# Historical note: work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M4.md
+
+Original: [work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M4.md](<../../../../work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M4.md>)
+
+SHA-256: `EFFBD9497558C25112255AAE97DBBFEFF11C490D098D72F00F4BDDB4280156A1`; 4459 bytes.
+
+````markdown
+# M4 — Real-world `.decl` support + linter scope refinement
+
+The original M4 question was "decide which validation rules belong in the linter once we have real-world signal." The corpus drop reframed it. Running the linter over 64 valid `.decl` files surfaced **752,686** diagnostics — all false positives, since the corpus is golden by construction. Almost none of them come from the validate package; they come from the parser refusing real `.decl` shapes. M1's parser was built around `.entities`-style input (top-level `Version N` + `component { ... }`) and the actual `.decl` format is a family of at least four distinct grammars that share an extension. The validate-package work this goal was originally about can't begin until the parser stops drowning the signal. Format inventory + dispatch decision: [M4-decl-taxonomy.md](M4-decl-taxonomy.md).
+
+M4 reframes around a single binary success metric: **zero diagnostics on golden corpus.** A regression harness walks `testdata/golden/` and asserts strict expected counts per `{code, scope}`; it lands green seeded with today's known false-positive counts; each ticket re-baselines the allowlist downward as it drains a row; M4 closes when only the documented permanent residual remains. Pattern follows [internal/lint/clean_sweep_test.go:64-71](../../internal/lint/clean_sweep_test.go#L64-L71)'s existing "Known linter gap" allowlist, extended to cover the broader corpus at the `testdata/golden/` root.
+
+**Scope:** `internal/parse/` (grammar dispatch + per-shape grammars for the curly inherit/edit, animset, and material families), `internal/validate/` (rule policy refinement once parse stops drowning), `internal/lint/` (the harness), and `testdata/golden/` (golden fixtures). Decided to pull `.decl` parser scope in rather than carve it as a separate goal; without it, the rule-policy conversation is unanswerable.
+
+**Out of scope (candidate goals):**
+- **G-A: Schema awareness** — `internal/schema/`, valid-fields-per-entity-type. Deprioritized; large enough to merit its own goal.
+- **G-B: Cross-file reference resolution** — file-graph awareness. Likely prerequisite for any serious NULL-ref rule; deferred until the harness is green and we can re-examine the corpus for ref patterns.
+- **G-C: Renderprog/HLSL embedded grammar** — the `renderprog.*.decl` shape embeds HLSL preprocessor + shader source inside `hlsl_prefix { ... }` blocks. Different problem domain than the other `.decl` shapes; carved out so M4 isn't blocked on it.
+
+**Status:** closed (2026-05-03). Harness drained to its permanent terminal state — Shape 4 (renderprog) VOID_SCAN per G-C, the EOF unterminated-comment fixture, and the LINT_VE_INCONSISTENCY true positive. See [internal/lint/clean_sweep_test.go](../../internal/lint/clean_sweep_test.go)'s `permanentAllowlist`.
+
+## Retro
+
+Non-obvious decisions worth preserving (commit history has the per-ticket detail):
+
+- **Pulled `.decl` parser scope into M4** rather than carving as a separate goal. The corpus drop showed the rule-policy question wasn't answerable until the parser stopped drowning the signal, so the format taxonomy + per-shape grammars landed inside M4. Scope grew, but the alternative was an empty goal blocked on an external dependency.
+- **Scanner promotion over grammar refactoring** for `,` `(` `)` `:` `.` `/`. The corpus showed these as legitimate punctuation across multiple shapes (tuples, scoped names, file paths, function-call values). Promoting them to `SYMBOL` in the scanner drained ~1,937 + 244 + 33 hits at once and let every shape-grammar handle them uniformly. Cheaper than teaching each grammar a private path lexer.
+- **Retired `VALIDATE_ARRAY_COUNT_MISMATCH` + `VALIDATE_ARRAY_MISSING_NUM`** (M4.8). The corpus revealed `num` is array *capacity*, not item count — sparse partial overrides of inherited arrays are legal, and all 147 hits were false positives. Inheritance-aware re-introduction tracked in [G-B.1](../todo/G-B.1-inheritance-aware-array-validation.md), blocked on G-B's file-graph layer.
+- **Retired `VOID_SCAN_STRUCTURE`** (M4.11) as redundant — the structural conditions it caught were already covered by the parse-layer codes once dispatch landed.
+- **Shape 4 (renderprog) is permanently allowlisted, not deferred.** The HLSL embedded grammar belongs to G-C, a different problem domain. The harness treats those VOID_SCAN counts as terminal state, not a future drain target.
+
+````

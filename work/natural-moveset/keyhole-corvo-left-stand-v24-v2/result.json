@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "failure": "Missing native/remote keyhole phase 7",
+  "checks": [
+    "Repeat 1: native entry, continuous look and exit drive remote body on distinct Steam events",
+    "Repeat 1: swords holstered during peek; native entry equipment restored on exit",
+    "Repeat 1: native exit stance restored and observer first person unaffected"
+  ],
+  "source": "host",
+  "reverse": false,
+  "crouchedStart": false,
+  "recorded": true,
+  "dll": "6DB8EAC4ECDE97ABB272B8AEF592D5FFEDF665EBC4CB75322F35A4492B657774",
+  "scope": "Native Dunwall office door keyhole, two normal controller entry/hold/exit sequences. Full-body NPC donor, native phase clock, native equipment state. No camera, root, door state or animation-event writes. Arbitrary doors, moving/early cancellation and full lifecycle remain separate."
+}

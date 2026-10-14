@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-12T22:37:37.300197+02:00",
+  "live": "BE75B35BE849187A755222F02BAF3729E8CB76C9158426B496B6D946A5802E4A",
+  "probe": "91953438AABEBB1D6FAD1D44751B7D595A703AC241F5E0496F2B47F95673D0B6",
+  "protocol": 52,
+  "bankVersion": 56,
+  "clips": 325,
+  "cloneWireVersion": 4,
+  "complete": false,
+  "sourceObservation": {
+    "crouchedCastingSamples": 65,
+    "standingReaderAccepted": 0,
+    "stateSets": [
+      "6",
+      "6,63"
+    ],
+    "rawSceneSamples": 78,
+    "scope": "Source-only native crouched cast observation. Full-body crouched binding and remote contexts remain pending."
+  },
+  "cases": [
+    {
+      "take": "native-doppelganger-crouch-v489",
+      "passed": true,
+      "failure": null,
+      "checks": 6,
+      "dll": "E196E15A1071B09675FABF0D4F9F97D8E81078F1A24E7E55489E480B8E3F753E"
+    },
+    {
+      "take": "doppelganger-crouch-v491",
+      "passed": true,
+      "failure": null,
+      "checks": 19,
+      "dll": "BE75B35BE849187A755222F02BAF3729E8CB76C9158426B496B6D946A5802E4A"
+    }
+  ],
+  "authoring": [
+    {
+      "role": "corvo",
+      "bank": "doppelganger-crouch-banks-v490\\corvo-doppelganger-crouch-bank.bin",
+      "sha256": "C695C87300F163BACD938F580661346F0D3758525EF80484237FE7234DDD3BA5",
+      "format": "D2MOVE56",
+      "clips": 325,
+      "prior_payload_unchanged": true,
+      "sources": [
+        {
+          "id": 322,
+          "variant": 29,
+          "phase": "in",
+          "max_foot_error": 3.024834789156603e-07,
+          "minimum_pelvis_height": 0.6458682417869568
+        },
+        {
+          "id": 323,
+          "variant": 30,
+          "phase": "loop",
+          "max_foot_error": 2.736504029066407e-07,
+          "minimum_pelvis_height": 0.6898739337921143
+        },
+        {
+          "id": 324,
+          "variant": 31,
+          "phase": "out",
+          "max_foot_error": 3.2255507311959144e-07,
+          "minimum_pelvis_height": 0.6476370692253113
+        }
+      ],
+      "visual_accepted": false,
+      "runtime_verified": false
+    },
+    {
+      "role": "emily",
+      "bank": "doppelganger-crouch-banks-v490\\emily-doppelganger-crouch-bank.bin",
+      "sha256": "2E38F9234205BF0009BC7C9DAEF96F2E9263C7EC3B6B2DE94537A1AB92BFB795",
+      "format": "D2MOVE56",
+      "clips": 325,
+      "prior_payload_unchanged": true,
+      "sources": [
+        {
+          "id": 322,
+          "variant": 29,
+          "phase": "in",
+          "max_foot_error": 2.936133816128676e-07,
+          "minimum_pelvis_height": 0.6878091096878052
+        },
+        {
+          "id": 323,
+          "variant": 30,
+          "phase": "loop",
+          "max_foot_error": 2.921919755805668e-07,
+          "minimum_pelvis_height": 0.7307701706886292
+        },
+        {
+          "id": 324,
+          "variant": 31,
+          "phase": "out",
+          "max_foot_error": 3.3322091808637027e-07,
+          "minimum_pelvis_height": 0.6895359754562378
+        }
+      ],
+      "visual_accepted": false,
+      "runtime_verified": false
+    }
+  ],
+  "scope": "Native crouched armed Emily phase reader and full-body context candidate. Rig/feet/grip source checks are numerical; visual inspection remains its own evidence. No source first-person, root, animation event, AI or damage changes."
+}

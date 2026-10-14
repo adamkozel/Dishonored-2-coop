@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-13T21:55:01.897423+02:00",
+  "partialEvidencePassed": true,
+  "fullTestPassed": false,
+  "complete": false,
+  "candidate": "candidate-npc-combat-v865",
+  "dll": "F7BC1ECBBEF8A86C4017787BF37F9ACAFBCB2982A0A28188B0E9463882195AE6",
+  "probe": "EA5444F1ECEDED2937AEE80E21AA7F5609AA03536B797D82B92FF27C28944489",
+  "scope": "Partial only: one worker-origin native player_sword damage event in take866 is reconstructed on the engine thread, host ordered over native Steam, and applies40-to30 once in both games. Duplicate commit leaves health unchanged. The larger repeated-controller test fails on an unsupported generic_fatality action; recordings show close finisher behavior, not an accepted complete ordinary attack. Client-source requests, repeated hits, full attack feedback and lethal outcomes remain unverified.",
+  "sourceWorkerThread": 96724,
+  "sourceEngineThread": 83824,
+  "hostNativeCommits": 1,
+  "clientNativeApplications": 1,
+  "duplicateRejections": 1,
+  "healthAfter": 30,
+  "fixtures": [
+    "finite source AI and root hold",
+    "finite ordinary-assassination eligibility exclusion"
+  ],
+  "visualJudgment": "Paired contact sheets inspected. Close face/finisher behavior and the later refused client fatality are visible. This is native event diagnostic evidence, not complete combat or animation-quality acceptance.",
+  "failedTakes": [
+    {
+      "take": "work/natural-moveset/npc-combat-v851",
+      "failure": "Native hit did not converge: host bound_actor_retired; client active_nonfatal_sword",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v853",
+      "failure": "Native alert context unavailable host",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v854",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client active_nonfatal_sword",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v856",
+      "failure": "Native hit did not converge: host unsupported_or_unready_native_hit; client all_bound_actors_retired",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v858",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client all_bound_actors_retired",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v859",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client active_nonfatal_sword",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v861",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client active_nonfatal_sword",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v864",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client all_bound_actors_retired",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v866",
+      "failure": "Native hit did not converge: host all_bound_actors_retired; client active_nonfatal_sword",
+      "restored": true
+    },
+    {
+      "take": "work/natural-moveset/npc-combat-v867",
+      "failure": "Native hit did not converge: host active_nonfatal_sword; client all_bound_actors_retired",
+      "restored": true
+    }
+  ],
+  "next": "Add native fatality/assassination and lethal outcome lifecycle to the actor protocol; pre-death frame/AI retirement and deduplicated tombstones. Verify client-source ordering and complete attacks. Do not continue tuning test distance to avoid genuine native action types."
+}

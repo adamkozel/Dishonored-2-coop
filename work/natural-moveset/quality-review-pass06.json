@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-10T16:06:42.180512+02:00",
+  "complete": false,
+  "first_person_wrist_constraints": false,
+  "live_dll_changed": false,
+  "evidence": [
+    {
+      "report": "window-v5-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "slide-v4-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "ammo-changes-v1-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "window-choke-v2-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "top-transition-v1-roundtrip.json",
+      "passed": true
+    },
+    {
+      "report": "water-exit-v3-roundtrip.json",
+      "passed": true
+    }
+  ],
+  "visual_inspection": {
+    "window_lethal": "v5: braced stance, shoulder/spine action and partner pull are visible. Precise fingers/blade and native target physics remain unverified.",
+    "window_nonlethal": "v2: boot stays inside neutral sill; paired entry/hold/finish/release recorded. End target state is native baked motion, not simulated ragdoll.",
+    "crossbow_ammo": "Native regular/sleep models and exact tags are attached to native crossbow mechanism. Holster/type-change/equip is an authored presentation hypothesis. Reload phase clocks use native scene data.",
+    "ladder_top": "v1: step over a neutral top platform and native standing recovery. Fine palm/toe contact and top descent entry still need work.",
+    "water_exit": "v3: swim approach, edge hold, climb and planted standing recovery. Fixed low Corvo recovery in v2; neutral wall boot clearance and palms fitted without changing native lengths. No water simulation or live traversal binding.",
+    "sliding_pair": "v4 now passes body publication; existing impact overlap and contact/recovery issues remain."
+  },
+  "failed_attempts": [
+    {
+      "take": "window-choke-v2-pose-test-1",
+      "reason": "Lost command acknowledgement during concurrent rendering; not counted as a pass. Both review leases retired. Fresh serial take 2 passed."
+    }
+  ],
+  "rejected_donors": [
+    {
+      "source": "mixamo-heavy-pickup/source-manifest.json",
+      "reason": "Single-hand pickup is not shoulder hoist"
+    },
+    {
+      "source": "Mixamo Carrying / Carrying Someone Idle",
+      "reason": "Browser preview shows front cradling, not D2 shoulder carry; no download or promotion"
+    }
+  ],
+  "remaining": "Recorded candidates are not complete animation coverage. Body lift/drop/throw, contextual variants, fine contact/weapon fit, animation lifecycle transitions and many gameplay bindings remain incomplete."
+}

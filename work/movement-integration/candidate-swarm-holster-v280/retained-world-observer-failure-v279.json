@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "failure": "Live rat entity/frame types changed",
+  "source": "host",
+  "stance": "standing",
+  "holstered": true,
+  "checks": [
+    "Exact Corvo Swarm item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Requested native stance/sword context confirmed before input; cast may natively change stance",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Swarm entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.004,
+      "input": "Native Corvo LT1800 then release at grounded floor"
+    }
+  ],
+  "dll": "A495E1224C383E39AF2106D1597B347A48653A322BE79AF74413740139D287FE",
+  "probe": "CE0A54F1D042D4A0C51BF6BBA2FFA9E5E08151247BE330CDE02302AAA92A6382",
+  "scope": "Native source Corvo Swarm acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general swarm behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+}

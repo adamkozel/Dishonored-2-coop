@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "source": "host",
+  "character": "corvo",
+  "crouched": true,
+  "holstered": true,
+  "moving": true,
+  "balanced": true,
+  "balancedRevision": 3,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+    "Two native cast events drive remote whole-body Windblast animation through Steam",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Full-body cast retains original native crouch/standing stance throughout",
+    "Confirmed network travel continues to advance the gait during native casting",
+    "Exactly two uniquely identified native source effects each create one finite remote world effect through Steam",
+    "Both clone-owned remote effects preserve the exact independently read native source origin and orientation",
+    "Replayed reliable packet is received and rejected without a second effect",
+    "Native cleanup restores original power quantity and selection",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "Protected original executable, Steam API and save hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.793,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.354,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "4",
+    "2"
+  ],
+  "nativeScenes": [
+    "221",
+    "222"
+  ],
+  "dll": "80E9E28879F84E427BF05BFEC45357430EE181376C9A1669CA28D4A5E9670F8A",
+  "bankSha256": "B2952CF40CE94B9FB90FF3914492E10D5465DC6C923C9561D8EA1D13BB55EA27",
+  "recorded": true,
+  "matchedNativeEffects": 2,
+  "remoteEffectIds": [
+    "228",
+    "225"
+  ],
+  "scope": "Corvo Windblast ground stance/equipment/travel body integration. Native source controller casts and scene timing drive the remote whole body through Steam. Observed basic native cast FX drives one separate world-space presentation effect on the remote clone, preserving native position/axis and body timing. Original private screen distortion is excluded. Replay, finite cleanup and health are checked. Impacts, world physics outcomes, upgrades and broader lifecycle are not certified; visual quality requires separate review."
+}

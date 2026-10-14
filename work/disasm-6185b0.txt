@@ -1,0 +1,59 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406185B0: push        rdi
+  00000001406185B2: sub         rsp,40h
+  00000001406185B6: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001406185BF: mov         qword ptr [rsp+50h],rbx
+  00000001406185C4: mov         qword ptr [rsp+60h],rbp
+  00000001406185C9: mov         qword ptr [rsp+68h],rsi
+  00000001406185CE: mov         esi,r8d
+  00000001406185D1: mov         rdi,rdx
+  00000001406185D4: mov         rbp,rcx
+  00000001406185D7: cmp         byte ptr [rdx+8],0
+  00000001406185DB: je          0000000140618612
+  00000001406185DD: lea         rcx,[rsp+30h]
+  00000001406185E2: call        0000000140500C30
+  00000001406185E7: nop
+  00000001406185E8: lea         rdx,[rsp+28h]
+  00000001406185ED: mov         rcx,rbp
+  00000001406185F0: call        0000000140618460
+  00000001406185F5: mov         r8d,esi
+  00000001406185F8: mov         rdx,rdi
+  00000001406185FB: lea         rcx,[rsp+28h]
+  0000000140618600: call        00000001406189B0
+  0000000140618605: nop
+  0000000140618606: lea         rcx,[rsp+30h]
+  000000014061860B: call        000000014061A0A0
+  0000000140618610: jmp         0000000140618648
+  0000000140618612: mov         ecx,18h
+  0000000140618617: call        00000001400F13F0
+  000000014061861C: mov         rbx,rax
+  000000014061861F: mov         qword ptr [rsp+58h],rax
+  0000000140618624: test        rax,rax
+  0000000140618627: je          0000000140618634
+  0000000140618629: lea         rcx,[rax+8]
+  000000014061862D: call        0000000140500C30
+  0000000140618632: jmp         0000000140618636
+  0000000140618634: xor         ebx,ebx
+  0000000140618636: mov         qword ptr [rbp+20h],rbx
+  000000014061863A: mov         r8d,esi
+  000000014061863D: mov         rdx,rdi
+  0000000140618640: mov         rcx,rbx
+  0000000140618643: call        00000001406189B0
+  0000000140618648: mov         rbx,qword ptr [rsp+50h]
+  000000014061864D: mov         rbp,qword ptr [rsp+60h]
+  0000000140618652: mov         rsi,qword ptr [rsp+68h]
+  0000000140618657: add         rsp,40h
+  000000014061865B: pop         rdi
+  000000014061865C: ret
+  000000014061865D: int         3
+
+  Summary
+
+     1A7D000 .text

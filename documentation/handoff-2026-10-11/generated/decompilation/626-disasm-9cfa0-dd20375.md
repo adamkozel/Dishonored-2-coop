@@ -1,0 +1,82 @@
+# disasm-9cfa0.txt
+
+Original: [work/disasm-9cfa0.txt](<../../../../work/disasm-9cfa0.txt>)
+
+SHA-256: `D706D432C9C7CB62868F3587DEB9FE8E576E9C46E7D1A7797B17D74D606144D8`; 3208 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014009CFA0: movaps      xmm0,xmmword ptr [r8]
+  000000014009CFA4: mov         word ptr [rsp+10h],dx
+  000000014009CFA9: mov         r9,rcx
+  000000014009CFAC: movsx       rax,dx
+  000000014009CFB0: lea         r10,[r9+00000000000000F8h]
+  000000014009CFB7: shl         rax,6
+  000000014009CFBB: add         rax,qword ptr [rcx+0000000000000148h]
+  000000014009CFC2: movaps      xmmword ptr [rax],xmm0
+  000000014009CFC5: movaps      xmm1,xmmword ptr [r8+10h]
+  000000014009CFCA: movaps      xmmword ptr [rax+10h],xmm1
+  000000014009CFCE: movaps      xmm0,xmmword ptr [r8+20h]
+  000000014009CFD3: movaps      xmmword ptr [rax+20h],xmm0
+  000000014009CFD7: movaps      xmm1,xmmword ptr [r8+30h]
+  000000014009CFDC: mov         r8d,1
+  000000014009CFE2: movaps      xmmword ptr [rax+30h],xmm1
+  000000014009CFE6: movsx       rcx,word ptr [rsp+10h]
+  000000014009CFEC: mov         rax,rcx
+  000000014009CFEF: and         ecx,1Fh
+  000000014009CFF2: sar         rax,5
+  000000014009CFF6: lea         rdx,[r9+rax*4]
+  000000014009CFFA: mov         eax,r8d
+  000000014009CFFD: shl         eax,cl
+  000000014009CFFF: not         eax
+  000000014009D001: and         dword ptr [rdx+00000000000000D0h],eax
+  000000014009D007: movsx       rcx,word ptr [rsp+10h]
+  000000014009D00D: mov         rax,rcx
+  000000014009D010: and         ecx,1Fh
+  000000014009D013: sar         rax,5
+  000000014009D017: lea         rdx,[r9+rax*4]
+  000000014009D01B: mov         eax,r8d
+  000000014009D01E: shl         eax,cl
+  000000014009D020: or          dword ptr [rdx+00000000000000F8h],eax
+  000000014009D026: movsx       rcx,word ptr [rsp+10h]
+  000000014009D02C: mov         rax,rcx
+  000000014009D02F: and         ecx,1Fh
+  000000014009D032: shl         r8d,cl
+  000000014009D035: sar         rax,5
+  000000014009D039: or          dword ptr [r9+rax*4+0000000000000120h],r8d
+  000000014009D041: movsx       rax,word ptr [rsp+10h]
+  000000014009D047: mov         r8,qword ptr [r9+48h]
+  000000014009D04B: lea         rcx,[rax+rax*4]
+  000000014009D04F: lea         r11,[rcx*8+0000000000000000h]
+  000000014009D057: mov         ecx,dword ptr [r10+20h]
+  000000014009D05B: add         r8,r11
+  000000014009D05E: cmp         dword ptr [r8+20h],ecx
+  000000014009D062: cmovl       ecx,dword ptr [r8+20h]
+  000000014009D067: test        ecx,ecx
+  000000014009D069: js          000000014009D090
+  000000014009D06B: movsxd      rdx,ecx
+  000000014009D06E: je          000000014009D090
+  000000014009D070: lea         rcx,[r10+rdx*4]
+  000000014009D074: sub         r8,r10
+  000000014009D077: nop         word ptr [rax+rax+0000000000000000h]
+  000000014009D080: mov         eax,dword ptr [r8+rcx-4]
+  000000014009D085: lea         rcx,[rcx-4]
+  000000014009D089: or          dword ptr [rcx],eax
+  000000014009D08B: dec         rdx
+  000000014009D08E: jne         000000014009D080
+  000000014009D090: 4D
+
+  Summary
+
+     1A7D000 .text
+
+````

@@ -1,0 +1,8 @@
+[
+  {
+    "address": "14065db00",
+    "category": "NativeCheckpointRetry",
+    "comment": "CONFIRMED exact Steam B671F824... Ghidra + pinned disk Capstone v740: memory restart tail-jumps659190(mode2). Busy guards6591e6/6591f9/659201 queue RestartFromMemoryCheckpoint65993c and wait1 at659950; AL=0 at65997c. Accepted path BL=1 at6598c7 -> EAX at65990b. Corrected gate retains fixed SLOT82 permission on zero; consumes only AL=1 or actual loading entry. RUNTIME candidate742:744(client request)/745(host request) each observe FOUR forwarded AL=0 native callbacks with I/O18/20/21/22, then exactly ONE AL=1 at I/O0 per role; one actual loading entry+finish, both-ready hold, roles/counterparts and old-door retirement verified, inventories/health/protected files restored.738 earlier host stall is consistent but missing original callback trace prevents causal proof.742 explicit one-shot isolated retry_probe queues two fixed native retries, no native I/O-state mutation. Audit native-checkpoint-retry-audit-v746.json; doc58; full transcripts checkpoint-continuation-v740. General campaign saves/rearm/spawn separation outstanding.",
+    "type": "Note"
+  }
+]

@@ -1,0 +1,163 @@
+# disasm-feaa0.txt
+
+Original: [work/disasm-feaa0.txt](<../../../../work/disasm-feaa0.txt>)
+
+SHA-256: `0940296BC32C0C0D44D924B20BEE8FCDD30AD8F18126E50A97281C747AB724CB`; 6362 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001400FEAA0: mov         qword ptr [rsp+8],rcx
+  00000001400FEAA5: push        rbx
+  00000001400FEAA6: sub         rsp,30h
+  00000001400FEAAA: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001400FEAB3: mov         rbx,rcx
+  00000001400FEAB6: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FEABD: mov         rax,qword ptr [rcx]
+  00000001400FEAC0: call        qword ptr [rax+0000000000000080h]
+  00000001400FEAC6: mov         rdx,rax
+  00000001400FEAC9: mov         rcx,rbx
+  00000001400FEACC: call        000000014013F9D0
+  00000001400FEAD1: nop
+  00000001400FEAD2: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FEAD9: mov         rax,qword ptr [rcx]
+  00000001400FEADC: call        qword ptr [rax+78h]
+  00000001400FEADF: nop
+  00000001400FEAE0: mov         rax,rbx
+  00000001400FEAE3: add         rsp,30h
+  00000001400FEAE7: pop         rbx
+  00000001400FEAE8: ret
+  00000001400FEAE9: int         3
+  00000001400FEAEA: int         3
+  00000001400FEAEB: int         3
+  00000001400FEAEC: int         3
+  00000001400FEAED: int         3
+  00000001400FEAEE: int         3
+  00000001400FEAEF: int         3
+  00000001400FEAF0: mov         qword ptr [rsp+8],rcx
+  00000001400FEAF5: push        rdi
+  00000001400FEAF6: sub         rsp,30h
+  00000001400FEAFA: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001400FEB03: mov         qword ptr [rsp+48h],rbx
+  00000001400FEB08: mov         rdi,rcx
+  00000001400FEB0B: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FEB12: mov         rax,qword ptr [rcx]
+  00000001400FEB15: call        qword ptr [rax+78h]
+  00000001400FEB18: mov         rax,qword ptr [000000014228BAE0h]
+  00000001400FEB1F: mov         rbx,qword ptr [rax]
+  00000001400FEB22: mov         rcx,rdi
+  00000001400FEB25: call        00000001401D9090
+  00000001400FEB2A: mov         rdx,rax
+  00000001400FEB2D: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001400FEB34: call        qword ptr [rbx+48h]
+  00000001400FEB37: nop
+  00000001400FEB38: mov         rcx,rdi
+  00000001400FEB3B: mov         rbx,qword ptr [rsp+48h]
+  00000001400FEB40: add         rsp,30h
+  00000001400FEB44: pop         rdi
+  00000001400FEB45: jmp         000000014013FD10
+  00000001400FEB4A: int         3
+  00000001400FEB4B: int         3
+  00000001400FEB4C: int         3
+  00000001400FEB4D: int         3
+  00000001400FEB4E: int         3
+  00000001400FEB4F: int         3
+  00000001400FEB50: jmp         000000014015B440
+  00000001400FEB55: int         3
+  00000001400FEB56: int         3
+  00000001400FEB57: int         3
+  00000001400FEB58: int         3
+  00000001400FEB59: int         3
+  00000001400FEB5A: int         3
+  00000001400FEB5B: int         3
+  00000001400FEB5C: int         3
+  00000001400FEB5D: int         3
+  00000001400FEB5E: int         3
+  00000001400FEB5F: int         3
+  00000001400FEB60: lea         rax,[0000000141AE62C8h]
+  00000001400FEB67: mov         qword ptr [rcx],rax
+  00000001400FEB6A: ret
+  00000001400FEB6B: int         3
+  00000001400FEB6C: int         3
+  00000001400FEB6D: int         3
+  00000001400FEB6E: int         3
+  00000001400FEB6F: int         3
+  00000001400FEB70: push        rbx
+  00000001400FEB72: sub         rsp,20h
+  00000001400FEB76: lea         rax,[0000000141AE62C8h]
+  00000001400FEB7D: mov         rbx,rcx
+  00000001400FEB80: mov         qword ptr [rcx],rax
+  00000001400FEB83: test        dl,1
+  00000001400FEB86: je          00000001400FEB8D
+  00000001400FEB88: call        00000001400F1520
+  00000001400FEB8D: mov         rax,rbx
+  00000001400FEB90: add         rsp,20h
+  00000001400FEB94: pop         rbx
+  00000001400FEB95: ret
+  00000001400FEB96: int         3
+  00000001400FEB97: int         3
+  00000001400FEB98: int         3
+  00000001400FEB99: int         3
+  00000001400FEB9A: int         3
+  00000001400FEB9B: int         3
+  00000001400FEB9C: int         3
+  00000001400FEB9D: int         3
+  00000001400FEB9E: int         3
+  00000001400FEB9F: int         3
+  00000001400FEBA0: mov         qword ptr [rsp+8],rbx
+  00000001400FEBA5: mov         qword ptr [rsp+10h],rbp
+  00000001400FEBAA: mov         qword ptr [rsp+18h],rsi
+  00000001400FEBAF: mov         qword ptr [rsp+20h],rdi
+  00000001400FEBB4: push        r14
+  00000001400FEBB6: sub         rsp,20h
+  00000001400FEBBA: mov         rbx,qword ptr [rcx+8]
+  00000001400FEBBE: mov         r14,r9
+  00000001400FEBC1: mov         rsi,r8
+  00000001400FEBC4: mov         rdi,rdx
+  00000001400FEBC7: mov         rbp,rcx
+  00000001400FEBCA: test        rbx,rbx
+  00000001400FEBCD: je          00000001400FEBE8
+  00000001400FEBCF: nop
+  00000001400FEBD0: mov         rdx,qword ptr [rbx+8]
+  00000001400FEBD4: mov         rcx,rdi
+  00000001400FEBD7: call        0000000140141460
+  00000001400FEBDC: test        eax,eax
+  00000001400FEBDE: je          00000001400FEC55
+  00000001400FEBE0: mov         rbx,qword ptr [rbx]
+  00000001400FEBE3: test        rbx,rbx
+  00000001400FEBE6: jne         00000001400FEBD0
+  00000001400FEBE8: call        00000001401548E0
+  00000001400FEBED: xor         edx,edx
+  00000001400FEBEF: mov         r8,qword ptr [rax]
+  00000001400FEBF2: mov         rcx,rax
+  00000001400FEBF5: call        qword ptr [r8+48h]
+  00000001400FEBF9: mov         edx,27h
+  00000001400FEBFE: lea         ecx,[rdx+1]
+  00000001400FEC01: call        00000001400F1450
+  00000001400FEC06: mov         rbx,rax
+  00000001400FEC09: call        00000001401548E0
+  00000001400FEC0E: xor         edx,edx
+  00000001400FEC10: mov         r8,qword ptr [rax]
+  00000001400FEC13: mov         rcx,rax
+  00000001400FEC16: call        qword ptr [r8+50h]
+  00000001400FEC1A: mov         rcx,qword ptr [rsp+50h]
+  00000001400FEC1F: mov         qword ptr [rbx+8],rdi
+  00000001400FEC23: mov         qword ptr [rbx+18h],rcx
+  00000001400FEC27: mov         qword ptr [rbx+10h],rsi
+  00000001400FEC2B: mov         qword ptr [rbx+20h],r14
+  00000001400FEC2F: 48
+  00000001400FEC30: 8B
+
+  Summary
+
+     1A7D000 .text
+
+````

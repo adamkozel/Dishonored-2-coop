@@ -1,0 +1,228 @@
+# Current state and exact build
+
+
+
+<!-- GRENADE-LIVE-V55 -->
+## Current measured co-op continuation
+
+Updated 2026-10-14. Live candidate-npc-combat-v1213b ([identity](../../work/movement-integration/candidate-npc-combat-v1213b/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
+- A native use (player state 75, plus the focused entity) now plays an authored reach-and-operate interaction on the partner's body, for both roles (1214c, [chapter 92](92-native-use-interactions.md)). `lever_button_crank_wheel` is runtime-bound for the generic reach.
+- Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
+
+Previous header (1203f, history): Live candidate-npc-combat-v1203f ([identity](../../work/movement-integration/candidate-npc-combat-v1203f/identity.json)). Latest (stage 3 gate 4, product presentation):
+- In product mode the partner presentation now recovers by itself after pause menus and the tutorial modal (1204f).
+- It is live again 1.7 s after a native map load and 2.9 s after a shared checkpoint restart, on both peers (1199d). `map_load_checkpoint_recovery` is runtime-bound.
+- Root causes fixed: an engine-thread bank stall, a stream handshake that rejected restarted peers, over-strict product freshness, bulk congestion, and usable-hello reliable flooding ([chapter 91](91-product-presentation-recovery.md)).
+
+Open (stage 3): `window_enter_exit`, `cutscene_enter_exit` and the other unbound checklist items.
+
+Previous header (1193, history): Live candidate-npc-combat-v1193 ([identity](../../work/movement-integration/candidate-npc-combat-v1193/identity.json)). Latest (stage 7):
+- Product mode boots outside the lab environment. Steam is acquired at boot, there is no lab loopback, and the game stays idle until F7 or a Steam join (audit 1196).
+- A joiner follows the host's mission natively (audit 1192).
+- A 20-minute soak passed; memory growth is still unattributed (audit 1190).
+- Release r4 is `outputs/release/d2coop-v1193`, with a README and scratch-tested install/rollback ([chapter 90](90-release-packaging-and-steam-sessions.md)).
+
+Open: a control soak, two-account validation (needs the user), in-game UI and the mission transition. Earlier headers below are history.
+
+Previous header (1181, history): Live candidate-npc-combat-v1181 ([identity](../../work/movement-integration/candidate-npc-combat-v1181/identity.json)). Latest (stage 7): a product session controller arms and maintains every co-op system by itself, verified in the lab across two shared mission restarts. Product activation (`d2coop\d2coop.cfg`, F7 host, F8 leave, Steam join) is packaged in `outputs/release/d2coop-v1181` with scratch-tested install/rollback ([chapter 90](90-release-packaging-and-steam-sessions.md), audit 1185). Open: a product-mode boot from a scratch install, the stability soak, two-account validation (needs the user), in-game UI and the mission transition. Earlier headers below are history.
+
+Previous header (1178, history): Live candidate-npc-combat-v1178 ([identity](../../work/movement-integration/candidate-npc-combat-v1178/identity.json)). Latest (stage 7 started): a hash-guarded release package with byte-identical rollback, tested on scratch targets, and a native Steam session flow. The host creates a lobby with rich presence, opens the invite overlay and listens P2P; a same-account join is correctly refused at the second-account boundary ([chapter 90](90-release-packaging-and-steam-sessions.md), audit 1180). Open: two-account validation (needs the user), product activation without the lab environment, in-game host trigger and UI, a stability soak, and the mission transition. Earlier headers below are history.
+
+Previous header (1171, history): Live candidate-npc-combat-v1171 ([identity](../../work/movement-integration/candidate-npc-combat-v1171/identity.json)). Latest (stage 5 shared progression): a script trigger volume entered by one player is replayed natively in the partner's world through arkCpntTrigger's own enter/exit handler. Visually confirmed: the client got the Wall of Light tutorial, an objective update and hostile territory without moving ([chapter 89](89-mission-progression-discovery.md), audit 1173). Open: the client-originated direction, mission end and next-mission transitions, and stage 7. Earlier headers below are history.
+
+Previous header (1166b, history): Live candidate-npc-combat-v1166b ([identity](../../work/movement-integration/candidate-npc-combat-v1166b/identity.json)). Latest (stage 4 on missions): dynamic NPC relevance. The host-owned bound set follows both players, binding within 55 m and retiring beyond 75 m, and the client follows ([chapter 86](86-mission-npc-authority.md#dynamic-npc-relevance-candidates-11661166b-audit-1169), audit 1169). Mission progression research is in [chapter 89](89-mission-progression-discovery.md). Open: Kiscule progression mirroring and mission transitions, multi-enemy combat with rebinding, and stage 7. Earlier headers below are history.
+
+Previous header (1153c, history): Live candidate-npc-combat-v1153c ([identity](../../work/movement-integration/candidate-npc-combat-v1153c/identity.json)). Latest (stage 6 on missions): after each shared restart, the partner avatar, doors (16), coins, usables and the NPC stream all renew on both peers. Door channels now tolerate transient gaps ([chapter 88](88-mission-shared-death-and-checkpoint.md), audit 1161). Open: a real script autosave trigger, client-side partner visibility after restart, and map transitions. Earlier headers below are history.
+
+Previous header (1153, history): Live candidate-npc-combat-v1153 ([identity](../../work/movement-integration/candidate-npc-combat-v1153/identity.json)). Latest (stage 6 on missions): autosaves are paired. When one peer autosaves, the other mirrors it with the game's own RequestSave, and a shared death/restart returns both players to their own paired mid-mission checkpoint ([chapter 88](88-mission-shared-death-and-checkpoint.md), audit 1157; both origins; visually accepted). Open: a real script autosave trigger, partner avatar and door/coin/NPC renewal across mission restarts, and map transitions. Earlier headers below are history.
+
+Previous header (1147b, history): Live candidate-npc-combat-v1147b ([identity](../../work/movement-integration/candidate-npc-combat-v1147b/identity.json)). Action protocol 73, NPC combat wire 7; bank 70/369 unchanged; all fourteen protected files unchanged. Latest (stage 6 on missions): a checkpoint session armed on a mission map turns either player's native death into a shared death, with both native GameOver screens. Each peer then restarts exactly once from its own per-character mission autosave behind the both-ready barrier, and usable sessions renew ([chapter 88](88-mission-shared-death-and-checkpoint.md), audit 1152; visually accepted for both roles). Native facts: GameOver restart is RestartFromCheckpoint followed by the memory continuation; RequestSave is at 0x14065cc50. Open: paired mid-mission autosaves, partner avatar restoration and door/coin/NPC renewal across mission restarts, and map transitions. Earlier headers below are history.
+
+Previous header (1123e, history): Live candidate-npc-combat-v1123e ([identity](../../work/movement-integration/candidate-npc-combat-v1123e/identity.json)). Action protocol 73, NPC combat wire 7; bank 70/369 unchanged; all fourteen protected files unchanged. Latest (stage 5 on missions): usable sync uses a structural two-state toggle family instead of the Dunwall window name, and has no map gate. 145 toggles pair on Edge of the World. Ordinary native use by the host (open) and by the client (close) converges natively on the peer ([chapter 87](87-mission-shared-usables.md), audit 1145). Door, usable and coin sessions now suspend through the item wheel and tutorial modals. Native use focus is readable at arkCpntPlayerSensorInteraction+0x80. Stage-4 mission combat and corpse authority from 1113d is unchanged. Open: shared player death and checkpoints on missions (stage 6), scripted levers and multi-state devices, and dynamic NPC relevance. Earlier headers below are history.
+
+Previous header (1113d, history): Live candidate-npc-combat-v1113d ([identity](../../work/movement-integration/candidate-npc-combat-v1113d/identity.json)). Action protocol 73, NPC combat wire 7; bank 70/369 unchanged; all fourteen protected files unchanged. Latest (stage 4 on missions): kick and sword hits from either player on a host-authoritative guard commit once and apply once; deaths are shared, and corpses are identical on both peers through corpse authority ([chapter 86](86-mission-npc-authority.md), audits 1110 and 1118). Guards now engage both players: an alerted guard natively targets the client's avatar, and its relayed hits are blocked natively or damage the client player (audit 1122). Open: sustained multi-enemy combat, dynamic NPC relevance, and shared player death/checkpoints on missions. Earlier headers below are history.
+
+Previous header (1108, history): Live candidate-npc-combat-v1108 ([identity](../../work/movement-integration/candidate-npc-combat-v1108/identity.json)). Action protocol 73, NPC combat wire 7; bank 70/369 unchanged; all fourteen protected files unchanged. Latest (stage 4 on missions): the host's native kick and sword hits on a host-authoritative guard commit once on the host and apply once on the client, so guard health converges in both worlds. NPC authority survives the combat behaviour-tree swap ([chapter 86](86-mission-npc-authority.md), audit 1110). Open: client-sourced hits, NPC death outcomes, guards engaging both players, and shared death/checkpoints on missions. Earlier headers below are history.
+
+Previous header (1097, history): Live candidate-npc-combat-v1097 ([identity](../../work/movement-integration/candidate-npc-combat-v1097/identity.json)). Action protocol 73; bank 70/369 unchanged; all fourteen protected files unchanged. Latest (stage 4 on missions): shared NPC authority with an NPC pose bandwidth budget holds through native guard combat on Edge of the World. Guards engage the host and blocking works; enemy-attack replication is active ([chapter 86](86-mission-npc-authority.md), audit 1100). Open: player strike outcomes on bound NPCs, client combat retirement, guards engaging both players, shared death on missions, and tutorial-modal tolerance. Earlier headers below are history.
+
+Previous header (1091, history): Live candidate-npc-combat-v1091 ([identity](../../work/movement-integration/candidate-npc-combat-v1091/identity.json)). Action protocol 73; bank 70/369 unchanged; all fourteen protected files unchanged. Latest: the stage-4 bridge. The shared NPC authority stream runs on mission maps, binding the nearest eligible NPCs to the host, and client replicas follow the host ([chapter 86](86-mission-npc-authority.md)). Before that: partner equipment and item-wheel robustness ([85](85-mission-equipment-and-item-wheel.md)), and pickups ([83](83-mission-shared-pickups.md)) and doors ([84](84-mission-shared-doors.md)) on missions. Next: NPC eligibility for non-idle AI, dynamic relevance, NPC combat with hostile guards on missions, and checkpoint/shared death on missions. Earlier headers below are history.
+
+Previous header (1074j, history): Live candidate-npc-combat-v1074j ([identity](../../work/movement-integration/candidate-npc-combat-v1074j/identity.json)). Action protocol 73, coin wire 7 with catalog-list wire 1; bank 70/369 unchanged. All fourteen protected save/config files unchanged. Latest: partner equipment and power presentation runs on mission maps and survives the native item wheel, verified for both roles ([chapter 85](85-mission-equipment-and-item-wheel.md)). Before that: shared pickups ([83](83-mission-shared-pickups.md)) and doors ([84](84-mission-shared-doors.md)) on missions, water exits ([82](82-water-exit-and-action-stream-hold.md)), and swimming/climbing for both roles ([50](50-swimming-climbing-mode-discovery.md)). Next: checkpoint/shared death on mission maps, the usable-sync intersection, and NPC combat authority on missions. Earlier headers below are history.
+
+Previous header (1059c, history): Live DLL `3B8BBEE7…` (candidate-npc-combat-v1059c) matches [the preserved candidate](../../work/movement-integration/candidate-npc-combat-v1059c/identity.json). Action protocol 73, coin wire 7 with catalog-list wire 1; bank 70/369 unchanged. All fourteen protected save/config files unchanged. Latest: shared pickups now run on mission maps as the intersection of both character worlds; ordinary native pickups by both roles are verified on Edge of the World ([chapter 83](83-mission-shared-pickups.md)), and shared doors work there without code changes, verified for both roles ([chapter 84](84-mission-shared-doors.md)). Before that: water exits and the action-stream hold ([chapter 82](82-water-exit-and-action-stream-hold.md)), and swimming/climbing for both roles ([chapter 50](50-swimming-climbing-mode-discovery.md)). Next: lift the remaining Dunwall-only gates (usables, checkpoint/shared death, Doppelganger visual, props). Earlier headers below are history.
+
+Previous header (1056, history): Live DLL `0352516B…` (candidate-npc-combat-v1056) and probe `EE8ADF67…` match [the preserved candidate](../../work/movement-integration/candidate-npc-combat-v1056/identity.json). Action protocol 73; bank 70/369 unchanged (Corvo `FD50D187…` on the client, Emily `500BEC1D…` on the host). All fourteen protected save/config files unchanged. Latest: water exits bound for both roles, and protocol-73 holds keep the action stream alive through native states no binding classifies ([chapter 82](82-water-exit-and-action-stream-hold.md)); before that, swimming/chain climbing for both roles with bounded visual acceptance ([chapter 50](50-swimming-climbing-mode-discovery.md)). Next: lift the remaining Dunwall-only gameplay gates so the existing coin, inventory, NPC and combat work (chapters 63–80) runs on mission maps. Earlier headers below are history.
+
+Previous header (1042, history): Live DLL `A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B` (candidate-npc-combat-v1042) and probe `D600DA2D0664810F12D41E9B018AAB22F5E2BD238E587FA25D7C6C89830AC79A` match [the preserved candidate](../../work/movement-integration/candidate-npc-combat-v1042/identity.json). Action protocol 72; bank 70/369 (Corvo `FD50D187…` installed on the client, Emily `500BEC1D…` installed on the host). All fourteen protected save/config files unchanged. Latest result: remote native swimming (state 22) and chain climbing (state 23) verified for **both source roles** in Edge of the World with bounded actual-game visual acceptance (1043, 1046, 1049; [audit 1050](../../work/movement-integration/traversal-parity-audit-v1050.json), [chapter 50](50-swimming-climbing-mode-discovery.md)). The 1012 paragraph below is kept as history.
+
+Previous header (history): Live DLL `989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C` (candidate-npc-combat-v1012) and probe `BAFEB687A25126DDFCF385E971AB0F58A5A57F5E23E2D0A40976882085F0C6AA` match [the preserved candidate](../../work/movement-integration/candidate-npc-combat-v1012/identity.json). Semantic protocol 69; enemy-attack packet v3; isolated candidate bank 67/357. All fourteen protected save/config files unchanged.
+
+Live DLL is now 1039 `A5BD34794D97AED913BE6CD6B25355E14C1F380160F07D9D22EAF848FE173EAD` with banks 69/365 and action protocol 71. Isolated co-op now runs on real mission maps through the native `campaign` command: the bring-up is verified in Edge of the World, and remote native swimming is bound and numerically verified ([chapter 50](50-swimming-climbing-mode-discovery.md)). Defense presentation is verified for both roles. Earlier, 1026 shipped banks 68/359 and protocol 70. It adds remote-body presentation of the receiving player's native block impact and timed parry, plus a lab-only observer camera. Both are verified in scoped runs 1025 and 1028c (with host-window video); see [chapter 80](80-native-timed-parry.md). Earlier step (1018): native timed parry against relayed enemy sword hits passes 1017f ([chapter 80](80-native-timed-parry.md)). The native parry window is about 265 ms. Parry-win (blowback) has a 0% native chance in this fixture, so its host path is implemented but unexercised. Before that, held block passed (1013c). The native block is resolved by the attacker's weapon before any damage call (`1406357d0`); 1012 runs that native resolution on the receiving player, so blocked contacts cause no damage and the host's attacker receives the native blocked event. Timed parry now passes (chapter 80); parry-win blowback is unexercised. See [chapter 79](79-enemy-combat-recovery-and-defense.md).
+
+Both roles and both standing throw branches pass network-presentation checks. Both roles additionally pass native mechanism and held-effect checks; same-world source/receiver menu recovery cases pass with fresh tokens. [Detailed grenade evidence and failures](20-grenade-stream-development.md), [native stun continuity](21-native-stun-development.md), [crouched grenade contexts](22-crouched-grenade-development.md) and [airborne grenade contexts](23-airborne-grenade-development.md) record their exact scopes. Native source projectile, explosions and world damage remain local.
+
+[Native elixir development](24-native-elixir-investigation.md) confirms both-role health use and normal-gameplay mana use, plus remote walking/stopping continuity through both consumables. Remote drink sound, resource outcome synchronization and broader interruptions remain incomplete. [Mesmerize development](25-native-mesmerize-investigation.md) and [partner/target findings](26-mesmerize-targets-and-partner-exclusion.md) record body/world/eye presentation, walking and pause evidence. Partner exclusion through item deselection passes v95; ordinary guard targeting passes v99. Scoped readers pass v105/v107, with recorded v107 eye/link maxima of 0.3833/0.4515 ms over 219 calls each. Target beam/trail/head presentation passes v107's 14 checks; precise target alignment and shared NPC gameplay remain incomplete. [Avatar AI lifetime and interruption regression](27-presentation-ai-lifetime.md) records the v109 crash and ownership repair, followed by passing v120/v121 menu recovery with fresh active snapshots. [Cancellation, native lifetime and crouched contexts](28-mesmerize-cancel-lifetime-and-crouch.md) records v123 cancellation, v125's retained failed assertion, corrected v129 native-expiry proof, v131 phase provenance and the v133 whole-body crouch candidate. Individual receipts distinguish runtime checks from visual acceptance. Full movement and playable co-op remain incomplete.
+
+Latest scoped results: [Chapter29](29-airborne-root-continuity.md) records armed/holstered Mesmerize air continuity. [Chapter30](30-native-domino-investigation.md) records native Domino phases, partner exclusion, target marks, directed connections and beam ownership. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance. Refer to individual completed receipts for runtime verification. Failed fixture placements, input/state assertions and their corrections remain preserved. Native NPC positions and shared gameplay outcomes remain unsynchronized; complete movement and playable co-op are unfinished.
+
+1401 actual-game videos are indexed. Movement and playable co-op remain incomplete; autonomous work continues beyond movement.
+
+[Chapter31](31-native-devouring-swarm.md) records native Swarm source, body integration, test repairs and current world-component findings. Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.
+[Chapter32](32-native-possession-investigation.md) records empty-target remote body binding, exact target ownership, native human-host entry/exit, fixture corrections, and outstanding remote lifecycle/VFX work. 374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.
+[Partner interaction exclusion](34-partner-interaction-exclusion.md): 396: all8 partner sword contexts398/400 pass; ordinary NPC sword targeting399 retained. Rear choke387 scoped evidence preserved. Broad interaction edge-case audit deferred after user requested moving on. No direct partner combat, powers, targeting or contextual interactions. Normal movement collision is explicitly allowed. Broader direct interaction exclusions remain incomplete.
+[Emily Doppelganger cast and clone lifecycle](35-doppelganger-cast-and-clone-lifecycle.md): Native493/494 show standing/crouched Emily keeps the sword sheathed throughout the466/1200/666ms Doppelganger phases. 495 appends six complete-body hands-free phase clips to bank57/331, retaining all325 previous payloads; semantic53 accepts the observed native equipment context. 496/497 pass remote body/clone/FX and standing-recovery checks. Standing/crouched armed evidence491 and continuous clone/material-reuse evidence485/486/488 remain preserved. Airborne/cancellation/upgrades/multiple clones, shared outcomes and visual acceptance remain open; whole movement/playable co-op incomplete. Native cancellation505: confirmed X-with-LT cancels with no source activation/mana/clone scene and no remote clone/FX;503 standing armed and504 crouched holstered recover full body. Wrong-input499/500 and array-assertion502 failures are preserved. Native air, other interruptions, upgrades/multiple clones, late join and shared gameplay remain unfinished. Airborne517: diagnostic512 passes paired513/510,20checks each; earlier509 landing dropout remains unresolved. Actual source/remote recordings reviewed in temporal samples; no final visual acceptance.
+<!-- /GRENADE-LIVE-V55 -->
+
+
+
+The active implementation is a guarded two-instance Dunwall development lab. Corvo and Emily use their native local first-person controls, cameras and arms. Separately owned native Doppelganger rigs represent the remote player. Native Steam networking carries state; there is no finished native host/join interface or verified two-account online session.
+
+
+
+<!-- BENDTIME-CURRENT -->
+
+## Current movement continuation
+
+
+
+Updated 2026-10-11T22:41:25.511987+02:00. Measured live proxy `B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486`; probe `B3B556129D9E21526C59A2D117D8C6C35D91B28A707B049BB9CEE00BD42D46DB`. [Current code milestone](../../work/movement-integration/candidate-network-failure-fx-v48), [bank pins](../../work/natural-moveset/outofmana-context-bank-manifest-v46.json), [18-file integrity report](../../work/handoff-integrity-verification.json).
+
+
+
+Corvo Bend Time uses exact native scene clocks over Steam, with scoped ground/air and same-world pause recovery evidence. Four standing/crouched and drawn/holstered failure-response takes pass twelve checks each in v46. Manual native failure hand FX pass six checks each for Corvo and Emily in v47; viewed temporal samples show hand smoke without obvious observer blur. v48 binds Corvo's effect once to the delayed native failure event, with duplicate/late-event rejection. Consult each take for actual runtime outcome. Emily automatic failure binding, exact tattoo alignment, continuous visual quality, contact/clearance and broader movement coverage remain open.
+
+
+
+Prior milestones are retained. Whole movement completion remains false. Counts of clips or videos do not establish accepted movements. See [failure/recovery findings](16-power-failure-and-resume.md), [full state](../../work/current-task-state.json) and [dashboard](http://127.0.0.1:8769/review.html).
+
+<!-- /BENDTIME-CURRENT -->
+
+
+
+<!-- HIGH-THROW-CURRENT -->
+
+## Historical high-throw continuation (v34)
+
+
+
+Updated: 2026-10-11T20:01:13.677759+02:00. Live experimental proxy: `67010EF9F82D61BB6D0B415A399D209AFF7E5F4A208906F0876395223EB55D85`.
+
+
+
+Probe: `A0D22CD8EA4203D64AD5F16DB2A55287E45F9D62BAC74F84F16B350727BF8DCD`. The bank is D2MOVE36 with234clips; all233 prior clip payloads remain byte-identical. See [bank hashes](../../work/natural-moveset/high-throw-bank-manifest-v31.json), [native throw findings](13-native-body-throw.md) and the per-take results in [current state](../../work/current-task-state.json).
+
+
+
+The v33 physics milestone passes23 pickup checks and21 throw checks for each named Corvo/Emily standing wall-facing take. One native impulse is queued after scene retirement and ragdoll transition. Actual videos show forward travel, but hand/body alignment and complete throw quality remain unaccepted. The separately archived v34 candidate tests retaining the attachment until the ragdoll boundary. Read its own result before treating it as validated.
+
+
+
+Preserved rollback builds: [v33 throw physics](../../work/movement-integration/candidate-high-throw-v33) and [v30 low-drop/stance](../../work/movement-integration/candidate-carry-stance-anchor-v30). Original Steam assets and14 protected save/config files are checked independently; runtime experiments are limited to the physical clone.
+
+<!-- /HIGH-THROW-CURRENT -->
+
+
+
+## Preserved v30 movement milestone
+
+
+
+| Component | Current identity |
+
+|---|---|
+
+| Exact game executable SHA-256 | `B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180` |
+
+| Preserved v30 proxy SHA-256 | `891A60B35E162DEE695B7D9C0E7ED67EC5F1CE5C9A05DA4BCD932D4989BD7727` |
+
+| Preserved probe v26 SHA-256 | `CDD8D1C8BA56516EACB688F307E78D0AD009EAE891D4B57A0C010C23C5D146AF` |
+
+| Bank format | D2MOVE35, 233 clips, crouched-pickup contact v3 |
+
+| Corvo bank SHA-256 | `752B441F3BB5C137E3506ED82B11D6AB9738196DF9FD151E9A73F0818908A677` |
+
+| Emily bank SHA-256 | `31035CEC92EA7678082D3D085F71F81C84C5D7FD1BBA64F3B012867EAAEB7DEB` |
+
+| Current source | [outputs/d2-coop-lab/src](../../outputs/d2-coop-lab/src) |
+
+| Archived v30 source and binary | [candidate-carry-stance-anchor-v30](../../work/movement-integration/candidate-carry-stance-anchor-v30) |
+
+| Bank manifest | [crouched-pickup-bank-manifest-v3.json](../../work/natural-moveset/crouched-pickup-bank-manifest-v3.json) |
+
+| Dashboard | [local review](http://127.0.0.1:8769/review.html) |
+
+
+
+The dashboard contains 105 functional movement requirements, 505 motion candidates with role data, 483 authoring recordings and 296 actual game recordings after the v30 and native-throw reference indexing steps. Two of those newest recordings are first-person source references, not remote throw playback. 100 requirements have candidate material. These counts do not imply 95% completion: contextual integration, transitions, effects, authority, visual review and full role coverage remain incomplete. Use the regenerated inventory for counts after subsequent work.
+
+
+
+## What the recent carry work establishes
+
+
+
+The native source player picks up the known Mayhew body using ordinary controller input. Its real Carry45 preparation/hoist/loop state drives a bounded remote carrier sequence and a separately owned victim. The authored bank controls pose; the existing movement stream owns world position. On native low drop, the visible pose is synchronized to the physics bodies before ragdoll ownership returns.
+
+
+
+v30 corrects a stance-dependent shoulder offset. v29 held the body roughly 47 cm away from the desired shoulder target after a stance change. Recomputing the anchor using the current shoulder brings the final measured residual to about 1.7 cm in the two selected cases. Corvo crouched-to-standing passes 51 scoped checks; Emily standing-to-crouched passes 48. Both actual-video temporal sheets were inspected.
+
+
+
+This is not final carry acceptance. Corvo's standing supporting-wrist target residual remains approximately 10.5 cm; Emily's crouched residual is 3.9 cm. Targets include authoring offsets and are not a substitute for palm/finger surface inspection. Other bodies, turning, throws, interrupted ownership and general campaign integration remain open.
+
+
+
+The first Corvo v30 capture lacked an observed received preparation packet. Its failed validator is preserved. A new harness samples the stream before slow native reads and attachment setup; a fresh run passes. No successful packet observation was invented for the original take.
+
+
+
+## Existing broader capabilities and limits
+
+
+
+| Area | Established evidence | Still required |
+
+|---|---|---|
+
+| Two instances | Isolated profiles; windowed side-by-side; background simulation; finite controller input | Fresh-launch and long-run coverage beyond the fixture |
+
+| Shared recovery | Either reload/death coordinates native screens and one retry for pre-staged canonical Dunwall SLOT82; roles and both-ready gate restored | Arbitrary checkpoints, save transfer, campaign progression and complete cinematic recovery |
+
+| Native transport | Game Steam user/pipe and SteamNetworkingSockets012, same-PC connection, freshness and identity checks | Host/join/invites, NAT/relay behavior and separate-account online testing |
+
+| Avatar presentation | Native clone rigs, owned equipment, smoothing, action and bank experiments | Complete automatic gameplay integration and accepted movement library |
+
+| Friendly fire | Attributed native health damage filtered; real sword contacts, reload and positive enemy controls tested | Every power/projectile, indirect hazards, knockouts and pre-damage choreography |
+
+| World/combat | Bounded guard perception, damage relay, health and death experiments with duplicate/lifetime tests | General host authority, all AI, physics, inventory, quests and doors |
+
+| Native UI | Relevant IGGY resources exported; native pause/death/retry reused | Integrated native session setup, character choice and connection recovery |
+
+
+
+Historical fields such as the top-level `LoaderSha256`, old `Live` snapshots and early `Implemented:false` values in [current-task-state.json](../../work/current-task-state.json) are retained provenance, not reliable live status. Prefer `MovementIntegration.LatestContinuation`, the archived identity and fresh process/file checks.
+
+
+
+
+
+<!-- EQUIPMENT-GRENADE-V52 -->
+
+## Latest measured live build: grenade equip v52
+
+
+
+Updated 2026-10-11T22:53:36.465244+02:00. This supersedes earlier live-build descriptions on this page. Live proxy `C43B0FB0FD03AECF8D85A7312282F688879BF725DE4ACD5BD7AB6584C15634E1` and probe `B08645C92ADEA9252563461A70EFD422C78AABF57D2B969A9E39B8911E3C1E9D` match [the preserved v52 candidate](../../work/movement-integration/candidate-grenade-equip-v52/identity.json). Protocol 36 and standard D2MOVE41/251 v46 banks are unchanged. [All eighteen protected file checks pass](../../work/handoff-integrity-verification.json).
+
+
+
+Both characters pass seven scoped native grenade equip/unequip checks, using ordinary holster/draw input. The local first-person recordings are reviewed and indexed; they do not demonstrate remote grenade movement. Exact native scene ownership is the next binding step. Failed takes are preserved. [Grenade findings](18-native-grenade-investigation.md).
+
+
+
+Earlier paired-role equipment, v50 crouched cast guard candidate and v51 failure-effect lifecycle evidence remains valid within each take. The pause visibility gap remains open. There are 411 indexed actual-game videos; this is not a completion percentage. Movement and playable co-op remain incomplete, with the goal active beyond movement.
+
+<!-- /EQUIPMENT-GRENADE-V52 -->
+

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "character": "emily",
+  "exit": "jump",
+  "holstered": true,
+  "layout": 2,
+  "checks": [
+    "Exact bank and native Steam stream ready in requested sword state",
+    "Native sprint-to-slide state drives remote whole-body slide through Steam",
+    "Native jump interrupts slide and retains airborne body presentation",
+    "Requested end stance and fully owned native-driven gait recovered",
+    "Source first-person and native remote sword retain requested equipment state",
+    "Both players and avatars retain native health",
+    "Protected original files and saves unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.241,
+      "action": "Native sprint input"
+    },
+    {
+      "seconds": 1.619,
+      "action": "Native crouch while sprinting"
+    },
+    {
+      "seconds": 2.003,
+      "action": "Native jump interrupts slide; neutral stick avoids requesting a furniture vault"
+    }
+  ],
+  "dll": "D662AA6718B0F42A643CA1B53D310B3B58C45671F248C937CE2E36974E29A2EB",
+  "bankSha256": "5C73453BFD26882AA801EDCF17FBD0A2ADFB5E933C11942C84A1009EFA686BF0",
+  "recorded": true,
+  "scope": "Native sprint-to-slide in isolated Dunwall with one explicit equipment and recovery/interruption context. Source POV and remote full-body recording. No combat/victim contact, slopes, low ceilings or arbitrary interruption acceptance."
+}

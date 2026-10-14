@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "7F2C0E493D64A63C4FDA59A2E901E54DE3D4C2832C12C561AD5A3297592B5DB2",
+  "checks": [
+    "Ordinary RT starts the owned native assassination scene",
+    "Exact native state13 and four owned bindings validate fast-back1333",
+    "Independent native sword equipped/started observed during lethal scene",
+    "Native Steam remote full-body lethal phase observed",
+    "Native standing recovery restores existing movement",
+    "Remote actor follows independent native source root through lethal animation",
+    "Remote body playback did not duplicate damage on the receiver victim",
+    "Native ordinary RT250ms behind exact authored guard2; independent source and Steam actor checks, victim/world outcome remains separate.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "distance": 1.15,
+        "yaw": 90,
+        "stance": 0,
+        "name": "rear-lethal"
+      },
+      "key": "client-rear-lethal",
+      "count": 86,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Fast rear assassination actor-body network binding via existing legacy paired channel, ordinary RT250ms. Source native controls and outcomes unchanged; remote actor animation/root/equipment only. Receiver victim, death/corpse, contact alignment and world outcomes remain unsynchronized by this binding. All checkpoint inventory/health and14 protected files restored."
+}

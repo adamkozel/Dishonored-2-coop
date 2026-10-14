@@ -1,0 +1,4 @@
+{
+  "code": "import ghidra.app.cmd.function.CreateFunctionCmd;\ndisassemble(toAddr(0x1406182f0L)); CreateFunctionCmd.fixupFunctionBody(currentProgram,getFunctionAt(toAddr(0x1406182f0L)),monitor);\ndisassemble(toAddr(0x1406170b0L)); CreateFunctionCmd.fixupFunctionBody(currentProgram,getFunctionAt(toAddr(0x1406170b0L)),monitor);\ndisassemble(toAddr(0x140619380L)); CreateFunctionCmd.fixupFunctionBody(currentProgram,getFunctionAt(toAddr(0x140619380L)),monitor);\ndisassemble(toAddr(0x1406139f0L)); CreateFunctionCmd.fixupFunctionBody(currentProgram,getFunctionAt(toAddr(0x1406139f0L)),monitor);\nprintln(\"Inventory call-path instructions and bodies materialized\");",
+  "program": "Dishonored2.exe"
+}

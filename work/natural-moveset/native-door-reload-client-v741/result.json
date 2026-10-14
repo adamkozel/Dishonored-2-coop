@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "2E750FF68CCCD3A7010F9F9E85B68CD82D6B4C3D27B78408DC138829EC3921EA",
+  "checks": [
+    "Both native doors were Moving when either player requested one shared reload; duplicate peer retry performed no extra load",
+    "Both roles and counterparts restored after both-ready hold; old door channels retired; new-world door remains checkpoint-closed with no replayed native queue call",
+    "Both native views recorded across interrupted door motion, shared loading and checkpoint return",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "yaw": 270,
+        "stance": 0,
+        "name": "unlocked-door-tap",
+        "distance": 1.0
+      },
+      "key": "client-unlocked-door-tap",
+      "count": 116,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 210178579
+    }
+  ],
+  "door": "ld_door_350cm_int_rich_wood_01_3",
+  "initialOpen": false,
+  "scope": "Shared fixed-SLOT82 checkpoint interrupts active native door motion; one load per peer, both-ready role restoration, old door scope retirement and no old target applied to new-world door. This does not prove automatic door rearming or cross-campaign saves."
+}

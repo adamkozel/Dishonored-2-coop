@@ -1,0 +1,704 @@
+# host-camera-v1.json
+
+Original: [work/natural-moveset/carry-peer-research-v1/host-camera-v1.json](<../../../../work/natural-moveset/carry-peer-research-v1/host-camera-v1.json>)
+
+SHA-256: `B486C18553D82619BBFA157359D52DA9397E6C541B79F07B1C42316C45E0C95E`; 15818 bytes.
+
+## Original saved record
+
+````json
+{
+  "target": 50.0,
+  "settled": true,
+  "method": "Native controller look input with read-only native view-matrix feedback. Native setviewpos preserves existing camera pitch; its extra pitch argument does not set this field.",
+  "samples": [
+    {
+      "iteration": 0,
+      "pitch": 0.4482752931268399,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.5962
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.552,
+          68.2848
+        ],
+        "nativeViewOrientation": [
+          -0.000689721,
+          -0.999969,
+          -0.0078238,
+          0.999997,
+          -0.000672341,
+          -0.0022239,
+          0.00221857,
+          -0.00782531,
+          0.999967
+        ]
+      }
+    },
+    {
+      "iteration": 1,
+      "pitch": 6.174045343050116,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.579,
+          68.0877
+        ],
+        "nativeViewOrientation": [
+          -0.00070866,
+          -0.9942,
+          -0.107549,
+          1,
+          -0.000653192,
+          -0.000550966,
+          0.000477519,
+          -0.10755,
+          0.9942
+        ]
+      }
+    },
+    {
+      "iteration": 2,
+      "pitch": 12.68483541280816,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.608,
+          68.0818
+        ],
+        "nativeViewOrientation": [
+          -0.000670475,
+          -0.975592,
+          -0.219588,
+          1,
+          -0.000559397,
+          -0.000568023,
+          0.000431322,
+          -0.219588,
+          0.975593
+        ]
+      }
+    },
+    {
+      "iteration": 3,
+      "pitch": 19.512590951792284,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.639,
+          68.0739
+        ],
+        "nativeViewOrientation": [
+          -0.00067047,
+          -0.942568,
+          -0.334014,
+          1,
+          -0.000487902,
+          -0.000630479,
+          0.000431303,
+          -0.334015,
+          0.942568
+        ]
+      }
+    },
+    {
+      "iteration": 4,
+      "pitch": 26.340386901239995,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.668,
+          68.0626
+        ],
+        "nativeViewOrientation": [
+          -0.000670462,
+          -0.896174,
+          -0.443703,
+          1,
+          -0.000409488,
+          -0.000683993,
+          0.000431285,
+          -0.443703,
+          0.896174
+        ]
+      }
+    },
+    {
+      "iteration": 5,
+      "pitch": 33.80533577174445,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.698,
+          68.0454
+        ],
+        "nativeViewOrientation": [
+          -0.000670451,
+          -0.830932,
+          -0.556373,
+          1,
+          -0.000317154,
+          -0.000731375,
+          0.000431267,
+          -0.556373,
+          0.830932
+        ]
+      }
+    },
+    {
+      "iteration": 6,
+      "pitch": 40.16252652688743,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.721,
+          68.0272
+        ],
+        "nativeViewOrientation": [
+          -0.00067044,
+          -0.764218,
+          -0.644958,
+          1,
+          -0.000234223,
+          -0.000761977,
+          0.000431253,
+          -0.644958,
+          0.764218
+        ]
+      }
+    },
+    {
+      "iteration": 7,
+      "pitch": 47.30890610580088,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.742,
+          68.0034
+        ],
+        "nativeViewOrientation": [
+          -0.000670426,
+          -0.678046,
+          -0.73502,
+          1,
+          -0.000137611,
+          -0.000785176,
+          0.000431238,
+          -0.73502,
+          0.678045
+        ]
+      }
+    },
+    {
+      "iteration": 8,
+      "pitch": 47.71838394961417,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.741,
+          67.9998
+        ],
+        "nativeViewOrientation": [
+          -0.000670426,
+          -0.672775,
+          -0.739847,
+          1,
+          -0.000131996,
+          -0.000786138,
+          0.000431237,
+          -0.739847,
+          0.672775
+        ]
+      }
+    },
+    {
+      "iteration": 9,
+      "pitch": 48.12784360810776,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.741,
+          67.9972
+        ],
+        "nativeViewOrientation": [
+          -0.000670425,
+          -0.66747,
+          -0.744636,
+          1,
+          -0.000126374,
+          -0.00078706,
+          0.000431236,
+          -0.744637,
+          0.66747
+        ]
+      }
+    },
+    {
+      "iteration": 10,
+      "pitch": 48.53739234054,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.742,
+          67.9957
+        ],
+        "nativeViewOrientation": [
+          -0.000670424,
+          -0.662131,
+          -0.749388,
+          1,
+          -0.000120745,
+          -0.000787942,
+          0.000431236,
+          -0.749388,
+          0.662131
+        ]
+      }
+    },
+    {
+      "iteration": 11,
+      "pitch": 48.837686377637596,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.744,
+          67.9952
+        ],
+        "nativeViewOrientation": [
+          -0.000670423,
+          -0.658194,
+          -0.752848,
+          1,
+          -0.000116614,
+          -0.000788563,
+          0.000431235,
+          -0.752848,
+          0.658194
+        ]
+      }
+    },
+    {
+      "iteration": 12,
+      "pitch": 49.19254238012713,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.746,
+          67.9952
+        ],
+        "nativeViewOrientation": [
+          -0.000670422,
+          -0.653518,
+          -0.75691,
+          1,
+          -0.000111727,
+          -0.00078927,
+          0.000431234,
+          -0.756911,
+          0.653518
+        ]
+      }
+    },
+    {
+      "iteration": 13,
+      "pitch": 49.19254238012713,
+      "target": 50.0,
+      "view": {
+        "pid": 75820,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1be9b1fad60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1be9b2cdb20",
+        "auxiliaryDefinition": "0x1bddcb83b20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -38.95,
+          -161.5,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -1.62921E-07,
+          -1,
+          0,
+          1,
+          -1.62921E-07,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -38.95,
+          -161.747,
+          67.996
+        ],
+        "nativeViewOrientation": [
+          -0.000670422,
+          -0.653518,
+          -0.75691,
+          1,
+          -0.000111727,
+          -0.000789269,
+          0.000431234,
+          -0.756911,
+          0.653518
+        ]
+      }
+    }
+  ]
+}
+
+````

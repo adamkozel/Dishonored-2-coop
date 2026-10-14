@@ -1,0 +1,60 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014075E36C: movaps      xmmword ptr [rsp+50h],xmm6
+  000000014075E371: mov         rcx,rsi
+  000000014075E374: movaps      xmmword ptr [rsp+40h],xmm7
+  000000014075E379: movaps      xmmword ptr [rsp+30h],xmm8
+  000000014075E37F: call        00000001400C3C30
+  000000014075E384: mov         rax,qword ptr [rsp+78h]
+  000000014075E389: mov         rbx,qword ptr [000000014231E918h]
+  000000014075E390: movss       xmm6,dword ptr [rax+0Ch]
+  000000014075E395: mov         rcx,rbx
+  000000014075E398: divss       xmm6,xmm0
+  000000014075E39C: call        00000001400B4600
+  000000014075E3A1: mov         rcx,rbx
+  000000014075E3A4: movaps      xmm8,xmm0
+  000000014075E3A8: call        00000001400B4610
+  000000014075E3AD: movaps      xmm7,xmm0
+  000000014075E3B0: comiss      xmm7,xmm6
+  000000014075E3B3: ja          000000014075E3C4
+  000000014075E3B5: comiss      xmm6,xmm8
+  000000014075E3B9: jbe         000000014075E3C1
+  000000014075E3BB: movaps      xmm7,xmm8
+  000000014075E3BF: jmp         000000014075E3C4
+  000000014075E3C1: movaps      xmm7,xmm6
+  000000014075E3C4: mov         rdx,qword ptr [000000014231E918h]
+  000000014075E3CB: movaps      xmm2,xmm7
+  000000014075E3CE: xor         r9d,r9d
+  000000014075E3D1: mov         rcx,rsi
+  000000014075E3D4: mov         dword ptr [rsp+20h],4
+  000000014075E3DC: call        00000001400C5C60
+  000000014075E3E1: mov         rcx,rsi
+  000000014075E3E4: call        0000000140418880
+  000000014075E3E9: mov         rcx,rsi
+  000000014075E3EC: xorps       xmm6,xmm6
+  000000014075E3EF: cvtss2sd    xmm6,xmm7
+  000000014075E3F3: call        00000001408832B0
+  000000014075E3F8: lea         rdx,[0000000141C58998h]
+  000000014075E3FF: movaps      xmm3,xmm6
+  000000014075E402: mov         r8,rax
+  000000014075E405: xor         ecx,ecx
+  000000014075E407: movq        r9,xmm3
+  000000014075E40C: call        00000001401668E0
+  000000014075E411: movaps      xmm8,xmmword ptr [rsp+30h]
+  000000014075E417: movaps      xmm7,xmmword ptr [rsp+40h]
+  000000014075E41C: movaps      xmm6,xmmword ptr [rsp+50h]
+  000000014075E421: mov         rbx,qword ptr [rsp+0000000000000080h]
+  000000014075E429: add         rsp,60h
+  000000014075E42D: pop         rsi
+  000000014075E42E: ret
+  000000014075E42F: 48
+
+  Summary
+
+     1A7D000 .text

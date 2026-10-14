@@ -1,0 +1,18 @@
+
+void FUN_14018ccb0(longlong param_1)
+
+{
+  longlong *plVar1;
+  
+  plVar1 = (longlong *)FUN_140a9de90();
+  *(undefined4 *)(param_1 + 0x68) = 0;
+  if (-1 < *(int *)(param_1 + 0x6c)) {
+    (**(code **)(*plVar1 + 0x20))
+              (plVar1,*(undefined8 *)(param_1 + 0x60),*(int *)(param_1 + 0x6c) << 3);
+  }
+  *(undefined4 *)(param_1 + 0x6c) = 0x80000000;
+  *(undefined8 *)(param_1 + 0x60) = 0;
+  return;
+}
+
+

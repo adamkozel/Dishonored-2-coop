@@ -1,0 +1,106 @@
+{
+  "created": "2026-10-12T18:22:38.401046+02:00",
+  "userInstruction": "Movement collision is fine",
+  "decision": "Retain normal native partner movement collision; stop pass-through work. All other partner interaction exclusions remain required.",
+  "baseline": "work\\movement-integration\\candidate-possession-partner-v374",
+  "dll": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "sourceFiles": 261,
+  "sourceMatchesVerified374": true,
+  "deploymentVerified": true,
+  "scope": "Verified374 source/staging and isolated DLL restored; exact original collision prologue in both live game processes, native Steam session connected, damage and three power filters installed, health and protected files unchanged. This read-only check is not a new blanket gameplay exclusion test.",
+  "verifiedAt": "2026-10-12T18:24:39.320492+02:00",
+  "roles": [
+    {
+      "role": "host",
+      "pid": 72852,
+      "base": "0x7ff7c5750000",
+      "nativeCollisionPrologue": "448bca8bc2418bd081e2ffffff00",
+      "health": 56,
+      "partnerHealth": 40,
+      "steamInterface": "SteamNetworkingSockets012",
+      "connectionState": 3,
+      "powerFilters": {
+        "mesmerize": {
+          "installed": true,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "forwarded": 0,
+          "otherAccepted": 0,
+          "cacheHit": 0,
+          "cacheMiss": 0,
+          "readTotalUs": 0,
+          "readMaxUs": 0
+        },
+        "domino": {
+          "installed": true,
+          "calls": 0,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "otherAccepted": 0,
+          "cacheHit": 0,
+          "cacheMiss": 0,
+          "readMaxUs": 0
+        },
+        "possession": {
+          "installed": true,
+          "calls": 0,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "otherAccepted": 0,
+          "readMaxUs": 0
+        }
+      },
+      "damageFilterEnabled": true
+    },
+    {
+      "role": "client",
+      "pid": 83940,
+      "base": "0x7ff7c5750000",
+      "nativeCollisionPrologue": "448bca8bc2418bd081e2ffffff00",
+      "health": 56,
+      "partnerHealth": 40,
+      "steamInterface": "SteamNetworkingSockets012",
+      "connectionState": 3,
+      "powerFilters": {
+        "mesmerize": {
+          "installed": true,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "forwarded": 0,
+          "otherAccepted": 0,
+          "cacheHit": 0,
+          "cacheMiss": 0,
+          "readTotalUs": 0,
+          "readMaxUs": 0
+        },
+        "domino": {
+          "installed": true,
+          "calls": 0,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "otherAccepted": 0,
+          "cacheHit": 0,
+          "cacheMiss": 0,
+          "readMaxUs": 0
+        },
+        "possession": {
+          "installed": true,
+          "calls": 0,
+          "considered": 0,
+          "blocked": 0,
+          "readFailed": 0,
+          "otherAccepted": 0,
+          "readMaxUs": 0
+        }
+      },
+      "damageFilterEnabled": true
+    }
+  ],
+  "protectedFilesUnchanged": 14
+}

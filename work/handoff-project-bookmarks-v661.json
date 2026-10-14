@@ -1,0 +1,32 @@
+[
+  {
+    "address": "141c7dc68",
+    "category": "D2Coop Native Climb Swim",
+    "comment": "CONFIRMED runtime read-only658: arkPlayerStateSwimming VT RVA1c7dc68, distinct instances in slots0/1 of native mode at stateMachine+30. No actual swimming activated. VT+68=140846450 static update: reads machine+2f8 inputs, machine+308 physics/current controller+48, writes movement+54..60, handles state+74 and slot1 completion. Preserve native physics; authored swim studies still unbound. work/movement-integration/traversal-research-v658.",
+    "type": "Note"
+  },
+  {
+    "address": "141c7d958",
+    "category": "D2Coop Native Climb Swim",
+    "comment": "CONFIRMED runtime658: arkPlayerStateSwimMantle VT RVA1c7d958, slot8 of mode machine+30. No activation/scene observation yet. VT+30=140845d00, +50=140845b50. Do not reuse default-mode mantle8 merely by ID.",
+    "type": "Note"
+  },
+  {
+    "address": "141c786c8",
+    "category": "D2Coop Native Climb Swim",
+    "comment": "CONFIRMED runtime658: arkPlayerStateCancelClimb VT RVA1c786c8, slot88 of native climb mode machine+48. Native mode tables differ from default. Not activated or remotely bound.",
+    "type": "Note"
+  },
+  {
+    "address": "1405be480",
+    "category": "D2Coop Native Climb Swim",
+    "comment": "Read-only climb fixture research659: returns entityDef+0x58 (embedded native class/type descriptor). Native create1408a78f0 checks descriptor+0x98 bit0x20 before spawn; query659 reads entityDef+0xf0 through exact loaded-name/vtable checks. No climb fixture spawn or activation is implied. Source decomp saved work/movement-integration/climb-fixture-v657/decompile-1405be480.txt.",
+    "type": "Note"
+  },
+  {
+    "address": "141c78498",
+    "category": "D2Coop Native Climb Swim",
+    "comment": "CONFIRMED read-only658: arkPlayerStateClimb ID29 in native modes machine+30 and+48, VT RVA1c78498; update+68=1408310a0 uses state+220 and +e8 low24 count>=2 with machine+308 physics. Runtime661: original chain_01 usable_sources definition resolves spawnable in both games. Native isolated spawn created arkClimbable but only Audio+AnimBase components, no PhysicsSystem/Climbable component; 136 ordinary-input samples never activated Climb29. Fixture removed and both checkpoints fully restored. Cause of missing inherited components unproven. Do not force native mode or repeat decorative-chain tests. Evidence documentation/handoff-2026-10-11/51-native-chain-fixture-blocker.md; work/natural-moveset/native-climb-corvo-v661.",
+    "type": "Note"
+  }
+]

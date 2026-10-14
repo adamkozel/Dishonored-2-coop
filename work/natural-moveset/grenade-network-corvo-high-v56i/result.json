@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Native cook entry, cook loop, release and empty recovery drive remote whole-body clips on source clock",
+    "Cosmetic grenade disappears at release and stays hidden through empty recovery and native standing",
+    "Duplicate packet sent during native cook; prop remains one cached native entity",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.938,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene"
+  ],
+  "dll": "035642275AC27A738315BE9E28B59FBC06212320FA27CEA0C07897AD478684BB",
+  "probe": "9867E4153123CF557B39CB46D81FE71C11CF43E63BC18253FFF0A0F4F7CEE8DD",
+  "finalDll": "035642275AC27A738315BE9E28B59FBC06212320FA27CEA0C07897AD478684BB",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Both checkpoints restored after firing. Visual acceptance separate."
+}

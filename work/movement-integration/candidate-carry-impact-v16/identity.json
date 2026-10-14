@@ -1,0 +1,31 @@
+{
+  "sha256": "BF72043B184CD96B22703ADDF10833EF1F1DA1B07015E2B236421AE68620AEFE",
+  "reason": "Reject incidental damage from the exact leased remote carry body; two-second release tail; native local pickup, unrelated bodies, expired leases and retired identities remain native.",
+  "runtimeValidated": true,
+  "scope": "Both-role scoped carry interruption/impact tests plus native friendly-fire, real sword contacts and ordinary enemy sword damage. Complete movement remains false.",
+  "cases": {
+    "corvo": {
+      "video": "carry-cleanup-stream-corvo-v16/native.mp4",
+      "evidence": "carry-cleanup-stream-corvo-v16/validation.json",
+      "checks": 18,
+      "samples": 141,
+      "avatar_health_after": 40,
+      "impact_blocks": 1,
+      "root_follow_passed": false
+    },
+    "emily": {
+      "video": "carry-cleanup-stream-emily-v16/native.mp4",
+      "evidence": "carry-cleanup-stream-emily-v16/validation.json",
+      "checks": 18,
+      "samples": 144,
+      "avatar_health_after": 40,
+      "impact_blocks": 1,
+      "root_follow_passed": false
+    }
+  },
+  "regression": {
+    "friendly-fire-native": "carry-impact-v16-regression\\friendly-fire-native.json",
+    "friendly-fire-strikes": "carry-impact-v16-regression\\friendly-fire-strikes.json",
+    "native-sword-damage-verification": "carry-impact-v16-regression\\native-sword-damage-verification.json"
+  }
+}

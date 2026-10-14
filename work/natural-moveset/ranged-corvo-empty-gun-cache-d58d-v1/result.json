@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "bankVersion": 30,
+  "bankRevision": 4,
+  "bankSha256": "9030B30E348631CBA1617028D13CEFC93F77650A05203CE9510010A7064B7CBF",
+  "source": "host",
+  "kind": "gun",
+  "cameraView": "front",
+  "stanceTransitions": false,
+  "emptyOnly": true,
+  "travelling": false,
+  "crouched": true,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam v27 scene stream, v30 body bank and automatic cosmetic weapon attach ready",
+    "Native empty triggers observed without ammunition grant or native firing",
+    "Both source motion and complete remote body remain crouched through all ranged phases",
+    "All 3 expected source-owned ranged phases reached the remote body through Steam",
+    "No remote muzzle effect starts for empty native trigger actions",
+    "Owned native scene reader validates empty, equip and unequip identities and clocks",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health, inventory and protected files unchanged; no ammunition was granted"
+  ],
+  "events": [
+    {
+      "seconds": 1.797,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.813,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.873,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.786,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.76,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.878,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "D58DEA2F56D7DFC7D2ACDACFF7A1A1612564FA5925A52AC8BF48E99EDB60684B",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Unloaded native ranged presentation with no source projectiles. Native acquisition and separate stream rearming are fixture-driven; this does not prove uninterrupted native wheel selection.",
+  "evidenceWordingCorrection": "Empty-only test checked three phases; removed the inherited loaded-test wording that also named fire/reload. Passed flag and recorded observations unchanged."
+}

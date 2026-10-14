@@ -1,0 +1,44 @@
+# Historical note: outputs/d2-coop-lab/analysis/ghidra/README.md
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/README.md](<../../../../outputs/d2-coop-lab/analysis/ghidra/README.md>)
+
+SHA-256: `155E78630361BB114A4E10EDDEFB6546295AAD9F5253507A2E0D448DF79A3312`; 5619 bytes.
+
+````markdown
+# Persistent native analysis
+
+Ghidra 12.1.4 and bethington/ghidra-mcp 6.0.0 are installed locally for this co-op project. Java is Temurin 21.0.12.1+1; Python is CPython 3.13.16 in an isolated uv environment. `toolchain-lock.json` records the release URLs, published and verified archive hashes, source commit and binary hashes. `python-dependencies.uv.lock` and `python-environment.freeze.txt` pin Python dependencies. No system Java/Python installation or PATH changes are required.
+
+The persistent project is `project/Dishonored2-B671F824.gpr`. Its program is `/Dishonored2.exe`, imported from the local `input` copy after checking SHA-256 `B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180`. Static image base is `0x140000000`; all project notes use RVAs and must be rebased against the live module base for runtime work. Ghidra never attaches to or changes either game process. Original Steam files, saves and DLLs remain separate.
+
+## Use
+
+Run `Start-D2Ghidra.ps1` from the project shell to start the headless server independently. It binds to `127.0.0.1:8089`, uses at most a 2 GB Java heap and two logical processors, and reopens the saved program. It does not run whole-program analysis. The tools live under workspace `work/tools`; do not delete that directory as disposable scratch.
+
+Codex MCP server `d2-ghidra` is registered with an absolute isolated Python path and `codex_bridge.py`. The bridge also starts Ghidra if necessary. The initial chat did not hot-reload its tool inventory. After restarting Codex on 2026-10-09, all 244 tools became available directly under `mcp__d2_ghidra__`. Actual native tool calls verified program identity, function lookup, call cross-references and decompilation; see `native-chat-verification.json`. The local `mcp_client.py` remains a fallback using the same pinned MCP bridge and backend.
+
+Example from the workspace root:
+
+```powershell
+& outputs/d2-coop-lab/analysis/ghidra/Start-D2Ghidra.ps1
+& work/tools/ghidra-mcp-6.0.0/.venv/Scripts/python.exe outputs/d2-coop-lab/analysis/ghidra/mcp_client.py catalog --match decompile,function_by,xrefs
+```
+
+For a tool call, put its arguments in a JSON file and pass `--args-file`, with `--output` to retain the raw MCP response. Schemas are saved in `mcp-tools.json`. Specify `program: Dishonored2.exe`. Java inline scripts should use LF newlines; the client normalizes CRLF because the upstream import hoister mishandles CRLF. The client also checks errors embedded in response text, since the upstream bridge can return `isError: false` for a backend failure.
+
+Start the backend independently before short-lived clients: the Windows MCP SDK can terminate processes created by its bridge when that client closes. The long-lived Codex connection can own its backend, but standalone analysis should not rely on a short-lived client's child process surviving. Save changes using `save_all_programs` after every meaningful analysis update. For newly investigated functions, materialize their instructions with `disassemble` and repair their body with `CreateFunctionCmd.fixupFunctionBody`; imported function placeholders can otherwise have a one-byte body even though on-demand decompilation succeeds. PE unwind records may describe secondary ranges, so confirm the real entry point in disassembly.
+
+## Evidence and continuation
+
+`native-findings.json` imports 31 analyst-named functions, 19 address labels and seven partial native structures. `confirmed-runtime` means corroborated in the existing bounded Dunwall experiments. `confirmed-static` means reconstructed from native code and the guarded readers. These labels do not claim whole-campaign correctness. Names are semantic analyst labels, not recovered official symbols. Structure lengths are minimum known views, not recovered native class sizes; unknown bytes remain undefined. Hypotheses are recorded separately in the JSON and Ghidra's `D2Coop Research` program options.
+
+`build_seed.py` creates the initial import request. Do not blindly rerun the initial seed over later comments. Use targeted MCP changes, keep raw decompilation/xrefs in this directory, and append dated findings to `findings.json`. Refine types only when supported by code or runtime evidence. Save the program and export a GZF snapshot after substantial milestones. The initial portable snapshot is under `snapshots/`.
+
+Actual tool verification is recorded in `verified-function-lookup.json`, `verified-xrefs.json` and `verified-decompilation.json`, for native health-ratio RVA `0x717d50`. The decompilation reads `currentHealth` at component+0x20, calls virtual maximum at vtable+0xd8, divides only when maximum is positive, otherwise returns zero. `persisted-function-lookup.json` proves the named function survived a fresh Java process and project reopen. `verification.json` records the final setup checks.
+
+Initial import exceeded the bridge's 30-second load timeout while Ghidra resolved PE dependencies, but completed in the backend. The saved program was inspected and reopened; no repeated import was needed. A first launcher attempt assumed a system PowerShell path; the corrected launcher uses the installed Codex runtime. The project loader requires `/Dishonored2.exe`, including the leading slash. These issues are resolved and do not block targeted decompilation.
+
+Continue co-op work with Ghidra alongside disassembly and bounded runtime tests. Current useful targets include native inventory/component creation for Emily's counterpart, native finger-pose calibration, repeatable combat, and native session UI. Whole-program decompilation is not a prerequisite.
+
+
+````

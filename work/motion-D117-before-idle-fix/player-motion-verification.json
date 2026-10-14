@@ -1,0 +1,5613 @@
+{
+  "ObservedAt": "2026-10-09T00:33:31.4166119+02:00",
+  "Passed": true,
+  "Failure": null,
+  "DllSha256": "D117EECD846A9A4BA0C72D5260363CC0700C2E4414A3A281C0709F6AA7437AD9",
+  "ProbeSha256": "BFDC7052C4D067E49334F6713508A197ECD0DBE19EA8608012642991FE4D182F",
+  "NativeReadRetries": 0,
+  "Cases": [
+    {
+      "Role": "host",
+      "Posture": 0,
+      "Before": {
+        "Native": {
+          "tick": 55801312,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1224,
+          "received": 1223,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1223,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            948,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 4938,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1221,
+          "received": 1221,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1221,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            942,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 4704,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "After": {
+        "Native": {
+          "tick": 55804093,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1282,
+          "received": 1282,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1282,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1007,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5265,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1279,
+          "received": 1280,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1280,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            989,
+            0,
+            7,
+            5
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5031,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "NativeSamples": [
+        {
+          "tick": 55801468,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4886551
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801531,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.8286819
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801609,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.2112122
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801687,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.5937347
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801765,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8938065
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801843,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.7405167
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801906,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.5116196
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55801968,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.182579
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802046,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.6123734
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802125,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802203,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802265,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802343,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802421,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802484,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802546,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802609,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802671,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802734,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802796,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802859,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802921,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55802984,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803046,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803109,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803156,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803234,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803296,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803359,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55803421,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        }
+      ],
+      "JumpHeight": 1.4901581000000022,
+      "ReceivedJumpPackets": 7,
+      "ReceivedFallPackets": 5,
+      "OtherLocalDisplacement": 0.0
+    },
+    {
+      "Role": "host",
+      "Posture": 1,
+      "Before": {
+        "Native": {
+          "tick": 55805109,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1304,
+          "received": 1303,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1303,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 1,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 1,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1028,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5385,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1306,
+          "received": 1306,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1306,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 1,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 1,
+          "receivedPlayerMotions": [
+            995,
+            20,
+            7,
+            5
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5180,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "After": {
+        "Native": {
+          "tick": 55807859,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1362,
+          "received": 1362,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1362,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 1,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 1,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1087,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5711,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1365,
+          "received": 1365,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1365,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": true,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 1,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 1,
+          "receivedPlayerMotions": [
+            995,
+            67,
+            13,
+            11
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5510,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "NativeSamples": [
+        {
+          "tick": 55805187,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.5311584
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805265,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.8711853
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805328,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.2112122
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805406,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.6362457
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805484,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8938065
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805546,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.7650452
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805625,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.5504532
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805687,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.1805344
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805750,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.6798172
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805812,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805875,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55805937,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806000,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806046,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806109,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806171,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806234,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806296,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806359,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806421,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806484,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806546,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806609,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806671,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806734,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806796,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806859,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806921,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55806984,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55807046,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55807109,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55807171,
+          "game": "0x27040022050",
+          "player": "0x270414c20f0",
+          "machine": "0x270e4ffcb60",
+          "mode": "0x270ebf09350",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        }
+      ],
+      "JumpHeight": 1.4901581000000022,
+      "ReceivedJumpPackets": 6,
+      "ReceivedFallPackets": 6,
+      "OtherLocalDisplacement": 0.0
+    },
+    {
+      "Role": "host",
+      "Stage": "Pause",
+      "NativeRefused": true,
+      "Source": {
+        "role": 0,
+        "engineThread": 44064,
+        "screenTransportPumps": 7148,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 65536,
+        "connection": 1278581195,
+        "connectionState": 3,
+        "sent": 1398,
+        "received": 1399,
+        "rejected": 0,
+        "lastCommand": 497388938,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 1399,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 209916411,
+        "probeFollowEnabled": false,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400017
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003632
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 2,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 0,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 9,
+        "posePacketBytes": 192,
+        "localSequenceMetadataValid": 0,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 0,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 0,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          1124,
+          0,
+          0,
+          0
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 5835,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      },
+      "Peer": {
+        "role": 1,
+        "engineThread": 38456,
+        "screenTransportPumps": 6658,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 0,
+        "connection": 2255377183,
+        "connectionState": 3,
+        "sent": 1402,
+        "received": 1401,
+        "rejected": 0,
+        "lastCommand": 497390872,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 1401,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 209916391,
+        "probeFollowEnabled": false,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400017
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003632
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 2,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 0,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 9,
+        "posePacketBytes": 192,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 0,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 0,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 0,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          1012,
+          69,
+          13,
+          11
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 5620,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      }
+    },
+    {
+      "Role": "client",
+      "Posture": 0,
+      "Before": {
+        "Native": {
+          "tick": 55810671,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1423,
+          "received": 1422,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1422,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1030,
+            69,
+            13,
+            11
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5620,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1420,
+          "received": 1420,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1420,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1145,
+            0,
+            0,
+            0
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5835,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "After": {
+        "Native": {
+          "tick": 55813406,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1482,
+          "received": 1481,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1481,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1089,
+            69,
+            13,
+            11
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5620,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1478,
+          "received": 1479,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1479,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1192,
+            0,
+            7,
+            5
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5835,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "NativeSamples": [
+        {
+          "tick": 55810734,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4461517
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55810812,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.8286819
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55810890,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.2537079
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55810968,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.5937347
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811015,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8893738
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811093,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8427124
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811156,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.6853409
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811218,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.3828659
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811281,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.0109024
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811343,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4631729
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811421,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811484,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811546,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811609,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811687,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811765,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811828,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811906,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55811968,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812015,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812093,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812156,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812203,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812281,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812343,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812390,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812453,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812515,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812593,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812656,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        },
+        {
+          "tick": 55812718,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 0,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 0,
+              "vtableRva": "0x1c85628",
+              "type": ".?AVarkPlayerStateRunning@@"
+            }
+          ]
+        }
+      ],
+      "JumpHeight": 1.4857254000000069,
+      "ReceivedJumpPackets": 7,
+      "ReceivedFallPackets": 5,
+      "OtherLocalDisplacement": 0.0
+    },
+    {
+      "Role": "client",
+      "Posture": 1,
+      "Before": {
+        "Native": {
+          "tick": 55814390,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1503,
+          "received": 1502,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1502,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 1,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 1,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1110,
+            69,
+            13,
+            11
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5620,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1500,
+          "received": 1500,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1500,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 1,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 1,
+          "receivedPlayerMotions": [
+            1197,
+            16,
+            7,
+            5
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5835,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "After": {
+        "Native": {
+          "tick": 55817078,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        "Source": {
+          "role": 1,
+          "engineThread": 38456,
+          "screenTransportPumps": 6658,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 0,
+          "connection": 2255377183,
+          "connectionState": 3,
+          "sent": 1557,
+          "received": 1556,
+          "rejected": 0,
+          "lastCommand": 497390872,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1556,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916391,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 1,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 0,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 1,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 0,
+          "receivedPlayerMotions": [
+            1164,
+            69,
+            13,
+            11
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5620,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        },
+        "Peer": {
+          "role": 0,
+          "engineThread": 44064,
+          "screenTransportPumps": 7148,
+          "nativeInterface": "SteamNetworkingSockets012",
+          "steamAvailable": true,
+          "listener": 65536,
+          "connection": 1278581195,
+          "connectionState": 3,
+          "sent": 1558,
+          "received": 1559,
+          "rejected": 0,
+          "lastCommand": 497388938,
+          "localPoseAvailable": true,
+          "localPosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "remotePoseAvailable": true,
+          "remoteFresh": true,
+          "remoteSequence": 1559,
+          "remotePosition": [
+            -28.0921,
+            -153.962006,
+            66.403648
+          ],
+          "probeActorHandle": 209916411,
+          "probeFollowEnabled": false,
+          "probeRenderPosition": [
+            -30.580063,
+            -153.716965,
+            66.400017
+          ],
+          "probeOffset": [
+            -2.487963,
+            0.245041,
+            -0.003632
+          ],
+          "remoteActorImplemented": false,
+          "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "localMapId": "b09f633a29a020cc",
+          "localEpoch": 11,
+          "remoteMapId": "b09f633a29a020cc",
+          "remoteEpoch": 11,
+          "localGameLogicState": 1,
+          "localPendingGameLogicState": 0,
+          "remoteGameLogicState": 1,
+          "remotePendingGameLogicState": 0,
+          "localCinematicMetadataValid": 1,
+          "localCinematicNodeCount": 0,
+          "localCinematicSignature": "0",
+          "remoteCinematicMetadataValid": 1,
+          "remoteCinematicNodeCount": 0,
+          "remoteCinematicSignature": "0",
+          "localCinematicEpoch": 1,
+          "remoteCinematicEpoch": 1,
+          "cinematicSyncEnabled": true,
+          "remoteCinematicSyncEnabled": 1,
+          "localCinematicCanSkip": 0,
+          "remoteCinematicCanSkip": 0,
+          "nativeSkipCallbacks": 0,
+          "skipSent": 0,
+          "skipReceived": 0,
+          "skipApplied": 0,
+          "skipDropped": 0,
+          "localSkipSceneId": "0",
+          "remoteSkipSceneId": "0",
+          "nativeSkipThread": 0,
+          "poseProtocol": 9,
+          "posePacketBytes": 192,
+          "localSequenceMetadataValid": 1,
+          "localSequenceCount": 0,
+          "localSequenceSignature": "0",
+          "localSequenceBoundaryId": "0",
+          "remoteSequenceMetadataValid": 1,
+          "remoteSequenceCount": 0,
+          "remoteSequenceSignature": "0",
+          "remoteSequenceBoundaryId": "0",
+          "localPlayerStanceValid": 1,
+          "localPlayerStance": 0,
+          "remotePlayerStanceValid": 1,
+          "remotePlayerStance": 1,
+          "localPlayerMotionValid": 1,
+          "localPlayerMotion": 0,
+          "remotePlayerMotionValid": 1,
+          "remotePlayerMotion": 1,
+          "receivedPlayerMotions": [
+            1197,
+            63,
+            14,
+            10
+          ],
+          "cinematicHoldActive": false,
+          "cinematicHoldId": 0,
+          "cinematicHoldStarted": 0,
+          "cinematicHoldResumed": 0,
+          "cinematicHoldAbandoned": 0,
+          "localSequenceTimeMs": 0,
+          "localSequencePaused": 0,
+          "remoteSequenceTimeMs": 0,
+          "remoteSequencePaused": 0,
+          "barrierEnabled": 1,
+          "barrierHeld": 0,
+          "remoteBarrierEnabled": 1,
+          "remoteBarrierHeld": 0,
+          "barrierStarted": 0,
+          "barrierReleased": 0,
+          "barrierTimedOut": 0,
+          "barrierMissed": 0,
+          "barrierSent": 0,
+          "barrierReceived": 0,
+          "barrierRejected": 0,
+          "locomotionEnabled": true,
+          "locomotionApplied": 5835,
+          "locomotionRefused": 0,
+          "locomotionSpeed": 0.0,
+          "aiHoldActive": false,
+          "aiHoldHandle": 0,
+          "aiHoldStarted": 0,
+          "aiHoldReleased": 0,
+          "aiHoldRefused": 0,
+          "aiHoldInvalidated": 0,
+          "aiHoldResult": "idle"
+        }
+      },
+      "NativeSamples": [
+        {
+          "tick": 55814468,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4886551
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814515,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.7861786
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814593,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.0837021
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814656,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.4662323
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814734,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 2,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8893814
+          ],
+          "active": [
+            {
+              "id": 2,
+              "vtableRva": "0x1c85028",
+              "type": ".?AVarkPlayerStateJumping@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814812,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.8263626
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814890,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.5851974
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55814953,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            67.2847672
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815015,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 0,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 3,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.8841934
+          ],
+          "active": [
+            {
+              "id": 3,
+              "vtableRva": "0x1c845c8",
+              "type": ".?AVarkPlayerStateFalling@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815078,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815140,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815218,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815281,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815343,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815406,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815453,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815531,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815593,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815656,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815703,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815765,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815828,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815890,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55815953,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816031,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816093,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816156,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816218,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816281,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816343,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        },
+        {
+          "tick": 55816406,
+          "game": "0x208b7baa050",
+          "player": "0x208b6d95fd0",
+          "machine": "0x208ddfb4830",
+          "mode": "0x208e0856030",
+          "stance": 1,
+          "defaultMode": true,
+          "motionValid": true,
+          "motion": 1,
+          "position": [
+            -28.0921001,
+            -153.962006,
+            66.4036484
+          ],
+          "active": [
+            {
+              "id": 6,
+              "vtableRva": "0x1c84258",
+              "type": ".?AVarkPlayerStateSneaking@@"
+            }
+          ]
+        }
+      ],
+      "JumpHeight": 1.4857330000000104,
+      "ReceivedJumpPackets": 7,
+      "ReceivedFallPackets": 5,
+      "OtherLocalDisplacement": 0.0
+    },
+    {
+      "Role": "client",
+      "Stage": "Pause",
+      "NativeRefused": true,
+      "Source": {
+        "role": 1,
+        "engineThread": 38456,
+        "screenTransportPumps": 6658,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 0,
+        "connection": 2255377183,
+        "connectionState": 3,
+        "sent": 1593,
+        "received": 1594,
+        "rejected": 0,
+        "lastCommand": 497390872,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 1594,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 209916391,
+        "probeFollowEnabled": false,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400017
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003632
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 2,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 0,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 9,
+        "posePacketBytes": 192,
+        "localSequenceMetadataValid": 0,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 0,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 0,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          1202,
+          69,
+          13,
+          11
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 5620,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      },
+      "Peer": {
+        "role": 0,
+        "engineThread": 44064,
+        "screenTransportPumps": 7148,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 65536,
+        "connection": 1278581195,
+        "connectionState": 3,
+        "sent": 1596,
+        "received": 1594,
+        "rejected": 0,
+        "lastCommand": 497388938,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 1594,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 209916411,
+        "probeFollowEnabled": false,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400017
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003632
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 2,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 0,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 9,
+        "posePacketBytes": 192,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 0,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 0,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 0,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          1215,
+          67,
+          14,
+          10
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 5835,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      }
+    }
+  ],
+  "Scope": "Default-mode native motion metadata over Steam: ground, sneaking, jumping, falling, landing and pause invalidation. Received-packet counters retain brief states between status refreshes; source actions independently sampled from native state machine. Remote action animations are not applied."
+}

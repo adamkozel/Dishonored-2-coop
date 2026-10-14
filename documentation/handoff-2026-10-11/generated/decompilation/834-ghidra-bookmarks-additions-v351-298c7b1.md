@@ -1,0 +1,25 @@
+# ghidra-bookmarks-additions-v351.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v351.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v351.json>)
+
+SHA-256: `35517EA669957E58CFA4D588F902F8262FEB924B1FA31DC95135BB7084417CB8`; 1916 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "1404c4e10",
+    "category": "D2Coop/Possession-target-FX-v350",
+    "comment": "CONFIRMED exact EXE isolated350: selected human NPC possession component flags&0xc==8, generation and reciprocal owner; exact declaration VT1b63d68/name components/characters/npc/base/possession_human.cpntnpcpossession, +a8 target-human FX. 140448200 selected weak ref/b0 handle sends135; 4c4350 registers135->4c53a0. 4c4e10 creates temporary idEntityFx stored component+28, binds possession_target tag, starts87cb90 and stores ID+30. 4c4f20 stops via878c30/87ce20 and resets IDFFFFFFFF WITHOUT clearing actor pointer. Scoped reader350 matched15/15 independent native FX records in159samples; exact bucket ownership/transform and race tests pass. Unknown selected-item reads during occupation do not imply absence.351 cosmetic target-particle Steam stream runtime pending; NPC authority/camera/gameplay untouched.",
+    "type": "Note"
+  },
+  {
+    "address": "1408784b0",
+    "category": "D2Coop/Possession-visibility-v336",
+    "comment": "CONFIRMED exact B671 native Hide8784b0/Show87c590 sets/clears+D0 bit0 and calls87e040. DLL343 native human exit and subsequent walk343/345 PASS15; exactly owned Corvo clone hide/show, local player firstperson unchanged.344 receiver-stop PASS14. Both actual native menu cases347 PASS14: receiver pause 8 hiddenbaseline/22restored-disarmed rows incl7stilloccupied; source pause6baseline/23restored rows incl7stilloccupied. Streams remain disarmed after interruption; normal native source exit follows.346 failed harness timing retained.349 PASS16 sourceFX research plus body exit continuity; peerguard overlap prevents full visual acceptance. All completed receipts restore complete checkpoint inventories/health and protected14. Native NPC/targetFX/shared outcomes/alternatehosts still unfinished. No local-player/NPC/collision visibility writes.",
+    "type": "Note"
+  }
+]
+
+````

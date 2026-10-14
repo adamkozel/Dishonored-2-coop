@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build_handoff.py", line 231, in <module>
+    text=f.read_text(encoding='utf-8');clean=[];fence=None
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x96 in position 1824: invalid start byte

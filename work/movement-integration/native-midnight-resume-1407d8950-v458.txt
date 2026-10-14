@@ -1,0 +1,71 @@
+
+/* [confirmed-runtime] RVA 0x7d8950
+   Resume matching captured instance only.
+   Evidence: src/engine_bridge.cpp
+   Names are analyst-assigned semantic labels, not recovered official symbols. */
+
+undefined1
+D2_Sequence_Resume(longlong param_1,undefined8 param_2,undefined4 param_3,undefined8 param_4)
+
+{
+  longlong lVar1;
+  undefined1 uVar2;
+  int iVar3;
+  longlong lVar4;
+  longlong *plVar5;
+  ulonglong uVar6;
+  ulonglong uVar7;
+  longlong lStackX_8;
+  longlong lStack_30;
+  int iStack_28;
+  
+  uVar6 = 0;
+  iStack_28 = 0;
+  lStack_30 = param_1;
+  lVar4 = FUN_1407d59c0(param_1,param_2,&lStack_30,param_4,0xfffffffffffffffe);
+  if ((lVar4 == 0) || (*(int *)(lVar4 + 0x27c) == 10)) {
+    uVar2 = 0;
+  }
+  else {
+    FUN_1407d06a0(lVar4,param_3);
+    lVar1 = param_1 + 0x1b08;
+    iVar3 = FUN_1401581c0(lVar1,0,1);
+    while (iVar3 == 1) {
+      iVar3 = FUN_1401581c0(lVar1,0,1);
+    }
+    iVar3 = (*(uint *)(param_1 + 0x618) & 0xffffff) - 1;
+    if (-1 < iVar3) {
+      plVar5 = *(longlong **)(param_1 + 0x610);
+      uVar7 = uVar6;
+      do {
+        if (*plVar5 == lVar4) {
+          if (-1 < (int)uVar7) {
+            uVar2 = FUN_14060aee0(param_1 + 0x610,uVar7);
+            goto LAB_1407d8a30;
+          }
+          break;
+        }
+        uVar7 = (ulonglong)((int)uVar7 + 1);
+        uVar6 = uVar6 + 1;
+        plVar5 = plVar5 + 1;
+      } while ((longlong)uVar6 <= (longlong)iVar3);
+    }
+    uVar2 = 0;
+LAB_1407d8a30:
+    lStackX_8 = lVar4;
+    if (*(char *)(lVar4 + 0x2b5) == '\0') {
+      FUN_1408918f0();
+    }
+    else {
+      FUN_140160b50(param_1,&lStackX_8,*(undefined4 *)(param_1 + 0x11f0));
+      *(int *)(param_1 + 0x11f0) = *(int *)(param_1 + 0x11f0) + 1;
+    }
+    FUN_1401581e0(lVar1,0);
+  }
+  if (iStack_28 != 0) {
+    FUN_1407d7050(lStack_30);
+  }
+  return uVar2;
+}
+
+

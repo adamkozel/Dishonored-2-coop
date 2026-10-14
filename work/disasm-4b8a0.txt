@@ -1,0 +1,132 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014004B8A0: lea         rcx,[00000001425AF110h]
+  000000014004B8A7: jmp         000000014004B720
+  000000014004B8AC: int         3
+  000000014004B8AD: int         3
+  000000014004B8AE: int         3
+  000000014004B8AF: int         3
+  000000014004B8B0: mov         qword ptr [rsp+8],rbx
+  000000014004B8B5: push        rdi
+  000000014004B8B6: sub         rsp,30h
+  000000014004B8BA: mov         edi,dword ptr [rcx+0000000000001E98h]
+  000000014004B8C0: mov         rbx,rcx
+  000000014004B8C3: cmp         edi,0FFFFFFFFh
+  000000014004B8C6: je          000000014004B914
+  000000014004B8C8: mov         rcx,qword ptr [0000000142286CF8h]
+  000000014004B8CF: mov         rax,qword ptr [rcx]
+  000000014004B8D2: call        qword ptr [rax+00000000000000A8h]
+  000000014004B8D8: mov         edx,edi
+  000000014004B8DA: mov         rcx,rax
+  000000014004B8DD: call        00000001400D2620
+  000000014004B8E2: mov         rcx,qword ptr [0000000142286CF8h]
+  000000014004B8E9: mov         rax,qword ptr [rcx]
+  000000014004B8EC: call        qword ptr [rax+00000000000000A8h]
+  000000014004B8F2: mov         edx,dword ptr [rbx+0000000000001E98h]
+  000000014004B8F8: xorps       xmm2,xmm2
+  000000014004B8FB: mov         r8,qword ptr [rax]
+  000000014004B8FE: mov         rcx,rax
+  000000014004B901: movss       dword ptr [rsp+28h],xmm2
+  000000014004B907: movaps      xmm3,xmm2
+  000000014004B90A: movss       dword ptr [rsp+20h],xmm2
+  000000014004B910: call        qword ptr [r8+28h]
+  000000014004B914: mov         dword ptr [rbx+0000000000001E98h],0FFFFFFFFh
+  000000014004B91E: mov         rcx,qword ptr [0000000142287C78h]
+  000000014004B925: mov         rax,qword ptr [rcx]
+  000000014004B928: call        qword ptr [rax+38h]
+  000000014004B92B: mov         rcx,rax
+  000000014004B92E: mov         rbx,qword ptr [rsp+40h]
+  000000014004B933: add         rsp,30h
+  000000014004B937: pop         rdi
+  000000014004B938: jmp         00000001400DC270
+  000000014004B93D: int         3
+  000000014004B93E: int         3
+  000000014004B93F: int         3
+  000000014004B940: push        rbx
+  000000014004B942: sub         rsp,20h
+  000000014004B946: cmp         dword ptr [00000001432C7ED4h],1
+  000000014004B94D: mov         rbx,rcx
+  000000014004B950: je          000000014004B996
+  000000014004B952: cmp         dword ptr [00000001432CD1C8h],0
+  000000014004B959: jg          000000014004B996
+  000000014004B95B: mov         rcx,qword ptr [0000000142274708h]
+  000000014004B962: mov         rax,qword ptr [rcx]
+  000000014004B965: call        qword ptr [rax+30h]
+  000000014004B968: test        al,al
+  000000014004B96A: je          000000014004B996
+  000000014004B96C: cmp         byte ptr [rbx+5Ah],0
+  000000014004B970: jne         000000014004B996
+  000000014004B972: mov         byte ptr [rbx+5Ah],1
+  000000014004B976: mov         rcx,qword ptr [0000000142286CF8h]
+  000000014004B97D: mov         rax,qword ptr [rcx]
+  000000014004B980: call        qword ptr [rax+00000000000000E0h]
+  000000014004B986: lea         rcx,[0000000142BC58A0h]
+  000000014004B98D: call        000000014005E6C0
+  000000014004B992: mov         byte ptr [rbx+5Ah],0
+  000000014004B996: add         rsp,20h
+  000000014004B99A: pop         rbx
+  000000014004B99B: ret
+  000000014004B99C: int         3
+  000000014004B99D: int         3
+  000000014004B99E: int         3
+  000000014004B99F: int         3
+  000000014004B9A0: mov         qword ptr [rsp+8],rcx
+  000000014004B9A5: push        rdi
+  000000014004B9A6: sub         rsp,30h
+  000000014004B9AA: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014004B9B3: mov         qword ptr [rsp+48h],rbx
+  000000014004B9B8: mov         qword ptr [rsp+50h],rsi
+  000000014004B9BD: mov         rbx,rcx
+  000000014004B9C0: xor         esi,esi
+  000000014004B9C2: mov         qword ptr [rcx+10h],rsi
+  000000014004B9C6: mov         word ptr [rcx+18h],1
+  000000014004B9CC: mov         dword ptr [rcx+1Ch],2
+  000000014004B9D3: lea         rax,[0000000141AC8608h]
+  000000014004B9DA: mov         qword ptr [rcx],rax
+  000000014004B9DD: lea         rax,[0000000141AC8710h]
+  000000014004B9E4: mov         qword ptr [rcx+8],rax
+  000000014004B9E8: lea         rax,[rcx+0000000000000120h]
+  000000014004B9EF: mov         edi,1Fh
+  000000014004B9F4: mov         ecx,edi
+  000000014004B9F6: nop         word ptr [rax+rax+0000000000000000h]
+  000000014004BA00: mov         dword ptr [rax+0Ch],0BF800000h
+  000000014004BA07: mov         dword ptr [rax+8],0BF800000h
+  000000014004BA0E: mov         dword ptr [rax+4],0BF800000h
+  000000014004BA15: mov         dword ptr [rax],0BF800000h
+  000000014004BA1B: lea         rax,[rax+10h]
+  000000014004BA1F: dec         ecx
+  000000014004BA21: jns         000000014004BA00
+  000000014004BA23: lea         rcx,[rbx+0000000000000328h]
+  000000014004BA2A: call        000000014099ED70
+  000000014004BA2F: nop
+  000000014004BA30: mov         qword ptr [rbx+0000000000608360h],rsi
+  000000014004BA37: lea         rcx,[rbx+0000000000608390h]
+  000000014004BA3E: call        0000000140058000
+  000000014004BA43: nop
+  000000014004BA44: mov         qword ptr [rbx+0000000000609800h],rsi
+  000000014004BA4B: call        00000001401548E0
+  000000014004BA50: and         dword ptr [rbx+0000000000609808h],0FF000000h
+  000000014004BA5A: mov         byte ptr [rbx+000000000060980Bh],3Ch
+  000000014004BA61: mov         edx,3Fh
+  000000014004BA66: mov         dword ptr [rbx+000000000060980Ch],edx
+  000000014004BA6C: test        dl,40h
+  000000014004BA6F: jne         000000014004BA96
+  000000014004BA71: mov         rcx,qword ptr [rbx+0000000000609800h]
+  000000014004BA78: test        rcx,rcx
+  000000014004BA7B: je          000000014004BA85
+  000000014004BA7D: shr         edx,8
+  000000014004BA80: call        00000001409D8180
+  000000014004BA85: mov         qword ptr [rbx+0000000000609800h],rsi
+  000000014004BA8C: and         dword ptr [rbx+000000000060980Ch],0FFh
+  000000014004BA96: and         dword ptr [rbx+0000000000609808h],0FF000000h
+  000000014004BAA0: B9
+
+  Summary
+
+     1A7D000 .text

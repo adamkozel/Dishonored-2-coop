@@ -1,0 +1,198 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791659073802,
+  "captureStart": 1791659072679,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.125,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Holster sword",
+      "seconds": 2.333,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Unarmed forward walk",
+      "seconds": 5.428,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Unarmed backward walk",
+      "seconds": 6.964,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Draw sword at body-relative hand contact",
+      "seconds": 8.778,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch",
+      "seconds": 11.654,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched holster",
+      "seconds": 13.726,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Unarmed crouch left",
+      "seconds": 16.861,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Unarmed crouch right",
+      "seconds": 18.243,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched draw",
+      "seconds": 20.141,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand",
+      "seconds": 23.031,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Guard after equipment change",
+      "seconds": 25.481,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final recovery",
+      "seconds": 27.965,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1200,
+      0,
+      0,
+      1500,
+      "X",
+      0,
+      "Holster sword"
+    ],
+    [
+      4300,
+      0,
+      14000,
+      700,
+      "Neutral",
+      0,
+      "Unarmed forward walk"
+    ],
+    [
+      5800,
+      0,
+      -14000,
+      700,
+      "Neutral",
+      0,
+      "Unarmed backward walk"
+    ],
+    [
+      7600,
+      0,
+      0,
+      650,
+      "X",
+      0,
+      "Draw sword at body-relative hand contact"
+    ],
+    [
+      10500,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch"
+    ],
+    [
+      12600,
+      0,
+      0,
+      1500,
+      "X",
+      0,
+      "Crouched holster"
+    ],
+    [
+      15700,
+      -16000,
+      0,
+      650,
+      "Neutral",
+      0,
+      "Unarmed crouch left"
+    ],
+    [
+      17100,
+      16000,
+      0,
+      650,
+      "Neutral",
+      0,
+      "Unarmed crouch right"
+    ],
+    [
+      19000,
+      0,
+      0,
+      650,
+      "X",
+      0,
+      "Crouched draw"
+    ],
+    [
+      21900,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand"
+    ],
+    [
+      24300,
+      0,
+      0,
+      700,
+      "RightShoulder",
+      0,
+      "Guard after equipment change"
+    ],
+    [
+      26800,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final recovery"
+    ]
+  ],
+  "dll": "EE876D41AC0FA5B5AC9478FCB9BF611A4C0DEE06773B00CD6B69AFE23C64F0BE",
+  "bank": "66F411F7DEB5F89226A666F785A5FA670C6896DC7B9FC90705FC42D6952EB4F1",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual native draw/holster scenes and source sword state drive authored whole-body movement and native clone equipment over Steam. Unarmed directions use native body clips. Visual contact and interruption acceptance remain pending."
+}

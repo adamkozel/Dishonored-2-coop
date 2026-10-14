@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T19:22:39.658701+02:00",
+  "dll": "0DFF3E9789886EE17C4AF5F1699A1199B46B5C6F7BBD08656B859185BBB91806",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203d",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1203e on 1203d: product-only bulk congestion gate - NPC body poses and world observations skip a cycle while Steam's connection queue estimate exceeds 40 ms (soak 1186 host queue p50 104 ms/p90 285 ms/max 900 ms delayed partner pose packets into 1 s+ stale gaps); partner presentation, control and reliable session messages are never gated; product status reports bulkCongestionSkips/bulkQueueUsMax. Watchdog grace 3 s doubling to 15 s, reset after 10 s live. Keeps 1203d freshness, 1203c handshake re-pin, 1203b bank reactivation/worker bind check. Runtime pending.",
+  "scopedPresentationRecoveryVerified": true,
+  "runtimeEvidence": "../presentation-recovery-audit-v1205.json",
+  "result": "1204f pass: product partner presentation restored by itself after pause (both roles), tutorial modal and a 60 m warp; restore 14-19 s; reliable backlog remains."
+}

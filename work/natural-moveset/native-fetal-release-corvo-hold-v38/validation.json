@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "checks": {
+    "harness_passed": true,
+    "preparation_transmitted": true,
+    "native_hoist_observed": true,
+    "stream_ready_throughout": true,
+    "no_stream_rearm": true,
+    "steam_connected": true,
+    "bank_active_throughout": true,
+    "no_bank_refusals": true,
+    "unique_mapped_body": true,
+    "one_source_corpse_generation": true,
+    "loaded_pose_reached": true,
+    "health_preserved": true,
+    "gather_played": true,
+    "gather_precedes_hoist": true,
+    "hoist_played": true,
+    "semantic_holster_followed": true,
+    "native_holster_observed": true,
+    "authored_hoist_advances": true,
+    "hoist_never_rewinds": true,
+    "supported_settle_observed": true,
+    "supported_settle_finishes": true,
+    "no_settle_replay_on_native_loop": true,
+    "capture_at_least_24hz": true
+  },
+  "samples": 163,
+  "preparation_samples": 5,
+  "lift_samples": 9,
+  "loop_samples": 75,
+  "actual_capture_hz": 27.260579064587972,
+  "transitions": [
+    {
+      "ms": 2,
+      "remote": 0,
+      "playing": 0,
+      "amount": 0.0
+    },
+    {
+      "ms": 1822,
+      "remote": 7,
+      "playing": 0,
+      "amount": 0.0
+    },
+    {
+      "ms": 1948,
+      "remote": 7,
+      "playing": 7,
+      "amount": 0.1878897
+    },
+    {
+      "ms": 2280,
+      "remote": 1,
+      "playing": 1,
+      "amount": 0.1476898
+    },
+    {
+      "ms": 3218,
+      "remote": 1,
+      "playing": 2,
+      "amount": 0.0326793
+    },
+    {
+      "ms": 3343,
+      "remote": 2,
+      "playing": 2,
+      "amount": 0.0523398
+    },
+    {
+      "ms": 8779,
+      "remote": 5,
+      "playing": 5,
+      "amount": 0.1111699
+    },
+    {
+      "ms": 9595,
+      "remote": 0,
+      "playing": 5,
+      "amount": 1.0
+    }
+  ],
+  "video_sha256": "3C3C6FDE2BBC4BDA27CF10DF2B93EBECB50C32F638DA97924AC28DFB743E9EC7",
+  "scope": "Explicit bounded Mayhew paired experiment: ordinary native X pickup drives the carrier through Steam and the victim snapshot blend through the same source hoist clock. Late native retargeting supports the load. Source walks and requests native high throw using RT; native fallback variant5 uses a separate compact victim scene and bounded physics handoff; high-throw impulse is forbidden; native first-person is unchanged. Contacts and full pickup quality unaccepted.",
+  "complete": false,
+  "visual_accepted": false
+}

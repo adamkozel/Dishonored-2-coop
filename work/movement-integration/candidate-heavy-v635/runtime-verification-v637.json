@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-13T09:19:58.210920+02:00",
+  "candidate": "candidate-heavy-v635",
+  "dll": "7E3ADCA32421AE8EAB2DDC1650DF49E3BABFBB0FB14209FC6F1AAE8C1EE01F43",
+  "probe": "BAB4E6F53E01F8181603636FC8C3F153903D20BFD7579861725CFB4C6E74FA66",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "runtimeVerified": true,
+  "scope": "Recorded stationary crouched heavy actor presentation on both roles",
+  "complete": false,
+  "visualAccepted": false,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\crouched-heavy-corvo-v636\\result.json",
+      "sha256": "BF5F36F60BCB66B2CDDF0ED99F248FFC2E23ADED57A07B5A68F6632FD2D79CDE",
+      "checks": [
+        "Independent reader validates ordinary crouched charge and exact observed subscene release",
+        "Native crouched release duration and stance retained",
+        "Remote body performs both crouched charge entry and hold",
+        "Native Steam source semantics drive full-body crouched heavy release",
+        "Native sword remains equipped during crouched heavy attack",
+        "Native stance locomotion resumes after heavy release",
+        "Independent network root retained through crouched heavy attack",
+        "Ordinary crouched RT1500ms in known central-room fixture; owned charge/hold/release through native Steam, no scene forcing or victim outcome replay.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "coverage": {
+        "chargeSamples": 13,
+        "releaseSamples": 7,
+        "remoteReleaseSamples": 8,
+        "durationMs": [
+          833
+        ],
+        "scope": "Stationary crouched charge/hold/release. Moving, cancellation, target outcomes and visual polish remain separate."
+      }
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\crouched-heavy-emily-v636\\result.json",
+      "sha256": "0456BA4B409D0C0F36F0E4C0971BEF0EBA5508ED1DA57634E394270F599DB892",
+      "checks": [
+        "Independent reader validates ordinary crouched charge and exact observed subscene release",
+        "Native crouched release duration and stance retained",
+        "Remote body performs both crouched charge entry and hold",
+        "Native Steam source semantics drive full-body crouched heavy release",
+        "Native sword remains equipped during crouched heavy attack",
+        "Native stance locomotion resumes after heavy release",
+        "Independent network root retained through crouched heavy attack",
+        "Ordinary crouched RT1500ms in known central-room fixture; owned charge/hold/release through native Steam, no scene forcing or victim outcome replay.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "coverage": {
+        "chargeSamples": 13,
+        "releaseSamples": 7,
+        "remoteReleaseSamples": 7,
+        "durationMs": [
+          833
+        ],
+        "scope": "Stationary crouched charge/hold/release. Moving, cancellation, target outcomes and visual polish remain separate."
+      }
+    }
+  ],
+  "limitations": [
+    "Stationary crouched charge/hold/release actor presentation only. Moving/cancel/interruption contexts and shared victim outcomes are not covered.",
+    "Both636 tests selected Scene_1/833. Scene_2/1000 has native source629, asset and unit-test evidence; corrected remote playback of that alternative was not exercised.",
+    "Both native release subscenes use the same existing adapted body donor. Direction-specific acting, static-hold breathing, contact and fine stance-transition polish are deferred.",
+    "Both observer sheets were inspected: full body windup/release/recovery visible. Coarse pose transitions remain; no final visual acceptance or complete movement claim.",
+    "Corvo634 failed release validation due to incorrect role-specific timing inference. Exact asset635 and corrected636 tests establish scene/duration pairs independent of role. Original failed receipt retained, with restoration verified."
+  ],
+  "retainedFailure": "work/natural-moveset/crouched-heavy-corvo-v634/result.json"
+}

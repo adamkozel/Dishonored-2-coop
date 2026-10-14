@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "stance": "standing",
+  "holstered": true,
+  "move": 0,
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native Steam transport and exact bank46/285 remote Emily standing armed context ready",
+    "Native controller stance and sword selection drive the same remote stance/equipment context before the cast",
+    "Strict scene reader validates all three native phases with reciprocal owned Emily left arm",
+    "All exact source scene incarnations, including native aim-loop renewal, match remote phase events through Steam",
+    "All three native phases retain source/remote stance and sword selection, using the corresponding full-body context clips; standing recovery retains the bank",
+    "Native committed world incarnation and transform drive one cosmetic model, all three scene phases and one owned body effect through native Steam; source retirement hides the model and requests native effect stop; the native particle tail then leaves the manager",
+    "Duplicate lifecycle packet rejected without a second model or effect; no late world revival",
+    "Remote body recovers, original sword selections and all avatar health retained; remote model/effect has retired",
+    "Native cast spends source mana without resource writes",
+    "Exact native world body effect exists after source cast; presentation/AI ownership still under investigation",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Ordinary native tutorial NPC remains eligible and receives source-owned beam/head effects; co-op partner is absent from native targets, remote eye presents and retires",
+    "Source-observed beam, trail and target-head effect incarnations drive bounded native receiver FX owned only by the cosmetic model; all retire without NPC writes or duplicate damage calls",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.769,
+      "input": "Native standing input LeftY=0 with LT held1800ms then released"
+    },
+    {
+      "videoTime": 6.908,
+      "input": "Standing recovery observation; no stance input"
+    }
+  ],
+  "dll": "4F44E2A78577641C04F23073E68EB00D18114983557A68A9AA8CE7B970B8C52D",
+  "probe": "5DC7B4AFB0A99C5A812B224EB4384511A0746EEE112FA828C3DA70232E631607",
+  "bankSha256": "367CE7FFDB05CFCDEEE4FD4B45C99C8DF58AD60560C7CF3137ED8214E60FE182",
+  "scope": "Native Emily Mesmerize phases drive corresponding whole-body stance/equipment clips through Steam. Explicit stance, holstered and move parameters identify this take. Native source power owns mana, targets and gameplay. Remote world/model/effects are cosmetic; positive NPC and repeatedly valid empty-target cases have distinct checks. Standing recovery, native sword selection, inventory/health, checkpoint cleanup and protected saves are verified separately from visual acceptance. Shared NPC authority and broader movement remain incomplete."
+}

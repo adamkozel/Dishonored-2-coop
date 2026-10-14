@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-14T01:30:49.232327+02:00",
+  "candidate": "candidate-npc-combat-v966",
+  "dll": "70D6F3F7BBB49082467308C7471D429876A131CE3135A25DABA430C1C8F8971D",
+  "cases": [
+    {
+      "take": "npc-crossbow-measured-body-v970",
+      "passed": true,
+      "restored": true,
+      "source": "host",
+      "remainingHealth": 25,
+      "commits": 1,
+      "deaths": 0,
+      "scope": "Host ordinary measured-camera torso shot left both guards25 health. Duplicate, shared reload/rearm and full restoration passed. Earlier client967 provides separate living-victim coverage. No complete AI or paired choreography acceptance.",
+      "visualReview": {
+        "host": "Six inspected frames show torso hit and native blood/reaction, then upright living recovery.",
+        "client": "Observer is obstructed by nearby geometry throughout inspected frames; no paired-body visual acceptance."
+      }
+    },
+    {
+      "take": "npc-dual-crossbow-v971",
+      "passed": true,
+      "restored": true,
+      "source": "both",
+      "remainingHealth": 10,
+      "commits": 2,
+      "deaths": 0,
+      "inputStartSeparationMs": 12,
+      "callbackTicks": {
+        "host": [
+          491087359
+        ],
+        "client": [
+          491087375
+        ]
+      },
+      "scope": "Two ordinary crossbow inputs from Corvo and Emily, input starts12ms apart; host ordered two contacts, both targets40-to25-to10, one client request, no pending work/death. Duplicates, shared reload/rearm, native aim/settings and protected restoration passed. No proof of exact simultaneous callback execution, active AI combat or full paired visuals.",
+      "visualReview": {
+        "host": "Six inspected frames: normal crossbow fires; large nearby cloth/furniture blocks most target/body view. No full visual acceptance.",
+        "client": "Six inspected frames show native crossbow use, guard blood/reaction and upright recovery. Paired avatar visibility is insufficient for grip/choreography acceptance."
+      }
+    }
+  ],
+  "complete": false,
+  "limitations": "Active enemy perception/attacks on both players, unrestricted native modifiers, projectile/physics ownership, sustained stability (including unresolved crash961), full campaign/movement/native session UI and separate-account Steam validation remain open."
+}

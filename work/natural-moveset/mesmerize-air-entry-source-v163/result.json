@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Standing native source starts on the proven floor before the bounded jump",
+    "Direct native Jump/Fall samples overlap the exact466ms reciprocal Mesmerize entry scene",
+    "Native cast phases retain reciprocal arm binding during bounded jump input; raw player/scene overlap is recorded rather than assumed",
+    "Read-only native Midnight scenes, arm/equipment data and player state samples retained for air provenance analysis; remote integration not claimed",
+    "Native cast spends source mana without resource writes",
+    "Exact native world body effect exists after source cast; presentation/AI ownership still under investigation",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.862,
+      "input": "Native jump and Mesmerize aim together; LT held1800ms then released"
+    }
+  ],
+  "dll": "4F44E2A78577641C04F23073E68EB00D18114983557A68A9AA8CE7B970B8C52D",
+  "probe": "5DC7B4AFB0A99C5A812B224EB4384511A0746EEE112FA828C3DA70232E631607",
+  "scope": "Native source in-place jump and Mesmerize aim begin together with1800ms hold; directly inspect airborne entry and later grounded release. Raw player states and single-arm Midnight bindings determine actual airborne behavior. Current strict reader still refuses airborne Mesmerize, and no remote body/FX integration is enabled by this observation. Native mana/world behavior and final native floor are recorded. Both isolated checkpoints and protected save hashes restore."
+}

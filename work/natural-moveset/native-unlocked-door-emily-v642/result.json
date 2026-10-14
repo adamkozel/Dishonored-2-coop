@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "7E3ADCA32421AE8EAB2DDC1650DF49E3BABFBB0FB14209FC6F1AAE8C1EE01F43",
+  "checks": [
+    "Two ordinary short-X requests recorded at the adjacent unlocked door; scene/state/door results require inspection",
+    "Native source observation only; no forced door state, native scene, inventory grant or new binding claim.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "name": "unlocked-door-tap",
+        "stance": 0,
+        "yaw": 270,
+        "distance": 1.0
+      },
+      "key": "client-unlocked-door-tap",
+      "count": 142,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Source-only native unlocked door short-X observation with independently read source/peer Openable states. Both actual views, scene/state trace and before/after door entities retained. Successful script execution does not prove an open/close action or new remote binding. Restoration is established only by checks/failure."
+}

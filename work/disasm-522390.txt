@@ -1,0 +1,51 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140522390: mov         qword ptr [rsp+8],rbx
+  0000000140522395: push        rdi
+  0000000140522396: sub         rsp,20h
+  000000014052239A: mov         eax,dword ptr [r8+8]
+  000000014052239E: mov         rbx,r8
+  00000001405223A1: mov         rdi,rcx
+  00000001405223A4: and         eax,0FFFFFFh
+  00000001405223A9: cmp         eax,1
+  00000001405223AC: jne         000000014052240F
+  00000001405223AE: lea         edx,[rax+1]
+  00000001405223B1: add         rcx,58h
+  00000001405223B5: call        00000001403DA910
+  00000001405223BA: test        rax,rax
+  00000001405223BD: je          000000014052240F
+  00000001405223BF: mov         rdx,qword ptr [rbx]
+  00000001405223C2: mov         rcx,rax
+  00000001405223C5: cvttsd2si   edx,mmword ptr [rdx+10h]
+  00000001405223CA: call        0000000140456B70
+  00000001405223CF: mov         rbx,rax
+  00000001405223D2: test        rax,rax
+  00000001405223D5: je          000000014052240F
+  00000001405223D7: cmp         qword ptr [rax+00000000000000D8h],0
+  00000001405223DF: je          000000014052240F
+  00000001405223E1: mov         rcx,rdi
+  00000001405223E4: call        000000014018FDC0
+  00000001405223E9: mov         rdi,qword ptr [rax+8]
+  00000001405223ED: mov         rcx,qword ptr [rdi+78h]
+  00000001405223F1: test        rcx,rcx
+  00000001405223F4: je          000000014052240F
+  00000001405223F6: mov         rdx,qword ptr [rbx+00000000000000D8h]
+  00000001405223FD: call        00000001404F9CE0
+  0000000140522402: mov         edx,0Ch
+  0000000140522407: mov         rcx,rdi
+  000000014052240A: call        00000001407885B0
+  000000014052240F: mov         rbx,qword ptr [rsp+30h]
+  0000000140522414: add         rsp,20h
+  0000000140522418: pop         rdi
+  0000000140522419: ret
+  000000014052241A: int         3
+
+  Summary
+
+     1A7D000 .text

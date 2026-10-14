@@ -1,0 +1,780 @@
+{
+  "ms": 54,
+  "native": {
+    "tick": 332789515,
+    "game": "0x2301630a050",
+    "player": "0x22fc9bc7930",
+    "machine": "0x23042dcce10",
+    "mode": "0x2304569d020",
+    "stance": 0,
+    "defaultMode": true,
+    "motionValid": true,
+    "motion": 0,
+    "position": [
+      -48.5900002,
+      -155.070007,
+      66.4370575
+    ],
+    "active": [
+      {
+        "id": 0,
+        "vtableRva": "0x1c85628",
+        "type": ".?AVarkPlayerStateRunning@@"
+      }
+    ],
+    "keyholeSceneValid": false,
+    "keyholeReaderStage": 1,
+    "landingSceneValid": false,
+    "combatSceneValid": false,
+    "vaultSceneValid": false,
+    "traversalSceneValid": false,
+    "traversalReaderStage": 1,
+    "equipmentSceneValid": false,
+    "powerSceneValid": false,
+    "rangedSceneValid": false,
+    "carrySceneValid": false,
+    "carryThrowResearchValid": false,
+    "vaultSensorResearch": {
+      "front38": 0,
+      "clearF0": 0,
+      "minSpeed70": 3.6500001,
+      "valuesF4to10c": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "velocityCandidate33c": [
+        0,
+        0,
+        1.05984482E-05
+      ]
+    }
+  },
+  "sword": {
+    "root": [
+      -48.3574829,
+      -154.714905,
+      67.8437958,
+      -0.0141756237,
+      0.572594345,
+      0.819716096,
+      -0.962020814,
+      0.215695396,
+      -0.167305768,
+      -0.272607297,
+      -0.790955782,
+      0.54779017
+    ],
+    "attachment": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "frame": "0x230450805a0",
+    "tick": 332789546,
+    "character": 2,
+    "logic": 1,
+    "quantity": 1,
+    "weaponHandle": 198752,
+    "equipped": true,
+    "started": true,
+    "joint": 59,
+    "tag": "weapon_attach_tag",
+    "armHandle": 132762,
+    "actor": "0x22fc9bc7930",
+    "inventory": "0x2302f010150",
+    "entity": "0x230430f7c00",
+    "parent": "0x2304347b320",
+    "component": "0x2301b7b2050"
+  },
+  "movement": {
+    "clockRejection": {
+      "code": 0,
+      "count": 0,
+      "dt": 0.0,
+      "dz": 0.0,
+      "rate": 0.0,
+      "motion": 0,
+      "previousAirState": 0
+    },
+    "carryPlaybackStance": 0,
+    "stunVariant": 0,
+    "stunAmount": 0.0,
+    "stunWeight": 0.0,
+    "stunEvent": 0,
+    "grenadeHeld": 0,
+    "grenadeVariant": 0,
+    "grenadeAmount": 0.0,
+    "grenadeWeight": 0.0,
+    "grenadeEvent": 0,
+    "carrySampleAmount": 0.0,
+    "carryAuthoredAmount": 0.0,
+    "carrySettle": 1.0,
+    "experimental": true,
+    "active": true,
+    "end": 332849437,
+    "joints": 219,
+    "phase": 0.0,
+    "speed": 0.0,
+    "weight": 0.927733,
+    "a": 1,
+    "b": 2,
+    "mix": 0.0,
+    "checksum": 13024402001568516493,
+    "applied": 22,
+    "refused": 0,
+    "gaits": 2,
+    "runMix": 0.0,
+    "version": 46,
+    "stanceMix": 0.0,
+    "sprintMix": 0.0,
+    "sprintSide": 27,
+    "sprintDirection": 0.0,
+    "leanAmount": 0.0,
+    "leanWeight": 0.0,
+    "leanUp": 0.0,
+    "slideState": 0,
+    "slideTime": 0.0,
+    "slideWeight": 0.0,
+    "airState": 0,
+    "airTime": 0.0,
+    "airWeight": 0.0,
+    "airProgress": 0.0,
+    "airRun": 0.0,
+    "airCrouch": 0.0,
+    "combatVariant": 0,
+    "combatPhase": 0,
+    "combatClip": 0,
+    "combatAmount": 0.0,
+    "combatWeight": 0.0,
+    "combatEvent": 0,
+    "equipmentVariant": 0,
+    "equipmentAmount": 0.0,
+    "equipmentWeight": 0.0,
+    "armedMix": 1.0,
+    "presentedDrawn": true,
+    "traversalVariant": 0,
+    "traversalAmount": 0.0,
+    "traversalWeight": 0.0,
+    "traversalEvent": 0,
+    "powerVariant": 0,
+    "powerAmount": 0.0,
+    "powerWeight": 0.0,
+    "powerEvent": 0,
+    "combatAirMix": 0.0,
+    "combatMoveMix": 0.0,
+    "nativeFeet": false,
+    "currentFeet": false,
+    "feetCasts": 0,
+    "feetSolves": 0,
+    "feetResetsAvoided": 0,
+    "feetReferences": 0,
+    "terrainWeight": 0.0,
+    "terrainGrade": 0.0,
+    "terrainDown": 0.0,
+    "terrainRun": 0.0,
+    "turnWeight": 0.0,
+    "turnPhase": 0.0,
+    "turnVelocity": 0.0,
+    "turnClip": 149,
+    "turnSerial": 0,
+    "kneeCorrections": 0,
+    "kneeReject": 0,
+    "kneeOffsetError": 0.0,
+    "secondJump": false,
+    "secondJumpSerial": 0,
+    "secondJumpProgress": 0.0,
+    "secondJumpTransition": 0.0,
+    "landingCrouchMix": 0.0,
+    "rangedShot": 0,
+    "rangedMechanism": 0,
+    "rangedKind": 0,
+    "rangedVariant": 0,
+    "rangedAmount": 0.0,
+    "rangedWeight": 0.0,
+    "rangedEvent": 0,
+    "carryVariant": 0,
+    "carryWeight": 0.0,
+    "carryMove": 0.0,
+    "carryPhase": 0.0,
+    "carryCrouchPhase": 0.0,
+    "carryEvent": 0
+  },
+  "source": {
+    "wireRefused": 0,
+    "stopServiceTick": 0,
+    "stopLastState": 0,
+    "sourceLastFailure": 0,
+    "sourceFailureCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceAttempts": 39,
+    "sourceMisses": 0,
+    "sourceReadMaxMs": 16.411,
+    "sendGapMaxMs": 47,
+    "stoppedStateAgeMs": 0,
+    "stoppedRootAgeMs": 0,
+    "rejectedEvent": 0,
+    "expectedEvent": 0,
+    "rejectedSequence": 0,
+    "expectedSequence": 0,
+    "rejectedState": 0,
+    "expectedState": 0,
+    "stateRejectReason": 0,
+    "rejectedAgeMs": 0.0,
+    "rejectReason": 2,
+    "retireReason": 0,
+    "retireRootAge": 0,
+    "retireHelloAge": 0,
+    "sourceGrenadeHeld": 0,
+    "sourceGrenade": 0,
+    "remoteGrenadeHeld": 0,
+    "remoteGrenade": 0,
+    "armed": true,
+    "ready": true,
+    "remainingMs": 15000,
+    "token": 1,
+    "peerToken": 1,
+    "epoch": 11,
+    "peerEpoch": 11,
+    "handle": 209916390,
+    "sourceState": 0,
+    "remoteState": 0,
+    "sourceEvent": 1,
+    "remoteEvent": 1,
+    "lastSequence": 56,
+    "started": 1,
+    "sent": 56,
+    "received": 56,
+    "accepted": 37,
+    "applied": 0,
+    "rejected": 1,
+    "refused": 0,
+    "released": 0,
+    "actionActive": false,
+    "result": "ready",
+    "leanSide": 0.0,
+    "leanUp": 0.0,
+    "sourceVariant": 0,
+    "sourcePhase": 0,
+    "remoteVariant": 0,
+    "remotePhase": 0,
+    "carrySource": 0,
+    "carryRemote": 0,
+    "carrySourceIncarnation": 0,
+    "carryRemoteIncarnation": 0,
+    "carryLocalHandle": 0,
+    "carrySpawner": 0,
+    "carryDefinition": 0,
+    "corpseMutations": false
+  },
+  "peer": {
+    "wireRefused": 0,
+    "stopServiceTick": 0,
+    "stopLastState": 0,
+    "sourceLastFailure": 0,
+    "sourceFailureCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceAttempts": 42,
+    "sourceMisses": 0,
+    "sourceReadMaxMs": 16.1159,
+    "sendGapMaxMs": 46,
+    "stoppedStateAgeMs": 0,
+    "stoppedRootAgeMs": 0,
+    "rejectedEvent": 1,
+    "expectedEvent": 0,
+    "rejectedSequence": 3,
+    "expectedSequence": 1,
+    "rejectedState": 0,
+    "expectedState": 0,
+    "stateRejectReason": 7,
+    "rejectedAgeMs": 0.0,
+    "rejectReason": 7,
+    "retireReason": 0,
+    "retireRootAge": 0,
+    "retireHelloAge": 0,
+    "sourceGrenadeHeld": 0,
+    "sourceGrenade": 0,
+    "remoteGrenadeHeld": 0,
+    "remoteGrenade": 0,
+    "armed": true,
+    "ready": true,
+    "remainingMs": 15000,
+    "token": 1,
+    "peerToken": 1,
+    "epoch": 11,
+    "peerEpoch": 11,
+    "handle": 209916411,
+    "sourceState": 0,
+    "remoteState": 0,
+    "sourceEvent": 1,
+    "remoteEvent": 1,
+    "lastSequence": 61,
+    "started": 1,
+    "sent": 63,
+    "received": 61,
+    "accepted": 40,
+    "applied": 0,
+    "rejected": 2,
+    "refused": 0,
+    "released": 0,
+    "actionActive": false,
+    "result": "ready",
+    "leanSide": 0.0,
+    "leanUp": 0.0,
+    "sourceVariant": 0,
+    "sourcePhase": 0,
+    "remoteVariant": 0,
+    "remotePhase": 0,
+    "carrySource": 0,
+    "carryRemote": 0,
+    "carrySourceIncarnation": 0,
+    "carryRemoteIncarnation": 0,
+    "carryLocalHandle": 0,
+    "carrySpawner": 0,
+    "carryDefinition": 0,
+    "corpseMutations": false
+  },
+  "midnight": {
+    "readOnly": true,
+    "atomic": false,
+    "tick": 332789562,
+    "pid": 49992,
+    "manager": "0x230164ff388",
+    "proxy": "0x23042d9abf0",
+    "channels": [
+      0,
+      0
+    ],
+    "instances": [
+      {
+        "pointer": "0x2303bd960a0",
+        "listOffset": "0x0",
+        "id": 101,
+        "state": 5,
+        "playerChannel": -1,
+        "asset": "midnight/campaign/dunwall/shared/anim_saferoom_door.midnightscene",
+        "subscene": "close_loop",
+        "sceneDurationMs": 1000,
+        "clockWords": [
+          32865,
+          865,
+          32000,
+          967757504,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x23042fad9d0",
+            "handle": 89129322,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fb4ba0",
+            "handle": 90898821,
+            "reciprocal": true
+          }
+        ]
+      },
+      {
+        "pointer": "0x2303bd96358",
+        "listOffset": "0x0",
+        "id": 122,
+        "state": 5,
+        "playerChannel": -1,
+        "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+        "subscene": "post_fight_loop",
+        "sceneDurationMs": 12333,
+        "clockWords": [
+          77789,
+          4436,
+          73353,
+          967755328,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x22fc9bc7930",
+            "handle": 1,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fec1a0",
+            "handle": 106627701,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fe6fb0",
+            "handle": 104989276,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042feb6f0",
+            "handle": 106693238,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fbf310",
+            "handle": 97190373,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fd4150",
+            "handle": 99418631,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fecf70",
+            "handle": 107151997,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fe0f80",
+            "handle": 102433333,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fd9340",
+            "handle": 101253667,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fd4870",
+            "handle": 99484168,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042feac40",
+            "handle": 105710183,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fe9350",
+            "handle": 105579109,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23017541a90",
+            "handle": 186976065,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23017540780",
+            "handle": 186713917,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x230175412f0",
+            "handle": 187238213,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x230456a0230",
+            "handle": 188352342,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23045733830",
+            "handle": 189859693,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x230456bce40",
+            "handle": 189663082,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x230456bd9b0",
+            "handle": 189335397,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x2301753ffe0",
+            "handle": 186451769,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23017542230",
+            "handle": 187303750,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x230456bdd80",
+            "handle": 189728619,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042feebf0",
+            "handle": 106889849,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042ff0c00",
+            "handle": 107086460,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe2f90",
+            "handle": 103744073,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe4fa0",
+            "handle": 103678536,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe4160",
+            "handle": 103809610,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe2870",
+            "handle": 103875147,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe56c0",
+            "handle": 103481925,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fdfdb0",
+            "handle": 103285314,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fde850",
+            "handle": 103154240,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe16a0",
+            "handle": 103088703,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fdda10",
+            "handle": 103350851,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fe4880",
+            "handle": 103416388,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          },
+          {
+            "actor": "0x23042fe9a70",
+            "handle": 105316961,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fdafc0",
+            "handle": 101319204,
+            "reciprocal": true
+          }
+        ]
+      },
+      {
+        "pointer": "0x2303bd96610",
+        "listOffset": "0x0",
+        "id": 145,
+        "state": 5,
+        "playerChannel": -1,
+        "asset": "midnight/campaign/dunwall/escape/tower/oh_ramsey_throneroom.midnightscene",
+        "subscene": "loop",
+        "sceneDurationMs": 9405,
+        "clockWords": [
+          11078,
+          0,
+          11078,
+          1005604030,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x23045734b40",
+            "handle": 190318452,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23045a799a0",
+            "handle": 190973822,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042ff1320",
+            "handle": 108069515,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23045733fd0",
+            "handle": 190777211,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fed300",
+            "handle": 108003978,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23042fed690",
+            "handle": 108135052,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x23045af6200",
+            "handle": 201525551,
+            "reciprocal": true
+          },
+          {
+            "actor": "0x0",
+            "handle": 0,
+            "reciprocal": false
+          }
+        ]
+      },
+      {
+        "pointer": "0x2303bd970f0",
+        "listOffset": "0x0",
+        "id": 200,
+        "state": 3,
+        "playerChannel": -1,
+        "asset": "midnight/gameplay/human/common/distraction/distraction_stand_look_stuff.midnightscene",
+        "subscene": "Loop_a",
+        "sceneDurationMs": 15333,
+        "clockWords": [
+          14841,
+          14841,
+          0,
+          976144416,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x230456a0da0",
+            "handle": 189269860,
+            "reciprocal": true
+          }
+        ]
+      },
+      {
+        "pointer": "0x2303bd96e38",
+        "listOffset": "0x0",
+        "id": 204,
+        "state": 3,
+        "playerChannel": -1,
+        "asset": "midnight/gameplay/human/common/idlebreak/empty_idlebreak_dust_sneeze_a.midnightscene",
+        "subscene": "Npc",
+        "sceneDurationMs": 2833,
+        "clockWords": [
+          416,
+          416,
+          0,
+          976143392,
+          1065353216,
+          1065353216
+        ],
+        "bindingsResearch": [
+          {
+            "actor": "0x23045733460",
+            "handle": 190252915,
+            "reciprocal": true
+          }
+        ]
+      }
+    ]
+  }
+}

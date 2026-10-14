@@ -1,0 +1,3966 @@
+{
+  "At": "2026-10-09T12:17:25.6973159+02:00",
+  "Passed": true,
+  "Failure": null,
+  "Dll": "7D7AE1277E2B9F54FFBDA7C76693D457D0FF5FE5940CF8697DCBD360A0268E18",
+  "Cases": [
+    {
+      "Case": "ReloadHost",
+      "Passed": true,
+      "NativeReport": "doppelganger-recovery-reloadhost-native.json",
+      "Before": [
+        {
+          "Role": "host",
+          "Bridge": {
+            "role": 0,
+            "engineThread": 52044,
+            "screenTransportPumps": 6988,
+            "nativeInterface": "SteamNetworkingSockets012",
+            "steamAvailable": true,
+            "listener": 65536,
+            "connection": 1069865230,
+            "connectionState": 3,
+            "sent": 4476,
+            "received": 4475,
+            "rejected": 0,
+            "lastCommand": 539666354,
+            "localPoseAvailable": true,
+            "localPosition": [
+              -33.0,
+              -153.0,
+              66.403648
+            ],
+            "remotePoseAvailable": true,
+            "remoteFresh": true,
+            "remoteSequence": 4475,
+            "remotePosition": [
+              -33.0,
+              -148.0,
+              66.978355
+            ],
+            "probeActorHandle": 209916411,
+            "probeFollowEnabled": true,
+            "probeFollowExact": true,
+            "probeRenderPosition": [
+              -33.0,
+              -148.0,
+              66.978355
+            ],
+            "probeOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "remoteActorImplemented": false,
+            "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+            "localMapId": "b09f633a29a020cc",
+            "localEpoch": 11,
+            "remoteMapId": "b09f633a29a020cc",
+            "remoteEpoch": 11,
+            "localGameLogicState": 1,
+            "localPendingGameLogicState": 0,
+            "remoteGameLogicState": 1,
+            "remotePendingGameLogicState": 0,
+            "localCinematicMetadataValid": 1,
+            "localCinematicNodeCount": 0,
+            "localCinematicSignature": "0",
+            "remoteCinematicMetadataValid": 1,
+            "remoteCinematicNodeCount": 0,
+            "remoteCinematicSignature": "0",
+            "localCinematicEpoch": 1,
+            "remoteCinematicEpoch": 1,
+            "cinematicSyncEnabled": true,
+            "remoteCinematicSyncEnabled": 1,
+            "localCinematicCanSkip": 0,
+            "remoteCinematicCanSkip": 0,
+            "nativeSkipCallbacks": 0,
+            "skipSent": 0,
+            "skipReceived": 0,
+            "skipApplied": 0,
+            "skipDropped": 0,
+            "localSkipSceneId": "0",
+            "remoteSkipSceneId": "0",
+            "nativeSkipThread": 0,
+            "poseProtocol": 10,
+            "posePacketBytes": 1156,
+            "localSequenceMetadataValid": 1,
+            "localSequenceCount": 0,
+            "localSequenceSignature": "0",
+            "localSequenceBoundaryId": "0",
+            "remoteSequenceMetadataValid": 1,
+            "remoteSequenceCount": 0,
+            "remoteSequenceSignature": "0",
+            "remoteSequenceBoundaryId": "0",
+            "localPlayerStanceValid": 1,
+            "localPlayerStance": 0,
+            "remotePlayerStanceValid": 1,
+            "remotePlayerStance": 0,
+            "localPlayerMotionValid": 1,
+            "localPlayerMotion": 0,
+            "remotePlayerMotionValid": 1,
+            "remotePlayerMotion": 0,
+            "receivedPlayerMotions": [
+              4203,
+              0,
+              0,
+              0
+            ],
+            "cinematicHoldActive": false,
+            "cinematicHoldId": 0,
+            "cinematicHoldStarted": 0,
+            "cinematicHoldResumed": 0,
+            "cinematicHoldAbandoned": 0,
+            "localSequenceTimeMs": 0,
+            "localSequencePaused": 0,
+            "remoteSequenceTimeMs": 0,
+            "remoteSequencePaused": 0,
+            "barrierEnabled": 1,
+            "barrierHeld": 0,
+            "remoteBarrierEnabled": 1,
+            "remoteBarrierHeld": 0,
+            "barrierStarted": 0,
+            "barrierReleased": 0,
+            "barrierTimedOut": 0,
+            "barrierMissed": 0,
+            "barrierSent": 0,
+            "barrierReceived": 0,
+            "barrierRejected": 0,
+            "locomotionEnabled": true,
+            "locomotionApplied": 22110,
+            "locomotionRefused": 0,
+            "locomotionSpeed": 0.0,
+            "bodyProbeApplied": 0,
+            "bodyProbeRefused": 0,
+            "bodyProbeThread": 0,
+            "bodyStreamEnabled": false,
+            "bodyStreamApplied": 0,
+            "localBodyPoseValid": 1,
+            "remoteBodyPoseValid": 1,
+            "aiHoldActive": false,
+            "aiHoldHandle": 0,
+            "aiHoldStarted": 0,
+            "aiHoldReleased": 0,
+            "aiHoldRefused": 0,
+            "aiHoldInvalidated": 0,
+            "aiHoldResult": "idle"
+          },
+          "Reset": {
+            "enabled": false,
+            "phase": 0,
+            "result": "disabled",
+            "arm": 0,
+            "peerArm": 0,
+            "transaction": 0,
+            "digest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "held": false,
+            "expectBoundary": false,
+            "loads": 0,
+            "completed": 0,
+            "requests": 0,
+            "duplicates": 0,
+            "rejected": 0,
+            "aborted": 0,
+            "heldAt": 0,
+            "releasedAt": 0,
+            "readyAt": 0,
+            "completedAt": 0,
+            "hostReady": 0,
+            "clientReady": 0,
+            "readyDelay": 0,
+            "sent": 0,
+            "received": 0,
+            "samples": 0,
+            "maxDistance": 0,
+            "game": "0x0",
+            "player": "0x0",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "loadingEntryAt": 0,
+            "oldGame": "0x0",
+            "avatarRequested": false,
+            "avatarPending": false,
+            "avatarReady": false,
+            "avatarRestored": 0,
+            "avatarRefused": 0,
+            "avatarProfile": "story",
+            "avatarExact": false,
+            "avatarAiHeld": true,
+            "avatarAiAcquired": 1,
+            "avatarAiReleased": 0,
+            "avatarAiLost": 0,
+            "avatarAiRefused": 1,
+            "avatarIdleOwned": true,
+            "avatarIdleAcquired": 1,
+            "avatarIdleReleased": 0,
+            "avatarIdleLost": 0,
+            "avatarIdleRefused": 0,
+            "deathActive": false,
+            "deathReady": false,
+            "peerDeathReady": false,
+            "deathRetryQueued": false,
+            "deathCount": 0,
+            "deathApplied": 0,
+            "deathReceived": 0
+          },
+          "Stream": {
+            "armed": false,
+            "ready": false,
+            "remainingMs": 0,
+            "token": 0,
+            "peerToken": 0,
+            "epoch": 0,
+            "peerEpoch": 0,
+            "handle": 0,
+            "sourceState": 4294967295,
+            "remoteState": 0,
+            "sourceEvent": 0,
+            "remoteEvent": 0,
+            "lastSequence": 0,
+            "started": 0,
+            "sent": 0,
+            "received": 0,
+            "accepted": 0,
+            "applied": 0,
+            "rejected": 0,
+            "refused": 2,
+            "released": 0,
+            "actionActive": false,
+            "result": "unavailable_or_busy"
+          },
+          "Avatar": {
+            "handle": "0xc8311fb",
+            "pointer": "0x26e79ced490",
+            "vtableRva": "0x1c5e108",
+            "name": "d2coop_probe_emily",
+            "type": ".?AVarkNPC@@",
+            "definition": "0x26f8572b0a0",
+            "definitionName": "models/characters/def/d2coop/doppelganger_emily.def",
+            "position": [
+              -33,
+              -148,
+              66.9784
+            ],
+            "renderPosition": [
+              -33,
+              -148,
+              66.9784
+            ],
+            "orientation": [
+              -1.62921E-07,
+              -1,
+              0,
+              1,
+              -1.62921E-07,
+              0,
+              0,
+              0,
+              1
+            ],
+            "renderOrientation": [
+              -1.62921E-07,
+              -1,
+              0,
+              1,
+              -1.62921E-07,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physicsBodies": [
+              {
+                "id": 16779326,
+                "position": [
+                  -33.0375,
+                  -147.987,
+                  68.0326
+                ]
+              },
+              {
+                "id": 16779327,
+                "position": [
+                  -33.0385,
+                  -148.001,
+                  68.0938
+                ]
+              },
+              {
+                "id": 16779328,
+                "position": [
+                  -33.0365,
+                  -147.989,
+                  68.2607
+                ]
+              },
+              {
+                "id": 16779329,
+                "position": [
+                  -33.0328,
+                  -147.968,
+                  68.4873
+                ]
+              },
+              {
+                "id": 16779330,
+                "position": [
+                  -33.0256,
+                  -147.994,
+                  68.5903
+                ]
+              },
+              {
+                "id": 16779331,
+                "position": [
+                  -32.902,
+                  -147.947,
+                  68.4077
+                ]
+              },
+              {
+                "id": 16779332,
+                "position": [
+                  -32.8552,
+                  -147.93,
+                  68.1618
+                ]
+              },
+              {
+                "id": 16779333,
+                "position": [
+                  -32.7902,
+                  -147.972,
+                  67.924
+                ]
+              },
+              {
+                "id": 16779334,
+                "position": [
+                  -33.1582,
+                  -147.927,
+                  68.4184
+                ]
+              },
+              {
+                "id": 16779335,
+                "position": [
+                  -33.1883,
+                  -147.943,
+                  68.17
+                ]
+              },
+              {
+                "id": 16779336,
+                "position": [
+                  -33.2389,
+                  -147.994,
+                  67.93
+                ]
+              },
+              {
+                "id": 16779337,
+                "position": [
+                  -32.9526,
+                  -147.966,
+                  67.9322
+                ]
+              },
+              {
+                "id": 16779338,
+                "position": [
+                  -32.8819,
+                  -148.157,
+                  67.5431
+                ]
+              },
+              {
+                "id": 16779339,
+                "position": [
+                  -32.9307,
+                  -147.907,
+                  67.194
+                ]
+              },
+              {
+                "id": 16779340,
+                "position": [
+                  -33.1352,
+                  -147.982,
+                  67.9557
+                ]
+              },
+              {
+                "id": 16779341,
+                "position": [
+                  -33.1215,
+                  -148.174,
+                  67.5611
+                ]
+              },
+              {
+                "id": 16779342,
+                "position": [
+                  -33.0732,
+                  -147.952,
+                  67.1932
+                ]
+              }
+            ]
+          },
+          "Animation": {
+            "handle": 209916411,
+            "animation": "0x26f3ba6d950",
+            "data": "0x26ecbf1a200",
+            "bindings": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1672,
+                "values": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1688,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2152,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1744,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1752,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2168,
+                "values": [
+                  -1
+                ]
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2192,
+                "values": [
+                  1
+                ]
+              },
+              {
+                "name": "linearVelocity",
+                "type": 10,
+                "offset": 464,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "speed",
+                "type": 1,
+                "offset": 0,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "midnightWeight",
+                "type": 1,
+                "offset": 1264,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2656,
+                "values": [
+                  -33,
+                  -148,
+                  66.9783554,
+                  -1.62920685E-07,
+                  -1,
+                  0,
+                  1,
+                  -1.62920685E-07,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "declaredInputs": [
+              {
+                "name": "coopFullBodyWeight",
+                "type": 1,
+                "offset": 1664,
+                "value": 0
+              },
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1672
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1688
+              },
+              {
+                "name": "targAngularVelocity",
+                "type": 1,
+                "offset": 1704,
+                "value": 0
+              },
+              {
+                "name": "targStance",
+                "type": 7,
+                "offset": 1712
+              },
+              {
+                "name": "targEquipState",
+                "type": 8,
+                "offset": 1720
+              },
+              {
+                "name": "isTargStanceImmediate",
+                "type": 11,
+                "offset": 1728
+              },
+              {
+                "name": "isTargEquipStateImmediate",
+                "type": 11,
+                "offset": 1736
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1744,
+                "value": 0
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1752,
+                "value": 0
+              },
+              {
+                "name": "vectorMode",
+                "type": 11,
+                "offset": 1760
+              },
+              {
+                "name": "jumpData",
+                "type": 14,
+                "offset": 1768
+              },
+              {
+                "name": "doorData",
+                "type": 23,
+                "offset": 1904
+              },
+              {
+                "name": "pathfindingData",
+                "type": 15,
+                "offset": 1920
+              },
+              {
+                "name": "locoInputData",
+                "type": 19,
+                "offset": 2048
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2152
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2168,
+                "value": -1
+              },
+              {
+                "name": "stairCommand",
+                "type": 0,
+                "offset": 2176
+              },
+              {
+                "name": "stairAngle",
+                "type": 1,
+                "offset": 2184,
+                "value": 0
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2192,
+                "value": 1
+              },
+              {
+                "name": "midnightData",
+                "type": 9,
+                "offset": 2200
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2656
+              },
+              {
+                "name": "recoverFromRagdollSnapshotInput",
+                "type": 13,
+                "offset": 3144
+              },
+              {
+                "name": "recoverFromRagdollBlendInput",
+                "type": 1,
+                "offset": 3160,
+                "value": 0
+              },
+              {
+                "name": "versusFrame",
+                "type": 1,
+                "offset": 3168,
+                "value": 3.40282347E+38
+              },
+              {
+                "name": "animBasicInputData1",
+                "type": 12,
+                "offset": 3176,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  1207959552
+                ]
+              },
+              {
+                "name": "versusBlend",
+                "type": 1,
+                "offset": 3200,
+                "value": 0
+              },
+              {
+                "name": "animBasicInputData2",
+                "type": 12,
+                "offset": 3208,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  1207959552
+                ]
+              },
+              {
+                "name": "locoSelector_blendFactor",
+                "type": 1,
+                "offset": 3232,
+                "value": 1
+              }
+            ],
+            "modernOutputWords": [
+              0,
+              0,
+              0,
+              0,
+              1067762122,
+              1086001252,
+              1069318188,
+              1077706796,
+              0,
+              2,
+              0,
+              0,
+              21,
+              3183189784,
+              1032746285,
+              1039200605,
+              3183185138,
+              1032745977,
+              1039203373,
+              1076363264,
+              1059586048,
+              1039200605,
+              1,
+              1,
+              25,
+              3174929432,
+              3180777818,
+              1039203808,
+              3174929432,
+              3180777818,
+              1039203808,
+              1076363264,
+              1059586048,
+              1039203808,
+              1,
+              0,
+              22,
+              1015901096,
+              1038202076,
+              3132702937,
+              1015914311,
+              1038202280,
+              3132600301,
+              1076363264,
+              1059586048,
+              3132702937,
+              1,
+              1,
+              26,
+              1032712726,
+              3182421278,
+              3132638216,
+              1032708620,
+              3182431761,
+              3132492422,
+              1076363264,
+              1059586048,
+              3132638216,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              6,
+              8,
+              0,
+              1082130432,
+              1051721728,
+              3340773448,
+              32759,
+              255,
+              0
+            ],
+            "locomotionNodes": [
+              {
+                "instance": "0x26ecbf1aea8",
+                "input": "0x26ecbf1ac60",
+                "controller": "0x26f7c231a10",
+                "model": "models/characters/d2coop/shadow_emily.md6",
+                "requestMode": 3,
+                "stance": 4294967295,
+                "equipment": 4294967295,
+                "requestFlags": 1,
+                "requested": [
+                  0,
+                  0,
+                  0,
+                  -1.62920685E-07,
+                  -1,
+                  0
+                ],
+                "actualVelocity": [
+                  0,
+                  0,
+                  0
+                ],
+                "graphs": [
+                  {
+                    "address": "0x26f85358cd0",
+                    "stance": 0,
+                    "equipment": 0,
+                    "activeType": ".?AVarkLocomotionMode_Idle@@",
+                    "candidates": [
+                      {
+                        "type": ".?AVarkLocomotionMode_Idle@@",
+                        "scoreRva": "0x4824c0"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_FrontalMove@@",
+                        "scoreRva": "0x480840"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_Strafe@@",
+                        "scoreRva": "0x4836b0"
+                      },
+                      {
+                        "type": "",
+                        "scoreRva": "0x0"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "locomotionStances": [
+              {
+                "index": 0,
+                "name": "Relaxed"
+              },
+              {
+                "index": 1,
+                "name": "Combat"
+              },
+              {
+                "index": 2,
+                "name": "Search"
+              },
+              {
+                "index": 3,
+                "name": "Mesmerize"
+              }
+            ],
+            "modelConfig": {
+              "138": {
+                "address": "0x0",
+                "type": "",
+                "name": ""
+              },
+              "140": {
+                "address": "0x26edd3d1300",
+                "type": ".?AVarkDeclLocomotion@@",
+                "name": "models/characters/female/base/locomotion/female.loco"
+              },
+              "148": {
+                "address": "0x26f6bff5510",
+                "type": ".?AVarkDeclAnimBasic@@",
+                "name": "models/characters/d2coop/shadow_actions.animbasic",
+                "entries": [
+                  "generic_smallhit_front",
+                  "generic_smallhit_back",
+                  "generic_smallhit_left",
+                  "generic_smallhit_right",
+                  "sword_patrol_searchpose",
+                  "sword_attack_fasta",
+                  "sword_parry_ll_in",
+                  "sword_parry_ll_out",
+                  "sword_idle",
+                  "sword_fall_loop",
+                  "sword_land_walk_out"
+                ]
+              }
+            }
+          },
+          "Sword": {
+            "tick": 98039640,
+            "weaponHandle": 210047485,
+            "joint": 17,
+            "tag": "right_hand_wpn",
+            "stable": true,
+            "frameFlags": 2,
+            "phase": 3,
+            "offset": [
+              0,
+              0,
+              0
+            ],
+            "quaternion": [
+              0.00644244766,
+              -0.906892717,
+              0.421301842,
+              0.00299288891
+            ],
+            "jointMatrix": [
+              -0.991866291,
+              -0.119095817,
+              0.0449207835,
+              0.955113769,
+              -0.119780578,
+              0.753932774,
+              -0.645940304,
+              0.194271877,
+              0.0430615172,
+              -0.646066666,
+              -0.76206553,
+              0.205590218,
+              -0.0260015149,
+              -0.227499485,
+              0.889550567,
+              0.0924859196
+            ],
+            "weaponNativeRoot": [
+              -33.2275009,
+              -147.973999,
+              67.8679047,
+              0.108372487,
+              -0.993467689,
+              -0.0357393362,
+              0.981039762,
+              0.101067819,
+              0.165366918,
+              -0.160674602,
+              -0.0529829375,
+              0.985584378
+            ],
+            "weaponRenderRoot": [
+              -33.2275009,
+              -147.973999,
+              67.8679047,
+              0.108372487,
+              -0.993467689,
+              -0.0357393362,
+              0.981039762,
+              0.101067819,
+              0.165366918,
+              -0.160674602,
+              -0.0529829375,
+              0.985584378
+            ],
+            "parentNativeRoot": [
+              -33,
+              -148,
+              66.9783554,
+              -1.62920685E-07,
+              -1,
+              0,
+              1,
+              -1.62920685E-07,
+              0,
+              0,
+              0,
+              1
+            ],
+            "parentRenderRoot": [
+              -33,
+              -148,
+              66.9783554,
+              -1.62920685E-07,
+              -1,
+              0,
+              1,
+              -1.62920685E-07,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "Health": {
+            "tick": 98039671,
+            "handle": 209916411,
+            "logic": 1,
+            "component": "0x26f5d64b4c8",
+            "actor": "0x26e79ced490",
+            "attributes": "0x26f6bc75900",
+            "current": 40,
+            "maximum": 40,
+            "baseMaximum": 40,
+            "suppressedMaximum": 10,
+            "ownerSuppressed": false,
+            "maximumIndex": 1,
+            "suppressedIndex": -1,
+            "attributeCount": 3,
+            "attributeValues": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "Role": "client",
+          "Bridge": {
+            "role": 1,
+            "engineThread": 52764,
+            "screenTransportPumps": 6592,
+            "nativeInterface": "SteamNetworkingSockets012",
+            "steamAvailable": true,
+            "listener": 0,
+            "connection": 1569466360,
+            "connectionState": 3,
+            "sent": 4487,
+            "received": 4488,
+            "rejected": 0,
+            "lastCommand": 539667451,
+            "localPoseAvailable": true,
+            "localPosition": [
+              -33.0,
+              -148.0,
+              66.978355
+            ],
+            "remotePoseAvailable": true,
+            "remoteFresh": true,
+            "remoteSequence": 4488,
+            "remotePosition": [
+              -33.0,
+              -153.0,
+              66.403648
+            ],
+            "probeActorHandle": 209916390,
+            "probeFollowEnabled": true,
+            "probeFollowExact": true,
+            "probeRenderPosition": [
+              -33.0,
+              -153.0,
+              66.403648
+            ],
+            "probeOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "remoteActorImplemented": false,
+            "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+            "localMapId": "b09f633a29a020cc",
+            "localEpoch": 11,
+            "remoteMapId": "b09f633a29a020cc",
+            "remoteEpoch": 11,
+            "localGameLogicState": 1,
+            "localPendingGameLogicState": 0,
+            "remoteGameLogicState": 1,
+            "remotePendingGameLogicState": 0,
+            "localCinematicMetadataValid": 1,
+            "localCinematicNodeCount": 0,
+            "localCinematicSignature": "0",
+            "remoteCinematicMetadataValid": 1,
+            "remoteCinematicNodeCount": 0,
+            "remoteCinematicSignature": "0",
+            "localCinematicEpoch": 1,
+            "remoteCinematicEpoch": 1,
+            "cinematicSyncEnabled": true,
+            "remoteCinematicSyncEnabled": 1,
+            "localCinematicCanSkip": 0,
+            "remoteCinematicCanSkip": 0,
+            "nativeSkipCallbacks": 0,
+            "skipSent": 0,
+            "skipReceived": 0,
+            "skipApplied": 0,
+            "skipDropped": 0,
+            "localSkipSceneId": "0",
+            "remoteSkipSceneId": "0",
+            "nativeSkipThread": 0,
+            "poseProtocol": 10,
+            "posePacketBytes": 1156,
+            "localSequenceMetadataValid": 1,
+            "localSequenceCount": 0,
+            "localSequenceSignature": "0",
+            "localSequenceBoundaryId": "0",
+            "remoteSequenceMetadataValid": 1,
+            "remoteSequenceCount": 0,
+            "remoteSequenceSignature": "0",
+            "remoteSequenceBoundaryId": "0",
+            "localPlayerStanceValid": 1,
+            "localPlayerStance": 0,
+            "remotePlayerStanceValid": 1,
+            "remotePlayerStance": 0,
+            "localPlayerMotionValid": 1,
+            "localPlayerMotion": 0,
+            "remotePlayerMotionValid": 1,
+            "remotePlayerMotion": 0,
+            "receivedPlayerMotions": [
+              4218,
+              0,
+              0,
+              0
+            ],
+            "cinematicHoldActive": false,
+            "cinematicHoldId": 0,
+            "cinematicHoldStarted": 0,
+            "cinematicHoldResumed": 0,
+            "cinematicHoldAbandoned": 0,
+            "localSequenceTimeMs": 0,
+            "localSequencePaused": 0,
+            "remoteSequenceTimeMs": 0,
+            "remoteSequencePaused": 0,
+            "barrierEnabled": 1,
+            "barrierHeld": 0,
+            "remoteBarrierEnabled": 1,
+            "remoteBarrierHeld": 0,
+            "barrierStarted": 0,
+            "barrierReleased": 0,
+            "barrierTimedOut": 0,
+            "barrierMissed": 0,
+            "barrierSent": 0,
+            "barrierReceived": 0,
+            "barrierRejected": 0,
+            "locomotionEnabled": true,
+            "locomotionApplied": 21935,
+            "locomotionRefused": 0,
+            "locomotionSpeed": 0.0,
+            "bodyProbeApplied": 0,
+            "bodyProbeRefused": 0,
+            "bodyProbeThread": 0,
+            "bodyStreamEnabled": false,
+            "bodyStreamApplied": 0,
+            "localBodyPoseValid": 1,
+            "remoteBodyPoseValid": 1,
+            "aiHoldActive": false,
+            "aiHoldHandle": 0,
+            "aiHoldStarted": 0,
+            "aiHoldReleased": 0,
+            "aiHoldRefused": 0,
+            "aiHoldInvalidated": 0,
+            "aiHoldResult": "idle"
+          },
+          "Reset": {
+            "enabled": false,
+            "phase": 0,
+            "result": "disabled",
+            "arm": 0,
+            "peerArm": 0,
+            "transaction": 0,
+            "digest": "0000000000000000000000000000000000000000000000000000000000000000",
+            "held": false,
+            "expectBoundary": false,
+            "loads": 0,
+            "completed": 0,
+            "requests": 0,
+            "duplicates": 0,
+            "rejected": 0,
+            "aborted": 0,
+            "heldAt": 0,
+            "releasedAt": 0,
+            "readyAt": 0,
+            "completedAt": 0,
+            "hostReady": 0,
+            "clientReady": 0,
+            "readyDelay": 0,
+            "sent": 0,
+            "received": 0,
+            "samples": 0,
+            "maxDistance": 0,
+            "game": "0x0",
+            "player": "0x0",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "loadingEntryAt": 0,
+            "oldGame": "0x0",
+            "avatarRequested": false,
+            "avatarPending": false,
+            "avatarReady": false,
+            "avatarRestored": 0,
+            "avatarRefused": 0,
+            "avatarProfile": "story",
+            "avatarExact": false,
+            "avatarAiHeld": true,
+            "avatarAiAcquired": 1,
+            "avatarAiReleased": 0,
+            "avatarAiLost": 0,
+            "avatarAiRefused": 1,
+            "avatarIdleOwned": true,
+            "avatarIdleAcquired": 1,
+            "avatarIdleReleased": 0,
+            "avatarIdleLost": 0,
+            "avatarIdleRefused": 0,
+            "deathActive": false,
+            "deathReady": false,
+            "peerDeathReady": false,
+            "deathRetryQueued": false,
+            "deathCount": 0,
+            "deathApplied": 0,
+            "deathReceived": 0
+          },
+          "Stream": {
+            "armed": false,
+            "ready": false,
+            "remainingMs": 0,
+            "token": 0,
+            "peerToken": 0,
+            "epoch": 0,
+            "peerEpoch": 0,
+            "handle": 0,
+            "sourceState": 4294967295,
+            "remoteState": 0,
+            "sourceEvent": 0,
+            "remoteEvent": 0,
+            "lastSequence": 0,
+            "started": 0,
+            "sent": 0,
+            "received": 0,
+            "accepted": 0,
+            "applied": 0,
+            "rejected": 0,
+            "refused": 2,
+            "released": 0,
+            "actionActive": false,
+            "result": "unavailable_or_busy"
+          },
+          "Avatar": {
+            "handle": "0xc8311e6",
+            "pointer": "0x290f8c90b40",
+            "vtableRva": "0x1c5e108",
+            "name": "d2coop_probe_corvo",
+            "type": ".?AVarkNPC@@",
+            "definition": "0x2910384c3a0",
+            "definitionName": "models/characters/def/d2coop/doppelganger_corvo.def",
+            "position": [
+              -33,
+              -153,
+              66.4036
+            ],
+            "renderPosition": [
+              -33,
+              -153,
+              66.4036
+            ],
+            "orientation": [
+              -4.37114E-08,
+              1,
+              0,
+              -1,
+              -4.37114E-08,
+              0,
+              0,
+              0,
+              1
+            ],
+            "renderOrientation": [
+              -4.37114E-08,
+              1,
+              0,
+              -1,
+              -4.37114E-08,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physicsBodies": [
+              {
+                "id": 16779326,
+                "position": [
+                  -33.0013,
+                  -153.011,
+                  67.4493
+                ]
+              },
+              {
+                "id": 16779327,
+                "position": [
+                  -33.001,
+                  -153.006,
+                  67.5416
+                ]
+              },
+              {
+                "id": 16779328,
+                "position": [
+                  -33.0003,
+                  -153.019,
+                  67.7972
+                ]
+              },
+              {
+                "id": 16779329,
+                "position": [
+                  -33.0013,
+                  -153.022,
+                  68.0788
+                ]
+              },
+              {
+                "id": 16779330,
+                "position": [
+                  -32.995,
+                  -152.997,
+                  68.1756
+                ]
+              },
+              {
+                "id": 16779331,
+                "position": [
+                  -33.2099,
+                  -153.04,
+                  67.9266
+                ]
+              },
+              {
+                "id": 16779332,
+                "position": [
+                  -33.2539,
+                  -153.053,
+                  67.6897
+                ]
+              },
+              {
+                "id": 16779333,
+                "position": [
+                  -33.2993,
+                  -153.027,
+                  67.4207
+                ]
+              },
+              {
+                "id": 16779334,
+                "position": [
+                  -32.7912,
+                  -153.041,
+                  67.9289
+                ]
+              },
+              {
+                "id": 16779335,
+                "position": [
+                  -32.7429,
+                  -153.052,
+                  67.6928
+                ]
+              },
+              {
+                "id": 16779336,
+                "position": [
+                  -32.697,
+                  -153.031,
+                  67.4236
+                ]
+              },
+              {
+                "id": 16779337,
+                "position": [
+                  -33.1039,
+                  -153.017,
+                  67.4349
+                ]
+              },
+              {
+                "id": 16779338,
+                "position": [
+                  -33.1479,
+                  -152.822,
+                  67.0304
+                ]
+              },
+              {
+                "id": 16779339,
+                "position": [
+                  -33.1273,
+                  -153.081,
+                  66.6731
+                ]
+              },
+              {
+                "id": 16779340,
+                "position": [
+                  -32.8992,
+                  -153.017,
+                  67.4356
+                ]
+              },
+              {
+                "id": 16779341,
+                "position": [
+                  -32.863,
+                  -152.812,
+                  67.0347
+                ]
+              },
+              {
+                "id": 16779342,
+                "position": [
+                  -32.8726,
+                  -153.066,
+                  66.673
+                ]
+              }
+            ]
+          },
+          "Animation": {
+            "handle": 209916390,
+            "animation": "0x28f945a2690",
+            "data": "0x28f814c0480",
+            "bindings": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1664,
+                "values": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1680,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2160,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1752,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1760,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2176,
+                "values": [
+                  -1
+                ]
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2200,
+                "values": [
+                  1
+                ]
+              },
+              {
+                "name": "linearVelocity",
+                "type": 10,
+                "offset": 464,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "speed",
+                "type": 1,
+                "offset": 0,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "midnightWeight",
+                "type": 1,
+                "offset": 1264,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2664,
+                "values": [
+                  -33,
+                  -153,
+                  66.4036484,
+                  -4.37113883E-08,
+                  1,
+                  0,
+                  -1,
+                  -4.37113883E-08,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "declaredInputs": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1664
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1680
+              },
+              {
+                "name": "targAngularVelocity",
+                "type": 1,
+                "offset": 1696,
+                "value": 0
+              },
+              {
+                "name": "targStance",
+                "type": 7,
+                "offset": 1704
+              },
+              {
+                "name": "versusFrame",
+                "type": 1,
+                "offset": 1712,
+                "value": 3.40282347E+38
+              },
+              {
+                "name": "targEquipState",
+                "type": 8,
+                "offset": 1720
+              },
+              {
+                "name": "isTargStanceImmediate",
+                "type": 11,
+                "offset": 1728
+              },
+              {
+                "name": "versusBlend",
+                "type": 1,
+                "offset": 1736,
+                "value": 0
+              },
+              {
+                "name": "isTargEquipStateImmediate",
+                "type": 11,
+                "offset": 1744
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1752,
+                "value": 0
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1760,
+                "value": 0
+              },
+              {
+                "name": "vectorMode",
+                "type": 11,
+                "offset": 1768
+              },
+              {
+                "name": "jumpData",
+                "type": 14,
+                "offset": 1776
+              },
+              {
+                "name": "doorData",
+                "type": 23,
+                "offset": 1912
+              },
+              {
+                "name": "pathfindingData",
+                "type": 15,
+                "offset": 1928
+              },
+              {
+                "name": "locoInputData",
+                "type": 19,
+                "offset": 2056
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2160
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2176,
+                "value": -1
+              },
+              {
+                "name": "stairCommand",
+                "type": 0,
+                "offset": 2184
+              },
+              {
+                "name": "stairAngle",
+                "type": 1,
+                "offset": 2192,
+                "value": 0
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2200,
+                "value": 1
+              },
+              {
+                "name": "midnightData",
+                "type": 9,
+                "offset": 2208
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2664
+              },
+              {
+                "name": "coopFullBodyWeight",
+                "type": 1,
+                "offset": 3152,
+                "value": 0
+              },
+              {
+                "name": "animBasicInputData1",
+                "type": 12,
+                "offset": 3160,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  3976200192
+                ]
+              },
+              {
+                "name": "animBasicInputData2",
+                "type": 12,
+                "offset": 3184,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  3976200192
+                ]
+              },
+              {
+                "name": "locoSelector_blendFactor",
+                "type": 1,
+                "offset": 3208,
+                "value": 1
+              },
+              {
+                "name": "recoverFromRagdollSnapshotInput",
+                "type": 13,
+                "offset": 3216
+              },
+              {
+                "name": "recoverFromRagdollBlendInput",
+                "type": 1,
+                "offset": 3232,
+                "value": 0
+              }
+            ],
+            "modernOutputWords": [
+              0,
+              0,
+              0,
+              0,
+              1068807351,
+              1088526744,
+              1066847473,
+              1077432302,
+              0,
+              2,
+              0,
+              0,
+              21,
+              3181616678,
+              1040350519,
+              1041173856,
+              3181616678,
+              1040350519,
+              1041173856,
+              1068289152,
+              1051511936,
+              1041173856,
+              1,
+              1,
+              25,
+              3179651890,
+              3187832717,
+              1041174064,
+              3179651890,
+              3187832717,
+              1041174064,
+              1068289152,
+              1051511936,
+              1041174064,
+              1,
+              0,
+              22,
+              1030922300,
+              1041925921,
+              3071115280,
+              1032109847,
+              1041975337,
+              3069644255,
+              3212836864,
+              1058921804,
+              3071115280,
+              1,
+              1,
+              26,
+              1033369804,
+              3189273462,
+              3024909312,
+              1033369804,
+              3189273462,
+              3024909312,
+              1068289152,
+              1051511936,
+              3024909312,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              6,
+              8,
+              0,
+              1082130432,
+              1059690944,
+              3340773448,
+              32759,
+              255,
+              0
+            ],
+            "locomotionNodes": [
+              {
+                "instance": "0x28f814c1628",
+                "input": "0x28f814c0ee8",
+                "controller": "0x290fb357bb0",
+                "model": "models/characters/d2coop/shadow_corvo.md6",
+                "requestMode": 3,
+                "stance": 4294967295,
+                "equipment": 4294967295,
+                "requestFlags": 5,
+                "requested": [
+                  0,
+                  0,
+                  0,
+                  -4.37113883E-08,
+                  1,
+                  0
+                ],
+                "actualVelocity": [
+                  0,
+                  0,
+                  0
+                ],
+                "graphs": [
+                  {
+                    "address": "0x291021ad360",
+                    "stance": 0,
+                    "equipment": 0,
+                    "activeType": ".?AVarkLocomotionMode_Idle@@",
+                    "candidates": [
+                      {
+                        "type": ".?AVarkLocomotionMode_Idle@@",
+                        "scoreRva": "0x4824c0"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_FrontalMove@@",
+                        "scoreRva": "0x480840"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_Strafe@@",
+                        "scoreRva": "0x4836b0"
+                      },
+                      {
+                        "type": "",
+                        "scoreRva": "0x0"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "locomotionStances": [
+              {
+                "index": 0,
+                "name": "Relaxed"
+              },
+              {
+                "index": 1,
+                "name": "Combat"
+              },
+              {
+                "index": 2,
+                "name": "Search"
+              },
+              {
+                "index": 3,
+                "name": "Mesmerize"
+              }
+            ],
+            "modelConfig": {
+              "138": {
+                "address": "0x0",
+                "type": "",
+                "name": ""
+              },
+              "140": {
+                "address": "0x29095b6d890",
+                "type": ".?AVarkDeclLocomotion@@",
+                "name": "models/characters/tall/base/locomotion/tall.loco"
+              },
+              "148": {
+                "address": "0x290f89494d0",
+                "type": ".?AVarkDeclAnimBasic@@",
+                "name": "models/characters/d2coop/shadow_actions.animbasic",
+                "entries": [
+                  "generic_smallhit_front",
+                  "generic_smallhit_back",
+                  "generic_smallhit_left",
+                  "generic_smallhit_right",
+                  "sword_patrol_searchpose",
+                  "sword_attack_fasta",
+                  "sword_parry_ll_in",
+                  "sword_parry_ll_out",
+                  "sword_idle",
+                  "sword_fall_loop",
+                  "sword_land_walk_out"
+                ]
+              }
+            }
+          },
+          "Sword": {
+            "tick": 98040000,
+            "weaponHandle": 210047464,
+            "joint": 17,
+            "tag": "right_hand_wpn",
+            "stable": true,
+            "frameFlags": 2,
+            "phase": 3,
+            "offset": [
+              0,
+              0,
+              0
+            ],
+            "quaternion": [
+              0.0301797073,
+              -0.906413257,
+              0.421079099,
+              0.014020104
+            ],
+            "jointMatrix": [
+              -0.955273271,
+              -0.244439632,
+              0.16644001,
+              0.947029412,
+              -0.120883569,
+              0.836420357,
+              0.534591615,
+              -0.189913899,
+              -0.269889176,
+              0.490561306,
+              -0.828558743,
+              0.243690938,
+              -0.026414603,
+              -0.274861991,
+              0.972608387,
+              0.0400846489
+            ],
+            "weaponNativeRoot": [
+              -32.7251396,
+              -153.026413,
+              67.3762589,
+              -0.188261509,
+              0.96119839,
+              -0.201631308,
+              -0.173894584,
+              0.169434935,
+              0.970078528,
+              0.966601372,
+              0.217691123,
+              0.135249197
+            ],
+            "weaponRenderRoot": [
+              -32.7251396,
+              -153.026413,
+              67.3762589,
+              -0.188261509,
+              0.96119839,
+              -0.201631308,
+              -0.173894584,
+              0.169434935,
+              0.970078528,
+              0.966601372,
+              0.217691123,
+              0.135249197
+            ],
+            "parentNativeRoot": [
+              -33,
+              -153,
+              66.4036484,
+              -4.37113883E-08,
+              1,
+              0,
+              -1,
+              -4.37113883E-08,
+              0,
+              0,
+              0,
+              1
+            ],
+            "parentRenderRoot": [
+              -33,
+              -153,
+              66.4036484,
+              -4.37113883E-08,
+              1,
+              0,
+              -1,
+              -4.37113883E-08,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "Health": {
+            "tick": 98040031,
+            "handle": 209916390,
+            "logic": 1,
+            "component": "0x290d333f698",
+            "actor": "0x290f8c90b40",
+            "attributes": "0x290f85d7900",
+            "current": 40,
+            "maximum": 40,
+            "baseMaximum": 40,
+            "suppressedMaximum": 10,
+            "ownerSuppressed": false,
+            "maximumIndex": 1,
+            "suppressedIndex": -1,
+            "attributeCount": 3,
+            "attributeValues": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "After": [
+        {
+          "Role": "host",
+          "Bridge": {
+            "role": 0,
+            "engineThread": 52044,
+            "screenTransportPumps": 11032,
+            "nativeInterface": "SteamNetworkingSockets012",
+            "steamAvailable": true,
+            "listener": 65536,
+            "connection": 1069865230,
+            "connectionState": 3,
+            "sent": 4747,
+            "received": 4744,
+            "rejected": 0,
+            "lastCommand": 539670324,
+            "localPoseAvailable": true,
+            "localPosition": [
+              -27.787413,
+              -153.598755,
+              66.403648
+            ],
+            "remotePoseAvailable": true,
+            "remoteFresh": true,
+            "remoteSequence": 4744,
+            "remotePosition": [
+              -28.301132,
+              -154.133545,
+              66.403648
+            ],
+            "probeActorHandle": 209916411,
+            "probeFollowEnabled": true,
+            "probeFollowExact": true,
+            "probeRenderPosition": [
+              -28.301132,
+              -154.133545,
+              66.403648
+            ],
+            "probeOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "remoteActorImplemented": false,
+            "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+            "localMapId": "b09f633a29a020cc",
+            "localEpoch": 16,
+            "remoteMapId": "b09f633a29a020cc",
+            "remoteEpoch": 16,
+            "localGameLogicState": 1,
+            "localPendingGameLogicState": 0,
+            "remoteGameLogicState": 1,
+            "remotePendingGameLogicState": 0,
+            "localCinematicMetadataValid": 1,
+            "localCinematicNodeCount": 0,
+            "localCinematicSignature": "0",
+            "remoteCinematicMetadataValid": 1,
+            "remoteCinematicNodeCount": 0,
+            "remoteCinematicSignature": "0",
+            "localCinematicEpoch": 1,
+            "remoteCinematicEpoch": 1,
+            "cinematicSyncEnabled": true,
+            "remoteCinematicSyncEnabled": 1,
+            "localCinematicCanSkip": 0,
+            "remoteCinematicCanSkip": 0,
+            "nativeSkipCallbacks": 0,
+            "skipSent": 0,
+            "skipReceived": 0,
+            "skipApplied": 0,
+            "skipDropped": 0,
+            "localSkipSceneId": "0",
+            "remoteSkipSceneId": "0",
+            "nativeSkipThread": 0,
+            "poseProtocol": 10,
+            "posePacketBytes": 1156,
+            "localSequenceMetadataValid": 1,
+            "localSequenceCount": 0,
+            "localSequenceSignature": "0",
+            "localSequenceBoundaryId": "0",
+            "remoteSequenceMetadataValid": 1,
+            "remoteSequenceCount": 0,
+            "remoteSequenceSignature": "0",
+            "remoteSequenceBoundaryId": "0",
+            "localPlayerStanceValid": 1,
+            "localPlayerStance": 0,
+            "remotePlayerStanceValid": 1,
+            "remotePlayerStance": 0,
+            "localPlayerMotionValid": 1,
+            "localPlayerMotion": 0,
+            "remotePlayerMotionValid": 1,
+            "remotePlayerMotion": 0,
+            "receivedPlayerMotions": [
+              4324,
+              0,
+              0,
+              0
+            ],
+            "cinematicHoldActive": false,
+            "cinematicHoldId": 0,
+            "cinematicHoldStarted": 0,
+            "cinematicHoldResumed": 0,
+            "cinematicHoldAbandoned": 0,
+            "localSequenceTimeMs": 0,
+            "localSequencePaused": 0,
+            "remoteSequenceTimeMs": 0,
+            "remoteSequencePaused": 0,
+            "barrierEnabled": 1,
+            "barrierHeld": 0,
+            "remoteBarrierEnabled": 1,
+            "remoteBarrierHeld": 0,
+            "barrierStarted": 0,
+            "barrierReleased": 0,
+            "barrierTimedOut": 0,
+            "barrierMissed": 0,
+            "barrierSent": 0,
+            "barrierReceived": 0,
+            "barrierRejected": 0,
+            "locomotionEnabled": true,
+            "locomotionApplied": 22654,
+            "locomotionRefused": 0,
+            "locomotionSpeed": 0.0,
+            "bodyProbeApplied": 0,
+            "bodyProbeRefused": 0,
+            "bodyProbeThread": 0,
+            "bodyStreamEnabled": false,
+            "bodyStreamApplied": 0,
+            "localBodyPoseValid": 1,
+            "remoteBodyPoseValid": 1,
+            "aiHoldActive": false,
+            "aiHoldHandle": 0,
+            "aiHoldStarted": 0,
+            "aiHoldReleased": 0,
+            "aiHoldRefused": 0,
+            "aiHoldInvalidated": 0,
+            "aiHoldResult": "idle"
+          },
+          "Reset": {
+            "enabled": true,
+            "phase": 0,
+            "result": "armed",
+            "arm": 1,
+            "peerArm": 1,
+            "transaction": 1,
+            "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+            "held": false,
+            "expectBoundary": false,
+            "loads": 1,
+            "completed": 1,
+            "requests": 2,
+            "duplicates": 2,
+            "rejected": 0,
+            "aborted": 0,
+            "heldAt": 98047812,
+            "releasedAt": 98049375,
+            "readyAt": 98047812,
+            "completedAt": 98049406,
+            "hostReady": 1,
+            "clientReady": 1,
+            "readyDelay": 0,
+            "sent": 25,
+            "received": 22,
+            "samples": 142,
+            "maxDistance": 0,
+            "game": "0x26f4df07050",
+            "player": "0x26ece6b0f50",
+            "position": [
+              -28.0921001,
+              -153.962006,
+              66.4036407
+            ],
+            "loadingEntryAt": 98042671,
+            "oldGame": "0x26f3e29a050",
+            "avatarRequested": true,
+            "avatarPending": false,
+            "avatarReady": true,
+            "avatarRestored": 1,
+            "avatarRefused": 0,
+            "avatarProfile": "doppelganger",
+            "avatarExact": true,
+            "avatarAiHeld": true,
+            "avatarAiAcquired": 2,
+            "avatarAiReleased": 1,
+            "avatarAiLost": 0,
+            "avatarAiRefused": 2,
+            "avatarIdleOwned": true,
+            "avatarIdleAcquired": 2,
+            "avatarIdleReleased": 1,
+            "avatarIdleLost": 0,
+            "avatarIdleRefused": 0,
+            "deathActive": false,
+            "deathReady": false,
+            "peerDeathReady": false,
+            "deathRetryQueued": false,
+            "deathCount": 0,
+            "deathApplied": 0,
+            "deathReceived": 0
+          },
+          "Stream": {
+            "armed": false,
+            "ready": false,
+            "remainingMs": 0,
+            "token": 0,
+            "peerToken": 0,
+            "epoch": 0,
+            "peerEpoch": 0,
+            "handle": 0,
+            "sourceState": 4294967295,
+            "remoteState": 0,
+            "sourceEvent": 0,
+            "remoteEvent": 0,
+            "lastSequence": 0,
+            "started": 0,
+            "sent": 0,
+            "received": 0,
+            "accepted": 0,
+            "applied": 0,
+            "rejected": 0,
+            "refused": 2,
+            "released": 0,
+            "actionActive": false,
+            "result": "unavailable_or_busy"
+          },
+          "Avatar": {
+            "handle": "0xc8311fb",
+            "pointer": "0x26ecbb68910",
+            "vtableRva": "0x1c5e108",
+            "name": "d2coop_probe_emily",
+            "type": ".?AVarkNPC@@",
+            "definition": "0x26f8573f820",
+            "definitionName": "models/characters/def/d2coop/doppelganger_emily.def",
+            "position": [
+              -28.3011,
+              -154.134,
+              66.4036
+            ],
+            "renderPosition": [
+              -28.3011,
+              -154.134,
+              66.4036
+            ],
+            "orientation": [
+              -0.995185,
+              0.0980171,
+              0,
+              -0.0980171,
+              -0.995185,
+              0,
+              0,
+              0,
+              1
+            ],
+            "renderOrientation": [
+              -0.995185,
+              0.0980171,
+              0,
+              -0.0980171,
+              -0.995185,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physicsBodies": [
+              {
+                "id": 16779326,
+                "position": [
+                  -28.2945,
+                  -154.104,
+                  67.481
+                ]
+              },
+              {
+                "id": 16779327,
+                "position": [
+                  -28.308,
+                  -154.102,
+                  67.5421
+                ]
+              },
+              {
+                "id": 16779328,
+                "position": [
+                  -28.2985,
+                  -154.105,
+                  67.7088
+                ]
+              },
+              {
+                "id": 16779329,
+                "position": [
+                  -28.2579,
+                  -154.118,
+                  67.9315
+                ]
+              },
+              {
+                "id": 16779330,
+                "position": [
+                  -28.2721,
+                  -154.138,
+                  68.0348
+                ]
+              },
+              {
+                "id": 16779331,
+                "position": [
+                  -28.2541,
+                  -154.246,
+                  67.854
+                ]
+              },
+              {
+                "id": 16779332,
+                "position": [
+                  -28.2467,
+                  -154.29,
+                  67.6072
+                ]
+              },
+              {
+                "id": 16779333,
+                "position": [
+                  -28.3056,
+                  -154.349,
+                  67.3712
+                ]
+              },
+              {
+                "id": 16779334,
+                "position": [
+                  -28.2128,
+                  -153.99,
+                  67.8652
+                ]
+              },
+              {
+                "id": 16779335,
+                "position": [
+                  -28.2296,
+                  -153.957,
+                  67.6172
+                ]
+              },
+              {
+                "id": 16779336,
+                "position": [
+                  -28.2837,
+                  -153.896,
+                  67.3804
+                ]
+              },
+              {
+                "id": 16779337,
+                "position": [
+                  -28.2904,
+                  -154.193,
+                  67.3832
+                ]
+              },
+              {
+                "id": 16779338,
+                "position": [
+                  -28.4466,
+                  -154.234,
+                  66.9747
+                ]
+              },
+              {
+                "id": 16779339,
+                "position": [
+                  -28.2148,
+                  -154.212,
+                  66.6101
+                ]
+              },
+              {
+                "id": 16779340,
+                "position": [
+                  -28.2691,
+                  -154.01,
+                  67.4011
+                ]
+              },
+              {
+                "id": 16779341,
+                "position": [
+                  -28.4362,
+                  -154.003,
+                  66.9949
+                ]
+              },
+              {
+                "id": 16779342,
+                "position": [
+                  -28.2469,
+                  -154.065,
+                  66.611
+                ]
+              }
+            ]
+          },
+          "Animation": {
+            "handle": 209916411,
+            "animation": "0x26ecbfa7950",
+            "data": "0x26ecbb7d880",
+            "bindings": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1672,
+                "values": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1688,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2152,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1744,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1752,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2168,
+                "values": [
+                  -1
+                ]
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2192,
+                "values": [
+                  1
+                ]
+              },
+              {
+                "name": "linearVelocity",
+                "type": 10,
+                "offset": 464,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "speed",
+                "type": 1,
+                "offset": 0,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "midnightWeight",
+                "type": 1,
+                "offset": 1264,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2656,
+                "values": [
+                  -28.3011322,
+                  -154.133545,
+                  66.4036484,
+                  -0.99518472,
+                  0.0980170965,
+                  0,
+                  -0.0980170965,
+                  -0.99518472,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "declaredInputs": [
+              {
+                "name": "coopFullBodyWeight",
+                "type": 1,
+                "offset": 1664,
+                "value": 0
+              },
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1672
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1688
+              },
+              {
+                "name": "targAngularVelocity",
+                "type": 1,
+                "offset": 1704,
+                "value": 0
+              },
+              {
+                "name": "targStance",
+                "type": 7,
+                "offset": 1712
+              },
+              {
+                "name": "targEquipState",
+                "type": 8,
+                "offset": 1720
+              },
+              {
+                "name": "isTargStanceImmediate",
+                "type": 11,
+                "offset": 1728
+              },
+              {
+                "name": "isTargEquipStateImmediate",
+                "type": 11,
+                "offset": 1736
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1744,
+                "value": 0
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1752,
+                "value": 0
+              },
+              {
+                "name": "vectorMode",
+                "type": 11,
+                "offset": 1760
+              },
+              {
+                "name": "jumpData",
+                "type": 14,
+                "offset": 1768
+              },
+              {
+                "name": "doorData",
+                "type": 23,
+                "offset": 1904
+              },
+              {
+                "name": "pathfindingData",
+                "type": 15,
+                "offset": 1920
+              },
+              {
+                "name": "locoInputData",
+                "type": 19,
+                "offset": 2048
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2152
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2168,
+                "value": -1
+              },
+              {
+                "name": "stairCommand",
+                "type": 0,
+                "offset": 2176
+              },
+              {
+                "name": "stairAngle",
+                "type": 1,
+                "offset": 2184,
+                "value": 0
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2192,
+                "value": 1
+              },
+              {
+                "name": "midnightData",
+                "type": 9,
+                "offset": 2200
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2656
+              },
+              {
+                "name": "recoverFromRagdollSnapshotInput",
+                "type": 13,
+                "offset": 3144
+              },
+              {
+                "name": "recoverFromRagdollBlendInput",
+                "type": 1,
+                "offset": 3160,
+                "value": 0
+              },
+              {
+                "name": "versusFrame",
+                "type": 1,
+                "offset": 3168,
+                "value": 3.40282347E+38
+              },
+              {
+                "name": "animBasicInputData1",
+                "type": 12,
+                "offset": 3176,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  1207959552
+                ]
+              },
+              {
+                "name": "versusBlend",
+                "type": 1,
+                "offset": 3200,
+                "value": 0
+              },
+              {
+                "name": "animBasicInputData2",
+                "type": 12,
+                "offset": 3208,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  1207959552
+                ]
+              },
+              {
+                "name": "locoSelector_blendFactor",
+                "type": 1,
+                "offset": 3232,
+                "value": 1
+              }
+            ],
+            "modernOutputWords": [
+              0,
+              0,
+              0,
+              0,
+              1067762122,
+              1086001252,
+              1069318188,
+              1077706796,
+              0,
+              2,
+              0,
+              0,
+              541523989,
+              3183193050,
+              1032746501,
+              1039198658,
+              3183185138,
+              1032745977,
+              1039203373,
+              1070875716,
+              1054098500,
+              1039198658,
+              1162698581,
+              1,
+              1195442201,
+              3174929432,
+              3180777818,
+              1039203808,
+              3174929432,
+              3180777818,
+              1039203808,
+              1070875716,
+              1054098500,
+              1039203808,
+              1096767567,
+              0,
+              1142947862,
+              1015891804,
+              1038201934,
+              3132775092,
+              1015914311,
+              1038202280,
+              3132600301,
+              1070875716,
+              1054098500,
+              3132775092,
+              541868365,
+              1,
+              1498677274,
+              1032711214,
+              3182425138,
+              3132584528,
+              1032708620,
+              3182431761,
+              3132492422,
+              1070875716,
+              1054098500,
+              3132584528,
+              1598770761,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              6,
+              8,
+              0,
+              1082130432,
+              1058397662,
+              3340773448,
+              32759,
+              255,
+              1852795232
+            ],
+            "locomotionNodes": [
+              {
+                "instance": "0x26ecbb7e528",
+                "input": "0x26ecbb7e2e0",
+                "controller": "0x26ece6abd30",
+                "model": "models/characters/d2coop/shadow_emily.md6",
+                "requestMode": 3,
+                "stance": 4294967295,
+                "equipment": 4294967295,
+                "requestFlags": 69,
+                "requested": [
+                  0,
+                  0,
+                  0,
+                  -0.99518472,
+                  0.0980170965,
+                  0
+                ],
+                "actualVelocity": [
+                  0,
+                  0,
+                  0
+                ],
+                "graphs": [
+                  {
+                    "address": "0x26f85336550",
+                    "stance": 0,
+                    "equipment": 0,
+                    "activeType": ".?AVarkLocomotionMode_Idle@@",
+                    "candidates": [
+                      {
+                        "type": ".?AVarkLocomotionMode_Idle@@",
+                        "scoreRva": "0x4824c0"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_FrontalMove@@",
+                        "scoreRva": "0x480840"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_Strafe@@",
+                        "scoreRva": "0x4836b0"
+                      },
+                      {
+                        "type": "",
+                        "scoreRva": "0x0"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "locomotionStances": [
+              {
+                "index": 0,
+                "name": "Relaxed"
+              },
+              {
+                "index": 1,
+                "name": "Combat"
+              },
+              {
+                "index": 2,
+                "name": "Search"
+              },
+              {
+                "index": 3,
+                "name": "Mesmerize"
+              }
+            ],
+            "modelConfig": {
+              "138": {
+                "address": "0x0",
+                "type": "",
+                "name": ""
+              },
+              "140": {
+                "address": "0x26edd3d1300",
+                "type": ".?AVarkDeclLocomotion@@",
+                "name": "models/characters/female/base/locomotion/female.loco"
+              },
+              "148": {
+                "address": "0x26f6bfab800",
+                "type": ".?AVarkDeclAnimBasic@@",
+                "name": "models/characters/d2coop/shadow_actions.animbasic",
+                "entries": [
+                  "generic_smallhit_front",
+                  "generic_smallhit_back",
+                  "generic_smallhit_left",
+                  "generic_smallhit_right",
+                  "sword_patrol_searchpose",
+                  "sword_attack_fasta",
+                  "sword_parry_ll_in",
+                  "sword_parry_ll_out",
+                  "sword_idle",
+                  "sword_fall_loop",
+                  "sword_land_walk_out"
+                ]
+              }
+            }
+          },
+          "Sword": {
+            "tick": 98053484,
+            "weaponHandle": 210047485,
+            "joint": 17,
+            "tag": "right_hand_wpn",
+            "stable": false,
+            "frameFlags": 2,
+            "phase": 3,
+            "offset": [
+              0,
+              0,
+              0
+            ],
+            "quaternion": [
+              0.00644244766,
+              -0.906892717,
+              0.421301842,
+              0.00299288891
+            ],
+            "jointMatrix": [
+              -0.991594732,
+              -0.128040567,
+              0.0185874719,
+              0.949070096,
+              -0.105590984,
+              0.717838466,
+              -0.688156128,
+              0.201250508,
+              0.0747691095,
+              -0.684334695,
+              -0.72532469,
+              0.207287401,
+              -0.0136161745,
+              -0.228119463,
+              0.901877284,
+              0.121936962
+            ],
+            "weaponNativeRoot": [
+              -28.2652225,
+              -153.907852,
+              67.3055267,
+              -0.999762774,
+              -0.0199314654,
+              -0.00880891923,
+              0.0188390836,
+              -0.993719459,
+              0.110305138,
+              -0.0109521346,
+              0.110112987,
+              0.993858695
+            ],
+            "weaponRenderRoot": [
+              -28.2652225,
+              -153.907852,
+              67.3055267,
+              -0.999762774,
+              -0.0199314654,
+              -0.00880891923,
+              0.0188390836,
+              -0.993719459,
+              0.110305138,
+              -0.0109521346,
+              0.110112987,
+              0.993858695
+            ],
+            "parentNativeRoot": [
+              -28.3011322,
+              -154.133545,
+              66.4036484,
+              -0.99518472,
+              0.0980170965,
+              0,
+              -0.0980170965,
+              -0.99518472,
+              0,
+              0,
+              0,
+              1
+            ],
+            "parentRenderRoot": [
+              -28.3011322,
+              -154.133545,
+              66.4036484,
+              -0.99518472,
+              0.0980170965,
+              0,
+              -0.0980170965,
+              -0.99518472,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "Health": {
+            "tick": 98053515,
+            "handle": 209916411,
+            "logic": 1,
+            "component": "0x26f5d654378",
+            "actor": "0x26ecbb68910",
+            "attributes": "0x26f6bc32900",
+            "current": 40,
+            "maximum": 40,
+            "baseMaximum": 40,
+            "suppressedMaximum": 10,
+            "ownerSuppressed": false,
+            "maximumIndex": 1,
+            "suppressedIndex": -1,
+            "attributeCount": 3,
+            "attributeValues": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "Role": "client",
+          "Bridge": {
+            "role": 1,
+            "engineThread": 52764,
+            "screenTransportPumps": 10579,
+            "nativeInterface": "SteamNetworkingSockets012",
+            "steamAvailable": true,
+            "listener": 0,
+            "connection": 1569466360,
+            "connectionState": 3,
+            "sent": 4755,
+            "received": 4758,
+            "rejected": 0,
+            "lastCommand": 539670160,
+            "localPoseAvailable": true,
+            "localPosition": [
+              -28.301132,
+              -154.133545,
+              66.403648
+            ],
+            "remotePoseAvailable": true,
+            "remoteFresh": true,
+            "remoteSequence": 4758,
+            "remotePosition": [
+              -27.787413,
+              -153.598755,
+              66.403648
+            ],
+            "probeActorHandle": 210178579,
+            "probeFollowEnabled": true,
+            "probeFollowExact": true,
+            "probeRenderPosition": [
+              -27.787413,
+              -153.598755,
+              66.403648
+            ],
+            "probeOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "remoteActorImplemented": false,
+            "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+            "localMapId": "b09f633a29a020cc",
+            "localEpoch": 16,
+            "remoteMapId": "b09f633a29a020cc",
+            "remoteEpoch": 16,
+            "localGameLogicState": 1,
+            "localPendingGameLogicState": 0,
+            "remoteGameLogicState": 1,
+            "remotePendingGameLogicState": 0,
+            "localCinematicMetadataValid": 1,
+            "localCinematicNodeCount": 0,
+            "localCinematicSignature": "0",
+            "remoteCinematicMetadataValid": 1,
+            "remoteCinematicNodeCount": 0,
+            "remoteCinematicSignature": "0",
+            "localCinematicEpoch": 1,
+            "remoteCinematicEpoch": 1,
+            "cinematicSyncEnabled": true,
+            "remoteCinematicSyncEnabled": 1,
+            "localCinematicCanSkip": 0,
+            "remoteCinematicCanSkip": 0,
+            "nativeSkipCallbacks": 0,
+            "skipSent": 0,
+            "skipReceived": 0,
+            "skipApplied": 0,
+            "skipDropped": 0,
+            "localSkipSceneId": "0",
+            "remoteSkipSceneId": "0",
+            "nativeSkipThread": 0,
+            "poseProtocol": 10,
+            "posePacketBytes": 1156,
+            "localSequenceMetadataValid": 1,
+            "localSequenceCount": 0,
+            "localSequenceSignature": "0",
+            "localSequenceBoundaryId": "0",
+            "remoteSequenceMetadataValid": 1,
+            "remoteSequenceCount": 0,
+            "remoteSequenceSignature": "0",
+            "remoteSequenceBoundaryId": "0",
+            "localPlayerStanceValid": 1,
+            "localPlayerStance": 0,
+            "remotePlayerStanceValid": 1,
+            "remotePlayerStance": 0,
+            "localPlayerMotionValid": 1,
+            "localPlayerMotion": 0,
+            "remotePlayerMotionValid": 1,
+            "remotePlayerMotion": 0,
+            "receivedPlayerMotions": [
+              4339,
+              0,
+              0,
+              0
+            ],
+            "cinematicHoldActive": false,
+            "cinematicHoldId": 0,
+            "cinematicHoldStarted": 0,
+            "cinematicHoldResumed": 0,
+            "cinematicHoldAbandoned": 0,
+            "localSequenceTimeMs": 0,
+            "localSequencePaused": 0,
+            "remoteSequenceTimeMs": 0,
+            "remoteSequencePaused": 0,
+            "barrierEnabled": 1,
+            "barrierHeld": 0,
+            "remoteBarrierEnabled": 1,
+            "remoteBarrierHeld": 0,
+            "barrierStarted": 0,
+            "barrierReleased": 0,
+            "barrierTimedOut": 0,
+            "barrierMissed": 0,
+            "barrierSent": 0,
+            "barrierReceived": 0,
+            "barrierRejected": 0,
+            "locomotionEnabled": true,
+            "locomotionApplied": 22469,
+            "locomotionRefused": 0,
+            "locomotionSpeed": 0.0,
+            "bodyProbeApplied": 0,
+            "bodyProbeRefused": 0,
+            "bodyProbeThread": 0,
+            "bodyStreamEnabled": false,
+            "bodyStreamApplied": 0,
+            "localBodyPoseValid": 1,
+            "remoteBodyPoseValid": 1,
+            "aiHoldActive": false,
+            "aiHoldHandle": 0,
+            "aiHoldStarted": 0,
+            "aiHoldReleased": 0,
+            "aiHoldRefused": 0,
+            "aiHoldInvalidated": 0,
+            "aiHoldResult": "idle"
+          },
+          "Reset": {
+            "enabled": true,
+            "phase": 0,
+            "result": "armed",
+            "arm": 1,
+            "peerArm": 1,
+            "transaction": 1,
+            "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+            "held": false,
+            "expectBoundary": false,
+            "loads": 1,
+            "completed": 1,
+            "requests": 1,
+            "duplicates": 0,
+            "rejected": 1,
+            "aborted": 0,
+            "heldAt": 98047843,
+            "releasedAt": 98049390,
+            "readyAt": 98049343,
+            "completedAt": 98049390,
+            "hostReady": 1,
+            "clientReady": 1,
+            "readyDelay": 1500,
+            "sent": 25,
+            "received": 27,
+            "samples": 140,
+            "maxDistance": 0,
+            "game": "0x290a5712050",
+            "player": "0x290fb4a0dd0",
+            "position": [
+              -28.0921001,
+              -153.962006,
+              66.4036407
+            ],
+            "loadingEntryAt": 98042906,
+            "oldGame": "0x28f93f5b050",
+            "avatarRequested": true,
+            "avatarPending": false,
+            "avatarReady": true,
+            "avatarRestored": 1,
+            "avatarRefused": 0,
+            "avatarProfile": "doppelganger",
+            "avatarExact": true,
+            "avatarAiHeld": true,
+            "avatarAiAcquired": 2,
+            "avatarAiReleased": 1,
+            "avatarAiLost": 0,
+            "avatarAiRefused": 2,
+            "avatarIdleOwned": true,
+            "avatarIdleAcquired": 2,
+            "avatarIdleReleased": 1,
+            "avatarIdleLost": 0,
+            "avatarIdleRefused": 0,
+            "deathActive": false,
+            "deathReady": false,
+            "peerDeathReady": false,
+            "deathRetryQueued": false,
+            "deathCount": 0,
+            "deathApplied": 0,
+            "deathReceived": 0
+          },
+          "Stream": {
+            "armed": false,
+            "ready": false,
+            "remainingMs": 0,
+            "token": 0,
+            "peerToken": 0,
+            "epoch": 0,
+            "peerEpoch": 0,
+            "handle": 0,
+            "sourceState": 4294967295,
+            "remoteState": 0,
+            "sourceEvent": 0,
+            "remoteEvent": 0,
+            "lastSequence": 0,
+            "started": 0,
+            "sent": 0,
+            "received": 0,
+            "accepted": 0,
+            "applied": 0,
+            "rejected": 0,
+            "refused": 2,
+            "released": 0,
+            "actionActive": false,
+            "result": "unavailable_or_busy"
+          },
+          "Avatar": {
+            "handle": "0xc871213",
+            "pointer": "0x28f81203630",
+            "vtableRva": "0x1c5e108",
+            "name": "d2coop_probe_corvo",
+            "type": ".?AVarkNPC@@",
+            "definition": "0x29103854c20",
+            "definitionName": "models/characters/def/d2coop/doppelganger_corvo.def",
+            "position": [
+              -27.7874,
+              -153.599,
+              66.4036
+            ],
+            "renderPosition": [
+              -27.7874,
+              -153.599,
+              66.4036
+            ],
+            "orientation": [
+              -0.995185,
+              0.0980171,
+              0,
+              -0.0980171,
+              -0.995185,
+              0,
+              0,
+              0,
+              1
+            ],
+            "renderOrientation": [
+              -0.995185,
+              0.0980171,
+              0,
+              -0.0980171,
+              -0.995185,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physicsBodies": [
+              {
+                "id": 16779326,
+                "position": [
+                  -27.7806,
+                  -153.596,
+                  67.4538
+                ]
+              },
+              {
+                "id": 16779327,
+                "position": [
+                  -27.7851,
+                  -153.596,
+                  67.5461
+                ]
+              },
+              {
+                "id": 16779328,
+                "position": [
+                  -27.7717,
+                  -153.597,
+                  67.8017
+                ]
+              },
+              {
+                "id": 16779329,
+                "position": [
+                  -27.765,
+                  -153.598,
+                  68.0833
+                ]
+              },
+              {
+                "id": 16779330,
+                "position": [
+                  -27.7925,
+                  -153.601,
+                  68.1795
+                ]
+              },
+              {
+                "id": 16779331,
+                "position": [
+                  -27.7671,
+                  -153.808,
+                  67.9338
+                ]
+              },
+              {
+                "id": 16779332,
+                "position": [
+                  -27.7645,
+                  -153.853,
+                  67.6967
+                ]
+              },
+              {
+                "id": 16779333,
+                "position": [
+                  -27.8005,
+                  -153.896,
+                  67.4285
+                ]
+              },
+              {
+                "id": 16779334,
+                "position": [
+                  -27.7262,
+                  -153.39,
+                  67.9355
+                ]
+              },
+              {
+                "id": 16779335,
+                "position": [
+                  -27.7153,
+                  -153.34,
+                  67.6996
+                ]
+              },
+              {
+                "id": 16779336,
+                "position": [
+                  -27.7384,
+                  -153.29,
+                  67.4312
+                ]
+              },
+              {
+                "id": 16779337,
+                "position": [
+                  -27.7838,
+                  -153.699,
+                  67.439
+                ]
+              },
+              {
+                "id": 16779338,
+                "position": [
+                  -27.9671,
+                  -153.726,
+                  67.0275
+                ]
+              },
+              {
+                "id": 16779339,
+                "position": [
+                  -27.7177,
+                  -153.733,
+                  66.6625
+                ]
+              },
+              {
+                "id": 16779340,
+                "position": [
+                  -27.7653,
+                  -153.495,
+                  67.4405
+                ]
+              },
+              {
+                "id": 16779341,
+                "position": [
+                  -27.9521,
+                  -153.444,
+                  67.0329
+                ]
+              },
+              {
+                "id": 16779342,
+                "position": [
+                  -27.7091,
+                  -153.478,
+                  66.6651
+                ]
+              }
+            ]
+          },
+          "Animation": {
+            "handle": 210178579,
+            "animation": "0x28f945a6690",
+            "data": "0x28f81225200",
+            "bindings": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1664,
+                "values": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1680,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2160,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1752,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1760,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2176,
+                "values": [
+                  -1
+                ]
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2200,
+                "values": [
+                  1
+                ]
+              },
+              {
+                "name": "linearVelocity",
+                "type": 10,
+                "offset": 464,
+                "values": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "name": "speed",
+                "type": 1,
+                "offset": 0,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "midnightWeight",
+                "type": 1,
+                "offset": 1264,
+                "values": [
+                  0
+                ]
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2664,
+                "values": [
+                  -27.7874126,
+                  -153.598755,
+                  66.4036484,
+                  -0.99518472,
+                  0.0980170965,
+                  0,
+                  -0.0980170965,
+                  -0.99518472,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "declaredInputs": [
+              {
+                "name": "forwardOrientation",
+                "type": 10,
+                "offset": 1664
+              },
+              {
+                "name": "targLinearVelocity",
+                "type": 10,
+                "offset": 1680
+              },
+              {
+                "name": "targAngularVelocity",
+                "type": 1,
+                "offset": 1696,
+                "value": 0
+              },
+              {
+                "name": "targStance",
+                "type": 7,
+                "offset": 1704
+              },
+              {
+                "name": "versusFrame",
+                "type": 1,
+                "offset": 1712,
+                "value": 3.40282347E+38
+              },
+              {
+                "name": "targEquipState",
+                "type": 8,
+                "offset": 1720
+              },
+              {
+                "name": "isTargStanceImmediate",
+                "type": 11,
+                "offset": 1728
+              },
+              {
+                "name": "versusBlend",
+                "type": 1,
+                "offset": 1736,
+                "value": 0
+              },
+              {
+                "name": "isTargEquipStateImmediate",
+                "type": 11,
+                "offset": 1744
+              },
+              {
+                "name": "targSpeed",
+                "type": 1,
+                "offset": 1752,
+                "value": 0
+              },
+              {
+                "name": "targAngle",
+                "type": 1,
+                "offset": 1760,
+                "value": 0
+              },
+              {
+                "name": "vectorMode",
+                "type": 11,
+                "offset": 1768
+              },
+              {
+                "name": "jumpData",
+                "type": 14,
+                "offset": 1776
+              },
+              {
+                "name": "doorData",
+                "type": 23,
+                "offset": 1912
+              },
+              {
+                "name": "pathfindingData",
+                "type": 15,
+                "offset": 1928
+              },
+              {
+                "name": "locoInputData",
+                "type": 19,
+                "offset": 2056
+              },
+              {
+                "name": "desiredOrientation",
+                "type": 10,
+                "offset": 2160
+              },
+              {
+                "name": "requestedVelocity",
+                "type": 1,
+                "offset": 2176,
+                "value": -1
+              },
+              {
+                "name": "stairCommand",
+                "type": 0,
+                "offset": 2184
+              },
+              {
+                "name": "stairAngle",
+                "type": 1,
+                "offset": 2192,
+                "value": 0
+              },
+              {
+                "name": "locoPlayRateMultiplier",
+                "type": 1,
+                "offset": 2200,
+                "value": 1
+              },
+              {
+                "name": "midnightData",
+                "type": 9,
+                "offset": 2208
+              },
+              {
+                "name": "locomotionInputData",
+                "type": 21,
+                "offset": 2664
+              },
+              {
+                "name": "coopFullBodyWeight",
+                "type": 1,
+                "offset": 3152,
+                "value": 0
+              },
+              {
+                "name": "animBasicInputData1",
+                "type": 12,
+                "offset": 3160,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  3976200192
+                ]
+              },
+              {
+                "name": "animBasicInputData2",
+                "type": 12,
+                "offset": 3184,
+                "rawWords": [
+                  255,
+                  0,
+                  0,
+                  1065353216,
+                  0,
+                  3976200192
+                ]
+              },
+              {
+                "name": "locoSelector_blendFactor",
+                "type": 1,
+                "offset": 3208,
+                "value": 1
+              },
+              {
+                "name": "recoverFromRagdollSnapshotInput",
+                "type": 13,
+                "offset": 3216
+              },
+              {
+                "name": "recoverFromRagdollBlendInput",
+                "type": 1,
+                "offset": 3232,
+                "value": 0
+              }
+            ],
+            "modernOutputWords": [
+              0,
+              0,
+              0,
+              0,
+              1068807351,
+              1088526744,
+              1066847473,
+              1077432302,
+              0,
+              2,
+              0,
+              0,
+              21,
+              3181616678,
+              1040350519,
+              1041173856,
+              3181616678,
+              1040350519,
+              1041173856,
+              1065493026,
+              1048715810,
+              1041173856,
+              1,
+              1,
+              25,
+              3179651890,
+              3187832717,
+              1041174064,
+              3179651890,
+              3187832717,
+              1041174064,
+              1065493026,
+              1048715810,
+              1041174064,
+              1,
+              0,
+              22,
+              1030922299,
+              1041925921,
+              3071115280,
+              3198501066,
+              3208711427,
+              1000328266,
+              3212836864,
+              1065128512,
+              3071115280,
+              1,
+              1,
+              26,
+              1033369804,
+              3189273462,
+              3024909312,
+              1033369804,
+              3189273462,
+              3024909312,
+              1065493026,
+              1048715810,
+              3024909312,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              6,
+              8,
+              0,
+              1082130432,
+              1061089007,
+              3340773448,
+              32759,
+              255,
+              0
+            ],
+            "locomotionNodes": [
+              {
+                "instance": "0x28f812263a8",
+                "input": "0x28f81225c68",
+                "controller": "0x290fb4a2930",
+                "model": "models/characters/d2coop/shadow_corvo.md6",
+                "requestMode": 3,
+                "stance": 4294967295,
+                "equipment": 4294967295,
+                "requestFlags": 5,
+                "requested": [
+                  0,
+                  0,
+                  0,
+                  -0.99518472,
+                  0.0980170965,
+                  0
+                ],
+                "actualVelocity": [
+                  0,
+                  0,
+                  0
+                ],
+                "graphs": [
+                  {
+                    "address": "0x291024e7140",
+                    "stance": 0,
+                    "equipment": 0,
+                    "activeType": ".?AVarkLocomotionMode_Idle@@",
+                    "candidates": [
+                      {
+                        "type": ".?AVarkLocomotionMode_Idle@@",
+                        "scoreRva": "0x4824c0"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_FrontalMove@@",
+                        "scoreRva": "0x480840"
+                      },
+                      {
+                        "type": ".?AVarkLocomotionMode_Strafe@@",
+                        "scoreRva": "0x4836b0"
+                      },
+                      {
+                        "type": "",
+                        "scoreRva": "0x0"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "locomotionStances": [
+              {
+                "index": 0,
+                "name": "Relaxed"
+              },
+              {
+                "index": 1,
+                "name": "Combat"
+              },
+              {
+                "index": 2,
+                "name": "Search"
+              },
+              {
+                "index": 3,
+                "name": "Mesmerize"
+              }
+            ],
+            "modelConfig": {
+              "138": {
+                "address": "0x0",
+                "type": "",
+                "name": ""
+              },
+              "140": {
+                "address": "0x29095b6d890",
+                "type": ".?AVarkDeclLocomotion@@",
+                "name": "models/characters/tall/base/locomotion/tall.loco"
+              },
+              "148": {
+                "address": "0x2910394d550",
+                "type": ".?AVarkDeclAnimBasic@@",
+                "name": "models/characters/d2coop/shadow_actions.animbasic",
+                "entries": [
+                  "generic_smallhit_front",
+                  "generic_smallhit_back",
+                  "generic_smallhit_left",
+                  "generic_smallhit_right",
+                  "sword_patrol_searchpose",
+                  "sword_attack_fasta",
+                  "sword_parry_ll_in",
+                  "sword_parry_ll_out",
+                  "sword_idle",
+                  "sword_fall_loop",
+                  "sword_land_walk_out"
+                ]
+              }
+            }
+          },
+          "Sword": {
+            "tick": 98053843,
+            "weaponHandle": 210309653,
+            "joint": 17,
+            "tag": "right_hand_wpn",
+            "stable": true,
+            "frameFlags": 2,
+            "phase": 3,
+            "offset": [
+              0,
+              0,
+              0
+            ],
+            "quaternion": [
+              0.0301797073,
+              -0.906413257,
+              0.421079099,
+              0.014020104
+            ],
+            "jointMatrix": [
+              -0.953351021,
+              -0.261723995,
+              0.150406182,
+              0.940322757,
+              -0.146962017,
+              0.837643504,
+              0.526075602,
+              -0.200016037,
+              -0.263673365,
+              0.479430765,
+              -0.837031782,
+              0.256653577,
+              -0.0140392771,
+              -0.283170193,
+              0.975783169,
+              0.0389183536
+            ],
+            "weaponNativeRoot": [
+              -27.7456856,
+              -153.318329,
+              67.3794327,
+              -0.976523101,
+              -0.11024116,
+              -0.185066521,
+              -0.165135607,
+              -0.168554932,
+              0.971761048,
+              -0.138321936,
+              0.979508102,
+              0.146393001
+            ],
+            "weaponRenderRoot": [
+              -27.7456856,
+              -153.318329,
+              67.3794327,
+              -0.976523101,
+              -0.11024116,
+              -0.185066521,
+              -0.165135607,
+              -0.168554932,
+              0.971761048,
+              -0.138321936,
+              0.979508102,
+              0.146393001
+            ],
+            "parentNativeRoot": [
+              -27.7874126,
+              -153.598755,
+              66.4036484,
+              -0.99518472,
+              0.0980170965,
+              0,
+              -0.0980170965,
+              -0.99518472,
+              0,
+              0,
+              0,
+              1
+            ],
+            "parentRenderRoot": [
+              -27.7874126,
+              -153.598755,
+              66.4036484,
+              -0.99518472,
+              0.0980170965,
+              0,
+              -0.0980170965,
+              -0.99518472,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "Health": {
+            "tick": 98053875,
+            "handle": 210178579,
+            "logic": 1,
+            "component": "0x290e1d18f48",
+            "actor": "0x28f81203630",
+            "attributes": "0x290f860e910",
+            "current": 40,
+            "maximum": 40,
+            "baseMaximum": 40,
+            "suppressedMaximum": 10,
+            "ownerSuppressed": false,
+            "maximumIndex": 1,
+            "suppressedIndex": -1,
+            "attributeCount": 3,
+            "attributeValues": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "Scope": "Fixed canonical Dunwall SLOT82. Either reload and either natural player death/native retry; both original death bindings, one shared load, both-ready role gate, exactly one owned native clone/model with AI/idle held and initialized sword after recovery. Does not verify arbitrary campaign checkpoints or cinematic rearming."
+}

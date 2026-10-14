@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "source": "host",
+  "character": "corvo",
+  "airborneExperiment": true,
+  "crouched": false,
+  "holstered": false,
+  "moving": false,
+  "failure": "Power presentation retired: native_state_stale",
+  "checks": [
+    "Native Steam stream and exact v39 stance/equipment bank ready before the cast"
+  ],
+  "events": [
+    {
+      "seconds": 1.914,
+      "action": "Confirmed native A jump, then LT cast 350ms",
+      "index": 0
+    }
+  ],
+  "seenEvents": [],
+  "nativeScenes": [
+    "219"
+  ],
+  "dll": "B4845ABC910D51DB2C1C79F47BA6D39E3A00AC6427EF0E90EC42CA96291B3699",
+  "bankSha256": "F72E01750AC8EFA2A4F4B37FAD0BBC14BA3C7C35FCE5AC7652C82E8EA95700E3",
+  "recorded": true,
+  "scope": "Corvo Bend Time airborne cast, landing and equipment integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
+}

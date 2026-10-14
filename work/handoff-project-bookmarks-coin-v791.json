@@ -1,0 +1,20 @@
+[
+  {
+    "address": "1406156e0",
+    "category": "CoopPickupResearch",
+    "comment": "Currency type1/15 branch adds quantity to arkCpntInventory+16c, emits player event1439ab8f0 and stats67aea0. Runtime786c: ordinary X pickup of exact pickups_coin_emily_lowvalue_4 gives each role0->1, repeated X stays1, peer unchanged; isolated checkpoint restores0 and all quantities. Native LootObject reward841030 caller also records67e200 and6733c0 HUD. Direct replication still under experiment.",
+    "type": "Note"
+  },
+  {
+    "address": "1439acd40",
+    "category": "CoopPickupResearch",
+    "comment": "Exact runtime descriptor789, both restored isolated games: event pickedUp, format bb, types bool;bool;, argument names _isSuccesful;_fromGrapple;, count2 at+24, script callback at+40 non-null. Native LootObject update841500 and exit83fe70 call8848a0(actor,result,event,successVariant,fromGrappleVariant) then882fc0(result) before76ec20 removal. Native variants24 bytes,type0x69,integer payload+8. Candidate790 mirrors this for exact coin only; broader quest/loot behavior and network authority unverified.",
+    "type": "Note"
+  },
+  {
+    "address": "140841030",
+    "category": "CoopPickupResearch",
+    "comment": "2026-10-13 exact retail B671F824. Native LootObject47 award helper:6156e0 currency,67e200 item stats,6733c0 native money HUD. Fixture788b verifies claim76e2b0/reward841030/finish76ec20 both roles, exactly once per epoch. Candidate790 adds pickedUp(true,false)8848a0 and return variant destructor882fc0 before finish, matching841500.790b both role application receipts show5 calls0->1 and duplicate no-op; final cleanup/audit in documentation63 and audit791. Steam shared pickups and general quest effects remain unverified.",
+    "type": "Note"
+  }
+]

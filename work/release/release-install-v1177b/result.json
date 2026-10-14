@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "message": "Installed candidate-npc-combat-v1171: 10 files; backup in d2coop-backup/20261014-172315",
+      "passed": true,
+      "case": "install"
+    },
+    {
+      "message": null,
+      "passed": true,
+      "case": "reinstall_refused"
+    },
+    {
+      "message": "Rolled back: 9 added files removed, 1 originals restored.",
+      "passed": true,
+      "case": "rollback_byte_identical"
+    },
+    {
+      "message": null,
+      "passed": true,
+      "case": "wrong_exe_refused_unchanged"
+    },
+    {
+      "message": null,
+      "passed": true,
+      "case": "modified_master_refused_unchanged"
+    },
+    {
+      "message": null,
+      "passed": true,
+      "case": "steam_install_untouched"
+    }
+  ],
+  "failure": null,
+  "passed": true
+}

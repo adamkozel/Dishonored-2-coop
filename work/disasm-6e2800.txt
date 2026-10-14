@@ -1,0 +1,38 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406E2800: mov         qword ptr [rsp+8],rbx
+  00000001406E2805: push        rdi
+  00000001406E2806: sub         rsp,20h
+  00000001406E280A: mov         rbx,r9
+  00000001406E280D: mov         rdi,rcx
+  00000001406E2810: test        dl,dl
+  00000001406E2812: je          00000001406E2822
+  00000001406E2814: comiss      xmm2,dword ptr [0000000141AB3B00h]
+  00000001406E281B: jbe         00000001406E2822
+  00000001406E281D: mov         r8b,1
+  00000001406E2820: jmp         00000001406E2825
+  00000001406E2822: xor         r8b,r8b
+  00000001406E2825: cmp         byte ptr [r9+2Ch],r8b
+  00000001406E2829: je          00000001406E2838
+  00000001406E282B: mov         byte ptr [r9+2Ch],r8b
+  00000001406E282F: mov         rax,qword ptr [rcx]
+  00000001406E2832: mov         rdx,rbx
+  00000001406E2835: call        qword ptr [rax+50h]
+  00000001406E2838: mov         rax,qword ptr [rdi]
+  00000001406E283B: mov         rdx,rbx
+  00000001406E283E: mov         rcx,rdi
+  00000001406E2841: mov         rbx,qword ptr [rsp+30h]
+  00000001406E2846: add         rsp,20h
+  00000001406E284A: pop         rdi
+  00000001406E284B: jmp         qword ptr [rax+48h]
+  00000001406E284F: int         3
+
+  Summary
+
+     1A7D000 .text

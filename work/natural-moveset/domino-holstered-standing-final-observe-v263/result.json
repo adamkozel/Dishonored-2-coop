@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "stance": "standing",
+  "holstered": true,
+  "checks": [
+    "Exact native Emily Domino item acquired and selected without directly invoking power or VFX",
+    "Controller input produces recorded native PhantasmalLink scenes with reciprocal bindings; phase names and counts are observed, not inferred",
+    "Native selected ground stance plus state72 independently recorded with sword remaining holstered with raw In/Loop/Out phases and reciprocal bindings; existing reader accepts ordinary crouched phases and refuses separately recorded final_Select400ms; native reselection clears the single target; new final phase remains research-only",
+    "Native player state, equipment, raw component/entity and filtered effect samples retained; mana change and targeting outcome remain observations",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and no filtered native Domino effects remain",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.002,
+      "input": "Native LT held 1800ms then released"
+    },
+    {
+      "videoTime": 6.23,
+      "input": "Second native LT1800ms at the same already-selected guard while holstered in the selected ground stance"
+    }
+  ],
+  "dll": "C2ABD4788DA464A0A8DA274C16CB03CCFCFF216680216A88F796017DC270AD8B",
+  "probe": "F3AB49AE6D1400E5236A1F4D46C69A141E1E707094ABFECCD9975C258E4AF6D2",
+  "scope": "Targeted holstered native Domino final-selection observation (no remote binding): exact Emily inventory acquisition, one native LT hold/release, raw PhantasmalLink subscenes, state/equipment/target and filtered effect data. A recorded scene is not proof of successful linking, mana spending or target outcomes. No remote body/VFX or gameplay replication. Full isolated inventory/health and checkpoint recovery plus protected hashes are required."
+}

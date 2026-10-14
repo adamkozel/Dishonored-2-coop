@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nvoid FUN_140441150(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  undefined4 local_18;\r\n  undefined4 local_14;\r\n  float local_10;\r\n  \r\n  if ((*(char *)(param_1 + 0xd2) != '\\0') && (*(char *)(param_1 + 0xd4) == '\\0')) {\r\n    local_18 = *(undefined4 *)(param_1 + 0x120);\r\n    local_14 = *(undefined4 *)(param_1 + 0x124);\r\n    lVar1 = *(longlong *)(param_1 + 8);\r\n    lVar2 = *(longlong *)(param_1 + 0xb0);\r\n    local_10 = *(float *)(param_1 + 0x128);\r\n    lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xdc));\r\n    if ((lVar3 == 0) &&\r\n       (*(float *)(param_1 + 0x134) <= 0.7071067 && *(float *)(param_1 + 0x134) != 0.7071067)) {\r\n      lVar3 = FUN_1407fda30(*(undefined8 *)(lVar2 + 0x308));\r\n      local_10 = local_10 + *(float *)(lVar3 + 4);\r\n    }\r\n    FUN_140774d90(*(undefined8 *)(lVar2 + 0x300),&local_18,*(undefined4 *)(lVar1 + 0x220));\r\n    *(undefined1 *)(param_1 + 0xd4) = 1;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nvoid FUN_140441150(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  undefined4 local_18;\r\n  undefined4 local_14;\r\n  float local_10;\r\n  \r\n  if ((*(char *)(param_1 + 0xd2) != '\\0') && (*(char *)(param_1 + 0xd4) == '\\0')) {\r\n    local_18 = *(undefined4 *)(param_1 + 0x120);\r\n    local_14 = *(undefined4 *)(param_1 + 0x124);\r\n    lVar1 = *(longlong *)(param_1 + 8);\r\n    lVar2 = *(longlong *)(param_1 + 0xb0);\r\n    local_10 = *(float *)(param_1 + 0x128);\r\n    lVar3 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xdc));\r\n    if ((lVar3 == 0) &&\r\n       (*(float *)(param_1 + 0x134) <= 0.7071067 && *(float *)(param_1 + 0x134) != 0.7071067)) {\r\n      lVar3 = FUN_1407fda30(*(undefined8 *)(lVar2 + 0x308));\r\n      local_10 = local_10 + *(float *)(lVar3 + 4);\r\n    }\r\n    FUN_140774d90(*(undefined8 *)(lVar2 + 0x300),&local_18,*(undefined4 *)(lVar1 + 0x220));\r\n    *(undefined1 *)(param_1 + 0xd4) = 1;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

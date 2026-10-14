@@ -1,0 +1,32 @@
+{
+  "created": "2026-10-14T07:29:23.992599+02:00",
+  "program": "Dishonored2.exe B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "runtimeControl": {
+    "take": "natural-moveset/local-native-block-v1011c",
+    "status": "CONFIRMED RUNTIME",
+    "finding": "Local-only control (no relay, NPC stream off): three native enemies engaged the held-blocking client player for ~12 s; health 56 unchanged; zero npc_sword 717950 calls. Two npc_closecombat.damage calls (amount 0, inflictor=attacker, resultFlags 177) were observed.",
+    "failedHarnessTakes": [
+      "local-native-block-v1011 (PowerShell H alias collision, no gameplay)",
+      "local-native-block-v1011b (probe of unspawned audience NPCs, no gameplay)"
+    ]
+  },
+  "static": {
+    "status": "CONFIRMED STATIC",
+    "functions": {
+      "1406357d0": "arkCpntWeaponMeleeNPC victim resolution (renamed D2_WeaponMeleeNPC_ResolveVictimBlock). Victim arkCpntBlock (descriptor 1439edc20) -> 60d750 cone with attacker 878230 bounds centre -> weapon decl+0x180 blockable -> PlayerStateMachine (1439aed60) +0x90 table +0x170 block state -> 859980(state, attacker, component+0x3428 bit2 heavy). Result 2 -> 636140 parry-win damage to attacker; 0/1 -> event 0xe6 {victim, result} to attacker (8112c0 on 810240()+0xc8e8). Then 635f30/634890 end the attack. Not in cone/blockable -> vtable+0x138 (634320) damage path.",
+      "14060d750": "arkCpntBlock attacker-in-cone; requires PlayerStateMachine state 0x2c (state44 arkPlayerStateBlock) and uses arkCpntPlayerCamera (1439d7480) position/forward with decl+0x6c length and +0x70 radius (60d8b0).",
+      "140859980": "arkPlayerStateBlock incoming melee resolution; plays native block impact (859e20) or parry presentations; returns 0 block, 1 parry-lose for attacker, 2 parry-win.",
+      "1405cc280": "arkCpntAICombatAttack event 0xe6 handler: payload result 0 sets blocked flags, 1 -> StartParryLose (1405d0890).",
+      "1405cc5b0": "arkCpntAICombatAttack event 0x49 handler: zero-amount attack-decl+0x220 damage (npc_closecombat) to target; matches the two local control events.",
+      "1407846f0": "arkPlayer damage-event override (vtable+0x140): possession redirect only, then 879270 -> health 717950. Not the block gate."
+    },
+    "vtables": {
+      "arkCpntWeaponMeleeNPC": "141b9cf48 (descriptor 1439ba940)",
+      "arkCpntBlock": "141b99248",
+      "arkCpntPlayerStateMachine": "141c73d58",
+      "arkPlayer": "141c5e428"
+    }
+  },
+  "conclusion": "Relayed contacts called 717950 directly and therefore bypassed the native pre-damage block resolution; zero protection entries in 1004/1008 were expected because block is not a health protection.",
+  "ghidra": "Renamed and bookmarked (category D2Coop) and program saved 2026-10-14."
+}

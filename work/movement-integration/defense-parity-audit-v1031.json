@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-14T09:25:29.466252+02:00",
+  "candidate": "candidate-npc-combat-v1026",
+  "dll": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+  "cases": [
+    {
+      "take": "corvo-defense-presentation-v1030",
+      "passed": true,
+      "scope": "Candidate1026 both-role parity: host Corvo native block impact / timed parry against host-native enemies presented on the client remote Corvo body (bank68 clips357/358) through Steam protocol70; client observer camera films remote Corvo.",
+      "result": {
+        "native": {
+          "relayed": [
+            0,
+            0,
+            0
+          ],
+          "block": 4,
+          "parryLose": 2,
+          "parryWin": 0
+        },
+        "shown": {
+          "wrongClip": 0,
+          "parry": 11,
+          "impact": 13,
+          "all": 193
+        }
+      }
+    }
+  ],
+  "complete": false,
+  "outstanding": [
+    "Crouched/sneak block impacts, heavy attacks and parry-win remain unexercised for both roles.",
+    "Donor clip acting/transition/contact unreviewed."
+  ]
+}

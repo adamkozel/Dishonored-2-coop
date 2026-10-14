@@ -1,0 +1,36 @@
+{
+  "status": "unresolved native crash; bounded test fixture added",
+  "original_failure": {
+    "build": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
+    "evidence": "combat-observation-exit-v1",
+    "confirmed": [
+      "The host reached native death with health zero after a combat observation.",
+      "The client exited with read access violation at RVA584660, address28.",
+      "Ghidra RTTI identifies caller1405a4b00 as arkBTTask_Action_CombatGiveUp.",
+      "Caller phase at task+b0 was one; task+b8 was null when passed to584660.",
+      "AI references had been released on follow_scope_changed shortly before the crash."
+    ],
+    "hypotheses": [
+      "Resuming the ownerless remote Doppelganger's autonomous graph may contribute.",
+      "The task could instead belong to an ordinary world NPC. Original logs lack the owner pointer."
+    ],
+    "not_proved": ["The crashing actor identity", "The exact cause of the host death", "That movement-bank code caused the fault"]
+  },
+  "diagnostics": {
+    "build": "A38195E8EB05E6F8BB6153289B6BDCE6F29488142D5D8B7A58CBD04DF4075B70",
+    "scope": "ReadProcessMemory at the exact observed exception only: task, vtable, actor, reciprocal handle candidate, graph phase/context. Does not consume exceptions or patch native behavior.",
+    "regression": "../natural-moveset/air-bank-v2-priority/result.json",
+    "second_death": "death-without-crash-v1",
+    "result": "13 action/pause checks passed. A later host death after an obstructed slide take did not crash the client; this weakens any claim that releasing AI alone is sufficient."
+  },
+  "movement_fixture": {
+    "build": "2EA179BD0F39E50C0CFD6E885BD298EA478ABD84DA2CC1C87809AA1A3BE0D5F8",
+    "command": "coop_movement_fixture 60000",
+    "targets": ["ld_spawner_ramsey_escape", "ld_spawner_guard_escape_2", "ld_spawner_guard_escape_1"],
+    "scope": "Developer-only Dunwall fixture; native Decision and Reflex pause references on exact reciprocal NPCs. Attacking targets are refused. No health writes, global AI switch, animation changes, or network world-authority claims.",
+    "lifetime": "Nonrenewable 60 seconds, explicit cancellation, native pause, peer/scope change and pre-checkpoint teardown. Exactly six references per game.",
+    "tests": "../natural-moveset/movement-fixture-v2/result.json",
+    "result": "Both roles passed exact acquisition, duplicate rejection, cancellation, pause and expiry with balanced native releases and unchanged player health."
+  },
+  "next": "Capture a task owner if the crash recurs; do not add a generic native null-pointer patch or claim the lifecycle failure fixed."
+}

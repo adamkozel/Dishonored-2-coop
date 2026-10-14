@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "F474471D41F50917DD57726C3756523825094DD4AD85A1F6E6D7A2CE17BF48B3",
+  "checks": [
+    "Two explicit native transitions produce0->1->2->1->0; duplicate open/close are no-ops; peer remains unchanged",
+    "Native Openable API proof only; door state/animation/event machinery runs in engine, no network synchronization yet",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "yaw": 270,
+        "name": "unlocked-door-tap",
+        "distance": 1.0,
+        "stance": 0
+      },
+      "key": "client-unlocked-door-tap",
+      "count": 132,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Local native Openable74a400 request proof with ordinary native open/close parameters and component resume. Exact identity, unlinked/unlocked, stable state guards. Both game views recorded; no shared door networking yet."
+}

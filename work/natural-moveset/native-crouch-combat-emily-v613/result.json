@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "A1860B6C37F649281A1312A40EAF270EE37E65B497F64804B4169523A682B6F5",
+  "checks": [
+    "Ordinary crouched RT native combat observed; exact scene contract needs inspection",
+    "Native crouched RT250ms facing guard2; source-only combat context research, no new binding claim.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "yaw": 90,
+        "name": "crouch-combat",
+        "distance": 1.15,
+        "stance": 1
+      },
+      "key": "client-crouch-combat",
+      "count": 87,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Source-only native crouched targeted combat observation, ordinary RT250ms. Captures exact source phases/state/target and actual game video. No new remote crouched combat binding or shared victim outcome is claimed. All checkpoint inventory/health and14 protected files restored."
+}

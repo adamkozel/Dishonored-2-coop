@@ -1,0 +1,121 @@
+# inspection.log
+
+Original: [work/natural-moveset/native-lethal-research-v602/inspection.log](<../../../../work/natural-moveset/native-lethal-research-v602/inspection.log>)
+
+SHA-256: `38BE77E3B15B6A49FEFCF606590865012A21F0619D472D9B58F89DA8E7E4D18F`; 2086 bytes.
+
+## Original saved record
+
+````text
+{
+  "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "nativeState13Vtable": "0x141c83468",
+  "stringXrefs": [
+    "0x140863799",
+    "0x1408637b5"
+  ],
+  "functions": [
+    {
+      "begin": "0x140863760",
+      "end": "0x1408639d5",
+      "unwind": "0x1420c9d9c"
+    }
+  ],
+  "vtableSlots": [
+    {
+      "slot": "0x0",
+      "address": "0x1408bb170"
+    },
+    {
+      "slot": "0x8",
+      "address": "0x140860dc0"
+    },
+    {
+      "slot": "0x10",
+      "address": "0x140399620"
+    },
+    {
+      "slot": "0x18",
+      "address": "0x1400998b0"
+    },
+    {
+      "slot": "0x20",
+      "address": "0x140861bd0"
+    },
+    {
+      "slot": "0x28",
+      "address": "0x140862820"
+    },
+    {
+      "slot": "0x30",
+      "address": "0x140854890"
+    },
+    {
+      "slot": "0x38",
+      "address": "0x140854910"
+    },
+    {
+      "slot": "0x40",
+      "address": "0x140863270"
+    },
+    {
+      "slot": "0x48",
+      "address": "0x140854d00"
+    },
+    {
+      "slot": "0x50",
+      "address": "0x140853d40"
+    },
+    {
+      "slot": "0x58",
+      "address": "0x140860eb0"
+    },
+    {
+      "slot": "0x60",
+      "address": "0x140862350"
+    },
+    {
+      "slot": "0x68",
+      "address": "0x140863760"
+    },
+    {
+      "slot": "0x70",
+      "address": "0x140681680"
+    },
+    {
+      "slot": "0x78",
+      "address": "0x140854940"
+    },
+    {
+      "slot": "0x80",
+      "address": "0x1400998b0"
+    },
+    {
+      "slot": "0x88",
+      "address": "0x1400998b0"
+    },
+    {
+      "slot": "0x90",
+      "address": "0x1408636a0"
+    },
+    {
+      "slot": "0x98",
+      "address": "0x1408629c0"
+    },
+    {
+      "slot": "0xa0",
+      "address": "0x140863300"
+    },
+    {
+      "slot": "0xa8",
+      "address": "0x1400998b0"
+    },
+    {
+      "slot": "0xb0",
+      "address": "0x1400998b0"
+    }
+  ],
+  "scope": "Exact PE exception directory boundaries and raw native table. Slot semantics need Ghidra/runtime evidence."
+}
+
+````

@@ -1,0 +1,21 @@
+#!/bin/sh
+# Dishonored 2 co-op repository guard (install: cp tools/repo/pre-commit .git/hooks/pre-commit).
+# Rejects staged binaries, oversized files, files under never-committed folders
+# and any staged text containing a SteamID64 (7656119 + 10 digits).
+fail=0
+git diff --cached --name-only --diff-filter=AM -z | while IFS= read -r -d '' f; do
+  case "$f" in
+    work/asset-game/*|work/lab-game/*|work/lab-instances/*|work/build/*|work/tools/*|outputs/d2-coop-lab/bin/*|outputs/d2-coop-lab/assets/*|work/release/online-session-v1179/*|*/profile/*)
+      echo "pre-commit: never-committed folder: $f" >&2; exit 1;;
+    *.mp4|*.bin|*.dll|*.exe|*.pdb|*.lib|*.obj|*.zip|*.7z|*.gz|*.png|*.jpg|*.jpeg|*.ndjson|*.resources|*.index|*.pck|*.bk2|*.blend|*.voidIndex|*.voidRessources|*.md6*)
+      echo "pre-commit: binary/media type: $f" >&2; exit 1;;
+  esac
+  size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
+  case "$f" in
+    *.json|*.log|*.txt|*.csv|*.md|*.html|*.xml) cap=262144;;
+    *) cap=2097152;;
+  esac
+  if [ "$size" -gt "$cap" ]; then echo "pre-commit: $f is $size bytes (cap $cap)" >&2; exit 1; fi
+  if git show ":$f" 2>/dev/null | grep -Eq '7656119[0-9]{10}'; then echo "pre-commit: $f contains a SteamID64" >&2; exit 1; fi
+done || fail=1
+exit $fail

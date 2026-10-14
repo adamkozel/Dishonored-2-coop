@@ -1,0 +1,21 @@
+{
+  "bookmarks": [
+    {
+      "address": "140717950",
+      "category": "D2Coop_NpcCombat_850",
+      "comment": "2026-10-13 NPC combat research850-852 (experimental, not accepted): decompilation shows 717950 calls virtual D0 damage evaluation, F8 damage application, E8 death callback below0.5HP, E0 post-damage callback, and queues a144-byte event when actor+D1 bit8 is set. Setter7185b0 only clamps/currentHP and emits property change; it is not an equivalent death/reaction path. New npc_combat.h reconstructs ordinary player_sword damage from local declaration/native constructors, intercepts client hits as requests, host orders repeated nonfatal outcomes on generation/epoch/arm/nonce scoped NPC bindings. Unsupported/fatal/queued hits stop adapter. Take851 failed before any shared damage because an unrelated pose channel timed out; protected baseline restored. Candidate852 changes retirement to per actor; runtime evidence pending. Evidence work/movement-integration/npc-combat-research-v850, work/natural-moveset/npc-combat-v851. Analyst interpretations, not official symbol names."
+    }
+  ],
+  "receipt": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"address\":\"140717950\",\"category\":\"D2Coop_NpcCombat_850\",\"comment\":\"2026-10-13 NPC combat research850-852 (experimental, not accepted): decompilation shows 717950 calls virtual D0 damage evaluation, F8 damage application, E8 death callback below0.5HP, E0 post-damage callback, and queues a144-byte event when actor+D1 bit8 is set. Setter7185b0 only clamps/currentHP and emits property change; it is not an equivalent death/reaction path. New npc_combat.h reconstructs ordinary player_sword damage from local declaration/native constructors, intercepts client hits as requests, host orders repeated nonfatal outcomes on generation/epoch/arm/nonce scoped NPC bindings. Unsupported/fatal/queued hits stop adapter. Take851 failed before any shared damage because an unrelated pose channel timed out; protected baseline restored. Candidate852 changes retirement to per actor; runtime evidence pending. Evidence work/movement-integration/npc-combat-research-v850, work/natural-moveset/npc-combat-v851. Analyst interpretations, not official symbol names.\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"address\":\"140717950\",\"category\":\"D2Coop_NpcCombat_850\",\"comment\":\"2026-10-13 NPC combat research850-852 (experimental, not accepted): decompilation shows 717950 calls virtual D0 damage evaluation, F8 damage application, E8 death callback below0.5HP, E0 post-damage callback, and queues a144-byte event when actor+D1 bit8 is set. Setter7185b0 only clamps/currentHP and emits property change; it is not an equivalent death/reaction path. New npc_combat.h reconstructs ordinary player_sword damage from local declaration/native constructors, intercepts client hits as requests, host orders repeated nonfatal outcomes on generation/epoch/arm/nonce scoped NPC bindings. Unsupported/fatal/queued hits stop adapter. Take851 failed before any shared damage because an unrelated pose channel timed out; protected baseline restored. Candidate852 changes retirement to per actor; runtime evidence pending. Evidence work/movement-integration/npc-combat-research-v850, work/natural-moveset/npc-combat-v851. Analyst interpretations, not official symbol names.\"}"
+    },
+    "isError": false
+  }
+}

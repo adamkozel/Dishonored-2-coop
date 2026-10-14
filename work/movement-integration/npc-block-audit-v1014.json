@@ -1,0 +1,87 @@
+{
+  "at": "2026-10-14T07:30:01.152759+02:00",
+  "candidate": "candidate-npc-combat-v1012",
+  "dll": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+  "findings": "npc-block-native-v1011.json",
+  "cases": [
+    {
+      "take": "local-native-block-v1011",
+      "candidate": "70ACF63FB8D5D2E21072996D2234A11D54DDEA82EDF015378FF1324D8E1547B7",
+      "passed": false,
+      "scope": "Failed harness run: Harness failure before gameplay sampling: PowerShell alias H shadowed the handle helper.",
+      "result": {
+        "failure": "Cannot locate the history for Id 189269860."
+      }
+    },
+    {
+      "take": "local-native-block-v1011b",
+      "candidate": "70ACF63FB8D5D2E21072996D2234A11D54DDEA82EDF015378FF1324D8E1547B7",
+      "passed": false,
+      "scope": "Failed harness run: Harness failure before gameplay sampling: probed unspawned audience NPCs.",
+      "result": {
+        "failure": "Native query failed --ai-targets"
+      }
+    },
+    {
+      "take": "local-native-block-v1011c",
+      "candidate": "70ACF63FB8D5D2E21072996D2234A11D54DDEA82EDF015378FF1324D8E1547B7",
+      "passed": true,
+      "scope": "Local native ground truth (no relay, NPC stream off, build1002): held block against three engaged native enemies for ~12s, health56 unchanged, zero npc_sword damage calls; two zero-amount npc_closecombat calls. Observation, not a co-op acceptance.",
+      "result": {
+        "healthBefore": 56,
+        "healthAfter": 56,
+        "npcSwordDamageCalls": 0,
+        "closeCombatZeroCalls": 2
+      }
+    },
+    {
+      "take": "npc-native-block-v1013",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": false,
+      "scope": "Failed harness run: Harness failure before any relayed contact: PowerShell 7 read-only $Error assignment in the aim helper. Restoration passed.",
+      "result": {
+        "failure": "Cannot overwrite variable Error because it is read-only or constant."
+      }
+    },
+    {
+      "take": "npc-native-block-v1013b",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": false,
+      "scope": "Failed harness run: Harness failure: run under Windows PowerShell 5.1, whose File.Move overload is missing; commands and fixture restore failed and its protected-file report was a 5.1 false positive. Independent PowerShell 7 recheck found all 14 protected files unchanged; fixture was restored before 1013c.",
+      "result": {
+        "failure": "Cannot find an overload for \"Move\" and the argument count: \"3\"."
+      }
+    },
+    {
+      "take": "npc-native-block-v1013c",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": true,
+      "scope": "Opt-in1002: actual client native held-block scene with controller facing toward the closest engaged enemy, at least one relayed enemy sword contact defended by native 1406357d0-equivalent resolution (no 717950 call), host-acknowledged outcome and native attacker reaction event, clone40 and duplicate rejection. Not timed parry or host-attacker recoil/stagger acceptance.",
+      "result": {
+        "applied": 0,
+        "hostParryLose": 0,
+        "hostReactionFailures": 0,
+        "swordDamageCalls": 0,
+        "hostReactions": 2,
+        "blocked": 2,
+        "initial": 56,
+        "parryWin": 0,
+        "hostParryWin": 0,
+        "final": 56,
+        "hostBlocked": 2,
+        "parryLose": 0,
+        "defended": 2,
+        "expectedLoss": 0,
+        "consumed": 2,
+        "nativeBlockSamples": 17,
+        "duplicateRejected": true
+      }
+    }
+  ],
+  "complete": false,
+  "outstanding": [
+    "Timed parry (parry-lose/parry-win) not exercised; parry-win attacker stagger (636140) is not mirrored to the host.",
+    "Host attacker block reaction is a posted native event count, not visually verified.",
+    "Heavy/unblockable attacks, side/rear arcs under movement and latency, multiple simultaneous attackers, other damage families (npc_closecombat kicks) remain unverified."
+  ]
+}

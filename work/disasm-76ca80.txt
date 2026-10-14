@@ -1,0 +1,56 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014076CA80: mov         qword ptr [rsp+20h],rbx
+  000000014076CA85: push        rbp
+  000000014076CA86: push        rsi
+  000000014076CA87: push        rdi
+  000000014076CA88: push        r13
+  000000014076CA8A: push        r14
+  000000014076CA8C: sub         rsp,50h
+  000000014076CA90: movzx       ebx,dx
+  000000014076CA93: mov         rdx,qword ptr [rcx+0000000000000100h]
+  000000014076CA9A: mov         rsi,rcx
+  000000014076CA9D: mov         ecx,dword ptr [rcx+0000000000000138h]
+  000000014076CAA3: mov         r13,r9
+  000000014076CAA6: xor         edi,edi
+  000000014076CAA8: or          r9d,0FFFFFFFFh
+  000000014076CAAC: test        ecx,ecx
+  000000014076CAAE: jle         000000014076CAD1
+  000000014076CAB0: mov         rdx,qword ptr [rdx+28h]
+  000000014076CAB4: movsx       rax,di
+  000000014076CAB8: mov         eax,dword ptr [rdx+rax*4]
+  000000014076CABB: and         eax,0FFFFFFh
+  000000014076CAC0: cmp         eax,0FFFFFFh
+  000000014076CAC5: jne         000000014076CAD5
+  000000014076CAC7: inc         di
+  000000014076CACA: movsx       eax,di
+  000000014076CACD: cmp         eax,ecx
+  000000014076CACF: jl          000000014076CAB4
+  000000014076CAD1: movzx       edi,r9w
+  000000014076CAD5: cmp         bx,word ptr [000000014231DA40h]
+  000000014076CADC: mov         rcx,qword ptr [00000001439A5290h]
+  000000014076CAE3: mov         r14,qword ptr [rcx+0000000000060410h]
+  000000014076CAEA: lea         rbp,[rcx+0000000000060280h]
+  000000014076CAF1: cmove       bx,di
+  000000014076CAF5: cmp         bx,di
+  000000014076CAF8: jne         000000014076CCF0
+  000000014076CAFE: movzx       edx,r8b
+  000000014076CB02: test        r8b,r8b
+  000000014076CB05: je          000000014076CCD8
+  000000014076CB0B: dec         edx
+  000000014076CB0D: je          000000014076CCC0
+  000000014076CB13: mov         eax,dword ptr [rsi+1Ch]
+  000000014076CB16: and         al,0Ch
+  000000014076CB18: cmp         al,8
+  000000014076CB1A: jb          000000014076CC97
+  000000014076CB20: 4C
+
+  Summary
+
+     1A7D000 .text

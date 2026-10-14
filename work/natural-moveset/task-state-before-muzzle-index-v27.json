@@ -1,0 +1,4010 @@
+{
+  "UpdatedAt": "2026-10-11T10:28:59.230960+02:00",
+  "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
+  "GuardPoseLink": {
+    "Passed": true,
+    "DllSha256": "CD1F0479923F520C490B0860AEF133927B5F683BF685FDE2A53F45B1B614F412",
+    "Record": "guard-link-verification.json",
+    "Checks": [
+      "No binding or mutation when only client arms",
+      "Fresh incarnation handshake, both native AI holds, host movement, cached/rendered client pose and animated body alignment",
+      "Fixed lease expiry and duplicate-arm refusal",
+      "Guard poses expire while ordinary Steam traffic stays connected",
+      "client native pause releases both references and stops mutations",
+      "host native pause releases both references and stops mutations",
+      "Checkpoint reload releases controls and requires new binding, nonce and world epoch"
+    ],
+    "Scope": "Eight-second, explicitly armed, host-to-client pose transfer for one authored guard with native decision/reflex pause. Host movement stimulus is a bounded native transform nudge. Combat must stay inactive. Does not establish combat/damage/quest authority, arbitrary NPC support, or complete remote animation.",
+    "MaxPoseError": 1.363813194366535e-07,
+    "MaxAnimatedBodyError": 1.1400000005323818e-05,
+    "BodyObservations": 68,
+    "ReloadClient": true,
+    "DisconnectHost": false,
+    "HistoricalFullRecord": "guard-link-full-verification.json",
+    "HistoricalFullRecordDll": "31D5221EC8FC5360249FC49F2B28C5D3027973CB44B25B0BC13F55B5C73C3916",
+    "CombatAuthorityImplemented": false,
+    "NaturalAiNavigationVerified": false,
+    "SharedCheckpointReloadImplemented": false
+  },
+  "AiDecisionScope": {
+    "DllSha256": "31D5221EC8FC5360249FC49F2B28C5D3027973CB44B25B0BC13F55B5C73C3916",
+    "Scope": "Two-second reference-counted pause of AIDecision only. Independent native scheduler reads. Does not establish complete AI authority or host NPC pose application.",
+    "Record": "ai-decision-hold-verification.json",
+    "Target": "client ld_spawner_guard_tutorial_1",
+    "Invalidated": 0,
+    "PostLoadControl": "ai-postload-control.json",
+    "Passed": true,
+    "Released": 4,
+    "Acquired": 4,
+    "Checks": [
+      "Host mutation refused",
+      "Only one client decision component removed and restored; duplicate did not renew; host and Steam continued",
+      "Explicit cancellation",
+      "client native pause releases hold and refuses reacquisition",
+      "host native pause releases hold and refuses reacquisition"
+    ],
+    "CurrentBuildReloadAndDisconnectTested": false,
+    "HistoricalFullRecord": "ai-decision-hold-before-guard-verification.json"
+  },
+  "UserSteering": {
+    "PreserveCorvoEmilyRoles": true,
+    "CanonicalSharedCheckpointRequired": true,
+    "BothReadyBeforeResume": true,
+    "ManualRequestFromEitherPlayerReloadsBoth": true,
+    "Required": true,
+    "Implemented": false,
+    "DuplicateRequestsProduceOneReset": true,
+    "EitherPlayerDeathShowsBothNativeDeathScreens": true
+  },
+  "Live": [
+    {
+      "Role": "host",
+      "Status": {
+        "role": 0,
+        "engineThread": 58060,
+        "screenTransportPumps": 6924,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 65536,
+        "connection": 2728830185,
+        "connectionState": 3,
+        "sent": 24299,
+        "received": 24913,
+        "rejected": 0,
+        "lastCommand": 622971842,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -34.299999,
+          -154.800003,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 24913,
+        "remotePosition": [
+          -28.903521,
+          -152.034683,
+          66.829102
+        ],
+        "probeActorHandle": 209916411,
+        "probeFollowEnabled": true,
+        "probeFollowExact": true,
+        "probeRenderPosition": [
+          -28.903521,
+          -152.034683,
+          66.829102
+        ],
+        "probeOffset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 6,
+        "remoteCinematicEpoch": 7,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 10,
+        "posePacketBytes": 1156,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          23782,
+          82,
+          76,
+          55
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "poseSmoothingEnabled": true,
+        "poseInterpolationMs": 80.0,
+        "probeTargetPosition": [
+          -28.903521,
+          -152.034683,
+          66.829102
+        ],
+        "locomotionEnabled": true,
+        "locomotionApplied": 82061,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "bodyProbeApplied": 0,
+        "bodyProbeRefused": 0,
+        "bodyProbeThread": 0,
+        "bodyStreamEnabled": false,
+        "bodyStreamApplied": 0,
+        "localBodyPoseValid": 1,
+        "remoteBodyPoseValid": 1,
+        "nativeCrouchReferenceReady": false,
+        "nativeCrouchJointCount": 0,
+        "bodyCrouchHelpersApplied": 0,
+        "bodyCrouchUpright": false,
+        "bodyPublicationAddress": "0x7ffa7c341520",
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      }
+    },
+    {
+      "Role": "client",
+      "Status": {
+        "role": 1,
+        "engineThread": 45728,
+        "screenTransportPumps": 6651,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 0,
+        "connection": 3308518467,
+        "connectionState": 3,
+        "sent": 24913,
+        "received": 24299,
+        "rejected": 0,
+        "lastCommand": 622972367,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.903521,
+          -152.034683,
+          66.829102
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 24299,
+        "remotePosition": [
+          -34.299999,
+          -154.800003,
+          66.403648
+        ],
+        "probeActorHandle": 209916390,
+        "probeFollowEnabled": true,
+        "probeFollowExact": true,
+        "probeRenderPosition": [
+          -34.299999,
+          -154.800003,
+          66.403648
+        ],
+        "probeOffset": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 11,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 11,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 7,
+        "remoteCinematicEpoch": 6,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 10,
+        "posePacketBytes": 1156,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          23325,
+          80,
+          6,
+          5
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "poseSmoothingEnabled": true,
+        "poseInterpolationMs": 80.0,
+        "probeTargetPosition": [
+          -34.299999,
+          -154.800003,
+          66.403648
+        ],
+        "locomotionEnabled": true,
+        "locomotionApplied": 86189,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "bodyProbeApplied": 0,
+        "bodyProbeRefused": 0,
+        "bodyProbeThread": 0,
+        "bodyStreamEnabled": false,
+        "bodyStreamApplied": 0,
+        "localBodyPoseValid": 1,
+        "remoteBodyPoseValid": 1,
+        "nativeCrouchReferenceReady": false,
+        "nativeCrouchJointCount": 0,
+        "bodyCrouchHelpersApplied": 0,
+        "bodyCrouchUpright": false,
+        "bodyPublicationAddress": "0x7ffa7c341520",
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      }
+    }
+  ],
+  "CheckpointResearch": {
+    "DllSha256": "CD1F0479923F520C490B0860AEF133927B5F683BF685FDE2A53F45B1B614F412",
+    "NativeRoleRestorationPassed": true,
+    "AutomaticRoleRestorationBeforeGameplay": true,
+    "ExplicitLocalArmingRequired": true,
+    "SourceCheckpointSha256": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09",
+    "SourceRole": "Corvo",
+    "RestoredRole": "Emily",
+    "RoleRestorationRecord": "native-loading-character-verification.json",
+    "LoadingHoldRecord": "native-loading-hold-verification.json",
+    "NativeCharacterRoutineRva": "0x8a7650",
+    "NativeMaintenanceRoutineRva": "0x8ab380",
+    "NativeLoadingSwitchRva": "0x7885b0",
+    "NativeLogicDuringRestoration": 15,
+    "NativeWorldPhaseDuringRestoration": 3,
+    "ReplacementQueueEmptyBeforeRelease": true,
+    "ReplacementDisplacement": 0,
+    "PreservedNpcIdentities": 64,
+    "MovementDistance": 0.8758343964471809,
+    "BoundedLocalLoadingHoldMilliseconds": 2000,
+    "SteamTrafficDuringHoldVerified": true,
+    "BinarySaveOrMetadataModifiedByConversion": false,
+    "BodyDefinitionVerifiedBeforeGameplay": true,
+    "CheckpointFilesAfterExperiments": [
+      {
+        "File": "checkpoint.dat",
+        "Hash": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09",
+        "Expected": "9D79B4115AF4E13D8341C3CDC46F2B56B05A1E1D07CB0E086D5A7C988809EA09"
+      },
+      {
+        "File": "game.details",
+        "Hash": "FD8E89DC59CBE8503150BD933A28C6F88095385CB60A1087FEDF466C92453194",
+        "Expected": "FD8E89DC59CBE8503150BD933A28C6F88095385CB60A1087FEDF466C92453194"
+      },
+      {
+        "File": "screenshot.png",
+        "Hash": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D",
+        "Expected": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D"
+      }
+    ],
+    "NativeCommandObservers": [
+      "LoadGame",
+      "RestartFromCheckpoint",
+      "RestartFromMemoryCheckpoint"
+    ],
+    "EarlierPostGameplayConversionRecord": "native-character-restore-verification.json",
+    "EarlierNativeUiRecord": "native-character-ui-guards-verification.json",
+    "EarlierNativeUiRecordDll": "DC5D01BF30EBD254CF0197625F911ED0A08078DFA9A144C9CD25102390975E70",
+    "F9Verified": false,
+    "GameOverDispatchVerified": false,
+    "CanonicalSaveTransferImplemented": false,
+    "SharedResetTransactionImplemented": false,
+    "BothReadyLoadingBarrierImplemented": false,
+    "Scope": "Explicitly armed client-only Dunwall load experiment. An unchanged Corvo checkpoint becomes Emily while the new world remains in native loading state 15, then a two-second local hold precedes gameplay. Position and 64 authored NPC identities preserved. No network reset, save transfer, general quest/inventory/power compatibility or both-ready transaction."
+  },
+  "SharedCheckpointFixture": {
+    "ObservedAt": "2026-10-08T23:16:45.4355607+02:00",
+    "DllSha256": "05EECCD0D21B4544C6A7A4D000A7E347694B9559313A6548B80A40B354A4E4FE",
+    "Passed": true,
+    "Reports": [
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-client-verification.json",
+        "Passed": true
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-host-verification.json",
+        "Passed": true
+      },
+      {
+        "Report": "shared-checkpoint-duplicates-verification.json",
+        "Passed": true
+      },
+      {
+        "Report": "shared-checkpoint-host-delay-host-verification.json",
+        "Passed": true
+      },
+      {
+        "Report": "shared-checkpoint-mismatch-verification.json",
+        "Passed": true
+      }
+    ],
+    "Scope": "Fixed, byte-identical pre-staged Dunwall SLOT82. Native reload request from either side, exactly one load each, restored Corvo/Emily, both-ready gate. Client and host delay, simultaneous/repeated requests, either peer disconnect to native pause, mismatched digest refusal and rearm recovery verified.",
+    "NativeUiVisuallyVerified": false,
+    "UiCaptureFailure": "foreground window did not report a process id",
+    "SaveTransferImplemented": false,
+    "DeathPropagationImplemented": false,
+    "FullCoop": false,
+    "Backup": "work/verified-shared-checkpoint-05ee"
+  },
+  "PreviousBroadMilestoneDll": "CD1F0479923F520C490B0860AEF133927B5F683BF685FDE2A53F45B1B614F412",
+  "SharedRecovery": {
+    "ObservedAt": "2026-10-09T00:16:20.0210382+02:00",
+    "Passed": true,
+    "DllSha256": "7623D6B9FD668B533B936F1252B94D7EF0C393F1A2A4B108DAA3BF7F6E706FC6",
+    "Reports": [
+      {
+        "Report": "avatar-ai-ownership-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:04:26.1943044+02:00",
+        "Sha256": "326E5BB9C6A1FC6DDFE8164B552383608740522922ECB275DEDDDC3B92F60892"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-08T23:58:31.4199441+02:00",
+        "Sha256": "25BFDFF546CC4B3642178DBF69AAA6FF69246FABDB79F5062A6FE4D5359E8D49"
+      },
+      {
+        "Report": "shared-checkpoint-host-delay-host-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:04:38.5180775+02:00",
+        "Sha256": "448F00302092260C5D3DFF657EB288922A366881E10242AD3D1E001A0B25B671"
+      },
+      {
+        "Report": "shared-checkpoint-duplicates-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:02:11.3519104+02:00",
+        "Sha256": "A5A5B35E1273F8090BD94932D2F28D6B59AC6E36DC208BED7FADF58FB5AEAA10"
+      },
+      {
+        "Report": "shared-checkpoint-mismatch-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:04:43.517158+02:00",
+        "Sha256": "A3775E70778A71487C6565A6450BEE24434EA7464D023C5054B9C5EDC5C888D7"
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-client-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:04:57.4123507+02:00",
+        "Sha256": "BAFB5AB13778833C8752ED652D0A916D3930EA85CAC7BE2AEAFB571F00D64ED2"
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-host-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:10:56.7907621+02:00",
+        "Sha256": "7CF808FCC2C6D63E22638374F415446F2F090EEE2AA415638631381B5D3F8FE7"
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-client-loading-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:11:44.0233+02:00",
+        "Sha256": "3AE1564797F994E0C757444E2734CB52EBD46FBBE85D1AA1858ABB4B6C8B1074"
+      },
+      {
+        "Report": "shared-checkpoint-disconnect-host-loading-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:12:18.7185473+02:00",
+        "Sha256": "145E9085B9DAAC27784024E7E9905ACB873A6BA8354B629B7F097C134A58A04D"
+      },
+      {
+        "Report": "session-disconnect-client-gameplay-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:12:52.8647609+02:00",
+        "Sha256": "1709A01655F9B286721FDE0128FB6B029D67180D225ABCFF441949D999B40D2A"
+      },
+      {
+        "Report": "session-disconnect-host-death-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:13:26.4572047+02:00",
+        "Sha256": "536AA4BA899EF8D7CA67D97E14CFF066F03D3084679FB436642B1527D35B9ED4"
+      },
+      {
+        "Report": "shared-death-client-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:01:07.6000488+02:00",
+        "Sha256": "EFDC0025AE75A473832EFBF3348CC7C04B9AB6999DA870DBCBD34A00E8F659CF"
+      },
+      {
+        "Report": "shared-death-host-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:01:26.6842784+02:00",
+        "Sha256": "0A9578DF4CCDE88658A50C3CB757482AE318C3A656FBC82330BFF123BF43D445"
+      },
+      {
+        "Report": "shared-death-concurrent-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:01:39.4082866+02:00",
+        "Sha256": "BB466F503FA905C5CF7C9535C210AA2056A794CA406849B66E9FA6769308BF5A"
+      },
+      {
+        "Report": "shared-death-host-from-pause-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:01:59.0021095+02:00",
+        "Sha256": "BA0B6D20E7F250024AA94E1E51170D4968B391189A3D6E31A98CF1904CC3F426"
+      },
+      {
+        "Report": "native-loading-character-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:14:34.9485765+02:00",
+        "Sha256": "6C5B6A8A139FF76FBA432622982CF6A43FD8D63A5A0FFF915B4028DB1157E86D"
+      },
+      {
+        "Report": "native-loading-hold-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:14:02.0826431+02:00",
+        "Sha256": "8B12B7F24BD5A2DDBBA884A2AA9AAFD4986C5334F86FB73B3A0C1F14680FDAB9"
+      },
+      {
+        "Report": "guard-link-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:15:27.425962+02:00",
+        "Sha256": "980007A2C7E18CDC71E4024354C5F46452FFAB8F459F9EF5EAF5ECBAFECDD033"
+      },
+      {
+        "Report": "world-observation-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:15:44.7345825+02:00",
+        "Sha256": "2D9AAA61E53771428B48AD9F9CF006DD0E8A73255D5AD6E6C3D1C77ECF6BC806"
+      },
+      {
+        "Report": "locomotion-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:04:20.4145954+02:00",
+        "Sha256": "D743F158B62DA1846EA72A08651CA3EB31A65AEF317F5F2FEC7CC4E084C10D2F"
+      },
+      {
+        "Report": "native-reconnect-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:16:02.2659921+02:00",
+        "Sha256": "940611244BCFD293FEA88A255256520ECCF102C85FBA91D2516E55848BB5BC50"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:16:19.50909+02:00",
+        "Sha256": "61FC9CEF5382A525FCDE231EF5AB706AC1434EB3B9241FBA08CBE036A76DA263"
+      },
+      {
+        "Report": "steam-transport-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:02:13.8635551+02:00",
+        "Sha256": "1CC0DB4C6C89C83553DBD4E4A711B523288F209E30DFD8FEEC770A823417F9CA"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T00:16:19.5827833+02:00",
+        "Sha256": "597F6A70E1701AF019D0F2737386427E8EE3A1139244557015B4EBAB48A829CB"
+      }
+    ],
+    "Scope": "Fixed byte-identical pre-staged Dunwall SLOT82. Native reload requests and either natural fall death coordinate one shared reset with pre-gameplay Corvo/Emily restoration and both-ready gate. Previously enabled counterpart presentation returns once. Native UI state and Flash bindings inspected, without screenshot verification.",
+    "CanonicalDigest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+    "SharedReload": true,
+    "SharedDeath": true,
+    "NativeGameOverState": 13,
+    "BothReadyGate": true,
+    "RolePreservation": true,
+    "CounterpartRestoredAfterReset": true,
+    "EitherLoadingPeerLossPauses": true,
+    "LostGameplaySessionPauses": true,
+    "NativeUiVisuallyVerified": false,
+    "SaveTransferImplemented": false,
+    "ArbitraryCheckpointSelection": false,
+    "SharedCombat": false,
+    "SharedWorldAuthority": false,
+    "CampaignSupport": false,
+    "TwoAccountOnlineVerified": false,
+    "PlayableCoop": false,
+    "CurrentLive": [
+      {
+        "Role": "host",
+        "Pid": 41728,
+        "GameLogic": 1,
+        "Map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "Epoch": 21,
+        "Follow": true,
+        "Locomotion": true,
+        "Fresh": true,
+        "ProbeHandle": 209916411
+      },
+      {
+        "Role": "client",
+        "Pid": 43968,
+        "GameLogic": 1,
+        "Map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "Epoch": 11,
+        "Follow": true,
+        "Locomotion": true,
+        "Fresh": true,
+        "ProbeHandle": 209916390
+      }
+    ]
+  },
+  "PlayerStance": {
+    "ObservedAt": "2026-10-09T00:29:25.2042145+02:00",
+    "Passed": true,
+    "DllSha256": "0247FCAC6E613490ECC59A19D1077398634D3375EFC4974A043EE8102C23A1E5",
+    "Reports": [
+      {
+        "Report": "player-stance-verification.json",
+        "Passed": true,
+        "Sha256": "CB019EB22BA93C418828A0371401210D6FAD8150A1B0A2525A8526025A3D7C56",
+        "ObservedAt": "2026-10-09T00:23:31.6774498+02:00"
+      },
+      {
+        "Report": "avatar-ai-ownership-verification.json",
+        "Passed": true,
+        "Sha256": "229CEAEC4E3569C99AF686285F67B0EE56D9A25E1E19A581849210B511EC32C9",
+        "ObservedAt": "2026-10-09T00:25:42.5050605+02:00"
+      },
+      {
+        "Report": "steam-transport-verification.json",
+        "Passed": true,
+        "Sha256": "57DD7B3FA081708ECFA80DB6CEE3836EC27E4C772FD83D953BDA497FD6701DD8",
+        "ObservedAt": "2026-10-09T00:23:34.2492305+02:00"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "Sha256": "F58C43A25D02A8FD6752E440AED9C9129DA53248920D4BC18DF4362BBC085FDD",
+        "ObservedAt": "2026-10-09T00:23:47.1101398+02:00"
+      },
+      {
+        "Report": "shared-death-host-verification.json",
+        "Passed": true,
+        "Sha256": "6E3C4C09D0D31CD450EB75F1D9A24957BAE7D732942C7C3F9D81A5EE3670A10F",
+        "ObservedAt": "2026-10-09T00:24:06.3202312+02:00"
+      },
+      {
+        "Report": "shared-death-client-verification.json",
+        "Passed": true,
+        "Sha256": "8535B137EE4B9BB41E81214AC844EF117E5E8BE5A0A070FF5691B92F2B76D2F0",
+        "ObservedAt": "2026-10-09T00:24:25.4060761+02:00"
+      },
+      {
+        "Report": "locomotion-verification.json",
+        "Passed": true,
+        "Sha256": "44C05D3015300A78DC1458ED06A787A2249906E9D3D7DABBA8CDB26922DC4B9F",
+        "ObservedAt": "2026-10-09T00:25:19.9571535+02:00"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "Sha256": "06ACEC5F12C5E531E59089789FC71A86E7BF84082FE5E78C82498FA0C6FCA8CE",
+        "ObservedAt": "2026-10-09T00:25:20.1423951+02:00"
+      }
+    ],
+    "PoseProtocol": 8,
+    "PacketBytes": 184,
+    "Scope": "Actual player standing/crouch metadata over native Steam, with native pause invalidation. Targeted recovery/movement regressions passed; remote crouch/jump animation not implemented.",
+    "BroadRecoveryBuild": "7623D6B9FD668B533B936F1252B94D7EF0C393F1A2A4B108DAA3BF7F6E706FC6",
+    "PlayableCoop": false
+  },
+  "PlayerMotion": {
+    "ObservedAt": "2026-10-09T00:51:08.6160286+02:00",
+    "Passed": true,
+    "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+    "PoseProtocol": 9,
+    "PacketBytes": 192,
+    "Reports": [
+      {
+        "Report": "player-motion-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:46:28.2071281+02:00",
+        "Sha256": "24FD77982FF9924C28FC36909A3F78FDC82FC7A0C34ED1664C19CFB78EF28EE5"
+      },
+      {
+        "Report": "player-stance-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:46:50.9676436+02:00",
+        "Sha256": "3615572B95AE728F7958CC29439A16360A67CECE5E2464A6828503072755A38E"
+      },
+      {
+        "Report": "avatar-ai-ownership-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:46:08.9742844+02:00",
+        "Sha256": "33588858BA5BC0934A362E73F74E1C630FA17C772BF56C13EE1A0C0635980448"
+      },
+      {
+        "Report": "steam-transport-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:46:53.4890854+02:00",
+        "Sha256": "59EF1CBC3E94B0E68A49543227415C4D2B6862EA73EE37ED412B0376AE39695A"
+      },
+      {
+        "Report": "shared-checkpoint-host-delay-host-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:47:06.3516888+02:00",
+        "Sha256": "36650D3B40C34309F80495D69039B37BDC49F821545F7611341ECDB7820478A8"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:47:18.8352322+02:00",
+        "Sha256": "5EB883B66C16FAE0C8C6F610B0137CFC6DA7B67FCE68E804A71BE6559B6858B5"
+      },
+      {
+        "Report": "shared-death-host-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:47:57.2433179+02:00",
+        "Sha256": "F7BF95BCD37F3519BB1D2C31EE03BADFF86333FD162E5944671885D1CC29988E"
+      },
+      {
+        "Report": "shared-death-client-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:47:37.9175413+02:00",
+        "Sha256": "00DF13E0C1F7790EA6F1C591D62DFC777F5859F0AF7E2C224E0C84E744FC453A"
+      },
+      {
+        "Report": "locomotion-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:48:52.0589961+02:00",
+        "Sha256": "1700A7126EA2C06A350D40E73F613F2D1B5B31780403C8986EBB4792889041D3"
+      },
+      {
+        "Report": "locomotion-guards-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:49:34.0399749+02:00",
+        "Sha256": "16E642DF7EFEE9013EAAC2E61F7AEE44589FF53D6D1A1FB4FEE2C34D47E41734"
+      },
+      {
+        "Report": "avatar-idle-disconnect-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:49:34.0936744+02:00",
+        "Sha256": "C30831AE7228CD0C45ED6C87D621203C2023F2587A759F373FEA2E02F81EF005"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:50:01.1909111+02:00",
+        "Sha256": "ED87DBD093F00DAD6AC0646590DA52AFCAC1CEC5E0E4269CC5EEBB4A271159D1"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "DllSha256": "6EC73DA91716ABD8AF2238ABA261E284195363D7B23D5DE5F1D6D8247D13753C",
+        "ObservedAt": "2026-10-09T00:50:01.2457518+02:00",
+        "Sha256": "38B6603A097BD53EB505F602E367010B6183789EB9B2445686B41FC174322E15"
+      }
+    ],
+    "Live": [
+      {
+        "Role": "host",
+        "Pid": 33664,
+        "Epoch": 36,
+        "Follow": true,
+        "IdleOwned": true,
+        "IdleAcquired": 11,
+        "IdleReleased": 10,
+        "IdleLost": 0
+      },
+      {
+        "Role": "client",
+        "Pid": 40492,
+        "Epoch": 11,
+        "Follow": true,
+        "IdleOwned": true,
+        "IdleAcquired": 1,
+        "IdleReleased": 0,
+        "IdleLost": 0
+      }
+    ],
+    "Scope": "Read-only actual player stance and verified default-mode ground/sneak/jump/fall states transported over native Steam. Standing and crouched jumps in both directions, native pause invalidation, both shared reloads and natural deaths, counterpart walking, owned native idle-break autoplay restoration, and actual peer-loss cleanup passed.",
+    "RemoteCrouchJumpAnimation": false,
+    "NativeIdleAutoplayControl": true,
+    "PlayableCoop": false,
+    "SharedWorldAuthority": false,
+    "TwoAccountOnlineVerified": false,
+    "PriorBroadRecovery": "milestones/7623/shared-recovery-summary.json",
+    "PriorStance": "milestones/0247/player-stance-summary.json",
+    "KnownFailureFixed": "D117 Emily idle foot-motion failure coincided with full native Midnight animation weight. Native idle-break autoplay control fixed the original unchanged locomotion assertions; failed evidence retained."
+  },
+  "PreviousVerifiedLoaderSha256": "C4598AFA325EA8A3AC1A033A44EE232A6FB53CE4C800A0C29D4E0A50A9EE2BB5",
+  "BodyStream": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T01:20:12.9905364+02:00",
+    "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+    "ProbeSha256": "42B5F7E17C7CDD128C04DA722D68AF00A514DF7D1F52191A7AE0CFA86050733F",
+    "PoseProtocol": 10,
+    "PacketBytes": 1156,
+    "Reports": [
+      {
+        "Report": "body-stream-first-verification.json",
+        "Passed": true,
+        "Sha256": "B63CC4E15538D44AAC1BD0212B5CC9EE3B7518CCEE86FEA6CE5BE0C065E452E0",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:11:25.2891372+02:00"
+      },
+      {
+        "Report": "body-stream-verification.json",
+        "Passed": true,
+        "Sha256": "C45634C901834A8C62E014D8E5B856B0FCE22BC28007C66A7B88CEBA9B1F50E5",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:19:20.9385558+02:00"
+      },
+      {
+        "Report": "body-stream-guards-verification.json",
+        "Passed": true,
+        "Sha256": "73E478C740269F7634C73AA0768288BD89C641F6FDE4190BB3D8377D2865E3EF",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:13:34.2410237+02:00"
+      },
+      {
+        "Report": "avatar-ai-ownership-verification.json",
+        "Passed": true,
+        "Sha256": "825AA2BABAE6268929E11B68656ED0C60D66179220EDE97F126159E7FF34A07A",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:14:26.6874538+02:00"
+      },
+      {
+        "Report": "player-motion-verification.json",
+        "Passed": true,
+        "Sha256": "22A52799992776DD1F88480FFF1652DD6DC977861ABBA6DB7742A716E0BCAD94",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:14:45.959932+02:00"
+      },
+      {
+        "Report": "player-stance-verification.json",
+        "Passed": true,
+        "Sha256": "A5490DBFA95192FD488F1B4FE8A8D219118B800FB6E5162F5F61DF9896386D8D",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:15:09.074625+02:00"
+      },
+      {
+        "Report": "steam-transport-verification.json",
+        "Passed": true,
+        "Sha256": "C65544CD250D83171F59BBE14953F227E37BE24D932CDE68DAB4CD0296D9218B",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:15:11.6161235+02:00"
+      },
+      {
+        "Report": "shared-checkpoint-host-delay-host-verification.json",
+        "Passed": true,
+        "Sha256": "72C0D9312342C5300DCA21D2F9BC1C6F9315F85DD0E2285BD75177B2A82E3340",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:16:21.9942382+02:00"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "Sha256": "AB3574FCA2342BBAD59E2B27D7004FF6043DC03AB668971BCE41A5944E077823",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:16:34.5565166+02:00"
+      },
+      {
+        "Report": "shared-death-host-verification.json",
+        "Passed": true,
+        "Sha256": "BA142556EB22E68E393A5747D4AE251A1B4FA2CA8B9115FBC0969C149EF51315",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:16:53.8180738+02:00"
+      },
+      {
+        "Report": "shared-death-client-verification.json",
+        "Passed": true,
+        "Sha256": "B7AAECF7FBB90DC80C26B6E03593F9056220F82E3C080D23317A35100BCBBBC8",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:17:12.9889428+02:00"
+      },
+      {
+        "Report": "locomotion-verification.json",
+        "Passed": true,
+        "Sha256": "7C86CA2A1DD56749E77B13DABC77770D2531B3C8013FC38CC439675E05CB2BA5",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:18:08.2755447+02:00"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "Sha256": "BF96EB844DA1D08E1907B95F319F380A8CEF8B8A32015BA7B09692D9E80BEB76",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:19:24.3932954+02:00"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "Sha256": "488F33184ABA3550B767CEE2F82F75F1910458E9F205AC61A3B864D92EF77647",
+        "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+        "ObservedAt": "2026-10-09T01:18:51.1495251+02:00"
+      }
+    ],
+    "Live": [
+      {
+        "Role": "host",
+        "Pid": 36664,
+        "Epoch": 41,
+        "Handle": 209916411,
+        "BodyStream": true,
+        "BodyApplied": 2068,
+        "Follow": true,
+        "Fresh": true
+      },
+      {
+        "Role": "client",
+        "Pid": 39152,
+        "Epoch": 36,
+        "Handle": 209916390,
+        "BodyStream": true,
+        "BodyApplied": 1648,
+        "Follow": true,
+        "Fresh": true
+      }
+    ],
+    "Scope": "Experimental actual-player body poses over native Steam; 17 mapped joints on Corvo/Emily counterparts, crouch/crouch-walk/jumps, native standing gait, 250ms freshness, both pauses and actual peer loss. Verified again after both shared reloads and deaths. Unmapped native arm motion and target bone lengths preserved.",
+    "NativeUiAdded": false,
+    "VisualAppearanceReviewed": false,
+    "CombatReplicated": false,
+    "WorldAuthority": false,
+    "OnlineTwoAccountsVerified": false,
+    "PlayableCoop": false,
+    "PhysicsNote": "Clean idle baseline already shows about 0.01182 maximum Emily body/joint separation with zero body-stream applications. The local crouch experiment reached a similar Emily error and about 0.00281 for Corvo. Existing independent animated-body tolerance is unchanged; shared hit detection is not established.",
+    "PriorMovement": "milestones/6ec7/player-motion-summary.json",
+    "PriorBroadRecovery": "milestones/7623/shared-recovery-summary.json"
+  },
+  "CurrentBuildReports": [
+    "research/doppelganger-first-person-424B.json",
+    "research/doppelganger-airborne-424B.json",
+    "research/doppelganger-airborne-guards-424B.json",
+    "research/doppelganger-sword-stream-424B.json",
+    "research/doppelganger-native-actions-424B.json",
+    "research/doppelganger-recovery-424B.json",
+    "research/doppelganger-final-fixture-424B.json",
+    "research/baseline-integrity-verification.json"
+  ],
+  "VerificationAttribution": "424B: first-person 3/32, airborne 4 cases, sword stream 6/70, airborne pause 2, direct native actions 8, fixed Dunwall recovery 4, original baseline 8 files all pass. Root interpolation A/B six comparisons on 8007; identical interpolation in 424B plus matching action delay. Strict gait remains 97D9 evidence, Emily idle failed; ADB4 post-recovery action report retains its own build.",
+  "HealthResearch": {
+    "WorldTransportVerifiedBuild": "CE4BC75E9C76F04BB9366B441E87151FAA31047876C487435D2CC40D5F392241",
+    "Reports": "research/milestones/ce4b",
+    "Snapshot": "work/verified-world-health-CE4B",
+    "NpcHealthMatchedPackets": 336,
+    "IndependentNpcChecks": 12,
+    "NativeDamageRva": "0x717950",
+    "HealthGetterRva": "0x7197f0",
+    "HealthSetterRva": "0x7185b0",
+    "DamageWorkerThreadObserved": true,
+    "NativeDeathVisualBothReviewed": true,
+    "NativeDeathScreens": "research/screens/native-shared-death-81B6-{host,client}.jpg",
+    "HealthMutatedByMod": false,
+    "DamageReplicated": false,
+    "Pending": "42BE guard-health milestone archived; current9639 perception work underway."
+  },
+  "GuardHealth": {
+    "Passed": true,
+    "DllSha256": "42BEAD3DF5FDCAE248E332F84F3CBAA82C63587FF604424B3A761DA345F629FA",
+    "Record": "research/guard-health-verification.json",
+    "Scope": "Eight-second known-guard native nonfatal health transfer; not damage or death replay",
+    "NativeSetter": "0x7185b0",
+    "Protocol": 2,
+    "PacketBytes": 164
+  },
+  "GuardHealthMilestone": {
+    "ObservedAt": "2026-10-09T01:58:56.7018876+02:00",
+    "DllSha256": "42BEAD3DF5FDCAE248E332F84F3CBAA82C63587FF604424B3A761DA345F629FA",
+    "ProbeSha256": "55BB4F54012E0B5A59C7289598C585C130EA85E2799E3FD848EDC07559BEC93B",
+    "Passed": true,
+    "Reports": [
+      {
+        "Report": "guard-health-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:46:47.7404668+02:00",
+        "Sha256": "EF3A6E90E7696B76EBC81F6622BC93C3728F92FF511D0475349289D21BD2713B"
+      },
+      {
+        "Report": "guard-link-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:47:53.3955509+02:00",
+        "Sha256": "E44F431F61FADEF62FB2819DFD92391B9973DC3FCB988D2983D10ACC6778C0FF"
+      },
+      {
+        "Report": "world-observation-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:48:19.3143623+02:00",
+        "Sha256": "73712E951B36076F446D480FB27EF8CED0A597D6DEE865E814EC0CFFBB87B809"
+      },
+      {
+        "Report": "shared-death-host-health-damage-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:48:39.7254189+02:00",
+        "Sha256": "BA59B6ECEBEE7D70B574644B7939D304A8F5275F58A0B327342BFF627F359120"
+      },
+      {
+        "Report": "shared-death-client-health-damage-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:48:59.1258294+02:00",
+        "Sha256": "6B9DC5AF434C3E34223B6453A645D9DDA78520ED758ABD32B9C256586675C727"
+      },
+      {
+        "Report": "body-stream-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:51:42.6447989+02:00",
+        "Sha256": "A2795137A839FE4A4964A01D6B89591F314F9A02C4B03BF3D8832DD672EEEB58"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:49:26.6527652+02:00",
+        "Sha256": "DEA6C9BD9D95D2237D4C8AFB01B2BEA45977C264C2517C0E8D7FB7047DC4031D"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T01:55:06.2039103+02:00",
+        "Sha256": "76BC9A4C5FD54180EDA0C46A601D3CB97626C57F248A80CA62AB37749DFDA0A8"
+      }
+    ],
+    "Scope": "One authored inactive guard: explicitly armed native health 40 to 35, host/client isolation and lifetime guards; read-only world health; both natural fall deaths and coordinated retries; body stream and baseline integrity.",
+    "BodyFixtureCorrection": "Four transition captures precede stationary crouch sampling. First pre-fix sample crossed the native transition. Rotation tolerance unchanged; failed raw data preserved.",
+    "PlayableCoop": false,
+    "GeneralCombatReplication": false,
+    "OnlineTwoAccounts": false,
+    "SourceBackup": "work/verified-guard-health-42BE"
+  },
+  "PartnerPerception": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T02:27:02.5139849+02:00",
+    "DllSha256": "963920C046F5B8EBCC3883FD6A6EF8166E21469C532653FC7271312EB1049CCB",
+    "ProbeSha256": "6E991B46388158E6228AA14BBBFB2CB1069FC4648D03B643AF618491E702A664",
+    "Scope": "Native single-guard directional faction override and cleanup. The active escape guard selects remote Emily as combat target and starts its attack scheduler; one real sword hit reached her native health callback and was ignored by the story-NPC health definition. Exact partner coordinates survive both shared reloads and natural deaths.",
+    "Reports": [
+      {
+        "Report": "partner-relationship-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:19:27.9965522+02:00",
+        "Sha256": "48E721060F3BFFEE8C93A952DC8613F6D2667A3463D4C6538D5D3FA1D01E467C"
+      },
+      {
+        "Report": "partner-relationship-escape-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:20:04.0837356+02:00",
+        "Sha256": "E45B020E67957DE646C6024851CD116FF8D255D41711528CEC174037A7F20C64"
+      },
+      {
+        "Report": "partner-perception-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:20:44.9781091+02:00",
+        "Sha256": "59DFD5DE5F59E8E0E703F8757CDBBC3F7F22AEA47AAC9A1D64E3E9B91308B098"
+      },
+      {
+        "Report": "exact-partner-recovery-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:24:27.4454786+02:00",
+        "Sha256": "7DA9F4780E8E51DC5FB2F114A32B51B5AE78827C1B9A06E1E210053F6DA11098"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:23:36.4117003+02:00",
+        "Sha256": "2017347ED51074583791FF1B81717FD80A13F7487B35CFB65BD9A1CD9397AB4C"
+      },
+      {
+        "Report": "shared-checkpoint-host-delay-host-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:23:48.6927644+02:00",
+        "Sha256": "9C0B73C16303C830A662618FF3ECDD923F0AFFFCB29E973FFF4FE42E047D79F8"
+      },
+      {
+        "Report": "shared-death-client-health-damage-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:24:08.1228002+02:00",
+        "Sha256": "608EBFC2E6342CD8894C623F9617E224BD2A4CF231C7F727C953A68A48C0F139"
+      },
+      {
+        "Report": "shared-death-host-health-damage-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:24:27.4356111+02:00",
+        "Sha256": "9CEAF39ADBB31D091F69EC00897C762818DA66CFB9C01E56F2C5FD63D49A5B63"
+      },
+      {
+        "Report": "guard-health-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:25:04.9176239+02:00",
+        "Sha256": "6EE7420A3FBB0CCCAA952FDFE8FF01EC170BE77C3CBAD7145B87F62CB2307EF8"
+      },
+      {
+        "Report": "body-stream-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:25:44.7520476+02:00",
+        "Sha256": "F0EBF0BECF14CF20C1781D0FA25D9F93DADCC1E63AD2DDAC414AB805F436C9E1"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:26:37.9622981+02:00",
+        "Sha256": "E3ADDBE59D3BD83CBA197FF86F472C85C15DE439B2E82538C5607FF4CA381AFB"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:26:01.3661842+02:00",
+        "Sha256": "9D6C1F8511273107124718B35745B3782AD53DC7A251022D15712843815D929C"
+      }
+    ],
+    "PartnerTargetedSamples": 13,
+    "PartnerSwordHits": 1,
+    "PartnerDamageApplied": 0,
+    "DamageReplicated": false,
+    "PlayableCoop": false,
+    "OnlineTwoAccounts": false,
+    "SourceBackup": "work/verified-partner-perception-9639"
+  },
+  "CombatRecovery": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T02:56:02.6684234+02:00",
+    "DllSha256": "ABC00D06C0A1E17CEEC1BD4740CEEE9A14AF99C61B4C26CA93E4FFC05647574E",
+    "ProbeSha256": "FFA370885475F8AB4AA52D9D4A5B932D1594274338BC8E8EE43AD087F4D25C93",
+    "Reports": [
+      {
+        "Report": "sword-death-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:49:26.5195681+02:00",
+        "Sha256": "162CB0AD6663439E35FAD79324250287B114831D1075421D35645CEDDBE9AA2D"
+      },
+      {
+        "Report": "sword-relay-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:53:36.9027703+02:00",
+        "Sha256": "98D59EBC8FF443B9A7D13C4A114AE08F3F74B1C8BC0A2C7D7104F265E8691CBE"
+      },
+      {
+        "Report": "sword-relay-guards-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:51:07.937762+02:00",
+        "Sha256": "BE803E7E5A6C1F3C6E05179C3C91C1472B75B835E4C79BD0BFFFE0FA5FE37029"
+      },
+      {
+        "Report": "sword-relay-guards-cumulative-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:52:55.2435234+02:00",
+        "Sha256": "C0EA43E33457ACB2FD8D7BC4D8675901AC8CC7869DF3E3C567E5DE93312AB96D"
+      },
+      {
+        "Report": "native-loading-character-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:54:24.5078622+02:00",
+        "Sha256": "B078B4940067497A0EE8C2EFD94AF427326A49A8E73384C4D00E1B4EEC1C00D5"
+      },
+      {
+        "Report": "shared-checkpoint-client-delay-client-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:54:51.4593904+02:00",
+        "Sha256": "910E76D593F8EBB041F50095B23E3FBD54B49B525FF1D044CCDCB52CF2F5C4BE"
+      },
+      {
+        "Report": "shared-checkpoint-duplicates-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:55:03.914909+02:00",
+        "Sha256": "83494110165A02F3EE90D12498AC83CADAA998381CC1779B5F5267A0B805641F"
+      },
+      {
+        "Report": "shared-death-host-health-damage-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:55:23.32213+02:00",
+        "Sha256": "9F28F38E86BD82886E3594998DD462C5F0315A6857314A4A3D399E7DCC54DF58"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:55:23.346443+02:00",
+        "Sha256": "B7B6AF001240D32C83233996C9A809540DB242DAA864810C193E1E766C368557"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T02:55:38.1572059+02:00",
+        "Sha256": "B491A692843B4CEB363427AD84F63C42D1E95558FCCD5F43C9D1FBD3FBD59BC6"
+      }
+    ],
+    "Scope": "Five actual native guard hits relayed through Steam to fatal client health, both native death screens, one coordinated retry, role restoration, both-ready gate and checkpoint health preservation. Single and cumulative mode cleanup, mismatched modes, native pauses, expiry, reload, actual client loss. One known guard and isolated offset fixture.",
+    "NativeSwordHits": 5,
+    "CheckpointHealth": 56,
+    "HealthBeforeNativeRoleCorrection": 70,
+    "PlayableCoop": false,
+    "OnlineTwoAccounts": false,
+    "GeneralCombatAuthority": false,
+    "SourceBackup": "work/combat-recovery-ABC0"
+  },
+  "CombatGuard": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T03:12:50.2829256+02:00",
+    "DllSha256": "2935909D62DDE8C21A70FD25528D89F9C69B994F53550378C7A1E1F87F46B519",
+    "ProbeSha256": "FFA370885475F8AB4AA52D9D4A5B932D1594274338BC8E8EE43AD087F4D25C93",
+    "Reports": [
+      {
+        "Report": "combat-guard-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:01:27.7383683+02:00",
+        "Sha256": "055A9E9B8F863DCB50D59A5ED35CE10F4B90A260CB738BC87B66B52FF850C863"
+      },
+      {
+        "Report": "guard-link-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:03:11.1931538+02:00",
+        "Sha256": "CDF529FBC79BF869B81011B6EF7D0FBF8CA42A21F91E7877AC078A5F793A8A53"
+      },
+      {
+        "Report": "guard-health-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:05:39.5091685+02:00",
+        "Sha256": "959C4A2911773F751C95CF6C80570128B6F155BDD9936BBFB4CAEC61C93F00DF"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:10:13.8322994+02:00",
+        "Sha256": "B852BBEE4BE34F36B1F90F6B50B6EC7211EBA48F483C80B78CC7F6C4519EB31A"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:10:13.7625804+02:00",
+        "Sha256": "ABDA692BF64A61CB6C92881D39371E74BF9857DB1C5F8AD0B6BBE1ADE12C131C"
+      }
+    ],
+    "Scope": "One native host escape guard pursues the remote counterpart, while client decision/reflex AI are natively paused. Root movement, a real sword hit and dependent lease cleanup verified. Existing inactive guard and nonfatal health regressions passed.",
+    "HostMovement": 2.182132514528505,
+    "ClientMovement": 2.1850465391754694,
+    "NativeDamage": 15,
+    "NativeAttackSamples": 15,
+    "SourceBackup": "work/combat-guard-2935",
+    "FullWorldAuthority": false,
+    "PlayableCoop": false,
+    "OnlineTwoAccounts": false,
+    "IntegratedFatalCombatPassed": false,
+    "Pending": "Fatal combined test exposed recovery-arm sequencing and native upward health changes; fixes are in newer unbuilt source."
+  },
+  "GuardAnimation": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T03:37:06.9495991+02:00",
+    "DllSha256": "4A1862BBD8A8574EF1986F430D71FB2A725D21883B89A1B2953885E1B17EED01",
+    "ProbeSha256": "FFA370885475F8AB4AA52D9D4A5B932D1594274338BC8E8EE43AD087F4D25C93",
+    "Reports": [
+      {
+        "Report": "sword-death-combat-guard-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:14:15.4645838+02:00",
+        "Sha256": "FB5FF601F19E7EEB73848C55A6C45892E2D52F1C569E189E4BB0FD1BA1E76D1C"
+      },
+      {
+        "Report": "guard-body-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:32:37.3492239+02:00",
+        "Sha256": "D52308F04D4058634E028BF2A83478C33DB68A948C347DEABC59EB3DEC74098B"
+      },
+      {
+        "Report": "guard-body-guards-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:35:43.7159491+02:00",
+        "Sha256": "813EAB3DB875A29087E96086AC976E71D4BBAF04A19D72E88A9DFD8E2759D178"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:36:15.5438137+02:00",
+        "Sha256": "61D3CF902C90DBAD58C8DC70AC21AD0E7392983F98A12A1F32A705A44065B663"
+      },
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Passed": true,
+        "ObservedAt": "2026-10-09T03:36:15.5809329+02:00",
+        "Sha256": "DD21FEC456F2E03FC6D51EE79F0004B84A3F50F327D6C338348E524D9EB618FC"
+      }
+    ],
+    "Scope": "One native combat guard: five relayed sword hits, both death screens and coordinated checkpoint recovery; visible native guard core pose comparison and eight animation lifetime checks.",
+    "CoreJointObservations": 270,
+    "NativeAttackSamples": 6,
+    "OtherNpcDamage": "Six local hits from Ramsey and escape guard 2 killed the observer during the animation-only fixture; controlled guard caused none. Other NPC world authority remains absent.",
+    "PlayableCoop": false,
+    "OnlineTwoAccounts": false,
+    "SourceBackup": "work/native-guard-body-4A18"
+  },
+  "GuardWeapon": {
+    "Passed": true,
+    "ObservedAt": "2026-10-09T04:08:55.2678844+02:00",
+    "DllSha256": "DE225C601D7B3A8124C9DB46266C639EE065C6B3E13D5AA90ABD2553F0F76947",
+    "Reports": [
+      {
+        "Report": "baseline-integrity-verification.json",
+        "Sha256": "D61E6EA538062563000C07F4E1486E18C18DC91428AC6C33DF6EC02AD50F998E"
+      },
+      {
+        "Report": "guard-body-weapon-verification.json",
+        "Sha256": "11E057F3D63202E262282ABFCCF99BA118BBE695FD9CBE88AF6D12EAE47897B3"
+      },
+      {
+        "Report": "guard-weapon-guards-verification.json",
+        "Sha256": "35314FE3F669DEB3D52652568EA72C037225DBFB2457D29B7F275444B45A1FA6"
+      },
+      {
+        "Report": "guard-weapon-verification.json",
+        "Sha256": "7212DA20E0803A500CE534BAAEB4B8CDE6D48689F93EF450E3A2EF1A0683D5A4"
+      },
+      {
+        "Report": "lab-restoration-verification.json",
+        "Sha256": "41638E5ACCD88B8DB9C49053250D7A4372CEFBA89214443164F85BD5DE50AD63"
+      },
+      {
+        "Report": "sword-death-combat-guard-weapon-verification.json",
+        "Sha256": "92DDC8BADA40607179021ADFB0C2D2A0FA617350861EA56E13F2A66A31E66483"
+      }
+    ],
+    "Scope": "Fixed guard sword state over native Steam; seven stream checks, five lifetime scenarios, five native fatal hits/shared retry and combined animation observations.",
+    "WeaponCombatSamples": 61,
+    "AnimatedDrawnSamples": 7,
+    "CoreJointObservations": 270,
+    "VisualAlignmentVerified": false,
+    "OtherNpcs": "Five independent local NPC hits killed the visible observer; no controlled-guard local damage.",
+    "PlayableCoop": false,
+    "OnlineTwoAccounts": false,
+    "Pending": "Sword attachment tag/joint correct but live weapon/root alignment requires investigation; client sword root height remained fixed during changing arm poses."
+  },
+  "GhidraAnalysis": {
+    "ExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "OriginalBaselineUnchanged": true,
+    "NoFullProgramAnalysisRequired": true,
+    "CurrentChatNativeToolHotReloaded": false,
+    "Snapshot": "snapshots/Dishonored2-B671F824-seeded-20261009.gzf",
+    "CurrentChatMcpClientVerified": true,
+    "ToolCount": 244,
+    "PersistedHypotheses": true,
+    "SnapshotSha256": "C07A5B44751A35A7316A3D450488D1CED86E032A9E14FF9B922CDDDF5EFD8A21",
+    "ResolvedSetupIssues": [
+      "Initial import completed after HTTP timeout; verified backend state and persistence",
+      "Correct installed PowerShell path and absolute /Dishonored2.exe project path",
+      "CRLF inline Java imports normalized; embedded backend/script errors detected"
+    ],
+    "PersistedStructures": 7,
+    "Project": "project/Dishonored2-B671F824.gpr",
+    "Passed": true,
+    "CrossReferenceQuery": true,
+    "RegisteredServer": "d2-ghidra",
+    "FunctionLookup": true,
+    "Transport": "Actual MCP stdio initialize, tools/list, tools/call through pinned integration",
+    "RemainingBlocker": null,
+    "ObservedAt": "2026-10-09T07:55:41.6569903+02:00",
+    "Decompilation": true,
+    "FreshJvmReopen": true,
+    "Versions": "toolchain-lock.json"
+  },
+  "CurrentHandStream": {
+    "DllSha256": "DBA742675D90BEFE8A56CA4876F56BF3BF07B0D67E6702B3376C9514A7FE2865",
+    "Reports": [
+      {
+        "Passed": true,
+        "Sha256": "5DF0F8C46328B0BB805C45383909A2658EC772409CA2FB8575A39B4E85964380",
+        "Report": "arm-stream-observations.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "55112146A6FF27E4A8956920E44E9091935AE52D078DD6668129536A58D65D2B",
+        "Report": "arm-stream-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "259C91670CDC9B7A4D64F4504EEBE5FE1F48BCCAC0712A7A703541D7AA88D56A",
+        "Report": "arm-stream-guards-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "536E9809615EBE20A2E5DA831BD3A7950B0A002E342697DCC50CCEB4B790BE1C",
+        "Report": "avatar-weapon-observations.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "F4794F02D20A6B0E204FFF684F2FDD112E8B49689AF1B5B71EBD31EC26D89B48",
+        "Report": "avatar-weapon-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "2C7B8B2F334B314A1F6CBE0CC8DA5AE8B80E598E13F210005205529399B852A7",
+        "Report": "avatar-weapon-client-death-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "AE86AF66762275FA2CA3EA3D1A96D08F4C40A89414A74E7A861587E29305B4F9",
+        "Report": "shared-death-client-health-damage-equipment-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "CA3EF890B144DE70B11D29A0D01E3B4E0DCDF9BD535E66F66ECB012B95FCC513",
+        "Report": "enemy-melee-client-counterattack-recovery-arms-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "50A9F6FD42C2012FD72546B84058DC719F2F35B9522AB842AD64F3F00E77B88A",
+        "Report": "player-arm-observation-verification.json"
+      },
+      {
+        "Passed": true,
+        "Sha256": "5E05E0B42C11D3E08848794DD2B2EF3C39D52954D5905B39269E1E02BA120B2B",
+        "Report": "baseline-integrity-verification.json"
+      }
+    ],
+    "ProbeSha256": "11F01DC0C54F8C4A99DD235D8FC5EB5E957BB15CC91DEA4C18772FD17B4B9BB4",
+    "Scope": "21 semantic right-arm/hand joints; 2604 independent native joint comparisons. Sword lifecycle, client natural death and combined ordinary melee/counterattack/shared retry pass. Visual Corvo finger grip remains too open; correct numerical transmission does not establish a correct closed sword grip.",
+    "Screenshot": "research/screens/avatar-hand-grip-DBA7.png",
+    "SourceBackup": "work/native-hand-stream-DBA7",
+    "VisualGripPassed": false,
+    "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
+  },
+  "NextAction": "Continue from upright torso comparison: improve crouched combat and foot placement, then complete no-friendly-fire routing. Preserve native UI/Steam, original assets, first-person controls, stable 424B and the 6FDE native-pose alternative.",
+  "LastGhidraFindings": [
+    "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
+    "RVA614c20 selects existing entries, not native insertion.",
+    "RVA6182f0 restores per-item quantities and equipped flag into existing entries; real CALL xref6183ff->614b20 confirmed.",
+    "Owned Emily inventory read-only: eight hat/accessory items, no sword, zero equipment entries.",
+    "Two GZF snapshots, saved project, pinned versions and functional MCP evidence under analysis/ghidra.",
+    "MD6 parser 1c9630 consumes locomotion/AnimBasic after props; correct ordering fixes null foot-IK controller without disabling native IK.",
+    "Native Slash39/Block44 exact classes observed both roles and mapped to the scoped Steam action stream.",
+    "Graph selection 484ab0/484760: immediate native request flags fix owned Corvo repeated transition; 97D9 five-stage runtime pass.",
+    "Persistent graph/action decompilation and comments saved in Dishonored2-B671F824 project; REA optional Windows backend deferred (assessment saved).",
+    "AnimBasic53eef0 native mode2 loops inherited airborne clip; native transform87d200 receives buffered root. Airborne/presentation runtime notes saved in exact executable project, analysis/ghidra/doppelganger-airborne-and-presentation.json."
+  ],
+  "VoidTools": {
+    "ObservedAt": "2026-10-09T08:53:03.5655574+02:00",
+    "ExplorerVersion": "1.2.0.0",
+    "InstallerVersion": "1.2.0.0",
+    "MappingVersion": "1.0.0.0",
+    "Setup": "outputs/d2-coop-lab/analysis/void-tools/toolchain-lock.json",
+    "Reader": "outputs/d2-coop-lab/Read-D2Assets.ps1",
+    "RigCheck": "asset-rig-agreement-verification.json",
+    "RigComparisons": 4,
+    "Joints": 572,
+    "StaticInventoryConfirmed": true,
+    "EmilyWeaponImplemented": false,
+    "VisualGripPassed": false,
+    "NativeUiAssetsExported": true,
+    "AssetPatchesInstalled": false,
+    "LoaderChanged": false
+  },
+  "OwnedPartnerEquipment": {
+    "Passed": true,
+    "Loader": "6C535EA2CB5C939F104BB924E57CD5943751DD4B989D6CA9BE4DB1F5A634ABB7",
+    "Note": "analysis/void-tools/owned-partner-equipment.md",
+    "Evidence": "research/milestones/6c53",
+    "PhysicalAssets": "work/asset-game",
+    "Backup": "work/native-partner-equipment-6C53",
+    "VisualGripPassed": false
+  },
+  "Doppelganger": {
+    "Loader": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D",
+    "OriginalExe": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "Backup": "work/pre-doppelganger-E6B3",
+    "StableMilestone": "work/native-partner-equipment-6C53",
+    "FingerPoseTuningPaused": true,
+    "OptIn": true,
+    "FullReplacementReady": false,
+    "FirstPersonRegressionPassed": true,
+    "DamageFirewallSelfTestPassed": true,
+    "NativeAnimationCombatEventsVerified": false,
+    "LocomotionRegressionPassed": false,
+    "Note": "analysis/void-tools/doppelganger-investigation.md",
+    "ActionMilestone": "work/doppelganger-actions-9D3F",
+    "SteamActionMilestone": "work/doppelganger-stream-C459",
+    "CurrentMilestone": "work/doppelganger-smoothing-424B",
+    "SteamSwordActionReplicationVerified": true,
+    "SteamActionScope": "Native states 39 Slash / 44 Block, both rigs, one attack episode, held parry/recovery; two-token 15-second developer lease over existing SteamNetworkingSockets012 same-PC connection. No authoritative damage/combos/directional success or real-account online claim.",
+    "CorvoCombatLocomotionPassed": true,
+    "EmilyMovementBodyChecksPassed": true,
+    "EmilyIdlePassed": false,
+    "IdleReference": "Direct native sword_idle also shows about 0.11 Emily foot excursion; authored movement remains a hypothesis, threshold unchanged.",
+    "NativeUiAdded": false,
+    "ReaInstalled": false,
+    "PrimaryDevelopmentApproach": true,
+    "UserSelectedApproach": "Native Doppelganger presentation for both remote roles; keep local first-person behavior unchanged.",
+    "Fallback": "Preserved earlier story-avatar milestones, not primary development.",
+    "SharedRecoveryPassed": true,
+    "PostRecoveryActionsPassed": true,
+    "LocomotionEvidenceBuild": "97D9EC98AA3882B26FE04F0FDF4F2039487CCAC17B1DD73971CC63DAEEAD0BE6",
+    "AutomaticSceneRearm": false,
+    "ArbitraryCampaignRecovery": false,
+    "SharedRecoveryScope": "Fixed canonical Dunwall SLOT82. Either reload and either natural player death/native retry; both original death bindings, one shared load, both-ready role gate, exactly one owned native clone/model with AI/idle held and initialized sword after recovery. Does not verify arbitrary campaign checkpoints or cinematic rearming.",
+    "AirborneMilestone": "work/doppelganger-airborne-7D7A",
+    "RootSmoothingEnabled": true,
+    "RootInterpolationMs": 80,
+    "NativeAirborneLandingVerified": true,
+    "NativeActionRegressionPassed": true,
+    "PostRecoveryActionEvidenceBuild": "ADB49B9EDF92D5BFFBB4CB51B26F7712C48E848B65C90EBA36495C8BD7EE9B7A",
+    "CrouchRequirement": "Complete connected full-body crouch posture, including torso/head and arms/sword; lower-body-only solution rejected by user.",
+    "ActiveCandidate": "916546D6EBCEC336BDF553D14739E7F11E853F2E9B1CAA74B9D4193C7808CB8D",
+    "WorkInProgress": {
+      "UpdatedAt": "2026-10-09T13:56:34.0483224+02:00",
+      "CandidateDll": "916546D6EBCEC336BDF553D14739E7F11E853F2E9B1CAA74B9D4193C7808CB8D",
+      "Scope": "Whole-body crouch mechanical checks pass both roles on 9165. Full native torso/head/arms/hands with player-driven pelvis and stepping. Visual pose and crouched combat remain unfinished; disabled by default. Original local first-person behavior preserved.",
+      "CurrentMilestone": "work/doppelganger-smoothing-424B",
+      "Assets": "Seven-resource isolated pack, twelve-entry AnimBasic with female/tall distraction animsets. Original eleven-entry rollback remains in work/doppelganger-airborne-7D7A/installed-assets.",
+      "Automation": "Prior overnight automation remains paused; no new scheduling or agent tasks.",
+      "PendingTest": "9165: whole-body crouch both roles; pause both directions and checkpoint invalidation; first-person 3 checks/32 observations; direct actions 8 cases; Steam action stream 6 checks/70 observations; airborne 4 cycles; original file/save integrity all passed. Overlap-fixture failure retained; general partner collision remains open. No test process pending."
+    },
+    "Next": "Improve complete crouch sword/arm posture and Emily torso bend using coordinated native references, then integrate crouched combat. Validate directional gait and terrain. Lower-body-only solution rejected; finger tuning paused. Preserve stable 424B and protected Steam files."
+  },
+  "HistoricalWorkBeforeDoppelganger": {
+    "WorkInProgress": {
+      "UpdatedAt": "2026-10-09T02:20:52.6804418+02:00",
+      "CandidateDll": "9677FB57F9B6B9BF5A6EAC84807BEEE47C73DFE6052977A2BA68896E20900526",
+      "Scope": "Experimental actual-player body poses over native Steam; 17 mapped joints on Corvo/Emily counterparts, crouch/crouch-walk/jumps, native standing gait, 250ms freshness, both pauses and actual peer loss. Verified again after both shared reloads and deaths. Unmapped native arm motion and target bone lengths preserved.",
+      "Protocol": "src/checkpoint_sync.h and checkpoint_protocol.h; explicit coop_checkpoint_sync on/off; both-ready gate after role restore",
+      "PendingTest": "0B07 local native equipment test passed five checks, nine drawn samples: sword slot0, hand joint17, holster195, duplicate nonrenewal, expiry and explicit/guard cancellation restore. Probe ED46. New unbuilt source adds game-over reads and pending-restore world retirement; do not attribute current source to0B07. Next equipment pause/reload/disconnect guards, then Steam weapon-state replication. No running tool session.",
+      "Correction": "Loading entry is native caller787a55 with validated owner, empty stack, pending0 and phase2 observed; player already exists. GameLocal addresses may be reused. Cached LoadGame skips asynchronous memory restart so entry consumes any remaining continuation permission.",
+      "Automation": "dishonored-2-overnight-development; every 30 minutes through 08:00 Europe/Prague 2026-10-09",
+      "Next": "0B07 local native equipment test passed five checks, nine drawn samples: sword slot0, hand joint17, holster195, duplicate nonrenewal, expiry and explicit/guard cancellation restore. Probe ED46. New unbuilt source adds game-over reads and pending-restore world retirement; do not attribute current source to0B07. Next equipment pause/reload/disconnect guards, then Steam weapon-state replication. No running tool session."
+    },
+    "Next": "BA0B archived six reports in research/milestones/ba0b and full backupwork/native-attachment-BA0B. Native child frame fix fully measured and combined fatal passed. Local native enemy assassination damage passed5checks on7610, corpse screenshot saved and backupwork/native-enemy-local-7610. Actual player strikes before Mayhew nohit because nativeinventoryheld; after native Mayhew31sec Xscene, client RTrealassassination killsguard40to0(host40). Rawwork/player-strike-after-mayhew-observations-BA0B.json. New enemy_outcome protocol212bytes bothroles optin60sec, fixedguard actualplayerassassin capture, nativedeathreceiverattributedproxy, reliablekill/ack/duplicates. First AA26runtime handshakefailed due packetdispatch mistakenlynestedunderSwordmagic, fixed now. New build deployed/restart+restore+Test-D2EnemyOutcome -SourceRole client running session12798. Need followtest, fix ifneeded, testhostreverse, lifetimeguards, regressions. Active source includesnative_enemy_damage.h,enemy_outcome.h,enemy_outcome_protocol.h,enemy_outcome_tests.cpp andformalTest-D2EnemyDamage/Outcome. Do notstopfor milestones user sleeping.",
+    "VerificationAttribution": "Historical milestones retain their own DLL hashes. Current9639 relationship tests passed on both fixed guards; partner perception positive capture exists but formal test running."
+  },
+  "DoppelgangerSharedRecovery": {
+    "ObservedAt": "2026-10-09T12:44:38.6790564+02:00",
+    "Passed": true,
+    "DllSha256": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D",
+    "Cases": [
+      "ReloadHost",
+      "ReloadClient",
+      "DeathHost",
+      "DeathClient"
+    ],
+    "Report": "research/doppelganger-recovery-424B.json",
+    "Scope": "Fixed canonical Dunwall SLOT82. Either reload and either natural player death/native retry; both original death bindings, one shared load, both-ready role gate, exactly one owned native clone/model with AI/idle held and initialized sword after recovery. Does not verify arbitrary campaign checkpoints or cinematic rearming.",
+    "Milestone": "work/doppelganger-smoothing-424B",
+    "PreviousPostRecoveryActions": "research/doppelganger-post-recovery-actions-ADB4.json"
+  },
+  "PoseSmoothing": {
+    "Passed": true,
+    "CurrentDll": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D",
+    "MeasurementDll": "80078F9F68B055D7F8A5D918ACB8D1F548252378A08CF53AD8A51FE834BF073A",
+    "Report": "research/pose-smoothing-verification.json",
+    "DelayMs": 80,
+    "DefaultEnabled": true,
+    "TraceScope": "Native/render transform callback cadence, not rendered FPS; six horizontal/diagonal/vertical A/B comparisons, both roles. Raw position updates about18-22Hz; smoothed153-547 callbacks/sec. No observer displacement; zero sampled native/render target error.",
+    "Algorithm": "Receiver QPC timeline; linear XYZ and shortest-arc normalized quaternion rotation. No extrapolation; resets on session/world/map, >250ms gap or >3m discontinuity.",
+    "Remaining": [
+      "Internet jitter and two-account sessions",
+      "Short teleports below3m",
+      "Long-fall/high-speed discontinuity tuning"
+    ],
+    "Milestone": "work/doppelganger-smoothing-424B"
+  },
+  "DoppelgangerAirborne": {
+    "Passed": true,
+    "Report": "research/doppelganger-airborne-424B.json",
+    "Dll": "424BE19EA9BF87FD134787D99D1637E2A249CF1A827E51D77D5B28AE333A9B7D",
+    "Cases": 4,
+    "PauseGuards": 2,
+    "Clips": [
+      "sword_fall_loop",
+      "sword_land_walk_out"
+    ],
+    "LocalFirstPersonUnchanged": true,
+    "Scope": "Native Jump/Fall source states, two standing episodes per role, native airborne loop and one landing, matching80ms action delay. Not complete takeoff/aerial combat/directional landing parity."
+  },
+  "Crouch": {
+    "UserRequirement": "User now requests comparing bent legs with an upright torso and native standing arms/sword. Keep connection to pelvis and preserve full native-pose alternative.",
+    "FullMovesetReady": false,
+    "LowerBodyOnlyRejected": false,
+    "StableMilestone": "work/doppelganger-smoothing-424B",
+    "WholeBodyRetargetResearch": "work/doppelganger-fullbody-crouch-18A4-research",
+    "NativeReferenceReport": "research/doppelganger-crouch-native-reference-DCD0.json",
+    "HeldNativeReferenceReport": "research/doppelganger-crouch-native-pose-888A.json",
+    "Notes": "analysis/void-tools/doppelganger-crouch-investigation.md",
+    "CurrentReport": "research/doppelganger-crouch-upright-303A-cases.json",
+    "CurrentDll": "303AF7E16B85CF061195163FA557D35FDFEEBEC65CB2C1EF2620D0224BF9B2C1",
+    "WholeBodyMechanicalChecksPassed": true,
+    "PauseAndReloadGuardsPassed": true,
+    "FirstPersonRegressionPassed": true,
+    "DefaultEnabled": false,
+    "VisualComplete": false,
+    "ResearchBackup": "work/doppelganger-crouch-upright-303A-research",
+    "Remaining": [
+      "Crouched attacks/parries and action arbitration",
+      "Visual foot planting, depth and gait quality",
+      "Terrain and collision capsule agreement",
+      "Automatic reference setup and campaign lifetime",
+      "Complete bidirectional friendly-fire suppression"
+    ],
+    "RegressionReports": [
+      "doppelganger-crouch-relative-6FDE.json",
+      "doppelganger-crouch-directions-6FDE.json",
+      "doppelganger-crouch-guards-6FDE.json",
+      "doppelganger-firstperson-6FDE.json",
+      "doppelganger-actions-6FDE.json",
+      "doppelganger-steam-actions-6FDE.json"
+    ],
+    "DirectActionsRegressionPassed": true,
+    "SteamActionsRegressionPassed": true,
+    "AirborneRegressionPassed": null,
+    "UserVisualRejected": true,
+    "RejectedVisualDll": "916546D6EBCEC336BDF553D14739E7F11E853F2E9B1CAA74B9D4193C7808CB8D",
+    "RegressionBuild": "6FDE1885980C35A48E3EDB2CDC1FFD905BE95DB501637FB718E3CEDC209B265F",
+    "CurrentStyle": "upright",
+    "CurrentSessionEnabled": true,
+    "CurrentBuildReports": [
+      "doppelganger-crouch-upright-303A-cases.json",
+      "doppelganger-crouch-directions-303A.json",
+      "doppelganger-crouch-guards-303A.json",
+      "doppelganger-crouch-baseline-303A.json"
+    ]
+  },
+  "ActiveTest": {
+    "Dll": "092ED98F46921D73A46354CA31F69DE7AEFDFDF30FD9B14DAC767AE49ED9A23B",
+    "Fixture": "Isolated physical-copy Dunwall instances, native Steam sockets, windowed side by side",
+    "Experiment": "AnimGen/Blender Corvo candidate",
+    "Status": "Complete bounded sequence recorded; proof off; stable automatic path not replaced",
+    "Reports": [
+      "work/animgen-feasibility/result.json",
+      "work/animgen-feasibility/README.txt"
+    ],
+    "FullMovesetReady": false
+  },
+  "FriendlyFireRequirement": {
+    "DisabledRequired": true,
+    "ImplementedForAttributedNativeHealthDamage": true,
+    "FullNoHarmCoverageComplete": false,
+    "NativeAndRealSwordChecksPassed": true,
+    "NormalEnemyDamagePassed": true,
+    "ReloadPassed": true,
+    "Milestone": "work/friendly-fire-345C",
+    "Report": "analysis/ghidra/friendly-fire.md",
+    "Remaining": [
+      "Every projectile and power",
+      "Unattributed indirect/physics hazards",
+      "Non-health incapacitation and pre-damage takedown choreography",
+      "Post-contact native sword validation failure: isolate weapon/equipment side effects despite unchanged health"
+    ]
+  },
+  "MixamoExperiment": {
+    "Status": "User rejects present overall animation quality and iteration cost; pose-tuning frozen, full-body authoring/AnimGen evaluation is the next direction",
+    "Clip": "Crouched Walking",
+    "Description": "Crouched Walk",
+    "InPlaceRequired": true,
+    "UserLikesPreview": true,
+    "BlenderMcpConnected": true,
+    "DonorDownloaded": true,
+    "RuntimeImprovementProven": true,
+    "LatestVisualApprovalPending": false,
+    "Report": "research/mixamo-mirrored-1a46.json",
+    "AcceptedAsProductionPath": false
+  },
+  "WorkInProgress": "Unreal and SDK unblocked. Actual AnimGen -> Blender -> native Corvo D2 proof complete and recorded. Candidate separate/off; foot/transition quality and production action arbitration remain.",
+  "Next": "Use the recorded generated candidate and precise phase/pose instrumentation to improve foot/transition quality before broad moveset expansion; then automatic action selection, Emily and direction coverage. Preserve native FP, Steam and original assets.",
+  "AnimationStrategy": {
+    "At": "2026-10-10T00:42:46.4758843+02:00",
+    "Decision": "Stop pose-by-pose animation polishing as the production strategy; evaluate full-body authoring and offline AnimGen generation",
+    "UserFeedback": "Current visual quality and iteration cost are unacceptable",
+    "Preserved": [
+      "work/friendly-fire-345C",
+      "work/sword-grip-fit/789d-grip-milestone",
+      "work/sword-grip-fit/2997-combined-research"
+    ],
+    "Keep": [
+      "Native first-person controls and rigs",
+      "Native Steam transport",
+      "Owned Doppelganger characters and native equipment",
+      "Guarded remote pose playback and original asset/save protection"
+    ],
+    "Engine": {
+      "LauncherRegistered": "UE 5.8.3",
+      "RegisteredPath": "C:\\Users\\adako\\Documents\\Codex\\Tools\\UE_5.8",
+      "EditorExists": true,
+      "ExistingProject": "C:\\Users\\adako\\Documents\\Unreal Projects\\MyProject",
+      "ExistingProjectModified": false,
+      "FreeDiskGB": 105.96
+    },
+    "KnownPipeline": {
+      "NativeSkeletonNamesParentsBindTransformsVerified": true,
+      "EvaluatedFirstPersonPoseCapture": true,
+      "CompleteFirstPersonClipBatchExportVerified": false,
+      "ExternalBakedMotionPlayedOnNativeAvatars": true,
+      "NativeSkinnedCharacterExportToAuthoringToolVerified": true,
+      "AnimGenOutputBakingAndExportVerified": true,
+      "AnimGenRuntimePortToD2Verified": false,
+      "AnimGenExportMechanism": "Evaluated pose/root/contact JSON into Blender; generated FBX/Sequencer baking not established",
+      "OfflineGeneratedAnimGenPosePlaybackInD2Verified": true
+    },
+    "EvaluationOrder": [
+      "Resolve actual Unreal Editor installation and compatible AnimGen sample",
+      "Prove skeletal motion recording/export on a supplied example before training",
+      "Establish a viewable skinned D2 target character and weapon rig in the authoring environment",
+      "Retarget and visually validate a coherent full-body locomotion set; use first-person poses as timing/contact references",
+      "Bring one validated result into the isolated D2 lab and compare equal cameras and travel",
+      "Expand only after the same motion retains quality in D2"
+    ],
+    "Acceptance": [
+      "Foot contact and travel agree",
+      "Hands stay on the hilt",
+      "Body posture and proportions remain coherent",
+      "Start/stop/turn/stance transitions look natural",
+      "No first-person animation or network-root replacement"
+    ],
+    "UnresolvedRuntimeBug": "nativePlayerMotion rejects two-state Sneaking+Slash/Block; identified, not fixed; keep separate from motion quality evaluation",
+    "Sources": [
+      "https://www.fab.com/listings/df37eb46-09bf-4604-9307-cdc39c769790",
+      "https://dev.epicgames.com/documentation/unreal-engine/API/Plugins/AnimGen/UAnimGenController",
+      "https://dev.epicgames.com/documentation/unreal-engine/API/Plugins/AnimGen/UAnimGenControllerTrainingSettin-"
+    ],
+    "LatestProof": "work/animgen-feasibility/result.json",
+    "UnrealBlocker": {
+      "resolved": true,
+      "reason": "UE 5.8.3 installation and .NET SDK repair complete; editor module compiled and actual generated poses captured",
+      "existingProjectsModified": false
+    },
+    "WorkingVersions": "work/animgen-feasibility/working-versions.json",
+    "SamplePipelineStatus": "work/animgen-feasibility/sample-pipeline-status.json"
+  },
+  "FullbodyProof": {
+    "at": "2026-10-09T18:57:50.665187+02:00",
+    "dllSha256": "F4F035D954BFC39F59E170E494C6ED1B0093E332C55167649D1C43F3C5A1817D",
+    "clipSha256": "109956C449EC4AB9DA9D68F944C173F844D391074B3A5D3310264B9F180484FF",
+    "layoutHashHex": "00db32d37719931f",
+    "result": "One complete Corvo forward advance, native-FP-inspired guard and recovery authored in Blender and played on the owned native D2 Doppelganger",
+    "pipeline": "Offline full-body Blender authoring to validated native-skeleton local-pose clip; existing Steam-driven root; native correctives and equipment",
+    "productionIntegrated": false,
+    "animGenUsed": false,
+    "userVisualAcceptance": "Pending user review of recorded proof, not a milestone approval gate",
+    "visualReview": {
+      "evidence": "controller-video-4, authored-ready/step/settled/guard/recovery images, final-authoring-guard.png",
+      "assessment": "Useful limited proof; skin proportions coherent, support contacts retained, guard hand on hilt, complete-body action survives transfer",
+      "limitations": [
+        "Restrained offhand and narrow stance still deserve artistic refinement",
+        "Existing relaxed native idle and open hand return outside the authored clip",
+        "Low capture cadence limits judder assessment",
+        "No Emily, direction changes, crouch, terrain or complete moveset acceptance"
+      ]
+    },
+    "runtimeMetrics": "runtime-verification.json",
+    "runtimeSafety": "safety-verification.json",
+    "additionalSafety": {
+      "FinalStatus": {
+        "experimental": true,
+        "active": false,
+        "start": 121907656,
+        "end": 0,
+        "seconds": 0.800003,
+        "fixed": -1.0,
+        "checksum": 11806995091830539036,
+        "applied": 4216,
+        "refused": 1
+      },
+      "NoMovementExpirySeconds": 10,
+      "ObservedActiveAfterExpiry": false
+    },
+    "firstPersonRegression": "milestone-F4F/player-arm-observation-verification.json",
+    "baselineIntegrity": "milestone-F4F/baseline-integrity-verification.json",
+    "videos": [
+      "d2-fullbody-sequence.mp4",
+      "blender-sequence.mp4"
+    ],
+    "authoring": "corvo-fullbody-authored.blend",
+    "instructions": "README.txt",
+    "transport": "Existing native SteamNetworkingSockets012 on one PC; separate-account Internet hosting/joining not established by this proof",
+    "preserved": [
+      "work/friendly-fire-345C",
+      "work/sword-grip-fit/789d-grip-milestone",
+      "work/sword-grip-fit/2997-combined-research",
+      "work/fullbody-proof/milestone-F4F"
+    ],
+    "blocker": {
+      "component": "UE 5.8.2 / Epic AnimGen",
+      "approvalReview": "Rejected uninstall/removal because confirmation deletes engine data; cancelled, not retried",
+      "reason": "Registered engine directory missing; repair IS-0002-DP-01",
+      "fallback": "Blender 5.2.0 LTS",
+      "existingProjectsModified": false
+    },
+    "confirmedFindings": [
+      "Native skinned 215-joint Corvo imported with preserved weights and rest axes",
+      "Set edit-bone length before assigning native matrix; full rest-matrix comparison catches inverse-bind corruption",
+      "Authoring clip must leave root/anchor identity and preserve anatomical local translations",
+      "Native corrective helper routine edits local and global matrices; final native pass required",
+      "Repeated native setviewpos is not a locomotion driver; controller-driven step removed observed vertical oscillation"
+    ],
+    "hypotheses": [
+      "Dynamic view-height subtraction plus deferred position event likely explains repeated-setviewpos height oscillation; exact causal path not completely traced"
+    ],
+    "pending": [
+      "Automatic selection by replicated movement/combat state and interruption arbitration",
+      "Convincing start/stop/turn/stance transition set",
+      "Emily adaptation and broad sword contact review",
+      "Native UI/session setup, campaign and complete no-friendly-fire coverage"
+    ]
+  },
+  "UnrealInstallation": {
+    "At": "2026-10-10T00:42:46.4758843+02:00",
+    "UserAuthorizedEngineDeletion": true,
+    "UninstallSubmitted": true,
+    "EngineVersion": "5.8.2",
+    "OriginalEnginePath": "C:/Program Files/Epic Games/UE_5.8",
+    "OriginalPathExists": false,
+    "Status": "Completed: Launcher SHA verification passed; isolated AnimGen Python commandlet passed",
+    "ConsentProcessObserved": false,
+    "ExistingProjectManifest": "existing-project-before-engine-reinstall.json",
+    "LocalInstallDestination": "C:/Users/adako/Documents/Codex/Tools/UE_5.8",
+    "D2ProcessesUntouched": false,
+    "DownloadSizeGB": 11.654,
+    "CreateShortcut": false,
+    "RequiredStorageGB": 29.51,
+    "DownloadStartedVerified": true,
+    "UacConsentPid": 55992,
+    "UninstallCompleted": true,
+    "OriginalProjectCheckedFiles": 1828,
+    "OptionalPlatformsSelected": [],
+    "InstallSubmitted": true,
+    "OriginalProjectChangedFiles": 0,
+    "ValidationScript": "Verify-Engine.ps1",
+    "TargetEngineBuild": "5.8.3-58210709+++UE5+Release-5.8-Windows",
+    "UninstallCompletedAtUtc": "2026-10-09T21:46:17Z",
+    "MetaHumanCoreDataSelected": false,
+    "DebugSymbolsSelected": false,
+    "PathLengthBlockerResolved": true,
+    "TargetEngineVersion": "5.8.3",
+    "SelectedComponents": [
+      "Core Components",
+      "Templates and Feature Packs",
+      "Engine Source"
+    ],
+    "ProgressDiagnosis": "install-progress-diagnosis.json",
+    "VerificationProgress": 1,
+    "CompletedAtUtc": "2026-10-09T22:38:17.631Z",
+    "WorkingVersions": "working-versions.json",
+    "D2ProcessNote": "Installation preserved the environment; later isolated process restarts recovered memory and loaded the candidate DLL; protected saves and Steam assets verified"
+  },
+  "AnimGenProof": {
+    "at": "2026-10-10T09:09:45.51195+02:00",
+    "result": "Actual Epic AnimGen locomotion retargeted to native Corvo with D2 first-person sword constraints and played in isolated D2",
+    "dllSha256": "092ED98F46921D73A46354CA31F69DE7AEFDFDF30FD9B14DAC767AE49ED9A23B",
+    "clipSha256": "AA3942F70C5494949E00B18925E9377425A2B88F3E8C8B7C460D8E4FC3F3526C",
+    "animGenUsed": true,
+    "animGenRunsInsideD2": false,
+    "productionIntegrated": false,
+    "completeMoveset": false,
+    "userVisualAcceptance": "Not yet reviewed by user; no milestone approval requested",
+    "scope": "One forward start/walk/stop, authored FP-inspired guard and recovery on flat Dunwall terrain, Corvo only",
+    "videos": [
+      "d2-generated-sequence.mp4",
+      "blender-generated-sequence.mp4"
+    ],
+    "authoring": "exports/corvo-generated-candidate.blend",
+    "instructions": "README.txt",
+    "runtime": {
+      "take": "runtime-take-5",
+      "source": "native read-only",
+      "accepted_samples": 475,
+      "rejected_samples": 115,
+      "final_phase": 8.0,
+      "refusals_during_take": 0,
+      "expected_travel_m": 3.982501983642578,
+      "actual_travel_m": 4.083116,
+      "source_vertical_range_m": 0.0,
+      "anatomical_local_translation_max_error_m": 0,
+      "socket_local_position_max_error_m": 0.0,
+      "reconstructed_phase_rotation_error_degrees": {
+        "count": 6969,
+        "median": 0.08846932034957805,
+        "p95": 1.6095714021146577,
+        "max": 38.1612190948513
+      },
+      "largest_rotation_outliers": [
+        {
+          "tick": 172734765,
+          "time": 6.625,
+          "phase": 6.234,
+          "joint": "right_arm_jnt",
+          "degrees": 38.1612190948513
+        },
+        {
+          "tick": 172734781,
+          "time": 6.641,
+          "phase": 6.25,
+          "joint": "right_arm_jnt",
+          "degrees": 37.29281072485572
+        },
+        {
+          "tick": 172734750,
+          "time": 6.61,
+          "phase": 6.219,
+          "joint": "right_arm_jnt",
+          "degrees": 32.917263070285536
+        },
+        {
+          "tick": 172734718,
+          "time": 6.578,
+          "phase": 6.187,
+          "joint": "right_wrist_jnt",
+          "degrees": 31.384709776742024
+        },
+        {
+          "tick": 172734718,
+          "time": 6.578,
+          "phase": 6.187,
+          "joint": "right_arm_jnt",
+          "degrees": 30.901787174281775
+        },
+        {
+          "tick": 172734703,
+          "time": 6.563,
+          "phase": 6.172,
+          "joint": "right_wrist_jnt",
+          "degrees": 28.38147921604706
+        },
+        {
+          "tick": 172734765,
+          "time": 6.625,
+          "phase": 6.234,
+          "joint": "right_elbow_jnt",
+          "degrees": 26.553499760737537
+        },
+        {
+          "tick": 172736156,
+          "time": 8.016,
+          "phase": 7.625,
+          "joint": "left_elbow_jnt",
+          "degrees": 25.28525186199873
+        },
+        {
+          "tick": 172734781,
+          "time": 6.641,
+          "phase": 6.25,
+          "joint": "right_elbow_jnt",
+          "degrees": 24.363372198419075
+        },
+        {
+          "tick": 172736000,
+          "time": 7.86,
+          "phase": 7.469,
+          "joint": "right_arm_jnt",
+          "degrees": 23.66586180254901
+        },
+        {
+          "tick": 172734750,
+          "time": 6.61,
+          "phase": 6.219,
+          "joint": "right_wrist_jnt",
+          "degrees": 21.939540492782758
+        },
+        {
+          "tick": 172734765,
+          "time": 6.625,
+          "phase": 6.234,
+          "joint": "right_wrist_jnt",
+          "degrees": 21.87678198601922
+        }
+      ],
+      "high_contact_ankle_speed_m_s": [
+        {
+          "count": 224,
+          "median": 0.0365556077003687,
+          "p95": 0.36371588423898604,
+          "max": 1.2482037603517384
+        },
+        {
+          "count": 213,
+          "median": 0.026187000689975704,
+          "p95": 0.34776896844107014,
+          "max": 0.8109863253164868
+        }
+      ],
+      "high_contact_segments": [
+        [
+          {
+            "samples": 89,
+            "max_displacement_from_first_m": 0.060659284993073916
+          },
+          {
+            "samples": 18,
+            "max_displacement_from_first_m": 0.042037698187568334
+          },
+          {
+            "samples": 21,
+            "max_displacement_from_first_m": 0.022116219307788655
+          },
+          {
+            "samples": 105,
+            "max_displacement_from_first_m": 0.08653471602228156
+          }
+        ],
+        [
+          {
+            "samples": 77,
+            "max_displacement_from_first_m": 0.02210389784681074
+          },
+          {
+            "samples": 21,
+            "max_displacement_from_first_m": 0.0571749320430726
+          },
+          {
+            "samples": 18,
+            "max_displacement_from_first_m": 0.02607667145506942
+          },
+          {
+            "samples": 18,
+            "max_displacement_from_first_m": 0.020465252575124965
+          },
+          {
+            "samples": 90,
+            "max_displacement_from_first_m": 0.0865052337527398
+          }
+        ]
+      ],
+      "entry_exit_blends_excluded": true,
+      "quality_accepted_as_complete_moveset": false,
+      "limitations": [
+        "Single flat Corvo forward path only",
+        "Phase inferred from root observations rather than an atomic phase/pose record; especially approximate at final stop. Capture attempts every 20 ms. Do not interpret peak transition error as established pose corruption.",
+        "Contact curves are confidence, not a guarantee of visual foot planting",
+        "No native weapon transform captured by this script; socket agreement alone does not establish hilt fit",
+        "Screenshots and video required for visual assessment"
+      ],
+      "fixed_guard_comparison": {
+        "clip_frame": 405,
+        "seconds": 6.75,
+        "accepted_samples": 77,
+        "rejected_samples": 18,
+        "anatomical_and_socket_rotation_error_degrees": {
+          "count": 1848,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.03956468205889273
+        },
+        "anatomical_and_socket_translation_error_m": {
+          "count": 1848,
+          "median": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "native_correctives_excluded": true
+      },
+      "fixed_guard_native_sword_attachment": [
+        {
+          "tick": 172997218,
+          "joint": 17,
+          "translation_error_m": 0.0,
+          "rotation_error_degrees": 0.0,
+          "native_render_position_error_m": 0.0
+        }
+      ]
+    },
+    "runtimeSafety": "safety-verification.json",
+    "leaseSafety": "lease-expiry-verification.json",
+    "baselineIntegrity": "baseline-integrity-verification.json",
+    "videoProvenance": "video-provenance.json",
+    "workingVersions": "working-versions.json",
+    "milestone": "milestone-092E",
+    "confirmed": [
+      "Native AnimGen schema valid throughout 480 generated 60-Hz poses",
+      "Generated root motion extracted from native attributes; legacy extraction slot was not sufficient",
+      "Native mesh import requires rest-scale compensation in Blender",
+      "Native anatomical lengths and root authority preserved",
+      "Complete sequence reached phase 8 without runtime refusal",
+      "Exact guard transfer and stable sword attachment agree",
+      "Pause, cancellation, wrong-role/invalid-file refusal and new lease expiry verified"
+    ],
+    "visualAssessment": {
+      "decision": "Retain for development; keep separate from stable automatic movement",
+      "observed": "Coherent native-body walk silhouette and sword guard survive authoring transfer",
+      "remaining": [
+        "Foot drift and start/stop quality",
+        "Restrained guard posture",
+        "Old native idle/open hand returns after release",
+        "Capture cadence limits smoothness judgment"
+      ]
+    },
+    "notEstablished": [
+      "Emily or complete moveset",
+      "Model learned swordplay from D2 first-person clips",
+      "Arbitrary terrain or combat interruption",
+      "Full first-person combat regression on this DLL",
+      "Full co-op campaign or separate-account Internet Steam sessions"
+    ],
+    "memoryIssue": "Overnight isolated game processes approached 69 GB combined private commit; verified save snapshot and restart recovered memory; cause and long-run growth remain unverified",
+    "live": [
+      {
+        "Role": "host",
+        "Pid": 60816,
+        "Epoch": 16,
+        "Handle": 209916411,
+        "Follow": true,
+        "NativeInterface": "SteamNetworkingSockets012",
+        "BodyStream": false,
+        "AuthoringProof": {
+          "experimental": true,
+          "active": false,
+          "start": 0,
+          "end": 0,
+          "seconds": 0.0,
+          "fixed": -1.0,
+          "checksum": 0,
+          "applied": 0,
+          "refused": 0
+        }
+      },
+      {
+        "Role": "client",
+        "Pid": 18928,
+        "Epoch": 16,
+        "Handle": 209916390,
+        "Follow": true,
+        "NativeInterface": "SteamNetworkingSockets012",
+        "BodyStream": false,
+        "AuthoringProof": {
+          "experimental": true,
+          "active": false,
+          "start": 172996375,
+          "end": 0,
+          "seconds": 6.75,
+          "fixed": 6.75,
+          "checksum": 1837878134471782003,
+          "applied": 7864,
+          "refused": 2
+        }
+      }
+    ],
+    "proofDisabledAtFinish": true
+  },
+  "MovesetExpansion": {
+    "scope": "Full remote moveset work in progress; first candidate bank covers armed idle + eight walking directions on both native rigs",
+    "complete": false,
+    "default_enabled": false,
+    "nonrenewable_lease_seconds": 60,
+    "coverage": "work/moveset-growth/coverage.json",
+    "functional_items": 105,
+    "source_aliases": 1942,
+    "native_first_person_changed": false,
+    "network": "Existing native Steam root and action streams",
+    "banks": [
+      {
+        "role": "corvo",
+        "sha256": "4d4f17ecf482f4b3b3f3c04900b83e9aca8323a3850b0f0b8cbf5b4cd1db42a5",
+        "layout_hash": 61698903717286687,
+        "bytes": 6556028,
+        "joints": 215
+      },
+      {
+        "role": "emily",
+        "sha256": "904f6b9080dd0453e4979d05f2c206b7853b9b16b9900c493a296cd836ef8d3c",
+        "layout_hash": 9573391624217783168,
+        "bytes": 6677996,
+        "joints": 219
+      }
+    ],
+    "tests": {
+      "direction_checks": 18,
+      "priority_checks": 13,
+      "bank_validation": "Both actual banks plus malformed inputs and phase math; full existing build regression suite passed"
+    },
+    "videos": [
+      "work/moveset-growth/corvo-walking.mp4",
+      "work/moveset-growth/emily-walking.mp4"
+    ],
+    "turn_feedback": [
+      {
+        "name": "turn_left_180",
+        "requested_unreal_yaw": -180,
+        "actual_unreal_yaw": 179.9961749019481,
+        "wrapped_error_degrees": 0.0038250980519478617,
+        "d2_playback": false
+      },
+      {
+        "name": "turn_left_90",
+        "requested_unreal_yaw": -90,
+        "actual_unreal_yaw": -90.01385349840155,
+        "wrapped_error_degrees": 0.013853498401545039,
+        "d2_playback": false
+      },
+      {
+        "name": "turn_right_180",
+        "requested_unreal_yaw": 180,
+        "actual_unreal_yaw": -179.709512978004,
+        "wrapped_error_degrees": 0.2904870219960003,
+        "d2_playback": false
+      },
+      {
+        "name": "turn_right_90",
+        "requested_unreal_yaw": 90,
+        "actual_unreal_yaw": 90.1306230047333,
+        "wrapped_error_degrees": 0.1306230047333088,
+        "d2_playback": false
+      }
+    ],
+    "turn_candidates": {
+      "retargeted_roles": [
+        "corvo",
+        "emily"
+      ],
+      "directions": [
+        90,
+        -90,
+        180,
+        -180
+      ],
+      "deployed": false,
+      "blocker": "Foot/knee continuity under root-following turns; source-timed right90 promising, remaining candidates fail continuity"
+    },
+    "native_fullbody_source_candidates": "work/moveset-growth/native-fullbody-candidates.json",
+    "remaining": "Dedicated transitions/foot polish, running/sprinting sources, turn runtime, crouch/lean, traversal, combat variants, ranged/items, paired actions, powers and interactions",
+    "previous_milestone": "work/animgen-feasibility/milestone-092E",
+    "ghidra_note": "Dishonored2.exe 0x140540a90 post comment saved"
+  },
+  "NaturalFullBodyMoveset": {
+    "at": "2026-10-10T17:52:04.450299+02:00",
+    "complete_moveset": false,
+    "functional_requirements": 105,
+    "requirements_with_candidates": 100,
+    "paired_role_recordings": 482,
+    "actual_game_recordings": [
+      {
+        "video": "native-corvo-1.mp4",
+        "character": "corvo",
+        "actual_capture_hz": 10.824064107164215,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Native D2 pose review. World-root translation and rotation intentionally remain controlled by the local player; clips are not gameplay bound."
+      },
+      {
+        "video": "native-emily-1.mp4",
+        "character": "emily",
+        "actual_capture_hz": 10.925025511735399,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Native D2 pose review. World-root translation and rotation intentionally remain controlled by the local player; clips are not gameplay bound."
+      },
+      {
+        "video": "gait-emily-video-1.mp4",
+        "character": "emily",
+        "alias": null,
+        "actual_capture_hz": 8.392101551480959,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Actual player inputs, native Steam root stream, authored native walk/run and directional blending. Phase advances with travelled distance."
+      },
+      {
+        "video": "stance-emily-video-2.mp4",
+        "character": "emily",
+        "alias": "crouch_sequence",
+        "actual_capture_hz": 7.591733445803459,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Actual D2 pose-only sequence on the native remote character. Actor root stays still; this recording evaluates body, native correctives and weapon attachment, not travelling foot contact."
+      },
+      {
+        "video": "powers-emily-video-1.mp4",
+        "character": "emily",
+        "alias": "power_cast_showcase",
+        "actual_capture_hz": 9.925990422289944,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Actual D2 pose-only sequence on the native remote character. Actor root stays still; this recording evaluates body, native correctives and weapon attachment, not travelling foot contact.",
+        "chapters": [
+          {
+            "name": "windblast",
+            "seconds": 0.424,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "doppelganger",
+            "seconds": 2.175,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "mesmerize",
+            "seconds": 5.19,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "bend time",
+            "seconds": 7.992,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "devouring swarm",
+            "seconds": 9.434,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "dark vision",
+            "seconds": 12.176,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "blink",
+            "seconds": 13.711,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "possession",
+            "seconds": 14.958,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "far reach",
+            "seconds": 16.45,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          },
+          {
+            "name": "domino",
+            "seconds": 18.436,
+            "timing_precision": "Approximate; 60ms telemetry cadence"
+          }
+        ],
+        "sequence_completed": true,
+        "clip_sha256": "80ee6d0e523b3921a5a1d92769e4904a805a9d81c3e60dacc285bc81b6923f72"
+      },
+      {
+        "video": "blink-assault-emily-video-1.mp4",
+        "character": "emily",
+        "alias": "blink_assault_kick_sequence",
+        "actual_capture_hz": 6.431459022418228,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Actual D2 pose-only sequence on the native remote character. Actor root stays still; this recording evaluates body, native correctives and weapon attachment, not travelling foot contact."
+      },
+      {
+        "video": "trap-wall-emily-video-1.mp4",
+        "character": "emily",
+        "alias": "springrazor_wall_place_sequence",
+        "actual_capture_hz": 7.056936647955093,
+        "container_fps": 30,
+        "timing": "Actual capture intervals, no speedup",
+        "scope": "Actual D2 pose-only sequence on the native remote character. Actor root stays still; this recording evaluates body, native correctives and weapon attachment, not travelling foot contact."
+      },
+      {
+        "video": "integrated-stance-corvo-v1.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Live walking, crouching and recovery",
+        "actual_capture_hz": 29.710526315789473,
+        "container_fps": "1129/38",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.122,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk forward",
+            "seconds": 2.159,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk backward",
+            "seconds": 3.54,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk left",
+            "seconds": 4.923,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk right",
+            "seconds": 6.055,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 7.532,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched idle",
+            "seconds": 9.319,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 10.561,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward",
+            "seconds": 11.929,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch left",
+            "seconds": 13.363,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch right",
+            "seconds": 14.765,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward left",
+            "seconds": 16.136,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward right",
+            "seconds": 17.474,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward right",
+            "seconds": 18.748,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward left",
+            "seconds": 20.038,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch stop",
+            "seconds": 21.545,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 22.728,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native block takes priority",
+            "seconds": 24.655,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sword attack takes priority",
+            "seconds": 26.331,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native jump takes priority",
+            "seconds": 28.349,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 30.461,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run forward",
+            "seconds": 31.736,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run backward",
+            "seconds": 33.035,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final idle",
+            "seconds": 34.65,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "F94E4F1DE4ACFB7553DE184344011BE421287FEBBAB3DFBBE457F8F7BCBAE964",
+        "bank_sha256": "C5926EA6EF7B26E23576F5AB69BB01A8A532088E6FD840AB0B3E1BB52817628C",
+        "sha256": "66dffeb92da12ad980a00c7885964d3e579e03e1ad58b3e93924bc38ff47cc1a",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "1129/38",
+          "duration": "38.000000",
+          "nb_frames": "1129"
+        },
+        "evidence": "integrated-stance-corvo-v1/take.json",
+        "requirements": [
+          "armed_idle",
+          "walk_8_directions",
+          "run_8_directions",
+          "crouch_idle",
+          "crouch_8_directions",
+          "stand_to_crouch",
+          "crouch_to_stand",
+          "crouch_stop_start",
+          "reverse_and_direction_changes",
+          "gait_speed_changes"
+        ],
+        "tests": [
+          "stance-bank-v1-test-2/result.json",
+          "stance-bank-v1-priority/result.json"
+        ],
+        "limitations": [
+          "Partial coverage per linked requirement; the video is not acceptance of every variant.",
+          "Dark Dunwall room; close-up weapon grip, terrain contacts and arbitrary interruptions need further review.",
+          "Attack, block and jump show existing native presentation priority, not completion of those action families.",
+          "Persistent test opt-in retires on pause/load; automatic session lifecycle integration remains pending."
+        ]
+      },
+      {
+        "video": "integrated-stance-emily-v1.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Live walking, crouching and recovery",
+        "actual_capture_hz": 29.68421052631579,
+        "container_fps": "564/19",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.123,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk forward",
+            "seconds": 2.161,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk backward",
+            "seconds": 3.522,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk left",
+            "seconds": 4.929,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Walk right",
+            "seconds": 6.063,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 7.553,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched idle",
+            "seconds": 9.34,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 10.534,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward",
+            "seconds": 11.951,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch left",
+            "seconds": 13.363,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch right",
+            "seconds": 14.747,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward left",
+            "seconds": 16.131,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward right",
+            "seconds": 17.423,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward right",
+            "seconds": 18.723,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward left",
+            "seconds": 20.052,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch stop",
+            "seconds": 21.56,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 22.772,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native block takes priority",
+            "seconds": 24.632,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sword attack takes priority",
+            "seconds": 26.345,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native jump takes priority",
+            "seconds": 28.38,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 30.444,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run forward",
+            "seconds": 31.734,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run backward",
+            "seconds": 33.022,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final idle",
+            "seconds": 34.628,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "F94E4F1DE4ACFB7553DE184344011BE421287FEBBAB3DFBBE457F8F7BCBAE964",
+        "bank_sha256": "316EAA92A2B85AE856AC561DD64F304CD3F50A57DAD4CECB5C97ADDCD95A8B20",
+        "sha256": "92a3e0d23f434a883db8d2c4ead146ae363d0106f5b74c0d9efd62f6035ffe9b",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "564/19",
+          "duration": "38.000000",
+          "nb_frames": "1128"
+        },
+        "evidence": "integrated-stance-emily-v1/take.json",
+        "requirements": [
+          "armed_idle",
+          "walk_8_directions",
+          "run_8_directions",
+          "crouch_idle",
+          "crouch_8_directions",
+          "stand_to_crouch",
+          "crouch_to_stand",
+          "crouch_stop_start",
+          "reverse_and_direction_changes",
+          "gait_speed_changes"
+        ],
+        "tests": [
+          "stance-bank-v1-test-2/result.json",
+          "stance-bank-v1-priority/result.json"
+        ],
+        "limitations": [
+          "Partial coverage per linked requirement; the video is not acceptance of every variant.",
+          "Dark Dunwall room; close-up weapon grip, terrain contacts and arbitrary interruptions need further review.",
+          "Attack, block and jump show existing native presentation priority, not completion of those action families.",
+          "Persistent test opt-in retires on pause/load; automatic session lifecycle integration remains pending."
+        ]
+      },
+      {
+        "video": "integrated-lean-corvo-v1.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Live standing/crouched lean and recovery",
+        "actual_capture_hz": 27.657894736842106,
+        "container_fps": "1051/38",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Exact native Leaning state and read-only horizontal lean amplitude travel over Steam and select authored whole-body balance shifts. Native movement releases the lean. Local first-person camera and controls remain untouched.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.122,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native standing lean left",
+            "seconds": 2.656,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits left lean",
+            "seconds": 5.643,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return forward",
+            "seconds": 7.136,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native standing lean right",
+            "seconds": 9.141,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits right lean",
+            "seconds": 12.157,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return forward",
+            "seconds": 13.635,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 15.638,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native crouched lean left",
+            "seconds": 18.145,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits crouched left lean",
+            "seconds": 21.155,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 22.662,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native crouched lean right",
+            "seconds": 24.635,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits crouched right lean",
+            "seconds": 27.659,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 29.126,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 31.136,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 34.636,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "6C4FEEC151EFA5527352522864791281A83C4D5B4323AEB0E4EBD1FEB2F8CEC7",
+        "bank_sha256": "AD45A693D3F4D81AB587ECC05A429889F96FC4D3B7AB0599D4B9AEF44FB3D45A",
+        "sha256": "00c1e8449df323d632aaa2d6d83d8048e67aa92cffee8d5ff76536c024b2ca57",
+        "capture": {
+          "width": 800,
+          "height": 540,
+          "avg_frame_rate": "1051/38",
+          "duration": "38.000000",
+          "nb_frames": "1051"
+        },
+        "evidence": "integrated-lean-corvo-v1/take.json",
+        "requirements": [
+          "stand_lean_left_right",
+          "crouch_lean_left_right"
+        ],
+        "tests": [
+          "lean-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Partial Dunwall coverage, no general visual acceptance.",
+          "Vertical peeking, collision-limited lean, sword interruptions and simultaneous direction reversals need further runtime coverage.",
+          "Dark room limits close-up hand and equipment inspection."
+        ]
+      },
+      {
+        "video": "integrated-lean-emily-v1.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Live standing/crouched lean and recovery",
+        "actual_capture_hz": 27.973684210526315,
+        "container_fps": "1063/38",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Exact native Leaning state and read-only horizontal lean amplitude travel over Steam and select authored whole-body balance shifts. Native movement releases the lean. Local first-person camera and controls remain untouched.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.111,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native standing lean left",
+            "seconds": 2.651,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits left lean",
+            "seconds": 5.616,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return forward",
+            "seconds": 7.129,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native standing lean right",
+            "seconds": 9.112,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits right lean",
+            "seconds": 12.147,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return forward",
+            "seconds": 13.657,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 15.619,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native crouched lean left",
+            "seconds": 18.124,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits crouched left lean",
+            "seconds": 21.135,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 22.641,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native crouched lean right",
+            "seconds": 24.619,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Movement exits crouched right lean",
+            "seconds": 27.64,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 29.13,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 31.112,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 34.654,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "6C4FEEC151EFA5527352522864791281A83C4D5B4323AEB0E4EBD1FEB2F8CEC7",
+        "bank_sha256": "1DDE5C8A0D1793597C3C9C85039ABD13D1029CB1D24E214458F5F2C05E6245DC",
+        "sha256": "acb18111c8350aa6e0b83b0be224a3cdc58aec100925f2338b419555e12fe301",
+        "capture": {
+          "width": 800,
+          "height": 540,
+          "avg_frame_rate": "1063/38",
+          "duration": "38.000000",
+          "nb_frames": "1063"
+        },
+        "evidence": "integrated-lean-emily-v1/take.json",
+        "requirements": [
+          "stand_lean_left_right",
+          "crouch_lean_left_right"
+        ],
+        "tests": [
+          "lean-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Partial Dunwall coverage, no general visual acceptance.",
+          "Vertical peeking, collision-limited lean, sword interruptions and simultaneous direction reversals need further runtime coverage.",
+          "Dark room limits close-up hand and equipment inspection."
+        ]
+      },
+      {
+        "video": "integrated-sprint-corvo-v2.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Live sprinting, crouching and recovery",
+        "actual_capture_hz": 27.736842105263158,
+        "container_fps": "527/19",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual native sprint/standing/crouch inputs and Steam semantic state select the whole-body movement bank. Steps follow network-controlled travel. Root timestamps and gradual buffer recovery prevent arrival bursts from compressing movement time. Native block/slash presentation takes priority. Complete movement, terrain, equipment and effects remain unfinished.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.125,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint forward",
+            "seconds": 2.664,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run backward recovery",
+            "seconds": 5.136,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing stop",
+            "seconds": 7.623,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint diagonal left",
+            "seconds": 9.666,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run back right recovery",
+            "seconds": 12.153,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing stop",
+            "seconds": 14.656,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint diagonal right",
+            "seconds": 16.646,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run back left recovery",
+            "seconds": 19.165,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 21.663,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 23.624,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward",
+            "seconds": 25.667,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 28.161,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native block priority",
+            "seconds": 30.639,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native slash priority",
+            "seconds": 32.629,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 34.623,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "6C4FEEC151EFA5527352522864791281A83C4D5B4323AEB0E4EBD1FEB2F8CEC7",
+        "bank_sha256": "AD45A693D3F4D81AB587ECC05A429889F96FC4D3B7AB0599D4B9AEF44FB3D45A",
+        "sha256": "70b89338277a33d04e362bd484651fbb17200f017b64be755e17c870c85eb7ba",
+        "capture": {
+          "width": 800,
+          "height": 540,
+          "avg_frame_rate": "527/19",
+          "duration": "38.000000",
+          "nb_frames": "1054"
+        },
+        "evidence": "integrated-sprint-corvo-v2/take.json",
+        "requirements": [
+          "sprint_forward_and_diagonals",
+          "start_stop_each_gait",
+          "gait_speed_changes",
+          "reverse_and_direction_changes",
+          "stand_to_crouch",
+          "crouch_to_stand",
+          "crouch_stop_start"
+        ],
+        "tests": [
+          "sprint-bank-v1-underrun/result.json",
+          "stance-bank-v4-regression-2/result.json",
+          "stance-bank-v4-priority/result.json",
+          "lean-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Partial coverage per linked requirement; the video is not acceptance of every variant.",
+          "Dark Dunwall room; close-up weapon grip, terrain contacts and arbitrary interruptions need further review.",
+          "Attack, block and jump show existing native presentation priority, not completion of those action families.",
+          "Persistent test opt-in retires on pause/load; automatic session lifecycle integration remains pending.",
+          "Wide view retains sprint travel; initial body is near the right edge and local sword. Later crouch is partly occluded by native furniture."
+        ]
+      },
+      {
+        "video": "integrated-sprint-emily-v2.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Live sprinting, crouching and recovery",
+        "actual_capture_hz": 28.13157894736842,
+        "container_fps": "1069/38",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual native sprint/standing/crouch inputs and Steam semantic state select the whole-body movement bank. Steps follow network-controlled travel. Root timestamps and gradual buffer recovery prevent arrival bursts from compressing movement time. Native block/slash presentation takes priority. Complete movement, terrain, equipment and effects remain unfinished.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.116,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint forward",
+            "seconds": 2.644,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run backward recovery",
+            "seconds": 5.131,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing stop",
+            "seconds": 7.665,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint diagonal left",
+            "seconds": 9.666,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run back right recovery",
+            "seconds": 12.14,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing stop",
+            "seconds": 14.634,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native sprint diagonal right",
+            "seconds": 16.626,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Run back left recovery",
+            "seconds": 19.163,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand to crouch",
+            "seconds": 21.657,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch forward",
+            "seconds": 23.631,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch backward",
+            "seconds": 25.619,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch to stand",
+            "seconds": 28.148,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native block priority",
+            "seconds": 30.637,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native slash priority",
+            "seconds": 32.623,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 34.644,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "6C4FEEC151EFA5527352522864791281A83C4D5B4323AEB0E4EBD1FEB2F8CEC7",
+        "bank_sha256": "1DDE5C8A0D1793597C3C9C85039ABD13D1029CB1D24E214458F5F2C05E6245DC",
+        "sha256": "daa6502de951aa0463b0599127b50854d3efe31c0872da819fe7e935781449f1",
+        "capture": {
+          "width": 800,
+          "height": 540,
+          "avg_frame_rate": "1069/38",
+          "duration": "38.000000",
+          "nb_frames": "1069"
+        },
+        "evidence": "integrated-sprint-emily-v2/take.json",
+        "requirements": [
+          "sprint_forward_and_diagonals",
+          "start_stop_each_gait",
+          "gait_speed_changes",
+          "reverse_and_direction_changes",
+          "stand_to_crouch",
+          "crouch_to_stand",
+          "crouch_stop_start"
+        ],
+        "tests": [
+          "sprint-bank-v1-underrun/result.json",
+          "stance-bank-v4-regression-2/result.json",
+          "stance-bank-v4-priority/result.json",
+          "lean-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Partial coverage per linked requirement; the video is not acceptance of every variant.",
+          "Dark Dunwall room; close-up weapon grip, terrain contacts and arbitrary interruptions need further review.",
+          "Attack, block and jump show existing native presentation priority, not completion of those action families.",
+          "Persistent test opt-in retires on pause/load; automatic session lifecycle integration remains pending.",
+          "Wide view retains sprint travel; initial body is near the right edge and local sword. Later crouch is partly occluded by native furniture."
+        ]
+      },
+      {
+        "video": "integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Standing, held, crouched and moving jumps",
+        "actual_capture_hz": 29.615384615384617,
+        "container_fps": "385/13",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Read-only native Jumping/Falling states and native start/apex heights control the remote full-body air bank. Rising pose follows replicated root height. Native ground contact starts authored standing/running/crouched landing recovery; local first-person physics and controls remain unchanged.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.127,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing jump",
+            "seconds": 2.654,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Held jump",
+            "seconds": 6.148,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 10.166,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched jump and landing",
+            "seconds": 12.134,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 16.127,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Move into jump",
+            "seconds": 18.131,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Moving jump",
+            "seconds": 18.427,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Landing recovery",
+            "seconds": 22.125,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final idle",
+            "seconds": 24.148,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "A38195E8EB05E6F8BB6153289B6BDCE6F29488142D5D8B7A58CBD04DF4075B70",
+        "bank_sha256": "3FAC85F7CF38B8F8DAF40281EF09FC3859E65ED7C4DB4732BDD73C906FC54A59",
+        "sha256": "8bff2a3b0263cb30a5995a2ad25361f3c4ca6d67b53250b54f0becc37fee7100",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "385/13",
+          "duration": "26.000000",
+          "nb_frames": "770"
+        },
+        "evidence": "integrated-air-corvo-v5/take.json",
+        "requirements": [
+          "standing_jump_takeoff",
+          "running_jump_takeoff",
+          "crouch_jump_transition",
+          "rising_airborne",
+          "fall_loop",
+          "soft_landing",
+          "moving_landing"
+        ],
+        "tests": [
+          "air-bank-v4-semantic/result.json",
+          "air-bank-v2-priority/result.json"
+        ],
+        "limitations": [
+          "Ordinary Dunwall jumps only; no complete family or visual acceptance.",
+          "Double jump, high falls, hard landings, slopes, airborne attacks and arbitrary interruptions remain unverified.",
+          "Moving takeoff uses observed speed blend; a short walking start does not certify maximum-speed running jumps."
+        ]
+      },
+      {
+        "video": "integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Standing, held, crouched and moving jumps",
+        "actual_capture_hz": 29.653846153846153,
+        "container_fps": "771/26",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": true,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Read-only native Jumping/Falling states and native start/apex heights control the remote full-body air bank. Rising pose follows replicated root height. Native ground contact starts authored standing/running/crouched landing recovery; local first-person physics and controls remain unchanged.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.131,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing jump",
+            "seconds": 2.641,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Held jump",
+            "seconds": 6.161,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 10.148,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched jump and landing",
+            "seconds": 12.178,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing recovery",
+            "seconds": 16.166,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Move into jump",
+            "seconds": 18.141,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Moving jump",
+            "seconds": 18.452,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Landing recovery",
+            "seconds": 22.137,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final idle",
+            "seconds": 24.177,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "A38195E8EB05E6F8BB6153289B6BDCE6F29488142D5D8B7A58CBD04DF4075B70",
+        "bank_sha256": "CA7B5A3EE7FE4E12BAA5053B47CE6E5268D9E918E93D58245A9D9316B4B75FFD",
+        "sha256": "4fb7c4f702e78f69a488d39b9096f220730b9dc7e3875fe83db476b0feb1756f",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "771/26",
+          "duration": "26.000000",
+          "nb_frames": "771"
+        },
+        "evidence": "integrated-air-emily-v5/take.json",
+        "requirements": [
+          "standing_jump_takeoff",
+          "running_jump_takeoff",
+          "crouch_jump_transition",
+          "rising_airborne",
+          "fall_loop",
+          "soft_landing",
+          "moving_landing"
+        ],
+        "tests": [
+          "air-bank-v4-semantic/result.json",
+          "air-bank-v2-priority/result.json"
+        ],
+        "limitations": [
+          "Ordinary Dunwall jumps only; no complete family or visual acceptance.",
+          "Double jump, high falls, hard landings, slopes, airborne attacks and arbitrary interruptions remain unverified.",
+          "Moving takeoff uses observed speed blend; a short walking start does not certify maximum-speed running jumps."
+        ]
+      },
+      {
+        "video": "integrated-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Native-timed sword combos, heavy attack and guards",
+        "actual_capture_hz": 29.612903225806452,
+        "container_fps": "918/31",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": false,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual native sword scene semantics over Steam drive authored standing/crouched body attacks and guards. Root placement and local first-person controls remain native. Visual acceptance, hits, air combat and other movement families remain pending.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.135,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native short slash",
+            "seconds": 2.453,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo first slash",
+            "seconds": 5.359,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo second slash",
+            "seconds": 5.889,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo third slash",
+            "seconds": 6.477,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Heavy windup, hold and release",
+            "seconds": 8.963,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing guard and release",
+            "seconds": 12.461,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 16.266,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched slash",
+            "seconds": 18.458,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched guard and release",
+            "seconds": 21.566,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return to standing",
+            "seconds": 25.466,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final armed idle",
+            "seconds": 28.476,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "D3EF81227796790A8373903E189BC2833E44CA469A82FC1F6402FF9BFEEC6452",
+        "bank_sha256": "FB7A204B273EBD3A52150A0003A19BCB307E65FF91BD4207F2A1176C32130B1B",
+        "sha256": "6bfb7f22c0f8e8ebb7ca64e48a28041d6e8686594a44e863b2a200416ec5b8fd",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "918/31",
+          "duration": "31.000000",
+          "nb_frames": "918"
+        },
+        "evidence": "integrated-combat-corvo-v1/take.json",
+        "requirements": [
+          "light_attack_variants",
+          "heavy_attack_variants",
+          "crouched_attack",
+          "block_enter_hold_exit"
+        ],
+        "tests": [
+          "combat-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Both-role isolated native-input and Steam timing checks pass; no complete combat-family or visual acceptance.",
+          "Short/alternating slashes, one heavy windup/hold/release, one standing/crouched guard quadrant. Other directional parries, counters, victim contacts and hit reactions are unfinished.",
+          "Airborne combat and moving-foot contact remain unfinished. Heavy hold currently retains a static authored windup pose.",
+          "Complete body remains visible, but this camera distance does not establish fine grip/contact acceptance."
+        ]
+      },
+      {
+        "video": "integrated-combat-emily-v1.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Native-timed sword combos, heavy attack and guards",
+        "actual_capture_hz": 29.677419354838708,
+        "container_fps": "920/31",
+        "timing": "Real-time Windows Graphics Capture timestamps; no speedup or output frame duplication.",
+        "kind": "game",
+        "travelling": false,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Actual native sword scene semantics over Steam drive authored standing/crouched body attacks and guards. Root placement and local first-person controls remain native. Visual acceptance, hits, air combat and other movement families remain pending.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.123,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Native short slash",
+            "seconds": 2.444,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo first slash",
+            "seconds": 5.365,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo second slash",
+            "seconds": 5.895,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Combo third slash",
+            "seconds": 6.422,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Heavy windup, hold and release",
+            "seconds": 8.936,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Standing guard and release",
+            "seconds": 12.433,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 16.239,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched slash",
+            "seconds": 18.466,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched guard and release",
+            "seconds": 21.547,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Return to standing",
+            "seconds": 25.443,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final armed idle",
+            "seconds": 28.456,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "D3EF81227796790A8373903E189BC2833E44CA469A82FC1F6402FF9BFEEC6452",
+        "bank_sha256": "DB17268E8F3FC072AF3E00AFADCD20D8065F6F5AB4575AAA7B31D0BE04FA37C8",
+        "sha256": "4cde14132b064643b713e77b36918716a2cb335cc63bedb4f35dfd566de7c011",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "920/31",
+          "duration": "31.000000",
+          "nb_frames": "920"
+        },
+        "evidence": "integrated-combat-emily-v1/take.json",
+        "requirements": [
+          "light_attack_variants",
+          "heavy_attack_variants",
+          "crouched_attack",
+          "block_enter_hold_exit"
+        ],
+        "tests": [
+          "combat-bank-v1-test/result.json"
+        ],
+        "limitations": [
+          "Both-role isolated native-input and Steam timing checks pass; no complete combat-family or visual acceptance.",
+          "Short/alternating slashes, one heavy windup/hold/release, one standing/crouched guard quadrant. Other directional parries, counters, victim contacts and hit reactions are unfinished.",
+          "Airborne combat and moving-foot contact remain unfinished. Heavy hold currently retains a static authored windup pose.",
+          "Complete body remains visible, but this camera distance does not establish fine grip/contact acceptance."
+        ]
+      },
+      {
+        "video": "integrated-equipment-close-corvo-v3.mp4",
+        "character": "corvo",
+        "label": "Corvo \u00b7 Native sword draw/holster, standing and crouched",
+        "actual_capture_hz": 29.633333333333333,
+        "container_fps": "889/30",
+        "timing": "Real Windows Graphics Capture timestamps; no speedup or duplicated output frames.",
+        "kind": "game",
+        "travelling": false,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Native first-person inputs and exact owned equipment scenes drive whole-body draw/holster and body-relative native clone sword handoff over Steam.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.122,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Holster sword",
+            "seconds": 2.373,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 5.462,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 6.925,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Draw sword at body-relative hand contact",
+            "seconds": 8.724,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 11.631,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched holster",
+            "seconds": 13.739,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 16.843,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 18.225,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched draw",
+            "seconds": 20.138,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand",
+            "seconds": 23.061,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Guard after equipment change",
+            "seconds": 25.45,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final recovery",
+            "seconds": 27.947,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "0E32032996386A453EA1D99A4BB4C3C96D52A2F61478802F85C6700BBEABB3B3",
+        "bank_sha256": "8F43991F3D542AF08DA3DF0135C8E311E9E7B5BDD21175577A3D9185E846A63A",
+        "sha256": "efc851426b1b54bc2bf9cbd2ad80acfbd9c30349e173c5fd7795e649eb0f94ff",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "889/30",
+          "duration": "30.000000",
+          "nb_frames": "889"
+        },
+        "evidence": "integrated-equipment-close-corvo-v3/take.json",
+        "requirements": [
+          "sword_draw_holster",
+          "sword_ready_idle",
+          "stand_to_crouch",
+          "crouch_to_stand"
+        ],
+        "tests": [
+          "equipment-bank-v3-test/result.json",
+          "equipment-pause-v3/result.json",
+          "equipment-v3-priority/result.json"
+        ],
+        "visual_review": {
+          "contact_sheet": "integrated-equipment-close-corvo-v3/contact.jpg",
+          "observations": [
+            "Full body visible in native Dunwall room.",
+            "Crouched equipment posture no longer adds the complete crouch bend twice.",
+            "Native sword changes between the hand and hip at the authored reach."
+          ],
+          "accepted": false
+        },
+        "limitations": [
+          "One stationary view per role; fine finger contact, moving draw/holster and arbitrary interruption need additional visual review.",
+          "Crouched variants use a bounded posture adaptation of the native standing motion.",
+          "No general family or complete movement acceptance from this take.",
+          "Pause cleanup is verified; automatic session rearm and full death/load lifecycle remain unfinished."
+        ]
+      },
+      {
+        "video": "integrated-equipment-close-emily-v3.mp4",
+        "character": "emily",
+        "label": "Emily \u00b7 Native sword draw/holster, standing and crouched",
+        "actual_capture_hz": 29.666666666666668,
+        "container_fps": "89/3",
+        "timing": "Real Windows Graphics Capture timestamps; no speedup or duplicated output frames.",
+        "kind": "game",
+        "travelling": false,
+        "gameplay_bound": true,
+        "complete": false,
+        "visual_accepted": false,
+        "scope": "Native first-person inputs and exact owned equipment scenes drive whole-body draw/holster and body-relative native clone sword handoff over Steam.",
+        "chapters": [
+          {
+            "name": "Armed standing",
+            "seconds": 1.124,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Holster sword",
+            "seconds": 2.352,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 5.447,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 6.927,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Draw sword at body-relative hand contact",
+            "seconds": 8.765,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouch",
+            "seconds": 11.668,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched holster",
+            "seconds": 13.74,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 16.85,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stationary grip inspection",
+            "seconds": 18.232,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Crouched draw",
+            "seconds": 20.129,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Stand",
+            "seconds": 23.05,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Guard after equipment change",
+            "seconds": 25.457,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          },
+          {
+            "name": "Final recovery",
+            "seconds": 27.928,
+            "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+          }
+        ],
+        "dll_sha256": "0E32032996386A453EA1D99A4BB4C3C96D52A2F61478802F85C6700BBEABB3B3",
+        "bank_sha256": "674A9EF1004960E80D1B91932A5C5062A68FD3598E05DED0E2D51F330EAE8AD9",
+        "sha256": "15fa00b8da00a5f290a1349358d10d20852f5f0a2ee40b0794c37a42932034a0",
+        "capture": {
+          "width": 944,
+          "height": 540,
+          "avg_frame_rate": "89/3",
+          "duration": "30.000000",
+          "nb_frames": "890"
+        },
+        "evidence": "integrated-equipment-close-emily-v3/take.json",
+        "requirements": [
+          "sword_draw_holster",
+          "sword_ready_idle",
+          "stand_to_crouch",
+          "crouch_to_stand"
+        ],
+        "tests": [
+          "equipment-bank-v3-test/result.json",
+          "equipment-pause-v3/result.json",
+          "equipment-v3-priority/result.json"
+        ],
+        "visual_review": {
+          "contact_sheet": "integrated-equipment-close-emily-v3/contact.jpg",
+          "observations": [
+            "Full body visible in native Dunwall room.",
+            "Crouched equipment posture no longer adds the complete crouch bend twice.",
+            "Native sword changes between the hand and hip at the authored reach."
+          ],
+          "accepted": false
+        },
+        "limitations": [
+          "One stationary view per role; fine finger contact, moving draw/holster and arbitrary interruption need additional visual review.",
+          "Crouched variants use a bounded posture adaptation of the native standing motion.",
+          "No general family or complete movement acceptance from this take.",
+          "Pause cleanup is verified; automatic session rearm and full death/load lifecycle remain unfinished."
+        ]
+      }
+    ],
+    "native_sources_sampled": 1889,
+    "first_person_constraints": false,
+    "unchanged_live_dll": "CF60C5EAB9A08573F128F2EF3958F9237BC92FCDC5B551682601DF44C6BDBD46",
+    "remaining": [
+      {
+        "id": "ragdoll_handoff",
+        "family": "combat"
+      },
+      {
+        "id": "scripted_scene_pose_handoff",
+        "family": "interactions"
+      },
+      {
+        "id": "cutscene_enter_exit",
+        "family": "interactions"
+      },
+      {
+        "id": "map_load_checkpoint_recovery",
+        "family": "interactions"
+      },
+      {
+        "id": "incapacitation_and_rescue_if_supported",
+        "family": "interactions"
+      }
+    ],
+    "limitations": [
+      "Authored candidates are not visual acceptance or complete game-state bindings.",
+      "Right game-window capture remains blocked by monitor crop error; left capture recovered.",
+      "Two 39.73-second native reading clips exceed the current 30-second in-game review duration limit; offline recordings are complete.",
+      "Offline native helper/cloth preview approximations differ from actual D2 rendering.",
+      "Contact targets, held props, paired victims, character powers, many transitions and contextual variants remain incomplete."
+    ],
+    "review": "natural-moveset/review.html",
+    "catalog": "natural-moveset/review-catalog.json",
+    "integrity": "natural-moveset/authoring-pass-integrity.json",
+    "stable_milestone": "natural-moveset/milestone-CF60",
+    "tests": [
+      "window-v5-roundtrip.json",
+      "slide-v4-roundtrip.json",
+      "ammo-changes-v1-roundtrip.json",
+      "window-choke-v2-roundtrip.json",
+      "top-transition-v1-roundtrip.json",
+      "water-exit-v3-roundtrip.json",
+      "trap-surface-v1-roundtrip.json",
+      "carry-release-v3-roundtrip.json",
+      "ladder-top-entry-v1-roundtrip.json",
+      "body-lift-v2-roundtrip.json",
+      "body-throw-v1-roundtrip.json",
+      "gaits-corvo-2/result.json",
+      "gaits-emily-1/result.json",
+      "gait-priority-1/result.json",
+      "stance-pose-test-1/result.json",
+      "stance-roundtrip.json",
+      "mixamo-v5-pose-test/result.json",
+      "mixamo-v5-roundtrip.json",
+      "review-feedback-export-test.json",
+      "guard-v1-roundtrip.json",
+      "shadow-v1-roundtrip.json",
+      "mechanisms-v4-roundtrip.json",
+      "carry-v3-roundtrip.json",
+      "object-carry-v1-roundtrip.json",
+      "item-transitions-v1-roundtrip.json",
+      "ladder-v2-roundtrip.json",
+      "water-v1-roundtrip.json",
+      "contextual-v1-roundtrip.json",
+      "crouched-pairs-v1-roundtrip.json",
+      "blink-assault-v1-roundtrip.json"
+    ]
+  },
+  "CorvoCalfPreviewCorrection": {
+    "user_report": "Persistent chicken-leg deformation at the boot/trouser seam",
+    "cause": "Offline calf helpers followed the foot pivot",
+    "fix": "Shin-relative calf helper anchoring in all review renderers; original weights and animation bytes retained",
+    "validation": "boot-seam-v1/validation.json",
+    "rebuild": "boot-seam-v1/rebuild-audit.json",
+    "visual_comparison": "boot-seam-v1/comparison-grid.jpg",
+    "native_capture": "boot-seam-native-test-1/result.json",
+    "limits": "Native axial twist remains approximate; not full movement acceptance",
+    "finished": "2026-10-10T17:52:04.277226+02:00"
+  },
+  "MovementIntegration": {
+    "complete": false,
+    "current": "D2MOVE29 / 213 clips, Steam action protocol v26. Standing crossbow source-state matrix passes; visual acceptance and complete movement phase unfinished.",
+    "rollback": "work\\movement-integration\\verified-equipment-0E32",
+    "contract": "work/natural-moveset/movement-phase-contract.json",
+    "findings": "work/movement-integration/native-movement-findings.json",
+    "tests": [
+      "lean-bank-v1-test",
+      "sprint-bank-v1-underrun",
+      "stance-bank-v4-regression-2",
+      "stance-bank-v4-priority",
+      "slide-bank-v2-test",
+      "air-bank-v3-coverage",
+      "air-bank-v4-semantic",
+      "slide-bank-v4-semantic",
+      "combat-bank-v1-test",
+      "combat-bank-v1-priority",
+      "equipment-bank-v3-test",
+      "equipment-pause-v3",
+      "equipment-v3-priority"
+    ],
+    "next": "Validate and record weaponless full-body specials, then continue incomplete movement/traversal/combat/power bindings. Complete movement is not achieved.",
+    "liveBuild": "559C15B990357476F2F080E5B4A8F9056DC056EFA08A1D51C735F96F4919BF96",
+    "crashInvestigation": "work/movement-integration/combat-lifecycle-investigation.json",
+    "combat": {
+      "source_observation": "natural-moveset/native-combat-timing-v3-reader/reader-coverage.json",
+      "bank": "natural-moveset/combat-bank-manifest-v1.json",
+      "reader": "outputs/d2-coop-lab/src/native_player_combat_scene.h",
+      "binding": "outputs/d2-coop-lab/src/combat_presentation.h",
+      "visual_accepted": false,
+      "limitations": [
+        "Static heavy hold",
+        "Moving attacks, airborne combat, parry outcomes and victim contacts unfinished",
+        "Native CombatGiveUp crash investigation remains unresolved"
+      ]
+    },
+    "equipmentFindings": "work/movement-integration/equipment-integration-findings.json",
+    "verifiedEquipmentBuild": "0E32032996386A453EA1D99A4BB4C3C96D52A2F61478802F85C6700BBEABB3B3",
+    "LatestContinuation": {
+      "scope": "Complete movement port remains active and incomplete",
+      "preserved": "verified-darkvision-air-48A0; verified-blink-endpoints-E8E7; earlier milestones retained",
+      "deploying": "Native muzzle v27/559C: unit tests and Corvo runtime pass; Emily verification in progress.",
+      "bank": "D2MOVE29 / 213 clips; ranged-banks-v1",
+      "actual_game_videos": 195,
+      "native_feet_v5_game_checks": 112,
+      "stair_v2_game_checks": 30,
+      "standing_turn_v2_game_checks": 38,
+      "standing_turns": "Both roles and drawn/holstered states recorded; ankle swing and lengths preserved. Fast native controller acceleration now upgrades completed steps to90/180 arcs. Full visual acceptance and horizontal footplant refinement remain.",
+      "next": "Native muzzle effect observation and cosmetic replication; ranged quality/context gaps and remaining movement families.",
+      "complete": false,
+      "knee_blocker": "v19 native IK moved crouched knees up to31cm despite near-preserved ankle targets. Original Corvo ON/OFF takes archived; ON strict flat ankle check failed4.3mm. Not accepted.",
+      "knee_candidate": "Owned phase0->phase3 knee plane correction verified on both roles/equipment and standing/crouched transitions; native foot endpoints, ankle rotations and lengths preserved. 48 complete poses, all8 contact sheets inspected. Native helpers rerun. First-person unaffected.",
+      "live": "559C15B990357476F2F080E5B4A8F9056DC056EFA08A1D51C735F96F4919BF96",
+      "knee_turn_checks": 64,
+      "moving_turn_tests": [
+        "moving-turn-corvo-knee-v4b",
+        "moving-turn-emily-knee-v4",
+        "moving-turn-corvo-unarmed-knee-v4"
+      ],
+      "keyhole": {
+        "matrix": "Eight standard side/stance/role takes passed; v6 Corvo reverse framing superseded by v7/v9 recaptures",
+        "early_cancel": "Corvo standing and Emily crouched passed 8 checks each on live5357; native entry cancels directly without out-scene",
+        "pause": "Both Corvo and Emily pass5 lifecycle checks each; temporary native idle/hidden actor during suspended ownership remains a visual limitation.",
+        "dashboard": "12 actual-game takes, 90 checks across standard/early/pause cases, selected frames inspected; final visual acceptance pending.",
+        "darkvision": "Exact native equipment acquisition, owned 933ms left-arm cast, Steam action variant10, private native overlay and full-body standing casts pass. Native reveal persists after unequip; bounded30s native-expiry cleanup verified. Current crouch observation in progress."
+      },
+      "slide_matrix_checks": 84,
+      "ranged_matrix_checks": 28,
+      "crossbow_native_state_checks": 18
+    },
+    "Ranged": {
+      "nativeActionFindings": "work/natural-moveset/native-ranged-action-findings-v2.json",
+      "nativeActionChecks": 20,
+      "attachmentChecks": 12,
+      "attachmentBuild": "43EF1A3F8004113547AD90D586AAC7BAB38F3ECBEA79B0CC3801EB383FBBC568",
+      "attachmentRecordPattern": "work/natural-moveset/ranged-prop-{corvo|emily}-{gun|crossbow}-v3/result.json",
+      "nativeParentMethod": "140875e80 raw left_hand_attachment_jnt; native spawn ownership field before initialize",
+      "remoteGameplayBound": true,
+      "visualAccepted": false,
+      "remoteGameplayBoundScope": "Standing base gun/crossbow draw, fire, reload, empty-trigger and holster body/prop presentation only; four cases.",
+      "networkBuild": "30AB28F8591D40153679CD52D7B3534B4D3BE6AEF9F7D2DCAEDFDDEEEB45806B",
+      "networkChecks": 28,
+      "networkFindings": "work/natural-moveset/ranged-matrix-findings-v29.json",
+      "nativeMechanismBuild": "0E70FBC248D0B9FA406D95B8A2916CB8CD2743CD1714031CE189E469F5C1ACE3",
+      "nativeMechanismChecks": 18,
+      "nativeMechanismFindings": "work/natural-moveset/crossbow-native-state-findings-v26.json"
+    }
+  }
+}

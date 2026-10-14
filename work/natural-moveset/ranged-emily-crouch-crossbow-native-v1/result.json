@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "observationOnly": true,
+  "mappedVariants": [],
+  "source": "client",
+  "kind": "crossbow",
+  "crouched": true,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Read-only native scenes and requested stance observed; mapped reader and remote playback are not acceptance criteria for this observation",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 1.876,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.745,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.793,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.771,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.85,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.859,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "829D43447DC206110E4884214EB3374969E4E011A1E2803C561AB308DDD738D4",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Two-round native ranged weapon/action investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

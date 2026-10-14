@@ -1,0 +1,37 @@
+{
+  "passed": false,
+  "failure": "Observer pitch did not settle",
+  "dll": "F88ED4CC3D897CE1CF62F4AE6AA54014DF5B338075264DD8FCFAB88D8501492B",
+  "source": "host",
+  "checks": [
+    "Both complete inventories and player/partner health restored from isolated checkpoint",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "case": "food",
+      "target": "pickups_fruit_apple_01_4",
+      "samples": 110,
+      "sourceLogic": [
+        1
+      ],
+      "states": [
+        0,
+        81
+      ]
+    },
+    {
+      "case": "coin",
+      "target": "pickups_coin_emily_lowvalue_4",
+      "samples": 112,
+      "sourceLogic": [
+        1
+      ],
+      "states": [
+        0,
+        81
+      ]
+    }
+  ],
+  "scope": "Native food/coin/note source interaction with existing full-body and Steam transport. No automatic acceptance of target activation, a new gesture, shared world outcome or complete movement."
+}

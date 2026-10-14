@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "source": "host",
+  "noManaExperiment": true,
+  "crouched": true,
+  "holstered": true,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Exact v41 stance/equipment bank active on the native Steam remote avatar",
+    "Normal native activation consumes mana; the next activation attempt has less than the measured expenditure",
+    "Both failed requests produce distinct native out-of-mana scenes",
+    "All four controller requests are consumed; failed requests produce no power activation or BendTime scene",
+    "Failed request spends no further measured native mana",
+    "Normal controller casting produced native BendTime scene observations",
+    "Two distinct owned native failure scenes each drive one remote body event over Steam",
+    "Every observed frame retains native and remote stance through failure and recovery",
+    "Remote failure recovers to original stance with original sword, health and no observer screen effect",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 2.014,
+      "action": "Native LT press 250ms",
+      "index": 0,
+      "ms": 1285,
+      "inputSequence": 747408124
+    },
+    {
+      "seconds": 3.882,
+      "action": "Native LT press 250ms",
+      "index": 1,
+      "ms": 3153,
+      "inputSequence": 747409993
+    },
+    {
+      "seconds": 6.847,
+      "action": "Native LT press 250ms",
+      "index": 2,
+      "ms": 6118,
+      "inputSequence": 747412958
+    },
+    {
+      "seconds": 8.87,
+      "action": "Native LT press 250ms",
+      "index": 3,
+      "ms": 8141,
+      "inputSequence": 747414981
+    }
+  ],
+  "dll": "AA8C3D2A9A9BCA738D37F6C0464BF523395C42F440FB2419D617381DCF3C990D",
+  "bankSha256": "6DE3B2439C63CD6C24B864751FD0AB4E44936EEB74DFECF31CC4DD2FC6DA1CFA",
+  "capture": "Paired actual D2 source and remote body videos with native scene, Steam and presentation evidence",
+  "scope": "Corvo Bend Time standing/crouched and drawn/holstered failure response from exact native scene ownership; only the context named in this take is validated. No air/slide, other powers or Emily binding claimed. Native time dilation remains source-local; no remote power activation or animation damage. Original files unchanged."
+}

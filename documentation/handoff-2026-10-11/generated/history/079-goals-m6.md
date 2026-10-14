@@ -1,0 +1,31 @@
+# Historical note: work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M6.md
+
+Original: [work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M6.md](<../../../../work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M6.md>)
+
+SHA-256: `97EEE67F56F6D38D8B16260A19AAC773E5531E030ECE35F291AC20E152C5648D`; 3576 bytes.
+
+````markdown
+# M6 — Preview environments
+
+Today every commit lands in `main` and ships straight to production via the Worker + Pages deploy. That worked while this was a single-author project; it doesn't survive the addition of collaborators. M6 inverts the pipeline: commits go to PR branches, each PR gets a full-stack preview deployment (matched Worker + Pages, both pinned to that PR's commit), `main` becomes protected, and merging to `main` is the only event that updates production. Success looks like: a PR opens, CI builds and deploys a preview, reviewers click a URL to exercise the change end-to-end, and `main` is no longer push-able. With that in place, the PR pipeline is ready for collaborators — the collaboration spec itself follows separately.
+
+**Scope:** `wrangler.toml` (single-script Wrangler versions with per-PR `pr-<N>` preview aliases; no named environment blocks), `.github/workflows/ci.yml` (deploy job triggers on PR events, computes a deterministic preview Worker URL from the PR/branch, passes it into the Pages build as a per-run `VITE_API_URL` override), `web/` build wiring to honor that override, and GitHub branch-protection settings on `main`. Excludes the collaboration spec (separate, deliberately blocked on M6 completing), and excludes the deferred items now tracked in [M7](M7.md) — diagnostic-count cap, post-deploy smoke, automated rollback, `_headers`, cache layer, `compatibility_date` discipline, custom-domain lockdown, Workers Logs export. Idle preview Workers cost $0 incrementally on the existing $5/mo Workers Paid plan, so previews are left up rather than torn down on PR close.
+
+**Status:** done.
+
+## Retrospective
+
+**What shipped.**
+- Per-PR full-stack preview environments: a non-production Worker version aliased `pr-<N>` plus a Pages preview at `pr-<N>.voidslice.pages.dev`, both pinned to that PR's commit, surfaced as a sticky PR comment.
+- `main` is now branch-protected: PR + four required checks (`test`, `lint`, `build`, `preview-deploy`), strict up-to-date, linear history, no force-pushes, no deletions, no admin bypass.
+- CI triggers split (PR-only on feature branches, push-only on `main`) — eliminated the previous double-run on every commit.
+- `cloudflare.md` retired; its only durable content (the deferred-items list) moved into the new [M7](M7.md) goal.
+
+**Worth remembering.**
+- Wrangler versions + aliases beat named-environment blocks for "Nth deployable artifact" use cases at this scale; revisit only if a true staging environment with distinct bindings is wanted. The rate-limit binding (`namespace_id = "1001"`) is shared across all preview versions of `voidslice-api` — acceptable at current traffic, but split the binding before it can starve prod.
+- `--preview-alias` is a Wrangler 4.x flag; the action's default 3.90.0 silently drops it. Pin the wrangler version explicitly on any step that uses 4.x-only flags.
+- Pages URLs are deterministic (`https://<branch>.<project>.pages.dev`) — template them, don't scrape stdout. Worker alias URLs need the account subdomain, which is account-specific; parse from `wrangler` output to keep the workflow account-agnostic.
+- `gh api` and `git push` over HTTPS use separate auth paths — `gh auth setup-git` is needed if the credential helper isn't already configured. Easy to miss when scripting branch-protection wiring on a fresh host.
+- "Deploys are safe" ≠ "deploys are robust." The deferred items (diag cap, origin lock, smoke + rollback, `_headers`, cache, log export, `compatibility_date` discipline) live in [M7](M7.md).
+
+````

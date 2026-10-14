@@ -1,0 +1,110 @@
+{
+  "host": {
+    "experimental": true,
+    "enabled": false,
+    "result": "checkpoint_barrier",
+    "nonce": 1,
+    "event": 4,
+    "consumed": 0,
+    "acked": 4,
+    "pending": 0,
+    "captured": 4,
+    "replicaBlocked": 0,
+    "sent": 4,
+    "applied": 0,
+    "duplicates": 0,
+    "rejected": 0,
+    "before": 0,
+    "after": 0,
+    "inflicted": 0,
+    "lastAttacker": 0,
+    "entries": [
+      {
+        "arm": 1,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 2,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 3,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 4,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 5,
+        "peerNonce": 1,
+        "ready": false
+      }
+    ],
+    "session": {
+      "enabled": false,
+      "waitingCheckpoint": false,
+      "terminal": false,
+      "renewals": 0,
+      "terminalBlocked": 1
+    }
+  },
+  "client": {
+    "experimental": true,
+    "enabled": false,
+    "result": "recovery_scope_expired",
+    "nonce": 1,
+    "event": 0,
+    "consumed": 4,
+    "acked": 0,
+    "pending": 0,
+    "captured": 0,
+    "replicaBlocked": 0,
+    "sent": 0,
+    "applied": 4,
+    "duplicates": 0,
+    "rejected": 5,
+    "before": 11,
+    "after": 0,
+    "inflicted": 11,
+    "lastAttacker": 190318452,
+    "entries": [
+      {
+        "arm": 1,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 2,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 3,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 4,
+        "peerNonce": 1,
+        "ready": false
+      },
+      {
+        "arm": 5,
+        "peerNonce": 1,
+        "ready": false
+      }
+    ],
+    "session": {
+      "enabled": false,
+      "waitingCheckpoint": false,
+      "terminal": false,
+      "renewals": 0,
+      "terminalBlocked": 0
+    }
+  }
+}

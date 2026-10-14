@@ -1,0 +1,105 @@
+# inventory-quantity-notification-decompilation.json
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/inventory-quantity-notification-decompilation.json](<../../../../outputs/d2-coop-lab/analysis/ghidra/inventory-quantity-notification-decompilation.json>)
+
+SHA-256: `A62895149B83E83C798BD946339DD41E269489DD32BCC58A17ED30EC168085D0`; 4943 bytes.
+
+## Original saved record
+
+````json
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\r\n\r\nvoid FUN_1406170b0(longlong param_1,longlong *param_2,int param_3,int param_4)\r\n\r\n{\r\n  int iVar1;\r\n  undefined4 uVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  longlong lVar5;\r\n  undefined8 unaff_RDI;\r\n  \r\n  if (param_3 != param_4) {\r\n    lVar5 = *param_2;\r\n    uVar2 = *(undefined4 *)(*(longlong *)(param_1 + 0x10) + 0xa8);\r\n    lVar3 = func_0x000140810240();\r\n    plVar4 = (longlong *)FUN_1408112c0(lVar3 + 0xc8e8,0x1ad,0x10,uVar2);\r\n    if (plVar4 != (longlong *)0x0) {\r\n      *plVar4 = lVar5;\r\n      plVar4[1] = CONCAT44(param_4,param_3);\r\n    }\r\n  }\r\n  if ((param_3 == 0) && (0 < param_4)) {\r\n    FUN_140619380(param_1,param_2,0);\r\n    FUN_1406139f0(param_1,param_2);\r\n  }\r\n  else if (param_4 == 0) {\r\n    FUN_140617e70(param_1,param_2);\r\n    goto LAB_14061716b;\r\n  }\r\n  if ((0 < param_4) &&\r\n     (lVar5 = *(longlong *)(param_1 + 0x10), lVar3 = func_0x0001408a8ba0(_D2_GameSingletonPtr),\r\n     lVar3 == lVar5)) {\r\n    *(undefined1 *)((longlong)param_2 + 0x34) = 1;\r\n  }\r\nLAB_14061716b:\r\n  lVar5 = FUN_1406dc560((int)param_2[1]);\r\n  if (lVar5 != 0) {\r\n    FUN_1406162b0(param_1,param_2,param_3,param_4);\r\n  }\r\n  for (lVar5 = (**(code **)(*(longlong *)*param_2 + 0xb8))(); lVar5 != 0;\r\n      lVar5 = *(longlong *)(lVar5 + 0xa0)) {\r\n    if (lVar5 == 0x14397edd0) {\r\n      FUN_1406164b0(param_1,param_2,*param_2,param_3,param_4);\r\n      return;\r\n    }\r\n  }\r\n  lVar5 = *param_2;\r\n  if (*(int *)(lVar5 + 0x60) == 0x12) {\r\n    iVar1 = *(int *)(param_1 + 0x188);\r\n    if ((-1 < iVar1) &&\r\n       (lVar5 = *(longlong *)(*(longlong *)(param_1 + 0xf0) + 0x48),\r\n       *(float *)(lVar5 + 0x24 + (longlong)iVar1 * 0x28) !=\r\n       *(float *)(lVar5 + 8 + (longlong)iVar1 * 0x28))) {\r\n      if ((*(uint *)(*param_2 + 0xa8) & 0xffffff) == 0) {\r\n        return;\r\n      }\r\n      FUN_140616940(param_1,*param_2 + 0xa0,param_3,param_4,unaff_RDI);\r\n    }\r\n    if ((*(uint *)(*param_2 + 0x98) & 0xffffff) != 0) {\r\n      FUN_140616940(param_1,*param_2 + 0x90,param_3,param_4,unaff_RDI);\r\n    }\r\n    return;\r\n  }\r\n  if ((*(uint *)(lVar5 + 0x98) & 0xffffff) != 0) {\r\n    FUN_140616940(param_1,lVar5 + 0x90,param_3,param_4);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\r\n\r\nvoid FUN_1406170b0(longlong param_1,longlong *param_2,int param_3,int param_4)\r\n\r\n{\r\n  int iVar1;\r\n  undefined4 uVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  longlong lVar5;\r\n  undefined8 unaff_RDI;\r\n  \r\n  if (param_3 != param_4) {\r\n    lVar5 = *param_2;\r\n    uVar2 = *(undefined4 *)(*(longlong *)(param_1 + 0x10) + 0xa8);\r\n    lVar3 = func_0x000140810240();\r\n    plVar4 = (longlong *)FUN_1408112c0(lVar3 + 0xc8e8,0x1ad,0x10,uVar2);\r\n    if (plVar4 != (longlong *)0x0) {\r\n      *plVar4 = lVar5;\r\n      plVar4[1] = CONCAT44(param_4,param_3);\r\n    }\r\n  }\r\n  if ((param_3 == 0) && (0 < param_4)) {\r\n    FUN_140619380(param_1,param_2,0);\r\n    FUN_1406139f0(param_1,param_2);\r\n  }\r\n  else if (param_4 == 0) {\r\n    FUN_140617e70(param_1,param_2);\r\n    goto LAB_14061716b;\r\n  }\r\n  if ((0 < param_4) &&\r\n     (lVar5 = *(longlong *)(param_1 + 0x10), lVar3 = func_0x0001408a8ba0(_D2_GameSingletonPtr),\r\n     lVar3 == lVar5)) {\r\n    *(undefined1 *)((longlong)param_2 + 0x34) = 1;\r\n  }\r\nLAB_14061716b:\r\n  lVar5 = FUN_1406dc560((int)param_2[1]);\r\n  if (lVar5 != 0) {\r\n    FUN_1406162b0(param_1,param_2,param_3,param_4);\r\n  }\r\n  for (lVar5 = (**(code **)(*(longlong *)*param_2 + 0xb8))(); lVar5 != 0;\r\n      lVar5 = *(longlong *)(lVar5 + 0xa0)) {\r\n    if (lVar5 == 0x14397edd0) {\r\n      FUN_1406164b0(param_1,param_2,*param_2,param_3,param_4);\r\n      return;\r\n    }\r\n  }\r\n  lVar5 = *param_2;\r\n  if (*(int *)(lVar5 + 0x60) == 0x12) {\r\n    iVar1 = *(int *)(param_1 + 0x188);\r\n    if ((-1 < iVar1) &&\r\n       (lVar5 = *(longlong *)(*(longlong *)(param_1 + 0xf0) + 0x48),\r\n       *(float *)(lVar5 + 0x24 + (longlong)iVar1 * 0x28) !=\r\n       *(float *)(lVar5 + 8 + (longlong)iVar1 * 0x28))) {\r\n      if ((*(uint *)(*param_2 + 0xa8) & 0xffffff) == 0) {\r\n        return;\r\n      }\r\n      FUN_140616940(param_1,*param_2 + 0xa0,param_3,param_4,unaff_RDI);\r\n    }\r\n    if ((*(uint *)(*param_2 + 0x98) & 0xffffff) != 0) {\r\n      FUN_140616940(param_1,*param_2 + 0x90,param_3,param_4,unaff_RDI);\r\n    }\r\n    return;\r\n  }\r\n  if ((*(uint *)(lVar5 + 0x98) & 0xffffff) != 0) {\r\n    FUN_140616940(param_1,lVar5 + 0x90,param_3,param_4);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_1406170b0(longlong param_1,longlong *param_2,int param_3,int param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  longlong lVar3;
+  longlong *plVar4;
+  longlong lVar5;
+  undefined8 unaff_RDI;
+  
+  if (param_3 != param_4) {
+    lVar5 = *param_2;
+    uVar2 = *(undefined4 *)(*(longlong *)(param_1 + 0x10) + 0xa8);
+    lVar3 = func_0x000140810240();
+    plVar4 = (longlong *)FUN_1408112c0(lVar3 + 0xc8e8,0x1ad,0x10,uVar2);
+    if (plVar4 != (longlong *)0x0) {
+      *plVar4 = lVar5;
+      plVar4[1] = CONCAT44(param_4,param_3);
+    }
+  }
+  if ((param_3 == 0) && (0 < param_4)) {
+    FUN_140619380(param_1,param_2,0);
+    FUN_1406139f0(param_1,param_2);
+  }
+  else if (param_4 == 0) {
+    FUN_140617e70(param_1,param_2);
+    goto LAB_14061716b;
+  }
+  if ((0 < param_4) &&
+     (lVar5 = *(longlong *)(param_1 + 0x10), lVar3 = func_0x0001408a8ba0(_D2_GameSingletonPtr),
+     lVar3 == lVar5)) {
+    *(undefined1 *)((longlong)param_2 + 0x34) = 1;
+  }
+LAB_14061716b:
+  lVar5 = FUN_1406dc560((int)param_2[1]);
+  if (lVar5 != 0) {
+    FUN_1406162b0(param_1,param_2,param_3,param_4);
+  }
+  for (lVar5 = (**(code **)(*(longlong *)*param_2 + 0xb8))(); lVar5 != 0;
+      lVar5 = *(longlong *)(lVar5 + 0xa0)) {
+    if (lVar5 == 0x14397edd0) {
+      FUN_1406164b0(param_1,param_2,*param_2,param_3,param_4);
+      return;
+    }
+  }
+  lVar5 = *param_2;
+  if (*(int *)(lVar5 + 0x60) == 0x12) {
+    iVar1 = *(int *)(param_1 + 0x188);
+    if ((-1 < iVar1) &&
+       (lVar5 = *(longlong *)(*(longlong *)(param_1 + 0xf0) + 0x48),
+       *(float *)(lVar5 + 0x24 + (longlong)iVar1 * 0x28) !=
+       *(float *)(lVar5 + 8 + (longlong)iVar1 * 0x28))) {
+      if ((*(uint *)(*param_2 + 0xa8) & 0xffffff) == 0) {
+        return;
+      }
+      FUN_140616940(param_1,*param_2 + 0xa0,param_3,param_4,unaff_RDI);
+    }
+    if ((*(uint *)(*param_2 + 0x98) & 0xffffff) != 0) {
+      FUN_140616940(param_1,*param_2 + 0x90,param_3,param_4,unaff_RDI);
+    }
+    return;
+  }
+  if ((*(uint *)(lVar5 + 0x98) & 0xffffff) != 0) {
+    FUN_140616940(param_1,lVar5 + 0x90,param_3,param_4);
+  }
+  return;
+}
+
+
+````

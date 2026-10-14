@@ -1,0 +1,68 @@
+{
+  "identity": {
+    "role": "host",
+    "target": "0xb5a0776",
+    "observeStream": true,
+    "crouched": true,
+    "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "dllSha256": "82E7775D2AE3752887750E2A48AEFCD22D6E978368AAF2B1DD9B0C85240DE99D",
+    "probeSha256": "8827B69D5330187F23FCEEBDADD6A432C2C26AD7317DB2E98CEE03FD40BC8F43",
+    "harnessSha256": "1E7C69A07DC73E46F767CB787BD2036E98734CBDC8B1195815B0D65741B7FF22",
+    "healthBefore": {
+      "tick": 284656500,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x181bfa847c0",
+      "actor": "0x181b0a0d210",
+      "attributes": "0x181b0c951c0",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scope": "Native first-person pickup reference. Normal X input; read-only corpse skeleton, physics, scene and retarget observations. Optional pre-armed two-peer semantic stream; no remote corpse mutations and no third-person lift acceptance."
+  },
+  "checks": {
+    "harness_finished": true,
+    "preparation_observed": true,
+    "native_lift_observed": true,
+    "native_loop_observed": true,
+    "receiver_continuously_ready": false,
+    "sender_continuously_ready": false,
+    "no_receiver_restart": true,
+    "received_pickup_and_loop": false,
+    "mapped_authored_target": false,
+    "native_health_preserved": true
+  },
+  "passed": false,
+  "transitions": [
+    {
+      "ms": 1,
+      "ready": true,
+      "result": "ready",
+      "state": 0,
+      "carry": 0
+    },
+    {
+      "ms": 1575,
+      "ready": false,
+      "result": "native_state_stale",
+      "state": 0,
+      "carry": 0
+    }
+  ],
+  "sample_count": 52,
+  "video_sha256": "2EEF05E1344910565D6075BE37C4BC80E30EBA9C3198F52F1B5841367A71D218",
+  "scope": "Semantic continuity through observed native pickup. First-person source video; no complete third-person pickup claim.",
+  "complete": false
+}

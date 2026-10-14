@@ -1,0 +1,158 @@
+{
+  "at": "2026-10-14T10:37:36.790254+02:00",
+  "candidate": "candidate-npc-combat-v1042",
+  "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+  "protocol": 72,
+  "bank": "climb-banks-v1042 (70/369): Corvo FD50D187, Emily 500BEC1D",
+  "harnesses": [
+    "../natural-moveset/Test-TraversalCoop-v1046.ps1",
+    "../natural-moveset/Test-TraversalCoop-v1047.ps1",
+    "../natural-moveset/Test-TraversalCoop-v1048.ps1",
+    "../natural-moveset/Test-TraversalCoop-v1049.ps1"
+  ],
+  "cases": [
+    {
+      "take": "traversal-emily-v1046",
+      "passed": true,
+      "source": "client",
+      "sourceCharacter": "emily",
+      "observer": "host",
+      "bank": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "swim": {
+        "swimming": 201,
+        "moving": 88,
+        "samples": 213,
+        "sinking": 22,
+        "rising": 20
+      },
+      "climb": {
+        "descending": 46,
+        "ascending": 117,
+        "phases": 51,
+        "samples": 224,
+        "climbing": 163
+      },
+      "visualAccepted": {
+        "swim": false,
+        "climb": true
+      },
+      "scope": "Candidate1042 (confirmed runtime): emily (client) native swimming state22 and chain climbing state23 presented on the host remote emily body with bank70 in Edge of the World; swim 201/213 samples swimWeight>0.5, stroke 88, dive 22, surface 20; climb 163/224 samples climbWeight>0.5, ascend 117, descend 46, 51 cycle phases. Role parity, Emily (client) as source, both modes. Host observer camera video shows remote Emily grab the chain, climb up and down, release and land (sheet inspected). Swim video framed open sea (dock vantage faced away from the lane); swimming numeric only."
+    },
+    {
+      "take": "traversal-emily-swimview-v1047",
+      "passed": true,
+      "source": "client",
+      "sourceCharacter": "emily",
+      "observer": "host",
+      "bank": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "swim": {
+        "moving": 87,
+        "sinking": 15,
+        "samples": 211,
+        "rising": 19,
+        "swimming": 211
+      },
+      "climb": null,
+      "visualAccepted": {
+        "swim": false
+      },
+      "scope": "Candidate1042 (confirmed runtime): emily (client) native swimming state22 presented on the host remote emily body with bank70 in Edge of the World; swim 211/211 samples swimWeight>0.5, stroke 87, dive 15, surface 19. Emily swim with the observer at the spawn yawed at the lane and pitched 22 deg down (native look input). Numeric pass; visual not accepted: remote body not visible."
+    },
+    {
+      "take": "traversal-emily-swimview-v1048",
+      "passed": true,
+      "source": "client",
+      "sourceCharacter": "emily",
+      "observer": "host",
+      "bank": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "swim": {
+        "sinking": 14,
+        "swimming": 208,
+        "moving": 87,
+        "rising": 19,
+        "samples": 208
+      },
+      "climb": null,
+      "visualAccepted": {
+        "swim": false
+      },
+      "scope": "Candidate1042 (confirmed runtime): emily (client) native swimming state22 presented on the host remote emily body with bank70 in Edge of the World; swim 208/208 samples swimWeight>0.5, stroke 87, dive 14, surface 19. Diagnostic: observer bridge remote/render position and native view sampled. Projection shows the lane at x=-26.8 runs just beyond a boat moored alongside the dock and the swimmer (root ~-1.9, eye at the waterline, surface ~0 per native1035) was behind it from the dock-level camera. Numeric pass; visual not accepted."
+    },
+    {
+      "take": "traversal-emily-swimview-v1049",
+      "passed": true,
+      "source": "client",
+      "sourceCharacter": "emily",
+      "observer": "host",
+      "bank": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "swim": {
+        "moving": 70,
+        "swimming": 218,
+        "rising": 20,
+        "samples": 218,
+        "sinking": 16
+      },
+      "climb": null,
+      "visualAccepted": {
+        "swim": true
+      },
+      "scope": "Candidate1042 (confirmed runtime): emily (client) native swimming state22 presented on the host remote emily body with bank70 in Edge of the World; swim 218/218 samples swimWeight>0.5, stroke 70, dive 16, surface 20. Emily swim, lane 5.5 m off the dock, observer pitched 50 deg down then held 9 m above the dock edge (coop_observer_camera). Host video shows remote Emily treading at entry, horizontal stroke with lead arm extended, dive/surface and tread again (sheet and crops inspected)."
+    },
+    {
+      "take": "traversal-corvo-swimview-v1049",
+      "passed": true,
+      "source": "host",
+      "sourceCharacter": "corvo",
+      "observer": "client",
+      "bank": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE",
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "swim": {
+        "samples": 185,
+        "swimming": 185,
+        "moving": 61,
+        "sinking": 13,
+        "rising": 16
+      },
+      "climb": null,
+      "visualAccepted": {
+        "swim": true
+      },
+      "scope": "Candidate1042 (confirmed runtime): corvo (host) native swimming state22 presented on the client remote corvo body with bank70 in Edge of the World; swim 185/185 samples swimWeight>0.5, stroke 61, dive 13, surface 16. Corvo (host) as source with the same overhead framing. Client video shows remote Corvo treading, stroking and surfacing (sheet inspected); faint while submerged during the dive."
+    }
+  ],
+  "roleParity": {
+    "swimming": {
+      "corvoSource": [
+        "swim-coop-eotw-v1038c..f (numeric)",
+        "traversal-corvo-swimview-v1049 (visual)"
+      ],
+      "emilySource": [
+        "traversal-emily-v1046",
+        "traversal-emily-swimview-v1047/1048/1049 (visual 1049)"
+      ]
+    },
+    "chainClimbing": {
+      "corvoSource": [
+        "climb-coop-eotw-v1043 (visual)"
+      ],
+      "emilySource": [
+        "traversal-emily-v1046 (visual)"
+      ]
+    }
+  },
+  "findings": [
+    "Confirmed runtime: native swimming eye sits at the waterline (root ~-2.0, view ~-0.1, surface ~0 in native1035), so the faithfully placed remote body is mostly submerged; it is visible from a steep overhead view, not from dock level.",
+    "Confirmed runtime: presentation is role-symmetric; the Emily bank70 on the host and Corvo bank70 on the client both drive swim/climb layers from the same protocol72 states.",
+    "Harness: Set-ObserverPitch + immediate coop_observer_camera hold after an elevated setviewpos gives a stable overhead vantage (falls ~0.3 m before the hold)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Swim mantle/water exit (no native exit state bound yet), underwater-only acting.",
+    "Chain hand-over-hand acting and grab/release transitions (clips 367/368 reserved); true ladders and top exits in other maps.",
+    "Polish (head height at the waterline, stroke cadence vs native speed ~3.5 m/s) deferred to the animator; editable sources kept."
+  ]
+}

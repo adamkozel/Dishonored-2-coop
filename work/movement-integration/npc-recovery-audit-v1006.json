@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-14T02:29:38.582556+02:00",
+  "candidate": "candidate-npc-combat-v1002",
+  "dll": "70ACF63FB8D5D2E21072996D2234A11D54DDEA82EDF015378FF1324D8E1547B7",
+  "cases": [
+    {
+      "take": "npc-native-death-v993",
+      "candidate": 992,
+      "passed": false,
+      "restored": true,
+      "scope": "Failed native experiment: Native terminal outcome did not retain clean checkpoint intent. Full isolated restoration passed; inspect its evidence for the last established stage.",
+      "result": {
+        "failure": "Native terminal outcome did not retain clean checkpoint intent"
+      }
+    },
+    {
+      "take": "npc-native-death-v995",
+      "candidate": 994,
+      "passed": false,
+      "restored": true,
+      "scope": "Failed native experiment: Native terminal outcome did not retain clean checkpoint intent. Full isolated restoration passed; inspect its evidence for the last established stage.",
+      "result": {
+        "failure": "Native terminal outcome did not retain clean checkpoint intent"
+      }
+    },
+    {
+      "take": "npc-native-death-v998",
+      "candidate": 997,
+      "passed": false,
+      "restored": true,
+      "scope": "Failed native experiment: Fresh enemy attack negotiation failed. Full isolated restoration passed; inspect its evidence for the last established stage.",
+      "result": {
+        "failure": "Fresh enemy attack negotiation failed"
+      }
+    },
+    {
+      "take": "npc-native-block-v999",
+      "candidate": 997,
+      "passed": false,
+      "restored": true,
+      "scope": "Failed native experiment: Unique native Ramsey required for frontal defense setup. Full isolated restoration passed; inspect its evidence for the last established stage.",
+      "result": {
+        "failure": "Unique native Ramsey required for frontal defense setup"
+      }
+    },
+    {
+      "take": "npc-native-death-v1003",
+      "candidate": 1002,
+      "passed": true,
+      "restored": true,
+      "scope": "Repeated host-owned enemy sword contacts cause actual client death, both native death screens without harming host, one coordinated checkpoint retry, fresh roles/avatars/NPC arms and automatic attack renewal without prior hits and one-sided peer stop. Not native-menu renewal, all damage types, or full campaign.",
+      "result": {
+        "applications": 6,
+        "hostHealth": 56,
+        "clientHealth": 0,
+        "renewalsEach": 1,
+        "oneSidedStop": true
+      }
+    },
+    {
+      "take": "npc-native-block-v1004",
+      "candidate": 1002,
+      "passed": false,
+      "restored": true,
+      "scope": "Native held-block experiment failed its acceptance assertion; inspect failure and evidence. Restoration passed.",
+      "result": {
+        "failure": "No native protected zero-damage contact and held-block animation established",
+        "protectedZeroDamage": 0,
+        "nativeBlockSamples": 23,
+        "playerHealth": 46
+      }
+    }
+  ],
+  "complete": false
+}

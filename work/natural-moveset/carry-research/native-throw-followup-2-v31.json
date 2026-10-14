@@ -1,0 +1,15 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nvoid FUN_140734040(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  longlong lVar3;\r\n  short sVar4;\r\n  undefined4 local_18;\r\n  undefined4 local_14;\r\n  undefined4 local_10;\r\n  \r\n  uVar2 = FUN_1408a8ba0(D2_GameSingletonPtr);\r\n  lVar3 = FUN_140877720(uVar2,&DAT_1439d7510,2);\r\n  if ((lVar3 != 0) && (lVar3 = FUN_1407fdaa0(lVar3), *(int *)(lVar3 + 4) != 2)) {\r\n    lVar3 = *(longlong *)(param_1 + 8);\r\n    sVar4 = 0;\r\n    lVar1 = *(longlong *)(param_1 + 0x10);\r\n    if (0 < *(int *)(param_1 + 0x138)) {\r\n      do {\r\n        if (*(int *)((longlong)*(int *)(param_1 + 0x1e0) * (longlong)sVar4 + 0xb0 +\r\n                    *(longlong *)(param_1 + 0x1d8)) != 0) {\r\n          local_18 = *(undefined4 *)(lVar1 + 0x33c);\r\n          local_14 = *(undefined4 *)(lVar1 + 0x340);\r\n          local_10 = *(undefined4 *)(lVar1 + 0x344);\r\n          FUN_140733c60(param_1,sVar4,&local_18,*(undefined4 *)(lVar3 + 0xc4));\r\n        }\r\n        sVar4 = sVar4 + 1;\r\n      } while ((int)sVar4 < *(int *)(param_1 + 0x138));\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nvoid FUN_140734040(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  longlong lVar3;\r\n  short sVar4;\r\n  undefined4 local_18;\r\n  undefined4 local_14;\r\n  undefined4 local_10;\r\n  \r\n  uVar2 = FUN_1408a8ba0(D2_GameSingletonPtr);\r\n  lVar3 = FUN_140877720(uVar2,&DAT_1439d7510,2);\r\n  if ((lVar3 != 0) && (lVar3 = FUN_1407fdaa0(lVar3), *(int *)(lVar3 + 4) != 2)) {\r\n    lVar3 = *(longlong *)(param_1 + 8);\r\n    sVar4 = 0;\r\n    lVar1 = *(longlong *)(param_1 + 0x10);\r\n    if (0 < *(int *)(param_1 + 0x138)) {\r\n      do {\r\n        if (*(int *)((longlong)*(int *)(param_1 + 0x1e0) * (longlong)sVar4 + 0xb0 +\r\n                    *(longlong *)(param_1 + 0x1d8)) != 0) {\r\n          local_18 = *(undefined4 *)(lVar1 + 0x33c);\r\n          local_14 = *(undefined4 *)(lVar1 + 0x340);\r\n          local_10 = *(undefined4 *)(lVar1 + 0x344);\r\n          FUN_140733c60(param_1,sVar4,&local_18,*(undefined4 *)(lVar3 + 0xc4));\r\n        }\r\n        sVar4 = sVar4 + 1;\r\n      } while ((int)sVar4 < *(int *)(param_1 + 0x138));\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  }
+}

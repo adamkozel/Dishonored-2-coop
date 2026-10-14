@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nundefined8 FUN_1405bf560(undefined8 param_1)\r\n\r\n{\r\n  byte bVar1;\r\n  char cVar2;\r\n  uint uVar3;\r\n  longlong lVar4;\r\n  undefined8 uVar5;\r\n  undefined8 uVar6;\r\n  \r\n  lVar4 = FUN_1408a8ba0(D2_GameSingletonPtr);\r\n  if (lVar4 != 0) {\r\n    uVar3 = FUN_140604bd0(D2_GameSingletonPtr + 0x1f7bb8,param_1,lVar4);\r\n    if (uVar3 < 2) {\r\n      return 1;\r\n    }\r\n  }\r\n  uVar6 = 0;\r\n  lVar4 = FUN_140877720(param_1,&DAT_1439b3e50,2);\r\n  if (lVar4 != 0) {\r\n    bVar1 = *(byte *)(*(longlong *)(lVar4 + 0x10) + 0xd1);\r\n    if (((bVar1 & 8) == 0) && ((bVar1 & 0x20) == 0)) {\r\n      uVar6 = 1;\r\n      uVar5 = FUN_14092e460(lVar4);\r\n      cVar2 = FUN_14055e810(uVar5);\r\n      if (cVar2 == '\\0') {\r\n        cVar2 = FUN_14055dd50(uVar5);\r\n        if (cVar2 != '\\0') {\r\n          lVar4 = FUN_14055f7a0(uVar5);\r\n          if ((*(int *)(lVar4 + 0x20) == 0) && (3 < *(int *)(lVar4 + 0x24))) {\r\n            return 0;\r\n          }\r\n          uVar6 = 1;\r\n        }\r\n      }\r\n    }\r\n  }\r\n  return uVar6;\r\n}\r\n\r\n"
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nundefined8 FUN_1405bf560(undefined8 param_1)\r\n\r\n{\r\n  byte bVar1;\r\n  char cVar2;\r\n  uint uVar3;\r\n  longlong lVar4;\r\n  undefined8 uVar5;\r\n  undefined8 uVar6;\r\n  \r\n  lVar4 = FUN_1408a8ba0(D2_GameSingletonPtr);\r\n  if (lVar4 != 0) {\r\n    uVar3 = FUN_140604bd0(D2_GameSingletonPtr + 0x1f7bb8,param_1,lVar4);\r\n    if (uVar3 < 2) {\r\n      return 1;\r\n    }\r\n  }\r\n  uVar6 = 0;\r\n  lVar4 = FUN_140877720(param_1,&DAT_1439b3e50,2);\r\n  if (lVar4 != 0) {\r\n    bVar1 = *(byte *)(*(longlong *)(lVar4 + 0x10) + 0xd1);\r\n    if (((bVar1 & 8) == 0) && ((bVar1 & 0x20) == 0)) {\r\n      uVar6 = 1;\r\n      uVar5 = FUN_14092e460(lVar4);\r\n      cVar2 = FUN_14055e810(uVar5);\r\n      if (cVar2 == '\\0') {\r\n        cVar2 = FUN_14055dd50(uVar5);\r\n        if (cVar2 != '\\0') {\r\n          lVar4 = FUN_14055f7a0(uVar5);\r\n          if ((*(int *)(lVar4 + 0x20) == 0) && (3 < *(int *)(lVar4 + 0x24))) {\r\n            return 0;\r\n          }\r\n          uVar6 = 1;\r\n        }\r\n      }\r\n    }\r\n  }\r\n  return uVar6;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

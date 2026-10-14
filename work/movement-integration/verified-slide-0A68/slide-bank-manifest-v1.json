@@ -1,0 +1,92 @@
+[
+  {
+    "role": "corvo",
+    "bank": "slide-banks-v1\\corvo-slide-bank.bin",
+    "sha256": "36bf91434e2f71d9046362e8962c4b5312a7b370b4fd0cfd2b2a84691aa1d579",
+    "format": "D2MOVE06",
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 33,
+        "alias": "slide_enter",
+        "source": "dynamics-authored\\slide_enter-corvo.bin",
+        "sha256": "e488ccf76bc644d6ac623f8dcd4fe209f8bd2488e0e55acacac8319ea23df50d",
+        "duration": 0.35,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 34,
+        "alias": "slide_loop",
+        "source": "dynamics-authored\\slide_loop-corvo.bin",
+        "sha256": "ccc4dbabeeac18c1e77d5497ce39cde16d9561d7bd8fa81c27efa5364465bd6f",
+        "duration": 1.0,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 35,
+        "alias": "slide_exit_to_run",
+        "source": "dynamics-authored\\slide_exit_to_run-corvo.bin",
+        "sha256": "354eb997ab2c5a589aefe9659b3b99ce04f2394764f34a7cb5ec7413ad998997",
+        "duration": 1.1833333333333333,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 36,
+        "alias": "slide_to_crouch",
+        "source": "dynamics-authored\\slide_to_crouch-corvo.bin",
+        "sha256": "4954d1df715579a320d6dd5fc13afb1b48822d503b19006b1839987d1e42844d",
+        "duration": 0.9,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      }
+    ],
+    "root_writes": false,
+    "events": false,
+    "gameplay_verified": false,
+    "visual_accepted": false
+  },
+  {
+    "role": "emily",
+    "bank": "slide-banks-v1\\emily-slide-bank.bin",
+    "sha256": "1bab98551563977642dc338d3c15f1bba9f5eda8bfd7aee228751cc626e6b713",
+    "format": "D2MOVE06",
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 33,
+        "alias": "slide_enter",
+        "source": "dynamics-authored\\slide_enter-emily.bin",
+        "sha256": "802eb16265b7ddd464ba29f7770ad643a41601e9c55df81d835a3ee8d528d037",
+        "duration": 0.35,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 34,
+        "alias": "slide_loop",
+        "source": "dynamics-authored\\slide_loop-emily.bin",
+        "sha256": "85b8649dd5dcbe9d6d628ca21428cc8e5f69264deafde50918ccd860466d50a0",
+        "duration": 1.0,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 35,
+        "alias": "slide_exit_to_run",
+        "source": "dynamics-authored\\slide_exit_to_run-emily.bin",
+        "sha256": "e13cfba7e3d92f2b134342e05dd5ff1589955dfd2447453585208f9fccab8883",
+        "duration": 1.1833333333333333,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      },
+      {
+        "id": 36,
+        "alias": "slide_to_crouch",
+        "source": "dynamics-authored\\slide_to_crouch-emily.bin",
+        "sha256": "e8eeffd4673df62d4d0e29f475dd1dc6a35c4c301e97fedfc897948f96a665df",
+        "duration": 0.9,
+        "sampling": "0..119 full authored sequence; endpoint clamp, loop only for slide_loop"
+      }
+    ],
+    "root_writes": false,
+    "events": false,
+    "gameplay_verified": false,
+    "visual_accepted": false
+  }
+]

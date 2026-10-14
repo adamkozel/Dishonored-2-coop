@@ -1,0 +1,15 @@
+
+void FUN_14048ff20(longlong param_1,longlong *param_2)
+
+{
+  undefined2 uVar1;
+  
+  uVar1 = FUN_140490030();
+  FUN_14048ff80(param_1 + 0x10,uVar1);
+                    /* WARNING: Could not recover jumptable at 0x00014048ff53. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*param_2 + 8))(param_2,0);
+  return;
+}
+
+

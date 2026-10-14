@@ -1,0 +1,31 @@
+# load-requeue-14065acb0.txt
+
+Original: [work/movement-integration/npc-combat-research-v879/load-requeue-14065acb0.txt](<../../../../work/movement-integration/npc-combat-research-v879/load-requeue-14065acb0.txt>)
+
+SHA-256: `5BB38FC7B12E21013C468C36415BD0E9BD6E7714838CC884C15FFCC5654DD200`; 593 bytes.
+
+## Original saved record
+
+````text
+void FUN_14065acb0(undefined8 param_1,int param_2,longlong param_3,undefined8 param_4)
+
+{
+  longlong lVar1;
+  undefined8 uVar2;
+  undefined1 auStack_30 [40];
+  
+  FUN_14013f9d0(auStack_30,&UNK_141c34880,param_3,param_4,0xfffffffffffffffe);
+  if (param_2 != -1) {
+    FUN_140140aa0(auStack_30,&UNK_141ad8924,param_2);
+    if (param_3 != 0) {
+      FUN_140140aa0(auStack_30,&UNK_141b0e3d0,param_3);
+    }
+  }
+  lVar1 = *(longlong *)PTR_PTR_14228bae0;
+  uVar2 = D2_InternedName_Resolve(auStack_30);
+  (**(code **)(lVar1 + 0x70))(PTR_PTR_14228bae0,uVar2);
+  FUN_14013fd10(auStack_30);
+  return;
+}
+
+````

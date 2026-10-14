@@ -1,0 +1,702 @@
+{
+  "at": "2026-10-13T15:29:56.833018+02:00",
+  "passed": true,
+  "candidate": "28036591E7CE7B9EA142D53B24CA4354E6C0349AE7D2FCA16E449A2AD27E2EFA",
+  "cases": [
+    {
+      "take": "native-door-menu-baseline-v768",
+      "version": 768,
+      "passed": false,
+      "failure": "Persistent door catalog retired or did not resume for host",
+      "pauseRole": "host",
+      "source": "client",
+      "moving": false,
+      "useDuringMenu": false,
+      "checks": [
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {}
+    },
+    {
+      "take": "native-door-menu-host-v770",
+      "version": 770,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "host",
+      "source": "client",
+      "moving": false,
+      "useDuringMenu": false,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6656,
+            "packetsIgnored": 0
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 3,
+            "peerArm": 3,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 24,
+            "received": 18,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 11,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6735,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 3,
+            "peerArm": 3,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 18,
+            "received": 20,
+            "rejected": 2,
+            "duplicates": 4,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 11,
+          "initialUninitializedChannels": []
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-client-v771",
+      "version": 771,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "client",
+      "source": "host",
+      "moving": false,
+      "useDuringMenu": false,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6828,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 9,
+            "peerArm": 9,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 23,
+            "received": 16,
+            "rejected": 1,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 16,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6812,
+            "packetsIgnored": 0
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 9,
+            "peerArm": 9,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 17,
+            "received": 21,
+            "rejected": 1,
+            "duplicates": 5,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 16,
+          "initialUninitializedChannels": [
+            "ld_door_350cm_int_rich_wood_01_1",
+            "ld_door_350cm_int_rich_wood_01_2",
+            "ld_door_350cm_int_rich_wood_01_3",
+            "ld_door_big_rich_int_window_350_0_4",
+            "ld_door_big_rich_int_window_350_0_5",
+            "ld_door_big_rich_int_window_350_0_6"
+          ]
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-moving-host-v772",
+      "version": 772,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "host",
+      "source": "client",
+      "moving": true,
+      "useDuringMenu": false,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6563,
+            "packetsIgnored": 0
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 15,
+            "peerArm": 15,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 19,
+            "received": 15,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 21,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6703,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 15,
+            "peerArm": 15,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 15,
+            "received": 15,
+            "rejected": 2,
+            "duplicates": 1,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 21,
+          "initialUninitializedChannels": [
+            "ld_door_big_rich_int_window_350_0_5",
+            "ld_door_big_rich_int_window_350_0_6"
+          ]
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-moving-client-v773",
+      "version": 773,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "client",
+      "source": "host",
+      "moving": true,
+      "useDuringMenu": false,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6734,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 21,
+            "peerArm": 21,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 19,
+            "received": 12,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 26,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6719,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 21,
+            "peerArm": 21,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 13,
+            "received": 16,
+            "rejected": 1,
+            "duplicates": 3,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 26,
+          "initialUninitializedChannels": [
+            "ld_door_350cm_int_rich_wood_01_1",
+            "ld_door_350cm_int_rich_wood_01_2",
+            "ld_door_350cm_int_rich_wood_01_3",
+            "ld_door_big_rich_int_window_350_0_4",
+            "ld_door_big_rich_int_window_350_0_5",
+            "ld_door_big_rich_int_window_350_0_6"
+          ]
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-use-host-v774",
+      "version": 774,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "host",
+      "source": "client",
+      "moving": false,
+      "useDuringMenu": true,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6750,
+            "packetsIgnored": 0
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 27,
+            "peerArm": 27,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 18,
+            "received": 14,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 31,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6844,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 27,
+            "peerArm": 27,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 14,
+            "received": 14,
+            "rejected": 2,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 31,
+          "initialUninitializedChannels": [
+            "ld_door_350cm_int_rich_wood_01_1",
+            "ld_door_350cm_int_rich_wood_01_2",
+            "ld_door_350cm_int_rich_wood_01_3",
+            "ld_door_big_rich_int_window_350_0_4",
+            "ld_door_big_rich_int_window_350_0_5",
+            "ld_door_big_rich_int_window_350_0_6"
+          ]
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-use-client-v775",
+      "version": 775,
+      "passed": true,
+      "failure": null,
+      "pauseRole": "client",
+      "source": "host",
+      "moving": false,
+      "useDuringMenu": true,
+      "checks": [
+        "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+        "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+        "Complete inventories and native player/counterpart health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6532,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 33,
+            "peerArm": 33,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 22,
+            "received": 14,
+            "rejected": 1,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 36,
+          "initialUninitializedChannels": []
+        },
+        "client": {
+          "menu": {
+            "suspended": false,
+            "since": 0,
+            "suspensions": 1,
+            "resumes": 1,
+            "pausedMs": 6547,
+            "packetsIgnored": 6
+          },
+          "door": {
+            "name": "ld_door_350cm_int_rich_wood_01_3",
+            "definition": "ld_door_350cm_int_rich_wood_01_3",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 33,
+            "peerArm": 33,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 15,
+            "received": 18,
+            "rejected": 1,
+            "duplicates": 4,
+            "requests": 0,
+            "commits": 2,
+            "nativeCalls": 1,
+            "converged": 2,
+            "sideCorrections": 0,
+            "result": "native_state_converged"
+          },
+          "native": {
+            "current": 2,
+            "pending": 2,
+            "side": 0
+          },
+          "epoch": 36,
+          "initialUninitializedChannels": []
+        }
+      }
+    },
+    {
+      "take": "native-door-menu-reload-client-v776",
+      "version": 776,
+      "passed": true,
+      "failure": null,
+      "source": "client",
+      "checks": [
+        "Both native doors were Moving when either player requested one shared reload; duplicate peer retry performed no extra load",
+        "Both roles and counterparts restored after both-ready hold; six fresh door channels renew without manual setup; native AI resumes; checkpoint-closed state has no replay, then a fresh use synchronizes",
+        "Both native views recorded across interrupted door motion, shared loading and checkpoint return",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "roles": {
+        "host": {
+          "epoch": 46,
+          "rearms": 1,
+          "nativeLoadingEntries": 1,
+          "nativeLoadingFinishes": 1,
+          "maxDistance": 0
+        },
+        "client": {
+          "epoch": 46,
+          "rearms": 1,
+          "nativeLoadingEntries": 1,
+          "nativeLoadingFinishes": 1,
+          "maxDistance": 0
+        }
+      }
+    }
+  ],
+  "scope": "Same-world native pause2 in both roles, idle and receiver native Moving held over six seconds, plus native use by either unpaused player. Existing arms persist, native queues do not run while menu held, original transition completes once or new desired state synchronizes after resume. Single same-map fixed-SLOT82 shared reload regression also passes. Read-note4/wheel13 retention is code/unit-tested only; not native runtime accepted here. No whole-session pause, shared AI, full movement, campaign, general save or release-UI completion claim.",
+  "complete": false
+}

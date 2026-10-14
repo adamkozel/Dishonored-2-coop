@@ -1,0 +1,302 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014009CFA0: movaps      xmm0,xmmword ptr [r8]
+  000000014009CFA4: mov         word ptr [rsp+10h],dx
+  000000014009CFA9: mov         r9,rcx
+  000000014009CFAC: movsx       rax,dx
+  000000014009CFB0: lea         r10,[r9+00000000000000F8h]
+  000000014009CFB7: shl         rax,6
+  000000014009CFBB: add         rax,qword ptr [rcx+0000000000000148h]
+  000000014009CFC2: movaps      xmmword ptr [rax],xmm0
+  000000014009CFC5: movaps      xmm1,xmmword ptr [r8+10h]
+  000000014009CFCA: movaps      xmmword ptr [rax+10h],xmm1
+  000000014009CFCE: movaps      xmm0,xmmword ptr [r8+20h]
+  000000014009CFD3: movaps      xmmword ptr [rax+20h],xmm0
+  000000014009CFD7: movaps      xmm1,xmmword ptr [r8+30h]
+  000000014009CFDC: mov         r8d,1
+  000000014009CFE2: movaps      xmmword ptr [rax+30h],xmm1
+  000000014009CFE6: movsx       rcx,word ptr [rsp+10h]
+  000000014009CFEC: mov         rax,rcx
+  000000014009CFEF: and         ecx,1Fh
+  000000014009CFF2: sar         rax,5
+  000000014009CFF6: lea         rdx,[r9+rax*4]
+  000000014009CFFA: mov         eax,r8d
+  000000014009CFFD: shl         eax,cl
+  000000014009CFFF: not         eax
+  000000014009D001: and         dword ptr [rdx+00000000000000D0h],eax
+  000000014009D007: movsx       rcx,word ptr [rsp+10h]
+  000000014009D00D: mov         rax,rcx
+  000000014009D010: and         ecx,1Fh
+  000000014009D013: sar         rax,5
+  000000014009D017: lea         rdx,[r9+rax*4]
+  000000014009D01B: mov         eax,r8d
+  000000014009D01E: shl         eax,cl
+  000000014009D020: or          dword ptr [rdx+00000000000000F8h],eax
+  000000014009D026: movsx       rcx,word ptr [rsp+10h]
+  000000014009D02C: mov         rax,rcx
+  000000014009D02F: and         ecx,1Fh
+  000000014009D032: shl         r8d,cl
+  000000014009D035: sar         rax,5
+  000000014009D039: or          dword ptr [r9+rax*4+0000000000000120h],r8d
+  000000014009D041: movsx       rax,word ptr [rsp+10h]
+  000000014009D047: mov         r8,qword ptr [r9+48h]
+  000000014009D04B: lea         rcx,[rax+rax*4]
+  000000014009D04F: lea         r11,[rcx*8+0000000000000000h]
+  000000014009D057: mov         ecx,dword ptr [r10+20h]
+  000000014009D05B: add         r8,r11
+  000000014009D05E: cmp         dword ptr [r8+20h],ecx
+  000000014009D062: cmovl       ecx,dword ptr [r8+20h]
+  000000014009D067: test        ecx,ecx
+  000000014009D069: js          000000014009D090
+  000000014009D06B: movsxd      rdx,ecx
+  000000014009D06E: je          000000014009D090
+  000000014009D070: lea         rcx,[r10+rdx*4]
+  000000014009D074: sub         r8,r10
+  000000014009D077: nop         word ptr [rax+rax+0000000000000000h]
+  000000014009D080: mov         eax,dword ptr [r8+rcx-4]
+  000000014009D085: lea         rcx,[rcx-4]
+  000000014009D089: or          dword ptr [rcx],eax
+  000000014009D08B: dec         rdx
+  000000014009D08E: jne         000000014009D080
+  000000014009D090: 4D
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014009DC40: mov         qword ptr [rsp+8],rbx
+  000000014009DC45: push        rdi
+  000000014009DC46: sub         rsp,20h
+  000000014009DC4A: mov         rax,qword ptr [rcx+0000000000000148h]
+  000000014009DC51: mov         rdx,qword ptr [rcx+0000000000000158h]
+  000000014009DC58: mov         ebx,1
+  000000014009DC5D: mov         rdi,rcx
+  000000014009DC60: movaps      xmm0,xmmword ptr [rax]
+  000000014009DC63: movaps      xmmword ptr [rdx],xmm0
+  000000014009DC66: movaps      xmm1,xmmword ptr [rax+10h]
+  000000014009DC6A: movaps      xmmword ptr [rdx+10h],xmm1
+  000000014009DC6E: movaps      xmm0,xmmword ptr [rax+20h]
+  000000014009DC72: movaps      xmmword ptr [rdx+20h],xmm0
+  000000014009DC76: movaps      xmm1,xmmword ptr [rax+30h]
+  000000014009DC7A: movaps      xmmword ptr [rdx+30h],xmm1
+  000000014009DC7E: and         dword ptr [rcx+00000000000000F8h],0FFFFFFFEh
+  000000014009DC85: mov         eax,dword ptr [rcx+0000000000000160h]
+  000000014009DC8B: and         eax,0FFFFFFh
+  000000014009DC90: cmp         eax,ebx
+  000000014009DC92: jle         000000014009DCB5
+  000000014009DC94: movzx       edx,bx
+  000000014009DC97: mov         rcx,rdi
+  000000014009DC9A: call        000000014009E240
+  000000014009DC9F: mov         ecx,dword ptr [rdi+0000000000000160h]
+  000000014009DCA5: inc         bx
+  000000014009DCA8: and         ecx,0FFFFFFh
+  000000014009DCAE: movsx       eax,bx
+  000000014009DCB1: cmp         eax,ecx
+  000000014009DCB3: jl          000000014009DC94
+  000000014009DCB5: mov         rbx,qword ptr [rsp+30h]
+  000000014009DCBA: add         rsp,20h
+  000000014009DCBE: pop         rdi
+  000000014009DCBF: ret
+  000000014009DCC0: push        rdi
+  000000014009DCC2: sub         rsp,20h
+  000000014009DCC6: mov         rdi,rcx
+  000000014009DCC9: call        000000014009BEA0
+  000000014009DCCE: test        al,al
+  000000014009DCD0: je          000000014009DD6D
+  000000014009DCD6: test        byte ptr [rdi+00000000000000F8h],1
+  000000014009DCDD: mov         qword ptr [rsp+30h],rbx
+  000000014009DCE2: je          000000014009DD17
+  000000014009DCE4: mov         rax,qword ptr [rdi+0000000000000148h]
+  000000014009DCEB: mov         rdx,qword ptr [rdi+0000000000000158h]
+  000000014009DCF2: movaps      xmm0,xmmword ptr [rax]
+  000000014009DCF5: movaps      xmmword ptr [rdx],xmm0
+  000000014009DCF8: movaps      xmm1,xmmword ptr [rax+10h]
+  000000014009DCFC: movaps      xmmword ptr [rdx+10h],xmm1
+  000000014009DD00: movaps      xmm0,xmmword ptr [rax+20h]
+  000000014009DD04: movaps      xmmword ptr [rdx+20h],xmm0
+  000000014009DD08: movaps      xmm1,xmmword ptr [rax+30h]
+  000000014009DD0C: movaps      xmmword ptr [rdx+30h],xmm1
+  000000014009DD10: and         dword ptr [rdi+00000000000000F8h],0FFFFFFFEh
+  000000014009DD17: mov         eax,dword ptr [rdi+0000000000000160h]
+  000000014009DD1D: mov         ebx,1
+  000000014009DD22: and         eax,0FFFFFFh
+  000000014009DD27: cmp         eax,ebx
+  000000014009DD29: jle         000000014009DD68
+  000000014009DD2B: mov         ecx,ebx
+  000000014009DD2D: nop         dword ptr [rax]
+  000000014009DD30: movsxd      rax,ecx
+  000000014009DD33: and         ecx,1Fh
+  000000014009DD36: sar         rax,5
+  000000014009DD3A: mov         edx,dword ptr [rdi+rax*4+00000000000000F8h]
+  000000014009DD41: shr         edx,cl
+  000000014009DD43: test        dl,1
+  000000014009DD46: je          000000014009DD53
+  000000014009DD48: movzx       edx,bx
+  000000014009DD4B: mov         rcx,rdi
+  000000014009DD4E: call        000000014009E240
+  000000014009DD53: mov         eax,dword ptr [rdi+0000000000000160h]
+  000000014009DD59: inc         bx
+  000000014009DD5C: and         eax,0FFFFFFh
+  000000014009DD61: movsx       ecx,bx
+  000000014009DD64: cmp         ecx,eax
+  000000014009DD66: jl          000000014009DD30
+  000000014009DD68: mov         rbx,qword ptr [rsp+30h]
+  000000014009DD6D: add         rsp,20h
+  000000014009DD71: pop         rdi
+  000000014009DD72: ret
+  000000014009DD73: int         3
+  000000014009DD74: int         3
+  000000014009DD75: int         3
+  000000014009DD76: int         3
+  000000014009DD77: int         3
+  000000014009DD78: int         3
+  000000014009DD79: int         3
+  000000014009DD7A: int         3
+  000000014009DD7B: int         3
+  000000014009DD7C: int         3
+  000000014009DD7D: int         3
+  000000014009DD7E: int         3
+  000000014009DD7F: int         3
+  000000014009DD80: push        rdi
+  000000014009DD82: push        r13
+  000000014009DD84: sub         rsp,0D8h
+  000000014009DD8B: mov         eax,dword ptr [rdx+24h]
+  000000014009DD8E: mov         rdi,rcx
+  000000014009DD91: lea         r8d,[rax+1Fh]
+  000000014009DD95: mov         dword ptr [rsp+44h],eax
+  000000014009DD99: mov         eax,dword ptr [rdx+20h]
+  000000014009DD9C: sar         r8d,5
+  000000014009DDA0: 44
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014009B5B0: sub         rsp,18h
+  000000014009B5B4: movss       xmm0,dword ptr [rcx+8]
+  000000014009B5B9: movss       xmm2,dword ptr [rcx+4]
+  000000014009B5BE: movss       xmm5,dword ptr [rcx+0Ch]
+  000000014009B5C3: movaps      xmmword ptr [rsp],xmm6
+  000000014009B5C7: xorps       xmm1,xmm1
+  000000014009B5CA: unpcklps    xmm2,xmm1
+  000000014009B5CD: movss       xmm6,dword ptr [rcx]
+  000000014009B5D1: movss       xmm4,dword ptr [rcx+18h]
+  000000014009B5D6: movss       xmm3,dword ptr [rdx]
+  000000014009B5DA: unpcklps    xmm6,xmm0
+  000000014009B5DD: unpcklps    xmm6,xmm2
+  000000014009B5E0: movss       xmm0,dword ptr [rcx+14h]
+  000000014009B5E5: movss       xmm2,dword ptr [rcx+10h]
+  000000014009B5EA: unpcklps    xmm2,xmm1
+  000000014009B5ED: unpcklps    xmm5,xmm0
+  000000014009B5F0: movss       xmm0,dword ptr [rcx+20h]
+  000000014009B5F5: unpcklps    xmm5,xmm2
+  000000014009B5F8: movss       xmm2,dword ptr [rcx+1Ch]
+  000000014009B5FD: unpcklps    xmm4,xmm0
+  000000014009B600: movss       xmm0,dword ptr [rdx+8]
+  000000014009B605: unpcklps    xmm2,xmm1
+  000000014009B608: unpcklps    xmm3,xmm0
+  000000014009B60B: unpcklps    xmm4,xmm2
+  000000014009B60E: movss       xmm2,dword ptr [rdx+4]
+  000000014009B613: movaps      xmmword ptr [r8],xmm6
+  000000014009B617: movaps      xmm6,xmmword ptr [rsp]
+  000000014009B61B: unpcklps    xmm2,xmm1
+  000000014009B61E: unpcklps    xmm3,xmm2
+  000000014009B621: movaps      xmmword ptr [r8+10h],xmm5
+  000000014009B626: movaps      xmmword ptr [r8+20h],xmm4
+  000000014009B62B: movaps      xmmword ptr [r8+30h],xmm3
+  000000014009B630: add         rsp,18h
+  000000014009B634: ret
+  000000014009B635: int         3
+  000000014009B636: int         3
+  000000014009B637: int         3
+  000000014009B638: int         3
+  000000014009B639: int         3
+  000000014009B63A: int         3
+  000000014009B63B: int         3
+  000000014009B63C: int         3
+  000000014009B63D: int         3
+  000000014009B63E: int         3
+  000000014009B63F: int         3
+  000000014009B640: push        rbx
+  000000014009B642: sub         rsp,50h
+  000000014009B646: mov         rbx,r8
+  000000014009B649: lea         r8,[rsp+20h]
+  000000014009B64E: call        000000014009B680
+  000000014009B653: movaps      xmm0,xmmword ptr [rsp+20h]
+  000000014009B658: movaps      xmm1,xmmword ptr [rsp+30h]
+  000000014009B65D: movaps      xmmword ptr [rbx],xmm0
+  000000014009B660: movaps      xmm0,xmmword ptr [rsp+40h]
+  000000014009B665: movaps      xmmword ptr [rbx+10h],xmm1
+  000000014009B669: movaps      xmmword ptr [rbx+20h],xmm0
+  000000014009B66D: add         rsp,50h
+  000000014009B671: pop         rbx
+  000000014009B672: ret
+  000000014009B673: int         3
+  000000014009B674: int         3
+  000000014009B675: int         3
+  000000014009B676: int         3
+  000000014009B677: int         3
+  000000014009B678: int         3
+  000000014009B679: int         3
+  000000014009B67A: int         3
+  000000014009B67B: int         3
+  000000014009B67C: int         3
+  000000014009B67D: int         3
+  000000014009B67E: int         3
+  000000014009B67F: int         3
+  000000014009B680: mov         rax,rsp
+  000000014009B683: sub         rsp,0A8h
+  000000014009B68A: movaps      xmmword ptr [rax-18h],xmm6
+  000000014009B68E: movaps      xmmword ptr [rax-28h],xmm7
+  000000014009B692: movss       xmm7,dword ptr [0000000141F697B0h]
+  000000014009B69A: lea         r11,[rax]
+  000000014009B69D: movaps      xmmword ptr [rax-38h],xmm8
+  000000014009B6A2: movaps      xmmword ptr [rax-48h],xmm9
+  000000014009B6A7: movaps      xmmword ptr [rax-58h],xmm10
+  000000014009B6AC: movss       xmm10,dword ptr [rcx+8]
+  000000014009B6B2: movaps      xmmword ptr [rax-68h],xmm11
+  000000014009B6B7: movaps      xmmword ptr [rax-78h],xmm12
+  000000014009B6BC: movaps      xmmword ptr [rsp+20h],xmm13
+  000000014009B6C2: movss       xmm11,dword ptr [rcx+0Ch]
+  000000014009B6C8: movaps      xmmword ptr [rsp+10h],xmm14
+  000000014009B6CE: movaps      xmmword ptr [rsp],xmm15
+  000000014009B6D3: movaps      xmm9,xmm11
+  000000014009B6D7: movss       xmm15,dword ptr [rcx]
+  000000014009B6DC: movss       xmm14,dword ptr [rcx+4]
+  000000014009B6E2: movaps      xmm8,xmm15
+  000000014009B6E6: movaps      xmm4,xmm7
+  000000014009B6E9: movaps      xmm13,xmm15
+  000000014009B6ED: movaps      xmm5,xmm11
+  000000014009B6F1: movaps      xmm2,xmm15
+  000000014009B6F5: movaps      xmm0,xmm10
+  000000014009B6F9: addss       xmm0,xmm10
+  000000014009B6FE: addss       xmm2,xmm15
+  000000014009B703: movaps      xmm1,xmm14
+  000000014009B707: movaps      xmm12,xmm14
+  000000014009B70B: mulss       xmm5,xmm0
+  000000014009B70F: mulss       xmm13,xmm0
+  000000014009B714: mulss       xmm10,xmm0
+  000000014009B719: addss       xmm1,xmm14
+  000000014009B71E: mulss       xmm14,xmm0
+  000000014009B723: mulss       xmm9,xmm1
+  000000014009B728: mulss       xmm8,xmm1
+  000000014009B72D: movaps      xmm0,xmm10
+  000000014009B731: movaps      xmm3,xmm8
+  000000014009B735: subss       xmm3,xmm5
+  000000014009B739: addss       xmm5,xmm8
+  000000014009B73E: movaps      xmm8,xmmword ptr [r11-38h]
+  000000014009B743: mulss       xmm12,xmm1
+  000000014009B748: mulss       xmm11,xmm2
+  000000014009B74D: F3
+  000000014009B74E: 44
+  000000014009B74F: 0F
+  000000014009B750: pop         rcx

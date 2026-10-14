@@ -1,0 +1,57 @@
+{
+  "alias": "mixamo_sword_and_shield_attack",
+  "family": "combat",
+  "identity": "004629fe776e458ad85e43a842a199f829a79d085c8df17f82f31e33bca6e746",
+  "video": "aerial-donor-videos-v1\\mixamo_sword_and_shield_attack.mp4",
+  "frames": 71,
+  "fps": 30,
+  "duration": 2.3666666666666667,
+  "render_seconds": 14.761784791946411,
+  "roles": {
+    "corvo": "mixamo_sword_and_shield_attack-corvo",
+    "emily": "mixamo_sword_and_shield_attack-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "hands_free",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": false,
+  "render_identity": "9659ca97fa3c2f9b9d4853bbf0b259be5bdb4aa44317b339f596623d99ed5f56",
+  "render_inputs": {
+    "data_identity": "7a2232d0383655f845d012f9c02c07d80b0a2fc56f498974ed6cb08e8a370bf2",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      }
+    },
+    "scripts": {
+      "render_library.py": "f4087f58d5dc8ad33e52bb939c82a3383f2657554d5d29ad6849475e224e9c84",
+      "preview_natural_walk.py": "867c593dc5d00efe5b4c6f27d78fb4d0681c824ade3746b9787dc7833671a152",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "ae316b28fbb27e59553960ea99e317e9606e5c0b0434e6936358367d9d900b7e"
+    }
+  }
+}

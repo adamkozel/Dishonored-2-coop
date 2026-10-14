@@ -1,0 +1,78 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406162B0: mov         qword ptr [rsp+18h],rbx
+  00000001406162B5: mov         qword ptr [rsp+10h],rdx
+  00000001406162BA: push        rbp
+  00000001406162BB: push        rsi
+  00000001406162BC: push        rdi
+  00000001406162BD: sub         rsp,20h
+  00000001406162C1: mov         rsi,rcx
+  00000001406162C4: mov         rcx,rdx
+  00000001406162C7: mov         ebx,r9d
+  00000001406162CA: mov         ebp,r8d
+  00000001406162CD: call        000000014063C8C0
+  00000001406162D2: mov         rdi,rax
+  00000001406162D5: test        ebp,ebp
+  00000001406162D7: jle         0000000140616314
+  00000001406162D9: test        ebx,ebx
+  00000001406162DB: jne         0000000140616312
+  00000001406162DD: lea         rcx,[rsi+0000000000000138h]
+  00000001406162E4: lea         rdx,[rsp+48h]
+  00000001406162E9: call        00000001407B8270
+  00000001406162EE: lea         rcx,[rsi+0000000000000148h]
+  00000001406162F5: lea         rdx,[rsp+48h]
+  00000001406162FA: call        00000001408918F0
+  00000001406162FF: lea         rcx,[rsi+0000000000000128h]
+  0000000140616306: lea         rdx,[rsp+48h]
+  000000014061630B: call        00000001407B8270
+  0000000140616310: jmp         0000000140616365
+  0000000140616312: test        ebp,ebp
+  0000000140616314: jne         0000000140616365
+  0000000140616316: test        ebx,ebx
+  0000000140616318: jle         0000000140616365
+  000000014061631A: lea         rcx,[rsi+0000000000000148h]
+  0000000140616321: lea         rdx,[rsp+48h]
+  0000000140616326: call        00000001407B8270
+  000000014061632B: lea         rcx,[rsi+0000000000000138h]
+  0000000140616332: lea         rdx,[rsp+48h]
+  0000000140616337: call        00000001408918F0
+  000000014061633C: cmp         dword ptr [rdi+68h],4
+  0000000140616340: je          0000000140616354
+  0000000140616342: test        byte ptr [rsi+0000000000000190h],1
+  0000000140616349: je          0000000140616365
+  000000014061634B: cmp         byte ptr [rdi+00000000000000C0h],0
+  0000000140616352: je          0000000140616365
+  0000000140616354: lea         rcx,[rsi+0000000000000128h]
+  000000014061635B: lea         rdx,[rsp+48h]
+  0000000140616360: call        00000001408918F0
+  0000000140616365: mov         eax,dword ptr [rsi+1Ch]
+  0000000140616368: and         al,30h
+  000000014061636A: cmp         al,10h
+  000000014061636C: jb          000000014061639A
+  000000014061636E: test        dword ptr [rsi+0000000000000140h],0FFFFFFh
+  0000000140616378: jg          0000000140616392
+  000000014061637A: test        dword ptr [rsi+0000000000000150h],0FFFFFFh
+  0000000140616384: jg          0000000140616392
+  0000000140616386: test        dword ptr [rsi+0000000000000130h],0FFFFFFh
+  0000000140616390: jle         000000014061639A
+  0000000140616392: mov         rcx,rsi
+  0000000140616395: call        00000001407E79A0
+  000000014061639A: test        dword ptr [rsi+0000000000000150h],0FFFFFFh
+  00000001406163A4: jle         0000000140616499
+  00000001406163AA: mov         eax,dword ptr [rsi+0000000000000150h]
+  00000001406163B0: mov         rbx,qword ptr [rsi+0000000000000148h]
+  00000001406163B7: and         eax,0FFFFFFh
+  00000001406163BC: lea         rdi,[rbx+rax*8]
+  00000001406163C0: cmp         rbx,rdi
+  00000001406163C3: je          0000000140616499
+  00000001406163C9: 4C
+
+  Summary
+
+     1A7D000 .text

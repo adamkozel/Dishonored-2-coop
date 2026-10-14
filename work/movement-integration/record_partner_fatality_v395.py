@@ -1,0 +1,23 @@
+from pathlib import Path
+import json,hashlib,subprocess
+R=Path(__file__).resolve().parents[2];P=R/'work/natural-moveset';F=P/'partner-sword-contexts-host-v392'
+read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
+write=lambda p,x:p.write_text(json.dumps(x,indent=2),encoding='utf-8')
+result=read(F/'result.json');assert not result['passed'] and result['failure']=='Native paired scene bound both source player and partner'
+rows=read(F/'host-front-standing-observations.json');paired=[]
+for row in rows:
+ for scene in row['midnight']['instances']:
+  handles=[b['handle'] for b in scene.get('bindingsResearch',[]) if b.get('reciprocal')]
+  if scene.get('state')==3 and 1 in handles and row['source']['probeActorHandle'] in handles:paired.append(dict(ms=row['ms'],asset=scene['asset'],handles=handles))
+assert paired and all('fatality_generic_right' in s['asset'] for s in paired)
+write(F/'interaction-analysis.json',dict(interactionExcluded=False,pairedScenes=paired,scope='Confirmed reciprocal native partner fatality despite rear-choke filter387. Only first front-standing case ran; health and inventory restored after failure. Other contexts untested.'))
+review=dict(inspected=True,complete=False,visualAccepted=False,times=[1,1.4,1.8,2.2,2.6,3.5],contactSheet='contact-sheet.jpg',scope='Viewed source sequence shows cinematic sword motion and blood/impact effects against Emily. This is a confirmed exclusion failure, not a remote animation approval.')
+write(F/'host-front-standing-visual-review.json',review)
+video=F/'host-front-standing.mp4';meta=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=nb_frames,duration','-of','json',str(video)],text=True))['streams'][0]
+manifest=read(P/'runtime-video-manifest.json');relative=video.relative_to(P).as_posix();assert not any(x['video']==relative for x in manifest)
+manifest.append(dict(video=relative,character='corvo',label='Partner sword fatality gap · 392',alias='native_partner_interaction_exclusion',requirements=['lethal_takedown_front_back_sides'],gameplay_bound=False,complete=False,visual_accepted=False,evidence=F.name+'/result.json',visual_review=F.name+'/host-front-standing-visual-review.json',proxy_sha256=result['dll'],actual_capture_hz=int(meta['nb_frames'])/float(meta['duration']),video_sha256=hashlib.sha256(video.read_bytes()).hexdigest().upper(),checks_passed=False,scope=review['scope']))
+write(P/'runtime-video-manifest.json',manifest)
+state=read(R/'work/current-task-state.json');state['PartnerInteractionExclusion'].update(latest='387 rear choke exclusion remains scoped verified. Sword test392 fails: fatality_generic_right binds the partner through a separate interaction sensor.',next='Exclude current partner from native interaction-sensor sword targets; validate sword contexts and ordinary NPC positive control, then continue remaining direct interactions and co-op.',fatalityFailure='work/natural-moveset/partner-sword-contexts-host-v392/interaction-analysis.json');write(R/'work/current-task-state.json',state)
+doc=R/'documentation/handoff-2026-10-11/34-partner-interaction-exclusion.md'
+with doc.open('a',encoding='utf-8') as f:f.write('\n\n## Confirmed sword fatality gap392 and native interaction-sensor trace395\n\nThe first front-standing native RT300ms test392 fails: `fatality_generic_right.midnightscene` reciprocally binds player1 and the current registered Emily partner. State39 is therefore insufficient to distinguish a normal slash from a paired finisher. Viewed footage shows cinematic sword movement and blood/impact effects. Rear-choke eligibility still rejects1038 calls with zero refusals. Remaining three contexts and the reciprocal role were not run. Both checkpoint inventories/health restore and all14 protected hashes remain unchanged. The failing video is indexed separately; no full takedown exclusion claim.\n\nExact-image Ghidra trace: Slash state vtable1c85d28;86b050 falls back from global assassination to interaction sensor type0x21 through3b8080. Native3b8080 resolves the generation-bearing handle at sensor+88;3b8020 resolves+8c. Both respect flag+ b8 bit0 unless explicitly overridden. Native86d320 stores the latter handle in Slash state+e0;86cbf0 uses it as a paired scene target. Static RTTI identifies `arkCpntPlayerSensorInteraction`, vtable1b403b8. Read-only392 samples confirm the exact partner handle at both+88 and+8c, local player ownership at+10 and local PlayerStates at+20. These are separate from the five global assassination records already filtered. Target-specific getter exclusion is a candidate, not yet runtime verified. Normal movement collision stays enabled.\n')
+print(json.dumps(dict(pairedScenes=len(paired),videos=len(manifest),documented=True)))

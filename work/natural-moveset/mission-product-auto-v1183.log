@@ -1,0 +1,62 @@
+{
+  "failure": null,
+  "cases": [
+    {
+      "armDigest": "e02f298c586429533769209879e73a13201a0560f21c8e3988dfbd17a2c600ea",
+      "cycles": [
+        {
+          "dying": "host",
+          "checks": {
+            "host": {
+              "rearms": 1,
+              "epochChanged": true,
+              "spawnDistance": 0.8358478859218238,
+              "completed": 1,
+              "character": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "aborted": 0,
+              "loads": 1
+            },
+            "client": {
+              "rearms": 1,
+              "epochChanged": true,
+              "spawnDistance": 0.7243622577136465,
+              "completed": 1,
+              "character": 2,
+              "usable": "renewed_after_shared_checkpoint",
+              "aborted": 0,
+              "loads": 1
+            }
+          }
+        },
+        {
+          "dying": "client",
+          "checks": {
+            "host": {
+              "rearms": 1,
+              "epochChanged": true,
+              "spawnDistance": 0.8358478859218238,
+              "completed": 1,
+              "character": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "aborted": 0,
+              "loads": 1
+            },
+            "client": {
+              "rearms": 1,
+              "epochChanged": true,
+              "spawnDistance": 0.7259312990221665,
+              "completed": 1,
+              "character": 2,
+              "usable": "renewed_after_shared_checkpoint",
+              "aborted": 0,
+              "loads": 1
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Product controller arms and maintains every system by itself (no harness arming) across two shared mission restarts; Dunwall fixture restored.",
+  "passed": true
+}

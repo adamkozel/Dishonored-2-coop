@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "source": "host",
+  "kind": "crossbow",
+  "crouched": false,
+  "holstered": false,
+  "failure": "Crossbow mechanical pose refused or never applied",
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+    "Two native shots and a subsequent native empty trigger action observed"
+  ],
+  "events": [
+    {
+      "seconds": 1.927,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.864,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.899,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.805,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.868,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.889,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "2C20A5D2B3A70D04C1F0D23005D45065F2E952C200BF07F84C1AF5AC36EAE176",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

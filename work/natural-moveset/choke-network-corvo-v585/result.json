@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "AC631D0F1AE86CC2C9191F8F86F6F159ADE97C29C3E5B2104483256CB9CF4088",
+  "checks": [
+    "Owned native choke phase1 read independently",
+    "Steam remote whole-body choke phase1 observed",
+    "Owned native choke phase2 read independently",
+    "Steam remote whole-body choke phase2 observed",
+    "Owned native choke phase3 read independently",
+    "Steam remote whole-body choke phase3 observed",
+    "Native standing recovery restores existing locomotion",
+    "Remote actor follows independent native source root during choke",
+    "Ordinary guard native eligibility accepted and normal-input choke reaches state41/back/loop; no direct NPC mutation or force-state call",
+    "Native RightShoulder held6500ms behind exact authored guard2; paired scene owner verification and visual review remain required.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "name": "rear-choke",
+        "stance": 0,
+        "yaw": 90,
+        "distance": 1.15
+      },
+      "key": "host-rear-choke",
+      "count": 40,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Native rear choke phase and target-binding observation using existing ordinary guard fixture; standard controller input only. Captures source scenes, native root/stance/state and actual recording. Source-timed remote actor body through native Steam. Remote victim animation/alignment and shared knockout outcomes are not implemented by this binding. Restore checkpoint inventory/health and14 protected files."
+}

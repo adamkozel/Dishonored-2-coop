@@ -1,0 +1,608 @@
+[
+  {
+    "role": "corvo",
+    "bank": "equipment-banks-v2\\corvo-equipment-bank.bin",
+    "sha256": "66f411f7deb5f89226a666f785a5fa670c6896dc7b9fc90705fc42d6952eb4f1",
+    "format": "D2MOVE09",
+    "prior_payload_unchanged": true,
+    "directions": [
+      {
+        "alias": "empty_walk_n_add",
+        "sha256": "1ddbc0c8f64fcd8512dbdebb62fbae038d8fbc15164dc2787fac4c6205f2a4b3",
+        "phase_offset": 0.041666666666666664,
+        "stride": 1.6000000566244115
+      },
+      {
+        "alias": "empty_walk_w_add",
+        "sha256": "a9e84965b23fa0076a8fcfda8d5dc578fd701f5036d8624b4992d64c581cf951",
+        "phase_offset": 0.09166666666666666,
+        "stride": 1.5
+      },
+      {
+        "alias": "empty_walk_s_add",
+        "sha256": "8c212b8fa7b4f312b9a40e5ad59ea504749059892de10691a2cfacb01575e0c5",
+        "phase_offset": 0.175,
+        "stride": 1.599999907612798
+      },
+      {
+        "alias": "empty_walk_e_add",
+        "sha256": "c5411543ca5833154e5627827088602a6083d49cad887a3e9c504f164df846b6",
+        "phase_offset": 0.1,
+        "stride": 1.5
+      },
+      {
+        "alias": "empty_run_n_add",
+        "sha256": "893cd9e802c76f793bb73c95e88e18aa446d42156fcadf2ffd62915a0aeeeadc",
+        "phase_offset": 0.9666666666666667,
+        "stride": 4.699999813323322
+      },
+      {
+        "alias": "empty_run_w_add",
+        "sha256": "c8fa88adaaa0094912bb8bf2505cfadca478e22b8b40562010b16d50cdc6c1fb",
+        "phase_offset": 0.1,
+        "stride": 4.5
+      },
+      {
+        "alias": "empty_run_s_add",
+        "sha256": "a6c3794888077408080cfda3355be028a5962a18209e8f7446339426cd43f9f4",
+        "phase_offset": 0.175,
+        "stride": 3.5999998728434224
+      },
+      {
+        "alias": "empty_run_e_add",
+        "sha256": "a32815a0b19195b1ffad17543db5f587101b9d4510af6d1acb1f64eac8574b0f",
+        "phase_offset": 0.075,
+        "stride": 4.5
+      }
+    ],
+    "contacts": [
+      {
+        "clip": 85,
+        "source_alias": "sword_equipsword",
+        "source_sha256": "78194b78f3122ae3e87000d37396b8e2d8753c1472a1aa3ff59d26aa2ce4827d",
+        "crouched": false,
+        "frame": 67,
+        "amount": 0.5630252100840336,
+        "chest_reach_degrees": 12.080732316146326,
+        "contact_position_error": 2.735743219813281e-07,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 86,
+        "source_alias": "sword_unequipsword",
+        "source_sha256": "799b4834df2345ed01a727bfbc3b4fa03d5fa4fb7bd25b5cd0ac0924229f2aba",
+        "crouched": false,
+        "frame": 50,
+        "amount": 0.42016806722689076,
+        "chest_reach_degrees": 6.0000535278181015,
+        "contact_position_error": 1.0536712127723508e-07,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 87,
+        "source_alias": "sword_equipsword",
+        "source_sha256": "78194b78f3122ae3e87000d37396b8e2d8753c1472a1aa3ff59d26aa2ce4827d",
+        "crouched": true,
+        "frame": 44,
+        "amount": 0.3697478991596639,
+        "chest_reach_degrees": 0.0,
+        "contact_position_error": 1.698993779866603e-07,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 88,
+        "source_alias": "sword_unequipsword",
+        "source_sha256": "799b4834df2345ed01a727bfbc3b4fa03d5fa4fb7bd25b5cd0ac0924229f2aba",
+        "crouched": true,
+        "frame": 58,
+        "amount": 0.48739495798319327,
+        "chest_reach_degrees": 0.0,
+        "contact_position_error": 3.332000937312528e-08,
+        "contact_rotation_error": 0.0
+      }
+    ],
+    "native_attachments": {
+      "drawn": {
+        "tick": 215245890,
+        "weaponHandle": 210047464,
+        "joint": 17,
+        "tag": "right_hand_wpn",
+        "stable": false,
+        "frameFlags": 2,
+        "phase": 3,
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0.0301797073,
+          -0.906413257,
+          0.421079099,
+          0.014020104
+        ],
+        "jointMatrix": [
+          -0.979659855,
+          -0.174468994,
+          0.099133566,
+          0.972330928,
+          -0.0870734453,
+          0.814688921,
+          0.573323727,
+          -0.140569746,
+          -0.180790246,
+          0.553030372,
+          -0.81330955,
+          0.180374533,
+          -0.0586205013,
+          -0.241595656,
+          0.966759145,
+          0.0455289371
+        ],
+        "weaponNativeRoot": [
+          -33.7784462,
+          -153.021759,
+          67.3704071,
+          0.98328191,
+          0.119891353,
+          -0.137050226,
+          0.124151491,
+          0.109169051,
+          0.986239552,
+          0.133203238,
+          -0.986766577,
+          0.0924592763
+        ],
+        "weaponRenderRoot": [
+          -33.7784462,
+          -153.021759,
+          67.3704071,
+          0.98328191,
+          0.119891353,
+          -0.137050226,
+          0.124151491,
+          0.109169051,
+          0.986239552,
+          0.133203238,
+          -0.986766577,
+          0.0924592763
+        ],
+        "parentNativeRoot": [
+          -33.7198257,
+          -152.780167,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "parentRenderRoot": [
+          -33.7198257,
+          -152.780167,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "holstered": {
+        "tick": 215243421,
+        "weaponHandle": 210047464,
+        "joint": 195,
+        "tag": "holster_wpn",
+        "stable": true,
+        "frameFlags": 2,
+        "phase": 3,
+        "offset": [
+          0,
+          0.0199999996,
+          0
+        ],
+        "quaternion": [
+          0,
+          -0.190809041,
+          0,
+          0.981627226
+        ],
+        "jointMatrix": [
+          -0.659263134,
+          0.210470811,
+          -0.721854687,
+          0.614489257,
+          -0.310462207,
+          -0.950564206,
+          0.0063864924,
+          0.318596512,
+          -0.684825182,
+          0.228319153,
+          0.692015052,
+          0.721732855,
+          0.0854679868,
+          0.199042916,
+          1.05175781,
+          -0.0918216035
+        ],
+        "weaponNativeRoot": [
+          -33.6405678,
+          -152.600128,
+          67.4555359,
+          -0.354718059,
+          0.109615304,
+          -0.928525507,
+          -0.310462177,
+          -0.950564325,
+          0.00638662279,
+          -0.881923139,
+          0.290537506,
+          0.371213734
+        ],
+        "weaponRenderRoot": [
+          -33.6405678,
+          -152.600128,
+          67.4555359,
+          -0.354718059,
+          0.109615304,
+          -0.928525507,
+          -0.310462177,
+          -0.950564325,
+          0.00638662279,
+          -0.881923139,
+          0.290537506,
+          0.371213734
+        ],
+        "parentNativeRoot": [
+          -33.7198257,
+          -152.780167,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "parentRenderRoot": [
+          -33.7198257,
+          -152.780167,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "events": false,
+    "root_writes": false,
+    "visual_accepted": false,
+    "gameplay_verified": false,
+    "limitations": [
+      "All-direction unarmed gaits use verified Corvo donor; Emily is retargeted.",
+      "Unarmed crouch preserves existing body posture and releases fingers.",
+      "Unarmed sprint, lean, air and slide need separate full-body weaponless adaptation.",
+      "Contact solves require actual-game visual review; numerical coincidence is not acceptance."
+    ]
+  },
+  {
+    "role": "emily",
+    "bank": "equipment-banks-v2\\emily-equipment-bank.bin",
+    "sha256": "37a120d87c6f27a6b12e4bdf950f92bd31d12acb24e5ff7de68dd6553ca9beb3",
+    "format": "D2MOVE09",
+    "prior_payload_unchanged": true,
+    "directions": [
+      {
+        "alias": "empty_walk_n_add",
+        "sha256": "1be01058baca0127b8f04f302119a48cab2580fd0bcff9b02e52188f1016876a",
+        "phase_offset": 0.041666666666666664,
+        "stride": 1.5620191978759674
+      },
+      {
+        "alias": "empty_walk_w_add",
+        "sha256": "511683abc4b8fd48737198ba95e0c817684710a2143a2185b0a332d8393763ed",
+        "phase_offset": 0.09166666666666666,
+        "stride": 1.4643929970547518
+      },
+      {
+        "alias": "empty_walk_s_add",
+        "sha256": "f891bc8aaaf62fc6def2912e7d66aec9fc784fef6ec1c02265664a99f2bb3895",
+        "phase_offset": 0.16666666666666666,
+        "stride": 1.5620191215585364
+      },
+      {
+        "alias": "empty_walk_e_add",
+        "sha256": "274bbc0afb60763d5c01d7548f9da281a790142c0441fcad544c3f2288056828",
+        "phase_offset": 0.09166666666666666,
+        "stride": 1.4643929970547518
+      },
+      {
+        "alias": "empty_run_n_add",
+        "sha256": "01ea08a06c61ea7120d1460a64c6dcbe5e7f064bcf69c34f83140e8c0144734d",
+        "phase_offset": 0.9583333333333334,
+        "stride": 4.588431257059088
+      },
+      {
+        "alias": "empty_run_w_add",
+        "sha256": "f23b7dbf086090f8d99f7bc52c1b45ad70be418700566cc7f65a3e753208e468",
+        "phase_offset": 0.08333333333333333,
+        "stride": 4.393179045434427
+      },
+      {
+        "alias": "empty_run_s_add",
+        "sha256": "e626dd0dab92fd01347e59cbd5f6ea52428b86375d82bee1758b569327410712",
+        "phase_offset": 0.16666666666666666,
+        "stride": 3.5145432906177123
+      },
+      {
+        "alias": "empty_run_e_add",
+        "sha256": "d94d068d5230aa0c9932b44bff64c8b8329302c539e4d8c1e539bd752b6b8fc5",
+        "phase_offset": 0.041666666666666664,
+        "stride": 4.393179045434427
+      }
+    ],
+    "contacts": [
+      {
+        "clip": 85,
+        "source_alias": "sword_equipsword",
+        "source_sha256": "5f059db666376ee6d41f6bcce055aa6e0ca8c67665877ca28db3c26e1d068a06",
+        "crouched": false,
+        "frame": 67,
+        "amount": 0.5630252100840336,
+        "chest_reach_degrees": 2.9999652922065208,
+        "contact_position_error": 1.5359765386647212e-07,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 86,
+        "source_alias": "sword_unequipsword",
+        "source_sha256": "032fb000c6893078c2f202a886152b05f2705dadefeebbbb375fd6dcf6e82afd",
+        "crouched": false,
+        "frame": 50,
+        "amount": 0.42016806722689076,
+        "chest_reach_degrees": 0.0,
+        "contact_position_error": 3.332000937312528e-08,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 87,
+        "source_alias": "sword_equipsword",
+        "source_sha256": "5f059db666376ee6d41f6bcce055aa6e0ca8c67665877ca28db3c26e1d068a06",
+        "crouched": true,
+        "frame": 41,
+        "amount": 0.3445378151260504,
+        "chest_reach_degrees": 0.0,
+        "contact_position_error": 1.666000468656264e-08,
+        "contact_rotation_error": 0.0
+      },
+      {
+        "clip": 88,
+        "source_alias": "sword_unequipsword",
+        "source_sha256": "032fb000c6893078c2f202a886152b05f2705dadefeebbbb375fd6dcf6e82afd",
+        "crouched": true,
+        "frame": 50,
+        "amount": 0.42016806722689076,
+        "chest_reach_degrees": 0.0,
+        "contact_position_error": 1.5269146510898468e-07,
+        "contact_rotation_error": 0.0
+      }
+    ],
+    "native_attachments": {
+      "drawn": {
+        "tick": 215242625,
+        "weaponHandle": 210047485,
+        "joint": 17,
+        "tag": "right_hand_wpn",
+        "stable": false,
+        "frameFlags": 2,
+        "phase": 3,
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0.00644244766,
+          -0.906892717,
+          0.421301842,
+          0.00299288891
+        ],
+        "jointMatrix": [
+          -0.991594851,
+          -0.128040299,
+          0.0185874999,
+          0.949070215,
+          -0.10559085,
+          0.717838645,
+          -0.688156247,
+          0.201250374,
+          0.0747689009,
+          -0.684334695,
+          -0.72532481,
+          0.207287222,
+          -0.0136164101,
+          -0.228119671,
+          0.901877642,
+          0.12193726
+        ],
+        "weaponNativeRoot": [
+          -33.1423874,
+          -153.599365,
+          67.3055267,
+          0.992994845,
+          0.117829025,
+          -0.00880894624,
+          -0.11614956,
+          0.987087727,
+          0.110305138,
+          0.0216923486,
+          -0.108509272,
+          0.993858755
+        ],
+        "weaponRenderRoot": [
+          -33.1423874,
+          -153.599365,
+          67.3055267,
+          0.992994845,
+          0.117829025,
+          -0.00880894624,
+          -0.11614956,
+          0.987087727,
+          0.110305138,
+          0.0216923486,
+          -0.108509272,
+          0.993858755
+        ],
+        "parentNativeRoot": [
+          -33.1287727,
+          -153.371246,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "parentRenderRoot": [
+          -33.1287727,
+          -153.371246,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "holstered": {
+        "tick": 215240156,
+        "weaponHandle": 210047485,
+        "joint": 195,
+        "tag": "holster_wpn",
+        "stable": false,
+        "frameFlags": 2,
+        "phase": 3,
+        "offset": [
+          -0.0649999976,
+          -0.0199999996,
+          -0.0250000004
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "jointMatrix": [
+          -0.387730777,
+          0.235637844,
+          -0.891144872,
+          0.168044493,
+          -0.343869001,
+          -0.933958173,
+          -0.0973436534,
+          0.313184977,
+          -0.855230272,
+          0.268693954,
+          0.443152964,
+          0.934705973,
+          -0.00951987598,
+          0.137837276,
+          0.977787018,
+          -0.0209128447
+        ],
+        "weaponNativeRoot": [
+          -33.0848312,
+          -153.236771,
+          67.4302292,
+          -0.387731075,
+          0.235637933,
+          -0.891144931,
+          -0.34386906,
+          -0.933958352,
+          -0.0973436683,
+          -0.855230153,
+          0.268694043,
+          0.443153322
+        ],
+        "weaponRenderRoot": [
+          -33.0848312,
+          -153.236771,
+          67.4302292,
+          -0.387731135,
+          0.235637963,
+          -0.891145051,
+          -0.34386909,
+          -0.933958411,
+          -0.097343646,
+          -0.855230212,
+          0.268694043,
+          0.443153352
+        ],
+        "parentNativeRoot": [
+          -33.1287727,
+          -153.371246,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "parentRenderRoot": [
+          -33.1287727,
+          -153.371246,
+          66.4036484,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "events": false,
+    "root_writes": false,
+    "visual_accepted": false,
+    "gameplay_verified": false,
+    "limitations": [
+      "All-direction unarmed gaits use verified Corvo donor; Emily is retargeted.",
+      "Unarmed crouch preserves existing body posture and releases fingers.",
+      "Unarmed sprint, lean, air and slide need separate full-body weaponless adaptation.",
+      "Contact solves require actual-game visual review; numerical coincidence is not acceptance."
+    ]
+  }
+]

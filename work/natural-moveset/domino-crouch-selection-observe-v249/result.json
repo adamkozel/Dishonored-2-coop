@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Domino item acquired and selected without directly invoking power or VFX",
+    "Controller input produces recorded native PhantasmalLink scenes with reciprocal bindings; phase names and counts are observed, not inferred",
+    "Native crouch plus state72 independently recorded with raw In/Loop/Out phases and reciprocal bindings; existing reader accepts In/Loop/Out and refuses separately recorded native Select400ms; new phase remains research-only",
+    "Native player state, equipment, raw component/entity and filtered effect samples retained; mana change and targeting outcome remain observations",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and no filtered native Domino effects remain",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.999,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "D4646A3336F8274581DF37767C7F805544AA7DEABED915688D81398F55B41A30",
+  "probe": "94B7545F153F02BFB668902A68DA691284B4561A011BA9813376B86C521358A8",
+  "scope": "Targeted crouched native Domino selection observation (no remote binding): exact Emily inventory acquisition, one native LT hold/release, raw PhantasmalLink subscenes, state/equipment/target and filtered effect data. A recorded scene is not proof of successful linking, mana spending or target outcomes. No remote body/VFX or gameplay replication. Full isolated inventory/health and checkpoint recovery plus protected hashes are required."
+}

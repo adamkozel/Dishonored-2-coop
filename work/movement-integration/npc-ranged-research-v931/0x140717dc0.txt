@@ -1,0 +1,24 @@
+
+bool FUN_140717dc0(longlong param_1,longlong param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  uint local_18;
+  uint local_14;
+  uint local_10;
+  
+  iVar1 = *(int *)(*(longlong *)(param_1 + 8) + 0x80);
+  local_10 = *(uint *)(param_2 + 0x44) ^ 0x80000000;
+  local_14 = *(uint *)(param_2 + 0x40) ^ 0x80000000;
+  local_18 = *(uint *)(param_2 + 0x3c) ^ 0x80000000;
+  iVar2 = FUN_1406dd130(*(longlong *)(param_1 + 0x10) + 0x30c,&local_18);
+  if (iVar1 == 0) {
+    return true;
+  }
+  if (iVar1 != 1) {
+    return iVar2 == 2;
+  }
+  return iVar2 == 1;
+}
+

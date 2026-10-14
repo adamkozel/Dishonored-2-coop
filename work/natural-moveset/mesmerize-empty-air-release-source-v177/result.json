@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Standing native source starts on the proven floor before the bounded jump",
+    "Native X establishes confirmed holstered sword and settled standing before the jump/cast",
+    "Direct native equipment observations retain the holstered sword through airborne phases and recovery",
+    "Direct native Jump/Fall samples overlap the exact666ms reciprocal Mesmerize release scene",
+    "Native cast phases retain reciprocal arm binding during bounded jump input; raw player/scene overlap is recorded rather than assumed",
+    "Read-only native Midnight scenes, arm/equipment data and player state samples retained for air provenance analysis; remote integration not claimed",
+    "Native cast spends source mana without resource writes",
+    "Exact native world body effect exists after source cast; presentation/AI ownership still under investigation",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.937,
+      "input": "Native LT held 1800ms then released"
+    },
+    {
+      "videoTime": 3.005,
+      "input": "Native A while aiming, retaining LT180ms then releasing"
+    }
+  ],
+  "dll": "DDD62F5EB3D7CED26AC45D859C48C72C8CC9A0754A31DF1EEC7C1025FC605805",
+  "probe": "964433461EBAE095F91E13479DE3AF2DA5C38B052DA778394D4AF024C376DCCA",
+  "scope": "Native source in-place jump while holding Mesmerize aim, releasing LT180ms after A. Raw player states and single-arm Midnight bindings determine actual airborne behavior. Current strict reader still refuses holstered airborne Mesmerize, and no remote body/FX integration is enabled by this observation. Native mana/world behavior and final native floor are recorded. Both isolated checkpoints and protected save hashes restore."
+}

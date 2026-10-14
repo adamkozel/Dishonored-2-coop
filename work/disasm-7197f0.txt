@@ -1,0 +1,77 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407197F0: push        rbx
+  00000001407197F2: sub         rsp,20h
+  00000001407197F6: mov         rbx,rcx
+  00000001407197F9: call        0000000140717DB0
+  00000001407197FE: mov         rax,qword ptr [rbx+10h]
+  0000000140719802: test        byte ptr [rax+00000000000000D1h],20h
+  0000000140719809: movaps      xmm1,xmm0
+  000000014071980C: je          0000000140719820
+  000000014071980E: mov         rax,qword ptr [rbx+8]
+  0000000140719812: movss       xmm0,dword ptr [rax+00000000000000B4h]
+  000000014071981A: add         rsp,20h
+  000000014071981E: pop         rbx
+  000000014071981F: ret
+  0000000140719820: mov         r8,qword ptr [rbx+68h]
+  0000000140719824: test        r8,r8
+  0000000140719827: je          000000014071987A
+  0000000140719829: movsxd      rax,dword ptr [rbx+00000000000000B4h]
+  0000000140719830: cmp         eax,0FFFFFFFFh
+  0000000140719833: jle         000000014071984C
+  0000000140719835: lea         rdx,[rax+rax*4]
+  0000000140719839: mov         rax,qword ptr [r8+48h]
+  000000014071983D: movss       xmm0,dword ptr [rax+rdx*8+24h]
+  0000000140719843: ucomiss     xmm0,dword ptr [rax+rdx*8+8]
+  0000000140719848: jp          000000014071987A
+  000000014071984A: jne         000000014071987A
+  000000014071984C: movsxd      rax,dword ptr [rbx+00000000000000B0h]
+  0000000140719853: cmp         eax,0FFFFFFFFh
+  0000000140719856: jle         0000000140719873
+  0000000140719858: lea         rdx,[rax+rax*4]
+  000000014071985C: mov         rax,qword ptr [r8+48h]
+  0000000140719860: movss       xmm0,dword ptr [rax+rdx*8+24h]
+  0000000140719866: addss       xmm1,xmm0
+  000000014071986A: movaps      xmm0,xmm1
+  000000014071986D: add         rsp,20h
+  0000000140719871: pop         rbx
+  0000000140719872: ret
+  0000000140719873: xorps       xmm0,xmm0
+  0000000140719876: addss       xmm1,xmm0
+  000000014071987A: movaps      xmm0,xmm1
+  000000014071987D: add         rsp,20h
+  0000000140719881: pop         rbx
+  0000000140719882: ret
+  0000000140719883: int         3
+  0000000140719884: int         3
+  0000000140719885: int         3
+  0000000140719886: int         3
+  0000000140719887: int         3
+  0000000140719888: int         3
+  0000000140719889: int         3
+  000000014071988A: int         3
+  000000014071988B: int         3
+  000000014071988C: int         3
+  000000014071988D: int         3
+  000000014071988E: int         3
+  000000014071988F: int         3
+  0000000140719890: push        rbx
+  0000000140719892: sub         rsp,20h
+  0000000140719896: cmp         dword ptr [rcx+00000000000000F0h],0
+  000000014071989D: mov         rbx,rcx
+  00000001407198A0: jl          00000001407198CF
+  00000001407198A2: add         rcx,0E0h
+  00000001407198A9: mov         edx,2
+  00000001407198AE: E8
+  00000001407198AF: pop         rbp
+  00000001407198B0: 10
+
+  Summary
+
+     1A7D000 .text

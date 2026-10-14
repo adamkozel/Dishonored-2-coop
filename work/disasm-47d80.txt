@@ -1,0 +1,39 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140047D80: mov         qword ptr [rsp+8],rbx
+  0000000140047D85: push        rdi
+  0000000140047D86: sub         rsp,20h
+  0000000140047D8A: test        dword ptr [rcx+0000000000000080h],0FFFFFFh
+  0000000140047D94: movzx       edi,dl
+  0000000140047D97: mov         rbx,rcx
+  0000000140047D9A: jbe         0000000140047DDD
+  0000000140047D9C: mov         rcx,qword ptr [00000001422FCD70h]
+  0000000140047DA3: mov         rax,qword ptr [rcx]
+  0000000140047DA6: call        qword ptr [rax+0000000000000100h]
+  0000000140047DAC: mov         rcx,qword ptr [rbx+78h]
+  0000000140047DB0: add         rcx,118h
+  0000000140047DB7: call        0000000140143BB0
+  0000000140047DBC: test        al,al
+  0000000140047DBE: je          0000000140047DDD
+  0000000140047DC0: mov         rcx,qword ptr [0000000142274270h]
+  0000000140047DC7: test        dil,dil
+  0000000140047DCA: sete        bl
+  0000000140047DCD: call        00000001408E0880
+  0000000140047DD2: movzx       edx,bl
+  0000000140047DD5: mov         rcx,rax
+  0000000140047DD8: call        0000000140033720
+  0000000140047DDD: mov         rbx,qword ptr [rsp+30h]
+  0000000140047DE2: add         rsp,20h
+  0000000140047DE6: pop         rdi
+  0000000140047DE7: ret
+  0000000140047DE8: int         3
+
+  Summary
+
+     1A7D000 .text

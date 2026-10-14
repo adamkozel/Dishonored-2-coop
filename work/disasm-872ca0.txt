@@ -1,0 +1,65 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140872CA0: mov         eax,dword ptr [rcx+00000000000000C0h]
+  0000000140872CA6: mov         dword ptr [rdx],eax
+  0000000140872CA8: mov         eax,dword ptr [rcx+00000000000000C4h]
+  0000000140872CAE: mov         dword ptr [rdx+4],eax
+  0000000140872CB1: mov         eax,dword ptr [rcx+00000000000000C8h]
+  0000000140872CB7: mov         dword ptr [rdx+8],eax
+  0000000140872CBA: ret
+  0000000140872CBB: int         3
+  0000000140872CBC: int         3
+  0000000140872CBD: int         3
+  0000000140872CBE: int         3
+  0000000140872CBF: int         3
+  0000000140872CC0: mov         qword ptr [rsp+20h],r9
+  0000000140872CC5: push        rbp
+  0000000140872CC6: push        rsi
+  0000000140872CC7: push        rdi
+  0000000140872CC8: push        r12
+  0000000140872CCA: push        r13
+  0000000140872CCC: push        r14
+  0000000140872CCE: push        r15
+  0000000140872CD0: lea         rbp,[rsp-1Fh]
+  0000000140872CD5: sub         rsp,0D0h
+  0000000140872CDC: mov         qword ptr [rbp+0Fh],0FFFFFFFFFFFFFFFEh
+  0000000140872CE4: mov         qword ptr [rsp+0000000000000118h],rbx
+  0000000140872CEC: mov         r14,r8
+  0000000140872CEF: mov         r12,rdx
+  0000000140872CF2: mov         rbx,rcx
+  0000000140872CF5: mov         rcx,qword ptr [rcx]
+  0000000140872CF8: test        rcx,rcx
+  0000000140872CFB: je          0000000140873325
+  0000000140872D01: mov         eax,dword ptr [rdx]
+  0000000140872D03: mov         dword ptr [rcx+0000000000001860h],eax
+  0000000140872D09: mov         eax,dword ptr [rdx+4]
+  0000000140872D0C: mov         dword ptr [rcx+0000000000001864h],eax
+  0000000140872D12: mov         eax,dword ptr [rdx+8]
+  0000000140872D15: mov         dword ptr [rcx+0000000000001868h],eax
+  0000000140872D1B: mov         rcx,qword ptr [rbx]
+  0000000140872D1E: mov         eax,dword ptr [r8]
+  0000000140872D21: mov         dword ptr [rcx+000000000000186Ch],eax
+  0000000140872D27: mov         eax,dword ptr [r8+4]
+  0000000140872D2B: mov         dword ptr [rcx+0000000000001870h],eax
+  0000000140872D31: mov         eax,dword ptr [r8+8]
+  0000000140872D35: mov         dword ptr [rcx+0000000000001874h],eax
+  0000000140872D3B: mov         eax,dword ptr [r8+0Ch]
+  0000000140872D3F: mov         dword ptr [rcx+0000000000001878h],eax
+  0000000140872D45: mov         eax,dword ptr [r8+10h]
+  0000000140872D49: mov         dword ptr [rcx+000000000000187Ch],eax
+  0000000140872D4F: mov         eax,dword ptr [r8+14h]
+  0000000140872D53: mov         dword ptr [rcx+0000000000001880h],eax
+  0000000140872D59: mov         eax,dword ptr [r8+18h]
+  0000000140872D5D: 89
+  0000000140872D5E: 81
+  0000000140872D5F: test        byte ptr [rax],bl
+
+  Summary
+
+     1A7D000 .text

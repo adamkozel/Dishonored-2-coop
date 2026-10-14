@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-13T11:05:55.485401+02:00",
+  "passed": true,
+  "candidate": "candidate-loot-motion-v666",
+  "dll": "A5E6F9F6319600E488321E8BF2F73D12872720671491EEE79A7CEE15B1184A15",
+  "probe": "C687281CCB9709552BD1EF9ABC99A7C7C13DF26EFD0FACFD070191DD8B150BB3",
+  "baselineRejectedNativeLoot": true,
+  "cases": [
+    {
+      "take": "native-interactions-corvo-coin-v667",
+      "role": "host",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed and restored both inventories, player/partner health and 14 protected files",
+        "Ten-second compact reader retained a valid reciprocal native state throughout",
+        "Both brief native standing loot combinations observed, with and without Undraw81",
+        "Exact native LootObject47 remains recognized as standing motion",
+        "Interact, loot, undraw and final running state remain recognized",
+        "Source remained in active gameplay throughout capture",
+        "Both native Steam presentation streams remained ready",
+        "Remote full-body bank remained active and fully weighted",
+        "Exact native coin entity removed from source registry after ordinary X input",
+        "Source and receiver returned to ordinary idle"
+      ],
+      "samples": 111,
+      "compactSamples": 639,
+      "minimumBodyWeight": 0.999778,
+      "nativeLootWindowMs": [
+        1641,
+        1656
+      ],
+      "sourceVideo": "native-interactions-corvo-coin-v667/coin-source.mp4",
+      "observerVideo": "native-interactions-corvo-coin-v667/coin-observer.mp4"
+    },
+    {
+      "take": "native-interactions-emily-coin-v668",
+      "role": "client",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed and restored both inventories, player/partner health and 14 protected files",
+        "Ten-second compact reader retained a valid reciprocal native state throughout",
+        "Both brief native standing loot combinations observed, with and without Undraw81",
+        "Exact native LootObject47 remains recognized as standing motion",
+        "Interact, loot, undraw and final running state remain recognized",
+        "Source remained in active gameplay throughout capture",
+        "Both native Steam presentation streams remained ready",
+        "Remote full-body bank remained active and fully weighted",
+        "Exact native coin entity removed from source registry after ordinary X input",
+        "Source and receiver returned to ordinary idle"
+      ],
+      "samples": 111,
+      "compactSamples": 637,
+      "minimumBodyWeight": 0.999997,
+      "nativeLootWindowMs": [
+        1672,
+        1688
+      ],
+      "sourceVideo": "native-interactions-emily-coin-v668/coin-source.mp4",
+      "observerVideo": "native-interactions-emily-coin-v668/coin-observer.mp4"
+    }
+  ],
+  "checks": 20,
+  "visualAccepted": false,
+  "complete": false,
+  "scope": "Both-role stationary standing coin pickup preserves existing body and first-person behavior. No new reach gesture, crouched pickup, pickpocket, shared currency, inventory or world-removal claim."
+}

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "kind": "health",
+  "wheelButton": "NativeHealth",
+  "networkContinuity": true,
+  "leftY": 12000,
+  "checks": [
+    "Exactly one scalar native potion granted without equipping or invoking consumption",
+    "Exact native callback consumed one potion in normal gameplay",
+    "Native health increases after consumption without a health setter",
+    "Remote walking and stopping persist through native consumption with same Steam tokens, continuous bank updates and no invented body action",
+    "Only source native health changes; remote player and cosmetic avatar health are not synchronized by this experiment",
+    "Both inventories restore exactly after finite native grant",
+    "Both native isolated checkpoints restore health and unowned potion state",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.463,
+      "input": "Native forward walking through consumption",
+      "leftY": 12000
+    },
+    {
+      "videoTime": 2.442,
+      "input": "Exact native health-consume routine from engine thread; no keyboard input"
+    }
+  ],
+  "dll": "399CDA1770D53232C6DDDA59EAA6862783DF5120938F59D56F9EFF8816B25AE1",
+  "probe": "98AF22AF95FD0F265F62B757958EBB9458D475A32A2DB79E5512D2D3BEA8B359",
+  "finalDll": "399CDA1770D53232C6DDDA59EAA6862783DF5120938F59D56F9EFF8816B25AE1",
+  "scope": "Existing remote body walking/stopping continuity through source native health consumption, over Steam. No dedicated drink gesture, remote drink audio or remote health synchronization is implemented; all outcomes reset through isolated checkpoints."
+}

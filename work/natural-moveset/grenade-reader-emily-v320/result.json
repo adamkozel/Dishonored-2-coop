@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "pitch": 35,
+  "interruption": "none",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Native cook entry, cook loop, release and empty recovery drive remote whole-body clips on source clock",
+    "Cosmetic grenade disappears at release and stays hidden through empty recovery and native standing",
+    "Duplicate packet sent during native cook; prop remains one cached native entity",
+    "Exact six-joint native mechanism changes from idle to cook and stops writing after release without animation events",
+    "One owned native in-hand spark/light/audio effect follows the remote cosmetic grenade and stops at release; duplicate packet does not restart it",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.944,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 35,
+      "actualPitch": 34.33683330312945
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_low_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_low.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene"
+  ],
+  "dll": "B088BCBA3302E5A8D1A78CE282C816A638022995BB69BFCC1626A0109EC72A50",
+  "probe": "527A8D81167204270CB424790C4F852FD708EF6CB7E2E4E23AE0F1A9B6CCAED4",
+  "finalDll": "B088BCBA3302E5A8D1A78CE282C816A638022995BB69BFCC1626A0109EC72A50",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}

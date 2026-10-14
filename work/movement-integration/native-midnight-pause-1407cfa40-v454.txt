@@ -1,0 +1,58 @@
+
+undefined8 FUN_1407cfa40(longlong param_1,int param_2)
+
+{
+  undefined8 uVar1;
+  undefined8 *puVar2;
+  uint uVar3;
+  ulonglong uVar4;
+  ulonglong uVar5;
+  ulonglong uVar6;
+  undefined1 auStackX_18 [8];
+  undefined1 auStack_38 [8];
+  undefined4 uStack_30;
+  undefined1 auStack_20 [24];
+  
+  if (param_2 < 1) {
+    uVar5 = 0;
+    uVar4 = uVar5;
+    uVar6 = uVar5;
+    if ((*(uint *)(param_1 + 0xe8) & 0xffffff) != 0) {
+      do {
+        FUN_1407dd360(*(undefined8 *)(uVar6 + *(longlong *)(param_1 + 0xe0)));
+        uVar3 = (int)uVar4 + 1;
+        uVar4 = (ulonglong)uVar3;
+        uVar6 = uVar6 + 8;
+      } while ((int)uVar3 < (int)(*(uint *)(param_1 + 0xe8) & 0xffffff));
+    }
+    uVar4 = uVar5;
+    if ((*(uint *)(param_1 + 0x138) & 0xffffff) != 0) {
+      do {
+        FUN_1407dd360(*(undefined8 *)(uVar5 + *(longlong *)(param_1 + 0x130)));
+        uVar3 = (int)uVar4 + 1;
+        uVar5 = uVar5 + 8;
+        uVar4 = (ulonglong)uVar3;
+      } while ((int)uVar3 < (int)(*(uint *)(param_1 + 0x138) & 0xffffff));
+    }
+    if (*(longlong *)(param_1 + 0x150) != 0) {
+      FUN_1407dd360();
+    }
+    uStack_30 = *(undefined4 *)(param_1 + 0x158);
+    *(undefined4 *)(param_1 + 0x27c) = 5;
+    if (*(longlong *)(param_1 + 0x290) != 0) {
+      auStack_38[0] = 0x6d;
+      FUN_140884920(*(longlong *)(param_1 + 0x290),auStack_20,&DAT_1439a7840,auStack_38);
+      FUN_140882fc0(auStack_20);
+    }
+    return 1;
+  }
+  puVar2 = (undefined8 *)
+           (**(code **)(*D2_GameSingletonPtr + 0xd0))(D2_GameSingletonPtr,auStackX_18,3);
+  uVar1 = *puVar2;
+  *(undefined4 *)(param_1 + 0x2a8) = 5;
+  *(undefined8 *)(param_1 + 0x298) = uVar1;
+  *(double *)(param_1 + 0x2a0) = (double)((float)param_2 * 0.001) + *(double *)(param_1 + 0x298);
+  return 0;
+}
+
+

@@ -1,0 +1,104 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140752670: push        rdi
+  0000000140752672: sub         rsp,30h
+  0000000140752676: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014075267F: mov         qword ptr [rsp+48h],rbx
+  0000000140752684: mov         qword ptr [rsp+50h],rsi
+  0000000140752689: mov         rbx,rdx
+  000000014075268C: mov         rdi,rcx
+  000000014075268F: mov         rax,qword ptr [rcx+10h]
+  0000000140752693: test        byte ptr [rax+00000000000000D0h],80h
+  000000014075269A: je          00000001407527C1
+  00000001407526A0: mov         r8d,1
+  00000001407526A6: cmp         byte ptr [rdx+8],0
+  00000001407526AA: je          00000001407526C9
+  00000001407526AC: movzx       eax,byte ptr [rcx+0000000000000408h]
+  00000001407526B3: and         al,1Fh
+  00000001407526B5: mov         byte ptr [rsp+40h],al
+  00000001407526B9: mov         rcx,qword ptr [rdx]
+  00000001407526BC: mov         rax,qword ptr [rcx]
+  00000001407526BF: lea         rdx,[rsp+40h]
+  00000001407526C4: call        qword ptr [rax+30h]
+  00000001407526C7: jmp         00000001407526EF
+  00000001407526C9: mov         byte ptr [rsp+40h],0
+  00000001407526CE: mov         rcx,qword ptr [rdx]
+  00000001407526D1: mov         rax,qword ptr [rcx]
+  00000001407526D4: lea         rdx,[rsp+40h]
+  00000001407526D9: call        qword ptr [rax+28h]
+  00000001407526DC: movzx       eax,byte ptr [rsp+40h]
+  00000001407526E1: xor         al,byte ptr [rdi+0000000000000408h]
+  00000001407526E7: and         al,1Fh
+  00000001407526E9: xor         byte ptr [rdi+0000000000000408h],al
+  00000001407526EF: lea         rdx,[rdi+00000000000003C0h]
+  00000001407526F6: mov         rcx,rbx
+  00000001407526F9: cmp         byte ptr [rbx+8],0
+  00000001407526FD: je          0000000140752709
+  00000001407526FF: mov         rdx,qword ptr [rdx]
+  0000000140752702: call        0000000140131FB0
+  0000000140752707: jmp         000000014075270E
+  0000000140752709: call        0000000140131DF0
+  000000014075270E: lea         rdx,[rdi+00000000000003D0h]
+  0000000140752715: mov         rcx,qword ptr [rbx]
+  0000000140752718: mov         r8d,2
+  000000014075271E: mov         rax,qword ptr [rcx]
+  0000000140752721: cmp         byte ptr [rbx+8],0
+  0000000140752725: je          000000014075272C
+  0000000140752727: call        qword ptr [rax+30h]
+  000000014075272A: jmp         000000014075272F
+  000000014075272C: call        qword ptr [rax+28h]
+  000000014075272F: lea         rdx,[rdi+00000000000003D4h]
+  0000000140752736: mov         rcx,qword ptr [rbx]
+  0000000140752739: mov         r8d,0Ch
+  000000014075273F: mov         rax,qword ptr [rcx]
+  0000000140752742: cmp         byte ptr [rbx+8],0
+  0000000140752746: je          000000014075274D
+  0000000140752748: call        qword ptr [rax+30h]
+  000000014075274B: jmp         0000000140752750
+  000000014075274D: call        qword ptr [rax+28h]
+  0000000140752750: lea         rdx,[rdi+00000000000003E0h]
+  0000000140752757: mov         rcx,qword ptr [rbx]
+  000000014075275A: mov         r8d,10h
+  0000000140752760: mov         rax,qword ptr [rcx]
+  0000000140752763: cmp         byte ptr [rbx+8],0
+  0000000140752767: je          000000014075276E
+  0000000140752769: call        qword ptr [rax+30h]
+  000000014075276C: jmp         0000000140752771
+  000000014075276E: call        qword ptr [rax+28h]
+  0000000140752771: cmp         byte ptr [rbx+8],0
+  0000000140752775: je          000000014075278C
+  0000000140752777: mov         rdx,qword ptr [rdi+00000000000003C8h]
+  000000014075277E: add         rdx,20h
+  0000000140752782: mov         rcx,rbx
+  0000000140752785: call        00000001404DFF60
+  000000014075278A: jmp         00000001407527C1
+  000000014075278C: mov         ecx,28h
+  0000000140752791: call        00000001400F13F0
+  0000000140752796: mov         rsi,rax
+  0000000140752799: mov         qword ptr [rsp+40h],rax
+  000000014075279E: test        rax,rax
+  00000001407527A1: je          00000001407527AD
+  00000001407527A3: mov         rcx,rax
+  00000001407527A6: call        000000014013FB30
+  00000001407527AB: jmp         00000001407527AF
+  00000001407527AD: xor         esi,esi
+  00000001407527AF: mov         qword ptr [rdi+0000000000000410h],rsi
+  00000001407527B6: mov         rdx,rsi
+  00000001407527B9: mov         rcx,rbx
+  00000001407527BC: call        0000000140131ED0
+  00000001407527C1: mov         rbx,qword ptr [rsp+48h]
+  00000001407527C6: mov         rsi,qword ptr [rsp+50h]
+  00000001407527CB: add         rsp,30h
+  00000001407527CF: pop         rdi
+  00000001407527D0: ret
+  00000001407527D1: int         3
+
+  Summary
+
+     1A7D000 .text

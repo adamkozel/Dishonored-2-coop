@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "check": "harness completed",
+      "passed": true
+    },
+    {
+      "check": "snapshot and pending attachment observed before cancel",
+      "passed": true
+    },
+    {
+      "check": "no reciprocal attachment created",
+      "passed": true
+    },
+    {
+      "check": "one release completes within 1.2s after cancel",
+      "passed": true
+    },
+    {
+      "check": "snapshot bindings and fixture stay retired",
+      "passed": true
+    },
+    {
+      "check": "corpse returns to native ragdoll mode",
+      "passed": true
+    },
+    {
+      "check": "native carried flag restored",
+      "passed": true
+    },
+    {
+      "check": "no victim scene left active",
+      "passed": true
+    },
+    {
+      "check": "corpse stays dead",
+      "passed": true
+    },
+    {
+      "check": "local first-person health preserved",
+      "passed": true
+    },
+    {
+      "check": "remote avatar health preserved",
+      "passed": true
+    },
+    {
+      "check": "Steam transport stays connected",
+      "passed": true
+    },
+    {
+      "check": "at least 24 captured frames per second",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "samples": 141,
+  "active_snapshot_samples": 3,
+  "after_samples": 119,
+  "cleanup_delay_ms": 593,
+  "actual_capture_hz": 26.90909090909091,
+  "video_sha256": "3B90EB08E2F1B0AC51C1A294530B7CFFE091140DCF654E08BC9D2DB5845C3F23",
+  "complete": false,
+  "visual_accepted": false,
+  "scope": "Explicit cancellation during the unattached pose blend. No complete pickup or general world-body authority demonstrated."
+}

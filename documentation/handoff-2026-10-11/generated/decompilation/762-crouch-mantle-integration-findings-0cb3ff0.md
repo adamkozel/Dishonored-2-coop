@@ -1,0 +1,34 @@
+# crouch-mantle-integration-findings.json
+
+Original: [work/movement-integration/crouch-mantle-integration-findings.json](<../../../../work/movement-integration/crouch-mantle-integration-findings.json>)
+
+SHA-256: `6A0DA79681335208F6C7F7851C773CCFE5267163A0FF66E1DF817B10515F1C49`; 1288 bytes.
+
+## Original saved record
+
+````json
+{
+  "dll_sha256": "3A8EE80A3C9FFB248AEAC641B98B45E43E999DF7CB3A0F7660BC6C65324BD147",
+  "bank_format": "D2MOVE13 / 115 clips",
+  "action_protocol": "12 / 208 bytes",
+  "tests": [
+    "crouch-mantle-v13c-test",
+    "crouch-mantle-v13-priority"
+  ],
+  "checks": 29,
+  "complete": false,
+  "visual_accepted": false,
+  "protected_saves_unchanged": true,
+  "binding": "Native state8 kind1 next6: mantle_low_sneak, Corvo Scene_2 / Emily Scene_1,500ms; actual player only or player plus exact owned right arm. Character comes from the exact player body definition. Crouched recovery sword_equip_sneak_fast333ms binds only the owned right arm.",
+  "evidence": [
+    "integrated-crouch-mantle-corvo-v3/take.json",
+    "integrated-crouch-mantle-emily-v3/take.json"
+  ],
+  "limits": [
+    "Arbitrary geometry contacts, other traversals and visual acceptance remain incomplete.",
+    "First attempts exposed optional-arm binding and distinct crouched fast recovery; both corrected and the failed evidence retained.",
+    "v1 recordings rejected for an obstructed bookshelf camera; Emily observer health changed. Isolated fixture restored, camera moved and NPC isolation moved before camera setup. v3 health checks passed."
+  ],
+  "created": "2026-10-10T22:47:11.727743+02:00"
+}
+````

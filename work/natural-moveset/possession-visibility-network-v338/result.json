@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "failure": "No verified upper-floor tutorial guard within twenty metres",
+  "source": "host",
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Both isolated checkpoints restore complete original inventory quantities and health, clearing temporary Possession and upgrade acquisitions",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [],
+  "dll": "D21071A6DE663F017815B00F21F63BD467DD5C1E4AEADF8E209F6315F67FA718",
+  "probe": "99A60F78FB0CB48E5EE2B015621E752A3FA8171917002A9DE9C56AE5B7A420DE",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; finite native human-upgrade and verified guard-target experiment; generation-validated human target, native internal state lifecycle, release400ms and normal-input exit investigated; Remote native successful release over protocol50/bank52 investigated. Human transfer/internal1 and occupation/internal8 maintain a finite cosmetic clone visibility lease; remote target control, VFX and shared gameplay remain unimplemented. Body visibility uses native API on the exact held Corvo clone only; interruption/alternate contexts pending. Checkpoint and protected save restoration mandatory."
+}

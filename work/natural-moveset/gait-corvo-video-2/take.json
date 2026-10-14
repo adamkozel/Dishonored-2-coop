@@ -1,0 +1,98 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 0,
+  "end": 1791624335027,
+  "failure": "Recorder not ready",
+  "dll": "CF60C5EAB9A08573F128F2EF3958F9237BC92FCDC5B551682601DF44C6BDBD46",
+  "bank": "07527A2699E756A7C3EEDD7D528BC2807A0605CBA9E1909C36BB6733E3016841",
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "idle"
+    ],
+    [
+      1000,
+      0,
+      14000,
+      1100,
+      "walk forward"
+    ],
+    [
+      2100,
+      0,
+      32767,
+      600,
+      "accelerate to run"
+    ],
+    [
+      2800,
+      0,
+      0,
+      100,
+      "stop"
+    ],
+    [
+      3400,
+      -22000,
+      0,
+      800,
+      "left"
+    ],
+    [
+      4400,
+      0,
+      -32767,
+      850,
+      "backward run"
+    ],
+    [
+      5350,
+      0,
+      0,
+      100,
+      "stop"
+    ],
+    [
+      6000,
+      22000,
+      0,
+      800,
+      "right"
+    ],
+    [
+      7000,
+      -14000,
+      14000,
+      800,
+      "diagonal"
+    ],
+    [
+      8100,
+      0,
+      0,
+      100,
+      "stop"
+    ],
+    [
+      8600,
+      0,
+      -14000,
+      1000,
+      "backward walk"
+    ],
+    [
+      9800,
+      0,
+      0,
+      100,
+      "standing recovery"
+    ]
+  ],
+  "firstPersonChanged": false,
+  "scope": "Actual player inputs, native Steam root stream, authored native walk/run and directional blending. Phase advances with travelled distance."
+}

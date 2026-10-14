@@ -1,0 +1,21 @@
+{
+  "load-host.mp4": {
+    "accepted": true,
+    "review": "Host sheet inspected: after the native map load (client followed the host mission), the Emily Doppelganger partner stands on the Edge of the World boat in front of Corvo, full body, natural head motion."
+  },
+  "restart-host.mp4": {
+    "accepted": true,
+    "review": "Host sheet inspected: after the shared death and native checkpoint restart, Emily stands on the boat in front of Corvo, full body, upright and live."
+  },
+  "load-client.mp4": {
+    "accepted": false,
+    "review": "Client sheet inspected: faces the boat cabin poster wall. The requested client spot at the boat edge was displaced by the engine to ~0.9 m from Corvo; the partner is too close to the camera to show (status: partner exactly at the host position). No client-side visual from this take."
+  },
+  "restart-client.mp4": {
+    "accepted": false,
+    "review": "Client sheet inspected: same 0.9 m displacement as the load clip; poster wall, partner too close to the camera to show. No client-side visual from this take."
+  },
+  "findings": [
+    "1203f restored the full partner presentation 1.7 s after the map load and 2.9 s after the shared restart (was 14-24 s), with no full repairs; the host send queue peaked at 138 ms (was ~1 s)."
+  ]
+}

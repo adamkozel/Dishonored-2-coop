@@ -1,0 +1,63 @@
+# disasm-7cc2d0.txt
+
+Original: [work/disasm-7cc2d0.txt](<../../../../work/disasm-7cc2d0.txt>)
+
+SHA-256: `DEF1CACD7A035B222F05CFEC1B11C326A28EE4DF6AFEE1BCE8882BF23329BC96`; 2099 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407CC2D0: push        rbp
+  00000001407CC2D2: push        rbx
+  00000001407CC2D3: push        rsi
+  00000001407CC2D4: push        rdi
+  00000001407CC2D5: push        r12
+  00000001407CC2D7: push        r14
+  00000001407CC2D9: push        r15
+  00000001407CC2DB: mov         rbp,rsp
+  00000001407CC2DE: sub         rsp,80h
+  00000001407CC2E5: mov         qword ptr [rbp-50h],0FFFFFFFFFFFFFFFEh
+  00000001407CC2ED: movaps      xmmword ptr [rsp+70h],xmm6
+  00000001407CC2F2: movaps      xmmword ptr [rsp+60h],xmm7
+  00000001407CC2F7: mov         r12,rdx
+  00000001407CC2FA: mov         rsi,rcx
+  00000001407CC2FD: movzx       eax,byte ptr [rbp-3Ch]
+  00000001407CC301: or          eax,300h
+  00000001407CC306: mov         r8d,dword ptr [rbp-40h]
+  00000001407CC30A: and         r8d,0FF000000h
+  00000001407CC311: and         eax,0FFFFFFC0h
+  00000001407CC314: and         r8d,0FFFFFFh
+  00000001407CC31B: or          r8d,5000000h
+  00000001407CC322: mov         dword ptr [rbp-40h],r8d
+  00000001407CC326: lea         rcx,[rbp-38h]
+  00000001407CC32A: mov         qword ptr [rbp-48h],rcx
+  00000001407CC32E: btr         eax,7
+  00000001407CC332: or          eax,40h
+  00000001407CC335: mov         dword ptr [rbp-3Ch],eax
+  00000001407CC338: xor         r15d,r15d
+  00000001407CC33B: mov         dword ptr [rbp+40h],r15d
+  00000001407CC33F: and         r8d,0FFFFFFh
+  00000001407CC346: dec         r8d
+  00000001407CC349: mov         ecx,r15d
+  00000001407CC34C: mov         eax,r15d
+  00000001407CC34F: movsxd      rdx,r8d
+  00000001407CC352: js          00000001407CC36B
+  00000001407CC354: cmp         dword ptr [rbp+rax*4-38h],r15d
+  00000001407CC359: je          00000001407CC367
+  00000001407CC35B: inc         ecx
+  00000001407CC35D: inc         rax
+  00000001407CC360: 48
+
+  Summary
+
+     1A7D000 .text
+
+````

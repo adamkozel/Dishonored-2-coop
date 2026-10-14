@@ -1,0 +1,50 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014087B780: mov         rax,rsp
+  000000014087B783: push        rbp
+  000000014087B784: push        rdi
+  000000014087B785: push        r12
+  000000014087B787: push        r14
+  000000014087B789: push        r15
+  000000014087B78B: lea         rbp,[rax-68h]
+  000000014087B78F: sub         rsp,140h
+  000000014087B796: mov         qword ptr [rbp+30h],0FFFFFFFFFFFFFFFEh
+  000000014087B79E: mov         qword ptr [rax+10h],rbx
+  000000014087B7A2: mov         qword ptr [rax+18h],rsi
+  000000014087B7A6: mov         r15,rdx
+  000000014087B7A9: mov         rsi,rcx
+  000000014087B7AC: mov         eax,dword ptr [rcx+00000000000000A8h]
+  000000014087B7B2: and         eax,0FFFF0000h
+  000000014087B7B7: add         rcx,20h
+  000000014087B7BB: cmp         eax,3FFF0000h
+  000000014087B7C0: jne         000000014087B7CC
+  000000014087B7C2: call        000000014013FF40
+  000000014087B7C7: jmp         000000014087BB4D
+  000000014087B7CC: call        00000001401D9090
+  000000014087B7D1: cmp         byte ptr [rax],0
+  000000014087B7D4: je          000000014087B7E5
+  000000014087B7D6: mov         rdx,rsi
+  000000014087B7D9: mov         rcx,qword ptr [00000001439A5290h]
+  000000014087B7E0: call        00000001408AC460
+  000000014087B7E5: cmp         byte ptr [r15],0
+  000000014087B7E9: jne         000000014087B957
+  000000014087B7EF: mov         rax,qword ptr [rsi+00000000000002E8h]
+  000000014087B7F6: test        rax,rax
+  000000014087B7F9: je          000000014087B801
+  000000014087B7FB: mov         rbx,qword ptr [rax+8]
+  000000014087B7FF: jmp         000000014087B80C
+  000000014087B801: mov         rcx,rsi
+  000000014087B804: call        0000000140A93200
+  000000014087B809: mov         rbx,qword ptr [rax]
+  000000014087B80C: lea         rcx,[rsp+20h]
+  000000014087B811: call        000000014013FB30
+  000000014087B816: nop
+  000000014087B817: xor         edx,edx
+  000000014087B819: mov         r8d,0E8h
+  000000014087B81F: 48
+  000000014087B820: 8D

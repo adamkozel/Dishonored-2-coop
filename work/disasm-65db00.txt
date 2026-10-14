@@ -1,0 +1,110 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014065DB00: sub         rsp,28h
+  000000014065DB04: mov         rax,qword ptr [00000001439A5290h]
+  000000014065DB0B: test        rax,rax
+  000000014065DB0E: je          000000014065DB6D
+  000000014065DB10: mov         qword ptr [rsp+20h],rbx
+  000000014065DB15: lea         rbx,[rax+00000000002E75D8h]
+  000000014065DB1C: test        rbx,rbx
+  000000014065DB1F: je          000000014065DB68
+  000000014065DB21: mov         rcx,qword ptr [0000000143989430h]
+  000000014065DB28: mov         rax,qword ptr [rcx]
+  000000014065DB2B: call        qword ptr [rax+58h]
+  000000014065DB2E: test        rax,rax
+  000000014065DB31: jg          000000014065DB48
+  000000014065DB33: lea         rcx,[0000000141C347A8h]
+  000000014065DB3A: mov         rbx,qword ptr [rsp+20h]
+  000000014065DB3F: add         rsp,28h
+  000000014065DB43: jmp         0000000140166830
+  000000014065DB48: or          r8d,0FFFFFFFFh
+  000000014065DB4C: lea         r9,[0000000141AB2848h]
+  000000014065DB53: mov         rcx,rbx
+  000000014065DB56: lea         edx,[r8+3]
+  000000014065DB5A: mov         rbx,qword ptr [rsp+20h]
+  000000014065DB5F: add         rsp,28h
+  000000014065DB63: jmp         0000000140659190
+  000000014065DB68: mov         rbx,qword ptr [rsp+20h]
+  000000014065DB6D: add         rsp,28h
+  000000014065DB71: ret
+  000000014065DB72: int         3
+  000000014065DB73: int         3
+  000000014065DB74: int         3
+  000000014065DB75: int         3
+  000000014065DB76: int         3
+  000000014065DB77: int         3
+  000000014065DB78: int         3
+  000000014065DB79: int         3
+  000000014065DB7A: int         3
+  000000014065DB7B: int         3
+  000000014065DB7C: int         3
+  000000014065DB7D: int         3
+  000000014065DB7E: int         3
+  000000014065DB7F: int         3
+  000000014065DB80: mov         dword ptr [rsp+10h],edx
+  000000014065DB84: push        rbp
+  000000014065DB85: push        rbx
+  000000014065DB86: push        rsi
+  000000014065DB87: push        rdi
+  000000014065DB88: push        r12
+  000000014065DB8A: push        r13
+  000000014065DB8C: push        r14
+  000000014065DB8E: push        r15
+  000000014065DB90: lea         rbp,[rsp-58h]
+  000000014065DB95: sub         rsp,158h
+  000000014065DB9C: mov         qword ptr [rbp+18h],0FFFFFFFFFFFFFFFEh
+  000000014065DBA4: mov         r15,rcx
+  000000014065DBA7: mov         rax,qword ptr [rcx+0000000000027A00h]
+  000000014065DBAE: mov         rcx,qword ptr [rax]
+  000000014065DBB1: mov         rax,qword ptr [rcx]
+  000000014065DBB4: call        qword ptr [rax+68h]
+  000000014065DBB7: mov         qword ptr [rbp-28h],rax
+  000000014065DBBB: xor         edx,edx
+  000000014065DBBD: lea         r8d,[rdx+38h]
+  000000014065DBC1: lea         rcx,[rbp-20h]
+  000000014065DBC5: call        00000001411AD450
+  000000014065DBCA: mov         rcx,qword ptr [r15+0000000000027A00h]
+  000000014065DBD1: mov         rcx,qword ptr [rcx]
+  000000014065DBD4: mov         r9,qword ptr [rcx]
+  000000014065DBD7: mov         r8d,38h
+  000000014065DBDD: lea         rdx,[rbp-20h]
+  000000014065DBE1: call        qword ptr [r9+30h]
+  000000014065DBE5: mov         r14,qword ptr [r15]
+  000000014065DBE8: add         r14,601C0h
+  000000014065DBEF: mov         qword ptr [rsp+78h],r14
+  000000014065DBF4: mov         esi,dword ptr [r14+8]
+  000000014065DBF8: and         esi,0FFFFFFh
+  000000014065DBFE: xor         r12d,r12d
+  000000014065DC01: mov         qword ptr [rbp-38h],r12
+  000000014065DC05: call        00000001401548E0
+  000000014065DC0A: movzx       eax,byte ptr [rbp-2Ch]
+  000000014065DC0E: mov         ecx,dword ptr [rbp-30h]
+  000000014065DC11: and         ecx,0FF000000h
+  000000014065DC17: or          eax,3Fh
+  000000014065DC1A: and         ecx,0FFFFFFh
+  000000014065DC20: or          ecx,4C000000h
+  000000014065DC26: and         eax,0FFFFFF3Fh
+  000000014065DC2B: mov         dword ptr [rbp-2Ch],eax
+  000000014065DC2E: test        al,40h
+  000000014065DC30: jne         000000014065DC3C
+  000000014065DC32: mov         qword ptr [rbp-38h],r12
+  000000014065DC36: movzx       eax,al
+  000000014065DC39: mov         dword ptr [rbp-2Ch],eax
+  000000014065DC3C: and         ecx,0FF000000h
+  000000014065DC42: mov         dword ptr [rbp-30h],ecx
+  000000014065DC45: mov         qword ptr [rsp+40h],r12
+  000000014065DC4A: call        00000001401548E0
+  000000014065DC4F: movzx       edi,byte ptr [rsp+4Ch]
+  000000014065DC54: mov         ebx,dword ptr [rsp+48h]
+  000000014065DC58: and         ebx,0FF000000h
+  000000014065DC5E: or          edi,3Fh
+
+  Summary
+
+     1A7D000 .text

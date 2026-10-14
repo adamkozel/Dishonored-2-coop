@@ -1,0 +1,64 @@
+{
+  "executable_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "complete": false,
+  "confirmed": [
+    "Phase0 authored crouched turn followed by native IK can rotate knees up to31cm while ankles remain near authored positions.",
+    "Native primary leg chains are pelvis18 -> femur19/23 -> tibia20/24 -> ankle21/25. center_root2 is parent of pelvis18.",
+    "Native phase2 and phase3 primary transforms agree before the correction.",
+    "Post-solve rotation about hip-to-ankle axis preserves native endpoints, bone lengths and ankle rotations;12 captured failure cases pass pure math checks.",
+    "Native capturePosePhase callback visits all animated actors; correction reference must be scoped before mutation, not merely before native writes. Diagnostic kneeReject1 exposed unrelated callbacks consuming reference."
+  ],
+  "candidate_v1": {
+    "dll": "14D149B060D4F452BA0F183AA4CAD850BAE342F8750909F4CDE1DE0A4E2E4A0C",
+    "test": "natural-moveset/crouch-turn-corvo-knee-v1",
+    "outcome": "Runtime ancestry guard refused all corrections; no knee fixes published. Guard assumed parent2 instead of native parent18. Candidate not accepted."
+  },
+  "candidate_v2": "B414: exact parent18, still refused because unrelated actor callback consumed the cached reference.",
+  "limitations": [
+    "The native IK solver itself retains millimeter endpoint residuals; the existing3mm flat-floor test is unchanged.",
+    "Numerical pole correction is not visual acceptance.",
+    "Complete movement remains unfinished."
+  ],
+  "candidate_v3": {
+    "dll": "BD5F2D2EDB0A7C34663A5FB7B5E9C4F95FB3AB8F86F20884654D2378CC0060CD",
+    "test": "natural-moveset/knee-scope-v3",
+    "result": "kneeReject1; no corrections, native pose remained unchanged."
+  },
+  "candidate_v4": {
+    "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+    "diagnostic": "natural-moveset/knee-scope-v4",
+    "corrections": 343,
+    "refused": 0,
+    "kneeReject": 0,
+    "max_local_offset_difference_m": 8e-08,
+    "status": "Eight native takes passed64 functional checks;48 complete phase2/phase3 captures. All eight contact sheets inspected; full movement still incomplete.",
+    "runtime_passes": [
+      "crouch-turn-corvo-knee-v4",
+      "crouch-turn-corvo-unarmed-knee-v4",
+      "crouch-turn-emily-knee-v4",
+      "crouch-turn-emily-unarmed-knee-v4",
+      "turn-stance-corvo-knee-v4",
+      "turn-stance-corvo-unarmed-knee-v4",
+      "turn-stance-emily-knee-v4",
+      "turn-stance-emily-unarmed-knee-v4"
+    ],
+    "reviewed_contact_sheets": [
+      "work\\natural-moveset\\crouch-turn-corvo-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\crouch-turn-corvo-unarmed-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\crouch-turn-emily-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\crouch-turn-emily-unarmed-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\turn-stance-corvo-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\turn-stance-corvo-unarmed-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\turn-stance-emily-knee-v4\\contact.jpg",
+      "work\\natural-moveset\\turn-stance-emily-unarmed-knee-v4\\contact.jpg"
+    ],
+    "observations": [
+      "Native whole-body turn preserved. Primary knee bend now follows authoring pose in reviewed Corvo armed and holstered cases.",
+      "All12 captured leg pairs per take preserve pre-correction terrain foot endpoints and orientation; pole error after correction below.001degrees.",
+      "Six frame samples per take reviewed; full movement and arbitrary contact quality remain incomplete."
+    ],
+    "max_pole_before_deg": 92.27803997594212,
+    "max_pole_after_deg": 0.00011490791033980917,
+    "max_native_endpoint_error_m": 6.491671587420641e-07
+  }
+}

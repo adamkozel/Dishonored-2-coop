@@ -1,0 +1,85 @@
+{
+  "result": {
+    "passed": true,
+    "failure": null,
+    "source": "host",
+    "stance": "standing",
+    "holstered": true,
+    "move": 8000,
+    "checks": [
+      "Exact Corvo Swarm item acquired through native inventory API; no direct spawn, AI or damage invocation",
+      "Remote Corvo uses exact bank50/313 and native Steam pose transport",
+      "Native controller stance and holster inputs establish the same complete-body remote context before casting",
+      "All three exact native phases with reciprocal Corvo arm/body ownership drive remote full-body phases",
+      "Bounded send/accept histories exactly match strict native scene incarnations, including sub-status-interval final aim loops",
+      "Swarm cast preserves root/body continuity without rejected presentation clocks",
+      "Remote body retains native cast stance/sword context and then recovers to standing with sword selection retained",
+      "Native source swarm remains source-owned; body playback creates no peer rats or duplicate power actions",
+      "Both original inventory quantities and player/partner health retained; world reset still required",
+      "Both isolated checkpoints restore original health/inventory and retire spawned Swarm entities",
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [
+      {
+        "videoTime": 1.921,
+        "input": "Native Corvo standing LT1800 then release; LeftY=8000; holstered=True"
+      },
+      {
+        "videoTime": 7.323,
+        "input": "Native standing recovery after cast"
+      }
+    ],
+    "dll": "06E1DA2C679CFF6E420F9BCA8E0E2B3558F2CFB399A21D982C91DE5D9E1A0747",
+    "probe": "B24A953BCEC1A531E618991261B91E6890F939C6571398627B0B9B936CD87FB8",
+    "bankSha256": "1769ADCA5B033E33E81770908BDA923A8073EEFCAF1A2CD7CCF81016273030EE",
+    "scope": "Native grounded Corvo Swarm phases in the specified stance/equipment context drive remote full-body bank50 poses through native Steam in isolated AI-held Dunwall. Local first-person remains native; peer animation does not execute rat, VFX or damage events. Remote world/rat behavior, aerial/slide contexts and visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+  },
+  "nativePhases": [
+    {
+      "variant": 23,
+      "nativeScenes": 1,
+      "sentEvents": 1,
+      "acceptedEvents": 1
+    },
+    {
+      "variant": 24,
+      "nativeScenes": 6,
+      "sentEvents": 6,
+      "acceptedEvents": 6
+    },
+    {
+      "variant": 25,
+      "nativeScenes": 1,
+      "sentEvents": 1,
+      "acceptedEvents": 1
+    }
+  ],
+  "continuity": {
+    "samples": 58,
+    "minimumBodyWeight": 1.0,
+    "rejections": [
+      0
+    ]
+  },
+  "context": {
+    "stance": "standing",
+    "holstered": true,
+    "move": 8000,
+    "contextPhaseSamples": 38,
+    "standingRecoverySamples": 64,
+    "minimumCrouchedWeight": 0.0
+  },
+  "complete": false,
+  "visualAccepted": false,
+  "walkingEvidence": {
+    "take": "swarm-network-standing-holstered-moving-v284",
+    "requestedAxis": 8000,
+    "distance": 0.06924399999999764,
+    "maximumRemoteSpeed": 0.02344,
+    "activeWalkingCastSamples": 0,
+    "gaitCyclesAdvancedWhileMoving": 0,
+    "stoppedPhaseRange": 0.0,
+    "walkingCoveragePassed": false,
+    "scope": "Observed source path length plus remote gait speed/phase during native casting. Numerical eligibility does not establish foot sliding or visual acceptance."
+  }
+}

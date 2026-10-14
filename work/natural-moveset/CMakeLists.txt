@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(D2OfflineAnimationSampler LANGUAGES CXX)
+add_executable(d2_sample_edge sample_edge.cpp)
+target_compile_features(d2_sample_edge PRIVATE cxx_std_17)
+target_compile_definitions(d2_sample_edge PRIVATE UNICODE _UNICODE NOMINMAX)
+target_compile_options(d2_sample_edge PRIVATE /EHsc)
+target_link_libraries(d2_sample_edge PRIVATE bcrypt)

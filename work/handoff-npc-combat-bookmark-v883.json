@@ -1,0 +1,33 @@
+{
+  "bookmarks": [
+    {
+      "address": "140659190",
+      "category": "D2Coop_LoadSlotRetry_879",
+      "comment": "2026-10-13 confirmed static + failed runtime trace878: save-operation pointer manager+27980 flags at+10 mask1 causes659190 to call65acb0 with requested slot, then queue wait1. Static strings141c34880='LoadGame',141c35114='wait 1'. Host878 first LoadGame82 sawflags0d, immediate native requeueflags0c consumed by mod checkpointIntercept as duplicate; no loading entry, client timedout. Original only allowed one slot dispatch and memory continuation after caching. Candidate879 FD33F5AE... permits same-slot82 retries in same bounded transaction/original game before loading entry; unit tests exclude other slots/worlds/phases/deadline. Kill->shared checkpoint881 passes fresh seven NPCs + combat nonce, but slotRetryCalls0 means new native busy branch still unexercised on corrected build.882 reloaded but combat renegotiation timed out (host has peerNonce, client none); separate follow-up. Native research transcripts npc-combat-research-v879; failed/recovered876/878 retained. Analyst labels, not recovered symbols."
+    }
+  ],
+  "receipt": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"address\":\"140659190\",\"category\":\"D2Coop_LoadSlotRetry_879\",\"comment\":\"2026-10-13 confirmed static + failed runtime trace878: save-operation pointer manager+27980 flags at+10 mask1 causes659190 to call65acb0 with requested slot, then queue wait1. Static strings141c34880='LoadGame',141c35114='wait 1'. Host878 first LoadGame82 sawflags0d, immediate native requeueflags0c consumed by mod checkpointIntercept as duplicate; no loading entry, client timedout. Original only allowed one slot dispatch and memory continuation after caching. Candidate879 FD33F5AE... permits same-slot82 retries in same bounded transaction/original game before loading entry; unit tests exclude other slots/worlds/phases/deadline. Kill->shared checkpoint881 passes fresh seven NPCs + combat nonce, but slotRetryCalls0 means new native busy branch still unexercised on corrected build.882 reloaded but combat renegotiation timed out (host has peerNonce, client none); separate follow-up. Native research transcripts npc-combat-research-v879; failed/recovered876/878 retained. Analyst labels, not recovered symbols.\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"address\":\"140659190\",\"category\":\"D2Coop_LoadSlotRetry_879\",\"comment\":\"2026-10-13 confirmed static + failed runtime trace878: save-operation pointer manager+27980 flags at+10 mask1 causes659190 to call65acb0 with requested slot, then queue wait1. Static strings141c34880='LoadGame',141c35114='wait 1'. Host878 first LoadGame82 sawflags0d, immediate native requeueflags0c consumed by mod checkpointIntercept as duplicate; no loading entry, client timedout. Original only allowed one slot dispatch and memory continuation after caching. Candidate879 FD33F5AE... permits same-slot82 retries in same bounded transaction/original game before loading entry; unit tests exclude other slots/worlds/phases/deadline. Kill->shared checkpoint881 passes fresh seven NPCs + combat nonce, but slotRetryCalls0 means new native busy branch still unexercised on corrected build.882 reloaded but combat renegotiation timed out (host has peerNonce, client none); separate follow-up. Native research transcripts npc-combat-research-v879; failed/recovered876/878 retained. Analyst labels, not recovered symbols.\"}"
+    },
+    "isError": false
+  },
+  "saved": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+    },
+    "isError": false
+  }
+}

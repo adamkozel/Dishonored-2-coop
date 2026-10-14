@@ -1,0 +1,63 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407CFA40: mov         qword ptr [rsp+20h],rbx
+  00000001407CFA45: push        rdi
+  00000001407CFA46: sub         rsp,50h
+  00000001407CFA4A: mov         edi,edx
+  00000001407CFA4C: mov         rbx,rcx
+  00000001407CFA4F: test        edx,edx
+  00000001407CFA51: jle         00000001407CFABB
+  00000001407CFA53: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407CFA5A: lea         rdx,[rsp+70h]
+  00000001407CFA5F: mov         r8d,3
+  00000001407CFA65: mov         rax,qword ptr [rcx]
+  00000001407CFA68: call        qword ptr [rax+00000000000000D0h]
+  00000001407CFA6E: movd        xmm0,edi
+  00000001407CFA72: mov         rax,qword ptr [rax]
+  00000001407CFA75: mov         dword ptr [rbx+00000000000002A8h],5
+  00000001407CFA7F: mov         qword ptr [rbx+0000000000000298h],rax
+  00000001407CFA86: cvtdq2ps    xmm0,xmm0
+  00000001407CFA89: mulss       xmm0,dword ptr [0000000141AB3B04h]
+  00000001407CFA91: cvtps2pd    xmm1,xmm0
+  00000001407CFA94: addsd       xmm1,mmword ptr [rbx+0000000000000298h]
+  00000001407CFA9C: movsd       mmword ptr [rsp+70h],xmm1
+  00000001407CFAA2: mov         rax,qword ptr [rsp+70h]
+  00000001407CFAA7: mov         qword ptr [rbx+00000000000002A0h],rax
+  00000001407CFAAE: xor         al,al
+  00000001407CFAB0: mov         rbx,qword ptr [rsp+78h]
+  00000001407CFAB5: add         rsp,50h
+  00000001407CFAB9: pop         rdi
+  00000001407CFABA: ret
+  00000001407CFABB: xor         edi,edi
+  00000001407CFABD: test        dword ptr [rcx+00000000000000E8h],0FFFFFFh
+  00000001407CFAC7: mov         qword ptr [rsp+60h],rsi
+  00000001407CFACC: mov         esi,edi
+  00000001407CFACE: jle         00000001407CFB0A
+  00000001407CFAD0: mov         qword ptr [rsp+68h],r14
+  00000001407CFAD5: mov         r14d,edi
+  00000001407CFAD8: nop         dword ptr [rax+rax+0000000000000000h]
+  00000001407CFAE0: mov         rax,qword ptr [rbx+00000000000000E0h]
+  00000001407CFAE7: mov         rcx,qword ptr [r14+rax]
+  00000001407CFAEB: call        00000001407DD360
+  00000001407CFAF0: mov         eax,dword ptr [rbx+00000000000000E8h]
+  00000001407CFAF6: inc         esi
+  00000001407CFAF8: and         eax,0FFFFFFh
+  00000001407CFAFD: lea         r14,[r14+8]
+  00000001407CFB01: cmp         esi,eax
+  00000001407CFB03: jl          00000001407CFAE0
+  00000001407CFB05: mov         r14,qword ptr [rsp+68h]
+  00000001407CFB0A: test        dword ptr [rbx+0000000000000138h],0FFFFFFh
+  00000001407CFB14: jle         00000001407CFB45
+  00000001407CFB16: mov         rsi,rdi
+  00000001407CFB19: nop         dword ptr [rax+0000000000000000h]
+  00000001407CFB20: 48
+
+  Summary
+
+     1A7D000 .text

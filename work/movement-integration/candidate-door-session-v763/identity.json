@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-13T14:53:34.472386+02:00",
+  "dll": "0C500AFF27B7D7EEA4D403CBFFD0A599B375C1AADD8232D9FDD5B020E97D6377",
+  "probe": "1ECB428D77B93915EA0417F3531E9103BB8E24DEC2336E874A809BA827810B22",
+  "previous": "candidate-door-side-v755",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Explicit ordinary-door session keeps ID-only intent across verified coordinated same-map checkpoint loads. Old native bindings retire before load; both-complete and restored local role/counterpart plus fresh paired epochs allow a new catalog and new arms. Session mode does not pause AI or depend on movement isolation. Legacy one-world fixture mode retained. Session change, uncoordinated world change or failed checkpoint retires intent. Same protocol69/bank67/357 and exact native queue. Runtime pending.",
+  "runtimeAudit": "../native-door-session-audit-v767.json",
+  "runtimeScope": "Explicit native-console ordinary-door session; fixed-SLOT82 same-map reload in both request roles, new arms/epochs/no old request applied, active native AI after load and fresh native door use. Initial live-AI test766 passes door interaction checks but fails overall health invariant: a native guard attacks the stationary source, visibly recorded. Full inventory/health/protected restoration passes. No shared AI authority, cross-campaign save/load, native session UI or complete movement claim. Same-world menu suspension and repeated loads remain outstanding."
+}

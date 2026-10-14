@@ -1,0 +1,16 @@
+{
+  "dll": "6B4814984CE396DC5CD6678630993A280FF01929F9F0811EA4B50876AD7D0FF8",
+  "prior": "candidate-terrain-v17-v2",
+  "bank": "D2MOVE18",
+  "clips": 161,
+  "phase": "Native donor yaw reparameterization driven by actual delayed root facing",
+  "gameplayVerified": true,
+  "complete": false,
+  "tests": [
+    "turn-corvo-v18-v1b"
+  ],
+  "checks": 9,
+  "visual_accepted": false,
+  "rejected_reason": "Native controller acceleration can choose the 45-degree donor at entry and leave it overcranked during fast spins. V2 reselects angular arc at completed steps.",
+  "fixture_correction": "First take turn-corvo-v18-v1 used input10000: native look velocity ~.015rad/s, below intentional .3rad/s turn threshold. Test inputs calibrated to22000/28000/32767, no runtime threshold weakened."
+}

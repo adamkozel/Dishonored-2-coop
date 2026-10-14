@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source": "host",
+  "failure": null,
+  "checks": [
+    "Exact native Dark Vision equipment acquired and selected only on source",
+    "Native controller casting starts the source vision manager; peer remains unchanged",
+    "Native cleanup restores inventory quantities and selection; vision manager inactive",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.901,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.271,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 8.837,
+      "action": "Native LT press 250ms",
+      "index": 2
+    }
+  ],
+  "dll": "D01CA730DBA05BAE2D0D1F258DAB32BBB3681B9089C61AD3E1EA15D8FAE55B4A",
+  "capture": "Actual native source POV and read-only state/scene observations",
+  "scope": "Native Dark Vision investigation only; remote body and world-visible effects are not certified. Runtime acquired entity and discovery metadata require isolated checkpoint reload for exact baseline restoration."
+}

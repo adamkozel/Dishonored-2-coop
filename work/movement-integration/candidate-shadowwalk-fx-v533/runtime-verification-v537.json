@@ -1,0 +1,139 @@
+{
+  "at": "2026-10-13T00:07:20.486744+02:00",
+  "result": {
+    "passed": true,
+    "failure": null,
+    "source": "client",
+    "checks": [
+      "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+      "Remote Emily complete-body bank58/335 and native Steam stream ready",
+      "Exact native ShadowWalk player state observed after normal LT input",
+      "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+      "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+      "Native mana decreases; replenishment prevents interpreting this as exact cost",
+      "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+      "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+      "Native Steam entry/form/exit drive remote full-body poses, holstered equipment, distance crawl and recovery without clock rejection",
+      "Complete crawl cycle plus return sampled across measured travel; actual native peer sword stays holstered",
+      "Six native particle resources follow owned peer joints and retire after exit; no first-person screen effect copied",
+      "Both original inventory quantities and player/partner health retained; world reset still required",
+      "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [
+      {
+        "videoTime": 1.921,
+        "input": "Native Emily LT220 activation"
+      },
+      {
+        "videoTime": 4.724,
+        "input": "Forward2600ms only after observed exact native ShadowWalk state"
+      },
+      {
+        "videoTime": 8.023,
+        "input": "Backward2600ms in observed native ShadowWalk state"
+      },
+      {
+        "videoTime": 12.092,
+        "input": "Native LT220 End Shadow Walk after bounded movement"
+      }
+    ],
+    "dll": "E7C012BAE02C2F7ADCCE655142C965CA1EE8F9969BCA732C24E086C39662174A",
+    "probe": "47CC19449611FEBBD26ED8473C2AB6472EF9DBE31520B9DC6139E42F98C33EA7",
+    "scope": "Body-only native Shadow Walk entry, idle, bounded forward/backward crawl and requested exit through native Steam. Original FP preserved. Material, VFX, attacks and untested traversal remain unfinished. Checkpoint and protected saves restored; actual remote/source videos require visual review."
+  },
+  "scope": "Native Emily Shadow Walk complete-body entry/idle/forward/backward/exit and six native arm/hand/ash particle resources, driven by accepted native Steam state and owned published peer joints. First-person screen effects remain local. Body shader/morphology, attack, dedicated directional clips, broader traversal and final quality remain incomplete.",
+  "scopeCorrection": "The raw test inherited its body-only summary from525. Its additional14th check and remote-fx-observations explicitly establish particles; this receipt states the actual scope without rewriting the original.",
+  "body": {
+    "variants": [
+      32,
+      33,
+      34
+    ],
+    "received": [
+      32,
+      33,
+      34
+    ],
+    "crawlSamples": 34,
+    "travelPhases": [
+      0.0,
+      0.03479,
+      0.0397,
+      0.068768,
+      0.139899,
+      0.202529,
+      0.332728,
+      0.395673,
+      0.39745,
+      0.46473,
+      0.481205,
+      0.539788,
+      0.558198,
+      0.634466,
+      0.657868,
+      0.711321,
+      0.753334,
+      0.768467,
+      0.838293,
+      0.868388,
+      0.900488,
+      0.954255,
+      0.967926
+    ],
+    "clockRefused": 0,
+    "recoverySamples": 6,
+    "scope": "Initial body-only native entry/form/exit. Visual review and native shadow material/particles still required."
+  },
+  "travel": {
+    "sourceDistanceMeters": 4.6846920000000125,
+    "absoluteTravelCycles": 1.9350070000000001,
+    "stopPhases": [
+      0.068768
+    ],
+    "forwardMillis": 2600,
+    "backwardMillis": 2600,
+    "scope": "Measured native source travel and accepted distance-driven body cadence. Does not establish final foot/hand contact quality."
+  },
+  "particles": {
+    "effectNames": [
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_arm_idle_01.fx",
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/idle/ply_hand_idle_01.fx",
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx",
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_02.fx",
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_hand_loco_01.fx",
+      "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+    ],
+    "owner": 209916411,
+    "snapshots": 241,
+    "started": 24,
+    "stopped": 24,
+    "updates": 1870,
+    "refused": 0,
+    "nativeRecordsRetired": true,
+    "screenEffectsExcluded": true,
+    "scope": "Native cosmetic particle ownership, posed-joint update and cleanup. Visual quality and shader morphology remain separate."
+  },
+  "visualReview": {
+    "at": "2026-10-13T00:07:20.486744+02:00",
+    "inspected": true,
+    "sheets": [
+      "fx-sheet.jpg",
+      "source-sheet.jpg"
+    ],
+    "method": "Viewed temporal sheets extracted from actual paired game recordings.",
+    "observations": [
+      "Remote body lowers, crawls forward and returns backward, then recovers with native sword.",
+      "Observer has its normal game view throughout; native low camera/vision/end prompt remain in the source view.",
+      "The remote body still looks human. Particle presence/ownership is confirmed separately by native records; the sheet does not establish strong shadow appearance."
+    ],
+    "limitations": [
+      "Column partly occludes entry/idle; moving phases are visible.",
+      "No final contact, morphology, VFX quality or sustained performance acceptance.",
+      "Temporal sheets cannot prove continuous motion quality."
+    ],
+    "complete": false,
+    "visualAccepted": false
+  },
+  "complete": false
+}

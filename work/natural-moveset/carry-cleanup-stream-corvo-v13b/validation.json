@@ -1,0 +1,130 @@
+{
+  "identity": {
+    "character": "corvo",
+    "role": "host",
+    "peer": "client",
+    "dllSha256": "43A5D79A5E07E056FCBEA7DC17F515F87199CA065BE579B85C7D732E4596B112",
+    "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "bankSha256": "B091E524B90556E62293A7A5B1AAA1EF45BD6B845332C6FD37299E93BA400042",
+    "victimSceneSourceSha256": "5AF9933110E7342F9C934B448AF46315E99E765B110DAB14A97FA4657FA957B8",
+    "installedAssetIndexSha256": "9544C035FB0CD9FDB01F0D4A29AA4EFE51EA26722446D373C126865E63C0B052",
+    "healthBefore": {
+      "tick": 280374875,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x29035279620",
+      "actor": "0x29027e23490",
+      "attributes": "0x290350fcdf0",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "victimSceneRequested": true,
+    "naturalRelease": true,
+    "nativeDropExpected": false,
+    "crouchedDrop": false,
+    "view": "front",
+    "scope": "Explicitly armed native attachment experiment on the authored Mayhew corpse. Maximum lifetime is 8 seconds, or 16 seconds with NaturalRelease. Requested victim-only animation is recorded separately; shoulder pose and ragdoll outcome require visual inspection.",
+    "corpseMutations": true
+  },
+  "samples": 136,
+  "held_samples": 30,
+  "checks": [
+    {
+      "check": "harness completed",
+      "passed": true
+    },
+    {
+      "check": "strict reciprocal attachment observed",
+      "passed": true
+    },
+    {
+      "check": "one exact mapped corpse generation",
+      "passed": true
+    },
+    {
+      "check": "native release empties attachment list",
+      "passed": true
+    },
+    {
+      "check": "this case starts and releases exactly one attachment",
+      "passed": true
+    },
+    {
+      "check": "local first-person health preserved",
+      "passed": true
+    },
+    {
+      "check": "at least 24 captured frames per second",
+      "passed": true
+    },
+    {
+      "check": "victim-only native scene owns exactly the corpse",
+      "passed": true
+    },
+    {
+      "check": "actual native victim carry clip is connected",
+      "passed": true
+    },
+    {
+      "check": "victim scene retired on release",
+      "passed": true
+    },
+    {
+      "check": "corpse remains dead",
+      "passed": true
+    },
+    {
+      "check": "native physics changes ragdoll to animated and back",
+      "passed": true
+    },
+    {
+      "check": "native carried flag is claimed and restored",
+      "passed": true
+    },
+    {
+      "check": "interruption retires attachment within 1.2 seconds",
+      "passed": true
+    },
+    {
+      "check": "action stream resumes with fresh carrying state",
+      "passed": false
+    },
+    {
+      "check": "resumed action stream does not replay attachment",
+      "passed": true
+    },
+    {
+      "check": "Steam transport stays connected through interruption",
+      "passed": true
+    }
+  ],
+  "mechanical_checks_passed": false,
+  "post_release_samples": 89,
+  "release_counter_delta": 1,
+  "interruption": "stream",
+  "root_follows_carrier": false,
+  "carrier_displacement_m": 1.5675050000000113,
+  "corpse_displacement_m": 3.305243403086656,
+  "maximum_carrier_root_separation_m": 2.0316063802708713,
+  "actual_capture_hz": 27.318181818181817,
+  "video_sha256": "B16C823A1E694F7DC440179E3BA76225C138A73A2F2B6FBE48DDBD8EC8ECF34C",
+  "native_victim_scene_active": true,
+  "victim_animation_input_count": 1,
+  "native_victim_animation": true,
+  "native_victim_drop_animation": false,
+  "visual_accepted": false,
+  "complete": false,
+  "scope": "Explicitly armed attachment mechanics only. Root movement, corpse pose and physics handoff must be judged separately."
+}

@@ -1,0 +1,50 @@
+MSBuild version 17.14.60+43b635718 for .NET Framework
+
+  engine_bridge.cpp
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(218,52): warning C4389: '==': signed/unsigned mismatch [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_lab_proxy.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/engine_bridge.cpp')
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(218,75): warning C4389: '==': signed/unsigned mismatch [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_lab_proxy.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/engine_bridge.cpp')
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(343,100): warning C4456: declaration of 'a' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_lab_proxy.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/engine_bridge.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(251,14):
+      see declaration of 'a'
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(343,118): warning C4456: declaration of 'b' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_lab_proxy.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/engine_bridge.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\movement_playback.h(251,57):
+      see declaration of 'b'
+  
+  d2_lab_proxy.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\dinput8.dll
+PASS: game mutex scoped, unrelated mutex unchanged, system DirectInput forwarded
+PASS: simulated input preserves controls; expired, malformed, and excessive leases release input
+PASS: pose protocol rejects incompatible builds, own role, NaNs, wrong size, invalid flags and malformed rotation bases
+PASS: body pose protocol rejects stale payloads, reflections, invalid origin, nonfinite and unbounded joints
+PASS: native cinematic, pause, and pending state transitions block movement follow
+PASS: cinematic identities ignore observer order, distinguish native nodes, and reject inconsistent metadata
+PASS: skip relay rejects mismatched scenes, sessions, world epochs, cinematic epochs, and disabled peers
+PASS: active sequence boundaries distinguish subscenes and channels; branch equivalence is limited to the observed opening pair
+PASS: opening rendezvous requires both native holds and rejects releases for another role, session, epoch, or segment
+PASS: death retirement requires the same dead actor, registered component, empty pause state and stopped scheduler
+PASS: native faction registration, directional overrides, bounds, ownership and concurrent change
+PASS: native health ownership, bounded attributes, suppressed maximum, transition and concurrent-change guards
+PASS: native sword inventory, quantity, component registration, tags, slot and attachment identity
+PASS: native Agility item identity, both roles, enhancement type, absent equipment and concurrent-change guards
+PASS: both native starting power identities, quantity/selection, ownership, slot, generation and concurrent activation guards
+PASS: native equipment scene ownership, both character subscenes, lifecycle, generations and concurrent binding guards
+PASS: native player sword slot/component state, both roles, reciprocal arm/body attachments, quantity, phase and concurrent-change guards
+PASS: dedicated Emily partner scope, exact asset, inherited sword declaration and 219 joint bounds
+PASS: separate Corvo tutorial sword scope, exact actor/item/base asset, reciprocal owner and joint bounds
+PASS: native equipment death retirement requires stable inventory removal and no registered melee component
+PASS: native child-frame ownership, reciprocal entities, bounded list, cycles, pause and concurrent replacement guards
+PASS: AI knowledge ownership, bounded targets, stale target resolution and concurrent change
+PASS: player stance ownership, bounded lookup, native transition and concurrent replacement refusal
+PASS: native combat scene ownership, bounds, generation and concurrent replacement
+PASS: native hard-landing body scene, character, generation and ownership
+PASS: native keyhole phases, body/arms/door ownership, mirrored crouch, clocks and bounded exit handoff
+PASS: exact native low mantle ownership, scene bounds, geometry and lifetime
+PASS: active player states enforce reciprocal ownership, unique bounded IDs and stable mode/list lifetimes
+PASS: AI scheduler pool membership, inactive partition, lifetime checks, bounds and concurrent-change refusal
+PASS: reciprocal NPC identity, unrelated local handles, stale generations, ambiguous spawners, world packet scope and transform validation

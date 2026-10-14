@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "7E3ADCA32421AE8EAB2DDC1650DF49E3BABFBB0FB14209FC6F1AAE8C1EE01F43",
+  "checks": [
+    "Independent reader validates ordinary crouched charge and exact observed subscene release",
+    "Native crouched release duration and stance retained",
+    "Remote body performs both crouched charge entry and hold",
+    "Native Steam source semantics drive full-body crouched heavy release",
+    "Native sword remains equipped during crouched heavy attack",
+    "Native stance locomotion resumes after heavy release",
+    "Independent network root retained through crouched heavy attack",
+    "Ordinary crouched RT1500ms in known central-room fixture; owned charge/hold/release through native Steam, no scene forcing or victim outcome replay.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "yaw": 90,
+        "distance": 1.15,
+        "name": "crouched-heavy",
+        "stance": 1
+      },
+      "key": "client-crouched-heavy",
+      "count": 242,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Ordinary crouched heavy charge/hold/release actor presentation, native Steam source clocks, existing adapted full-body clips. Source roots/events/outcomes unchanged. Complete movement, shared victim outcomes and visual acceptance not claimed. Restoration status is recorded in checks and failure."
+}

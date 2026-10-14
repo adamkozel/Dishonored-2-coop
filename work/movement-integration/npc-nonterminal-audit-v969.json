@@ -1,0 +1,150 @@
+{
+  "at": "2026-10-14T01:25:00.717907+02:00",
+  "candidate": "candidate-npc-combat-v966",
+  "dll": "70D6F3F7BBB49082467308C7471D429876A131CE3135A25DABA430C1C8F8971D",
+  "probe": "BAFEB687A25126DDFCF385E971AB0F58A5A57F5E23E2D0A40976882085F0C6AA",
+  "complete": false,
+  "combatProtocol": 6,
+  "combatPacketBytes": 276,
+  "cases": [
+    {
+      "take": "npc-crossbow-body-v960",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "source": "host",
+      "passed": false,
+      "restorationPassed": true,
+      "failure": "Nonterminal coverage requested but shot was lethal",
+      "health": {
+        "host": 0,
+        "client": 0
+      },
+      "deaths": {
+        "host": 1,
+        "client": 1
+      },
+      "scope": "Requested living-victim coverage FAILED: native shot killed both targets. Outcome matched; automatic protected restoration passed. No nonterminal or full checkpoint-test acceptance.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-crossbow-body-v961",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "source": "client",
+      "passed": false,
+      "restorationPassed": false,
+      "failure": "Shared reload failed peer_disconnected",
+      "health": {
+        "host": 25,
+        "client": 25
+      },
+      "deaths": {
+        "host": 0,
+        "client": 0
+      },
+      "manualRecovery": {
+        "recovered": true,
+        "candidate": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+        "scope": "Separate process restart and isolated checkpoint restoration after client driver-module exception; original failed test remains failed."
+      },
+      "scope": "Native living bolt hit40-to25 matched. Full test and automatic cleanup FAILED: client access violation in nvwgf2umx.dll+300d7a during shared reload. Separate isolated recovery963 passed. Root cause remains open; location alone does not assign blame.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-crossbow-body-v965",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "source": "client",
+      "passed": false,
+      "restorationPassed": true,
+      "failure": "Nonterminal coverage requested but shot was lethal",
+      "health": {
+        "host": 0,
+        "client": 0
+      },
+      "deaths": {
+        "host": 1,
+        "client": 1
+      },
+      "scope": "Requested living-victim coverage FAILED: native shot killed both targets. Outcome matched; automatic protected restoration passed. No nonterminal or full checkpoint-test acceptance.",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-crossbow-exact-body-v967",
+      "candidate": "candidate-npc-combat-v966",
+      "dll": "70D6F3F7BBB49082467308C7471D429876A131CE3135A25DABA430C1C8F8971D",
+      "source": "client",
+      "passed": true,
+      "restorationPassed": true,
+      "failure": null,
+      "health": {
+        "host": 25,
+        "client": 25
+      },
+      "deaths": {
+        "host": 0,
+        "client": 0
+      },
+      "scope": "Client native single regular bolt: both guards40-to25, no death; duplicates, body/prop counters, complete shared reload/rearm and protected restoration pass. One living-victim reload, not a fix for crash961 or full active combat certification.",
+      "aim": {
+        "before": {
+          "readOnly": true,
+          "controller": 1,
+          "mouse": 0
+        },
+        "during": {
+          "readOnly": true,
+          "controller": 0,
+          "mouse": 0
+        },
+        "restored": {
+          "readOnly": true,
+          "controller": 1,
+          "mouse": 0
+        }
+      },
+      "visualReview": {
+        "client": "Six inspected frames at0.4/0.6/0.9/1.4/3/8s show ordinary first-person bolt firing, blood/hit reaction, and upright living recovery. No complete animation or embedded-bolt acceptance.",
+        "host": "Corresponding visible guard reaction and upright recovery. Remote Emily is partly cut off/obstructed by furniture at left; full-body grip alignment is not accepted.",
+        "completePairedChoreographyAccepted": false
+      }
+    },
+    {
+      "take": "npc-crossbow-exact-body-v968",
+      "candidate": "candidate-npc-combat-v966",
+      "dll": "70D6F3F7BBB49082467308C7471D429876A131CE3135A25DABA430C1C8F8971D",
+      "source": "host",
+      "passed": false,
+      "restorationPassed": true,
+      "failure": "Nonterminal coverage requested but shot was lethal",
+      "health": {
+        "host": 0,
+        "client": 0
+      },
+      "deaths": {
+        "host": 1,
+        "client": 1
+      },
+      "scope": "Requested living-victim coverage FAILED: native shot killed both targets. Outcome matched; automatic protected restoration passed. No nonterminal or full checkpoint-test acceptance. Controller mode0 still selected region2; snapping mode alone does not explain the targeting.",
+      "aim": {
+        "before": {
+          "readOnly": true,
+          "controller": 1,
+          "mouse": 0
+        },
+        "during": {
+          "readOnly": true,
+          "controller": 0,
+          "mouse": 0
+        },
+        "restored": {
+          "readOnly": true,
+          "controller": 1,
+          "mouse": 0
+        }
+      },
+      "visualReview": {}
+    }
+  ],
+  "limitations": "Candidate954 both-role regular bolt milestone and948 pistol milestone remain preserved. Exact-aim nonterminal plus shared reload verified only for client967. Host968 still hit head; aim feedback investigation needed. Reload crash961 remains unresolved. Complete world combat, source-class/AI modifiers, projectile physics, movement/campaign/native UI and separate-account Steam validation remain open."
+}

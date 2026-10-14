@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-14T10:14:54.900671+02:00",
+  "candidate": "candidate-npc-combat-v1042",
+  "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+  "protocol": 72,
+  "bank": "climb-banks-v1042 (70/369)",
+  "cases": [
+    {
+      "take": "native-climb-eotw-v1041",
+      "passed": true,
+      "dll": "A5BD34794D97AED913BE6CD6B25355E14C1F380160F07D9D22EAF848FE173EAD",
+      "scope": "Native chain climbing discovery: ordinary interact at script_chain_01_1_8/2xlonger_2 enters alternate-mode state29 arkPlayerStateClimb (1c78498); jump released into harbor water (swimming). State watch failed (probe duration 16000 > 15000 limit); snapshots retained."
+    },
+    {
+      "take": "native-climb-eotw-v1041b",
+      "passed": true,
+      "dll": "A5BD34794D97AED913BE6CD6B25355E14C1F380160F07D9D22EAF848FE173EAD",
+      "scope": "Chain1: X grab -> state29; up/down move z 15.74 -> 16.04 -> 14.24 inside state29; B does not release. Chain2 placement landed on a slope (Slipping)."
+    },
+    {
+      "take": "climb-coop-eotw-v1043",
+      "passed": true,
+      "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+      "scope": "Candidate1042: host native chain climbing (state23, protocol72) presented on the client remote Corvo with bank70: 146/198 climbing samples, ascend 55, descend 91, 42 cycle phases; client observer-camera video shows grab, climb, descent and drop. Hand-to-chain contact approximate (ladder stand-in clips)."
+    }
+  ],
+  "complete": false,
+  "outstanding": [
+    "Chain-specific hand-over-hand acting (ladder-contact stand-ins), grab entry and release/drop transitions (clips 367/368 reserved, not bound).",
+    "Emily as climber; ladders in other maps; top exit/mantle from a chain."
+  ]
+}

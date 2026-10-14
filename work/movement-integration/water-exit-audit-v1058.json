@@ -1,0 +1,298 @@
+{
+  "at": "2026-10-14T11:18:09.421973+02:00",
+  "candidate": "candidate-npc-combat-v1056",
+  "dll": "0352516B0A005701F3FDD0CEB7CFD888A7361C4FE80D89063D5C4578356191CD",
+  "probe": "EE8ADF67AFA32648AD3E670C3DE9D4F695B8CB85571A7CD4FE50C467AF0DC91A",
+  "protocol": 73,
+  "bank": "climb-banks-v1042 (70/369) unchanged",
+  "harnesses": [
+    "../natural-moveset/Test-SwimExit-v1051.ps1",
+    "../natural-moveset/Test-SwimExit-v1052.ps1",
+    "../natural-moveset/Test-SwimExit-v1053.ps1",
+    "../natural-moveset/Test-SwimExit-v1054.ps1",
+    "../natural-moveset/Recover-InterruptedTake-v1055.ps1"
+  ],
+  "cases": [
+    {
+      "take": "swim-exit-corvo-v1051",
+      "harnessPassed": false,
+      "kind": null,
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "Failed run (retained): dock wall below the spawn is too high for a swim exit; source stayed swimming at the wall (x=-29.93, z=-1.98). Harness then moved to the canal lane.",
+      "exit": {
+        "observer": {
+          "traversalVariants": [],
+          "swimming": 207,
+          "traversal": 0,
+          "samples": 207
+        },
+        "finalPosition": [
+          -29.9324,
+          192.155,
+          -1.97513
+        ],
+        "exited": false,
+        "attempts": 3
+      },
+      "streams": {}
+    },
+    {
+      "take": "swim-exit-corvo-v1052",
+      "harnessPassed": true,
+      "kind": "swim_walkout",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "Confirmed runtime: swimming onto the canal steps hands over directly from arkPlayerStateSwimming (alternate mode, stance7) to default-mode arkPlayerStateRunning (1c85628) at y~178, z 0.21 - no mantle state. Observer (client) video: remote Corvo rises upright out of the water and runs up the steps; swim layer fades in ~400 ms, one ~100 ms neutral frame (bank weight 0) at the handover (zoom sheet inspected).",
+      "exit": {
+        "finalPosition": [
+          -24.8178,
+          171.825,
+          1.88435
+        ],
+        "attempts": 6,
+        "observer": {
+          "traversal": 0,
+          "samples": 188,
+          "traversalVariants": [],
+          "swimming": 63
+        },
+        "exited": true
+      },
+      "streams": {}
+    },
+    {
+      "take": "swim-exit-boat-corvo-v1053",
+      "harnessPassed": true,
+      "kind": "stream_loss",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "Confirmed runtime defect on 1042: jump at the moored boat entered default-mode arkPlayerStateMantle (state8, 1c82f68, stance1) but the observer bank weight fell to 0 for the rest of the take (eligibility mask 31 then 29: action stream retired). Harness passed (exit reached); presentation failed.",
+      "exit": {
+        "finalPosition": [
+          -30.7893,
+          187.719,
+          1.2637
+        ],
+        "observer": {
+          "swimming": 29,
+          "traversalVariants": [],
+          "samples": 232,
+          "traversal": 0
+        },
+        "attempts": 2,
+        "exited": true
+      },
+      "streams": {}
+    },
+    {
+      "take": "swim-exit-boat-corvo-v1054",
+      "harnessPassed": true,
+      "kind": "mantle_ok",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "1042: second jump at the dock wall mantled from z -1.43 to 1.26 (rise 2.69 m): native mantle_idle.midnightscene Scene_2, 833 ms, traversal variant4 presented on the client (12 samples); stream stayed ready.",
+      "exit": {
+        "exited": true,
+        "observer": {
+          "traversalVariants": [
+            4
+          ],
+          "traversal": 12,
+          "samples": 189,
+          "swimming": 46
+        },
+        "attempts": 3,
+        "finalPosition": [
+          -32.5714,
+          187.745,
+          1.20571
+        ]
+      },
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        }
+      }
+    },
+    {
+      "take": "swim-exit-boat-corvo-v1054b",
+      "harnessPassed": null,
+      "kind": "interrupted",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "Interrupted by the user after mission load, before cleanup; restored by Recover-InterruptedTake-v1055.ps1 (recovery.json passed). No test result.",
+      "exit": null,
+      "streams": {}
+    },
+    {
+      "take": "swim-exit-boat-corvo-v1054c",
+      "harnessPassed": true,
+      "kind": "mantle_ok",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "1042 repeat: dock mantle from z -1.43 (rise 2.69 m) presented as variant4; stream ready.",
+      "exit": {
+        "observer": {
+          "swimming": 43,
+          "traversalVariants": [
+            4
+          ],
+          "samples": 185,
+          "traversal": 11
+        },
+        "attempts": 3,
+        "finalPosition": [
+          -32.5714,
+          187.726,
+          1.20571
+        ],
+        "exited": true
+      },
+      "streams": {
+        "host": {
+          "unboundRefused": 1,
+          "sourceMisses": 1,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        }
+      }
+    },
+    {
+      "take": "swim-exit-deep-corvo-v1054d",
+      "harnessPassed": true,
+      "kind": "stream_loss",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1042",
+      "scope": "1042 reproduction of the defect: mantle straight from swim depth (start z -1.81, goal 1.26, rise 3.07 m, kind2 next6). Source traversal reader failed at stage2 (validTraversalGeometry rise<=3 m), 12 source misses, ground fallback refused all, both roles retired native_state_stale. Confirmed runtime cause.",
+      "exit": {
+        "attempts": 2,
+        "exited": true,
+        "observer": {
+          "samples": 233,
+          "swimming": 25,
+          "traversalVariants": [],
+          "traversal": 0
+        },
+        "finalPosition": [
+          -32.1819,
+          187.624,
+          1.20571
+        ]
+      },
+      "streams": {
+        "host": {
+          "unboundRefused": 12,
+          "sourceMisses": 12,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "sourceMisses": 0,
+          "result": "native_state_stale"
+        }
+      }
+    },
+    {
+      "take": "swim-exit-deep-corvo-v1057",
+      "harnessPassed": true,
+      "kind": "fixed",
+      "source": "host",
+      "candidate": "candidate-npc-combat-v1056",
+      "scope": "Candidate1056: same deep exit (rise 3.07 m) - reader stage0, traversal variant5 (high mantle into sneak) presented on the client for 11 samples, stream ready, zero source misses. Client video: remote Corvo climbs out with hands on the dock edge and ends crouched (sheet inspected).",
+      "exit": {
+        "exited": true,
+        "attempts": 2,
+        "finalPosition": [
+          -32.1511,
+          187.633,
+          1.2202
+        ],
+        "observer": {
+          "samples": 186,
+          "traversalVariants": [
+            5
+          ],
+          "traversal": 11,
+          "swimming": 24
+        }
+      },
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        }
+      }
+    },
+    {
+      "take": "swim-exit-deep-emily-v1057",
+      "harnessPassed": true,
+      "kind": "fixed",
+      "source": "client",
+      "candidate": "candidate-npc-combat-v1056",
+      "scope": "Candidate1056, Emily source: deep exit (rise 3.15 m) - variant4 presented on the host for 11 samples, stream ready; one transition-frame source miss became a payload-free state24 hold instead of a refusal. Host video: remote Emily climbs out with hands on the dock edge and stands (sheet inspected).",
+      "exit": {
+        "observer": {
+          "swimming": 31,
+          "traversal": 11,
+          "traversalVariants": [
+            4
+          ],
+          "samples": 210
+        },
+        "finalPosition": [
+          -32.5714,
+          188.087,
+          1.20571
+        ],
+        "exited": true,
+        "attempts": 2
+      },
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 1,
+          "sourceMisses": 1,
+          "result": "ready"
+        }
+      }
+    }
+  ],
+  "findings": [
+    "Confirmed static: native assets include swim_mantle.playerstateswimmantle (arkPlayerStateSwimMantle) and common ply_body_generic_swim_{idle,n,s,e,w,neutral} body animations; neither appeared in these exits.",
+    "Confirmed runtime: water exits use (a) a direct swimming->default running handover on steps and (b) the ordinary default-mode high mantle (state8, mantle_idle/mantle_sneak scenes, 833 ms) onto ledges; from swim depth the rise reaches 3.07-3.15 m.",
+    "Confirmed runtime (1042 defect): any native state the source cannot classify for >250 ms while not on default ground starves the action stream into permanent native_state_stale retirement on both roles.",
+    "Candidate1056: rise bound 4 m; protocol73 payload-free state24 hold keeps the stream alive through unclassified states (receiver presents nothing authored)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Hold path exercised only by one natural transition frame (Emily 1057); a sustained unclassified-state fixture (e.g. slope Slipping) is still needed.",
+    "arkPlayerStateSwimMantle not yet observed natively; native swim body animations are an option for later fidelity work.",
+    "Mantle onto the moored boat (1053 geometry) not re-run on 1056."
+  ]
+}

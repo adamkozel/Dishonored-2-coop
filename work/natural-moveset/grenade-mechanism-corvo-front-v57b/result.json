@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Native cook entry, cook loop, release and empty recovery drive remote whole-body clips on source clock",
+    "Cosmetic grenade disappears at release and stays hidden through empty recovery and native standing",
+    "Duplicate packet sent during native cook; prop remains one cached native entity",
+    "Exact six-joint native mechanism changes from idle to cook and stops writing after release without animation events",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.975,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0,
+      "actualPitch": -0.014844248018093871
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene"
+  ],
+  "dll": "D35D9138F74C6316D44770CDC95CCB8B7739844DA7E914FDC894B0BBB5554E8A",
+  "probe": "8B523CB6A7B5960C08AAAD33237104FE418DE7A3F68225A11C68E2C49FD7E167",
+  "finalDll": "D35D9138F74C6316D44770CDC95CCB8B7739844DA7E914FDC894B0BBB5554E8A",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Both checkpoints restored after firing. Visual acceptance separate."
+}

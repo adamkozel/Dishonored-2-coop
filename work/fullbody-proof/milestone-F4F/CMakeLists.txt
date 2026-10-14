@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(D2AuthoringCapture LANGUAGES CXX)
+add_executable(d2_capture_pose capture_pose.cpp)
+target_compile_features(d2_capture_pose PRIVATE cxx_std_17)
+target_compile_definitions(d2_capture_pose PRIVATE UNICODE _UNICODE NOMINMAX)
+target_include_directories(d2_capture_pose PRIVATE ../../outputs/d2-coop-lab/src)

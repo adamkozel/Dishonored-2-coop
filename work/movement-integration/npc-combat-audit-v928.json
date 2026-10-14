@@ -1,0 +1,201 @@
+{
+  "at": "2026-10-14T00:17:12.718471+02:00",
+  "candidate": "candidate-npc-combat-v926",
+  "dll": "4CE3947C8453C56EE55AF2117B62EAD6E38D1E8ED4CF8DB68E7AB3A88CB2A2F1",
+  "combatProtocol": 4,
+  "combatPacketBytes": 256,
+  "complete": false,
+  "cases": [
+    {
+      "take": "npc-combat-client-v906",
+      "candidate": "candidate-npc-combat-v905",
+      "dll": "CD704EE79E92928B349F159523D9481BCEB5935E82726433E6C274FD62C8B87B",
+      "passed": true,
+      "failure": null,
+      "source": "client",
+      "restored": true,
+      "worldOutcomes": null,
+      "commitsAtPrimaryDeath": 4,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established.",
+      "visualReview": {
+        "client": "Contact sheet inspected: native sword contacts, assassination/death, shared loading and return are visible. Full paired choreography/corpse agreement not accepted.",
+        "host": "Observer view is mostly occluded by a door frame; usable for loading/recovery, not paired combat quality."
+      }
+    },
+    {
+      "take": "npc-combat-client-v908",
+      "candidate": "candidate-npc-combat-v907",
+      "dll": "F794D6974553FF253A7A8561749BBB429BD3ED66BCF2C883F3505B7251528515",
+      "passed": true,
+      "failure": null,
+      "source": "client",
+      "restored": true,
+      "worldOutcomes": null,
+      "commitsAtPrimaryDeath": 4,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established.",
+      "visualReview": {
+        "client": "Source contact sheet shows three sword contacts and native assassination/death, loading and return. Native first-person source preserved; no paired visual acceptance implied.",
+        "host": "Repositioned observer shows remote Emily, guard reactions/death and shared loading; foreground foliage partially occludes. Paired finisher alignment and corpse equality remain unaccepted."
+      }
+    },
+    {
+      "take": "npc-combat-host-v909",
+      "candidate": "candidate-npc-combat-v907",
+      "dll": "F794D6974553FF253A7A8561749BBB429BD3ED66BCF2C883F3505B7251528515",
+      "passed": false,
+      "failure": "Native contact failed: hit_damage_parameters / all_bound_actors_retired",
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": null,
+      "scope": "Failed investigation retained; no acceptance. Native contact failed: hit_damage_parameters / all_bound_actors_retired",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-combat-world-v912",
+      "candidate": "candidate-npc-combat-v911",
+      "dll": "99D6EF3198EDC1298B962A86AB65A66E133A67D31883395C11F709D0D69CE48A",
+      "passed": false,
+      "failure": "Damage fixture failed all_bound_actors_retired",
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": null,
+      "scope": "Failed investigation retained; no acceptance. Damage fixture failed all_bound_actors_retired",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-combat-world-v916",
+      "candidate": "candidate-npc-combat-v915",
+      "dll": "649F7DE6D418C82A6D1E2852A000670D1AF79F15F5380A912B88B0B44C5C632E",
+      "passed": false,
+      "failure": "Native contact failed: hit_damage_parameters / all_bound_actors_retired",
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": null,
+      "scope": "Failed investigation retained; no acceptance. Native contact failed: hit_damage_parameters / all_bound_actors_retired",
+      "visualReview": {}
+    },
+    {
+      "take": "npc-combat-world-v919",
+      "candidate": "candidate-npc-combat-v918",
+      "dll": "BF75C68CE5BC5025A0A7CD37805FBC544D5E1B19C6A12B32849ED3D22EBB266F",
+      "passed": true,
+      "failure": null,
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": {
+        "client": 0,
+        "host": 0,
+        "replicaSuppressed": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only."
+      },
+      "commitsAtPrimaryDeath": 1,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established. Authored map-trigger and corpse outcome paths were not exercised.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/1/2/3/4/6s: native close-range assassination and victim falling out of view, surrounding live NPCs. Native source action is visible.",
+        "client": "Inspected contact-client.jpg at0/1/2/3/4/6s: remote Corvo, victim dropping and corpse on floor, other NPCs. Remote player remains mostly neutral during native paired action; full paired choreography and matching corpse physics are not accepted."
+      }
+    },
+    {
+      "take": "npc-combat-hazard-v920",
+      "candidate": "candidate-npc-combat-v918",
+      "dll": "BF75C68CE5BC5025A0A7CD37805FBC544D5E1B19C6A12B32849ED3D22EBB266F",
+      "passed": true,
+      "failure": null,
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": {
+        "host": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 0,
+        "client": 0
+      },
+      "commitsAtPrimaryDeath": 4,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established. Authored map-trigger and corpse outcome paths were not exercised.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/4/8/12/14/16s: native waiting guard then sword contacts with blood. No fire event visible in this sampled interval. Numeric world counters are zero.",
+        "client": "Inspected contact-client.jpg at0/4/8/12/14/16s: remote Corvo in front of victim with partial victim occlusion. Does not establish matched sword/victim choreography or fire VFX."
+      }
+    },
+    {
+      "take": "npc-combat-trigger-v921",
+      "candidate": "candidate-npc-combat-v918",
+      "dll": "BF75C68CE5BC5025A0A7CD37805FBC544D5E1B19C6A12B32849ED3D22EBB266F",
+      "passed": true,
+      "failure": null,
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": {
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 0,
+        "client": 0,
+        "host": 0
+      },
+      "commitsAtPrimaryDeath": 4,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established. Authored map-trigger and corpse outcome paths were not exercised.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/4/8/12/14/17s: waiting guard followed by native sword contacts/blood. Console trigger activation produced no observed world damage; positive trigger acceptance is not claimed.",
+        "client": "Inspected contact-client.jpg at0/4/8/12/14/17s: remote Corvo partly blocks target, native room and combat. No fire outcome visible. Full paired attack choreography remains incomplete."
+      }
+    },
+    {
+      "take": "npc-combat-fixture-v923",
+      "candidate": "candidate-npc-combat-v922",
+      "dll": "AD85B312A8D20700BB2B2ADBD41440DD3EC926DED628A7ED67FF176FB0CE8C77",
+      "passed": false,
+      "failure": "Native map hazard interrupted combat authority",
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": null,
+      "scope": "Failed investigation retained; no acceptance. Native map hazard interrupted combat authority Explicit reconstruction of an observed native fire callback; not natural map-trigger activation.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/0.5/1/1.5/2/3s: native guard begins burning and reacts. This is the reconstructed event fixture. Full test fails on the subsequent native incendiary death callback.",
+        "client": "Inspected contact-client.jpg at0/0.5/1/1.5/2/3s: remote Corvo partially occludes guard; guard reaction and flames are visible by3s. Fire timing/pose is not visually matched or accepted. One equal zero-damage native world outcome is numerically verified before the continuation fails."
+      }
+    },
+    {
+      "take": "npc-combat-fixture-v927",
+      "candidate": "candidate-npc-combat-v926",
+      "dll": "4CE3947C8453C56EE55AF2117B62EAD6E38D1E8ED4CF8DB68E7AB3A88CB2A2F1",
+      "passed": true,
+      "failure": null,
+      "source": "host",
+      "restored": true,
+      "worldOutcomes": {
+        "host": 3,
+        "client": 3,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 1
+      },
+      "commitsAtPrimaryDeath": 2,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established. Explicit reconstruction of an observed native fire callback; not natural map-trigger activation. Three native world outcomes verified: zero-damage ignition, terminal burning continuation and corpse contact reducing another NPC50 to49; client-local continuation suppressed; no sword input.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/0.5/1/2/3/6s: target ignites with native flames, reacts, darkens and falls out of the close source view. No sword action. Native burning visual response is present; full corpse alignment is not accepted.",
+        "client": "Inspected contact-client.jpg at0/0.5/1/2/3/6s: remote Corvo partly occludes victim; flames appear behind him, victim falls, burning body/flames remain near his feet. Native fire/death presentation is present. Timing and corpse placement differ visibly; matched corpse physics is not accepted."
+      }
+    },
+    {
+      "take": "npc-combat-client-v929",
+      "candidate": "candidate-npc-combat-v926",
+      "dll": "4CE3947C8453C56EE55AF2117B62EAD6E38D1E8ED4CF8DB68E7AB3A88CB2A2F1",
+      "passed": true,
+      "failure": null,
+      "source": "client",
+      "restored": true,
+      "worldOutcomes": {
+        "replicaSuppressed": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "client": 0,
+        "host": 0
+      },
+      "commitsAtPrimaryDeath": 4,
+      "scope": "Finite NPC fixture: native target damage/death, exactly-once outcomes, checkpoint/rearm and protected restoration pass. Complete active-world combat, paired choreography and corpse physics are not established.",
+      "visualReview": {
+        "host": "Inspected contact-host.jpg at0/2/4/6/8/10s: remote Emily beside the guard, native victim reactions visible. Emily remains mostly neutral while the source attacks. Complete paired sword/finisher choreography is visibly unfinished.",
+        "client": "Inspected contact-client.jpg at0/2/4/6/8/10s: first-person sword strikes, blood and native close assassination sequence. Source first-person action is intact. Numerical death, duplicates and checkpoint checks are scoped separately from remote visual quality."
+      }
+    }
+  ],
+  "observation": "npc-ranged-observe-v903",
+  "compoundQueue": "Bounded32 FIFO policy and melee integration pass; real multi-contact native ranged burst pending.",
+  "limitations": "Full combat/co-op and movement acceptance remain unfinished. Actual compound ranged requests, projectile ownership, protected regions, active AI targeting both players, paired victim choreography and shared corpse/limb physics remain incomplete. Natural map-trigger activation is unverified; reconstructed ignition/native burning death plus one secondary corpse contact pass927. Intermittent handshake882 and positive native save-busy retry coverage remain open."
+}

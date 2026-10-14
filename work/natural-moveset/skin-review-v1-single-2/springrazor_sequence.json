@@ -1,0 +1,76 @@
+{
+  "alias": "springrazor_sequence",
+  "family": "ranged_and_items",
+  "identity": "4e76bd55c1246bf439e1a10107470e043ccbc5f7552b947325efb96526bf58cc",
+  "video": "skin-review-v1-single-2\\springrazor_sequence.mp4",
+  "frames": 105,
+  "fps": 30,
+  "duration": 3.5,
+  "render_seconds": 21.399648427963257,
+  "roles": {
+    "corvo": "springrazor_sequence-corvo",
+    "emily": "springrazor_sequence-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_plus_native_trap",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": true,
+  "skin_preview_version": "corvo-shin-anchors-v1",
+  "skin_preview_limit": "Corvo calf anchors corrected; small native axial helper twist and other runtime correctives remain approximate.",
+  "render_identity": "e29f6438ae6e674eacc7999953f9e5696a1d2fd9b23f80ea2742c1de9598e1d8",
+  "render_inputs": {
+    "data_identity": "b9158ec725a5b1d4e30a402fa07bf16a2295ebee5ecabc23a1a8cd2a19c7ca59",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      },
+      "corvo-spring_razor-model": {
+        "path": "natural-moveset\\item-models\\spring-razor.json",
+        "sha256": "fcb4607b9f0b2287449427605ea430c620e828ded1ecda9b7a2522fc49a4750e"
+      },
+      "corvo-spring_razor-skeleton": {
+        "path": "natural-moveset\\contact-fixtures\\skeleton.json",
+        "sha256": "479fc338eb75a52fffe506f6f0cb9e253683e1efcce00d81953527f6499ad915"
+      },
+      "emily-spring_razor-model": {
+        "path": "natural-moveset\\item-models\\spring-razor.json",
+        "sha256": "fcb4607b9f0b2287449427605ea430c620e828ded1ecda9b7a2522fc49a4750e"
+      },
+      "emily-spring_razor-skeleton": {
+        "path": "natural-moveset\\contact-fixtures\\skeleton.json",
+        "sha256": "479fc338eb75a52fffe506f6f0cb9e253683e1efcce00d81953527f6499ad915"
+      }
+    },
+    "scripts": {
+      "render_library.py": "319e587a7df3ca37e251cd018a9e9a2e5a17a7ceb16d9557f0f3be3aa5e5b5dd",
+      "preview_natural_walk.py": "3589b51ed9479c2c05b0b0fed568d2fa1865834bd7bdd8c32db61455d60524fb",
+      "preview_skin.py": "cac45f58ae3739ffe007db6b81ebd7cf4d8bfe90801015977eac5952ddd26a71",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b8aac937837fcf08075080bf1de6c6461906d74703256291db166a7148ba8a3b"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Status": "Read-only research; no stance replication or mutation implemented",
+  "SupportedExecutable": "Steam Dishonored2 1.77.9.0, PE timestamp 67a50cde",
+  "PlayerPhysicsRttiNameRva": "0x2323ce0",
+  "PlayerPhysicsVtableRva": "0x1c73268",
+  "ComponentOwnerOffset": "0x10",
+  "CandidateCurrentStanceOffset": "0x50",
+  "CandidatePreviousStanceOffset": "0x54",
+  "Evidence": [
+    "Native code 0x7fff02 reads previous dword +54 and current +50, compares, and dispatches playerStanceChanged descriptor 0x39ab580 with both values through 0x8848a0; then copies +50 to +54.",
+    "Descriptor registration 0x1399990 references string playerStanceChanged at 0x1c9aaf8 and _oldPlayerStance;_newPlayerStance; at 0x1c9aaa8.",
+    "Independent --components 1 found arkCpntPlayerPhysics with exact vtable and owner matching actual Emily player; --object sampled both dwords as zero during ordinary gameplay. Values for crouch, jump, landing and special states are not mapped yet.",
+    "m_crouch script parameter 0x1b76a08 -> object 0x3984030 -> native handler 0x5297f0. It resolves another component via descriptor 0x39aed60 and sets/clears input flag 6 via 0x8036d0/0x8036b0. This is input, not confirmed physical stance. Do not use as authoritative stance."
+  ],
+  "Files": [
+    "work/player-stance-strings.json",
+    "work/player-stance-enum-strings.json",
+    "work/client-player-components.json",
+    "work/client-player-physics-standing.json",
+    "work/disasm-7ffed0.txt",
+    "work/disasm-5297f0.txt"
+  ],
+  "Next": "After current recovery tests, use bounded ordinary controller crouch/jump input and independent component reads in both roles to map actual stance transitions. Reacquire component through current player each sample; do not reuse captured pointers after load. Add a guarded reader before modifying network or animation behavior."
+}

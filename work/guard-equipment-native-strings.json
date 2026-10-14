@@ -1,0 +1,3194 @@
+[
+  {
+    "rva": "0x1af8938",
+    "text": "ARK_ATTRIBUTE_RANGED_WEAPON_DISPERSION_RATIO"
+  },
+  {
+    "rva": "0x1af9c28",
+    "text": "ARK_ATTRIBUTE_NPC_WEAPON_PROJECTILE_ACCURACY_FACTOR"
+  },
+  {
+    "rva": "0x1af9ce0",
+    "text": "ARK_ATTRIBUTE_PLAYER_WEAPON_PROJECTILE_EXTRA_DISPERSION_CHANCE"
+  },
+  {
+    "rva": "0x1afa028",
+    "text": "ARK_ATTRIBUTE_PLAYER_MELEE_WEAPON_DAMAGE_TO_HEALTH_FACTOR"
+  },
+  {
+    "rva": "0x1afac68",
+    "text": "ARK_ATTRIBUTE_PREFER_MELEE_SPACE"
+  },
+  {
+    "rva": "0x1b54b40",
+    "text": "arkCpntWeaponThrowableNPC::PrepareProjectile - %s: No settings for current context."
+  },
+  {
+    "rva": "0x1b54ba0",
+    "text": "arkCpntWeaponThrowableNPC::PrepareProjectile - %s: No prepare bind tag specified."
+  },
+  {
+    "rva": "0x1b54c00",
+    "text": "arkCpntWeaponThrowableNPC::LaunchProjectile - %s: No settings for current context."
+  },
+  {
+    "rva": "0x1b54c60",
+    "text": "arkCpntWeaponThrowableNPC::StartProjectile : couldn't find a working homing tag for target %s"
+  },
+  {
+    "rva": "0x1b54cc0",
+    "text": "arkCpntWeaponThrowableNPC::LaunchProjectile - %s: No origin bind tag specified."
+  },
+  {
+    "rva": "0x1b54d10",
+    "text": "arkCpntWeaponThrowableNPC::LaunchProjectile - %s: failed to recover the bind tag %s."
+  },
+  {
+    "rva": "0x1b55320",
+    "text": "[ arkCpntPlayerPowerSystem::AddEquipmentUpgrade ] could not add enhancement upgrade."
+  },
+  {
+    "rva": "0x1b553b0",
+    "text": "[ arkCpntPlayerPowerSystem::InitBluePrintEntry ] Blueprint (%s) isn't referenced in the player inventory."
+  },
+  {
+    "rva": "0x1b556d8",
+    "text": "arkDeclEquipmentUpgrade"
+  },
+  {
+    "rva": "0x1b759d8",
+    "text": "arkDeclInventoryItem *"
+  },
+  {
+    "rva": "0x1b80688",
+    "text": "arkEquipmentSlot_t"
+  },
+  {
+    "rva": "0x1b80b70",
+    "text": "arkAICombatMeleeSlot::DoVisionQuery"
+  },
+  {
+    "rva": "0x1b87570",
+    "text": "arkCpntAICrewModule_CombatMelee::SelectMembers - Role %s not handled."
+  },
+  {
+    "rva": "0x1b875c0",
+    "text": "arkCpntAICrewModule_CombatMelee::CancelSelection - You should not require a role in this module."
+  },
+  {
+    "rva": "0x1b87630",
+    "text": "arkCpntAICrewModule_CombatMelee::ReadAndCheckToken - Token held by non melee fighter %s, forcing release"
+  },
+  {
+    "rva": "0x1b88e68",
+    "text": "arkAIMeleeDefense: %s - Attacker disappeared"
+  },
+  {
+    "rva": "0x1b88e98",
+    "text": "arkAIMeleeDefense: %s - Invalid attacker slash type"
+  },
+  {
+    "rva": "0x1b88ed0",
+    "text": "arkAIMeleeDefense: %s - Dodge midnight %s has an invalid priority, should be PRIORITY_NPC_REACTIVITY"
+  },
+  {
+    "rva": "0x1b88f40",
+    "text": "arkAIMeleeDefense: %s - Parry midnight %s has an invalid priority, should be PRIORITY_NPC_REACTIVITY"
+  },
+  {
+    "rva": "0x1b98ea0",
+    "text": "[ arkInventoryCondition::IsConditionOk ] Element %d in m_anyItem is NULL."
+  },
+  {
+    "rva": "0x1b9a970",
+    "text": "arkDeclInventoryItemCollection"
+  },
+  {
+    "rva": "0x1b9a9a8",
+    "text": "arkDeclInventoryLoadout"
+  },
+  {
+    "rva": "0x1b9a9d8",
+    "text": "arkDeclInventoryCrafting"
+  },
+  {
+    "rva": "0x1b9af68",
+    "text": "arkDeclCpntEquipment"
+  },
+  {
+    "rva": "0x1b9af90",
+    "text": "arkCpntEquipment"
+  },
+  {
+    "rva": "0x1b9c9a0",
+    "text": "game\\arkInventory\\arkCpntProjectile.cpp"
+  },
+  {
+    "rva": "0x1b9d0b0",
+    "text": "[ arkCpntWeaponMeleeNPC::OnStarted ] %s has no spawner entity."
+  },
+  {
+    "rva": "0x1b9d0f0",
+    "text": "arkCpntWeaponMeleeNPC::ProjectFocusRay"
+  },
+  {
+    "rva": "0x1b9d690",
+    "text": "[ arkCpntWeaponMeleePlayer::OnStarted ] %s has no spawner entity."
+  },
+  {
+    "rva": "0x1b9da40",
+    "text": "arkCpntWeaponThrowable::HandleFire - a arkCpntAudio is needed here!"
+  },
+  {
+    "rva": "0x1b9df78",
+    "text": "arkDeclCpntWeaponMelee"
+  },
+  {
+    "rva": "0x1b9dfa0",
+    "text": "arkCpntWeaponMelee"
+  },
+  {
+    "rva": "0x1b9dff0",
+    "text": "ark_weapon_melee_debug_lifetime"
+  },
+  {
+    "rva": "0x1b9e648",
+    "text": "arkDeclCpntWeaponRanged"
+  },
+  {
+    "rva": "0x1b9e678",
+    "text": "arkCpntWeaponRanged"
+  },
+  {
+    "rva": "0x1b9eb60",
+    "text": "arkDeclInventoryItem"
+  },
+  {
+    "rva": "0x1c39190",
+    "text": "arkDeclHUDElementEquipment"
+  },
+  {
+    "rva": "0x1c391d0",
+    "text": "[ arkHUDElementEquipment::AddToPickupLog ] Plural name isn't set for %s, fallback to simple name."
+  },
+  {
+    "rva": "0x1c39240",
+    "text": "[ arkHUDElementEquipment::AddToPickupLog ] Missing image for %s."
+  },
+  {
+    "rva": "0x1c39290",
+    "text": "[ arkHUDElementEquipment::AddCoinToPickupLog ] Missing image for %s."
+  },
+  {
+    "rva": "0x1c3dc40",
+    "text": "arkDeclPlayerStatePlaceWeaponReady"
+  },
+  {
+    "rva": "0x1c48790",
+    "text": "arkAIMeleeDefense"
+  },
+  {
+    "rva": "0x1c496e0",
+    "text": "bark.npc.equippedWeapon.melee"
+  },
+  {
+    "rva": "0x1c49728",
+    "text": "bark.npc.equippedWeapon.ranged"
+  },
+  {
+    "rva": "0x1c4a110",
+    "text": "bark.npc.player.hasWeaponsOut"
+  },
+  {
+    "rva": "0x1c4a670",
+    "text": "arkCpntAICombatMeleeSpace"
+  },
+  {
+    "rva": "0x1c740a0",
+    "text": "arkCpntInventory"
+  },
+  {
+    "rva": "0x1c7be20",
+    "text": "[ arkPlayerStateLootObject::PlayInventoryFullSound ] m_inventoryFullSoundEvent is NULL."
+  },
+  {
+    "rva": "0x1c7c150",
+    "text": "arkDeclPlayerStatePlaceWeapon"
+  },
+  {
+    "rva": "0x1c7d6c0",
+    "text": "arkDeclPlayerStateRequestReloadWeapon"
+  },
+  {
+    "rva": "0x1c7d708",
+    "text": "arkDeclPlayerStateReloadWeapon"
+  },
+  {
+    "rva": "0x1c7f1d0",
+    "text": "arkDeclPlayerStateThrowWeapon"
+  },
+  {
+    "rva": "0x1c81070",
+    "text": "ark_inventory_mana_potion_autouse"
+  },
+  {
+    "rva": "0x1c84d88",
+    "text": "arkDeclPlayerStateFireWeapon"
+  },
+  {
+    "rva": "0x1c84dc0",
+    "text": "arkDeclPlayerStateCancelFireWeapon"
+  },
+  {
+    "rva": "0x1c98b48",
+    "text": "idEventReceiver*;arkDeclInventoryItem*;bool;bool;idEntity*;"
+  },
+  {
+    "rva": "0x1c98be0",
+    "text": "idEventReceiver*;arkDeclInventoryItem*;"
+  },
+  {
+    "rva": "0x1c99bf8",
+    "text": "arkMD6AnimEventHandle_t&;arkEquipmentSlot_t;"
+  },
+  {
+    "rva": "0x1c9a840",
+    "text": "arkMD6AnimEventHandle_t&;arkEquipmentArchetype_t;arkEquipmentSlot_t;idAtomicString&;"
+  },
+  {
+    "rva": "0x1c9ac78",
+    "text": "arkDeclInventoryItem*;"
+  },
+  {
+    "rva": "0x1ca3028",
+    "text": "arkCpntWeaponPlaceable"
+  },
+  {
+    "rva": "0x1ca4340",
+    "text": "arkTreeNodeSettings_Condition_CrewCombatHasAnyMeleeFighter"
+  },
+  {
+    "rva": "0x1ca9e68",
+    "text": "arkKisculeGraphVariable < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1cab168",
+    "text": "arkMidnightKeyPropEvent_WeaponFire"
+  },
+  {
+    "rva": "0x1cab330",
+    "text": "arkRuleAction_AIMeleeDefenseOutcomeInstance"
+  },
+  {
+    "rva": "0x1cb0f70",
+    "text": "arkRuleCondition < arkInventoryItemType_t >"
+  },
+  {
+    "rva": "0x1cb10c8",
+    "text": "arkBTTask_Condition_CrewCombatHasAnyMeleeFighter"
+  },
+  {
+    "rva": "0x1cb13f8",
+    "text": "arkCpntWeaponMeleeNPC"
+  },
+  {
+    "rva": "0x1cb1bb0",
+    "text": "arkKisculeNodePlayerInventoryNotification"
+  },
+  {
+    "rva": "0x1cb1fa8",
+    "text": "arkPlayerStateFireWeapon"
+  },
+  {
+    "rva": "0x1cb87f0",
+    "text": "arkRuleCondition < arkInventoryTag >"
+  },
+  {
+    "rva": "0x1cb8a90",
+    "text": "arkCpntAIReasoner_Equipment"
+  },
+  {
+    "rva": "0x1cb8c98",
+    "text": "arkCpntWeaponMeleePlayer"
+  },
+  {
+    "rva": "0x1cb93f8",
+    "text": "arkKisculeNodePlayerInventoryNotificationParameters"
+  },
+  {
+    "rva": "0x1cbcf20",
+    "text": "arkAIWeaponStatus_t"
+  },
+  {
+    "rva": "0x1cbf650",
+    "text": "arkKisculeGraphVariableNodeParameters < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1cbf698",
+    "text": "arkKisculeNodeNamedVariable < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1cbfa80",
+    "text": "arkCpntBoneCharmInventory"
+  },
+  {
+    "rva": "0x1cbfc58",
+    "text": "arkKisculeGraphVariableInventoryItem"
+  },
+  {
+    "rva": "0x1cc06c0",
+    "text": "arkMidnightKeyPropPlayerEquipment"
+  },
+  {
+    "rva": "0x1cc0788",
+    "text": "arkPlayerStateReloadWeapon"
+  },
+  {
+    "rva": "0x1cc0830",
+    "text": "arkRuleAction_MeleeSlotPatternInstance"
+  },
+  {
+    "rva": "0x1cc0858",
+    "text": "arkRuleCondition < arkAIWeaponStatus_t >"
+  },
+  {
+    "rva": "0x1cc0888",
+    "text": "arkRuleCondition_arkAIWeaponStatus_t"
+  },
+  {
+    "rva": "0x1cc6230",
+    "text": "arkCpntAICrewModule_CombatMelee"
+  },
+  {
+    "rva": "0x1cc64a0",
+    "text": "arkCpntWeaponThrowable"
+  },
+  {
+    "rva": "0x1cc68d8",
+    "text": "arkKisculeNodeCompareInventoryItem"
+  },
+  {
+    "rva": "0x1cc6ff0",
+    "text": "arkPlayerStateRequestReloadWeapon"
+  },
+  {
+    "rva": "0x1cc70a0",
+    "text": "arkRuleAction_MeleeSlotPatternOutcome"
+  },
+  {
+    "rva": "0x1ccde60",
+    "text": "arkCpntWeaponThrowableNPC"
+  },
+  {
+    "rva": "0x1ccdeb8",
+    "text": "arkKisculeGraphNodeParametersDoubleInventoryItem"
+  },
+  {
+    "rva": "0x1cce9d0",
+    "text": "arkPlayerStateCancelFireWeapon"
+  },
+  {
+    "rva": "0x1cd5720",
+    "text": "arkKisculeNodeNamedVariableInventoryItem"
+  },
+  {
+    "rva": "0x1cd58b0",
+    "text": "arkKisculeNodeStoryFlag < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1cd58e8",
+    "text": "arkKisculeNodeStoryFlagInventoryItem"
+  },
+  {
+    "rva": "0x1cd5b38",
+    "text": "arkMidnightKeyPropTimedEvent_WeaponActiveFrames"
+  },
+  {
+    "rva": "0x1cdbda8",
+    "text": "arkKisculeVariableNode < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1cdc710",
+    "text": "arkKisculeNodeGetInventoryItemQuantity"
+  },
+  {
+    "rva": "0x1cdc7a8",
+    "text": "arkKisculeNodeInventory"
+  },
+  {
+    "rva": "0x1cdcca8",
+    "text": "arkPlayerStateThrowWeapon"
+  },
+  {
+    "rva": "0x1ce2408",
+    "text": "arkCpntWeaponCrossbow"
+  },
+  {
+    "rva": "0x1ce2950",
+    "text": "arkKisculeNodeGetInventoryItemQuantityParameters"
+  },
+  {
+    "rva": "0x1ce29f8",
+    "text": "arkKisculeNodeInventoryItem"
+  },
+  {
+    "rva": "0x1ce2ec0",
+    "text": "arkPlayerStatePlaceWeapon"
+  },
+  {
+    "rva": "0x1ce32d0",
+    "text": "arkWeapon"
+  },
+  {
+    "rva": "0x1ce64a0",
+    "text": "arkInventoryItemType_t"
+  },
+  {
+    "rva": "0x1ce8c78",
+    "text": "arkCpntWeaponGun"
+  },
+  {
+    "rva": "0x1ce8ec0",
+    "text": "arkKisculeNodeActionPlayerInventory"
+  },
+  {
+    "rva": "0x1ce91a0",
+    "text": "arkKisculeNodeInventoryItemToString"
+  },
+  {
+    "rva": "0x1ce9520",
+    "text": "arkKisculeVariableNode < arkDeclInventoryItem * >::arkKisculeVariableNodeParameterInternal"
+  },
+  {
+    "rva": "0x1ce9698",
+    "text": "arkPlayerStatePlaceWeaponReady"
+  },
+  {
+    "rva": "0x1ce9700",
+    "text": "arkRuleAction_AIMeleeAttackOutcome"
+  },
+  {
+    "rva": "0x1ce97a0",
+    "text": "arkRuleCondition_arkInventoryItemType_t"
+  },
+  {
+    "rva": "0x1cecc10",
+    "text": "arkInventoryTag"
+  },
+  {
+    "rva": "0x1cef1a8",
+    "text": "arkCpntWeaponGunNPC"
+  },
+  {
+    "rva": "0x1cef1f8",
+    "text": "arkHUDElementEquipment"
+  },
+  {
+    "rva": "0x1cef458",
+    "text": "arkKisculeNodeActionPlayerInventoryParameters"
+  },
+  {
+    "rva": "0x1cef780",
+    "text": "arkKisculeNodeInventoryParameters"
+  },
+  {
+    "rva": "0x1cefc80",
+    "text": "arkRuleAction_AIMeleeDefenseOutcome"
+  },
+  {
+    "rva": "0x1cefd20",
+    "text": "arkRuleCondition_arkInventoryTag"
+  },
+  {
+    "rva": "0x1cf6f10",
+    "text": "size of the pool for arkCpntInventoryFactory when the game start"
+  },
+  {
+    "rva": "0x1cf6f58",
+    "text": "cpnt_poolsize_arkCpntInventory"
+  },
+  {
+    "rva": "0x1cf7770",
+    "text": "size of the pool for arkCpntWeaponThrowableFactory when the game start"
+  },
+  {
+    "rva": "0x1cf77b8",
+    "text": "cpnt_poolsize_arkCpntWeaponThrowable"
+  },
+  {
+    "rva": "0x1cf7940",
+    "text": "size of the pool for arkCpntBoneCharmInventoryFactory when the game start"
+  },
+  {
+    "rva": "0x1cf7990",
+    "text": "cpnt_poolsize_arkCpntBoneCharmInventory"
+  },
+  {
+    "rva": "0x1cf8b10",
+    "text": "size of the pool for arkCpntAICombatMeleeSpaceFactory when the game start"
+  },
+  {
+    "rva": "0x1cf8b60",
+    "text": "cpnt_poolsize_arkCpntAICombatMeleeSpace"
+  },
+  {
+    "rva": "0x1cf93f0",
+    "text": "size of the pool for arkCpntWeaponMeleeNPCFactory when the game start"
+  },
+  {
+    "rva": "0x1cf9438",
+    "text": "cpnt_poolsize_arkCpntWeaponMeleeNPC"
+  },
+  {
+    "rva": "0x1cfa3d0",
+    "text": "size of the pool for arkCpntAICrewModule_CombatMeleeFactory when the game start"
+  },
+  {
+    "rva": "0x1cfa420",
+    "text": "cpnt_poolsize_arkCpntAICrewModule_CombatMelee"
+  },
+  {
+    "rva": "0x1cfae30",
+    "text": "size of the pool for arkCpntAIReasoner_EquipmentFactory when the game start"
+  },
+  {
+    "rva": "0x1cfae80",
+    "text": "cpnt_poolsize_arkCpntAIReasoner_Equipment"
+  },
+  {
+    "rva": "0x1cfd1b0",
+    "text": "size of the pool for arkCpntWeaponMeleePlayerFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd200",
+    "text": "cpnt_poolsize_arkCpntWeaponMeleePlayer"
+  },
+  {
+    "rva": "0x1cfd2b0",
+    "text": "size of the pool for arkCpntWeaponCrossbowFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd2f8",
+    "text": "cpnt_poolsize_arkCpntWeaponCrossbow"
+  },
+  {
+    "rva": "0x1cfd3a0",
+    "text": "size of the pool for arkCpntWeaponPlaceableFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd3e8",
+    "text": "cpnt_poolsize_arkCpntWeaponPlaceable"
+  },
+  {
+    "rva": "0x1cfd410",
+    "text": "size of the pool for arkCpntWeaponThrowableNPCFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd460",
+    "text": "cpnt_poolsize_arkCpntWeaponThrowableNPC"
+  },
+  {
+    "rva": "0x1cfd490",
+    "text": "size of the pool for arkCpntWeaponGunFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd4d8",
+    "text": "cpnt_poolsize_arkCpntWeaponGun"
+  },
+  {
+    "rva": "0x1cfd500",
+    "text": "size of the pool for arkCpntWeaponGunNPCFactory when the game start"
+  },
+  {
+    "rva": "0x1cfd548",
+    "text": "cpnt_poolsize_arkCpntWeaponGunNPC"
+  },
+  {
+    "rva": "0x1d28d30",
+    "text": "arkDeclCpntAICrewModule_CombatMelee"
+  },
+  {
+    "rva": "0x1d28f60",
+    "text": "arkDeclCpntAICombatMeleeSpace"
+  },
+  {
+    "rva": "0x1d29288",
+    "text": "arkDeclCpntAIReasoner_Equipment"
+  },
+  {
+    "rva": "0x1d2a4d0",
+    "text": "arkDeclCpntWeaponMeleePlayer"
+  },
+  {
+    "rva": "0x1d2a508",
+    "text": "arkDeclCpntWeaponMeleeNPC"
+  },
+  {
+    "rva": "0x1d2a540",
+    "text": "arkDeclCpntWeaponCrossbow"
+  },
+  {
+    "rva": "0x1d2a578",
+    "text": "arkDeclCpntWeaponPlaceable"
+  },
+  {
+    "rva": "0x1d2a5b0",
+    "text": "arkDeclCpntWeaponThrowable"
+  },
+  {
+    "rva": "0x1d2a5e8",
+    "text": "arkDeclCpntWeaponThrowableNPC"
+  },
+  {
+    "rva": "0x1d2a620",
+    "text": "arkDeclCpntWeaponGun"
+  },
+  {
+    "rva": "0x1d2a648",
+    "text": "arkDeclCpntWeaponGunNPC"
+  },
+  {
+    "rva": "0x1d2a6a8",
+    "text": "arkDeclCpntInventory"
+  },
+  {
+    "rva": "0x1d2a6d0",
+    "text": "arkDeclCpntBoneCharmInventory"
+  },
+  {
+    "rva": "0x1d322c8",
+    "text": "arkMeleeSlotPattern"
+  },
+  {
+    "rva": "0x1d32998",
+    "text": "arkKisculeNodeGetInventoryItemQuantityParameters::inventory_t"
+  },
+  {
+    "rva": "0x1d32a60",
+    "text": "arkKisculeNodeInventoryParameters::inventory_t"
+  },
+  {
+    "rva": "0x1d348f0",
+    "text": "arkMidnightKeyPropPlayerEquipment::action_t"
+  },
+  {
+    "rva": "0x1d34928",
+    "text": "arkMidnightKeyPropPlayerEquipment::slot_t"
+  },
+  {
+    "rva": "0x1d34a00",
+    "text": "arkWeaponSlot_t"
+  },
+  {
+    "rva": "0x1d34ba8",
+    "text": "arkAIMeleeDefenseType"
+  },
+  {
+    "rva": "0x1d3f878",
+    "text": "arkMsgRemoveItemFromInventory"
+  },
+  {
+    "rva": "0x1d3f898",
+    "text": "arkMsgNewItemInInventory"
+  },
+  {
+    "rva": "0x1d3f8b8",
+    "text": "arkMsgWeaponFire"
+  },
+  {
+    "rva": "0x1d3fc50",
+    "text": "arkMsgInventoryAddItem"
+  },
+  {
+    "rva": "0x1d3fc68",
+    "text": "arkMsgInventoryRemoveItem"
+  },
+  {
+    "rva": "0x1d40808",
+    "text": "arkInventoryItem"
+  },
+  {
+    "rva": "0x1d40820",
+    "text": "arkHUDElementEquipment::arkPlayerInventoryInfo_t"
+  },
+  {
+    "rva": "0x1d40f10",
+    "text": "arkInventoryCondition"
+  },
+  {
+    "rva": "0x1d410f8",
+    "text": "arkFlashBoneCharmEquipment"
+  },
+  {
+    "rva": "0x1d41c70",
+    "text": "arkEquipmentUpgradeInstance_t"
+  },
+  {
+    "rva": "0x1d458b8",
+    "text": "arkMsgAIMeleeDefenseOpportunity"
+  },
+  {
+    "rva": "0x1d45920",
+    "text": "arkAICombatMeleeSlotSettings"
+  },
+  {
+    "rva": "0x1d45940",
+    "text": "arkAICombatMeleeSlotSettings::patternSettings"
+  },
+  {
+    "rva": "0x1d45970",
+    "text": "arkAICombatMeleeSlot"
+  },
+  {
+    "rva": "0x1d45988",
+    "text": "arkAICombatMeleeSlot::updateInfo_t"
+  },
+  {
+    "rva": "0x1d46670",
+    "text": "arkRecordCombatMeleeSlot"
+  },
+  {
+    "rva": "0x1d46700",
+    "text": "arkRecordKd_WeaponInventory"
+  },
+  {
+    "rva": "0x1d47080",
+    "text": "arkAICombatMeleeSlotMsg"
+  },
+  {
+    "rva": "0x1d47098",
+    "text": "arkAICombatMeleeSlotOccupiedMsg"
+  },
+  {
+    "rva": "0x1d470b8",
+    "text": "arkAICombatMeleeSlotUnoccupiedMsg"
+  },
+  {
+    "rva": "0x1d470e0",
+    "text": "arkAICombatMeleeSlotReservedMsg"
+  },
+  {
+    "rva": "0x1d47100",
+    "text": "arkAICombatMeleeSlotUnreservedMsg"
+  },
+  {
+    "rva": "0x1d47128",
+    "text": "arkAICombatMeleeSlotObstructedMsg"
+  },
+  {
+    "rva": "0x1d47150",
+    "text": "arkAICombatMeleeSlotUnobstructedMsg"
+  },
+  {
+    "rva": "0x1d47178",
+    "text": "arkCpntAICombatMeleeSpace::clientNpc"
+  },
+  {
+    "rva": "0x1d47ca0",
+    "text": "arkDeclCpntAIReasoner_Attention::playerRangedWeaponUsage_t"
+  },
+  {
+    "rva": "0x1d49e00",
+    "text": "arkDeclInventoryItem::consumable_t"
+  },
+  {
+    "rva": "0x1d49e28",
+    "text": "arkDeclEquipmentUpgrade::upgradeInfo_t"
+  },
+  {
+    "rva": "0x1d49e50",
+    "text": "arkDeclEquipmentUpgrade::ammoUpgradeInfo_t"
+  },
+  {
+    "rva": "0x1d49e80",
+    "text": "arkDeclEquipmentUpgrade::ammoUpgradeInfo_t::flags_t"
+  },
+  {
+    "rva": "0x1d49ed0",
+    "text": "arkCpntEquipment::upgrade_t"
+  },
+  {
+    "rva": "0x1d49fc0",
+    "text": "arkWeaponMeleePhantom"
+  },
+  {
+    "rva": "0x1d49fd8",
+    "text": "arkWeaponMeleePhantom::arkConeInfo_t"
+  },
+  {
+    "rva": "0x1d4a028",
+    "text": "arkMsgMeleeWeaponDangerousState"
+  },
+  {
+    "rva": "0x1d4a060",
+    "text": "arkDeclCpntWeaponMelee::blowBackFx_t"
+  },
+  {
+    "rva": "0x1d4a0a0",
+    "text": "arkDeclCpntWeaponMeleePlayer::arkPlayerMeleeFocusShapeCone_t"
+  },
+  {
+    "rva": "0x1d4a0e0",
+    "text": "arkDeclCpntWeaponMeleePlayer::arkPlayerMeleeFocusShape_t"
+  },
+  {
+    "rva": "0x1d4a130",
+    "text": "arkCpntWeaponMeleePlayer::arkSwarmAgentContact_t"
+  },
+  {
+    "rva": "0x1d4a168",
+    "text": "arkDeclCpntWeaponMeleeNPC::arkDamageShapeCone_t"
+  },
+  {
+    "rva": "0x1d4a198",
+    "text": "arkDeclCpntWeaponRanged::ammoType"
+  },
+  {
+    "rva": "0x1d4a1c0",
+    "text": "arkDeclCpntWeaponRanged::aimSettings"
+  },
+  {
+    "rva": "0x1d4a1e8",
+    "text": "arkDeclCpntWeaponRanged::aimSettings::smoothing_t"
+  },
+  {
+    "rva": "0x1d4a220",
+    "text": "arkCpntWeaponRanged::firelockTarget_t"
+  },
+  {
+    "rva": "0x1d4a248",
+    "text": "arkCpntWeaponPlaceable::placementResult_t"
+  },
+  {
+    "rva": "0x1d4a288",
+    "text": "arkDeclCpntWeaponThrowableNPC::homingSettings"
+  },
+  {
+    "rva": "0x1d4a2b8",
+    "text": "arkDeclCpntWeaponThrowableNPC::targetMissedSettings"
+  },
+  {
+    "rva": "0x1d4a2f0",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchSettings"
+  },
+  {
+    "rva": "0x1d4a320",
+    "text": "arkDeclCpntWeaponGunNPC::projectileSettings"
+  },
+  {
+    "rva": "0x1d4a350",
+    "text": "arkMsgInventoryItemPickedUp"
+  },
+  {
+    "rva": "0x1d4a370",
+    "text": "arkMsgInventoryEquipItem"
+  },
+  {
+    "rva": "0x1d4a390",
+    "text": "arkMsgInventoryUnequipItem"
+  },
+  {
+    "rva": "0x1d4a3b0",
+    "text": "arkMsgInventoryItemQuantityChanged"
+  },
+  {
+    "rva": "0x1d4a3d8",
+    "text": "arkDeclInventoryItemCollection::arkItem"
+  },
+  {
+    "rva": "0x1d4a420",
+    "text": "arkDeclInventoryLoadout::arkItem"
+  },
+  {
+    "rva": "0x1d4a448",
+    "text": "arkDeclInventoryCrafting::arkCombination"
+  },
+  {
+    "rva": "0x1d4a478",
+    "text": "arkCpntInventory::arkCombination"
+  },
+  {
+    "rva": "0x1d4a4a0",
+    "text": "arkCpntInventory::arkAmmoWeaponLink"
+  },
+  {
+    "rva": "0x1d4a4c8",
+    "text": "arkCpntInventory::savegameState_t"
+  },
+  {
+    "rva": "0x1d4a4f0",
+    "text": "arkCpntInventory::savegameState_t::itemState_t"
+  },
+  {
+    "rva": "0x1d4a520",
+    "text": "arkCpntInventory::arkSort"
+  },
+  {
+    "rva": "0x1d4a540",
+    "text": "idSort_Quick < arkInventoryItem , arkCpntInventory::arkSort >"
+  },
+  {
+    "rva": "0x1d4a580",
+    "text": "arkCpntInventory::arkSearch"
+  },
+  {
+    "rva": "0x1d4a5a0",
+    "text": "idSearch_Binary < arkInventoryItem , arkCpntInventory::arkSearch >"
+  },
+  {
+    "rva": "0x1d4a620",
+    "text": "arkBoneCharmInventoryItem"
+  },
+  {
+    "rva": "0x1d4a640",
+    "text": "arkCpntBoneCharmInventory::arkSortByLevel"
+  },
+  {
+    "rva": "0x1d4a670",
+    "text": "idSort_Quick < const arkBoneCharm * , arkCpntBoneCharmInventory::arkSortByLevel >"
+  },
+  {
+    "rva": "0x1d4a9b8",
+    "text": "arkEquipmentUpgradeInfo_t"
+  },
+  {
+    "rva": "0x1d4a9d8",
+    "text": "arkEquipmentUpgradeTree_t"
+  },
+  {
+    "rva": "0x1d4d6e0",
+    "text": "arkDeclCpntWatchTower::weaponSettings"
+  },
+  {
+    "rva": "0x1d4d730",
+    "text": "arkWatchTowerWeapon"
+  },
+  {
+    "rva": "0x1d5ef20",
+    "text": "idList < arkCpntInventory::arkAmmoWeaponLink , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5ef70",
+    "text": "idListBase < arkCpntInventory::arkAmmoWeaponLink , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5efc8",
+    "text": "idList < arkInventoryItem , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f010",
+    "text": "idListBase < arkInventoryItem , 24 , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f060",
+    "text": "idList < arkCpntInventory::arkCombination , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f0b0",
+    "text": "idListBase < arkCpntInventory::arkCombination , 24 , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f110",
+    "text": "idList < const arkInventoryItem * , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f160",
+    "text": "idListBase < arkInventoryItem * , 24 , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f290",
+    "text": "idList < arkInventoryTag , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f2d0",
+    "text": "idListBase < arkInventoryTag , 24 , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d5f410",
+    "text": "arkCheckedCpntPtr < arkCpntInventory , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d60090",
+    "text": "arkValidCpntPtr < arkCpntInventory , CF_ATTACHED >"
+  },
+  {
+    "rva": "0x1d60480",
+    "text": "idList < arkCpntEquipment::upgrade_t , TAG_GAME , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d604d0",
+    "text": "idListBase < arkCpntEquipment::upgrade_t , 24 , TAG_GAME , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d61960",
+    "text": "arkValidCpntPtr < const arkCpntWeaponThrowable , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d61fc0",
+    "text": "idList < arkDeclInventoryItem * , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62010",
+    "text": "idListBase < arkDeclInventoryItem * , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62470",
+    "text": "arkEnumArray < int , arkEquipmentSection_t , arkEquipmentSection_enumDesc >"
+  },
+  {
+    "rva": "0x1d624c0",
+    "text": "idList < arkEquipmentUpgradeInstance_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62510",
+    "text": "idListBase < arkEquipmentUpgradeInstance_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62570",
+    "text": "idList < idPair < const arkDeclInventoryItem * , const arkDeclCpntEquipment * > , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d625f0",
+    "text": "idListBase < idPair < const arkDeclInventoryItem * , const arkDeclCpntEquipment * > , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62730",
+    "text": "idList < const arkDeclInventoryItem * , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62910",
+    "text": "arkValidCpntPtr < arkCpntInventory , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d62950",
+    "text": "idList < arkBoneCharmInventoryItem , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d629a0",
+    "text": "idListBase < arkBoneCharmInventoryItem , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d62af0",
+    "text": "arkValidCpntPtr < arkCpntBoneCharmInventory , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d62c20",
+    "text": "arkCheckedCpntPtr < arkCpntBoneCharmInventory , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d697e0",
+    "text": "idList < arkDeclInventoryLoadout::arkItem , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d69830",
+    "text": "idListBase < arkDeclInventoryLoadout::arkItem , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6a350",
+    "text": "idList < arkAICombatMeleeSlot , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6a3a0",
+    "text": "idListBase < arkAICombatMeleeSlot , 24 , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6a3f0",
+    "text": "idList < arkCpntAICombatMeleeSpace::clientNpc , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6a450",
+    "text": "idListBase < arkCpntAICombatMeleeSpace::clientNpc , 24 , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6a5d0",
+    "text": "idStaticList < arkAICombatMeleeSlot * , 16 , TAG_COMPONENT_AI >"
+  },
+  {
+    "rva": "0x1d6a610",
+    "text": "idList < arkAICombatMeleeSlot * , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d6c208",
+    "text": "arkCheckedCpntPtr < arkCpntEquipment , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d6c740",
+    "text": "arkEnumArray < arkAICombatMeleeSlotSettings::patternSettings , arkMeleeSlotPattern , arkMeleeSlotPattern_enumDesc >"
+  },
+  {
+    "rva": "0x1d6d3e0",
+    "text": "arkCheckedCpntPtr < arkCpntAICombatMeleeSpace , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d6d718",
+    "text": "arkCheckedCpntPtr < arkCpntWeaponMeleeNPC , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d6ffe8",
+    "text": "arkCheckedCpntPtr < arkCpntAICombatMeleeSpace , CF_ATTACHED >"
+  },
+  {
+    "rva": "0x1d71320",
+    "text": "idList < arkAICombatMeleeSlotSettings , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d71370",
+    "text": "idListBase < arkAICombatMeleeSlotSettings , 24 , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d74e60",
+    "text": "idList < const arkDeclEquipmentUpgrade * , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d74eb0",
+    "text": "idListBase < arkDeclEquipmentUpgrade * , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d74f00",
+    "text": "idList < arkDeclEquipmentUpgrade::ammoUpgradeInfo_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d74f60",
+    "text": "idListBase < arkDeclEquipmentUpgrade::ammoUpgradeInfo_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75770",
+    "text": "idStaticList < arkCpntWeaponMeleePlayer::arkSwarmAgentContact_t , 32 , TAG_IDLIST >"
+  },
+  {
+    "rva": "0x1d757d0",
+    "text": "idList < arkCpntWeaponMeleePlayer::arkSwarmAgentContact_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75870",
+    "text": "idList < arkDeclCpntWeaponRanged::ammoType , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d758c0",
+    "text": "idListBase < arkDeclCpntWeaponRanged::ammoType , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75980",
+    "text": "idList < const arkDeclEquipmentUpgrade::ammoUpgradeInfo_t * , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d759e0",
+    "text": "idListBase < arkDeclEquipmentUpgrade::ammoUpgradeInfo_t * , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75a50",
+    "text": "idList < arkCpntWeaponRanged::firelockTarget_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75ab0",
+    "text": "idListBase < arkCpntWeaponRanged::firelockTarget_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75c50",
+    "text": "arkEditList < arkDeclCpntWeaponThrowableNPC::launchSettings , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1d75ca0",
+    "text": "idList < arkDeclCpntWeaponThrowableNPC::launchTarget_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75d00",
+    "text": "idListBase < arkDeclCpntWeaponThrowableNPC::launchTarget_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75e50",
+    "text": "arkEditList < arkDeclCpntWeaponGunNPC::projectileSettings , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1d75ea0",
+    "text": "arkEditList < arkDeclInventoryItemCollection::arkItem , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1d75ef0",
+    "text": "arkEditList < arkDeclInventoryLoadout::arkItem , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1d75f40",
+    "text": "idList < arkDeclInventoryCrafting::arkCombination , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d75fa0",
+    "text": "idListBase < arkDeclInventoryCrafting::arkCombination , 24 , TAG_COMPONENT , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76000",
+    "text": "idList < arkCpntInventory::savegameState_t::itemState_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76060",
+    "text": "idListBase < arkCpntInventory::savegameState_t::itemState_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d760c8",
+    "text": "idSort < arkInventoryItem >"
+  },
+  {
+    "rva": "0x1d760e8",
+    "text": "idSearch < arkInventoryItem >"
+  },
+  {
+    "rva": "0x1d76930",
+    "text": "idList < arkEquipmentUpgradeInfo_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76980",
+    "text": "idListBase < arkEquipmentUpgradeInfo_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76b30",
+    "text": "idList < arkEquipmentUpgradeTree_t , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76b80",
+    "text": "idListBase < arkEquipmentUpgradeTree_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d76f50",
+    "text": "arkValidCpntPtr < arkCpntBoneCharmInventory , CF_ATTACHED >"
+  },
+  {
+    "rva": "0x1d7a270",
+    "text": "arkFSM < arkWatchTowerWeapon , arkWatchTowerWeapon::state_t , 3 >"
+  },
+  {
+    "rva": "0x1d7a2c0",
+    "text": "arkFSM < arkWatchTowerWeapon , arkWatchTowerWeapon::state_t , 3 >::stateMethods"
+  },
+  {
+    "rva": "0x1d7b030",
+    "text": "arkCheckedCpntPtr < arkCpntWeaponRanged , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d7b070",
+    "text": "idStaticList < arkCpntWeaponRanged::firelockTarget_t , 3 , TAG_IDLIST >"
+  },
+  {
+    "rva": "0x1d7b0b8",
+    "text": "arkCheckedCpntPtr < arkCpntWeaponThrowable , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d7b3c0",
+    "text": "arkCheckedCpntPtr < arkCpntWeaponMeleePlayer , CF_STARTED >"
+  },
+  {
+    "rva": "0x1d827b0",
+    "text": "idListBase < arkAICombatMeleeSlot * , 24 , TAG_COMPONENT_AI , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d82f70",
+    "text": "idListBase < arkCpntWeaponMeleePlayer::arkSwarmAgentContact_t , 24 , TAG_IDLIST , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d83030",
+    "text": "arkEditListItem < arkDeclCpntWeaponThrowableNPC::launchSettings >"
+  },
+  {
+    "rva": "0x1d83080",
+    "text": "arkEditListItem < arkDeclCpntWeaponGunNPC::projectileSettings >"
+  },
+  {
+    "rva": "0x1d830c0",
+    "text": "arkEditListItem < arkDeclInventoryItemCollection::arkItem >"
+  },
+  {
+    "rva": "0x1d83100",
+    "text": "arkEditListItem < arkDeclInventoryLoadout::arkItem >"
+  },
+  {
+    "rva": "0x1d844c0",
+    "text": "idPair < const arkDeclInventoryItem * , const arkDeclCpntEquipment * >"
+  },
+  {
+    "rva": "0x1d98e08",
+    "text": "arkCpntInventory::lockSaveState_t"
+  },
+  {
+    "rva": "0x1da97f8",
+    "text": "arkEquipmentArchetype_t"
+  },
+  {
+    "rva": "0x1db0df8",
+    "text": "arkAIMeleeDefense::state_t"
+  },
+  {
+    "rva": "0x1db1330",
+    "text": "arkAICombatMeleeSlot::state_t"
+  },
+  {
+    "rva": "0x1db1430",
+    "text": "arkAICombatMeleeSlot::visionState_t"
+  },
+  {
+    "rva": "0x1dbdc98",
+    "text": "arkDeclEquipmentUpgrade::animation_t"
+  },
+  {
+    "rva": "0x1dbf398",
+    "text": "arkWeaponMeleePhantom::arkPhantomType_t"
+  },
+  {
+    "rva": "0x1dbf790",
+    "text": "arkCpntWeaponMeleePlayer::bloodState_t"
+  },
+  {
+    "rva": "0x1dc0440",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchStyle_t"
+  },
+  {
+    "rva": "0x1dc0470",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchOrigin_t"
+  },
+  {
+    "rva": "0x1dc1398",
+    "text": "arkEquipmentSection_t"
+  },
+  {
+    "rva": "0x1dce180",
+    "text": "arkPlayerStateFireWeapon::state_t"
+  },
+  {
+    "rva": "0x1dce1f8",
+    "text": "arkPlayerStatePlaceWeapon::stage_t"
+  },
+  {
+    "rva": "0x1dce268",
+    "text": "arkPlayerStateThrowWeapon::stage_t"
+  },
+  {
+    "rva": "0x1dde1d0",
+    "text": "m_arkBTTask_Condition_CrewCombatHasAnyMeleeFighterFactory"
+  },
+  {
+    "rva": "0x1de23d8",
+    "text": "arkEquipmentSection_enumDesc"
+  },
+  {
+    "rva": "0x1de23f8",
+    "text": "[arkEquipmentSection_enumDesc::NUM]"
+  },
+  {
+    "rva": "0x1de2fe8",
+    "text": "arkMeleeSlotPattern_enumDesc"
+  },
+  {
+    "rva": "0x1de3008",
+    "text": "[arkMeleeSlotPattern_enumDesc::NUM]"
+  },
+  {
+    "rva": "0x1de5fa8",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchTarget_t"
+  },
+  {
+    "rva": "0x1de6be8",
+    "text": "arkWatchTowerWeapon::state_t"
+  },
+  {
+    "rva": "0x1de6c10",
+    "text": "(constarkWatchTowerWeapon::state_t_previous)arkWatchTowerWeapon::*"
+  },
+  {
+    "rva": "0x1de6c58",
+    "text": "(constarkWatchTowerWeapon::state_t_next)arkWatchTowerWeapon::*"
+  },
+  {
+    "rva": "0x1de6c98",
+    "text": "()arkWatchTowerWeapon::*"
+  },
+  {
+    "rva": "0x1deab30",
+    "text": "arkMsgInventoryAddItem::Type"
+  },
+  {
+    "rva": "0x1deac40",
+    "text": "arkMsgInventoryRemoveItem::Type"
+  },
+  {
+    "rva": "0x1deb088",
+    "text": "ARK_AI_COMBAT_DESTINATION_DIRECTED_MELEE"
+  },
+  {
+    "rva": "0x1deb550",
+    "text": "ARK_AI_COMBAT_DESTINATION_INDIVIDUAL_MELEE"
+  },
+  {
+    "rva": "0x1deb7e0",
+    "text": "ARK_AI_COMBAT_DESTINATION_INDIVIDUAL_BASIC_MELEE"
+  },
+  {
+    "rva": "0x1dec1e0",
+    "text": "arkDeclMidnightScene::EMFV_MERGE_WEAPON_ACTIVE_FRAME_EVENT"
+  },
+  {
+    "rva": "0x1df1918",
+    "text": "ARK_MELEE_SLOT_PATTERN_DEFAULT"
+  },
+  {
+    "rva": "0x1df1a28",
+    "text": "ARK_MELEE_SLOT_PATTERN_PRIMARY_PUSH"
+  },
+  {
+    "rva": "0x1df1a50",
+    "text": "ARK_HUD_ELEMENT_EQUIPMENT"
+  },
+  {
+    "rva": "0x1df1a90",
+    "text": "arkMidnightKey::EMKC_PLAYER_EQUIPMENT"
+  },
+  {
+    "rva": "0x1df1b18",
+    "text": "ARK_MELEE_SLOT_PATTERN_FRONT_SPLIT"
+  },
+  {
+    "rva": "0x1df6fc8",
+    "text": "arkMsgAIMeleeDefenseOpportunity::Type"
+  },
+  {
+    "rva": "0x1df7060",
+    "text": "ARK_MSG_AI_MELEE_DEFENSE_OPPORTUNITY"
+  },
+  {
+    "rva": "0x1df71c0",
+    "text": "arkAIMeleeDefense::STATE_IDLE"
+  },
+  {
+    "rva": "0x1df72a8",
+    "text": "arkAIMeleeDefense::STATE_OPPORTUNITY_PENDING"
+  },
+  {
+    "rva": "0x1df7398",
+    "text": "arkAIMeleeDefense::STATE_DODGE_PENDING"
+  },
+  {
+    "rva": "0x1df7498",
+    "text": "arkAIMeleeDefense::STATE_DODGE"
+  },
+  {
+    "rva": "0x1df7588",
+    "text": "arkAIMeleeDefense::STATE_PARRY_PENDING"
+  },
+  {
+    "rva": "0x1df7688",
+    "text": "arkAIMeleeDefense::STATE_PARRY"
+  },
+  {
+    "rva": "0x1df7890",
+    "text": "arkAICombatMeleeSlot::STATE_NONE"
+  },
+  {
+    "rva": "0x1df7998",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_BY_PATTERN"
+  },
+  {
+    "rva": "0x1df7ac0",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_BY_PLAYER_ACTION"
+  },
+  {
+    "rva": "0x1df7bc8",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_DANGER_ZONE"
+  },
+  {
+    "rva": "0x1df7ce8",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_NO_REFERENCE_NAVMESH"
+  },
+  {
+    "rva": "0x1df7e08",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_NO_SLOT_NAVMESH"
+  },
+  {
+    "rva": "0x1df7f20",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_NO_NAVMESH_LINE_OF_SIGHT"
+  },
+  {
+    "rva": "0x1df8030",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_ATTACK_OBSTRUCTION"
+  },
+  {
+    "rva": "0x1df8168",
+    "text": "arkAICombatMeleeSlot::STATE_DISABLED_NO_VISION"
+  },
+  {
+    "rva": "0x1df8278",
+    "text": "arkAICombatMeleeSlot::STATE_ENABLED_NAVMESH_DIRECT_PATH"
+  },
+  {
+    "rva": "0x1df83c0",
+    "text": "arkAICombatMeleeSlot::STATE_ENABLED_VISION"
+  },
+  {
+    "rva": "0x1df84f8",
+    "text": "arkAICombatMeleeSlot::VISION_UNKNOWN"
+  },
+  {
+    "rva": "0x1df8640",
+    "text": "arkAICombatMeleeSlot::VISION_SUCCESS"
+  },
+  {
+    "rva": "0x1df8758",
+    "text": "arkAICombatMeleeSlot::VISION_FAILED"
+  },
+  {
+    "rva": "0x1df8ca0",
+    "text": "arkCollisionSettings_t::eBLOCK_WEAPON"
+  },
+  {
+    "rva": "0x1dfe380",
+    "text": "ARK_MSG_INVENTORY_ITEM_PICKED_UP"
+  },
+  {
+    "rva": "0x1dfe488",
+    "text": "ARK_MSG_INVENTORY_ADD_ITEM"
+  },
+  {
+    "rva": "0x1dfe5b0",
+    "text": "ARK_MSG_INVENTORY_REMOVE_ITEM"
+  },
+  {
+    "rva": "0x1dfe6c8",
+    "text": "ARK_MSG_INVENTORY_EQUIP_ITEM"
+  },
+  {
+    "rva": "0x1dfe7d8",
+    "text": "ARK_MSG_INVENTORY_UNEQUIP_ITEM"
+  },
+  {
+    "rva": "0x1dfe8d0",
+    "text": "ARK_MSG_INVENTORY_ITEM_EQUIPPED"
+  },
+  {
+    "rva": "0x1dfe9c8",
+    "text": "ARK_MSG_INVENTORY_ITEM_UNEQUIPPED"
+  },
+  {
+    "rva": "0x1dfef38",
+    "text": "arkWatchTowerWeapon::STATE_IDLE"
+  },
+  {
+    "rva": "0x1dff020",
+    "text": "arkWatchTowerWeapon::STATE_RELOADING"
+  },
+  {
+    "rva": "0x1dff128",
+    "text": "arkWatchTowerWeapon::STATE_FIRING"
+  },
+  {
+    "rva": "0x1dff220",
+    "text": "arkWatchTowerWeapon::STATE_MAX"
+  },
+  {
+    "rva": "0x1dff338",
+    "text": "arkWatchTowerWeapon::STATE_INVALID"
+  },
+  {
+    "rva": "0x1e01900",
+    "text": "ARK_MSG_DROP_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e03638",
+    "text": "arkPlayerState::ENTITY_LEFT_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e03708",
+    "text": "arkPlayerState::ENTITY_RIGHT_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e03b20",
+    "text": "ARK_MSG_WEAPON_FIRE"
+  },
+  {
+    "rva": "0x1e03b88",
+    "text": "arkPlayerStateFireWeapon::MAX_FIRELOCK_TARGETS"
+  },
+  {
+    "rva": "0x1e03c28",
+    "text": "ARK_MSG_WEAPON_RELOAD"
+  },
+  {
+    "rva": "0x1e03ca0",
+    "text": "arkPlayerStateFireWeapon::INACTIVE"
+  },
+  {
+    "rva": "0x1e03d38",
+    "text": "ARK_MSG_WEAPON_CONSUME_AMMO_FROM_MAGAZINE"
+  },
+  {
+    "rva": "0x1e03db0",
+    "text": "arkPlayerStateFireWeapon::FIRELOCK_WAITING"
+  },
+  {
+    "rva": "0x1e03eb8",
+    "text": "arkPlayerStateFireWeapon::FIRELOCK_ACTIVATED"
+  },
+  {
+    "rva": "0x1e03f68",
+    "text": "ARK_MSG_WEAPON_RELOAD_MAGAZINE"
+  },
+  {
+    "rva": "0x1e03fd8",
+    "text": "arkPlayerStateFireWeapon::FIRELOCK_TARGET_MARKED"
+  },
+  {
+    "rva": "0x1e04088",
+    "text": "ARK_MSG_WEAPON_UPGRADE_ANIMATE_FOR_FIRE"
+  },
+  {
+    "rva": "0x1e04108",
+    "text": "arkPlayerStateFireWeapon::CHARGING"
+  },
+  {
+    "rva": "0x1e041f0",
+    "text": "arkPlayerStateFireWeapon::FIRING"
+  },
+  {
+    "rva": "0x1e04290",
+    "text": "ARK_MSG_WEAPON_UPGRADE_ANIMATE_FOR_RELOAD"
+  },
+  {
+    "rva": "0x1e04310",
+    "text": "arkPlayerStateFireWeapon::OUT_OF_AMMO"
+  },
+  {
+    "rva": "0x1e043a0",
+    "text": "ARK_MSG_WEAPON_ARM"
+  },
+  {
+    "rva": "0x1e04418",
+    "text": "arkPlayerStatePlaceWeapon::NONE"
+  },
+  {
+    "rva": "0x1e04518",
+    "text": "arkPlayerStatePlaceWeapon::PLACE"
+  },
+  {
+    "rva": "0x1e04620",
+    "text": "arkPlayerStatePlaceWeapon::RELOAD"
+  },
+  {
+    "rva": "0x1e04720",
+    "text": "arkPlayerStatePlaceWeapon::OUT_OF_AMMO"
+  },
+  {
+    "rva": "0x1e04818",
+    "text": "arkPlayerStateThrowWeapon::NONE"
+  },
+  {
+    "rva": "0x1e04930",
+    "text": "arkPlayerStateThrowWeapon::COOKING_IN"
+  },
+  {
+    "rva": "0x1e04a50",
+    "text": "arkPlayerStateThrowWeapon::COOKING_IDLE"
+  },
+  {
+    "rva": "0x1e04b70",
+    "text": "arkPlayerStateThrowWeapon::THROW"
+  },
+  {
+    "rva": "0x1e04c78",
+    "text": "arkPlayerStateThrowWeapon::RELOAD"
+  },
+  {
+    "rva": "0x1e04d98",
+    "text": "arkPlayerStateThrowWeapon::OUT_OF_AMMO"
+  },
+  {
+    "rva": "0x1e06bc8",
+    "text": "ARK_MSG_TOGGLE_HIT_RUN_MELEE_LEFT"
+  },
+  {
+    "rva": "0x1e06ce8",
+    "text": "ARK_MSG_TOGGLE_HIT_RUN_MELEE_RIGHT"
+  },
+  {
+    "rva": "0x1e083e0",
+    "text": "ARK_MSG_AI_MELEE_SLOT_OCCUPIED"
+  },
+  {
+    "rva": "0x1e08648",
+    "text": "ARK_MSG_AI_MELEE_SLOT_UNOCCUPIED"
+  },
+  {
+    "rva": "0x1e08778",
+    "text": "ARK_MSG_AI_MELEE_SLOT_RESERVED"
+  },
+  {
+    "rva": "0x1e089a0",
+    "text": "ARK_MSG_AI_MELEE_SLOT_UNRESERVED"
+  },
+  {
+    "rva": "0x1e08bf8",
+    "text": "ARK_MSG_AI_MELEE_SLOT_OBSTRUCTED"
+  },
+  {
+    "rva": "0x1e08e38",
+    "text": "ARK_MSG_AI_MELEE_SLOT_UNOBSTRUCTED"
+  },
+  {
+    "rva": "0x1e09630",
+    "text": "arkDeclCpntAICombatMeleeSpace::MAX_VISION_QUERY_MELEE_SLOTS"
+  },
+  {
+    "rva": "0x1e09770",
+    "text": "arkAICombatMeleeSlotOccupiedMsg::Type"
+  },
+  {
+    "rva": "0x1e098a0",
+    "text": "arkAICombatMeleeSlotUnoccupiedMsg::Type"
+  },
+  {
+    "rva": "0x1e09998",
+    "text": "arkAICombatMeleeSlotReservedMsg::Type"
+  },
+  {
+    "rva": "0x1e09ac8",
+    "text": "arkAICombatMeleeSlotUnreservedMsg::Type"
+  },
+  {
+    "rva": "0x1e09bb0",
+    "text": "arkAICombatMeleeSlotObstructedMsg::Type"
+  },
+  {
+    "rva": "0x1e09cd8",
+    "text": "arkAICombatMeleeSlotUnobstructedMsg::Type"
+  },
+  {
+    "rva": "0x1e09df0",
+    "text": "arkCpntAICombatMeleeSpace::INVALID_SLOT_INDEX"
+  },
+  {
+    "rva": "0x1e16228",
+    "text": "ARK_MSG_MELEE_WEAPON_DANGEROUS_STATE"
+  },
+  {
+    "rva": "0x1e16970",
+    "text": "ARK_MSG_NEW_ITEM_IN_INVENTORY"
+  },
+  {
+    "rva": "0x1e16ba8",
+    "text": "ARK_MSG_REMOVE_ITEM_FROM_INVENTORY"
+  },
+  {
+    "rva": "0x1e175d8",
+    "text": "arkKisculeNodeGetSpecialLootParameters::EQUIPMENT"
+  },
+  {
+    "rva": "0x1e17740",
+    "text": "arkKisculeNodeGetInventoryItemQuantityParameters::INVENTORY_PLAYER"
+  },
+  {
+    "rva": "0x1e17860",
+    "text": "arkKisculeNodeGetInventoryItemQuantityParameters::INVENTORY_VOIDHOUSE"
+  },
+  {
+    "rva": "0x1e17df8",
+    "text": "arkCpntAICombatAttack::STATE_ATTACK_MELEE"
+  },
+  {
+    "rva": "0x1e18bf0",
+    "text": "ARK_CONTROLSETTING_KEY_MELEE"
+  },
+  {
+    "rva": "0x1e18ce0",
+    "text": "ARK_CONTROLSETTING_KEY_POWER_WEAPON"
+  },
+  {
+    "rva": "0x1e19330",
+    "text": "arkKisculeNodeInventoryParameters::INVENTORY_PLAYER"
+  },
+  {
+    "rva": "0x1e19450",
+    "text": "arkKisculeNodeInventoryParameters::INVENTORY_VOIDHOUSE"
+  },
+  {
+    "rva": "0x1e1f498",
+    "text": "ARK_MSG_INVENTORY_ITEM_QUANTITY_CHANGED"
+  },
+  {
+    "rva": "0x1e20ed8",
+    "text": "arkDeclEquipmentUpgrade::STATIC"
+  },
+  {
+    "rva": "0x1e20fb8",
+    "text": "arkDeclEquipmentUpgrade::LOOPING_ANIMATION"
+  },
+  {
+    "rva": "0x1e210c8",
+    "text": "arkDeclEquipmentUpgrade::LOOPING_ANIMATION_ON_CHARGE"
+  },
+  {
+    "rva": "0x1e211b0",
+    "text": "arkDeclEquipmentUpgrade::ANIMATE_ON_FIRE"
+  },
+  {
+    "rva": "0x1e212b8",
+    "text": "arkDeclEquipmentUpgrade::ANIMATE_ON_RELOAD"
+  },
+  {
+    "rva": "0x1e213b0",
+    "text": "arkDeclEquipmentUpgrade::ANIMATE_MAGAZINE"
+  },
+  {
+    "rva": "0x1e214b8",
+    "text": "arkDeclEquipmentUpgrade::ANIMATE_FIRELOCK"
+  },
+  {
+    "rva": "0x1e21a78",
+    "text": "arkMidnight::EMTT_PLAYER_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e236d8",
+    "text": "arkWeaponMeleePhantom::ARK_PHANTOM_TYPE_NONE"
+  },
+  {
+    "rva": "0x1e237f8",
+    "text": "arkWeaponMeleePhantom::ARK_PHANTOM_TYPE_AABB"
+  },
+  {
+    "rva": "0x1e238d8",
+    "text": "arkWeaponMeleePhantom::ARK_PHANTOM_TYPE_CONE"
+  },
+  {
+    "rva": "0x1e239f8",
+    "text": "arkWeaponMeleePhantom::ARK_PHANTOM_TYPE_MAX"
+  },
+  {
+    "rva": "0x1e23f10",
+    "text": "ARK_ATTACK_HIT_MELEE"
+  },
+  {
+    "rva": "0x1e24298",
+    "text": "arkMsgMeleeWeaponDangerousState::Type"
+  },
+  {
+    "rva": "0x1e243c8",
+    "text": "arkCpntWeaponMelee::MAX_CONTACTS"
+  },
+  {
+    "rva": "0x1e244e0",
+    "text": "arkCpntWeaponMeleePlayer::MAX_SWARM_AGENT_CONTACTS"
+  },
+  {
+    "rva": "0x1e24600",
+    "text": "arkCpntWeaponMeleePlayer::BS_CLEAN"
+  },
+  {
+    "rva": "0x1e24728",
+    "text": "arkCpntWeaponMeleePlayer::BS_FADE_NEXTSTEP"
+  },
+  {
+    "rva": "0x1e24848",
+    "text": "arkCpntWeaponMeleePlayer::BS_WAIT"
+  },
+  {
+    "rva": "0x1e24950",
+    "text": "arkCpntWeaponMeleePlayer::BS_FADEOUT"
+  },
+  {
+    "rva": "0x1e24a50",
+    "text": "arkDeclCpntWeaponThrowable::MAX_COOKING_STAGES"
+  },
+  {
+    "rva": "0x1e24b50",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_STYLE_NONE"
+  },
+  {
+    "rva": "0x1e24c68",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_STYLE_THROW"
+  },
+  {
+    "rva": "0x1e24d70",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_STYLE_WRIST"
+  },
+  {
+    "rva": "0x1e24e78",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_ORIGIN_HAND"
+  },
+  {
+    "rva": "0x1e24f88",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_ORIGIN_TAG"
+  },
+  {
+    "rva": "0x1e25098",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_TARGET_ORIGIN"
+  },
+  {
+    "rva": "0x1e25190",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_TARGET_HEAD"
+  },
+  {
+    "rva": "0x1e25208",
+    "text": "ARK_MDNT_MSG_DROP_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e25298",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_TARGET_TORSO"
+  },
+  {
+    "rva": "0x1e25398",
+    "text": "arkDeclCpntWeaponThrowableNPC::LAUNCH_TARGET_GRENADE_POINTING"
+  },
+  {
+    "rva": "0x1e254a8",
+    "text": "arkMsgInventoryItemPickedUp::Type"
+  },
+  {
+    "rva": "0x1e255a8",
+    "text": "arkMsgInventoryEquipItem::Type"
+  },
+  {
+    "rva": "0x1e256b0",
+    "text": "arkMsgInventoryUnequipItem::Type"
+  },
+  {
+    "rva": "0x1e257c0",
+    "text": "arkMsgInventoryItemQuantityChanged::Type"
+  },
+  {
+    "rva": "0x1e25ae0",
+    "text": "arkCpntInventory::SAVE_UNLOCK"
+  },
+  {
+    "rva": "0x1e25bd0",
+    "text": "arkCpntInventory::SAVE_LOCK"
+  },
+  {
+    "rva": "0x1e25cc8",
+    "text": "arkCpntInventory::SAVE_PENDING_UNLOCK"
+  },
+  {
+    "rva": "0x1e25dd8",
+    "text": "arkCpntBoneCharmInventory::MAX_NB_SLOTS"
+  },
+  {
+    "rva": "0x1e26730",
+    "text": "arkMidnightKeyPropPlayerEquipment::ACTION_EQUIP"
+  },
+  {
+    "rva": "0x1e26870",
+    "text": "arkMidnightKeyPropPlayerEquipment::ACTION_UNEQUIP"
+  },
+  {
+    "rva": "0x1e26990",
+    "text": "arkMidnightKeyPropPlayerEquipment::ACTION_REEQUIP"
+  },
+  {
+    "rva": "0x1e26aa8",
+    "text": "arkMidnightKeyPropPlayerEquipment::SLOT_LEFT_HAND"
+  },
+  {
+    "rva": "0x1e26be0",
+    "text": "arkMidnightKeyPropPlayerEquipment::SLOT_RIGHT_HAND"
+  },
+  {
+    "rva": "0x1e26d38",
+    "text": "arkMidnightKeyPropPlayerEquipment::SLOT_BOTH_HANDS"
+  },
+  {
+    "rva": "0x1e27df0",
+    "text": "ARK_MDNT_MSG_WEAPON_ARM"
+  },
+  {
+    "rva": "0x1e27ee0",
+    "text": "ARK_MDNT_MSG_WEAPON_CONSUME_AMMO_FROM_MAGAZINE"
+  },
+  {
+    "rva": "0x1e27ff8",
+    "text": "ARK_MDNT_MSG_WEAPON_FIRE"
+  },
+  {
+    "rva": "0x1e280e8",
+    "text": "ARK_MDNT_MSG_WEAPON_RELOAD"
+  },
+  {
+    "rva": "0x1e281e0",
+    "text": "ARK_MDNT_MSG_WEAPON_RELOAD_MAGAZINE"
+  },
+  {
+    "rva": "0x1e282e8",
+    "text": "ARK_MDNT_MSG_WEAPON_UPGRADE_ANIMATE_FOR_FIRE"
+  },
+  {
+    "rva": "0x1e283e0",
+    "text": "ARK_MDNT_MSG_WEAPON_UPGRADE_ANIMATE_FOR_RELOAD"
+  },
+  {
+    "rva": "0x1e28ad0",
+    "text": "arkMidnight::MELEE_WEAPON_ACTIVE_FRAMES"
+  },
+  {
+    "rva": "0x1e28bf0",
+    "text": "arkMidnight::MELEE_WEAPON_CLOSE_COMBAT_ACTIVE_FRAMES"
+  },
+  {
+    "rva": "0x1e28d18",
+    "text": "arkMidnight::MELEE_LEFT_WEAPONS_ACTIVE_FRAMES"
+  },
+  {
+    "rva": "0x1e28e58",
+    "text": "arkMidnight::MELEE_RIGHT_WEAPONS_ACTIVE_FRAMES"
+  },
+  {
+    "rva": "0x1e29588",
+    "text": "arkMidnight::HIDE_RIGHT_ARM_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e29688",
+    "text": "arkMidnight::HIDE_LEFT_ARM_EQUIPMENT"
+  },
+  {
+    "rva": "0x1e29788",
+    "text": "arkMidnight::HIT_AND_RUN_MELEE_LEFT"
+  },
+  {
+    "rva": "0x1e298a8",
+    "text": "arkMidnight::HIT_AND_RUN_MELEE_RIGHT"
+  },
+  {
+    "rva": "0x1e2a508",
+    "text": "arkMidnight::MELEE_HEAD_WEAPONS_ACTIVE_FRAMES"
+  },
+  {
+    "rva": "0x1e2aed8",
+    "text": "ARK_PLAYER_STATISTIC_FAVORITE_WEAPON"
+  },
+  {
+    "rva": "0x1e2ba80",
+    "text": "arkCpntAIHowlerSkills::ARK_AI_HIT_AND_RUN_TYPE_MELEE_LEFT"
+  },
+  {
+    "rva": "0x1e2bbc0",
+    "text": "arkCpntAIHowlerSkills::ARK_AI_HIT_AND_RUN_TYPE_MELEE_RIGHT"
+  },
+  {
+    "rva": "0x1e2ce20",
+    "text": "arkMsgRemoveItemFromInventory::Type"
+  },
+  {
+    "rva": "0x1e2cf80",
+    "text": "arkMsgNewItemInInventory::Type"
+  },
+  {
+    "rva": "0x1e2d0c8",
+    "text": "arkMsgWeaponFire::Type"
+  },
+  {
+    "rva": "0x1e363c0",
+    "text": "ARK_AI_HIT_AND_RUN_TYPE_MELEE_LEFT"
+  },
+  {
+    "rva": "0x1e363e8",
+    "text": "ARK_AI_HIT_AND_RUN_TYPE_MELEE_RIGHT"
+  },
+  {
+    "rva": "0x1e3f6f8",
+    "text": "arkPlayerStateFireWeapon::firelockTarget_t"
+  },
+  {
+    "rva": "0x1e3f888",
+    "text": "arkPlayerStateFireWeapon::firelockTargetList"
+  },
+  {
+    "rva": "0x1e3f940",
+    "text": "idStaticList < arkPlayerStateFireWeapon::firelockTarget_t , MAX_FIRELOCK_TARGETS >"
+  },
+  {
+    "rva": "0x1e41f08",
+    "text": "arkCpntWeaponMelee::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42080",
+    "text": "arkCpntWeaponMelee::contactList_t"
+  },
+  {
+    "rva": "0x1e42280",
+    "text": "arkDeclCpntWeaponRanged::killCamTriggerChance_t"
+  },
+  {
+    "rva": "0x1e42410",
+    "text": "arkCpntWeaponRanged::ammoType"
+  },
+  {
+    "rva": "0x1e425e8",
+    "text": "arkCpntWeaponCrossbow::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42610",
+    "text": "arkDeclCpntAICombatMeleeSpace::slotSettingsList"
+  },
+  {
+    "rva": "0x1e42690",
+    "text": "idList < arkAICombatMeleeSlotSettings , TAG_COMPONENT_AI >"
+  },
+  {
+    "rva": "0x1e42770",
+    "text": "arkCpntWeaponPlaceable::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42798",
+    "text": "arkDeclCpntAICombatMeleeSpace::impairingPlayerStateList"
+  },
+  {
+    "rva": "0x1e428f8",
+    "text": "arkCpntWeaponThrowable::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42920",
+    "text": "arkAICombatMeleeSlots"
+  },
+  {
+    "rva": "0x1e42980",
+    "text": "idList < arkAICombatMeleeSlot , TAG_COMPONENT_AI >"
+  },
+  {
+    "rva": "0x1e42a10",
+    "text": "arkInventoryCondition::arkDeclInventoryItemList"
+  },
+  {
+    "rva": "0x1e42a70",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchSettings::projectileDefList"
+  },
+  {
+    "rva": "0x1e42ab8",
+    "text": "arkCpntAICombatMeleeSpace::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42b28",
+    "text": "idList < arkDeclInventoryItem * >"
+  },
+  {
+    "rva": "0x1e42c58",
+    "text": "arkDeclCpntWeaponThrowableNPC::launchSettingsList"
+  },
+  {
+    "rva": "0x1e42c90",
+    "text": "arkCpntAICombatMeleeSpace::_InnerClassTypeUserVar"
+  },
+  {
+    "rva": "0x1e42d30",
+    "text": "arkCpntAICombatMeleeSpace::visionQuerySlots"
+  },
+  {
+    "rva": "0x1e42dd0",
+    "text": "arkCpntWeaponThrowableNPC::_InnerClassType"
+  },
+  {
+    "rva": "0x1e42e00",
+    "text": "idStaticList < arkAICombatMeleeSlot * , arkDeclCpntAICombatMeleeSpace::MAX_VISION_QUERY_MELEE_SLOTS , TAG_COMPONENT_AI >"
+  },
+  {
+    "rva": "0x1e42ef8",
+    "text": "arkCpntAICombatMeleeSpace::clientList"
+  },
+  {
+    "rva": "0x1e42f60",
+    "text": "arkCpntWeaponThrowableNPC::decl"
+  },
+  {
+    "rva": "0x1e42f80",
+    "text": "idList < arkCpntAICombatMeleeSpace::clientNpc , TAG_COMPONENT_AI >"
+  },
+  {
+    "rva": "0x1e430c8",
+    "text": "arkCpntAICombatMeleeSpace::attackObstructionRecordList"
+  },
+  {
+    "rva": "0x1e43148",
+    "text": "arkCpntWeaponGun::_InnerClassType"
+  },
+  {
+    "rva": "0x1e43230",
+    "text": "arkCpntAICombatMeleeSpace::attackObstructionBoxList"
+  },
+  {
+    "rva": "0x1e432d0",
+    "text": "arkDeclCpntWeaponGunNPC::projectileSettingsList"
+  },
+  {
+    "rva": "0x1e43398",
+    "text": "arkCpntWeaponGunNPC::_InnerClassType"
+  },
+  {
+    "rva": "0x1e434d8",
+    "text": "arkMsgInventoryItemEquipped"
+  },
+  {
+    "rva": "0x1e43560",
+    "text": "arkMsgInventoryItem < ARK_MSG_INVENTORY_ITEM_EQUIPPED >"
+  },
+  {
+    "rva": "0x1e43a30",
+    "text": "arkMsgInventoryItemUnequipped"
+  },
+  {
+    "rva": "0x1e43ab0",
+    "text": "arkMsgInventoryItem < ARK_MSG_INVENTORY_ITEM_UNEQUIPPED >"
+  },
+  {
+    "rva": "0x1e440c8",
+    "text": "arkDeclInventoryItemCollection::arkItemList"
+  },
+  {
+    "rva": "0x1e441f8",
+    "text": "arkDeclInventoryCrafting::arkCombinationList"
+  },
+  {
+    "rva": "0x1e44250",
+    "text": "idList < arkDeclInventoryCrafting::arkCombination , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e44388",
+    "text": "arkCpntInventory::_InnerClassType"
+  },
+  {
+    "rva": "0x1e44470",
+    "text": "arkCpntInventory::arkItemPtrList"
+  },
+  {
+    "rva": "0x1e444b8",
+    "text": "idList < const arkInventoryItem * , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e44598",
+    "text": "arkCpntInventory::arkCombinationPtrList"
+  },
+  {
+    "rva": "0x1e445f0",
+    "text": "idList < const arkCpntInventory::arkCombination * , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e45a18",
+    "text": "arkCpntAICombatMeleeSpacePtr"
+  },
+  {
+    "rva": "0x1e46cc0",
+    "text": "arkCpntAIReasoner_Equipment::_InnerClassType"
+  },
+  {
+    "rva": "0x1e471c0",
+    "text": "arkInventoryTagList"
+  },
+  {
+    "rva": "0x1e471d8",
+    "text": "idList < arkInventoryTag , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e472e8",
+    "text": "arkMsgAIMeleeDefenseOpportunity::weaponPtr"
+  },
+  {
+    "rva": "0x1e47350",
+    "text": "arkCheckedCpntPtr < arkCpntEquipment >"
+  },
+  {
+    "rva": "0x1e473e8",
+    "text": "arkAIMeleeDefense::_InnerClassType"
+  },
+  {
+    "rva": "0x1e47468",
+    "text": "arkAIMeleeDefense::_InnerClassTypeUserVar"
+  },
+  {
+    "rva": "0x1e47548",
+    "text": "arkAICombatMeleeSlotSettings::patternSettingsArray"
+  },
+  {
+    "rva": "0x1e475d8",
+    "text": "arkAICombatMeleeSlot::updateInfo_t::attackObstructionList"
+  },
+  {
+    "rva": "0x1e47e18",
+    "text": "arkCpntInventory::arkEquipmentList"
+  },
+  {
+    "rva": "0x1e47eb0",
+    "text": "arkCpntInventory::arkItemList"
+  },
+  {
+    "rva": "0x1e47ed0",
+    "text": "idList < arkInventoryItem , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e47f80",
+    "text": "arkCpntInventory::arkCombinationList"
+  },
+  {
+    "rva": "0x1e47fc8",
+    "text": "idList < arkCpntInventory::arkCombination , TAG_COMPONENT >"
+  },
+  {
+    "rva": "0x1e48080",
+    "text": "arkCpntBoneCharmInventory::_InnerClassType"
+  },
+  {
+    "rva": "0x1e48698",
+    "text": "arkCpntPlayerPowerSystem::equipmentSectionIndex"
+  },
+  {
+    "rva": "0x1e4a0a0",
+    "text": "arkMsgToggleHitAndRunMeleeLeft"
+  },
+  {
+    "rva": "0x1e4a160",
+    "text": "arkMsgToggleHitAndRun < ARK_MSG_TOGGLE_HIT_RUN_MELEE_LEFT >"
+  },
+  {
+    "rva": "0x1e4a650",
+    "text": "arkMsgToggleHitAndRunMeleeRight"
+  },
+  {
+    "rva": "0x1e4a6e0",
+    "text": "arkMsgToggleHitAndRun < ARK_MSG_TOGGLE_HIT_RUN_MELEE_RIGHT >"
+  },
+  {
+    "rva": "0x1e4e0d8",
+    "text": "arkBTTask_Condition_CrewCombatHasAnyMeleeFighter::mySettings_t"
+  },
+  {
+    "rva": "0x2296490",
+    "text": ".?AVarkMidnightKeyPropTimedEvent_WeaponActiveFrames@@"
+  },
+  {
+    "rva": "0x22965e8",
+    "text": ".?AVarkMidnightKeyPropEvent_WeaponFire@@"
+  },
+  {
+    "rva": "0x22981a0",
+    "text": ".?AVarkMidnightKeyPropPlayerEquipment@@"
+  },
+  {
+    "rva": "0x22fe460",
+    "text": ".?AVarkTreeNodeSettings_Condition_CrewCombatHasAnyMeleeFighter@@"
+  },
+  {
+    "rva": "0x22fe7c0",
+    "text": ".?AVarkDeclCpntAIReasoner_Equipment@@"
+  },
+  {
+    "rva": "0x22fe7f8",
+    "text": ".?AVarkCpntAIReasoner_Equipment@@"
+  },
+  {
+    "rva": "0x2300498",
+    "text": ".?AW4arkAIWeaponStatus_t@@"
+  },
+  {
+    "rva": "0x23006b8",
+    "text": ".?AW4arkInventoryItemType_t@@"
+  },
+  {
+    "rva": "0x23006e8",
+    "text": ".?AVarkInventoryTag@@"
+  },
+  {
+    "rva": "0x2304218",
+    "text": ".?AVarkCpntEquipment@@"
+  },
+  {
+    "rva": "0x2304268",
+    "text": ".?AVarkDeclCpntEquipment@@"
+  },
+  {
+    "rva": "0x2304c00",
+    "text": ".?AVarkDeclCpntWeaponGun@@"
+  },
+  {
+    "rva": "0x2304c30",
+    "text": ".?AVarkDeclCpntWeaponRanged@@"
+  },
+  {
+    "rva": "0x2304c60",
+    "text": ".?AVarkCpntWeaponGun@@"
+  },
+  {
+    "rva": "0x2304c88",
+    "text": ".?AVarkCpntWeaponRanged@@"
+  },
+  {
+    "rva": "0x2304cb8",
+    "text": ".?AVarkCpntWeaponGunNPC@@"
+  },
+  {
+    "rva": "0x2304ce8",
+    "text": ".?AVarkDeclCpntWeaponGunNPC@@"
+  },
+  {
+    "rva": "0x2304d18",
+    "text": ".?AVarkDeclCpntWeaponPlaceable@@"
+  },
+  {
+    "rva": "0x2304d50",
+    "text": ".?AVarkCpntWeaponPlaceable@@"
+  },
+  {
+    "rva": "0x2304d90",
+    "text": ".?AVarkCpntWeaponThrowableNPC@@"
+  },
+  {
+    "rva": "0x2304dc0",
+    "text": ".?AVarkDeclCpntWeaponThrowableNPC@@"
+  },
+  {
+    "rva": "0x2304e60",
+    "text": ".?AVarkDeclEquipmentUpgrade@@"
+  },
+  {
+    "rva": "0x2304e90",
+    "text": ".?AVarkDeclInventoryItem@@"
+  },
+  {
+    "rva": "0x2304ec0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclEquipmentUpgrade@@@@"
+  },
+  {
+    "rva": "0x230c3a0",
+    "text": ".?AVarkKisculeNodeActionPlayerInventoryParameters@@"
+  },
+  {
+    "rva": "0x230c3e8",
+    "text": ".?AVarkKisculeNodeActionPlayerInventory@@"
+  },
+  {
+    "rva": "0x230d838",
+    "text": ".?AVarkCpntAICombatMeleeSpace@@"
+  },
+  {
+    "rva": "0x230d868",
+    "text": ".?AVarkDeclCpntAICombatMeleeSpace@@"
+  },
+  {
+    "rva": "0x230e888",
+    "text": ".?AVarkCpntAICrewModule_CombatMelee@@"
+  },
+  {
+    "rva": "0x230e8c0",
+    "text": ".?AVarkDeclCpntAICrewModule_CombatMelee@@"
+  },
+  {
+    "rva": "0x230eb40",
+    "text": ".?AVarkAIMeleeDefense@@"
+  },
+  {
+    "rva": "0x230f390",
+    "text": ".?AVsecondarySlotSearch@?7??FindMeleeSpaceDestination@arkCpntAIReasoner_Combat@@AEBA_NAEAUarkRecordCombatDestination@@AEBVarkCpntAICombatMeleeSpace@@AEBU3@AEBVarkRecordCombatTarget@@@Z@"
+  },
+  {
+    "rva": "0x230f460",
+    "text": ".?AV?$idSearch_Binary@UsecondarySlot_t@?7??FindMeleeSpaceDestination@arkCpntAIReasoner_Combat@@AEBA_NAEAUarkRecordCombatDestination@@AEBVarkCpntAICombatMeleeSpace@@AEBU4@AEBVarkRecordCombatTarget@@@Z@VsecondarySlotSearch@?7??23@AEBA_N0123@Z@@@"
+  },
+  {
+    "rva": "0x230f570",
+    "text": ".?AV?$idSearch@UsecondarySlot_t@?7??FindMeleeSpaceDestination@arkCpntAIReasoner_Combat@@AEBA_NAEAUarkRecordCombatDestination@@AEBVarkCpntAICombatMeleeSpace@@AEBU4@AEBVarkRecordCombatTarget@@@Z@@@"
+  },
+  {
+    "rva": "0x2311770",
+    "text": ".?AVarkBTTask_Condition_CrewCombatHasAnyMeleeFighter@@"
+  },
+  {
+    "rva": "0x2314b30",
+    "text": ".?AV?$arkBTTaskFactory@VarkBTTask_Condition_CrewCombatHasAnyMeleeFighter@@@@"
+  },
+  {
+    "rva": "0x2315ca0",
+    "text": ".?AVarkCpntBoneCharmInventory@@"
+  },
+  {
+    "rva": "0x2315cd0",
+    "text": ".?AVarkDeclCpntBoneCharmInventory@@"
+  },
+  {
+    "rva": "0x2315d08",
+    "text": ".?AVarkSortByLevel@arkCpntBoneCharmInventory@@"
+  },
+  {
+    "rva": "0x2315d50",
+    "text": ".?AV?$idSort_Quick@PEBVarkBoneCharm@@VarkSortByLevel@arkCpntBoneCharmInventory@@@@"
+  },
+  {
+    "rva": "0x2315e08",
+    "text": ".?AV?$idSort@VarkInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2315e40",
+    "text": ".?AV?$idSearch@VarkInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2315e78",
+    "text": ".?AVarkCpntInventory@@"
+  },
+  {
+    "rva": "0x2315ea0",
+    "text": ".?AVarkDeclInventoryItemCollection@@"
+  },
+  {
+    "rva": "0x2315ee0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclInventoryItemCollection@@@@"
+  },
+  {
+    "rva": "0x2315f30",
+    "text": ".?AVarkDeclInventoryLoadout@@"
+  },
+  {
+    "rva": "0x2315f60",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclInventoryLoadout@@@@"
+  },
+  {
+    "rva": "0x2315fa8",
+    "text": ".?AVarkDeclInventoryCrafting@@"
+  },
+  {
+    "rva": "0x2315fe0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclInventoryCrafting@@@@"
+  },
+  {
+    "rva": "0x2316028",
+    "text": ".?AVarkDeclCpntInventory@@"
+  },
+  {
+    "rva": "0x2316058",
+    "text": ".?AVarkSort@arkCpntInventory@@"
+  },
+  {
+    "rva": "0x2316090",
+    "text": ".?AV?$idSort_Quick@VarkInventoryItem@@VarkSort@arkCpntInventory@@@@"
+  },
+  {
+    "rva": "0x23160e8",
+    "text": ".?AVarkSearch@arkCpntInventory@@"
+  },
+  {
+    "rva": "0x2316120",
+    "text": ".?AV?$idSearch_Binary@VarkInventoryItem@@VarkSearch@arkCpntInventory@@@@"
+  },
+  {
+    "rva": "0x2316180",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntEquipment@@@@"
+  },
+  {
+    "rva": "0x23161d0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntEquipment@@@@"
+  },
+  {
+    "rva": "0x23164b0",
+    "text": ".?AVarkDeclCpntWeaponCrossbow@@"
+  },
+  {
+    "rva": "0x23164e0",
+    "text": ".?AVarkCpntWeaponCrossbow@@"
+  },
+  {
+    "rva": "0x2316510",
+    "text": ".?AVarkCpntWeaponMeleeNPC@@"
+  },
+  {
+    "rva": "0x2316540",
+    "text": ".?AVarkCpntWeaponMelee@@"
+  },
+  {
+    "rva": "0x2316570",
+    "text": ".?AVarkDeclCpntWeaponMeleeNPC@@"
+  },
+  {
+    "rva": "0x23165a0",
+    "text": ".?AVarkDeclCpntWeaponMelee@@"
+  },
+  {
+    "rva": "0x2316610",
+    "text": ".?AVarkDeclCpntWeaponMeleePlayer@@"
+  },
+  {
+    "rva": "0x2316648",
+    "text": ".?AVarkCpntWeaponMeleePlayer@@"
+  },
+  {
+    "rva": "0x2316678",
+    "text": ".?AVarkCpntWeaponThrowable@@"
+  },
+  {
+    "rva": "0x23166a8",
+    "text": ".?AVarkDeclCpntWeaponThrowable@@"
+  },
+  {
+    "rva": "0x23166e0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponMelee@@@@"
+  },
+  {
+    "rva": "0x2316730",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponMelee@@@@"
+  },
+  {
+    "rva": "0x2316780",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponRanged@@@@"
+  },
+  {
+    "rva": "0x23167d0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponRanged@@@@"
+  },
+  {
+    "rva": "0x2316820",
+    "text": ".?AV?$idSort@UfirelockTarget_t@arkCpntWeaponRanged@@@@"
+  },
+  {
+    "rva": "0x23168a0",
+    "text": ".?AV?$idSort_Quick@UfirelockTarget_t@arkCpntWeaponRanged@@VQuickSortFirelockTargets@@@@"
+  },
+  {
+    "rva": "0x2316910",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2317230",
+    "text": ".?AVarkKisculeNodePlayerInventoryNotificationParameters@@"
+  },
+  {
+    "rva": "0x2318a10",
+    "text": ".?AVarkDeclHUDElementEquipment@@"
+  },
+  {
+    "rva": "0x2318a48",
+    "text": ".?AVarkHUDElementEquipment@@"
+  },
+  {
+    "rva": "0x2318a80",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclHUDElementEquipment@@@@"
+  },
+  {
+    "rva": "0x2319bb0",
+    "text": ".?AVarkPlayerStatePlaceWeaponReady@@"
+  },
+  {
+    "rva": "0x2319be8",
+    "text": ".?AVarkDeclPlayerStatePlaceWeaponReady@@"
+  },
+  {
+    "rva": "0x2319c30",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStatePlaceWeaponReady@@@@"
+  },
+  {
+    "rva": "0x231a980",
+    "text": ".?AVarkRuleAction_MeleeSlotPatternOutcome@@"
+  },
+  {
+    "rva": "0x231a9c0",
+    "text": ".?AVarkRuleAction_MeleeSlotPatternInstance@@"
+  },
+  {
+    "rva": "0x23209c0",
+    "text": ".?AVarkKisculeGraphNodeParametersDoubleInventoryItem@@"
+  },
+  {
+    "rva": "0x2321098",
+    "text": ".?AVarkKisculeNodeInventoryParameters@@"
+  },
+  {
+    "rva": "0x23210d0",
+    "text": ".?AVarkKisculeNodeInventory@@"
+  },
+  {
+    "rva": "0x2321590",
+    "text": ".?AVarkKisculeNodeGetInventoryItemQuantityParameters@@"
+  },
+  {
+    "rva": "0x2321758",
+    "text": ".?AVarkKisculeNodeGetInventoryItemQuantity@@"
+  },
+  {
+    "rva": "0x2324348",
+    "text": ".?AVarkMidnightTrackInstPlayerEquipment@@"
+  },
+  {
+    "rva": "0x23256e0",
+    "text": ".?AVarkPlayerStatePlaceWeapon@@"
+  },
+  {
+    "rva": "0x2325710",
+    "text": ".?AVarkDeclPlayerStatePlaceWeapon@@"
+  },
+  {
+    "rva": "0x2325750",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStatePlaceWeapon@@@@"
+  },
+  {
+    "rva": "0x2325ad0",
+    "text": ".?AVarkPlayerStateRequestReloadWeapon@@"
+  },
+  {
+    "rva": "0x2325b08",
+    "text": ".?AVarkPlayerStateReloadWeapon@@"
+  },
+  {
+    "rva": "0x2325b40",
+    "text": ".?AVarkDeclPlayerStateRequestReloadWeapon@@"
+  },
+  {
+    "rva": "0x2325b80",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateRequestReloadWeapon@@@@"
+  },
+  {
+    "rva": "0x2325bd8",
+    "text": ".?AVarkDeclPlayerStateReloadWeapon@@"
+  },
+  {
+    "rva": "0x2325c10",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateReloadWeapon@@@@"
+  },
+  {
+    "rva": "0x23261d0",
+    "text": ".?AVarkPlayerStateThrowWeapon@@"
+  },
+  {
+    "rva": "0x2326200",
+    "text": ".?AVarkDeclPlayerStateThrowWeapon@@"
+  },
+  {
+    "rva": "0x2326240",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateThrowWeapon@@@@"
+  },
+  {
+    "rva": "0x2327448",
+    "text": ".?AVarkPlayerStateFireWeapon@@"
+  },
+  {
+    "rva": "0x2327478",
+    "text": ".?AVarkPlayerStateCancelFireWeapon@@"
+  },
+  {
+    "rva": "0x23274b0",
+    "text": ".?AVarkDeclPlayerStateFireWeapon@@"
+  },
+  {
+    "rva": "0x23274f0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateFireWeapon@@@@"
+  },
+  {
+    "rva": "0x2327540",
+    "text": ".?AVarkDeclPlayerStateCancelFireWeapon@@"
+  },
+  {
+    "rva": "0x2327580",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateCancelFireWeapon@@@@"
+  },
+  {
+    "rva": "0x2328968",
+    "text": ".?AVarkRuleAction_AIMeleeAttackOutcome@@"
+  },
+  {
+    "rva": "0x2328a20",
+    "text": ".?AVarkRuleAction_AIMeleeDefenseOutcomeInstance@@"
+  },
+  {
+    "rva": "0x2328a68",
+    "text": ".?AVarkRuleAction_AIMeleeDefenseOutcome@@"
+  },
+  {
+    "rva": "0x232feb0",
+    "text": ".?AVarkKisculeNodePlayerInventoryNotification@@"
+  },
+  {
+    "rva": "0x23302d0",
+    "text": ".?AV?$arkRuleConditionInstance@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x2330320",
+    "text": ".?AV?$arkUserVarInstance@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x2330770",
+    "text": ".?AV?$arkUserVarInstance_ClassMember@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x23307d0",
+    "text": ".?AV?$arkUserVarInstance_ClassProvider@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x2330c30",
+    "text": ".?AV?$arkUserVarInstance_RuleCache@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x2330c80",
+    "text": ".?AV?$arkUserVarInstance_Blackboard@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x2330f80",
+    "text": ".?AV?$arkRuleCondition@W4arkInventoryItemType_t@@@@"
+  },
+  {
+    "rva": "0x23321f0",
+    "text": ".?AV?$arkRuleConditionInstance@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332238",
+    "text": ".?AV?$arkUserVarInstance@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332700",
+    "text": ".?AV?$arkUserVarInstance_ClassMember@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332750",
+    "text": ".?AV?$arkUserVarInstance_ClassProvider@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332c00",
+    "text": ".?AV?$arkUserVarInstance_RuleCache@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332c50",
+    "text": ".?AV?$arkUserVarInstance_Blackboard@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2332fb8",
+    "text": ".?AV?$arkRuleCondition@VarkInventoryTag@@@@"
+  },
+  {
+    "rva": "0x2333ee0",
+    "text": ".?AV?$arkRuleConditionInstance@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x2333f30",
+    "text": ".?AV?$arkUserVarInstance@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x23340d0",
+    "text": ".?AV?$arkUserVarInstance_ClassMember@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x2334120",
+    "text": ".?AV?$arkUserVarInstance_ClassProvider@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x23342c0",
+    "text": ".?AV?$arkUserVarInstance_RuleCache@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x2334310",
+    "text": ".?AV?$arkUserVarInstance_Blackboard@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x23344f0",
+    "text": ".?AVarkRuleCondition_arkAIWeaponStatus_t@@"
+  },
+  {
+    "rva": "0x2334530",
+    "text": ".?AV?$arkRuleCondition@W4arkAIWeaponStatus_t@@@@"
+  },
+  {
+    "rva": "0x2334578",
+    "text": ".?AVarkKisculeGraphVariableInventoryItem@@"
+  },
+  {
+    "rva": "0x23345c0",
+    "text": ".?AV?$arkKisculeGraphVariable@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2335010",
+    "text": ".?AVarkKisculeNodeCompareInventoryItem@@"
+  },
+  {
+    "rva": "0x2338a98",
+    "text": ".?AVarkKisculeNodeNamedVariableInventoryItem@@"
+  },
+  {
+    "rva": "0x2338ae0",
+    "text": ".?AV?$arkKisculeNodeNamedVariable@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2338c78",
+    "text": ".?AVarkKisculeNodeStoryFlagInventoryItem@@"
+  },
+  {
+    "rva": "0x2338cc0",
+    "text": ".?AV?$arkKisculeNodeStoryFlag@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x23390e0",
+    "text": ".?AVarkKisculeVariableNodeParameterInternal@?$arkKisculeVariableNode@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2339160",
+    "text": ".?AV?$arkKisculeGraphVariableNodeParameters@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x2339d70",
+    "text": ".?AV?$arkKisculeVariableNode@PEAVarkDeclInventoryItem@@@@"
+  },
+  {
+    "rva": "0x233a8e0",
+    "text": ".?AVarkKisculeNodeInventoryItem@@"
+  },
+  {
+    "rva": "0x233adc0",
+    "text": ".?AVarkWeapon@@"
+  },
+  {
+    "rva": "0x233b4c8",
+    "text": ".?AVarkRuleCondition_arkInventoryItemType_t@@"
+  },
+  {
+    "rva": "0x233baf8",
+    "text": ".?AVarkKisculeNodeInventoryItemToString@@"
+  },
+  {
+    "rva": "0x233c1f8",
+    "text": ".?AVarkRuleCondition_arkInventoryTag@@"
+  },
+  {
+    "rva": "0x233c888",
+    "text": ".?AVarkCpntInventoryFactory@@"
+  },
+  {
+    "rva": "0x233cc78",
+    "text": ".?AVarkCpntWeaponThrowableFactory@@"
+  },
+  {
+    "rva": "0x233cd58",
+    "text": ".?AVarkCpntBoneCharmInventoryFactory@@"
+  },
+  {
+    "rva": "0x233d5b8",
+    "text": ".?AVarkCpntAICombatMeleeSpaceFactory@@"
+  },
+  {
+    "rva": "0x233d9e0",
+    "text": ".?AVarkCpntWeaponMeleeNPCFactory@@"
+  },
+  {
+    "rva": "0x233e190",
+    "text": ".?AVarkCpntAICrewModule_CombatMeleeFactory@@"
+  },
+  {
+    "rva": "0x233e688",
+    "text": ".?AVarkCpntAIReasoner_EquipmentFactory@@"
+  },
+  {
+    "rva": "0x233f730",
+    "text": ".?AVarkCpntWeaponMeleePlayerFactory@@"
+  },
+  {
+    "rva": "0x233f7a0",
+    "text": ".?AVarkCpntWeaponCrossbowFactory@@"
+  },
+  {
+    "rva": "0x233f818",
+    "text": ".?AVarkCpntWeaponPlaceableFactory@@"
+  },
+  {
+    "rva": "0x233f850",
+    "text": ".?AVarkCpntWeaponThrowableNPCFactory@@"
+  },
+  {
+    "rva": "0x233f888",
+    "text": ".?AVarkCpntWeaponGunFactory@@"
+  },
+  {
+    "rva": "0x233f8b8",
+    "text": ".?AVarkCpntWeaponGunNPCFactory@@"
+  },
+  {
+    "rva": "0x23443b0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntAICrewModule_CombatMelee@@@@"
+  },
+  {
+    "rva": "0x2344410",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntAICrewModule_CombatMelee@@@@"
+  },
+  {
+    "rva": "0x23449d0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntAICombatMeleeSpace@@@@"
+  },
+  {
+    "rva": "0x2344a20",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntAICombatMeleeSpace@@@@"
+  },
+  {
+    "rva": "0x2345740",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntAIReasoner_Equipment@@@@"
+  },
+  {
+    "rva": "0x2345790",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntAIReasoner_Equipment@@@@"
+  },
+  {
+    "rva": "0x23493b0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponMeleePlayer@@@@"
+  },
+  {
+    "rva": "0x2349400",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponMeleePlayer@@@@"
+  },
+  {
+    "rva": "0x2349450",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponMeleeNPC@@@@"
+  },
+  {
+    "rva": "0x23494a0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponMeleeNPC@@@@"
+  },
+  {
+    "rva": "0x23494f0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponCrossbow@@@@"
+  },
+  {
+    "rva": "0x2349540",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponCrossbow@@@@"
+  },
+  {
+    "rva": "0x2349590",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponPlaceable@@@@"
+  },
+  {
+    "rva": "0x23495e0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponPlaceable@@@@"
+  },
+  {
+    "rva": "0x2349630",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponThrowable@@@@"
+  },
+  {
+    "rva": "0x2349680",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponThrowable@@@@"
+  },
+  {
+    "rva": "0x23496d0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponThrowableNPC@@@@"
+  },
+  {
+    "rva": "0x2349720",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponThrowableNPC@@@@"
+  },
+  {
+    "rva": "0x2349770",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponGun@@@@"
+  },
+  {
+    "rva": "0x23497c0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponGun@@@@"
+  },
+  {
+    "rva": "0x2349810",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntWeaponGunNPC@@@@"
+  },
+  {
+    "rva": "0x2349860",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntWeaponGunNPC@@@@"
+  },
+  {
+    "rva": "0x2349950",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntInventory@@@@"
+  },
+  {
+    "rva": "0x23499a0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntInventory@@@@"
+  },
+  {
+    "rva": "0x23499f0",
+    "text": ".?AV?$arkDeclComponentInfo@VarkDeclCpntBoneCharmInventory@@@@"
+  },
+  {
+    "rva": "0x2349a40",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclCpntBoneCharmInventory@@@@"
+  },
+  {
+    "rva": "0x2362048",
+    "text": ".?AW4arkWeaponSlot_t@@"
+  },
+  {
+    "rva": "0x2362760",
+    "text": ".?AV?$idList@VarkInventoryItem@@$0EB@$0?0@@"
+  },
+  {
+    "rva": "0x23627a0",
+    "text": ".?AV?$idList@PEBVarkInventoryItem@@$0EB@$0?0@@"
+  },
+  {
+    "rva": "0x23627e0",
+    "text": ".?AV?$idList@VarkInventoryTag@@$0EB@$0?0@@"
+  },
+  {
+    "rva": "0x2363350",
+    "text": ".?AV?$idList@PEAVarkDeclInventoryItem@@$04$0?0@@"
+  },
+  {
+    "rva": "0x23633f8",
+    "text": ".?AVarkInventoryCondition@@"
+  },
+  {
+    "rva": "0x23635d0",
+    "text": ".?AV?$idList@UarkEquipmentUpgradeInstance_t@@$04$0?0@@"
+  },
+  {
+    "rva": "0x2363620",
+    "text": ".?AV?$idList@V?$idPair@PEBVarkDeclInventoryItem@@PEBVarkDeclCpntEquipment@@@@$04$0?0@@"
+  },
+  {
+    "rva": "0x2363690",
+    "text": ".?AV?$idList@PEBVarkDeclInventoryItem@@$04$0?0@@"
+  },
+  {
+    "rva": "0x23637c0",
+    "text": ".?AV?$idList@VarkBoneCharmInventoryItem@@$04$0?0@@"
+  },
+  {
+    "rva": "0x23653c8",
+    "text": ".?AW4arkEquipmentArchetype_t@@"
+  },
+  {
+    "rva": "0x23653f8",
+    "text": ".?AW4arkEquipmentSlot_t@@"
+  },
+  {
+    "rva": "0x23662e8",
+    "text": ".?AVarkRecordKd_WeaponInventory@@"
+  },
+  {
+    "rva": "0x23663b8",
+    "text": ".?AVarkRecordCombatMeleeSlot@@"
+  },
+  {
+    "rva": "0x2366f10",
+    "text": ".?AV?$idList@VarkAICombatMeleeSlot@@$0DA@$0?0@@"
+  },
+  {
+    "rva": "0x2366fd8",
+    "text": ".?AW4arkMeleeSlotPattern@@"
+  },
+  {
+    "rva": "0x2367748",
+    "text": ".?AW4arkAIMeleeDefenseType@@"
+  },
+  {
+    "rva": "0x2369240",
+    "text": ".?AV?$idList@VarkAICombatMeleeSlotSettings@@$0DA@$0?0@@"
+  },
+  {
+    "rva": "0x236a2d0",
+    "text": ".?AV?$idList@PEBVarkDeclEquipmentUpgrade@@$04$0?0@@"
+  },
+  {
+    "rva": "0x236a4b8",
+    "text": ".?AVarkWeaponMeleePhantom@@"
+  },
+  {
+    "rva": "0x236a690",
+    "text": ".?AV?$idList@UarkEquipmentUpgradeInfo_t@@$04$0?0@@"
+  },
+  {
+    "rva": "0x236a6d8",
+    "text": ".?AW4arkEquipmentSection_t@@"
+  },
+  {
+    "rva": "0x236a708",
+    "text": ".?AUarkEquipmentUpgradeInfo_t@@"
+  },
+  {
+    "rva": "0x236a770",
+    "text": ".?AV?$idList@UarkEquipmentUpgradeTree_t@@$04$0?0@@"
+  },
+  {
+    "rva": "0x236bc30",
+    "text": ".?AVarkWatchTowerWeapon@@"
+  }
+]

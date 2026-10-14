@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-12T19:47:32.664176+02:00",
+  "result": {
+    "passed": true,
+    "failure": null,
+    "source": "client",
+    "checks": [
+      "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+      "Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets",
+      "Both original inventory quantities and player/partner health retained; world reset still required",
+      "Exact equipment array, cloned NPC and owned native Decoy component agree in repeated live samples, then report authoritative registry absence; no cause of retirement inferred",
+      "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [
+      {
+        "videoTime": 2.291,
+        "input": "Native Emily LT1800 then release at grounded floor"
+      }
+    ],
+    "dll": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+    "probe": "0DEE856B36620738BF406775A50617F2F0A7D80647DB4C9E571AE95AABA75BF8",
+    "scope": "Native source Emily Doppelganger acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. Existing guards held in the isolated Dunwall fixture; newly summoned clone retains native AI; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+  },
+  "stats": {
+    "presentSamples": 290,
+    "afterAbsent": 134,
+    "rawA0": [
+      128
+    ],
+    "retiredSamples": 134,
+    "cachedPresentAverageMs": 0.35298620689655136,
+    "handles": [
+      210178604
+    ],
+    "refusalStages": [],
+    "maxReadMs": 27.9553,
+    "scope": "Read-only reciprocal equipment/array/entity/component ownership. Registry retirement proves the tracked incarnation is absent. Read failure remains unknown. Raw component+a0 has no inferred meaning; retirement cause is not inferred."
+  },
+  "complete": false,
+  "scope": "Read-only cached equipment/array/native NPC/Decoy ownership and registry retirement verified417. No clone pose, effects, AI, gameplay or receiver presentation implied. Retirement cause remains unproven."
+}

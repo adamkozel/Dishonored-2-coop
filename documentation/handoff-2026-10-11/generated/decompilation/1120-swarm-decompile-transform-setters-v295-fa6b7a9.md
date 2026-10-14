@@ -1,0 +1,12 @@
+# swarm-decompile-transform-setters-v295.txt
+
+Original: [work/movement-integration/swarm-decompile-transform-setters-v295.txt](<../../../../work/movement-integration/swarm-decompile-transform-setters-v295.txt>)
+
+SHA-256: `FDB61FBCB0A411393723FD3FF5A8ADF5E0E2DF86719BB332FB253B78011B3AD5`; 2097 bytes.
+
+## Original saved record
+
+````text
+{"0x14087c320":"\r\nvoid FUN_14087c320(longlong param_1,undefined4 *param_2)\r\n\r\n{\r\n  *(undefined4 *)(param_1 + 0x78) = *param_2;\r\n  *(undefined4 *)(param_1 + 0x7c) = param_2[1];\r\n  *(undefined4 *)(param_1 + 0x80) = param_2[2];\r\n  return;\r\n}\r\n\r\n","0x14087c2c0":"\r\nvoid FUN_14087c2c0(longlong param_1,undefined4 *param_2)\r\n\r\n{\r\n  *(undefined4 *)(param_1 + 0x84) = *param_2;\r\n  *(undefined4 *)(param_1 + 0x88) = param_2[1];\r\n  *(undefined4 *)(param_1 + 0x8c) = param_2[2];\r\n  *(undefined4 *)(param_1 + 0x90) = param_2[3];\r\n  *(undefined4 *)(param_1 + 0x94) = param_2[4];\r\n  *(undefined4 *)(param_1 + 0x98) = param_2[5];\r\n  *(undefined4 *)(param_1 + 0x9c) = param_2[6];\r\n  *(undefined4 *)(param_1 + 0xa0) = param_2[7];\r\n  *(undefined4 *)(param_1 + 0xa4) = param_2[8];\r\n  return;\r\n}\r\n\r\n","0x140751d00":"\r\nvoid FUN_140751d00(longlong param_1,undefined4 *param_2,undefined4 *param_3,char param_4)\r\n\r\n{\r\n  *(undefined4 *)(param_1 + 0x30) = *param_2;\r\n  *(undefined4 *)(param_1 + 0x34) = param_2[1];\r\n  *(undefined4 *)(param_1 + 0x38) = param_2[2];\r\n  *(undefined4 *)(param_1 + 0x3c) = *param_3;\r\n  *(undefined4 *)(param_1 + 0x40) = param_3[1];\r\n  *(undefined4 *)(param_1 + 0x44) = param_3[2];\r\n  *(undefined4 *)(param_1 + 0x48) = param_3[3];\r\n  *(undefined4 *)(param_1 + 0x4c) = param_3[4];\r\n  *(undefined4 *)(param_1 + 0x50) = param_3[5];\r\n  *(undefined4 *)(param_1 + 0x54) = param_3[6];\r\n  *(undefined4 *)(param_1 + 0x58) = param_3[7];\r\n  *(undefined4 *)(param_1 + 0x5c) = param_3[8];\r\n  *(undefined2 *)(param_1 + 0xd4) = 0x101;\r\n  if (param_4 != '\\0') {\r\n    *(undefined4 *)(param_1 + 0x6c) = DAT_1431af668;\r\n    *(undefined4 *)(param_1 + 0x70) = DAT_1431af66c;\r\n    *(undefined4 *)(param_1 + 0x74) = DAT_1431af670;\r\n    *(undefined4 *)(param_1 + 0x78) = DAT_1431af668;\r\n    *(undefined4 *)(param_1 + 0x7c) = DAT_1431af66c;\r\n    *(undefined4 *)(param_1 + 0x80) = DAT_1431af670;\r\n    *(undefined2 *)(param_1 + 0xa0) = 0;\r\n    *(undefined2 *)(param_1 + 0xd4) = 0x101;\r\n  }\r\n  return;\r\n}\r\n\r\n"}
+
+````

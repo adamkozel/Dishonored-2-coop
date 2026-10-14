@@ -1,0 +1,61 @@
+{
+  "asset": "outputs\\d2-coop-lab\\research\\asset-exports\\phantasmal-native-v174\\game1_patch\\generated.decls.midnightscene.midnight.gameplay.player.base.powers.power_phantasmal_cast..midnightscene.decl",
+  "sha256": "B6BBBD6177188BFEB83AE00BB6A47E3717FF9025E86CE69B964BB0CC1C5E02AA",
+  "scenes": [
+    {
+      "name": "Cast_In",
+      "animations": [
+        "ply_leftarm_power_phantasmal_select_in"
+      ],
+      "duration_ms": [
+        266
+      ]
+    },
+    {
+      "name": "Cast_Loop",
+      "animations": [
+        "ply_leftarm_power_phantasmal_select_loop"
+      ],
+      "duration_ms": [
+        1333
+      ]
+    },
+    {
+      "name": "Cast_Select_out",
+      "animations": [
+        "ply_leftarm_power_phantasmal_select_out"
+      ],
+      "duration_ms": [
+        266
+      ]
+    },
+    {
+      "name": "Cast_final_Select",
+      "animations": [
+        "ply_leftarm_power_phantasmal_select"
+      ],
+      "duration_ms": [
+        400
+      ]
+    },
+    {
+      "name": "Cast_Select",
+      "animations": [
+        "ply_leftarm_power_phantasmal_select"
+      ],
+      "duration_ms": [
+        400
+      ]
+    },
+    {
+      "name": "Cast_fire",
+      "animations": [
+        "ply_leftarm_power_phantasmal_fire"
+      ],
+      "duration_ms": [
+        500
+      ]
+    }
+  ],
+  "interpretation": "Cast_Select and Cast_final_Select use identical native left hand animation and400ms; whole-body logical selection variant21 can share authored support acting. Runtime recovery requires separate proof."
+}

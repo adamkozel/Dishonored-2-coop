@@ -1,0 +1,83 @@
+{
+  "at": "2026-10-14T01:57:50.595741+02:00",
+  "candidate": "candidate-npc-combat-v983",
+  "dll": "DA0FCE9F4B7F78A08E92F82461E93AF9B1163D386DB9F27473FAC063A2313A59",
+  "cases": [
+    {
+      "take": "npc-native-perception-v984",
+      "passed": false,
+      "restored": true,
+      "selectedEnemies": [],
+      "retention": {
+        "experimental": true,
+        "installed": true,
+        "enabled": true,
+        "retained": 2237,
+        "forwarded": 7329,
+        "refused": 0,
+        "continuousTransforms": 2237,
+        "teleportTransforms": 7269,
+        "avatarAiHeld": true,
+        "avatarHandle": 209916411
+      },
+      "movement": null,
+      "scope": "Failed harness: strict Array.Contains type comparison produced zero watched handles; one real guard-to-clone hit recorded, but target-selection assertion invalid. Retained as failed; cleanup passed."
+    },
+    {
+      "take": "npc-native-perception-v985",
+      "passed": true,
+      "restored": true,
+      "selectedEnemies": [
+        190318452,
+        190973822
+      ],
+      "retention": {
+        "experimental": true,
+        "installed": true,
+        "enabled": true,
+        "retained": 4050,
+        "forwarded": 13034,
+        "refused": 0,
+        "continuousTransforms": 4050,
+        "teleportTransforms": 12917,
+        "avatarAiHeld": true,
+        "avatarHandle": 209916411
+      },
+      "movement": null,
+      "scope": "Experimental983 native targeting with owned continuous-transform observable retention; no faction override. Both games restored. No enemy damage relay or full lifecycle acceptance."
+    },
+    {
+      "take": "npc-native-perception-v986",
+      "passed": true,
+      "restored": true,
+      "selectedEnemies": [
+        190318452,
+        190973822
+      ],
+      "retention": {
+        "experimental": true,
+        "installed": true,
+        "enabled": true,
+        "retained": 5594,
+        "forwarded": 22679,
+        "refused": 0,
+        "continuousTransforms": 5594,
+        "teleportTransforms": 22500,
+        "avatarAiHeld": true,
+        "avatarHandle": 209916411
+      },
+      "movement": {
+        "selectedAfterMoving": 15,
+        "startMs": 218,
+        "maxDistance": 7,
+        "startPosition": [
+          -42.964142,
+          -122.007835,
+          61.3372
+        ]
+      },
+      "scope": "Experimental983 native targeting with owned continuous-transform observable retention; no faction override. Both games restored. No enemy damage relay or full lifecycle acceptance."
+    }
+  ],
+  "complete": false
+}

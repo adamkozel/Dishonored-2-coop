@@ -1,0 +1,52 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014009B900: movaps      xmm1,xmmword ptr [rcx]
+  000000014009B903: movaps      xmm2,xmmword ptr [rcx+10h]
+  000000014009B907: movaps      xmm3,xmmword ptr [rcx+20h]
+  000000014009B90B: movss       dword ptr [rdx],xmm1
+  000000014009B90F: movaps      xmm0,xmm1
+  000000014009B912: shufps      xmm0,xmm1,55h
+  000000014009B916: shufps      xmm1,xmm1,0AAh
+  000000014009B91A: movss       dword ptr [rdx+4],xmm0
+  000000014009B91F: movss       dword ptr [rdx+8],xmm1
+  000000014009B924: movss       dword ptr [rdx+0Ch],xmm2
+  000000014009B929: movaps      xmm0,xmm2
+  000000014009B92C: shufps      xmm0,xmm2,55h
+  000000014009B930: shufps      xmm2,xmm2,0AAh
+  000000014009B934: movss       dword ptr [rdx+10h],xmm0
+  000000014009B939: movss       dword ptr [rdx+14h],xmm2
+  000000014009B93E: movss       dword ptr [rdx+18h],xmm3
+  000000014009B943: movaps      xmm0,xmm3
+  000000014009B946: shufps      xmm0,xmm3,55h
+  000000014009B94A: shufps      xmm3,xmm3,0AAh
+  000000014009B94E: movss       dword ptr [rdx+20h],xmm3
+  000000014009B953: movss       dword ptr [rdx+1Ch],xmm0
+  000000014009B958: mov         eax,dword ptr [rcx+30h]
+  000000014009B95B: movss       xmm1,dword ptr [rcx+38h]
+  000000014009B960: movss       xmm0,dword ptr [rcx+34h]
+  000000014009B965: mov         dword ptr [r8],eax
+  000000014009B968: movss       dword ptr [r8+4],xmm0
+  000000014009B96E: movss       dword ptr [r8+8],xmm1
+  000000014009B974: ret
+  000000014009B975: int         3
+  000000014009B976: int         3
+  000000014009B977: int         3
+  000000014009B978: int         3
+  000000014009B979: int         3
+  000000014009B97A: int         3
+  000000014009B97B: int         3
+  000000014009B97C: int         3
+  000000014009B97D: int         3
+  000000014009B97E: int         3
+  000000014009B97F: int         3
+  000000014009B980: F3
+
+  Summary
+
+     1A7D000 .text

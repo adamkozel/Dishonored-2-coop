@@ -1,0 +1,35 @@
+{
+  "createdAt": "2026-10-11T17:41:00.8286026+02:00",
+  "sha256": "E42F7EECFDB0643EAD3CDC141ECBA462A3AEE29527BB90143EE914BFEF7E4890",
+  "parentSha256": "D3A7927662EEA77733989FE9457DAB59657390FEFACC14085FED0F56CCDCA708",
+  "runtimeValidated": true,
+  "bankVersion": 34,
+  "scope": "Separate supported pickup endpoint plus one 350ms carry-loop transition; preserves legacy v33 behavior and native victim ownership path. Full pickup remains unaccepted.",
+  "cases": {
+    "native-paired-pickup-corvo-settle-v25": {
+      "video": "native-paired-pickup-corvo-settle-v25/native.mp4",
+      "evidence": "native-paired-pickup-corvo-settle-v25/validation.json",
+      "paired_evidence": "native-paired-pickup-corvo-settle-v25/paired-validation.json",
+      "visual_review": "native-paired-pickup-corvo-settle-v25/visual-review.json",
+      "checks": 34,
+      "bank_sha256": "CA5F15FC627DF5E04493F6E6B393E5FDE3BD60DFE18E40FF53F3B6B3DCA73147",
+      "video_sha256": "36020167E82FBB6E484FBD4EA2504B87378DC6AADB7C5FD0E6DB58E9BF99564E",
+      "role": "corvo",
+      "complete": false,
+      "visual_accepted": false
+    },
+    "native-paired-pickup-emily-settle-v25": {
+      "video": "native-paired-pickup-emily-settle-v25/native.mp4",
+      "evidence": "native-paired-pickup-emily-settle-v25/validation.json",
+      "paired_evidence": "native-paired-pickup-emily-settle-v25/paired-validation.json",
+      "visual_review": "native-paired-pickup-emily-settle-v25/visual-review.json",
+      "checks": 34,
+      "bank_sha256": "E73A7AB744CF6836CE74B600A3E754375BC0C17A4D24B5F3DA94B6E9ED712FF3",
+      "video_sha256": "9FE31159559887D876ECC3021C055A8AB6D5EC4D38162B33FC99332A98D77EF5",
+      "role": "emily",
+      "complete": false,
+      "visual_accepted": false
+    }
+  },
+  "validation_scope": "See each recorded role: new supported endpoint and one-time loaded transition, source-clock ownership and late cleanup. Full movement/carry remains incomplete."
+}

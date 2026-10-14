@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "B8120436A3242BDD30342F11A20638B32872255641EE6E969B163B1B7EE02289",
+  "checks": [
+    "Ordinary guard native interaction target returned; real RT input produces state39 and reciprocal player/guard paired scene",
+    "Native RT300ms in front of exact authored guard2; source placed by read-only orientation, no direct target mutation; visual review remains required.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "distance": 1.15,
+        "yaw": 90,
+        "name": "front-sword",
+        "stance": 0
+      },
+      "key": "host-front-sword",
+      "count": 28,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Ordinary guard sword positive control for396. Native source placed in front of exact authored guard2, RT300ms, reciprocal player/guard paired scene and state39 required. Native target getter must return ordinary NPC. Checkpoint inventory/health and14 protected hashes restored; collision retained. Visual review separate."
+}

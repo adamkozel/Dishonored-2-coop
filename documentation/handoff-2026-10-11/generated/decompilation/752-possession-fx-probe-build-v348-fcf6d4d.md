@@ -1,0 +1,43 @@
+# possession-fx-probe-build-v348.log
+
+Original: [work/movement-integration/candidate-possession-fx-research-v348/possession-fx-probe-build-v348.log](<../../../../work/movement-integration/candidate-possession-fx-research-v348/possession-fx-probe-build-v348.log>)
+
+SHA-256: `875F5D3143860DF5AB9A83D7A096C7EE0FCAEA8C1D47AA38C7D72A8D6202641C`; 2655 bytes.
+
+## Original saved record
+
+````text
+MSBuild version 17.14.60+43b635718 for .NET Framework
+
+  runtime_probe.cpp
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(88,62): warning C4456: declaration of 'stance' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_runtime_probe.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/runtime_probe.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(70,75):
+      see declaration of 'stance'
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(88,71): warning C4456: declaration of 'equipment' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_runtime_probe.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/runtime_probe.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(70,84):
+      see declaration of 'equipment'
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(94,65): warning C4456: declaration of 'mode' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_runtime_probe.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/runtime_probe.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\animation_probe.h(70,68):
+      see declaration of 'mode'
+  
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\native_skeleton.h(165,44): warning C4456: declaration of 'again' hides previous local declaration [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_runtime_probe.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/runtime_probe.cpp')
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\native_skeleton.h(133,24):
+      see declaration of 'again'
+      C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\native_skeleton.h(165,44):
+      the template instantiation context (the oldest one first) is
+          C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\runtime_probe.cpp(154,58):
+          see reference to function template instantiation 'bool readNativeSkeleton<main::<lambda_1>>(Read,uintptr_t,uint32_t,NativeSkeleton &,NativeSkeletonScope)' being compiled
+          with
+          [
+              Read=main::<lambda_1>
+          ]
+  
+  d2_runtime_probe.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_runtime_probe.exe
+
+````

@@ -1,0 +1,37 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014078A300: push        rbx
+  000000014078A302: sub         rsp,20h
+  000000014078A306: mov         rbx,rcx
+  000000014078A309: mov         rcx,qword ptr [rcx+8]
+  000000014078A30D: call        00000001408832B0
+  000000014078A312: test        rax,rax
+  000000014078A315: je          000000014078A342
+  000000014078A317: mov         rcx,rax
+  000000014078A31A: call        00000001408A8BA0
+  000000014078A31F: test        rax,rax
+  000000014078A322: je          000000014078A342
+  000000014078A324: lea         rdx,[00000001439E8640h]
+  000000014078A32B: xor         r8d,r8d
+  000000014078A32E: mov         rcx,rax
+  000000014078A331: call        0000000140877720
+  000000014078A336: lea         rcx,[rbx+50h]
+  000000014078A33A: mov         rdx,rax
+  000000014078A33D: call        00000001403DAB80
+  000000014078A342: mov         rax,qword ptr [rbx+10h]
+  000000014078A346: mov         ecx,dword ptr [rax+0000000000000088h]
+  000000014078A34C: mov         dword ptr [rbx+00000000000009C8h],ecx
+  000000014078A352: add         rsp,20h
+  000000014078A356: pop         rbx
+  000000014078A357: ret
+  000000014078A358: int         3
+
+  Summary
+
+     1A7D000 .text

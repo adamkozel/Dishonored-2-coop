@@ -1,0 +1,72 @@
+# equipment-integration-findings.json
+
+Original: [work/movement-integration/equipment-integration-findings.json](<../../../../work/movement-integration/equipment-integration-findings.json>)
+
+SHA-256: `2A3DF9CD36C170E8F190A223EFCA73B264791004352A4E7D221C2E879B475D02`; 2946 bytes.
+
+## Original saved record
+
+````json
+{
+  "scope": "Equipment and unarmed movement integration; incomplete phase",
+  "confirmed": {
+    "nativeCloneEquipment": "natural-moveset/native-shadow-equipment-v6/result.json",
+    "snapshot": "movement-integration/verified-equipment-3364",
+    "sourceEquipment": "natural-moveset/native-equipment-timing-v3-reader/reader-coverage.json",
+    "nativeAttachments": "natural-moveset/native-shadow-equipment-v6/samples.json",
+    "unarmedReference": "natural-moveset/empty-additive-reference.json",
+    "runtimeTests": [
+      "work\\natural-moveset\\equipment-bank-v3-test\\result.json",
+      "work\\natural-moveset\\equipment-pause-v3\\result.json",
+      "work\\natural-moveset\\equipment-v3-priority\\result.json"
+    ],
+    "currentSnapshot": "work\\movement-integration\\verified-equipment-0E32",
+    "videoIndex": "natural-moveset/runtime-video-manifest.json"
+  },
+  "candidate": {
+    "bank": "natural-moveset/equipment-bank-manifest-v3.json",
+    "protocol": "CoopShadowActionPacket v8 / 168 bytes",
+    "nativeRootMotion": true,
+    "firstPersonUnchanged": true,
+    "damageEvents": false
+  },
+  "failedTrials": [
+    {
+      "path": "natural-moveset/native-shadow-equipment-v1",
+      "reason": "Test helper R collided with Invoke-History alias; no experiment ran"
+    },
+    {
+      "path": "natural-moveset/native-shadow-equipment-v2",
+      "reason": "Mailbox wrapper missing new command allowlist; no mutation ran"
+    },
+    {
+      "path": "natural-moveset/native-shadow-equipment-v3",
+      "reason": "Guard required AIAttack; isolated clone actually omits it"
+    },
+    {
+      "path": "natural-moveset/native-shadow-equipment-v4",
+      "reason": "Strict reader overlaps native queued Stop; restored before observing holster"
+    },
+    {
+      "path": "natural-moveset/native-shadow-equipment-v5",
+      "reason": "Host passed; client read-only attachment snapshot raced animation, fixed bounded retry"
+    },
+    {
+      "path": "natural-moveset/equipment-bank-v1-test",
+      "reason": "Transport-only nativeMutationAllowed guard incorrectly blocked engine-thread equipment dispatch; body animation played but sword remained drawn"
+    }
+  ],
+  "corrections": [
+    "Use inverse native reference-frame quaternion for offline equipment transforms, as independently established by prior renderer-root measurements.",
+    "Contact adaptation includes up to 12.1 degrees of chest reach; anatomical translations preserved.",
+    "v3 crouched draw/holster blends absolute torso posture instead of adding the full crouch bend to an already bent donor; visual whole-body review performed in both native game instances."
+  ],
+  "accepted": false,
+  "complete": false,
+  "pending": [
+    "Fine finger/grip and moving draw/holster visual acceptance",
+    "Death/load and automatic session equipment lifecycle",
+    "Unarmed special-action body runtime candidate v10"
+  ]
+}
+````

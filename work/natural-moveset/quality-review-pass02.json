@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-10T13:05:34.577873+02:00",
+  "complete_moveset": false,
+  "reviewed": [
+    {
+      "motion": "armed sprint v3",
+      "evidence": "sprint-weapon-v3-inspection.jpg",
+      "observations": "Blade stays beside body instead of passing the face in sampled views. Native weapon arm is foot-phase synchronized; no world-space wrist target. User visual acceptance and travelling sprint gameplay binding are pending."
+    },
+    {
+      "motion": "crouched attacks v2",
+      "evidence": "crouch-attack-v2-inspection.jpg",
+      "observations": "Reduced the stacked forward lean seen in v1; pelvis rises through the attack. Normal combat grip currently lacks an authored transition from the reverse-grip crouch stance. Collision clearance and complete recovery remain pending."
+    },
+    {
+      "motion": "crouched turn v2",
+      "evidence": "crouch-turn-v2-inspection.jpg",
+      "observations": "Full-body low turn and stepping visible. 45/90/180 degree left/right candidates require root-yaw/state binding and visual acceptance."
+    },
+    {
+      "motion": "power studies v1",
+      "evidence": [
+        "power-windblast-v1-inspection.jpg",
+        "power-doppelganger-v1-inspection.jpg",
+        "powers-emily-video-1.mp4"
+      ],
+      "observations": "Native caster body action and source hand gestures are present. Pose-only D2 tests cover all ten sequences on both rigs; no power outcome, target or effects were triggered."
+    }
+  ],
+  "failed_evidence": [
+    {
+      "take": "crouch-actions-pose-test-1",
+      "reason": "Fourth hold request refused admission. Exact gating predicate was not logged. Repeat of all twenty cases passed; original failed result retained."
+    }
+  ],
+  "held_item_experiment": {
+    "status": "in_progress",
+    "scope": "Native crossbow geometry/mechanism and first-person hand-local attachment reference. Target wrist follows the full-body pose. Emily high-detail body replacement is being checked; grip not accepted."
+  }
+}

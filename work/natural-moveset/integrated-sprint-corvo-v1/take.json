@@ -1,0 +1,240 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791651012506,
+  "captureStart": 1791651011386,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.122,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint forward",
+      "seconds": 2.626,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Run backward recovery",
+      "seconds": 5.174,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing stop",
+      "seconds": 7.629,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint diagonal left",
+      "seconds": 9.64,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Run back right recovery",
+      "seconds": 12.141,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing stop",
+      "seconds": 14.627,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint diagonal right",
+      "seconds": 16.654,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Run back left recovery",
+      "seconds": 19.146,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand to crouch",
+      "seconds": 21.654,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch forward",
+      "seconds": 23.646,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch backward",
+      "seconds": 25.658,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch to stand",
+      "seconds": 28.16,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native block priority",
+      "seconds": 30.65,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slash priority",
+      "seconds": 32.642,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 34.666,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      650,
+      "LeftThumb",
+      0,
+      "Native sprint forward"
+    ],
+    [
+      4000,
+      0,
+      -24000,
+      900,
+      "Neutral",
+      0,
+      "Run backward recovery"
+    ],
+    [
+      6500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing stop"
+    ],
+    [
+      8500,
+      -16000,
+      28000,
+      650,
+      "LeftThumb",
+      0,
+      "Native sprint diagonal left"
+    ],
+    [
+      11000,
+      15000,
+      -26000,
+      900,
+      "Neutral",
+      0,
+      "Run back right recovery"
+    ],
+    [
+      13500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing stop"
+    ],
+    [
+      15500,
+      16000,
+      28000,
+      650,
+      "LeftThumb",
+      0,
+      "Native sprint diagonal right"
+    ],
+    [
+      18000,
+      -15000,
+      -26000,
+      900,
+      "Neutral",
+      0,
+      "Run back left recovery"
+    ],
+    [
+      20500,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand to crouch"
+    ],
+    [
+      22500,
+      0,
+      18000,
+      900,
+      "Neutral",
+      0,
+      "Crouch forward"
+    ],
+    [
+      24500,
+      0,
+      -18000,
+      900,
+      "Neutral",
+      0,
+      "Crouch backward"
+    ],
+    [
+      27000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch to stand"
+    ],
+    [
+      29500,
+      0,
+      0,
+      800,
+      "RightShoulder",
+      0,
+      "Native block priority"
+    ],
+    [
+      31500,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Native slash priority"
+    ],
+    [
+      33500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing recovery"
+    ]
+  ],
+  "dll": "B2CBD91DE237D6E51BC3C97623F8884C18F4D2EA243616C8F8231088908609F1",
+  "bank": "036889B341006BC6D14302A9622137E177F0895E226C2CB5F070BBC86C62D9F5",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "failure": null,
+  "mode": "source-pause",
+  "automaticResume": true,
+  "interruptionAt": 7.381,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Exact v41 stance/equipment bank active on the native Steam remote avatar",
+    "One exact native failure scene produces one owned live hand effect before interruption",
+    "Interruption stops the owned effect exactly once; observer pause defers native cleanup until resume",
+    "Both pinned banks resume through fresh Steam tokens after native menu resume",
+    "No delayed failure effect restarts after retirement or fresh-token recovery",
+    "Inactive native power fixture restores quantity and selection",
+    "Both inventories, player/avatar health and fourteen protected hashes retained"
+  ],
+  "events": [
+    {
+      "seconds": 1.749,
+      "action": "Native LT press",
+      "index": 0
+    },
+    {
+      "seconds": 3.766,
+      "action": "Native LT press",
+      "index": 1
+    },
+    {
+      "seconds": 6.851,
+      "action": "Native LT press",
+      "index": 2
+    }
+  ],
+  "dll": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+  "bankSha256": "6DE3B2439C63CD6C24B864751FD0AB4E44936EEB74DFECF31CC4DD2FC6DA1CFA",
+  "scope": "Corvo standing armed out-of-mana native hand effect interruption. Exact owned native scene and Steam body clock; cleanup and optional same-world menu recovery only. Death, reload, disconnect and broader contexts remain open."
+}

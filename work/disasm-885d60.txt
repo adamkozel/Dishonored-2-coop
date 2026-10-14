@@ -1,0 +1,94 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140885D60: push        rbp
+  0000000140885D62: push        rsi
+  0000000140885D63: push        rdi
+  0000000140885D64: push        r12
+  0000000140885D66: push        r13
+  0000000140885D68: push        r14
+  0000000140885D6A: push        r15
+  0000000140885D6C: lea         rbp,[rsp+FFFFFFFFFFFFFCA0h]
+  0000000140885D74: sub         rsp,460h
+  0000000140885D7B: mov         qword ptr [rsp+30h],0FFFFFFFFFFFFFFFEh
+  0000000140885D84: mov         qword ptr [rsp+00000000000004A0h],rbx
+  0000000140885D8C: movzx       ecx,byte ptr [rbp+000000000000015Ch]
+  0000000140885D93: bts         ecx,0Fh
+  0000000140885D97: mov         eax,dword ptr [rbp+0000000000000158h]
+  0000000140885D9D: and         eax,0FF000000h
+  0000000140885DA2: or          ecx,3Fh
+  0000000140885DA5: and         eax,0FFFFFFh
+  0000000140885DAA: or          eax,3000000h
+  0000000140885DAF: mov         dword ptr [rbp+0000000000000158h],eax
+  0000000140885DB5: lea         rax,[rbp+0000000000000160h]
+  0000000140885DBC: mov         qword ptr [rbp+0000000000000150h],rax
+  0000000140885DC3: or          ecx,0C0h
+  0000000140885DC9: mov         dword ptr [rbp+000000000000015Ch],ecx
+  0000000140885DCF: movzx       ecx,byte ptr [rsp+4Ch]
+  0000000140885DD4: bts         ecx,0Fh
+  0000000140885DD8: mov         eax,dword ptr [rsp+48h]
+  0000000140885DDC: and         eax,0FF000000h
+  0000000140885DE1: or          ecx,3Fh
+  0000000140885DE4: and         eax,0FFFFFFh
+  0000000140885DE9: or          eax,3000000h
+  0000000140885DEE: mov         dword ptr [rsp+48h],eax
+  0000000140885DF2: lea         rax,[rsp+50h]
+  0000000140885DF7: mov         qword ptr [rsp+40h],rax
+  0000000140885DFC: or          ecx,0C0h
+  0000000140885E02: mov         dword ptr [rsp+4Ch],ecx
+  0000000140885E06: xor         r15d,r15d
+  0000000140885E09: xor         r12d,r12d
+  0000000140885E0C: mov         r14,qword ptr [00000001439A5290h]
+  0000000140885E13: add         r14,601B8h
+  0000000140885E1A: mov         qword ptr [rbp+00000000000003B8h],r14
+  0000000140885E21: mov         dl,1
+  0000000140885E23: mov         rcx,r14
+  0000000140885E26: call        0000000140158290
+  0000000140885E2B: nop
+  0000000140885E2C: mov         dl,1
+  0000000140885E2E: mov         rcx,r14
+  0000000140885E31: call        0000000140158290
+  0000000140885E36: mov         r13d,dword ptr [r14+10h]
+  0000000140885E3A: and         r13d,0FFFFFFh
+  0000000140885E41: mov         rcx,r14
+  0000000140885E44: call        00000001401582E0
+  0000000140885E49: test        r13d,r13d
+  0000000140885E4C: jle         0000000140886030
+  0000000140885E52: xor         edi,edi
+  0000000140885E54: mov         esi,r13d
+  0000000140885E57: nop         word ptr [rax+rax+0000000000000000h]
+  0000000140885E60: mov         dl,1
+  0000000140885E62: mov         rcx,r14
+  0000000140885E65: call        0000000140158290
+  0000000140885E6A: mov         rbx,qword ptr [r14+8]
+  0000000140885E6E: mov         rcx,r14
+  0000000140885E71: call        00000001401582E0
+  0000000140885E76: mov         ecx,dword ptr [rbx+rdi]
+  0000000140885E79: call        00000001406DC560
+  0000000140885E7E: mov         dword ptr [rbp+00000000000003A8h],0FFFFFFFFh
+  0000000140885E88: mov         dword ptr [rbp+00000000000003B0h],0FFFFFFFFh
+  0000000140885E92: lea         r8,[rbp+00000000000003B0h]
+  0000000140885E99: lea         rdx,[rbp+00000000000003A8h]
+  0000000140885EA0: mov         rcx,rax
+  0000000140885EA3: call        0000000140883F30
+  0000000140885EA8: xor         r11d,r11d
+  0000000140885EAB: mov         eax,r11d
+  0000000140885EAE: mov         r8d,dword ptr [rbp+00000000000003A8h]
+  0000000140885EB5: test        r8d,r8d
+  0000000140885EB8: setns       al
+  0000000140885EBB: add         r15d,eax
+  0000000140885EBE: mov         eax,r11d
+  0000000140885EC1: cmp         dword ptr [rbp+00000000000003B0h],eax
+  0000000140885EC7: setge       al
+  0000000140885ECA: add         r12d,eax
+  0000000140885ECD: test        r8d,r8d
+  0000000140885ED0: 0F
+
+  Summary
+
+     1A7D000 .text

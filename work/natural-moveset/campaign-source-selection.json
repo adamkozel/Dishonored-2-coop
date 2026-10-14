@@ -1,0 +1,343 @@
+{
+  "scope": "Additional native actor motions; contact-aware gameplay binding and visual acceptance remain pending",
+  "sources": {
+    "b1fa2fb5425c9995": {
+      "alias": "sword_grenade_in",
+      "family": "ranged_and_items",
+      "purpose": "Native grenade actor motion; held grenade and gameplay-owned release still need contact and timing binding",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "31c95a91db341da8": {
+      "alias": "sword_grenade_launch",
+      "family": "ranged_and_items",
+      "purpose": "Native grenade actor motion; held grenade and gameplay-owned release still need contact and timing binding",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "9b04b6ddabcf5732": {
+      "alias": "sword_grenade_launch_down",
+      "family": "ranged_and_items",
+      "purpose": "Native grenade actor motion; held grenade and gameplay-owned release still need contact and timing binding",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "3b2277b47c1535b0": {
+      "alias": "sword_grenade_jumpaway_toss",
+      "family": "ranged_and_items",
+      "purpose": "Native grenade actor motion; held grenade and gameplay-owned release still need contact and timing binding",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "6b2644c08be25db2": {
+      "alias": "sword_gun_equip",
+      "family": "ranged_and_items",
+      "purpose": "Native pistol equip motion; native pistol attachment is a separate requirement",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "5a2c587bad198952": {
+      "alias": "sword_attack_aerial_interception",
+      "family": "combat",
+      "purpose": "Native interception attacker motion; victim contact and gameplay outcomes remain separate",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "18c4e174ac72200b": {
+      "alias": "sword_attack_ground_interception",
+      "family": "combat",
+      "purpose": "Native interception attacker motion; victim contact and gameplay outcomes remain separate",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "85544d8eb99224e5": {
+      "alias": "empty_distraction_look_keyhole_in",
+      "family": "stance",
+      "purpose": "Stationary native keyhole entry/recovery, requiring door-relative alignment",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "64cd46b52492819f": {
+      "alias": "empty_distraction_look_keyhole_out",
+      "family": "stance",
+      "purpose": "Stationary native keyhole entry/recovery, requiring door-relative alignment",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "0b5b2cb6868b7cbb": {
+      "alias": "empty_distraction_look_keyhole_out",
+      "family": "stance",
+      "purpose": "Stationary native keyhole entry/recovery, requiring door-relative alignment",
+      "targets": [
+        "emily"
+      ]
+    },
+    "0b0f72b0b5c4b098": {
+      "alias": "activity_counter_read_book_in_walkright",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "3e53e1261185c4fc": {
+      "alias": "activity_counter_read_book_in_walkright",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "emily"
+      ]
+    },
+    "46497a20d7605bcc": {
+      "alias": "activity_counter_read_book_loop",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "8ab2dfeb73fc83ab": {
+      "alias": "activity_counter_read_book_loop",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "emily"
+      ]
+    },
+    "c0a66093342ec47f": {
+      "alias": "activity_counter_read_book_out_walk",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "75c49990fa8d1405": {
+      "alias": "activity_counter_read_book_out_walk",
+      "family": "interactions",
+      "purpose": "Native standing reading sequence; book and support surface require contact adaptation",
+      "targets": [
+        "emily"
+      ]
+    },
+    "439b8831477a5fda": {
+      "alias": "activity_sitting_table_read_in",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "e58b1020ce874a15": {
+      "alias": "activity_sitting_table_read_in",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "b5608ea37983c164": {
+      "alias": "activity_sitting_table_read_loop",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "0548af65708bdcb3": {
+      "alias": "activity_sitting_table_read_loop",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "535af9ab8947e320": {
+      "alias": "activity_sitting_table_read_out",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "5d037497951b7df6": {
+      "alias": "activity_sitting_table_read_out",
+      "family": "interactions",
+      "purpose": "Native seated reading sequence; seat and book must be aligned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "5fd9046dfbba9789": {
+      "alias": "gesture_armcrossed_openhand",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "78bca0d51a45db77": {
+      "alias": "gesture_armcrossed_openhand",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "emily"
+      ]
+    },
+    "12463753d468616f": {
+      "alias": "gesture_openhand_think",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "b32c72dc44654225": {
+      "alias": "gesture_openhand_think",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "emily"
+      ]
+    },
+    "580a8afc90d5c20d": {
+      "alias": "posture_talkcenter",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "dfd0695631a2f8ad": {
+      "alias": "posture_talkcenter",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "emily"
+      ]
+    },
+    "cdd07160b30091a5": {
+      "alias": "empty_distraction_clipboard_loop_talk",
+      "family": "interactions",
+      "purpose": "Native full-body dialogue gesture; clipboard prop only for that specific source",
+      "targets": [
+        "corvo",
+        "emily"
+      ]
+    },
+    "324be7ae6c3f3976": {
+      "alias": "empty_distraction_eat_apple_in",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "e78b90b0308343c2": {
+      "alias": "empty_distraction_eat_apple_in",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "5a460123c6b3e835": {
+      "alias": "empty_distraction_eat_apple_loop",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "b9cff2a20d81132b": {
+      "alias": "empty_distraction_eat_apple_loop",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "f4ed7a0468e0887e": {
+      "alias": "empty_distraction_eat_apple_out",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "da8f4a52449e7c8f": {
+      "alias": "empty_distraction_eat_apple_out",
+      "family": "interactions",
+      "purpose": "Native eating sequence; apple contact and consumption event remain network-owned",
+      "targets": [
+        "emily"
+      ]
+    },
+    "ad57f927ff0d213e": {
+      "alias": "activity_drink_standing_in",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "1c207e84d42b5b51": {
+      "alias": "activity_drink_standing_in",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "emily"
+      ]
+    },
+    "896fbacc103d6948": {
+      "alias": "activity_drink_standing_loop_a",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "fef6b700b3d427ca": {
+      "alias": "activity_drink_standing_loop_a",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "emily"
+      ]
+    },
+    "e0953c4d028cf6d8": {
+      "alias": "activity_drink_standing_out",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "corvo"
+      ]
+    },
+    "88833f839a46d8c4": {
+      "alias": "activity_drink_standing_out",
+      "family": "interactions",
+      "purpose": "Native standing drink sequence; hand prop and elixir timing remain separate",
+      "targets": [
+        "emily"
+      ]
+    }
+  },
+  "missing_requested_aliases": []
+}

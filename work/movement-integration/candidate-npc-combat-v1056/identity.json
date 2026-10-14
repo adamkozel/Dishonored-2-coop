@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-14T11:00:38.295668+02:00",
+  "dll": "0352516B0A005701F3FDD0CEB7CFD888A7361C4FE80D89063D5C4578356191CD",
+  "probe": "EE8ADF67AFA32648AD3E670C3DE9D4F695B8CB85571A7CD4FE50C467AF0DC91A",
+  "previous": "candidate-npc-combat-v1042",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Experimental1056 on verified1042: (1) native mantle geometry rise bound 3m->4m so a high mantle out of water (swim depth start, 1054d rise 3.07m) keeps its exact traversal scene; (2) protocol73 action state24 hold: when no binding classifies the native state and default ground locomotion does not apply, the source sends a payload-free hold (same live player in gameplay, stable state list, validated equipment) so the action stream is not starved into permanent native_state_stale retirement; receiver presents nothing authored (bank weight 0, network-owned root). Bank70/369 unchanged. Runtime pending.",
+  "scopedWaterExitVerified": true,
+  "runtimeEvidence": "../water-exit-audit-v1058.json"
+}

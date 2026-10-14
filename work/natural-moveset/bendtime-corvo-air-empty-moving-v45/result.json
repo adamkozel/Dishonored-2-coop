@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "source": "host",
+  "character": "corvo",
+  "airborneExperiment": true,
+  "crouched": false,
+  "holstered": true,
+  "moving": true,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v39 stance/equipment bank ready before the cast",
+    "Two native toggles produce four start/release phases driving the remote body through Steam",
+    "Exact native airborne power scene overlaps remote cast and airborne leg presentation",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Native standing physics stance is retained through jump/fall and landing",
+    "Confirmed network travel continues to advance the gait during native casting",
+    "Native cleanup restores original power quantity and selection",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "All 14 protected original settings/save and isolated checkpoint file hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.958,
+      "action": "Confirmed native A jump, then LT cast 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.425,
+      "action": "Confirmed native A jump, then LT cast 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "8",
+    "4",
+    "3",
+    "7"
+  ],
+  "nativeScenes": [
+    "221",
+    "223",
+    "222",
+    "220"
+  ],
+  "dll": "296BC0E7ACCB700A86D0D4BCCC7E7EAE1926B813D07892627A219511EB2E74F7",
+  "bankSha256": "F72E01750AC8EFA2A4F4B37FAD0BBC14BA3C7C35FCE5AC7652C82E8EA95700E3",
+  "recorded": true,
+  "scope": "Corvo Bend Time airborne cast, landing and equipment integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
+}

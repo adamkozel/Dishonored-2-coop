@@ -1,0 +1,53 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014056E1D0: mov         qword ptr [rsp+8],rbx
+  000000014056E1D5: push        rdi
+  000000014056E1D6: sub         rsp,20h
+  000000014056E1DA: mov         ebx,edx
+  000000014056E1DC: mov         rdi,rcx
+  000000014056E1DF: call        0000000140187520
+  000000014056E1E4: test        bl,1
+  000000014056E1E7: je          000000014056E1F1
+  000000014056E1E9: mov         rcx,rdi
+  000000014056E1EC: call        00000001400F1520
+  000000014056E1F1: mov         rax,rdi
+  000000014056E1F4: mov         rbx,qword ptr [rsp+30h]
+  000000014056E1F9: add         rsp,20h
+  000000014056E1FD: pop         rdi
+  000000014056E1FE: ret
+  000000014056E1FF: int         3
+  000000014056E200: push        rdi
+  000000014056E202: sub         rsp,30h
+  000000014056E206: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014056E20F: mov         qword ptr [rsp+40h],rbx
+  000000014056E214: mov         rdi,rdx
+  000000014056E217: mov         edx,24h
+  000000014056E21C: lea         ecx,[rdx+54h]
+  000000014056E21F: call        00000001400F1450
+  000000014056E224: mov         rbx,rax
+  000000014056E227: mov         qword ptr [rsp+50h],rax
+  000000014056E22C: test        rax,rax
+  000000014056E22F: je          000000014056E256
+  000000014056E231: mov         rcx,rax
+  000000014056E234: call        000000014000CC90
+  000000014056E239: nop
+  000000014056E23A: lea         rax,[0000000141B83308h]
+  000000014056E241: mov         qword ptr [rbx],rax
+  000000014056E244: lea         rcx,[rbx+68h]
+  000000014056E248: call        0000000140131AE0
+  000000014056E24D: mov         dword ptr [rbx+70h],3FFF0010h
+  000000014056E254: jmp         000000014056E258
+  000000014056E256: xor         ebx,ebx
+  000000014056E258: mov         rdx,rdi
+  000000014056E25B: mov         rcx,rbx
+  000000014056E25E: call        000000014005F6A0
+  000000014056E263: mov         rax,rbx
+  000000014056E266: mov         rbx,qword ptr [rsp+40h]
+  000000014056E26B: add         rsp,30h
+  000000014056E26F: pop         rdi
+  000000014056E270: ret

@@ -1,0 +1,157 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791660827669,
+  "captureStart": 1791660826543,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.128,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing jump",
+      "seconds": 2.666,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Held jump",
+      "seconds": 6.136,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch",
+      "seconds": 10.161,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched jump and landing",
+      "seconds": 12.131,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 16.163,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Move into jump",
+      "seconds": 18.149,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Moving jump",
+      "seconds": 18.462,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Landing recovery",
+      "seconds": 22.159,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 24.13,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      0,
+      180,
+      "A",
+      0,
+      "Standing jump"
+    ],
+    [
+      5000,
+      0,
+      0,
+      800,
+      "A",
+      0,
+      "Held jump"
+    ],
+    [
+      9000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch"
+    ],
+    [
+      11000,
+      0,
+      0,
+      180,
+      "A",
+      0,
+      "Crouched jump and landing"
+    ],
+    [
+      15000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Standing recovery"
+    ],
+    [
+      17000,
+      0,
+      18000,
+      500,
+      "Neutral",
+      0,
+      "Move into jump"
+    ],
+    [
+      17300,
+      0,
+      18000,
+      180,
+      "A",
+      0,
+      "Moving jump"
+    ],
+    [
+      21000,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Landing recovery"
+    ],
+    [
+      23000,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "DD5DF932A1C74BFC5E42435AAB9E5700DD3CD59A97FB89785B27575E0E26F054",
+  "bank": "ACCD09DF736B1180548E3550FA3E6760DD129687B84DB1862F6F08A46A1A56FC",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual native weaponless movement over Steam selects authored hands-free full-body variants. Native sword remains holstered throughout; donor motion retains native foot paths and bone lengths. Whole-family visual acceptance remains pending.",
+  "unarmed": true
+}

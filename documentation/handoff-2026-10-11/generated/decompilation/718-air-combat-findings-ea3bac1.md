@@ -1,0 +1,32 @@
+# air-combat-findings.json
+
+Original: [work/movement-integration/air-combat-findings.json](<../../../../work/movement-integration/air-combat-findings.json>)
+
+SHA-256: `22CC63AE26502023F7389EBDA2974D401CB11B4E593F20030E78212575CEEE96`; 898 bytes.
+
+## Original saved record
+
+````json
+{
+  "complete": false,
+  "visual_accepted": false,
+  "dll": "6F257EC8CD838F2381E5BF6F0E2E3C652C32304C74C3DFEB4F9910158797FD38",
+  "bank": "D2MOVE16 / 141 clips",
+  "tests": [
+    "integrated-air-combat-corvo-v2/result.json",
+    "integrated-air-combat-emily-v2/result.json"
+  ],
+  "checks": 14,
+  "confirmed": [
+    "Both native characters perform early/late airborne sword actions and guarding over Steam.",
+    "Landing preserves the current native scene phase.",
+    "Future landed action state no longer cancels the delayed airborne body.",
+    "Native health, first-person controls, sword attachment and protected files remain intact."
+  ],
+  "pending": [
+    "Moving sword gait, broader combat/terrain/variant coverage and final visual acceptance.",
+    "Remaining functional movement requirements."
+  ],
+  "rollback": "work/movement-integration/candidate-air-clock-v2"
+}
+````

@@ -1,0 +1,184 @@
+{
+  "timestamp": "2026-10-08T17:19:05.2038995+02:00",
+  "baselineChanged": [],
+  "baselineFilesChecked": 8,
+  "installedExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "installedDinput8Present": false,
+  "cooperativeGameplayImplemented": false,
+  "sharedCutscenesImplemented": false,
+  "bothBaselinesLoadedWithoutFurtherPhysicalInput": true,
+  "simulatedControllerRoutingAndExpiryPassed": true,
+  "windowClientArea": [
+    944,
+    540
+  ],
+  "observedWindowOrigins": [
+    [
+      7,
+      9
+    ],
+    [
+      967,
+      9
+    ]
+  ],
+  "observedWindowCaptureSize": [
+    946,
+    572
+  ],
+  "backgroundMovementVerified": true,
+  "backgroundScope": "Loaded initial escape scene; inactive host moved approximately 0.38 game units while focused client remained stationary",
+  "startupIntroSkipVerified": false,
+  "deliberateNativePauseAndResumeVerified": true,
+  "deliberatePauseScope": "Inactive host: simulated Start opened existing native pause menu; simulated A on highlighted Resume returned to gameplay",
+  "nativeSteamInterface": "SteamNetworkingSockets012",
+  "steamDllReplaced": false,
+  "nativeSteamMovementTransferPassed": true,
+  "independentCorvoEmilyActorsObserved": true,
+  "persistentRemoteAvatarMovementPassed": true,
+  "renderFollowFailure": "Historical render-only failure fixed by native entity/component transform dispatch. The prior rigid-body skeleton assumption test remains recorded as failed; independent reconstruction using the current animated skeleton now passes.",
+  "nativeSteamDllHashMatchesInstalled": true,
+  "LatestNativePhysicsBodyRegressionPassed": false,
+  "NativeWorldTransitionInvalidationPassed": true,
+  "NativeNewGameEmptySlotCrashFixed": true,
+  "NativeLoggingCaptureEnabled": false,
+  "NativeEmilySelectionCompletedAutonomously": true,
+  "ProtocolVersion": 7,
+  "ProtocolBytes": 176,
+  "NativeImmediatePhysicsTransformPassed": true,
+  "NativePhaseGuardStages": [
+    "Ready",
+    "ClientPause",
+    "ClientResumed",
+    "ClientMenu",
+    "ClientMovie",
+    "ClientChoice",
+    "ClientCinematic"
+  ],
+  "NativeMovieTransportFallbackPassed": true,
+  "NativeCinematicIdentityStages": [
+    "Ready",
+    "Intro",
+    "Choice",
+    "PostChoice",
+    "Completed"
+  ],
+  "NativeCinematicIdentityReplicated": true,
+  "NativeCinematicSkipSynchronizationImplemented": true,
+  "NativeCleanEmilyCheckpointPreserved": true,
+  "LoaderSha256": "46A10BA57DB2561BAB0CA34E50D78792595253B772318CD28C18AE041181D895",
+  "SkipProtocolVersion": 3,
+  "SkipProtocolBytes": 96,
+  "StagedLoaderMatchesBuild": true,
+  "NativeCinematicSkipScope": "Opt-in matching-segment native skip relay over Steam, opening verified. A separate bounded opening rendezvous is implemented; general entry and completion barriers are not.",
+  "NativeSequenceIdentityReplicated": true,
+  "NativeSequenceBoundaryGuardPassed": true,
+  "NativeBoundedCinematicHoldPassed": [
+    "Corvo",
+    "Emily"
+  ],
+  "NativeBoundedCinematicHoldScope": "Two-second local native pause/resume of the player sequence only; audio and other local tracks are unverified.",
+  "EarlierRegressionsScope": "Current 46A10BA5 build: bounded native guard AIDecision hold including actual host loss, Steam movement, both-character walking, avatar pause/resume guards, and NPC observation with client reload passed. Avatar disconnect and NPC observation disconnect evidence remains on 0EC33CB7; cinematic skip/opening rendezvous evidence remains on 23D5911E. These are per-build results, not complete co-op.",
+  "NativeOpeningBarrierPassed": [
+    "Corvo first",
+    "Emily first",
+    "Corvo missing-peer timeout"
+  ],
+  "NativeOpeningBarrierScope": "Exact opening post-choice player sequence only; normal speed; other local tracks, audio and ongoing timeline correction unverified. Per-test records identify builds.",
+  "BarrierProtocolVersion": 1,
+  "BarrierProtocolBytes": 96,
+  "NativePostOpeningProbeSpawnPassed": true,
+  "NativeAnimatedBodyAlignmentPassed": true,
+  "NativeAnimatedBodyAlignmentScope": "Current walking regression independently reconstructs animated skeleton/body poses during idle, both movement directions, stopping, and disabled-adapter motion. Maximum separation is recorded in NativeLocomotion. Historical rigid-body assumption test remains failed. Does not establish hit detection or shared physics authority.",
+  "LatestNativePhysicsBodyRegressionScope": "The false legacy result refers to the earlier rigid-body assumption. See NativeAnimatedBodyAlignmentPassed and NativeLocomotion for current animated-body evidence; hit detection and shared physics authority remain unverified.",
+  "NativeLocomotion": {
+    "Passed": true,
+    "DllSha256": "46A10BA57DB2561BAB0CA34E50D78792595253B772318CD28C18AE041181D895",
+    "Characters": [
+      "Emily",
+      "Corvo"
+    ],
+    "MaxAnimatedBodyError": 0.019949808334941678,
+    "NativeFeetMoveWithAdapter": true,
+    "DisabledAdapterComparisonPassed": true,
+    "PauseAndDisconnectPassed": false,
+    "Record": "locomotion-verification.json",
+    "GuardRecord": "locomotion-guards-verification.json",
+    "FreshOpeningRecord": "locomotion-opening-verification.json",
+    "FullPlayerAnimationReplicated": false,
+    "ContinuousVisualQualityVerified": false,
+    "VisualObservations": "Native Emily and Corvo models and walking poses observed in side-by-side windows. Some native story NPC upper-body gestures remain.",
+    "PausePassed": true,
+    "CurrentBuildDisconnectTested": false,
+    "HistoricalDisconnectPassed": true,
+    "HistoricalDisconnectRecord": "locomotion-guards-before-ai-verification.json"
+  },
+  "NativeWorldNpcObservation": {
+    "Passed": true,
+    "DllSha256": "46A10BA57DB2561BAB0CA34E50D78792595253B772318CD28C18AE041181D895",
+    "ObservationOnly": true,
+    "NpcIdentities": 48,
+    "MatchedPacketComparisons": 336,
+    "MaxPoseDifference": 0.0,
+    "ProtocolVersion": 1,
+    "PacketBytes": 504,
+    "NativePauseAndClientReloadPassed": true,
+    "ActualDisconnectPassed": true,
+    "Record": "world-observation-verification.json",
+    "DisconnectRecord": "world-disconnect-verification.json",
+    "Identity": "Unique authored spawner name plus exact NPC definition, validated by reciprocal native spawner/child handles. Local handles and generated NPC names are excluded from cross-process identity.",
+    "GameplayMutationImplemented": false,
+    "NativeHostCatalogCount": 64,
+    "NativeClientCatalogCount": 64,
+    "CurrentBuildDisconnectTested": false,
+    "DisconnectDllSha256": "0EC33CB7215D2EF72F6685F630246A41C13162021372FD86CC8634BB9776331B"
+  },
+  "ReadyForFinalUserCheck": false,
+  "GameSpeed": "Normal; no speedup implemented or used.",
+  "Outstanding": [
+    "Host-authoritative NPC simulation and reliable entity birth/despawn negotiation",
+    "Shared damage, loot, inventory, doors and quest state",
+    "Remote player combat, powers and complete animation state",
+    "Campaign-wide cutscene entry, timeline and completion synchronization",
+    "Native UI integration for starting and joining a co-op campaign",
+    "Online Steam lobby/invite flow and testing with separate accounts",
+    "Shared death and manual checkpoint reset through native menus, canonical shared save state and both-ready barrier"
+  ],
+  "NativeAiDecisionHold": {
+    "DllSha256": "46A10BA57DB2561BAB0CA34E50D78792595253B772318CD28C18AE041181D895",
+    "Scope": "Two-second reference-counted pause of AIDecision only. Independent native scheduler reads. Does not establish complete AI authority or host NPC pose application.",
+    "Record": "ai-decision-hold-verification.json",
+    "Target": "client ld_spawner_guard_tutorial_1",
+    "Invalidated": 0,
+    "PostLoadControl": "ai-postload-control.json",
+    "Passed": true,
+    "Released": 7,
+    "Acquired": 7,
+    "Checks": [
+      "Host mutation refused",
+      "Only one client decision component removed and restored; duplicate did not renew; host and Steam continued",
+      "Explicit cancellation",
+      "client native pause releases hold and refuses reacquisition",
+      "host native pause releases hold and refuses reacquisition",
+      "Native checkpoint reload releases first and permits fresh identity binding",
+      "Actual host termination releases the client hold and prevents reacquisition"
+    ]
+  },
+  "SharedCheckpointReset": {
+    "PreserveCorvoEmilyRoles": true,
+    "CanonicalSharedCheckpointRequired": true,
+    "BothReadyBeforeResume": true,
+    "ManualRequestFromEitherPlayerReloadsBoth": true,
+    "Required": true,
+    "Implemented": false,
+    "DuplicateRequestsProduceOneReset": true,
+    "EitherPlayerDeathShowsBothNativeDeathScreens": true
+  },
+  "PacketPublication": {
+    "OriginalExpiryPreserved": true,
+    "MaxRetryMs": 150,
+    "Passed": true,
+    "Record": "packet-publication-verification.json"
+  },
+  "TestArea": "Existing Dunwall checkpoint; no custom map or tutorial migration planned."
+}

@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "bankVersion": 30,
+  "bankRevision": 4,
+  "bankSha256": "9030B30E348631CBA1617028D13CEFC93F77650A05203CE9510010A7064B7CBF",
+  "source": "host",
+  "kind": "gun",
+  "cameraView": "front",
+  "stanceTransitions": false,
+  "emptyOnly": false,
+  "airborne": true,
+  "airReload": true,
+  "travelling": false,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam scene stream, v30 body bank and automatic cosmetic weapon attach ready",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Native Jump/Fall and ranged action overlap reach the remote full body; native cosmetic weapon remains attached through Steam ownership",
+    "Native reload continues on the remote body while jumping; landing does not substitute a new equipment action",
+    "Native landing returns the remote body to standing with the held ranged weapon before holstering",
+    "All 5 expected source-owned ranged phases reached the remote body through Steam",
+    "Two source native flashes produce exactly two finite remote muzzle effects; empty triggers and duplicate packet do not add flashes",
+    "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 1.895,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 0
+    },
+    {
+      "seconds": 2.856,
+      "action": "Native A jump during observed Reload59",
+      "index": -1
+    },
+    {
+      "seconds": 5.056,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 1
+    },
+    {
+      "seconds": 7.949,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 2
+    },
+    {
+      "seconds": 10.879,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.742,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.924,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 5
+    }
+  ],
+  "dll": "B38E7E422D9EC6033D8ED5FF77074F485613E4B20AAD6EB8EA66BCE9DABB689F",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Two-round native ranged body/hand attachment integration candidate. Muzzle checks, when explicitly listed, validate source-confirmed finite native effects. Visual acceptance, remote projectile/impact synchronization, audio validation, upgrades and unlisted stance/movement contexts remain unfinished. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

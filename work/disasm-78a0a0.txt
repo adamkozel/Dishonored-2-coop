@@ -1,0 +1,84 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014078A0A0: push        rbx
+  000000014078A0A2: sub         rsp,20h
+  000000014078A0A6: test        byte ptr [rcx+00000000000009C0h],2
+  000000014078A0AD: mov         rbx,rcx
+  000000014078A0B0: jne         000000014078A0D4
+  000000014078A0B2: add         rcx,50h
+  000000014078A0B6: mov         edx,2
+  000000014078A0BB: call        00000001403DA910
+  000000014078A0C0: mov         ecx,dword ptr [rax+0000000000000224h]
+  000000014078A0C6: dec         ecx
+  000000014078A0C8: cmp         ecx,1
+  000000014078A0CB: jbe         000000014078A0DC
+  000000014078A0CD: or          byte ptr [rbx+00000000000009C0h],2
+  000000014078A0D4: mov         al,1
+  000000014078A0D6: add         rsp,20h
+  000000014078A0DA: pop         rbx
+  000000014078A0DB: ret
+  000000014078A0DC: xor         al,al
+  000000014078A0DE: add         rsp,20h
+  000000014078A0E2: pop         rbx
+  000000014078A0E3: ret
+  000000014078A0E4: int         3
+  000000014078A0E5: int         3
+  000000014078A0E6: int         3
+  000000014078A0E7: int         3
+  000000014078A0E8: int         3
+  000000014078A0E9: int         3
+  000000014078A0EA: int         3
+  000000014078A0EB: int         3
+  000000014078A0EC: int         3
+  000000014078A0ED: int         3
+  000000014078A0EE: int         3
+  000000014078A0EF: int         3
+  000000014078A0F0: push        rdi
+  000000014078A0F2: sub         rsp,30h
+  000000014078A0F6: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014078A0FF: mov         qword ptr [rsp+40h],rbx
+  000000014078A104: mov         rbx,rdx
+  000000014078A107: mov         rdi,rcx
+  000000014078A10A: mov         edx,35h
+  000000014078A10F: mov         ecx,9D0h
+  000000014078A114: call        00000001400F1450
+  000000014078A119: mov         qword ptr [rsp+50h],rax
+  000000014078A11E: test        rax,rax
+  000000014078A121: je          000000014078A134
+  000000014078A123: mov         r8,rdi
+  000000014078A126: mov         rdx,rbx
+  000000014078A129: mov         rcx,rax
+  000000014078A12C: call        0000000140789D30
+  000000014078A131: nop
+  000000014078A132: jmp         000000014078A136
+  000000014078A134: xor         eax,eax
+  000000014078A136: mov         rbx,qword ptr [rsp+40h]
+  000000014078A13B: add         rsp,30h
+  000000014078A13F: pop         rdi
+  000000014078A140: ret
+  000000014078A141: int         3
+  000000014078A142: int         3
+  000000014078A143: int         3
+  000000014078A144: int         3
+  000000014078A145: int         3
+  000000014078A146: int         3
+  000000014078A147: int         3
+  000000014078A148: int         3
+  000000014078A149: int         3
+  000000014078A14A: int         3
+  000000014078A14B: int         3
+  000000014078A14C: int         3
+  000000014078A14D: int         3
+  000000014078A14E: int         3
+  000000014078A14F: int         3
+  000000014078A150: 48
+
+  Summary
+
+     1A7D000 .text

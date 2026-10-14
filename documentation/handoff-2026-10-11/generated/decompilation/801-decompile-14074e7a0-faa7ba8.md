@@ -1,0 +1,89 @@
+# decompile-14074e7a0.txt
+
+Original: [work/movement-integration/door-research-v639/decompile-14074e7a0.txt](<../../../../work/movement-integration/door-research-v639/decompile-14074e7a0.txt>)
+
+SHA-256: `D040637070793DF8FC1240D548CD670F3770A24DBD5FC7D42D2A2D39E4B7E8E5`; 2289 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_14074e7a0(longlong param_1)
+
+{
+  float fVar1;
+  char cVar2;
+  longlong lVar3;
+  undefined8 uVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  float fVar9;
+  
+  cVar2 = D2_AnimBasic_IsPlaying(*(undefined8 *)(*(longlong *)(param_1 + 0x18) + 0xf8),0);
+  if (cVar2 != '\0') {
+    if (*(longlong *)(param_1 + 0x20) != 0) {
+      lVar3 = *(longlong *)(*(longlong *)(param_1 + 0x18) + 0x10);
+      fVar8 = *(float *)(lVar3 + 0x310);
+      fVar6 = *(float *)(lVar3 + 0x30c);
+      fVar7 = fVar8 * fVar8 + fVar6 * fVar6 + 0.0;
+      if (fVar7 <= 1.1754944e-38) {
+        fVar7 = 1.1754944e-38;
+      }
+      fVar9 = 1.0 / SQRT(fVar7);
+      lVar3 = FUN_1406dc560(*(undefined4 *)(*(longlong *)(param_1 + 0x18) + 0xdc));
+      fVar7 = *(float *)(lVar3 + 0x30c);
+      fVar1 = *(float *)(lVar3 + 0x310);
+      fVar5 = fVar1 * fVar1 + fVar7 * fVar7 + 0.0;
+      if (fVar5 <= 1.1754944e-38) {
+        fVar5 = 1.1754944e-38;
+      }
+      fVar5 = 1.0 / SQRT(fVar5);
+      fVar8 = fVar1 * fVar5 * fVar8 * fVar9 + fVar7 * fVar5 * fVar6 * fVar9 +
+              fVar5 * 0.0 * fVar9 * 0.0;
+      if (-1.0 <= fVar8) {
+        if (1.0 < fVar8) {
+          fVar8 = 1.0;
+        }
+      }
+      else {
+        fVar8 = -1.0;
+      }
+      fVar8 = ABS(fVar8);
+      FUN_140738890(*(undefined8 *)(param_1 + 0x20),1.0 - fVar8,1);
+      if (-1.0 < fVar8) {
+        if (fVar8 < 1.0) {
+          fVar8 = (float)FUN_1411afeb4(fVar8);
+        }
+        else {
+          fVar8 = 0.0;
+        }
+      }
+      else {
+        fVar8 = 3.1415927;
+      }
+      fVar8 = fVar8 / DAT_14228a750;
+      fVar6 = *(float *)(param_1 + 0x2c) - fVar8;
+      if (fVar6 != 0.0) {
+        *(uint *)(param_1 + 0x28) = (fVar6 <= 0.0) + 1;
+      }
+      *(float *)(param_1 + 0x2c) = fVar8;
+      uVar4 = FUN_1406dc560(*(undefined4 *)(*(longlong *)(param_1 + 0x18) + 0x114));
+      lVar3 = FUN_14074b140(param_1,uVar4);
+      if ((lVar3 != 0) && (*(int *)(lVar3 + 0x10c) == 5)) {
+        FUN_140540d30(*(undefined8 *)(*(longlong *)(param_1 + 0x18) + 0xf8),0,
+                      *(undefined4 *)(lVar3 + 0x118),*(undefined4 *)(lVar3 + 0x11c));
+      }
+      lVar3 = FUN_1407e7110(D2_GameSingletonPtr + 0x1f52b8);
+      *(undefined1 *)(lVar3 + 0x99) = 1;
+    }
+    return;
+  }
+  FUN_14074adf0(param_1);
+  return;
+}
+
+
+
+````

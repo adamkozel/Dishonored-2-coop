@@ -1,0 +1,51 @@
+# windblast-native-findings-v2.json
+
+Original: [work/natural-moveset/windblast-native-findings-v2.json](<../../../../work/natural-moveset/windblast-native-findings-v2.json>)
+
+SHA-256: `D6AFE89261D69DD30AE69ADBDF0CA1C8258030135174E0BA34FFD5085AF96F5A`; 2994 bytes.
+
+## Original saved record
+
+````json
+{
+  "executable_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "body_build": "C3B2A7717B973CBEFF8A27E0AF480C71F6D0CAA5E16FBB2E2F2C9198E6E41E0F",
+  "confirmed": [
+    "Basic Corvo Windblast uses owned 1000ms power_windblast_cast.midnightscene / Cast_Ou_Shockwave with reciprocal native player and left-arm bindings.",
+    "Standing armed remote whole-body cast variant11 travels through native Steam protocol22. Two native casts and two unique remote animation events, recovery, original sword state, health, fixture cleanup and protected files pass8 checks.",
+    "Native FX manager game+1f8430 has an ID hash at eef60. Records use140-byte hexadecimal stride, owner at0, unique ID at4, declaration at8, origin38 and axis44. Pool slots bounded to1024; snapshots reject map mutation and recycled IDs.",
+    "Clean-checkpoint native observation captured2 basic blast FX records. Owners were windblast_object.def entities, each with parent player handle1. Both used wblast_blast_01.fx. Origin and orientation came from the native cast, around eye/hand height, not the remote avatar foot origin.",
+    "Second cast reused the same FX record address with a different ID. Address equality is not effect identity.",
+    "In this office/carpet observation no separate ground-dust or NPC-impact effect appeared. A cast alone does not justify inventing either impact.",
+    "Basic blast FX definition includes screenParticle, fullscreen distortion, sound and rumble. Viewer scoping for a remote-avatar owner still needs direct testing.",
+    "Native crouched and holstered Corvo casts keep the same1000ms Cast_Ou_Shockwave scene with owned left-arm and player bindings.",
+    "Manual ECB2 clone-owned native blast FX visibly distorts the observer screen; it is rejected for network use."
+  ],
+  "evidence": [
+    "native-windblast-corvo-v1/result.json",
+    "windblast-corvo-body-v27-v1/result.json",
+    "native-windblast-effects-v2/result.json",
+    "native-windblast-corvo-crouched-v1/result.json",
+    "native-windblast-corvo-empty-v1/result.json",
+    "native-windblast-fx-corvo-v1/visual-review.json"
+  ],
+  "rejected_evidence": [
+    {
+      "take": "native-windblast-effects-v1",
+      "reason": "No successful native cast after earlier power use. Retained as failed; clean-checkpoint v2 produced2 casts. Mana exhaustion is inferred from native failure gestures, not yet independently measured."
+    }
+  ],
+  "hypotheses": [
+    "Separate world-space native-particle and sound declaration should preserve world presentation without viewer distortion; runtime test pending."
+  ],
+  "remaining": [
+    "Native world-VFX playback and viewer scoping",
+    "Network FX identity/timing/cleanup",
+    "Crouch, movement, holstered, airborne and slide casts",
+    "Upgrades and impact contexts",
+    "Power authority and victim/physics outcomes",
+    "Lifecycle matrix and complete continuous visual review"
+  ],
+  "complete": false
+}
+````

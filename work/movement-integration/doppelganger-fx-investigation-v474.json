@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-12T21:58:30.533496+02:00",
+  "complete": false,
+  "live": "A3CA4348CF0DD721C3BC28A97E56E4AB040A775FC5473967EB3AEBA4A4F63A9B",
+  "probe": "BB182DF6AB560D30981E40756A9C52231B5E9FB7BB1D5C6C9CE2B6E810ABF378",
+  "takes": [
+    {
+      "take": "doppelganger-fx-v463",
+      "passed": false,
+      "failure": "Remote cosmetic effect scene lacks independent native binding",
+      "checks": 15,
+      "dll": "717A8B8A4CA7C1CF00B0798DCC2F3669364E6A28EA18CE20825188F94F60BE22"
+    },
+    {
+      "take": "doppelganger-fx-v465",
+      "passed": false,
+      "failure": "Remote cosmetic effect scene lacks independent native binding",
+      "checks": 15,
+      "dll": "F0194B871A9BF252D606D53B3811D01FDF69E042892F20DE3313F950E83E6031"
+    },
+    {
+      "take": "doppelganger-fx-v469",
+      "passed": true,
+      "failure": null,
+      "checks": 17,
+      "dll": "8029946A1012192519946C8E09B52F70D04EF962C3C3C9DDAC0042A5E259BB15"
+    },
+    {
+      "take": "doppelganger-fx-v470",
+      "passed": false,
+      "failure": "Clone visible pose, interpolation, exact transform or retirement check failed",
+      "checks": 14,
+      "dll": "8029946A1012192519946C8E09B52F70D04EF962C3C3C9DDAC0042A5E259BB15"
+    },
+    {
+      "take": "doppelganger-fx-v473",
+      "passed": false,
+      "failure": "Clone visible pose, interpolation, exact transform or retirement check failed",
+      "checks": 14,
+      "dll": "A3CA4348CF0DD721C3BC28A97E56E4AB040A775FC5473967EB3AEBA4A4F63A9B"
+    }
+  ],
+  "verifiedBaseline": {
+    "at": "2026-10-12T21:58:30.533496+02:00",
+    "passed": true,
+    "dll": "8029946A1012192519946C8E09B52F70D04EF962C3C3C9DDAC0042A5E259BB15",
+    "probe": "BB182DF6AB560D30981E40756A9C52231B5E9FB7BB1D5C6C9CE2B6E810ABF378",
+    "scope": "One standing armed Emily cast in isolated Dunwall: source and peer body/root/FX clocks and helpers, health/inventory and checkpoint/protected14 recovery. Native cosmetic scene force-update option prevents observed LOD pause. Not complete clone gameplay, movement acceptance, reuse or a release approval.",
+    "take": "work/natural-moveset/doppelganger-fx-v469/result.json",
+    "effects": [
+      {
+        "variant": 1,
+        "observations": 29,
+        "minimumClock": 79.0,
+        "maximumClock": 988.0
+      },
+      {
+        "variant": 2,
+        "observations": 14,
+        "minimumClock": 51.0,
+        "maximumClock": 426.0
+      }
+    ],
+    "complete": false
+  },
+  "securityBlock": {
+    "candidate": 466,
+    "test467Ran": false,
+    "detail": "Windows reported virus or potentially unwanted software when reading the diagnostic DLL during deployment. No antivirus settings changed; blocked build was removed from active use and preserved452 restored. First restoration encountered blocked destination hash, so known452 replaced only stopped physical lab DLL before relaunch. No claim of a false positive. Source hardware-watch changes and temporary pause hooks removed before468."
+  },
+  "sameActorReuseVerified": false,
+  "visibilityInvestigation": "470 extra hide/reappear around18.475s, source/receiver fresh in adjacent samples;472 records gate masks at the exact hide instead of inferring cause.",
+  "nativeCollisionRetained": true,
+  "partnerEdgeCasesDeferred": true
+}

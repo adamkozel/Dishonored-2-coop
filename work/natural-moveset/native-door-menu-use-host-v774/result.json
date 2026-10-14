@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "28036591E7CE7B9EA142D53B24CA4354E6C0349AE7D2FCA16E449A2AD27E2EFA",
+  "candidate": "candidate-door-menu-v769",
+  "pauseRole": "host",
+  "source": "client",
+  "moving": false,
+  "useDuringMenu": true,
+  "checks": [
+    "Native pause held over six seconds; original six channels and world epochs retained; no door API calls during held menu; session resumed automatically",
+    "One native source interaction converged to both real open states and matching side with one receiver API call, without manual rearm",
+    "Complete inventories and native player/counterpart health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "scope": "Native pause menu held over six seconds in the same world, idle, receiver opening in flight, or other-player use during menu; retain catalog and complete one door use after resume. Bounded AI isolation for fixture safety, not shared enemy authority."
+}

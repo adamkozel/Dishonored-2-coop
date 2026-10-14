@@ -1,0 +1,74 @@
+{
+  "alias": "stunmine_sequence",
+  "family": "ranged_and_items",
+  "identity": "148d66a82d835db3d938180af10c521429a853ce4e280037e787e83a509a4af1",
+  "video": "items-videos-v2\\stunmine_sequence.mp4",
+  "frames": 105,
+  "fps": 30,
+  "duration": 3.5,
+  "render_seconds": 27.915486097335815,
+  "roles": {
+    "corvo": "stunmine_sequence-corvo",
+    "emily": "stunmine_sequence-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_plus_native_stunmine",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": true,
+  "render_identity": "aa7c7989141bfbaf6b75a5ba7fced0e6390d56ec5c0a62d88ee26492e910036a",
+  "render_inputs": {
+    "data_identity": "188382b128b778a6a0055d3876d0a172d6b8e8ee00754f5e324a2f7f8ad35a78",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      },
+      "corvo-stun_mine-model": {
+        "path": "natural-moveset\\item-models\\stun_mine.json",
+        "sha256": "4e889369b121c2788e7e00b91dfb7ccd78d07c4c4386c401a81869117bb51ed5"
+      },
+      "corvo-stun_mine-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\stun_mine-skeleton.json",
+        "sha256": "271328f2c82ced6d9ace6f7f8e7d4162c1f250e715a5dbee607c73d43f1b0a93"
+      },
+      "emily-stun_mine-model": {
+        "path": "natural-moveset\\item-models\\stun_mine.json",
+        "sha256": "4e889369b121c2788e7e00b91dfb7ccd78d07c4c4386c401a81869117bb51ed5"
+      },
+      "emily-stun_mine-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\stun_mine-skeleton.json",
+        "sha256": "271328f2c82ced6d9ace6f7f8e7d4162c1f250e715a5dbee607c73d43f1b0a93"
+      }
+    },
+    "scripts": {
+      "render_library.py": "ff01d32c5890318f1e7715157a18963c8ff298761fa56ae4fc0ba6b16edec217",
+      "preview_natural_walk.py": "867c593dc5d00efe5b4c6f27d78fb4d0681c824ade3746b9787dc7833671a152",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b9add222e650a178299d5e7400e223ec94ec90ad8b1983ed7c4088c4c7e5a551"
+    }
+  },
+  "provenance_note": "Fingerprint recorded immediately after the completed render, before renderer modification."
+}

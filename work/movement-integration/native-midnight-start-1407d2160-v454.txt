@@ -1,0 +1,111 @@
+
+void FUN_1407d2160(longlong *param_1,int *param_2,int *param_3,int *param_4)
+
+{
+  undefined4 *puVar1;
+  char cVar2;
+  int iVar3;
+  uint uVar4;
+  int iVar5;
+  int local_res8 [2];
+  uint local_res10 [2];
+  undefined4 local_b8;
+  int local_b4;
+  undefined4 local_b0;
+  undefined8 local_a0;
+  undefined4 local_98;
+  undefined4 local_94;
+  undefined8 local_90;
+  undefined4 local_88;
+  undefined4 local_84;
+  undefined4 local_80;
+  undefined8 local_7c;
+  byte local_74;
+  undefined8 local_70;
+  undefined4 local_68;
+  undefined4 local_64;
+  undefined8 local_60;
+  undefined4 local_58;
+  undefined4 local_54;
+  undefined4 local_50;
+  undefined8 local_4c;
+  byte local_44;
+  
+  uVar4 = *(uint *)(param_1 + 0x4f) >> 0x1a;
+  iVar5 = 0;
+  local_res10[1] = 0;
+  local_res10[0] = uVar4;
+  FUN_1407cae40(param_1 + 0x45,local_res10);
+  iVar3 = FUN_140196fe0(*param_1,uVar4 << 0x1a);
+  if (*param_2 <= iVar3) {
+    if ((int)param_1[0x50] == 0) {
+      local_b4 = *param_2;
+      iVar5 = iVar3 + -1;
+    }
+    else {
+      local_b4 = (iVar3 - *param_2) + -1;
+    }
+    puVar1 = (undefined4 *)((longlong)param_1 + 0x15c);
+    local_b8 = 0;
+    local_b0 = 0;
+    *puVar1 = 0;
+    *(int *)(param_1 + 0x2c) = local_b4;
+    local_res8[0] = 0;
+    *(undefined4 *)((longlong)param_1 + 0x164) = 0;
+    *(undefined4 *)(param_1 + 0x2d) = 0;
+    cVar2 = FUN_1407cbc20(param_1,uVar4,local_res8);
+    if (cVar2 == '\0') {
+      if ((*(char *)((longlong)param_1 + 0x2b6) == '\0') || ((local_res8[0] - 2U & 0xfffffffb) != 0)
+         ) {
+        if (param_4 != (int *)0x0) {
+          *param_4 = local_res8[0];
+        }
+        *(undefined4 *)((longlong)param_1 + 0x27c) = 6;
+      }
+    }
+    else {
+      FUN_1407d2650(param_1);
+      FUN_1407cd480(param_1,4);
+      local_44 = local_44 & 0xf8;
+      *(undefined1 *)((longlong)param_1 + 0x2b1) = 0;
+      local_70 = 0xffffffffffffffff;
+      local_68 = 0xffffffff;
+      local_64 = 0;
+      local_60 = 0xffffffffffffffff;
+      local_58 = 0xffffffff;
+      local_54 = 0;
+      local_50 = 0xbf800000;
+      local_4c = 0;
+      local_res10[0] = 0;
+      FUN_1407ce4f0(&local_70,puVar1,(int)param_1[0x50],0,iVar5);
+      FUN_1407ce0f0(param_1,&local_70,0x101,1);
+      FUN_1407d2b80(param_1,puVar1);
+      if (0 < *param_3) {
+        FUN_1407cc2d0(param_1,local_res10);
+        local_74 = local_74 & 0xf8;
+        local_a0 = 0xffffffffffffffff;
+        local_98 = 0xffffffff;
+        local_94 = 0;
+        local_90 = 0xffffffffffffffff;
+        local_88 = 0xffffffff;
+        local_84 = 0;
+        local_80 = 0xbf800000;
+        local_7c = 0;
+        FUN_1407ce4f0(&local_a0,puVar1,(int)param_1[0x50],local_res10[0],iVar5);
+        FUN_1407d3130(param_1,&local_a0);
+      }
+      local_b0 = (undefined4)param_1[0x2b];
+      *(undefined4 *)((longlong)param_1 + 0x27c) = 3;
+      if (param_1[0x52] != 0) {
+        local_b8 = CONCAT31(local_b8._1_3_,0x6d);
+        FUN_140884920(param_1[0x52],&local_a0,&DAT_1439a7660,&local_b8);
+        FUN_140882fc0(&local_a0);
+      }
+    }
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_140166830("%s: StartTime is superior to first scene length.",*(undefined8 *)(*param_1 + 8));
+}
+
+

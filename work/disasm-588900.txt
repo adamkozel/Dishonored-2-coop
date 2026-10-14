@@ -1,0 +1,58 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140588900: push        rbx
+  0000000140588902: sub         rsp,30h
+  0000000140588906: mov         rbx,qword ptr [rcx+10h]
+  000000014058890A: xor         eax,eax
+  000000014058890C: mov         qword ptr [rsp+20h],rax
+  0000000140588911: mov         qword ptr [rsp+28h],rax
+  0000000140588916: lea         rax,[0000000140588AF0h]
+  000000014058891D: mov         qword ptr [rsp+28h],rax
+  0000000140588922: mov         qword ptr [rsp+20h],rcx
+  0000000140588927: call        0000000140810240
+  000000014058892C: lea         r9,[rsp+20h]
+  0000000140588931: mov         r8d,23h
+  0000000140588937: mov         rdx,rbx
+  000000014058893A: mov         rcx,rax
+  000000014058893D: call        0000000140811160
+  0000000140588942: add         rsp,30h
+  0000000140588946: pop         rbx
+  0000000140588947: ret
+  0000000140588948: int         3
+  0000000140588949: int         3
+  000000014058894A: int         3
+  000000014058894B: int         3
+  000000014058894C: int         3
+  000000014058894D: int         3
+  000000014058894E: int         3
+  000000014058894F: int         3
+  0000000140588950: mov         qword ptr [rsp+10h],rbx
+  0000000140588955: mov         qword ptr [rsp+18h],rbp
+  000000014058895A: push        rsi
+  000000014058895B: push        rdi
+  000000014058895C: push        r15
+  000000014058895E: sub         rsp,30h
+  0000000140588962: mov         rax,qword ptr [rcx+28h]
+  0000000140588966: mov         rbp,qword ptr [rcx+10h]
+  000000014058896A: mov         rsi,rcx
+  000000014058896D: test        rax,rax
+  0000000140588970: je          00000001405889CE
+  0000000140588972: mov         rcx,qword ptr [rcx+30h]
+  0000000140588976: cmp         rax,qword ptr [rcx+8]
+  000000014058897A: je          00000001405889CE
+  000000014058897C: call        00000001405D79D0
+  0000000140588981: mov         rdx,qword ptr [rsi+28h]
+  0000000140588985: mov         rcx,qword ptr [rsi+30h]
+  0000000140588989: mov         r9d,1
+  000000014058898F: 4C
+  0000000140588990: 8B
+
+  Summary
+
+     1A7D000 .text

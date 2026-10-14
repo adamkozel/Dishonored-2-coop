@@ -1,0 +1,16 @@
+from pathlib import Path
+P=Path(__file__).resolve().parent
+s=(P/'Test-WindblastBody.ps1').read_text()
+s=s.replace('Windblast','BendTime').replace('windblast','bendtime').replace('WINDBLAST','BENDTIME')
+s=s.replace('body-v27-v1','body-v40-v1').replace('bendtime-banks-v1','bendtime-banks-v40').replace('v27','v38').replace('version-eq27','version-eq38').replace('version-ne27','version-ne38')
+s=s.replace('$nativeScenes=@{};','$nativeScenes=@{};$nativePhases=@{};$remotePhases=@{};')
+s=s.replace("if($native.powerSceneValid-and$native.powerScene.variant-eq11){$nativeScenes[[string]$native.powerScene.handle]=$true}","if($native.powerSceneValid-and$native.powerScene.variant-in@(12,14)){$nativeScenes[[string]$native.powerScene.handle]=$true;$nativePhases[[string]$native.powerScene.variant]=$true}")
+s=s.replace("if($m.powerVariant-eq11-and$m.powerWeight-gt.5){$seen[[string]$m.powerEvent]=$true}","if($m.powerVariant-in@(12,14)-and$m.powerWeight-gt.5){$seen[[string]$m.powerEvent]=$true;$remotePhases[[string]$m.powerVariant]=$true};if($power.powerActive){$activated=$true}elseif($activated){$deactivated=$true}")
+s=s.replace("if($seen.Count-ne2-or$nativeScenes.Count-ne2)","if($seen.Count-ne4-or$nativeScenes.Count-ne4-or$nativePhases.Count-ne2-or$remotePhases.Count-ne2-or!$activated-or!$deactivated)")
+s=s.replace('Expected two independently identified native/remote casts','Expected four independently identified native/remote start/release phases and native active/inactive cycle')
+s=s.replace('Two native cast events drive remote whole-body BendTime animation through Steam','Two native toggles produce four start/release phases driving the remote body through Steam')
+s=s.replace('$after.quantity-or$after.equipped-or$after.started)', '$after.quantity-or$after.equipped-or$after.started-or$after.powerActive)')
+s=s.replace('remote world VFX, impacts, other contexts and broader lifecycle','remote viewer VFX, shared time authority, other contexts and broader lifecycle')
+s=s.replace("if($failure){throw $failure}","if($failure){throw $failure}")
+(P/'Test-BendTimeBody.ps1').write_text(s)
+print('Created paired native Bend Time body test')

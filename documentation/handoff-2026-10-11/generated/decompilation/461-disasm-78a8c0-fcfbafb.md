@@ -1,0 +1,49 @@
+# disasm-78a8c0.txt
+
+Original: [work/disasm-78a8c0.txt](<../../../../work/disasm-78a8c0.txt>)
+
+SHA-256: `F2463F91E47094E32DD0EA473FC40C837C439522E4930CA08020519F3287F68F`; 1546 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014078A8C0: push        rbx
+  000000014078A8C2: sub         rsp,70h
+  000000014078A8C6: cmp         qword ptr [rcx+20h],0
+  000000014078A8CB: mov         rbx,rcx
+  000000014078A8CE: je          000000014078A929
+  000000014078A8D0: lea         r8,[rsp+58h]
+  000000014078A8D5: lea         rdx,[rsp+38h]
+  000000014078A8DA: lea         rcx,[rsp+20h]
+  000000014078A8DF: mov         r9d,1
+  000000014078A8E5: call        0000000140028980
+  000000014078A8EA: lea         rdx,[rbx+78h]
+  000000014078A8EE: lea         rcx,[rbx+0000000000000380h]
+  000000014078A8F5: lea         r8,[rsp+20h]
+  000000014078A8FA: call        0000000140028A90
+  000000014078A8FF: or          byte ptr [rbx+00000000000009C0h],1
+  000000014078A906: cmp         dword ptr [rbx+00000000000009CCh],0
+  000000014078A90D: jne         000000014078A929
+  000000014078A90F: mov         rax,qword ptr [rbx+10h]
+  000000014078A913: mov         ecx,dword ptr [rax+000000000000008Ch]
+  000000014078A919: mov         dword ptr [rbx+00000000000009CCh],1
+  000000014078A923: mov         dword ptr [rbx+00000000000009C4h],ecx
+  000000014078A929: add         rsp,70h
+  000000014078A92D: pop         rbx
+  000000014078A92E: ret
+  000000014078A92F: int         3
+  000000014078A930: 40
+
+  Summary
+
+     1A7D000 .text
+
+````

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "source": "host",
+  "airborneExperiment": true,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Native Jump/Fall overlaps the exact active BendTime scene",
+    "Normal controller casting produced native BendTime scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.903,
+      "action": "Confirmed native A jump then LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.885,
+      "action": "Confirmed native A jump then LT press 250ms",
+      "index": 1
+    }
+  ],
+  "dll": "459C82C0A41C9EA11DDB1C91A4AF673724DFF5ABA3B47793BB262C2CB4A7F1F7",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native airborne BendTime investigation only; no remote body/effect integration claimed. Native time dilation remains source-local in this research take; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

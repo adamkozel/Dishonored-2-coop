@@ -1,0 +1,86 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791665078321,
+  "captureStart": 1791665077200,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Crouched at native desk",
+      "seconds": 1.123,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native crouched mantle",
+      "seconds": 2.655,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native low-stance landing and equipment recovery",
+      "seconds": 5.65,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand after crouched mantle",
+      "seconds": 7.623,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 9.625,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Crouched at native desk"
+    ],
+    [
+      1500,
+      0,
+      22000,
+      1300,
+      "A",
+      0,
+      "Native crouched mantle"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Native low-stance landing and equipment recovery"
+    ],
+    [
+      6500,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand after crouched mantle"
+    ],
+    [
+      8500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "3A8EE80A3C9FFB248AEAC641B98B45E43E999DF7CB3A0F7660BC6C65324BD147",
+  "bank": "E5501E0E1492BC4F03F689E6C11E30E6186D49C60AFD37EB175777E01061CE88",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body bank; see mode and bank version for covered actions. Complete movement integration remains pending."
+}

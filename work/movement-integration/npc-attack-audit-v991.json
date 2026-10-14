@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-14T02:09:08.172565+02:00",
+  "candidate": "candidate-npc-combat-v988",
+  "dll": "C16BA967FD1876E59904BAE11D887036B16604D293068C5B62BC4344F1238481",
+  "cases": [
+    {
+      "take": "npc-native-attack-v989",
+      "passed": true,
+      "restored": true,
+      "scope": "Opt-in988: native bound-enemy sword contact to owned host clone routes through Steam to actual client player, native damage/health/reaction once, clone health40 retained, duplicate rejected. Not all damage types or full lifecycle/combat.",
+      "result": {
+        "actualPlayerBefore": 56,
+        "actualPlayerAfter": 41,
+        "cloneHealth": 40,
+        "duplicateApplied": false
+      }
+    },
+    {
+      "take": "npc-native-death-v990",
+      "passed": true,
+      "restored": true,
+      "scope": "Repeated host-owned enemy sword contacts cause actual client death, both native death screens without harming host, one coordinated checkpoint retry, fresh roles/avatars/NPC arms and explicit attack rearm without prior hits. Not automatic attack-session renewal, all damage types, or full campaign.",
+      "result": {
+        "actualPlayerHealthSequence": [
+          56,
+          41,
+          26,
+          11,
+          0
+        ],
+        "applications": 4,
+        "hostHealth": 56,
+        "loadsEach": 1,
+        "explicitAttackRearm": true,
+        "postLethalContact": "Host emitted event5 during death animation; client already at0 refused a further native application. No extra subtraction. Graceful terminal acknowledgement remains follow-up work."
+      }
+    }
+  ],
+  "complete": false
+}

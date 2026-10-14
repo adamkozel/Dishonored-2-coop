@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-14T16:55:31.421740+02:00",
+  "candidate": "candidate-npc-combat-v1163",
+  "dll": "724D789E83F7B20850394A4102B3242C944BEFD94B0ECCC46C3318DF9BC46D52",
+  "cases": [
+    {
+      "take": "mission-entities-v1162",
+      "passed": true,
+      "scope": "Read-only Edge of the World entity census (11155 entities per role, identical counts): 127 arkTrigger volumes (vtable 0x1c5eae8), 205 area volumes, 371 usables, 472 pickups, 141 NPCs.",
+      "cases": [
+        {
+          "client": 11155,
+          "host": 11155
+        }
+      ]
+    },
+    {
+      "take": "mission-activations-v1164",
+      "passed": true,
+      "scope": "1163 activation observer: zero idEntity::Activate calls during mission load and while the host stood inside three script trigger volumes; a console \"trigger\" on a Dunwall light registered exactly one (observer confirmed working; lab restored).",
+      "cases": [
+        {
+          "clientActivations": 0,
+          "hostActivations": 0,
+          "visits": [
+            {
+              "clientAfter": 0,
+              "trigger": "script_trigger_objectives_a_02",
+              "clientBefore": 0,
+              "hostBefore": 0,
+              "hostAfter": 0,
+              "position": [
+                58.1617,
+                30.1325,
+                31.7465
+              ]
+            },
+            {
+              "clientAfter": 0,
+              "trigger": "script_trigger_objectives_a_aftercheckpoint",
+              "clientBefore": 0,
+              "hostBefore": 0,
+              "hostAfter": 0,
+              "position": [
+                24.9641,
+                34.9944,
+                25.4059
+              ]
+            },
+            {
+              "clientAfter": 0,
+              "trigger": "script_trigger_docks_oh_workers_dreadfulwale",
+              "clientBefore": 0,
+              "hostBefore": 0,
+              "hostAfter": 0,
+              "position": [
+                -43.625,
+                190.866,
+                9.79663
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "native": {
+    "consoleCommands": "no mission-end/next-mission console command (113 commands listed; campaign/map/restartmap only)",
+    "scriptNodes": [
+      "arkKisculeNodeLevelTransition",
+      "arkKisculeNodeActionGameflowMission",
+      "arkKisculeNodeActionGameflowObjective",
+      "arkKisculeNodeTriggerNotification (vtable 0x141c68488)",
+      "arkKisculeNodeActionAutosave (vtable 0x141b7c9e8)"
+    ],
+    "entityActivate": "0x140875290 idEntity::Activate(entity, activator) -> vtable+0x128 when entity+0xd0 & 8; arkTrigger vtable+0x128 is a no-op (0x1400998b0)",
+    "triggerPath": "trigger volumes feed the Kiscule script graph via their touch/physics path (arkHavokUserData::triggerEnterCount_t) and arkKisculeNodeTriggerNotification, not idEntity::Activate"
+  },
+  "findings": [
+    "Confirmed runtime: mission script progression (trigger volumes, objectives, level transition) does not pass through idEntity::Activate; mirroring progression requires the Kiscule trigger-notification/objective level.",
+    "Confirmed static: mission transitions are Kiscule nodes (LevelTransition, GameflowMission); there is no console command for them."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Locate the arkTrigger touch -> Kiscule notification dispatch and the objective-state store; design host-authoritative objective/trigger mirroring.",
+    "Mission end and next-mission load for both peers (stage 6) depend on the same script level."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "source": "host",
+  "character": "corvo",
+  "crouched": true,
+  "holstered": false,
+  "moving": false,
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+    "Two native cast events drive remote whole-body Dark Vision animation through Steam",
+    "Native source vision overlay manager toggles on/off; observer vision and loadout remain untouched",
+    "Both casts recover to original stance with network body ownership retained",
+    "First-person and remote native sword retain the original drawn/holstered state",
+    "Full-body cast retains original native crouch/standing stance throughout",
+    "Native cleanup restores quantity, selection and inactive vision",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "Protected original executable, Steam API and save hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.958,
+      "action": "Native LT press 350ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.314,
+      "action": "Native LT press 350ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "2",
+    "4"
+  ],
+  "nativeScenes": [
+    "219",
+    "220"
+  ],
+  "dll": "D662AA6718B0F42A643CA1B53D310B3B58C45671F248C937CE2E36974E29A2EB",
+  "bankSha256": "B2952CF40CE94B9FB90FF3914492E10D5465DC6C923C9561D8EA1D13BB55EA27",
+  "recorded": true,
+  "scope": "Scoped native Dark Vision on/off casts in the explicitly recorded stance, sword and travel context. Source POV and remote whole-body observer, native private reveal, controls and camera. No remote damage, mana or VFX events. Airborne/other contexts and broader lifecycle remain unverified."
+}

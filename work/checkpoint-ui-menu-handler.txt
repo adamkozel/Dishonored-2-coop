@@ -1,0 +1,137 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  00000001404F3290: test        dl,dl
+  00000001404F3292: je          00000001404F32A2
+  00000001404F3294: mov         rcx,qword ptr [0000000142274420h]
+  00000001404F329B: mov         rax,qword ptr [rcx]
+  00000001404F329E: jmp         qword ptr [rax+40h]
+  00000001404F32A2: mov         rcx,qword ptr [000000014228BAE0h]
+  00000001404F32A9: lea         rdx,[0000000141AE0EF0h]
+  00000001404F32B0: mov         rax,qword ptr [rcx]
+  00000001404F32B3: jmp         qword ptr [rax+48h]
+  00000001404F32B7: int         3
+  00000001404F32B8: int         3
+  00000001404F32B9: int         3
+  00000001404F32BA: int         3
+  00000001404F32BB: int         3
+  00000001404F32BC: int         3
+  00000001404F32BD: int         3
+  00000001404F32BE: int         3
+  00000001404F32BF: int         3
+  00000001404F32C0: mov         qword ptr [rsp+8],rbx
+  00000001404F32C5: push        rdi
+  00000001404F32C6: sub         rsp,20h
+  00000001404F32CA: mov         rbx,rdx
+  00000001404F32CD: mov         rdi,rcx
+  00000001404F32D0: call        00000001404F3840
+  00000001404F32D5: mov         rdx,rbx
+  00000001404F32D8: mov         rcx,rdi
+  00000001404F32DB: call        00000001404F3300
+  00000001404F32E0: mov         rax,qword ptr [rdi]
+  00000001404F32E3: mov         rcx,rdi
+  00000001404F32E6: mov         rbx,qword ptr [rsp+30h]
+  00000001404F32EB: add         rsp,20h
+  00000001404F32EF: pop         rdi
+  00000001404F32F0: jmp         qword ptr [rax+00000000000000A0h]
+  00000001404F32F7: int         3
+  00000001404F32F8: int         3
+  00000001404F32F9: int         3
+  00000001404F32FA: int         3
+  00000001404F32FB: int         3
+  00000001404F32FC: int         3
+  00000001404F32FD: int         3
+  00000001404F32FE: int         3
+  00000001404F32FF: int         3
+  00000001404F3300: push        rbp
+  00000001404F3302: push        rsi
+  00000001404F3303: push        rdi
+  00000001404F3304: push        r12
+  00000001404F3306: push        r13
+  00000001404F3308: push        r14
+  00000001404F330A: push        r15
+  00000001404F330C: sub         rsp,5C0h
+  00000001404F3313: mov         qword ptr [rsp+48h],0FFFFFFFFFFFFFFFEh
+  00000001404F331C: mov         qword ptr [rsp+0000000000000608h],rbx
+  00000001404F3324: mov         rdi,rdx
+  00000001404F3327: mov         rbx,rcx
+  00000001404F332A: add         rcx,0A50h
+  00000001404F3331: call        0000000140395380
+  00000001404F3336: mov         rcx,rbx
+  00000001404F3339: call        0000000140789710
+  00000001404F333E: mov         r12,rax
+  00000001404F3341: mov         qword ptr [rsp+40h],rax
+  00000001404F3346: mov         esi,dword ptr [rax+18h]
+  00000001404F3349: and         esi,0FFFFFFh
+  00000001404F334F: mov         r9d,esi
+  00000001404F3352: lea         r8,[0000000141B6B4F0h]
+  00000001404F3359: mov         rdx,rdi
+  00000001404F335C: lea         rcx,[rsp+50h]
+  00000001404F3361: call        0000000140027F60
+  00000001404F3366: nop
+  00000001404F3367: lea         rdi,[rbx+00000000000000E0h]
+  00000001404F336E: xor         r8d,r8d
+  00000001404F3371: lea         rdx,[rsp+0000000000000318h]
+  00000001404F3379: mov         rcx,rdi
+  00000001404F337C: call        00000001400283F0
+  00000001404F3381: mov         rcx,qword ptr [rbx+8]
+  00000001404F3385: call        00000001408832B0
+  00000001404F338A: lea         rcx,[rax+0000000000312740h]
+  00000001404F3391: call        0000000140515B60
+  00000001404F3396: mov         byte ptr [rsp+0000000000000600h],al
+  00000001404F339D: xor         ebp,ebp
+  00000001404F339F: movsxd      r15,esi
+  00000001404F33A2: test        esi,esi
+  00000001404F33A4: jle         00000001404F3604
+  00000001404F33AA: xor         r14d,r14d
+  00000001404F33AD: nop         dword ptr [rax]
+  00000001404F33B0: mov         rsi,qword ptr [r12+10h]
+  00000001404F33B5: add         rsi,r14
+  00000001404F33B8: lea         rcx,[rsi+00000000000000A0h]
+  00000001404F33BF: call        00000001401D9090
+  00000001404F33C4: mov         rdx,rax
+  00000001404F33C7: lea         r8,[rbx+00000000000003D0h]
+  00000001404F33CE: mov         rcx,rdi
+  00000001404F33D1: call        000000014002A720
+  00000001404F33D6: lea         rdx,[rsi+0000000000000098h]
+  00000001404F33DD: lea         r8,[rbx+00000000000003E0h]
+  00000001404F33E4: mov         rcx,rdi
+  00000001404F33E7: call        000000014002A120
+  00000001404F33EC: mov         eax,dword ptr [rsi+000000000000016Ch]
+  00000001404F33F2: mov         dword ptr [rsp+0000000000000610h],eax
+  00000001404F33F9: lea         r8,[rbx+00000000000003F0h]
+  00000001404F3400: lea         rdx,[rsp+0000000000000610h]
+  00000001404F3408: mov         rcx,rdi
+  00000001404F340B: call        000000014002A120
+  00000001404F3410: lea         rcx,[rsi+70h]
+  00000001404F3414: call        00000001401D9090
+  00000001404F3419: mov         rdx,rax
+  00000001404F341C: lea         r8,[rbx+0000000000000400h]
+  00000001404F3423: mov         rcx,rdi
+  00000001404F3426: call        000000014002A720
+  00000001404F342B: lea         rcx,[rsi+30h]
+  00000001404F342F: call        00000001401D9090
+  00000001404F3434: mov         rdx,rax
+  00000001404F3437: lea         r8,[rbx+0000000000000410h]
+  00000001404F343E: mov         rcx,rdi
+  00000001404F3441: call        000000014002A720
+  00000001404F3446: mov         eax,dword ptr [rsi+4]
+  00000001404F3449: mov         dword ptr [rsp+0000000000000610h],eax
+  00000001404F3450: lea         r8,[rbx+0000000000000420h]
+  00000001404F3457: lea         rdx,[rsp+0000000000000610h]
+  00000001404F345F: mov         rcx,rdi
+  00000001404F3462: call        000000014002A120
+  00000001404F3467: lea         r8,[rbx+0000000000000430h]
+  00000001404F346E: mov         rdx,rsi
+  00000001404F3471: mov         rcx,rdi
+  00000001404F3474: call        000000014002A120
+  00000001404F3479: lea         rcx,[rsi+0000000000000140h]
+  00000001404F3480: call        00000001401D9090
+  00000001404F3485: mov         rdx,rax
+  00000001404F3488: lea         r8,[rbx+0000000000000450h]
+  00000001404F348F: 48
+  00000001404F3490: 8B

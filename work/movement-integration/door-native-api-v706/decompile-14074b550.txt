@@ -1,0 +1,32 @@
+
+void FUN_14074b550(longlong param_1,undefined8 param_2)
+
+{
+  byte *pbVar1;
+  longlong lVar2;
+  longlong lVar3;
+  longlong lVar4;
+  
+  lVar2 = FUN_140810210(param_2);
+  lVar4 = 0;
+  lVar3 = FUN_1403da910(param_1 + 0xe8,0);
+  if (lVar3 != 0) {
+    lVar4 = *(longlong *)(lVar3 + 0x10);
+  }
+  if ((lVar2 == *(longlong *)(param_1 + 0x10)) || (lVar2 == lVar4)) {
+    FUN_14074b600(param_1,param_2);
+  }
+  else {
+    FUN_14074b390(param_1,param_2);
+  }
+  pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);
+  *pbVar1 = *pbVar1 | 4;
+  lVar4 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xdc));
+  if (lVar4 != 0) {
+    lVar4 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xdc));
+    *(byte *)(lVar4 + 0xd4) = *(byte *)(lVar4 + 0xd4) | 4;
+  }
+  return;
+}
+
+

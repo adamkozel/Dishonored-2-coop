@@ -1,0 +1,785 @@
+# loot-declaration-client.json
+
+Original: [work/natural-moveset/native-pickup-research-v785/loot-declaration-client.json](<../../../../work/natural-moveset/native-pickup-research-v785/loot-declaration-client.json>)
+
+SHA-256: `DA98909ABA1EDCEADE7E4310F9533E4A5470B5C6988CC79B5289F784F1F6BF8D`; 15721 bytes.
+
+## Original saved record
+
+````json
+{
+  "pointer": "0x238e1461fd0",
+  "type": ".?AVarkDeclCpntLoot@@",
+  "words": [
+    {
+      "offset": "0x0",
+      "word": "0x7ff7c73a5a78",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x8",
+      "word": "0x2385c2e0098",
+      "pointerType": "",
+      "pointerText": "components/equipment/loot_pickable.cpntloot"
+    },
+    {
+      "offset": "0x10",
+      "word": "0x7ff7c916e0d0",
+      "pointerType": ".?AV?$arkDeclComponentInfo@VarkDeclCpntLoot@@@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x18",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x20",
+      "word": "0x200000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x28",
+      "word": "0x133b40c57",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x30",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x38",
+      "word": "0x36326a8100000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x40",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x48",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x50",
+      "word": "0xe1561d0000100001",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x58",
+      "word": "0x400000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x60",
+      "word": "0x80000001f",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x68",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x70",
+      "word": "0x3f41000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x78",
+      "word": "0x238646c31e8",
+      "pointerType": "",
+      "pointerText": "belt"
+    },
+    {
+      "offset": "0x80",
+      "word": "0x238646c31f8",
+      "pointerType": "",
+      "pointerText": "belt02"
+    },
+    {
+      "offset": "0x88",
+      "word": "0xe1563970",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x90",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x98",
+      "word": "0x800264001a66fdd9",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xa0",
+      "word": "0xe1561d500010003f",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xa8",
+      "word": "0x8c0080001066fdd8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xb0",
+      "word": "0xe15669280010004b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xb8",
+      "word": "0x90",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xc0",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xc8",
+      "word": "0x65642f01",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xd0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xd8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xe0",
+      "word": "0x2f73746e00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xe8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xf0",
+      "word": "0x23849427860",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0xf8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x100",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x108",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x110",
+      "word": "0x70736201",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x118",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x120",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x128",
+      "word": "0x5f67756800000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x130",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x138",
+      "word": "0x23849423870",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x140",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x148",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x150",
+      "word": "0x238cf67e1566928",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x158",
+      "word": "0x2e3",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x160",
+      "word": "0x238e14623f0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x168",
+      "word": "0x8c0081001072fdcc",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x170",
+      "word": "0xe15668e80010004b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x178",
+      "word": "0x90",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x180",
+      "word": "0x238646c48b0",
+      "pointerType": "",
+      "pointerText": "sound"
+    },
+    {
+      "offset": "0x188",
+      "word": "0x65642f01",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x190",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x198",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1a0",
+      "word": "0x2f73746e00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1a8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1b0",
+      "word": "0x238494275a0",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1b8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1c0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1c8",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1d0",
+      "word": "0x632f7201",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1d8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1e0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1e8",
+      "word": "0x635f736600000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1f0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x1f8",
+      "word": "0x23849424b00",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x200",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x208",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x210",
+      "word": "0xe15668e8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x218",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x220",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x228",
+      "word": "0x8c008200107efdc0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x230",
+      "word": "0xe1566ba80010004b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x238",
+      "word": "0x90",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x240",
+      "word": "0x238646c48b0",
+      "pointerType": "",
+      "pointerText": "sound"
+    },
+    {
+      "offset": "0x248",
+      "word": "0x65204301",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x250",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x258",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x260",
+      "word": "0x65204e4f00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x268",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x270",
+      "word": "0x23849423c90",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x278",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x280",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x288",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x290",
+      "word": "0x54415401",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x298",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2a0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2a8",
+      "word": "0x4c43495400000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2b0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2b8",
+      "word": "0x238494246e0",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2c0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2c8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2d0",
+      "word": "0xe1561f80e1566ba8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2d8",
+      "word": "0x18",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2e0",
+      "word": "0x2386c3871de8aff",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2e8",
+      "word": "0x8c008300104afdf4",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2f0",
+      "word": "0xe1566b680010004b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x2f8",
+      "word": "0x90",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x300",
+      "word": "0x7ff7c7202848",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x308",
+      "word": "0x65642f01",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x310",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x318",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x320",
+      "word": "0x2f73746e00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x328",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x330",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x338",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x340",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x348",
+      "word": "0x238646c48b0",
+      "pointerType": "",
+      "pointerText": "sound"
+    },
+    {
+      "offset": "0x350",
+      "word": "0x632f7201",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x358",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x360",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x368",
+      "word": "0x662f726500000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x370",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x378",
+      "word": "0x238494291d0",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x380",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x388",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x390",
+      "word": "0x238e1566b68",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x398",
+      "word": "0xe1561e60",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3a0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3a8",
+      "word": "0x8c0084001056fde8",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3b0",
+      "word": "0xe1566a280010004b",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3b8",
+      "word": "0x90",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3c0",
+      "word": "0x238646c48b0",
+      "pointerType": "",
+      "pointerText": "sound"
+    },
+    {
+      "offset": "0x3c8",
+      "word": "0x65642f01",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3d0",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3d8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3e0",
+      "word": "0x2f73746e00000000",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3e8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3f0",
+      "word": "0x2384942a5c0",
+      "pointerType": ".?AVarkDeclSoundEvent@@",
+      "pointerText": ""
+    },
+    {
+      "offset": "0x3f8",
+      "word": "0x0",
+      "pointerType": "",
+      "pointerText": ""
+    }
+  ]
+}
+
+````

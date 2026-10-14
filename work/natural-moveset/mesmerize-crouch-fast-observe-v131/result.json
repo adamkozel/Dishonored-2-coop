@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native controller B establishes crouched source context before any cast",
+    "All three native crouched cast phases retain one reciprocal arm binding and observed Sneaking/UsePower state context",
+    "Read-only native Midnight scenes, arm/equipment data and player state samples retained for crouch provenance analysis; remote integration not claimed",
+    "Native cast spends source mana without resource writes",
+    "Exact native world body effect exists after source cast; presentation/AI ownership still under investigation",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.084,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "C179CFD8258A13000484A051D0EAFB4F6D1B8C6FDACD1F02E5CBAE3BCA6284E2",
+  "probe": "C4AF30EFB7C950310D048668E5A6A318910C23B04606B7E6E69D1DA6F079542F",
+  "scope": "Native crouched source Mesmerize acquisition and controller cast observation. Existing strict power reader deliberately remains standing-only; raw Midnight/player state evidence must be reviewed before enabling crouch transport. No remote body, VFX, AI or gameplay outcome replication. Mandatory isolated checkpoint reload retires world effects; original assets and saves unchanged."
+}

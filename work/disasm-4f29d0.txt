@@ -1,0 +1,71 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001404F29D0: mov         qword ptr [rsp+10h],rbx
+  00000001404F29D5: mov         qword ptr [rsp+18h],rbp
+  00000001404F29DA: mov         qword ptr [rsp+20h],rsi
+  00000001404F29DF: push        rdi
+  00000001404F29E0: sub         rsp,20h
+  00000001404F29E4: mov         rbp,rdx
+  00000001404F29E7: mov         rsi,rcx
+  00000001404F29EA: call        00000001404F3F00
+  00000001404F29EF: lea         r8,[000000014078F0D0h]
+  00000001404F29F6: lea         rdx,[0000000141B6AC60h]
+  00000001404F29FD: mov         r9,rsi
+  00000001404F2A00: mov         rcx,rbp
+  00000001404F2A03: call        000000014002CD20
+  00000001404F2A08: xor         ebx,ebx
+  00000001404F2A0A: lea         rdi,[rsi+0000000000000090h]
+  00000001404F2A11: mov         ecx,dword ptr [rdi+8]
+  00000001404F2A14: mov         r8d,ebx
+  00000001404F2A17: mov         edx,ebx
+  00000001404F2A19: and         ecx,0FFFFFFh
+  00000001404F2A1F: mov         r9d,eax
+  00000001404F2A22: mov         dword ptr [rsp+30h],eax
+  00000001404F2A26: dec         ecx
+  00000001404F2A28: movsxd      r10,ecx
+  00000001404F2A2B: js          00000001404F2A4B
+  00000001404F2A2D: mov         rax,qword ptr [rdi]
+  00000001404F2A30: cmp         dword ptr [rax],r9d
+  00000001404F2A33: je          00000001404F2A46
+  00000001404F2A35: inc         rdx
+  00000001404F2A38: inc         r8d
+  00000001404F2A3B: add         rax,4
+  00000001404F2A3F: cmp         rdx,r10
+  00000001404F2A42: jle         00000001404F2A30
+  00000001404F2A44: jmp         00000001404F2A4B
+  00000001404F2A46: test        r8d,r8d
+  00000001404F2A49: jns         00000001404F2A58
+  00000001404F2A4B: lea         rdx,[rsp+30h]
+  00000001404F2A50: mov         rcx,rdi
+  00000001404F2A53: call        000000014001D6B0
+  00000001404F2A58: lea         r8,[00000001404F2970h]
+  00000001404F2A5F: lea         rdx,[0000000141B6AC70h]
+  00000001404F2A66: mov         r9,rsi
+  00000001404F2A69: mov         rcx,rbp
+  00000001404F2A6C: call        000000014002CD20
+  00000001404F2A71: mov         ecx,dword ptr [rdi+8]
+  00000001404F2A74: mov         r8d,ebx
+  00000001404F2A77: and         ecx,0FFFFFFh
+  00000001404F2A7D: mov         dword ptr [rsp+30h],eax
+  00000001404F2A81: mov         rdx,rbx
+  00000001404F2A84: dec         ecx
+  00000001404F2A86: movsxd      r9,ecx
+  00000001404F2A89: js          00000001404F2AAA
+  00000001404F2A8B: mov         rcx,qword ptr [rdi]
+  00000001404F2A8E: nop
+  00000001404F2A90: cmp         dword ptr [rcx],eax
+  00000001404F2A92: je          00000001404F2AA5
+  00000001404F2A94: inc         rdx
+  00000001404F2A97: inc         r8d
+  00000001404F2A9A: add         rcx,4
+  00000001404F2A9E: cmp         rdx,r9
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,42 @@
+from pathlib import Path
+import shutil
+R=Path(__file__).resolve().parents[2]; S=R/'outputs/d2-coop-lab/src'; W=R/'work/movement-integration'
+B=W/'heart-pre-v562'; B.mkdir(exist_ok=False)
+for name in ('engine_bridge.cpp','runtime_probe.cpp','grenade_fixture.h'):
+    shutil.copy2(S/name,B/name)
+shutil.copy2(R/'outputs/d2-coop-lab/Send-D2Command.ps1',B/'Send-D2Command.ps1')
+g=(S/'native_player_grenade.h').read_text()
+g=g.replace('NativePlayerGrenade','NativePlayerHeart').replace('readNativePlayerGrenade','readNativePlayerHeart')
+g=g.replace('// B671F824 regular grenade: TYPE_AMMO with a live weapon component, unlike\n// scalar bullet/bolt entries. Read-only identities verified in both roles.', '// B671F824 native Heart. Exact component, declaration, entity and slot\n// identities observed in both roles in native-gadgets-research-v561.')
+g=g.replace(',lowThrowCandidate=false','')
+g=g.replace('components/equipment/gadgets/regular_grenade.inventoryitem','models/items/heart/heart.inventoryitem')
+g=g.replace('type!=4','type!=2').replace('p.maximum!=4','p.maximum!=1')
+g=g.replace('0x1b9d8b8','0x1b99c68').replace('0x1b9d778','0x1b99b28')
+g=g.replace('components/characters/player/base/weapons/regular_grenade.cpntweaponthrowable','components/characters/player/base/items/heart.cpntheart')
+g=g.replace(';unsigned char low=0','')
+g=g.replace('||\n       !read(p.component+0x17c,&low,1)||low>1','')
+g=g.replace('p.lowThrowCandidate=low!=0;','')
+g=g.replace('||a.lowThrowCandidate!=b.lowThrowCandidate','')
+(S/'native_player_heart.h').write_text(g)
+f=(S/'grenade_fixture.h').read_text().replace('grenade','heart').replace('Grenade','Heart')
+f=f.replace('movementHeartFixtureBusy(){return heartFixture.until!=0||movementPotionFixtureBusy();}', 'movementHeartFixtureBusy(){return heartFixture.until!=0;}')
+f=f.replace('if(f.until||movementPotionFixtureBusy()', 'if(f.until||movementGrenadeFixtureBusy()||movementPotionFixtureBusy()')
+f=f.replace('12000','20000').replace('tick+18000','tick+26000')
+(S/'heart_fixture.h').write_text(f)
+p=S/'grenade_fixture.h';g=p.read_text().replace('bool movementGrenadeFixtureBusy(){','bool movementHeartFixtureBusy();\nbool movementGrenadeFixtureBusy(){').replace('return grenadeFixture.until!=0||movementPotionFixtureBusy();','return grenadeFixture.until!=0||movementPotionFixtureBusy()||movementHeartFixtureBusy();');p.write_text(g)
+p=S/'engine_bridge.cpp';s=p.read_text();s=s.replace('#include "grenade_fixture.h"','#include "grenade_fixture.h"\n#include "heart_fixture.h"')
+line='    if(!std::strcmp(text,"coop_grenade_fixture 12000")||!std::strcmp(text,"coop_grenade_fixture off"))return true;'
+assert line in s;s=s.replace(line,line+'\n    if(!std::strcmp(text,"coop_heart_fixture 20000")||!std::strcmp(text,"coop_heart_fixture off"))return true;')
+line='    if(!std::strcmp(request.command,"coop_grenade_fixture off")){grenadeFixtureRequest=2;return;}'
+assert line in s;s=s.replace(line,line+'\n    if(!std::strcmp(request.command,"coop_heart_fixture 20000")){heartFixtureRequest=1;return;}\n    if(!std::strcmp(request.command,"coop_heart_fixture off")){heartFixtureRequest=2;return;}')
+s=s.replace('writeGrenadeFixture(tick);','writeGrenadeFixture(tick);writeHeartFixture(tick);').replace('serviceGrenadeFixture(tick);','serviceGrenadeFixture(tick);serviceHeartFixture(tick);');p.write_text(s)
+p=S/'runtime_probe.cpp';s=p.read_text().replace('#include "native_player_grenade.h"','#include "native_player_grenade.h"\n#include "native_player_heart.h"')
+start=s.index('    if(argc==3&&!std::strcmp(argv[2],"--player-grenade"))')
+end=s.index('    if(argc==3&&!std::strcmp(argv[2],"--player-inventory"))',start)
+t=s[start:end].replace('Grenade','Heart').replace('grenade','heart')
+# The standalone Heart has no grenade pitch classifier.
+t=t.replace('<<",\\\"lowThrowCandidate\\\":"<<(p.lowThrowCandidate?"true":"false")','')
+s=s[:end]+t+s[end:];p.write_text(s)
+p=R/'outputs/d2-coop-lab/Send-D2Command.ps1';s=p.read_text().replace('|coop_grenade_fixture|','|coop_grenade_fixture|coop_heart_fixture|');p.write_text(s)
+b=(W/'Build-UnboundPresentation-v558.ps1').read_text().replace('v558','v562').replace('Build558','Build562');(W/'Build-Heart-v562.ps1').write_text(b)
+print('Prepared native Heart reader and bounded isolated acquisition fixture; production binding pending observation.')

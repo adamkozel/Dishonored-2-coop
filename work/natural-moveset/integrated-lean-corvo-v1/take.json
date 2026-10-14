@@ -1,0 +1,240 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791651613108,
+  "captureStart": 1791651611989,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.122,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native standing lean left",
+      "seconds": 2.656,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Movement exits left lean",
+      "seconds": 5.643,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Return forward",
+      "seconds": 7.136,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native standing lean right",
+      "seconds": 9.141,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Movement exits right lean",
+      "seconds": 12.157,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Return forward",
+      "seconds": 13.635,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand to crouch",
+      "seconds": 15.638,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native crouched lean left",
+      "seconds": 18.145,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Movement exits crouched left lean",
+      "seconds": 21.155,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch forward",
+      "seconds": 22.662,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native crouched lean right",
+      "seconds": 24.635,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Movement exits crouched right lean",
+      "seconds": 27.659,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch forward",
+      "seconds": 29.126,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch to stand",
+      "seconds": 31.136,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 34.636,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      -32767,
+      0,
+      650,
+      "Y",
+      0,
+      "Native standing lean left"
+    ],
+    [
+      4500,
+      0,
+      -22000,
+      350,
+      "Neutral",
+      0,
+      "Movement exits left lean"
+    ],
+    [
+      6000,
+      0,
+      22000,
+      350,
+      "Neutral",
+      0,
+      "Return forward"
+    ],
+    [
+      8000,
+      32767,
+      0,
+      650,
+      "Y",
+      0,
+      "Native standing lean right"
+    ],
+    [
+      11000,
+      0,
+      -22000,
+      350,
+      "Neutral",
+      0,
+      "Movement exits right lean"
+    ],
+    [
+      12500,
+      0,
+      22000,
+      350,
+      "Neutral",
+      0,
+      "Return forward"
+    ],
+    [
+      14500,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand to crouch"
+    ],
+    [
+      17000,
+      -32767,
+      0,
+      650,
+      "Y",
+      0,
+      "Native crouched lean left"
+    ],
+    [
+      20000,
+      0,
+      -22000,
+      350,
+      "Neutral",
+      0,
+      "Movement exits crouched left lean"
+    ],
+    [
+      21500,
+      0,
+      22000,
+      350,
+      "Neutral",
+      0,
+      "Crouch forward"
+    ],
+    [
+      23500,
+      32767,
+      0,
+      650,
+      "Y",
+      0,
+      "Native crouched lean right"
+    ],
+    [
+      26500,
+      0,
+      -22000,
+      350,
+      "Neutral",
+      0,
+      "Movement exits crouched right lean"
+    ],
+    [
+      28000,
+      0,
+      22000,
+      350,
+      "Neutral",
+      0,
+      "Crouch forward"
+    ],
+    [
+      30000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch to stand"
+    ],
+    [
+      33500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing recovery"
+    ]
+  ],
+  "dll": "6C4FEEC151EFA5527352522864791281A83C4D5B4323AEB0E4EBD1FEB2F8CEC7",
+  "bank": "AD45A693D3F4D81AB587ECC05A429889F96FC4D3B7AB0599D4B9AEF44FB3D45A",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body standing/crouched bank. Native attack, block and airborne presentation take priority. Effects, other actions and complete moveset integration remain pending."
+}

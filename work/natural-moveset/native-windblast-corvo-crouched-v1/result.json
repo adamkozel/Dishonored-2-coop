@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "source": "host",
+  "crouched": true,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo Windblast equipment acquired and selected",
+    "Normal controller casting produced native Windblast scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.917,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.761,
+      "action": "Native LT press 250ms",
+      "index": 1
+    }
+  ],
+  "dll": "ECB28BA26345C482740B2470B2190315E9E71CE81BC3D6EA514500A4C3C63212",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native Windblast investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

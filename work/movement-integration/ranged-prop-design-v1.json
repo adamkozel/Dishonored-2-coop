@@ -1,0 +1,33 @@
+{
+  "complete": false,
+  "resources": [
+    {
+      "Name": "models/weapons/d2coop/ranged_prop_corvo_gun.def",
+      "File": "assets/ranged_prop_corvo_gun.def"
+    },
+    {
+      "Name": "models/weapons/d2coop/ranged_prop_corvo_crossbow.def",
+      "File": "assets/ranged_prop_corvo_crossbow.def"
+    },
+    {
+      "Name": "models/weapons/d2coop/ranged_prop_emily_gun.def",
+      "File": "assets/ranged_prop_emily_gun.def"
+    },
+    {
+      "Name": "models/weapons/d2coop/ranged_prop_emily_crossbow.def",
+      "File": "assets/ranged_prop_emily_crossbow.def"
+    }
+  ],
+  "purpose": "Native visual-only gun/crossbow meshes attached through native entity/reference-frame API. No inventory, weapon, projectile, pickup, collision, attention-source, health or damage component.",
+  "attachment": {
+    "native_api": "140875e80 -> 140752900",
+    "query": "140879930",
+    "draw_tag": "left_hand_wpn",
+    "source": "Native cpntEquipment start 14061aed0 and elite gun declaration"
+  },
+  "limitations": [
+    "Uninstalled/unverified until bounded runtime test.",
+    "Mesh mechanism animation, hand grip offsets and streamed gameplay binding remain to be implemented.",
+    "Generic cpntEquipment base was not used: no shipped standalone declaration found and base vtable contains abstract slots."
+  ]
+}

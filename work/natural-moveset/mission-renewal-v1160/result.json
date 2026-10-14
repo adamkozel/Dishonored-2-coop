@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "cycles": [
+        {
+          "checks": {
+            "host": {
+              "epochChanged": true,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 1,
+              "aborted": 0,
+              "spawnDistance": 0.835847885921841,
+              "completed": 1,
+              "rearms": 1
+            },
+            "client": {
+              "epochChanged": true,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 2,
+              "aborted": 0,
+              "spawnDistance": 0.8123233742789765,
+              "completed": 1,
+              "rearms": 1
+            }
+          },
+          "dying": "host"
+        },
+        {
+          "checks": {
+            "host": {
+              "epochChanged": true,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 1,
+              "aborted": 0,
+              "spawnDistance": 0.835847885921841,
+              "completed": 1,
+              "rearms": 1
+            },
+            "client": {
+              "epochChanged": true,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 2,
+              "aborted": 0,
+              "spawnDistance": 0.8123233742789765,
+              "completed": 1,
+              "rearms": 1
+            }
+          },
+          "dying": "client"
+        }
+      ],
+      "armDigest": "e02f298c586429533769209879e73a13201a0560f21c8e3988dfbd17a2c600ea"
+    }
+  ],
+  "failure": null,
+  "passed": true,
+  "scope": "All world-authority systems and the partner avatar renew once across each shared mission restart (both roles dying); Dunwall fixture restored."
+}

@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-13T14:34:29.991379+02:00",
+  "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+  "probe": "1ECB428D77B93915EA0417F3531E9103BB8E24DEC2336E874A809BA827810B22",
+  "previous": "candidate-checkpoint-retry-v742",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Native ordinary door convergence now checks actual Open side. Wrong-side Open closes using the actual native side and reopens using the latest host order, suppressing intermediate correction as local input. No transform or native state-field copying. Same protocol69/bank67/357 and checkpoint retry742. Runtime pending.",
+  "runtimeAudit": "../native-door-side-audit-v762.json",
+  "runtimeScope": "756/757 both corrected player roles,760 opposite correction direction,758/759 ordinary busy-use regression. Explicit isolated catalog; visible native close/reopen and collision effects retained."
+}

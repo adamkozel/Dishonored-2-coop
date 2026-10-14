@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T19:33:36.358100+02:00",
+  "dll": "6EB4CBBAE240609167BFDCA0A95DE3DE35DED7FAE6B7577D7C1707C6F300895C",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203e",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1203f on 1203e: (1) per-message-type send tally (coopSendMessage wrapper on all 48 bridge send sites, .send-tally.json); (2) product-only door/usable channel hellos every 2 s once the peer is bound with a 6 s readiness window (145 EotW usables at 4 Hz x 504 B was ~292 KB/s reliable per direction); (3) product-only source pose timeline rebase after >500 ms of sustained late samples (the strict 250 ms late window froze the partner on its last pose under congestion: 1204f warp hold). Lab mapping/hellos unchanged. Runtime pending.",
+  "scopedLifecycleRecoveryVerified": true,
+  "lifecycleEvidence": "../lifecycle-audit-v1202.json",
+  "result": "1199d pass: partner presentation live 1.7 s after a native map load and 2.9 s after a shared restart on both peers; host queue max 138 ms; usable/door hello reduction and pose-timeline rebase active (send tally: usable sync was the reliable flooder, peak 360 KB/s while binding)."
+}

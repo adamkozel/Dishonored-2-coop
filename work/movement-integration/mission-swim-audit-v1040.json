@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-14T10:03:09.370937+02:00",
+  "live": {
+    "candidate": "candidate-npc-combat-v1039",
+    "dll": "A5BD34794D97AED913BE6CD6B25355E14C1F380160F07D9D22EAF848FE173EAD",
+    "protocol": 71,
+    "bank": "swim-banks-v1037 (69/365)"
+  },
+  "cases": [
+    {
+      "take": "corvo-defense-presentation-v1030",
+      "passed": true,
+      "scope": "Candidate1026 both-role parity: host Corvo native block impact / timed parry against host-native enemies presented on the client remote Corvo body (bank68 clips357/358) through Steam protocol70; client observer camera films remote Corvo.",
+      "candidate": "candidate-npc-combat-v1037",
+      "result": {
+        "native": {
+          "relayed": [
+            0,
+            0,
+            0
+          ],
+          "block": 4,
+          "parryLose": 2,
+          "parryWin": 0
+        },
+        "shown": {
+          "wrongClip": 0,
+          "parry": 11,
+          "impact": 13,
+          "all": 193
+        }
+      }
+    },
+    {
+      "take": "mission-eotw-v1034",
+      "passed": true,
+      "scope": "Passed: Native developer command campaign campaign/edge_of_the_world/eotw.mapinfo low corvo loads Edge of the World in the isolated host; ~70 s intro (logic5) then gameplay at the harbor dock; census 11164 entities incl. 3 arkClimbable chains, 371 usables, 27 doors. Dunwall fixture restored.",
+      "candidate": "candidate-npc-combat-v1033",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "native-swim-v1035",
+      "passed": true,
+      "scope": "Passed: Native swimming observed: alternate mode, sole active state0 arkPlayerStateSwimming (1c7dc68), stance7; forward/dive/surface/back inputs stay inside the same state. First-person video inspected.",
+      "candidate": "candidate-npc-combat-v1033",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "mission-coop-eotw-v1036",
+      "passed": true,
+      "scope": "Passed: Co-op bring-up on Edge of the World: both roles load the mission natively, transport fresh, partner Doppelgangers spawned, client remote Corvo follows host within 0.4 mm while walking; client video shows native remote Corvo on the Karnaca dock.",
+      "candidate": "candidate-npc-combat-v1033",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038",
+      "passed": false,
+      "scope": "Failed run: Candidate1037: no remote swim presentation; mask 29/31 showed the action stream never started on the mission map.",
+      "candidate": "candidate-npc-combat-v1037",
+      "result": {
+        "failure": "Remote Corvo body did not present native swimming on the client"
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038b",
+      "passed": false,
+      "scope": "Failed run: Candidate1037 diagnostic: shadow stream refused on both roles (unavailable_or_busy) - armProbePairReady was restricted to the Dunwall tower map.",
+      "candidate": "candidate-npc-combat-v1037",
+      "result": {
+        "failure": "Remote Corvo body did not present native swimming on the client"
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038c",
+      "passed": true,
+      "scope": "Candidate1039: host native swimming (state22, protocol71) presented on the client remote Corvo body with bank69: 189/204 samples swimWeight>0.5, stroke 78, dive 18, surface 18. Visual review: client camera placements did not frame the mostly submerged swimmer.",
+      "candidate": "candidate-npc-combat-v1039",
+      "result": {
+        "swim": {
+          "swimming": 189,
+          "moving": 78,
+          "sinking": 18,
+          "rising": 18,
+          "maxSwimSamples": 524.0,
+          "samples": 204
+        }
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038d",
+      "passed": true,
+      "scope": "Candidate1039: host native swimming (state22, protocol71) presented on the client remote Corvo body with bank69: 188/203 samples swimWeight>0.5, stroke 79, dive 17, surface 18. Visual review: client camera placements did not frame the mostly submerged swimmer.",
+      "candidate": "candidate-npc-combat-v1039",
+      "result": {
+        "swim": {
+          "moving": 79,
+          "rising": 18,
+          "sinking": 17,
+          "swimming": 188,
+          "maxSwimSamples": 529.0,
+          "samples": 203
+        }
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038e",
+      "passed": true,
+      "scope": "Candidate1039: host native swimming (state22, protocol71) presented on the client remote Corvo body with bank69: 186/199 samples swimWeight>0.5, stroke 78, dive 19, surface 17. Visual review: client camera placements did not frame the mostly submerged swimmer.",
+      "candidate": "candidate-npc-combat-v1039",
+      "result": {
+        "swim": {
+          "sinking": 19,
+          "moving": 78,
+          "maxSwimSamples": 476.0,
+          "rising": 17,
+          "swimming": 186,
+          "samples": 199
+        }
+      }
+    },
+    {
+      "take": "swim-coop-eotw-v1038f",
+      "passed": true,
+      "scope": "Candidate1039: host native swimming (state22, protocol71) presented on the client remote Corvo body with bank69: 187/202 samples swimWeight>0.5, stroke 77, dive 21, surface 17. Visual review: client camera placements did not frame the mostly submerged swimmer.",
+      "candidate": "candidate-npc-combat-v1039",
+      "result": {
+        "swim": {
+          "sinking": 21,
+          "moving": 77,
+          "maxSwimSamples": 475.0,
+          "samples": 202,
+          "rising": 17,
+          "swimming": 187
+        }
+      }
+    }
+  ],
+  "complete": false,
+  "remainingDunwallOnlyGameplayGates": [
+    "coin_sync.h",
+    "usable_sync.h",
+    "checkpoint_sync.h (shared checkpoint/death: Dunwall SLOT82 only)",
+    "doppelganger_visual.h",
+    "ranged_prop.h",
+    "grenade_prop.h",
+    "heart_prop.h",
+    "trap_prop.h",
+    "native_power_fx.h",
+    "domino_link_presentation.h / domino_mark_presentation.h / possession_fx_stream.h / swarm_rat_visual_fixture.h (also tied to observer-isolation movement fixture)",
+    "guard_link.h / damage_protocol.h (legacy guard experiments)"
+  ],
+  "outstanding": [
+    "Visual acceptance of remote swimming (needs a standing observer vantage over water).",
+    "Swim mantle/water exit, underwater-only acting and Emily-as-swimmer runs.",
+    "Other mission maps, ladders/chains (3 arkClimbable chains in Edge of the World), windows.",
+    "Lift remaining Dunwall-only gameplay gates for map-agnostic play."
+  ]
+}

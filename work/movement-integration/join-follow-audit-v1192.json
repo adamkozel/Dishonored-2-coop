@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-14T18:21:53.515088+02:00",
+  "candidate": "candidate-npc-combat-v1188",
+  "dll": "8E72491F3B5CB364A9A4EE7265DB6BD93A552F525C532E68104CF7C982D27285",
+  "cases": [
+    {
+      "take": "mission-join-follow-v1189",
+      "passed": false,
+      "scope": "Functional pass (client loaded Edge of the World once on the host's published mission, same map on both peers) but flagged \"Recording failed\": ffmpeg returned non-zero across the native map load. Both recordings are intact (~150 s); the client video shows Dunwall, the Edge of the World loading screen, then Emily at the docks. Lab restored.",
+      "failure": "Recording failed",
+      "videos": [
+        "../natural-moveset/mission-join-follow-v1189/follow-host.mp4",
+        "../natural-moveset/mission-join-follow-v1189/follow-client.mp4"
+      ]
+    },
+    {
+      "take": "mission-join-follow-v1191",
+      "passed": true,
+      "scope": "Pass: host published campaign/edge_of_the_world/eotw.mapinfo (sent 15); the client on Dunwall loaded it natively once (campaign ... low emily, loads 1, received 14, refused 0) and reached same_mission. Harness now accepts recordings >=140 s regardless of the ffmpeg exit code. Lab restored.",
+      "failure": null,
+      "videos": [
+        "../natural-moveset/mission-join-follow-v1191/follow-host.mp4",
+        "../natural-moveset/mission-join-follow-v1191/follow-client.mp4"
+      ]
+    }
+  ],
+  "productBoot": {
+    "take": "../release/product-boot-v1187",
+    "passed": false,
+    "failure": "Steam interfaces not ready in product mode",
+    "product": {
+      "productMode": true,
+      "autoArm": false,
+      "result": "waiting_partner",
+      "step": 0,
+      "worlds": 0,
+      "dispatched": 0,
+      "last": "",
+      "hostKeys": 0,
+      "leaveKeys": 0,
+      "role": 0,
+      "partnerAssets": true,
+      "dataDir": "set"
+    },
+    "dataRemoved": true,
+    "closed": true,
+    "finding": "Confirmed runtime: a standalone process from the lab game copy, with no lab environment and a temporary d2coop/d2coop.cfg, activated product mode by itself (status in d2coop, partner assets detected, controller waiting_partner) and was cleaned up afterwards. Failed only on Steam readiness: Steam interfaces were acquired lazily on host/join, so the GameLobbyJoinRequested callback was not registered at boot (an in-game Steam Join/accepted invite would be missed), and the lab loopback listener still opened in product mode. Fixed in the next candidate."
+  },
+  "findings": [
+    "Confirmed runtime (lab): join-follow - a joiner on a different map loads the host's mission natively with the game's own campaign command and converges on the same map.",
+    "Product-mode activation works outside the lab environment; Steam acquisition at boot and loopback suppression are required (next candidate)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Rerun the product-mode boot with the Steam-at-boot fix.",
+    "Two-account online validation (user).",
+    "In-game UI; longer soak; stage 6 mission transition."
+  ]
+}

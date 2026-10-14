@@ -1,0 +1,61 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  000000014084DC30: lea         edx,[rcx+0Fh]
+  000000014084DC33: call        00000001407DF490
+  000000014084DC38: lea         rax,[0000000141C7F8D8h]
+  000000014084DC3F: mov         qword ptr [rbx],rax
+  000000014084DC42: mov         rax,rbx
+  000000014084DC45: add         rsp,20h
+  000000014084DC49: pop         rbx
+  000000014084DC4A: ret
+  000000014084DC4B: int         3
+  000000014084DC4C: int         3
+  000000014084DC4D: int         3
+  000000014084DC4E: int         3
+  000000014084DC4F: int         3
+  000000014084DC50: push        rbx
+  000000014084DC52: sub         rsp,20h
+  000000014084DC56: mov         rbx,rcx
+  000000014084DC59: call        00000001400998B0
+  000000014084DC5E: xor         eax,eax
+  000000014084DC60: cmp         qword ptr [rbx+0000000000000138h],rax
+  000000014084DC67: setne       al
+  000000014084DC6A: add         rsp,20h
+  000000014084DC6E: pop         rbx
+  000000014084DC6F: ret
+  000000014084DC70: mov         qword ptr [rsp+10h],rsi
+  000000014084DC75: push        rdi
+  000000014084DC76: sub         rsp,20h
+  000000014084DC7A: mov         rdi,rdx
+  000000014084DC7D: mov         rsi,rcx
+  000000014084DC80: call        00000001407E0010
+  000000014084DC85: test        al,al
+  000000014084DC87: je          000000014084DCD5
+  000000014084DC89: mov         rcx,rdi
+  000000014084DC8C: mov         qword ptr [rsp+30h],rbx
+  000000014084DC91: call        00000001400998B0
+  000000014084DC96: mov         rbx,qword ptr [rsi+10h]
+  000000014084DC9A: mov         rdi,qword ptr [rdi+00000000000000D0h]
+  000000014084DCA1: mov         rcx,rbx
+  000000014084DCA4: call        00000001400998B0
+  000000014084DCA9: mov         rbx,qword ptr [rbx+0000000000000138h]
+  000000014084DCB0: mov         rdx,rdi
+  000000014084DCB3: mov         rcx,rbx
+  000000014084DCB6: call        0000000140757CE0
+  000000014084DCBB: test        al,al
+  000000014084DCBD: je          000000014084DCD0
+  000000014084DCBF: test        dword ptr [rbx+28h],0FFFFFFh
+  000000014084DCC6: jne         000000014084DCD0
+  000000014084DCC8: mov         rcx,rsi
+  000000014084DCCB: call        00000001407E0D60
+  000000014084DCD0: mov         rbx,qword ptr [rsp+30h]
+  000000014084DCD5: mov         rsi,qword ptr [rsp+38h]
+  000000014084DCDA: add         rsp,20h
+  000000014084DCDE: pop         rdi
+  000000014084DCDF: ret
+  000000014084DCE0: 48

@@ -1,0 +1,153 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407D71F0: push        rbp
+  00000001407D71F2: push        rsi
+  00000001407D71F3: push        rdi
+  00000001407D71F4: push        r14
+  00000001407D71F6: push        r15
+  00000001407D71F8: sub         rsp,40h
+  00000001407D71FC: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001407D7205: mov         qword ptr [rsp+78h],rbx
+  00000001407D720A: mov         ebx,r8d
+  00000001407D720D: mov         r14,rcx
+  00000001407D7210: mov         qword ptr [rsp+28h],rcx
+  00000001407D7215: xor         edi,edi
+  00000001407D7217: mov         dword ptr [rsp+30h],edi
+  00000001407D721B: lea         r8,[rsp+28h]
+  00000001407D7220: call        00000001407D5860
+  00000001407D7225: mov         rsi,rax
+  00000001407D7228: mov         qword ptr [rsp+70h],rax
+  00000001407D722D: test        rax,rax
+  00000001407D7230: je          00000001407D7378
+  00000001407D7236: cmp         dword ptr [rax+000000000000027Ch],0Ah
+  00000001407D723D: je          00000001407D7378
+  00000001407D7243: mov         edx,ebx
+  00000001407D7245: mov         rcx,rax
+  00000001407D7248: call        00000001407CFA40
+  00000001407D724D: movzx       ebp,al
+  00000001407D7250: lea         rbx,[r14+0000000000001B08h]
+  00000001407D7257: mov         qword ptr [rsp+0000000000000088h],rbx
+  00000001407D725F: xor         edx,edx
+  00000001407D7261: lea         r8d,[rdi+1]
+  00000001407D7265: mov         rcx,rbx
+  00000001407D7268: call        00000001401581C0
+  00000001407D726D: cmp         eax,1
+  00000001407D7270: jne         00000001407D7295
+  00000001407D7272: nop         word ptr [rax+rax+0000000000000000h]
+  00000001407D7280: pause
+  00000001407D7282: xor         edx,edx
+  00000001407D7284: lea         r8d,[rdx+1]
+  00000001407D7288: mov         rcx,rbx
+  00000001407D728B: call        00000001401581C0
+  00000001407D7290: cmp         eax,1
+  00000001407D7293: je          00000001407D7280
+  00000001407D7295: mov         rcx,rdi
+  00000001407D7298: test        bpl,bpl
+  00000001407D729B: je          00000001407D733C
+  00000001407D72A1: mov         eax,dword ptr [r14+0000000000000618h]
+  00000001407D72A8: and         eax,0FFFFFFh
+  00000001407D72AD: dec         eax
+  00000001407D72AF: mov         edx,edi
+  00000001407D72B1: movsxd      r8,eax
+  00000001407D72B4: js          00000001407D72E1
+  00000001407D72B6: mov         rax,qword ptr [r14+0000000000000610h]
+  00000001407D72BD: nop         dword ptr [rax]
+  00000001407D72C0: cmp         qword ptr [rax],rsi
+  00000001407D72C3: je          00000001407D72D5
+  00000001407D72C5: inc         edx
+  00000001407D72C7: inc         rcx
+  00000001407D72CA: add         rax,8
+  00000001407D72CE: cmp         rcx,r8
+  00000001407D72D1: jle         00000001407D72C0
+  00000001407D72D3: jmp         00000001407D72E1
+  00000001407D72D5: test        edx,edx
+  00000001407D72D7: js          00000001407D72E1
+  00000001407D72D9: mov         bpl,1
+  00000001407D72DC: jmp         00000001407D736C
+  00000001407D72E1: mov         rdx,rsi
+  00000001407D72E4: mov         rcx,r14
+  00000001407D72E7: call        00000001407D8160
+  00000001407D72EC: movzx       ebp,al
+  00000001407D72EF: mov         eax,dword ptr [r14+0000000000000618h]
+  00000001407D72F6: and         eax,0FFFFFFh
+  00000001407D72FB: dec         eax
+  00000001407D72FD: mov         rcx,rdi
+  00000001407D7300: movsxd      rdx,eax
+  00000001407D7303: js          00000001407D7329
+  00000001407D7305: mov         rax,qword ptr [r14+0000000000000610h]
+  00000001407D730C: nop         dword ptr [rax]
+  00000001407D7310: cmp         qword ptr [rax],rsi
+  00000001407D7313: je          00000001407D7325
+  00000001407D7315: inc         edi
+  00000001407D7317: inc         rcx
+  00000001407D731A: add         rax,8
+  00000001407D731E: cmp         rcx,rdx
+  00000001407D7321: jle         00000001407D7310
+  00000001407D7323: jmp         00000001407D7329
+  00000001407D7325: test        edi,edi
+  00000001407D7327: jns         00000001407D736C
+  00000001407D7329: lea         rdx,[rsp+70h]
+  00000001407D732E: lea         rcx,[r14+0000000000000610h]
+  00000001407D7335: call        00000001408918F0
+  00000001407D733A: jmp         00000001407D736C
+  00000001407D733C: mov         eax,dword ptr [r14+8]
+  00000001407D7340: and         eax,0FFFFFFh
+  00000001407D7345: dec         eax
+  00000001407D7347: movsxd      rdx,eax
+  00000001407D734A: js          00000001407D7363
+  00000001407D734C: mov         rax,qword ptr [r14]
+  00000001407D734F: nop
+  00000001407D7350: cmp         qword ptr [rax],rsi
+  00000001407D7353: je          00000001407D7366
+  00000001407D7355: inc         edi
+  00000001407D7357: inc         rcx
+  00000001407D735A: add         rax,8
+  00000001407D735E: cmp         rcx,rdx
+  00000001407D7361: jle         00000001407D7350
+  00000001407D7363: or          edi,0FFFFFFFFh
+  00000001407D7366: test        edi,edi
+  00000001407D7368: setns       bpl
+  00000001407D736C: xor         edx,edx
+  00000001407D736E: mov         rcx,rbx
+  00000001407D7371: call        00000001401581E0
+  00000001407D7376: jmp         00000001407D737B
+  00000001407D7378: xor         bpl,bpl
+  00000001407D737B: mov         edx,dword ptr [rsp+30h]
+  00000001407D737F: test        edx,edx
+  00000001407D7381: je          00000001407D738D
+  00000001407D7383: mov         rcx,qword ptr [rsp+28h]
+  00000001407D7388: call        00000001407D7050
+  00000001407D738D: movzx       eax,bpl
+  00000001407D7391: mov         rbx,qword ptr [rsp+78h]
+  00000001407D7396: add         rsp,40h
+  00000001407D739A: pop         r15
+  00000001407D739C: pop         r14
+  00000001407D739E: pop         rdi
+  00000001407D739F: pop         rsi
+  00000001407D73A0: pop         rbp
+  00000001407D73A1: ret
+  00000001407D73A2: int         3
+  00000001407D73A3: int         3
+  00000001407D73A4: int         3
+  00000001407D73A5: int         3
+  00000001407D73A6: int         3
+  00000001407D73A7: int         3
+  00000001407D73A8: int         3
+  00000001407D73A9: int         3
+  00000001407D73AA: int         3
+  00000001407D73AB: int         3
+  00000001407D73AC: int         3
+  00000001407D73AD: int         3
+  00000001407D73AE: int         3
+  00000001407D73AF: int         3
+  00000001407D73B0: 48
+
+  Summary
+
+     1A7D000 .text

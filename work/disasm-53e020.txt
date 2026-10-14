@@ -1,0 +1,94 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014053E020: mov         qword ptr [rsp+8],rbx
+  000000014053E025: mov         qword ptr [rsp+10h],rbp
+  000000014053E02A: mov         qword ptr [rsp+20h],rsi
+  000000014053E02F: mov         word ptr [rsp+18h],r8w
+  000000014053E035: push        rdi
+  000000014053E036: push        r14
+  000000014053E038: push        r15
+  000000014053E03A: sub         rsp,70h
+  000000014053E03E: mov         rbx,qword ptr [rcx+10h]
+  000000014053E042: mov         rdi,r9
+  000000014053E045: mov         r15d,edx
+  000000014053E048: mov         rsi,qword ptr [rbx+0000000000000358h]
+  000000014053E04F: mov         rbp,rcx
+  000000014053E052: test        rsi,rsi
+  000000014053E055: je          000000014053E078
+  000000014053E057: mov         rcx,rsi
+  000000014053E05A: call        0000000140750FE0
+  000000014053E05F: mov         rcx,rsi
+  000000014053E062: mov         r14,rax
+  000000014053E065: call        0000000140750F70
+  000000014053E06A: movzx       r8d,word ptr [rsp+00000000000000A0h]
+  000000014053E073: mov         rbx,rax
+  000000014053E076: jmp         000000014053E086
+  000000014053E078: lea         r14,[rbx+0000000000000300h]
+  000000014053E07F: add         rbx,30Ch
+  000000014053E086: mov         rcx,rbp
+  000000014053E089: cmp         r8w,0FFFFh
+  000000014053E08E: jne         000000014053E0F0
+  000000014053E090: lea         rdx,[rsp+30h]
+  000000014053E095: mov         r8,r14
+  000000014053E098: call        000000014053C4F0
+  000000014053E09D: mov         ecx,dword ptr [rax]
+  000000014053E09F: mov         dword ptr [rdi],ecx
+  000000014053E0A1: mov         ecx,dword ptr [rax+4]
+  000000014053E0A4: mov         dword ptr [rdi+4],ecx
+  000000014053E0A7: mov         eax,dword ptr [rax+8]
+  000000014053E0AA: mov         rcx,qword ptr [rsp+00000000000000B0h]
+  000000014053E0B2: mov         dword ptr [rdi+8],eax
+  000000014053E0B5: mov         eax,dword ptr [rbx]
+  000000014053E0B7: mov         dword ptr [rcx],eax
+  000000014053E0B9: mov         eax,dword ptr [rbx+4]
+  000000014053E0BC: mov         dword ptr [rcx+4],eax
+  000000014053E0BF: mov         eax,dword ptr [rbx+8]
+  000000014053E0C2: mov         dword ptr [rcx+8],eax
+  000000014053E0C5: mov         eax,dword ptr [rbx+0Ch]
+  000000014053E0C8: mov         dword ptr [rcx+0Ch],eax
+  000000014053E0CB: mov         eax,dword ptr [rbx+10h]
+  000000014053E0CE: mov         dword ptr [rcx+10h],eax
+  000000014053E0D1: mov         eax,dword ptr [rbx+14h]
+  000000014053E0D4: mov         dword ptr [rcx+14h],eax
+  000000014053E0D7: mov         eax,dword ptr [rbx+18h]
+  000000014053E0DA: mov         dword ptr [rcx+18h],eax
+  000000014053E0DD: mov         eax,dword ptr [rbx+1Ch]
+  000000014053E0E0: mov         dword ptr [rcx+1Ch],eax
+  000000014053E0E3: mov         eax,dword ptr [rbx+20h]
+  000000014053E0E6: mov         dword ptr [rcx+20h],eax
+  000000014053E0E9: xor         al,al
+  000000014053E0EB: jmp         000000014053E1D1
+  000000014053E0F0: mov         rsi,qword ptr [rsp+00000000000000B0h]
+  000000014053E0F8: mov         r9,rdi
+  000000014053E0FB: mov         edx,r15d
+  000000014053E0FE: mov         qword ptr [rsp+20h],rsi
+  000000014053E103: call        000000014053D6A0
+  000000014053E108: test        al,al
+  000000014053E10A: je          000000014053E0E9
+  000000014053E10C: movss       xmm2,dword ptr [rdi+4]
+  000000014053E111: movss       xmm3,dword ptr [rdi+8]
+  000000014053E116: movaps      xmmword ptr [rsp+60h],xmm6
+  000000014053E11B: movaps      xmmword ptr [rsp+50h],xmm7
+  000000014053E120: movaps      xmmword ptr [rsp+40h],xmm8
+  000000014053E126: movaps      xmm1,xmm3
+  000000014053E129: lea         rdx,[rsp+30h]
+  000000014053E12E: mov         r8,r14
+  000000014053E131: mov         rcx,rbp
+  000000014053E134: movss       xmm8,dword ptr [rdi]
+  000000014053E139: mulss       xmm1,dword ptr [rbx+18h]
+  000000014053E13E: movaps      xmm0,xmm8
+  000000014053E142: movaps      xmm6,xmm8
+  000000014053E146: movaps      xmm7,xmm2
+  000000014053E149: mulss       xmm8,dword ptr [rbx+8]
+  000000014053E14F: F3
+  000000014053E150: 0F
+
+  Summary
+
+     1A7D000 .text

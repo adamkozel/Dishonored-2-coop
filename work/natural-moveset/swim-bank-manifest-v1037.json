@@ -1,0 +1,120 @@
+[
+  {
+    "role": "corvo",
+    "bank": "swim-banks-v1037\\corvo-choke-bank.bin",
+    "sha256": "DEB1742EF3FEC6E37421C027BD0D4F6D1066C8677D845DE64E87F2A448B40517",
+    "version": 69,
+    "clips": 365,
+    "prior359PayloadsUnchanged": true,
+    "source_bank_sha256": "0750303AFD7852CAFAE45C4D2655013E3205D7686106F84342EE088478DAA608",
+    "added": [
+      {
+        "clip": 359,
+        "donor": "mixamo-retargeted-v5\\mixamo_treading_water-corvo.bin",
+        "donorSha256": "692b4b51666e2a36a26e8e084a1e0acc42540898935bf8378b7c09429401ddb2",
+        "duration": 3.0,
+        "purpose": "native swimming idle/tread loop"
+      },
+      {
+        "clip": 360,
+        "donor": "water-movement-v1\\water_forward_sequence-corvo.bin",
+        "donorSha256": "5cad8eef81be1c74949fff0862326740043ec1e56f2f57e41a2c1c24d3bb69fe",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming travel stroke loop"
+      },
+      {
+        "clip": 361,
+        "donor": "water-movement-v1\\water_up_sequence-corvo.bin",
+        "donorSha256": "4356ef0224a4f78d82408aafa0f6786e7f50b4e29ad929edccbc6e19018b7159",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming rising toward surface"
+      },
+      {
+        "clip": 362,
+        "donor": "water-movement-v1\\water_down_sequence-corvo.bin",
+        "donorSha256": "506d2c63ac98f584e17598f9b573fd2221fe405bcae709916569edce78516587",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming dive/descent"
+      },
+      {
+        "clip": 363,
+        "donor": "mixamo-retargeted-v5\\mixamo_treading_water-corvo.bin",
+        "donorSha256": "692b4b51666e2a36a26e8e084a1e0acc42540898935bf8378b7c09429401ddb2",
+        "duration": 3.0,
+        "purpose": "reserved copy of 359"
+      },
+      {
+        "clip": 364,
+        "donor": "water-movement-v1\\water_forward_sequence-corvo.bin",
+        "donorSha256": "5cad8eef81be1c74949fff0862326740043ec1e56f2f57e41a2c1c24d3bb69fe",
+        "duration": 4.516666666666667,
+        "purpose": "reserved copy of 360"
+      }
+    ],
+    "conversion": "Existing authored swim studies (mixamo-retargeted-v5 treading, water-movement-v1 forward/up/down) resampled to 120 frames plus guard; loops sampled by time, stroke rate scaled with replicated horizontal speed, up/down blended by replicated vertical velocity. Roots/events excluded; root and depth stay network-owned.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  },
+  {
+    "role": "emily",
+    "bank": "swim-banks-v1037\\emily-choke-bank.bin",
+    "sha256": "0FBFA4304E4862B78CA380B5B3A850274BCBC077610D1D836F5318426D4F7FBC",
+    "version": 69,
+    "clips": 365,
+    "prior359PayloadsUnchanged": true,
+    "source_bank_sha256": "D0C8CC534036E948C860A8956E13B1F1FFC7D544CB26533193D5486BA9F79F3A",
+    "added": [
+      {
+        "clip": 359,
+        "donor": "mixamo-retargeted-v5\\mixamo_treading_water-emily.bin",
+        "donorSha256": "120b88769fc6600a6f2b9f7ede180b6c782152850bc1b6b49e3fd447bc5f30ad",
+        "duration": 3.0,
+        "purpose": "native swimming idle/tread loop"
+      },
+      {
+        "clip": 360,
+        "donor": "water-movement-v1\\water_forward_sequence-emily.bin",
+        "donorSha256": "9cdf33f3347a7360e4674a6a9c72e68c7e9683a37b7df4b38e29ed71a7bad6c2",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming travel stroke loop"
+      },
+      {
+        "clip": 361,
+        "donor": "water-movement-v1\\water_up_sequence-emily.bin",
+        "donorSha256": "9ef938684f3b84efd1d53a87045b8513bf853449224e72ebbecc601da510e1f7",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming rising toward surface"
+      },
+      {
+        "clip": 362,
+        "donor": "water-movement-v1\\water_down_sequence-emily.bin",
+        "donorSha256": "37e7d2577ec73001d0365f813db55bf3cad22b09ad9a6063ef56923fe0c22a4a",
+        "duration": 4.516666666666667,
+        "purpose": "native swimming dive/descent"
+      },
+      {
+        "clip": 363,
+        "donor": "mixamo-retargeted-v5\\mixamo_treading_water-emily.bin",
+        "donorSha256": "120b88769fc6600a6f2b9f7ede180b6c782152850bc1b6b49e3fd447bc5f30ad",
+        "duration": 3.0,
+        "purpose": "reserved copy of 359"
+      },
+      {
+        "clip": 364,
+        "donor": "water-movement-v1\\water_forward_sequence-emily.bin",
+        "donorSha256": "9cdf33f3347a7360e4674a6a9c72e68c7e9683a37b7df4b38e29ed71a7bad6c2",
+        "duration": 4.516666666666667,
+        "purpose": "reserved copy of 360"
+      }
+    ],
+    "conversion": "Existing authored swim studies (mixamo-retargeted-v5 treading, water-movement-v1 forward/up/down) resampled to 120 frames plus guard; loops sampled by time, stroke rate scaled with replicated horizontal speed, up/down blended by replicated vertical velocity. Roots/events excluded; root and depth stay network-owned.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  }
+]

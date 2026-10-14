@@ -1,0 +1,72 @@
+{
+  "character": "emily",
+  "source": "client",
+  "observer": "host",
+  "start": 1791663030740,
+  "captureStart": 1791663029615,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Standing at native desk",
+      "seconds": 1.127,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native jump into low mantle",
+      "seconds": 2.632,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native landing and equipment recovery",
+      "seconds": 5.658,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 8.677,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing at native desk"
+    ],
+    [
+      1500,
+      0,
+      22000,
+      1300,
+      "A",
+      0,
+      "Native jump into low mantle"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Native landing and equipment recovery"
+    ],
+    [
+      7500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "BA8CA08FB81128DC6B8A252F31914A0DE14963130DBC0885675C5527A88B8AF5",
+  "bank": "BB087B8250DAF99A5067FCD9AFCF3DA12E9A4370C423F8E6848A7FBADF923DC0",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body bank; see mode and bank version for covered actions. Complete movement integration remains pending."
+}

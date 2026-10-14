@@ -1,0 +1,69 @@
+{
+  "bookmarks": [
+    {
+      "address": "1405ff520",
+      "category": "D2Coop native remote perception v979",
+      "comment": "CONFIRMED STATIC exact Steam EXE B671F824...16180: Observable declaration+6c selects point generation: 2 player path5ff9f0,3 NPC path5ff810. Native clone uses3 with PhysicsSystemEvolved (decl+68=1); localplayer uses2 with PlayerPhysics (decl+68=0). Do not redirect NPC to player path; it expects PlayerPhysics layout. Runtime979 both components present and native reference counter+40=1. Avatar hostility already native Player faction2 to enemies; extra faction overrides unnecessary. Remote target selection still failed976/978/981; cause unproven."
+    },
+    {
+      "address": "1405ff810",
+      "category": "D2Coop native remote perception v979",
+      "comment": "CONFIRMED STATIC exact EXE: ordinary NPC single visibility point uses8780d0 world bounds centerXY and maxZ minus decl+364/+368 according to bound PhysicsSystemEvolved+238 state. Read-only980/981 bounds and all17 physics bodies agree with clone root, including remote test placement(-42.9563,-122,61.00368); cached bounds hypothesis unsupported by those reads. Actual scene LOS/FOV not certified by bounds."
+    },
+    {
+      "address": "140600220",
+      "category": "D2Coop native remote perception v979",
+      "comment": "CONFIRMED STATIC exact EXE: if Observable+40 referencecount>0, queues area actor events1BF(remove) then1BE(add), payload8 componentpointer; does not change refcount. Called by native87d200 transform setter for same-area transforms. Our remote-follow invokes87d200 every engine callback. HYPOTHESIS: repeated unregister/register disrupts perception retention; diagnostic982 freezes owned follow after proven placement, results pending. No global engine patch or AI unpause authorized by this hypothesis."
+    }
+  ],
+  "receipts": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"success\":true,\"address\":\"1405ff520\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact Steam EXE B671F824...16180: Observable declaration+6c selects point generation: 2 player path5ff9f0,3 NPC path5ff810. Native clone uses3 with PhysicsSystemEvolved (decl+68=1); localplayer uses2 with PlayerPhysics (decl+68=0). Do not redirect NPC to player path; it expects PlayerPhysics layout. Runtime979 both components present and native reference counter+40=1. Avatar hostility already native Player faction2 to enemies; extra faction overrides unnecessary. Remote target selection still failed976/978/981; cause unproven.\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"success\":true,\"address\":\"1405ff520\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact Steam EXE B671F824...16180: Observable declaration+6c selects point generation: 2 player path5ff9f0,3 NPC path5ff810. Native clone uses3 with PhysicsSystemEvolved (decl+68=1); localplayer uses2 with PlayerPhysics (decl+68=0). Do not redirect NPC to player path; it expects PlayerPhysics layout. Runtime979 both components present and native reference counter+40=1. Avatar hostility already native Player faction2 to enemies; extra faction overrides unnecessary. Remote target selection still failed976/978/981; cause unproven.\"}"
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"success\":true,\"address\":\"1405ff810\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact EXE: ordinary NPC single visibility point uses8780d0 world bounds centerXY and maxZ minus decl+364/+368 according to bound PhysicsSystemEvolved+238 state. Read-only980/981 bounds and all17 physics bodies agree with clone root, including remote test placement(-42.9563,-122,61.00368); cached bounds hypothesis unsupported by those reads. Actual scene LOS/FOV not certified by bounds.\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"success\":true,\"address\":\"1405ff810\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact EXE: ordinary NPC single visibility point uses8780d0 world bounds centerXY and maxZ minus decl+364/+368 according to bound PhysicsSystemEvolved+238 state. Read-only980/981 bounds and all17 physics bodies agree with clone root, including remote test placement(-42.9563,-122,61.00368); cached bounds hypothesis unsupported by those reads. Actual scene LOS/FOV not certified by bounds.\"}"
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"success\":true,\"address\":\"140600220\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact EXE: if Observable+40 referencecount>0, queues area actor events1BF(remove) then1BE(add), payload8 componentpointer; does not change refcount. Called by native87d200 transform setter for same-area transforms. Our remote-follow invokes87d200 every engine callback. HYPOTHESIS: repeated unregister/register disrupts perception retention; diagnostic982 freezes owned follow after proven placement, results pending. No global engine patch or AI unpause authorized by this hypothesis.\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"success\":true,\"address\":\"140600220\",\"category\":\"D2Coop native remote perception v979\",\"comment\":\"CONFIRMED STATIC exact EXE: if Observable+40 referencecount>0, queues area actor events1BF(remove) then1BE(add), payload8 componentpointer; does not change refcount. Called by native87d200 transform setter for same-area transforms. Our remote-follow invokes87d200 every engine callback. HYPOTHESIS: repeated unregister/register disrupts perception retention; diagnostic982 freezes owned follow after proven placement, results pending. No global engine patch or AI unpause authorized by this hypothesis.\"}"
+      },
+      "isError": false
+    }
+  ],
+  "saved": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+    },
+    "isError": false
+  }
+}

@@ -1,0 +1,1091 @@
+{
+  "exact_game_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "source_indices_unchanged": true,
+  "scope": "Exact native power components and direct scene/effect/entity references; static data, not remote playback evidence.",
+  "resources": [
+    {
+      "resource": "components/characters/player/base/powers/blink/blink.cpntpowerblink",
+      "sha256": "59090C9F682001838E7866F5FFFC49FAE788FA8A8C046AE3BCBBEB74C84092B4",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_out.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_in_slide.midnightscene"
+        },
+        {
+          "property": "m_loopMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_loop_slide.midnightscene"
+        },
+        {
+          "property": "m_outMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_blink_cast_out_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_blinkTopTargetFx",
+          "resource": "models/effects/gameplay/powers/blink/blink_target_01.fx"
+        },
+        {
+          "property": "m_blinkBottomTargetFx",
+          "resource": "models/effects/gameplay/powers/blink/blink_target_02.fx"
+        },
+        {
+          "property": "m_blinkMantleFx",
+          "resource": "models/effects/gameplay/powers/blink/blink_mantle_01.fx"
+        },
+        {
+          "property": "m_blinkScreenFx",
+          "resource": "models/testassets/vrosier/powerfx/blink_cast.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/shadow_walk/shadow_walk.cpntpowershadowwalk",
+      "sha256": "223F6C1C6867A2FA524DB1CCD261ECF41D6FCC11EBDD04DEB48E232EC73C4069",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_cast_in.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_transInMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene"
+        },
+        {
+          "property": "m_transInMidnightSneak",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene"
+        },
+        {
+          "property": "m_transInMidnightCrouch",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_crouch.midnightscene"
+        },
+        {
+          "property": "m_leftArmHideMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_hide_left_arm.midnightscene"
+        },
+        {
+          "property": "m_transOutMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene"
+        },
+        {
+          "property": "m_transOutMidnightCrouch",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out_crouch.midnightscene"
+        },
+        {
+          "property": "m_leftArmShowMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_equip.midnightscene"
+        },
+        {
+          "property": "m_wallTransOutMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out_wall.midnightscene"
+        },
+        {
+          "property": "m_attackTransOutMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/bendtime/bendtime.cpntpowerbendtime",
+      "sha256": "E88CB86E6E9FAC16AEB8789C50EF47A2353746767876F9135C340447CB81CCCE",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_in_test.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_loop_test.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_out_test.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_in_slide.midnightscene"
+        },
+        {
+          "property": "m_loopMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_loop_slide.midnightscene"
+        },
+        {
+          "property": "m_outMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_bendtime_cast_out_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/mesmerize/mesmerize.cpntpowermesmerize",
+      "sha256": "59432523AC9379AD4560CE09153B7CEEA72CD91E75B06E6809B6E63EC69F9D92",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_mesmerize_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_mesmerize_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_mesmerize_cast_out.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_cloneEntityDef",
+          "resource": "models/powers/mesmerize/mesmerize_object.def"
+        },
+        {
+          "property": "m_fxOK",
+          "resource": "models/effects/gameplay/powers/mesmerize_v2/target/mesmerize_v2_target_ok_01.fx"
+        },
+        {
+          "property": "m_fxNotOK",
+          "resource": "models/effects/gameplay/powers/mesmerize_v2/target/mesmerize_v2_target_base_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/doppelganger/doppelganger_power.cpntpowerdoppelganger",
+      "sha256": "8337924E24ED2D04D62E7410205D928DEA6FDE16D543F392C11C26D538FA491C",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_out.midnightscene"
+        },
+        {
+          "property": "m_fxOK",
+          "resource": "models/effects/gameplay/powers/doppelganger/target/dganger_target_ok_01.fx"
+        },
+        {
+          "property": "m_fxNotOK",
+          "resource": "models/effects/gameplay/powers/doppelganger/target/dganger_target_notok_01.fx"
+        },
+        {
+          "property": "m_decoyEntityDef",
+          "resource": "models/powers/doppelganger/decoy_entity.def"
+        },
+        {
+          "property": "m_deadlyShadowEntityDef",
+          "resource": "models/powers/doppelganger/deadlyshadow_entity.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/doppelganger/doppelganger_corvopower.cpntpowerdoppelganger",
+      "sha256": "CB60853758EAD1E1561FC72084D3FE01B8294D0D4DB8B22DBCE07478640EEB7C",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_decoy_cast_out.midnightscene"
+        },
+        {
+          "property": "m_fxOK",
+          "resource": "models/effects/gameplay/powers/doppelganger/target/dganger_target_ok_01.fx"
+        },
+        {
+          "property": "m_fxNotOK",
+          "resource": "models/effects/gameplay/powers/doppelganger/target/dganger_target_notok_01.fx"
+        },
+        {
+          "property": "m_decoyEntityDef",
+          "resource": "models/powers/doppelganger/decoy_entity_corvo.def"
+        },
+        {
+          "property": "m_deadlyShadowEntityDef",
+          "resource": "models/powers/doppelganger/deadlyshadow_entity_corvo.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/grapple/grapple.cpntpowergrapple",
+      "sha256": "808DC04A022B5085AF04DDA4EF81B3D2C1739798692B115B614A6EA4D6306E2C",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_in_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_out.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_in_slide.midnightscene"
+        },
+        {
+          "property": "m_loopMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_in_loop_slide.midnightscene"
+        },
+        {
+          "property": "m_outMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_out_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_pullMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_pull.midnightscene"
+        },
+        {
+          "property": "m_pullMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_grapple_pull_slide.midnightscene"
+        },
+        {
+          "property": "m_worldTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_target_wall_02.fx"
+        },
+        {
+          "property": "m_mantleTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_mantle_02.fx"
+        },
+        {
+          "property": "m_npcTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_target_npc_02.fx"
+        },
+        {
+          "property": "m_npcTargetFXAttachTag",
+          "resource": "fx_grapple_target"
+        },
+        {
+          "property": "m_movableTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_target_wob_01.fx"
+        },
+        {
+          "property": "m_pickupTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_target_pickup_01.fx"
+        },
+        {
+          "property": "m_chainTargetFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_target_wob_01.fx"
+        },
+        {
+          "property": "m_curveBeamFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/target/sgrapple_prediction_01.fx"
+        },
+        {
+          "property": "m_worldImpactFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_impact_01.fx"
+        },
+        {
+          "property": "m_npcImpactFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_impact_npc_01.fx"
+        },
+        {
+          "property": "m_movableImpactFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_impact_npc_01.fx"
+        },
+        {
+          "property": "m_pickupImpactFX",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_impact_pickups_01.fx"
+        },
+        {
+          "property": "m_dummyEntityDef",
+          "resource": "models/characters/player/base/grapple_dummy.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/possession/possession.cpntpowerpossession",
+      "sha256": "74B99CAA6E7CA2CB3FF135573C9E53DC288CC4F13BAA316C6EC47561422A492A",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_out.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_in_slide.midnightscene"
+        },
+        {
+          "property": "m_loopMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_loop_slide.midnightscene"
+        },
+        {
+          "property": "m_outMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_possession_cast_out_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/darkvision/darkvision.cpntpowerdarkvision",
+      "sha256": "B9B48C195C5F5363827AEECC1F99CDBF61F8329CFA1F7BA674E0101D48A11027",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_darkvision_cast.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_darkvision_cast_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/windblast/windblast.cpntpowerwindblast",
+      "sha256": "E7B769FEBF7913FDC961CB70C01F9BDA968FE7FB20481D9B53C21651FBED1C10",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_windblast_cast.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_windblast_cast_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_windblastBasicEntityDef",
+          "resource": "models/powers/windblast/windblast_object.def"
+        },
+        {
+          "property": "m_windblastGreaterEntityDef",
+          "resource": "models/powers/windblast/windblast_greater_object.def"
+        },
+        {
+          "property": "m_windblastShockwaveEntityDef",
+          "resource": "models/powers/windblast/windblast_shockwave_object.def"
+        },
+        {
+          "property": "m_windblastGreaterShockwaveEntityDef",
+          "resource": "models/powers/windblast/windblast_greater_shockwave_object.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/devouring_swarm/power.cpntpowerdevouringswarm",
+      "sha256": "2475B4ACD7B22DAA4454319A18ED4CACDD4A24F798A9C77A2155DE9F4EA7FD0E",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_in.midnightscene"
+        },
+        {
+          "property": "m_loopMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_loop.midnightscene"
+        },
+        {
+          "property": "m_outMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_out.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_in_slide.midnightscene"
+        },
+        {
+          "property": "m_loopMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_loop_slide.midnightscene"
+        },
+        {
+          "property": "m_outMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_swarm_cast_out_slide.midnightscene"
+        },
+        {
+          "property": "m_cloneEntityDef",
+          "resource": "models/characters/animals/rat/devouring_swarm.def"
+        },
+        {
+          "property": "m_fxOK",
+          "resource": "models/effects/gameplay/powers/rat_swarm/target/rswarm_target_ok_01.fx"
+        },
+        {
+          "property": "m_bigSwarmDef",
+          "resource": "models/characters/animals/rat/devouring_swarm_big.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "components/characters/player/base/powers/phantasmallink/phantasmal_link.cpntpowerphantasmallink",
+      "sha256": "9FA16CA563DDAF3B0FCAE4394844E467782681F439A1F4D51CEFF1265676DC1B",
+      "batch": "movement-native-power-components-v1",
+      "references": [
+        {
+          "property": "m_equipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_equipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_equip.midnightscene"
+        },
+        {
+          "property": "m_unequipMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_unequipFastMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_unequip.midnightscene"
+        },
+        {
+          "property": "m_inMidnight",
+          "resource": "midnight/gameplay/player/base/powers/power_phantasmal_cast.midnightscene"
+        },
+        {
+          "property": "m_inMidnightSlide",
+          "resource": "midnight/gameplay/player/base/powers/power_phantasmal_cast_slide.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[1]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_right.midnightscene"
+        },
+        {
+          "property": "m_slashMidnights[2]",
+          "resource": "midnight/gameplay/player/base/powers/power_slash_left.midnightscene"
+        },
+        {
+          "property": "m_phantasmalNetworkDesc",
+          "resource": "models/powers/phantasmallink/phantasmal_network.def"
+        },
+        {
+          "property": "m_targetingFx",
+          "resource": "models/effects/gameplay/powers/phantasmal_link/target/phlink_targeted_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/characters/animals/rat/devouring_swarm.def",
+      "sha256": "D2DD0F6B16CF26F12C10A848285AB2F4ADF2EC5E4E8DEA6194B1561438AF0D7C",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/characters/animals/rat/ratswarm_base.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/characters/animals/rat/devouring_swarm_big.def",
+      "sha256": "D2F0475FB141DAD277621BF94F770D626136642263CB333E13E50BB1AEF63E9F",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/characters/animals/rat/devouring_swarm.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/powers/doppelganger/decoy_entity_corvo.def",
+      "sha256": "DDBB3934A1A94D24F78D299ED53B21ADD462D355EEB1D851D93AA99055D5CE07",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/powers/doppelganger/decoy_entity.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/powers/doppelganger/deadlyshadow_entity_corvo.def",
+      "sha256": "E145BA5A88651562AFA7EE27843676AEECD7DCFAAD44295179485D1AA75D6D86",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/powers/doppelganger/deadlyshadow_entity.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/powers/windblast/windblast_greater_object.def",
+      "sha256": "966C5C8662D5C2453957E1111D9D1481D2268C7B9082D64B52C9A80179EFE005",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/powers/windblast/windblast_object.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/powers/windblast/windblast_shockwave_object.def",
+      "sha256": "A72C85A02AF3BC630FBAAC134B5C6B7FE16AFEA6E520B7BE88A65E60BAD3E495",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/powers/windblast/windblast_object.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "models/powers/windblast/windblast_greater_shockwave_object.def",
+      "sha256": "A7A76BF87794E0A525EC7360974031DE4CA6C1C2F6BF1A2291E42FFD438B4484",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "inherit",
+          "resource": "models/powers/windblast/windblast_shockwave_object.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_out.midnightscene",
+      "sha256": "A2D90B79F49CE670A606E7A69F686B408368156D50C35EBDB70D9FA45C78D389",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_cast_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_grapple_cast_out_slide.midnightscene",
+      "sha256": "FA83C6F3F56B129F56F4DB3817FC2FE21410FF8572AC78589021E033C4CA3CE4",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_grapple/grapple/sgrapple_cast_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene",
+      "sha256": "47D818F6189CF801CF4E80FB8EBB33F682C2411571D51E4F780405FF683BCBCE",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene",
+      "sha256": "8C880C026CE2434117513EFD4957893670FE18DD70095EBA44D27850C5F42B48",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_crouch.midnightscene",
+      "sha256": "24570B879A7B491ABBDF68205EF3543EBC1BDABD6714CE00BE43652FE7602010",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene",
+      "sha256": "D39C0A7C9EE1A480B4DAB7512D774A5CF189FCE15B09973D27F1D725B14C09FC",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/loco/ply_arm_loco_01.fx"
+        },
+        {
+          "property": "m_declFx",
+          "resource": "models/effects/gameplay/powers/shadow_walk/ply_arms/transformation/ply_arm_ashes_01.fx"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene",
+      "sha256": "1701BE6365ED114881AB1696A3BF85F954D281EFDE9F8BA431B4E972F5990D9C",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "resource": "midnight/gameplay/player/base/powers/power_shadow_walk_trans_out_crouch.midnightscene",
+      "sha256": "8BB165D1F43994B5FDF3A36025F6B358B4E5522409F20A127491483F2098E620",
+      "batch": "movement-native-power-dependencies-v1",
+      "references": [
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_emily_rightarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_leftarm_01.def"
+        },
+        {
+          "property": "m_entityDef",
+          "resource": "models/effects/gameplay/powers/shadow_walk/fake_ply_corvo_rightarm_01.def"
+        }
+      ],
+      "runtime_verified": false
+    }
+  ]
+}

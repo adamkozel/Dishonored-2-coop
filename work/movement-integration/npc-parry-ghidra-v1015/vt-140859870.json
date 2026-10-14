@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nundefined8 FUN_140859870(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  \r\n  lVar2 = *(longlong *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x328) + 0x68);\r\n  cVar1 = FUN_140855230();\r\n  if ((cVar1 != '\\0') && (lVar2 != 0)) {\r\n    lVar2 = FUN_14063c8c0(lVar2);\r\n    if (*(int *)(lVar2 + 0x11c) == 1) {\r\n      return 1;\r\n    }\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nundefined8 FUN_140859870(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  longlong lVar2;\r\n  \r\n  lVar2 = *(longlong *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x328) + 0x68);\r\n  cVar1 = FUN_140855230();\r\n  if ((cVar1 != '\\0') && (lVar2 != 0)) {\r\n    lVar2 = FUN_14063c8c0(lVar2);\r\n    if (*(int *)(lVar2 + 0x11c) == 1) {\r\n      return 1;\r\n    }\r\n  }\r\n  return 0;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

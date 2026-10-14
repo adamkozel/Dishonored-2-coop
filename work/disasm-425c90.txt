@@ -1,0 +1,69 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140425C90: mov         dword ptr [rsp+10h],edx
+  0000000140425C94: push        rbx
+  0000000140425C95: sub         rsp,30h
+  0000000140425C99: cmp         dword ptr [rcx+20h],3
+  0000000140425C9D: mov         rbx,rcx
+  0000000140425CA0: jne         0000000140425CAB
+  0000000140425CA2: call        0000000140425F30
+  0000000140425CA7: mov         edx,dword ptr [rsp+48h]
+  0000000140425CAB: cmp         word ptr [rbx+0000000000000118h],3
+  0000000140425CB3: mov         rcx,qword ptr [rbx+78h]
+  0000000140425CB7: mov         r8d,1
+  0000000140425CBD: jne         0000000140425CD5
+  0000000140425CBF: mov         r9d,edx
+  0000000140425CC2: mov         rdx,qword ptr [rbx+10h]
+  0000000140425CC6: mov         dword ptr [rsp+20h],3
+  0000000140425CCE: call        0000000140778F40
+  0000000140425CD3: jmp         0000000140425CDE
+  0000000140425CD5: mov         rdx,qword ptr [rbx+10h]
+  0000000140425CD9: call        0000000140778A00
+  0000000140425CDE: cmp         dword ptr [rbx+20h],1
+  0000000140425CE2: je          0000000140425CEC
+  0000000140425CE4: mov         rcx,rbx
+  0000000140425CE7: call        00000001407E77E0
+  0000000140425CEC: mov         dword ptr [rbx+20h],1
+  0000000140425CF3: add         rsp,30h
+  0000000140425CF7: pop         rbx
+  0000000140425CF8: ret
+  0000000140425CF9: int         3
+  0000000140425CFA: int         3
+  0000000140425CFB: int         3
+  0000000140425CFC: int         3
+  0000000140425CFD: int         3
+  0000000140425CFE: int         3
+  0000000140425CFF: int         3
+  0000000140425D00: mov         qword ptr [rsp+8],rbx
+  0000000140425D05: mov         qword ptr [rsp+10h],rsi
+  0000000140425D0A: mov         qword ptr [rsp+18h],rdi
+  0000000140425D0F: push        rbp
+  0000000140425D10: push        r12
+  0000000140425D12: push        r13
+  0000000140425D14: push        r14
+  0000000140425D16: push        r15
+  0000000140425D18: mov         rbp,rsp
+  0000000140425D1B: sub         rsp,50h
+  0000000140425D1F: lea         rax,[0000000141B4CF98h]
+  0000000140425D26: mov         rdi,rcx
+  0000000140425D29: lea         rsi,[00000001439C4EF0h]
+  0000000140425D30: lea         rdx,[rbp-20h]
+  0000000140425D34: add         rcx,8
+  0000000140425D38: mov         qword ptr [rbp-18h],7
+  0000000140425D40: mov         qword ptr [rbp-20h],rsi
+  0000000140425D44: mov         qword ptr [rbp-10h],rax
+  0000000140425D48: call        000000014039DE50
+  0000000140425D4D: 4C
+  0000000140425D4E: 8D
+  0000000140425D4F: 05
+  0000000140425D50: 74
+
+  Summary
+
+     1A7D000 .text

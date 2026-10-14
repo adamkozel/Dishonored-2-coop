@@ -1,0 +1,9 @@
+from pathlib import Path
+R=Path(__file__).resolve().parents[2];W=R/'work/movement-integration';P=R/'work/natural-moveset'
+p=W/'Invoke-NativeLabOperation.ps1';s=p.read_text(encoding='utf-8-sig');assert 'Test-SwarmRatVisualNetwork-v306.ps1' in s;p.write_text(s.replace('Test-SwarmRatVisualNetwork-v306.ps1','Test-SwarmRatVisualNetwork-v307.ps1'))
+s=(P/'Test-SwarmRatVisualNetwork-v306.ps1').read_text(encoding='utf-8-sig').replace('0x140751050 self-binding then0x140753630 scale','Exact owned entity+0x330 write, native0x14087c5d0 render flush, self-frame settlement').replace('through native reference-frame dispatch','through a guarded cosmetic-only entity scale write and native render/frame propagation')
+(P/'Test-SwarmRatVisualNetwork-v307.ps1').write_text(s)
+s=(W/'archive_rat_scale_bind_v306.py').read_text().replace('rat_scale_bind_v306','rat_scale_owner_v307').replace('swarm-rat-scale-bind-v306','swarm-rat-scale-owner-v307').replace('swarm-rat-scale-bind-{kind}-v306','swarm-rat-scale-owner-{kind}-v307').replace('swarm-rat-scale-bind-*-v306','swarm-rat-scale-owner-*-v307').replace('Test-SwarmRatVisualNetwork-v306','Test-SwarmRatVisualNetwork-v307')
+start=s.index("scope='")+len("scope='");end=s.index("')\n(A/",start)
+s=s[:start]+'Candidate307: native753c10 self-driver copies authoritative entity330 scale into frame60;306 binding succeeded but scale reverted, so753630 is insufficient for generic self-driven models. Guard exact owned cosmetic identity/frame/render/self-driver and finite old scale, update only entity330 XYZ then native87c5d0 render flush. Native frame update settles frame60 with500ms bound; no native RatAgent/AI/gameplay. Tests require all source rat identities, XYZ scale at three native levels, gait and source-stop/checkpoint restoration. Native original files and local first-person unchanged; color/state/VFX/audio and gameplay authority remain incomplete.'+s[end:]
+(W/'archive_rat_scale_owner_v307.py').write_text(s)

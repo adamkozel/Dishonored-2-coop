@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "kind": "mana",
+  "wheelButton": "NativeMana",
+  "networkContinuity": true,
+  "manaPreparation": true,
+  "statisticsValidated": true,
+  "leftY": 12000,
+  "checks": [
+    "Native Emily Dark Vision casts spend mana; native effect expires and inventory retires before potion grant, without resource writes",
+    "Exactly one scalar native potion granted without equipping or invoking consumption",
+    "Both native consumption statistic arrays independently distinguish exactly one use from grant/rollback; other potion kind unchanged",
+    "Exact native callback consumed one potion in normal gameplay",
+    "Native mana increases with exactly one mana-consumption statistic increment and unchanged health",
+    "Remote walking and stopping persist through native consumption with same Steam tokens, continuous bank updates and no invented body action",
+    "Remote player and cosmetic avatar health remain unchanged by source potion consumption",
+    "Both inventories restore exactly after finite native grant",
+    "Both native isolated checkpoints restore health and unowned potion state",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.474,
+      "input": "Native forward walking through consumption",
+      "leftY": 12000
+    },
+    {
+      "videoTime": 2.465,
+      "input": "Exact native mana-consume routine from engine thread; no keyboard input"
+    }
+  ],
+  "dll": "241507FB9BB498829200914893015985C5C79533BCD0C53CEC84FF5F5334480E",
+  "probe": "58666214BE4E71E13506E87691BDC20CA3F46D1FD481B3AA928927E526E041A7",
+  "finalDll": "241507FB9BB498829200914893015985C5C79533BCD0C53CEC84FF5F5334480E",
+  "scope": "Existing remote body walking/stopping continuity through source native potion consumption, over Steam. No dedicated drink gesture, remote drink audio or remote resource synchronization is implemented; all outcomes reset through isolated checkpoints."
+}

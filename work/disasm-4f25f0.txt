@@ -1,0 +1,111 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001404F25F0: mov         qword ptr [rsp+8],rbx
+  00000001404F25F5: push        rdi
+  00000001404F25F6: sub         rsp,20h
+  00000001404F25FA: mov         rdi,rcx
+  00000001404F25FD: call        00000001405BEF90
+  00000001404F2602: mov         ebx,dword ptr [rax+00000000000000A8h]
+  00000001404F2608: call        0000000140810240
+  00000001404F260D: mov         r9d,ebx
+  00000001404F2610: lea         rcx,[rax+000000000000C8E8h]
+  00000001404F2617: mov         edx,17Ch
+  00000001404F261C: mov         r8d,4
+  00000001404F2622: call        00000001408112C0
+  00000001404F2627: test        rax,rax
+  00000001404F262A: je          00000001404F2632
+  00000001404F262C: mov         dword ptr [rax],0Ch
+  00000001404F2632: mov         rcx,rdi
+  00000001404F2635: mov         rbx,qword ptr [rsp+30h]
+  00000001404F263A: add         rsp,20h
+  00000001404F263E: pop         rdi
+  00000001404F263F: jmp         00000001404F3240
+  00000001404F2644: int         3
+  00000001404F2645: int         3
+  00000001404F2646: int         3
+  00000001404F2647: int         3
+  00000001404F2648: int         3
+  00000001404F2649: int         3
+  00000001404F264A: int         3
+  00000001404F264B: int         3
+  00000001404F264C: int         3
+  00000001404F264D: int         3
+  00000001404F264E: int         3
+  00000001404F264F: int         3
+  00000001404F2650: push        rbx
+  00000001404F2652: push        rsi
+  00000001404F2653: push        rdi
+  00000001404F2654: sub         rsp,20h
+  00000001404F2658: mov         eax,dword ptr [rcx+0000000000000B60h]
+  00000001404F265E: mov         rbx,rcx
+  00000001404F2661: mov         dword ptr [rsp+50h],eax
+  00000001404F2665: test        eax,eax
+  00000001404F2667: jne         00000001404F2699
+  00000001404F2669: mov         rdi,qword ptr [rcx+10h]
+  00000001404F266D: mov         edx,dword ptr [rdi+00000000000000F0h]
+  00000001404F2673: and         edx,0FFFFFFh
+  00000001404F2679: jle         00000001404F2693
+  00000001404F267B: dec         edx
+  00000001404F267D: xor         ecx,ecx
+  00000001404F267F: call        00000001408AC110
+  00000001404F2684: movsxd      rcx,eax
+  00000001404F2687: mov         rax,qword ptr [rdi+00000000000000E8h]
+  00000001404F268E: mov         eax,dword ptr [rax+rcx*4]
+  00000001404F2691: jmp         00000001404F2695
+  00000001404F2693: xor         eax,eax
+  00000001404F2695: mov         dword ptr [rsp+50h],eax
+  00000001404F2699: lea         r8,[rbx+0000000000000E10h]
+  00000001404F26A0: lea         rdx,[rsp+50h]
+  00000001404F26A5: lea         rcx,[rbx+0000000000000B68h]
+  00000001404F26AC: call        000000014002A530
+  00000001404F26B1: mov         rcx,rbx
+  00000001404F26B4: call        0000000140789710
+  00000001404F26B9: mov         rcx,rax
+  00000001404F26BC: mov         rdi,rax
+  00000001404F26BF: call        0000000140465D80
+  00000001404F26C4: test        dword ptr [rdi+18h],0FFFFFFh
+  00000001404F26CB: je          00000001404F26E9
+  00000001404F26CD: test        al,al
+  00000001404F26CF: jne         00000001404F26E9
+  00000001404F26D1: mov         rcx,rdi
+  00000001404F26D4: mov         byte ptr [rsp+48h],1
+  00000001404F26D9: call        0000000140465010
+  00000001404F26DE: test        al,al
+  00000001404F26E0: je          00000001404F26EE
+  00000001404F26E2: mov         byte ptr [rsp+40h],1
+  00000001404F26E7: jmp         00000001404F26F3
+  00000001404F26E9: mov         byte ptr [rsp+48h],0
+  00000001404F26EE: mov         byte ptr [rsp+40h],0
+  00000001404F26F3: lea         r8,[rbx+0000000000000E20h]
+  00000001404F26FA: lea         rdx,[rsp+40h]
+  00000001404F26FF: lea         rcx,[rbx+0000000000000B68h]
+  00000001404F2706: call        000000014002A640
+  00000001404F270B: lea         r8,[rbx+0000000000000E30h]
+  00000001404F2712: lea         rdx,[rsp+48h]
+  00000001404F2717: lea         rcx,[rbx+0000000000000B68h]
+  00000001404F271E: call        000000014002A640
+  00000001404F2723: mov         rcx,rdi
+  00000001404F2726: call        0000000140466090
+  00000001404F272B: mov         rcx,rbx
+  00000001404F272E: call        00000001404F3640
+  00000001404F2733: add         rsp,20h
+  00000001404F2737: pop         rdi
+  00000001404F2738: pop         rsi
+  00000001404F2739: pop         rbx
+  00000001404F273A: ret
+  00000001404F273B: int         3
+  00000001404F273C: int         3
+  00000001404F273D: int         3
+  00000001404F273E: int         3
+  00000001404F273F: int         3
+  00000001404F2740: 48
+
+  Summary
+
+     1A7D000 .text

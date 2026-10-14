@@ -1,0 +1,14 @@
+{
+  "role": "client",
+  "family": "windblast",
+  "failure": null,
+  "checks": [
+    "Native effect start refused without scoped NPC isolation",
+    "Both native windblast declarations create effects with exact clone owner, unique FX ID and expected declaration",
+    "Finite effects retire and explicit cancellation stops only tracked native records",
+    "Both players and native avatar health preserved",
+    "Original executable, Steam API and protected save hashes unchanged"
+  ],
+  "dll": "EACAC52D7BD6F8753AB04D5E4B74EAFDFF7574A82BD751C811AA49E91D2D0A35",
+  "scope": "Isolated world-space reuse of native Windblast particles and sound, plus native ground-dust feasibility. Dedicated effect declaration omits first-person fullscreen distortion/rumble. Manual finite native visual effects, without casting or gameplay outcomes. Screen distortion and visible world effects require visual review before any network integration."
+}

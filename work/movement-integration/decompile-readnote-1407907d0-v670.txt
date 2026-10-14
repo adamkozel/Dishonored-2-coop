@@ -1,0 +1,21 @@
+
+void FUN_1407907d0(longlong param_1)
+
+{
+  longlong lVar1;
+  undefined8 uVar2;
+  
+  FUN_1407910e0();
+  lVar1 = FUN_1408832b0(*(undefined8 *)(param_1 + 8));
+  if ((lVar1 != 0) && (lVar1 = FUN_1408a8ba0(lVar1), lVar1 != 0)) {
+    uVar2 = FUN_140877720(lVar1,&DAT_1439aed60,0);
+    FUN_1403dab80(param_1 + 0x60,uVar2);
+    uVar2 = FUN_140877720(lVar1,&DAT_1439e8640,0);
+    FUN_1403dab80(param_1 + 0x70,uVar2);
+    uVar2 = FUN_140877720(lVar1,&DAT_1439c5ac0,0);
+    FUN_1403dab80(param_1 + 0x80,uVar2);
+  }
+  return;
+}
+
+

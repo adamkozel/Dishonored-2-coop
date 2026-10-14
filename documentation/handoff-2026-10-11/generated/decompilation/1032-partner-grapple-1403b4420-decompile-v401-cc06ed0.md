@@ -1,0 +1,64 @@
+# partner-grapple-1403b4420-decompile-v401.txt
+
+Original: [work/movement-integration/partner-grapple-1403b4420-decompile-v401.txt](<../../../../work/movement-integration/partner-grapple-1403b4420-decompile-v401.txt>)
+
+SHA-256: `C2965E1E90DA779674AECD89B3FF263E9C4F0BF74C93FA4B018F3D84D6661030`; 1771 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_1403b4420(longlong param_1,char param_2)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  int iVar3;
+  
+  if (param_2 == '\0') {
+    lVar1 = D2_GameSingletonPtr + 0x60280;
+    if (*(int *)(param_1 + 0x1bc) != -1) {
+      FUN_140091a50(lVar1);
+    }
+    if (*(int *)(param_1 + 0x1c0) != -1) {
+      FUN_140091a50(lVar1);
+    }
+    *(undefined1 *)(param_1 + 0x188) = 0;
+    *(undefined4 *)(param_1 + 0x1c4) = 0x3fff0010;
+    *(undefined4 *)(param_1 + 0x1c8) = 0x3fff0010;
+    *(undefined4 *)(param_1 + 0x1cc) = DAT_1431af668;
+    iVar3 = 0;
+    *(undefined4 *)(param_1 + 0x1d0) = DAT_1431af66c;
+    *(undefined4 *)(param_1 + 0x1d4) = DAT_1431af670;
+    *(undefined4 *)(param_1 + 0x1d8) = DAT_1431af668;
+    *(undefined4 *)(param_1 + 0x1dc) = DAT_1431af66c;
+    *(undefined4 *)(param_1 + 0x1e0) = DAT_1431af670;
+    *(undefined4 *)(param_1 + 0x1e4) = DAT_1431af668;
+    *(undefined4 *)(param_1 + 0x1e8) = DAT_1431af66c;
+    *(undefined4 *)(param_1 + 0x1ec) = DAT_1431af670;
+    *(undefined4 *)(param_1 + 0x1f0) = DAT_1431af668;
+    *(undefined4 *)(param_1 + 500) = DAT_1431af66c;
+    *(undefined4 *)(param_1 + 0x1f8) = DAT_1431af670;
+    *(undefined4 *)(param_1 + 0x1fe) = 0;
+    *(undefined8 *)(param_1 + 0x202) = 0x100;
+    *(undefined4 *)(param_1 + 0x20c) = 0xbf800000;
+    *(undefined4 *)(param_1 + 0x210) = 0xbf800000;
+    *(undefined4 *)(param_1 + 0x214) = 0xbf800000;
+    if (0 < *(int *)(param_1 + 0x228)) {
+      lVar2 = 0;
+      do {
+        if (*(int *)(lVar2 + *(longlong *)(param_1 + 0x230)) != -1) {
+          FUN_140091a50(lVar1,*(longlong *)(param_1 + 0x230) + (longlong)iVar3 * 4);
+        }
+        iVar3 = iVar3 + 1;
+        lVar2 = lVar2 + 4;
+      } while (iVar3 < *(int *)(param_1 + 0x228));
+    }
+  }
+  FUN_1403c2b00(param_1,param_2);
+  return;
+}
+
+
+
+````

@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-13T08:05:09.350105+02:00",
+  "candidate": "candidate-combat-target-v610",
+  "dll": "A1860B6C37F649281A1312A40EAF270EE37E65B497F64804B4169523A682B6F5",
+  "probe": "7A1A77529D9B33900FA98AF4D06D059E4A75EC2BD2C6EE25D395A08F51779EC5",
+  "protocol": 65,
+  "bankVersion": 65,
+  "clips": 353,
+  "runtimeVerified": true,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\targeted-combat-corvo-v611\\result.json",
+      "resultSha256": "C141A6BBDAF19EBFF9477475DF58E95C8304B8BCAC3CEE4B3A7626789D6BBC6C",
+      "checks": [
+        "Ordinary sword input produces native three-actor targeted slash",
+        "Independent reader validates exact player, right arm and native enemy target",
+        "Native sword equipped and started during targeted slash",
+        "Existing full-body combat clip plays through native Steam source semantics",
+        "Native standing recovery restores movement after targeted attack",
+        "Independent network root retained through target-bearing attack",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native ordinary RT250ms facing guard2; validated target-bearing sword animation, no shared victim outcome.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\targeted-combat-emily-v614\\result.json",
+      "resultSha256": "00D66FF717F822A88338E77AF6144D9E3288797B1BE47CA72A0BC66297C1F693",
+      "checks": [
+        "Ordinary sword input produces native three-actor targeted slash",
+        "Independent reader validates exact player, right arm and native enemy target",
+        "Native sword equipped and started during targeted slash",
+        "Existing full-body combat clip plays through native Steam source semantics",
+        "Native standing recovery restores movement after targeted attack",
+        "Independent network root retained through target-bearing attack",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native ordinary RT250ms facing guard2; validated target-bearing sword animation, no shared victim outcome.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    }
+  ],
+  "complete": false,
+  "visualAccepted": false,
+  "limitations": [
+    "Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay.",
+    "Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance.",
+    "Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt.",
+    "Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored.",
+    "Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished."
+  ]
+}

@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "requested_delivery": "Complete Corvo/Emily moveset library ported to Dishonored 2, with actual in-game recordings in the review dashboard. Finish the movement phase before moving to other co-op work.",
+  "scope": "Every applicable functional movement requirement in review-catalog.json, including transitions, contextual actions, equipment and powers.",
+  "complete": false,
+  "completion_requires": [
+    "Complete-body motions look natural on each applicable native character rig, including hands, knees, calf helpers and attachments.",
+    "Native gameplay states trigger the correct remote motion automatically through the native Steam connection.",
+    "World position remains network controlled; foot cadence and trajectory agree with travel, contact and native gameplay timing.",
+    "Entry, hold, completion, cancellation, interruption and recovery work, including relevant stance, weapon and direction variants.",
+    "Native equipment, props, victim alignment and physics handoffs appear correctly where required.",
+    "Powers include their native world VFX, spawned entities or transformed representation, with phase, target and cleanup synchronized.",
+    "First-person-only targeting and screen effects remain scoped to their native viewer; remote presentation does not affect the other player's camera.",
+    "Remote presentation cannot inflict duplicate damage or friendly fire, spend mana twice, or create duplicate gameplay entities.",
+    "Native first-person animations, hands, camera and controls are preserved.",
+    "Each applicable action and character has actual D2 recording evidence in the dashboard with the tested build and source data identified.",
+    "Recordings preserve real elapsed timing; playback quality is inspected visually, not inferred from joint matrices or capture counts.",
+    "Pause, death, checkpoint reload, map changes and peer loss retire animation/effect ownership cleanly and restore usable native state."
+  ],
+  "evidence_rules": [
+    "An authoring preview or fixed-frame pose publication is not proof of gameplay integration.",
+    "A native effect resource existing in the installation is not proof of remote effect playback or synchronization.",
+    "Corvo/Emily comparison adaptations do not imply that both characters receive every power in the campaign.",
+    "No requirement is marked finished solely because it has a donor clip or a numerical test."
+  ],
+  "power_cases": [
+    {
+      "id": "blink",
+      "character": "corvo",
+      "requirements": [
+        "corvo_blink_aim_cancel_release_arrive",
+        "corvo_blink_pull_and_kick_variants"
+      ],
+      "needs": [
+        "aim/cancel/release/arrival timing",
+        "departure and arrival presentation if native counterpart effects exist",
+        "teleport discontinuity rather than interpolated walking",
+        "Blink Assault contact and recovery"
+      ],
+      "runtime_effects_verified": false,
+      "partial_runtime_evidence": {
+        "scope": "Standing armed Dunwall body and native world effects, cancellation and replay refusal.",
+        "recording": "integrated-blink-fx-v3.mp4",
+        "remaining": "Stance/movement/equipment/upgrades/dynamic targets, full lifecycle and final visual acceptance.",
+        "latest_regression": {
+          "recording": "blink-regression-v26-v2.mp4",
+          "evidence": "blink-regression-v26-v2/result.json",
+          "dll": "E8E73BE946D2DC0C7E9801B04E70A6ED264FDE7A8E7FCBFF794B75FF22A1C99A",
+          "checks": [
+            "Native Steam stream and v26 bank ready before the cast",
+            "corvo native cast phases 1,2,3 drive remote whole-body presentation",
+            "Native phase end restores standing movement",
+            "Native X cancellation does not teleport or pull the source",
+            "Both players/avatar health, source first-person sword, remote native sword and peer power quantity preserved",
+            "Native Blink travel creates exactly one network departure and one arrival; aim cancellation creates neither",
+            "Repeated reliable arrival packet cannot replay effects",
+            "Remote Blink uses a discrete endpoint transfer with no eye-height body jump (max endpoint error 0.0136110005877573 m)"
+          ]
+        }
+      }
+    },
+    {
+      "id": "far_reach",
+      "character": "emily",
+      "requirements": [
+        "emily_far_reach_aim_cancel_release_arrive",
+        "emily_far_reach_pull_variants"
+      ],
+      "needs": [
+        "native tendril and attachment endpoints",
+        "pull/travel/arrival phases",
+        "target ownership and cleanup"
+      ],
+      "runtime_effects_verified": false,
+      "partial_runtime_evidence": {
+        "scope": "Standing armed Dunwall body and native world effects, cancellation and replay refusal.",
+        "recording": "integrated-grapple-fx-v3.mp4",
+        "remaining": "Stance/movement/equipment/upgrades/dynamic targets, full lifecycle and final visual acceptance.",
+        "latest_regression": {
+          "recording": "grapple-regression-v26-v2.mp4",
+          "evidence": "grapple-regression-v26-v2/result.json",
+          "dll": "E8E73BE946D2DC0C7E9801B04E70A6ED264FDE7A8E7FCBFF794B75FF22A1C99A",
+          "checks": [
+            "Native Steam stream and v26 bank ready before the cast",
+            "emily native cast phases 4,5,6,7 drive remote whole-body presentation",
+            "Native phase end restores standing movement",
+            "Native X cancellation does not teleport or pull the source",
+            "Both players/avatar health, source first-person sword, remote native sword and peer power quantity preserved",
+            "Native Far Reach cast creates exactly one remote native tether and one impact; aim cancellation creates neither",
+            "Remote authored left wrist drives native tether endpoints; native end retires the owned beam",
+            "Duplicate reliable Far Reach end packet cannot replay tether or impact"
+          ]
+        }
+      }
+    },
+    {
+      "id": "dark_vision",
+      "character": "both",
+      "requirements": [
+        "corvo_dark_vision_cast_end",
+        "emily_dark_vision_cast_end"
+      ],
+      "needs": [
+        "cast and end timing",
+        "native viewer-specific reveal and screen effects",
+        "confirmed world-visible effects only"
+      ],
+      "runtime_effects_verified": false,
+      "partial_runtime_evidence": {
+        "scope": "Both roles standing/crouched, drawn/holstered; stationary and forward/backward walking. Native cast clock, private reveal, recovery, equipment/health/cleanup.",
+        "recordings": [
+          "darkvision-corvo-v25-v2.mp4",
+          "darkvision-emily-v25-v2.mp4"
+        ],
+        "natural_expiry": "native-darkvision-corvo-v4/result.json",
+        "remaining": "Sideways/run/slide/water, moving and double jumps, upgrades, lifecycle and full continuous visual approval.",
+        "context_recordings": [
+          "darkvision-corvo-crouched-v26-v1.mp4",
+          "darkvision-corvo-crouched-v26-v1-source.mp4",
+          "darkvision-corvo-empty-v26-v1.mp4",
+          "darkvision-corvo-empty-v26-v1-source.mp4",
+          "darkvision-corvo-crouched-empty-v26-v1.mp4",
+          "darkvision-corvo-crouched-empty-v26-v1-source.mp4",
+          "darkvision-corvo-moving-v26-v3.mp4",
+          "darkvision-corvo-moving-v26-v3-source.mp4",
+          "darkvision-corvo-crouched-moving-v26-v1.mp4",
+          "darkvision-corvo-crouched-moving-v26-v1-source.mp4",
+          "darkvision-corvo-empty-moving-v26-v1.mp4",
+          "darkvision-corvo-empty-moving-v26-v1-source.mp4",
+          "darkvision-corvo-crouched-empty-moving-v26-v1.mp4",
+          "darkvision-corvo-crouched-empty-moving-v26-v1-source.mp4",
+          "darkvision-emily-crouched-v26-v1.mp4",
+          "darkvision-emily-crouched-v26-v1-source.mp4",
+          "darkvision-emily-empty-v26-v1.mp4",
+          "darkvision-emily-empty-v26-v1-source.mp4",
+          "darkvision-emily-crouched-empty-v26-v2.mp4",
+          "darkvision-emily-crouched-empty-v26-v2-source.mp4",
+          "darkvision-emily-moving-v26-v1.mp4",
+          "darkvision-emily-moving-v26-v1-source.mp4",
+          "darkvision-emily-crouched-moving-v26-v1.mp4",
+          "darkvision-emily-crouched-moving-v26-v1-source.mp4",
+          "darkvision-emily-empty-moving-v26-v1.mp4",
+          "darkvision-emily-empty-moving-v26-v1-source.mp4",
+          "darkvision-emily-crouched-empty-moving-v26-v1.mp4",
+          "darkvision-emily-crouched-empty-moving-v26-v1-source.mp4"
+        ],
+        "context_tests": [
+          "darkvision-corvo-crouched-v26-v1/result.json",
+          "darkvision-corvo-empty-v26-v1/result.json",
+          "darkvision-corvo-crouched-empty-v26-v1/result.json",
+          "darkvision-corvo-moving-v26-v3/result.json",
+          "darkvision-corvo-crouched-moving-v26-v1/result.json",
+          "darkvision-corvo-empty-moving-v26-v1/result.json",
+          "darkvision-corvo-crouched-empty-moving-v26-v1/result.json",
+          "darkvision-emily-crouched-v26-v1/result.json",
+          "darkvision-emily-empty-v26-v1/result.json",
+          "darkvision-emily-crouched-empty-v26-v2/result.json",
+          "darkvision-emily-moving-v26-v1/result.json",
+          "darkvision-emily-crouched-moving-v26-v1/result.json",
+          "darkvision-emily-empty-moving-v26-v1/result.json",
+          "darkvision-emily-crouched-empty-moving-v26-v1/result.json"
+        ],
+        "context_checks": 134,
+        "airborne": {
+          "recordings": [
+            "darkvision-corvo-air-v26-v3.mp4",
+            "darkvision-corvo-air-v26-v3-source.mp4",
+            "darkvision-emily-air-v26-v2.mp4",
+            "darkvision-emily-air-v26-v2-source.mp4",
+            "darkvision-corvo-air-empty-v26-v1.mp4",
+            "darkvision-corvo-air-empty-v26-v1-source.mp4",
+            "darkvision-emily-air-empty-v26-v1.mp4",
+            "darkvision-emily-air-empty-v26-v1-source.mp4"
+          ],
+          "tests": [
+            "darkvision-corvo-air-v26-v3/result.json",
+            "darkvision-emily-air-v26-v2/result.json",
+            "darkvision-corvo-air-empty-v26-v1/result.json",
+            "darkvision-emily-air-empty-v26-v1/result.json"
+          ],
+          "checks": 48,
+          "scope": "Both roles, drawn and holstered, two ordinary jump casts each.",
+          "dll": "48A0E8F493C17097455CECF5416AD1DDC095DFC02885FD0DCBC79C50EEB337FD"
+        }
+      }
+    },
+    {
+      "id": "possession",
+      "character": "corvo",
+      "requirements": [
+        "corvo_possession_enter_loop_exit"
+      ],
+      "needs": [
+        "body visibility and controlled-body handoff",
+        "native enter/exit presentation",
+        "reappearance and target restoration"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "bend_time",
+      "character": "corvo",
+      "requirements": [
+        "corvo_bend_time_cast_end"
+      ],
+      "needs": [
+        "native cast effects",
+        "shared world-time state and coherent playback clocks",
+        "end/interruption cleanup"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "windblast",
+      "character": "corvo",
+      "requirements": [
+        "corvo_windblast_cast"
+      ],
+      "needs": [
+        "native blast/shockwave visuals",
+        "direction and phase",
+        "single authoritative hit/impulse"
+      ],
+      "runtime_effects_verified": false,
+      "partial_runtime_evidence": {
+        "scope": "Corvo Windblast ground stance/equipment/travel body integration. Native source controller casts and scene timing drive the remote whole body through Steam. Observed basic native cast FX drives one separate world-space presentation effect on the remote clone, preserving native position/axis and body timing. Original private screen distortion is excluded. Replay, finite cleanup and health are checked. Impacts, world physics outcomes, upgrades and broader lifecycle are not certified; visual quality requires separate review.",
+        "recordings": [
+          "windblast-corvo-network-v28-v1.mp4",
+          "windblast-corvo-network-v28-v1-source.mp4",
+          "windblast-corvo-empty-network-v28-v1.mp4",
+          "windblast-corvo-empty-network-v28-v1-source.mp4"
+        ],
+        "tests": [
+          "windblast-corvo-network-v28-v1/result.json",
+          "windblast-corvo-empty-network-v28-v1/result.json"
+        ],
+        "dll": "80E9E28879F84E427BF05BFEC45357430EE181376C9A1669CA28D4A5E9670F8A",
+        "checks": [
+          "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+          "Two native cast events drive remote whole-body Windblast animation through Steam",
+          "Both casts recover to original stance with network body ownership retained",
+          "First-person and remote native sword retain the original drawn/holstered state",
+          "Full-body cast retains original native crouch/standing stance throughout",
+          "Exactly two uniquely identified native source effects each create one finite remote world effect through Steam",
+          "Both clone-owned remote effects preserve the exact independently read native source origin and orientation",
+          "Replayed reliable packet is received and rejected without a second effect",
+          "Native cleanup restores original power quantity and selection",
+          "Both players and remote avatars retain native health; no animation damage events",
+          "Protected original executable, Steam API and save hashes unchanged"
+        ],
+        "remaining": [
+          "Standing stationary basic Corvo Windblast only.",
+          "Fine hand contact and continuous visual quality still require acceptance.",
+          "Crouched, travelling, aerial, upgraded and impact variants remain incomplete.",
+          "Remote physics/damage outcomes are outside this cosmetic effect proof.",
+          "Recordings contain no audio; sound is not audibly verified."
+        ],
+        "airborne": {
+          "recordings": [
+            "windblast-corvo-air-network-v28-v1.mp4",
+            "windblast-corvo-air-network-v28-v1-source.mp4",
+            "windblast-corvo-air-empty-moving-v28-v1.mp4",
+            "windblast-corvo-air-empty-moving-v28-v1-source.mp4"
+          ],
+          "tests": [
+            "windblast-corvo-air-network-v28-v1/result.json",
+            "windblast-corvo-air-empty-moving-v28-v1/result.json"
+          ],
+          "dll": "D662AA6718B0F42A643CA1B53D310B3B58C45671F248C937CE2E36974E29A2EB",
+          "checks": 27,
+          "remaining": [
+            "Two ordinary jumping basic casts per take, with the explicitly recorded equipment/travel context.",
+            "Double-jump casting, upgrades, physics impacts and full lifecycle remain unverified.",
+            "Selected temporal frames inspected; complete continuous motion quality is not accepted.",
+            "No recorded audio; sound is not audibly verified."
+          ]
+        }
+      }
+    },
+    {
+      "id": "devouring_swarm",
+      "character": "corvo",
+      "requirements": [
+        "corvo_devouring_swarm_cast"
+      ],
+      "needs": [
+        "native swarm spawn and manifestation effects",
+        "shared swarm entities/lifetime",
+        "single authoritative damage path"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "domino",
+      "character": "emily",
+      "requirements": [
+        "emily_domino_mark_link_cancel"
+      ],
+      "needs": [
+        "native marks and link effects",
+        "target identity and link updates",
+        "removal/target-death cleanup"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "doppelganger",
+      "character": "emily",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "needs": [
+        "native summon/expiry presentation",
+        "independent summoned clone identity distinct from the remote player avatar",
+        "single clone lifecycle and outcomes"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "mesmerize",
+      "character": "emily",
+      "requirements": [
+        "emily_mesmerize_cast"
+      ],
+      "needs": [
+        "native manifestation entity/effects",
+        "targets and duration",
+        "dismissal/interruption cleanup"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "shadow_walk",
+      "character": "emily",
+      "requirements": [
+        "emily_shadow_walk_enter_move_attack_exit"
+      ],
+      "needs": [
+        "native shadow form and effects",
+        "entry/movement/attack/exit body handoff",
+        "wall/rat-hole variants and restoration of equipment"
+      ],
+      "runtime_effects_verified": false
+    },
+    {
+      "id": "power_variants",
+      "character": "both",
+      "requirements": [
+        "power_upgrade_variants",
+        "power_interruptions_and_no_mana"
+      ],
+      "needs": [
+        "applicable upgrades",
+        "no-mana and invalid-target rejection",
+        "arbitrary interruption and absence of orphaned effects"
+      ],
+      "runtime_effects_verified": false
+    }
+  ],
+  "conditional_exclusions": {
+    "incapacitation_and_rescue_if_supported": "Shared death/checkpoint recovery remains the requested policy; no partner-rescue mechanic is planned."
+  }
+}

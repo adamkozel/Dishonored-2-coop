@@ -1,0 +1,95 @@
+{
+  "name": "Dishonored 2 Corvo/Emily co-op",
+  "candidate": "candidate-npc-combat-v1193",
+  "built": "2026-10-14T18:24:45.697754+02:00",
+  "requiredExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "requiredSteamApiSha256": "71AF8666392ACAD2080A816B9F1196FE9CCB950E1DB8A549F8312C4D231F55A8",
+  "originalMasterIndexSha256": "E76D1A13AC95F5614300BE65F55EBC1CDE68974E792BF72D96E5E5D206AAC147",
+  "files": [
+    {
+      "path": "dinput8.dll",
+      "sha256": "D46F838EDEB9B90F718DC9CA965BB53B2078C9358DC9EAF8C95FED07E946C2F0",
+      "size": 4994048,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/master.index",
+      "sha256": "DF8FF7ED1FD727EC68E93866D5912E341C1A068E9D4F34783B1B478EC047BBB4",
+      "size": 932,
+      "replacesOriginal": true
+    },
+    {
+      "path": "base/game1voidmod.index",
+      "sha256": "A20FD3AA4D025484B70BECCA8638BB39D588993DCD16C3F5E9621888EBF55236",
+      "size": 10081964,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game1voidmod.resources",
+      "sha256": "E88FFBE7BBB2E8BA700C813A71D1704474DE0D2CACFDE9E97F9D78F7730D5FE6",
+      "size": 253177,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game2voidmod.index",
+      "sha256": "25F74D3F1FCF7D4E8889C008E4CE885A13A4932564923874A6901855AFF57936",
+      "size": 19137608,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game2voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "size": 4,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game3voidmod.index",
+      "sha256": "9268D81FA6EB00E3DC0F0B08E50B3BE0D12BEB3D128941BD85F41371CFDE015A",
+      "size": 17554804,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game3voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "size": 4,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game4voidmod.index",
+      "sha256": "C65204710727D136E6D05E3B66D762DFDF44D91F26473E8B38B1A736BE6524C8",
+      "size": 36,
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game4voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "size": 4,
+      "replacesOriginal": false
+    },
+    {
+      "path": "d2coop/d2coop.cfg",
+      "sha256": "23D2FB03DC8DC0BCDD3C03DC2849852EB1858F9E6BBDC42640278BED9198F831",
+      "size": 177,
+      "replacesOriginal": false
+    },
+    {
+      "path": "d2coop/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE",
+      "size": 268795868,
+      "replacesOriginal": false
+    },
+    {
+      "path": "d2coop/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+      "size": 273796556,
+      "replacesOriginal": false
+    }
+  ],
+  "notes": [
+    "Never replaces Dishonored2.exe or steam_api64.dll (native Steam).",
+    "Install backs up master.index and any existing dinput8.dll; Uninstall restores them byte-identically.",
+    "Saves are written by the game in its normal profile; the co-op lab profiles are not shipped.",
+    "Product mode: F7 hosts (Steam lobby + invite overlay), F8 leaves; partners join through Steam Join Game / invite.",
+    "Two-account online validation is still outstanding."
+  ]
+}

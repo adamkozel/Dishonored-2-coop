@@ -1,0 +1,24 @@
+{
+  "passed": false,
+  "failure": "Strict successful release with exact target and EnterPossessedHost26 not repeatedly observed",
+  "source": "host",
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Exact human-upgrade native quantity acquired and stable reciprocal tutorial guard selected by read-only world identity",
+    "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.215,
+      "input": "Native Corvo LT500 then release at freshly revalidated human target"
+    },
+    {
+      "videoTime": 8.812,
+      "input": "Native LT120 to leave host body"
+    }
+  ],
+  "dll": "268AE6B6A44FD08F6F0947C9D63333F4E09B30DC03EBF3CA22931491A40479EB",
+  "probe": "1300127FF79E8AA6C3354C22B3535D809E7AE063ADC7A7987256DD3CD62DF998",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; finite native human-upgrade and verified guard-target experiment; generation-validated human target, native internal state lifecycle, release400ms and normal-input exit investigated; remote movement/VFX/gameplay remain unverified. Checkpoint and protected save restoration mandatory."
+}

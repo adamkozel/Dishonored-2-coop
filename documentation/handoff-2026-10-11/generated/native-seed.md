@@ -1,0 +1,667 @@
+# Seed functions, labels and partial structures
+
+[native-findings.json](<../../../outputs/d2-coop-lab/analysis/ghidra/native-findings.json>)
+
+Names are analyst labels; structure sizes are minimum known views. This seed predates later bookmarks.
+
+````json
+{
+  "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "imageBase": "0x140000000",
+  "functions": [
+    {
+      "rva": "0xff8f0",
+      "name": "D2_CommandBuffer_Execute",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Engine-thread command pump; exact original vtable slot checked before hook."
+    },
+    {
+      "rva": "0x48ad0",
+      "name": "D2_Common_ScreenUpdate",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Six integer-class arguments retained; loading and native UI transport pump."
+    },
+    {
+      "rva": "0x753c10",
+      "name": "D2_ReferenceFrame_Update",
+      "confidence": "confirmed-runtime",
+      "source": "src/native_child_frames.h",
+      "sourceSha256": "b7f31777239f0447a03a3a2fdd476a005a822191260df0efe4d3262676287d4a",
+      "note": "Recursive direct-child frame update. Suppressing the owned root must still update native child weapon frames; milestone 95B4."
+    },
+    {
+      "rva": "0x540f20",
+      "name": "D2_Animation_Evaluate",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Hook runs native evaluation before bounded body/arm retargeting. Preserve unmapped native joints."
+    },
+    {
+      "rva": "0x9cfa0",
+      "name": "D2_Animation_SetJointLocal",
+      "confidence": "confirmed-runtime",
+      "source": "src/arm_probe.h",
+      "sourceSha256": "2147f4457c1a87230a75decd2d15b38ee4b5ab75ef793d0f911aaed2c6f051a3",
+      "note": "Used for validated native joint rotations; preserve current local translations."
+    },
+    {
+      "rva": "0x9dc40",
+      "name": "D2_Animation_RebuildPose",
+      "confidence": "confirmed-runtime",
+      "source": "src/arm_probe.h",
+      "sourceSha256": "2147f4457c1a87230a75decd2d15b38ee4b5ab75ef793d0f911aaed2c6f051a3",
+      "note": "Native rebuild after controlled local joint updates."
+    },
+    {
+      "rva": "0x23cb00",
+      "name": "D2_Animation_GetJointName",
+      "confidence": "confirmed-static",
+      "source": "src/runtime_probe.cpp",
+      "sourceSha256": "13c2b6eee32a57a31940a9b9d3eb3845479b59f3d6053492e3db3206929b8b5a",
+      "note": "Reconstructed read-only: intern manager RVA22995c0, entries+8, count+10, stride72, string pointer+16. IDs are process-local."
+    },
+    {
+      "rva": "0x1d9090",
+      "name": "D2_InternedName_Resolve",
+      "confidence": "confirmed-static",
+      "source": "src/runtime_probe.cpp",
+      "sourceSha256": "13c2b6eee32a57a31940a9b9d3eb3845479b59f3d6053492e3db3206929b8b5a",
+      "note": "Tail target used by joint name accessor; distinguish intern IDs from stable semantic bone names."
+    },
+    {
+      "rva": "0x717950",
+      "name": "D2_Health_ApplyDamage",
+      "confidence": "confirmed-runtime",
+      "source": "src/damage_observer.h",
+      "sourceSha256": "5b137ba766cbc76470216e54dcec6649130af2c8be0e4b6b8ac7a264f8e0094d",
+      "note": "Native damage entry, called once by observer hook; bounded event capture. Do not infer arbitrary damage synchronization from one-hit tests."
+    },
+    {
+      "rva": "0x7185b0",
+      "name": "D2_Health_SetCurrent",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Native setter used to restore player HP and decrease owned guard HP. No arbitrary increase in guard stream."
+    },
+    {
+      "rva": "0x717d50",
+      "name": "D2_Health_GetRatio",
+      "confidence": "confirmed-static",
+      "source": "src/native_health.h",
+      "sourceSha256": "69a14292942621f6ed6fdbeb83a08bffe340bbfc02fc11bae73779bcb486fe0a",
+      "note": "Reads component+20 and divides by virtual maximum; zero HP alone does not establish game-over."
+    },
+    {
+      "rva": "0x7197f0",
+      "name": "D2_Health_GetMaximum",
+      "confidence": "confirmed-static",
+      "source": "src/native_health.h",
+      "sourceSha256": "69a14292942621f6ed6fdbeb83a08bffe340bbfc02fc11bae73779bcb486fe0a",
+      "note": "Maximum from declaration, suppression flag and bounded attribute entries."
+    },
+    {
+      "rva": "0x71a9e0",
+      "name": "D2_Health_ApplyLethal",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Lethal native health path; natural fall/sword deaths tested separately."
+    },
+    {
+      "rva": "0x780260",
+      "name": "D2_DamageParams_Construct",
+      "confidence": "confirmed-runtime",
+      "source": "src/enemy_melee.h",
+      "sourceSha256": "ce5e071b8b52518e035a47099f9ba74a7c22556141480d432e5ee2b80744ca89",
+      "note": "Observed parameter storage144bytes. Partial knowledge; not a recovered full class."
+    },
+    {
+      "rva": "0x780470",
+      "name": "D2_DamageResult_Construct",
+      "confidence": "confirmed-runtime",
+      "source": "src/enemy_melee.h",
+      "sourceSha256": "ce5e071b8b52518e035a47099f9ba74a7c22556141480d432e5ee2b80744ca89",
+      "note": "Observed result storage32bytes. Do not assume all semantic fields known."
+    },
+    {
+      "rva": "0x614b20",
+      "name": "D2_Inventory_Equip",
+      "confidence": "confirmed-runtime",
+      "source": "src/avatar_sword.h",
+      "sourceSha256": "8d706d21f0ef5fc711d6d98a764fd84cb87c76c08ad4928b92cdac1a8913e6e5",
+      "note": "Native inventory, existing equipment entry, bool true. Guard and authored Corvo tutorial sword; no Emily counterpart equipment yet."
+    },
+    {
+      "rva": "0x619640",
+      "name": "D2_Inventory_Unequip",
+      "confidence": "confirmed-runtime",
+      "source": "src/avatar_sword.h",
+      "sourceSha256": "8d706d21f0ef5fc711d6d98a764fd84cb87c76c08ad4928b92cdac1a8913e6e5",
+      "note": "Native existing-entry unequip. Cleanup defers during pause/death; retires on world replacement."
+    },
+    {
+      "rva": "0x1599460",
+      "name": "D2_Inventory_Reflection",
+      "confidence": "confirmed-static",
+      "source": "src/native_sword_equipment.h",
+      "sourceSha256": "eb2bdb6b4f4c7addf3af132d683a46f37279416730285bcd4e3408b360d073a8",
+      "note": "Items+38 stride56, equipment pointers+58, sixteen slots+68."
+    },
+    {
+      "rva": "0x7e7800",
+      "name": "D2_Component_Pause",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Acquire one owned pause reference only; bounded identity checks."
+    },
+    {
+      "rva": "0x7e79c0",
+      "name": "D2_Component_Resume",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Release only our reference; never resume a retired stopped component after native death."
+    },
+    {
+      "rva": "0x87d200",
+      "name": "D2_Entity_SetTransform",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Native actor transform setter; separate root and child-frame update responsibilities."
+    },
+    {
+      "rva": "0x8a78f0",
+      "name": "D2_Game_SpawnActor",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Counterpart spawn uses existing declarations and native spawner registration."
+    },
+    {
+      "rva": "0x8a7650",
+      "name": "D2_Game_SwitchCharacter",
+      "confidence": "confirmed-runtime",
+      "source": "src/native_character.h",
+      "sourceSha256": "da32011458e1ea1b18c7effbfd4b3935f6efbd4849bbea2f7f029578a2f7fe76",
+      "note": "Corvo/Emily restoration restricted to native loading15, followed by entity maintenance."
+    },
+    {
+      "rva": "0x8ab380",
+      "name": "D2_Game_MaintainEntities",
+      "confidence": "confirmed-runtime",
+      "source": "src/native_character.h",
+      "sourceSha256": "da32011458e1ea1b18c7effbfd4b3935f6efbd4849bbea2f7f029578a2f7fe76",
+      "note": "Used at controlled save/load character boundary."
+    },
+    {
+      "rva": "0x4f2980",
+      "name": "D2_GameOver_Retry",
+      "confidence": "confirmed-runtime",
+      "source": "src/native_gameover.h",
+      "sourceSha256": "f3640935afa0ac32119e3087a6445a4c96ccb77a941d8ff9a7642308fac0d359",
+      "note": "Native retry; shared death13 screens precede one coordinated reload."
+    },
+    {
+      "rva": "0x78a5b0",
+      "name": "D2_Cinematic_SkipConfirmed",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Native shared skip callback; opening test evidence does not cover full campaign."
+    },
+    {
+      "rva": "0x7d71f0",
+      "name": "D2_Sequence_Pause",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Native sequence instance pause used by bounded shared scene barrier."
+    },
+    {
+      "rva": "0x7d8950",
+      "name": "D2_Sequence_Resume",
+      "confidence": "confirmed-runtime",
+      "source": "src/engine_bridge.cpp",
+      "sourceSha256": "86a792b368b0d62f588ebb79a17fd55956fd6d60e3ca56cb02fa36a981beba4b",
+      "note": "Resume matching captured instance only."
+    },
+    {
+      "rva": "0x605990",
+      "name": "D2_Faction_SetRelationship",
+      "confidence": "confirmed-runtime",
+      "source": "src/sword_link.h",
+      "sourceSha256": "70333c8d03a76732f4c96cd075167ed88251d325336aac7adee1fd1c0180aa1e",
+      "note": "Per-entity enemy relation2 for bounded partner-vs-guard experiments."
+    },
+    {
+      "rva": "0x6060a0",
+      "name": "D2_Faction_RemoveRelationship",
+      "confidence": "confirmed-runtime",
+      "source": "src/sword_link.h",
+      "sourceSha256": "70333c8d03a76732f4c96cd075167ed88251d325336aac7adee1fd1c0180aa1e",
+      "note": "Release per-entity experimental relationship."
+    },
+    {
+      "rva": "0x16fec0",
+      "name": "D2_Entity_GetChildren",
+      "confidence": "confirmed-static",
+      "source": "src/native_child_frames.h",
+      "sourceSha256": "b7f31777239f0447a03a3a2fdd476a005a822191260df0efe4d3262676287d4a",
+      "note": "Returns entity+B0 direct children container."
+    }
+  ],
+  "labels": [
+    [
+      "39a5290",
+      "D2_GameSingletonPtr"
+    ],
+    [
+      "22995c0",
+      "D2_InternedNameManagerPtr"
+    ],
+    [
+      "3990b60",
+      "D2_DeclarationManager"
+    ],
+    [
+      "1c940a8",
+      "D2_VT_Game"
+    ],
+    [
+      "1c5e428",
+      "D2_VT_Player"
+    ],
+    [
+      "1c5e108",
+      "D2_VT_NPC"
+    ],
+    [
+      "1c87d58",
+      "D2_VT_Entity"
+    ],
+    [
+      "1c573e8",
+      "D2_VT_ReferenceFrame"
+    ],
+    [
+      "1b80408",
+      "D2_VT_AnimationComponent"
+    ],
+    [
+      "1b9a878",
+      "D2_VT_Inventory"
+    ],
+    [
+      "1c51588",
+      "D2_VT_Health"
+    ],
+    [
+      "1c51698",
+      "D2_VT_HealthDeclaration"
+    ],
+    [
+      "1b9cf48",
+      "D2_VT_NPCMeleeWeapon"
+    ],
+    [
+      "1b9d508",
+      "D2_VT_PlayerMeleeWeapon"
+    ],
+    [
+      "1ce1e98",
+      "D2_VT_PlayerWeaponEntity"
+    ],
+    [
+      "1cc4108",
+      "D2_VT_AIDecision"
+    ],
+    [
+      "1b8a588",
+      "D2_VT_AIReflex"
+    ],
+    [
+      "1b93a88",
+      "D2_VT_AIAttack"
+    ],
+    [
+      "1b6aab8",
+      "D2_VT_GameOverState"
+    ]
+  ],
+  "structures": [
+    [
+      "D2_ComponentPartial",
+      32,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          8,
+          "ptr",
+          "declaration"
+        ],
+        [
+          16,
+          "ptr",
+          "owner"
+        ],
+        [
+          28,
+          "u32",
+          "flags"
+        ]
+      ],
+      "native_ai_state.h"
+    ],
+    [
+      "D2_HealthPartial",
+      184,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          8,
+          "ptr",
+          "declaration"
+        ],
+        [
+          16,
+          "ptr",
+          "owner"
+        ],
+        [
+          32,
+          "float",
+          "currentHealth"
+        ],
+        [
+          104,
+          "ptr",
+          "attributes"
+        ],
+        [
+          176,
+          "i32",
+          "maximumAttributeIndex"
+        ],
+        [
+          180,
+          "i32",
+          "suppressedAttributeIndex"
+        ]
+      ],
+      "native_health.h"
+    ],
+    [
+      "D2_InventoryEntryPartial",
+      56,
+      [
+        [
+          0,
+          "ptr",
+          "itemDeclaration"
+        ],
+        [
+          8,
+          "u32",
+          "weaponHandle"
+        ],
+        [
+          16,
+          "ptr",
+          "equipmentComponent"
+        ],
+        [
+          24,
+          "ptr",
+          "equipmentDeclaration"
+        ],
+        [
+          32,
+          "i32",
+          "quantity"
+        ],
+        [
+          36,
+          "i32",
+          "maximumQuantity"
+        ]
+      ],
+      "native_sword_equipment.h"
+    ],
+    [
+      "D2_InventoryPartial",
+      232,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          8,
+          "ptr",
+          "declaration"
+        ],
+        [
+          16,
+          "ptr",
+          "owner"
+        ],
+        [
+          56,
+          "ptr",
+          "items"
+        ],
+        [
+          64,
+          "u32",
+          "itemCountFlags"
+        ],
+        [
+          88,
+          "ptr",
+          "equipmentEntries"
+        ],
+        [
+          96,
+          "u32",
+          "equipmentCountFlags"
+        ],
+        [
+          104,
+          "ptr16",
+          "slots"
+        ]
+      ],
+      "native_sword_equipment.h"
+    ],
+    [
+      "D2_EntityPartial",
+      864,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          32,
+          "ptr",
+          "name"
+        ],
+        [
+          120,
+          "matrix12",
+          "cachedTransform"
+        ],
+        [
+          168,
+          "u32",
+          "handle"
+        ],
+        [
+          172,
+          "u32",
+          "parentHandle"
+        ],
+        [
+          176,
+          "ptr",
+          "children"
+        ],
+        [
+          184,
+          "u32",
+          "childCountFlags"
+        ],
+        [
+          616,
+          "ptr",
+          "components"
+        ],
+        [
+          624,
+          "u32",
+          "componentCountFlags"
+        ],
+        [
+          744,
+          "ptr",
+          "definition"
+        ],
+        [
+          768,
+          "matrix12",
+          "rootTransform"
+        ],
+        [
+          856,
+          "ptr",
+          "referenceFrame"
+        ]
+      ],
+      "native_player_arm.h; native_skeleton.h; native_child_frames.h"
+    ],
+    [
+      "D2_ReferenceFramePartial",
+      978,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          16,
+          "ptr",
+          "owner"
+        ],
+        [
+          960,
+          "ptr",
+          "attachmentTag"
+        ],
+        [
+          968,
+          "ptr",
+          "attachmentParent"
+        ],
+        [
+          976,
+          "u16",
+          "attachmentJoint"
+        ]
+      ],
+      "native_sword_equipment.h"
+    ],
+    [
+      "D2_AnimationComponentPartial",
+      756,
+      [
+        [
+          0,
+          "ptr",
+          "vtable"
+        ],
+        [
+          16,
+          "ptr",
+          "owner"
+        ],
+        [
+          56,
+          "ptr",
+          "renderEntity"
+        ],
+        [
+          128,
+          "ptr",
+          "skeleton"
+        ],
+        [
+          392,
+          "ptr",
+          "localPose"
+        ],
+        [
+          400,
+          "u32",
+          "localPoseCountFlags"
+        ],
+        [
+          408,
+          "ptr",
+          "globalPose"
+        ],
+        [
+          416,
+          "u32",
+          "globalPoseCountFlags"
+        ],
+        [
+          728,
+          "ptr",
+          "matrixCache"
+        ],
+        [
+          736,
+          "u32",
+          "matrixCountFlags"
+        ],
+        [
+          744,
+          "ptr",
+          "phaseHeaders"
+        ],
+        [
+          752,
+          "u32",
+          "phaseCountFlags"
+        ]
+      ],
+      "native_skeleton.h"
+    ]
+  ],
+  "hypotheses": [
+    "Emily NPC may require an authored inventory component/item path to receive a native sword. No equipment creation validated.",
+    "General remote-player attacks may be representable through native player-weapon components. Existing tests establish only one guard and bounded one-hit forwarding.",
+    "All campaign transitions may be coordinated through known sequence/loading states. Evidence currently covers a small Dunwall area and opening scenes only.",
+    "Native host/join and role selection UI integration is unresolved. Native SteamNetworkingSockets012 loopback is verified; separate Steam accounts/invites are not."
+  ]
+}
+````

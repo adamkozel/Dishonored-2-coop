@@ -1,0 +1,45 @@
+# disasm-19fcbb0.txt
+
+Original: [work/disasm-19fcbb0.txt](<../../../../work/disasm-19fcbb0.txt>)
+
+SHA-256: `8F89F91E143CDD4676F5215B38984F105A292746EC972B90C62F6A57BCDC14E0`; 1400 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001419FCBB0: lea         edx,[0000000141E25D88h]
+  00000001419FCBB6: lea         rcx,[0000000143DEA440h]
+  00000001419FCBBD: xor         r8d,r8d
+  00000001419FCBC0: mov         qword ptr [0000000143DEA438h],5
+  00000001419FCBCB: call        0000000140131F90
+  00000001419FCBD0: lea         rdx,[0000000141E25E90h]
+  00000001419FCBD7: lea         rcx,[0000000143DEA450h]
+  00000001419FCBDE: xor         r8d,r8d
+  00000001419FCBE1: mov         qword ptr [0000000143DEA448h],6
+  00000001419FCBEC: call        0000000140131F90
+  00000001419FCBF1: lea         rdx,[0000000141E25F88h]
+  00000001419FCBF8: lea         rcx,[0000000143DEA460h]
+  00000001419FCBFF: xor         r8d,r8d
+  00000001419FCC02: mov         qword ptr [0000000143DEA458h],7
+  00000001419FCC0D: call        0000000140131F90
+  00000001419FCC12: lea         rdx,[0000000141E26080h]
+  00000001419FCC19: lea         rcx,[0000000143DEA470h]
+  00000001419FCC20: xor         r8d,r8d
+  00000001419FCC23: mov         qword ptr [0000000143DEA468h],8
+  00000001419FCC2E: E8
+  00000001419FCC2F: pop         rbp
+  00000001419FCC30: push        rbx
+
+  Summary
+
+     1A7D000 .text
+
+````

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "source": "client",
+  "character": "emily",
+  "failure": null,
+  "checks": [
+    "Native Steam stream and exact v25 bank ready before the cast",
+    "Two native cast events drive remote whole-body Dark Vision animation through Steam",
+    "Native source vision overlay manager toggles on/off; observer vision and loadout remain untouched",
+    "Both casts recover to standing with network body ownership retained",
+    "First-person sword and remote native sword remain equipped",
+    "Native cleanup restores quantity, selection and inactive vision",
+    "Both players and remote avatars retain native health; no animation damage events",
+    "Protected original executable, Steam API and save hashes unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.812,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.333,
+      "action": "Native LT press 250ms",
+      "index": 1
+    }
+  ],
+  "seenEvents": [
+    "4",
+    "2"
+  ],
+  "nativeScenes": [
+    "212",
+    "213"
+  ],
+  "dll": "D01CA730DBA05BAE2D0D1F258DAB32BBB3681B9089C61AD3E1EA15D8FAE55B4A",
+  "bankSha256": "91795F8BAD1C3C05D2DCA1BB2943234B3155FF3D23D4DD0E8FEA6E3D78E34A1C",
+  "recorded": true,
+  "scope": "Native armed standing Dark Vision on/off casts, source POV and remote full-body observer. Native source retains vision overlay/reveal, controls, camera and sword. Pose carries no effects or gameplay events. Crouched/moving/airborne casts and broad lifecycle remain unverified."
+}

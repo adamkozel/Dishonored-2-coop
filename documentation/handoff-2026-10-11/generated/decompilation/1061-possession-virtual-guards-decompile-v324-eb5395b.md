@@ -1,0 +1,12 @@
+# possession-virtual-guards-decompile-v324.txt
+
+Original: [work/movement-integration/possession-virtual-guards-decompile-v324.txt](<../../../../work/movement-integration/possession-virtual-guards-decompile-v324.txt>)
+
+SHA-256: `A7A243AEE3C2258C75F9A3FE713A8C4F49F28C5A9744AE7327E88669920DDFDD`; 631 bytes.
+
+## Original saved record
+
+````text
+{"0x140448050":"\r\nulonglong FUN_140448050(longlong param_1)\r\n\r\n{\r\n  ulonglong uVar1;\r\n  \r\n  if (*(int *)(*(longlong *)(*(longlong *)(param_1 + 0xe8) + 0x2f8) + 0x5d0) == 0xe) {\r\n    uVar1 = FUN_14061c060();\r\n    return uVar1;\r\n  }\r\n  if (-1 < *(int *)(param_1 + 0x100)) {\r\n    return (ulonglong)\r\n           *(uint *)(*(longlong *)(*(longlong *)(param_1 + 0x30) + 0x48) + 0x24 +\r\n                    (longlong)*(int *)(param_1 + 0x100) * 0x28);\r\n  }\r\n  return 0;\r\n}\r\n\r\n","0x1404480b0":"\r\nbyte FUN_1404480b0(longlong param_1)\r\n\r\n{\r\n  return ~*(byte *)(param_1 + 0xf4) & 1;\r\n}\r\n\r\n"}
+
+````

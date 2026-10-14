@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "observationOnly": true,
+  "airborneExperiment": true,
+  "airReloadExperiment": true,
+  "mappedVariants": [
+    2,
+    7,
+    8,
+    9,
+    10
+  ],
+  "source": "client",
+  "kind": "crossbow",
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Read-only native scenes and requested stance observed; mapped reader and remote playback are not acceptance criteria for this observation",
+    "Native Jump/Fall and ranged scenes overlap under ordinary controller input; no remote airborne playback claimed",
+    "Observed native Reload59 accepted ordinary jump input and overlapped a native airborne state",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 2.027,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 0
+    },
+    {
+      "seconds": 2.984,
+      "action": "Native A jump during observed Reload59",
+      "index": -1
+    },
+    {
+      "seconds": 4.871,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 1
+    },
+    {
+      "seconds": 7.947,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 2
+    },
+    {
+      "seconds": 10.808,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.887,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.953,
+      "action": "Native A jump, then LT trigger after observing native air state",
+      "index": 5
+    }
+  ],
+  "dll": "05377F9EAB5EEBA983CD35C9C3FC8E1AA3F349EDC24CDB42E0C8F15FD3B78065",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Two-round native ranged weapon/action investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

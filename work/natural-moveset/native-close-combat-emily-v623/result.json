@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "B6F17E91D00E50160AC50B79F0F0EF8D196CB5A16804631B1D8B2E160439C2F5",
+  "checks": [
+    "Ordinary close-range RT native combat observed; exact scene contract needs inspection",
+    "Ordinary close-range RT250ms facing guard2; reproduce611 native kick context if selected, no forced scene or new binding claim.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "name": "close-combat",
+        "yaw": 90,
+        "stance": 0,
+        "distance": 1.15
+      },
+      "key": "client-close-combat",
+      "count": 248,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Source-only native close-range combat observation, ordinary RT250ms. Captures exact source phases/state/target and actual game video. No new remote kick binding or shared victim outcome is claimed. All checkpoint inventory/health and14 protected files restored."
+}

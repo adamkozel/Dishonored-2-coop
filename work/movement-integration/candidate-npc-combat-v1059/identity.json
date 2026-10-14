@@ -1,0 +1,25 @@
+{
+  "created": "2026-10-14T11:22:02.942659+02:00",
+  "dll": "83D178A49FDB1546D9EEFFC2DD9C8AA0078C5DC6A1F044F30B0249FE70D46443",
+  "probe": "71B25B5DCAF0453481EA43106BEA0F286844800E1126A2EDBDC8AB56F34C1ACD",
+  "previous": "candidate-npc-combat-v1056",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 5,
+  "scope": "Experimental1059 on 1056: shared pickup sync (coin/ammo/food catalog, chapters 64-67) made map-agnostic - kGuardMap gate removed (same native campaign map/world pair still required), per-map catalog bound 64->512 (coin_limits.h), coin wire version5 refuses 64-bound peers; read-only probe --coin-catalog census. Action protocol73 and bank70 unchanged. Runtime pending.",
+  "result": "1060: whole-catalog digest cannot match per-character mission worlds; superseded by 1059c",
+  "runtimeEvidence": "../mission-pickup-audit-v1065.json"
+}

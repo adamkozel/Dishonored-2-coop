@@ -1,0 +1,89 @@
+# native-helper-call-order.txt
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/crouch-helpers/native-helper-call-order.txt](<../../../../outputs/d2-coop-lab/analysis/ghidra/crouch-helpers/native-helper-call-order.txt>)
+
+SHA-256: `894247144AACA40581ACDFABC4704B9EC1D80AA137CF572769B7882E957554DD`; 3056 bytes.
+
+## Original saved record
+
+````text
+=== GHIDRA SCRIPT EXECUTION ===
+Script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\CrouchHelperFlowDefine.java
+Program: Dishonored2.exe
+Time: Fri Oct 09 14:13:44 CEST 2026
+
+Found script: C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts\CrouchHelperFlowDefine.java
+Size: 457 bytes
+
+Script provider: JavaScriptProvider
+
+--- SCRIPT OUTPUT ---
+C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\tools\ghidra-runtime\ghidra_scripts hasn't changed, with 1 file failing in previous build(s):
+DefineBasicUpdate.java:2: error: incompatible types: ghidra.program.model.listing.Function cannot be converted to java.lang.String
+public class DefineBasicUpdate extends GhidraScript {public void run() throws Exception {for(String s:new String[]{"1406e3fa0","1406e4850","1406e4af0"}){var a=toAddr(s);if(getInstructionAt(a)==null)disassemble(a);if(getFunctionAt(a)==null)createFunction(a,null);println(getFunctionAt(a));}}}
+                                                                                                                                                                                                                                                                                           ^
+
+ENTRY 140541110
+ENTRY 14023fca0
+140541110 MOV qword ptr [RSP + 0x18],RBX
+140541115 MOV qword ptr [RSP + 0x20],RSI
+14054111a PUSH RDI
+14054111b SUB RSP,0x20
+14054111f MOV RAX,qword ptr [RCX + 0x10]
+140541123 MOV RDI,RCX
+140541126 MOV RSI,qword ptr [RAX + 0x358]
+14054112d TEST RSI,RSI
+140541130 JZ 0x140541154
+140541132 MOV RCX,RSI
+140541135 CALL 0x140750f70
+14054113a MOV RCX,RSI
+14054113d MOV RBX,RAX
+140541140 CALL 0x140750fe0
+140541145 LEA RCX,[RDI + 0x40]
+140541149 MOV RDX,RAX
+14054114c MOV R8,RBX
+14054114f CALL 0x14009d560
+140541154 MOV RBX,qword ptr [RDI + 0x10]
+140541158 LEA RDX,[RSP + 0x30]
+14054115d MOV RCX,RBX
+140541160 CALL 0x140877eb0
+140541165 MOV RAX,qword ptr [RDI + 0x38]
+140541169 TEST RAX,RAX
+14054116c JZ 0x14054124c
+140541172 MOV RAX,qword ptr [RAX + 0x1fe8]
+140541179 CMP qword ptr [RAX + 0x50],0x0
+14054117e JZ 0x14054124c
+140541184 MOV RAX,qword ptr [RDI]
+140541187 MOV EDX,dword ptr [RSP + 0x30]
+14054118b MOV RCX,RDI
+14054118e CALL qword ptr [RAX + 0xd8]
+140541194 TEST AL,AL
+140541196 JZ 0x14054124c
+14054119c MOV EDX,0x40
+1405411a1 MOV RCX,RDI
+1405411a4 CALL 0x14053bcd0
+1405411a9 MOV RAX,qword ptr [RDI + 0x38]
+1405411ad MOV RCX,qword ptr [RAX + 0x1fe8]
+1405411b4 MOVSXD RAX,dword ptr [RAX + 0x1fb8]
+1405411bb LEA RDX,[RAX + RAX*0x2]
+1405411bf MOV RAX,qword ptr [RCX + 0x68]
+1405411c3 CMP byte ptr [RAX + RDX*0x8 + 0x10],0x0
+1405411c8 JNZ 0x1405411da
+1405411ca LEA R8,[RDI + 0x2b0]
+1405411d1 LEA RDX,[RDI + 0x40]
+1405411d5 CALL 0x14023fca0
+1405411da MOV EDX,0x3
+1405411df MOV RCX,RDI
+1405411e2 CALL 0x140540a90
+1405411e7 CMP qword ptr [RBX + 0x358],0x0
+1405411ef MOV RCX,RBX
+1405411f2 JZ 0x140541203
+1405411f4 CALL 0x1408783d0
+1405411f9 MOV RCX,RAX
+1405411fc CALL 0x1407521f0
+140541201 JMP 0x14054124c
+
+
+=== SCRIPT COMPLETED SUCCESSFULLY ===
+
+````

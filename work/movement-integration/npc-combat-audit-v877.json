@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-13T22:21:20.983951+02:00",
+  "scopedNativeMeleePassed": true,
+  "complete": false,
+  "candidate": "candidate-npc-combat-v871",
+  "dll": "6C760426F98847D375272D5F6BE0E9FA6E0474332C4991E3B4E45E36609AE4E4",
+  "cases": [
+    {
+      "take": "npc-combat-host-v872",
+      "source": "host",
+      "commits": 1,
+      "declaration": "assassination_damage",
+      "passed": true,
+      "scope": "host-initiated native melee: 1 host-ordered outcome(s), matching death and stopped native AI in both games; two references released per actor before death, terminal duplicates rejected. Finite source AI/root fixture; full paired choreography, shared ragdoll/limbs, other damage families and campaign acceptance remain incomplete.",
+      "visualReview": "Contact sheets inspected: native first-person action and counterpart victim response/death visible. Observer sword partly obscures the upper view; exact attacker/victim alignment and matching corpse physics are not accepted."
+    },
+    {
+      "take": "npc-combat-client-v874",
+      "source": "client",
+      "commits": 4,
+      "declaration": "assassination_damage",
+      "passed": true,
+      "scope": "client-initiated native melee: 4 host-ordered outcome(s), matching death and stopped native AI in both games; two references released per actor before death, terminal duplicates rejected. Finite source AI/root fixture; full paired choreography, shared ragdoll/limbs, other damage families and campaign acceptance remain incomplete.",
+      "visualReview": "Contact sheets inspected: native first-person action and counterpart victim response/death visible. Observer sword partly obscures the upper view; exact attacker/victim alignment and matching corpse physics are not accepted."
+    },
+    {
+      "take": "npc-combat-fatality-v875",
+      "source": "host",
+      "commits": 1,
+      "declaration": "generic_fatality",
+      "passed": true,
+      "scope": "host-initiated native melee: 1 host-ordered outcome(s), matching death and stopped native AI in both games; two references released per actor before death, terminal duplicates rejected. Finite source AI/root fixture; full paired choreography, shared ragdoll/limbs, other damage families and campaign acceptance remain incomplete. Finite assassination exclusion selects generic fatality for this test only.",
+      "visualReview": "Source finishing hit and fallen victim visible. Receiver camera misses the victim: receiver death is validated through native health and stopped AI, not a visual matching-body claim."
+    }
+  ],
+  "checkpointAfterDeathPassed": false,
+  "checkpointFailure": "Shared checkpoint after death failed in876: host remained expectBoundary with no loading entry, client timed out. Ordinary cleanup could not disable the host reset; exact isolated process restart restored baseline. Failed restoration and separate successful recovery are both preserved. Further trace/reproduction pending. Complete combat, movement and playable co-op remain unfinished.",
+  "unchanged": [
+    "movement protocol69",
+    "both357-clip bank67 payloads",
+    "original Steam executable and DLL",
+    "protected save/config hashes"
+  ]
+}

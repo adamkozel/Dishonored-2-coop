@@ -1,0 +1,120 @@
+{
+  "source": "swarm-native-crouched-holstered-observe-v274/world-components-{0,1}.json",
+  "observedStride": 264,
+  "agentPrefixSamples": [
+    {
+      "index": 0,
+      "samples": [
+        {
+          "videoTime": 5.875,
+          "referenceFrame": "0x2bdf758bb20",
+          "entity": "0x2bdc575f180",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -47.81560516357422,
+            -153.115478515625,
+            66.3984375
+          ],
+          "initialPositionCandidate": [
+            -47.153255462646484,
+            -152.92703247070312,
+            66.3984375
+          ]
+        },
+        {
+          "videoTime": 6.362,
+          "referenceFrame": "0x2bdf758bb20",
+          "entity": "0x2bdc575f180",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -47.93225860595703,
+            -152.88037109375,
+            66.3984375
+          ],
+          "initialPositionCandidate": [
+            -47.153255462646484,
+            -152.92703247070312,
+            66.3984375
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "samples": [
+        {
+          "videoTime": 5.875,
+          "referenceFrame": "0x2bdf758c360",
+          "entity": "0x2bd8d143560",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -48.94463348388672,
+            -152.66957092285156,
+            66.3984375
+          ],
+          "initialPositionCandidate": [
+            -49.26704406738281,
+            -152.01902770996094,
+            66.3984375
+          ]
+        },
+        {
+          "videoTime": 6.362,
+          "referenceFrame": "0x2bdf758c360",
+          "entity": "0x2bd8d143560",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -48.88870620727539,
+            -152.79141235351562,
+            66.3984375
+          ],
+          "initialPositionCandidate": [
+            -49.26704406738281,
+            -152.01902770996094,
+            66.3984375
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "samples": [
+        {
+          "videoTime": 5.875,
+          "referenceFrame": "0x2bdf758cba0",
+          "entity": "0x2bd8d146480",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -47.967369079589844,
+            -153.85824584960938,
+            66.39842987060547
+          ],
+          "initialPositionCandidate": [
+            -47.615013122558594,
+            -154.4354705810547,
+            66.39842987060547
+          ]
+        },
+        {
+          "videoTime": 6.362,
+          "referenceFrame": "0x2bdf758cba0",
+          "entity": "0x2bd8d146480",
+          "ownerComponent": "0x2bd9d470020",
+          "positionCandidate": [
+            -48.0568733215332,
+            -153.56143188476562,
+            66.39842987060547
+          ],
+          "initialPositionCandidate": [
+            -47.615013122558594,
+            -154.4354705810547,
+            66.39842987060547
+          ]
+        }
+      ]
+    }
+  ],
+  "confirmed": "RTTI arkRat at component+0x80, three repeated vtables at0x108 stride, owner component reciprocal in each sampled prefix; +8 reference-frame RTTI, +0x10 swarm-agent entity RTTI, +0x78 rat-animation component RTTI.",
+  "hypotheses": "Live positions at +0xD0 change while initial positions at +0x34 remain fixed. Requires reciprocal entity/reference-frame validation and static setter/update trace before using them as network transforms. Array at component+0x68 is initialization data, not proven live coordinates.",
+  "remoteWorldImplemented": false
+}

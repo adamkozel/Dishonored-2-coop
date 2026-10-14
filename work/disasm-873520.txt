@@ -1,0 +1,96 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140873520: mov         eax,dword ptr [rdx]
+  0000000140873522: mov         dword ptr [rcx+00000000000000C0h],eax
+  0000000140873528: mov         eax,dword ptr [rdx+4]
+  000000014087352B: mov         dword ptr [rcx+00000000000000C4h],eax
+  0000000140873531: mov         eax,dword ptr [rdx+8]
+  0000000140873534: mov         dword ptr [rcx+00000000000000C8h],eax
+  000000014087353A: ret
+  000000014087353B: int         3
+  000000014087353C: int         3
+  000000014087353D: int         3
+  000000014087353E: int         3
+  000000014087353F: int         3
+  0000000140873540: mov         qword ptr [rsp+8],rcx
+  0000000140873545: push        rbp
+  0000000140873546: push        rsi
+  0000000140873547: push        rdi
+  0000000140873548: push        r14
+  000000014087354A: push        r15
+  000000014087354C: sub         rsp,30h
+  0000000140873550: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  0000000140873559: mov         qword ptr [rsp+70h],rbx
+  000000014087355E: mov         rbp,r8
+  0000000140873561: mov         rbx,rdx
+  0000000140873564: mov         r14,rcx
+  0000000140873567: lea         rax,[0000000141C87798h]
+  000000014087356E: mov         qword ptr [rcx],rax
+  0000000140873571: mov         qword ptr [rcx+18h],rdx
+  0000000140873575: mov         dword ptr [rcx+20h],0
+  000000014087357C: mov         qword ptr [rcx+8],r8
+  0000000140873580: mov         ecx,20h
+  0000000140873585: call        00000001400F13F0
+  000000014087358A: mov         r15,rax
+  000000014087358D: mov         qword ptr [rsp+68h],rax
+  0000000140873592: test        rax,rax
+  0000000140873595: je          00000001408735CF
+  0000000140873597: mov         rax,qword ptr [rbx]
+  000000014087359A: mov         rcx,rbx
+  000000014087359D: call        qword ptr [rax+0000000000000140h]
+  00000001408735A3: mov         rsi,rax
+  00000001408735A6: mov         rcx,rbp
+  00000001408735A9: call        0000000140A93200
+  00000001408735AE: mov         rbx,rax
+  00000001408735B1: lea         rcx,[r15+8]
+  00000001408735B5: call        0000000140131AE0
+  00000001408735BA: mov         qword ptr [r15],rbp
+  00000001408735BD: mov         rcx,qword ptr [rbx]
+  00000001408735C0: mov         qword ptr [r15+8],rcx
+  00000001408735C4: mov         qword ptr [r15+10h],rsi
+  00000001408735C8: mov         byte ptr [r15+18h],0
+  00000001408735CD: jmp         00000001408735D2
+  00000001408735CF: xor         r15d,r15d
+  00000001408735D2: mov         qword ptr [r14+10h],r15
+  00000001408735D6: mov         rax,r14
+  00000001408735D9: mov         rbx,qword ptr [rsp+70h]
+  00000001408735DE: add         rsp,30h
+  00000001408735E2: pop         r15
+  00000001408735E4: pop         r14
+  00000001408735E6: pop         rdi
+  00000001408735E7: pop         rsi
+  00000001408735E8: pop         rbp
+  00000001408735E9: ret
+  00000001408735EA: int         3
+  00000001408735EB: int         3
+  00000001408735EC: int         3
+  00000001408735ED: int         3
+  00000001408735EE: int         3
+  00000001408735EF: int         3
+  00000001408735F0: lea         rax,[0000000141C87528h]
+  00000001408735F7: mov         qword ptr [rcx],rax
+  00000001408735FA: ret
+  00000001408735FB: int         3
+  00000001408735FC: int         3
+  00000001408735FD: int         3
+  00000001408735FE: int         3
+  00000001408735FF: int         3
+  0000000140873600: push        rbx
+  0000000140873602: sub         rsp,20h
+  0000000140873606: lea         rax,[0000000141C87798h]
+  000000014087360D: mov         rbx,rcx
+  0000000140873610: mov         qword ptr [rcx],rax
+  0000000140873613: mov         rcx,qword ptr [rcx+10h]
+  0000000140873617: test        rcx,rcx
+  000000014087361A: je          0000000140873621
+  000000014087361C: call        00000001400F1520
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,51 @@
+[
+  {
+    "Address": "140617300",
+    "Name": "D2_Inventory_Initialize_FromCollection",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static on exact B671F824 EXE: component virtual+18. Enumerates declaration+68 collection via6136e0, constructs 56-byte entries63c630, appends613e60, sorts618f10, caches crafting indices. Entries point into a sorted contiguous array; appending live risks invalidating equipment pointers and cached indices. Native asset exports corroborate m_collection. Runtime call not tested."
+  },
+  {
+    "Address": "140617930",
+    "Name": "D2_Inventory_Start_ApplyLoadout",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static: component virtual+28. Applies declaration+78 m_defaultLoadout quantities to existing entries; saved state takes6182f0 path. Semantic lifecycle name inferred from vtable/call pattern. Asset corvo_attano.def overrides m_collection/m_defaultLoadout under component key jiGYw3. Emily story definition lacks this override. No Emily mutation yet."
+  },
+  {
+    "Address": "1406177b0",
+    "Name": "D2_Inventory_Uninitialize_Hypothesis",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static: component virtual+20. Queues owned equipment entity removal via8847f0/882fc0, frees item/equipment arrays and unregisters component. Semantic name hypothesis, no direct runtime invocation tested."
+  },
+  {
+    "Address": "140617c10",
+    "Name": "D2_Inventory_Stop_Hypothesis",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static: component virtual+30. Unsubscribes events, unequips slots and clears cached components/scheduler. Semantic name hypothesis."
+  },
+  {
+    "Address": "140617e70",
+    "Name": "D2_Inventory_NotifyItemDepleted_Hypothesis",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Correction: this is not item destruction. Static code emits event0x16b for actual-player inventory outside restore. No deletion/removal implementation established here."
+  },
+  {
+    "Address": "140759e70",
+    "Name": "D2_Spawner_ApplyComponentOverrides",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static: before spawn init, replaces NPC component declaration pointers in actor+240 (12-byte records, key+0, ptr+4); calls01d6b0 to APPEND modified index at actor+380. 01d6b0 is not removal. Inference: analogous inventory override before init may allow owned Emily sword; declaration ownership/lifetime still unresolved."
+  },
+  {
+    "Address": "14096b420",
+    "Name": "D2_InventoryDeclaration_Factory",
+    "Confidence": "confirmed-static behavior; analyst semantic name",
+    "RuntimeMutationValidated": false,
+    "Finding": "Confirmed static: allocates0x88 bytes via0f1450 and constructs613580. Recovered from inventory typeinfo virtual+30. Allocation alone does not establish ownership or safe cloning. No runtime invocation."
+  }
+]

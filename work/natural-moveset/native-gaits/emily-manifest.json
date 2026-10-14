@@ -1,0 +1,168 @@
+{
+  "role": "emily",
+  "bank": "native-gaits\\emily-gait-bank.bin",
+  "sha256": "43e9d0b51f9718b45e776177a0b03bbb6fa1528acecec088b2d0144afd963db5",
+  "sources": [
+    {
+      "alias": "sword_walk_n_add",
+      "sha256": "422e4089641796ec201bebd4602843dbf3134e44e7ff5737d1d3fbc7378799e0",
+      "phase_offset": 0.0,
+      "stride": 1.9525240774782584,
+      "seconds": 1.1333333333333333,
+      "native_speed": 1.7228153624808162
+    },
+    {
+      "alias": "sword_walk_w_add",
+      "sha256": "fc59af0be439da654c656fcdcde5b9f9c5762970c40ff136abc14bc4fc3e7281",
+      "phase_offset": 0.05,
+      "stride": 1.8548978871004798,
+      "seconds": 1.1333333333333333,
+      "native_speed": 1.6366746062651292
+    },
+    {
+      "alias": "sword_walk_s_add",
+      "sha256": "cea6b5250b1fc4590608980d3a65569347da2f68e93e559676b3dbee17d41b9d",
+      "phase_offset": 0.15,
+      "stride": 1.6772156025476268,
+      "seconds": 1.1333333333333333,
+      "native_speed": 1.479896119894965
+    },
+    {
+      "alias": "sword_walk_e_add",
+      "sha256": "a704afb3898bbd97f5f2a6dbab82971dc461f82e0c41805766a8d2733261c776",
+      "phase_offset": 0.06666666666666667,
+      "stride": 1.8548978871004798,
+      "seconds": 1.1333333333333333,
+      "native_speed": 1.6366746062651292
+    },
+    {
+      "alias": "sword_run_n_add",
+      "sha256": "b3d3ba07acd406c0365ca492698b1a859bb908bc9847d91d4078c29a4b57bf04",
+      "phase_offset": 0.975,
+      "stride": 4.393179045434427,
+      "seconds": 0.6666666666666666,
+      "native_speed": 6.589768568151641
+    },
+    {
+      "alias": "sword_run_w_add",
+      "sha256": "105cb14b7d73651927831f5d8740192799cfcb597a2dbd22a7c0a4415a943f30",
+      "phase_offset": 0.03333333333333333,
+      "stride": 3.905048154956517,
+      "seconds": 0.6666666666666666,
+      "native_speed": 5.857572232434776
+    },
+    {
+      "alias": "sword_run_s_add",
+      "sha256": "ff98e71da67302c53043ffb2b05f57a2d155a60401d40a38a70ce1a5cf5a0b4f",
+      "phase_offset": 0.16666666666666666,
+      "stride": 3.5145432906177123,
+      "seconds": 0.6666666666666666,
+      "native_speed": 5.271814935926569
+    },
+    {
+      "alias": "sword_run_e_add",
+      "sha256": "2954d0012799d5014bdf3f65b53f43ee5e30c41345a8856744ee3c6f5ed5a61e",
+      "phase_offset": 0.025,
+      "stride": 3.905048154956517,
+      "seconds": 0.6666666666666666,
+      "native_speed": 5.857572232434776
+    }
+  ],
+  "clips": [
+    {
+      "name": "armed_idle",
+      "stride": 0,
+      "angle": 0
+    },
+    {
+      "name": "walk_forward",
+      "stride": 1.9525240774782584,
+      "angle": 0.0
+    },
+    {
+      "name": "walk_forward_left",
+      "stride": 1.3465693859491745,
+      "angle": 0.7853981633974483
+    },
+    {
+      "name": "walk_left",
+      "stride": 1.8548978871004798,
+      "angle": 1.5707963267948966
+    },
+    {
+      "name": "walk_back_left",
+      "stride": 1.2503697802049423,
+      "angle": 2.356194490192345
+    },
+    {
+      "name": "walk_back",
+      "stride": 1.6772156025476268,
+      "angle": 3.141592653589793
+    },
+    {
+      "name": "walk_back_right",
+      "stride": 1.2503697802049423,
+      "angle": 3.9269908169872414
+    },
+    {
+      "name": "walk_right",
+      "stride": 1.8548978871004798,
+      "angle": 4.71238898038469
+    },
+    {
+      "name": "walk_forward_right",
+      "stride": 1.3465693859491745,
+      "angle": 5.497787143782138
+    },
+    {
+      "name": "run_forward",
+      "stride": 4.393179045434427,
+      "angle": 0.0
+    },
+    {
+      "name": "run_forward_left",
+      "stride": 2.9389378701230413,
+      "angle": 0.7853981633974483
+    },
+    {
+      "name": "run_left",
+      "stride": 3.905048154956517,
+      "angle": 1.5707963267948966
+    },
+    {
+      "name": "run_back_left",
+      "stride": 2.6268524717880175,
+      "angle": 2.356194490192345
+    },
+    {
+      "name": "run_back",
+      "stride": 3.5145432906177123,
+      "angle": 3.141592653589793
+    },
+    {
+      "name": "run_back_right",
+      "stride": 2.6268524717880175,
+      "angle": 3.9269908169872414
+    },
+    {
+      "name": "run_right",
+      "stride": 3.905048154956517,
+      "angle": 4.71238898038469
+    },
+    {
+      "name": "run_forward_right",
+      "stride": 2.9389378701230413,
+      "angle": 5.497787143782138
+    }
+  ],
+  "gaits": [
+    "walk",
+    "run"
+  ],
+  "phase": "Travel distance divided by blended native stride; no elapsed-time gait advancement",
+  "diagonals": "Whole-body pose and displacement blends of native cardinal motions",
+  "root_writes": false,
+  "events": false,
+  "first_person_constraints": false,
+  "visual_accepted": false
+}

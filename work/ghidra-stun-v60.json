@@ -1,0 +1,183 @@
+{
+  "program": "Dishonored2.exe",
+  "exe_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "scope": "Read-only native stun investigation; runtime whitelist unchanged",
+  "calls": [
+    {
+      "index": 0,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"address\":\"141fe65f8\",\"length\":32,\"data\":[1,0,0,0,0,0,0,0,0,0,0,0,112,122,50,2,32,102,254,1,248,101,254,1,0,0,0,0,0,0,0,0],\"hex\":\"010000000000000000000000707a32022066fe01f865fe010000000000000000\"}"
+          }
+        ],
+        "structuredContent": {
+          "result": "{\"address\":\"141fe65f8\",\"length\":32,\"data\":[1,0,0,0,0,0,0,0,0,0,0,0,112,122,50,2,32,102,254,1,248,101,254,1,0,0,0,0,0,0,0,0],\"hex\":\"010000000000000000000000707a32022066fe01f865fe010000000000000000\"}"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 1,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "From 1408dadff [DATA]\nFrom 1408dae0c [DATA]"
+          }
+        ],
+        "structuredContent": {
+          "result": "From 1408dadff [DATA]\nFrom 1408dae0c [DATA]"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 2,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140868870(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  undefined1 *puVar3;\r\n  undefined4 *puVar4;\r\n  undefined8 *puVar5;\r\n  float fVar6;\r\n  undefined4 uVar7;\r\n  float fVar8;\r\n  undefined4 local_res8 [2];\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x18);\r\n  uVar2 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x300);\r\n  if (**(char **)(lVar1 + 0xb0) != '\\0') {\r\n    puVar3 = (undefined1 *)FUN_1407710b0(uVar2,local_res8,lVar1 + 0xb0);\r\n    if ((undefined1 *)(param_1 + 0x34) != puVar3) {\r\n      *(undefined1 *)(param_1 + 0x34) = *puVar3;\r\n    }\r\n  }\r\n  puVar5 = (undefined8 *)(lVar1 + 0xb8);\r\n  if (*(char *)*puVar5 == '\\0') {\r\n    if (**(char **)(lVar1 + 0xb0) == '\\0') goto LAB_140868911;\r\n    puVar5 = (undefined8 *)(lVar1 + 0xb0);\r\n  }\r\n  puVar3 = (undefined1 *)FUN_140770f10(uVar2,local_res8,puVar5);\r\n  if ((undefined1 *)(param_1 + 0x35) != puVar3) {\r\n    *(undefined1 *)(param_1 + 0x35) = *puVar3;\r\n  }\r\nLAB_140868911:\r\n  fVar8 = DAT_14228a75c * *(float *)(lVar1 + 0xa4);\r\n  if ((fVar8 < 0.0) || (6.2831855 <= fVar8)) {\r\n    fVar6 = (float)FUN_1411ad95c(fVar8 * 0.15915494);\r\n    fVar8 = fVar8 - fVar6 * 6.2831855;\r\n  }\r\n  uVar7 = FUN_1411ade30(fVar8);\r\n  *(undefined4 *)(param_1 + 0x40) = uVar7;\r\n  fVar8 = DAT_14228a75c * *(float *)(lVar1 + 0xa8);\r\n  if ((fVar8 < 0.0) || (6.2831855 <= fVar8)) {\r\n    fVar6 = (float)FUN_1411ad95c(fVar8 * 0.15915494);\r\n    fVar8 = fVar8 - fVar6 * 6.2831855;\r\n  }\r\n  uVar7 = FUN_1411ade30(fVar8);\r\n  *(undefined4 *)(param_1 + 0x44) = uVar7;\r\n  uVar2 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x330);\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_143996498);\r\n  if ((undefined4 *)(param_1 + 0x54) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x54) = *puVar4;\r\n  }\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_1439964a0);\r\n  if ((undefined4 *)(param_1 + 0x58) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x58) = *puVar4;\r\n  }\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_1439964a8);\r\n  if ((undefined4 *)(param_1 + 0x5c) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x5c) = *puVar4;\r\n  }\r\n  if ((undefined4 *)(param_1 + 0x30) != local_res8) {\r\n    *(undefined4 *)(param_1 + 0x30) = 0xffffffff;\r\n  }\r\n  if (**(char **)(lVar1 + 0x138) != '\\0') {\r\n    puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8);\r\n    if ((undefined4 *)(param_1 + 0x60) != puVar4) {\r\n      *(undefined4 *)(param_1 + 0x60) = *puVar4;\r\n    }\r\n  }\r\n  *(undefined1 *)(param_1 + 0x48) = 0;\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140868870(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  undefined1 *puVar3;\r\n  undefined4 *puVar4;\r\n  undefined8 *puVar5;\r\n  float fVar6;\r\n  undefined4 uVar7;\r\n  float fVar8;\r\n  undefined4 local_res8 [2];\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x18);\r\n  uVar2 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x300);\r\n  if (**(char **)(lVar1 + 0xb0) != '\\0') {\r\n    puVar3 = (undefined1 *)FUN_1407710b0(uVar2,local_res8,lVar1 + 0xb0);\r\n    if ((undefined1 *)(param_1 + 0x34) != puVar3) {\r\n      *(undefined1 *)(param_1 + 0x34) = *puVar3;\r\n    }\r\n  }\r\n  puVar5 = (undefined8 *)(lVar1 + 0xb8);\r\n  if (*(char *)*puVar5 == '\\0') {\r\n    if (**(char **)(lVar1 + 0xb0) == '\\0') goto LAB_140868911;\r\n    puVar5 = (undefined8 *)(lVar1 + 0xb0);\r\n  }\r\n  puVar3 = (undefined1 *)FUN_140770f10(uVar2,local_res8,puVar5);\r\n  if ((undefined1 *)(param_1 + 0x35) != puVar3) {\r\n    *(undefined1 *)(param_1 + 0x35) = *puVar3;\r\n  }\r\nLAB_140868911:\r\n  fVar8 = DAT_14228a75c * *(float *)(lVar1 + 0xa4);\r\n  if ((fVar8 < 0.0) || (6.2831855 <= fVar8)) {\r\n    fVar6 = (float)FUN_1411ad95c(fVar8 * 0.15915494);\r\n    fVar8 = fVar8 - fVar6 * 6.2831855;\r\n  }\r\n  uVar7 = FUN_1411ade30(fVar8);\r\n  *(undefined4 *)(param_1 + 0x40) = uVar7;\r\n  fVar8 = DAT_14228a75c * *(float *)(lVar1 + 0xa8);\r\n  if ((fVar8 < 0.0) || (6.2831855 <= fVar8)) {\r\n    fVar6 = (float)FUN_1411ad95c(fVar8 * 0.15915494);\r\n    fVar8 = fVar8 - fVar6 * 6.2831855;\r\n  }\r\n  uVar7 = FUN_1411ade30(fVar8);\r\n  *(undefined4 *)(param_1 + 0x44) = uVar7;\r\n  uVar2 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x330);\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_143996498);\r\n  if ((undefined4 *)(param_1 + 0x54) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x54) = *puVar4;\r\n  }\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_1439964a0);\r\n  if ((undefined4 *)(param_1 + 0x58) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x58) = *puVar4;\r\n  }\r\n  puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8,&DAT_1439964a8);\r\n  if ((undefined4 *)(param_1 + 0x5c) != puVar4) {\r\n    *(undefined4 *)(param_1 + 0x5c) = *puVar4;\r\n  }\r\n  if ((undefined4 *)(param_1 + 0x30) != local_res8) {\r\n    *(undefined4 *)(param_1 + 0x30) = 0xffffffff;\r\n  }\r\n  if (**(char **)(lVar1 + 0x138) != '\\0') {\r\n    puVar4 = (undefined4 *)FUN_14060ce50(uVar2,local_res8);\r\n    if ((undefined4 *)(param_1 + 0x60) != puVar4) {\r\n      *(undefined4 *)(param_1 + 0x60) = *puVar4;\r\n    }\r\n  }\r\n  *(undefined1 *)(param_1 + 0x48) = 0;\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 3,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nulonglong FUN_140869400(longlong param_1)\r\n\r\n{\r\n  ulonglong uVar1;\r\n  \r\n  if ((-1 < *(int *)(param_1 + 0x60)) &&\r\n     (uVar1 = *(ulonglong *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x330) + 0x48),\r\n     *(float *)(uVar1 + 0x24 + (longlong)*(int *)(param_1 + 0x60) * 0x28) == 0.0)) {\r\n    return uVar1 & 0xffffffffffffff00;\r\n  }\r\n  uVar1 = FUN_140854910();\r\n  return uVar1;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nulonglong FUN_140869400(longlong param_1)\r\n\r\n{\r\n  ulonglong uVar1;\r\n  \r\n  if ((-1 < *(int *)(param_1 + 0x60)) &&\r\n     (uVar1 = *(ulonglong *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x330) + 0x48),\r\n     *(float *)(uVar1 + 0x24 + (longlong)*(int *)(param_1 + 0x60) * 0x28) == 0.0)) {\r\n    return uVar1 & 0xffffffffffffff00;\r\n  }\r\n  uVar1 = FUN_140854910();\r\n  return uVar1;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 4,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"address\":\"142327a70\",\"length\":112,\"data\":[184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0,46,63,65,86,97,114,107,80,108,97,121,101,114,83,116,97,116,101,83,116,117,110,64,64,0,0,0,0,0,0,0,0,184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0,46,63,65,86,97,114,107,68,101,99,108,80,108,97,121,101,114,83,116,97,116,101,83,116,117,110,64,64,0,0,0,0,184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0],\"hex\":\"b846f5410100000000000000000000002e3f415661726b506c6179657253746174655374756e40400000000000000000b846f5410100000000000000000000002e3f415661726b4465636c506c6179657253746174655374756e404000000000b846f541010000000000000000000000\"}"
+          }
+        ],
+        "structuredContent": {
+          "result": "{\"address\":\"142327a70\",\"length\":112,\"data\":[184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0,46,63,65,86,97,114,107,80,108,97,121,101,114,83,116,97,116,101,83,116,117,110,64,64,0,0,0,0,0,0,0,0,184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0,46,63,65,86,97,114,107,68,101,99,108,80,108,97,121,101,114,83,116,97,116,101,83,116,117,110,64,64,0,0,0,0,184,70,245,65,1,0,0,0,0,0,0,0,0,0,0,0],\"hex\":\"b846f5410100000000000000000000002e3f415661726b506c6179657253746174655374756e40400000000000000000b846f5410100000000000000000000002e3f415661726b4465636c506c6179657253746174655374756e404000000000b846f541010000000000000000000000\"}"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 5,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":\"No function found for 0x1408dadf0\"}"
+          }
+        ],
+        "structuredContent": {
+          "result": "{\"error\":\"No function found for 0x1408dadf0\"}"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 6,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nundefined8 FUN_140870960(longlong param_1)\r\n\r\n{\r\n  float *pfVar1;\r\n  char cVar2;\r\n  longlong lVar3;\r\n  \r\n  cVar2 = FUN_140854890();\r\n  if (cVar2 == '\\0') {\r\n    return 0;\r\n  }\r\n  pfVar1 = (float *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x308) + 0x2b0);\r\n  if ((3.4028235e+38 < *pfVar1 || *pfVar1 == 3.4028235e+38) &&\r\n     (lVar3 = FUN_1407fdaa0(), *(int *)(lVar3 + 4) == 0)) {\r\n    return 0;\r\n  }\r\n  return 1;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nundefined8 FUN_140870960(longlong param_1)\r\n\r\n{\r\n  float *pfVar1;\r\n  char cVar2;\r\n  longlong lVar3;\r\n  \r\n  cVar2 = FUN_140854890();\r\n  if (cVar2 == '\\0') {\r\n    return 0;\r\n  }\r\n  pfVar1 = (float *)(*(longlong *)(*(longlong *)(param_1 + 0x10) + 0x308) + 0x2b0);\r\n  if ((3.4028235e+38 < *pfVar1 || *pfVar1 == 3.4028235e+38) &&\r\n     (lVar3 = FUN_1407fdaa0(), *(int *)(lVar3 + 4) == 0)) {\r\n    return 0;\r\n  }\r\n  return 1;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 7,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140870470(longlong param_1,longlong param_2)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined4 auStackX_8 [2];\r\n  undefined1 auStack_38 [48];\r\n  \r\n  FUN_1409ffc00();\r\n  *(undefined4 *)(param_1 + 0xa8) = *(undefined4 *)(param_2 + 8);\r\n  if (*(longlong *)(param_2 + 0x10) != 0) {\r\n    auStackX_8[0] = 0;\r\n    FUN_140854be0(param_1,auStackX_8,*(longlong *)(param_2 + 0x10),7,0);\r\n  }\r\n  uVar1 = *(undefined8 *)(param_1 + 0x10);\r\n  FUN_140835590(auStack_38,0,0x81,*(undefined4 *)(param_1 + 8));\r\n  FUN_1408024d0(uVar1,0x40,auStack_38);\r\n  FUN_1408024d0(uVar1,0x35,auStack_38);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140870470(longlong param_1,longlong param_2)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined4 auStackX_8 [2];\r\n  undefined1 auStack_38 [48];\r\n  \r\n  FUN_1409ffc00();\r\n  *(undefined4 *)(param_1 + 0xa8) = *(undefined4 *)(param_2 + 8);\r\n  if (*(longlong *)(param_2 + 0x10) != 0) {\r\n    auStackX_8[0] = 0;\r\n    FUN_140854be0(param_1,auStackX_8,*(longlong *)(param_2 + 0x10),7,0);\r\n  }\r\n  uVar1 = *(undefined8 *)(param_1 + 0x10);\r\n  FUN_140835590(auStack_38,0,0x81,*(undefined4 *)(param_1 + 8));\r\n  FUN_1408024d0(uVar1,0x40,auStack_38);\r\n  FUN_1408024d0(uVar1,0x35,auStack_38);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 8,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140870ce0(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  float *pfVar3;\r\n  char cVar4;\r\n  undefined1 auStackX_8 [8];\r\n  undefined1 auStack_48 [64];\r\n  \r\n  FUN_1408695c0();\r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  uVar2 = *(undefined8 *)(lVar1 + 800);\r\n  FUN_140752870(uVar2,\"arkPlayerStateStun::Update\",0,&DAT_1431af668);\r\n  FUN_1407527e0(uVar2,\"arkPlayerStateStun::Update\",0,&DAT_1431af668);\r\n  if (*(float *)(param_1 + 0xa8) <= 0.0) {\r\n    cVar4 = FUN_140854920(param_1);\r\n    if (cVar4 != '\\0') {\r\n      cVar4 = FUN_140803180(lVar1,0x40);\r\n      if (cVar4 == '\\0') {\r\n        cVar4 = FUN_140803180(lVar1,0x35);\r\n        if (cVar4 == '\\0') {\r\n          FUN_140854190(param_1);\r\n          FUN_1408022e0(lVar1,0);\r\n          FUN_140835590(auStack_48,0,0x46,*(undefined4 *)(param_1 + 8));\r\n          FUN_1408024d0(lVar1,0x40,auStack_48);\r\n          FUN_1408024d0(lVar1,0x35,auStack_48);\r\n        }\r\n      }\r\n    }\r\n  }\r\n  if (0.0 < *(float *)(param_1 + 0xa8)) {\r\n    uVar2 = FUN_140854880(param_1);\r\n    pfVar3 = (float *)FUN_140877eb0(uVar2,auStackX_8);\r\n    *(float *)(param_1 + 0xa8) = *(float *)(param_1 + 0xa8) - *pfVar3;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140870ce0(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined8 uVar2;\r\n  float *pfVar3;\r\n  char cVar4;\r\n  undefined1 auStackX_8 [8];\r\n  undefined1 auStack_48 [64];\r\n  \r\n  FUN_1408695c0();\r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  uVar2 = *(undefined8 *)(lVar1 + 800);\r\n  FUN_140752870(uVar2,\"arkPlayerStateStun::Update\",0,&DAT_1431af668);\r\n  FUN_1407527e0(uVar2,\"arkPlayerStateStun::Update\",0,&DAT_1431af668);\r\n  if (*(float *)(param_1 + 0xa8) <= 0.0) {\r\n    cVar4 = FUN_140854920(param_1);\r\n    if (cVar4 != '\\0') {\r\n      cVar4 = FUN_140803180(lVar1,0x40);\r\n      if (cVar4 == '\\0') {\r\n        cVar4 = FUN_140803180(lVar1,0x35);\r\n        if (cVar4 == '\\0') {\r\n          FUN_140854190(param_1);\r\n          FUN_1408022e0(lVar1,0);\r\n          FUN_140835590(auStack_48,0,0x46,*(undefined4 *)(param_1 + 8));\r\n          FUN_1408024d0(lVar1,0x40,auStack_48);\r\n          FUN_1408024d0(lVar1,0x35,auStack_48);\r\n        }\r\n      }\r\n    }\r\n  }\r\n  if (0.0 < *(float *)(param_1 + 0xa8)) {\r\n    uVar2 = FUN_140854880(param_1);\r\n    pfVar3 = (float *)FUN_140877eb0(uVar2,auStackX_8);\r\n    *(float *)(param_1 + 0xa8) = *(float *)(param_1 + 0xa8) - *pfVar3;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 9,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1408686e0(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  undefined8 uVar3;\r\n  \r\n  FUN_140853d40();\r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  lVar2 = *(longlong *)(param_1 + 0x18);\r\n  *(undefined4 *)(*(longlong *)(lVar1 + 0x308) + 0x2ac) = *(undefined4 *)(lVar2 + 0xac);\r\n  FUN_140869500(param_1);\r\n  FUN_1407f43b0(*(undefined8 *)(lVar1 + 0x310),*(undefined4 *)(lVar2 + 0xc0),\r\n                *(undefined4 *)(lVar2 + 0xc4));\r\n  *(undefined1 *)(param_1 + 0x4a) = 0;\r\n  *(undefined4 *)(param_1 + 0x4c) = DAT_14399634c;\r\n  FUN_14060b780(*(undefined8 *)(lVar1 + 0x330),lVar2 + 0x118);\r\n  if ((((-1 < *(int *)(param_1 + 0x5c)) &&\r\n       (0.0 < *(float *)(*(longlong *)(*(longlong *)(lVar1 + 0x330) + 0x48) + 0x24 +\r\n                        (longlong)*(int *)(param_1 + 0x5c) * 0x28))) ||\r\n      ((-1 < *(int *)(param_1 + 0x30) &&\r\n       (0.0 < *(float *)(*(longlong *)(*(longlong *)(lVar1 + 0x330) + 0x48) + 0x24 +\r\n                        (longlong)*(int *)(param_1 + 0x30) * 0x28))))) &&\r\n     (*(char *)(param_1 + 0x49) == '\\0')) {\r\n    uVar3 = *(undefined8 *)(lVar1 + 0x358);\r\n    *(undefined1 *)(param_1 + 0x49) = 1;\r\n    FUN_1405ff1f0(uVar3);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1408686e0(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  undefined8 uVar3;\r\n  \r\n  FUN_140853d40();\r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  lVar2 = *(longlong *)(param_1 + 0x18);\r\n  *(undefined4 *)(*(longlong *)(lVar1 + 0x308) + 0x2ac) = *(undefined4 *)(lVar2 + 0xac);\r\n  FUN_140869500(param_1);\r\n  FUN_1407f43b0(*(undefined8 *)(lVar1 + 0x310),*(undefined4 *)(lVar2 + 0xc0),\r\n                *(undefined4 *)(lVar2 + 0xc4));\r\n  *(undefined1 *)(param_1 + 0x4a) = 0;\r\n  *(undefined4 *)(param_1 + 0x4c) = DAT_14399634c;\r\n  FUN_14060b780(*(undefined8 *)(lVar1 + 0x330),lVar2 + 0x118);\r\n  if ((((-1 < *(int *)(param_1 + 0x5c)) &&\r\n       (0.0 < *(float *)(*(longlong *)(*(longlong *)(lVar1 + 0x330) + 0x48) + 0x24 +\r\n                        (longlong)*(int *)(param_1 + 0x5c) * 0x28))) ||\r\n      ((-1 < *(int *)(param_1 + 0x30) &&\r\n       (0.0 < *(float *)(*(longlong *)(*(longlong *)(lVar1 + 0x330) + 0x48) + 0x24 +\r\n                        (longlong)*(int *)(param_1 + 0x30) * 0x28))))) &&\r\n     (*(char *)(param_1 + 0x49) == '\\0')) {\r\n    uVar3 = *(undefined8 *)(lVar1 + 0x358);\r\n    *(undefined1 *)(param_1 + 0x49) = 1;\r\n    FUN_1405ff1f0(uVar3);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "index": 10,
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_140868d70(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  FUN_14060c9b0(*(undefined8 *)(lVar1 + 0x330),*(longlong *)(param_1 + 0x18) + 0x118);\r\n  lVar2 = *(longlong *)(lVar1 + 0x300);\r\n  FUN_140774620(lVar2,0,0,0,*(undefined4 *)(param_1 + 8));\r\n  *(undefined4 *)(lVar2 + 0xd98) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xd9c) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xda0) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xda4) = 0x7149f2ca;\r\n  if (*(char *)(param_1 + 0x4a) != '\\0') {\r\n    FUN_140775270(*(undefined8 *)(lVar1 + 0x300),0,1);\r\n  }\r\n  if ((*(char *)(param_1 + 0x49) != '\\0') &&\r\n     (*(longlong *)(*(longlong *)(lVar1 + 0x358) + 0x10) != 0)) {\r\n    FUN_1405ff2d0();\r\n    *(undefined1 *)(param_1 + 0x49) = 0;\r\n  }\r\n  FUN_1408541a0(param_1);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_140868d70(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  \r\n  lVar1 = *(longlong *)(param_1 + 0x10);\r\n  FUN_14060c9b0(*(undefined8 *)(lVar1 + 0x330),*(longlong *)(param_1 + 0x18) + 0x118);\r\n  lVar2 = *(longlong *)(lVar1 + 0x300);\r\n  FUN_140774620(lVar2,0,0,0,*(undefined4 *)(param_1 + 8));\r\n  *(undefined4 *)(lVar2 + 0xd98) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xd9c) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xda0) = 0x7149f2ca;\r\n  *(undefined4 *)(lVar2 + 0xda4) = 0x7149f2ca;\r\n  if (*(char *)(param_1 + 0x4a) != '\\0') {\r\n    FUN_140775270(*(undefined8 *)(lVar1 + 0x300),0,1);\r\n  }\r\n  if ((*(char *)(param_1 + 0x49) != '\\0') &&\r\n     (*(longlong *)(*(longlong *)(lVar1 + 0x358) + 0x10) != 0)) {\r\n    FUN_1405ff2d0();\r\n    *(undefined1 *)(param_1 + 0x49) = 0;\r\n  }\r\n  FUN_1408541a0(param_1);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ]
+}

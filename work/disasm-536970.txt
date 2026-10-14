@@ -1,0 +1,48 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140536970: mov         qword ptr [rsp+8],rbx
+  0000000140536975: mov         qword ptr [rsp+10h],rsi
+  000000014053697A: push        rdi
+  000000014053697B: sub         rsp,20h
+  000000014053697F: mov         rax,qword ptr [00000001439A5290h]
+  0000000140536986: mov         rsi,rcx
+  0000000140536989: mov         rdi,qword ptr [rax+00000000001F6F28h]
+  0000000140536990: call        00000001407BE4E0
+  0000000140536995: lea         rdx,[0000000141B7E488h]
+  000000014053699C: test        dword ptr [rax+18h],0FFFFFFh
+  00000001405369A3: mov         rbx,rax
+  00000001405369A6: setbe       r8b
+  00000001405369AA: movzx       ecx,r8b
+  00000001405369AE: call        00000001401668E0
+  00000001405369B3: call        00000001405BEF90
+  00000001405369B8: test        byte ptr [rax+00000000000000D1h],8
+  00000001405369BF: jne         00000001405369FE
+  00000001405369C1: mov         rdx,rsi
+  00000001405369C4: mov         rcx,rax
+  00000001405369C7: call        0000000140883A10
+  00000001405369CC: lea         r8,[rbx+10h]
+  00000001405369D0: lea         rdx,[rbx+8]
+  00000001405369D4: mov         rcx,rdi
+  00000001405369D7: call        00000001404F1380
+  00000001405369DC: mov         rcx,qword ptr [00000001439A5290h]
+  00000001405369E3: mov         edx,9
+  00000001405369E8: add         rcx,1F6EC8h
+  00000001405369EF: call        00000001407885B0
+  00000001405369F4: mov         dword ptr [rdi+0000000000000678h],0FFFFFFFFh
+  00000001405369FE: mov         rbx,qword ptr [rsp+30h]
+  0000000140536A03: mov         rsi,qword ptr [rsp+38h]
+  0000000140536A08: xor         al,al
+  0000000140536A0A: add         rsp,20h
+  0000000140536A0E: pop         rdi
+  0000000140536A0F: ret
+  0000000140536A10: 48
+
+  Summary
+
+     1A7D000 .text

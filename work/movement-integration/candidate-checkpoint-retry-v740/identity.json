@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-13T13:59:23.032272+02:00",
+  "dll": "2E750FF68CCCD3A7010F9F9E85B68CD82D6B4C3D27B78408DC138829EC3921EA",
+  "probe": "1ECB428D77B93915EA0417F3531E9103BB8E24DEC2336E874A809BA827810B22",
+  "previous": "candidate-door-catalog-v728",
+  "protocol": 69,
+  "bankVersion": 67,
+  "clips": 357,
+  "banks": [
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\corvo-choke-bank.bin",
+      "sha256": "660557041AFF3CBE4C974DC233AFD80AD2CF888DD7DF39344DEE0D0C44381159"
+    },
+    {
+      "path": "work\\natural-moveset\\heavy-banks-v633\\emily-choke-bank.bin",
+      "sha256": "EB4FF10152368232B6C5442DFA3BF9B746B59E36DAC92FCDCE4CEEE8977D9732"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Native checkpoint memory continuation preserves fixed SLOT82 permission when the exact native routine returns AL=0; consumes it at AL=1 or loading entry. Scoped diagnostics capture consumed callbacks and save-I/O state. Same ordinary door catalogue and protocol69/bank67/357. Runtime pending.",
+  "runtimeAudit": "../native-checkpoint-retry-audit-v746.json",
+  "runtimeScope": "Client shared reset passes741, no busy callback in that take. Fixed-SLOT82 isolated fixture only."
+}

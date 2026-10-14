@@ -1,0 +1,176 @@
+{
+  "alias": "item_switch_crossbow_to_heart",
+  "family": "ranged_and_items",
+  "identity": "c35acb719588a466e7acce8bed8f0587f92f556430fdcfe4a7a88c9cd0993c3e",
+  "video": "skin-review-v1-single-1\\item_switch_crossbow_to_heart.mp4",
+  "frames": 89,
+  "fps": 30,
+  "duration": 2.966666666666667,
+  "render_seconds": 18.882328510284424,
+  "roles": {
+    "corvo": "item_switch_crossbow_to_heart-corvo",
+    "emily": "item_switch_crossbow_to_heart-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_ready",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": true,
+  "skin_preview_version": "corvo-shin-anchors-v1",
+  "skin_preview_limit": "Corvo calf anchors corrected; small native axial helper twist and other runtime correctives remain approximate.",
+  "render_identity": "86de7ec16088663ad05565cdda875ca1d766a2dfd9ac5720a1bf59a61435bcd5",
+  "render_inputs": {
+    "data_identity": "f3d87bd8e0524a51566e49601767da33fa1d4486559b1111118a80c91a52584c",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      },
+      "corvo-crossbow_corvo-model": {
+        "path": "natural-moveset\\item-models\\crossbow_corvo.json",
+        "sha256": "b2bb3b6fe9afd11ce1633fb32655bb12d240a32200c19345e1d4b74a66b16e3b"
+      },
+      "corvo-crossbow_corvo-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\crossbow_corvo-skeleton.json",
+        "sha256": "e9781f63f9e1d5ff295fa68f53a6f8178607b679f3a9a5493ff7ed8ebb70a8db"
+      },
+      "corvo-crossbow_corvo-crossbow_idle": {
+        "mechanism": {
+          "id": "crossbow_corvo-crossbow_idle",
+          "kind": "crossbow_corvo",
+          "asset": "models/weapons/crossbow/animations/corvo/crossbow_idle.md6anim",
+          "asset_sha256": "EF76EC62A3E29D6F89D3F6AE49FAF04BEE93BDB432390F11BAB58F7C6F1757A3",
+          "skeleton": "models/weapons/crossbow/crossbow_corvo.md6skl",
+          "skeleton_sha256": "3C8C36F0487F2037FD59FA9E72B899EE10565D4933CC2C9832AB8881C4E7BDCB",
+          "sampling": {
+            "joints": 14,
+            "frames": 3,
+            "fps": 30,
+            "animation_sha256": "ef76ec62a3e29d6f89d3f6ae49faf04bee93bdb432390f11bab58f7c6f1757a3",
+            "skeleton_sha256": "3c8c36f0487f2037fd59fa9e72b899ee10565d4933cc2c9832ab8881c4e7bdcb",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\crossbow_corvo-crossbow_idle.edgepose",
+          "sample_sha256": "2bba96cd1b1023394f1f610bf12e79e98e46464d1d0dddc5e22c3a5bf0b6e01b",
+          "events": false
+        }
+      },
+      "corvo-heart-model": {
+        "path": "natural-moveset\\item-models\\heart.json",
+        "sha256": "2abfc245daaf9a763b4f8b5532b48dcea338211e221c854bbb5772756b4ac556"
+      },
+      "corvo-heart-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\heart-skeleton.json",
+        "sha256": "6fa3b171103ac8f8a9879a1d30f99f0bc99050194a97b6dcf7bbb343c564d5b1"
+      },
+      "corvo-heart-heart_idle": {
+        "mechanism": {
+          "id": "heart-heart_idle",
+          "kind": "heart",
+          "asset": "models/weapons/heart/_animations_/heart_idle.md6anim",
+          "asset_sha256": "3695D0F3AAA4A60FC3EB926B9B75FB3085252CF2DA773A4FEB2262FAC428FC8C",
+          "skeleton": "models/weapons/heart/heart.md6skl",
+          "skeleton_sha256": "C67EDEBD87970D892157CFFABC9F959EACB77D7EDBD5CD466718EAD3C2768F76",
+          "sampling": {
+            "joints": 22,
+            "frames": 2,
+            "fps": 30,
+            "animation_sha256": "3695d0f3aaa4a60fc3eb926b9b75fb3085252cf2da773a4feb2262fac428fc8c",
+            "skeleton_sha256": "c67edebd87970d892157cffabc9f959eacb77d7edbd5cd466718ead3c2768f76",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\heart-heart_idle.edgepose",
+          "sample_sha256": "8de3aa1d5f7e692329804db165a3464f343a2c2540a8672907eaa985fa3de737",
+          "events": false
+        }
+      },
+      "emily-crossbow_emily-model": {
+        "path": "natural-moveset\\item-models\\crossbow_emily.json",
+        "sha256": "be8e3103c1a2b7a9a4201c3db29f9c72fa8afb824dc0eb268f706d71fd6bc0e1"
+      },
+      "emily-crossbow_emily-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\crossbow_emily-skeleton.json",
+        "sha256": "0332a7ebe4d77efa24075348000bb5e7d7067000a9979e38f645ed1b2acdd18b"
+      },
+      "emily-crossbow_emily-crossbow_idle": {
+        "mechanism": {
+          "id": "crossbow_emily-crossbow_idle",
+          "kind": "crossbow_emily",
+          "asset": "models/weapons/crossbow/animations/emily/crossbow_idle.md6anim",
+          "asset_sha256": "CAD50BB992850E423DDFF8B9ACB6277DA5F0F6D75EDAF5CDD236BC60AFA0A89B",
+          "skeleton": "models/weapons/crossbow/crossbow_emily.md6skl",
+          "skeleton_sha256": "C94CB897DC6A51EBAC6DB521D9FCD352660793670589F3C0A6A8AA61021B92AD",
+          "sampling": {
+            "joints": 33,
+            "frames": 3,
+            "fps": 30,
+            "animation_sha256": "cad50bb992850e423ddff8b9acb6277da5f0f6d75edaf5cdd236bc60afa0a89b",
+            "skeleton_sha256": "c94cb897dc6a51ebac6db521d9fcd352660793670589f3c0a6a8aa61021b92ad",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\crossbow_emily-crossbow_idle.edgepose",
+          "sample_sha256": "b5608b7cdd2b1815bd3ece565e32b8c65c40c3003d232e046f5ac845943e5e8b",
+          "events": false
+        }
+      },
+      "emily-heart-model": {
+        "path": "natural-moveset\\item-models\\heart.json",
+        "sha256": "2abfc245daaf9a763b4f8b5532b48dcea338211e221c854bbb5772756b4ac556"
+      },
+      "emily-heart-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\heart-skeleton.json",
+        "sha256": "6fa3b171103ac8f8a9879a1d30f99f0bc99050194a97b6dcf7bbb343c564d5b1"
+      },
+      "emily-heart-heart_idle": {
+        "mechanism": {
+          "id": "heart-heart_idle",
+          "kind": "heart",
+          "asset": "models/weapons/heart/_animations_/heart_idle.md6anim",
+          "asset_sha256": "3695D0F3AAA4A60FC3EB926B9B75FB3085252CF2DA773A4FEB2262FAC428FC8C",
+          "skeleton": "models/weapons/heart/heart.md6skl",
+          "skeleton_sha256": "C67EDEBD87970D892157CFFABC9F959EACB77D7EDBD5CD466718EAD3C2768F76",
+          "sampling": {
+            "joints": 22,
+            "frames": 2,
+            "fps": 30,
+            "animation_sha256": "3695d0f3aaa4a60fc3eb926b9b75fb3085252cf2da773a4feb2262fac428fc8c",
+            "skeleton_sha256": "c67edebd87970d892157cffabc9f959eacb77d7edbd5cd466718ead3c2768f76",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\heart-heart_idle.edgepose",
+          "sample_sha256": "8de3aa1d5f7e692329804db165a3464f343a2c2540a8672907eaa985fa3de737",
+          "events": false
+        }
+      }
+    },
+    "scripts": {
+      "render_library.py": "319e587a7df3ca37e251cd018a9e9a2e5a17a7ceb16d9557f0f3be3aa5e5b5dd",
+      "preview_natural_walk.py": "3589b51ed9479c2c05b0b0fed568d2fa1865834bd7bdd8c32db61455d60524fb",
+      "preview_skin.py": "cac45f58ae3739ffe007db6b81ebd7cf4d8bfe90801015977eac5952ddd26a71",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b8aac937837fcf08075080bf1de6c6461906d74703256291db166a7148ba8a3b"
+    }
+  }
+}

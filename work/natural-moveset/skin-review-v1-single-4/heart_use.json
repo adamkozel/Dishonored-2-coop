@@ -1,0 +1,118 @@
+{
+  "alias": "heart_use",
+  "family": "ranged_and_items",
+  "identity": "616e31c6e0c151696ef59332a691ba489481d6ce7ffcca3a4170486f6448a3c6",
+  "video": "skin-review-v1-single-4\\heart_use.mp4",
+  "frames": 31,
+  "fps": 30,
+  "duration": 1.0333333333333334,
+  "render_seconds": 6.757285833358765,
+  "roles": {
+    "corvo": "heart_use-corvo",
+    "emily": "heart_use-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_plus_native_heart",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": true,
+  "skin_preview_version": "corvo-shin-anchors-v1",
+  "skin_preview_limit": "Corvo calf anchors corrected; small native axial helper twist and other runtime correctives remain approximate.",
+  "render_identity": "392a19aaeb30a7c72b0370e49b9149d3f2e52ab0f1a460fe476572e68ea3cba2",
+  "render_inputs": {
+    "data_identity": "27b879065c2a34562609be928acc7d937895bd073db3a837e527b2106e7c5ab5",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      },
+      "corvo-heart-model": {
+        "path": "natural-moveset\\item-models\\heart.json",
+        "sha256": "2abfc245daaf9a763b4f8b5532b48dcea338211e221c854bbb5772756b4ac556"
+      },
+      "corvo-heart-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\heart-skeleton.json",
+        "sha256": "6fa3b171103ac8f8a9879a1d30f99f0bc99050194a97b6dcf7bbb343c564d5b1"
+      },
+      "corvo-heart-heart_use": {
+        "mechanism": {
+          "id": "heart-heart_use",
+          "kind": "heart",
+          "asset": "models/weapons/heart/_animations_/heart_use.md6anim",
+          "asset_sha256": "E006F325190DD785369E97FFA51573928A637118645890B163D6C6787F26F2BE",
+          "skeleton": "models/weapons/heart/heart.md6skl",
+          "skeleton_sha256": "C67EDEBD87970D892157CFFABC9F959EACB77D7EDBD5CD466718EAD3C2768F76",
+          "sampling": {
+            "joints": 22,
+            "frames": 31,
+            "fps": 30,
+            "animation_sha256": "e006f325190dd785369e97ffa51573928a637118645890b163d6c6787f26f2be",
+            "skeleton_sha256": "c67edebd87970d892157cffabc9f959eacb77d7edbd5cd466718ead3c2768f76",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\heart-heart_use.edgepose",
+          "sample_sha256": "592de76f7781a5a2215d8daca526618dfe777dc315c44bcd3f37993c5fe47989",
+          "events": false
+        }
+      },
+      "emily-heart-model": {
+        "path": "natural-moveset\\item-models\\heart.json",
+        "sha256": "2abfc245daaf9a763b4f8b5532b48dcea338211e221c854bbb5772756b4ac556"
+      },
+      "emily-heart-skeleton": {
+        "path": "natural-moveset\\item-mechanisms\\heart-skeleton.json",
+        "sha256": "6fa3b171103ac8f8a9879a1d30f99f0bc99050194a97b6dcf7bbb343c564d5b1"
+      },
+      "emily-heart-heart_use": {
+        "mechanism": {
+          "id": "heart-heart_use",
+          "kind": "heart",
+          "asset": "models/weapons/heart/_animations_/heart_use.md6anim",
+          "asset_sha256": "E006F325190DD785369E97FFA51573928A637118645890B163D6C6787F26F2BE",
+          "skeleton": "models/weapons/heart/heart.md6skl",
+          "skeleton_sha256": "C67EDEBD87970D892157CFFABC9F959EACB77D7EDBD5CD466718EAD3C2768F76",
+          "sampling": {
+            "joints": 22,
+            "frames": 31,
+            "fps": 30,
+            "animation_sha256": "e006f325190dd785369e97ffa51573928a637118645890b163d6c6787f26f2be",
+            "skeleton_sha256": "c67edebd87970d892157cffabc9f959eacb77d7edbd5cd466718ead3c2768f76",
+            "method": "offline native Edge evaluator; no entrypoint or events"
+          },
+          "sample_file": "item-mechanisms\\heart-heart_use.edgepose",
+          "sample_sha256": "592de76f7781a5a2215d8daca526618dfe777dc315c44bcd3f37993c5fe47989",
+          "events": false
+        }
+      }
+    },
+    "scripts": {
+      "render_library.py": "319e587a7df3ca37e251cd018a9e9a2e5a17a7ceb16d9557f0f3be3aa5e5b5dd",
+      "preview_natural_walk.py": "3589b51ed9479c2c05b0b0fed568d2fa1865834bd7bdd8c32db61455d60524fb",
+      "preview_skin.py": "cac45f58ae3739ffe007db6b81ebd7cf4d8bfe90801015977eac5952ddd26a71",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b8aac937837fcf08075080bf1de6c6461906d74703256291db166a7148ba8a3b"
+    }
+  }
+}

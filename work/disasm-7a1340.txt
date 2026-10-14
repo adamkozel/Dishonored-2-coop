@@ -1,0 +1,93 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407A1340: push        rdi
+  00000001407A1342: sub         rsp,50h
+  00000001407A1346: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001407A134F: mov         qword ptr [rsp+60h],rbx
+  00000001407A1354: mov         qword ptr [rsp+68h],rbp
+  00000001407A1359: mov         qword ptr [rsp+70h],rsi
+  00000001407A135E: mov         rdi,rcx
+  00000001407A1361: lea         rdx,[0000000143984470h]
+  00000001407A1368: call        0000000140523120
+  00000001407A136D: mov         rsi,rax
+  00000001407A1370: lea         rdx,[0000000143984618h]
+  00000001407A1377: mov         rcx,rdi
+  00000001407A137A: call        0000000140523120
+  00000001407A137F: mov         rbp,rax
+  00000001407A1382: cmp         dword ptr [00000001432C7ED4h],0
+  00000001407A1389: jne         00000001407A1421
+  00000001407A138F: mov         r8,rsi
+  00000001407A1392: lea         rdx,[0000000141AB3BC8h]
+  00000001407A1399: lea         rcx,[rsp+28h]
+  00000001407A139E: call        00000001401402F0
+  00000001407A13A3: nop
+  00000001407A13A4: lea         rdx,[0000000141AB3AC8h]
+  00000001407A13AB: lea         rcx,[rsp+28h]
+  00000001407A13B0: call        0000000140144E50
+  00000001407A13B5: mov         rcx,qword ptr [000000014228BAF0h]
+  00000001407A13BC: mov         rbx,qword ptr [rcx]
+  00000001407A13BF: lea         rcx,[rsp+28h]
+  00000001407A13C4: call        00000001401D9090
+  00000001407A13C9: mov         rdx,rax
+  00000001407A13CC: xor         r8d,r8d
+  00000001407A13CF: mov         rcx,qword ptr [000000014228BAF0h]
+  00000001407A13D6: call        qword ptr [rbx+0000000000000098h]
+  00000001407A13DC: test        al,al
+  00000001407A13DE: jne         00000001407A1417
+  00000001407A13E0: lea         rcx,[rsp+28h]
+  00000001407A13E5: call        00000001401D9090
+  00000001407A13EA: mov         rdx,rax
+  00000001407A13ED: lea         rcx,[0000000141AC7B00h]
+  00000001407A13F4: call        0000000140166830
+  00000001407A13F9: lea         rdx,[0000000143983B48h]
+  00000001407A1400: mov         rcx,rdi
+  00000001407A1403: call        00000001407BE910
+  00000001407A1408: nop
+  00000001407A1409: lea         rcx,[rsp+28h]
+  00000001407A140E: call        000000014013FD10
+  00000001407A1413: xor         al,al
+  00000001407A1415: jmp         00000001407A1491
+  00000001407A1417: lea         rcx,[rsp+28h]
+  00000001407A141C: call        000000014013FD10
+  00000001407A1421: lea         rdx,[rsp+28h]
+  00000001407A1426: mov         rcx,rsi
+  00000001407A1429: call        0000000140088500
+  00000001407A142E: nop
+  00000001407A142F: lea         rdx,[0000000141C65B78h]
+  00000001407A1436: mov         rcx,rax
+  00000001407A1439: call        0000000140140130
+  00000001407A143E: movzx       ebx,al
+  00000001407A1441: lea         rcx,[rsp+28h]
+  00000001407A1446: call        000000014013FD10
+  00000001407A144B: test        bl,bl
+  00000001407A144D: je          00000001407A1462
+  00000001407A144F: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407A1456: add         rcx,30F370h
+  00000001407A145D: call        000000014067E6A0
+  00000001407A1462: mov         rax,qword ptr [00000001439A5290h]
+  00000001407A1469: lea         rbx,[rax+00000000001F6EC8h]
+  00000001407A1470: mov         edx,0Fh
+  00000001407A1475: mov         rcx,rbx
+  00000001407A1478: call        00000001407885B0
+  00000001407A147D: mov         r8,rbp
+  00000001407A1480: mov         rdx,rsi
+  00000001407A1483: mov         rcx,qword ptr [rbx+0000000000000090h]
+  00000001407A148A: call        00000001404F1D40
+  00000001407A148F: mov         al,1
+  00000001407A1491: mov         rbx,qword ptr [rsp+60h]
+  00000001407A1496: mov         rbp,qword ptr [rsp+68h]
+  00000001407A149B: mov         rsi,qword ptr [rsp+70h]
+  00000001407A14A0: add         rsp,50h
+  00000001407A14A4: pop         rdi
+  00000001407A14A5: ret
+  00000001407A14A6: int         3
+
+  Summary
+
+     1A7D000 .text

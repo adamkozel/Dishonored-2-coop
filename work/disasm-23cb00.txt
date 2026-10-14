@@ -1,0 +1,59 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014023CB00: movzx       eax,word ptr [rdx]
+  000000014023CB03: mov         r8,rcx
+  000000014023CB06: mov         ecx,0FFFFh
+  000000014023CB0B: cmp         ax,cx
+  000000014023CB0E: je          000000014023CB3C
+  000000014023CB10: movzx       edx,ax
+  000000014023CB13: mov         eax,dword ptr [r8+10h]
+  000000014023CB17: and         eax,0FFFFFFh
+  000000014023CB1C: cmp         edx,eax
+  000000014023CB1E: jge         000000014023CB3C
+  000000014023CB20: test        edx,edx
+  000000014023CB22: js          000000014023CB3C
+  000000014023CB24: mov         rax,qword ptr [r8+8]
+  000000014023CB28: lea         rcx,[rdx*8+0000000000000002h]
+  000000014023CB30: add         rcx,rdx
+  000000014023CB33: lea         rcx,[rax+rcx*8]
+  000000014023CB37: jmp         00000001401D9090
+  000000014023CB3C: xor         eax,eax
+  000000014023CB3E: ret
+  000000014023CB3F: int         3
+  000000014023CB40: movzx       eax,word ptr [rdx]
+  000000014023CB43: mov         r8,rcx
+  000000014023CB46: mov         ecx,0FFFFh
+  000000014023CB4B: cmp         ax,cx
+  000000014023CB4E: je          000000014023CB7C
+  000000014023CB50: movzx       edx,ax
+  000000014023CB53: mov         eax,dword ptr [r8+48h]
+  000000014023CB57: and         eax,0FFFFFFh
+  000000014023CB5C: cmp         edx,eax
+  000000014023CB5E: jge         000000014023CB7C
+  000000014023CB60: test        edx,edx
+  000000014023CB62: js          000000014023CB7C
+  000000014023CB64: mov         rax,qword ptr [r8+40h]
+  000000014023CB68: lea         rcx,[rdx*8+0000000000000002h]
+  000000014023CB70: add         rcx,rdx
+  000000014023CB73: lea         rcx,[rax+rcx*8]
+  000000014023CB77: jmp         00000001401D9090
+  000000014023CB7C: xor         eax,eax
+  000000014023CB7E: ret
+  000000014023CB7F: int         3
+  000000014023CB80: mov         rax,rsp
+  000000014023CB83: push        r14
+  000000014023CB85: sub         rsp,140h
+  000000014023CB8C: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  000000014023CB95: mov         qword ptr [rax+8],rbx
+  000000014023CB99: mov         qword ptr [rax+10h],rbp
+  000000014023CB9D: mov         qword ptr [rax+18h],rsi
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,413 @@
+{
+  "case": "source-pause",
+  "before": {
+    "source": {
+      "sent": 131,
+      "received": 0,
+      "rejected": 0,
+      "unknown": 428,
+      "presented": 0,
+      "reads": 921,
+      "readMaxMs": 7.6037,
+      "readStage": 0,
+      "started": 0,
+      "stopped": 0,
+      "updated": 0,
+      "refused": 0,
+      "retired": 0,
+      "sourceId": 0,
+      "target": 0,
+      "nativeId": 4294967295,
+      "nativeOwner": 0,
+      "leased": false,
+      "lastSentId": 745,
+      "lastPresentedId": 0
+    },
+    "peer": {
+      "sent": 0,
+      "received": 131,
+      "rejected": 4,
+      "unknown": 0,
+      "presented": 126,
+      "reads": 0,
+      "readMaxMs": 0.0,
+      "readStage": 0,
+      "started": 9,
+      "stopped": 8,
+      "updated": 75,
+      "refused": 0,
+      "retired": 0,
+      "sourceId": 745,
+      "target": 189269860,
+      "nativeId": 341,
+      "nativeOwner": 209916390,
+      "leased": true,
+      "lastSentId": 0,
+      "lastPresentedId": 745
+    },
+    "player": {
+      "tick": 372260812,
+      "game": "0x1d1e4e08050",
+      "player": "0x1d23021f800",
+      "machine": "0x1d249485960",
+      "mode": "0x1d2602d1330",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -39.3600006,
+        -155.710007,
+        66.4036484
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 63,
+          "vtableRva": "0x1c80ed8",
+          "type": ".?AVarkPlayerStateUsePower@@"
+        }
+      ],
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": false,
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "sourceStream": {
+      "powerSentHistory": [
+        {
+          "event": 2,
+          "variant": 26,
+          "durationMs": 333,
+          "nativeScene": 223
+        }
+      ],
+      "powerReceivedHistory": [],
+      "wireRefused": 0,
+      "stopServiceTick": 0,
+      "stopLastState": 0,
+      "sourceLastFailure": 0,
+      "sourceFailureCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sourceReadTimings": {
+        "states": {
+          "count": 66,
+          "maxMs": 0.3876
+        },
+        "stun": {
+          "count": 66,
+          "maxMs": 0.0011
+        },
+        "power": {
+          "count": 66,
+          "maxMs": 6.8144
+        },
+        "ranged": {
+          "count": 63,
+          "maxMs": 1.6685
+        },
+        "grenadeScene": {
+          "count": 63,
+          "maxMs": 0.017
+        },
+        "carry": {
+          "count": 63,
+          "maxMs": 0.002
+        },
+        "carryPreparation": {
+          "count": 63,
+          "maxMs": 0.0005
+        },
+        "sword": {
+          "count": 66,
+          "maxMs": 0.958
+        },
+        "heldRanged": {
+          "count": 63,
+          "maxMs": 1.4474
+        },
+        "heldGrenade": {
+          "count": 63,
+          "maxMs": 0.9178
+        },
+        "muzzle": {
+          "count": 66,
+          "maxMs": 0.376
+        }
+      },
+      "sourceAttempts": 66,
+      "sourceMisses": 0,
+      "sourceReadMaxMs": 10.843,
+      "sendGapMaxMs": 63,
+      "stoppedStateAgeMs": 0,
+      "stoppedRootAgeMs": 0,
+      "rejectedEvent": 1,
+      "expectedEvent": 0,
+      "rejectedSequence": 2359,
+      "expectedSequence": 2357,
+      "rejectedState": 0,
+      "expectedState": 0,
+      "stateRejectReason": 7,
+      "rejectedAgeMs": 0.0,
+      "rejectReason": 7,
+      "retireReason": 2,
+      "retireRootAge": 0,
+      "retireHelloAge": 47,
+      "sourceGrenadeHeld": 0,
+      "sourceGrenade": 0,
+      "remoteGrenadeHeld": 0,
+      "remoteGrenade": 0,
+      "armed": true,
+      "ready": true,
+      "remainingMs": 15000,
+      "token": 10,
+      "peerToken": 10,
+      "epoch": 66,
+      "peerEpoch": 66,
+      "handle": 209916411,
+      "sourceState": 10,
+      "remoteState": 0,
+      "sourceEvent": 2,
+      "remoteEvent": 1,
+      "lastSequence": 2446,
+      "started": 10,
+      "sent": 2558,
+      "received": 2446,
+      "accepted": 1627,
+      "applied": 1,
+      "rejected": 68,
+      "refused": 0,
+      "released": 1,
+      "actionActive": false,
+      "result": "ready",
+      "leanSide": 0.0,
+      "leanUp": 0.0,
+      "sourceVariant": 0,
+      "sourcePhase": 0,
+      "remoteVariant": 0,
+      "remotePhase": 0,
+      "carrySource": 0,
+      "carryRemote": 0,
+      "carrySourceIncarnation": 0,
+      "carryRemoteIncarnation": 0,
+      "carryLocalHandle": 0,
+      "carrySpawner": 0,
+      "carryDefinition": 0,
+      "corpseMutations": false
+    },
+    "peerStream": {
+      "powerSentHistory": [],
+      "powerReceivedHistory": [
+        {
+          "event": 2,
+          "variant": 26,
+          "durationMs": 333,
+          "nativeScene": 0
+        }
+      ],
+      "wireRefused": 0,
+      "stopServiceTick": 0,
+      "stopLastState": 0,
+      "sourceLastFailure": 0,
+      "sourceFailureCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sourceReadTimings": {
+        "states": {
+          "count": 65,
+          "maxMs": 0.7191
+        },
+        "stun": {
+          "count": 65,
+          "maxMs": 0.0009
+        },
+        "power": {
+          "count": 65,
+          "maxMs": 7.1427
+        },
+        "ranged": {
+          "count": 65,
+          "maxMs": 2.2717
+        },
+        "grenadeScene": {
+          "count": 65,
+          "maxMs": 0.0193
+        },
+        "carry": {
+          "count": 65,
+          "maxMs": 0.0018
+        },
+        "carryPreparation": {
+          "count": 65,
+          "maxMs": 0.0005
+        },
+        "sword": {
+          "count": 65,
+          "maxMs": 1.152
+        },
+        "heldRanged": {
+          "count": 65,
+          "maxMs": 1.6774
+        },
+        "heldGrenade": {
+          "count": 65,
+          "maxMs": 0.8591
+        },
+        "muzzle": {
+          "count": 65,
+          "maxMs": 0.9235
+        }
+      },
+      "sourceAttempts": 65,
+      "sourceMisses": 0,
+      "sourceReadMaxMs": 12.8428,
+      "sendGapMaxMs": 78,
+      "stoppedStateAgeMs": 0,
+      "stoppedRootAgeMs": 0,
+      "rejectedEvent": 1,
+      "expectedEvent": 0,
+      "rejectedSequence": 2042,
+      "expectedSequence": 2040,
+      "rejectedState": 0,
+      "expectedState": 0,
+      "stateRejectReason": 7,
+      "rejectedAgeMs": 0.0,
+      "rejectReason": 2,
+      "retireReason": 2,
+      "retireRootAge": 0,
+      "retireHelloAge": 31,
+      "sourceGrenadeHeld": 0,
+      "sourceGrenade": 0,
+      "remoteGrenadeHeld": 0,
+      "remoteGrenade": 0,
+      "armed": true,
+      "ready": true,
+      "remainingMs": 15000,
+      "token": 10,
+      "peerToken": 10,
+      "epoch": 66,
+      "peerEpoch": 66,
+      "handle": 209916390,
+      "sourceState": 0,
+      "remoteState": 10,
+      "sourceEvent": 1,
+      "remoteEvent": 2,
+      "lastSequence": 2576,
+      "started": 10,
+      "sent": 2450,
+      "received": 2560,
+      "accepted": 1761,
+      "applied": 0,
+      "rejected": 38,
+      "refused": 0,
+      "released": 0,
+      "actionActive": false,
+      "result": "ready",
+      "leanSide": 0.0,
+      "leanUp": 0.0,
+      "sourceVariant": 0,
+      "sourcePhase": 0,
+      "remoteVariant": 0,
+      "remotePhase": 0,
+      "carrySource": 0,
+      "carryRemote": 0,
+      "carrySourceIncarnation": 0,
+      "carryRemoteIncarnation": 0,
+      "carryLocalHandle": 0,
+      "carrySpawner": 0,
+      "carryDefinition": 0,
+      "corpseMutations": false
+    }
+  },
+  "afterSource": {
+    "sent": 139,
+    "received": 0,
+    "rejected": 0,
+    "unknown": 428,
+    "presented": 0,
+    "reads": 929,
+    "readMaxMs": 7.6037,
+    "readStage": 0,
+    "started": 0,
+    "stopped": 0,
+    "updated": 0,
+    "refused": 0,
+    "retired": 0,
+    "sourceId": 0,
+    "target": 0,
+    "nativeId": 4294967295,
+    "nativeOwner": 0,
+    "leased": false,
+    "lastSentId": 0,
+    "lastPresentedId": 0
+  },
+  "afterPeer": {
+    "sent": 0,
+    "received": 139,
+    "rejected": 4,
+    "unknown": 0,
+    "presented": 133,
+    "reads": 0,
+    "readMaxMs": 0.0,
+    "readStage": 0,
+    "started": 9,
+    "stopped": 9,
+    "updated": 82,
+    "refused": 0,
+    "retired": 0,
+    "sourceId": 0,
+    "target": 0,
+    "nativeId": 4294967295,
+    "nativeOwner": 0,
+    "leased": false,
+    "lastSentId": 0,
+    "lastPresentedId": 0
+  },
+  "settledRows": 20
+}

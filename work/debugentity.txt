@@ -1,0 +1,104 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  0000000140885C10: push        rdi
+  0000000140885C12: push        r14
+  0000000140885C14: push        r15
+  0000000140885C16: sub         rsp,30h
+  0000000140885C1A: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  0000000140885C23: mov         qword ptr [rsp+58h],rbx
+  0000000140885C28: mov         qword ptr [rsp+60h],rbp
+  0000000140885C2D: mov         qword ptr [rsp+68h],rsi
+  0000000140885C32: mov         r14,rcx
+  0000000140885C35: mov         eax,dword ptr [rcx]
+  0000000140885C37: cmp         eax,2
+  0000000140885C3A: je          0000000140885C5E
+  0000000140885C3C: test        eax,eax
+  0000000140885C3E: jle         0000000140885C46
+  0000000140885C40: mov         rdx,qword ptr [rcx+8]
+  0000000140885C44: jmp         0000000140885C4D
+  0000000140885C46: lea         rdx,[0000000141AB2848h]
+  0000000140885C4D: lea         rcx,[0000000141C8A648h]
+  0000000140885C54: call        0000000140166830
+  0000000140885C59: jmp         0000000140885D43
+  0000000140885C5E: mov         rsi,qword ptr [00000001439A5290h]
+  0000000140885C65: add         rsi,601B8h
+  0000000140885C6C: mov         qword ptr [rsp+50h],rsi
+  0000000140885C71: mov         dl,1
+  0000000140885C73: mov         rcx,rsi
+  0000000140885C76: call        0000000140158290
+  0000000140885C7B: nop
+  0000000140885C7C: mov         dl,1
+  0000000140885C7E: mov         rcx,rsi
+  0000000140885C81: call        0000000140158290
+  0000000140885C86: mov         r15d,dword ptr [rsi+10h]
+  0000000140885C8A: and         r15d,0FFFFFFh
+  0000000140885C91: mov         rcx,rsi
+  0000000140885C94: call        00000001401582E0
+  0000000140885C99: xor         edi,edi
+  0000000140885C9B: test        r15d,r15d
+  0000000140885C9E: jle         0000000140885D0E
+  0000000140885CA0: mov         dl,1
+  0000000140885CA2: mov         rcx,rsi
+  0000000140885CA5: call        0000000140158290
+  0000000140885CAA: movsxd      rcx,edi
+  0000000140885CAD: mov         rax,qword ptr [rsi+8]
+  0000000140885CB1: lea         rbx,[rax+rcx*4]
+  0000000140885CB5: mov         rcx,rsi
+  0000000140885CB8: call        00000001401582E0
+  0000000140885CBD: mov         ecx,dword ptr [rbx]
+  0000000140885CBF: call        00000001406DC560
+  0000000140885CC4: mov         rbp,rax
+  0000000140885CC7: test        rax,rax
+  0000000140885CCA: je          0000000140885CF4
+  0000000140885CCC: lea         rcx,[rax+20h]
+  0000000140885CD0: call        00000001401D9090
+  0000000140885CD5: mov         rbx,rax
+  0000000140885CD8: mov         edx,1
+  0000000140885CDD: mov         rcx,r14
+  0000000140885CE0: call        000000014000B670
+  0000000140885CE5: mov         rdx,rax
+  0000000140885CE8: mov         rcx,rbx
+  0000000140885CEB: call        0000000140143650
+  0000000140885CF0: test        eax,eax
+  0000000140885CF2: je          0000000140885CFD
+  0000000140885CF4: inc         edi
+  0000000140885CF6: cmp         edi,r15d
+  0000000140885CF9: jge         0000000140885D0E
+  0000000140885CFB: jmp         0000000140885CA0
+  0000000140885CFD: mov         rdx,rbp
+  0000000140885D00: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140885D07: call        00000001408AD840
+  0000000140885D0C: jmp         0000000140885D3B
+  0000000140885D0E: mov         eax,dword ptr [r14]
+  0000000140885D11: lea         rdx,[0000000141AB2848h]
+  0000000140885D18: cmp         eax,1
+  0000000140885D1B: jle         0000000140885D23
+  0000000140885D1D: mov         r8,qword ptr [r14+10h]
+  0000000140885D21: jmp         0000000140885D26
+  0000000140885D23: mov         r8,rdx
+  0000000140885D26: test        eax,eax
+  0000000140885D28: jle         0000000140885D2E
+  0000000140885D2A: mov         rdx,qword ptr [r14+8]
+  0000000140885D2E: lea         rcx,[0000000141C8A668h]
+  0000000140885D35: call        0000000140166830
+  0000000140885D3A: nop
+  0000000140885D3B: mov         rcx,rsi
+  0000000140885D3E: call        00000001401582E0
+  0000000140885D43: mov         rbx,qword ptr [rsp+58h]
+  0000000140885D48: mov         rbp,qword ptr [rsp+60h]
+  0000000140885D4D: mov         rsi,qword ptr [rsp+68h]
+  0000000140885D52: add         rsp,30h
+  0000000140885D56: pop         r15
+  0000000140885D58: pop         r14
+  0000000140885D5A: pop         rdi
+  0000000140885D5B: ret
+  0000000140885D5C: int         3
+  0000000140885D5D: int         3
+  0000000140885D5E: int         3
+  0000000140885D5F: int         3
+  0000000140885D60: 40

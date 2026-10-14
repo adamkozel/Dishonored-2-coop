@@ -1,0 +1,57 @@
+{
+  "exe_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "status": "v5 scoped current-foot reference callback verified in isolated D2; default remains off until terrain visual review",
+  "confirmed": [
+    "AnimEvolved native vtable RVA 1b80408; feet runtime embedded at +2d08, count +2d10.",
+    "Runtime reflection: feet pointer +0, count +8, rootPositionAndPitchMs +c, expectedReferenceFrameOrigin +1c, currentWeight +28, targetWeight +2c, velocity +30; size38.",
+    "549340 allocates count * 0x280 native FootIK objects from decl+98 foot configuration.",
+    "Read-only isolated Emily observation: two native FootIK objects, current and target weight1.",
+    "54f500 evaluates native graph then publishes phase0, before feet/IK stages.",
+    "550a10 selects and steps feet weights, then398de0 schedules each foot's native casts.",
+    "550970 calls54f9f0 (IK setup including54bc00 native foot/pelvis correction), then publishes phase1 and phase2.",
+    "541110 finalizes corrective helpers and publishes phase3. Existing authored movement applied immediately before phase3 overwrites preceding IK.",
+    "FootIK VT+0 RVA396610 builds IK reference effector: flag4/state2 zeroes source-foot reference Z, else source ankleZ minus NPC c4. Must match current-pose solve/cast branch through this later callback."
+  ],
+  "experiment": "Apply only the scoped remote movement bank at phase0 via coop_movement_feet on; default phase3 preserved. Allow native stages to run once in their normal order. No direct IK, physics, damage or AI calls.",
+  "hypotheses": [
+    "Native foot casts and corrections may produce useful terrain contact for the authored bank.",
+    "Foot plant markers from the retained NPC graph may not match the authored gait and require further work."
+  ],
+  "acceptance": "Actual A/B game footage plus final pose, native attachment and root ownership checks. Numerics alone do not establish good foot contact.",
+  "ghidra_saved": true,
+  "evidence": [
+    "native-feet-corvo-v1",
+    "native-feet-emily-v1",
+    "native-feet-corvo-close-v1"
+  ],
+  "phase0_observation": "All 3 takes pass eight functional checks. Close video shows feet raised/redirected unnaturally. Native foot state0/1 anticipated targets differ from authored ankle pose. Not promoted.",
+  "matrix_note": "Native SIMD padding elements3/7/11/15 are not rotation data; phase analysis excludes them. Upper body changes mainly common pelvis translation; actual rotations retained.",
+  "candidate_v2": "8CE44D7A5556C140EF78D8FC2550FF1C72F2EF401E060C196AA2AEE3AC3E4A4B: scoped native solve/cast flag4 (current pose) with automatic restoration; special airborne/slide/traversal/power remains phase3.",
+  "candidate_v3": "E7447EBA2608DAB35874977A857476B177C6BE6E53AA2E9D12719BFA42526561: native54bbc0 resets feet each network transform; skip only owned continuous grounded authored movement.",
+  "v3_tests": [
+    "native-feet-corvo-close-v3",
+    "native-feet-emily-close-v3",
+    "native-feet-air-corvo-v3",
+    "native-feet-air-emily-v3"
+  ],
+  "v3_checks": 30,
+  "v3_visual": "Closer grounded contact than v2; native targets still discard authored swing height. Not accepted as complete.",
+  "v4_rejected": "Explicit target-height addition double-counted authored ankle height. Corvo numerical checks passed but actual foot visuals floated; preserved in rejected-feet-v4. Never promoted.",
+  "candidate_v5": "E077DE1C0662F2236DF0A9203D3262F27009DC10E4A8D171220452BCFB1A8147",
+  "v5_snapshot": "candidate-native-feet-E077",
+  "v5_game_checks": 112,
+  "v5_tests": [
+    "native-feet-corvo-close-v5",
+    "native-feet-emily-close-v5",
+    "native-feet-air-corvo-v5",
+    "native-feet-air-emily-v5",
+    "native-feet-stairs-corvo-v5b",
+    "native-feet-stairs-emily-v5",
+    "movement-native-feet-v5-regressions.json",
+    "native-feet-blink-v5",
+    "native-feet-grapple-v5"
+  ],
+  "v5_numerics": "Flat ankle height preserved within 1.1 mm after common pelvis floor correction; native leg lengths unchanged. Native crouch knee roll differs up to 10.71 mm / matrix element .1906. Stairs traverse roughly 3 m up and down. Numerics do not establish visual acceptance.",
+  "v5_visual": "Six actual D2 videos indexed in dashboard (45 total). Closer floor contact. Native staircase clips functional but wide dim shots require closer review. v17 dedicated stair gait experiment under development.",
+  "v5_complete": false
+}

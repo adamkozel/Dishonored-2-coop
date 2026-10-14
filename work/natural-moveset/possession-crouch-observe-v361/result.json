@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "stance": "crouched",
+  "holstered": false,
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Requested native stance/sword context confirmed before input; cast may natively change stance",
+    "Raw native scenes and accepted/rejected ownership reader samples recorded without assuming context support",
+    "Native input produces reciprocal Possession cast scenes; observed phase set recorded without assuming complete coverage",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.955,
+      "input": "Native Corvo LT1800 then release at grounded floor"
+    }
+  ],
+  "dll": "1DECA11B323146BA2A5403E0CE71CB641A104E789071253B606796B06640A2C7",
+  "probe": "BDDD5E8FAF976561771D8F8DD5A177E5A45B5145F9F674AA38CA339E889A80CC",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; empty-target stance/equipment observation only. Existing standing human-target remote evidence is separate; no new remote context or gameplay claim. Checkpoint and protected save restoration mandatory."
+}

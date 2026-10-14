@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-14T12:53:37.207082+02:00",
+  "candidate": "candidate-npc-combat-v1091",
+  "dll": "BCA4230A2DB93F5CF743D7F84EE6AB9DD6604EF0CB98A1ED91ADEC5DC2752178",
+  "harnesses": [
+    "../natural-moveset/Test-MissionNpcCensus-v1090.ps1",
+    "../natural-moveset/Test-MissionNpcStream-v1092.ps1"
+  ],
+  "census": {
+    "take": "mission-npc-census-v1090",
+    "npcs": 141,
+    "identicalAcrossCharacters": true,
+    "uniqueReciprocal": 133,
+    "scriptedCorpses": 22,
+    "within20m": 5,
+    "within40m": 17,
+    "within80m": 34
+  },
+  "stream": {
+    "take": "mission-npc-stream-v1092",
+    "hostReady": 9,
+    "clientReady": 9,
+    "clientBodyApplied": 6710,
+    "pairs": [
+      {
+        "poses": 192,
+        "spawner": "script_spawner_docks_oh_workers_bloodflymeat_worker_c",
+        "roots": 760,
+        "distance": 0.0
+      },
+      {
+        "poses": 192,
+        "spawner": "script_spawner_docks_worker_01",
+        "roots": 759,
+        "distance": 0.0
+      },
+      {
+        "poses": 192,
+        "spawner": "script_spawner_oh_workers_dreadfulwale_worker_a",
+        "roots": 759,
+        "distance": 0.0
+      },
+      {
+        "poses": 192,
+        "spawner": "script_spawner_docks_oh_civ_barge_worker_c",
+        "roots": 759,
+        "distance": 0.0
+      },
+      {
+        "poses": 192,
+        "spawner": "script_spawner_docks_oh_workers_dreadfulwale_worker_b",
+        "roots": 758,
+        "distance": 0.0
+      },
+      {
+        "poses": 192,
+        "spawner": "script_spawner_docks_docker_19",
+        "roots": 758,
+        "distance": 0.0
+      },
+      {
+        "poses": 191,
+        "spawner": "script_spawner_docks_civilian_10",
+        "roots": 757,
+        "distance": 0.0
+      },
+      {
+        "poses": 191,
+        "spawner": "script_spawner_docks_civilian_04",
+        "roots": 757,
+        "distance": 0.0
+      },
+      {
+        "poses": 190,
+        "spawner": "script_spawner_docks_docker_ramos",
+        "roots": 756,
+        "distance": 0.0
+      }
+    ]
+  },
+  "findings": [
+    "Confirmed runtime: Edge of the World authored NPC sets are identical for Corvo and Emily (141, unlike pickups).",
+    "1091: generic NPC authority/combat/partner perception no longer require the Dunwall map (coopNpcPairReady); legacy guard-link experiments still do.",
+    "Confirmed runtime: the NPC authority stream binds the 9 eligible dock NPCs within 60 m of the host on both peers; client replicas follow host authority (max deviation 5 mm, including two NPCs that moved 0.1-0.19 m); 2 of 132 unbound NPCs diverged between worlds by up to 2.3 m within 10 s, showing why authority is needed."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Eligibility excludes NPCs whose decision/reflex AI is not idle (e.g. scripted walkers such as docks_docker_10); needs AI-flag semantics before widening.",
+    "Dynamic relevance (rebinding as players move) instead of a bind-time nearest set.",
+    "NPC combat on missions with hostile guards; perception of both players; shared outcomes (stage 4)."
+  ]
+}

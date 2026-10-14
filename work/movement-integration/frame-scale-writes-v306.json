@@ -1,0 +1,167 @@
+[
+  {
+    "instruction": "0x140753636",
+    "context": [
+      "14075362d int3 ",
+      "14075362e int3 ",
+      "14075362f int3 ",
+      "140753630 mov eax, dword ptr [rdx]",
+      "140753632 mov rcx, qword ptr [rcx + 8]",
+      "140753636 mov dword ptr [rcx + 0x60], eax",
+      "140753639 mov eax, dword ptr [rdx + 4]",
+      "14075363c mov dword ptr [rcx + 0x64], eax",
+      "14075363f mov eax, dword ptr [rdx + 8]",
+      "140753642 mov dword ptr [rcx + 0x68], eax"
+    ]
+  },
+  {
+    "instruction": "0x140753af9",
+    "context": [
+      "140753ae9 lea rdi, [rbx + 0x30]",
+      "140753aed mov dword ptr [rdi + 0x58], eax",
+      "140753af0 mov eax, dword ptr [rcx + 4]",
+      "140753af3 mov dword ptr [rdi + 0x5c], eax",
+      "140753af6 mov eax, dword ptr [rcx + 8]",
+      "140753af9 mov dword ptr [rdi + 0x60], eax",
+      "140753afc mov byte ptr [rdi + 0x70], 1",
+      "140753b00 jmp 0x140753b0a",
+      "140753b02 lea rdi, [rbx + 0x30]",
+      "140753b06 mov byte ptr [rdi + 0x70], 0"
+    ]
+  },
+  {
+    "instruction": "0x140753e3c",
+    "context": [
+      "140753e24 mov dword ptr [rsp + 0x28], eax",
+      "140753e28 mov qword ptr [rsp + 0x20], rdx",
+      "140753e2d mov rdx, qword ptr [rbp + 0x70]",
+      "140753e31 call 0x14018e050",
+      "140753e36 mov eax, dword ptr [rsi + 0x330]",
+      "140753e3c mov dword ptr [rdi + 0x60], eax",
+      "140753e3f mov eax, dword ptr [rsi + 0x334]",
+      "140753e45 mov dword ptr [rdi + 0x64], eax",
+      "140753e48 mov eax, dword ptr [rsi + 0x338]",
+      "140753e4e mov dword ptr [rdi + 0x68], eax"
+    ]
+  },
+  {
+    "instruction": "0x140754010",
+    "context": [
+      "140753ffb mov eax, dword ptr [rdi + 0x58]",
+      "140753ffe mov dword ptr [rsi + 0x328], eax",
+      "140754004 mov eax, dword ptr [rdi + 0x5c]",
+      "140754007 mov dword ptr [rsi + 0x32c], eax",
+      "14075400d mov eax, dword ptr [rdi + 0x60]",
+      "140754010 mov dword ptr [rsi + 0x330], eax",
+      "140754016 mov eax, dword ptr [rdi + 0x64]",
+      "140754019 mov dword ptr [rsi + 0x334], eax",
+      "14075401f mov eax, dword ptr [rdi + 0x68]",
+      "140754022 mov dword ptr [rsi + 0x338], eax"
+    ]
+  },
+  {
+    "instruction": "0x1407541b3",
+    "context": [
+      "140754196 mov dword ptr [rcx + 0x1888], eax",
+      "14075419c mov eax, dword ptr [rsi + 0x32c]",
+      "1407541a2 mov dword ptr [rcx + 0x188c], eax",
+      "1407541a8 mov eax, dword ptr [rsi + 0x330]",
+      "1407541ae mov edx, 1",
+      "1407541b3 mov dword ptr [rcx + 0x1890], eax",
+      "1407541b9 mov eax, dword ptr [rsi + 0x334]",
+      "1407541bf mov dword ptr [rcx + 0x1894], eax",
+      "1407541c5 mov eax, dword ptr [rsi + 0x338]",
+      "1407541cb mov dword ptr [rcx + 0x1898], eax"
+    ]
+  },
+  {
+    "instruction": "0x14087bde2",
+    "context": [
+      "14087bdc4 mov eax, dword ptr [rbx + 0x328]",
+      "14087bdca mov dword ptr [rdi + 0x1888], eax",
+      "14087bdd0 mov eax, dword ptr [rbx + 0x32c]",
+      "14087bdd6 mov dword ptr [rdi + 0x188c], eax",
+      "14087bddc mov eax, dword ptr [rbx + 0x330]",
+      "14087bde2 mov dword ptr [rdi + 0x1890], eax",
+      "14087bde8 mov eax, dword ptr [rbx + 0x334]",
+      "14087bdee mov dword ptr [rdi + 0x1894], eax",
+      "14087bdf4 mov eax, dword ptr [rbx + 0x338]",
+      "14087bdfa mov dword ptr [rdi + 0x1898], eax"
+    ]
+  },
+  {
+    "instruction": "0x14087c684",
+    "context": [
+      "14087c666 mov eax, dword ptr [rbx + 0x328]",
+      "14087c66c mov dword ptr [rcx + 0x1888], eax",
+      "14087c672 mov eax, dword ptr [rbx + 0x32c]",
+      "14087c678 mov dword ptr [rcx + 0x188c], eax",
+      "14087c67e mov eax, dword ptr [rbx + 0x330]",
+      "14087c684 mov dword ptr [rcx + 0x1890], eax",
+      "14087c68a mov eax, dword ptr [rbx + 0x334]",
+      "14087c690 mov dword ptr [rcx + 0x1894], eax",
+      "14087c696 mov eax, dword ptr [rbx + 0x338]",
+      "14087c69c mov dword ptr [rcx + 0x1898], eax"
+    ]
+  },
+  {
+    "instruction": "0x14087c83f",
+    "context": [
+      "14087c821 mov dword ptr [rsp + 0x28], 0x3f800000",
+      "14087c829 call qword ptr [rax + 0x58]",
+      "14087c82c lea rcx, [rdi + 0xf0]",
+      "14087c833 movss xmm0, dword ptr [rsp + 0x20]",
+      "14087c839 movss xmm1, dword ptr [rsp + 0x24]",
+      "14087c83f movss dword ptr [rdi + 0x330], xmm0",
+      "14087c847 movss xmm0, dword ptr [rsp + 0x28]",
+      "14087c84d movss dword ptr [rdi + 0x334], xmm1",
+      "14087c855 movss dword ptr [rdi + 0x338], xmm0",
+      "14087c85d mov eax, dword ptr [rdi + 0x78]"
+    ]
+  },
+  {
+    "instruction": "0x14087cc52",
+    "context": [
+      "14087cc43 mov eax, dword ptr [rdx + 0x14]",
+      "14087cc46 mov dword ptr [rbx + 0x58], eax",
+      "14087cc49 mov eax, dword ptr [rdx + 0x18]",
+      "14087cc4c mov dword ptr [rbx + 0x5c], eax",
+      "14087cc4f mov eax, dword ptr [rdx + 0x1c]",
+      "14087cc52 mov dword ptr [rbx + 0x60], eax",
+      "14087cc55 mov eax, dword ptr [rdx + 0x20]",
+      "14087cc58 lea rdx, [rip + 0x1a18679]",
+      "14087cc5f mov dword ptr [rbx + 0x64], eax",
+      "14087cc62 mov eax, dword ptr [rdi + 0x33c]"
+    ]
+  },
+  {
+    "instruction": "0x14087dc9a",
+    "context": [
+      "14087dc8b mov eax, dword ptr [rsi + 0x14]",
+      "14087dc8e mov dword ptr [rbx + 0x58], eax",
+      "14087dc91 mov eax, dword ptr [rsi + 0x18]",
+      "14087dc94 mov dword ptr [rbx + 0x5c], eax",
+      "14087dc97 mov eax, dword ptr [rsi + 0x1c]",
+      "14087dc9a mov dword ptr [rbx + 0x60], eax",
+      "14087dc9d mov eax, dword ptr [rsi + 0x20]",
+      "14087dca0 mov dword ptr [rbx + 0x64], eax",
+      "14087dca3 mov eax, dword ptr [rdi + 0x33c]",
+      "14087dca9 mov dword ptr [rbx + 0x68], eax"
+    ]
+  },
+  {
+    "instruction": "0x14087ea87",
+    "context": [
+      "14087ea6f mov eax, dword ptr [rsi + 0x320]",
+      "14087ea75 mov dword ptr [rbx + 0x58], eax",
+      "14087ea78 mov eax, dword ptr [rsi + 0x324]",
+      "14087ea7e mov dword ptr [rbx + 0x5c], eax",
+      "14087ea81 mov eax, dword ptr [rsi + 0x328]",
+      "14087ea87 mov dword ptr [rbx + 0x60], eax",
+      "14087ea8a mov eax, dword ptr [rsi + 0x32c]",
+      "14087ea90 mov dword ptr [rbx + 0x64], eax",
+      "14087ea93 mov eax, dword ptr [rsi + 0x33c]",
+      "14087ea99 mov dword ptr [rbx + 0x68], eax"
+    ]
+  }
+]

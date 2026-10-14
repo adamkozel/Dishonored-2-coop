@@ -1,0 +1,4770 @@
+{
+  "ObservedAt": "2026-10-08T23:12:32.2679261+02:00",
+  "Passed": true,
+  "Failure": null,
+  "DllSha256": "05EECCD0D21B4544C6A7A4D000A7E347694B9559313A6548B80A40B354A4E4FE",
+  "RequestRole": "client",
+  "DelayRole": "client",
+  "Duplicate": false,
+  "Scope": "Steam-coordinated fixed pre-staged Dunwall SLOT82, one native load per peer, both-ready loading hold, preserved Corvo/Emily roles. No save transfer or death propagation.",
+  "Before": {
+    "client": {
+      "enabled": true,
+      "phase": 0,
+      "result": "armed",
+      "arm": 3,
+      "peerArm": 2,
+      "transaction": 5,
+      "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+      "held": false,
+      "expectBoundary": false,
+      "loads": 1,
+      "completed": 0,
+      "requests": 2,
+      "duplicates": 0,
+      "rejected": 18,
+      "aborted": 1,
+      "heldAt": 50863578,
+      "releasedAt": 50868687,
+      "readyAt": 50863578,
+      "completedAt": 0,
+      "hostReady": 0,
+      "clientReady": 1,
+      "readyDelay": 1500,
+      "sent": 27,
+      "received": 27,
+      "samples": 479,
+      "maxDistance": 0,
+      "game": "0x182b133e050",
+      "player": "0x182ea7127f0",
+      "position": [
+        -28.0921001,
+        -153.962006,
+        66.4036407
+      ]
+    },
+    "host": {
+      "enabled": true,
+      "phase": 0,
+      "result": "armed",
+      "arm": 2,
+      "peerArm": 3,
+      "transaction": 0,
+      "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+      "held": false,
+      "expectBoundary": false,
+      "loads": 0,
+      "completed": 0,
+      "requests": 1,
+      "duplicates": 0,
+      "rejected": 15,
+      "aborted": 0,
+      "heldAt": 0,
+      "releasedAt": 0,
+      "readyAt": 0,
+      "completedAt": 0,
+      "hostReady": 0,
+      "clientReady": 0,
+      "readyDelay": 0,
+      "sent": 19,
+      "received": 18,
+      "samples": 0,
+      "maxDistance": 0,
+      "game": "0x0",
+      "player": "0x0",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "After": [
+    {
+      "Role": "host",
+      "Reset": {
+        "enabled": true,
+        "phase": 0,
+        "result": "armed",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": false,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 1,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 50958406,
+        "readyAt": 50956812,
+        "completedAt": 50958718,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 0,
+        "sent": 35,
+        "received": 32,
+        "samples": 151,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Character": {
+        "character": 1,
+        "queued": 0,
+        "game": "0x1ccbf8c4050",
+        "settings": "0x1cc41879520",
+        "player": "0x1ccc5f4f2a0",
+        "definition": "models/characters/player/corvo/body.def",
+        "corvoDefinition": "models/characters/player/corvo/body.def",
+        "emilyDefinition": "models/characters/player/emily/body.def"
+      },
+      "Player": {
+        "pid": 35468,
+        "active": 0,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1ccc5f4f2a0",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1cc417349c0",
+        "auxiliaryDefinition": "0x1cc2c47baa0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -28.0921,
+          -153.962,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -0.995185,
+          0.0980171,
+          0,
+          -0.0980171,
+          -0.995185,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -28.1434,
+          -153.957,
+          68.0979
+        ],
+        "nativeViewOrientation": [
+          -0.995119,
+          0.0986842,
+          0.000259081,
+          -0.0986843,
+          -0.995119,
+          -0.000431184,
+          0.000215265,
+          -0.000454647,
+          1
+        ]
+      },
+      "Npcs": {
+        "pid": 35468,
+        "unboundNpcs": 0,
+        "npcs": [
+          {
+            "handle": "0xb1d0739",
+            "spawnerHandle": "0x445005f",
+            "spawnerName": "ld_spawner_crowd_civ_left_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0885,
+              32.1305,
+              61.1616
+            ],
+            "orientation": [
+              0.894635,
+              -0.446798,
+              0,
+              0.446798,
+              0.894635,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb1f073b",
+            "spawnerHandle": "0x881049b",
+            "spawnerName": "esc_env_spawner_49",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.8271,
+              -130.332,
+              61.1073
+            ],
+            "orientation": [
+              0.20792,
+              0.978146,
+              0,
+              -0.978146,
+              0.20792,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb21073d",
+            "spawnerHandle": "0x44a0064",
+            "spawnerName": "ld_spawner_crowd_civ_right_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.3237,
+              25.4671,
+              61.3721
+            ],
+            "orientation": [
+              0.441435,
+              -0.897293,
+              0,
+              0.897293,
+              0.441435,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb23073f",
+            "spawnerHandle": "0x4270041",
+            "spawnerName": "ld_spawner_alexi_audience",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -58,
+              45.61,
+              60.9891
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb240740",
+            "spawnerHandle": "0x882049c",
+            "spawnerName": "esc_env_spawner_50",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4049,
+              -117.305,
+              61.1616
+            ],
+            "orientation": [
+              0.619115,
+              0.785301,
+              0,
+              -0.785301,
+              0.619115,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb250741",
+            "spawnerHandle": "0x44b0065",
+            "spawnerName": "ld_spawner_crowd_civ_right_1",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.9052,
+              24.8149,
+              61.3065
+            ],
+            "orientation": [
+              -0.380733,
+              0.924685,
+              0,
+              -0.924685,
+              -0.380733,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb280744",
+            "spawnerHandle": "0x883049d",
+            "spawnerName": "esc_env_spawner_51",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6702,
+              -124.267,
+              61.1627
+            ],
+            "orientation": [
+              -0.866451,
+              -0.499262,
+              0,
+              0.499262,
+              -0.866451,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb290745",
+            "spawnerHandle": "0x44c0066",
+            "spawnerName": "ld_spawner_crowd_civ_right_3",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.1417,
+              32.3917,
+              61.3854
+            ],
+            "orientation": [
+              -0.998954,
+              0.0457242,
+              0,
+              -0.0457242,
+              -0.998954,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2a0746",
+            "spawnerHandle": "0x444005e",
+            "spawnerName": "ld_spawner_crowd_civ_left_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0933,
+              32.8268,
+              61.3406
+            ],
+            "orientation": [
+              0.978438,
+              -0.206541,
+              0,
+              0.206541,
+              0.978438,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2f074b",
+            "spawnerHandle": "0x86e0488",
+            "spawnerName": "esc_env_spawner_47",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -59.6368,
+              -141.343,
+              61.163
+            ],
+            "orientation": [
+              0.74638,
+              -0.66552,
+              0,
+              0.66552,
+              0.74638,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb30074c",
+            "spawnerHandle": "0x86d0487",
+            "spawnerName": "esc_env_spawner_46",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.4691,
+              -143.926,
+              61.1455
+            ],
+            "orientation": [
+              -0.833081,
+              0.553151,
+              0,
+              -0.553151,
+              -0.833081,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb31074d",
+            "spawnerHandle": "0x86c0486",
+            "spawnerName": "esc_env_spawner_45",
+            "definition": "models/characters/base/human_behead_dead.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.1081,
+              -132.704,
+              61.7136
+            ],
+            "orientation": [
+              0.426923,
+              -0.904288,
+              0,
+              0.904288,
+              0.426923,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb32074e",
+            "spawnerHandle": "0x86b0485",
+            "spawnerName": "esc_env_spawner_44",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.3883,
+              -133.203,
+              61.7587
+            ],
+            "orientation": [
+              0.520107,
+              0.854101,
+              0,
+              -0.854101,
+              0.520107,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb33074f",
+            "spawnerHandle": "0x86a0484",
+            "spawnerName": "esc_env_spawner_43",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6459,
+              -133.481,
+              61.1653
+            ],
+            "orientation": [
+              0.638227,
+              0.769848,
+              0,
+              -0.769848,
+              0.638227,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb350751",
+            "spawnerHandle": "0x8680482",
+            "spawnerName": "esc_env_spawner_41",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.9781,
+              -126.92,
+              61.1689
+            ],
+            "orientation": [
+              0.643498,
+              0.765447,
+              0,
+              -0.765447,
+              0.643498,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb360752",
+            "spawnerHandle": "0x8670481",
+            "spawnerName": "esc_env_spawner_40",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8961,
+              -128.398,
+              61.12
+            ],
+            "orientation": [
+              -0.884482,
+              -0.466575,
+              0,
+              0.466575,
+              -0.884482,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb370753",
+            "spawnerHandle": "0x8660480",
+            "spawnerName": "esc_env_spawner_39",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4427,
+              -125.426,
+              61.1689
+            ],
+            "orientation": [
+              -0.18747,
+              0.98227,
+              0,
+              -0.98227,
+              -0.18747,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb380754",
+            "spawnerHandle": "0x865047f",
+            "spawnerName": "esc_env_spawner_38",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.9467,
+              -121.707,
+              61.1649
+            ],
+            "orientation": [
+              -0.385163,
+              0.922849,
+              0,
+              -0.922849,
+              -0.385163,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb390755",
+            "spawnerHandle": "0x864047e",
+            "spawnerName": "esc_env_spawner_37",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8677,
+              -119.305,
+              61.1731
+            ],
+            "orientation": [
+              -0.512813,
+              0.8585,
+              0,
+              -0.8585,
+              -0.512813,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3a0756",
+            "spawnerHandle": "0x44d0067",
+            "spawnerName": "ld_spawner_crowd_civ_right_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0428,
+              33.4584,
+              61.375
+            ],
+            "orientation": [
+              -0.791182,
+              -0.611581,
+              0,
+              0.611581,
+              -0.791182,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3b0757",
+            "spawnerHandle": "0x863047d",
+            "spawnerName": "esc_env_spawner_36",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0227,
+              -114.618,
+              61.1886
+            ],
+            "orientation": [
+              -0.989578,
+              0.144,
+              0,
+              -0.144,
+              -0.989578,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3c0758",
+            "spawnerHandle": "0x862047c",
+            "spawnerName": "esc_env_spawner_35",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.0099,
+              -117.931,
+              61.1624
+            ],
+            "orientation": [
+              -0.450241,
+              0.892907,
+              0,
+              -0.892907,
+              -0.450241,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3d0759",
+            "spawnerHandle": "0x861047b",
+            "spawnerName": "esc_env_spawner_34",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.3565,
+              -113.868,
+              61.2116
+            ],
+            "orientation": [
+              -0.963,
+              -0.269502,
+              0,
+              0.269502,
+              -0.963,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3e075a",
+            "spawnerHandle": "0x860047a",
+            "spawnerName": "esc_env_spawner_33",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.4204,
+              -106.009,
+              61.1721
+            ],
+            "orientation": [
+              -0.0136607,
+              -0.999907,
+              0,
+              0.999907,
+              -0.0136607,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3f075b",
+            "spawnerHandle": "0x85f0479",
+            "spawnerName": "esc_env_spawner",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.3953,
+              -113.132,
+              61.2088
+            ],
+            "orientation": [
+              -0.93302,
+              -0.359825,
+              0,
+              0.359825,
+              -0.93302,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb41075d",
+            "spawnerHandle": "0x85e0478",
+            "spawnerName": "esc_env_spawner_32",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.7101,
+              -115.184,
+              61.1728
+            ],
+            "orientation": [
+              0.618103,
+              0.786097,
+              0,
+              -0.786097,
+              0.618103,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb470763",
+            "spawnerHandle": "0x8690483",
+            "spawnerName": "esc_env_spawner_42",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.5319,
+              -123.346,
+              61.1805
+            ],
+            "orientation": [
+              0.83545,
+              -0.549566,
+              0,
+              0.549566,
+              0.83545,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb480764",
+            "spawnerHandle": "0x51d0137",
+            "spawnerName": "ld_spawner_guard_tutorial_2",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.6995,
+              -151.562,
+              66.4
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb490765",
+            "spawnerHandle": "0x4b100cb",
+            "spawnerName": "ld_spawner_crowd_civ_left_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.8114,
+              27.7658,
+              61.3846
+            ],
+            "orientation": [
+              0.678556,
+              -0.734549,
+              0,
+              0.734549,
+              0.678556,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4a0766",
+            "spawnerHandle": "0x5170131",
+            "spawnerName": "ld_spawner_vista_8",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              57.3307,
+              -208.555,
+              -3.49036
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4b0767",
+            "spawnerHandle": "0x514012e",
+            "spawnerName": "ld_spawner_vista_7",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              40.54,
+              -189.26,
+              -3.48862
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4c0768",
+            "spawnerHandle": "0x511012b",
+            "spawnerName": "ld_spawner_vista_6",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              58.7584,
+              -204.922,
+              -3.49182
+            ],
+            "orientation": [
+              0.325344,
+              -0.945596,
+              0,
+              0.945596,
+              0.325344,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4d0769",
+            "spawnerHandle": "0x50b0125",
+            "spawnerName": "ld_spawner_vista_5",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              60.125,
+              -206.019,
+              -3.49536
+            ],
+            "orientation": [
+              -0.396855,
+              -0.917881,
+              0,
+              0.917881,
+              -0.396855,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4e076a",
+            "spawnerHandle": "0x4b500cf",
+            "spawnerName": "ld_spawner_crowd_civ_left_1",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.0418,
+              24.9869,
+              61.1971
+            ],
+            "orientation": [
+              0.555991,
+              0.831188,
+              0,
+              -0.831188,
+              0.555991,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4f076b",
+            "spawnerHandle": "0x4b800d2",
+            "spawnerName": "ld_spawner_crowd_civ_left_6",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.3843,
+              25.7111,
+              61.182
+            ],
+            "orientation": [
+              0.99768,
+              0.0680775,
+              0,
+              -0.0680775,
+              0.99768,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb50076c",
+            "spawnerHandle": "0x5070121",
+            "spawnerName": "ld_spawner_vista_4",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.7491,
+              -193.147,
+              -3.49416
+            ],
+            "orientation": [
+              0.0475136,
+              -0.99887,
+              0,
+              0.99887,
+              0.0475136,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb51076d",
+            "spawnerHandle": "0x4ba00d4",
+            "spawnerName": "ld_spawner_crowd_civ_right_6",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.9145,
+              26.0617,
+              61.1986
+            ],
+            "orientation": [
+              -0.967303,
+              -0.253622,
+              0,
+              0.253622,
+              -0.967303,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb53076f",
+            "spawnerHandle": "0x504011e",
+            "spawnerName": "ld_spawner_vista_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              61.8447,
+              -194.323,
+              -3.49398
+            ],
+            "orientation": [
+              0.788143,
+              0.615492,
+              0,
+              -0.615492,
+              0.788143,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb570773",
+            "spawnerHandle": "0x4cb00e5",
+            "spawnerName": "ld_spawner_guard_tutorial_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.0752,
+              -152.86,
+              66.4
+            ],
+            "orientation": [
+              -4.76837E-07,
+              1,
+              0,
+              -1,
+              -4.76837E-07,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb580774",
+            "spawnerHandle": "0x4e100fb",
+            "spawnerName": "ld_spawner_ramsey_escape",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.096,
+              -120.091,
+              61
+            ],
+            "orientation": [
+              0.757423,
+              0.652924,
+              0,
+              -0.652924,
+              0.757423,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5a0776",
+            "spawnerHandle": "0x4de00f8",
+            "spawnerName": "ld_spawner_alexi_escape",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.0063,
+              -162.966,
+              66.4251
+            ],
+            "orientation": [
+              0.0980571,
+              0.995181,
+              0,
+              -0.995181,
+              0.0980571,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5b0777",
+            "spawnerHandle": "0x4ed0107",
+            "spawnerName": "ld_spawner_vista_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              55.196,
+              -241.175,
+              0.120667
+            ],
+            "orientation": [
+              0.986681,
+              0.162669,
+              0,
+              -0.162669,
+              0.986681,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5f077b",
+            "spawnerHandle": "0x4d600f0",
+            "spawnerName": "ld_spawner_guard_escape_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.9563,
+              -118.47,
+              61
+            ],
+            "orientation": [
+              -0.575055,
+              -0.818114,
+              0,
+              0.818114,
+              -0.575055,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb60077c",
+            "spawnerHandle": "0x4fc0116",
+            "spawnerName": "ld_spawner_vista_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.582,
+              -229.169,
+              -5.28631
+            ],
+            "orientation": [
+              1,
+              -3.502E-07,
+              0,
+              3.502E-07,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb61077d",
+            "spawnerHandle": "0x8df04f9",
+            "spawnerName": "esc_env_spawner_53",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -35.8086,
+              -162.96,
+              66.5872
+            ],
+            "orientation": [
+              -0.735388,
+              0.677646,
+              0,
+              -0.677646,
+              -0.735388,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb62077e",
+            "spawnerHandle": "0x4d700f1",
+            "spawnerName": "ld_spawner_guard_escape_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -41.7963,
+              -119.886,
+              61
+            ],
+            "orientation": [
+              -0.993319,
+              -0.115403,
+              0,
+              0.115403,
+              -0.993319,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb63077f",
+            "spawnerHandle": "0x8de04f8",
+            "spawnerName": "esc_env_spawner_52",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -34.0251,
+              -160.63,
+              66.5937
+            ],
+            "orientation": [
+              0.620558,
+              0.78416,
+              0,
+              -0.78416,
+              0.620558,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb640780",
+            "spawnerHandle": "0x880049a",
+            "spawnerName": "esc_env_spawner_48",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -49.6979,
+              -134.191,
+              61.1656
+            ],
+            "orientation": [
+              0.851947,
+              0.523628,
+              0,
+              -0.523628,
+              0.851947,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc07119b",
+            "spawnerHandle": "0x430004a",
+            "spawnerName": "ld_spawner_delilah",
+            "definition": "models/characters/def/maps/dunwall_escape/delilah_copperspoon.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.6853,
+              58.1725,
+              59.7998
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc08119c",
+            "spawnerHandle": "0x4460060",
+            "spawnerName": "ld_spawner_traitor_3",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.0971,
+              13.5234,
+              61.006
+            ],
+            "orientation": [
+              -0.00503764,
+              0.999987,
+              0,
+              -0.999987,
+              -0.00503764,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc09119d",
+            "spawnerHandle": "0x42e0048",
+            "spawnerName": "ld_spawner_duke_guard_left_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              52.9,
+              60.9911
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0a119e",
+            "spawnerHandle": "0x431004b",
+            "spawnerName": "ld_spawner_ramsey_audience",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.58,
+              17.8298,
+              61.606
+            ],
+            "orientation": [
+              0.514104,
+              -0.857728,
+              0,
+              0.857728,
+              0.514104,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0c119f",
+            "spawnerHandle": "0x4c200dc",
+            "spawnerName": "ld_spawner_crowd_civ_servant_2",
+            "definition": "models/characters/def/generic/servant_female_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -35.7259,
+              24.2498,
+              61
+            ],
+            "orientation": [
+              0.238356,
+              0.971178,
+              0,
+              -0.971178,
+              0.238356,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0d11a0",
+            "spawnerHandle": "0x42f0049",
+            "spawnerName": "ld_spawner_duke_guard_right_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0e11a1",
+            "spawnerHandle": "0x44e0068",
+            "spawnerName": "ld_spawner_throne_guard_right_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.6049,
+              21.4997,
+              61
+            ],
+            "orientation": [
+              -0.998796,
+              -0.0490687,
+              0,
+              0.0490687,
+              -0.998795,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0f11a2",
+            "spawnerHandle": "0x42d0047",
+            "spawnerName": "ld_spawner_duke",
+            "definition": "models/characters/def/story/luca_abele.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.7057,
+              55.0936,
+              60.2082
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1011a3",
+            "spawnerHandle": "0x41e0038",
+            "spawnerName": "ld_spawner_duke_guard_left_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1111a4",
+            "spawnerHandle": "0x4280042",
+            "spawnerName": "ld_spawner_duke_carrier_back",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6586,
+              60.1145,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1211a5",
+            "spawnerHandle": "0x4290043",
+            "spawnerName": "ld_spawner_duke_carrier_front",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6498,
+              55.9097,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1511a6",
+            "spawnerHandle": "0x4170031",
+            "spawnerName": "ld_spawner_duke_guard_right_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              52.9,
+              60.9864
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1611a7",
+            "spawnerHandle": "0x42a0044",
+            "spawnerName": "ld_spawner_clockw_left",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.0745,
+              49.4492,
+              60.9801
+            ],
+            "orientation": [
+              -0.0078458,
+              -0.999969,
+              0,
+              0.999969,
+              -0.0078458,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1811a8",
+            "spawnerHandle": "0x42c0046",
+            "spawnerName": "ld_spawner_clockw_right",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7542,
+              49.459,
+              60.9801
+            ],
+            "orientation": [
+              -0.0117022,
+              -0.999932,
+              0,
+              0.999932,
+              -0.0117022,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1a11a9",
+            "spawnerHandle": "0x42b0045",
+            "spawnerName": "ld_spawner_corvo_audience",
+            "definition": "models/characters/def/story/corvo_attano.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -41.44,
+              17.7398,
+              61.606
+            ],
+            "orientation": [
+              -0.634394,
+              -0.77301,
+              0,
+              0.77301,
+              -0.634394,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1b11aa",
+            "spawnerHandle": "0x41b0035",
+            "spawnerName": "ld_spawner_emily_audience",
+            "definition": "models/characters/def/story/emily_kaldwin.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6225,
+              9.38434,
+              61.0205
+            ],
+            "orientation": [
+              -0.910501,
+              0.413506,
+              0,
+              -0.413506,
+              -0.910501,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Reset": {
+        "enabled": true,
+        "phase": 0,
+        "result": "armed",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": false,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 1,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 50958437,
+        "readyAt": 50958406,
+        "completedAt": 50958734,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 41,
+        "received": 43,
+        "samples": 144,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Character": {
+        "character": 2,
+        "queued": 0,
+        "game": "0x182b133c050",
+        "settings": "0x182a9ef3510",
+        "player": "0x182f5f221f0",
+        "definition": "models/characters/player/emily/body.def",
+        "corvoDefinition": "models/characters/player/corvo/body.def",
+        "emilyDefinition": "models/characters/player/emily/body.def"
+      },
+      "Player": {
+        "pid": 44860,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x182f5f221f0",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x182f4693c50",
+        "auxiliaryDefinition": "0x1828485e610",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -28.0921,
+          -153.962,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -0.995185,
+          0.0980171,
+          0,
+          -0.0980171,
+          -0.995185,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -28.1434,
+          -153.957,
+          68.0956
+        ],
+        "nativeViewOrientation": [
+          -0.995119,
+          0.0986842,
+          0.000259081,
+          -0.0986843,
+          -0.995119,
+          -0.000431184,
+          0.000215265,
+          -0.000454647,
+          1
+        ]
+      },
+      "Npcs": {
+        "pid": 44860,
+        "unboundNpcs": 0,
+        "npcs": [
+          {
+            "handle": "0xb1d0739",
+            "spawnerHandle": "0x445005f",
+            "spawnerName": "ld_spawner_crowd_civ_left_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.09,
+              32.1278,
+              61.1623
+            ],
+            "orientation": [
+              0.894186,
+              -0.447695,
+              0,
+              0.447695,
+              0.894186,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb1f073b",
+            "spawnerHandle": "0x881049b",
+            "spawnerName": "esc_env_spawner_49",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.8271,
+              -130.332,
+              61.1073
+            ],
+            "orientation": [
+              0.20792,
+              0.978146,
+              0,
+              -0.978146,
+              0.20792,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb21073d",
+            "spawnerHandle": "0x44a0064",
+            "spawnerName": "ld_spawner_crowd_civ_right_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.3237,
+              25.4671,
+              61.3721
+            ],
+            "orientation": [
+              0.441435,
+              -0.897293,
+              0,
+              0.897293,
+              0.441435,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb23073f",
+            "spawnerHandle": "0x4270041",
+            "spawnerName": "ld_spawner_alexi_audience",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -58,
+              45.61,
+              60.9891
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb240740",
+            "spawnerHandle": "0x882049c",
+            "spawnerName": "esc_env_spawner_50",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4049,
+              -117.305,
+              61.1616
+            ],
+            "orientation": [
+              0.619115,
+              0.785301,
+              0,
+              -0.785301,
+              0.619115,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb250741",
+            "spawnerHandle": "0x44b0065",
+            "spawnerName": "ld_spawner_crowd_civ_right_1",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.9052,
+              24.8149,
+              61.3065
+            ],
+            "orientation": [
+              -0.380733,
+              0.924685,
+              0,
+              -0.924685,
+              -0.380733,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb280744",
+            "spawnerHandle": "0x883049d",
+            "spawnerName": "esc_env_spawner_51",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6702,
+              -124.267,
+              61.1627
+            ],
+            "orientation": [
+              -0.866451,
+              -0.499262,
+              0,
+              0.499262,
+              -0.866451,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb290745",
+            "spawnerHandle": "0x44c0066",
+            "spawnerName": "ld_spawner_crowd_civ_right_3",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.1417,
+              32.3917,
+              61.3854
+            ],
+            "orientation": [
+              -0.998954,
+              0.0457242,
+              0,
+              -0.0457242,
+              -0.998954,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2a0746",
+            "spawnerHandle": "0x444005e",
+            "spawnerName": "ld_spawner_crowd_civ_left_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0906,
+              32.8149,
+              61.3243
+            ],
+            "orientation": [
+              0.984592,
+              -0.174864,
+              0,
+              0.174864,
+              0.984592,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2f074b",
+            "spawnerHandle": "0x86e0488",
+            "spawnerName": "esc_env_spawner_47",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -59.6368,
+              -141.343,
+              61.163
+            ],
+            "orientation": [
+              0.74638,
+              -0.66552,
+              0,
+              0.66552,
+              0.74638,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb30074c",
+            "spawnerHandle": "0x86d0487",
+            "spawnerName": "esc_env_spawner_46",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.4691,
+              -143.926,
+              61.1455
+            ],
+            "orientation": [
+              -0.833081,
+              0.553151,
+              0,
+              -0.553151,
+              -0.833081,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb31074d",
+            "spawnerHandle": "0x86c0486",
+            "spawnerName": "esc_env_spawner_45",
+            "definition": "models/characters/base/human_behead_dead.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.1081,
+              -132.704,
+              61.7136
+            ],
+            "orientation": [
+              0.426923,
+              -0.904288,
+              0,
+              0.904288,
+              0.426923,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb32074e",
+            "spawnerHandle": "0x86b0485",
+            "spawnerName": "esc_env_spawner_44",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.3883,
+              -133.203,
+              61.7587
+            ],
+            "orientation": [
+              0.520107,
+              0.854101,
+              0,
+              -0.854101,
+              0.520107,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb33074f",
+            "spawnerHandle": "0x86a0484",
+            "spawnerName": "esc_env_spawner_43",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6459,
+              -133.481,
+              61.1653
+            ],
+            "orientation": [
+              0.638227,
+              0.769848,
+              0,
+              -0.769848,
+              0.638227,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb350751",
+            "spawnerHandle": "0x8680482",
+            "spawnerName": "esc_env_spawner_41",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.9781,
+              -126.92,
+              61.1689
+            ],
+            "orientation": [
+              0.643498,
+              0.765447,
+              0,
+              -0.765447,
+              0.643498,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb360752",
+            "spawnerHandle": "0x8670481",
+            "spawnerName": "esc_env_spawner_40",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8961,
+              -128.398,
+              61.12
+            ],
+            "orientation": [
+              -0.884482,
+              -0.466575,
+              0,
+              0.466575,
+              -0.884482,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb370753",
+            "spawnerHandle": "0x8660480",
+            "spawnerName": "esc_env_spawner_39",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4427,
+              -125.426,
+              61.1689
+            ],
+            "orientation": [
+              -0.18747,
+              0.98227,
+              0,
+              -0.98227,
+              -0.18747,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb380754",
+            "spawnerHandle": "0x865047f",
+            "spawnerName": "esc_env_spawner_38",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.9467,
+              -121.707,
+              61.1649
+            ],
+            "orientation": [
+              -0.385163,
+              0.922849,
+              0,
+              -0.922849,
+              -0.385163,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb390755",
+            "spawnerHandle": "0x864047e",
+            "spawnerName": "esc_env_spawner_37",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8677,
+              -119.305,
+              61.1731
+            ],
+            "orientation": [
+              -0.512813,
+              0.8585,
+              0,
+              -0.8585,
+              -0.512813,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3a0756",
+            "spawnerHandle": "0x44d0067",
+            "spawnerName": "ld_spawner_crowd_civ_right_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0428,
+              33.4584,
+              61.375
+            ],
+            "orientation": [
+              -0.791182,
+              -0.611581,
+              0,
+              0.611581,
+              -0.791182,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3b0757",
+            "spawnerHandle": "0x863047d",
+            "spawnerName": "esc_env_spawner_36",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0227,
+              -114.618,
+              61.1886
+            ],
+            "orientation": [
+              -0.989578,
+              0.144,
+              0,
+              -0.144,
+              -0.989578,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3c0758",
+            "spawnerHandle": "0x862047c",
+            "spawnerName": "esc_env_spawner_35",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.0099,
+              -117.931,
+              61.1624
+            ],
+            "orientation": [
+              -0.450241,
+              0.892907,
+              0,
+              -0.892907,
+              -0.450241,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3d0759",
+            "spawnerHandle": "0x861047b",
+            "spawnerName": "esc_env_spawner_34",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.3565,
+              -113.868,
+              61.2116
+            ],
+            "orientation": [
+              -0.963,
+              -0.269502,
+              0,
+              0.269502,
+              -0.963,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3e075a",
+            "spawnerHandle": "0x860047a",
+            "spawnerName": "esc_env_spawner_33",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.4204,
+              -106.009,
+              61.1721
+            ],
+            "orientation": [
+              -0.0136607,
+              -0.999907,
+              0,
+              0.999907,
+              -0.0136607,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3f075b",
+            "spawnerHandle": "0x85f0479",
+            "spawnerName": "esc_env_spawner",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.3953,
+              -113.132,
+              61.2088
+            ],
+            "orientation": [
+              -0.93302,
+              -0.359825,
+              0,
+              0.359825,
+              -0.93302,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb41075d",
+            "spawnerHandle": "0x85e0478",
+            "spawnerName": "esc_env_spawner_32",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.7101,
+              -115.184,
+              61.1728
+            ],
+            "orientation": [
+              0.618103,
+              0.786097,
+              0,
+              -0.786097,
+              0.618103,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb470763",
+            "spawnerHandle": "0x8690483",
+            "spawnerName": "esc_env_spawner_42",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.5319,
+              -123.346,
+              61.1805
+            ],
+            "orientation": [
+              0.83545,
+              -0.549566,
+              0,
+              0.549566,
+              0.83545,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb480764",
+            "spawnerHandle": "0x51d0137",
+            "spawnerName": "ld_spawner_guard_tutorial_2",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.6995,
+              -151.562,
+              66.4
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb490765",
+            "spawnerHandle": "0x4b100cb",
+            "spawnerName": "ld_spawner_crowd_civ_left_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.8114,
+              27.7658,
+              61.3846
+            ],
+            "orientation": [
+              0.678556,
+              -0.734549,
+              0,
+              0.734549,
+              0.678556,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4a0766",
+            "spawnerHandle": "0x5170131",
+            "spawnerName": "ld_spawner_vista_8",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              57.3307,
+              -208.555,
+              -3.49036
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4b0767",
+            "spawnerHandle": "0x514012e",
+            "spawnerName": "ld_spawner_vista_7",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              40.54,
+              -189.26,
+              -3.48862
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4c0768",
+            "spawnerHandle": "0x511012b",
+            "spawnerName": "ld_spawner_vista_6",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              58.7584,
+              -204.922,
+              -3.49182
+            ],
+            "orientation": [
+              0.325797,
+              -0.94544,
+              0,
+              0.94544,
+              0.325797,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4d0769",
+            "spawnerHandle": "0x50b0125",
+            "spawnerName": "ld_spawner_vista_5",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              60.124,
+              -206.021,
+              -3.49536
+            ],
+            "orientation": [
+              -0.396997,
+              -0.91782,
+              0,
+              0.91782,
+              -0.396997,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4e076a",
+            "spawnerHandle": "0x4b500cf",
+            "spawnerName": "ld_spawner_crowd_civ_left_1",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.0418,
+              24.9869,
+              61.1971
+            ],
+            "orientation": [
+              0.555991,
+              0.831188,
+              0,
+              -0.831188,
+              0.555991,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4f076b",
+            "spawnerHandle": "0x4b800d2",
+            "spawnerName": "ld_spawner_crowd_civ_left_6",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.3843,
+              25.7111,
+              61.182
+            ],
+            "orientation": [
+              0.99768,
+              0.0680775,
+              0,
+              -0.0680775,
+              0.99768,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb50076c",
+            "spawnerHandle": "0x5070121",
+            "spawnerName": "ld_spawner_vista_4",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.749,
+              -193.147,
+              -3.49416
+            ],
+            "orientation": [
+              0.0479922,
+              -0.998848,
+              0,
+              0.998848,
+              0.0479922,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb51076d",
+            "spawnerHandle": "0x4ba00d4",
+            "spawnerName": "ld_spawner_crowd_civ_right_6",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.9145,
+              26.0617,
+              61.1986
+            ],
+            "orientation": [
+              -0.967303,
+              -0.253622,
+              0,
+              0.253622,
+              -0.967303,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb53076f",
+            "spawnerHandle": "0x504011e",
+            "spawnerName": "ld_spawner_vista_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              61.8447,
+              -194.323,
+              -3.49398
+            ],
+            "orientation": [
+              0.788097,
+              0.615551,
+              0,
+              -0.615551,
+              0.788097,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb570773",
+            "spawnerHandle": "0x4cb00e5",
+            "spawnerName": "ld_spawner_guard_tutorial_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.0752,
+              -152.86,
+              66.4
+            ],
+            "orientation": [
+              -4.76837E-07,
+              1,
+              0,
+              -1,
+              -4.76837E-07,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb580774",
+            "spawnerHandle": "0x4e100fb",
+            "spawnerName": "ld_spawner_ramsey_escape",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.096,
+              -120.091,
+              61
+            ],
+            "orientation": [
+              0.757423,
+              0.652924,
+              0,
+              -0.652924,
+              0.757423,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5a0776",
+            "spawnerHandle": "0x4de00f8",
+            "spawnerName": "ld_spawner_alexi_escape",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.0063,
+              -162.966,
+              66.4251
+            ],
+            "orientation": [
+              0.0980571,
+              0.995181,
+              0,
+              -0.995181,
+              0.0980571,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5b0777",
+            "spawnerHandle": "0x4ed0107",
+            "spawnerName": "ld_spawner_vista_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              55.196,
+              -241.175,
+              0.120667
+            ],
+            "orientation": [
+              0.986629,
+              0.162983,
+              0,
+              -0.162983,
+              0.986629,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5f077b",
+            "spawnerHandle": "0x4d600f0",
+            "spawnerName": "ld_spawner_guard_escape_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.9563,
+              -118.47,
+              61
+            ],
+            "orientation": [
+              -0.575055,
+              -0.818114,
+              0,
+              0.818114,
+              -0.575055,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb60077c",
+            "spawnerHandle": "0x4fc0116",
+            "spawnerName": "ld_spawner_vista_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.582,
+              -229.169,
+              -5.28631
+            ],
+            "orientation": [
+              1,
+              -3.502E-07,
+              0,
+              3.502E-07,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb61077d",
+            "spawnerHandle": "0x8df04f9",
+            "spawnerName": "esc_env_spawner_53",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -35.8086,
+              -162.96,
+              66.5872
+            ],
+            "orientation": [
+              -0.735388,
+              0.677646,
+              0,
+              -0.677646,
+              -0.735388,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb62077e",
+            "spawnerHandle": "0x4d700f1",
+            "spawnerName": "ld_spawner_guard_escape_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -41.7963,
+              -119.886,
+              61
+            ],
+            "orientation": [
+              -0.993319,
+              -0.115403,
+              0,
+              0.115403,
+              -0.993319,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb63077f",
+            "spawnerHandle": "0x8de04f8",
+            "spawnerName": "esc_env_spawner_52",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -34.0251,
+              -160.63,
+              66.5937
+            ],
+            "orientation": [
+              0.620558,
+              0.78416,
+              0,
+              -0.78416,
+              0.620558,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb640780",
+            "spawnerHandle": "0x880049a",
+            "spawnerName": "esc_env_spawner_48",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -49.6979,
+              -134.191,
+              61.1656
+            ],
+            "orientation": [
+              0.851947,
+              0.523628,
+              0,
+              -0.523628,
+              0.851947,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc07119b",
+            "spawnerHandle": "0x430004a",
+            "spawnerName": "ld_spawner_delilah",
+            "definition": "models/characters/def/maps/dunwall_escape/delilah_copperspoon.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.6853,
+              58.1725,
+              59.7998
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc08119c",
+            "spawnerHandle": "0x4460060",
+            "spawnerName": "ld_spawner_traitor_3",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.0971,
+              13.5234,
+              61.006
+            ],
+            "orientation": [
+              -0.00503764,
+              0.999987,
+              0,
+              -0.999987,
+              -0.00503764,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc09119d",
+            "spawnerHandle": "0x42e0048",
+            "spawnerName": "ld_spawner_duke_guard_left_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              52.9,
+              60.9911
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0a119e",
+            "spawnerHandle": "0x431004b",
+            "spawnerName": "ld_spawner_ramsey_audience",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.58,
+              17.8298,
+              61.606
+            ],
+            "orientation": [
+              0.514104,
+              -0.857728,
+              0,
+              0.857728,
+              0.514104,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0c119f",
+            "spawnerHandle": "0x4c200dc",
+            "spawnerName": "ld_spawner_crowd_civ_servant_2",
+            "definition": "models/characters/def/generic/servant_female_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -35.7259,
+              24.2498,
+              61
+            ],
+            "orientation": [
+              0.238356,
+              0.971178,
+              0,
+              -0.971178,
+              0.238356,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0d11a0",
+            "spawnerHandle": "0x42f0049",
+            "spawnerName": "ld_spawner_duke_guard_right_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0e11a1",
+            "spawnerHandle": "0x44e0068",
+            "spawnerName": "ld_spawner_throne_guard_right_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.6049,
+              21.4997,
+              61
+            ],
+            "orientation": [
+              -0.998796,
+              -0.0490687,
+              0,
+              0.0490687,
+              -0.998795,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0f11a2",
+            "spawnerHandle": "0x42d0047",
+            "spawnerName": "ld_spawner_duke",
+            "definition": "models/characters/def/story/luca_abele.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.7057,
+              55.0936,
+              60.2082
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1011a3",
+            "spawnerHandle": "0x41e0038",
+            "spawnerName": "ld_spawner_duke_guard_left_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1111a4",
+            "spawnerHandle": "0x4280042",
+            "spawnerName": "ld_spawner_duke_carrier_back",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6586,
+              60.1145,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1211a5",
+            "spawnerHandle": "0x4290043",
+            "spawnerName": "ld_spawner_duke_carrier_front",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6498,
+              55.9097,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1511a6",
+            "spawnerHandle": "0x4170031",
+            "spawnerName": "ld_spawner_duke_guard_right_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              52.9,
+              60.9864
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1611a7",
+            "spawnerHandle": "0x42a0044",
+            "spawnerName": "ld_spawner_clockw_left",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.0745,
+              49.4492,
+              60.9801
+            ],
+            "orientation": [
+              -0.0078458,
+              -0.999969,
+              0,
+              0.999969,
+              -0.0078458,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1811a8",
+            "spawnerHandle": "0x42c0046",
+            "spawnerName": "ld_spawner_clockw_right",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7542,
+              49.459,
+              60.9801
+            ],
+            "orientation": [
+              -0.0117022,
+              -0.999932,
+              0,
+              0.999932,
+              -0.0117022,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1a11a9",
+            "spawnerHandle": "0x42b0045",
+            "spawnerName": "ld_spawner_corvo_audience",
+            "definition": "models/characters/def/story/corvo_attano.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -41.44,
+              17.7398,
+              61.606
+            ],
+            "orientation": [
+              -0.634394,
+              -0.77301,
+              0,
+              0.77301,
+              -0.634394,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1b11aa",
+            "spawnerHandle": "0x41b0035",
+            "spawnerName": "ld_spawner_emily_audience",
+            "definition": "models/characters/def/story/emily_kaldwin.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6225,
+              9.38434,
+              61.0205
+            ],
+            "orientation": [
+              -0.910501,
+              0.413506,
+              0,
+              -0.413506,
+              -0.910501,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "Samples": [
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 6,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50956937,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 6,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957078,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 10,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957093,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 29,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957234,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 10,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957250,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 53,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957390,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 33,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957406,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 53,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957546,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 57,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957562,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 77,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957703,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 57,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957718,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 77,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957859,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 80,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50957875,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 100,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958015,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 104,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958031,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 124,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958171,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 104,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958187,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 124,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958312,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x0",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 128,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958343,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x0",
+        "player": "0x182f5f221f0",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 147,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958500,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 128,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958531,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 2,
+        "peerArm": 3,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 2,
+        "duplicates": 0,
+        "rejected": 15,
+        "aborted": 0,
+        "heldAt": 50956812,
+        "releasedAt": 0,
+        "readyAt": 50956812,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 0,
+        "readyDelay": 0,
+        "sent": 23,
+        "received": 20,
+        "samples": 147,
+        "maxDistance": 0,
+        "game": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958687,
+        "game": "0x1ccbf8c4050",
+        "sessionGame": "0x1ccbf8c4050",
+        "activeGame": "0x1ccbf8c4050",
+        "player": "0x1ccc5f4f2a0",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 3,
+        "peerArm": 2,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 2,
+        "completed": 0,
+        "requests": 3,
+        "duplicates": 0,
+        "rejected": 18,
+        "aborted": 1,
+        "heldAt": 50956906,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 2,
+        "readyDelay": 1500,
+        "sent": 29,
+        "received": 31,
+        "samples": 128,
+        "maxDistance": 0,
+        "game": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      },
+      "Native": {
+        "tick": 50958703,
+        "game": "0x182b133c050",
+        "sessionGame": "0x182b133c050",
+        "activeGame": "0x182b133c050",
+        "player": "0x182f5f221f0",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    }
+  ]
+}

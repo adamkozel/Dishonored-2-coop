@@ -1,0 +1,481 @@
+{
+  "at": "2026-10-14T12:46:10.344274+02:00",
+  "candidate": "candidate-npc-combat-v1074j",
+  "dll": "B781C12A3C7F4E301268EF231AB7EBF52E2F3847AF73177339BF75F9D5BD963F",
+  "probe": "D3C9B6B5D30FED9988415979A5523DC7AFCC5ECDE81A7D8DA28CABD5A6C9B9B3",
+  "actionProtocol": 73,
+  "harnesses": [
+    "../natural-moveset/Test-MissionEquipment-v1072.ps1",
+    "../natural-moveset/Test-MissionEquipment-v1088.ps1",
+    "../natural-moveset/Probe-WheelReaders-v1082.ps1",
+    "../natural-moveset/Probe-WheelHold-v1085.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-equipment-v1072",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1071",
+      "source": "host",
+      "scope": "1071: native item wheel layout read (Heart top; pistol bullets upper-right; grenade lower-right; Blink bottom; crossbow bolts lower-left; sleep darts upper-left). Opening the wheel retired the action stream on both roles (scope_or_peer_changed).",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 74,
+          "result": "scope_or_peer_changed"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 77,
+          "result": "scope_or_peer_changed"
+        }
+      },
+      "observer": {
+        "grenade": 0,
+        "samples": 13,
+        "rangedKinds": [],
+        "ranged": 0,
+        "equipment": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1073",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1071",
+      "source": "host",
+      "scope": "Confirmed runtime: the item wheel is native logic state 8 (arkGameLogicStatePowerwheel). coop_movement_resume refused to arm (live_owned_presentation_required); stream retired again.",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 137,
+          "result": "scope_or_peer_changed"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 142,
+          "result": "scope_or_peer_changed"
+        }
+      },
+      "observer": {
+        "ranged": 0,
+        "samples": 8,
+        "equipment": 0,
+        "grenade": 0,
+        "rangedKinds": []
+      }
+    },
+    {
+      "take": "mission-equipment-v1075",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074",
+      "source": "host",
+      "scope": "1074 (presentation readiness accepts logic8): stream still retired (reason2) - local cinematic metadata unavailable in the wheel.",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 72,
+          "result": "scope_or_peer_changed"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 74,
+          "result": "scope_or_peer_changed"
+        }
+      },
+      "observer": {
+        "grenade": 0,
+        "rangedKinds": [],
+        "equipment": 0,
+        "samples": 8,
+        "ranged": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1076",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074b",
+      "source": "host",
+      "scope": "1074b: stream survived the wheel opening but source holds failed (stance reader requires logic1) -> native_state_stale.",
+      "streams": {
+        "host": {
+          "unboundRefused": 6,
+          "holdSamples": 0,
+          "sourceMisses": 6,
+          "accepted": 70,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 72,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "equipment": 0,
+        "grenade": 0,
+        "ranged": 0,
+        "rangedKinds": [],
+        "samples": 239
+      }
+    },
+    {
+      "take": "mission-equipment-v1077",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074d",
+      "source": "host",
+      "scope": "1074c: follow stopped during the wheel (unknown term).",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 73,
+          "result": "scope_or_peer_changed"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 77,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "ranged": 0,
+        "samples": 237,
+        "grenade": 0,
+        "equipment": 0,
+        "rangedKinds": []
+      }
+    },
+    {
+      "take": "mission-equipment-v1078",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074d",
+      "source": "host",
+      "scope": "1074d: built without the intended diagnostic edit (identical to 1074c); same failure.",
+      "streams": {
+        "host": {
+          "unboundRefused": 6,
+          "holdSamples": 0,
+          "sourceMisses": 6,
+          "accepted": 65,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 67,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "rangedKinds": [],
+        "equipment": 0,
+        "ranged": 0,
+        "grenade": 0,
+        "samples": 237
+      }
+    },
+    {
+      "take": "mission-equipment-v1079",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074e",
+      "source": "host",
+      "scope": "1074e diagnostic: wheel samples as logic1 with pending8 while opening, which invalidated follow (bits 1|2).",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 69,
+          "result": "scope_or_peer_changed"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 72,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "equipment": 0,
+        "samples": 238,
+        "grenade": 0,
+        "rangedKinds": [],
+        "ranged": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1080",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074f",
+      "source": "host",
+      "scope": "1074f: follow survived the wheel; source missed 4 sends (no hold) -> stale.",
+      "streams": {
+        "host": {
+          "unboundRefused": 4,
+          "holdSamples": 0,
+          "sourceMisses": 4,
+          "accepted": 68,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 72,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "equipment": 0,
+        "samples": 238,
+        "grenade": 0,
+        "rangedKinds": [],
+        "ranged": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1081",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074g",
+      "source": "host",
+      "scope": "1074g: hold also for the pending8 transition; still stale (cause not yet visible).",
+      "streams": {
+        "host": {
+          "unboundRefused": 5,
+          "holdSamples": 0,
+          "sourceMisses": 5,
+          "accepted": 70,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 76,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "ranged": 0,
+        "equipment": 0,
+        "samples": 236,
+        "grenade": 0,
+        "rangedKinds": []
+      }
+    },
+    {
+      "take": "mission-equipment-v1083",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074h",
+      "source": "host",
+      "scope": "1074h diagnostic pairBits=0: source stream current yet stale - the action-stream wire validator still required coopWorldPairReady, rejecting packets in both directions during the wheel.",
+      "streams": {
+        "host": {
+          "unboundRefused": 5,
+          "holdSamples": 0,
+          "sourceMisses": 5,
+          "accepted": 66,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 70,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "ranged": 0,
+        "grenade": 0,
+        "rangedKinds": [],
+        "equipment": 0,
+        "samples": 237
+      }
+    },
+    {
+      "take": "mission-equipment-v1084",
+      "streamSurvivedWheel": false,
+      "candidate": "candidate-npc-combat-v1074i",
+      "source": "host",
+      "scope": "1074i (validator uses presentation pair): client retired first because the host source sent no holds during its wheel.",
+      "streams": {
+        "host": {
+          "unboundRefused": 12,
+          "holdSamples": 0,
+          "sourceMisses": 12,
+          "accepted": 68,
+          "result": "native_state_stale"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 67,
+          "result": "native_state_stale"
+        }
+      },
+      "observer": {
+        "rangedKinds": [],
+        "equipment": 0,
+        "samples": 235,
+        "ranged": 0,
+        "grenade": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1086",
+      "streamSurvivedWheel": true,
+      "candidate": "candidate-npc-combat-v1074j",
+      "source": "host",
+      "scope": "1074j: read-only probe --presentation-hold (1085) showed the player state machine is unreadable inside the wheel while the stance reader succeeds; stance-based hold proof. Stream stays ready on both roles through the wheel (48 holds); observer presents the partner Blink aim afterwards (power variants 2/3).",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 48,
+          "sourceMisses": 62,
+          "accepted": 355,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 373,
+          "result": "ready"
+        }
+      },
+      "observer": {
+        "equipment": 0,
+        "samples": 195,
+        "rangedKinds": [],
+        "grenade": 0,
+        "ranged": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1087",
+      "streamSurvivedWheel": true,
+      "candidate": "candidate-npc-combat-v1074j",
+      "source": "host",
+      "scope": "1074j: left/right sticks do not drive wheel selection under virtual input (no highlight); stream survives again; Blink presented.",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 47,
+          "sourceMisses": 61,
+          "accepted": 728,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 758,
+          "result": "ready"
+        }
+      },
+      "observer": {
+        "samples": 193,
+        "grenade": 0,
+        "rangedKinds": [],
+        "ranged": 0,
+        "equipment": 0
+      }
+    },
+    {
+      "take": "mission-equipment-v1088",
+      "streamSurvivedWheel": true,
+      "candidate": "candidate-npc-combat-v1074j",
+      "source": "host",
+      "scope": "1074j Corvo source: wheel open/close (47 holds, stream ready), then native D-pad Left quick slot equips the pistol and LT enters native ReloadWeapon; client presents ranged kind1 for 135 samples and attaches the native pistol prop to remote Corvo; client video: sword, neutral during the wheel, pistol drawn, reload with ejected casing, aim.",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 47,
+          "sourceMisses": 47,
+          "accepted": 1111,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 1160,
+          "result": "ready"
+        }
+      },
+      "observer": {
+        "samples": 194,
+        "equipment": 2,
+        "ranged": 135,
+        "rangedKinds": [
+          1
+        ],
+        "grenade": 0
+      }
+    },
+    {
+      "take": "mission-equipment-emily-v1088",
+      "streamSurvivedWheel": true,
+      "candidate": "candidate-npc-combat-v1074j",
+      "source": "client",
+      "scope": "1074j Emily source: same sequence; host presents ranged kind1 for 153 samples with the native pistol prop on remote Emily; host video: sword, neutral during her wheel, pistol drawn, reload, aim.",
+      "streams": {
+        "host": {
+          "unboundRefused": 0,
+          "holdSamples": 0,
+          "sourceMisses": 0,
+          "accepted": 1495,
+          "result": "ready"
+        },
+        "client": {
+          "unboundRefused": 1,
+          "holdSamples": 48,
+          "sourceMisses": 49,
+          "accepted": 1543,
+          "result": "ready"
+        }
+      },
+      "observer": {
+        "grenade": 0,
+        "samples": 221,
+        "ranged": 153,
+        "equipment": 3,
+        "rangedKinds": [
+          1
+        ]
+      }
+    }
+  ],
+  "findings": [
+    "1071: ranged/grenade/heart/trap props, Doppelganger visual and partner power FX no longer require the Dunwall map; the Dunwall observer-isolation fixture is required only for manual fixture requests.",
+    "Confirmed runtime: the native item wheel is arkGameLogicStatePowerwheel (logic stack InGame+Powerwheel, logic8; sampled as logic1/pending8 while opening); cinematic metadata is unavailable and the player state machine unreadable inside it, while the stance reader works.",
+    "1074j: ongoing presentation (pose receive, follow, bank lease, action stream incl. wire validator) accepts the wheel via coopPresentationReady; the source sends payload-free holds with a stance-based identity proof; starting presentation, world authority and checkpoints still require gameplay.",
+    "Confirmed runtime: native D-pad quick slots select items (wheel stick selection is not driven by the virtual controller); partner pistol draw/reload/aim with the native prop is presented on a mission map for both roles."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Wheel stick selection under virtual input; crossbow/grenade/heart/trap and powers via quick slots on missions.",
+    "Pause/journal menus (logic 2/4) still rely on movement resume (needs a live bank on the arming side).",
+    "The stance-based hold also applies in gameplay when the full proof fails (same live player only)."
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "at": "2026-10-12T19:28:17.699741+02:00",
+  "dll": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+  "probe": "EFE0F99D8FFADE1D1314759867F1C818A38E255AFAAF12A56A1BE0CBFC0E0328",
+  "protocol": 52,
+  "protocolBytes": 336,
+  "bankVersion": 55,
+  "clips": 322,
+  "result": {
+    "passed": true,
+    "failure": null,
+    "source": "client",
+    "checks": [
+      "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+      "Remote Emily uses exact bank55/322 and native Steam pose transport",
+      "All three exact native phases with reciprocal Emily arm/body ownership drive remote full-body phases",
+      "Bounded send/accept histories exactly match strict native scene incarnations, including sub-status-interval final aim loops",
+      "Doppelganger cast preserves root/body continuity without rejected presentation clocks",
+      "Remote body recovers to standing with native sword selection retained",
+      "Native source clone observed during its lifetime; body playback creates no peer clones or duplicate power actions",
+      "Both original inventory quantities and player/partner health retained; world reset still required",
+      "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [
+      {
+        "videoTime": 1.922,
+        "input": "Native Emily LT1800 then release at grounded floor"
+      }
+    ],
+    "dll": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+    "probe": "EFE0F99D8FFADE1D1314759867F1C818A38E255AFAAF12A56A1BE0CBFC0E0328",
+    "bankSha256": "B15744451FC76E6FDC6E0C86B010BFD67B7C76714821199DA617BE8C96034E42",
+    "scope": "Standing armed native Emily Doppelganger phases drive remote full-body bank55 poses through native Steam in isolated AI-held Dunwall. Local first-person remains native; peer animation does not execute clone, VFX or damage events. Remote world/clone behavior, alternate contexts and visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+  },
+  "continuity": {
+    "samples": 70,
+    "minimumBodyWeight": 1.0,
+    "rejections": [
+      0
+    ]
+  },
+  "phases": [
+    {
+      "variant": 29,
+      "nativeHandles": [
+        207
+      ],
+      "sourceEvents": [
+        {
+          "event": 2,
+          "variant": 29,
+          "durationMs": 466,
+          "nativeScene": 207
+        }
+      ],
+      "acceptedEvents": [
+        {
+          "event": 2,
+          "variant": 29,
+          "durationMs": 466,
+          "nativeScene": 0
+        }
+      ],
+      "sampledPoseEvents": [
+        2
+      ]
+    },
+    {
+      "variant": 30,
+      "nativeHandles": [
+        208,
+        209
+      ],
+      "sourceEvents": [
+        {
+          "event": 3,
+          "variant": 30,
+          "durationMs": 1200,
+          "nativeScene": 208
+        },
+        {
+          "event": 4,
+          "variant": 30,
+          "durationMs": 1200,
+          "nativeScene": 209
+        }
+      ],
+      "acceptedEvents": [
+        {
+          "event": 3,
+          "variant": 30,
+          "durationMs": 1200,
+          "nativeScene": 0
+        },
+        {
+          "event": 4,
+          "variant": 30,
+          "durationMs": 1200,
+          "nativeScene": 0
+        }
+      ],
+      "sampledPoseEvents": [
+        3,
+        4
+      ]
+    },
+    {
+      "variant": 31,
+      "nativeHandles": [
+        211
+      ],
+      "sourceEvents": [
+        {
+          "event": 5,
+          "variant": 31,
+          "durationMs": 666,
+          "nativeScene": 211
+        }
+      ],
+      "acceptedEvents": [
+        {
+          "event": 5,
+          "variant": 31,
+          "durationMs": 666,
+          "nativeScene": 0
+        }
+      ],
+      "sampledPoseEvents": [
+        5
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "video": "native-doppelganger-source-v406b.mp4",
+      "character": "emily",
+      "label": "Doppelganger native source \u00b7 406b",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "native-doppelganger-source-v406b/result.json",
+      "visual_review": "native-doppelganger-source-v406b/visual-review.json",
+      "proxy_sha256": "5B876D635856EBD0684AA77C38367204D302E7A833076D32596F0426D7AC1CE3",
+      "actual_capture_hz": 25.875,
+      "video_sha256": "9848EB96E34D45DED8790E4DEA910813C768105A88634BA8325340841D1086B3",
+      "checks_passed": true,
+      "scope": "Viewed native preview, summon FX and Emily clone. Native arm phases466/1200/666ms, exact inventory fixture and full protected cleanup. Source-only evidence; no remote clone behavior."
+    },
+    {
+      "video": "doppelganger-network-v408.mp4",
+      "character": "emily",
+      "label": "Doppelganger remote body \u00b7 408",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v408/result.json",
+      "visual_review": "doppelganger-network-v408/visual-review.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 25.25,
+      "video_sha256": "4E817B16807F019D10D95CE7B43BD5124148F4816CD81B2DBA75AE49EB1FBD0A",
+      "checks_passed": false,
+      "scope": "408 retained failure: three body phases and recovery pass, but final source clone was absent; requiring a clone to remain until recording end was unsupported. Coarse viewed body gesture/sword recovery; camera crops legs."
+    },
+    {
+      "video": "doppelganger-network-v408-source.mp4",
+      "character": "emily",
+      "label": "Doppelganger native source \u00b7 408",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v408/result.json",
+      "visual_review": "doppelganger-network-v408/visual-review-source.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 24.5,
+      "video_sha256": "BE2BA829FDA98289E993741423F6B3A23B10A2E5A19017F4BE40E15457881E22",
+      "checks_passed": false,
+      "scope": "408 retained failure: three body phases and recovery pass, but final source clone was absent; requiring a clone to remain until recording end was unsupported. Coarse viewed body gesture/sword recovery; camera crops legs. Native first-person and summon effects remain original."
+    },
+    {
+      "video": "doppelganger-network-v409.mp4",
+      "character": "emily",
+      "label": "Doppelganger remote body \u00b7 409",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v409/result.json",
+      "visual_review": "doppelganger-network-v409/visual-review.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 24.5625,
+      "video_sha256": "A9477769B1BF1A14E5DBF9EC37B04B7F4F77AD7DB9828E1CCB4E00033C053B2D",
+      "checks_passed": false,
+      "scope": "409 retained telemetry failure: slow complete entity scans hide466ms entry in sampled movement status. Native clone component/identity samples retained; video not visually reviewed."
+    },
+    {
+      "video": "doppelganger-network-v409-source.mp4",
+      "character": "emily",
+      "label": "Doppelganger native source \u00b7 409",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v409/result.json",
+      "visual_review": "doppelganger-network-v409/visual-review-source.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 24.1875,
+      "video_sha256": "4DC68DB7716FB2E4FE505F0FD6EB17C212AE18C13BE486A63BA29CAB47095166",
+      "checks_passed": false,
+      "scope": "409 retained telemetry failure: slow complete entity scans hide466ms entry in sampled movement status. Native clone component/identity samples retained; video not visually reviewed. Native first-person and summon effects remain original."
+    },
+    {
+      "video": "doppelganger-network-v411.mp4",
+      "character": "emily",
+      "label": "Doppelganger remote body \u00b7 411",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v411/result.json",
+      "visual_review": "doppelganger-network-v411/visual-review.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 24.875,
+      "video_sha256": "A374206D8E37E6A6A61D1D8EF6120EF52ECA7BCA0DCEE33818D7B96EA1CE89CD",
+      "checks_passed": true,
+      "scope": "411 passed10checks: exact native source phase IDs equal Steam sent/accepted events; three remote full-body phases,70 continuity samples allweight1/zero clock refusals, sword selection and standing recovery. Viewed complete-body gesture, stable legs and attachment at this camera; final aesthetic acceptance and close finger contact remain pending. Source native clone stays separate; remote clone/world FX and shared outcomes still absent. Both checkpoints, health, inventory and14protected hashes restore."
+    },
+    {
+      "video": "doppelganger-network-v411-source.mp4",
+      "character": "emily",
+      "label": "Doppelganger native source \u00b7 411",
+      "alias": "native_doppelganger_cast",
+      "requirements": [
+        "emily_doppelganger_cast"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "doppelganger-network-v411/result.json",
+      "visual_review": "doppelganger-network-v411/visual-review-source.json",
+      "proxy_sha256": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+      "actual_capture_hz": 23.4375,
+      "video_sha256": "A45B5FAE2DE9A4E840A436205E3A580607CA0DC8B19B0851D4A3EA7A813AA1DE",
+      "checks_passed": true,
+      "scope": "411 passed10checks: exact native source phase IDs equal Steam sent/accepted events; three remote full-body phases,70 continuity samples allweight1/zero clock refusals, sword selection and standing recovery. Viewed complete-body gesture, stable legs and attachment at this camera; final aesthetic acceptance and close finger contact remain pending. Source native clone stays separate; remote clone/world FX and shared outcomes still absent. Both checkpoints, health, inventory and14protected hashes restore. Native first-person and summon effects remain original."
+    }
+  ],
+  "complete": false,
+  "scope": "Standing armed Emily remote body cast only. Source-owned native clone/FX observed; remote clone/FX, shared outcomes, other contexts, cancellation/interruption and final visual acceptance remain incomplete."
+}

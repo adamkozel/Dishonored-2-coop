@@ -1,0 +1,82 @@
+{
+  "sha256": "4BAC18132571484683021D82F72853E27C3AA53ABF58B85FF004DB18A5C1A060",
+  "reason": "Accept exact observed crouched pickup preparation while keeping strict identity/stance checks. Experimental early snapshot cancellation preserves the blend until ragdoll physics consumes it.",
+  "runtimeValidated": true,
+  "source_cases": {
+    "corvo": {
+      "video": "native-pickup-crouched-corvo-v21b/native.mp4",
+      "evidence": "native-pickup-crouched-corvo-v21b/stream-validation.json",
+      "checks": 10,
+      "transitions": [
+        {
+          "ms": 1,
+          "ready": true,
+          "result": "ready",
+          "state": 0,
+          "carry": 0
+        },
+        {
+          "ms": 1856,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 1
+        },
+        {
+          "ms": 2877,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 2
+        }
+      ]
+    },
+    "emily": {
+      "video": "native-pickup-crouched-emily-v21/native.mp4",
+      "evidence": "native-pickup-crouched-emily-v21/stream-validation.json",
+      "checks": 10,
+      "transitions": [
+        {
+          "ms": 1,
+          "ready": true,
+          "result": "ready",
+          "state": 0,
+          "carry": 0
+        },
+        {
+          "ms": 1783,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 1
+        },
+        {
+          "ms": 2880,
+          "ready": true,
+          "result": "ready",
+          "state": 14,
+          "carry": 2
+        }
+      ]
+    }
+  },
+  "cancel_cases": {
+    "corvo": {
+      "video": "carry-snapshot-cancel-corvo-v21/native.mp4",
+      "evidence": "carry-snapshot-cancel-corvo-v21/snapshot-cancel-validation.json",
+      "checks": 13,
+      "cleanup_delay_ms": 279,
+      "visual_observations": "Corvo falls and settles without the v20 large upward launch; a small pose discontinuity remains.",
+      "visual_accepted": false
+    },
+    "emily": {
+      "video": "carry-snapshot-cancel-emily-v21/native.mp4",
+      "evidence": "carry-snapshot-cancel-emily-v21/snapshot-cancel-validation.json",
+      "checks": 13,
+      "cleanup_delay_ms": 293,
+      "visual_observations": "Emily still launches upward and sideways at 2.6-2.9 seconds. Mechanical cleanup passes but the visual handoff fails.",
+      "visual_accepted": false
+    }
+  },
+  "scope": "Both-role crouched native pickup semantic continuity and bounded pre-attachment snapshot cancellation. Complete third-person carrier lifting, automatic body authority and movement phase remain unfinished."
+}

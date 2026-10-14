@@ -1,0 +1,16 @@
+{
+  "program": "Dishonored2.exe",
+  "address": "14067bec0",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nulonglong FUN_14067bec0(longlong param_1)\r\n\r\n{\r\n  int iVar1;\r\n  longlong lVar2;\r\n  int *piVar3;\r\n  ulonglong uVar4;\r\n  int local_res10 [6];\r\n  \r\n  iVar1 = (**(code **)(*D2_GameSingletonPtr + 0x90))();\r\n  if (iVar1 == 3) {\r\n    lVar2 = FUN_1403da910(param_1 + 0x10,2);\r\n    if (lVar2 != 0) {\r\n      piVar3 = (int *)FUN_14092e460(lVar2);\r\n      local_res10[0] = *piVar3;\r\n      if (local_res10[0] == 0) {\r\n        piVar3 = (int *)FUN_140724160(lVar2);\r\n        local_res10[0] = *piVar3;\r\n      }\r\n      uVar4 = FUN_140723df0(lVar2,local_res10);\r\n      return uVar4;\r\n    }\r\n  }\r\n  else {\r\n    if (0 < (int)*(uint *)(param_1 + 0x208)) {\r\n      return (ulonglong)*(uint *)(param_1 + 0x208);\r\n    }\r\n    if (D2_GameSingletonPtr[0x66e23] != 0) {\r\n      return (ulonglong)*(uint *)(D2_GameSingletonPtr[0x66e23] + 0x20c);\r\n    }\r\n  }\r\n  return 0xffffffff;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nulonglong FUN_14067bec0(longlong param_1)\r\n\r\n{\r\n  int iVar1;\r\n  longlong lVar2;\r\n  int *piVar3;\r\n  ulonglong uVar4;\r\n  int local_res10 [6];\r\n  \r\n  iVar1 = (**(code **)(*D2_GameSingletonPtr + 0x90))();\r\n  if (iVar1 == 3) {\r\n    lVar2 = FUN_1403da910(param_1 + 0x10,2);\r\n    if (lVar2 != 0) {\r\n      piVar3 = (int *)FUN_14092e460(lVar2);\r\n      local_res10[0] = *piVar3;\r\n      if (local_res10[0] == 0) {\r\n        piVar3 = (int *)FUN_140724160(lVar2);\r\n        local_res10[0] = *piVar3;\r\n      }\r\n      uVar4 = FUN_140723df0(lVar2,local_res10);\r\n      return uVar4;\r\n    }\r\n  }\r\n  else {\r\n    if (0 < (int)*(uint *)(param_1 + 0x208)) {\r\n      return (ulonglong)*(uint *)(param_1 + 0x208);\r\n    }\r\n    if (D2_GameSingletonPtr[0x66e23] != 0) {\r\n      return (ulonglong)*(uint *)(D2_GameSingletonPtr[0x66e23] + 0x20c);\r\n    }\r\n  }\r\n  return 0xffffffff;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  }
+}

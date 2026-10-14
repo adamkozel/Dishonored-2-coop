@@ -1,0 +1,149 @@
+# arkPlayerStatePlaceWeapon.json
+
+Original: [work/natural-moveset/native-gadgets-research-v561/arkPlayerStatePlaceWeapon.json](<../../../../work/natural-moveset/native-gadgets-research-v561/arkPlayerStatePlaceWeapon.json>)
+
+SHA-256: `1B4C8572136E1A04AC3D319F0FB6A6458BE1F489810D37D1CBC0CDBBD2BC3B7F`; 3344 bytes.
+
+## Original saved record
+
+````json
+{
+  "executable": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\Dishonored2.exe",
+  "sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "type": "arkPlayerStatePlaceWeapon",
+  "typeRva": "0x23256d0",
+  "locators": [
+    {
+      "rva": "0x1fe1708",
+      "offset": 0,
+      "constructionDisplacement": 0,
+      "hierarchy": "0x1fe1730"
+    }
+  ],
+  "tables": [
+    {
+      "vtable": "0x1c7c098",
+      "locator": "0x1fe1708",
+      "offset": 0,
+      "functions": [
+        {
+          "slot": "0x0",
+          "rva": "0x922750",
+          "address": "0x140922750"
+        },
+        {
+          "slot": "0x8",
+          "rva": "0x8dbbf0",
+          "address": "0x1408dbbf0"
+        },
+        {
+          "slot": "0x10",
+          "rva": "0x399620",
+          "address": "0x140399620"
+        },
+        {
+          "slot": "0x18",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0x20",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0x28",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0x30",
+          "rva": "0x842060",
+          "address": "0x140842060"
+        },
+        {
+          "slot": "0x38",
+          "rva": "0x854910",
+          "address": "0x140854910"
+        },
+        {
+          "slot": "0x40",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0x48",
+          "rva": "0x854d00",
+          "address": "0x140854d00"
+        },
+        {
+          "slot": "0x50",
+          "rva": "0x841d80",
+          "address": "0x140841d80"
+        },
+        {
+          "slot": "0x58",
+          "rva": "0x9ffc00",
+          "address": "0x1409ffc00"
+        },
+        {
+          "slot": "0x60",
+          "rva": "0x842020",
+          "address": "0x140842020"
+        },
+        {
+          "slot": "0x68",
+          "rva": "0x842150",
+          "address": "0x140842150"
+        },
+        {
+          "slot": "0x70",
+          "rva": "0x841fa0",
+          "address": "0x140841fa0"
+        },
+        {
+          "slot": "0x78",
+          "rva": "0x854940",
+          "address": "0x140854940"
+        },
+        {
+          "slot": "0x80",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0x88",
+          "rva": "0x842110",
+          "address": "0x140842110"
+        },
+        {
+          "slot": "0x90",
+          "rva": "0x399620",
+          "address": "0x140399620"
+        },
+        {
+          "slot": "0x98",
+          "rva": "0x6d040",
+          "address": "0x14006d040"
+        },
+        {
+          "slot": "0xa0",
+          "rva": "0x399620",
+          "address": "0x140399620"
+        },
+        {
+          "slot": "0xa8",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        },
+        {
+          "slot": "0xb0",
+          "rva": "0x998b0",
+          "address": "0x1400998b0"
+        }
+      ]
+    }
+  ],
+  "scope": "Confirmed static RTTI/table candidates from exact PE; no runtime component ownership or safe mutation implied."
+}
+````

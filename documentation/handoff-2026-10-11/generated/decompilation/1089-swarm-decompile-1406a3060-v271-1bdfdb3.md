@@ -1,0 +1,46 @@
+# swarm-decompile-1406a3060-v271.txt
+
+Original: [work/movement-integration/swarm-decompile-1406a3060-v271.txt](<../../../../work/movement-integration/swarm-decompile-1406a3060-v271.txt>)
+
+SHA-256: `E955271EF7543D1A064A47B50CDDC99CAA398FB0A97698A1BFF34C5A87F9DF5B`; 1074 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_1406a3060(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  char cVar3;
+  undefined4 uVar4;
+  undefined4 auStackX_8 [2];
+  undefined1 auStackX_10 [8];
+  undefined1 auStack_18 [16];
+  
+  FUN_1406a7a30();
+  lVar1 = *(longlong *)(param_1 + 8);
+  if ((*(uint *)(param_1 + 0x1c) >> 0x1e & 1) == 0) {
+    auStackX_8[0] = DAT_1432ce58c;
+    lVar2 = *(longlong *)(param_1 + 0x10);
+    cVar3 = FUN_1401ae9a0(D2_GameSingletonPtr + 0x1e8870,auStackX_8,lVar2 + 0x78,
+                          *(float *)(lVar1 + 0x9c) * 0.01 * *(float *)(lVar1 + 0x6c),auStack_18,
+                          auStackX_10);
+    if (cVar3 != '\0') {
+      FUN_14087c320(lVar2,auStack_18);
+      FUN_14087d1e0(lVar2,auStack_18,lVar2 + 0x30c,0);
+    }
+  }
+  FUN_1406a97f0(param_1,*(undefined4 *)(lVar1 + 0x470));
+  if ((*(uint *)(param_1 + 0x1c) >> 0x1e & 1) == 0) {
+    uVar4 = FUN_1408ac110(*(undefined4 *)(*(longlong *)(param_1 + 8) + 0x464),
+                          *(undefined4 *)(*(longlong *)(param_1 + 8) + 0x468));
+    *(undefined4 *)(param_1 + 0x208) = uVar4;
+  }
+  return;
+}
+
+
+
+````

@@ -1,0 +1,204 @@
+[
+  {
+    "role": "corvo",
+    "bank": "air-banks-v1\\corvo-air-bank.bin",
+    "sha256": "3fac85f7cf38b8f8daf40281ef09fc3859e65ed7c4db4732bdd73c906fc54a59",
+    "format": "D2MOVE07",
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 37,
+        "alias": "standing_jump_sequence",
+        "part": "rise",
+        "source": "jumps-authored-v3\\standing_jump_sequence-corvo.bin",
+        "sha256": "4a2e6662dc5441dafa2488dfa7bdbc9c96511912fe0f8e013ce7fa4c81738ea7",
+        "source_frames": [
+          38,
+          56
+        ],
+        "duration": 0.3
+      },
+      {
+        "id": 38,
+        "alias": "sword_fall_loop",
+        "part": "full",
+        "source": "native-retargeted\\96d6079fa2cdf499-corvo.bin",
+        "sha256": "25db3b073cd2af1a41eb5461002de7b80e1d66ff51c35f150483bfcaba1b3900",
+        "source_frames": [
+          0,
+          10
+        ],
+        "duration": 0.3333333333333333
+      },
+      {
+        "id": 39,
+        "alias": "standing_jump_sequence",
+        "part": "land",
+        "source": "jumps-authored-v3\\standing_jump_sequence-corvo.bin",
+        "sha256": "4a2e6662dc5441dafa2488dfa7bdbc9c96511912fe0f8e013ce7fa4c81738ea7",
+        "source_frames": [
+          73,
+          141
+        ],
+        "duration": 1.1333333333333333
+      },
+      {
+        "id": 40,
+        "alias": "running_jump_sequence",
+        "part": "running-rise",
+        "source": "dynamics-authored\\running_jump_sequence-corvo.bin",
+        "sha256": "418dae4cdc9965a3e7b6746bc7b7d0e6554d47b8c652723fb13d3f12b0f71b96",
+        "source_frames": [
+          4,
+          21
+        ],
+        "duration": 0.2833333333333333
+      },
+      {
+        "id": 41,
+        "alias": "running_jump_sequence",
+        "part": "running-land",
+        "source": "dynamics-authored\\running_jump_sequence-corvo.bin",
+        "sha256": "418dae4cdc9965a3e7b6746bc7b7d0e6554d47b8c652723fb13d3f12b0f71b96",
+        "source_frames": [
+          36,
+          54
+        ],
+        "duration": 0.3
+      },
+      {
+        "id": 42,
+        "alias": "crouch_jump_to_crouch",
+        "part": "crouch-land",
+        "source": "jumps-authored-v3\\crouch_jump_to_crouch-corvo.bin",
+        "sha256": "638b8b099de796ab02c930d812ebf47c3157c5b215bb938c68ec200c8decc6a8",
+        "source_frames": [
+          69,
+          113
+        ],
+        "duration": 0.7333333333333333
+      },
+      {
+        "id": 43,
+        "alias": "crouch_jump_to_crouch",
+        "part": "crouch-rise",
+        "source": "jumps-authored-v3\\crouch_jump_to_crouch-corvo.bin",
+        "sha256": "638b8b099de796ab02c930d812ebf47c3157c5b215bb938c68ec200c8decc6a8",
+        "source_frames": [
+          34,
+          52
+        ],
+        "duration": 0.3
+      }
+    ],
+    "root_writes": false,
+    "events": false,
+    "gameplay_verified": false,
+    "visual_accepted": false,
+    "limitations": [
+      "No double jump, hard-landing or airborne combat acceptance from this bank.",
+      "Running and crouched variants require native-state timing and actual-game visual review."
+    ]
+  },
+  {
+    "role": "emily",
+    "bank": "air-banks-v1\\emily-air-bank.bin",
+    "sha256": "ca7b5a3ee7fe4e12baa5053b47ce6e5268d9e918e93d58245a9d9316b4b75ffd",
+    "format": "D2MOVE07",
+    "previous_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 37,
+        "alias": "standing_jump_sequence",
+        "part": "rise",
+        "source": "jumps-authored-v3\\standing_jump_sequence-emily.bin",
+        "sha256": "635aff2b685c8b44e502e6bf21a4b780602c749f03733170c3a1b079704badfb",
+        "source_frames": [
+          38,
+          56
+        ],
+        "duration": 0.3
+      },
+      {
+        "id": 38,
+        "alias": "sword_fall_loop",
+        "part": "full",
+        "source": "native-retargeted\\96d6079fa2cdf499-emily.bin",
+        "sha256": "dd8b226d558f7f715e15e0644e144e1a7ef28193c25c445e1714389b2a975da7",
+        "source_frames": [
+          0,
+          10
+        ],
+        "duration": 0.3333333333333333
+      },
+      {
+        "id": 39,
+        "alias": "standing_jump_sequence",
+        "part": "land",
+        "source": "jumps-authored-v3\\standing_jump_sequence-emily.bin",
+        "sha256": "635aff2b685c8b44e502e6bf21a4b780602c749f03733170c3a1b079704badfb",
+        "source_frames": [
+          73,
+          141
+        ],
+        "duration": 1.1333333333333333
+      },
+      {
+        "id": 40,
+        "alias": "running_jump_sequence",
+        "part": "running-rise",
+        "source": "dynamics-authored\\running_jump_sequence-emily.bin",
+        "sha256": "7d5ce591546613971b7385b58f105fa7fb740db794242e7bd723a91bd7f8c19c",
+        "source_frames": [
+          4,
+          21
+        ],
+        "duration": 0.2833333333333333
+      },
+      {
+        "id": 41,
+        "alias": "running_jump_sequence",
+        "part": "running-land",
+        "source": "dynamics-authored\\running_jump_sequence-emily.bin",
+        "sha256": "7d5ce591546613971b7385b58f105fa7fb740db794242e7bd723a91bd7f8c19c",
+        "source_frames": [
+          36,
+          54
+        ],
+        "duration": 0.3
+      },
+      {
+        "id": 42,
+        "alias": "crouch_jump_to_crouch",
+        "part": "crouch-land",
+        "source": "jumps-authored-v3\\crouch_jump_to_crouch-emily.bin",
+        "sha256": "ac0e21e98bb7a53234c38dfa981064869564b84334a56c3417321ab85852894b",
+        "source_frames": [
+          69,
+          113
+        ],
+        "duration": 0.7333333333333333
+      },
+      {
+        "id": 43,
+        "alias": "crouch_jump_to_crouch",
+        "part": "crouch-rise",
+        "source": "jumps-authored-v3\\crouch_jump_to_crouch-emily.bin",
+        "sha256": "ac0e21e98bb7a53234c38dfa981064869564b84334a56c3417321ab85852894b",
+        "source_frames": [
+          34,
+          52
+        ],
+        "duration": 0.3
+      }
+    ],
+    "root_writes": false,
+    "events": false,
+    "gameplay_verified": false,
+    "visual_accepted": false,
+    "limitations": [
+      "No double jump, hard-landing or airborne combat acceptance from this bank.",
+      "Running and crouched variants require native-state timing and actual-game visual review."
+    ]
+  }
+]

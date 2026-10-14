@@ -1,0 +1,12 @@
+# possession-equipment-update-decompile-v350.json
+
+Original: [work/movement-integration/possession-equipment-update-decompile-v350.json](<../../../../work/movement-integration/possession-equipment-update-decompile-v350.json>)
+
+SHA-256: `E543C6DC57DE4BAE4F957D09CD0BB7729E752592C051C6DFF873F0D983EA2AD9`; 2001 bytes.
+
+## Original saved record
+
+````json
+{"0x140447c60":"\r\nvoid FUN_140447c60(undefined8 param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  int iVar2;\r\n  longlong lVar3;\r\n  \r\n  lVar3 = FUN_1407e7380();\r\n  iVar2 = FUN_1401581c0(lVar3 + 0xc0c,0,1);\r\n  while (iVar2 == 1) {\r\n    iVar2 = FUN_1401581c0(lVar3 + 0xc0c,0,1);\r\n  }\r\n  FUN_14048ff20(*(undefined8 *)(lVar3 + 0x870),param_1);\r\n  FUN_1401581e0(lVar3 + 0xc0c,0);\r\n  uVar1 = FUN_1407e7380();\r\n  FUN_1407ec5a0(uVar1,param_1);\r\n  return;\r\n}\r\n\r\n","0x140448000":"\r\nundefined8 FUN_140448000(void)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1407e7380();\r\n  return *(undefined8 *)(lVar1 + 0x870);\r\n}\r\n\r\n","0x140448020":"\r\nundefined4 FUN_140448020(void)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1407e7380();\r\n  return *(undefined4 *)(*(longlong *)(lVar1 + 0x870) + 0xc);\r\n}\r\n\r\n","0x1404480b0":"\r\nbyte FUN_1404480b0(longlong param_1)\r\n\r\n{\r\n  return ~*(byte *)(param_1 + 0xf4) & 1;\r\n}\r\n\r\n","0x14061c1f0":"\r\nvoid FUN_14061c1f0(longlong param_1)\r\n\r\n{\r\n  undefined4 *puVar1;\r\n  undefined1 local_res8 [32];\r\n  \r\n  FUN_14061aed0();\r\n  puVar1 = (undefined4 *)FUN_14060ce50(*(undefined8 *)(param_1 + 0x30),local_res8,&DAT_143987d58);\r\n  if ((undefined4 *)(param_1 + 0x68) != puVar1) {\r\n    *(undefined4 *)(param_1 + 0x68) = *puVar1;\r\n  }\r\n  puVar1 = (undefined4 *)FUN_14060ce50(*(undefined8 *)(param_1 + 0x30),local_res8,&DAT_143987d60);\r\n  if ((undefined4 *)(param_1 + 0x98) != puVar1) {\r\n    *(undefined4 *)(param_1 + 0x98) = *puVar1;\r\n  }\r\n  puVar1 = (undefined4 *)FUN_14060ce50(*(undefined8 *)(param_1 + 0x30),local_res8,&DAT_143987d68);\r\n  if ((undefined4 *)(param_1 + 0x9c) != puVar1) {\r\n    *(undefined4 *)(param_1 + 0x9c) = *puVar1;\r\n  }\r\n  puVar1 = (undefined4 *)FUN_14060ce50(*(undefined8 *)(param_1 + 0x30),local_res8,&DAT_143987d70);\r\n  if ((undefined4 *)(param_1 + 0xa0) != puVar1) {\r\n    *(undefined4 *)(param_1 + 0xa0) = *puVar1;\r\n  }\r\n  return;\r\n}\r\n\r\n"}
+
+````

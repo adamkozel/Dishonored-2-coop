@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+  "checks": [
+    "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+    "Both native opposite-side openings observed; one host order converges in state and actual native opening side, with no measured rejection delta",
+    "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "yaw": 270,
+        "distance": 1.0,
+        "stance": 0,
+        "name": "unlocked-door-tap"
+      },
+      "key": "host-unlocked-door-tap",
+      "count": 134,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "door": "ld_door_350cm_int_rich_wood_01_3",
+  "initialOpen": false,
+  "scope": "Simultaneous native openings from opposite sides. Both independent native Moving parameters must be observed, then both actual Open sides must match the host order. No assumed same-side convergence."
+}

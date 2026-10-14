@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-14T20:04:34.936120+02:00",
+  "dll": "985F0265777D67ED02B955A9AFB69D7E641E3B42D7E7F16B8B3B221D4E025009",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203f",
+  "protocol": 74,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213 on 1203f: Stage 3 native use -> authored interaction. Source: native player state 75 (vtable 0x1c86ab8, one ~15 ms sample per successful use, 1210c) rising edge + the interaction sensor's focused entity (arkCpntPlayerSensorInteraction 0x1b403b8 +0x80) classified by name (1 button/generic reach, 2 lever, 3 crank, 4 wheel/valve, 5 key/lock); ends on another action or >0.6 m movement. Wire protocol 74/416 bytes (useVariant/TimeMs/DurationMs/Event, ground action only). Bank 71/374 appends mechanisms-v4 interact sequences as clips 369-373 (prior 369 unchanged); remote playback blends the clip on its authored duration and fades out when the partner moves. Runtime pending.",
+  "result": "1214: host-source use passed (state 75 edge, focused ld_rich_small_gp_window_handle_37 -> variant 1; client remote Corvo presented clip 369 to weight 1.0/amount 1.0); client-source uses were missed (1214 open-handle use never registered natively; 1214b the window opened but the source never saw state 75): the one-frame state was only sampled at the 33 ms packet cadence. Superseded by 1213b (per-frame use sampling).",
+  "runtimeEvidence": "../../natural-moveset/use-interaction-v1214b/result.json"
+}

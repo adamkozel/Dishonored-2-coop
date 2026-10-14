@@ -1,0 +1,270 @@
+{
+  "at": "2026-10-14T17:04:59.835629+02:00",
+  "candidate": "candidate-npc-combat-v1166b",
+  "dll": "DF2FF26777CE90E651D66D0A95C2E418FB17C45496B5ECE6ED6332C508EF5136",
+  "harnesses": [
+    "../natural-moveset/Test-MissionNpcRelevance-v1168.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-npc-relevance-v1167",
+      "passed": false,
+      "scope": "1166: spawn set (9) bound on the host and followed by the client on Hello; after a ~205 m move the host dropped the 9 and added 11, the client bound them, then the NPC session ended with session_pose_stale (a >1 s pose gap during the long move) -> 1166b.",
+      "failure": "NPC sets did not converge (far): host=0 client=0",
+      "stages": [
+        {
+          "hostResult": "active",
+          "hostBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "hostPlayer": [
+            -30.814,
+            192.748,
+            1.25397
+          ],
+          "hostRelevance": {
+            "bound": 9,
+            "scans": 2,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 0,
+            "clientRefused": 0
+          },
+          "clientResult": "active",
+          "clientBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "tag": "spawn",
+          "clientRelevance": {
+            "bound": 9,
+            "scans": 0,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 9,
+            "clientRefused": 0
+          },
+          "matched": true,
+          "ms": 1127
+        },
+        {
+          "hostResult": "session_pose_stale",
+          "hostBound": [],
+          "hostPlayer": [
+            62.222,
+            4.47204,
+            33.495
+          ],
+          "hostRelevance": {
+            "bound": 0,
+            "scans": 3,
+            "added": 11,
+            "dropped": 9,
+            "clientBound": 0,
+            "clientRefused": 0
+          },
+          "clientResult": "no_bound_npcs",
+          "clientBound": [],
+          "tag": "far",
+          "clientRelevance": {
+            "bound": 0,
+            "scans": 0,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 20,
+            "clientRefused": 0
+          },
+          "matched": false,
+          "ms": 30422
+        }
+      ]
+    },
+    {
+      "take": "mission-npc-relevance-v1168",
+      "passed": true,
+      "scope": "Pass (1166b): spawn 9 -> far interior 11 (9 dropped, 11 added) -> back at spawn 9 (11 dropped, 9 re-added); host and client bound/ready sets identical at every stage within about 1 s; no transport stall occurred in this take.",
+      "failure": null,
+      "stages": [
+        {
+          "hostResult": "active",
+          "tag": "spawn",
+          "hostRelevance": {
+            "bound": 9,
+            "scans": 2,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 0,
+            "clientRefused": 0
+          },
+          "hostBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "clientResult": "active",
+          "hostPlayer": [
+            -30.8141,
+            192.748,
+            1.25397
+          ],
+          "ms": 1116,
+          "clientRelevance": {
+            "bound": 9,
+            "scans": 0,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 9,
+            "clientRefused": 0
+          },
+          "clientBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "matched": true
+        },
+        {
+          "hostResult": "active",
+          "tag": "far",
+          "hostRelevance": {
+            "bound": 11,
+            "scans": 4,
+            "added": 11,
+            "dropped": 9,
+            "clientBound": 0,
+            "clientRefused": 0
+          },
+          "hostBound": [
+            "models/characters/def/generic/elite_female_01_veteran.def_10794",
+            "models/characters/def/generic/elite_female_01.def_10834",
+            "models/characters/def/generic/elite_male_tall_01.def_10743",
+            "models/characters/def/generic/guard_male_small_01.def_10737",
+            "models/characters/def/generic/guard_male_small_01.def_10740",
+            "models/characters/def/generic/guard_male_small_01.def_10811",
+            "models/characters/def/generic/guard_male_small_01.def_10833",
+            "models/characters/def/generic/guard_male_small_01.def_10835",
+            "models/characters/def/generic/guard_male_small_01.def_10836",
+            "models/characters/def/generic/guard_male_small_01.def_10837",
+            "models/characters/def/generic/lower_guard_male_small_01.def_10809"
+          ],
+          "clientResult": "active",
+          "hostPlayer": [
+            62.222,
+            4.47204,
+            33.495
+          ],
+          "ms": 1024,
+          "clientRelevance": {
+            "bound": 11,
+            "scans": 0,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 20,
+            "clientRefused": 0
+          },
+          "clientBound": [
+            "models/characters/def/generic/elite_female_01_veteran.def_10794",
+            "models/characters/def/generic/elite_female_01.def_10834",
+            "models/characters/def/generic/elite_male_tall_01.def_10743",
+            "models/characters/def/generic/guard_male_small_01.def_10737",
+            "models/characters/def/generic/guard_male_small_01.def_10740",
+            "models/characters/def/generic/guard_male_small_01.def_10811",
+            "models/characters/def/generic/guard_male_small_01.def_10833",
+            "models/characters/def/generic/guard_male_small_01.def_10835",
+            "models/characters/def/generic/guard_male_small_01.def_10836",
+            "models/characters/def/generic/guard_male_small_01.def_10837",
+            "models/characters/def/generic/lower_guard_male_small_01.def_10809"
+          ],
+          "matched": true
+        },
+        {
+          "hostResult": "active",
+          "tag": "return",
+          "hostRelevance": {
+            "bound": 9,
+            "scans": 7,
+            "added": 20,
+            "dropped": 20,
+            "clientBound": 0,
+            "clientRefused": 0
+          },
+          "hostBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "clientResult": "active",
+          "hostPlayer": [
+            -30.814,
+            192.748,
+            1.25397
+          ],
+          "ms": 1026,
+          "clientRelevance": {
+            "bound": 9,
+            "scans": 0,
+            "added": 0,
+            "dropped": 0,
+            "clientBound": 29,
+            "clientRefused": 0
+          },
+          "clientBound": [
+            "models/characters/def/generic/worker_male_small_01.def_10731",
+            "models/characters/def/generic/worker_male_small_01.def_10732",
+            "models/characters/def/generic/worker_male_small_01.def_10734",
+            "models/characters/def/generic/worker_male_small_01.def_10754",
+            "models/characters/def/generic/worker_male_small_01.def_10755",
+            "models/characters/def/generic/worker_male_small_01.def_10756",
+            "models/characters/def/generic/worker_male_small_01.def_10823",
+            "models/characters/def/generic/worker_male_small_01.def_10825",
+            "models/characters/def/generic/worker_male_small_01.def_10828"
+          ],
+          "matched": true
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: host-owned dynamic NPC relevance - every 2 s the host binds eligible NPCs within 55 m of either player (max 24) and retires channels beyond 75 m of both (Stop to the client); the client binds on host Hello; sets stay identical across a ~205 m move and back.",
+    "Session stall tolerance (1166b: 1-10 s without partner poses suspends NPC/door/usable sessions like a menu) is implemented but was not exercised in 1168 (no stall occurred): hypothesis-level until a stall is observed."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Exercise the stall-suspend path deliberately.",
+    "Combat while channels rebind (a bound NPC engaged in combat leaving 75 m).",
+    "Visual review of replicas after rebinding (this harness recorded no video)."
+  ]
+}

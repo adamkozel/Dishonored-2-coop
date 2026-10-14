@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native Steam transport and exact bank46/285 remote Emily standing armed context ready",
+    "Native crouch drives the remote Posture-100 stance before the cast",
+    "Native Emily enter and aim scenes drive corresponding complete-body remote phases through Steam",
+    "Native X while LT remains held cancels the aim; remote body returns to its normal movement bank without stale power weight",
+    "Native and remote remain crouched through aim, cancellation and return to the normal crouched movement bank",
+    "Cancelled aim consumes no source mana; no resource writes are used",
+    "Cancelled aim creates neither source-native nor cosmetic world, target links or particles; native players and avatars retain health",
+    "Native and remote sword selections remain equipped after cancellation",
+    "Both native inventory quantities restore exactly before checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.793,
+      "input": "Native LT hold begins; no release-to-cast"
+    },
+    {
+      "videoTime": 4.297,
+      "input": "Native X cancel while LT held, followed by neutral"
+    }
+  ],
+  "dll": "C00A8689AE6E16D9855882256ADF191AA4A79C508CC5B9D5C9A84B98BC4A45EA",
+  "probe": "84C665478CC705961B0BA09296D8C98C7E92B5533C02F083C7EAB93BD9E2D319",
+  "bankSha256": "367CE7FFDB05CFCDEEE4FD4B45C99C8DF58AD60560C7CF3137ED8214E60FE182",
+  "scope": "Crouched armed Emily Mesmerize native aim cancellation via controller X while LT remains held. Confirms native first-person enter/aim provenance, remote body recovery and absence of a committed native/cosmetic power or mana cost. Visual acceptance and shared NPC outcomes remain incomplete; standing cancellation and natural lifetime have separate receipts. Both isolated checkpoints restore and protected originals remain unchanged."
+}

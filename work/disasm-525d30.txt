@@ -1,0 +1,74 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140525D30: mov         qword ptr [rsp+10h],rbx
+  0000000140525D35: mov         qword ptr [rsp+18h],rsi
+  0000000140525D3A: push        rdi
+  0000000140525D3B: sub         rsp,20h
+  0000000140525D3F: cmp         byte ptr [rcx+35h],0
+  0000000140525D43: mov         rsi,rdx
+  0000000140525D46: mov         rdi,rcx
+  0000000140525D49: je          0000000140525D89
+  0000000140525D4B: call        00000001405BEF90
+  0000000140525D50: mov         ebx,dword ptr [rax+00000000000000A8h]
+  0000000140525D56: call        0000000140810240
+  0000000140525D5B: mov         r9d,ebx
+  0000000140525D5E: lea         rcx,[rax+000000000000C8E8h]
+  0000000140525D65: mov         edx,17Ch
+  0000000140525D6A: mov         r8d,4
+  0000000140525D70: call        00000001408112C0
+  0000000140525D75: test        rax,rax
+  0000000140525D78: je          0000000140525D80
+  0000000140525D7A: mov         dword ptr [rax],0Bh
+  0000000140525D80: mov         byte ptr [rdi+35h],0
+  0000000140525D84: mov         byte ptr [rsi],4
+  0000000140525D87: jmp         0000000140525DF9
+  0000000140525D89: mov         rcx,qword ptr [rcx+20h]
+  0000000140525D8D: call        00000001407BBF20
+  0000000140525D92: lea         rdx,[rsp+30h]
+  0000000140525D97: mov         rcx,rax
+  0000000140525D9A: call        0000000140877EB0
+  0000000140525D9F: movss       xmm1,dword ptr [rdi+30h]
+  0000000140525DA4: xorps       xmm0,xmm0
+  0000000140525DA7: subss       xmm1,dword ptr [rsp+30h]
+  0000000140525DAD: comiss      xmm0,xmm1
+  0000000140525DB0: movss       dword ptr [rdi+30h],xmm1
+  0000000140525DB5: jb          0000000140525DF6
+  0000000140525DB7: lea         rdx,[00000001439846C0h]
+  0000000140525DBE: mov         rcx,rdi
+  0000000140525DC1: call        0000000140523DB0
+  0000000140525DC6: mov         rbx,qword ptr [00000001439A5290h]
+  0000000140525DCD: mov         rcx,qword ptr [rbx+00000000001F6F48h]
+  0000000140525DD4: test        rcx,rcx
+  0000000140525DD7: je          0000000140525DF2
+  0000000140525DD9: mov         rdx,rax
+  0000000140525DDC: call        00000001404F2C50
+  0000000140525DE1: lea         rcx,[rbx+00000000001F6EC8h]
+  0000000140525DE8: mov         edx,0Dh
+  0000000140525DED: call        00000001407885B0
+  0000000140525DF2: mov         byte ptr [rdi+35h],1
+  0000000140525DF6: mov         byte ptr [rsi],1
+  0000000140525DF9: mov         rax,qword ptr [rdi+28h]
+  0000000140525DFD: mov         rbx,qword ptr [rsp+38h]
+  0000000140525E02: mov         qword ptr [rsi+18h],rdi
+  0000000140525E06: mov         ecx,dword ptr [rax+8]
+  0000000140525E09: xor         eax,eax
+  0000000140525E0B: mov         dword ptr [rsi+4],ecx
+  0000000140525E0E: mov         dword ptr [rsi+8],eax
+  0000000140525E11: mov         dword ptr [rsi+0Ch],ecx
+  0000000140525E14: mov         dword ptr [rsi+10h],eax
+  0000000140525E17: mov         rax,rsi
+  0000000140525E1A: mov         rsi,qword ptr [rsp+40h]
+  0000000140525E1F: add         rsp,20h
+  0000000140525E23: pop         rdi
+  0000000140525E24: ret
+  0000000140525E25: int         3
+
+  Summary
+
+     1A7D000 .text

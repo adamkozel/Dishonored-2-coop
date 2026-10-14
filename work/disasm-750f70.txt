@@ -1,0 +1,71 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140750F70: push        rdi
+  0000000140750F72: sub         rsp,20h
+  0000000140750F76: mov         rdi,rcx
+  0000000140750F79: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140750F80: mov         rax,qword ptr [rcx]
+  0000000140750F83: call        qword ptr [rax+00000000000000C0h]
+  0000000140750F89: cmp         dword ptr [rdi+0000000000000084h],eax
+  0000000140750F8F: jne         0000000140750F9B
+  0000000140750F91: lea         rax,[rdi+3Ch]
+  0000000140750F95: add         rsp,20h
+  0000000140750F99: pop         rdi
+  0000000140750F9A: ret
+  0000000140750F9B: cmp         byte ptr [rdi+00000000000000D5h],0
+  0000000140750FA2: je          0000000140750FD2
+  0000000140750FA4: mov         qword ptr [rsp+38h],rbx
+  0000000140750FA9: mov         rbx,qword ptr [rdi+10h]
+  0000000140750FAD: lea         rdx,[rsp+30h]
+  0000000140750FB2: mov         rcx,rbx
+  0000000140750FB5: call        0000000140877EB0
+  0000000140750FBA: lea         rdx,[rbx+0000000000000300h]
+  0000000140750FC1: lea         rcx,[rdi+30h]
+  0000000140750FC5: mov         r8d,dword ptr [rax]
+  0000000140750FC8: call        00000001407501D0
+  0000000140750FCD: mov         rbx,qword ptr [rsp+38h]
+  0000000140750FD2: lea         rax,[rdi+00000000000000B0h]
+  0000000140750FD9: add         rsp,20h
+  0000000140750FDD: pop         rdi
+  0000000140750FDE: ret
+  0000000140750FDF: int         3
+  0000000140750FE0: push        rdi
+  0000000140750FE2: sub         rsp,20h
+  0000000140750FE6: mov         rdi,rcx
+  0000000140750FE9: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140750FF0: mov         rax,qword ptr [rcx]
+  0000000140750FF3: call        qword ptr [rax+00000000000000C0h]
+  0000000140750FF9: cmp         dword ptr [rdi+0000000000000084h],eax
+  0000000140750FFF: jne         000000014075100B
+  0000000140751001: lea         rax,[rdi+30h]
+  0000000140751005: add         rsp,20h
+  0000000140751009: pop         rdi
+  000000014075100A: ret
+  000000014075100B: cmp         byte ptr [rdi+00000000000000D4h],0
+  0000000140751012: je          0000000140751042
+  0000000140751014: mov         qword ptr [rsp+38h],rbx
+  0000000140751019: mov         rbx,qword ptr [rdi+10h]
+  000000014075101D: lea         rdx,[rsp+30h]
+  0000000140751022: mov         rcx,rbx
+  0000000140751025: call        0000000140877EB0
+  000000014075102A: lea         rdx,[rbx+0000000000000300h]
+  0000000140751031: lea         rcx,[rdi+30h]
+  0000000140751035: mov         r8d,dword ptr [rax]
+  0000000140751038: call        0000000140750550
+  000000014075103D: mov         rbx,qword ptr [rsp+38h]
+  0000000140751042: lea         rax,[rdi+00000000000000A4h]
+  0000000140751049: add         rsp,20h
+  000000014075104D: pop         rdi
+  000000014075104E: ret
+  000000014075104F: int         3
+  0000000140751050: 48
+
+  Summary
+
+     1A7D000 .text

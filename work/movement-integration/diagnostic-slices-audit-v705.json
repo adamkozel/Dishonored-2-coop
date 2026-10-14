@@ -1,0 +1,4559 @@
+{
+  "at": "2026-10-13T12:19:14.927765+02:00",
+  "passed": true,
+  "checks": 32,
+  "failedChecks": 0,
+  "cases": [
+    {
+      "take": "native-interactions-corvo-crouch-coin-v701",
+      "candidate": "candidate-native-timing-v700",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed and restored both inventories,health and14 protected files",
+        "Compact native states valid throughout",
+        "Exact native crouched loot activated",
+        "Crouch classification continuous",
+        "Native source coin removed",
+        "Both Steam streams remain ready",
+        "Remote body fully weighted throughout capture",
+        "Remote crouch retained"
+      ],
+      "failures": [],
+      "samples": 124,
+      "compactSamples": 893,
+      "minimumBodyWeight": 0.999851,
+      "timing": {
+        "sourceTiming": {
+          "elapsedMs": 13000,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 630,
+              "totalMs": 0.14,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 630,
+              "totalMs": 1.238,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 630,
+              "totalMs": 428.803,
+              "meanMs": 0.681,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 630,
+              "totalMs": 136.752,
+              "meanMs": 0.217,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 630,
+              "totalMs": 9.682,
+              "meanMs": 0.015,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 630,
+              "totalMs": 0.077,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 630,
+              "totalMs": 126.449,
+              "meanMs": 0.201,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 630,
+              "totalMs": 0.139,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 630,
+              "totalMs": 0.151,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 630,
+              "totalMs": 2135.319,
+              "meanMs": 3.389,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 630,
+              "totalMs": 0.288,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 630,
+              "totalMs": 0.177,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 630,
+              "totalMs": 55.93,
+              "meanMs": 0.089,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 630,
+              "totalMs": 2896.833,
+              "meanMs": 4.598,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 630,
+              "totalMs": 1137.172,
+              "meanMs": 1.805,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 1365,
+              "totalMs": 913.597,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 180,
+              "totalMs": 192.837,
+              "meanMs": 1.071,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 52,
+              "totalMs": 43.537,
+              "meanMs": 0.837,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 52,
+              "totalMs": 39.329,
+              "meanMs": 0.756,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 52,
+              "totalMs": 38.682,
+              "meanMs": 0.744,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 52,
+              "totalMs": 38.797,
+              "meanMs": 0.746,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 52,
+              "totalMs": 57.194,
+              "meanMs": 1.1,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 52,
+              "totalMs": 43.666,
+              "meanMs": 0.84,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 52,
+              "totalMs": 42.229,
+              "meanMs": 0.812,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 52,
+              "totalMs": 41.589,
+              "meanMs": 0.8,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 52,
+              "totalMs": 39.952,
+              "meanMs": 0.768,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 52,
+              "totalMs": 39.869,
+              "meanMs": 0.767,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 52,
+              "totalMs": 38.696,
+              "meanMs": 0.744,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 52,
+              "totalMs": 39.402,
+              "meanMs": 0.758,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 52,
+              "totalMs": 41.273,
+              "meanMs": 0.794,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 52,
+              "totalMs": 39.991,
+              "meanMs": 0.769,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 52,
+              "totalMs": 40.568,
+              "meanMs": 0.78,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 52,
+              "totalMs": 40.606,
+              "meanMs": 0.781,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 52,
+              "totalMs": 41.926,
+              "meanMs": 0.806,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 52,
+              "totalMs": 38.688,
+              "meanMs": 0.744,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 52,
+              "totalMs": 39.705,
+              "meanMs": 0.764,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 52,
+              "totalMs": 40.036,
+              "meanMs": 0.77,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 52,
+              "totalMs": 40.357,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 52,
+              "totalMs": 39.046,
+              "meanMs": 0.751,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 52,
+              "totalMs": 41.757,
+              "meanMs": 0.803,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 52,
+              "totalMs": 39.379,
+              "meanMs": 0.757,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 52,
+              "totalMs": 49.582,
+              "meanMs": 0.954,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 52,
+              "totalMs": 41.495,
+              "meanMs": 0.798,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 52,
+              "totalMs": 39.949,
+              "meanMs": 0.768,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 52,
+              "totalMs": 41.714,
+              "meanMs": 0.802,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 52,
+              "totalMs": 37.572,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 52,
+              "totalMs": 40.185,
+              "meanMs": 0.773,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 52,
+              "totalMs": 41.13,
+              "meanMs": 0.791,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 52,
+              "totalMs": 58.569,
+              "meanMs": 1.126,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 52,
+              "totalMs": 40.412,
+              "meanMs": 0.777,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 52,
+              "totalMs": 39.469,
+              "meanMs": 0.759,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 52,
+              "totalMs": 40.083,
+              "meanMs": 0.771,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 52,
+              "totalMs": 41.181,
+              "meanMs": 0.792,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 52,
+              "totalMs": 43.246,
+              "meanMs": 0.832,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 52,
+              "totalMs": 43.738,
+              "meanMs": 0.841,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 52,
+              "totalMs": 40.077,
+              "meanMs": 0.771,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 52,
+              "totalMs": 41.051,
+              "meanMs": 0.789,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 52,
+              "totalMs": 40.33,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 52,
+              "totalMs": 40.781,
+              "meanMs": 0.784,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 52,
+              "totalMs": 39.665,
+              "meanMs": 0.763,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 52,
+              "totalMs": 38.958,
+              "meanMs": 0.749,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 52,
+              "totalMs": 38.879,
+              "meanMs": 0.748,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 52,
+              "totalMs": 39.698,
+              "meanMs": 0.763,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 52,
+              "totalMs": 52.185,
+              "meanMs": 1.004,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 52,
+              "totalMs": 38.205,
+              "meanMs": 0.735,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 52,
+              "totalMs": 40.07,
+              "meanMs": 0.771,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 52,
+              "totalMs": 126.98,
+              "meanMs": 2.442,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 52,
+              "totalMs": 38.638,
+              "meanMs": 0.743,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 52,
+              "totalMs": 40.342,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 52,
+              "totalMs": 38.323,
+              "meanMs": 0.737,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 52,
+              "totalMs": 37.554,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 52,
+              "totalMs": 38.704,
+              "meanMs": 0.744,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 52,
+              "totalMs": 41.472,
+              "meanMs": 0.798,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 52,
+              "totalMs": 46.186,
+              "meanMs": 0.888,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 52,
+              "totalMs": 40.923,
+              "meanMs": 0.787,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 52,
+              "totalMs": 40.408,
+              "meanMs": 0.777,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 52,
+              "totalMs": 42.094,
+              "meanMs": 0.81,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 52,
+              "totalMs": 41.795,
+              "meanMs": 0.804,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 52,
+              "totalMs": 41.896,
+              "meanMs": 0.806,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 52,
+              "totalMs": 60.745,
+              "meanMs": 1.168,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 52,
+              "totalMs": 38.579,
+              "meanMs": 0.742,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 52,
+              "totalMs": 39.582,
+              "meanMs": 0.761,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 52,
+              "totalMs": 37.955,
+              "meanMs": 0.73,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 52,
+              "totalMs": 37.052,
+              "meanMs": 0.713,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 52,
+              "totalMs": 36.66,
+              "meanMs": 0.705,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 52,
+              "totalMs": 36.412,
+              "meanMs": 0.7,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 52,
+              "totalMs": 37.404,
+              "meanMs": 0.719,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 52,
+              "totalMs": 38.731,
+              "meanMs": 0.745,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 52,
+              "totalMs": 39.389,
+              "meanMs": 0.757,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 52,
+              "totalMs": 40.391,
+              "meanMs": 0.777,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 1365,
+              "totalMs": 3371.175,
+              "meanMs": 2.47,
+              "over50ms": 52
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 1365,
+              "totalMs": 0.294,
+              "meanMs": 0.0,
+              "over50ms": 0
+            }
+          ],
+          "events": [
+            {
+              "name": "status_all",
+              "tick": 443396265,
+              "ms": 70.845
+            },
+            {
+              "name": "status_all",
+              "tick": 443396531,
+              "ms": 66.28
+            },
+            {
+              "name": "status_all",
+              "tick": 443396750,
+              "ms": 56.053
+            },
+            {
+              "name": "status_all",
+              "tick": 443397031,
+              "ms": 65.368
+            },
+            {
+              "name": "status_all",
+              "tick": 443397265,
+              "ms": 63.81
+            },
+            {
+              "name": "status_all",
+              "tick": 443397531,
+              "ms": 55.076
+            },
+            {
+              "name": "status_all",
+              "tick": 443397750,
+              "ms": 56.812
+            },
+            {
+              "name": "status_all",
+              "tick": 443398031,
+              "ms": 60.548
+            },
+            {
+              "name": "status_all",
+              "tick": 443398265,
+              "ms": 60.935
+            },
+            {
+              "name": "status_all",
+              "tick": 443398531,
+              "ms": 62.281
+            },
+            {
+              "name": "status_all",
+              "tick": 443398765,
+              "ms": 58.843
+            },
+            {
+              "name": "status_all",
+              "tick": 443399031,
+              "ms": 56.233
+            },
+            {
+              "name": "status_all",
+              "tick": 443399250,
+              "ms": 57.695
+            },
+            {
+              "name": "status_all",
+              "tick": 443399531,
+              "ms": 60.977
+            },
+            {
+              "name": "status_all",
+              "tick": 443399765,
+              "ms": 61.656
+            },
+            {
+              "name": "status_all",
+              "tick": 443400031,
+              "ms": 64.941
+            },
+            {
+              "name": "status_all",
+              "tick": 443400296,
+              "ms": 94.734
+            },
+            {
+              "name": "status_all",
+              "tick": 443400515,
+              "ms": 56.698
+            },
+            {
+              "name": "status_all",
+              "tick": 443400765,
+              "ms": 58.348
+            },
+            {
+              "name": "status_all",
+              "tick": 443401031,
+              "ms": 64.358
+            },
+            {
+              "name": "status_all",
+              "tick": 443401265,
+              "ms": 61.195
+            },
+            {
+              "name": "status_all",
+              "tick": 443401531,
+              "ms": 65.664
+            },
+            {
+              "name": "status_all",
+              "tick": 443401765,
+              "ms": 64.781
+            },
+            {
+              "name": "status_all",
+              "tick": 443402031,
+              "ms": 58.696
+            },
+            {
+              "name": "status_all",
+              "tick": 443402265,
+              "ms": 62.056
+            },
+            {
+              "name": "status_all",
+              "tick": 443402531,
+              "ms": 59.817
+            },
+            {
+              "name": "status_all",
+              "tick": 443402765,
+              "ms": 59.984
+            },
+            {
+              "name": "status_all",
+              "tick": 443403031,
+              "ms": 60.618
+            },
+            {
+              "name": "status_all",
+              "tick": 443403250,
+              "ms": 55.634
+            },
+            {
+              "name": "status_all",
+              "tick": 443403531,
+              "ms": 56.364
+            },
+            {
+              "name": "status_all",
+              "tick": 443403750,
+              "ms": 56.299
+            },
+            {
+              "name": "status_all",
+              "tick": 443404031,
+              "ms": 57.406
+            },
+            {
+              "name": "status_all",
+              "tick": 443404296,
+              "ms": 93.356
+            },
+            {
+              "name": "status_all",
+              "tick": 443404531,
+              "ms": 63.248
+            },
+            {
+              "name": "status_all",
+              "tick": 443404765,
+              "ms": 64.054
+            },
+            {
+              "name": "status_all",
+              "tick": 443405031,
+              "ms": 57.317
+            },
+            {
+              "name": "status_all",
+              "tick": 443405265,
+              "ms": 61.688
+            },
+            {
+              "name": "status_all",
+              "tick": 443405531,
+              "ms": 55.463
+            },
+            {
+              "name": "status_all",
+              "tick": 443405765,
+              "ms": 61.12
+            },
+            {
+              "name": "status_all",
+              "tick": 443406031,
+              "ms": 61.118
+            },
+            {
+              "name": "status_all",
+              "tick": 443406265,
+              "ms": 63.13
+            },
+            {
+              "name": "status_all",
+              "tick": 443406531,
+              "ms": 56.953
+            },
+            {
+              "name": "status_all",
+              "tick": 443406765,
+              "ms": 60.241
+            },
+            {
+              "name": "status_all",
+              "tick": 443407031,
+              "ms": 59.328
+            },
+            {
+              "name": "status_all",
+              "tick": 443407250,
+              "ms": 58.27
+            },
+            {
+              "name": "status_all",
+              "tick": 443407531,
+              "ms": 59.096
+            },
+            {
+              "name": "status_all",
+              "tick": 443407765,
+              "ms": 65.083
+            },
+            {
+              "name": "status_all",
+              "tick": 443408015,
+              "ms": 52.542
+            },
+            {
+              "name": "status_all",
+              "tick": 443408265,
+              "ms": 61.054
+            },
+            {
+              "name": "status_all",
+              "tick": 443408515,
+              "ms": 57.003
+            },
+            {
+              "name": "status_all",
+              "tick": 443408765,
+              "ms": 61.848
+            },
+            {
+              "name": "status_all",
+              "tick": 443409015,
+              "ms": 56.065
+            }
+          ]
+        },
+        "peerTiming": {
+          "elapsedMs": 13000,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 469,
+              "totalMs": 0.105,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 469,
+              "totalMs": 0.954,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 469,
+              "totalMs": 234.796,
+              "meanMs": 0.501,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 469,
+              "totalMs": 135.746,
+              "meanMs": 0.289,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 469,
+              "totalMs": 34.485,
+              "meanMs": 0.074,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 469,
+              "totalMs": 0.084,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 469,
+              "totalMs": 0.082,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 469,
+              "totalMs": 0.123,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 469,
+              "totalMs": 0.135,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 469,
+              "totalMs": 2129.959,
+              "meanMs": 4.541,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 469,
+              "totalMs": 0.199,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 469,
+              "totalMs": 332.722,
+              "meanMs": 0.709,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 469,
+              "totalMs": 0.162,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 469,
+              "totalMs": 2870.957,
+              "meanMs": 6.121,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 469,
+              "totalMs": 3146.084,
+              "meanMs": 6.708,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 706,
+              "totalMs": 480.611,
+              "meanMs": 0.681,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 174,
+              "totalMs": 175.924,
+              "meanMs": 1.011,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 51,
+              "totalMs": 45.201,
+              "meanMs": 0.886,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 51,
+              "totalMs": 42.79,
+              "meanMs": 0.839,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 51,
+              "totalMs": 39.105,
+              "meanMs": 0.767,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 51,
+              "totalMs": 56.405,
+              "meanMs": 1.106,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 51,
+              "totalMs": 53.866,
+              "meanMs": 1.056,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 51,
+              "totalMs": 40.747,
+              "meanMs": 0.799,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 51,
+              "totalMs": 40.143,
+              "meanMs": 0.787,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 51,
+              "totalMs": 39.36,
+              "meanMs": 0.772,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 51,
+              "totalMs": 39.547,
+              "meanMs": 0.775,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 51,
+              "totalMs": 38.935,
+              "meanMs": 0.763,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 51,
+              "totalMs": 37.83,
+              "meanMs": 0.742,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 51,
+              "totalMs": 38.932,
+              "meanMs": 0.763,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 51,
+              "totalMs": 40.221,
+              "meanMs": 0.789,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 51,
+              "totalMs": 41.077,
+              "meanMs": 0.805,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 51,
+              "totalMs": 39.846,
+              "meanMs": 0.781,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 51,
+              "totalMs": 36.947,
+              "meanMs": 0.724,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 51,
+              "totalMs": 39.076,
+              "meanMs": 0.766,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 51,
+              "totalMs": 40.002,
+              "meanMs": 0.784,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 51,
+              "totalMs": 37.985,
+              "meanMs": 0.745,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 51,
+              "totalMs": 39.098,
+              "meanMs": 0.767,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 51,
+              "totalMs": 37.702,
+              "meanMs": 0.739,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 51,
+              "totalMs": 40.348,
+              "meanMs": 0.791,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 51,
+              "totalMs": 41.096,
+              "meanMs": 0.806,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 51,
+              "totalMs": 39.754,
+              "meanMs": 0.779,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 51,
+              "totalMs": 42.052,
+              "meanMs": 0.825,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 51,
+              "totalMs": 40.033,
+              "meanMs": 0.785,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 51,
+              "totalMs": 39.464,
+              "meanMs": 0.774,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 51,
+              "totalMs": 37.858,
+              "meanMs": 0.742,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 51,
+              "totalMs": 36.221,
+              "meanMs": 0.71,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 51,
+              "totalMs": 44.226,
+              "meanMs": 0.867,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 51,
+              "totalMs": 38.378,
+              "meanMs": 0.753,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 51,
+              "totalMs": 39.579,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 51,
+              "totalMs": 38.226,
+              "meanMs": 0.75,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 51,
+              "totalMs": 37.705,
+              "meanMs": 0.739,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 51,
+              "totalMs": 36.704,
+              "meanMs": 0.72,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 51,
+              "totalMs": 38.048,
+              "meanMs": 0.746,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 51,
+              "totalMs": 37.607,
+              "meanMs": 0.737,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 51,
+              "totalMs": 55.907,
+              "meanMs": 1.096,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 51,
+              "totalMs": 38.584,
+              "meanMs": 0.757,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 51,
+              "totalMs": 38.498,
+              "meanMs": 0.755,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 51,
+              "totalMs": 39.169,
+              "meanMs": 0.768,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 51,
+              "totalMs": 40.071,
+              "meanMs": 0.786,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 51,
+              "totalMs": 38.667,
+              "meanMs": 0.758,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 51,
+              "totalMs": 38.679,
+              "meanMs": 0.758,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 51,
+              "totalMs": 39.841,
+              "meanMs": 0.781,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 51,
+              "totalMs": 39.553,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 51,
+              "totalMs": 38.641,
+              "meanMs": 0.758,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 51,
+              "totalMs": 37.304,
+              "meanMs": 0.731,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 51,
+              "totalMs": 38.621,
+              "meanMs": 0.757,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 51,
+              "totalMs": 130.614,
+              "meanMs": 2.561,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 51,
+              "totalMs": 42.897,
+              "meanMs": 0.841,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 51,
+              "totalMs": 39.4,
+              "meanMs": 0.773,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 51,
+              "totalMs": 52.91,
+              "meanMs": 1.037,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 51,
+              "totalMs": 39.987,
+              "meanMs": 0.784,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 51,
+              "totalMs": 39.207,
+              "meanMs": 0.769,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 51,
+              "totalMs": 41.241,
+              "meanMs": 0.809,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 51,
+              "totalMs": 41.257,
+              "meanMs": 0.809,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 51,
+              "totalMs": 38.041,
+              "meanMs": 0.746,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 51,
+              "totalMs": 40.054,
+              "meanMs": 0.785,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 51,
+              "totalMs": 40.007,
+              "meanMs": 0.784,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 51,
+              "totalMs": 42.113,
+              "meanMs": 0.826,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 51,
+              "totalMs": 36.917,
+              "meanMs": 0.724,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 51,
+              "totalMs": 56.906,
+              "meanMs": 1.116,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 51,
+              "totalMs": 38.527,
+              "meanMs": 0.755,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 51,
+              "totalMs": 39.5,
+              "meanMs": 0.775,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 51,
+              "totalMs": 38.084,
+              "meanMs": 0.747,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 51,
+              "totalMs": 36.931,
+              "meanMs": 0.724,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 51,
+              "totalMs": 38.472,
+              "meanMs": 0.754,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 51,
+              "totalMs": 36.892,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 51,
+              "totalMs": 36.511,
+              "meanMs": 0.716,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 51,
+              "totalMs": 40.225,
+              "meanMs": 0.789,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 51,
+              "totalMs": 39.825,
+              "meanMs": 0.781,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 51,
+              "totalMs": 39.741,
+              "meanMs": 0.779,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 706,
+              "totalMs": 3299.856,
+              "meanMs": 4.674,
+              "over50ms": 51
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 706,
+              "totalMs": 0.199,
+              "meanMs": 0.0,
+              "over50ms": 0
+            }
+          ],
+          "events": [
+            {
+              "name": "status_all",
+              "tick": 443396015,
+              "ms": 60.516
+            },
+            {
+              "name": "status_all",
+              "tick": 443396265,
+              "ms": 70.3
+            },
+            {
+              "name": "status_all",
+              "tick": 443396500,
+              "ms": 64.724
+            },
+            {
+              "name": "status_all",
+              "tick": 443396734,
+              "ms": 55.677
+            },
+            {
+              "name": "status_all",
+              "tick": 443397031,
+              "ms": 62.889
+            },
+            {
+              "name": "status_all",
+              "tick": 443397250,
+              "ms": 58.492
+            },
+            {
+              "name": "status_all",
+              "tick": 443397500,
+              "ms": 55.583
+            },
+            {
+              "name": "status_all",
+              "tick": 443397781,
+              "ms": 59.172
+            },
+            {
+              "name": "status_all",
+              "tick": 443398000,
+              "ms": 59.421
+            },
+            {
+              "name": "status_all",
+              "tick": 443398250,
+              "ms": 60.873
+            },
+            {
+              "name": "status_all",
+              "tick": 443398531,
+              "ms": 64.14
+            },
+            {
+              "name": "status_all",
+              "tick": 443398765,
+              "ms": 59.609
+            },
+            {
+              "name": "status_all",
+              "tick": 443399000,
+              "ms": 56.981
+            },
+            {
+              "name": "status_all",
+              "tick": 443399265,
+              "ms": 58.016
+            },
+            {
+              "name": "status_all",
+              "tick": 443399500,
+              "ms": 58.02
+            },
+            {
+              "name": "status_all",
+              "tick": 443399750,
+              "ms": 66.04
+            },
+            {
+              "name": "status_all",
+              "tick": 443400031,
+              "ms": 62.645
+            },
+            {
+              "name": "status_all",
+              "tick": 443400296,
+              "ms": 94.822
+            },
+            {
+              "name": "status_all",
+              "tick": 443400500,
+              "ms": 56.49
+            },
+            {
+              "name": "status_all",
+              "tick": 443400750,
+              "ms": 58.704
+            },
+            {
+              "name": "status_all",
+              "tick": 443401031,
+              "ms": 64.989
+            },
+            {
+              "name": "status_all",
+              "tick": 443401250,
+              "ms": 58.904
+            },
+            {
+              "name": "status_all",
+              "tick": 443401531,
+              "ms": 64.24
+            },
+            {
+              "name": "status_all",
+              "tick": 443401750,
+              "ms": 61.897
+            },
+            {
+              "name": "status_all",
+              "tick": 443402000,
+              "ms": 56.745
+            },
+            {
+              "name": "status_all",
+              "tick": 443402250,
+              "ms": 59.653
+            },
+            {
+              "name": "status_all",
+              "tick": 443402531,
+              "ms": 62.905
+            },
+            {
+              "name": "status_all",
+              "tick": 443402750,
+              "ms": 60.592
+            },
+            {
+              "name": "status_all",
+              "tick": 443403000,
+              "ms": 57.758
+            },
+            {
+              "name": "status_all",
+              "tick": 443403265,
+              "ms": 58.796
+            },
+            {
+              "name": "status_all",
+              "tick": 443403500,
+              "ms": 58.856
+            },
+            {
+              "name": "status_all",
+              "tick": 443403765,
+              "ms": 57.723
+            },
+            {
+              "name": "status_all",
+              "tick": 443404000,
+              "ms": 56.927
+            },
+            {
+              "name": "status_all",
+              "tick": 443404328,
+              "ms": 108.423
+            },
+            {
+              "name": "status_all",
+              "tick": 443404531,
+              "ms": 65.567
+            },
+            {
+              "name": "status_all",
+              "tick": 443404765,
+              "ms": 62.569
+            },
+            {
+              "name": "status_all",
+              "tick": 443405046,
+              "ms": 58.46
+            },
+            {
+              "name": "status_all",
+              "tick": 443405265,
+              "ms": 63.833
+            },
+            {
+              "name": "status_all",
+              "tick": 443405546,
+              "ms": 55.435
+            },
+            {
+              "name": "status_all",
+              "tick": 443405765,
+              "ms": 60.484
+            },
+            {
+              "name": "status_all",
+              "tick": 443406046,
+              "ms": 59.268
+            },
+            {
+              "name": "status_all",
+              "tick": 443406265,
+              "ms": 62.677
+            },
+            {
+              "name": "status_all",
+              "tick": 443406546,
+              "ms": 57.586
+            },
+            {
+              "name": "status_all",
+              "tick": 443406765,
+              "ms": 59.98
+            },
+            {
+              "name": "status_all",
+              "tick": 443407046,
+              "ms": 57.468
+            },
+            {
+              "name": "status_all",
+              "tick": 443407265,
+              "ms": 59.356
+            },
+            {
+              "name": "status_all",
+              "tick": 443407546,
+              "ms": 59.695
+            },
+            {
+              "name": "status_all",
+              "tick": 443407765,
+              "ms": 62.374
+            },
+            {
+              "name": "status_all",
+              "tick": 443408046,
+              "ms": 56.351
+            },
+            {
+              "name": "status_all",
+              "tick": 443408265,
+              "ms": 56.553
+            },
+            {
+              "name": "status_all",
+              "tick": 443408546,
+              "ms": 55.471
+            },
+            {
+              "name": "status_all",
+              "tick": 443408765,
+              "ms": 58.311
+            }
+          ]
+        }
+      }
+    },
+    {
+      "take": "native-interactions-corvo-crouch-coin-v703",
+      "candidate": "candidate-diagnostic-slices-v702",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed and restored both inventories,health and14 protected files",
+        "Compact native states valid throughout",
+        "Exact native crouched loot activated",
+        "Crouch classification continuous",
+        "Native source coin removed",
+        "Both Steam streams remain ready",
+        "Remote body fully weighted throughout capture",
+        "Remote crouch retained",
+        "sourceTiming: no diagnostic status call reaches50ms during measurement",
+        "sourceTiming: no staggered diagnostic slice reaches50ms",
+        "peerTiming: no diagnostic status call reaches50ms during measurement",
+        "peerTiming: no staggered diagnostic slice reaches50ms"
+      ],
+      "failures": [],
+      "samples": 122,
+      "compactSamples": 892,
+      "minimumBodyWeight": 0.999396,
+      "timing": {
+        "sourceTiming": {
+          "elapsedMs": 13000,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 786,
+              "totalMs": 0.139,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 786,
+              "totalMs": 1.435,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 786,
+              "totalMs": 541.122,
+              "meanMs": 0.688,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 786,
+              "totalMs": 144.201,
+              "meanMs": 0.183,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 786,
+              "totalMs": 11.993,
+              "meanMs": 0.015,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 786,
+              "totalMs": 0.101,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 786,
+              "totalMs": 122.256,
+              "meanMs": 0.156,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 786,
+              "totalMs": 0.143,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 786,
+              "totalMs": 0.171,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 786,
+              "totalMs": 2533.118,
+              "meanMs": 3.223,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 786,
+              "totalMs": 0.374,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 786,
+              "totalMs": 0.286,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 786,
+              "totalMs": 65.78,
+              "meanMs": 0.084,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 786,
+              "totalMs": 3423.167,
+              "meanMs": 4.355,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 786,
+              "totalMs": 1357.804,
+              "meanMs": 1.727,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 940,
+              "totalMs": 628.93,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 205,
+              "totalMs": 212.868,
+              "meanMs": 1.038,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 49,
+              "totalMs": 31.822,
+              "meanMs": 0.649,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 49,
+              "totalMs": 34.331,
+              "meanMs": 0.701,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 49,
+              "totalMs": 34.938,
+              "meanMs": 0.713,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 49,
+              "totalMs": 48.328,
+              "meanMs": 0.986,
+              "over50ms": 0
+            },
+            {
+              "name": "diagnostic_slice",
+              "calls": 940,
+              "totalMs": 2665.995,
+              "meanMs": 2.836,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 52,
+              "totalMs": 37.473,
+              "meanMs": 0.721,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 52,
+              "totalMs": 37.986,
+              "meanMs": 0.73,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 52,
+              "totalMs": 36.256,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 940,
+              "totalMs": 3031.183,
+              "meanMs": 3.225,
+              "over50ms": 0
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 940,
+              "totalMs": 0.268,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 49,
+              "totalMs": 45.937,
+              "meanMs": 0.937,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 49,
+              "totalMs": 35.991,
+              "meanMs": 0.735,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 49,
+              "totalMs": 33.929,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 49,
+              "totalMs": 39.602,
+              "meanMs": 0.808,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 49,
+              "totalMs": 35.112,
+              "meanMs": 0.717,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 49,
+              "totalMs": 37.852,
+              "meanMs": 0.772,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 49,
+              "totalMs": 36.443,
+              "meanMs": 0.744,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 49,
+              "totalMs": 36.17,
+              "meanMs": 0.738,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 49,
+              "totalMs": 34.233,
+              "meanMs": 0.699,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 49,
+              "totalMs": 33.541,
+              "meanMs": 0.685,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 49,
+              "totalMs": 33.208,
+              "meanMs": 0.678,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 49,
+              "totalMs": 34.407,
+              "meanMs": 0.702,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 49,
+              "totalMs": 33.788,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 49,
+              "totalMs": 35.02,
+              "meanMs": 0.715,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 49,
+              "totalMs": 67.338,
+              "meanMs": 1.374,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 49,
+              "totalMs": 33.535,
+              "meanMs": 0.684,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 49,
+              "totalMs": 35.443,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 49,
+              "totalMs": 33.808,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 49,
+              "totalMs": 34.002,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 49,
+              "totalMs": 35.951,
+              "meanMs": 0.734,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 49,
+              "totalMs": 33.306,
+              "meanMs": 0.68,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 49,
+              "totalMs": 33.8,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 49,
+              "totalMs": 32.662,
+              "meanMs": 0.667,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 49,
+              "totalMs": 32.79,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 49,
+              "totalMs": 35.352,
+              "meanMs": 0.721,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 49,
+              "totalMs": 33.985,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 49,
+              "totalMs": 32.293,
+              "meanMs": 0.659,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 49,
+              "totalMs": 32.552,
+              "meanMs": 0.664,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 49,
+              "totalMs": 42.219,
+              "meanMs": 0.862,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 48,
+              "totalMs": 36.109,
+              "meanMs": 0.752,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 48,
+              "totalMs": 31.772,
+              "meanMs": 0.662,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 48,
+              "totalMs": 39.184,
+              "meanMs": 0.816,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 48,
+              "totalMs": 29.602,
+              "meanMs": 0.617,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 48,
+              "totalMs": 33.964,
+              "meanMs": 0.708,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 48,
+              "totalMs": 31.867,
+              "meanMs": 0.664,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 48,
+              "totalMs": 30.107,
+              "meanMs": 0.627,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 48,
+              "totalMs": 31.711,
+              "meanMs": 0.661,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 48,
+              "totalMs": 33.694,
+              "meanMs": 0.702,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 48,
+              "totalMs": 32.354,
+              "meanMs": 0.674,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 48,
+              "totalMs": 30.653,
+              "meanMs": 0.639,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 48,
+              "totalMs": 32.075,
+              "meanMs": 0.668,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 48,
+              "totalMs": 51.591,
+              "meanMs": 1.075,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 48,
+              "totalMs": 96.784,
+              "meanMs": 2.016,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 48,
+              "totalMs": 33.134,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 48,
+              "totalMs": 32.443,
+              "meanMs": 0.676,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 48,
+              "totalMs": 69.179,
+              "meanMs": 1.441,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 48,
+              "totalMs": 33.202,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 48,
+              "totalMs": 32.258,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 48,
+              "totalMs": 35.628,
+              "meanMs": 0.742,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 48,
+              "totalMs": 34.667,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 48,
+              "totalMs": 32.127,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 48,
+              "totalMs": 46.656,
+              "meanMs": 0.972,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 48,
+              "totalMs": 37.191,
+              "meanMs": 0.775,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 48,
+              "totalMs": 38.976,
+              "meanMs": 0.812,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 48,
+              "totalMs": 42.955,
+              "meanMs": 0.895,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 48,
+              "totalMs": 55.192,
+              "meanMs": 1.15,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 48,
+              "totalMs": 33.902,
+              "meanMs": 0.706,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 48,
+              "totalMs": 35.12,
+              "meanMs": 0.732,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 48,
+              "totalMs": 33.545,
+              "meanMs": 0.699,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 48,
+              "totalMs": 31.985,
+              "meanMs": 0.666,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 48,
+              "totalMs": 35.44,
+              "meanMs": 0.738,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 48,
+              "totalMs": 34.657,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 48,
+              "totalMs": 32.286,
+              "meanMs": 0.673,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 49,
+              "totalMs": 37.672,
+              "meanMs": 0.769,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 49,
+              "totalMs": 38.48,
+              "meanMs": 0.785,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 49,
+              "totalMs": 47.781,
+              "meanMs": 0.975,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMixamoStatus",
+              "calls": 49,
+              "totalMs": 32.815,
+              "meanMs": 0.67,
+              "over50ms": 0
+            }
+          ],
+          "events": []
+        },
+        "peerTiming": {
+          "elapsedMs": 13063,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 601,
+              "totalMs": 0.123,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 601,
+              "totalMs": 1.136,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 601,
+              "totalMs": 293.603,
+              "meanMs": 0.489,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 601,
+              "totalMs": 138.68,
+              "meanMs": 0.231,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 601,
+              "totalMs": 35.478,
+              "meanMs": 0.059,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 601,
+              "totalMs": 0.089,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 601,
+              "totalMs": 0.11,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 601,
+              "totalMs": 0.135,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 601,
+              "totalMs": 0.151,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 601,
+              "totalMs": 2509.537,
+              "meanMs": 4.176,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 601,
+              "totalMs": 0.247,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 601,
+              "totalMs": 399.712,
+              "meanMs": 0.665,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 601,
+              "totalMs": 0.232,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 601,
+              "totalMs": 3380.945,
+              "meanMs": 5.626,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 601,
+              "totalMs": 3602.012,
+              "meanMs": 5.993,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 639,
+              "totalMs": 424.949,
+              "meanMs": 0.665,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 194,
+              "totalMs": 183.091,
+              "meanMs": 0.944,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 36,
+              "totalMs": 25.714,
+              "meanMs": 0.714,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 36,
+              "totalMs": 25.985,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 36,
+              "totalMs": 26.032,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 36,
+              "totalMs": 36.847,
+              "meanMs": 1.024,
+              "over50ms": 0
+            },
+            {
+              "name": "diagnostic_slice",
+              "calls": 639,
+              "totalMs": 1990.057,
+              "meanMs": 3.114,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 51,
+              "totalMs": 33.972,
+              "meanMs": 0.666,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 51,
+              "totalMs": 36.909,
+              "meanMs": 0.724,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 51,
+              "totalMs": 35.82,
+              "meanMs": 0.702,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 639,
+              "totalMs": 2321.575,
+              "meanMs": 3.633,
+              "over50ms": 0
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 639,
+              "totalMs": 0.201,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 36,
+              "totalMs": 28.112,
+              "meanMs": 0.781,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 36,
+              "totalMs": 25.383,
+              "meanMs": 0.705,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 36,
+              "totalMs": 42.541,
+              "meanMs": 1.182,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 35,
+              "totalMs": 24.292,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 35,
+              "totalMs": 25.309,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 35,
+              "totalMs": 25.328,
+              "meanMs": 0.724,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 35,
+              "totalMs": 29.663,
+              "meanMs": 0.848,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 35,
+              "totalMs": 26.763,
+              "meanMs": 0.765,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 35,
+              "totalMs": 24.647,
+              "meanMs": 0.704,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 35,
+              "totalMs": 30.052,
+              "meanMs": 0.859,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 35,
+              "totalMs": 24.726,
+              "meanMs": 0.706,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 35,
+              "totalMs": 26.387,
+              "meanMs": 0.754,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 35,
+              "totalMs": 25.726,
+              "meanMs": 0.735,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 35,
+              "totalMs": 26.071,
+              "meanMs": 0.745,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 35,
+              "totalMs": 25.29,
+              "meanMs": 0.723,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 35,
+              "totalMs": 23.204,
+              "meanMs": 0.663,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 35,
+              "totalMs": 23.925,
+              "meanMs": 0.684,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 35,
+              "totalMs": 24.002,
+              "meanMs": 0.686,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 35,
+              "totalMs": 27.736,
+              "meanMs": 0.792,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 35,
+              "totalMs": 25.217,
+              "meanMs": 0.72,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 35,
+              "totalMs": 24.143,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 35,
+              "totalMs": 23.22,
+              "meanMs": 0.663,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 35,
+              "totalMs": 22.871,
+              "meanMs": 0.653,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 35,
+              "totalMs": 24.791,
+              "meanMs": 0.708,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 35,
+              "totalMs": 56.079,
+              "meanMs": 1.602,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 36,
+              "totalMs": 26.828,
+              "meanMs": 0.745,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 36,
+              "totalMs": 27.067,
+              "meanMs": 0.752,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 36,
+              "totalMs": 26.58,
+              "meanMs": 0.738,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 36,
+              "totalMs": 25.801,
+              "meanMs": 0.717,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 36,
+              "totalMs": 25.992,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 36,
+              "totalMs": 26.687,
+              "meanMs": 0.741,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 36,
+              "totalMs": 38.575,
+              "meanMs": 1.072,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 36,
+              "totalMs": 25.962,
+              "meanMs": 0.721,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 36,
+              "totalMs": 29.472,
+              "meanMs": 0.819,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 36,
+              "totalMs": 25.566,
+              "meanMs": 0.71,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 36,
+              "totalMs": 26.477,
+              "meanMs": 0.735,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 36,
+              "totalMs": 26.688,
+              "meanMs": 0.741,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 36,
+              "totalMs": 26.289,
+              "meanMs": 0.73,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 36,
+              "totalMs": 25.823,
+              "meanMs": 0.717,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 36,
+              "totalMs": 25.13,
+              "meanMs": 0.698,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 36,
+              "totalMs": 24.554,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 36,
+              "totalMs": 25.662,
+              "meanMs": 0.713,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 36,
+              "totalMs": 88.058,
+              "meanMs": 2.446,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 36,
+              "totalMs": 23.32,
+              "meanMs": 0.648,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 36,
+              "totalMs": 24.551,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 36,
+              "totalMs": 26.124,
+              "meanMs": 0.726,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 36,
+              "totalMs": 30.348,
+              "meanMs": 0.843,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 36,
+              "totalMs": 25.355,
+              "meanMs": 0.704,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 36,
+              "totalMs": 29.079,
+              "meanMs": 0.808,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 36,
+              "totalMs": 27.631,
+              "meanMs": 0.768,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 36,
+              "totalMs": 26.284,
+              "meanMs": 0.73,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 36,
+              "totalMs": 38.269,
+              "meanMs": 1.063,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 36,
+              "totalMs": 26.932,
+              "meanMs": 0.748,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 36,
+              "totalMs": 27.487,
+              "meanMs": 0.764,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 36,
+              "totalMs": 25.369,
+              "meanMs": 0.705,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 36,
+              "totalMs": 28.86,
+              "meanMs": 0.802,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 36,
+              "totalMs": 25.229,
+              "meanMs": 0.701,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 36,
+              "totalMs": 24.543,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 36,
+              "totalMs": 25.868,
+              "meanMs": 0.719,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 36,
+              "totalMs": 24.868,
+              "meanMs": 0.691,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 36,
+              "totalMs": 24.87,
+              "meanMs": 0.691,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 36,
+              "totalMs": 25.021,
+              "meanMs": 0.695,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 36,
+              "totalMs": 24.54,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 36,
+              "totalMs": 26.638,
+              "meanMs": 0.74,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 36,
+              "totalMs": 28.16,
+              "meanMs": 0.782,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 36,
+              "totalMs": 25.704,
+              "meanMs": 0.714,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMixamoStatus",
+              "calls": 36,
+              "totalMs": 24.843,
+              "meanMs": 0.69,
+              "over50ms": 0
+            }
+          ],
+          "events": []
+        }
+      }
+    },
+    {
+      "take": "native-interactions-emily-crouch-coin-v704",
+      "candidate": "candidate-diagnostic-slices-v702",
+      "passed": true,
+      "checks": [
+        "Exact candidate completed and restored both inventories,health and14 protected files",
+        "Compact native states valid throughout",
+        "Exact native crouched loot activated",
+        "Crouch classification continuous",
+        "Native source coin removed",
+        "Both Steam streams remain ready",
+        "Remote body fully weighted throughout capture",
+        "Remote crouch retained",
+        "sourceTiming: no diagnostic status call reaches50ms during measurement",
+        "sourceTiming: no staggered diagnostic slice reaches50ms",
+        "peerTiming: no diagnostic status call reaches50ms during measurement",
+        "peerTiming: no staggered diagnostic slice reaches50ms"
+      ],
+      "failures": [],
+      "samples": 121,
+      "compactSamples": 894,
+      "minimumBodyWeight": 1.0,
+      "timing": {
+        "sourceTiming": {
+          "elapsedMs": 13140,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 579,
+              "totalMs": 0.16,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 579,
+              "totalMs": 1.311,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 579,
+              "totalMs": 291.038,
+              "meanMs": 0.503,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 579,
+              "totalMs": 140.734,
+              "meanMs": 0.243,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 579,
+              "totalMs": 34.772,
+              "meanMs": 0.06,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 579,
+              "totalMs": 0.095,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 579,
+              "totalMs": 0.096,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 579,
+              "totalMs": 0.14,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 579,
+              "totalMs": 0.144,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 579,
+              "totalMs": 2623.518,
+              "meanMs": 4.531,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 579,
+              "totalMs": 0.261,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 579,
+              "totalMs": 387.53,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 579,
+              "totalMs": 0.222,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 579,
+              "totalMs": 3481.619,
+              "meanMs": 6.013,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 579,
+              "totalMs": 3723.739,
+              "meanMs": 6.431,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 628,
+              "totalMs": 432.344,
+              "meanMs": 0.688,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 183,
+              "totalMs": 170.859,
+              "meanMs": 0.934,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 35,
+              "totalMs": 24.275,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 35,
+              "totalMs": 25.551,
+              "meanMs": 0.73,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 36,
+              "totalMs": 25.042,
+              "meanMs": 0.696,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 36,
+              "totalMs": 36.359,
+              "meanMs": 1.01,
+              "over50ms": 0
+            },
+            {
+              "name": "diagnostic_slice",
+              "calls": 628,
+              "totalMs": 1865.109,
+              "meanMs": 2.97,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 51,
+              "totalMs": 33.204,
+              "meanMs": 0.651,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 51,
+              "totalMs": 36.293,
+              "meanMs": 0.712,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 51,
+              "totalMs": 35.188,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 628,
+              "totalMs": 2177.161,
+              "meanMs": 3.467,
+              "over50ms": 0
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 628,
+              "totalMs": 0.198,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 36,
+              "totalMs": 25.991,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 36,
+              "totalMs": 25.878,
+              "meanMs": 0.719,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 36,
+              "totalMs": 25.096,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 36,
+              "totalMs": 24.816,
+              "meanMs": 0.689,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 36,
+              "totalMs": 27.144,
+              "meanMs": 0.754,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 36,
+              "totalMs": 25.789,
+              "meanMs": 0.716,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 36,
+              "totalMs": 25.303,
+              "meanMs": 0.703,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 36,
+              "totalMs": 25.638,
+              "meanMs": 0.712,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 36,
+              "totalMs": 25.461,
+              "meanMs": 0.707,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 36,
+              "totalMs": 25.22,
+              "meanMs": 0.701,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 36,
+              "totalMs": 24.207,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 36,
+              "totalMs": 24.592,
+              "meanMs": 0.683,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 35,
+              "totalMs": 22.938,
+              "meanMs": 0.655,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 35,
+              "totalMs": 23.526,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 35,
+              "totalMs": 25.166,
+              "meanMs": 0.719,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 35,
+              "totalMs": 24.463,
+              "meanMs": 0.699,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 35,
+              "totalMs": 23.145,
+              "meanMs": 0.661,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 35,
+              "totalMs": 24.394,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 35,
+              "totalMs": 27.033,
+              "meanMs": 0.772,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 35,
+              "totalMs": 24.317,
+              "meanMs": 0.695,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 35,
+              "totalMs": 23.726,
+              "meanMs": 0.678,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 35,
+              "totalMs": 23.862,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 35,
+              "totalMs": 25.769,
+              "meanMs": 0.736,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 35,
+              "totalMs": 24.916,
+              "meanMs": 0.712,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 35,
+              "totalMs": 25.532,
+              "meanMs": 0.729,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 35,
+              "totalMs": 24.131,
+              "meanMs": 0.689,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 35,
+              "totalMs": 22.878,
+              "meanMs": 0.654,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 35,
+              "totalMs": 23.519,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 35,
+              "totalMs": 23.95,
+              "meanMs": 0.684,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 35,
+              "totalMs": 22.173,
+              "meanMs": 0.634,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 35,
+              "totalMs": 23.873,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 35,
+              "totalMs": 23.227,
+              "meanMs": 0.664,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 35,
+              "totalMs": 24.391,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 35,
+              "totalMs": 23.121,
+              "meanMs": 0.661,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 35,
+              "totalMs": 23.604,
+              "meanMs": 0.674,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 35,
+              "totalMs": 22.824,
+              "meanMs": 0.652,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 35,
+              "totalMs": 23.223,
+              "meanMs": 0.664,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 35,
+              "totalMs": 24.323,
+              "meanMs": 0.695,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 35,
+              "totalMs": 47.554,
+              "meanMs": 1.359,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 35,
+              "totalMs": 24.138,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 35,
+              "totalMs": 23.535,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 35,
+              "totalMs": 24.429,
+              "meanMs": 0.698,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 35,
+              "totalMs": 69.117,
+              "meanMs": 1.975,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 35,
+              "totalMs": 24.116,
+              "meanMs": 0.689,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 35,
+              "totalMs": 25.104,
+              "meanMs": 0.717,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 35,
+              "totalMs": 24.4,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 35,
+              "totalMs": 24.914,
+              "meanMs": 0.712,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 35,
+              "totalMs": 22.894,
+              "meanMs": 0.654,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 35,
+              "totalMs": 26.807,
+              "meanMs": 0.766,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 35,
+              "totalMs": 29.428,
+              "meanMs": 0.841,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 35,
+              "totalMs": 24.793,
+              "meanMs": 0.708,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 35,
+              "totalMs": 39.891,
+              "meanMs": 1.14,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 35,
+              "totalMs": 25.904,
+              "meanMs": 0.74,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 35,
+              "totalMs": 27.144,
+              "meanMs": 0.776,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 35,
+              "totalMs": 24.366,
+              "meanMs": 0.696,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 35,
+              "totalMs": 25.271,
+              "meanMs": 0.722,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 35,
+              "totalMs": 23.432,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 35,
+              "totalMs": 24.134,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 35,
+              "totalMs": 25.604,
+              "meanMs": 0.732,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 35,
+              "totalMs": 23.953,
+              "meanMs": 0.684,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 35,
+              "totalMs": 26.076,
+              "meanMs": 0.745,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 35,
+              "totalMs": 24.352,
+              "meanMs": 0.696,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 35,
+              "totalMs": 35.681,
+              "meanMs": 1.019,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 35,
+              "totalMs": 25.4,
+              "meanMs": 0.726,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 35,
+              "totalMs": 26.622,
+              "meanMs": 0.761,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 35,
+              "totalMs": 27.052,
+              "meanMs": 0.773,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMixamoStatus",
+              "calls": 35,
+              "totalMs": 25.827,
+              "meanMs": 0.738,
+              "over50ms": 0
+            }
+          ],
+          "events": []
+        },
+        "peerTiming": {
+          "elapsedMs": 13015,
+          "stages": [
+            {
+              "name": "initializeSteam",
+              "calls": 775,
+              "totalMs": 0.133,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "pumpConnections",
+              "calls": 775,
+              "totalMs": 1.47,
+              "meanMs": 0.002,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleLocalPlayer",
+              "calls": 775,
+              "totalMs": 529.679,
+              "meanMs": 0.683,
+              "over50ms": 0
+            },
+            {
+              "name": "prepareWorldObservation",
+              "calls": 775,
+              "totalMs": 144.356,
+              "meanMs": 0.186,
+              "over50ms": 0
+            },
+            {
+              "name": "exchangePoses",
+              "calls": 775,
+              "totalMs": 11.994,
+              "meanMs": 0.015,
+              "over50ms": 0
+            },
+            {
+              "name": "checkpointService",
+              "calls": 775,
+              "totalMs": 0.105,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendWorldObservation",
+              "calls": 775,
+              "totalMs": 127.086,
+              "meanMs": 0.164,
+              "over50ms": 0
+            },
+            {
+              "name": "sendArmStream",
+              "calls": 775,
+              "totalMs": 0.153,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendAvatarWeapon",
+              "calls": 775,
+              "totalMs": 0.156,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sendShadowStream",
+              "calls": 775,
+              "totalMs": 2570.62,
+              "meanMs": 3.317,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeBlinkFx",
+              "calls": 775,
+              "totalMs": 0.379,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeGrappleFx",
+              "calls": 775,
+              "totalMs": 0.268,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "sampleNativeWindblastFx",
+              "calls": 775,
+              "totalMs": 67.478,
+              "meanMs": 0.087,
+              "over50ms": 0
+            },
+            {
+              "name": "transport_all",
+              "calls": 775,
+              "totalMs": 3455.908,
+              "meanMs": 4.459,
+              "over50ms": 0
+            },
+            {
+              "name": "native_services_all",
+              "calls": 775,
+              "totalMs": 1350.475,
+              "meanMs": 1.743,
+              "over50ms": 0
+            },
+            {
+              "name": "presentation_all",
+              "calls": 942,
+              "totalMs": 637.186,
+              "meanMs": 0.676,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementStatus",
+              "calls": 206,
+              "totalMs": 167.916,
+              "meanMs": 0.815,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativeMotionRefusals",
+              "calls": 48,
+              "totalMs": 33.896,
+              "meanMs": 0.706,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAuthoringStatus",
+              "calls": 48,
+              "totalMs": 32.75,
+              "meanMs": 0.682,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReviewStatus",
+              "calls": 48,
+              "totalMs": 34.243,
+              "meanMs": 0.713,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWorldObservation",
+              "calls": 48,
+              "totalMs": 49.893,
+              "meanMs": 1.039,
+              "over50ms": 0
+            },
+            {
+              "name": "diagnostic_slice",
+              "calls": 942,
+              "totalMs": 2582.629,
+              "meanMs": 2.742,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMovementResumeStatus",
+              "calls": 52,
+              "totalMs": 34.725,
+              "meanMs": 0.668,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowStream",
+              "calls": 52,
+              "totalMs": 34.973,
+              "meanMs": 0.673,
+              "over50ms": 0
+            },
+            {
+              "name": "writeObserverIsolation",
+              "calls": 52,
+              "totalMs": 33.584,
+              "meanMs": 0.646,
+              "over50ms": 0
+            },
+            {
+              "name": "status_all",
+              "calls": 942,
+              "totalMs": 2891.791,
+              "meanMs": 3.07,
+              "over50ms": 0
+            },
+            {
+              "name": "native_execute_buffer",
+              "calls": 942,
+              "totalMs": 0.27,
+              "meanMs": 0.0,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDamageObservation",
+              "calls": 48,
+              "totalMs": 37.449,
+              "meanMs": 0.78,
+              "over50ms": 0
+            },
+            {
+              "name": "writeFriendlyFireProbe",
+              "calls": 48,
+              "totalMs": 34.032,
+              "meanMs": 0.709,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizePartnerFilter",
+              "calls": 48,
+              "totalMs": 31.274,
+              "meanMs": 0.652,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoPartnerFilter",
+              "calls": 48,
+              "totalMs": 33.162,
+              "meanMs": 0.691,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionPartnerFilter",
+              "calls": 48,
+              "totalMs": 34.364,
+              "meanMs": 0.716,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAssassinationPartnerFilter",
+              "calls": 48,
+              "totalMs": 33.671,
+              "meanMs": 0.701,
+              "over50ms": 0
+            },
+            {
+              "name": "writeInteractionPartnerFilter",
+              "calls": 48,
+              "totalMs": 34.467,
+              "meanMs": 0.718,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordSampleStatus",
+              "calls": 48,
+              "totalMs": 33.998,
+              "meanMs": 0.708,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemySampleStatus",
+              "calls": 48,
+              "totalMs": 32.211,
+              "meanMs": 0.671,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyOutcomeStatus",
+              "calls": 48,
+              "totalMs": 31.673,
+              "meanMs": 0.66,
+              "over50ms": 0
+            },
+            {
+              "name": "writeEnemyMeleeStatus",
+              "calls": 48,
+              "totalMs": 33.213,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmProbe",
+              "calls": 48,
+              "totalMs": 33.171,
+              "meanMs": 0.691,
+              "over50ms": 0
+            },
+            {
+              "name": "writeArmStream",
+              "calls": 48,
+              "totalMs": 33.219,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarSword",
+              "calls": 48,
+              "totalMs": 32.336,
+              "meanMs": 0.674,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowEquipment",
+              "calls": 48,
+              "totalMs": 34.559,
+              "meanMs": 0.72,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionBodyVisibility",
+              "calls": 48,
+              "totalMs": 34.011,
+              "meanMs": 0.709,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAvatarWeapon",
+              "calls": 48,
+              "totalMs": 33.113,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwordLinkStatus",
+              "calls": 48,
+              "totalMs": 34.875,
+              "meanMs": 0.727,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardStatus",
+              "calls": 48,
+              "totalMs": 37.521,
+              "meanMs": 0.782,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardBody",
+              "calls": 48,
+              "totalMs": 33.903,
+              "meanMs": 0.706,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardEquipment",
+              "calls": 48,
+              "totalMs": 31.845,
+              "meanMs": 0.663,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGuardWeapon",
+              "calls": 48,
+              "totalMs": 49.367,
+              "meanMs": 1.028,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFixture",
+              "calls": 48,
+              "totalMs": 32.663,
+              "meanMs": 0.68,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDarkVisionFixture",
+              "calls": 48,
+              "totalMs": 33.477,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFixture",
+              "calls": 48,
+              "totalMs": 31.73,
+              "meanMs": 0.661,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeFixture",
+              "calls": 48,
+              "totalMs": 32.49,
+              "meanMs": 0.677,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoFixture",
+              "calls": 48,
+              "totalMs": 33.386,
+              "meanMs": 0.696,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmFixture",
+              "calls": 48,
+              "totalMs": 66.35,
+              "meanMs": 1.382,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFixture",
+              "calls": 48,
+              "totalMs": 32.275,
+              "meanMs": 0.672,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerFixture",
+              "calls": 48,
+              "totalMs": 31.389,
+              "meanMs": 0.654,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFixture",
+              "calls": 48,
+              "totalMs": 33.916,
+              "meanMs": 0.707,
+              "over50ms": 0
+            },
+            {
+              "name": "writeBendTimeFixture",
+              "calls": 48,
+              "totalMs": 31.079,
+              "meanMs": 0.647,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedFixture",
+              "calls": 48,
+              "totalMs": 30.857,
+              "meanMs": 0.643,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFixture",
+              "calls": 48,
+              "totalMs": 31.084,
+              "meanMs": 0.648,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartFixture",
+              "calls": 48,
+              "totalMs": 31.269,
+              "meanMs": 0.651,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapFixture",
+              "calls": 48,
+              "totalMs": 33.019,
+              "meanMs": 0.688,
+              "over50ms": 0
+            },
+            {
+              "name": "writePotionFixture",
+              "calls": 48,
+              "totalMs": 33.796,
+              "meanMs": 0.704,
+              "over50ms": 0
+            },
+            {
+              "name": "writeRangedProp",
+              "calls": 48,
+              "totalMs": 33.03,
+              "meanMs": 0.688,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeProp",
+              "calls": 48,
+              "totalMs": 33.318,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writeHeartProp",
+              "calls": 48,
+              "totalMs": 33.05,
+              "meanMs": 0.689,
+              "over50ms": 0
+            },
+            {
+              "name": "writeTrapProp",
+              "calls": 48,
+              "totalMs": 33.212,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrenadeFx",
+              "calls": 48,
+              "totalMs": 33.222,
+              "meanMs": 0.692,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeVisual",
+              "calls": 48,
+              "totalMs": 96.258,
+              "meanMs": 2.005,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMesmerizeWorldStream",
+              "calls": 48,
+              "totalMs": 33.707,
+              "meanMs": 0.702,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoWorld",
+              "calls": 48,
+              "totalMs": 33.473,
+              "meanMs": 0.697,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDominoBeams",
+              "calls": 48,
+              "totalMs": 32.972,
+              "meanMs": 0.687,
+              "over50ms": 0
+            },
+            {
+              "name": "writePossessionFx",
+              "calls": 48,
+              "totalMs": 33.309,
+              "meanMs": 0.694,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmWorld",
+              "calls": 48,
+              "totalMs": 32.677,
+              "meanMs": 0.681,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerWorld",
+              "calls": 48,
+              "totalMs": 49.856,
+              "meanMs": 1.039,
+              "over50ms": 0
+            },
+            {
+              "name": "writeDoppelgangerVisual",
+              "calls": 48,
+              "totalMs": 40.861,
+              "meanMs": 0.851,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmSpawnFx",
+              "calls": 48,
+              "totalMs": 43.694,
+              "meanMs": 0.91,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmTrails",
+              "calls": 48,
+              "totalMs": 32.11,
+              "meanMs": 0.669,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwarmRatVisual",
+              "calls": 49,
+              "totalMs": 36.935,
+              "meanMs": 0.754,
+              "over50ms": 0
+            },
+            {
+              "name": "writePoseClockDiagnostics",
+              "calls": 49,
+              "totalMs": 36.942,
+              "meanMs": 0.754,
+              "over50ms": 0
+            },
+            {
+              "name": "writeAgilityFixture",
+              "calls": 49,
+              "totalMs": 34.618,
+              "meanMs": 0.706,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCarryAttachmentFixture",
+              "calls": 48,
+              "totalMs": 35.099,
+              "meanMs": 0.731,
+              "over50ms": 0
+            },
+            {
+              "name": "writeNativePowerFx",
+              "calls": 48,
+              "totalMs": 33.163,
+              "meanMs": 0.691,
+              "over50ms": 0
+            },
+            {
+              "name": "writeShadowWalkFx",
+              "calls": 48,
+              "totalMs": 33.108,
+              "meanMs": 0.69,
+              "over50ms": 0
+            },
+            {
+              "name": "writePowerFxStream",
+              "calls": 48,
+              "totalMs": 75.008,
+              "meanMs": 1.563,
+              "over50ms": 0
+            },
+            {
+              "name": "writeWindblastFxStream",
+              "calls": 48,
+              "totalMs": 34.371,
+              "meanMs": 0.716,
+              "over50ms": 0
+            },
+            {
+              "name": "writeGrappleFxStream",
+              "calls": 48,
+              "totalMs": 33.044,
+              "meanMs": 0.688,
+              "over50ms": 0
+            },
+            {
+              "name": "writePartnerEnemyStatus",
+              "calls": 48,
+              "totalMs": 34.26,
+              "meanMs": 0.714,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointTrace",
+              "calls": 48,
+              "totalMs": 34.331,
+              "meanMs": 0.715,
+              "over50ms": 0
+            },
+            {
+              "name": "writeSwitchTrace",
+              "calls": 48,
+              "totalMs": 34.257,
+              "meanMs": 0.714,
+              "over50ms": 0
+            },
+            {
+              "name": "writeReplacementTrace",
+              "calls": 48,
+              "totalMs": 34.359,
+              "meanMs": 0.716,
+              "over50ms": 0
+            },
+            {
+              "name": "writeCheckpointSync",
+              "calls": 48,
+              "totalMs": 33.248,
+              "meanMs": 0.693,
+              "over50ms": 0
+            },
+            {
+              "name": "writeMixamoStatus",
+              "calls": 48,
+              "totalMs": 34.443,
+              "meanMs": 0.718,
+              "over50ms": 0
+            }
+          ],
+          "events": []
+        }
+      }
+    }
+  ],
+  "complete": false,
+  "scope": "Measured game-thread diagnostic hitch reduction and unchanged native crouched pickup/body continuity. Does not prove absence of all data gaps or automatic recovery after a retired stream. No network deadlines relaxed."
+}

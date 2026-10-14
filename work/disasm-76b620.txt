@@ -1,0 +1,36 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014076B620: mov         qword ptr [rsp+8],rbx
+  000000014076B625: mov         qword ptr [rsp+10h],rsi
+  000000014076B62A: push        rdi
+  000000014076B62B: sub         rsp,20h
+  000000014076B62F: mov         esi,r8d
+  000000014076B632: mov         ebx,edx
+  000000014076B634: mov         rdi,rcx
+  000000014076B637: call        0000000140727390
+  000000014076B63C: cmp         ebx,esi
+  000000014076B63E: jle         000000014076B64C
+  000000014076B640: cmp         esi,6
+  000000014076B643: jge         000000014076B64C
+  000000014076B645: mov         eax,1
+  000000014076B64A: jmp         000000014076B64E
+  000000014076B64C: xor         eax,eax
+  000000014076B64E: mov         byte ptr [rdi+0000000000000144h],al
+  000000014076B654: mov         rax,qword ptr [rdi]
+  000000014076B657: mov         rcx,rdi
+  000000014076B65A: mov         rbx,qword ptr [rsp+30h]
+  000000014076B65F: mov         rsi,qword ptr [rsp+38h]
+  000000014076B664: add         rsp,20h
+  000000014076B668: pop         rdi
+  000000014076B669: jmp         qword ptr [rax+00000000000001C0h]
+  000000014076B670: 40
+
+  Summary
+
+     1A7D000 .text

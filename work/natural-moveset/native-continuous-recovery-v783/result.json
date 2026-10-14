@@ -1,0 +1,60 @@
+{
+  "cycles": [
+    {
+      "passed": true,
+      "transaction": 1,
+      "death": false,
+      "rearms": 1,
+      "id": "01-host-reload",
+      "source": "host",
+      "hostEpoch": 16,
+      "pauseSurvivor": false,
+      "clientEpoch": 16
+    },
+    {
+      "passed": true,
+      "transaction": 2,
+      "death": false,
+      "rearms": 2,
+      "id": "02-client-reload",
+      "source": "client",
+      "hostEpoch": 21,
+      "pauseSurvivor": false,
+      "clientEpoch": 21
+    },
+    {
+      "passed": true,
+      "transaction": 3,
+      "death": true,
+      "rearms": 3,
+      "id": "03-corvo-death",
+      "source": "host",
+      "hostEpoch": 26,
+      "pauseSurvivor": false,
+      "clientEpoch": 26
+    },
+    {
+      "passed": true,
+      "transaction": 4,
+      "death": true,
+      "rearms": 4,
+      "id": "04-emily-death-paused-survivor",
+      "source": "client",
+      "hostEpoch": 31,
+      "pauseSurvivor": true,
+      "clientEpoch": 31
+    }
+  ],
+  "dll": "1DD50096D91436684A592C77937CF762DF81B57F08A4636A859BDE73DD65C285",
+  "checks": [
+    "Four consecutive recoveries under unchanged checkpoint arms and continuously retained door-session IDs, alternating manual reloads and natural fall deaths",
+    "Both native death screens, untouched survivor health, blocked survivor movement and one coordinated retry per actual death",
+    "One real load and one counterpart per role per cycle; new epochs and six fresh bindings, no old door replay, fresh native use after every recovery",
+    "Complete inventories and player/counterpart health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "passed": true,
+  "failure": null,
+  "scope": "Four continuous same-map fixed-SLOT82 recoveries without rearming checkpoint/door sessions. Real native fall deaths and survivor pause; both native game-over UI, one retry, restored roles/counterparts, fresh shared doors. Finite NPC isolation used between stimuli, independently released/rechecked after each load. No general campaign/save or shared enemy authority claim.",
+  "candidate": "candidate-death-barrier-v782"
+}

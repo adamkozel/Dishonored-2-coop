@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nvoid FUN_14061cc90(longlong param_1,undefined8 *param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong *plVar2;\r\n  undefined4 auStackX_8 [2];\r\n  \r\n  FUN_14061b370();\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd0,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd1,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd3,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  plVar2 = (longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) != '\\0') {\r\n    auStackX_8[0] = *(undefined4 *)(param_1 + 0xc0);\r\n    (**(code **)(*plVar2 + 0x30))();\r\n    return;\r\n  }\r\n  (**(code **)(*plVar2 + 0x28))(plVar2,auStackX_8,4);\r\n  *(undefined4 *)(param_1 + 0xc0) = auStackX_8[0];\r\n  return;\r\n}\r\n\r\n"
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nvoid FUN_14061cc90(longlong param_1,undefined8 *param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong *plVar2;\r\n  undefined4 auStackX_8 [2];\r\n  \r\n  FUN_14061b370();\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd0,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd1,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  lVar1 = *(longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) == '\\0') {\r\n    (**(code **)(lVar1 + 0x28))((longlong *)*param_2,param_1 + 0xd3,1);\r\n  }\r\n  else {\r\n    (**(code **)(lVar1 + 0x30))();\r\n  }\r\n  plVar2 = (longlong *)*param_2;\r\n  if (*(char *)(param_2 + 1) != '\\0') {\r\n    auStackX_8[0] = *(undefined4 *)(param_1 + 0xc0);\r\n    (**(code **)(*plVar2 + 0x30))();\r\n    return;\r\n  }\r\n  (**(code **)(*plVar2 + 0x28))(plVar2,auStackX_8,4);\r\n  *(undefined4 *)(param_1 + 0xc0) = auStackX_8[0];\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

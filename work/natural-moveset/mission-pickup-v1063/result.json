@@ -1,0 +1,23 @@
+{
+  "scope": "Shared pickup intersection with ordinary native pickups on Edge of the World (candidate1059c); Dunwall fixture restored.",
+  "cases": [
+    {
+      "role": "host",
+      "removedBothPeers": true,
+      "quantity": 10,
+      "family": 1,
+      "converged": true,
+      "name": "pickups_copper_wire_2"
+    },
+    {
+      "role": "client",
+      "removedBothPeers": false,
+      "quantity": 10,
+      "family": 1,
+      "converged": false,
+      "name": "pouch_small_02_12143"
+    }
+  ],
+  "passed": false,
+  "failure": "Ordinary pickup did not converge: pouch_small_02_12143 by client"
+}

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+  "checks": [
+    "Native RightShoulder held2000ms while behind exact partner; targeting/state/scene and native video observations collected. Outcome requires analysis.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "yaw": 90,
+        "name": "rear-choke",
+        "stance": 0,
+        "distance": 1.15
+      },
+      "key": "host-rear-choke",
+      "count": 28,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    }
+  ],
+  "scope": "Native partner rear choke input observation. This collection result does not prove interaction exclusion. Native player states, paired scene binding, partner health and source video must be reviewed. Normal native movement collision intentionally retained."
+}

@@ -1,0 +1,55 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140425430: mov         qword ptr [rsp+10h],rbx
+  0000000140425435: mov         qword ptr [rsp+18h],rsi
+  000000014042543A: push        rdi
+  000000014042543B: sub         rsp,30h
+  000000014042543F: mov         rdi,rcx
+  0000000140425442: call        00000001407E7670
+  0000000140425447: mov         eax,dword ptr [rdi+1Ch]
+  000000014042544A: mov         rsi,qword ptr [rdi+10h]
+  000000014042544E: shr         eax,1Eh
+  0000000140425451: test        al,1
+  0000000140425453: jne         0000000140425471
+  0000000140425455: mov         rcx,qword ptr [rdi+8]
+  0000000140425459: lea         rdx,[rsp+40h]
+  000000014042545E: add         rcx,68h
+  0000000140425462: call        00000001406DD620
+  0000000140425467: mov         rcx,rdi
+  000000014042546A: mov         edx,dword ptr [rax]
+  000000014042546C: call        0000000140425C90
+  0000000140425471: mov         rdx,qword ptr [rdi+30h]
+  0000000140425475: lea         rcx,[rdi+0000000000000090h]
+  000000014042547C: call        00000001407C7960
+  0000000140425481: lea         rcx,[rdi+0000000000000090h]
+  0000000140425488: xor         r8d,r8d
+  000000014042548B: mov         rdx,rsi
+  000000014042548E: call        00000001407C7300
+  0000000140425493: xor         eax,eax
+  0000000140425495: mov         qword ptr [rsp+20h],rax
+  000000014042549A: mov         qword ptr [rsp+28h],rax
+  000000014042549F: lea         rax,[00000001404263B0h]
+  00000001404254A6: mov         qword ptr [rsp+28h],rax
+  00000001404254AB: mov         qword ptr [rsp+20h],rdi
+  00000001404254B0: call        0000000140810240
+  00000001404254B5: lea         r9,[rsp+20h]
+  00000001404254BA: mov         r8d,0D1h
+  00000001404254C0: mov         rdx,rsi
+  00000001404254C3: mov         rcx,rax
+  00000001404254C6: call        0000000140810810
+  00000001404254CB: mov         rbx,qword ptr [rsp+48h]
+  00000001404254D0: mov         rsi,qword ptr [rsp+50h]
+  00000001404254D5: add         rsp,30h
+  00000001404254D9: pop         rdi
+  00000001404254DA: ret
+  00000001404254DB: int         3
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,26 @@
+{
+  "source": "host",
+  "character": "corvo",
+  "failure": null,
+  "checks": [
+    "Native Steam stream and v16 bank ready before the cast",
+    "corvo native cast phases 1,2,3 drive remote whole-body presentation",
+    "Native phase end restores standing movement",
+    "Native X cancellation does not teleport or pull the source",
+    "Both players/avatar health, source first-person sword, remote native sword and peer power quantity preserved",
+    "Native Blink travel creates exactly one network departure and one arrival; aim cancellation creates neither",
+    "Repeated reliable arrival packet cannot replay effects",
+    "Remote Blink uses a discrete endpoint transfer with no eye-height body jump (max endpoint error 0.00302899999999795 m)"
+  ],
+  "seenPhases": [
+    "3",
+    "1",
+    "2"
+  ],
+  "dll": "A0B648425DA7C8EB9D5C138BF0550434E124E6574D0085F5021D14691C346471",
+  "bank": "46A0EE490A538143324872ED3149D9BB73D612061212373E4355513949FBCAE6",
+  "recorded": false,
+  "blinkFxTested": true,
+  "grappleFxTested": false,
+  "scope": "Native source power scene phases transported over Steam into full-body pose candidates. Native source controls gameplay outcomes. Power FX only claimed when explicitly checked. Armed, standing Dunwall static-world fixture; not complete powers or movement."
+}

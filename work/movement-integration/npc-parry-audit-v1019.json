@@ -1,0 +1,160 @@
+{
+  "at": "2026-10-14T08:37:20.246090+02:00",
+  "candidate": "candidate-npc-combat-v1018",
+  "dll": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+  "probes": {
+    "probe-block-v1016": "06C18D5E9273AC220EDE948D91A8BCB3165AAFED6886F760051914A91E7BE6DA",
+    "probe-block-v1016b": "6E06EBA1B0FAEA2CCD589312825A33FAFA82490E9FF1A11F9615B4866EAF34D7"
+  },
+  "findings": [
+    "npc-parry-ghidra-v1015",
+    "../../documentation/handoff-2026-10-11/80-native-timed-parry.md"
+  ],
+  "cases": [
+    {
+      "take": "block-window-v1016",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": false,
+      "scope": "Failed run: Harness failure before any input: Send-D2Input minimum duration is 100 ms (80 requested). No game state touched.",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "block-window-v1016b",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": false,
+      "scope": "Failed run: Harness failure before any input: integer array passed through pwsh -File became one value. No game state touched.",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "block-window-v1016c",
+      "candidate": "989B3EBC71AF3D899940D0039028AA2C97768C5CFA6FE8481CF4DB51365D1B5C",
+      "passed": true,
+      "scope": "Read-only native parry-window timing (client, build1012, probe --watch-block-state 5 ms): arkPlayerStateBlock+58 opens at block entry and closes ~265 ms later; re-entry cooldown +70 = 0.266 s; linger +74 = 0.",
+      "result": {
+        "records": 8,
+        "probe": "06C18D5E9273AC220EDE948D91A8BCB3165AAFED6886F760051914A91E7BE6DA"
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017",
+      "candidate": "A838FF9D5D349EDEE022B61E5D3118E7850EE50B8097516B2B975B4665825CBC",
+      "passed": false,
+      "scope": "Failed run: Candidate1016 status defect: new object key parryWin duplicated the existing parryWin counter, so the harness read an object; cleanup also waited only 20 s for 46 s recordings. Restoration of gameplay/health/ownership and protected files passed.",
+      "result": {
+        "failure": "Method invocation failed because [System.Management.Automation.PSObject] does not contain a method named 'op_Addition'."
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017b",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": false,
+      "scope": "Failed run: Validator defect: summed health loss ignored native health regeneration (21 -> 35 before the final read). Per-event health was consistent; 9 contacts natively defended (5 block, 4 timed parry result1), 3 applied, host acks/reactions matched. No parry-win (native chance 0). Restoration passed.",
+      "result": {
+        "failure": "No receiver-native defended contact with consistent health, acknowledgement outcomes and block animation"
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017c",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": false,
+      "scope": "Failed run: Validator defect: compared process-lifetime observer counters with per-session counts (deltas matched: 2 block, 1 parry). Restoration passed.",
+      "result": {
+        "failure": "No consistent native timed parry (result1/2) with matching host reactions, observer counts and any parry-win blowback/FX"
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017d",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": false,
+      "scope": "Failed run: Validator defect: required host lastInflicted 0 although no parry-win occurred (sentinel -1). 1 block + 2 timed parries, counts consistent. Restoration passed.",
+      "result": {
+        "failure": "No consistent native timed parry (result1/2) with matching host reactions, observer counts and any parry-win blowback/FX"
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017e",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": false,
+      "scope": "Failed run: No defended contact: all three relayed contacts landed outside a raised block (600/350 ms cycle) and reached the three-hit stop. Health/acks consistent. Restoration passed.",
+      "result": {
+        "failure": "No receiver-native defended contact with consistent health, acknowledgement outcomes and block animation"
+      }
+    },
+    {
+      "take": "npc-native-parry-v1017f",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": true,
+      "scope": "Candidate1016: ordinary native block-press cycle; relayed enemy sword contacts resolved natively on the actual client including at least one native timed parry (result1 parry-lose; parry-win requires a nonzero native chance stat, 0% in this fixture, and is validated only if it occurs); host posts native 0xe6 parry/block events to its authoritative attacker; outcome counts agree across ack, host and the passive 859980 observer. Earlier text: actual client native held-block scene with controller facing toward the closest engaged enemy, at least one relayed enemy sword contact defended by native 1406357d0-equivalent resolution (no 717950 call), host-acknowledged outcome and native attacker reaction event, clone40 and duplicate rejection. Not timed parry or host-attacker recoil/stagger acceptance.",
+      "result": {
+        "defended": 5,
+        "blocked": 4,
+        "hostReactionFailures": 0,
+        "swordDamageCalls": 3,
+        "hostParryLose": 1,
+        "parryWin": 0,
+        "hostBlocked": 4,
+        "initial": 56,
+        "hostReactions": 5,
+        "parryLose": 1,
+        "hostParryWin": 0,
+        "expectedLoss": 45.0,
+        "final": 35,
+        "applied": 3,
+        "consumed": 8,
+        "parry": {
+          "clientRelayed": [
+            12,
+            8,
+            0
+          ],
+          "hostHooked": true,
+          "hostLastResult": "none",
+          "baseRelayed": [
+            8,
+            7,
+            0
+          ],
+          "hostFailures": 0,
+          "hostApplied": 0,
+          "baseNative": [
+            0,
+            0,
+            0
+          ],
+          "clientFx": 0,
+          "clientFxFailures": 0,
+          "hostLastAmount": -1,
+          "hostNative": [
+            0,
+            0,
+            0
+          ],
+          "clientHooked": true,
+          "clientNative": [
+            0,
+            0,
+            0
+          ],
+          "hostLastInflicted": -1
+        },
+        "nativeBlockSamples": 21,
+        "duplicateRejected": true,
+        "inputCycle": "900/320 ms"
+      }
+    }
+  ],
+  "complete": false,
+  "incidents": [
+    "The first Build-NpcAttack-v1016 run overwrote shadowwalk-body-{world,action,resume,checkpoint}-tests-v1012.log (unarchived 1012 build logs) with 1016 output at 08:11. 1012 runtime evidence, audit1014, archive, smoke and bank logs are unaffected."
+  ],
+  "outstanding": [
+    "Parry-win (result2) host blowback path is implemented but unexercised: the native parry-win percent row (stat row 67) reads 0 for both characters in this fixture; it needs a fixture whose upgrades/charms give a nonzero chance.",
+    "Host attacker parry reaction is supported by posted native 0xe6 counts and the client-side streamed off-balance pose, not a host-camera view.",
+    "Relay latency plus 80 ms NPC body interpolation shifts effective parry timing relative to the on-screen cue; not measured.",
+    "Heavy/unblockable attacks, close-combat kicks (npc_closecombat), several simultaneous attackers and other enemy damage families."
+  ]
+}

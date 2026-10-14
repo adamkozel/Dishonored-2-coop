@@ -1,0 +1,55 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407879F0: mov         qword ptr [rsp+8],rbx
+  00000001407879F5: mov         qword ptr [rsp+10h],rbp
+  00000001407879FA: mov         qword ptr [rsp+18h],rsi
+  00000001407879FF: push        rdi
+  0000000140787A00: sub         rsp,20h
+  0000000140787A04: mov         rbx,rcx
+  0000000140787A07: mov         rsi,rdx
+  0000000140787A0A: add         rcx,540h
+  0000000140787A11: mov         rdx,qword ptr [rbx+8]
+  0000000140787A15: mov         rdi,r9
+  0000000140787A18: mov         rbp,r8
+  0000000140787A1B: call        0000000140465740
+  0000000140787A20: test        rsi,rsi
+  0000000140787A23: je          0000000140787A7F
+  0000000140787A25: mov         rax,qword ptr [rsi+00000000000003F0h]
+  0000000140787A2C: test        rax,rax
+  0000000140787A2F: je          0000000140787A7F
+  0000000140787A31: mov         rcx,rbx
+  0000000140787A34: mov         qword ptr [rbx],rax
+  0000000140787A37: mov         qword ptr [rbx+10h],rbp
+  0000000140787A3B: call        0000000140787810
+  0000000140787A40: mov         rcx,rbx
+  0000000140787A43: call        0000000140787770
+  0000000140787A48: mov         edx,0Fh
+  0000000140787A4D: mov         rcx,rbx
+  0000000140787A50: call        00000001407885B0
+  0000000140787A55: mov         rcx,rbx
+  0000000140787A58: call        0000000140787510
+  0000000140787A5D: test        rdi,rdi
+  0000000140787A60: je          0000000140787A70
+  0000000140787A62: mov         eax,dword ptr [rdi+0000000000000278h]
+  0000000140787A68: mov         dword ptr [rbx+00000000000008B0h],eax
+  0000000140787A6E: jmp         0000000140787A7F
+  0000000140787A70: mov         rax,qword ptr [rbx]
+  0000000140787A73: mov         ecx,dword ptr [rax+0000000000000108h]
+  0000000140787A79: mov         dword ptr [rbx+00000000000008B0h],ecx
+  0000000140787A7F: mov         rbx,qword ptr [rsp+30h]
+  0000000140787A84: mov         rbp,qword ptr [rsp+38h]
+  0000000140787A89: mov         rsi,qword ptr [rsp+40h]
+  0000000140787A8E: add         rsp,20h
+  0000000140787A92: pop         rdi
+  0000000140787A93: ret
+  0000000140787A94: int         3
+
+  Summary
+
+     1A7D000 .text

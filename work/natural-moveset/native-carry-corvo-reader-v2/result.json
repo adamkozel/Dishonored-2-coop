@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "complete": false,
+  "remote_gameplay_bound": false,
+  "visual_accepted": false,
+  "scope": "Native source-reader proof only. Remote full-body/corpse attachment, physics and release binding remain incomplete.",
+  "character": "corvo",
+  "take": "native-carry-corvo-reader-v2",
+  "checks": [
+    "Exact verified Steam executable identity",
+    "Existing BD99 proxy preserved; only the read-only probe changed",
+    "Owned native pickup, idle, walk and selected release each sampled at least three times",
+    "All accepted scenes resolve to the intended native character",
+    "Carry walking independently observed while standing and crouched",
+    "Pickup, carry and drop retain the same source corpse generation",
+    "At least 95% of accepted samples agree with a subsequent independent scene and binding read",
+    "Carry reader refuses samples outside native carry/drop states",
+    "Native pickup begins from free movement and release returns to free movement",
+    "Native source player health and identity preserved",
+    "Real-time native recording retains at least 24 captured frames per second"
+  ],
+  "samples": 279,
+  "accepted_samples": 219,
+  "variants": {
+    "1": 12,
+    "2": 165,
+    "3": 28,
+    "4": 14
+  },
+  "independent_scene_matches": 217,
+  "serial_probe_retirement_boundaries": [
+    {
+      "index": 76,
+      "ms": 6125,
+      "retired_handle": 228,
+      "next_handle": 229
+    }
+  ],
+  "actual_capture_hz": 27.541666666666668,
+  "video_sha256": "5EF08D1695CAE3DDC54661051F94131F251CE9E864B66A9C25004F9F3282CF5B",
+  "observations_sha256": "4115AF5AA072CA63E0E0DBB76BAD6611B277A826CD79A5C86B75840904573D42",
+  "identity": {
+    "role": "host",
+    "pid": 75820,
+    "executableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "proxySha256": "BD99C7A6E327292B2493DC354538EFD2F35C06C4800297BFE5476BC848D1A706",
+    "probeSha256": "491DFAE92B965DF0812B5EEFF0508F9314B0DF90D2F7C03FC209519FC6674DC4",
+    "readerSha256": "2707A9390884AAE72E466D768228C9536C57261C1DC89EAFA0DB767D9A017C79",
+    "harnessSha256": "969CF8228EB6D884965E8067D35A8559606B6011B5AF0239E47221CF780946D9",
+    "healthBefore": {
+      "tick": 271585484,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1beb7fe7ca0",
+      "actor": "0x1be9b1cbfa0",
+      "attributes": "0x1beb7e6b470",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

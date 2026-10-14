@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "failure": "Native crouch not grounded before observation",
+  "source": "client",
+  "checks": [
+    "Exact native Emily Domino item acquired and selected without directly invoking power or VFX",
+    "Both isolated checkpoints restore clean health/inventory and no filtered native Domino effects remain",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [],
+  "dll": "40102FC99C4310DFEB769B7AE9236C13FC961452C6D73E09F82BBE2108902111",
+  "probe": "425A51347E95F121979D530106F901FA87581DD892718B5957903973F9DE3C98",
+  "scope": "Crouched native Domino observation (no remote binding): exact Emily inventory acquisition, one native LT hold/release, raw PhantasmalLink subscenes, state/equipment/target and filtered effect data. A recorded scene is not proof of successful linking, mana spending or target outcomes. No remote body/VFX or gameplay replication. Full isolated inventory/health and checkpoint recovery plus protected hashes are required."
+}

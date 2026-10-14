@@ -1,0 +1,440 @@
+{
+  "at": "2026-10-13T00:02:26.839220+02:00",
+  "cases": [
+    {
+      "take": "native-shadowwalk-scenes-v522",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "client",
+        "checks": [
+          "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+          "Exact native ShadowWalk player state observed after normal LT input",
+          "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+          "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+          "Native mana decreases; replenishment prevents interpreting this as exact cost",
+          "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+          "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.956,
+            "input": "Native Emily LT220 activation"
+          },
+          {
+            "videoTime": 4.708,
+            "input": "Forward550ms only after observed exact native ShadowWalk state"
+          },
+          {
+            "videoTime": 6.318,
+            "input": "Backward550ms in observed native ShadowWalk state"
+          },
+          {
+            "videoTime": 7.788,
+            "input": "Native LT220 End Shadow Walk after bounded movement"
+          }
+        ],
+        "dll": "F461D7477AAF7E24052D29985C1820DEEF103E366744981292C44109949A4C2F",
+        "probe": "A7A2D464AE1CE2A8C598B9F3221B36E1155FA8D2A4948ADD6F5A2FADFB9F7C44",
+        "scope": "Source-only native Shadow Walk acquisition, normal LT activation, conditional bounded movement, requested exit, scene/state/equipment observations. No remote form/VFX/gameplay binding. Checkpoint and protected saves must restore."
+      },
+      "observations": {
+        "strict-scene-observations": [
+          {
+            "Name": "32, 1000",
+            "Count": 21
+          },
+          {
+            "Name": "33, 1000",
+            "Count": 139
+          },
+          {
+            "Name": "34, 1133",
+            "Count": 23
+          }
+        ]
+      }
+    },
+    {
+      "take": "native-shadowwalk-body-v525",
+      "result": {
+        "passed": false,
+        "failure": "Remote complete-body phase 32 not observed at full weight",
+        "source": "client",
+        "checks": [
+          "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+          "Remote Emily complete-body bank58/335 and native Steam stream ready",
+          "Exact native ShadowWalk player state observed after normal LT input",
+          "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+          "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+          "Native mana decreases; replenishment prevents interpreting this as exact cost",
+          "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+          "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+          "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 2.012,
+            "input": "Native Emily LT220 activation"
+          },
+          {
+            "videoTime": 4.784,
+            "input": "Forward550ms only after observed exact native ShadowWalk state"
+          },
+          {
+            "videoTime": 6.309,
+            "input": "Backward550ms in observed native ShadowWalk state"
+          },
+          {
+            "videoTime": 7.909,
+            "input": "Native LT220 End Shadow Walk after bounded movement"
+          }
+        ],
+        "dll": "EDF30E05A912F856C63E31641F1258CDBDCA7F130654F63D21DBE31106B8B352",
+        "probe": "A7A2D464AE1CE2A8C598B9F3221B36E1155FA8D2A4948ADD6F5A2FADFB9F7C44",
+        "scope": "Body-only native Shadow Walk entry, idle, bounded forward/backward crawl and requested exit through native Steam. Original FP preserved. Material, VFX, attacks and untested traversal remain unfinished. Checkpoint and protected saves restored; actual remote/source videos require visual review."
+      },
+      "observations": {
+        "strict-scene-observations": [
+          {
+            "Name": "32, 1000",
+            "Count": 21
+          },
+          {
+            "Name": "33, 1000",
+            "Count": 135
+          },
+          {
+            "Name": "34, 1133",
+            "Count": 23
+          }
+        ]
+      }
+    },
+    {
+      "take": "native-shadowwalk-body-v527",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "client",
+        "checks": [
+          "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+          "Remote Emily complete-body bank58/335 and native Steam stream ready",
+          "Exact native ShadowWalk player state observed after normal LT input",
+          "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+          "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+          "Native mana decreases; replenishment prevents interpreting this as exact cost",
+          "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+          "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+          "Native Steam entry/form/exit drive remote full-body poses, holstered equipment, distance crawl and recovery without clock rejection",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.984,
+            "input": "Native Emily LT220 activation"
+          },
+          {
+            "videoTime": 4.735,
+            "input": "Forward550ms only after observed exact native ShadowWalk state"
+          },
+          {
+            "videoTime": 6.266,
+            "input": "Backward550ms in observed native ShadowWalk state"
+          },
+          {
+            "videoTime": 7.875,
+            "input": "Native LT220 End Shadow Walk after bounded movement"
+          }
+        ],
+        "dll": "1E63864BF531EEC0F1468C59E500FECBF68E350B22F1FE4B031C2211F6D6E246",
+        "probe": "47CC19449611FEBBD26ED8473C2AB6472EF9DBE31520B9DC6139E42F98C33EA7",
+        "scope": "Body-only native Shadow Walk entry, idle, bounded forward/backward crawl and requested exit through native Steam. Original FP preserved. Material, VFX, attacks and untested traversal remain unfinished. Checkpoint and protected saves restored; actual remote/source videos require visual review."
+      },
+      "observations": {
+        "remote-body-observations": {
+          "variants": [
+            32,
+            33,
+            34
+          ],
+          "received": [
+            32,
+            33,
+            34
+          ],
+          "crawlSamples": 20,
+          "travelPhases": [
+            0.0,
+            0.039297,
+            0.047308,
+            0.076539,
+            0.103527,
+            0.142339,
+            0.202169,
+            0.209172,
+            0.222955
+          ],
+          "clockRefused": 0,
+          "recoverySamples": 9,
+          "scope": "Initial body-only native entry/form/exit. Visual review and native shadow material/particles still required."
+        },
+        "strict-scene-observations": [
+          {
+            "Name": "32, 1000",
+            "Count": 21
+          },
+          {
+            "Name": "33, 1000",
+            "Count": 143
+          },
+          {
+            "Name": "34, 1133",
+            "Count": 24
+          }
+        ]
+      }
+    },
+    {
+      "take": "native-shadowwalk-travel-v529",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "client",
+        "checks": [
+          "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+          "Remote Emily complete-body bank58/335 and native Steam stream ready",
+          "Exact native ShadowWalk player state observed after normal LT input",
+          "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+          "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+          "Native mana decreases; replenishment prevents interpreting this as exact cost",
+          "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+          "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+          "Native Steam entry/form/exit drive remote full-body poses, holstered equipment, distance crawl and recovery without clock rejection",
+          "Complete crawl cycle plus return sampled across measured travel; actual native peer sword stays holstered",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.989,
+            "input": "Native Emily LT220 activation"
+          },
+          {
+            "videoTime": 4.865,
+            "input": "Forward2600ms only after observed exact native ShadowWalk state"
+          },
+          {
+            "videoTime": 8.138,
+            "input": "Backward2600ms in observed native ShadowWalk state"
+          },
+          {
+            "videoTime": 11.927,
+            "input": "Native LT220 End Shadow Walk after bounded movement"
+          }
+        ],
+        "dll": "1E63864BF531EEC0F1468C59E500FECBF68E350B22F1FE4B031C2211F6D6E246",
+        "probe": "47CC19449611FEBBD26ED8473C2AB6472EF9DBE31520B9DC6139E42F98C33EA7",
+        "scope": "Body-only native Shadow Walk entry, idle, bounded forward/backward crawl and requested exit through native Steam. Original FP preserved. Material, VFX, attacks and untested traversal remain unfinished. Checkpoint and protected saves restored; actual remote/source videos require visual review."
+      },
+      "observations": {
+        "remote-body-observations": {
+          "variants": [
+            32,
+            33,
+            34
+          ],
+          "received": [
+            32,
+            33,
+            34
+          ],
+          "crawlSamples": 37,
+          "travelPhases": [
+            0.0,
+            0.020234,
+            0.021322,
+            0.036758,
+            0.072344,
+            0.108285,
+            0.240789,
+            0.342665,
+            0.356445,
+            0.419733,
+            0.434011,
+            0.5086,
+            0.546482,
+            0.568992,
+            0.620103,
+            0.628634,
+            0.699639,
+            0.70781,
+            0.74406,
+            0.799929,
+            0.805636,
+            0.889263,
+            0.89311,
+            0.95262,
+            0.96458
+          ],
+          "clockRefused": 0,
+          "recoverySamples": 7,
+          "scope": "Initial body-only native entry/form/exit. Visual review and native shadow material/particles still required."
+        },
+        "long-travel-observations": {
+          "sourceDistanceMeters": 4.609555523126609,
+          "absoluteTravelCycles": 1.9038989999999998,
+          "stopPhases": [
+            0.036758,
+            0.072344
+          ],
+          "forwardMillis": 2600,
+          "backwardMillis": 2600,
+          "scope": "Measured native source travel and accepted distance-driven body cadence. Does not establish final foot/hand contact quality."
+        },
+        "strict-scene-observations": [
+          {
+            "Name": "32, 1000",
+            "Count": 22
+          },
+          {
+            "Name": "33, 1000",
+            "Count": 264
+          },
+          {
+            "Name": "34, 1133",
+            "Count": 23
+          }
+        ]
+      }
+    },
+    {
+      "take": "native-shadowwalk-travel-v532",
+      "result": {
+        "passed": true,
+        "failure": null,
+        "source": "client",
+        "checks": [
+          "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+          "Remote Emily complete-body bank58/335 and native Steam stream ready",
+          "Exact native ShadowWalk player state observed after normal LT input",
+          "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+          "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+          "Native mana decreases; replenishment prevents interpreting this as exact cost",
+          "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+          "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+          "Native Steam entry/form/exit drive remote full-body poses, holstered equipment, distance crawl and recovery without clock rejection",
+          "Complete crawl cycle plus return sampled across measured travel; actual native peer sword stays holstered",
+          "Both original inventory quantities and player/partner health retained; world reset still required",
+          "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+          "All14 protected save/settings hashes retained"
+        ],
+        "events": [
+          {
+            "videoTime": 1.991,
+            "input": "Native Emily LT220 activation"
+          },
+          {
+            "videoTime": 4.765,
+            "input": "Forward2600ms only after observed exact native ShadowWalk state"
+          },
+          {
+            "videoTime": 8.043,
+            "input": "Backward2600ms in observed native ShadowWalk state"
+          },
+          {
+            "videoTime": 12.081,
+            "input": "Native LT220 End Shadow Walk after bounded movement"
+          }
+        ],
+        "dll": "1E63864BF531EEC0F1468C59E500FECBF68E350B22F1FE4B031C2211F6D6E246",
+        "probe": "47CC19449611FEBBD26ED8473C2AB6472EF9DBE31520B9DC6139E42F98C33EA7",
+        "scope": "Body-only native Shadow Walk entry, idle, bounded forward/backward crawl and requested exit through native Steam. Original FP preserved. Material, VFX, attacks and untested traversal remain unfinished. Checkpoint and protected saves restored; actual remote/source videos require visual review."
+      },
+      "observations": {
+        "remote-body-observations": {
+          "variants": [
+            32,
+            33,
+            34
+          ],
+          "received": [
+            32,
+            33,
+            34
+          ],
+          "crawlSamples": 38,
+          "travelPhases": [
+            0.0,
+            0.016046,
+            0.037362,
+            0.064463,
+            0.097911,
+            0.123115,
+            0.218789,
+            0.337714,
+            0.347489,
+            0.414649,
+            0.430091,
+            0.476755,
+            0.487943,
+            0.566158,
+            0.56711,
+            0.62677,
+            0.667826,
+            0.685114,
+            0.733052,
+            0.734898,
+            0.808412,
+            0.831322,
+            0.887485,
+            0.90732,
+            0.953026,
+            0.989581
+          ],
+          "clockRefused": 0,
+          "recoverySamples": 7,
+          "scope": "Initial body-only native entry/form/exit. Visual review and native shadow material/particles still required."
+        },
+        "long-travel-observations": {
+          "sourceDistanceMeters": 4.786436999999978,
+          "absoluteTravelCycles": 1.9770329999999998,
+          "stopPhases": [
+            0.064463,
+            0.097911
+          ],
+          "forwardMillis": 2600,
+          "backwardMillis": 2600,
+          "scope": "Measured native source travel and accepted distance-driven body cadence. Does not establish final foot/hand contact quality."
+        },
+        "strict-scene-observations": [
+          {
+            "Name": "32, 1000",
+            "Count": 22
+          },
+          {
+            "Name": "33, 1000",
+            "Count": 275
+          },
+          {
+            "Name": "34, 1133",
+            "Count": 26
+          }
+        ]
+      }
+    }
+  ],
+  "bodyNativeBound": true,
+  "bodyOnlyCandidate": "candidate-shadowwalk-body-v526",
+  "currentParticleCandidate": "candidate-shadowwalk-fx-v533",
+  "particleCandidateRuntimeVerified": false,
+  "complete": false,
+  "visualAccepted": false
+}

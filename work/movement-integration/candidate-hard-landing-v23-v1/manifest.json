@@ -1,0 +1,21 @@
+{
+  "dll_sha256": "16A5A45490F3155B6C1AAAD925F53ADD55D9C27E0ADE764A62D32BB46573F97C",
+  "format": "D2MOVE23",
+  "clips": 183,
+  "tests": [
+    "hard-landing-corvo-stand-v23-v5/result.json",
+    "hard-landing-corvo-crouch-v23-v1/result.json",
+    "hard-landing-emily-stand-v23-v5/result.json",
+    "hard-landing-emily-crouch-v23-v1/result.json"
+  ],
+  "checks": 40,
+  "game_recordings": [
+    "hard-landing-corvo-stand-v23-v5.mp4",
+    "hard-landing-corvo-crouch-v23-v1.mp4",
+    "hard-landing-emily-stand-v23-v5.mp4",
+    "hard-landing-emily-crouch-v23-v1.mp4"
+  ],
+  "source_bank_manifest": "hard-landing-crouch-bank-manifest-v1.json",
+  "complete": false,
+  "limitations": "Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete."
+}

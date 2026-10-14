@@ -1,0 +1,4824 @@
+[
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 0,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 0,
+      "after": 0,
+      "inflicted": 0,
+      "lastAttacker": 0,
+      "blocked": 0,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 0,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          0,
+          0,
+          0
+        ],
+        "count": 0,
+        "recent": []
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190973822,
+      "distance": 3.548517686117413,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          -0.967871,
+          -0.251446,
+          0,
+          0.251446,
+          -0.967871,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -43.0062,
+          -122.013,
+          62.6993
+        ],
+        "nativeViewOrientation": [
+          -0.96804,
+          -0.250797,
+          0.000259081,
+          0.250797,
+          -0.96804,
+          -0.000431184,
+          0.00035894,
+          -0.000352427,
+          1
+        ]
+      },
+      "yawError": -59.51762169659207,
+      "position": [
+        -45.5156898,
+        -119.504128,
+        61.0000038,
+        0.612230539,
+        -0.790679276,
+        0,
+        0.790679276,
+        0.612230539,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518556937,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518556406,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518556437,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518556468,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518556500,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518556531,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518556875,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -40.9441071,
+        -116.754799,
+        60.9999962,
+        -0.35803318,
+        -0.933709025,
+        0,
+        0.933709025,
+        -0.35803318,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -40.9441071,
+        -116.754799,
+        60.9999962,
+        -0.35803318,
+        -0.933709025,
+        0,
+        0.933709025,
+        -0.35803318,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518556968,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3552,
+      "received": 3559,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3559,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.361778
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3002,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.361778
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12842,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 539,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        -0.707194,
+        0.70702,
+        0,
+        -0.70702,
+        -0.707194,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9929,
+        -121.963,
+        62.6943
+      ],
+      "nativeViewOrientation": [
+        -0.711477,
+        0.701507,
+        0.041082,
+        -0.6966,
+        -0.711778,
+        0.0901149,
+        0.0924575,
+        0.035497,
+        0.995084
+      ]
+    },
+    "playerStates": {
+      "tick": 518556984,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 206
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 206,
+        "action": 2,
+        "variant": 10,
+        "character": 2,
+        "timeMs": 83,
+        "durationMs": 533,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 0,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 0,
+      "after": 0,
+      "inflicted": 0,
+      "lastAttacker": 0,
+      "blocked": 0,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 0,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          0,
+          0,
+          0
+        ],
+        "count": 0,
+        "recent": []
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190973822,
+      "distance": 2.535531416185956,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          -0.707194,
+          0.70702,
+          0,
+          -0.70702,
+          -0.707194,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.993,
+          -121.963,
+          62.6942
+        ],
+        "nativeViewOrientation": [
+          -0.710382,
+          0.703621,
+          0.0165665,
+          -0.703219,
+          -0.710552,
+          0.0244674,
+          0.0289871,
+          0.00573135,
+          0.999563
+        ]
+      },
+      "yawError": 0.4633812838496567,
+      "position": [
+        -44.808815,
+        -120.193329,
+        61.0000267,
+        0.715919137,
+        -0.698183179,
+        0,
+        0.698183179,
+        0.715919137,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518557453,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518557156,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518557187,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518557218,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518557234,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518557265,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518557375,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -41.8969574,
+        -119.417084,
+        61,
+        -0.363755584,
+        -0.931494296,
+        0,
+        0.931494296,
+        -0.363755584,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -41.8969574,
+        -119.417084,
+        61,
+        -0.363755584,
+        -0.931494296,
+        0,
+        0.931494296,
+        -0.363755584,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518557468,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3558,
+      "received": 3564,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3564,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3007,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12855,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 1043,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        -0.707194,
+        0.70702,
+        0,
+        -0.70702,
+        -0.707194,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9928,
+        -121.964,
+        62.701
+      ],
+      "nativeViewOrientation": [
+        -0.70672,
+        0.707494,
+        0.000259081,
+        -0.707494,
+        -0.706719,
+        -0.000431184,
+        -0.000121963,
+        -0.000488024,
+        1
+      ]
+    },
+    "playerStates": {
+      "tick": 518557500,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 207
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 207,
+        "action": 2,
+        "variant": 11,
+        "character": 2,
+        "timeMs": 33,
+        "durationMs": 2133,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 0,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 0,
+      "after": 0,
+      "inflicted": 0,
+      "lastAttacker": 0,
+      "blocked": 0,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 0,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          0,
+          0,
+          0
+        ],
+        "count": 0,
+        "recent": []
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190973822,
+      "distance": 1.6280759508771308,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          -0.707194,
+          0.70702,
+          0,
+          -0.70702,
+          -0.707194,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.9928,
+          -121.964,
+          62.6991
+        ],
+        "nativeViewOrientation": [
+          -0.70672,
+          0.707494,
+          0.000259081,
+          -0.707494,
+          -0.706719,
+          -0.000431184,
+          -0.000121963,
+          -0.000488024,
+          1
+        ]
+      },
+      "yawError": 0.7564861112572601,
+      "position": [
+        -44.1585007,
+        -120.827438,
+        61.0000267,
+        0.715919137,
+        -0.698183179,
+        0,
+        0.698183179,
+        0.715919137,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518557953,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518557671,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518557687,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518557718,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518557734,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518557765,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518557875,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -42.137104,
+        -120.127815,
+        61.0000229,
+        -0.363755584,
+        -0.931494296,
+        0,
+        0.931494296,
+        -0.363755584,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -42.137104,
+        -120.127815,
+        61.0000229,
+        -0.363755584,
+        -0.931494296,
+        0,
+        0.931494296,
+        -0.363755584,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518557968,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3569,
+      "received": 3575,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3575,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3018,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12879,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 1544,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        -0.707194,
+        0.70702,
+        0,
+        -0.70702,
+        -0.707194,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9928,
+        -121.964,
+        62.6963
+      ],
+      "nativeViewOrientation": [
+        -0.706638,
+        0.707576,
+        0.000388661,
+        -0.707576,
+        -0.706637,
+        -0.00057082,
+        -0.000129256,
+        -0.00067837,
+        1
+      ]
+    },
+    "playerStates": {
+      "tick": 518558000,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 207
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 207,
+        "action": 2,
+        "variant": 11,
+        "character": 2,
+        "timeMs": 516,
+        "durationMs": 2133,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 0,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 0,
+      "after": 0,
+      "inflicted": 0,
+      "lastAttacker": 0,
+      "blocked": 0,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 0,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          0,
+          0,
+          0
+        ],
+        "count": 0,
+        "recent": []
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190973822,
+      "distance": 1.6281475522705187,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          -0.707194,
+          0.70702,
+          0,
+          -0.70702,
+          -0.707194,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.9927,
+          -121.964,
+          62.694
+        ],
+        "nativeViewOrientation": [
+          -0.706585,
+          0.707623,
+          0.00282331,
+          -0.707609,
+          -0.706589,
+          0.00455881,
+          0.00522084,
+          0.00122339,
+          0.999986
+        ]
+      },
+      "yawError": 0.7696387127237756,
+      "position": [
+        -44.1585007,
+        -120.827438,
+        61.0000267,
+        0.715919137,
+        -0.698183179,
+        0,
+        0.698183179,
+        0.715919137,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518558468,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518558171,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518558187,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518558218,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518558250,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518558281,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518558390,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -42.1865196,
+        -120.255272,
+        61.0000229,
+        -0.363756061,
+        -0.931494534,
+        0,
+        0.931494534,
+        -0.363756061,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -42.1865196,
+        -120.255272,
+        61.0000229,
+        -0.363756061,
+        -0.931494534,
+        0,
+        0.931494534,
+        -0.363756061,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518558484,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3580,
+      "received": 3586,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3586,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3029,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12904,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 2060,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        -0.707194,
+        0.70702,
+        0,
+        -0.70702,
+        -0.707194,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9926,
+        -121.964,
+        62.6949
+      ],
+      "nativeViewOrientation": [
+        -0.711181,
+        0.699122,
+        0.0738331,
+        -0.690898,
+        -0.714474,
+        0.110392,
+        0.129929,
+        0.0274976,
+        0.991142
+      ]
+    },
+    "playerStates": {
+      "tick": 518558515,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 209
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 209,
+        "action": 2,
+        "variant": 10,
+        "character": 2,
+        "timeMs": 175,
+        "durationMs": 533,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 0,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 0,
+      "after": 0,
+      "inflicted": 0,
+      "lastAttacker": 0,
+      "blocked": 0,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 0,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          0,
+          0,
+          0
+        ],
+        "count": 0,
+        "recent": []
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190777211,
+      "distance": 2.1056849220174363,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          -0.707194,
+          0.70702,
+          0,
+          -0.70702,
+          -0.707194,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.9928,
+          -121.964,
+          62.6923
+        ],
+        "nativeViewOrientation": [
+          -0.706944,
+          0.707264,
+          -0.00294831,
+          -0.707236,
+          -0.706945,
+          -0.00679566,
+          -0.00689062,
+          -0.002719,
+          0.999973
+        ]
+      },
+      "yawError": -70.04997060028434,
+      "position": [
+        -42.1008034,
+        -120.05658,
+        61.0000229,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518559265,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518558687,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518558718,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518558734,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518558765,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518558781,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518559187,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -42.2241402,
+        -120.336754,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -42.2241402,
+        -120.336754,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518559296,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3601,
+      "received": 3607,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3607,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3050,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12951,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 2865,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        0.423613,
+        0.905843,
+        0,
+        -0.905843,
+        0.423613,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9342,
+        -121.953,
+        62.6793
+      ],
+      "nativeViewOrientation": [
+        0.424253,
+        0.905534,
+        -0.00420549,
+        -0.905543,
+        0.424255,
+        -0.000371516,
+        0.00144778,
+        0.00396587,
+        0.999991
+      ]
+    },
+    "playerStates": {
+      "tick": 518559312,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 210
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 210,
+        "action": 2,
+        "variant": 11,
+        "character": 2,
+        "timeMs": 425,
+        "durationMs": 2133,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 1,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 56,
+      "after": 56,
+      "inflicted": 0,
+      "lastAttacker": 190777211,
+      "blocked": 1,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 1,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          1,
+          0,
+          0
+        ],
+        "count": 1,
+        "recent": [
+          {
+            "tick": 518559375,
+            "thread": 95064,
+            "attacker": 190777211,
+            "result": 0,
+            "heavy": 0,
+            "window": 0,
+            "gate": 1,
+            "linger": 0,
+            "relay": true
+          }
+        ]
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190777211,
+      "distance": 1.1308040002468316,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          0.402891,
+          0.915248,
+          0,
+          -0.915248,
+          0.402891,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.9119,
+          -121.898,
+          62.6843
+        ],
+        "nativeViewOrientation": [
+          0.397247,
+          0.900354,
+          -0.177645,
+          -0.917708,
+          0.390278,
+          -0.0741267,
+          0.00259069,
+          0.192473,
+          0.981299
+        ]
+      },
+      "yawError": 0.025225689665361983,
+      "position": [
+        -42.4558868,
+        -120.86322,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518559765,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518559468,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518559500,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518559515,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518559546,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518559562,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518559687,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -42.4558868,
+        -120.86322,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -42.4558868,
+        -120.86322,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518559781,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3612,
+      "received": 3617,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3617,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3060,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12973,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 3358,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        0.402891,
+        0.915248,
+        0,
+        -0.915248,
+        0.402891,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9204,
+        -121.918,
+        62.6912
+      ],
+      "nativeViewOrientation": [
+        0.398879,
+        0.904124,
+        -0.153151,
+        -0.915191,
+        0.402995,
+        -0.00452467,
+        0.0576281,
+        0.141967,
+        0.988192
+      ]
+    },
+    "playerStates": {
+      "tick": 518559812,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": false,
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "incoming": {
+      "experimental": true,
+      "enabled": true,
+      "result": "active_native_sword",
+      "nonce": 1,
+      "event": 0,
+      "consumed": 1,
+      "acked": 0,
+      "pending": 0,
+      "captured": 0,
+      "replicaBlocked": 0,
+      "sent": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 5,
+      "before": 56,
+      "after": 56,
+      "inflicted": 0,
+      "lastAttacker": 190777211,
+      "blocked": 1,
+      "parryLose": 0,
+      "parryWin": 0,
+      "reactions": 0,
+      "reactionFailures": 0,
+      "lastDefense": 1,
+      "entries": [
+        {
+          "arm": 1,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 2,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 3,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 4,
+          "peerNonce": 1,
+          "ready": true
+        },
+        {
+          "arm": 5,
+          "peerNonce": 1,
+          "ready": true
+        }
+      ],
+      "blowback": {
+        "applied": 0,
+        "failures": 0,
+        "replicaFx": 0,
+        "replicaFxFailures": 0,
+        "lastAmount": -1,
+        "lastInflicted": -1,
+        "lastResult": "none"
+      },
+      "defenseObserver": {
+        "hooked": true,
+        "native": [
+          0,
+          0,
+          0
+        ],
+        "relayed": [
+          1,
+          0,
+          0
+        ],
+        "count": 1,
+        "recent": [
+          {
+            "tick": 518559375,
+            "thread": 95064,
+            "attacker": 190777211,
+            "result": 0,
+            "heavy": 0,
+            "window": 0,
+            "gate": 1,
+            "linger": 0,
+            "relay": true
+          }
+        ]
+      },
+      "session": {
+        "enabled": true,
+        "waitingCheckpoint": false,
+        "terminal": false,
+        "renewals": 0,
+        "terminalBlocked": 0,
+        "retired": "none"
+      }
+    },
+    "defenseAim": {
+      "target": 190777211,
+      "distance": 1.4974595273866391,
+      "view": {
+        "pid": 46868,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1c43368ed30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1c3fab96b80",
+        "auxiliaryDefinition": "0x1c3f689c0f0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -42.9563,
+          -122,
+          61.0037
+        ],
+        "candidateOrientation": [
+          0.402891,
+          0.915248,
+          0,
+          -0.915248,
+          0.402891,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -42.9196,
+          -121.917,
+          62.6927
+        ],
+        "nativeViewOrientation": [
+          0.398998,
+          0.904742,
+          -0.149136,
+          -0.915007,
+          0.403438,
+          -0.000526506,
+          0.0596907,
+          0.13667,
+          0.988817
+        ]
+      },
+      "yawError": -1.064029863659016,
+      "position": [
+        -42.29002,
+        -120.558319,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "avatarHealth": {
+      "tick": 518560250,
+      "handle": 209916411,
+      "logic": 1,
+      "component": "0x1e1c4e74148",
+      "actor": "0x1e1d770c2a0",
+      "attributes": "0x1e1d7bdc910",
+      "current": 37,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 1,
+      "suppressedIndex": -1,
+      "attributeCount": 3,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "pid": 6312,
+      "handle": "0xb5f077b",
+      "actor": "0x1e1d7e91360",
+      "component": "0x1e1d7b80bf0",
+      "manager": "0x1e197331d80",
+      "registry": "0x1e19749eb30",
+      "tree": "0x0",
+      "flags": "0xa000000a",
+      "pauseReferences": 0,
+      "pauseState": 0,
+      "started": true,
+      "schedulerActive": true,
+      "idleState": 0,
+      "idleAutoPlay": 0,
+      "poolIndex": 22,
+      "liveCount": 38,
+      "activeCount": 3,
+      "activeIndices": [
+        19,
+        22,
+        24
+      ]
+    },
+    "allTargets": [
+      {
+        "tick": 518559968,
+        "handle": 189269860,
+        "logic": 1,
+        "component": "0x1e1d7bf2290",
+        "actor": "0x1e1d7e91ed0",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518559984,
+        "handle": 190252915,
+        "logic": 1,
+        "component": "0x1e1d7bfd550",
+        "actor": "0x1e1d7e93980",
+        "combat": {
+          "handle": 1073676304,
+          "resolved": false,
+          "flags": 0,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": []
+      },
+      {
+        "tick": 518560015,
+        "handle": 190318452,
+        "logic": 1,
+        "component": "0x1e1d7bfe590",
+        "actor": "0x1e1d7e944f0",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190777211,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518560046,
+        "handle": 190777211,
+        "logic": 1,
+        "component": "0x1e1d7c01650",
+        "actor": "0x1e1d7e91360",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 190318452,
+            "resolved": true,
+            "flags": 321,
+            "perceived": 0,
+            "cached": 0
+          },
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      },
+      {
+        "tick": 518560062,
+        "handle": 190973822,
+        "logic": 1,
+        "component": "0x1e1d7c036d0",
+        "actor": "0x1e1d81ceb20",
+        "combat": {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 3,
+          "cached": 3
+        },
+        "attention": [
+          {
+            "handle": 1,
+            "resolved": true,
+            "flags": 251,
+            "perceived": 2,
+            "cached": 2
+          },
+          {
+            "handle": 209916411,
+            "resolved": true,
+            "flags": 379,
+            "perceived": 2,
+            "cached": 2
+          }
+        ]
+      }
+    ],
+    "targets": {
+      "tick": 518560171,
+      "handle": 190777211,
+      "logic": 1,
+      "component": "0x1e1d7c01650",
+      "actor": "0x1e1d7e91360",
+      "combat": {
+        "handle": 209916411,
+        "resolved": true,
+        "flags": 379,
+        "perceived": 3,
+        "cached": 3
+      },
+      "attention": [
+        {
+          "handle": 190318452,
+          "resolved": true,
+          "flags": 321,
+          "perceived": 0,
+          "cached": 0
+        },
+        {
+          "handle": 1,
+          "resolved": true,
+          "flags": 251,
+          "perceived": 2,
+          "cached": 2
+        },
+        {
+          "handle": 209916411,
+          "resolved": true,
+          "flags": 379,
+          "perceived": 2,
+          "cached": 2
+        }
+      ]
+    },
+    "pose": {
+      "handle": 190777211,
+      "stable": true,
+      "root": [
+        -42.1572533,
+        -120.365166,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ],
+      "render": [
+        -42.1572533,
+        -120.365166,
+        61.0000267,
+        -0.402886152,
+        -0.915250301,
+        0,
+        0.915250301,
+        -0.402886152,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "clientPlayerHealth": {
+      "tick": 518560265,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1c44338a010",
+      "actor": "0x1c43368ed30",
+      "attributes": "0x1c443215380",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bridge": {
+      "role": 0,
+      "engineThread": 4608,
+      "screenTransportPumps": 9761,
+      "nativeInterface": "SteamNetworkingSockets012",
+      "steamAvailable": true,
+      "listener": 65536,
+      "connection": 1777381093,
+      "connectionState": 3,
+      "sent": 3617,
+      "received": 3623,
+      "rejected": 0,
+      "lastCommand": 960188386,
+      "localPoseAvailable": true,
+      "localPosition": [
+        -33.0,
+        -153.0,
+        66.403648
+      ],
+      "remotePoseAvailable": true,
+      "remoteFresh": true,
+      "remoteSequence": 3623,
+      "remotePosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeActorHandle": 209916411,
+      "probeFollowEnabled": true,
+      "probeFollowExact": true,
+      "probeRenderPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "probeOffset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "remoteActorImplemented": false,
+      "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "localMapId": "b09f633a29a020cc",
+      "localEpoch": 16,
+      "remoteMapId": "b09f633a29a020cc",
+      "remoteEpoch": 16,
+      "localGameLogicState": 1,
+      "localPendingGameLogicState": 0,
+      "remoteGameLogicState": 1,
+      "remotePendingGameLogicState": 0,
+      "localCinematicMetadataValid": 1,
+      "localCinematicNodeCount": 0,
+      "localCinematicSignature": "0",
+      "remoteCinematicMetadataValid": 1,
+      "remoteCinematicNodeCount": 0,
+      "remoteCinematicSignature": "0",
+      "localCinematicEpoch": 11,
+      "remoteCinematicEpoch": 9,
+      "cinematicSyncEnabled": true,
+      "remoteCinematicSyncEnabled": 1,
+      "localCinematicCanSkip": 0,
+      "remoteCinematicCanSkip": 0,
+      "nativeSkipCallbacks": 2,
+      "skipSent": 2,
+      "skipReceived": 0,
+      "skipApplied": 0,
+      "skipDropped": 0,
+      "localSkipSceneId": "0",
+      "remoteSkipSceneId": "0",
+      "nativeSkipThread": 4608,
+      "poseProtocol": 11,
+      "posePacketBytes": 1164,
+      "localSequenceMetadataValid": 1,
+      "localSequenceCount": 0,
+      "localSequenceSignature": "0",
+      "localSequenceBoundaryId": "0",
+      "remoteSequenceMetadataValid": 1,
+      "remoteSequenceCount": 0,
+      "remoteSequenceSignature": "0",
+      "remoteSequenceBoundaryId": "0",
+      "localPlayerStanceValid": 1,
+      "localPlayerStance": 0,
+      "remotePlayerStanceValid": 1,
+      "remotePlayerStance": 0,
+      "localPlayerMotionValid": 1,
+      "localPlayerMotion": 0,
+      "remotePlayerMotionValid": 1,
+      "remotePlayerMotion": 0,
+      "receivedPlayerMotions": [
+        3066,
+        0,
+        0,
+        0
+      ],
+      "cinematicHoldActive": false,
+      "cinematicHoldId": 0,
+      "cinematicHoldStarted": 0,
+      "cinematicHoldResumed": 0,
+      "cinematicHoldAbandoned": 0,
+      "localSequenceTimeMs": 0,
+      "localSequencePaused": 0,
+      "remoteSequenceTimeMs": 0,
+      "remoteSequencePaused": 0,
+      "barrierEnabled": 1,
+      "barrierHeld": 0,
+      "remoteBarrierEnabled": 1,
+      "remoteBarrierHeld": 0,
+      "barrierStarted": 0,
+      "barrierReleased": 0,
+      "barrierTimedOut": 0,
+      "barrierMissed": 0,
+      "barrierSent": 0,
+      "barrierReceived": 0,
+      "barrierRejected": 0,
+      "poseSmoothingEnabled": true,
+      "poseInterpolationMs": 80.0,
+      "probeTargetPosition": [
+        -42.956299,
+        -122.0,
+        61.003677
+      ],
+      "locomotionEnabled": true,
+      "locomotionApplied": 12986,
+      "locomotionRefused": 0,
+      "locomotionSpeed": 0.0,
+      "bodyProbeApplied": 0,
+      "bodyProbeRefused": 0,
+      "bodyProbeThread": 0,
+      "bodyStreamEnabled": false,
+      "bodyStreamApplied": 0,
+      "localBodyPoseValid": 1,
+      "remoteBodyPoseValid": 1,
+      "nativeCrouchReferenceReady": false,
+      "nativeCrouchJointCount": 0,
+      "bodyCrouchHelpersApplied": 0,
+      "bodyCrouchUpright": false,
+      "bodyPublicationAddress": "0x7ffa03204608",
+      "aiHoldActive": false,
+      "aiHoldHandle": 0,
+      "aiHoldStarted": 0,
+      "aiHoldReleased": 0,
+      "aiHoldRefused": 0,
+      "aiHoldInvalidated": 0,
+      "aiHoldResult": "idle"
+    },
+    "ms": 3852,
+    "view": {
+      "pid": 46868,
+      "active": 1,
+      "localIndex": -1,
+      "alternate": 0,
+      "player": "0x1c43368ed30",
+      "gameVtableRva": "0x1c940a8",
+      "spawnMethodRva": "0x8a78f0",
+      "auxiliaryEntity": "0x1c3fab96b80",
+      "auxiliaryDefinition": "0x1c3f689c0f0",
+      "viewListFlags": "0x5000001",
+      "candidatePosition": [
+        -42.9563,
+        -122,
+        61.0037
+      ],
+      "candidateOrientation": [
+        0.402891,
+        0.915248,
+        0,
+        -0.915248,
+        0.402891,
+        0,
+        0,
+        0,
+        1
+      ],
+      "nativeViewPosition": [
+        -42.9195,
+        -121.916,
+        62.6937
+      ],
+      "nativeViewOrientation": [
+        0.398998,
+        0.904742,
+        -0.149136,
+        -0.915007,
+        0.403438,
+        -0.000526506,
+        0.0596907,
+        0.13667,
+        0.988817
+      ]
+    },
+    "playerStates": {
+      "tick": 518560296,
+      "game": "0x1c418dff050",
+      "player": "0x1c43368ed30",
+      "machine": "0x1c443225420",
+      "mode": "0x1c462cd3020",
+      "stance": 0,
+      "defaultMode": true,
+      "motionValid": true,
+      "motion": 0,
+      "position": [
+        -42.9562988,
+        -122,
+        61.0036774
+      ],
+      "active": [
+        {
+          "id": 0,
+          "vtableRva": "0x1c85628",
+          "type": ".?AVarkPlayerStateRunning@@"
+        },
+        {
+          "id": 44,
+          "vtableRva": "0x1c81a68",
+          "type": ".?AVarkPlayerStateBlock@@",
+          "sequence24Research": 216
+        }
+      ],
+      "chokeSceneValid": false,
+      "keyholeSceneValid": false,
+      "keyholeReaderStage": 1,
+      "landingSceneValid": false,
+      "combatSceneValid": true,
+      "combatScene": {
+        "handle": 216,
+        "action": 2,
+        "variant": 11,
+        "character": 2,
+        "timeMs": 375,
+        "durationMs": 2133,
+        "asset": "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene",
+        "subscene": "Scene_1",
+        "targetHandle": 0,
+        "targetSpawner": ""
+      },
+      "vaultSceneValid": false,
+      "traversalSceneValid": false,
+      "traversalReaderStage": 1,
+      "equipmentSceneValid": false,
+      "powerSceneValid": false,
+      "rangedSceneValid": false,
+      "carrySceneValid": false,
+      "carryThrowResearchValid": false,
+      "vaultSensorResearch": {
+        "front38": 0,
+        "clearF0": 0,
+        "minSpeed70": 3.6500001,
+        "valuesF4to10c": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "velocityCandidate33c": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  }
+]

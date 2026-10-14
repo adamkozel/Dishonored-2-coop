@@ -1,0 +1,86 @@
+
+void FUN_14074bbf0(longlong param_1,longlong param_2)
+
+{
+  char *pcVar1;
+  int iVar2;
+  longlong lVar3;
+  longlong *plVar4;
+  longlong *plVar5;
+  char cVar6;
+  bool bVar7;
+  char cVar8;
+  float fVar9;
+  
+  lVar3 = FUN_1403da910(param_1 + 0xe8,0);
+  pcVar1 = *(char **)(param_2 + 8);
+  plVar4 = (longlong *)FUN_1406df6d0(param_1 + 0x40,*(undefined4 *)(param_1 + 0x48));
+  iVar2 = (**(code **)(*plVar4 + 0x28))(plVar4);
+  if (iVar2 != 1) {
+    if (*(int *)(param_1 + 0x4c) != 1) {
+      return;
+    }
+    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(param_1 + 0x48);
+    if (lVar3 == 0) {
+      return;
+    }
+    if (*(int *)(lVar3 + 0x4c) != 1) {
+      return;
+    }
+    *(undefined4 *)(lVar3 + 0x4c) = *(undefined4 *)(lVar3 + 0x48);
+    return;
+  }
+  if (*(char *)((longlong)plVar4 + 0x13) != *pcVar1) {
+    return;
+  }
+  plVar5 = (longlong *)FUN_1406df6d0(param_1 + 0x40,*(undefined4 *)(param_1 + 0x48));
+  iVar2 = (**(code **)(*plVar5 + 0x28))(plVar5);
+  if (iVar2 == 0) {
+    fVar9 = 0.0;
+LAB_14074bcbd:
+    if ((pcVar1[1] != '\0') || (0.25 < fVar9)) {
+      iVar2 = 0;
+      cVar6 = '\x01';
+      goto LAB_14074bcfd;
+    }
+    iVar2 = 3;
+  }
+  else {
+    iVar2 = (**(code **)(*plVar5 + 0x28))(plVar5);
+    fVar9 = 1.0;
+    if ((iVar2 != 2) &&
+       (fVar9 = 1.0 - *(float *)((longlong)plVar5 + 0x2c), 1 < *(uint *)(plVar5 + 5)))
+    goto LAB_14074bcbd;
+    if ((pcVar1[1] == '\0') && (fVar9 < 0.25)) {
+      iVar2 = 3;
+      cVar6 = '\x01';
+      goto LAB_14074bcfd;
+    }
+    iVar2 = 0;
+  }
+  cVar6 = *(char *)((longlong)plVar4 + 0x11);
+LAB_14074bcfd:
+  cVar8 = *(char *)((longlong)plVar4 + 0x12);
+  if (((char)plVar4[2] == '\0') && (*(char *)((longlong)plVar4 + 0x11) == '\0')) {
+    bVar7 = false;
+  }
+  else {
+    bVar7 = true;
+  }
+  if (bVar7 == (iVar2 == 0)) {
+    if (cVar6 == '\0') {
+      return;
+    }
+  }
+  else {
+    cVar8 = cVar8 == '\0';
+  }
+  FUN_14074d7a0(param_1,iVar2,cVar8);
+  lVar3 = FUN_1403da910(param_1 + 0xe8,0);
+  if (lVar3 != 0) {
+    FUN_14074d7a0(lVar3,iVar2,cVar8 == '\0');
+  }
+  return;
+}
+
+

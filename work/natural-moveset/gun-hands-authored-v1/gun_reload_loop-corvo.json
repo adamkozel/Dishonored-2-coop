@@ -1,0 +1,131 @@
+{
+  "id": "gun_reload_loop-corvo",
+  "role": "corvo",
+  "binary": "gun-hands-authored-v1\\gun_reload_loop-corvo.bin",
+  "sha256": "55559bca272c91a482a0e72eb1a8bb06c72e17b51ff9698a1800d33eeaf222e0",
+  "frames": 5,
+  "fps": 60,
+  "duration": 0.06666666666666667,
+  "joints": 215,
+  "layout_hash": 61698903717286687,
+  "root_track": [
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "root_track_semantics": "Offline demonstration only; replicated gameplay owns world position",
+  "selection": {
+    "alias": "gun_reload_loop",
+    "family": "ranged_and_items",
+    "purpose": "Native whole-body gun acting with native finger articulation and hand-local prop reference; no camera-space wrist target. Gameplay binding and remote mechanism animation pending."
+  },
+  "source": {
+    "body_alias": "sword_gun_reload",
+    "body_sha256": "9515f92314560b2a5e16167949fb53e3ed4b5c9a908b83105a514c3c2c6b3561",
+    "hand_asset": "models/characters/player/_animations_/corvo/leftarm/ply_leftarm_gun_reload_loop.md6anim",
+    "hand_sample_sha256": "de6cc2a16e93343533e232efce2b822e061bc382d2692c94af011e970009e455"
+  },
+  "equipment_policy": "sword_ready",
+  "first_person_constraints": false,
+  "events": false,
+  "root_writes": false,
+  "native_length_error": 2.9802322387695365e-08,
+  "visual_accepted": false,
+  "runtime_verified": false,
+  "props": [
+    {
+      "kind": "gun_corvo",
+      "parent_joint": 9,
+      "attachment_track": [
+        [
+          0.6685986518859863,
+          0.3218880593776703,
+          0.413283109664917,
+          0.5277887582778931,
+          0.01293499581515789,
+          0.0407889187335968,
+          -0.030751116573810577
+        ],
+        [
+          0.6685985922813416,
+          0.32188811898231506,
+          0.413283109664917,
+          0.5277888178825378,
+          0.012934982776641846,
+          0.0407889224588871,
+          -0.03075111098587513
+        ],
+        [
+          0.6685986518859863,
+          0.3218880891799927,
+          0.41328316926956177,
+          0.5277887582778931,
+          0.012934979982674122,
+          0.0407889150083065,
+          -0.030751099810004234
+        ],
+        [
+          0.6685986518859863,
+          0.3218880593776703,
+          0.413283109664917,
+          0.5277887582778931,
+          0.012934964150190353,
+          0.04078894108533859,
+          -0.030751146376132965
+        ],
+        [
+          0.6685986518859863,
+          0.3218880593776703,
+          0.413283109664917,
+          0.5277887582778931,
+          0.01293499581515789,
+          0.0407889187335968,
+          -0.030751116573810577
+        ]
+      ],
+      "events": false
+    }
+  ]
+}

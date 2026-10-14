@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\n/* Project scope: exact retail executable only. Confirmed findings have bounded static/runtime\r\n   evidence; imported hypotheses are unverified. See analysis/ghidra/native-findings.json. No\r\n   complete campaign, general combat, Emily equipment, or online session claim. */\r\n\r\nfloat D2_Health_GetRatio(D2_HealthPartial *health)\r\n\r\n{\r\n  float fVar1;\r\n  \r\n  fVar1 = (float)(**(code **)(health->vtable + 0xd8))();\r\n  if (0.0 < fVar1) {\r\n    return health->currentHealth / fVar1;\r\n  }\r\n  return 0.0;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\n/* Project scope: exact retail executable only. Confirmed findings have bounded static/runtime\r\n   evidence; imported hypotheses are unverified. See analysis/ghidra/native-findings.json. No\r\n   complete campaign, general combat, Emily equipment, or online session claim. */\r\n\r\nfloat D2_Health_GetRatio(D2_HealthPartial *health)\r\n\r\n{\r\n  float fVar1;\r\n  \r\n  fVar1 = (float)(**(code **)(health->vtable + 0xd8))();\r\n  if (0.0 < fVar1) {\r\n    return health->currentHealth / fVar1;\r\n  }\r\n  return 0.0;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

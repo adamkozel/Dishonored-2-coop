@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-13T11:19:29.233363+02:00",
+  "passed": true,
+  "candidate": "candidate-read-note-v670",
+  "dll": "43DA35D5BA6DFEDE85A6C9FE90BA2813C77F3E3F905015E5AA41C398AB6AD56E",
+  "probe": "C687281CCB9709552BD1EF9ABC99A7C7C13DF26EFD0FACFD070191DD8B150BB3",
+  "cases": [
+    {
+      "take": "native-interactions-corvo-note-v671",
+      "role": "host",
+      "checks": [
+        "Exact build completed with both inventories, health and14 protected files restored",
+        "Actual native ReadNote4 and exact RTTI/vtable observed for sustained UI interval",
+        "Ordinary gameplay and live presentation preceded reading",
+        "Both actor handles, world epochs and maps retained through native UI and recovery",
+        "Movement/action presentation remained suspended while native note UI was open",
+        "Both streams and receiver movement resumed automatically after closing native UI",
+        "Recovery uses fresh source and receiver handshake tokens",
+        "Unchanged bank67 recovered to full standing presentation",
+        "No resume fault or substituted animation bank",
+        "Exact source note collected through native UI interaction"
+      ],
+      "samples": 96,
+      "nativeNoteSamples": 43,
+      "bodyResumeAfterFirstGameplayMs": 2769,
+      "fullWeightAfterFirstGameplayMs": 3652,
+      "bodyVisibilityVerified": false,
+      "passed": true
+    },
+    {
+      "take": "native-interactions-emily-note-v672",
+      "role": "client",
+      "checks": [
+        "Exact build completed with both inventories, health and14 protected files restored",
+        "Actual native ReadNote4 and exact RTTI/vtable observed for sustained UI interval",
+        "Ordinary gameplay and live presentation preceded reading",
+        "Both actor handles, world epochs and maps retained through native UI and recovery",
+        "Movement/action presentation remained suspended while native note UI was open",
+        "Both streams and receiver movement resumed automatically after closing native UI",
+        "Recovery uses fresh source and receiver handshake tokens",
+        "Unchanged bank67 recovered to full standing presentation",
+        "No resume fault or substituted animation bank",
+        "Exact source note collected through native UI interaction"
+      ],
+      "samples": 95,
+      "nativeNoteSamples": 41,
+      "bodyResumeAfterFirstGameplayMs": 2941,
+      "fullWeightAfterFirstGameplayMs": 3739,
+      "bodyVisibilityVerified": false,
+      "passed": true
+    }
+  ],
+  "checks": 20,
+  "bodyVisibilityVerified": false,
+  "complete": false,
+  "visualAccepted": false,
+  "scope": "Ordinary native note UI and same-world automatic body recovery only. No authored reading gesture, document-state replication, shared UI, load/death recovery or complete movement claim."
+}

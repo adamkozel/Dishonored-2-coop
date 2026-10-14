@@ -1,0 +1,77 @@
+# partner-context-1403b00a0-decompile-v384.txt
+
+Original: [work/movement-integration/partner-context-1403b00a0-decompile-v384.txt](<../../../../work/movement-integration/partner-context-1403b00a0-decompile-v384.txt>)
+
+SHA-256: `BA8DDE1C3D310E45CCFF9BA7AE1F38C4E730A18C8113EF6A9168C6D412F98D84`; 1530 bytes.
+
+## Original saved record
+
+````text
+
+ulonglong FUN_1403b00a0(undefined8 param_1,longlong param_2)
+
+{
+  byte bVar1;
+  byte bVar2;
+  bool bVar3;
+  bool bVar4;
+  char cVar5;
+  char cVar6;
+  int iVar7;
+  ulonglong in_RAX;
+  longlong lVar8;
+  longlong lVar9;
+  longlong *plVar10;
+  uint uVar11;
+  uint uVar12;
+  bool bVar13;
+  
+  if (param_2 == 0) {
+    return in_RAX & 0xffffffffffffff00;
+  }
+  lVar8 = FUN_1408f2e50(param_2);
+  bVar1 = *(byte *)(lVar8 + 0x368);
+  lVar9 = FUN_140877720(param_2,&DAT_1439e2a00,2);
+  if (lVar9 == 0) {
+code_r0x0001403b0122:
+    bVar13 = false;
+  }
+  else {
+    plVar10 = (longlong *)FUN_1405f7150(lVar9);
+    if (plVar10 == (longlong *)0x0) goto code_r0x0001403b0122;
+    cVar5 = (**(code **)(*plVar10 + 0x20))(plVar10);
+    bVar13 = cVar5 == '\0';
+  }
+  bVar2 = *(byte *)(param_2 + 0xd1);
+  cVar5 = FUN_1403b0000(param_1,*(undefined4 *)(param_2 + 0xa8));
+  lVar9 = FUN_140877720(param_2,&DAT_1439ba280,2);
+  uVar11 = 0;
+  if (lVar9 == 0) {
+    bVar3 = false;
+  }
+  else {
+    iVar7 = FUN_1407659c0(lVar9,0,2);
+    bVar3 = 0x17 < iVar7;
+  }
+  lVar9 = FUN_140877720(param_2,&DAT_1439e27c0,2);
+  if (lVar9 != 0) {
+    cVar6 = FUN_1405bfbb0(param_2);
+    if (cVar6 != '\0') {
+      bVar4 = true;
+      goto code_r0x0001403b01b3;
+    }
+  }
+  bVar4 = false;
+code_r0x0001403b01b3:
+  cVar6 = FUN_1403ee810(lVar8);
+  uVar12 = 0;
+  if ((((!bVar4) && (uVar12 = uVar11, !bVar3)) && ((bVar1 & 1) != 0)) &&
+     (((!bVar13 && ((~(bVar2 >> 3) & 1) != 0)) && ((cVar5 == '\0' && (cVar6 == '\0')))))) {
+    uVar12 = 1;
+  }
+  return (ulonglong)uVar12;
+}
+
+
+
+````

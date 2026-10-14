@@ -1,0 +1,8 @@
+[
+  {
+    "address": "14074ac50",
+    "category": "NativeDoorOpenSide",
+    "comment": "Exact Steam executable B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180. Native autoclose requires cp+0x48==2, then gets active Open state via1406df6d0 and reads state+0x10 (=cp+0xc8). Ordinary interaction14074b6e0 also reads it only while Open; Closed computes opening side geometrically; Moving uses cp+0x92. Read-only727: closed big-rich-window_0_4 host cp+c8=0xf0/client0, causing725 catalog host5/client6.728 canonicalizes snapshot side0 outside Open, retains active-Open <=1 guard, never writes inactive native state.729-734 verify six paired eligible doors/four excluded, actual cycles on two wooden doors, both source roles and both sequential operator orders. New closed door's first native interaction not yet exercised, and construction/serialization of0xf0 is not traced.735 audit and57-native-door-catalog-and-traversal.md retain limits.",
+    "type": "Note"
+  }
+]

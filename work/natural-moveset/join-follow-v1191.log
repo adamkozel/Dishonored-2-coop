@@ -1,0 +1,37 @@
+{
+  "scope": "Client follows the host into Edge of the World natively (host-only load command); Dunwall fixture restored.",
+  "cases": [
+    {
+      "clientFollow": {
+        "enabled": true,
+        "result": "same_mission",
+        "hostMapinfo": "campaign/edge_of_the_world/eotw.mapinfo",
+        "hostHigh": 0,
+        "hostMap": "6963703508939449882",
+        "localMap": "6963703508939449882",
+        "sent": 0,
+        "received": 14,
+        "loads": 1,
+        "refused": 0,
+        "role": 1
+      },
+      "hostFollow": {
+        "enabled": true,
+        "result": "publishing",
+        "hostMapinfo": "",
+        "hostHigh": 0,
+        "hostMap": "0",
+        "localMap": "6963703508939449882",
+        "sent": 15,
+        "received": 0,
+        "loads": 0,
+        "refused": 0,
+        "role": 0
+      },
+      "clientLoads": 1,
+      "sameMap": true
+    }
+  ],
+  "failure": null,
+  "passed": true
+}

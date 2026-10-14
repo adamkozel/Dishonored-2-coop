@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "stance": "airborne",
+  "leftY": 12000,
+  "interruption": "none",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Native cook entry, cook loop, release and empty recovery drive remote whole-body clips on source clock",
+    "Cosmetic grenade disappears at release and stays hidden through empty recovery and native standing",
+    "Duplicate packet sent during native cook; prop remains one cached native entity",
+    "Exact six-joint native mechanism changes from idle to cook and stops writing after release without animation events",
+    "One owned native in-hand spark/light/audio effect follows the remote cosmetic grenade and stops at release; duplicate packet does not restart it",
+    "Native idle jump retains the held grenade and existing airborne body motion",
+    "Exact native jump and fall overlap cooking/release; receiver combines grenade gesture with airborne body motion",
+    "Landing and empty recovery finish while both Steam streams retain the same tokens",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.824,
+      "input": "Native jump with idle held grenade"
+    },
+    {
+      "videoTime": 2.291,
+      "input": "Cook grenade after idle jump landing",
+      "leftY": 12000,
+      "pitch": 0,
+      "actualPitch": -0.014844248018093871
+    },
+    {
+      "videoTime": 3.024,
+      "input": "Native second jump while cooking"
+    },
+    {
+      "videoTime": 3.441,
+      "input": "Native trigger release during jump/fall"
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene"
+  ],
+  "dll": "28F1DB269BD455B85D6CA86C34F13DBD007C3EFDF7DCFB6F468911C10E6FC0AF",
+  "probe": "35DE9C4E568AC47FAA6F9E0975972090712CC5302F9E3B25DE36263D169BDEC7",
+  "finalDll": "28F1DB269BD455B85D6CA86C34F13DBD007C3EFDF7DCFB6F468911C10E6FC0AF",
+  "scope": "Airborne native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}

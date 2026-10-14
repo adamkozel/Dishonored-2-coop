@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "stance": "crouched",
+  "leftY": 0,
+  "checks": [
+    "One native grenade selected and requested native stance confirmed",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.965,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0,
+      "stance": "crouched",
+      "leftY": 0
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene"
+  ],
+  "dll": "129137DA59399401ACFFC7CF9CD41244C43D18FD737DC37A3BA6CA2D5D411DB2",
+  "probe": "374BD0B5F7D41D596B94B661A4E3CE68436CCE6F64F417BF447C3D7743A38332",
+  "scope": "Source native one-grenade action observation only. Real native projectile/world effects are reset through the isolated checkpoints. No remote grenade animation, damage authority or projectile replication is claimed."
+}

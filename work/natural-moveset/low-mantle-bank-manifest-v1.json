@@ -1,0 +1,84 @@
+[
+  {
+    "role": "corvo",
+    "bank": "low-mantle-banks-v1\\corvo-low-mantle-bank.bin",
+    "sha256": "0d7dce396d6049f5f5f14ff84da255eb75a024ef5372c198b3175ab837b1676a",
+    "format": "D2MOVE12",
+    "clips": 113,
+    "prior_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 111,
+        "alias": "armed_native_low_mantle",
+        "source": "native-retargeted\\7f3d9466f7880bc9-corvo.bin",
+        "source_sha256": "fb0eb9c03da4b4ede533e3863c721d528b3db6fe478904ad306cbd5f8a5c563f",
+        "donor_frames": [
+          10,
+          30
+        ],
+        "native_duration_ms": 500
+      },
+      {
+        "id": 112,
+        "alias": "unarmed_native_low_mantle",
+        "source": "native-retargeted\\7f3d9466f7880bc9-corvo.bin",
+        "source_sha256": "fb0eb9c03da4b4ede533e3863c721d528b3db6fe478904ad306cbd5f8a5c563f",
+        "donor_frames": [
+          10,
+          30
+        ],
+        "native_duration_ms": 500
+      }
+    ],
+    "events": false,
+    "root_writes": false,
+    "gameplay_verified": false,
+    "visual_accepted": false,
+    "limitations": [
+      "Only the observed mantle_low_idle Scene_1 variant.",
+      "No ledge contact constraints yet.",
+      "Cropped native donor has a different original root trajectory; live visual comparison is required before acceptance."
+    ]
+  },
+  {
+    "role": "emily",
+    "bank": "low-mantle-banks-v1\\emily-low-mantle-bank.bin",
+    "sha256": "bb087b8250daf99a5067fcd9afcf3da12e9a4370c423f8e6848a7fbadf923dc0",
+    "format": "D2MOVE12",
+    "clips": 113,
+    "prior_payload_unchanged": true,
+    "sources": [
+      {
+        "id": 111,
+        "alias": "armed_native_low_mantle",
+        "source": "native-retargeted\\7f3d9466f7880bc9-emily.bin",
+        "source_sha256": "d079593de8d9fbf1d676702649ca37ec44c328944086ba9f419a0a407e40f6b7",
+        "donor_frames": [
+          10,
+          30
+        ],
+        "native_duration_ms": 500
+      },
+      {
+        "id": 112,
+        "alias": "unarmed_native_low_mantle",
+        "source": "native-retargeted\\7f3d9466f7880bc9-emily.bin",
+        "source_sha256": "d079593de8d9fbf1d676702649ca37ec44c328944086ba9f419a0a407e40f6b7",
+        "donor_frames": [
+          10,
+          30
+        ],
+        "native_duration_ms": 500
+      }
+    ],
+    "events": false,
+    "root_writes": false,
+    "gameplay_verified": false,
+    "visual_accepted": false,
+    "limitations": [
+      "Only the observed mantle_low_idle Scene_1 variant.",
+      "No ledge contact constraints yet.",
+      "Cropped native donor has a different original root trajectory; live visual comparison is required before acceptance."
+    ]
+  }
+]

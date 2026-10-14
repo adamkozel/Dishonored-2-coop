@@ -1,0 +1,67 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140765980: movsxd      rax,r8d
+  0000000140765983: add         rax,2
+  0000000140765987: add         rax,rax
+  000000014076598A: mov         eax,dword ptr [rcx+rax*8]
+  000000014076598D: mov         dword ptr [rdx],eax
+  000000014076598F: mov         rax,rdx
+  0000000140765992: ret
+  0000000140765993: int         3
+  0000000140765994: int         3
+  0000000140765995: int         3
+  0000000140765996: int         3
+  0000000140765997: int         3
+  0000000140765998: int         3
+  0000000140765999: int         3
+  000000014076599A: int         3
+  000000014076599B: int         3
+  000000014076599C: int         3
+  000000014076599D: int         3
+  000000014076599E: int         3
+  000000014076599F: int         3
+  00000001407659A0: movsxd      rax,edx
+  00000001407659A3: add         rax,rax
+  00000001407659A6: mov         eax,dword ptr [rcx+rax*8+28h]
+  00000001407659AA: ret
+  00000001407659AB: int         3
+  00000001407659AC: int         3
+  00000001407659AD: int         3
+  00000001407659AE: int         3
+  00000001407659AF: int         3
+  00000001407659B0: movsxd      rax,edx
+  00000001407659B3: add         rax,rax
+  00000001407659B6: mov         eax,dword ptr [rcx+rax*8+2Ch]
+  00000001407659BA: ret
+  00000001407659BB: int         3
+  00000001407659BC: int         3
+  00000001407659BD: int         3
+  00000001407659BE: int         3
+  00000001407659BF: int         3
+  00000001407659C0: mov         r10d,r8d
+  00000001407659C3: test        r8d,r8d
+  00000001407659C6: je          0000000140765A0A
+  00000001407659C8: mov         eax,dword ptr [rcx+1Ch]
+  00000001407659CB: and         al,3
+  00000001407659CD: cmp         al,2
+  00000001407659CF: jb          0000000140765A0A
+  00000001407659D1: mov         eax,dword ptr [rcx+0000000000000098h]
+  00000001407659D7: and         eax,0FFFFFFh
+  00000001407659DC: jle         0000000140765A0A
+  00000001407659DE: xor         r8d,r8d
+  00000001407659E1: movsxd      r9,eax
+  00000001407659E4: test        eax,eax
+  00000001407659E6: jle         0000000140765A0A
+  00000001407659E8: mov         rcx,qword ptr [rcx+0000000000000090h]
+  00000001407659EF: nop
+  00000001407659F0: 85
+
+  Summary
+
+     1A7D000 .text

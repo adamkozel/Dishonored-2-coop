@@ -1,0 +1,49 @@
+{
+  "passed": false,
+  "failure": "Remote grenade phase 5 absent",
+  "source": "host",
+  "pitch": 0,
+  "stance": "airborne",
+  "leftY": 12000,
+  "interruption": "none",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Exact native scene reader validates cooking, release and empty recovery then clears",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native action consumed the single granted grenade",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.884,
+      "input": "Native jump with idle held grenade"
+    },
+    {
+      "videoTime": 2.309,
+      "input": "Cook grenade after idle jump landing",
+      "leftY": 12000,
+      "pitch": 0,
+      "actualPitch": -0.014844248018093871
+    },
+    {
+      "videoTime": 2.924,
+      "input": "Native second jump while cooking"
+    },
+    {
+      "videoTime": 3.346,
+      "input": "Native trigger release during jump/fall"
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene"
+  ],
+  "dll": "C4AA318837D220E821F9FBF00FF3D744F39ED5AA922297914EEB57F0FC3CEAC7",
+  "probe": "35DE9C4E568AC47FAA6F9E0975972090712CC5302F9E3B25DE36263D169BDEC7",
+  "finalDll": "C4AA318837D220E821F9FBF00FF3D744F39ED5AA922297914EEB57F0FC3CEAC7",
+  "scope": "Airborne native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}

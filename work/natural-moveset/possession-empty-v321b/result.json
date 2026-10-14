@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "failure": "Native Possession scene bindings not reciprocal",
+  "source": "host",
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.271,
+      "input": "Native Corvo LT1800 then release at grounded floor"
+    }
+  ],
+  "dll": "8B612D3614CB878BF7EB19C9E89BBB8EC6E47C440DBF168D984B2039FF733620",
+  "probe": "38EAD16F9705BEE5134D6EAA3FFB0B8FAC9A040D707235C82C68BFD1DB6040D1",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; empty-target cast only; valid-target possession, remote movement/VFX/gameplay remain unverified. Checkpoint and protected save restoration mandatory."
+}

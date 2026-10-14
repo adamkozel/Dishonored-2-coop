@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-13T02:56:33.128927+02:00",
+  "candidate": "candidate-lethal-v604",
+  "dll": "7F2C0E493D64A63C4FDA59A2E901E54DE3D4C2832C12C561AD5A3297592B5DB2",
+  "probe": "E66F4971F81CF5719843619F2DE5933A9362FE62027673F0F6C1E1FE1A2DF98F",
+  "protocol": 65,
+  "bankVersion": 65,
+  "clips": 353,
+  "runtimeVerified": true,
+  "tests": [
+    {
+      "role": "corvo",
+      "result": "work\\natural-moveset\\lethal-network-corvo-v605\\result.json",
+      "checks": [
+        "Ordinary RT starts the owned native assassination scene",
+        "Exact native state13 and four owned bindings validate fast-back1333",
+        "Independent native sword equipped/started observed during lethal scene",
+        "Native Steam remote full-body lethal phase observed",
+        "Native standing recovery restores existing movement",
+        "Remote actor follows independent native source root through lethal animation",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native ordinary RT250ms behind exact authored guard2; independent source and Steam actor checks, victim/world outcome remains separate.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    },
+    {
+      "role": "emily",
+      "result": "work\\natural-moveset\\lethal-network-emily-v605\\result.json",
+      "checks": [
+        "Ordinary RT starts the owned native assassination scene",
+        "Exact native state13 and four owned bindings validate fast-back1333",
+        "Independent native sword equipped/started observed during lethal scene",
+        "Native Steam remote full-body lethal phase observed",
+        "Native standing recovery restores existing movement",
+        "Remote actor follows independent native source root through lethal animation",
+        "Remote body playback did not duplicate damage on the receiver victim",
+        "Native ordinary RT250ms behind exact authored guard2; independent source and Steam actor checks, victim/world outcome remains separate.",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ]
+    }
+  ],
+  "complete": false,
+  "visualAccepted": false,
+  "limitations": [
+    "Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete.",
+    "Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work.",
+    "Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged.",
+    "Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance.",
+    "Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution."
+  ]
+}

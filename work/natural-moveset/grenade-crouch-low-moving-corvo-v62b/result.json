@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "failure": "Insufficient item fixture lease for the full throw and recovery",
+  "source": "host",
+  "pitch": 35,
+  "stance": "crouched",
+  "leftY": 12000,
+  "interruption": "none",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [],
+  "scenes": [],
+  "dll": "CB1685DD316E9099AD551BF349987ACEADFBD1218EC8F8D89941D440CBEEAC4F",
+  "probe": "CBF8DDA86965437A9245B5288A58ABD76832BBD530D141AF5A3D1D6F39E0D512",
+  "finalDll": "CB1685DD316E9099AD551BF349987ACEADFBD1218EC8F8D89941D440CBEEAC4F",
+  "scope": "Crouched native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}

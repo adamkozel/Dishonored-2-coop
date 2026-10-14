@@ -1,0 +1,180 @@
+# ghidra-potions-v64.json
+
+Original: [work/ghidra-potions-v64.json](<../../../../work/ghidra-potions-v64.json>)
+
+SHA-256: `AFEAEB972C7EEF725254C29332146080BCACB66256ED32DAFFAC83306D5824C2`; 5602 bytes.
+
+## Original saved record
+
+````json
+{
+  "potionStrings64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"matches\":[],\"total\":0,\"offset\":0,\"limit\":40}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"matches\":[],\"total\":0,\"offset\":0,\"limit\":40}"
+    },
+    "isError": false
+  },
+  "potionStrings64b": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"matches\":[{\"address\":\"141c39640\",\"value\":\"_quickPotion\",\"encoding\":\"ascii\"}],\"total\":1,\"offset\":0,\"limit\":30}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"matches\":[{\"address\":\"141c39640\",\"value\":\"_quickPotion\",\"encoding\":\"ascii\"}],\"total\":1,\"offset\":0,\"limit\":30}"
+    },
+    "isError": false
+  },
+  "quickPotionXrefs64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "From 1406745d4 [DATA]"
+      }
+    ],
+    "structuredContent": {
+      "result": "From 1406745d4 [DATA]"
+    },
+    "isError": false
+  },
+  "quickPotionFunction64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"error\":\"No function found for 0x1406745d4\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"error\":\"No function found for 0x1406745d4\"}"
+    },
+    "isError": false
+  },
+  "quickPotionCtor64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nvoid FUN_140674590(longlong param_1,undefined8 param_2)\r\n\r\n{\r\n  *(undefined8 *)(param_1 + 0x68) = param_2;\r\n  FUN_140029a60(param_1 + 0x160,param_2,\"_masterHUD\",0);\r\n  FUN_140028b70(param_1 + 0x70,param_2,\"_C_FillHealthGauge\");\r\n  FUN_140029a60(param_1 + 0x408,param_2,\"_quickPotion\",0);\r\n  FUN_140028b70(param_1 + 0xa0,param_2,\"_C_Show\");\r\n  FUN_140028b70(param_1 + 0xd0,param_2,\"_C_Hide\");\r\n  FUN_140028b70(param_1 + 0x100,param_2,\"_C_InstantClose\");\r\n  FUN_140028b70(param_1 + 0x130,param_2,\"_C_Consume\");\r\n  return;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nvoid FUN_140674590(longlong param_1,undefined8 param_2)\r\n\r\n{\r\n  *(undefined8 *)(param_1 + 0x68) = param_2;\r\n  FUN_140029a60(param_1 + 0x160,param_2,\"_masterHUD\",0);\r\n  FUN_140028b70(param_1 + 0x70,param_2,\"_C_FillHealthGauge\");\r\n  FUN_140029a60(param_1 + 0x408,param_2,\"_quickPotion\",0);\r\n  FUN_140028b70(param_1 + 0xa0,param_2,\"_C_Show\");\r\n  FUN_140028b70(param_1 + 0xd0,param_2,\"_C_Hide\");\r\n  FUN_140028b70(param_1 + 0x100,param_2,\"_C_InstantClose\");\r\n  FUN_140028b70(param_1 + 0x130,param_2,\"_C_Consume\");\r\n  return;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  },
+  "consumeHealthXref64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "No references found to address: 0x141b6bb30"
+      }
+    ],
+    "structuredContent": {
+      "result": "No references found to address: 0x141b6bb30"
+    },
+    "isError": false
+  },
+  "consumeMsgXref64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "No references found to address: 0x141e14bd8"
+      }
+    ],
+    "structuredContent": {
+      "result": "No references found to address: 0x141e14bd8"
+    },
+    "isError": false
+  },
+  "potionSetQuantity64": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nundefined4 FUN_140618de0(longlong param_1,undefined8 param_2,undefined4 param_3)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  int iVar2;\r\n  undefined4 uVar3;\r\n  longlong lVar4;\r\n  undefined **local_res8;\r\n  undefined8 local_40;\r\n  undefined4 local_38;\r\n  undefined8 local_30;\r\n  undefined8 local_28;\r\n  undefined8 local_20;\r\n  undefined1 local_18;\r\n  undefined4 local_14;\r\n  undefined1 local_b;\r\n  \r\n  local_res8 = &PTR_FUN_141b9a840;\r\n  local_38 = 0x3fff0010;\r\n  local_30 = 0;\r\n  local_28 = 0;\r\n  local_20 = 0;\r\n  local_18 = 0;\r\n  local_14 = 0;\r\n  local_b = 1;\r\n  local_40 = param_2;\r\n  iVar2 = FUN_140618af0(&local_res8,*(undefined8 *)(param_1 + 0x38),\r\n                        *(uint *)(param_1 + 0x40) & 0xffffff,&local_40,0xfffffffffffffffe);\r\n  local_res8 = &PTR_FUN_141b9a808;\r\n  if (iVar2 < 0) {\r\n    uVar3 = 0;\r\n  }\r\n  else {\r\n    lVar4 = (longlong)iVar2 * 0x38 + *(longlong *)(param_1 + 0x38);\r\n    uVar1 = *(undefined4 *)(lVar4 + 0x20);\r\n    uVar3 = FUN_14063cc00(lVar4,param_3);\r\n    FUN_1406170b0(param_1,lVar4,uVar1,uVar3);\r\n  }\r\n  return uVar3;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nundefined4 FUN_140618de0(longlong param_1,undefined8 param_2,undefined4 param_3)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  int iVar2;\r\n  undefined4 uVar3;\r\n  longlong lVar4;\r\n  undefined **local_res8;\r\n  undefined8 local_40;\r\n  undefined4 local_38;\r\n  undefined8 local_30;\r\n  undefined8 local_28;\r\n  undefined8 local_20;\r\n  undefined1 local_18;\r\n  undefined4 local_14;\r\n  undefined1 local_b;\r\n  \r\n  local_res8 = &PTR_FUN_141b9a840;\r\n  local_38 = 0x3fff0010;\r\n  local_30 = 0;\r\n  local_28 = 0;\r\n  local_20 = 0;\r\n  local_18 = 0;\r\n  local_14 = 0;\r\n  local_b = 1;\r\n  local_40 = param_2;\r\n  iVar2 = FUN_140618af0(&local_res8,*(undefined8 *)(param_1 + 0x38),\r\n                        *(uint *)(param_1 + 0x40) & 0xffffff,&local_40,0xfffffffffffffffe);\r\n  local_res8 = &PTR_FUN_141b9a808;\r\n  if (iVar2 < 0) {\r\n    uVar3 = 0;\r\n  }\r\n  else {\r\n    lVar4 = (longlong)iVar2 * 0x38 + *(longlong *)(param_1 + 0x38);\r\n    uVar1 = *(undefined4 *)(lVar4 + 0x20);\r\n    uVar3 = FUN_14063cc00(lVar4,param_3);\r\n    FUN_1406170b0(param_1,lVar4,uVar1,uVar3);\r\n  }\r\n  return uVar3;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  }
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+void FUN_140674590(longlong param_1,undefined8 param_2)
+
+{
+  *(undefined8 *)(param_1 + 0x68) = param_2;
+  FUN_140029a60(param_1 + 0x160,param_2,"_masterHUD",0);
+  FUN_140028b70(param_1 + 0x70,param_2,"_C_FillHealthGauge");
+  FUN_140029a60(param_1 + 0x408,param_2,"_quickPotion",0);
+  FUN_140028b70(param_1 + 0xa0,param_2,"_C_Show");
+  FUN_140028b70(param_1 + 0xd0,param_2,"_C_Hide");
+  FUN_140028b70(param_1 + 0x100,param_2,"_C_InstantClose");
+  FUN_140028b70(param_1 + 0x130,param_2,"_C_Consume");
+  return;
+}
+
+
+````
+
+### text
+
+````text
+
+undefined4 FUN_140618de0(longlong param_1,undefined8 param_2,undefined4 param_3)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  longlong lVar4;
+  undefined **local_res8;
+  undefined8 local_40;
+  undefined4 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined8 local_20;
+  undefined1 local_18;
+  undefined4 local_14;
+  undefined1 local_b;
+  
+  local_res8 = &PTR_FUN_141b9a840;
+  local_38 = 0x3fff0010;
+  local_30 = 0;
+  local_28 = 0;
+  local_20 = 0;
+  local_18 = 0;
+  local_14 = 0;
+  local_b = 1;
+  local_40 = param_2;
+  iVar2 = FUN_140618af0(&local_res8,*(undefined8 *)(param_1 + 0x38),
+                        *(uint *)(param_1 + 0x40) & 0xffffff,&local_40,0xfffffffffffffffe);
+  local_res8 = &PTR_FUN_141b9a808;
+  if (iVar2 < 0) {
+    uVar3 = 0;
+  }
+  else {
+    lVar4 = (longlong)iVar2 * 0x38 + *(longlong *)(param_1 + 0x38);
+    uVar1 = *(undefined4 *)(lVar4 + 0x20);
+    uVar3 = FUN_14063cc00(lVar4,param_3);
+    FUN_1406170b0(param_1,lVar4,uVar1,uVar3);
+  }
+  return uVar3;
+}
+
+
+````

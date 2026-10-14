@@ -1,0 +1,70 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140617930: push        rbx
+  0000000140617932: push        r12
+  0000000140617934: push        r15
+  0000000140617936: sub         rsp,30h
+  000000014061793A: mov         rbx,rcx
+  000000014061793D: call        00000001407E7670
+  0000000140617942: mov         r12,qword ptr [rbx+10h]
+  0000000140617946: mov         rax,qword ptr [r12]
+  000000014061794A: mov         rcx,r12
+  000000014061794D: call        qword ptr [rax]
+  000000014061794F: mov         ecx,dword ptr [rax+60h]
+  0000000140617952: cmp         ecx,dword ptr [00000001439CE350h]
+  0000000140617958: jl          0000000140617967
+  000000014061795A: cmp         ecx,dword ptr [00000001439CE354h]
+  0000000140617960: jg          0000000140617967
+  0000000140617962: mov         r15b,1
+  0000000140617965: jmp         000000014061796A
+  0000000140617967: xor         r15b,r15b
+  000000014061796A: lea         rdx,[00000001439AE8E0h]
+  0000000140617971: mov         r8d,1
+  0000000140617977: mov         rcx,r12
+  000000014061797A: mov         qword ptr [rsp+60h],rdi
+  000000014061797F: call        0000000140877720
+  0000000140617984: lea         rcx,[rbx+00000000000000F8h]
+  000000014061798B: mov         rdx,rax
+  000000014061798E: call        00000001403DAB80
+  0000000140617993: lea         rdx,[00000001439D13B0h]
+  000000014061799A: mov         r8d,1
+  00000001406179A0: mov         rcx,r12
+  00000001406179A3: call        0000000140877720
+  00000001406179A8: lea         rcx,[rbx+0000000000000108h]
+  00000001406179AF: mov         rdx,rax
+  00000001406179B2: call        00000001403DAB80
+  00000001406179B7: lea         rdx,[00000001439AE6A0h]
+  00000001406179BE: mov         r8d,1
+  00000001406179C4: mov         rcx,r12
+  00000001406179C7: call        0000000140877720
+  00000001406179CC: lea         rcx,[rbx+0000000000000118h]
+  00000001406179D3: mov         rdx,rax
+  00000001406179D6: call        00000001403DAB80
+  00000001406179DB: mov         rdx,qword ptr [rbx+20h]
+  00000001406179DF: and         byte ptr [rbx+0000000000000190h],0FEh
+  00000001406179E6: test        rdx,rdx
+  00000001406179E9: je          0000000140617A18
+  00000001406179EB: mov         rcx,rbx
+  00000001406179EE: call        00000001406182F0
+  00000001406179F3: mov         rdi,qword ptr [rbx+20h]
+  00000001406179F7: test        rdi,rdi
+  00000001406179FA: je          0000000140617A0D
+  00000001406179FC: lea         rcx,[rdi+8]
+  0000000140617A00: call        000000014061A0A0
+  0000000140617A05: mov         rcx,rdi
+  0000000140617A08: call        00000001400F1520
+  0000000140617A0D: xor         edi,edi
+  0000000140617A0F: mov         qword ptr [rbx+20h],rdi
+  0000000140617A13: jmp         0000000140617B1E
+  0000000140617A18: mov         rax,qword ptr [rbx+8]
+  0000000140617A1C: 48
+
+  Summary
+
+     1A7D000 .text

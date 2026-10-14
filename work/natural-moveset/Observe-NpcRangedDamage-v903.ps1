@@ -1,0 +1,34 @@
+param([ValidateSet('host','client')][string]$Source='host',[ValidateSet('gun','crossbow')][string]$Kind='gun',[string]$Take='npc-ranged-observe-v903')
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$caps=@()
+function Save($p,$v){$v|ConvertTo-Json -Depth 22|Set-Content -LiteralPath $p}
+function C($r,$c){& "$lab/Send-D2Command.ps1" -Role $r -Command $c -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function I($r,$trigger=0,$ms=100,$button='Neutral'){& "$lab/Send-D2Input.ps1" -Role $r -Button $button -DurationMs $ms -LeftTrigger $trigger|Out-Null}
+function S($r,$suffix=''){Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw|ConvertFrom-Json}
+function Q($r,$mode,$arg=0){for($i=0;$i-lt8;$i++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 30};throw "Native query failed $r $mode"}
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Native operation active'}
+ if(Test-Path $out){throw 'Unique take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+ $pin=Get-Content "$root/work/movement-integration/candidate-npc-combat-v896/identity.json" -Raw|ConvertFrom-Json
+ if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw 'Wrong candidate'}
+ foreach($r in 'host','client'){$l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json;$p=Get-Process -Id $l.pid;if(!$l.assetExperiment-or$p.Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')-or[Math]::Abs(($p.StartTime-[DateTime]$l.startedAt).TotalSeconds)-gt5){throw 'Wrong isolated process'};$pids[$r]=$l.pid;if((S $r).localGameLogicState-ne1-or(S $r '.npc-combat.json').enabled){throw 'Baseline required'};Save "$out/inventory-before-$r.json" (Q $r '--player-inventory')}
+ $dirty=$true;C $Source 'coop_movement_fixture 60000';$watch=[Diagnostics.Stopwatch]::StartNew();do{$f=S $Source '.observer-isolation.json';if($f.ready){break};Start-Sleep -Milliseconds 60}while($watch.ElapsedMilliseconds-lt5000);if(!$f.ready){throw 'Source isolation unavailable'}
+ C $Source "coop_ranged_fixture ${Kind}_loaded";$watch.Restart();do{$f=S $Source '.ranged-fixture.json';if($f.result-eq'native_ranged_ready'){break};Start-Sleep -Milliseconds 60}while($watch.ElapsedMilliseconds-lt5000);if($f.result-ne'native_ranged_ready'){throw 'Ranged acquisition failed'}
+ I $Source 0 1500 X;Start-Sleep -Milliseconds 1800;I $Source 0 650 X;Start-Sleep -Milliseconds 1800;Save "$out/weapon.json" (Q $Source "--player-$Kind")
+ $world=Q $Source '--world-npcs';Save "$out/world.json" $world;$target=@($world.npcs|Where-Object spawnerName -eq 'ld_spawner_guard_escape_1');if($target.Count-ne1-or!$target[0].unique-or!$target[0].reciprocal){throw 'Target unavailable'};$handle=[Convert]::ToUInt32($target[0].handle.Replace('0x',''),16)
+ $pose=Q $Source '--npc-pose' $handle;Save "$out/target-before.json" $pose;Save "$out/health-before.json" (Q $Source '--health' $handle);$t=$pose.root
+ # Three metres behind the native target, aiming below the chest, avoiding a headshot.
+ $x=$t[0]-3*$t[3];$y=$t[1]-3*$t[4];$z=$t[2]+1.7;$yaw=[Math]::Atan2($t[4],$t[3])*180/[Math]::PI;$pitch=13.1
+ C $Source ("setviewpos {0} {1} {2} {3} {4}"-f$x,$y,$z,$yaw,$pitch);Start-Sleep -Milliseconds 350
+ $hwnd=(Get-Process -Id $pids[$Source]).MainWindowHandle.ToInt64();$args=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t','8','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$Source.mp4");$caps+=Start-Process (Get-Command ffmpeg).Source -ArgumentList $args -WindowStyle Hidden -RedirectStandardError "$out/capture.log" -RedirectStandardOutput "$out/capture.stdout" -PassThru
+ C $Source 'coop_damage_observe off';C $Source 'coop_damage_observe 60000';Start-Sleep -Milliseconds 300;I $Source 255 200;Start-Sleep -Milliseconds 1000
+ $events=S $Source '.damage.json';Save "$out/damage.json" $events;Save "$out/health-after.json" (Q $Source '--health' $handle);Save "$out/player-after.json" (Q $Source '--health' 1);Save "$out/isolation-after.json" (S $Source '.observer-isolation.json')
+ $index=0;foreach($e in $events.events){$raw=[Convert]::FromHexString($e.rawInfo);$ptr='0x'+[BitConverter]::ToUInt64($raw,0).ToString('x');Save "$out/declaration-$index.json" (Q $Source '--object' $ptr);$index++}
+ if(!@($events.events|Where-Object {$_.handle-eq$handle-and$_.attackerHandle-eq1}).Count){throw 'No native player ranged damage on target observed'}
+}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
+finally{if($owned){$errors=[Collections.Generic.List[string]]::new();if($dirty){try{I $Source;C $Source 'coop_ranged_fixture off';$watch=[Diagnostics.Stopwatch]::StartNew();do{$f=S $Source '.ranged-fixture.json';if(!$f.active){break};Start-Sleep -Milliseconds 80}while($watch.ElapsedMilliseconds-lt6000);Save "$out/ranged-restoration.json" $f;C $Source 'coop_movement_fixture off';C $Source 'coop_damage_observe off';& "$root/work/PrepareShadowSword.ps1" -EvidencePath "$out/restored-setup.json"|Out-Null;& "$root/work/natural-moveset/Restore-LabNoteInventory-v779.ps1" -Baseline "$root/work/natural-moveset/native-coin-reward-v786c" -Evidence "$out/note-restoration"|Out-Null}catch{$errors.Add($_.Exception.Message)}}
+ foreach($p in $caps){if(!$p.WaitForExit(10000)-or$p.ExitCode){$errors.Add('Capture failed')}}
+ foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;Save "$out/final-$r.json" @{bridge=$s;health=$hp;inventory=(Q $r '--player-inventory')};if($s.localGameLogicState-ne1-or!$s.remoteFresh-or$hp.current-ne56){throw 'Baseline not restored'}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
+ foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add("Protected file changed $($f.Path)")}}
+ Save "$out/restoration.json" @{passed=($errors.Count-eq0);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '};Save "$out/result.json" @{passed=(!$failure);failure=$failure;source=$Source;kind=$Kind;candidate=$pin.dll;scope='Native damage observation only. No replication acceptance.'};$mutex.ReleaseMutex()};$mutex.Dispose()}
+Get-Content "$out/result.json";if($failure){throw $failure}

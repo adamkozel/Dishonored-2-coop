@@ -1,0 +1,107 @@
+{
+  "complete": false,
+  "item_studies": {
+    "revision": "items-retarget-manifest-v2.json",
+    "observed": [
+      "Full-body crossbow equip/fire/reload/holster rendered with distinct native weapon geometry",
+      "Heart posture now keeps the elbow bent close to the body",
+      "Higher-detail Emily geometry improves finger inspection"
+    ],
+    "gaps": [
+      "Normal crossbow reload mechanism remains in its idle pose",
+      "Trap placement has no surface contact or release",
+      "Item props are not yet bound in D2",
+      "Emily authoring mesh omits simulated coat panels",
+      "Fine hand contact and transitions need review"
+    ],
+    "format_clips_passed": 48,
+    "runtime_body_cases_passed": 12,
+    "evidence": [
+      "items-format-validation-v2.json",
+      "items-v2-pose-test-1/result.json",
+      "items-v2-roundtrip.json",
+      "crossbow-sequence-v2-inspection.jpg",
+      "heart-sequence-v2-inspection.jpg"
+    ]
+  },
+  "native_pairs": {
+    "confirmed": [
+      "Exact-game midnight scenes pair sword_doppelganger_assassination_fastfront/back with role-specific generic victim clips",
+      "Scene timing is role-specific and retained",
+      "Scene includes damage and equipment events; none are executed by the review pipeline"
+    ],
+    "hypothesis": "The inverse initial victim auxiliary anchor places the victim relative to its attacker. Initial rendered front/back contact supports this, but runtime placement code has not been traced.",
+    "observed": [
+      "Native front/back pair body choreography is coherent in the pilot",
+      "Head/neck contact is much more informative than solo attack clips",
+      "Tall and female target shapes remain review stand-ins"
+    ],
+    "gaps": [
+      "No paired gameplay ownership or native ragdoll handoff",
+      "No small/nonhuman targets",
+      "Final corpse trajectory and arbitrary contact adaptation remain unverified"
+    ],
+    "render_failure": "First background render crashed with user add-ons loaded. Fresh --factory-startup background process rendered all four pairs successfully, without changing user preferences.",
+    "evidence": [
+      "paired-front-v1-inspection.jpg",
+      "paired-back-v1-inspection.jpg",
+      "pair-origin-research.json"
+    ]
+  },
+  "mixamo_search": {
+    "takedown": "MMA double-leg takedown variants found; not chosen for D2 stealth style",
+    "choke": "No appropriate stealth actor/victim pair found"
+  },
+  "review_player": {
+    "fix": "Loopback range-aware server enables seeking",
+    "browser_check": {
+      "clip": "powers-emily-video-1.mp4",
+      "chapter": "blink",
+      "seek_seconds": 13.711,
+      "seekable_seconds": [
+        0,
+        23.1
+      ],
+      "paused": true
+    },
+    "feedback_before_refresh": "Empty, zero saved notes; checked after initial automatic refresh rejection"
+  },
+  "jumps": {
+    "revision": "jumps-retarget-manifest-v3.json",
+    "observed": [
+      "Bounded forearm pronation keeps the blade clear of the face in inspected standing/crouch/double jump poses",
+      "Complete jump body retains compression, flight, landing and recovery",
+      "Crouch return is a full-body transition"
+    ],
+    "gaps": [
+      "Final sword/body clearance across all frames remains a visual review item",
+      "Double-jump trajectory is an authored demonstration, not native physics calibration",
+      "Crouch reverse-grip transition and gameplay jump binding remain incomplete"
+    ],
+    "runtime_pose_cases": 8,
+    "evidence": [
+      "jumps-v3-pose-test-1/result.json",
+      "jumps-v3-roundtrip.json",
+      "crouch-jump-v3-inspection.jpg",
+      "double-jump-v3-inspection.jpg"
+    ]
+  },
+  "nonlethal": {
+    "revision": "choke-sequences-manifest-v1.json",
+    "observed": [
+      "Revised forward-facing, staggered stance makes both hand targets reachable without changing bone lengths",
+      "Rear entry, two held-struggle cycles and finish/release are recorded together",
+      "Hand targets follow the moving victim, not a first-person camera"
+    ],
+    "gaps": [
+      "Baked native finish stops before a full fall and requires native ragdoll ownership",
+      "Release does not include complete victim recovery",
+      "Fine finger/head contact, front/side approaches and live paired ownership remain incomplete"
+    ],
+    "evidence": [
+      "nonlethal-release-v1-inspection.jpg",
+      "nonlethal-finish-tail-v1-inspection.jpg",
+      "nonlethal-format-validation-v1.json"
+    ]
+  }
+}

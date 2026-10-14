@@ -1,0 +1,102 @@
+
+/* [confirmed-runtime] RVA 0x7d71f0
+   Native sequence instance pause used by bounded shared scene barrier.
+   Evidence: src/engine_bridge.cpp
+   Names are analyst-assigned semantic labels, not recovered official symbols. */
+
+undefined1
+D2_Sequence_Pause(undefined8 *param_1,undefined8 param_2,undefined4 param_3,undefined8 param_4)
+
+{
+  undefined8 *puVar1;
+  char cVar2;
+  undefined1 uVar3;
+  int iVar4;
+  longlong lVar5;
+  longlong *plVar6;
+  ulonglong uVar7;
+  ulonglong uVar8;
+  ulonglong uVar9;
+  int iVar10;
+  longlong lStackX_8;
+  undefined8 *puStack_40;
+  int iStack_38;
+  
+  uVar8 = 0;
+  iStack_38 = 0;
+  puStack_40 = param_1;
+  lVar5 = FUN_1407d5860(param_1,param_2,&puStack_40,param_4,0xfffffffffffffffe);
+  lStackX_8 = lVar5;
+  if ((lVar5 == 0) || (*(int *)(lVar5 + 0x27c) == 10)) {
+    uVar3 = 0;
+  }
+  else {
+    cVar2 = FUN_1407cfa40(lVar5,param_3);
+    puVar1 = param_1 + 0x361;
+    iVar4 = FUN_1401581c0(puVar1,0,1);
+    while (iVar4 == 1) {
+      iVar4 = FUN_1401581c0(puVar1,0,1);
+    }
+    if (cVar2 == '\0') {
+      iVar4 = (*(uint *)(param_1 + 1) & 0xffffff) - 1;
+      if (-1 < iVar4) {
+        plVar6 = (longlong *)*param_1;
+        uVar7 = uVar8;
+        do {
+          iVar10 = (int)uVar7;
+          if (*plVar6 == lVar5) goto LAB_1407d7366;
+          uVar7 = (ulonglong)(iVar10 + 1);
+          uVar8 = uVar8 + 1;
+          plVar6 = plVar6 + 1;
+        } while ((longlong)uVar8 <= (longlong)iVar4);
+      }
+      iVar10 = -1;
+LAB_1407d7366:
+      uVar3 = -1 < iVar10;
+    }
+    else {
+      iVar4 = (*(uint *)(param_1 + 0xc3) & 0xffffff) - 1;
+      if (-1 < iVar4) {
+        plVar6 = (longlong *)param_1[0xc2];
+        uVar7 = uVar8;
+        uVar9 = uVar8;
+        do {
+          if (*plVar6 == lVar5) {
+            if (-1 < (int)uVar9) {
+              uVar3 = 1;
+              goto LAB_1407d736c;
+            }
+            break;
+          }
+          uVar9 = (ulonglong)((int)uVar9 + 1);
+          uVar7 = uVar7 + 1;
+          plVar6 = plVar6 + 1;
+        } while ((longlong)uVar7 <= (longlong)iVar4);
+      }
+      uVar3 = func_0x0001407d8160(param_1,lVar5);
+      iVar4 = (*(uint *)(param_1 + 0xc3) & 0xffffff) - 1;
+      if (-1 < iVar4) {
+        plVar6 = (longlong *)param_1[0xc2];
+        uVar7 = uVar8;
+        do {
+          if (*plVar6 == lVar5) {
+            if (-1 < (int)uVar7) goto LAB_1407d736c;
+            break;
+          }
+          uVar7 = (ulonglong)((int)uVar7 + 1);
+          uVar8 = uVar8 + 1;
+          plVar6 = plVar6 + 1;
+        } while ((longlong)uVar8 <= (longlong)iVar4);
+      }
+      FUN_1408918f0(param_1 + 0xc2,&lStackX_8);
+    }
+LAB_1407d736c:
+    FUN_1401581e0(puVar1,0);
+  }
+  if (iStack_38 != 0) {
+    FUN_1407d7050(puStack_40);
+  }
+  return uVar3;
+}
+
+

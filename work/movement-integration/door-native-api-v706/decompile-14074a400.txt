@@ -1,0 +1,33 @@
+
+ulonglong FUN_14074a400(longlong param_1,undefined1 *param_2)
+
+{
+  ulonglong in_RAX;
+  longlong *plVar1;
+  longlong lVar2;
+  ulonglong uVar3;
+  
+  if (*(int *)(param_1 + 8) == 1) {
+LAB_14074a482:
+    uVar3 = in_RAX & 0xffffffffffffff00;
+  }
+  else {
+    plVar1 = (longlong *)FUN_1406df6d0();
+    lVar2 = FUN_1406df6d0(param_1,1);
+    if (plVar1 != (longlong *)0x0) {
+      in_RAX = (**(code **)(*plVar1 + 0x20))(plVar1,lVar2);
+      if ((char)in_RAX == '\0') goto LAB_14074a482;
+    }
+    *(undefined1 *)(lVar2 + 0x10) = *param_2;
+    *(undefined1 *)(lVar2 + 0x11) = param_2[1];
+    *(undefined1 *)(lVar2 + 0x12) = param_2[2];
+    if ((undefined1 *)(lVar2 + 0x13) != param_2 + 3) {
+      *(undefined1 *)(lVar2 + 0x13) = param_2[3];
+    }
+    *(undefined4 *)(param_1 + 0xc) = 1;
+    uVar3 = 1;
+  }
+  return uVar3;
+}
+
+

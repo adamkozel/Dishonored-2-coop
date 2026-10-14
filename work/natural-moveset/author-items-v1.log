@@ -1,0 +1,117 @@
+Blender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:35:40)
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Traceback (most recent call last):
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\modules\addon_utils.py", line 457, in enable
+    mod = importlib.import_module(module_name)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\__init__.py", line 66, in <module>
+    from . import ops
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\manual\ops.py", line 73, in <module>
+    from .. ui import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\__init__.py", line 74, in <module>
+    from . import ui_templates
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_templates.py", line 77, in <module>
+    from . ui_menus import SCATTER5_PT_docs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\ui\ui_menus.py", line 77, in <module>
+    from ... __init__ import addon_prefs
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\__init__.py", line 160, in <module>
+    module = importlib.import_module(f".gpl_script.{module_name}", __package__)
+  File "C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\__init__.py", line 98, in <module>
+    from . import gatekeeper
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\gatekeeper.py", line 65, in <module>
+    from . import override
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\override.py", line 69, in <module>
+    from . import engine
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\engine.py", line 72, in <module>
+    from . import core
+  File "C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\user_default\geo_scatter\gpl_script\physics\core.py", line 61, in <module>
+    import pybullet
+ModuleNotFoundError: No module named 'pybullet'
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+Extensions: writing cache failed ([Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.cache\\compat.dat').
+Error: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Failed to extract path: C:\Users\adako\AppData\Roaming\Blender Foundation\Blender\5.2\extensions\.local\lib\python3.13\site-packages\.DS_Store error [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\extensions\\.local\\lib\\python3.13\\site-packages\\.DS_Store'
+Unable to set stale files pending: [Errno 13] Permission denied: 'C:\\Users\\adako\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\config\\stale-pending'
+Octane Addon Client is enabled
+OctaneBlender.init: opts = {'server': None, 'port': None, 'cert': None}
+Octane Ocio Management Update Start
+Octane Ocio Management Update End. Time cost: 0.03 secs
+AUTHORED crossbow_equip corvo 33
+AUTHORED crossbow_idle corvo 201
+AUTHORED crossbow_fire corvo 41
+AUTHORED crossbow_reload_in corvo 21
+AUTHORED crossbow_reload_loop corvo 5
+AUTHORED crossbow_reload_out corvo 21
+AUTHORED crossbow_ooa corvo 31
+AUTHORED crossbow_unequip corvo 21
+AUTHORED crossbow_sequence corvo 264
+AUTHORED heart_equip corvo 33
+AUTHORED heart_idle corvo 201
+AUTHORED heart_use corvo 61
+AUTHORED heart_unequip corvo 21
+AUTHORED heart_sequence corvo 237
+AUTHORED stunmine_equip corvo 31
+AUTHORED stunmine_idle corvo 201
+AUTHORED stunmine_ready_in corvo 13
+AUTHORED stunmine_ready_loop corvo 41
+AUTHORED stunmine_place corvo 19
+AUTHORED stunmine_reload corvo 53
+AUTHORED stunmine_ready_out corvo 13
+AUTHORED stunmine_ooa corvo 21
+AUTHORED stunmine_unequip corvo 31
+AUTHORED stunmine_sequence corvo 209
+AUTHORED crossbow_equip emily 33
+AUTHORED crossbow_idle emily 201
+AUTHORED crossbow_fire emily 41
+AUTHORED crossbow_reload_in emily 21
+AUTHORED crossbow_reload_loop emily 5
+AUTHORED crossbow_reload_out emily 21
+AUTHORED crossbow_ooa emily 31
+AUTHORED crossbow_unequip emily 21
+AUTHORED crossbow_sequence emily 264
+AUTHORED heart_equip emily 33
+AUTHORED heart_idle emily 201
+AUTHORED heart_use emily 61
+AUTHORED heart_unequip emily 21
+AUTHORED heart_sequence emily 237
+AUTHORED stunmine_equip emily 31
+AUTHORED stunmine_idle emily 201
+AUTHORED stunmine_ready_in emily 13
+AUTHORED stunmine_ready_loop emily 41
+AUTHORED stunmine_place emily 19
+AUTHORED stunmine_reload emily 53
+AUTHORED stunmine_ready_out emily 13
+AUTHORED stunmine_ooa emily 21
+AUTHORED stunmine_unequip emily 31
+AUTHORED stunmine_sequence emily 209
+10.81.95.225
+192.168.1.120
+Client connecting to localhost:50051
+
+Blender quit

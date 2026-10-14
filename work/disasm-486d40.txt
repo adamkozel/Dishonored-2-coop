@@ -1,0 +1,99 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140486D40: mov         eax,dword ptr [rdx]
+  0000000140486D42: mov         dword ptr [rcx],eax
+  0000000140486D44: mov         eax,dword ptr [rdx+4]
+  0000000140486D47: mov         dword ptr [rcx+4],eax
+  0000000140486D4A: mov         eax,dword ptr [rdx+8]
+  0000000140486D4D: mov         dword ptr [rcx+8],eax
+  0000000140486D50: ret
+  0000000140486D51: int         3
+  0000000140486D52: int         3
+  0000000140486D53: int         3
+  0000000140486D54: int         3
+  0000000140486D55: int         3
+  0000000140486D56: int         3
+  0000000140486D57: int         3
+  0000000140486D58: int         3
+  0000000140486D59: int         3
+  0000000140486D5A: int         3
+  0000000140486D5B: int         3
+  0000000140486D5C: int         3
+  0000000140486D5D: int         3
+  0000000140486D5E: int         3
+  0000000140486D5F: int         3
+  0000000140486D60: movzx       eax,byte ptr [rcx+00000000000000C8h]
+  0000000140486D67: shr         al,3
+  0000000140486D6A: and         al,1
+  0000000140486D6C: ret
+  0000000140486D6D: int         3
+  0000000140486D6E: int         3
+  0000000140486D6F: int         3
+  0000000140486D70: movzx       eax,byte ptr [rcx+00000000000000C8h]
+  0000000140486D77: shr         al,2
+  0000000140486D7A: and         al,1
+  0000000140486D7C: ret
+  0000000140486D7D: int         3
+  0000000140486D7E: int         3
+  0000000140486D7F: int         3
+  0000000140486D80: mov         edx,dword ptr [rcx+00000000000000B0h]
+  0000000140486D86: dec         edx
+  0000000140486D88: cmp         edx,1
+  0000000140486D8B: setbe       al
+  0000000140486D8E: ret
+  0000000140486D8F: int         3
+  0000000140486D90: xor         eax,eax
+  0000000140486D92: mov         qword ptr [rcx],rdx
+  0000000140486D95: mov         qword ptr [rcx+8],rax
+  0000000140486D99: mov         qword ptr [rcx+10h],rax
+  0000000140486D9D: mov         qword ptr [rcx+18h],rax
+  0000000140486DA1: mov         qword ptr [rcx+20h],rax
+  0000000140486DA5: mov         dword ptr [rcx+28h],eax
+  0000000140486DA8: mov         rax,rcx
+  0000000140486DAB: ret
+  0000000140486DAC: int         3
+  0000000140486DAD: int         3
+  0000000140486DAE: int         3
+  0000000140486DAF: int         3
+  0000000140486DB0: xor         eax,eax
+  0000000140486DB2: mov         qword ptr [rcx],rdx
+  0000000140486DB5: mov         qword ptr [rcx+8],rax
+  0000000140486DB9: mov         dword ptr [rcx+10h],eax
+  0000000140486DBC: mov         rax,rcx
+  0000000140486DBF: ret
+  0000000140486DC0: mov         rax,rsp
+  0000000140486DC3: mov         qword ptr [rax+8],rbx
+  0000000140486DC7: push        rdi
+  0000000140486DC8: sub         rsp,0F0h
+  0000000140486DCF: mov         rdx,qword ptr [r8+40h]
+  0000000140486DD3: movaps      xmmword ptr [rax-18h],xmm6
+  0000000140486DD7: movaps      xmmword ptr [rax-28h],xmm8
+  0000000140486DDC: mov         rdi,rcx
+  0000000140486DDF: mov         rcx,qword ptr [rcx]
+  0000000140486DE2: lea         r9,[rsp+50h]
+  0000000140486DE7: movaps      xmmword ptr [rax-38h],xmm9
+  0000000140486DEC: movaps      xmmword ptr [rax-48h],xmm10
+  0000000140486DF1: movaps      xmmword ptr [rax-58h],xmm11
+  0000000140486DF6: mov         rbx,r8
+  0000000140486DF9: movaps      xmm2,xmm3
+  0000000140486DFC: movaps      xmmword ptr [rax-68h],xmm12
+  0000000140486E01: movaps      xmmword ptr [rax-78h],xmm13
+  0000000140486E06: mulss       xmm2,dword ptr [rdx+38h]
+  0000000140486E0B: movaps      xmm10,xmm3
+  0000000140486E0F: movaps      xmm13,xmm1
+  0000000140486E13: call        000000014024B130
+  0000000140486E18: lea         rdx,[rsp+20h]
+  0000000140486E1D: 48
+  0000000140486E1E: 8D
+  0000000140486E1F: 4C
+  0000000140486E20: 24
+
+  Summary
+
+     1A7D000 .text

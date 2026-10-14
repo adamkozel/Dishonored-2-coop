@@ -1,0 +1,100 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791656999515,
+  "captureStart": 1791656998392,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.126,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native sprint",
+      "seconds": 2.63,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native slide",
+      "seconds": 3.017,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Full-body recovery to crouch",
+      "seconds": 5.639,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Stand after slide",
+      "seconds": 7.162,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 10.661,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1000,
+      "LeftThumb",
+      0,
+      "Native sprint"
+    ],
+    [
+      1850,
+      0,
+      32767,
+      500,
+      "B",
+      0,
+      "Native slide"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Full-body recovery to crouch"
+    ],
+    [
+      6000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Stand after slide"
+    ],
+    [
+      9500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing recovery"
+    ]
+  ],
+  "dll": "D3EF81227796790A8373903E189BC2833E44CA469A82FC1F6402FF9BFEEC6452",
+  "bank": "FB7A204B273EBD3A52150A0003A19BCB307E65FF91BD4207F2A1176C32130B1B",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body bank; see mode and bank version for covered actions. Complete movement integration remains pending."
+}

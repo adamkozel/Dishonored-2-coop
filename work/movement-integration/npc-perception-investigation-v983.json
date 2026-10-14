@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-14T01:53:26.675877+02:00",
+  "cases": [
+    {
+      "take": "npc-native-perception-v976",
+      "passed": false,
+      "restored": true,
+      "failure": "Native enemy did not sustain remote-avatar combat target in this fixture",
+      "nativeDamage": []
+    },
+    {
+      "take": "npc-native-perception-v978",
+      "passed": false,
+      "restored": true,
+      "failure": "Native enemy did not sustain remote-avatar combat target in this fixture",
+      "nativeDamage": []
+    },
+    {
+      "take": "npc-native-perception-v981",
+      "passed": false,
+      "restored": true,
+      "failure": "Native enemy did not sustain remote-avatar combat target in this fixture",
+      "nativeDamage": []
+    },
+    {
+      "take": "npc-native-perception-v982",
+      "passed": false,
+      "restored": true,
+      "failure": "Native enemy did not sustain remote-avatar combat target in this fixture",
+      "nativeDamage": [
+        {
+          "tick": 492314562,
+          "handle": 209916411,
+          "attackerHandle": 190318452,
+          "inflictorHandle": 207947912,
+          "damageAmount": 20,
+          "before": 40,
+          "after": 20
+        },
+        {
+          "tick": 492315265,
+          "handle": 209916411,
+          "attackerHandle": 190973822,
+          "inflictorHandle": 208406671,
+          "damageAmount": 20,
+          "before": 20,
+          "after": 0
+        }
+      ]
+    }
+  ],
+  "unnecessaryExperiment": "candidate-npc-combat-v973",
+  "verifiedRollback": "npc-perception-recovery-v975.json",
+  "currentExperiment": "candidate-npc-combat-v983",
+  "currentFallback": "candidate-npc-combat-v966",
+  "complete": false
+}

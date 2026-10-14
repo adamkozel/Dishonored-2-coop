@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "source": "host",
+  "kind": "crossbow",
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native requested character/ranged equipment acquired and selected",
+    "Normal controller casting produced native ranged fire/out-of-ammo scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture grants no ammunition"
+  ],
+  "events": [
+    {
+      "seconds": 1.836,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.831,
+      "action": "Native LT press 250ms",
+      "index": 1
+    }
+  ],
+  "dll": "E50822BD843B1B44F1595C4FFC77441BBD3C01703172E659F2CC5299FCFB04B3",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native ranged weapon investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

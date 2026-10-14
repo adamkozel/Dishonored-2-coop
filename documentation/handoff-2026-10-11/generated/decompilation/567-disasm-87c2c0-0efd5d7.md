@@ -1,0 +1,58 @@
+# disasm-87c2c0.txt
+
+Original: [work/disasm-87c2c0.txt](<../../../../work/disasm-87c2c0.txt>)
+
+SHA-256: `0991B1DFF50C2DDA1A354F363CFED8DEF07C3311DEA5CD1D167EDD48CAE8E331`; 1990 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014087C2C0: mov         eax,dword ptr [rdx]
+  000000014087C2C2: mov         dword ptr [rcx+0000000000000084h],eax
+  000000014087C2C8: mov         eax,dword ptr [rdx+4]
+  000000014087C2CB: mov         dword ptr [rcx+0000000000000088h],eax
+  000000014087C2D1: mov         eax,dword ptr [rdx+8]
+  000000014087C2D4: mov         dword ptr [rcx+000000000000008Ch],eax
+  000000014087C2DA: mov         eax,dword ptr [rdx+0Ch]
+  000000014087C2DD: mov         dword ptr [rcx+0000000000000090h],eax
+  000000014087C2E3: mov         eax,dword ptr [rdx+10h]
+  000000014087C2E6: mov         dword ptr [rcx+0000000000000094h],eax
+  000000014087C2EC: mov         eax,dword ptr [rdx+14h]
+  000000014087C2EF: mov         dword ptr [rcx+0000000000000098h],eax
+  000000014087C2F5: mov         eax,dword ptr [rdx+18h]
+  000000014087C2F8: mov         dword ptr [rcx+000000000000009Ch],eax
+  000000014087C2FE: mov         eax,dword ptr [rdx+1Ch]
+  000000014087C301: mov         dword ptr [rcx+00000000000000A0h],eax
+  000000014087C307: mov         eax,dword ptr [rdx+20h]
+  000000014087C30A: mov         dword ptr [rcx+00000000000000A4h],eax
+  000000014087C310: ret
+  000000014087C311: int         3
+  000000014087C312: int         3
+  000000014087C313: int         3
+  000000014087C314: int         3
+  000000014087C315: int         3
+  000000014087C316: int         3
+  000000014087C317: int         3
+  000000014087C318: int         3
+  000000014087C319: int         3
+  000000014087C31A: int         3
+  000000014087C31B: int         3
+  000000014087C31C: int         3
+  000000014087C31D: int         3
+  000000014087C31E: int         3
+  000000014087C31F: int         3
+  000000014087C320: 8B
+
+  Summary
+
+     1A7D000 .text
+
+````

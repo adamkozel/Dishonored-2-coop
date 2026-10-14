@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "failure": "Native kick scene not selected by ordinary input",
+  "dll": "0FB8A544BA79339F697C1068BEFE4E793DC061467E9CEFABEF2E1311AA601404",
+  "checks": [
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [],
+  "scope": "Existing combat pipeline binds exact native kick800. Protocol67 and bank66/354; prior353 unchanged. This take requires native17 selection, remote playback and stance recovery. Actor presentation only; no native victim events or damage replay. All inventories, health and14 protected files restored."
+}

@@ -1,0 +1,72 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791663585876,
+  "captureStart": 1791663584750,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Standing at native desk",
+      "seconds": 1.128,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native jump into low mantle",
+      "seconds": 2.645,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native landing and equipment recovery",
+      "seconds": 5.665,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 8.672,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing at native desk"
+    ],
+    [
+      1500,
+      0,
+      22000,
+      1300,
+      "A",
+      0,
+      "Native jump into low mantle"
+    ],
+    [
+      4500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Native landing and equipment recovery"
+    ],
+    [
+      7500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "5830AE3E10EE6AC802D4BFD7C14AEB6096555ECC766F19C4DC061A308D4BA390",
+  "bank": "DD7792D204AB4697E2F6B5F307C7385C613893F9CA679B6C602874F4112235BC",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body bank; see mode and bank version for covered actions. Complete movement integration remains pending."
+}

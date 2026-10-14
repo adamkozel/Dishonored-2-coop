@@ -1,0 +1,156 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  00000001407FDCB0: mov         qword ptr [rsp+8],rcx
+  00000001407FDCB5: push        rbp
+  00000001407FDCB6: push        rbx
+  00000001407FDCB7: push        rsi
+  00000001407FDCB8: push        rdi
+  00000001407FDCB9: push        r12
+  00000001407FDCBB: push        r13
+  00000001407FDCBD: push        r14
+  00000001407FDCBF: push        r15
+  00000001407FDCC1: lea         rbp,[rsp-1Fh]
+  00000001407FDCC6: sub         rsp,0F8h
+  00000001407FDCCD: mov         r8,qword ptr [rcx+48h]
+  00000001407FDCD1: mov         rax,qword ptr [00000001439A5290h]
+  00000001407FDCD8: mov         r12,qword ptr [rcx+10h]
+  00000001407FDCDC: mov         r13,qword ptr [rax+0000000000060410h]
+  00000001407FDCE3: add         r8,200h
+  00000001407FDCEA: xor         r14d,r14d
+  00000001407FDCED: mov         edx,dword ptr [r8+8]
+  00000001407FDCF1: mov         r9,rcx
+  00000001407FDCF4: mov         qword ptr [rbp+7Fh],r8
+  00000001407FDCF8: and         edx,0FFFFFFh
+  00000001407FDCFE: movsxd      rdi,edx
+  00000001407FDD01: mov         dword ptr [rbp+77h],edx
+  00000001407FDD04: mov         qword ptr [rsp+20h],rdi
+  00000001407FDD09: test        edx,edx
+  00000001407FDD0B: jle         00000001407FDF2B
+  00000001407FDD11: mov         esi,r14d
+  00000001407FDD14: mov         r14,rdi
+  00000001407FDD17: nop         word ptr [rax+rax+0000000000000000h]
+  00000001407FDD20: mov         r15,qword ptr [r8]
+  00000001407FDD23: mov         eax,dword ptr [rsi+r15]
+  00000001407FDD27: mov         ecx,eax
+  00000001407FDD29: mov         dword ptr [rbp+6Fh],eax
+  00000001407FDD2C: and         ecx,0FFFFFFh
+  00000001407FDD32: cmp         ecx,0FFFFFFh
+  00000001407FDD38: je          00000001407FDF12
+  00000001407FDD3E: cmp         ecx,dword ptr [r13+30h]
+  00000001407FDD42: jae         00000001407FDF12
+  00000001407FDD48: movsxd      rcx,ecx
+  00000001407FDD4B: imul        rcx,rcx,0B0h
+  00000001407FDD52: add         rcx,qword ptr [r13+28h]
+  00000001407FDD56: test        byte ptr [rcx+44h],3
+  00000001407FDD5A: je          00000001407FDF12
+  00000001407FDD60: cmp         dword ptr [rcx+70h],eax
+  00000001407FDD63: jne         00000001407FDF12
+  00000001407FDD69: mov         ecx,eax
+  00000001407FDD6B: mov         rax,qword ptr [r13+28h]
+  00000001407FDD6F: and         ecx,0FFFFFFh
+  00000001407FDD75: imul        rcx,rcx,0B0h
+  00000001407FDD7C: mov         ecx,dword ptr [rcx+rax+78h]
+  00000001407FDD80: inc         ecx
+  00000001407FDD82: je          00000001407FDF12
+  00000001407FDD88: lea         rcx,[rbp+6Fh]
+  00000001407FDD8C: mov         rdx,r13
+  00000001407FDD8F: call        000000014018CD00
+  00000001407FDD94: mov         rcx,qword ptr [rax+8]
+  00000001407FDD98: mov         rbx,qword ptr [rcx+10h]
+  00000001407FDD9C: mov         rcx,rbx
+  00000001407FDD9F: mov         rax,qword ptr [rbx]
+  00000001407FDDA2: call        qword ptr [rax]
+  00000001407FDDA4: mov         ecx,dword ptr [rax+60h]
+  00000001407FDDA7: cmp         ecx,dword ptr [00000001439CE2C0h]
+  00000001407FDDAD: jl          00000001407FDDB7
+  00000001407FDDAF: cmp         ecx,dword ptr [00000001439CE2C4h]
+  00000001407FDDB5: jle         00000001407FDDD0
+  00000001407FDDB7: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407FDDBE: mov         r8,rbx
+  00000001407FDDC1: mov         rdx,r12
+  00000001407FDDC4: add         rcx,1F52E8h
+  00000001407FDDCB: call        000000014080E910
+  00000001407FDDD0: mov         rax,qword ptr [rbx]
+  00000001407FDDD3: mov         rcx,rbx
+  00000001407FDDD6: call        qword ptr [rax]
+  00000001407FDDD8: test        rax,rax
+  00000001407FDDDB: je          00000001407FDF0E
+  00000001407FDDE1: mov         eax,dword ptr [rax+60h]
+  00000001407FDDE4: cmp         eax,dword ptr [00000001439CE2C0h]
+  00000001407FDDEA: jl          00000001407FDF0E
+  00000001407FDDF0: cmp         eax,dword ptr [00000001439CE2C4h]
+  00000001407FDDF6: jg          00000001407FDF0E
+  00000001407FDDFC: movss       xmm0,dword ptr [rsi+r15+4]
+  00000001407FDE03: movss       xmm1,dword ptr [rsi+r15+8]
+  00000001407FDE0A: movss       xmm4,dword ptr [r12+000000000000033Ch]
+  00000001407FDE14: mov         edi,dword ptr [rbx+00000000000000A8h]
+  00000001407FDE1A: subss       xmm4,dword ptr [rbx+000000000000033Ch]
+  00000001407FDE22: movss       xmm3,dword ptr [r12+0000000000000340h]
+  00000001407FDE2C: movss       xmm2,dword ptr [r12+0000000000000344h]
+  00000001407FDE36: subss       xmm3,dword ptr [rbx+0000000000000340h]
+  00000001407FDE3E: subss       xmm2,dword ptr [rbx+0000000000000344h]
+  00000001407FDE46: movss       dword ptr [rsp+2Ch],xmm0
+  00000001407FDE4C: mov         ebx,dword ptr [r12+00000000000000A8h]
+  00000001407FDE54: movss       xmm0,dword ptr [rsi+r15+0Ch]
+  00000001407FDE5B: movss       dword ptr [rsp+30h],xmm1
+  00000001407FDE61: movss       xmm1,dword ptr [rsi+r15+14h]
+  00000001407FDE68: movss       dword ptr [rsp+34h],xmm0
+  00000001407FDE6E: movss       xmm0,dword ptr [rsi+r15+10h]
+  00000001407FDE75: movss       dword ptr [rsp+3Ch],xmm1
+  00000001407FDE7B: movss       dword ptr [rsp+38h],xmm0
+  00000001407FDE81: movss       xmm0,dword ptr [rsi+r15+18h]
+  00000001407FDE88: movss       dword ptr [rsp+44h],xmm4
+  00000001407FDE8E: movss       dword ptr [rsp+40h],xmm0
+  00000001407FDE94: movss       dword ptr [rsp+48h],xmm3
+  00000001407FDE9A: movss       dword ptr [rsp+4Ch],xmm2
+  00000001407FDEA0: call        0000000140810240
+  00000001407FDEA5: mov         r9d,ebx
+  00000001407FDEA8: mov         edx,178h
+  00000001407FDEAD: lea         rcx,[rax+000000000000C8E8h]
+  00000001407FDEB4: mov         r8d,28h
+  00000001407FDEBA: call        00000001408112C0
+  00000001407FDEBF: mov         r8,qword ptr [rbp+7Fh]
+  00000001407FDEC3: mov         rdx,rax
+  00000001407FDEC6: test        rax,rax
+  00000001407FDEC9: je          00000001407FDF12
+  00000001407FDECB: mov         ecx,dword ptr [rsp+2Ch]
+  00000001407FDECF: mov         dword ptr [rax],edi
+  00000001407FDED1: mov         dword ptr [rax+4],ecx
+  00000001407FDED4: mov         ecx,dword ptr [rsp+30h]
+  00000001407FDED8: mov         dword ptr [rax+8],ecx
+  00000001407FDEDB: mov         ecx,dword ptr [rsp+34h]
+  00000001407FDEDF: mov         dword ptr [rax+0Ch],ecx
+  00000001407FDEE2: mov         ecx,dword ptr [rsp+38h]
+  00000001407FDEE6: mov         dword ptr [rax+10h],ecx
+  00000001407FDEE9: mov         eax,dword ptr [rsp+3Ch]
+  00000001407FDEED: mov         dword ptr [rdx+14h],eax
+  00000001407FDEF0: mov         eax,dword ptr [rsp+40h]
+  00000001407FDEF4: mov         dword ptr [rdx+18h],eax
+  00000001407FDEF7: mov         eax,dword ptr [rsp+44h]
+  00000001407FDEFB: mov         dword ptr [rdx+1Ch],eax
+  00000001407FDEFE: mov         eax,dword ptr [rsp+48h]
+  00000001407FDF02: mov         dword ptr [rdx+20h],eax
+  00000001407FDF05: mov         eax,dword ptr [rsp+4Ch]
+  00000001407FDF09: mov         dword ptr [rdx+24h],eax
+  00000001407FDF0C: jmp         00000001407FDF12
+  00000001407FDF0E: mov         r8,qword ptr [rbp+7Fh]
+  00000001407FDF12: add         rsi,1Ch
+  00000001407FDF16: dec         r14
+  00000001407FDF19: jne         00000001407FDD20
+  00000001407FDF1F: mov         edx,dword ptr [rbp+77h]
+  00000001407FDF22: mov         rdi,qword ptr [rsp+20h]
+  00000001407FDF27: mov         r9,qword ptr [rbp+67h]
+  00000001407FDF2B: cmp         byte ptr [r9+00000000000002CCh],0
+  00000001407FDF33: mov         byte ptr [r9+00000000000002CEh],0
+  00000001407FDF3B: je          00000001407FE2F4
+  00000001407FDF41: cmp         byte ptr [r9+00000000000002CDh],0
+  00000001407FDF49: jne         00000001407FE2F4
+  00000001407FDF4F: cmp         edx,1
+  00000001407FDF52: jle         00000001407FE2F4
+  00000001407FDF58: movsxd      rax,dword ptr [r9+50h]
+  00000001407FDF5C: 44

@@ -1,0 +1,102 @@
+# ghidra-mesmerize-world-constructor-v71.json
+
+Original: [work/ghidra-mesmerize-world-constructor-v71.json](<../../../../work/ghidra-mesmerize-world-constructor-v71.json>)
+
+SHA-256: `4803B5390A3964971D68FE223A486A9B6BB2E41E0C754AE4C1BFEE69ECCEFBDB`; 6109 bytes.
+
+## Original saved record
+
+````json
+{"program":"Dishonored2.exe","address":"140727d50","response":{"content":[{"type":"text","text":"\r\nundefined8 * FUN_140727d50(undefined8 *param_1)\r\n\r\n{\r\n  FUN_1407e71e0();\r\n  *param_1 = &PTR_LAB_141c53958;\r\n  param_1[4] = param_1;\r\n  *(undefined4 *)(param_1 + 5) = 4;\r\n  *(undefined4 *)((longlong)param_1 + 0x2c) = 4;\r\n  param_1[6] = 0;\r\n  param_1[7] = 0;\r\n  param_1[8] = 0;\r\n  param_1[9] = 0;\r\n  param_1[10] = 0;\r\n  param_1[0xb] = 0;\r\n  param_1[0xc] = 0;\r\n  param_1[0xd] = 0;\r\n  param_1[0xe] = 0;\r\n  param_1[0xf] = 0;\r\n  param_1[0x10] = 0;\r\n  param_1[0x11] = 0;\r\n  param_1[0x12] = 0;\r\n  param_1[0x13] = 0;\r\n  param_1[0x14] = 0;\r\n  param_1[0x15] = 0;\r\n  *(undefined4 *)(param_1 + 0x16) = 0xffffffff;\r\n  FUN_1404e26e0((longlong)param_1 + 0xb4);\r\n  param_1[0x1c] = 0;\r\n  *(undefined4 *)(param_1 + 0x1d) = 0xffffffff;\r\n  *(undefined1 *)((longlong)param_1 + 0xec) = 0;\r\n  *(undefined4 *)(param_1 + 0x1e) = DAT_1431af668;\r\n  *(undefined4 *)((longlong)param_1 + 0xf4) = DAT_1431af66c;\r\n  *(undefined4 *)(param_1 + 0x1f) = DAT_1431af670;\r\n  *(undefined4 *)((longlong)param_1 + 0xfc) = DAT_1431af668;\r\n  *(undefined4 *)(param_1 + 0x20) = DAT_1431af66c;\r\n  *(undefined4 *)((longlong)param_1 + 0x104) = DAT_1431af670;\r\n  param_1[0x24] = 0x3fff0010;\r\n  *(undefined4 *)(param_1 + 0x25) = 0;\r\n  FUN_140500c30(param_1 + 0x26);\r\n  FUN_140500c30(param_1 + 0x28);\r\n  *(undefined4 *)(param_1 + 0x2a) = 0x7149f2ca;\r\n  *(undefined8 *)((longlong)param_1 + 0x154) = 0;\r\n  *(undefined4 *)((longlong)param_1 + 0x15c) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x2c) = 0;\r\n  FUN_140500c30(param_1 + 0x2d);\r\n  FUN_140500c30(param_1 + 0x2f);\r\n  FUN_140500c30(param_1 + 0x31);\r\n  FUN_140500c30(param_1 + 0x33);\r\n  FUN_140500c30(param_1 + 0x35);\r\n  *(undefined4 *)(param_1 + 0x37) = 0;\r\n  param_1[0x38] = 0;\r\n  param_1[0x39] = 0;\r\n  param_1[0x3a] = 0;\r\n  *(undefined2 *)(param_1 + 0x3b) = 0xffff;\r\n  *(undefined8 *)((longlong)param_1 + 0x1dc) = 0;\r\n  *(undefined8 *)((longlong)param_1 + 0x1e4) = 0;\r\n  FUN_1406ddb40(param_1 + 0x3e);\r\n  *(undefined4 *)(param_1 + 0x52) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x294) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x53) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x29c) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x54) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x2a4) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x55) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x2ac) = 0xffffffff;\r\n  *(undefined2 *)(param_1 + 0x56) = 0;\r\n  *(undefined1 *)((longlong)param_1 + 0x2b2) = 0;\r\n  param_1[6] = &LAB_1407290b0;\r\n  param_1[7] = &LAB_140729340;\r\n  param_1[8] = 0;\r\n  param_1[9] = FUN_1407290c0;\r\n  param_1[10] = 0;\r\n  param_1[0xb] = FUN_14072f820;\r\n  param_1[0xc] = FUN_140728f50;\r\n  param_1[0xd] = 0;\r\n  param_1[0xe] = FUN_14072f370;\r\n  param_1[0xf] = FUN_140728fc0;\r\n  param_1[0x10] = FUN_140729190;\r\n  param_1[0x11] = FUN_14072f3d0;\r\n  return param_1;\r\n}\r\n\r\n"}],"structuredContent":{"result":"\r\nundefined8 * FUN_140727d50(undefined8 *param_1)\r\n\r\n{\r\n  FUN_1407e71e0();\r\n  *param_1 = &PTR_LAB_141c53958;\r\n  param_1[4] = param_1;\r\n  *(undefined4 *)(param_1 + 5) = 4;\r\n  *(undefined4 *)((longlong)param_1 + 0x2c) = 4;\r\n  param_1[6] = 0;\r\n  param_1[7] = 0;\r\n  param_1[8] = 0;\r\n  param_1[9] = 0;\r\n  param_1[10] = 0;\r\n  param_1[0xb] = 0;\r\n  param_1[0xc] = 0;\r\n  param_1[0xd] = 0;\r\n  param_1[0xe] = 0;\r\n  param_1[0xf] = 0;\r\n  param_1[0x10] = 0;\r\n  param_1[0x11] = 0;\r\n  param_1[0x12] = 0;\r\n  param_1[0x13] = 0;\r\n  param_1[0x14] = 0;\r\n  param_1[0x15] = 0;\r\n  *(undefined4 *)(param_1 + 0x16) = 0xffffffff;\r\n  FUN_1404e26e0((longlong)param_1 + 0xb4);\r\n  param_1[0x1c] = 0;\r\n  *(undefined4 *)(param_1 + 0x1d) = 0xffffffff;\r\n  *(undefined1 *)((longlong)param_1 + 0xec) = 0;\r\n  *(undefined4 *)(param_1 + 0x1e) = DAT_1431af668;\r\n  *(undefined4 *)((longlong)param_1 + 0xf4) = DAT_1431af66c;\r\n  *(undefined4 *)(param_1 + 0x1f) = DAT_1431af670;\r\n  *(undefined4 *)((longlong)param_1 + 0xfc) = DAT_1431af668;\r\n  *(undefined4 *)(param_1 + 0x20) = DAT_1431af66c;\r\n  *(undefined4 *)((longlong)param_1 + 0x104) = DAT_1431af670;\r\n  param_1[0x24] = 0x3fff0010;\r\n  *(undefined4 *)(param_1 + 0x25) = 0;\r\n  FUN_140500c30(param_1 + 0x26);\r\n  FUN_140500c30(param_1 + 0x28);\r\n  *(undefined4 *)(param_1 + 0x2a) = 0x7149f2ca;\r\n  *(undefined8 *)((longlong)param_1 + 0x154) = 0;\r\n  *(undefined4 *)((longlong)param_1 + 0x15c) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x2c) = 0;\r\n  FUN_140500c30(param_1 + 0x2d);\r\n  FUN_140500c30(param_1 + 0x2f);\r\n  FUN_140500c30(param_1 + 0x31);\r\n  FUN_140500c30(param_1 + 0x33);\r\n  FUN_140500c30(param_1 + 0x35);\r\n  *(undefined4 *)(param_1 + 0x37) = 0;\r\n  param_1[0x38] = 0;\r\n  param_1[0x39] = 0;\r\n  param_1[0x3a] = 0;\r\n  *(undefined2 *)(param_1 + 0x3b) = 0xffff;\r\n  *(undefined8 *)((longlong)param_1 + 0x1dc) = 0;\r\n  *(undefined8 *)((longlong)param_1 + 0x1e4) = 0;\r\n  FUN_1406ddb40(param_1 + 0x3e);\r\n  *(undefined4 *)(param_1 + 0x52) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x294) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x53) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x29c) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x54) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x2a4) = 0xffffffff;\r\n  *(undefined4 *)(param_1 + 0x55) = 0xffffffff;\r\n  *(undefined4 *)((longlong)param_1 + 0x2ac) = 0xffffffff;\r\n  *(undefined2 *)(param_1 + 0x56) = 0;\r\n  *(undefined1 *)((longlong)param_1 + 0x2b2) = 0;\r\n  param_1[6] = &LAB_1407290b0;\r\n  param_1[7] = &LAB_140729340;\r\n  param_1[8] = 0;\r\n  param_1[9] = FUN_1407290c0;\r\n  param_1[10] = 0;\r\n  param_1[0xb] = FUN_14072f820;\r\n  param_1[0xc] = FUN_140728f50;\r\n  param_1[0xd] = 0;\r\n  param_1[0xe] = FUN_14072f370;\r\n  param_1[0xf] = FUN_140728fc0;\r\n  param_1[0x10] = FUN_140729190;\r\n  param_1[0x11] = FUN_14072f3d0;\r\n  return param_1;\r\n}\r\n\r\n"},"isError":false}}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+undefined8 * FUN_140727d50(undefined8 *param_1)
+
+{
+  FUN_1407e71e0();
+  *param_1 = &PTR_LAB_141c53958;
+  param_1[4] = param_1;
+  *(undefined4 *)(param_1 + 5) = 4;
+  *(undefined4 *)((longlong)param_1 + 0x2c) = 4;
+  param_1[6] = 0;
+  param_1[7] = 0;
+  param_1[8] = 0;
+  param_1[9] = 0;
+  param_1[10] = 0;
+  param_1[0xb] = 0;
+  param_1[0xc] = 0;
+  param_1[0xd] = 0;
+  param_1[0xe] = 0;
+  param_1[0xf] = 0;
+  param_1[0x10] = 0;
+  param_1[0x11] = 0;
+  param_1[0x12] = 0;
+  param_1[0x13] = 0;
+  param_1[0x14] = 0;
+  param_1[0x15] = 0;
+  *(undefined4 *)(param_1 + 0x16) = 0xffffffff;
+  FUN_1404e26e0((longlong)param_1 + 0xb4);
+  param_1[0x1c] = 0;
+  *(undefined4 *)(param_1 + 0x1d) = 0xffffffff;
+  *(undefined1 *)((longlong)param_1 + 0xec) = 0;
+  *(undefined4 *)(param_1 + 0x1e) = DAT_1431af668;
+  *(undefined4 *)((longlong)param_1 + 0xf4) = DAT_1431af66c;
+  *(undefined4 *)(param_1 + 0x1f) = DAT_1431af670;
+  *(undefined4 *)((longlong)param_1 + 0xfc) = DAT_1431af668;
+  *(undefined4 *)(param_1 + 0x20) = DAT_1431af66c;
+  *(undefined4 *)((longlong)param_1 + 0x104) = DAT_1431af670;
+  param_1[0x24] = 0x3fff0010;
+  *(undefined4 *)(param_1 + 0x25) = 0;
+  FUN_140500c30(param_1 + 0x26);
+  FUN_140500c30(param_1 + 0x28);
+  *(undefined4 *)(param_1 + 0x2a) = 0x7149f2ca;
+  *(undefined8 *)((longlong)param_1 + 0x154) = 0;
+  *(undefined4 *)((longlong)param_1 + 0x15c) = 0xffffffff;
+  *(undefined4 *)(param_1 + 0x2c) = 0;
+  FUN_140500c30(param_1 + 0x2d);
+  FUN_140500c30(param_1 + 0x2f);
+  FUN_140500c30(param_1 + 0x31);
+  FUN_140500c30(param_1 + 0x33);
+  FUN_140500c30(param_1 + 0x35);
+  *(undefined4 *)(param_1 + 0x37) = 0;
+  param_1[0x38] = 0;
+  param_1[0x39] = 0;
+  param_1[0x3a] = 0;
+  *(undefined2 *)(param_1 + 0x3b) = 0xffff;
+  *(undefined8 *)((longlong)param_1 + 0x1dc) = 0;
+  *(undefined8 *)((longlong)param_1 + 0x1e4) = 0;
+  FUN_1406ddb40(param_1 + 0x3e);
+  *(undefined4 *)(param_1 + 0x52) = 0xffffffff;
+  *(undefined4 *)((longlong)param_1 + 0x294) = 0xffffffff;
+  *(undefined4 *)(param_1 + 0x53) = 0xffffffff;
+  *(undefined4 *)((longlong)param_1 + 0x29c) = 0xffffffff;
+  *(undefined4 *)(param_1 + 0x54) = 0xffffffff;
+  *(undefined4 *)((longlong)param_1 + 0x2a4) = 0xffffffff;
+  *(undefined4 *)(param_1 + 0x55) = 0xffffffff;
+  *(undefined4 *)((longlong)param_1 + 0x2ac) = 0xffffffff;
+  *(undefined2 *)(param_1 + 0x56) = 0;
+  *(undefined1 *)((longlong)param_1 + 0x2b2) = 0;
+  param_1[6] = &LAB_1407290b0;
+  param_1[7] = &LAB_140729340;
+  param_1[8] = 0;
+  param_1[9] = FUN_1407290c0;
+  param_1[10] = 0;
+  param_1[0xb] = FUN_14072f820;
+  param_1[0xc] = FUN_140728f50;
+  param_1[0xd] = 0;
+  param_1[0xe] = FUN_14072f370;
+  param_1[0xf] = FUN_140728fc0;
+  param_1[0x10] = FUN_140729190;
+  param_1[0x11] = FUN_14072f3d0;
+  return param_1;
+}
+
+
+````

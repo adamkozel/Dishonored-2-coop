@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-14T20:18:14.407058+02:00",
+  "dll": "5285C29B2601F653063774669CAC88511E36D228EEE58E434C9E4C110B517DE6",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1213b",
+  "protocol": 74,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213c on 1213b: bench vise classified as the crank interaction (variant 3); the source records why a use ends (1 moved, 2 other action + action id, 3 clip duration) for the 1214c early-end diagnosis. Otherwise 1213b. Runtime pending.",
+  "result": "1218/1218b/1218c (EotW vise) failed on presentation staging; diagnostics 1219/1219b/1220 isolated a pose-timeline freeze: the 1203f late rebase adopted a 520 ms queued-packet offset and later fresh packets mapped ~500 ms into the future (rejected as early) - partner frozen 26 m behind after a client warp. Superseded by 1213d.",
+  "runtimeEvidence": "../../natural-moveset/warp-hold-probe-v1220/result.json"
+}

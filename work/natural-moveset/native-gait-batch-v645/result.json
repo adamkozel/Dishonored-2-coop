@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "7E3ADCA32421AE8EAB2DDC1650DF49E3BABFBB0FB14209FC6F1AAE8C1EE01F43",
+  "checks": [
+    "host: walk/run, unarmed native idle and equipped stationary recovery present; detailed direction/root checks follow independent audit",
+    "client: walk/run, unarmed native idle and equipped stationary recovery present; detailed direction/root checks follow independent audit",
+    "Both roles recorded in one isolated native operation with one checkpoint restoration; existing movement clips and native first person retained.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "yaw": 0,
+        "stance": 0,
+        "name": "gait-batch",
+        "distance": 0.0
+      },
+      "key": "host-gait-batch",
+      "count": 214,
+      "partnerHandle": 209916411
+    },
+    {
+      "source": "client",
+      "case": {
+        "yaw": 0,
+        "stance": 0,
+        "name": "gait-batch",
+        "distance": 0.0
+      },
+      "key": "client-gait-batch",
+      "count": 215,
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Batched native locomotion transitions on both roles using candidate635 and existing bank67: walk/run/stop, reverse, diagonal direction changes, moving turns, holstered idle/movement and armed recovery. Both native views and Steam/body telemetry retained. Detailed direction/root/phase checks and visual inspection recorded separately; no new animation authoring or final visual acceptance."
+}

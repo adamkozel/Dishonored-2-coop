@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "source": "host",
+  "airborneExperiment": true,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo Windblast equipment acquired and selected",
+    "Native Jump/Fall state observed during controller casting",
+    "Normal controller casting produced native Windblast scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 2.125,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.837,
+      "action": "Native simultaneous A jump and LT cast, 250ms",
+      "index": 1
+    }
+  ],
+  "dll": "80E9E28879F84E427BF05BFEC45357430EE181376C9A1669CA28D4A5E9670F8A",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native Windblast investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

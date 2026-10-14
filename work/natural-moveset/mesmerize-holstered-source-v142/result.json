@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Selected native stance established before the equipment observation",
+    "Native sword is confirmed holstered before LT, with native stance preserved throughout observation",
+    "Native phase, reciprocal arm, sword equipment and mana observations saved without inferring automatic draw or a successful cast",
+    "Both native inventories restore and player health stays unchanged; world effects require separate checkpoint cleanup",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.106,
+      "input": "Native X held1000ms to holster equipment"
+    },
+    {
+      "videoTime": 5.503,
+      "input": "Native LT held 1800ms then released"
+    }
+  ],
+  "dll": "C00A8689AE6E16D9855882256ADF191AA4A79C508CC5B9D5C9A84B98BC4A45EA",
+  "probe": "67748B482794C703D916721F66FFAFCC0EC49C05B8E7CE5DB9C7FF1EDBF9E467",
+  "scope": "Source-only native holstered Mesmerize observation. Native X holsters, then one LT hold/release tests the actual draw/use behavior in the requested stance. Raw scene/equipment/mana evidence determines whether a cast occurs and which equipment context it uses. No remote integration or complete movement coverage claimed. Isolated native checkpoints and protected hashes restore."
+}

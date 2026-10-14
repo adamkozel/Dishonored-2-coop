@@ -1,0 +1,33 @@
+void FUN_14071a2c0(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  undefined8 uVar3;
+  ulonglong uVar4;
+  uint uVar5;
+  ulonglong uVar6;
+  undefined8 local_18;
+  undefined4 local_10;
+  
+  lVar1 = *(longlong *)(param_1 + 0x10);
+  uVar4 = 0;
+  uVar6 = uVar4;
+  if ((*(uint *)(param_1 + 0x140) & 0xffffff) != 0) {
+    do {
+      lVar2 = *(longlong *)(param_1 + 0x138);
+      if ((*(ulonglong *)(lVar2 + uVar4) & *(ulonglong *)(param_1 + 0x130)) != 0) {
+        uVar3 = FUN_1404e52a0(*(undefined8 *)
+                               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +
+                               (longlong)*(int *)(lVar1 + 0x2e0) * 8));
+        local_18 = *(undefined8 *)(lVar2 + 8 + uVar4);
+        local_10 = *(undefined4 *)(lVar1 + 0xa8);
+        FUN_140417500(uVar3,&local_18);
+      }
+      uVar5 = (int)uVar6 + 1;
+      uVar4 = uVar4 + 0x10;
+      uVar6 = (ulonglong)uVar5;
+    } while ((int)uVar5 < (int)(*(uint *)(param_1 + 0x140) & 0xffffff));
+  }
+  return;
+}

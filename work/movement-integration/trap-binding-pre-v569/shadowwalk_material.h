@@ -1,0 +1,95 @@
+#pragma once
+#include "native_material_params.h"
+// Isolated544 visual feasibility candidate. No shared material edits, model
+// changes or attachment propagation. Body particles/native FP remain533.
+struct ShadowWalkMaterial {
+    std::uintptr_t game=0,actor=0,render=0;unsigned handle=0;
+    std::array<std::uintptr_t,2> declarations{};std::array<unsigned,2> ids{};
+    std::array<std::array<unsigned,4>,2> written{};
+    std::uint64_t token=0,peer=0,epoch=0;ULONGLONG deadline=0;
+    bool active=false,blocked=false;unsigned variant=0;float fade=0;
+    std::uint64_t starts=0,updates=0,restores=0,refused=0,retired=0;
+} shadowWalkMaterial;
+bool shadowWalkMaterialApi(){
+    const unsigned char bytes[]={0x48,0x8b,0xc4,0x57,0x41,0x54,0x41,0x55,0x41,0x56,0x41,0x57,0x48,0x83,0xec,0x40};
+    return nativePowerFxApi()&&!std::memcmp(gameImage+0x876030,bytes,sizeof(bytes));
+}
+bool shadowWalkMaterialIdentity(){
+    auto& s=shadowWalkMaterial;std::uintptr_t render=0;
+    return s.actor&&s.handle!=1&&s.game==observedGame&&s.epoch==outgoing.worldEpoch&&
+        worldIdentityEntity(memoryRead,s.game,s.handle)==s.actor&&memoryRead(s.actor+0xf0,&render,8)&&render==s.render;
+}
+bool shadowWalkMaterialOwned(NativeMaterialParams& p){
+    auto& s=shadowWalkMaterial;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!shadowWalkMaterialIdentity()||!readNativeMaterialParams(memoryRead,base,s.actor,s.render,p))return false;
+    for(unsigned i=0;i<2;++i){const int at=p.find(s.ids[i]);if(at<0||p.words[at]!=s.written[i])return false;}return true;
+}
+void shadowWalkMaterialApply(bool remove,const std::array<std::array<unsigned,4>,2>& words){
+    auto& s=shadowWalkMaterial;
+    struct Value{std::uintptr_t declaration;std::array<unsigned,4> words;};static_assert(sizeof(Value)==24);
+    struct List{const void* data;unsigned count,capacity;};static_assert(sizeof(List)==16);
+    const Value values[]={{s.declarations[0],words[0]},{s.declarations[1],words[1]}};
+    const List clears{s.declarations.data(),remove?2u:0u,0},sets{values,remove?0u:2u,0};
+    // Native routine owns the render lock, parameter allocation and dirty flag.
+    reinterpret_cast<void(*)(std::uintptr_t,const List*,const List*)>(gameImage+0x876030)(s.actor,&clears,&sets);
+}
+void stopShadowWalkMaterial(){
+    auto& s=shadowWalkMaterial;if(!s.active)return;
+    if(!shadowWalkMaterialIdentity()){s.active=false;++s.retired;return;}
+    NativeMaterialParams p{};
+    if(!shadowWalkMaterialOwned(p)){s.active=false;s.blocked=true;++s.refused;return;}
+    shadowWalkMaterialApply(true,{});
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeMaterialParams after{};
+    if(readNativeMaterialParams(memoryRead,base,s.actor,s.render,after)&&after.find(s.ids[0])<0&&after.find(s.ids[1])<0)++s.restores;
+    else ++s.refused;
+    s.active=false;s.variant=0;s.fade=0;
+}
+bool startShadowWalkMaterial(ULONGLONG tick){
+    auto& s=shadowWalkMaterial;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeSkeleton rig{};
+    if(!readNativeSkeleton(memoryRead,base,probeHandle,rig)||!rig.stable||rig.actor!=probeActor||rig.game!=observedGame||!bodyShadowTarget(rig)||rig.parents.size()!=219)return false;
+    NativeMaterialParams before{};if(!readNativeMaterialParams(memoryRead,base,rig.actor,rig.render,before))return false;
+    constexpr const char* names[]={"materialeffects/effect","materialeffects/fadevalue"};
+    std::array<std::uintptr_t,2> declarations{};std::array<unsigned,2> ids{};
+    for(unsigned i=0;i<2;++i){
+        declarations[i]=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x2433f90,names[i],false,false);
+        std::uintptr_t vt=0,info=0,name=0;unsigned flags=0;std::string text;
+        if(!declarations[i]||!memoryRead(declarations[i],&vt,8)||vt!=base+0x1b19b48||
+           !memoryRead(declarations[i]+0x10,&info,8)||info!=base+0x2433f90||!memoryRead(declarations[i]+8,&name,8)||
+           !worldIdentityString(memoryRead,name,text)||text!=names[i]||!memoryRead(declarations[i]+0x48,&ids[i],4)||ids[i]>=65536||
+           !memoryRead(declarations[i]+0x4c,&flags,4)||((flags>>4)&3)!=(i?3u:1u)||before.find(ids[i])>=0)return false;
+    }
+    if(ids[0]==ids[1])return false;
+    s.actor=rig.actor;s.handle=rig.handle;s.render=rig.render;s.game=rig.game;s.declarations=declarations;s.ids=ids;
+    s.token=shadowStream.token;s.peer=shadowStream.peerToken;s.epoch=outgoing.worldEpoch;s.deadline=tick+15000;
+    s.written={};s.written[0][0]=4;shadowWalkMaterialApply(false,s.written);s.active=true;
+    NativeMaterialParams after{};if(!shadowWalkMaterialOwned(after)){s.blocked=true;++s.refused;stopShadowWalkMaterial();return false;}
+    ++s.starts;return true;
+}
+void serviceShadowWalkMaterial(ULONGLONG tick){
+    if(!shadowWalkMaterialApi())return;auto& s=shadowWalkMaterial;unsigned variant=0;float amount=0;
+    AcquireSRWLockShared(&movementLock);const auto& p=movementPlayback;
+    if(localRole==0&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
+       p.clock.weight>.9f&&p.powerWeight>.9f&&p.powerVariant>=32&&p.powerVariant<=34&&!p.presentedDrawn){variant=p.powerVariant;amount=p.powerAmount;}
+    ReleaseSRWLockShared(&movementLock);
+    if(!variant||!coopGameplayReady(outgoing)||!shadowStreamCurrent(tick)||!shadowStream.peerReady){stopShadowWalkMaterial();if(!variant)s.blocked=false;return;}
+    if(s.active&&(tick>=s.deadline||s.token!=shadowStream.token||s.peer!=shadowStream.peerToken||s.handle!=probeHandle)){
+        stopShadowWalkMaterial();s.blocked=true;return;
+    }
+    if(!s.active){if(s.blocked)return;if(!startShadowWalkMaterial(tick)){++s.refused;s.blocked=true;return;}}
+    NativeMaterialParams before{};if(!shadowWalkMaterialOwned(before)){s.active=false;s.blocked=true;++s.refused;return;}
+    // Bounded hypothesis for visual comparison: native effect4 at partial fade.
+    // The original power dissolves FP helper arms completely. A full fade would
+    // erase the partner; this retains an inspectable complete-body silhouette.
+    const float mix=(std::max)(0.f,(std::min)(1.f,amount));
+    const float fade=.45f*(variant==32?mix:variant==34?1.f-mix:1.f);
+    auto words=s.written;std::memcpy(&words[1][0],&fade,4);s.variant=variant;
+    if(words!=s.written){shadowWalkMaterialApply(false,words);s.written=words;s.fade=fade;++s.updates;
+        NativeMaterialParams after{};if(!shadowWalkMaterialOwned(after)){s.active=false;s.blocked=true;++s.refused;}}
+}
+void writeShadowWalkMaterial(){
+    char path[MAX_PATH]{},temp[MAX_PATH]{};
+    if(std::snprintf(path,sizeof(path),"%s.shadowwalk-material.json",statusPath)>=sizeof(path)||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=sizeof(temp))return;
+    FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=shadowWalkMaterial;
+    fprintf(f,"{\"active\":%s,\"blocked\":%s,\"handle\":%u,\"variant\":%u,\"fade\":%.6f,\"starts\":%llu,\"updates\":%llu,\"restores\":%llu,\"refused\":%llu,\"retired\":%llu}\n",s.active?"true":"false",s.blocked?"true":"false",s.handle,s.variant,s.fade,s.starts,s.updates,s.restores,s.refused,s.retired);
+    fclose(f);MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+}

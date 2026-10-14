@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "bankVersion": 30,
+  "bankRevision": 4,
+  "bankSha256": "9030B30E348631CBA1617028D13CEFC93F77650A05203CE9510010A7064B7CBF",
+  "source": "host",
+  "kind": "crossbow",
+  "cameraView": "front",
+  "stanceTransitions": false,
+  "emptyOnly": false,
+  "travelling": false,
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+    "Native Steam v27 scene stream, v30 body bank and automatic cosmetic weapon attach ready",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Independent source/remote skeleton observations captured; exact cosmetic crossbow phase callback applied without refusals",
+    "Source-owned cocked/fired clip state reaches the remote body and remains fired after the last round, across scene completion",
+    "All 5 expected source-owned ranged phases reached the remote body through Steam",
+    "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 1.927,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.972,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.776,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.829,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 13.877,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 15.943,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "05377F9EAB5EEBA983CD35C9C3FC8E1AA3F349EDC24CDB42E0C8F15FD3B78065",
+  "capture": "Actual peer body and native source POV; source native input drives Steam presentation",
+  "scope": "Two-round native ranged body/hand attachment integration candidate. Muzzle checks, when explicitly listed, validate source-confirmed finite native effects. Visual acceptance, remote projectile/impact synchronization, audio validation, upgrades and unlisted stance/movement contexts remain unfinished. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

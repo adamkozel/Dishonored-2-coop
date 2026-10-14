@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-13T16:56:14.932001+02:00",
+  "passed": true,
+  "candidate": "6FF3C09E64DAADE87C1133294D50773CCF27968C7B9EA6DA7F28DDDE8A461BDE",
+  "roles": [
+    {
+      "role": "host",
+      "passed": true,
+      "first": {
+        "localExperiment": true,
+        "attempts": 1,
+        "nativeCalls": 5,
+        "refused": 2,
+        "noops": 0,
+        "handle": 171968090,
+        "generation": 3239,
+        "epoch": 16,
+        "before": 0,
+        "after": 1,
+        "flags": 8,
+        "result": "native_coin_reward_event_and_removal"
+      },
+      "duplicate": {
+        "localExperiment": true,
+        "attempts": 1,
+        "nativeCalls": 5,
+        "refused": 2,
+        "noops": 1,
+        "handle": 171968090,
+        "generation": 3239,
+        "epoch": 16,
+        "before": 0,
+        "after": 1,
+        "flags": 8,
+        "result": "already_collected"
+      },
+      "inventoryRestored": true,
+      "currencyRestored": true
+    },
+    {
+      "role": "client",
+      "passed": true,
+      "first": {
+        "localExperiment": true,
+        "attempts": 1,
+        "nativeCalls": 5,
+        "refused": 1,
+        "noops": 0,
+        "handle": 171968090,
+        "generation": 3239,
+        "epoch": 16,
+        "before": 0,
+        "after": 1,
+        "flags": 8,
+        "result": "native_coin_reward_event_and_removal"
+      },
+      "duplicate": {
+        "localExperiment": true,
+        "attempts": 1,
+        "nativeCalls": 5,
+        "refused": 1,
+        "noops": 1,
+        "handle": 171968090,
+        "generation": 3239,
+        "epoch": 16,
+        "before": 0,
+        "after": 1,
+        "flags": 8,
+        "result": "already_collected"
+      },
+      "inventoryRestored": true,
+      "currencyRestored": true
+    }
+  ],
+  "scope": "Exact one-coin direct native API feasibility in both roles, with local native UI/reward/removal, duplicate refusal and restored isolated baseline. Includes the native pickedUp event for this exact coin. No network pickup relay, arbitrary mission-effect coverage, shared wallet, or full co-op completion."
+}

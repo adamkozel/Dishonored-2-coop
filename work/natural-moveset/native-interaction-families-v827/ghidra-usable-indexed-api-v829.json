@@ -1,0 +1,84 @@
+{
+  "program": "Dishonored2.exe",
+  "scope": "Targeted static indexed-state setter and native call-site evidence. Local fixture implemented829, runtime pending.",
+  "functions": [
+    {
+      "address": "14077b870",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_14077b870(longlong param_1,longlong *param_2)\r\n\r\n{\r\n  byte *pbVar1;\r\n  int iVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  uint uVar5;\r\n  int iVar6;\r\n  ulonglong uVar7;\r\n  ulonglong uVar8;\r\n  \r\n  lVar3 = *(longlong *)(param_1 + 8);\r\n  uVar7 = 0;\r\n  uVar5 = *(uint *)(lVar3 + 0x78) & 0xffffff;\r\n  if (uVar5 != 0) {\r\n    plVar4 = *(longlong **)(lVar3 + 0x70);\r\n    uVar8 = uVar7;\r\n    do {\r\n      if (*plVar4 == *param_2) goto LAB_14077b8b6;\r\n      uVar8 = uVar8 + 1;\r\n      uVar7 = (ulonglong)((int)uVar7 + 1);\r\n      plVar4 = plVar4 + 0x10;\r\n    } while ((longlong)uVar8 < (longlong)(ulonglong)uVar5);\r\n  }\r\n  uVar7 = 0xffffffff;\r\nLAB_14077b8b6:\r\n  uVar5 = *(uint *)(lVar3 + 0x78) & 0xffffff;\r\n  iVar6 = (int)uVar7;\r\n  if ((-1 < iVar6) && (iVar6 < (int)uVar5)) {\r\n    iVar2 = *(int *)(param_1 + 0x28);\r\n    if (iVar6 != iVar2) {\r\n      if ((*(byte *)(param_1 + 0x30) & 2) != 0) {\r\n        *(int *)(param_1 + 0x2c) = iVar6;\r\n        pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n        *pbVar1 = *pbVar1 | 4;\r\n        return;\r\n      }\r\n      iVar6 = iVar6 + -1;\r\n      if (iVar6 < 0) {\r\n        iVar6 = uVar5 - 1;\r\n      }\r\n      FUN_14077a880(param_1,uVar7,CONCAT31((int3)((uint)iVar2 >> 8),iVar2 == iVar6),0);\r\n    }\r\n    pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n    *pbVar1 = *pbVar1 | 4;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_14077b870(longlong param_1,longlong *param_2)\r\n\r\n{\r\n  byte *pbVar1;\r\n  int iVar2;\r\n  longlong lVar3;\r\n  longlong *plVar4;\r\n  uint uVar5;\r\n  int iVar6;\r\n  ulonglong uVar7;\r\n  ulonglong uVar8;\r\n  \r\n  lVar3 = *(longlong *)(param_1 + 8);\r\n  uVar7 = 0;\r\n  uVar5 = *(uint *)(lVar3 + 0x78) & 0xffffff;\r\n  if (uVar5 != 0) {\r\n    plVar4 = *(longlong **)(lVar3 + 0x70);\r\n    uVar8 = uVar7;\r\n    do {\r\n      if (*plVar4 == *param_2) goto LAB_14077b8b6;\r\n      uVar8 = uVar8 + 1;\r\n      uVar7 = (ulonglong)((int)uVar7 + 1);\r\n      plVar4 = plVar4 + 0x10;\r\n    } while ((longlong)uVar8 < (longlong)(ulonglong)uVar5);\r\n  }\r\n  uVar7 = 0xffffffff;\r\nLAB_14077b8b6:\r\n  uVar5 = *(uint *)(lVar3 + 0x78) & 0xffffff;\r\n  iVar6 = (int)uVar7;\r\n  if ((-1 < iVar6) && (iVar6 < (int)uVar5)) {\r\n    iVar2 = *(int *)(param_1 + 0x28);\r\n    if (iVar6 != iVar2) {\r\n      if ((*(byte *)(param_1 + 0x30) & 2) != 0) {\r\n        *(int *)(param_1 + 0x2c) = iVar6;\r\n        pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n        *pbVar1 = *pbVar1 | 4;\r\n        return;\r\n      }\r\n      iVar6 = iVar6 + -1;\r\n      if (iVar6 < 0) {\r\n        iVar6 = uVar5 - 1;\r\n      }\r\n      FUN_14077a880(param_1,uVar7,CONCAT31((int3)((uint)iVar2 >> 8),iVar2 == iVar6),0);\r\n    }\r\n    pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n    *pbVar1 = *pbVar1 | 4;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    },
+    {
+      "address": "14077b920",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_14077b920(longlong param_1,int param_2,char param_3)\r\n\r\n{\r\n  byte *pbVar1;\r\n  uint uVar2;\r\n  int iVar3;\r\n  undefined4 uVar4;\r\n  \r\n  if (param_2 < 0) {\r\n    return;\r\n  }\r\n  uVar2 = *(uint *)(*(longlong *)(param_1 + 8) + 0x78) & 0xffffff;\r\n  if ((int)uVar2 <= param_2) {\r\n    return;\r\n  }\r\n  if (param_3 == '\\0') {\r\n    if (param_2 == *(int *)(param_1 + 0x28)) goto LAB_14077b989;\r\n    if ((*(byte *)(param_1 + 0x30) & 2) != 0) {\r\n      *(int *)(param_1 + 0x2c) = param_2;\r\n      pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n      *pbVar1 = *pbVar1 | 4;\r\n      return;\r\n    }\r\n    iVar3 = param_2 + -1;\r\n    if (iVar3 < 0) {\r\n      iVar3 = uVar2 - 1;\r\n    }\r\n    uVar4 = CONCAT31((int3)((uint)iVar3 >> 8),*(int *)(param_1 + 0x28) == iVar3);\r\n  }\r\n  else {\r\n    uVar4 = 0;\r\n  }\r\n  FUN_14077a880(param_1,param_2,uVar4,0);\r\nLAB_14077b989:\r\n  pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n  *pbVar1 = *pbVar1 | 4;\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_14077b920(longlong param_1,int param_2,char param_3)\r\n\r\n{\r\n  byte *pbVar1;\r\n  uint uVar2;\r\n  int iVar3;\r\n  undefined4 uVar4;\r\n  \r\n  if (param_2 < 0) {\r\n    return;\r\n  }\r\n  uVar2 = *(uint *)(*(longlong *)(param_1 + 8) + 0x78) & 0xffffff;\r\n  if ((int)uVar2 <= param_2) {\r\n    return;\r\n  }\r\n  if (param_3 == '\\0') {\r\n    if (param_2 == *(int *)(param_1 + 0x28)) goto LAB_14077b989;\r\n    if ((*(byte *)(param_1 + 0x30) & 2) != 0) {\r\n      *(int *)(param_1 + 0x2c) = param_2;\r\n      pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n      *pbVar1 = *pbVar1 | 4;\r\n      return;\r\n    }\r\n    iVar3 = param_2 + -1;\r\n    if (iVar3 < 0) {\r\n      iVar3 = uVar2 - 1;\r\n    }\r\n    uVar4 = CONCAT31((int3)((uint)iVar3 >> 8),*(int *)(param_1 + 0x28) == iVar3);\r\n  }\r\n  else {\r\n    uVar4 = 0;\r\n  }\r\n  FUN_14077a880(param_1,param_2,uVar4,0);\r\nLAB_14077b989:\r\n  pbVar1 = (byte *)(*(longlong *)(param_1 + 0x10) + 0xd4);\r\n  *pbVar1 = *pbVar1 | 4;\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "stateNameEmptyValue": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"address\":\"141ab2848\",\"length\":40,\"data\":[0,0,0,0,0,0,0,0,224,161,246,65,1,0,0,0,80,59,0,64,1,0,0,0,216,162,246,65,1,0,0,0,64,208,6,64,1,0,0,0],\"hex\":\"0000000000000000e0a1f64101000000503b004001000000d8a2f6410100000040d0064001000000\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"address\":\"141ab2848\",\"length\":40,\"data\":[0,0,0,0,0,0,0,0,224,161,246,65,1,0,0,0,80,59,0,64,1,0,0,0,216,162,246,65,1,0,0,0,64,208,6,64,1,0,0,0],\"hex\":\"0000000000000000e0a1f64101000000503b004001000000d8a2f6410100000040d0064001000000\"}"
+    },
+    "isError": false
+  },
+  "xrefs": {
+    "content": [
+      {
+        "type": "text",
+        "text": "From 143f2fb3c [DATA]\nFrom 140497fe3 [UNCONDITIONAL_CALL]\nFrom 14049802b [UNCONDITIONAL_CALL]"
+      }
+    ],
+    "structuredContent": {
+      "result": "From 143f2fb3c [DATA]\nFrom 140497fe3 [UNCONDITIONAL_CALL]\nFrom 14049802b [UNCONDITIONAL_CALL]"
+    },
+    "isError": false
+  },
+  "callerLookup": {
+    "content": [
+      {
+        "type": "text",
+        "text": "No function found for 0x140497fe3"
+      }
+    ],
+    "structuredContent": {
+      "result": "No function found for 0x140497fe3"
+    },
+    "isError": false
+  },
+  "guard": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"address\":\"14077b920\",\"length\":32,\"data\":[133,210,120,117,83,72,131,236,32,72,139,65,8,72,139,217,139,72,120,129,225,255,255,255,0,59,209,125,87,69,132,192],\"hex\":\"85d27875534883ec20488b4108488bd98b487881e1ffffff003bd17d574584c0\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"address\":\"14077b920\",\"length\":32,\"data\":[133,210,120,117,83,72,131,236,32,72,139,65,8,72,139,217,139,72,120,129,225,255,255,255,0,59,209,125,87,69,132,192],\"hex\":\"85d27875534883ec20488b4108488bd98b487881e1ffffff003bd17d574584c0\"}"
+    },
+    "isError": false
+  }
+}

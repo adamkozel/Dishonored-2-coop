@@ -1,0 +1,311 @@
+{
+  "at": "2026-10-14T15:46:04.050172+02:00",
+  "candidate": "candidate-npc-combat-v1123e",
+  "dll": "5C7931B69C020A9F3B1DFC7E38F51DFC46970218261C89BB3E84A3311469343C",
+  "harnesses": [
+    "../natural-moveset/Test-MissionUsable-v1144.ps1",
+    "../natural-moveset/Probe-UseFocus-v1133.ps1"
+  ],
+  "census": {
+    "dunwall": {
+      "usables": 52,
+      "evidence": "../natural-moveset/usable-census-dunwall-v1123.json"
+    },
+    "edgeOfTheWorld": {
+      "usablesPerRole": 269,
+      "sharedTogglesOriginal": 104,
+      "sharedTogglesWithReversed": 145,
+      "evidence": "../natural-moveset/mission-usable-v1144/usable-census-host.json"
+    }
+  },
+  "focusProbe": {
+    "evidence": "../natural-moveset/use-focus-v1133",
+    "sensorInteraction": "arkCpntPlayerSensorInteraction+0x80 high dword = focused entity handle (0x3fff.... = none)",
+    "playerInteraction": "arkCpntPlayerInteraction+0x38 = focused usable component"
+  },
+  "cases": [
+    {
+      "take": "mission-usable-v1124",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123",
+      "scope": "1123 census: 269 usables per role, 104 identical toggles on both characters, all 104 paired. Chosen vise sat 2 m from dock workers; the host took damage and aim failed.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 104
+    },
+    {
+      "take": "mission-usable-v1125",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123",
+      "scope": "Interior sink: the visible \"Sink - Open\" prompt and the tap (\"Use\") belong to other usables; no toggle changed.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 104
+    },
+    {
+      "take": "mission-usable-v1126",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123b",
+      "scope": "1123b (reversed toggles): 145 shared toggles paired; census diff after each press found no change (aim landed on the countertop/tap).",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1127",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123b",
+      "scope": "Diagnostic: press 150/400/900 ms at three heights on the sink, sync not armed: no change; camera on the countertop.",
+      "failure": "diagnostic complete",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1128",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123b",
+      "scope": "Window target: one transient context blip retired all 145 client channels (world_input_or_connection_scope_changed) -> 1123c.",
+      "failure": "Mission usable family did not pair",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1129",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "1123c: sndctrl_13 from outside reads \"Locked from the inside\"; inside aims at the frame.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1130",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Lateral sweep inside sndctrl_13: no prompt (blinds).",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1131",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Street trash bin: the teleport stand was outside streamed geometry; the host fell (Game Over). Lab restored.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1132",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Apartment cabinet from the floor proven by the door take: no prompt.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1134",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Focus-steered (1133 reader): outside focus = script_invisible_window_locked_191; no focus inside.",
+      "failure": "Ordinary native use did not reach 1 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1135",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Discovery sweep: the host focused script_rich_small_gp_window_handle_149 and opened sndctrl_14; the client converged natively (revision 2). The client then found no focus on the open window.",
+      "failure": "Ordinary native use did not reach 0 on client",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1136",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Known stand first: the host opened sndctrl_14 again; the client had no focus at origin heights.",
+      "failure": "Ordinary native use did not reach 0 on client",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1137",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Aims at the live driver entity position: the client still had no focus on the open window.",
+      "failure": "Ordinary native use did not reach 0 on client",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1138",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "The host could not refocus its own opened handle either, so this is not client-specific (open sash moves the handle).",
+      "failure": "Ordinary native use did not reach 0 on host",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1139",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "The client session arm was refused right after the intro cinematic (initial_catalog_refused) -> harness arm retry; 1123d arms by identity scope.",
+      "failure": "Mission usable family did not pair",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1140",
+      "passed": true,
+      "candidate": "candidate-npc-combat-v1123c",
+      "scope": "Pass (1123c): host native use of window_handle_149 opened sndctrl_14 (client converged 370 ms); client native use of window_handle_146 closed sndctrl_11 (host committed, converged 57 ms). The client use happened after the 150 s recording ended.",
+      "failure": null,
+      "cases": [
+        {
+          "sharedToggles": 145,
+          "target": "script_rich_small_01_sndctrl_11",
+          "hostUse": {
+            "height": 0.9,
+            "driver": "script_rich_small_gp_window_handle_149",
+            "from": 0,
+            "name": "script_rich_small_01_sndctrl_14",
+            "to": 1,
+            "bearing": 135,
+            "lateral": 0.0
+          },
+          "openConvergeMs": 370,
+          "hostTarget": "script_rich_small_01_sndctrl_14",
+          "declaration": "map_cpntusablewithstatelist_decl_45",
+          "pairedChannels": {
+            "client": 145,
+            "host": 145
+          },
+          "hostReuse": null,
+          "closeConvergeMs": 57,
+          "reopenConvergeMs": null,
+          "clientUse": {
+            "height": 1.3,
+            "driver": "script_rich_small_gp_window_handle_146",
+            "from": 1,
+            "name": "script_rich_small_01_sndctrl_11",
+            "to": 0,
+            "bearing": 225,
+            "lateral": 0.0
+          },
+          "position": [
+            -4.17938,
+            151.445,
+            13.8
+          ],
+          "misses": [
+            {
+              "candidate": "script_rich_small_01_sndctrl_13",
+              "role": "client",
+              "miss": "Ordinary native use did not reach 1 on client"
+            },
+            {
+              "candidate": "script_rich_small_01_sndctrl_12",
+              "role": "client",
+              "miss": "Ordinary native use did not reach 0 on client"
+            }
+          ]
+        }
+      ],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1141",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123d",
+      "scope": "1123d: the session stopped with unsupported_native_phase during host attempts -> 1123e (item wheel and tutorial modal suspend sessions).",
+      "failure": "Shared toggle did not converge script_rich_small_01_sndctrl_14 target 1 (host-use)",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1142",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123e",
+      "scope": "1123e instrumented: sessions active with no suspensions; focused single presses sometimes did not register natively; the client did not drive its toggle.",
+      "failure": "No client toggle could be driven by ordinary native use",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1143",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1123e",
+      "scope": "Press retry while focus holds: both directions converged; the harness waited 90 s for a 150 s recording (Recording failed).",
+      "failure": "Recording failed",
+      "cases": [],
+      "sharedToggles": 145
+    },
+    {
+      "take": "mission-usable-v1144",
+      "passed": true,
+      "candidate": "candidate-npc-combat-v1123e",
+      "scope": "Pass (1123e), recorded: host opens sndctrl_14 (client converges 221 ms), client closes sndctrl_11 (host converges 58 ms); 145 channels paired on both peers; sessions active; Dunwall fixture restored. Client video: window open with outside view and native \"Window\" prompt, then closed after Emily's use.",
+      "failure": null,
+      "cases": [
+        {
+          "target": "script_rich_small_01_sndctrl_11",
+          "clientUse": {
+            "driver": "script_rich_small_gp_window_handle_146",
+            "lateral": 0.0,
+            "bearing": 225,
+            "from": 1,
+            "to": 0,
+            "height": 1.3,
+            "name": "script_rich_small_01_sndctrl_11"
+          },
+          "reopenConvergeMs": null,
+          "closeConvergeMs": 58,
+          "hostUse": {
+            "driver": "script_rich_small_gp_window_handle_149",
+            "lateral": 0.0,
+            "bearing": 135,
+            "from": 0,
+            "to": 1,
+            "height": 0.9,
+            "name": "script_rich_small_01_sndctrl_14"
+          },
+          "openConvergeMs": 221,
+          "hostReuse": null,
+          "sharedToggles": 145,
+          "position": [
+            -4.17938,
+            151.445,
+            13.8
+          ],
+          "declaration": "map_cpntusablewithstatelist_decl_45",
+          "pairedChannels": {
+            "client": 145,
+            "host": 145
+          },
+          "hostTarget": "script_rich_small_01_sndctrl_14",
+          "misses": []
+        }
+      ],
+      "sharedToggles": 145
+    }
+  ],
+  "findings": [
+    "Confirmed static/runtime: usables are state-list components; a structural two-state toggle family (entries enter 255 / exit i or uniformly reversed, no apply-on-finish, uniform custom prompt, no transition time, flags bit 0 clear, not a vault) replaces the Dunwall name rule; declaration names are per-map and only compared between peers.",
+    "Confirmed runtime: Edge of the World has 269 usables per role; 145 toggles are identical on Corvo and Emily and all pair.",
+    "Confirmed runtime (1133): windows are operated through a separate *_window_handle_* UsableStatic; native focus is readable at arkCpntPlayerSensorInteraction+0x80 (high dword).",
+    "Confirmed runtime (1144): ordinary native use by the host (open) and by the client (close) converges natively on the peer on a mission map.",
+    "Robustness found on the way: transient channel context blips pause instead of retiring (1123c); session arm checks identity scope (1123d); item wheel (8) and tutorial modals (12) suspend door/usable/coin sessions (1123e)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Levers/cranks with scripted consequences (script_lever_*) are structurally eligible; their script side effects on the replica are unverified (hypothesis: native index request replays the authored state change).",
+    "Multi-state devices (typewriters, safes, 5/10-state) and vaults keep their own semantics.",
+    "Usable sync across mission checkpoints/reloads (stage 6).",
+    "Native press reliability: a focused single press sometimes does not register; harness retries."
+  ]
+}

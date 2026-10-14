@@ -1,0 +1,82 @@
+#pragma once
+#include "native_player_domino_item.h"
+#include "native_player_power_scene.h"
+// Observed v187/v235 standing and v245/v249/v251 crouched armed Emily;
+// v253/v263 preserve the same ordinary/final scenes with the sword holstered.
+// One native scene instance changes
+// subscene while retaining its handle; a phase change is not a new cast.
+inline unsigned nativeDominoVariant(const std::string& asset,const std::string& sub,unsigned duration){
+    if(asset!="midnight/gameplay/player/base/powers/power_phantasmal_cast.midnightscene")return 0;
+    if(sub=="Cast_In"&&duration==266)return 19;
+    if(sub=="Cast_Loop"&&duration==1333)return 20;
+    // v235 native target deselection uses final_Select. Exact installed scene
+    // assigns both selection subscenes the same 400ms native hand clip. Reuse
+    // the authored full-body selection gesture; source owns the final exit.
+    if((sub=="Cast_Select"||sub=="Cast_final_Select")&&duration==400)return 21;
+    if(sub=="Cast_Select_out"&&duration==266)return 22;
+    return 0; // fire/slide are assets, not yet observed coverage.
+}
+template<class Read> bool readNativePlayerDominoScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerPowerScene& out){
+    NativeDominoItem item{};NativePlayerPowerScene s{};
+    if(states.player.logic!=1||states.player.current>1||!states.defaultMode||states.active.empty()||states.active.size()>2||
+       !readNativeDominoItem(read,base,item,true)||!item.instantiated||!item.started||
+       item.player.sword.game!=states.player.game||item.player.sword.actor!=states.player.player)return false;
+    unsigned ground=0,casting=0;
+    for(const auto& a:states.active){
+        if((states.player.current==0&&a.id==0&&a.vtable==base+0x1c85628)||
+           (states.player.current==1&&a.id==6&&a.vtable==base+0x1c84258))++ground;
+        else if(a.id==72&&a.vtable==base+0x1c3eeb8)++casting;
+        else return false;
+    }
+    if(ground!=1||casting>1)return false;
+    const auto game=states.player.game,manager=game+0x1f5338;
+    std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> counts{};
+    std::uintptr_t declaration=0,scene=0,bindings=0;unsigned bindingFlags=0;
+    for(unsigned field=0;field<2;++field){const auto at=manager+(field?0x610:0);
+        if(!read(at,&lists[field],8)||!read(at+8,&counts[field],4)||(counts[field]&0xffffff)>512||((counts[field]&0xffffff)&&!lists[field]))return false;
+        for(unsigned i=0;i<(counts[field]&0xffffff);++i){
+            std::uintptr_t c=0,d=0,vt=0,name=0,sc=0;unsigned state=0,duration=0;std::string asset,sub;
+            if(!read(lists[field]+i*8,&c,8)||!c||!read(c+0x27c,&state,4))return false;
+            if(state!=3)continue;
+            if(!read(c,&d,8)||!d||!read(d,&vt,8)||vt!=base+0x1affbc8||!read(d+8,&name,8)||!worldIdentityString(read,name,asset))return false;
+            if(asset!="midnight/gameplay/player/base/powers/power_phantasmal_cast.midnightscene")continue;
+            if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
+            const auto variant=nativeDominoVariant(asset,sub,duration);if(!variant)return false;
+            if(s.instance){if(s.instance==c)continue;return false;}
+            s.instance=c;s.variant=variant;s.asset=std::move(asset);s.subscene=std::move(sub);s.durationMs=duration;declaration=d;scene=sc;
+        }
+    }
+    // v239: native state72 retires around 100ms into the final 400ms scene.
+    // The same owned scene remains active through recovery. Only this exact
+    // final subscene (not ordinary Select) may finish on grounded state0 alone,
+    // or exact Sneaking6 when crouched (native v251 preserves the owned scene).
+    // Holstered v263 confirms both ground contexts, including the owned scene
+    // after casting72 retires; equipment identity still must survive rereading.
+    const bool finalRecovery=s.variant==21&&s.subscene=="Cast_final_Select";
+    if(!s.instance||(!casting&&s.variant!=22&&!finalRecovery)||!read(s.instance+0x158,&s.handle,4)||!s.handle||!read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||
+       (finalRecovery&&s.timeMs>s.durationMs)||
+       !read(s.instance+0x10,&bindings,8)||!bindings||!read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)!=2)return false;
+    std::array<std::uintptr_t,2> actors{};unsigned armCount=0,bodyCount=0;
+    for(unsigned i=0;i<2;++i){unsigned handle=0;
+        if(!read(bindings+i*0x20+8,&actors[i],8)||!actors[i]||!read(actors[i]+0xa8,&handle,4)||worldIdentityEntity(read,game,handle)!=actors[i])return false;
+        if(actors[i]==states.player.player){if(++bodyCount>1||handle!=1)return false;}
+        else if(++armCount>1||!readNativePlayerArm(read,base,game,handle,s.arm)||s.arm.actor!=actors[i]||s.arm.player!=states.player.player||s.arm.side!=1||s.arm.character!=2)return false;
+    }
+    if(armCount!=1||bodyCount!=1)return false;
+    std::uintptr_t again=0;unsigned number=0;
+    if(!read(s.instance,&again,8)||again!=declaration||!read(s.instance+8,&again,8)||again!=scene||!read(s.instance+0x158,&number,4)||number!=s.handle||
+       !read(s.instance+0x27c,&number,4)||number!=3||!read(s.instance+0x10,&again,8)||again!=bindings||!read(s.instance+0x18,&number,4)||number!=bindingFlags)return false;
+    for(unsigned i=0;i<2;++i){
+        if(!read(bindings+i*0x20+8,&again,8)||again!=actors[i])return false;
+        const auto at=manager+(i?0x610:0);if(!read(at,&again,8)||again!=lists[i]||!read(at+8,&number,4)||number!=counts[i])return false;
+    }
+    NativePlayerStates finalStates{};NativeDominoItem finalItem{};NativePlayerArm finalArm{};
+    if(!readNativePlayerStates(read,base,finalStates)||finalStates.player.game!=game||finalStates.player.player!=states.player.player||
+       finalStates.component!=states.component||finalStates.mode!=states.mode||finalStates.player.current!=states.player.current||!finalStates.defaultMode||finalStates.active.size()!=states.active.size()||
+       !readNativeDominoItem(read,base,finalItem,true)||!finalItem.started||!sameSwordEquipmentIdentity(item.player.sword,finalItem.player.sword)||
+       finalItem.entry!=item.entry||finalItem.component!=item.component||finalItem.entity!=item.entity||finalItem.handle!=item.handle||
+       finalItem.equipmentDeclaration!=item.equipmentDeclaration||finalItem.parentDeclaration!=item.parentDeclaration||
+       !readNativePlayerArm(read,base,game,s.arm.handle,finalArm)||!sameNativePlayerArm(s.arm,finalArm))return false;
+    for(unsigned i=0;i<states.active.size();++i)if(states.active[i].id!=finalStates.active[i].id||states.active[i].pointer!=finalStates.active[i].pointer||states.active[i].vtable!=finalStates.active[i].vtable)return false;
+    s.power=item;out=std::move(s);return true;
+}

@@ -1,0 +1,39 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140533F70: push        rbx
+  0000000140533F72: sub         rsp,20h
+  0000000140533F76: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140533F7D: movzx       ebx,dl
+  0000000140533F80: call        00000001408A8BA0
+  0000000140533F85: test        rax,rax
+  0000000140533F88: je          0000000140533FC9
+  0000000140533F8A: lea         rdx,[00000001439AED60h]
+  0000000140533F91: mov         r8d,2
+  0000000140533F97: mov         rcx,rax
+  0000000140533F9A: call        0000000140877720
+  0000000140533F9F: test        rax,rax
+  0000000140533FA2: je          0000000140533FC9
+  0000000140533FA4: mov         rax,qword ptr [rax+0000000000000090h]
+  0000000140533FAB: test        rax,rax
+  0000000140533FAE: je          0000000140533FC9
+  0000000140533FB0: mov         rcx,qword ptr [rax+0000000000000138h]
+  0000000140533FB7: test        rcx,rcx
+  0000000140533FBA: je          0000000140533FC9
+  0000000140533FBC: movzx       edx,bl
+  0000000140533FBF: add         rsp,20h
+  0000000140533FC3: pop         rbx
+  0000000140533FC4: jmp         0000000140681C80
+  0000000140533FC9: add         rsp,20h
+  0000000140533FCD: pop         rbx
+  0000000140533FCE: ret
+  0000000140533FCF: int         3
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "pitch": 0,
+  "stance": "standing",
+  "leftY": 12000,
+  "checks": [
+    "One native grenade selected and requested native stance confirmed",
+    "Actual native cooking entry, cooking idle and throw scene observed",
+    "Native jump/fall state observed independently of controller input",
+    "Native action consumed the single granted grenade",
+    "Both inventories restored to the pre-grant quantities",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.021,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0,
+      "stance": "standing",
+      "leftY": 12000
+    },
+    {
+      "videoTime": 1.586,
+      "input": "Native jump while cooking; trigger still held"
+    },
+    {
+      "videoTime": 2.117,
+      "input": "Native trigger release after jump; no velocity or gameplay calls"
+    }
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_idle.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high_ooa.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_throw_high.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_cooking_in.midnightscene"
+  ],
+  "dll": "CB1685DD316E9099AD551BF349987ACEADFBD1218EC8F8D89941D440CBEEAC4F",
+  "probe": "CBF8DDA86965437A9245B5288A58ABD76832BBD530D141AF5A3D1D6F39E0D512",
+  "scope": "Source native one-grenade jump/cook/release observation only. Input alone does not establish airborne overlap; inspect exact state/scene rows. Real native projectile/world effects are reset through the isolated checkpoints. No remote grenade animation, damage authority or projectile replication is claimed."
+}

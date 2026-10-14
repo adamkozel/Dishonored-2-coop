@@ -1,0 +1,66 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001404F2380: mov         qword ptr [rsp+8],rcx
+  00000001404F2385: push        rbx
+  00000001404F2386: sub         rsp,30h
+  00000001404F238A: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001404F2393: mov         rbx,rcx
+  00000001404F2396: call        00000001404F2D60
+  00000001404F239B: nop
+  00000001404F239C: lea         rax,[0000000141B6AAB8h]
+  00000001404F23A3: mov         qword ptr [rbx],rax
+  00000001404F23A6: mov         dword ptr [rbx+0000000000000B60h],0
+  00000001404F23B0: lea         rcx,[rbx+0000000000000B68h]
+  00000001404F23B7: call        0000000140028F80
+  00000001404F23BC: nop
+  00000001404F23BD: lea         rcx,[rbx+0000000000000E10h]
+  00000001404F23C4: call        0000000140028FC0
+  00000001404F23C9: lea         rcx,[rbx+0000000000000E20h]
+  00000001404F23D0: call        0000000140028FC0
+  00000001404F23D5: lea         rcx,[rbx+0000000000000E30h]
+  00000001404F23DC: call        0000000140028FC0
+  00000001404F23E1: nop
+  00000001404F23E2: mov         rax,rbx
+  00000001404F23E5: add         rsp,30h
+  00000001404F23E9: pop         rbx
+  00000001404F23EA: ret
+  00000001404F23EB: int         3
+  00000001404F23EC: int         3
+  00000001404F23ED: int         3
+  00000001404F23EE: int         3
+  00000001404F23EF: int         3
+  00000001404F23F0: mov         qword ptr [rsp+8],rcx
+  00000001404F23F5: push        rdi
+  00000001404F23F6: sub         rsp,30h
+  00000001404F23FA: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001404F2403: mov         qword ptr [rsp+48h],rbx
+  00000001404F2408: mov         ebx,edx
+  00000001404F240A: mov         rdi,rcx
+  00000001404F240D: add         rcx,0E8h
+  00000001404F2414: call        000000014061A0A0
+  00000001404F2419: nop
+  00000001404F241A: mov         rcx,rdi
+  00000001404F241D: call        0000000140022C10
+  00000001404F2422: test        bl,1
+  00000001404F2425: je          00000001404F242F
+  00000001404F2427: mov         rcx,rdi
+  00000001404F242A: call        00000001400F1520
+  00000001404F242F: mov         rax,rdi
+  00000001404F2432: mov         rbx,qword ptr [rsp+48h]
+  00000001404F2437: add         rsp,30h
+  00000001404F243B: pop         rdi
+  00000001404F243C: ret
+  00000001404F243D: int         3
+  00000001404F243E: int         3
+  00000001404F243F: int         3
+  00000001404F2440: 48
+
+  Summary
+
+     1A7D000 .text

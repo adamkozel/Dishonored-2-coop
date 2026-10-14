@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-14T17:16:43.533053+02:00",
+  "candidate": "candidate-npc-combat-v1171",
+  "dll": "C532DE0B0B32ECD2C2D6159324EE2B3429C6E83DC06AC932348A110CD76454AC",
+  "harnesses": [
+    "../natural-moveset/Test-TriggerMirror-v1174.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-trigger-mirror-v1174",
+      "passed": true,
+      "scope": "Pass, client-originated: the client walked the same trigger route while the host stayed at the docks; all 9 client-local script-trigger events replayed natively in the host world for Corvo (none missing/rejected); native tutorial modal (logic 12) on both peers; host HUD showed the objective update and HOSTILE TERRITORY without moving.",
+      "cases": [
+        {
+          "hostNotFound": 0,
+          "hostRejected": 0,
+          "hostApplied": 9,
+          "hostMirroredEvents": [
+            "script_trigger_docks_photograph_area:True:0x1",
+            "script_trigger_docks_oh_workers_dreadfulwale:True:0x1",
+            "script_trigger_docks_photograph_area:False:0x1",
+            "script_trigger_docks_oh_workers_dreadfulwale:False:0x1",
+            "script_trigger_streets_wol_tutorial:True:0x1",
+            "script_trigger_streets_beforesquare_wol_speaker_01:True:0x1",
+            "script_trigger_streets_wol_area:True:0x1",
+            "script_trigger_streets_hostilezone_wol:True:0x1",
+            "script_trigger_neutralzone:False:0x1"
+          ],
+          "tutorial": [
+            {
+              "client": 12,
+              "host": 12
+            }
+          ],
+          "clientLocalEvents": [
+            "script_trigger_docks_photograph_area:True",
+            "script_trigger_docks_oh_workers_dreadfulwale:True",
+            "script_trigger_docks_photograph_area:False",
+            "audio_water_water_volume:True",
+            "audio_exteriors_area_volume_360:False",
+            "script_trigger_docks_oh_workers_dreadfulwale:False",
+            "audio_exteriors_area_volume_300:True",
+            "script_trigger_streets_wol_tutorial:True",
+            "script_trigger_streets_beforesquare_wol_speaker_01:True",
+            "script_trigger_streets_wol_area:True",
+            "script_trigger_streets_hostilezone_wol:True",
+            "audio_water_water_volume:False",
+            "script_trigger_neutralzone:False"
+          ],
+          "clientSent": 9
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: trigger mirroring is symmetric; either player's scripted trigger crossing advances the partner's mission script natively (audits 1173 and 1175)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Full mission walk with the mirror on; mission end/level transition."
+  ]
+}

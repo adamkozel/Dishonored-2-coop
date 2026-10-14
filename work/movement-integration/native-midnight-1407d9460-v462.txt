@@ -1,0 +1,56 @@
+
+ulonglong FUN_1407d9460(undefined8 param_1,undefined8 param_2,uint param_3,undefined4 *param_4,
+                       undefined1 param_5)
+
+{
+  byte bVar1;
+  longlong lVar2;
+  undefined8 uVar3;
+  undefined8 uVar4;
+  ulonglong uVar5;
+  undefined8 local_20;
+  int local_18;
+  
+  local_18 = 0;
+  local_20 = param_1;
+  lVar2 = FUN_1407d5860(param_1,param_2,&local_20,param_4,0xfffffffffffffffe);
+  if (lVar2 == 0) {
+    uVar5 = 0;
+    if (local_18 != 0) {
+      uVar5 = FUN_1407d7050(local_20);
+    }
+    uVar5 = uVar5 & 0xffffffffffffff00;
+  }
+  else {
+    if (*(int *)(lVar2 + 0x27c) == 9) {
+      (**(code **)(*(longlong *)PTR_PTR_142286cf8 + 0xa0))();
+      uVar3 = FUN_14014bef0(PTR_DAT_142294408,"arkMidnight::InterruptionFlags_t",
+                            (longlong)(int)param_3);
+      uVar4 = FUN_1407cd870(lVar2);
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830("[%s] is stopped by see callstack in log (%s).",uVar4,uVar3);
+    }
+    if (*(int *)(lVar2 + 0x27c) == 10) {
+      bVar1 = 1;
+    }
+    else {
+      bVar1 = FUN_1407cfcd0(lVar2,param_3 | 2,param_5);
+      if (bVar1 == 0) {
+        if (param_4 != (undefined4 *)0x0) {
+          *param_4 = 6;
+        }
+      }
+      else {
+        FUN_1407d17d0(lVar2,param_3 | 2);
+        FUN_1407d7050(param_1,*(undefined4 *)(lVar2 + 0x158));
+      }
+    }
+    if (local_18 != 0) {
+      FUN_1407d7050(local_20);
+    }
+    uVar5 = (ulonglong)bVar1;
+  }
+  return uVar5;
+}
+
+

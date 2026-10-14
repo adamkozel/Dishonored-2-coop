@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-14T18:25:37.690567+02:00",
+  "candidate": "candidate-npc-combat-v1193",
+  "dll": "D46F838EDEB9B90F718DC9CA965BB53B2078C9358DC9EAF8C95FED07E946C2F0",
+  "cases": [
+    {
+      "take": "../release/product-boot-v1187",
+      "candidate": "candidate-npc-combat-v1188",
+      "passed": false,
+      "failure": "Steam interfaces not ready in product mode",
+      "scope": "Standalone process from the lab game copy, no lab environment, temporary d2coop/d2coop.cfg and isolated fs_savepath: product mode activated (status in d2coop, partner assets detected, controller waiting_partner) but Steam interfaces were not acquired (lazy acquisition on host/join, so the join callback was unregistered); the lab loopback listener also opened."
+    },
+    {
+      "take": "../release/product-boot-v1194",
+      "candidate": "candidate-npc-combat-v1193",
+      "passed": true,
+      "scope": "Same boot on 1193: product mode active, Steam interfaces ready at boot (join callback registered), no UDP 31426 loopback endpoint, no session started by itself; the game reached its native boot screens; process closed and temporary d2coop folder removed; protected files unchanged; lab instances stayed fresh.",
+      "online": {
+        "steamReady": true,
+        "active": false,
+        "host": false,
+        "phase": 0,
+        "result": "off",
+        "self": "0",
+        "lobby": "0",
+        "owner": "0",
+        "lobbyMembers": 0,
+        "listener": 0,
+        "connection": 0,
+        "connectionState": 0,
+        "inviteOpened": false,
+        "joinRequests": 0,
+        "launchLobby": "0",
+        "role": 0
+      },
+      "product": {
+        "productMode": true,
+        "autoArm": false,
+        "result": "waiting_partner",
+        "step": 0,
+        "worlds": 0,
+        "dispatched": 0,
+        "last": "",
+        "hostKeys": 0,
+        "leaveKeys": 0,
+        "role": 0,
+        "partnerAssets": true,
+        "dataDir": "set"
+      },
+      "loopbackEndpoints": 0
+    }
+  ],
+  "package": {
+    "path": "../../outputs/release/d2coop-v1193",
+    "release": "r4",
+    "files": 13,
+    "readme": "README.txt",
+    "test": "../release/release-install-v1195/result.json",
+    "cases": [
+      {
+        "case": "install",
+        "passed": true,
+        "message": "Installed candidate-npc-combat-v1193: 13 files; backup in d2coop-backup/20261014-182447"
+      },
+      {
+        "case": "reinstall_refused",
+        "passed": true,
+        "message": null
+      },
+      {
+        "case": "rollback_byte_identical",
+        "passed": true,
+        "message": "Rolled back: 12 added files removed, 1 originals restored."
+      },
+      {
+        "case": "wrong_exe_refused_unchanged",
+        "passed": true,
+        "message": null
+      },
+      {
+        "case": "modified_master_refused_unchanged",
+        "passed": true,
+        "message": null
+      },
+      {
+        "case": "steam_install_untouched",
+        "passed": true,
+        "message": null
+      }
+    ]
+  },
+  "findings": [
+    "Confirmed runtime: product mode activates outside the lab environment, acquires the game's own Steam interfaces at boot and stays idle (no loopback, no session) until F7 / Steam join.",
+    "Release r4 (d2coop-v1193) supersedes r3 (d2coop-v1181, no Steam-at-boot); install/rollback passes all six scratch cases."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Two-account online validation (user): F7 host, invite/Join Game, disconnect and reconnect.",
+    "Control soak to attribute memory growth; longer soak.",
+    "In-game UI/character choice; stage 6 mission transition."
+  ]
+}

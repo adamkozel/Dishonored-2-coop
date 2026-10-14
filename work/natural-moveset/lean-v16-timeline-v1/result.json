@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host stance=0 side=-1: exact native lean amount selects full-body parameter curve",
+    "host stance=0 side=-1: movement exits lean and restores standing/crouched gait",
+    "host stance=0 side=1: exact native lean amount selects full-body parameter curve",
+    "host stance=0 side=1: movement exits lean and restores standing/crouched gait",
+    "host stance=1 side=-1: exact native lean amount selects full-body parameter curve",
+    "host stance=1 side=-1: movement exits lean and restores standing/crouched gait",
+    "host stance=1 side=1: exact native lean amount selects full-body parameter curve",
+    "host stance=1 side=1: movement exits lean and restores standing/crouched gait",
+    "client stance=0 side=-1: exact native lean amount selects full-body parameter curve",
+    "client stance=0 side=-1: movement exits lean and restores standing/crouched gait",
+    "client stance=0 side=1: exact native lean amount selects full-body parameter curve",
+    "client stance=0 side=1: movement exits lean and restores standing/crouched gait",
+    "client stance=1 side=-1: exact native lean amount selects full-body parameter curve",
+    "client stance=1 side=-1: movement exits lean and restores standing/crouched gait",
+    "client stance=1 side=1: exact native lean amount selects full-body parameter curve",
+    "client stance=1 side=1: movement exits lean and restores standing/crouched gait",
+    "Native player health unchanged on both roles"
+  ],
+  "dll": "A0B648425DA7C8EB9D5C138BF0550434E124E6574D0085F5021D14691C346471",
+  "scope": "Horizontal standing/crouched native lean and locomotion recovery on both characters. Vertical peeking, collision-limited lean and arbitrary combat interruptions remain unverified; visual acceptance is separate."
+}

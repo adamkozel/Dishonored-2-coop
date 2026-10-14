@@ -1,0 +1,214 @@
+{
+  "at": "2026-10-14T11:51:25.265469+02:00",
+  "candidate": "candidate-npc-combat-v1059c",
+  "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+  "harnesses": [
+    "../natural-moveset/Test-MissionDoor-v1066.ps1",
+    "../natural-moveset/Test-MissionDoor-v1067.ps1",
+    "../natural-moveset/Test-MissionDoor-v1068.ps1",
+    "../natural-moveset/Test-MissionDoor-v1069.ps1"
+  ],
+  "cases": [
+    {
+      "take": "mission-door-v1066",
+      "passed": false,
+      "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+      "scope": "Door sync armed on Edge of the World without code change: 16 doors catalogued and paired on both peers (session active). Only candidate tried was not opened by the host: entity origin is the hinge, aim hit the frame. Restoration first reported a native inventory read failure; repaired by re-running Restore-LabNoteInventory (note-restoration-repair passed, both inventories match baseline).",
+      "failure": "No usable paired door converged among 5 candidates",
+      "cases": [
+        {
+          "door": "env_interiors_door_interior_350cm_01_19",
+          "skipped": "host_native_use_did_not_open (locked or not targeted)"
+        }
+      ],
+      "pairing": {
+        "client": 16,
+        "clientResult": "ordinary_door_catalog_armed",
+        "hostSession": "active",
+        "paired": [
+          "env_door_glass_350cm_01_1",
+          "env_door_glass_350cm_01_2",
+          "env_interiors_door_glass_350cm_01_2",
+          "env_interiors_door_interior_350cm_01_1",
+          "env_interiors_door_interior_350cm_01_15",
+          "env_interiors_door_interior_350cm_01_19",
+          "env_interiors_door_interior_350cm_01_20",
+          "env_interiors_door_interior_350cm_01_21",
+          "env_interiors_door_interior_350cm_01_8",
+          "env_interiors_door_interior_350cm_01_9",
+          "env_interiors_door_medium_template_16",
+          "env_interiors_door_medium_template_19",
+          "env_interiors_door_metal_kar_350_01",
+          "eotw_lights_01_door_grid_metal_350_01",
+          "script_door_grid_metal_350_01_1",
+          "script_door_overseersoutpost_3rdfloor_observationroom"
+        ],
+        "host": 16,
+        "clientSession": "active",
+        "hostResult": "ordinary_door_catalog_armed"
+      }
+    },
+    {
+      "take": "mission-door-v1067",
+      "passed": false,
+      "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+      "scope": "Yaw sweep: host ordinary open (offset -20 deg) converged natively on the client (revision2 applied). Client close never targeted the opened panel (swung into the room).",
+      "failure": "Client closed env_interiors_door_interior_350cm_01_19 but host door did not converge (host current 2)",
+      "cases": [
+        {
+          "clientCloseConverged": false,
+          "hostOpenConverged": true,
+          "door": "env_interiors_door_interior_350cm_01_19"
+        }
+      ],
+      "pairing": {
+        "clientResult": "ordinary_door_catalog_armed",
+        "host": 16,
+        "hostResult": "ordinary_door_catalog_armed",
+        "client": 16,
+        "clientSession": "active",
+        "hostSession": "active",
+        "paired": [
+          "env_door_glass_350cm_01_1",
+          "env_door_glass_350cm_01_2",
+          "env_interiors_door_glass_350cm_01_2",
+          "env_interiors_door_interior_350cm_01_1",
+          "env_interiors_door_interior_350cm_01_15",
+          "env_interiors_door_interior_350cm_01_19",
+          "env_interiors_door_interior_350cm_01_20",
+          "env_interiors_door_interior_350cm_01_21",
+          "env_interiors_door_interior_350cm_01_8",
+          "env_interiors_door_interior_350cm_01_9",
+          "env_interiors_door_medium_template_16",
+          "env_interiors_door_medium_template_19",
+          "env_interiors_door_metal_kar_350_01",
+          "eotw_lights_01_door_grid_metal_350_01",
+          "script_door_grid_metal_350_01_1",
+          "script_door_overseersoutpost_3rdfloor_observationroom"
+        ]
+      }
+    },
+    {
+      "take": "mission-door-v1068",
+      "passed": false,
+      "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+      "scope": "Wider close sweep (+-90 deg) still could not target the inward-swung panel from outside; host open converged again.",
+      "failure": "Client closed env_interiors_door_interior_350cm_01_19 but host door did not converge (host current 2)",
+      "cases": [
+        {
+          "clientCloseConverged": false,
+          "hostOpenConverged": true,
+          "door": "env_interiors_door_interior_350cm_01_19"
+        }
+      ],
+      "pairing": {
+        "client": 16,
+        "hostResult": "ordinary_door_catalog_armed",
+        "paired": [
+          "env_door_glass_350cm_01_1",
+          "env_door_glass_350cm_01_2",
+          "env_interiors_door_glass_350cm_01_2",
+          "env_interiors_door_interior_350cm_01_1",
+          "env_interiors_door_interior_350cm_01_15",
+          "env_interiors_door_interior_350cm_01_19",
+          "env_interiors_door_interior_350cm_01_20",
+          "env_interiors_door_interior_350cm_01_21",
+          "env_interiors_door_interior_350cm_01_8",
+          "env_interiors_door_interior_350cm_01_9",
+          "env_interiors_door_medium_template_16",
+          "env_interiors_door_medium_template_19",
+          "env_interiors_door_metal_kar_350_01",
+          "eotw_lights_01_door_grid_metal_350_01",
+          "script_door_grid_metal_350_01_1",
+          "script_door_overseersoutpost_3rdfloor_observationroom"
+        ],
+        "clientResult": "ordinary_door_catalog_armed",
+        "host": 16,
+        "hostSession": "active",
+        "clientSession": "active"
+      }
+    },
+    {
+      "take": "mission-door-v1069",
+      "passed": true,
+      "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+      "scope": "Role parity with opens: host opened env_interiors_door_interior_350cm_01_19 (client native door opened, revision applied); client opened env_interiors_door_medium_template_19 (host native door opened). Five other paired doors were already open (state2) on both peers. Dunwall fixture restored.",
+      "failure": null,
+      "cases": [
+        {
+          "yawOffset": -20,
+          "source": "host",
+          "door": "env_interiors_door_interior_350cm_01_19",
+          "peerConverged": true
+        },
+        {
+          "skipped": "not_closed host 2 client 2",
+          "source": "client",
+          "door": "env_door_glass_350cm_01_1"
+        },
+        {
+          "skipped": "not_closed host 2 client 2",
+          "source": "client",
+          "door": "script_door_grid_metal_350_01_1"
+        },
+        {
+          "skipped": "not_closed host 2 client 2",
+          "source": "client",
+          "door": "env_interiors_door_metal_kar_350_01"
+        },
+        {
+          "skipped": "not_closed host 2 client 2",
+          "source": "client",
+          "door": "env_interiors_door_interior_350cm_01_9"
+        },
+        {
+          "skipped": "not_closed host 2 client 2",
+          "source": "client",
+          "door": "env_interiors_door_interior_350cm_01_8"
+        },
+        {
+          "yawOffset": 40,
+          "source": "client",
+          "door": "env_interiors_door_medium_template_19",
+          "peerConverged": true
+        }
+      ],
+      "pairing": {
+        "clientSession": "active",
+        "hostSession": "active",
+        "clientResult": "ordinary_door_catalog_armed",
+        "hostResult": "ordinary_door_catalog_armed",
+        "host": 16,
+        "client": 16,
+        "paired": [
+          "env_door_glass_350cm_01_1",
+          "env_door_glass_350cm_01_2",
+          "env_interiors_door_glass_350cm_01_2",
+          "env_interiors_door_interior_350cm_01_1",
+          "env_interiors_door_interior_350cm_01_15",
+          "env_interiors_door_interior_350cm_01_19",
+          "env_interiors_door_interior_350cm_01_20",
+          "env_interiors_door_interior_350cm_01_21",
+          "env_interiors_door_interior_350cm_01_8",
+          "env_interiors_door_interior_350cm_01_9",
+          "env_interiors_door_medium_template_16",
+          "env_interiors_door_medium_template_19",
+          "env_interiors_door_metal_kar_350_01",
+          "eotw_lights_01_door_grid_metal_350_01",
+          "script_door_grid_metal_350_01_1",
+          "script_door_overseersoutpost_3rdfloor_observationroom"
+        ]
+      }
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: door sync (chapters 56-61) has no map gate and pairs per door, so per-character worlds intersect naturally; 16 doors pair in Edge of the World.",
+    "Confirmed runtime: ordinary native door use by either role converges natively on the peer on a mission map.",
+    "Harness: door entity origins are hinges; aim needs a yaw sweep; inward-swinging open panels are not targetable from outside."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Closing on mission maps (Dunwall-verified), locked doors/keys, door side corrections, checkpoint renewal on missions.",
+    "Usable sync (windows/levers) still gated to Dunwall with a 128 cap; EotW has 371 usables - needs the identity-list intersection used for pickups."
+  ]
+}

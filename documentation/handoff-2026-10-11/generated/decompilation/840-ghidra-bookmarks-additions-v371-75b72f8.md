@@ -1,0 +1,25 @@
+# ghidra-bookmarks-additions-v371.json
+
+Original: [work/movement-integration/ghidra-bookmarks-additions-v371.json](<../../../../work/movement-integration/ghidra-bookmarks-additions-v371.json>)
+
+SHA-256: `B4977A82E6290448EB805D96FA86D2CE4BDE4C4F322D2D91A37B873F3AF4F303`; 1959 bytes.
+
+## Original saved record
+
+````json
+[
+  {
+    "address": "141c79878",
+    "category": "D2Coop/Possession-crouch-release-v371",
+    "comment": "CONFIRMED B671 native possession-crouch-target-network-v370: exact EnterPossessedHost26 VT1c79878 retains physics stance1 through native internal0 release and internal1 transfer. Read-only target watcher sees13 valid samples each with reciprocal generation-validated human target. Raw Midnight watcher observes release Scene_1/400ms12 times. Occupation internal8/physics18 then native LT exit restores Sneaking6/physics1, independent sword_equip_sneak Scene_2/1133ms (37 raw samples) and power_equip Scene_1/333ms (10).370 standing-only release reader rejects; standing-only harness fails camera reframe; source/native transfer succeeds, both checkpoints and protected14 restored.371 candidate permits only observed standing/crouched entry class, exact dual-scene timings/owners and adds bank54 clip318 crouched release. Prior318 payloads unchanged. Candidate runtime pending; no shared NPC gameplay. Peer camera370 shows target particles but caster is outside usable view; no visual approval.",
+    "type": "Note"
+  },
+  {
+    "address": "141c78a68",
+    "category": "D2Coop/Possession-draw-v367",
+    "comment": "CONFIRMED B671 runtime370: initially holstered crouched draw/cast PASS13 with79 body samples at weight1,0 receiver clock rejections,0 bounded source-motion refusals; source/peer sheets viewed, fine visual acceptance pending. Runtime369 had observed one exact Sneaking6+Draw65+EquipChange53+UsePower63 overlap;370 admits that additional context while preserving independent arm/equipment scene validation. No retrospective proof of unrecorded367 transient. Successful crouched human-target370 independently exposes entry/internal0 and transfer/internal1 retaining physics1; reader rejected standing-only context, failed take retained.371 candidate addresses this; runtime pending. No shared NPC gameplay claim.",
+    "type": "Note"
+  }
+]
+
+````

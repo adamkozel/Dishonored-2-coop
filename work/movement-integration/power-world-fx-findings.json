@@ -1,0 +1,33 @@
+{
+  "dll_sha256": "8E83763193BFE1CD54DF13458BEAEC9C499C2138678C6699F3C176387B03724A",
+  "bank": "D2MOVE15 / 126 clips",
+  "action_protocol": "14 / 236 bytes",
+  "blink_fx_protocol": "1 / 116 bytes",
+  "grapple_fx_protocol": "1 / 144 bytes",
+  "complete": false,
+  "visual_accepted": false,
+  "body_and_fx_checks": 16,
+  "tests": [
+    "integrated-blink-fx-v3/result.json",
+    "integrated-grapple-fx-v3/result.json",
+    "integrated-grapple-hand-v2/result.json",
+    "combat-v15-regression-v1/result.json",
+    "grapple-fx-stream-stop-v2/result.json",
+    "grapple-fx-pause-v2/result.json"
+  ],
+  "confirmed": [
+    "Both starting powers have native-role body phases and native world effects over Steam.",
+    "Each successful cast produces exactly two scoped effects; aim cancellation produces none.",
+    "Duplicate reliable event packets cannot replay effects.",
+    "Far Reach native endpoints update after remote root presentation, every native game frame.",
+    "Two completed-pose and active-record snapshots during the fast pull match the native wrist exactly."
+  ],
+  "pending": [
+    "A recovery-boundary snapshot shows 0.114 m difference; inspect transition/stop timing across more cases.",
+    "Power stance/equipment/direction/upgrades and dynamic targets.",
+    "Other powers, complete lifecycle, remaining movement bindings and final visual acceptance."
+  ],
+  "rollback": "work/movement-integration/verified-power-fx-8E83",
+  "protected_files_unchanged": true,
+  "current_build_additional_checks": 27
+}

@@ -1,0 +1,62 @@
+{
+  "scope": "Mission checkpoint mode: shared native death and one shared restart from each peer own mission autosave; Dunwall fixture restored.",
+  "cases": [
+    {
+      "armDigest": "e02f298c586429533769209879e73a13201a0560f21c8e3988dfbd17a2c600ea",
+      "cycles": [
+        {
+          "dying": "host",
+          "checks": {
+            "client": {
+              "spawnDistance": 0.0,
+              "aborted": 0,
+              "completed": 1,
+              "epochChanged": true,
+              "rearms": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 2
+            },
+            "host": {
+              "spawnDistance": 0.0,
+              "aborted": 0,
+              "completed": 1,
+              "epochChanged": true,
+              "rearms": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 1
+            }
+          }
+        },
+        {
+          "dying": "client",
+          "checks": {
+            "client": {
+              "spawnDistance": 0.0,
+              "aborted": 0,
+              "completed": 1,
+              "epochChanged": true,
+              "rearms": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 2
+            },
+            "host": {
+              "spawnDistance": 0.0,
+              "aborted": 0,
+              "completed": 1,
+              "epochChanged": true,
+              "rearms": 1,
+              "usable": "renewed_after_shared_checkpoint",
+              "loads": 1,
+              "character": 1
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "failure": null
+}

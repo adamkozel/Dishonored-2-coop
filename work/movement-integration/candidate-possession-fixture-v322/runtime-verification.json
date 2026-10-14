@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-12T13:58:15.475531+02:00",
+  "result": {
+    "passed": true,
+    "failure": null,
+    "source": "host",
+    "checks": [
+      "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+      "Strict reader repeatedly accepts native333ms entry and200ms aim with exact Corvo arm/equipment ownership and Running0+UsePower63",
+      "Native input produces reciprocal Possession cast scenes; observed phase set recorded without assuming complete coverage",
+      "Both original inventory quantities and player/partner health retained; world reset still required",
+      "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+      "All14 protected save/settings hashes retained"
+    ],
+    "events": [
+      {
+        "videoTime": 2.066,
+        "input": "Native Corvo LT1800 then release at grounded floor"
+      }
+    ],
+    "dll": "8B612D3614CB878BF7EB19C9E89BBB8EC6E47C440DBF168D984B2039FF733620",
+    "probe": "626D36052AD5D2C6037E0267B69C1DEB74DB1A758566F26918EAF64CF84E0081",
+    "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; empty-target cast only; valid-target possession, remote movement/VFX/gameplay remain unverified. Checkpoint and protected save restoration mandatory."
+  },
+  "observations": {
+    "scenes": [
+      {
+        "scene": "midnight/gameplay/player/base/powers/power_possession_cast_in.midnightscene, Scene_1",
+        "samples": 7,
+        "durationMs": [
+          333
+        ]
+      },
+      {
+        "scene": "midnight/gameplay/player/base/powers/power_possession_cast_loop.midnightscene, Scene_1",
+        "samples": 50,
+        "durationMs": [
+          200
+        ]
+      }
+    ],
+    "manaBefore": 100.0,
+    "manaAfter": 100.0,
+    "nativeStateSets": [
+      "0",
+      "0,63"
+    ],
+    "observedEntityDefinitions": [
+      "esc_env_aeration_vent_fan_01_4",
+      "esc_env_aeration_vent_fan_01_5",
+      "models/environment/props/generic/laboratory_accessories_set_01/breakables/lab_test_tub_01a_brk.def",
+      "models/environment/props/generic/laboratory_accessories_set_01/breakables/lab_test_tub_01b_brk.def",
+      "models/environment/props/generic/laboratory_accessories_set_01/breakables/lab_test_tub_01c_brk.def",
+      "models/environment/props/generic/laboratory_accessories_set_01/breakables/lab_test_tub_01d_brk.def",
+      "models/powers/possession/possession.def"
+    ],
+    "scope": "Source-only native phase/lifecycle observation in isolated AI-held Dunwall; no remote gameplay or body binding"
+  },
+  "reader": {
+    "rawActive": 57,
+    "incompleteRaw": 1,
+    "strictAccepted": 57,
+    "strictRejected": 422,
+    "scope": "Raw observations may catch incomplete loop initialization. Only double-validated arm/equipment scenes are accepted."
+  },
+  "visualReview": {
+    "inspected": true,
+    "at": "2026-10-12T13:58:15.475531+02:00",
+    "evidence": [
+      "source-sheet.jpg"
+    ],
+    "method": "Viewed actual source temporal sheet at0.6/1.9/2.2/2.8/3.4/4.3/6s",
+    "notes": "Native Corvo left hand enters the aim pose, then lowers after no-target release. Native power icon/cancel hint remain local. No target transfer, third-person body, or remote effect demonstrated.",
+    "visual_accepted": false,
+    "complete": false
+  },
+  "complete": false
+}

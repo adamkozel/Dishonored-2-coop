@@ -1,0 +1,292 @@
+{
+  "at": "2026-10-10T09:09:45.511950+02:00",
+  "result": "Actual Epic AnimGen locomotion retargeted to native Corvo with D2 first-person sword constraints and played in isolated D2",
+  "dllSha256": "092ED98F46921D73A46354CA31F69DE7AEFDFDF30FD9B14DAC767AE49ED9A23B",
+  "clipSha256": "AA3942F70C5494949E00B18925E9377425A2B88F3E8C8B7C460D8E4FC3F3526C",
+  "animGenUsed": true,
+  "animGenRunsInsideD2": false,
+  "productionIntegrated": false,
+  "completeMoveset": false,
+  "userVisualAcceptance": "Not yet reviewed by user; no milestone approval requested",
+  "scope": "One forward start/walk/stop, authored FP-inspired guard and recovery on flat Dunwall terrain, Corvo only",
+  "videos": [
+    "d2-generated-sequence.mp4",
+    "blender-generated-sequence.mp4"
+  ],
+  "authoring": "exports/corvo-generated-candidate.blend",
+  "instructions": "README.txt",
+  "runtime": {
+    "take": "runtime-take-5",
+    "source": "native read-only",
+    "accepted_samples": 475,
+    "rejected_samples": 115,
+    "final_phase": 8.0,
+    "refusals_during_take": 0,
+    "expected_travel_m": 3.982501983642578,
+    "actual_travel_m": 4.083116,
+    "source_vertical_range_m": 0.0,
+    "anatomical_local_translation_max_error_m": 0,
+    "socket_local_position_max_error_m": 0.0,
+    "reconstructed_phase_rotation_error_degrees": {
+      "count": 6969,
+      "median": 0.08846932034957805,
+      "p95": 1.6095714021146577,
+      "max": 38.1612190948513
+    },
+    "largest_rotation_outliers": [
+      {
+        "tick": 172734765,
+        "time": 6.625,
+        "phase": 6.234,
+        "joint": "right_arm_jnt",
+        "degrees": 38.1612190948513
+      },
+      {
+        "tick": 172734781,
+        "time": 6.641,
+        "phase": 6.25,
+        "joint": "right_arm_jnt",
+        "degrees": 37.29281072485572
+      },
+      {
+        "tick": 172734750,
+        "time": 6.61,
+        "phase": 6.219,
+        "joint": "right_arm_jnt",
+        "degrees": 32.917263070285536
+      },
+      {
+        "tick": 172734718,
+        "time": 6.578,
+        "phase": 6.187,
+        "joint": "right_wrist_jnt",
+        "degrees": 31.384709776742024
+      },
+      {
+        "tick": 172734718,
+        "time": 6.578,
+        "phase": 6.187,
+        "joint": "right_arm_jnt",
+        "degrees": 30.901787174281775
+      },
+      {
+        "tick": 172734703,
+        "time": 6.563,
+        "phase": 6.172,
+        "joint": "right_wrist_jnt",
+        "degrees": 28.38147921604706
+      },
+      {
+        "tick": 172734765,
+        "time": 6.625,
+        "phase": 6.234,
+        "joint": "right_elbow_jnt",
+        "degrees": 26.553499760737537
+      },
+      {
+        "tick": 172736156,
+        "time": 8.016,
+        "phase": 7.625,
+        "joint": "left_elbow_jnt",
+        "degrees": 25.28525186199873
+      },
+      {
+        "tick": 172734781,
+        "time": 6.641,
+        "phase": 6.25,
+        "joint": "right_elbow_jnt",
+        "degrees": 24.363372198419075
+      },
+      {
+        "tick": 172736000,
+        "time": 7.86,
+        "phase": 7.469,
+        "joint": "right_arm_jnt",
+        "degrees": 23.66586180254901
+      },
+      {
+        "tick": 172734750,
+        "time": 6.61,
+        "phase": 6.219,
+        "joint": "right_wrist_jnt",
+        "degrees": 21.939540492782758
+      },
+      {
+        "tick": 172734765,
+        "time": 6.625,
+        "phase": 6.234,
+        "joint": "right_wrist_jnt",
+        "degrees": 21.87678198601922
+      }
+    ],
+    "high_contact_ankle_speed_m_s": [
+      {
+        "count": 224,
+        "median": 0.0365556077003687,
+        "p95": 0.36371588423898604,
+        "max": 1.2482037603517384
+      },
+      {
+        "count": 213,
+        "median": 0.026187000689975704,
+        "p95": 0.34776896844107014,
+        "max": 0.8109863253164868
+      }
+    ],
+    "high_contact_segments": [
+      [
+        {
+          "samples": 89,
+          "max_displacement_from_first_m": 0.060659284993073916
+        },
+        {
+          "samples": 18,
+          "max_displacement_from_first_m": 0.042037698187568334
+        },
+        {
+          "samples": 21,
+          "max_displacement_from_first_m": 0.022116219307788655
+        },
+        {
+          "samples": 105,
+          "max_displacement_from_first_m": 0.08653471602228156
+        }
+      ],
+      [
+        {
+          "samples": 77,
+          "max_displacement_from_first_m": 0.02210389784681074
+        },
+        {
+          "samples": 21,
+          "max_displacement_from_first_m": 0.0571749320430726
+        },
+        {
+          "samples": 18,
+          "max_displacement_from_first_m": 0.02607667145506942
+        },
+        {
+          "samples": 18,
+          "max_displacement_from_first_m": 0.020465252575124965
+        },
+        {
+          "samples": 90,
+          "max_displacement_from_first_m": 0.0865052337527398
+        }
+      ]
+    ],
+    "entry_exit_blends_excluded": true,
+    "quality_accepted_as_complete_moveset": false,
+    "limitations": [
+      "Single flat Corvo forward path only",
+      "Phase inferred from root observations rather than an atomic phase/pose record; especially approximate at final stop. Capture attempts every 20 ms. Do not interpret peak transition error as established pose corruption.",
+      "Contact curves are confidence, not a guarantee of visual foot planting",
+      "No native weapon transform captured by this script; socket agreement alone does not establish hilt fit",
+      "Screenshots and video required for visual assessment"
+    ],
+    "fixed_guard_comparison": {
+      "clip_frame": 405,
+      "seconds": 6.75,
+      "accepted_samples": 77,
+      "rejected_samples": 18,
+      "anatomical_and_socket_rotation_error_degrees": {
+        "count": 1848,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.03956468205889273
+      },
+      "anatomical_and_socket_translation_error_m": {
+        "count": 1848,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "native_correctives_excluded": true
+    },
+    "fixed_guard_native_sword_attachment": [
+      {
+        "tick": 172997218,
+        "joint": 17,
+        "translation_error_m": 0.0,
+        "rotation_error_degrees": 0.0,
+        "native_render_position_error_m": 0.0
+      }
+    ]
+  },
+  "runtimeSafety": "safety-verification.json",
+  "leaseSafety": "lease-expiry-verification.json",
+  "baselineIntegrity": "baseline-integrity-verification.json",
+  "videoProvenance": "video-provenance.json",
+  "workingVersions": "working-versions.json",
+  "milestone": "milestone-092E",
+  "confirmed": [
+    "Native AnimGen schema valid throughout 480 generated 60-Hz poses",
+    "Generated root motion extracted from native attributes; legacy extraction slot was not sufficient",
+    "Native mesh import requires rest-scale compensation in Blender",
+    "Native anatomical lengths and root authority preserved",
+    "Complete sequence reached phase 8 without runtime refusal",
+    "Exact guard transfer and stable sword attachment agree",
+    "Pause, cancellation, wrong-role/invalid-file refusal and new lease expiry verified"
+  ],
+  "visualAssessment": {
+    "decision": "Retain for development; keep separate from stable automatic movement",
+    "observed": "Coherent native-body walk silhouette and sword guard survive authoring transfer",
+    "remaining": [
+      "Foot drift and start/stop quality",
+      "Restrained guard posture",
+      "Old native idle/open hand returns after release",
+      "Capture cadence limits smoothness judgment"
+    ]
+  },
+  "notEstablished": [
+    "Emily or complete moveset",
+    "Model learned swordplay from D2 first-person clips",
+    "Arbitrary terrain or combat interruption",
+    "Full first-person combat regression on this DLL",
+    "Full co-op campaign or separate-account Internet Steam sessions"
+  ],
+  "memoryIssue": "Overnight isolated game processes approached 69 GB combined private commit; verified save snapshot and restart recovered memory; cause and long-run growth remain unverified",
+  "live": [
+    {
+      "Role": "host",
+      "Pid": 60816,
+      "Epoch": 16,
+      "Handle": 209916411,
+      "Follow": true,
+      "NativeInterface": "SteamNetworkingSockets012",
+      "BodyStream": false,
+      "AuthoringProof": {
+        "experimental": true,
+        "active": false,
+        "start": 0,
+        "end": 0,
+        "seconds": 0.0,
+        "fixed": -1.0,
+        "checksum": 0,
+        "applied": 0,
+        "refused": 0
+      }
+    },
+    {
+      "Role": "client",
+      "Pid": 18928,
+      "Epoch": 16,
+      "Handle": 209916390,
+      "Follow": true,
+      "NativeInterface": "SteamNetworkingSockets012",
+      "BodyStream": false,
+      "AuthoringProof": {
+        "experimental": true,
+        "active": false,
+        "start": 172996375,
+        "end": 0,
+        "seconds": 6.75,
+        "fixed": 6.75,
+        "checksum": 1837878134471782003,
+        "applied": 7864,
+        "refused": 2
+      }
+    }
+  ],
+  "proofDisabledAtFinish": true
+}

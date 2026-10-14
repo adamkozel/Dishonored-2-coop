@@ -1,0 +1,57 @@
+{
+  "alias": "guard_rr_hold_sequence",
+  "family": "combat",
+  "identity": "8a1bd162dad33058e6d13d588a367403c24c05f84b5d8afdd1686a9d7b264237",
+  "video": "guard-sequences-videos-v1\\guard_rr_hold_sequence.mp4",
+  "frames": 109,
+  "fps": 30,
+  "duration": 3.6333333333333333,
+  "render_seconds": 19.72424054145813,
+  "roles": {
+    "corvo": "guard_rr_hold_sequence-corvo",
+    "emily": "guard_rr_hold_sequence-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_ready",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": false,
+  "render_identity": "6a9ae6fc4d34149e7ec31f2d8f049302dfe0e8c932239bbdc079fe66811ba225",
+  "render_inputs": {
+    "data_identity": "a40c14af91b632d68540f3d017e2a79acf59ac9f1234a468be45259f0e744a14",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      }
+    },
+    "scripts": {
+      "render_library.py": "a3a1e66e32fce58d5dab1349091b9206246416dab866f3bccc32a920bed8f339",
+      "preview_natural_walk.py": "867c593dc5d00efe5b4c6f27d78fb4d0681c824ade3746b9787dc7833671a152",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b9add222e650a178299d5e7400e223ec94ec90ad8b1983ed7c4088c4c7e5a551"
+    }
+  }
+}

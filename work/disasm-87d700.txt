@@ -1,0 +1,54 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014087D700: jl          000000014087D726
+  000000014087D702: xor         al,0F3h
+  000000014087D704: movups      xmm6,xmmword ptr [rbp-78h]
+  000000014087D708: movss       dword ptr [rsp+38h],xmm6
+  000000014087D70E: movss       xmm3,dword ptr [rbp-74h]
+  000000014087D713: movss       dword ptr [rsp+3Ch],xmm3
+  000000014087D719: movss       xmm4,dword ptr [rbp-70h]
+  000000014087D71E: movss       dword ptr [rsp+40h],xmm4
+  000000014087D724: movss       xmm5,dword ptr [rbp-6Ch]
+  000000014087D729: movss       dword ptr [rsp+44h],xmm5
+  000000014087D72F: movss       xmm9,dword ptr [rbp-68h]
+  000000014087D735: movss       dword ptr [rsp+48h],xmm9
+  000000014087D73C: movss       xmm10,dword ptr [rbp-64h]
+  000000014087D742: movss       dword ptr [rsp+4Ch],xmm10
+  000000014087D749: movss       xmm11,dword ptr [rbp-60h]
+  000000014087D74F: movss       dword ptr [rsp+50h],xmm11
+  000000014087D756: mov         rbx,qword ptr [rbp-30h]
+  000000014087D75A: mov         rax,qword ptr [rbp-28h]
+  000000014087D75E: and         eax,0FFFFFFh
+  000000014087D763: lea         rdi,[rbx+rax*8]
+  000000014087D767: cmp         rbx,rdi
+  000000014087D76A: je          000000014087D920
+  000000014087D770: mov         rax,qword ptr [rbx]
+  000000014087D773: mov         qword ptr [rbp-48h],rax
+  000000014087D777: test        rax,rax
+  000000014087D77A: je          000000014087D913
+  000000014087D780: movss       xmm2,dword ptr [rax+0000000000000308h]
+  000000014087D788: subss       xmm2,dword ptr [rsi+0000000000000308h]
+  000000014087D790: movss       xmm1,dword ptr [rax+0000000000000304h]
+  000000014087D798: subss       xmm1,dword ptr [rsi+0000000000000304h]
+  000000014087D7A0: movss       xmm0,dword ptr [rax+0000000000000300h]
+  000000014087D7A8: subss       xmm0,dword ptr [rsi+0000000000000300h]
+  000000014087D7B0: mulss       xmm6,xmm0
+  000000014087D7B4: mulss       xmm5,xmm1
+  000000014087D7B8: addss       xmm6,xmm5
+  000000014087D7BC: mulss       xmm11,xmm2
+  000000014087D7C1: addss       xmm6,xmm11
+  000000014087D7C6: mulss       xmm7,xmm0
+  000000014087D7CA: mulss       xmm4,xmm1
+  000000014087D7CE: F3
+  000000014087D7CF: 0F
+  000000014087D7D0: pop         rax
+
+  Summary
+
+     1A7D000 .text

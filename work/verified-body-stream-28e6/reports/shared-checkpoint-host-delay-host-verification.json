@@ -1,0 +1,5804 @@
+{
+  "ObservedAt": "2026-10-09T01:16:21.9942382+02:00",
+  "Passed": true,
+  "Failure": null,
+  "DllSha256": "28E6FAA03CB5F16685087311BAA1C00E4EC1A8D2DDEB32DF4F30AF81390511A0",
+  "RequestRole": "host",
+  "DelayRole": "host",
+  "Duplicate": false,
+  "Scope": "Steam-coordinated fixed pre-staged Dunwall SLOT82, one native load per peer, both-ready loading hold, preserved Corvo/Emily roles and restoration of previously enabled counterpart presentation. No save transfer; this test does not cause death.",
+  "Before": {
+    "client": {
+      "enabled": true,
+      "phase": 0,
+      "result": "armed",
+      "arm": 1,
+      "peerArm": 1,
+      "transaction": 0,
+      "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+      "held": false,
+      "expectBoundary": false,
+      "loads": 0,
+      "completed": 0,
+      "requests": 0,
+      "duplicates": 0,
+      "rejected": 2,
+      "aborted": 0,
+      "heldAt": 0,
+      "releasedAt": 0,
+      "readyAt": 0,
+      "completedAt": 0,
+      "hostReady": 0,
+      "clientReady": 0,
+      "readyDelay": 0,
+      "sent": 4,
+      "received": 5,
+      "samples": 0,
+      "maxDistance": 0,
+      "game": "0x0",
+      "player": "0x0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "loadingEntryAt": 0,
+      "oldGame": "0x0",
+      "avatarRequested": true,
+      "avatarPending": false,
+      "avatarReady": false,
+      "avatarRestored": 0,
+      "avatarRefused": 0,
+      "avatarAiHeld": true,
+      "avatarAiAcquired": 5,
+      "avatarAiReleased": 4,
+      "avatarAiLost": 0,
+      "avatarAiRefused": 0,
+      "avatarIdleOwned": true,
+      "avatarIdleAcquired": 5,
+      "avatarIdleReleased": 4,
+      "avatarIdleLost": 0,
+      "avatarIdleRefused": 0,
+      "deathActive": false,
+      "deathReady": false,
+      "peerDeathReady": false,
+      "deathRetryQueued": false,
+      "deathCount": 0,
+      "deathApplied": 0,
+      "deathReceived": 0
+    },
+    "host": {
+      "enabled": true,
+      "phase": 0,
+      "result": "armed",
+      "arm": 1,
+      "peerArm": 1,
+      "transaction": 0,
+      "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+      "held": false,
+      "expectBoundary": false,
+      "loads": 0,
+      "completed": 0,
+      "requests": 0,
+      "duplicates": 0,
+      "rejected": 0,
+      "aborted": 0,
+      "heldAt": 0,
+      "releasedAt": 0,
+      "readyAt": 0,
+      "completedAt": 0,
+      "hostReady": 0,
+      "clientReady": 0,
+      "readyDelay": 1500,
+      "sent": 6,
+      "received": 4,
+      "samples": 0,
+      "maxDistance": 0,
+      "game": "0x0",
+      "player": "0x0",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "loadingEntryAt": 0,
+      "oldGame": "0x0",
+      "avatarRequested": true,
+      "avatarPending": false,
+      "avatarReady": false,
+      "avatarRestored": 0,
+      "avatarRefused": 0,
+      "avatarAiHeld": true,
+      "avatarAiAcquired": 8,
+      "avatarAiReleased": 7,
+      "avatarAiLost": 0,
+      "avatarAiRefused": 0,
+      "avatarIdleOwned": true,
+      "avatarIdleAcquired": 8,
+      "avatarIdleReleased": 7,
+      "avatarIdleLost": 0,
+      "avatarIdleRefused": 0,
+      "deathActive": false,
+      "deathReady": false,
+      "peerDeathReady": false,
+      "deathRetryQueued": false,
+      "deathCount": 0,
+      "deathApplied": 0,
+      "deathReceived": 0
+    }
+  },
+  "After": [
+    {
+      "Role": "host",
+      "Reset": {
+        "enabled": true,
+        "phase": 0,
+        "result": "armed",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": false,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 1,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 58387328,
+        "readyAt": 58387312,
+        "completedAt": 58387359,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 22,
+        "received": 20,
+        "samples": 143,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": true,
+        "avatarRestored": 1,
+        "avatarRefused": 0,
+        "avatarAiHeld": true,
+        "avatarAiAcquired": 9,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": true,
+        "avatarIdleAcquired": 9,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Character": {
+        "character": 1,
+        "queued": 0,
+        "game": "0x2486ca4f050",
+        "settings": "0x248b9a57fd0",
+        "player": "0x248d3bdac30",
+        "definition": "models/characters/player/corvo/body.def",
+        "corvoDefinition": "models/characters/player/corvo/body.def",
+        "emilyDefinition": "models/characters/player/emily/body.def"
+      },
+      "Player": {
+        "pid": 36664,
+        "active": 0,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x248d3bdac30",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x248b98556d0",
+        "auxiliaryDefinition": "0x24864090bb0",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -28.0921,
+          -153.962,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -0.995185,
+          0.0980171,
+          0,
+          -0.0980171,
+          -0.995185,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -28.1434,
+          -153.957,
+          68.0983
+        ],
+        "nativeViewOrientation": [
+          -0.995119,
+          0.0986842,
+          0.000259081,
+          -0.0986843,
+          -0.995119,
+          -0.000431184,
+          0.000215265,
+          -0.000454647,
+          1
+        ]
+      },
+      "Npcs": {
+        "pid": 36664,
+        "unboundNpcs": 1,
+        "npcs": [
+          {
+            "handle": "0xb1d0739",
+            "spawnerHandle": "0x445005f",
+            "spawnerName": "ld_spawner_crowd_civ_left_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0844,
+              32.1292,
+              61.1636
+            ],
+            "orientation": [
+              0.892108,
+              -0.451822,
+              0,
+              0.451822,
+              0.892108,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb1f073b",
+            "spawnerHandle": "0x881049b",
+            "spawnerName": "esc_env_spawner_49",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.8271,
+              -130.332,
+              61.1073
+            ],
+            "orientation": [
+              0.20792,
+              0.978146,
+              0,
+              -0.978146,
+              0.20792,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb21073d",
+            "spawnerHandle": "0x44a0064",
+            "spawnerName": "ld_spawner_crowd_civ_right_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.3237,
+              25.4671,
+              61.3721
+            ],
+            "orientation": [
+              0.441435,
+              -0.897293,
+              0,
+              0.897293,
+              0.441435,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb23073f",
+            "spawnerHandle": "0x4270041",
+            "spawnerName": "ld_spawner_alexi_audience",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -58,
+              45.61,
+              60.9891
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb240740",
+            "spawnerHandle": "0x882049c",
+            "spawnerName": "esc_env_spawner_50",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4049,
+              -117.305,
+              61.1616
+            ],
+            "orientation": [
+              0.619115,
+              0.785301,
+              0,
+              -0.785301,
+              0.619115,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb250741",
+            "spawnerHandle": "0x44b0065",
+            "spawnerName": "ld_spawner_crowd_civ_right_1",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.9052,
+              24.8149,
+              61.3065
+            ],
+            "orientation": [
+              -0.380733,
+              0.924685,
+              0,
+              -0.924685,
+              -0.380733,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb280744",
+            "spawnerHandle": "0x883049d",
+            "spawnerName": "esc_env_spawner_51",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6702,
+              -124.267,
+              61.1627
+            ],
+            "orientation": [
+              -0.866451,
+              -0.499262,
+              0,
+              0.499262,
+              -0.866451,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb290745",
+            "spawnerHandle": "0x44c0066",
+            "spawnerName": "ld_spawner_crowd_civ_right_3",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.1417,
+              32.3917,
+              61.3854
+            ],
+            "orientation": [
+              -0.998954,
+              0.0457242,
+              0,
+              -0.0457242,
+              -0.998954,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2a0746",
+            "spawnerHandle": "0x444005e",
+            "spawnerName": "ld_spawner_crowd_civ_left_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0872,
+              32.8377,
+              61.3638
+            ],
+            "orientation": [
+              0.977487,
+              -0.210995,
+              0,
+              0.210995,
+              0.977487,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2f074b",
+            "spawnerHandle": "0x86e0488",
+            "spawnerName": "esc_env_spawner_47",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -59.6368,
+              -141.343,
+              61.163
+            ],
+            "orientation": [
+              0.74638,
+              -0.66552,
+              0,
+              0.66552,
+              0.74638,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb30074c",
+            "spawnerHandle": "0x86d0487",
+            "spawnerName": "esc_env_spawner_46",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.4691,
+              -143.926,
+              61.1455
+            ],
+            "orientation": [
+              -0.833081,
+              0.553151,
+              0,
+              -0.553151,
+              -0.833081,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb31074d",
+            "spawnerHandle": "0x86c0486",
+            "spawnerName": "esc_env_spawner_45",
+            "definition": "models/characters/base/human_behead_dead.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.1081,
+              -132.704,
+              61.7136
+            ],
+            "orientation": [
+              0.426923,
+              -0.904288,
+              0,
+              0.904288,
+              0.426923,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb32074e",
+            "spawnerHandle": "0x86b0485",
+            "spawnerName": "esc_env_spawner_44",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.3883,
+              -133.203,
+              61.7587
+            ],
+            "orientation": [
+              0.520107,
+              0.854101,
+              0,
+              -0.854101,
+              0.520107,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb33074f",
+            "spawnerHandle": "0x86a0484",
+            "spawnerName": "esc_env_spawner_43",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6459,
+              -133.481,
+              61.1653
+            ],
+            "orientation": [
+              0.638227,
+              0.769848,
+              0,
+              -0.769848,
+              0.638227,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb350751",
+            "spawnerHandle": "0x8680482",
+            "spawnerName": "esc_env_spawner_41",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.9781,
+              -126.92,
+              61.1689
+            ],
+            "orientation": [
+              0.643498,
+              0.765447,
+              0,
+              -0.765447,
+              0.643498,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb360752",
+            "spawnerHandle": "0x8670481",
+            "spawnerName": "esc_env_spawner_40",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8961,
+              -128.398,
+              61.12
+            ],
+            "orientation": [
+              -0.884482,
+              -0.466575,
+              0,
+              0.466575,
+              -0.884482,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb370753",
+            "spawnerHandle": "0x8660480",
+            "spawnerName": "esc_env_spawner_39",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4427,
+              -125.426,
+              61.1689
+            ],
+            "orientation": [
+              -0.18747,
+              0.98227,
+              0,
+              -0.98227,
+              -0.18747,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb380754",
+            "spawnerHandle": "0x865047f",
+            "spawnerName": "esc_env_spawner_38",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.9467,
+              -121.707,
+              61.1649
+            ],
+            "orientation": [
+              -0.385163,
+              0.922849,
+              0,
+              -0.922849,
+              -0.385163,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb390755",
+            "spawnerHandle": "0x864047e",
+            "spawnerName": "esc_env_spawner_37",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8677,
+              -119.305,
+              61.1731
+            ],
+            "orientation": [
+              -0.512813,
+              0.8585,
+              0,
+              -0.8585,
+              -0.512813,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3a0756",
+            "spawnerHandle": "0x44d0067",
+            "spawnerName": "ld_spawner_crowd_civ_right_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0428,
+              33.4584,
+              61.375
+            ],
+            "orientation": [
+              -0.791182,
+              -0.611581,
+              0,
+              0.611581,
+              -0.791182,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3b0757",
+            "spawnerHandle": "0x863047d",
+            "spawnerName": "esc_env_spawner_36",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0227,
+              -114.618,
+              61.1886
+            ],
+            "orientation": [
+              -0.989578,
+              0.144,
+              0,
+              -0.144,
+              -0.989578,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3c0758",
+            "spawnerHandle": "0x862047c",
+            "spawnerName": "esc_env_spawner_35",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.0099,
+              -117.931,
+              61.1624
+            ],
+            "orientation": [
+              -0.450241,
+              0.892907,
+              0,
+              -0.892907,
+              -0.450241,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3d0759",
+            "spawnerHandle": "0x861047b",
+            "spawnerName": "esc_env_spawner_34",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.3565,
+              -113.868,
+              61.2116
+            ],
+            "orientation": [
+              -0.963,
+              -0.269502,
+              0,
+              0.269502,
+              -0.963,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3e075a",
+            "spawnerHandle": "0x860047a",
+            "spawnerName": "esc_env_spawner_33",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.4204,
+              -106.009,
+              61.1721
+            ],
+            "orientation": [
+              -0.0136607,
+              -0.999907,
+              0,
+              0.999907,
+              -0.0136607,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3f075b",
+            "spawnerHandle": "0x85f0479",
+            "spawnerName": "esc_env_spawner",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.3953,
+              -113.132,
+              61.2088
+            ],
+            "orientation": [
+              -0.93302,
+              -0.359825,
+              0,
+              0.359825,
+              -0.93302,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb41075d",
+            "spawnerHandle": "0x85e0478",
+            "spawnerName": "esc_env_spawner_32",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.7101,
+              -115.184,
+              61.1728
+            ],
+            "orientation": [
+              0.618103,
+              0.786097,
+              0,
+              -0.786097,
+              0.618103,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb470763",
+            "spawnerHandle": "0x8690483",
+            "spawnerName": "esc_env_spawner_42",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.5319,
+              -123.346,
+              61.1805
+            ],
+            "orientation": [
+              0.83545,
+              -0.549566,
+              0,
+              0.549566,
+              0.83545,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb480764",
+            "spawnerHandle": "0x51d0137",
+            "spawnerName": "ld_spawner_guard_tutorial_2",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.6995,
+              -151.562,
+              66.4
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb490765",
+            "spawnerHandle": "0x4b100cb",
+            "spawnerName": "ld_spawner_crowd_civ_left_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.8114,
+              27.7658,
+              61.3846
+            ],
+            "orientation": [
+              0.678556,
+              -0.734549,
+              0,
+              0.734549,
+              0.678556,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4a0766",
+            "spawnerHandle": "0x5170131",
+            "spawnerName": "ld_spawner_vista_8",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              57.3307,
+              -208.555,
+              -3.49036
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4b0767",
+            "spawnerHandle": "0x514012e",
+            "spawnerName": "ld_spawner_vista_7",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              40.54,
+              -189.26,
+              -3.48862
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4c0768",
+            "spawnerHandle": "0x511012b",
+            "spawnerName": "ld_spawner_vista_6",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              58.7584,
+              -204.922,
+              -3.49182
+            ],
+            "orientation": [
+              0.325111,
+              -0.945676,
+              0,
+              0.945676,
+              0.325111,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4d0769",
+            "spawnerHandle": "0x50b0125",
+            "spawnerName": "ld_spawner_vista_5",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              60.1244,
+              -206.02,
+              -3.49536
+            ],
+            "orientation": [
+              -0.396708,
+              -0.917945,
+              0,
+              0.917945,
+              -0.396708,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4e076a",
+            "spawnerHandle": "0x4b500cf",
+            "spawnerName": "ld_spawner_crowd_civ_left_1",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.0418,
+              24.9869,
+              61.1971
+            ],
+            "orientation": [
+              0.555991,
+              0.831188,
+              0,
+              -0.831188,
+              0.555991,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4f076b",
+            "spawnerHandle": "0x4b800d2",
+            "spawnerName": "ld_spawner_crowd_civ_left_6",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.3843,
+              25.7111,
+              61.182
+            ],
+            "orientation": [
+              0.99768,
+              0.0680775,
+              0,
+              -0.0680775,
+              0.99768,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb50076c",
+            "spawnerHandle": "0x5070121",
+            "spawnerName": "ld_spawner_vista_4",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.7481,
+              -193.147,
+              -3.49416
+            ],
+            "orientation": [
+              0.0500022,
+              -0.998749,
+              0,
+              0.998749,
+              0.0500022,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb51076d",
+            "spawnerHandle": "0x4ba00d4",
+            "spawnerName": "ld_spawner_crowd_civ_right_6",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.9145,
+              26.0617,
+              61.1986
+            ],
+            "orientation": [
+              -0.967303,
+              -0.253622,
+              0,
+              0.253622,
+              -0.967303,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb53076f",
+            "spawnerHandle": "0x504011e",
+            "spawnerName": "ld_spawner_vista_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              61.845,
+              -194.323,
+              -3.49398
+            ],
+            "orientation": [
+              0.787884,
+              0.615824,
+              0,
+              -0.615824,
+              0.787884,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb570773",
+            "spawnerHandle": "0x4cb00e5",
+            "spawnerName": "ld_spawner_guard_tutorial_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.0752,
+              -152.86,
+              66.4
+            ],
+            "orientation": [
+              -4.76837E-07,
+              1,
+              0,
+              -1,
+              -4.76837E-07,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb580774",
+            "spawnerHandle": "0x4e100fb",
+            "spawnerName": "ld_spawner_ramsey_escape",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.096,
+              -120.091,
+              61
+            ],
+            "orientation": [
+              0.757423,
+              0.652924,
+              0,
+              -0.652924,
+              0.757423,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5a0776",
+            "spawnerHandle": "0x4de00f8",
+            "spawnerName": "ld_spawner_alexi_escape",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.0063,
+              -162.966,
+              66.4251
+            ],
+            "orientation": [
+              0.0980573,
+              0.995181,
+              0,
+              -0.995181,
+              0.0980573,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5b0777",
+            "spawnerHandle": "0x4ed0107",
+            "spawnerName": "ld_spawner_vista_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              55.196,
+              -241.177,
+              0.120667
+            ],
+            "orientation": [
+              0.986049,
+              0.166456,
+              0,
+              -0.166456,
+              0.986049,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5f077b",
+            "spawnerHandle": "0x4d600f0",
+            "spawnerName": "ld_spawner_guard_escape_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.9563,
+              -118.47,
+              61
+            ],
+            "orientation": [
+              -0.575055,
+              -0.818114,
+              0,
+              0.818114,
+              -0.575055,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb60077c",
+            "spawnerHandle": "0x4fc0116",
+            "spawnerName": "ld_spawner_vista_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.582,
+              -229.169,
+              -5.28631
+            ],
+            "orientation": [
+              1,
+              -3.502E-07,
+              0,
+              3.502E-07,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb61077d",
+            "spawnerHandle": "0x8df04f9",
+            "spawnerName": "esc_env_spawner_53",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -35.8086,
+              -162.96,
+              66.5872
+            ],
+            "orientation": [
+              -0.735388,
+              0.677646,
+              0,
+              -0.677646,
+              -0.735388,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb62077e",
+            "spawnerHandle": "0x4d700f1",
+            "spawnerName": "ld_spawner_guard_escape_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -41.7963,
+              -119.886,
+              61
+            ],
+            "orientation": [
+              -0.993319,
+              -0.115403,
+              0,
+              0.115403,
+              -0.993319,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb63077f",
+            "spawnerHandle": "0x8de04f8",
+            "spawnerName": "esc_env_spawner_52",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -34.0251,
+              -160.63,
+              66.5937
+            ],
+            "orientation": [
+              0.620558,
+              0.78416,
+              0,
+              -0.78416,
+              0.620558,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb640780",
+            "spawnerHandle": "0x880049a",
+            "spawnerName": "esc_env_spawner_48",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -49.6979,
+              -134.191,
+              61.1656
+            ],
+            "orientation": [
+              0.851947,
+              0.523628,
+              0,
+              -0.523628,
+              0.851947,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc07119b",
+            "spawnerHandle": "0x430004a",
+            "spawnerName": "ld_spawner_delilah",
+            "definition": "models/characters/def/maps/dunwall_escape/delilah_copperspoon.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.6853,
+              58.1725,
+              59.7998
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc08119c",
+            "spawnerHandle": "0x4460060",
+            "spawnerName": "ld_spawner_traitor_3",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.0971,
+              13.5234,
+              61.006
+            ],
+            "orientation": [
+              -0.00503764,
+              0.999987,
+              0,
+              -0.999987,
+              -0.00503764,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc09119d",
+            "spawnerHandle": "0x42e0048",
+            "spawnerName": "ld_spawner_duke_guard_left_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              52.9,
+              60.9911
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0a119e",
+            "spawnerHandle": "0x431004b",
+            "spawnerName": "ld_spawner_ramsey_audience",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.58,
+              17.8298,
+              61.606
+            ],
+            "orientation": [
+              0.514104,
+              -0.857728,
+              0,
+              0.857728,
+              0.514104,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0c119f",
+            "spawnerHandle": "0x4c200dc",
+            "spawnerName": "ld_spawner_crowd_civ_servant_2",
+            "definition": "models/characters/def/generic/servant_female_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -35.7259,
+              24.2498,
+              61
+            ],
+            "orientation": [
+              0.238356,
+              0.971178,
+              0,
+              -0.971178,
+              0.238356,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0d11a0",
+            "spawnerHandle": "0x42f0049",
+            "spawnerName": "ld_spawner_duke_guard_right_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0e11a1",
+            "spawnerHandle": "0x44e0068",
+            "spawnerName": "ld_spawner_throne_guard_right_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.6049,
+              21.4997,
+              61
+            ],
+            "orientation": [
+              -0.998796,
+              -0.0490687,
+              0,
+              0.0490687,
+              -0.998795,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0f11a2",
+            "spawnerHandle": "0x42d0047",
+            "spawnerName": "ld_spawner_duke",
+            "definition": "models/characters/def/story/luca_abele.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.7057,
+              55.0936,
+              60.2082
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1011a3",
+            "spawnerHandle": "0x41e0038",
+            "spawnerName": "ld_spawner_duke_guard_left_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1111a4",
+            "spawnerHandle": "0x4280042",
+            "spawnerName": "ld_spawner_duke_carrier_back",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6586,
+              60.1145,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1211a5",
+            "spawnerHandle": "0x4290043",
+            "spawnerName": "ld_spawner_duke_carrier_front",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6498,
+              55.9097,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1511a6",
+            "spawnerHandle": "0x4170031",
+            "spawnerName": "ld_spawner_duke_guard_right_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              52.9,
+              60.9864
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1611a7",
+            "spawnerHandle": "0x42a0044",
+            "spawnerName": "ld_spawner_clockw_left",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.0745,
+              49.4492,
+              60.9801
+            ],
+            "orientation": [
+              -0.0078458,
+              -0.999969,
+              0,
+              0.999969,
+              -0.0078458,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1811a8",
+            "spawnerHandle": "0x42c0046",
+            "spawnerName": "ld_spawner_clockw_right",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7542,
+              49.459,
+              60.9801
+            ],
+            "orientation": [
+              -0.0117022,
+              -0.999932,
+              0,
+              0.999932,
+              -0.0117022,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1a11a9",
+            "spawnerHandle": "0x42b0045",
+            "spawnerName": "ld_spawner_corvo_audience",
+            "definition": "models/characters/def/story/corvo_attano.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -41.44,
+              17.7398,
+              61.606
+            ],
+            "orientation": [
+              -0.634394,
+              -0.77301,
+              0,
+              0.77301,
+              -0.634394,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1b11aa",
+            "spawnerHandle": "0x41b0035",
+            "spawnerName": "ld_spawner_emily_audience",
+            "definition": "models/characters/def/story/emily_kaldwin.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6225,
+              9.38434,
+              61.0205
+            ],
+            "orientation": [
+              -0.910501,
+              0.413506,
+              0,
+              -0.413506,
+              -0.910501,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "Bridge": {
+        "role": 0,
+        "engineThread": 40968,
+        "screenTransportPumps": 15538,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 65536,
+        "connection": 3933074925,
+        "connectionState": 3,
+        "sent": 7814,
+        "received": 7603,
+        "rejected": 0,
+        "lastCommand": 500008008,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 3848,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 209916411,
+        "probeFollowEnabled": true,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400009
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003639
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 21,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 16,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 10,
+        "posePacketBytes": 1156,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          6539,
+          368,
+          34,
+          25
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 34041,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "bodyProbeApplied": 1179,
+        "bodyProbeRefused": 0,
+        "bodyProbeThread": 40968,
+        "bodyStreamEnabled": true,
+        "bodyStreamApplied": 1179,
+        "localBodyPoseValid": 1,
+        "remoteBodyPoseValid": 1,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      },
+      "Avatars": [
+        {
+          "handle": "0xc8311fb",
+          "pointer": "0x248b99dfd50",
+          "vtableRva": "0x1c5e108",
+          "name": "d2coop_probe_emily",
+          "type": ".?AVarkNPC@@",
+          "definition": "0x247913ffbb0",
+          "definitionName": "models/characters/def/story/emily_kaldwin.def",
+          "position": [
+            -30.5801,
+            -153.717,
+            66.4
+          ],
+          "renderPosition": [
+            -30.5801,
+            -153.717,
+            66.4
+          ],
+          "orientation": [
+            -0.995185,
+            0.0980171,
+            0,
+            -0.0980171,
+            -0.995185,
+            0,
+            0,
+            0,
+            1
+          ],
+          "renderOrientation": [
+            -0.995185,
+            0.0980171,
+            0,
+            -0.0980171,
+            -0.995185,
+            0,
+            0,
+            0,
+            1
+          ],
+          "physicsBodies": [
+            {
+              "id": 16779326,
+              "position": [
+                -30.5763,
+                -153.694,
+                67.4781
+              ]
+            },
+            {
+              "id": 16779327,
+              "position": [
+                -30.59,
+                -153.692,
+                67.5393
+              ]
+            },
+            {
+              "id": 16779328,
+              "position": [
+                -30.5815,
+                -153.695,
+                67.7059
+              ]
+            },
+            {
+              "id": 16779329,
+              "position": [
+                -30.535,
+                -153.704,
+                67.9285
+              ]
+            },
+            {
+              "id": 16779330,
+              "position": [
+                -30.5481,
+                -153.71,
+                68.0348
+              ]
+            },
+            {
+              "id": 16779331,
+              "position": [
+                -30.5326,
+                -153.835,
+                67.8499
+              ]
+            },
+            {
+              "id": 16779332,
+              "position": [
+                -30.5249,
+                -153.88,
+                67.6034
+              ]
+            },
+            {
+              "id": 16779333,
+              "position": [
+                -30.5677,
+                -153.937,
+                67.3635
+              ]
+            },
+            {
+              "id": 16779334,
+              "position": [
+                -30.4936,
+                -153.578,
+                67.8617
+              ]
+            },
+            {
+              "id": 16779335,
+              "position": [
+                -30.5156,
+                -153.542,
+                67.6146
+              ]
+            },
+            {
+              "id": 16779336,
+              "position": [
+                -30.5714,
+                -153.481,
+                67.3782
+              ]
+            },
+            {
+              "id": 16779337,
+              "position": [
+                -30.5739,
+                -153.784,
+                67.383
+              ]
+            },
+            {
+              "id": 16779338,
+              "position": [
+                -30.7349,
+                -153.82,
+                66.9759
+              ]
+            },
+            {
+              "id": 16779339,
+              "position": [
+                -30.495,
+                -153.795,
+                66.6169
+              ]
+            },
+            {
+              "id": 16779340,
+              "position": [
+                -30.5492,
+                -153.601,
+                67.3953
+              ]
+            },
+            {
+              "id": 16779341,
+              "position": [
+                -30.7279,
+                -153.585,
+                66.9943
+              ]
+            },
+            {
+              "id": 16779342,
+              "position": [
+                -30.5263,
+                -153.648,
+                66.6168
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Role": "client",
+      "Reset": {
+        "enabled": true,
+        "phase": 0,
+        "result": "armed",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": false,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 1,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 58387328,
+        "readyAt": 58385890,
+        "completedAt": 58387343,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 22,
+        "received": 23,
+        "samples": 137,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": true,
+        "avatarRestored": 1,
+        "avatarRefused": 0,
+        "avatarAiHeld": true,
+        "avatarAiAcquired": 6,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": true,
+        "avatarIdleAcquired": 6,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Character": {
+        "character": 2,
+        "queued": 0,
+        "game": "0x1cc4cc11050",
+        "settings": "0x1ccbe4cca30",
+        "player": "0x1cd032ecd60",
+        "definition": "models/characters/player/emily/body.def",
+        "corvoDefinition": "models/characters/player/corvo/body.def",
+        "emilyDefinition": "models/characters/player/emily/body.def"
+      },
+      "Player": {
+        "pid": 39152,
+        "active": 1,
+        "localIndex": -1,
+        "alternate": 0,
+        "player": "0x1cd032ecd60",
+        "gameVtableRva": "0x1c940a8",
+        "spawnMethodRva": "0x8a78f0",
+        "auxiliaryEntity": "0x1cd02a0fb20",
+        "auxiliaryDefinition": "0x1cbdf74ab20",
+        "viewListFlags": "0x5000001",
+        "candidatePosition": [
+          -28.0921,
+          -153.962,
+          66.4036
+        ],
+        "candidateOrientation": [
+          -0.995185,
+          0.0980171,
+          0,
+          -0.0980171,
+          -0.995185,
+          0,
+          0,
+          0,
+          1
+        ],
+        "nativeViewPosition": [
+          -28.1434,
+          -153.957,
+          68.0994
+        ],
+        "nativeViewOrientation": [
+          -0.995119,
+          0.0986842,
+          0.000259081,
+          -0.0986843,
+          -0.995119,
+          -0.000431184,
+          0.000215265,
+          -0.000454647,
+          1
+        ]
+      },
+      "Npcs": {
+        "pid": 39152,
+        "unboundNpcs": 1,
+        "npcs": [
+          {
+            "handle": "0xb1d0739",
+            "spawnerHandle": "0x445005f",
+            "spawnerName": "ld_spawner_crowd_civ_left_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0852,
+              32.129,
+              61.1631
+            ],
+            "orientation": [
+              0.891849,
+              -0.452333,
+              0,
+              0.452333,
+              0.891849,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb1f073b",
+            "spawnerHandle": "0x881049b",
+            "spawnerName": "esc_env_spawner_49",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.8271,
+              -130.332,
+              61.1073
+            ],
+            "orientation": [
+              0.20792,
+              0.978146,
+              0,
+              -0.978146,
+              0.20792,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb21073d",
+            "spawnerHandle": "0x44a0064",
+            "spawnerName": "ld_spawner_crowd_civ_right_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.3237,
+              25.4671,
+              61.3721
+            ],
+            "orientation": [
+              0.441435,
+              -0.897293,
+              0,
+              0.897293,
+              0.441435,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb23073f",
+            "spawnerHandle": "0x4270041",
+            "spawnerName": "ld_spawner_alexi_audience",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -58,
+              45.61,
+              60.9891
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb240740",
+            "spawnerHandle": "0x882049c",
+            "spawnerName": "esc_env_spawner_50",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4049,
+              -117.305,
+              61.1616
+            ],
+            "orientation": [
+              0.619115,
+              0.785301,
+              0,
+              -0.785301,
+              0.619115,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb250741",
+            "spawnerHandle": "0x44b0065",
+            "spawnerName": "ld_spawner_crowd_civ_right_1",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.9052,
+              24.8149,
+              61.3065
+            ],
+            "orientation": [
+              -0.380733,
+              0.924685,
+              0,
+              -0.924685,
+              -0.380733,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb280744",
+            "spawnerHandle": "0x883049d",
+            "spawnerName": "esc_env_spawner_51",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6702,
+              -124.267,
+              61.1627
+            ],
+            "orientation": [
+              -0.866451,
+              -0.499262,
+              0,
+              0.499262,
+              -0.866451,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb290745",
+            "spawnerHandle": "0x44c0066",
+            "spawnerName": "ld_spawner_crowd_civ_right_3",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.1417,
+              32.3917,
+              61.3854
+            ],
+            "orientation": [
+              -0.998954,
+              0.0457242,
+              0,
+              -0.0457242,
+              -0.998954,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2a0746",
+            "spawnerHandle": "0x444005e",
+            "spawnerName": "ld_spawner_crowd_civ_left_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.0848,
+              32.8415,
+              61.3614
+            ],
+            "orientation": [
+              0.978749,
+              -0.205062,
+              0,
+              0.205062,
+              0.978749,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb2f074b",
+            "spawnerHandle": "0x86e0488",
+            "spawnerName": "esc_env_spawner_47",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -59.6368,
+              -141.343,
+              61.163
+            ],
+            "orientation": [
+              0.74638,
+              -0.66552,
+              0,
+              0.66552,
+              0.74638,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb30074c",
+            "spawnerHandle": "0x86d0487",
+            "spawnerName": "esc_env_spawner_46",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.4691,
+              -143.926,
+              61.1455
+            ],
+            "orientation": [
+              -0.833081,
+              0.553151,
+              0,
+              -0.553151,
+              -0.833081,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb31074d",
+            "spawnerHandle": "0x86c0486",
+            "spawnerName": "esc_env_spawner_45",
+            "definition": "models/characters/base/human_behead_dead.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.1081,
+              -132.704,
+              61.7136
+            ],
+            "orientation": [
+              0.426923,
+              -0.904288,
+              0,
+              0.904288,
+              0.426923,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb32074e",
+            "spawnerHandle": "0x86b0485",
+            "spawnerName": "esc_env_spawner_44",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.3883,
+              -133.203,
+              61.7587
+            ],
+            "orientation": [
+              0.520107,
+              0.854101,
+              0,
+              -0.854101,
+              0.520107,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb33074f",
+            "spawnerHandle": "0x86a0484",
+            "spawnerName": "esc_env_spawner_43",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.6459,
+              -133.481,
+              61.1653
+            ],
+            "orientation": [
+              0.638227,
+              0.769848,
+              0,
+              -0.769848,
+              0.638227,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb350751",
+            "spawnerHandle": "0x8680482",
+            "spawnerName": "esc_env_spawner_41",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.9781,
+              -126.92,
+              61.1689
+            ],
+            "orientation": [
+              0.643498,
+              0.765447,
+              0,
+              -0.765447,
+              0.643498,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb360752",
+            "spawnerHandle": "0x8670481",
+            "spawnerName": "esc_env_spawner_40",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8961,
+              -128.398,
+              61.12
+            ],
+            "orientation": [
+              -0.884482,
+              -0.466575,
+              0,
+              0.466575,
+              -0.884482,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb370753",
+            "spawnerHandle": "0x8660480",
+            "spawnerName": "esc_env_spawner_39",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.4427,
+              -125.426,
+              61.1689
+            ],
+            "orientation": [
+              -0.18747,
+              0.98227,
+              0,
+              -0.98227,
+              -0.18747,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb380754",
+            "spawnerHandle": "0x865047f",
+            "spawnerName": "esc_env_spawner_38",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.9467,
+              -121.707,
+              61.1649
+            ],
+            "orientation": [
+              -0.385163,
+              0.922849,
+              0,
+              -0.922849,
+              -0.385163,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb390755",
+            "spawnerHandle": "0x864047e",
+            "spawnerName": "esc_env_spawner_37",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.8677,
+              -119.305,
+              61.1731
+            ],
+            "orientation": [
+              -0.512813,
+              0.8585,
+              0,
+              -0.8585,
+              -0.512813,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3a0756",
+            "spawnerHandle": "0x44d0067",
+            "spawnerName": "ld_spawner_crowd_civ_right_4",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0428,
+              33.4584,
+              61.375
+            ],
+            "orientation": [
+              -0.791182,
+              -0.611581,
+              0,
+              0.611581,
+              -0.791182,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3b0757",
+            "spawnerHandle": "0x863047d",
+            "spawnerName": "esc_env_spawner_36",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -40.0227,
+              -114.618,
+              61.1886
+            ],
+            "orientation": [
+              -0.989578,
+              0.144,
+              0,
+              -0.144,
+              -0.989578,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3c0758",
+            "spawnerHandle": "0x862047c",
+            "spawnerName": "esc_env_spawner_35",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.0099,
+              -117.931,
+              61.1624
+            ],
+            "orientation": [
+              -0.450241,
+              0.892907,
+              0,
+              -0.892907,
+              -0.450241,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3d0759",
+            "spawnerHandle": "0x861047b",
+            "spawnerName": "esc_env_spawner_34",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.3565,
+              -113.868,
+              61.2116
+            ],
+            "orientation": [
+              -0.963,
+              -0.269502,
+              0,
+              0.269502,
+              -0.963,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3e075a",
+            "spawnerHandle": "0x860047a",
+            "spawnerName": "esc_env_spawner_33",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.4204,
+              -106.009,
+              61.1721
+            ],
+            "orientation": [
+              -0.0136607,
+              -0.999907,
+              0,
+              0.999907,
+              -0.0136607,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb3f075b",
+            "spawnerHandle": "0x85f0479",
+            "spawnerName": "esc_env_spawner",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -43.3953,
+              -113.132,
+              61.2088
+            ],
+            "orientation": [
+              -0.93302,
+              -0.359825,
+              0,
+              0.359825,
+              -0.93302,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb41075d",
+            "spawnerHandle": "0x85e0478",
+            "spawnerName": "esc_env_spawner_32",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.7101,
+              -115.184,
+              61.1728
+            ],
+            "orientation": [
+              0.618103,
+              0.786097,
+              0,
+              -0.786097,
+              0.618103,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb470763",
+            "spawnerHandle": "0x8690483",
+            "spawnerName": "esc_env_spawner_42",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -48.5319,
+              -123.346,
+              61.1805
+            ],
+            "orientation": [
+              0.83545,
+              -0.549566,
+              0,
+              0.549566,
+              0.83545,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb480764",
+            "spawnerHandle": "0x51d0137",
+            "spawnerName": "ld_spawner_guard_tutorial_2",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.6995,
+              -151.562,
+              66.4
+            ],
+            "orientation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb490765",
+            "spawnerHandle": "0x4b100cb",
+            "spawnerName": "ld_spawner_crowd_civ_left_2",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -46.8114,
+              27.7658,
+              61.3846
+            ],
+            "orientation": [
+              0.678556,
+              -0.734549,
+              0,
+              0.734549,
+              0.678556,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4a0766",
+            "spawnerHandle": "0x5170131",
+            "spawnerName": "ld_spawner_vista_8",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              57.3307,
+              -208.555,
+              -3.49036
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4b0767",
+            "spawnerHandle": "0x514012e",
+            "spawnerName": "ld_spawner_vista_7",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              40.54,
+              -189.26,
+              -3.48862
+            ],
+            "orientation": [
+              0.242979,
+              0.970032,
+              0,
+              -0.970032,
+              0.242979,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4c0768",
+            "spawnerHandle": "0x511012b",
+            "spawnerName": "ld_spawner_vista_6",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              58.7584,
+              -204.922,
+              -3.49182
+            ],
+            "orientation": [
+              0.325817,
+              -0.945433,
+              0,
+              0.945433,
+              0.325817,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4d0769",
+            "spawnerHandle": "0x50b0125",
+            "spawnerName": "ld_spawner_vista_5",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              60.124,
+              -206.021,
+              -3.49536
+            ],
+            "orientation": [
+              -0.322248,
+              -0.946655,
+              0,
+              0.946655,
+              -0.322248,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4e076a",
+            "spawnerHandle": "0x4b500cf",
+            "spawnerName": "ld_spawner_crowd_civ_left_1",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.0418,
+              24.9869,
+              61.1971
+            ],
+            "orientation": [
+              0.555991,
+              0.831188,
+              0,
+              -0.831188,
+              0.555991,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb4f076b",
+            "spawnerHandle": "0x4b800d2",
+            "spawnerName": "ld_spawner_crowd_civ_left_6",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -47.3843,
+              25.7111,
+              61.182
+            ],
+            "orientation": [
+              0.99768,
+              0.0680775,
+              0,
+              -0.0680775,
+              0.99768,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb50076c",
+            "spawnerHandle": "0x5070121",
+            "spawnerName": "ld_spawner_vista_4",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.7497,
+              -193.147,
+              -3.49416
+            ],
+            "orientation": [
+              0.0461267,
+              -0.998936,
+              0,
+              0.998936,
+              0.0461267,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb51076d",
+            "spawnerHandle": "0x4ba00d4",
+            "spawnerName": "ld_spawner_crowd_civ_right_6",
+            "definition": "models/characters/def/generic/aristo_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -38.9145,
+              26.0617,
+              61.1986
+            ],
+            "orientation": [
+              -0.967303,
+              -0.253622,
+              0,
+              0.253622,
+              -0.967303,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb53076f",
+            "spawnerHandle": "0x504011e",
+            "spawnerName": "ld_spawner_vista_3",
+            "definition": "models/characters/def/generic/aristo_female_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              61.8445,
+              -194.322,
+              -3.49398
+            ],
+            "orientation": [
+              0.788327,
+              0.615256,
+              0,
+              -0.615256,
+              0.788327,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb570773",
+            "spawnerHandle": "0x4cb00e5",
+            "spawnerName": "ld_spawner_guard_tutorial_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -45.0752,
+              -152.86,
+              66.4
+            ],
+            "orientation": [
+              -4.76837E-07,
+              1,
+              0,
+              -1,
+              -4.76837E-07,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb580774",
+            "spawnerHandle": "0x4e100fb",
+            "spawnerName": "ld_spawner_ramsey_escape",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -44.096,
+              -120.091,
+              61
+            ],
+            "orientation": [
+              0.757423,
+              0.652924,
+              0,
+              -0.652924,
+              0.757423,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5a0776",
+            "spawnerHandle": "0x4de00f8",
+            "spawnerName": "ld_spawner_alexi_escape",
+            "definition": "models/characters/def/story/alexi_mayhew.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -39.0063,
+              -162.966,
+              66.4251
+            ],
+            "orientation": [
+              0.0980573,
+              0.995181,
+              0,
+              -0.995181,
+              0.0980573,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5b0777",
+            "spawnerHandle": "0x4ed0107",
+            "spawnerName": "ld_spawner_vista_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              55.196,
+              -241.174,
+              0.120667
+            ],
+            "orientation": [
+              0.98699,
+              0.16078,
+              0,
+              -0.16078,
+              0.98699,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb5f077b",
+            "spawnerHandle": "0x4d600f0",
+            "spawnerName": "ld_spawner_guard_escape_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -42.9563,
+              -118.47,
+              61
+            ],
+            "orientation": [
+              -0.575055,
+              -0.818114,
+              0,
+              0.818114,
+              -0.575055,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb60077c",
+            "spawnerHandle": "0x4fc0116",
+            "spawnerName": "ld_spawner_vista_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              37.582,
+              -229.169,
+              -5.28631
+            ],
+            "orientation": [
+              1,
+              -3.502E-07,
+              0,
+              3.502E-07,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb61077d",
+            "spawnerHandle": "0x8df04f9",
+            "spawnerName": "esc_env_spawner_53",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -35.8086,
+              -162.96,
+              66.5872
+            ],
+            "orientation": [
+              -0.735388,
+              0.677646,
+              0,
+              -0.677646,
+              -0.735388,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb62077e",
+            "spawnerHandle": "0x4d700f1",
+            "spawnerName": "ld_spawner_guard_escape_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -41.7963,
+              -119.886,
+              61
+            ],
+            "orientation": [
+              -0.993319,
+              -0.115403,
+              0,
+              0.115403,
+              -0.993319,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb63077f",
+            "spawnerHandle": "0x8de04f8",
+            "spawnerName": "esc_env_spawner_52",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -34.0251,
+              -160.63,
+              66.5937
+            ],
+            "orientation": [
+              0.620558,
+              0.78416,
+              0,
+              -0.78416,
+              0.620558,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xb640780",
+            "spawnerHandle": "0x880049a",
+            "spawnerName": "esc_env_spawner_48",
+            "definition": "models/characters/base/human_dead",
+            "childCount": 1,
+            "reciprocal": true,
+            "unique": true,
+            "position": [
+              -49.6979,
+              -134.191,
+              61.1656
+            ],
+            "orientation": [
+              0.851947,
+              0.523628,
+              0,
+              -0.523628,
+              0.851947,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc07119b",
+            "spawnerHandle": "0x430004a",
+            "spawnerName": "ld_spawner_delilah",
+            "definition": "models/characters/def/maps/dunwall_escape/delilah_copperspoon.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.6853,
+              58.1725,
+              59.7998
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc08119c",
+            "spawnerHandle": "0x4460060",
+            "spawnerName": "ld_spawner_traitor_3",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.0971,
+              13.5234,
+              61.006
+            ],
+            "orientation": [
+              -0.00503764,
+              0.999987,
+              0,
+              -0.999987,
+              -0.00503764,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc09119d",
+            "spawnerHandle": "0x42e0048",
+            "spawnerName": "ld_spawner_duke_guard_left_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              52.9,
+              60.9911
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0a119e",
+            "spawnerHandle": "0x431004b",
+            "spawnerName": "ld_spawner_ramsey_audience",
+            "definition": "models/characters/def/story/mortimer_ramsey.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -45.58,
+              17.8298,
+              61.606
+            ],
+            "orientation": [
+              0.514104,
+              -0.857728,
+              0,
+              0.857728,
+              0.514104,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0c119f",
+            "spawnerHandle": "0x4c200dc",
+            "spawnerName": "ld_spawner_crowd_civ_servant_2",
+            "definition": "models/characters/def/generic/servant_female_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -35.7259,
+              24.2498,
+              61
+            ],
+            "orientation": [
+              0.238356,
+              0.971178,
+              0,
+              -0.971178,
+              0.238356,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0d11a0",
+            "spawnerHandle": "0x42f0049",
+            "spawnerName": "ld_spawner_duke_guard_right_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0e11a1",
+            "spawnerHandle": "0x44e0068",
+            "spawnerName": "ld_spawner_throne_guard_right_1",
+            "definition": "models/characters/def/generic/dunwall_guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -39.6049,
+              21.4997,
+              61
+            ],
+            "orientation": [
+              -0.998796,
+              -0.0490687,
+              0,
+              0.0490687,
+              -0.998795,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc0f11a2",
+            "spawnerHandle": "0x42d0047",
+            "spawnerName": "ld_spawner_duke",
+            "definition": "models/characters/def/story/luca_abele.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.7057,
+              55.0936,
+              60.2082
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1011a3",
+            "spawnerHandle": "0x41e0038",
+            "spawnerName": "ld_spawner_duke_guard_left_1",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.7,
+              51,
+              61.0059
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1111a4",
+            "spawnerHandle": "0x4280042",
+            "spawnerName": "ld_spawner_duke_carrier_back",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6586,
+              60.1145,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1211a5",
+            "spawnerHandle": "0x4290043",
+            "spawnerName": "ld_spawner_duke_carrier_front",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6498,
+              55.9097,
+              59.9
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1511a6",
+            "spawnerHandle": "0x4170031",
+            "spawnerName": "ld_spawner_duke_guard_right_2",
+            "definition": "models/characters/def/generic/guard_male_small_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7,
+              52.9,
+              60.9864
+            ],
+            "orientation": [
+              -0.0490679,
+              -0.998795,
+              0,
+              0.998795,
+              -0.0490679,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1611a7",
+            "spawnerHandle": "0x42a0044",
+            "spawnerName": "ld_spawner_clockw_left",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -44.0745,
+              49.4492,
+              60.9801
+            ],
+            "orientation": [
+              -0.0078458,
+              -0.999969,
+              0,
+              0.999969,
+              -0.0078458,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1811a8",
+            "spawnerHandle": "0x42c0046",
+            "spawnerName": "ld_spawner_clockw_right",
+            "definition": "models/characters/def/generic/clockwork_01.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -42.7542,
+              49.459,
+              60.9801
+            ],
+            "orientation": [
+              -0.0117022,
+              -0.999932,
+              0,
+              0.999932,
+              -0.0117022,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1a11a9",
+            "spawnerHandle": "0x42b0045",
+            "spawnerName": "ld_spawner_corvo_audience",
+            "definition": "models/characters/def/story/corvo_attano.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -41.44,
+              17.7398,
+              61.606
+            ],
+            "orientation": [
+              -0.634394,
+              -0.77301,
+              0,
+              0.77301,
+              -0.634394,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "handle": "0xc1b11aa",
+            "spawnerHandle": "0x41b0035",
+            "spawnerName": "ld_spawner_emily_audience",
+            "definition": "models/characters/def/story/emily_kaldwin.def",
+            "childCount": 0,
+            "reciprocal": false,
+            "unique": false,
+            "position": [
+              -43.6225,
+              9.38434,
+              61.0205
+            ],
+            "orientation": [
+              -0.910501,
+              0.413506,
+              0,
+              -0.413506,
+              -0.910501,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "Bridge": {
+        "role": 1,
+        "engineThread": 41612,
+        "screenTransportPumps": 10673,
+        "nativeInterface": "SteamNetworkingSockets012",
+        "steamAvailable": true,
+        "listener": 0,
+        "connection": 3049494159,
+        "connectionState": 3,
+        "sent": 3858,
+        "received": 3868,
+        "rejected": 0,
+        "lastCommand": 500007265,
+        "localPoseAvailable": true,
+        "localPosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "remotePoseAvailable": true,
+        "remoteFresh": true,
+        "remoteSequence": 7823,
+        "remotePosition": [
+          -28.0921,
+          -153.962006,
+          66.403648
+        ],
+        "probeActorHandle": 210178579,
+        "probeFollowEnabled": true,
+        "probeRenderPosition": [
+          -30.580063,
+          -153.716965,
+          66.400017
+        ],
+        "probeOffset": [
+          -2.487963,
+          0.245041,
+          -0.003632
+        ],
+        "remoteActorImplemented": false,
+        "localMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "localMapId": "b09f633a29a020cc",
+        "localEpoch": 16,
+        "remoteMapId": "b09f633a29a020cc",
+        "remoteEpoch": 21,
+        "localGameLogicState": 1,
+        "localPendingGameLogicState": 0,
+        "remoteGameLogicState": 1,
+        "remotePendingGameLogicState": 0,
+        "localCinematicMetadataValid": 1,
+        "localCinematicNodeCount": 0,
+        "localCinematicSignature": "0",
+        "remoteCinematicMetadataValid": 1,
+        "remoteCinematicNodeCount": 0,
+        "remoteCinematicSignature": "0",
+        "localCinematicEpoch": 1,
+        "remoteCinematicEpoch": 1,
+        "cinematicSyncEnabled": true,
+        "remoteCinematicSyncEnabled": 1,
+        "localCinematicCanSkip": 0,
+        "remoteCinematicCanSkip": 0,
+        "nativeSkipCallbacks": 0,
+        "skipSent": 0,
+        "skipReceived": 0,
+        "skipApplied": 0,
+        "skipDropped": 0,
+        "localSkipSceneId": "0",
+        "remoteSkipSceneId": "0",
+        "nativeSkipThread": 0,
+        "poseProtocol": 10,
+        "posePacketBytes": 1156,
+        "localSequenceMetadataValid": 1,
+        "localSequenceCount": 0,
+        "localSequenceSignature": "0",
+        "localSequenceBoundaryId": "0",
+        "remoteSequenceMetadataValid": 1,
+        "remoteSequenceCount": 0,
+        "remoteSequenceSignature": "0",
+        "remoteSequenceBoundaryId": "0",
+        "localPlayerStanceValid": 1,
+        "localPlayerStance": 0,
+        "remotePlayerStanceValid": 1,
+        "remotePlayerStance": 0,
+        "localPlayerMotionValid": 1,
+        "localPlayerMotion": 0,
+        "remotePlayerMotionValid": 1,
+        "remotePlayerMotion": 0,
+        "receivedPlayerMotions": [
+          3316,
+          147,
+          21,
+          15
+        ],
+        "cinematicHoldActive": false,
+        "cinematicHoldId": 0,
+        "cinematicHoldStarted": 0,
+        "cinematicHoldResumed": 0,
+        "cinematicHoldAbandoned": 0,
+        "localSequenceTimeMs": 0,
+        "localSequencePaused": 0,
+        "remoteSequenceTimeMs": 0,
+        "remoteSequencePaused": 0,
+        "barrierEnabled": 1,
+        "barrierHeld": 0,
+        "remoteBarrierEnabled": 1,
+        "remoteBarrierHeld": 0,
+        "barrierStarted": 0,
+        "barrierReleased": 0,
+        "barrierTimedOut": 0,
+        "barrierMissed": 0,
+        "barrierSent": 0,
+        "barrierReceived": 0,
+        "barrierRejected": 0,
+        "locomotionEnabled": true,
+        "locomotionApplied": 15237,
+        "locomotionRefused": 0,
+        "locomotionSpeed": 0.0,
+        "bodyProbeApplied": 743,
+        "bodyProbeRefused": 0,
+        "bodyProbeThread": 47780,
+        "bodyStreamEnabled": true,
+        "bodyStreamApplied": 743,
+        "localBodyPoseValid": 1,
+        "remoteBodyPoseValid": 1,
+        "aiHoldActive": false,
+        "aiHoldHandle": 0,
+        "aiHoldStarted": 0,
+        "aiHoldReleased": 0,
+        "aiHoldRefused": 0,
+        "aiHoldInvalidated": 0,
+        "aiHoldResult": "idle"
+      },
+      "Avatars": [
+        {
+          "handle": "0xc871213",
+          "pointer": "0x1ccbe3ed4a0",
+          "vtableRva": "0x1c5e108",
+          "name": "d2coop_probe_corvo",
+          "type": ".?AVarkNPC@@",
+          "definition": "0x1cc4a104be0",
+          "definitionName": "models/characters/def/story/corvo_attano.def",
+          "position": [
+            -30.5801,
+            -153.717,
+            66.4
+          ],
+          "renderPosition": [
+            -30.5801,
+            -153.717,
+            66.4
+          ],
+          "orientation": [
+            -0.995185,
+            0.0980171,
+            0,
+            -0.0980171,
+            -0.995185,
+            0,
+            0,
+            0,
+            1
+          ],
+          "renderOrientation": [
+            -0.995185,
+            0.0980171,
+            0,
+            -0.0980171,
+            -0.995185,
+            0,
+            0,
+            0,
+            1
+          ],
+          "physicsBodies": [
+            {
+              "id": 16779326,
+              "position": [
+                -30.5759,
+                -153.714,
+                67.4509
+              ]
+            },
+            {
+              "id": 16779327,
+              "position": [
+                -30.5805,
+                -153.713,
+                67.5431
+              ]
+            },
+            {
+              "id": 16779328,
+              "position": [
+                -30.5677,
+                -153.713,
+                67.7987
+              ]
+            },
+            {
+              "id": 16779329,
+              "position": [
+                -30.557,
+                -153.712,
+                68.0802
+              ]
+            },
+            {
+              "id": 16779330,
+              "position": [
+                -30.5778,
+                -153.709,
+                68.1781
+              ]
+            },
+            {
+              "id": 16779331,
+              "position": [
+                -30.5599,
+                -153.925,
+                67.9352
+              ]
+            },
+            {
+              "id": 16779332,
+              "position": [
+                -30.5642,
+                -153.971,
+                67.6985
+              ]
+            },
+            {
+              "id": 16779333,
+              "position": [
+                -30.6173,
+                -154.013,
+                67.4329
+              ]
+            },
+            {
+              "id": 16779334,
+              "position": [
+                -30.5173,
+                -153.505,
+                67.9329
+              ]
+            },
+            {
+              "id": 16779335,
+              "position": [
+                -30.5121,
+                -153.455,
+                67.6968
+              ]
+            },
+            {
+              "id": 16779336,
+              "position": [
+                -30.5503,
+                -153.407,
+                67.4298
+              ]
+            },
+            {
+              "id": 16779337,
+              "position": [
+                -30.5791,
+                -153.816,
+                67.4359
+              ]
+            },
+            {
+              "id": 16779338,
+              "position": [
+                -30.7634,
+                -153.845,
+                67.025
+              ]
+            },
+            {
+              "id": 16779339,
+              "position": [
+                -30.5121,
+                -153.852,
+                66.6613
+              ]
+            },
+            {
+              "id": 16779340,
+              "position": [
+                -30.5607,
+                -153.613,
+                67.4376
+              ]
+            },
+            {
+              "id": 16779341,
+              "position": [
+                -30.745,
+                -153.565,
+                67.0283
+              ]
+            },
+            {
+              "id": 16779342,
+              "position": [
+                -30.5013,
+                -153.597,
+                66.6608
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Samples": [
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 24,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386093,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 24,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386234,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 23,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386250,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 48,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386390,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 47,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386406,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 48,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386546,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 47,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386562,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 72,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386703,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 71,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386718,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 96,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386859,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 71,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58386875,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 96,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387015,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 95,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387046,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 119,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387171,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x0",
+        "player": "0x248d3bdac30",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 118,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387203,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x0",
+        "player": "0x1cd032ecd60",
+        "logic": 15,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 0,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 8,
+        "received": 7,
+        "samples": 119,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387328,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 118,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387359,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 6,
+        "result": "released",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 58387312,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 10,
+        "received": 7,
+        "samples": 143,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387500,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "client",
+      "Trace": {
+        "enabled": true,
+        "phase": 5,
+        "result": "held",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 0,
+        "duplicates": 0,
+        "rejected": 2,
+        "aborted": 0,
+        "heldAt": 58385890,
+        "releasedAt": 0,
+        "readyAt": 58385890,
+        "completedAt": 0,
+        "hostReady": 0,
+        "clientReady": 1,
+        "readyDelay": 0,
+        "sent": 7,
+        "received": 8,
+        "samples": 118,
+        "maxDistance": 0,
+        "game": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381031,
+        "oldGame": "0x1cc4b076050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 5,
+        "avatarAiReleased": 5,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 5,
+        "avatarIdleReleased": 5,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387531,
+        "game": "0x1cc4cc11050",
+        "sessionGame": "0x1cc4cc11050",
+        "activeGame": "0x1cc4cc11050",
+        "player": "0x1cd032ecd60",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 2,
+        "queued": 0,
+        "definition": "models/characters/player/emily/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ]
+      }
+    },
+    {
+      "Role": "host",
+      "Trace": {
+        "enabled": true,
+        "phase": 6,
+        "result": "released",
+        "arm": 1,
+        "peerArm": 1,
+        "transaction": 1,
+        "digest": "a296b888c17eff7465e0c9b5023672925cb2be9ebec37960ac20b70ed9eff519",
+        "held": true,
+        "expectBoundary": false,
+        "loads": 1,
+        "completed": 0,
+        "requests": 1,
+        "duplicates": 0,
+        "rejected": 0,
+        "aborted": 0,
+        "heldAt": 58385812,
+        "releasedAt": 0,
+        "readyAt": 58387312,
+        "completedAt": 0,
+        "hostReady": 1,
+        "clientReady": 1,
+        "readyDelay": 1500,
+        "sent": 10,
+        "received": 7,
+        "samples": 143,
+        "maxDistance": 0,
+        "game": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036407
+        ],
+        "loadingEntryAt": 58381109,
+        "oldGame": "0x248bd9ad050",
+        "avatarRequested": true,
+        "avatarPending": false,
+        "avatarReady": false,
+        "avatarRestored": 0,
+        "avatarRefused": 0,
+        "avatarAiHeld": false,
+        "avatarAiAcquired": 8,
+        "avatarAiReleased": 8,
+        "avatarAiLost": 0,
+        "avatarAiRefused": 0,
+        "avatarIdleOwned": false,
+        "avatarIdleAcquired": 8,
+        "avatarIdleReleased": 8,
+        "avatarIdleLost": 0,
+        "avatarIdleRefused": 0,
+        "deathActive": false,
+        "deathReady": false,
+        "peerDeathReady": false,
+        "deathRetryQueued": false,
+        "deathCount": 0,
+        "deathApplied": 0,
+        "deathReceived": 0
+      },
+      "Native": {
+        "tick": 58387656,
+        "game": "0x2486ca4f050",
+        "sessionGame": "0x2486ca4f050",
+        "activeGame": "0x2486ca4f050",
+        "player": "0x248d3bdac30",
+        "logic": 1,
+        "pending": 0,
+        "phase": 3,
+        "character": 1,
+        "queued": 0,
+        "definition": "models/characters/player/corvo/body.def",
+        "position": [
+          -28.0921001,
+          -153.962006,
+          66.4036484
+        ]
+      }
+    }
+  ]
+}

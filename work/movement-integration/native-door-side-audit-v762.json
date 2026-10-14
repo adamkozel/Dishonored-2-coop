@@ -1,0 +1,443 @@
+{
+  "at": "2026-10-13T14:44:24.258085+02:00",
+  "passed": true,
+  "candidate": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+  "cases": [
+    {
+      "take": "native-door-overlap-host-first-v747",
+      "version": 747,
+      "source": "host",
+      "passed": false,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": "Received native moving transition was not available for overlapping input"
+    },
+    {
+      "take": "native-door-overlap-opposite-host-v748",
+      "version": 748,
+      "source": "host",
+      "passed": false,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": "Native Steam door ordering, application, duplicate handling or rejection delta differs"
+    },
+    {
+      "take": "native-door-close-reopen-host-v750",
+      "version": 750,
+      "source": "host",
+      "passed": false,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": "Native Steam door ordering, application, duplicate handling or rejection delta differs"
+    },
+    {
+      "take": "native-door-close-handoff-host-v751",
+      "version": 751,
+      "source": "host",
+      "passed": false,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": "Native Steam door ordering, application, duplicate handling or rejection delta differs"
+    },
+    {
+      "take": "native-door-busy-use-host-v752",
+      "version": 752,
+      "source": "host",
+      "passed": true,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 0,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 0
+        },
+        "peer": {
+          "role": 1,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        }
+      }
+    },
+    {
+      "take": "native-door-busy-use-client-v753",
+      "version": 753,
+      "source": "client",
+      "passed": true,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 1,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        },
+        "peer": {
+          "role": 0,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 0
+        }
+      }
+    },
+    {
+      "take": "native-door-simultaneous-sides-v754",
+      "version": 754,
+      "source": "host",
+      "passed": false,
+      "dll": "A59AF758A40FC67F2EB35595A2F352FFA371025F9B30EA3681E87C7C8CC2AD85",
+      "checks": [
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": "Authoritative door side differs from actual native open-side geometry"
+    },
+    {
+      "take": "native-door-simultaneous-sides-host-v756",
+      "version": 756,
+      "source": "host",
+      "passed": true,
+      "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Both native opposite-side openings observed; one host order converges in state and actual native opening side, with no measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 0,
+          "revision": 3,
+          "side": 1,
+          "applied": 3,
+          "nativeCalls": 2,
+          "sideCorrections": 1,
+          "requests": 1,
+          "rejected": 0
+        },
+        "peer": {
+          "role": 1,
+          "revision": 3,
+          "side": 1,
+          "applied": 3,
+          "nativeCalls": 0,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        }
+      },
+      "actual": {
+        "source": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x6010001",
+          "movingTarget": "0x2",
+          "openSide": 1,
+          "child": 175572625
+        },
+        "peer": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x6010001",
+          "movingTarget": "0x2",
+          "openSide": 1,
+          "child": 175572625
+        }
+      },
+      "sourceDisplacement": 0.5215963075492425,
+      "nativeCycles": {
+        "source": [
+          0,
+          1,
+          0,
+          1,
+          2
+        ],
+        "peer": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "take": "native-door-simultaneous-sides-client-v757",
+      "version": 757,
+      "source": "client",
+      "passed": true,
+      "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Both native opposite-side openings observed; one host order converges in state and actual native opening side, with no measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 1,
+          "revision": 3,
+          "side": 1,
+          "applied": 3,
+          "nativeCalls": 2,
+          "sideCorrections": 1,
+          "requests": 1,
+          "rejected": 0
+        },
+        "peer": {
+          "role": 0,
+          "revision": 3,
+          "side": 1,
+          "applied": 3,
+          "nativeCalls": 0,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 0
+        }
+      },
+      "actual": {
+        "source": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x6010001",
+          "movingTarget": "0x2",
+          "openSide": 1,
+          "child": 175572625
+        },
+        "peer": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x6010001",
+          "movingTarget": "0x2",
+          "openSide": 1,
+          "child": 175572625
+        }
+      },
+      "sourceDisplacement": 0.5216377289748089,
+      "nativeCycles": {
+        "source": [
+          0,
+          1,
+          2
+        ],
+        "peer": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "take": "native-door-busy-use-host-v758",
+      "version": 758,
+      "source": "host",
+      "passed": true,
+      "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 0,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 0
+        },
+        "peer": {
+          "role": 1,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        }
+      }
+    },
+    {
+      "take": "native-door-busy-use-client-v759",
+      "version": 759,
+      "source": "client",
+      "passed": true,
+      "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 1,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        },
+        "peer": {
+          "role": 0,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 1,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 0
+        }
+      }
+    },
+    {
+      "take": "native-door-simultaneous-sides-reverse-v760",
+      "version": 760,
+      "source": "host",
+      "passed": true,
+      "dll": "381063871DCA6B3A1AFDEE51E96BC22A955BAE0C455364D25D09AE13C21A78C0",
+      "checks": [
+        "Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations",
+        "Both native opposite-side openings observed; one host order converges in state and actual native opening side, with no measured rejection delta",
+        "Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded",
+        "Both checkpoint inventories and player/partner health restored",
+        "All14 protected save/settings hashes retained"
+      ],
+      "failure": null,
+      "sync": {
+        "source": {
+          "role": 0,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 2,
+          "sideCorrections": 1,
+          "requests": 1,
+          "rejected": 0
+        },
+        "peer": {
+          "role": 1,
+          "revision": 3,
+          "side": 0,
+          "applied": 3,
+          "nativeCalls": 0,
+          "sideCorrections": 0,
+          "requests": 1,
+          "rejected": 1
+        }
+      },
+      "actual": {
+        "source": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x7000001",
+          "movingTarget": "0x2",
+          "openSide": 0,
+          "child": 175572625
+        },
+        "peer": {
+          "handle": "0x54e0168",
+          "current": 2,
+          "pending": 2,
+          "locked": 0,
+          "flags1e8": "0x0",
+          "state90": "0x7000001",
+          "movingTarget": "0x2",
+          "openSide": 0,
+          "child": 175572625
+        }
+      },
+      "sourceDisplacement": 0.12761356715490424,
+      "nativeCycles": {
+        "source": [
+          0,
+          1,
+          0,
+          1,
+          2
+        ],
+        "peer": [
+          0,
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "complete": false,
+  "scope": "Explicit isolated ordinary-door catalog only. Native busy-use behavior in both orders; simultaneous opposite sides corrected via native close/reopen in both player roles, and reverse direction760. Retain five failed receipts. No automatic rearm, linked/locked/scripted door support, shared AI or full movement acceptance."
+}

@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-14T19:43:08.020973+02:00",
+  "probes": [
+    {
+      "take": "../natural-moveset/window-mantle-probe-v1201",
+      "window": "ld_rich_small_01_sndctr_4 (Dunwall Tower)",
+      "notes": [
+        {
+          "opened": true,
+          "before": 0,
+          "after": 1
+        },
+        {
+          "start": [
+            -28.4498,
+            -149.123,
+            66.4036
+          ],
+          "enterMantle": false,
+          "afterEnter": [
+            -28.4498,
+            -149.123,
+            66.4036
+          ],
+          "logic": 1
+        },
+        {
+          "logic": 1,
+          "exitMantle": true,
+          "afterExit": [
+            -31.3844,
+            -149.19,
+            66.4324
+          ]
+        }
+      ],
+      "finding": "Opened natively; jump+forward toward it only jumped in place against the wall (no mantle state 8): a chest-height opening over a sheer drop, not climbable. Reverse attempt mantled (crouched, state 8) onto room furniture."
+    },
+    {
+      "take": "../natural-moveset/window-mantle-probe-v1206",
+      "window": "script_rich_small_01_sndctrl_14 (Edge of the World docks apartment)",
+      "notes": [
+        {
+          "after": 1,
+          "before": 0,
+          "opened": true
+        },
+        {
+          "start": [
+            1.523,
+            144.671,
+            12.8571
+          ],
+          "afterEnter": [
+            3.02299,
+            143.476,
+            12.8571
+          ],
+          "logic": 1,
+          "enterMantle": false
+        },
+        {
+          "exitMantle": false,
+          "afterExit": [
+            0.8998,
+            143.242,
+            12.8571
+          ],
+          "logic": 1
+        }
+      ],
+      "finding": "Opened natively; the usable is a venetian-blind toggle over a closed window (video), the player only walked along it; no mantle either way."
+    }
+  ],
+  "static": "Ghidra string census (d2-ghidra MCP): no window-specific player traversal state or scene; the only window class is arkCpntPlayerSensorWindowAssassination (paired window takedown). Player window entry/exit is the generic native mantle (state 8, confined/low variants), already partially bound (651/656 low confined mantle).",
+  "conclusion": "window_enter_exit stays unverified: it needs the existing mantle binding recorded through a genuinely climbable window, which neither catalogued window usable is.",
+  "complete": false
+}

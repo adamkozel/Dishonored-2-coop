@@ -1,0 +1,108 @@
+
+void FUN_14086cbf0(longlong param_1)
+
+{
+  int *piVar1;
+  longlong lVar2;
+  int iVar3;
+  char cVar4;
+  undefined8 uVar5;
+  longlong lVar6;
+  longlong lVar7;
+  longlong lVar8;
+  int *piVar9;
+  undefined8 *puVar10;
+  int iVar11;
+  float fVar12;
+  int local_res8 [2];
+  undefined1 local_res10 [8];
+  undefined8 in_stack_ffffffffffffffb8;
+  undefined4 uVar13;
+  
+  uVar13 = (undefined4)((ulonglong)in_stack_ffffffffffffffb8 >> 0x20);
+  if (((*(char *)(param_1 + 0xcc) == '\0') && (*(char *)(param_1 + 0xcd) == '\0')) &&
+     (*(longlong *)(param_1 + 0xa0) != 0)) {
+    FUN_140895820();
+    lVar6 = *(longlong *)(param_1 + 0xa0);
+    uVar5 = FUN_14018cd20(lVar6 + 0x40);
+    lVar6 = FUN_140894430(lVar6 + 0x40,uVar5,&DAT_1439e5a60);
+    if (lVar6 != 0) {
+      uVar5 = *(undefined8 *)(*(longlong *)(param_1 + 0x10) + 0x338);
+      lVar2 = *(longlong *)(param_1 + 0x18);
+      lVar7 = FUN_140777b90(uVar5,0x21);
+      lVar8 = FUN_140777b90(uVar5,9);
+      if ((((*(char *)(param_1 + 0xd2) == '\0') || (lVar7 == 0)) ||
+          ((lVar8 == 0 ||
+           ((lVar7 = FUN_1403b8020(lVar7,0), lVar7 != 0 || (*(char *)(lVar8 + 0x54) == '\0')))))) ||
+         (fVar12 = *(float *)(lVar2 + 0xa4), fVar12 = fVar12 * fVar12,
+         fVar12 < *(float *)(lVar8 + 0x70) || fVar12 == *(float *)(lVar8 + 0x70))) {
+        lVar2 = *(longlong *)(lVar6 + 0x10);
+        if (lVar2 != 0) {
+          lVar7 = *(longlong *)(param_1 + 0x10);
+          if (*(char *)(param_1 + 0xd2) != '\0') {
+            FUN_1407701e0(*(undefined8 *)(lVar7 + 0x300),4);
+          }
+          piVar1 = (int *)(param_1 + 0x100);
+          iVar11 = 0;
+          if ((*piVar1 == 0) ||
+             (cVar4 = FUN_140772070(*(undefined8 *)(lVar7 + 0x300),*piVar1), cVar4 != '\0')) {
+            local_res8[0] = 0;
+          }
+          else {
+            local_res8[0] = *(int *)(lVar6 + 0x4c);
+          }
+          iVar3 = local_res8[0];
+          lVar8 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xe0));
+          if (lVar8 == 0) {
+            piVar9 = (int *)FUN_140854be0(param_1,local_res10,lVar2,7,CONCAT44(uVar13,iVar3));
+            if (local_res8 == piVar9) goto LAB_14086cf02;
+            iVar11 = *piVar9;
+          }
+          else {
+            uVar5 = FUN_1406dc560(*(undefined4 *)(param_1 + 0xe0));
+            piVar9 = (int *)FUN_140854ab0(param_1,local_res10,lVar2,0x27,uVar5,iVar3);
+            if (local_res8 != piVar9) {
+              iVar11 = *piVar9;
+            }
+            cVar4 = FUN_140803180(lVar7,0x12);
+            if (cVar4 != '\0') {
+              FUN_140802a20(lVar7,0x12);
+            }
+          }
+          if (iVar11 != 0) {
+            FUN_14086c6a0(param_1,lVar6,iVar3);
+            lVar2 = *(longlong *)(*(longlong *)(param_1 + 0x10) + 0x90);
+            if ((lVar2 != 0) && (lVar2 = *(longlong *)(lVar2 + 0x150), lVar2 != 0)) {
+              FUN_140864070(lVar2,lVar6 + 0x18);
+            }
+            *(undefined8 *)(param_1 + 0xc0) = *(undefined8 *)(lVar6 + 0x40);
+            uVar5 = FUN_140854880(param_1);
+            puVar10 = (undefined8 *)FUN_140878030(uVar5,local_res8);
+            *(undefined8 *)(param_1 + 0xa8) = *puVar10;
+            *(undefined4 *)(param_1 + 0xb0) = *(undefined4 *)(lVar6 + 0x48);
+            if (piVar1 != local_res8) {
+              *piVar1 = iVar11;
+            }
+            *(undefined1 *)(param_1 + 0xda) = 0;
+            if (((-1 < *(int *)(param_1 + 0x108)) &&
+                (fVar12 = *(float *)(*(longlong *)(*(longlong *)(lVar7 + 0x330) + 0x48) + 0x24 +
+                                    (longlong)*(int *)(param_1 + 0x108) * 0x28), fVar12 != 1.0)) &&
+               (FUN_1407d8fe0(D2_GameSingletonPtr + 0x1f5338,iVar11,fVar12),
+               *(int *)(param_1 + 200) != 0)) {
+              FUN_1407d8fe0(D2_GameSingletonPtr + 0x1f5338,*(undefined4 *)(param_1 + 200),fVar12);
+            }
+          }
+        }
+      }
+      else {
+        FUN_14086a9a0(param_1);
+        FUN_140854190(param_1);
+      }
+    }
+  }
+LAB_14086cf02:
+  *(undefined1 *)(param_1 + 0xd7) = 0;
+  return;
+}
+
+

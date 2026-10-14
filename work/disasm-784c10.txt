@@ -1,0 +1,56 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140784C10: push        rdi
+  0000000140784C12: sub         rsp,60h
+  0000000140784C16: mov         qword ptr [rsp+50h],0FFFFFFFFFFFFFFFEh
+  0000000140784C1F: mov         qword ptr [rsp+70h],rbx
+  0000000140784C24: mov         rbx,rcx
+  0000000140784C27: mov         rax,qword ptr [rcx+00000000000000F0h]
+  0000000140784C2E: mov         qword ptr [rcx+0000000000000360h],rax
+  0000000140784C35: mov         rdx,qword ptr [rcx+00000000000003E8h]
+  0000000140784C3C: test        rdx,rdx
+  0000000140784C3F: je          0000000140784CD2
+  0000000140784C45: lea         r8,[rcx+0000000000000300h]
+  0000000140784C4C: lea         r9,[rcx+000000000000030Ch]
+  0000000140784C53: xor         edi,edi
+  0000000140784C55: mov         qword ptr [rsp+40h],rdi
+  0000000140784C5A: mov         qword ptr [rsp+38h],rdi
+  0000000140784C5F: mov         qword ptr [rsp+30h],rdi
+  0000000140784C64: mov         byte ptr [rsp+28h],dil
+  0000000140784C69: mov         qword ptr [rsp+20h],rcx
+  0000000140784C6E: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140784C75: call        00000001408AE9B0
+  0000000140784C7A: mov         qword ptr [rbx+00000000000003E0h],rax
+  0000000140784C81: mov         eax,dword ptr [0000000142433ED0h]
+  0000000140784C87: test        al,1
+  0000000140784C89: jne         0000000140784CA1
+  0000000140784C8B: or          eax,1
+  0000000140784C8E: mov         dword ptr [0000000142433ED0h],eax
+  0000000140784C94: lea         rcx,[0000000142433EC8h]
+  0000000140784C9B: call        0000000140131AE0
+  0000000140784CA0: nop
+  0000000140784CA1: mov         byte ptr [rsp+28h],1
+  0000000140784CA6: mov         qword ptr [rsp+20h],rdi
+  0000000140784CAB: xor         r9d,r9d
+  0000000140784CAE: lea         r8,[0000000142433EC8h]
+  0000000140784CB5: mov         rdx,qword ptr [rbx+00000000000003E0h]
+  0000000140784CBC: mov         rcx,rbx
+  0000000140784CBF: call        0000000140875E80
+  0000000140784CC4: mov         dl,1
+  0000000140784CC6: mov         rcx,qword ptr [rbx+00000000000003E0h]
+  0000000140784CCD: call        000000014087E200
+  0000000140784CD2: xor         r8d,r8d
+  0000000140784CD5: lea         rdx,[00000001439B4120h]
+  0000000140784CDC: mov         rcx,rbx
+  0000000140784CDF: E8
+  0000000140784CE0: 3C
+
+  Summary
+
+     1A7D000 .text

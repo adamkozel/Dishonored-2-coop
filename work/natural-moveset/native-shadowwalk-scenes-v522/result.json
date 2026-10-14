@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "client",
+  "checks": [
+    "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+    "Exact native ShadowWalk player state observed after normal LT input",
+    "Native Shadow Walk scenes observed with reciprocal bindings and recorded clocks",
+    "Bounded forward/backward inputs issued during exact form state; requested exit recovers normal mode on same floor",
+    "Native mana decreases; replenishment prevents interpreting this as exact cost",
+    "Strict native mode reader observes all recorded phases including exact alternate ShadowWalk form and retirement",
+    "Owned native seven-binding entry and exit scenes plus sustained form observed; native LT request ends form",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.956,
+      "input": "Native Emily LT220 activation"
+    },
+    {
+      "videoTime": 4.708,
+      "input": "Forward550ms only after observed exact native ShadowWalk state"
+    },
+    {
+      "videoTime": 6.318,
+      "input": "Backward550ms in observed native ShadowWalk state"
+    },
+    {
+      "videoTime": 7.788,
+      "input": "Native LT220 End Shadow Walk after bounded movement"
+    }
+  ],
+  "dll": "F461D7477AAF7E24052D29985C1820DEEF103E366744981292C44109949A4C2F",
+  "probe": "A7A2D464AE1CE2A8C598B9F3221B36E1155FA8D2A4948ADD6F5A2FADFB9F7C44",
+  "scope": "Source-only native Shadow Walk acquisition, normal LT activation, conditional bounded movement, requested exit, scene/state/equipment observations. No remote form/VFX/gameplay binding. Checkpoint and protected saves must restore."
+}

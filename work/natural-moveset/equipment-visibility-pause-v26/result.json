@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host: pause retires body/equipment and refuses paused rearm",
+    "host: resume restores original visible native sword without replaying movement",
+    "host: native first-person resumes normally and health stays unchanged",
+    "client: pause retires body/equipment and refuses paused rearm",
+    "client: resume restores original visible native sword without replaying movement",
+    "client: native first-person resumes normally and health stays unchanged"
+  ],
+  "dll": "A3A1542B9245DBCE5D33FC89952FAD0CC3C90656F8F727C715A6150145130D86",
+  "scope": "Pause cleanup while remote clone sword is holstered, both source roles. Full death/loading/session lifecycle remains separate."
+}

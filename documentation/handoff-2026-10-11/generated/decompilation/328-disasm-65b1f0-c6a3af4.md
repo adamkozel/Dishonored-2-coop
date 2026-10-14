@@ -1,0 +1,59 @@
+# disasm-65b1f0.txt
+
+Original: [work/disasm-65b1f0.txt](<../../../../work/disasm-65b1f0.txt>)
+
+SHA-256: `B05744C2B0CA70D7B4B6F8CA934529680C24BB3476D2CE34BEA74DAB17FF0FCB`; 2090 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014065B1F0: mov         qword ptr [rsp+8],rbx
+  000000014065B1F5: push        rdi
+  000000014065B1F6: sub         rsp,20h
+  000000014065B1FA: cmp         dword ptr [rdx+00000000000039D8h],0
+  000000014065B201: mov         rbx,rdx
+  000000014065B204: mov         rdi,rcx
+  000000014065B207: jne         000000014065B241
+  000000014065B209: cmp         dword ptr [0000000143132D88h],0
+  000000014065B210: lea         rdx,[0000000141C35060h]
+  000000014065B217: setne       al
+  000000014065B21A: movzx       ecx,al
+  000000014065B21D: call        00000001401668E0
+  000000014065B222: mov         rcx,qword ptr [000000014228BAE0h]
+  000000014065B229: lea         rdx,[0000000141C34788h]
+  000000014065B230: mov         rax,qword ptr [rcx]
+  000000014065B233: mov         rbx,qword ptr [rsp+30h]
+  000000014065B238: add         rsp,20h
+  000000014065B23C: pop         rdi
+  000000014065B23D: jmp         qword ptr [rax+70h]
+  000000014065B241: mov         dl,1
+  000000014065B243: mov         dword ptr [0000000142318198h],0FFFFFFFFh
+  000000014065B24D: call        0000000140658950
+  000000014065B252: mov         rcx,qword ptr [rdi]
+  000000014065B255: mov         ebx,dword ptr [rbx+00000000000039D8h]
+  000000014065B25B: call        00000001408A8BA0
+  000000014065B260: test        rax,rax
+  000000014065B263: je          000000014065B29B
+  000000014065B265: mov         rcx,qword ptr [rdi]
+  000000014065B268: mov         r9d,dword ptr [rax+00000000000000A8h]
+  000000014065B26F: mov         edx,179h
+  000000014065B274: add         rcx,1F5250h
+  000000014065B27B: mov         r8d,0Ch
+  000000014065B281: call        00000001408112C0
+  000000014065B286: test        rax,rax
+  000000014065B289: je          000000014065B29B
+  000000014065B28B: mov         dword ptr [rax],2
+
+  Summary
+
+     1A7D000 .text
+
+````

@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T21:12:01.874724+02:00",
+  "passed": true,
+  "complete": false,
+  "candidate": "candidate-npc-stream-v847",
+  "dll": "15CEB61FDAC3FF17117EE2C6E5411A77AA6F698FD9381D9BBF532E4C5747ACD4",
+  "probe": "EA5444F1ECEDED2937AEE80E21AA7F5609AA03536B797D82B92FF27C28944489",
+  "scope": "Verified native host/client menu suspension and resume on retained NPC arms; same-map coordinated checkpoint retires old AI leases and rebinds seven fresh native actors after both-complete/role restoration. Visible menu proof has two223-joint body callbacks before/after, none during held pause. General combat, mid-world spawning/death and campaign transitions remain incomplete.",
+  "initialActors": 5,
+  "reloadedActors": 7,
+  "clientTotalAcquired": 24,
+  "clientTotalReleased": 24,
+  "clientLost": 0,
+  "visibleBodiesBefore": 5921,
+  "visibleBodiesHeld": 5967,
+  "visibleBodiesAfter": 6211,
+  "evidence": "work/natural-moveset/npc-recovery-v848b/result.json",
+  "visualEvidence": "work/natural-moveset/npc-visible-menu-v849/contact.png",
+  "visualJudgment": "Paired sampled frames show native host Pause screen, held client NPC posture and return to animation afterward. Two visible small-guard rigs only; no224-joint or complete movement-quality acceptance.",
+  "failedTake": {
+    "path": "work/natural-moveset/npc-recovery-v848/result.json",
+    "reason": "Harness assumed five actors after checkpoint. Both native catalogs/streams actually contained seven; source unchanged in repeat848b, expected count now derived from fresh host catalog.",
+    "restorationPassed": true
+  }
+}

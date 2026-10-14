@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-14T17:34:15.867806+02:00",
+  "candidate": "candidate-npc-combat-v1178",
+  "dll": "AEB10289B333B366DDF036F01C6062AA143F325230D5FFD86C000748CA8D7464",
+  "packaging": {
+    "package": "../../outputs/release/d2coop-v1171-r2",
+    "superseded": "../../outputs/release/d2coop-v1171 (helper H shadowed by the PowerShell alias h; never installed)",
+    "payload": "dinput8.dll, base/game1..4voidmod.{index,resources}, modified base/master.index (exactly the files that differ from an original install; read-only comparison: 147 small shared files byte-identical incl. Dishonored2.exe and steam_api64.dll)",
+    "test": "../release/release-install-v1177b/result.json",
+    "cases": [
+      {
+        "message": "Installed candidate-npc-combat-v1171: 10 files; backup in d2coop-backup/20261014-172315",
+        "passed": true,
+        "case": "install"
+      },
+      {
+        "message": null,
+        "passed": true,
+        "case": "reinstall_refused"
+      },
+      {
+        "message": "Rolled back: 9 added files removed, 1 originals restored.",
+        "passed": true,
+        "case": "rollback_byte_identical"
+      },
+      {
+        "message": null,
+        "passed": true,
+        "case": "wrong_exe_refused_unchanged"
+      },
+      {
+        "message": null,
+        "passed": true,
+        "case": "modified_master_refused_unchanged"
+      },
+      {
+        "message": null,
+        "passed": true,
+        "case": "steam_install_untouched"
+      }
+    ]
+  },
+  "onlineSession": {
+    "test": "../release/online-session-v1179/result.json",
+    "host": {
+      "phase": 2,
+      "result": "hosting_lobby",
+      "lobbyCreated": true,
+      "listener": true,
+      "inviteOpened": true
+    },
+    "client": {
+      "phase": 6,
+      "result": "lobby_owner_is_self",
+      "lobbyEntered": true,
+      "ownerIsSelf": true
+    },
+    "loopbackRecovered": true,
+    "note": "The invite-dialog screenshot shows the user's Steam friends list; it stays local evidence and is not published. The dialog remained open on the host lab window after the take (closing it via desktop control was declined by the user)."
+  },
+  "findings": [
+    "Confirmed: the release payload is exactly dinput8.dll + 4 voidmod packages + modified master.index; the installer refuses unsupported executables or a non-original master.index without changes and the rollback restores byte-identical originals (scratch targets only; the Steam install was only read).",
+    "Confirmed runtime: through the game's own steam_api64 the host creates a friends-only Steam lobby, sets lobby data and rich presence, listens P2P and opens Steam's native invite overlay; the second lab instance (same Steam account) enters that lobby and correctly refuses to connect to itself.",
+    "The shipped DLL is inert without lab environment variables: a product activation path (no lab policy/input/command file; host/join through Steam UI) is still required."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Two-account online validation (host/join/invite/disconnect/reconnect) - requires a second Steam account and the user.",
+    "Product activation path in the proxy (no lab environment) and in-game host trigger; skip the invite dialog in automated lab hosting.",
+    "Native in-game UI for host/join/character choice; sustained stability soak."
+  ]
+}

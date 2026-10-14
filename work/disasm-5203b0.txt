@@ -1,0 +1,134 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001405203B0: mov         rax,rsp
+  00000001405203B3: push        rsi
+  00000001405203B4: push        rdi
+  00000001405203B5: push        r12
+  00000001405203B7: push        r14
+  00000001405203B9: push        r15
+  00000001405203BB: sub         rsp,50h
+  00000001405203BF: mov         qword ptr [rax-48h],0FFFFFFFFFFFFFFFEh
+  00000001405203C7: mov         qword ptr [rax+10h],rbx
+  00000001405203CB: mov         qword ptr [rax+18h],rbp
+  00000001405203CF: mov         r12d,r8d
+  00000001405203D2: mov         rbp,rdx
+  00000001405203D5: mov         r15,rcx
+  00000001405203D8: add         rcx,78h
+  00000001405203DC: mov         edx,2
+  00000001405203E1: call        00000001403DA910
+  00000001405203E6: mov         rbx,rax
+  00000001405203E9: lea         rcx,[r15+48h]
+  00000001405203ED: mov         edx,2
+  00000001405203F2: call        00000001403DA910
+  00000001405203F7: mov         rdi,rax
+  00000001405203FA: test        rbx,rbx
+  00000001405203FD: je          0000000140520587
+  0000000140520403: test        rax,rax
+  0000000140520406: je          0000000140520587
+  000000014052040C: mov         rcx,qword ptr [rbx+0000000000000090h]
+  0000000140520413: test        rcx,rcx
+  0000000140520416: je          0000000140520587
+  000000014052041C: mov         r14,qword ptr [rcx+00000000000001B0h]
+  0000000140520423: test        r14,r14
+  0000000140520426: je          0000000140520587
+  000000014052042C: mov         qword ptr [rsp+38h],0
+  0000000140520435: call        00000001401548E0
+  000000014052043A: movzx       eax,byte ptr [rsp+44h]
+  000000014052043F: mov         ecx,dword ptr [rsp+40h]
+  0000000140520443: and         ecx,0FF000000h
+  0000000140520449: or          eax,3Fh
+  000000014052044C: and         ecx,0FFFFFFh
+  0000000140520452: or          ecx,41000000h
+  0000000140520458: mov         dword ptr [rsp+40h],ecx
+  000000014052045C: and         eax,0FFFFFF3Fh
+  0000000140520461: mov         dword ptr [rsp+44h],eax
+  0000000140520465: test        al,40h
+  0000000140520467: jne         00000001405204B1
+  0000000140520469: mov         rbx,qword ptr [rsp+38h]
+  000000014052046E: test        rbx,rbx
+  0000000140520471: je          000000014052049F
+  0000000140520473: call        00000001401548E0
+  0000000140520478: mov         r10,qword ptr [rax]
+  000000014052047B: mov         qword ptr [rsp+20h],10h
+  0000000140520484: mov         r9,rbx
+  0000000140520487: mov         r8d,1ECh
+  000000014052048D: lea         rdx,[0000000141AB2230h]
+  0000000140520494: mov         rcx,rax
+  0000000140520497: call        qword ptr [r10+10h]
+  000000014052049B: mov         ecx,dword ptr [rsp+40h]
+  000000014052049F: mov         qword ptr [rsp+38h],0
+  00000001405204A8: movzx       eax,byte ptr [rsp+44h]
+  00000001405204AD: mov         dword ptr [rsp+44h],eax
+  00000001405204B1: and         ecx,0FF000000h
+  00000001405204B7: mov         dword ptr [rsp+40h],ecx
+  00000001405204BB: lea         r8,[rsp+38h]
+  00000001405204C0: mov         edx,r12d
+  00000001405204C3: mov         rcx,rdi
+  00000001405204C6: call        0000000140614550
+  00000001405204CB: mov         eax,dword ptr [rsp+40h]
+  00000001405204CF: and         eax,0FFFFFFh
+  00000001405204D4: xor         ebx,ebx
+  00000001405204D6: movsxd      rsi,eax
+  00000001405204D9: mov         rdi,qword ptr [rsp+38h]
+  00000001405204DE: test        eax,eax
+  00000001405204E0: jle         0000000140520553
+  00000001405204E2: mov         rcx,qword ptr [rdi+rbx*8]
+  00000001405204E6: test        rcx,rcx
+  00000001405204E9: je          00000001405204EE
+  00000001405204EB: mov         rcx,qword ptr [rcx]
+  00000001405204EE: test        rcx,rcx
+  00000001405204F1: je          000000014052054B
+  00000001405204F3: mov         edx,dword ptr [rcx+64h]
+  00000001405204F6: cmp         edx,dword ptr [rbp]
+  00000001405204F9: jne         000000014052054B
+  00000001405204FB: mov         eax,dword ptr [rcx+70h]
+  00000001405204FE: mov         dword ptr [rsp+0000000000000080h],eax
+  0000000140520505: mov         dword ptr [rsp+0000000000000098h],edx
+  000000014052050C: mov         dword ptr [rsp+20h],r12d
+  0000000140520511: mov         r9d,dword ptr [rcx+00000000000000C4h]
+  0000000140520518: lea         r8,[rsp+0000000000000080h]
+  0000000140520520: lea         rdx,[rsp+0000000000000098h]
+  0000000140520528: mov         rcx,r14
+  000000014052052B: call        00000001408451B0
+  0000000140520530: mov         rcx,r15
+  0000000140520533: call        000000014018FDC0
+  0000000140520538: mov         edx,4
+  000000014052053D: mov         rcx,qword ptr [rax+8]
+  0000000140520541: call        00000001407885B0
+  0000000140520546: mov         rdi,qword ptr [rsp+38h]
+  000000014052054B: inc         rbx
+  000000014052054E: cmp         rbx,rsi
+  0000000140520551: jl          00000001405204E2
+  0000000140520553: test        byte ptr [rsp+44h],40h
+  0000000140520558: jne         0000000140520587
+  000000014052055A: test        rdi,rdi
+  000000014052055D: je          0000000140520587
+  000000014052055F: call        00000001401548E0
+  0000000140520564: mov         r10,qword ptr [rax]
+  0000000140520567: mov         qword ptr [rsp+20h],10h
+  0000000140520570: mov         r9,rdi
+  0000000140520573: mov         r8d,1ECh
+  0000000140520579: lea         rdx,[0000000141AB2230h]
+  0000000140520580: mov         rcx,rax
+  0000000140520583: call        qword ptr [r10+10h]
+  0000000140520587: lea         r11,[rsp+50h]
+  000000014052058C: mov         rbx,qword ptr [r11+38h]
+  0000000140520590: mov         rbp,qword ptr [r11+40h]
+  0000000140520594: mov         rsp,r11
+  0000000140520597: pop         r15
+  0000000140520599: pop         r14
+  000000014052059B: pop         r12
+  000000014052059D: pop         rdi
+  000000014052059E: pop         rsi
+  000000014052059F: ret
+  00000001405205A0: 48
+
+  Summary
+
+     1A7D000 .text

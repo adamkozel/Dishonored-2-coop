@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+  "checks": [
+    "Both roles observed facing partner front/rear and crouched rear using native sensor state and game-window recordings; no attack, choke or interact inputs",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "host",
+      "case": {
+        "stance": 0,
+        "yaw": 270,
+        "distance": 1.15,
+        "name": "front"
+      },
+      "key": "host-front",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    },
+    {
+      "source": "host",
+      "case": {
+        "stance": 0,
+        "yaw": 90,
+        "distance": 1.15,
+        "name": "rear"
+      },
+      "key": "host-rear",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    },
+    {
+      "source": "host",
+      "case": {
+        "stance": 1,
+        "yaw": 90,
+        "distance": 0.85,
+        "name": "rear-crouched"
+      },
+      "key": "host-rear-crouched",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916411
+    },
+    {
+      "source": "client",
+      "case": {
+        "stance": 0,
+        "yaw": 270,
+        "distance": 1.15,
+        "name": "front"
+      },
+      "key": "client-front",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    },
+    {
+      "source": "client",
+      "case": {
+        "stance": 0,
+        "yaw": 90,
+        "distance": 1.15,
+        "name": "rear"
+      },
+      "key": "client-rear",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    },
+    {
+      "source": "client",
+      "case": {
+        "stance": 1,
+        "yaw": 90,
+        "distance": 0.85,
+        "name": "rear-crouched"
+      },
+      "key": "client-rear-crouched",
+      "count": 10,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Neutral partner contextual sensor observation only; no attack or interaction outcomes tested. Normal native movement collision intentionally retained."
+}

@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nulonglong FUN_1408598c0(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  char cVar2;\r\n  undefined8 *puVar3;\r\n  char *pcVar4;\r\n  longlong *plVar5;\r\n  undefined8 *puVar6;\r\n  longlong lVar7;\r\n  int iVar8;\r\n  \r\n  iVar8 = 0;\r\n  puVar3 = *(undefined8 **)(DAT_1432cde60 + 0x10);\r\n  lVar7 = 0;\r\n  pcVar4 = (char *)*puVar3;\r\n  cVar1 = *pcVar4;\r\n  puVar6 = puVar3;\r\n  cVar2 = cVar1;\r\n  while (plVar5 = DAT_1432cde68, cVar2 != '\\0') {\r\n    if (puVar6[1] == 1) {\r\n      pcVar4 = (char *)(longlong)iVar8;\r\n      plVar5 = (longlong *)(param_1 + (longlong)pcVar4 * 8);\r\n      break;\r\n    }\r\n    lVar7 = lVar7 + 1;\r\n    iVar8 = iVar8 + 1;\r\n    puVar6 = puVar3 + lVar7 * 2;\r\n    pcVar4 = (char *)*puVar6;\r\n    cVar2 = *pcVar4;\r\n  }\r\n  if (*plVar5 != 0) {\r\n    iVar8 = 0;\r\n    lVar7 = 0;\r\n    puVar6 = puVar3;\r\n    while (plVar5 = DAT_1432cde68, cVar1 != '\\0') {\r\n      if (puVar6[1] == 2) {\r\n        pcVar4 = (char *)(longlong)iVar8;\r\n        plVar5 = (longlong *)(param_1 + (longlong)pcVar4 * 8);\r\n        break;\r\n      }\r\n      lVar7 = lVar7 + 1;\r\n      iVar8 = iVar8 + 1;\r\n      puVar6 = puVar3 + lVar7 * 2;\r\n      pcVar4 = (char *)*puVar6;\r\n      cVar1 = *pcVar4;\r\n    }\r\n    if (*plVar5 != 0) {\r\n      return CONCAT71((int7)((ulonglong)pcVar4 >> 8),1);\r\n    }\r\n  }\r\n  return (ulonglong)pcVar4 & 0xffffffffffffff00;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nulonglong FUN_1408598c0(longlong param_1)\r\n\r\n{\r\n  char cVar1;\r\n  char cVar2;\r\n  undefined8 *puVar3;\r\n  char *pcVar4;\r\n  longlong *plVar5;\r\n  undefined8 *puVar6;\r\n  longlong lVar7;\r\n  int iVar8;\r\n  \r\n  iVar8 = 0;\r\n  puVar3 = *(undefined8 **)(DAT_1432cde60 + 0x10);\r\n  lVar7 = 0;\r\n  pcVar4 = (char *)*puVar3;\r\n  cVar1 = *pcVar4;\r\n  puVar6 = puVar3;\r\n  cVar2 = cVar1;\r\n  while (plVar5 = DAT_1432cde68, cVar2 != '\\0') {\r\n    if (puVar6[1] == 1) {\r\n      pcVar4 = (char *)(longlong)iVar8;\r\n      plVar5 = (longlong *)(param_1 + (longlong)pcVar4 * 8);\r\n      break;\r\n    }\r\n    lVar7 = lVar7 + 1;\r\n    iVar8 = iVar8 + 1;\r\n    puVar6 = puVar3 + lVar7 * 2;\r\n    pcVar4 = (char *)*puVar6;\r\n    cVar2 = *pcVar4;\r\n  }\r\n  if (*plVar5 != 0) {\r\n    iVar8 = 0;\r\n    lVar7 = 0;\r\n    puVar6 = puVar3;\r\n    while (plVar5 = DAT_1432cde68, cVar1 != '\\0') {\r\n      if (puVar6[1] == 2) {\r\n        pcVar4 = (char *)(longlong)iVar8;\r\n        plVar5 = (longlong *)(param_1 + (longlong)pcVar4 * 8);\r\n        break;\r\n      }\r\n      lVar7 = lVar7 + 1;\r\n      iVar8 = iVar8 + 1;\r\n      puVar6 = puVar3 + lVar7 * 2;\r\n      pcVar4 = (char *)*puVar6;\r\n      cVar1 = *pcVar4;\r\n    }\r\n    if (*plVar5 != 0) {\r\n      return CONCAT71((int7)((ulonglong)pcVar4 >> 8),1);\r\n    }\r\n  }\r\n  return (ulonglong)pcVar4 & 0xffffffffffffff00;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

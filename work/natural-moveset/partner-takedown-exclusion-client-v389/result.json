@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "440B0F9FD8BE7D24D22B62DE0BD7FB43C2E9C85FE6AB3551DA9A988AA273C6CD",
+  "checks": [
+    "Native partner choke input rejected before state41 or paired takedown scene; exact partner filter actively rejected with no ownership read refusal",
+    "Native RightShoulder held2000ms while behind exact partner; targeting/state/scene and native video observations collected. Outcome requires analysis.",
+    "Both checkpoint inventories and player/partner health restored",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "source": "client",
+      "case": {
+        "stance": 0,
+        "name": "rear-choke",
+        "yaw": 90,
+        "distance": 1.15
+      },
+      "key": "client-rear-choke",
+      "count": 27,
+      "sensors": [
+        ".?AVarkCpntPlayerSensorInteraction@@",
+        ".?AVarkCpntPlayerSensorGlobalAssassination@@",
+        ".?AVarkCpntPlayerSensorWindowAssassination@@",
+        ".?AVarkCpntPlayerSensorDropAssassination@@",
+        ".?AVarkCpntPlayerSensorAssassination@@"
+      ],
+      "partnerHandle": 209916390
+    }
+  ],
+  "scope": "Scoped partner rear choke exclusion test on candidate387. Native input must produce active exact-identity rejection, no choke state41 or paired scene, and unchanged health. Other takedowns, contexts and ordinary NPC control remain separate; visual review required. Normal native movement collision intentionally retained."
+}

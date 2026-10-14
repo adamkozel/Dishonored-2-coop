@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-13T02:08:58.962728+02:00",
+  "candidate": "candidate-trap-network-v575",
+  "dll": "605DC6EC1FD8EBDE40FD9AF403FEB31741DC574BC77A3DBD4E458BB09AE5EEE9",
+  "probe": "A15A0A781B3B756F93A6EAB432B5347CA07917D3B0E02453284ACE014C05B040",
+  "protocol": 62,
+  "bankVersion": 62,
+  "clips": 348,
+  "tests": [
+    {
+      "role": "corvo",
+      "trap": "razor",
+      "path": "work\\natural-moveset\\trap-network-corvo-razor-v578\\result.json",
+      "checks": [
+        "Exact native Trap acquisition and selection observed",
+        "Native Trap scenes captured at15ms cadence",
+        "Quantity and selected slot rolled back",
+        "Steam remote Trap phase 0 drives authored body",
+        "Steam remote Trap phase 1 drives authored body",
+        "Steam remote Trap phase 2 drives authored body",
+        "Steam remote Trap phase 3 drives authored body",
+        "Steam remote Trap phase 4 drives authored body",
+        "Steam remote Trap phase 5 drives authored body",
+        "Steam remote Trap phase 7 drives authored body",
+        "Native render-only Trap attached to owned remote left wrist",
+        "Existing crouch locomotion composes with native Trap action",
+        "Consumed inventory removes held remote gadget",
+        "Stopping stream hides native Trap prop",
+        "Both isolated checkpoints and14 protected save/settings hashes restored"
+      ]
+    },
+    {
+      "role": "emily",
+      "trap": "stun",
+      "path": "work\\natural-moveset\\trap-network-emily-stun-v576\\result.json",
+      "checks": [
+        "Exact native Trap acquisition and selection observed",
+        "Native Trap scenes captured at15ms cadence",
+        "Quantity and selected slot rolled back",
+        "Steam remote Trap phase 0 drives authored body",
+        "Steam remote Trap phase 1 drives authored body",
+        "Steam remote Trap phase 2 drives authored body",
+        "Steam remote Trap phase 3 drives authored body",
+        "Steam remote Trap phase 4 drives authored body",
+        "Steam remote Trap phase 5 drives authored body",
+        "Steam remote Trap phase 7 drives authored body",
+        "Native render-only Trap attached to owned remote left wrist",
+        "Existing crouch locomotion composes with native Trap action",
+        "Consumed inventory removes held remote gadget",
+        "Stopping stream hides native Trap prop",
+        "Both isolated checkpoints and14 protected save/settings hashes restored"
+      ]
+    }
+  ],
+  "runtimeVerified": true,
+  "visualAccepted": false,
+  "complete": false,
+  "limitations": [
+    "Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality.",
+    "Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate.",
+    "Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage.",
+    "Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing.",
+    "Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish.",
+    "Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed."
+  ],
+  "unresolvedEvidence": "work/natural-moveset/trap-network-corvo-razor-v576/result.json"
+}

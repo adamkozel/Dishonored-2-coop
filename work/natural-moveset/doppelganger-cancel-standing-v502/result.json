@@ -1,0 +1,31 @@
+{
+  "passed": false,
+  "failure": "Cancelled aim produced a remote clone or effect",
+  "retainedWorld": false,
+  "expectedVisualReuse": false,
+  "source": "client",
+  "stance": "standing",
+  "holstered": false,
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Remote Emily uses exact bank57/331 and native Steam pose transport",
+    "Native controller stance and holster inputs establish the same complete-body remote context before casting",
+    "Native owned entry/aim phases drive remote full-body poses; cancellation plays no successful-cast release",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.784,
+      "input": "Native LT aim; release-to-cast will be cancelled"
+    },
+    {
+      "videoTime": 3.146,
+      "input": "Native X while LT held; both released after250ms"
+    }
+  ],
+  "dll": "1A3F5720DA7431418D613A9DF932B953B2AE304BF75826DD77D8FF82B2887279",
+  "probe": "AEAEAEEB2E85620D2599EF946E8C8076C326C1DAF6452FA4153AF0A7C82F3EB9",
+  "bankSha256": "1A188F00EAAB3A38F92C85C2A271766FDE3C1E9DC59C333658D1E5258E58F42E",
+  "scope": "Native X while LT is held cancels aimed Doppelganger in the specified ground/equipment context. Verify entry/aim body, no cast-release, source activation/mana/clone-scene absence, no remote clone/FX and full-weight stance/equipment recovery. Local first-person remains native. General interruptions and full power/shared gameplay remain separate. Checkpoint and protected14 restoration mandatory."
+}

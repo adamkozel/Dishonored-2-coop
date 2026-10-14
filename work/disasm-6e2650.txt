@@ -1,0 +1,77 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406E2650: mov         rax,rsp
+  00000001406E2653: mov         qword ptr [rax+10h],rbx
+  00000001406E2657: mov         qword ptr [rax+18h],rsi
+  00000001406E265B: push        rdi
+  00000001406E265C: sub         rsp,40h
+  00000001406E2660: cmp         byte ptr [rsp+70h],0
+  00000001406E2665: movzx       ebx,r9b
+  00000001406E2669: movzx       edi,dx
+  00000001406E266C: mov         rsi,rcx
+  00000001406E266F: jne         00000001406E2704
+  00000001406E2675: mov         qword ptr [rax+8],r8
+  00000001406E2679: movsd       xmm0,mmword ptr [rax+8]
+  00000001406E267E: xorps       xmm1,xmm1
+  00000001406E2681: subsd       xmm0,mmword ptr [rcx+38h]
+  00000001406E2686: movss       dword ptr [rax-18h],xmm1
+  00000001406E268B: mov         qword ptr [rsi+38h],r8
+  00000001406E268F: lea         rcx,[rsp+50h]
+  00000001406E2694: cvtpd2ps    xmm0,xmm0
+  00000001406E2698: movss       dword ptr [rax+28h],xmm0
+  00000001406E269D: mov         eax,dword ptr [rax+28h]
+  00000001406E26A0: mov         dword ptr [rsp+50h],eax
+  00000001406E26A4: mov         eax,dword ptr [rsp+30h]
+  00000001406E26A8: mov         dword ptr [rsp+70h],eax
+  00000001406E26AC: lea         rax,[rsp+70h]
+  00000001406E26B1: movss       xmm0,dword ptr [rsp+70h]
+  00000001406E26B7: comiss      xmm0,dword ptr [rsp+50h]
+  00000001406E26BC: cmovbe      rax,rcx
+  00000001406E26C0: mov         eax,dword ptr [rax]
+  00000001406E26C2: mov         dword ptr [rsi+40h],eax
+  00000001406E26C5: mov         rdx,qword ptr [rsi]
+  00000001406E26C8: mov         rcx,qword ptr [rsi+8]
+  00000001406E26CC: call        00000001406EB070
+  00000001406E26D1: mov         rcx,rsi
+  00000001406E26D4: mov         rdx,rax
+  00000001406E26D7: call        00000001406E1CC0
+  00000001406E26DC: and         dword ptr [rsi+50h],0FF000000h
+  00000001406E26E3: lea         rcx,[rsi+48h]
+  00000001406E26E7: test        rax,rax
+  00000001406E26EA: je          00000001406E2704
+  00000001406E26EC: mov         rdx,qword ptr [rsi+38h]
+  00000001406E26F0: mov         qword ptr [rsp+20h],rcx
+  00000001406E26F5: movzx       r9d,bl
+  00000001406E26F9: mov         r8,rax
+  00000001406E26FC: mov         rcx,rsi
+  00000001406E26FF: call        00000001406E24B0
+  00000001406E2704: mov         r9d,dword ptr [rsi+50h]
+  00000001406E2708: xor         eax,eax
+  00000001406E270A: and         r9d,0FFFFFFh
+  00000001406E2711: jle         00000001406E275A
+  00000001406E2713: mov         rax,qword ptr [rsi+10h]
+  00000001406E2717: mov         r8,qword ptr [rsi+48h]
+  00000001406E271B: movzx       edx,di
+  00000001406E271E: mov         rcx,qword ptr [rax+50h]
+  00000001406E2722: mov         rax,qword ptr [rsp+0000000000000080h]
+  00000001406E272A: mov         qword ptr [rsp+28h],rax
+  00000001406E272F: mov         rax,qword ptr [rsp+78h]
+  00000001406E2734: mov         qword ptr [rsp+20h],rax
+  00000001406E2739: call        000000014024B600
+  00000001406E273E: mov         rcx,qword ptr [rsi+18h]
+  00000001406E2742: lea         rdx,[rsi+20h]
+  00000001406E2746: movzx       edi,ax
+  00000001406E2749: call        00000001408840A0
+  00000001406E274E: 48
+  00000001406E274F: 8D
+  00000001406E2750: 4E
+
+  Summary
+
+     1A7D000 .text

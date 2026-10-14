@@ -1,0 +1,202 @@
+{
+  "character": "corvo",
+  "source": "host",
+  "observer": "client",
+  "start": 1791661694880,
+  "captureStart": 1791661693760,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Standing idle",
+      "seconds": 1.122,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing upward peek",
+      "seconds": 2.679,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Combine upward and sideways peek",
+      "seconds": 6.123,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Lower native peek",
+      "seconds": 9.152,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native look releases lean",
+      "seconds": 11.632,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Return look",
+      "seconds": 13.46,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch",
+      "seconds": 16.144,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched upward peek",
+      "seconds": 18.659,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Lower crouched peek",
+      "seconds": 22.648,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native look releases crouched lean",
+      "seconds": 26.139,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Return look",
+      "seconds": 27.94,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing recovery",
+      "seconds": 31.142,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final idle",
+      "seconds": 34.633,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Standing idle"
+    ],
+    [
+      1500,
+      0,
+      32767,
+      1000,
+      "Y",
+      0,
+      "Standing upward peek"
+    ],
+    [
+      5000,
+      32767,
+      0,
+      850,
+      "Y",
+      0,
+      "Combine upward and sideways peek"
+    ],
+    [
+      8000,
+      0,
+      -32767,
+      1000,
+      "Y",
+      0,
+      "Lower native peek"
+    ],
+    [
+      10500,
+      0,
+      0,
+      1000,
+      "Neutral",
+      0,
+      "Native look releases lean",
+      22000
+    ],
+    [
+      12300,
+      0,
+      0,
+      1000,
+      "Neutral",
+      0,
+      "Return look",
+      -22000
+    ],
+    [
+      15000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch"
+    ],
+    [
+      17500,
+      0,
+      32767,
+      1000,
+      "Y",
+      0,
+      "Crouched upward peek"
+    ],
+    [
+      21500,
+      0,
+      -32767,
+      1000,
+      "Y",
+      0,
+      "Lower crouched peek"
+    ],
+    [
+      25000,
+      0,
+      0,
+      1000,
+      "Neutral",
+      0,
+      "Native look releases crouched lean",
+      22000
+    ],
+    [
+      26800,
+      0,
+      0,
+      1000,
+      "Neutral",
+      0,
+      "Return look",
+      -22000
+    ],
+    [
+      30000,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Standing recovery"
+    ],
+    [
+      33500,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final idle"
+    ]
+  ],
+  "dll": "5347B627587550169E79C04A2E1A99A12ED89B520D9E90D23A43C408A5CF859B",
+  "bank": "9D67DCA1F745E846F428382F639C814B26033F8509627AE9B4DF62075F5C1625",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual player inputs and native Steam movement drive the candidate whole-body bank; see mode and bank version for covered actions. Complete movement integration remains pending."
+}

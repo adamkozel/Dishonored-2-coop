@@ -1,0 +1,24 @@
+{
+  "passed": false,
+  "failure": "Owned native action variant 7 missing",
+  "source": "host",
+  "pitch": 35,
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.964,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 35
+    }
+  ],
+  "scenes": [],
+  "dll": "035642275AC27A738315BE9E28B59FBC06212320FA27CEA0C07897AD478684BB",
+  "probe": "9867E4153123CF557B39CB46D81FE71C11CF43E63BC18253FFF0A0F4F7CEE8DD",
+  "finalDll": "035642275AC27A738315BE9E28B59FBC06212320FA27CEA0C07897AD478684BB",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Both checkpoints restored after firing. Visual acceptance separate."
+}

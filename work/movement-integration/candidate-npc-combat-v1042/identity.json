@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-14T10:11:40.785867+02:00",
+  "dll": "A67A63DD73C6B2F47192F40E15FBC6DD154EED5DBA61A2E2718EFB07E201608B",
+  "probe": "D600DA2D0664810F12D41E9B018AAB22F5E2BD238E587FA25D7C6C89830AC79A",
+  "previous": "candidate-npc-combat-v1039",
+  "protocol": 72,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "scope": "Experimental1042 on verified1039: native chain climbing (alternate-mode state29 arkPlayerStateClimb 1c78498) becomes action state23 over protocol72; receiver bank70/369 presents authored ladder-contact ascend/descend cycles advanced by replicated vertical distance. Swim/map-agnostic stream retained. Runtime pending.",
+  "scopedClimbPresentationVerified": true,
+  "runtimeEvidence": "../traversal-parity-audit-v1050.json",
+  "scopedSwimPresentationVerified": true,
+  "roleParityVerified": "swim+climb both sources (1043/1046/1049)"
+}

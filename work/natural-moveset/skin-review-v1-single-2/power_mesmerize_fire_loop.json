@@ -1,0 +1,60 @@
+{
+  "alias": "power_mesmerize_fire_loop",
+  "family": "powers",
+  "identity": "01c4467e5eb38ade4a56b12a5b7967f7a959a487dec52a9d7c14a17726a7668f",
+  "video": "skin-review-v1-single-2\\power_mesmerize_fire_loop.mp4",
+  "frames": 37,
+  "fps": 30,
+  "duration": 1.2333333333333334,
+  "render_seconds": 6.6468505859375,
+  "roles": {
+    "corvo": "power_mesmerize_fire_loop-corvo",
+    "emily": "power_mesmerize_fire_loop-emily"
+  },
+  "source": "Blender weighted native model preview",
+  "root": "Source trajectory; authoring preview only; see per-clip root_track_semantics",
+  "cloth": "High-detail native Emily body without simulated coat panels. Exact clothing and native correctives require D2 validation.",
+  "equipment": "sword_ready",
+  "status": "authored_candidate_recorded",
+  "visual_accepted": false,
+  "model_variant": "High-detail Emily body without simulated coat panels",
+  "model_sha256": {
+    "emily-body": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+  },
+  "native_props": false,
+  "skin_preview_version": "corvo-shin-anchors-v1",
+  "skin_preview_limit": "Corvo calf anchors corrected; small native axial helper twist and other runtime correctives remain approximate.",
+  "render_identity": "8e22d4d711f86f07288851ed5511ceb57f1edaae77d24f87cb7ed3ce9ec59912",
+  "render_inputs": {
+    "data_identity": "7dc209abfda71e8d5189dc5079dd998a717a2a26d24683d131a5f0b2617e8eb7",
+    "models": {
+      "corvo-body": {
+        "path": "fullbody-proof\\corvo-body.json",
+        "sha256": "f58465fe8f1ee64d72781483510c14238ccb490207c382ab78141c6940a49344"
+      },
+      "corvo-head": {
+        "path": "fullbody-proof\\corvo-head.json",
+        "sha256": "2ce4ae2f1083485383e6c3afa49e249e33c666f796daf692b3a3c6399fca82da"
+      },
+      "emily-body": {
+        "path": "natural-moveset\\item-models\\emily-body-high.json",
+        "sha256": "2a4fb6d96cfa244757b62ba264a4257dca5f836a9e08fd3818b8da171d746528"
+      },
+      "emily-head": {
+        "path": "moveset-growth\\emily-head.json",
+        "sha256": "907fad19ce95293d57eebe2aee6488ddc8ed2d08b187a9d03ca3ec31df10f050"
+      },
+      "sword": {
+        "path": "fullbody-proof/sword.json",
+        "sha256": "fc64ccfc350986640304a571e48a2dfb43674f7769d7eb35e1402c6fa22936c6"
+      }
+    },
+    "scripts": {
+      "render_library.py": "319e587a7df3ca37e251cd018a9e9a2e5a17a7ceb16d9557f0f3be3aa5e5b5dd",
+      "preview_natural_walk.py": "3589b51ed9479c2c05b0b0fed568d2fa1865834bd7bdd8c32db61455d60524fb",
+      "preview_skin.py": "cac45f58ae3739ffe007db6b81ebd7cf4d8bfe90801015977eac5952ddd26a71",
+      "native_prop_preview.py": "d55010a3bf9f996a59fe2d74dbc5d48224939f9e76d403300f8aa615efe3fbac",
+      "render_identity.py": "b8aac937837fcf08075080bf1de6c6461906d74703256291db166a7148ba8a3b"
+    }
+  }
+}

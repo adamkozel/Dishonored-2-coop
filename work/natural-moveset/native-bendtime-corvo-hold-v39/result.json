@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "source": "host",
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native Corvo BendTime equipment acquired and selected",
+    "Normal controller casting produced native BendTime scene observations",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged"
+  ],
+  "events": [
+    {
+      "seconds": 1.918,
+      "action": "Native LT press 1200ms",
+      "index": 0
+    },
+    {
+      "seconds": 5.83,
+      "action": "Native LT press 1200ms",
+      "index": 1
+    }
+  ],
+  "dll": "60B99A0397B6C6E2652A132B239A9D9B6622206C170159F3CCC00CDAC5D3DD6D",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Native BendTime investigation only; no remote body/effect integration claimed. Native time dilation remains source-local in this research take; reload the isolated checkpoint before other tests. No saves or original assets modified."
+}

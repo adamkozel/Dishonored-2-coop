@@ -1,0 +1,56 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "14061bcc0",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_14061bcc0(longlong *param_1)\r\n\r\n{\r\n  if (*(char *)((longlong)param_1 + 0xa4) != '\\0') {\r\n                    /* WARNING: Could not recover jumptable at 0x00014061bccc. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n    (**(code **)(*param_1 + 0x128))();\r\n    return;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_14061bcc0(longlong *param_1)\r\n\r\n{\r\n  if (*(char *)((longlong)param_1 + 0xa4) != '\\0') {\r\n                    /* WARNING: Could not recover jumptable at 0x00014061bccc. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n    (**(code **)(*param_1 + 0x128))();\r\n    return;\r\n  }\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "1407e7c00",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_1407e7c00(longlong *param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  char cVar2;\r\n  int iVar3;\r\n  uint uVar4;\r\n  \r\n  lVar1 = *(longlong *)(D2_GameSingletonPtr + 0x1e8960);\r\n  iVar3 = FUN_1401581c0(lVar1 + 0xc08,0,1);\r\n  while (iVar3 == 1) {\r\n    iVar3 = FUN_1401581c0(lVar1 + 0xc08,0,1);\r\n  }\r\n  uVar4 = *(uint *)((longlong)param_1 + 0x1c) >> 2 & 3;\r\n  if (uVar4 != 3) {\r\n    if ((uVar4 == 1) && (cVar2 = FUN_1407ec4c0(lVar1,param_1), cVar2 != '\\0')) {\r\n      *(uint *)((longlong)param_1 + 0x1c) = *(uint *)((longlong)param_1 + 0x1c) & 0xfffffff3;\r\n    }\r\n    uVar4 = *(uint *)((longlong)param_1 + 0x1c);\r\n    if (((byte)uVar4 & 0xc) == 8) {\r\n      *(uint *)((longlong)param_1 + 0x1c) = uVar4 | 0xc;\r\n      if ((uVar4 & 0x10000000) == 0) {\r\n        FUN_1407eb480(lVar1,param_1);\r\n      }\r\n      else {\r\n        FUN_1407ec4c0();\r\n        *(uint *)((longlong)param_1 + 0x1c) = *(uint *)((longlong)param_1 + 0x1c) & 0xefffffff;\r\n      }\r\n      (**(code **)(*param_1 + 0x40))(param_1);\r\n    }\r\n  }\r\n  FUN_1401581e0(lVar1 + 0xc08,0);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_1407e7c00(longlong *param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  char cVar2;\r\n  int iVar3;\r\n  uint uVar4;\r\n  \r\n  lVar1 = *(longlong *)(D2_GameSingletonPtr + 0x1e8960);\r\n  iVar3 = FUN_1401581c0(lVar1 + 0xc08,0,1);\r\n  while (iVar3 == 1) {\r\n    iVar3 = FUN_1401581c0(lVar1 + 0xc08,0,1);\r\n  }\r\n  uVar4 = *(uint *)((longlong)param_1 + 0x1c) >> 2 & 3;\r\n  if (uVar4 != 3) {\r\n    if ((uVar4 == 1) && (cVar2 = FUN_1407ec4c0(lVar1,param_1), cVar2 != '\\0')) {\r\n      *(uint *)((longlong)param_1 + 0x1c) = *(uint *)((longlong)param_1 + 0x1c) & 0xfffffff3;\r\n    }\r\n    uVar4 = *(uint *)((longlong)param_1 + 0x1c);\r\n    if (((byte)uVar4 & 0xc) == 8) {\r\n      *(uint *)((longlong)param_1 + 0x1c) = uVar4 | 0xc;\r\n      if ((uVar4 & 0x10000000) == 0) {\r\n        FUN_1407eb480(lVar1,param_1);\r\n      }\r\n      else {\r\n        FUN_1407ec4c0();\r\n        *(uint *)((longlong)param_1 + 0x1c) = *(uint *)((longlong)param_1 + 0x1c) & 0xefffffff;\r\n      }\r\n      (**(code **)(*param_1 + 0x40))(param_1);\r\n    }\r\n  }\r\n  FUN_1401581e0(lVar1 + 0xc08,0);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "address": "14061be50",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "\r\nvoid FUN_14061be50(longlong param_1)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  undefined1 local_res8 [32];\r\n  \r\n  *(undefined2 *)(param_1 + 0xa4) = 0;\r\n  *(undefined1 *)(param_1 + 0xa6) = 0;\r\n  puVar1 = (undefined8 *)FUN_140878030(*(undefined8 *)(param_1 + 0x10),local_res8);\r\n  *(undefined8 *)(param_1 + 0x78) = *puVar1;\r\n  FUN_14060c9b0(*(undefined8 *)(param_1 + 0x30),param_1 + 0x80);\r\n  return;\r\n}\r\n\r\n"
+          }
+        ],
+        "structuredContent": {
+          "result": "\r\nvoid FUN_14061be50(longlong param_1)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  undefined1 local_res8 [32];\r\n  \r\n  *(undefined2 *)(param_1 + 0xa4) = 0;\r\n  *(undefined1 *)(param_1 + 0xa6) = 0;\r\n  puVar1 = (undefined8 *)FUN_140878030(*(undefined8 *)(param_1 + 0x10),local_res8);\r\n  *(undefined8 *)(param_1 + 0x78) = *puVar1;\r\n  FUN_14060c9b0(*(undefined8 *)(param_1 + 0x30),param_1 + 0x80);\r\n  return;\r\n}\r\n\r\n"
+        },
+        "isError": false
+      }
+    }
+  }
+]

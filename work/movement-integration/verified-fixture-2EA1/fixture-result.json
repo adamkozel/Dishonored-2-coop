@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Both roles hold exactly six native Decision/Reflex references; duplicate requests do not renew or reacquire",
+    "Explicit cancellation releases each owned reference exactly once",
+    "Native pause releases both finite fixtures without losing references",
+    "Finite lease expires on both roles; references balanced and native player health unchanged"
+  ],
+  "dll": "2EA179BD0F39E50C0CFD6E885BD298EA478ABD84DA2CC1C87809AA1A3BE0D5F8",
+  "scope": "Developer-only isolated Dunwall movement fixture; three named native NPCs, 60-second nonrenewable hold. No production AI synchronization claim."
+}

@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "failure": "Native/remote stance or equipment context not ready",
+  "source": "client",
+  "stance": "standing",
+  "holstered": true,
+  "move": 0,
+  "checks": [
+    "Exact native Emily Mesmerize item acquired and selected without directly invoking power or VFX",
+    "Native Steam transport and exact bank46/285 remote Emily standing armed context ready",
+    "Both isolated checkpoints restore clean health/inventory and retire native Mesmerize effects",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [],
+  "dll": "75EC7A32FCBE91D165D8EF2D842135FCDCBDC1A6225585B09E62B2B806DBBFB7",
+  "probe": "67748B482794C703D916721F66FFAFCC0EC49C05B8E7CE5DB9C7FF1EDBF9E467",
+  "bankSha256": "367CE7FFDB05CFCDEEE4FD4B45C99C8DF58AD60560C7CF3137ED8214E60FE182",
+  "scope": "Native Emily Mesmerize phases drive corresponding whole-body stance/equipment clips through Steam. Explicit stance, holstered and move parameters identify this take. Native source power owns mana, targets and gameplay. Remote world/model/effects are cosmetic; positive NPC and repeatedly valid empty-target cases have distinct checks. Standing recovery, native sword selection, inventory/health, checkpoint cleanup and protected saves are verified separately from visual acceptance. Shared NPC authority and broader movement remain incomplete."
+}

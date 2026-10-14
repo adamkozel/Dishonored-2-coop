@@ -1,0 +1,1066 @@
+# combat: complete requirement records
+
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-14T01:55:24.397473+02:00. All fields below retain the catalog wording.
+
+## sword_draw_holster
+
+Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.
+
+````json
+{
+  "id": "sword_draw_holster",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "sword draw holster",
+  "motions": [
+    "sword_equipsword",
+    "sword_unequipsword"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-equipment-close-corvo-v3.mp4",
+    "integrated-equipment-close-emily-v3.mp4",
+    "equipment-review-both-v48-host.mp4",
+    "equipment-review-both-v48-v2-host.mp4",
+    "equipment-review-both-v48-v3-host.mp4",
+    "equipment-review-both-v48-v4-host.mp4",
+    "equipment-review-both-v48-v4-client.mp4",
+    "unbound-presentation-v559c-host.mp4",
+    "unbound-presentation-v559c-client.mp4",
+    "unbound-presentation-v559b-host.mp4",
+    "native-gait-batch-v645/host-gait-batch.mp4",
+    "native-gait-batch-v645/host-observer.mp4",
+    "native-gait-batch-v645/client-gait-batch.mp4",
+    "native-gait-batch-v645/client-observer.mp4"
+  ],
+  "native_visibility_v26": {
+    "build": "A3A1542B9245DBCE5D33FC89952FAD0CC3C90656F8F727C715A6150145130D86",
+    "cases": {
+      "native-paired-pickup-corvo-visibility-v26": {
+        "video": "native-paired-pickup-corvo-visibility-v26/native.mp4",
+        "evidence": "native-paired-pickup-corvo-visibility-v26/validation.json",
+        "paired_evidence": "native-paired-pickup-corvo-visibility-v26/paired-validation.json",
+        "sword_evidence": "native-paired-pickup-corvo-visibility-v26/sword-visibility-validation.json",
+        "visual_review": "native-paired-pickup-corvo-visibility-v26/visual-review.json",
+        "checks": 44,
+        "video_sha256": "5D083A9A68D6E9C70834432C349CF0A5F7D9429F3060CCA04AB65B86D3A20240",
+        "role": "corvo",
+        "complete": false,
+        "visual_accepted": false
+      },
+      "native-paired-pickup-emily-visibility-v26": {
+        "video": "native-paired-pickup-emily-visibility-v26/native.mp4",
+        "evidence": "native-paired-pickup-emily-visibility-v26/validation.json",
+        "paired_evidence": "native-paired-pickup-emily-visibility-v26/paired-validation.json",
+        "sword_evidence": "native-paired-pickup-emily-visibility-v26/sword-visibility-validation.json",
+        "visual_review": "native-paired-pickup-emily-visibility-v26/visual-review.json",
+        "checks": 44,
+        "video_sha256": "50D60A38EAC36841F9E712E0881B6DBC9F47CFF2448073F1E5F80F67E56267E3",
+        "role": "emily",
+        "complete": false,
+        "visual_accepted": false
+      }
+    },
+    "tests": [
+      "equipment-visibility-v26/result.json",
+      "equipment-visibility-pause-v26/result.json"
+    ],
+    "confirmed": [
+      "Exact clone inventory child retained; no replacement weapon or inventory mutation for visibility.",
+      "Native entity hide/show follows confirmed holster/draw and matching native attachment tags.",
+      "Both roles: standing/crouched draw-holster and unarmed directional movement; pause retires ownership and resume restores original sword."
+    ],
+    "limitations": [
+      "Sword folding is not animated; the static clone blade is hidden while holstered.",
+      "Full carry and whole movement delivery remain incomplete."
+    ],
+    "complete": false
+  },
+  "native_integration": {
+    "equipment-review-both-v48-host.mp4": {
+      "video": "equipment-review-both-v48-host.mp4",
+      "character": "corvo",
+      "label": "Sword draw/holster · corvo · equipment-review-both-v48 · failed check",
+      "alias": "sword_equipsword",
+      "requirements": [
+        "sword_draw_holster"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "equipment-review-both-v48/result.json",
+      "visual_review": null,
+      "proxy_sha256": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+      "actual_capture_hz": 28.6875,
+      "video_sha256": "B54A7359017F27B747C970B0BF7C274C3809AA4841D97CB3CCE68DAEF72479BD",
+      "checks_passed": false,
+      "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+    },
+    "equipment-review-both-v48-v2-host.mp4": {
+      "video": "equipment-review-both-v48-v2-host.mp4",
+      "character": "corvo",
+      "label": "Sword draw/holster · corvo · equipment-review-both-v48-v2 · failed check",
+      "alias": "sword_equipsword",
+      "requirements": [
+        "sword_draw_holster"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "equipment-review-both-v48-v2/result.json",
+      "visual_review": null,
+      "proxy_sha256": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+      "actual_capture_hz": 25.416666666666668,
+      "video_sha256": "7753C5A2FEF6FAFEF2F3B817C3E19B4F4F6E2F8F6068C48176EF34233EE8E517",
+      "checks_passed": false,
+      "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+    },
+    "equipment-review-both-v48-v3-host.mp4": {
+      "video": "equipment-review-both-v48-v3-host.mp4",
+      "character": "corvo",
+      "label": "Sword draw/holster · corvo · equipment-review-both-v48-v3 · failed check",
+      "alias": "sword_equipsword",
+      "requirements": [
+        "sword_draw_holster"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "equipment-review-both-v48-v3/result.json",
+      "visual_review": null,
+      "proxy_sha256": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+      "actual_capture_hz": 27.583333333333332,
+      "video_sha256": "A1236EFAB4AABA0B09B6BB3C7EAE87FF1C52E79A30A13BB1926C910685AF0779",
+      "checks_passed": false,
+      "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+    },
+    "equipment-review-both-v48-v4-host.mp4": {
+      "video": "equipment-review-both-v48-v4-host.mp4",
+      "character": "corvo",
+      "label": "Sword draw/holster · corvo · equipment-review-both-v48-v4",
+      "alias": "sword_equipsword",
+      "requirements": [
+        "sword_draw_holster"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "equipment-review-both-v48-v4/result.json",
+      "visual_review": "equipment-review-both-v48-v4/visual-review-host.json",
+      "proxy_sha256": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+      "actual_capture_hz": 27.24808895066018,
+      "video_sha256": "E8A6877C905795EA4CF3E2E2DE9A3C0E0B4C56A46C7D944563CAFEA779837512",
+      "checks_passed": true,
+      "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+    },
+    "equipment-review-both-v48-v4-client.mp4": {
+      "video": "equipment-review-both-v48-v4-client.mp4",
+      "character": "emily",
+      "label": "Sword draw/holster · emily · equipment-review-both-v48-v4",
+      "alias": "sword_equipsword",
+      "requirements": [
+        "sword_draw_holster"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "equipment-review-both-v48-v4/result.json",
+      "visual_review": "equipment-review-both-v48-v4/visual-review-client.json",
+      "proxy_sha256": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+      "actual_capture_hz": 27.604166666666668,
+      "video_sha256": "86776A4669CBEE47A9B9CF578AB223075A70E1C86A866C29D525539C3E3C3F6C",
+      "checks_passed": true,
+      "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+    }
+  },
+  "complete": false,
+  "evidence": [
+    "native-gait-batch-v645/result.json"
+  ]
+}
+````
+
+- [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
+- [in_game_recordings: integrated-equipment-close-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-corvo-v3.mp4>)
+- [in_game_recordings: integrated-equipment-close-emily-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-emily-v3.mp4>)
+- [in_game_recordings: equipment-review-both-v48-host.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-host.mp4>)
+- [in_game_recordings: equipment-review-both-v48-v2-host.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-v2-host.mp4>)
+- [in_game_recordings: equipment-review-both-v48-v3-host.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-v3-host.mp4>)
+- [in_game_recordings: equipment-review-both-v48-v4-host.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-v4-host.mp4>)
+- [in_game_recordings: equipment-review-both-v48-v4-client.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-v4-client.mp4>)
+- [in_game_recordings: unbound-presentation-v559c-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559c-host.mp4>)
+- [in_game_recordings: unbound-presentation-v559c-client.mp4](<../../../../work/natural-moveset/unbound-presentation-v559c-client.mp4>)
+- [in_game_recordings: unbound-presentation-v559b-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559b-host.mp4>)
+- [in_game_recordings: native-gait-batch-v645/host-gait-batch.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/host-gait-batch.mp4>)
+- [in_game_recordings: native-gait-batch-v645/host-observer.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/host-observer.mp4>)
+- [in_game_recordings: native-gait-batch-v645/client-gait-batch.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/client-gait-batch.mp4>)
+- [in_game_recordings: native-gait-batch-v645/client-observer.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/client-observer.mp4>)
+## sword_ready_idle
+
+Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.
+
+````json
+{
+  "id": "sword_ready_idle",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "isolated_Dunwall_both_roles",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "evidence": [
+    "walk-test-3/result.json",
+    "corvo-walking.mp4",
+    "emily-walking.mp4",
+    "grip-closeup-corvo-v2/result.json",
+    "grip-closeup-emily-v1/result.json"
+  ],
+  "notes": "Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
+  "title": "sword ready idle",
+  "motions": [
+    "sword_idle",
+    "armed_idle"
+  ],
+  "deliverable_kind": "animation",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-equipment-close-corvo-v3.mp4",
+    "integrated-equipment-close-emily-v3.mp4",
+    "grip-closeup-corvo-v2.mp4",
+    "grip-closeup-emily-v1.mp4"
+  ]
+}
+````
+
+- [evidence: grip-closeup-corvo-v2/result.json](<../../../../work/natural-moveset/grip-closeup-corvo-v2/result.json>)
+- [evidence: grip-closeup-emily-v1/result.json](<../../../../work/natural-moveset/grip-closeup-emily-v1/result.json>)
+- [in_game_recordings: integrated-equipment-close-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-corvo-v3.mp4>)
+- [in_game_recordings: integrated-equipment-close-emily-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-emily-v3.mp4>)
+- [in_game_recordings: grip-closeup-corvo-v2.mp4](<../../../../work/natural-moveset/grip-closeup-corvo-v2.mp4>)
+- [in_game_recordings: grip-closeup-emily-v1.mp4](<../../../../work/natural-moveset/grip-closeup-emily-v1.mp4>)
+## light_attack_variants
+
+Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.
+
+````json
+{
+  "id": "light_attack_variants",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_steam_target_bearing_standing_slash",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.",
+  "evidence": [
+    "priority-2/result.json"
+  ],
+  "title": "light attack variants",
+  "motions": [
+    "sword_attack_fastb",
+    "sword_attack_shorta",
+    "sword_attack_shortb",
+    "sword_attack_shortc",
+    "sword_attack_shortd",
+    "sword_attack_fasta",
+    "sword_attack_shorte"
+  ],
+  "deliverable_kind": "animation",
+  "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-combat-corvo-v1.mp4",
+    "integrated-combat-emily-v1.mp4",
+    "native-front-corvo-v607/host-front-lethal.mp4",
+    "native-front-emily-v607/client-front-lethal.mp4",
+    "targeted-combat-corvo-v611/host-targeted-slash.mp4",
+    "targeted-combat-corvo-v611/observer.mp4",
+    "targeted-combat-emily-v611/client-targeted-slash.mp4",
+    "targeted-combat-emily-v612/client-targeted-slash.mp4",
+    "targeted-combat-emily-v612/observer.mp4",
+    "targeted-combat-emily-v614/client-targeted-slash.mp4",
+    "targeted-combat-emily-v614/observer.mp4",
+    "native-close-combat-emily-v623/client-close-combat.mp4"
+  ],
+  "complete": false,
+  "visual_accepted": false
+}
+````
+
+- [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
+- [in_game_recordings: native-front-corvo-v607/host-front-lethal.mp4](<../../../../work/natural-moveset/native-front-corvo-v607/host-front-lethal.mp4>)
+- [in_game_recordings: native-front-emily-v607/client-front-lethal.mp4](<../../../../work/natural-moveset/native-front-emily-v607/client-front-lethal.mp4>)
+- [in_game_recordings: targeted-combat-corvo-v611/host-targeted-slash.mp4](<../../../../work/natural-moveset/targeted-combat-corvo-v611/host-targeted-slash.mp4>)
+- [in_game_recordings: targeted-combat-corvo-v611/observer.mp4](<../../../../work/natural-moveset/targeted-combat-corvo-v611/observer.mp4>)
+- [in_game_recordings: targeted-combat-emily-v611/client-targeted-slash.mp4](<../../../../work/natural-moveset/targeted-combat-emily-v611/client-targeted-slash.mp4>)
+- [in_game_recordings: targeted-combat-emily-v612/client-targeted-slash.mp4](<../../../../work/natural-moveset/targeted-combat-emily-v612/client-targeted-slash.mp4>)
+- [in_game_recordings: targeted-combat-emily-v612/observer.mp4](<../../../../work/natural-moveset/targeted-combat-emily-v612/observer.mp4>)
+- [in_game_recordings: targeted-combat-emily-v614/client-targeted-slash.mp4](<../../../../work/natural-moveset/targeted-combat-emily-v614/client-targeted-slash.mp4>)
+- [in_game_recordings: targeted-combat-emily-v614/observer.mp4](<../../../../work/natural-moveset/targeted-combat-emily-v614/observer.mp4>)
+- [in_game_recordings: native-close-combat-emily-v623/client-close-combat.mp4](<../../../../work/natural-moveset/native-close-combat-emily-v623/client-close-combat.mp4>)
+## heavy_attack_variants
+
+Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
+
+````json
+{
+  "id": "heavy_attack_variants",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "heavy attack variants",
+  "motions": [
+    "sword_attack_longa",
+    "sword_attack_longb"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-combat-corvo-v1.mp4",
+    "integrated-combat-emily-v1.mp4",
+    "native-heavy-corvo-v629/host-crouched-heavy.mp4",
+    "native-heavy-emily-v630/client-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v634/host-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v634/observer.mp4",
+    "crouched-heavy-corvo-v636/host-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v636/observer.mp4",
+    "crouched-heavy-emily-v636/client-crouched-heavy.mp4",
+    "crouched-heavy-emily-v636/observer.mp4"
+  ],
+  "complete": false,
+  "evidence": [
+    "crouched-heavy-corvo-v636/result.json",
+    "crouched-heavy-emily-v636/result.json"
+  ]
+}
+````
+
+- [evidence: crouched-heavy-corvo-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/result.json>)
+- [evidence: crouched-heavy-emily-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-emily-v636/result.json>)
+- [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
+- [in_game_recordings: native-heavy-corvo-v629/host-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-corvo-v629/host-crouched-heavy.mp4>)
+- [in_game_recordings: native-heavy-emily-v630/client-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-emily-v630/client-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v634/host-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v634/host-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v634/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v634/observer.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v636/host-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/host-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/observer.mp4>)
+- [in_game_recordings: crouched-heavy-emily-v636/client-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/client-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-emily-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/observer.mp4>)
+## moving_attack
+
+Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.
+
+````json
+{
+  "id": "moving_attack",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_moving_combat_both_roles",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "moving attack",
+  "motions": [
+    "sword_attack_left_90a",
+    "sword_attack_left_180a",
+    "sword_attack_right_90a",
+    "sword_attack_right_180a",
+    "sword_attack_stepbacka"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-moving-combat-corvo-v1.mp4",
+    "integrated-moving-combat-emily-v1.mp4",
+    "native-feet-corvo-close-v5.mp4",
+    "native-feet-air-corvo-v5.mp4",
+    "native-feet-emily-close-v5.mp4",
+    "native-feet-air-emily-v5.mp4"
+  ]
+}
+````
+
+- [in_game_recordings: integrated-moving-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-moving-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-emily-v1.mp4>)
+- [in_game_recordings: native-feet-corvo-close-v5.mp4](<../../../../work/natural-moveset/native-feet-corvo-close-v5.mp4>)
+- [in_game_recordings: native-feet-air-corvo-v5.mp4](<../../../../work/natural-moveset/native-feet-air-corvo-v5.mp4>)
+- [in_game_recordings: native-feet-emily-close-v5.mp4](<../../../../work/natural-moveset/native-feet-emily-close-v5.mp4>)
+- [in_game_recordings: native-feet-air-emily-v5.mp4](<../../../../work/natural-moveset/native-feet-air-emily-v5.mp4>)
+## crouched_attack
+
+Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
+
+````json
+{
+  "id": "crouched_attack",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+  "evidence": [
+    "priority-2/result.json",
+    "crouched-heavy-corvo-v636/result.json",
+    "crouched-heavy-emily-v636/result.json"
+  ],
+  "title": "crouched attack",
+  "motions": [
+    "crouch_attack_fast_a",
+    "crouch_attack_fast_b",
+    "crouch_attack_short_a"
+  ],
+  "deliverable_kind": "animation",
+  "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-combat-corvo-v1.mp4",
+    "integrated-combat-emily-v1.mp4",
+    "integrated-moving-combat-corvo-v1.mp4",
+    "integrated-moving-combat-emily-v1.mp4",
+    "native-feet-corvo-close-v5.mp4",
+    "native-feet-emily-close-v5.mp4",
+    "native-crouch-combat-corvo-v613/host-crouch-combat.mp4",
+    "native-crouch-combat-emily-v613/client-crouch-combat.mp4",
+    "crouch-combat-corvo-v621/host-crouched-slash.mp4",
+    "crouch-combat-corvo-v621/observer.mp4",
+    "crouch-combat-emily-v621/client-crouched-slash.mp4",
+    "crouch-combat-emily-v621/observer.mp4",
+    "crouch-combat-corvo-v619/host-crouched-slash.mp4",
+    "crouch-combat-corvo-v619/observer.mp4",
+    "crouch-regression-corvo-v627/host-crouched-slash.mp4",
+    "crouch-regression-corvo-v627/observer.mp4",
+    "crouch-regression-emily-v627/client-crouched-slash.mp4",
+    "crouch-regression-emily-v627/observer.mp4",
+    "native-kick-emily-v626/client-close-kick.mp4",
+    "native-kick-emily-v626/observer.mp4",
+    "native-heavy-corvo-v629/host-crouched-heavy.mp4",
+    "native-heavy-emily-v630/client-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v634/host-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v634/observer.mp4",
+    "crouched-heavy-corvo-v636/host-crouched-heavy.mp4",
+    "crouched-heavy-corvo-v636/observer.mp4",
+    "crouched-heavy-emily-v636/client-crouched-heavy.mp4",
+    "crouched-heavy-emily-v636/observer.mp4"
+  ],
+  "complete": false,
+  "visual_accepted": false
+}
+````
+
+- [evidence: crouched-heavy-corvo-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/result.json>)
+- [evidence: crouched-heavy-emily-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-emily-v636/result.json>)
+- [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
+- [in_game_recordings: integrated-moving-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-moving-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-emily-v1.mp4>)
+- [in_game_recordings: native-feet-corvo-close-v5.mp4](<../../../../work/natural-moveset/native-feet-corvo-close-v5.mp4>)
+- [in_game_recordings: native-feet-emily-close-v5.mp4](<../../../../work/natural-moveset/native-feet-emily-close-v5.mp4>)
+- [in_game_recordings: native-crouch-combat-corvo-v613/host-crouch-combat.mp4](<../../../../work/natural-moveset/native-crouch-combat-corvo-v613/host-crouch-combat.mp4>)
+- [in_game_recordings: native-crouch-combat-emily-v613/client-crouch-combat.mp4](<../../../../work/natural-moveset/native-crouch-combat-emily-v613/client-crouch-combat.mp4>)
+- [in_game_recordings: crouch-combat-corvo-v621/host-crouched-slash.mp4](<../../../../work/natural-moveset/crouch-combat-corvo-v621/host-crouched-slash.mp4>)
+- [in_game_recordings: crouch-combat-corvo-v621/observer.mp4](<../../../../work/natural-moveset/crouch-combat-corvo-v621/observer.mp4>)
+- [in_game_recordings: crouch-combat-emily-v621/client-crouched-slash.mp4](<../../../../work/natural-moveset/crouch-combat-emily-v621/client-crouched-slash.mp4>)
+- [in_game_recordings: crouch-combat-emily-v621/observer.mp4](<../../../../work/natural-moveset/crouch-combat-emily-v621/observer.mp4>)
+- [in_game_recordings: crouch-combat-corvo-v619/host-crouched-slash.mp4](<../../../../work/natural-moveset/crouch-combat-corvo-v619/host-crouched-slash.mp4>)
+- [in_game_recordings: crouch-combat-corvo-v619/observer.mp4](<../../../../work/natural-moveset/crouch-combat-corvo-v619/observer.mp4>)
+- [in_game_recordings: crouch-regression-corvo-v627/host-crouched-slash.mp4](<../../../../work/natural-moveset/crouch-regression-corvo-v627/host-crouched-slash.mp4>)
+- [in_game_recordings: crouch-regression-corvo-v627/observer.mp4](<../../../../work/natural-moveset/crouch-regression-corvo-v627/observer.mp4>)
+- [in_game_recordings: crouch-regression-emily-v627/client-crouched-slash.mp4](<../../../../work/natural-moveset/crouch-regression-emily-v627/client-crouched-slash.mp4>)
+- [in_game_recordings: crouch-regression-emily-v627/observer.mp4](<../../../../work/natural-moveset/crouch-regression-emily-v627/observer.mp4>)
+- [in_game_recordings: native-kick-emily-v626/client-close-kick.mp4](<../../../../work/natural-moveset/native-kick-emily-v626/client-close-kick.mp4>)
+- [in_game_recordings: native-kick-emily-v626/observer.mp4](<../../../../work/natural-moveset/native-kick-emily-v626/observer.mp4>)
+- [in_game_recordings: native-heavy-corvo-v629/host-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-corvo-v629/host-crouched-heavy.mp4>)
+- [in_game_recordings: native-heavy-emily-v630/client-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-emily-v630/client-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v634/host-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v634/host-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v634/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v634/observer.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v636/host-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/host-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-corvo-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/observer.mp4>)
+- [in_game_recordings: crouched-heavy-emily-v636/client-crouched-heavy.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/client-crouched-heavy.mp4>)
+- [in_game_recordings: crouched-heavy-emily-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/observer.mp4>)
+## airborne_attack
+
+Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.
+
+````json
+{
+  "id": "airborne_attack",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "partial_native_airborne_combat_both_roles",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "airborne attack",
+  "motions": [
+    "sword_attack_jumpa"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-air-combat-corvo-v2.mp4",
+    "integrated-air-combat-emily-v2.mp4"
+  ]
+}
+````
+
+- [in_game_recordings: integrated-air-combat-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-corvo-v2.mp4>)
+- [in_game_recordings: integrated-air-combat-emily-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-emily-v2.mp4>)
+## block_enter_hold_exit
+
+Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.
+
+````json
+{
+  "id": "block_enter_hold_exit",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "isolated_Dunwall_both_roles",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.",
+  "evidence": [
+    "priority-2/result.json"
+  ],
+  "title": "block enter hold exit",
+  "motions": [
+    "sword_parry_ll_in",
+    "sword_parry_ll_out",
+    "sword_parry_lr_in",
+    "sword_parry_lr_out",
+    "sword_parry_rl_in",
+    "sword_parry_rl_out",
+    "sword_parry_rr_in",
+    "sword_parry_rr_out",
+    "guard_ll_hold_sequence",
+    "guard_lr_hold_sequence",
+    "guard_rl_hold_sequence",
+    "guard_rr_hold_sequence"
+  ],
+  "deliverable_kind": "animation",
+  "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "integrated-combat-corvo-v1.mp4",
+    "integrated-combat-emily-v1.mp4",
+    "integrated-air-combat-corvo-v2.mp4",
+    "integrated-air-combat-emily-v2.mp4",
+    "integrated-moving-combat-corvo-v1.mp4",
+    "integrated-moving-combat-emily-v1.mp4",
+    "native-feet-corvo-close-v5.mp4",
+    "native-feet-emily-close-v5.mp4"
+  ]
+}
+````
+
+- [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
+- [in_game_recordings: integrated-air-combat-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-corvo-v2.mp4>)
+- [in_game_recordings: integrated-air-combat-emily-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-emily-v2.mp4>)
+- [in_game_recordings: integrated-moving-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-corvo-v1.mp4>)
+- [in_game_recordings: integrated-moving-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-emily-v1.mp4>)
+- [in_game_recordings: native-feet-corvo-close-v5.mp4](<../../../../work/natural-moveset/native-feet-corvo-close-v5.mp4>)
+- [in_game_recordings: native-feet-emily-close-v5.mp4](<../../../../work/natural-moveset/native-feet-emily-close-v5.mp4>)
+## parry_directions
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "parry_directions",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "parry directions",
+  "motions": [
+    "sword_parry_ll_in",
+    "sword_parry_lr_in",
+    "sword_parry_rl_in",
+    "sword_parry_rr_in"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## parry_recovery
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "parry_recovery",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "parry recovery",
+  "motions": [
+    "sword_parry_ll_out",
+    "sword_parry_lr_out",
+    "sword_parry_rl_out",
+    "sword_parry_rr_out"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## counterattack
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "counterattack",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "counterattack",
+  "motions": [
+    "sword_parry_ll_attack",
+    "sword_parry_lr_attack",
+    "sword_parry_rl_attack",
+    "sword_parry_rr_attack",
+    "guard_ll_counter_sequence",
+    "guard_lr_counter_sequence",
+    "guard_rl_counter_sequence",
+    "guard_rr_counter_sequence"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## hit_reactions_directions
+
+Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
+
+````json
+{
+  "id": "hit_reactions_directions",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "native_network_standing_stun_partial_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "hit reactions directions",
+  "motions": [
+    "sword_stinghit_back",
+    "sword_stinghit_front",
+    "sword_stinghit_left",
+    "sword_stinghit_right"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "grenade-stun-scenes-corvo-v60.mp4",
+    "grenade-stun-scenes-emily-v60.mp4",
+    "stun-network-corvo-v61.mp4",
+    "stun-network-corvo-v61-source.mp4",
+    "stun-network-corvo-v61b.mp4",
+    "stun-network-corvo-v61b-source.mp4",
+    "stun-network-emily-v61b.mp4",
+    "stun-network-emily-v61b-source.mp4"
+  ],
+  "native_integration": {
+    "grenade-stun-scenes-corvo-v60.mp4": {
+      "video": "grenade-stun-scenes-corvo-v60.mp4",
+      "character": "corvo",
+      "label": "Native source observation · grenade-stun-scenes-corvo-v60",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "grenade-stun-scenes-corvo-v60/result.json",
+      "visual_review": "grenade-stun-scenes-corvo-v60/visual-review.json",
+      "proxy_sha256": "129137DA59399401ACFFC7CF9CD41244C43D18FD737DC37A3BA6CA2D5D411DB2",
+      "actual_capture_hz": 27.32590529247911,
+      "video_sha256": "61CB8D61299788D905DAEFE1EEE0695C4B012D73772298FED012A476DE5EEBB8",
+      "checks_passed": true,
+      "scope": "Source native one-grenade action observation only. Real native projectile/world effects are reset through the isolated checkpoints. No remote grenade animation, damage authority or projectile replication is claimed."
+    },
+    "grenade-stun-scenes-emily-v60.mp4": {
+      "video": "grenade-stun-scenes-emily-v60.mp4",
+      "character": "emily",
+      "label": "Native source observation · grenade-stun-scenes-emily-v60",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "grenade-stun-scenes-emily-v60/result.json",
+      "visual_review": "grenade-stun-scenes-emily-v60/visual-review.json",
+      "proxy_sha256": "129137DA59399401ACFFC7CF9CD41244C43D18FD737DC37A3BA6CA2D5D411DB2",
+      "actual_capture_hz": 27.24233983286908,
+      "video_sha256": "2925AF839D1C8FF22E12E5340334EDE279DB659A0C77EAD036848E269A3E6D80",
+      "checks_passed": true,
+      "scope": "Source native one-grenade action observation only. Real native projectile/world effects are reset through the isolated checkpoints. No remote grenade animation, damage authority or projectile replication is claimed."
+    },
+    "stun-network-corvo-v61.mp4": {
+      "video": "stun-network-corvo-v61.mp4",
+      "character": "corvo",
+      "label": "Native stun network · stun-network-corvo-v61",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-corvo-v61/result.json",
+      "visual_review": "stun-network-corvo-v61/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.5,
+      "video_sha256": "75654D728F226A7977A03A6C1C23E789326618E5E872E57EF1A06667C43C28CF",
+      "checks_passed": false,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    },
+    "stun-network-corvo-v61-source.mp4": {
+      "video": "stun-network-corvo-v61-source.mp4",
+      "character": "corvo",
+      "label": "Native stun network · stun-network-corvo-v61-source",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": false,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-corvo-v61/result.json",
+      "visual_review": "stun-network-corvo-v61/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.75,
+      "video_sha256": "76D98A5C3013994ACC20E27ACB9C7663628AA51D6A3B742E104EB7E77319D97E",
+      "checks_passed": false,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    },
+    "stun-network-corvo-v61b.mp4": {
+      "video": "stun-network-corvo-v61b.mp4",
+      "character": "corvo",
+      "label": "Native stun network · stun-network-corvo-v61b",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-corvo-v61b/result.json",
+      "visual_review": "stun-network-corvo-v61b/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.23463687150838,
+      "video_sha256": "D60C3924510185E4D0D7F4FC768D5E9B663298606E60AC17B930CFFCBE8D440E",
+      "checks_passed": true,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    },
+    "stun-network-corvo-v61b-source.mp4": {
+      "video": "stun-network-corvo-v61b-source.mp4",
+      "character": "corvo",
+      "label": "Native stun network · stun-network-corvo-v61b-source",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-corvo-v61b/result.json",
+      "visual_review": "stun-network-corvo-v61b/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.910863509749305,
+      "video_sha256": "F5B4CC7DC2DDA4D7B2253D122297FE2F341AC56FB63E05DC0D15F930B9AB4148",
+      "checks_passed": true,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    },
+    "stun-network-emily-v61b.mp4": {
+      "video": "stun-network-emily-v61b.mp4",
+      "character": "emily",
+      "label": "Native stun network · stun-network-emily-v61b",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-emily-v61b/result.json",
+      "visual_review": "stun-network-emily-v61b/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.916666666666668,
+      "video_sha256": "AFFB2C1C9DE66CDE4322D2FF1FE77867511D99FBA4DCF1B7168158FBE314AF12",
+      "checks_passed": true,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    },
+    "stun-network-emily-v61b-source.mp4": {
+      "video": "stun-network-emily-v61b-source.mp4",
+      "character": "emily",
+      "label": "Native stun network · stun-network-emily-v61b-source",
+      "alias": "hit_react_stun",
+      "requirements": [
+        "hit_reactions_directions"
+      ],
+      "gameplay_bound": true,
+      "complete": false,
+      "visual_accepted": false,
+      "evidence": "stun-network-emily-v61b/result.json",
+      "visual_review": "stun-network-emily-v61b/visual-review.json",
+      "proxy_sha256": "A699D40BC86A483C85F6256AECE5EACD51C78A44C0C71C41DE3C242DE074BFDC",
+      "actual_capture_hz": 27.75,
+      "video_sha256": "443627E76F3C3EDF9B6E886E0C6B4A0851C489340A53DFB3BEE2FA428AA9CEFB",
+      "checks_passed": true,
+      "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+    }
+  }
+}
+````
+
+- [in_game_recordings: grenade-stun-scenes-corvo-v60.mp4](<../../../../work/natural-moveset/grenade-stun-scenes-corvo-v60.mp4>)
+- [in_game_recordings: grenade-stun-scenes-emily-v60.mp4](<../../../../work/natural-moveset/grenade-stun-scenes-emily-v60.mp4>)
+- [in_game_recordings: stun-network-corvo-v61.mp4](<../../../../work/natural-moveset/stun-network-corvo-v61.mp4>)
+- [in_game_recordings: stun-network-corvo-v61-source.mp4](<../../../../work/natural-moveset/stun-network-corvo-v61-source.mp4>)
+- [in_game_recordings: stun-network-corvo-v61b.mp4](<../../../../work/natural-moveset/stun-network-corvo-v61b.mp4>)
+- [in_game_recordings: stun-network-corvo-v61b-source.mp4](<../../../../work/natural-moveset/stun-network-corvo-v61b-source.mp4>)
+- [in_game_recordings: stun-network-emily-v61b.mp4](<../../../../work/natural-moveset/stun-network-emily-v61b.mp4>)
+- [in_game_recordings: stun-network-emily-v61b-source.mp4](<../../../../work/natural-moveset/stun-network-emily-v61b-source.mp4>)
+## stagger_knockdown_recovery
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "stagger_knockdown_recovery",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "stagger knockdown recovery",
+  "motions": [
+    "sword_recovery_fast_front",
+    "sword_recovery_fast_back",
+    "sword_parry_lose_left",
+    "sword_parry_lose_right",
+    "sword_recovery_a_idle",
+    "sword_recovery_fast_left"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## kick_or_shove_if_present
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "kick_or_shove_if_present",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "kick or shove if present",
+  "motions": [
+    "sword_attack_kick",
+    "sword_attack_punch"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## death_variants
+
+Candidates require animation review and appropriate game-state/contact binding.
+
+````json
+{
+  "id": "death_variants",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "candidates",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "death variants",
+  "motions": [
+    "generic_deathfast_left",
+    "generic_deathfast_front",
+    "generic_deathfast_back",
+    "generic_deathfast_right",
+    "empty_stinghit_death"
+  ],
+  "deliverable_kind": "animation",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": []
+}
+````
+
+## ragdoll_handoff
+
+This requires native ragdoll ownership and a tested transition, not a baked animation alone.
+
+````json
+{
+  "id": "ragdoll_handoff",
+  "family": "combat",
+  "characters": [
+    "corvo",
+    "emily"
+  ],
+  "authoring": "missing",
+  "runtime_binding": "not_verified",
+  "visual_validation": "not_accepted",
+  "native_reference_family_count": 195,
+  "priority": 2,
+  "title": "ragdoll handoff",
+  "motions": [],
+  "deliverable_kind": "lifecycle_transition",
+  "notes": "This requires native ragdoll ownership and a tested transition, not a baked animation alone.",
+  "phase_status": "work_remaining",
+  "power_visual_requirements": [],
+  "in_game_recordings": [
+    "carry-snapshot-corvo-v20/native.mp4",
+    "carry-snapshot-emily-v20/native.mp4",
+    "carry-snapshot-cancel-corvo-v20/native.mp4",
+    "carry-snapshot-cancel-corvo-v21/native.mp4",
+    "carry-snapshot-cancel-emily-v21/native.mp4",
+    "carry-snapshot-cancel-emily-v22/native.mp4",
+    "carry-snapshot-cancel-corvo-v22/native.mp4",
+    "carry-snapshot-cancel-emily-v22b/native.mp4",
+    "carry-snapshot-stream-emily-v22/native.mp4"
+  ]
+}
+````
+
+- [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
+- [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-corvo-v21/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v21/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-emily-v21/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-emily-v21/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-emily-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-emily-v22/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-corvo-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v22/native.mp4>)
+- [in_game_recordings: carry-snapshot-cancel-emily-v22b/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-emily-v22b/native.mp4>)
+- [in_game_recordings: carry-snapshot-stream-emily-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-stream-emily-v22/native.mp4>)
+

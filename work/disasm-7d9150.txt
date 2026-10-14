@@ -1,0 +1,69 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407D9150: push        rdi
+  00000001407D9152: sub         rsp,40h
+  00000001407D9156: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001407D915F: mov         qword ptr [rsp+50h],rbx
+  00000001407D9164: mov         rdi,rcx
+  00000001407D9167: mov         qword ptr [rsp+28h],rcx
+  00000001407D916C: mov         dword ptr [rsp+30h],0
+  00000001407D9174: lea         r8,[rsp+28h]
+  00000001407D9179: call        00000001407D5860
+  00000001407D917E: mov         rbx,rax
+  00000001407D9181: test        rax,rax
+  00000001407D9184: je          00000001407D9199
+  00000001407D9186: mov         rcx,rax
+  00000001407D9189: call        00000001407D1750
+  00000001407D918E: mov         qword ptr [rdi+0000000000001030h],rbx
+  00000001407D9195: mov         bl,1
+  00000001407D9197: jmp         00000001407D919B
+  00000001407D9199: xor         bl,bl
+  00000001407D919B: mov         edx,dword ptr [rsp+30h]
+  00000001407D919F: test        edx,edx
+  00000001407D91A1: je          00000001407D91AD
+  00000001407D91A3: mov         rcx,qword ptr [rsp+28h]
+  00000001407D91A8: call        00000001407D7050
+  00000001407D91AD: movzx       eax,bl
+  00000001407D91B0: mov         rbx,qword ptr [rsp+50h]
+  00000001407D91B5: add         rsp,40h
+  00000001407D91B9: pop         rdi
+  00000001407D91BA: ret
+  00000001407D91BB: int         3
+  00000001407D91BC: int         3
+  00000001407D91BD: int         3
+  00000001407D91BE: int         3
+  00000001407D91BF: int         3
+  00000001407D91C0: mov         r11,rsp
+  00000001407D91C3: mov         qword ptr [r11+8],rbx
+  00000001407D91C7: mov         qword ptr [r11+10h],rbp
+  00000001407D91CB: mov         qword ptr [r11+18h],rsi
+  00000001407D91CF: push        rdi
+  00000001407D91D0: sub         rsp,50h
+  00000001407D91D4: mov         rax,qword ptr [rsp+0000000000000080h]
+  00000001407D91DC: mov         rbp,qword ptr [rsp+0000000000000090h]
+  00000001407D91E4: mov         rdi,rdx
+  00000001407D91E7: mov         qword ptr [r11-28h],rbp
+  00000001407D91EB: mov         qword ptr [r11-30h],rax
+  00000001407D91EF: lea         rax,[000000014398F888h]
+  00000001407D91F6: lea         rdx,[r11-18h]
+  00000001407D91FA: mov         rsi,rcx
+  00000001407D91FD: mov         dword ptr [rsp+40h],0
+  00000001407D9205: mov         qword ptr [r11-38h],rax
+  00000001407D9209: call        00000001407D6040
+  00000001407D920E: mov         ebx,dword ptr [rsp+40h]
+  00000001407D9212: test        ebx,ebx
+  00000001407D9214: je          00000001407D924A
+  00000001407D9216: mov         r9,qword ptr [rsp+0000000000000088h]
+  00000001407D921E: 4C
+  00000001407D921F: 8D
+  00000001407D9220: 44
+
+  Summary
+
+     1A7D000 .text

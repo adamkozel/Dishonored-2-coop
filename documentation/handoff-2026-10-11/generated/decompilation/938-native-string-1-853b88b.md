@@ -1,0 +1,31 @@
+# native-string-1.json
+
+Original: [work/movement-integration/npc-combat-research-v879/native-string-1.json](<../../../../work/movement-integration/npc-combat-research-v879/native-string-1.json>)
+
+SHA-256: `E24C69901B4B4F4E45682BB38B9CA2914938368C1BA0ED465B6223430BAFE3B0`; 601 bytes.
+
+## Original saved record
+
+````json
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"address\":\"141c35114\",\"length\":32,\"data\":[119,97,105,116,32,49,0,0,0,0,0,0,91,83,65,86,69,93,32,78,111,32,113,117,105,99,107,115,97,118,101,32],\"hex\":\"7761697420310000000000005b534156455d204e6f20717569636b7361766520\"}"
+    }
+  ],
+  "structuredContent": {
+    "result": "{\"address\":\"141c35114\",\"length\":32,\"data\":[119,97,105,116,32,49,0,0,0,0,0,0,91,83,65,86,69,93,32,78,111,32,113,117,105,99,107,115,97,118,101,32],\"hex\":\"7761697420310000000000005b534156455d204e6f20717569636b7361766520\"}"
+  },
+  "isError": false
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+{"address":"141c35114","length":32,"data":[119,97,105,116,32,49,0,0,0,0,0,0,91,83,65,86,69,93,32,78,111,32,113,117,105,99,107,115,97,118,101,32],"hex":"7761697420310000000000005b534156455d204e6f20717569636b7361766520"}
+````

@@ -1,0 +1,619 @@
+{
+  "at": "2026-10-13T09:47:58.287916+02:00",
+  "test": "native-gait-batch-v645",
+  "checks": [
+    {
+      "character": "corvo",
+      "name": "native_steam_stays_connected",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "bank67_stays_active",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "bounded_remote_root_error_under_one_metre",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "walk_and_run_advance_native_root",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "forward_backward_reversal",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "diagonal_direction_reversal",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "moving_turn_has_native_translation_and_yaw",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "each_stopped_gait_reaches_zero_speed",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "holster_reaches_both_native_swords",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "unarmed_walk_advances_root",
+      "passed": true
+    },
+    {
+      "character": "corvo",
+      "name": "redraw_and_idle_recover",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "native_steam_stays_connected",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "bank67_stays_active",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "bounded_remote_root_error_under_one_metre",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "walk_and_run_advance_native_root",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "forward_backward_reversal",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "diagonal_direction_reversal",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "moving_turn_has_native_translation_and_yaw",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "each_stopped_gait_reaches_zero_speed",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "holster_reaches_both_native_swords",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "unarmed_walk_advances_root",
+      "passed": true
+    },
+    {
+      "character": "emily",
+      "name": "redraw_and_idle_recover",
+      "passed": true
+    }
+  ],
+  "characters": [
+    {
+      "character": "corvo",
+      "checks": {
+        "native_steam_stays_connected": true,
+        "bank67_stays_active": true,
+        "bounded_remote_root_error_under_one_metre": true,
+        "walk_and_run_advance_native_root": true,
+        "forward_backward_reversal": true,
+        "diagonal_direction_reversal": true,
+        "moving_turn_has_native_translation_and_yaw": true,
+        "each_stopped_gait_reaches_zero_speed": true,
+        "holster_reaches_both_native_swords": true,
+        "unarmed_walk_advances_root": true,
+        "redraw_and_idle_recover": true
+      },
+      "samples": 214,
+      "rootErrorMax": 0.4781134422895816,
+      "rootErrorMean": 0.038838139455214735,
+      "bodyWeightMin": 0.999862,
+      "streamReadySamples": 210,
+      "lateSamples": 210,
+      "reverseDot": -0.17511330878000278,
+      "diagonalDot": -0.2813371964120066,
+      "stages": {
+        "armed-idle": {
+          "samples": 9,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.0,
+          "phaseLast": 0.0,
+          "runMax": 0.0,
+          "weightMin": 0.985104
+        },
+        "walk-forward": {
+          "samples": 8,
+          "distance": 0.762272000000003,
+          "yawDelta": 0.10804359775596595,
+          "speedMax": 0.929814,
+          "speedEnd": 0.923349,
+          "phaseFirst": 0.0,
+          "phaseLast": 0.3057613,
+          "runMax": 0.0,
+          "weightMin": 0.999999
+        },
+        "accelerate-run": {
+          "samples": 5,
+          "distance": 1.0363729999999975,
+          "yawDelta": -0.09896499822539795,
+          "speedMax": 3.511679,
+          "speedEnd": 3.259928,
+          "phaseFirst": 0.3811359,
+          "phaseLast": 0.8440116,
+          "runMax": 0.891417,
+          "weightMin": 1.0
+        },
+        "run-stop": {
+          "samples": 10,
+          "distance": 0.25974480288351404,
+          "yawDelta": 0.19334326352966968,
+          "speedMax": 2.704101,
+          "speedEnd": 0.000144,
+          "phaseFirst": 0.0235941,
+          "phaseLast": 0.0697209,
+          "runMax": 0.722655,
+          "weightMin": 1.0
+        },
+        "walk-before-reverse": {
+          "samples": 6,
+          "distance": 0.5258200000000031,
+          "yawDelta": -0.11354253879989074,
+          "speedMax": 0.939419,
+          "speedEnd": 0.939419,
+          "phaseFirst": 0.0697209,
+          "phaseLast": 0.2994621,
+          "runMax": 3.2e-05,
+          "weightMin": 1.0
+        },
+        "reverse-back": {
+          "samples": 8,
+          "distance": 0.33302900000000335,
+          "yawDelta": 0.18612881262339442,
+          "speedMax": 0.833055,
+          "speedEnd": 0.522595,
+          "phaseFirst": 0.3452699,
+          "phaseLast": 0.6798221,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "walk-stop": {
+          "samples": 9,
+          "distance": 0.0,
+          "yawDelta": -0.008837412496433217,
+          "speedMax": 0.281613,
+          "speedEnd": 1e-05,
+          "phaseFirst": 0.6798221,
+          "phaseLast": 0.6798221,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-left": {
+          "samples": 5,
+          "distance": 0.42381616007888123,
+          "yawDelta": 0.06704771356410788,
+          "speedMax": 1.649155,
+          "speedEnd": 1.649155,
+          "phaseFirst": 0.6798221,
+          "phaseLast": 0.1293984,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-reverse": {
+          "samples": 7,
+          "distance": 0.6812943047773096,
+          "yawDelta": -0.28348589861417395,
+          "speedMax": 1.663532,
+          "speedEnd": 1.403808,
+          "phaseFirst": 0.2787316,
+          "phaseLast": 0.9670185,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-stop": {
+          "samples": 10,
+          "distance": 0.0,
+          "yawDelta": 0.05776813752021326,
+          "speedMax": 0.238982,
+          "speedEnd": 2e-06,
+          "phaseFirst": 0.9785181,
+          "phaseLast": 0.9785181,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "moving-turn-right": {
+          "samples": 6,
+          "distance": 0.4070648683072525,
+          "yawDelta": -76.91522386930505,
+          "speedMax": 0.873662,
+          "speedEnd": 0.526033,
+          "phaseFirst": 0.9785181,
+          "phaseLast": 0.2462619,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "moving-turn-back": {
+          "samples": 8,
+          "distance": 0.4138718815406482,
+          "yawDelta": 96.48292680393956,
+          "speedMax": 0.62479,
+          "speedEnd": 0.506355,
+          "phaseFirst": 0.2595463,
+          "phaseLast": 0.5814056,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "turn-stop": {
+          "samples": 13,
+          "distance": 0.0,
+          "yawDelta": -0.0006159021375538032,
+          "speedMax": 0.265033,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.5829637,
+          "phaseLast": 0.5829637,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "native-holster": {
+          "samples": 25,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.5829637,
+          "phaseLast": 0.5829637,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-idle": {
+          "samples": 11,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.5829637,
+          "phaseLast": 0.5829637,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-forward": {
+          "samples": 6,
+          "distance": 0.5263185033085946,
+          "yawDelta": -0.06292140623827436,
+          "speedMax": 1.020571,
+          "speedEnd": 1.012038,
+          "phaseFirst": 0.5829637,
+          "phaseLast": 0.8946075,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-back": {
+          "samples": 8,
+          "distance": 0.3446303194816105,
+          "yawDelta": 0.06345823718021393,
+          "speedMax": 0.751141,
+          "speedEnd": 0.107639,
+          "phaseFirst": 0.9811723,
+          "phaseLast": 0.2658252,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-stop": {
+          "samples": 12,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.032477,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.2658252,
+          "phaseLast": 0.2658252,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "native-redraw": {
+          "samples": 25,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.2658252,
+          "phaseLast": 0.2658252,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "armed-recovery": {
+          "samples": 23,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.2658252,
+          "phaseLast": 0.2658252,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        }
+      }
+    },
+    {
+      "character": "emily",
+      "checks": {
+        "native_steam_stays_connected": true,
+        "bank67_stays_active": true,
+        "bounded_remote_root_error_under_one_metre": true,
+        "walk_and_run_advance_native_root": true,
+        "forward_backward_reversal": true,
+        "diagonal_direction_reversal": true,
+        "moving_turn_has_native_translation_and_yaw": true,
+        "each_stopped_gait_reaches_zero_speed": true,
+        "holster_reaches_both_native_swords": true,
+        "unarmed_walk_advances_root": true,
+        "redraw_and_idle_recover": true
+      },
+      "samples": 215,
+      "rootErrorMax": 0.8295600000000007,
+      "rootErrorMean": 0.029201894400620626,
+      "bodyWeightMin": 0.999866,
+      "streamReadySamples": 211,
+      "lateSamples": 211,
+      "reverseDot": -0.1564513691920012,
+      "diagonalDot": -0.685785069381998,
+      "stages": {
+        "armed-idle": {
+          "samples": 10,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.0,
+          "phaseLast": 0.0,
+          "runMax": 0.0,
+          "weightMin": 0.974788
+        },
+        "walk-forward": {
+          "samples": 7,
+          "distance": 0.5924150000000026,
+          "yawDelta": 0.1164164507111991,
+          "speedMax": 0.905782,
+          "speedEnd": 0.905782,
+          "phaseFirst": 0.0020924,
+          "phaseLast": 0.3579519,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "accelerate-run": {
+          "samples": 6,
+          "distance": 1.769415262817913,
+          "yawDelta": -0.19619140834012683,
+          "speedMax": 3.341664,
+          "speedEnd": 3.341664,
+          "phaseFirst": 0.4494703,
+          "phaseLast": 0.0636711,
+          "runMax": 0.960321,
+          "weightMin": 1.0
+        },
+        "run-stop": {
+          "samples": 10,
+          "distance": 0.0,
+          "yawDelta": 0.16487811163835886,
+          "speedMax": 3.060929,
+          "speedEnd": 2.1e-05,
+          "phaseFirst": 0.1029925,
+          "phaseLast": 0.1029925,
+          "runMax": 0.975642,
+          "weightMin": 1.0
+        },
+        "walk-before-reverse": {
+          "samples": 6,
+          "distance": 0.38509400000000227,
+          "yawDelta": -0.13966417509604412,
+          "speedMax": 0.898807,
+          "speedEnd": 0.869909,
+          "phaseFirst": 0.1029925,
+          "phaseLast": 0.3913392,
+          "runMax": 3.5e-05,
+          "weightMin": 1.0
+        },
+        "reverse-back": {
+          "samples": 8,
+          "distance": 0.40626800000000074,
+          "yawDelta": 0.19959530114536506,
+          "speedMax": 0.628755,
+          "speedEnd": 0.580404,
+          "phaseFirst": 0.4140064,
+          "phaseLast": 0.7274433,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "walk-stop": {
+          "samples": 9,
+          "distance": 0.0,
+          "yawDelta": -0.008633911455348198,
+          "speedMax": 0.129607,
+          "speedEnd": 5e-06,
+          "phaseFirst": 0.7298213,
+          "phaseLast": 0.7298213,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-left": {
+          "samples": 6,
+          "distance": 0.701918920152458,
+          "yawDelta": 0.21550335443939161,
+          "speedMax": 1.604024,
+          "speedEnd": 1.604024,
+          "phaseFirst": 0.7298213,
+          "phaseLast": 0.4095294,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-reverse": {
+          "samples": 7,
+          "distance": 0.9932976980835168,
+          "yawDelta": -0.41137541922026344,
+          "speedMax": 1.606498,
+          "speedEnd": 1.001966,
+          "phaseFirst": 0.4729944,
+          "phaseLast": 0.249349,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "diagonal-stop": {
+          "samples": 9,
+          "distance": 0.0,
+          "yawDelta": 0.050329982020798525,
+          "speedMax": 0.3018,
+          "speedEnd": 9e-06,
+          "phaseFirst": 0.2582457,
+          "phaseLast": 0.2582457,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "moving-turn-right": {
+          "samples": 7,
+          "distance": 0.4606128362182298,
+          "yawDelta": -83.26846646726823,
+          "speedMax": 0.837451,
+          "speedEnd": 0.44304,
+          "phaseFirst": 0.2582457,
+          "phaseLast": 0.5687277,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "moving-turn-back": {
+          "samples": 7,
+          "distance": 0.38976593724053443,
+          "yawDelta": 84.89825782390676,
+          "speedMax": 0.620548,
+          "speedEnd": 0.50728,
+          "phaseFirst": 0.5765448,
+          "phaseLast": 0.8630257,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "turn-stop": {
+          "samples": 13,
+          "distance": 0.0,
+          "yawDelta": -0.03763956990738393,
+          "speedMax": 0.132193,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.8630257,
+          "phaseLast": 0.8630257,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "native-holster": {
+          "samples": 26,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.8630257,
+          "phaseLast": 0.8630257,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-idle": {
+          "samples": 11,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.8630257,
+          "phaseLast": 0.8630257,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-forward": {
+          "samples": 7,
+          "distance": 0.6557560087296191,
+          "yawDelta": -0.0733616116488065,
+          "speedMax": 1.076011,
+          "speedEnd": 0.694875,
+          "phaseFirst": 0.8630257,
+          "phaseLast": 0.2828865,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-back": {
+          "samples": 7,
+          "distance": 0.36077500293257597,
+          "yawDelta": 0.0674166388539561,
+          "speedMax": 0.712023,
+          "speedEnd": 0.284972,
+          "phaseFirst": 0.2828865,
+          "phaseLast": 0.559309,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "unarmed-stop": {
+          "samples": 12,
+          "distance": 0.0,
+          "yawDelta": -0.0011754982875515907,
+          "speedMax": 0.060045,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.559309,
+          "phaseLast": 0.559309,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "native-redraw": {
+          "samples": 24,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.559309,
+          "phaseLast": 0.559309,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        },
+        "armed-recovery": {
+          "samples": 23,
+          "distance": 0.0,
+          "yawDelta": 0.0,
+          "speedMax": 0.0,
+          "speedEnd": 0.0,
+          "phaseFirst": 0.559309,
+          "phaseLast": 0.559309,
+          "runMax": 0.0,
+          "weightMin": 1.0
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "complete": false,
+  "visualAccepted": false,
+  "limitations": [
+    "One fixed Dunwall course, ordinary walk/run inputs and two moving turns; not exhaustive gaits/terrain/collision/powers.",
+    "One-metre bound detects incorrect or abandoned root following; it is not a low-latency or smoothness acceptance threshold. See actual measured errors.",
+    "Detailed contact, foot sliding, grip and natural body acting remain animator polish. Observer sheets must be inspected separately.",
+    "No new production code or clips: current635/67 functional regression and coverage audit. Complete movement is not established."
+  ]
+}

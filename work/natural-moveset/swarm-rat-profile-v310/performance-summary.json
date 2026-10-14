@@ -1,0 +1,90 @@
+{
+  "take": "swarm-rat-profile-v310",
+  "scope": "Quiet windows after video/watcher exit. Timing stages overlap. Pump capped by10ms; callback rate is not display FPS. No render/animation CPU or GPU attribution.",
+  "windows": {
+    "active": {
+      "observations": 11,
+      "modelCounts": [
+        25
+      ],
+      "serviceIntervalSamples": 81,
+      "serviceIntervalMeanMs": 31.74595679012344,
+      "serviceObservedHz": 31.500074375175622,
+      "stages": {
+        "identity": {
+          "calls": 6075,
+          "totalMs": 93.92490099999998,
+          "meanCallMs": 0.015460889053497939,
+          "msPerPoolService": 1.1595666790123453
+        },
+        "gait": {
+          "calls": 2025,
+          "totalMs": 6.045400000000001,
+          "meanCallMs": 0.002985382716049383,
+          "msPerPoolService": 0.07463456790123457
+        },
+        "scale": {
+          "calls": 2025,
+          "totalMs": 8.861598999999998,
+          "meanCallMs": 0.0043760982716049375,
+          "msPerPoolService": 0.10940245679012343
+        },
+        "transform": {
+          "calls": 2025,
+          "totalMs": 35.34190100000001,
+          "meanCallMs": 0.017452790617283956,
+          "msPerPoolService": 0.4363197654320988
+        },
+        "total": {
+          "calls": 81,
+          "totalMs": 117.12109999999996,
+          "meanCallMs": 1.445939506172839,
+          "msPerPoolService": 1.445939506172839
+        }
+      },
+      "measuredPoolServiceFraction": 0.04554720198644914
+    },
+    "hidden": {
+      "observations": 11,
+      "modelCounts": [
+        0
+      ],
+      "serviceIntervalSamples": 140,
+      "serviceIntervalMeanMs": 17.882115714285778,
+      "serviceObservedHz": 55.92179448884305,
+      "stages": {
+        "identity": {
+          "calls": 0,
+          "totalMs": 0.0,
+          "meanCallMs": null,
+          "msPerPoolService": 0.0
+        },
+        "gait": {
+          "calls": 0,
+          "totalMs": 0.0,
+          "meanCallMs": null,
+          "msPerPoolService": 0.0
+        },
+        "scale": {
+          "calls": 0,
+          "totalMs": 0.0,
+          "meanCallMs": null,
+          "msPerPoolService": 0.0
+        },
+        "transform": {
+          "calls": 0,
+          "totalMs": 0.0,
+          "meanCallMs": null,
+          "msPerPoolService": 0.0
+        },
+        "total": {
+          "calls": 140,
+          "totalMs": 2.9025000000000034,
+          "meanCallMs": 0.020732142857142883,
+          "msPerPoolService": 0.020732142857142883
+        }
+      },
+      "measuredPoolServiceFraction": 0.0011593786321704796
+    }
+  }
+}

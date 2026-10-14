@@ -1,0 +1,34 @@
+{
+  "passed": false,
+  "failure": "Doppelganger root/body continuity failed",
+  "retainedWorld": false,
+  "expectedVisualReuse": false,
+  "source": "client",
+  "airMode": "release",
+  "holstered": false,
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Remote Emily uses exact bank57/331 and native Steam pose transport",
+    "Native standing equipment context matches the remote full body before airborne casting",
+    "Separate four-component Emily visual and all219 final native joints match the received/interpolated pose",
+    "All three exact native phases with reciprocal Emily arm/body ownership drive remote full-body phases",
+    "Native airborne phase overlaps remote cast and air locomotion; matching equipment and original floor recover",
+    "Bounded send/accept histories exactly match strict native scene incarnations, including sub-status-interval final aim loops",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.953,
+      "input": "Native release airborne cast; holstered=False"
+    },
+    {
+      "videoTime": 3.186,
+      "input": "Native A+LT180, then release while airborne"
+    }
+  ],
+  "dll": "44451D0B4E7B62C9AFC4843DC5993E10607D347F880D25BE84E9E72EA1ADDC45",
+  "probe": "3C2A4EF6FF6EB91572D28C4BC93E800499C8DD6EB7FEA919394CE4751300CF0B",
+  "bankSha256": "1A188F00EAAB3A38F92C85C2A271766FDE3C1E9DC59C333658D1E5258E58F42E",
+  "scope": "Native airborne Emily Doppelganger phases drive remote bank57 full-body casts blended with existing jump/fall locomotion through native Steam in isolated AI-held Dunwall. Local first-person remains native; peer animation does not execute gameplay clone or damage events; separate native FX/material-only scenes reproduce source-owned summon/disappearance effects. Clone identity/root/lifetime Steam transport verified separately; shared clone gameplay, alternate contexts and visual acceptance remain pending. Checkpoint and protected14 restoration mandatory."
+}

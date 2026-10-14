@@ -1,0 +1,53 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140540E20: mov         qword ptr [rsp+18h],rbx
+  0000000140540E25: push        rdi
+  0000000140540E26: sub         rsp,20h
+  0000000140540E2A: mov         rdi,qword ptr [rcx+10h]
+  0000000140540E2E: mov         rbx,rcx
+  0000000140540E31: lea         rdx,[rsp+30h]
+  0000000140540E36: mov         rcx,rdi
+  0000000140540E39: call        0000000140877EB0
+  0000000140540E3E: mov         rax,qword ptr [rbx+38h]
+  0000000140540E42: test        rax,rax
+  0000000140540E45: je          0000000140540F06
+  0000000140540E4B: mov         rax,qword ptr [rax+0000000000001FE8h]
+  0000000140540E52: cmp         qword ptr [rax+50h],0
+  0000000140540E57: je          0000000140540F06
+  0000000140540E5D: mov         rax,qword ptr [rbx]
+  0000000140540E60: mov         edx,dword ptr [rsp+30h]
+  0000000140540E64: mov         rcx,rbx
+  0000000140540E67: call        qword ptr [rax+00000000000000D8h]
+  0000000140540E6D: test        al,al
+  0000000140540E6F: je          0000000140540F06
+  0000000140540E75: mov         r8d,dword ptr [rsp+30h]
+  0000000140540E7A: mov         rdx,rdi
+  0000000140540E7D: mov         rcx,rbx
+  0000000140540E80: call        0000000140540F20
+  0000000140540E85: xor         edx,edx
+  0000000140540E87: mov         rcx,rbx
+  0000000140540E8A: call        0000000140540A90
+  0000000140540E8F: cmp         qword ptr [rdi+0000000000000358h],0
+  0000000140540E97: mov         rcx,rdi
+  0000000140540E9A: je          0000000140540EB4
+  0000000140540E9C: call        00000001408783D0
+  0000000140540EA1: mov         rcx,rax
+  0000000140540EA4: call        0000000140752260
+  0000000140540EA9: mov         rbx,qword ptr [rsp+40h]
+  0000000140540EAE: add         rsp,20h
+  0000000140540EB2: pop         rdi
+  0000000140540EB3: ret
+  0000000140540EB4: mov         qword ptr [rsp+38h],rsi
+  0000000140540EB9: call        000000014016FEC0
+  0000000140540EBE: xor         ebx,ebx
+  0000000140540EC0: F7
+
+  Summary
+
+     1A7D000 .text

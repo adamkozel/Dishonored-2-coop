@@ -1,0 +1,35 @@
+{
+  "ExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "Confirmed": [
+    "Both local players use player_body_emily.md6skl with20 joints in this fixture.",
+    "Native Emily clone uses219 joints and Corvo215; model and skeleton names are pinned in bodyShadowTarget.",
+    "Native0x9cfa0 writes a64-byte local joint matrix and invalidates descendants;0x9dc40 rebuilds global transforms.",
+    "User rejected lower-body-only570B; archived, not promoted.",
+    "18A4 phase3 full17-joint retarget passes both roles mechanically but upright torso/native idle arms remain visually unsuitable.",
+    "DCD0 full native under-table alias plays on both rigs;888A float1.2-second held pose passes full-body reference checks.",
+    "AnimBasic startTime is float seconds; integer1000 trial C5B5 failed and is retained.",
+    "9165 both roles pass whole-body crouch, walk and standing return with phase-3-complete observation bracketing.",
+    "9165 native pause, checkpoint invalidation, first-person, direct/Steam actions and airborne regressions pass. Visual pose remains incomplete; research only.",
+    "9165 full-body pose was visually rejected by the user despite passing mechanical checks.",
+    "Native helper evaluation at RVA 0x23fca0 occurs after IK and before phase3 in 0x541110; ordinary 0x9dc40 FK does not evaluate correctives.",
+    "5E41 invokes native helpers successfully on both rigs but retains compressed poses with below-floor knees.",
+    "9B9E samples 22 native whole-body references; the 600ms search frame preserves grounded connected geometry on both rigs.",
+    "6FDE preserves a full native reference and transfers motion relative to settled FPS crouch; both roles pass crouch/walk/stand, reference height, limb length, knee/toe clearance and attachment checks.",
+    "6FDE native pause and reload invalidation pass; local first-person arm ownership and native sword-action regressions pass.",
+    "303A user-requested upright torso comparison preserves calibrated native crouch legs, restores standing spine/head/arms, counter-rotates spine against pelvis tilt and retains native connector lengths. Independent Corvo and Emily flat-floor cases pass; earlier fixture failures remain preserved."
+  ],
+  "Hypotheses": [
+    "Direct playback of player-body clips on the clone rig is not verified.",
+    "A better native combat-ready torso/arm reference may improve the full crouch composition; current search pose has a low sword and excessive Emily forward bend.",
+    "Crouched action arbitration, terrain/capsule behavior and full campaign use remain unverified.",
+    "Unexplained older clone deaths were not reproduced by a fresh first-person and Steam action trace; no cause established. Complete friendly-fire immunity is required but not implemented."
+  ],
+  "Setter": {
+    "result": "\r\n/* [confirmed-runtime] RVA 0x9cfa0\r\n   Used for validated native joint rotations; preserve current local translations.\r\n   Evidence: src/arm_probe.h\r\n   Names are analyst-assigned semantic labels, not recovered official symbols. */\r\n\r\nvoid D2_Animation_SetJointLocal(longlong param_1,short param_2,undefined8 *param_3)\r\n\r\n{\r\n  uint *puVar1;\r\n  byte bVar2;\r\n  undefined8 uVar3;\r\n  undefined8 *puVar4;\r\n  uint *puVar5;\r\n  int iVar6;\r\n  longlong lVar7;\r\n  longlong lVar8;\r\n  \r\n  uVar3 = param_3[1];\r\n  puVar4 = (undefined8 *)((longlong)param_2 * 0x40 + *(longlong *)(param_1 + 0x148));\r\n  *puVar4 = *param_3;\r\n  puVar4[1] = uVar3;\r\n  uVar3 = param_3[3];\r\n  puVar4[2] = param_3[2];\r\n  puVar4[3] = uVar3;\r\n  uVar3 = param_3[5];\r\n  puVar4[4] = param_3[4];\r\n  puVar4[5] = uVar3;\r\n  uVar3 = param_3[7];\r\n  puVar4[6] = param_3[6];\r\n  puVar4[7] = uVar3;\r\n  bVar2 = (byte)param_2;\r\n  puVar5 = (uint *)(param_1 + ((longlong)param_2 >> 5) * 4 + 0xd0);\r\n  *puVar5 = *puVar5 & ~(1 << (bVar2 & 0x1f));\r\n  puVar5 = (uint *)(param_1 + ((longlong)param_2 >> 5) * 4 + 0xf8);\r\n  *puVar5 = *puVar5 | 1 << (bVar2 & 0x1f);\r\n  puVar5 = (uint *)(param_1 + 0x120 + ((longlong)param_2 >> 5) * 4);\r\n  *puVar5 = *puVar5 | 1 << (bVar2 & 0x1f);\r\n  lVar8 = *(longlong *)(param_1 + 0x48) + (longlong)param_2 * 0x28;\r\n  iVar6 = *(int *)(param_1 + 0x118);\r\n  if (*(int *)(lVar8 + 0x20) < *(int *)(param_1 + 0x118)) {\r\n    iVar6 = *(int *)(lVar8 + 0x20);\r\n  }\r\n  if ((-1 < iVar6) && (lVar7 = (longlong)iVar6, iVar6 != 0)) {\r\n    puVar5 = (uint *)(param_1 + 0xf8 + lVar7 * 4);\r\n    do {\r\n      puVar1 = (uint *)((lVar8 - (param_1 + 0xf8)) + -4 + (longlong)puVar5);\r\n      puVar5 = puVar5 + -1;\r\n      *puVar5 = *puVar5 | *puVar1;\r\n      lVar7 = lVar7 + -1;\r\n    } while (lVar7 != 0);\r\n  }\r\n  lVar8 = *(longlong *)(param_1 + 0x48) + (longlong)param_2 * 0x28;\r\n  iVar6 = *(int *)(param_1 + 0x140);\r\n  if (*(int *)(lVar8 + 0x20) < *(int *)(param_1 + 0x140)) {\r\n    iVar6 = *(int *)(lVar8 + 0x20);\r\n  }\r\n  if ((-1 < iVar6) && (lVar7 = (longlong)iVar6, iVar6 != 0)) {\r\n    puVar5 = (uint *)(param_1 + 0x120 + lVar7 * 4);\r\n    do {\r\n      puVar1 = (uint *)((lVar8 - (param_1 + 0x120)) + -4 + (longlong)puVar5);\r\n      puVar5 = puVar5 + -1;\r\n      *puVar5 = *puVar5 | *puVar1;\r\n      lVar7 = lVar7 + -1;\r\n    } while (lVar7 != 0);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "Rebuild": {
+    "result": "\r\n/* [confirmed-runtime] RVA 0x9dc40\r\n   Native rebuild after controlled local joint updates.\r\n   Evidence: src/arm_probe.h\r\n   Names are analyst-assigned semantic labels, not recovered official symbols. */\r\n\r\nvoid D2_Animation_RebuildPose(longlong param_1)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  undefined8 *puVar2;\r\n  undefined4 uVar3;\r\n  undefined4 uVar4;\r\n  undefined4 uVar5;\r\n  undefined8 uVar6;\r\n  short sVar7;\r\n  \r\n  puVar1 = *(undefined8 **)(param_1 + 0x148);\r\n  puVar2 = *(undefined8 **)(param_1 + 0x158);\r\n  sVar7 = 1;\r\n  uVar6 = puVar1[1];\r\n  *puVar2 = *puVar1;\r\n  puVar2[1] = uVar6;\r\n  uVar6 = puVar1[3];\r\n  puVar2[2] = puVar1[2];\r\n  puVar2[3] = uVar6;\r\n  uVar3 = *(undefined4 *)((longlong)puVar1 + 0x24);\r\n  uVar4 = *(undefined4 *)(puVar1 + 5);\r\n  uVar5 = *(undefined4 *)((longlong)puVar1 + 0x2c);\r\n  *(undefined4 *)(puVar2 + 4) = *(undefined4 *)(puVar1 + 4);\r\n  *(undefined4 *)((longlong)puVar2 + 0x24) = uVar3;\r\n  *(undefined4 *)(puVar2 + 5) = uVar4;\r\n  *(undefined4 *)((longlong)puVar2 + 0x2c) = uVar5;\r\n  uVar6 = puVar1[7];\r\n  puVar2[6] = puVar1[6];\r\n  puVar2[7] = uVar6;\r\n  *(uint *)(param_1 + 0xf8) = *(uint *)(param_1 + 0xf8) & 0xfffffffe;\r\n  if (1 < (*(uint *)(param_1 + 0x160) & 0xffffff)) {\r\n    do {\r\n      FUN_14009e240(param_1,sVar7);\r\n      sVar7 = sVar7 + 1;\r\n    } while ((int)sVar7 < (int)(*(uint *)(param_1 + 0x160) & 0xffffff));\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "HelperEvidence": "analysis/ghidra/crouch-helpers",
+  "CurrentResearchDll": "303AF7E16B85CF061195163FA557D35FDFEEBEC65CB2C1EF2620D0224BF9B2C1"
+}

@@ -1,0 +1,26 @@
+{
+  "block1007_0": {
+    "result": "From 1409361a2 [DATA]\nFrom 1409361a9 [DATA]"
+  },
+  "block1007_1": {
+    "result": "\r\nbyte FUN_140824250(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined1 local_b8 [32];\r\n  undefined1 local_98 [144];\r\n  \r\n  lVar1 = FUN_1406dc560(*(undefined4 *)(param_1 + 0x1d4));\r\n  D2_DamageParams_Construct\r\n            (local_98,*(undefined8 *)(*(longlong *)(*(longlong *)(lVar1 + 0x3a8) + 8) + 0x1c0));\r\n  D2_DamageResult_Construct(local_b8);\r\n  FUN_140780ae0(local_98,1);\r\n  *(undefined1 *)(*(longlong *)(param_1 + 0x200) + 0x60) = 0;\r\n  D2_Health_ApplyDamage(*(undefined8 *)(param_1 + 0x200),local_98,local_b8);\r\n  return *(byte *)(*(longlong *)(*(longlong *)(param_1 + 0x200) + 0x10) + 0xd1) >> 3 & 1;\r\n}\r\n\r\n"
+  },
+  "block1007_2": {
+    "result": "{\"address\":\"141c81a68\",\"length\":256,\"data\":[112,119,147,64,1,0,0,0,240,187,141,64,1,0,0,0,32,150,57,64,1,0,0,0,176,152,9,64,1,0,0,0,176,144,133,64,1,0,0,0,96,81,133,64,1,0,0,0,112,152,133,64,1,0,0,0,16,73,133,64,1,0,0,0,112,85,133,64,1,0,0,0,0,77,133,64,1,0,0,0,64,143,133,64,1,0,0,0,0,252,159,64,1,0,0,0,64,150,133,64,1,0,0,0,96,161,133,64,1,0,0,0,128,22,104,64,1,0,0,0,64,73,133,64,1,0,0,0,96,83,133,64,1,0,0,0,176,152,9,64,1,0,0,0,32,150,57,64,1,0,0,0,64,208,6,64,1,0,0,0,32,150,57,64,1,0,0,0,96,160,133,64,1,0,0,0,240,159,133,64,1,0,0,0,16,151,133,64,1,0,0,0,32,82,133,64,1,0,0,0,0,157,133,64,1,0,0,0,0,82,133,64,1,0,0,0,64,41,104,64,1,0,0,0,80,41,104,64,1,0,0,0,96,41,104,64,1,0,0,0,32,150,57,64,1,0,0,0,97,114,107,68,101,99,108,80],\"hex\":\"7077934001000000f0bb8d40010000002096394001000000b098094001000000b0908540010000006051854001000000709885400100000010498540010000007055854001000000004d854001000000408f85400100000000fc9f4001000000409685400100000060a1854001000000801668400100000040498540010000006053854001000000b098094001000000209639400100000040d0064001000000209639400100000060a0854001000000f09f85400100000010978540010000002052854001000000009d8540010000000052854001000000402968400100000050296840010000006029684001000000209639400100000061726b4465636c50\"}"
+  },
+  "block1009_140855160": {
+    "result": "\r\nvoid FUN_140855160(undefined8 param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 uVar2;\r\n  undefined8 local_18;\r\n  code *local_10;\r\n  \r\n  uVar1 = FUN_140854880();\r\n  local_10 = FUN_140855750;\r\n  local_18 = param_1;\r\n  uVar2 = FUN_140810240();\r\n  FUN_140811160(uVar2,uVar1,0xf6,&local_18);\r\n  return;\r\n}\r\n\r\n"
+  },
+  "block1009_140855220": {
+    "result": "{\"error\":\"No function found for 0x140855220\"}"
+  },
+  "block1009_140855360": {
+    "result": "{\"error\":\"No function found for 0x140855360\"}"
+  },
+  "block1009_140855570": {
+    "result": "\r\nvoid FUN_140855570(longlong param_1)\r\n\r\n{\r\n  if ((*(char *)(*(longlong *)(param_1 + 0x18) + 0x74) != '\\0') &&\r\n     (*(char *)(param_1 + 0x20) != '\\0')) {\r\n    *(byte *)(param_1 + 0x48) = *(byte *)(param_1 + 0x48) & 0xfd;\r\n    *(byte *)(param_1 + 0x48) = *(byte *)(param_1 + 0x48) | 2;\r\n    return;\r\n  }\r\n  *(byte *)(param_1 + 0x48) = *(byte *)(param_1 + 0x48) & 0xfd;\r\n  *(undefined1 *)(param_1 + 0x48) = *(undefined1 *)(param_1 + 0x48);\r\n  return;\r\n}\r\n\r\n"
+  },
+  "block1009_140855750": {
+    "result": "\r\nvoid FUN_140855750(longlong *param_1,longlong param_2)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n  if ((char)param_1[4] != '\\0') {\r\n    iVar1 = (**(code **)(*param_1 + 0xd0))();\r\n    if ((iVar1 == 2) && (*(int *)((longlong)param_1 + 0x24) == **(int **)(param_2 + 8))) {\r\n      (**(code **)(*param_1 + 0xb8))(param_1);\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  }
+}

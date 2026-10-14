@@ -1,0 +1,69 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26300.
+-- Configuring done (0.0s)
+-- Generating done (0.4s)
+-- Build files have been written to: C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/build
+MSBuild version 17.14.60+43b635718 for .NET Framework
+
+  d2_arm_protocol_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_arm_protocol_tests.exe
+  d2_avatar_weapon_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_avatar_weapon_tests.exe
+  d2_checkpoint_protocol_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_checkpoint_protocol_tests.exe
+  d2_damage_protocol_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_damage_protocol_tests.exe
+  d2_enemy_melee_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_enemy_melee_tests.exe
+  d2_enemy_outcome_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_enemy_outcome_tests.exe
+  d2_guard_body_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_guard_body_tests.exe
+  d2_guard_protocol_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_guard_protocol_tests.exe
+  d2_guard_weapon_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_guard_weapon_tests.exe
+  engine_bridge.cpp
+  d2_lab_proxy.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\dinput8.dll
+  d2_native_skeleton_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_native_skeleton_tests.exe
+  d2_proxy_smoke.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_proxy_smoke.exe
+  d2_runtime_probe.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_runtime_probe.exe
+  shadow_action_protocol_tests.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(781,9): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc [C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\d2_shadow_action_tests.vcxproj]
+  (compiling source file '../../outputs/d2-coop-lab/src/shadow_action_protocol_tests.cpp')
+      C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\include\__msvc_ostream.hpp(781,9):
+      the template instantiation context (the oldest one first) is
+          C:\Users\adako\Documents\Codex\2026-10-08\i-x20\outputs\d2-coop-lab\src\shadow_action_protocol_tests.cpp(5,52):
+          see reference to function template instantiation 'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)' being compiled
+  
+  d2_shadow_action_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_shadow_action_tests.exe
+  d2_steam_probe.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_steam_probe.exe
+  d2_world_identity_tests.vcxproj -> C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\build\Release\d2_world_identity_tests.exe
+PASS: game mutex scoped, unrelated mutex unchanged, system DirectInput forwarded
+PASS: simulated input preserves controls; expired, malformed, and excessive leases release input
+PASS: pose protocol rejects incompatible builds, own role, NaNs, wrong size, invalid flags and malformed rotation bases
+PASS: body pose protocol rejects stale payloads, reflections, invalid origin, nonfinite and unbounded joints
+PASS: native cinematic, pause, and pending state transitions block movement follow
+PASS: cinematic identities ignore observer order, distinguish native nodes, and reject inconsistent metadata
+PASS: skip relay rejects mismatched scenes, sessions, world epochs, cinematic epochs, and disabled peers
+PASS: active sequence boundaries distinguish subscenes and channels; branch equivalence is limited to the observed opening pair
+PASS: opening rendezvous requires both native holds and rejects releases for another role, session, epoch, or segment
+PASS: death retirement requires the same dead actor, registered component, empty pause state and stopped scheduler
+PASS: native faction registration, directional overrides, bounds, ownership and concurrent change
+PASS: native health ownership, bounded attributes, suppressed maximum, transition and concurrent-change guards
+PASS: native sword inventory, quantity, component registration, tags, slot and attachment identity
+PASS: native player sword slot/component state, both roles, reciprocal arm/body attachments, quantity, phase and concurrent-change guards
+PASS: dedicated Emily partner scope, exact asset, inherited sword declaration and 219 joint bounds
+PASS: separate Corvo tutorial sword scope, exact actor/item/base asset, reciprocal owner and joint bounds
+PASS: native equipment death retirement requires stable inventory removal and no registered melee component
+PASS: native child-frame ownership, reciprocal entities, bounded list, cycles, pause and concurrent replacement guards
+PASS: AI knowledge ownership, bounded targets, stale target resolution and concurrent change
+PASS: player stance ownership, bounded lookup, native transition and concurrent replacement refusal
+PASS: active player states enforce reciprocal ownership, unique bounded IDs and stable mode/list lifetimes
+PASS: AI scheduler pool membership, inactive partition, lifetime checks, bounds and concurrent-change refusal
+PASS: reciprocal NPC identity, unrelated local handles, stale generations, ambiguous spawners, world packet scope and transform validation
+PASS: explicit guard handshake, both incarnations, arming nonce, role/epoch/session guards, and pose validation
+PASS: sword hit scoped to role, world, sessions, two arm tokens, one consumption and bounded direction/location
+PASS: guard animation fixed rig, local-name independence, native binding, phase, finite rigid joints and malformed payloads
+PASS: fixed sword state, guard incarnation, world/session, root correlation and duplicate/out-of-order lifetime checks
+PASS: enemy outcome identity, either source role, local arms, canonical declaration, duplicate consumption, acknowledgments, world replacement and native phase guards
+PASS: ordinary enemy sword event binds either source, observed geometry, one consumption, native phase, world and local arm tokens
+Checkpoint packet identity, direction, role, token and phase checks passed.
+PASS: skeleton identity, hierarchy, bounded layout, native pose ownership and concurrent replacement guards
+PASS: separate player arm skeleton scope validates both roles/sides, reciprocal parent, exact assets, generation and concurrent detachment
+PASS: retarget bind roundtrip, inserted pelvis, native arm preservation and invalid-transform refusal
+PASS: five-joint arm retarget bind roundtrip, native translations and unmapped poses, finite rigid inputs and exact chain identity
+PASS: both native hand rigs, extra metacarpal mapping, 21-joint bind/curl, bone-length preservation and hierarchy refusal
+PASS: right-arm protocol roles, rig identity, fresh root, session/world scope, pause/loading, replay and rigid poses
+PASS: Corvo/Emily weapon opt-in tokens, exact role/character, known states, native phase, sessions/worlds, root age and replay refusal
+PASS: clone action roles/tokens/worlds, replay/event integrity, phase/freshness, and exact native slash/block classes

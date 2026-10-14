@@ -1,0 +1,31 @@
+# handoff-research-options-20261011.json
+
+Original: [outputs/d2-coop-lab/analysis/ghidra/handoff-research-options-20261011.json](<../../../../outputs/d2-coop-lab/analysis/ghidra/handoff-research-options-20261011.json>)
+
+SHA-256: `6132382CBFC4821368419225E98030A9A5B4BE12B540E0C9260FFE3167B0866C`; 2593 bytes.
+
+## Original saved record
+
+````json
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"group\":\"D2Coop Research\",\"options\":[{\"name\":\"Evidence policy\",\"type\":\"STRING_TYPE\",\"value\":\"Analyst semantic labels. Confirmed runtime is limited to existing Dunwall tests; confirmed static is disassembly/reader reconstruction. Partial structures leave unknown bytes undefined and do not assert full sizeof.\",\"is_default\":false,\"registered\":false,\"description\":\"Unregistered Option\"},{\"name\":\"Unverified hypotheses\",\"type\":\"STRING_TYPE\",\"value\":\"Emily NPC may require an authored inventory component/item path to receive a native sword. No equipment creation validated.\\nGeneral remote-player attacks may be representable through native player-weapon components. Existing tests establish only one guard and bounded one-hit forwarding.\\nAll campaign transitions may be coordinated through known sequence/loading states. Evidence currently covers a small Dunwall area and opening scenes only.\\nNative host/join and role selection UI integration is unresolved. Native SteamNetworkingSockets012 loopback is verified; separate Steam accounts/invites are not.\",\"is_default\":false,\"registered\":false,\"description\":\"Unregistered Option\"}],\"count\":2,\"program\":\"Dishonored2.exe\"}"
+    }
+  ],
+  "structuredContent": {
+    "result": "{\"group\":\"D2Coop Research\",\"options\":[{\"name\":\"Evidence policy\",\"type\":\"STRING_TYPE\",\"value\":\"Analyst semantic labels. Confirmed runtime is limited to existing Dunwall tests; confirmed static is disassembly/reader reconstruction. Partial structures leave unknown bytes undefined and do not assert full sizeof.\",\"is_default\":false,\"registered\":false,\"description\":\"Unregistered Option\"},{\"name\":\"Unverified hypotheses\",\"type\":\"STRING_TYPE\",\"value\":\"Emily NPC may require an authored inventory component/item path to receive a native sword. No equipment creation validated.\\nGeneral remote-player attacks may be representable through native player-weapon components. Existing tests establish only one guard and bounded one-hit forwarding.\\nAll campaign transitions may be coordinated through known sequence/loading states. Evidence currently covers a small Dunwall area and opening scenes only.\\nNative host/join and role selection UI integration is unresolved. Native SteamNetworkingSockets012 loopback is verified; separate Steam accounts/invites are not.\",\"is_default\":false,\"registered\":false,\"description\":\"Unregistered Option\"}],\"count\":2,\"program\":\"Dishonored2.exe\"}"
+  },
+  "isError": false
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+{"group":"D2Coop Research","options":[{"name":"Evidence policy","type":"STRING_TYPE","value":"Analyst semantic labels. Confirmed runtime is limited to existing Dunwall tests; confirmed static is disassembly/reader reconstruction. Partial structures leave unknown bytes undefined and do not assert full sizeof.","is_default":false,"registered":false,"description":"Unregistered Option"},{"name":"Unverified hypotheses","type":"STRING_TYPE","value":"Emily NPC may require an authored inventory component/item path to receive a native sword. No equipment creation validated.\nGeneral remote-player attacks may be representable through native player-weapon components. Existing tests establish only one guard and bounded one-hit forwarding.\nAll campaign transitions may be coordinated through known sequence/loading states. Evidence currently covers a small Dunwall area and opening scenes only.\nNative host/join and role selection UI integration is unresolved. Native SteamNetworkingSockets012 loopback is verified; separate Steam accounts/invites are not.","is_default":false,"registered":false,"description":"Unregistered Option"}],"count":2,"program":"Dishonored2.exe"}
+````

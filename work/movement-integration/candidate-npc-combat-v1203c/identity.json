@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T19:09:19.603325+02:00",
+  "dll": "056E8A4E3CC4EAEACF9E8E5FE32943B69FA57769ECE23634BE087C59B38BF937",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203b",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1203c on 1203b: shadow stream handshake under the product controller - a peer hello while no local stream runs restarts the local stream at once, and a hello from a newer peer incarnation (higher token) re-pins the handshake instead of being rejected forever; bank/stream-only losses are repaired after 1 s without backoff (avatar/follow repairs keep the 6 s doubling grace). Keeps 1203b worker-side bind check and in-place bank reactivation. Runtime pending.",
+  "result": "Runtime 1204c failed (facing check): the product controller armed (resume armed, 13 quick repairs) but the stream became ready and retired within ~1 s repeatedly - retireReason 2 (pair not ready) at retireRootAge 250: partner pose gaps >=250 ms every few seconds on the busy mission map (sender send gap max 78-140 ms). Handshake re-pin/peer-hello restart worked (stream re-established each time). Superseded by 1203d (product presentation freshness 1 s).",
+  "runtimeEvidence": "../../natural-moveset/mission-presentation-resume-v1204c/result.json",
+  "auditEvidence": "../presentation-recovery-audit-v1205.json"
+}

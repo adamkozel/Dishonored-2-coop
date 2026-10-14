@@ -1,0 +1,43 @@
+# swarm-decompile-1406b9070-v286.txt
+
+Original: [work/movement-integration/swarm-decompile-1406b9070-v286.txt](<../../../../work/movement-integration/swarm-decompile-1406b9070-v286.txt>)
+
+SHA-256: `3B97163C2B2B02DE577E3F0189022E3FE47779DD493142283F7C5C0D80DC0445`; 878 bytes.
+
+## Original saved record
+
+````text
+
+void FUN_1406b9070(longlong param_1,longlong *param_2,int *param_3)
+
+{
+  undefined8 uVar1;
+  longlong lVar2;
+  undefined8 uVar3;
+  int aiStackX_18 [4];
+  
+  if ((*param_3 == 0x3fff0010) || ((*(uint *)((longlong)param_2 + 0x1c) >> 0x1e & 1) == 0)) {
+    uVar1 = *(undefined8 *)(param_2[1] + 0xe0);
+    uVar3 = (**(code **)(*param_2 + 0xd0))(param_2);
+    lVar2 = FUN_1406c6280(uVar3,uVar1);
+    FUN_1406bc4f0(lVar2,param_3);
+  }
+  else {
+    aiStackX_18[0] = *param_3;
+    uVar1 = FUN_1407b5e00(D2_GameSingletonPtr + 0x3130b0,aiStackX_18);
+    lVar2 = FUN_1408c3e30(uVar1);
+    if (lVar2 == 0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830(&UNK_141c44a10);
+    }
+    FUN_1408762d0(lVar2);
+  }
+  *(longlong *)(param_1 + 0x10) = lVar2;
+  uVar1 = FUN_140877720(lVar2,&DAT_1439cb200,0);
+  *(undefined8 *)(param_1 + 0x78) = uVar1;
+  return;
+}
+
+
+
+````

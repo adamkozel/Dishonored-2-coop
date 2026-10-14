@@ -1,0 +1,197 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+
+  00000001408AD260: push        rdi
+  00000001408AD262: sub         rsp,50h
+  00000001408AD266: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001408AD26F: mov         qword ptr [rsp+60h],rbx
+  00000001408AD274: mov         qword ptr [rsp+68h],rsi
+  00000001408AD279: mov         rdi,rcx
+  00000001408AD27C: add         rcx,1F52B8h
+  00000001408AD283: call        00000001407E70B0
+  00000001408AD288: mov         rcx,rdi
+  00000001408AD28B: call        00000001408AF320
+  00000001408AD290: test        al,al
+  00000001408AD292: jne         00000001408AD2A2
+  00000001408AD294: cmp         dword ptr [rdi+000000000030EFE4h],0
+  00000001408AD29B: jne         00000001408AD2A2
+  00000001408AD29D: xor         sil,sil
+  00000001408AD2A0: jmp         00000001408AD2A5
+  00000001408AD2A2: mov         sil,1
+  00000001408AD2A5: lea         rcx,[rdi+00000000001F52C8h]
+  00000001408AD2AC: movzx       edx,sil
+  00000001408AD2B0: call        00000001407E6FC0
+  00000001408AD2B5: test        sil,sil
+  00000001408AD2B8: je          00000001408AD3EF
+  00000001408AD2BE: mov         rcx,qword ptr [0000000142274708h]
+  00000001408AD2C5: mov         rax,qword ptr [rcx]
+  00000001408AD2C8: lea         r8,[0000000142294F50h]
+  00000001408AD2CF: xor         edx,edx
+  00000001408AD2D1: call        qword ptr [rax+00000000000000A0h]
+  00000001408AD2D7: mov         eax,dword ptr [rdi+00000000000600F8h]
+  00000001408AD2DD: imul        eax,eax,19660Dh
+  00000001408AD2E3: add         eax,3C6EF35Fh
+  00000001408AD2E8: mov         dword ptr [rdi+00000000000600F8h],eax
+  00000001408AD2EE: mov         r8b,1
+  00000001408AD2F1: xor         edx,edx
+  00000001408AD2F3: mov         rcx,qword ptr [rdi+00000000001E8960h]
+  00000001408AD2FA: call        00000001407EC5B0
+  00000001408AD2FF: mov         rcx,rdi
+  00000001408AD302: call        00000001408AB380
+  00000001408AD307: nop
+  00000001408AD308: lea         rax,[0000000141C95B68h]
+  00000001408AD30F: mov         qword ptr [rsp+28h],rax
+  00000001408AD314: mov         qword ptr [rsp+30h],rdi
+  00000001408AD319: lea         rax,[rsp+28h]
+  00000001408AD31E: mov         qword ptr [rsp+40h],rax
+  00000001408AD323: xor         r8d,r8d
+  00000001408AD326: lea         rdx,[rsp+28h]
+  00000001408AD32B: lea         rcx,[rdi+00000000003415D0h]
+  00000001408AD332: call        000000014007A9B0
+  00000001408AD337: nop
+  00000001408AD338: mov         rcx,qword ptr [rsp+40h]
+  00000001408AD33D: test        rcx,rcx
+  00000001408AD340: je          00000001408AD353
+  00000001408AD342: mov         rax,qword ptr [rcx]
+  00000001408AD345: lea         rdx,[rsp+28h]
+  00000001408AD34A: cmp         rcx,rdx
+  00000001408AD34D: setne       dl
+  00000001408AD350: call        qword ptr [rax+20h]
+  00000001408AD353: mov         byte ptr [rdi+0000000000337121h],1
+  00000001408AD35A: lea         rcx,[rdi+00000000001F5338h]
+  00000001408AD361: call        00000001407D9740
+  00000001408AD366: mov         byte ptr [rdi+0000000000337121h],0
+  00000001408AD36D: lea         rcx,[rdi+0000000000060280h]
+  00000001408AD374: call        0000000140091D80
+  00000001408AD379: lea         rcx,[rdi+00000000001E8968h]
+  00000001408AD380: call        00000001408101F0
+  00000001408AD385: lea         rcx,[rdi+00000000003415D0h]
+  00000001408AD38C: call        000000014007ACA0
+  00000001408AD391: mov         rcx,qword ptr [0000000142274270h]
+  00000001408AD398: call        0000000140035680
+  00000001408AD39D: lea         rcx,[rdi+00000000001F6EC8h]
+  00000001408AD3A4: call        00000001407886F0
+  00000001408AD3A9: mov         rcx,rdi
+  00000001408AD3AC: call        00000001408AF8A0
+  00000001408AD3B1: mov         r8b,1
+  00000001408AD3B4: mov         edx,4
+  00000001408AD3B9: mov         rcx,qword ptr [rdi+00000000001E8960h]
+  00000001408AD3C0: call        00000001407EC5B0
+  00000001408AD3C5: mov         rcx,rdi
+  00000001408AD3C8: call        00000001408AF460
+  00000001408AD3CD: mov         rcx,rdi
+  00000001408AD3D0: call        00000001408AF230
+  00000001408AD3D5: lea         rcx,[rdi+00000000001F7C08h]
+  00000001408AD3DC: call        00000001406C65F0
+  00000001408AD3E1: lea         rcx,[rdi+00000000003415A0h]
+  00000001408AD3E8: call        000000014007ACA0
+  00000001408AD3ED: jmp         00000001408AD41B
+  00000001408AD3EF: mov         rcx,qword ptr [0000000142274270h]
+  00000001408AD3F6: call        0000000140035680
+  00000001408AD3FB: lea         rcx,[rdi+00000000001F6EC8h]
+  00000001408AD402: call        00000001407886F0
+  00000001408AD407: lea         rcx,[rdi+00000000001F6EC8h]
+  00000001408AD40E: call        0000000140788740
+  00000001408AD413: mov         rcx,rdi
+  00000001408AD416: call        00000001408AF230
+  00000001408AD41B: mov         rcx,qword ptr [0000000142274708h]
+  00000001408AD422: mov         rax,qword ptr [rcx]
+  00000001408AD425: xor         r8d,r8d
+  00000001408AD428: lea         rdx,[rsp+28h]
+  00000001408AD42D: call        qword ptr [rax+00000000000000A8h]
+  00000001408AD433: mov         dword ptr [rsp+38h],0
+  00000001408AD43B: mov         rcx,qword ptr [0000000142274708h]
+  00000001408AD442: mov         rax,qword ptr [rcx]
+  00000001408AD445: lea         r8,[0000000142294E50h]
+  00000001408AD44C: xor         edx,edx
+  00000001408AD44E: call        qword ptr [rax+00000000000000A0h]
+  00000001408AD454: nop
+  00000001408AD455: lea         rcx,[rdi+00000000002E7410h]
+  00000001408AD45C: xor         edx,edx
+  00000001408AD45E: call        00000001408852E0
+  00000001408AD463: mov         rdx,qword ptr [rdi+0000000000340F08h]
+  00000001408AD46A: test        rdx,rdx
+  00000001408AD46D: je          00000001408AD487
+  00000001408AD46F: mov         rax,qword ptr [00000001439A5290h]
+  00000001408AD476: test        byte ptr [rax+0000000000337130h],40h
+  00000001408AD47D: jne         00000001408AD487
+  00000001408AD47F: mov         rcx,rdi
+  00000001408AD482: call        00000001408AC710
+  00000001408AD487: mov         edx,dword ptr [00000001439A0EB8h]
+  00000001408AD48D: test        edx,edx
+  00000001408AD48F: jle         00000001408AD4A3
+  00000001408AD491: dec         edx
+  00000001408AD493: mov         r8b,1
+  00000001408AD496: lea         rcx,[00000001439A0E90h]
+  00000001408AD49D: call        00000001401028E0
+  00000001408AD4A2: nop
+  00000001408AD4A3: mov         rcx,qword ptr [0000000142274708h]
+  00000001408AD4AA: mov         r9,qword ptr [rcx]
+  00000001408AD4AD: lea         r8,[rsp+28h]
+  00000001408AD4B2: mov         edx,dword ptr [rsp+38h]
+  00000001408AD4B6: call        qword ptr [r9+00000000000000A0h]
+  00000001408AD4BD: movzx       eax,sil
+  00000001408AD4C1: mov         rbx,qword ptr [rsp+60h]
+  00000001408AD4C6: mov         rsi,qword ptr [rsp+68h]
+  00000001408AD4CB: add         rsp,50h
+  00000001408AD4CF: pop         rdi
+  00000001408AD4D0: ret
+  00000001408AD4D1: int         3
+  00000001408AD4D2: int         3
+  00000001408AD4D3: int         3
+  00000001408AD4D4: int         3
+  00000001408AD4D5: int         3
+  00000001408AD4D6: int         3
+  00000001408AD4D7: int         3
+  00000001408AD4D8: int         3
+  00000001408AD4D9: int         3
+  00000001408AD4DA: int         3
+  00000001408AD4DB: int         3
+  00000001408AD4DC: int         3
+  00000001408AD4DD: int         3
+  00000001408AD4DE: int         3
+  00000001408AD4DF: int         3
+  00000001408AD4E0: push        rbx
+  00000001408AD4E2: sub         rsp,20h
+  00000001408AD4E6: mov         rbx,rcx
+  00000001408AD4E9: mov         dl,1
+  00000001408AD4EB: add         rcx,1F52C8h
+  00000001408AD4F2: call        00000001407E6FC0
+  00000001408AD4F7: mov         rax,qword ptr [rbx]
+  00000001408AD4FA: mov         rcx,rbx
+  00000001408AD4FD: call        qword ptr [rax+00000000000000B8h]
+  00000001408AD503: mov         rcx,rax
+  00000001408AD506: call        000000014005A090
+  00000001408AD50B: mov         rcx,qword ptr [0000000142274270h]
+  00000001408AD512: call        0000000140035680
+  00000001408AD517: mov         rcx,rbx
+  00000001408AD51A: call        00000001408AB380
+  00000001408AD51F: lea         rcx,[rbx+00000000002E7410h]
+  00000001408AD526: xor         edx,edx
+  00000001408AD528: call        00000001408852E0
+  00000001408AD52D: test        dword ptr [rbx+00000000001F52C0h],0FFFFFFh
+  00000001408AD537: je          00000001408AD557
+  00000001408AD539: lea         rcx,[rbx+00000000001F52B8h]
+  00000001408AD540: call        00000001407E7110
+  00000001408AD545: mov         rdx,qword ptr [rbx+00000000001E8940h]
+  00000001408AD54C: xorps       xmm2,xmm2
+  00000001408AD54F: mov         rcx,rax
+  00000001408AD552: call        000000014088E220
+  00000001408AD557: mov         rdx,qword ptr [rbx+0000000000340F08h]
+  00000001408AD55E: test        rdx,rdx
+  00000001408AD561: je          00000001408AD56B
+  00000001408AD563: mov         rcx,rbx
+  00000001408AD566: call        00000001408AC710
+  00000001408AD56B: lea         rcx,[rbx+00000000001F6EC8h]
+  00000001408AD572: add         rsp,20h
+  00000001408AD576: pop         rbx
+  00000001408AD577: jmp         0000000140788740
+  00000001408AD57C: int         3
+  00000001408AD57D: int         3
+  00000001408AD57E: int         3
+  00000001408AD57F: int         3
+  00000001408AD580: 40

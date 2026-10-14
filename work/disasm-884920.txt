@@ -1,0 +1,189 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140884920: mov         qword ptr [rsp+20h],r9
+  0000000140884925: mov         qword ptr [rsp+10h],rdx
+  000000014088492A: push        rdi
+  000000014088492B: sub         rsp,40h
+  000000014088492F: mov         qword ptr [rsp+38h],0FFFFFFFFFFFFFFFEh
+  0000000140884938: mov         qword ptr [rsp+50h],rbx
+  000000014088493D: mov         rdi,r9
+  0000000140884940: mov         rbx,rdx
+  0000000140884943: mov         dword ptr [rsp+30h],0
+  000000014088494B: mov         qword ptr [rsp+20h],r9
+  0000000140884950: mov         r9d,1
+  0000000140884956: call        0000000140884A90
+  000000014088495B: mov         dword ptr [rsp+30h],1
+  0000000140884963: mov         rcx,rdi
+  0000000140884966: call        0000000140882FC0
+  000000014088496B: mov         rax,rbx
+  000000014088496E: mov         rbx,qword ptr [rsp+50h]
+  0000000140884973: add         rsp,40h
+  0000000140884977: pop         rdi
+  0000000140884978: ret
+  0000000140884979: int         3
+  000000014088497A: int         3
+  000000014088497B: int         3
+  000000014088497C: int         3
+  000000014088497D: int         3
+  000000014088497E: int         3
+  000000014088497F: int         3
+  0000000140884980: mov         qword ptr [rsp+10h],rdx
+  0000000140884985: push        rdi
+  0000000140884986: push        r14
+  0000000140884988: push        r15
+  000000014088498A: sub         rsp,30h
+  000000014088498E: mov         qword ptr [rsp+28h],0FFFFFFFFFFFFFFFEh
+  0000000140884997: mov         qword ptr [rsp+50h],rbx
+  000000014088499C: mov         qword ptr [rsp+60h],rbp
+  00000001408849A1: mov         qword ptr [rsp+68h],rsi
+  00000001408849A6: mov         rbp,r9
+  00000001408849A9: mov         r14,r8
+  00000001408849AC: mov         rsi,rdx
+  00000001408849AF: mov         rdi,rcx
+  00000001408849B2: mov         dword ptr [rsp+20h],0
+  00000001408849BA: cmp         dword ptr [00000001439A0BB8h],0
+  00000001408849C1: je          0000000140884A39
+  00000001408849C3: lea         rax,[00000001439AA810h]
+  00000001408849CA: cmp         r8,rax
+  00000001408849CD: jne         0000000140884A39
+  00000001408849CF: mov         rax,qword ptr [rcx]
+  00000001408849D2: call        qword ptr [rax]
+  00000001408849D4: mov         ecx,dword ptr [rax+60h]
+  00000001408849D7: cmp         ecx,dword ptr [00000001439BDF10h]
+  00000001408849DD: jl          0000000140884A39
+  00000001408849DF: cmp         ecx,dword ptr [00000001439BDF14h]
+  00000001408849E5: jg          0000000140884A39
+  00000001408849E7: mov         rcx,rbp
+  00000001408849EA: call        00000001408832C0
+  00000001408849EF: test        rax,rax
+  00000001408849F2: je          0000000140884A02
+  00000001408849F4: lea         rcx,[rax+20h]
+  00000001408849F8: call        00000001401D9090
+  00000001408849FD: mov         r15,rax
+  0000000140884A00: jmp         0000000140884A09
+  0000000140884A02: lea         r15,[0000000141AB3D9Ch]
+  0000000140884A09: lea         rcx,[rdi+20h]
+  0000000140884A0D: call        00000001401D9090
+  0000000140884A12: mov         rbx,rax
+  0000000140884A15: mov         rcx,qword ptr [00000001439A5290h]
+  0000000140884A1C: mov         rdx,qword ptr [rcx]
+  0000000140884A1F: call        qword ptr [rdx+00000000000000C0h]
+  0000000140884A25: mov         edx,eax
+  0000000140884A27: mov         r9,r15
+  0000000140884A2A: mov         r8,rbx
+  0000000140884A2D: lea         rcx,[0000000141C89D80h]
+  0000000140884A34: call        0000000140166830
+  0000000140884A39: mov         rax,qword ptr [rdi]
+  0000000140884A3C: mov         r9,rbp
+  0000000140884A3F: mov         r8,r14
+  0000000140884A42: mov         rdx,rsi
+  0000000140884A45: mov         rcx,rdi
+  0000000140884A48: call        qword ptr [rax+10h]
+  0000000140884A4B: mov         dword ptr [rsp+20h],1
+  0000000140884A53: mov         rdx,qword ptr [r14+40h]
+  0000000140884A57: test        rdx,rdx
+  0000000140884A5A: je          0000000140884A67
+  0000000140884A5C: mov         r8,rbp
+  0000000140884A5F: mov         rcx,rdi
+  0000000140884A62: call        0000000140883D10
+  0000000140884A67: mov         rax,rsi
+  0000000140884A6A: mov         rbx,qword ptr [rsp+50h]
+  0000000140884A6F: mov         rbp,qword ptr [rsp+60h]
+  0000000140884A74: mov         rsi,qword ptr [rsp+68h]
+  0000000140884A79: add         rsp,30h
+  0000000140884A7D: pop         r15
+  0000000140884A7F: pop         r14
+  0000000140884A81: pop         rdi
+  0000000140884A82: ret
+  0000000140884A83: int         3
+  0000000140884A84: int         3
+  0000000140884A85: int         3
+  0000000140884A86: int         3
+  0000000140884A87: int         3
+  0000000140884A88: int         3
+  0000000140884A89: int         3
+  0000000140884A8A: int         3
+  0000000140884A8B: int         3
+  0000000140884A8C: int         3
+  0000000140884A8D: int         3
+  0000000140884A8E: int         3
+  0000000140884A8F: int         3
+  0000000140884A90: mov         dword ptr [rsp+20h],r9d
+  0000000140884A95: mov         qword ptr [rsp+10h],rdx
+  0000000140884A9A: push        rbx
+  0000000140884A9B: push        rbp
+  0000000140884A9C: push        rsi
+  0000000140884A9D: push        rdi
+  0000000140884A9E: push        r14
+  0000000140884AA0: push        r15
+  0000000140884AA2: sub         rsp,108h
+  0000000140884AA9: mov         qword ptr [rsp+38h],0FFFFFFFFFFFFFFFEh
+  0000000140884AB2: mov         rbp,r8
+  0000000140884AB5: mov         rsi,rdx
+  0000000140884AB8: mov         r14,rcx
+  0000000140884ABB: xor         ebx,ebx
+  0000000140884ABD: mov         dword ptr [rsp+30h],ebx
+  0000000140884AC1: lea         r15,[0000000140882FC0h]
+  0000000140884AC8: mov         qword ptr [rsp+20h],r15
+  0000000140884ACD: lea         r9,[00000001407BB7D0h]
+  0000000140884AD4: lea         edx,[rbx+18h]
+  0000000140884AD7: lea         r8d,[rbx+8]
+  0000000140884ADB: lea         rcx,[rsp+40h]
+  0000000140884AE0: call        00000001411AD700
+  0000000140884AE5: nop
+  0000000140884AE6: lea         rdi,[rsp+0000000000000160h]
+  0000000140884AEE: cmp         dword ptr [rsp+0000000000000158h],ebx
+  0000000140884AF5: jle         0000000140884B27
+  0000000140884AF7: add         rdi,0FFFFFFFFFFFFFFF8h
+  0000000140884AFB: nop         dword ptr [rax+rax]
+  0000000140884B00: lea         rdi,[rdi+8]
+  0000000140884B04: movsxd      rax,ebx
+  0000000140884B07: lea         rcx,[rax+rax*2]
+  0000000140884B0B: lea         rdx,[rsp+40h]
+  0000000140884B10: lea         rcx,[rdx+rcx*8]
+  0000000140884B14: mov         rdx,qword ptr [rdi]
+  0000000140884B17: call        0000000140883000
+  0000000140884B1C: inc         ebx
+  0000000140884B1E: cmp         ebx,dword ptr [rsp+0000000000000158h]
+  0000000140884B25: jl          0000000140884B00
+  0000000140884B27: lea         r9,[rsp+40h]
+  0000000140884B2C: mov         r8,rbp
+  0000000140884B2F: mov         rdx,rsi
+  0000000140884B32: mov         rcx,r14
+  0000000140884B35: call        0000000140884980
+  0000000140884B3A: mov         dword ptr [rsp+30h],1
+  0000000140884B42: mov         r9,r15
+  0000000140884B45: mov         edx,18h
+  0000000140884B4A: lea         r8d,[rdx-10h]
+  0000000140884B4E: lea         rcx,[rsp+40h]
+  0000000140884B53: call        00000001411AD55C
+  0000000140884B58: mov         rax,rsi
+  0000000140884B5B: add         rsp,108h
+  0000000140884B62: pop         r15
+  0000000140884B64: pop         r14
+  0000000140884B66: pop         rdi
+  0000000140884B67: pop         rsi
+  0000000140884B68: pop         rbp
+  0000000140884B69: pop         rbx
+  0000000140884B6A: ret
+  0000000140884B6B: int         3
+  0000000140884B6C: int         3
+  0000000140884B6D: int         3
+  0000000140884B6E: int         3
+  0000000140884B6F: int         3
+  0000000140884B70: mov         qword ptr [rsp+8],rbx
+  0000000140884B75: mov         qword ptr [rsp+10h],rsi
+  0000000140884B7A: push        rdi
+  0000000140884B7B: sub         rsp,20h
+  0000000140884B7F: 48
+  0000000140884B80: 8B
+
+  Summary
+
+     1A7D000 .text

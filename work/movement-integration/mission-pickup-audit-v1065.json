@@ -1,0 +1,310 @@
+{
+  "at": "2026-10-14T11:39:58.232055+02:00",
+  "candidate": "candidate-npc-combat-v1059c",
+  "dll": "3B8BBEE76416DAA746755F06CA82806EC0158B8E1ADC0AFF69DF75229285CE3E",
+  "probe": "E27FF1968184441519D83C3A075D3AC112E8D354C29047B2DC67D4364394078D",
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "actionProtocol": 73,
+  "harnesses": [
+    "../natural-moveset/Test-MissionPickup-v1060.ps1",
+    "../natural-moveset/Test-MissionPickup-v1061.ps1",
+    "../natural-moveset/Test-MissionPickup-v1062.ps1",
+    "../natural-moveset/Test-MissionPickup-v1063.ps1",
+    "../natural-moveset/Test-MissionPickup-v1064.ps1"
+  ],
+  "cases": [
+    {
+      "take": "coin-census-dunwall-v1059.json",
+      "passed": true,
+      "scope": "Read-only --coin-catalog census in the Dunwall fixture on 1059: 51 eligible (19 currency, 4 ammunition, 27 food, 1 other), matching chapter 67.",
+      "census": {
+        "pid": 107496,
+        "entities": 2185,
+        "pickups": 51,
+        "eligible": 51,
+        "ambiguous": 0,
+        "ineligible": 0,
+        "limit": 512,
+        "digest": "3e76c7c38686d6a2",
+        "items": "omitted"
+      }
+    },
+    {
+      "take": "mission-pickup-v1060",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1059",
+      "scope": "1059 (map gate removed, cap 512): Edge of the World census 292/292 eligible (124 currency, 75 ammunition, 61 food, 32 other) but digests differ - character worlds hold different script pickups (Corvo-only script ammo vs Emily-only coin/banana). Whole-catalog equality cannot work on missions.",
+      "failure": "Mission census differs or is unusable: host 292/0 client 292",
+      "cases": [],
+      "armed": {},
+      "census": null
+    },
+    {
+      "take": "mission-pickup-v1061",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1059b",
+      "scope": "1059b hello-paired intersection: ~290 per-entry hellos/250 ms do not scale; asymmetric settles (host 251, client 244) never become ready. Census also varies between loads (293/288).",
+      "failure": "Mission catalog handshake failed: host awaiting_catalog_peer client awaiting_catalog_peer",
+      "cases": [],
+      "armed": {
+        "host": {
+          "ready": false,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 42,
+          "peerOnly": 18,
+          "catalogCount": 251
+        },
+        "client": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 44,
+          "peerOnly": 87,
+          "catalogCount": 244
+        }
+      },
+      "census": {
+        "common": 286,
+        "hostOnly": [
+          "pickups_pouch_01",
+          "pickups_ammo_stun_mine_6",
+          "pickups_vegetable_carrot_01_5",
+          "pickups_pear_03",
+          "pickups_bastillian_fig_cut_02_1",
+          "script_ammo_bolt_pack_incendiary_1",
+          "script_ammo_grenade_sticky_1"
+        ],
+        "client": 288,
+        "clientOnly": [
+          "pickups_processed_whale_oil_8",
+          "pickups_vegetable_potato_01_12"
+        ],
+        "host": 293
+      }
+    },
+    {
+      "take": "mission-pickup-v1062",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1059c",
+      "scope": "1059c identity-list intersection works: both peers 287 shared, same digest, ready after one list exchange each; host ordinary pickup (copper wire, 10) converged and removed on both. Client pickup failed only because the harness chose an underwater item on the canal bed (aim).",
+      "failure": "Ordinary pickup did not converge: pickups_ivory_scrimshaw_01_1 by client",
+      "cases": [
+        {
+          "removedBothPeers": true,
+          "quantity": 10,
+          "role": "host",
+          "converged": true,
+          "family": 1,
+          "name": "pickups_copper_wire_2"
+        },
+        {
+          "removedBothPeers": false,
+          "quantity": 30,
+          "role": "client",
+          "converged": false,
+          "family": 1,
+          "name": "pickups_ivory_scrimshaw_01_1"
+        }
+      ],
+      "armed": {
+        "host": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 5,
+          "peerOnly": 0,
+          "listsSent": 2,
+          "listsReceived": 1,
+          "sharedDigest": "3dff77aa19a7f866",
+          "peerDigest": "3dff77aa19a7f866",
+          "catalogCount": 287
+        },
+        "client": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 1,
+          "peerOnly": 0,
+          "listsSent": 1,
+          "listsReceived": 1,
+          "sharedDigest": "3dff77aa19a7f866",
+          "peerDigest": "3dff77aa19a7f866",
+          "catalogCount": 287
+        }
+      },
+      "census": {
+        "hostOnly": [
+          "env_interiors_dark_bread_01_1",
+          "pickups_fruit_pear_01_1",
+          "script_ammo_bullet_box_regular_10",
+          "script_ammo_bolt_pack_tranquilizer_3",
+          "script_ammo_springrazor_5"
+        ],
+        "host": 292,
+        "client": 288,
+        "clientOnly": [
+          "pickups_bastillian_fig_cut_02_2"
+        ],
+        "common": 287
+      }
+    },
+    {
+      "take": "mission-pickup-v1063",
+      "passed": false,
+      "candidate": "candidate-npc-combat-v1059c",
+      "scope": "1059c: 285 shared, same digest; host pickup converged again; the chosen client \"currency\" was an NPC-carried pickpocket pouch (pouch_small_02) so X hit the worker Talk prompt - harness item choice.",
+      "failure": "Ordinary pickup did not converge: pouch_small_02_12143 by client",
+      "cases": [
+        {
+          "role": "host",
+          "removedBothPeers": true,
+          "quantity": 10,
+          "family": 1,
+          "converged": true,
+          "name": "pickups_copper_wire_2"
+        },
+        {
+          "role": "client",
+          "removedBothPeers": false,
+          "quantity": 10,
+          "family": 1,
+          "converged": false,
+          "name": "pouch_small_02_12143"
+        }
+      ],
+      "armed": {
+        "host": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 8,
+          "peerOnly": 0,
+          "listsSent": 2,
+          "listsReceived": 1,
+          "sharedDigest": "a510e8ff040ee1ea",
+          "peerDigest": "a510e8ff040ee1ea",
+          "catalogCount": 285
+        },
+        "client": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 2,
+          "peerOnly": 0,
+          "listsSent": 1,
+          "listsReceived": 1,
+          "sharedDigest": "a510e8ff040ee1ea",
+          "peerDigest": "a510e8ff040ee1ea",
+          "catalogCount": 285
+        }
+      },
+      "census": {
+        "hostOnly": [
+          "env_interiors_coin1_lowvalue_9",
+          "env_fruit_pear_01_1",
+          "pickups_vegetable_potato_01_4",
+          "pickups_ammo_bullet_box_regular_13",
+          "pickups_bastillian_fig_cut_02_2",
+          "pickups_fruit_banana_01_4",
+          "pickups_pearl_fan",
+          "script_ammo_bolt_pack_tranquilizer_2"
+        ],
+        "client": 287,
+        "clientOnly": [
+          "eotw_lights_01_fruit_apple_01_1",
+          "pickups_vegetable_carrot_01_9"
+        ],
+        "common": 285,
+        "host": 293
+      }
+    },
+    {
+      "take": "mission-pickup-v1064",
+      "passed": true,
+      "candidate": "candidate-npc-combat-v1059c",
+      "scope": "1059c: 285-ish shared intersection agreed; ordinary native pickups (stand at the item, native look aim, X) by alternating roles - host copper wire (currency 10), client pouch (currency 20), host pistol bullet (ammunition 1) - each converged with receipts on both peers and removal from both worlds; shared currency 0 -> 30 on both. Dunwall fixture restored.",
+      "failure": null,
+      "cases": [
+        {
+          "name": "pickups_copper_wire_2",
+          "converged": true,
+          "role": "host",
+          "removedBothPeers": true,
+          "family": 1,
+          "quantity": 10
+        },
+        {
+          "name": "pickups_pouch_01_2",
+          "converged": true,
+          "role": "client",
+          "removedBothPeers": true,
+          "family": 1,
+          "quantity": 20
+        },
+        {
+          "name": "pickups_ammo_bullet_gun_regular",
+          "converged": true,
+          "role": "host",
+          "removedBothPeers": true,
+          "family": 4,
+          "quantity": 1
+        }
+      ],
+      "armed": {
+        "host": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 1,
+          "peerOnly": 0,
+          "listsSent": 2,
+          "listsReceived": 1,
+          "sharedDigest": "c7c138b2d1515b7f",
+          "peerDigest": "c7c138b2d1515b7f",
+          "catalogCount": 286
+        },
+        "client": {
+          "ready": true,
+          "result": "awaiting_catalog_peer",
+          "settled": true,
+          "localOnly": 5,
+          "peerOnly": 0,
+          "listsSent": 1,
+          "listsReceived": 1,
+          "sharedDigest": "c7c138b2d1515b7f",
+          "peerDigest": "c7c138b2d1515b7f",
+          "catalogCount": 286
+        }
+      },
+      "census": {
+        "host": 287,
+        "clientOnly": [
+          "env_interiors_coin3_highvalue_5",
+          "pickups_ammo_bolt_regular_11",
+          "pickups_ammo_bullet_box_regular_13",
+          "pickups_coin2_midvalue_30",
+          "script_ingot_silver_01"
+        ],
+        "common": 286,
+        "hostOnly": [
+          "pickups_ammo_bolt_tranquilizer_7"
+        ],
+        "client": 291
+      }
+    }
+  ],
+  "findings": [
+    "Confirmed runtime: mission worlds are character-specific - Corvo and Emily loads of Edge of the World differ by a handful of script-placed pickups (ammunition types vs coins/food), so the shared pickup catalog must be an intersection.",
+    "Confirmed runtime: pickup census varies slightly between loads (streaming/scripts); the identity-list exchange happens at bind time on both peers, so both derive the same intersection regardless.",
+    "Confirmed runtime: ordinary native interaction pickups route through the installed reward observer and Steam commit path on a mission map; currency is shared (both wallets +30).",
+    "Pickpocket pouches carried by NPCs are catalog entries but are taken through the NPC interaction, not world pickup (not yet exercised)."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Food and stored-potion families on mission maps (Dunwall-verified only); pickpocket pouches; containers/drawers; grapple (Far Reach) pickups.",
+    "Checkpoint/reload renewal of the mission catalog (Dunwall-verified only).",
+    "Remaining Dunwall-only gates: usable/door-adjacent sync, checkpoint/shared death, Doppelganger visual, props, power FX, guard/damage legacy."
+  ]
+}

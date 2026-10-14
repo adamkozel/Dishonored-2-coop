@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "scope": "Native use -> authored interaction presentation on the partner body (Dunwall window handle), both roles; fixture restored.",
+  "cases": [
+    {
+      "observer": "client",
+      "sourceUsesBefore": 0,
+      "sourceUseName": "ld_rich_small_gp_window_handle_37",
+      "observerSamples": 107,
+      "bankVersion": 71,
+      "maxAmount": 1.0,
+      "usableChanged": true,
+      "shownSamples": 31,
+      "sourceUnfocused": 0,
+      "source": "host",
+      "sourceUsesAfter": 1,
+      "maxWeight": 0.9999999
+    },
+    {
+      "observer": "host",
+      "sourceUsesBefore": 0,
+      "sourceUseName": "",
+      "observerSamples": 122,
+      "bankVersion": 71,
+      "maxAmount": 0.0,
+      "usableChanged": false,
+      "shownSamples": 0,
+      "sourceUnfocused": 0,
+      "source": "client",
+      "sourceUsesAfter": 0,
+      "maxWeight": 0.0
+    }
+  ],
+  "failure": "Native use did not change the window (client)"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-UseInteraction-v1214.ps1:85[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  85 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mNative use did not change the window (client)[0m

@@ -1,0 +1,82 @@
+{
+  "at": "2026-10-14T01:06:19.030016+02:00",
+  "candidate": "candidate-npc-combat-v954",
+  "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+  "combatProtocol": 6,
+  "combatPacketBytes": 276,
+  "complete": false,
+  "cases": [
+    {
+      "take": "npc-crossbow-host-v956",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "passed": true,
+      "source": "host",
+      "failure": null,
+      "restored": true,
+      "deaths": 1,
+      "remainingHealth": 0,
+      "commits": 1,
+      "pendingHighWater": 0,
+      "worldOutcomes": {
+        "host": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only.",
+        "replicaSuppressed": 0,
+        "client": 0
+      },
+      "scopedPresentationCountersPassed": true,
+      "scope": "Native health outcomes with 1 death(s) and 0 remaining target health; scoped native damage,  duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "host": "Viewed six native frames0.4-2.3s: first-person crossbow, bolt contact/head reaction and native victim death are visible. Corpse lands separately; embedded-bolt replication and paired corpse physics are not established.",
+        "client": "Viewed six native frames0.4-2.3s: Corvo keeps the native crossbow attached and progresses from aim/fire toward recovery. Throne furniture occludes the victim and partly the weapon. Full grip/mechanism/choreography is not accepted from this view.",
+        "completeVisualAcceptance": false,
+        "method": "Manual native-video contact-sheet inspection."
+      }
+    },
+    {
+      "take": "npc-crossbow-client-v957",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "passed": false,
+      "source": "client",
+      "failure": "Combined crossbow firing body/prop did not remain valid through native damage",
+      "restored": true,
+      "scope": "Failed combined test retained: both native bolt contacts matched health40-to25-to10, but scripted reposition before the second shot caused a movement clock rejection. Full test not accepted; independently restored.",
+      "visualReview": {
+        "host": "Viewed six frames0.4-5s. Emily aims and cycles the native crossbow prop beside visible guard reactions. The scripted second-shot reposition is a recorded movement rejection; this whole test remains failed. No full presentation acceptance.",
+        "client": "Recording retained; no separate new visual inspection.",
+        "completeVisualAcceptance": false,
+        "method": "Manual native wall-time video contact-sheet inspection; unviewed/occluded material explicitly identified."
+      }
+    },
+    {
+      "take": "npc-crossbow-client-v958",
+      "candidate": "candidate-npc-combat-v954",
+      "dll": "F7B860243A8D2CF6819DC7E145BD855ED96AA9B96C83733A4B763F57181376BA",
+      "passed": true,
+      "source": "client",
+      "failure": null,
+      "restored": true,
+      "deaths": 1,
+      "remainingHealth": 0,
+      "commits": 2,
+      "pendingHighWater": 1,
+      "worldOutcomes": {
+        "host": 0,
+        "replicaSuppressed": 0,
+        "client": 0,
+        "scope": "Positive counters establish host-owned world outcomes; inspect declarations to distinguish authored trigger damage from corpse contact. Zero is a regression pass only."
+      },
+      "scopedPresentationCountersPassed": true,
+      "scope": "Native health outcomes with 1 death(s) and 0 remaining target health; scoped native damage,  duplicates, shared checkpoint and restoration passed; complete world combat, paired corpse/limb physics and all hit modifiers are not established.",
+      "visualReview": {
+        "client": "Viewed six frames0.4-5s. Native crossbow shot, living first-hit reaction, reload, second contact and death are visible. Exact counterpart corpse/limb physics is not established.",
+        "host": "Viewed six frames0.4-5s. Foreground foliage heavily occludes both shooter and victim; visual judgment of the remote action is not possible from this recording. Body/prop counters pass, but this is not visual acceptance.",
+        "completeVisualAcceptance": false,
+        "method": "Manual native wall-time video contact-sheet inspection; unviewed/occluded material explicitly identified."
+      }
+    }
+  ],
+  "nativeDiagnostic": "npc-crossbow-inspect-v953",
+  "limitations": "Broader projectile families, source-class/AI-dependent damage modifiers, protected regions, wall impacts, authoritative limb/corpse physics, active enemy targeting both players and automatic full-world combat remain incomplete. Independent Steam-account online testing and complete movement/campaign/native session UI also remain open."
+}

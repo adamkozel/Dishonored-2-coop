@@ -1,0 +1,55 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001406E2200: movups      xmm0,xmmword ptr [r8]
+  00000001406E2204: mov         rax,qword ptr [rcx]
+  00000001406E2207: movsxd      r8,dword ptr [rdx+4]
+  00000001406E220B: add         r8,qword ptr [rax]
+  00000001406E220E: inc         byte ptr [r8+9]
+  00000001406E2212: movq        mmword ptr [r8],xmm0
+  00000001406E2217: mov         byte ptr [r8+8],1
+  00000001406E221C: ret
+  00000001406E221D: int         3
+  00000001406E221E: int         3
+  00000001406E221F: int         3
+  00000001406E2220: mov         qword ptr [rsp+8],rbx
+  00000001406E2225: mov         qword ptr [rsp+18h],rbp
+  00000001406E222A: push        rsi
+  00000001406E222B: push        rdi
+  00000001406E222C: push        r12
+  00000001406E222E: push        r14
+  00000001406E2230: push        r15
+  00000001406E2232: sub         rsp,30h
+  00000001406E2236: mov         rbx,qword ptr [rsp+0000000000000080h]
+  00000001406E223E: mov         r14,rcx
+  00000001406E2241: movzx       r15d,r9b
+  00000001406E2245: mov         ecx,dword ptr [rbx+0Ch]
+  00000001406E2248: mov         eax,dword ptr [rbx+8]
+  00000001406E224B: mov         r12,r8
+  00000001406E224E: mov         r10d,ecx
+  00000001406E2251: and         eax,0FFFFFFh
+  00000001406E2256: mov         rbp,rdx
+  00000001406E2259: shr         r10d,8
+  00000001406E225D: cmp         eax,r10d
+  00000001406E2260: jne         00000001406E2339
+  00000001406E2266: mov         eax,ecx
+  00000001406E2268: and         eax,0C0h
+  00000001406E226D: cmp         al,0C0h
+  00000001406E226F: jne         00000001406E22E9
+  00000001406E2271: cmp         byte ptr [00000001431AEE98h],0
+  00000001406E2278: je          00000001406E228B
+  00000001406E227A: lea         edx,[r10+1]
+  00000001406E227E: mov         rcx,rbx
+  00000001406E2281: call        00000001406E1010
+  00000001406E2286: jmp         00000001406E2339
+  00000001406E228B: and         ecx,3Fh
+  00000001406E228E: cmp         ecx,3Fh
+
+  Summary
+
+     1A7D000 .text

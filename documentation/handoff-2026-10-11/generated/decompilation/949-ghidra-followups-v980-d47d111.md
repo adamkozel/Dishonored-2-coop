@@ -1,0 +1,693 @@
+# ghidra-followups-v980.json
+
+Original: [work/movement-integration/npc-perception-research-v979/ghidra-followups-v980.json](<../../../../work/movement-integration/npc-perception-research-v979/ghidra-followups-v980.json>)
+
+SHA-256: `4A1BA7DD9F999F4ECFEBFCD697371709EBE06BFBC0C5CE19B3AAD239692FA1DA`; 43564 bytes.
+
+## Original saved record
+
+````json
+{
+  "obs980_pointxrefs": {
+    "content": [
+      {
+        "type": "text",
+        "text": "From 143f18b08 [DATA]\nFrom 14040a0bc in FUN_140409fa0 [UNCONDITIONAL_CALL]"
+      }
+    ],
+    "structuredContent": {
+      "result": "From 143f18b08 [DATA]\nFrom 14040a0bc in FUN_140409fa0 [UNCONDITIONAL_CALL]"
+    },
+    "isError": false
+  },
+  "obs980_trace0": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nvoid FUN_140409fa0(longlong param_1,longlong param_2,longlong param_3,ulonglong param_4)\r\n\r\n{\r\n  char cVar1;\r\n  uint uVar2;\r\n  longlong lVar3;\r\n  undefined8 uVar4;\r\n  undefined8 uVar5;\r\n  longlong *plVar6;\r\n  undefined4 *puVar7;\r\n  undefined8 *puVar8;\r\n  undefined1 local_128 [16];\r\n  undefined8 local_118;\r\n  undefined1 local_110 [40];\r\n  undefined4 *local_e8;\r\n  uint local_e0;\r\n  uint local_dc;\r\n  undefined4 local_d8 [48];\r\n  \r\n  local_118 = 0xfffffffffffffffe;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xffffff81;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 1;\r\n  uVar2 = FUN_140409e50(param_3);\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xfffffc7f;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | (uVar2 & 7) << 7;\r\n  *(undefined4 *)(param_1 + 0xc) = *(undefined4 *)(param_3 + 0xa8);\r\n  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_3 + 0x300);\r\n  *(undefined4 *)(param_1 + 0x14) = *(undefined4 *)(param_3 + 0x304);\r\n  *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_3 + 0x308);\r\n  if ((param_4 & 2) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439bfc30,1);\r\n    if (lVar3 == 0) {\r\n      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);\r\n      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);\r\n                    /* WARNING: Subroutine does not return */\r\n      FUN_140166830(0x74,uVar5,uVar4);\r\n    }\r\n    cVar1 = FUN_140600210(lVar3);\r\n    if (cVar1 != '\\0') {\r\n      local_e0 = 0x5000000;\r\n      local_e8 = local_d8;\r\n      local_dc = 0x1040;\r\n      FUN_1405ff520(lVar3,&local_e8);\r\n      puVar7 = local_e8;\r\n      if ((local_e0 & 0xffffff) != 0) {\r\n        *(undefined4 *)(param_1 + 0x1c) = *local_e8;\r\n        *(undefined4 *)(param_1 + 0x20) = local_e8[1];\r\n        *(undefined4 *)(param_1 + 0x24) = local_e8[2];\r\n        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 2;\r\n      }\r\n      if (((local_dc & 0x40) == 0) && (local_e8 != (undefined4 *)0x0)) {\r\n        plVar6 = (longlong *)FUN_1401548e0();\r\n        (**(code **)(*plVar6 + 0x10))\r\n                  (plVar6,\r\n                   \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                   ,0x1ec,puVar7,0x10);\r\n      }\r\n    }\r\n  }\r\n  if ((param_4 & 4) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439caf30,2);\r\n    if (lVar3 != 0) {\r\n      cVar1 = FUN_140409290(lVar3,0);\r\n      if (cVar1 != '\\0') {\r\n        puVar7 = (undefined4 *)FUN_140409280(lVar3,0);\r\n        *(undefined4 *)(param_1 + 0x28) = *puVar7;\r\n        *(undefined4 *)(param_1 + 0x2c) = puVar7[1];\r\n        *(undefined4 *)(param_1 + 0x30) = puVar7[2];\r\n        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 4;\r\n      }\r\n    }\r\n  }\r\n  lVar3 = 0;\r\n  if ((param_4 & 0x18) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439e8010,1);\r\n    if ((lVar3 == 0) && ((*(uint *)(param_1 + 8) & 0x380) != 0x180)) {\r\n      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);\r\n      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);\r\n                    /* WARNING: Subroutine does not return */\r\n      FUN_140166830(0x75,uVar5,uVar4);\r\n    }\r\n  }\r\n  if (((param_4 & 8) != 0) && (lVar3 != 0)) {\r\n    FUN_14053d940(lVar3,0,*(undefined2 *)(lVar3 + 0x2c7c),param_1 + 0x34,local_110);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 8;\r\n  }\r\n  if (((param_4 & 0x10) != 0) && (lVar3 != 0)) {\r\n    FUN_14053dac0(lVar3,0,lVar3 + 0x2c80,param_1 + 0x40,local_110);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x10;\r\n  }\r\n  if ((param_4 & 0x20) != 0) {\r\n    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(param_3 + 0x33c);\r\n    *(undefined4 *)(param_1 + 0x50) = *(undefined4 *)(param_3 + 0x340);\r\n    *(undefined4 *)(param_1 + 0x54) = *(undefined4 *)(param_3 + 0x344);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x20;\r\n  }\r\n  if ((param_4 & 0x40) != 0) {\r\n    *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_3 + 0x30c);\r\n    *(undefined4 *)(param_1 + 0x5c) = *(undefined4 *)(param_3 + 0x310);\r\n    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(param_3 + 0x314);\r\n    *(undefined4 *)(param_1 + 100) = *(undefined4 *)(param_3 + 0x318);\r\n    *(undefined4 *)(param_1 + 0x68) = *(undefined4 *)(param_3 + 0x31c);\r\n    *(undefined4 *)(param_1 + 0x6c) = *(undefined4 *)(param_3 + 800);\r\n    *(undefined4 *)(param_1 + 0x70) = *(undefined4 *)(param_3 + 0x324);\r\n    *(undefined4 *)(param_1 + 0x74) = *(undefined4 *)(param_3 + 0x328);\r\n    *(undefined4 *)(param_1 + 0x78) = *(undefined4 *)(param_3 + 0x32c);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x40;\r\n  }\r\n  puVar8 = (undefined8 *)FUN_1405bece0(local_128,param_2);\r\n  *(undefined8 *)(param_1 + 0x80) = *puVar8;\r\n  *(undefined4 *)(param_1 + 0x88) = *(undefined4 *)(puVar8 + 1);\r\n  puVar8 = (undefined8 *)FUN_1405bed20(local_128,param_2);\r\n  *(undefined8 *)(param_1 + 0x90) = *puVar8;\r\n  *(undefined4 *)(param_1 + 0x98) = *(undefined4 *)(puVar8 + 1);\r\n  return;\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nvoid FUN_140409fa0(longlong param_1,longlong param_2,longlong param_3,ulonglong param_4)\r\n\r\n{\r\n  char cVar1;\r\n  uint uVar2;\r\n  longlong lVar3;\r\n  undefined8 uVar4;\r\n  undefined8 uVar5;\r\n  longlong *plVar6;\r\n  undefined4 *puVar7;\r\n  undefined8 *puVar8;\r\n  undefined1 local_128 [16];\r\n  undefined8 local_118;\r\n  undefined1 local_110 [40];\r\n  undefined4 *local_e8;\r\n  uint local_e0;\r\n  uint local_dc;\r\n  undefined4 local_d8 [48];\r\n  \r\n  local_118 = 0xfffffffffffffffe;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xffffff81;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 1;\r\n  uVar2 = FUN_140409e50(param_3);\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xfffffc7f;\r\n  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | (uVar2 & 7) << 7;\r\n  *(undefined4 *)(param_1 + 0xc) = *(undefined4 *)(param_3 + 0xa8);\r\n  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_3 + 0x300);\r\n  *(undefined4 *)(param_1 + 0x14) = *(undefined4 *)(param_3 + 0x304);\r\n  *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_3 + 0x308);\r\n  if ((param_4 & 2) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439bfc30,1);\r\n    if (lVar3 == 0) {\r\n      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);\r\n      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);\r\n                    /* WARNING: Subroutine does not return */\r\n      FUN_140166830(0x74,uVar5,uVar4);\r\n    }\r\n    cVar1 = FUN_140600210(lVar3);\r\n    if (cVar1 != '\\0') {\r\n      local_e0 = 0x5000000;\r\n      local_e8 = local_d8;\r\n      local_dc = 0x1040;\r\n      FUN_1405ff520(lVar3,&local_e8);\r\n      puVar7 = local_e8;\r\n      if ((local_e0 & 0xffffff) != 0) {\r\n        *(undefined4 *)(param_1 + 0x1c) = *local_e8;\r\n        *(undefined4 *)(param_1 + 0x20) = local_e8[1];\r\n        *(undefined4 *)(param_1 + 0x24) = local_e8[2];\r\n        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 2;\r\n      }\r\n      if (((local_dc & 0x40) == 0) && (local_e8 != (undefined4 *)0x0)) {\r\n        plVar6 = (longlong *)FUN_1401548e0();\r\n        (**(code **)(*plVar6 + 0x10))\r\n                  (plVar6,\r\n                   \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                   ,0x1ec,puVar7,0x10);\r\n      }\r\n    }\r\n  }\r\n  if ((param_4 & 4) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439caf30,2);\r\n    if (lVar3 != 0) {\r\n      cVar1 = FUN_140409290(lVar3,0);\r\n      if (cVar1 != '\\0') {\r\n        puVar7 = (undefined4 *)FUN_140409280(lVar3,0);\r\n        *(undefined4 *)(param_1 + 0x28) = *puVar7;\r\n        *(undefined4 *)(param_1 + 0x2c) = puVar7[1];\r\n        *(undefined4 *)(param_1 + 0x30) = puVar7[2];\r\n        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 4;\r\n      }\r\n    }\r\n  }\r\n  lVar3 = 0;\r\n  if ((param_4 & 0x18) != 0) {\r\n    lVar3 = FUN_140877720(param_3,&DAT_1439e8010,1);\r\n    if ((lVar3 == 0) && ((*(uint *)(param_1 + 8) & 0x380) != 0x180)) {\r\n      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);\r\n      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);\r\n                    /* WARNING: Subroutine does not return */\r\n      FUN_140166830(0x75,uVar5,uVar4);\r\n    }\r\n  }\r\n  if (((param_4 & 8) != 0) && (lVar3 != 0)) {\r\n    FUN_14053d940(lVar3,0,*(undefined2 *)(lVar3 + 0x2c7c),param_1 + 0x34,local_110);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 8;\r\n  }\r\n  if (((param_4 & 0x10) != 0) && (lVar3 != 0)) {\r\n    FUN_14053dac0(lVar3,0,lVar3 + 0x2c80,param_1 + 0x40,local_110);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x10;\r\n  }\r\n  if ((param_4 & 0x20) != 0) {\r\n    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(param_3 + 0x33c);\r\n    *(undefined4 *)(param_1 + 0x50) = *(undefined4 *)(param_3 + 0x340);\r\n    *(undefined4 *)(param_1 + 0x54) = *(undefined4 *)(param_3 + 0x344);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x20;\r\n  }\r\n  if ((param_4 & 0x40) != 0) {\r\n    *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_3 + 0x30c);\r\n    *(undefined4 *)(param_1 + 0x5c) = *(undefined4 *)(param_3 + 0x310);\r\n    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(param_3 + 0x314);\r\n    *(undefined4 *)(param_1 + 100) = *(undefined4 *)(param_3 + 0x318);\r\n    *(undefined4 *)(param_1 + 0x68) = *(undefined4 *)(param_3 + 0x31c);\r\n    *(undefined4 *)(param_1 + 0x6c) = *(undefined4 *)(param_3 + 800);\r\n    *(undefined4 *)(param_1 + 0x70) = *(undefined4 *)(param_3 + 0x324);\r\n    *(undefined4 *)(param_1 + 0x74) = *(undefined4 *)(param_3 + 0x328);\r\n    *(undefined4 *)(param_1 + 0x78) = *(undefined4 *)(param_3 + 0x32c);\r\n    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x40;\r\n  }\r\n  puVar8 = (undefined8 *)FUN_1405bece0(local_128,param_2);\r\n  *(undefined8 *)(param_1 + 0x80) = *puVar8;\r\n  *(undefined4 *)(param_1 + 0x88) = *(undefined4 *)(puVar8 + 1);\r\n  puVar8 = (undefined8 *)FUN_1405bed20(local_128,param_2);\r\n  *(undefined8 *)(param_1 + 0x90) = *puVar8;\r\n  *(undefined4 *)(param_1 + 0x98) = *(undefined4 *)(puVar8 + 1);\r\n  return;\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  "obs980_gate0": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nbool FUN_140600210(longlong param_1)\r\n\r\n{\r\n  return 0 < *(int *)(param_1 + 0x40);\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nbool FUN_140600210(longlong param_1)\r\n\r\n{\r\n  return 0 < *(int *)(param_1 + 0x40);\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  "obs980_gate1": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "From 143f18b20 [DATA]\nFrom 1405ff58a in FUN_1405ff520 [UNCONDITIONAL_CALL]"
+        }
+      ],
+      "structuredContent": {
+        "result": "From 143f18b20 [DATA]\nFrom 1405ff58a in FUN_1405ff520 [UNCONDITIONAL_CALL]"
+      },
+      "isError": false
+    }
+  },
+  "obs980_gate2": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "From 14040a06c in FUN_140409fa0 [UNCONDITIONAL_CALL]"
+        }
+      ],
+      "structuredContent": {
+        "result": "From 14040a06c in FUN_140409fa0 [UNCONDITIONAL_CALL]"
+      },
+      "isError": false
+    }
+  },
+  "obs980_vtxrefs": {
+    "content": [
+      {
+        "type": "text",
+        "text": "From 1405fef1c in FUN_1405fef00 [DATA]\nFrom 1405fef23 in FUN_1405fef00 [DATA]"
+      }
+    ],
+    "structuredContent": {
+      "result": "From 1405fef1c in FUN_1405fef00 [DATA]\nFrom 1405fef23 in FUN_1405fef00 [DATA]"
+    },
+    "isError": false
+  },
+  "obs980_refs0": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "From 14087d47b in D2_Entity_SetTransform [DATA]\nFrom 140573ee6 in FUN_140573ea0 [DATA]\nFrom 1405741b0 in FUN_140574150 [DATA]\nFrom 140857d1a [DATA]\nFrom 140837eb7 [DATA]\nFrom 1408577a8 [DATA]\nFrom 1406a7734 in FUN_1406a76c0 [DATA]\nFrom 14071692d in FUN_140716910 [DATA]\nFrom 14040e1c4 [DATA]\nFrom 14073ce71 [DATA]\nFrom 140803bb3 [DATA]\nFrom 1408721aa in FUN_140872080 [DATA]\nFrom 140822478 in FUN_1408223e0 [DATA]\nFrom 140400aad in FUN_1404009d0 [DATA]\nFrom 1408e0b10 [DATA]\nFrom 140838930 [DATA]\nFrom 1405ff85a in FUN_1405ff810 [DATA]\nFrom 140764c09 [DATA]\nFrom 140741f4c in FUN_140741ed0 [DATA]\nFrom 14040a028 in FUN_140409fa0 [DATA]\nFrom 1406aa676 in FUN_1406aa650 [DATA]"
+        }
+      ],
+      "structuredContent": {
+        "result": "From 14087d47b in D2_Entity_SetTransform [DATA]\nFrom 140573ee6 in FUN_140573ea0 [DATA]\nFrom 1405741b0 in FUN_140574150 [DATA]\nFrom 140857d1a [DATA]\nFrom 140837eb7 [DATA]\nFrom 1408577a8 [DATA]\nFrom 1406a7734 in FUN_1406a76c0 [DATA]\nFrom 14071692d in FUN_140716910 [DATA]\nFrom 14040e1c4 [DATA]\nFrom 14073ce71 [DATA]\nFrom 140803bb3 [DATA]\nFrom 1408721aa in FUN_140872080 [DATA]\nFrom 140822478 in FUN_1408223e0 [DATA]\nFrom 140400aad in FUN_1404009d0 [DATA]\nFrom 1408e0b10 [DATA]\nFrom 140838930 [DATA]\nFrom 1405ff85a in FUN_1405ff810 [DATA]\nFrom 140764c09 [DATA]\nFrom 140741f4c in FUN_140741ed0 [DATA]\nFrom 14040a028 in FUN_140409fa0 [DATA]\nFrom 1406aa676 in FUN_1406aa650 [DATA]"
+      },
+      "isError": false
+    }
+  },
+  "obs980_refs1": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "\r\nundefined4 FUN_1405ff380(void)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1407e7380();\r\n  return *(undefined4 *)(*(longlong *)(lVar1 + 0x2f8) + 0xc);\r\n}\r\n\r\n"
+        }
+      ],
+      "structuredContent": {
+        "result": "\r\nundefined4 FUN_1405ff380(void)\r\n\r\n{\r\n  longlong lVar1;\r\n  \r\n  lVar1 = FUN_1407e7380();\r\n  return *(undefined4 *)(*(longlong *)(lVar1 + 0x2f8) + 0xc);\r\n}\r\n\r\n"
+      },
+      "isError": false
+    }
+  },
+  "obs981_transform": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\n/* [confirmed-runtime] RVA 0x87d200\r\n   Native actor transform setter; separate root and child-frame update responsibilities.\r\n   Evidence: src/engine_bridge.cpp\r\n   Names are analyst-assigned semantic labels, not recovered official symbols. */\r\n\r\nvoid D2_Entity_SetTransform(longlong param_1,float *param_2,float *param_3,char param_4,int param_5)\r\n\r\n{\r\n  float *pfVar1;\r\n  char cVar2;\r\n  longlong *plVar3;\r\n  longlong lVar4;\r\n  float *pfVar5;\r\n  undefined8 uVar6;\r\n  longlong *plVar7;\r\n  int iVar8;\r\n  longlong lVar9;\r\n  float *pfVar10;\r\n  float fVar11;\r\n  uint uVar12;\r\n  float fVar13;\r\n  float fVar14;\r\n  float fVar15;\r\n  float fVar16;\r\n  float fVar17;\r\n  float fVar18;\r\n  float fVar19;\r\n  float fVar20;\r\n  float fVar21;\r\n  float fVar22;\r\n  float fVar23;\r\n  undefined8 in_stack_fffffffffffffe38;\r\n  undefined4 uVar24;\r\n  undefined8 local_1b8;\r\n  float local_1b0;\r\n  float fStack_1ac;\r\n  float local_1a8;\r\n  float fStack_1a4;\r\n  float local_1a0;\r\n  float local_19c;\r\n  float local_198;\r\n  float local_190;\r\n  float local_18c;\r\n  float local_188;\r\n  float local_184;\r\n  float local_180;\r\n  float local_17c;\r\n  float local_178;\r\n  float local_174;\r\n  float local_170;\r\n  float local_168;\r\n  float local_164;\r\n  float local_160;\r\n  float local_15c;\r\n  float local_158;\r\n  float local_154;\r\n  float local_150;\r\n  float local_14c;\r\n  float local_148;\r\n  undefined8 local_140;\r\n  float local_138;\r\n  longlong local_130;\r\n  undefined4 local_128;\r\n  ulonglong local_120;\r\n  longlong *local_118;\r\n  uint local_110;\r\n  uint uStack_10c;\r\n  longlong local_108 [6];\r\n  undefined8 local_d8;\r\n  undefined1 local_d0 [184];\r\n  \r\n                    /* \r\n                       \r\n                       2026-10-09 D2COOP 8007 presentation A/B: existing owned-avatar native\r\n                       transform dispatch now evaluated each command-engine frame with receiver QPC\r\n                       and 80ms buffered XYZ/quaternion interpolation. Raw packet stepping was 18-22\r\n                       movement updates/sec; native/render transform updates become 153-547/sec at\r\n                       engine callback cadence in six actual-input cases. This is transform sampling\r\n                       cadence, not display refresh. Local gameplay authority unchanged; teleports\r\n                       >3m, >250ms outages and scope replacement reset the buffer. Source pose\r\n                       transport unchanged. Internet jitter and overlap collisions unverified. */\r\n  local_d8 = 0xfffffffffffffffe;\r\n  if (param_5 < 8) {\r\n    fVar16 = *(float *)(param_1 + 0x308) - param_2[2];\r\n    fVar11 = *(float *)(param_1 + 0x304) - param_2[1];\r\n    fVar14 = *(float *)(param_1 + 0x300) - *param_2;\r\n    if (400.0 < fVar14 * fVar14 + fVar11 * fVar11 + fVar16 * fVar16) {\r\n      plVar3 = (longlong *)(**(code **)(*D2_GameSingletonPtr + 0x48))();\r\n      local_120 = (**(code **)(*plVar3 + 0x58))(plVar3);\r\n      local_140 = *(longlong **)(param_1 + 0xf0);\r\n      if (local_140 != (longlong *)0x0) {\r\n        cVar2 = FUN_140383390(local_120 + 600,local_140);\r\n        if (cVar2 != '\\0') {\r\n          FUN_1402b2590(local_120,local_140);\r\n        }\r\n        (**(code **)(*local_140 + 0x28))(local_140,1);\r\n      }\r\n    }\r\n    lVar4 = FUN_140877720(param_1,&DAT_1439e2a00,0);\r\n    if (lVar4 == 0) {\r\n      local_168 = *param_3;\r\n      local_164 = param_3[1];\r\n      local_160 = param_3[2];\r\n      local_15c = param_3[3];\r\n      local_158 = param_3[4];\r\n      local_154 = param_3[5];\r\n      local_150 = param_3[6];\r\n      local_14c = param_3[7];\r\n      local_148 = param_3[8];\r\n      pfVar5 = &local_168;\r\n    }\r\n    else {\r\n      uVar12 = FUN_1401103c0(param_3);\r\n      local_130 = (ulonglong)uVar12 << 0x20;\r\n      local_128 = 0;\r\n      pfVar5 = (float *)FUN_14010d490(&local_130);\r\n    }\r\n    local_190 = *pfVar5;\r\n    local_18c = pfVar5[1];\r\n    local_188 = pfVar5[2];\r\n    local_184 = pfVar5[3];\r\n    local_180 = pfVar5[4];\r\n    local_17c = pfVar5[5];\r\n    local_178 = pfVar5[6];\r\n    local_174 = pfVar5[7];\r\n    local_170 = pfVar5[8];\r\n    if ((*(uint *)(D2_GameSingletonPtr + 0x6820e) & 0xffffff) == 0) {\r\n      iVar8 = -1;\r\n    }\r\n    else {\r\n      lVar4 = FUN_1408a8640(D2_GameSingletonPtr,param_2);\r\n      iVar8 = *(int *)(lVar4 + 0x2e0);\r\n    }\r\n    if ((iVar8 == -1) || (iVar8 == *(int *)(param_1 + 0x2e0))) {\r\n      local_1b0 = 6.018531e-36;\r\n      local_1b8 = &local_1a8;\r\n      fStack_1ac = 8.07148e-43;\r\n      FUN_140877b50(param_1,&DAT_1439bfc30,&local_1b8,0);\r\n      pfVar5 = local_1b8 + (ulonglong)((uint)local_1b0 & 0xffffff) * 2;\r\n      pfVar1 = local_1b8;\r\n      for (pfVar10 = local_1b8; local_1b8 = pfVar1, pfVar10 != pfVar5; pfVar10 = pfVar10 + 2) {\r\n        FUN_140600220(*(undefined8 *)pfVar10);\r\n        pfVar1 = local_1b8;\r\n      }\r\n      if ((((uint)fStack_1ac & 0x40) == 0) && (pfVar1 != (float *)0x0)) {\r\n        plVar3 = (longlong *)FUN_1401548e0();\r\n        in_stack_fffffffffffffe38 = 0;\r\n        (**(code **)(*plVar3 + 0x10))\r\n                  (plVar3,\r\n                   \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                   ,0x1ec,pfVar1,0x10);\r\n      }\r\n    }\r\n    else {\r\n      FUN_140875fc0(param_1);\r\n    }\r\n    uVar24 = *(undefined4 *)(param_1 + 0xa8);\r\n    uVar6 = FUN_140810240();\r\n    FUN_1408103f0(uVar6,0xc3,uVar24);\r\n    fVar11 = *(float *)(param_1 + 0x30c);\r\n    fVar14 = *(float *)(param_1 + 0x310);\r\n    fVar16 = *(float *)(param_1 + 0x314);\r\n    fVar18 = *(float *)(param_1 + 0x318);\r\n    fVar19 = *(float *)(param_1 + 0x31c);\r\n    fVar20 = *(float *)(param_1 + 800);\r\n    fVar21 = *(float *)(param_1 + 0x324);\r\n    fVar22 = *(float *)(param_1 + 0x328);\r\n    fVar23 = *(float *)(param_1 + 0x32c);\r\n    local_110 = 0x5000000;\r\n    local_118 = local_108;\r\n    uStack_10c = 0x6ff;\r\n    lVar4 = FUN_140877720(param_1,&DAT_1439c00b0,0);\r\n    lVar9 = 0;\r\n    local_120 = 0;\r\n    if ((((lVar4 != 0) && (7 < ((byte)*(undefined4 *)(lVar4 + 0x1c) & 0xc))) &&\r\n        (uVar12 = *(uint *)(lVar4 + 0x28) & 0xffffff, uVar12 != 0)) &&\r\n       ((*(int *)(lVar4 + 0x3c) != 0 &&\r\n        (local_140 = (longlong *)(longlong)(int)uVar12, local_140 != (longlong *)0x0)))) {\r\n      do {\r\n        if ((*(byte *)(lVar9 + 0xfc + *(longlong *)(lVar4 + 0x20)) & 1) == 0) {\r\n          local_130 = FUN_1406dc560(*(undefined4 *)(lVar9 + 0x90 + *(longlong *)(lVar4 + 0x20)));\r\n          FUN_1408918f0(&local_118,&local_130);\r\n        }\r\n        lVar9 = lVar9 + 0x100;\r\n        local_140 = (longlong *)((longlong)local_140 + -1);\r\n      } while (local_140 != (longlong *)0x0);\r\n      local_140 = (longlong *)0x0;\r\n    }\r\n    FUN_1400af430(&local_118,param_1 + 0xb0);\r\n    local_1b8._0_4_ = DAT_14228a780;\r\n    local_1b8._0_4_ = DAT_14228a780;\r\n    local_1b8._4_4_ = DAT_14228a784;\r\n    local_1b0 = DAT_14228a788;\r\n    fStack_1ac = DAT_14228a78c;\r\n    local_1a8 = DAT_14228a790;\r\n    fStack_1a4 = DAT_14228a794;\r\n    local_1a0 = DAT_14228a798;\r\n    local_19c = DAT_14228a79c;\r\n    local_198 = DAT_14228a7a0;\r\n    if ((local_110 & 0xffffff) != 0) {\r\n      local_168 = fVar11;\r\n      local_164 = fVar14;\r\n      local_160 = fVar16;\r\n      local_15c = fVar18;\r\n      local_158 = fVar19;\r\n      local_154 = fVar20;\r\n      local_150 = fVar21;\r\n      local_14c = fVar22;\r\n      local_148 = fVar23;\r\n      FUN_14010ee70(&local_168);\r\n      plVar3 = local_118 + (local_110 & 0xffffff);\r\n      local_1b0 = local_160;\r\n      fStack_1ac = local_15c;\r\n      local_1a8 = local_158;\r\n      fStack_1a4 = local_154;\r\n      local_1a0 = local_150;\r\n      local_19c = local_14c;\r\n      local_198 = local_148;\r\n      local_1b8._0_4_ = local_168;\r\n      fVar11 = local_168;\r\n      fVar14 = local_164;\r\n      fVar16 = local_160;\r\n      fVar18 = local_15c;\r\n      fVar19 = local_158;\r\n      fVar20 = local_154;\r\n      fVar21 = local_150;\r\n      fVar22 = local_14c;\r\n      fVar23 = local_148;\r\n      local_1b8._4_4_ = local_164;\r\n      for (plVar7 = local_118; uVar24 = (undefined4)((ulonglong)in_stack_fffffffffffffe38 >> 0x20),\r\n          plVar7 != plVar3; plVar7 = plVar7 + 1) {\r\n        local_130 = *plVar7;\r\n        if (local_130 != 0) {\r\n          fVar17 = *(float *)(local_130 + 0x308) - *(float *)(param_1 + 0x308);\r\n          fVar15 = *(float *)(local_130 + 0x304) - *(float *)(param_1 + 0x304);\r\n          fVar13 = *(float *)(local_130 + 0x300) - *(float *)(param_1 + 0x300);\r\n          fVar16 = fVar16 * fVar13 + fVar20 * fVar15 + fVar23 * fVar17;\r\n          fVar14 = fVar14 * fVar13 + fVar19 * fVar15 + fVar22 * fVar17;\r\n          fVar11 = fVar11 * fVar13 + fVar18 * fVar15 + fVar21 * fVar17;\r\n          FUN_14000dce0(&local_1b8,&local_168,local_130 + 0x30c);\r\n          local_138 = local_188 * fVar11 + local_17c * fVar14 + local_170 * fVar16 + param_2[2];\r\n          local_140 = (longlong *)\r\n                      CONCAT44(local_18c * fVar11 + local_180 * fVar14 + local_174 * fVar16 +\r\n                               param_2[1],\r\n                               local_190 * fVar11 + local_184 * fVar14 + local_178 * fVar16 +\r\n                               *param_2);\r\n          FUN_14000dce0(&local_190,local_d0,&local_168);\r\n          in_stack_fffffffffffffe38 = CONCAT44(uVar24,param_5 + 1);\r\n          D2_Entity_SetTransform(local_130,&local_140,local_d0,param_4,in_stack_fffffffffffffe38);\r\n          fVar18 = fStack_1ac;\r\n          fVar19 = local_1a8;\r\n          fVar20 = fStack_1a4;\r\n          fVar16 = local_1b0;\r\n          fVar14 = local_1b8._4_4_;\r\n          fVar11 = (float)local_1b8;\r\n          fVar21 = local_1a0;\r\n          fVar22 = local_19c;\r\n          fVar23 = local_198;\r\n        }\r\n      }\r\n    }\r\n    lVar4 = 0;\r\n    if ((*(uint *)(param_1 + 0x270) & 0xffffff) != 0) {\r\n      do {\r\n        plVar3 = *(longlong **)(lVar4 + *(longlong *)(param_1 + 0x268));\r\n        if ((plVar3 != (longlong *)0x0) &&\r\n           (7 < ((byte)*(undefined4 *)((longlong)plVar3 + 0x1c) & 0xc))) {\r\n          (**(code **)(*plVar3 + 0xb0))(plVar3,param_2,&local_190,param_4);\r\n        }\r\n        uVar12 = (int)local_120 + 1;\r\n        local_120 = (ulonglong)uVar12;\r\n        lVar4 = lVar4 + 8;\r\n      } while ((int)uVar12 < (int)(*(uint *)(param_1 + 0x270) & 0xffffff));\r\n    }\r\n    FUN_14000f2c0(&local_190);\r\n    *(float *)(param_1 + 0x30c) = local_190;\r\n    *(float *)(param_1 + 0x310) = local_18c;\r\n    *(float *)(param_1 + 0x314) = local_188;\r\n    *(float *)(param_1 + 0x318) = local_184;\r\n    *(float *)(param_1 + 0x31c) = local_180;\r\n    *(float *)(param_1 + 800) = local_17c;\r\n    *(float *)(param_1 + 0x324) = local_178;\r\n    *(float *)(param_1 + 0x328) = local_174;\r\n    *(float *)(param_1 + 0x32c) = local_170;\r\n    *(float *)(param_1 + 0x300) = *param_2;\r\n    *(float *)(param_1 + 0x304) = param_2[1];\r\n    *(float *)(param_1 + 0x308) = param_2[2];\r\n    if (param_4 != '\\0') {\r\n      *(undefined4 *)(param_1 + 0x33c) = DAT_1431af668;\r\n      *(undefined4 *)(param_1 + 0x340) = DAT_1431af66c;\r\n      *(undefined4 *)(param_1 + 0x344) = DAT_1431af670;\r\n      *(undefined4 *)(param_1 + 0x348) = DAT_1431af668;\r\n      *(undefined4 *)(param_1 + 0x34c) = DAT_1431af66c;\r\n      *(undefined4 *)(param_1 + 0x350) = DAT_1431af670;\r\n    }\r\n    plVar3 = *(longlong **)(param_1 + 0xf0);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      if (((*(byte *)(param_1 + 0xd0) & 1) == 0) && ((*(byte *)(param_1 + 0xd0) & 2) == 0)) {\r\n        *(float *)(plVar3 + 0x30c) = *param_2;\r\n        *(float *)((longlong)plVar3 + 0x1864) = param_2[1];\r\n        *(float *)(plVar3 + 0x30d) = param_2[2];\r\n        *(float *)((longlong)plVar3 + 0x186c) = local_190;\r\n        *(float *)(plVar3 + 0x30e) = local_18c;\r\n        *(float *)((longlong)plVar3 + 0x1874) = local_188;\r\n        *(float *)(plVar3 + 0x30f) = local_184;\r\n        *(float *)((longlong)plVar3 + 0x187c) = local_180;\r\n        *(float *)(plVar3 + 0x310) = local_17c;\r\n        *(float *)((longlong)plVar3 + 0x1884) = local_178;\r\n        *(float *)(plVar3 + 0x311) = local_174;\r\n        *(float *)((longlong)plVar3 + 0x188c) = local_170;\r\n        (**(code **)(*plVar3 + 0x28))(plVar3,1);\r\n      }\r\n      else {\r\n        (**(code **)(*plVar3 + 0x38))();\r\n      }\r\n    }\r\n    plVar3 = local_118;\r\n    if (((uStack_10c & 0x40) == 0) && (local_118 != (longlong *)0x0)) {\r\n      plVar7 = (longlong *)FUN_1401548e0();\r\n      (**(code **)(*plVar7 + 0x10))\r\n                (plVar7,\r\n                 \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                 ,0x1ec,plVar3,0x10);\r\n    }\r\n    return;\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  FUN_140166830(&DAT_141c88510);\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\n/* [confirmed-runtime] RVA 0x87d200\r\n   Native actor transform setter; separate root and child-frame update responsibilities.\r\n   Evidence: src/engine_bridge.cpp\r\n   Names are analyst-assigned semantic labels, not recovered official symbols. */\r\n\r\nvoid D2_Entity_SetTransform(longlong param_1,float *param_2,float *param_3,char param_4,int param_5)\r\n\r\n{\r\n  float *pfVar1;\r\n  char cVar2;\r\n  longlong *plVar3;\r\n  longlong lVar4;\r\n  float *pfVar5;\r\n  undefined8 uVar6;\r\n  longlong *plVar7;\r\n  int iVar8;\r\n  longlong lVar9;\r\n  float *pfVar10;\r\n  float fVar11;\r\n  uint uVar12;\r\n  float fVar13;\r\n  float fVar14;\r\n  float fVar15;\r\n  float fVar16;\r\n  float fVar17;\r\n  float fVar18;\r\n  float fVar19;\r\n  float fVar20;\r\n  float fVar21;\r\n  float fVar22;\r\n  float fVar23;\r\n  undefined8 in_stack_fffffffffffffe38;\r\n  undefined4 uVar24;\r\n  undefined8 local_1b8;\r\n  float local_1b0;\r\n  float fStack_1ac;\r\n  float local_1a8;\r\n  float fStack_1a4;\r\n  float local_1a0;\r\n  float local_19c;\r\n  float local_198;\r\n  float local_190;\r\n  float local_18c;\r\n  float local_188;\r\n  float local_184;\r\n  float local_180;\r\n  float local_17c;\r\n  float local_178;\r\n  float local_174;\r\n  float local_170;\r\n  float local_168;\r\n  float local_164;\r\n  float local_160;\r\n  float local_15c;\r\n  float local_158;\r\n  float local_154;\r\n  float local_150;\r\n  float local_14c;\r\n  float local_148;\r\n  undefined8 local_140;\r\n  float local_138;\r\n  longlong local_130;\r\n  undefined4 local_128;\r\n  ulonglong local_120;\r\n  longlong *local_118;\r\n  uint local_110;\r\n  uint uStack_10c;\r\n  longlong local_108 [6];\r\n  undefined8 local_d8;\r\n  undefined1 local_d0 [184];\r\n  \r\n                    /* \r\n                       \r\n                       2026-10-09 D2COOP 8007 presentation A/B: existing owned-avatar native\r\n                       transform dispatch now evaluated each command-engine frame with receiver QPC\r\n                       and 80ms buffered XYZ/quaternion interpolation. Raw packet stepping was 18-22\r\n                       movement updates/sec; native/render transform updates become 153-547/sec at\r\n                       engine callback cadence in six actual-input cases. This is transform sampling\r\n                       cadence, not display refresh. Local gameplay authority unchanged; teleports\r\n                       >3m, >250ms outages and scope replacement reset the buffer. Source pose\r\n                       transport unchanged. Internet jitter and overlap collisions unverified. */\r\n  local_d8 = 0xfffffffffffffffe;\r\n  if (param_5 < 8) {\r\n    fVar16 = *(float *)(param_1 + 0x308) - param_2[2];\r\n    fVar11 = *(float *)(param_1 + 0x304) - param_2[1];\r\n    fVar14 = *(float *)(param_1 + 0x300) - *param_2;\r\n    if (400.0 < fVar14 * fVar14 + fVar11 * fVar11 + fVar16 * fVar16) {\r\n      plVar3 = (longlong *)(**(code **)(*D2_GameSingletonPtr + 0x48))();\r\n      local_120 = (**(code **)(*plVar3 + 0x58))(plVar3);\r\n      local_140 = *(longlong **)(param_1 + 0xf0);\r\n      if (local_140 != (longlong *)0x0) {\r\n        cVar2 = FUN_140383390(local_120 + 600,local_140);\r\n        if (cVar2 != '\\0') {\r\n          FUN_1402b2590(local_120,local_140);\r\n        }\r\n        (**(code **)(*local_140 + 0x28))(local_140,1);\r\n      }\r\n    }\r\n    lVar4 = FUN_140877720(param_1,&DAT_1439e2a00,0);\r\n    if (lVar4 == 0) {\r\n      local_168 = *param_3;\r\n      local_164 = param_3[1];\r\n      local_160 = param_3[2];\r\n      local_15c = param_3[3];\r\n      local_158 = param_3[4];\r\n      local_154 = param_3[5];\r\n      local_150 = param_3[6];\r\n      local_14c = param_3[7];\r\n      local_148 = param_3[8];\r\n      pfVar5 = &local_168;\r\n    }\r\n    else {\r\n      uVar12 = FUN_1401103c0(param_3);\r\n      local_130 = (ulonglong)uVar12 << 0x20;\r\n      local_128 = 0;\r\n      pfVar5 = (float *)FUN_14010d490(&local_130);\r\n    }\r\n    local_190 = *pfVar5;\r\n    local_18c = pfVar5[1];\r\n    local_188 = pfVar5[2];\r\n    local_184 = pfVar5[3];\r\n    local_180 = pfVar5[4];\r\n    local_17c = pfVar5[5];\r\n    local_178 = pfVar5[6];\r\n    local_174 = pfVar5[7];\r\n    local_170 = pfVar5[8];\r\n    if ((*(uint *)(D2_GameSingletonPtr + 0x6820e) & 0xffffff) == 0) {\r\n      iVar8 = -1;\r\n    }\r\n    else {\r\n      lVar4 = FUN_1408a8640(D2_GameSingletonPtr,param_2);\r\n      iVar8 = *(int *)(lVar4 + 0x2e0);\r\n    }\r\n    if ((iVar8 == -1) || (iVar8 == *(int *)(param_1 + 0x2e0))) {\r\n      local_1b0 = 6.018531e-36;\r\n      local_1b8 = &local_1a8;\r\n      fStack_1ac = 8.07148e-43;\r\n      FUN_140877b50(param_1,&DAT_1439bfc30,&local_1b8,0);\r\n      pfVar5 = local_1b8 + (ulonglong)((uint)local_1b0 & 0xffffff) * 2;\r\n      pfVar1 = local_1b8;\r\n      for (pfVar10 = local_1b8; local_1b8 = pfVar1, pfVar10 != pfVar5; pfVar10 = pfVar10 + 2) {\r\n        FUN_140600220(*(undefined8 *)pfVar10);\r\n        pfVar1 = local_1b8;\r\n      }\r\n      if ((((uint)fStack_1ac & 0x40) == 0) && (pfVar1 != (float *)0x0)) {\r\n        plVar3 = (longlong *)FUN_1401548e0();\r\n        in_stack_fffffffffffffe38 = 0;\r\n        (**(code **)(*plVar3 + 0x10))\r\n                  (plVar3,\r\n                   \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                   ,0x1ec,pfVar1,0x10);\r\n      }\r\n    }\r\n    else {\r\n      FUN_140875fc0(param_1);\r\n    }\r\n    uVar24 = *(undefined4 *)(param_1 + 0xa8);\r\n    uVar6 = FUN_140810240();\r\n    FUN_1408103f0(uVar6,0xc3,uVar24);\r\n    fVar11 = *(float *)(param_1 + 0x30c);\r\n    fVar14 = *(float *)(param_1 + 0x310);\r\n    fVar16 = *(float *)(param_1 + 0x314);\r\n    fVar18 = *(float *)(param_1 + 0x318);\r\n    fVar19 = *(float *)(param_1 + 0x31c);\r\n    fVar20 = *(float *)(param_1 + 800);\r\n    fVar21 = *(float *)(param_1 + 0x324);\r\n    fVar22 = *(float *)(param_1 + 0x328);\r\n    fVar23 = *(float *)(param_1 + 0x32c);\r\n    local_110 = 0x5000000;\r\n    local_118 = local_108;\r\n    uStack_10c = 0x6ff;\r\n    lVar4 = FUN_140877720(param_1,&DAT_1439c00b0,0);\r\n    lVar9 = 0;\r\n    local_120 = 0;\r\n    if ((((lVar4 != 0) && (7 < ((byte)*(undefined4 *)(lVar4 + 0x1c) & 0xc))) &&\r\n        (uVar12 = *(uint *)(lVar4 + 0x28) & 0xffffff, uVar12 != 0)) &&\r\n       ((*(int *)(lVar4 + 0x3c) != 0 &&\r\n        (local_140 = (longlong *)(longlong)(int)uVar12, local_140 != (longlong *)0x0)))) {\r\n      do {\r\n        if ((*(byte *)(lVar9 + 0xfc + *(longlong *)(lVar4 + 0x20)) & 1) == 0) {\r\n          local_130 = FUN_1406dc560(*(undefined4 *)(lVar9 + 0x90 + *(longlong *)(lVar4 + 0x20)));\r\n          FUN_1408918f0(&local_118,&local_130);\r\n        }\r\n        lVar9 = lVar9 + 0x100;\r\n        local_140 = (longlong *)((longlong)local_140 + -1);\r\n      } while (local_140 != (longlong *)0x0);\r\n      local_140 = (longlong *)0x0;\r\n    }\r\n    FUN_1400af430(&local_118,param_1 + 0xb0);\r\n    local_1b8._0_4_ = DAT_14228a780;\r\n    local_1b8._0_4_ = DAT_14228a780;\r\n    local_1b8._4_4_ = DAT_14228a784;\r\n    local_1b0 = DAT_14228a788;\r\n    fStack_1ac = DAT_14228a78c;\r\n    local_1a8 = DAT_14228a790;\r\n    fStack_1a4 = DAT_14228a794;\r\n    local_1a0 = DAT_14228a798;\r\n    local_19c = DAT_14228a79c;\r\n    local_198 = DAT_14228a7a0;\r\n    if ((local_110 & 0xffffff) != 0) {\r\n      local_168 = fVar11;\r\n      local_164 = fVar14;\r\n      local_160 = fVar16;\r\n      local_15c = fVar18;\r\n      local_158 = fVar19;\r\n      local_154 = fVar20;\r\n      local_150 = fVar21;\r\n      local_14c = fVar22;\r\n      local_148 = fVar23;\r\n      FUN_14010ee70(&local_168);\r\n      plVar3 = local_118 + (local_110 & 0xffffff);\r\n      local_1b0 = local_160;\r\n      fStack_1ac = local_15c;\r\n      local_1a8 = local_158;\r\n      fStack_1a4 = local_154;\r\n      local_1a0 = local_150;\r\n      local_19c = local_14c;\r\n      local_198 = local_148;\r\n      local_1b8._0_4_ = local_168;\r\n      fVar11 = local_168;\r\n      fVar14 = local_164;\r\n      fVar16 = local_160;\r\n      fVar18 = local_15c;\r\n      fVar19 = local_158;\r\n      fVar20 = local_154;\r\n      fVar21 = local_150;\r\n      fVar22 = local_14c;\r\n      fVar23 = local_148;\r\n      local_1b8._4_4_ = local_164;\r\n      for (plVar7 = local_118; uVar24 = (undefined4)((ulonglong)in_stack_fffffffffffffe38 >> 0x20),\r\n          plVar7 != plVar3; plVar7 = plVar7 + 1) {\r\n        local_130 = *plVar7;\r\n        if (local_130 != 0) {\r\n          fVar17 = *(float *)(local_130 + 0x308) - *(float *)(param_1 + 0x308);\r\n          fVar15 = *(float *)(local_130 + 0x304) - *(float *)(param_1 + 0x304);\r\n          fVar13 = *(float *)(local_130 + 0x300) - *(float *)(param_1 + 0x300);\r\n          fVar16 = fVar16 * fVar13 + fVar20 * fVar15 + fVar23 * fVar17;\r\n          fVar14 = fVar14 * fVar13 + fVar19 * fVar15 + fVar22 * fVar17;\r\n          fVar11 = fVar11 * fVar13 + fVar18 * fVar15 + fVar21 * fVar17;\r\n          FUN_14000dce0(&local_1b8,&local_168,local_130 + 0x30c);\r\n          local_138 = local_188 * fVar11 + local_17c * fVar14 + local_170 * fVar16 + param_2[2];\r\n          local_140 = (longlong *)\r\n                      CONCAT44(local_18c * fVar11 + local_180 * fVar14 + local_174 * fVar16 +\r\n                               param_2[1],\r\n                               local_190 * fVar11 + local_184 * fVar14 + local_178 * fVar16 +\r\n                               *param_2);\r\n          FUN_14000dce0(&local_190,local_d0,&local_168);\r\n          in_stack_fffffffffffffe38 = CONCAT44(uVar24,param_5 + 1);\r\n          D2_Entity_SetTransform(local_130,&local_140,local_d0,param_4,in_stack_fffffffffffffe38);\r\n          fVar18 = fStack_1ac;\r\n          fVar19 = local_1a8;\r\n          fVar20 = fStack_1a4;\r\n          fVar16 = local_1b0;\r\n          fVar14 = local_1b8._4_4_;\r\n          fVar11 = (float)local_1b8;\r\n          fVar21 = local_1a0;\r\n          fVar22 = local_19c;\r\n          fVar23 = local_198;\r\n        }\r\n      }\r\n    }\r\n    lVar4 = 0;\r\n    if ((*(uint *)(param_1 + 0x270) & 0xffffff) != 0) {\r\n      do {\r\n        plVar3 = *(longlong **)(lVar4 + *(longlong *)(param_1 + 0x268));\r\n        if ((plVar3 != (longlong *)0x0) &&\r\n           (7 < ((byte)*(undefined4 *)((longlong)plVar3 + 0x1c) & 0xc))) {\r\n          (**(code **)(*plVar3 + 0xb0))(plVar3,param_2,&local_190,param_4);\r\n        }\r\n        uVar12 = (int)local_120 + 1;\r\n        local_120 = (ulonglong)uVar12;\r\n        lVar4 = lVar4 + 8;\r\n      } while ((int)uVar12 < (int)(*(uint *)(param_1 + 0x270) & 0xffffff));\r\n    }\r\n    FUN_14000f2c0(&local_190);\r\n    *(float *)(param_1 + 0x30c) = local_190;\r\n    *(float *)(param_1 + 0x310) = local_18c;\r\n    *(float *)(param_1 + 0x314) = local_188;\r\n    *(float *)(param_1 + 0x318) = local_184;\r\n    *(float *)(param_1 + 0x31c) = local_180;\r\n    *(float *)(param_1 + 800) = local_17c;\r\n    *(float *)(param_1 + 0x324) = local_178;\r\n    *(float *)(param_1 + 0x328) = local_174;\r\n    *(float *)(param_1 + 0x32c) = local_170;\r\n    *(float *)(param_1 + 0x300) = *param_2;\r\n    *(float *)(param_1 + 0x304) = param_2[1];\r\n    *(float *)(param_1 + 0x308) = param_2[2];\r\n    if (param_4 != '\\0') {\r\n      *(undefined4 *)(param_1 + 0x33c) = DAT_1431af668;\r\n      *(undefined4 *)(param_1 + 0x340) = DAT_1431af66c;\r\n      *(undefined4 *)(param_1 + 0x344) = DAT_1431af670;\r\n      *(undefined4 *)(param_1 + 0x348) = DAT_1431af668;\r\n      *(undefined4 *)(param_1 + 0x34c) = DAT_1431af66c;\r\n      *(undefined4 *)(param_1 + 0x350) = DAT_1431af670;\r\n    }\r\n    plVar3 = *(longlong **)(param_1 + 0xf0);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      if (((*(byte *)(param_1 + 0xd0) & 1) == 0) && ((*(byte *)(param_1 + 0xd0) & 2) == 0)) {\r\n        *(float *)(plVar3 + 0x30c) = *param_2;\r\n        *(float *)((longlong)plVar3 + 0x1864) = param_2[1];\r\n        *(float *)(plVar3 + 0x30d) = param_2[2];\r\n        *(float *)((longlong)plVar3 + 0x186c) = local_190;\r\n        *(float *)(plVar3 + 0x30e) = local_18c;\r\n        *(float *)((longlong)plVar3 + 0x1874) = local_188;\r\n        *(float *)(plVar3 + 0x30f) = local_184;\r\n        *(float *)((longlong)plVar3 + 0x187c) = local_180;\r\n        *(float *)(plVar3 + 0x310) = local_17c;\r\n        *(float *)((longlong)plVar3 + 0x1884) = local_178;\r\n        *(float *)(plVar3 + 0x311) = local_174;\r\n        *(float *)((longlong)plVar3 + 0x188c) = local_170;\r\n        (**(code **)(*plVar3 + 0x28))(plVar3,1);\r\n      }\r\n      else {\r\n        (**(code **)(*plVar3 + 0x38))();\r\n      }\r\n    }\r\n    plVar3 = local_118;\r\n    if (((uStack_10c & 0x40) == 0) && (local_118 != (longlong *)0x0)) {\r\n      plVar7 = (longlong *)FUN_1401548e0();\r\n      (**(code **)(*plVar7 + 0x10))\r\n                (plVar7,\r\n                 \"c:\\\\users\\\\zmiarchiving\\\\desktop\\\\dh2\\\\dishonored2\\\\voidengine\\\\core\\\\idlib\\\\containers/List.h\"\r\n                 ,0x1ec,plVar3,0x10);\r\n    }\r\n    return;\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  FUN_140166830(&DAT_141c88510);\r\n}\r\n\r\n"
+    },
+    "isError": false
+  },
+  "obs981_update": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nvoid FUN_140600220(longlong param_1)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  longlong lVar2;\r\n  longlong *plVar3;\r\n  \r\n  if (0 < *(int *)(param_1 + 0x40)) {\r\n    uVar1 = *(undefined4 *)\r\n             (*(longlong *)\r\n               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +\r\n               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);\r\n    lVar2 = FUN_140810240();\r\n    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1bf,8,uVar1);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      *plVar3 = param_1;\r\n    }\r\n    uVar1 = *(undefined4 *)\r\n             (*(longlong *)\r\n               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +\r\n               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);\r\n    lVar2 = FUN_140810240();\r\n    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1be,8,uVar1);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      *plVar3 = param_1;\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nvoid FUN_140600220(longlong param_1)\r\n\r\n{\r\n  undefined4 uVar1;\r\n  longlong lVar2;\r\n  longlong *plVar3;\r\n  \r\n  if (0 < *(int *)(param_1 + 0x40)) {\r\n    uVar1 = *(undefined4 *)\r\n             (*(longlong *)\r\n               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +\r\n               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);\r\n    lVar2 = FUN_140810240();\r\n    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1bf,8,uVar1);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      *plVar3 = param_1;\r\n    }\r\n    uVar1 = *(undefined4 *)\r\n             (*(longlong *)\r\n               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +\r\n               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);\r\n    lVar2 = FUN_140810240();\r\n    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1be,8,uVar1);\r\n    if (plVar3 != (longlong *)0x0) {\r\n      *plVar3 = param_1;\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  }
+}
+
+````
+
+## Unescaped text fields for reading
+
+### text
+
+````text
+
+void FUN_140409fa0(longlong param_1,longlong param_2,longlong param_3,ulonglong param_4)
+
+{
+  char cVar1;
+  uint uVar2;
+  longlong lVar3;
+  undefined8 uVar4;
+  undefined8 uVar5;
+  longlong *plVar6;
+  undefined4 *puVar7;
+  undefined8 *puVar8;
+  undefined1 local_128 [16];
+  undefined8 local_118;
+  undefined1 local_110 [40];
+  undefined4 *local_e8;
+  uint local_e0;
+  uint local_dc;
+  undefined4 local_d8 [48];
+  
+  local_118 = 0xfffffffffffffffe;
+  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xffffff81;
+  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 1;
+  uVar2 = FUN_140409e50(param_3);
+  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & 0xfffffc7f;
+  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | (uVar2 & 7) << 7;
+  *(undefined4 *)(param_1 + 0xc) = *(undefined4 *)(param_3 + 0xa8);
+  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_3 + 0x300);
+  *(undefined4 *)(param_1 + 0x14) = *(undefined4 *)(param_3 + 0x304);
+  *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_3 + 0x308);
+  if ((param_4 & 2) != 0) {
+    lVar3 = FUN_140877720(param_3,&DAT_1439bfc30,1);
+    if (lVar3 == 0) {
+      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);
+      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830(0x74,uVar5,uVar4);
+    }
+    cVar1 = FUN_140600210(lVar3);
+    if (cVar1 != '\0') {
+      local_e0 = 0x5000000;
+      local_e8 = local_d8;
+      local_dc = 0x1040;
+      FUN_1405ff520(lVar3,&local_e8);
+      puVar7 = local_e8;
+      if ((local_e0 & 0xffffff) != 0) {
+        *(undefined4 *)(param_1 + 0x1c) = *local_e8;
+        *(undefined4 *)(param_1 + 0x20) = local_e8[1];
+        *(undefined4 *)(param_1 + 0x24) = local_e8[2];
+        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 2;
+      }
+      if (((local_dc & 0x40) == 0) && (local_e8 != (undefined4 *)0x0)) {
+        plVar6 = (longlong *)FUN_1401548e0();
+        (**(code **)(*plVar6 + 0x10))
+                  (plVar6,
+                   "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+                   ,0x1ec,puVar7,0x10);
+      }
+    }
+  }
+  if ((param_4 & 4) != 0) {
+    lVar3 = FUN_140877720(param_3,&DAT_1439caf30,2);
+    if (lVar3 != 0) {
+      cVar1 = FUN_140409290(lVar3,0);
+      if (cVar1 != '\0') {
+        puVar7 = (undefined4 *)FUN_140409280(lVar3,0);
+        *(undefined4 *)(param_1 + 0x28) = *puVar7;
+        *(undefined4 *)(param_1 + 0x2c) = puVar7[1];
+        *(undefined4 *)(param_1 + 0x30) = puVar7[2];
+        *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 4;
+      }
+    }
+  }
+  lVar3 = 0;
+  if ((param_4 & 0x18) != 0) {
+    lVar3 = FUN_140877720(param_3,&DAT_1439e8010,1);
+    if ((lVar3 == 0) && ((*(uint *)(param_1 + 8) & 0x380) != 0x180)) {
+      uVar4 = D2_InternedName_Resolve(param_3 + 0x20);
+      uVar5 = D2_InternedName_Resolve(param_2 + 0x20);
+                    /* WARNING: Subroutine does not return */
+      FUN_140166830(0x75,uVar5,uVar4);
+    }
+  }
+  if (((param_4 & 8) != 0) && (lVar3 != 0)) {
+    FUN_14053d940(lVar3,0,*(undefined2 *)(lVar3 + 0x2c7c),param_1 + 0x34,local_110);
+    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 8;
+  }
+  if (((param_4 & 0x10) != 0) && (lVar3 != 0)) {
+    FUN_14053dac0(lVar3,0,lVar3 + 0x2c80,param_1 + 0x40,local_110);
+    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x10;
+  }
+  if ((param_4 & 0x20) != 0) {
+    *(undefined4 *)(param_1 + 0x4c) = *(undefined4 *)(param_3 + 0x33c);
+    *(undefined4 *)(param_1 + 0x50) = *(undefined4 *)(param_3 + 0x340);
+    *(undefined4 *)(param_1 + 0x54) = *(undefined4 *)(param_3 + 0x344);
+    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x20;
+  }
+  if ((param_4 & 0x40) != 0) {
+    *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_3 + 0x30c);
+    *(undefined4 *)(param_1 + 0x5c) = *(undefined4 *)(param_3 + 0x310);
+    *(undefined4 *)(param_1 + 0x60) = *(undefined4 *)(param_3 + 0x314);
+    *(undefined4 *)(param_1 + 100) = *(undefined4 *)(param_3 + 0x318);
+    *(undefined4 *)(param_1 + 0x68) = *(undefined4 *)(param_3 + 0x31c);
+    *(undefined4 *)(param_1 + 0x6c) = *(undefined4 *)(param_3 + 800);
+    *(undefined4 *)(param_1 + 0x70) = *(undefined4 *)(param_3 + 0x324);
+    *(undefined4 *)(param_1 + 0x74) = *(undefined4 *)(param_3 + 0x328);
+    *(undefined4 *)(param_1 + 0x78) = *(undefined4 *)(param_3 + 0x32c);
+    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x40;
+  }
+  puVar8 = (undefined8 *)FUN_1405bece0(local_128,param_2);
+  *(undefined8 *)(param_1 + 0x80) = *puVar8;
+  *(undefined4 *)(param_1 + 0x88) = *(undefined4 *)(puVar8 + 1);
+  puVar8 = (undefined8 *)FUN_1405bed20(local_128,param_2);
+  *(undefined8 *)(param_1 + 0x90) = *puVar8;
+  *(undefined4 *)(param_1 + 0x98) = *(undefined4 *)(puVar8 + 1);
+  return;
+}
+
+
+````
+
+### text
+
+````text
+From 14087d47b in D2_Entity_SetTransform [DATA]
+From 140573ee6 in FUN_140573ea0 [DATA]
+From 1405741b0 in FUN_140574150 [DATA]
+From 140857d1a [DATA]
+From 140837eb7 [DATA]
+From 1408577a8 [DATA]
+From 1406a7734 in FUN_1406a76c0 [DATA]
+From 14071692d in FUN_140716910 [DATA]
+From 14040e1c4 [DATA]
+From 14073ce71 [DATA]
+From 140803bb3 [DATA]
+From 1408721aa in FUN_140872080 [DATA]
+From 140822478 in FUN_1408223e0 [DATA]
+From 140400aad in FUN_1404009d0 [DATA]
+From 1408e0b10 [DATA]
+From 140838930 [DATA]
+From 1405ff85a in FUN_1405ff810 [DATA]
+From 140764c09 [DATA]
+From 140741f4c in FUN_140741ed0 [DATA]
+From 14040a028 in FUN_140409fa0 [DATA]
+From 1406aa676 in FUN_1406aa650 [DATA]
+````
+
+### text
+
+````text
+
+undefined4 FUN_1405ff380(void)
+
+{
+  longlong lVar1;
+  
+  lVar1 = FUN_1407e7380();
+  return *(undefined4 *)(*(longlong *)(lVar1 + 0x2f8) + 0xc);
+}
+
+
+````
+
+### text
+
+````text
+
+/* [confirmed-runtime] RVA 0x87d200
+   Native actor transform setter; separate root and child-frame update responsibilities.
+   Evidence: src/engine_bridge.cpp
+   Names are analyst-assigned semantic labels, not recovered official symbols. */
+
+void D2_Entity_SetTransform(longlong param_1,float *param_2,float *param_3,char param_4,int param_5)
+
+{
+  float *pfVar1;
+  char cVar2;
+  longlong *plVar3;
+  longlong lVar4;
+  float *pfVar5;
+  undefined8 uVar6;
+  longlong *plVar7;
+  int iVar8;
+  longlong lVar9;
+  float *pfVar10;
+  float fVar11;
+  uint uVar12;
+  float fVar13;
+  float fVar14;
+  float fVar15;
+  float fVar16;
+  float fVar17;
+  float fVar18;
+  float fVar19;
+  float fVar20;
+  float fVar21;
+  float fVar22;
+  float fVar23;
+  undefined8 in_stack_fffffffffffffe38;
+  undefined4 uVar24;
+  undefined8 local_1b8;
+  float local_1b0;
+  float fStack_1ac;
+  float local_1a8;
+  float fStack_1a4;
+  float local_1a0;
+  float local_19c;
+  float local_198;
+  float local_190;
+  float local_18c;
+  float local_188;
+  float local_184;
+  float local_180;
+  float local_17c;
+  float local_178;
+  float local_174;
+  float local_170;
+  float local_168;
+  float local_164;
+  float local_160;
+  float local_15c;
+  float local_158;
+  float local_154;
+  float local_150;
+  float local_14c;
+  float local_148;
+  undefined8 local_140;
+  float local_138;
+  longlong local_130;
+  undefined4 local_128;
+  ulonglong local_120;
+  longlong *local_118;
+  uint local_110;
+  uint uStack_10c;
+  longlong local_108 [6];
+  undefined8 local_d8;
+  undefined1 local_d0 [184];
+  
+                    /* 
+                       
+                       2026-10-09 D2COOP 8007 presentation A/B: existing owned-avatar native
+                       transform dispatch now evaluated each command-engine frame with receiver QPC
+                       and 80ms buffered XYZ/quaternion interpolation. Raw packet stepping was 18-22
+                       movement updates/sec; native/render transform updates become 153-547/sec at
+                       engine callback cadence in six actual-input cases. This is transform sampling
+                       cadence, not display refresh. Local gameplay authority unchanged; teleports
+                       >3m, >250ms outages and scope replacement reset the buffer. Source pose
+                       transport unchanged. Internet jitter and overlap collisions unverified. */
+  local_d8 = 0xfffffffffffffffe;
+  if (param_5 < 8) {
+    fVar16 = *(float *)(param_1 + 0x308) - param_2[2];
+    fVar11 = *(float *)(param_1 + 0x304) - param_2[1];
+    fVar14 = *(float *)(param_1 + 0x300) - *param_2;
+    if (400.0 < fVar14 * fVar14 + fVar11 * fVar11 + fVar16 * fVar16) {
+      plVar3 = (longlong *)(**(code **)(*D2_GameSingletonPtr + 0x48))();
+      local_120 = (**(code **)(*plVar3 + 0x58))(plVar3);
+      local_140 = *(longlong **)(param_1 + 0xf0);
+      if (local_140 != (longlong *)0x0) {
+        cVar2 = FUN_140383390(local_120 + 600,local_140);
+        if (cVar2 != '\0') {
+          FUN_1402b2590(local_120,local_140);
+        }
+        (**(code **)(*local_140 + 0x28))(local_140,1);
+      }
+    }
+    lVar4 = FUN_140877720(param_1,&DAT_1439e2a00,0);
+    if (lVar4 == 0) {
+      local_168 = *param_3;
+      local_164 = param_3[1];
+      local_160 = param_3[2];
+      local_15c = param_3[3];
+      local_158 = param_3[4];
+      local_154 = param_3[5];
+      local_150 = param_3[6];
+      local_14c = param_3[7];
+      local_148 = param_3[8];
+      pfVar5 = &local_168;
+    }
+    else {
+      uVar12 = FUN_1401103c0(param_3);
+      local_130 = (ulonglong)uVar12 << 0x20;
+      local_128 = 0;
+      pfVar5 = (float *)FUN_14010d490(&local_130);
+    }
+    local_190 = *pfVar5;
+    local_18c = pfVar5[1];
+    local_188 = pfVar5[2];
+    local_184 = pfVar5[3];
+    local_180 = pfVar5[4];
+    local_17c = pfVar5[5];
+    local_178 = pfVar5[6];
+    local_174 = pfVar5[7];
+    local_170 = pfVar5[8];
+    if ((*(uint *)(D2_GameSingletonPtr + 0x6820e) & 0xffffff) == 0) {
+      iVar8 = -1;
+    }
+    else {
+      lVar4 = FUN_1408a8640(D2_GameSingletonPtr,param_2);
+      iVar8 = *(int *)(lVar4 + 0x2e0);
+    }
+    if ((iVar8 == -1) || (iVar8 == *(int *)(param_1 + 0x2e0))) {
+      local_1b0 = 6.018531e-36;
+      local_1b8 = &local_1a8;
+      fStack_1ac = 8.07148e-43;
+      FUN_140877b50(param_1,&DAT_1439bfc30,&local_1b8,0);
+      pfVar5 = local_1b8 + (ulonglong)((uint)local_1b0 & 0xffffff) * 2;
+      pfVar1 = local_1b8;
+      for (pfVar10 = local_1b8; local_1b8 = pfVar1, pfVar10 != pfVar5; pfVar10 = pfVar10 + 2) {
+        FUN_140600220(*(undefined8 *)pfVar10);
+        pfVar1 = local_1b8;
+      }
+      if ((((uint)fStack_1ac & 0x40) == 0) && (pfVar1 != (float *)0x0)) {
+        plVar3 = (longlong *)FUN_1401548e0();
+        in_stack_fffffffffffffe38 = 0;
+        (**(code **)(*plVar3 + 0x10))
+                  (plVar3,
+                   "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+                   ,0x1ec,pfVar1,0x10);
+      }
+    }
+    else {
+      FUN_140875fc0(param_1);
+    }
+    uVar24 = *(undefined4 *)(param_1 + 0xa8);
+    uVar6 = FUN_140810240();
+    FUN_1408103f0(uVar6,0xc3,uVar24);
+    fVar11 = *(float *)(param_1 + 0x30c);
+    fVar14 = *(float *)(param_1 + 0x310);
+    fVar16 = *(float *)(param_1 + 0x314);
+    fVar18 = *(float *)(param_1 + 0x318);
+    fVar19 = *(float *)(param_1 + 0x31c);
+    fVar20 = *(float *)(param_1 + 800);
+    fVar21 = *(float *)(param_1 + 0x324);
+    fVar22 = *(float *)(param_1 + 0x328);
+    fVar23 = *(float *)(param_1 + 0x32c);
+    local_110 = 0x5000000;
+    local_118 = local_108;
+    uStack_10c = 0x6ff;
+    lVar4 = FUN_140877720(param_1,&DAT_1439c00b0,0);
+    lVar9 = 0;
+    local_120 = 0;
+    if ((((lVar4 != 0) && (7 < ((byte)*(undefined4 *)(lVar4 + 0x1c) & 0xc))) &&
+        (uVar12 = *(uint *)(lVar4 + 0x28) & 0xffffff, uVar12 != 0)) &&
+       ((*(int *)(lVar4 + 0x3c) != 0 &&
+        (local_140 = (longlong *)(longlong)(int)uVar12, local_140 != (longlong *)0x0)))) {
+      do {
+        if ((*(byte *)(lVar9 + 0xfc + *(longlong *)(lVar4 + 0x20)) & 1) == 0) {
+          local_130 = FUN_1406dc560(*(undefined4 *)(lVar9 + 0x90 + *(longlong *)(lVar4 + 0x20)));
+          FUN_1408918f0(&local_118,&local_130);
+        }
+        lVar9 = lVar9 + 0x100;
+        local_140 = (longlong *)((longlong)local_140 + -1);
+      } while (local_140 != (longlong *)0x0);
+      local_140 = (longlong *)0x0;
+    }
+    FUN_1400af430(&local_118,param_1 + 0xb0);
+    local_1b8._0_4_ = DAT_14228a780;
+    local_1b8._0_4_ = DAT_14228a780;
+    local_1b8._4_4_ = DAT_14228a784;
+    local_1b0 = DAT_14228a788;
+    fStack_1ac = DAT_14228a78c;
+    local_1a8 = DAT_14228a790;
+    fStack_1a4 = DAT_14228a794;
+    local_1a0 = DAT_14228a798;
+    local_19c = DAT_14228a79c;
+    local_198 = DAT_14228a7a0;
+    if ((local_110 & 0xffffff) != 0) {
+      local_168 = fVar11;
+      local_164 = fVar14;
+      local_160 = fVar16;
+      local_15c = fVar18;
+      local_158 = fVar19;
+      local_154 = fVar20;
+      local_150 = fVar21;
+      local_14c = fVar22;
+      local_148 = fVar23;
+      FUN_14010ee70(&local_168);
+      plVar3 = local_118 + (local_110 & 0xffffff);
+      local_1b0 = local_160;
+      fStack_1ac = local_15c;
+      local_1a8 = local_158;
+      fStack_1a4 = local_154;
+      local_1a0 = local_150;
+      local_19c = local_14c;
+      local_198 = local_148;
+      local_1b8._0_4_ = local_168;
+      fVar11 = local_168;
+      fVar14 = local_164;
+      fVar16 = local_160;
+      fVar18 = local_15c;
+      fVar19 = local_158;
+      fVar20 = local_154;
+      fVar21 = local_150;
+      fVar22 = local_14c;
+      fVar23 = local_148;
+      local_1b8._4_4_ = local_164;
+      for (plVar7 = local_118; uVar24 = (undefined4)((ulonglong)in_stack_fffffffffffffe38 >> 0x20),
+          plVar7 != plVar3; plVar7 = plVar7 + 1) {
+        local_130 = *plVar7;
+        if (local_130 != 0) {
+          fVar17 = *(float *)(local_130 + 0x308) - *(float *)(param_1 + 0x308);
+          fVar15 = *(float *)(local_130 + 0x304) - *(float *)(param_1 + 0x304);
+          fVar13 = *(float *)(local_130 + 0x300) - *(float *)(param_1 + 0x300);
+          fVar16 = fVar16 * fVar13 + fVar20 * fVar15 + fVar23 * fVar17;
+          fVar14 = fVar14 * fVar13 + fVar19 * fVar15 + fVar22 * fVar17;
+          fVar11 = fVar11 * fVar13 + fVar18 * fVar15 + fVar21 * fVar17;
+          FUN_14000dce0(&local_1b8,&local_168,local_130 + 0x30c);
+          local_138 = local_188 * fVar11 + local_17c * fVar14 + local_170 * fVar16 + param_2[2];
+          local_140 = (longlong *)
+                      CONCAT44(local_18c * fVar11 + local_180 * fVar14 + local_174 * fVar16 +
+                               param_2[1],
+                               local_190 * fVar11 + local_184 * fVar14 + local_178 * fVar16 +
+                               *param_2);
+          FUN_14000dce0(&local_190,local_d0,&local_168);
+          in_stack_fffffffffffffe38 = CONCAT44(uVar24,param_5 + 1);
+          D2_Entity_SetTransform(local_130,&local_140,local_d0,param_4,in_stack_fffffffffffffe38);
+          fVar18 = fStack_1ac;
+          fVar19 = local_1a8;
+          fVar20 = fStack_1a4;
+          fVar16 = local_1b0;
+          fVar14 = local_1b8._4_4_;
+          fVar11 = (float)local_1b8;
+          fVar21 = local_1a0;
+          fVar22 = local_19c;
+          fVar23 = local_198;
+        }
+      }
+    }
+    lVar4 = 0;
+    if ((*(uint *)(param_1 + 0x270) & 0xffffff) != 0) {
+      do {
+        plVar3 = *(longlong **)(lVar4 + *(longlong *)(param_1 + 0x268));
+        if ((plVar3 != (longlong *)0x0) &&
+           (7 < ((byte)*(undefined4 *)((longlong)plVar3 + 0x1c) & 0xc))) {
+          (**(code **)(*plVar3 + 0xb0))(plVar3,param_2,&local_190,param_4);
+        }
+        uVar12 = (int)local_120 + 1;
+        local_120 = (ulonglong)uVar12;
+        lVar4 = lVar4 + 8;
+      } while ((int)uVar12 < (int)(*(uint *)(param_1 + 0x270) & 0xffffff));
+    }
+    FUN_14000f2c0(&local_190);
+    *(float *)(param_1 + 0x30c) = local_190;
+    *(float *)(param_1 + 0x310) = local_18c;
+    *(float *)(param_1 + 0x314) = local_188;
+    *(float *)(param_1 + 0x318) = local_184;
+    *(float *)(param_1 + 0x31c) = local_180;
+    *(float *)(param_1 + 800) = local_17c;
+    *(float *)(param_1 + 0x324) = local_178;
+    *(float *)(param_1 + 0x328) = local_174;
+    *(float *)(param_1 + 0x32c) = local_170;
+    *(float *)(param_1 + 0x300) = *param_2;
+    *(float *)(param_1 + 0x304) = param_2[1];
+    *(float *)(param_1 + 0x308) = param_2[2];
+    if (param_4 != '\0') {
+      *(undefined4 *)(param_1 + 0x33c) = DAT_1431af668;
+      *(undefined4 *)(param_1 + 0x340) = DAT_1431af66c;
+      *(undefined4 *)(param_1 + 0x344) = DAT_1431af670;
+      *(undefined4 *)(param_1 + 0x348) = DAT_1431af668;
+      *(undefined4 *)(param_1 + 0x34c) = DAT_1431af66c;
+      *(undefined4 *)(param_1 + 0x350) = DAT_1431af670;
+    }
+    plVar3 = *(longlong **)(param_1 + 0xf0);
+    if (plVar3 != (longlong *)0x0) {
+      if (((*(byte *)(param_1 + 0xd0) & 1) == 0) && ((*(byte *)(param_1 + 0xd0) & 2) == 0)) {
+        *(float *)(plVar3 + 0x30c) = *param_2;
+        *(float *)((longlong)plVar3 + 0x1864) = param_2[1];
+        *(float *)(plVar3 + 0x30d) = param_2[2];
+        *(float *)((longlong)plVar3 + 0x186c) = local_190;
+        *(float *)(plVar3 + 0x30e) = local_18c;
+        *(float *)((longlong)plVar3 + 0x1874) = local_188;
+        *(float *)(plVar3 + 0x30f) = local_184;
+        *(float *)((longlong)plVar3 + 0x187c) = local_180;
+        *(float *)(plVar3 + 0x310) = local_17c;
+        *(float *)((longlong)plVar3 + 0x1884) = local_178;
+        *(float *)(plVar3 + 0x311) = local_174;
+        *(float *)((longlong)plVar3 + 0x188c) = local_170;
+        (**(code **)(*plVar3 + 0x28))(plVar3,1);
+      }
+      else {
+        (**(code **)(*plVar3 + 0x38))();
+      }
+    }
+    plVar3 = local_118;
+    if (((uStack_10c & 0x40) == 0) && (local_118 != (longlong *)0x0)) {
+      plVar7 = (longlong *)FUN_1401548e0();
+      (**(code **)(*plVar7 + 0x10))
+                (plVar7,
+                 "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\idlib\\containers/List.h"
+                 ,0x1ec,plVar3,0x10);
+    }
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_140166830(&DAT_141c88510);
+}
+
+
+````
+
+### text
+
+````text
+
+void FUN_140600220(longlong param_1)
+
+{
+  undefined4 uVar1;
+  longlong lVar2;
+  longlong *plVar3;
+  
+  if (0 < *(int *)(param_1 + 0x40)) {
+    uVar1 = *(undefined4 *)
+             (*(longlong *)
+               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +
+               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);
+    lVar2 = FUN_140810240();
+    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1bf,8,uVar1);
+    if (plVar3 != (longlong *)0x0) {
+      *plVar3 = param_1;
+    }
+    uVar1 = *(undefined4 *)
+             (*(longlong *)
+               (*(longlong *)(D2_GameSingletonPtr + 0x341068) +
+               (longlong)*(int *)(*(longlong *)(param_1 + 0x10) + 0x2e0) * 8) + 0xa8);
+    lVar2 = FUN_140810240();
+    plVar3 = (longlong *)FUN_1408112c0(lVar2 + 0xc8e8,0x1be,8,uVar1);
+    if (plVar3 != (longlong *)0x0) {
+      *plVar3 = param_1;
+    }
+  }
+  return;
+}
+
+
+````

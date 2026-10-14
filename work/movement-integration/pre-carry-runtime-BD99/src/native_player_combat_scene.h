@@ -1,0 +1,77 @@
+#pragma once
+#include "native_player_action.h"
+#include "native_player_arm.h"
+#include <array>
+
+// Read-only source semantics. Ghidra8549c0 stores the current animation
+// scene at state+24. Native 7ce7e0 builds the instance's target bindings.
+// Both were correlated on Corvo and Emily in native-combat-timing-v2.
+struct NativePlayerCombatScene {
+    std::uintptr_t instance=0,statePointer=0;
+    unsigned handle=0,action=0,variant=0,timeMs=0,durationMs=0,character=0;
+    std::string asset,subscene;
+};
+inline unsigned nativeCombatVariant(const std::string& asset){
+    constexpr const char* names[]={"sword_slash_right","sword_slash_rightb","sword_slash_left","sword_slash_leftb",
+        "sword_slash_sneak_right","sword_slash_sneak_left","sword_attack_focus_in","sword_attack_focus_out",
+        "sword_attack_focus_cancel","sword_parry_in","sword_parry_idle","sword_parry_out",
+        "sword_parry_in_sneak","sword_parry_out_sneak"};
+    for(unsigned i=0;i<14;++i)if(asset==std::string("midnight/gameplay/player/base/combat/")+names[i]+".midnightscene")return i+1;
+    return 0;
+}
+template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerCombatScene& out){
+    NativePlayerCombatScene s{};
+    if(states.player.logic!=1||!nativePlayerSwordAction(states,base,s.action)||!s.action)return false;
+    for(const auto& a:states.active)if(a.id==39||a.id==44)s.statePointer=a.pointer;
+    if(!s.statePointer||!read(s.statePointer+0x24,&s.handle,4)||!s.handle)return false;
+    const auto game=states.player.game,manager=game+0x1f5338;
+    std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
+    for(unsigned field=0;field<2;++field){
+        const auto at=manager+(field?0x610:0);
+        if(!read(at,&lists[field],8)||!read(at+8,&flags[field],4)||(flags[field]&0xffffff)>512||((flags[field]&0xffffff)&&!lists[field]))return false;
+        for(unsigned i=0;i<(flags[field]&0xffffff);++i){
+            std::uintptr_t candidate=0;unsigned id=0;
+            if(!read(lists[field]+i*8,&candidate,8)||!candidate||!read(candidate+0x158,&id,4))return false;
+            if(id==s.handle){if(s.instance&&s.instance!=candidate)return false;s.instance=candidate;}
+        }
+    }
+    std::uintptr_t declaration=0,scene=0,vt=0,name=0,subName=0,bindings=0;unsigned phase=0,bindingFlags=0;
+    if(!s.instance||!read(s.instance+0x27c,&phase,4)||phase!=3||!read(s.instance,&declaration,8)||
+       !read(declaration,&vt,8)||vt!=base+0x1affbc8||!read(declaration+8,&name,8)||!worldIdentityString(read,name,s.asset)||
+       !(s.variant=nativeCombatVariant(s.asset))||!read(s.instance+8,&scene,8)||!read(scene,&vt,8)||vt!=base+0x1b00198||
+       !read(scene+0x28,&s.durationMs,4)||!s.durationMs||s.durationMs>10000||!read(scene+0x30,&subName,8)||
+       !worldIdentityString(read,subName,s.subscene)||s.subscene.empty()||s.subscene.size()>64||
+       !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||!read(s.instance+0x10,&bindings,8)||!bindings||
+       !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)<1||(bindingFlags&0xffffff)>2)return false;
+    if((s.action==1)!=(s.variant<=9))return false;
+    unsigned playerCount=0,armCount=0;NativePlayerArm arm{};
+    std::array<std::uintptr_t,2> actors{};
+    for(unsigned i=0;i<(bindingFlags&0xffffff);++i){
+        unsigned handle=0;
+        if(!read(bindings+i*0x20+8,&actors[i],8)||!actors[i]||!read(actors[i]+0xa8,&handle,4)||
+           worldIdentityEntity(read,game,handle)!=actors[i])return false;
+        if(actors[i]==states.player.player){if(++playerCount>1||handle!=1)return false;}
+        else{NativePlayerArm candidate{};if(++armCount>1||!readNativePlayerArm(read,base,game,handle,candidate)||candidate.side!=2||candidate.actor!=actors[i]||candidate.player!=states.player.player)return false;arm=candidate;}
+    }
+    // Parry idle targets the right arm only. Other observed scenes bind both
+    // the native player and arm. No NPC/other player's scene is accepted.
+    if(armCount!=1||(s.variant!=11&&playerCount!=1))return false;s.character=arm.character;
+    std::uintptr_t again=0;unsigned number=0;
+    if(!read(base+0x39a5290,&again,8)||again!=game||worldIdentityEntity(read,game,1)!=states.player.player||
+       !read(s.statePointer+0x24,&number,4)||number!=s.handle||!read(s.statePointer+0x10,&again,8)||again!=states.component||
+       !read(s.statePointer,&again,8)||again!=base+(s.action==1?0x1c85d28:0x1c81a68)||
+       !read(states.component+0x90,&again,8)||again!=states.mode||!read(states.mode+0x10+(s.action==1?39:44)*8,&again,8)||again!=s.statePointer||
+       !read(s.instance+0x158,&number,4)||number!=s.handle||!read(s.instance+0x27c,&number,4)||number!=3||
+       !read(s.instance,&again,8)||again!=declaration||!read(s.instance+8,&again,8)||again!=scene||
+       !read(s.instance+0x10,&again,8)||again!=bindings||!read(s.instance+0x18,&number,4)||number!=bindingFlags)return false;
+    for(unsigned i=0;i<2;++i){const auto at=manager+(i?0x610:0);if(!read(at,&again,8)||again!=lists[i]||!read(at+8,&number,4)||number!=flags[i])return false;}
+    for(unsigned i=0;i<(bindingFlags&0xffffff);++i)if(!read(bindings+i*0x20+8,&again,8)||again!=actors[i])return false;
+    NativePlayerArm finalArm{};if(!readNativePlayerArm(read,base,game,arm.handle,finalArm)||!sameNativePlayerArm(arm,finalArm))return false;
+    NativePlayerStates finalStates{};
+    if(!readNativePlayerStates(read,base,finalStates)||finalStates.player.logic!=1||finalStates.player.game!=game||
+       finalStates.player.player!=states.player.player||finalStates.component!=states.component||finalStates.mode!=states.mode)return false;
+    unsigned finalAction=0;if(!nativePlayerSwordAction(finalStates,base,finalAction)||finalAction!=s.action)return false;
+    bool sameState=false;for(const auto& a:finalStates.active)if((a.id==39||a.id==44)&&a.pointer==s.statePointer)sameState=true;
+    if(!sameState)return false;
+    out=std::move(s);return true;
+}

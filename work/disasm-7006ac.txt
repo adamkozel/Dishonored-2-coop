@@ -1,0 +1,70 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407006AC: mov         r8,qword ptr [rbx+0000000000000308h]
+  00000001407006B3: test        r8,r8
+  00000001407006B6: je          00000001407006E6
+  00000001407006B8: lea         rdx,[rsp+28h]
+  00000001407006BD: mov         rcx,qword ptr [rbx+0000000000000338h]
+  00000001407006C4: call        00000001406E0DA0
+  00000001407006C9: mov         ecx,dword ptr [rax]
+  00000001407006CB: mov         dword ptr [rbx+2Ch],ecx
+  00000001407006CE: mov         ecx,dword ptr [rax+4]
+  00000001407006D1: mov         dword ptr [rbx+30h],ecx
+  00000001407006D4: mov         ecx,dword ptr [rax+8]
+  00000001407006D7: mov         dword ptr [rbx+34h],ecx
+  00000001407006DA: mov         ecx,dword ptr [rax+0Ch]
+  00000001407006DD: mov         dword ptr [rbx+38h],ecx
+  00000001407006E0: mov         eax,dword ptr [rax+10h]
+  00000001407006E3: mov         dword ptr [rbx+3Ch],eax
+  00000001407006E6: mov         r8,qword ptr [rbx+0000000000000310h]
+  00000001407006ED: test        r8,r8
+  00000001407006F0: je          000000014070071B
+  00000001407006F2: lea         rdx,[rsp+40h]
+  00000001407006F7: mov         rcx,qword ptr [rbx+0000000000000338h]
+  00000001407006FE: call        00000001406E0D70
+  0000000140700703: nop
+  0000000140700704: lea         rcx,[rbx+40h]
+  0000000140700708: mov         rdx,rax
+  000000014070070B: call        00000001406EA1B0
+  0000000140700710: nop
+  0000000140700711: lea         rcx,[rsp+40h]
+  0000000140700716: call        000000014061A0A0
+  000000014070071B: mov         r8,qword ptr [rbx+0000000000000508h]
+  0000000140700722: test        r8,r8
+  0000000140700725: je          0000000140700747
+  0000000140700727: lea         rdx,[rsp+40h]
+  000000014070072C: mov         rcx,qword ptr [rbx+0000000000000338h]
+  0000000140700733: call        00000001406E0DD0
+  0000000140700738: mov         rdx,rax
+  000000014070073B: lea         rcx,[rbx+0000000000000378h]
+  0000000140700742: call        00000001406EA2E0
+  0000000140700747: mov         rdx,qword ptr [rbx+00000000000004C8h]
+  000000014070074E: test        rdx,rdx
+  0000000140700751: je          000000014070085A
+  0000000140700757: cmp         qword ptr [rbx+00000000000004D0h],0
+  000000014070075F: je          000000014070085A
+  0000000140700765: cmp         qword ptr [rbx+00000000000004D8h],0
+  000000014070076D: je          000000014070085A
+  0000000140700773: cmp         qword ptr [rbx+00000000000004E0h],0
+  000000014070077B: je          000000014070085A
+  0000000140700781: cmp         qword ptr [rbx+00000000000004E8h],0
+  0000000140700789: je          000000014070085A
+  000000014070078F: cmp         qword ptr [rbx+00000000000004F0h],0
+  0000000140700797: je          000000014070085A
+  000000014070079D: mov         rcx,qword ptr [rbx+0000000000000338h]
+  00000001407007A4: call        00000001406E0B80
+  00000001407007A9: movss       dword ptr [rbx+0000000000000340h],xmm0
+  00000001407007B1: mov         rdx,qword ptr [rbx+00000000000004D0h]
+  00000001407007B8: mov         rcx,qword ptr [rbx+0000000000000338h]
+  00000001407007BF: E8
+  00000001407007C0: lods        byte ptr [rsi]
+
+  Summary
+
+     1A7D000 .text

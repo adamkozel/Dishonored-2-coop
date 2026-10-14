@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-13T09:46:58.318205+02:00",
+  "dll": "7E3ADCA32421AE8EAB2DDC1650DF49E3BABFBB0FB14209FC6F1AAE8C1EE01F43",
+  "candidate": "candidate-heavy-v635",
+  "tests": [
+    {
+      "character": "corvo",
+      "take": "native-unlocked-door-corvo-v641",
+      "result": "work\\natural-moveset\\native-unlocked-door-corvo-v641\\result.json",
+      "sha256": "6EC994BCC1D28253B23A58D3C08A8BEDCAE2B34640188CB3AC19E6F56AB03CF4",
+      "samples": 140,
+      "sourceDoorCycle": [
+        0,
+        1,
+        2,
+        1,
+        0
+      ],
+      "peerDoorStates": [
+        0
+      ],
+      "nativePlayerStates": [
+        0,
+        75,
+        81
+      ],
+      "worldSynchronized": false
+    },
+    {
+      "character": "emily",
+      "take": "native-unlocked-door-emily-v642",
+      "result": "work\\natural-moveset\\native-unlocked-door-emily-v642\\result.json",
+      "sha256": "75613544E70CB594B17E5DF24935FC91650DF6A412F2DEC2F83C36B91086055D",
+      "samples": 142,
+      "sourceDoorCycle": [
+        0,
+        1,
+        2,
+        1,
+        0
+      ],
+      "peerDoorStates": [
+        0
+      ],
+      "nativePlayerStates": [
+        0,
+        75,
+        81
+      ],
+      "worldSynchronized": false
+    }
+  ],
+  "limitations": [
+    "Only one ordinary unlocked Dunwall door, two short-X inputs per character. Source closed/open/closed is proven; receiver stays closed. No shared door implementation.",
+    "Corvo638 locked office attempt reports Royal Quarters Key needed. No successful key use, linked door, break/destruction or quest-script outcome coverage.",
+    "No dedicated first-person reach or player Midnight scene was observed in these sampled ordinary taps; retain normal locomotion and native equipment overlays here. Both roles briefly include Undraw81 near the second tap as well as UseInteraction75. Absence of a reach in these samples is not universal absence of interaction animation.",
+    "Both source and observer sheets were inspected. Source opening/closing is visible. Observer avatar is visible initially but becomes obscured/absent later while its own door stays closed. Cause not established; continuous visual presentation not accepted.",
+    "640 retained failure: PowerShell signed 0xffffffff mask included flags beside generation;641 uses explicit unsigned DWORD mask. Both inventories/health and14 protected hashes restored even on640.",
+    "No production DLL/bank changed. Native Openable routines are traced, not directly invoked. Propagating door outcomes requires native state/event/physics ownership, not transform-only playback."
+  ],
+  "complete": false,
+  "visualAccepted": false,
+  "worldSynchronized": false,
+  "retainedFailure": "work/natural-moveset/native-unlocked-door-corvo-v640/result.json"
+}

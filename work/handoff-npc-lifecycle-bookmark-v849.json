@@ -1,0 +1,33 @@
+{
+  "bookmarks": [
+    {
+      "address": "140658d00",
+      "category": "D2Coop_NpcLifecycle_849",
+      "comment": "Candidate847 DLL15CEB61FDAC3FF17117EE2C6E5411A77AA6F698FD9381D9BBF532E4C5747ACD4. Existing native LoadGame callback wrapper now calls beforeNpcNativeLoad before original teardown. Shared coordinator retires NPC presentation/releases owned Decision/Reflex references while old epoch and component incarnations are still valid; rebind only after both-complete/new epochs and avatar role recovery. Runtime848b: five initial actors, native host/client menus >6s retain arms with no root writes, both resume; checkpoint rebuilds seven eligible native actors including vista5 and Alexi (new catalog, not cached five). Client acquired24/released24/retired0/lost0 after final stop. Failed848 retained: harness incorrectly expected five after load, code had seven active compatible channels. Visible849 verifies body callbacks before pause, fixed5967 during held native menu,6211 after resume; ten refs retained during menu then all released. Menu interpolation drops samples but retains sequence replay floor. Exact paused scope only; no mid-world spawn/despawn, damage/death replication or all-rig visual claim. Evidence work/natural-moveset/npc-recovery-v848b and npc-visible-menu-v849. Original game/Steam/saves protected."
+    }
+  ],
+  "set": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"address\":\"140658d00\",\"category\":\"D2Coop_NpcLifecycle_849\",\"comment\":\"Candidate847 DLL15CEB61FDAC3FF17117EE2C6E5411A77AA6F698FD9381D9BBF532E4C5747ACD4. Existing native LoadGame callback wrapper now calls beforeNpcNativeLoad before original teardown. Shared coordinator retires NPC presentation/releases owned Decision/Reflex references while old epoch and component incarnations are still valid; rebind only after both-complete/new epochs and avatar role recovery. Runtime848b: five initial actors, native host/client menus >6s retain arms with no root writes, both resume; checkpoint rebuilds seven eligible native actors including vista5 and Alexi (new catalog, not cached five). Client acquired24/released24/retired0/lost0 after final stop. Failed848 retained: harness incorrectly expected five after load, code had seven active compatible channels. Visible849 verifies body callbacks before pause, fixed5967 during held native menu,6211 after resume; ten refs retained during menu then all released. Menu interpolation drops samples but retains sequence replay floor. Exact paused scope only; no mid-world spawn/despawn, damage/death replication or all-rig visual claim. Evidence work/natural-moveset/npc-recovery-v848b and npc-visible-menu-v849. Original game/Steam/saves protected.\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"address\":\"140658d00\",\"category\":\"D2Coop_NpcLifecycle_849\",\"comment\":\"Candidate847 DLL15CEB61FDAC3FF17117EE2C6E5411A77AA6F698FD9381D9BBF532E4C5747ACD4. Existing native LoadGame callback wrapper now calls beforeNpcNativeLoad before original teardown. Shared coordinator retires NPC presentation/releases owned Decision/Reflex references while old epoch and component incarnations are still valid; rebind only after both-complete/new epochs and avatar role recovery. Runtime848b: five initial actors, native host/client menus >6s retain arms with no root writes, both resume; checkpoint rebuilds seven eligible native actors including vista5 and Alexi (new catalog, not cached five). Client acquired24/released24/retired0/lost0 after final stop. Failed848 retained: harness incorrectly expected five after load, code had seven active compatible channels. Visible849 verifies body callbacks before pause, fixed5967 during held native menu,6211 after resume; ten refs retained during menu then all released. Menu interpolation drops samples but retains sequence replay floor. Exact paused scope only; no mid-world spawn/despawn, damage/death replication or all-rig visual claim. Evidence work/natural-moveset/npc-recovery-v848b and npc-visible-menu-v849. Original game/Steam/saves protected.\"}"
+    },
+    "isError": false
+  },
+  "save": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+    },
+    "isError": false
+  }
+}

@@ -1,0 +1,44 @@
+
+void FUN_1403b0470(longlong param_1)
+
+{
+  longlong lVar1;
+  longlong lVar2;
+  longlong lVar3;
+  ulonglong uVar4;
+  uint uVar5;
+  ulonglong uVar6;
+  
+  uVar4 = 0;
+  *(undefined8 *)(param_1 + 0x168) = 0;
+  *(undefined8 *)(param_1 + 0x170) = 0;
+  *(undefined8 *)(param_1 + 0x178) = 0;
+  *(undefined8 *)(param_1 + 0x180) = 0;
+  *(undefined8 *)(param_1 + 0x188) = 0;
+  FUN_1403a3730();
+  uVar6 = uVar4;
+  if (0 < *(int *)(param_1 + 0x198)) {
+    do {
+      lVar3 = *(longlong *)(uVar4 + *(longlong *)(param_1 + 400));
+      while (lVar3 != 0) {
+        lVar1 = *(longlong *)(lVar3 + 0x30);
+        lVar2 = *(longlong *)(lVar3 + 0x28);
+        if (lVar2 != 0) {
+          FUN_140895660(lVar2);
+          FUN_1400f1520(lVar2);
+        }
+        FUN_14013fd10(lVar3);
+        FUN_1400f1520(lVar3);
+        lVar3 = lVar1;
+      }
+      uVar5 = (int)uVar6 + 1;
+      *(undefined8 *)(uVar4 + *(longlong *)(param_1 + 400)) = 0;
+      uVar4 = uVar4 + 8;
+      uVar6 = (ulonglong)uVar5;
+    } while ((int)uVar5 < *(int *)(param_1 + 0x198));
+  }
+  *(undefined4 *)(param_1 + 0x19c) = 0;
+  return;
+}
+
+

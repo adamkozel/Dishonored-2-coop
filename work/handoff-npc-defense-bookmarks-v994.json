@@ -1,0 +1,52 @@
+{
+  "bookmarks": [
+    {
+      "address": "140718fe0",
+      "category": "D2Coop native enemy defense v994",
+      "comment": "CONFIRMED STATIC exact Steam B671F824...16180: Health vtable141c51588 slot+D0 points here (raw e08f714001000000). Called from native717950. Walks registered protection list Health+88/count+90, invokes435200 per entry, skips regional719d20 if result+8 nonzero, computes native attributes/modifiers then outcome clamped to current health. Candidate988 native client20 base ->15 observed989, repeated death990. Native blocked/parry relay still unverified; do not infer from static presence alone."
+    },
+    {
+      "address": "140435200",
+      "category": "D2Coop native enemy defense v994",
+      "comment": "CONFIRMED STATIC: registered health protection evaluator. Direction test6dd130 from negative DamageInfo+3c and owner/linkedactor root axes; decl128/12c/130 choose rule. Matching damage flags decl138/140 set result+8 mask, result+10 entry, factor output0. Further event/owner effect handling present. HYPOTHESIS native player block/parry path applicable to reconstructed remote sword hit, awaiting ordinary held-block input and native result evidence. No native patches here. Transcript work/movement-integration/npc-defense-ghidra-v994.json."
+    }
+  ],
+  "receipts": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"success\":true,\"address\":\"140718fe0\",\"category\":\"D2Coop native enemy defense v994\",\"comment\":\"CONFIRMED STATIC exact Steam B671F824...16180: Health vtable141c51588 slot+D0 points here (raw e08f714001000000). Called from native717950. Walks registered protection list Health+88/count+90, invokes435200 per entry, skips regional719d20 if result+8 nonzero, computes native attributes/modifiers then outcome clamped to current health. Candidate988 native client20 base ->15 observed989, repeated death990. Native blocked/parry relay still unverified; do not infer from static presence alone.\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"success\":true,\"address\":\"140718fe0\",\"category\":\"D2Coop native enemy defense v994\",\"comment\":\"CONFIRMED STATIC exact Steam B671F824...16180: Health vtable141c51588 slot+D0 points here (raw e08f714001000000). Called from native717950. Walks registered protection list Health+88/count+90, invokes435200 per entry, skips regional719d20 if result+8 nonzero, computes native attributes/modifiers then outcome clamped to current health. Candidate988 native client20 base ->15 observed989, repeated death990. Native blocked/parry relay still unverified; do not infer from static presence alone.\"}"
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"success\":true,\"address\":\"140435200\",\"category\":\"D2Coop native enemy defense v994\",\"comment\":\"CONFIRMED STATIC: registered health protection evaluator. Direction test6dd130 from negative DamageInfo+3c and owner/linkedactor root axes; decl128/12c/130 choose rule. Matching damage flags decl138/140 set result+8 mask, result+10 entry, factor output0. Further event/owner effect handling present. HYPOTHESIS native player block/parry path applicable to reconstructed remote sword hit, awaiting ordinary held-block input and native result evidence. No native patches here. Transcript work/movement-integration/npc-defense-ghidra-v994.json.\"}"
+        }
+      ],
+      "structuredContent": {
+        "result": "{\"success\":true,\"address\":\"140435200\",\"category\":\"D2Coop native enemy defense v994\",\"comment\":\"CONFIRMED STATIC: registered health protection evaluator. Direction test6dd130 from negative DamageInfo+3c and owner/linkedactor root axes; decl128/12c/130 choose rule. Matching damage flags decl138/140 set result+8 mask, result+10 entry, factor output0. Further event/owner effect handling present. HYPOTHESIS native player block/parry path applicable to reconstructed remote sword hit, awaiting ordinary held-block input and native result evidence. No native patches here. Transcript work/movement-integration/npc-defense-ghidra-v994.json.\"}"
+      },
+      "isError": false
+    }
+  ],
+  "saved": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+    },
+    "isError": false
+  }
+}

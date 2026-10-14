@@ -1,0 +1,8 @@
+[
+  {
+    "address": "140829180",
+    "category": "D2Coop/NativeThrowAttachment-v34",
+    "comment": "STATIC CONFIRMED exact B671F824: called by829e30 before Drop46 scene start832770. Computes reference-animation joint transforms using CarryCorpseDecl+80/+90/+98, invokes755870, sets owner joint/offset, activates757830. Exact Void asset export carry-release-placement-v34 SHA12BB41B5 names spine03 carry, spine02 drop, anchor_jnt, reference ply_body_common_carrycorpse_in. V34 isolated analogue retains remote attachment until280ms and rebases03->02 preserving its model frame; does not invoke player state callbacks or copy FP anchors. It is not the same calculation as native829180 and is not visual acceptance; see native-high-throw-*-v34 recordings and documentation/handoff-2026-10-11/13-native-body-throw.md.",
+    "type": "Note"
+  }
+]

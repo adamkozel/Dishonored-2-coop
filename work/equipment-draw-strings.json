@@ -1,0 +1,1082 @@
+[
+  {
+    "rva": "0x1ac6790",
+    "text": "sets com_drawThreadSpeeds to 2 if a frame takes longer than this time in milliseconds"
+  },
+  {
+    "rva": "0x1ac6810",
+    "text": "1 = dynamic draw, 2 = static draw, 3 = dynamic draw until stall"
+  },
+  {
+    "rva": "0x1ac6850",
+    "text": "com_drawThreadSpeeds"
+  },
+  {
+    "rva": "0x1ac8880",
+    "text": "0 = off, 1 = draw all presentables we know about."
+  },
+  {
+    "rva": "0x1ac88b8",
+    "text": "com_drawPresentables"
+  },
+  {
+    "rva": "0x1ad5340",
+    "text": "ark_physics_query_separation_draw"
+  },
+  {
+    "rva": "0x1ad53a0",
+    "text": "ark_physics_query_separation_draw_substeps"
+  },
+  {
+    "rva": "0x1ad5420",
+    "text": "ark_physics_query_separation_draw_iter"
+  },
+  {
+    "rva": "0x1ad6b20",
+    "text": "idTriangleDrawVerts::FixNilNormals() Fixed %d vertices with nil normals"
+  },
+  {
+    "rva": "0x1ad6b70",
+    "text": "idTriangleDrawVerts::DeriveTangents() Object has %d faces (%.3f%%) with degenerate tangent space! Recovered..."
+  },
+  {
+    "rva": "0x1ad6bf0",
+    "text": "idTriangleDrawVerts::RemoveDegenerateOrDuplicateFaces() %d degenerate / %d duplicate faces found and removed out of %d (%.2f%%). %d unused vertices removed out of %d (%.2f%%)."
+  },
+  {
+    "rva": "0x1b08200",
+    "text": "draws bounds of committed models: 1 : rendermodels, 2 : surfaces"
+  },
+  {
+    "rva": "0x1b08258",
+    "text": "draws bounds depth test"
+  },
+  {
+    "rva": "0x1b0f0e0",
+    "text": "idTriangleDrawVerts::BuildBarycentriCoordinatesForVertices() Old geometry had %d vertices, new geometry has %d vertices (additional vertices = %d, growth = %.4f%%)"
+  },
+  {
+    "rva": "0x1b15d58",
+    "text": "Unknown drawing state option '%s'"
+  },
+  {
+    "rva": "0x1b1aee8",
+    "text": "arkGDrawTexturePack::HardClear : %s - "
+  },
+  {
+    "rva": "0x1b1af10",
+    "text": "arkGDrawTexturePack::ManageGPUMemory - '%s' has no more reference - Unloading : "
+  },
+  {
+    "rva": "0x1b1af68",
+    "text": "arkGDrawTexturePack::ManageGPUMemory - '%s' has reference - "
+  },
+  {
+    "rva": "0x1b1afd0",
+    "text": "arkGDrawWrapper::arkGDrawTexturePack::LoadTexturePack - \"%s\" not found"
+  },
+  {
+    "rva": "0x1b1b018",
+    "text": "render\\gdraw\\arkGDrawWrapper.cpp"
+  },
+  {
+    "rva": "0x1b1b0c0",
+    "text": "Iggy GDraw encountered an error HRESULT = %x"
+  },
+  {
+    "rva": "0x1b1b0f0",
+    "text": "~arkGDrawWrapper : there are still loaded texture packs!"
+  },
+  {
+    "rva": "0x1b1b130",
+    "text": "arkGDrawWrapper::GrabInternalDepthImageView - Failed to find an appropriate depth buffer"
+  },
+  {
+    "rva": "0x1b1b190",
+    "text": "arkGDrawWrapper::RequestTexturePackLoading - failed to allocate request!"
+  },
+  {
+    "rva": "0x1b1b1e0",
+    "text": "arkGDrawWrapper::RequestTexturePackUnloading - failed to allocate request!"
+  },
+  {
+    "rva": "0x1b1b230",
+    "text": "arkGDrawWrapper::RenderTaskManageTextures - Reference added { %s, 0x%p, %ull }"
+  },
+  {
+    "rva": "0x1b1b280",
+    "text": "arkGDrawWrapper::RenderTaskManageTextures - Reference removed { %s, 0x%p, %ull }"
+  },
+  {
+    "rva": "0x1b1b2e0",
+    "text": "arkGDrawWrapper::RenderTaskManageTextures - Failed to find an installed pack for '%s'"
+  },
+  {
+    "rva": "0x1b1b338",
+    "text": "arkGDrawWrapper::DepthBuffer_%d_%d"
+  },
+  {
+    "rva": "0x1b1b510",
+    "text": "GDraw Thrashing vertex memory"
+  },
+  {
+    "rva": "0x1b1b530",
+    "text": "GDraw Thrashing texture memory"
+  },
+  {
+    "rva": "0x1b1b550",
+    "text": "GDraw Out of static vertex buffer %s"
+  },
+  {
+    "rva": "0x1b1b578",
+    "text": "GDraw Out of texture %s"
+  },
+  {
+    "rva": "0x1b1b5d8",
+    "text": "GDraw D3D out of memory in %s %s"
+  },
+  {
+    "rva": "0x1b1b600",
+    "text": "GDraw D3D error in %s%s: 0x%08x"
+  },
+  {
+    "rva": "0x1b1b620",
+    "text": "GDraw dynamic vertex buffer usage of %d bytes in one call larger than buffer size %d"
+  },
+  {
+    "rva": "0x1b1b690",
+    "text": "GDraw texture size too large (%d x %d), dimension limit is 16384"
+  },
+  {
+    "rva": "0x1b1b6e0",
+    "text": "c:\\users\\zmiarchiving\\desktop\\dh2\\dishonored2\\voidengine\\core\\render\\gdraw\\gdraw_d3d1x_shared.inl"
+  },
+  {
+    "rva": "0x1b1b750",
+    "text": "GDraw out of memory to store texture data to pass to D3D for %d x %d texture"
+  },
+  {
+    "rva": "0x1b1b840",
+    "text": "GDraw rendertarget allocation failed: hit size limit of %d bytes"
+  },
+  {
+    "rva": "0x1b1b888",
+    "text": "GDraw rendertarget allocation failed: hit handle limit"
+  },
+  {
+    "rva": "0x1b1b928",
+    "text": "GDraw warning: w=0,h=0 rendertarget"
+  },
+  {
+    "rva": "0x1b1b950",
+    "text": "GDraw rendertarget nesting exceeds MAX_RENDER_STACK_DEPTH"
+  },
+  {
+    "rva": "0x1b1ba28",
+    "text": "GDraw .iggytex raw texture format %d not supported by hardware"
+  },
+  {
+    "rva": "0x1b232d0",
+    "text": "Alpha threshold when drawing opaque arkDefault surface in depth buffer"
+  },
+  {
+    "rva": "0x1b23330",
+    "text": "Alpha threshold when drawing opaque arkDefault surfaces in the back buffer (lit pass)"
+  },
+  {
+    "rva": "0x1b233a0",
+    "text": "Alpha threshold when drawing particle surfaces in the back buffer (lit pass)"
+  },
+  {
+    "rva": "0x1b26578",
+    "text": "r_showGuiOverdraw"
+  },
+  {
+    "rva": "0x1b265a0",
+    "text": "showGuiOverdraw"
+  },
+  {
+    "rva": "0x1b26a40",
+    "text": "Alpha threshold when drawing alpha surfaces in the opaque depth buffer"
+  },
+  {
+    "rva": "0x1b26ab0",
+    "text": "Alpha threshold when drawing alpha surfaces in the alpha depth buffer"
+  },
+  {
+    "rva": "0x1b26b10",
+    "text": "Alpha threshold when drawing alpha surfaces in the back buffer (lit pass)"
+  },
+  {
+    "rva": "0x1b26bc0",
+    "text": "Alpha threshold when drawing particle surfaces in the alpha depth buffer"
+  },
+  {
+    "rva": "0x1b275b0",
+    "text": "PostFX_DrawColor"
+  },
+  {
+    "rva": "0x1b27998",
+    "text": "draw alpha object in debug mode"
+  },
+  {
+    "rva": "0x1b2b000",
+    "text": "OPAQUE WORLD drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b040",
+    "text": "OPAQUE WIND world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b080",
+    "text": "BLEND world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b0c0",
+    "text": "DECAL world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b100",
+    "text": "DARKVISION layer %d world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b148",
+    "text": "WATER world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b190",
+    "text": "BOAT VOLUME world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b1d0",
+    "text": "SKY CLOUD world drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b2b210",
+    "text": "INTERIOR FOG NULLIFIER drawsurf list is full : wanted %d (size : %d)"
+  },
+  {
+    "rva": "0x1b31d98",
+    "text": "if > 0 draw a grid pattern to test gamma levels"
+  },
+  {
+    "rva": "0x1b31df0",
+    "text": "if > 0 draw a swatch at a specific luminance for calibrating gamma"
+  },
+  {
+    "rva": "0x1b31f08",
+    "text": "draws all triangles with the solid vertex color"
+  },
+  {
+    "rva": "0x1b32010",
+    "text": "1 = just print volumes numbers, highlighting ones covering the view, 2 = also draw planes of each volume, 3 = also draw edges of each volume"
+  },
+  {
+    "rva": "0x1b32110",
+    "text": "specifies the draw color for \"showTris\" mode 4"
+  },
+  {
+    "rva": "0x1b32150",
+    "text": "r_showDrawColor"
+  },
+  {
+    "rva": "0x1b321b0",
+    "text": "allow r_showSurfaceInfo to intersect materials that don't draw ( \"isdrawn 0\" )"
+  },
+  {
+    "rva": "0x1b32200",
+    "text": "r_showNoDrawSurfaceInfo"
+  },
+  {
+    "rva": "0x1b32218",
+    "text": "report drawsurf/index/vertex counts"
+  },
+  {
+    "rva": "0x1b322d8",
+    "text": "draw a filled polygon"
+  },
+  {
+    "rva": "0x1b32538",
+    "text": "Flush GPU after each draw call"
+  },
+  {
+    "rva": "0x1b32558",
+    "text": "r_finishEveryDraw"
+  },
+  {
+    "rva": "0x1b325b8",
+    "text": "draw calls in a frame"
+  },
+  {
+    "rva": "0x1b325d0",
+    "text": "draws"
+  },
+  {
+    "rva": "0x1b325d8",
+    "text": "drawn triangles in the scene"
+  },
+  {
+    "rva": "0x1b33600",
+    "text": "drawConsole"
+  },
+  {
+    "rva": "0x1b36438",
+    "text": "skip to draw alpha in zBuffer"
+  },
+  {
+    "rva": "0x1b36470",
+    "text": "Enables wireframe rendering of the world. 0 = Disabled, 1 = Only draw visible ones, 2 = Draw all front facing, 3 = Draw all, 4 = Only visible ones with blended lines. Negative values will draw the world in solid color"
+  },
+  {
+    "rva": "0x1b36d50",
+    "text": "Draw loaded images scaled on the screen"
+  },
+  {
+    "rva": "0x1b36d78",
+    "text": "r_drawLoadedImages"
+  },
+  {
+    "rva": "0x1b36d90",
+    "text": "Shrink factor for r_drawLoadedImages"
+  },
+  {
+    "rva": "0x1b36db8",
+    "text": "r_drawLoadedImagesScale"
+  },
+  {
+    "rva": "0x1b3b898",
+    "text": "Duration of close combat debug draws (in seconds)."
+  },
+  {
+    "rva": "0x1b47ef0",
+    "text": "Draws DSM evaluation."
+  },
+  {
+    "rva": "0x1b47f30",
+    "text": "In case several DSM evaluators are executed on the same NPC at the same time, this will draw information for the one with this tag."
+  },
+  {
+    "rva": "0x1b5ece0",
+    "text": "Display sound debug draw if true"
+  },
+  {
+    "rva": "0x1b5ed08",
+    "text": "ark_darkVisionSoundDrawDebug"
+  },
+  {
+    "rva": "0x1b66b08",
+    "text": "Enable windblast debugDraw of all potential targets"
+  },
+  {
+    "rva": "0x1b66b40",
+    "text": "ark_windblast_debugDrawAllTargets"
+  },
+  {
+    "rva": "0x1b66b68",
+    "text": "Enable windblast debugDraw of blast trajectory"
+  },
+  {
+    "rva": "0x1b66b98",
+    "text": "ark_windblast_debugDrawTrajectory"
+  },
+  {
+    "rva": "0x1b66bc0",
+    "text": "Enable windblast debugDraw of deflection upgrade"
+  },
+  {
+    "rva": "0x1b66bf8",
+    "text": "ark_windblast_debugDrawDeflection"
+  },
+  {
+    "rva": "0x1b7f510",
+    "text": "+/-1: draws hit test spheres on test, +/-2: draws every frame, < 0 for depth test"
+  },
+  {
+    "rva": "0x1b7f580",
+    "text": "draw the skeleton of current debugged entity"
+  },
+  {
+    "rva": "0x1b7f5c0",
+    "text": "draw the helper joints"
+  },
+  {
+    "rva": "0x1b7f5f8",
+    "text": "draw the face fx joints"
+  },
+  {
+    "rva": "0x1b7f630",
+    "text": "draw only joints with name containing this substring"
+  },
+  {
+    "rva": "0x1b7f688",
+    "text": "scale used to draw joint names of the skeleton"
+  },
+  {
+    "rva": "0x1b7f6d0",
+    "text": "scale used to draw joint axis of the skeleton"
+  },
+  {
+    "rva": "0x1b7f7d8",
+    "text": "draw joint mod on the skeleton"
+  },
+  {
+    "rva": "0x1b7f810",
+    "text": "draw only joints with joint mod on the skeleton"
+  },
+  {
+    "rva": "0x1b7f860",
+    "text": "draw skeleton but not the debug info of the component"
+  },
+  {
+    "rva": "0x1b7f8b0",
+    "text": "selects the anim progress state to draw with r_showskel, 0 = draw anim only, 1 = draw post ik & facefx, 2 = draw ready to render"
+  },
+  {
+    "rva": "0x1b9dfb8",
+    "text": "Duration of weapon melee debug draws (in seconds)."
+  },
+  {
+    "rva": "0x1c39b20",
+    "text": "If true, display locator debug draw"
+  },
+  {
+    "rva": "0x1c39b48",
+    "text": "ark_ui_locator_debugdraw"
+  },
+  {
+    "rva": "0x1c39b68",
+    "text": "If true, display offset debug draw"
+  },
+  {
+    "rva": "0x1c39b90",
+    "text": "ark_ui_offset_debugdraw"
+  },
+  {
+    "rva": "0x1c3a5c8",
+    "text": "Enable debug draw"
+  },
+  {
+    "rva": "0x1c3a5e0",
+    "text": "ark_camera_blackmarket_enableDebugDraw"
+  },
+  {
+    "rva": "0x1c550b8",
+    "text": "Enable eye state debug draw"
+  },
+  {
+    "rva": "0x1c62ee8",
+    "text": "Use debug draw in rayTrace"
+  },
+  {
+    "rva": "0x1c62f08",
+    "text": "ark_kiscule_rayTraceDebugDraw"
+  },
+  {
+    "rva": "0x1c714e0",
+    "text": "ark_drawAllComponentsInfo"
+  },
+  {
+    "rva": "0x1c78b20",
+    "text": "arkDeclPlayerStateDraw"
+  },
+  {
+    "rva": "0x1c78b38",
+    "text": "playerStateDraw"
+  },
+  {
+    "rva": "0x1c7aaa8",
+    "text": "Enable throw debugDraw"
+  },
+  {
+    "rva": "0x1c7aac0",
+    "text": "ark_throw_debugDraw"
+  },
+  {
+    "rva": "0x1c7e040",
+    "text": "arkDeclPlayerStateUndraw"
+  },
+  {
+    "rva": "0x1c7e060",
+    "text": "playerStateUndraw"
+  },
+  {
+    "rva": "0x1c8b100",
+    "text": "print debug information about weapon states, also draws lines when monsters are alerted and shows melee range"
+  },
+  {
+    "rva": "0x1c8b370",
+    "text": "draws a debug circle to show the spread on the weapon"
+  },
+  {
+    "rva": "0x1c8b590",
+    "text": "draws entities and their targets.  hidden entities are drawn gray."
+  },
+  {
+    "rva": "0x1c8b5f0",
+    "text": "draws trigger entities (orange) and thier targets (green).  disabled triggers are drawn grey."
+  },
+  {
+    "rva": "0x1c8b660",
+    "text": "draws door bounds"
+  },
+  {
+    "rva": "0x1c8b690",
+    "text": "draws boxes around func/static entities."
+  },
+  {
+    "rva": "0x1c8b740",
+    "text": "draws boxes around all entities.  cyan for actors, orange for triggers, green for solid, grey for everything else.  also prints the entity name and number in the box"
+  },
+  {
+    "rva": "0x1c8bbf0",
+    "text": "draws obstacle avoidance information. 2,4 = draw obstacles for player, 3,4 = top-down view"
+  },
+  {
+    "rva": "0x1c8bf60",
+    "text": "draws debug info when editing entities with g_editEntityMode > 0"
+  },
+  {
+    "rva": "0x1c8bfc0",
+    "text": "draws the layer names when g_editEntityMode is enabled"
+  },
+  {
+    "rva": "0x1c8c010",
+    "text": "draws the local axes of the selected entity instead of world axes"
+  },
+  {
+    "rva": "0x1c8c078",
+    "text": "draws the debug bounds in edit mode with depth testing"
+  },
+  {
+    "rva": "0x1c8c1c8",
+    "text": "draw the bounding box of the selected entity"
+  },
+  {
+    "rva": "0x1c8cff0",
+    "text": "enables drawing of HUD elements"
+  },
+  {
+    "rva": "0x1c8d020",
+    "text": "enables drawing of Player Information elements in the HUD (e.g. name and health)."
+  },
+  {
+    "rva": "0x1c8d0e0",
+    "text": "enables drawing of Poi Information elements in the HUD (e.g. leader, base, flag)."
+  },
+  {
+    "rva": "0x1c8d148",
+    "text": "enables drawing of GUI elements other then HUD"
+  },
+  {
+    "rva": "0x1c8d388",
+    "text": "the size of subdivisions to use for debug drawing"
+  },
+  {
+    "rva": "0x1c8d3d8",
+    "text": "draw a graph of view bob ( angle and offset )"
+  },
+  {
+    "rva": "0x1c8d408",
+    "text": "g_drawBob"
+  },
+  {
+    "rva": "0x1c8d418",
+    "text": "draw a graph of hands sway"
+  },
+  {
+    "rva": "0x1c8d438",
+    "text": "g_drawSway"
+  },
+  {
+    "rva": "0x1c8d448",
+    "text": "draw a graph of crouch correction"
+  },
+  {
+    "rva": "0x1c8d470",
+    "text": "g_drawCrouch"
+  },
+  {
+    "rva": "0x1c91770",
+    "text": "toggle com_drawThreadSpeeds 0 1"
+  },
+  {
+    "rva": "0x1c945e0",
+    "text": "draws boxes around thinking entities.  dormant entities (outside of pvs) are drawn yellow.  non-dormant are green."
+  },
+  {
+    "rva": "0x1c948a0",
+    "text": "Draw the damage per second inflicted by the player"
+  },
+  {
+    "rva": "0x1c948d8",
+    "text": "g_drawDPSFromPlayer"
+  },
+  {
+    "rva": "0x1c948f0",
+    "text": "How far above each entity's origin to draw the DPS text"
+  },
+  {
+    "rva": "0x1c94928",
+    "text": "g_drawDPSFromPlayerHeight"
+  },
+  {
+    "rva": "0x1c94948",
+    "text": "How large to draw the DPS text"
+  },
+  {
+    "rva": "0x1c94968",
+    "text": "g_drawDPSFromPlayerScale"
+  },
+  {
+    "rva": "0x1c959b0",
+    "text": "Draws a point at the specified x,y,z location for debugging purposes."
+  },
+  {
+    "rva": "0x1c99248",
+    "text": "notice_EV_DrawWeapons"
+  },
+  {
+    "rva": "0x1c99260",
+    "text": "notice_EV_SheatheWeapons"
+  },
+  {
+    "rva": "0x1c9ad38",
+    "text": "drawWeapons"
+  },
+  {
+    "rva": "0x1c9ad48",
+    "text": "sheatheWeapons"
+  },
+  {
+    "rva": "0x1cb1f90",
+    "text": "arkPlayerStateDraw"
+  },
+  {
+    "rva": "0x1ce2f20",
+    "text": "arkPlayerStateUndraw"
+  },
+  {
+    "rva": "0x1d37b50",
+    "text": "idDrawVert"
+  },
+  {
+    "rva": "0x1d39a38",
+    "text": "arkGDrawWrapper"
+  },
+  {
+    "rva": "0x1d3b8f0",
+    "text": "drawSurf_t"
+  },
+  {
+    "rva": "0x1d50d90",
+    "text": "idList < idDrawVert , TAG_IDLIB , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d50dc8",
+    "text": "idListBase < idDrawVert , 24 , TAG_IDLIB , HEAP_DEFAULTHEAP >"
+  },
+  {
+    "rva": "0x1d89cf8",
+    "text": "m_mayBeDrawn"
+  },
+  {
+    "rva": "0x1d8b7e0",
+    "text": "m_gdraw"
+  },
+  {
+    "rva": "0x1d8b8f0",
+    "text": "m_gDraw"
+  },
+  {
+    "rva": "0x1d8c450",
+    "text": "idRawTriangles"
+  },
+  {
+    "rva": "0x1d8c618",
+    "text": "m_firstUpdateDrawNeeded"
+  },
+  {
+    "rva": "0x1d90700",
+    "text": "m_hasSemiStaticDrawsRef"
+  },
+  {
+    "rva": "0x1d90778",
+    "text": "m_hasSemiStaticDraws"
+  },
+  {
+    "rva": "0x1d99fa0",
+    "text": "m_equipWasUndraw"
+  },
+  {
+    "rva": "0x1d9b328",
+    "text": "m_leftPairToReequipOnDraw"
+  },
+  {
+    "rva": "0x1d9b368",
+    "text": "m_rightPairToReequipOnDraw"
+  },
+  {
+    "rva": "0x1db2c38",
+    "text": "m_drawing"
+  },
+  {
+    "rva": "0x1dc6230",
+    "text": "m_leftEquipmentToReequipOnDraw"
+  },
+  {
+    "rva": "0x1dc6250",
+    "text": "m_leftAmmoToReequipOnDraw"
+  },
+  {
+    "rva": "0x1dc62b8",
+    "text": "m_rightEquipmentToReequipOnDraw"
+  },
+  {
+    "rva": "0x1dc62d8",
+    "text": "m_rightAmmoToReequipOnDraw"
+  },
+  {
+    "rva": "0x1dcfff0",
+    "text": "m_debugDrawPersistentShapes"
+  },
+  {
+    "rva": "0x1dd0010",
+    "text": "m_debugPersistentShapesDrawn"
+  },
+  {
+    "rva": "0x1dd0ae8",
+    "text": "m_undrawAction"
+  },
+  {
+    "rva": "0x1deef00",
+    "text": "PLAYER_STATE_DRAW_RIGHT_HAND"
+  },
+  {
+    "rva": "0x1def8b8",
+    "text": "idDrawVert::UNUSED_BARYCENTRICS"
+  },
+  {
+    "rva": "0x1defb28",
+    "text": "PLAYER_STATE_DRAW_LEFT_HAND"
+  },
+  {
+    "rva": "0x1df0ca8",
+    "text": "PLAYER_STATE_UNDRAW"
+  },
+  {
+    "rva": "0x1df1628",
+    "text": "BB_DRAWINDIRECT_ARGS"
+  },
+  {
+    "rva": "0x1df3668",
+    "text": "MAX_DYNAMIC_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3888",
+    "text": "MAX_DYNAMIC_SSS_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3aa8",
+    "text": "MAX_DYNAMIC_SHADOW_WALK_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3ba8",
+    "text": "MAX_DYNAMIC_ALPHA_LIT_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3ca0",
+    "text": "MAX_DYNAMIC_DISTORTION_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3da0",
+    "text": "MAX_DYNAMIC_MASK_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df3fc8",
+    "text": "MAX_DYNAMIC_HAIR_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df40f8",
+    "text": "MAX_DYNAMIC_OUTLINE_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4218",
+    "text": "MAX_DYNAMIC_WATER_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4328",
+    "text": "MAX_DYNAMIC_BOAT_VOLUME_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4448",
+    "text": "MAX_DYNAMIC_DECAL_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4550",
+    "text": "MAX_DYNAMIC_POST_TONEMAP_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4690",
+    "text": "MAX_DYNAMIC_DARKVISION_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df48b0",
+    "text": "MAX_DYNAMIC_UNDERWATER_ALPHA_LIT_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df48e0",
+    "text": "VERTEX_MASK_DRAWVERT"
+  },
+  {
+    "rva": "0x1df49c0",
+    "text": "MAX_DYNAMIC_UNDERWATER_PREDICATED_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df49f0",
+    "text": "VERTEX_MASK_OUTSIDE_DRAWVERT"
+  },
+  {
+    "rva": "0x1df4ae0",
+    "text": "MAX_DYNAMIC_OPAQUE_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4e28",
+    "text": "MAX_SKY_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df4f38",
+    "text": "MAX_INTERIOR_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df52b8",
+    "text": "MAX_STATIC_OPAQUE_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df5490",
+    "text": "MAX_STATIC_OPAQUE_WIND_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df55c0",
+    "text": "MAX_STATIC_ALPHA_LIT_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df56a8",
+    "text": "MAX_STATIC_DECAL_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df57a0",
+    "text": "MAX_STATIC_DARKVISION_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df5890",
+    "text": "MAX_STATIC_WATER_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df5978",
+    "text": "MAX_STATIC_BOAT_VOLUME_DRAWSURFS"
+  },
+  {
+    "rva": "0x1df5a78",
+    "text": "MAX_STATIC_WIND_DRAWSURFS"
+  },
+  {
+    "rva": "0x1e09010",
+    "text": "WEAPONREADY_HOLSTERED"
+  },
+  {
+    "rva": "0x1e155f0",
+    "text": "EQUIP_HOLSTER_HIP_LEFT"
+  },
+  {
+    "rva": "0x1e156c0",
+    "text": "EQUIP_HOLSTER_HIP_RIGHT"
+  },
+  {
+    "rva": "0x1e157b8",
+    "text": "EQUIP_HOLSTER_BACK"
+  },
+  {
+    "rva": "0x1e15898",
+    "text": "EQUIP_HOLSTER_SHOULDER"
+  },
+  {
+    "rva": "0x1e159b8",
+    "text": "EQUIP_HOLSTER_BELT_LEFT"
+  },
+  {
+    "rva": "0x1e15ac8",
+    "text": "EQUIP_HOLSTER_BELT_RIGHT"
+  },
+  {
+    "rva": "0x1e15c08",
+    "text": "EQUIP_HOLSTER_BELT_BACK"
+  },
+  {
+    "rva": "0x1e15d18",
+    "text": "EQUIP_HOLSTER_BELT_FRONT"
+  },
+  {
+    "rva": "0x1e2b790",
+    "text": "arkMidnight::EQUIP_STATE_DRAW"
+  },
+  {
+    "rva": "0x1e2b8c0",
+    "text": "arkMidnight::EQUIP_STATE_UNDRAW"
+  },
+  {
+    "rva": "0x1e30f30",
+    "text": "EQUIP_STATE_DRAW"
+  },
+  {
+    "rva": "0x1e30f48",
+    "text": "EQUIP_STATE_UNDRAW"
+  },
+  {
+    "rva": "0x1e44958",
+    "text": "(const idDrawVert & _vertex0 , const idDrawVert & _vertex1)*"
+  },
+  {
+    "rva": "0x1e8dfa0",
+    "text": " [ DrawCall %.3f ]"
+  },
+  {
+    "rva": "0x1ef7ee0",
+    "text": "drawFaceNormal"
+  },
+  {
+    "rva": "0x1ef8858",
+    "text": "drawLines"
+  },
+  {
+    "rva": "0x1ef8d38",
+    "text": "drawNonplanarity"
+  },
+  {
+    "rva": "0x1f20958",
+    "text": "IggyPlayerDraw"
+  },
+  {
+    "rva": "0x1f21446",
+    "text": "L8swf_draw_text.c"
+  },
+  {
+    "rva": "0x1f2162f",
+    "text": "?swf_draw_triangulate.c"
+  },
+  {
+    "rva": "0x1f25c60",
+    "text": "drawCircle"
+  },
+  {
+    "rva": "0x1f25c70",
+    "text": "drawEllipse"
+  },
+  {
+    "rva": "0x1f25c80",
+    "text": "drawRect"
+  },
+  {
+    "rva": "0x1f25c90",
+    "text": "drawRoundRect"
+  },
+  {
+    "rva": "0x1f273c8",
+    "text": "IBitmapDrawable"
+  },
+  {
+    "rva": "0x1f289c0",
+    "text": "swf_draw_shape.c"
+  },
+  {
+    "rva": "0x2270d68",
+    "text": "RedrawWindow"
+  },
+  {
+    "rva": "0x22726f0",
+    "text": ".?AV?$idTriangleDrawVerts@G@@"
+  },
+  {
+    "rva": "0x229a060",
+    "text": ".?AV?$idTriangleDrawVerts@I@@"
+  },
+  {
+    "rva": "0x22f9990",
+    "text": ".?AV?$idSort@PEBVworldDrawSurf_t@@@@"
+  },
+  {
+    "rva": "0x22f99c8",
+    "text": ".?AV?$idSearch@PEBVworldDrawSurf_t@@@@"
+  },
+  {
+    "rva": "0x22f9a00",
+    "text": ".?AV?$idSort@VworldDrawSurf_t@@@@"
+  },
+  {
+    "rva": "0x22f9a38",
+    "text": ".?AV?$idSearch@PEAVdrawSurf_t@@@@"
+  },
+  {
+    "rva": "0x22f9ae0",
+    "text": ".?AV?$idSearch_Binary@PEBVworldDrawSurf_t@@VSurfaceWorldModelSearch@@@@"
+  },
+  {
+    "rva": "0x22f9b70",
+    "text": ".?AV?$idSort_Quick@PEBVworldDrawSurf_t@@VidSort_StaticWorld@@@@"
+  },
+  {
+    "rva": "0x22f9bf0",
+    "text": ".?AV?$idSort_Quick@VworldDrawSurf_t@@VWorldSurfaceSkyCloudsSort@@@@"
+  },
+  {
+    "rva": "0x22f9c80",
+    "text": ".?AV?$idSearch_Binary@PEBVworldDrawSurf_t@@VDepthWorldModelSearch@@@@"
+  },
+  {
+    "rva": "0x22f9d80",
+    "text": ".?AV?$idSearch_Binary@PEAVdrawSurf_t@@V?$SurfaceCompare@$0A@@@@@"
+  },
+  {
+    "rva": "0x22f9e80",
+    "text": ".?AV?$idSearch_Binary@PEAVdrawSurf_t@@V?$SurfaceCompare@$01@@@@"
+  },
+  {
+    "rva": "0x22f9f80",
+    "text": ".?AV?$idSearch_Binary@PEAVdrawSurf_t@@V?$SurfaceCompare@$00@@@@"
+  },
+  {
+    "rva": "0x22fa080",
+    "text": ".?AV?$idSearch_Binary@PEAVdrawSurf_t@@V?$SurfaceCompare@$07@@@@"
+  },
+  {
+    "rva": "0x2324b90",
+    "text": ".?AVarkPlayerStateDraw@@"
+  },
+  {
+    "rva": "0x2324bc0",
+    "text": ".?AVarkDeclPlayerStateDraw@@"
+  },
+  {
+    "rva": "0x2324bf0",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateDraw@@@@"
+  },
+  {
+    "rva": "0x2325de0",
+    "text": ".?AVarkPlayerStateUndraw@@"
+  },
+  {
+    "rva": "0x2325e10",
+    "text": ".?AVarkDeclPlayerStateUndraw@@"
+  },
+  {
+    "rva": "0x2325e40",
+    "text": ".?AV?$idDeclInfoTemplate@VarkDeclPlayerStateUndraw@@@@"
+  },
+  {
+    "rva": "0x2329b20",
+    "text": ".?AUdrawCheckMark_bool_t@@"
+  },
+  {
+    "rva": "0x235c230",
+    "text": ".?AV?$idList@VidDrawVert@@$0CC@$0?0@@"
+  }
+]

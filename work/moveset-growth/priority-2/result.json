@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host Slash retains native motion=0 and suppresses the walking bank",
+    "host standing Block retains motion=0 and takes native animation priority",
+    "host Slash retains native motion=1 and suppresses the walking bank",
+    "host crouched Block retains motion=1; standing bank does not override crouch",
+    "host native jump/fall suppresses the standing walking bank",
+    "host pause retires bank, rejects rearm, and resume does not replay it",
+    "client Slash retains native motion=0 and suppresses the walking bank",
+    "client standing Block retains motion=0 and takes native animation priority",
+    "client Slash retains native motion=1 and suppresses the walking bank",
+    "client crouched Block retains motion=1; standing bank does not override crouch",
+    "client native jump/fall suppresses the standing walking bank",
+    "client pause retires bank, rejects rearm, and resume does not replay it",
+    "Both players retain native checkpoint health 56; both independent avatars retain 40"
+  ],
+  "dll": "723540B709CCF7ECD999AC76B1A47F281E47B7AB9B6D2193A0D4EE0CF01941CB",
+  "scope": "Native Block/movement coexistence, action/stance/airborne priority and pause for the experimental bank; no new combat outcomes or jumping animation claim."
+}

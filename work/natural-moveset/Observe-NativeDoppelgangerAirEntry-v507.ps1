@@ -1,0 +1,115 @@
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take,[ValidateRange(-15,45)][int]$Pitch=30,[ValidateRange(100,800)][int]$ReleaseAfterJumpMs=180)
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+if(!$Take-or(Test-Path $out)){throw 'Unique take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+$pids=@{};$inventory=@{};$rows=[Collections.Generic.List[object]]::new();$events=[Collections.Generic.List[object]]::new();$checks=[Collections.Generic.List[string]]::new();$capture=$null;$monitor=$null;$strictMonitor=$null;$dirty=$false;$failure=$null
+$initialDll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;$initialProbe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function I($r,$lt=0,$ms=100){& "$lab/Send-D2Input.ps1" -Role $r -Button Neutral -LeftTrigger $lt -DurationMs $ms|Out-Null}
+function S($r,$suffix=''){for($a=0;$a-lt8;$a++){try{$v=Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw|ConvertFrom-Json;if($null-ne$v){return $v}}catch{};Start-Sleep -Milliseconds 15};throw 'Status unavailable'}
+function Q($r,$mode,$arg=0){for($a=0;$a-lt8;$a++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 20};throw "Native read $mode failed"}
+function OptionalFx($r){$raw=& "$lab/bin/d2_runtime_probe.exe" $pids[$r] --doppelganger-effects;$code=$LASTEXITCODE;if($code){return [pscustomobject]@{stable=$false;exitCode=$code}};return($raw|ConvertFrom-Json)}
+try{
+ foreach($r in 'host','client'){
+  $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
+  if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
+  foreach($cmd in 'coop_movement_resume off','coop_movement_bank off','coop_review_clip off','coop_shadow_stream off','coop_potion_fixture off','coop_bendtime_fixture off','coop_darkvision_fixture off','coop_mesmerize_fixture off','coop_domino_fixture off','coop_swarm_fixture off','coop_possession_fixture off','coop_doppelganger_fixture off','coop_movement_fixture off','coop_movement_fixture 60000'){C $r $cmd}
+  if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Clean living fixture required'}
+  $inventory[$r]=Q $r '--player-inventory';$inventory[$r]|ConvertTo-Json -Depth 8|Set-Content "$out/inventory-before-$r.json"
+ }
+ $dirty=$true
+ C host 'setviewpos -34.3 -154.8 68.1 90 0'
+ C client 'setviewpos -48.59 -155.07 68.1 90 0';Start-Sleep -Milliseconds 800
+ & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role client -Pitch $Pitch -Evidence "$out/source-camera.json" -Quick
+ $ground=Q client '--player-states';$ground|ConvertTo-Json -Depth 10|Set-Content "$out/source-grounded.json"
+ if(!$ground.motionValid-or$ground.motion-ne0-or$ground.stance-ne0-or[Math]::Abs([double]$ground.position[2]-66.4370575)-gt.03){throw 'Emily is not grounded on measured test floor'}
+ $baselineEntities=Q client '--entities';$baselineEntities|ConvertTo-Json -Depth 8|Set-Content "$out/entities-before.json"
+ $before=Q client '--player-doppelganger';$before|ConvertTo-Json -Depth 8|Set-Content "$out/before.json"
+ if($before.quantity-or$before.equipped-or$before.started){throw 'Doppelganger already owned or active'}
+ $manaBefore=& "$PSScriptRoot/Read-NativeMana.ps1" -Role client -Evidence "$out/mana-before.json"
+ C client 'coop_doppelganger_fixture 40000';$w=[Diagnostics.Stopwatch]::StartNew()
+ do{$f=S client '.doppelganger-fixture.json';if($f.result-eq'native_doppelganger_ready'){break};Start-Sleep -Milliseconds 60}while($w.ElapsedMilliseconds-lt6500)
+ if($f.result-ne'native_doppelganger_ready'){
+  $f|ConvertTo-Json -Depth 8|Set-Content "$out/acquisition-fixture.json"
+  $inv=Q client '--player-inventory';$inv|ConvertTo-Json -Depth 10|Set-Content "$out/acquisition-inventory.json"
+  $item=@($inv.items|Where-Object name -eq 'models/powers/doppelganger/doppelganger.inventoryitem')
+  if($item.Count-eq1-and$item[0].component-ne'0x0'){Q client '--object' $item[0].component|ConvertTo-Json -Depth 12|Set-Content "$out/acquisition-component.json";Q client '--components' $item[0].handle|ConvertTo-Json -Depth 12|Set-Content "$out/acquisition-components.json"}
+  throw "Native Doppelganger acquisition failed: $($f.result)"
+ }
+ $power=Q client '--player-doppelganger';$power|ConvertTo-Json -Depth 8|Set-Content "$out/enabled.json"
+ if(!$power.instantiated-or!$power.started-or!$power.equipped-or$power.quantity-ne1){throw 'Exact native Doppelganger item not ready'}
+ $checks.Add('Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation')
+ & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role client -Pitch -60 -Evidence "$out/holster-look-away.json" -Quick
+ & "$lab/Send-D2Input.ps1" -Role client -Button X -DurationMs 1000|Out-Null;Start-Sleep -Milliseconds 1200
+ & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role client -Pitch $Pitch -Evidence "$out/holster-look-return.json" -Quick
+ $context=Q client '--player-states';$sword=Q client '--player-sword'
+ $context|ConvertTo-Json -Depth 10|Set-Content "$out/context-before.json"
+ if($context.stance-ne0-or!$context.motionValid-or$context.motion-ne0-or$sword.equipped){throw 'Native grounded holstered context not established'}
+ $hwnd=(Get-Process -Id $pids.client).MainWindowHandle.ToInt64();if(!$hwnd){throw 'Source window missing'}
+ $args=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t','16','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$PSScriptRoot/$Take.mp4")
+ $start=[DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds();$capture=Start-Process (Get-Command ffmpeg).Source -ArgumentList $args -WindowStyle Hidden -RedirectStandardError "$out/capture.log" -RedirectStandardOutput "$out/capture.stdout" -PassThru
+ Start-Sleep -Milliseconds 600;if($capture.HasExited){throw 'Source capture failed'}
+ $monitor=Start-Process "$lab/bin/d2_runtime_probe.exe" -ArgumentList @($pids.client,'--watch-midnight','15000') -WindowStyle Hidden -RedirectStandardOutput "$out/midnight.ndjson" -RedirectStandardError "$out/midnight.stderr" -PassThru
+
+ $strictMonitor=Start-Process "$lab/bin/d2_runtime_probe.exe" -ArgumentList @($pids.client,'--watch-doppelganger-scenes','15000') -WindowStyle Hidden -RedirectStandardOutput "$out/power-scenes.ndjson" -RedirectStandardError "$out/power-scenes.stderr" -PassThru
+ $w.Restart();$cast=$false;$jumped=$false;$entityNext=5000
+
+ while($w.ElapsedMilliseconds-lt14000){
+  if(!$cast-and$w.ElapsedMilliseconds-ge1100){
+   & "$lab/Send-D2Input.ps1" -Role client -Button A -LeftTrigger 255 -DurationMs 700|Out-Null;$cast=$true;$jumped=$true
+   $events.Add([pscustomobject]@{videoTime=([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()-$start)/1000;input='Native A+LT700 from holstered standing; observe entry while jumping, then natural release'})
+  }
+  $scene=Q client '--midnight'
+  $entities=$null;if($w.ElapsedMilliseconds-ge$entityNext){$entityNext=$w.ElapsedMilliseconds+2000;$entities=Q client '--entities'}
+  $rows.Add([pscustomobject]@{ms=$w.ElapsedMilliseconds;videoTime=([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()-$start)/1000;player=(Q client '--player-states');midnight=$scene;sword=(Q client '--player-sword');power=(Q client '--player-doppelganger');component=(Q client '--object' $power.component);effects=(OptionalFx client);entities=@($entities.entities|Where-Object {$_.definitionName-match'(?i)(doppelganger|decoy_entity|deadlyshadow)'})})
+  Start-Sleep -Milliseconds 30
+ }
+ I client;$manaAfter=& "$PSScriptRoot/Read-NativeMana.ps1" -Role client -Evidence "$out/mana-after.json"
+ $monitor.WaitForExit(4000)|Out-Null;if(!$monitor.HasExited-or$monitor.ExitCode){throw 'Raw Midnight watcher failed'}
+ $samples=@(Get-Content "$out/midnight.ndjson"|ForEach-Object {$_|ConvertFrom-Json})
+ $scenes=@($samples|ForEach-Object instances|Where-Object {$_.state-eq3-and$_.asset-like'*power_decoy_cast*'})
+ foreach($part in 'in','loop','out'){if(!@($scenes|Where-Object asset -eq "midnight/gameplay/player/base/powers/power_decoy_cast_$part.midnightscene").Count){throw "Native Doppelganger $part phase not observed"}}
+ if(@($scenes|Where-Object {!$_.bindingsResearch.Count-or@($_.bindingsResearch|Where-Object {!$_.reciprocal}).Count}).Count){throw 'Native Doppelganger scene bindings not reciprocal'}
+ [ordered]@{scenes=@($scenes|Group-Object asset,subscene|ForEach-Object {[ordered]@{scene=$_.Name;samples=$_.Count;durationMs=@($_.Group.sceneDurationMs|Sort-Object -Unique)}});manaBefore=$manaBefore.currentCandidate;manaAfter=$manaAfter.currentCandidate;nativeStateSets=@($rows|ForEach-Object {($_.player.active.id|Sort-Object)-join','}|Sort-Object -Unique);observedEntityDefinitions=@($rows.entities.definitionName|Sort-Object -Unique);scope='Source-only native phase/lifecycle observation in isolated AI-held Dunwall; no remote gameplay or body binding'}|ConvertTo-Json -Depth 12|Set-Content "$out/doppelganger-observations.json"
+ $checks.Add('Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets')
+ $strictMonitor.WaitForExit(4000)|Out-Null;if(!$strictMonitor.HasExited-or$strictMonitor.ExitCode){throw 'Doppelganger state watcher failed'}
+ $strict=@(Get-Content "$out/power-scenes.ndjson"|ForEach-Object {$_|ConvertFrom-Json})
+ $airRows=@($rows|Where-Object {@($_.player.active|Where-Object {$_.id-in2,3}).Count})
+ $overlap=@($airRows|Where-Object {@($_.midnight.instances|Where-Object {$_.state-eq3-and$_.asset-like'*power_decoy_cast_*'}).Count})
+ $airEntry=@($airRows|Where-Object {@($_.midnight.instances|Where-Object {$_.state-eq3-and$_.asset-eq'midnight/gameplay/player/base/powers/power_decoy_cast_in.midnightscene'-and$_.sceneDurationMs-eq466-and@($_.bindingsResearch).Count-eq1-and$_.bindingsResearch[0].reciprocal}).Count})
+ $peak=($rows|ForEach-Object {[double]$_.player.position[2]}|Measure-Object -Maximum).Maximum
+ $fastAir=@($strict|Where-Object {$_.playerStatesValid-and(2-in$_.activeStates-or3-in$_.activeStates)})
+ [ordered]@{jumpInput=$jumped;jumpAndAimMs=700;holstered=$true;airStateSamples=$airRows.Count;airAndRawSceneSamples=$overlap.Count;airEntrySamples=$airEntry.Count;fastAirSamples=$fastAir.Count;strictAirAccepted=@($fastAir|Where-Object valid).Count;strictAccepted=@($strict|Where-Object valid).Count;peakHeight=$peak;initialHeight=$context.position[2];finalHeight=$rows[-1].player.position[2];stateSets=@($strict|Where-Object playerStatesValid|ForEach-Object {($_.activeStates|Sort-Object)-join','}|Sort-Object -Unique);airRows=$airRows;fastAir=$fastAir;scope='Independent native Jump/Fall and raw scene overlap; current production reader may reject airborne casting. No remote air integration claimed.'}|ConvertTo-Json -Depth 20|Set-Content "$out/air-context-observations.json"
+ if(@($rows.player|Where-Object {$_.stance-ne0-or!$_.defaultMode-or@($_.active|Where-Object {$_.id-notin0,2,3,63}).Count}).Count){throw 'Unexpected native state during bounded jump observation'}
+ if(!$jumped-or!$airRows.Count-or$peak-[double]$context.position[2]-gt3-or[Math]::Abs([double]$rows[-1].player.position[2]-$context.position[2])-gt.3){throw 'Native jump did not remain bounded and recover the same floor'}
+ if(!$airEntry.Count){throw 'No directly sampled native airborne entry; inputs alone do not prove airborne casting'}
+ $checks.Add('Native Jump/Fall directly overlaps reciprocal466ms Doppelganger entry; bounded jump returns to the same floor')
+ if($manaAfter.currentCandidate-ge$manaBefore.currentCandidate){throw 'Native mana expenditure not observed'}
+ $checks.Add('Native source mana decreases after successful cast; replenishment means this is not an exact cost measurement')
+ $scenes|ConvertTo-Json -Depth 16|Set-Content "$out/doppelganger-scenes.json"
+ C client 'coop_doppelganger_fixture off';$w.Restart()
+ do{$f=S client '.doppelganger-fixture.json';if(!$f.active){break};Start-Sleep -Milliseconds 70}while($w.ElapsedMilliseconds-lt6500)
+ if($f.active-or$f.result-ne'quantity_and_selection_restored'){throw 'Native Doppelganger inventory restoration unconfirmed'}
+ foreach($r in 'host','client'){
+  $after=Q $r '--player-inventory';$after|ConvertTo-Json -Depth 8|Set-Content "$out/inventory-after-$r.json"
+  if(Compare-Object @($inventory[$r].items|ForEach-Object {"$($_.name):$($_.quantity)"}) @($after.items|ForEach-Object {"$($_.name):$($_.quantity)"})){throw 'Inventory quantities differ'}
+  if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Player or partner health changed'}
+ }
+ $checks.Add('Both original inventory quantities and player/partner health retained; world reset still required')
+}catch{$failure=$_.Exception.Message}finally{
+ foreach($r in 'host','client'){try{I $r;C $r 'coop_doppelganger_fixture off'}catch{}}
+ foreach($job in @($capture,$monitor,$strictMonitor)){if($job){$job.WaitForExit(18000)|Out-Null;if(!$job.HasExited-or$job.ExitCode){$failure=($failure+'; capture/watcher failed').TrimStart('; ')}}}
+ foreach($r in 'host','client'){try{C $r 'coop_movement_fixture off'}catch{}}
+ $rows|ConvertTo-Json -Depth 22|Set-Content "$out/states.json"
+ if($dirty){try{
+  & "$root/work/PrepareShadowSword.ps1" *> "$out/checkpoint-restore.log"
+  foreach($r in 'host','client'){if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Restored health differs'}}
+  $p=Q client '--player-doppelganger';if($p.quantity-or$p.equipped-or$p.started){throw 'Doppelganger remains acquired after checkpoint'}
+  $entities=Q client '--entities';$entities|ConvertTo-Json -Depth 8|Set-Content "$out/entities-restored.json"
+  $partnerHandle='0x{0:x}' -f [uint32](S client).probeActorHandle
+  $restoredClones=@($entities.entities|Where-Object {$_.definitionName-match'^models/powers/doppelganger/(decoy_entity|deadlyshadow_entity)(|_corvo)\.def$'-and$_.handle-ne$partnerHandle});if($restoredClones.Count){throw 'Unexpected native clone remains after checkpoint'}
+  $checks.Add('Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities')
+ }catch{$failure=($failure+'; checkpoint restore: '+$_.Exception.Message).TrimStart('; ')}}
+ try{foreach($f in(Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json)){if((Get-FileHash $f.Path).Hash-ne$f.Hash){throw 'Protected file changed'}};$checks.Add('All14 protected save/settings hashes retained')}catch{$failure=($failure+'; '+$_.Exception.Message).TrimStart('; ')}
+ [ordered]@{passed=(!$failure);failure=$failure;source='client';airborne=$true;jumpAndAimMs=700;holstered=$true;checks=$checks;events=$events;dll=$initialDll;probe=$initialProbe;scope='Native source holstered Emily Doppelganger simultaneous jump/aim entry observation. Native acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory.'}|ConvertTo-Json -Depth 8|Set-Content "$out/result.json"
+}
+if($failure){throw $failure};"PASS_NATIVE_DOPPELGANGER_OBSERVATION $($checks.Count) checks"

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "failure": null,
+  "dll": "E3DAB14778127A9F3A12432A0FB69D6A2E7E866627BC12F62C7B616A7F70E437",
+  "source": "host",
+  "checks": [
+    "Selected ordinary-input native interaction sequences and both actual game views recorded; activation and body continuity require independent audit",
+    "Both complete inventories and player/partner health restored from isolated checkpoint",
+    "All14 protected save/settings hashes retained"
+  ],
+  "cases": [
+    {
+      "case": "coin",
+      "target": "pickups_coin_emily_lowvalue_4",
+      "samples": 124,
+      "sourceLogic": [
+        1
+      ],
+      "states": [
+        6,
+        81
+      ]
+    }
+  ],
+  "scope": "Native food/coin/note source interaction with existing full-body and Steam transport. No automatic acceptance of target activation, a new gesture, shared world outcome or complete movement."
+}

@@ -1,0 +1,24 @@
+# Historical note: work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M10.md
+
+Original: [work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M10.md](<../../../../work/tool-evaluation-2026-10-12/void-slice/kanban/goals/M10.md>)
+
+SHA-256: `3352553DD7DE428ECEB5783499C8475A47A95973D209ED27C0C9543107A7AB67`; 2221 bytes.
+
+````markdown
+# M10 — Nit capture
+
+During a goal's work, the user notices tiny corrections that don't belong to it — a CLAUDE.md rule, a typo, a one-line convention update, a small rename. Today each forces a bad choice: inline detour that pollutes the goal's PR and breaks its `Paths:` discipline, dropped on the floor because there's no capture mechanism, or a standalone goal/PR which is absurd overhead for a 30-second change. This goal builds the missing slot. A `/nit` command files a tiny single-edit chore to a long-lived `nits` branch (storage substrate is a sibling `../void-slice-nits/` worktree, so capture never touches the active goal's branch). `/goal-slice` surfaces pending nits and adopts the ones that fit the goal's `Paths:`, materializing each as an ordinary ticket on the goal branch with `**Origin:** nit-<timestamp>`. Adoption is race-safe: the `git push` that removes a nit from the `nits` branch is the atomic claim, so two concurrent slices can't both pick up the same nit. Success: the user files a nit in any session at any time without polluting the active goal, and the next `/goal-slice` absorbs adopted nits as tickets that ride the goal's PR.
+
+**Scope:** new `/nit` slash command (`.claude/commands/nit.md`) and helper script (`tools/nit.sh`); integration into `/goal-define` (informational surface only) and `/goal-slice` (atomic-claim adoption, Paths-subset enforcement, ticket materialization with `Origin:`); the long-lived `nits` branch and `../void-slice-nits/` worktree as the storage substrate; documentation in `CLAUDE.md § Kanban` and `kanban/README.md`. Excludes any mechanism that bypasses M9's `Paths:` contract — an adopted nit's `Paths:` must be a subset of the adopting goal's or it gets deferred. Excludes auto-expiry, claim-revocation flows, multi-edit nits (single-file/single-conceptual-change is the sizing bound; bigger work files a ticket directly), and a GitHub Issues or external-store backend. Adjacent to [M9](M9.md), whose `Paths:` discipline and goal-as-unit-of-PR contracts this goal extends rather than amends.
+
+**Paths:**
+- .claude/commands/**
+- kanban/README.md
+- kanban/goals/M10.md
+- kanban/todo/M10.*
+- tools/**
+- CLAUDE.md
+
+**Status:** done.
+
+````

@@ -1,0 +1,196 @@
+{
+  "at": "2026-10-14T09:09:46.662133+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1022",
+    "candidate-npc-combat-v1026"
+  ],
+  "dll": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+  "bankManifest": "work/natural-moveset/parry-bank-manifest-v1022.json",
+  "protocol": 70,
+  "cases": [
+    {
+      "take": "npc-parry-scenes-v1021",
+      "candidate": "A3A3D2504BC3A8851F8D2CF90AFBA86362CA072C13B96C5EEC0E4416E868F990",
+      "passed": true,
+      "scope": "Passed observation: Source observation on 1018 (--watch-midnight): relayed result1 parries start sword_parry_win Scene_1/500 within 0-31 ms; result0 block starts sword_parry_hit_1 Scene_1/533 after 16 ms; both bind player camera, owned right arm and the attacking NPC. The run also passed the full timed-parry relay acceptance.",
+      "result": {
+        "failure": null
+      }
+    },
+    {
+      "take": "npc-parry-presentation-v1023",
+      "candidate": "A7637CA17028C1423C3C6ADCBEDE267ABDA4116FF8E1829FAC233E0A1AD90D66",
+      "passed": true,
+      "scope": "Candidate1022: receiver timed parry (variant21) presented on the host remote body as bank68 clip358 (8 samples, weight>0.5); no block occurred so clip357 unexercised.",
+      "result": {
+        "result": "Bounded generic native enemy sword routing to actual remote player; restored isolated lab.",
+        "presentation": {
+          "wrongClip": 0,
+          "impact": 0,
+          "all": 8,
+          "parry": 8
+        },
+        "defense": {
+          "blocked": 0,
+          "hostReactions": 1,
+          "initial": 56,
+          "parryLose": 1,
+          "hostParryWin": 0,
+          "hostParryLose": 1,
+          "defended": 1,
+          "applied": 3,
+          "consumed": 4,
+          "hostBlocked": 0,
+          "expectedLoss": 35.0,
+          "swordDamageCalls": 3,
+          "hostReactionFailures": 0,
+          "parryWin": 0,
+          "final": 35
+        }
+      }
+    },
+    {
+      "take": "npc-parry-presentation-v1023b",
+      "candidate": "A7637CA17028C1423C3C6ADCBEDE267ABDA4116FF8E1829FAC233E0A1AD90D66",
+      "passed": false,
+      "scope": "Failed run: One relayed block (relay consistent) whose impact scene was not presented on the host (host events 17-19 skipped); cause not determined. Restoration passed.",
+      "result": {
+        "failure": "Native defense impact/parry scene did not reach the remote body as bank68 clips 357/358"
+      }
+    },
+    {
+      "take": "npc-combat-scene-v1024",
+      "candidate": "A7637CA17028C1423C3C6ADCBEDE267ABDA4116FF8E1829FAC233E0A1AD90D66",
+      "passed": false,
+      "scope": "Failed run: Diagnostic --watch-combat-scene run: the shared reader accepts sword_parry_hit_1 as variant19 (3 times) and sword_parry_win as 21; stage-6 misses are the normal handle-0 gaps. Cleanup failed (input packet expired; both instances left on the native Press-any-key screen). Recovered separately: npc-combat-scene-v1024/recovery/result.json (gameplay, health56, partners, protected14).",
+      "result": {
+        "failure": "Packet expired before atomic publication.; host: Native query failed host --health; client: Native query failed client --health"
+      }
+    },
+    {
+      "take": "npc-parry-presentation-v1025",
+      "candidate": "A7637CA17028C1423C3C6ADCBEDE267ABDA4116FF8E1829FAC233E0A1AD90D66",
+      "passed": true,
+      "scope": "Candidate1022: receiver block impact (sword_parry_hit_2, variant20) and three timed parries (21) presented on the host remote body as clips357/358 (9 and 25 samples); every source event received in order with zero rejections.",
+      "result": {
+        "result": "Bounded generic native enemy sword routing to actual remote player; restored isolated lab.",
+        "presentation": {
+          "wrongClip": 0,
+          "parry": 25,
+          "impact": 9,
+          "all": 219
+        },
+        "defense": {
+          "initial": 56,
+          "expectedLoss": 30.0,
+          "blocked": 1,
+          "hostReactions": 4,
+          "hostParryWin": 0,
+          "consumed": 6,
+          "hostParryLose": 3,
+          "final": 35,
+          "parryLose": 3,
+          "hostReactionFailures": 0,
+          "applied": 2,
+          "hostBlocked": 1,
+          "swordDamageCalls": 2,
+          "defended": 4,
+          "parryWin": 0
+        }
+      }
+    },
+    {
+      "take": "observer-camera-v1027",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": false,
+      "scope": "Failed run: Harness failure: Send-D2Command.ps1 allowlist lacked coop_observer_camera (hold and cleanup off refused). Host returned to its parked position; protected files unchanged.",
+      "result": {
+        "failure": "Command is outside the bounded native research command set."
+      }
+    },
+    {
+      "take": "observer-camera-v1027b",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": false,
+      "scope": "Failed run: Validator defect: parked check read the (held) native view position instead of the body position; all functional checks passed and the body was parked.",
+      "result": {
+        "failure": "Observer camera checks failed"
+      }
+    },
+    {
+      "take": "observer-camera-v1027c",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": true,
+      "scope": "Candidate1026 lab observer camera: native render view held at the observer pose while the host body returned to its parked position; overrides grew; released by off.",
+      "result": {
+        "result": "Lab-only observer camera hold on host; no gameplay assertion.",
+        "checks": {
+          "hostParked": true,
+          "released": true,
+          "held": true,
+          "heldNearView": true,
+          "overridesGrew": true
+        }
+      }
+    },
+    {
+      "take": "npc-parry-observed-v1028",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": false,
+      "scope": "Failed run: Setup failure before any relayed contact: native positive control did not detect the host within 4 s. Restoration passed.",
+      "result": {
+        "failure": "Native local positive control did not detect player host"
+      }
+    },
+    {
+      "take": "npc-parry-observed-v1028b",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": false,
+      "scope": "Failed run: Owned clone 40 -> 37 about 3.8 s into the defense loop; damage records were not saved by that harness version, so the source is unattributed. Restoration passed.",
+      "result": {
+        "failure": "Owned clone absorbed gameplay damage instead of routing it"
+      }
+    },
+    {
+      "take": "npc-parry-observed-v1028c",
+      "candidate": "54FCA892CF635AE5345CFD2041736BD4CDE41F8A5FB3308F49BE9E64759B4150",
+      "passed": true,
+      "scope": "Candidate1026: defense presentation with the host observer camera watching the remote player: 2 blocks + 1 timed parry relayed natively, host remote body presented clips357 (12 samples) and 358 (7), relay/ack/observer counts consistent, restoration passed.",
+      "result": {
+        "result": "Bounded generic native enemy sword routing to actual remote player; restored isolated lab.",
+        "presentation": {
+          "impact": 12,
+          "wrongClip": 0,
+          "parry": 7,
+          "all": 318
+        },
+        "defense": {
+          "hostParryLose": 1,
+          "hostParryWin": 0,
+          "applied": 3,
+          "blocked": 2,
+          "final": 35,
+          "defended": 3,
+          "expectedLoss": 25.0,
+          "hostReactions": 3,
+          "hostReactionFailures": 0,
+          "swordDamageCalls": 3,
+          "hostBlocked": 2,
+          "consumed": 6,
+          "parryWin": 0,
+          "parryLose": 1,
+          "initial": 56
+        }
+      }
+    }
+  ],
+  "complete": false,
+  "notes": [
+    "Send-D2Command.ps1 allowlist gained coop_observer_camera after candidate1026 was staged; the archived copy predates that one-word change."
+  ],
+  "outstanding": [
+    "Donor deflection clips357/358 are functional stand-ins: acting, block-idle transition and sword/hand contact unreviewed; final visual acceptance belongs to the animation review.",
+    "1023b missed impact presentation and 1028b unattributed clone damage (40->37) remain unexplained.",
+    "Crouched/sneak block impacts, parry-win (0% native chance) and heavy attacks remain unexercised."
+  ]
+}

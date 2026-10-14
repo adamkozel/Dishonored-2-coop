@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "failure": "Native grounded crouched armed context not established",
+  "source": "client",
+  "checks": [
+    "Exact Emily Shadow Walk item acquired through native inventory API; no direct state transition or damage invocation",
+    "Both isolated checkpoints restore original health/inventory and unowned Shadow Walk item",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [],
+  "dll": "E7C012BAE02C2F7ADCCE655142C965CA1EE8F9969BCA732C24E086C39662174A",
+  "probe": "EEE9BDDD20B69B14E47CFC9EA9CF4DAFDE81FFA7FB1C44563494551B65CFBCAE",
+  "scope": "Source-only crouched Shadow Walk activation, conditional bounded forward/back movement, requested exit and reciprocal native scene/state/equipment observations. Strict presentation-reader coverage measured separately; no remote crouched animation acceptance. Verified533 and probe541 pinned. Checkpoint and protected saves must restore."
+}

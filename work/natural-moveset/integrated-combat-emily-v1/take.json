@@ -1,0 +1,184 @@
+{
+  "character": "emily",
+  "source": "client",
+  "observer": "host",
+  "start": 1791656665298,
+  "captureStart": 1791656664177,
+  "failure": null,
+  "chapters": [
+    {
+      "name": "Armed standing",
+      "seconds": 1.123,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Native short slash",
+      "seconds": 2.444,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Combo first slash",
+      "seconds": 5.365,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Combo second slash",
+      "seconds": 5.895,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Combo third slash",
+      "seconds": 6.422,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Heavy windup, hold and release",
+      "seconds": 8.936,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Standing guard and release",
+      "seconds": 12.433,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouch",
+      "seconds": 16.239,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched slash",
+      "seconds": 18.466,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Crouched guard and release",
+      "seconds": 21.547,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Return to standing",
+      "seconds": 25.443,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    },
+    {
+      "name": "Final armed idle",
+      "seconds": 28.456,
+      "timing_precision": "Command issue relative to recorder launch; native response and recorder initialization add latency."
+    }
+  ],
+  "events": [
+    [
+      0,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Armed standing"
+    ],
+    [
+      1300,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Native short slash"
+    ],
+    [
+      4200,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Combo first slash"
+    ],
+    [
+      4750,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Combo second slash"
+    ],
+    [
+      5300,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Combo third slash"
+    ],
+    [
+      7800,
+      0,
+      0,
+      1500,
+      "Neutral",
+      255,
+      "Heavy windup, hold and release"
+    ],
+    [
+      11300,
+      0,
+      0,
+      1500,
+      "RightShoulder",
+      0,
+      "Standing guard and release"
+    ],
+    [
+      15100,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Crouch"
+    ],
+    [
+      17300,
+      0,
+      0,
+      180,
+      "Neutral",
+      255,
+      "Crouched slash"
+    ],
+    [
+      20400,
+      0,
+      0,
+      1500,
+      "RightShoulder",
+      0,
+      "Crouched guard and release"
+    ],
+    [
+      24300,
+      0,
+      0,
+      180,
+      "B",
+      0,
+      "Return to standing"
+    ],
+    [
+      27300,
+      0,
+      0,
+      100,
+      "Neutral",
+      0,
+      "Final armed idle"
+    ]
+  ],
+  "dll": "D3EF81227796790A8373903E189BC2833E44CA469A82FC1F6402FF9BFEEC6452",
+  "bank": "DB17268E8F3FC072AF3E00AFADCD20D8065F6F5AB4575AAA7B31D0BE04FA37C8",
+  "capture": "FFmpeg gfxcapture, one game HWND, real-time timestamps, no duplicated output frames",
+  "scope": "Actual native sword scene semantics over Steam drive authored standing/crouched body attacks and guards. Root placement and local first-person controls remain native. Visual acceptance, hits, air combat and other movement families remain pending."
+}

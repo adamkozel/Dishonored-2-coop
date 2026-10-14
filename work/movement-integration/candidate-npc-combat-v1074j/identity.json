@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T12:38:54.054941+02:00",
+  "dll": "B781C12A3C7F4E301268EF231AB7EBF52E2F3847AF73177339BF75F9D5BD963F",
+  "probe": "D3C9B6B5D30FED9988415979A5523DC7AFCC5ECDE81A7D8DA28CABD5A6C9B9B3",
+  "previous": "candidate-npc-combat-v1074i",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": true,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1074j on 1074i: read-only probe --presentation-hold (1085) showed the player state machine is unreadable inside the native Powerwheel (logic stack InGame+Powerwheel) while the stance reader succeeds; the protocol73 hold now proves the wheel with two stable stance reads (same game, player, physics component), carrying the last validated equipment state. Runtime pending.",
+  "scopedWheelPresentationVerified": true,
+  "scopedMissionEquipmentVerified": true,
+  "runtimeEvidence": "../mission-equipment-audit-v1089.json"
+}

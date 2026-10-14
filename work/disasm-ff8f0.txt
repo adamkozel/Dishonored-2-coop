@@ -1,0 +1,193 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001400FF8F0: push        rbx
+  00000001400FF8F2: push        r13
+  00000001400FF8F4: mov         eax,1448h
+  00000001400FF8F9: call        00000001411AD7C0
+  00000001400FF8FE: sub         rsp,rax
+  00000001400FF901: mov         r13,rcx
+  00000001400FF904: add         rcx,18h
+  00000001400FF908: call        0000000140143FF0
+  00000001400FF90D: test        eax,eax
+  00000001400FF90F: jle         00000001400FFB91
+  00000001400FF915: mov         qword ptr [rsp+0000000000001460h],rbp
+  00000001400FF91D: mov         qword ptr [rsp+0000000000001468h],rsi
+  00000001400FF925: mov         qword ptr [rsp+0000000000001470h],rdi
+  00000001400FF92D: mov         qword ptr [rsp+0000000000001440h],r12
+  00000001400FF935: mov         qword ptr [rsp+0000000000001438h],r14
+  00000001400FF93D: mov         qword ptr [rsp+0000000000001430h],r15
+  00000001400FF945: cmp         dword ptr [r13+10h],0
+  00000001400FF94A: jne         00000001400FFB5D
+  00000001400FF950: lea         rcx,[r13+18h]
+  00000001400FF954: xor         r14d,r14d
+  00000001400FF957: xor         r15b,r15b
+  00000001400FF95A: xor         r12b,r12b
+  00000001400FF95D: xor         esi,esi
+  00000001400FF95F: call        0000000140143FF0
+  00000001400FF964: test        eax,eax
+  00000001400FF966: jle         00000001400FFADC
+  00000001400FF96C: nop         dword ptr [rax]
+  00000001400FF970: lea         rcx,[r13+18h]
+  00000001400FF974: mov         edx,esi
+  00000001400FF976: call        0000000140140230
+  00000001400FF97B: cmp         byte ptr [rax],22h
+  00000001400FF97E: jne         00000001400FF983
+  00000001400FF980: inc         r14d
+  00000001400FF983: lea         rcx,[r13+18h]
+  00000001400FF987: mov         edx,esi
+  00000001400FF989: call        0000000140140230
+  00000001400FF98E: cmp         byte ptr [rax],2Fh
+  00000001400FF991: jne         00000001400FF9CC
+  00000001400FF993: test        r14d,r14d
+  00000001400FF996: jne         00000001400FF9CC
+  00000001400FF998: lea         rcx,[r13+18h]
+  00000001400FF99C: lea         edi,[rsi+1]
+  00000001400FF99F: call        0000000140143FF0
+  00000001400FF9A4: cmp         edi,eax
+  00000001400FF9A6: jge         00000001400FF9CC
+  00000001400FF9A8: lea         rcx,[r13+18h]
+  00000001400FF9AC: mov         edx,edi
+  00000001400FF9AE: call        0000000140140230
+  00000001400FF9B3: lea         rcx,[r13+18h]
+  00000001400FF9B7: mov         edx,edi
+  00000001400FF9B9: cmp         byte ptr [rax],2Ah
+  00000001400FF9BC: sete        r12b
+  00000001400FF9C0: call        0000000140140230
+  00000001400FF9C5: cmp         byte ptr [rax],2Fh
+  00000001400FF9C8: sete        r15b
+  00000001400FF9CC: test        r15b,r15b
+  00000001400FF9CF: je          00000001400FFA19
+  00000001400FF9D1: lea         rcx,[r13+18h]
+  00000001400FF9D5: mov         edi,esi
+  00000001400FF9D7: call        0000000140143FF0
+  00000001400FF9DC: cmp         esi,eax
+  00000001400FF9DE: jge         00000001400FFA81
+  00000001400FF9E4: lea         rcx,[r13+18h]
+  00000001400FF9E8: mov         edx,edi
+  00000001400FF9EA: call        0000000140140230
+  00000001400FF9EF: cmp         byte ptr [rax],0Ah
+  00000001400FF9F2: je          00000001400FFA81
+  00000001400FF9F8: lea         rcx,[r13+18h]
+  00000001400FF9FC: mov         edx,edi
+  00000001400FF9FE: call        0000000140140230
+  00000001400FFA03: cmp         byte ptr [rax],0Dh
+  00000001400FFA06: je          00000001400FFA81
+  00000001400FFA08: lea         rcx,[r13+18h]
+  00000001400FFA0C: inc         edi
+  00000001400FFA0E: call        0000000140143FF0
+  00000001400FFA13: cmp         edi,eax
+  00000001400FFA15: jl          00000001400FF9E4
+  00000001400FFA17: jmp         00000001400FFA81
+  00000001400FFA19: test        r12b,r12b
+  00000001400FFA1C: je          00000001400FFA93
+  00000001400FFA1E: lea         rcx,[r13+18h]
+  00000001400FFA22: mov         edi,esi
+  00000001400FFA24: call        0000000140143FF0
+  00000001400FFA29: cmp         esi,eax
+  00000001400FFA2B: jge         00000001400FFA81
+  00000001400FFA2D: nop         dword ptr [rax]
+  00000001400FFA30: lea         rcx,[r13+18h]
+  00000001400FFA34: mov         edx,edi
+  00000001400FFA36: call        0000000140140230
+  00000001400FFA3B: cmp         byte ptr [rax],2Ah
+  00000001400FFA3E: jne         00000001400FFA60
+  00000001400FFA40: lea         rcx,[r13+18h]
+  00000001400FFA44: lea         ebp,[rdi+1]
+  00000001400FFA47: call        0000000140143FF0
+  00000001400FFA4C: cmp         ebp,eax
+  00000001400FFA4E: jge         00000001400FFA60
+  00000001400FFA50: lea         rcx,[r13+18h]
+  00000001400FFA54: mov         edx,ebp
+  00000001400FFA56: call        0000000140140230
+  00000001400FFA5B: cmp         byte ptr [rax],2Fh
+  00000001400FFA5E: je          00000001400FFA71
+  00000001400FFA60: lea         rcx,[r13+18h]
+  00000001400FFA64: inc         edi
+  00000001400FFA66: call        0000000140143FF0
+  00000001400FFA6B: cmp         edi,eax
+  00000001400FFA6D: jl          00000001400FFA30
+  00000001400FFA6F: jmp         00000001400FFA81
+  00000001400FFA71: inc         edi
+  00000001400FFA73: lea         rcx,[r13+18h]
+  00000001400FFA77: mov         edx,edi
+  00000001400FFA79: call        0000000140140230
+  00000001400FFA7E: mov         byte ptr [rax],0Ah
+  00000001400FFA81: lea         rcx,[r13+18h]
+  00000001400FFA85: mov         edx,esi
+  00000001400FFA87: call        0000000140140230
+  00000001400FFA8C: mov         esi,edi
+  00000001400FFA8E: mov         byte ptr [rax],0
+  00000001400FFA91: jmp         00000001400FFAA9
+  00000001400FFA93: test        r14b,1
+  00000001400FFA97: jne         00000001400FFAA9
+  00000001400FFA99: lea         rcx,[r13+18h]
+  00000001400FFA9D: mov         edx,esi
+  00000001400FFA9F: call        0000000140140230
+  00000001400FFAA4: cmp         byte ptr [rax],3Bh
+  00000001400FFAA7: je          00000001400FFADC
+  00000001400FFAA9: lea         rcx,[r13+18h]
+  00000001400FFAAD: mov         edx,esi
+  00000001400FFAAF: call        0000000140140230
+  00000001400FFAB4: cmp         byte ptr [rax],0Ah
+  00000001400FFAB7: je          00000001400FFADC
+  00000001400FFAB9: lea         rcx,[r13+18h]
+  00000001400FFABD: mov         edx,esi
+  00000001400FFABF: call        0000000140140230
+  00000001400FFAC4: cmp         byte ptr [rax],0Dh
+  00000001400FFAC7: je          00000001400FFADC
+  00000001400FFAC9: lea         rcx,[r13+18h]
+  00000001400FFACD: inc         esi
+  00000001400FFACF: call        0000000140143FF0
+  00000001400FFAD4: cmp         esi,eax
+  00000001400FFAD6: jl          00000001400FF970
+  00000001400FFADC: lea         rcx,[r13+18h]
+  00000001400FFAE0: call        0000000140143FF0
+  00000001400FFAE5: cmp         esi,eax
+  00000001400FFAE7: jge         00000001400FFAF7
+  00000001400FFAE9: lea         rcx,[r13+18h]
+  00000001400FFAED: mov         edx,esi
+  00000001400FFAEF: call        0000000140140230
+  00000001400FFAF4: mov         byte ptr [rax],0
+  00000001400FFAF7: lea         rcx,[r13+18h]
+  00000001400FFAFB: mov         dword ptr [rsp+20h],0
+  00000001400FFB03: call        00000001401D9090
+  00000001400FFB08: lea         rcx,[rsp+20h]
+  00000001400FFB0D: mov         r8b,1
+  00000001400FFB10: mov         rdx,rax
+  00000001400FFB13: call        0000000140132630
+  00000001400FFB18: lea         rcx,[r13+18h]
+  00000001400FFB1C: call        0000000140143FF0
+  00000001400FFB21: lea         rcx,[r13+18h]
+  00000001400FFB25: cmp         esi,eax
+  00000001400FFB27: jl          00000001400FFB30
+  00000001400FFB29: call        0000000140141390
+  00000001400FFB2E: jmp         00000001400FFB3B
+  00000001400FFB30: lea         r8d,[rsi+1]
+  00000001400FFB34: xor         edx,edx
+  00000001400FFB36: call        0000000140141F20
+  00000001400FFB3B: mov         rax,qword ptr [r13]
+  00000001400FFB3F: lea         rdx,[rsp+20h]
+  00000001400FFB44: mov         rcx,r13
+  00000001400FFB47: call        qword ptr [rax+68h]
+  00000001400FFB4A: lea         rcx,[r13+18h]
+  00000001400FFB4E: call        0000000140143FF0
+  00000001400FFB53: test        eax,eax
+  00000001400FFB55: jg          00000001400FF945
+  00000001400FFB5B: jmp         00000001400FFB61
+  00000001400FFB5D: dec         dword ptr [r13+10h]
+  00000001400FFB61: mov         r14,qword ptr [rsp+0000000000001438h]
+  00000001400FFB69: mov         r12,qword ptr [rsp+0000000000001440h]
+  00000001400FFB71: mov         rdi,qword ptr [rsp+0000000000001470h]
+  00000001400FFB79: mov         rsi,qword ptr [rsp+0000000000001468h]
+  00000001400FFB81: mov         rbp,qword ptr [rsp+0000000000001460h]
+  00000001400FFB89: mov         r15,qword ptr [rsp+0000000000001430h]
+
+  Summary
+
+     1A7D000 .text

@@ -1,0 +1,21 @@
+{
+  "passed": false,
+  "failure": "Native clone absence after fixture retirement not observed",
+  "source": "client",
+  "checks": [
+    "Exact Emily Doppelganger item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Native input produces reciprocal Doppelganger entry/loop/out scenes with observed clocks and state sets",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and retire spawned Doppelganger entities",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 1.807,
+      "input": "Native Emily LT1800 then release at grounded floor"
+    }
+  ],
+  "dll": "D45C0F58FB8364D44E5C5E46DAA545E0120AFA695BAB592BD12FB1317C50C0D2",
+  "probe": "EA052F5C0979C9DB69EE41B3FA98DD98421E8C9B7E28A95F06D14143EF4220EF",
+  "scope": "Native source Emily Doppelganger acquisition, controller input, raw scene clocks/state/equipment and spawned entity observations. AI held in the isolated Dunwall fixture; neither general doppelganger behavior nor remote movement/VFX/gameplay verified. Checkpoint and protected save restoration mandatory."
+}

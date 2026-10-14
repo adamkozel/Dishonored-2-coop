@@ -1,0 +1,67 @@
+{
+  "scope": "20-minute stability soak with the product controller: movement across the mission, shared deaths/restarts, transport/session/memory sampling; Dunwall fixture restored.",
+  "passed": true,
+  "cases": [
+    {
+      "armedEnd": {
+        "host": {
+          "npc": "renewed_after_shared_checkpoint",
+          "product": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "usable": "renewed_after_shared_checkpoint",
+          "checkpoint": "armed",
+          "fresh": true
+        },
+        "client": {
+          "npc": "renewed_after_shared_checkpoint",
+          "product": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "usable": "renewed_after_shared_checkpoint",
+          "checkpoint": "armed",
+          "fresh": true
+        }
+      },
+      "samples": 117,
+      "memory": {
+        "host": {
+          "startPriv": 6742609920,
+          "handlesEnd": 1463,
+          "endPriv": 6877687808,
+          "baselinePriv": 6769188864,
+          "handlesStart": 1474,
+          "growthMB": 103.5
+        },
+        "client": {
+          "startPriv": 6723735552,
+          "handlesEnd": 1478,
+          "endPriv": 6985867264,
+          "baselinePriv": 6753234944,
+          "handlesStart": 1480,
+          "growthMB": 221.9
+        }
+      },
+      "deaths": [
+        {
+          "dying": "host",
+          "restarted": true,
+          "ms": 360197,
+          "deathScreens": true
+        },
+        {
+          "dying": "client",
+          "restarted": true,
+          "ms": 738846,
+          "deathScreens": true
+        },
+        {
+          "dying": "host",
+          "restarted": true,
+          "ms": 1116434,
+          "deathScreens": true
+        }
+      ],
+      "soakMinutes": 20
+    }
+  ],
+  "failure": null
+}

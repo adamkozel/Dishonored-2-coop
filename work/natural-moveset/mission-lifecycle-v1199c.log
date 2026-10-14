@@ -1,0 +1,11 @@
+{
+  "cases": [],
+  "scope": "Lifecycle: partner avatar after a native map load (join-follow + product controller) and after a shared checkpoint restart, filmed from both windows; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "Partner avatar not present when facing (restart)"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-LifecycleRecovery-v1199.ps1:124[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 124 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mPartner avatar not present when facing (restart)[0m

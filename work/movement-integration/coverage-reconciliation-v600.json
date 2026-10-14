@@ -1,0 +1,335 @@
+{
+  "at": "2026-10-13T02:42:24.497314+02:00",
+  "scope": "Review metadata repair only, backed by exact archived evidence; not new feature completion.",
+  "items": [
+    {
+      "id": "pistol_draw_aim_fire_reload_holster",
+      "previous": "not_verified",
+      "new": "partial_native_steam_ranged_five_phase_both_roles",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\ranged-corvo-gun-network-v29-v1\\result.json",
+          "sha256": "5BDCF5EF2912B00EF440AB300C0AB4AF124E735C4B1F4699288435B9EABBA32D",
+          "dll": "30AB28F8591D40153679CD52D7B3534B4D3BE6AEF9F7D2DCAEDFDDEEEB45806B",
+          "checks": [
+            "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+            "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+            "Two native shots and a subsequent native empty trigger action observed",
+            "All five source-owned ranged phases reached the remote body through Steam",
+            "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+            "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+            "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+          ],
+          "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+        },
+        {
+          "path": "work\\natural-moveset\\ranged-emily-gun-network-v29-v1\\result.json",
+          "sha256": "68D9658CCA5CD867FCB7A92B4F575EF03BB1A2DCAD00E876D4209C152AFC5897",
+          "dll": "30AB28F8591D40153679CD52D7B3534B4D3BE6AEF9F7D2DCAEDFDDEEEB45806B",
+          "checks": [
+            "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+            "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+            "Two native shots and a subsequent native empty trigger action observed",
+            "All five source-owned ranged phases reached the remote body through Steam",
+            "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+            "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+            "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+          ],
+          "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    },
+    {
+      "id": "crossbow_draw_aim_fire_reload_holster",
+      "previous": "not_verified",
+      "new": "partial_native_steam_ranged_five_phase_both_roles",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\ranged-corvo-crossbow-network-v29-v1\\result.json",
+          "sha256": "A095E23EC366B27C9668E2B7D178E46DBCEC0067BF7CB8A3A4CEA1BE5B039287",
+          "dll": "30AB28F8591D40153679CD52D7B3534B4D3BE6AEF9F7D2DCAEDFDDEEEB45806B",
+          "checks": [
+            "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+            "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+            "Two native shots and a subsequent native empty trigger action observed",
+            "All five source-owned ranged phases reached the remote body through Steam",
+            "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+            "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+            "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+          ],
+          "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+        },
+        {
+          "path": "work\\natural-moveset\\ranged-emily-crossbow-network-v29-v1\\result.json",
+          "sha256": "65893058A5DE273F2311A19D737FFED7779044A8A8DC7ED11F109B9359F3AA81",
+          "dll": "30AB28F8591D40153679CD52D7B3534B4D3BE6AEF9F7D2DCAEDFDDEEEB45806B",
+          "checks": [
+            "Exact native ranged equipment acquired; normal controller holster/draw initializes native arm presentation",
+            "Native Steam v25 scene stream, v29 body bank and automatic cosmetic weapon attach ready",
+            "Two native shots and a subsequent native empty trigger action observed",
+            "All five source-owned ranged phases reached the remote body through Steam",
+            "Owned native scene reader validates fire, reload, empty, equip and unequip identities and clocks",
+            "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+            "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+          ],
+          "scope": "Two-round native ranged body/hand attachment integration candidate. Visual acceptance separate; remote projectiles, muzzle effects, sounds, upgrades and nonstanding contexts not yet integrated. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    },
+    {
+      "id": "corvo_windblast_cast",
+      "previous": "not_verified",
+      "new": "partial_native_steam_windblast_body_and_finite_world_fx",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\windblast-corvo-balanced-network-v28-v3\\result.json",
+          "sha256": "E0496708E77F0822AA6ED3D638774E358190CC8BDB18716016FC0A1AAB21601B",
+          "dll": "80E9E28879F84E427BF05BFEC45357430EE181376C9A1669CA28D4A5E9670F8A",
+          "checks": [
+            "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+            "Two native cast events drive remote whole-body Windblast animation through Steam",
+            "Both casts recover to original stance with network body ownership retained",
+            "First-person and remote native sword retain the original drawn/holstered state",
+            "Full-body cast retains original native crouch/standing stance throughout",
+            "Exactly two uniquely identified native source effects each create one finite remote world effect through Steam",
+            "Both clone-owned remote effects preserve the exact independently read native source origin and orientation",
+            "Replayed reliable packet is received and rejected without a second effect",
+            "Native cleanup restores original power quantity and selection",
+            "Both players and remote avatars retain native health; no animation damage events",
+            "Protected original executable, Steam API and save hashes unchanged"
+          ],
+          "scope": "Corvo Windblast ground stance/equipment/travel body integration. Native source controller casts and scene timing drive the remote whole body through Steam. Observed basic native cast FX drives one separate world-space presentation effect on the remote clone, preserving native position/axis and body timing. Original private screen distortion is excluded. Replay, finite cleanup and health are checked. Impacts, world physics outcomes, upgrades and broader lifecycle are not certified; visual quality requires separate review."
+        },
+        {
+          "path": "work\\natural-moveset\\windblast-corvo-balanced-empty-moving-v28-v3\\result.json",
+          "sha256": "776E7AFBAE60B535E0FBBB76F9938F4C9456E89BCDFF67612B5444B525AFC206",
+          "dll": "80E9E28879F84E427BF05BFEC45357430EE181376C9A1669CA28D4A5E9670F8A",
+          "checks": [
+            "Native Steam stream and exact v28 stance/equipment bank ready before the cast",
+            "Two native cast events drive remote whole-body Windblast animation through Steam",
+            "Both casts recover to original stance with network body ownership retained",
+            "First-person and remote native sword retain the original drawn/holstered state",
+            "Full-body cast retains original native crouch/standing stance throughout",
+            "Confirmed network travel continues to advance the gait during native casting",
+            "Exactly two uniquely identified native source effects each create one finite remote world effect through Steam",
+            "Both clone-owned remote effects preserve the exact independently read native source origin and orientation",
+            "Replayed reliable packet is received and rejected without a second effect",
+            "Native cleanup restores original power quantity and selection",
+            "Both players and remote avatars retain native health; no animation damage events",
+            "Protected original executable, Steam API and save hashes unchanged"
+          ],
+          "scope": "Corvo Windblast ground stance/equipment/travel body integration. Native source controller casts and scene timing drive the remote whole body through Steam. Observed basic native cast FX drives one separate world-space presentation effect on the remote clone, preserving native position/axis and body timing. Original private screen distortion is excluded. Replay, finite cleanup and health are checked. Impacts, world physics outcomes, upgrades and broader lifecycle are not certified; visual quality requires separate review."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    },
+    {
+      "id": "turn_in_place_90_180",
+      "previous": "not_verified",
+      "new": "partial_native_steam_stance_turns_both_roles",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\turn-stance-corvo-knee-v4\\result.json",
+          "sha256": "AB2C0C7A74ED848FA0F3F64B18BB67790C24E7F378C792C7A6C8DBF06CBD5AC6",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-corvo-unarmed-knee-v4\\result.json",
+          "sha256": "C8784B831322ECE929481432956DEDFD6EC4EB35960901310E08AD00910203AA",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "Native hands-free presentation ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-emily-knee-v4\\result.json",
+          "sha256": "365A5EEFE4EDB187B1DD0A06C9C3414075646145A21DA801BF3A4213D3665405",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-emily-unarmed-knee-v4\\result.json",
+          "sha256": "C31841F9EBB119D01F13948F470D7D36DF7EE69418C602EF8BBBF1739E59F314",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "Native hands-free presentation ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    },
+    {
+      "id": "crouched_turns",
+      "previous": "not_verified",
+      "new": "partial_native_steam_stance_turns_both_roles",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\turn-stance-corvo-knee-v4\\result.json",
+          "sha256": "AB2C0C7A74ED848FA0F3F64B18BB67790C24E7F378C792C7A6C8DBF06CBD5AC6",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-corvo-unarmed-knee-v4\\result.json",
+          "sha256": "C8784B831322ECE929481432956DEDFD6EC4EB35960901310E08AD00910203AA",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "Native hands-free presentation ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-emily-knee-v4\\result.json",
+          "sha256": "365A5EEFE4EDB187B1DD0A06C9C3414075646145A21DA801BF3A4213D3665405",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        },
+        {
+          "path": "work\\natural-moveset\\turn-stance-emily-unarmed-knee-v4\\result.json",
+          "sha256": "C31841F9EBB119D01F13948F470D7D36DF7EE69418C602EF8BBBF1739E59F314",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam stream and v19 full-stance turn bank ready",
+            "Native hands-free presentation ready",
+            "left-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "right-stance-turn: complete standing / crouched / standing turn and stopped recovery; three stable native pose samples",
+            "Native health and equipped/holstered sword states preserved through crouch recovery",
+            "Original files and protected saves unchanged"
+          ],
+          "scope": "Native stance changes while continuously turning, both directions. Complete-body stance and turn poses follow native source input, followed by standing recovery. Native actor root stays in place."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    },
+    {
+      "id": "slopes_and_stairs",
+      "previous": "not_verified",
+      "new": "partial_native_steam_dunwall_stairs_both_roles",
+      "receipts": [
+        {
+          "path": "work\\natural-moveset\\terrain-corvo-knee-v4\\result.json",
+          "sha256": "E03E3DBC9C3E267A73C91BAE1AF33A8A23C79E868B8F34ED7E916423EEB04D77",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam and both native body/weapon identities ready on safe-room stairs",
+            "up gait selected from delayed root grade for 60 samples and stopped without extra steps",
+            "corvo up traversed native staircase with active body bank and complete pose sample; height change 3.002487",
+            "down gait selected from delayed root grade for 38 samples and stopped without extra steps",
+            "corvo down traversed native staircase with active body bank and complete pose sample; height change -2.927006",
+            "Native health and sword attachments preserved",
+            "Original Steam files and protected saves unchanged"
+          ],
+          "scope": "Actual Imperial Safe Room staircase in current Dunwall map; native player physics owns height. Dedicated measured native up/down cycles selected by filtered root grade; native casts correct authored clone feet. Full terrain and visual acceptance remain separate."
+        },
+        {
+          "path": "work\\natural-moveset\\terrain-corvo-unarmed-knee-v4\\result.json",
+          "sha256": "970709584D3C5C10EAF93A6C27A8B104B80D1E4E8EF16BF877DB7EF8BBD002BA",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam and both native body/weapon identities ready on safe-room stairs",
+            "Native hands-free stance replicated; unarmed full-body bank active",
+            "up gait selected from delayed root grade for 50 samples and stopped without extra steps",
+            "corvo up traversed native staircase with active body bank and complete pose sample; height change 3.003182",
+            "down gait selected from delayed root grade for 33 samples and stopped without extra steps",
+            "corvo down traversed native staircase with active body bank and complete pose sample; height change -2.924141",
+            "Native health and sword attachments preserved",
+            "Original Steam files and protected saves unchanged"
+          ],
+          "scope": "Actual Imperial Safe Room staircase in current Dunwall map; native player physics owns height. Dedicated measured native up/down cycles selected by filtered root grade; native casts correct authored clone feet. Full terrain and visual acceptance remain separate."
+        },
+        {
+          "path": "work\\natural-moveset\\terrain-emily-knee-v4b\\result.json",
+          "sha256": "34DC364AE6642A1665A6BC95D2FBA400C6AFACB5B924CE20270D46CC65455D8A",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam and both native body/weapon identities ready on safe-room stairs",
+            "up gait selected from delayed root grade for 64 samples and stopped without extra steps",
+            "emily up traversed native staircase with active body bank and complete pose sample; height change 3.00248000000001",
+            "down gait selected from delayed root grade for 42 samples and stopped without extra steps",
+            "emily down traversed native staircase with active body bank and complete pose sample; height change -2.927006",
+            "Native health and sword attachments preserved",
+            "Original Steam files and protected saves unchanged"
+          ],
+          "scope": "Actual Imperial Safe Room staircase in current Dunwall map; native player physics owns height. Dedicated measured native up/down cycles selected by filtered root grade; native casts correct authored clone feet. Full terrain and visual acceptance remain separate."
+        },
+        {
+          "path": "work\\natural-moveset\\terrain-emily-unarmed-knee-v4\\result.json",
+          "sha256": "F606BE0A2AA827FC34F9A7CE0CE42FAAAAA5B39DB7BCA7A57F11A0FDDA9BA3A7",
+          "dll": "712205BCCB55BCE4D733AB3F910F5338DA476438B1B1138B0926D9FCC4E0329F",
+          "checks": [
+            "Native Steam and both native body/weapon identities ready on safe-room stairs",
+            "Native hands-free stance replicated; unarmed full-body bank active",
+            "up gait selected from delayed root grade for 54 samples and stopped without extra steps",
+            "emily up traversed native staircase with active body bank and complete pose sample; height change 3.00273900000001",
+            "down gait selected from delayed root grade for 35 samples and stopped without extra steps",
+            "emily down traversed native staircase with active body bank and complete pose sample; height change -2.92413699999999",
+            "Native health and sword attachments preserved",
+            "Original Steam files and protected saves unchanged"
+          ],
+          "scope": "Actual Imperial Safe Room staircase in current Dunwall map; native player physics owns height. Dedicated measured native up/down cycles selected by filtered root grade; native casts correct authored clone feet. Full terrain and visual acceptance remain separate."
+        }
+      ],
+      "currentBuildRetested": false,
+      "complete": false,
+      "visualAccepted": false
+    }
+  ]
+}

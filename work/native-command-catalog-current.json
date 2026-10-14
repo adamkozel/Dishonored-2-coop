@@ -1,0 +1,570 @@
+{
+  "pid": 47808,
+  "commands": [
+    {
+      "name": "testStatsEnd",
+      "description": "ends a test session for recording stats and exits the game",
+      "callbackRva": "0x42440"
+    },
+    {
+      "name": "testStatsBegin",
+      "description": "starts a test session for recording stats",
+      "callbackRva": "0x42400"
+    },
+    {
+      "name": "playEvents",
+      "description": "playEvents <name> playback sys events F12 will stop playback",
+      "callbackRva": "0x42120"
+    },
+    {
+      "name": "recordEvents",
+      "description": "recordEvents <name> start recording sys events",
+      "callbackRva": "0x421a0"
+    },
+    {
+      "name": "deleteGenerated",
+      "description": "deletes the generated path",
+      "callbackRva": "0x49da0"
+    },
+    {
+      "name": "leaveGameToMainMenu",
+      "description": "Loads the mainmenu",
+      "callbackRva": "0x4a850"
+    },
+    {
+      "name": "leaveGame",
+      "description": "disconnects from a game",
+      "callbackRva": "0x49ee0"
+    },
+    {
+      "name": "disconnect",
+      "description": "disconnects from a game",
+      "callbackRva": "0x49ee0"
+    },
+    {
+      "name": "restartmaphere",
+      "description": "restarts the current map and teleports the player back to the current position",
+      "callbackRva": "0x4b800"
+    },
+    {
+      "name": "restartmap",
+      "description": "restarts the current map",
+      "callbackRva": "0x4b8a0"
+    },
+    {
+      "name": "map",
+      "description": "loads a combo map",
+      "callbackRva": "0x4a9f0"
+    },
+    {
+      "name": "campaign",
+      "description": "loads a map via mapinfo decl",
+      "callbackRva": "0x49ae0"
+    },
+    {
+      "name": "stripStrings",
+      "description": "strip strings containing the specified substring or prefix",
+      "callbackRva": "0x42200"
+    },
+    {
+      "name": "reloadTextLanguage",
+      "description": "reload language dict",
+      "callbackRva": "0x421f0"
+    },
+    {
+      "name": "vid_restart",
+      "description": "resizes/fullscreens the game window",
+      "callbackRva": "0x42cf0"
+    },
+    {
+      "name": "find",
+      "description": "finds all system elements containing the given search string",
+      "callbackRva": "0x41a70"
+    },
+    {
+      "name": "writeConfig",
+      "description": "writes a config file",
+      "callbackRva": "0x42920"
+    },
+    {
+      "name": "exit",
+      "description": "exits the game",
+      "callbackRva": "0x42170"
+    },
+    {
+      "name": "quit",
+      "description": "quits the game",
+      "callbackRva": "0x42170"
+    },
+    {
+      "name": "reloadModels",
+      "description": "reloads models",
+      "callbackRva": "0x2754a0"
+    },
+    {
+      "name": "listModels",
+      "description": "lists all models",
+      "callbackRva": "0x275110"
+    },
+    {
+      "name": "rp",
+      "description": "Displays or modifies a renderparm",
+      "callbackRva": "0x3648a0"
+    },
+    {
+      "name": "testImage",
+      "description": "displays the given image centered on screen",
+      "callbackRva": "0x365430"
+    },
+    {
+      "name": "colorGradingShot",
+      "description": "Takes a screenshot with the color grading inset",
+      "callbackRva": "0x3647b0"
+    },
+    {
+      "name": "envshot",
+      "description": "takes an environment shot",
+      "callbackRva": "0x2dbf10"
+    },
+    {
+      "name": "rawscreenshot",
+      "description": "takes a screenshot",
+      "callbackRva": "0x364a90"
+    },
+    {
+      "name": "screenshot",
+      "description": "takes a screenshot",
+      "callbackRva": "0x364dd0"
+    },
+    {
+      "name": "cubeshot",
+      "description": "takes an shot a cubmap",
+      "callbackRva": "0x2dbf00"
+    },
+    {
+      "name": "buddha",
+      "description": "Toggle buddha mode on player / NPCs.",
+      "callbackRva": "0x718e20"
+    },
+    {
+      "name": "god",
+      "description": "Toggle god mode on player / NPCs.",
+      "callbackRva": "0x718f00"
+    },
+    {
+      "name": "resetViewParms",
+      "description": "Resets the current view renderParms",
+      "callbackRva": "0x886ce0"
+    },
+    {
+      "name": "clearDebugPoints",
+      "description": "empties the list of debug points",
+      "callbackRva": "0x8a77a0"
+    },
+    {
+      "name": "popDebugPoint",
+      "description": "removes a debug point from the list of debug points",
+      "callbackRva": "0x8ab270"
+    },
+    {
+      "name": "pushDebugPoint",
+      "description": "adds a debug point to the list of debug points",
+      "callbackRva": "0x8abd60"
+    },
+    {
+      "name": "randomTest",
+      "description": "superficial test of random number generators",
+      "callbackRva": "0x887100"
+    },
+    {
+      "name": "entityListenerStats",
+      "description": "stats of entity listener",
+      "callbackRva": "0x885d60"
+    },
+    {
+      "name": "debugEntityByName",
+      "description": "debug entity by name",
+      "callbackRva": "0x885c10"
+    },
+    {
+      "name": "prevAI",
+      "description": "move debug target to the prev monster",
+      "callbackRva": "0x886950"
+    },
+    {
+      "name": "nextAI",
+      "description": "move debug target to the next monster",
+      "callbackRva": "0x886650"
+    },
+    {
+      "name": "nextActiveAI",
+      "description": "move debug target to the next active (alive and not hidden) monster",
+      "callbackRva": "0x886650"
+    },
+    {
+      "name": "gameError",
+      "description": "causes a game error",
+      "callbackRva": "0x886190"
+    },
+    {
+      "name": "clearLights",
+      "description": "clears all lights",
+      "callbackRva": "0x885820"
+    },
+    {
+      "name": "popLight",
+      "description": "removes the last created light",
+      "callbackRva": "0x8867a0"
+    },
+    {
+      "name": "listLines",
+      "description": "lists all debug lines",
+      "callbackRva": "0x886570"
+    },
+    {
+      "name": "blinkline",
+      "description": "blinks a debug line",
+      "callbackRva": "0x885740"
+    },
+    {
+      "name": "removeline",
+      "description": "removes a debug line",
+      "callbackRva": "0x886c10"
+    },
+    {
+      "name": "addarrow",
+      "description": "adds a debug arrow",
+      "callbackRva": "0x885550"
+    },
+    {
+      "name": "addline",
+      "description": "adds a debug line",
+      "callbackRva": "0x885550"
+    },
+    {
+      "name": "reloadEntity",
+      "description": "reloads the specified entity",
+      "callbackRva": "0x886aa0"
+    },
+    {
+      "name": "killEntity",
+      "description": "removes the entity with the given name, 'kill entityname' will remove that single entity, 'kill all entityname' removes all entities matching the class of the given name",
+      "callbackRva": "0x8863e0"
+    },
+    {
+      "name": "damage",
+      "description": "apply damage to an entity",
+      "callbackRva": "0x885990"
+    },
+    {
+      "name": "trigger",
+      "description": "triggers an entity",
+      "callbackRva": "0x887060"
+    },
+    {
+      "name": "teleport",
+      "description": "teleports the player to an entity location",
+      "callbackRva": "0x886f50"
+    },
+    {
+      "name": "setviewpos",
+      "description": "sets the current view position",
+      "callbackRva": "0x886d10"
+    },
+    {
+      "name": "getviewpos",
+      "description": "prints the current view position",
+      "callbackRva": "0x8861c0"
+    },
+    {
+      "name": "where",
+      "description": "prints the current view position",
+      "callbackRva": "0x8861c0"
+    },
+    {
+      "name": "reexportDecls",
+      "description": "reparses and saves decls of a specific type",
+      "callbackRva": "0x20730"
+    },
+    {
+      "name": "touchDecl",
+      "description": "reparses a decl",
+      "callbackRva": "0x21a40"
+    },
+    {
+      "name": "unregisterDeclFolder",
+      "description": "unregister a decl folder",
+      "callbackRva": "0x21d60"
+    },
+    {
+      "name": "listDecls",
+      "description": "lists all decls",
+      "callbackRva": "0x1f4e0"
+    },
+    {
+      "name": "writeImage",
+      "description": "Writes a tga for a given image",
+      "callbackRva": "0x2ecd20"
+    },
+    {
+      "name": "listImages",
+      "description": "lists images",
+      "callbackRva": "0x2ec0a0"
+    },
+    {
+      "name": "copy",
+      "description": "copy a file",
+      "callbackRva": "0x15ee10"
+    },
+    {
+      "name": "path",
+      "description": "lists search paths",
+      "callbackRva": "0x161fc0"
+    },
+    {
+      "name": "dirtree",
+      "description": "lists a folder with subfolders",
+      "callbackRva": "0x15ef10"
+    },
+    {
+      "name": "dir",
+      "description": "lists a folder",
+      "callbackRva": "0x15f100"
+    },
+    {
+      "name": "makeDeclTree",
+      "description": "Generates declTree",
+      "callbackRva": "0x1fd80"
+    },
+    {
+      "name": "arkIggySubtitleLevel",
+      "description": "Setup a subtitles display level. 0 = none; 1 = main only; 2 all.",
+      "callbackRva": "0x35720"
+    },
+    {
+      "name": "arkSwitchToBindingSet",
+      "description": "select the current bind set",
+      "callbackRva": "0x3b9d0"
+    },
+    {
+      "name": "arkSwitchToDefaultBindingSet",
+      "description": "select the default bind set",
+      "callbackRva": "0x3ba20"
+    },
+    {
+      "name": "arkBind",
+      "description": "binds a command to a key",
+      "callbackRva": "0x3b9b0"
+    },
+    {
+      "name": "arkBindSecondary",
+      "description": "binds a command to a key",
+      "callbackRva": "0x3b9a0"
+    },
+    {
+      "name": "arkUnbind",
+      "description": "unbinds any command from a key",
+      "callbackRva": "0x3bd30"
+    },
+    {
+      "name": "arkUnbindCurrentSet",
+      "description": "unbinds any commands from the current binding set",
+      "callbackRva": "0x3ba70"
+    },
+    {
+      "name": "arkUnbindKeyboard",
+      "description": "unbinds any command from a keyboard keys",
+      "callbackRva": "0x3bbb0"
+    },
+    {
+      "name": "arkUnbindMouse",
+      "description": "unbinds any command from the mouse",
+      "callbackRva": "0x3bc70"
+    },
+    {
+      "name": "arkUnbindJoypad",
+      "description": "unbinds any command from a joypad buttons",
+      "callbackRva": "0x3baf0"
+    },
+    {
+      "name": "arkUnbindAll",
+      "description": "unbinds any commands from all the binding sets",
+      "callbackRva": "0x3ba40"
+    },
+    {
+      "name": "arkListBindings",
+      "description": "lists key bindings",
+      "callbackRva": "0x3b9c0"
+    },
+    {
+      "name": "idStudio",
+      "description": "design studio for the game",
+      "callbackRva": "0x43190"
+    },
+    {
+      "name": "writeEntitiesFile",
+      "description": "writes out a production build .entities file for the specified map",
+      "callbackRva": "0x43380"
+    },
+    {
+      "name": "writeEntitiesFileWithError",
+      "description": "writes out a production build .entities file for the specified map",
+      "callbackRva": "0x431a0"
+    },
+    {
+      "name": "clear",
+      "description": "clears the console",
+      "callbackRva": "0x53af0"
+    },
+    {
+      "name": "print",
+      "description": "Prints the arguments to the console",
+      "callbackRva": "0x53b30"
+    },
+    {
+      "name": "history",
+      "description": "Displays the console command history",
+      "callbackRva": "0x54290"
+    },
+    {
+      "name": "clearHistory",
+      "description": "Clears the console history",
+      "callbackRva": "0x54280"
+    },
+    {
+      "name": "con_watch",
+      "description": "adds a new console watch - displays per frame results of console var/function printed output",
+      "callbackRva": "0x54710"
+    },
+    {
+      "name": "con_unwatch",
+      "description": "removes the specified console watch. Specify 'all' to remove all watches.",
+      "callbackRva": "0x54610"
+    },
+    {
+      "name": "toggle",
+      "description": "toggles a cvar",
+      "callbackRva": "0x103780"
+    },
+    {
+      "name": "cvarAdd",
+      "description": "adds a value to a cvar",
+      "callbackRva": "0x1032e0"
+    },
+    {
+      "name": "cvarRandom",
+      "description": "sets a cvar to a random value",
+      "callbackRva": "0x1034a0"
+    },
+    {
+      "name": "addWrap",
+      "description": "adds to a cvar, with wrapping",
+      "callbackRva": "0x103190"
+    },
+    {
+      "name": "addClamp",
+      "description": "adds to a cvar, with clamping",
+      "callbackRva": "0x103040"
+    },
+    {
+      "name": "cvarMultiply",
+      "description": "multiplies a cvar by a value",
+      "callbackRva": "0x1033b0"
+    },
+    {
+      "name": "reset",
+      "description": "resets a cvar to it's default value",
+      "callbackRva": "0x103710"
+    },
+    {
+      "name": "listCvars",
+      "description": "lists cvars",
+      "callbackRva": "0x1036f0"
+    },
+    {
+      "name": "cvar_restart",
+      "description": "restarts the cvar system, defaulting all cvars",
+      "callbackRva": "0x103670"
+    },
+    {
+      "name": "cvar_resetcheats",
+      "description": "defaulting all cheats/canreset cvars",
+      "callbackRva": "0x103610"
+    },
+    {
+      "name": "cvarsModified",
+      "description": "reports cvars modified since the last call",
+      "callbackRva": "0x1036d0"
+    },
+    {
+      "name": "scheduleVideo",
+      "description": "Schedules the video so it starts next frame",
+      "callbackRva": "0x4fdd30"
+    },
+    {
+      "name": "ark_settings_save",
+      "description": "Save settings",
+      "callbackRva": "0x650aa0"
+    },
+    {
+      "name": "RestartFromMemoryCheckpoint",
+      "description": "Restart from the last memory checkpoint",
+      "callbackRva": "0x29188ad30"
+    },
+    {
+      "name": "RestartFromCheckpoint",
+      "description": "Restart from the last save",
+      "callbackRva": "0x29188ad00"
+    },
+    {
+      "name": "SaveGame",
+      "description": "Quick save",
+      "callbackRva": "0x65f520"
+    },
+    {
+      "name": "LoadGame",
+      "description": "Quick load, or load the specified slot number",
+      "callbackRva": "0x29188ad60"
+    },
+    {
+      "name": "TestFx",
+      "description": "tests a fx impact",
+      "callbackRva": "0x781d00"
+    },
+    {
+      "name": "Ansel_PlayerVisible",
+      "description": "Shows/hides the player for Nvidia Ansel.",
+      "callbackRva": "0x8a6bb0"
+    },
+    {
+      "name": "wait",
+      "description": "delays remaining buffered commands one or more frames",
+      "callbackRva": "0x100750"
+    },
+    {
+      "name": "parse",
+      "description": "prints tokenized string",
+      "callbackRva": "0x1002e0"
+    },
+    {
+      "name": "echo",
+      "description": "prints text",
+      "callbackRva": "0xff340"
+    },
+    {
+      "name": "vstr",
+      "description": "inserts the current value of a cvar as command text",
+      "callbackRva": "0x1006e0"
+    },
+    {
+      "name": "exec",
+      "description": "executes a config file",
+      "callbackRva": "0xff3d0"
+    },
+    {
+      "name": "listCmds",
+      "description": "lists commands",
+      "callbackRva": "0x1000b0"
+    }
+  ]
+}

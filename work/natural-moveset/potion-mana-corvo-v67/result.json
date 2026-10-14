@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "kind": "mana",
+  "wheelButton": "X",
+  "networkContinuity": false,
+  "leftY": 0,
+  "checks": [
+    "Native controller BendTime spends mana; toggle and native inventory cleanup retire power completely before potion grant, without resource writes",
+    "Exactly one scalar native potion granted without equipping or invoking consumption",
+    "Both native consumption statistic arrays independently distinguish exactly one use from grant/rollback; other potion kind unchanged",
+    "Native wheel input consumed one potion",
+    "Native mana increases with exactly one mana-consumption statistic increment and unchanged health",
+    "Both inventories restore exactly after finite native grant",
+    "Both native isolated checkpoints restore health and unowned potion state",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.981,
+      "input": "Native LeftShoulder item wheel"
+    },
+    {
+      "videoTime": 2.251,
+      "input": "Native item wheel plus X"
+    }
+  ],
+  "dll": "399CDA1770D53232C6DDDA59EAA6862783DF5120938F59D56F9EFF8816B25AE1",
+  "probe": "58666214BE4E71E13506E87691BDC20CA3F46D1FD481B3AA928927E526E041A7",
+  "finalDll": "399CDA1770D53232C6DDDA59EAA6862783DF5120938F59D56F9EFF8816B25AE1",
+  "scope": "Source-only native potion and item-wheel observation. No remote animation or shared healing is claimed; all native effects are reset through isolated checkpoints."
+}

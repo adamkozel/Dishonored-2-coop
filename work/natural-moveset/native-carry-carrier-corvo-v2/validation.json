@@ -1,0 +1,116 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "passed": true,
+      "check": "harness completed with native controls released"
+    },
+    {
+      "passed": true,
+      "check": "exact verified executable"
+    },
+    {
+      "passed": true,
+      "check": "sustained owned native carry source samples"
+    },
+    {
+      "passed": true,
+      "check": "carry preserves independently observed native grounded/crouched movement"
+    },
+    {
+      "passed": true,
+      "check": "Steam carry remains live; target corpse stays read-only"
+    },
+    {
+      "passed": true,
+      "check": "sustained authored carrier pose publication"
+    },
+    {
+      "passed": true,
+      "check": "both standing and crouching observed"
+    },
+    {
+      "passed": false,
+      "check": "native forward carry walking observed in both stances"
+    },
+    {
+      "passed": true,
+      "check": "peer maps the unique reciprocal authored corpse through its own entity pool"
+    },
+    {
+      "passed": true,
+      "check": "authored knee references and native feet remain enabled"
+    },
+    {
+      "passed": true,
+      "check": "native release returns source to ordinary movement"
+    },
+    {
+      "passed": true,
+      "check": "local native player health unchanged"
+    },
+    {
+      "passed": true,
+      "check": "carrier gait phase tracks native travelled distance within 20 cm sampling tolerance"
+    },
+    {
+      "passed": true,
+      "check": "real-time recording has at least 24 captured frames per second"
+    }
+  ],
+  "samples": 184,
+  "held_samples": 141,
+  "identity": {
+    "character": "corvo",
+    "role": "host",
+    "peer": "client",
+    "dllSha256": "CFFE1B202F04FF236D225ADC3E3A61FAF5D40F3556493801B3668ABB6FD70852",
+    "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "bankSha256": "3D3F10DC03CFB93C71679A6246D0BAE9CA6BCF3FC0500F2DAB6515521472234B",
+    "healthBefore": {
+      "tick": 273084984,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x1703d6a4dc0",
+      "actor": "0x17017fd59f0",
+      "attributes": "0x1703d530130",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scope": "Carrier-only native Steam integration. Authored loaded idle and forward walking, standing and crouched. Matched corpse is observed only; attachment, pickup, release and physical outcomes are not ported.",
+    "corpseMutations": false
+  },
+  "actual_capture_hz": 27.789473684210527,
+  "capture": {
+    "width": 800,
+    "height": 540,
+    "avg_frame_rate": "528/19",
+    "duration": "19.000000",
+    "nb_frames": "528"
+  },
+  "video_sha256": "24A6FCBF9BDBF264D914E94B90ACF7C7D14F3242AB84899F3AD398BC7F41D550",
+  "source_distance_m": 2.5789950998541595,
+  "phase_distance_m": 2.5789940000000002,
+  "carrier_gameplay_bound": true,
+  "corpse_gameplay_bound": false,
+  "complete": false,
+  "visual_accepted": false,
+  "remaining": [
+    "Matching corpse attachment and physics/ragdoll handoff",
+    "Pickup and release carrier acting",
+    "Directional carry locomotion and final load/contact quality",
+    "Shared target contention, interruptions, death, reload and peer loss"
+  ]
+}

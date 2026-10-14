@@ -1,0 +1,192 @@
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='native-door-session-live-ai-v766',[ValidateSet('host','client')][string]$Source='host',[ValidateSet('ld_door_350cm_int_rich_wood_01_3','ld_door_350cm_int_rich_wood_01_2')][string]$DoorName='ld_door_350cm_int_rich_wood_01_2')
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$capture=$null;$monitor=$null;$peerCapture=$null
+$pids=@{};$inventory=@{};$rows=[Collections.Generic.List[object]]::new();$checks=[Collections.Generic.List[string]]::new()
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function I($r,$b='Neutral',$ms=100){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms|Out-Null}
+function DAll($r){Get-Content "$root/work/lab-instances/$r/coop-status.json.door-sync.json" -Raw|ConvertFrom-Json}
+function DS($r){$d=@((DAll $r).entries|Where-Object name -eq $DoorName);if($d.Count-ne1){throw 'Selected door channel absent or ambiguous'};return $d[0]}
+function CatalogReady($d){$d.enabled-and$d.catalogCount-eq6-and$d.ambiguous-eq0-and$d.ineligible-eq4-and@($d.entries|Where-Object {!$_.enabled-or!$_.ready-or$_.revision-ne1-or$_.applied-ne1}).Count-eq0}
+$initialOpen=$DoorName-eq'ld_door_350cm_int_rich_wood_01_2'
+$expectedCycle=if($initialOpen){'2,1,0,1,2'}else{'0,1,2,1,0'}
+function S($r){for($a=0;$a-lt8;$a++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json" -Raw|ConvertFrom-Json)}catch{Start-Sleep -Milliseconds 15}};throw 'Status unavailable'}
+function Q($r,$mode,$arg=0){for($a=0;$a-lt8;$a++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 20};throw "Native read failed $mode"}
+function W($o,$offset){$w=@($o.words|Where-Object offset -eq $offset);if($w.Count-ne1){throw "Missing object field $offset"};[Convert]::ToUInt64($w[0].word.Substring(2),16)}
+function DoorSample($r){
+ $d=$doorBindings[$r];$o=Q $r '--object' $d.component
+ if($o.type-ne'.?AVarkCpntOpenable@@'-or(W $o '0x10')-ne$d.owner-or((W $o '0x18')-band [uint64]4294967295)-ne$d.generation){$o|ConvertTo-Json -Depth 7|Set-Content "$out/failed-door-$r.json";throw 'Door component lifetime changed'}
+ $state=W $o '0x48';$flags=W $o '0x1e8'
+ [pscustomobject]@{handle=$d.handle;current=[uint32]($state-band [uint64]4294967295);pending=[uint32]($state-shr 32);locked=[int]($flags-band 255);flags1e8=('0x{0:x}'-f$flags);state90=('0x{0:x}'-f(W $o '0x90'));movingTarget=('0x{0:x}'-f(W $o '0xb0'));child=[uint32]((W $o '0xd8')-shr 32)}
+}
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Another native operation remains active'}
+ if(Test-Path -LiteralPath $out){throw 'Unique evidence take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+ [ordered]@{pid=$PID;operation='NativeDoorSessionLiveAI766';take=$Take;started=(Get-Date).ToString('o');state='running'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+ $dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash
+ $pin=Get-Content "$root/work/movement-integration/candidate-door-session-v763/identity.json" -Raw|ConvertFrom-Json
+ if($dll-ne$pin.dll){throw 'Expected archived763 candidate'}
+ foreach($r in 'host','client'){
+  $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
+  if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
+  foreach($cmd in 'coop_movement_resume off','coop_movement_bank off','coop_review_clip off','coop_shadow_stream off','coop_probe_follow exact','coop_probe_locomotion on','coop_shadow_loco combat','coop_movement_fixture off'){C $r $cmd}
+  if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Living fixture required'}
+  $inventory[$r]=Q $r '--player-inventory';$inventory[$r]|ConvertTo-Json -Depth 10|Set-Content "$out/inventory-before-$r.json"
+ }
+ $dirty=$true
+ foreach($source in @($Source)){
+  $peer=if($source-eq'host'){'client'}else{'host'}
+  foreach($case in @(@{name='unlocked-door-tap';yaw=270;stance=0;distance=1.0})){
+   if(!$initialOpen){throw 'Closing conflict requires the initially open bathroom door'}
+   I $source;I $peer
+   $state=Q $source '--player-states';if($state.stance-ne$case.stance){I $source B 180;Start-Sleep -Milliseconds 500}
+   if($initialOpen){
+    C $peer 'setviewpos -49.2 -161.4 68.1 163 0'
+    C $source 'setviewpos -50.3 -160.75 68.1 180 0'
+   }else{
+    C $peer 'setviewpos -46.5 -165.5 68.1 90 0'
+    C $source 'setviewpos -47.05 -163.5 68.1 270 0'
+   }
+   & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 0 -Evidence "$out/source-camera.json" -Quick
+   & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 0 -Evidence "$out/observer-camera.json" -Quick
+   $components=Q $source '--components' 1
+   $components|ConvertTo-Json -Depth 8|Set-Content "$out/player-components-before.json"
+   $sensors=@($components.components|Where-Object {$_.type-match'(?i)(PlayerSensor.*(Interaction|Use)|PlayerFocus)'})
+   foreach($r in 'host','client'){@((Q $r '--entities').entities|Where-Object {$_.type-match'Door'})|ConvertTo-Json -Depth 8|Set-Content "$out/doors-before-$r.json"}
+   $doorBindings=@{}
+   foreach($r in 'host','client'){
+    $door=@((Q $r '--entities').entities|Where-Object name -eq $DoorName)
+    if($door.Count-ne1-or$door[0].type-ne'.?AVarkDoor@@'){throw 'Exact ordinary door missing'};$door=$door[0]
+    $cp=@((Q $r '--components' $door.handle).components|Where-Object type -eq '.?AVarkCpntOpenable@@')
+    if($cp.Count-ne1-or$cp[0].owner-ne$door.pointer){throw 'Door component owner mismatch'};$cp=$cp[0]
+    $obj=Q $r '--object' $cp.pointer;$obj|ConvertTo-Json -Depth 7|Set-Content "$out/openable-before-$r.json"
+    $doorBindings[$r]=[pscustomobject]@{handle=$door.handle;component=$cp.pointer;owner=[Convert]::ToUInt64($door.pointer.Substring(2),16);generation=((W $obj '0x18')-band [uint64]4294967295)}
+    if((DoorSample $r).locked-ne0){throw 'Unlocked door required'}
+   }
+   $doorBindings|ConvertTo-Json -Depth 5|Set-Content "$out/door-bindings.json"
+   $character=if($source-eq'host'){'corvo'}else{'emily'}
+   $entry=Get-Content "$PSScriptRoot/heavy-bank-manifest-v633.json" -Raw|ConvertFrom-Json|Where-Object role -eq $character
+   $bank=Join-Path $PSScriptRoot $entry.bank;if((Get-FileHash $bank).Hash-ne$entry.sha256){throw 'Bank hash differs'}
+   Copy-Item $bank "$root/work/lab-instances/$peer/coop-status.json.movement.bin" -Force;C $peer 'coop_movement_bank on'
+   $bw=[Diagnostics.Stopwatch]::StartNew();do{$m=Get-Content "$root/work/lab-instances/$peer/coop-status.json.movement.json" -Raw|ConvertFrom-Json;if($m.active-and$m.version-eq67){break};Start-Sleep -Milliseconds 40}while($bw.ElapsedMilliseconds-lt5000)
+   if(!$m.active-or$m.version-ne67){throw 'Choke bank preload failed'}
+   foreach($r in 'host','client'){C $r 'coop_shadow_stream on'}
+   foreach($r in 'host','client'){C $r 'coop_door_sync session'}
+   $dw=[Diagnostics.Stopwatch]::StartNew();do{$dh=DAll host;$dc=DAll client;if((CatalogReady $dh)-and(CatalogReady $dc)){break};Start-Sleep -Milliseconds 40}while($dw.ElapsedMilliseconds-lt6000)
+   foreach($r in 'host','client'){
+    $isolation=Get-Content "$root/work/lab-instances/$r/coop-status.json.observer-isolation.json" -Raw|ConvertFrom-Json
+    $isolation|ConvertTo-Json -Depth 6|Set-Content "$out/native-isolation-before-$r.json"
+    if($isolation.active-or$isolation.heldReferences-or!(DAll $r).session.enabled){throw 'Expected live door session without movement isolation'}
+    $npcs=Q $r '--world-npcs';$ramsey=@($npcs.npcs|Where-Object spawnerName -eq 'ld_spawner_ramsey_escape')
+    if($ramsey.Count-ne1){throw 'Native Ramsey identity unavailable'}
+    $ai=Q $r '--ai-decision' $ramsey[0].handle;$ai|ConvertTo-Json -Depth 7|Set-Content "$out/native-ai-before-$r.json"
+    if(!$ai.started-or!$ai.schedulerActive-or$ai.pauseReferences){throw 'Native AI is not active at session start'}
+   }
+   $catalogBefore=@{host=$dh;client=$dc};$catalogBefore|ConvertTo-Json -Depth 9|Set-Content "$out/catalog-before.json"
+   if(!(CatalogReady $dh)-or!(CatalogReady $dc)){throw 'Six-door catalog not armed'}
+   foreach($r in 'host','client'){if((DoorSample $r).current-ne$(if($initialOpen){2}else{0})){throw 'Initial door state differs'}}
+   $key="$source-$($case.name)";$hwnd=(Get-Process -Id $pids[$source]).MainWindowHandle.ToInt64();if(!$hwnd){throw 'Source window missing'}
+   $args=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t','20','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key.mp4")
+   $capture=Start-Process (Get-Command ffmpeg).Source -ArgumentList $args -WindowStyle Hidden -RedirectStandardError "$out/$key-capture.log" -RedirectStandardOutput "$out/$key-capture.stdout" -PassThru
+   $peerHwnd=(Get-Process -Id $pids[$peer]).MainWindowHandle.ToInt64();$peerArgs=$args.Clone();$graphIndex=[Array]::FindIndex($peerArgs,[Predicate[object]]{param($x) "$x" -like "gfxcapture=*"});if($graphIndex-lt0){throw "Capture graph absent"};$peerArgs[$graphIndex]="gfxcapture=hwnd=${peerHwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra";$peerArgs[$peerArgs.Length-1]="$out/observer.mp4"
+   $peerCapture=Start-Process (Get-Command ffmpeg).Source -ArgumentList $peerArgs -WindowStyle Hidden -RedirectStandardError "$out/observer-capture.log" -RedirectStandardOutput "$out/observer-capture.stdout" -PassThru
+   $monitor=Start-Process "$lab/bin/d2_runtime_probe.exe" -ArgumentList @($pids[$source],'--watch-midnight','19500') -WindowStyle Hidden -RedirectStandardOutput "$out/scenes.ndjson" -RedirectStandardError "$out/scenes.stderr" -PassThru
+   $filterBefore=Get-Content "$root/work/lab-instances/$source/coop-status.json.assassination-partner-filter.json" -Raw|ConvertFrom-Json;if(!$filterBefore.installed){throw "Takedown filter missing"}
+   $watch=[Diagnostics.Stopwatch]::StartNew();$samples=[Collections.Generic.List[object]]::new();$sent=$false;$second=$false;$third=$false;$duplicateOpen=$false;$duplicateClose=$false;$inputs=[Collections.Generic.List[object]]::new()
+   while($watch.ElapsedMilliseconds-lt19000){
+    if(!$sent-and$watch.ElapsedMilliseconds-ge1100){
+     $nativeBefore=Q $source '--player-states';$nativeBefore|ConvertTo-Json -Depth 8|Set-Content "$out/native-before-input.json"
+     if($nativeBefore.stance-ne0){throw 'Standing source required for initial door observation'}
+     I $source X 200;$inputs.Add([pscustomobject]@{ms=$watch.ElapsedMilliseconds;input='first player native close';role=$source;attempt=1});$sent=$true
+    }
+    if($sent-and!$second){
+     $nativeMoving=DoorSample $peer;$receiving=DS $peer
+     if($nativeMoving.current-eq1-and$nativeMoving.pending-eq1-and$receiving.target-eq0-and$receiving.inFlight-and$receiving.nativeCalls-eq1){
+      [ordered]@{ms=$watch.ElapsedMilliseconds;native=$nativeMoving;receiving=$receiving;first=(DS $source)}|ConvertTo-Json -Depth 7|Set-Content "$out/native-at-overlap.json"
+      C $source 'setviewpos -44 -161 68.1 220 0'
+      C $peer 'setviewpos -50.3 -160.75 68.1 180 0'
+      $secondNative=DoorSample $peer
+      $secondNative|ConvertTo-Json -Depth 5|Set-Content "$out/native-before-second-use.json"
+      if($secondNative.current-ne1-or$secondNative.pending-ne1){throw 'Known use-position handoff missed native Moving window'}
+      I $peer X 200;$inputs.Add([pscustomobject]@{ms=$watch.ElapsedMilliseconds;input='second player native reopen during received close';role=$peer;attempt=2});$second=$true
+     }elseif($watch.ElapsedMilliseconds-gt3500){throw 'Received native moving transition was not available for overlapping input'}
+    }
+    if($second-and!$third-and$watch.ElapsedMilliseconds-ge3500){
+     $readySource=DS $source;$readyPeer=DS $peer;$nativeSource=DoorSample $source;$nativePeer=DoorSample $peer
+     [ordered]@{source=$readySource;peer=$readyPeer;nativeSource=$nativeSource;nativePeer=$nativePeer}|ConvertTo-Json -Depth 8|Set-Content "$out/after-busy-use.json"
+     if(!$readySource.enabled-or!$readyPeer.enabled-or$readySource.revision-ne2-or$readyPeer.revision-ne2-or$readySource.applied-ne2-or$readyPeer.applied-ne2-or$readySource.nativeCalls-ne0-or$readyPeer.nativeCalls-ne1-or$readySource.requests-ne$(if($source-eq'client'){1}else{0})-or$readyPeer.requests-ne$(if($source-eq'client'){1}else{0})-or$nativeSource.current-ne0-or$nativePeer.current-ne0){throw 'Input while closing changed ordered native operation'}
+     I $peer X 200;$inputs.Add([pscustomobject]@{ms=$watch.ElapsedMilliseconds;input='second player native reopen after closing completed';role=$peer;attempt=3});$third=$true
+    }
+    if(!$duplicateOpen-and$watch.ElapsedMilliseconds-ge6000){C $source 'coop_door_sync duplicate';$duplicateOpen=$true}
+    if(!$duplicateClose-and$watch.ElapsedMilliseconds-ge10000){C $peer 'coop_door_sync duplicate';$duplicateClose=$true}
+    $apiPath="$root/work/lab-instances/$source/coop-status.json.door-fixture.json";$api=if(Test-Path $apiPath){Get-Content $apiPath -Raw|ConvertFrom-Json}else{$null}
+    $samples.Add([pscustomobject]@{syncSource=(DS $source);syncPeer=(DS $peer);api=$api;ms=$watch.ElapsedMilliseconds;doorSource=(DoorSample $source);doorPeer=(DoorSample $peer);player=(Q $source '--player-states');source=(S $source);peer=(S $peer);sword=(Q $source '--player-sword');movement=(Get-Content "$root/work/lab-instances/$peer/coop-status.json.movement.json" -Raw|ConvertFrom-Json);stream=(Get-Content "$root/work/lab-instances/$peer/coop-status.json.shadow-stream.json" -Raw|ConvertFrom-Json)})
+    Start-Sleep -Milliseconds 30
+   }
+   $monitor.WaitForExit(6000)|Out-Null;if(!$monitor.HasExited-or$monitor.ExitCode){throw "Native scene monitor incomplete"};$monitor=$null
+   $capture.WaitForExit(6000)|Out-Null;if(!$capture.HasExited-or$capture.ExitCode){throw 'Native capture failed'};$capture=$null
+   $samples|ConvertTo-Json -Depth 17|Set-Content "$out/$key-observations.json"
+   $filterAfter=Get-Content "$root/work/lab-instances/$source/coop-status.json.assassination-partner-filter.json" -Raw|ConvertFrom-Json
+   [ordered]@{before=$filterBefore;after=$filterAfter}|ConvertTo-Json -Depth 6|Set-Content "$out/filter.json"
+   if(!$filterAfter.installed){throw 'Partner eligibility filter not installed'}
+   $allScenes=@(Get-Content "$out/scenes.ndjson"|ForEach-Object {$_|ConvertFrom-Json}|ForEach-Object {$_.instances})
+   $allScenes|ConvertTo-Json -Depth 9|Set-Content "$out/native-scenes.json"
+   $inputs|ConvertTo-Json|Set-Content "$out/inputs.json"
+   $samples|ForEach-Object { [pscustomobject]@{ms=$_.ms;stance=$_.player.stance;mode=$_.player.mode;active=$_.player.active} }|ConvertTo-Json -Depth 9|Set-Content "$out/native-action-states.json"
+   foreach($r in 'host','client'){@((Q $r '--entities').entities|Where-Object {$_.type-match'Door'})|ConvertTo-Json -Depth 8|Set-Content "$out/doors-after-$r.json"}
+   if($inputs.Count-ne3-or$samples.Count-lt40){throw 'Door observation input/sampling incomplete'}
+   $ds=DS $source;$dp=DS $peer
+   [ordered]@{source=$ds;peer=$dp;baselineSource=$samples[0].syncSource;baselinePeer=$samples[0].syncPeer}|ConvertTo-Json -Depth 6|Set-Content "$out/native-sync-final.json"
+   if(!$ds.enabled-or!$dp.enabled-or$ds.nativeCalls-ne1-or$dp.nativeCalls-ne1-or$ds.revision-ne3-or$dp.revision-ne3-or$ds.applied-ne3-or$dp.applied-ne3-or$dp.duplicates-lt1-or$ds.duplicates-lt1-or$ds.rejected-ne$samples[0].syncSource.rejected-or$dp.rejected-ne$samples[0].syncPeer.rejected){throw 'Native Steam door ordering, application, duplicate handling or rejection delta differs'}
+   $states=@();foreach($x in $samples){$v=$x.doorSource.current;if(!$states.Count-or$states[-1]-ne$v){$states+=$v}}
+   if($states[0]-ne2-or$states[-1]-ne2-or1-notin$states){throw 'First door did not finish open after overlapping native input'}
+   $peerStates=@();foreach($x in $samples){$v=$x.doorPeer.current;if(!$peerStates.Count-or$peerStates[-1]-ne$v){$peerStates+=$v}}
+   if($peerStates[0]-ne2-or$peerStates[-1]-ne2-or1-notin$peerStates){throw 'Second door did not finish open after overlapping native input'}
+   if($ds.requests-ne1-or$dp.requests-ne1){throw 'Expected one client request across the overlapping native input'}
+   $catalogAfter=@{host=(DAll host);client=(DAll client)};$catalogAfter|ConvertTo-Json -Depth 9|Set-Content "$out/catalog-after.json"
+   foreach($r in 'host','client'){
+    $before=$catalogBefore[$r];$after=$catalogAfter[$r]
+    if(!$after.enabled-or$after.catalogCount-ne6-or$after.rejected-ne$before.rejected-or$after.unmatched-ne$before.unmatched){throw 'Catalog scope or packet rejection changed'}
+    foreach($old in $before.entries){
+     $entry=@($after.entries|Where-Object name -eq $old.name)
+     if($entry.Count-ne1-or!$entry[0].enabled-or!$entry[0].ready){throw 'Catalog door retired during ordinary interaction'}
+     if($old.name-ne$DoorName-and($entry[0].revision-ne1-or$entry[0].applied-ne1-or$entry[0].target-ne$old.target-or$entry[0].nativeCalls-ne0-or$entry[0].rejected-ne$old.rejected)){throw 'Unrelated door changed during selected interaction'}
+    }
+   }
+   $checks.Add('Six eligible authored doors armed; four unsafe doors excluded; five unrelated channels retain initial targets/revisions without native mutations')
+   $checks.Add('Native second-player input while closing leaves the existing operation unchanged; a subsequent input after completion reopens normally; both remain enabled and converge open at host revision3, one receiver API call each, one client request, no replay application or measured rejection delta')
+   C $peer 'coop_movement_bank off';foreach($r in 'host','client'){C $r 'coop_shadow_stream off'}
+   $rows.Add([pscustomobject]@{source=$source;case=$case;key=$key;count=$samples.Count;sensors=@($sensors.type);partnerHandle=(S $source).probeActorHandle})
+   foreach($r in 'host','client'){if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Health changed during neutral targeting observation'}}
+  }
+ }
+ $checks.Add('Bounded native Steam ordinary-door synchronization with host desired-state ordering; both viewpoints recorded')
+}catch{$failure=$_.Exception.Message;if($samples){$samples|ConvertTo-Json -Depth 17|Set-Content "$out/partial-observations.json"};if($inputs){$inputs|ConvertTo-Json|Set-Content "$out/partial-inputs.json"}}finally{
+ if($owned){
+  foreach($r in 'host','client'){
+   try{I $r}catch{}
+   Copy-Item "$root/work/lab-instances/$r/coop-status.json.door-sync.json" "$out/final-$r-door-sync.json"
+  }
+  if($peerCapture){$peerCapture.WaitForExit(45000)|Out-Null;if(!$peerCapture.HasExited-or$peerCapture.ExitCode){$failure=($failure+'; observer capture incomplete').TrimStart('; ')}}
+  if($monitor){$monitor.WaitForExit(15000)|Out-Null;if(!$monitor.HasExited-or$monitor.ExitCode){$failure=($failure+'; scene monitor incomplete').TrimStart('; ')}}
+  if($capture){$capture.WaitForExit(10000)|Out-Null;if(!$capture.HasExited-or$capture.ExitCode){$failure=($failure+'; capture incomplete').TrimStart('; ')}}
+  foreach($r in 'host','client'){try{C $r 'coop_door_sync off';C $r 'coop_movement_bank off';C $r 'coop_shadow_stream off';C $r 'coop_movement_fixture off'}catch{}}
+  if($dirty){try{
+   & "$root/work/PrepareShadowSword.ps1" *> "$out/checkpoint-restore.log"
+   foreach($r in 'host','client'){
+    $restored=Q $r '--player-inventory';$restored|ConvertTo-Json -Depth 10|Set-Content "$out/inventory-checkpoint-restored-$r.json"
+    if(Compare-Object @($inventory[$r].items|ForEach-Object {"$($_.name):$($_.quantity)"}) @($restored.items|ForEach-Object {"$($_.name):$($_.quantity)"})){throw 'Complete checkpoint inventory differs'}
+    if((Q $r '--health' 1).current-ne56-or(Q $r '--health' (S $r).probeActorHandle).current-ne40){throw 'Restored health differs'}
+   };$checks.Add('Both checkpoint inventories and player/partner health restored')
+  }catch{$failure=($failure+'; restore: '+$_.Exception.Message).TrimStart('; ')}}
+  try{foreach($f in(Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json)){if((Get-FileHash $f.Path).Hash-ne$f.Hash){throw 'Protected file changed'}};$checks.Add('All14 protected save/settings hashes retained')}catch{$failure=($failure+'; '+$_.Exception.Message).TrimStart('; ')}
+  if(Test-Path -LiteralPath $out){[ordered]@{passed=(!$failure);failure=$failure;dll=$dll;checks=$checks;cases=$rows;door=$DoorName;initialOpen=$initialOpen;scope='Explicit door session with native AI active from initial arming; no movement-isolation fixture. Native input during received closing is not accepted as a reversal; both finish the same ordered close. The other player then uses the completed door and both reopen at revision3. Explicit input/state observations; no assumed busy-input buffering or reversal.'}|ConvertTo-Json -Depth 10|Set-Content "$out/result.json"}
+  [ordered]@{pid=$PID;operation='NativeDoorSessionLiveAI766';take=$Take;ended=(Get-Date).ToString('o');state='finished'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+  $mutex.ReleaseMutex()
+ };$mutex.Dispose()
+}
+if($failure){throw $failure};"PASS_NATIVE_DOOR_OBSERVATION $($checks.Count) checks"
+
+
+
+
+

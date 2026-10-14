@@ -1,0 +1,106 @@
+[
+  {
+    "role": "corvo",
+    "bank": "use-banks-v1212\\corvo-choke-bank.bin",
+    "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18",
+    "version": 71,
+    "clips": 374,
+    "prior369PayloadsUnchanged": true,
+    "source_bank_sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE",
+    "added": [
+      {
+        "clip": 369,
+        "donor": "mechanisms-v4\\interact_button_sequence-corvo.bin",
+        "donorSha256": "95a9f0a65613e6dc462577f0bf3df0abad0f14b92545b1c19131f957e2a0b4e1",
+        "duration": 2.3,
+        "purpose": "native use: button/press or generic reach (state 75)"
+      },
+      {
+        "clip": 370,
+        "donor": "mechanisms-v4\\interact_lever_sequence-corvo.bin",
+        "donorSha256": "4b63572e6261e8853fba78f35e87f1b1354b559e4b40e78b679633de352b075b",
+        "duration": 3.2,
+        "purpose": "native use: lever"
+      },
+      {
+        "clip": 371,
+        "donor": "mechanisms-v4\\interact_crank_sequence-corvo.bin",
+        "donorSha256": "0be2b6b17d5b78fa998093f4a7a20cef84b24e07b56a88d90da0a23ef53890f4",
+        "duration": 4.8,
+        "purpose": "native use: crank"
+      },
+      {
+        "clip": 372,
+        "donor": "mechanisms-v4\\interact_wheel_sequence-corvo.bin",
+        "donorSha256": "5f0ff227ab4a030e9a957d2d8506f949059c5e58425207547db791201edd45f5",
+        "duration": 5.2,
+        "purpose": "native use: wheel/valve"
+      },
+      {
+        "clip": 373,
+        "donor": "mechanisms-v4\\interact_key_sequence-corvo.bin",
+        "donorSha256": "71fc67fb0c201c68a0b74c043ee5278784404a611917cf6f564225d6fdfd3ab2",
+        "duration": 3.2,
+        "purpose": "native use: key/lock"
+      }
+    ],
+    "conversion": "Existing authored mechanism studies (mechanisms-v4: reach, operate, recover with full-body weight transfer) resampled to 120 frames plus guard; played once per native use event on its own clip duration; root network-owned, no events.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  },
+  {
+    "role": "emily",
+    "bank": "use-banks-v1212\\emily-choke-bank.bin",
+    "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E",
+    "version": 71,
+    "clips": 374,
+    "prior369PayloadsUnchanged": true,
+    "source_bank_sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+    "added": [
+      {
+        "clip": 369,
+        "donor": "mechanisms-v4\\interact_button_sequence-emily.bin",
+        "donorSha256": "bb780352eec45fafc94a36a2f9d499e05673030ef1884301d5a5f97240e6e3b6",
+        "duration": 2.3,
+        "purpose": "native use: button/press or generic reach (state 75)"
+      },
+      {
+        "clip": 370,
+        "donor": "mechanisms-v4\\interact_lever_sequence-emily.bin",
+        "donorSha256": "4167a798ed212bab2da478361bd58d8b1a82bcc60acd5d32061f6a19da360e17",
+        "duration": 3.2,
+        "purpose": "native use: lever"
+      },
+      {
+        "clip": 371,
+        "donor": "mechanisms-v4\\interact_crank_sequence-emily.bin",
+        "donorSha256": "544f0273f6b13877a96a1c5daa55d82d0045211ec78f3f5167712f751baff48f",
+        "duration": 4.8,
+        "purpose": "native use: crank"
+      },
+      {
+        "clip": 372,
+        "donor": "mechanisms-v4\\interact_wheel_sequence-emily.bin",
+        "donorSha256": "1c1ce9096bf55637add6be8acb58a258bb95e8e1425ea3b5b3dd35216d59777c",
+        "duration": 5.2,
+        "purpose": "native use: wheel/valve"
+      },
+      {
+        "clip": 373,
+        "donor": "mechanisms-v4\\interact_key_sequence-emily.bin",
+        "donorSha256": "7ed58ee6f6a8d95b2c5245bcff0ad9efc63ae2279db1391caeb8a66dafd77de4",
+        "duration": 3.2,
+        "purpose": "native use: key/lock"
+      }
+    ],
+    "conversion": "Existing authored mechanism studies (mechanisms-v4: reach, operate, recover with full-body weight transfer) resampled to 120 frames plus guard; played once per native use event on its own clip duration; root network-owned, no events.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  }
+]

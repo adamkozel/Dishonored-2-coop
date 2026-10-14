@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "checks": [
+    "Read-only exact owned arm/item scene reader observes both native equip variants repeatedly",
+    "Native quantity callback and native equip produce one selected grenade with exact stable owner",
+    "Actual native grenade equip and unequip Midnight scenes recorded",
+    "Native grenade remains selected while crouching and returns to standing",
+    "No native cooking, throw or slash scene observed in the equip-only test",
+    "Scene reader refuses baseline and clears after native rollback",
+    "Native rollback restores zero quantity, empty slot and original component/handle",
+    "Both full inventory quantities and player/avatar health remain unchanged",
+    "All fourteen protected settings/save hashes retained"
+  ],
+  "scenes": [
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_unequip.midnightscene",
+    "midnight/gameplay/player/base/gadgets/gadget_grenade_equip.midnightscene"
+  ],
+  "dll": "B088BCBA3302E5A8D1A78CE282C816A638022995BB69BFCC1626A0109EC72A50",
+  "probe": "527A8D81167204270CB424790C4F852FD708EF6CB7E2E4E23AE0F1A9B6CCAED4",
+  "scope": "Native source grenade equip/unequip and stance observations only. No cooking, throw, remote prop/body binding or gameplay replication is claimed."
+}

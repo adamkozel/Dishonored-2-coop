@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "failure": "Capture did not finish",
+  "checks": [
+    "host: stance 0 holster uses native scene and authored contact; settles to matching native sword state and independent visibility flag",
+    "host: stance 0 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "host: stance 0 draw uses native scene and authored contact; settles to matching native sword state and independent visibility flag",
+    "host: stance 1 holster uses native scene and authored contact; settles to matching native sword state and independent visibility flag",
+    "host: stance 1 unarmed forward/sideways/backward retain distance-clocked authored body",
+    "host: stance 1 draw uses native scene and authored contact; settles to matching native sword state and independent visibility flag",
+    "host: original visible drawn sword restored, no visibility refusal or lost lease; health unchanged"
+  ],
+  "chapters": [
+    {
+      "source": "host",
+      "stance": 0,
+      "action": "holster",
+      "videoTime": 0.7028291
+    },
+    {
+      "source": "host",
+      "stance": 0,
+      "action": "draw",
+      "videoTime": 9.758498399999999
+    },
+    {
+      "source": "host",
+      "stance": 1,
+      "action": "holster",
+      "videoTime": 14.1009149
+    },
+    {
+      "source": "host",
+      "stance": 1,
+      "action": "draw",
+      "videoTime": 23.257774299999998
+    }
+  ],
+  "bankManifest": "outofmana-context-bank-manifest-v46.json",
+  "dll": "B25CACBF0DE2AF36CB52E538E4499474063A4BA8D9AB6479FC903EF98811D486",
+  "scope": "Native source input, strict equipment scene, Steam timing, authored body and native clone sword. Visual hand contact and broader unarmed special actions remain unaccepted."
+}

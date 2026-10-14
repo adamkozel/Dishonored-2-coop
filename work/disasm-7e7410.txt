@@ -1,0 +1,87 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407E7410: push        rbx
+  00000001407E7412: sub         rsp,20h
+  00000001407E7416: mov         rbx,rcx
+  00000001407E7419: mov         rcx,qword ptr [rcx+10h]
+  00000001407E741D: mov         rax,qword ptr [rcx]
+  00000001407E7420: call        qword ptr [rax]
+  00000001407E7422: mov         ecx,dword ptr [rax+60h]
+  00000001407E7425: cmp         ecx,dword ptr [00000001439CE2C0h]
+  00000001407E742B: jl          00000001407E74B4
+  00000001407E7431: cmp         ecx,dword ptr [00000001439CE2C4h]
+  00000001407E7437: jg          00000001407E74B4
+  00000001407E7439: mov         rcx,qword ptr [rbx+10h]
+  00000001407E743D: lea         rdx,[00000001439DC670h]
+  00000001407E7444: mov         r8d,2
+  00000001407E744A: call        0000000140877720
+  00000001407E744F: test        rax,rax
+  00000001407E7452: je          00000001407E74B4
+  00000001407E7454: test        byte ptr [rax+00000000000007CCh],1
+  00000001407E745B: je          00000001407E74B4
+  00000001407E745D: mov         rcx,rax
+  00000001407E7460: call        00000001403ED560
+  00000001407E7465: test        al,al
+  00000001407E7467: jne         00000001407E74B4
+  00000001407E7469: mov         rcx,qword ptr [rbx+10h]
+  00000001407E746D: lea         rdx,[00000001439E2A00h]
+  00000001407E7474: mov         r8d,1
+  00000001407E747A: call        0000000140877720
+  00000001407E747F: test        rax,rax
+  00000001407E7482: je          00000001407E7522
+  00000001407E7488: test        byte ptr [rax+0000000000000D58h],1
+  00000001407E748F: je          00000001407E7522
+  00000001407E7495: mov         rcx,qword ptr [rbx+10h]
+  00000001407E7499: lea         rdx,[rax+0000000000000D4Ch]
+  00000001407E74A0: mov         r9b,1
+  00000001407E74A3: lea         r8,[rcx+000000000000030Ch]
+  00000001407E74AA: add         rsp,20h
+  00000001407E74AE: pop         rbx
+  00000001407E74AF: jmp         000000014087D1E0
+  00000001407E74B4: mov         rcx,qword ptr [00000001439A5290h]
+  00000001407E74BB: mov         rax,qword ptr [rcx]
+  00000001407E74BE: call        qword ptr [rax+0000000000000088h]
+  00000001407E74C4: mov         rcx,qword ptr [rbx+10h]
+  00000001407E74C8: add         rcx,20h
+  00000001407E74CC: test        byte ptr [rax+8],40h
+  00000001407E74D0: jne         00000001407E7509
+  00000001407E74D2: call        00000001401D9090
+  00000001407E74D7: lea         rcx,[0000000141C70F40h]
+  00000001407E74DE: mov         rdx,rax
+  00000001407E74E1: call        0000000140166830
+  00000001407E74E6: mov         rcx,qword ptr [rbx+10h]
+  00000001407E74EA: lea         rdx,[00000001439A6F30h]
+  00000001407E74F1: xorps       xmm0,xmm0
+  00000001407E74F4: movss       dword ptr [rsp+30h],xmm0
+  00000001407E74FA: mov         r8d,dword ptr [rsp+30h]
+  00000001407E74FF: add         rsp,20h
+  00000001407E7503: pop         rbx
+  00000001407E7504: jmp         0000000140883F60
+  00000001407E7509: call        00000001401D9090
+  00000001407E750E: lea         rcx,[0000000141C70FC0h]
+  00000001407E7515: mov         rdx,rax
+  00000001407E7518: add         rsp,20h
+  00000001407E751C: pop         rbx
+  00000001407E751D: jmp         0000000140166830
+  00000001407E7522: add         rsp,20h
+  00000001407E7526: pop         rbx
+  00000001407E7527: ret
+  00000001407E7528: int         3
+  00000001407E7529: int         3
+  00000001407E752A: int         3
+  00000001407E752B: int         3
+  00000001407E752C: int         3
+  00000001407E752D: int         3
+  00000001407E752E: int         3
+  00000001407E752F: int         3
+  00000001407E7530: 40
+
+  Summary
+
+     1A7D000 .text

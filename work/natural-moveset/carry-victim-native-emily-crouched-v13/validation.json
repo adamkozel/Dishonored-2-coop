@@ -1,0 +1,137 @@
+{
+  "identity": {
+    "character": "emily",
+    "role": "client",
+    "peer": "host",
+    "dllSha256": "43A5D79A5E07E056FCBEA7DC17F515F87199CA065BE579B85C7D732E4596B112",
+    "exeSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+    "bankSha256": "CE6CE474A89CA154BB576CD07B8B0DA41114E95EB7C5EA2690C2D1BE9E5B6EC1",
+    "victimSceneSourceSha256": "5AF9933110E7342F9C934B448AF46315E99E765B110DAB14A97FA4657FA957B8",
+    "installedAssetIndexSha256": "9544C035FB0CD9FDB01F0D4A29AA4EFE51EA26722446D373C126865E63C0B052",
+    "healthBefore": {
+      "tick": 279736703,
+      "handle": 1,
+      "logic": 1,
+      "component": "0x20a45db6830",
+      "actor": "0x209aaaeb9d0",
+      "attributes": "0x20a45c3e010",
+      "current": 56,
+      "maximum": 70,
+      "baseMaximum": 70,
+      "suppressedMaximum": 1,
+      "ownerSuppressed": false,
+      "maximumIndex": 82,
+      "suppressedIndex": 83,
+      "attributeCount": 254,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "victimSceneRequested": true,
+    "naturalRelease": true,
+    "nativeDropExpected": true,
+    "crouchedDrop": true,
+    "view": "front",
+    "scope": "Explicitly armed native attachment experiment on the authored Mayhew corpse. Maximum lifetime is 8 seconds, or 16 seconds with NaturalRelease. Requested victim-only animation is recorded separately; shoulder pose and ragdoll outcome require visual inspection.",
+    "corpseMutations": true
+  },
+  "samples": 145,
+  "held_samples": 93,
+  "checks": [
+    {
+      "check": "harness completed",
+      "passed": true
+    },
+    {
+      "check": "strict reciprocal attachment observed",
+      "passed": true
+    },
+    {
+      "check": "one exact mapped corpse generation",
+      "passed": true
+    },
+    {
+      "check": "native release empties attachment list",
+      "passed": true
+    },
+    {
+      "check": "this case starts and releases exactly one attachment",
+      "passed": true
+    },
+    {
+      "check": "local first-person health preserved",
+      "passed": true
+    },
+    {
+      "check": "at least 24 captured frames per second",
+      "passed": true
+    },
+    {
+      "check": "victim-only native scene owns exactly the corpse",
+      "passed": true
+    },
+    {
+      "check": "actual native victim carry clip is connected",
+      "passed": true
+    },
+    {
+      "check": "victim scene retired on release",
+      "passed": true
+    },
+    {
+      "check": "corpse remains dead",
+      "passed": true
+    },
+    {
+      "check": "native physics changes ragdoll to animated and back",
+      "passed": true
+    },
+    {
+      "check": "native carried flag is claimed and restored",
+      "passed": true
+    },
+    {
+      "check": "source drop reaches victim playback",
+      "passed": true
+    },
+    {
+      "check": "native drop scene binds only the same corpse",
+      "passed": true
+    },
+    {
+      "check": "actual native victim drop clip is connected",
+      "passed": true
+    },
+    {
+      "check": "native drop scene retires",
+      "passed": true
+    },
+    {
+      "check": "source drop releases before the fixture timeout",
+      "passed": true
+    },
+    {
+      "check": "authored carrier follows the same native drop state",
+      "passed": true
+    }
+  ],
+  "mechanical_checks_passed": true,
+  "post_release_samples": 31,
+  "release_counter_delta": 1,
+  "root_follows_carrier": false,
+  "carrier_displacement_m": 2.5675565856327527,
+  "corpse_displacement_m": 4.168272499854,
+  "maximum_carrier_root_separation_m": 1.965403699929923,
+  "actual_capture_hz": 27.359635811836114,
+  "video_sha256": "FF7655D9CB34ED07CDD8314D1431443CE9ED167FC803E00E244DFE26CA237B92",
+  "native_victim_scene_active": true,
+  "victim_animation_input_count": 1,
+  "native_victim_animation": true,
+  "native_victim_drop_animation": true,
+  "visual_accepted": false,
+  "complete": false,
+  "scope": "Explicitly armed attachment mechanics only. Root movement, corpse pose and physics handoff must be judged separately."
+}

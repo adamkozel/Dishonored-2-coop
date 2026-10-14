@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Both role directions recorded with identical corridor/input and clear versus partner-present control",
+    "Player and partner health stable after every movement case; collision verdict requires trajectory and video analysis",
+    "Both checkpoints restore original complete inventory and health",
+    "All14 protected save/settings hashes retained"
+  ],
+  "dll": "CA19D04C7035C14873F3272F8BFF2739C9F9D9541F8B50A45DA90B466544932B",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "cases": [
+    "host-clear",
+    "host-partner",
+    "client-clear",
+    "client-partner"
+  ],
+  "collisionExclusionVerified": false,
+  "scope": "Read-only movement/physics observation with native controller input. Clear versus partner-present corridor on both roles. No collision filter or physics mutation. Passing means collection/restoration succeeded; trajectory/visual verdict is separate."
+}

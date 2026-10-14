@@ -1,0 +1,15 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\r\nvoid FUN_140735830(longlong param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  longlong lVar2;\r\n  int iVar3;\r\n  short sVar4;\r\n  longlong lVar5;\r\n  \r\n  uVar1 = *(undefined8 *)(param_1 + 8);\r\n  lVar2 = *(longlong *)(param_1 + 0x100);\r\n  sVar4 = 0;\r\n  if (0 < *(int *)(param_1 + 0x138)) {\r\n    iVar3 = 0;\r\n    do {\r\n      lVar5 = (longlong)(iVar3 * *(int *)(param_1 + 0x1e0)) + *(longlong *)(param_1 + 0x1d8);\r\n      FUN_1407358c0(param_1,uVar1,*(undefined4 *)(*(longlong *)(lVar2 + 0x28) + (longlong)sVar4 * 4)\r\n                    ,*(undefined4 *)(lVar5 + 0xb0),*(undefined8 *)(lVar5 + 0x90));\r\n      sVar4 = sVar4 + 1;\r\n      iVar3 = (int)sVar4;\r\n    } while (iVar3 < *(int *)(param_1 + 0x138));\r\n  }\r\n  return;\r\n}\r\n\r\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\r\nvoid FUN_140735830(longlong param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  longlong lVar2;\r\n  int iVar3;\r\n  short sVar4;\r\n  longlong lVar5;\r\n  \r\n  uVar1 = *(undefined8 *)(param_1 + 8);\r\n  lVar2 = *(longlong *)(param_1 + 0x100);\r\n  sVar4 = 0;\r\n  if (0 < *(int *)(param_1 + 0x138)) {\r\n    iVar3 = 0;\r\n    do {\r\n      lVar5 = (longlong)(iVar3 * *(int *)(param_1 + 0x1e0)) + *(longlong *)(param_1 + 0x1d8);\r\n      FUN_1407358c0(param_1,uVar1,*(undefined4 *)(*(longlong *)(lVar2 + 0x28) + (longlong)sVar4 * 4)\r\n                    ,*(undefined4 *)(lVar5 + 0xb0),*(undefined8 *)(lVar5 + 0x90));\r\n      sVar4 = sVar4 + 1;\r\n      iVar3 = (int)sVar4;\r\n    } while (iVar3 < *(int *)(param_1 + 0x138));\r\n  }\r\n  return;\r\n}\r\n\r\n"
+    },
+    "isError": false
+  }
+}

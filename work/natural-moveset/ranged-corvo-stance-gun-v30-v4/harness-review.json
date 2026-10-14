@@ -1,0 +1,9 @@
+{
+  "cause": "Harness required 800ms full-body stance blend to finish within 750ms of input command, before native change and delayed Steam timeline.",
+  "source": "outputs/d2-coop-lab/src/movement_bank.h:182",
+  "changed": "Deadline now measured from observed native stance; 800ms blend plus 200ms transport allowance. Native response independently bounded to 600ms.",
+  "result_preserved": true,
+  "runtime_changed": false,
+  "rerun_required": true,
+  "visual": "Front view shows near-level crouched blade; oblique apparent downward direction was camera foreshortening. Contact sheets inspected; full grip/transition acceptance remains false."
+}

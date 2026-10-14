@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "failure": "Bank did not become ready",
+  "checks": [
+    "host Slash retains native motion=0 and selects the intended combat presentation (authored=True)",
+    "host standing Block retains motion=0 and selects the intended guard presentation (authored=True)",
+    "host Slash retains native motion=1 and selects the intended combat presentation (authored=True)",
+    "host crouched Block retains motion=1; standing bank does not override crouch",
+    "host native jump/fall selects authored airborne motion without competing clone action",
+    "host pause retires bank, rejects rearm, and resume does not replay it"
+  ],
+  "dll": "DD5DF932A1C74BFC5E42435AAB9E5700DD3CD59A97FB89785B27575E0E26F054",
+  "scope": "Native Block/movement coexistence, action/stance/airborne priority and pause for the experimental bank; no new combat outcomes or whole-family visual acceptance."
+}

@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-14T19:02:53.658952+02:00",
+  "dll": "05C22812B9755856BDEBF3EF4585DD668E9DF4F85798E45196A6B7D9563FF14F",
+  "probe": "A2B7158EA9B202C8DC21FF3EC395F69D340CFDB0CCAC7A4191CF0B9C6464043C",
+  "previous": "candidate-npc-combat-v1203",
+  "protocol": 73,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 70,
+  "clips": 369,
+  "banks": [
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/corvo-choke-bank.bin",
+      "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE"
+    },
+    {
+      "path": "work/natural-moveset/climb-banks-v1042/emily-choke-bank.bin",
+      "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1203b on 1203: 1204 showed every movement-bank (re)load stalled the committing peer ~1-2 s (engine-thread full-bank bind check over ~270 MB), making the other peer's follow stale; the 1203 watchdog then re-ran the whole presentation and both peers ping-ponged. 1203b: the bind check runs in the load worker against a request-time snapshot (commit compares only the snapshot); a dormant bank for the same actor/world is reactivated in place (no re-decode); the watchdog repairs only missing pieces (avatar/follow/bank/stream) with a 6 s grace doubling to 60 s; timers for serviceMovementBank/serviceMovementResume/followProbe and commit ms in the log. Runtime pending.",
+  "result": "Runtime 1204b failed: bank commit now 0.5 ms (was ~1-2 s) and follow no longer went stale; bank reactivated in place; but the shadow stream never stayed ready - its token handshake rejects a unilaterally restarted peer and the two watchdogs restarted at different times (backoff 48 s). Superseded by 1203c.",
+  "runtimeEvidence": "../../natural-moveset/mission-presentation-resume-v1204b/result.json",
+  "auditEvidence": "../presentation-recovery-audit-v1205.json"
+}

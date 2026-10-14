@@ -1,0 +1,192 @@
+# native-movement-findings.json
+
+Original: [work/movement-integration/native-movement-findings.json](<../../../../work/movement-integration/native-movement-findings.json>)
+
+SHA-256: `7F9FCCC824272E11C64DE0212EA243BBE5285BAA25F27822FF903FFA45436620`; 8916 bytes.
+
+## Original saved record
+
+````json
+{
+  "executable_sha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "status": "in_progress",
+  "confirmed_native_activation": {
+    "sprinting": {
+      "id": 1,
+      "vtable_rva": "0x1c85948",
+      "roles": [
+        "corvo",
+        "emily"
+      ],
+      "inputs": [
+        "forward",
+        "left diagonal",
+        "right diagonal"
+      ],
+      "evidence": "../natural-moveset/native-sprint-observation-v1/states.json"
+    },
+    "leaning": {
+      "id": 18,
+      "vtable_rva": "0x1c82b28",
+      "roles": [
+        "corvo",
+        "emily"
+      ],
+      "coexists_with": [
+        0,
+        6
+      ],
+      "evidence": "../natural-moveset/native-context-observation-v1/states.json",
+      "update_function": "0x14085dcc0",
+      "observed_fields": {
+        "0x40": "signed lateral lean; negative left, positive right under known controller inputs",
+        "0x44": "upward lean; observed 0..1",
+        "0x50": "scale; observed 1 in current tests"
+      },
+      "limits": "Vertical peeking now passed 18 both-role/stance/equipment checks. Actual armed D2 recordings indexed; standing lift subtle. Collision-limited scale and arbitrary combat interruptions remain unverified.",
+      "gameplay_binding": "D2MOVE05: lean-bank-v1-test/result.json; actual D2 recordings integrated-lean-{corvo,emily}-v1.mp4"
+    },
+    "sliding": {
+      "id": 7,
+      "vtable_rva": "0x1c86108",
+      "roles": [
+        "corvo",
+        "emily"
+      ],
+      "evidence": "../natural-moveset/native-context-observation-v1/states.json",
+      "limits": "Native slide entry, crouch recovery and jump interruption passed both roles (9 checks). Low ceilings, slopes, paired actions and visual acceptance remain pending.",
+      "gameplay_binding": "D2MOVE06: slide-bank-v2-test/result.json. Raw capsule stance can become 0 before Sliding ID7 retires; v1 failure preserved."
+    },
+    "sword_scenes": {
+      "states": {
+        "slash": 39,
+        "block": 44
+      },
+      "scene_handle_offset": "0x24",
+      "scene_bindings": "instance+0x10 pointer, +0x18 count, 0x20 stride, actor+8",
+      "runtime_evidence": "../natural-moveset/native-combat-timing-v3-reader/reader-coverage.json",
+      "reader_coverage": "201/201 active sword samples",
+      "live_binding": "D2MOVE08 combat-bank-v1-test:16 checks and combat-bank-v1-priority:13 checks",
+      "recordings": [
+        "integrated-combat-corvo-v1.mp4",
+        "integrated-combat-emily-v1.mp4"
+      ],
+      "limits": "Single guard quadrant, static heavy hold, no air/moving contact/impact or visual acceptance"
+    },
+    "low_mantle": {
+      "state_id": 8,
+      "vtable_rva": "0x1c82f68",
+      "activation": "controller A + forward at existing desk-left fixture (-32,-148.5), yaw90",
+      "scene": "midnight/gameplay/player/base/mobility/mantle_low_idle.midnightscene",
+      "subscene": "Scene_1",
+      "duration_ms": 500,
+      "binding": "Observed mantle_low_idle Scene_1 500 ms. Exactly one actual player plus optional owned right arm. Owned sword_equip_fast binds only right arm; both roles observed, 500 ms each.",
+      "read_only_fields": {
+        "0x24": "native scene handle",
+        "0xd8": "kind1 observed",
+        "0xb8": "next0 observed",
+        "0xbc": "stable goal world XYZ",
+        "0xe8": "stable start world XYZ"
+      },
+      "evidence": [
+        {
+          "evidence": "native-traversal-v1/states.json",
+          "samples": 6,
+          "scenes": [
+            "midnight/gameplay/player/base/mobility/mantle_low_idle.midnightscene"
+          ]
+        },
+        {
+          "evidence": "native-traversal-emily-v1/states.json",
+          "samples": 6,
+          "scenes": [
+            "midnight/gameplay/player/base/mobility/mantle_low_idle.midnightscene"
+          ]
+        }
+      ],
+      "scope": "v2 contact fitted to measured Dunwall desk trajectory; world actor root remains network-controlled. Both roles filmed. Geometry-general contacts, high/vault/hang, interruptions and visual acceptance remain incomplete.",
+      "gameplay_binding": "low-mantle-v6-recovery-test:16 checks + low-mantle-v12-priority:13",
+      "recordings": [
+        "integrated-low-mantle-corvo-v2/take.json",
+        "integrated-low-mantle-emily-v2/take.json"
+      ]
+    },
+    "crouched_low_mantle": {
+      "dll_sha256": "3A8EE80A3C9FFB248AEAC641B98B45E43E999DF7CB3A0F7660BC6C65324BD147",
+      "bank_format": "D2MOVE13 / 115 clips",
+      "action_protocol": "12 / 208 bytes",
+      "tests": [
+        "crouch-mantle-v13c-test",
+        "crouch-mantle-v13-priority"
+      ],
+      "checks": 29,
+      "complete": false,
+      "visual_accepted": false,
+      "protected_saves_unchanged": true,
+      "binding": "Native state8 kind1 next6: mantle_low_sneak, Corvo Scene_2 / Emily Scene_1,500ms; actual player only or player plus exact owned right arm. Character comes from the exact player body definition. Crouched recovery sword_equip_sneak_fast333ms binds only the owned right arm.",
+      "evidence": [
+        "integrated-crouch-mantle-corvo-v3/take.json",
+        "integrated-crouch-mantle-emily-v3/take.json"
+      ],
+      "limits": [
+        "Arbitrary geometry contacts, other traversals and visual acceptance remain incomplete.",
+        "First attempts exposed optional-arm binding and distinct crouched fast recovery; both corrected and the failed evidence retained.",
+        "v1 recordings rejected for an obstructed bookshelf camera; Emily observer health changed. Isolated fixture restored, camera moved and NPC isolation moved before camera setup. v3 health checks passed."
+      ],
+      "created": "2026-10-10T22:47:11.727743+02:00"
+    },
+    "low_vault": {
+      "dll_sha256": "B1CB32BAF8E581F46759DCFA019D84BD59229DBFE13E546FF36C1459ACC0CF31",
+      "bank_format": "D2MOVE14 / 117 clips",
+      "action_protocol": "13 / 224 bytes",
+      "tests": [
+        "vault-v14c-test",
+        "vault-v14c-priority"
+      ],
+      "checks": 29,
+      "complete": false,
+      "visual_accepted": false,
+      "protected_saves_unchanged": true,
+      "binding": "Native state9 VT1c86e18. Approach/exit have no scene handle; active vault_1/2 has exact player and both owned arms, Corvo Scene_2 / Emily Scene_1, declared933ms. Animation phase follows start/end-plane distance, not the prematurely ended native scene clock.",
+      "evidence": [
+        "integrated-vault-corvo-v3/take.json",
+        "integrated-vault-corvo-unarmed-v3/take.json",
+        "integrated-vault-emily-v3/take.json",
+        "integrated-vault-emily-unarmed-v3/take.json"
+      ],
+      "limits": [
+        "High/window variants and arbitrary support contacts remain unfinished.",
+        "v14a failed because an early action handoff reset blend weight and test progress used integer overloads. v14c corrects both; telemetry now samples movement at50ms while active.",
+        "Fine support and landing contact remains partly occluded by desk and props."
+      ],
+      "created": "2026-10-10T23:20:07.669693+02:00"
+    }
+  },
+  "root_interpolation": {
+    "before": "sprint-root-trace-v1.analysis.json",
+    "source_clock_only": "sprint-root-trace-source-clock.analysis.json",
+    "after": "sprint-root-trace-underrun.analysis.json",
+    "before_maximum_mps": 33.30930600763873,
+    "source_clock_only_maximum_mps": 39.80395378072791,
+    "after_maximum_mps": 7.973871876915769,
+    "after_spikes_over_10_mps": 0,
+    "after_samples": 964,
+    "changes": [
+      "Pose protocol 11 appends monotonic source sampling time",
+      "Receiver preserves sampling intervals while slowly adapting clock offset",
+      "After buffer starvation, presentation recovers at at most 1.05 times clock speed instead of snapping to a late packet"
+    ],
+    "limits": "One comparable three-second live root trace per version plus a both-role sprint test; not a general network-latency or long-session certification. No changes to native local movement or camera."
+  },
+  "native_effects": {
+    "status": "static_analysis_only",
+    "entity_start_candidate": "0x14087e9e0",
+    "attachment_transform_candidate": "0x14087ec90",
+    "asset_manifest": "../../outputs/d2-coop-lab/research/asset-exports/movement-native-power-components-v1/manifest.json",
+    "limits": "No arbitrary native effect calls were made. Resource declaration identity, parent lifetime, termination, audience and outcome ownership must be validated before playback. First-person screen effects must remain local."
+  },
+  "recording_issues": {
+    "slide": "Side views v9/v10 lose or occlude full body; v11 outside PVS; oblique v12 preserves later recovery but clips initial feet and briefly occludes travel. None indexed as clear accepted slide coverage. Native state tests pass."
+  }
+}
+````

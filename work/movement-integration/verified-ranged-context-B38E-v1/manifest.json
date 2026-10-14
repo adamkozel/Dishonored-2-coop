@@ -1,0 +1,125 @@
+{
+  "created": "2026-10-11T12:01:45.391497+02:00",
+  "dll": "B38E7E422D9EC6033D8ED5FF77074F485613E4B20AAD6EB8EA66BCE9DABB689F",
+  "source_snapshot": "work\\movement-integration\\candidate-air-landing-B38E-v1",
+  "protocol": 28,
+  "packet_bytes": 260,
+  "bank_version": 30,
+  "bank_revision": 4,
+  "banks": [
+    {
+      "role": "corvo",
+      "sha256": "9030B30E348631CBA1617028D13CEFC93F77650A05203CE9510010A7064B7CBF",
+      "preserved": "work\\movement-integration\\verified-crouched-ranged-7CD4-v4\\corvo-crouched-ranged-bank.bin"
+    },
+    {
+      "role": "emily",
+      "sha256": "B615D5D6563D538EAD30CDAEAB7DAAE36FADDAD64D8EC063D4C9B52AF555D88B",
+      "preserved": "work\\movement-integration\\verified-crouched-ranged-7CD4-v4\\emily-crouched-ranged-bank.bin"
+    }
+  ],
+  "files": [
+    {
+      "source": "work\\natural-moveset\\Test-RangedNetwork.ps1",
+      "snapshot": "Test-RangedNetwork.ps1",
+      "sha256": "66A494DBE02D3D0165A9863F254438BB938D3F4554474A51B489863C689F1F6B"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-air-native-findings-v28.json",
+      "snapshot": "ranged-air-native-findings-v28.json",
+      "sha256": "ABD7EA1C143EB7E5E7AF65B597BDB74A89A749D80AE8E71EE3F5C46998B54834"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-air-runtime-findings-v28.json",
+      "snapshot": "ranged-air-runtime-findings-v28.json",
+      "sha256": "1638FB5324BB54B93D92FD2B35394D3BBF22704010AAFEFFCE6F5D2CC7371FA2"
+    },
+    {
+      "source": "work\\natural-moveset\\crouched-ranged-bank-manifest-v4.json",
+      "snapshot": "crouched-ranged-bank-manifest-v4.json",
+      "sha256": "EB0D3067C56E2D2DED393BACAB37578D88C1E8879357E43904FB19FC9E98E4A3"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-corvo-gun-air-v28-v3\\result.json",
+      "snapshot": "ranged-corvo-gun-air-v28-v3/result.json",
+      "sha256": "C22957C4A6C63A8B5EDB60050EA9B8AC4F79D01EC543D819100BF8C46C586982"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-corvo-gun-air-v28-v3\\visual-review.json",
+      "snapshot": "ranged-corvo-gun-air-v28-v3/visual-review.json",
+      "sha256": "17D4CC73315A719D72259F93207CFB962504C373C5D40D542D8F9A81C2938DD4"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-emily-crossbow-air-v28-v1\\result.json",
+      "snapshot": "ranged-emily-crossbow-air-v28-v1/result.json",
+      "sha256": "0858D03763149432F5DC0C6D28674267FB87B4A91C8C4582365553F461762571"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-emily-crossbow-air-v28-v1\\visual-review.json",
+      "snapshot": "ranged-emily-crossbow-air-v28-v1/visual-review.json",
+      "sha256": "C22CA356C07C536062E06556F1FD59E04F30044EB1662462D27CAEB019BF0301"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-corvo-crouch-gun-moving-v30-v4\\result.json",
+      "snapshot": "ranged-corvo-crouch-gun-moving-v30-v4/result.json",
+      "sha256": "B61CA0611FAE980233BBE21731445D9C7BB808BD0338128C92CE16123DA8EE11"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-corvo-crouch-gun-moving-v30-v4\\visual-review.json",
+      "snapshot": "ranged-corvo-crouch-gun-moving-v30-v4/visual-review.json",
+      "sha256": "33D736EB9E4BB266B9F1BEA9EA3C08703CF29ED820A52CE8C5E1434B142547CC"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-emily-crouch-crossbow-moving-v30-v4\\result.json",
+      "snapshot": "ranged-emily-crouch-crossbow-moving-v30-v4/result.json",
+      "sha256": "EB35C22F31D84400A0100122A72C168AD802411879CF72275EB19B373E02F737"
+    },
+    {
+      "source": "work\\natural-moveset\\ranged-emily-crouch-crossbow-moving-v30-v4\\visual-review.json",
+      "snapshot": "ranged-emily-crouch-crossbow-moving-v30-v4/visual-review.json",
+      "sha256": "57E4DC63299CFE25143EF5D4CA53C729A11F831EDB5FAF81AF64660E7613ED1B"
+    }
+  ],
+  "cases": [
+    {
+      "take": "ranged-corvo-gun-air-v28-v3",
+      "checks": 11,
+      "result": "work/natural-moveset/ranged-corvo-gun-air-v28-v3/result.json",
+      "source": "host",
+      "kind": "gun",
+      "airborne": true,
+      "travelling": false
+    },
+    {
+      "take": "ranged-emily-crossbow-air-v28-v1",
+      "checks": 12,
+      "result": "work/natural-moveset/ranged-emily-crossbow-air-v28-v1/result.json",
+      "source": "client",
+      "kind": "crossbow",
+      "airborne": true,
+      "travelling": false
+    },
+    {
+      "take": "ranged-corvo-crouch-gun-moving-v30-v4",
+      "checks": 10,
+      "result": "work/natural-moveset/ranged-corvo-crouch-gun-moving-v30-v4/result.json",
+      "source": "host",
+      "kind": "gun",
+      "airborne": false,
+      "travelling": true
+    },
+    {
+      "take": "ranged-emily-crouch-crossbow-moving-v30-v4",
+      "checks": 11,
+      "result": "work/natural-moveset/ranged-emily-crouch-crossbow-moving-v30-v4/result.json",
+      "source": "client",
+      "kind": "crossbow",
+      "airborne": false,
+      "travelling": true
+    }
+  ],
+  "checks": 44,
+  "complete": false,
+  "visual_accepted": false,
+  "scope": "Partial native ranged presentation with single jump/reload/landing and eight-direction crouched travel. Exact test scope and visual limitations are retained; this does not complete movement."
+}

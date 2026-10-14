@@ -1,0 +1,172 @@
+{
+  "failure": null,
+  "scope": "Native API source/recipient capacity tests over Steam: partial ammo 9-to-10, full ammo and full stored health potion accept zero but retire the world object and acknowledge once; per-item native ownership, unrelated inventory/health/money, duplicates and native fixture restoration. Checkpoint cleanup restores full isolated baseline. Not ordinary ammo/potion input or cross-account online proof.",
+  "cases": [
+    {
+      "plan": {
+        "recipientDelta": 1,
+        "fixtureRole": "client",
+        "setup": 9,
+        "name": "pickups_ammo_bullet_box_regular",
+        "family": 4,
+        "source": "host"
+      },
+      "receipts": {
+        "host": {
+          "name": "pickups_ammo_bullet_box_regular",
+          "item": "components/equipment/ammo/bullet.inventoryitem",
+          "family": 4,
+          "maximum": 10,
+          "accepted": 3,
+          "quantity": 2,
+          "arm": 1,
+          "peerArm": 1,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": true,
+          "before": 0,
+          "after": 3,
+          "nativeCalls": 0,
+          "observations": 1,
+          "exerciseCalls": 5,
+          "result": "coin_committed_once"
+        },
+        "client": {
+          "name": "pickups_ammo_bullet_box_regular",
+          "item": "components/equipment/ammo/bullet.inventoryitem",
+          "family": 4,
+          "maximum": 10,
+          "accepted": 1,
+          "quantity": 2,
+          "arm": 1,
+          "peerArm": 1,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": false,
+          "before": 9,
+          "after": 10,
+          "nativeCalls": 5,
+          "observations": 0,
+          "exerciseCalls": 0,
+          "result": "coin_committed_once"
+        }
+      },
+      "passed": true
+    },
+    {
+      "plan": {
+        "recipientDelta": 0,
+        "fixtureRole": "client",
+        "setup": 10,
+        "name": "pickups_ammo_bullet_regular",
+        "family": 4,
+        "source": "host"
+      },
+      "receipts": {
+        "host": {
+          "name": "pickups_ammo_bullet_regular",
+          "item": "components/equipment/ammo/bullet.inventoryitem",
+          "family": 4,
+          "maximum": 10,
+          "accepted": 1,
+          "quantity": 1,
+          "arm": 2,
+          "peerArm": 2,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": true,
+          "before": 3,
+          "after": 4,
+          "nativeCalls": 0,
+          "observations": 1,
+          "exerciseCalls": 5,
+          "result": "coin_committed_once"
+        },
+        "client": {
+          "name": "pickups_ammo_bullet_regular",
+          "item": "components/equipment/ammo/bullet.inventoryitem",
+          "family": 4,
+          "maximum": 10,
+          "accepted": 0,
+          "quantity": 1,
+          "arm": 2,
+          "peerArm": 2,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": false,
+          "before": 10,
+          "after": 10,
+          "nativeCalls": 5,
+          "observations": 0,
+          "exerciseCalls": 0,
+          "result": "coin_committed_once"
+        }
+      },
+      "passed": true
+    },
+    {
+      "plan": {
+        "recipientDelta": 0,
+        "fixtureRole": "host",
+        "setup": 10,
+        "name": "pickups_life_potion_01_9",
+        "family": 14,
+        "source": "client"
+      },
+      "receipts": {
+        "host": {
+          "name": "pickups_life_potion_01_9",
+          "item": "components/interactive/health_potion.inventoryitem",
+          "family": 14,
+          "maximum": 10,
+          "accepted": 0,
+          "quantity": 1,
+          "arm": 20,
+          "peerArm": 20,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": false,
+          "before": 10,
+          "after": 10,
+          "nativeCalls": 5,
+          "observations": 0,
+          "exerciseCalls": 0,
+          "result": "coin_committed_once"
+        },
+        "client": {
+          "name": "pickups_life_potion_01_9",
+          "item": "components/interactive/health_potion.inventoryitem",
+          "family": 14,
+          "maximum": 10,
+          "accepted": 1,
+          "quantity": 1,
+          "arm": 20,
+          "peerArm": 20,
+          "revision": 1,
+          "ack": 1,
+          "attempted": true,
+          "awarded": true,
+          "nativeSource": true,
+          "before": 0,
+          "after": 1,
+          "nativeCalls": 0,
+          "observations": 1,
+          "exerciseCalls": 5,
+          "result": "coin_committed_once"
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,50 @@
+{
+  "passed": false,
+  "checks": {
+    "pickup_checks_passed": true,
+    "native_high_throw_observed": true,
+    "exact_source_state": true,
+    "source_throw_velocity_bounded": true,
+    "authored_remote_throw": true,
+    "victim_only_throw_scene": true,
+    "one_impulse_queued": false,
+    "no_impulse_refusals": false,
+    "source_velocity_replicated": false,
+    "same_corpse_generation": true,
+    "source_finished": true,
+    "released_after_throw": true,
+    "retarget_removed": true,
+    "native_ragdoll_restored": true,
+    "victim_remains_dead": true,
+    "health_preserved": true,
+    "original_sword_restored": true,
+    "equipment_retired": true,
+    "old_clip_payload_retained": true,
+    "finite_physical_trajectory": true,
+    "no_unbounded_launch": true
+  },
+  "source_samples": 8,
+  "remote_samples": 10,
+  "victim_scene_samples": 3,
+  "impulses_queued": 0,
+  "throw_velocity": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "trajectory_bounds": [
+    -38.933857,
+    -161.841583,
+    66.1737137,
+    -38.4099922,
+    -160.590439,
+    68.0671539
+  ],
+  "video_sha256": "8714B737EB0D972278BDD431B5F67C5AC334A3DEA2C90CE087BF3D5DC6222C8B",
+  "actual_capture_hz": 27.266666666666666,
+  "dll_sha256": "46DCE62AB9B8FEDA9457C6760F3096E494307ED9DBBAD5FD398D4EDB1FFF3217",
+  "bank_sha256": "9097431EF49B0EB70001BF8B33F02A59E0FB438F228710CD03ECC86DA5E1BBCD",
+  "complete": false,
+  "visual_accepted": false,
+  "scope": "Standing native X pickup, short carry walk, native RT high throw. Bounded same-PC Mayhew fixture; source-driven carrier clip, victim-only scene, one queued native impulse. Wall proximity, arbitrary corpses, pitched throws, world authority and mesh contacts are not accepted by these numerical checks."
+}

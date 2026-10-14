@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "source": "host",
+  "kind": "gun",
+  "crouched": false,
+  "holstered": false,
+  "failure": null,
+  "checks": [
+    "Exact native requested character/ranged equipment acquired and selected",
+    "Two native shots and a subsequent native empty trigger action observed",
+    "Native cleanup restores source inventory quantity/selection; peer inventory unchanged",
+    "Both player health and protected files unchanged; fixture restores its two-round ammunition grant"
+  ],
+  "events": [
+    {
+      "seconds": 1.957,
+      "action": "Native LT press 250ms",
+      "index": 0
+    },
+    {
+      "seconds": 4.735,
+      "action": "Native LT press 250ms",
+      "index": 1
+    },
+    {
+      "seconds": 7.911,
+      "action": "Native LT press 250ms",
+      "index": 2
+    },
+    {
+      "seconds": 10.84,
+      "action": "Native X hold 1500ms",
+      "index": 3
+    },
+    {
+      "seconds": 14.883,
+      "action": "Native X draw 650ms",
+      "index": 4
+    },
+    {
+      "seconds": 18.77,
+      "action": "Native LT press 250ms",
+      "index": 5
+    }
+  ],
+  "dll": "6A8D2E361D468049BC119AE4C128F018DFC28BBAE128A0FA8CBA6DB4D09B3534",
+  "capture": "Actual native source POV and read-only state/scene/entity observations",
+  "scope": "Two-round native ranged weapon/action investigation only; no remote body/effect integration claimed. Native gameplay may move destructible objects; reload the isolated checkpoint before other tests. Native projectile and impact state requires an isolated checkpoint reload after this test. No saves or original assets modified."
+}

@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "failure": null,
+  "at": "2026-10-09T18:51:53.8594290+02:00",
+  "dllSha256": "F4F035D954BFC39F59E170E494C6ED1B0093E332C55167649D1C43F3C5A1817D",
+  "clipSha256": "109956C449EC4AB9DA9D68F944C173F844D391074B3A5D3310264B9F180484FF",
+  "checks": [
+    "Explicit cancellation retires the clip and stops pose writes",
+    "Host/remote Emily scope refuses the Corvo-only proof",
+    "Invalid clip magic is refused; exact working clip restored",
+    "host native pause cancels the clip, refuses rearm, and resume does not replay it",
+    "client native pause cancels the clip, refuses rearm, and resume does not replay it"
+  ],
+  "events": [
+    {
+      "stage": "cancel",
+      "before": {
+        "experimental": true,
+        "active": true,
+        "start": 121709578,
+        "end": 121719578,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 2959,
+        "refused": 0
+      },
+      "settled": {
+        "experimental": true,
+        "active": false,
+        "start": 121709578,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 2978,
+        "refused": 0
+      },
+      "after": {
+        "experimental": true,
+        "active": false,
+        "start": 121709578,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 2978,
+        "refused": 0
+      }
+    },
+    {
+      "refused": {
+        "experimental": true,
+        "active": false,
+        "start": 121713968,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3039,
+        "refused": 0
+      },
+      "resumed": {
+        "experimental": true,
+        "active": false,
+        "start": 121713968,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3039,
+        "refused": 0
+      },
+      "stage": "pause-host",
+      "before": {
+        "experimental": true,
+        "active": true,
+        "start": 121713968,
+        "end": 121723968,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3012,
+        "refused": 0
+      },
+      "paused": {
+        "experimental": true,
+        "active": false,
+        "start": 121713968,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3039,
+        "refused": 0
+      }
+    },
+    {
+      "refused": {
+        "experimental": true,
+        "active": false,
+        "start": 121718484,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3089,
+        "refused": 1
+      },
+      "resumed": {
+        "experimental": true,
+        "active": false,
+        "start": 121718484,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3089,
+        "refused": 1
+      },
+      "stage": "pause-client",
+      "before": {
+        "experimental": true,
+        "active": true,
+        "start": 121718484,
+        "end": 121728484,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3071,
+        "refused": 0
+      },
+      "paused": {
+        "experimental": true,
+        "active": false,
+        "start": 121718484,
+        "end": 0,
+        "seconds": 3.066667,
+        "fixed": 3.066667,
+        "checksum": 11806995091830539036,
+        "applied": 3089,
+        "refused": 1
+      }
+    }
+  ],
+  "scope": "One bounded Corvo authoring proof. No checkpoint reload, stale network, combat arbitration or full moveset coverage claim."
+}

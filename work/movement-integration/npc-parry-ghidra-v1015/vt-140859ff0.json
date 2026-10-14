@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "\r\nvoid FUN_140859ff0(longlong param_1,longlong param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined1 auStack_38 [48];\r\n  \r\n  if (*(char *)(param_2 + 8) != '\\0') {\r\n    lVar1 = *(longlong *)(param_1 + 0x10);\r\n    if (*(int *)(param_2 + 0xc) == 2) {\r\n      FUN_140774a10(*(longlong *)(lVar1 + 0x300) + 0x370,1);\r\n    }\r\n    else if (*(int *)(param_2 + 0xc) < 1) {\r\n      return;\r\n    }\r\n    FUN_140835590(auStack_38,0,0x14,*(undefined4 *)(param_1 + 8));\r\n    FUN_1408024d0(lVar1,0x40,auStack_38);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "\r\nvoid FUN_140859ff0(longlong param_1,longlong param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  undefined1 auStack_38 [48];\r\n  \r\n  if (*(char *)(param_2 + 8) != '\\0') {\r\n    lVar1 = *(longlong *)(param_1 + 0x10);\r\n    if (*(int *)(param_2 + 0xc) == 2) {\r\n      FUN_140774a10(*(longlong *)(lVar1 + 0x300) + 0x370,1);\r\n    }\r\n    else if (*(int *)(param_2 + 0xc) < 1) {\r\n      return;\r\n    }\r\n    FUN_140835590(auStack_38,0,0x14,*(undefined4 *)(param_1 + 8));\r\n    FUN_1408024d0(lVar1,0x40,auStack_38);\r\n  }\r\n  return;\r\n}\r\n\r\n"
+  },
+  "isError": false
+}

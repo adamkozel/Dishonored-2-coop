@@ -1,0 +1,116 @@
+# disasm-7fcaf0.txt
+
+Original: [work/disasm-7fcaf0.txt](<../../../../work/disasm-7fcaf0.txt>)
+
+SHA-256: `0D57ECAECDCBE1FB1C006B866472AA3C7658CBBAE0FD0CB1EC1D98B5B170F15F`; 4314 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  00000001407FCAF0: mov         qword ptr [rsp+8],rbx
+  00000001407FCAF5: push        rdi
+  00000001407FCAF6: sub         rsp,20h
+  00000001407FCAFA: mov         ebx,edx
+  00000001407FCAFC: mov         rdi,rcx
+  00000001407FCAFF: call        00000001407FCA60
+  00000001407FCB04: test        bl,1
+  00000001407FCB07: je          00000001407FCB11
+  00000001407FCB09: mov         rcx,rdi
+  00000001407FCB0C: call        00000001400F1520
+  00000001407FCB11: mov         rax,rdi
+  00000001407FCB14: mov         rbx,qword ptr [rsp+30h]
+  00000001407FCB19: add         rsp,20h
+  00000001407FCB1D: pop         rdi
+  00000001407FCB1E: ret
+  00000001407FCB1F: int         3
+  00000001407FCB20: mov         qword ptr [rsp+8],rcx
+  00000001407FCB25: push        rdi
+  00000001407FCB26: sub         rsp,30h
+  00000001407FCB2A: mov         qword ptr [rsp+20h],0FFFFFFFFFFFFFFFEh
+  00000001407FCB33: mov         qword ptr [rsp+48h],rbx
+  00000001407FCB38: mov         ebx,edx
+  00000001407FCB3A: mov         rdi,rcx
+  00000001407FCB3D: add         rcx,0C0h
+  00000001407FCB44: call        000000014061A0A0
+  00000001407FCB49: nop
+  00000001407FCB4A: mov         rcx,rdi
+  00000001407FCB4D: call        000000014000CCD0
+  00000001407FCB52: test        bl,1
+  00000001407FCB55: je          00000001407FCB5F
+  00000001407FCB57: mov         rcx,rdi
+  00000001407FCB5A: call        00000001400F1520
+  00000001407FCB5F: mov         rax,rdi
+  00000001407FCB62: mov         rbx,qword ptr [rsp+48h]
+  00000001407FCB67: add         rsp,30h
+  00000001407FCB6B: pop         rdi
+  00000001407FCB6C: ret
+  00000001407FCB6D: int         3
+  00000001407FCB6E: int         3
+  00000001407FCB6F: int         3
+  00000001407FCB70: mov         rcx,qword ptr [rcx+48h]
+  00000001407FCB74: test        rcx,rcx
+  00000001407FCB77: jne         00000001401B2FF0
+  00000001407FCB7D: rep ret
+  00000001407FCB7F: int         3
+  00000001407FCB80: mov         rcx,qword ptr [rcx+48h]
+  00000001407FCB84: test        rcx,rcx
+  00000001407FCB87: jne         00000001401B30F0
+  00000001407FCB8D: rep ret
+  00000001407FCB8F: int         3
+  00000001407FCB90: sub         rsp,28h
+  00000001407FCB94: cmp         byte ptr [rcx+00000000000002CDh],0
+  00000001407FCB9B: jne         00000001407FCBD9
+  00000001407FCB9D: cmp         byte ptr [rcx+00000000000002CCh],0
+  00000001407FCBA4: jne         00000001407FCBD9
+  00000001407FCBA6: movss       xmm0,dword ptr [0000000141AB3828h]
+  00000001407FCBAE: comiss      xmm0,dword ptr [rcx+00000000000002B0h]
+  00000001407FCBB5: ja          00000001407FCBC1
+  00000001407FCBB7: mov         rax,qword ptr [rcx+48h]
+  00000001407FCBBB: cmp         dword ptr [rax+24h],0
+  00000001407FCBBF: je          00000001407FCBD9
+  00000001407FCBC1: addss       xmm1,dword ptr [0000000141AB3B0Ch]
+  00000001407FCBC9: call        00000001407FDC30
+  00000001407FCBCE: test        al,al
+  00000001407FCBD0: jne         00000001407FCBD9
+  00000001407FCBD2: mov         al,1
+  00000001407FCBD4: add         rsp,28h
+  00000001407FCBD8: ret
+  00000001407FCBD9: xor         al,al
+  00000001407FCBDB: add         rsp,28h
+  00000001407FCBDF: ret
+  00000001407FCBE0: mov         rcx,qword ptr [rcx+48h]
+  00000001407FCBE4: test        rcx,rcx
+  00000001407FCBE7: jne         00000001401B3980
+  00000001407FCBED: rep ret
+  00000001407FCBEF: int         3
+  00000001407FCBF0: sub         rsp,28h
+  00000001407FCBF4: mov         rcx,qword ptr [rcx+48h]
+  00000001407FCBF8: test        rcx,rcx
+  00000001407FCBFB: je          00000001407FCC02
+  00000001407FCBFD: call        00000001401B3A00
+  00000001407FCC02: add         rsp,28h
+  00000001407FCC06: ret
+  00000001407FCC07: int         3
+  00000001407FCC08: int         3
+  00000001407FCC09: int         3
+  00000001407FCC0A: int         3
+  00000001407FCC0B: int         3
+  00000001407FCC0C: int         3
+  00000001407FCC0D: int         3
+  00000001407FCC0E: int         3
+  00000001407FCC0F: int         3
+  00000001407FCC10: 48
+
+  Summary
+
+     1A7D000 .text
+
+````

@@ -1,0 +1,8 @@
+[
+  {
+    "address": "14074b6e0",
+    "category": "NativeDoorUseConflict",
+    "comment": "CONFIRMED exact Steam B671F824... Ghidra v749: ordinary native use74b6e0 stores interactor at Openable+114; Open2 closes from active Open-state side+c8; otherwise chooses opening side geometrically from player/door and entries1e0/1e1. Moving1 branch completes/commits existing native transition before inline queue, but this is NOT proof that player UI delivers use while Moving. RUNTIME752/753 both role orders: X during closing leaves revision2/close unchanged; fresh X after completion reopens both at revision3. Failed747 collision placement,750 reverse-side wall view,748/751 unsupported reversal expectations retained. RUNTIME754 simultaneous real opposite-side native openings (params7000001/6010001) both report ordered Open side1/applied3, but actual host Open side0/client side1. Logical Open alone insufficient for geometry convergence. RUNTIME755 accepted in bounded scope:756 Corvo and757 Emily each correct actual side0 to1 with two native calls/one correction;760 reverses placement and corrects side1 to0. Both actual stable Open sides equal host order revision3.758/759 ordinary busy-use regression passes with zero corrections. All five755 cases restore inventories/health14 protected hashes. Corrective motion is visible and can push a nearby player (756 about0.52 units); source camera limitations retained. No full animation or seamless-use acceptance. Audit native-door-side-audit-v762.json, doc59; automatic rearm and general door/world semantics remain outstanding. Transcripts work/movement-integration/door-conflict-v749; all observations saved under work/natural-moveset/native-door-*.",
+    "type": "Note"
+  }
+]

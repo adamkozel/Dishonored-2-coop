@@ -1,0 +1,56 @@
+# disasm-783e50.txt
+
+Original: [work/disasm-783e50.txt](<../../../../work/disasm-783e50.txt>)
+
+SHA-256: `2009F8A4399B49E54A5798CB87DCD4F846BCF339E1E755503525219295A98253`; 1872 bytes.
+
+## Original saved record
+
+````text
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  0000000140783E50: mov         qword ptr [rsp+8],rbx
+  0000000140783E55: push        rdi
+  0000000140783E56: sub         rsp,20h
+  0000000140783E5A: mov         rbx,rdx
+  0000000140783E5D: mov         rdi,rcx
+  0000000140783E60: call        0000000140879E70
+  0000000140783E65: lea         rcx,[rdi+0000000000000368h]
+  0000000140783E6C: mov         rdx,rbx
+  0000000140783E6F: call        0000000140783ED0
+  0000000140783E74: cmp         byte ptr [rbx+8],0
+  0000000140783E78: mov         rcx,qword ptr [rbx]
+  0000000140783E7B: mov         rax,qword ptr [rcx]
+  0000000140783E7E: lea         rdx,[rdi+0000000000000370h]
+  0000000140783E85: mov         r8d,4
+  0000000140783E8B: je          0000000140783E92
+  0000000140783E8D: call        qword ptr [rax+30h]
+  0000000140783E90: jmp         0000000140783E95
+  0000000140783E92: call        qword ptr [rax+28h]
+  0000000140783E95: cmp         byte ptr [rbx+8],0
+  0000000140783E99: mov         rcx,qword ptr [rbx]
+  0000000140783E9C: lea         rdx,[rdi+0000000000000378h]
+  0000000140783EA3: mov         rax,qword ptr [rcx]
+  0000000140783EA6: mov         r8d,8
+  0000000140783EAC: je          0000000140783EBC
+  0000000140783EAE: mov         rbx,qword ptr [rsp+30h]
+  0000000140783EB3: add         rsp,20h
+  0000000140783EB7: pop         rdi
+  0000000140783EB8: jmp         qword ptr [rax+30h]
+  0000000140783EBC: mov         rbx,qword ptr [rsp+30h]
+  0000000140783EC1: add         rsp,20h
+  0000000140783EC5: pop         rdi
+  0000000140783EC6: jmp         qword ptr [rax+28h]
+  0000000140783ECA: int         3
+
+  Summary
+
+     1A7D000 .text
+
+````

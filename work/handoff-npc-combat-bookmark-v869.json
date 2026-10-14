@@ -1,0 +1,33 @@
+{
+  "bookmarks": [
+    {
+      "address": "140717800",
+      "category": "D2Coop_NpcLethal_869",
+      "comment": "2026-10-13 static exact-executable finding: preliminary damage computation tests damage flag bit2 (0x4); when set, result damage is current victim HP, not maxDamage. Void batch npc-combat-v869 independently decodes generic_fatality as INSTANTKILL|MELEE (native84, max1000, reactions2/2) and assassination as INSTANTKILL|NO_REACTION|MELEE (8c, max0,reactions0/0). Native717950 invokes E8 death callback71a9e0 below0.5 after evaluation/subtraction. Candidate869 adds explicit action kinds, pre-death pose/capture and pause-reference retirement, native stopped-AI readback and terminal event dedup tombstones. Implementation unverified at bookmark time; native paired victim choreography, limb severance and corpse synchronization remain unverified. Evidence npc-combat-research-v869 and asset-exports/npc-combat-v869. Analyst interpretation, not official symbols."
+    }
+  ],
+  "receipt": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"address\":\"140717800\",\"category\":\"D2Coop_NpcLethal_869\",\"comment\":\"2026-10-13 static exact-executable finding: preliminary damage computation tests damage flag bit2 (0x4); when set, result damage is current victim HP, not maxDamage. Void batch npc-combat-v869 independently decodes generic_fatality as INSTANTKILL|MELEE (native84, max1000, reactions2/2) and assassination as INSTANTKILL|NO_REACTION|MELEE (8c, max0,reactions0/0). Native717950 invokes E8 death callback71a9e0 below0.5 after evaluation/subtraction. Candidate869 adds explicit action kinds, pre-death pose/capture and pause-reference retirement, native stopped-AI readback and terminal event dedup tombstones. Implementation unverified at bookmark time; native paired victim choreography, limb severance and corpse synchronization remain unverified. Evidence npc-combat-research-v869 and asset-exports/npc-combat-v869. Analyst interpretation, not official symbols.\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"address\":\"140717800\",\"category\":\"D2Coop_NpcLethal_869\",\"comment\":\"2026-10-13 static exact-executable finding: preliminary damage computation tests damage flag bit2 (0x4); when set, result damage is current victim HP, not maxDamage. Void batch npc-combat-v869 independently decodes generic_fatality as INSTANTKILL|MELEE (native84, max1000, reactions2/2) and assassination as INSTANTKILL|NO_REACTION|MELEE (8c, max0,reactions0/0). Native717950 invokes E8 death callback71a9e0 below0.5 after evaluation/subtraction. Candidate869 adds explicit action kinds, pre-death pose/capture and pause-reference retirement, native stopped-AI readback and terminal event dedup tombstones. Implementation unverified at bookmark time; native paired victim choreography, limb severance and corpse synchronization remain unverified. Evidence npc-combat-research-v869 and asset-exports/npc-combat-v869. Analyst interpretation, not official symbols.\"}"
+    },
+    "isError": false
+  },
+  "saved": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\"success\":true,\"program\":\"Dishonored2.exe\",\"message\":\"Program saved successfully\"}"
+    },
+    "isError": false
+  }
+}

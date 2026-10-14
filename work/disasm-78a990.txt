@@ -1,0 +1,52 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\Program Files (x86)\Steam\steamapps\common\Dishonored2\Dishonored2.exe
+
+File Type: EXECUTABLE IMAGE
+
+  000000014078A990: mov         qword ptr [rsp+8],rbx
+  000000014078A995: mov         qword ptr [rsp+10h],rsi
+  000000014078A99A: push        rdi
+  000000014078A99B: sub         rsp,30h
+  000000014078A99F: mov         eax,dword ptr [rcx+68h]
+  000000014078A9A2: mov         rbx,qword ptr [rcx+60h]
+  000000014078A9A6: mov         rsi,rcx
+  000000014078A9A9: and         eax,0FFFFFFh
+  000000014078A9AE: lea         rdi,[rbx+rax*4]
+  000000014078A9B2: cmp         rbx,rdi
+  000000014078A9B5: je          000000014078A9D7
+  000000014078A9B7: nop         word ptr [rax+rax+0000000000000000h]
+  000000014078A9C0: mov         edx,dword ptr [rbx]
+  000000014078A9C2: mov         rcx,qword ptr [0000000142274270h]
+  000000014078A9C9: call        0000000140035400
+  000000014078A9CE: add         rbx,4
+  000000014078A9D2: cmp         rbx,rdi
+  000000014078A9D5: jne         000000014078A9C0
+  000000014078A9D7: test        byte ptr [rsi+6Ch],40h
+  000000014078A9DB: jne         000000014078AA1D
+  000000014078A9DD: mov         rbx,qword ptr [rsi+60h]
+  000000014078A9E1: test        rbx,rbx
+  000000014078A9E4: je          000000014078AA0E
+  000000014078A9E6: call        00000001401548E0
+  000000014078A9EB: lea         rdx,[0000000141AB2230h]
+  000000014078A9F2: mov         r9,rbx
+  000000014078A9F5: mov         r10,qword ptr [rax]
+  000000014078A9F8: mov         r8d,1ECh
+  000000014078A9FE: mov         rcx,rax
+  000000014078AA01: mov         qword ptr [rsp+20h],10h
+  000000014078AA0A: call        qword ptr [r10+10h]
+  000000014078AA0E: and         dword ptr [rsi+6Ch],0FFh
+  000000014078AA15: mov         qword ptr [rsi+60h],0
+  000000014078AA1D: and         dword ptr [rsi+68h],0FF000000h
+  000000014078AA24: mov         rbx,qword ptr [rsp+40h]
+  000000014078AA29: mov         rsi,qword ptr [rsp+48h]
+  000000014078AA2E: add         rsp,30h
+  000000014078AA32: pop         rdi
+  000000014078AA33: ret
+  000000014078AA34: int         3
+
+  Summary
+
+     1A7D000 .text

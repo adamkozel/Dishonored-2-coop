@@ -1,0 +1,71 @@
+{
+  "at": "2026-10-14T17:47:38.762399+02:00",
+  "candidate": "candidate-npc-combat-v1181",
+  "dll": "32C165426414FF26019D4CFCA42AB8E61044AD714D8A25458469B8553B6AF1A6",
+  "cases": [
+    {
+      "take": "mission-product-auto-v1182",
+      "passed": false,
+      "scope": "Harness helper PS shadowed by the PowerShell alias ps (Get-Process); failed before arming; lab restored.",
+      "failure": "Cannot find a process with the name \"host\". Verify the process name and call the cmdlet again."
+    },
+    {
+      "take": "mission-product-auto-v1183",
+      "passed": true,
+      "scope": "Pass: the harness only sent coop_product_auto on; the DLL controller armed all 17 steps on both peers and kept them armed through two shared mission restarts: doors, coins, usables and NPC stream renewed and the partner avatar was restored 2/2. At the post-restart sample the client had 0 bound NPC channels while the host had 9 (client binds on host Hello; convergence not captured by that sample).",
+      "failure": null
+    }
+  ],
+  "package": {
+    "path": "../../outputs/release/d2coop-v1181",
+    "files": 13,
+    "added": [
+      "d2coop/d2coop.cfg",
+      "d2coop/corvo-choke-bank.bin",
+      "d2coop/emily-choke-bank.bin"
+    ],
+    "test": "../release/release-install-v1184/result.json",
+    "cases": [
+      {
+        "passed": true,
+        "case": "install",
+        "message": "Installed candidate-npc-combat-v1181: 13 files; backup in d2coop-backup/20261014-174637"
+      },
+      {
+        "passed": true,
+        "case": "reinstall_refused",
+        "message": null
+      },
+      {
+        "passed": true,
+        "case": "rollback_byte_identical",
+        "message": "Rolled back: 12 added files removed, 1 originals restored."
+      },
+      {
+        "passed": true,
+        "case": "wrong_exe_refused_unchanged",
+        "message": null
+      },
+      {
+        "passed": true,
+        "case": "modified_master_refused_unchanged",
+        "message": null
+      },
+      {
+        "passed": true,
+        "case": "steam_install_untouched",
+        "message": null
+      }
+    ]
+  },
+  "findings": [
+    "Confirmed runtime (lab): the product session controller alone arms and maintains the whole co-op feature set per shared world and across shared mission restarts.",
+    "Product activation (no lab env + d2coop/d2coop.cfg) is implemented and packaged; it has not been booted in a real installed game here."
+  ],
+  "complete": false,
+  "outstanding": [
+    "Boot a product-mode install (scratch copy of the game) and verify activation without the lab environment.",
+    "Two-account online validation.",
+    "Native in-game UI for host/join/character choice; stability soak."
+  ]
+}

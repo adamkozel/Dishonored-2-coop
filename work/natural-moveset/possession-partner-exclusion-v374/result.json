@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "failure": null,
+  "source": "host",
+  "stance": "standing",
+  "holstered": false,
+  "checks": [
+    "Exact Corvo Possession item acquired through native inventory API; no direct spawn, AI or damage invocation",
+    "Requested native stance/sword context confirmed before input; cast may natively change stance",
+    "Exact current partner blocked before native target/FX selection; no identity refusals, transfer, occupied state or mana cost",
+    "Raw native scenes and accepted/rejected ownership reader samples recorded without assuming context support",
+    "Native input produces reciprocal Possession cast scenes; observed phase set recorded without assuming complete coverage",
+    "Both original inventory quantities and player/partner health retained; world reset still required",
+    "Both isolated checkpoints restore original health/inventory and clear the temporary Possession acquisition",
+    "All14 protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.214,
+      "input": "Native Corvo LT held toward exact partner, then normal release"
+    },
+    {
+      "videoTime": 4.692,
+      "input": "Neutral after timed LT release; no crouch/cancel input"
+    }
+  ],
+  "dll": "AD06C1A322AD45C7A511A1D74AB1058156F87DC527041F36CB82C894D6500BF2",
+  "probe": "31EDE6888F7C05363128BA4FC047E5B59DEE9F737FFFC1135DE623C0A6C2D6A4",
+  "scope": "Native source Corvo Possession acquisition, controller input, raw scene clocks/state/equipment and candidate target/entity observations. AI held in the isolated Dunwall fixture; Partner exclusion with native human upgrade, ordinary LT hold/release, target references, no mana cost, no transfer, unchanged health and full checkpoint restoration. Ordinary NPC positive control is separate. Existing standing human-target remote evidence is separate; no new remote context or gameplay claim. Checkpoint and protected save restoration mandatory."
+}

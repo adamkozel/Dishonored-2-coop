@@ -1,0 +1,21 @@
+from pathlib import Path
+R=Path(__file__).resolve().parents[2];W=R/'work/movement-integration';N=R/'work/natural-moveset'
+s=(N/'Observe-NativeHeart-v563.ps1').read_text()
+s=s.replace("[string]$Take='native-heart-v563')", "[string]$Take='native-trap-v568',[ValidateSet('stun','razor')][string]$Trap='stun')")
+s=s.replace('$pids=@{};', "$mode=if($Trap-eq'stun'){'--player-stunmine'}else{'--player-springrazor'};$pids=@{};")
+s=s.replace('HeartObserve563','TrapObserve568').replace('heart','trap').replace('Heart','Trap')
+s=s.replace("'--player-trap'",'$mode').replace("C $Source 'coop_trap_fixture 20000'", 'C $Source "coop_trap_fixture $Trap"')
+s=s.replace(" C $Source 'setviewpos -33.5 -153 68.1 0 0'", " C $Source 'setviewpos -33.5 -153 68.1 0 0'\n & \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $Source -Pitch 40 -Evidence \"$out/source-camera.json\"")
+s=s.replace('I $Source Neutral 250 255','I $Source Neutral 650 255')
+s=s.replace("$_.asset-match'trap'", "$_.asset-match'gadget_stunmine_'")
+s=s.replace(" $checks.Add('Native Trap scenes captured at15ms cadence')", " $checks.Add('Native trap scenes captured at15ms cadence')")
+s=s.replace("scope='Native Trap source observation; no remote body/prop binding yet.'", "trap=$Trap;scope='Native one-trap acquisition/equip/ordinary placement-input observation, including native world changes. No remote trap binding claimed. Both isolated checkpoints restore afterward.'")
+s=s.replace(" if(!@($rows|Where-Object {$_.item.equipped", " if(!@($rows|Where-Object {$_.item.equipped")
+# Equip reader needs the source-specific mode during cleanup, both original quantities are zero.
+(N/'Observe-NativeTrap-v568.ps1').write_text(s)
+s=(W/'stage_heart_v564.py').read_text().replace("A=W/'candidate-heart-network-v564';P=W/'candidate-heart-observation-v562'", "A=W/'candidate-trap-observation-v567';P=W/'candidate-heart-network-v564'")
+s=s.replace('v564.log','v567.log').replace("W/'implement_heart_v564.py',W/'Build-Heart-v564.ps1',W/'implement_heart_prop_v564.py',W/'test_heart_source_v564.py'", "W/'prepare_traps_v567.py',W/'Build-Traps-v567.ps1',W/'prepare_trap_runtime_v568.py'")
+s=s.replace('Native Heart full-body presentation and render-only prop through Steam; exact clocks/ownership. Isolated20s acquisition fixture. Runtime integration pending.', 'Preserves Heart/Steam/bank60 behavior; adds isolated20s native trap acquisition and rollback plus read-only placeable ownership probes. Trap runtime observation pending.')
+(W/'stage_traps_v567.py').write_text(s)
+s=(W/'Deploy-Heart-v562.ps1').read_text().replace('stage_heart_v562.py','stage_traps_v567.py').replace('HeartDeploy562','TrapDeploy567');(W/'Deploy-Traps-v567.ps1').write_text(s)
+print('Trap source observations reuse current native inputs,15ms scene recording and checkpoint restore.')

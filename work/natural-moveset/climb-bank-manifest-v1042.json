@@ -1,0 +1,92 @@
+[
+  {
+    "role": "corvo",
+    "bank": "climb-banks-v1042\\corvo-choke-bank.bin",
+    "sha256": "FD50D18796C8113B054F75CA2053D6F1220A36F49D26A68A2C3706BF2489B0AE",
+    "version": 70,
+    "clips": 369,
+    "prior365PayloadsUnchanged": true,
+    "source_bank_sha256": "DEB1742EF3FEC6E37421C027BD0D4F6D1066C8677D845DE64E87F2A448B40517",
+    "added": [
+      {
+        "clip": 365,
+        "donor": "ladder-contact-v2\\ladder_ascend_contact-corvo.bin",
+        "donorSha256": "6496a5156149807dca8c6c26bc04fe7cfd9360c3481ea88f8af2b9305e59698a",
+        "duration": 3.3,
+        "purpose": "native climbing ascend cycle (stand-in for chain)"
+      },
+      {
+        "clip": 366,
+        "donor": "ladder-contact-v2\\ladder_descend_contact-corvo.bin",
+        "donorSha256": "d259f55d5bc9144a1dbb60de7eead2f702fdfa32dd2e4e3b741a513d2e84e126",
+        "duration": 3.3,
+        "purpose": "native climbing descend cycle"
+      },
+      {
+        "clip": 367,
+        "donor": "ladder-contact-v2\\ladder_bottom_enter_contact-corvo.bin",
+        "donorSha256": "18b01ebef6f4b0aed0134c95c4d6d88a8574211e8e7292c05f78b22ed23629c4",
+        "duration": 1.6,
+        "purpose": "climb entry (reserved)"
+      },
+      {
+        "clip": 368,
+        "donor": "ladder-contact-v2\\ladder_bottom_exit_contact-corvo.bin",
+        "donorSha256": "1da62581c139f9c832ffcc5a3f4f87ab6ab3027cf049dddd8729e3a22117a508",
+        "duration": 1.6,
+        "purpose": "climb exit (reserved)"
+      }
+    ],
+    "conversion": "Existing authored ladder-contact studies (ladder-contact-v2) resampled to 120 frames plus guard; climb cycle advanced by replicated vertical distance (assumed 1.5 m per cycle), ascend/descend by vertical direction; root network-owned. Earlier note: existing authored swim studies (mixamo-retargeted-v5 treading, water-movement-v1 forward/up/down) resampled to 120 frames plus guard; loops sampled by time, stroke rate scaled with replicated horizontal speed, up/down blended by replicated vertical velocity. Roots/events excluded; root and depth stay network-owned.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  },
+  {
+    "role": "emily",
+    "bank": "climb-banks-v1042\\emily-choke-bank.bin",
+    "sha256": "500BEC1D97B78036F9086156CC07753B7609DF4AD128D800C9A49DA97E329A7A",
+    "version": 70,
+    "clips": 369,
+    "prior365PayloadsUnchanged": true,
+    "source_bank_sha256": "0FBFA4304E4862B78CA380B5B3A850274BCBC077610D1D836F5318426D4F7FBC",
+    "added": [
+      {
+        "clip": 365,
+        "donor": "ladder-contact-v2\\ladder_ascend_contact-emily.bin",
+        "donorSha256": "b6f04fcf26ce330f7d42e4e66b1e0e51df2a83798d916678715cfd18f586b0ec",
+        "duration": 3.3,
+        "purpose": "native climbing ascend cycle (stand-in for chain)"
+      },
+      {
+        "clip": 366,
+        "donor": "ladder-contact-v2\\ladder_descend_contact-emily.bin",
+        "donorSha256": "9556480247a397999db0049427fb018ea2bda97d9ee6f8761e196a0dadedbd09",
+        "duration": 3.3,
+        "purpose": "native climbing descend cycle"
+      },
+      {
+        "clip": 367,
+        "donor": "ladder-contact-v2\\ladder_bottom_enter_contact-emily.bin",
+        "donorSha256": "a7ff85ed39df251b30be1416959006fa2ff5766e16ee0afa9394c4cfc51918ba",
+        "duration": 1.6,
+        "purpose": "climb entry (reserved)"
+      },
+      {
+        "clip": 368,
+        "donor": "ladder-contact-v2\\ladder_bottom_exit_contact-emily.bin",
+        "donorSha256": "c2727db979b5e4ecad5b176313fa3bd23afd70bcbe35ae5d39f5264fa83de8fc",
+        "duration": 1.6,
+        "purpose": "climb exit (reserved)"
+      }
+    ],
+    "conversion": "Existing authored ladder-contact studies (ladder-contact-v2) resampled to 120 frames plus guard; climb cycle advanced by replicated vertical distance (assumed 1.5 m per cycle), ascend/descend by vertical direction; root network-owned. Earlier note: existing authored swim studies (mixamo-retargeted-v5 treading, water-movement-v1 forward/up/down) resampled to 120 frames plus guard; loops sampled by time, stroke rate scaled with replicated horizontal speed, up/down blended by replicated vertical velocity. Roots/events excluded; root and depth stay network-owned.",
+    "root_writes": false,
+    "events": false,
+    "runtime_verified": false,
+    "visual_accepted": false,
+    "complete": false
+  }
+]

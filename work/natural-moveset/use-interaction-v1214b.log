@@ -1,0 +1,26 @@
+{
+  "scope": "Native use -> authored interaction presentation on the partner body (Dunwall window handle), both roles; fixture restored.",
+  "cases": [
+    {
+      "observer": "host",
+      "observerSamples": 120,
+      "maxAmount": 0.0,
+      "shownSamples": 0,
+      "sourceUnfocused": 0,
+      "source": "client",
+      "maxWeight": 0.0,
+      "sourceUsesBefore": 0,
+      "usableChanged": true,
+      "sourceUsesAfter": 0,
+      "bankVersion": 71,
+      "sourceUseName": ""
+    }
+  ],
+  "failure": "Source did not register the native use state 75 (client)",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-UseInteraction-v1214b.ps1:86[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  86 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mSource did not register the native use state 75 (client)[0m

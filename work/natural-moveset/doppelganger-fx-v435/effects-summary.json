@@ -1,0 +1,152 @@
+{
+  "samples": 286,
+  "valid": 283,
+  "worldStable": 285,
+  "failures": [
+    0,
+    69
+  ],
+  "maxReadMs": 4.2714,
+  "effects": [
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_despawn_01.fx",
+      "observations": 65,
+      "ids": [
+        438
+      ],
+      "owners": [
+        210768398
+      ],
+      "parents": [
+        1073676304
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ".?AVarkCpntReferenceFrame@@"
+      ]
+    },
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_despawn_body_01.fx",
+      "observations": 59,
+      "ids": [
+        436,
+        437,
+        439,
+        440
+      ],
+      "owners": [
+        210637324,
+        210702861,
+        210833935,
+        210899472
+      ],
+      "parents": [
+        1073676304
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ".?AVarkCpntReferenceFrame@@"
+      ]
+    },
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_01.fx",
+      "observations": 235,
+      "ids": [
+        410
+      ],
+      "owners": [
+        210506244
+      ],
+      "parents": [
+        1073676304
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ".?AVarkCpntReferenceFrame@@"
+      ]
+    },
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/decoy/spawn_despawn/decoy_spawn_body_01.fx",
+      "observations": 124,
+      "ids": [
+        411,
+        412,
+        413,
+        414
+      ],
+      "owners": [
+        210571781,
+        210637318,
+        210702855,
+        210768392
+      ],
+      "parents": [
+        1073676304
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ".?AVarkCpntReferenceFrame@@"
+      ]
+    },
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/target/dganger_target_notok_01.fx",
+      "observations": 28,
+      "ids": [
+        407
+      ],
+      "owners": [
+        659967
+      ],
+      "parents": [
+        1
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ""
+      ]
+    },
+    {
+      "name": "models/effects/gameplay/powers/doppelganger/target/dganger_target_ok_01.fx",
+      "observations": 28,
+      "ids": [
+        409
+      ],
+      "owners": [
+        659967
+      ],
+      "parents": [
+        1
+      ],
+      "ownerMatches": 0,
+      "parentMatches": 0,
+      "ownerTypes": [
+        ".?AVidEntity@@"
+      ],
+      "frameTypes": [
+        ""
+      ]
+    }
+  ],
+  "scope": "Read-only435 FX inventory observes native target, spawn and despawn records. The four clone effect kinds use separate idEntity helpers without clone parent handles; direct owner/parent attribution is invalid. Exact scene/track/helper linkage remains a static hypothesis requiring runtime validation. Existing clone body/Steam/health/checkpoint/protected14 regression passes13 checks. No remote FX yet.",
+  "complete": false
+}
