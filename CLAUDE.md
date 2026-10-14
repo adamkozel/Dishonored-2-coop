@@ -43,23 +43,35 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
 3. **Record every result, pass or fail:**
    - `python tools/repo/build_repo_manifest.py --update-gitignore`, then `git add -A`, then `git commit -F <msgfile>`, then `git push`.
    - The pre-commit hook runs the guard and evidence checks in about 3 s. Never use `--no-verify`.
-   - If the hook rejects an oversized new file, re-run the manifest (which lists it in `.gitignore`) and add again.
+   - If the hook rejects something, fix the cause and commit again:
+     - **Oversized new file:** re-run the manifest, which lists it in `.gitignore`, then add again.
+     - **Changed take file:** write the re-run to a new take folder.
+     - **SteamID:** remove it.
+     - `EVIDENCE_AMEND=1` (plus the `evidence-amend` label) is only for deliberate, explained scrubs.
    - On the first push, run `gh pr create --draft --body-file <file>`. The body says `Closes #<card>`, or `Refs #<card>` for partial progress.
    - Bind the PR (ccd_pr `bind_pr`) and turn on `set_monitor auto_fix`.
 4. **Keep going.** Draft PRs run no CI; the hook already checked each commit. Continue straight to the next take.
 5. **Merge** when the card is done, or at a coherent checkpoint on a long card.
-   - Run `gh pr ready <n>`. Checks take about 1 min, plus about 6 min for `unit-tests` when `outputs/d2-coop-lab` changed.
-   - Keep working while they run. Uncommitted work is fine.
-   - Read `gh pr checks <n>` once at a natural pause. Never poll in a loop; the app wakes the session on failures.
+   - Run `gh pr ready <n>`. Checks take about 1 min, plus about 3–4 min for `unit-tests` when the build inputs (`src/`, `third_party/`, `CMakeLists.txt`) changed.
+   - Keep working while they run, but don't commit or branch until the merge is done. Both live state files change with every result, so a second branch would conflict after the squash.
+   - Read `gh pr checks <n>` once at a natural pause. Exit code 8 means pending. Never poll in a loop; the app wakes the session on failures.
    - When green, run `gh pr merge <n> --squash --delete-branch --subject "<title> (#n)" --body-file <file>`.
    - Then `git switch main && git pull --ff-only`. Uncommitted work carries over to the next branch.
 6. **On CI failure,** fix on the same branch and push.
-   - If Actions minutes are exhausted (the free plan has 2,000 a month and Windows counts double), jobs fail to start.
-   - In that case, verify locally (hook plus the local unit-test executables), say so in the PR, and merge.
-7. **Needs-you items** (for example two-account validation, #12) need an action only the user can take.
+   - If a conflict happens anyway, merge `origin/main` into the branch. For `work/current-task-state.json` and the catalog, keep the branch's (newest) version.
+7. **Nothing on GitHub may stop a goal.** GitHub is never on the lab's critical path. Possible problems:
+   - GitHub or the network is down;
+   - a push or `gh` call fails;
+   - Actions minutes are exhausted. The free plan has 2,000 a month, and Windows counts double: about 1 min per merge plus about 8 min more when build inputs changed, so roughly 200–400 merges a month.
+
+   Whatever the cause:
+   - keep working and committing locally;
+   - push and merge when GitHub is reachable again;
+   - when checks can't run, verify locally (hook, `tools/repo/check-sources.sh`, the local unit-test executables), say so in the PR, and merge.
+8. **Needs-you items** (for example two-account validation, #12) need an action only the user can take.
    - Move the card to Needs you and continue with the next card.
    - They never stop the goal, and they are never marked done without the user.
-8. **New work found:** open an issue, add it to the board with Stage set, and leave it in Todo. The 105-item movement checklist stays in `documentation/.../generated/movement-requirements.md`, not in issues.
+9. **New work found:** open an issue, add it to the board with Stage set, and leave it in Todo. The 105-item movement checklist stays in `documentation/.../generated/movement-requirements.md`, not in issues.
 
 ### Board IDs
 
@@ -90,7 +102,14 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
 
 ### Tooling notes
 
-- **gh:** `C:\Program Files\GitHub CLI\gh.exe` (2.102+). Prompts are disabled; the token has the repo, workflow and project scopes.
-- **Message text:** in PowerShell, pass commit and PR text through files (`-F`, `--body-file`). Here-strings piped as `-F -` do not work.
+- **gh:** `C:\Program Files\GitHub CLI\gh.exe` (2.102+). Call it by full path; shells started before the install don't have it on PATH.
+  - Prompts are disabled.
+  - The keyring token has the repo, workflow and project scopes.
+- **Git sign-in:** git authenticates through gh's token (repo-local `credential.https://github.com.helper`), never through a Git Credential Manager window.
+- **Editor:** `core.editor=true`, so no git command can wait on an editor.
+- **Message text:**
+  - Write commit and PR text to files with the Write tool, then pass them with `-F` or `--body-file`.
+  - Windows PowerShell's `Set-Content -Encoding UTF8` adds a BOM to the subject.
+  - Here-strings piped as `-F -` do not work.
 - **Git Bash:** drop the leading `/` from `gh api` paths.
 - **Do not:** enable GitHub auto-merge (a private repo on the free plan can't have required checks or rulesets, so it would merge at once), force-push `main`, or commit lab instances, game copies, binaries or videos (the manifest and hook enforce this).

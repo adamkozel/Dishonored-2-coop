@@ -2,6 +2,7 @@
 # pre-commit hook already runs the same checks on every local commit).
 # - guard: tools/repo/pre-commit --all over every tracked file (never-committed
 #   folders, binary/media types, size caps, SteamID64).
+# - sources: every build input of outputs/d2-coop-lab is tracked.
 # - evidence: recorded takes and candidate archives are append-only
 #   (tools/repo/check-evidence.sh); the evidence-amend label allows a
 #   deliberate amendment explained in the PR.
@@ -26,6 +27,8 @@ jobs:
           filter: blob:none
       - name: Guard (every tracked file)
         run: sh tools/repo/pre-commit --all
+      - name: Every build input is committed
+        run: sh tools/repo/check-sources.sh
       - name: Evidence self-test
         run: sh tools/repo/test-check-evidence.sh
       - name: Takes and candidate archives are append-only
