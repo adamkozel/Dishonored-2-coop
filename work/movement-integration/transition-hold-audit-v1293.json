@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-15T23:17:07.858771+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214ay",
+    "candidate-npc-combat-v1214az"
+  ],
+  "takes": [
+    {
+      "take": "mission-end-hold-v1291c",
+      "candidate": "candidate-npc-combat-v1214ay",
+      "passed": true,
+      "acceptance": false,
+      "failure": "host window Not Responding in 44 of 321 samples during the hold"
+    },
+    {
+      "take": "mission-end-hold-v1291d",
+      "candidate": "candidate-npc-combat-v1214az",
+      "passed": true,
+      "acceptance": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: both-ready hold at the next mission start after a mirrored mission end; Emily presses Continue 20 s after Corvo.",
+  "findings": [
+    "Confirmed runtime: the next-mission load ends with the native FinishLoad switch 15 -> 1 (caller 0x7879cd) while the intro scene is pending (5).",
+    "1214ay (1291c): Corvo held 21406 ms until Emily reported campaign/institute/institute_p_lowchaos; Emily released at once (0 ms). Both entered the intro in the same sample and reached gameplay together.",
+    "1291c defect: the holding thread owns the game window, so Windows flagged it Not Responding (44 of 321 samples).",
+    "1214az (1291d): peeking the queue without removing every 500 ms while holding (43 peeks) kept the window responsive (0 of 319 samples not responding); hold 21235 ms; both reached gameplay in the same sample.",
+    "Visual (accepted): while held, Corvo sees the native black load-end frame with the skip hint; from the intro on, both screens match."
+  ],
+  "next": [
+    "Partner loads the host chaos variant (each world picks institute_p_low/highchaos from its own chaos).",
+    "Client-originated mission end; product mode across the VM; boat and in-mission LevelTransition boundaries (chapter 97)."
+  ]
+}
