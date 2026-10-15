@@ -3,7 +3,14 @@
 // Opt-in enemy sword contacts through existing native NPC authority bindings.
 // Host owns physical hits; the receiving actual player retains native damage
 // modifiers, reactions and death. No health or damage amount is sent remotely.
-struct NpcAttackBinding {std::uint64_t arm=0,peerNonce=0;bool ready=false;};
+// 1214ah (#14): bindings follow dynamic NPC relevance like the combat channels
+// (1213v): they join and retire per NPC, a binding that does not negotiate retires
+// alone, and the product controller re-arms a stopped relay. Before, the relay bound
+// only the NPCs present at its start and stopped on any retirement or timeout
+// (take 1258j: no_ready_actors / negotiation_timeout), so guards could not hurt the
+// client for most of a mission (Emily's health stayed 70 in every 1270 fight).
+struct NpcAttackBinding {std::uint64_t arm=0,peerNonce=0;bool ready=false;ULONGLONG started=0;};
+struct NpcAttackRetired {std::uint64_t arm=0;ULONGLONG at=0;};
 struct NpcAttackPending {std::uint64_t event=0,arm=0;ULONGLONG at=0;unsigned weapon=0;};
 struct NpcAttackCaptureIdentity {NativeNpcAuthority source{};std::uint64_t arm=0,nonce=0;};
 struct NpcAttackContact {std::uint64_t arm=0,nonce=0;ULONGLONG tick=0;unsigned attacker=0,inflictor=0,flags=0;float offset[3]{},direction[3]{};};
@@ -25,6 +32,8 @@ struct NpcAttackRuntime {
 struct NpcAttackSession {bool enabled=false,waitingCheckpoint=false,terminal=false;DoorSessionScope scope{};ULONGLONG deadline=0;std::uint64_t renewals=0;const char* retired="none";};
 NpcAttackSession npcAttackSession{};
 NpcAttackRuntime npcAttack{};std::uint64_t npcAttackNonce=0;int npcAttackRequest=-1;
+bool npcAttackWanted=false;ULONGLONG npcAttackRearmAt=0;std::uint64_t npcAttackRearms=0,npcAttackBindingsAdded=0,npcAttackBindingsRetired=0,npcAttackPeerRestarts=0,npcAttackContactsDropped=0;
+std::vector<NpcAttackRetired> npcAttackRetiredArms;const char* npcAttackLastRetire="none";
 SRWLOCK npcAttackCaptureLock=SRWLOCK_INIT;NpcAttackCaptureScope npcAttackCaptureScope{};
 std::vector<NpcAttackContact> npcAttackContacts;
 std::atomic<unsigned> npcAttackFault{0};
@@ -287,8 +296,29 @@ void beginNpcAttack(ULONGLONG tick){
     if(!npcStreamContext(tick)||!swordDamageApiMatches()||!probeFollow||!avatarAiHeld||!probeDoppelganger){npcAttack.result="unavailable";return;}
     clearNpcAttackCapture();npcAttackFault.store(0);npcAttackCaptured.store(0);npcAttackReplicaBlocked.store(0);npcAttackTerminalBlocked.store(0);
     npcAttack={};npcAttack.enabled=true;npcAttack.nonce=++npcAttackNonce;npcAttack.started=tick;npcAttack.scope=doorSessionScope(outgoing,remote);npcAttack.result="negotiating";
-    for(auto& c:npcChannels)if(c.enabled&&c.ready&&c.peerArm)npcAttack.bindings.push_back({c.arm});
-    if(npcAttack.bindings.empty())stopNpcAttack("no_ready_actors");
+    npcAttackRetiredArms.clear();
+    for(auto& c:npcChannels)if(c.enabled&&c.ready&&c.peerArm)npcAttack.bindings.push_back({c.arm,0,false,tick});
+    if(npcAttack.bindings.empty())npcAttack.result="waiting_for_actors";
+}
+// 1214ah: per-binding retirement and relevance sync.
+void retireNpcAttackBinding(std::uint64_t arm,const char* reason,ULONGLONG tick){
+    npcAttack.bindings.erase(std::remove_if(npcAttack.bindings.begin(),npcAttack.bindings.end(),[&](const auto& b){return b.arm==arm;}),npcAttack.bindings.end());
+    npcAttack.pending.erase(std::remove_if(npcAttack.pending.begin(),npcAttack.pending.end(),[&](const auto& e){return e.arm==arm;}),npcAttack.pending.end());
+    npcAttackRetiredArms.push_back({arm,tick});++npcAttackBindingsRetired;npcAttackLastRetire=reason;
+}
+void syncNpcAttackBindings(ULONGLONG tick){
+    for(std::size_t i=0;i<npcAttack.bindings.size();){auto* c=npcCombatActor(npcAttack.bindings[i].arm);
+        if(!c||!c->enabled||!c->ready){retireNpcAttackBinding(npcAttack.bindings[i].arm,"actor_unbound",tick);continue;}++i;}
+    npcAttackRetiredArms.erase(std::remove_if(npcAttackRetiredArms.begin(),npcAttackRetiredArms.end(),[&](const auto& r){return tick-r.at>=3000;}),npcAttackRetiredArms.end());
+    for(auto& c:npcChannels){if(!c.enabled||!c.ready||!c.peerArm||c.corpse)continue;
+        if(npcAttackBinding(c.arm))continue;
+        if(std::any_of(npcAttackRetiredArms.begin(),npcAttackRetiredArms.end(),[&](const auto& r){return r.arm==c.arm;}))continue;
+        npcAttack.bindings.push_back({c.arm,0,false,tick});++npcAttackBindingsAdded;}
+}
+// A peer that re-armed starts a new nonce and event sequence: restart ours with it.
+void npcAttackPeerRestarted(){
+    for(auto& b:npcAttack.bindings){b.peerNonce=0;b.ready=false;}
+    npcAttack.pending.clear();npcAttack.event=npcAttack.acked=0;npcAttack.consumed=0;++npcAttackPeerRestarts;
 }
 bool applyNpcAttack(NpcAuthorityChannel& c,const CoopNpcAttack& p){
     NativeHealth h{},source{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
@@ -324,7 +354,8 @@ void receiveNpcAttack(const CoopNpcAttack& p,ULONGLONG tick){
     if(!b||!c||!c->enabled||!c->ready||p.binding.sourceArm!=c->peerArm||p.binding.sourceHandle!=c->peerHandle||
        p.binding.targetHandle!=c->lease.binding.npc.handle||p.binding.rig!=c->rig||p.binding.joints!=c->render.joints){++npcAttack.rejected;return;}
     if(p.kind==NpcAttackMessage::Hello){
-        if(b->peerNonce&&b->peerNonce!=p.sourceNonce){stopNpcAttack("peer_replaced");return;}
+        if(b->peerNonce&&b->peerNonce!=p.sourceNonce)npcAttackPeerRestarted();
+        else if(!b->peerNonce&&std::any_of(npcAttack.bindings.begin(),npcAttack.bindings.end(),[&](const auto& o){return o.peerNonce&&o.peerNonce!=p.sourceNonce;}))npcAttackPeerRestarted();
         b->peerNonce=p.sourceNonce;if(!sendNpcAttack(npcAttackPacket(*c,*b,NpcAttackMessage::Ready),*c))stopNpcAttack("send_failed");return;
     }
     if(p.targetNonce!=npcAttack.nonce||!b->peerNonce||p.sourceNonce!=b->peerNonce){++npcAttack.rejected;return;}
@@ -380,13 +411,14 @@ void publishNpcAttackCapture(ULONGLONG tick,bool terminal){
             if(terminal)clearNpcAttackCapture();else stopNpcAttack("victim_replaced");return;
         }
         next.host=!localRole;next.terminal=terminal;next.until=tick+250;
-        for(auto& b:npcAttack.bindings){auto* c=npcCombatActor(b.arm);if(c&&c->enabled&&c->ready)next.sources.push_back({c->lease.binding,b.arm,npcAttack.nonce});}
+        for(auto& b:npcAttack.bindings){auto* c=npcCombatActor(b.arm);if(b.ready&&c&&c->enabled&&c->ready)next.sources.push_back({c->lease.binding,b.arm,npcAttack.nonce});}
     }
     AcquireSRWLockExclusive(&npcAttackCaptureLock);npcAttackCaptureScope=std::move(next);ReleaseSRWLockExclusive(&npcAttackCaptureLock);
 }
 void serviceNpcAttack(ULONGLONG tick){
     if(npcAttackRequest>=0){
         const auto q=npcAttackRequest;npcAttackRequest=-1;
+        npcAttackWanted=q!=0;
         if(!q){stopNpcAttack("disabled");return;}
         if(!npcAttackSession.enabled){
             beginNpcAttack(tick);
@@ -395,6 +427,11 @@ void serviceNpcAttack(ULONGLONG tick){
     }
     if(!npcAttack.enabled){
         auto& intent=npcAttackSession;
+        // 1214ah: the product controller re-arms a relay stopped outside checkpoint recovery.
+        if(npcAttackWanted&&!intent.waitingCheckpoint&&(productMode||productAutoArm)&&npcAuthorityStreamActive&&tick-npcAttackRearmAt>=3000){
+            npcAttackRearmAt=tick;beginNpcAttack(tick);
+            if(npcAttack.enabled){++npcAttackRearms;intent={};intent.enabled=true;intent.scope=doorSessionScope(outgoing,remote);}
+            return;}
         if(!intent.enabled||!intent.waitingCheckpoint)return;
         if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected||
            outgoing.session!=intent.scope.session||remote.session!=intent.scope.peerSession||
@@ -416,10 +453,12 @@ void serviceNpcAttack(ULONGLONG tick){
         return;
     }
     if(!npcAttackScope(tick)){stopNpcAttack("session_or_world_changed");return;}
+    syncNpcAttackBindings(tick);
     if(npcAttackFault.exchange(0)){stopNpcAttack("capture_failed");return;}
     std::vector<NpcAttackContact> captured;AcquireSRWLockExclusive(&npcAttackCaptureLock);captured.swap(npcAttackContacts);ReleaseSRWLockExclusive(&npcAttackCaptureLock);
     for(const auto& e:captured){
         auto* b=npcAttackBinding(e.arm);auto* c=npcCombatActor(e.arm);NativeHealth h{};
+        if(!localRole&&e.nonce==npcAttack.nonce&&(!b||!b->ready)){++npcAttackContactsDropped;continue;}
         if(localRole||e.nonce!=npcAttack.nonce||tick<e.tick||tick-e.tick>=250||!b||!b->ready||!c||!npcCombatIdentity(*c,h)||npcAttack.pending.size()>=32){stopNpcAttack("contact_expired_or_replaced");return;}
         auto p=npcAttackPacket(*c,*b,NpcAttackMessage::Hit);p.event=++npcAttack.event;
         std::memcpy(p.offset,e.offset,12);std::memcpy(p.direction,e.direction,12);p.flags=e.flags;
@@ -428,15 +467,18 @@ void serviceNpcAttack(ULONGLONG tick){
     }
     if(!npcAttack.pending.empty()&&tick-npcAttack.pending.front().at>5000){stopNpcAttack("ack_timeout");return;}
     if(tick-npcAttack.helloAt>=500){npcAttack.helloAt=tick;
+        std::vector<std::uint64_t> gone;
         for(auto& b:npcAttack.bindings){auto* c=npcCombatActor(b.arm);NativeHealth h{};
-            if(!c||!npcCombatIdentity(*c,h)){stopNpcAttack("actor_retired");return;}
+            if(!c||!npcCombatIdentity(*c,h)){gone.push_back(b.arm);continue;}
             if(!b.ready&&!sendNpcAttack(npcAttackPacket(*c,b,NpcAttackMessage::Hello),*c)){stopNpcAttack("hello_failed");return;}
         }
+        for(auto arm:gone)retireNpcAttackBinding(arm,"actor_retired",tick);
     }
-    const bool ready=std::all_of(npcAttack.bindings.begin(),npcAttack.bindings.end(),[](const auto& b){return b.ready;});
-    if(!ready&&tick-npcAttack.started>5000){stopNpcAttack("negotiation_timeout");return;}
-    npcAttack.result=ready?"active_native_sword":"negotiating";
-    if(ready)publishNpcAttackCapture(tick,false);
+    {std::vector<std::uint64_t> late;for(const auto& b:npcAttack.bindings)if(!b.ready&&tick-b.started>5000)late.push_back(b.arm);
+     for(auto arm:late)retireNpcAttackBinding(arm,"negotiation_timeout",tick);}
+    const bool any=std::any_of(npcAttack.bindings.begin(),npcAttack.bindings.end(),[](const auto& b){return b.ready;});
+    npcAttack.result=any?"active_native_sword":npcAttack.bindings.empty()?"waiting_for_actors":"negotiating";
+    if(any)publishNpcAttackCapture(tick,false);
 }
 void repeatNpcAttack(){
     if(!localRole&&npcAttack.enabled&&npcAttack.lastHit.event){auto* c=npcCombatActor(npcAttack.lastHit.binding.sourceArm);if(c)sendNpcAttack(npcAttack.lastHit,*c);}
@@ -449,7 +491,9 @@ void writeNpcAttack(){
     for(unsigned i=0;i<npcAttack.bindings.size();++i){const auto& b=npcAttack.bindings[i];fprintf(f,"%s{\"arm\":%llu,\"peerNonce\":%llu,\"ready\":%s}",i?",":"",b.arm,b.peerNonce,b.ready?"true":"false");}
     std::array<MeleeDefenseObservation,64> defense{};std::uint64_t defenseCount=0;
     AcquireSRWLockShared(&meleeDefenseObserveLock);defense=meleeDefenseObservations;defenseCount=meleeDefenseObservationCount;ReleaseSRWLockShared(&meleeDefenseObserveLock);
-    fprintf(f,"],\"blowback\":{\"applied\":%llu,\"failures\":%llu,\"replicaFx\":%llu,\"replicaFxFailures\":%llu,\"lastAmount\":%.9g,\"lastInflicted\":%.9g,\"lastResult\":\"%s\"}",
+    fprintf(f,"],\"relevance\":{\"wanted\":%s,\"rearms\":%llu,\"added\":%llu,\"retired\":%llu,\"peerRestarts\":%llu,\"contactsDropped\":%llu,\"lastRetire\":\"%s\"}",
+        npcAttackWanted?"true":"false",npcAttackRearms,npcAttackBindingsAdded,npcAttackBindingsRetired,npcAttackPeerRestarts,npcAttackContactsDropped,npcAttackLastRetire);
+    fprintf(f,",\"blowback\":{\"applied\":%llu,\"failures\":%llu,\"replicaFx\":%llu,\"replicaFxFailures\":%llu,\"lastAmount\":%.9g,\"lastInflicted\":%.9g,\"lastResult\":\"%s\"}",
         npcParryWinApplied,npcParryWinFailures,npcParryWinFx,npcParryWinFxFailures,npcParryWinLastAmount,npcParryWinLastInflicted,npcParryWinLastResult);
     fprintf(f,",\"defenseObserver\":{\"hooked\":%s,\"native\":[%llu,%llu,%llu],\"relayed\":[%llu,%llu,%llu],\"count\":%llu,\"recent\":[",meleeDefenseHooked()?"true":"false",
         meleeDefenseNative[0].load(),meleeDefenseNative[1].load(),meleeDefenseNative[2].load(),meleeDefenseRelayed[0].load(),meleeDefenseRelayed[1].load(),meleeDefenseRelayed[2].load(),defenseCount);

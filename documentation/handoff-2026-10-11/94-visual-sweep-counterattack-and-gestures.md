@@ -53,7 +53,11 @@ Harness [v1258](../../work/natural-moveset/make_counterattack_v1258.py) and its 
   - Result: the host's counter-kill finisher left the guard dead on the host and conscious on the client.
   - 1214i re-binds a living NPC 2 s after a non-terminal retirement, with a fresh nonce and a new health comparison. Deaths still end the NPC for good (unit-tested).
 - **Confirmed runtime (1258f, 1214i): counterattack.** Corvo's timed parry win, then an attack, plays the counter-kill finisher `fatality_head_fast_b` (id 94). The partner presents it and the guard is dead in both worlds.
-- **Not yet produced:** Emily's counter. She parried and slashed in every take.
+- **Confirmed runtime (1258l, 1214ah): Emily's counter.** Emily's timed parry win against a relayed guard hit, then an attack, plays the counter-kill finisher `fatality_leftleg_medium_a`. The host presents it (phase 105) and the guard is dead in both worlds, 0.0 m apart. **Visual acceptance is open:** the 1258l observer view is far and dark (the opposite balcony).
+  - In 1258i and 1258j she only parried and slashed: the NPC attack relay was off on both peers, so the guard's swings at her clone never reached her world and no native parry was possible ([chapter 95](95-shared-combat-authority.md#the-npc-attack-relay-under-dynamic-relevance-1214ah)).
+  - With the relay fixed (1214ah), 1258k still saw no hit: the guard never swung while she attacked every 1.15 s.
+  - Harness [1258e](../../work/natural-moveset/Test-Counterattack-v1258e.ps1) holds block 1.6 s per cycle, so the guard attacks into it: 9 relayed hits (3 blocked, 1 parry-lose, 5 applied), then the parry win and the counter.
+  - Audit: [counter-relay-audit-v1280.json](../../work/movement-integration/counter-relay-audit-v1280.json).
 
 ## Pickup, food and elixir gestures (1214j)
 

@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "guards": 3,
+      "outcomes": [
+        {
+          "spawner": "script_spawner_checkpoint_guard_01",
+          "host": "alive",
+          "client": "alive"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_02",
+          "host": "dead",
+          "client": "dead"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_04",
+          "host": "dead",
+          "client": "dead"
+        }
+      ],
+      "samples": 53,
+      "passed": false,
+      "failure": "A player died (Game Over) at 17805 ms; the fight is inconclusive",
+      "checks": [],
+      "stuck": 0,
+      "hostCommitted": 6,
+      "clientRequests": 0,
+      "minHealth": {
+        "client": 40.0,
+        "host": 0.0
+      },
+      "gameOverSamples": 22
+    }
+  ],
+  "failure": "A player died (Game Over) at 17805 ms; the fight is inconclusive",
+  "scope": "Stage 4 sustained multi-enemy fight on Edge of the World: both players fight the Wall of Light guard group at once under the product controller; guard outcomes compared in both worlds, combat session and player health sampled; Dunwall fixture restored.",
+  "passed": false
+}
