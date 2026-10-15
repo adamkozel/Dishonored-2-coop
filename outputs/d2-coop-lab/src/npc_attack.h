@@ -459,6 +459,9 @@ void serviceNpcAttack(ULONGLONG tick){
     for(const auto& e:captured){
         auto* b=npcAttackBinding(e.arm);auto* c=npcCombatActor(e.arm);NativeHealth h{};
         if(!localRole&&e.nonce==npcAttack.nonce&&(!b||!b->ready)){++npcAttackContactsDropped;continue;}
+        // 1214aj: a guard inside the client's paired scene (held or following its victim pose) is
+        // being finished in the client's world; its host-world swings are not relayed.
+        if(!localRole&&e.nonce==npcAttack.nonce&&c&&(c->hostPairedLease||c->hostPairedFollow)){++npcAttackContactsDropped;continue;}
         if(localRole||e.nonce!=npcAttack.nonce||tick<e.tick||tick-e.tick>=250||!b||!b->ready||!c||!npcCombatIdentity(*c,h)||npcAttack.pending.size()>=32){stopNpcAttack("contact_expired_or_replaced");return;}
         auto p=npcAttackPacket(*c,*b,NpcAttackMessage::Hit);p.event=++npcAttack.event;
         std::memcpy(p.offset,e.offset,12);std::memcpy(p.direction,e.direction,12);p.flags=e.flags;

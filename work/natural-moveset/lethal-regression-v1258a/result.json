@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "approach": "back",
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 6 presented",
+        "Same outcome in both worlds: dead",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "camera": "shoulder1",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -39.7586,
+          -144.518,
+          66.4
+        ],
+        "source": [
+          -41.567,
+          -143.719,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T19:19:19.6432799+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|2200",
+        "midnight/gameplay/player/base/combat/sword_equip_fast.midnightscene|500"
+      ],
+      "sceneIds": [
+        6
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 15730828,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x210b0461080",
+          "actor": "0x210cbe21f90",
+          "attributes": "0x210cbb7b8e0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 15730843,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1b8b6347cd0",
+          "actor": "0x1bae15e4d20",
+          "attributes": "0x1bae14608d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "victimEnd": {
+        "source": [
+          -38.7407,
+          -145.504,
+          66.5837
+        ],
+        "observer": [
+          -38.7407,
+          -145.504,
+          66.5837
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 226,
+        "rootsDelta": 187,
+        "bodyAppliedDelta": 187,
+        "positionBefore": [
+          -39.6349,
+          -145.24,
+          66.4
+        ],
+        "positionAfter": [
+          -38.7407,
+          -145.504,
+          66.5837
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Counterattack (#9): parry follow-up cycles against a host-owned guard under the product controller, both source roles: native parry and finisher scenes, partner phase, shared death and victim position; fixture restored after every case."
+}

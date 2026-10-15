@@ -1,0 +1,126 @@
+{
+  "approach": "front",
+  "source": "client",
+  "kind": "fatality",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 97 presented",
+    "Same outcome in both worlds: dead",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "camera": "shoulder1",
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T19:04:51.7780888+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/combat/sword_attack_focus_in.midnightscene|266",
+    "midnight/gameplay/player/base/combat/sword_slash_left.midnightscene|1000",
+    "midnight/gameplay/player/base/combat/sword_slash_leftb.midnightscene|1000",
+    "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+    "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000",
+    "midnight/gameplay/player/base/combat/throwhit.midnightscene|800",
+    "midnight/gameplay/player/base/fatalities/fatality_head_medium_b.midnightscene|2000"
+  ],
+  "sceneIds": [
+    97
+  ],
+  "attempts": 5,
+  "final": {
+    "source": {
+      "tick": 14863171,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x28840608700",
+      "actor": "0x28847c625e0",
+      "attributes": "0x288479bb8e0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 14863187,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x246b3b4cef0",
+      "actor": "0x246e5a04330",
+      "attributes": "0x246e575a8d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "victimEnd": {
+    "source": [
+      -41.9955,
+      -143.739,
+      66.553
+    ],
+    "observer": [
+      -41.9955,
+      -143.739,
+      66.553
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "host_authority",
+    "posesDelta": 226,
+    "rootsDelta": 168,
+    "bodyAppliedDelta": 168,
+    "positionBefore": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "positionAfter": [
+      -41.9955,
+      -143.739,
+      66.553
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}

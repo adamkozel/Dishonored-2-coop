@@ -20,6 +20,12 @@ void npcAuthorityProtocolTests(){
      q.h.reserved=58;require(validNpcControl(q,host,client)&&npcPairedKnockoutVariant(58)&&npcPairedKnockoutVariant(3)&&!npcPairedKnockoutVariant(5),"a drop choke (58) is a paired knockout scene");
      q.h.reserved=57;require(!validNpcControl(q,host,client),"choke cancel (57) is not a paired hold variant");
      q.h.reserved=119;require(validNpcControl(q,host,client)&&!npcPairedKnockoutVariant(119),"a sword lock (119) holds the host NPC and never asks for a knockout");
+     q.h.reserved=105;require(validNpcControl(q,host,client),"a counter finisher (105) is a paired hold variant");
+     require(npcPairedCorpseFollows(105,true,true,10000,0,10200),"a client finisher hold on a fresh host corpse follows the client victim (take 1258l)");
+     require(!npcPairedCorpseFollows(105,true,true,10000,0,13500),"a corpse older than 3 s with no window does not start following");
+     require(npcPairedCorpseFollows(105,true,true,10000,13600,13500),"an open window keeps following past 3 s while holds arrive");
+     require(!npcPairedCorpseFollows(3,true,true,10000,0,10200)&&!npcPairedCorpseFollows(119,true,true,10000,0,10200),"chokes and sword locks never move a corpse");
+     require(!npcPairedCorpseFollows(105,true,false,0,0,10200)&&!npcPairedCorpseFollows(105,false,true,10000,0,10200),"a living or unready NPC takes the ordinary hold path");
      {auto k=q;k.h.kind=NpcAuthorityMessage::PairedKnockout;k.h.reserved=73;require(validNpcControl(k,host,client),"a slide choke (73) asks for the knockout (take 1254a: 1214c capped it at 3 and never sent it)");
       k.h.reserved=5;require(!validNpcControl(k,host,client),"a lethal never asks for a knockout");k.h.reserved=1;require(!validNpcControl(k,host,client),"a choke entry never asks for a knockout");}
      q.h.reserved=kNativeTakedownSceneCount+1;require(!validNpcControl(q,host,client),"unknown takedown scene refused");

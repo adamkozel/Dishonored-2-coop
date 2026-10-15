@@ -1,6 +1,6 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T18:21:06.990521+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T19:24:55.573562+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
 105 requirements: 95 runtime-bound (fully or partially), 80 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
@@ -426,7 +426,7 @@ Captured 2026-10-15T18:21:06.990521+02:00; source [review-catalog.json](<../../.
 | block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
 | parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
-| counterattack | combat | candidates | native_counter_kill_finisher_shared_both_roles | not_accepted | work_remaining |
+| counterattack | combat | candidates | partial_native_counter_kill_finisher_shared_host_source | not_accepted | work_remaining |
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | accepted_sweep_1260_functional_both_roles | work_remaining |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
