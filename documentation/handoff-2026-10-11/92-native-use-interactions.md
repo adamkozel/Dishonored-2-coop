@@ -85,6 +85,20 @@ Updated 2026-10-14.
 
 Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and valve visual acceptance continues in #33.
 
+**#33 lever and valve visuals (1214ak, [audit 1282](../../work/movement-integration/lever-valve-audit-v1282.json)):** accepted (functional) in both roles.
+- **Framing fix:** the observer takes its pitch, then teleports and holds the camera in the same step. The held view stays at the spot while the body falls. Every earlier lever spot fell from the turbine platform (z 20.5) to the street before the hold.
+
+| Take | Mechanism | Source | Visual |
+|---|---|---|---|
+| [use-variants-v1228i](../../work/natural-moveset/use-variants-v1228i) | turbine lever | Emily | Accepted: full body on the platform, reaching the lever on the post |
+| use-variants-v1228i | turbine lever | Corvo | Not accepted: head and shoulders above the frame (2.4 m, pitch 15) |
+| [use-variants-v1228j](../../work/natural-moveset/use-variants-v1228j) | turbine lever | Corvo | Accepted: fully framed from 3.0 m at pitch 5; turbine blades sometimes pass in front |
+| [use-variants-dunwall-v1228k](../../work/natural-moveset/use-variants-dunwall-v1228k) | sink tap | Emily | Accepted: reaches and turns the tap |
+| use-variants-dunwall-v1228k | sink tap | Corvo | Not accepted: his body fills the frame and hides the tap (1.3 m behind, 0.5 m aside) |
+| [use-variants-dunwall-v1228l](../../work/natural-moveset/use-variants-dunwall-v1228l) | sink tap | Corvo (Emily again) | Accepted: fully framed with his hand at the tap (1.4 m behind, 0.9 m aside, pitch 20) |
+
+Harness options: `-LeversOnly` (1228i); `-Back`, `-ObserverPitch` and `-LeverSources` (1228j); `-Side` and `-TapsOnly` (1228k).
+
 **#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
 - The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).
 - The client's window use also plays to duration.

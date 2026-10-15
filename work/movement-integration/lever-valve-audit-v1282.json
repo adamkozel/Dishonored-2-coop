@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-15T19:38:23.413116+02:00",
+  "candidate": "candidate-npc-combat-v1214ak",
+  "cases": [
+    {
+      "take": "use-variants-v1228i",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "host",
+      "observer": "client",
+      "target": "script_lever_windturbine_1_1_1",
+      "passed": true,
+      "shownSamples": 41,
+      "video": "use-variants-v1228i/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+      "visual": "not accepted: Corvo's head and shoulders above the frame (2.4 m, pitch 15)"
+    },
+    {
+      "take": "use-variants-v1228i",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "client",
+      "observer": "host",
+      "target": "script_lever_windturbine_1_1_1",
+      "passed": true,
+      "shownSamples": 40,
+      "video": "use-variants-v1228i/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+      "visual": "accepted: Emily on the turbine platform reaches the lever on the post, full body in view"
+    },
+    {
+      "take": "use-variants-v1228j",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "host",
+      "observer": "client",
+      "target": "script_lever_windturbine_1_1_1",
+      "passed": true,
+      "shownSamples": 41,
+      "video": "use-variants-v1228j/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+      "visual": "accepted: Corvo fully framed reaching the lever (3.0 m, pitch 5); turbine blades pass in front at times"
+    },
+    {
+      "take": "use-variants-dunwall-v1228k",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "host",
+      "observer": "client",
+      "target": "esc_env_rich_sink_tap_01_1",
+      "passed": true,
+      "shownSamples": 74,
+      "video": "use-variants-dunwall-v1228k/use-host-esc_env_rich_sink_tap_01_1-observed.mp4",
+      "visual": "not accepted: Corvo fills the frame and hides the tap (1.3 m behind, 0.5 m aside)"
+    },
+    {
+      "take": "use-variants-dunwall-v1228k",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "client",
+      "observer": "host",
+      "target": "esc_env_rich_sink_tap_01_1",
+      "passed": true,
+      "shownSamples": 79,
+      "video": "use-variants-dunwall-v1228k/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+      "visual": "accepted: Emily reaches and turns the sink tap"
+    },
+    {
+      "take": "use-variants-dunwall-v1228l",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "host",
+      "observer": "client",
+      "target": "esc_env_rich_sink_tap_01_1",
+      "passed": true,
+      "shownSamples": 77,
+      "video": "use-variants-dunwall-v1228l/use-host-esc_env_rich_sink_tap_01_1-observed.mp4",
+      "visual": "accepted: Corvo fully framed at the sink with his hand at the tap (1.4 m behind, 0.9 m aside, pitch 20)"
+    },
+    {
+      "take": "use-variants-dunwall-v1228l",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "source": "client",
+      "observer": "host",
+      "target": "esc_env_rich_sink_tap_01_1",
+      "passed": true,
+      "shownSamples": 81,
+      "video": "use-variants-dunwall-v1228l/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+      "visual": "accepted (regression of 1228k)"
+    }
+  ],
+  "findings": [
+    "Framing (confirmed runtime): holding the observer camera in the same step as the teleport (pitch first) keeps the view at the intended spot while the body falls; every earlier lever spot fell from the turbine platform (z 20.5) to the street before the hold.",
+    "Confirmed runtime: the turbine lever (variant 2) and the Dunwall sink tap (variant 4) pass in both roles on 1214ak, presented at weight 1.0.",
+    "Visual: lever and valve accepted (functional) in both roles - Emily 1228i (lever) and 1228k/l (tap), Corvo 1228j (lever) and 1228l (tap).",
+    "Harness: 1228i holds the camera at the teleport and adds -LeversOnly; 1228j adds -Back, -ObserverPitch and -LeverSources; 1228k adds -Side and -TapsOnly."
+  ],
+  "complete": true,
+  "scope": "#33: lever and valve use variants filmed and accepted in both roles."
+}
