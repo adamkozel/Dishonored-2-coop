@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-15T04:55:12.626750+02:00",
+  "candidate": "candidate-npc-combat-v1213l",
+  "takes": [
+    {
+      "take": "../natural-moveset/cutscene-transition-v1236",
+      "candidate": "candidate-npc-combat-v1213l",
+      "passed": false,
+      "failure": "Partner presentation not live before the scene",
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/cutscene-transition-v1236b",
+      "candidate": "candidate-npc-combat-v1213l",
+      "passed": true,
+      "failure": null,
+      "restoration": true
+    }
+  ],
+  "scene": {
+    "sceneStartHostMs": 518,
+    "sceneStartClientMs": 523,
+    "sceneEndMs": 30951,
+    "restoreMs": 1567,
+    "restored": true,
+    "duringLiveSamples": 0,
+    "duringSamples": 58
+  },
+  "findings": [
+    "Confirmed runtime (1236b, pass): both peers enter the native Mayhew scene together (0.52 s after use); during the 30 s scene the partner presentation is retired on both peers (follow and bank off in all 58 samples), so no partner stands in the scene; 1.57 s after the scene ends the full partner presentation is live again.",
+    "The partner stream needs the native sword: from the pre-Mayhew save (before the scene hands it over) it never arms (1236, missing 8) - entry is gated on the avatar being present (follow + bank).",
+    "Visual accepted on both windows: no partner intrusion in the native scene, partner presented right after it."
+  ],
+  "complete": true,
+  "scope": "cutscene_enter_exit on a real native scene (Mayhew, Cinematic5, played in full); other scenes and skipped playback follow the same lifecycle but are not separately recorded."
+}

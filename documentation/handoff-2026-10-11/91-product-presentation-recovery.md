@@ -90,7 +90,13 @@ Earlier attempts:
 - **Warp hold.** After a 60 m harness warp, the host-side partner stayed at the old spot for 7–15 s.
   - Root cause: the strict source pose timeline rejected samples during a latency spike. 1203f rebases it (product only); re-test pending.
 - **Client-side visual** of the Corvo partner after load/restart: the spots must keep at least 2 m of reachable separation.
-- **Cinematic (logic 5)** with a real mid-mission scene is untested.
+- **Cinematic (logic 5), real native scene (#8, 1213l, take [1236b](../../work/natural-moveset/cutscene-transition-v1236b), [audit 1239](../../work/movement-integration/cutscene-transition-audit-v1239.json); confirmed runtime):**
+  - **Scene:** both players use Mayhew in the Dunwall fixture, and the native skippable scene plays in full.
+  - **Entry:** both peers enter logic 5 together, 0.52 s after the use.
+  - **During the 30 s scene:** the partner presentation is retired on both peers (follow and bank off), so no partner stands in the scene.
+  - **Exit:** 1.57 s after the scene ends, the full partner presentation is live again.
+  - **Visual accepted on both windows.** The native scene plays without the partner intruding, and the partner is presented in front right after it.
+  - From the pre-Mayhew save the partner stream can't arm, because the scene itself hands over the sword (take 1236). Entry is therefore gated on the avatar being present (follow + bank).
 
 ## Related: stability soak attribution (audit 1200)
 
