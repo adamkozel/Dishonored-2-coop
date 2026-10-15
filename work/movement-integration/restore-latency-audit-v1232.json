@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-15T03:47:30.134457+02:00",
+  "take": "../natural-moveset/mission-presentation-resume-v1230",
+  "candidate": "candidate-npc-combat-v1213h",
+  "reference": "../natural-moveset/mission-presentation-resume-v1204f (1203e)",
+  "method": "waitMs from each live-*.json: from the end of the case (menu closed, warp back, modal dismissed) until both peers report the full partner presentation live (avatar, follow < 1 m, bank, stream, fresh).",
+  "cases": {
+    "armedFacing": {
+      "ok1230": true,
+      "ms1230": 340,
+      "ok1204f": true,
+      "ms1204f": 6922
+    },
+    "pauseClient": {
+      "ok1230": true,
+      "ms1230": 1562,
+      "ok1204f": true,
+      "ms1204f": 18995
+    },
+    "pauseHost": {
+      "ok1230": true,
+      "ms1230": 1568,
+      "ok1204f": true,
+      "ms1204f": 17366
+    },
+    "afterWarp": {
+      "ok1230": true,
+      "ms1230": 325,
+      "ok1204f": true,
+      "ms1204f": 15522
+    },
+    "modal": {
+      "ok1230": false,
+      "ms1230": 30087,
+      "ok1204f": true,
+      "ms1204f": 14474
+    }
+  },
+  "findings": [
+    "Confirmed runtime: pause restore latency is ~1.6 s in both roles on 1213h (19.0/17.4 s in 1204f on 1203e); the 60 m warp recovers in 0.33 s (15.5 s).",
+    "Regression (#35): after the shared tutorial modal the movement bank request is refused on both peers for 30 s; restoration passed."
+  ],
+  "complete": true,
+  "scope": "#10 re-measurement; the modal failure is tracked separately in #35."
+}
