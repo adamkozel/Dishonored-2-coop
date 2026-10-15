@@ -1,0 +1,37 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: client-kick: Partner presentation weight dropped in 26 samples | host-kick: Partner presentation weight dropped in 15 samples",
+  "cases": [
+    {
+      "source": "client",
+      "case": "kick",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 26 samples",
+      "checks": [],
+      "camera": [
+        -46.76140105,
+        -142.61817956000002,
+        68.10000000000001
+      ],
+      "lowWeightSamples": 26,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kick",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 15 samples",
+      "checks": [],
+      "camera": [
+        -51.2375881,
+        -150.0868384,
+        68.10000000000001
+      ],
+      "lowWeightSamples": 15,
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}

@@ -158,3 +158,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Stage 3: takedown census, drop/slide/side variants and sword finishers (candidates 1214b–1214g)](93-takedown-census-variants-and-finishers.md)
 - [Stage 3: visual-acceptance sweep, counterattack, sword locks and item gestures (candidates 1214h–1214j)](94-visual-sweep-counterattack-and-gestures.md)
 - [Stage 4: shared combat authority on missions — unshared deaths and host-world damage (candidates 1214n–1214o)](95-shared-combat-authority.md)
+- [96. External research references](96-external-research-references.md): public Dishonored 2 resources (camera, cvars, autosplitter, saves) and what was verified against the lab build.

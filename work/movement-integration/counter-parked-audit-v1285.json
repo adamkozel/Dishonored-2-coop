@@ -1,0 +1,99 @@
+{
+  "at": "2026-10-15T20:52:37.637515+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214ao",
+    "candidate-npc-combat-v1214ap"
+  ],
+  "takes": [
+    {
+      "take": "coverage-v1284a",
+      "candidate": "candidate-npc-combat-v1214an",
+      "passed": false,
+      "failure": "2 case(s) failed: client-kick: Partner presentation weight dropped in 26 samples | host-kick: Partner presentation weight dropped in 15 samples"
+    },
+    {
+      "take": "counterattack-v1258z",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258aa",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258ab",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258ac",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258ad",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258ae",
+      "candidate": "candidate-npc-combat-v1214ak",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258af",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Command is outside the bounded native research command set."
+    },
+    {
+      "take": "counterattack-v1258ag",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Command is outside the bounded native research command set."
+    },
+    {
+      "take": "counterattack-v1258ah",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Command is outside the bounded native research command set."
+    },
+    {
+      "take": "counterattack-v1258ai",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258aj",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258ak",
+      "candidate": "candidate-npc-combat-v1214ao",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (coverage-v1284a, 1214an, free camera): no native kick (throwhit) in 8 close attacks per role; the guard fought back and the source ended down (state 15). The kick view stays open.",
+    "Confirmed runtime (counterattack-v1258y-ab, 1214ak, harness 1258m): blocked hits followed by slashes, no finisher; in z/aa/ab the guard never swung.",
+    "Confirmed runtime (counterattack-v1258ac-ae, harness 1258n, attack only after sword_parry_win): the guard never swung (0 relayed hits) when the source did not attack.",
+    "Confirmed runtime (counterattack-v1258af-ah): the sender allowlist refused ark_god_player; restored cleanly.",
+    "Confirmed static: ark_god_player (object +0x398d500, value +0x398d528) is read only by the god console toggle (+0x718f93), never by damage code. Confirmed runtime (counterattack-v1258ai): health 56 -> 0 with the cvar set. 1214ao allowed the cvar; 1214ap removes it.",
+    "Confirmed runtime (counterattack-v1258aj/ak): the guard never swung.",
+    "1214ap adds the lab-only coop_player_health_hold (refills the local player health at each service tick); built, unit tests and deploy pass, not yet runtime-verified.",
+    "Decision: Emily's counter-kill is parked on #9. It depends on the guard's AI attacking her clone, which most takes never got; a lab fixture that makes the guard attack on command would make it deterministic."
+  ],
+  "complete": false,
+  "scope": "#9 counter-kill attempts (parked) and the #11 kick view; native god mode stripped; lab health hold built."
+}

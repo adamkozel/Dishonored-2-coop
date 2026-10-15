@@ -62,6 +62,12 @@ Harness [v1258](../../work/natural-moveset/make_counterattack_v1258.py) and its 
   - **Provoking Emily's counter (takes 1258m–1258y):** in many takes the guard never swung at Emily's clone. A held block mostly gives plain blocks (`sword_parry_hit`), and an attack after one only slashes (1258y). An attack that replaces a held block in the same frame never slashes (1258q). Harness [1258n](../../work/natural-moveset/make_counterattack_v1258n.py) taps block and attacks only after `sword_parry_win`, so the guard keeps full health and any finisher is the counter-kill.
   - Takes 1258ac–1258ae (harness 1258n, 1214ak): the guard never swung at Emily in any of them (0 relayed hits), so no parry win was possible. Her counter-kill stays open; a lab fixture that makes the guard attack would make it deterministic.
 
+## Counter-kill parked, kick view open (audit 1285)
+
+[Audit 1285](../../work/movement-integration/counter-parked-audit-v1285.json) covers takes 1258y–1258ak and coverage-v1284a.
+- Emily's counter-kill is parked on #9. Most takes never got a guard swing at her clone. The native god mode is stripped ([chapter 96](96-external-research-references.md)), so 1214ap adds a lab health hold (`coop_player_health_hold`), built but not yet runtime-verified.
+- **Kick:** the free-camera kick take produced no native kick (`throwhit`) in 8 close attacks per role, so the kick view stays open.
+
 ## Long fall and landing (audit 1283)
 
 Harness [Record-Coverage-v1283](../../work/natural-moveset/make_coverage_v1283.py) drops the source 6 m above its usual spot while the partner films at a level pitch. In take [coverage-v1283a](../../work/natural-moveset/coverage-v1283a) both roles fell 5.3–6.1 m (native falling state 3, then grounded). The partner shows the falling pose with arms out, a deep landing crouch and the recovery. **Fall loop and hard landing are accepted (functional) in both roles.**
