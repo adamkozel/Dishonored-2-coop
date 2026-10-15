@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:52:40.430033+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T21:17:46.024022+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -328,7 +328,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Short and alternating 
 - [in_game_recordings: native-close-combat-emily-v623/client-close-combat.mp4](<../../../../work/natural-moveset/native-close-combat-emily-v623/client-close-combat.mp4>)
 ## heavy_attack_variants
 
-Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
+Audit 1286: Corvo's crouched heavy re-taken (coverage-v1285a) without the standing pop; accepted in both roles. Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
 
 ````json
 {
@@ -340,7 +340,7 @@ Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads f
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_crouched_heavy_retake",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "heavy attack variants",
@@ -349,7 +349,7 @@ Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads f
     "sword_attack_longb"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+  "notes": "Audit 1286: Corvo's crouched heavy re-taken (coverage-v1285a) without the standing pop; accepted in both roles. Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -368,7 +368,8 @@ Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads f
   "evidence": [
     "crouched-heavy-corvo-v636/result.json",
     "crouched-heavy-emily-v636/result.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "../movement-integration/views-audit-v1286.json"
   ]
 }
 ````
@@ -376,6 +377,7 @@ Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads f
 - [evidence: crouched-heavy-corvo-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/result.json>)
 - [evidence: crouched-heavy-emily-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-emily-v636/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: ../movement-integration/views-audit-v1286.json](<../../../../work/movement-integration/views-audit-v1286.json>)
 - [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
 - [in_game_recordings: native-heavy-corvo-v629/host-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-corvo-v629/host-crouched-heavy.mp4>)

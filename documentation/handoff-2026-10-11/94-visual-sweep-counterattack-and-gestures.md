@@ -68,6 +68,14 @@ Harness [v1258](../../work/natural-moveset/make_counterattack_v1258.py) and its 
 - Emily's counter-kill is parked on #9. Most takes never got a guard swing at her clone. The native god mode is stripped ([chapter 96](96-external-research-references.md)), so 1214ap adds a lab health hold (`coop_player_health_hold`), built but not yet runtime-verified.
 - **Kick:** the free-camera kick take produced no native kick (`throwhit`) in 8 close attacks per role, so the kick view stays open.
 
+## Crouched heavy and map-load recovery (audit 1286)
+
+[Audit 1286](../../work/movement-integration/views-audit-v1286.json):
+- **Crouched heavy:** re-taken at the open lab spot with the free camera ([coverage-v1285a](../../work/natural-moveset/coverage-v1285a)). Corvo stays crouched through charge, hold and release, with no standing pop. Accepted (functional) in both roles.
+- **Map load and checkpoint restart:** filmed from both windows with the free camera ([mission-lifecycle-v1199h](../../work/natural-moveset/mission-lifecycle-v1199h)). Corvo on the client and Emily on the host are upright and whole after both. Accepted (functional) in both roles.
+  - **Takes 1199e–1199g:** the floating arms beside Corvo after the restart were the observer's own first-person arms, not a partner defect (confirmed runtime from the entity lists).
+  - **Fix (1214aq):** the free camera hides them while it holds.
+
 ## Long fall and landing (audit 1283)
 
 Harness [Record-Coverage-v1283](../../work/natural-moveset/make_coverage_v1283.py) drops the source 6 m above its usual spot while the partner films at a level pitch. In take [coverage-v1283a](../../work/natural-moveset/coverage-v1283a) both roles fell 5.3–6.1 m (native falling state 3, then grounded). The partner shows the falling pose with arms out, a deep landing crouch and the recovery. **Fall loop and hard landing are accepted (functional) in both roles.**

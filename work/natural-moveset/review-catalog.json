@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T20:52:40.177141+02:00",
+  "generated": "2026-10-15T21:17:45.694513+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -1986,7 +1986,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles_crouched_heavy_retake",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "heavy attack variants",
@@ -1995,7 +1995,7 @@
         "sword_attack_longb"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+      "notes": "Audit 1286: Corvo's crouched heavy re-taken (coverage-v1285a) without the standing pop; accepted in both roles. Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -2014,7 +2014,8 @@
       "evidence": [
         "crouched-heavy-corvo-v636/result.json",
         "crouched-heavy-emily-v636/result.json",
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "../movement-integration/views-audit-v1286.json"
       ]
     },
     {
@@ -17882,13 +17883,13 @@
       ],
       "authoring": "missing",
       "runtime_binding": "partial_native_steam_map_load_and_checkpoint_restart_both_peers",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "map load checkpoint recovery",
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
+      "notes": "Audit 1286: the partner is filmed upright and whole on both peers after the map load and the shared checkpoint restart (mission-lifecycle-v1199h); accepted in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -17897,7 +17898,8 @@
       ],
       "evidence": [
         "../movement-integration/lifecycle-audit-v1202.json",
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/views-audit-v1286.json"
       ]
     },
     {

@@ -24,6 +24,34 @@ int observerCameraRequest=-1;float observerCameraAt[3]{};
 // toggle (+0x718f93), never by damage code (confirmed static, build 1.77.9.0). A single hit larger than the current
 // health still kills; hits, reactions and parries stay native.
 bool playerHealthHold=false;std::uint64_t playerHealthRefills=0,playerHealthHoldMisses=0;float playerHealthLast=0;
+// 1214aq (#11, lab only): while a hold is active the local player's own first-person arm entities (left_arm_1 /
+// right_arm_2, children of the player) are hidden with the native hide (+0x8784b0: sets actor+0xD0 bit 0, then the
+// render update) and shown again on release (+0x87c590 show, +0x87c5d0 update). Takes 1199e-1199g: with the camera
+// held away from the observer's body, those arms floated beside the filmed partner. Release re-validates each arm by
+// handle and actor before touching it, so a reload never leaves a stale pointer in use.
+struct ObserverHiddenArm {std::uint32_t handle=0;std::uintptr_t actor=0;};
+std::array<ObserverHiddenArm,2> observerHiddenArms{};std::uint64_t observerArmHides=0,observerArmShows=0;ULONGLONG observerArmScanAt=0;
+void observerCameraArms(bool hide,ULONGLONG tick){
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame)return;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!hide){
+        for(auto& a:observerHiddenArms){if(!a.actor)continue;NativePlayerArm arm{};
+            if(readNativePlayerArm(memoryRead,base,observedGame,a.handle,arm)&&arm.actor==a.actor){
+                reinterpret_cast<void(*)(void*)>(gameImage+0x87c590)(reinterpret_cast<void*>(a.actor));
+                reinterpret_cast<void(*)(void*)>(gameImage+0x87c5d0)(reinterpret_cast<void*>(a.actor));++observerArmShows;}
+            a={};}
+        return;
+    }
+    if(tick-observerArmScanAt<500)return;observerArmScanAt=tick;
+    std::uintptr_t handles=0;std::uint32_t flags=0;
+    if(!memoryRead(observedGame+0x601c0,&handles,8)||!handles||!memoryRead(observedGame+0x601c8,&flags,4)||(flags&0xffffff)>16384)return;
+    for(std::uint32_t i=0;i<(flags&0xffffff);++i){std::uint32_t h=0;if(!memoryRead(handles+i*4,&h,4)||!h)continue;
+        NativePlayerArm arm{};if(!readNativePlayerArm(memoryRead,base,observedGame,h,arm)||arm.side<1||arm.side>2)continue;
+        unsigned char f=0;if(!memoryRead(arm.actor+0xd0,&f,1))continue;
+        if(!(f&1)){reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(arm.actor));++observerArmHides;}
+        observerHiddenArms[arm.side-1]={h,arm.actor};
+    }
+}
 void servicePlayerHealthHold(){
     if(!playerHealthHold||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     NativeHealth h{};if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),1,h)||!h.component){++playerHealthHoldMisses;return;}
@@ -59,6 +87,8 @@ bool installObserverCamera(){
 }
 void serviceObserverCamera(ULONGLONG tick){
     servicePlayerHealthHold();
+    {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
+     if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
     AcquireSRWLockExclusive(&observerCameraLock);
     if(request==0){observerCamera.active=false;observerCamera.result="off";}
@@ -83,6 +113,8 @@ void writeObserverCamera(){
     fprintf(f,"{\"labOnly\":true,\"installed\":%s,\"active\":%s,\"result\":\"%s\",\"view\":\"%llx\",\"overrides\":%llu,\"position\":[%.6f,%.6f,%.6f],\"views\":[",
         realNativeRenderViewSet?"true":"false",h.active?"true":"false",h.result,static_cast<unsigned long long>(h.view),h.overrides,h.position[0],h.position[1],h.position[2]);
     bool first=true;for(const auto& r:views)if(r.view){fprintf(f,"%s{\"view\":\"%llx\",\"count\":%llu,\"tick\":%llu,\"position\":[%.6f,%.6f,%.6f]}",first?"":",",static_cast<unsigned long long>(r.view),r.count,r.tick,r.position[0],r.position[1],r.position[2]);first=false;}
-    fprintf(f,"],\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
+    fprintf(f,"],\"armsHidden\":{\"hides\":%llu,\"shows\":%llu,\"left\":%s,\"right\":%s},",static_cast<unsigned long long>(observerArmHides),
+        static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
+    fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
         static_cast<unsigned long long>(playerHealthRefills),static_cast<unsigned long long>(playerHealthHoldMisses),playerHealthLast);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

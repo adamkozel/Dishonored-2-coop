@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T20:52:40.430033+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T21:17:46.024022+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 95 runtime-bound (fully or partially), 83 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 95 runtime-bound (fully or partially), 85 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -419,7 +419,7 @@ Captured 2026-10-15T20:52:40.430033+02:00; source [review-catalog.json](<../../.
 | sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | sword_ready_idle | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | light_attack_variants | combat | candidates | partial_native_steam_target_bearing_standing_slash | accepted_sweep_1260_functional_both_roles | work_remaining |
-| heavy_attack_variants | combat | candidates | partial_native_steam_standing_and_crouched_combat | not_accepted | work_remaining |
+| heavy_attack_variants | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_functional_both_roles_crouched_heavy_retake | work_remaining |
 | moving_attack | combat | candidates | partial_native_moving_combat_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | crouched_attack | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_sweep_1260_functional_both_roles | work_remaining |
 | airborne_attack | combat | candidates | partial_native_airborne_combat_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
@@ -479,7 +479,7 @@ Captured 2026-10-15T20:52:40.430033+02:00; source [review-catalog.json](<../../.
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
 | scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | not_accepted | work_remaining |
 | cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | work_remaining |
-| map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | not_accepted | work_remaining |
+| map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | accepted_functional_both_roles | work_remaining |
 | incapacitation_and_rescue_if_supported | interactions | missing | not_verified | not_accepted | excluded_by_policy |
 
 ## Full per-family records

@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "crouchheavy",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner crouched heavy presented in 12 samples"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "heavySamples": 12,
+      "combatVariants": [
+        0,
+        5,
+        7,
+        18
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "crouchheavy",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner crouched heavy presented in 11 samples"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "heavySamples": 11,
+      "combatVariants": [
+        0,
+        5,
+        7,
+        18
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}
