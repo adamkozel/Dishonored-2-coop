@@ -6,6 +6,7 @@ struct NpcRenderIdentity {
     std::uintptr_t animation=0,render=0,model=0,skeleton=0;
     unsigned animationGeneration=0,joints=0,slot=0;
     bool corpse=false; // 1113: shared-death corpse presentation (health0, AI not paused)
+    bool unconscious=false; // 1214a: shared knockout (health > 0, AI destroyed by the knockout)
 };
 struct NpcRenderState {NpcRenderIdentity id{};ULONGLONG until=0;std::uint64_t arm=0,sequence=0;CoopNpcPose pose{};};
 SRWLOCK npcPresentationLock=SRWLOCK_INIT;
@@ -29,7 +30,7 @@ bool npcRenderCurrent(const NpcRenderIdentity& id){
     float health=0;
     if(!eq(n.health.component+0x10,n.npc.actor)||!memoryRead(n.health.component+0x18,&u,4)||u!=n.healthGeneration||
        !memoryRead(n.health.component+0x20,&health,4)||!std::isfinite(health)||(id.corpse?health!=0:health<=0))return false;
-    if(id.corpse)return true; // death already applied natively; the corpse AI is not paused-owned
+    if(id.corpse||id.unconscious)return true; // death/knockout already applied natively; that AI is not paused-owned
     for(unsigned i=0;i<3;++i){const auto& s=n.ai[i];
         if(!eq(s.component,base+nativeAiVtable(s.kind))||!eq(s.component+0x10,n.npc.actor)||
            !memoryRead(s.component+0x18,&u,4)||u!=n.aiGeneration[i]||!memoryRead(s.component+0x1c,&u,4))return false;
@@ -461,7 +462,7 @@ void presentNpcStream(ULONGLONG tick){
     for(auto& c:npcChannels){
         const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
         if(!hostVictim&&(!localRole||!c.enabled||!c.ready||c.localPaired||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
-        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
+        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
         ++c.roots;if(hostVictim)std::memcpy(c.presentedRoot,p.pose.root,12);next.push_back(std::move(p));

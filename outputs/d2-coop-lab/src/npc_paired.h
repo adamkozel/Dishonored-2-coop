@@ -37,8 +37,17 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
     if(!applyNativeKnockout(before,attacker,after,kNpcPairedKnockoutDecl)||!nativeNpcUnconscious(after)){++npcPairedRefused;c.pairedResult="host_knockout_refused";return;}
     c.unconscious=true;c.unconsciousAt=tick;++npcPairedKnockouts;c.pairedResult="host_knockout_applied";c.result="host_unconscious";
 }
+// 1214a: after the knockout the held NPC is pinned for 3 s at the client victim's
+// last root while its native collapse plays. Take 1248i: when the victim pose
+// stream ended at the knockout, the host NPC's pending walk carried it ~3.8 m.
+std::uint64_t npcPairedPins=0;
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick){
     if(c.hostPairedLease&&tick>=c.pairedUntil){releaseNpcAiLease(c.lease);c.hostPairedLease=false;c.pairedResult="host_paired_released";}
+    if(c.unconscious&&c.reversePoses&&c.unconsciousAt&&tick-c.unconsciousAt<3000&&(!c.reversePoseAt||tick-c.reversePoseAt>=350)&&nativeMutationAllowed){
+        float transform[12]{};std::memcpy(transform,c.reverseRoot,12);
+        if(!memoryRead(c.lease.binding.npc.actor+0x30c,transform+3,36))return;
+        reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),transform,transform+3,true,0);++npcPairedPins;
+    }
 }
 // 1213v: the host's NPC is natively unconscious (a host choke, or the host's
 // knockout for a client choke). The client's replica follows the host's body by
