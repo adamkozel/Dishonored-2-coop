@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Combat session active on both peers",
+        "Hit 0: host 40 -> 35, client 40 -> 35",
+        "Hit 1: host 35 -> 30, client 35 -> 30",
+        "Hit 2: host 30 -> 25, client 30 -> 25",
+        "3 host-world hits shared as HostWorld commits; the client followed each"
+      ],
+      "guardHost": "0xb480764",
+      "guardClient": "0xb480764",
+      "counters": {
+        "hostWorldPassed": 3,
+        "hostWorldCommitted": 3,
+        "clientHostWorldApplied": 3,
+        "clientFollowSubtractions": 3
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 host-world damage: under the product controller the host applies lab-only bloodfly damage (another NPC as source) to the combat-bound Dunwall tutorial guard through the installed damage observer; the client replica must follow every hit (HostWorld); fixture restored."
+}

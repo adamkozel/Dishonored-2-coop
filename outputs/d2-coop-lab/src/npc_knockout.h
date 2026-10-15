@@ -50,7 +50,7 @@ struct NpcHostWorldTest{bool requested=false,player=false;const char* result="id
 NpcHostWorldTest npcHostWorldTest;
 void serviceNpcHostWorldTest(){
     auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
-    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!npcCombat.enabled){t.result="context_refused";return;}
+    if((localRole&&!t.player)||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!npcCombat.enabled){t.result="context_refused";return;}
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float best=1e12f;NpcAuthorityChannel* target=nullptr;
     for(const auto& b:npcCombat.channels){if(!b.enabled||!b.ready||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
         if(!c||c->unconscious||!npcCombatIdentity(*c,h)||h.current<=3)continue;
@@ -79,7 +79,7 @@ void writeNpcHostWorldTest(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-hostworld-test.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"runs\":%llu,\"mode\":\"%s\",\"result\":\"%s\",\"target\":%u,\"source\":%u,\"amount\":%.4f,\"before\":%.4f,\"after\":%.4f,\"maximum\":%.3f}",
-        static_cast<unsigned long long>(t.runs),t.player?"hostnative":"hostworld",t.result,t.target,t.source,t.amount,t.before.current,t.after.current,t.before.maximum);
+        static_cast<unsigned long long>(t.runs),t.player?(localRole?"clientnative":"hostnative"):"hostworld",t.result,t.target,t.source,t.amount,t.before.current,t.after.current,t.before.maximum);
     const bool ok=!ferror(f);if(!fclose(f)&&ok)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
 void writeNpcKnockoutTest(){

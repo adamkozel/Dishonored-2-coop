@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Combat session active on both peers",
+        "Hit 0: host 40 -> 0, client 40 -> 0",
+        "The host grenade explosion passed the capture natively (hostNativePassed) and the guard ends in the same state in both worlds"
+      ],
+      "guardHost": "0xb480764",
+      "guardClient": "0xb480764",
+      "counters": {
+        "hostNativePassed": 1,
+        "hostNativeLast": "components/equipment/damage/explosion_grenade.damage",
+        "hostWorldCommitted": 0,
+        "clientHostWorldApplied": 0
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 host player damage the replay cannot reproduce: under the product controller the lab-only hostnative_test sends the native grenade explosion (local player as attacker and inflictor) to the combat-bound Dunwall tutorial guard through the installed damage observer; it must apply natively and the guard end in the same state in both worlds (1214w/1214x); fixture restored."
+}

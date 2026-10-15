@@ -1,6 +1,6 @@
 # Shared combat authority on missions
 
-Stage 4, card #14. Candidates 1214n–1214x; harnesses 1270 (multi-enemy fight), 1271 (killing an unconscious guard), 1272 (host-world damage on a bound guard), 1273/1274 (host grenade on a bound guard).
+Stage 4, card #14. Candidates 1214n–1214z; harnesses 1270 (multi-enemy fight), 1271 (killing an unconscious guard), 1272 (host-world damage on a bound guard), 1273/1274 (host grenade on a bound guard) and 1275 (client grenade on a host guard).
 
 The roadmap exit criteria for stage 4 are: enemies perceive and fight both players; one authoritative damage and outcome path; and synchronized health, deaths, spawns, bodies and physics. This chapter covers sustained multi-enemy fights on a real mission map and the two gaps they exposed in the shared outcome path. The NPC stream and the per-NPC combat channels are described in [chapter 86](86-mission-npc-authority.md).
 
@@ -122,9 +122,25 @@ The combat JSON records each channel's retirement reason and shared health, plus
   - `Dead` shared the death: the client's replica also went 40 → 0 (`client_dead_from_host`).
 - A real thrown grenade or power on a mission map is still to be recorded.
 
+## Client grenades and powers: PeerNative (1214y–1214z, harness 1275)
+
+**Finding (confirmed static):** on the client, the same non-replayable player damage was suppressed and retired the NPC, so a client grenade, power, tranquilizer bolt or bolt variant never hurt a host NPC.
+
+**Fix (1214z):**
+- **Client:** such a hit becomes a `PeerNative` request carrying only its known declaration key and native amount (`validNpcPeerNative`: a known declaration that is not replayable, amount 0–1000, no geometry). The hit is suppressed locally.
+- **Host:** applies the request natively with the partner avatar as attacker and inflictor (`npcCombatApplyPeerNative`). HostWorld commits share a loss and `Dead` shares a death.
+- `PeerNative` is never a commit. It waits while sword requests are pending (`peerNativeBusy`).
+- Counters: `peerNativeRequests` on the client, `peerNativeApplied` on the host.
+- 1214y failed its own new unit test (the test lacked the client-side binding) and was never staged; 1214z is the same code with the fixed test.
+
+**Tests (lab fixture `hostnative_test` run on the client, native `explosion_grenade` amount 50):**
+- 1275a: the take stopped before running (candidate 1214y missing).
+- 1275b: the path worked but the harness failed. The host applied the request (40 → 0) and `Dead` killed the client's replica (40 → 0); the harness wrongly expected the client's own hit to land.
+- **1275c: pass.** Host 40 → 0 and client 40 → 0; `peerNativeRequests` 1 and `peerNativeApplied` 1.
+- **Regressions on 1214z:** 1274b (host grenade, 40 → 0 in both worlds) and 1272c (HostWorld 40 → 35 → 30 → 25 in both worlds) pass.
+
 ## Open
 
-- A client's grenade or power on a host NPC is still suppressed and retires the channel; it needs a request the host applies natively.
-- Host grenades and powers are verified through the lab fixture only (1274a), not yet with a real throw or cast on a mission.
+- Grenades and powers in both roles are verified through the lab fixture only (1274, 1275), not yet with a real throw or cast on a mission.
 - The Hello follow (host lower at re-bind) is unit-tested but not yet observed at runtime.
 - Spawns, bodies and physics beyond the corpse stream are not covered by this chapter.
