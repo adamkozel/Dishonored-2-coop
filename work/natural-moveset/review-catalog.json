@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T10:36:31.594591+02:00",
+  "generated": "2026-10-15T11:05:53.370988+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -129,10 +129,10 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "isolated_Dunwall_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 90,
       "priority": 1,
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
+      "notes": "Audit 1267: runs in 8 directions accepted in both roles (coverage 1267a). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
       "title": "run 8 directions",
       "motions": [
         "sword_run_e_add",
@@ -153,10 +153,13 @@
       "power_visual_requirements": [],
       "in_game_recordings": [
         "integrated-stance-corvo-v1.mp4",
-        "integrated-stance-emily-v1.mp4"
+        "integrated-stance-emily-v1.mp4",
+        "coverage-v1267a/client-run8-observer.mp4",
+        "coverage-v1267a/host-run8-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
+        "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -1385,7 +1388,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "isolated_Dunwall_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "slide enter loop exit",
@@ -1397,7 +1400,7 @@
         "slide_to_crouch"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
+      "notes": "Audit 1267: sprint-to-slide with crouched exit accepted for both characters (1267a); Corvo stand/jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -1424,7 +1427,9 @@
         "slide-emily-empty-stand-v28-v9.mp4",
         "slide-emily-empty-stand-v28-v9-source.mp4",
         "slide-emily-empty-jump-v28-v9.mp4",
-        "slide-emily-empty-jump-v28-v9-source.mp4"
+        "slide-emily-empty-jump-v28-v9-source.mp4",
+        "coverage-v1267a/client-slide-observer.mp4",
+        "coverage-v1267a/host-slide-observer.mp4"
       ],
       "evidence": [
         "slide-corvo-crouch-v28-v8/result.json",
@@ -1439,7 +1444,8 @@
         "slide-emily-empty-crouch-v28-v9/result.json",
         "slide-emily-empty-stand-v28-v9/result.json",
         "slide-emily-empty-jump-v28-v9/result.json",
-        "../movement-integration/visual-sweep-v1260/traversal-review.json"
+        "../movement-integration/visual-sweep-v1260/traversal-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -1451,7 +1457,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "isolated_Dunwall_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "slide to crouch or stand",
@@ -1460,7 +1466,7 @@
         "slide_to_crouch"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
+      "notes": "Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -1502,7 +1508,8 @@
         "slide-emily-empty-crouch-v28-v9/result.json",
         "slide-emily-empty-stand-v28-v9/result.json",
         "slide-emily-empty-jump-v28-v9/result.json",
-        "../movement-integration/visual-sweep-v1260/traversal-review.json"
+        "../movement-integration/visual-sweep-v1260/traversal-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -2532,7 +2539,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_npc_death_and_corpse_both_peers_mission_map",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "death variants",
@@ -2544,16 +2551,18 @@
         "empty_stinghit_death"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
+      "notes": "Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-sourced in sweep 1260 (1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
-        "mission-combat-v1117/combat-client.mp4"
+        "mission-combat-v1117/combat-client.mp4",
+        "takedown-variants-v1254b/slide-host-lethal-observer.mp4"
       ],
       "evidence": [
         "../movement-integration/mission-corpse-audit-v1118.json",
         "../movement-integration/takedown-variants-audit-v1257.json",
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -2565,13 +2574,13 @@
       ],
       "authoring": "missing",
       "runtime_binding": "partial_native_steam_npc_corpse_authority_mission_map",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "ragdoll handoff",
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
+      "notes": "Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -2584,11 +2593,13 @@
         "carry-snapshot-cancel-corvo-v22/native.mp4",
         "carry-snapshot-cancel-emily-v22b/native.mp4",
         "carry-snapshot-stream-emily-v22/native.mp4",
-        "mission-combat-v1117/combat-client.mp4"
+        "mission-combat-v1117/combat-client.mp4",
+        "takedown-variants-v1254b/drop-host-lethal-observer.mp4"
       ],
       "evidence": [
         "../movement-integration/mission-corpse-audit-v1118.json",
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -2769,7 +2780,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_network_ground_grenade_partial_verified",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles_bank_1266",
       "native_reference_family_count": 251,
       "priority": 3,
       "title": "grenade equip aim throw",
@@ -2780,7 +2791,7 @@
         "sword_grenade_launch_down"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
+      "notes": "Audit 1267: release pop fixed in bank 1266 (pelvis travel scaled to 25%); throw accepted from both windows. Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -2858,7 +2869,9 @@
         "grenade-reader-host-v320.mp4",
         "grenade-reader-host-v320-source.mp4",
         "grenade-reader-emily-v320.mp4",
-        "grenade-reader-emily-v320-source.mp4"
+        "grenade-reader-emily-v320-source.mp4",
+        "grenade-network-host-v1266a.mp4",
+        "grenade-network-client-v1266a.mp4"
       ],
       "native_integration": {
         "native-grenade-actions-corvo-high-v54.mp4": {
@@ -4288,7 +4301,8 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -5243,7 +5257,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "bounded_native_source_paired_pickup_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles_v38",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "carry body lift idle move drop throw",
@@ -5260,7 +5274,7 @@
         "carry_pickup_supported_settle"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
+      "notes": "Audit 1267: lift, carry and throw accepted for both characters from the v38 recordings (the sweep had judged v13). Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -7038,7 +7052,8 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "../movement-integration/sweep-defects-audit-v1267.json"
       ]
     },
     {
@@ -65669,7 +65684,7 @@
       ],
       "gameplay_bound": true,
       "complete": false,
-      "visual_accepted": false,
+      "visual_accepted": true,
       "evidence": "native-high-throw-corvo-regression-v38/high-throw-validation.json",
       "visual_review": "native-high-throw-corvo-regression-v38/visual-review.json",
       "proxy_sha256": "A46597540535879DE144EE173C18D7F995195B16FC43EC35F35BCD86F3BBB09D",
@@ -65677,6 +65692,7 @@
       "actual_capture_hz": 26.14190687361419,
       "scope": "Standing native X pickup, short carry walk, native RT high throw. Bounded same-PC Mayhew fixture; source-driven carrier clip, victim-only scene, one queued native impulse. Wall proximity, arbitrary corpses, pitched throws, world authority and mesh contacts are not accepted by these numerical checks.",
       "checks_passed": true,
+      "review": "Audit 1267: Re-review (sweep input had picked the old v13 take): Corvo bends to the body, lifts it through mid-air onto his shoulder, carries it and throws it with a lunge; the body lands and he stands.",
       "kind": "game",
       "travelling": false
     },
@@ -65690,7 +65706,7 @@
       ],
       "gameplay_bound": true,
       "complete": false,
-      "visual_accepted": false,
+      "visual_accepted": true,
       "evidence": "native-high-throw-emily-regression-v38/high-throw-validation.json",
       "visual_review": "native-high-throw-emily-regression-v38/visual-review.json",
       "proxy_sha256": "A46597540535879DE144EE173C18D7F995195B16FC43EC35F35BCD86F3BBB09D",
@@ -65698,6 +65714,7 @@
       "actual_capture_hz": 27.193763919821826,
       "scope": "Standing native X pickup, short carry walk, native RT high throw. Bounded same-PC Mayhew fixture; source-driven carrier clip, victim-only scene, one queued native impulse. Wall proximity, arbitrary corpses, pitched throws, world authority and mesh contacts are not accepted by these numerical checks.",
       "checks_passed": true,
+      "review": "Audit 1267: Re-review: Emily crouches to the body, lifts it onto her shoulder, carries and throws it, then stands.",
       "kind": "game",
       "travelling": false
     },
@@ -94089,13 +94106,14 @@
       "container_fps": "342/13",
       "timing": "Native wall-time recording, no speedup",
       "scope": "Held observer camera behind the guard; the source drops onto or slides into a host-owned guard with natural AI.",
-      "review": "Client window: remote Corvo comes down on the guard, arm raised, the guard goes down beneath him and Corvo stands over the body (dead in both worlds, 0.0 m). Functional: the existing fast-back stab or choke donor normalized to the native scene clock; drop- and slide-specific motion is left for animator polish.",
+      "review": "Client window: remote Corvo comes down on the guard, arm raised, the guard goes down beneath him and Corvo stands over the body (dead in both worlds, 0.0 m). Functional: the existing fast-back stab or choke donor normalized to the native scene clock; drop- and slide-specific motion is left for animator polish. Audit 1267: Client window: after remote Corvo's drop kill the guard goes down beneath him and lies as a corpse.",
       "candidate": "candidate-npc-combat-v1214e",
       "dll": "63F8CB595063F4C79F35CBACDF896D8A851953FB3F59C09032411EC4D7114C9F",
       "runtime_test_passed": true,
       "visual_accepted": true,
       "requirements": [
-        "aerial_drop_kill"
+        "aerial_drop_kill",
+        "ragdoll_handoff"
       ],
       "kind": "game"
     },
@@ -94173,13 +94191,14 @@
       "container_fps": "339/13",
       "timing": "Native wall-time recording, no speedup",
       "scope": "Held observer camera behind the guard; the source drops onto or slides into a host-owned guard with natural AI.",
-      "review": "Client window: remote Corvo slides low into the guard, stabs, and the guard falls beside him (0.0 m). Functional: the existing fast-back stab or choke donor normalized to the native scene clock; drop- and slide-specific motion is left for animator polish.",
+      "review": "Client window: remote Corvo slides low into the guard, stabs, and the guard falls beside him (0.0 m). Functional: the existing fast-back stab or choke donor normalized to the native scene clock; drop- and slide-specific motion is left for animator polish. Audit 1267: Client window: the guard killed by remote Corvo collapses and lies dead beside him (Corvo-sourced NPC death and ragdoll in the observer world).",
       "candidate": "candidate-npc-combat-v1214e",
       "dll": "63F8CB595063F4C79F35CBACDF896D8A851953FB3F59C09032411EC4D7114C9F",
       "runtime_test_passed": true,
       "visual_accepted": true,
       "requirements": [
-        "sliding_takedown"
+        "sliding_takedown",
+        "death_variants"
       ],
       "kind": "game"
     },
@@ -94348,6 +94367,126 @@
       "visual_accepted": true,
       "requirements": [
         "health_elixir"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "grenade-network-host-v1266a.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Coverage / grenade_equip_aim_throw / grenade-network-host-v1266a.mp4",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 23.9,
+      "container_fps": "8580/359",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Client window: remote Corvo cooks and throws; with bank 1266 the release reads as a short step into the throw instead of a 0.75 m sideways jump (1265a, same build, old bank: pop still present).",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "grenade_equip_aim_throw"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "grenade-network-client-v1266a.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Coverage / grenade_equip_aim_throw / grenade-network-client-v1266a.mp4",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.42,
+      "container_fps": "329/12",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Host window: remote Emily cooks and throws with the short release step of bank 1266.",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "grenade_equip_aim_throw"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "coverage-v1267a/client-run8-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Coverage / run_8_directions / coverage-v1267a",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.09,
+      "container_fps": "298/11",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Host window: remote Emily runs full-stick forward, back, both strafes and the diagonals with full running strides; no frozen or popping frames.",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "run_8_directions"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "coverage-v1267a/host-run8-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Coverage / run_8_directions / coverage-v1267a",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.9,
+      "container_fps": "8520/329",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Client window: remote Corvo runs in the eight directions with full strides and clean direction changes.",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "run_8_directions"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "coverage-v1267a/client-slide-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Coverage / slide_enter_loop_exit / coverage-v1267a",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.91,
+      "container_fps": "296/11",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Host window: remote Emily sprints in, drops into a low slide and ends crouched.",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "slide_enter_loop_exit"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "coverage-v1267a/host-slide-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Coverage / slide_enter_loop_exit / coverage-v1267a",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.82,
+      "container_fps": "284/11",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view in the other player's window.",
+      "review": "Client window: remote Corvo sprints, slides with a leg-forward pose and ends crouched.",
+      "candidate": "candidate-npc-combat-v1214l",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "slide_enter_loop_exit"
       ],
       "kind": "game"
     }

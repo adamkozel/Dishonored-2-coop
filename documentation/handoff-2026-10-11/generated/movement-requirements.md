@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T11:05:53.687129+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 94 runtime-bound (fully or partially), 72 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 94 runtime-bound (fully or partially), 79 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -379,7 +379,7 @@ Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../.
 | stand_idle | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | armed_idle | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | walk_8_directions | locomotion | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| run_8_directions | locomotion | candidates | isolated_Dunwall_both_roles | not_accepted | work_remaining |
+| run_8_directions | locomotion | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | work_remaining |
 | sprint_forward_and_diagonals | locomotion | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | start_stop_each_gait | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | gait_speed_changes | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
@@ -410,8 +410,8 @@ Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../.
 | climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | accepted_sweep_1260_functional_both_roles | work_remaining |
 | ledge_hang_and_pull_up | traversal | candidates | partial_isolated_Dunwall_low_mantle | accepted_sweep_1260_functional_both_roles | work_remaining |
 | window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted | work_remaining |
-| slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | not_accepted | work_remaining |
-| slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | not_accepted | work_remaining |
+| slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | work_remaining |
+| slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | work_remaining |
 | ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | work_remaining |
 | swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
@@ -430,12 +430,12 @@ Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../.
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | accepted_sweep_1260_functional_both_roles | work_remaining |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
-| death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | not_accepted | work_remaining |
-| ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | not_accepted | work_remaining |
+| death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | accepted_functional_both_roles | work_remaining |
+| ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | accepted_functional_both_roles | work_remaining |
 | pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | bolt_or_ammo_switch | ranged_and_items | candidates | not_verified | not_accepted | work_remaining |
-| grenade_equip_aim_throw | ranged_and_items | candidates | native_network_ground_grenade_partial_verified | not_accepted | work_remaining |
+| grenade_equip_aim_throw | ranged_and_items | candidates | native_network_ground_grenade_partial_verified | accepted_functional_both_roles_bank_1266 | work_remaining |
 | mine_or_razor_place | ranged_and_items | candidates | partial_native_steam_trap_body_and_held_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
 | heart_equip_use_holster | ranged_and_items | candidates | partial_native_steam_ground_heart_body_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
 | health_elixir | ranged_and_items | candidates | native_health_elixir_drink_reach_presented_both_roles | accepted_functional_both_roles_hand_to_mouth | work_remaining |
@@ -451,7 +451,7 @@ Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../.
 | enemy_body_size_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | paired_victim_alignment | paired_actions | candidates | shared_victim_and_outcome_both_roles_choke_and_lethal_product | accepted_host_and_client_sourced_rear_choke_and_lethal_victims | work_remaining |
 | struggle_and_escape | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | accepted_sweep_1260_functional_both_roles | work_remaining |
-| carry_body_lift_idle_move_drop_throw | paired_actions | candidates | bounded_native_source_paired_pickup_both_roles | not_accepted | work_remaining |
+| carry_body_lift_idle_move_drop_throw | paired_actions | candidates | bounded_native_source_paired_pickup_both_roles | accepted_functional_both_roles_v38 | work_remaining |
 | corvo_blink_aim_cancel_release_arrive | powers | candidates | partial_native_Blink_body_and_world_FX | accepted_sweep_1260_functional_owner | work_remaining |
 | corvo_blink_pull_and_kick_variants | powers | candidates | not_verified | not_accepted | work_remaining |
 | corvo_dark_vision_cast_end | powers | candidates | partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam | bounded_actual_game_frames_inspected | work_remaining |

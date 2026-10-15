@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -599,7 +599,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
 - [evidence: ../movement-integration/presentation-hold-audit-v1241.json](<../../../../work/movement-integration/presentation-hold-audit-v1241.json>)
 ## slide_enter_loop_exit
 
-Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
+Audit 1267: sprint-to-slide with crouched exit accepted for both characters (1267a); Corvo stand/jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
 
 ````json
 {
@@ -611,7 +611,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "slide enter loop exit",
@@ -623,7 +623,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
     "slide_to_crouch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
+  "notes": "Audit 1267: sprint-to-slide with crouched exit accepted for both characters (1267a); Corvo stand/jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -650,7 +650,9 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
     "slide-emily-empty-stand-v28-v9.mp4",
     "slide-emily-empty-stand-v28-v9-source.mp4",
     "slide-emily-empty-jump-v28-v9.mp4",
-    "slide-emily-empty-jump-v28-v9-source.mp4"
+    "slide-emily-empty-jump-v28-v9-source.mp4",
+    "coverage-v1267a/client-slide-observer.mp4",
+    "coverage-v1267a/host-slide-observer.mp4"
   ],
   "evidence": [
     "slide-corvo-crouch-v28-v8/result.json",
@@ -665,7 +667,8 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
     "slide-emily-empty-crouch-v28-v9/result.json",
     "slide-emily-empty-stand-v28-v9/result.json",
     "slide-emily-empty-jump-v28-v9/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
@@ -683,6 +686,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
 - [evidence: slide-emily-empty-stand-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-stand-v28-v9/result.json>)
 - [evidence: slide-emily-empty-jump-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8.mp4>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8-source.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8-source.mp4>)
 - [in_game_recordings: slide-corvo-stand-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-stand-v28-v8.mp4>)
@@ -707,9 +711,11 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
 - [in_game_recordings: slide-emily-empty-stand-v28-v9-source.mp4](<../../../../work/natural-moveset/slide-emily-empty-stand-v28-v9-source.mp4>)
 - [in_game_recordings: slide-emily-empty-jump-v28-v9.mp4](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9.mp4>)
 - [in_game_recordings: slide-emily-empty-jump-v28-v9-source.mp4](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9-source.mp4>)
+- [in_game_recordings: coverage-v1267a/client-slide-observer.mp4](<../../../../work/natural-moveset/coverage-v1267a/client-slide-observer.mp4>)
+- [in_game_recordings: coverage-v1267a/host-slide-observer.mp4](<../../../../work/natural-moveset/coverage-v1267a/host-slide-observer.mp4>)
 ## slide_to_crouch_or_stand
 
-Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
+Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
 
 ````json
 {
@@ -721,7 +727,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "slide to crouch or stand",
@@ -730,7 +736,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
     "slide_to_crouch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
+  "notes": "Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -772,7 +778,8 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
     "slide-emily-empty-crouch-v28-v9/result.json",
     "slide-emily-empty-stand-v28-v9/result.json",
     "slide-emily-empty-jump-v28-v9/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
@@ -790,6 +797,7 @@ Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slid
 - [evidence: slide-emily-empty-stand-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-stand-v28-v9/result.json>)
 - [evidence: slide-emily-empty-jump-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8.mp4>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8-source.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8-source.mp4>)
 - [in_game_recordings: slide-corvo-stand-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-stand-v28-v8.mp4>)

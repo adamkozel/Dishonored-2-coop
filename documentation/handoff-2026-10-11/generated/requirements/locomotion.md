@@ -1,6 +1,6 @@
 # locomotion: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
 
 ## stand_idle
 
@@ -161,7 +161,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Standing walking reads
 - [in_game_recordings: unbound-presentation-v559b-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559b-host.mp4>)
 ## run_8_directions
 
-Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.
+Audit 1267: runs in 8 directions accepted in both roles (coverage 1267a). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.
 
 ````json
 {
@@ -173,10 +173,10 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The on
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 90,
   "priority": 1,
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
+  "notes": "Audit 1267: runs in 8 directions accepted in both roles (coverage 1267a). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
   "title": "run 8 directions",
   "motions": [
     "sword_run_e_add",
@@ -197,17 +197,23 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The on
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
-    "integrated-stance-emily-v1.mp4"
+    "integrated-stance-emily-v1.mp4",
+    "coverage-v1267a/client-run8-observer.mp4",
+    "coverage-v1267a/host-run8-observer.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
+- [in_game_recordings: coverage-v1267a/client-run8-observer.mp4](<../../../../work/natural-moveset/coverage-v1267a/client-run8-observer.mp4>)
+- [in_game_recordings: coverage-v1267a/host-run8-observer.mp4](<../../../../work/natural-moveset/coverage-v1267a/host-run8-observer.mp4>)
 ## sprint_forward_and_diagonals
 
 Visual sweep 1260: accepted (corvo accept, emily accept). Both characters sprint with a clear forward lean and long stride in several headings, and stop and crouch cleanly. Small in a wide room. Exact native Sprinting state selects forward/diagonal whole-body sprint. Distance drives cadence. Both-role checks and actual D2 recordings exist; general terrain/contact and final visual acceptance remain pending.

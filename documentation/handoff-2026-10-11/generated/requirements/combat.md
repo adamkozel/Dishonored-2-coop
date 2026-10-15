@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1043,7 +1043,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neithe
 - [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants
 
-Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
+Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-sourced in sweep 1260 (1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
 
 ````json
 {
@@ -1055,7 +1055,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-s
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_npc_death_and_corpse_both_peers_mission_map",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "death variants",
@@ -1067,16 +1067,18 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-s
     "empty_stinghit_death"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
+  "notes": "Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-sourced in sweep 1260 (1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
-    "mission-combat-v1117/combat-client.mp4"
+    "mission-combat-v1117/combat-client.mp4",
+    "takedown-variants-v1254b/slide-host-lethal-observer.mp4"
   ],
   "evidence": [
     "../movement-integration/mission-corpse-audit-v1118.json",
     "../movement-integration/takedown-variants-audit-v1257.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
@@ -1084,10 +1086,12 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-s
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/slide-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-host-lethal-observer.mp4>)
 ## ragdoll_handoff
 
-Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.
+Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.
 
 ````json
 {
@@ -1099,13 +1103,13 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse h
   ],
   "authoring": "missing",
   "runtime_binding": "partial_native_steam_npc_corpse_authority_mission_map",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "ragdoll handoff",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
+  "notes": "Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1118,17 +1122,20 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse h
     "carry-snapshot-cancel-corvo-v22/native.mp4",
     "carry-snapshot-cancel-emily-v22b/native.mp4",
     "carry-snapshot-stream-emily-v22/native.mp4",
-    "mission-combat-v1117/combat-client.mp4"
+    "mission-combat-v1117/combat-client.mp4",
+    "takedown-variants-v1254b/drop-host-lethal-observer.mp4"
   ],
   "evidence": [
     "../movement-integration/mission-corpse-audit-v1118.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)
@@ -1139,4 +1146,5 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse h
 - [in_game_recordings: carry-snapshot-cancel-emily-v22b/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-emily-v22b/native.mp4>)
 - [in_game_recordings: carry-snapshot-stream-emily-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-stream-emily-v22/native.mp4>)
 - [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/drop-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-host-lethal-observer.mp4>)
 

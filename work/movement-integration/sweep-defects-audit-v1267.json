@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-15T11:05:49.844152+02:00",
+  "candidate": "candidate-npc-combat-v1214l",
+  "takes": [
+    {
+      "take": "../natural-moveset/grenade-network-host-v1265a",
+      "passed": false,
+      "failure": "Native cooking_in missing"
+    },
+    {
+      "take": "../natural-moveset/grenade-network-client-v1265a",
+      "passed": false,
+      "failure": "Native cooking_in missing"
+    },
+    {
+      "take": "../natural-moveset/grenade-network-host-v1266a",
+      "passed": false,
+      "failure": "Native cooking_in missing"
+    },
+    {
+      "take": "../natural-moveset/grenade-network-client-v1266a",
+      "passed": false,
+      "failure": "Native cooking_in missing"
+    },
+    {
+      "take": "../natural-moveset/crouched-heavy-corvo-v1265a",
+      "passed": false,
+      "failure": "Expected archived635 candidate"
+    },
+    {
+      "take": "../natural-moveset/crouched-heavy-corvo-v1265b",
+      "passed": false,
+      "failure": "Remote crouched charge phase2 absent; restore: Complete checkpoint inventory differs"
+    },
+    {
+      "take": "../natural-moveset/gestures-v1261c",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "../natural-moveset/coverage-v1267a",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "findings": [
+    "Confirmed static (bank 1212): the grenade release/recovery clips 256/257 (crouched 269/270) carry ~0.75 m (crouched ~0.45 m) of authored horizontal pelvis travel; with the network root still, the partner jumped sideways at release (1265a on 1214j: still present). Bank 1266 scales that travel to 25%, other payloads byte-identical; 1266a shows a short step into the throw. Candidate 1214l deploys bank 1266; product regression 1261c passes in both roles.",
+    "Carry (re-review): the newest v38 recordings show a floor-to-shoulder lift, carry and throw for both characters; the sweep had judged the old v13 take because its input sorted videos oldest-first.",
+    "Coverage 1267a (1214l, product controller): runs in 8 directions and sprint-to-slide with crouched exit in both roles; presentation stayed live (no weight drops) and the slide was presented; visuals accepted.",
+    "Corvo-sourced NPC death and corpse are visible in the client window of the 1254b lethal takedowns; with the sweep-accepted Emily-sourced take (1117) both roles are covered.",
+    "Crouched heavy (open): 1265a stopped on the old candidate pin; 1265b ran on 1214l but the source never held the charge, so the sweep's ~0.2 s standing snap (v636) is neither reproduced nor cleared; its restore hit an inventory mismatch and the lab was re-restored (checkpoint and note inventory; both inventories and health back to baseline).",
+    "Still without a judgeable view: long fall loop, doors (partner hidden), key use as Corvo, map-load recovery as Corvo, kick (legs only)."
+  ],
+  "complete": false
+}
