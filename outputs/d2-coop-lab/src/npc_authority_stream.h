@@ -114,7 +114,9 @@ std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPaired
 NpcAuthorityHeader npcHeader(const NpcAuthorityChannel& c,NpcAuthorityMessage kind){
     NpcAuthorityHeader h{};h.role=localRole;h.kind=kind;h.sequence=c.sequence+1;h.sourceSession=npcStreamSession;h.targetSession=npcStreamPeerSession;
     h.sourceEpoch=npcStreamEpoch;h.targetEpoch=npcStreamPeerEpoch;h.map=npcStreamMap;h.sourceArm=c.arm;h.sourceHandle=c.lease.binding.npc.handle;
-    h.rig=c.rig;h.joints=c.render.joints;h.size=static_cast<unsigned short>(kind==NpcAuthorityMessage::Pose?npcPoseBytes(h.joints):sizeof(CoopNpcControl));
+    // 1213z: PairedPose is a pose-sized message too (1213x sized it as a control
+    // message, so every client victim pose failed validation before sending).
+    h.rig=c.rig;h.joints=c.render.joints;h.size=static_cast<unsigned short>(npcPoseKind(kind)?npcPoseBytes(h.joints):sizeof(CoopNpcControl));
     if(kind!=NpcAuthorityMessage::Hello){h.targetArm=c.peerArm;h.targetHandle=c.peerHandle;}return h;
 }
 bool sendNpcControl(NpcAuthorityChannel& c,NpcAuthorityMessage kind,std::uint32_t reserved=0){
