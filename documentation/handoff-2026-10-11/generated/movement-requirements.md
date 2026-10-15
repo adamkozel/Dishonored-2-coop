@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T19:38:27.007355+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T20:11:57.785352+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 95 runtime-bound (fully or partially), 80 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 95 runtime-bound (fully or partially), 83 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -402,9 +402,9 @@ Captured 2026-10-15T19:38:27.007355+02:00; source [review-catalog.json](<../../.
 | crouch_jump_transition | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | double_jump | traversal | candidates | partial_native_double_jump_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | rising_airborne | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| fall_loop | traversal | candidates | isolated_Dunwall_both_roles | not_accepted | work_remaining |
+| fall_loop | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles_long_fall | work_remaining |
 | soft_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| hard_landing | traversal | candidates | native_light_landing_standing_and_crouched_verified_dunwall | reviewed_bounded_cases_full_acceptance_pending | work_remaining |
+| hard_landing | traversal | candidates | native_light_landing_standing_and_crouched_verified_dunwall | accepted_functional_both_roles_long_fall_landing | work_remaining |
 | moving_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | vault_low_obstacle | traversal | candidates | partial_isolated_Dunwall_native_vault | accepted_sweep_1260_functional_both_roles | work_remaining |
 | climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | accepted_sweep_1260_functional_both_roles | work_remaining |
@@ -468,10 +468,10 @@ Captured 2026-10-15T19:38:27.007355+02:00; source [review-catalog.json](<../../.
 | emily_shadow_walk_enter_move_attack_exit | powers | candidates | partial_native_standing_sneaking_entry_crawl_exit_through_Steam | accepted_sweep_1260_functional_owner | work_remaining |
 | power_upgrade_variants | powers | candidates | not_verified | not_accepted | work_remaining |
 | power_interruptions_and_no_mana | powers | candidates | partial_native_Corvo_Bend_Time_failure_and_same_world_pause | accepted_sweep_1260_functional_owner | work_remaining |
-| door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | not_accepted | work_remaining |
+| door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | accepted_functional_both_roles_crouched_rise | work_remaining |
 | lever_button_crank_wheel | interactions | candidates | native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | pickup_loot_steal | interactions | candidates | native_pickup_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | work_remaining |
-| key_use | interactions | candidates | native_use_state75_real_lock_both_roles | not_accepted | work_remaining |
+| key_use | interactions | candidates | native_use_state75_real_lock_both_roles | accepted_functional_both_roles | work_remaining |
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | not_accepted | work_remaining |
 | eat_drink | interactions | candidates | native_food_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | work_remaining |
 | carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | work_remaining |

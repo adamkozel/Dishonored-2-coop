@@ -139,6 +139,9 @@ unsigned shadowFocusedUseVariant(std::uintptr_t base){
 // mana potion quantity drop, last valid count kept across the item wheel) presents the same reach
 // to the mouth. Presentation only: no item, inventory or health outcome is synthesized.
 struct ShadowGesture {bool wasLoot=false,wasHold=false;std::uint64_t holds=0;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;} shadowGesture;
+// 1214al (#11): use-path diagnostics. Takes 1228m-1228q: the client's lock and door uses register at the
+// source but the host never presents them, while client taps and host locks/doors do.
+std::uint64_t shadowUseSent=0,shadowUseReceived=0,shadowUseAccepted=0,shadowUseRejected=0;unsigned shadowUseRejectReason=0,shadowUseLastVariant=0,shadowUseLastEvent=0;
 void startShadowUse(unsigned variant){
     shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);
     shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);
@@ -419,7 +422,7 @@ void sendShadowStream(ULONGLONG tick){
         p.rangedShot=nativeRangedShot.observe(shadowStream.token,shadowStream.peerToken,p.event,localRole,
             action==13&&p.rangedKind==1&&p.rangedVariant==3&&p.rangedTimeMs<=666,outgoing.position,muzzleRecords);
     if(validShadowAction(p,remote,outgoing)&&coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK){
-        ++shadowStreamSent;shadowStreamLastPacket=p;
+        ++shadowStreamSent;shadowStreamLastPacket=p;if(p.useVariant)++shadowUseSent;
         shadowStream.powerSentHistory.observe(p.event,p.powerVariant,p.powerDurationMs,scene);
     }else ++shadowWireRefused;
 }
@@ -438,7 +441,8 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
     }
     const unsigned reject=!nativeMutationAllowed?1:!shadowStreamCurrent(tick)?2:!validShadowAction(p,outgoing,remote)?3:p.sequence<=shadowStream.lastSequence?4:
         (shadowStream.peerToken&&p.sourceToken!=shadowStream.peerToken)?5:(p.targetToken&&p.targetToken!=shadowStream.token)?6:0;
-    if(reject){shadowStreamRejectReason=reject;if(p.kind==1&&reject!=2)shadowStreamStateRejectReason=reject;++shadowStreamRejected;return;}
+    if(p.useVariant){++shadowUseReceived;shadowUseLastVariant=p.useVariant;shadowUseLastEvent=p.useEvent;}
+    if(reject){shadowStreamRejectReason=reject;if(p.kind==1&&reject!=2)shadowStreamStateRejectReason=reject;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=reject;}return;}
     if(p.kind==0){
         shadowStream.peerToken=p.sourceToken;shadowStream.lastSequence=p.sequence;shadowStream.lastPeer=tick;
         if(p.targetToken==shadowStream.token){shadowStream.peerReady=true;shadowStreamResult="ready";}return;
@@ -446,11 +450,12 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
     if(!shadowStream.peerReady||!shadowActionTokensMatch(p,shadowStream.token,shadowStream.peerToken)||
        !shadowActionEventFresh(p,shadowStream.lastSequence,shadowStream.lastEvent,shadowStream.remoteState)){
         shadowStreamStateRejectReason=shadowStreamRejectReason=!shadowStream.peerReady?7:!shadowActionTokensMatch(p,shadowStream.token,shadowStream.peerToken)?20:21;
+        if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=shadowStreamRejectReason;}
         shadowStreamRejectedEvent=p.event;shadowStreamExpectedEvent=shadowStream.lastEvent;shadowStreamRejectedSequence=p.sequence;shadowStreamExpectedSequence=shadowStream.lastSequence;shadowStreamRejectedState=p.state;shadowStreamExpectedState=shadowStream.remoteState;
         ++shadowStreamRejected;return;
     }
     if(p.event==shadowStream.lastEvent&&(p.chokeVariant!=shadowStream.remoteChoke||p.chokeDurationMs!=shadowStream.remoteChokeDuration||p.chokeSpawner!=shadowStream.remoteChokeSpawner||p.chokeDefinition!=shadowStream.remoteChokeDefinition||p.trapHeld!=shadowStream.remoteTrapHeld||p.trapVariant!=shadowStream.remoteTrap||p.trapStock!=shadowStream.remoteTrapStock||p.trapDurationMs!=shadowStream.remoteTrapDuration||p.heartHeld!=shadowStream.remoteHeartHeld||p.heartVariant!=shadowStream.remoteHeart||p.heartDurationMs!=shadowStream.remoteHeartDuration||p.stunVariant!=shadowStream.remoteStun||p.stunDurationMs!=shadowStream.remoteStunDuration||p.combatVariant!=shadowStream.remoteVariant||p.combatPhase!=shadowStream.remotePhase||p.combatDurationMs!=shadowStream.remoteDuration||p.swordState!=shadowStream.remoteSword||p.equipmentVariant!=shadowStream.remoteEquipment||p.equipmentDurationMs!=shadowStream.remoteEquipmentDuration||p.powerVariant!=shadowStream.remotePower||p.powerDurationMs!=shadowStream.remotePowerDuration||p.rangedKind!=shadowStream.remoteRangedKind||p.rangedVariant!=shadowStream.remoteRanged||p.rangedDurationMs!=shadowStream.remoteRangedDuration||p.carryVariant!=shadowStream.remoteCarry||p.carryDurationMs!=shadowStream.remoteCarryDuration||p.carryIncarnation!=shadowStream.remoteCarryIncarnation||p.carrySpawner!=shadowStream.remoteCarrySpawner||p.carryDefinition!=shadowStream.remoteCarryDefinition||p.grenadeHeld!=shadowStream.remoteGrenadeHeld||p.grenadeVariant!=shadowStream.remoteGrenade||p.grenadeDurationMs!=shadowStream.remoteGrenadeDuration)){
-        shadowStreamStateRejectReason=8;++shadowStreamRejected;return;
+        shadowStreamStateRejectReason=8;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=8;}return;
     }
     NativeWorldNpc chokeTarget{};
     if(p.chokeVariant&&(!worldObservationReady(tick)||!worldCatalogTick||tick-worldCatalogTick>750||
@@ -479,7 +484,8 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
        !stunTimeline.push({mapped,p.event,p.stunVariant,p.stunTimeMs,p.stunDurationMs})?22:
        !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})?24:
        !movementTimeline.push({mapped,p.event,p.state,p.leanSide,p.leanUp,p.airStartZ,p.airTargetZ,p.airStage,p.airRemaining})?19:0;
-    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-mapped;++shadowStreamRejected;return;}
+    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-mapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
+    if(p.useVariant)++shadowUseAccepted;
     shadowStream.combat=std::move(combatTimeline);shadowStream.equipment=std::move(equipmentTimeline);shadowStream.traversal=std::move(traversalTimeline);shadowStream.power=std::move(powerTimeline);shadowStream.ranged=std::move(rangedTimeline);shadowStream.carry=std::move(carryTimeline);shadowStream.grenade=std::move(grenadeTimeline);shadowStream.heart=std::move(heartTimeline);shadowStream.trap=std::move(trapTimeline);shadowStream.choke=std::move(chokeTimeline);shadowStream.stun=std::move(stunTimeline);shadowStream.use=std::move(useTimeline);shadowStream.remoteCarryLocalHandle=carryTarget.handle;shadowStream.movement=std::move(movementTimeline);
     shadowStream.lastSequence=p.sequence;
     const bool changed=p.event!=shadowStream.lastEvent;
@@ -563,6 +569,8 @@ void writeShadowStream(ULONGLONG tick){
         }fprintf(f,"],");
     }
     fprintf(f,"\"wireRefused\":%llu,\"stopServiceTick\":%llu,\"stopLastState\":%llu,",shadowWireRefused,shadowStopServiceTick,shadowStopLastState);
+    fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
+        static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");
     fprintf(f,"\"unboundSamples\":%llu,\"unboundRefused\":%llu,\"holdSamples\":%llu,\"unboundProbeActive\":%s,",shadowUnboundSamples,shadowUnboundRefused,shadowHoldSamples,tick<shadowUnboundProbeUntil?"true":"false");

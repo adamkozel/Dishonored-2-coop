@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "fall",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Source fell 5.28 m"
+      ],
+      "lowWeightSamples": 1,
+      "fallMetres": 5.28,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "fall",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Source fell 6.1 m"
+      ],
+      "lowWeightSamples": 2,
+      "fallMetres": 6.1,
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}

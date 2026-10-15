@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T19:38:27.007355+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:11:57.785352+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -225,7 +225,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The ascent pose (lifto
 - [in_game_recordings: integrated-unarmed-air-emily-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-emily-v3.mp4>)
 ## fall_loop
 
-Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.
+Audit 1283: a 5-6 m fall in both roles shows the falling pose with arms out (coverage-v1283a), accepted functionally. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.
 
 ````json
 {
@@ -237,13 +237,14 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The sh
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_long_fall",
   "native_reference_family_count": 155,
   "priority": 2,
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
+  "notes": "Audit 1283: a 5-6 m fall in both roles shows the falling pose with arms out (coverage-v1283a), accepted functionally. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
   "evidence": [
     "priority-2/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "../movement-integration/coverage-audit-v1283.json"
   ],
   "title": "fall loop",
   "motions": [
@@ -264,6 +265,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The sh
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -320,7 +322,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Landings compress and 
 - [in_game_recordings: native-feet-air-emily-v5.mp4](<../../../../work/natural-moveset/native-feet-air-emily-v5.mp4>)
 ## hard_landing
 
-Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.
+Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in both roles (coverage-v1283a), accepted functionally. Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.
 
 ````json
 {
@@ -332,7 +334,7 @@ Native CatFall light body scene drives complete-body landing on both characters 
   ],
   "authoring": "candidates",
   "runtime_binding": "native_light_landing_standing_and_crouched_verified_dunwall",
-  "visual_validation": "reviewed_bounded_cases_full_acceptance_pending",
+  "visual_validation": "accepted_functional_both_roles_long_fall_landing",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "hard landing",
@@ -345,7 +347,7 @@ Native CatFall light body scene drives complete-body landing on both characters 
     "empty_native_hard_landing_crouched"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
+  "notes": "Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in both roles (coverage-v1283a), accepted functionally. Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -358,7 +360,8 @@ Native CatFall light body scene drives complete-body landing on both characters 
     "hard-landing-corvo-stand-v23-v5/result.json",
     "hard-landing-corvo-crouch-v23-v1/result.json",
     "hard-landing-emily-stand-v23-v5/result.json",
-    "hard-landing-emily-crouch-v23-v1/result.json"
+    "hard-landing-emily-crouch-v23-v1/result.json",
+    "../movement-integration/coverage-audit-v1283.json"
   ]
 }
 ````
@@ -367,6 +370,7 @@ Native CatFall light body scene drives complete-body landing on both characters 
 - [evidence: hard-landing-corvo-crouch-v23-v1/result.json](<../../../../work/natural-moveset/hard-landing-corvo-crouch-v23-v1/result.json>)
 - [evidence: hard-landing-emily-stand-v23-v5/result.json](<../../../../work/natural-moveset/hard-landing-emily-stand-v23-v5/result.json>)
 - [evidence: hard-landing-emily-crouch-v23-v1/result.json](<../../../../work/natural-moveset/hard-landing-emily-crouch-v23-v1/result.json>)
+- [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
 - [in_game_recordings: hard-landing-corvo-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-corvo-stand-v23-v5.mp4>)
 - [in_game_recordings: hard-landing-corvo-crouch-v23-v1.mp4](<../../../../work/natural-moveset/hard-landing-corvo-crouch-v23-v1.mp4>)
 - [in_game_recordings: hard-landing-emily-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-emily-stand-v23-v5.mp4>)
