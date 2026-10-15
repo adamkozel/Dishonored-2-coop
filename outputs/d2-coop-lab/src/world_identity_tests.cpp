@@ -1796,6 +1796,11 @@ void playerStanceTests() {
             bad=confined;bad.str(names,"midnight/gameplay/player/base/mobility/mantle_low_sneak.midnightscene");require(!inspect(bad),"automatic mantle requires confined rather than manual sneak scene");
             bad=confined;bad.d(state+0xb8,6);require(!inspect(bad),"manual crouch cannot borrow automatic mantle scene");
             bad=confined;bad.d(arm+0xac,2);require(!inspect(bad),"automatic mantle still refuses foreign support arm");
+            {// 1213l (#7, 1237c): the EotW window's confined low mantle binds the LEFT arm.
+             auto leftLow=confined;std::string body;{const auto at=armNames+0x100;char text[64]{};for(unsigned k=0;k<63;++k){char c=0;leftLow.read(at+k,&c,1);if(!c)break;text[k]=c;}body=text;}
+             const bool emily=body.find("emily")!=std::string::npos;
+             leftLow.str(armNames,"left_arm_1");leftLow.str(armNames+0x200,emily?"models/characters/player/emily/left_arm.def":"models/characters/player/corvo/left_arm.def");
+             require(inspect(leftLow)&&result.variant==2&&result.endStance==1,"1213l a confined low mantle accepts a single LEFT support arm (EotW window)");}
             bad=confined;unsigned reads=0;
             require(!readNativePlayerTraversalScene([&](auto p,auto d,auto n){const bool ok=bad.read(p,d,n);if(p==state+0xb8&&++reads==1)bad.d(p,6);return ok;},base,ns,result),"automatic mantle rejects next-state changes while reading");
         }

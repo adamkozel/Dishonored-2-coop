@@ -1,0 +1,150 @@
+{
+  "at": "2026-10-15T04:47:47.195876+02:00",
+  "takes": [
+    {
+      "take": "../natural-moveset/climbable-windows-v1231",
+      "candidate": null,
+      "passed": false,
+      "failure": "A player died during the probe (logic 13); remaining windows not tested",
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/climbable-windows-v1231b",
+      "candidate": null,
+      "passed": false,
+      "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored",
+      "restoration": false
+    },
+    {
+      "take": "../natural-moveset/window-traversal-v1235",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": false,
+      "failure": "Probe @{scope=Edge of the World openable windows: floors on both sides, native open, forward+jump crossing (host only); Dunwall fixture restored.; windows=System.Object[]; passed=False; failure=host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored} has no crossing for script_rich_small_01_sndctrl",
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-traversal-v1235b",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": false,
+      "failure": "host: Partner presentation not live before the host crossing; client: Partner presentation not live before the client crossing",
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-traversal-v1235c",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": false,
+      "failure": "host: Partner did not present the traversal (host -> client); client: Partner did not present the traversal (client -> host)",
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-mantle-states-v1237",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": true,
+      "failure": null,
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-mantle-states-v1237b",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": true,
+      "failure": null,
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-mantle-states-v1237c",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": true,
+      "failure": null,
+      "restoration": true
+    },
+    {
+      "take": "../natural-moveset/window-traversal-v1235d",
+      "candidate": "candidate-npc-combat-v1213l",
+      "passed": true,
+      "failure": null,
+      "restoration": true
+    }
+  ],
+  "final": [
+    {
+      "source": "host",
+      "observer": "client",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": true,
+      "failure": null,
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        19.3063,
+        90.1536,
+        16.5091
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 3.101,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateFalling@@",
+        ".?AVarkPlayerStateSneaking@@"
+      ],
+      "mantle": true,
+      "observerSamples": 85,
+      "traversalSamples": 4,
+      "traversalVariants": [
+        0,
+        2
+      ],
+      "maxTraversalWeight": 0.999982,
+      "minWeight": 0.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": true,
+      "failure": null,
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        18.9415,
+        90.0888,
+        16.5069
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 2.739,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateFalling@@",
+        ".?AVarkPlayerStateSneaking@@"
+      ],
+      "mantle": true,
+      "observerSamples": 103,
+      "traversalSamples": 9,
+      "traversalVariants": [
+        0,
+        2
+      ],
+      "maxTraversalWeight": 1.0,
+      "minWeight": 0.187014
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1231b): of 41 openable Edge of the World windows, script_rich_small_01_sndctrl, _10 and _18 are climbable with the native Mantle state (forward + jump crosses ~2 m); _16 crossed by slipping.",
+    "Confirmed runtime (1237c): the window mantle is the native confined low-crouch mantle (kind 1, next 10, mantle_low_crouch.midnightscene, 500 ms, Scene_2) binding the player and the LEFT arm; the source reader accepted only a right arm for low climbs, so the partner showed a jump (1235c).",
+    "Confirmed runtime (1235d, 1213l, passed): both roles mantle through the window and the partner presents the traversal (variant 2) at weight ~1.0; restoration passed.",
+    "Visual: not accepted - the side-on observer spot had no line of sight to the window (#33)."
+  ],
+  "complete": true,
+  "scope": "window_enter_exit runtime binding through a climbable window, both roles; visual acceptance tracked in #33."
+}

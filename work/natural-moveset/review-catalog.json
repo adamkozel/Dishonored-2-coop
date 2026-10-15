@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T04:25:29.337729+02:00",
+  "generated": "2026-10-15T04:47:50.003680+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -1296,7 +1296,7 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
+      "runtime_binding": "native_confined_low_mantle_through_climbable_eotw_window_both_roles",
       "visual_validation": "not_accepted",
       "native_reference_family_count": 155,
       "priority": 2,
@@ -1309,12 +1309,13 @@
         "sword_vaultthrough_walkleft_in"
       ],
       "deliverable_kind": "animation",
-      "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window.",
+      "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33).",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
-        "../movement-integration/window-traversal-audit-v1207.json"
+        "../movement-integration/window-traversal-audit-v1207.json",
+        "../movement-integration/window-traversal-audit-v1238.json"
       ]
     },
     {
@@ -93396,6 +93397,44 @@
       "review": "Client view of remote Corvo (host source, 1213k): not separately reviewed; the 1234 host video is the accepted Corvo reach.",
       "candidate": "candidate-npc-combat-v1213k",
       "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "window-traversal-v1235d/cross-host-observed.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Traversal / window mantle through script_rich_small_01_sndctrl (source host) / window-traversal-v1235d",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 16.39,
+      "container_fps": "4410/269",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window while the source mantles through a climbable Edge of the World window (native confined low-crouch mantle).",
+      "review": "Observer camera stood outside in a stair alley with no line of sight to the window: only steps and wall in frame. Runtime-bound (partner traversal variant 2 at weight ~1.0); not reviewable (#33).",
+      "candidate": "candidate-npc-combat-v1213l",
+      "dll": "54A55ED4D07EC7F392915E048C5B049761C3FB4B40DF78FE8F1318373196B83F",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "window-traversal-v1235d/cross-client-observed.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Traversal / window mantle through script_rich_small_01_sndctrl (source client) / window-traversal-v1235d",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 21.22,
+      "container_fps": "191/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window while the source mantles through a climbable Edge of the World window (native confined low-crouch mantle).",
+      "review": "Observer camera stood outside in a stair alley with no line of sight to the window: only steps and wall in frame. Runtime-bound (partner traversal variant 2 at weight ~1.0); not reviewable (#33).",
+      "candidate": "candidate-npc-combat-v1213l",
+      "dll": "54A55ED4D07EC7F392915E048C5B049761C3FB4B40DF78FE8F1318373196B83F",
       "runtime_test_passed": true,
       "visual_accepted": false,
       "requirements": [],

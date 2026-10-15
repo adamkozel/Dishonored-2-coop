@@ -121,7 +121,15 @@ Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and
   - The tower window is a chest-height opening over a sheer drop: jumping toward it only bumps the frame, and no mantle triggers.
   - The docks one is a venetian-blind toggle.
 - A Ghidra string census found no window-specific player traversal state. Window entry and exit is the generic native mantle (state 8, confined/low variants), already partially bound.
-- Remaining: record that mantle binding through a genuinely climbable window.
+- **A genuinely climbable window, both roles (#7, candidate 1213l, [audit 1238](../../work/movement-integration/window-traversal-audit-v1238.json); confirmed runtime):**
+  - **Probe 1231b:** a fall-guarded probe of the 41 openable Edge of the World windows. `script_rich_small_01_sndctrl`, `_10` and `_18` are climbable with the native Mantle state: forward plus jump crosses about 2 m. `_16` crossed by slipping. The first probe (1231) lost the host to a fall and pushed backwards.
+  - **1235c:** both roles mantled through `script_rich_small_01_sndctrl`, but the partner showed only a jump.
+  - **Diagnosis (1237c, research probe):** the scene is the known confined low-crouch mantle (kind 1, next 10, `mantle_low_crouch.midnightscene`, 500 ms, Scene_2). It binds the player and the **left** arm, while the source reader accepted only a right arm for low climbs.
+  - **1213l:** the confined low mantle may bind a single left arm. In take 1235d (passed) the partner presents the traversal (variant 2) at weight about 1.0 in both roles.
+  - **Visual:** not accepted. The side-on observer spot had no line of sight to the window (#33).
+  - Harness lessons:
+    - `$probe` vs the `[string]$Probe` parameter (coercion, 1235);
+    - teleport only after the partner is live (1235b).
 
 ## Counterattack and knockdown (audit 1211)
 
