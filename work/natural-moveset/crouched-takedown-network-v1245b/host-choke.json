@@ -1,0 +1,26 @@
+{
+  "source": "host",
+  "observer": "client",
+  "kind": "choke",
+  "passed": false,
+  "failure": "Remote phase 2 not presented",
+  "checks": [
+    "Observer presents the crouched partner before the takedown",
+    "Native scene(s) on the source: midnight/gameplay/player/base/choke/choke_back.midnightscene|600, midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400, midnight/gameplay/player/base/choke/choke_win.midnightscene|1800",
+    "Source phase 1 read and presented on the observer at weight > 0.8"
+  ],
+  "bankVersion": 71,
+  "before": {
+    "follow": true,
+    "stanceMix": 1.0,
+    "waitMs": 208,
+    "weight": 1.0
+  },
+  "inputMs": 842,
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "restored": true
+}
