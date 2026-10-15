@@ -865,9 +865,9 @@ void exchangePoses(ULONGLONG tick) {
         if(magic==0x414e3244){
             NpcAuthorityHeader h{};const auto bytes=static_cast<unsigned>(messages[i]->m_cbSize);
             if(bytes>=sizeof(h))std::memcpy(&h,messages[i]->m_pData,sizeof(h));
-            if(h.kind==NpcAuthorityMessage::Pose&&bytes==npcPoseBytes(h.joints)&&bytes<=sizeof(NpcPoseWire)){
+            if(npcPoseKind(h.kind)&&bytes==npcPoseBytes(h.joints)&&bytes<=sizeof(NpcPoseWire)){
                 CoopNpcPose p{};if(decodeNpcPose(messages[i]->m_pData,bytes,p))receiveNpcPose(p,tick);else ++npcDecodeRejected;
-            }else if(h.kind!=NpcAuthorityMessage::Pose&&bytes==sizeof(CoopNpcControl)){
+            }else if(!npcPoseKind(h.kind)&&bytes==sizeof(CoopNpcControl)){
                 CoopNpcControl p{};std::memcpy(&p,messages[i]->m_pData,bytes);receiveNpcControl(p,tick);
             }else ++npcPacketsRejected;
             messages[i]->Release();continue;

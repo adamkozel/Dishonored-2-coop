@@ -12,7 +12,10 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // and knocks it out natively when the client's choke_win begins.
 // 1213v: Unconscious (host -> client): the host NPC is natively unconscious; the
 // client knocks its replica out silently so both worlds agree.
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious};
+// 1213x: PairedPose (client -> host) carries the client's native VICTIM pose while
+// its paired takedown runs, so the host's held NPC plays the same victim motion.
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose};
+inline bool npcPoseKind(NpcAuthorityMessage k){return k==NpcAuthorityMessage::Pose||k==NpcAuthorityMessage::PairedPose;}
 inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5;}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
@@ -64,15 +67,16 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&h.reserved<=3;
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;
     }return false;
 }
 inline bool validNpcControl(const CoopNpcControl& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    return p.h.kind!=NpcAuthorityMessage::Pose&&validNpcHeader(p.h,local,peer)&&coopWorldName(p.spawner)&&coopWorldName(p.definition);
+    return !npcPoseKind(p.h.kind)&&validNpcHeader(p.h,local,peer)&&coopWorldName(p.spawner)&&coopWorldName(p.definition);
 }
 inline BodyMatrix npcWireMatrix(const float* p){BodyMatrix m{};for(unsigned c=0;c<4;++c)for(unsigned r=0;r<3;++r)m.v[c*4+r]=p[c*3+r];return m;}
 using NpcPoseWire=std::array<unsigned char,176+kNpcAuthorityMaxJoints*sizeof(NpcCompactJoint)>;
 inline bool encodeNpcPose(const CoopNpcPose& p,NpcPoseWire& bytes){
-    if(p.h.version!=2||p.h.kind!=NpcAuthorityMessage::Pose||!npcPoseBytes(p.h.joints)||p.h.size!=npcPoseBytes(p.h.joints))return false;
+    if(p.h.version!=2||!npcPoseKind(p.h.kind)||!npcPoseBytes(p.h.joints)||p.h.size!=npcPoseBytes(p.h.joints))return false;
     std::memcpy(bytes.data(),&p,176);
     for(unsigned j=0;j<p.h.joints;++j){
         if(!bodyRigid(npcWireMatrix(p.local[j]),3.f))return false;
@@ -86,7 +90,7 @@ inline bool encodeNpcPose(const CoopNpcPose& p,NpcPoseWire& bytes){
 inline bool decodeNpcPose(const void* bytes,std::size_t size,CoopNpcPose& out){
     if(!bytes||size<176||size>sizeof(NpcPoseWire))return false;
     CoopNpcPose p{};std::memcpy(&p,bytes,176);
-    if(p.h.magic!=0x414e3244||p.h.version!=2||p.h.kind!=NpcAuthorityMessage::Pose||size!=npcPoseBytes(p.h.joints)||p.h.size!=size)return false;
+    if(p.h.magic!=0x414e3244||p.h.version!=2||!npcPoseKind(p.h.kind)||size!=npcPoseBytes(p.h.joints)||p.h.size!=size)return false;
     for(unsigned j=0;j<p.h.joints;++j){NpcCompactJoint joint{};std::memcpy(&joint,static_cast<const unsigned char*>(bytes)+176+j*sizeof(joint),sizeof(joint));
         float q[4]{},norm=0;for(unsigned i=0;i<4;++i){if(joint.quaternion[i]==-32768)return false;q[i]=joint.quaternion[i]/32767.f;norm+=q[i]*q[i];}
         if(norm<.999f||norm>1.001f)return false;norm=1.f/std::sqrt(norm);for(float& v:q)v*=norm;
@@ -95,7 +99,7 @@ inline bool decodeNpcPose(const void* bytes,std::size_t size,CoopNpcPose& out){
     }out=p;return true;
 }
 inline bool validNpcPose(const CoopNpcPose& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.h.kind!=NpcAuthorityMessage::Pose||!validNpcHeader(p.h,local,peer)||!p.sampleUs||p.sampleUs>9007199254740991ull||
+    if(!npcPoseKind(p.h.kind)||!validNpcHeader(p.h,local,peer)||!p.sampleUs||p.sampleUs>9007199254740991ull||
        !std::isfinite(p.health)||!std::isfinite(p.maximum)||p.health<0||p.maximum<=0||p.health>p.maximum||p.maximum>1000000)return false; // 1113: corpse poses carry health0
     CoopPosePacket root=peer;std::memcpy(root.position,p.root,12);std::memcpy(root.orientation,p.root+3,36);
     if(!validCoopPose(root,local.role))return false;

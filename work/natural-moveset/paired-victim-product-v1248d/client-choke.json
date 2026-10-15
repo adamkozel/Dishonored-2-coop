@@ -1,0 +1,86 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": false,
+  "failure": "Outcome differs: source unconscious, observer conscious, expected unconscious",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented"
+  ],
+  "guardHandleSource": "0xb480764",
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -47.8791,
+      -146.507,
+      66.4
+    ],
+    "source": [
+      -48.5927,
+      -150.012,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T07:24:19.8207639+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 29254843,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1f4c19a8380",
+      "actor": "0x1f4c73ebfd0",
+      "attributes": "0x1f4c71618d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 29254859,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2063ef98ee0",
+      "actor": "0x20649d0e330",
+      "attributes": "0x20649a688d0",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "conscious"
+  },
+  "restored": true
+}

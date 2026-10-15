@@ -41,6 +41,11 @@ void npcAuthorityProtocolTests(){
         bad=wire;const std::int16_t outOfRange=32767;std::memcpy(bad.data()+176+8,&outOfRange,2);require(!decodeNpcPose(bad.data(),original.h.size,decoded),"out-of-range encoded joint translation refused");
     }
     auto b=pose;b.h.role=1;require(!validNpcPose(b,client,host),"client cannot send host-authoritative body poses");
+    {// 1213x: the client's paired victim pose, validated on the host.
+     auto v=pose;v.h.kind=NpcAuthorityMessage::PairedPose;v.h.role=1;v.h.sourceSession=22;v.h.targetSession=11;v.h.sourceEpoch=5;v.h.targetEpoch=3;
+     require(validNpcPose(v,host,client),"client streams its paired victim pose to the host");
+     v.h.role=0;v.h.sourceSession=11;v.h.targetSession=22;v.h.sourceEpoch=3;v.h.targetEpoch=5;require(!validNpcPose(v,client,host),"the host never sends a paired victim pose");
+     NpcPoseWire wire{};CoopNpcPose decoded{};auto w=pose;w.h.kind=NpcAuthorityMessage::PairedPose;require(encodeNpcPose(w,wire)&&decodeNpcPose(wire.data(),w.h.size,decoded)&&decoded.h.kind==NpcAuthorityMessage::PairedPose,"paired victim pose round-trips the compact wire");}
     b=pose;--b.h.size;require(!validNpcPose(b,client,host),"wire length must match joint count");
     b=pose;b.local[223][0]=-1;require(!validNpcPose(b,client,host),"reflected body joint refused");
     b=pose;b.local[223][10]=NAN;require(!validNpcPose(b,client,host),"nonfinite body joint refused");

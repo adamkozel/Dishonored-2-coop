@@ -77,7 +77,7 @@ struct NpcAuthorityChannel {
     // a choke that knocks the replica out keeps it natively unconscious. Host:
     // the NPC's AI is held for the scene and it is knocked out at choke_win.
     bool localPaired=false,unconscious=false,hostPairedLease=false;unsigned pairedVariant=0;
-    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0,unconsciousSentAt=0;unsigned unconsciousSends=0;const char* pairedResult="none";
+    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0,unconsciousSentAt=0,unconsciousAt=0,reversePoseAt=0,reverseSentAt=0;unsigned unconsciousSends=0;std::uint64_t reversePoses=0;const char* pairedResult="none";
     bool enabled=true,ready=false;
     const char* result="negotiating";
     std::uint64_t sent=0,received=0,rejected=0,poses=0,roots=0;
@@ -335,17 +335,19 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
     if(!npcStreamContext(tick)||!validNpcPose(p,outgoing,remote)){++npcPacketsRejected;++npcPoseScopeRejected;return;}
     auto it=std::find_if(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&c.arm==p.h.targetArm;});
     if(it==npcChannels.end()){++npcPacketsRejected;return;}auto& c=*it;++c.received;
-    if(!c.ready||(!c.lease.ready&&!c.corpse)||p.h.sourceArm!=c.peerArm||p.h.sourceHandle!=c.peerHandle||p.h.targetHandle!=c.lease.binding.npc.handle||
+    const bool reverse=p.h.kind==NpcAuthorityMessage::PairedPose;
+    if(reverse?(localRole||!c.ready||c.corpse||!(c.hostPairedLease||(c.unconscious&&tick-c.unconsciousAt<3500))):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;return;}
+    if(p.h.sourceArm!=c.peerArm||p.h.sourceHandle!=c.peerHandle||p.h.targetHandle!=c.lease.binding.npc.handle||
        p.h.rig!=c.rig||p.h.joints!=c.render.joints||!c.buffer.push(p,presentationClock())){++c.rejected;return;}
-    c.poseAt=tick;c.peerAt=tick;++c.poses;
+    c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;}else{c.poseAt=tick;++c.poses;}
 }
-void sendNpcPose(NpcAuthorityChannel& c){
+void sendNpcPose(NpcAuthorityChannel& c,NpcAuthorityMessage kind=NpcAuthorityMessage::Pose){
     NativeSkeleton s{};
     const auto refuse=[&](const char* reason){++c.rejected;++c.poseFailures;c.poseFailure=reason;};
     if(!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c.lease.binding.npc.handle,s)){refuse("native_skeleton_read");return;}
     if(!s.stable||s.logic!=1||s.game!=c.lease.binding.health.game||s.actor!=c.lease.binding.npc.actor||s.animation!=c.render.animation){refuse("skeleton_identity");return;}
     if(npcAuthorityRig(s)!=c.rig){refuse("rig_identity");return;}
-    CoopNpcPose p{};p.h=npcHeader(c,NpcAuthorityMessage::Pose);p.sampleUs=static_cast<std::uint64_t>(presentationClock()*1000.);
+    CoopNpcPose p{};p.h=npcHeader(c,kind);p.h.kind=kind;p.sampleUs=static_cast<std::uint64_t>(presentationClock()*1000.);
     std::memcpy(p.root,s.root,sizeof(p.root));p.health=c.lease.binding.health.current;p.maximum=c.lease.binding.health.maximum;
     for(unsigned j=0;j<p.h.joints;++j)for(unsigned col=0;col<4;++col)for(unsigned row=0;row<3;++row)p.local[j][col*3+row]=s.localPose[j][col*4+row];
     if(!validNpcPose(p,remote,outgoing)){
@@ -411,6 +413,7 @@ void serviceNpcStream(ULONGLONG tick){
             if(pairedVariant==3&&!c.pairedKnockoutAt){c.pairedKnockoutAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedKnockout,3);c.pairedResult="client_knockout_sent";}
         }else if(localRole&&c.localPaired&&!c.unconscious&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult="client_paired_ended";}
         if(!localRole)serviceHostNpcPaired(c,tick);
+        if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}
         if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}
         if(tick-c.lastCheck>=100){c.lastCheck=tick;NativeNpcAuthority fresh{};
             const bool freshRead=readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh);
@@ -428,7 +431,7 @@ void serviceNpcStream(ULONGLONG tick){
                 if(localRole)npcCorpseHoldAnimated(c);
             }
             else if(localRole&&(c.unconscious||(c.localPaired&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0))){
-                if(!c.unconscious){c.unconscious=true;c.pairedResult="client_unconscious_native";}c.result="client_unconscious";}
+                if(!c.unconscious){c.unconscious=true;c.unconsciousAt=tick;c.pairedResult="client_unconscious_native";}c.result="client_unconscious";}
             else if(localRole&&c.lease.references){const bool paused=npcAuthorityPaused(fresh);
                 if(!paused&&(c.lease.ready||tick-c.started>1500)){stopNpcChannel(c,"ai_ownership_changed");continue;}
                 c.lease.ready=paused;if(paused){c.ready=true;c.result="client_replica";}}
@@ -451,10 +454,12 @@ void serviceNpcStream(ULONGLONG tick){
     if(std::none_of(npcChannels.begin(),npcChannels.end(),[](const auto& c){return c.enabled;}))npcStreamResult="no_bound_npcs"; // 1166: relevance re-adds
 }
 void presentNpcStream(ULONGLONG tick){
-    if(!localRole||!npcStreamContext(tick)){clearNpcPresentation();return;}
+    if(!npcStreamContext(tick)){clearNpcPresentation();return;}
     std::vector<NpcRenderState> next;
-    for(auto& c:npcChannels){if(!c.enabled||!c.ready||c.localPaired||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350)continue;
-        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.until=c.poseAt+350;p.arm=c.arm;
+    for(auto& c:npcChannels){
+        const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
+        if(!hostVictim&&(!localRole||!c.enabled||!c.ready||c.localPaired||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
+        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
         ++c.roots;next.push_back(std::move(p));

@@ -16,7 +16,9 @@ bool npcPairedPartnerNear(const NpcAuthorityChannel& c,float range){
 }
 void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick){
     if(!c.ready||c.corpse||c.unconscious||!npcPairedVariant(p.h.reserved)){++npcPairedRefused;c.pairedResult="host_paired_refused_state";return;}
-    if(!npcPairedPartnerNear(c,3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
+    // 1213x: distance gates only the start of a hold; the held NPC then follows the
+    // client's victim pose (PairedPose), which the native choke drags with the attacker.
+    if(!c.hostPairedLease&&!npcPairedPartnerNear(c,3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
     c.pairedVariant=p.h.reserved;c.pairedUntil=tick+1500;
     if(p.h.kind==NpcAuthorityMessage::PairedHold){
         if(!c.hostPairedLease){
@@ -33,7 +35,7 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
     const auto avatar=shadowDamageIdentity();
     const unsigned attacker=validCoopDamageAvatar(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),avatar)?avatar.handle:0x3fff0010u;
     if(!applyNativeKnockout(before,attacker,after,kNpcPairedKnockoutDecl)||!nativeNpcUnconscious(after)){++npcPairedRefused;c.pairedResult="host_knockout_refused";return;}
-    c.unconscious=true;++npcPairedKnockouts;c.pairedResult="host_knockout_applied";c.result="host_unconscious";
+    c.unconscious=true;c.unconsciousAt=tick;++npcPairedKnockouts;c.pairedResult="host_knockout_applied";c.result="host_unconscious";
 }
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick){
     if(c.hostPairedLease&&tick>=c.pairedUntil){releaseNpcAiLease(c.lease);c.hostPairedLease=false;c.pairedResult="host_paired_released";}
