@@ -1,4 +1,5 @@
 #pragma once
+#include "presentation_hold.h"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -35,17 +36,17 @@ struct UsePresentation {
             // use needs a newer event. Variant 0 (no use) is always admissible.
             if(s.variant&&s.event<p.event)return false;
             if(s.variant&&p.variant&&s.event==p.event&&(s.variant!=p.variant||s.elapsed<p.elapsed))return false;
-            if(s.time-p.time>250)clear();}
+            if(s.time-p.time>presentationHold().gapMs)clear();}
         if(count==samples.size()){std::move(samples.begin()+1,samples.end(),samples.begin());--count;}
         samples[count++]=s;return true;
     }
     bool sample(double at,Sample& out,float& amount)const{
-        if(!count||!std::isfinite(at)||at<samples[0].time||at-samples[count-1].time>200)return false;
+        if(!count||!std::isfinite(at)||at<samples[0].time||at-samples[count-1].time>presentationHold().sampleMs)return false;
         unsigned k=0;for(unsigned i=1;i<count&&samples[i].time<=at;++i)k=i;out=samples[k];
         if(!out.variant){amount=0;return true;}
         double elapsed=out.elapsed;
         if(k+1<count&&samples[k+1].event==out.event&&samples[k+1].variant==out.variant){const auto& n=samples[k+1];elapsed+=(n.elapsed-out.elapsed)*(at-out.time)/(n.time-out.time);}
-        else elapsed+=(std::min)(100.,(std::max)(0.,at-out.time));
+        else elapsed+=(std::min)(presentationHold().extrapolateMs,(std::max)(0.,at-out.time));
         amount=(std::min)(1.f,float(elapsed/out.duration));return true;
     }
 };

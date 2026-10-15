@@ -2080,7 +2080,7 @@ void executeBuffer(void* system) {
     const DWORD thread=GetCurrentThreadId();
     DWORD unassigned=0;engineThread.compare_exchange_strong(unassigned,thread);
     if(thread==engineThread.load()) {
-        const auto tick=GetTickCount64();
+        const auto tick=GetTickCount64();setPresentationHold(productMode||productAutoArm);
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();
             lastPump=tick;nativeMutationAllowed=true;pumpTransport(tick);nativeMutationAllowed=false;

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T04:55:16.349663+02:00",
+  "generated": "2026-10-15T05:31:28.442916+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -1309,13 +1309,14 @@
         "sword_vaultthrough_walkleft_in"
       ],
       "deliverable_kind": "animation",
-      "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33).",
+      "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33). Audit 1241 (1213m): the same mantle passes again in both roles with the partner held through source gaps (native-pose time 29% -> 1% on the host-source side).",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
         "../movement-integration/window-traversal-audit-v1207.json",
-        "../movement-integration/window-traversal-audit-v1238.json"
+        "../movement-integration/window-traversal-audit-v1238.json",
+        "../movement-integration/presentation-hold-audit-v1241.json"
       ]
     },
     {
@@ -17597,11 +17598,14 @@
         "empty_distraction_sitting_bench_out_walk",
         "empty_distraction_sitting_bench_in"
       ],
-      "deliverable_kind": "animation",
-      "notes": "Candidates require animation review and appropriate game-state/contact binding.",
-      "phase_status": "work_remaining",
+      "deliverable_kind": "not_applicable_no_native_player_state",
+      "notes": "Not applicable (audit 1240, confirmed static): D2 has no player sitting state among its arkPlayerState classes; the only sitting strings are NPC AI providers. Seated story moments are native cinematics, covered by cutscene_enter_exit. The authored NPC bench clips remain in the library unbound.",
+      "phase_status": "not_applicable",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [],
+      "evidence": [
+        "../movement-integration/not-applicable-audit-v1240.json"
+      ]
     },
     {
       "id": "scripted_scene_pose_handoff",
@@ -17611,17 +17615,22 @@
         "emily"
       ],
       "authoring": "missing",
-      "runtime_binding": "not_verified",
+      "runtime_binding": "partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles",
       "visual_validation": "not_accepted",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "scripted scene pose handoff",
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
-      "notes": "A context-dependent animation ownership transition. Requires a tested blend from the actual scene pose, rather than one universal clip.",
+      "notes": "A context-dependent animation ownership transition. Audit 1241 (1213m): on the native confined mantle the partner holds the scene pose at full weight, then blends from that actual pose to locomotion over ~250 ms (traversal weight 0.34/0.07/0.02 while locomotion returns 0.49/0.89/0.97), in both roles. Use scenes recover the same way (vise reach videos, audit 1235). Other scene families, an unclassified-state frame at the scene end and visual acceptance (#33) remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [],
+      "evidence": [
+        "../movement-integration/presentation-hold-audit-v1241.json",
+        "../movement-integration/window-traversal-audit-v1238.json",
+        "../movement-integration/use-reach-audit-v1235.json"
+      ]
     },
     {
       "id": "cutscene_enter_exit",
@@ -93486,6 +93495,44 @@
       "requirements": [
         "cutscene_enter_exit"
       ],
+      "kind": "game"
+    },
+    {
+      "video": "window-traversal-v1235e/cross-host-observed.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Traversal / window mantle with the 1213m presentation hold (source host) / window-traversal-v1235e",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 19.67,
+      "container_fps": "59/3",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window while the source mantles through the climbable Edge of the World window under the product controller (1213m hold).",
+      "review": "Same observer spot as 1235d: the camera faces the stair alley and only the partner's legs show at the top edge. Runtime-bound; not reviewable (#33).",
+      "candidate": "candidate-npc-combat-v1213m",
+      "dll": "DE508C73A263CE779C1416374E2C8A16BBA0ADB141B5235441D6184351B7E18B",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "window-traversal-v1235e/cross-client-observed.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Traversal / window mantle with the 1213m presentation hold (source client) / window-traversal-v1235e",
+      "travelling": true,
+      "gameplay_bound": true,
+      "actual_capture_hz": 21.83,
+      "container_fps": "2925/134",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window while the source mantles through the climbable Edge of the World window under the product controller (1213m hold).",
+      "review": "Same observer spot as 1235d: the camera faces the stair alley and only the partner's legs show at the top edge. Runtime-bound; not reviewable (#33).",
+      "candidate": "candidate-npc-combat-v1213m",
+      "dll": "DE508C73A263CE779C1416374E2C8A16BBA0ADB141B5235441D6184351B7E18B",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
       "kind": "game"
     }
   ],

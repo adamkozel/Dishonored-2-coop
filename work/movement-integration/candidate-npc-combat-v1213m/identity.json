@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-15T05:27:26.106449+02:00",
+  "dll": "DE508C73A263CE779C1416374E2C8A16BBA0ADB141B5235441D6184351B7E18B",
+  "probe": "52EA4405746DAE0870A4A02F367E6CB0A267CD24ABDEF232DF9DDE5718AC95C3",
+  "previous": "candidate-npc-combat-v1213l",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213m on 1213l: one product-aware hold for every partner-presentation timeline (presentation_hold.h). Under the product controller the movement semantics and all 12 action timelines hold their last source sample for the 1 s presentation lease, bridge source gaps up to 1 s without clearing, and run a held action on real time; eligibility mask 16 (stale source state) uses presentationFreshMs(). Lab rules (200 ms hold, 250 ms gap clear, 100 ms extrapolation, 250 ms state age) are unchanged. Take 1235d showed 250-375 ms state gaps on Edge of the World snapping the partner to its native pose every ~0.6 s."
+}

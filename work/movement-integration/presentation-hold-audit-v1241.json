@@ -1,0 +1,472 @@
+{
+  "at": "2026-10-15T05:31:25.366780+02:00",
+  "candidate": "candidate-npc-combat-v1213m",
+  "takes": [
+    {
+      "take": "../natural-moveset/window-traversal-v1235d",
+      "candidate": "candidate-npc-combat-v1213l",
+      "passed": true,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "passed": true,
+          "crossed": true,
+          "mantle": true,
+          "maxTraversalWeight": 0.999982
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "passed": true,
+          "crossed": true,
+          "mantle": true,
+          "maxTraversalWeight": 1.0
+        }
+      ],
+      "gaps": {
+        "host": {
+          "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235d/cross-host-observer-movement.ndjson",
+          "seconds": 7.98,
+          "samples": 85,
+          "activeSamples": 85,
+          "nativePoseSamples": 25,
+          "nativePoseFraction": 0.294,
+          "presentedToNativeDrops": 11,
+          "eligibilityFailures": 471,
+          "staleStateRecords": 10,
+          "invalidSemanticRecords": 7,
+          "maxStaleStateAgeMs": 375,
+          "rootStepRejections": 3
+        },
+        "client": {
+          "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235d/cross-client-observer-movement.ndjson",
+          "seconds": 7.97,
+          "samples": 103,
+          "activeSamples": 103,
+          "nativePoseSamples": 0,
+          "nativePoseFraction": 0.0,
+          "presentedToNativeDrops": 0,
+          "eligibilityFailures": 61,
+          "staleStateRecords": 6,
+          "invalidSemanticRecords": 6,
+          "maxStaleStateAgeMs": 9484,
+          "rootStepRejections": 0
+        }
+      },
+      "handoff": {
+        "host": [
+          {
+            "ms": 1588,
+            "traversalWeight": 0.913,
+            "traversalAmount": 0.657,
+            "locomotionWeight": 0.398
+          },
+          {
+            "ms": 1619,
+            "traversalWeight": 0.969,
+            "traversalAmount": 0.697,
+            "locomotionWeight": 0.515
+          },
+          {
+            "ms": 1712,
+            "traversalWeight": 0.999,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.79
+          },
+          {
+            "ms": 1805,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2022,
+            "traversalWeight": 0.48,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2083,
+            "traversalWeight": 0.28,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2114,
+            "traversalWeight": 0.209,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2177,
+            "traversalWeight": 0.126,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2272,
+            "traversalWeight": 0.055,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2334,
+            "traversalWeight": 0.035,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 2522,
+            "traversalWeight": 0.006,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.493
+          },
+          {
+            "ms": 2553,
+            "traversalWeight": 0.005,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.612
+          },
+          {
+            "ms": 2645,
+            "traversalWeight": 0.003,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.797
+          },
+          {
+            "ms": 2739,
+            "traversalWeight": 0.001,
+            "traversalAmount": 0.947,
+            "locomotionWeight": 0.912
+          }
+        ],
+        "client": [
+          {
+            "ms": 1183,
+            "traversalWeight": 0.726,
+            "traversalAmount": 0.146,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1307,
+            "traversalWeight": 0.998,
+            "traversalAmount": 0.406,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1339,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.489,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1495,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.669,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1557,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.76,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1681,
+            "traversalWeight": 1.0,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1746,
+            "traversalWeight": 1.0,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1778,
+            "traversalWeight": 1.0,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1886,
+            "traversalWeight": 0.594,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.187
+          },
+          {
+            "ms": 1947,
+            "traversalWeight": 0.316,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.568
+          },
+          {
+            "ms": 2009,
+            "traversalWeight": 0.202,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.723
+          },
+          {
+            "ms": 2072,
+            "traversalWeight": 0.112,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.847
+          },
+          {
+            "ms": 2165,
+            "traversalWeight": 0.052,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.929
+          },
+          {
+            "ms": 2228,
+            "traversalWeight": 0.032,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.956
+          }
+        ]
+      }
+    },
+    {
+      "take": "../natural-moveset/window-traversal-v1235e",
+      "candidate": "candidate-npc-combat-v1213m",
+      "passed": true,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "passed": true,
+          "crossed": true,
+          "mantle": true,
+          "maxTraversalWeight": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "passed": true,
+          "crossed": true,
+          "mantle": true,
+          "maxTraversalWeight": 1.0
+        }
+      ],
+      "gaps": {
+        "host": {
+          "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235e/cross-host-observer-movement.ndjson",
+          "seconds": 7.92,
+          "samples": 99,
+          "activeSamples": 99,
+          "nativePoseSamples": 1,
+          "nativePoseFraction": 0.01,
+          "presentedToNativeDrops": 1,
+          "eligibilityFailures": 542,
+          "staleStateRecords": 14,
+          "invalidSemanticRecords": 15,
+          "maxStaleStateAgeMs": 0,
+          "rootStepRejections": 0
+        },
+        "client": {
+          "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235e/cross-client-observer-movement.ndjson",
+          "seconds": 7.95,
+          "samples": 103,
+          "activeSamples": 103,
+          "nativePoseSamples": 1,
+          "nativePoseFraction": 0.01,
+          "presentedToNativeDrops": 1,
+          "eligibilityFailures": 63,
+          "staleStateRecords": 5,
+          "invalidSemanticRecords": 6,
+          "maxStaleStateAgeMs": 8890,
+          "rootStepRejections": 1
+        }
+      },
+      "handoff": {
+        "host": [
+          {
+            "ms": 1358,
+            "traversalWeight": 0.981,
+            "traversalAmount": 0.207,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1389,
+            "traversalWeight": 0.996,
+            "traversalAmount": 0.286,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1451,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.425,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1545,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.595,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1607,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.726,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1670,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.889,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1763,
+            "traversalWeight": 0.669,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.0
+          },
+          {
+            "ms": 1857,
+            "traversalWeight": 0.342,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.489
+          },
+          {
+            "ms": 1951,
+            "traversalWeight": 0.169,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.747
+          },
+          {
+            "ms": 2045,
+            "traversalWeight": 0.074,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.89
+          },
+          {
+            "ms": 2108,
+            "traversalWeight": 0.037,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.944
+          },
+          {
+            "ms": 2171,
+            "traversalWeight": 0.022,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.968
+          },
+          {
+            "ms": 2234,
+            "traversalWeight": 0.014,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.979
+          },
+          {
+            "ms": 2296,
+            "traversalWeight": 0.008,
+            "traversalAmount": 0.977,
+            "locomotionWeight": 0.988
+          }
+        ],
+        "client": [
+          {
+            "ms": 1343,
+            "traversalWeight": 0.876,
+            "traversalAmount": 0.103,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1405,
+            "traversalWeight": 0.988,
+            "traversalAmount": 0.212,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1467,
+            "traversalWeight": 0.999,
+            "traversalAmount": 0.339,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1560,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.507,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1591,
+            "traversalWeight": 1.0,
+            "traversalAmount": 0.624,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1779,
+            "traversalWeight": 1.0,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1872,
+            "traversalWeight": 0.489,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1933,
+            "traversalWeight": 0.274,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 1997,
+            "traversalWeight": 0.196,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 2090,
+            "traversalWeight": 0.093,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 2153,
+            "traversalWeight": 0.054,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 2185,
+            "traversalWeight": 0.037,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 2281,
+            "traversalWeight": 0.019,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 1.0
+          },
+          {
+            "ms": 2374,
+            "traversalWeight": 0.008,
+            "traversalAmount": 1.0,
+            "locomotionWeight": 0.0
+          }
+        ]
+      }
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1235d, 1213l, product controller): with the host as source the client's partner was in its native pose for 29% of the samples, dropping 11 times in 7.98 s. Each drop was a source state gap of 250-375 ms (eligibility mask 16, then mask 1 while the semantic timeline refilled) or the root snap after one (a 12-18 m/s step rejected by the gait clock).",
+    "Confirmed static: every presentation timeline (movement semantics and 12 action timelines) invalidated its last sample after 200 ms, cleared on a 250 ms gap and extrapolated actions by at most 100 ms, and mask 16 used a fixed 250 ms; the product controller had relaxed only the stream lease (1 s, 1203d).",
+    "Confirmed runtime (1235e, 1213m, same harness, passed, restoration passed): native-pose time 1% (host source) and 1% (client source), 1 and 1 drops; host-source root-step rejections 3 -> 0.",
+    "Scene-to-locomotion handoff (1235e): the mantle scene pose is presented at full weight to amount 0.977, then the traversal weight decays (0.34, 0.07, 0.02 over ~250 ms) while locomotion ramps back (0.49, 0.89, 0.97): a measured blend from the actual scene pose, in both roles.",
+    "Remaining: one frame of the protocol-73 hold (state 24, an unclassified native state) at the mantle end still drops to the native pose for one frame and ramps back; the lab keeps its strict rules outside the product controller.",
+    "Visual: not reviewable - the observer spot faces the stair alley (#33)."
+  ],
+  "complete": true,
+  "scope": "Product-controller presentation continuity across source gaps up to 1 s, measured on the window mantle in both roles; other maps and longer outages are not separately measured."
+}

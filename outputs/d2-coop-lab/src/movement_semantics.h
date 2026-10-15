@@ -1,4 +1,5 @@
 #pragma once
+#include "presentation_hold.h"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -25,13 +26,13 @@ struct MovementSemantics {
         }else if(s.airStage||s.startZ||s.targetZ||s.remaining)return false;
         if(count){const auto& prev=samples[count-1];
             if(s.time<=prev.time||s.event<prev.event||(s.event==prev.event&&s.state!=prev.state))return false;
-            if(s.time-prev.time>250)clear();
+            if(s.time-prev.time>presentationHold().gapMs)clear();
         }
         if(count==samples.size()){std::move(samples.begin()+1,samples.end(),samples.begin());--count;}
         samples[count++]=s;return true;
     }
     bool sample(double at,Sample& out)const{
-        if(!count||!std::isfinite(at)||at<samples[0].time||at-samples[count-1].time>200)return false;
+        if(!count||!std::isfinite(at)||at<samples[0].time||at-samples[count-1].time>presentationHold().sampleMs)return false;
         unsigned index=0;for(unsigned i=1;i<count&&samples[i].time<=at;++i)index=i;
         out=samples[index];
         if(out.state==5&&index+1<count&&samples[index+1].event==out.event){

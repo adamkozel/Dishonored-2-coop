@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:10:51.376710+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:31:28.777814+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -522,7 +522,7 @@ Native low mantle with standing or crouched exit is bound on both roles, armed a
 - [in_game_recordings: integrated-crouch-mantle-emily-v3.mp4](<../../../../work/natural-moveset/integrated-crouch-mantle-emily-v3.mp4>)
 ## window_enter_exit
 
-Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33).
+Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33). Audit 1241 (1213m): the same mantle passes again in both roles with the partner held through source gaps (native-pose time 29% -> 1% on the host-source side).
 
 ````json
 {
@@ -546,19 +546,21 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "sword_vaultthrough_walkleft_in"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33).",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33). Audit 1241 (1213m): the same mantle passes again in both roles with the partner held through source gaps (native-pose time 29% -> 1% on the host-source side).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
     "../movement-integration/window-traversal-audit-v1207.json",
-    "../movement-integration/window-traversal-audit-v1238.json"
+    "../movement-integration/window-traversal-audit-v1238.json",
+    "../movement-integration/presentation-hold-audit-v1241.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/window-traversal-audit-v1207.json](<../../../../work/movement-integration/window-traversal-audit-v1207.json>)
 - [evidence: ../movement-integration/window-traversal-audit-v1238.json](<../../../../work/movement-integration/window-traversal-audit-v1238.json>)
+- [evidence: ../movement-integration/presentation-hold-audit-v1241.json](<../../../../work/movement-integration/presentation-hold-audit-v1241.json>)
 ## slide_enter_loop_exit
 
 Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
