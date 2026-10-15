@@ -168,6 +168,26 @@ int main(int argc, char** argv) {
         }
         std::cout<<"{\"readOnly\":true,\"controller\":"<<values[0]<<",\"mouse\":"<<values[1]<<"}\n";return 0;
     }
+    if(argc==3&&!std::strcmp(argv[2],"--focus")){
+        // 1226 (#3): what the native interaction sensor is focused on right now, read exactly as
+        // shadowFocusedUseVariant does (player components +0x268/+0x270, arkCpntPlayerSensorInteraction
+        // vtable 0x1b403b8, +0x80 high dword = focused handle; 0x3fff.... = none). Lets a harness aim
+        // until the intended usable is focused before pressing Use.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0;unsigned count=0;std::uint64_t word=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b403b8){sensor=m;break;}
+        if(!sensor||!reader(sensor+0x80,&word,8))return 59;
+        const auto handle=static_cast<std::uint32_t>(word>>32);
+        std::string name;bool focused=(handle>>16)!=0x3fff;
+        if(focused){const auto actor=worldIdentityEntity(reader,game,handle);std::uintptr_t text=0;
+            if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))focused=false;}
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"focused\":"<<(focused?"true":"false")<<",\"handle\":"<<handle<<",\"name\":"<<jsonString(name)<<"}\n";
+        return 0;
+    }
     if(argc==3&&!std::strcmp(argv[2],"--npc-authority")){
         std::uintptr_t game=0;std::vector<NativeNpcAuthority> catalog;unsigned ineligible=0,unavailable=0,unbound=0;
         const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};

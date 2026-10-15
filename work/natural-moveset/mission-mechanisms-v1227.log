@@ -1,0 +1,53 @@
+{
+  "passed": false,
+  "failure": "Source did not register a native use of env_vise_01_1_3 (client)",
+  "cases": [
+    {
+      "used": true,
+      "sourceUses": 1,
+      "observer": "client",
+      "observedVariants": [
+        0,
+        3
+      ],
+      "target": "env_vise_01_1_3",
+      "side": 0,
+      "endAction": 0,
+      "shownSamples": 58,
+      "maxAmount": 0.9918691,
+      "source": "host",
+      "sourceUseName": "env_vise_01_1_3",
+      "sourceLastVariant": 3,
+      "maxWeight": 1.0,
+      "observerSamples": 117,
+      "endReason": 3,
+      "expected": 3
+    },
+    {
+      "used": false,
+      "sourceUses": 0,
+      "observer": "host",
+      "observedVariants": [
+        0
+      ],
+      "target": "env_vise_01_1_3",
+      "side": 0,
+      "endAction": 0,
+      "shownSamples": 0,
+      "maxAmount": 0.0,
+      "source": "client",
+      "sourceUseName": "",
+      "sourceLastVariant": 0,
+      "maxWeight": 0.0,
+      "observerSamples": 131,
+      "endReason": 0,
+      "expected": 3
+    }
+  ],
+  "scope": "Native use of real Edge of the World mechanisms (vise both roles, optional turbine lever) -> authored interaction on the partner body; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionMechanisms-v1227.ps1:118[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 118 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mSource did not register a native use of env_vise_01_1_3 (client)[0m

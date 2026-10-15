@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "failure": "--focus did not name the aimed window (got 'ld_rich_small_gp_window_handle_37')",
+  "notes": {
+    "baseline": {
+      "readOnly": true,
+      "tick": 11872921,
+      "focused": false,
+      "handle": 1073676304,
+      "name": ""
+    },
+    "aimed": {
+      "readOnly": true,
+      "tick": 11879406,
+      "focused": true,
+      "handle": 94372282,
+      "name": "ld_rich_small_gp_window_handle_37"
+    },
+    "windowHandle": "0x5a401be"
+  },
+  "scope": "d2_runtime_probe --focus: unfocused baseline, then a real Dunwall window aimed at must be named. Fixture restored."
+}
