@@ -1,10 +1,10 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-14T01:55:24.397473+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:10:51.376710+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
-Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
+Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.
 
 ````json
 {
@@ -35,7 +35,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "sword_gun_equip"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
+  "notes": "Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -60,7 +60,9 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "ranged-corvo-crouch-moving-muzzle-bd99-v1.mp4",
     "ranged-corvo-crouch-moving-muzzle-bd99-v1-source.mp4",
     "ranged-emily-standing-muzzle-bd99-v1.mp4",
-    "ranged-emily-standing-muzzle-bd99-v1-source.mp4"
+    "ranged-emily-standing-muzzle-bd99-v1-source.mp4",
+    "mission-equipment-v1088/equip-client.mp4",
+    "mission-equipment-emily-v1088/equip-host.mp4"
   ],
   "evidence": [
     "ranged-corvo-gun-network-v29-v1/result.json",
@@ -73,7 +75,8 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "ranged-corvo-gun-air-v28-v3/result.json",
     "ranged-corvo-crouch-gun-moving-v30-v4/result.json",
     "ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json",
-    "ranged-emily-standing-muzzle-bd99-v1/result.json"
+    "ranged-emily-standing-muzzle-bd99-v1/result.json",
+    "../movement-integration/mission-equipment-audit-v1089.json"
   ],
   "complete": false,
   "visual_accepted": false
@@ -91,6 +94,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
 - [evidence: ranged-corvo-crouch-gun-moving-v30-v4/result.json](<../../../../work/natural-moveset/ranged-corvo-crouch-gun-moving-v30-v4/result.json>)
 - [evidence: ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json](<../../../../work/natural-moveset/ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json>)
 - [evidence: ranged-emily-standing-muzzle-bd99-v1/result.json](<../../../../work/natural-moveset/ranged-emily-standing-muzzle-bd99-v1/result.json>)
+- [evidence: ../movement-integration/mission-equipment-audit-v1089.json](<../../../../work/movement-integration/mission-equipment-audit-v1089.json>)
 - [in_game_recordings: ranged-corvo-gun-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-corvo-gun-network-v29-v1.mp4>)
 - [in_game_recordings: ranged-corvo-gun-network-v29-v1-source.mp4](<../../../../work/natural-moveset/ranged-corvo-gun-network-v29-v1-source.mp4>)
 - [in_game_recordings: ranged-emily-gun-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-emily-gun-network-v29-v1.mp4>)
@@ -113,6 +117,8 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
 - [in_game_recordings: ranged-corvo-crouch-moving-muzzle-bd99-v1-source.mp4](<../../../../work/natural-moveset/ranged-corvo-crouch-moving-muzzle-bd99-v1-source.mp4>)
 - [in_game_recordings: ranged-emily-standing-muzzle-bd99-v1.mp4](<../../../../work/natural-moveset/ranged-emily-standing-muzzle-bd99-v1.mp4>)
 - [in_game_recordings: ranged-emily-standing-muzzle-bd99-v1-source.mp4](<../../../../work/natural-moveset/ranged-emily-standing-muzzle-bd99-v1-source.mp4>)
+- [in_game_recordings: mission-equipment-v1088/equip-client.mp4](<../../../../work/natural-moveset/mission-equipment-v1088/equip-client.mp4>)
+- [in_game_recordings: mission-equipment-emily-v1088/equip-host.mp4](<../../../../work/natural-moveset/mission-equipment-emily-v1088/equip-host.mp4>)
 ## crossbow_draw_aim_fire_reload_holster
 
 Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Ammunition switching, projectile/impact outcomes, precise attachment and broader variants remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
@@ -2449,7 +2455,7 @@ Native source consumption observed with inventory, resource and checkpoint resto
 - [in_game_recordings: potion-mana-movement-emily-v69-receiver.mp4](<../../../../work/natural-moveset/potion-mana-movement-emily-v69-receiver.mp4>)
 ## item_switch_interruptions
 
-Three native item switches and equip cancellation at 30/70 percent are recorded, with at most one left-hand item visible. Arbitrary-time interruption, inventory state and runtime prop binding remain pending.
+Three native item switches and equip cancellation at 30/70 percent are recorded, with at most one left-hand item visible. Arbitrary-time interruption, inventory state and runtime prop binding remain pending. 1088 (candidate1074j, Edge of the World, both roles): opening/closing the native item wheel no longer retires partner presentation (protocol73 holds; neutral body during the wheel), and a native D-pad quick-slot switch from sword to pistol is presented with the native pistol prop. Arbitrary-time interruption of other items remains open.
 
 ````json
 {
@@ -2460,8 +2466,8 @@ Three native item switches and equip cancellation at 30/70 percent are recorded,
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map",
+  "visual_validation": "bounded_actual_game_frames_inspected",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "item switch interruptions",
@@ -2477,11 +2483,20 @@ Three native item switches and equip cancellation at 30/70 percent are recorded,
     "item_switch_stunmine_to_crossbow"
   ],
   "deliverable_kind": "animation",
-  "notes": "Three native item switches and equip cancellation at 30/70 percent are recorded, with at most one left-hand item visible. Arbitrary-time interruption, inventory state and runtime prop binding remain pending.",
+  "notes": "Three native item switches and equip cancellation at 30/70 percent are recorded, with at most one left-hand item visible. Arbitrary-time interruption, inventory state and runtime prop binding remain pending. 1088 (candidate1074j, Edge of the World, both roles): opening/closing the native item wheel no longer retires partner presentation (protocol73 holds; neutral body during the wheel), and a native D-pad quick-slot switch from sword to pistol is presented with the native pistol prop. Arbitrary-time interruption of other items remains open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "mission-equipment-v1088/equip-client.mp4",
+    "mission-equipment-emily-v1088/equip-host.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/mission-equipment-audit-v1089.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/mission-equipment-audit-v1089.json](<../../../../work/movement-integration/mission-equipment-audit-v1089.json>)
+- [in_game_recordings: mission-equipment-v1088/equip-client.mp4](<../../../../work/natural-moveset/mission-equipment-v1088/equip-client.mp4>)
+- [in_game_recordings: mission-equipment-emily-v1088/equip-host.mp4](<../../../../work/natural-moveset/mission-equipment-emily-v1088/equip-host.mp4>)
 

@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-14T01:55:24.397473+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:10:51.376710+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -619,7 +619,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 - [in_game_recordings: native-feet-emily-close-v5.mp4](<../../../../work/natural-moveset/native-feet-emily-close-v5.mp4>)
 ## parry_directions
 
-Candidates require animation review and appropriate game-state/contact binding.
+1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open. Directional variants are not distinguished: the native player scenes carry no attack direction.
 
 ````json
 {
@@ -630,7 +630,7 @@ Candidates require animation review and appropriate game-state/contact binding.
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -642,16 +642,22 @@ Candidates require animation review and appropriate game-state/contact binding.
     "sword_parry_rr_in"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open. Directional variants are not distinguished: the native player scenes carry no attack direction.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/npc-defense-presentation-audit-v1029.json",
+    "../movement-integration/defense-parity-audit-v1031.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/npc-defense-presentation-audit-v1029.json](<../../../../work/movement-integration/npc-defense-presentation-audit-v1029.json>)
+- [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
 ## parry_recovery
 
-Candidates require animation review and appropriate game-state/contact binding.
+1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open.
 
 ````json
 {
@@ -662,7 +668,7 @@ Candidates require animation review and appropriate game-state/contact binding.
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -674,16 +680,22 @@ Candidates require animation review and appropriate game-state/contact binding.
     "sword_parry_rr_out"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/npc-defense-presentation-audit-v1029.json",
+    "../movement-integration/defense-parity-audit-v1031.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/npc-defense-presentation-audit-v1029.json](<../../../../work/movement-integration/npc-defense-presentation-audit-v1029.json>)
+- [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
 ## counterattack
 
-Candidates require animation review and appropriate game-state/contact binding.
+Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
 
 ````json
 {
@@ -710,13 +722,17 @@ Candidates require animation review and appropriate game-state/contact binding.
     "guard_rr_counter_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/native-combat-use-observations-v1211.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
 ## hit_reactions_directions
 
 Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
@@ -922,7 +938,7 @@ Both-role v61b verifies exact owned standing Stun14 scene, directional full-body
 - [in_game_recordings: stun-network-emily-v61b-source.mp4](<../../../../work/natural-moveset/stun-network-emily-v61b-source.mp4>)
 ## stagger_knockdown_recovery
 
-Candidates require animation review and appropriate game-state/contact binding.
+Candidates require animation review and appropriate game-state/contact binding. 1209 (audit 1211): no player knockdown provoked in an attack spree; native Corvo knockdown fall/front/land/recovery assets identified (PLAYER_HITREACT_KNOCKDOWN blowback).
 
 ````json
 {
@@ -947,16 +963,20 @@ Candidates require animation review and appropriate game-state/contact binding.
     "sword_recovery_fast_left"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1209 (audit 1211): no player knockdown provoked in an attack spree; native Corvo knockdown fall/front/land/recovery assets identified (PLAYER_HITREACT_KNOCKDOWN blowback).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/native-combat-use-observations-v1211.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
 ## kick_or_shove_if_present
 
-Candidates require animation review and appropriate game-state/contact binding.
+Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
 
 ````json
 {
@@ -967,7 +987,7 @@ Candidates require animation review and appropriate game-state/contact binding.
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_player_kick_outcome_host_source_mission_map",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -977,16 +997,25 @@ Candidates require animation review and appropriate game-state/contact binding.
     "sword_attack_punch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "mission-combat-v1109/combat-client.mp4",
+    "mission-combat-v1109/combat-host.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/mission-outcome-audit-v1110.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/mission-outcome-audit-v1110.json](<../../../../work/movement-integration/mission-outcome-audit-v1110.json>)
+- [in_game_recordings: mission-combat-v1109/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-client.mp4>)
+- [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants
 
-Candidates require animation review and appropriate game-state/contact binding.
+Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
 
 ````json
 {
@@ -997,7 +1026,7 @@ Candidates require animation review and appropriate game-state/contact binding.
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_npc_death_and_corpse_both_peers_mission_map",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -1010,16 +1039,23 @@ Candidates require animation review and appropriate game-state/contact binding.
     "empty_stinghit_death"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
+  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "mission-combat-v1117/combat-client.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/mission-corpse-audit-v1118.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
+- [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
 ## ragdoll_handoff
 
-This requires native ragdoll ownership and a tested transition, not a baked animation alone.
+This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.
 
 ````json
 {
@@ -1030,14 +1066,14 @@ This requires native ragdoll ownership and a tested transition, not a baked anim
     "emily"
   ],
   "authoring": "missing",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_npc_corpse_authority_mission_map",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "ragdoll handoff",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "This requires native ragdoll ownership and a tested transition, not a baked animation alone.",
+  "notes": "This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1049,11 +1085,16 @@ This requires native ragdoll ownership and a tested transition, not a baked anim
     "carry-snapshot-cancel-emily-v22/native.mp4",
     "carry-snapshot-cancel-corvo-v22/native.mp4",
     "carry-snapshot-cancel-emily-v22b/native.mp4",
-    "carry-snapshot-stream-emily-v22/native.mp4"
+    "carry-snapshot-stream-emily-v22/native.mp4",
+    "mission-combat-v1117/combat-client.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/mission-corpse-audit-v1118.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)
@@ -1063,4 +1104,5 @@ This requires native ragdoll ownership and a tested transition, not a baked anim
 - [in_game_recordings: carry-snapshot-cancel-corvo-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v22/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-emily-v22b/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-emily-v22b/native.mp4>)
 - [in_game_recordings: carry-snapshot-stream-emily-v22/native.mp4](<../../../../work/natural-moveset/carry-snapshot-stream-emily-v22/native.mp4>)
+- [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
 
