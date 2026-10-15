@@ -15,6 +15,12 @@ $g = 'C:\D2Lab\ws'
 $s = New-PSSession -VMName $VmName -Credential (Get-D2LabGuestCredential)
 function Step($m) { Write-Host ("{0:HH:mm:ss} {1}" -f (Get-Date), $m) }
 try {
+    # A running guest lab instance locks its DLL and resources: stop it first (re-start it afterwards
+    # with Start-D2LabVMRole). Only processes running from the guest workspace's game copy.
+    $stopped = Invoke-Command -Session $s -ArgumentList $g { param($g)
+        $p = Get-Process Dishonored2 -ErrorAction SilentlyContinue | Where-Object { $_.Path -like "$g\work\asset-game\*" }
+        if ($p) { $p | Stop-Process -Force; Start-Sleep -Seconds 3; @($p).Count } else { 0 } }
+    if ($stopped) { Step "stopped $stopped running guest lab instance(s) before syncing" }
     Invoke-Command -Session $s -ArgumentList $g {
         param($g)
         foreach ($d in "$g\outputs\d2-coop-lab\tooling", "$g\outputs\d2-coop-lab\bin", "$g\outputs\d2-coop-lab\research", "$g\work\lab-instances", 'C:\D2Lab\pwsh') { New-Item -ItemType Directory -Force $d | Out-Null }
@@ -23,13 +29,15 @@ try {
     $have = Invoke-Command -Session $s { if (Test-Path C:\D2Lab\pwsh\pwsh.exe) { & C:\D2Lab\pwsh\pwsh.exe -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' } }
     $want = & "$pwshSrc\pwsh.exe" -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
     if ($have -ne $want) { Step "copying pwsh $want"; Copy-Item -ToSession $s -Recurse -Force -Path "$pwshSrc\*" -Destination 'C:\D2Lab\pwsh' }
-    # 2. Lab scripts, tooling and binaries, plus the VC++ runtime the DLL/probe import (#22).
+    # 2. Lab scripts, tooling and binaries. Since 1213f the DLL and probe link the C runtime statically
+    #    (#22), so no VC++ runtime is copied, and app-local copies from earlier syncs are removed: the
+    #    guest must load the mod exactly as a clean PC would.
     Step 'copying lab scripts, tooling and bin'
     Get-ChildItem $lab -Filter *.ps1 -File | ForEach-Object { Copy-Item -ToSession $s -Force -Path $_.FullName -Destination "$g\outputs\d2-coop-lab\$($_.Name)" }
     Copy-Item -ToSession $s -Force -Path "$lab\tooling\*" -Destination "$g\outputs\d2-coop-lab\tooling"
     Copy-Item -ToSession $s -Force -Path "$lab\bin\*" -Destination "$g\outputs\d2-coop-lab\bin"
-    $crt = 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll' | ForEach-Object { Join-Path "$env:windir\System32" $_ }
-    $crt | ForEach-Object { Copy-Item -ToSession $s -Force -Path $_ -Destination "$g\outputs\d2-coop-lab\bin" }
+    Invoke-Command -Session $s -ArgumentList $g { param($g)
+        foreach ($d in "$g\outputs\d2-coop-lab\bin", "$g\work\asset-game") { foreach ($f in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') { Remove-Item -LiteralPath "$d\$f" -ErrorAction SilentlyContinue } } }
     # 3. Physical game copy from the guest's own Steam install (42 GB, guest-local), then the lab's mod resources.
     if (!$SkipGameCopy) {
         Step 'game copy: guest Steam install -> work\asset-game (robocopy, skips files already present)'
@@ -42,10 +50,9 @@ try {
         $rc | Select-Object -SkipLast 1 | ForEach-Object { Step "  $_" }
         if ([int]($rc | Select-Object -Last 1) -ge 8) { throw "robocopy failed ($($rc | Select-Object -Last 1))" }
     }
-    Step 'mod resources (voidmod, master.index) and app-local VC++ runtime into the game copy'
+    Step 'mod resources (voidmod, master.index) into the game copy'
     Get-ChildItem (Join-Path $RepoRoot 'work/asset-game/base') -File | Where-Object { $_.Name -like 'game?voidmod.*' -or $_.Name -eq 'master.index' } |
         ForEach-Object { Copy-Item -ToSession $s -Force -Path $_.FullName -Destination "$g\work\asset-game\base\$($_.Name)" }
-    $crt | ForEach-Object { Copy-Item -ToSession $s -Force -Path $_ -Destination "$g\work\asset-game" }
     # 4. Instance seed for the guest role (saves, config, movement bank); never the host's live state files.
     Step "instance seed: work/lab-instances/$Role"
     $src = Join-Path $RepoRoot "work/lab-instances/$Role"
@@ -70,7 +77,7 @@ try {
             gameCopyGB = [math]::Round(((Get-ChildItem -Recurse -File "$g\work\asset-game" | Measure-Object Length -Sum).Sum) / 1GB, 1)
             dll = & $h "$g\outputs\d2-coop-lab\bin\dinput8.dll"
             probe = & $h "$g\outputs\d2-coop-lab\bin\d2_runtime_probe.exe"
-            crtInBin = @('msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll' | Where-Object { Test-Path "$g\outputs\d2-coop-lab\bin\$_" }).Count
+            appLocalCrtLeft = @(foreach ($d in "$g\outputs\d2-coop-lab\bin", "$g\work\asset-game") { 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll' | Where-Object { Test-Path "$d\$_" } }).Count
             slot81 = Test-Path "$g\work\lab-instances\$r\base\savegame\SLOT81\checkpoint.dat"
             slot82 = Test-Path "$g\work\lab-instances\$r\base\savegame\SLOT82"
             bankMB = [math]::Round((Get-Item "$g\work\lab-instances\$r\coop-status.json.movement.bin" -ErrorAction SilentlyContinue).Length / 1MB)

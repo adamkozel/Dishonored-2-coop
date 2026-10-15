@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "scope": "#22: candidate 1213f links the C/C++ runtime statically; the mod DLL loads on a Windows install without the VC++ 2015-2022 runtime.",
+  "candidate": "candidate-npc-combat-v1213f (dll AA15A46A7BE07545...)",
+  "staticCheck": "PE imports - dinput8.dll: bcrypt.dll, KERNEL32.dll, USER32.dll; d2_runtime_probe.exe: KERNEL32.dll (no MSVCP140/VCRUNTIME140/api-ms-win-crt). 1213e imported MSVCP140, VCRUNTIME140, VCRUNTIME140_1 and api-ms-win-crt-*.",
+  "runtime": {
+    "guestRuntimeDllsInSystem32": 0,
+    "guestAppLocalRuntimeDlls": 0,
+    "instance": "alive, status file written, engine thread running, Steam available, menu (logic 6)",
+    "loadedRuntimeModules": "none",
+    "loaderLog": ["Lab loader active.", "Native lab placement and focus-pause policy installed.", "Engine-thread bridge and current native Steam transport installed.", "Per-instance simulated controller active; background acquisition retained."]
+  },
+  "host": "Deploy-NpcAttack-v1213f: fixture ready, protected saves unchanged; host lab pair in gameplay and fresh.",
+  "note": "The first sync attempt failed because a running guest instance locked its files; Sync-D2LabVMWorkspace now stops the guest lab instance before syncing."
+}

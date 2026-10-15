@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 project(D2CoopLab LANGUAGES CXX)
+# 1213f (#22): link the C/C++ runtime statically into every target, so the mod DLL and the probe
+# load on a clean Windows install without the VC++ 2015-2022 redistributable (a clean PC, e.g.
+# the lab VM, has no MSVCP140/VCRUNTIME140). The proxy shares no CRT objects with the game.
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 add_executable(d2_movement_second_jump_tests src/movement_second_jump_tests.cpp)
 target_compile_features(d2_movement_second_jump_tests PRIVATE cxx_std_17)
 add_executable(d2_movement_resume_tests src/movement_resume_tests.cpp)
