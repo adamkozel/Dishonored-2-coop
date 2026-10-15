@@ -155,5 +155,15 @@ Found while measuring partner presentation on Edge of the World (take 1235e). Bo
 
 **Take [1235f](../../work/natural-moveset/window-traversal-v1235f)** passed in both roles, and restoration passed. It archives both peers' timings per case:
 - **Client:** catalog reads fell to 10 (101 Hellos deferred) and stalls to 10. Each read still costs 70–86 ms.
-- **Host:** the scan still stalls for 80–207 ms. **Open:** the catalog read has to move off the engine thread.
+- **Host:** the scan still stalls for 80–207 ms. The catalog read has to move off the engine thread.
+
+**1213o** reads the catalog on a worker thread for both the host's relevance scan and the client's Hello binds ([audit 1243](../../work/movement-integration/npc-catalog-worker-audit-v1243.json)):
+- the engine thread only takes the finished snapshot;
+- it re-reads each NPC it is about to bind (`freshNpcCatalogEntry`) before `bindNpcChannel`;
+- the one-off read at stream start stays on the engine thread.
+
+**Take [1235g](../../work/natural-moveset/window-traversal-v1235g)** passed in both roles, and restoration passed (confirmed runtime):
+- **Host:** one slow `serviceNpcStream` (73 ms, the stream start), down from 17 slow calls of up to 207 ms. The worker read the catalog 15 times in 87–95 ms; one read failed its list-consistency check and was retried on the next scan.
+- **Client:** no slow `exchangePoses` (max 15 ms).
+- **Presentation:** these stalls caused the partner-presentation gaps. Stale-state records fell to 0, eligibility failures to 1–2 per case, and native-pose time to 0.9–1.9%.
 
