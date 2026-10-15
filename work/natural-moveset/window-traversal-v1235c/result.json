@@ -1,0 +1,78 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": false,
+      "failure": "Partner did not present the traversal (host -> client)",
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        19.1468,
+        90.0126,
+        16.5066
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 2.947,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateRunning@@",
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateSneaking@@"
+      ],
+      "mantle": true,
+      "observerSamples": 87,
+      "traversalSamples": 0,
+      "traversalVariants": [
+        0
+      ],
+      "maxTraversalWeight": 0.0,
+      "minWeight": 0.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": false,
+      "failure": "Partner did not present the traversal (client -> host)",
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        19.1812,
+        90.3884,
+        16.5117
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 2.966,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateFalling@@",
+        ".?AVarkPlayerStateRunning@@",
+        ".?AVarkPlayerStateSneaking@@"
+      ],
+      "mantle": true,
+      "observerSamples": 106,
+      "traversalSamples": 0,
+      "traversalVariants": [
+        0
+      ],
+      "maxTraversalWeight": 0.0,
+      "minWeight": 0.0
+    }
+  ],
+  "scope": "window_enter_exit: native mantle through a climbable Edge of the World window, both roles, partner traversal presentation filmed; Dunwall fixture restored.",
+  "failure": "host: Partner did not present the traversal (host -> client); client: Partner did not present the traversal (client -> host)"
+}
