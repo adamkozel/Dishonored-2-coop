@@ -50,6 +50,7 @@ const char* productStep(unsigned i){
     case 16:return "coop_trigger_mirror on";
     case 17:return "coop_movement_resume on";
     case 18:return "coop_mission_end_mirror on"; // 1214bb: mission end, both-ready hold, chaos
+    case 19:return "coop_gameflow_mirror on"; // 1214bg: objectives follow the host
     default:return nullptr;
     }
 }

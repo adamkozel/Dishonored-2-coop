@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-16T01:53:05.455531+02:00",
+  "dll": "D211F7F74E46D10ED773A5F69543AF5AB036CCD1CDB2AEEC9D9897FC5CE45E88",
+  "probe": "14C6CA5227A405A87A2F919B0E4655C1D289C3123917A03E141B914303EA0003",
+  "previous": "candidate-npc-combat-v1214bf",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1266/corvo-choke-bank.bin",
+      "sha256": "08684FDC8E7A7F450885B5B68B929053CCCB64CCAFC61C9E816A3CE3A73303A6"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1266/emily-choke-bank.bin",
+      "sha256": "A4EDC6A26BB799AB86138AE03B3972F6A16E207911A38BCDC2E48933447F79DB"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1214bg on 1214bf (#74 campaign): gameflow follows the host. The host publishes every non-mission gameflow node (id, state) about twice a second (D2GF); a partner in gameplay sets each differing node through the native set-state routine 0x1404e9bd0 (take route-dunwall-v1300d: Ramsey and the ring advanced only the host). Status reports each world id-set hash. Lab command coop_gameflow_mirror; product step 19."
+}

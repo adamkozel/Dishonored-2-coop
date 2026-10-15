@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T01:35:00.696553+02:00",
+  "at": "2026-10-16T01:58:13.268205+02:00",
   "candidate": "candidate-npc-combat-v1214bf",
   "takes": [
     {
@@ -25,6 +25,36 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300a",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300b",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300c",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300d",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300e",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": true,
+      "failure": null
     }
   ],
   "complete": false,
@@ -33,9 +63,14 @@
     "Confirmed runtime: the Dunwall start runs load (15) -> coup scene (5) -> native character choice (logic 14) -> confirmation (logic 3, defaults to No) -> intro scene (5) -> gameplay.",
     "Choice input: Left highlights Corvo, Right highlights Emily, A opens the confirmation; Right then A confirms Yes. The host chose Corvo and the client Emily.",
     "Takes 1299a-c stopped at the choice or the confirmation and left the lab there; Deploy-SourceClock relaunched it each time (recovery.json). Take 1299d passed: both worlds reached gameplay in 118068 ms at the same spot with equal gameflow counts [241, 4, 3, 0, 0, 0, 0], and the lab restored.",
-    "Visual: Corvo sees Emily's partner avatar in the Imperial Chambers with \"Objective updated: Escape Dunwall Tower\" and the native autosave."
+    "Visual: Corvo sees Emily's partner avatar in the Imperial Chambers with \"Objective updated: Escape Dunwall Tower\" and the native autosave.",
+    "Route harness Route-Mission-v1300 (steps: trigger, at, use, wait, attack, loot) records both worlds' gameflow counts after every step.",
+    "1300a: the bedroom trigger advanced only the host within the snapshot window; 1300b: both advanced (all host trigger events applied in the client world).",
+    "1300c: the Mayhew triggers ran the Mayhew goodbye scene in both worlds; both reached the Dunwall fixture state [239,2,5,2].",
+    "1300d: Ramsey (mortimer_ramsey NPC) was killed (health 50 -> 0) and his body searched (ring); the host gameflow advanced to [237,1,3,6,0,1,0], the client stayed at [239,2,5,2].",
+    "1214bg: gameflow follows the host (D2GF, native set-state for non-mission nodes). 1300e: both worlds share the id-set hash bb242f74 and match after every step, including Ramsey and the ring (client applied 13 node states)."
   ],
   "next": [
-    "Route through the tower (bedroom trigger, Mayhew, sword, ring, vault, Ramsey), the streets and the boat, then the mission end into the Outsider visit."
+    "Vault lockers with the ring, safe room, the vault exit LevelTransition to the streets (with the loading-entry stack), streets, boat, mission end."
   ]
 }

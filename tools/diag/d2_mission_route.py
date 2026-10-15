@@ -9,6 +9,8 @@ LevelTransition nodes with their roots.
 
 Usage:
   python -I d2_mission_route.py <base-dir> <map .entities source regex> [--depth N] [--json out.json]
+  python -I d2_mission_route.py <base-dir> <map regex> --event NAME [--event NAME ...]
+    (where each custom event is sent from, and what starts those senders)
 Example:
   python -I d2_mission_route.py work/asset-game/base "dunwall_escape_tower_p[.]entities$"
 """
@@ -21,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import d2_resource_index as r  # noqa: E402
 
-ROOT_KINDS = ('TriggerNotification', 'UsableNotification', 'GetCustomEvent', 'LoadingEnd', 'PickupNotification',
+ROOT_KINDS = ('MidnightControl', 'TriggerNotification', 'UsableNotification', 'GetCustomEvent', 'LoadingEnd', 'PickupNotification',
               'DeathNotification', 'AIStateNotification', 'InventoryNotification', 'ConversationNotification',
               'GameflowTaskNotification', 'GameflowObjectiveNotification', 'Timer', 'EntitySpawned', 'Notification')
 TARGETS = ('arkKisculeNodeActionGameflowTask', 'arkKisculeNodeActionGameflowObjective', 'arkKisculeNodeActionGameflowMission',
@@ -90,11 +92,25 @@ def main():
     ap.add_argument('map')
     ap.add_argument('--depth', type=int, default=6)
     ap.add_argument('--json')
+    ap.add_argument('--event',action='append',default=[])
     a = ap.parse_args()
     source, text = load_entities(a.base, a.map)
     ents = split_entities(text)
     pos = {name: position(body) for name, body in ents.items()}
     report = {'source': source, 'targets': []}
+    if a.event:
+        print(source)
+        for ent, body in ents.items():
+            if 'm_kiscule' not in body:
+                continue
+            nodes, incoming = graph(body)
+            for nid, n in nodes.items():
+                if n['name'] == 'arkKisculeNodeSendCustomEvent' and n['params'].get('m_eventName') in a.event:
+                    print(f"[send {n['params']['m_eventName']}] ({ent}#{nid})")
+                    for d, rid, kind, params in roots(nodes, incoming, nid, a.depth):
+                        ref = params.get('m_listenedEntity') or params.get('m_eventName') or params.get('m_declMdnt') or ''
+                        print(f'    d{d} {kind}: {ref} {pos.get(ref) or ""}')
+        return
     for ent, body in ents.items():
         if 'm_kiscule' not in body:
             continue
