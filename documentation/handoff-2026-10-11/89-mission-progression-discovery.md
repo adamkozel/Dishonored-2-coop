@@ -123,6 +123,8 @@ So in co-op, the partner reaches the end through the shared carriage usable or a
 - **Runtime (pass):** the lab-only `coop_chaos_points 60` (refused in product mode) set the host over the high threshold. The client followed (0 → 60), both computed level 1, and both loaded `institute_p_highchaos`.
 - **Failed take:** mission-end-chaos-v1291e failed on a harness variable collision (PowerShell's `$chaos` is the `-Chaos` parameter). It is kept as evidence.
 
+**Client-originated end (take mission-end-client-v1291g, [audit 1295](../../work/movement-integration/client-mission-end-audit-v1295.json)):** Emily took the carriage. Corvo's world completed its own mission from her `D2ME` and opened its own result screen. With the host at 60 chaos points, both loaded `institute_p_highchaos`. The mission end works from either player.
+
 **Next (superseded by the mirror above):** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
 
 ## Next for this line

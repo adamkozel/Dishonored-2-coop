@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-15T23:38:15.580175+02:00",
+  "candidate": "candidate-npc-combat-v1214ba",
+  "takes": [
+    {
+      "take": "mission-end-client-v1291g",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: a client-originated mission end (Emily takes the carriage) with the host over the high chaos threshold.",
+  "findings": [
+    "Confirmed runtime: Emily used the carriage; her world sent D2ME (sent 1); Corvo's world completed its own mission from it (applied 1) and opened its own result screen.",
+    "Host states: 1/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 0/0@ -> 15/5@ -> 5/0@campaign/institute/institute_p_highchaos -> 1/0@campaign/institute/institute_p_highchaos.",
+    "Client states: 1/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 9/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 0/0@ -> 15/5@ -> 1/5@campaign/institute/institute_p_highchaos -> 5/0@campaign/institute/institute_p_highchaos -> 1/0@campaign/institute/institute_p_highchaos.",
+    "Chaos followed the host (both 60 points, level 1); both loaded campaign/institute/institute_p_highchaos (same map: True).",
+    "Both-ready hold: host waited 1281 ms, client 0 ms."
+  ],
+  "next": [
+    "Product mode across the VM (two accounts).",
+    "Hand-offs without a result screen and in-mission LevelTransition map changes (chapter 97)."
+  ]
+}
