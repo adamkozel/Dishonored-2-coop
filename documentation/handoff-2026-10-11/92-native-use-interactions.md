@@ -115,6 +115,7 @@ Harness options: `-LeversOnly` (1228i); `-Back`, `-ObserverPitch` and `-LeverSou
 - **How it works (confirmed static):** the camera hooks the native render-view setter (+0x890c50), the function the [IGCS Dishonored 2 notes](https://github.com/FransBouma/InjectableGenericCameraSystem/tree/master/Cameras/Dishonored2) describe. IGCS was read as a reference only. Its current camera uses the native Ansel mode, which pauses the game.
 - **Harness 1228n `-FreeCam`:** the observer turns toward the use where it stands, takes the pitch, and the camera is held at the computed spot (`-Back`, `-Side`, `-EyeHeight`). No body teleport means no falls from platforms, no walls and no crouching at cramped spots.
 - **Take [use-variants-dunwall-v1228u](../../work/natural-moveset/use-variants-dunwall-v1228u):** lock and door pass in both roles with the camera held at the spot.
+- **Hidden arms (1214aq):** while a hold is active, the observer's own first-person arm entities are hidden with the native hide (+0x8784b0) and shown again on release. Before, they floated in view when the observer's body stood in front of the camera ([audit 1286](../../work/movement-integration/views-audit-v1286.json)).
 
 **#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
 - The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).

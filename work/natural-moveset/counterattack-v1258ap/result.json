@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "approach": "face",
+      "source": "client",
+      "kind": "counter",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "healthHold": true,
+      "sourceHealthStart": 70,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "camera": [
+        -37.739999560857,
+        -145.71000018297624,
+        68.60000000000001
+      ],
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -38.99,
+          -148.71,
+          66.4
+        ],
+        "observer": [
+          -38.99,
+          -148.71,
+          66.4
+        ]
+      },
+      "counterStarted": true,
+      "inputAt": "2026-10-15T20:55:22.7095369+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/combat/sword_attack_focus_in.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+        "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_recoil_left.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_leftb.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_right.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_rightb.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_slash_left.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_leftb.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000"
+      ],
+      "sourceHealthEnd": 70,
+      "healthHoldStatus": {
+        "active": true,
+        "refills": 4,
+        "misses": 0,
+        "last": 70.0
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Counterattack (#9): parry follow-up cycles against a host-owned guard under the product controller, both source roles: native parry and finisher scenes, partner phase, shared death and victim position; fixture restored after every case."
+}

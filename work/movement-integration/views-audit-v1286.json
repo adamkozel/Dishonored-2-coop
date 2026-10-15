@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-15T21:17:42.428822+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214ap",
+    "candidate-npc-combat-v1214aq"
+  ],
+  "takes": [
+    {
+      "take": "coverage-v1285a",
+      "candidate": "candidate-npc-combat-v1214ap",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "counterattack-v1258ap",
+      "candidate": "candidate-npc-combat-v1214ap",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "mission-lifecycle-v1199e",
+      "candidate": "candidate-npc-combat-v1214ap",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "mission-lifecycle-v1199f",
+      "candidate": "candidate-npc-combat-v1214ap",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "mission-lifecycle-v1199g",
+      "candidate": "candidate-npc-combat-v1214ap",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "mission-lifecycle-v1199h",
+      "candidate": "candidate-npc-combat-v1214aq",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (coverage-v1285a, 1214ap): crouched at the open lab spot, two 1.5 s charged attacks per role; the partner presented the crouched heavy (combat variant 18) in 11-12 samples. Visual: Corvo stays crouched through charge, hold and release with no standing pop (the 1260 rejection), Emily likewise. Accepted (functional) in both roles.",
+    "Confirmed runtime (mission-lifecycle-v1199e, 1214ap, -FreeCam): after the native map load and after the shared checkpoint restart the partner is present on both peers; the client window now shows Corvo (1199d faced a wall).",
+    "Confirmed runtime (1199e/1199f entity lists): the floating shoulders and arms beside Corvo after the restart were the observer's own first-person arms (left_arm_1/right_arm_2 at the client body, which the restart left 0.9 m off its spot); there was exactly one partner clone. Not a co-op defect; 1199g (camera from actual positions) showed the arms in every view.",
+    "Fix 1214aq (lab only): while an observer camera hold is active, the local first-person arm entities are hidden with the native hide (+0x8784b0) and shown on release after re-validation by handle.",
+    "Confirmed runtime (mission-lifecycle-v1199h, 1214aq): Corvo on the client and Emily on the host, upright and whole after the load and after the restart, no arms in view (hides 2 and 4, shows 2). Visual: map-load and checkpoint recovery accepted in both roles.",
+    "Confirmed runtime (counterattack-v1258ap, 1214ap): the lab health hold refilled the source 4 times and the source ended at 70 of 70; the guard walked away and never engaged (combat views stay parked)."
+  ],
+  "complete": true,
+  "scope": "#11: crouched heavy and map-load/checkpoint recovery views; free camera hides the observer arms; health hold verified."
+}

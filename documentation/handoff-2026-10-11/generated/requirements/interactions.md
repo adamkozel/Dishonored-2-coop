@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:52:40.430033+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T21:17:46.024022+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -1109,7 +1109,7 @@ Native cutscene animation remains scene-specific. Entry/exit ownership and blend
 - [in_game_recordings: cutscene-transition-v1236b/scene-client.mp4](<../../../../work/natural-moveset/cutscene-transition-v1236b/scene-client.mp4>)
 ## map_load_checkpoint_recovery
 
-Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.
+Audit 1286: the partner is filmed upright and whole on both peers after the map load and the shared checkpoint restart (mission-lifecycle-v1199h); accepted in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.
 
 ````json
 {
@@ -1121,13 +1121,13 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily pa
   ],
   "authoring": "missing",
   "runtime_binding": "partial_native_steam_map_load_and_checkpoint_restart_both_peers",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "map load checkpoint recovery",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
+  "notes": "Audit 1286: the partner is filmed upright and whole on both peers after the map load and the shared checkpoint restart (mission-lifecycle-v1199h); accepted in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1136,13 +1136,15 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily pa
   ],
   "evidence": [
     "../movement-integration/lifecycle-audit-v1202.json",
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/views-audit-v1286.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/lifecycle-audit-v1202.json](<../../../../work/movement-integration/lifecycle-audit-v1202.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/views-audit-v1286.json](<../../../../work/movement-integration/views-audit-v1286.json>)
 - [in_game_recordings: mission-lifecycle-v1199d/load-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/load-host.mp4>)
 - [in_game_recordings: mission-lifecycle-v1199d/restart-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/restart-host.mp4>)
 ## incapacitation_and_rescue_if_supported
