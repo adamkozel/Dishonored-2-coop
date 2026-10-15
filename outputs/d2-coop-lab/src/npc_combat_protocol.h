@@ -51,6 +51,20 @@ inline unsigned npcCombatRangedWeapon(std::uint64_t flags){
     for(const auto& p:npcCombatRangedProfiles)if(p.flags==flags)return p.weapon;
     return 0;
 }
+// 1214w (#14): declarations the combat replay reproduces exactly: player sword,
+// kick, fatality, assassination, corpse contact and the ranged profiles.
+inline bool npcCombatReplayableDeclaration(std::uint64_t key){
+    constexpr std::uint64_t keys[]={0x1b4f75938aa0c437ull,0xfe8a6479049dd8c8ull,0x2fe1234fd9ffa6aull,0xc277b040bc6873ccull,0xace60ad990b96dbdull};
+    for(auto k:keys)if(k==key)return true;
+    for(const auto& p:npcCombatRangedProfiles)if(p.key==key)return true;
+    return false;
+}
+// On the host, any other damage (grenade explosions, powers, thrown props, bolt
+// variants) applies natively; HostWorld and Dead share its outcome. World
+// sentinels (corpse contact, map triggers) stay captured.
+inline bool npcCombatHostNativeDeclaration(unsigned localRole,unsigned attacker,unsigned inflictor,std::uint64_t key){
+    return localRole==0&&attacker!=0x3fff0010u&&inflictor!=0x3fff0010u&&!npcCombatReplayableDeclaration(key);
+}
 inline bool validNpcRanged(NpcCombatDamage d,const NpcCombatRangedDamage& r){
     const auto* p=npcCombatRangedProfile(d,r);
     return p&&std::isfinite(r.amount)&&r.amount>0&&r.amount>=p->minimum&&r.amount<=p->maximum&&

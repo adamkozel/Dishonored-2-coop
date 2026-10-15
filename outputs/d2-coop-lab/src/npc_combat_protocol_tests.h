@@ -89,6 +89,17 @@ void npcCombatProtocolTests(){
      require(!npcCombatHostWorldSource(0,0x3fff0010u,7,false,false)&&!npcCombatHostWorldSource(0,7,0x3fff0010u,false,false),"world sentinels (corpse contact, map triggers) stay captured");
      require(npcCombatHelloHealth(1,30,20)==1&&npcCombatHelloHealth(0,20,30)==2&&npcCombatHelloHealth(0,30,30)==0&&npcCombatHelloHealth(1,30,30)==0,"the client follows a lower host health; the host waits for it");
      require(npcCombatHelloHealth(1,20,30)==-1&&npcCombatHelloHealth(0,30,20)==-1&&npcCombatHelloHealth(1,30,0)==-1,"a replica never gains health and never dies by handshake");}
+    {// 1214w: host damage the combat replay cannot reproduce applies natively.
+     for(const char* d:{"components/characters/player/base/damage/player_sword.damage","components/characters/player/base/damage/player_kick.damage",
+         "components/characters/player/base/damage/generic_fatality.damage","components/characters/player/base/damage/assassination_damage.damage",
+         "components/base/damage/corpse_damage.damage","components/base/damage/gun_spread_damage.damage","components/equipment/damage/bullet_regular.damage",
+         "components/equipment/damage/bolt.damage"})require(npcCombatReplayableDeclaration(npcDamageKey(d)),"exact replay declarations stay captured");
+     for(const char* d:{"components/equipment/damage/explosion_grenade.damage","components/characters/player/base/damage/windblast_npc.damage",
+         "components/equipment/damage/springrazor.damage","components/equipment/damage/bolt_incendiary.damage"}){const auto k=npcDamageKey(d);
+         require(!npcCombatReplayableDeclaration(k)&&npcCombatHostNativeDeclaration(0,1,0x1234,k),"grenades, powers and bolt variants apply natively on the host");
+         require(!npcCombatHostNativeDeclaration(1,1,0x1234,k),"the client never applies replica damage natively");
+         require(!npcCombatHostNativeDeclaration(0,0x3fff0010u,7,k)&&!npcCombatHostNativeDeclaration(0,7,0x3fff0010u,k),"world sentinels stay captured");}
+     require(!npcCombatHostNativeDeclaration(0,1,0x1234,npcDamageKey("components/characters/player/base/damage/player_sword.damage")),"host sword hits stay exact commits");}
     auto badWorld=world;badWorld.sourceActorArm=0;require(!validNpcCombat(badWorld,c,h),"unattributed world collision rejected");
     badWorld=world;badWorld.sourceRole=1;require(!validNpcCombat(badWorld,c,h),"corpse cannot be disguised as player damage");
     badWorld=world;badWorld.kind=NpcCombatMessage::Request;badWorld.request=1;badWorld.event=0;badWorld.before=badWorld.after=badWorld.maximum=badWorld.inflicted=0;require(!validNpcCombat(badWorld,h,c),"client cannot request host-owned world damage");

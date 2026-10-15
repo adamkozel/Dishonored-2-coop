@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-15T15:24:46.083902+02:00",
+  "UpdatedAt": "2026-10-15T15:37:21.048764+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -21763,7 +21763,7 @@
   },
   "MovementExecutionPriority": {
     "priority": "Existing pipeline; functional coverage and continuous movement first, cosmetic polish later. No further third-party co-op research.",
-    "current": "1214v live (protocol 75, bank 1266): stage 4 shared combat - host deaths the combat capture missed are reconciled by Dead (1214n), host-world damage is shared as exact HostWorld health commits (1214o, take 1272b), killing an unconscious guard is shared in both roles with the bodies 0.0 m apart (1214p-v, take 1271m); held native objects, gestures, counter-kills and every native takedown/finisher scene presented.",
+    "current": "1214x live (protocol 75, bank 1266): stage 4 shared combat - host deaths the combat capture missed are reconciled by Dead (1214n), host-world damage is shared as exact HostWorld health commits (1214o, take 1272b), killing an unconscious guard is shared in both roles with the bodies 0.0 m apart (1214p-v, take 1271m), host grenades/powers apply natively and are shared (1214w, take 1274a); held native objects, gestures, counter-kills and every native takedown/finisher scene presented.",
     "completion": "Fallback keeps bodies usable but does not count as a completed action animation.",
     "coverageReconciliation": "work/movement-integration/coverage-reconciliation-v600.json",
     "polishDelegationPreference": "User2026-10-13 explicitly accepts functional-first coverage and later polish by a hired animator. Preserve editable sources and review recordings; do not claim complete gameplay from an attractive clip.",
@@ -22020,15 +22020,15 @@
     "scope": "Verified native host/client menu suspension and resume on retained NPC arms; same-map coordinated checkpoint retires old AI leases and rebinds seven fresh native actors after both-complete/role restoration. Visible menu proof has two223-joint body callbacks before/after, none during held pause. General combat, mid-world spawning/death and campaign transitions remain incomplete."
   },
   "NpcCombatContinuation": {
-    "at": "2026-10-15T15:24:46.083902+02:00",
-    "candidate": "candidate-npc-combat-v1214v",
+    "at": "2026-10-15T15:37:21.048764+02:00",
+    "candidate": "candidate-npc-combat-v1214x",
     "runtimeVerified": true,
     "nativeMeleeFixtureVerified": true,
     "complete": false,
     "receipt": "work/movement-integration/npc-defense-presentation-audit-v1029.json",
     "details": "documentation/handoff-2026-10-11/95-shared-combat-authority.md",
-    "latest": "1270e/1270f: every guard in 3-4 guard fights ends in the same state in both worlds. 1214n Dead, 1214o HostWorld (1272b exact on both peers), 1214p-v: killing an unconscious guard is shared in both roles through the combat commit (client kill) or Dead (host kill), bodies 0.0 m apart (1271m).",
-    "next": "Host-player damage the capture cannot decode (grenades, powers); Hello follow at runtime; spawns, bodies and physics; enemies perceiving both players.",
+    "latest": "1270e/1270f: every guard in 3-4 guard fights ends in the same state in both worlds. 1214n Dead, 1214o HostWorld (1272b exact on both peers), 1214p-v: killing an unconscious guard is shared in both roles through the combat commit (client kill) or Dead (host kill), bodies 0.0 m apart (1271m). 1214w: host damage the replay cannot reproduce (grenades, powers) applies natively; 1274a: a host grenade explosion killed a bound guard in both worlds (Dead).",
+    "next": "Client grenades/powers on host NPCs (native request); real grenade/power takes on a mission; Hello follow at runtime; spawns, bodies and physics; enemies perceiving both players.",
     "previousAcceptedNpcLifecycle": "candidate-npc-stream-v847",
     "inProgress": "Documentation and next combat/world items.",
     "acceptedEnemyDamageFallback": "candidate-npc-combat-v988"

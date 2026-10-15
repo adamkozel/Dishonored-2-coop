@@ -1,6 +1,6 @@
 # Shared combat authority on missions
 
-Stage 4, card #14. Candidates 1214n–1214v; harnesses 1270 (multi-enemy fight), 1271 (killing an unconscious guard) and 1272 (host-world damage on a bound guard).
+Stage 4, card #14. Candidates 1214n–1214x; harnesses 1270 (multi-enemy fight), 1271 (killing an unconscious guard), 1272 (host-world damage on a bound guard), 1273/1274 (host grenade on a bound guard).
 
 The roadmap exit criteria for stage 4 are: enemies perceive and fight both players; one authoritative damage and outcome path; and synchronized health, deaths, spawns, bodies and physics. This chapter covers sustained multi-enemy fights on a real mission map and the two gaps they exposed in the shared outcome path. The NPC stream and the per-NPC combat channels are described in [chapter 86](86-mission-npc-authority.md).
 
@@ -109,8 +109,22 @@ The combat JSON records each channel's retirement reason and shared health, plus
 - **1271l, client kill:** both worlds recorded the death, but the bodies ended 8.84 m apart. The client had choked this guard, and its replica stays locally paired while unconscious (1214a) so that its native unconscious body is kept. Nothing ended that pairing on death, so the host's corpse poses arrived but were never applied: the root count stayed at 308 while poses rose from 543 to 581.
   - **Fix (1214v):** a corpse ends the pairing, so the host's corpse stream drives the body (1271m: 0.0 m apart).
 
+## Host grenades and powers (1214w–1214x, harnesses 1273/1274)
+
+**Finding (confirmed static):** the combat replay reproduces only these declarations exactly: player sword, kick, fatality, assassination, corpse contact and the three ranged profiles (gun spread, regular bullet, bolt). Any other player damage on a bound NPC, for example `explosion_grenade`, Windblast (`windblast_npc`), `springrazor` or the bolt variants, was suppressed by the capture, and the NPC's channel was retired (`hit_damage_parameters`). A host grenade therefore did not hurt a bound guard.
+
+**Fix (1214w):** on the host, such damage applies natively (`npcCombatHostNativeDeclaration`, counted as `hostNativePassed` with the last declaration). HostWorld commits share a loss and `Dead` shares a death. World sentinels (corpse contact, map triggers) stay captured.
+
+**Tests:**
+- **1273a:** fail (harness). The lab item fixture refuses to grant a grenade under the product controller (`unsupported_scope_or_item_owned`): it needs the isolated movement fixture.
+- **1274a (1214x), pass (confirmed runtime):** the lab-only `coop_npc_combat hostnative_test` sends the native `explosion_grenade` (amount 50; attacker and inflictor the host player) through the installed damage observer at the bound Dunwall tutorial guard.
+  - The hit passed the capture natively (`hostNativePassed` 1) and killed the guard (40 → 0).
+  - `Dead` shared the death: the client's replica also went 40 → 0 (`client_dead_from_host`).
+- A real thrown grenade or power on a mission map is still to be recorded.
+
 ## Open
 
-- Host-player damage that the capture cannot decode (grenades, powers) still retires the channel; ranged and power damage on missions remain open.
+- A client's grenade or power on a host NPC is still suppressed and retires the channel; it needs a request the host applies natively.
+- Host grenades and powers are verified through the lab fixture only (1274a), not yet with a real throw or cast on a mission.
 - The Hello follow (host lower at re-bind) is unit-tested but not yet observed at runtime.
 - Spawns, bodies and physics beyond the corpse stream are not covered by this chapter.

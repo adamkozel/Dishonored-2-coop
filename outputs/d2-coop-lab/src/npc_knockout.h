@@ -42,7 +42,11 @@ void serviceNpcKnockoutTest(){
 // bloodfly damage_periodic, attacker and inflictor another NPC). Target: the bound,
 // ready, conscious combat NPC nearest the host player; source: another streamed NPC.
 constexpr char kNpcHostWorldTestDecl[]="components/characters/animals/bloodfly/damage_periodic.damage";
-struct NpcHostWorldTest{bool requested=false;const char* result="idle";std::uint32_t target=0,source=0;NativeHealth before{},after{};float amount=0;std::uint64_t runs=0;};
+// 1214x (coop_npc_combat hostnative_test): the host player's own grenade explosion
+// (explosion_grenade, attacker and inflictor the local player, native amount) on the
+// same target: player damage the combat replay cannot reproduce (1214w).
+constexpr char kNpcHostNativeTestDecl[]="components/equipment/damage/explosion_grenade.damage";
+struct NpcHostWorldTest{bool requested=false,player=false;const char* result="idle";std::uint32_t target=0,source=0;NativeHealth before{},after{};float amount=0;std::uint64_t runs=0;};
 NpcHostWorldTest npcHostWorldTest;
 void serviceNpcHostWorldTest(){
     auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
@@ -54,16 +58,17 @@ void serviceNpcHostWorldTest(){
         float d=0;for(unsigned i=0;i<3;++i){const float x=root[i]-outgoing.position[i];d+=x*x;}
         if(d<best){best=d;target=c;}}
     if(!target){t.result="no_bound_target";return;}
-    for(const auto& c:npcChannels)if(c.enabled&&c.arm!=target->arm&&c.lease.binding.npc.handle){t.source=c.lease.binding.npc.handle;break;}
+    if(t.player)t.source=1;
+    else for(const auto& c:npcChannels)if(c.enabled&&c.arm!=target->arm&&c.lease.binding.npc.handle){t.source=c.lease.binding.npc.handle;break;}
     if(!t.source){t.result="no_source_npc";return;}
     t.target=target->lease.binding.npc.handle;
     if(!readNativeHealth(memoryRead,base,t.target,t.before)||t.before.actor!=target->lease.binding.npc.actor){t.result="health_refused";return;}
-    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kNpcHostWorldTestDecl,false,false);
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,t.player?kNpcHostNativeTestDecl:kNpcHostWorldTestDecl,false,false);
     std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138){t.result="declaration_refused";return;}
     alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
-    std::memcpy(&t.amount,params.data()+8,4);if(!(t.amount>0)||t.amount>=t.before.current){t.amount=2;std::memcpy(params.data()+8,&t.amount,4);}
+    std::memcpy(&t.amount,params.data()+8,4);if(!(t.amount>0)||(!t.player&&t.amount>=t.before.current)){t.amount=t.player?5.f:2.f;std::memcpy(params.data()+8,&t.amount,4);}
     std::memcpy(params.data()+0x50,&t.source,4);std::memcpy(params.data()+0x54,&t.source,4);
     observeNativeDamage(reinterpret_cast<void*>(t.before.component),params.data(),result.data());
     if(!readNativeHealth(memoryRead,base,t.target,t.after)){t.result="after_refused";return;}
@@ -73,8 +78,8 @@ void writeNpcHostWorldTest(){
     if(!*statusPath||!npcHostWorldTest.runs)return;const auto& t=npcHostWorldTest;
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-hostworld-test.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"runs\":%llu,\"result\":\"%s\",\"target\":%u,\"source\":%u,\"amount\":%.4f,\"before\":%.4f,\"after\":%.4f,\"maximum\":%.3f}",
-        static_cast<unsigned long long>(t.runs),t.result,t.target,t.source,t.amount,t.before.current,t.after.current,t.before.maximum);
+    fprintf(f,"{\"runs\":%llu,\"mode\":\"%s\",\"result\":\"%s\",\"target\":%u,\"source\":%u,\"amount\":%.4f,\"before\":%.4f,\"after\":%.4f,\"maximum\":%.3f}",
+        static_cast<unsigned long long>(t.runs),t.player?"hostnative":"hostworld",t.result,t.target,t.source,t.amount,t.before.current,t.after.current,t.before.maximum);
     const bool ok=!ferror(f);if(!fclose(f)&&ok)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
 void writeNpcKnockoutTest(){

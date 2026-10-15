@@ -49,7 +49,7 @@ NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest
 // only that NPC, and the product controller re-arms a stopped session.
 bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
 const char* npcCombatLastRetire="none";
-std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0};std::uint64_t npcCombatFollowSubtractions=0;
+std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0},npcCombatHostNativePassed{0},npcCombatHostNativeLastKey{0};std::uint64_t npcCombatFollowSubtractions=0;
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
@@ -119,7 +119,12 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
         if(!localRole){unsigned inflictor=0,attacker=0;const auto i=reinterpret_cast<std::uintptr_t>(info),base=reinterpret_cast<std::uintptr_t>(gameImage);
             if(memoryRead(i+0x50,&inflictor,4)&&memoryRead(i+0x54,&attacker,4)){
                 const auto in=readNativeDamageSource(memoryRead,base,game,inflictor),at=readNativeDamageSource(memoryRead,base,game,attacker);
-                if(npcCombatHostWorldSource(localRole,attacker,inflictor,at.valid&&at.localOwned,in.valid&&in.localOwned)){npcCombatHostWorldPassed.fetch_add(1);break;}}}
+                if(npcCombatHostWorldSource(localRole,attacker,inflictor,at.valid&&at.localOwned,in.valid&&in.localOwned)){npcCombatHostWorldPassed.fetch_add(1);break;}
+                // 1214w: host damage the replay cannot reproduce (grenades, powers) used to be
+                // suppressed and retire the NPC; it applies natively and HostWorld/Dead share it.
+                std::uintptr_t name=0;std::string path;
+                if(decl&&memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,path)&&npcCombatHostNativeDeclaration(localRole,attacker,inflictor,npcDamageKey(path))){
+                    npcCombatHostNativePassed.fetch_add(1);npcCombatHostNativeLastKey.store(npcDamageKey(path));break;}}}
         handled=true;NpcCombatCapture e{};e.nonce=b.nonce;e.arm=b.arm;e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.component=c;
         if(npcCombatCaptures.size()>=64||!memoryRead(reinterpret_cast<std::uintptr_t>(info),e.info.data(),e.info.size())||!memoryRead(n.npc.actor+0x300,e.position,12))npcCombatCaptureFault.store(1);
         else{
@@ -821,7 +826,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load());
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\"",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}());
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
