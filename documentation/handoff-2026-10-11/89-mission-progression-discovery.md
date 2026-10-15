@@ -132,6 +132,8 @@ So in co-op, the partner reaches the end through the shared carriage usable or a
   - Steam's invite overlay, opened by `coop_session host`, kept the host's input. Lab takes now host with `coop_session host_quiet` (1214bc).
   - On the result screen, Continue starts the next mission with the native `RestartFromMemoryCheckpoint` (confirmed runtime). Checkpoint sync, armed in product mode, consumed it as a user reload, so both worlds stayed on their result screens (take 1291h). 1214bd passes it through at logic 11.
 - **Lab product-mode take mission-end-product-v1291i passed:** both worlds reached The Good Doctor.
+- **Two accounts (take mission-end-vm-v1296d, 1214be, pass):** across two machines and two Steam accounts in product mode, both worlds completed Edge of the World with their own result screens, and both reached The Good Doctor in the same sample.
+  - In 1296c the host had held to its 90 s timeout, because the VM's single ready didn't count. 1214be re-sends the ready every second while holding and for 30 s after release. The host now held 3.7 s and received 30 readies, none refused.
 
 **Next (superseded by the mirror above):** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
 

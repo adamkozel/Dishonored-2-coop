@@ -5,7 +5,10 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1214ba ([identity](../../work/movement-integration/candidate-npc-combat-v1214ba/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-16. Live candidate-npc-combat-v1214be ([identity](../../work/movement-integration/candidate-npc-combat-v1214be/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Two-account mission end (#16, 1214bb–1214be, [audit 1296](../../work/movement-integration/mission-end-vm-audit-v1296.json)):** in product mode across this PC and the VM's second Steam account, finishing Edge of the World takes both players to The Good Doctor together.
+  - Fixed on the way: checkpoint sync had swallowed the result screen's Continue (`RestartFromMemoryCheckpoint`).
+  - Lab takes now host without the Steam invite overlay (`coop_session host_quiet`).
 - **Chaos follows the host (#16, 1214ba, [audit 1294](../../work/movement-integration/chaos-follows-host-audit-v1294.json)):** the partner keeps the host's chaos points, so both worlds load the same low or high chaos variant of the next mission (tested with the host over the high threshold: both loaded `institute_p_highchaos`).
 - **Both-ready start of the next mission (#16, 1214ay–1214az, [audit 1293](../../work/movement-integration/transition-hold-audit-v1293.json)):** whoever presses Continue first waits at the native load end until the partner has loaded too, so both start The Good Doctor together. The window stays responsive while waiting ([chapter 89](89-mission-progression-discovery.md)).
 - **Mission end in both worlds (#16, 1214ax, [audit 1292](../../work/movement-integration/mission-end-mirror-audit-v1292.json)):** when one player finishes Edge of the World through the carriage, the partner's world completes its own mission natively. Each player sees their own result screen, and both load The Good Doctor with their own character state ([chapter 89](89-mission-progression-discovery.md), [chapter 97](97-campaign-map-sequence.md)). Without it (take 1291a), the partner stayed behind. Open: the boat and in-mission map changes.

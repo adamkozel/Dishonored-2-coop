@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T00:45:03.086363+02:00",
+  "at": "2026-10-16T00:53:54.070234+02:00",
   "candidate": "candidate-npc-combat-v1214bb",
   "takes": [
     {
@@ -18,9 +18,15 @@
       "candidate": "candidate-npc-combat-v1214bd",
       "passed": true,
       "failure": null
+    },
+    {
+      "take": "mission-end-vm-v1296d",
+      "candidate": "candidate-npc-combat-v1214be",
+      "passed": true,
+      "failure": null
     }
   ],
-  "complete": false,
+  "complete": true,
   "scope": "#16 stage 6: the Edge of the World mission end across two machines and two Steam accounts in product mode (coop_product_auto): host on this PC = Corvo, VM = Emily.",
   "findings": [
     "1214bb: the product controller arms coop_mission_end_mirror (step 18); confirmed runtime: armed on both peers after the two-account join and the Edge of the World load.",
@@ -31,9 +37,10 @@
     "Side effect: the second account also unlocked \"Ghostly\" and \"Alternative Approach\".",
     "Take 1296b (quiet lobby, 1214bc): no overlay, but both worlds again stayed in logic 11; reproduced on the lab pair and traced to checkpoint sync consuming RestartFromMemoryCheckpoint (audit 1298).",
     "Take 1296c (1214bd, pass): across two machines and two Steam accounts in product mode, both worlds showed their own result screen and reached gameplay on institute_p_lowchaos (VM screenshot vm-logic1-124s.png: Emily at Addermire, objective updated).",
-    "Defect in 1296c: the host both-ready hold timed out after 90 s (VM arrived at 124 s, host at 210 s): the VM's single D2MR did not count on the host. 1214be re-sends the ready every second while holding and for 30 s after release."
+    "Defect in 1296c: the host both-ready hold timed out after 90 s (VM arrived at 124 s, host at 210 s): the VM's single D2MR did not count on the host. 1214be re-sends the ready every second while holding and for 30 s after release.",
+    "Take 1296d (1214be, pass): across two machines and two Steam accounts in product mode both worlds completed Edge of the World with their own result screens; the host held 3703 ms (readies sent 34, received 30, refused 0); both reached gameplay on campaign/institute/institute_p_lowchaos in the same sample (123659 ms)."
   ],
   "next": [
-    "VM take on 1214be: the both-ready hold must release on both peers."
+    "Campaign route takes per mission (chapter 97), two accounts in product mode."
   ]
 }
