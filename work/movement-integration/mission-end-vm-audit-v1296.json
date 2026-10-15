@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-15T23:58:19.238425+02:00",
+  "candidate": "candidate-npc-combat-v1214bb",
+  "takes": [
+    {
+      "take": "mission-end-vm-v1296a",
+      "passed": false,
+      "failure": "Next mission not reached (host False, vm False)"
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: the Edge of the World mission end across two machines and two Steam accounts in product mode (coop_product_auto): host on this PC = Corvo, VM = Emily.",
+  "findings": [
+    "1214bb: the product controller arms coop_mission_end_mirror (step 18); confirmed runtime: armed on both peers after the two-account join and the Edge of the World load.",
+    "Confirmed runtime: the host carriage end sent D2ME; the VM (second account) completed its own mission (applied 1) and showed Emily's native \"Edge of the World - Mission 02 Complete\" screen (vm-logic11-24s.png).",
+    "Host states: 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 9/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos; VM states: 1/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos.",
+    "Failure: both stayed in logic 11. coop_session host opened the native Steam invite overlay on the host, which kept the host input, so the host never continued; the VM continued from its result screen and then waited in logic 11 (product mode).",
+    "Privacy: the overlay showed the friends list in the local host recording (end-host.mp4; videos are never committed). 1214bc adds the lab-only coop_session host_quiet (no invite overlay) for takes.",
+    "Side effect: the second account also unlocked \"Ghostly\" and \"Alternative Approach\"."
+  ],
+  "next": [
+    "Re-run with coop_session host_quiet (1214bc)."
+  ]
+}
