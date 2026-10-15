@@ -1,0 +1,15 @@
+{
+  "interrupted": true,
+  "reason": "Stopped by Claude after both lever cases: city watch guards at the wind-turbine lever attacked and killed the host observer during the client lever case (host health 0, both peers at game logic 13 death screen), so the latch and tap cases could not run.",
+  "cases": "Both lever cases completed and are recorded (use-*-script_lever_windturbine_1_1_1.json).",
+  "recovery": [
+    "Recover-InterruptedTake-v1055: could not leave the death screen (logic 13).",
+    "Deploy-SourceClock relaunch of both validated instances on the deployed 1213h; protected saves unchanged (recovery-relaunch.log).",
+    "Restore-LabNoteInventory-v779 after relaunch: both inventories match the baseline."
+  ],
+  "finalLogic": {
+    "host": 1,
+    "client": 1
+  },
+  "restored": true
+}

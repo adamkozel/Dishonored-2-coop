@@ -39,14 +39,27 @@ struct UsePresentation {
         amount=(std::min)(1.f,float(elapsed/out.duration));return true;
     }
 };
+// 1213h (#5): a use ends when the source walks away - more than 0.6 m of HORIZONTAL travel from where
+// it started. Vertical change never ends it: in 1228/1228b the Dunwall window's opening sash dropped the
+// source 0.46 m off a ledge with only 0.36 m of horizontal travel, which the old 3D rule (0.668 m) read
+// as walking away and ended the clip at 20-40% (confirmed runtime).
+inline bool useMovedAway(const float* origin,const float* position){
+    const float dx=position[0]-origin[0],dy=position[1]-origin[1];return dx*dx+dy*dy>.36f;}
 // Source classification of the focused usable's entity name (lower case).
 inline unsigned useVariantForName(const char* name){
     if(!name||!*name)return 1;
     char lower[192]{};for(unsigned i=0;i<sizeof(lower)-1&&name[i];++i){const char c=name[i];lower[i]=(c>='A'&&c<='Z')?char(c-'A'+'a'):c;}
     const auto has=[&](const char* s){return std::strstr(lower,s)!=nullptr;};
+    // Whole '_'-separated token: "rich_sink_tap_01" and "tap_right" are taps, "tapestry" is not.
+    const auto token=[&](const char* s){const auto n=std::strlen(s);
+        for(const char* at=std::strstr(lower,s);at;at=std::strstr(at+1,s))
+            if((at==lower||at[-1]=='_')&&(!at[n]||at[n]=='_'))return true;
+        return false;};
     if(has("lever"))return 2;
     if(has("crank")||has("vise"))return 3; // 1213c: a bench vise is turned by its screw handle
-    if(has("wheel")||has("valve"))return 4;
-    if((has("key")&&!has("keyhole"))||has("lock"))return 5;
+    // 1213g: sink and dissection-table taps are native Usable_tap valves (confirmed static, mission entities).
+    if(has("wheel")||has("valve")||has("faucet")||token("tap"))return 4;
+    // 1213g: door latches are native Usable_latch; ring lockers are Usable_lock (confirmed static).
+    if((has("key")&&!has("keyhole"))||has("lock")||has("latch"))return 5;
     return 1;
 }

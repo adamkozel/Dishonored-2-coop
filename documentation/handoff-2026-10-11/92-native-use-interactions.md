@@ -34,9 +34,68 @@ Updated 2026-10-14.
   - In both roles the first focused press did not register and the second did; the harness retries.
 - The take is recorded as failed only because the optional turbine-lever case afterwards threw "Observer pitch did not settle" (#4).
 
+**Real mechanisms for every variant (#4, confirmed static, [resource reader](../../tools/diag/d2_resource_index.py)):**
+- Each usable's entityDef carries a native interaction name:
+
+  | Native name | Examples | Variant |
+  |---|---|---|
+  | `Usable_lever` | `lever_01`, `lever_template` | 2 lever |
+  | `Usable_vise`, `Usable_crank` | `vise_01`; `valve_set_01` (a turned valve wheel) | 3 crank; 4 by its `valve` name |
+  | `Usable_tap` | `rich_sink_tap_01`, dissection-table `tap` | 4 wheel/valve |
+  | `Usable_lock` | `ring_locker_01` | 5 key/lock |
+  | `Usable_latch` | `door_latch_01` | 5 key/lock |
+  | `Usable_redbutton` | `button_01` | 1 |
+
+- **Dunwall fixture** (`dunwall_escape_tower_p`): ring lockers `ld_ring_locker_01_{1,2}_{lock,open}` and `_3`, about 22 m from the window; a sink tap `esc_env_rich_sink_tap_01_1`.
+- **Edge of the World:** the turbine lever; sink taps and dissection-table taps; three door latches. No valve wheels.
+- **Elsewhere:** a real `wheel_01` (`ld_wheel_01_1_1`) is in the Royal Conservatory (`curator`). Valve sets and levers are in A Crack in the Slab (`bunker`) and the Clockwork Mansion (`madinventor`).
+- **Candidate 1213g** classifies whole-token `tap` and `faucet` as 4 and `latch` as 5 (unit-tested), and deploys the `--focus` probe.
+- **Harness `Test-UseVariants-v1228`** (`-Mission dunwall|eotw`): the source aims its native eye at the target point (`Set-NativeInteractionAim-v691`) on four sides at 1.0 m and 0.75 m, then sweeps pitch. No aim or pitch failure can throw. Each case records pass or fail, and the required cases decide the take.
+
+**Dunwall results (1213g, takes 1228 and 1228b, confirmed runtime):**
+- **Lock (ring locker), both roles, both takes:** the native use registered and was classified 5. The focus named the co-located twin `ld_ring_locker_01_1_open`. The partner played the key/lock clip at weight 1.0 to 100%, ending by duration.
+- **Tap:**
+  - client: 1228 and 1228b, variant 4, 80 frames, to 100%;
+  - host: failed in 1228 (focused, but no use registered), passed in 1228b (74 frames, to 100%).
+- **Harness press bug (confirmed static):** `Send-D2Input` publishes an expiring input packet and returns at once. `X 600` followed directly by Neutral therefore held the press for only about 50–150 ms, so the first press often did not register (1227b, 1228). 1228b holds the press (X 400, wait, Neutral), and every use registered on the first press.
+- **Window (#5), both roles in 1228:** the use ended by movement (`endReason` 1) after 0.5–0.8 s.
+  - 1228b sampled the source's position. The source had been placed on something about 0.57 m above the floor in front of the window, and the opening sash dropped it 0.46 m with 0.36 m of horizontal travel. The 3D distance of 0.668 m crossed the 0.6 m "walked away" rule.
+  - **Candidate 1213h:** a use ends only on more than 0.6 m of horizontal travel (`useMovedAway`, unit-tested with the measured numbers).
+- **Visual:** not accepted. The observer was too close or occluded (candelabra), and in the 1228 tap case it stood behind a wall. v1228c films from the source's own open approach side, 3.4 m from the target.
+
+**Edge of the World (1213h, takes 1228c–1228e):**
+- **1228c, stopped by Claude:** teleporting to the wind-turbine lever raised a native tutorial modal (game logic 12) on both peers. Look input was ignored, so the seek could not succeed.
+  - Recovery: the fixture was restored, but a stuck client fixture isolation refused the note restore. A `Deploy-SourceClock` relaunch (protected saves unchanged) and a note restore completed it.
+  - From 1228d on, `ClearModals` dismisses logic 12 and pause menus before every seek pose and press.
+- **1228d, failed:** the helper was first named `Clear`, which PowerShell resolves to the `Clear-Host` alias before any function. Every case threw "CursorPosition: The handle is invalid".
+- **1228e, lever in both roles (confirmed runtime):** both sources focused `script_lever_windturbine_1_1_1`, registered the use on the first held press and classified it 2.
+  - Client source: the partner played it at weight 1.0 to 100%.
+  - Host source: the partner stopped at 27% because one observer frame was refused, which drops the whole presentation lease (#34).
+- **Hazard:** city watch guards near the turbine then killed the host observer (logic 13), so the latch and tap cases could not run. The take was stopped and the lab relaunched and restored. No native `notarget` exists (confirmed static).
+- **Visual:** neither lever video is reviewable (#33). One shows Corvo about 10 m away; in the other the observer is under attack.
+
+**#4 status:** every variant has been exercised natively in both roles on a real mechanism, recorded and reviewed:
+
+| Variant | Mechanism | Takes |
+|---|---|---|
+| Lever | wind-turbine lever | 1228e |
+| Crank | bench vise | 1227b |
+| Wheel/valve | sink tap | 1228b |
+| Key/lock | ring locker | 1228, 1228b |
+
+Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and valve visual acceptance continues in #33.
+
+**#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
+- The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).
+- The client's window use also plays to duration.
+- In the same take, the lock and tap passed again in both roles.
+- Framing note: while the observer camera is held, `setviewpos` z is the observer's feet. The close focus-line camera therefore sat about 3.3 m up and looked down at the head (#33).
+
+**Audit:** [use-variants-audit-v1229](../../work/movement-integration/use-variants-audit-v1229.json). Per-video reviews are in [use-variants-review-v1229](../../work/movement-integration/use-variants-review-v1229.json).
+
 **Open:**
-- Lever, wheel and key variants are untested on real mechanisms. Crank/vise passes (1227b).
-- The early end of the host-source use (#5): not reproduced on the vise, which plays to 100%. Re-check on the window in the #4 run.
+- Lever and valve visual acceptance (#33); latch (optional).
+- One refused pose frame drops the whole partner presentation (#34).
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

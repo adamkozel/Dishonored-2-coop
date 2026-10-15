@@ -1,0 +1,88 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "script_door_latch_blackmarket_apartment",
+        "script_door_latch_01_right_1",
+        "script_doorlatch_bm_backyard"
+      ],
+      "expected": 5,
+      "optional": true,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "script_door_latch_blackmarket_apartment",
+        "script_door_latch_01_right_1",
+        "script_doorlatch_bm_backyard"
+      ],
+      "expected": 5,
+      "optional": true,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "env_interiors_tap_1",
+        "env_interiors_tap_right",
+        "env_interiors_rich_sink_tap_01_1_6"
+      ],
+      "expected": 4,
+      "optional": true,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "env_interiors_tap_1",
+        "env_interiors_tap_right",
+        "env_interiors_rich_sink_tap_01_1_6"
+      ],
+      "expected": 4,
+      "optional": true,
+      "passed": false,
+      "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+    }
+  ],
+  "scope": "Use variants on real mechanisms (eotw): native use -> authored interaction on the partner body, both roles; fixture restored.",
+  "failure": "host script_lever_windturbine_1_1_1: Exception setting \"CursorPosition\": \"The handle is invalid.\"; client script_lever_windturbine_1_1_1: Exception setting \"CursorPosition\": \"The handle is invalid.\""
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-UseVariants-v1228d.ps1:177[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 177 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost script_lever_windturbine_1_1_1: Exception setting "CursorPosition": "The handle is invalid."; client[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mscript_lever_windturbine_1_1_1: Exception setting "CursorPosition": "The handle is invalid."[0m
+exit=1

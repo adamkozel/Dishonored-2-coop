@@ -1,0 +1,19 @@
+{
+  "interrupted": true,
+  "reason": "Stopped by Claude: both peers sat in a native tutorial modal (game logic 12) raised when the host was teleported to the wind-turbine lever; the harness had no modal handling, so look input was ignored and every seek would have failed. No use case ran.",
+  "recovery": [
+    "Recover-InterruptedTake-v1055: modal dismissed, lab features off, Dunwall fixture restored (recovery-restored-setup.json); note restore refused (scope_refused) and retries hit a stuck client fixture isolation (already_held).",
+    "Deploy-SourceClock relaunch of both validated isolated instances on the deployed 1213h; protected saves unchanged (recovery-relaunch.log).",
+    "Restore-LabNoteInventory-v779 after relaunch: both inventories match the baseline (recovery-note-restoration-after-relaunch/result.json)."
+  ],
+  "liveDllIs1213h": true,
+  "finalLogic": {
+    "host": 1,
+    "client": 1
+  },
+  "remoteFresh": {
+    "host": true,
+    "client": true
+  },
+  "restored": true
+}

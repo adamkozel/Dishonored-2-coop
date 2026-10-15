@@ -1,0 +1,232 @@
+{
+  "scope": "Use variants on real mechanisms (dunwall): native use -> authored interaction on the partner body, both roles; fixture restored.",
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "ld_ring_locker_01_1_lock",
+        "ld_ring_locker_01_2_lock",
+        "ld_ring_locker_01_1_open",
+        "ld_ring_locker_01_2_open",
+        "ld_ring_locker_01_3"
+      ],
+      "expected": 5,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "ld_ring_locker_01_1_lock",
+      "focus": {
+        "dist": 1.0,
+        "dz": 0,
+        "tries": 1,
+        "side": 0,
+        "handle": 93061542,
+        "name": "ld_ring_locker_01_1_open"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 3,
+      "sourceUseName": "ld_ring_locker_01_1_open",
+      "sourceLastVariant": 5,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 140,
+      "shownSamples": 46,
+      "observedVariants": [
+        0,
+        5
+      ],
+      "maxWeight": 1.0,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "ld_ring_locker_01_1_lock",
+        "ld_ring_locker_01_2_lock",
+        "ld_ring_locker_01_1_open",
+        "ld_ring_locker_01_2_open",
+        "ld_ring_locker_01_3"
+      ],
+      "expected": 5,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "ld_ring_locker_01_1_lock",
+      "focus": {
+        "dist": 1.0,
+        "dz": 0,
+        "tries": 1,
+        "side": 0,
+        "handle": 93061542,
+        "name": "ld_ring_locker_01_1_open"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 4,
+      "sourceUseName": "ld_ring_locker_01_1_open",
+      "sourceLastVariant": 5,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 149,
+      "shownSamples": 48,
+      "observedVariants": [
+        0,
+        5
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "esc_env_rich_sink_tap_01_1"
+      ],
+      "expected": 4,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "esc_env_rich_sink_tap_01_1",
+      "focus": {
+        "dist": 1.0,
+        "tries": 4,
+        "side": 0,
+        "pitch": 30,
+        "handle": 111149754,
+        "name": "esc_env_rich_sink_tap_01_1"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 4,
+      "sourceUseName": "esc_env_rich_sink_tap_01_1",
+      "sourceLastVariant": 4,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 137,
+      "shownSamples": 74,
+      "observedVariants": [
+        4,
+        5
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "esc_env_rich_sink_tap_01_1"
+      ],
+      "expected": 4,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "esc_env_rich_sink_tap_01_1",
+      "focus": {
+        "dist": 1.0,
+        "tries": 4,
+        "side": 0,
+        "pitch": 30,
+        "handle": 111149754,
+        "name": "esc_env_rich_sink_tap_01_1"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 5,
+      "sourceUseName": "esc_env_rich_sink_tap_01_1",
+      "sourceLastVariant": 4,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 155,
+      "shownSamples": 81,
+      "observedVariants": [
+        4,
+        5
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "ld_rich_small_gp_window_handle_37"
+      ],
+      "expected": 1,
+      "optional": true,
+      "passed": true,
+      "failure": null,
+      "target": "ld_rich_small_gp_window_handle_37",
+      "focus": {
+        "dist": 1.0,
+        "dz": 0,
+        "tries": 17,
+        "side": 180,
+        "handle": 94372282,
+        "name": "ld_rich_small_gp_window_handle_37"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.668,
+      "used": true,
+      "sourceUses": 5,
+      "sourceUseName": "ld_rich_small_gp_window_handle_37",
+      "sourceLastVariant": 1,
+      "endReason": 1,
+      "endAction": 0,
+      "observerSamples": 137,
+      "shownSamples": 12,
+      "observedVariants": [
+        1,
+        4
+      ],
+      "maxWeight": 0.9998446,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "ld_rich_small_gp_window_handle_37"
+      ],
+      "expected": 1,
+      "optional": true,
+      "passed": true,
+      "failure": null,
+      "target": "ld_rich_small_gp_window_handle_37",
+      "focus": {
+        "dist": 1.0,
+        "dz": 0,
+        "tries": 17,
+        "side": 180,
+        "handle": 94372282,
+        "name": "ld_rich_small_gp_window_handle_37"
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 6,
+      "sourceUseName": "ld_rich_small_gp_window_handle_37",
+      "sourceLastVariant": 1,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 155,
+      "shownSamples": 37,
+      "observedVariants": [
+        1,
+        4
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    }
+  ],
+  "passed": true,
+  "failure": null
+}
+exit=0

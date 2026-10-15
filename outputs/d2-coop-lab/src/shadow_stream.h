@@ -133,8 +133,8 @@ void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
     if(active&&!shadowUse.wasActive){++shadowUse.edges;const unsigned variant=shadowFocusedUseVariant(base);
         if(variant){shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);}}
     shadowUse.wasActive=active;
-    if(shadowUse.variant){float d2=0;for(int i=0;i<3;++i){const float d=outgoing.position[i]-shadowUse.origin[i];d2+=d*d;}
-        if(d2>.36f){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
+    if(shadowUse.variant){
+        if(useMovedAway(shadowUse.origin,outgoing.position)){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
 }
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;

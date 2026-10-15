@@ -5,8 +5,18 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-14. Live candidate-npc-combat-v1213b ([identity](../../work/movement-integration/candidate-npc-combat-v1213b/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
-- A native use (player state 75, plus the focused entity) now plays an authored reach-and-operate interaction on the partner's body, for both roles (1214c, [chapter 92](92-native-use-interactions.md)). `lever_button_crank_wheel` is runtime-bound for the generic reach.
+Updated 2026-10-15. Live candidate-npc-combat-v1213h ([identity](../../work/movement-integration/candidate-npc-combat-v1213h/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
+- **Use variants on real mechanisms, both roles (#4):** a native use (player state 75, plus the focused entity) plays the matching authored interaction on the partner's body ([chapter 92](92-native-use-interactions.md), [audit 1229](../../work/movement-integration/use-variants-audit-v1229.json)):
+  - generic: window;
+  - lever: wind turbine;
+  - crank: bench vise;
+  - wheel/valve: sink tap;
+  - key/lock: ring locker.
+
+  Two visuals are accepted: Corvo at the vise and Emily at the lock. The lever and valve still need visual acceptance (#33).
+- **#5 fixed in 1213h:** a use ends only on horizontal travel. The window's drop had ended the host's use early.
+- **Static asset census:** [`tools/diag/d2_resource_index.py`](../../tools/diag/d2_resource_index.py) reads every mission's entity files without lab time.
+- An earlier milestone (1214c): `lever_button_crank_wheel` became runtime-bound for the generic reach.
 - Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
 - Two machines (stage 2, 2026-10-15): the lab VM `D2CoopVM` now runs the user's second Steam account ([tools/vm](../../tools/vm/README.md)).
   - The first two-account connection passed in take [two-account-session-v1221](../../work/natural-moveset/two-account-session-v1221/result.json). The host lab instance on the main account opened a friends-only lobby, and the VM instance on the second account joined over Steam P2P. Movement synced both ways.

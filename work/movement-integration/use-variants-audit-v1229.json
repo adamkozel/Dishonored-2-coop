@@ -1,0 +1,964 @@
+{
+  "at": "2026-10-15T03:39:59.797410+02:00",
+  "cases": [
+    {
+      "take": "../natural-moveset/mission-mechanisms-v1227b",
+      "candidate": "candidate-npc-combat-v1213f",
+      "passed": false,
+      "failure": "Observer pitch did not settle",
+      "cases": [
+        {
+          "observedVariants": [
+            0,
+            3
+          ],
+          "sourceLastVariant": 3,
+          "observerSamples": 123,
+          "used": true,
+          "endAction": 0,
+          "shownSamples": 60,
+          "sourceUses": 2,
+          "source": "host",
+          "expected": 3,
+          "maxWeight": 1.0,
+          "sourceUseName": "env_vise_01_1_3",
+          "endReason": 3,
+          "observer": "client",
+          "target": "env_vise_01_1_3",
+          "maxAmount": 1.0,
+          "side": 0
+        },
+        {
+          "observedVariants": [
+            0,
+            3
+          ],
+          "sourceLastVariant": 3,
+          "observerSamples": 137,
+          "used": true,
+          "endAction": 0,
+          "shownSamples": 65,
+          "sourceUses": 1,
+          "source": "client",
+          "expected": 3,
+          "maxWeight": 1.0,
+          "sourceUseName": "env_vise_01_1_3",
+          "endReason": 3,
+          "observer": "host",
+          "target": "env_vise_01_1_3",
+          "maxAmount": 1.0,
+          "side": 0
+        }
+      ],
+      "restoration": true,
+      "interrupted": false
+    },
+    {
+      "take": "../natural-moveset/use-variants-dunwall-v1228",
+      "candidate": "candidate-npc-combat-v1213g",
+      "passed": false,
+      "failure": "host esc_env_rich_sink_tap_01_1: Source did not register a native use of esc_env_rich_sink_tap_01_1 (host)",
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "tries": 1,
+            "dist": 1.0,
+            "dz": 0,
+            "name": "ld_ring_locker_01_1_open",
+            "handle": 93061542,
+            "side": 0
+          },
+          "observerPitch": true,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 132,
+          "shownSamples": 41,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "tries": 1,
+            "dist": 1.0,
+            "dz": 0,
+            "name": "ld_ring_locker_01_1_open",
+            "handle": 93061542,
+            "side": 0
+          },
+          "observerPitch": true,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 156,
+          "shownSamples": 51,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": false,
+          "failure": "Source did not register a native use of esc_env_rich_sink_tap_01_1 (host)",
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "tries": 4,
+            "dist": 1.0,
+            "name": "esc_env_rich_sink_tap_01_1",
+            "pitch": 30,
+            "handle": 111149754,
+            "side": 0
+          },
+          "observerPitch": true,
+          "used": false,
+          "sourceUses": 1,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 146,
+          "shownSamples": 0,
+          "observedVariants": [
+            5
+          ],
+          "maxWeight": 0.0,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "tries": 4,
+            "dist": 1.0,
+            "name": "esc_env_rich_sink_tap_01_1",
+            "pitch": 30,
+            "handle": 111149754,
+            "side": 0
+          },
+          "observerPitch": true,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "esc_env_rich_sink_tap_01_1",
+          "sourceLastVariant": 4,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 157,
+          "shownSamples": 80,
+          "observedVariants": [
+            4,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "tries": 17,
+            "dist": 1.0,
+            "dz": 0,
+            "name": "ld_rich_small_gp_window_handle_37",
+            "handle": 94372282,
+            "side": 180
+          },
+          "observerPitch": true,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 1,
+          "endAction": 0,
+          "observerSamples": 149,
+          "shownSamples": 14,
+          "observedVariants": [
+            1,
+            5
+          ],
+          "maxWeight": 0.9988875,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "tries": 31,
+            "dist": 1.0,
+            "name": "ld_rich_small_gp_window_handle_37",
+            "pitch": 60,
+            "handle": 94372282,
+            "side": 270
+          },
+          "observerPitch": true,
+          "used": true,
+          "sourceUses": 3,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 1,
+          "endAction": 0,
+          "observerSamples": 159,
+          "shownSamples": 10,
+          "observedVariants": [
+            1,
+            4
+          ],
+          "maxWeight": 0.9910976,
+          "maxAmount": 0.9989951
+        }
+      ],
+      "restoration": true,
+      "interrupted": false
+    },
+    {
+      "take": "../natural-moveset/use-variants-dunwall-v1228b",
+      "candidate": "candidate-npc-combat-v1213g",
+      "passed": true,
+      "failure": null,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "dist": 1.0,
+            "dz": 0,
+            "tries": 1,
+            "side": 0,
+            "handle": 93061542,
+            "name": "ld_ring_locker_01_1_open"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 3,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 140,
+          "shownSamples": 46,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 1.0,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "dist": 1.0,
+            "dz": 0,
+            "tries": 1,
+            "side": 0,
+            "handle": 93061542,
+            "name": "ld_ring_locker_01_1_open"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 4,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 149,
+          "shownSamples": 48,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "dist": 1.0,
+            "tries": 4,
+            "side": 0,
+            "pitch": 30,
+            "handle": 111149754,
+            "name": "esc_env_rich_sink_tap_01_1"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 4,
+          "sourceUseName": "esc_env_rich_sink_tap_01_1",
+          "sourceLastVariant": 4,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 137,
+          "shownSamples": 74,
+          "observedVariants": [
+            4,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "dist": 1.0,
+            "tries": 4,
+            "side": 0,
+            "pitch": 30,
+            "handle": 111149754,
+            "name": "esc_env_rich_sink_tap_01_1"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 5,
+          "sourceUseName": "esc_env_rich_sink_tap_01_1",
+          "sourceLastVariant": 4,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 155,
+          "shownSamples": 81,
+          "observedVariants": [
+            4,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "dist": 1.0,
+            "dz": 0,
+            "tries": 17,
+            "side": 180,
+            "handle": 94372282,
+            "name": "ld_rich_small_gp_window_handle_37"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.668,
+          "used": true,
+          "sourceUses": 5,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 1,
+          "endAction": 0,
+          "observerSamples": 137,
+          "shownSamples": 12,
+          "observedVariants": [
+            1,
+            4
+          ],
+          "maxWeight": 0.9998446,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "dist": 1.0,
+            "dz": 0,
+            "tries": 17,
+            "side": 180,
+            "handle": 94372282,
+            "name": "ld_rich_small_gp_window_handle_37"
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 6,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 155,
+          "shownSamples": 37,
+          "observedVariants": [
+            1,
+            4
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        }
+      ],
+      "restoration": true,
+      "interrupted": false
+    },
+    {
+      "take": "../natural-moveset/use-variants-eotw-v1228c",
+      "candidate": "candidate-npc-combat-v1213h",
+      "passed": false,
+      "failure": "interrupted: Stopped by Claude: both peers sat in a native tutorial modal (game logic 12) raised when the host was teleported to the wind-turbine lever; the harness had no modal handling, so look input was ignored and every seek would have failed. No use case ran.",
+      "cases": [],
+      "restoration": true,
+      "interrupted": true
+    },
+    {
+      "take": "../natural-moveset/use-variants-eotw-v1228d",
+      "candidate": "candidate-npc-combat-v1213h",
+      "passed": false,
+      "failure": "host script_lever_windturbine_1_1_1: Exception setting \"CursorPosition\": \"The handle is invalid.\"; client script_lever_windturbine_1_1_1: Exception setting \"CursorPosition\": \"The handle is invalid.\"",
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "script_lever_windturbine_1_1_1"
+          ],
+          "expected": 2,
+          "optional": false,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "script_lever_windturbine_1_1_1"
+          ],
+          "expected": 2,
+          "optional": false,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "script_door_latch_blackmarket_apartment",
+            "script_door_latch_01_right_1",
+            "script_doorlatch_bm_backyard"
+          ],
+          "expected": 5,
+          "optional": true,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "script_door_latch_blackmarket_apartment",
+            "script_door_latch_01_right_1",
+            "script_doorlatch_bm_backyard"
+          ],
+          "expected": 5,
+          "optional": true,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "env_interiors_tap_1",
+            "env_interiors_tap_right",
+            "env_interiors_rich_sink_tap_01_1_6"
+          ],
+          "expected": 4,
+          "optional": true,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "env_interiors_tap_1",
+            "env_interiors_tap_right",
+            "env_interiors_rich_sink_tap_01_1_6"
+          ],
+          "expected": 4,
+          "optional": true,
+          "passed": false,
+          "failure": "Exception setting \"CursorPosition\": \"The handle is invalid.\""
+        }
+      ],
+      "restoration": true,
+      "interrupted": false
+    },
+    {
+      "take": "../natural-moveset/use-variants-eotw-v1228e",
+      "candidate": "candidate-npc-combat-v1213h",
+      "passed": false,
+      "failure": "interrupted: Stopped by Claude after both lever cases: city watch guards at the wind-turbine lever attacked and killed the host observer during the client lever case (host health 0, both peers at game logic 13 death screen), so the latch and tap cases could not run.",
+      "cases": [
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "script_lever_windturbine_1_1_1"
+          ],
+          "expected": 2,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "script_lever_windturbine_1_1_1",
+          "focus": {
+            "handle": 485890320,
+            "dz": 0,
+            "dist": 1.0,
+            "tries": 9,
+            "name": "script_lever_windturbine_1_1_1",
+            "side": 90
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "script_lever_windturbine_1_1_1",
+          "sourceLastVariant": 2,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 137,
+          "shownSamples": 43,
+          "observedVariants": [
+            0,
+            2
+          ],
+          "maxWeight": 1.0,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "script_lever_windturbine_1_1_1"
+          ],
+          "expected": 2,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "script_lever_windturbine_1_1_1",
+          "focus": {
+            "handle": 485890320,
+            "dz": 0,
+            "dist": 1.0,
+            "tries": 9,
+            "name": "script_lever_windturbine_1_1_1",
+            "side": 90
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.006,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "script_lever_windturbine_1_1_1",
+          "sourceLastVariant": 2,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 134,
+          "shownSamples": 16,
+          "observedVariants": [
+            0,
+            2
+          ],
+          "maxWeight": 0.9971527,
+          "maxAmount": 0.2732449
+        }
+      ],
+      "restoration": true,
+      "interrupted": true
+    },
+    {
+      "take": "../natural-moveset/use-variants-dunwall-v1228e",
+      "candidate": "candidate-npc-combat-v1213h",
+      "passed": true,
+      "failure": null,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "side": 0,
+            "handle": 93061542,
+            "dz": 0,
+            "name": "ld_ring_locker_01_1_open",
+            "dist": 1.0,
+            "tries": 1
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 146,
+          "shownSamples": 47,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 0.997123
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_ring_locker_01_1_lock",
+            "ld_ring_locker_01_2_lock",
+            "ld_ring_locker_01_1_open",
+            "ld_ring_locker_01_2_open",
+            "ld_ring_locker_01_3"
+          ],
+          "expected": 5,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "ld_ring_locker_01_1_lock",
+          "focus": {
+            "side": 0,
+            "handle": 93061542,
+            "dz": 0,
+            "name": "ld_ring_locker_01_1_open",
+            "dist": 1.0,
+            "tries": 1
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "ld_ring_locker_01_1_open",
+          "sourceLastVariant": 5,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 153,
+          "shownSamples": 50,
+          "observedVariants": [
+            0,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "side": 0,
+            "pitch": 30,
+            "handle": 111149754,
+            "name": "esc_env_rich_sink_tap_01_1",
+            "dist": 1.0,
+            "tries": 4
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "esc_env_rich_sink_tap_01_1",
+          "sourceLastVariant": 4,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 140,
+          "shownSamples": 80,
+          "observedVariants": [
+            4,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 0.997123
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "esc_env_rich_sink_tap_01_1"
+          ],
+          "expected": 4,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "esc_env_rich_sink_tap_01_1",
+          "focus": {
+            "side": 0,
+            "pitch": 30,
+            "handle": 111149754,
+            "name": "esc_env_rich_sink_tap_01_1",
+            "dist": 1.0,
+            "tries": 4
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "esc_env_rich_sink_tap_01_1",
+          "sourceLastVariant": 4,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 158,
+          "shownSamples": 84,
+          "observedVariants": [
+            4,
+            5
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "side": 180,
+            "handle": 94372282,
+            "dz": 0,
+            "name": "ld_rich_small_gp_window_handle_37",
+            "dist": 1.0,
+            "tries": 17
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.641,
+          "used": true,
+          "sourceUses": 3,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 147,
+          "shownSamples": 31,
+          "observedVariants": [
+            1,
+            4
+          ],
+          "maxWeight": 0.99997,
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "ld_rich_small_gp_window_handle_37"
+          ],
+          "expected": 1,
+          "optional": true,
+          "passed": true,
+          "failure": null,
+          "target": "ld_rich_small_gp_window_handle_37",
+          "focus": {
+            "side": 180,
+            "handle": 94372282,
+            "dz": 0,
+            "name": "ld_rich_small_gp_window_handle_37",
+            "dist": 1.0,
+            "tries": 17
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 3,
+          "sourceUseName": "ld_rich_small_gp_window_handle_37",
+          "sourceLastVariant": 1,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 157,
+          "shownSamples": 36,
+          "observedVariants": [
+            1,
+            4
+          ],
+          "maxWeight": 0.9999999,
+          "maxAmount": 1.0
+        }
+      ],
+      "restoration": true,
+      "interrupted": false
+    }
+  ],
+  "coverage": {
+    "generic": [
+      "client",
+      "host"
+    ],
+    "lever": [
+      "client",
+      "host"
+    ],
+    "crank": [
+      "client",
+      "host"
+    ],
+    "wheel_valve": [
+      "client",
+      "host"
+    ],
+    "key_lock": [
+      "client",
+      "host"
+    ]
+  },
+  "findings": [
+    "Confirmed static (tools/diag/d2_resource_index.py): usables carry native interaction names - Usable_lever, Usable_vise, Usable_crank (valve_set), Usable_tap, Usable_lock (ring_locker), Usable_latch, Usable_redbutton.",
+    "Confirmed runtime (1228/1228b, 1213g): the Dunwall ring locker (variant 5) and sink tap (variant 4) are used natively in both roles and presented on the partner at weight 1.0 to 100%, ending by duration.",
+    "Confirmed static: Send-D2Input publishes an expiring packet and returns at once; the harness Neutral right after the press cut presses to ~50-150 ms (first presses missed in 1227b/1228). Held presses (1228b) registered every use on the first press.",
+    "Confirmed runtime (1228b, #5): the host window use ended because the opening sash dropped the source 0.46 m off a ledge (0.36 m horizontal, 0.668 m 3D > 0.6 m). 1213h ends a use on horizontal travel only."
+  ],
+  "runtimeVerified": [
+    "candidate-npc-combat-v1213g",
+    "candidate-npc-combat-v1213h"
+  ],
+  "complete": true,
+  "outstanding": [
+    "Visual acceptance of each variant on real mechanisms (framing).",
+    "Hand targeting to the actual handle geometry (#6)."
+  ]
+}
