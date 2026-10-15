@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-15T16:30:46.520837+02:00",
+  "UpdatedAt": "2026-10-15T17:13:20.515965+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -21763,7 +21763,7 @@
   },
   "MovementExecutionPriority": {
     "priority": "Existing pipeline; functional coverage and continuous movement first, cosmetic polish later. No further third-party co-op research.",
-    "current": "1214ad live (protocol 75, bank 1266): stage 4 shared combat - host deaths the combat capture missed are reconciled by Dead (1214n), host-world damage is shared as exact HostWorld health commits (1214o, take 1272b), killing an unconscious guard is shared in both roles with the bodies 0.0 m apart (1214p-v, take 1271m), grenades/powers from either player are shared (host native 1214w take 1274a, client PeerNative request 1214z take 1275c), fair relevance and the NPC life roster share knockouts/deaths of NPCs near only one player (1214ac/1214ad, takes 1276i/1276m); held native objects, gestures, counter-kills and every native takedown/finisher scene presented.",
+    "current": "1214ag live (protocol 75, bank 1266): stage 4 shared combat - host deaths the combat capture missed are reconciled by Dead (1214n), host-world damage is shared as exact HostWorld health commits (1214o, take 1272b), killing an unconscious guard is shared in both roles with the bodies 0.0 m apart (1214p-v, take 1271m), grenades/powers from either player are shared (host native 1214w take 1274a, client PeerNative request 1214z take 1275c), fair relevance and the NPC life roster share knockouts/deaths of NPCs near only one player (1214ac/1214ad, takes 1276i/1276m), carried bodies follow in both worlds (1214ae, takes 1277e/1277f); held native objects, gestures, counter-kills and every native takedown/finisher scene presented.",
     "completion": "Fallback keeps bodies usable but does not count as a completed action animation.",
     "coverageReconciliation": "work/movement-integration/coverage-reconciliation-v600.json",
     "polishDelegationPreference": "User2026-10-13 explicitly accepts functional-first coverage and later polish by a hired animator. Preserve editable sources and review recordings; do not claim complete gameplay from an attractive clip.",
@@ -22020,15 +22020,15 @@
     "scope": "Verified native host/client menu suspension and resume on retained NPC arms; same-map coordinated checkpoint retires old AI leases and rebinds seven fresh native actors after both-complete/role restoration. Visible menu proof has two223-joint body callbacks before/after, none during held pause. General combat, mid-world spawning/death and campaign transitions remain incomplete."
   },
   "NpcCombatContinuation": {
-    "at": "2026-10-15T16:30:46.520837+02:00",
-    "candidate": "candidate-npc-combat-v1214ad",
+    "at": "2026-10-15T17:13:20.515965+02:00",
+    "candidate": "candidate-npc-combat-v1214ag",
     "runtimeVerified": true,
     "nativeMeleeFixtureVerified": true,
     "complete": false,
     "receipt": "work/movement-integration/npc-defense-presentation-audit-v1029.json",
     "details": "documentation/handoff-2026-10-11/95-shared-combat-authority.md",
-    "latest": "1270e/1270f: every guard in 3-4 guard fights ends in the same state in both worlds. 1214n Dead, 1214o HostWorld (1272b exact on both peers), 1214p-v: killing an unconscious guard is shared in both roles through the combat commit (client kill) or Dead (host kill), bodies 0.0 m apart (1271m). 1214w: host damage the replay cannot reproduce (grenades, powers) applies natively; 1274a: a host grenade explosion killed a bound guard in both worlds (Dead). 1214z: a client hit the replay cannot reproduce is a PeerNative request the host applies natively (1275c: client grenade 40->0 in both worlds); regressions 1274b/1272c pass. 1214ac fair per-player relevance; 1214ad NPC life roster: unbound NPC knockouts/deaths cross worlds (1276i host dart, 1276m client choke on Edge of the World).",
-    "next": "Regression of 1270 fights on 1214ad; real grenade/power on a mission; Hello follow at runtime; spawns, bodies and physics.",
+    "latest": "1270e/1270f: every guard in 3-4 guard fights ends in the same state in both worlds. 1214n Dead, 1214o HostWorld (1272b exact on both peers), 1214p-v: killing an unconscious guard is shared in both roles through the combat commit (client kill) or Dead (host kill), bodies 0.0 m apart (1271m). 1214w: host damage the replay cannot reproduce (grenades, powers) applies natively; 1274a: a host grenade explosion killed a bound guard in both worlds (Dead). 1214z: a client hit the replay cannot reproduce is a PeerNative request the host applies natively (1275c: client grenade 40->0 in both worlds); regressions 1274b/1272c pass. 1214ac fair per-player relevance; 1214ad NPC life roster: unbound NPC knockouts/deaths cross worlds (1276i host dart, 1276m client choke on Edge of the World). 1214ae: a body the client carries streams back to the host (1277e: 8 m carry and drop, 0.0 m apart). 1278a: the Hello follow at runtime (host-only 40->35 with combat off; the client followed at re-binding). 1214ag fixes a host crash in fair relevance (dangling npcChannels pointers, take 1279a); 1279b: 40 trigger volumes, NPC sets identical in both worlds.",
+    "next": "Full trigger census for scripted spawns; real grenade/power on a mission; thrown objects and other physics props.",
     "previousAcceptedNpcLifecycle": "candidate-npc-stream-v847",
     "inProgress": "Documentation and next combat/world items.",
     "acceptedEnemyDamageFallback": "candidate-npc-combat-v988"

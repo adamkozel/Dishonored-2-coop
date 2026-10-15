@@ -26,7 +26,11 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // once, silently, to its own unbound NPC of the same spawner and definition. NPCs near
 // only one player cannot be streamed (take 1276h: never in either eligible catalog),
 // so their knockouts and deaths otherwise stay in one world.
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose,Dead,Life};
+// 1214ae (#14): Carry (client -> host): the client carries this bound NPC's body
+// (native carry state 45, or the drop state 46, until its body settles). The host
+// accepts the client's PairedPose for it (unconscious or corpse) and holds its physics
+// animated, so its body follows the carried body (take 1277d: it never moved).
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose,Dead,Life,Carry};
 inline bool npcLifeApplies(unsigned local,unsigned desired){return desired<=2&&desired>local;}
 // The host's combat channel for the NPC: 0 no outcome, 1 death pending, 2 death committed.
 // Dead follows a grace after the corpse appears, only for a death the combat channel
@@ -108,6 +112,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&npcPairedKnockoutVariant(h.reserved);
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Dead:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::Carry:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Life:return h.size==sizeof(CoopNpcControl)&&!h.targetArm&&!h.targetHandle&&h.rig==1&&h.joints==1&&h.sourceArm==h.sourceHandle;
     case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;
     }return false;

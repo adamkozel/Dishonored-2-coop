@@ -66,13 +66,16 @@ struct NpcHostWorldTest{bool requested=false,player=false;const char* result="id
 NpcHostWorldTest npcHostWorldTest;
 void serviceNpcHostWorldTest(){
     auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
-    if((localRole&&!t.player)||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!npcCombat.enabled){t.result="context_refused";return;}
+    // 1214af: with NPC combat off the host-world mode targets a stream-bound NPC (a host loss outside any combat channel; Hello follow test 1278).
+    if((localRole&&!t.player)||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||(!npcCombat.enabled&&(t.player||localRole))){t.result="context_refused";return;}
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float best=1e12f;NpcAuthorityChannel* target=nullptr;
-    for(const auto& b:npcCombat.channels){if(!b.enabled||!b.ready||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
-        if(!c||c->unconscious||!npcCombatIdentity(*c,h)||h.current<=3)continue;
-        float root[3]{};if(!memoryRead(c->lease.binding.npc.actor+0x300,root,12))continue;
+    const auto consider=[&](NpcAuthorityChannel* c){NativeHealth h{};
+        if(!c||c->unconscious||c->corpse||!c->enabled||!c->ready||!readNativeHealth(memoryRead,base,c->lease.binding.npc.handle,h)||h.actor!=c->lease.binding.npc.actor||h.current<=3)return;
+        float root[3]{};if(!memoryRead(c->lease.binding.npc.actor+0x300,root,12))return;
         float d=0;for(unsigned i=0;i<3;++i){const float x=root[i]-outgoing.position[i];d+=x*x;}
-        if(d<best){best=d;target=c;}}
+        if(d<best){best=d;target=c;}};
+    if(npcCombat.enabled){for(const auto& b:npcCombat.channels)if(b.enabled&&b.ready&&!b.terminal&&!b.deathPending)consider(npcCombatActor(b.arm));}
+    else for(auto& c:npcChannels)consider(&c);
     if(!target){t.result="no_bound_target";return;}
     if(t.player)t.source=1;
     else for(const auto& c:npcChannels)if(c.enabled&&c.arm!=target->arm&&c.lease.binding.npc.handle){t.source=c.lease.binding.npc.handle;break;}
