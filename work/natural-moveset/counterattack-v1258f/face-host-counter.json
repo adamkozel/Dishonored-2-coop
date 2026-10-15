@@ -1,0 +1,124 @@
+{
+  "approach": "face",
+  "source": "host",
+  "kind": "counter",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 94 presented",
+    "Same outcome in both worlds: dead",
+    "Victim ends 0.06 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ],
+    "observer": [
+      -47.9101,
+      -146.649,
+      66.4
+    ]
+  },
+  "counterStarted": true,
+  "inputAt": "2026-10-15T10:13:01.2323796+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+    "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+    "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+    "midnight/gameplay/player/base/combat/sword_parry_win.midnightscene|500",
+    "midnight/gameplay/player/base/fatalities/fatality_head_fast_b.midnightscene|1433"
+  ],
+  "sceneIds": [
+    94
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 39388687,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x22847e4b370",
+      "actor": "0x22860de0070",
+      "attributes": "0x22860b548d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 39388703,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x2b2302448b0",
+      "actor": "0x2b25dff5260",
+      "attributes": "0x2b25dd4e8d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "victimEnd": {
+    "source": [
+      -47.9941,
+      -147.348,
+      66.5506
+    ],
+    "observer": [
+      -48.0143,
+      -147.294,
+      67.4631
+    ]
+  },
+  "victimGapM": 0.06,
+  "victim": {
+    "result": "checkpoint_barrier",
+    "posesDelta": 140,
+    "rootsDelta": 606,
+    "bodyAppliedDelta": 607,
+    "positionBefore": [
+      -47.8585,
+      -146.702,
+      66.4024
+    ],
+    "positionAfter": [
+      -48.0143,
+      -147.294,
+      67.4631
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}
