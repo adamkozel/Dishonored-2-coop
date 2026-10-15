@@ -74,9 +74,9 @@ void serviceLabItemUse(){
     NativePlayerMana mana{};
     if(std::memcmp(gameImage+0x745b20,bytes,sizeof(bytes))){++labUseRefused;labUseResult="mana_routine_mismatch";return;}
     if(!readNativePlayerMana(memoryRead,base,mana)||mana.player!=h.actor||mana.game!=h.game){++labUseRefused;labUseResult="mana_read_failed";return;}
-    // 1214aw: the native routine refuses a full mana pool (1287a: the potion stayed 1 -> 1). The lab first empties the
-    // pool (component +0x20, as the reader reads it) and records the previous value; the drink then refills natively.
-    labManaBefore=mana.current;*reinterpret_cast<float*>(mana.component+0x20)=0.f;
+    // The native routine drinks only after a native power spent the pool (audit 1290); a lab pool write does not
+    // help (1214aw, removed in 1214ax). The pool before the drink is recorded.
+    labManaBefore=mana.current;
     reinterpret_cast<void(*)(void*)>(gameImage+0x745b20)(reinterpret_cast<void*>(mana.component));++labUses;labUseResult="mana_use_requested";
 }
 void serviceLabItemGrant(){

@@ -1,4 +1,4 @@
-param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[switch]$FollowHost,[string]$Candidate='candidate-npc-combat-v1214aw',[int]$WatchSeconds=170)
+param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[switch]$FollowHost,[switch]$MirrorEnd,[string]$Candidate='candidate-npc-combat-v1214aw',[int]$WatchSeconds=170)
 # Stage 6 mission end (chapter 89, 97): Edge of the World ends when the player
 # uses the Addermire Station carriage (script_kiscule_carriage), rides it, and
 # the gameflow mission completes (result screen, then institute.mapinfo).
@@ -6,8 +6,10 @@ param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edg
 # the station trigger, then uses the carriage. Both worlds' logic state, map,
 # epochs and cinematic epochs are sampled through the prompt, ride, result
 # screen and load; both windows are recorded. -FollowHost also enables the
-# 1188 join-follow. Lab SLOT81 checkpoints are hashed and kept; Dunwall
-# fixture restored.
+# 1188 join-follow. -MirrorEnd (1214ax+) enables coop_mission_end_mirror on
+# both: the partner world must complete its own mission, show its own result
+# screen and load the next mission. Lab SLOT81 checkpoints are hashed and
+# kept; Dunwall fixture restored.
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
 $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$captures=[Collections.Generic.List[object]]::new();$rows=[Collections.Generic.List[object]]::new()
 $slotBackup=Join-Path $env:TEMP "d2-slot81-$Take";$slotHashes=@{}
@@ -21,7 +23,8 @@ function Capture($name,$seconds){foreach($r in 'host','client'){$hwnd=(Get-Proce
   $captures.Add((Start-Process (Get-Command ffmpeg).Source -ArgumentList $args -WindowStyle Hidden -RedirectStandardError "$out/$name-$r-capture.log" -PassThru))}}
 function WaitCaptures(){foreach($c in @($captures)){if(!$c.WaitForExit(240000)-or$c.ExitCode){throw 'Recording failed'}};$captures.Clear()}
 function Snap($r){$s=S $r;$o=[ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;mapId=$s.localMapId;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;canSkip=$s.localCinematicCanSkip;remoteMapId=$s.remoteMapId;remoteLogic=$s.remoteGameLogicState;remoteFresh=$s.remoteFresh;connection=$s.connectionState;pos=$s.localPosition}
- if($FollowHost){try{$f=S $r '.follow.json';$o.follow=$f.result;$o.followLoads=$f.loads}catch{}};$o}
+ if($FollowHost){try{$f=S $r '.follow.json';$o.follow=$f.result;$o.followLoads=$f.loads}catch{}}
+ if($MirrorEnd){try{$m=S $r '.missionend.json';$o.mirror=$m.result;$o.mirrorSent=$m.sent;$o.mirrorApplied=$m.applied;$o.mirrorState=$m.appliedState}catch{}};$o}
 function SlotFiles($r){Get-ChildItem "$root/work/lab-instances/$r/base/savegame/SLOT81" -File}
 try{
  try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Native operation active'}
@@ -30,7 +33,7 @@ try{
  $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
  New-Item -ItemType Directory $slotBackup -Force|Out-Null
  foreach($r in 'host','client'){New-Item -ItemType Directory "$slotBackup/$r" -Force|Out-Null;$slotHashes[$r]=@(SlotFiles $r|ForEach-Object {Copy-Item $_.FullName "$slotBackup/$r/$($_.Name)";@{name=$_.Name;hash=(Get-FileHash $_.FullName).Hash}})}
- Save "$out/identity.json" @{dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;followHost=[bool]$FollowHost;slot81=$slotHashes}
+ Save "$out/identity.json" @{dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;followHost=[bool]$FollowHost;mirrorEnd=[bool]$MirrorEnd;slot81=$slotHashes}
  $dirty=$true
  C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"
  $w=[Diagnostics.Stopwatch]::StartNew();$log=[Collections.Generic.List[object]]::new();$last=@{host=0;client=0}
@@ -47,6 +50,7 @@ try{
  if(!(S host).remoteFresh-or!(S client).remoteFresh){throw 'Transport not fresh on mission map'}
  foreach($r in 'host','client'){C $r 'coop_trigger_mirror on';C $r 'coop_player_health_hold on'}
  if($FollowHost){foreach($r in 'host','client'){C $r 'coop_follow_host on'}}
+ if($MirrorEnd){foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on'}}
  $ents=(Q host '--entities').entities
  $names='script_trigger_addermirestation_inside_area','script_kar_cable_car_inv_use','script_kar_cable_car_inv_use_1','script_kar_cable_car_inv_use_2','script_kar_cable_car_01_1','script_kar_cable_car_r_door_01_usable','script_kar_cable_car_l_door_01_usable','script_target_carriage_player'
  $at=@{};foreach($n in $names){$e=@($ents|Where-Object name -eq $n);if($e.Count-ne1){throw "Missing $n"};$at[$n]=$e[0].position}
@@ -80,31 +84,34 @@ try{
  if(!$used){throw 'No carriage use registered'}
  # Watch the end sequence. Pokes probe the leave/stay prompt and the result
  # screen; skippable scenes are left to play (their states are the data).
- $pokes=@(@{at=8000;b='X'},@{at=14000;b='A'},@{at=20000;b='Up'},@{at=23000;b='X'},@{at=29000;b='Down'},@{at=32000;b='X'});$poked=@{};$stateSince=@{host=@{logic=1;ms=0}};$lastMap=(Snap host).mapId;$done=$false;$resultPresses=0
+ $pokes=@(@{at=8000;b='X'},@{at=14000;b='A'},@{at=20000;b='Up'},@{at=23000;b='X'},@{at=29000;b='Down'},@{at=32000;b='X'});$poked=@{};$stateSince=@{host=@{logic=1;ms=0};client=@{logic=1;ms=0}};$lastMap=(Snap host).mapId;$done=$false;$resultPresses=@{host=0;client=0};$arrived=@{host=$false;client=$false}
  $useAt=$clock.ElapsedMilliseconds;$progressAt=$useAt;$lastCine=(Snap host).cine
  do{
   Start-Sleep -Milliseconds 400;Mark 'watch';$h=$timeline[$timeline.Count-1].host
   if($h.cine-ne$lastCine-or$h.logic-ne1-or$h.mapId-ne$lastMap){$progressAt=$clock.ElapsedMilliseconds;$lastCine=$h.cine}
-  if($h.logic-ne$stateSince.host.logic){$stateSince.host=@{logic=$h.logic;ms=$clock.ElapsedMilliseconds}}
+  foreach($r in 'host','client'){$x=$timeline[$timeline.Count-1][$r];if($x.logic-ne$stateSince[$r].logic){$stateSince[$r]=@{logic=$x.logic;ms=$clock.ElapsedMilliseconds}}}
   $since=$clock.ElapsedMilliseconds-$useAt
   if($h.logic-eq1-and!$h.pending-and$h.mapId-eq$lastMap){foreach($pk in $pokes){if(!$poked[$pk.at]-and$since-ge$pk.at-and$clock.ElapsedMilliseconds-$progressAt-gt5000){$poked[$pk.at]=$true;I host $pk.b 250;Mark "poke-$($pk.b)";break}}}
-  if($h.logic-notin 1,5,8,15,0-and!$h.pending-and$clock.ElapsedMilliseconds-$stateSince.host.ms-gt5000-and$resultPresses-lt6){I host A 300;$resultPresses++;$stateSince.host.ms=$clock.ElapsedMilliseconds;Mark "result-A-$($h.logic)"}
-  if($h.logic-in 8,15-and$clock.ElapsedMilliseconds-$stateSince.host.ms-gt8000){I host A 300;$stateSince.host.ms=$clock.ElapsedMilliseconds;Mark 'load-A'}
-  if($h.map-like'*institute*'-and$h.logic-eq1-and!$h.pending){Start-Sleep -Seconds 8;Mark 'host-next-mission';$done=$true}
+  foreach($r in 'host','client'){if($r-eq'client'-and!$MirrorEnd){continue};$x=$timeline[$timeline.Count-1][$r]
+   if($x.logic-notin 1,5,8,15,0-and!$x.pending-and$clock.ElapsedMilliseconds-$stateSince[$r].ms-gt5000-and$resultPresses[$r]-lt6){I $r A 300;$resultPresses[$r]++;$stateSince[$r].ms=$clock.ElapsedMilliseconds;Mark "result-A-$r-$($x.logic)"}
+   if($x.logic-in 8,15-and$clock.ElapsedMilliseconds-$stateSince[$r].ms-gt8000){I $r A 300;$stateSince[$r].ms=$clock.ElapsedMilliseconds;Mark "load-A-$r"}
+   if(!$arrived[$r]-and$x.map-like'*institute*'-and$x.logic-eq1-and!$x.pending){$arrived[$r]=$true;Mark "$r-next-mission"}}
+  if($arrived.host-and(!$MirrorEnd-or$arrived.client)){Start-Sleep -Seconds 8;Mark 'next-mission';$done=$true}
  }while(!$done-and$clock.ElapsedMilliseconds-lt(($WatchSeconds-6)*1000))
  WaitCaptures
  Save "$out/timeline.json" @($timeline)
  foreach($r in 'host','client'){Save "$out/player-$r.json" (Q $r '--player')}
  $states=@{};foreach($x in $timeline){foreach($r in 'host','client'){$k="$r";if(!$states[$k]){$states[$k]=[Collections.Generic.List[string]]::new()};$v="$($x[$r].logic)/$($x[$r].pending)@$($x[$r].map)";if($states[$k].Count-eq0-or$states[$k][$states[$k].Count-1]-ne$v){$states[$k].Add($v)}}}
- $rows.Add(@{used=$used;hostReachedNextMission=$done;hostStates=@($states.host);clientStates=@($states.client);final=@{host=(Snap host);client=(Snap client)}})
- Save "$out/verified.json" @{passed=$done;scope='Host mission end through the carriage; client behaviour observed.'}
+ foreach($r in 'host','client'){try{Save "$out/missionend-$r.json" (S $r '.missionend.json')}catch{}}
+ $rows.Add(@{used=$used;hostReachedNextMission=$arrived.host;clientReachedNextMission=$arrived.client;hostStates=@($states.host);clientStates=@($states.client);final=@{host=(Snap host);client=(Snap client)}})
+ Save "$out/verified.json" @{passed=$done;scope=$(if($MirrorEnd){'Mission end through the carriage reaches the next mission in both worlds.'}else{'Host mission end through the carriage; client behaviour observed.'})}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};}
 finally{
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
   foreach($c in @($captures)){try{if(!$c.HasExited-and!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}}
   if($dirty){
-   foreach($r in 'host','client'){try{I $r;C $r 'coop_trigger_mirror off';C $r 'coop_player_health_hold off';C $r 'coop_follow_host off'}catch{}}
+   foreach($r in 'host','client'){try{I $r;C $r 'coop_trigger_mirror off';C $r 'coop_player_health_hold off';C $r 'coop_follow_host off';C $r 'coop_mission_end_mirror off'}catch{}}
    # Advance any screen that blocks the restore (result screen, load prompt).
    $w=[Diagnostics.Stopwatch]::StartNew()
    do{$ok=$true;foreach($r in 'host','client'){try{$s=S $r;if($s.localGameLogicState-notin 1,2,6,13-or$s.localPendingGameLogicState){$ok=$false;if($s.localGameLogicState-eq5){I $r X 3000}else{I $r A 300}}}catch{$ok=$false}};if(!$ok){Start-Sleep -Milliseconds 1500}}while(!$ok-and$w.ElapsedMilliseconds-lt120000)

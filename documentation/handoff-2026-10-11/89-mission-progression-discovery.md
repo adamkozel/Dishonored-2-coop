@@ -88,7 +88,27 @@ So in co-op, the partner reaches the end through the shared carriage usable or a
 - **Restore:** the lab's SLOT81 checkpoints were unchanged, and the lab and protected files were restored.
 - **Side effect:** the host instance unlocked a Steam achievement ("Alternative Approach") on the shared lab account.
 
-**Next:** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
+**Mission end mirror (candidate 1214ax, take mission-end-mirror-v1291b, [audit 1292](../../work/movement-integration/mission-end-mirror-audit-v1292.json)):**
+- **Static (confirmed):** the gameflow set-state routine `0x1404e9bd0` takes the manager (game+0x1f7780), a node id and a state.
+  - The manager's hash table is at +0x18 (mask at +0x28). A node keeps its id at +8 and its state at +0xc.
+  - Mission requests (`0x14040f760`) allow 1→2 (active), 2→3 (complete), 2→4 and 2→5.
+  - A mission that reaches 3 with its result screen enabled switches the game to logic 11 (`0x1404ea020` → `SwitchState` `0x1407885b0`).
+- **Mechanism:**
+  1. When a world enters its own result screen with its mission complete, it sends `D2ME` with its mapinfo.
+  2. A partner on the same mapinfo, in ordinary gameplay, finds its **own** active mission node (state 2) and sets it to 3 through the native routine. Ids never cross processes, since they are localization string ids.
+  3. Scenes, prompts and menus wait, because `SwitchState` can refuse from them.
+  4. Lab command: `coop_mission_end_mirror on|off`. Always on in product mode.
+- **Runtime (pass):**
+  - The host sent once. Emily's world completed its own mission (1 of 18 mission nodes) and opened its own result screen in the same 400 ms sample as Corvo's.
+  - Both loaded `institute_p_lowchaos` and reached gameplay 1.6 s apart, with the connection fresh. The lab was restored.
+  - Visual (accepted): each player saw a native "Edge of the World — Mission 02 Complete" screen with their own portrait, then The Good Doctor.
+- **Open:**
+  - The partner must load the host's chaos variant.
+  - A both-ready hold at the next mission start.
+  - A client-originated end, and product mode across the VM.
+  - The boat and in-mission `LevelTransition` changes ([chapter 97](97-campaign-map-sequence.md)).
+
+**Next (superseded by the mirror above):** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
 
 ## Next for this line
 
