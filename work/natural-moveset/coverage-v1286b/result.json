@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-note: Partner reading hold not presented | client-note: Partner reading hold not presented",
+  "cases": [
+    {
+      "source": "host",
+      "case": "note",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner reading hold not presented",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -28.7156,
+        -146.354,
+        68.0
+      ],
+      "lowWeightSamples": 2,
+      "readingSamples": 0,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "note",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner reading hold not presented",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -28.7156,
+        -146.354,
+        68.0
+      ],
+      "lowWeightSamples": 2,
+      "readingSamples": 0,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}

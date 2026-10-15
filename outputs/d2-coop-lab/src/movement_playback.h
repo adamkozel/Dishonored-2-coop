@@ -173,6 +173,13 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     HANDLE worker=CreateThread(nullptr,0,movementLoadWorker,nullptr,0,nullptr);
     if(!worker){movementLoad.requested=false;movementLoad.state.store(0);return movementBeginRefused(17);}CloseHandle(worker);return true;
 }
+// 1214ar (#11 read_object_or_note): while the partner reads a note (native ReadNote4), the established readable
+// retention keeps its body visible and frozen (sweep 1260: no reading gesture). The bank keeps its lease in exactly
+// that retained state and the apply blends the existing held-object reach (use variant 6 at its held amount) over the
+// frozen body; nothing is sampled from the menu, and root, actions and damage stay untouched. When reading ends,
+// ordinary publication resumes and the hold fades out.
+bool movementRetainsReadableBody(ULONGLONG tick);
+bool movementReadingHold=false;ULONGLONG movementReadingSince=0,movementReadingTick=0;std::uint64_t movementReadingFrames=0,movementReadingHolds=0;unsigned movementReadingLeaseFail=0;
 void serviceMovementBank(ULONGLONG tick){
     const auto state=movementLoad.state.load(std::memory_order_acquire);
     if(state>=2){
@@ -194,10 +201,21 @@ void serviceMovementBank(ULONGLONG tick){
         movementCommitMs=presentationClock()-commitStart;movementCommitMaxMs=(std::max)(movementCommitMaxMs,movementCommitMs);
         consoleOutput("COOP: movement bank async %s (decode %llu ms, commit %.1f ms)\n",valid?"committed":"discarded",movementLoad.decodeMs.load(),movementCommitMs);
     }
+    const bool readable=movementRetainsReadableBody(tick);
     AcquireSRWLockExclusive(&movementLock);auto& p=movementPlayback;
+    // 1214at: the movement resume suspends the bank (and the shadow stream) for any menu, the partner's ReadNote
+    // included (1286b/1286c: the lease dropped as the hold began), so the hold depends only on the readable
+    // retention and a loaded bank; the apply draws it without a lease.
+    const bool canRead=readable&&p.actor&&p.actor==probeActor&&p.bank.joints&&p.bank.hasUse();
+    if(canRead&&!movementReadingHold){movementReadingHold=true;movementReadingSince=tick;++movementReadingHolds;}
+    if(!canRead)movementReadingHold=false;
     if(p.end){const bool ok=tick<p.end&&p.actor==probeActor&&p.game==observedGame&&p.handle==probeHandle&&p.epoch==outgoing.worldEpoch&&
         p.peerEpoch==remote.worldEpoch&&p.session==remote.session&&probeFollow&&avatarAiHeld&&locomotionEnabled&&!bodyStreamEnabled&&
-        networkFrameOwned.load()&&coopPresentationReady(outgoing)&&coopPresentationReady(remote)&&lastReceive&&tick-lastReceive<presentationFreshMs();
+        networkFrameOwned.load()&&coopPresentationReady(outgoing)&&(coopPresentationReady(remote)||movementReadingHold)&&lastReceive&&tick-lastReceive<presentationFreshMs();
+        // 1214as: which lease condition fails while the partner reads (1286b: the lease dropped as the hold began).
+        if(movementReadingHold&&!ok)movementReadingLeaseFail=(tick>=p.end?1u:0u)|(p.actor!=probeActor?2u:0u)|(p.game!=observedGame?4u:0u)|(p.handle!=probeHandle?8u:0u)|(p.epoch!=outgoing.worldEpoch?16u:0u)|
+            (p.peerEpoch!=remote.worldEpoch?32u:0u)|(p.session!=remote.session?64u:0u)|(!probeFollow?128u:0u)|(!avatarAiHeld?256u:0u)|(!locomotionEnabled?512u:0u)|(bodyStreamEnabled?1024u:0u)|
+            (!networkFrameOwned.load()?2048u:0u)|(!coopPresentationReady(outgoing)?4096u:0u)|(!lastReceive||tick-lastReceive>=presentationFreshMs()?8192u:0u);
         if(ok){p.lease=lastReceive+presentationFreshMs();if(p.persistent)p.end=tick+60000;}else p.end=p.lease=0;}
     ReleaseSRWLockExclusive(&movementLock);
 }
@@ -565,7 +583,7 @@ void applyMovementBank(void* component,void* actor,int phase){
     // stages follow, then phase3 publishes corrected render/attachment data.
     // Default remains the archived phase3 path until the A/B test passes.
     if(phase!=((p.nativeFeet&&movementFootGrounded(p))?0:3)){ReleaseSRWLockExclusive(&movementLock);return;}
-    if(!p.end||tick>=p.end||tick>=p.lease||p.clock.weight<.001f||p.animation!=reinterpret_cast<std::uintptr_t>(component)||p.actor!=reinterpret_cast<std::uintptr_t>(actor)){
+    if((!movementReadingHold&&(!p.end||tick>=p.end||tick>=p.lease||p.clock.weight<.001f))||p.animation!=reinterpret_cast<std::uintptr_t>(component)||p.actor!=reinterpret_cast<std::uintptr_t>(actor)){
         ReleaseSRWLockExclusive(&movementLock);return;}
     NativeSkeleton s{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     unsigned refuseReason=PresentationRefusalGate::None;
@@ -575,6 +593,11 @@ void applyMovementBank(void* component,void* actor,int phase){
     if(ok&&!(ok=s.logic==1))refuseReason=PresentationRefusalGate::NotGameplay;
     if(ok&&!(ok=s.game==p.game&&s.actor==p.actor&&s.animation==p.animation&&s.skeleton==p.skeleton&&s.parents==p.parents))refuseReason=PresentationRefusalGate::Identity;
     if(ok&&!(ok=movementHelperMatches(s)))refuseReason=PresentationRefusalGate::Helpers;
+    if(movementReadingHold&&p.bank.hasUse()){
+        const float dt=movementReadingTick?(std::min)(.1f,float(tick-movementReadingTick)*.001f):0.f;movementReadingTick=tick;
+        p.useVariant=6;p.useAmount=(std::min)(UsePresentation::kHoldAmount,float(double(tick-movementReadingSince)/2300.));p.useTargetValid=false;
+        p.useWeight+=(1.f-p.useWeight)*(1.f-std::exp(-dt/.15f));++movementReadingFrames;
+    }else movementReadingTick=0;
     const unsigned count=p.bank.joints;std::vector<BodyMatrix> pose(count);
     if(p.bank.hasCarryPickupSettle())p.carryLast.resize(count);
     if(p.bank.hasTurns()&&p.turnSerial!=p.clock.turnSerial){p.turnSerial=p.clock.turnSerial;p.turnFrom=p.turnLast;}
@@ -847,7 +870,7 @@ void writeMovementStatus(){
     fprintf(f,"\"carryPlaybackStance\":%u,",p.carryStance);
     fprintf(f,"\"combatRecoveryStart\":%.7f,\"combatAuthoredAmount\":%.7f,",p.combatRecoveryStart,CombatPresentation::authoredAmount(p.combatVariant,p.combatAmount,p.combatRecoveryStart));
     fprintf(f,"\"stunVariant\":%u,\"stunAmount\":%.7f,\"stunWeight\":%.7f,\"stunEvent\":%llu,",p.stunVariant,p.stunAmount,p.stunWeight,p.stunEvent);
-    fprintf(f,"\"useVariant\":%u,\"useAmount\":%.7f,\"useWeight\":%.7f,\"useEvent\":%llu,\"sourceUses\":%llu,\"sourceUseUnfocused\":%llu,\"sourceUseName\":\"%s\",\"sourceUseFrames\":%llu,\"sourceUseEdges\":%llu,\"sourceUseLastVariant\":%u,\"sourceUseEndReason\":%u,\"sourceUseEndAction\":%u,",p.useVariant,p.useAmount,p.useWeight,p.useEvent,shadowUse.uses,shadowUse.unfocused,shadowUse.name,shadowUse.frames,shadowUse.edges,shadowUse.lastVariant,shadowUse.endReason,shadowUse.endAction);
+    fprintf(f,"\"readingHold\":%s,\"readingLeaseFail\":%u,\"readingHolds\":%llu,\"readingFrames\":%llu,\"useVariant\":%u,\"useAmount\":%.7f,\"useWeight\":%.7f,\"useEvent\":%llu,\"sourceUses\":%llu,\"sourceUseUnfocused\":%llu,\"sourceUseName\":\"%s\",\"sourceUseFrames\":%llu,\"sourceUseEdges\":%llu,\"sourceUseLastVariant\":%u,\"sourceUseEndReason\":%u,\"sourceUseEndAction\":%u,",movementReadingHold?"true":"false",movementReadingLeaseFail,static_cast<unsigned long long>(movementReadingHolds),static_cast<unsigned long long>(movementReadingFrames),p.useVariant,p.useAmount,p.useWeight,p.useEvent,shadowUse.uses,shadowUse.unfocused,shadowUse.name,shadowUse.frames,shadowUse.edges,shadowUse.lastVariant,shadowUse.endReason,shadowUse.endAction);
     fprintf(f,"\"grenadeHeld\":%u,\"grenadeVariant\":%u,\"grenadeAmount\":%.7f,\"grenadeWeight\":%.7f,\"grenadeEvent\":%llu,",p.grenadeHeld,p.grenadeVariant,p.grenadeAmount,p.grenadeWeight,p.grenadeEvent);
     fprintf(f,"\"heartHeld\":%u,\"heartVariant\":%u,\"heartAmount\":%.7f,\"heartWeight\":%.7f,\"heartEvent\":%llu,",p.heartHeld,p.heartVariant,p.heartAmount,p.heartWeight,p.heartEvent);
     fprintf(f,"\"trapHeld\":%u,\"trapVariant\":%u,\"trapAmount\":%.7f,\"trapWeight\":%.7f,\"trapEvent\":%llu,",p.trapHeld,p.trapVariant,p.trapAmount,p.trapWeight,p.trapEvent);

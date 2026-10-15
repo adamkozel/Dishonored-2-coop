@@ -1,0 +1,25 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-note: Ground vantage produces unsupported steep pitch | client-note: Ground vantage produces unsupported steep pitch",
+  "cases": [
+    {
+      "source": "host",
+      "case": "note",
+      "observer": "client",
+      "passed": false,
+      "failure": "Ground vantage produces unsupported steep pitch",
+      "checks": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "note",
+      "observer": "host",
+      "passed": false,
+      "failure": "Ground vantage produces unsupported steep pitch",
+      "checks": [],
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}
