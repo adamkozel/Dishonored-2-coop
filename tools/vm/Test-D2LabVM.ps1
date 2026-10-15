@@ -46,6 +46,13 @@ if (!$inSync -and $Repair) { & (Join-Path $PSScriptRoot 'Sync-D2LabVMWorkspace.p
     $inSync = $ws.dll -eq $hostHash.dll -and $ws.probe -eq $hostHash.probe -and $ws.startLab -eq $hostHash.startLab -and $ws.pwsh -and $ws.game }
 Check 'guest workspace' $inSync "dll/probe/scripts match host=$($ws.dll -eq $hostHash.dll -and $ws.probe -eq $hostHash.probe -and $ws.startLab -eq $hostHash.startLab), game copy=$($ws.game), pwsh=$($ws.pwsh)"
 Check 'guest disk' ($ws.freeGB -ge 20) "$($ws.freeGB) GB free"
+
+# Virtual controller (#24): the game ignores the lab's simulated controller without a controller device.
+$pad = { Invoke-D2LabVM { [pscustomobject]@{ process = [bool](Get-Process vigem_pad -ErrorAction SilentlyContinue)
+    device = [bool](Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue | Where-Object FriendlyName -like 'Xbox 360 Controller*') } } }
+$pd = & $pad
+if (!($pd.process -and $pd.device) -and $Repair) { & (Join-Path $PSScriptRoot 'Enable-D2LabVMPad.ps1') | Out-Host; $pd = & $pad }
+Check 'virtual pad' ($pd.process -and $pd.device) "vigem_pad running=$($pd.process), Xbox 360 controller present=$($pd.device) (start the game after it)"
 Check 'time sync' ((Get-VMIntegrationService -VMName $VmName -Name 'Time Synchronization').Enabled) 'Hyper-V time synchronization (packet expiry clocks)'
 if ($problems.Count) { Write-Host "NOT READY: $($problems -join ', ')"; exit 1 }
 Write-Host 'READY'

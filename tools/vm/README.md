@@ -72,6 +72,14 @@ Never launch the VM game at its defaults. Re-run `Set-D2LabVMGameSettings.ps1` i
 | `Invoke-D2LabVMProbe -Mode --player` | Runs `d2_runtime_probe.exe` against the guest instance |
 | `Invoke-D2LabVMLabScript` | Runs any lab script in the guest |
 
+**Controller (#24):** the guest has no controller device, and without one Dishonored 2 ignores the lab's simulated controller. `Enable-D2LabVMPad.ps1` fixes that:
+1. It builds `guest/vigem/{vigem_setup,vigem_pad}.cpp` with the local MSVC.
+2. It copies the signed ViGEmBus package from the host's DriverStore, with no download.
+3. It registers the bus device.
+4. It registers a sign-in task that plugs one virtual Xbox 360 pad.
+
+The proxy's `XInputGetState` hook still supplies the state. Start the game after the pad exists. Take `vm-virtual-pad-v1223`: from the menu to gameplay with the controller only, and a 5.40 m stick walk.
+
 The packet expiry clocks match because Hyper-V time synchronization is on.
 
 Lab mode's peer is hard-coded to `127.0.0.1`, so a host instance and the VM instance meet through the Steam lobby instead:

@@ -42,6 +42,7 @@ Hyper-V VM `D2CoopVM` is a second PC signed in to the user's **second Steam acco
   - `Get-D2LabVMStatus` (`-Sidecar online` gives the lobby state);
   - `Invoke-D2LabVMProbe`;
   - `Save-D2LabVMScreen` and `Get-D2LabVMFps`.
+- **Controller:** a ViGEmBus virtual Xbox 360 pad gives the VM a controller device, so the lab's simulated controller works there (#24). `Enable-D2LabVMPad.ps1` installs it; start the VM game after the pad exists.
 - **Two-account session:**
   1. Host lab: `Send-D2Command -Role host -Command 'coop_session host'`.
   2. Read `.lobby` from `work/lab-instances/host/coop-status.json.online.json`.
