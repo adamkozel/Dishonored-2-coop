@@ -1,4 +1,4 @@
-param([string]$Take='mission-end-vm-v1296a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bb',[int]$WatchSeconds=300)
+param([string]$Take='mission-end-vm-v1296a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bc',[int]$WatchSeconds=300)
 # Stage 6 mission end across two machines and two Steam accounts (chapters 89
 # and 97): host lab instance on this PC = main account (Corvo), client lab
 # instance in the lab VM = second account (Emily), friends-only Steam lobby,
@@ -7,6 +7,7 @@ param([string]$Take='mission-end-vm-v1296a',[string]$MapInfo='campaign/edge_of_t
 # the host is placed in the Addermire Station trigger and uses the carriage.
 # Both worlds must show their own result screen and reach The Good Doctor on
 # the same map. Host window recorded; VM screens saved at the key states.
+# The host lobby is quiet (1214bc): no invite overlay over the game.
 # Online sidecars contain SteamIDs: only whitelisted fields are recorded.
 # Restores: sessions off, VM instance stopped, host lab pair relaunched with
 # the Dunwall fixture.
@@ -55,7 +56,7 @@ try{
  $d=(Get-Date).AddSeconds(120);do{Start-Sleep 3;$gs=Get-D2LabVMStatus;if($gs.localGameLogicState-in 13,8,15){Send-D2LabVMKey 0x0D}}while((Get-Date)-lt$d-and$gs.localGameLogicState-ne1)
  if($gs.localGameLogicState-ne1){throw 'VM instance did not reach gameplay'}
  # Two-account session: host lobby, VM joins; both in product mode.
- HC 'coop_session host'
+ HC 'coop_session host_quiet'
  $d=(Get-Date).AddSeconds(30);do{Start-Sleep 2;$ho=HO}while((Get-Date)-lt$d-and!($ho.lobby-and"$($ho.lobby)"-ne'0'))
  if(!$ho.lobby-or"$($ho.lobby)"-eq'0'){throw 'Host did not create a lobby'}
  VC "coop_session join $($ho.lobby)"

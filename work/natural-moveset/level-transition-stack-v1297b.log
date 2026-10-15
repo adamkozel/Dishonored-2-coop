@@ -1,0 +1,222 @@
+{
+  "failure": "Host did not reach the streets (map campaign/dunwall/escape/tower/dunwall_escape_tower_p)",
+  "scope": "Dunwall tower vault exit LevelTransition (host): native loading-entry call stack recorded; client behaviour observed; Dunwall fixture restored.",
+  "passed": false,
+  "notes": {
+    "ring-0.9_0": {
+      "hit": false,
+      "face": {
+        "pitchSettled": true,
+        "eye": [
+          -31.9865,
+          -191.321,
+          47.0841
+        ],
+        "pitch": -60,
+        "yaw": 180.0
+      },
+      "before": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -149.765839
+        ],
+        "fresh": true
+      },
+      "after": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -503.353088
+        ],
+        "fresh": true
+      }
+    },
+    "ring--0.9_0": {
+      "hit": true,
+      "face": {
+        "pitchSettled": false,
+        "eye": [
+          -31.9865,
+          -191.321,
+          -509.647
+        ],
+        "pitch": -60,
+        "yaw": 0.0
+      },
+      "before": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -581.959351
+        ],
+        "fresh": true
+      },
+      "after": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -581.959351
+        ],
+        "fresh": true
+      }
+    },
+    "ring": true,
+    "locker-0.9_0": {
+      "hit": true,
+      "face": {
+        "pitchSettled": false,
+        "eye": [
+          -31.9865,
+          -191.321,
+          -580.265
+        ],
+        "pitch": -60,
+        "yaw": 180.0
+      },
+      "before": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -581.959351
+        ],
+        "fresh": true
+      },
+      "after": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -31.934999,
+          -191.320999,
+          -581.959351
+        ],
+        "fresh": true
+      }
+    },
+    "locker": true,
+    "hostFinal": {
+      "logic": 13,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -31.934999,
+        -191.320999,
+        -581.959351
+      ],
+      "fresh": true
+    },
+    "clientFinal": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true
+    },
+    "entryStacks": [
+      {
+        "sequence": 1,
+        "tick": 32500203,
+        "caller": "0x787a55",
+        "rva": [
+          "0x787a55",
+          "0x8aa275",
+          "0x8b21e0",
+          "0x3f695",
+          "0x62edd",
+          "0x62c95",
+          "0x4a1e3",
+          "0x4a074",
+          "0x4aeed",
+          "0xffb4a",
+          "0x454ed",
+          "0x45309",
+          "0xe3c21",
+          "0x166d9c"
+        ]
+      },
+      {
+        "sequence": 2,
+        "tick": 32508296,
+        "caller": "0x787a55",
+        "rva": [
+          "0x787a55",
+          "0x8aa275",
+          "0x8b21e0",
+          "0x3f695",
+          "0x62edd",
+          "0x62c95",
+          "0x4a1e3",
+          "0x4a074",
+          "0x6598c7",
+          "0xffb4a",
+          "0x454ed",
+          "0x45309",
+          "0xe3c21",
+          "0x166d9c"
+        ]
+      },
+      {
+        "sequence": 3,
+        "tick": 32713515,
+        "caller": "0x787a55",
+        "rva": [
+          "0x787a55",
+          "0x8aa275",
+          "0x8b21e0",
+          "0x3f695",
+          "0x62edd",
+          "0x62c95",
+          "0x4a1e3",
+          "0x4a074",
+          "0x6598c7",
+          "0xffb4a",
+          "0x454ed",
+          "0x45309",
+          "0xe3c21",
+          "0x166d9c"
+        ]
+      }
+    ]
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-LevelTransitionStack-v1297.ps1:86[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  86 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost did not reach the streets (map campaign/dunwall/escape/tower/dunwall_escape_tower_p)[0m
