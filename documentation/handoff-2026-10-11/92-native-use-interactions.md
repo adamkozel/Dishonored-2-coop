@@ -63,9 +63,39 @@ Updated 2026-10-14.
   - **Candidate 1213h:** a use ends only on more than 0.6 m of horizontal travel (`useMovedAway`, unit-tested with the measured numbers).
 - **Visual:** not accepted. The observer was too close or occluded (candelabra), and in the 1228 tap case it stood behind a wall. v1228c films from the source's own open approach side, 3.4 m from the target.
 
+**Edge of the World (1213h, takes 1228c–1228e):**
+- **1228c, stopped by Claude:** teleporting to the wind-turbine lever raised a native tutorial modal (game logic 12) on both peers. Look input was ignored, so the seek could not succeed.
+  - Recovery: the fixture was restored, but a stuck client fixture isolation refused the note restore. A `Deploy-SourceClock` relaunch (protected saves unchanged) and a note restore completed it.
+  - From 1228d on, `ClearModals` dismisses logic 12 and pause menus before every seek pose and press.
+- **1228d, failed:** the helper was first named `Clear`, which PowerShell resolves to the `Clear-Host` alias before any function. Every case threw "CursorPosition: The handle is invalid".
+- **1228e, lever in both roles (confirmed runtime):** both sources focused `script_lever_windturbine_1_1_1`, registered the use on the first held press and classified it 2.
+  - Client source: the partner played it at weight 1.0 to 100%.
+  - Host source: the partner stopped at 27% because one observer frame was refused, which drops the whole presentation lease (#34).
+- **Hazard:** city watch guards near the turbine then killed the host observer (logic 13), so the latch and tap cases could not run. The take was stopped and the lab relaunched and restored. No native `notarget` exists (confirmed static).
+- **Visual:** neither lever video is reviewable (#33). One shows Corvo about 10 m away; in the other the observer is under attack.
+
+**#4 status:** every variant has been exercised natively in both roles on a real mechanism, recorded and reviewed:
+
+| Variant | Mechanism | Takes |
+|---|---|---|
+| Lever | wind-turbine lever | 1228e |
+| Crank | bench vise | 1227b |
+| Wheel/valve | sink tap | 1228b |
+| Key/lock | ring locker | 1228, 1228b |
+
+Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and valve visual acceptance continues in #33.
+
+**#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
+- The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).
+- The client's window use also plays to duration.
+- In the same take, the lock and tap passed again in both roles.
+- Framing note: while the observer camera is held, `setviewpos` z is the observer's feet. The close focus-line camera therefore sat about 3.3 m up and looked down at the head (#33).
+
+**Audit:** [use-variants-audit-v1229](../../work/movement-integration/use-variants-audit-v1229.json). Per-video reviews are in [use-variants-review-v1229](../../work/movement-integration/use-variants-review-v1229.json).
+
 **Open:**
-- Lever and latch on Edge of the World (v1228c); a better-framed lock/tap take for visual review.
-- The early end of the host-source use (#5): explained, with the fix in 1213h; verify on the window.
+- Lever and valve visual acceptance (#33); latch (optional).
+- One refused pose frame drops the whole partner presentation (#34).
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

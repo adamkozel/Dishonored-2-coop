@@ -13,23 +13,35 @@ TAKES = {  # take -> candidate
     'use-variants-dunwall-v1228': 'candidate-npc-combat-v1213g',
     'use-variants-dunwall-v1228b': 'candidate-npc-combat-v1213g',
     'use-variants-eotw-v1228c': 'candidate-npc-combat-v1213h',
-    'use-variants-dunwall-v1228c': 'candidate-npc-combat-v1213h',
+    'use-variants-eotw-v1228d': 'candidate-npc-combat-v1213h',
+    'use-variants-eotw-v1228e': 'candidate-npc-combat-v1213h',
+    'use-variants-dunwall-v1228e': 'candidate-npc-combat-v1213h',
 }
-TAKES = {t: c for t, c in TAKES.items() if (N / t / 'result.json').exists()}
+TAKES = {t: c for t, c in TAKES.items() if (N / t / 'run-script.ps1').exists()}
+
+def take_result(take):
+    """result.json, or for a take stopped by Claude (recovery-summary.json) its per-case files."""
+    T = N / take
+    if (T / 'result.json').exists():
+        r = rd(T / 'result.json'); rest = rd(T / 'restoration.json')['passed']
+        return dict(passed=r['passed'], failure=r.get('failure'), cases=r.get('cases') or [], restoration=rest, interrupted=False)
+    rec = rd(T / 'recovery-summary.json')
+    cases = [rd(f) for f in sorted(T.glob('use-*.json')) if not f.name.endswith(('-observer-movement.json',))]
+    return dict(passed=False, failure='interrupted: ' + rec['reason'], cases=cases, restoration=rec['restored'], interrupted=True)
 REVIEW = json.loads((W / 'use-variants-review-v1229.json').read_text(encoding='utf-8')) if (W / 'use-variants-review-v1229.json').exists() else {}
 
 cases = []
 for take, cand in TAKES.items():
-    r = rd(N / take / 'result.json'); rest = rd(N / take / 'restoration.json')
-    cases.append(dict(take=f'../natural-moveset/{take}', candidate=cand, passed=r['passed'], failure=r.get('failure'),
-                      restoration=rest['passed'], cases=r.get('cases')))
+    r = take_result(take)
+    cases.append(dict(take=f'../natural-moveset/{take}', candidate=cand, **r))
 
 def variant_pass(variant):
     """Roles in which a required case of this variant passed, across all takes."""
     roles = set()
     for t in cases:
         for c in t['cases'] or []:
-            if c.get('passed') and (c.get('expected') == variant or c.get('sourceLastVariant') == variant and c.get('used')):
+            ok = c.get('passed') if 'passed' in c else (c.get('used') and c.get('shownSamples', 0) > 0 and c.get('sourceLastVariant') == c.get('expected'))
+            if ok and (c.get('expected') == variant or c.get('sourceLastVariant') == variant and c.get('used')):
                 roles.add(c['source'])
     return sorted(roles)
 
@@ -37,7 +49,7 @@ coverage = {name: variant_pass(v) for name, v in (('generic', 1), ('lever', 2), 
 
 videos = rd(N / 'runtime-video-manifest.json')
 for take, cand in TAKES.items():
-    T = N / take; res = rd(T / 'result.json')
+    T = N / take; res = take_result(take)
     for f in sorted(T.glob('*-observed.mp4')):
         meta = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=avg_frame_rate', '-of', 'json', str(f)], text=True))['streams'][0]
         a, b = map(float, meta['avg_frame_rate'].split('/'))
@@ -52,7 +64,7 @@ for take, cand in TAKES.items():
             timing='Native wall-time recording, no speedup',
             scope='Observer window of the remote partner while the source player natively uses a real mission mechanism (player state 75 + focused usable).',
             review=rv.get('review', 'Raw native recording; not reviewed.'), candidate=cand, dll=rd(W / cand / 'identity.json')['dll'],
-            runtime_test_passed=bool(case.get('passed')), visual_accepted=bool(rv.get('accepted')), requirements=reqs if rv.get('accepted') else []))
+            runtime_test_passed=bool(case.get('passed')) and not (res['interrupted'] and case.get('source') is None), visual_accepted=bool(rv.get('accepted')), requirements=reqs if rv.get('accepted') else []))
 wr(N / 'runtime-video-manifest.json', videos)
 
 at = datetime.datetime.now().astimezone().isoformat()
@@ -62,7 +74,8 @@ findings = [
     'Confirmed static: Send-D2Input publishes an expiring packet and returns at once; the harness Neutral right after the press cut presses to ~50-150 ms (first presses missed in 1227b/1228). Held presses (1228b) registered every use on the first press.',
     'Confirmed runtime (1228b, #5): the host window use ended because the opening sash dropped the source 0.46 m off a ledge (0.36 m horizontal, 0.668 m 3D > 0.6 m). 1213h ends a use on horizontal travel only.',
 ]
-wr(W / 'use-variants-audit-v1229.json', dict(at=at, cases=cases, coverage=coverage, findings=findings,
+verified = sorted({c['candidate'] for c in cases if c['passed']})
+wr(W / 'use-variants-audit-v1229.json', dict(at=at, cases=cases, coverage=coverage, findings=findings, runtimeVerified=verified,
     complete=all(len(v) == 2 for v in coverage.values()),
     outstanding=['Visual acceptance of each variant on real mechanisms (framing).', 'Hand targeting to the actual handle geometry (#6).']))
 
@@ -73,17 +86,14 @@ lev['runtime_binding'] = 'native_use_state75_real_mechanisms_' + '_'.join(k for 
 key['runtime_binding'] = 'native_use_state75_real_lock_both_roles' if both('key_lock') else key['runtime_binding']
 note = f" Audit 1229: real mechanisms, both roles - {', '.join(f'{k}: {'/'.join(v) or 'none'}' for k, v in coverage.items())}."
 for it in (lev, key):
-    it['notes'] = (it.get('notes') or '') + note
+    it['notes'] = (it.get('notes') or '').split(' Audit 1229:')[0] + note
     it.setdefault('evidence', [])
     if '../movement-integration/use-variants-audit-v1229.json' not in it['evidence']:
         it['evidence'].append('../movement-integration/use-variants-audit-v1229.json')
 wr(p, an)
 
-for take, cand in TAKES.items():
-    C = rd(W / cand / 'identity.json'); r = rd(N / take / 'result.json')
-    if r['passed'] and not C.get('runtimeVerified'):
-        C.update(runtimeVerified=True, runtimeEvidence='../use-variants-audit-v1229.json', result=f'{take} pass')
-        wr(W / cand / 'identity.json', C)
+# Candidate archives are append-only evidence (check-evidence.sh): runtime verification is recorded in the
+# audit (runtimeVerified below), never by rewriting a candidate's identity.json.
 
 s = rd(R / 'work/current-task-state.json'); s['UpdatedAt'] = at
 s['MovementExecutionPriority']['current'] = ('1213h live (protocol 74, bank 71/374): native use on real mechanisms presents the authored variant on the partner body; '
