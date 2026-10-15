@@ -269,7 +269,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // 1213: authored interaction for a native use; fades out once the
         // remote player moves (root stays network owned).
         UsePresentation::Sample use{};float useAmount=0;
-        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&ground&&pose.motionValid&&p.clock.speed<.8f;
+        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&ground&&pose.motionValid&&(p.clock.speed<.8f||use.variant>=6);
         if(combatDt>=0&&combatDt<.25f){
             if(useActive){if(use.event!=p.useEvent){p.useFrom=p.useLast;p.useTransition=0;p.useEvent=use.event;}
                 p.useVariant=use.variant;p.useAmount=useAmount;p.useTransition=(std::min)(1.f,p.useTransition+combatDt/.20f);
@@ -754,6 +754,9 @@ void applyMovementBank(void* component,void* actor,int phase){
             auto use=p.bank.sampleParameter(UsePresentation::clip(p.useVariant),j,p.useAmount);
             if(p.useFrom.size()==count)use=MovementBank::blend(p.useFrom[j],use,p.useTransition*p.useTransition*(3-2*p.useTransition));
             if(p.useLast.size()!=count)p.useLast.resize(count);p.useLast[j]=use;
+            // 1214m: a held object rides the upper body while the legs keep the locomotion gait.
+            if(p.useVariant>=6&&MovementBank::combatLocomotionJoint(j,p.parents)){
+                const float move=(std::max)(0.f,(std::min)(1.f,(p.clock.speed-.1f)/.5f));use=MovementBank::blend(use,v,move*move*(3-2*move));}
             v=MovementBank::blend(v,use,p.useWeight);
         }
         if(p.bank.hasCarry()&&p.carryWeight>.001f){

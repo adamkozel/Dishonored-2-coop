@@ -252,6 +252,20 @@ inline bool nativePlayerAutoCrouchStates(const NativePlayerStates& s,std::uintpt
     }
     return crouch==1&&equip<=1;
 }
+// Take 1269b (state table: RVA 1c7a998, arkPlayerStateHoldObject): picking up a native
+// movable (a bottle) keeps Running0/Sneaking6 and adds HoldObject49, overlapping Undraw81
+// while the sword is put away, until the object is thrown or put down.
+inline bool nativePlayerGroundHoldObjectStates(const NativePlayerStates& s,std::uintptr_t base){
+    if(s.player.logic!=1||!s.defaultMode||s.player.current>1||s.active.size()<2||s.active.size()>3)return false;
+    unsigned ground=0,hold=0,undraw=0;
+    for(const auto& a:s.active){
+        if((s.player.current==0&&a.id==0&&a.vtable==base+0x1c85628)||(s.player.current==1&&a.id==6&&a.vtable==base+0x1c84258))++ground;
+        else if(a.id==49&&a.vtable==base+0x1c7a998)++hold;
+        else if(a.id==81&&a.vtable==base+0x1c7df88)++undraw;
+        else return false;
+    }
+    return ground==1&&hold==1&&undraw<=1;
+}
 //664 standing and692 crouched coin pickup: LootObject47 may overlap Undraw81.
 // It retains the matching Running0/Sneaking6 state. Preserve movement while native code
 // handles the item; no pickup event, hand gesture or inventory is synthesized.
@@ -268,7 +282,7 @@ inline bool nativePlayerGroundLootStates(const NativePlayerStates& s,std::uintpt
     return ground==1&&loot==1&&undraw<=1;
 }
 inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,std::uint32_t& motion) {
-    if(nativePlayerGroundLootStates(s,base)){motion=s.player.current;return true;}
+    if(nativePlayerGroundLootStates(s,base)||nativePlayerGroundHoldObjectStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerAutoCrouchStates(s,base)){motion=1;return true;}
     if(nativePlayerGroundPairedStates(s,base)||nativePlayerSlideTakedownStates(s,base)||nativePlayerVersusStates(s,base)){motion=0;return true;}
     if(nativePlayerGroundTrapStates(s,base)){motion=s.player.current;return true;}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T11:05:53.370988+02:00",
+  "generated": "2026-10-15T11:24:33.062866+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -17734,8 +17734,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "partial_native_hold_object_gesture_both_roles_product",
+      "visual_validation": "accepted_functional_both_roles_held_reach",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "carry object place throw",
@@ -17747,10 +17747,16 @@
         "carry_object_throw"
       ],
       "deliverable_kind": "animation",
-      "notes": "Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.",
+      "notes": "Audit 1269 (1214m): holding a native movable (HoldObject49) presents a held reach and its throw finishes it, both roles; the object itself is not drawn in the partner's hand and movables are not world-synced yet. Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [
+        "object-carry-v1269c/host-bottle-observer.mp4",
+        "object-carry-v1269c/client-bottle-observer.mp4"
+      ],
+      "evidence": [
+        "../movement-integration/object-carry-audit-v1269.json"
+      ]
     },
     {
       "id": "shop_dialogue_gestures",
@@ -94487,6 +94493,48 @@
       "visual_accepted": true,
       "requirements": [
         "slide_enter_loop_exit"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "object-carry-v1269c/host-bottle-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Object hold and throw (1214m) / object-carry-v1269c",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.75,
+      "container_fps": "1725/67",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source holds and throws a native movable bottle.",
+      "review": "Client window: remote Corvo reaches out and holds his arm forward at chest height while the source holds the bottle, then finishes the reach when it is thrown and returns to the sword idle. Functional: the held object itself is not drawn in the partner's hand and the thrown bottle is not shared between worlds (world object sync, stage 5).",
+      "candidate": "candidate-npc-combat-v1214m",
+      "dll": "9839CF5AA1962C11DB9F72D573DBB6E55BB9EC6BDCFC26024A09ADC0235A26D5",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "carry_object_place_throw"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "object-carry-v1269c/client-bottle-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Object hold and throw (1214m) / object-carry-v1269c",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.0,
+      "container_fps": "27/1",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source holds and throws a native movable bottle.",
+      "review": "Host window: remote Emily holds the same reach while carrying the bottle and finishes it on the throw. Functional: the held object itself is not drawn in the partner's hand and the thrown bottle is not shared between worlds (world object sync, stage 5).",
+      "candidate": "candidate-npc-combat-v1214m",
+      "dll": "9839CF5AA1962C11DB9F72D573DBB6E55BB9EC6BDCFC26024A09ADC0235A26D5",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "carry_object_place_throw"
       ],
       "kind": "game"
     }

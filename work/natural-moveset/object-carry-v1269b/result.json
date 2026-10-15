@@ -1,0 +1,36 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-bottle; restore: Checkpoint inventory differs (client)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "bottle",
+      "observer": "client",
+      "passed": true,
+      "failure": "restore: Checkpoint inventory differs (client)",
+      "checks": [
+        "Partner presents the use reach (peak weight 0)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T11:14:44.7823294+02:00",
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3695,
+          "slot": "RT throw"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.0,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49"
+      ],
+      "restored": false
+    }
+  ],
+  "scope": "Pickup and food gestures (1214j): native LootObject47 drives the partner use reach toward the item, both source roles, product controller; fixture restored after every case."
+}

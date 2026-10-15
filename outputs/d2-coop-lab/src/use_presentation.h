@@ -15,12 +15,20 @@ struct UsePresentation {
     // 1213k (#6, protocol 75): world position of the used mechanism (its entity origin), when known.
     struct Sample {double time=0;std::uint32_t event=0;unsigned variant=0,elapsed=0,duration=0;float target[3]{};bool targetValid=false;};
     std::array<Sample,32> samples{};unsigned count=0;
-    static unsigned duration(unsigned variant){static const unsigned d[]={0,2300,3200,4800,5200,3200};return variant<=5?d[variant]:0;}
-    static unsigned clip(unsigned variant){return 368+variant;}
+    // 1214m (#11 carry_object_place_throw, take 1269b): 6 holds a native movable object - the
+    // generic reach approaches its contact pose and holds it while HoldObject49 lasts (up to 60 s);
+    // 7 releases it (thrown or put down) by finishing the same reach in 1.3 s.
+    static unsigned duration(unsigned variant){static const unsigned d[]={0,2300,3200,4800,5200,3200,60000,1300};return variant<=7?d[variant]:0;}
+    static unsigned clip(unsigned variant){return variant>=6?369:368+variant;}
+    static constexpr float kHoldAmount=.45f;
+    static float clipAmount(unsigned variant,double elapsed,unsigned duration){
+        if(variant==6)return (std::min)(kHoldAmount,float(elapsed/2300.));
+        if(variant==7)return kHoldAmount+(1-kHoldAmount)*(std::min)(1.f,float(elapsed/duration));
+        return (std::min)(1.f,float(elapsed/duration));}
     static bool valid(const Sample& s){
         if(s.targetValid&&!s.variant)return false;
         if(s.targetValid)for(float f:s.target)if(!std::isfinite(f)||std::fabs(f)>100000.f)return false;
-        return std::isfinite(s.time)&&s.variant<=5&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
+        return std::isfinite(s.time)&&s.variant<=7&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
     // #6: hand-reach weight over a clip: none while reaching out (0-12%), eased in to full contact
     // (30%), held while operating, eased out during recovery (72-92%).
     static float contact(float amount){
@@ -47,7 +55,7 @@ struct UsePresentation {
         double elapsed=out.elapsed;
         if(k+1<count&&samples[k+1].event==out.event&&samples[k+1].variant==out.variant){const auto& n=samples[k+1];elapsed+=(n.elapsed-out.elapsed)*(at-out.time)/(n.time-out.time);}
         else elapsed+=(std::min)(presentationHold().extrapolateMs,(std::max)(0.,at-out.time));
-        amount=(std::min)(1.f,float(elapsed/out.duration));return true;
+        amount=clipAmount(out.variant,elapsed,out.duration);return true;
     }
 };
 // 1213h (#5): a use ends when the source walks away - more than 0.6 m of HORIZONTAL travel from where

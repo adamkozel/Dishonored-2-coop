@@ -102,4 +102,25 @@ Both are presentation only: no item, inventory or health outcome is synthesized.
 - **Crouched heavy:** the sweep's 0.2 s standing snap is not reproduced on the current build. The 1265b re-record never held the charge, so it is inconclusive.
 - **No judgeable view yet:** long fall loop, doors, key use as Corvo, map-load recovery as Corvo, kick.
 
-Checklist: 94 of 105 runtime-bound, 79 visually accepted.
+## Holding and throwing objects (1214m, audit 1269)
+
+[Audit 1269](../../work/movement-integration/object-carry-audit-v1269.json).
+
+**What the native game does (confirmed runtime, 1269b):**
+- Picking up a native movable (a bottle) adds HoldObject49 (RVA `1c7a998`, `arkPlayerStateHoldObject`) over Running0, with Undraw81 while the sword is put away.
+- RT throws the object and returns to Running0.
+
+**Before 1214m:** the source classified none of these states. It dropped every sample, so the partner's presentation weight was 0 for the whole hold.
+
+**1214m:**
+- HoldObject is a ground action with valid root motion.
+- Use variant 6 holds the generic reach at its contact pose for the whole hold; the legs keep the locomotion gait while moving.
+- Variant 7 finishes the reach in 1.3 s on the release.
+
+**Confirmed runtime (1269c), both roles:** the partner stays fully presented and holds the reach, then finishes it on the throw. Presentation dips briefly at the pick-up and release moments.
+
+**Visual:** accepted as functional.
+
+**Open:** the object isn't drawn in the partner's hand, and movables aren't shared between worlds yet (stage 5).
+
+Checklist: 95 of 105 runtime-bound, 80 visually accepted.

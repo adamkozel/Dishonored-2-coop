@@ -491,13 +491,19 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     }
     {   // 1213: native use (state 75) -> authored interaction on the ground action only.
       auto use=p;use.state=0;use.combatVariant=0;use.combatPhase=0;use.combatDurationMs=0;use.airStage=0;use.useEvent=3;
-      for(unsigned v=1;v<=5;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
+      for(unsigned v=1;v<=7;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
       use.useVariant=2;use.useDurationMs=3200;use.useTimeMs=100;
       auto bad=use;bad.version=73;check(!validShadowAction(bad,c,h),"pre-use wire refused");
       bad=use;bad.useDurationMs=2300;check(!validShadowAction(bad,c,h),"use duration bound to its variant");
       bad=use;bad.useTimeMs=3201;check(!validShadowAction(bad,c,h),"use clock bounded");
       bad=use;bad.useEvent=0;check(!validShadowAction(bad,c,h),"use needs an incarnation");
-      bad=use;bad.useVariant=6;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      bad=use;bad.useVariant=8;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      check(UsePresentation::clip(6)==369&&UsePresentation::clip(7)==369&&std::fabs(UsePresentation::clipAmount(6,30000,60000)-UsePresentation::kHoldAmount)<1e-6f&&
+            UsePresentation::clipAmount(6,800,60000)<UsePresentation::kHoldAmount&&std::fabs(UsePresentation::clipAmount(7,0,1300)-UsePresentation::kHoldAmount)<1e-6f&&
+            std::fabs(UsePresentation::clipAmount(7,1300,1300)-1.f)<1e-6f&&UsePresentation::contact(UsePresentation::kHoldAmount)>.99f,"held objects (1269b) hold the reach at full contact, then finish it");
+      {NativePlayerStates hs{};const std::uintptr_t b=0x140000000;hs.player.logic=1;hs.defaultMode=true;hs.player.current=0;hs.active={{0,1,b+0x1c85628},{49,2,b+0x1c7a998},{81,3,b+0x1c7df88}};unsigned act=9;std::uint32_t mot=9;
+       check(nativePlayerGroundHoldObjectStates(hs,b)&&nativePlayerShadowAction(hs,b,act)&&act==0&&nativePlayerMotion(hs,b,mot)&&mot==0,"HoldObject49 over Running0 (1269b) is a ground action with valid root motion");
+       hs.active.pop_back();hs.active[1].vtable=b+0x1c7bcc9;check(!nativePlayerGroundHoldObjectStates(hs,b),"HoldObject requires its exact vtable");}
       bad=use;bad.state=1;bad.combatVariant=1;bad.combatPhase=1;bad.combatDurationMs=1000;check(!validShadowAction(bad,c,h),"use never overlaps an attack");
       UsePresentation line;UsePresentation::Sample out{};float a=0;
       check(line.push({100,1,2,0,3200})&&line.push({140,1,2,40,3200})&&line.sample(120,out,a)&&out.variant==2&&std::fabs(a-20.f/3200.f)<.00001f,"use interpolation");
