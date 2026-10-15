@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\movement-integration/stage_npc_attack_v1214k.py", line 11, in <module>
+    A.mkdir(exist_ok=False); shutil.copytree(L/'src', A/'src')
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\movement-integration\\candidate-npc-combat-v1214k'
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\movement-integration\Deploy-NpcAttack-v1214k.ps1:7[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m   7 | [0m  if($LASTEXITCODE){[36;1mthrow 'Stage failed'[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                    ~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mStage failed[0m

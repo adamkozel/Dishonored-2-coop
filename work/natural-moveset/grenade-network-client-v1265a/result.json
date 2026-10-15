@@ -1,0 +1,26 @@
+{
+  "passed": false,
+  "failure": "Native cooking_in missing",
+  "source": "client",
+  "pitch": 0,
+  "interruption": "none",
+  "checks": [
+    "One native grenade selected through normal holster/draw input",
+    "Native Steam handshake and exact candidate bank drive the remote held grenade without a prop command",
+    "Both isolated checkpoints restored with original player/avatar health and no grenades",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 0.913,
+      "input": "LT held for 1300ms then native release",
+      "pitch": 0,
+      "actualPitch": -0.014844248018093871
+    }
+  ],
+  "scenes": [],
+  "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+  "probe": "E631794B09C634C40947DDC93C11AAA49AC582611317F43218886FE0C19AAF90",
+  "finalDll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+  "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
+}
