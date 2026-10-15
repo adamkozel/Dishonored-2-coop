@@ -308,7 +308,17 @@ The host's corpse stream used to pull the body back. Once the host followed the 
 | [finisher-follow-v1258i](../../work/natural-moveset/finisher-follow-v1258i) | 1214ak | Pass: `fatality_generic_left` (91), 42 poses accepted. The guard falls at Emily's feet on Corvo's screen and stays on the floor (max z 67.4, final 66.7 in both worlds). **Visual: accepted (functional)** |
 | [lethal-regression-v1258a](../../work/natural-moveset/lethal-regression-v1258a) | 1214ak | Pass (regression): a client back lethal (`assassination_back`) still holds the host guard; 52 poses accepted, 0.0 m apart, body on the floor |
 
+## Real grenades in product mode (1214au, audit 1288)
+
+The lab-only `coop_grant_item grenade|health|mana` adds one native item in product mode. It uses the native inventory add (+0x618de0) and, for a grenade, the native equip (+0x614b20). The isolated grenade fixture refused product mode (take 1273a).
+
+| Take | Thrower | Result |
+|---|---|---|
+| [grenade-real-v1273b-host](../../work/natural-moveset/grenade-real-v1273b-host) | host | No hit: the grenade blew apart the office door between thrower and guard (whether the door break is shared is open) |
+| [grenade-real-v1273c-host](../../work/natural-moveset/grenade-real-v1273c-host) | host | Pass: guard 40 → 7.49 in both worlds (host-native pass-through, `HostWorld` commit) |
+| [grenade-real-v1273c-client](../../work/natural-moveset/grenade-real-v1273c-client) | client | Pass: guard dead in both worlds (`PeerNative` request applied by the host) |
+
 ## Open
 
-- Grenades and powers in both roles are verified through the lab fixture only (1274, 1275). Real sleep darts and chokes on a mission are verified (1276i, 1276m); a real grenade or power is not.
+- Real grenades in both roles are verified in product mode (1273c, audit 1288); real sleep darts and chokes on a mission (1276i, 1276m). A real power on a guard and destroyed doors and props remain open.
 - Spawns: none observed across Edge of the World's 102 trigger volumes (1279b–1279d); other missions are not yet censused. Thrown objects and other physics props are not covered by this chapter.

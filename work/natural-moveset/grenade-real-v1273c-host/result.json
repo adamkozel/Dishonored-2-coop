@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Combat session active on both peers",
+        "Host grenade hurt the bound guard: host 40 -> 7.48661041, client 40 -> 7.48661041",
+        "Guard health equal in both worlds (7.48661041)"
+      ],
+      "guardHost": "0xb480764",
+      "guardClient": "0xb480764",
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_grenade_equipped"
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 host grenade on a combat-bound guard: under the product controller the host throws one native grenade at the Dunwall tutorial guard; the guard must be hurt and end in the same state in both worlds (1214w native pass, HostWorld/Dead); fixture restored."
+}

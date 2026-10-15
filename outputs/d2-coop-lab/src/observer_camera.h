@@ -52,6 +52,37 @@ void observerCameraArms(bool hide,ULONGLONG tick){
         observerHiddenArms[arm.side-1]={h,arm.actor};
     }
 }
+// 1214au (#14 real grenade, #11 mana elixir; lab only): "coop_grant_item grenade|health|mana" adds one native item to
+// the local inventory through the native inventory add (+0x618de0, the routine the isolated fixtures use) in any
+// gameplay scope, product mode included. The isolated fixtures refuse product mode and roll the item back after 12 s
+// (take grenade-bound-guard-v1273a: unsupported_scope_or_item_owned); takes restore the inventory baseline at the end.
+unsigned labGrantRequest=0;std::uint64_t labGrants=0,labGrantRefused=0;const char* labGrantResult="idle";ULONGLONG labGrantEquipUntil=0;bool labGrantEquipSent=false;
+void serviceLabItemGrant(){
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    // A granted grenade is then selected once with the native equip (+0x614b20, as the isolated fixture does) when the
+    // left-hand slot is free, so the trigger throws it.
+    if(labGrantEquipUntil&&!labGrantRequest){const auto tick=GetTickCount64();
+        if(tick>=labGrantEquipUntil){labGrantEquipUntil=0;if(!labGrantEquipSent)labGrantResult="grenade_equip_timeout";return;}
+        NativePlayerGrenade g{};if(!readNativePlayerGrenade(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),g))return;
+        if(g.equipped){labGrantEquipUntil=0;labGrantResult="granted_grenade_equipped";return;}
+        if(!labGrantEquipSent&&g.quantity>=1){
+            if(g.player.sword.slots[1]){labGrantEquipUntil=0;labGrantResult="grenade_slot_occupied";return;}
+            labGrantEquipSent=true;reinterpret_cast<void(*)(void*,void*,bool)>(gameImage+0x614b20)(reinterpret_cast<void*>(g.player.sword.inventory),reinterpret_cast<void*>(g.entry),true);
+            labGrantResult="grenade_equip_requested";}
+        return;}
+    if(!labGrantRequest)return;
+    const unsigned r=labGrantRequest;labGrantRequest=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!coopGameplayReady(outgoing)){++labGrantRefused;labGrantResult="refused_not_gameplay";return;}
+    std::uintptr_t inventory=0,declaration=0;
+    if(r==1){NativePlayerGrenade g{};if(!readNativePlayerGrenade(memoryRead,base,g)){++labGrantRefused;labGrantResult="grenade_read_failed";return;}
+        inventory=g.player.sword.inventory;declaration=g.declaration;}
+    else{NativePlayerPotion p{};if(!readNativePlayerPotion(memoryRead,base,r==2?1u:2u,p)){++labGrantRefused;labGrantResult="potion_read_failed";return;}
+        inventory=p.player.sword.inventory;declaration=p.declaration;}
+    if(!inventory||!declaration){++labGrantRefused;labGrantResult="no_inventory_or_declaration";return;}
+    reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(inventory),reinterpret_cast<void*>(declaration),1);
+    ++labGrants;labGrantResult=r==1?"granted_grenade":r==2?"granted_health_potion":"granted_mana_potion";
+    if(r==1){labGrantEquipUntil=GetTickCount64()+3000;labGrantEquipSent=false;}
+}
 void servicePlayerHealthHold(){
     if(!playerHealthHold||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     NativeHealth h{};if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),1,h)||!h.component){++playerHealthHoldMisses;return;}
@@ -86,7 +117,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();
+    servicePlayerHealthHold();serviceLabItemGrant();
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -115,6 +146,7 @@ void writeObserverCamera(){
     bool first=true;for(const auto& r:views)if(r.view){fprintf(f,"%s{\"view\":\"%llx\",\"count\":%llu,\"tick\":%llu,\"position\":[%.6f,%.6f,%.6f]}",first?"":",",static_cast<unsigned long long>(r.view),r.count,r.tick,r.position[0],r.position[1],r.position[2]);first=false;}
     fprintf(f,"],\"armsHidden\":{\"hides\":%llu,\"shows\":%llu,\"left\":%s,\"right\":%s},",static_cast<unsigned long long>(observerArmHides),
         static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
+    fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult);
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
         static_cast<unsigned long long>(playerHealthRefills),static_cast<unsigned long long>(playerHealthHoldMisses),playerHealthLast);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

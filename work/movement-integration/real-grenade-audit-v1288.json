@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-15T21:52:37.547592+02:00",
+  "candidate": "candidate-npc-combat-v1214au",
+  "takes": [
+    {
+      "take": "grenade-real-v1273b-host",
+      "passed": false,
+      "failure": "The grenade did not hurt the guard in 2 throws (host 40 -> 40)",
+      "throws": [
+        {
+          "attempt": 0,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 40,
+            "client": 40
+          }
+        },
+        {
+          "attempt": 1,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 40,
+            "client": 40
+          }
+        }
+      ]
+    },
+    {
+      "take": "grenade-real-v1273b-client",
+      "passed": false,
+      "failure": "The grenade did not hurt the guard in 2 throws (host 40 -> 40)",
+      "throws": [
+        {
+          "attempt": 0,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 40,
+            "client": 40
+          }
+        },
+        {
+          "attempt": 1,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 40,
+            "client": 40
+          }
+        }
+      ]
+    },
+    {
+      "take": "grenade-real-v1273c-host",
+      "passed": true,
+      "failure": null,
+      "throws": [
+        {
+          "attempt": 0,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 7.48661041,
+            "client": 7.48661041
+          }
+        }
+      ]
+    },
+    {
+      "take": "grenade-real-v1273c-client",
+      "passed": true,
+      "failure": null,
+      "throws": [
+        {
+          "attempt": 0,
+          "before": {
+            "host": 40,
+            "client": 40
+          },
+          "after": {
+            "host": 0,
+            "client": 0
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Lab fixture (1214au, lab only): coop_grant_item grenade|health|mana adds one native item through the native inventory add (+0x618de0) and selects a grenade with the native equip (+0x614b20) in product mode; the isolated grenade fixture refused product mode (1273a: unsupported_scope_or_item_owned). Takes restore the inventory baseline.",
+    "Confirmed runtime (1273b, both roles): granted and equipped, both grenades exploded against the office door between the thrower and the guard and blew the door apart; the guard was untouched (40 -> 40). Whether the destroyed door is shared between the worlds was not filmed (open, physics/destructibles).",
+    "Confirmed runtime (1273c, host thrower, 3.5 m in front of the guard): the guard dropped 40 -> 7.49 in both worlds (host-native pass-through of explosion_grenade, HostWorld commit).",
+    "Confirmed runtime (1273c, client thrower): the guard died (40 -> 0) in both worlds through the PeerNative request the host applies.",
+    "Visual (1273c-client, host free camera): the grenade explodes at the guard and the guard collapses; the window behind overexposes the view."
+  ],
+  "complete": true,
+  "scope": "#14: real grenade on a bound guard in product mode, both roles."
+}

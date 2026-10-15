@@ -5,7 +5,8 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1214at ([identity](../../work/movement-integration/candidate-npc-combat-v1214at/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-15. Live candidate-npc-combat-v1214au ([identity](../../work/movement-integration/candidate-npc-combat-v1214au/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Real grenades (#14, 1214au, [audit 1288](../../work/movement-integration/real-grenade-audit-v1288.json)):** a real grenade thrown at a guard in product mode lands in both worlds, from either player ([chapter 95](95-shared-combat-authority.md#real-grenades-in-product-mode-1214au-audit-1288)). The lab can grant one native grenade, health or mana potion in product mode.
 - **Reading a note (#11, 1214at, [audit 1287](../../work/movement-integration/reading-audit-v1287.json)):** while the partner reads, they hold a reach instead of standing frozen; accepted in both roles ([chapter 94](94-visual-sweep-counterattack-and-gestures.md#reading-a-note-1214ar1214at-audit-1287)).
 - **Crouched heavy and map-load recovery views (#11, [audit 1286](../../work/movement-integration/views-audit-v1286.json)):** both accepted in both roles. The free camera hides the observer's own arms (1214aq), and the lab health hold is confirmed at runtime ([chapter 94](94-visual-sweep-counterattack-and-gestures.md#crouched-heavy-and-map-load-recovery-audit-1286)).
 - **Counter-kill parked (#9, [audit 1285](../../work/movement-integration/counter-parked-audit-v1285.json)):** Emily's counter-kill and the kick view stay open; the native god mode is stripped in this build. External research references are in [chapter 96](96-external-research-references.md).
