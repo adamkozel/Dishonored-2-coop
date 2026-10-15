@@ -60,6 +60,20 @@ When only one player crosses a scripted trigger, the partner's world doesn't adv
 
 **Mission end (hypothesis).** Edge of the World ends at Addermire Station, after the mission objectives. The partner's world is driven by mirrored triggers, shared usables and shared doors. If the mission end is a trigger or usable, the partner's world should run its own native `LevelTransition`. A real end-of-mission take still has to show this.
 
+**How Edge of the World ends (confirmed static, 2026-10-15, read with `tools/diag/d2_resource_index.py`):**
+- **Mission tree:** `models/gameflow/gameflow_eotw.arktree` declares `Mission_EotW`:
+  - `m_nextMissionMap = "campaign/institute/institute.mapinfo"`, `m_showResultScreen = true`.
+  - The required objective `Obj_EotW_A` ("Get to Addermire") runs its tasks in sequence: get past the Wall of Light (always succeeds), get to Addermire Station (`Task_EotW_A_02`), then activate the carriage (`Task_EotW_A_04`).
+  - The black market and Mindy objectives are optional side branches.
+- **The end is a usable plus a scene, not a `LevelTransition`.** In `maps/campaign/edge_of_the_world/eotw_p_lowchaos.entities`:
+  1. `script_kiscule_carriage` listens to the usable `script_kar_cable_car_inv_use` (and `_1`/`_2`), enters a cinematic and plays the `cablecar_enter_lever` scene.
+  2. A leave-or-stay prompt follows. `Carriage.Leave` plays `carriage_movement_toinstitute`.
+  3. In `script_kiscule_eotw_ui`, `Midnights.carriage_movement_toinstitute.OnEnded` fades to black over 2 s. Then `arkKisculeNodeActionGameflowTask` completes `Task_EotW_A_04`, and the gameflow mission completes: result screen, then the next mission map.
+- **Debug only:** the map's three `arkKisculeNodeLevelTransition` nodes are all in `script_debug`, behind the `Debug.PreviousMap` and `Debug.NextMap` events. They target `boat_eotw_p` and `institute_p_lowchaos` or `institute_p_highchaos` by chaos.
+- **Map list:** every mission opens on a Dreadful Wale map (`boat_<mission>_p`), and five missions span several maps ([chapter 96](96-external-research-references.md), disrev `docs/levels.md`). Stage 6 must therefore carry both in-mission and mission-to-mission map changes.
+
+So in co-op, the partner reaches the end through the shared carriage usable or a mirrored gameflow completion. Which one, and how both worlds then load the next map together, is the next runtime test.
+
 ## Next for this line
 
 1. Walk a whole mission with the mirror on.

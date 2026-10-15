@@ -2,6 +2,8 @@
 
 On 15 October 2026 the user researched public resources for reverse-engineering Dishonored 2. No third-party table, script, DLL or game tool was run; co-op mods stay excluded. This chapter records the leads with their verification state. Claude's checks against the lab build are marked.
 
+**Local copies (2026-10-15):** the LordRadai `cvars.md` (full clone at `work/Dishonored2-Debug`), the fakuivan 1.77.9.0 cvar dump, the drtchops autosplitter and a disrev clone are saved, pinned and hashed under `work/external-references` ([provenance](../../work/external-references/README.md)). They stay local: the LordRadai, fakuivan and disrev sources carry no license.
+
 ## Verified against the lab build
 
 - **Build:** the lab executable is Dishonored 2 **1.77.9.0** (confirmed static, PE version resource). That is the build of the cvar dump and the autosplitter's main state.
@@ -24,7 +26,8 @@ On 15 October 2026 the user researched public resources for reverse-engineering 
   - The lab can grant a mana potion in product mode (`coop_grant_item mana`), but the native drink routine (+0x745b20) refused both on a full pool and after the lab wrote the pool to 0. Only the value changed; the component flags still read as before.
   - In take potion-mana-corvo-v67 the pool was spent by a native power (flags 0x2800006a → 0x2800000a), and the wheel drink then consumed the potion.
   - The mana elixir view therefore waits for a map with powers.
-- **disrev** ([chipolux/disrev](https://github.com/chipolux/disrev)): resource containers and `.entities` maps (world setup, objects, encounters). It is a lead for finding mission contexts for the remaining checklist items: windows, chains, shops.
+- **disrev** ([chipolux/disrev](https://github.com/chipolux/disrev), saved locally at `e9cf30e`): resource containers and `.entities` maps (world setup, objects, encounters). It is a lead for finding mission contexts for the remaining checklist items: windows, chains, shops.
+  - Its `docs/levels.md` lists all 36 campaign maps by mission. Each mission starts on a Dreadful Wale map (`boat_<mission>_p`). Clockwork Mansion, Dust District, A Crack in the Slab, the Grand Palace and Death to the Empress span several maps. So stage 6 needs in-mission map transitions as well as mission-to-mission ones (confirmed static against the containers for Edge of the World: `boat_eotw_p`, `eotw_p_lowchaos`, `eotw_p_highchaos`).
 
 ## Leads not yet verified
 

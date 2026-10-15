@@ -2,7 +2,9 @@
 
 Usage:
   python -I d2_resource_index.py list <base-dir> [--type T] [--match REGEX]
-  python -I d2_resource_index.py grep <base-dir> --type entities --match REGEX --text REGEX
+  python -I d2_resource_index.py grep <base-dir> --type File --match "[.]entities$" --text REGEX
+  (map entity files are type File; mission objective trees are type arkTree,
+  models/gameflow/gameflow_<mission>.arktree)
 
 Never writes into the game folder. Point it at a game copy (work/asset-game/base).
 Index layout (confirmed static against work/game1.index.json): magic 05 'SER', BE size,
