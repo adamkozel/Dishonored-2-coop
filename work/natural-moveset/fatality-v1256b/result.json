@@ -1,0 +1,71 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: front-client-fatality: Remote phase 92 not presented | front-host-fatality: Remote phase 114 not presented",
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "fatality",
+      "observer": "host",
+      "passed": false,
+      "failure": "Remote phase 92 not presented",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "source": [
+          -44.5324,
+          -143.192,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T08:55:37.2483420+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/fatalities/fatality_generic_right.midnightscene|1333"
+      ],
+      "sceneIds": [
+        92
+      ],
+      "restored": true
+    },
+    {
+      "approach": "front",
+      "source": "host",
+      "kind": "fatality",
+      "observer": "client",
+      "passed": false,
+      "failure": "Remote phase 114 not presented",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -48.0232,
+          -147.161,
+          66.4
+        ],
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T08:56:33.9831182+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/fatalities/fatality_torso_medium_a.midnightscene|2000"
+      ],
+      "sceneIds": [
+        114
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Sword-combat finishers (census-1255 fatalities) on a host-owned NPC under the product controller, both source roles: native finisher scene, partner phase, shared death and victim position; fixture restored after every case."
+}

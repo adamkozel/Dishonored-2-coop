@@ -288,7 +288,10 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
             airPacket->traversalStart=vault.start;airPacket->traversalGoal=vault.goal;airPacket->traversalPoint=vault.point;airPacket->traversalHeight=vault.height;}
     }
     unsigned swordAction=0;nativePlayerSwordAction(states,base,swordAction);
-    if(swordAction){if(!sword.sword.equipped)return false;NativePlayerCombatScene combat{};
+    // 1214g: a generic sword finisher (census-1255 fatality, right arm only) runs in the
+    // sword attack state but is owned by the takedown channel; it has no combat scene
+    // (take 1256b: the client finisher was admitted and never sent).
+    if(swordAction&&!chokeValid){if(!sword.sword.equipped)return false;NativePlayerCombatScene combat{};
         if(!readNativePlayerCombatScene(memoryRead,base,states,combat)||combat.character!=localRole+1||
            (combat.target.actor&&(combat.target.actor==probeActor||combat.target.handle==probeHandle)))return false;
         if(sceneHandle)*sceneHandle=combat.handle;

@@ -56,12 +56,17 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
     unsigned clocks[3]{};
     if(!s.instance||!read(s.instance+0x15c,clocks,sizeof(clocks))||clocks[0]!=clocks[1]||clocks[2]||clocks[1]>s.durationMs||
        !read(s.instance+0x158,&s.handle,4)||!s.handle||!read(s.instance+0x10,&bindings,8)||!bindings||
-       !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)!=2+nativeTakedownArms(s.variant))return false;
+       !read(s.instance+0x18,&bindingFlags,4))return false;
     // Player, target and the owned arms (both; generic fatalities bind the right arm only).
-    const unsigned bound=2+nativeTakedownArms(s.variant),wantArms=nativeTakedownArms(s.variant);
-    s.timeMs=clocks[1];std::array<std::uintptr_t,4> actors{};unsigned players=0,targets=0,arms=0,sides=0;
+    // Four-binding finishers also carry one empty slot (take 1256b: NPC, player, two
+    // arms, null), which binds no actor.
+    const unsigned wantArms=nativeTakedownArms(s.variant),bound=bindingFlags&0xffffff,empty=bound-(2+wantArms);
+    if(bound!=2+wantArms&&!(nativeTakedownFatality(s.variant)&&wantArms==2&&bound==5))return false;
+    s.timeMs=clocks[1];std::array<std::uintptr_t,5> actors{};unsigned players=0,targets=0,arms=0,sides=0,nulls=0;
     for(unsigned i=0;i<bound;++i){unsigned handle=0;std::uintptr_t vt=0;
-        if(!read(bindings+i*0x20+8,&actors[i],8)||!actors[i]||!read(actors[i]+0xa8,&handle,4)||worldIdentityEntity(read,game,handle)!=actors[i]||!read(actors[i],&vt,8))return false;
+        if(!read(bindings+i*0x20+8,&actors[i],8))return false;
+        if(!actors[i]){if(++nulls>empty)return false;continue;}
+        if(!read(actors[i]+0xa8,&handle,4)||worldIdentityEntity(read,game,handle)!=actors[i]||!read(actors[i],&vt,8))return false;
         if(actors[i]==states.player.player){if(++players>1||handle!=1)return false;}
         else if(vt==base+0x1c5e108){
             if(++targets>1||!readWorldNpcIdentity(read,base,game,handle,s.target)||!s.target.unique||!s.target.reciprocal||s.target.actor!=actors[i])return false;

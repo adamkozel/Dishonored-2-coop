@@ -1,0 +1,153 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: front-client-fatality: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "fatality",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "source": [
+          -45.8949,
+          -143.889,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T09:15:24.6859310+02:00",
+      "scenes": [],
+      "restored": true
+    },
+    {
+      "approach": "front",
+      "source": "host",
+      "kind": "fatality",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 113 presented",
+        "Same outcome in both worlds: dead",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -48.0811,
+          -147.424,
+          66.4
+        ],
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T09:16:20.7251569+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/fatalities/fatality_torso_fast_b.midnightscene|1500"
+      ],
+      "sceneIds": [
+        113
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 35975671,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x190c2847e20",
+          "actor": "0x190cda2d500",
+          "attributes": "0x190cd7ab8d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 35975687,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1e0f3cb0ad0",
+          "actor": "0x1e20c36b480",
+          "attributes": "0x1e20c0d98d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "victimEnd": {
+        "source": [
+          -48.0635,
+          -145.377,
+          66.5499
+        ],
+        "observer": [
+          -48.0635,
+          -145.377,
+          66.5499
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "client_corpse",
+        "posesDelta": 98,
+        "rootsDelta": 458,
+        "bodyAppliedDelta": 458,
+        "positionBefore": [
+          -47.9767,
+          -146.951,
+          66.4
+        ],
+        "positionAfter": [
+          -48.0617,
+          -145.378,
+          66.55
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Sword-combat finishers (census-1255 fatalities) on a host-owned NPC under the product controller, both source roles: native finisher scene, partner phase, shared death and victim position; fixture restored after every case."
+}
