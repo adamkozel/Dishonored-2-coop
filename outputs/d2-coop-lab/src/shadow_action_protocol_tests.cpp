@@ -99,8 +99,17 @@ void chokePresentationTests(){
     native.player.current=12;check(!nativePlayerGroundAssassinationStates(native,base),"unobserved assassination stance refused");
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
-    check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
-          ChokePresentation::clip(6)==ChokePresentation::clip(5)&&ChokePresentation::duration(6)==1933,"observed assassination_back (1248j) presented with the fast-back donor on its own clock");
+    check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",2200)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
+          ChokePresentation::clip(6)==ChokePresentation::clip(5),"observed assassination_back (Corvo 1933 ms in 1248j, Emily 2200 ms in 1248k) presented with the fast-back donor");
+    {const auto drop=nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1800),
+         slide=nativeChokeVariant("midnight/gameplay/player/base/choke/choke_slide_front.midnightscene","Npc",1566),
+         window=nativeChokeVariant("midnight/gameplay/player/base/choke/choke_window_left.midnightscene","Npc",1166);
+     check(drop>6&&nativeTakedownLethal(drop)&&ChokePresentation::clip(drop)==ChokePresentation::clip(5)&&
+           slide>6&&nativeTakedownKind(slide)==3&&ChokePresentation::clip(slide)==ChokePresentation::clip(3)&&window>6&&nativeTakedownKind(window)==3&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back_carry_corpse.midnightscene","npc",1333)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_ready.midnightscene","Scene_1",366)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1801)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","Npc",1800),"census takedown scenes admitted by exact asset, subscene and duration; carry and drop-ready phases are not takedowns");}
     ChokePresentation t;ChokePresentation::Sample out{};float amount=0;
     check(t.push({100,1,1,200,600,31,41})&&t.push({140,1,1,240,600,31,41}),"confirmed choke clock accepted");
     check(t.sample(120,out,amount)&&std::fabs(amount-220.f/600)<1e-6f,"choke uses delayed native clock");
@@ -376,7 +385,8 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");
     }
     {auto choke=p;choke.state=21;choke.swordState=1;choke.chokeVariant=1;choke.chokeDurationMs=600;choke.chokeSpawner=31;choke.chokeDefinition=41;
-      for(unsigned v=1;v<=6;++v){choke.swordState=v>=5?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=ChokePresentation::duration(v);check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      for(unsigned v=1;v<=kNativeTakedownSceneCount;++v){choke.swordState=nativeTakedownLethal(v)?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=kNativeTakedownSubscenes[kNativeTakedownScenes[v-1].first].durationMs;check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      choke.swordState=2;choke.chokeVariant=5;choke.chokeDurationMs=1333;
       auto bad=choke;bad.version=68;check(!validShadowAction(bad,c,h),"previous combat wire refused");
       bad=choke;bad.chokeSpawner=0;check(!validShadowAction(bad,c,h),"targetless choke refused");
       bad=choke;bad.swordState=1;check(!validShadowAction(bad,c,h),"lethal paired scene requires presented sword");

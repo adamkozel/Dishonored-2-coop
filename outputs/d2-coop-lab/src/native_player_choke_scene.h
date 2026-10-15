@@ -2,29 +2,27 @@
 #include "native_player_states.h"
 #include "native_player_arm.h"
 #include "world_identity.h"
+#include "native_takedown_scenes.h"
 #include <array>
 // Exact native579 rear choke: state41 and four reciprocal bindings. Native
 // first-person and victim animations continue untouched on the source.
-// The same owned four-actor channel also carries exact native596 fast-back lethal
-// (5) and the slower native rear lethal assassination_back (6, take 1248j).
+// The same owned four-actor channel carries every native takedown scene of census
+// 1253 (native_takedown_scenes.h): exact asset, subscene name and per-character
+// duration. Ids 1-4 are the rear choke phases, 5 the fast-back lethal (596), 6
+// assassination_back (take 1248j: Corvo 1933 ms, Emily 2200 ms).
 struct NativePlayerChokeScene {
     std::uintptr_t instance=0;unsigned handle=0,variant=0,timeMs=0,durationMs=0,character=0;
     NativeWorldNpc target{};std::array<NativePlayerArm,2> arms{};
 };
 inline unsigned nativeChokeVariant(const std::string& asset,const std::string& sub,unsigned duration){
-    // assassination_back names its subscene "npc" (lower case) and runs 1933 ms
-    // in the same Assassination13 state as the fast-back lethal (take 1248j).
-    if(sub=="npc"&&duration==1933&&asset=="midnight/gameplay/player/base/assassination/assassination_back.midnightscene")return 6;
-    if(sub!="Npc")return 0;
-    if(duration==1333&&asset=="midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene")return 5;
-    const std::string prefix="midnight/gameplay/player/base/choke/choke_";
-    if(duration==600&&asset==prefix+"back.midnightscene")return 1;
-    if(duration==1400&&asset==prefix+"loop.midnightscene")return 2;
-    if(duration==1800&&asset==prefix+"win.midnightscene")return 3;
-    // Native591: releasing input early eventually lets the guard break free.
-    // This is not the separate, still unverified cancel400 scene.
-    if(duration==1500&&asset==prefix+"combat_lose.midnightscene")return 4;
-    return 0;
+    // Native591: releasing input early eventually lets the guard break free (4).
+    return nativeTakedownId(asset.c_str(),sub.c_str(),duration);
+}
+// Ids 1-6 keep their observed native states (Choke41; Assassination13). Other census
+// scenes accept either ground paired state until their own state is observed.
+inline bool nativeTakedownStates(unsigned variant,const NativePlayerStates& states,std::uintptr_t base){
+    if(variant>6)return nativePlayerGroundPairedStates(states,base);
+    return nativeTakedownLethal(variant)?nativePlayerGroundAssassinationStates(states,base):nativePlayerGroundChokeStates(states,base);
 }
 template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerChokeScene& out){
     if(!nativePlayerGroundPairedStates(states,base))return false;
@@ -41,7 +39,7 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
             if(asset.find("midnight/gameplay/player/base/choke/")!=0&&asset.find("midnight/gameplay/player/base/assassination/")!=0)continue;
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
             const auto variant=nativeChokeVariant(asset,sub,duration);if(!variant)return false;
-            if(variant>=5?!nativePlayerGroundAssassinationStates(states,base):!nativePlayerGroundChokeStates(states,base))return false;
+            if(!nativeTakedownStates(variant,states,base))return false;
             if(s.instance){if(s.instance==c)continue;return false;}
             s.instance=c;s.variant=variant;s.durationMs=duration;declaration=d;scene=sc;
         }

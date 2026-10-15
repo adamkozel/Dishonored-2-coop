@@ -17,6 +17,9 @@ void npcAuthorityProtocolTests(){
      q.h.kind=NpcAuthorityMessage::PairedHold;q.h.reserved=2;require(validNpcControl(q,host,client),"client paired hold names the host NPC and its choke phase");
      q.h.reserved=5;require(validNpcControl(q,host,client),"client paired hold for the fast-back lethal");
      q.h.reserved=6;require(validNpcControl(q,host,client),"back lethal (6) is a paired hold variant");
+     q.h.reserved=58;require(validNpcControl(q,host,client)&&npcPairedKnockoutVariant(58)&&npcPairedKnockoutVariant(3)&&!npcPairedKnockoutVariant(5),"a drop choke (58) is a paired knockout scene");
+     q.h.reserved=57;require(!validNpcControl(q,host,client),"choke cancel (57) is not a paired hold variant");
+     q.h.reserved=kNativeTakedownSceneCount+1;require(!validNpcControl(q,host,client),"unknown takedown scene refused");
      q.h.reserved=4;require(!validNpcControl(q,host,client),"breakout (4) is not a paired hold variant");
      q.h.reserved=0;require(!validNpcControl(q,host,client),"paired hold needs a variant");
      q.h.kind=NpcAuthorityMessage::PairedKnockout;q.h.reserved=3;require(validNpcControl(q,host,client),"client knockout request at choke_win");

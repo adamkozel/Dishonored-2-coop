@@ -1,0 +1,115 @@
+{
+  "source": "host",
+  "kind": "lethal",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 6 presented",
+    "Same outcome in both worlds: dead",
+    "Victim ends 0.1 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -48.1983,
+      -147.954,
+      66.4
+    ],
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T08:14:31.4390568+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|1933"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 32266343,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x2bcb23f7a00",
+      "actor": "0x2bcd9b3bf00",
+      "attributes": "0x2bcd9f95cd0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 32266359,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x19135c28fd0",
+      "actor": "0x1914ad41490",
+      "attributes": "0x1914aabf8d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "victimEnd": {
+    "source": [
+      -47.0879,
+      -147.496,
+      66.5791
+    ],
+    "observer": [
+      -47.0167,
+      -147.431,
+      67.6055
+    ]
+  },
+  "victimGapM": 0.1,
+  "victim": {
+    "result": "client_corpse",
+    "posesDelta": 94,
+    "rootsDelta": 456,
+    "bodyAppliedDelta": 456,
+    "positionBefore": [
+      -48.092,
+      -147.472,
+      66.4
+    ],
+    "positionAfter": [
+      -47.0879,
+      -147.496,
+      66.5791
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}

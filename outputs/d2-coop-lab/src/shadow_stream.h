@@ -180,7 +180,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(!valid||(action==5&&!nativePlayerLeanAmount(memoryRead,states,base,side,up)))return false;
     shadowSourceReadStage=3;
     if(chokeValid){
-        if(sword.sword.equipped!=(choke.variant>=5)||choke.character!=localRole+1||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
+        if(sword.sword.equipped!=nativeTakedownLethal(choke.variant)||choke.character!=localRole+1||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
         if(sceneHandle)*sceneHandle=choke.handle;
         if(airPacket){airPacket->chokeVariant=choke.variant;airPacket->chokeTimeMs=choke.timeMs;airPacket->chokeDurationMs=choke.durationMs;
             airPacket->chokeSpawner=carryIdentityKey(choke.target.spawnerName);airPacket->chokeDefinition=carryIdentityKey(choke.target.definition);}
