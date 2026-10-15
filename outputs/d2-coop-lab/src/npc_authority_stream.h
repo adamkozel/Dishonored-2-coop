@@ -77,7 +77,7 @@ struct NpcAuthorityChannel {
     // a choke that knocks the replica out keeps it natively unconscious. Host:
     // the NPC's AI is held for the scene and it is knocked out at choke_win.
     bool localPaired=false,unconscious=false,hostPairedLease=false;unsigned pairedVariant=0;
-    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0;const char* pairedResult="none";
+    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0,unconsciousSentAt=0;unsigned unconsciousSends=0;const char* pairedResult="none";
     bool enabled=true,ready=false;
     const char* result="negotiating";
     std::uint64_t sent=0,received=0,rejected=0,poses=0,roots=0;
@@ -109,6 +109,7 @@ bool npcStreamContext(ULONGLONG tick){
 }
 void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick);
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick);
+void clientNpcUnconscious(NpcAuthorityChannel& c);
 std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0;
 NpcAuthorityHeader npcHeader(const NpcAuthorityChannel& c,NpcAuthorityMessage kind){
     NpcAuthorityHeader h{};h.role=localRole;h.kind=kind;h.sequence=c.sequence+1;h.sourceSession=npcStreamSession;h.targetSession=npcStreamPeerSession;
@@ -325,6 +326,7 @@ void receiveNpcControl(const CoopNpcControl& p,ULONGLONG tick){
         if(p.h.kind==NpcAuthorityMessage::Stop){stopNpcChannel(c,"peer_stopped",false);return;}
         if(p.h.kind==NpcAuthorityMessage::Ready){c.ready=true;c.result="host_authority";}
         if((p.h.kind==NpcAuthorityMessage::PairedHold||p.h.kind==NpcAuthorityMessage::PairedKnockout)&&!localRole)hostNpcPaired(c,p,tick);
+        if(p.h.kind==NpcAuthorityMessage::Unconscious&&localRole)clientNpcUnconscious(c);
     }
     c.peerSequence=p.h.sequence;c.peerAt=tick;
 }
@@ -409,6 +411,7 @@ void serviceNpcStream(ULONGLONG tick){
             if(pairedVariant==3&&!c.pairedKnockoutAt){c.pairedKnockoutAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedKnockout,3);c.pairedResult="client_knockout_sent";}
         }else if(localRole&&c.localPaired&&!c.unconscious&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult="client_paired_ended";}
         if(!localRole)serviceHostNpcPaired(c,tick);
+        if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}
         if(tick-c.lastCheck>=100){c.lastCheck=tick;NativeNpcAuthority fresh{};
             const bool freshRead=readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh);
             const bool same=freshRead&&sameNpcAuthorityIdentity(c.lease.binding,fresh,false);
@@ -417,6 +420,7 @@ void serviceNpcStream(ULONGLONG tick){
                 c.lifecycleDiff=!freshRead?0x80000000u:((npcAuthorityIdentityDiff(c.lease.binding,fresh)&~0xe00u)|(!npcAuthorityLiving(fresh)?0x40000000u:0u));
                 stopNpcChannel(c,"native_lifecycle_changed");continue;}
             c.lease.binding.health=fresh.health;
+            if(!localRole&&!c.unconscious&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0){c.unconscious=true;c.result="host_unconscious";}
             if(dead&&!c.corpse&&c.ready){c.corpse=true;c.corpseUntil=tick+8000;c.result=localRole?"client_corpse":"host_corpse";}
             if(c.corpse){
                 // 1113d: corpses stay host-streamed (budgeted) for the stream lifetime; releasing

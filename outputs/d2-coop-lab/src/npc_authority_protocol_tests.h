@@ -22,6 +22,11 @@ void npcAuthorityProtocolTests(){
      q.h.reserved=5;require(!validNpcControl(q,host,client),"a lethal is never a knockout");
      q.h.reserved=3;q.h.role=0;require(!validNpcControl(q,host,client),"the host never sends a paired request");
      q.h.role=1;q.h.targetArm=0;require(!validNpcControl(q,host,client),"paired request names its host channel");}
+    {// 1213v: the host tells the client its NPC is natively unconscious.
+     CoopNpcControl u=p;u.h.kind=NpcAuthorityMessage::Unconscious;u.h.targetArm=8;u.h.targetHandle=0x50009;
+     require(validNpcControl(u,client,host),"host reports an unconscious NPC to the client");
+     u.h.reserved=3;require(!validNpcControl(u,client,host),"unconscious carries no variant");u.h.reserved=0;
+     u.h.targetArm=0;require(!validNpcControl(u,client,host),"unconscious names the client channel");}
     CoopNpcPose pose{};pose.h=p.h;pose.h.kind=NpcAuthorityMessage::Pose;pose.h.size=static_cast<unsigned short>(npcPoseBytes(pose.h.joints));pose.h.targetArm=8;pose.h.targetHandle=0x50009;
     pose.sampleUs=1000000;pose.health=pose.maximum=50;pose.root[3]=pose.root[7]=pose.root[11]=1;
     for(unsigned j=0;j<pose.h.joints;++j)pose.local[j][0]=pose.local[j][4]=pose.local[j][8]=1;

@@ -1,0 +1,104 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious"
+  ],
+  "guardHandleSource": "0xb480764",
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -47.7918,
+      -146.113,
+      66.4
+    ],
+    "source": [
+      -48.5866,
+      -149.824,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T07:07:11.0213585+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "final": {
+    "source": {
+      "tick": 28225953,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2361ae69a00",
+      "actor": "0x236470948c0",
+      "attributes": "0x23646dfb8d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 28225968,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x21f40358d50",
+      "actor": "0x21f43bd48a0",
+      "attributes": "0x21f43941ce0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "observerVictimMovedM": 0.54,
+  "victim": {
+    "result": "host_authority",
+    "posesDelta": 93,
+    "rootsDelta": 0,
+    "bodyAppliedDelta": 0,
+    "positionBefore": [
+      -47.7736,
+      -145.527,
+      66.4
+    ],
+    "positionAfter": [
+      -47.7642,
+      -145.932,
+      66.684
+    ]
+  },
+  "guardHealthObserverAfter": 10,
+  "restored": true
+}

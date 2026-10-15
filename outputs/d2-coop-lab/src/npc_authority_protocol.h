@@ -10,7 +10,9 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // paired takedown (rear choke variants 1-3, fast-back lethal 5, carried in
 // reserved) targets a host-owned NPC: the host holds that NPC's AI for the scene,
 // and knocks it out natively when the client's choke_win begins.
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout};
+// 1213v: Unconscious (host -> client): the host NPC is natively unconscious; the
+// client knocks its replica out silently so both worlds agree.
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious};
 inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5;}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
@@ -61,6 +63,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::Pose:return h.size==npcPoseBytes(h.joints)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&h.reserved<=3;
+    case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
     }return false;
 }
 inline bool validNpcControl(const CoopNpcControl& p,const CoopPosePacket& local,const CoopPosePacket& peer){

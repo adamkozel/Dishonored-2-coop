@@ -8,6 +8,7 @@
 struct NpcCombatChannel {
     std::uint64_t arm=0,peerArm=0,peerNonce=0,event=0,request=0,peerRequest=0,pending=0;
     bool ready=false,enabled=true,terminal=false,deathPending=false;
+    ULONGLONG started=0;const char* retired="none";
     ULONGLONG deathAt=0;unsigned deathSource=2;std::uint64_t deathRequest=0,deathEvent=0,deathSourceArm=0;
     NpcCombatDamage deathDamage=NpcCombatDamage::None;EnemyMeleeGeometry deathGeometry{};
     NativeHealth deathBefore{},deathAfter{};float deathInflicted=0;NpcCombatScriptDamage deathScript{};NpcCombatRangedDamage deathRanged{};
@@ -35,6 +36,14 @@ struct NpcCombatRuntime {
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
+// 1213v (#46): the combat session follows dynamic NPC relevance. It bound only
+// the channels present when it began, stopped when none were ready or any bound
+// NPC retired, and was never re-armed, so under the product controller it was
+// off (take 1248b: host "no_ready_native_actors") and no takedown or hit outcome
+// was shared. Bindings now join and retire per NPC, per-NPC divergence retires
+// only that NPC, and the product controller re-arms a stopped session.
+bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
+const char* npcCombatLastRetire="none";
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
 void traceNpcCombat(const CoopNpcCombat& p,bool sent,const char* result,std::uint64_t peerNonce=0){
@@ -492,15 +501,26 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
 }
 void beginNpcCombat(){
     if(npcCombat.enabled)return;
-    if(!npcStreamContext(GetTickCount64())||!swordDamageApiMatches()||npcChannels.empty())return;
+    if(!npcStreamContext(GetTickCount64())||!swordDamageApiMatches())return;
     npcCombat={};npcCombat.enabled=true;npcCombat.nonce=++npcCombatNonce;npcCombat.started=GetTickCount64();npcCombat.scope=doorSessionScope(outgoing,remote);npcCombat.result="negotiating";
     npcCombatNativeStage="idle";npcCombatNativeInflicted=npcCombatNativeAfter=0;npcCombatNativeGeneration=0;
     npcCombatSubtractions=npcCombatLethalSubtractions=0;
     npcCombatLastInfo={};npcCombatLastOwnerFlags=0;npcCombatLastDecl.clear();
     clearNpcCombatCapture();npcCombatCaptureFault.store(0);
-    for(auto& c:npcChannels){NativeHealth h{};if(npcCombatIdentity(c,h))npcCombat.channels.push_back({c.arm,c.peerArm});}
+    for(auto& c:npcChannels){NativeHealth h{};if(c.enabled&&c.ready&&c.peerArm&&!c.corpse&&!c.unconscious&&npcCombatIdentity(c,h)){NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=npcCombat.started;npcCombat.channels.push_back(b);}}
     if(!readNativeDamageTriggers(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,npcCombat.triggers)){stopNpcCombat("trigger_catalog_unavailable");return;}
-    if(npcCombat.channels.empty())stopNpcCombat("no_ready_native_actors");
+    if(npcCombat.channels.empty())npcCombat.result="waiting_for_actors";
+}
+void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason){
+    if(!b.enabled)return;b.enabled=b.ready=false;b.retired=reason;npcCombatLastRetire=reason;++npcCombatChannelsRetired;
+}
+void syncNpcCombatChannels(ULONGLONG tick){
+    for(auto& b:npcCombat.channels){if(!b.enabled)continue;auto* c=npcCombatActor(b.arm);if(!c||!c->enabled||c->peerArm!=b.peerArm)retireNpcCombatChannel(b,"actor_unbound");}
+    for(auto& c:npcChannels){if(!c.enabled||!c.ready||!c.peerArm||c.corpse||c.unconscious)continue;
+        if(std::any_of(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.arm==c.arm&&b.peerArm==c.peerArm;}))continue;
+        NativeHealth h{};if(!npcCombatIdentity(c,h))continue;
+        NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=tick;npcCombat.channels.push_back(b);++npcCombatChannelsAdded;}
+    if(npcCombat.channels.size()>96)npcCombat.channels.erase(std::remove_if(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return !b.enabled&&!b.terminal&&!b.deathPending;}),npcCombat.channels.end());
 }
 void serviceNpcCombatFixture(ULONGLONG tick){
     auto& f=npcCombatFixture;
@@ -537,14 +557,15 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
     if(!npcCombatScope(tick)){rejectNpcCombat(p,"receive_scope");return;}
     if(!validNpcCombat(p,outgoing,remote)){rejectNpcCombat(p,"receive_invalid_packet");return;}
     ++npcCombat.received[static_cast<unsigned>(p.kind)];
-    auto it=std::find_if(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.enabled&&b.arm==p.binding.targetArm&&b.peerArm==p.binding.sourceArm;});
+    const auto findBinding=[&](){return std::find_if(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.enabled&&b.arm==p.binding.targetArm&&b.peerArm==p.binding.sourceArm;});};
+    auto it=findBinding();if(it==npcCombat.channels.end()){syncNpcCombatChannels(tick);it=findBinding();}
     if(it==npcCombat.channels.end()){rejectNpcCombat(p,"receive_binding");return;}auto& b=*it;auto* c=npcCombatActor(b.arm);
     if(!c||p.binding.sourceHandle!=c->peerHandle||p.binding.targetHandle!=c->lease.binding.npc.handle||p.binding.rig!=c->rig||p.binding.joints!=c->render.joints){rejectNpcCombat(p,"receive_identity",b.peerNonce);return;}
     if(p.kind==NpcCombatMessage::Hello){
         if(b.terminal||b.deathPending){rejectNpcCombat(p,"receive_terminal_hello",b.peerNonce);return;}
         traceNpcCombat(p,false,"hello",b.peerNonce);
         if(b.ready&&b.peerNonce==p.sourceNonce){sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Ready));return;}
-        NativeHealth h{};if((b.peerNonce&&b.peerNonce!=p.sourceNonce)||!npcCombatIdentity(*c,h)||h.current!=p.before||h.maximum!=p.maximum){stopNpcCombat("initial_health_or_nonce_mismatch");return;}
+        NativeHealth h{};if((b.peerNonce&&b.peerNonce!=p.sourceNonce)||!npcCombatIdentity(*c,h)||h.current!=p.before||h.maximum!=p.maximum){retireNpcCombatChannel(b,"initial_health_or_nonce_mismatch");return;}
         b.peerNonce=p.sourceNonce;sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Ready));return;
     }
     if(p.targetNonce!=npcCombat.nonce||!b.peerNonce||p.sourceNonce!=b.peerNonce){rejectNpcCombat(p,"receive_nonce",b.peerNonce);return;}
@@ -559,26 +580,26 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
     const auto order=npcCombatOrder(p.kind==NpcCombatMessage::Request?b.peerRequest:b.event,p.kind==NpcCombatMessage::Request?p.request:p.event);
     if(order==NpcCombatOrder::Duplicate){++npcCombat.duplicates;return;}
     if(b.terminal||b.deathPending){++npcCombat.rejected;return;}
-    if(order!=NpcCombatOrder::Next){stopNpcCombat("event_gap");return;}
+    if(order!=NpcCombatOrder::Next){retireNpcCombatChannel(b,"event_gap");return;}
     NativeHealth before{},after{};float inflicted=0;
     std::uint64_t sourceArm=0;
     if(p.damage==NpcCombatDamage::Corpse){NativeHealth source{};bool pending=false;
         auto* actor=npcCombatCorpseSource(p.sourceActorArm,true,source,pending);
-        if(!actor){stopNpcCombat("world_source_identity");return;}sourceArm=actor->arm;
+        if(!actor){retireNpcCombatChannel(b,"world_source_identity");return;}sourceArm=actor->arm;
     }
-    if(!npcCombatIdentity(*c,before)){stopNpcCombat("actor_lifecycle_changed");return;}
+    if(!npcCombatIdentity(*c,before)){retireNpcCombatChannel(b,"actor_lifecycle_changed");return;}
     if(p.kind==NpcCombatMessage::Commit&&(before.current!=p.before||before.maximum!=p.maximum||
-       (p.sourceRole==1&&b.pending!=p.request))){stopNpcCombat("replica_or_request_diverged");return;}
-    if(!npcCombatApply(*c,before,p.sourceRole,p.damage,p.geometry,after,inflicted,sourceArm,p.script,p.ranged)){stopNpcCombat("native_replay_failed");return;}
-    if(p.kind==NpcCombatMessage::Commit&&(after.current!=p.after||inflicted!=p.inflicted)){stopNpcCombat("native_replica_result_diverged");return;}
+       (p.sourceRole==1&&b.pending!=p.request))){retireNpcCombatChannel(b,"replica_or_request_diverged");return;}
+    if(!npcCombatApply(*c,before,p.sourceRole,p.damage,p.geometry,after,inflicted,sourceArm,p.script,p.ranged)){retireNpcCombatChannel(b,"native_replay_failed");return;}
+    if(p.kind==NpcCombatMessage::Commit&&(after.current!=p.after||inflicted!=p.inflicted)){retireNpcCombatChannel(b,"native_replica_result_diverged");return;}
     if(after.current==0){npcCombatDeferDeath(b,p.sourceRole,p.request,p.event,p.damage,p.geometry,before,after,inflicted,sourceArm,p.script,p.ranged);return;}
     if(p.kind==NpcCombatMessage::Request){b.peerRequest=p.request;++npcCombat.requests;npcCombatCommit(*c,b,1,p.request,p.damage,p.geometry,before,after,inflicted,0,{},p.ranged);}
     else{b.event=p.event;++npcCombat.applied;if(p.sourceRole==2)++npcCombat.worldApplied;if(p.sourceRole==1){
-            if(!b.pendingRequests.acknowledge(p.request)){stopNpcCombat("pending_request_order");return;}
+            if(!b.pendingRequests.acknowledge(p.request)){retireNpcCombatChannel(b,"pending_request_order");return;}
             b.pending=b.pendingRequests.front();
         }
         if(after.current==0){b.terminal=true;b.pending=0;b.pendingRequests.clear();++npcCombat.deaths;}
-        if(after.current!=p.after||inflicted!=p.inflicted)stopNpcCombat("native_replica_result_diverged");}
+        if(after.current!=p.after||inflicted!=p.inflicted)retireNpcCombatChannel(b,"native_replica_result_diverged");}
 }
 void serviceNpcCombatTriggerFixture(){
     if(!npcCombatTriggerFixtureRequested)return;npcCombatTriggerFixtureRequested=false;
@@ -609,9 +630,11 @@ void serviceNpcCombatTriggerFixture(){
     npcCombatTriggerFixtureResult=npcCombatCaptured.load()==count+1?"captured_observed_event_fixture":"capture_unconfirmed";
 }
 void serviceNpcCombat(ULONGLONG tick){
-    if(npcCombatRequest>=0){const auto request=npcCombatRequest;npcCombatRequest=-1;if(request)beginNpcCombat();else stopNpcCombat("disabled");}
+    if(npcCombatRequest>=0){const auto request=npcCombatRequest;npcCombatRequest=-1;npcCombatWanted=request!=0;if(request)beginNpcCombat();else stopNpcCombat("disabled");}
     serviceNpcCombatFixture(tick);
+    if(!npcCombat.enabled&&npcCombatWanted&&(productMode||productAutoArm)&&npcAuthorityStreamActive&&tick-npcCombatRearmAt>=3000){npcCombatRearmAt=tick;beginNpcCombat();if(npcCombat.enabled)++npcCombatRearms;}
     if(!npcCombat.enabled)return;
+    syncNpcCombatChannels(tick);
     if(!npcCombatScope(tick)){stopNpcCombat("session_or_world_changed");return;}
     serviceNpcCombatTriggerFixture();
     if(npcCombatCaptureFault.exchange(0)){stopNpcCombat("native_capture_queue_failed");return;}
@@ -623,13 +646,14 @@ void serviceNpcCombat(ULONGLONG tick){
     auto queue=std::move(npcCombat.outgoing);npcCombat.outgoing.clear();for(const auto& p:queue)if(!sendNpcCombat(p)){stopNpcCombat("transport_failed");return;}
     if(tick-npcCombat.helloAt>=500){npcCombat.helloAt=tick;
         for(auto& b:npcCombat.channels){if(!b.enabled||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
-            if(!c||!npcCombatIdentity(*c,h)){stopNpcCombat("bound_actor_retired_without_combat_outcome");return;}
+            if(!c||!npcCombatIdentity(*c,h)){retireNpcCombatChannel(b,"bound_actor_retired_without_combat_outcome");continue;}
             if(!b.ready){auto p=npcCombatPacket(*c,b,NpcCombatMessage::Hello);p.before=h.current;p.maximum=h.maximum;sendNpcCombat(p);}
         }
     }
-    if(std::none_of(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return b.enabled;})){stopNpcCombat("all_bound_actors_retired");return;}
+    for(auto& b:npcCombat.channels)if(b.enabled&&!b.ready&&tick>=b.started&&tick-b.started>5000)retireNpcCombatChannel(b,"negotiation_timeout");
+    const bool any=std::any_of(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return b.enabled;});
     const bool ready=std::all_of(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return !b.enabled||b.ready;});
-    npcCombat.result=ready?"active_native_melee":"negotiating";if(!ready&&tick>=npcCombat.started&&tick-npcCombat.started>5000)stopNpcCombat("negotiation_timeout");
+    npcCombat.result=!any?"waiting_for_actors":ready?"active_native_melee":"negotiating";
     std::vector<NpcCombatCaptureBinding> bindings;
     if(npcCombat.enabled)for(const auto& b:npcCombat.channels)if(b.enabled&&b.ready&&!b.terminal&&!b.deathPending){auto* c=npcCombatActor(b.arm);if(c&&c->enabled)bindings.push_back({c->lease.binding,npcCombat.nonce,b.arm});}
     AcquireSRWLockExclusive(&npcCombatCaptureLock);npcCombatCaptureBindings=std::move(bindings);ReleaseSRWLockExclusive(&npcCombatCaptureLock);
@@ -637,7 +661,7 @@ void serviceNpcCombat(ULONGLONG tick){
 void repeatNpcCombat(){if(npcCombat.enabled&&npcCombat.lastSent.sourceNonce==npcCombat.nonce&&npcCombat.lastSent.event+npcCombat.lastSent.request)sendNpcCombat(npcCombat.lastSent);}
 void writeNpcCombat(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-combat.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    const auto& s=npcCombat;fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
+    const auto& s=npcCombat;fprintf(f,"{\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false");}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);

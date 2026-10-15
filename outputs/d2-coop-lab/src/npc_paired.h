@@ -38,3 +38,16 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick){
     if(c.hostPairedLease&&tick>=c.pairedUntil){releaseNpcAiLease(c.lease);c.hostPairedLease=false;c.pairedResult="host_paired_released";}
 }
+// 1213v: the host's NPC is natively unconscious (a host choke, or the host's
+// knockout for a client choke). The client's replica follows the host's body by
+// the pose stream, but stayed natively conscious (take 1248b host choke): knock it
+// out silently (no reaction - the stream drives the visible body).
+std::uint64_t npcClientUnconsciousApplied=0,npcClientUnconsciousRefused=0;
+void clientNpcUnconscious(NpcAuthorityChannel& c){
+    if(c.unconscious||c.corpse)return;
+    NativeHealth before{},after{};
+    if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c.lease.binding.npc.handle,before)||before.actor!=c.lease.binding.npc.actor){++npcClientUnconsciousRefused;return;}
+    if(nativeNpcUnconscious(before)){c.unconscious=true;c.result="client_unconscious";return;}
+    if(!applyNativeKnockout(before,0x3fff0010u,after,kNpcKnockoutDecl)||!nativeNpcUnconscious(after)){++npcClientUnconsciousRefused;c.pairedResult="client_unconscious_refused";return;}
+    c.unconscious=true;++npcClientUnconsciousApplied;c.result="client_unconscious";c.pairedResult="client_unconscious_from_host";
+}
