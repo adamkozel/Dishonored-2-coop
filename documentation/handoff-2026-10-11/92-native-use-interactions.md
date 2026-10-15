@@ -24,9 +24,19 @@ Updated 2026-10-14.
   - The host's use: remote Corvo on the client ended at 24% of the clip. The source ended the use early, for a reason not yet isolated.
 - **1214 / 1214b (1213, failed).** The host's use passed in 1214 (Corvo leans into the window; backlit). The client's uses were missed by the 33 ms sampling.
 
+**Vise, both roles (1213f, takes 1226–1227b, #3):**
+- **Cause of the 1218d failure:** the host's vise use never registered because the native interaction sensor wasn't focused when Use was pressed. The video shows Corvo beside the bench with no interaction.
+- **New probe mode `d2_runtime_probe --focus` (1226):** reads the sensor exactly as the mod does, `arkCpntPlayerSensorInteraction` +0x80. On the Dunwall window it named the window's handle sub-entity `ld_rich_small_gp_window_handle_37`, not the window root: focus targets handle entities.
+- **v1227b:** before each Use press, the harness searches stand-off side, yaw and pitch until `--focus` names a `vise` handle.
+  - Host: focused on the first pose.
+  - Client: focused on try 11 at yaw +12°, because the partner's body stood on the shared spot.
+  - Both roles registered the use with variant 3 (crank), as expected. The partner presented it at weight 1.0 for 60 and 65 frames, playing to 100% and ending by duration.
+  - In both roles the first focused press did not register and the second did; the harness retries.
+- The take is recorded as failed only because the optional turbine-lever case afterwards threw "Observer pitch did not settle" (#4).
+
 **Open:**
-- Lever, crank, wheel and key variants are classified and loaded but untested on real mechanisms.
-- The early end of the host-source use.
+- Lever, wheel and key variants are untested on real mechanisms. Crank/vise passes (1227b).
+- The early end of the host-source use (#5): not reproduced on the vise, which plays to 100%. Re-check on the window in the #4 run.
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "failure": "--focus did not name the aimed window (got 'ld_rich_small_gp_window_handle_37')",
+  "notes": {
+    "baseline": {
+      "readOnly": true,
+      "tick": 11872921,
+      "focused": false,
+      "handle": 1073676304,
+      "name": ""
+    },
+    "aimed": {
+      "readOnly": true,
+      "tick": 11879406,
+      "focused": true,
+      "handle": 94372282,
+      "name": "ld_rich_small_gp_window_handle_37"
+    },
+    "windowHandle": "0x5a401be"
+  },
+  "scope": "d2_runtime_probe --focus: unfocused baseline, then a real Dunwall window aimed at must be named. Fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Probe-Focus-v1226.ps1:36[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  36 | [0m Get-Content "$out/result.json"; if ($failure) { [36;1mthrow $failure[0m }[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                 ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1m--focus did not name the aimed window (got 'ld_rich_small_gp_window_handle_37')[0m
