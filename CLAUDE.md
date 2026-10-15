@@ -81,7 +81,8 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
    - Run `gh pr ready <n>`. Checks take about 1 min, plus about 3–4 min for `unit-tests` when the build inputs (`src/`, `third_party/`, `CMakeLists.txt`) changed.
    - Keep working while they run, but don't commit or branch until the merge is done. Both live state files change with every result, so a second branch would conflict after the squash.
    - Read `gh pr checks <n>` once at a natural pause. Exit code 8 means pending. Never poll in a loop; the app wakes the session on failures.
-   - When green, run `gh pr merge <n> --squash --delete-branch --author-email adamkozel@users.noreply.github.com --subject "<title> (#n)" --body-file <file>`. Without `--author-email`, GitHub authors the squash commit with the account's personal email.
+   - When green, squash locally, so the commit carries the noreply author: `git switch main && git pull --ff-only && git merge --squash origin/<branch> && git commit -F <file>` (subject `<title> (#n)`), then `git push origin main` (a fast-forward, never a force-push), `gh pr close <n> --delete-branch --comment "Squash-merged locally as <sha> ..."` and `git branch -D <branch>`.
+     - Why: `gh pr merge --squash` authors the commit with the account's primary (personal) email, and GitHub refuses `--author-email` with the noreply address until the account's "Keep my email addresses private" setting is on (#69). Once it is on, `gh pr merge <n> --squash --delete-branch --subject "<title> (#n)" --body-file <file>` is fine again.
    - Then `git switch main && git pull --ff-only`. Uncommitted work carries over to the next branch.
 6. **On CI failure,** fix on the same branch and push.
    - If a conflict happens anyway, merge `origin/main` into the branch. For `work/current-task-state.json` and the catalog, keep the branch's (newest) version.

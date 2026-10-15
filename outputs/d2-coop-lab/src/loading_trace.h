@@ -123,6 +123,7 @@ void traceLogicSwitch(void* manager,int target) {
     if(checkpointOwnsLoading()) {
         if(checkpointLoadingBoundary(e))target=2;
     }else if(holdLoadingSwitch(e))waitLoadingProbe();
+    else if(missionTransitionBoundary(e))waitMissionTransition();
     realLogicSwitch(manager,target);
     memoryRead(reinterpret_cast<std::uintptr_t>(manager)+0x538,&e.after,4);
     AcquireSRWLockExclusive(&switchTraceLock);
