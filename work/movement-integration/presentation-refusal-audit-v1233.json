@@ -1,0 +1,118 @@
+{
+  "at": "2026-10-15T04:03:27.596955+02:00",
+  "takes": {
+    "mission-presentation-resume-v1204f": {
+      "candidate": "1203e",
+      "passed": true,
+      "pause-client": {
+        "ok": true,
+        "ms": 18995
+      },
+      "pause-host": {
+        "ok": true,
+        "ms": 17366
+      },
+      "after-warp": {
+        "ok": true,
+        "ms": 15522
+      },
+      "modal": {
+        "ok": true,
+        "ms": 14474
+      }
+    },
+    "mission-presentation-resume-v1230": {
+      "candidate": "1213h",
+      "passed": false,
+      "pause-client": {
+        "ok": true,
+        "ms": 1562
+      },
+      "pause-host": {
+        "ok": true,
+        "ms": 1568
+      },
+      "after-warp": {
+        "ok": true,
+        "ms": 325
+      },
+      "modal": {
+        "ok": false,
+        "ms": 30087
+      }
+    },
+    "mission-presentation-resume-v1230b": {
+      "candidate": "1213i",
+      "passed": false,
+      "pause-client": {
+        "ok": true,
+        "ms": 1622
+      },
+      "pause-host": {
+        "ok": true,
+        "ms": 1246
+      },
+      "after-warp": {
+        "ok": true,
+        "ms": 325
+      },
+      "modal": {
+        "ok": false,
+        "ms": 30222
+      }
+    },
+    "mission-presentation-resume-v1230c": {
+      "candidate": "1213j",
+      "passed": true,
+      "pause-client": {
+        "ok": true,
+        "ms": 1294
+      },
+      "pause-host": {
+        "ok": true,
+        "ms": 1559
+      },
+      "after-warp": {
+        "ok": true,
+        "ms": 327
+      },
+      "modal": {
+        "ok": true,
+        "ms": 5142
+      }
+    }
+  },
+  "diagnosis": {
+    "take": "mission-presentation-resume-v1230b",
+    "client_beginRefusal": 15,
+    "client_beginRefusals": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      7,
+      0,
+      0
+    ],
+    "host_active": true,
+    "meaning": "reason 15: the partner avatar sword was not equipped/started - natively holstered by requestMovementEquipment(false) while the partner was holstered"
+  },
+  "findings": [
+    "Confirmed runtime (1230b, 1213i): after the tutorial modal the client bank request was refused 7x with reason 15 (avatar sword holstered); no frame refusals occurred (refuseReasons all 0).",
+    "Confirmed static: beginMovementBank and the bank commit required a drawn avatar sword; requestMovementEquipment(false) holsters it natively.",
+    "Confirmed runtime (1230c, 1213j, passed): with a settled drawn-or-holstered sword accepted, the presentation is live again 5.1 s after the tutorial modal (never in 1230/1230b; 14.5 s in 1204f); pauses 1.3-1.6 s; warp 0.33 s; both partners start holstered (presentedDrawn false) matching the source.",
+    "#34: the refusal gate (skip transient refused frames, stop after 20) is unit-tested; no refused frame occurred in 1230b/1230c, so the 1228e trigger was not reproduced at runtime."
+  ],
+  "complete": true
+}

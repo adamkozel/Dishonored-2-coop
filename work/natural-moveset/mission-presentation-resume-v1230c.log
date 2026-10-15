@@ -1,0 +1,2078 @@
+{
+  "scope": "Product controller: partner presentation restored by itself after pause menus (both roles) and the shared tutorial modal on Edge of the World; Dunwall fixture restored.",
+  "failure": null,
+  "passed": true,
+  "cases": [
+    {
+      "base": {
+        "host": {
+          "remote": [
+            -31.001318,
+            193.090576,
+            1.25397
+          ],
+          "local": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "handle": 813313190,
+          "render": [
+            -31.001318,
+            193.090576,
+            1.25397
+          ],
+          "stream": true,
+          "clockRejection": {
+            "code": 2,
+            "count": 1,
+            "dt": 0.0175312,
+            "dz": 0.24823332,
+            "rate": 28.49074936,
+            "motion": 0,
+            "previousAirState": 0
+          },
+          "ok": true,
+          "distance": 0.0,
+          "bank": true,
+          "logic": 1,
+          "fresh": true,
+          "weight": 1.0,
+          "follow": true,
+          "target": [
+            -31.001318,
+            193.090576,
+            1.25397
+          ]
+        },
+        "client": {
+          "remote": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "local": [
+            -31.001318,
+            193.090576,
+            1.25397
+          ],
+          "handle": 812723354,
+          "render": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "stream": true,
+          "clockRejection": {
+            "code": 3,
+            "count": 3,
+            "dt": 0.0452759,
+            "dz": -0.21230948,
+            "rate": 0.0,
+            "motion": 0,
+            "previousAirState": 0
+          },
+          "ok": true,
+          "distance": 0.0,
+          "bank": true,
+          "logic": 1,
+          "fresh": true,
+          "weight": 1.0,
+          "follow": true,
+          "target": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ]
+        },
+        "resume": {
+          "host": {
+            "enabled": true,
+            "phase": 1,
+            "armed": 2,
+            "suspended": 0,
+            "resumed": 0,
+            "refused": 1,
+            "checksum": 2084328936769022348,
+            "priorToken": 2,
+            "priorPeerToken": 2,
+            "result": "armed",
+            "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+          },
+          "client": {
+            "enabled": true,
+            "phase": 1,
+            "armed": 2,
+            "suspended": 0,
+            "resumed": 0,
+            "refused": 1,
+            "checksum": 4198469678325967669,
+            "priorToken": 2,
+            "priorPeerToken": 2,
+            "result": "armed",
+            "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+          }
+        },
+        "waitMs": 323,
+        "ok": true,
+        "product": {
+          "host": {
+            "productMode": false,
+            "autoArm": true,
+            "result": "armed",
+            "step": 18,
+            "worlds": 0,
+            "dispatched": 27,
+            "last": "coop_movement_resume on",
+            "hostKeys": 0,
+            "leaveKeys": 0,
+            "repairs": 0,
+            "quickRepairs": 1,
+            "bulkCongestionSkips": 59,
+            "bulkQueueUsMax": 79887,
+            "lateRebases": 0,
+            "presentationLost": false,
+            "missing": 0,
+            "repairBackoffMs": 0,
+            "role": 0,
+            "partnerAssets": true,
+            "dataDir": ""
+          },
+          "client": {
+            "productMode": false,
+            "autoArm": true,
+            "result": "armed",
+            "step": 18,
+            "worlds": 0,
+            "dispatched": 27,
+            "last": "coop_movement_resume on",
+            "hostKeys": 0,
+            "leaveKeys": 0,
+            "repairs": 0,
+            "quickRepairs": 1,
+            "bulkCongestionSkips": 0,
+            "bulkQueueUsMax": 0,
+            "lateRebases": 2,
+            "presentationLost": false,
+            "missing": 0,
+            "repairBackoffMs": 0,
+            "role": 1,
+            "partnerAssets": true,
+            "dataDir": ""
+          }
+        },
+        "tag": "armed-facing"
+      },
+      "cases": {
+        "pauseClientFollow": {
+          "host": {
+            "remote": [
+              -27.714001,
+              194.848007,
+              -2.776664
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -27.714001,
+              194.848007,
+              -2.776664
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 3,
+              "count": 2,
+              "dt": 0.0306092,
+              "dz": -0.16659927,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 3
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.999708,
+            "follow": true,
+            "target": [
+              -27.714001,
+              194.848007,
+              -2.776664
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -27.714001,
+              194.848007,
+              -2.776664
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 0,
+              "count": 0,
+              "dt": 0.0,
+              "dz": 0.0,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 3,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "same_world_movement_restored",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 2,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "same_world_movement_restored",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 319,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 37,
+              "last": "coop_usable_sync session",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 220,
+              "bulkQueueUsMax": 116592,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 34,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 12,
+              "repairBackoffMs": 0,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "pause-client-follows"
+        },
+        "pauseHost": {
+          "before": {
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 3,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 3,
+              "priorPeerToken": 3,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "repairs": 0,
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 4,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 3,
+              "priorPeerToken": 3,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "during": {
+            "host": {
+              "remote": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 2,
+                "count": 4,
+                "dt": 0.0368709,
+                "dz": -0.09890592,
+                "rate": 14.3000679,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 0.0,
+              "bank": false,
+              "logic": 2,
+              "fresh": true,
+              "weight": 1.0,
+              "follow": false,
+              "target": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 3,
+                "count": 3,
+                "dt": 0.0443143,
+                "dz": -0.16712427,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 0.0,
+              "bank": false,
+              "logic": 1,
+              "fresh": true,
+              "weight": 1.0,
+              "follow": false,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            }
+          },
+          "after": {
+            "host": {
+              "remote": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.920323,
+              "follow": true,
+              "target": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -30.928417,
+                193.089935,
+                1.25397
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.690448,
+              "follow": true,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            },
+            "resume": {
+              "host": {
+                "enabled": true,
+                "phase": 1,
+                "armed": 4,
+                "suspended": 2,
+                "resumed": 2,
+                "refused": 1,
+                "checksum": 2084328936769022348,
+                "priorToken": 3,
+                "priorPeerToken": 3,
+                "result": "same_world_movement_restored",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              },
+              "client": {
+                "enabled": true,
+                "phase": 4,
+                "armed": 3,
+                "suspended": 2,
+                "resumed": 1,
+                "refused": 2,
+                "checksum": 4198469678325967669,
+                "priorToken": 3,
+                "priorPeerToken": 3,
+                "result": "waiting_for_new_peer_samples",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              }
+            },
+            "waitMs": 1559,
+            "ok": true,
+            "product": {
+              "host": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "armed",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 47,
+                "last": "coop_trigger_mirror on",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 0,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 353,
+                "bulkQueueUsMax": 161933,
+                "lateRebases": 0,
+                "presentationLost": false,
+                "missing": 12,
+                "repairBackoffMs": 0,
+                "role": 0,
+                "partnerAssets": true,
+                "dataDir": ""
+              },
+              "client": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "armed",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 43,
+                "last": "coop_door_sync session",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 0,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 0,
+                "bulkQueueUsMax": 0,
+                "lateRebases": 2,
+                "presentationLost": false,
+                "missing": 12,
+                "repairBackoffMs": 0,
+                "role": 1,
+                "partnerAssets": true,
+                "dataDir": ""
+              }
+            },
+            "tag": "pause-host"
+          }
+        },
+        "modal": {
+          "during": {
+            "host": {
+              "remote": [
+                -31.795,
+                112.292999,
+                14.789319
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -31.006964,
+                193.087723,
+                1.25397
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 2,
+                "count": 3,
+                "dt": 0.0445498,
+                "dz": 0.59065521,
+                "rate": 22.44678879,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 81.924,
+              "bank": false,
+              "logic": 12,
+              "fresh": true,
+              "weight": 0.932989,
+              "follow": false,
+              "target": [
+                -31.006964,
+                193.087723,
+                1.25397
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -31.795,
+                112.292999,
+                14.789319
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 2,
+                "count": 2,
+                "dt": 0.0527051,
+                "dz": 1.50583887,
+                "rate": 58.39290619,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 0.0,
+              "bank": false,
+              "logic": 12,
+              "fresh": true,
+              "weight": 0.927452,
+              "follow": false,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            }
+          },
+          "repairs": {
+            "host": 1,
+            "client": 1
+          },
+          "host": 1,
+          "client": 12,
+          "ms": 253,
+          "after": {
+            "host": {
+              "remote": [
+                -31.809565,
+                112.34465,
+                10.299599
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -31.809565,
+                112.34465,
+                10.299599
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.560572,
+              "follow": true,
+              "target": [
+                -31.809565,
+                112.34465,
+                10.299599
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -31.809565,
+                112.34465,
+                10.299599
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.756388,
+              "follow": true,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            },
+            "resume": {
+              "host": {
+                "enabled": false,
+                "phase": 5,
+                "armed": 9,
+                "suspended": 2,
+                "resumed": 2,
+                "refused": 2,
+                "checksum": 2084328936769022348,
+                "priorToken": 4,
+                "priorPeerToken": 4,
+                "result": "presentation_stopped_without_pause",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              },
+              "client": {
+                "enabled": false,
+                "phase": 5,
+                "armed": 8,
+                "suspended": 2,
+                "resumed": 2,
+                "refused": 3,
+                "checksum": 4198469678325967669,
+                "priorToken": 4,
+                "priorPeerToken": 4,
+                "result": "presentation_stopped_without_pause",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              }
+            },
+            "waitMs": 5142,
+            "ok": true,
+            "product": {
+              "host": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "repairing_presentation",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 85,
+                "last": "coop_shadow_stream on",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 1,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 1117,
+                "bulkQueueUsMax": 161933,
+                "lateRebases": 0,
+                "presentationLost": false,
+                "missing": 14,
+                "repairBackoffMs": 6000,
+                "role": 0,
+                "partnerAssets": true,
+                "dataDir": ""
+              },
+              "client": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "repairing_presentation",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 84,
+                "last": "coop_shadow_stream on",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 1,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 0,
+                "bulkQueueUsMax": 0,
+                "lateRebases": 2,
+                "presentationLost": false,
+                "missing": 14,
+                "repairBackoffMs": 6000,
+                "role": 1,
+                "partnerAssets": true,
+                "dataDir": ""
+              }
+            },
+            "tag": "modal"
+          }
+        },
+        "pauseHostFollow": {
+          "host": {
+            "remote": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "local": [
+              -29.490902,
+              194.767029,
+              0.317621
+            ],
+            "handle": 813313190,
+            "render": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 0,
+              "count": 0,
+              "dt": 0.0,
+              "dz": 0.0,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ]
+          },
+          "client": {
+            "remote": [
+              -29.491398,
+              194.766205,
+              0.3269
+            ],
+            "local": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "handle": 812723354,
+            "render": [
+              -29.491903,
+              194.765015,
+              0.341216
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 1,
+              "dt": 0.0459256,
+              "dz": 0.63891864,
+              "rate": 64.66658783,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.014,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -29.491903,
+              194.765015,
+              0.341216
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 5,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 4,
+              "priorPeerToken": 4,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 3,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 3,
+              "priorPeerToken": 3,
+              "result": "same_world_movement_restored",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 318,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 48,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 380,
+              "bulkQueueUsMax": 161933,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 46,
+              "last": "coop_npc_stream on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "pause-host-follows"
+        },
+        "pauseClientFacing": {
+          "host": {
+            "remote": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 4,
+              "dt": 0.0368709,
+              "dz": -0.09890592,
+              "rate": 14.3000679,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.99999,
+            "follow": true,
+            "target": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -30.928417,
+              193.089935,
+              1.25397
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 3,
+              "count": 3,
+              "dt": 0.0443143,
+              "dz": -0.16712427,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.999983,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 3,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "same_world_movement_restored",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 2,
+              "suspended": 1,
+              "resumed": 1,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "same_world_movement_restored",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 316,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 39,
+              "last": "coop_npc_stream on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 220,
+              "bulkQueueUsMax": 116592,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 35,
+              "last": "coop_checkpoint_sync on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "pause-client-facing"
+        },
+        "pauseClient": {
+          "before": {
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 2,
+              "suspended": 0,
+              "resumed": 0,
+              "refused": 1,
+              "checksum": 4198469678325967669,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "repairs": 0,
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 2,
+              "suspended": 0,
+              "resumed": 0,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 2,
+              "priorPeerToken": 2,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "during": {
+            "host": {
+              "remote": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 2,
+                "count": 1,
+                "dt": 0.0175312,
+                "dz": 0.24823332,
+                "rate": 28.49074936,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 0.0,
+              "bank": false,
+              "logic": 1,
+              "fresh": true,
+              "weight": 1.0,
+              "follow": false,
+              "target": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": false,
+              "clockRejection": {
+                "code": 3,
+                "count": 3,
+                "dt": 0.0452759,
+                "dz": -0.21230948,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": false,
+              "distance": 0.0,
+              "bank": false,
+              "logic": 2,
+              "fresh": true,
+              "weight": 1.0,
+              "follow": false,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            }
+          },
+          "after": {
+            "host": {
+              "remote": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "local": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "handle": 813313190,
+              "render": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.502096,
+              "follow": true,
+              "target": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ]
+            },
+            "client": {
+              "remote": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "local": [
+                -31.001318,
+                193.090576,
+                1.25397
+              ],
+              "handle": 812723354,
+              "render": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ],
+              "stream": true,
+              "clockRejection": {
+                "code": 0,
+                "count": 0,
+                "dt": 0.0,
+                "dz": 0.0,
+                "rate": 0.0,
+                "motion": 0,
+                "previousAirState": 0
+              },
+              "ok": true,
+              "distance": 0.0,
+              "bank": true,
+              "logic": 1,
+              "fresh": true,
+              "weight": 0.584894,
+              "follow": true,
+              "target": [
+                -31.813999,
+                192.748001,
+                1.205706
+              ]
+            },
+            "resume": {
+              "host": {
+                "enabled": true,
+                "phase": 4,
+                "armed": 3,
+                "suspended": 1,
+                "resumed": 0,
+                "refused": 1,
+                "checksum": 2084328936769022348,
+                "priorToken": 2,
+                "priorPeerToken": 2,
+                "result": "waiting_for_new_peer_samples",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              },
+              "client": {
+                "enabled": true,
+                "phase": 4,
+                "armed": 2,
+                "suspended": 1,
+                "resumed": 0,
+                "refused": 2,
+                "checksum": 4198469678325967669,
+                "priorToken": 2,
+                "priorPeerToken": 2,
+                "result": "loading_pinned_movement_bank",
+                "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+              }
+            },
+            "waitMs": 1294,
+            "ok": true,
+            "product": {
+              "host": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "armed",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 35,
+                "last": "coop_checkpoint_sync on",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 0,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 220,
+                "bulkQueueUsMax": 116592,
+                "lateRebases": 0,
+                "presentationLost": false,
+                "missing": 0,
+                "repairBackoffMs": 0,
+                "role": 0,
+                "partnerAssets": true,
+                "dataDir": ""
+              },
+              "client": {
+                "productMode": false,
+                "autoArm": true,
+                "result": "armed",
+                "step": 18,
+                "worlds": 0,
+                "dispatched": 34,
+                "last": "coop_movement_resume on",
+                "hostKeys": 0,
+                "leaveKeys": 0,
+                "repairs": 0,
+                "quickRepairs": 1,
+                "bulkCongestionSkips": 0,
+                "bulkQueueUsMax": 0,
+                "lateRebases": 2,
+                "presentationLost": false,
+                "missing": 12,
+                "repairBackoffMs": 0,
+                "role": 1,
+                "partnerAssets": true,
+                "dataDir": ""
+              }
+            },
+            "tag": "pause-client"
+          }
+        },
+        "modalFacing": {
+          "host": {
+            "remote": [
+              -31.027683,
+              193.077805,
+              1.25397
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -31.027683,
+              193.077805,
+              1.25397
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 3,
+              "count": 5,
+              "dt": 0.1162332,
+              "dz": -0.32807195,
+              "rate": 0.08792194,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -31.027683,
+              193.077805,
+              1.25397
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -31.027683,
+              193.077805,
+              1.25397
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 3,
+              "count": 2,
+              "dt": 0.0487242,
+              "dz": -0.19765997,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 11,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 2,
+              "checksum": 2084328936769022348,
+              "priorToken": 5,
+              "priorPeerToken": 5,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 10,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 3,
+              "checksum": 4198469678325967669,
+              "priorToken": 5,
+              "priorPeerToken": 5,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 315,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 88,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 1,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 1135,
+              "bulkQueueUsMax": 161933,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 6000,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 88,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 1,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 6000,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "modal-facing"
+        },
+        "pauseHostFacing": {
+          "host": {
+            "remote": [
+              -30.880184,
+              193.07045,
+              1.25397
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -30.880184,
+              193.07045,
+              1.25397
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 1,
+              "dt": 0.0386437,
+              "dz": 0.24053717,
+              "rate": 12.28442955,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -30.880184,
+              193.07045,
+              1.25397
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -30.880184,
+              193.07045,
+              1.25397
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 2,
+              "dt": 0.0527051,
+              "dz": 1.50583887,
+              "rate": 58.39290619,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 5,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 4,
+              "priorPeerToken": 4,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 4,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 4,
+              "priorPeerToken": 4,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 315,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 48,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 380,
+              "bulkQueueUsMax": 161933,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 48,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "pause-host-facing"
+        },
+        "modalFollow": {
+          "host": {
+            "remote": [
+              -27.714001,
+              194.848007,
+              -2.955816
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -27.714001,
+              194.848007,
+              -2.955816
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 3,
+              "count": 3,
+              "dt": 0.0452367,
+              "dz": -0.16813707,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 3
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.999142,
+            "follow": true,
+            "target": [
+              -27.714001,
+              194.848007,
+              -2.955816
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -27.714001,
+              194.848007,
+              -2.955816
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 0,
+              "count": 0,
+              "dt": 0.0,
+              "dz": 0.0,
+              "rate": 0.0,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.999939,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 11,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 2,
+              "checksum": 2084328936769022348,
+              "priorToken": 5,
+              "priorPeerToken": 5,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 9,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 3,
+              "checksum": 4198469678325967669,
+              "priorToken": 5,
+              "priorPeerToken": 5,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 318,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 88,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 1,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 1135,
+              "bulkQueueUsMax": 161933,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 6000,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 86,
+              "last": "coop_npc_stream on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 1,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 6000,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "modal-follows"
+        },
+        "warpRecovered": {
+          "host": {
+            "remote": [
+              -31.006964,
+              193.087723,
+              1.25397
+            ],
+            "local": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "handle": 813313190,
+            "render": [
+              -31.006964,
+              193.087723,
+              1.25397
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 3,
+              "dt": 0.0445498,
+              "dz": 0.59065521,
+              "rate": 22.44678879,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 0.997858,
+            "follow": true,
+            "target": [
+              -31.006964,
+              193.087723,
+              1.25397
+            ]
+          },
+          "client": {
+            "remote": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "local": [
+              -31.006964,
+              193.087723,
+              1.25397
+            ],
+            "handle": 812723354,
+            "render": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ],
+            "stream": true,
+            "clockRejection": {
+              "code": 2,
+              "count": 2,
+              "dt": 0.0527051,
+              "dz": 1.50583887,
+              "rate": 58.39290619,
+              "motion": 0,
+              "previousAirState": 0
+            },
+            "ok": true,
+            "distance": 0.0,
+            "bank": true,
+            "logic": 1,
+            "fresh": true,
+            "weight": 1.0,
+            "follow": true,
+            "target": [
+              -31.813999,
+              192.748001,
+              1.205706
+            ]
+          },
+          "resume": {
+            "host": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 9,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 1,
+              "checksum": 2084328936769022348,
+              "priorToken": 4,
+              "priorPeerToken": 4,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            },
+            "client": {
+              "enabled": true,
+              "phase": 1,
+              "armed": 8,
+              "suspended": 2,
+              "resumed": 2,
+              "refused": 2,
+              "checksum": 4198469678325967669,
+              "priorToken": 4,
+              "priorPeerToken": 4,
+              "result": "armed",
+              "scope": "Explicit same-world native menu resume; load/death/session replacement remain separate"
+            }
+          },
+          "waitMs": 327,
+          "ok": true,
+          "product": {
+            "host": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 76,
+              "last": "coop_movement_resume on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 740,
+              "bulkQueueUsMax": 161933,
+              "lateRebases": 0,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 0,
+              "partnerAssets": true,
+              "dataDir": ""
+            },
+            "client": {
+              "productMode": false,
+              "autoArm": true,
+              "result": "armed",
+              "step": 18,
+              "worlds": 0,
+              "dispatched": 75,
+              "last": "coop_trigger_mirror on",
+              "hostKeys": 0,
+              "leaveKeys": 0,
+              "repairs": 0,
+              "quickRepairs": 1,
+              "bulkCongestionSkips": 0,
+              "bulkQueueUsMax": 0,
+              "lateRebases": 2,
+              "presentationLost": false,
+              "missing": 0,
+              "repairBackoffMs": 0,
+              "role": 1,
+              "partnerAssets": true,
+              "dataDir": ""
+            }
+          },
+          "tag": "after-warp"
+        }
+      }
+    }
+  ]
+}
+exit=0

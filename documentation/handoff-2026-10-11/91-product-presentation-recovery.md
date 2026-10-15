@@ -74,6 +74,19 @@ Earlier attempts:
 
   - The reliable backlog is solved in 1203f: the culprit was usable-channel hellos.
   - **New regression (#35):** after the shared tutorial modal, every `coop_movement_bank on` repair is refused on both peers, and the presentation did not return within 30 s (14.5 s in 1204f). 1213i adds refusal reason codes to find the failing condition.
+
+**Refusal reasons and the holstered-sword re-arm (candidates 1213i and 1213j, #34 and #35):**
+- **1213i, `PresentationRefusalGate`:** a refused pose frame now skips only that frame, and the presentation stops only after 20 consecutive refusals (about 0.5 s).
+  - Before, one refusal set `end=lease=0`. In 1228e that froze a lever use at 27%, and the partner stayed unpresented.
+  - Lifecycle loss (actor, world, session, freshness) still stops at once in `serviceMovementBank`.
+  - The movement status reports `refuseStreak`, `refuseLongest`, `refuseLast` and `refuseReasons` (not owned, skeleton read, unstable, not gameplay, identity, helpers, pose build, knee chain).
+- **Bank-request refusals are named:** `beginRefusal` and `beginRefusals` in the status (17 codes), and the console line "continuous movement bank refused (reason N)".
+- **#35 cause (take 1230b, confirmed runtime):** after the modal, the client's bank request was refused 7 times with reason 15, "avatar sword not equipped/started".
+  - Confirmed static: the partner's holster state (`requestMovementEquipment(false)`) holsters the avatar sword natively (`equipped=started=false`, `holster_wpn`).
+  - Both `beginMovementBank` and the bank commit demanded a drawn sword, so a bank that dropped while the partner was holstered could never re-arm.
+- **1213j:** a settled native sword, drawn **or** holstered (`equipped==started`, attached to the matching tag), is valid, and the new presentation starts in that state (`presentedDrawn`, `armedMix`).
+- **Verified (take [1230c](../../work/natural-moveset/mission-presentation-resume-v1230c), passed; [audit 1233](../../work/movement-integration/presentation-refusal-audit-v1233.json)):** the presentation is live again 5.1 s after the tutorial modal (never on 1213h/1213i; 14.5 s in 1204f). Pauses take 1.3–1.6 s and the warp 0.33 s. Both partners restart holstered, matching their source.
+- **#34 runtime note:** no refused frame occurred in 1230b or 1230c, so the 1228e trigger was not reproduced. The gate itself is unit-tested.
 - **Warp hold.** After a 60 m harness warp, the host-side partner stayed at the old spot for 7–15 s.
   - Root cause: the strict source pose timeline rejected samples during a latency spike. 1203f rebases it (product only); re-test pending.
 - **Client-side visual** of the Corvo partner after load/restart: the spots must keep at least 2 m of reachable separation.

@@ -5,7 +5,7 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1213h ([identity](../../work/movement-integration/candidate-npc-combat-v1213h/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
+Updated 2026-10-15. Live candidate-npc-combat-v1213j ([identity](../../work/movement-integration/candidate-npc-combat-v1213j/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
 - **Use variants on real mechanisms, both roles (#4):** a native use (player state 75, plus the focused entity) plays the matching authored interaction on the partner's body ([chapter 92](92-native-use-interactions.md), [audit 1229](../../work/movement-integration/use-variants-audit-v1229.json)):
   - generic: window;
   - lever: wind turbine;
@@ -15,6 +15,10 @@ Updated 2026-10-15. Live candidate-npc-combat-v1213h ([identity](../../work/move
 
   Two visuals are accepted: Corvo at the vise and Emily at the lock. The lever and valve still need visual acceptance (#33).
 - **#5 fixed in 1213h:** a use ends only on horizontal travel. The window's drop had ended the host's use early.
+- **Presentation recovery (#10, #34, #35):**
+  - Pause restore is about 1.6 s (it was 17–19 s), and the 60 m warp recovers in 0.33 s.
+  - After the tutorial modal the partner returns in 5.1 s. 1213j re-arms the bank on a holstered partner sword; before, it never re-armed.
+  - 1213i skips transient refused frames and names every refusal ([chapter 91](91-product-presentation-recovery.md)).
 - **Static asset census:** [`tools/diag/d2_resource_index.py`](../../tools/diag/d2_resource_index.py) reads every mission's entity files without lab time.
 - An earlier milestone (1214c): `lever_button_crank_wheel` became runtime-bound for the generic reach.
 - Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
