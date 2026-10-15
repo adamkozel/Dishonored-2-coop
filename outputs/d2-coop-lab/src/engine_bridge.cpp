@@ -685,8 +685,10 @@ void sampleLocalPlayer() {
                 readNativePlayerPresentationStance(memoryRead,base,states,presentation)){
             outgoing.playerStance=presentation;outgoing.playerStanceValid=1;
         }
+        // 1213r: motion is only valid on the wire with a wire stance (validCoopPose);
+        // an unmapped physical stance must not invalidate the whole root packet.
         const unsigned refusal=!stateValid?1u:states.player.game!=game||states.player.player!=player?2u:
-            states.player.current!=stance.current?3u:!nativePlayerMotion(states,base,motion)?4u:0u;
+            states.player.current!=stance.current?3u:!nativePlayerMotion(states,base,motion)?4u:!outgoing.playerStanceValid?5u:0u;
         if(!refusal) {
             outgoing.playerMotionValid=1;outgoing.playerMotion=motion;
             sampleBodyPose();
@@ -2080,6 +2082,9 @@ void executeBuffer(void* system) {
     const DWORD thread=GetCurrentThreadId();
     DWORD unassigned=0;engineThread.compare_exchange_strong(unassigned,thread);
     if(thread==engineThread.load()) {
+        // 1213q: interval between engine-thread command-buffer calls, which drive the
+        // whole bridge pump; a long gap here means nothing was sent or received.
+        {static double lastEngineCall=0;const double engineNow=presentationClock();if(lastEngineCall)nativeServiceTimings.add("engine_call_gap",engineNow-lastEngineCall);lastEngineCall=engineNow;}
         const auto tick=GetTickCount64();setPresentationHold(productMode||productAutoArm);
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();

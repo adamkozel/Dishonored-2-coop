@@ -1,0 +1,122 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-choke; restore: Checkpoint inventory differs (client)",
+  "dll": "C2EAFC582F25148536C9DCC84AF2C6F9DF0CD1A6C1258569A63EC48174FD4B7C",
+  "cases": [
+    {
+      "source": "host",
+      "kind": "choke",
+      "passed": true,
+      "failure": "restore: Checkpoint inventory differs (client)",
+      "stanceBefore": 1,
+      "statesBefore": {
+        "tick": 23741218,
+        "game": "0x289c8724050",
+        "player": "0x289e0b90db0",
+        "machine": "0x289cc34f5c0",
+        "mode": "0x289f8dbc020",
+        "stance": 1,
+        "defaultMode": true,
+        "motionValid": true,
+        "motion": 1,
+        "position": [
+          -47.6590309,
+          -153.296661,
+          66.4329681
+        ],
+        "active": [
+          {
+            "id": 6,
+            "vtableRva": "0x1c84258",
+            "type": ".?AVarkPlayerStateSneaking@@"
+          }
+        ],
+        "chokeSceneValid": false,
+        "keyholeSceneValid": false,
+        "keyholeReaderStage": 1,
+        "landingSceneValid": false,
+        "combatSceneValid": false,
+        "vaultSceneValid": false,
+        "traversalSceneValid": false,
+        "traversalReaderStage": 1,
+        "traversalResearch": {
+          "kind": 0,
+          "next": 0,
+          "current": 1,
+          "line": 32,
+          "duration": 0,
+          "bindings": 0,
+          "arms": 0,
+          "asset": "",
+          "expected": "",
+          "subscene": ""
+        },
+        "equipmentSceneValid": false,
+        "powerSceneValid": false,
+        "rangedSceneValid": false,
+        "carrySceneValid": false,
+        "carryThrowResearchValid": false,
+        "vaultSensorResearch": {
+          "front38": 0,
+          "clearF0": 0,
+          "minSpeed70": 3.6500001,
+          "valuesF4to10c": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "velocityCandidate33c": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "guardBefore": {
+        "orientation": [
+          -0.323635,
+          0.946182,
+          0,
+          -0.946182,
+          -0.323635,
+          0,
+          0,
+          0,
+          1
+        ],
+        "position": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|Npc|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|Npc|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|Npc|1800"
+      ],
+      "playerStates": [
+        "stance 0 / active 41",
+        "stance 1 / active 6",
+        "stance 1 / active 6,44",
+        "stance 1 / active 6,53",
+        "stance 1 / active 6,53,44",
+        "stance 12 / active 41"
+      ],
+      "guardAfter": {
+        "position": [
+          -47.2877,
+          -151.885,
+          66.6187
+        ],
+        "unique": true
+      },
+      "restored": false
+    }
+  ],
+  "scope": "Native observation of rear choke and lethal takedowns started from crouch (Dunwall upper-floor tutorial guard 2), both source roles; ordinary controller input only; no partner presentation claims."
+}

@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-choke: Remote phase 2 not presented | client-choke: The process cannot access the file 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\lab-instances\\host\\coop-status.json' because it is being used by another process.",
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "kind": "choke",
+      "passed": false,
+      "failure": "Remote phase 2 not presented",
+      "checks": [
+        "Observer presents the crouched partner before the takedown",
+        "Native scene(s) on the source: midnight/gameplay/player/base/choke/choke_back.midnightscene|600, midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400, midnight/gameplay/player/base/choke/choke_win.midnightscene|1800",
+        "Source phase 1 read and presented on the observer at weight > 0.8"
+      ],
+      "bankVersion": 71,
+      "before": {
+        "follow": true,
+        "stanceMix": 1.0,
+        "waitMs": 208,
+        "weight": 1.0
+      },
+      "inputMs": 842,
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "kind": "choke",
+      "passed": false,
+      "failure": "The process cannot access the file 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\lab-instances\\host\\coop-status.json' because it is being used by another process.",
+      "checks": [],
+      "restored": true
+    }
+  ],
+  "scope": "crouched_takedown: partner presentation of rear choke and fast-back lethal started from crouch, both source roles, Dunwall upper-floor guard 2; fixture restored after every case."
+}

@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "kind": "lethal",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Observer presents the partner at stance 1 before the takedown",
+        "Native scene(s) on the source: midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333",
+        "Source phase 5 read and presented on the observer at weight > 0.8",
+        "Locomotion returns after the takedown"
+      ],
+      "bankVersion": 71,
+      "camera": {
+        "x": -35.960000482796005,
+        "side": 3.4,
+        "pitch": 10,
+        "yaw": -179.99993852850412,
+        "y": -152.259996352208,
+        "z": 68.5
+      },
+      "before": {
+        "follow": true,
+        "waitMs": 207,
+        "stanceMix": 1.0,
+        "weight": 1.0
+      },
+      "inputMs": 871,
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+      ],
+      "crouchedAssassinationSamples": 14,
+      "recoveredSamples": 67,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "kind": "choke",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Observer presents the partner at stance 1 before the takedown",
+        "Native scene(s) on the source: midnight/gameplay/player/base/choke/choke_back.midnightscene|600, midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400, midnight/gameplay/player/base/choke/choke_win.midnightscene|1800",
+        "Source phase 1 read and presented on the observer at weight > 0.8",
+        "Source phase 2 read and presented on the observer at weight > 0.8",
+        "Source phase 3 read and presented on the observer at weight > 0.8",
+        "Locomotion returns after the takedown"
+      ],
+      "bankVersion": 71,
+      "camera": {
+        "x": -51.248410750000005,
+        "side": 2.8,
+        "pitch": 10,
+        "yaw": 11.249917665983238,
+        "y": -151.05760289999998,
+        "z": 68.5
+      },
+      "before": {
+        "follow": true,
+        "waitMs": 209,
+        "stanceMix": 1.0,
+        "weight": 1.0
+      },
+      "inputMs": 859,
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "recoveredSamples": 29,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "kind": "lethal",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Observer presents the partner at stance 1 before the takedown",
+        "Native scene(s) on the source: midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333",
+        "Source phase 5 read and presented on the observer at weight > 0.8",
+        "Locomotion returns after the takedown"
+      ],
+      "bankVersion": 71,
+      "camera": {
+        "x": -51.836878950000006,
+        "side": 3.4,
+        "pitch": 10,
+        "yaw": 11.249928843760548,
+        "y": -151.17465585000002,
+        "z": 68.5
+      },
+      "before": {
+        "follow": true,
+        "waitMs": 211,
+        "stanceMix": 1.0,
+        "weight": 1.0
+      },
+      "inputMs": 855,
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+      ],
+      "crouchedAssassinationSamples": 14,
+      "recoveredSamples": 72,
+      "restored": true
+    }
+  ],
+  "scope": "crouched_takedown visual take: partner presentation of rear choke and fast-back lethal started from crouch filmed through a held observer camera, both source roles, Dunwall upper-floor guard 2; fixture restored after every case."
+}

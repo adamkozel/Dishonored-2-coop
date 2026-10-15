@@ -218,8 +218,11 @@ inline bool nativePlayerGroundChokeStates(const NativePlayerStates& s,std::uintp
         s.active[0].id==41&&s.active[0].vtable==base+0x1c77c18;
 }
 // Native596 on both roles: exclusive Assassination13, standing0/default mode.
+// Native1244b on both roles: the same fast-back lethal started from crouch keeps
+// physical stance1 for the whole Assassination13 scene (a crouched rear choke
+// instead stands the player into Choke41, already admitted above).
 inline bool nativePlayerGroundAssassinationStates(const NativePlayerStates& s,std::uintptr_t base){
-    return s.player.logic==1&&s.defaultMode&&s.player.current==0&&s.active.size()==1&&
+    return s.player.logic==1&&s.defaultMode&&(s.player.current==0||s.player.current==1)&&s.active.size()==1&&
         s.active[0].id==13&&s.active[0].vtable==base+0x1c83468;
 }
 inline bool nativePlayerGroundPairedStates(const NativePlayerStates& s,std::uintptr_t base){

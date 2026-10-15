@@ -79,3 +79,25 @@ The cancellation observation590 stopped before input because every proposed obse
 [Harness585](../../work/natural-moveset/Test-ChokeNetwork-v585.ps1) retains the original phase/body-weight criteria. It also refreshes source position after observer camera setup, because camera preparation itself lets a walking guard move. Guard positions are observed, never written. Completed585 receipts determine runtime success;584's identity remains marked unverified until a separate receipt.
 
 Complete the recorded581/583 checks and retain failures. Confirm Emily's native phase contracts before counting her binding. Remote victim placement/animation, struggle matching and shared unconscious/death/corpse outcomes remain separate required co-op work. Cancellation, interruption, front/air/slide takedowns, moving a grabbed target and character-size/contact variants are not covered here. Fine contact, hand shaping and footwork are deferred polish; do not confuse that with the unimplemented victim gameplay.
+
+## Crouched takedowns and the choke-hold packet rejection (candidates 1213p–1213r, audit 1246)
+
+Updated 2026-10-15 (#11, `crouched_takedown`). [Audit 1246](../../work/movement-integration/crouched-takedown-audit-v1246.json).
+
+- **Native (probe [1244b](../../work/natural-moveset/crouched-takedown-v1244b), both roles, confirmed runtime):**
+  - A rear choke started from crouch stands the player into exclusive Choke41 and plays the standing scenes: `choke_back` 600 ms, `choke_loop` 1400 ms and `choke_win` 1800 ms.
+  - A fast-back lethal from crouch plays `assassination_fast_back` (1333 ms) while the player stays crouched: exclusive Assassination13 at physical stance 1. 1213p admits it ([chapter 42](42-native-fast-back-assassination.md)).
+- **Lab fixture:** `PrepareShadowSword` alone drops the lab-restored note `note_dw_frommeagan` from the client, so every per-case restore re-runs `Restore-LabNoteInventory-v779` (probe 1244 stopped on this).
+- **Choke-hold packet rejection (confirmed static and runtime, takes [1245](../../work/natural-moveset/crouched-takedown-network-v1245)–[1245c](../../work/natural-moveset/crouched-takedown-network-v1245c)):**
+  - During the hold (Choke41 at physical stance 12) the wire stance was invalid, but the paired-state root motion stayed valid.
+  - `validCoopPose` rejects motion without stance, so the peer dropped every pose packet of the hold (8 in 1245b). The lab's 250 ms lease then retired the partner.
+  - 1213q's `engine_call_gap` timing ruled out an engine stall, and both windows kept rendering.
+  - This affected the standing choke too, so the earlier choke bindings had regressed.
+- **1213r:** the choke hold is presented as stance 0 on the wire, and motion is only sent with a wire stance (motion refusal 5).
+- **Take [1245d](../../work/natural-moveset/crouched-takedown-network-v1245d)** passed every case in both roles, and restoration passed: crouched choke (phases 1/2/3), crouched lethal (phase 5), and a standing choke as the regression check. Locomotion returns after each.
+- **Visual (held observer camera; accepted for all four crouched cases, both characters):** Corvo's choke is in [1247b](../../work/natural-moveset/crouched-takedown-observed-v1247b) (side view). Corvo's lethal and Emily's choke and lethal are in [1247d](../../work/natural-moveset/crouched-takedown-observed-v1247d).
+  - The 1247d camera looks along the corridor from behind and above the attacker.
+  - From in front of the guard, the guard hid the partner (1247). Side spots in the bookshelf corridor landed in walls or off the balcony (1247b/c).
+  - The observer's guard is not animated in these lab takes (NPC stream off), so the release lowers into empty air. Victim alignment is its own item.
+  - The partner rises into the standing paired clips.
+
