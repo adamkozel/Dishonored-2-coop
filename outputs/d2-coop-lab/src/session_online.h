@@ -36,7 +36,7 @@ struct OnlineSteam {
 OnlineSteam onlineSteam{};
 enum class OnlinePhase:unsigned {Off,Creating,Hosting,Joining,Connecting,Connected,Failed};
 struct OnlineSession {
-    bool active=false,host=false,inviteOpened=false;OnlinePhase phase=OnlinePhase::Off;
+    bool active=false,host=false,inviteOpened=false,quiet=false;OnlinePhase phase=OnlinePhase::Off;
     std::uint64_t self=0,lobby=0,owner=0,call=0,requestedLobby=0,joinRequests=0,lobbyMembers=0;
     HSteamListenSocket listener=0;
     const char* result="off";
@@ -96,14 +96,17 @@ void stopOnlineSession(const char* reason){
     if(o.active)closeOnlineTransport(reason);
     const auto keep=o.joinRequests;o={};o.joinRequests=keep;o.result=reason;
 }
-void startOnlineHost(){
+// 1214bc: lab takes host with quiet=true (coop_session host_quiet): the VM joins
+// by lobby id, and the native invite overlay would take the host's input and
+// show the friends list in recordings (take 1296a). Product F7 keeps the dialog.
+void startOnlineHost(bool quiet=false){
     if(!acquireOnlineSteam()){onlineSession.result="steam_interfaces_unavailable";return;}
     // 1213e: stopOnlineSession() resets the transport only when an online session
     // was active. Coming from lab mode, the one-PC loopback peer stayed in
     // `connection`, so the host refused every lobby partner (take 1221, #23).
     stopOnlineSession("restart");closeOnlineTransport("online session replaces the lab link");
     if(listener){sockets->CloseListenSocket(listener);listener=0;}
-    auto& o=onlineSession;o.active=true;o.host=true;o.phase=OnlinePhase::Creating;o.self=onlineSteam.getSteamID(onlineSteam.user);
+    auto& o=onlineSession;o.active=true;o.host=true;o.quiet=quiet;o.phase=OnlinePhase::Creating;o.self=onlineSteam.getSteamID(onlineSteam.user);
     localRole=0;outgoing.role=0;
     o.call=onlineSteam.createLobby(onlineSteam.matchmaking,1/*friends only*/,2);o.result=o.call?"creating_lobby":"create_lobby_refused";
     if(!o.call)o.phase=OnlinePhase::Failed;
@@ -138,7 +141,7 @@ void serviceOnlineSession(ULONGLONG tick){
         o.listener=sockets->CreateListenSocketP2P(0,3,options);
         o.phase=OnlinePhase::Hosting;o.result=o.listener?"hosting_lobby":"p2p_listen_failed";
         if(!o.listener){o.phase=OnlinePhase::Failed;return;}
-        onlineSteam.inviteDialog(onlineSteam.friends,o.lobby);o.inviteOpened=true;
+        if(!o.quiet){onlineSteam.inviteDialog(onlineSteam.friends,o.lobby);o.inviteOpened=true;}
     }
     if(o.phase==OnlinePhase::Joining&&onlineSteam.callCompleted(onlineSteam.utils,o.call,&failed)){
         OnlineLobbyEnter r{};

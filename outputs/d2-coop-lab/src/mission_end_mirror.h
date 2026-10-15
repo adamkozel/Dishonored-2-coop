@@ -95,6 +95,18 @@ void receiveMapReady(const MapReadyPacket& p){
        !std::memchr(p.map,0,sizeof(p.map))||std::strncmp(p.map,"campaign/",9)){++h.refused;return;}
     h.peerSequence=p.sequence;std::snprintf(h.peerMap,sizeof(h.peerMap),"%s",p.map);
 }
+// 1214be: the ready is re-sent every second while holding and for 30 s after
+// release. Across machines a single send could arrive before the partner
+// knew this world's new session and be refused, so the partner held to its
+// timeout (take mission-end-vm-v1296c).
+std::uint64_t mapReadySentAt=0;
+void sendMapReady(std::uint64_t tick){
+    auto& h=transitionHold;if(!*h.localMap)return;
+    MapReadyPacket p{};p.role=localRole;p.session=outgoing.session;p.sequence=++h.sequence;std::snprintf(p.map,sizeof(p.map),"%s",h.localMap);
+    if(sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&
+       coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK)++h.sent;
+    mapReadySentAt=tick;
+}
 bool missionTransitionBoundary(const NativeSwitchEvent& e){
     auto& h=transitionHold;if(!h.expect||h.held)return false;
     if(e.tick-h.expectAt>600000){h.expect=false;h.result="expect_expired";return false;}
@@ -104,9 +116,7 @@ bool missionTransitionBoundary(const NativeSwitchEvent& e){
     h.expect=false;h.held=true;h.startedAt=e.tick;h.releasedAt=0;++h.holds;
     h.caller=static_cast<unsigned>(e.caller);h.from=e.from;h.to=static_cast<unsigned>(e.to);h.pending=e.pending;
     std::snprintf(h.localMap,sizeof(h.localMap),"%s",map);
-    MapReadyPacket p{};p.role=localRole;p.session=outgoing.session;p.sequence=++h.sequence;std::snprintf(p.map,sizeof(p.map),"%s",map);
-    if(sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&
-       coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK)++h.sent;
+    sendMapReady(e.tick);
     h.result="holding";networkFrameOwned.store(false,std::memory_order_release);
     return true;
 }
@@ -128,6 +138,7 @@ void waitMissionTransition(){
         if(tick-h.startedAt>90000){++h.timeouts;h.result=*h.peerMap?"timeout_other_map":"timeout";break;}
         if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected){++h.aborted;h.result="connection_lost";break;}
         if(h.ownsWindow&&tick-lastPeek>=500){MSG msg{};PeekMessageW(&msg,nullptr,0,0,PM_NOREMOVE);lastPeek=tick;++h.peeks;}
+        if(tick-mapReadySentAt>=1000)sendMapReady(tick);
         pumpTransport(tick);writeStatus(tick);Sleep(10);
     }
     h.held=false;h.releasedAt=GetTickCount64();h.lastWaitMs=h.releasedAt-h.startedAt;++h.released;
@@ -153,6 +164,7 @@ void serviceMissionEndMirror(std::uint64_t tick){
         }
     }
     m.lastLogic=logic;
+    {const auto& h=transitionHold;if(!h.held&&h.releasedAt&&*h.localMap&&tick-h.releasedAt<30000&&tick-mapReadySentAt>=1000)sendMapReady(tick);}
     if(!m.pending)return;
     if(tick-m.pendingAt>120000){m.pending=false;m.result="expired";return;}
     if(m.appliedEpoch==outgoing.worldEpoch){m.pending=false;m.result="already_applied";return;}
@@ -242,8 +254,8 @@ void writeMissionEndMirror(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.missionend.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionEnd;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
-        (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,
+    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
+        (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);

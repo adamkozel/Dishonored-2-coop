@@ -13,6 +13,11 @@ struct NativeSwitchEvent {
 SRWLOCK switchTraceLock=SRWLOCK_INIT;
 NativeSwitchEvent switchEvents[32]{};
 std::uint64_t switchTraceSequence=0;
+// 1214bc (stage 6 diagnostic): the call stack at each native loading-entry
+// switch (to 15), as image RVAs, so the routine a script LevelTransition or a
+// mission end calls to change the map can be identified statically.
+struct LoadingEntryStack{std::uint64_t sequence=0,tick=0;unsigned count=0,caller=0;std::uint32_t rva[24]{};};
+LoadingEntryStack loadingEntryStacks[4]{};std::uint64_t loadingEntryStackCount=0;
 struct LoadingProbe {
     bool armed=false,held=false;
     std::uint64_t armUntil=0,startedAt=0,releasedAt=0,started=0,released=0,refused=0,invalidated=0,samples=0;
@@ -105,6 +110,12 @@ void traceLogicSwitch(void* manager,int target) {
     NativeSwitchEvent e{};e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.to=target;
     e.caller=reinterpret_cast<std::uintptr_t>(_ReturnAddress())-reinterpret_cast<std::uintptr_t>(gameImage);
     nativeSwitchContext(reinterpret_cast<std::uintptr_t>(manager),e);
+    if(target==15){
+        void* frames[40]{};const USHORT n=RtlCaptureStackBackTrace(1,40,frames,nullptr);
+        const auto base=reinterpret_cast<std::uintptr_t>(gameImage);LoadingEntryStack s{};s.tick=e.tick;s.caller=static_cast<unsigned>(e.caller);
+        for(USHORT i=0;i<n&&s.count<24;++i){const auto a=reinterpret_cast<std::uintptr_t>(frames[i]);if(a>base&&a<base+0x2000000)s.rva[s.count++]=static_cast<std::uint32_t>(a-base);}
+        AcquireSRWLockExclusive(&switchTraceLock);s.sequence=++loadingEntryStackCount;loadingEntryStacks[(s.sequence-1)%4]=s;ReleaseSRWLockExclusive(&switchTraceLock);
+    }
     if(e.thread==engineThread.load()&&e.caller==0x787a55&&target==15&&e.game&&e.manager==e.game+0x1f6ec8) {
         std::uintptr_t vt=0;unsigned count=99,pending=99,phase=99;
         if(memoryRead(e.game,&vt,8)&&vt==reinterpret_cast<std::uintptr_t>(gameImage)+0x1c940a8&&
@@ -150,8 +161,8 @@ bool installNativeSwitchTrace() {
     return VirtualProtect(target,sizeof(jump),old,&unused)!=FALSE;
 }
 void writeSwitchTrace() {
-    NativeSwitchEvent snapshot[32]{};std::uint64_t count=0;
-    AcquireSRWLockShared(&switchTraceLock);count=switchTraceSequence;std::memcpy(snapshot,switchEvents,sizeof(snapshot));ReleaseSRWLockShared(&switchTraceLock);
+    NativeSwitchEvent snapshot[32]{};std::uint64_t count=0;LoadingEntryStack stacks[4]{};std::uint64_t stackCount=0;
+    AcquireSRWLockShared(&switchTraceLock);count=switchTraceSequence;std::memcpy(snapshot,switchEvents,sizeof(snapshot));stackCount=loadingEntryStackCount;std::memcpy(stacks,loadingEntryStacks,sizeof(stacks));ReleaseSRWLockShared(&switchTraceLock);
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.loading.json",statusPath)>=sizeof(path)||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=sizeof(temp))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
@@ -162,6 +173,11 @@ void writeSwitchTrace() {
         fprintf(f,"%s{\"sequence\":%llu,\"tick\":%llu,\"thread\":%u,\"caller\":\"0x%llx\",\"manager\":\"0x%llx\",\"game\":\"0x%llx\",\"activeGame\":\"0x%llx\",\"player\":\"0x%llx\",\"from\":%u,\"to\":%d,\"pendingBefore\":%u,\"pendingAfter\":%u,\"worldPhase\":%u,\"characterValid\":%s,\"character\":%d}",
             i==first?"":",",e.sequence,e.tick,e.thread,e.caller,e.manager,e.game,e.activeGame,e.player,e.from,e.to,e.pending,e.after,e.phase,e.characterValid?"true":"false",e.character);
     }
+    fprintf(f,"],\"entryStacks\":[");
+    for(auto i=stackCount>4?stackCount-4:0;i<stackCount;++i){const auto& s=stacks[i%4];
+        fprintf(f,"%s{\"sequence\":%llu,\"tick\":%llu,\"caller\":\"0x%x\",\"rva\":[",i==(stackCount>4?stackCount-4:0)?"":",",s.sequence,s.tick,s.caller);
+        for(unsigned j=0;j<s.count;++j)fprintf(f,"%s\"0x%x\"",j?",":"",s.rva[j]);
+        fprintf(f,"]}");}
     const auto& p=loadingProbe;
     fprintf(f,"],\"probe\":{\"armed\":%s,\"held\":%s,\"result\":\"%s\",\"startedAt\":%llu,\"releasedAt\":%llu,\"started\":%llu,\"released\":%llu,\"refused\":%llu,\"invalidated\":%llu,\"samples\":%llu,\"maxDistance\":%.9g,\"game\":\"0x%llx\",\"player\":\"0x%llx\"}}\n",
         p.armed?"true":"false",p.held?"true":"false",p.result,p.startedAt,p.releasedAt,p.started,p.released,p.refused,p.invalidated,p.samples,p.maxDistance,p.game,p.player);

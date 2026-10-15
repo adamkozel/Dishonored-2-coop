@@ -1,0 +1,199 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+23:46:47 copying lab scripts, tooling and bin
+23:46:53 mod resources (voidmod, master.index) into the game copy
+23:46:57 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : C480C29F5B59975E
+probe           : 14C6CA5227A405A8
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 260
+freeGB          : 97
+PSComputerName  : D2CoopVM
+RunspaceId      : 0fdfbeb3-5104-4ca3-a1a4-72751ee04a37
+
+
+23:47:22 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             97 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Next mission not reached (host False, vm False)",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bb",
+      "hostDll": "C480C29F5B59975EE601F9C4F3DC3C16EEDD8C972DE099BA17A9EE91F040FA1D",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": true,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "load": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "idle",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "idle",
+        "chaosPoints": -1,
+        "chaosLevel": -1
+      },
+      "vm": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "idle",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "idle",
+        "chaosPoints": -1,
+        "chaosLevel": -1
+      }
+    },
+    "armed": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "armed",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "publishing",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      },
+      "vm": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "armed",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "equal",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      }
+    },
+    "productHost": {
+      "result": "armed",
+      "step": 19,
+      "worlds": 0
+    },
+    "productVm": {
+      "result": "armed",
+      "step": 19,
+      "worlds": 0
+    },
+    "final": {
+      "host": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "sent",
+        "sent": 1,
+        "applied": 0,
+        "hold": "expecting",
+        "holdWaitMs": 0,
+        "chaos": "publishing",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      },
+      "vm": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "applied",
+        "sent": 0,
+        "applied": 1,
+        "hold": "expecting",
+        "holdWaitMs": 0,
+        "chaos": "equal",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      }
+    },
+    "arrivedMs": {
+      "host": false,
+      "vm": false
+    },
+    "hostStates": [
+      "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "9/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "11/0@campaign/edge_of_the_world/eotw_p_lowchaos"
+    ],
+    "vmStates": [
+      "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "11/0@campaign/edge_of_the_world/eotw_p_lowchaos"
+    ]
+  },
+  "scope": "Edge of the World mission end across two machines and two Steam accounts in product mode (host = Corvo on this PC, VM = Emily): both worlds show their own result screen and reach The Good Doctor on the same map."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionEndVM-v1296.ps1:126[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 126 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mNext mission not reached (host False, vm False)[0m

@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-16T00:46:18.762049+02:00",
+  "dll": "E07E159AA712C59376B163A564ECA659B8C9D4C97730C7B53C5A2F0265AEABF5",
+  "probe": "14C6CA5227A405A87A2F919B0E4655C1D289C3123917A03E141B914303EA0003",
+  "previous": "candidate-npc-combat-v1214bd",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1266/corvo-choke-bank.bin",
+      "sha256": "08684FDC8E7A7F450885B5B68B929053CCCB64CCAFC61C9E816A3CE3A73303A6"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1266/emily-choke-bank.bin",
+      "sha256": "A4EDC6A26BB799AB86138AE03B3972F6A16E207911A38BCDC2E48933447F79DB"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1214be on 1214bd (#16 stage 6): the both-ready transition hold re-sends D2MR every second while holding and for 30 s after release; across two machines a single ready could be refused before the partner knew the new session (take mission-end-vm-v1296c: the host held to its 90 s timeout)."
+}

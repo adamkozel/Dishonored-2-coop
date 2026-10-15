@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-16T00:10:13.452214+02:00",
+  "candidate": "candidate-npc-combat-v1214bc",
+  "takes": [
+    {
+      "take": "level-transition-stack-v1297a",
+      "passed": false,
+      "failure": "Observer pitch did not settle"
+    },
+    {
+      "take": "level-transition-stack-v1297b",
+      "passed": false,
+      "failure": "Host did not reach the streets (map campaign/dunwall/escape/tower/dunwall_escape_tower_p)"
+    },
+    {
+      "take": "level-transition-stack-v1297c",
+      "passed": false,
+      "failure": "Host died at the locker stand (GameOver)"
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6 diagnostic: the native routine a script LevelTransition calls (Dunwall tower vault exit, ld_kiscule).",
+  "findings": [
+    "1214bc records the call stack (image RVAs) at each native loading-entry switch; confirmed runtime: console loads (campaign/LoadGame) enter through 0x787a55 <- 0x8aa275 <- 0x8b21e0 <- 0x3f695 <- 0x62edd ... <- 0xffb4a.",
+    "The vault exit locker (ld_ring_locker_01_3) did not respond from three stands in the fixture (it likely needs the ring or the vault state of the scripted sequence); two stands and the ring spot had no floor and killed the host (logic 13).",
+    "Parked: in-mission LevelTransitions are mostly fired by script trigger volumes and usables, which are already mirrored, so each partner world should run its own; the campaign takes check this mission by mission (chapter 97)."
+  ],
+  "next": [
+    "Two-account product-mode mission end with coop_session host_quiet (take 1296b)."
+  ]
+}

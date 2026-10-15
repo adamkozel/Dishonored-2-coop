@@ -1412,7 +1412,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_damage_observe 60000")||!std::strcmp(text,"coop_damage_observe off"))return true;
     if(!std::strcmp(text,"coop_gameover_probe")||!std::strcmp(text,"coop_gameover_retry"))return true;
     if(!std::strcmp(text,"coop_product_auto on")||!std::strcmp(text,"coop_product_auto off")||!std::strcmp(text,"coop_follow_host on")||!std::strcmp(text,"coop_follow_host off"))return true;
-    if(!std::strcmp(text,"coop_session host")||!std::strcmp(text,"coop_session off")||!std::strncmp(text,"coop_session join ",18))return true;
+    if(!std::strcmp(text,"coop_session host")||!std::strcmp(text,"coop_session host_quiet")||!std::strcmp(text,"coop_session off")||!std::strncmp(text,"coop_session join ",18))return true;
     if(!std::strcmp(text,"coop_autosave_probe")||!std::strcmp(text,"coop_trigger_mirror on")||!std::strcmp(text,"coop_trigger_mirror off"))return true;
     if(!std::strcmp(text,"coop_mission_end_mirror on")||!std::strcmp(text,"coop_mission_end_mirror off"))return true;
     if(!std::strncmp(text,"coop_chaos_points ",18)&&std::strlen(text)<=24&&std::strspn(text+18,"0123456789")==std::strlen(text+18)&&text[18])return true;
@@ -1577,12 +1577,14 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_product_auto on")){productAutoArm=true;productArm={};return;}
     if(!std::strcmp(request.command,"coop_product_auto off")){productAutoArm=false;productArm={};productArm.result="disabled";return;}
     if(!std::strcmp(request.command,"coop_session host")){startOnlineHost();return;}
+    if(!std::strcmp(request.command,"coop_session host_quiet")){if(productMode)return;startOnlineHost(true);return;}
     if(!std::strcmp(request.command,"coop_session off")){stopOnlineSession("disabled");return;}
     if(!std::strncmp(request.command,"coop_session join ",18)){startOnlineJoin(std::strtoull(request.command+18,nullptr,10));return;}
     if(!std::strcmp(request.command,"coop_autosave_probe")){autosaveProbeRequested=true;return;}
     if(!std::strcmp(request.command,"coop_trigger_mirror on")){triggerMirrorEnabled=true;triggerPeerSequence=0;triggerMirrorResult="armed";return;}
     if(!std::strcmp(request.command,"coop_trigger_mirror off")){triggerMirrorEnabled=false;triggerMirrorResult="disabled";return;}
-    if(!std::strcmp(request.command,"coop_mission_end_mirror on")){missionEndMirrorEnabled=true;missionEnd={};missionEnd.result="armed";return;}
+    // Idempotent: re-arming in a new world (product controller) keeps a pending or sent mission end.
+    if(!std::strcmp(request.command,"coop_mission_end_mirror on")){if(!missionEndMirrorEnabled){missionEndMirrorEnabled=true;missionEnd={};missionEnd.result="armed";}return;}
     if(!std::strcmp(request.command,"coop_mission_end_mirror off")){missionEndMirrorEnabled=false;missionEnd={};missionEnd.result="disabled";return;}
     if(!std::strncmp(request.command,"coop_chaos_points ",18)){labSetChaosPoints(request.command+18);return;}
     if(!std::strcmp(request.command,"coop_checkpoint_sync on")){checkpointEnable(true);return;}
