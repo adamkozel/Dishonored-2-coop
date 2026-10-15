@@ -1,0 +1,49 @@
+{
+  "failure": "A player died (Game Over) at 17374 ms; the fight is inconclusive",
+  "cases": [
+    {
+      "guards": 4,
+      "outcomes": [
+        {
+          "spawner": "script_spawner_checkpoint_guard_01",
+          "host": "dead",
+          "client": "dead"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_02",
+          "host": "alive",
+          "client": "alive"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_04",
+          "host": "alive",
+          "client": "alive"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard03",
+          "host": "alive",
+          "client": "alive"
+        }
+      ],
+      "samples": 41,
+      "passed": false,
+      "failure": "A player died (Game Over) at 17374 ms; the fight is inconclusive",
+      "checks": [],
+      "stuck": 1,
+      "hostCommitted": 5,
+      "clientRequests": 0,
+      "minHealth": {
+        "client": 70.0,
+        "host": 0.0
+      },
+      "gameOverSamples": 14
+    }
+  ],
+  "scope": "Stage 4 sustained multi-enemy fight on Edge of the World: both players fight the Wall of Light guard group at once under the product controller; guard outcomes compared in both worlds, combat session and player health sampled; Dunwall fixture restored.",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionMultiCombat-v1270d.ps1:118[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 118 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mA player died (Game Over) at 17374 ms; the fight is inconclusive[0m
