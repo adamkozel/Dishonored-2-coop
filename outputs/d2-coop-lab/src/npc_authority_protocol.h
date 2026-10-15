@@ -5,6 +5,9 @@
 #include "pose_interpolation.h"
 #include "door_session_scope.h"
 #include <cstddef>
+#include <array>
+#include <vector>
+#include <algorithm>
 
 constexpr unsigned kNpcAuthorityMaxJoints=256;
 // 1213u (#46): PairedHold/PairedKnockout come from the client while ITS native
@@ -18,10 +21,34 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // 1214n (#14): Dead (host -> client): the host NPC died without a shared combat
 // outcome (take 1270c: a host finisher on an unaware guard was never captured and
 // the client's replica stayed alive). The client kills its replica silently.
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose,Dead};
+// 1214ad (#14): Life (either role): an UNBOUND NPC of the sender's world became
+// unconscious (reserved 1) or dead (2). The receiver applies the more severe state
+// once, silently, to its own unbound NPC of the same spawner and definition. NPCs near
+// only one player cannot be streamed (take 1276h: never in either eligible catalog),
+// so their knockouts and deaths otherwise stay in one world.
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose,Dead,Life};
+inline bool npcLifeApplies(unsigned local,unsigned desired){return desired<=2&&desired>local;}
 // The host's combat channel for the NPC: 0 no outcome, 1 death pending, 2 death committed.
 // Dead follows a grace after the corpse appears, only for a death the combat channel
 // neither committed nor holds pending; up to five sends 500 ms apart.
+// 1214ac (#14): fair relevance at the cap. Each player ranks the NPCs within the add
+// radius by distance; an NPC's priority is its better rank. At the cap an unbound NPC
+// displaces the worst-priority bound one when at least 2 ranks better (takes
+// 1276e/1276f: 24 NPCs near the client's spawn held every slot, so the guard 5 m from
+// the host was never bound and its sleep-dart knockout stayed host-only; a
+// nearest-player distance rule could not evict them).
+constexpr unsigned kNpcRelevanceUnranked=~0u;
+inline std::vector<unsigned> npcRelevancePriorities(const std::vector<std::array<float,2>>& distSq,float addSq){
+    std::vector<unsigned> priority(distSq.size(),kNpcRelevanceUnranked);
+    for(unsigned p=0;p<2;++p){std::vector<unsigned> order;
+        for(unsigned i=0;i<distSq.size();++i)if(distSq[i][p]>=0&&distSq[i][p]<=addSq)order.push_back(i);
+        std::stable_sort(order.begin(),order.end(),[&](unsigned a,unsigned b){return distSq[a][p]<distSq[b][p];});
+        for(unsigned r=0;r<order.size();++r)priority[order[r]]=(std::min)(priority[order[r]],r);}
+    return priority;
+}
+inline bool npcRelevanceDisplaces(unsigned candidate,unsigned bound){
+    return candidate!=kNpcRelevanceUnranked&&(bound==kNpcRelevanceUnranked||candidate+2<bound);
+}
 inline bool npcDeadReconcileDue(bool host,bool corpse,bool ready,unsigned long long corpseAt,unsigned long long tick,unsigned combatShare,unsigned sends,unsigned long long lastSent){
     return host&&corpse&&ready&&corpseAt&&!combatShare&&sends<5&&tick>=corpseAt&&tick-corpseAt>=1500&&(!sends||tick-lastSent>=500);
 }
@@ -69,7 +96,7 @@ inline bool npcStreamPoseStale(std::uint64_t now,std::uint64_t started,std::uint
 }
 inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& local,const CoopPosePacket& peer){
     const bool paired=h.kind==NpcAuthorityMessage::PairedHold||h.kind==NpcAuthorityMessage::PairedKnockout;
-    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.reserved!=0)||h.reserved2||
+    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2):h.reserved!=0)||h.reserved2||
        !h.sequence||!h.sourceArm||!h.sourceHandle||!h.rig||!h.joints||h.joints>kNpcAuthorityMaxJoints||!coopWorldPairReady(local,peer)||
        h.sourceSession!=peer.session||h.targetSession!=local.session||h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.map!=local.mapId)return false;
     switch(h.kind){
@@ -81,6 +108,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&npcPairedKnockoutVariant(h.reserved);
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Dead:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::Life:return h.size==sizeof(CoopNpcControl)&&!h.targetArm&&!h.targetHandle&&h.rig==1&&h.joints==1&&h.sourceArm==h.sourceHandle;
     case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;
     }return false;
 }

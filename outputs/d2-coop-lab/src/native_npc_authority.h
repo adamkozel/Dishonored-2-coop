@@ -88,16 +88,20 @@ template<class Read> bool readNativeNpcAuthority(Read read,std::uintptr_t base,s
     out=std::move(b);return true;
 }
 
+// 1214ad: life state of every unique, reciprocal NPC (0 alive, 1 unconscious, 2 dead).
+struct NativeNpcLife{std::string spawner,definition;std::uint32_t handle=0;std::uintptr_t actor=0;unsigned state=0;};
 // Catalog uniqueness includes unused authored spawners. Single-handle reads
 // establish local lifetime only; they cannot discover cross-process targets.
 template<class Read> bool readNativeNpcAuthorityCatalog(Read read,std::uintptr_t base,std::uintptr_t game,
-        std::vector<NativeNpcAuthority>& entries,unsigned& ineligible,unsigned& unavailable,unsigned& unbound){
+        std::vector<NativeNpcAuthority>& entries,unsigned& ineligible,unsigned& unavailable,unsigned& unbound,std::vector<NativeNpcLife>* life=nullptr){
     std::vector<NativeWorldNpc> catalog;entries.clear();ineligible=unavailable=0;
     if(!readWorldNpcCatalog(read,base,game,catalog,unbound))return false;
     for(const auto& n:catalog){
         if(!n.unique||!n.reciprocal){++ineligible;continue;}
         NativeHealth h{};
         if(!readNativeHealth(read,base,n.handle,h)){++unavailable;continue;}
+        if(life&&h.game==game&&h.actor==n.actor&&std::isfinite(h.current)&&life->size()<1024)
+            life->push_back({n.spawnerName,n.definition,n.handle,n.actor,h.current<=0?2u:((h.ownerFlags&0x20)?1u:0u)});
         if(h.game!=game||h.actor!=n.actor||h.logic!=1||h.current<=0){++ineligible;continue;}
         NativeNpcAuthority s{};
         if(!readNativeNpcAuthority(read,base,game,n.handle,s)){++unavailable;continue;}

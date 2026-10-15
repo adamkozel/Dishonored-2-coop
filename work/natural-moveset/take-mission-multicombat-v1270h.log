@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "scope": "Stage 4 sustained multi-enemy fight on Edge of the World: both players fight the Wall of Light guard group at once under the product controller; guard outcomes compared in both worlds, combat session and player health sampled; Dunwall fixture restored.",
+  "cases": [
+    {
+      "guards": 3,
+      "outcomes": [
+        {
+          "spawner": "script_spawner_checkpoint_guard_01",
+          "host": "dead",
+          "client": "dead"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_02",
+          "host": "dead",
+          "client": "dead"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_04",
+          "host": "dead",
+          "client": "dead"
+        }
+      ],
+      "samples": 63,
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "3 of 3 guards defeated; every guard ends in the same state in both worlds"
+      ],
+      "stuck": 5,
+      "hostCommitted": 5,
+      "clientRequests": 0,
+      "minHealth": {
+        "host": 40.0,
+        "client": 50.0
+      },
+      "gameOverSamples": 0
+    }
+  ],
+  "failure": null
+}

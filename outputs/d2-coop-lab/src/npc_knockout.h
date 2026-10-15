@@ -37,6 +37,22 @@ void serviceNpcKnockoutTest(){
     if(!applyNativeKnockout(t.before,1,t.after,t.decl)){t.result="apply_refused";return;}
     t.result=nativeNpcUnconscious(t.after)?"unconscious":t.after.current<=0?"dead":"unchanged";
 }
+// 1214ad: apply a peer's life state to this world's unbound NPC, silently: a knockout
+// by sleep_no_reaction or a kill by kill_no_reaction, the world as attacker.
+bool applyNpcLife(const NativeNpcLife& n,unsigned state){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth before{},after{};
+    if(!realNativeDamage||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||npcCombatNativeApplication)return false;
+    if(!readNativeHealth(memoryRead,base,n.handle,before)||before.actor!=n.actor||before.game!=observedGame||!(before.current>0))return false;
+    if(state==1)return applyNativeKnockout(before,0x3fff0010u,after,kNpcKnockoutDecl)&&nativeNpcUnconscious(after);
+    if(state!=2)return false;
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kNpcReconcileKillDecl,false,false);
+    std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138)return false;
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};const unsigned attacker=0x3fff0010u;
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());std::memcpy(params.data()+0x54,&attacker,4);
+    realNativeDamage(reinterpret_cast<void*>(before.component),params.data(),result.data());
+    return readNativeHealth(memoryRead,base,n.handle,after)&&after.actor==n.actor&&after.current<=0;
+}
 // Lab-only (coop_npc_combat hostworld_test, 1214r): host-world damage on a bound NPC
 // entering the installed damage observer exactly as a creature's hit does (take 1270e:
 // bloodfly damage_periodic, attacker and inflictor another NPC). Target: the bound,
