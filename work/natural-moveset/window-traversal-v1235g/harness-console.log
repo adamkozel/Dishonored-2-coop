@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": true,
+      "failure": null,
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        19.2105,
+        90.13,
+        16.5084
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 3.006,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateSneaking@@",
+        ".?AVarkPlayerStateRunning@@",
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateFalling@@"
+      ],
+      "mantle": true,
+      "observerSamples": 103,
+      "traversalSamples": 8,
+      "traversalVariants": [
+        0,
+        2
+      ],
+      "maxTraversalWeight": 1.0,
+      "minWeight": 0.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": true,
+      "failure": null,
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ],
+      "observerPitch": true,
+      "end": [
+        18.9802,
+        90.145,
+        16.5077
+      ],
+      "signedBefore": -0.727,
+      "signedAfter": 2.775,
+      "crossed": true,
+      "states": [
+        ".?AVarkPlayerStateSneaking@@",
+        ".?AVarkPlayerStateAutoCrouch@@",
+        ".?AVarkPlayerStateMantle@@",
+        ".?AVarkPlayerStateRunning@@"
+      ],
+      "mantle": true,
+      "observerSamples": 109,
+      "traversalSamples": 7,
+      "traversalVariants": [
+        0,
+        2
+      ],
+      "maxTraversalWeight": 1.0,
+      "minWeight": 0.0
+    }
+  ],
+  "failure": null,
+  "passed": true,
+  "scope": "window_enter_exit: native mantle through a climbable Edge of the World window, both roles, partner traversal presentation filmed; Dunwall fixture restored."
+}

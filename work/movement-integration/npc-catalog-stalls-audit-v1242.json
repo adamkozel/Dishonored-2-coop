@@ -1,0 +1,417 @@
+{
+  "at": "2026-10-15T05:41:58.466057+02:00",
+  "candidate": "candidate-npc-combat-v1213n",
+  "take": {
+    "take": "../natural-moveset/window-traversal-v1235f",
+    "passed": true,
+    "restoration": true,
+    "cases": [
+      {
+        "source": "host",
+        "passed": true,
+        "crossed": true,
+        "mantle": true,
+        "maxTraversalWeight": 1.0
+      },
+      {
+        "source": "client",
+        "passed": true,
+        "crossed": true,
+        "mantle": true,
+        "maxTraversalWeight": 1.0
+      }
+    ]
+  },
+  "timings": {
+    "host": {
+      "host": {
+        "relevance": {
+          "bound": 18,
+          "scans": 9,
+          "added": 19,
+          "dropped": 8,
+          "clientBound": 0,
+          "clientRefused": 0,
+          "clientDeferred": 0,
+          "helloCatalogReads": 0
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4190,
+            "slow": 0,
+            "maximumMs": 0.373,
+            "totalMs": 59.122
+          },
+          "serviceNpcStream": {
+            "count": 2783,
+            "slow": 10,
+            "maximumMs": 111.678,
+            "totalMs": 2808.703
+          },
+          "transport_all": {
+            "count": 4190,
+            "slow": 0,
+            "maximumMs": 38.358,
+            "totalMs": 6248.467
+          },
+          "native_services_all": {
+            "count": 2783,
+            "slow": 11,
+            "maximumMs": 120.311,
+            "totalMs": 7097.968
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 101.418
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 79.684
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.744
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 93.439
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 111.678
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 99.299
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 90.621
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 90.111
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 95.515
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.075
+          }
+        ]
+      },
+      "client": {
+        "relevance": {
+          "bound": 17,
+          "scans": 0,
+          "added": 0,
+          "dropped": 0,
+          "clientBound": 25,
+          "clientRefused": 18,
+          "clientDeferred": 87,
+          "helloCatalogReads": 6
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4246,
+            "slow": 6,
+            "maximumMs": 85.806,
+            "totalMs": 580.97
+          },
+          "serviceNpcStream": {
+            "count": 3095,
+            "slow": 1,
+            "maximumMs": 95.148,
+            "totalMs": 1318.166
+          },
+          "transport_all": {
+            "count": 4246,
+            "slow": 6,
+            "maximumMs": 98.858,
+            "totalMs": 5735.96
+          },
+          "native_services_all": {
+            "count": 3095,
+            "slow": 3,
+            "maximumMs": 124.961,
+            "totalMs": 8253.567
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 95.148
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 84.42
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 73.942
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 85.806
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 85.545
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 70.8
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 69.811
+          }
+        ]
+      }
+    },
+    "client": {
+      "host": {
+        "relevance": {
+          "bound": 19,
+          "scans": 15,
+          "added": 21,
+          "dropped": 8,
+          "clientBound": 0,
+          "clientRefused": 0,
+          "clientDeferred": 0,
+          "helloCatalogReads": 0
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4639,
+            "slow": 0,
+            "maximumMs": 0.373,
+            "totalMs": 74.958
+          },
+          "serviceNpcStream": {
+            "count": 3232,
+            "slow": 17,
+            "maximumMs": 207.35,
+            "totalMs": 5267.749
+          },
+          "transport_all": {
+            "count": 4639,
+            "slow": 1,
+            "maximumMs": 59.832,
+            "totalMs": 9605.995
+          },
+          "native_services_all": {
+            "count": 3232,
+            "slow": 18,
+            "maximumMs": 238.723,
+            "totalMs": 12326.905
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.744
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 93.439
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 111.678
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 99.299
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 90.621
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 90.111
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 95.515
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.075
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 84.739
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.809
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 81.058
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 207.35
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 155.973
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 95.113
+          },
+          {
+            "name": "serviceNpcStream",
+            "ms": 86.489
+          }
+        ]
+      },
+      "client": {
+        "relevance": {
+          "bound": 19,
+          "scans": 0,
+          "added": 0,
+          "dropped": 0,
+          "clientBound": 27,
+          "clientRefused": 21,
+          "clientDeferred": 101,
+          "helloCatalogReads": 10
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4622,
+            "slow": 10,
+            "maximumMs": 85.806,
+            "totalMs": 905.092
+          },
+          "serviceNpcStream": {
+            "count": 3471,
+            "slow": 1,
+            "maximumMs": 95.148,
+            "totalMs": 2640.788
+          },
+          "transport_all": {
+            "count": 4622,
+            "slow": 10,
+            "maximumMs": 98.858,
+            "totalMs": 9233.634
+          },
+          "native_services_all": {
+            "count": 3471,
+            "slow": 3,
+            "maximumMs": 124.961,
+            "totalMs": 14149.963
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 95.148
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 84.42
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 73.942
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 85.806
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 85.545
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 70.8
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 69.811
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 68.154
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 69.083
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 69.611
+          },
+          {
+            "name": "exchangePoses",
+            "ms": 75.021
+          }
+        ]
+      }
+    }
+  },
+  "gaps": {
+    "host": {
+      "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235f/cross-host-observer-movement.ndjson",
+      "seconds": 7.98,
+      "samples": 104,
+      "activeSamples": 104,
+      "nativePoseSamples": 2,
+      "nativePoseFraction": 0.019,
+      "presentedToNativeDrops": 2,
+      "eligibilityFailures": 224,
+      "staleStateRecords": 14,
+      "invalidSemanticRecords": 15,
+      "maxStaleStateAgeMs": 4734,
+      "rootStepRejections": 1
+    },
+    "client": {
+      "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235f/cross-client-observer-movement.ndjson",
+      "seconds": 7.91,
+      "samples": 101,
+      "activeSamples": 101,
+      "nativePoseSamples": 3,
+      "nativePoseFraction": 0.03,
+      "presentedToNativeDrops": 2,
+      "eligibilityFailures": 150,
+      "staleStateRecords": 13,
+      "invalidSemanticRecords": 13,
+      "maxStaleStateAgeMs": 3672,
+      "rootStepRejections": 2
+    }
+  },
+  "baseline_1235e": {
+    "source": "live lab status files read right after take 1235e (1213m); not archived",
+    "client": {
+      "clientBound": 27,
+      "clientRefused": 55,
+      "exchangePosesSlow": 46,
+      "exchangePosesMaxMs": 924.675,
+      "slowEventsMs": "78.8-103.4 about every 0.5 s"
+    },
+    "host": {
+      "relevanceScans": 21,
+      "serviceNpcStreamSlow": 22,
+      "serviceNpcStreamMaxMs": 161.945,
+      "slowEventsMs": "89.7-161.9 every 2 s"
+    }
+  },
+  "findings": [
+    "Confirmed runtime (1235e, live status): on Edge of the World every host Hello for an NPC the client had not bound re-read the whole native NPC catalog on the client engine thread; refused binds repeated on the next Hello (27 bound, 55 refused), giving 46 exchangePoses stalls of 79-103 ms (max 925 ms). The host 2 s relevance scan cost 90-162 ms.",
+    "Confirmed static: memoryRead is a ReadProcessMemory syscall per read; the world catalog walk read every live entity twice, and readNativeNpcAuthority reads each NPC frame twice.",
+    "Confirmed runtime (1235f, 1213n, passed both roles, restoration passed): one catalog snapshot per second and a 3 s refusal backoff cut the client catalog reads to 10 over both cases (101 Hellos deferred) and its exchangePoses stalls to 10; each remaining read still costs 70-86 ms.",
+    "The single-pass walk did not fix the host: serviceNpcStream still stalls 80-207 ms per relevance scan (17 slow over 15 scans). The catalog read must leave the engine thread (next candidate)."
+  ],
+  "complete": false,
+  "scope": "#43 first step: client Hello reads bounded; host relevance scan still on the engine thread."
+}

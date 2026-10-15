@@ -1,0 +1,281 @@
+{
+  "at": "2026-10-15T05:48:54.305625+02:00",
+  "candidate": "candidate-npc-combat-v1213o",
+  "take": {
+    "take": "../natural-moveset/window-traversal-v1235g",
+    "passed": true,
+    "restoration": true,
+    "cases": [
+      {
+        "source": "host",
+        "passed": true,
+        "crossed": true,
+        "mantle": true,
+        "maxTraversalWeight": 1.0
+      },
+      {
+        "source": "client",
+        "passed": true,
+        "crossed": true,
+        "mantle": true,
+        "maxTraversalWeight": 1.0
+      }
+    ]
+  },
+  "timings": {
+    "host": {
+      "host": {
+        "relevance": {
+          "bound": 18,
+          "scans": 8,
+          "added": 19,
+          "dropped": 8,
+          "clientBound": 0,
+          "clientRefused": 0,
+          "clientDeferred": 0,
+          "helloCatalogReads": 0,
+          "catalogStale": 0,
+          "workerRequests": 8,
+          "workerCompleted": 8,
+          "workerFailed": 1,
+          "workerLastMs": 86.73,
+          "workerMaxMs": 89.859
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4075,
+            "slow": 0,
+            "maximumMs": 0.221,
+            "totalMs": 51.818
+          },
+          "serviceNpcStream": {
+            "count": 2801,
+            "slow": 1,
+            "maximumMs": 73.484,
+            "totalMs": 2000.688
+          },
+          "transport_all": {
+            "count": 4075,
+            "slow": 0,
+            "maximumMs": 34.63,
+            "totalMs": 6200.668
+          },
+          "native_services_all": {
+            "count": 2801,
+            "slow": 2,
+            "maximumMs": 76.29,
+            "totalMs": 6231.721
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 73.484
+          }
+        ]
+      },
+      "client": {
+        "relevance": {
+          "bound": 17,
+          "scans": 0,
+          "added": 0,
+          "dropped": 0,
+          "clientBound": 25,
+          "clientRefused": 15,
+          "clientDeferred": 109,
+          "helloCatalogReads": 6,
+          "catalogStale": 0,
+          "workerRequests": 6,
+          "workerCompleted": 6,
+          "workerFailed": 0,
+          "workerLastMs": 89.773,
+          "workerMaxMs": 91.774
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 3934,
+            "slow": 0,
+            "maximumMs": 15.426,
+            "totalMs": 142.488
+          },
+          "serviceNpcStream": {
+            "count": 2885,
+            "slow": 1,
+            "maximumMs": 79.399,
+            "totalMs": 1146.608
+          },
+          "transport_all": {
+            "count": 3934,
+            "slow": 0,
+            "maximumMs": 27.157,
+            "totalMs": 5514.692
+          },
+          "native_services_all": {
+            "count": 2885,
+            "slow": 2,
+            "maximumMs": 82.752,
+            "totalMs": 7483.145
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 79.399
+          }
+        ]
+      }
+    },
+    "client": {
+      "host": {
+        "relevance": {
+          "bound": 19,
+          "scans": 15,
+          "added": 21,
+          "dropped": 8,
+          "clientBound": 0,
+          "clientRefused": 0,
+          "clientDeferred": 0,
+          "helloCatalogReads": 0,
+          "catalogStale": 0,
+          "workerRequests": 15,
+          "workerCompleted": 15,
+          "workerFailed": 1,
+          "workerLastMs": 90.397,
+          "workerMaxMs": 94.71
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4514,
+            "slow": 0,
+            "maximumMs": 0.221,
+            "totalMs": 66.941
+          },
+          "serviceNpcStream": {
+            "count": 3240,
+            "slow": 1,
+            "maximumMs": 73.484,
+            "totalMs": 3711.496
+          },
+          "transport_all": {
+            "count": 4514,
+            "slow": 0,
+            "maximumMs": 37.975,
+            "totalMs": 9496.619
+          },
+          "native_services_all": {
+            "count": 3240,
+            "slow": 2,
+            "maximumMs": 76.29,
+            "totalMs": 10649.618
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 73.484
+          }
+        ]
+      },
+      "client": {
+        "relevance": {
+          "bound": 19,
+          "scans": 0,
+          "added": 0,
+          "dropped": 0,
+          "clientBound": 27,
+          "clientRefused": 17,
+          "clientDeferred": 121,
+          "helloCatalogReads": 9,
+          "catalogStale": 0,
+          "workerRequests": 9,
+          "workerCompleted": 9,
+          "workerFailed": 0,
+          "workerLastMs": 92.251,
+          "workerMaxMs": 92.661
+        },
+        "stages": {
+          "exchangePoses": {
+            "count": 4273,
+            "slow": 0,
+            "maximumMs": 15.426,
+            "totalMs": 187.348
+          },
+          "serviceNpcStream": {
+            "count": 3224,
+            "slow": 1,
+            "maximumMs": 79.399,
+            "totalMs": 2426.833
+          },
+          "transport_all": {
+            "count": 4273,
+            "slow": 0,
+            "maximumMs": 30.842,
+            "totalMs": 8585.23
+          },
+          "native_services_all": {
+            "count": 3224,
+            "slow": 2,
+            "maximumMs": 82.752,
+            "totalMs": 13025.269
+          }
+        },
+        "slowEvents": [
+          {
+            "name": "serviceNpcStream",
+            "ms": 79.399
+          }
+        ]
+      }
+    }
+  },
+  "gaps": {
+    "host": {
+      "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235g/cross-host-observer-movement.ndjson",
+      "seconds": 7.97,
+      "samples": 103,
+      "activeSamples": 103,
+      "nativePoseSamples": 2,
+      "nativePoseFraction": 0.019,
+      "presentedToNativeDrops": 2,
+      "eligibilityFailures": 1,
+      "staleStateRecords": 0,
+      "invalidSemanticRecords": 0,
+      "maxStaleStateAgeMs": 0,
+      "rootStepRejections": 2
+    },
+    "client": {
+      "file": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/work/natural-moveset/window-traversal-v1235g/cross-client-observer-movement.ndjson",
+      "seconds": 7.93,
+      "samples": 109,
+      "activeSamples": 109,
+      "nativePoseSamples": 1,
+      "nativePoseFraction": 0.009,
+      "presentedToNativeDrops": 1,
+      "eligibilityFailures": 2,
+      "staleStateRecords": 0,
+      "invalidSemanticRecords": 0,
+      "maxStaleStateAgeMs": 0,
+      "rootStepRejections": 0
+    }
+  },
+  "baseline_1235f": {
+    "audit": "npc-catalog-stalls-audit-v1242.json",
+    "host": {
+      "serviceNpcStreamSlow": 17,
+      "serviceNpcStreamMaxMs": 207.35
+    },
+    "client": {
+      "helloCatalogReads": 10,
+      "exchangePosesSlow": 10,
+      "exchangePosesMaxMs": 85.806
+    }
+  },
+  "findings": [
+    "Confirmed runtime (1235g, 1213o, passed both roles, restoration passed): with the catalog read on a worker thread the host relevance scan no longer stalls the engine thread (serviceNpcStream: 1 slow call of 73 ms, the one-off stream start, against 17 slow up to 207 ms in 1235f); the worker read the catalog 15 times in 87-95 ms off-thread, one read failed its list-consistency check and was retried on the next scan.",
+    "Client: no slow exchangePoses at all (max 15.4 ms; 10 slow up to 86 ms in 1235f, 46 up to 925 ms in 1235e); 27 binds from 9 worker snapshots, no stale snapshot entry refused at bind.",
+    "The stalls were the source of the partner-presentation gaps: stale-state eligibility records fell to 0 and eligibility failures to 1-2 per case (hundreds in 1235e/1235f); native-pose time 1.9% (host source) and 0.9% (client source), the remaining drops being the one-frame protocol-73 hold at the mantle end and root-step rejections.",
+    "Every NPC bound from a worker snapshot is re-read and compared on the engine thread before bindNpcChannel (freshNpcCatalogEntry); the stream start still reads the catalog once on the engine thread."
+  ],
+  "complete": true,
+  "scope": "#43: NPC catalog reads off the engine thread on Edge of the World, both roles; the one-off stream-start read remains on the engine thread."
+}

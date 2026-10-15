@@ -189,29 +189,94 @@ bool bindNpcChannel(const NativeNpcAuthority& n,ULONGLONG tick){
     if(slot==npcChannels.size())npcChannels.push_back(std::move(c));else npcChannels[slot]=std::move(c);
     return true;
 }
-void refreshNpcRelevance(ULONGLONG tick){
-    if(localRole||tick-npcRelevanceAt<2000)return;npcRelevanceAt=tick;++npcRelevanceScans;
-    // Retire channels whose NPC is far from both players (corpses included).
-    for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority fresh{};
-        if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh))continue;
-        if(npcNearestPlayerSq(fresh.npc.position)>kNpcRelevanceDrop*kNpcRelevanceDrop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
+// 1213o (#43): native NPC catalog reads leave the engine thread. A catalog read
+// is thousands of ReadProcessMemory calls (70-207 ms on Edge of the World, take
+// 1235f) and stalled the host's 2 s relevance scan and the client's Hello binds.
+// One worker reads it; the engine thread only takes the finished snapshot and
+// re-reads the few NPCs it is about to bind (freshNpcCatalogEntry) before
+// bindNpcChannel, which re-reads their skeleton and identity again.
+struct NpcCatalogSnapshot{ULONGLONG at=0;std::uintptr_t game=0;std::uint64_t epoch=0;bool ok=false;unsigned ineligible=0,unavailable=0,unbound=0;double ms=0;std::vector<NativeNpcAuthority> entries;};
+struct NpcCatalogWorker{SRWLOCK lock=SRWLOCK_INIT;HANDLE wake=nullptr;bool started=false,pending=false;std::uintptr_t game=0;std::uint64_t epoch=0;
+    NpcCatalogSnapshot result;std::uint64_t requests=0,completed=0,taken=0,failed=0;double maxMs=0,lastMs=0;};
+NpcCatalogWorker npcCatalogWorker;
+DWORD WINAPI npcCatalogWorkerMain(void*){
+    auto& w=npcCatalogWorker;
+    for(;;){
+        WaitForSingleObject(w.wake,INFINITE);
+        AcquireSRWLockExclusive(&w.lock);const bool pending=w.pending;const auto game=w.game;const auto epoch=w.epoch;ReleaseSRWLockExclusive(&w.lock);
+        if(!pending)continue;
+        NpcCatalogSnapshot s{};s.game=game;s.epoch=epoch;const double start=presentationClock();
+        s.ok=readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),game,s.entries,s.ineligible,s.unavailable,s.unbound);
+        s.ms=presentationClock()-start;s.at=GetTickCount64();
+        AcquireSRWLockExclusive(&w.lock);w.lastMs=s.ms;w.maxMs=(std::max)(w.maxMs,s.ms);if(!s.ok)++w.failed;
+        w.result=std::move(s);w.pending=false;++w.completed;ReleaseSRWLockExclusive(&w.lock);
+    }
+}
+// Engine thread: ask for a catalog of this world unless one is already being read.
+void npcCatalogRequest(){
+    auto& w=npcCatalogWorker;
+    if(!w.started){w.wake=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!w.wake)return;
+        HANDLE t=CreateThread(nullptr,0,npcCatalogWorkerMain,nullptr,0,nullptr);if(!t){CloseHandle(w.wake);w.wake=nullptr;return;}CloseHandle(t);w.started=true;}
+    AcquireSRWLockExclusive(&w.lock);const bool idle=!w.pending;if(idle){w.pending=true;w.game=observedGame;w.epoch=outgoing.worldEpoch;++w.requests;}ReleaseSRWLockExclusive(&w.lock);
+    if(idle)SetEvent(w.wake);
+}
+// Engine thread: move out a finished snapshot of the current world not taken before.
+bool npcCatalogTake(NpcCatalogSnapshot& out){
+    auto& w=npcCatalogWorker;bool fresh=false;
+    AcquireSRWLockExclusive(&w.lock);
+    if(w.completed>w.taken){w.taken=w.completed;fresh=w.result.ok&&w.result.game==observedGame&&w.result.epoch==outgoing.worldEpoch;if(fresh)out=std::move(w.result);}
+    ReleaseSRWLockExclusive(&w.lock);return fresh;
+}
+// Engine thread: the snapshot entry is still the same eligible living NPC.
+bool freshNpcCatalogEntry(const NativeNpcAuthority& n,NativeNpcAuthority& fresh){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth h{};
+    if(!readNativeHealth(memoryRead,base,n.npc.handle,h)||h.game!=observedGame||h.actor!=n.npc.actor||h.logic!=1||h.current<=0)return false;
+    return readNativeNpcAuthority(memoryRead,base,observedGame,n.npc.handle,fresh)&&npcAuthorityAcquireEligible(fresh)&&sameNpcAuthorityIdentity(n,fresh);
+}
+std::uint64_t npcCatalogStale=0;
+void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     unsigned bound=npcEnabledChannels();if(bound>=kNpcRelevanceMax)return;
-    std::vector<NativeNpcAuthority> catalog;
-    if(!readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,npcStreamIneligible,npcStreamUnavailable,npcStreamUnbound))return;
     catalog.erase(std::remove_if(catalog.begin(),catalog.end(),[&](const auto& n){
         if(npcNearestPlayerSq(n.npc.position)>kNpcRelevanceAdd*kNpcRelevanceAdd)return true;
         return std::any_of(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&(c.lease.binding.npc.handle==n.npc.handle||
             (c.lease.binding.npc.spawnerName==n.npc.spawnerName&&c.lease.binding.npc.definition==n.npc.definition));});}),catalog.end());
     std::stable_sort(catalog.begin(),catalog.end(),[&](const auto& a,const auto& b){return npcNearestPlayerSq(a.npc.position)<npcNearestPlayerSq(b.npc.position);});
-    for(const auto& n:catalog){if(bound>=kNpcRelevanceMax)break;if(bindNpcChannel(n,tick)){++bound;++npcRelevanceAdded;}}
+    for(const auto& n:catalog){if(bound>=kNpcRelevanceMax)break;NativeNpcAuthority fresh{};
+        if(!freshNpcCatalogEntry(n,fresh)){++npcCatalogStale;continue;}
+        if(bindNpcChannel(fresh,tick)){++bound;++npcRelevanceAdded;}}
+}
+void refreshNpcRelevance(ULONGLONG tick){
+    if(localRole)return;
+    NpcCatalogSnapshot snapshot{};if(npcCatalogTake(snapshot))addRelevantNpcs(std::move(snapshot.entries),tick);
+    if(tick-npcRelevanceAt<2000)return;npcRelevanceAt=tick;++npcRelevanceScans;
+    // Retire channels whose NPC is far from both players (corpses included).
+    for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority fresh{};
+        if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh))continue;
+        if(npcNearestPlayerSq(fresh.npc.position)>kNpcRelevanceDrop*kNpcRelevanceDrop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
+    if(npcEnabledChannels()<kNpcRelevanceMax)npcCatalogRequest();
 }
 // Client: bind the NPC named by a host Hello from the current eligible catalog.
+// 1213n: every unmatched host Hello re-read the whole native NPC catalog on the
+// client's engine thread (80-100 ms on Edge of the World), and a refused bind
+// repeated on the next Hello: 82 reads and 46 stalls in ~25 s (take 1235e).
+// A catalog snapshot serves Hellos for up to 1 s, and a refused
+// spawner/definition pair waits 3 s before it is tried again. 1213o: the
+// snapshot comes from the worker; without a current one the Hello is deferred
+// (the host repeats it) while the worker reads.
+struct NpcHelloRefusal{std::string spawner,definition;ULONGLONG until=0;};
+NpcCatalogSnapshot npcHelloCatalog;std::vector<NpcHelloRefusal> npcHelloRefusals;std::uint64_t npcHelloCatalogReads=0,npcClientBindDeferred=0;
 bool bindNpcForHostHello(const CoopNpcControl& p,ULONGLONG tick){
     if(!localRole||p.h.kind!=NpcAuthorityMessage::Hello||npcEnabledChannels()>=kNpcRelevanceMax)return false;
-    std::vector<NativeNpcAuthority> catalog;
-    if(!readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,npcStreamIneligible,npcStreamUnavailable,npcStreamUnbound)){++npcClientBindRefused;return false;}
-    for(const auto& n:catalog)if(n.npc.spawnerName==p.spawner&&n.npc.definition==p.definition){
-        if(bindNpcChannel(n,tick)){++npcClientBound;return true;}break;}
+    const std::string spawner(p.spawner,strnlen(p.spawner,sizeof(p.spawner))),definition(p.definition,strnlen(p.definition,sizeof(p.definition)));
+    for(const auto& r:npcHelloRefusals)if(tick<r.until&&r.spawner==spawner&&r.definition==definition){++npcClientBindDeferred;return false;}
+    auto& c=npcHelloCatalog;
+    {NpcCatalogSnapshot next{};if(npcCatalogTake(next)){c=std::move(next);++npcHelloCatalogReads;}}
+    if(!c.ok||c.game!=observedGame||c.epoch!=outgoing.worldEpoch||tick-c.at>=1000){npcCatalogRequest();++npcClientBindDeferred;return false;}
+    for(const auto& n:c.entries)if(n.npc.spawnerName==spawner&&n.npc.definition==definition){
+        NativeNpcAuthority fresh{};if(!freshNpcCatalogEntry(n,fresh)){++npcCatalogStale;break;}
+        if(bindNpcChannel(fresh,tick)){++npcClientBound;return true;}break;}
+    npcHelloRefusals.erase(std::remove_if(npcHelloRefusals.begin(),npcHelloRefusals.end(),[&](const auto& r){return tick>=r.until;}),npcHelloRefusals.end());
+    if(npcHelloRefusals.size()<128)npcHelloRefusals.push_back({spawner,definition,tick+3000});
     ++npcClientBindRefused;return false;
 }
 void beginNpcStream(ULONGLONG tick){
@@ -228,7 +293,7 @@ void beginNpcStream(ULONGLONG tick){
     else{catalog.erase(std::remove_if(catalog.begin(),catalog.end(),[&](const auto& n){return npcNearestPlayerSq(n.npc.position)>kNpcRelevanceAdd*kNpcRelevanceAdd;}),catalog.end());
      std::stable_sort(catalog.begin(),catalog.end(),[&](const auto& a,const auto& b){return npcNearestPlayerSq(a.npc.position)<npcNearestPlayerSq(b.npc.position);});
      if(catalog.size()>kNpcRelevanceMax)catalog.resize(kNpcRelevanceMax);}
-    clearNpcPresentation();npcChannels.clear();for(auto& c:npcActorBodyApplied)c.store(0);for(auto& c:npcActorBodySequence)c.store(0);
+    clearNpcPresentation();npcChannels.clear();npcHelloCatalog={};npcHelloRefusals.clear();for(auto& c:npcActorBodyApplied)c.store(0);for(auto& c:npcActorBodySequence)c.store(0);
     for(auto& n:catalog)bindNpcChannel(n,GetTickCount64());
     npcRelevanceAt=GetTickCount64();
     npcStreamSession=outgoing.session;npcStreamPeerSession=remote.session;npcStreamEpoch=outgoing.worldEpoch;npcStreamPeerEpoch=remote.worldEpoch;npcStreamMap=outgoing.mapId;
@@ -380,7 +445,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcClientBound,npcClientBindRefused);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"helloCatalogReads\":%llu,\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcHelloCatalogReads,npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}}\n",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
