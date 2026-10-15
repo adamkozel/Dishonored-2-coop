@@ -1,0 +1,86 @@
+{
+  "scope": "Use variants on real mechanisms (dunwall): native use -> authored interaction on the partner body, both roles; fixture restored.",
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "ld_ring_locker_01_1_lock",
+        "ld_ring_locker_01_2_lock",
+        "ld_ring_locker_01_1_open",
+        "ld_ring_locker_01_2_open",
+        "ld_ring_locker_01_3"
+      ],
+      "expected": 5,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "ld_ring_locker_01_1_lock",
+      "focus": {
+        "name": "ld_ring_locker_01_1_open",
+        "dist": 1.0,
+        "handle": 93061542,
+        "tries": 1,
+        "dz": 0,
+        "side": 0
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 5,
+      "sourceUseName": "ld_ring_locker_01_1_open",
+      "sourceLastVariant": 5,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 152,
+      "shownSamples": 51,
+      "observedVariants": [
+        0,
+        5
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "ld_ring_locker_01_1_lock",
+        "ld_ring_locker_01_2_lock",
+        "ld_ring_locker_01_1_open",
+        "ld_ring_locker_01_2_open",
+        "ld_ring_locker_01_3"
+      ],
+      "expected": 5,
+      "optional": false,
+      "passed": false,
+      "failure": "Observer remote body did not present variant 5 (client -> host)",
+      "target": "ld_ring_locker_01_1_lock",
+      "focus": {
+        "name": "ld_ring_locker_01_1_open",
+        "dist": 1.0,
+        "handle": 93061542,
+        "tries": 1,
+        "dz": 0,
+        "side": 0
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 4,
+      "sourceUseName": "ld_ring_locker_01_1_open",
+      "sourceLastVariant": 5,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 150,
+      "shownSamples": 0,
+      "observedVariants": [
+        0
+      ],
+      "maxWeight": 0.0,
+      "maxAmount": 0.0
+    }
+  ],
+  "passed": false,
+  "failure": "client ld_ring_locker_01_1_lock: Observer remote body did not present variant 5 (client -> host)"
+}

@@ -269,7 +269,10 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // 1213: authored interaction for a native use; fades out once the
         // remote player moves (root stays network owned).
         UsePresentation::Sample use{};float useAmount=0;
-        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&ground&&pose.motionValid&&(p.clock.speed<.8f||use.variant>=6);
+        // 1214am (#11): a native use made while crouched (Emily at the ring lock and the office door,
+        // takes 1228m-1228r: native stance 1 throughout) is presented too; before, only a standing
+        // use was, and the partner showed nothing.
+        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&(ground||crouched)&&pose.motionValid&&(p.clock.speed<.8f||use.variant>=6);
         if(combatDt>=0&&combatDt<.25f){
             if(useActive){if(use.event!=p.useEvent){p.useFrom=p.useLast;p.useTransition=0;p.useEvent=use.event;}
                 p.useVariant=use.variant;p.useAmount=useAmount;p.useTransition=(std::min)(1.f,p.useTransition+combatDt/.20f);

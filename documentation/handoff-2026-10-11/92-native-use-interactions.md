@@ -99,6 +99,18 @@ Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and
 
 Harness options: `-LeversOnly` (1228i); `-Back`, `-ObserverPitch` and `-LeverSources` (1228j); `-Side` and `-TapsOnly` (1228k).
 
+**Crouched uses, doors and Corvo's key use (1214al–1214am, [audit 1283](../../work/movement-integration/coverage-audit-v1283.json)):**
+- **Finding (confirmed runtime, takes 1228m–1228r):** the host never presented Emily's ring-lock and office-door uses, while Corvo's lock and door uses and both roles' taps worked. The 1214al counters showed every use packet sent and accepted (66 of 66, variant 5).
+- **Cause (confirmed runtime):** Emily was natively crouched at the lock and the door, and the use presentation required a standing pose. Hypothesis: the harness's modal-clearing B press toggles crouch.
+- **Fix (1214am):** a use made while crouched is presented too. The partner rises into the standing use reach and returns to the crouch; a crouched reach would be more faithful (polish).
+
+| Take | Case | Result |
+|---|---|---|
+| [use-variants-dunwall-v1228s](../../work/natural-moveset/use-variants-dunwall-v1228s) | lock and door, both roles | Pass. Door accepted (functional) in both roles; the lock view was blocked |
+| [use-variants-dunwall-v1228t](../../work/natural-moveset/use-variants-dunwall-v1228t) | lock, both roles (1.8 m back, other side) | Pass. Corvo reaches the bookcase lock; Emily rises from the crouch into the reach. Accepted (functional) |
+
+`-Only` selects the Dunwall cases (1228l); 1228m samples both peers' shadow-stream status per case.
+
 **#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
 - The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).
 - The client's window use also plays to duration.

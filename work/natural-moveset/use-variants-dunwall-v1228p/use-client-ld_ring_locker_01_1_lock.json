@@ -1,0 +1,39 @@
+{
+  "source": "client",
+  "observer": "host",
+  "candidates": [
+    "ld_ring_locker_01_1_lock",
+    "ld_ring_locker_01_2_lock",
+    "ld_ring_locker_01_1_open",
+    "ld_ring_locker_01_2_open",
+    "ld_ring_locker_01_3"
+  ],
+  "expected": 5,
+  "optional": false,
+  "passed": false,
+  "failure": "Observer remote body did not present variant 5 (client -> host)",
+  "target": "ld_ring_locker_01_1_lock",
+  "focus": {
+    "dz": 0,
+    "dist": 1.0,
+    "tries": 1,
+    "handle": 93061542,
+    "name": "ld_ring_locker_01_1_open",
+    "side": 0
+  },
+  "observerPitch": true,
+  "sourceMaxDisplacement": 0.0,
+  "used": true,
+  "sourceUses": 8,
+  "sourceUseName": "ld_ring_locker_01_1_open",
+  "sourceLastVariant": 5,
+  "endReason": 3,
+  "endAction": 0,
+  "observerSamples": 149,
+  "shownSamples": 0,
+  "observedVariants": [
+    0
+  ],
+  "maxWeight": 0.0,
+  "maxAmount": 0.0
+}

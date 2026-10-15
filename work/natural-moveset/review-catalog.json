@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T19:38:26.664799+02:00",
+  "generated": "2026-10-15T20:11:57.472334+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -1115,13 +1115,14 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "isolated_Dunwall_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles_long_fall",
       "native_reference_family_count": 155,
       "priority": 2,
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
+      "notes": "Audit 1283: a 5-6 m fall in both roles shows the falling pose with arms out (coverage-v1283a), accepted functionally. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
       "evidence": [
         "priority-2/result.json",
-        "../movement-integration/visual-sweep-v1260/traversal-review.json"
+        "../movement-integration/visual-sweep-v1260/traversal-review.json",
+        "../movement-integration/coverage-audit-v1283.json"
       ],
       "title": "fall loop",
       "motions": [
@@ -1182,7 +1183,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_light_landing_standing_and_crouched_verified_dunwall",
-      "visual_validation": "reviewed_bounded_cases_full_acceptance_pending",
+      "visual_validation": "accepted_functional_both_roles_long_fall_landing",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "hard landing",
@@ -1195,7 +1196,7 @@
         "empty_native_hard_landing_crouched"
       ],
       "deliverable_kind": "animation",
-      "notes": "Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
+      "notes": "Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in both roles (coverage-v1283a), accepted functionally. Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -1208,7 +1209,8 @@
         "hard-landing-corvo-stand-v23-v5/result.json",
         "hard-landing-corvo-crouch-v23-v1/result.json",
         "hard-landing-emily-stand-v23-v5/result.json",
-        "hard-landing-emily-crouch-v23-v1/result.json"
+        "hard-landing-emily-crouch-v23-v1/result.json",
+        "../movement-integration/coverage-audit-v1283.json"
       ]
     },
     {
@@ -17213,7 +17215,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_ordinary_door_continuous_manual_and_death_checkpoint_recovery",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles_crouched_rise",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "door open close locked",
@@ -17224,7 +17226,7 @@
         "sword_walk_door_open_cw_right"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828\u2013834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
+      "notes": "Audit 1283: the partner reaches the office door in both roles (use-variants-dunwall-v1228s, 1214am); a crouched use rises into the standing reach (polish). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828\u2013834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -17400,7 +17402,8 @@
         "native-window-api-v830b/result.json",
         "shared-window-family-v832b/result.json",
         "shared-window-recovery-v833b/result.json",
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/coverage-audit-v1283.json"
       ]
     },
     {
@@ -17610,7 +17613,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_use_state75_real_lock_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_functional_both_roles",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "key use",
@@ -17618,7 +17621,7 @@
         "interact_key_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
+      "notes": "Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's crouched lock use is presented since 1214am. Accepted functionally in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -17628,7 +17631,8 @@
         "../movement-integration/native-combat-use-observations-v1211.json",
         "../movement-integration/use-interaction-audit-v1215.json",
         "../movement-integration/use-variants-audit-v1229.json",
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/coverage-audit-v1283.json"
       ]
     },
     {

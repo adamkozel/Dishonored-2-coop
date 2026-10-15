@@ -1,10 +1,10 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T19:38:27.007355+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:11:57.785352+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
-Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828–834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.
+Audit 1283: the partner reaches the office door in both roles (use-variants-dunwall-v1228s, 1214am); a crouched use rises into the standing reach (polish). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828–834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.
 
 ````json
 {
@@ -16,7 +16,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The re
   ],
   "authoring": "candidates",
   "runtime_binding": "native_ordinary_door_continuous_manual_and_death_checkpoint_recovery",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_crouched_rise",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "door open close locked",
@@ -27,7 +27,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The re
     "sword_walk_door_open_cw_right"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828–834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
+  "notes": "Audit 1283: the partner reaches the office door in both roles (use-variants-dunwall-v1228s, 1214am); a crouched use rises into the standing reach (polish). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828–834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -203,7 +203,8 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The re
     "native-window-api-v830b/result.json",
     "shared-window-family-v832b/result.json",
     "shared-window-recovery-v833b/result.json",
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/coverage-audit-v1283.json"
   ]
 }
 ````
@@ -250,6 +251,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The re
 - [evidence: shared-window-family-v832b/result.json](<../../../../work/natural-moveset/shared-window-family-v832b/result.json>)
 - [evidence: shared-window-recovery-v833b/result.json](<../../../../work/natural-moveset/shared-window-recovery-v833b/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
 - [in_game_recordings: native-door-api-corvo-v708/host-unlocked-door-tap.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v708/host-unlocked-door-tap.mp4>)
 - [in_game_recordings: native-door-api-corvo-v708/observer.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v708/observer.mp4>)
 - [in_game_recordings: native-door-api-corvo-v711/host-unlocked-door-tap.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v711/host-unlocked-door-tap.mp4>)
@@ -733,7 +735,7 @@ Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reac
 - [in_game_recordings: gestures-v1261b/client-coin-observer.mp4](<../../../../work/natural-moveset/gestures-v1261b/client-coin-observer.mp4>)
 ## key_use
 
-Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.
+Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's crouched lock use is presented since 1214am. Accepted functionally in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.
 
 ````json
 {
@@ -745,7 +747,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock
   ],
   "authoring": "candidates",
   "runtime_binding": "native_use_state75_real_lock_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "key use",
@@ -753,7 +755,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock
     "interact_key_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
+  "notes": "Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's crouched lock use is presented since 1214am. Accepted functionally in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -763,7 +765,8 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock
     "../movement-integration/native-combat-use-observations-v1211.json",
     "../movement-integration/use-interaction-audit-v1215.json",
     "../movement-integration/use-variants-audit-v1229.json",
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/coverage-audit-v1283.json"
   ]
 }
 ````
@@ -772,6 +775,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock
 - [evidence: ../movement-integration/use-interaction-audit-v1215.json](<../../../../work/movement-integration/use-interaction-audit-v1215.json>)
 - [evidence: ../movement-integration/use-variants-audit-v1229.json](<../../../../work/movement-integration/use-variants-audit-v1229.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
 - [in_game_recordings: use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4](<../../../../work/natural-moveset/use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4>)
 ## read_object_or_note
 
