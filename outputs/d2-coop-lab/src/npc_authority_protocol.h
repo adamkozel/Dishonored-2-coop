@@ -6,7 +6,12 @@
 #include <cstddef>
 
 constexpr unsigned kNpcAuthorityMaxJoints=256;
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop};
+// 1213u (#46): PairedHold/PairedKnockout come from the client while ITS native
+// paired takedown (rear choke variants 1-3, fast-back lethal 5, carried in
+// reserved) targets a host-owned NPC: the host holds that NPC's AI for the scene,
+// and knocks it out natively when the client's choke_win begins.
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout};
+inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5;}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
     std::uint32_t magic=0x414e3244,build=0x67a50cde;
@@ -45,7 +50,8 @@ inline bool npcStreamPoseStale(std::uint64_t now,std::uint64_t started,std::uint
     const auto base=poseAt?poseAt:started;return now>=base&&now-base>(poseAt?500u:3000u);
 }
 inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||h.reserved||h.reserved2||
+    const bool paired=h.kind==NpcAuthorityMessage::PairedHold||h.kind==NpcAuthorityMessage::PairedKnockout;
+    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.reserved!=0)||h.reserved2||
        !h.sequence||!h.sourceArm||!h.sourceHandle||!h.rig||!h.joints||h.joints>kNpcAuthorityMaxJoints||!coopWorldPairReady(local,peer)||
        h.sourceSession!=peer.session||h.targetSession!=local.session||h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.map!=local.mapId)return false;
     switch(h.kind){
@@ -53,6 +59,8 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::Ready:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Stop:return h.size==sizeof(CoopNpcControl)&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Pose:return h.size==npcPoseBytes(h.joints)&&h.role==0&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&h.reserved<=3;
     }return false;
 }
 inline bool validNpcControl(const CoopNpcControl& p,const CoopPosePacket& local,const CoopPosePacket& peer){

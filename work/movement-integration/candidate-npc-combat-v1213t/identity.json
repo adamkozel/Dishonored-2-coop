@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-15T06:59:01.989475+02:00",
+  "dll": "0A0BFA92B5818E30C9FE8A40C77DEF4E3C7289D828C62A267B9CBE722099DAEB",
+  "probe": "AF9368BB21E332B5642C44D2BEBDB3D9073AD0A75C7FFDF6D683CC95D0252BD7",
+  "previous": "candidate-npc-combat-v1213s",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213t on 1213s (#46): the knockout declaration is selectable; lab-only commands coop_npc_combat knockout_test (sleep_no_reaction_damage), knockout_reaction_test (sleep_damage) and knockout_generic_test (code_referenced generic_sleep_damage). Probe 1251: sleep_no_reaction_damage knocks the guard out like a choke (40/40 -> 10/10, flag 0x20, AI destroyed) but it stays standing frozen."
+}

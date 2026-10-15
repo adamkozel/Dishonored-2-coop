@@ -12,6 +12,16 @@ void npcAuthorityProtocolTests(){
         case 5:b.h.sourceArm=0;break;case 6:b.h.sourceHandle=0;break;case 7:b.h.rig=0;break;case 8:b.h.joints=257;break;case 9:b.h.joints=0;break;case 10:--b.h.size;break;
         case 11:b.h.targetArm=9;break;case 12:b.h.reserved=1;break;case 13:b.h.reserved2=1;break;case 14:b.h.role=1;break;case 15:b.h.sequence=0;break;case 16:b.spawner[191]='x';break;case 17:b.h.kind=NpcAuthorityMessage::Pose;break;}
         require(!validNpcControl(b,client,host),"malformed or stale NPC negotiation refused");}
+    {// 1213u (#46): the client's paired takedown hold/knockout, validated on the host.
+     CoopNpcControl q=p;q.h.role=1;q.h.sourceSession=22;q.h.targetSession=11;q.h.sourceEpoch=5;q.h.targetEpoch=3;q.h.targetArm=8;q.h.targetHandle=0x50009;
+     q.h.kind=NpcAuthorityMessage::PairedHold;q.h.reserved=2;require(validNpcControl(q,host,client),"client paired hold names the host NPC and its choke phase");
+     q.h.reserved=5;require(validNpcControl(q,host,client),"client paired hold for the fast-back lethal");
+     q.h.reserved=4;require(!validNpcControl(q,host,client),"breakout (4) is not a paired hold variant");
+     q.h.reserved=0;require(!validNpcControl(q,host,client),"paired hold needs a variant");
+     q.h.kind=NpcAuthorityMessage::PairedKnockout;q.h.reserved=3;require(validNpcControl(q,host,client),"client knockout request at choke_win");
+     q.h.reserved=5;require(!validNpcControl(q,host,client),"a lethal is never a knockout");
+     q.h.reserved=3;q.h.role=0;require(!validNpcControl(q,host,client),"the host never sends a paired request");
+     q.h.role=1;q.h.targetArm=0;require(!validNpcControl(q,host,client),"paired request names its host channel");}
     CoopNpcPose pose{};pose.h=p.h;pose.h.kind=NpcAuthorityMessage::Pose;pose.h.size=static_cast<unsigned short>(npcPoseBytes(pose.h.joints));pose.h.targetArm=8;pose.h.targetHandle=0x50009;
     pose.sampleUs=1000000;pose.health=pose.maximum=50;pose.root[3]=pose.root[7]=pose.root[11]=1;
     for(unsigned j=0;j<pose.h.joints;++j)pose.local[j][0]=pose.local[j][4]=pose.local[j][8]=1;

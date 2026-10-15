@@ -1,0 +1,1110 @@
+{
+  "world": null,
+  "health": {
+    "tick": 27111546,
+    "handle": 189269860,
+    "logic": 1,
+    "component": "0x259c9a97990",
+    "actor": "0x259df294ce0",
+    "attributes": "0x259df6da8d0",
+    "current": 40,
+    "maximum": 40,
+    "baseMaximum": 40,
+    "suppressedMaximum": 10,
+    "explicitHidden": false,
+    "ownerSuppressed": false,
+    "maximumIndex": -1,
+    "suppressedIndex": -1,
+    "attributeCount": 10,
+    "attributeValues": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "decision": {
+    "pid": 25728,
+    "handle": "0xb480764",
+    "actor": "0x259df294ce0",
+    "component": "0x259df8ae0b0",
+    "manager": "0x25997620da0",
+    "registry": "0x259976d3380",
+    "tree": "0x259df86a000",
+    "flags": "0xa000006a",
+    "pauseReferences": 1,
+    "pauseState": 2,
+    "started": true,
+    "schedulerActive": false,
+    "idleState": 0,
+    "idleAutoPlay": 0,
+    "poolIndex": 1,
+    "liveCount": 30,
+    "activeCount": 0,
+    "activeIndices": []
+  },
+  "reflex": {
+    "pid": 25728,
+    "handle": "0xb480764",
+    "actor": "0x259df294ce0",
+    "component": "0x259df6dd808",
+    "manager": "0x25997620da0",
+    "registry": "0x259976d8500",
+    "tree": "0x0",
+    "flags": "0xa000006a",
+    "pauseReferences": 1,
+    "pauseState": 2,
+    "started": true,
+    "schedulerActive": false,
+    "idleState": 0,
+    "idleAutoPlay": 0,
+    "poolIndex": 7,
+    "liveCount": 38,
+    "activeCount": 0,
+    "activeIndices": []
+  },
+  "idle": {
+    "pid": 25728,
+    "handle": "0xb480764",
+    "actor": "0x259df294ce0",
+    "component": "0x259df60c320",
+    "manager": "0x25997620da0",
+    "registry": "0x259976d8f20",
+    "tree": "0x0",
+    "flags": "0xa000006a",
+    "pauseReferences": 1,
+    "pauseState": 2,
+    "started": true,
+    "schedulerActive": false,
+    "idleState": 1,
+    "idleAutoPlay": 3,
+    "poolIndex": 7,
+    "liveCount": 42,
+    "activeCount": 0,
+    "activeIndices": []
+  },
+  "attack": {
+    "pid": 25728,
+    "handle": "0xb480764",
+    "actor": "0x259df294ce0",
+    "component": "0x259df67e1a0",
+    "manager": "0x25997620da0",
+    "registry": "0x259976d8a10",
+    "tree": "0x0",
+    "flags": "0x20000002",
+    "pauseReferences": 0,
+    "pauseState": 0,
+    "started": false,
+    "schedulerActive": false,
+    "idleState": 0,
+    "idleAutoPlay": 0,
+    "poolIndex": 7,
+    "liveCount": 38,
+    "activeCount": 0,
+    "activeIndices": []
+  },
+  "animation": {
+    "handle": 189269860,
+    "animation": "0x257bd706f10",
+    "data": "0x259e1745380",
+    "bindings": [
+      {
+        "name": "forwardOrientation",
+        "type": 10,
+        "offset": 1744,
+        "values": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "targLinearVelocity",
+        "type": 10,
+        "offset": 1760,
+        "values": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "desiredOrientation",
+        "type": 10,
+        "offset": 2224,
+        "values": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "targSpeed",
+        "type": 1,
+        "offset": 1816,
+        "values": [
+          0
+        ]
+      },
+      {
+        "name": "targAngle",
+        "type": 1,
+        "offset": 1824,
+        "values": [
+          0
+        ]
+      },
+      {
+        "name": "requestedVelocity",
+        "type": 1,
+        "offset": 2240,
+        "values": [
+          -1
+        ]
+      },
+      {
+        "name": "locoPlayRateMultiplier",
+        "type": 1,
+        "offset": 2264,
+        "values": [
+          1
+        ]
+      },
+      {
+        "name": "linearVelocity",
+        "type": 10,
+        "offset": 480,
+        "values": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "speed",
+        "type": 1,
+        "offset": 16,
+        "values": [
+          0
+        ]
+      },
+      {
+        "name": "midnightWeight",
+        "type": 1,
+        "offset": 1280,
+        "values": [
+          0
+        ]
+      },
+      {
+        "name": "locomotionInputData",
+        "type": 21,
+        "offset": 2728,
+        "values": [
+          -48.5900269,
+          -150.069901,
+          66.4000015,
+          -0.195089698,
+          0.980785489,
+          0,
+          -0.980785489,
+          -0.195089698,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "declaredInputs": [
+      {
+        "name": "animBasicInputData1",
+        "type": 12,
+        "offset": 1664,
+        "rawWords": [
+          767,
+          0,
+          0,
+          1065353216,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "animBasicInputData2",
+        "type": 12,
+        "offset": 1688,
+        "rawWords": [
+          767,
+          0,
+          0,
+          1065353216,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "locoSelector_blendFactor",
+        "type": 1,
+        "offset": 1712,
+        "value": 1
+      },
+      {
+        "name": "recoverFromRagdollSnapshotInput",
+        "type": 13,
+        "offset": 1720
+      },
+      {
+        "name": "recoverFromRagdollBlendInput",
+        "type": 1,
+        "offset": 1736,
+        "value": 0
+      },
+      {
+        "name": "forwardOrientation",
+        "type": 10,
+        "offset": 1744
+      },
+      {
+        "name": "targLinearVelocity",
+        "type": 10,
+        "offset": 1760
+      },
+      {
+        "name": "targAngularVelocity",
+        "type": 1,
+        "offset": 1776,
+        "value": 0
+      },
+      {
+        "name": "targStance",
+        "type": 7,
+        "offset": 1784
+      },
+      {
+        "name": "targEquipState",
+        "type": 8,
+        "offset": 1792
+      },
+      {
+        "name": "isTargStanceImmediate",
+        "type": 11,
+        "offset": 1800
+      },
+      {
+        "name": "isTargEquipStateImmediate",
+        "type": 11,
+        "offset": 1808
+      },
+      {
+        "name": "targSpeed",
+        "type": 1,
+        "offset": 1816,
+        "value": 0
+      },
+      {
+        "name": "targAngle",
+        "type": 1,
+        "offset": 1824,
+        "value": 0
+      },
+      {
+        "name": "vectorMode",
+        "type": 11,
+        "offset": 1832
+      },
+      {
+        "name": "jumpData",
+        "type": 14,
+        "offset": 1840
+      },
+      {
+        "name": "doorData",
+        "type": 23,
+        "offset": 1976
+      },
+      {
+        "name": "pathfindingData",
+        "type": 15,
+        "offset": 1992
+      },
+      {
+        "name": "locoInputData",
+        "type": 19,
+        "offset": 2120
+      },
+      {
+        "name": "desiredOrientation",
+        "type": 10,
+        "offset": 2224
+      },
+      {
+        "name": "requestedVelocity",
+        "type": 1,
+        "offset": 2240,
+        "value": -1
+      },
+      {
+        "name": "stairCommand",
+        "type": 0,
+        "offset": 2248
+      },
+      {
+        "name": "stairAngle",
+        "type": 1,
+        "offset": 2256,
+        "value": 0
+      },
+      {
+        "name": "locoPlayRateMultiplier",
+        "type": 1,
+        "offset": 2264,
+        "value": 1
+      },
+      {
+        "name": "midnightData",
+        "type": 9,
+        "offset": 2272
+      },
+      {
+        "name": "locomotionInputData",
+        "type": 21,
+        "offset": 2728
+      },
+      {
+        "name": "versusFrame",
+        "type": 1,
+        "offset": 3216,
+        "value": 3.40282347E+38
+      },
+      {
+        "name": "versusBlend",
+        "type": 1,
+        "offset": 3224,
+        "value": 0
+      }
+    ],
+    "modernOutputWords": [
+      0,
+      0,
+      0,
+      0,
+      1067327005,
+      1087897598,
+      1068591507,
+      1077706797,
+      0,
+      2,
+      0,
+      0,
+      21,
+      3181211474,
+      1040938572,
+      1040602056,
+      3181211528,
+      1040941584,
+      1040602530,
+      1077307008,
+      1060529792,
+      1040602056,
+      1,
+      1,
+      25,
+      3175078842,
+      3188417533,
+      1040601442,
+      3175079083,
+      3188414410,
+      1040600946,
+      1077307008,
+      1060529792,
+      1040601442,
+      1,
+      0,
+      22,
+      1029086533,
+      1042882931,
+      3070868202,
+      1029085462,
+      1042886368,
+      3060239024,
+      1077307008,
+      1060529792,
+      3070868202,
+      1,
+      1,
+      26,
+      1034356729,
+      3190609588,
+      3065858429,
+      1034356682,
+      3190605925,
+      3077506504,
+      1077307008,
+      1060529792,
+      3065858429,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      8,
+      6,
+      8,
+      0,
+      1082130432,
+      1049834240,
+      1639983176,
+      32758,
+      255,
+      0
+    ],
+    "locomotionNodes": [
+      {
+        "instance": "0x259e17462a0",
+        "input": "0x259e1745e28",
+        "controller": "0x259ca4aa0a0",
+        "model": "models/characters/small/guards/d_guards/d_guard_01_head1.md6",
+        "requestMode": 0,
+        "stance": 4294967295,
+        "equipment": 4294967295,
+        "requestFlags": 2,
+        "requested": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "actualVelocity": [
+          0,
+          0,
+          0
+        ],
+        "graphs": [
+          {
+            "address": "0x259e1408f80",
+            "stance": 0,
+            "equipment": 0,
+            "activeType": ".?AVarkLocomotionMode_Idle@@",
+            "candidates": [
+              {
+                "type": ".?AVarkLocomotionMode_Idle@@",
+                "scoreRva": "0x4824c0"
+              },
+              {
+                "type": ".?AVarkLocomotionMode_FrontalMove@@",
+                "scoreRva": "0x480840"
+              },
+              {
+                "type": ".?AVarkLocomotionMode_Strafe@@",
+                "scoreRva": "0x4836b0"
+              },
+              {
+                "type": "",
+                "scoreRva": "0x0"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "locomotionStances": [
+      {
+        "index": 0,
+        "name": "Relaxed"
+      },
+      {
+        "index": 1,
+        "name": "Combat"
+      },
+      {
+        "index": 2,
+        "name": "Search"
+      },
+      {
+        "index": 3,
+        "name": "Mesmerize"
+      }
+    ],
+    "modelConfig": {
+      "138": {
+        "address": "0x0",
+        "type": "",
+        "name": ""
+      },
+      "140": {
+        "address": "0x2597593ead0",
+        "type": ".?AVarkDeclLocomotion@@",
+        "name": "models/characters/small/base/locomotion/small.loco"
+      },
+      "148": {
+        "address": "0x259758cda10",
+        "type": ".?AVarkDeclAnimBasic@@",
+        "name": "models/characters/common/anim_basic_npc_search.animbasic",
+        "entries": [
+          "generic_smallhit_front",
+          "generic_smallhit_back",
+          "generic_smallhit_left",
+          "generic_smallhit_right",
+          "sword_patrol_searchpose"
+        ]
+      }
+    }
+  },
+  "components": {
+    "handle": "0xb480764",
+    "components": [
+      {
+        "pointer": "0x259df6045e8",
+        "vtableRva": "0x1b86568",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAICrewMember@@"
+      },
+      {
+        "pointer": "0x259b2ee02d0",
+        "vtableRva": "0x1ce6268",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntFaction@@"
+      },
+      {
+        "pointer": "0x259df606158",
+        "vtableRva": "0x1ce6b78",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAssassination@@"
+      },
+      {
+        "pointer": "0x259df607550",
+        "vtableRva": "0x1b98268",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIVisionConfig@@"
+      },
+      {
+        "pointer": "0x259df60c320",
+        "vtableRva": "0x1b4cec8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntAIIdleBreak@@"
+      },
+      {
+        "pointer": "0x259b2ee28f8",
+        "vtableRva": "0x1c58358",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntSpeech@@"
+      },
+      {
+        "pointer": "0x259b304b740",
+        "vtableRva": "0x1b97898",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntNavigation@@"
+      },
+      {
+        "pointer": "0x259df078090",
+        "vtableRva": "0x1b60448",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntFace@@"
+      },
+      {
+        "pointer": "0x259df04dd78",
+        "vtableRva": "0x1b4f578",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAITampering@@"
+      },
+      {
+        "pointer": "0x259df6568a0",
+        "vtableRva": "0x1b88928",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAIPhysicsReaction@@"
+      },
+      {
+        "pointer": "0x259df65dea0",
+        "vtableRva": "0x1c56548",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntNPCTalk@@"
+      },
+      {
+        "pointer": "0x259b2f3d670",
+        "vtableRva": "0x1b9a878",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntInventory@@"
+      },
+      {
+        "pointer": "0x259df6654e8",
+        "vtableRva": "0x1b5efd8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntDarkVisionProxy@@"
+      },
+      {
+        "pointer": "0x259b2f4d230",
+        "vtableRva": "0x1c4ded8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAreaLocator@@"
+      },
+      {
+        "pointer": "0x259df66bef8",
+        "vtableRva": "0x1b81cb8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAIAwarenessHUDDisplay@@"
+      },
+      {
+        "pointer": "0x259b2f57b40",
+        "vtableRva": "0x1b3b7c8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntCloseCombat@@"
+      },
+      {
+        "pointer": "0x259df2a5638",
+        "vtableRva": "0x1b94a68",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAIAttentionSource@@"
+      },
+      {
+        "pointer": "0x259df2a5660",
+        "vtableRva": "0x1b94a68",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAIAttentionSource@@"
+      },
+      {
+        "pointer": "0x259df2a5688",
+        "vtableRva": "0x1b94a68",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAIAttentionSource@@"
+      },
+      {
+        "pointer": "0x259df670780",
+        "vtableRva": "0x1c57b28",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntSnoring@@"
+      },
+      {
+        "pointer": "0x259df671d10",
+        "vtableRva": "0x1b4d538",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAimAt@@"
+      },
+      {
+        "pointer": "0x259b3108b40",
+        "vtableRva": "0x1c43a28",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntSwarmCombat@@"
+      },
+      {
+        "pointer": "0x259df6764f8",
+        "vtableRva": "0x1c59038",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntSeverable@@"
+      },
+      {
+        "pointer": "0x259df679bd0",
+        "vtableRva": "0x1c36418",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntPatrolClient@@"
+      },
+      {
+        "pointer": "0x259df58d7f0",
+        "vtableRva": "0x1c4d9a8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAimAssist@@"
+      },
+      {
+        "pointer": "0x259df8ae0b0",
+        "vtableRva": "0x1cc4108",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntAIDecision@@"
+      },
+      {
+        "pointer": "0x259df67e1a0",
+        "vtableRva": "0x1b93a88",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAICombatAttack@@"
+      },
+      {
+        "pointer": "0x259df688df8",
+        "vtableRva": "0x1b65e48",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntVisualPenetrationCorrector@@"
+      },
+      {
+        "pointer": "0x259df0492e0",
+        "vtableRva": "0x1c55bb8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntLoot@@"
+      },
+      {
+        "pointer": "0x259df691030",
+        "vtableRva": "0x1b3bab8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntDamageDecal@@"
+      },
+      {
+        "pointer": "0x259df6922a8",
+        "vtableRva": "0x1b8c638",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAISensoryDeprivator@@"
+      },
+      {
+        "pointer": "0x259df6961a0",
+        "vtableRva": "0x1b820d8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAICharacterDescription@@"
+      },
+      {
+        "pointer": "0x259df6979f0",
+        "vtableRva": "0x1b65ad8",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntVersus@@"
+      },
+      {
+        "pointer": "0x259b311a200",
+        "vtableRva": "0x1c57778",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntRetargeting@@"
+      },
+      {
+        "pointer": "0x259df9639f0",
+        "vtableRva": "0x1b98078",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntObservable@@"
+      },
+      {
+        "pointer": "0x259df967800",
+        "vtableRva": "0x1c59ac8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntMidnightProxy@@"
+      },
+      {
+        "pointer": "0x259df69c7d0",
+        "vtableRva": "0x1c51bf8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntLookAt@@"
+      },
+      {
+        "pointer": "0x259df434c00",
+        "vtableRva": "0x1c4e588",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAudio@@"
+      },
+      {
+        "pointer": "0x257bd706f10",
+        "vtableRva": "0x1b80408",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAnimEvolved@@"
+      },
+      {
+        "pointer": "0x259df34a9a0",
+        "vtableRva": "0x1c573e8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntReferenceFrame@@"
+      },
+      {
+        "pointer": "0x259df3716a0",
+        "vtableRva": "0x1c521b8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntLODDriver@@"
+      },
+      {
+        "pointer": "0x259df6d5188",
+        "vtableRva": "0x1b607e8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntFlammable@@"
+      },
+      {
+        "pointer": "0x259df6da8d0",
+        "vtableRva": "0x1b99028",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAttributes@@"
+      },
+      {
+        "pointer": "0x259df6dd808",
+        "vtableRva": "0x1b8a588",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntAIReflex@@"
+      },
+      {
+        "pointer": "0x259df6f1280",
+        "vtableRva": "0x1b95308",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntAIKnowledge@@"
+      },
+      {
+        "pointer": "0x259df7504e0",
+        "vtableRva": "0x1b84bc8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntAIBarks_NPC@@"
+      },
+      {
+        "pointer": "0x259df759a18",
+        "vtableRva": "0x1b640a8",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntCorpsePossession@@"
+      },
+      {
+        "pointer": "0x259df75d080",
+        "vtableRva": "0x1b641a8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntNPCPossession@@"
+      },
+      {
+        "pointer": "0x259df767940",
+        "vtableRva": "0x1c54008",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntPhysicsSystemEvolved@@"
+      },
+      {
+        "pointer": "0x259df77aa08",
+        "vtableRva": "0x1c561f8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2000000a",
+        "type": ".?AVarkCpntNPCInteraction@@"
+      },
+      {
+        "pointer": "0x259c9a97990",
+        "vtableRva": "0x1c51588",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntHealthEvolved@@"
+      },
+      {
+        "pointer": "0x259df77c580",
+        "vtableRva": "0x1b8c9d8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa800006a",
+        "type": ".?AVarkCpntAISensor_SmartObject@@"
+      },
+      {
+        "pointer": "0x259df77e480",
+        "vtableRva": "0x1b4eb08",
+        "owner": "0x259df294ce0",
+        "flags": "0xa800006a",
+        "type": ".?AVarkCpntAISensor_Psychic@@"
+      },
+      {
+        "pointer": "0x259df77fd40",
+        "vtableRva": "0x1b4e968",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Proximity@@"
+      },
+      {
+        "pointer": "0x259df8be0a0",
+        "vtableRva": "0x1b8c8c8",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAISensor_Combat@@"
+      },
+      {
+        "pointer": "0x259df78c9e8",
+        "vtableRva": "0x1b95f58",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Audio@@"
+      },
+      {
+        "pointer": "0x259df8280b0",
+        "vtableRva": "0x1cb5f48",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Vicinity@@"
+      },
+      {
+        "pointer": "0x259df8299a8",
+        "vtableRva": "0x1b966f8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Touch@@"
+      },
+      {
+        "pointer": "0x259df82b4f8",
+        "vtableRva": "0x1b4f1b8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Spatial@@"
+      },
+      {
+        "pointer": "0x259df831170",
+        "vtableRva": "0x1b96df8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAISensor_Vision@@"
+      },
+      {
+        "pointer": "0x259df834b88",
+        "vtableRva": "0x1b95968",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIReasoner_Attention@@"
+      },
+      {
+        "pointer": "0x259df83e810",
+        "vtableRva": "0x1b4e458",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIReasoner_WallOfLight@@"
+      },
+      {
+        "pointer": "0x259df840780",
+        "vtableRva": "0x1b4e058",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000006a",
+        "type": ".?AVarkCpntAIReasoner_Acknowledgement@@"
+      },
+      {
+        "pointer": "0x259df8426b8",
+        "vtableRva": "0x1ce0278",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIReasoner_Suspicion@@"
+      },
+      {
+        "pointer": "0x259df844688",
+        "vtableRva": "0x1b89c68",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAIReasoner_Search@@"
+      },
+      {
+        "pointer": "0x259df849078",
+        "vtableRva": "0x1b89608",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAIReasoner_Relationship@@"
+      },
+      {
+        "pointer": "0x259df84a128",
+        "vtableRva": "0x1b46de8",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIReasoner_PersonalSpace@@"
+      },
+      {
+        "pointer": "0x259df84bd78",
+        "vtableRva": "0x1b892f8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAIReasoner_Panic@@"
+      },
+      {
+        "pointer": "0x259df84dd80",
+        "vtableRva": "0x1b46b28",
+        "owner": "0x259df294ce0",
+        "flags": "0xa000000a",
+        "type": ".?AVarkCpntAIReasoner_Greetings@@"
+      },
+      {
+        "pointer": "0x259df852ac8",
+        "vtableRva": "0x1b39248",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAIReasoner_Equipment@@"
+      },
+      {
+        "pointer": "0x259df8546f8",
+        "vtableRva": "0x1b8b8c8",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAIReasoner_Combat@@"
+      },
+      {
+        "pointer": "0x259df85af80",
+        "vtableRva": "0x1b89178",
+        "owner": "0x259df294ce0",
+        "flags": "0x20000002",
+        "type": ".?AVarkCpntAIReasoner_Flee@@"
+      },
+      {
+        "pointer": "0x259ca576390",
+        "vtableRva": "0x1cecfb8",
+        "owner": "0x259df294ce0",
+        "flags": "0x28000002",
+        "type": ".?AVarkCpntAIInvestigateSpot@@"
+      },
+      {
+        "pointer": "0x259ca5763d0",
+        "vtableRva": "0x1cecfb8",
+        "owner": "0x259df294ce0",
+        "flags": "0x2800006a",
+        "type": ".?AVarkCpntAIInvestigateSpot@@"
+      },
+      {
+        "pointer": "0x259df8c0c78",
+        "vtableRva": "0x1ce6978",
+        "owner": "0x259df294ce0",
+        "flags": "0x28000002",
+        "type": ".?AVarkCpntAIDistraction_Dynamic@@"
+      },
+      {
+        "pointer": "0x259df06db98",
+        "vtableRva": "0x1b8bfd8",
+        "owner": "0x259df294ce0",
+        "flags": "0x28000002",
+        "type": ".?AVarkCpntAISearchSpot_Dynamic@@"
+      }
+    ]
+  },
+  "authority": {
+    "readOnly": true,
+    "pid": 25728,
+    "scanMs": 47,
+    "ineligible": 63,
+    "unavailable": 1,
+    "unbound": 1,
+    "entries": []
+  }
+}

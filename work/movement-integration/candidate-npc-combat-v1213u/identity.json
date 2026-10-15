@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-15T07:06:03.320325+02:00",
+  "dll": "AF6FE84D65E27A483D6D46C396F1C702324286F78B533319BF68492C01708003",
+  "probe": "AF9368BB21E332B5642C44D2BEBDB3D9073AD0A75C7FFDF6D683CC95D0252BD7",
+  "previous": "candidate-npc-combat-v1213t",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213u on 1213t (#46): client paired takedowns on host-owned NPCs. NPC control messages PairedHold/PairedKnockout (variant in reserved: choke 1-3, lethal 5; unit-tested). Client: reads its own native choke/assassination scene; while it targets a bound replica the replica keeps its native victim animation (host poses not applied), it sends PairedHold every 200 ms and PairedKnockout once at choke_win (3), and a natively unconscious replica keeps its channel. Host (npc_paired.h): PairedHold with the partner within 3 m pauses the NPC AI with the native AI lease (lapses 1.5 s after the last hold); PairedKnockout releases it and applies sleep_damage (probe 1251b drowsy collapse). Lethal holds only; death rides the assassination relay."
+}
