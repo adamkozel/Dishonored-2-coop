@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T21:17:46.024022+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T21:39:39.946516+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -779,7 +779,7 @@ Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's c
 - [in_game_recordings: use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4](<../../../../work/natural-moveset/use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4>)
 ## read_object_or_note
 
-Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).
+Audit 1287 (1214at): while the source reads a note the partner holds the held-object reach and returns to idle afterwards, in both roles (coverage-v1286e); accepted functionally, a two-handed reading pose is polish. Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).
 
 ````json
 {
@@ -791,7 +791,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the 
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_note_visible_root_hold_and_resume_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_held_reach_reading",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "read object or note",
@@ -804,7 +804,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the 
     "activity_counter_read_book_out_walk"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).",
+  "notes": "Audit 1287 (1214at): while the source reads a note the partner holds the held-object reach and returns to idle afterwards, in both roles (coverage-v1286e); accepted functionally, a two-handed reading pose is polish. Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -830,7 +830,8 @@ Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the 
     "native-interactions-corvo-note-v685/result.json",
     "../../work/movement-integration/readable-resume-audit-v684.json",
     "native-interactions-emily-note-v683/result.json",
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/reading-audit-v1287.json"
   ]
 }
 ````
@@ -839,6 +840,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the 
 - [evidence: ../../work/movement-integration/readable-resume-audit-v684.json](<../../../../work/movement-integration/readable-resume-audit-v684.json>)
 - [evidence: native-interactions-emily-note-v683/result.json](<../../../../work/natural-moveset/native-interactions-emily-note-v683/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/reading-audit-v1287.json](<../../../../work/movement-integration/reading-audit-v1287.json>)
 - [in_game_recordings: native-interactions-corvo-note-v685/note-source.mp4](<../../../../work/natural-moveset/native-interactions-corvo-note-v685/note-source.mp4>)
 - [in_game_recordings: native-interactions-corvo-note-v685/note-observer.mp4](<../../../../work/natural-moveset/native-interactions-corvo-note-v685/note-observer.mp4>)
 - [in_game_recordings: native-interactions-emily-note-v683/note-source.mp4](<../../../../work/natural-moveset/native-interactions-emily-note-v683/note-source.mp4>)

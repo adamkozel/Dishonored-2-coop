@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-15T21:39:36.706435+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214ar",
+    "candidate-npc-combat-v1214as",
+    "candidate-npc-combat-v1214at"
+  ],
+  "takes": [
+    {
+      "take": "coverage-v1286a",
+      "candidate": "candidate-npc-combat-v1214ar",
+      "passed": false,
+      "failure": "2 case(s) failed: host-note: Ground vantage produces unsupported steep pitch | client-note: Ground vantage produces unsupported steep pitch"
+    },
+    {
+      "take": "coverage-v1286b",
+      "candidate": "candidate-npc-combat-v1214ar",
+      "passed": false,
+      "failure": "2 case(s) failed: host-note: Partner reading hold not presented | client-note: Partner reading hold not presented"
+    },
+    {
+      "take": "coverage-v1286c",
+      "candidate": "candidate-npc-combat-v1214as",
+      "passed": false,
+      "failure": "1 case(s) failed: host-note: Partner reading hold not presented"
+    },
+    {
+      "take": "coverage-v1286d",
+      "candidate": "candidate-npc-combat-v1214at",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "coverage-v1286e",
+      "candidate": "candidate-npc-combat-v1214at",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1286a): from 0.8 m the table note needed an unsupported steep aim pitch; the source stands 1.3 m away from 1286b on.",
+    "Confirmed runtime (1286b on 1214ar): both sources entered the native reading UI (logic 4) but the partner showed no reading hold.",
+    "Confirmed runtime (1286c on 1214as, lease diagnostic): the movement resume suspends the bank and the shadow stream for any menu, the partner's ReadNote included, so a bank lease cannot cover reading.",
+    "Fix 1214at: the reading hold depends only on the readable retention and a loaded bank; the apply draws the held-object reach (use variant 6, held amount) over the frozen body without a lease. Presentation only: no root, action or damage is sampled from the menu.",
+    "Confirmed runtime (1286d/1286e on 1214at): the reading hold is presented in both roles (12-13 samples at full weight) and clears when reading ends.",
+    "Visual (1286e, camera 1.5 m above the source's actual feet): the partner raises the arm into the held reach while reading and returns to idle afterwards, in both roles. Accepted (functional); a two-handed reading pose (the sword may still be in hand) is polish."
+  ],
+  "complete": true,
+  "scope": "#11 read_object_or_note: partner reading hold while the source reads a note."
+}

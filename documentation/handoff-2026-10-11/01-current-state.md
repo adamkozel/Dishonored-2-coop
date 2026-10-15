@@ -5,7 +5,8 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1214aq ([identity](../../work/movement-integration/candidate-npc-combat-v1214aq/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-15. Live candidate-npc-combat-v1214at ([identity](../../work/movement-integration/candidate-npc-combat-v1214at/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Reading a note (#11, 1214at, [audit 1287](../../work/movement-integration/reading-audit-v1287.json)):** while the partner reads, they hold a reach instead of standing frozen; accepted in both roles ([chapter 94](94-visual-sweep-counterattack-and-gestures.md#reading-a-note-1214ar1214at-audit-1287)).
 - **Crouched heavy and map-load recovery views (#11, [audit 1286](../../work/movement-integration/views-audit-v1286.json)):** both accepted in both roles. The free camera hides the observer's own arms (1214aq), and the lab health hold is confirmed at runtime ([chapter 94](94-visual-sweep-counterattack-and-gestures.md#crouched-heavy-and-map-load-recovery-audit-1286)).
 - **Counter-kill parked (#9, [audit 1285](../../work/movement-integration/counter-parked-audit-v1285.json)):** Emily's counter-kill and the kick view stay open; the native god mode is stripped in this build. External research references are in [chapter 96](96-external-research-references.md).
 - **Free observer camera (#61, 1214an, [audit 1284](../../work/movement-integration/free-camera-audit-v1284.json)):** the lab camera can now be held at any point (`coop_observer_camera hold_at`) without moving the observer's body. Visual takes use it with `-FreeCam` ([chapter 92](92-native-use-interactions.md)).

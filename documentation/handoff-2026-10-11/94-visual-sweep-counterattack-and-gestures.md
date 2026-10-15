@@ -68,6 +68,15 @@ Harness [v1258](../../work/natural-moveset/make_counterattack_v1258.py) and its 
 - Emily's counter-kill is parked on #9. Most takes never got a guard swing at her clone. The native god mode is stripped ([chapter 96](96-external-research-references.md)), so 1214ap adds a lab health hold (`coop_player_health_hold`), built but not yet runtime-verified.
 - **Kick:** the free-camera kick take produced no native kick (`throwhit`) in 8 close attacks per role, so the kick view stays open.
 
+## Reading a note (1214ar–1214at, audit 1287)
+
+While the partner reads a note (native ReadNote4), the readable retention keeps its body visible and frozen. Sweep 1260 rejected this item because the partner made no reading gesture.
+- **Why a lease can't cover it (confirmed runtime, take 1286c):** the movement resume suspends the bank and the shadow stream for any menu, the partner's note included.
+- **Fix (1214at):** in exactly that retained state, the bank's apply draws the existing held-object reach (use variant 6, held amount) over the frozen body. Nothing is sampled from the menu, and root, actions and damage stay untouched.
+- **Take [coverage-v1286e](../../work/natural-moveset/coverage-v1286e):** the partner raises the arm into the held reach while reading and returns to idle afterwards, in both roles.
+  - **Accepted (functional).** A two-handed reading pose is polish.
+  - [Audit 1287](../../work/movement-integration/reading-audit-v1287.json).
+
 ## Crouched heavy and map-load recovery (audit 1286)
 
 [Audit 1286](../../work/movement-integration/views-audit-v1286.json):

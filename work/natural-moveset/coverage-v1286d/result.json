@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "note",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner reading hold presented in 12 samples"
+      ],
+      "camera": [
+        -28.7156,
+        -146.354,
+        68.0
+      ],
+      "lowWeightSamples": 2,
+      "readingSamples": 12,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "note",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner reading hold presented in 12 samples"
+      ],
+      "camera": [
+        -28.7156,
+        -146.354,
+        68.0
+      ],
+      "lowWeightSamples": 2,
+      "readingSamples": 12,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}
