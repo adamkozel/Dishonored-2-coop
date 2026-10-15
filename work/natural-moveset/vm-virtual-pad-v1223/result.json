@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "Lab VM simulated controller (#24): with a ViGEmBus virtual Xbox 360 pad present in the guest, the lab proxy's simulated controller drives Dishonored 2 inside the VM.",
+  "candidate": "candidate-npc-combat-v1213e (guest workspace in sync)",
+  "setup": "Signed ViGEmBus 1.21.442 package copied from the host DriverStore (catalog signature Valid); vigem_setup registered Nefarius\ViGEmBus\Gen1; vigem_pad plugged one virtual Xbox 360 pad (VID 045E PID 028E). Guest XInput pad 0: connected (type 1, subtype 1); devices: Xbox 360 Controller for Windows, HID-compliant game controller.",
+  "results": {
+    "menuToGameplayWithControllerOnly": true,
+    "leftStick1500ms_m": 5.40,
+    "before": "same test without a controller device moved 0.00 m (take two-account-session-v1221, keyboard W 6.27 m)"
+  },
+  "note": "The game enumerates controllers at launch: start the VM instance after the pad exists (Enable-D2LabVMPad.ps1 registers a logon task; Test-D2LabVM.ps1 -Repair checks it).",
+  "visualAcceptance": "not applicable"
+}
