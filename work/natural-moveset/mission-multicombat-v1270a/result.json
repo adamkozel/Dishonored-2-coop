@@ -1,0 +1,30 @@
+{
+  "scope": "Stage 4 sustained multi-enemy fight on Edge of the World: both players fight the Wall of Light guard group at once under the product controller; guard outcomes compared in both worlds, combat session and player health sampled; Dunwall fixture restored.",
+  "failure": null,
+  "passed": true,
+  "cases": [
+    {
+      "guards": 1,
+      "outcomes": [
+        {
+          "spawner": "script_spawner_streets_windmill_guard_01",
+          "host": "dead",
+          "client": "dead"
+        }
+      ],
+      "samples": 75,
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "1 of 1 guards defeated; every guard ends in the same state in both worlds"
+      ],
+      "stuck": 0,
+      "hostCommitted": 1,
+      "clientRequests": 0,
+      "minHealth": {
+        "host": 70.0,
+        "client": 70.0
+      }
+    }
+  ]
+}
