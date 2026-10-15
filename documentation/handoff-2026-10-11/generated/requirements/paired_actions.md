@@ -1,10 +1,10 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T08:00:08.819338+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
-604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.
+Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.
 
 ````json
 {
@@ -15,7 +15,7 @@ Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.js
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "partial_native_steam_fast_back_lethal_actor",
+  "runtime_binding": "partial_census_lethals_back_drop_slide_finishers_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 927,
   "priority": 3,
@@ -29,7 +29,7 @@ Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.js
     "paired_fast_back_female"
   ],
   "deliverable_kind": "animation",
-  "notes": "604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
+  "notes": "Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -52,10 +52,14 @@ Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.js
     "lethal-network-emily-v605/observer.mp4"
   ],
   "complete": false,
-  "visual_accepted": false
+  "visual_accepted": false,
+  "evidence": [
+    "../movement-integration/takedown-variants-audit-v1257.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [in_game_recordings: partner-sword-contexts-host-v392/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v392/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-rear-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-rear-standing.mp4>)
@@ -75,7 +79,7 @@ Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.js
 - [in_game_recordings: lethal-network-emily-v605/observer.mp4](<../../../../work/natural-moveset/lethal-network-emily-v605/observer.mp4>)
 ## nonlethal_takedown_front_back_sides
 
-Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
+Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
 
 ````json
 {
@@ -86,7 +90,7 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "partial_native_steam_rear_choke_actor_and_breakout",
+  "runtime_binding": "partial_census_chokes_back_both_roles_sides_emily_front_corvo",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 927,
   "priority": 3,
@@ -107,7 +111,7 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
     "nonlethal_right_release_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
+  "notes": "Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -143,12 +147,14 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
   "complete": false,
   "visual_accepted": false,
   "evidence": [
-    "../movement-integration/crouched-takedown-audit-v1246.json"
+    "../movement-integration/crouched-takedown-audit-v1246.json",
+    "../movement-integration/takedown-variants-audit-v1257.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [in_game_recordings: partner-takedown-exclusion-host-v388/host-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-host-v388/host-rear-choke.mp4>)
 - [in_game_recordings: partner-takedown-exclusion-client-v389/client-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-client-v389/client-rear-choke.mp4>)
 - [in_game_recordings: ordinary-guard-choke-control-v390/host-rear-choke.mp4](<../../../../work/natural-moveset/ordinary-guard-choke-control-v390/host-rear-choke.mp4>)
@@ -232,7 +238,7 @@ Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. 
 - [in_game_recordings: crouched-takedown-observed-v1247d/client-lethal-observer.mp4](<../../../../work/natural-moveset/crouched-takedown-observed-v1247d/client-lethal-observer.mp4>)
 ## aerial_drop_kill
 
-Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.
+Audit 1257 (1214e+, product controller, natural guard AI): assassination_drop_back (census id 19) is presented by the partner and the death is shared in both source roles (victims 0.0 m apart). Visual accepted from both windows as functional (fast-back stab donor normalized to the native clock). Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.
 
 ````json
 {
@@ -243,8 +249,8 @@ Revision required: actor/target overlap during impact, sword contact and recover
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_drop_lethal_presented_and_shared_both_roles_product",
+  "visual_validation": "accepted_functional_both_roles_fast_back_donor",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "aerial drop kill",
@@ -252,16 +258,25 @@ Revision required: actor/target overlap during impact, sword contact and recover
     "aerial_lethal_back_study"
   ],
   "deliverable_kind": "animation",
-  "notes": "Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
+  "notes": "Audit 1257 (1214e+, product controller, natural guard AI): assassination_drop_back (census id 19) is presented by the partner and the death is shared in both source roles (victims 0.0 m apart). Visual accepted from both windows as functional (fast-back stab donor normalized to the native clock). Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "takedown-variants-v1254b/drop-client-lethal-observer.mp4",
+    "takedown-variants-v1254b/drop-host-lethal-observer.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/takedown-variants-audit-v1257.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [in_game_recordings: takedown-variants-v1254b/drop-client-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-client-lethal-observer.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/drop-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-host-lethal-observer.mp4>)
 ## aerial_nonlethal_takedown
 
-Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.
+Audit 1257: choke_drop_back (census id 58) is presented and the knockout shared in both source roles (the client asks the host for the knockout when the scene begins; 0.0-0.01 m). Visual accepted from both windows as functional (choke donor). Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.
 
 ````json
 {
@@ -272,8 +287,8 @@ Revision required: initial body collision and weight transfer need work. Native 
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_drop_choke_presented_and_knockout_shared_both_roles_product",
+  "visual_validation": "accepted_functional_both_roles_choke_donor",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "aerial nonlethal takedown",
@@ -281,16 +296,25 @@ Revision required: initial body collision and weight transfer need work. Native 
     "aerial_nonlethal_back_study"
   ],
   "deliverable_kind": "animation",
-  "notes": "Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
+  "notes": "Audit 1257: choke_drop_back (census id 58) is presented and the knockout shared in both source roles (the client asks the host for the knockout when the scene begins; 0.0-0.01 m). Visual accepted from both windows as functional (choke donor). Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "takedown-variants-v1254b/drop-client-choke-observer.mp4",
+    "takedown-variants-v1254b/drop-host-choke-observer.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/takedown-variants-audit-v1257.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [in_game_recordings: takedown-variants-v1254b/drop-client-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-client-choke-observer.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/drop-host-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-host-choke-observer.mp4>)
 ## sliding_takedown
 
-Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.
+Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presented and shared in both source roles; slide takedowns keep physical stance 5 inside the paired state (0.0-0.29 m). Visual accepted from both windows as functional. Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.
 
 ````json
 {
@@ -301,8 +325,8 @@ Rear nonlethal prototype only. Revision required: initial sweep/body overlap, re
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_slide_choke_and_lethal_presented_and_shared_both_roles_product",
+  "visual_validation": "accepted_functional_both_roles_choke_and_lethal",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "sliding takedown",
@@ -310,13 +334,26 @@ Rear nonlethal prototype only. Revision required: initial sweep/body overlap, re
     "sliding_nonlethal_back_study"
   ],
   "deliverable_kind": "animation",
-  "notes": "Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.",
+  "notes": "Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presented and shared in both source roles; slide takedowns keep physical stance 5 inside the paired state (0.0-0.29 m). Visual accepted from both windows as functional. Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "takedown-variants-v1254b/slide-client-lethal-observer.mp4",
+    "takedown-variants-v1254b/slide-host-lethal-observer.mp4",
+    "takedown-variants-v1254b/slide-client-choke-observer.mp4",
+    "takedown-variants-v1254b/slide-host-choke-observer.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/takedown-variants-audit-v1257.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [in_game_recordings: takedown-variants-v1254b/slide-client-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-client-lethal-observer.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/slide-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-host-lethal-observer.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/slide-client-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-client-choke-observer.mp4>)
+- [in_game_recordings: takedown-variants-v1254b/slide-host-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-host-choke-observer.mp4>)
 ## wall_and_window_variants
 
 Rear window lethal and nonlethal entry/hold/finish/release studies. Native victim timing accompanies authored full-body stepping and pulling. Neutral sill clearance was checked visually. Fingers, blade contact, native window geometry, ragdoll continuation and live paired control remain unverified. Wall and other window directions remain missing.

@@ -225,6 +225,12 @@ inline bool nativePlayerGroundAssassinationStates(const NativePlayerStates& s,st
     return s.player.logic==1&&s.defaultMode&&(s.player.current==0||s.player.current==1)&&s.active.size()==1&&
         s.active[0].id==13&&s.active[0].vtable==base+0x1c83468;
 }
+// Take 1254a, both roles: a slide takedown runs its exclusive Assassination13 (or
+// Choke41) scene while the physical stance stays sliding (5).
+inline bool nativePlayerSlideTakedownStates(const NativePlayerStates& s,std::uintptr_t base){
+    return s.player.logic==1&&s.defaultMode&&s.player.current==5&&s.active.size()==1&&
+        ((s.active[0].id==13&&s.active[0].vtable==base+0x1c83468)||(s.active[0].id==41&&s.active[0].vtable==base+0x1c77c18));
+}
 inline bool nativePlayerGroundPairedStates(const NativePlayerStates& s,std::uintptr_t base){
     return nativePlayerGroundChokeStates(s,base)||nativePlayerGroundAssassinationStates(s,base);
 }
@@ -259,7 +265,7 @@ inline bool nativePlayerGroundLootStates(const NativePlayerStates& s,std::uintpt
 inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,std::uint32_t& motion) {
     if(nativePlayerGroundLootStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerAutoCrouchStates(s,base)){motion=1;return true;}
-    if(nativePlayerGroundPairedStates(s,base)){motion=0;return true;}
+    if(nativePlayerGroundPairedStates(s,base)||nativePlayerSlideTakedownStates(s,base)){motion=0;return true;}
     if(nativePlayerGroundTrapStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundHeartStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundDrawRequestStates(s,base)){motion=s.player.current;return true;}

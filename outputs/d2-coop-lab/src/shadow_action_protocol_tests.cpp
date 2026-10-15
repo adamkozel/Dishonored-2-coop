@@ -97,8 +97,28 @@ void chokePresentationTests(){
     check(!nativePlayerGroundChokeStates(native,base)&&!nativePresentationFallbackGround(native,base),"lethal identity does not admit choke or generic fallback");
     native.player.current=1;check(nativePlayerGroundAssassinationStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0,"observed crouched fast-back lethal (1244b) keeps its crouched stance");
     native.player.current=12;check(!nativePlayerGroundAssassinationStates(native,base),"unobserved assassination stance refused");
+    native.player.current=5;check(!nativePlayerGroundAssassinationStates(native,base)&&nativePlayerSlideTakedownStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0&&
+          nativeTakedownStates(33,native,base)&&!nativeTakedownStates(5,native,base),"slide lethal (1254a) keeps sliding stance 5 in Assassination13; only census slide-capable ids admit it");
+    native.player.current=0;check(nativeTakedownStates(110,native,base)&&!nativeTakedownStates(92,native,base),"four-binding finishers (1256a) run in Assassination13, generic ones do not");
+    native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
+    check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",2200)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
+          ChokePresentation::clip(6)==ChokePresentation::clip(5),"observed assassination_back (Corvo 1933 ms in 1248j, Emily 2200 ms in 1248k) presented with the fast-back donor");
+    {const auto drop=nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1800),
+         slide=nativeChokeVariant("midnight/gameplay/player/base/choke/choke_slide_front.midnightscene","Npc",1566),
+         window=nativeChokeVariant("midnight/gameplay/player/base/choke/choke_window_left.midnightscene","Npc",1166);
+     check(drop>6&&nativeTakedownLethal(drop)&&ChokePresentation::clip(drop)==ChokePresentation::clip(5)&&
+           slide>6&&nativeTakedownKind(slide)==3&&ChokePresentation::clip(slide)==ChokePresentation::clip(3)&&window>6&&nativeTakedownKind(window)==3&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back_carry_corpse.midnightscene","npc",1333)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_ready.midnightscene","Scene_1",366)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1801)&&
+           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","Npc",1800),"census takedown scenes admitted by exact asset, subscene and duration; carry and drop-ready phases are not takedowns");}
+    {const auto right=nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_right.midnightscene","Scene_1",1333),
+         torso=nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_torso_fast_b.midnightscene","npc",1500);
+     check(right==92&&nativeTakedownFatality(right)&&nativeTakedownLethal(right)&&nativeTakedownArms(right)==1&&
+           torso>92&&nativeTakedownFatality(torso)&&nativeTakedownArms(torso)==2&&!nativeTakedownFatality(5)&&nativeTakedownArms(5)==2&&
+           !nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_double_kill.midnightscene","Emily",2166),"census-1255 fatalities are lethal scenes with their bound arms; the double kill binds no AI group");}
     ChokePresentation t;ChokePresentation::Sample out{};float amount=0;
     check(t.push({100,1,1,200,600,31,41})&&t.push({140,1,1,240,600,31,41}),"confirmed choke clock accepted");
     check(t.sample(120,out,amount)&&std::fabs(amount-220.f/600)<1e-6f,"choke uses delayed native clock");
@@ -374,13 +394,14 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");
     }
     {auto choke=p;choke.state=21;choke.swordState=1;choke.chokeVariant=1;choke.chokeDurationMs=600;choke.chokeSpawner=31;choke.chokeDefinition=41;
-      for(unsigned v=1;v<=5;++v){choke.swordState=v==5?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=ChokePresentation::duration(v);check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      for(unsigned v=1;v<=kNativeTakedownSceneCount;++v){choke.swordState=nativeTakedownLethal(v)?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=kNativeTakedownSubscenes[kNativeTakedownScenes[v-1].first].durationMs;check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      choke.swordState=2;choke.chokeVariant=5;choke.chokeDurationMs=1333;
       auto bad=choke;bad.version=68;check(!validShadowAction(bad,c,h),"previous combat wire refused");
       bad=choke;bad.chokeSpawner=0;check(!validShadowAction(bad,c,h),"targetless choke refused");
       bad=choke;bad.swordState=1;check(!validShadowAction(bad,c,h),"lethal paired scene requires presented sword");
       bad=choke;bad.trapHeld=1;check(!validShadowAction(bad,c,h),"choke cannot conceal a held gadget");
       bad=choke;bad.state=18;check(!validShadowAction(bad,c,h),"unbound fallback cannot carry choke event");
-      bad=choke;bad.chokeTimeMs=1801;check(!validShadowAction(bad,c,h),"choke native duration bound");
+      bad=choke;bad.chokeTimeMs=bad.chokeDurationMs+1;check(!validShadowAction(bad,c,h),"choke native duration bound");
     }
     {unsigned local=0;const unsigned start[]={217,17,200},wrap[]={910,44,866},equip[]={25,25,0},shifted[]={25,0,0};
       check(nativeTrapLocalClock(4,666,start,local)&&local==17,"recorded native ready-loop local clock");

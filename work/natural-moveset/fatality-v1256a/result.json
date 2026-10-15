@@ -1,0 +1,61 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: front-client-fatality: Native takedown not performed on the source (guard moved or noticed the source) | front-host-fatality: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "fatality",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "source": [
+          -45.2168,
+          -143.547,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T08:50:16.1661062+02:00",
+      "scenes": [],
+      "restored": true
+    },
+    {
+      "approach": "front",
+      "source": "host",
+      "kind": "fatality",
+      "observer": "client",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.8143,
+          -146.215,
+          66.4
+        ],
+        "source": [
+          -48.5914,
+          -150.051,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T08:51:12.8168606+02:00",
+      "scenes": [],
+      "restored": true
+    }
+  ],
+  "scope": "Sword-combat finishers (census-1255 fatalities) on a host-owned NPC under the product controller, both source roles: native finisher scene, partner phase, shared death and victim position; fixture restored after every case."
+}

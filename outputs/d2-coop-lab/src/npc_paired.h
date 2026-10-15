@@ -27,7 +27,7 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
         }
         return;
     }
-    if(c.pairedVariant>3)return; // a lethal is never a knockout
+    if(!npcPairedKnockoutVariant(c.pairedVariant))return; // only a knockout scene knocks out
     if(c.hostPairedLease){releaseNpcAiLease(c.lease);c.hostPairedLease=false;}
     NativeHealth before{},after{};
     if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c.lease.binding.npc.handle,before)||before.actor!=c.lease.binding.npc.actor){

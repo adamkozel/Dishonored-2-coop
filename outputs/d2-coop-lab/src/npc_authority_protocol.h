@@ -1,4 +1,5 @@
 #pragma once
+#include "native_takedown_scenes.h"
 #include "world_protocol.h"
 #include "body_retarget.h"
 #include "pose_interpolation.h"
@@ -7,7 +8,7 @@
 
 constexpr unsigned kNpcAuthorityMaxJoints=256;
 // 1213u (#46): PairedHold/PairedKnockout come from the client while ITS native
-// paired takedown (rear choke variants 1-3, fast-back lethal 5, carried in
+// paired takedown (a census-1253 takedown scene id of kind entry, loop, knockout or lethal, carried in
 // reserved) targets a host-owned NPC: the host holds that NPC's AI for the scene,
 // and knocks it out natively when the client's choke_win begins.
 // 1213v: Unconscious (host -> client): the host NPC is natively unconscious; the
@@ -16,7 +17,10 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // its paired takedown runs, so the host's held NPC plays the same victim motion.
 enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose};
 inline bool npcPoseKind(NpcAuthorityMessage k){return k==NpcAuthorityMessage::Pose||k==NpcAuthorityMessage::PairedPose;}
-inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5;}
+inline bool npcPairedVariant(std::uint32_t v){const auto k=nativeTakedownKind(v);return k&&k!=4;}
+// The client asks for the host knockout when its native knockout scene begins (choke_win,
+// or a single-scene drop/slide/window/shadow-walk choke).
+inline bool npcPairedKnockoutVariant(std::uint32_t v){return nativeTakedownKind(v)==3;}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
     std::uint32_t magic=0x414e3244,build=0x67a50cde;
@@ -65,7 +69,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::Stop:return h.size==sizeof(CoopNpcControl)&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Pose:return h.size==npcPoseBytes(h.joints)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
-    case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&h.reserved<=3;
+    case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&npcPairedKnockoutVariant(h.reserved);
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;
     }return false;

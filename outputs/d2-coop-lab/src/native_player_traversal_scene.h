@@ -118,6 +118,9 @@ template<class Read> bool readNativePlayerPresentationStance(Read read,std::uint
     // rejected by the peer (takes 1245-1245c: ~8 packets, then the lab lease
     // retired the partner).
     if(states.player.current==12&&nativePlayerGroundChokeStates(states,base)){stance=0;return true;}
+    // Take 1254a: a slide takedown keeps physical stance 5; its paired scene is a
+    // standing presentation like the other takedowns.
+    if(nativePlayerSlideTakedownStates(states,base)){stance=0;return true;}
     NativePlayerTraversalScene traversal{};
     if(states.player.current==2&&readNativePlayerTraversalScene(read,base,states,traversal)&&
        traversal.variant==2&&traversal.asset=="midnight/gameplay/player/base/mobility/mantle_low_crouch.midnightscene"){

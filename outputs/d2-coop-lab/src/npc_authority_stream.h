@@ -413,7 +413,7 @@ void serviceNpcStream(ULONGLONG tick){
             if(!c.localPaired){c.localPaired=true;++npcPairedLocal;c.pairedResult="client_paired";}
             c.pairedVariant=pairedVariant;c.pairedUntil=tick+1500;
             if(tick-c.pairedHoldAt>=200){c.pairedHoldAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedHold,pairedVariant);}
-            if(pairedVariant==3&&!c.pairedKnockoutAt){c.pairedKnockoutAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedKnockout,3);c.pairedResult="client_knockout_sent";}
+            if(npcPairedKnockoutVariant(pairedVariant)&&!c.pairedKnockoutAt){c.pairedKnockoutAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedKnockout,pairedVariant);c.pairedResult="client_knockout_sent";}
         }else if(localRole&&c.localPaired&&!c.unconscious&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult="client_paired_ended";}
         if(!localRole)serviceHostNpcPaired(c,tick);
         if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}

@@ -155,3 +155,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Stage 7: release packaging, native Steam sessions, product mode, join-follow and soak (candidates 1171–1193)](90-release-packaging-and-steam-sessions.md)
 - [Product partner-presentation recovery: pause, modal, load, restart; bank stall, stream handshake, congestion, usable hellos (candidates 1203–1203f)](91-product-presentation-recovery.md)
 - [Stage 3: native use interactions (state 75 -> authored reach), window/counter/knockdown investigations (candidates 1213–1213b)](92-native-use-interactions.md)
+- [Stage 3: takedown census, drop/slide/side variants and sword finishers (candidates 1214b–1214g)](93-takedown-census-variants-and-finishers.md)
