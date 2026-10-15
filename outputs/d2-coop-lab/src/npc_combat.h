@@ -359,15 +359,28 @@ bool npcCombatRetireBeforeDeath(NpcAuthorityChannel& c){
     c.corpse=true;c.corpseAt=GetTickCount64();c.corpseUntil=c.corpseAt+8000;c.result=localRole?"client_corpse":"host_corpse";npcCombat.preDeathReleased+=c.lease.released;
     return !c.lease.references&&!c.lease.lost&&!c.lease.retired;
 }
+std::uint64_t npcCombatReadMaximumChanged=0;const char* npcCombatReadFailure="none";unsigned npcCombatReadWords[4]{},npcCombatReadGeneration=0;bool npcCombatReadTerminal=false;
 bool npcCombatReadResult(NpcAuthorityChannel& c,const NativeHealth& before,void* result,NativeHealth& after,float& inflicted,bool terminal,bool allowZero=false){
     unsigned protectedRegions=0,generation=0;float mana=0;const auto r=reinterpret_cast<std::uintptr_t>(result);const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     npcCombatNativeStage="result_or_health_identity";
     memoryRead(r,&npcCombatNativeInflicted,4);memoryRead(before.component+0x20,&npcCombatNativeAfter,4);memoryRead(before.component+0x18,&npcCombatNativeGeneration,4);
-    if(!memoryRead(r,&inflicted,4)||!std::isfinite(inflicted)||(allowZero?inflicted<0:inflicted<=0)||!memoryRead(r+4,&mana,4)||mana!=0||
-       !memoryRead(r+8,&protectedRegions,4)||protectedRegions||!readNativeHealth(memoryRead,base,before.handle,after)||
-       after.game!=before.game||after.actor!=before.actor||after.component!=before.component||after.declaration!=before.declaration||
-       !memoryRead(after.component+0x18,&generation,4)||generation!=c.lease.binding.healthGeneration||after.maximum!=before.maximum)return false;
-    if(!terminal)return after.current>0&&npcCombatClose(before.current-after.current,inflicted)&&npcCombatIdentity(c,after);
+    // 1214s: which result condition failed (take 1271h: a client stab on an unconscious
+    // guard failed here on the host after the native kill).
+    memoryRead(r,npcCombatReadWords,sizeof(npcCombatReadWords));npcCombatReadTerminal=terminal;npcCombatReadGeneration=c.lease.binding.healthGeneration;
+    const auto fail=[](const char* why){npcCombatReadFailure=why;return false;};
+    if(!memoryRead(r,&inflicted,4)||!std::isfinite(inflicted)||(allowZero?inflicted<0:inflicted<=0))return fail("inflicted");
+    if(!memoryRead(r+4,&mana,4)||mana!=0)return fail("mana");
+    if(!memoryRead(r+8,&protectedRegions,4)||protectedRegions)return fail("protected_regions");
+    if(!readNativeHealth(memoryRead,base,before.handle,after))return fail("health_read");
+    if(after.game!=before.game||after.actor!=before.actor||after.component!=before.component)return fail("health_identity");
+    if(after.declaration!=before.declaration)return fail("health_declaration");
+    if(!memoryRead(after.component+0x18,&generation,4)||generation!=c.lease.binding.healthGeneration)return fail("health_generation");
+    // A native kill of an unconscious NPC changes its health maximum (take 1271i);
+    // only a terminal result may (the dead proof checks the post-death maximum).
+    if(after.maximum!=before.maximum&&!(terminal&&after.current==0))return fail("health_maximum");
+    if(after.maximum!=before.maximum)++npcCombatReadMaximumChanged;
+    if(!terminal)return (after.current>0||fail("lethal_not_terminal"))&&(npcCombatClose(before.current-after.current,inflicted)||fail("inflicted_mismatch"))&&(npcCombatIdentity(c,after)||fail("identity_after"));
+    npcCombatReadFailure="none";
     npcCombatNativeStage="await_native_death_completion";
     // This validates only the native damage result. Completion is separately
     // checked over following engine services, while this actor stays retired.
@@ -395,7 +408,10 @@ bool prepareNpcCombatSubtraction(void* component,float amount){
     if(a->reconcile&&!a->terminal){a->failed=true;return false;}
     if(a->terminal){
         npcCombatNativeStage="native_lethal_subtraction_ownership";
-        if(!npcCombatRetireBeforeDeath(*c)&&!(a->reconcile&&c->corpse)){a->failed=true;return false;}
+        // 1214u: an unconscious replica's AI lease is not clean to release (take 1271k:
+        // the client refused the host's committed kill); once the corpse is recorded
+        // the death proceeds, as for a reconciled death.
+        if(!npcCombatRetireBeforeDeath(*c)&&!((a->reconcile||c->unconscious)&&c->corpse)){a->failed=true;return false;}
         ++npcCombatLethalSubtractions;
     }
     return true;
@@ -789,7 +805,8 @@ void writeNpcCombat(){
     }fputs("]}",f);
     fprintf(f,",\"captured\":%llu,\"workerCaptured\":%llu,\"lastCaptureThread\":%lu,\"engineThread\":%lu,\"nativeAttempt\":{\"ownerFlags\":%u,\"declaration\":\"%s\",\"rawInfo\":\"",npcCombatCaptured.load(),npcCombatWorkerCaptured.load(),npcCombatLastCaptureThread,engineThread.load(),npcCombatLastOwnerFlags,npcCombatLastDecl.c_str());
     for(auto byte:npcCombatLastInfo)fprintf(f,"%02x",byte);fputs("\"}",f);
-    fprintf(f,",\"nativeOutcome\":{\"stage\":\"%s\",\"inflicted\":%.9g,\"after\":%.9g,\"healthGeneration\":%u}",npcCombatNativeStage,npcCombatNativeInflicted,npcCombatNativeAfter,npcCombatNativeGeneration);
+    fprintf(f,",\"nativeOutcome\":{\"stage\":\"%s\",\"inflicted\":%.9g,\"after\":%.9g,\"healthGeneration\":%u,\"readFailure\":\"%s\",\"readTerminal\":%s,\"bindingGeneration\":%u,\"resultWords\":[%u,%u,%u,%u],\"maximumChanged\":%llu}",npcCombatNativeStage,npcCombatNativeInflicted,npcCombatNativeAfter,npcCombatNativeGeneration,
+        npcCombatReadFailure,npcCombatReadTerminal?"true":"false",npcCombatReadGeneration,npcCombatReadWords[0],npcCombatReadWords[1],npcCombatReadWords[2],npcCombatReadWords[3],npcCombatReadMaximumChanged);
     const auto& fixture=npcCombatFixture;
     fprintf(f,",\"fixtureHoldsFrames\":%s,\"fixturePairedFrameReleases\":%llu",fixture.holdFrames?"true":"false",fixture.pairedFrameReleases);
     fprintf(f,",\"nativeSubtractions\":%llu,\"nativeLethalSubtractions\":%llu",npcCombatSubtractions,npcCombatLethalSubtractions);

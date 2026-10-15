@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Source killed the unconscious guard (attempt 3)",
+        "Unconscious guard killed by the client is dead in both worlds (share: source client_dead_from_host, observer reconcile_sent)",
+        "Victim ends 1.64 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.7711,
+          -145.354,
+          66.4
+        ],
+        "source": [
+          -48.5737,
+          -149.692,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T12:49:08.3030780+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 48763921,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x18b4503a1f0",
+          "actor": "0x18b4b1aabb0",
+          "attributes": "0x18b4aefb8e0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 48763937,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x2cbc530d280",
+          "actor": "0x2cbdabfe160",
+          "attributes": "0x2cbda9688d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "killAttempts": 3,
+      "killOutcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "deathShare": {
+        "source": "client_dead_from_host",
+        "observer": "reconcile_sent",
+        "sourceRelevance": {
+          "deadReconciled": 0,
+          "deadSent": 0,
+          "combatSharedDeaths": 0
+        },
+        "observerRelevance": {
+          "clientDeadApplied": 0,
+          "clientDeadAlready": 0,
+          "clientDeadRefused": 0,
+          "clientDeadLast": "none",
+          "reconcileDecl": [
+            0.0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "victimEnd": {
+        "source": [
+          -49.1943,
+          -145.245,
+          66.5771
+        ],
+        "observer": [
+          -47.7959,
+          -146.101,
+          66.4193
+        ]
+      },
+      "victimGapM": 1.64,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 93,
+        "rootsDelta": 177,
+        "bodyAppliedDelta": 175,
+        "positionBefore": [
+          -47.5428,
+          -144.639,
+          66.4
+        ],
+        "positionAfter": [
+          -47.7901,
+          -146.095,
+          66.4068
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 unshared death: the source chokes the Dunwall tutorial guard under the product controller, then kills the unconscious body; the guard must end dead in both worlds (1214n Dead reconciliation); fixture restored after every case."
+}
