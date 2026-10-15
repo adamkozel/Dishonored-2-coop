@@ -1,0 +1,128 @@
+{
+  "approach": "face",
+  "source": "client",
+  "kind": "counter",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 105 presented",
+    "Same outcome in both worlds: dead",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -39.662,
+      -145.325,
+      66.4
+    ],
+    "source": [
+      -43.0007,
+      -143.318,
+      66.4
+    ]
+  },
+  "counterStarted": true,
+  "inputAt": "2026-10-15T18:18:12.1263101+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/combat/sword_parry_hit_1.midnightscene|533",
+    "midnight/gameplay/player/base/combat/sword_parry_hit_2.midnightscene|533",
+    "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+    "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+    "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+    "midnight/gameplay/player/base/combat/sword_parry_win.midnightscene|500",
+    "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+    "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000",
+    "midnight/gameplay/player/base/fatalities/fatality_leftleg_medium_a.midnightscene|2333"
+  ],
+  "sceneIds": [
+    105
+  ],
+  "attempts": 8,
+  "final": {
+    "source": {
+      "tick": 12061046,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2684a877d30",
+      "actor": "0x2685f624770",
+      "attributes": "0x2685f3998d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 12061062,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2e8b720ce10",
+      "actor": "0x2e8c8eb5210",
+      "attributes": "0x2e8c8c318d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "victimEnd": {
+    "source": [
+      -39.1496,
+      -147.707,
+      66.6057
+    ],
+    "observer": [
+      -39.1495,
+      -147.707,
+      66.6057
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "host_authority",
+    "posesDelta": 225,
+    "rootsDelta": 0,
+    "bodyAppliedDelta": 0,
+    "positionBefore": [
+      -38.5144,
+      -146.472,
+      66.4
+    ],
+    "positionAfter": [
+      -39.1373,
+      -147.708,
+      66.606
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}

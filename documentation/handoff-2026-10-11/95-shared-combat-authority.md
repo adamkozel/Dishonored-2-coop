@@ -249,6 +249,33 @@ The combat JSON records each channel's retirement reason and shared health, plus
   - does not apply host poses to that body.
 - **Host.** While a `Carry` is fresh, the host accepts those poses for the unconscious or dead NPC and holds its physics animated, so its body follows the client's.
 
+## The NPC attack relay under dynamic relevance (1214ah)
+
+The NPC attack relay carries a guard's sword hit at the partner's clone into the partner's own world, where it lands, is blocked or is parried natively.
+
+**Finding (confirmed runtime, 1258i/1258j on 1214ag):** Emily's health stayed 70 in every 1270 fight, and she could never counter. During the 1258j case the relay was off on both peers: the host had stopped with `no_ready_actors` and the client with `negotiation_timeout`.
+
+**Cause (confirmed static):** the relay bound only the NPCs that were ready when it started. It stopped for good on:
+- an empty start (`no_ready_actors`);
+- any retired NPC (`actor_retired`);
+- any binding that missed the 5 s negotiation (`negotiation_timeout`);
+- a peer re-arm with a new nonce (`peer_replaced`).
+
+Nothing re-armed it outside checkpoint recovery, while the combat channels already join and retire with relevance (1213v).
+
+**Fix (1214ah):**
+- Every tick, the relay binds each ready, bound, living combat channel and retires bindings whose channel is gone. A retired NPC is not re-added for 3 s.
+- A binding that does not negotiate in 5 s retires alone. Contacts from bindings that are not ready yet are dropped and counted.
+- A peer re-arm restarts the local event sequence instead of stopping.
+- In product mode, a relay that was requested but stopped re-arms after 3 s (outside checkpoint recovery).
+- `npc-attack.json` gains `relevance` counters: wanted, rearms, added, retired, peer restarts, dropped contacts, last retirement reason.
+
+| Take | Candidate | Result |
+|---|---|---|
+| [1270i](../../work/natural-moveset/mission-multicombat-v1270i) | 1214ah | Inconclusive (Corvo died at 17.8 s). Relayed hits damaged Emily (70 → 55 → 40); 25 bindings added and 14 retired on each peer |
+| [1258k](../../work/natural-moveset/counterattack-v1258k) | 1214ah | Fail: the relay was active, but the guard never swung at Emily while she attacked |
+| [1258l](../../work/natural-moveset/counterattack-v1258l) | 1214ah | Pass: Emily's counter (block held 1.6 s per cycle); [chapter 94](94-visual-sweep-counterattack-and-gestures.md#counterattack-sword-locks-and-b-swing-hits-9) |
+
 ## Open
 
 - Grenades and powers in both roles are verified through the lab fixture only (1274, 1275). Real sleep darts and chokes on a mission are verified (1276i, 1276m); a real grenade or power is not.

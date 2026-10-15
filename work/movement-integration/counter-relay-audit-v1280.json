@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-15T18:20:30.633360+02:00",
+  "candidate": "candidate-npc-combat-v1214ah",
+  "takes": [
+    {
+      "take": "counterattack-v1258i",
+      "candidate": "candidate-npc-combat-v1214ag",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258j",
+      "candidate": "candidate-npc-combat-v1214ag",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258k",
+      "candidate": "candidate-npc-combat-v1214ah",
+      "passed": false,
+      "failure": "1 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source)"
+    },
+    {
+      "take": "counterattack-v1258l",
+      "candidate": "candidate-npc-combat-v1214ah",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "mission-multicombat-v1270i",
+      "candidate": "candidate-npc-combat-v1214ah",
+      "passed": false,
+      "failure": "A player died (Game Over) at 17805 ms; the fight is inconclusive"
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1258i/1258j, 1214ag): Emily never counter-killed; in 1258j the NPC attack relay was off on both peers during the case (host no_ready_actors, client negotiation_timeout), so the guard's swings at her clone never reached her world and no native parry was possible.",
+    "Confirmed static: the relay bound only the NPCs present at its start and stopped on any retirement (actor_retired), any binding that missed negotiation (negotiation_timeout), an empty start (no_ready_actors) or a peer re-arm (peer_replaced); nothing re-armed it outside checkpoint recovery. Emily's health stayed 70 in every 1270 fight.",
+    "Fix (1214ah): relay bindings follow relevance (added/retired per NPC each tick, 3 s re-add block), a late binding retires alone, contacts from not-ready bindings are dropped, a peer re-arm restarts the sequence, and the product controller re-arms a stopped relay after 3 s.",
+    "Confirmed runtime (1270i, 1214ah): in a three-guard fight relayed guard hits damaged Emily (70 -> 55 -> 40, 2 applied); 25 bindings added and 14 retired on each peer; inconclusive overall (Corvo died at 17.8 s).",
+    "Confirmed runtime (1258k): the relay was active but the guard never swung at Emily's clone while she attacked every 1.15 s (0 hits sent).",
+    "Confirmed runtime (1258l, harness 1258e, block held 1.6 s per cycle): 9 relayed guard hits (3 blocked, 1 parry-lose, 5 applied); Emily's native sword_parry_win then the counter finisher fatality_leftleg_medium_a; the host presented it (phase 105) and the guard is dead in both worlds, 0.0 m apart.",
+    "Visual: the 1258l observer view is far and dark (opposite balcony); not judgeable. Counterattack visual acceptance stays open."
+  ],
+  "complete": false,
+  "scope": "#9 counterattack in both roles (runtime); #14 NPC attack relay under dynamic relevance. Visual acceptance of the counter pending; player knockdown open."
+}
