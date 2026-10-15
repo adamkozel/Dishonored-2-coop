@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:11:57.785352+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T20:52:40.430033+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -715,7 +715,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
 - [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
 ## counterattack
 
-Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
+Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rarely attacks her clone; native god mode is stripped). Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
 
 ````json
 {
@@ -742,7 +742,7 @@ Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214
     "guard_rr_counter_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
+  "notes": "Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rarely attacks her clone; native god mode is stripped). Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [],
@@ -750,7 +750,8 @@ Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214
     "../movement-integration/native-combat-use-observations-v1211.json",
     "../movement-integration/gestures-counter-audit-v1264.json",
     "../movement-integration/counter-relay-audit-v1280.json",
-    "../movement-integration/finisher-follow-audit-v1281.json"
+    "../movement-integration/finisher-follow-audit-v1281.json",
+    "../movement-integration/counter-parked-audit-v1285.json"
   ]
 }
 ````
@@ -759,6 +760,7 @@ Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214
 - [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
 - [evidence: ../movement-integration/counter-relay-audit-v1280.json](<../../../../work/movement-integration/counter-relay-audit-v1280.json>)
 - [evidence: ../movement-integration/finisher-follow-audit-v1281.json](<../../../../work/movement-integration/finisher-follow-audit-v1281.json>)
+- [evidence: ../movement-integration/counter-parked-audit-v1285.json](<../../../../work/movement-integration/counter-parked-audit-v1285.json>)
 ## hit_reactions_directions
 
 Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
@@ -1006,7 +1008,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
 - [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
 ## kick_or_shove_if_present
 
-Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
+Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close attacks per role; view still open. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
 
 ````json
 {
@@ -1027,7 +1029,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neithe
     "sword_attack_punch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
+  "notes": "Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close attacks per role; view still open. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1036,13 +1038,15 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neithe
   ],
   "evidence": [
     "../movement-integration/mission-outcome-audit-v1110.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "../movement-integration/counter-parked-audit-v1285.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-outcome-audit-v1110.json](<../../../../work/movement-integration/mission-outcome-audit-v1110.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: ../movement-integration/counter-parked-audit-v1285.json](<../../../../work/movement-integration/counter-parked-audit-v1285.json>)
 - [in_game_recordings: mission-combat-v1109/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-client.mp4>)
 - [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants

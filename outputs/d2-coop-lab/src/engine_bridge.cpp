@@ -1516,6 +1516,7 @@ bool allowedCommand(const char* text) {
         if(!std::strncmp(rest," emily",6))rest+=6;else if(!std::strncmp(rest," corvo",6))rest+=6;
         return *rest==0;
     }
+    if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
     const char* commands[]={"getviewpos","where","Ansel_PlayerVisible","LoadGame","listDecls","debugEntityByName","trigger","teleport","setviewpos","find","listModels"};
     for(const auto* name:commands){const auto n=std::strlen(name);if(!std::strncmp(text,name,n)&&(text[n]==0||text[n]==' '))return true;}
     return false;
@@ -1666,6 +1667,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_movement_fixture 60000")){beginObserverIsolation(GetTickCount64(),localRole==0,true);return;}
     if(!std::strcmp(request.command,"coop_movement_fixture off")){stopObserverIsolation("movement_fixture_cancelled");return;}
     if(!std::strcmp(request.command,"coop_observer_camera hold")){observerCameraRequest=1;return;}
+    if(!std::strcmp(request.command,"coop_player_health_hold on")){playerHealthHold=true;return;}
+    if(!std::strcmp(request.command,"coop_player_health_hold off")){playerHealthHold=false;return;}
     if(!std::strncmp(request.command,"coop_observer_camera hold_at ",29)){float at[3]{};char extra=0;
         if(sscanf_s(request.command+29,"%f %f %f %c",&at[0],&at[1],&at[2],&extra,1u)==3){std::memcpy(observerCameraAt,at,12);observerCameraRequest=2;}return;}
     if(!std::strcmp(request.command,"coop_observer_camera off")){observerCameraRequest=0;return;}

@@ -18,6 +18,18 @@ std::array<ObserverViewRecord,8> observerViews{};
 struct ObserverCameraHold {bool active=false;std::uintptr_t view=0;float position[3]{},basis[9]{};ULONGLONG until=0,started=0;std::uint64_t overrides=0;const char* result="off";};
 ObserverCameraHold observerCamera{};
 int observerCameraRequest=-1;float observerCameraAt[3]{};
+// 1214ap (#9, lab only): "coop_player_health_hold on|off" refills the local player's native health (component
+// +0x20) to its maximum every service tick while on, so long sword-fight takes do not end in the source's death
+// (1258m/1258n/1258y/1258ai). The native god mode cannot do it: ark_god_player is read only by the god console
+// toggle (+0x718f93), never by damage code (confirmed static, build 1.77.9.0). A single hit larger than the current
+// health still kills; hits, reactions and parries stay native.
+bool playerHealthHold=false;std::uint64_t playerHealthRefills=0,playerHealthHoldMisses=0;float playerHealthLast=0;
+void servicePlayerHealthHold(){
+    if(!playerHealthHold||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    NativeHealth h{};if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),1,h)||!h.component){++playerHealthHoldMisses;return;}
+    playerHealthLast=h.current;
+    if(h.current>0&&h.current<h.maximum&&std::isfinite(h.maximum)){*reinterpret_cast<float*>(h.component+0x20)=h.maximum;++playerHealthRefills;}
+}
 void observeNativeRenderViewSet(std::uintptr_t view,const float* position,const float* basis){
     const auto tick=GetTickCount64();float p[3]{},b[9]{};bool override=false;
     AcquireSRWLockExclusive(&observerCameraLock);
@@ -46,6 +58,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
+    servicePlayerHealthHold();
     const int request=observerCameraRequest;observerCameraRequest=-1;
     AcquireSRWLockExclusive(&observerCameraLock);
     if(request==0){observerCamera.active=false;observerCamera.result="off";}
@@ -70,5 +83,6 @@ void writeObserverCamera(){
     fprintf(f,"{\"labOnly\":true,\"installed\":%s,\"active\":%s,\"result\":\"%s\",\"view\":\"%llx\",\"overrides\":%llu,\"position\":[%.6f,%.6f,%.6f],\"views\":[",
         realNativeRenderViewSet?"true":"false",h.active?"true":"false",h.result,static_cast<unsigned long long>(h.view),h.overrides,h.position[0],h.position[1],h.position[2]);
     bool first=true;for(const auto& r:views)if(r.view){fprintf(f,"%s{\"view\":\"%llx\",\"count\":%llu,\"tick\":%llu,\"position\":[%.6f,%.6f,%.6f]}",first?"":",",static_cast<unsigned long long>(r.view),r.count,r.tick,r.position[0],r.position[1],r.position[2]);first=false;}
-    fputs("]}\n",f);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
+    fprintf(f,"],\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
+        static_cast<unsigned long long>(playerHealthRefills),static_cast<unsigned long long>(playerHealthHoldMisses),playerHealthLast);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

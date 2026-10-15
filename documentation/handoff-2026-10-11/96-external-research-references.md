@@ -1,0 +1,29 @@
+# External research references
+
+On 15 October 2026 the user researched public resources for reverse-engineering Dishonored 2. No third-party table, script, DLL or game tool was run; co-op mods stay excluded. This chapter records the leads with their verification state. Claude's checks against the lab build are marked.
+
+## Verified against the lab build
+
+- **Build:** the lab executable is Dishonored 2 **1.77.9.0** (confirmed static, PE version resource). That is the build of the cvar dump and the autosplitter's main state.
+- **Camera (IGCS):** [InjectableGenericCameraSystem, Dishonored 2](https://github.com/FransBouma/InjectableGenericCameraSystem/tree/master/Cameras/Dishonored2) (BSD 2-Clause), read as a reference only.
+  - The lab already hooks the native render-view setter its notes describe (+0x890c50).
+  - #61 builds the free observer camera on it (`coop_observer_camera hold_at`, [chapter 92](92-native-use-interactions.md)).
+  - Its current camera uses the native Ansel mode, which pauses the game, so it is not usable for motion takes.
+- **God mode is stripped (confirmed static):**
+  - `ark_god_player` and `ark_god_npc` are registered at +0x138a6c0 / +0x138a670.
+    - The `ark_god_player` object is at +0x398d500, value at +0x398d528, default "0", flags 9.
+  - The only code reading the value is the `god` console toggle (+0x718f93); damage code never reads it.
+  - **Confirmed runtime (take counterattack-v1258ai):** the source's health went 56 → 0 with the cvar set.
+  - The lab therefore uses its own health hold instead (`coop_player_health_hold`, 1214ap, lab only; built and deployed, not yet runtime-verified).
+- **AI cvars:** the build has 61 `ark_ai_*` cvars, but no notarget or perception switch among them (confirmed static).
+
+## Leads not yet verified
+
+| Need | Source | State |
+|---|---|---|
+| Loading state and level name (stage 6 automation) | [drtchops dishonored2.asl](https://github.com/drtchops/asl/blob/master/dishonored2.asl) (also the Som1Lse fork) | v1.77.9.0 offsets as declared: loading flag +0x288D2E8 (bool), level name +0x4025C50 (string128). Not yet read in the lab |
+| Console commands and cvars | [fakuivan cvar dump v1.77.9.0](https://gist.github.com/fakuivan/8910a208fc88f831f06b047d0955e4fe); [LordRadai Dishonored2-Debug](https://github.com/LordRadai/Dishonored2-Debug) (`listCmds`, `listCvars`, `SaveGame`, `LoadGame`, `RestartFromCheckpoint`, `nextAI`) | Build matches. A listed command or cvar may be stripped (as `god` is) |
+| Health, mana and ammo hooks | Cheat Engine tables (Fearless Revolution t=194 and t=27219, Nexus mod 187, Guided Hacking 231, FRAMED archive) | Pages blocked or not inspected; reference only, never run |
+| Save decompression (stage 6) | ZenHAX PS4 save thread (t=14452): 512-byte reads, 0x20000 window, 4-byte size header; compared with [DOOM 3 BFG Compressor.cpp](https://github.com/id-Software/DOOM-3-BFG/blob/master/neo/framework/Compressor.cpp) | Hypothesis for PC saves. Decompression alone leaves serialization and checkpoint consistency open |
+| Save location | Bethesda migration help: `%USERPROFILE%\Saved Games\Arkane Studios\Dishonored2\base\savegame` | The protected-file rules still apply: user saves are data and are never installed into the Steam saves |
+| Resource formats | [chipolux/disrev](https://github.com/chipolux/disrev), Void Explorer (Nexus 30) | Asset containers and `.entities`; not runtime layouts |

@@ -1,6 +1,6 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T20:11:57.785352+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T20:52:40.430033+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
 105 requirements: 95 runtime-bound (fully or partially), 83 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
