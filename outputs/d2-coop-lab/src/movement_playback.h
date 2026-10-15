@@ -133,7 +133,10 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     if(!bodyShadowTarget(s))return movementBeginRefused(12);
     if(!movementHelperMatches(s))return movementBeginRefused(13);
     if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily))return movementBeginRefused(14);
-    if(!sword.equipped||!sword.started)return movementBeginRefused(15);
+    // 1213j (#35): a settled native sword - drawn OR holstered - is valid. The partner's holster state
+    // (requestMovementEquipment) holsters the avatar sword natively; requiring it drawn meant a bank that
+    // dropped while the partner was holstered (1230/1230b: after the tutorial modal) could never re-arm.
+    if(sword.equipped!=sword.started||sword.attachedTag!=(sword.equipped?sword.drawTag:sword.holsterTag))return movementBeginRefused(15);
     movementBeginRefusal=0;
     // 1203b: a bank already committed for this exact partner actor/skeleton in
     // this world is dormant after a follow interruption (stale peer, menu,
@@ -148,7 +151,7 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
             MovementPlayback fresh{};fresh.bank=std::move(d.bank);fresh.nativeFeet=movementNativeFeetRequested;fresh.currentFeet=movementCurrentFeetRequested;
             fresh.game=s.game;fresh.actor=s.actor;fresh.animation=s.animation;fresh.skeleton=s.skeleton;fresh.handle=probeHandle;fresh.parents=s.parents;
             fresh.epoch=outgoing.worldEpoch;fresh.peerEpoch=remote.worldEpoch;fresh.session=remote.session;fresh.persistent=persistent;
-            fresh.end=tick+60000;fresh.lease=lastReceive+presentationFreshMs();d=std::move(fresh);reactivated=true;
+            fresh.end=tick+60000;fresh.lease=lastReceive+presentationFreshMs();fresh.presentedDrawn=sword.equipped;fresh.armedMix=sword.equipped?1.f:0.f;d=std::move(fresh);reactivated=true;
         }
         ReleaseSRWLockExclusive(&movementLock);
         if(reactivated){bodyPublication.animation.store(s.animation,std::memory_order_release);++movementReactivations;consoleOutput("COOP: movement bank reactivated in place\n");return true;}
@@ -160,6 +163,7 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     MovementPlayback next{};next.nativeFeet=movementNativeFeetRequested;next.currentFeet=movementCurrentFeetRequested;
     next.game=s.game;next.actor=s.actor;next.animation=s.animation;next.skeleton=s.skeleton;next.handle=probeHandle;next.parents=s.parents;
     next.epoch=outgoing.worldEpoch;next.peerEpoch=remote.worldEpoch;next.session=remote.session;next.persistent=persistent;
+    next.presentedDrawn=sword.equipped;next.armedMix=sword.equipped?1.f:0.f; // 1213j (#35): start in the native sword state
     movementLoad.next=std::move(next);movementLoad.layout=localRole?0x00db32d37719931full:0x84db84f5d1336b80ull;movementLoad.joints=localRole?215:219;
     movementLoad.bind=s.bindLocal;movementLoad.bindMatches=false;
     movementLoad.expectedChecksum=expectedChecksum;movementLoad.requested=true;movementLoad.deadline=tick+5000;movementLoad.state.store(1,std::memory_order_release);
@@ -175,7 +179,8 @@ void serviceMovementBank(ULONGLONG tick){
             next.epoch==outgoing.worldEpoch&&next.peerEpoch==remote.worldEpoch&&next.session==remote.session&&probeFollow&&avatarAiHeld&&locomotionEnabled&&!bodyStreamEnabled&&
             !reviewClipActive()&&!authoringProof.end&&!shadowAction.actor&&networkFrameOwned.load()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&lastReceive&&tick-lastReceive<presentationFreshMs()&&
             readNativeSkeleton(memoryRead,base,probeHandle,s)&&s.stable&&s.logic==1&&s.actor==next.actor&&s.game==next.game&&s.animation==next.animation&&s.skeleton==next.skeleton&&s.parents==next.parents&&movementHelperMatches(s)&&
-            readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&sword.equipped&&sword.started;
+            readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&
+            sword.equipped==sword.started&&sword.attachedTag==(sword.equipped?sword.drawTag:sword.holsterTag); // 1213j (#35): drawn or holstered
         // 1203b: the worker already checked every clip against the bind pose
         // captured at request time; only that snapshot is compared here.
         valid=valid&&movementLoad.bindMatches&&movementLoad.bind.size()==s.bindLocal.size();
