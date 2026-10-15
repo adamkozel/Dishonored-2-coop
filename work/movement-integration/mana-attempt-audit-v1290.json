@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-15T22:07:04.670889+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214av",
+    "candidate-npc-combat-v1214aw"
+  ],
+  "takes": [
+    {
+      "take": "coverage-v1287a",
+      "candidate": "candidate-npc-combat-v1214av",
+      "passed": false,
+      "failure": "2 case(s) failed: host-mana: Mana potion not consumed (1 -> 1) | client-mana: Mana potion not consumed (1 -> 1)"
+    },
+    {
+      "take": "coverage-v1287b",
+      "candidate": "candidate-npc-combat-v1214aw",
+      "passed": false,
+      "failure": "2 case(s) failed: host-mana: Mana potion not consumed (1 -> 1) | client-mana: Mana potion not consumed (1 -> 1)"
+    }
+  ],
+  "complete": false,
+  "scope": "#11 mana_elixir in product mode (lab), plus the static cvar checks from the user research.",
+  "findings": [
+    "1214av adds coop_use_item health|mana (native wheel routines +0x7194a0 / +0x745b20 with the fixture byte guards).",
+    "Confirmed runtime (1287a, 1214av): a granted mana potion was not consumed on a full pool (1 -> 1).",
+    "Confirmed runtime (1287b, 1214aw): writing the pool to 0 (100 -> 0) did not help (1 -> 1); the native expenditure in potion-mana-corvo-v67 also changed the component flags (0x2800006a -> 0x2800000a), which a value write does not. Hypothesis: the drink checks those flags. The 1214aw pool write is ineffective and is to be removed with the next code change.",
+    "The mana elixir view waits for a map with powers (mission-context group); the drink presentation path is the one already accepted for the health elixir.",
+    "Confirmed static: ark_buddha_player, g_damageScale, g_playerIncomingDamageScale and pm_disableFatalFall are not read by gameplay code; gp_manaEnable is read by the mana component."
+  ]
+}

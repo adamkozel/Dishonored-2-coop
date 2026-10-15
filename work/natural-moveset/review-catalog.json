@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T21:52:40.873699+02:00",
+  "generated": "2026-10-15T22:07:08.810214+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -4736,7 +4736,7 @@
         "empty_idlebreak_drink_flask"
       ],
       "deliverable_kind": "animation",
-      "notes": "Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+      "notes": "Audit 1290: in product mode the lab grants a mana potion, but the native drink needs a natively spent pool (power use); the view waits for a map with powers. Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -4845,7 +4845,8 @@
       },
       "evidence": [
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/gestures-counter-audit-v1264.json"
+        "../movement-integration/gestures-counter-audit-v1264.json",
+        "../movement-integration/mana-attempt-audit-v1290.json"
       ]
     },
     {

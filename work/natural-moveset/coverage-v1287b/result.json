@@ -1,0 +1,75 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-mana: Mana potion not consumed (1 -> 1) | client-mana: Mana potion not consumed (1 -> 1)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "mana",
+      "observer": "client",
+      "passed": false,
+      "failure": "Mana potion not consumed (1 -> 1)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "manaBefore": 1,
+      "manaAfter": 1,
+      "itemStatus": {
+        "itemGrant": {
+          "grants": 1,
+          "refused": 0,
+          "result": "granted_mana_potion"
+        },
+        "itemUse": {
+          "uses": 1,
+          "refused": 0,
+          "result": "mana_use_requested",
+          "manaBefore": 100.0,
+          "manaNow": 0.0
+        }
+      },
+      "lowWeightSamples": 0,
+      "drinkSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "mana",
+      "observer": "host",
+      "passed": false,
+      "failure": "Mana potion not consumed (1 -> 1)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "manaBefore": 1,
+      "manaAfter": 1,
+      "itemStatus": {
+        "itemGrant": {
+          "grants": 1,
+          "refused": 0,
+          "result": "granted_mana_potion"
+        },
+        "itemUse": {
+          "uses": 1,
+          "refused": 0,
+          "result": "mana_use_requested",
+          "manaBefore": 100.0,
+          "manaNow": 0.0
+        }
+      },
+      "lowWeightSamples": 0,
+      "drinkSamples": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}

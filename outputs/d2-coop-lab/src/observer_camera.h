@@ -57,6 +57,28 @@ void observerCameraArms(bool hide,ULONGLONG tick){
 // gameplay scope, product mode included. The isolated fixtures refuse product mode and roll the item back after 12 s
 // (take grenade-bound-guard-v1273a: unsupported_scope_or_item_owned); takes restore the inventory baseline at the end.
 unsigned labGrantRequest=0;std::uint64_t labGrants=0,labGrantRefused=0;const char* labGrantResult="idle";ULONGLONG labGrantEquipUntil=0;bool labGrantEquipSent=false;
+// 1214av (#11 mana elixir; lab only): "coop_use_item health|mana" drinks one potion through the native routine the
+// item wheel calls (health +0x7194a0 on the health component, mana +0x745b20 on the mana component), with the same
+// byte guards as the isolated potion fixture; eligibility, quantity and effects stay native. Product mode included.
+unsigned labUseRequest=0;std::uint64_t labUses=0,labUseRefused=0;const char* labUseResult="idle";float labManaBefore=-1;
+void serviceLabItemUse(){
+    if(!labUseRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    const unsigned u=labUseRequest;labUseRequest=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    NativeHealth h{};if(!coopGameplayReady(outgoing)||!readNativeHealth(memoryRead,base,1,h)||h.logic!=1||h.current<0.5f){++labUseRefused;labUseResult="refused_player_state";return;}
+    if(u==1){
+        const unsigned char bytes[]={0x48,0x89,0x5c,0x24,0x10,0x57,0x48,0x83,0xec,0x40,0x48,0x8b,0xf9,0xba,2,0,0,0,0x48,0x81,0xc1,0xe0,0,0,0,0xe8,0x52,0x14,0xcc,0xff};
+        if(std::memcmp(gameImage+0x7194a0,bytes,sizeof(bytes))){++labUseRefused;labUseResult="health_routine_mismatch";return;}
+        reinterpret_cast<void(*)(void*)>(gameImage+0x7194a0)(reinterpret_cast<void*>(h.component));++labUses;labUseResult="health_use_requested";return;
+    }
+    const unsigned char bytes[]={0x48,0x89,0x5c,0x24,0x18,0x57,0x48,0x83,0xec,0x50,0x48,0x8b,0xd9,0xba,2,0,0,0,0x48,0x83,0xc1,0x50,0xe8,0xd5,0x4d,0xc9,0xff};
+    NativePlayerMana mana{};
+    if(std::memcmp(gameImage+0x745b20,bytes,sizeof(bytes))){++labUseRefused;labUseResult="mana_routine_mismatch";return;}
+    if(!readNativePlayerMana(memoryRead,base,mana)||mana.player!=h.actor||mana.game!=h.game){++labUseRefused;labUseResult="mana_read_failed";return;}
+    // 1214aw: the native routine refuses a full mana pool (1287a: the potion stayed 1 -> 1). The lab first empties the
+    // pool (component +0x20, as the reader reads it) and records the previous value; the drink then refills natively.
+    labManaBefore=mana.current;*reinterpret_cast<float*>(mana.component+0x20)=0.f;
+    reinterpret_cast<void(*)(void*)>(gameImage+0x745b20)(reinterpret_cast<void*>(mana.component));++labUses;labUseResult="mana_use_requested";
+}
 void serviceLabItemGrant(){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     // A granted grenade is then selected once with the native equip (+0x614b20, as the isolated fixture does) when the
@@ -117,7 +139,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabItemUse();
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -147,6 +169,8 @@ void writeObserverCamera(){
     fprintf(f,"],\"armsHidden\":{\"hides\":%llu,\"shows\":%llu,\"left\":%s,\"right\":%s},",static_cast<unsigned long long>(observerArmHides),
         static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
     fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult);
+    {NativePlayerMana m{};const bool mr=readNativePlayerMana(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),m);
+     fprintf(f,"\"itemUse\":{\"uses\":%llu,\"refused\":%llu,\"result\":\"%s\",\"manaBefore\":%.3f,\"manaNow\":%.3f},",static_cast<unsigned long long>(labUses),static_cast<unsigned long long>(labUseRefused),labUseResult,labManaBefore,mr?m.current:-1.f);}
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
         static_cast<unsigned long long>(playerHealthRefills),static_cast<unsigned long long>(playerHealthHoldMisses),playerHealthLast);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T21:52:41.168607+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T22:07:09.255657+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
@@ -2350,7 +2350,7 @@ Audit 1264 (1214j): a consumed health elixir (native consume, quantity drop) pre
 - [in_game_recordings: native-potion-drink-client-v1263a-receiver.mp4](<../../../../work/natural-moveset/native-potion-drink-client-v1263a-receiver.mp4>)
 ## mana_elixir
 
-Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
+Audit 1290: in product mode the lab grants a mana potion, but the native drink needs a natively spent pool (power use); the view waits for a map with powers. Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
 
 ````json
 {
@@ -2370,7 +2370,7 @@ Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as 
     "empty_idlebreak_drink_flask"
   ],
   "deliverable_kind": "animation",
-  "notes": "Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+  "notes": "Audit 1290: in product mode the lab grants a mana potion, but the native drink needs a natively spent pool (power use); the view waits for a map with powers. Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2479,13 +2479,15 @@ Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as 
   },
   "evidence": [
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/gestures-counter-audit-v1264.json"
+    "../movement-integration/gestures-counter-audit-v1264.json",
+    "../movement-integration/mana-attempt-audit-v1290.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
+- [evidence: ../movement-integration/mana-attempt-audit-v1290.json](<../../../../work/movement-integration/mana-attempt-audit-v1290.json>)
 - [in_game_recordings: potion-mana-corvo-v67.mp4](<../../../../work/natural-moveset/potion-mana-corvo-v67.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68-receiver.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68-receiver.mp4>)
