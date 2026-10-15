@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T19:24:55.573562+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T19:38:27.007355+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -380,7 +380,7 @@ Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The re
 - [in_game_recordings: native-unlocked-door-emily-v642/observer.mp4](<../../../../work/natural-moveset/native-unlocked-door-emily-v642/observer.mp4>)
 ## lever_button_crank_wheel
 
-Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.
+Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (functional) in both roles (use-variants-v1228i/j, use-variants-dunwall-v1228k/l). Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.
 
 ````json
 {
@@ -403,7 +403,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as
     "interact_wheel_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
+  "notes": "Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (functional) in both roles (use-variants-v1228i/j, use-variants-dunwall-v1228k/l). Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -417,7 +417,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as
     "../movement-integration/use-interaction-audit-v1215.json",
     "../movement-integration/use-variants-audit-v1229.json",
     "../movement-integration/use-reach-audit-v1235.json",
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/lever-valve-audit-v1282.json"
   ]
 }
 ````
@@ -427,6 +428,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as
 - [evidence: ../movement-integration/use-variants-audit-v1229.json](<../../../../work/movement-integration/use-variants-audit-v1229.json>)
 - [evidence: ../movement-integration/use-reach-audit-v1235.json](<../../../../work/movement-integration/use-reach-audit-v1235.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/lever-valve-audit-v1282.json](<../../../../work/movement-integration/lever-valve-audit-v1282.json>)
 - [in_game_recordings: use-interaction-v1214c/use-client-observed.mp4](<../../../../work/natural-moveset/use-interaction-v1214c/use-client-observed.mp4>)
 - [in_game_recordings: mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4>)
 - [in_game_recordings: use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4>)
