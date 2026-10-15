@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "scope": "Stage 4 real ranged items on a mission: on Edge of the World under the product controller each source fires the quick-slot item (sleep darts) at its own checkpoint guard; every target leaves the alive state and ends in the same state in both worlds; Dunwall fixture restored.",
+  "failure": null,
+  "cases": [
+    {
+      "shots": [
+        {
+          "source": "host",
+          "target": "script_spawner_checkpoint_guard_01",
+          "boundReady": false,
+          "bindWaitMs": 10271,
+          "pitched": true,
+          "presses": [
+            {
+              "press": 0,
+              "before": 3,
+              "after": 2,
+              "fired": true
+            }
+          ],
+          "fired": true,
+          "before": {
+            "host": "alive",
+            "client": "alive"
+          },
+          "after": {
+            "host": "unconscious",
+            "client": "unconscious",
+            "ms": 3370,
+            "gameOver": false
+          },
+          "timeline": [
+            {
+              "ms": 506,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 1177,
+              "host": "unconscious",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 2046,
+              "host": "unconscious",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 2716,
+              "host": "unconscious",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 3370,
+              "host": "unconscious",
+              "client": "unconscious",
+              "hostLogic": 1,
+              "clientLogic": 1
+            }
+          ],
+          "host": {
+            "result": "active_native_melee",
+            "hostNativePassed": 0,
+            "hostNativeLast": "none",
+            "peerNativeApplied": 0,
+            "hostWorldCommitted": 0,
+            "committed": 0,
+            "deaths": 0,
+            "lastRetire": "none",
+            "lastDecl": ""
+          },
+          "client": {
+            "result": "active_native_melee",
+            "peerNativeRequests": 0,
+            "peerNativeBusy": 0,
+            "hostWorldApplied": 0,
+            "applied": 0,
+            "deaths": 0,
+            "lastRetire": "none",
+            "lastDecl": ""
+          },
+          "hostLife": {
+            "lifeSent": 1,
+            "lifeReceived": 24,
+            "lifeApplied": 0,
+            "lifeRefused": 0,
+            "bound": 24,
+            "evicted": 0
+          },
+          "clientLife": {
+            "lifeSent": 24,
+            "lifeReceived": 1,
+            "lifeApplied": 1,
+            "lifeRefused": 0,
+            "bound": 13
+          }
+        }
+      ],
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "host shot script_spawner_checkpoint_guard_01: unconscious in both worlds"
+      ]
+    }
+  ]
+}

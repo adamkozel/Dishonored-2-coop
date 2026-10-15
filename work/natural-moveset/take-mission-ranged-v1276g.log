@@ -1,0 +1,194 @@
+{
+  "scope": "Stage 4 real ranged items on a mission: on Edge of the World under the product controller each source fires the quick-slot item (sleep darts) at its own checkpoint guard; every target leaves the alive state and ends in the same state in both worlds; Dunwall fixture restored.",
+  "failure": "host shot script_spawner_checkpoint_guard_01: host alive, client alive",
+  "passed": false,
+  "cases": [
+    {
+      "shots": [
+        {
+          "source": "host",
+          "target": "script_spawner_checkpoint_guard_01",
+          "boundReady": false,
+          "bindWaitMs": 10254,
+          "pitched": true,
+          "presses": [
+            {
+              "press": 0,
+              "before": 3,
+              "after": 2,
+              "fired": true
+            }
+          ],
+          "fired": true,
+          "before": {
+            "host": "alive",
+            "client": "alive"
+          },
+          "after": {
+            "host": "alive",
+            "client": "alive",
+            "ms": 12151,
+            "gameOver": false
+          },
+          "timeline": [
+            {
+              "ms": 506,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 1175,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 1843,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 2508,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 3159,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 4062,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 4731,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 5382,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 6037,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 6813,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 7467,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 8121,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 8776,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 9428,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 10080,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 10734,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 11497,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            },
+            {
+              "ms": 12151,
+              "host": "alive",
+              "client": "alive",
+              "hostLogic": 1,
+              "clientLogic": 1
+            }
+          ],
+          "host": {
+            "result": "active_native_melee",
+            "hostNativePassed": 0,
+            "hostNativeLast": "none",
+            "peerNativeApplied": 0,
+            "hostWorldCommitted": 0,
+            "committed": 0,
+            "deaths": 0,
+            "lastRetire": "none",
+            "lastDecl": ""
+          },
+          "client": {
+            "result": "active_native_melee",
+            "peerNativeRequests": 0,
+            "peerNativeBusy": 0,
+            "hostWorldApplied": 0,
+            "applied": 0,
+            "deaths": 0,
+            "lastRetire": "none",
+            "lastDecl": ""
+          }
+        }
+      ],
+      "passed": false,
+      "failure": "host shot script_spawner_checkpoint_guard_01: host alive, client alive",
+      "checks": []
+    }
+  ]
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionRanged-v1276.ps1:131[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 131 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost shot script_spawner_checkpoint_guard_01: host alive, client alive[0m

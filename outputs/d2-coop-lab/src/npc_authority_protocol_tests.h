@@ -34,6 +34,21 @@ void npcAuthorityProtocolTests(){
      require(validNpcControl(u,client,host),"host reports an unconscious NPC to the client");
      u.h.reserved=3;require(!validNpcControl(u,client,host),"unconscious carries no variant");u.h.reserved=0;
      u.h.targetArm=0;require(!validNpcControl(u,client,host),"unconscious names the client channel");}
+    {// 1214ac: fair relevance at the cap.
+     std::vector<std::array<float,2>> d;for(unsigned i=0;i<24;++i)d.push_back({200.f*200.f,float(i+1)*float(i+1)});d.push_back({5.f*5.f,190.f*190.f});
+     const auto pr=npcRelevancePriorities(d,55.f*55.f);
+     require(pr[24]==0&&pr[0]==0&&pr[23]==23,"each player ranks its own nearest NPCs; the guard 5 m from the host has rank 0");
+     require(npcRelevanceDisplaces(pr[24],pr[23])&&!npcRelevanceDisplaces(pr[24],pr[1]),"the host's guard displaces the client's 24th NPC, not its nearest");
+     require(!npcRelevanceDisplaces(5,6)&&npcRelevanceDisplaces(3,6),"two-rank margin against churn");
+     require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");}
+    {// 1214ad: Life roster for unbound NPCs, either role.
+     CoopNpcControl l=p;l.h.kind=NpcAuthorityMessage::Life;l.h.reserved=2;l.h.targetArm=0;l.h.targetHandle=0;l.h.rig=1;l.h.joints=1;l.h.sourceArm=l.h.sourceHandle=0x50009;
+     require(validNpcControl(l,client,host),"the host reports an unbound NPC's death");
+     auto x=l;x.h.reserved=1;require(validNpcControl(x,client,host),"or its knockout");
+     x=l;x.h.reserved=3;require(!validNpcControl(x,client,host),"only unconscious or dead");x.h.reserved=0;require(!validNpcControl(x,client,host),"never alive");
+     x=l;x.h.targetArm=8;require(!validNpcControl(x,client,host),"names no channel");
+     x=l;x.h.sourceArm=7;require(!validNpcControl(x,client,host),"carries the sender NPC handle only");
+     require(npcLifeApplies(0,2)&&npcLifeApplies(1,2)&&npcLifeApplies(0,1)&&!npcLifeApplies(2,1)&&!npcLifeApplies(1,1)&&!npcLifeApplies(0,3),"only a more severe known state applies");}
     {// 1214n: the host tells the client its NPC died outside the shared combat outcome.
      CoopNpcControl d=p;d.h.kind=NpcAuthorityMessage::Dead;d.h.targetArm=8;d.h.targetHandle=0x50009;
      require(validNpcControl(d,client,host),"host reports an unshared death to the client");
