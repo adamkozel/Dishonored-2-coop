@@ -1,4 +1,4 @@
-param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[switch]$FollowHost,[switch]$MirrorEnd,[string]$Candidate='candidate-npc-combat-v1214aw',[int]$WatchSeconds=170)
+param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[switch]$FollowHost,[switch]$MirrorEnd,[string]$Candidate='candidate-npc-combat-v1214aw',[int]$WatchSeconds=170,[int]$ClientContinueDelayMs=0)
 # Stage 6 mission end (chapter 89, 97): Edge of the World ends when the player
 # uses the Addermire Station carriage (script_kiscule_carriage), rides it, and
 # the gameflow mission completes (result screen, then institute.mapinfo).
@@ -8,7 +8,9 @@ param([string]$Take='mission-end-carriage-v1291a',[string]$MapInfo='campaign/edg
 # screen and load; both windows are recorded. -FollowHost also enables the
 # 1188 join-follow. -MirrorEnd (1214ax+) enables coop_mission_end_mirror on
 # both: the partner world must complete its own mission, show its own result
-# screen and load the next mission. Lab SLOT81 checkpoints are hashed and
+# screen and load the next mission. -ClientContinueDelayMs delays the
+# client's Continue on its result screen (1214ay both-ready hold); window
+# responsiveness and the native switch trace are recorded. Lab SLOT81 checkpoints are hashed and
 # kept; Dunwall fixture restored.
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
 $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$captures=[Collections.Generic.List[object]]::new();$rows=[Collections.Generic.List[object]]::new()
@@ -24,7 +26,8 @@ function Capture($name,$seconds){foreach($r in 'host','client'){$hwnd=(Get-Proce
 function WaitCaptures(){foreach($c in @($captures)){if(!$c.WaitForExit(240000)-or$c.ExitCode){throw 'Recording failed'}};$captures.Clear()}
 function Snap($r){$s=S $r;$o=[ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;mapId=$s.localMapId;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;canSkip=$s.localCinematicCanSkip;remoteMapId=$s.remoteMapId;remoteLogic=$s.remoteGameLogicState;remoteFresh=$s.remoteFresh;connection=$s.connectionState;pos=$s.localPosition}
  if($FollowHost){try{$f=S $r '.follow.json';$o.follow=$f.result;$o.followLoads=$f.loads}catch{}}
- if($MirrorEnd){try{$m=S $r '.missionend.json';$o.mirror=$m.result;$o.mirrorSent=$m.sent;$o.mirrorApplied=$m.applied;$o.mirrorState=$m.appliedState}catch{}};$o}
+ if($MirrorEnd){try{$m=S $r '.missionend.json';$o.mirror=$m.result;$o.mirrorSent=$m.sent;$o.mirrorApplied=$m.applied;$o.mirrorState=$m.appliedState;if($m.hold){$o.hold=$m.hold.result;$o.holdWaitMs=$m.hold.lastWaitMs}}catch{}}
+ try{$o.responding=(Get-Process -Id $pids[$r]).Responding}catch{};$o}
 function SlotFiles($r){Get-ChildItem "$root/work/lab-instances/$r/base/savegame/SLOT81" -File}
 try{
  try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Native operation active'}
@@ -33,7 +36,7 @@ try{
  $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
  New-Item -ItemType Directory $slotBackup -Force|Out-Null
  foreach($r in 'host','client'){New-Item -ItemType Directory "$slotBackup/$r" -Force|Out-Null;$slotHashes[$r]=@(SlotFiles $r|ForEach-Object {Copy-Item $_.FullName "$slotBackup/$r/$($_.Name)";@{name=$_.Name;hash=(Get-FileHash $_.FullName).Hash}})}
- Save "$out/identity.json" @{dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;followHost=[bool]$FollowHost;mirrorEnd=[bool]$MirrorEnd;slot81=$slotHashes}
+ Save "$out/identity.json" @{dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;followHost=[bool]$FollowHost;mirrorEnd=[bool]$MirrorEnd;clientContinueDelayMs=$ClientContinueDelayMs;slot81=$slotHashes}
  $dirty=$true
  C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"
  $w=[Diagnostics.Stopwatch]::StartNew();$log=[Collections.Generic.List[object]]::new();$last=@{host=0;client=0}
@@ -93,7 +96,8 @@ try{
   $since=$clock.ElapsedMilliseconds-$useAt
   if($h.logic-eq1-and!$h.pending-and$h.mapId-eq$lastMap){foreach($pk in $pokes){if(!$poked[$pk.at]-and$since-ge$pk.at-and$clock.ElapsedMilliseconds-$progressAt-gt5000){$poked[$pk.at]=$true;I host $pk.b 250;Mark "poke-$($pk.b)";break}}}
   foreach($r in 'host','client'){if($r-eq'client'-and!$MirrorEnd){continue};$x=$timeline[$timeline.Count-1][$r]
-   if($x.logic-notin 1,5,8,15,0-and!$x.pending-and$clock.ElapsedMilliseconds-$stateSince[$r].ms-gt5000-and$resultPresses[$r]-lt6){I $r A 300;$resultPresses[$r]++;$stateSince[$r].ms=$clock.ElapsedMilliseconds;Mark "result-A-$r-$($x.logic)"}
+   $wait=if($r-eq'client'-and$x.logic-eq11){5000+$ClientContinueDelayMs}else{5000}
+   if($x.logic-notin 1,5,8,15,0-and!$x.pending-and$clock.ElapsedMilliseconds-$stateSince[$r].ms-gt$wait-and$resultPresses[$r]-lt6){I $r A 300;$resultPresses[$r]++;$stateSince[$r].ms=$clock.ElapsedMilliseconds;Mark "result-A-$r-$($x.logic)"}
    if($x.logic-in 8,15-and$clock.ElapsedMilliseconds-$stateSince[$r].ms-gt8000){I $r A 300;$stateSince[$r].ms=$clock.ElapsedMilliseconds;Mark "load-A-$r"}
    if(!$arrived[$r]-and$x.map-like'*institute*'-and$x.logic-eq1-and!$x.pending){$arrived[$r]=$true;Mark "$r-next-mission"}}
   if($arrived.host-and(!$MirrorEnd-or$arrived.client)){Start-Sleep -Seconds 8;Mark 'next-mission';$done=$true}
@@ -102,7 +106,7 @@ try{
  Save "$out/timeline.json" @($timeline)
  foreach($r in 'host','client'){Save "$out/player-$r.json" (Q $r '--player')}
  $states=@{};foreach($x in $timeline){foreach($r in 'host','client'){$k="$r";if(!$states[$k]){$states[$k]=[Collections.Generic.List[string]]::new()};$v="$($x[$r].logic)/$($x[$r].pending)@$($x[$r].map)";if($states[$k].Count-eq0-or$states[$k][$states[$k].Count-1]-ne$v){$states[$k].Add($v)}}}
- foreach($r in 'host','client'){try{Save "$out/missionend-$r.json" (S $r '.missionend.json')}catch{}}
+ foreach($r in 'host','client'){try{Save "$out/missionend-$r.json" (S $r '.missionend.json')}catch{};try{Copy-Item "$root/work/lab-instances/$r/coop-status.json.loading.json" "$out/loading-$r.json"}catch{}}
  $rows.Add(@{used=$used;hostReachedNextMission=$arrived.host;clientReachedNextMission=$arrived.client;hostStates=@($states.host);clientStates=@($states.client);final=@{host=(Snap host);client=(Snap client)}})
  Save "$out/verified.json" @{passed=$done;scope=$(if($MirrorEnd){'Mission end through the carriage reaches the next mission in both worlds.'}else{'Host mission end through the carriage; client behaviour observed.'})}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};}

@@ -836,6 +836,8 @@ bool checkpointIntercept(unsigned kind,int slot,bool& continuation);
 void checkpointContinuationReturned(unsigned char result);
 bool checkpointOwnsLoading();
 bool checkpointLoadingBoundary(const NativeSwitchEvent& event);
+bool missionTransitionBoundary(const NativeSwitchEvent& event);
+void waitMissionTransition();
 void checkpointObserveLoadingEntry(const NativeSwitchEvent& event);
 bool captureCheckpointPresentation(bool& shadow,bool& exact);
 bool restoreCheckpointPresentation(bool shadow,bool exact);
@@ -996,6 +998,11 @@ void exchangePoses(ULONGLONG tick) {
         if(magic==0x454D3244) {
             if(messages[i]->m_cbSize==sizeof(MissionEndPacket)){MissionEndPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveMissionEnd(p);}
             else ++missionEnd.refused;
+            messages[i]->Release();continue;
+        }
+        if(magic==0x524D3244) {
+            if(messages[i]->m_cbSize==sizeof(MapReadyPacket)){MapReadyPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveMapReady(p);}
+            else ++transitionHold.refused;
             messages[i]->Release();continue;
         }
         if(magic==0x50413244) {

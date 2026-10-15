@@ -108,6 +108,13 @@ So in co-op, the partner reaches the end through the shared carriage usable or a
   - A client-originated end, and product mode across the VM.
   - The boat and in-mission `LevelTransition` changes ([chapter 97](97-campaign-map-sequence.md)).
 
+**Both-ready hold at the next start (candidates 1214ay–1214az, takes mission-end-hold-v1291c/d, [audit 1293](../../work/movement-integration/transition-hold-audit-v1293.json)):**
+- **Boundary (confirmed runtime):** the next-mission load ends with the native FinishLoad switch 15 → 1 (caller `0x7879cd`), with the intro scene pending (5).
+- **Mechanism:** after a mirrored mission end, each world holds there and sends `D2MR` with its loaded map. It waits, reading state and pumping transport only, until the partner reports the same map, for at most 90 s or until the connection drops.
+- **Runtime:** Emily pressed Continue 20 s after Corvo. Corvo's world held about 21 s; Emily's released at once. Both entered The Good Doctor intro in the same sample and reached gameplay together.
+- **Window:** in 1291c (1214ay) Windows flagged Corvo's window Not Responding during the hold, because the holding thread owns the window. 1214az peeks its message queue without removing every 500 ms while holding. In 1291d there were 0 Not Responding samples.
+- **Visual (accepted):** the waiting player sees the native black load-end frame with the skip hint. From the intro on, both screens match.
+
 **Next (superseded by the mirror above):** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
 
 ## Next for this line
