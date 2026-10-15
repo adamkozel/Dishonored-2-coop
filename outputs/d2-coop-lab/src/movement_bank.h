@@ -18,7 +18,7 @@ struct MovementBank {
     bool hasParryImpact()const{return version>=68;}
     bool hasCrouchHeavy()const{return version>=67;}
     bool hasKick()const{return version>=66;}
-    bool hasChoke(unsigned variant=0)const{return version>=63&&(variant<=3||(variant==4&&version>=64)||(variant==5&&version>=65));}
+    bool hasChoke(unsigned variant=0)const{return version>=63&&(variant<=3||(variant==4&&version>=64)||((variant==5||variant==6)&&version>=65));}
     bool hasTrap()const{return version>=62;}
     bool hasHeart()const{return version>=60;}
     bool hasShadowWalkSneak()const{return version>=59;}

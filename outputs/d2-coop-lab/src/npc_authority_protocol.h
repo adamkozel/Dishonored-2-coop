@@ -7,7 +7,7 @@
 
 constexpr unsigned kNpcAuthorityMaxJoints=256;
 // 1213u (#46): PairedHold/PairedKnockout come from the client while ITS native
-// paired takedown (rear choke variants 1-3, fast-back lethal 5, carried in
+// paired takedown (rear choke variants 1-3, fast-back lethal 5, back lethal 6, carried in
 // reserved) targets a host-owned NPC: the host holds that NPC's AI for the scene,
 // and knocks it out natively when the client's choke_win begins.
 // 1213v: Unconscious (host -> client): the host NPC is natively unconscious; the
@@ -16,7 +16,7 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // its paired takedown runs, so the host's held NPC plays the same victim motion.
 enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose};
 inline bool npcPoseKind(NpcAuthorityMessage k){return k==NpcAuthorityMessage::Pose||k==NpcAuthorityMessage::PairedPose;}
-inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5;}
+inline bool npcPairedVariant(std::uint32_t v){return (v>=1&&v<=3)||v==5||v==6;}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
     std::uint32_t magic=0x414e3244,build=0x67a50cde;

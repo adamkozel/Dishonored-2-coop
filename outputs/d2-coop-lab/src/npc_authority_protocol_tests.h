@@ -16,6 +16,7 @@ void npcAuthorityProtocolTests(){
      CoopNpcControl q=p;q.h.role=1;q.h.sourceSession=22;q.h.targetSession=11;q.h.sourceEpoch=5;q.h.targetEpoch=3;q.h.targetArm=8;q.h.targetHandle=0x50009;
      q.h.kind=NpcAuthorityMessage::PairedHold;q.h.reserved=2;require(validNpcControl(q,host,client),"client paired hold names the host NPC and its choke phase");
      q.h.reserved=5;require(validNpcControl(q,host,client),"client paired hold for the fast-back lethal");
+     q.h.reserved=6;require(validNpcControl(q,host,client),"back lethal (6) is a paired hold variant");
      q.h.reserved=4;require(!validNpcControl(q,host,client),"breakout (4) is not a paired hold variant");
      q.h.reserved=0;require(!validNpcControl(q,host,client),"paired hold needs a variant");
      q.h.kind=NpcAuthorityMessage::PairedKnockout;q.h.reserved=3;require(validNpcControl(q,host,client),"client knockout request at choke_win");

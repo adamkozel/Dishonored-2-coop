@@ -5,13 +5,15 @@
 #include <cmath>
 #include <cstdint>
 // Legacy choke field names carry paired actor presentation only.
-// Variants1-4: rear choke;5: native fast-back lethal. Never replay victim events.
+// Variants1-4: rear choke;5: native fast-back lethal;6: native assassination_back
+// lethal (1933 ms), presented with the fast-back donor clip normalized to its clock
+// (no separate third-person donor exists). Never replay victim events.
 struct ChokePresentation {
     struct Sample {double time=0;std::uint64_t event=0;unsigned variant=0,elapsed=0,duration=0;std::uint64_t spawner=0,definition=0;};
     std::array<Sample,32> samples{};unsigned count=0;
-    static unsigned duration(unsigned v){constexpr unsigned d[]={0,600,1400,1800,1500,1333};return v<=5?d[v]:0;}
-    static unsigned clip(unsigned v){return 347+v;}
-    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=5&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&
+    static unsigned duration(unsigned v){constexpr unsigned d[]={0,600,1400,1800,1500,1333,1933};return v<=6?d[v]:0;}
+    static unsigned clip(unsigned v){return 347+(v==6?5:v);}
+    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=6&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&
         (s.variant?(s.spawner&&s.definition):(!s.elapsed&&!s.spawner&&!s.definition));}
     void clear(){count=0;}
     bool push(const Sample& s){

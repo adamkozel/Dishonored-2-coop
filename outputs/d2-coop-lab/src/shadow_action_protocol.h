@@ -107,7 +107,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         (p.trapVariant?p.state==20:p.state!=20)&&(!p.trapHeld||(p.kind==1&&(p.state==0||p.state==20)&&
         !p.heartHeld&&!p.rangedKind&&!p.grenadeHeld&&!p.powerVariant&&!p.combatVariant&&!p.carryVariant&&!p.stunVariant&&!p.airStage));
     const bool choke=ChokePresentation::valid({0,1,p.chokeVariant,p.chokeTimeMs,p.chokeDurationMs,p.chokeSpawner,p.chokeDefinition})&&
-        (p.chokeVariant?(p.kind==1&&p.state==21&&p.swordState==(p.chokeVariant==5?2u:1u)&&!p.trapHeld&&!p.heartHeld&&!p.grenadeHeld&&!p.rangedKind&&!p.carryVariant&&!p.powerVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant&&!p.airStage):p.state!=21);
+        (p.chokeVariant?(p.kind==1&&p.state==21&&p.swordState==(p.chokeVariant>=5?2u:1u)&&!p.trapHeld&&!p.heartHeld&&!p.grenadeHeld&&!p.rangedKind&&!p.carryVariant&&!p.powerVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant&&!p.airStage):p.state!=21);
     // 1213: a native use runs only on the ground action (state 0) and never
     // alongside another scene presentation.
     const bool use=p.useTargetValid<=1&&UsePresentation::valid({1.,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})&&

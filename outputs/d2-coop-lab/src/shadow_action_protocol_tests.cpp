@@ -99,6 +99,8 @@ void chokePresentationTests(){
     native.player.current=12;check(!nativePlayerGroundAssassinationStates(native,base),"unobserved assassination stance refused");
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
+    check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
+          ChokePresentation::clip(6)==ChokePresentation::clip(5)&&ChokePresentation::duration(6)==1933,"observed assassination_back (1248j) presented with the fast-back donor on its own clock");
     ChokePresentation t;ChokePresentation::Sample out{};float amount=0;
     check(t.push({100,1,1,200,600,31,41})&&t.push({140,1,1,240,600,31,41}),"confirmed choke clock accepted");
     check(t.sample(120,out,amount)&&std::fabs(amount-220.f/600)<1e-6f,"choke uses delayed native clock");
@@ -374,13 +376,13 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");
     }
     {auto choke=p;choke.state=21;choke.swordState=1;choke.chokeVariant=1;choke.chokeDurationMs=600;choke.chokeSpawner=31;choke.chokeDefinition=41;
-      for(unsigned v=1;v<=5;++v){choke.swordState=v==5?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=ChokePresentation::duration(v);check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      for(unsigned v=1;v<=6;++v){choke.swordState=v>=5?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=ChokePresentation::duration(v);check(validShadowAction(choke,c,h),"owned native choke wire phases");}
       auto bad=choke;bad.version=68;check(!validShadowAction(bad,c,h),"previous combat wire refused");
       bad=choke;bad.chokeSpawner=0;check(!validShadowAction(bad,c,h),"targetless choke refused");
       bad=choke;bad.swordState=1;check(!validShadowAction(bad,c,h),"lethal paired scene requires presented sword");
       bad=choke;bad.trapHeld=1;check(!validShadowAction(bad,c,h),"choke cannot conceal a held gadget");
       bad=choke;bad.state=18;check(!validShadowAction(bad,c,h),"unbound fallback cannot carry choke event");
-      bad=choke;bad.chokeTimeMs=1801;check(!validShadowAction(bad,c,h),"choke native duration bound");
+      bad=choke;bad.chokeTimeMs=bad.chokeDurationMs+1;check(!validShadowAction(bad,c,h),"choke native duration bound");
     }
     {unsigned local=0;const unsigned start[]={217,17,200},wrap[]={910,44,866},equip[]={25,25,0},shifted[]={25,0,0};
       check(nativeTrapLocalClock(4,666,start,local)&&local==17,"recorded native ready-loop local clock");
