@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
@@ -262,7 +262,7 @@ Regular/sleep-bolt changes are recorded in both directions with native bolt mode
 
 ## grenade_equip_aim_throw
 
-Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.
+Audit 1267: release pop fixed in bank 1266 (pelvis travel scaled to 25%); throw accepted from both windows. Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.
 
 ````json
 {
@@ -274,7 +274,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are r
   ],
   "authoring": "candidates",
   "runtime_binding": "native_network_ground_grenade_partial_verified",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_bank_1266",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "grenade equip aim throw",
@@ -285,7 +285,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are r
     "sword_grenade_launch_down"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
+  "notes": "Audit 1267: release pop fixed in bank 1266 (pelvis travel scaled to 25%); throw accepted from both windows. Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -363,7 +363,9 @@ Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are r
     "grenade-reader-host-v320.mp4",
     "grenade-reader-host-v320-source.mp4",
     "grenade-reader-emily-v320.mp4",
-    "grenade-reader-emily-v320-source.mp4"
+    "grenade-reader-emily-v320-source.mp4",
+    "grenade-network-host-v1266a.mp4",
+    "grenade-network-client-v1266a.mp4"
   ],
   "native_integration": {
     "native-grenade-actions-corvo-high-v54.mp4": {
@@ -1793,12 +1795,14 @@ Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are r
     }
   },
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: native-grenade-actions-corvo-high-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-corvo-high-v54.mp4>)
 - [in_game_recordings: native-grenade-actions-corvo-low-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-corvo-low-v54.mp4>)
 - [in_game_recordings: native-grenade-actions-emily-high-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-emily-high-v54.mp4>)
@@ -1874,6 +1878,8 @@ Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are r
 - [in_game_recordings: grenade-reader-host-v320-source.mp4](<../../../../work/natural-moveset/grenade-reader-host-v320-source.mp4>)
 - [in_game_recordings: grenade-reader-emily-v320.mp4](<../../../../work/natural-moveset/grenade-reader-emily-v320.mp4>)
 - [in_game_recordings: grenade-reader-emily-v320-source.mp4](<../../../../work/natural-moveset/grenade-reader-emily-v320-source.mp4>)
+- [in_game_recordings: grenade-network-host-v1266a.mp4](<../../../../work/natural-moveset/grenade-network-host-v1266a.mp4>)
+- [in_game_recordings: grenade-network-client-v1266a.mp4](<../../../../work/natural-moveset/grenade-network-client-v1266a.mp4>)
 ## mine_or_razor_place
 
 Visual sweep 1260: accepted (corvo accept, emily accept). The trap equip, ready, crouched place, empty or reload, and holster read correctly for both partners; contact with the floor is approximate. 575 with Emily576 and Corvo578: Corvo spring razor and Emily stun mine each pass at least15 native Steam presentation checks. Shared observed equip500, holster500, ready-in200/loop666, place300 and empty333 or observed reload866 clocks drive existing authored bank62/348; selected idle and static native wrist props included. Stock consumption hides remote held gadget. Both checkpoints and14 protected hashes restored. Failed570 clock-offset interpretation corrected from probe definition; Emily572 observed native reload866 instead of expected empty333, now represented explicitly; both observer sheets viewed, fine polish deferred. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed. Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality. Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate. Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage. Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing. Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed.

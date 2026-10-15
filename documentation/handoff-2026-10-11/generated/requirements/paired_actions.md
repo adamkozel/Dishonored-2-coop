@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -530,7 +530,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (be
 - [in_game_recordings: choke-breakout-corvo-v597/observer.mp4](<../../../../work/natural-moveset/choke-breakout-corvo-v597/observer.mp4>)
 ## carry_body_lift_idle_move_drop_throw
 
-Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.
+Audit 1267: lift, carry and throw accepted for both characters from the v38 recordings (the sweep had judged v13). Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.
 
 ````json
 {
@@ -542,7 +542,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping wo
   ],
   "authoring": "candidates",
   "runtime_binding": "bounded_native_source_paired_pickup_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_functional_both_roles_v38",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "carry body lift idle move drop throw",
@@ -559,7 +559,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping wo
     "carry_pickup_supported_settle"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
+  "notes": "Audit 1267: lift, carry and throw accepted for both characters from the v38 recordings (the sweep had judged v13). Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2337,12 +2337,14 @@ Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping wo
     }
   },
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "../movement-integration/sweep-defects-audit-v1267.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
 - [in_game_recordings: native-carry-corvo-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-corvo-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-emily-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-emily-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-carrier-corvo-v3/native.mp4](<../../../../work/natural-moveset/native-carry-carrier-corvo-v3/native.mp4>)

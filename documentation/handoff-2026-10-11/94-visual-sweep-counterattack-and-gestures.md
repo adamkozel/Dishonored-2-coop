@@ -80,3 +80,26 @@ Both are presentation only: no item, inventory or health outcome is synthesized.
 - mana elixir: same path, not recorded;
 - note-reading pose: the native ReadNote4 UI suspends the stream and the observer holds the body frozen, so a reading pose would need observer-side playback during that hold;
 - body looting and pickpocketing.
+
+## Sweep defects and missing views (audit 1267)
+
+[Audit 1267](../../work/movement-integration/sweep-defects-audit-v1267.json).
+
+**Grenade release pop (fixed).** The release and recovery clips (bank clips 256/257; crouched 269/270) carry about 0.75 m of authored horizontal pelvis travel (crouched about 0.45 m) while the native root stays still.
+- On 1214j the pop was still present (take 1265a, re-recorded with harness v1265, derived from v56 by `modernize_bank_harness_v1265.py`).
+- Bank 1266 ([builder](../../work/natural-moveset/build_grenade_release_bank_v1266.py)) scales that travel to 25%. All other clip payloads are byte-identical, and the bank stays at version 71 with 374 clips.
+- Take 1266a shows a short step into the throw instead.
+- Candidate 1214l deploys bank 1266. 1214k's stage failed on a stale bank-manifest path, and its partial archive is kept.
+- Product regression 1261c passes in both roles.
+
+**Carry (accepted).** The sweep's input sorted videos oldest-first, so the carry item was judged from the v13 take. The newest v38 recordings show a floor-to-shoulder lift, carry and throw for both characters.
+
+**Coverage takes (1267a, [harness](../../work/natural-moveset/make_coverage_v1267.py)):** runs in 8 directions and sprint-to-slide with a crouched exit, in both roles. Presentation stayed live and the visuals are accepted.
+
+**Deaths and ragdolls:** Corvo-sourced NPC deaths and corpses are visible in the client window of the 1254b takedowns, so both roles are covered.
+
+**Open:**
+- **Crouched heavy:** the sweep's 0.2 s standing snap is not reproduced on the current build. The 1265b re-record never held the charge, so it is inconclusive.
+- **No judgeable view yet:** long fall loop, doors, key use as Corvo, map-load recovery as Corvo, kick.
+
+Checklist: 94 of 105 runtime-bound, 79 visually accepted.

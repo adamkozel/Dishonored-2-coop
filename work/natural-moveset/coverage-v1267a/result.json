@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "run8",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "slide",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "run8",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "slide",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case."
+}
