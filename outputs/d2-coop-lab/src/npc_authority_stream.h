@@ -77,7 +77,7 @@ struct NpcAuthorityChannel {
     // a choke that knocks the replica out keeps it natively unconscious. Host:
     // the NPC's AI is held for the scene and it is knocked out at choke_win.
     bool localPaired=false,unconscious=false,hostPairedLease=false;unsigned pairedVariant=0;
-    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0,unconsciousSentAt=0,unconsciousAt=0,reversePoseAt=0,reverseSentAt=0;unsigned unconsciousSends=0;std::uint64_t reversePoses=0;const char* pairedResult="none";
+    ULONGLONG pairedUntil=0,pairedHoldAt=0,pairedKnockoutAt=0,unconsciousSentAt=0,unconsciousAt=0,reversePoseAt=0,reverseSentAt=0;unsigned unconsciousSends=0;std::uint64_t reversePoses=0;float reverseRoot[3]{},presentedRoot[3]{};const char* pairedResult="none";
     bool enabled=true,ready=false;
     const char* result="negotiating";
     std::uint64_t sent=0,received=0,rejected=0,poses=0,roots=0;
@@ -339,7 +339,7 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
     if(reverse?(localRole||!c.ready||c.corpse||!(c.hostPairedLease||(c.unconscious&&tick-c.unconsciousAt<3500))):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;return;}
     if(p.h.sourceArm!=c.peerArm||p.h.sourceHandle!=c.peerHandle||p.h.targetHandle!=c.lease.binding.npc.handle||
        p.h.rig!=c.rig||p.h.joints!=c.render.joints||!c.buffer.push(p,presentationClock())){++c.rejected;return;}
-    c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;}else{c.poseAt=tick;++c.poses;}
+    c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);}else{c.poseAt=tick;++c.poses;}
 }
 void sendNpcPose(NpcAuthorityChannel& c,NpcAuthorityMessage kind=NpcAuthorityMessage::Pose){
     NativeSkeleton s{};
@@ -462,7 +462,7 @@ void presentNpcStream(ULONGLONG tick){
         NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
-        ++c.roots;next.push_back(std::move(p));
+        ++c.roots;if(hostVictim)std::memcpy(c.presentedRoot,p.pose.root,12);next.push_back(std::move(p));
     }
     AcquireSRWLockExclusive(&npcPresentationLock);npcPresentation=std::move(next);ReleaseSRWLockExclusive(&npcPresentationLock);
 }
@@ -470,7 +470,7 @@ void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs);
-    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\"}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult);}
+    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f]}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2]);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
     fputs("],\"poseDiagnostics\":[",f);for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"stale\":%s,\"gaps\":%llu,\"recoveries\":%llu,\"failures\":%llu,\"lastFailure\":\"%s\",\"joint\":%d,\"matrix\":[",i?",":"",c.arm,c.lease.binding.npc.handle,c.poseStale?"true":"false",c.poseGaps,c.poseRecoveries,c.poseFailures,c.poseFailure,c.poseFailureJoint);
         for(unsigned j=0;j<12;++j)fprintf(f,"%s%.9g",j?",":"",c.poseFailureMatrix[j]);fputs("],\"root\":[",f);
