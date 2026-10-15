@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-15T21:52:37.547592+02:00",
+  "UpdatedAt": "2026-10-15T22:37:34.230064+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22033,5 +22033,13 @@
     "inProgress": "Documentation and next combat/world items.",
     "acceptedEnemyDamageFallback": "candidate-npc-combat-v988"
   },
-  "CommunicationPreference": "User requested that prior explanations not be repeated (consumable families and native cutscene skipping in particular). Give only materially new findings or actions; continue autonomously without milestone approval pauses."
+  "CommunicationPreference": "User requested that prior explanations not be repeated (consumable families and native cutscene skipping in particular). Give only materially new findings or actions; continue autonomously without milestone approval pauses.",
+  "MissionTransitions": {
+    "Card": 16,
+    "Audit": "work/movement-integration/mission-end-audit-v1291.json",
+    "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
+    "HostNativeMissionEnd": true,
+    "PartnerFollowsMissionEnd": false,
+    "NextAction": "Carry the mission end to the partner world natively: mirror gameflow task/objective/mission state changes (arkMsgGameflowTaskChangeState, arkMsgGameflowObjectiveChangeState, arkMsgGameflowMissionChangeState) so the partner completes its own mission, sees its own result screen and loads the next map with its own character state."
+  }
 }

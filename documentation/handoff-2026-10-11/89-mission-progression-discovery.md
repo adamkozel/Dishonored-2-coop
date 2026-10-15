@@ -74,6 +74,22 @@ When only one player crosses a scripted trigger, the partner's world doesn't adv
 
 So in co-op, the partner reaches the end through the shared carriage usable or a mirrored gameflow completion. Which one, and how both worlds then load the next map together, is the next runtime test.
 
+**Runtime (take mission-end-carriage-v1291a, candidate 1214aw, lab mode, follow off; [audit 1291](../../work/movement-integration/mission-end-audit-v1291.json)):**
+- **Setup:** the host was placed in `script_trigger_addermirestation_inside_area` with the trigger mirror and the lab health hold on. It used the carriage from its east door.
+- **Host (confirmed runtime):** the native end ran in full. Logic states, in order:
+  1. 1 → 5: the carriage-entry scene.
+  2. 9: the leave-or-stay prompt; A leaves.
+  3. 5: the ride.
+  4. 11: the native result screen, "Edge of the World — Mission Complete"; A continues.
+  5. 0 → 15/5: the map transition.
+  6. 5 → 1: the Good Doctor intro, then gameplay on `institute_p_lowchaos`, about 135 s after the use.
+- **Partner:** Emily's world stayed in gameplay on `eotw_p_lowchaos` throughout. Neither the shared usable nor the mirrored triggers carry the mission end, so the partner needs its own native completion.
+- **Transport:** the Steam connection stayed fresh with the peers on different maps.
+- **Restore:** the lab's SLOT81 checkpoints were unchanged, and the lab and protected files were restored.
+- **Side effect:** the host instance unlocked a Steam achievement ("Alternative Approach") on the shared lab account.
+
+**Next:** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
+
 ## Next for this line
 
 1. Walk a whole mission with the mirror on.

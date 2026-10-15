@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-15T22:37:34.230064+02:00",
+  "candidate": "candidate-npc-combat-v1214aw",
+  "takes": [
+    {
+      "take": "mission-end-carriage-v1291a",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: native mission end on Edge of the World (host), partner behaviour observed, lab mode, follow off.",
+  "findings": [
+    "Confirmed static (chapter 89): the mission ends through the carriage usable and scene, then the gameflow mission completion (result screen, institute.mapinfo); its LevelTransition nodes are debug only.",
+    "Confirmed runtime: the host used the carriage from the east door (cinematic epoch 20 -> 22).",
+    "Host logic sequence: 1/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 9/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 0/0@ -> 15/5@ -> 5/0@campaign/institute/institute_p_lowchaos -> 1/0@campaign/institute/institute_p_lowchaos.",
+    "Logic 9 is the leave-or-stay prompt (A leaves); logic 11 is the native result screen (A continues); 15/5 is the map transition; the Good Doctor intro scene (5) follows.",
+    "Client logic never left 1 on eotw_p_lowchaos: the shared usable and mirrored triggers do not carry the mission end to the partner world.",
+    "The Steam connection stayed fresh with the peers on different maps (remoteFresh true, connection 3 on both).",
+    "Lab SLOT81 checkpoints unchanged; Dunwall fixture and protected files restored.",
+    "Side effect: the host instance unlocked the Steam achievement \"Alternative Approach\" on the lab account (no casualties); lab instances share the main Steam account."
+  ],
+  "next": [
+    "Carry the mission end to the partner world natively: mirror gameflow task/objective/mission state changes (arkMsgGameflowTaskChangeState, arkMsgGameflowObjectiveChangeState, arkMsgGameflowMissionChangeState) so the partner completes its own mission, sees its own result screen and loads the next map with its own character state.",
+    "Partner follows the host's chaos variant; both-ready barrier before the next mission starts."
+  ]
+}
