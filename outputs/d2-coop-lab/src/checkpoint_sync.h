@@ -149,6 +149,7 @@ void checkpointRequest(std::uint64_t tick) {
     s.key=checkpointScope(true);s.phase=CheckpointPhase::Requested;s.deadline=tick+45000;s.result="requesting";
     if(!checkpointSend(CheckpointMessage::Request))checkpointFail("request_send_failed");
 }
+std::uint64_t checkpointMissionContinues=0;
 bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     continuation=false;
     auto& s=checkpointSync;if(!s.enabled)return false;
@@ -185,6 +186,10 @@ bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
             continuation=true;++s.continuationCalls;return false;
         }
     }
+    // 1214bd: after a mission's result screen, Continue loads the next mission
+    // with RestartFromMemoryCheckpoint (take mission-end-product-v1291h). That is
+    // the mission transition, not a user reload: pass it through.
+    if(kind==1&&outgoing.gameLogicState==11){++checkpointMissionContinues;return false;}
     checkpointRequest(GetTickCount64());return true;
 }
 void checkpointContinuationReturned(unsigned char result) {

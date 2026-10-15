@@ -1,4 +1,4 @@
-param([string]$Take='mission-end-vm-v1296a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bc',[int]$WatchSeconds=300)
+param([string]$Take='mission-end-vm-v1296a',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214be',[int]$WatchSeconds=300)
 # Stage 6 mission end across two machines and two Steam accounts (chapters 89
 # and 97): host lab instance on this PC = main account (Corvo), client lab
 # instance in the lab VM = second account (Emily), friends-only Steam lobby,
@@ -25,7 +25,7 @@ function HI([string]$b='',[int]$ms=100){$a=@{Role='host';DurationMs=$ms};if($b){
 function VI([string]$b='Neutral',[int]$ms=300){Send-D2LabVMInput -Button $b -DurationMs $ms|Out-Null}
 function HQ($mode,$arg=0){for($i=0;$i-lt8;$i++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $hostPid $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $hostPid $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 50};throw "Host query failed $mode"}
 function Snap($s,$m){$o=[ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;fresh=$s.remoteFresh;connection=$s.connectionState}
- if($m){$o.mirror=$m.result;$o.sent=$m.sent;$o.applied=$m.applied;if($m.hold){$o.hold=$m.hold.result;$o.holdWaitMs=$m.hold.lastWaitMs};if($m.chaos){$o.chaos=$m.chaos.result;$o.chaosPoints=$m.chaos.localPoints;$o.chaosLevel=$m.chaos.localLevel}};$o}
+ if($m){$o.mirror=$m.result;$o.sent=$m.sent;$o.applied=$m.applied;if($m.hold){$o.hold=$m.hold.result;$o.holdWaitMs=$m.hold.lastWaitMs;$o.holdSent=$m.hold.sent;$o.holdReceived=$m.hold.received;$o.holdRefused=$m.hold.refused};if($m.chaos){$o.chaos=$m.chaos.result;$o.chaosPoints=$m.chaos.localPoints;$o.chaosLevel=$m.chaos.localLevel}};$o}
 function Pair(){$h=Snap (HS) $(try{HS '.missionend.json'}catch{$null});$v=Snap (Get-D2LabVMStatus) $(try{Get-D2LabVMStatus -Sidecar missionend}catch{$null});[ordered]@{host=$h;vm=$v}}
 function WaitGameplay($label,$sec){
  $d=(Get-Date).AddSeconds($sec);$last=@{host=Get-Date;vm=Get-Date}

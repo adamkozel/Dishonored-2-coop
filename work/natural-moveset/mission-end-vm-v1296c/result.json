@@ -1,0 +1,171 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bd",
+      "hostDll": "5CCE1DC08A988F14CFFDE4AB198CC6ECAA1AD7B0FE0E810F410DDCF3263AF9DF",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "load": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 31,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "disabled",
+        "sent": 0,
+        "applied": 0,
+        "hold": "released",
+        "holdWaitMs": 1843,
+        "chaos": "publishing",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      },
+      "vm": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "idle",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "idle",
+        "chaosPoints": -1,
+        "chaosLevel": -1
+      }
+    },
+    "armed": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 31,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "armed",
+        "sent": 0,
+        "applied": 0,
+        "hold": "released",
+        "holdWaitMs": 1843,
+        "chaos": "publishing",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      },
+      "vm": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "armed",
+        "sent": 0,
+        "applied": 0,
+        "hold": "idle",
+        "holdWaitMs": 0,
+        "chaos": "equal",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      }
+    },
+    "productHost": {
+      "result": "armed",
+      "step": 19,
+      "worlds": 0
+    },
+    "productVm": {
+      "result": "armed",
+      "step": 19,
+      "worlds": 0
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "sent",
+        "sent": 1,
+        "applied": 0,
+        "hold": "timeout",
+        "holdWaitMs": 90016,
+        "chaos": "publishing",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      },
+      "vm": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 21,
+        "fresh": true,
+        "connection": 3,
+        "mirror": "applied",
+        "sent": 0,
+        "applied": 1,
+        "hold": "released",
+        "holdWaitMs": 0,
+        "chaos": "equal",
+        "chaosPoints": 0,
+        "chaosLevel": 0
+      }
+    },
+    "arrivedMs": {
+      "vm": 124078,
+      "host": 209787
+    },
+    "hostStates": [
+      "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "9/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "11/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "0/0@",
+      "15/5@",
+      "5/0@campaign/institute/institute_p_lowchaos",
+      "1/0@campaign/institute/institute_p_lowchaos"
+    ],
+    "vmStates": [
+      "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "11/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+      "0/0@",
+      "15/5@",
+      "5/0@campaign/institute/institute_p_lowchaos",
+      "1/0@campaign/institute/institute_p_lowchaos"
+    ]
+  },
+  "scope": "Edge of the World mission end across two machines and two Steam accounts in product mode (host = Corvo on this PC, VM = Emily): both worlds show their own result screen and reach The Good Doctor on the same map."
+}

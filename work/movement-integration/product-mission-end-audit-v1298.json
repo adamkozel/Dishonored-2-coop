@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-16T00:36:31.531102+02:00",
+  "candidates": [
+    "candidate-npc-combat-v1214bc",
+    "candidate-npc-combat-v1214bd"
+  ],
+  "takes": [
+    {
+      "take": "mission-end-product-v1291h",
+      "candidate": "candidate-npc-combat-v1214bc",
+      "passed": false,
+      "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Native query failed client --health"
+    },
+    {
+      "take": "mission-end-product-v1291i",
+      "candidate": "candidate-npc-combat-v1214bd",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: the mission end in lab product mode (coop_product_auto) on the lab pair; diagnosis of the result-screen hang seen across the VM (takes 1296a/b).",
+  "findings": [
+    "Confirmed runtime (1291h): with product mode both worlds stayed in logic 11 after Continue. The checkpoint command trace showed Continue issuing the native RestartFromMemoryCheckpoint at logic 11, and checkpoint sync (armed by product mode) consumed it as a user reload request (consumed: true; reset sidecar requests 1, rejected 2).",
+    "So after a result screen Dishonored 2 starts the next mission with RestartFromMemoryCheckpoint (confirmed runtime).",
+    "1214bd: checkpoint sync passes RestartFromMemoryCheckpoint through at logic 11 (checkpointContinues).",
+    "Take 1291i (1214bd, product mode): each world passed one continue; the both-ready hold released after 1.8 s; both reached institute_p_lowchaos; lab restored.",
+    "1291h left the lab stuck on the result screens; the 1214bd deploy relaunched it to the Dunwall fixture."
+  ],
+  "next": [
+    "Two-account VM take on 1214bd (1296c)."
+  ]
+}

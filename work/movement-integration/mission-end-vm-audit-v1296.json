@@ -1,11 +1,23 @@
 {
-  "at": "2026-10-15T23:58:19.238425+02:00",
+  "at": "2026-10-16T00:45:03.086363+02:00",
   "candidate": "candidate-npc-combat-v1214bb",
   "takes": [
     {
       "take": "mission-end-vm-v1296a",
       "passed": false,
       "failure": "Next mission not reached (host False, vm False)"
+    },
+    {
+      "take": "mission-end-vm-v1296b",
+      "candidate": "candidate-npc-combat-v1214bc",
+      "passed": false,
+      "failure": "Next mission not reached (host False, vm False)"
+    },
+    {
+      "take": "mission-end-vm-v1296c",
+      "candidate": "candidate-npc-combat-v1214bd",
+      "passed": true,
+      "failure": null
     }
   ],
   "complete": false,
@@ -16,9 +28,12 @@
     "Host states: 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 9/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 5/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos; VM states: 1/0@campaign/edge_of_the_world/eotw_p_lowchaos -> 11/0@campaign/edge_of_the_world/eotw_p_lowchaos.",
     "Failure: both stayed in logic 11. coop_session host opened the native Steam invite overlay on the host, which kept the host input, so the host never continued; the VM continued from its result screen and then waited in logic 11 (product mode).",
     "Privacy: the overlay showed the friends list in the local host recording (end-host.mp4; videos are never committed). 1214bc adds the lab-only coop_session host_quiet (no invite overlay) for takes.",
-    "Side effect: the second account also unlocked \"Ghostly\" and \"Alternative Approach\"."
+    "Side effect: the second account also unlocked \"Ghostly\" and \"Alternative Approach\".",
+    "Take 1296b (quiet lobby, 1214bc): no overlay, but both worlds again stayed in logic 11; reproduced on the lab pair and traced to checkpoint sync consuming RestartFromMemoryCheckpoint (audit 1298).",
+    "Take 1296c (1214bd, pass): across two machines and two Steam accounts in product mode, both worlds showed their own result screen and reached gameplay on institute_p_lowchaos (VM screenshot vm-logic1-124s.png: Emily at Addermire, objective updated).",
+    "Defect in 1296c: the host both-ready hold timed out after 90 s (VM arrived at 124 s, host at 210 s): the VM's single D2MR did not count on the host. 1214be re-sends the ready every second while holding and for 30 s after release."
   ],
   "next": [
-    "Re-run with coop_session host_quiet (1214bc)."
+    "VM take on 1214be: the both-ready hold must release on both peers."
   ]
 }

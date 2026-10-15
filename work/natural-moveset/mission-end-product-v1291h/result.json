@@ -1,0 +1,85 @@
+{
+  "passed": false,
+  "scope": "Edge of the World mission end through the carriage (host); both worlds sampled through prompt, ride, result screen and load; Dunwall fixture restored.",
+  "cases": [
+    {
+      "sameMap": true,
+      "used": "door-east",
+      "hostStates": [
+        "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "1/5@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "9/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "11/0@campaign/edge_of_the_world/eotw_p_lowchaos"
+      ],
+      "final": {
+        "client": {
+          "logic": 11,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "mapId": "60a40b72337a261a",
+          "epoch": 16,
+          "cine": 10,
+          "canSkip": 0,
+          "remoteMapId": "60a40b72337a261a",
+          "remoteLogic": 11,
+          "remoteFresh": true,
+          "connection": 3,
+          "pos": [
+            -31.078419,
+            192.488663,
+            1.210991
+          ],
+          "mirror": "applied",
+          "mirrorSent": 0,
+          "mirrorApplied": 1,
+          "mirrorState": 3,
+          "hold": "expecting",
+          "holdWaitMs": 0,
+          "chaos": "equal",
+          "chaosPoints": 0,
+          "chaosLevel": 0,
+          "chaosWrites": 0,
+          "responding": true
+        },
+        "host": {
+          "logic": 11,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "mapId": "60a40b72337a261a",
+          "epoch": 16,
+          "cine": 15,
+          "canSkip": 0,
+          "remoteMapId": "60a40b72337a261a",
+          "remoteLogic": 11,
+          "remoteFresh": true,
+          "connection": 3,
+          "pos": [
+            69.594894,
+            144.273148,
+            25.113638
+          ],
+          "mirror": "sent",
+          "mirrorSent": 1,
+          "mirrorApplied": 0,
+          "mirrorState": -1,
+          "hold": "expecting",
+          "holdWaitMs": 0,
+          "chaos": "publishing",
+          "chaosPoints": 0,
+          "chaosLevel": 0,
+          "chaosWrites": 0,
+          "responding": true
+        }
+      },
+      "clientReachedNextMission": false,
+      "clientStates": [
+        "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "11/0@campaign/edge_of_the_world/eotw_p_lowchaos"
+      ],
+      "hostReachedNextMission": false
+    }
+  ],
+  "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Native query failed client --health"
+}
