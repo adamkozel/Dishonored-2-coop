@@ -14,14 +14,15 @@ contract = data(P / 'work/natural-moveset/movement-phase-contract.json')
 req = G / 'movement-requirements.md'
 bound = sum(1 for i in catalog['items'] if i.get('runtime_binding') != 'not_verified')
 accepted = sum(1 for i in catalog['items'] if i.get('visual_validation') != 'not_accepted')
+excluded = sum(1 for i in catalog['items'] if i.get('phase_status') in ('not_applicable', 'excluded_by_policy'))
 lines = ['# Complete functional movement requirements\n', f'Captured {STAMP}; source {link(catalogPath, req)}.\n',
-         f'{len(catalog["items"])} requirements: {bound} runtime-bound (fully or partially), {accepted} with accepted visuals. Candidate material and recordings do not establish completion.\n',
+         f'{len(catalog["items"])} requirements: {bound} runtime-bound (fully or partially), {accepted} with accepted visuals, {excluded} not applicable or excluded by policy. Candidate material and recordings do not establish completion.\n',
          '## Acceptance contract\n', block(contract), '## Requirements\n',
-         '| id | family | authoring | runtime binding | visual validation |', '|---|---|---|---|---|']
+         '| id | family | authoring | runtime binding | visual validation | phase |', '|---|---|---|---|---|---|']
 families = collections.defaultdict(list)
 for item in catalog['items']:
     families[item['family']].append(item)
-    lines.append('| ' + ' | '.join(str(item.get(k, '')) for k in ['id', 'family', 'authoring', 'runtime_binding', 'visual_validation']) + ' |')
+    lines.append('| ' + ' | '.join(str(item.get(k, '')) for k in ['id', 'family', 'authoring', 'runtime_binding', 'visual_validation', 'phase_status']) + ' |')
 lines += ['\n## Full per-family records\n']
 for family, items in families.items():
     f = G / 'requirements' / f'{family}.md'; lines.append('- ' + link(f, req, f'{family}: {len(items)} requirements'))
@@ -35,4 +36,4 @@ for family, items in families.items():
                     if p.exists(): content.append('- ' + link(p, f, key + ': ' + x))
     content.append('\n'); f.parent.mkdir(parents=True, exist_ok=True); f.write_text('\n'.join(content), encoding='utf-8')
 req.write_text('\n'.join(lines) + '\n', encoding='utf-8')
-print(f'{len(catalog["items"])} requirements, {bound} bound, {accepted} visually accepted')
+print(f'{len(catalog["items"])} requirements, {bound} bound, {accepted} visually accepted, {excluded} not applicable/excluded')

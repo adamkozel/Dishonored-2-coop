@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:10:51.376710+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:17:35.284561+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -961,7 +961,7 @@ Candidates require animation review and appropriate game-state/contact binding.
 
 ## sit_stand
 
-Candidates require animation review and appropriate game-state/contact binding.
+Not applicable (audit 1240, confirmed static): D2 has no player sitting state among its arkPlayerState classes; the only sitting strings are NPC AI providers. Seated story moments are native cinematics, covered by cutscene_enter_exit. The authored NPC bench clips remain in the library unbound.
 
 ````json
 {
@@ -985,14 +985,18 @@ Candidates require animation review and appropriate game-state/contact binding.
     "empty_distraction_sitting_bench_out_walk",
     "empty_distraction_sitting_bench_in"
   ],
-  "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding.",
-  "phase_status": "work_remaining",
+  "deliverable_kind": "not_applicable_no_native_player_state",
+  "notes": "Not applicable (audit 1240, confirmed static): D2 has no player sitting state among its arkPlayerState classes; the only sitting strings are NPC AI providers. Seated story moments are native cinematics, covered by cutscene_enter_exit. The authored NPC bench clips remain in the library unbound.",
+  "phase_status": "not_applicable",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/not-applicable-audit-v1240.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/not-applicable-audit-v1240.json](<../../../../work/movement-integration/not-applicable-audit-v1240.json>)
 ## scripted_scene_pose_handoff
 
 A context-dependent animation ownership transition. Requires a tested blend from the actual scene pose, rather than one universal clip.

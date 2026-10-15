@@ -5,7 +5,9 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1213j ([identity](../../work/movement-integration/candidate-npc-combat-v1213j/identity.json)), protocol 74, bank 71/374. Latest (stage 3):
+Updated 2026-10-15. Live candidate-npc-combat-v1213l ([identity](../../work/movement-integration/candidate-npc-combat-v1213l/identity.json)), protocol 75, bank 71/374. Latest (stage 3):
+- **Checklist ([movement requirements](generated/movement-requirements.md)):** 87 of 105 runtime-bound, 9 visually accepted, 2 not applicable or excluded by policy. `sit_stand` is not applicable: D2 has no player sitting state (confirmed static, [audit 1240](../../work/movement-integration/not-applicable-audit-v1240.json)).
+- **Hand reach (#6), window traversal (#7) and cutscene entry/exit (#8):** the partner's right wrist reaches toward the used entity (audit 1235); the native confined mantle through a climbable window is presented in both roles (audit 1238; visual in #33); the partner retires for a native cinematic and is back 1.57 s after it (audit 1239, accepted on both windows).
 - **Use variants on real mechanisms, both roles (#4):** a native use (player state 75, plus the focused entity) plays the matching authored interaction on the partner's body ([chapter 92](92-native-use-interactions.md), [audit 1229](../../work/movement-integration/use-variants-audit-v1229.json)):
   - generic: window;
   - lever: wind turbine;
@@ -21,7 +23,7 @@ Updated 2026-10-15. Live candidate-npc-combat-v1213j ([identity](../../work/move
   - 1213i skips transient refused frames and names every refusal ([chapter 91](91-product-presentation-recovery.md)).
 - **Static asset census:** [`tools/diag/d2_resource_index.py`](../../tools/diag/d2_resource_index.py) reads every mission's entity files without lab time.
 - An earlier milestone (1214c): `lever_button_crank_wheel` became runtime-bound for the generic reach.
-- Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
+- Counterattack and knockdown (#9) have their native sources identified; neither is bound yet.
 - Two machines (stage 2, 2026-10-15): the lab VM `D2CoopVM` now runs the user's second Steam account ([tools/vm](../../tools/vm/README.md)).
   - The first two-account connection passed in take [two-account-session-v1221](../../work/natural-moveset/two-account-session-v1221/result.json). The host lab instance on the main account opened a friends-only lobby, and the VM instance on the second account joined over Steam P2P. Movement synced both ways.
   - Deployed DLL: `outputs/d2-coop-lab/bin/dinput8.dll` is hash-identical to candidate-npc-combat-v1213d.
@@ -37,7 +39,7 @@ Previous header (1203f, history): Live candidate-npc-combat-v1203f ([identity](.
 - It is live again 1.7 s after a native map load and 2.9 s after a shared checkpoint restart, on both peers (1199d). `map_load_checkpoint_recovery` is runtime-bound.
 - Root causes fixed: an engine-thread bank stall, a stream handshake that rejected restarted peers, over-strict product freshness, bulk congestion, and usable-hello reliable flooding ([chapter 91](91-product-presentation-recovery.md)).
 
-Open (stage 3): `window_enter_exit`, `cutscene_enter_exit` and the other unbound checklist items.
+Open (stage 3): the remaining unbound checklist items (#9, #11) and visual acceptance (#33).
 
 Previous header (1193, history): Live candidate-npc-combat-v1193 ([identity](../../work/movement-integration/candidate-npc-combat-v1193/identity.json)). Latest (stage 7):
 - Product mode boots outside the lab environment. Steam is acquired at boot, there is no lab loopback, and the game stays idle until F7 or a Steam join (audit 1196).

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T04:55:16.349663+02:00",
+  "generated": "2026-10-15T05:17:34.964385+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -17597,11 +17597,14 @@
         "empty_distraction_sitting_bench_out_walk",
         "empty_distraction_sitting_bench_in"
       ],
-      "deliverable_kind": "animation",
-      "notes": "Candidates require animation review and appropriate game-state/contact binding.",
-      "phase_status": "work_remaining",
+      "deliverable_kind": "not_applicable_no_native_player_state",
+      "notes": "Not applicable (audit 1240, confirmed static): D2 has no player sitting state among its arkPlayerState classes; the only sitting strings are NPC AI providers. Seated story moments are native cinematics, covered by cutscene_enter_exit. The authored NPC bench clips remain in the library unbound.",
+      "phase_status": "not_applicable",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [],
+      "evidence": [
+        "../movement-integration/not-applicable-audit-v1240.json"
+      ]
     },
     {
       "id": "scripted_scene_pose_handoff",
