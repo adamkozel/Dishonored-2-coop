@@ -727,8 +727,12 @@ int main(int argc, char** argv) {
         std::cout<<",\"vaultSceneValid\":"<<(vaultValid?"true":"false");
         if(vaultValid)std::cout<<",\"vaultScene\":{\"phase\":"<<vault.phase<<",\"handle\":"<<vault.handle<<",\"character\":"<<vault.character<<",\"variant\":"<<vault.sceneVariant<<",\"clockMs\":"<<vault.clockMs<<",\"durationMs\":"<<vault.durationMs<<",\"height\":"<<vault.height<<",\"progress\":"<<vault.progress<<'}';
         NativePlayerTraversalScene traversal{};unsigned traversalStage=0;
-        const bool traversalValid=readNativePlayerTraversalScene([&](std::uintptr_t p,void* b,std::size_t n){return read(process.value,p,b,n);},base,s,traversal,&traversalStage);
-        std::cout<<",\"traversalSceneValid\":"<<(traversalValid?"true":"false")<<",\"traversalReaderStage\":"<<traversalStage;
+        NativeTraversalResearch traversalResearch{};
+        const bool traversalValid=readNativePlayerTraversalScene([&](std::uintptr_t p,void* b,std::size_t n){return read(process.value,p,b,n);},base,s,traversal,&traversalStage,&traversalResearch);
+        std::cout<<",\"traversalSceneValid\":"<<(traversalValid?"true":"false")<<",\"traversalReaderStage\":"<<traversalStage
+                 <<",\"traversalResearch\":{\"kind\":"<<traversalResearch.kind<<",\"next\":"<<traversalResearch.next<<",\"current\":"<<traversalResearch.current
+                 <<",\"line\":"<<traversalResearch.line<<",\"duration\":"<<traversalResearch.duration<<",\"bindings\":"<<traversalResearch.bindings<<",\"arms\":"<<traversalResearch.arms
+                 <<",\"asset\":"<<jsonString(traversalResearch.asset)<<",\"expected\":"<<jsonString(traversalResearch.expected)<<",\"subscene\":"<<jsonString(traversalResearch.subscene)<<"}";
         if(traversalValid)std::cout<<",\"traversalScene\":{\"handle\":"<<traversal.handle<<",\"variant\":"<<traversal.variant<<",\"timeMs\":"<<traversal.timeMs<<",\"durationMs\":"<<traversal.durationMs
             <<",\"asset\":"<<jsonString(traversal.asset)<<",\"subscene\":"<<jsonString(traversal.subscene)<<'}';
         const bool equipmentValid=readNativePlayerEquipmentScene([&](std::uintptr_t p,void* b,std::size_t n){return read(process.value,p,b,n);},base,s,equipment);
