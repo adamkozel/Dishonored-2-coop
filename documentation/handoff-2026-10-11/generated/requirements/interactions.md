@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-14T01:55:24.397473+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:10:51.376710+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -378,7 +378,7 @@ Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.js
 - [in_game_recordings: native-unlocked-door-emily-v642/observer.mp4](<../../../../work/natural-moveset/native-unlocked-door-emily-v642/observer.mp4>)
 ## lever_button_crank_wheel
 
-Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending.
+Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.
 
 ````json
 {
@@ -389,7 +389,7 @@ Reach, operation and recovery studies with full-body weight transfer and neutral
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 47,
   "priority": 3,
@@ -401,13 +401,32 @@ Reach, operation and recovery studies with full-body weight transfer and neutral
     "interact_wheel_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending.",
+  "notes": "Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "use-interaction-v1214c/use-client-observed.mp4",
+    "mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4",
+    "use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4",
+    "use-reach-eotw-v1234b/use-client-env_vise_01_1_3-observed.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/native-combat-use-observations-v1211.json",
+    "../movement-integration/use-interaction-audit-v1215.json",
+    "../movement-integration/use-variants-audit-v1229.json",
+    "../movement-integration/use-reach-audit-v1235.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
+- [evidence: ../movement-integration/use-interaction-audit-v1215.json](<../../../../work/movement-integration/use-interaction-audit-v1215.json>)
+- [evidence: ../movement-integration/use-variants-audit-v1229.json](<../../../../work/movement-integration/use-variants-audit-v1229.json>)
+- [evidence: ../movement-integration/use-reach-audit-v1235.json](<../../../../work/movement-integration/use-reach-audit-v1235.json>)
+- [in_game_recordings: use-interaction-v1214c/use-client-observed.mp4](<../../../../work/natural-moveset/use-interaction-v1214c/use-client-observed.mp4>)
+- [in_game_recordings: mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4>)
+- [in_game_recordings: use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4>)
+- [in_game_recordings: use-reach-eotw-v1234b/use-client-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/use-reach-eotw-v1234b/use-client-env_vise_01_1_3-observed.mp4>)
 ## pickup_loot_steal
 
 700/701 measures recurring55–65ms diagnostic batches, with over100ms spikes.702 staggers71 writers across frames (max4 and4ms soft budget), retaining core report cadence and all gameplay/250ms freshness guards.703Corvo/704Emily pass24 scoped runtime checks; baseline701 passes8. Both roles keep Steam ready and body weight>.999 during crouched loot. No status/slice reaches50ms in either new capture, versus52/51 source/observer stalls in baseline. Inventories/health14protected restored. Six game sheets inspected; rear views limit grip/contact judgment. No all-gap recovery or full movement claim. 785–789: exact native coin lifecycle and currency path traced in Ghidra. Ordinary Corvo/Emily pickup adds one coin, repeated input does not recredit. Guarded direct claim/reward/removal passes both roles with three native calls and duplicate no-op; checkpoint restores currency0, full quantities, health and coin.787 retirement-bit refusal and788 inventory-reader failure retained. No shared pickup relay yet; extra native entity event and reliable host ordering remain. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications and coin removal recorded in both views. No shared Steam pickup channel yet. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications recorded in both views; coin removal visible for Corvo, while Emily camera points away and removal is established by native reads. No shared Steam pickup channel yet. 794–798: first bounded native Steam coin channel passes ordinary Corvo and Emily pickups, simultaneous native awards, duplicate packets, pause/resume and coordinated fixed-SLOT82 reload. Both new coin bindings reject retired packets, then a fresh ordinary Emily pickup rewards each wallet once. Worker-thread source observation uses an immutable lease and bounded queue. All test inventories/currency/health restored; actual paired videos retained, including failed793 observer and797 fixture takes. Exact one authored coin only; movement and full shared-world work remain incomplete. 800–808: one bounded native currency catalog replaces the single-item binding. Both games match19 ordinary type1 objects across6 values. Native API batch alternates sources and verifies all19 awards/removals (258 each), individual receipts and duplicate no-ops. Ordinary same-coin simultaneous pickup gives1 each with0 extra recipient calls. Catalog shared checkpoint/rebind/stale packets and fresh Emily pickup pass. Full catalog/inventory/currency/health baseline restored; outside-fixture exercise makes0 calls. Failed ordinary pouch/cupboard approaches retained. Functional family coverage; movement and playable co-op remain incomplete. 810–818: shared pickup catalog expands by native family to24 objects (19 currency,4 ammunition,1 stored health potion). API source/Steam recipient batch gives258 money,6 bullets and1 potion each, with unchanged health; native box modifier2->3 is preserved. Partial ammo9->10 and full ammo/potion zero-grant recipients retire objects and acknowledge once; duplicate no-ops pass. Mixed-catalog ordinary coin shared-checkpoint/rebind/old-packet tests pass. Three ordinary stack approach/isolation failures are retained; ordinary ammo/potion remains unverified. Complete baseline restored. Movement and playable co-op remain incomplete. 820–826: native food family expands Dunwall catalog to51 objects (27 health food,19 currency,4 ammo,1 stored potion). Batch gives14 health to native cap70,258 money,6 bullets and1 potion each;24 full-health food no-ops retire correctly. Unequal host/client health, duplicate rejection and coordinated checkpoint renewal pass. Representative ordinary ammo, stored potion and food inputs now pass. Previous potion setup failures were test-fixture preconditions, not relay failures. Complete native baseline/protected files restored. Movement/playable co-op remain incomplete.
@@ -700,7 +719,7 @@ Reach, operation and recovery studies with full-body weight transfer and neutral
 - [in_game_recordings: native-interactions-corvo-crouch-coin-v692/coin-source.mp4](<../../../../work/natural-moveset/native-interactions-corvo-crouch-coin-v692/coin-source.mp4>)
 ## key_use
 
-Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending.
+Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.
 
 ````json
 {
@@ -711,7 +730,7 @@ Reach, insert/turn and recovery study using a neutral key fixture. Exact lock ge
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "native_use_state75_real_lock_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 47,
   "priority": 3,
@@ -720,13 +739,24 @@ Reach, insert/turn and recovery study using a neutral key fixture. Exact lock ge
     "interact_key_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending.",
+  "notes": "Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/native-combat-use-observations-v1211.json",
+    "../movement-integration/use-interaction-audit-v1215.json",
+    "../movement-integration/use-variants-audit-v1229.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
+- [evidence: ../movement-integration/use-interaction-audit-v1215.json](<../../../../work/movement-integration/use-interaction-audit-v1215.json>)
+- [evidence: ../movement-integration/use-variants-audit-v1229.json](<../../../../work/movement-integration/use-variants-audit-v1229.json>)
+- [in_game_recordings: use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4](<../../../../work/natural-moveset/use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4>)
 ## read_object_or_note
 
 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).
@@ -992,7 +1022,7 @@ A context-dependent animation ownership transition. Requires a tested blend from
 
 ## cutscene_enter_exit
 
-Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them.
+Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.
 
 ````json
 {
@@ -1003,23 +1033,32 @@ Native cutscene animation remains scene-specific. Entry/exit ownership and blend
     "emily"
   ],
   "authoring": "missing",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_cinematic5_partner_retired_and_restored_both_roles",
+  "visual_validation": "accepted_mayhew_scene_both_windows",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "cutscene enter exit",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them.",
+  "notes": "Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "cutscene-transition-v1236b/scene-host.mp4",
+    "cutscene-transition-v1236b/scene-client.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/cutscene-transition-audit-v1239.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/cutscene-transition-audit-v1239.json](<../../../../work/movement-integration/cutscene-transition-audit-v1239.json>)
+- [in_game_recordings: cutscene-transition-v1236b/scene-host.mp4](<../../../../work/natural-moveset/cutscene-transition-v1236b/scene-host.mp4>)
+- [in_game_recordings: cutscene-transition-v1236b/scene-client.mp4](<../../../../work/natural-moveset/cutscene-transition-v1236b/scene-client.mp4>)
 ## map_load_checkpoint_recovery
 
-This is a lifecycle integration requirement, not a standalone animation clip.
+This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.
 
 ````json
 {
@@ -1030,20 +1069,29 @@ This is a lifecycle integration requirement, not a standalone animation clip.
     "emily"
   ],
   "authoring": "missing",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_steam_map_load_and_checkpoint_restart_both_peers",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "map load checkpoint recovery",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "This is a lifecycle integration requirement, not a standalone animation clip.",
+  "notes": "This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "mission-lifecycle-v1199d/load-host.mp4",
+    "mission-lifecycle-v1199d/restart-host.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/lifecycle-audit-v1202.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/lifecycle-audit-v1202.json](<../../../../work/movement-integration/lifecycle-audit-v1202.json>)
+- [in_game_recordings: mission-lifecycle-v1199d/load-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/load-host.mp4>)
+- [in_game_recordings: mission-lifecycle-v1199d/restart-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/restart-host.mp4>)
 ## incapacitation_and_rescue_if_supported
 
 No separate rescue moveset is planned under the requested shared-death policy: either death resets both players from the same checkpoint. Keep this original conditional requirement visible without inventing a rescue animation.

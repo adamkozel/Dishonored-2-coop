@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T05:10:51.376710+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements. Candidate material and recordings do not establish completion.
+105 requirements: 87 runtime-bound (fully or partially), 9 with accepted visuals. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -372,9 +372,9 @@ Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../.
 }
 ````
 
-## Requirement index
+## Requirements
 
-| ID | Family | Authoring | Runtime binding | Visual status |
+| id | family | authoring | runtime binding | visual validation |
 |---|---|---|---|---|
 | stand_idle | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | not_accepted |
 | armed_idle | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | not_accepted |
@@ -409,13 +409,13 @@ Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../.
 | vault_low_obstacle | traversal | candidates | partial_isolated_Dunwall_native_vault | not_accepted |
 | climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | not_accepted |
 | ledge_hang_and_pull_up | traversal | candidates | partial_isolated_Dunwall_low_mantle | not_accepted |
-| window_enter_exit | traversal | candidates | not_verified | not_accepted |
+| window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted |
 | slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | not_accepted |
 | slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | not_accepted |
-| ladder_up_down_entry_exit | traversal | candidates | not_verified | not_accepted |
+| ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected |
 | chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted |
-| swim_idle_directions | traversal | candidates | not_verified | not_accepted |
-| dive_surface_water_exit | traversal | candidates | not_verified | not_accepted |
+| swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected |
+| dive_surface_water_exit | traversal | candidates | partial_native_steam_water_exit_both_roles_mission_map | bounded_actual_game_frames_inspected |
 | sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | not_accepted |
 | sword_ready_idle | combat | candidates | isolated_Dunwall_both_roles | not_accepted |
 | light_attack_variants | combat | candidates | partial_native_steam_target_bearing_standing_slash | not_accepted |
@@ -424,14 +424,14 @@ Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../.
 | crouched_attack | combat | candidates | partial_native_steam_standing_and_crouched_combat | not_accepted |
 | airborne_attack | combat | candidates | partial_native_airborne_combat_both_roles | not_accepted |
 | block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | not_accepted |
-| parry_directions | combat | candidates | not_verified | not_accepted |
-| parry_recovery | combat | candidates | not_verified | not_accepted |
+| parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted |
+| parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted |
 | counterattack | combat | candidates | not_verified | not_accepted |
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | not_accepted |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted |
-| kick_or_shove_if_present | combat | candidates | not_verified | not_accepted |
-| death_variants | combat | candidates | not_verified | not_accepted |
-| ragdoll_handoff | combat | missing | not_verified | not_accepted |
+| kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted |
+| death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | not_accepted |
+| ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | not_accepted |
 | pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | not_accepted |
 | crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | not_accepted |
 | bolt_or_ammo_switch | ranged_and_items | candidates | not_verified | not_accepted |
@@ -440,7 +440,7 @@ Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../.
 | heart_equip_use_holster | ranged_and_items | candidates | partial_native_steam_ground_heart_body_prop | not_accepted |
 | health_elixir | ranged_and_items | candidates | native_network_movement_during_health_use_partial_verified | not_accepted |
 | mana_elixir | ranged_and_items | candidates | native_network_movement_during_mana_use_partial_verified | not_accepted |
-| item_switch_interruptions | ranged_and_items | candidates | not_verified | not_accepted |
+| item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected |
 | lethal_takedown_front_back_sides | paired_actions | candidates | partial_native_steam_fast_back_lethal_actor | not_accepted |
 | nonlethal_takedown_front_back_sides | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | not_accepted |
 | crouched_takedown | paired_actions | candidates | not_verified | not_accepted |
@@ -469,17 +469,17 @@ Captured 2026-10-14T01:55:24.397473+02:00; source [review-catalog.json](<../../.
 | power_upgrade_variants | powers | candidates | not_verified | not_accepted |
 | power_interruptions_and_no_mana | powers | candidates | partial_native_Corvo_Bend_Time_failure_and_same_world_pause | not_accepted |
 | door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | not_accepted |
-| lever_button_crank_wheel | interactions | candidates | not_verified | not_accepted |
+| lever_button_crank_wheel | interactions | candidates | native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles | not_accepted |
 | pickup_loot_steal | interactions | candidates | partial_native_standing_and_crouched_pickup_both_roles | not_accepted |
-| key_use | interactions | candidates | not_verified | not_accepted |
+| key_use | interactions | candidates | native_use_state75_real_lock_both_roles | not_accepted |
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | not_accepted |
 | eat_drink | interactions | candidates | partial_native_source_grapes_and_remote_body_both_roles | not_accepted |
 | carry_object_place_throw | interactions | candidates | not_verified | not_accepted |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted |
 | sit_stand | interactions | candidates | not_verified | not_accepted |
 | scripted_scene_pose_handoff | interactions | missing | not_verified | not_accepted |
-| cutscene_enter_exit | interactions | missing | not_verified | not_accepted |
-| map_load_checkpoint_recovery | interactions | missing | not_verified | not_accepted |
+| cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows |
+| map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | not_accepted |
 | incapacitation_and_rescue_if_supported | interactions | missing | not_verified | not_accepted |
 
 ## Full per-family records
