@@ -1,0 +1,654 @@
+[
+ {
+  "id": "stand_idle",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/host-observer.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Corvo walks in, settles into an armed idle with the sword low, reverses and makes a moving turn (~10-11 s), holsters into a relaxed holstered idle, takes a few holstered steps and redraws. Feet stay planted and transitions are smooth at 4 fps; no pops."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/client-observer.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Emily walks in, holds a wide armed ready idle, holsters into a natural standing idle (~15-21 s) and redraws. The moving-turn and backward segments partly leave the left camera edge (~10.3-11 s, ~18.7-19.7 s); every visible frame is intact and planted."
+   }
+  ],
+  "summary": "Both characters hold natural, planted standing idles, armed and holstered, in the v645 observer views. Emily is partly cropped at the left edge in some segments."
+ },
+ {
+  "id": "armed_idle",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/host-observer.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Corvo walks in, settles into an armed idle with the sword low, reverses and makes a moving turn (~10-11 s), holsters into a relaxed holstered idle, takes a few holstered steps and redraws. Feet stay planted and transitions are smooth at 4 fps; no pops."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/client-observer.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Emily walks in, holds a wide armed ready idle, holsters into a natural standing idle (~15-21 s) and redraws. The moving-turn and backward segments partly leave the left camera edge (~10.3-11 s, ~18.7-19.7 s); every visible frame is intact and planted."
+   }
+  ],
+  "summary": "The armed idle reads correctly for both: Corvo's sword is low and Emily holds a wide ready stance. Native attack and jump interrupt and recover cleanly."
+ },
+ {
+  "id": "walk_8_directions",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/unbound-presentation-v559c-host.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, holster, holstered walking in several directions (3-10.5 s), redraw, a held crouch with the sword (13.5-25 s, mostly in place), then a long stable armed idle. No T-pose, freeze or pop during the missing-binding fault injection."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/unbound-presentation-v559c-client.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed idle, holstered walking in several directions, redraw, crouch with short crouched moves, then a side-on armed idle (knees flexed, sword vertical) to the end. The body stays intact throughout the fault injection."
+   }
+  ],
+  "summary": "Standing walking reads with alternating strides in forward, back, lateral and diagonal headings for both characters, including through the missing-binding fault. Not every one of the 8 directions is shown in isolation."
+ },
+ {
+  "id": "run_8_directions",
+  "verdict": "insufficient",
+  "characters": {
+   "corvo": "insufficient",
+   "emily": "insufficient"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   }
+  ],
+  "summary": "The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items."
+ },
+ {
+  "id": "sprint_forward_and_diagonals",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-sprint-corvo-v2.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Clear sprint poses with forward lean and long stride in several headings (~2.5 s, ~9.5 s, ~12.5 s, ~16.5 s), each ending in a stop to armed idle, plus short walks, then crouch (22-27 s) and a stand-up into idle. Small in a wide room; no frozen travel."
+   },
+   {
+    "path": "work/natural-moveset/integrated-sprint-emily-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Leaning sprints in several headings (~2.5 s, ~9.5 s, ~16.5 s) with stops into armed idle, walks, then crouch (22.5-27 s), stand-up and a slash. Minor overlap with the candelabra while crouched (~24 s)."
+   }
+  ],
+  "summary": "Both characters sprint with a clear forward lean and long stride in several headings, and stop and crouch cleanly. Small in a wide room."
+ },
+ {
+  "id": "start_stop_each_gait",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-sprint-corvo-v2.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Clear sprint poses with forward lean and long stride in several headings (~2.5 s, ~9.5 s, ~12.5 s, ~16.5 s), each ending in a stop to armed idle, plus short walks, then crouch (22-27 s) and a stand-up into idle. Small in a wide room; no frozen travel."
+   },
+   {
+    "path": "work/natural-moveset/moving-turn-corvo-knee-v4b.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Curved walk, run and sprint loops with the sword drawn, including a leaning sprint arc past the camera (~20.6 s), with stops into armed idle. The stride follows the curved travel and there is no frozen pose."
+   },
+   {
+    "path": "work/natural-moveset/integrated-sprint-emily-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Leaning sprints in several headings (~2.5 s, ~9.5 s, ~16.5 s) with stops into armed idle, walks, then crouch (22.5-27 s), stand-up and a slash. Minor overlap with the candelabra while crouched (~24 s)."
+   },
+   {
+    "path": "work/natural-moveset/moving-turn-emily-knee-v4.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed curved walk, run and sprint, with a leaning sprint past the camera (~20.6 s) and a run (~21.7 s), stopping into the wide armed idle. Intact and planted at the stops."
+   }
+  ],
+  "summary": "Walk, run and sprint starts and stops settle into planted armed idles without freezing or sliding for both characters."
+ },
+ {
+  "id": "gait_speed_changes",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-sprint-corvo-v2.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Clear sprint poses with forward lean and long stride in several headings (~2.5 s, ~9.5 s, ~12.5 s, ~16.5 s), each ending in a stop to armed idle, plus short walks, then crouch (22-27 s) and a stand-up into idle. Small in a wide room; no frozen travel."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/host-observer.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Corvo walks in, settles into an armed idle with the sword low, reverses and makes a moving turn (~10-11 s), holsters into a relaxed holstered idle, takes a few holstered steps and redraws. Feet stay planted and transitions are smooth at 4 fps; no pops."
+   },
+   {
+    "path": "work/natural-moveset/integrated-sprint-emily-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Leaning sprints in several headings (~2.5 s, ~9.5 s, ~16.5 s) with stops into armed idle, walks, then crouch (22.5-27 s), stand-up and a slash. Minor overlap with the candelabra while crouched (~24 s)."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/client-observer.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Emily walks in, holds a wide armed ready idle, holsters into a natural standing idle (~15-21 s) and redraws. The moving-turn and backward segments partly leave the left camera edge (~10.3-11 s, ~18.7-19.7 s); every visible frame is intact and planted."
+   }
+  ],
+  "summary": "Walk-to-sprint-to-stop and walk-to-idle speed changes blend plausibly for both characters. Emily is partly cropped in the v645 batch."
+ },
+ {
+  "id": "turn_in_place_90_180",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/turn-corvo-v18-v2.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed in-place standing turns at three look speeds: the feet step around the pivot and the root stays put. Turn takes reset the source with setviewpos at every trial start (Test-TurnBankV19.ps1 line 40, confirmed static); each one shows as a ~180-degree heading snap with a slight float that settles in ~0.2 s at ~4 s intervals. This is a test artifact, not a presentation fault."
+   },
+   {
+    "path": "work/natural-moveset/turn-corvo-unarmed-v18-v2.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Holstered in-place standing turns with stepping feet and a stationary root. The same per-trial setviewpos reset snap appears every ~4 s. Otherwise clean."
+   },
+   {
+    "path": "work/natural-moveset/turn-emily-v18-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed in-place standing turns with stepping feet in the wide armed stance and a stationary root. Per-trial reset snaps only."
+   },
+   {
+    "path": "work/natural-moveset/turn-emily-unarmed-v18-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Holstered in-place turns with stepping feet. At each trial start (0.6, 4.6, 8.6 s ...) the body snaps ~180 degrees and floats slightly for ~0.2 s, matching the harness setviewpos reset. The turning itself is clean."
+   }
+  ],
+  "summary": "In-place turns step the feet around a stationary root for both characters, armed and holstered. The ~4 s heading snaps come from the harness's per-trial setviewpos reset, not the presentation."
+ },
+ {
+  "id": "moving_turns",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/moving-turn-corvo-knee-v4b.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Curved walk, run and sprint loops with the sword drawn, including a leaning sprint arc past the camera (~20.6 s), with stops into armed idle. The stride follows the curved travel and there is no frozen pose."
+   },
+   {
+    "path": "work/natural-moveset/moving-turn-corvo-unarmed-knee-v4.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Holstered curved walk, run and sprint. The arc around the camera at ~20-22 s, checked at 5 fps, is a continuous leaning sprint stride, not a crouch pop. Stops settle into holstered idle."
+   },
+   {
+    "path": "work/natural-moveset/moving-turn-emily-knee-v4.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed curved walk, run and sprint, with a leaning sprint past the camera (~20.6 s) and a run (~21.7 s), stopping into the wide armed idle. Intact and planted at the stops."
+   },
+   {
+    "path": "work/natural-moveset/moving-turn-emily-unarmed-knee-v4.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Holstered curved walk, run and sprint, with a sprint arc past the camera (~20.6 s), stopping into a relaxed holstered idle. No defects seen."
+   }
+  ],
+  "summary": "Curved walk, run and sprint loops read with the stride following the curve, and sprint lean in the tight arcs past the camera, for both characters armed and holstered."
+ },
+ {
+  "id": "reverse_and_direction_changes",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/host-observer.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Corvo walks in, settles into an armed idle with the sword low, reverses and makes a moving turn (~10-11 s), holsters into a relaxed holstered idle, takes a few holstered steps and redraws. Feet stay planted and transitions are smooth at 4 fps; no pops."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/native-gait-batch-v645/client-observer.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Emily walks in, holds a wide armed ready idle, holsters into a natural standing idle (~15-21 s) and redraws. The moving-turn and backward segments partly leave the left camera edge (~10.3-11 s, ~18.7-19.7 s); every visible frame is intact and planted."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   }
+  ],
+  "summary": "Reversals and direction changes blend without pops for both. Emily's v645 backward and moving-turn segments partly leave the frame but the visible parts are intact."
+ },
+ {
+  "id": "slopes_and_stairs",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/terrain-corvo-knee-v4.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Climbs the Safe Room staircase with alternating step-ups (~1.5-5.5 s) and comes back down with the sword drawn (~12-17 s). Height follows the steps with no visible floating or sinking. Small and dark in frame."
+   },
+   {
+    "path": "work/natural-moveset/native-feet-stairs-corvo-v5b.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Ascends and descends the staircase with stepping legs and the sword drawn on the way down, then exits frame right. No floating or popping seen."
+   },
+   {
+    "path": "work/natural-moveset/native-feet-stairs-emily-v5.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "In a cropped review Emily steps up the staircase (~1.5-6 s) and steps down with the sword drawn (~12-16 s). The body is intact and the stride is plausible. Small in frame."
+   },
+   {
+    "path": "work/natural-moveset/terrain-emily-v17-v2.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same staircase course in a wide shot. Emily is very small, but the cropped sheet shows a stepped ascent and descent with no floating; fine foot contact cannot be judged."
+   }
+  ],
+  "summary": "Both characters step up and down the Safe Room staircase with height following the steps and no floating. They are small in frame, so fine foot contact is unjudged and other slopes are not covered."
+ },
+ {
+  "id": "crouch_idle",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/crouch-balance-corvo-baseline-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Drops from armed idle into a deep crouch (one knee near the floor), crouch-travels forward, holds a crouched stop (~5-8 s), then stands into armed idle. Stable."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/crouch-balance-emily-baseline-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed idle into crouch, crouched forward travel, a crouched stop and a stand-up into idle. The crouch reads naturally and the coat behaves."
+   }
+  ],
+  "summary": "Crouch idles hold a stable low pose for both characters, in the baseline and in the better-balanced candidate. The auto-crouch observer view (v653) was insufficient: Corvo is hidden behind the display case."
+ },
+ {
+  "id": "crouch_8_directions",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/unbound-presentation-v559c-host.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, holster, holstered walking in several directions (3-10.5 s), redraw, a held crouch with the sword (13.5-25 s, mostly in place), then a long stable armed idle. No T-pose, freeze or pop during the missing-binding fault injection."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/unbound-presentation-v559c-client.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed idle, holstered walking in several directions, redraw, crouch with short crouched moves, then a side-on armed idle (knees flexed, sword vertical) to the end. The body stays intact throughout the fault injection."
+   }
+  ],
+  "summary": "Crouch-walking reads in forward, lateral and toward-camera directions for both, with a correct low posture. All 8 directions are not shown individually."
+ },
+ {
+  "id": "stand_to_crouch",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/turn-stance-corvo-knee-v4.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Continuous turning with stand-to-crouch-to-stand switches twice (~3 s and ~11 s). The crouch entry and exit blend over ~0.5 s with planted feet, and the final standing recovery is clean. Per-trial reset snaps as in the other turn takes."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/integrated-equipment-close-emily-v3.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Standing holster and draw, then a smooth stand-to-crouch (~11.8-12.3 s, checked at 10 fps), crouched holster and draw, a stand-up (~23 s), a slash and armed idle. The crouched draw briefly rises to a half-standing lunge (~20.5-21.1 s) before settling, which is polish for the equipment item."
+   }
+  ],
+  "summary": "Stand-to-crouch transitions blend smoothly over ~0.5 s for both characters, while walking, turning and stationary."
+ },
+ {
+  "id": "crouch_to_stand",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/integrated-crouch-mantle-corvo-v3.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "From a crouch behind the desk Corvo climbs onto it (~2.75-3.25 s), holds a crouch on the desktop, then rises smoothly to standing (~7.7-8.2 s, checked frame by frame) and idles. Backlit and small."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/integrated-crouch-mantle-emily-v3.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Crouched desk mantle, a held crouch on the desktop, then a stand-up at ~8 s into idle. Backlit and small, but the transitions are continuous."
+   }
+  ],
+  "summary": "Crouch-to-stand transitions are continuous and land in a planted idle for both characters, including on top of the desk after a crouched mantle."
+ },
+ {
+  "id": "crouched_turns",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/crouch-turn-corvo-knee-v4.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Crouched in-place turns with stepping feet hold a good low crouch, followed by a stable 6 s crouched hold. At each of the six trial starts (0.6, 4.8, 8.6, 12.8, 16.8, 20.6 s) the body flashes upright for ~0.2 s with a 180-degree heading snap, then drops back to crouch. These flashes line up with the harness setviewpos reset (confirmed static). That they are the source briefly airborne after the teleport, not a stance fault, is a hypothesis."
+   },
+   {
+    "path": "work/natural-moveset/crouch-turn-corvo-unarmed-knee-v4.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Holstered crouched turns with stepping feet and a held crouch. The same ~0.2 s upright flash appears only at the trial-start setviewpos resets (0.6, 4.6, 12.8, 16.8 s ...)."
+   },
+   {
+    "path": "work/natural-moveset/crouch-turn-emily-knee-v4.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Armed crouched turns with stepping feet and a held crouch. A brief upright flash appears only at the trial-start resets (0.6, 4.6, 8.6 s ...)."
+   },
+   {
+    "path": "work/natural-moveset/crouch-turn-emily-unarmed-knee-v4.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Holstered crouched turns hold the crouch. Frame by frame, each trial-start reset shows a 180-degree heading snap with an elevated upright pose for ~6 frames (e.g. 4.63-4.80 s) before she drops back into the crouch. Attributed to the harness setviewpos reset."
+   }
+  ],
+  "summary": "Crouched in-place turns hold the crouch with stepping feet for both characters. The only defects are ~0.2 s upright flashes with heading snaps at each trial start, which coincide with the harness setviewpos resets (confirmed static). Their cause is a hypothesis, so they are worth confirming in a take without per-trial teleports."
+ },
+ {
+  "id": "crouch_stop_start",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-stance-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "Armed idle, then forward, back and lateral standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking in several directions including toward the camera, crouched stops, standing back up (~22.5 s), native slash and jump, and armed idle. The room is dark but the body reads after brightening."
+   },
+   {
+    "path": "work/natural-moveset/crouch-balance-corvo-candidate-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The candidate crouch idle is better balanced (both feet planted, torso forward) and runs the same travel, stop and stand-up course cleanly. Not yet promoted."
+   },
+   {
+    "path": "work/natural-moveset/integrated-stance-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "Same course as Corvo's: armed idle, standing walking with alternating strides, a smooth drop to crouch (~8 s), crouch-walking and crouched stops, standing back up (~23 s), slash, jump and armed idle. Limbs stay intact and the feet plant when she stops."
+   },
+   {
+    "path": "work/natural-moveset/crouch-balance-emily-candidate-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The candidate crouch holds a balanced pose through travel, stop and stand-up. No defects."
+   }
+  ],
+  "summary": "Crouched travel starts and stops cleanly into a held crouch for both characters, then recovers to standing."
+ },
+ {
+  "id": "stand_lean_left_right",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-lean-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The standing lean shifts torso and hips to one side (~4-6 s) and then the other (~9-13 s) with the feet planted. The crouched lean shifts both ways (15-29 s), then he recovers to standing. The amplitude is modest but readable."
+   },
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The standing upward peek is barely visible: head height is nearly unchanged against a grid. The crouched upward peek clearly lifts the torso out of the crouch (~19-22 s), a crouched lateral lean follows (~26-28 s), and recovery to armed idle is clean."
+   },
+   {
+    "path": "work/natural-moveset/integrated-lean-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The standing lean tilts left and right with planted feet, and the crouched lean shifts both ways and recovers to standing (~31 s). Small in frame but readable."
+   },
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The standing upward lift is only a few pixels. The crouched upward peek visibly raises the body (~19-22 s), a crouched lateral lean follows (~26-28 s), and she recovers cleanly to armed idle."
+   }
+  ],
+  "summary": "Standing left and right leans read as whole-body balance shifts with planted feet for both characters. The amplitude is modest."
+ },
+ {
+  "id": "crouch_lean_left_right",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-lean-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The standing lean shifts torso and hips to one side (~4-6 s) and then the other (~9-13 s) with the feet planted. The crouched lean shifts both ways (15-29 s), then he recovers to standing. The amplitude is modest but readable."
+   },
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The standing upward peek is barely visible: head height is nearly unchanged against a grid. The crouched upward peek clearly lifts the torso out of the crouch (~19-22 s), a crouched lateral lean follows (~26-28 s), and recovery to armed idle is clean."
+   },
+   {
+    "path": "work/natural-moveset/integrated-lean-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The standing lean tilts left and right with planted feet, and the crouched lean shifts both ways and recovers to standing (~31 s). Small in frame but readable."
+   },
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The standing upward lift is only a few pixels. The crouched upward peek visibly raises the body (~19-22 s), a crouched lateral lean follows (~26-28 s), and she recovers cleanly to armed idle."
+   }
+  ],
+  "summary": "Crouched left and right leans shift the body both ways and recover to standing cleanly for both characters."
+ },
+ {
+  "id": "ledge_peek",
+  "verdict": "accept",
+  "characters": {
+   "corvo": "accept",
+   "emily": "accept"
+  },
+  "videos": [
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4",
+    "character": "corvo",
+    "verdict": "accept",
+    "review": "The standing upward peek is barely visible: head height is nearly unchanged against a grid. The crouched upward peek clearly lifts the torso out of the crouch (~19-22 s), a crouched lateral lean follows (~26-28 s), and recovery to armed idle is clean."
+   },
+   {
+    "path": "work/natural-moveset/integrated-vertical-peek-emily-v1.mp4",
+    "character": "emily",
+    "verdict": "accept",
+    "review": "The standing upward lift is only a few pixels. The crouched upward peek visibly raises the body (~19-22 s), a crouched lateral lean follows (~26-28 s), and she recovers cleanly to armed idle."
+   }
+  ],
+  "summary": "The crouched upward peek clearly lifts the torso for both characters and recovers cleanly. The standing upward lift is nearly imperceptible: polish, not a break."
+ }
+]

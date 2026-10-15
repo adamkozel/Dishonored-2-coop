@@ -1,10 +1,10 @@
 # stance: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
 
 ## crouch_idle
 
-Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouch idles hold a stable low pose for both characters, in the baseline and in the better-balanced candidate. The auto-crouch observer view (v653) was insufficient: Corvo is hidden behind the display case. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
 
 ````json
 {
@@ -16,7 +16,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouch idle",
@@ -24,7 +24,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch_idle"
   ],
   "deliverable_kind": "animation",
-  "notes": "Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouch idles hold a stable low pose for both characters, in the baseline and in the better-balanced candidate. The auto-crouch observer view (v653) was insufficient: Corvo is hidden behind the display case. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -54,7 +54,8 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch-balance-emily-candidate-v1/result.json",
     "native-auto-crouch-corvo-v653/result.json",
     "native-auto-crouch-emily-v654/result.json",
-    "native-auto-crouch-corvo-v655/result.json"
+    "native-auto-crouch-corvo-v655/result.json",
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ],
   "complete": false
 }
@@ -67,6 +68,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [evidence: native-auto-crouch-corvo-v653/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v653/result.json>)
 - [evidence: native-auto-crouch-emily-v654/result.json](<../../../../work/natural-moveset/native-auto-crouch-emily-v654/result.json>)
 - [evidence: native-auto-crouch-corvo-v655/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: crouch-balance-corvo-baseline-v1.mp4](<../../../../work/natural-moveset/crouch-balance-corvo-baseline-v1.mp4>)
@@ -87,7 +89,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [in_game_recordings: native-auto-crouch-corvo-v655/observer.mp4](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/observer.mp4>)
 ## crouch_8_directions
 
-Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-walking reads in forward, lateral and toward-camera directions for both, with a correct low posture. All 8 directions are not shown individually. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.
 
 ````json
 {
@@ -99,7 +101,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouch 8 directions",
@@ -116,7 +118,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch_walk_forward_right"
   ],
   "deliverable_kind": "animation",
-  "notes": "Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-walking reads in forward, lateral and toward-camera directions for both, with a correct low posture. All 8 directions are not shown individually. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -125,10 +127,14 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "unbound-presentation-v559c-host.mp4",
     "unbound-presentation-v559c-client.mp4",
     "unbound-presentation-v559b-host.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: unbound-presentation-v559c-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559c-host.mp4>)
@@ -136,7 +142,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [in_game_recordings: unbound-presentation-v559b-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559b-host.mp4>)
 ## stand_to_crouch
 
-Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
+Visual sweep 1260: accepted (corvo accept, emily accept). Stand-to-crouch transitions blend smoothly over ~0.5 s for both characters, while walking, turning and stationary. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
 
 ````json
 {
@@ -148,7 +154,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "stand to crouch",
@@ -156,7 +162,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "stand_to_crouch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Stand-to-crouch transitions blend smoothly over ~0.5 s for both characters, while walking, turning and stationary. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -194,7 +200,8 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch-balance-emily-candidate-v1/result.json",
     "native-auto-crouch-corvo-v653/result.json",
     "native-auto-crouch-emily-v654/result.json",
-    "native-auto-crouch-corvo-v655/result.json"
+    "native-auto-crouch-corvo-v655/result.json",
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ],
   "complete": false
 }
@@ -207,6 +214,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [evidence: native-auto-crouch-corvo-v653/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v653/result.json>)
 - [evidence: native-auto-crouch-emily-v654/result.json](<../../../../work/natural-moveset/native-auto-crouch-emily-v654/result.json>)
 - [evidence: native-auto-crouch-corvo-v655/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
@@ -235,7 +243,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [in_game_recordings: native-auto-crouch-corvo-v655/observer.mp4](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/observer.mp4>)
 ## crouch_to_stand
 
-Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-to-stand transitions are continuous and land in a planted idle for both characters, including on top of the desk after a crouched mantle. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.
 
 ````json
 {
@@ -247,7 +255,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouch to stand",
@@ -255,7 +263,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch_to_stand"
   ],
   "deliverable_kind": "animation",
-  "notes": "Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-to-stand transitions are continuous and land in a planted idle for both characters, including on top of the desk after a crouched mantle. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending. 651/656: exact native AutoCrouch10/raw2, low confined mantle8 next10 and fast333ms sword recovery now bind to existing crouch/low-mantle presentation. Corvo653/655 and Emily654 pass36 scoped checks; both streams remain ready, held crouch and final standing fully weighted. Original635 and all357 clips preserved. Clear654/655 observer sheets inspected; foot/sill contact and brief entry/retreat blend dips remain polish/continuity work. No open-window, high confined mantle or auto-crouch combat/power coverage claimed.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -295,7 +303,8 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch-balance-emily-candidate-v1/result.json",
     "native-auto-crouch-corvo-v653/result.json",
     "native-auto-crouch-emily-v654/result.json",
-    "native-auto-crouch-corvo-v655/result.json"
+    "native-auto-crouch-corvo-v655/result.json",
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ],
   "complete": false
 }
@@ -308,6 +317,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [evidence: native-auto-crouch-corvo-v653/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v653/result.json>)
 - [evidence: native-auto-crouch-emily-v654/result.json](<../../../../work/natural-moveset/native-auto-crouch-emily-v654/result.json>)
 - [evidence: native-auto-crouch-corvo-v655/result.json](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
@@ -338,7 +348,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [in_game_recordings: native-auto-crouch-corvo-v655/observer.mp4](<../../../../work/natural-moveset/native-auto-crouch-corvo-v655/observer.mp4>)
 ## crouched_turns
 
-Saved both-role armed and unarmed tests passed continuous left/right standing/crouched/standing turns and recovery with stationary native root. This is not full per-angle90/180 acceptance or fresh regression on the current build. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouched in-place turns hold the crouch with stepping feet for both characters. The only defects are ~0.2 s upright flashes with heading snaps at each trial start, which coincide with the harness setviewpos resets (confirmed static). Their cause is a hypothesis, so they are worth confirming in a take without per-trial teleports. Saved both-role armed and unarmed tests passed continuous left/right standing/crouched/standing turns and recovery with stationary native root. This is not full per-angle90/180 acceptance or fresh regression on the current build. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
 
 ````json
 {
@@ -350,7 +360,7 @@ Saved both-role armed and unarmed tests passed continuous left/right standing/cr
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_stance_turns_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouched turns",
@@ -363,7 +373,7 @@ Saved both-role armed and unarmed tests passed continuous left/right standing/cr
     "crouch_turn_right180"
   ],
   "deliverable_kind": "animation",
-  "notes": "Saved both-role armed and unarmed tests passed continuous left/right standing/crouched/standing turns and recovery with stationary native root. This is not full per-angle90/180 acceptance or fresh regression on the current build. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouched in-place turns hold the crouch with stepping feet for both characters. The only defects are ~0.2 s upright flashes with heading snaps at each trial start, which coincide with the harness setviewpos resets (confirmed static). Their cause is a hypothesis, so they are worth confirming in a take without per-trial teleports. Saved both-role armed and unarmed tests passed continuous left/right standing/crouched/standing turns and recovery with stationary native root. This is not full per-angle90/180 acceptance or fresh regression on the current build. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -382,7 +392,8 @@ Saved both-role armed and unarmed tests passed continuous left/right standing/cr
     "turn-stance-corvo-knee-v4/result.json",
     "turn-stance-corvo-unarmed-knee-v4/result.json",
     "turn-stance-emily-knee-v4/result.json",
-    "turn-stance-emily-unarmed-knee-v4/result.json"
+    "turn-stance-emily-unarmed-knee-v4/result.json",
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
@@ -391,6 +402,7 @@ Saved both-role armed and unarmed tests passed continuous left/right standing/cr
 - [evidence: turn-stance-corvo-unarmed-knee-v4/result.json](<../../../../work/natural-moveset/turn-stance-corvo-unarmed-knee-v4/result.json>)
 - [evidence: turn-stance-emily-knee-v4/result.json](<../../../../work/natural-moveset/turn-stance-emily-knee-v4/result.json>)
 - [evidence: turn-stance-emily-unarmed-knee-v4/result.json](<../../../../work/natural-moveset/turn-stance-emily-unarmed-knee-v4/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: crouch-turn-corvo-knee-v4.mp4](<../../../../work/natural-moveset/crouch-turn-corvo-knee-v4.mp4>)
 - [in_game_recordings: crouch-turn-corvo-unarmed-knee-v4.mp4](<../../../../work/natural-moveset/crouch-turn-corvo-unarmed-knee-v4.mp4>)
 - [in_game_recordings: crouch-turn-emily-knee-v4.mp4](<../../../../work/natural-moveset/crouch-turn-emily-knee-v4.mp4>)
@@ -401,7 +413,7 @@ Saved both-role armed and unarmed tests passed continuous left/right standing/cr
 - [in_game_recordings: turn-stance-emily-unarmed-knee-v4.mp4](<../../../../work/natural-moveset/turn-stance-emily-unarmed-knee-v4.mp4>)
 ## crouch_stop_start
 
-Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouched travel starts and stops cleanly into a held crouch for both characters, then recovers to standing. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.
 
 ````json
 {
@@ -413,7 +425,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouch stop start",
@@ -421,7 +433,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouched travel starts and stops cleanly into a held crouch for both characters, then recovers to standing. Actual native stance controls the full-body bank. Both roles pass directional, distance-based cadence, sustained playback and reversible stance transition checks; native actions retain priority. Floor contact, interruptions and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -438,7 +450,8 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
     "crouch-balance-corvo-baseline-v1/result.json",
     "crouch-balance-corvo-candidate-v1/result.json",
     "crouch-balance-emily-baseline-v1/result.json",
-    "crouch-balance-emily-candidate-v1/result.json"
+    "crouch-balance-emily-candidate-v1/result.json",
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
@@ -447,6 +460,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [evidence: crouch-balance-corvo-candidate-v1/result.json](<../../../../work/natural-moveset/crouch-balance-corvo-candidate-v1/result.json>)
 - [evidence: crouch-balance-emily-baseline-v1/result.json](<../../../../work/natural-moveset/crouch-balance-emily-baseline-v1/result.json>)
 - [evidence: crouch-balance-emily-candidate-v1/result.json](<../../../../work/natural-moveset/crouch-balance-emily-candidate-v1/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
@@ -457,7 +471,7 @@ Actual native stance controls the full-body bank. Both roles pass directional, d
 - [in_game_recordings: crouch-balance-emily-candidate-v1.mp4](<../../../../work/natural-moveset/crouch-balance-emily-candidate-v1.mp4>)
 ## stand_lean_left_right
 
-Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). Standing left and right leans read as whole-body balance shifts with planted feet for both characters. The amplitude is modest. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
 
 ````json
 {
@@ -469,7 +483,7 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "stand lean left right",
@@ -478,7 +492,7 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
     "stand_lean_right"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Standing left and right leans read as whole-body balance shifts with planted feet for both characters. The amplitude is modest. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -486,17 +500,21 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
     "integrated-lean-emily-v1.mp4",
     "integrated-vertical-peek-corvo-v1.mp4",
     "integrated-vertical-peek-emily-v1.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-lean-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-lean-corvo-v1.mp4>)
 - [in_game_recordings: integrated-lean-emily-v1.mp4](<../../../../work/natural-moveset/integrated-lean-emily-v1.mp4>)
 - [in_game_recordings: integrated-vertical-peek-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4>)
 - [in_game_recordings: integrated-vertical-peek-emily-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-emily-v1.mp4>)
 ## crouch_lean_left_right
 
-Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouched left and right leans shift the body both ways and recover to standing cleanly for both characters. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
 
 ````json
 {
@@ -508,7 +526,7 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "crouch lean left right",
@@ -517,7 +535,7 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
     "crouch_lean_right"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouched left and right leans shift the body both ways and recover to standing cleanly for both characters. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -525,17 +543,21 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
     "integrated-lean-emily-v1.mp4",
     "integrated-vertical-peek-corvo-v1.mp4",
     "integrated-vertical-peek-emily-v1.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-lean-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-lean-corvo-v1.mp4>)
 - [in_game_recordings: integrated-lean-emily-v1.mp4](<../../../../work/natural-moveset/integrated-lean-emily-v1.mp4>)
 - [in_game_recordings: integrated-vertical-peek-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4>)
 - [in_game_recordings: integrated-vertical-peek-emily-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-emily-v1.mp4>)
 ## ledge_peek
 
-Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). The crouched upward peek clearly lifts the torso for both characters and recovers cleanly. The standing upward lift is nearly imperceptible: polish, not a break. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.
 
 ````json
 {
@@ -547,7 +569,7 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "ledge peek",
@@ -555,16 +577,20 @@ Native vertical and lateral lean amplitudes drive whole-body balance poses. Both
     "ledge_peek"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The crouched upward peek clearly lifts the torso for both characters and recovers cleanly. The standing upward lift is nearly imperceptible: polish, not a break. Native vertical and lateral lean amplitudes drive whole-body balance poses. Both roles, stances and weapon states pass 18 entry/lower/side-transition/exit/recovery checks. Actual armed D2 takes show complete bodies. Standing lift is subtle and needs closer review; obstacle-specific sight lines, collision-limited scale, combat interruptions and final visual acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-vertical-peek-corvo-v1.mp4",
     "integrated-vertical-peek-emily-v1.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [in_game_recordings: integrated-vertical-peek-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-corvo-v1.mp4>)
 - [in_game_recordings: integrated-vertical-peek-emily-v1.mp4](<../../../../work/natural-moveset/integrated-vertical-peek-emily-v1.mp4>)
 ## keyhole_enter_look_exit

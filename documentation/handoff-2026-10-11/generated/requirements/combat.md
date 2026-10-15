@@ -1,10 +1,10 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
-Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.
+Visual sweep 1260: accepted (corvo accept, emily accept). Both characters show a recognizable whole-body draw and holster, standing and crouched, with clean transitions. Exact hand-to-hilt contact is a polish item. Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.
 
 ````json
 {
@@ -16,7 +16,7 @@ Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/p
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "sword draw holster",
@@ -25,7 +25,7 @@ Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/p
     "sword_unequipsword"
   ],
   "deliverable_kind": "animation",
-  "notes": "Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both characters show a recognizable whole-body draw and holster, standing and crouched, with clean transitions. Exact hand-to-hilt contact is a polish item. Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/protected-file checks. Actual-game sampled frames reviewed for both roles. Exact hand contact, continuous travel quality, interruption/recovery breadth and final visual acceptance remain open. Earlier failed takes are retained. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -186,12 +186,14 @@ Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/p
   },
   "complete": false,
   "evidence": [
-    "native-gait-batch-v645/result.json"
+    "native-gait-batch-v645/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-equipment-close-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-corvo-v3.mp4>)
 - [in_game_recordings: integrated-equipment-close-emily-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-emily-v3.mp4>)
 - [in_game_recordings: equipment-review-both-v48-host.mp4](<../../../../work/natural-moveset/equipment-review-both-v48-host.mp4>)
@@ -208,7 +210,7 @@ Current v48 DLL/v46 banks pass fifteen paired-role equipment/visibility/health/p
 - [in_game_recordings: native-gait-batch-v645/client-observer.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/client-observer.mp4>)
 ## sword_ready_idle
 
-Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). The standing and crouched sword-ready idles read naturally for both characters. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.
 
 ````json
 {
@@ -220,7 +222,7 @@ Standing/crouched bank passes both-role directional, distance-phase and native a
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "evidence": [
@@ -228,9 +230,10 @@ Standing/crouched bank passes both-role directional, distance-phase and native a
     "corvo-walking.mp4",
     "emily-walking.mp4",
     "grip-closeup-corvo-v2/result.json",
-    "grip-closeup-emily-v1/result.json"
+    "grip-closeup-emily-v1/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ],
-  "notes": "Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The standing and crouched sword-ready idles read naturally for both characters. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
   "title": "sword ready idle",
   "motions": [
     "sword_idle",
@@ -250,13 +253,14 @@ Standing/crouched bank passes both-role directional, distance-phase and native a
 
 - [evidence: grip-closeup-corvo-v2/result.json](<../../../../work/natural-moveset/grip-closeup-corvo-v2/result.json>)
 - [evidence: grip-closeup-emily-v1/result.json](<../../../../work/natural-moveset/grip-closeup-emily-v1/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-equipment-close-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-corvo-v3.mp4>)
 - [in_game_recordings: integrated-equipment-close-emily-v3.mp4](<../../../../work/natural-moveset/integrated-equipment-close-emily-v3.mp4>)
 - [in_game_recordings: grip-closeup-corvo-v2.mp4](<../../../../work/natural-moveset/grip-closeup-corvo-v2.mp4>)
 - [in_game_recordings: grip-closeup-emily-v1.mp4](<../../../../work/natural-moveset/grip-closeup-emily-v1.mp4>)
 ## light_attack_variants
 
-Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.
+Visual sweep 1260: accepted (corvo accept, emily accept). Short and alternating slashes are clearly readable on both characters. Corvo's targeted observer take is occluded, so his verdict rests on the integrated combat take. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.
 
 ````json
 {
@@ -268,12 +272,13 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_target_bearing_standing_slash",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
-  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Short and alternating slashes are clearly readable on both characters. Corvo's targeted observer take is occluded, so his verdict rests on the integrated combat take. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 610/615: native target-bearing sword scenes now drive existing remote combat clips. Corvo611 and Emily614 each pass10 source/Steam/recovery/restoration checks; receiver target health unchanged. Existing protocol65 and bank65/353 reused. Emily body attack/recovery visually observed; Corvo611 camera is occluded. Shared NPC reactions/outcomes and other combat contexts remain unfinished; cosmetic polish deferred. Ordinary standing right/rightb target-bearing sword actor playback only. Native local first-person remains unchanged; no victim events or damage replay. Corvo611 passed numerical checks but foreground guard occludes the body. Emily614 observer sheet inspected and shows the body attack and recovery. Fine contact/grip polish deferred; no visual acceptance. Emily611 retained failure: crouched native throwhit/kick800 instead of expected sword hit. Emily612 retained failure: one independently validated target scene, below the harness minimum of two; remote playback observed but no passing receipt. Corvo614 retained fixture failure: source could not stand near geometry and observer capture timed out during early cleanup. Both checkpoints/inventories/health and14 protected hashes restored. Bank65/353 and protocol65 unchanged. Targeted crouch/left/other contexts, shared enemy reaction/health/death and full campaign coverage remain unfinished.",
   "evidence": [
-    "priority-2/result.json"
+    "priority-2/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ],
   "title": "light attack variants",
   "motions": [
@@ -308,6 +313,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
 - [in_game_recordings: native-front-corvo-v607/host-front-lethal.mp4](<../../../../work/natural-moveset/native-front-corvo-v607/host-front-lethal.mp4>)
@@ -322,7 +328,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 - [in_game_recordings: native-close-combat-emily-v623/client-close-combat.mp4](<../../../../work/natural-moveset/native-close-combat-emily-v623/client-close-combat.mp4>)
 ## heavy_attack_variants
 
-Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
+Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
 
 ````json
 {
@@ -343,7 +349,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
     "sword_attack_longb"
   ],
   "deliverable_kind": "animation",
-  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+  "notes": "Visual sweep 1260: reject (corvo reject, emily accept). The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -361,13 +367,15 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
   "complete": false,
   "evidence": [
     "crouched-heavy-corvo-v636/result.json",
-    "crouched-heavy-emily-v636/result.json"
+    "crouched-heavy-emily-v636/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: crouched-heavy-corvo-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/result.json>)
 - [evidence: crouched-heavy-emily-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-emily-v636/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
 - [in_game_recordings: native-heavy-corvo-v629/host-crouched-heavy.mp4](<../../../../work/natural-moveset/native-heavy-corvo-v629/host-crouched-heavy.mp4>)
@@ -380,7 +388,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 - [in_game_recordings: crouched-heavy-emily-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/observer.mp4>)
 ## moving_attack
 
-Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.
+Visual sweep 1260: accepted (corvo accept, emily accept). Travelling sword actions combine readable upper-body attacks and guards with a continuing leg gait for both characters. Some foot slide is possible but not blocking. Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.
 
 ````json
 {
@@ -392,7 +400,7 @@ Both characters show forward, side and backward sword actions, crouched moving a
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_moving_combat_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "moving attack",
@@ -404,7 +412,7 @@ Both characters show forward, side and backward sword actions, crouched moving a
     "sword_attack_stepbacka"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Travelling sword actions combine readable upper-body attacks and guards with a continuing leg gait for both characters. Some foot slide is possible but not blocking. Both characters show forward, side and backward sword actions, crouched moving attacks and forward moving guard over Steam. Native scene timing drives the authored action while pelvis/legs retain distance-driven gait. Sixteen checks and actual D2 videos cover coexistence, stop/recovery, health and equipment. Close foot/hand review, speed/direction/variant/contact coverage and final acceptance remain pending.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -414,10 +422,14 @@ Both characters show forward, side and backward sword actions, crouched moving a
     "native-feet-air-corvo-v5.mp4",
     "native-feet-emily-close-v5.mp4",
     "native-feet-air-emily-v5.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-moving-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-moving-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-emily-v1.mp4>)
 - [in_game_recordings: native-feet-corvo-close-v5.mp4](<../../../../work/natural-moveset/native-feet-corvo-close-v5.mp4>)
@@ -426,7 +438,7 @@ Both characters show forward, side and backward sword actions, crouched moving a
 - [in_game_recordings: native-feet-air-emily-v5.mp4](<../../../../work/natural-moveset/native-feet-air-emily-v5.mp4>)
 ## crouched_attack
 
-Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
+Visual sweep 1260: accepted (corvo accept, emily accept). Crouched strikes read on both characters. Corvo's targeted observer take has a deep lunge bend and a pre-strike standing interval worth an animator look. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.
 
 ````json
 {
@@ -438,14 +450,15 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
-  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouched strikes read on both characters. Corvo's targeted observer take has a deep lunge bend and a pre-strike standing interval worth an animator look. Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished. 620/622: Corvo621 and Emily621 each pass10 targeted crouched strike, native Steam actor playback, root, native stance recovery and restoration checks. Both observer sheets show body attack/recovery; fine polish deferred. Optional hit-recovery15/16 was absent in621 and remains runtime-unverified. Protocol66, unchanged bank65/353. No duplicate receiver victim damage; shared enemy outcomes and complete movement remain unfinished. Target-bearing crouched strike and native stance recovery verified on both roles; no optional separate hit-recovery15/16 scene occurred in621. Those branches remain runtime-unverified despite native613 source observations and passing synthetic tests. Both621 observer contact sheets inspected: body crouches, strikes and recovers standing. Guard occlusion limits sword/contact inspection. Fine pose/grip/timing polish deferred, no visual acceptance. Receiver enemy health unchanged: actor playback does not duplicate damage. Enemy reactions/health/death remain independent; this is not shared-victim gameplay. Failed617 stream-setup and619 optional-branch assertions retained, with checkpoint/health/inventory and14 protected hashes restored. Complete movement and playable co-op remain unfinished. No new pipeline or third-party co-op research. 625/628: bank66/354 and protocol67 live. Corvo627 PASS10 and Emily627 PASS13 preserve crouched combat; Emily right hit-recovery15 now has owned-source, Steam body, monotonic follow-through, stance recovery and unchanged receiver-victim-health proof. Kick17 implementation/build tests pass but native626 selected another scene: kick remains runtime-unverified. Left recovery16 remains unverified. Prior353 payloads unchanged, checkpoints and14 protected files restored. Visual polish deferred. Native kick17 remains runtime-unverified. Emily626 selected crouched slash/right hit recovery15, not the required kick; the failed kick receipt remains unchanged. Corvo627 PASS10 and Emily627 PASS13 preserve targeted crouched attacks; Emily also proves owned right recovery15, monotonic follow-through, return to movement and unchanged receiver victim health. Left recovery16 remains unverified. Both627 observer sheets inspected: full-body strikes and standing recovery visible, but foreground guards limit sword/contact assessment. Fine polish deferred; no visual acceptance. All checkpoint inventories/playerpartner health and14 protected hashes restored. Shared enemy outcomes, complete movement and playable co-op remain unfinished. 635/636/637: both roles PASS10 stationary crouched heavy charge/hold/release through native Steam, full-body adapted clips354/355/356, root independence and native stance recovery. Protocol69,bank67/357; prior354 unchanged. Both inventories/health14protected hashes restored. Exact asset635 corrects role-specific release inference: Scene_1/833 and Scene_2/1000 are attack variants. Coarse pose transitions/contact polish deferred. Full movement and shared victim/world outcomes remain unfinished.",
   "evidence": [
     "priority-2/result.json",
     "crouched-heavy-corvo-v636/result.json",
-    "crouched-heavy-emily-v636/result.json"
+    "crouched-heavy-emily-v636/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ],
   "title": "crouched attack",
   "motions": [
@@ -494,6 +507,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 
 - [evidence: crouched-heavy-corvo-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-corvo-v636/result.json>)
 - [evidence: crouched-heavy-emily-v636/result.json](<../../../../work/natural-moveset/crouched-heavy-emily-v636/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
 - [in_game_recordings: integrated-moving-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-moving-combat-corvo-v1.mp4>)
@@ -524,7 +538,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 - [in_game_recordings: crouched-heavy-emily-v636/observer.mp4](<../../../../work/natural-moveset/crouched-heavy-emily-v636/observer.mp4>)
 ## airborne_attack
 
-Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.
+Visual sweep 1260: accepted (corvo accept, emily accept). Jump strikes, the airborne guard and the landing handoff read naturally for both characters. Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.
 
 ````json
 {
@@ -536,7 +550,7 @@ Both native characters perform early/late sword strikes and guarding during ordi
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_airborne_combat_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "airborne attack",
@@ -544,21 +558,25 @@ Both native characters perform early/late sword strikes and guarding during ordi
     "sword_attack_jumpa"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Jump strikes, the airborne guard and the landing handoff read naturally for both characters. Both native characters perform early/late sword strikes and guarding during ordinary jumps over Steam. Native scene phase continues through landing. Fourteen checks plus actual D2 recordings cover simultaneous flight/combat, recovery, attachments and preserved health/first person. Moving jumps, heavy/double-jump/contact variants, lifecycle and final visual acceptance remain unfinished.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-combat-corvo-v2.mp4",
     "integrated-air-combat-emily-v2.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-air-combat-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-corvo-v2.mp4>)
 - [in_game_recordings: integrated-air-combat-emily-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-emily-v2.mp4>)
 ## block_enter_hold_exit
 
-Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.
+Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and exit are readable standing, crouched and airborne for both characters. The pose is a high overhead block (a polish note). Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.
 
 ````json
 {
@@ -570,12 +588,13 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
   ],
   "authoring": "candidates",
   "runtime_binding": "isolated_Dunwall_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
-  "notes": "Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and exit are readable standing, crouched and airborne for both characters. The pose is a high overhead block (a polish note). Exact owned native sword scenes drive variant, phase and timing over Steam. Authored full-body short/alternating slashes, heavy windup/hold/release and standing/crouched guards pass both-role timing and recovery checks. Two actual D2 recordings show complete bodies. Heavy hold is static; moving contact, air combat, directional parries, hit reactions, paired outcomes and final visual acceptance remain unfinished.",
   "evidence": [
-    "priority-2/result.json"
+    "priority-2/result.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ],
   "title": "block enter hold exit",
   "motions": [
@@ -609,6 +628,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: integrated-combat-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-combat-corvo-v1.mp4>)
 - [in_game_recordings: integrated-combat-emily-v1.mp4](<../../../../work/natural-moveset/integrated-combat-emily-v1.mp4>)
 - [in_game_recordings: integrated-air-combat-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-air-combat-corvo-v2.mp4>)
@@ -695,7 +715,7 @@ Exact owned native sword scenes drive variant, phase and timing over Steam. Auth
 - [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
 ## counterattack
 
-Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
+Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
 
 ````json
 {
@@ -706,7 +726,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -722,20 +742,22 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "guard_rr_counter_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
+  "notes": "Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
-    "../movement-integration/native-combat-use-observations-v1211.json"
+    "../movement-integration/native-combat-use-observations-v1211.json",
+    "../movement-integration/gestures-counter-audit-v1264.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
+- [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
 ## hit_reactions_directions
 
-Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
+Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
 
 ````json
 {
@@ -747,7 +769,7 @@ Both-role v61b verifies exact owned standing Stun14 scene, directional full-body
   ],
   "authoring": "candidates",
   "runtime_binding": "native_network_standing_stun_partial_verified",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "hit reactions directions",
@@ -758,7 +780,7 @@ Both-role v61b verifies exact owned standing Stun14 scene, directional full-body
     "sword_stinghit_right"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -924,10 +946,14 @@ Both-role v61b verifies exact owned standing Stun14 scene, directional full-body
       "checks_passed": true,
       "scope": "Native standing grenade self-stun reaction and uninterrupted source-clock movement over Steam. Directional native NPC body clips are cosmetic and require visual review. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: grenade-stun-scenes-corvo-v60.mp4](<../../../../work/natural-moveset/grenade-stun-scenes-corvo-v60.mp4>)
 - [in_game_recordings: grenade-stun-scenes-emily-v60.mp4](<../../../../work/natural-moveset/grenade-stun-scenes-emily-v60.mp4>)
 - [in_game_recordings: stun-network-corvo-v61.mp4](<../../../../work/natural-moveset/stun-network-corvo-v61.mp4>)
@@ -976,7 +1002,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
 - [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
 ## kick_or_shove_if_present
 
-Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
+Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
 
 ````json
 {
@@ -997,7 +1023,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "sword_attack_punch"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
+  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1005,17 +1031,19 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "mission-combat-v1109/combat-host.mp4"
   ],
   "evidence": [
-    "../movement-integration/mission-outcome-audit-v1110.json"
+    "../movement-integration/mission-outcome-audit-v1110.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-outcome-audit-v1110.json](<../../../../work/movement-integration/mission-outcome-audit-v1110.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: mission-combat-v1109/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-client.mp4>)
 - [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants
 
-Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
+Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
 
 ````json
 {
@@ -1039,7 +1067,7 @@ Audit 1257: sword finishers (census-1255 fatalities) are presented as paired let
     "empty_stinghit_death"
   ],
   "deliverable_kind": "animation",
-  "notes": "Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
+  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1047,17 +1075,19 @@ Audit 1257: sword finishers (census-1255 fatalities) are presented as paired let
   ],
   "evidence": [
     "../movement-integration/mission-corpse-audit-v1118.json",
-    "../movement-integration/takedown-variants-audit-v1257.json"
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
 ## ragdoll_handoff
 
-This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.
+Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.
 
 ````json
 {
@@ -1075,7 +1105,7 @@ This requires native ragdoll ownership and a tested transition, not a baked anim
   "title": "ragdoll handoff",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
+  "notes": "Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1091,12 +1121,14 @@ This requires native ragdoll ownership and a tested transition, not a baked anim
     "mission-combat-v1117/combat-client.mp4"
   ],
   "evidence": [
-    "../movement-integration/mission-corpse-audit-v1118.json"
+    "../movement-integration/mission-corpse-audit-v1118.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)

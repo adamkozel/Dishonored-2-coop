@@ -22,6 +22,7 @@
 #include "native_player_heart_scene.h"
 #include "native_player_trap_scene.h"
 #include "native_player_choke_scene.h"
+#include "native_player_potion.h"
 #include "native_player_stun_scene.h"
 #include "native_player_carry_scene.h"
 #include "carry_identity.h"
@@ -132,8 +133,33 @@ unsigned shadowFocusedUseVariant(std::uintptr_t base){
     float origin[3]{};if(memoryRead(actor+0x300,origin,12)&&std::isfinite(origin[0])&&std::isfinite(origin[1])&&std::isfinite(origin[2])){std::memcpy(shadowUse.target,origin,12);shadowUse.targetValid=true;}
     return useVariantForName(text.c_str());
 }
+// 1214j (#11, visual sweep 1260): the native game plays no first-person gesture for pickups, food
+// or elixirs, so the partner showed none. A pickup or food (native LootObject47 over Running0/
+// Sneaking6) presents the generic use reach toward the focused item; a consumed elixir (health or
+// mana potion quantity drop, last valid count kept across the item wheel) presents the same reach
+// to the mouth. Presentation only: no item, inventory or health outcome is synthesized.
+struct ShadowGesture {bool wasLoot=false;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;} shadowGesture;
+void startShadowUse(unsigned variant){
+    shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);
+    shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);
+}
+void serviceShadowGestures(const NativePlayerStates& states,std::uintptr_t base,bool useActive){
+    bool loot=false;for(const auto& a:states.active)if(a.id==47&&a.vtable==base+0x1c7bcc8){loot=true;break;}
+    if(loot&&!shadowGesture.wasLoot&&!useActive&&!shadowUse.variant){shadowFocusedUseVariant(base);startShadowUse(1);++shadowGesture.loots;}
+    shadowGesture.wasLoot=loot;
+    if(shadowGesture.epoch!=outgoing.worldEpoch){shadowGesture.epoch=outgoing.worldEpoch;shadowGesture.potions[0]=shadowGesture.potions[1]=-1;}
+    const auto tick=GetTickCount64();if(tick<shadowGesture.nextPotionRead)return;
+    shadowGesture.nextPotionRead=tick+600;const unsigned kind=shadowGesture.nextKind;shadowGesture.nextKind=kind==1?2:1;
+    NativePlayerPotion p{};if(!readNativePlayerPotion(memoryRead,base,kind,p))return;
+    auto& last=shadowGesture.potions[kind-1];
+    if(last>=0&&p.quantity<last&&!useActive&&!shadowUse.variant){
+        shadowUse.target[0]=outgoing.position[0];shadowUse.target[1]=outgoing.position[1];shadowUse.target[2]=outgoing.position[2]+1.5f;shadowUse.targetValid=true;
+        startShadowUse(1);++shadowGesture.drinks;}
+    last=p.quantity;
+}
 void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
     bool active=false;for(const auto& a:states.active)if(a.id==75&&a.vtable==base+0x1c86ab8){active=true;break;}
+    serviceShadowGestures(states,base,active);
     if(active&&!shadowUse.wasActive){++shadowUse.edges;const unsigned variant=shadowFocusedUseVariant(base);
         if(variant){shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);}}
     shadowUse.wasActive=active;
@@ -180,7 +206,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(!valid||(action==5&&!nativePlayerLeanAmount(memoryRead,states,base,side,up)))return false;
     shadowSourceReadStage=3;
     if(chokeValid){
-        if(sword.sword.equipped!=nativeTakedownLethal(choke.variant)||choke.character!=localRole+1||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
+        if(sword.sword.equipped!=nativeTakedownSword(choke.variant)||choke.character!=localRole+1||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
         if(sceneHandle)*sceneHandle=choke.handle;
         if(airPacket){airPacket->chokeVariant=choke.variant;airPacket->chokeTimeMs=choke.timeMs;airPacket->chokeDurationMs=choke.durationMs;
             airPacket->chokeSpawner=carryIdentityKey(choke.target.spawnerName);airPacket->chokeDefinition=carryIdentityKey(choke.target.definition);}

@@ -1,0 +1,140 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: face-client-counter: Native takedown not performed on the source (guard moved or noticed the source) | face-host-counter: Outcome differs: source dead, observer conscious, expected dead",
+  "cases": [
+    {
+      "approach": "face",
+      "source": "client",
+      "kind": "counter",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": false,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ]
+      },
+      "counterStarted": true,
+      "inputAt": "2026-10-15T10:02:33.0014983+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+        "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_recoil_right.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_rightb.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000"
+      ],
+      "restored": true
+    },
+    {
+      "approach": "face",
+      "source": "host",
+      "kind": "counter",
+      "observer": "client",
+      "passed": false,
+      "failure": "Outcome differs: source dead, observer conscious, expected dead",
+      "checks": [
+        "Remote phase 96 presented",
+        "Remote phase 96 presented"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ],
+        "observer": [
+          -48.0072,
+          -147.088,
+          66.4
+        ]
+      },
+      "counterStarted": true,
+      "inputAt": "2026-10-15T10:03:45.0238063+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+        "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_parry_win.midnightscene|500",
+        "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000",
+        "midnight/gameplay/player/base/fatalities/fatality_head_medium_a.midnightscene|1333",
+        "midnight/gameplay/player/base/fatalities/fatality_head_medium_a.midnightscene|833"
+      ],
+      "sceneIds": [
+        96,
+        96
+      ],
+      "attempts": 3,
+      "final": {
+        "source": {
+          "tick": 38832390,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1adc5d445b0",
+          "actor": "0x1add9b15b00",
+          "attributes": "0x1add987b8d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 38832421,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x264c6b01ef0",
+          "actor": "0x264cbb584c0",
+          "attributes": "0x264cb8cd8d0",
+          "current": 40,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "conscious"
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Counterattack (#9): parry follow-up cycles against a host-owned guard under the product controller, both source roles: native parry and finisher scenes, partner phase, shared death and victim position; fixture restored after every case."
+}

@@ -21,6 +21,7 @@
 #include "native_presentation_fallback.h"
 #include "native_player_trap_scene.h"
 #include "native_player_choke_scene.h"
+#include "native_player_combat_scene.h"
 #include <iostream>
 #include <cstdlib>
 void check(bool ok,const char* m){if(!ok){std::cerr<<"FAIL: "<<m<<'\n';std::exit(1);}}
@@ -119,6 +120,11 @@ void chokePresentationTests(){
      check(right==92&&nativeTakedownFatality(right)&&nativeTakedownLethal(right)&&nativeTakedownArms(right)==1&&
            torso>92&&nativeTakedownFatality(torso)&&nativeTakedownArms(torso)==2&&!nativeTakedownFatality(5)&&nativeTakedownArms(5)==2&&
            !nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_double_kill.midnightscene","Emily",2166),"census-1255 fatalities are lethal scenes with their bound arms; the double kill binds no AI group");}
+    {const auto lock=nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",600);
+     check(lock==119&&nativeTakedownKind(lock)==6&&nativeTakedownSword(lock)&&!nativeTakedownLethal(lock)&&ChokePresentation::clip(lock)==CombatPresentation::clip(11,2)&&
+           nativeChokeVariant("midnight/gameplay/player/base/combat/versus_elite.midnightscene","versus_mediumwin",1033)==118&&
+           !nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",601),
+           "census-1259 sword locks (1258b) present the parry-idle clip on the drawn sword");}
     ChokePresentation t;ChokePresentation::Sample out{};float amount=0;
     check(t.push({100,1,1,200,600,31,41})&&t.push({140,1,1,240,600,31,41}),"confirmed choke clock accepted");
     check(t.sample(120,out,amount)&&std::fabs(amount-220.f/600)<1e-6f,"choke uses delayed native clock");
@@ -391,10 +397,14 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       CombatPresentation heavyClock;CombatPresentation::Sample sample{};float amount=0;
       check(heavyClock.push({100,1,18,1,0,833})&&heavyClock.push({200,1,18,1,100,833})&&heavyClock.sample(180,sample,amount)&&std::fabs(amount-80.f/833)<1e-6f,"heavy source clock interpolated");
       check(CombatPresentation::clip(18,1)==356&&!CombatPresentation::recovery(18),"heavy addresses new full-body release");
+      check(nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_right_b_hit.midnightscene")==22&&
+            nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_left_b_hit.midnightscene")==23&&
+            CombatPresentation::clip(22,1)==CombatPresentation::clip(2,1)&&CombatPresentation::clip(23,1)==CombatPresentation::clip(4,1),"b-swing hit scenes (1258b) present their slash-b clips");
+      {CombatPresentation t;check(t.push({10,1,22,1,100,733})&&!t.push({20,2,23,1,100,700})&&!t.push({30,3,24,1,100,733}),"b-swing hits own exactly 733 ms; no variant past 23");}
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");
     }
     {auto choke=p;choke.state=21;choke.swordState=1;choke.chokeVariant=1;choke.chokeDurationMs=600;choke.chokeSpawner=31;choke.chokeDefinition=41;
-      for(unsigned v=1;v<=kNativeTakedownSceneCount;++v){choke.swordState=nativeTakedownLethal(v)?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=kNativeTakedownSubscenes[kNativeTakedownScenes[v-1].first].durationMs;check(validShadowAction(choke,c,h),"owned native choke wire phases");}
+      for(unsigned v=1;v<=kNativeTakedownSceneCount;++v){choke.swordState=nativeTakedownSword(v)?2u:1u;choke.chokeVariant=v;choke.chokeDurationMs=kNativeTakedownSubscenes[kNativeTakedownScenes[v-1].first].durationMs;check(validShadowAction(choke,c,h),"owned native choke wire phases");}
       choke.swordState=2;choke.chokeVariant=5;choke.chokeDurationMs=1333;
       auto bad=choke;bad.version=68;check(!validShadowAction(bad,c,h),"previous combat wire refused");
       bad=choke;bad.chokeSpawner=0;check(!validShadowAction(bad,c,h),"targetless choke refused");

@@ -63,12 +63,12 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     // 19/20 native block impact (533 ms) and 21 defender timed parry (500 ms)
     // occur only inside the block state; exact single-phase durations.
     const bool defenseImpact=p.combatVariant>=19&&p.combatVariant<=21;
-    const bool combat=p.combatVariant<=21&&(!defenseImpact||((p.state==2||p.state==3)&&p.combatPhase==1&&p.combatDurationMs==(p.combatVariant==21?500u:533u)&&p.combatTimeMs<=p.combatDurationMs))&&
-        (p.combatVariant<15||defenseImpact||(p.state==1&&p.combatPhase==1&&
+    const bool combat=p.combatVariant<=23&&(!defenseImpact||((p.state==2||p.state==3)&&p.combatPhase==1&&p.combatDurationMs==(p.combatVariant==21?500u:533u)&&p.combatTimeMs<=p.combatDurationMs))&&
+        (p.combatVariant<15||defenseImpact||(p.combatVariant>=22&&p.state==1&&p.combatPhase==1&&p.combatDurationMs==733&&p.combatTimeMs<=733)||(p.combatVariant<22&&p.state==1&&p.combatPhase==1&&
         (p.combatVariant==18?(p.combatDurationMs==833||p.combatDurationMs==1000):p.combatDurationMs==(p.combatVariant==17?800u:p.combatVariant==15?866u:666u))&&p.combatTimeMs<=p.combatDurationMs))&&(p.combatVariant?
         ((p.state==1||p.state==2||p.state==3)&&p.combatPhase>=1&&p.combatPhase<=2&&p.combatDurationMs&&p.combatDurationMs<=10000&&p.combatTimeMs<=3600000&&
          (p.combatPhase!=2||p.combatVariant==7||p.combatVariant==11)&&
-         (p.state==3||(p.state==1)==(p.combatVariant<=9||(p.combatVariant>=15&&p.combatVariant<=18)))):(!p.combatPhase&&!p.combatDurationMs&&!p.combatTimeMs&&p.state!=1&&p.state!=2));
+         (p.state==3||(p.state==1)==(p.combatVariant<=9||(p.combatVariant>=15&&p.combatVariant<=18)||p.combatVariant>=22))):(!p.combatPhase&&!p.combatDurationMs&&!p.combatTimeMs&&p.state!=1&&p.state!=2));
     // Swimming carries no action scene of its own: every scene/action field
     // stays empty; the independent root channel owns position and depth.
     const bool swim=(p.state!=22&&p.state!=23)||(!p.combatVariant&&!p.powerVariant&&!p.traversalVariant&&!p.rangedKind&&!p.grenadeHeld&&!p.grenadeVariant&&!p.carryVariant&&
@@ -107,7 +107,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         (p.trapVariant?p.state==20:p.state!=20)&&(!p.trapHeld||(p.kind==1&&(p.state==0||p.state==20)&&
         !p.heartHeld&&!p.rangedKind&&!p.grenadeHeld&&!p.powerVariant&&!p.combatVariant&&!p.carryVariant&&!p.stunVariant&&!p.airStage));
     const bool choke=ChokePresentation::valid({0,1,p.chokeVariant,p.chokeTimeMs,p.chokeDurationMs,p.chokeSpawner,p.chokeDefinition})&&
-        (p.chokeVariant?(p.kind==1&&p.state==21&&p.swordState==(nativeTakedownLethal(p.chokeVariant)?2u:1u)&&!p.trapHeld&&!p.heartHeld&&!p.grenadeHeld&&!p.rangedKind&&!p.carryVariant&&!p.powerVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant&&!p.airStage):p.state!=21);
+        (p.chokeVariant?(p.kind==1&&p.state==21&&p.swordState==(nativeTakedownSword(p.chokeVariant)?2u:1u)&&!p.trapHeld&&!p.heartHeld&&!p.grenadeHeld&&!p.rangedKind&&!p.carryVariant&&!p.powerVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant&&!p.airStage):p.state!=21);
     // 1213: a native use runs only on the ground action (state 0) and never
     // alongside another scene presentation.
     const bool use=p.useTargetValid<=1&&UsePresentation::valid({1.,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})&&

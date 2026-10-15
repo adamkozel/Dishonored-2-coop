@@ -1,0 +1,454 @@
+[
+  {
+    "id": "sword_draw_holster",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-equipment-close-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Close full-body view: from the sword-ready stance, Corvo holsters to the left hip at ~2.8 s and stands in a relaxed idle with the sword sheathed, then redraws at ~9.4 s. Later he does a crouched holstered idle, a crouched draw at ~20.8 s and rises to the ready stance; feet stay planted and limbs are intact."
+      },
+      {
+        "path": "work/natural-moveset/equipment-review-both-v48-v4-host.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Wider, darker side view: holstered walking and standing, walking with the sword drawn, and crouched stances with the sword drawn and holstered all read correctly. The figure is small and the hand contact can't be judged."
+      },
+      {
+        "path": "work/natural-moveset/integrated-equipment-close-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "From the ready stance, Emily holsters at ~2.7 s into a relaxed idle with the sword sheathed and redraws at ~9.3 s. She then holsters crouched (~14.2 s), holds a crouched holstered idle, draws crouched (~20.8 s) and rises at ~23.3 s. Entries and exits are clean."
+      },
+      {
+        "path": "work/natural-moveset/equipment-review-both-v48-v4-client.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Dark wide view: holstered walking, crouching, the redraw and a long standing ready idle are all intact. She is small in frame."
+      }
+    ],
+    "summary": "Both characters show a recognizable whole-body draw and holster, standing and crouched, with clean transitions. Exact hand-to-hilt contact is a polish item."
+  },
+  {
+    "id": "sword_ready_idle",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-equipment-close-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Standing sword-ready idle in a wide stance with the sword low in the right hand and feet planted; a crouched sword idle is visible at ~21-22 s. The arms are held slightly away from the body (generic donor look)."
+      },
+      {
+        "path": "work/natural-moveset/grip-closeup-corvo-v2.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Close side view of the standing ready pose: the sword sits in the right hand, the feet are stable and there is a subtle idle sway."
+      },
+      {
+        "path": "work/natural-moveset/integrated-equipment-close-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Standing ready idle with the sword low in the right hand, plus a crouched sword idle at ~21.7-22.5 s; stable and intact."
+      },
+      {
+        "path": "work/natural-moveset/grip-closeup-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Close rear-side view: the sword is held in the right hand with a plausible grip and a small idle arm shift; feet planted."
+      }
+    ],
+    "summary": "The standing and crouched sword-ready idles read naturally for both characters."
+  },
+  {
+    "id": "light_attack_variants",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "A short lunging slash at ~2.2-2.6 s and an alternating two-swing combo at ~5.2-6.6 s, each returning cleanly to the ready stance with feet planted."
+      },
+      {
+        "path": "work/natural-moveset/targeted-combat-corvo-v611/observer.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "Corvo is visible only briefly beside the guard before the camera repositions. During the slash (~6.7 s) the guard occludes him and only the sword tip is visible."
+      },
+      {
+        "path": "work/natural-moveset/integrated-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "A slash at ~2.4 s and an alternating combo at ~5.3-6.8 s (lunge plus backswing), with clean recovery to the ready stance."
+      },
+      {
+        "path": "work/natural-moveset/targeted-combat-emily-v614/observer.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Emily walks in beside the guard with her sword, does an overhead backswing and forward cut at ~7.0-7.8 s and returns to ready by ~8.0 s. Blade contact isn't visible and the guard doesn't react."
+      }
+    ],
+    "summary": "Short and alternating slashes are clearly readable on both characters. Corvo's targeted observer take is occluded, so his verdict rests on the integrated combat take."
+  },
+  {
+    "id": "heavy_attack_variants",
+    "verdict": "reject",
+    "characters": {
+      "corvo": "reject",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Standing heavy: windup at ~8.8 s, a static hold with the sword cocked over the shoulder from 9.35 to 10.3 s, a lunging release at ~10.5 s and recovery at ~10.9 s."
+      },
+      {
+        "path": "work/natural-moveset/crouched-heavy-corvo-v636/observer.mp4",
+        "character": "corvo",
+        "verdict": "reject",
+        "review": "The crouched windup, hold, release and recovery read well (low wide stance at 6.35-7.1 s, release at 7.2-7.5 s, crouched recovery). But at 6.08 to 6.12 s the body snaps in one frame from a kneeling crouch to full standing, holds there for ~0.2 s, then drops into the windup: a visible pop at action entry. Hypothesis: the take's script restarts the shadow stream and movement bank just before input."
+      },
+      {
+        "path": "work/natural-moveset/integrated-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Standing heavy: windup at ~8.7 s, hold with the sword over the shoulder at 9.2-10.2 s, then release and recovery to ready."
+      },
+      {
+        "path": "work/natural-moveset/crouched-heavy-emily-v636/observer.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "She crouches at ~5.9 s, then does a crouched windup, a static hold at ~6.65-7.7 s, a release at ~7.85-8.15 s and a crouched recovery. Minor issue: a one-frame torso straightening with a dust puff at windup entry (~6.3 s). She is also shown standing for ~1.2 s before the crouch, which may not match the source."
+      }
+    ],
+    "summary": "The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart."
+  },
+  {
+    "id": "moving_attack",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-moving-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Covers a lunging slash while walking forward (~2 s), a slash while backing away (~6 s), a swing while moving sideways, a forward moving guard with the sword raised (~14 s) and a crouched travelling slash (~19 s). The legs keep a walking gait under the upper-body action and he settles to idle."
+      },
+      {
+        "path": "work/natural-moveset/integrated-moving-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Same coverage: a forward slash (~2.2 s), a backward-travel slash (~6 s), a sideways swing, a forward moving guard (~14 s) and a crouched travelling slash (~18.8-19.5 s), with the gait preserved and clean settling."
+      }
+    ],
+    "summary": "Travelling sword actions combine readable upper-body attacks and guards with a continuing leg gait for both characters. Some foot slide is possible but not blocking."
+  },
+  {
+    "id": "crouched_attack",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Kneeling crouched idle, crouched slashes at ~18.3 and ~21.3 s and a crouched overhead guard, then a return to kneeling and a clean stand-up at ~25.7 s."
+      },
+      {
+        "path": "work/natural-moveset/crouch-combat-corvo-v621/observer.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "A crouched lunging strike beside the guard at ~6.0-7.0 s, with a very deep forward bend at its extreme (~6.9 s), recovering to standing (the run notes say the source rises after the strike). Before the strike he is shown in a standing wide stance for ~2 s (3.9-5.7 s). The guard occludes contact."
+      },
+      {
+        "path": "work/natural-moveset/integrated-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Crouched slash at ~18.4 s, crouched swing at ~21.3 s and a crouched overhead guard, then a stand-up at ~25.7 s; intact limbs with planted feet."
+      },
+      {
+        "path": "work/natural-moveset/integrated-moving-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "A crouched travelling slash at ~18.75-19.5 s, then a steady crouched idle."
+      }
+    ],
+    "summary": "Crouched strikes read on both characters. Corvo's targeted observer take has a deep lunge bend and a pre-strike standing interval worth an animator look."
+  },
+  {
+    "id": "airborne_attack",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-combat-corvo-v2.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Three jumps (~1.7, 5.7 and 9.7 s) with airborne sword strikes and an airborne overhead guard. Each landing goes into a crouched guard or slash and recovers to standing by ~3.5 and ~11.5 s; limbs intact."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-combat-emily-v2.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Same pattern: airborne strikes, an airborne guard and landing follow-through into a crouched guard or slash with recovery to standing; intact and readable."
+      }
+    ],
+    "summary": "Jump strikes, the airborne guard and the landing handoff read naturally for both characters."
+  },
+  {
+    "id": "block_enter_hold_exit",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-combat-corvo-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Standing block: the sword is raised overhead at ~12.6 s, held steady to ~13.7 s and lowered back to ready. A crouched block at ~21.75-22.6 s exits back to the kneeling crouch. The block is a high overhead pose rather than the native horizontal guard."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-combat-corvo-v2.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "An airborne guard is held at ~6.4-6.7 s through the landing, then exits into a crouched recovery."
+      },
+      {
+        "path": "work/natural-moveset/integrated-combat-emily-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Standing block at ~12.6-13.6 s with a clean entry and exit; crouched block at ~21.8-22.3 s."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-combat-emily-v2.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Airborne guard held into the landing with a clean exit."
+      }
+    ],
+    "summary": "Block entry, hold and exit are readable standing, crouched and airborne for both characters. The pose is a high overhead block (a polish note)."
+  },
+  {
+    "id": "hit_reactions_directions",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/stun-network-corvo-v61b.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Sword raised to block at 1.6-2.2 s, a strong recoil with sparks at ~2.3 s and a sideways stagger at 2.5-2.7 s, recovering to the ready stance by ~3.9 s; he then walks away normally (4.5 s+)."
+      },
+      {
+        "path": "work/natural-moveset/stun-network-emily-v61b.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Same sequence: block, recoil, stagger and recovery by ~2.9 s, then normal travel from ~4.5 s; intact limbs."
+      }
+    ],
+    "summary": "The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped)."
+  },
+  {
+    "id": "kick_or_shove_if_present",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "insufficient",
+      "emily": "insufficient"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/mission-combat-v1109/combat-client.mp4",
+        "character": "emily",
+        "verdict": "insufficient",
+        "review": "Client view: the remote partner is only partly visible (legs at the top-right edge on the ledge above) while the guard walks on the stairs, so no kick body motion can be judged."
+      },
+      {
+        "path": "work/natural-moveset/mission-combat-v1109/combat-host.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "The host's own first-person view of its attack on the guard; no partner body is shown."
+      }
+    ],
+    "summary": "Neither recording shows a partner's kick body, so this needs a partner-facing take."
+  },
+  {
+    "id": "death_variants",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "insufficient",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/mission-combat-v1117/combat-client.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Client first-person fatality on the host-authoritative guard: struck at ~2.3 s, the guard twists and tumbles off the step at 2.5-3.6 s and ends in a natural slumped kneeling corpse that stays stable to 16 s. The judged body is the NPC; no partner is in frame."
+      }
+    ],
+    "summary": "The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided."
+  },
+  {
+    "id": "ragdoll_handoff",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "insufficient",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/mission-combat-v1117/combat-client.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "After the shared death, the client's corpse collapses smoothly and holds its slumped pose without pops or jitter to the end of the clip (16 s). The ragdoll release at channel stop isn't shown."
+      }
+    ],
+    "summary": "The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame."
+  },
+  {
+    "id": "lethal_takedown_front_back_sides",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/lethal-network-corvo-v605/observer.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Corvo stands beside the guard, steps in at ~4.4 s, raises the sword overhead and drives it down into the guard's shoulder or neck from behind at 4.6-5.15 s, then separates back to the ready idle by ~5.3 s. There is a small hop at ~3.65 s, and the guard doesn't react (the victim isn't synchronized in this candidate)."
+      },
+      {
+        "path": "work/natural-moveset/lethal-network-emily-v605/observer.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Emily hops at ~3.8 s, reaches over the guard with a stabbing arm at 4.6-5.2 s and recovers to the ready idle by ~5.7 s. The view is dim and partly occluded, her alignment to the observer's guard isn't rear-facing, and the guard doesn't react."
+      }
+    ],
+    "summary": "The rear fast-back lethal body action reads for both characters. Only the back direction is recorded, and victim reaction and alignment are not part of these takes."
+  },
+  {
+    "id": "nonlethal_takedown_front_back_sides",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/choke-network-corvo-v585/observer.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Corvo walks up behind the guard and holds a rear choke with his arms around the neck at ~3.4-8.6 s (static loop), then releases, briefly raises the sword overhead (~9.0-9.4 s) and stands beside the guard. The guard doesn't react."
+      },
+      {
+        "path": "work/natural-moveset/choke-breakout-corvo-v593/observer.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "The observer camera stays on a close-up of the guard's face; the partner is only glimpsed at ~3 s."
+      },
+      {
+        "path": "work/natural-moveset/choke-network-emily-v589/observer.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Emily steps in behind the guard and holds a rear choke at ~3.6-8.1 s, then releases, briefly raises the sword (~9.6-10 s) and stands beside the guard; intact limbs."
+      },
+      {
+        "path": "work/natural-moveset/choke-network-emily-v586/observer.mp4",
+        "character": "emily",
+        "verdict": "insufficient",
+        "review": "The observer camera faces a wall after ~1.2 s, so the partner isn't visible."
+      }
+    ],
+    "summary": "The rear choke's entry, hold and release read on both characters. Only rear chokes were judged, and the victim doesn't react in these older takes."
+  },
+  {
+    "id": "struggle_and_escape",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/choke-breakout-corvo-v597/observer.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Corvo enters the rear choke at ~4.5 s and holds it to ~10.9 s. At ~11.25 s he is thrown off, stumbling backwards with an arm flung out, and recovers to the standing ready idle by ~12.4 s. There is a small hop on approach at ~3.4 s."
+      },
+      {
+        "path": "work/natural-moveset/choke-breakout-corvo-v593/observer.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "The camera is stuck on a close-up of the guard's face; the partner is only glimpsed at ~3 s."
+      },
+      {
+        "path": "work/natural-moveset/choke-breakout-emily-v595/observer.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Emily holds the rear choke at ~4.1-10.5 s, is thrown off at ~10.9 s with a backward stumble and recovers to standing by ~11.6-12 s."
+      }
+    ],
+    "summary": "The choke breakout (being thrown off and recovering) reads clearly for both characters in the newer takes. The victim's side is not synchronized."
+  },
+  {
+    "id": "carry_body_lift_idle_move_drop_throw",
+    "verdict": "reject",
+    "characters": {
+      "corvo": "reject",
+      "emily": "reject"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/carry-victim-native-corvo-v13/native.mp4",
+        "character": "corvo",
+        "verdict": "reject",
+        "review": "Corvo stands with no pickup motion, and the body appears on his shoulder in one frame at ~2.0-2.1 s: an attachment pop with no floor-to-shoulder lift. The loaded walk and crouched carry read, but in the crouched carry one arm stays stiffly extended forward (~9.5-11.8 s). The drop at ~15 s releases the body to the floor and he recovers with the sword drawn. No throw is recorded."
+      },
+      {
+        "path": "work/natural-moveset/carry-victim-native-emily-v13/native.mp4",
+        "character": "emily",
+        "verdict": "reject",
+        "review": "The same pop: the body appears on Emily's shoulder at ~2.0-2.2 s without a lift. The carried walk, crouched carry and the drop at ~15.2 s (body to the floor) read, then she recovers standing. No throw is recorded."
+      },
+      {
+        "path": "work/natural-moveset/carry-victim-native-emily-crouched-v13/native.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "The crouched loaded carry (~10-14.7 s) and drop (~15 s) read, with a crouched idle afterwards and a stand-up at ~21 s. The pickup happens in shadow and can't be judged."
+      }
+    ],
+    "summary": "Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded."
+  }
+]

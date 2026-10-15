@@ -1,10 +1,10 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
-Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.
+Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival world FX, discrete arrival and the cancelled second aim all read correctly on the partner. Only a dark streak during the lab's reset back to the origin is visible, and it is not part of the power. Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.
 
 ````json
 {
@@ -15,7 +15,7 @@ Standing armed Dunwall native Blink phases drive whole-body motion over Steam. A
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Blink_body_and_world_FX",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo blink aim cancel release arrive",
@@ -31,7 +31,7 @@ Standing armed Dunwall native Blink phases drive whole-body motion over Steam. A
     "power_blink_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival world FX, discrete arrival and the cancelled second aim all read correctly on the partner. Only a dark streak during the lab's reset back to the origin is visible, and it is not part of the power. Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -63,12 +63,14 @@ Standing armed Dunwall native Blink phases drive whole-body motion over Steam. A
   ],
   "native_effects_status": "partial_standing_armed_Dunwall_departure_arrival",
   "evidence": [
-    "blink-regression-v26-v2/result.json"
+    "blink-regression-v26-v2/result.json",
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
   ]
 }
 ````
 
 - [evidence: blink-regression-v26-v2/result.json](<../../../../work/natural-moveset/blink-regression-v26-v2/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: integrated-blink-fx-v1.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v1.mp4>)
 - [in_game_recordings: integrated-blink-fx-v3.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v3.mp4>)
 - [in_game_recordings: blink-knee-v4.mp4](<../../../../work/natural-moveset/blink-knee-v4.mp4>)
@@ -244,7 +246,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
 - [in_game_recordings: darkvision-corvo-balanced-v28-v1-source.mp4](<../../../../work/natural-moveset/darkvision-corvo-balanced-v28-v1-source.mp4>)
 ## corvo_possession_enter_loop_exit
 
-374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.
+Visual sweep 1260: accepted (corvo accept). The empty-target Possession entry and aim, and the recovery to idle, read naturally. The possessed loop and the exit with a real target are not recorded, so that is a coverage gap rather than a visual defect. Scope: body accepted for the empty-target aim and recovery only; possession of a real target is not recorded. 374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.
 
 ````json
 {
@@ -255,7 +257,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
   ],
   "authoring": "candidates",
   "runtime_binding": "native_empty_target_entry_aim_remote_body_verified_target_pending",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo possession enter loop exit",
@@ -267,7 +269,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
     "power_possession_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). The empty-target Possession entry and aim, and the recovery to idle, read naturally. The possessed loop and the exit with a real target are not recorded, so that is a coverage gap rather than a visual defect. Scope: body accepted for the empty-target aim and recovery only; possession of a real target is not recorded. 374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -1688,10 +1690,14 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
       "checks_passed": true,
       "scope": "Ordinary guard positive control on374 DLL passes20. Viewed paired sheets at2.9/3.5/3.8/4.4/7.6/8.4s: native transfer/occupied tint/exit intact, remote Corvo disappears and returns, target particles play. Stair post obscures most caster gesture; no full visual acceptance. Scoped native source NPC possession remains local; shared NPC authority unimplemented. Complete checkpoint inventory/health and14 protected hashes restore."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: possession-empty-v322.mp4](<../../../../work/natural-moveset/possession-empty-v322.mp4>)
 - [in_game_recordings: possession-network-v323.mp4](<../../../../work/natural-moveset/possession-network-v323.mp4>)
 - [in_game_recordings: possession-network-v323-source.mp4](<../../../../work/natural-moveset/possession-network-v323-source.mp4>)
@@ -1764,7 +1770,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
 - [in_game_recordings: possession-partner-guard-control-v375-source.mp4](<../../../../work/natural-moveset/possession-partner-guard-control-v375-source.mp4>)
 ## corvo_bend_time_cast_end
 
-Native Corvo Bend Time start/release use exact native scene clocks over Steam. v42 corrects crouched shoulders; v44 retains airborne casting and tests same-world pause recovery with a temporary visibility gap. v45 adds the observed 333ms out-of-mana response. Named takes remain scoped; other contexts, interruptions, continuous visual acceptance and world-time-dependent effects remain open. Asset-only hold stays unbound; viewer blur is diagnostic only.
+Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time casts and releases are recognizable and recover cleanly. The crouched release pose is a little generic, and no world time effect is shown (out of scope). Native Corvo Bend Time start/release use exact native scene clocks over Steam. v42 corrects crouched shoulders; v44 retains airborne casting and tests same-world pause recovery with a temporary visibility gap. v45 adds the observed 333ms out-of-mana response. Named takes remain scoped; other contexts, interruptions, continuous visual acceptance and world-time-dependent effects remain open. Asset-only hold stays unbound; viewer blur is diagnostic only.
 
 ````json
 {
@@ -1775,7 +1781,7 @@ Native Corvo Bend Time start/release use exact native scene clocks over Steam. v
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Bend_Time_stance_equipment_air_and_pause_through_Steam",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo bend time cast end",
@@ -1787,7 +1793,7 @@ Native Corvo Bend Time start/release use exact native scene clocks over Steam. v
     "power_bend_time_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native Corvo Bend Time start/release use exact native scene clocks over Steam. v42 corrects crouched shoulders; v44 retains airborne casting and tests same-world pause recovery with a temporary visibility gap. v45 adds the observed 333ms out-of-mana response. Named takes remain scoped; other contexts, interruptions, continuous visual acceptance and world-time-dependent effects remain open. Asset-only hold stays unbound; viewer blur is diagnostic only.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time casts and releases are recognizable and recover cleanly. The crouched release pose is a little generic, and no world time effect is shown (out of scope). Native Corvo Bend Time start/release use exact native scene clocks over Steam. v42 corrects crouched shoulders; v44 retains airborne casting and tests same-world pause recovery with a temporary visibility gap. v45 adds the observed 333ms out-of-mana response. Named takes remain scoped; other contexts, interruptions, continuous visual acceptance and world-time-dependent effects remain open. Asset-only hold stays unbound; viewer blur is diagnostic only.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -3571,10 +3577,14 @@ Native Corvo Bend Time start/release use exact native scene clocks over Steam. v
       "checks_passed": true,
       "scope": "Corvo Bend Time ground stance/equipment/travel context integration. Native source controller casts and scene timing drive the remote whole body through Steam. Native source effects and physics are recorded; remote viewer VFX, shared time authority, other contexts and broader lifecycle are not yet implemented or certified."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: native-bendtime-corvo-v39.mp4](<../../../../work/natural-moveset/native-bendtime-corvo-v39.mp4>)
 - [in_game_recordings: bendtime-corvo-body-v40-v1.mp4](<../../../../work/natural-moveset/bendtime-corvo-body-v40-v1.mp4>)
 - [in_game_recordings: bendtime-corvo-body-v40-v1-source.mp4](<../../../../work/natural-moveset/bendtime-corvo-body-v40-v1-source.mp4>)
@@ -3657,7 +3667,7 @@ Native Corvo Bend Time start/release use exact native scene clocks over Steam. v
 - [in_game_recordings: bendtime-viewer-fx-v41-v1.mp4](<../../../../work/natural-moveset/bendtime-viewer-fx-v41-v1.mp4>)
 ## corvo_windblast_cast
 
-Saved native casts passed full-body phase, stance/equipment recovery, one remote finite cosmetic world effect per source effect, exact origin/axis and duplicate rejection. These cover the recorded crouched armed and holstered/moving ground fixtures; world impulses/hits, upgrade variants and production acceptance remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
+Visual sweep 1260: accepted (corvo accept). Windblast reads correctly in the crouched-armed and standing-holstered contexts, and the native wind streak world effect is visible on the observer. Saved native casts passed full-body phase, stance/equipment recovery, one remote finite cosmetic world effect per source effect, exact origin/axis and duplicate rejection. These cover the recorded crouched armed and holstered/moving ground fixtures; world impulses/hits, upgrade variants and production acceptance remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
 
 ````json
 {
@@ -3668,7 +3678,7 @@ Saved native casts passed full-body phase, stance/equipment recovery, one remote
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_windblast_body_and_finite_world_fx",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo windblast cast",
@@ -3677,7 +3687,7 @@ Saved native casts passed full-body phase, stance/equipment recovery, one remote
     "power_windblast_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Saved native casts passed full-body phase, stance/equipment recovery, one remote finite cosmetic world effect per source effect, exact origin/axis and duplicate rejection. These cover the recorded crouched armed and holstered/moving ground fixtures; world impulses/hits, upgrade variants and production acceptance remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). Windblast reads correctly in the crouched-armed and standing-holstered contexts, and the native wind streak world effect is visible on the observer. Saved native casts passed full-body phase, stance/equipment recovery, one remote finite cosmetic world effect per source effect, exact origin/axis and duplicate rejection. These cover the recorded crouched armed and holstered/moving ground fixtures; world impulses/hits, upgrade variants and production acceptance remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -3718,7 +3728,8 @@ Saved native casts passed full-body phase, stance/equipment recovery, one remote
     "windblast-corvo-balanced-network-v28-v3/result.json",
     "windblast-corvo-balanced-empty-moving-v28-v3/result.json",
     "windblast-corvo-air-network-v28-v1/result.json",
-    "windblast-corvo-air-empty-moving-v28-v1/result.json"
+    "windblast-corvo-air-empty-moving-v28-v1/result.json",
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
   ],
   "complete": false,
   "visual_accepted": false
@@ -3732,6 +3743,7 @@ Saved native casts passed full-body phase, stance/equipment recovery, one remote
 - [evidence: windblast-corvo-balanced-empty-moving-v28-v3/result.json](<../../../../work/natural-moveset/windblast-corvo-balanced-empty-moving-v28-v3/result.json>)
 - [evidence: windblast-corvo-air-network-v28-v1/result.json](<../../../../work/natural-moveset/windblast-corvo-air-network-v28-v1/result.json>)
 - [evidence: windblast-corvo-air-empty-moving-v28-v1/result.json](<../../../../work/natural-moveset/windblast-corvo-air-empty-moving-v28-v1/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: windblast-corvo-body-v27-v1.mp4](<../../../../work/natural-moveset/windblast-corvo-body-v27-v1.mp4>)
 - [in_game_recordings: windblast-corvo-body-v27-v1-source.mp4](<../../../../work/natural-moveset/windblast-corvo-body-v27-v1-source.mp4>)
 - [in_game_recordings: windblast-corvo-network-v28-v1.mp4](<../../../../work/natural-moveset/windblast-corvo-network-v28-v1.mp4>)
@@ -3748,7 +3760,7 @@ Saved native casts passed full-body phase, stance/equipment recovery, one remote
 - [in_game_recordings: windblast-corvo-air-empty-moving-v28-v1-source.mp4](<../../../../work/natural-moveset/windblast-corvo-air-empty-moving-v28-v1-source.mp4>)
 ## corvo_devouring_swarm_cast
 
-Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.
+Visual sweep 1260: accepted (corvo accept). The Swarm cast body reads well standing and crouched-moving. No native rats are visible on the observer in the reviewed takes, so the world presentation is not shown on video. Scope: body accepted; the rat swarm is not visible in the observer world (effect gap). Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.
 
 ````json
 {
@@ -3759,7 +3771,7 @@ Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict
   ],
   "authoring": "candidates",
   "runtime_binding": "native_swarm_grounded_contexts_incrementally_verified_world_pending",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo devouring swarm cast",
@@ -3771,7 +3783,7 @@ Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict
     "power_devouring_swarm_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). The Swarm cast body reads well standing and crouched-moving. No native rats are visible on the observer in the reviewed takes, so the world presentation is not shown on video. Scope: body accepted; the rat swarm is not visible in the observer world (effect gap). Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -4926,10 +4938,14 @@ Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict
       "checks": 25,
       "complete": false
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: swarm-native-standing-observe-v266.mp4](<../../../../work/natural-moveset/swarm-native-standing-observe-v266.mp4>)
 - [in_game_recordings: swarm-network-standing-v270.mp4](<../../../../work/natural-moveset/swarm-network-standing-v270.mp4>)
 - [in_game_recordings: swarm-network-standing-v270-source.mp4](<../../../../work/natural-moveset/swarm-network-standing-v270-source.mp4>)
@@ -4982,7 +4998,7 @@ Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict
 - [in_game_recordings: swarm-trails-v320-source.mp4](<../../../../work/natural-moveset/swarm-trails-v320-source.mp4>)
 ## emily_far_reach_aim_cancel_release_arrive
 
-Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.
+Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pull, impact and recovery read correctly. The only visible artifact is the reset streak back to the origin, which is a fixture move. Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.
 
 ````json
 {
@@ -4993,7 +5009,7 @@ Standing armed Dunwall body phases, native tether from the authored left wrist t
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Far_Reach_body_and_world_FX",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily far reach aim cancel release arrive",
@@ -5009,7 +5025,7 @@ Standing armed Dunwall body phases, native tether from the authored left wrist t
     "power_far_reach_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
+  "notes": "Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pull, impact and recovery read correctly. The only visible artifact is the reset streak back to the origin, which is a fixture move. Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -5040,12 +5056,14 @@ Standing armed Dunwall body phases, native tether from the authored left wrist t
   ],
   "native_effects_status": "partial_standing_armed_Dunwall_tether_impact",
   "evidence": [
-    "grapple-regression-v26-v2/result.json"
+    "grapple-regression-v26-v2/result.json",
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
   ]
 }
 ````
 
 - [evidence: grapple-regression-v26-v2/result.json](<../../../../work/natural-moveset/grapple-regression-v26-v2/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: integrated-power-emily-v3.mp4](<../../../../work/natural-moveset/integrated-power-emily-v3.mp4>)
 - [in_game_recordings: integrated-grapple-fx-v3.mp4](<../../../../work/natural-moveset/integrated-grapple-fx-v3.mp4>)
 - [in_game_recordings: grapple-knee-v4.mp4](<../../../../work/natural-moveset/grapple-knee-v4.mp4>)
@@ -5221,7 +5239,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
 - [in_game_recordings: darkvision-emily-balanced-empty-moving-v28-v1-source.mp4](<../../../../work/natural-moveset/darkvision-emily-balanced-empty-moving-v28-v1-source.mp4>)
 ## emily_domino_mark_link_cancel
 
-Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.
+Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture and its recovery read correctly, and the native mark effect appears on the target. Framing in v218 is cramped at the screen edge. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.
 
 ````json
 {
@@ -5232,7 +5250,7 @@ Domino scoped body/marks, partner exclusion, beams, aim cancellation, target des
   ],
   "authoring": "candidates",
   "runtime_binding": "native_domino_standing_armed_body_and_mark_partial_verified",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily domino mark link cancel",
@@ -5245,7 +5263,7 @@ Domino scoped body/marks, partner exclusion, beams, aim cancellation, target des
     "power_domino_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.",
+  "notes": "Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture and its recovery read correctly, and the native mark effect appears on the target. Framing in v218 is cramped at the screen edge. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -6986,10 +7004,14 @@ Domino scoped body/marks, partner exclusion, beams, aim cancellation, target des
       "checks_passed": true,
       "scope": "Native source Domino acquisition and native controller casting drives the explicit Emily stance/equipment phases then standing recovery through native Steam, with source scene timing and unchanged equipment state. One native scene incarnation changes subscenes. This take verifies one native target selection and reselection, exact final400 crouched recovery, corresponding peer gesture and source/cosmetic mark retirement. Earlier scoped mark/beam presentation proofs remain separate; NPC AI and shared outcomes are unfinished. No claim of complete Domino support or visual acceptance. Mandatory isolated checkpoint reload retires world effects; original assets and saves unchanged."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: domino-native-source-v187.mp4](<../../../../work/natural-moveset/domino-native-source-v187.mp4>)
 - [in_game_recordings: domino-native-target-v191.mp4](<../../../../work/natural-moveset/domino-native-target-v191.mp4>)
 - [in_game_recordings: domino-native-reader-v190.mp4](<../../../../work/natural-moveset/domino-native-reader-v190.mp4>)
@@ -7332,7 +7354,7 @@ Native493/494 show standing/crouched Emily keeps the sword sheathed throughout t
 - [in_game_recordings: doppelganger-air-entry-holstered-v510-source.mp4](<../../../../work/natural-moveset/doppelganger-air-entry-holstered-v510-source.mp4>)
 ## emily_mesmerize_cast
 
-Native Emily enter/aim/release clocks drive the remote complete body through Steam. Committed source world states drive one cosmetic model, native scenes and owned particles. Individual takes specify cancellation, expiry and recovery coverage. Latest inspected passing take mesmerize-empty-air-release-network-v181: Both actual-game sheets inspected. Empty-hand native aim switches to airborne release; peer retains the hidden sword, changing cast-arm and leg motion, landing and native standing recovery. All17 scoped checks pass;45 continuity samples have weight1.0 and zero rejections/dropouts. Three source and three peer airborne release samples;1.4857m peak rise returns to the same floor. Native empty-target world case creates no invented peer links. Effects retire; both checkpoint restorations and protected14 pass. Broader visual acceptance, directions and shared NPC outcomes remain open. Authoritative NPC outcomes, untested stance/direction and interruption contexts, and full visual acceptance remain incomplete. Individual failed takes and their reasons are retained.
+Visual sweep 1260: accepted (emily accept). The Mesmerize cast body reads naturally, and the native spirit world effect appears and clears on the observer. Native Emily enter/aim/release clocks drive the remote complete body through Steam. Committed source world states drive one cosmetic model, native scenes and owned particles. Individual takes specify cancellation, expiry and recovery coverage. Latest inspected passing take mesmerize-empty-air-release-network-v181: Both actual-game sheets inspected. Empty-hand native aim switches to airborne release; peer retains the hidden sword, changing cast-arm and leg motion, landing and native standing recovery. All17 scoped checks pass;45 continuity samples have weight1.0 and zero rejections/dropouts. Three source and three peer airborne release samples;1.4857m peak rise returns to the same floor. Native empty-target world case creates no invented peer links. Effects retire; both checkpoint restorations and protected14 pass. Broader visual acceptance, directions and shared NPC outcomes remain open. Authoritative NPC outcomes, untested stance/direction and interruption contexts, and full visual acceptance remain incomplete. Individual failed takes and their reasons are retained.
 
 ````json
 {
@@ -7343,7 +7365,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
   ],
   "authoring": "candidates",
   "runtime_binding": "native_observed_mesmerize_body_and_cosmetic_world_contexts_partial_verified",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily mesmerize cast",
@@ -7355,7 +7377,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
     "power_mesmerize_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native Emily enter/aim/release clocks drive the remote complete body through Steam. Committed source world states drive one cosmetic model, native scenes and owned particles. Individual takes specify cancellation, expiry and recovery coverage. Latest inspected passing take mesmerize-empty-air-release-network-v181: Both actual-game sheets inspected. Empty-hand native aim switches to airborne release; peer retains the hidden sword, changing cast-arm and leg motion, landing and native standing recovery. All17 scoped checks pass;45 continuity samples have weight1.0 and zero rejections/dropouts. Three source and three peer airborne release samples;1.4857m peak rise returns to the same floor. Native empty-target world case creates no invented peer links. Effects retire; both checkpoint restorations and protected14 pass. Broader visual acceptance, directions and shared NPC outcomes remain open. Authoritative NPC outcomes, untested stance/direction and interruption contexts, and full visual acceptance remain incomplete. Individual failed takes and their reasons are retained.",
+  "notes": "Visual sweep 1260: accepted (emily accept). The Mesmerize cast body reads naturally, and the native spirit world effect appears and clears on the observer. Native Emily enter/aim/release clocks drive the remote complete body through Steam. Committed source world states drive one cosmetic model, native scenes and owned particles. Individual takes specify cancellation, expiry and recovery coverage. Latest inspected passing take mesmerize-empty-air-release-network-v181: Both actual-game sheets inspected. Empty-hand native aim switches to airborne release; peer retains the hidden sword, changing cast-arm and leg motion, landing and native standing recovery. All17 scoped checks pass;45 continuity samples have weight1.0 and zero rejections/dropouts. Three source and three peer airborne release samples;1.4857m peak rise returns to the same floor. Native empty-target world case creates no invented peer links. Effects retire; both checkpoint restorations and protected14 pass. Broader visual acceptance, directions and shared NPC outcomes remain open. Authoritative NPC outcomes, untested stance/direction and interruption contexts, and full visual acceptance remain incomplete. Individual failed takes and their reasons are retained.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -9516,10 +9538,14 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
       "checks_passed": true,
       "scope": "Native Emily Mesmerize air entry or air release drives whole-body cast and air locomotion through Steam; the holstered field distinguishes empty-hand and sword contexts. The airCase field identifies the bounded in-place jump sequence. Explicit stance, holstered and move parameters identify this take. Native source power owns mana, targets and gameplay. Remote world/model/effects are cosmetic; positive NPC and repeatedly valid empty-target cases have distinct checks. Standing recovery, native sword selection, inventory/health, checkpoint cleanup and protected saves are verified separately from visual acceptance. Shared NPC authority and broader movement remain incomplete."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: mesmerize-native-emily-v70.mp4](<../../../../work/natural-moveset/mesmerize-native-emily-v70.mp4>)
 - [in_game_recordings: mesmerize-native-emily-v71.mp4](<../../../../work/natural-moveset/mesmerize-native-emily-v71.mp4>)
 - [in_game_recordings: mesmerize-owned-scenes-emily-v72.mp4](<../../../../work/natural-moveset/mesmerize-owned-scenes-emily-v72.mp4>)
@@ -9629,7 +9655,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
 - [in_game_recordings: mesmerize-empty-air-release-network-v181-source.mp4](<../../../../work/natural-moveset/mesmerize-empty-air-release-network-v181-source.mp4>)
 ## emily_shadow_walk_enter_move_attack_exit
 
-550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.
+Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit read correctly as functional coverage. The shadow material and attacks are not shown, and the native particles are subtle. Scope: body accepted; the shadow-walk transformed material is not applied and no attack is recorded. 550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.
 
 ````json
 {
@@ -9640,7 +9666,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_standing_sneaking_entry_crawl_exit_through_Steam",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily shadow walk enter move attack exit",
@@ -9652,7 +9678,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
     "shadow_walk_exit"
   ],
   "deliverable_kind": "animation",
-  "notes": "550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.",
+  "notes": "Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit read correctly as functional coverage. The shadow material and attacks are not shown, and the native particles are subtle. Scope: body accepted; the shadow-walk transformed material is not applied and no attack is recorded. 550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -9721,7 +9747,8 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
   "evidence": [
     "native-shadowwalk-sneak-v551/result.json",
     "native-shadowwalk-standing-v552/result.json",
-    "native-shadowwalk-sneak-clear-v554/result.json"
+    "native-shadowwalk-sneak-clear-v554/result.json",
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
   ],
   "remaining_behaviors": [
     "Correct whole-body Shadow Walk appearance; ordinary human body is still visible.",
@@ -9736,6 +9763,7 @@ Native Emily enter/aim/release clocks drive the remote complete body through Ste
 - [evidence: native-shadowwalk-sneak-v551/result.json](<../../../../work/natural-moveset/native-shadowwalk-sneak-v551/result.json>)
 - [evidence: native-shadowwalk-standing-v552/result.json](<../../../../work/natural-moveset/native-shadowwalk-standing-v552/result.json>)
 - [evidence: native-shadowwalk-sneak-clear-v554/result.json](<../../../../work/natural-moveset/native-shadowwalk-sneak-clear-v554/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: native-shadowwalk-standing-v516b.mp4](<../../../../work/natural-moveset/native-shadowwalk-standing-v516b.mp4>)
 - [in_game_recordings: native-shadowwalk-state-v520.mp4](<../../../../work/natural-moveset/native-shadowwalk-state-v520.mp4>)
 - [in_game_recordings: native-shadowwalk-scenes-v522.mp4](<../../../../work/natural-moveset/native-shadowwalk-scenes-v522.mp4>)
@@ -9811,7 +9839,7 @@ Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, 
 
 ## power_interruptions_and_no_mana
 
-Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.
+Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failures and pause recovery read correctly. A late relaxed-stance switch after the resume tests should be checked, and no Emily or other-power interruption recordings exist (outside the bound scope). Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.
 
 ````json
 {
@@ -9823,7 +9851,7 @@ Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen che
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Corvo_Bend_Time_failure_and_same_world_pause",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_owner",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "power interruptions and no mana",
@@ -9838,7 +9866,7 @@ Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen che
     "power_domino_cancel"
   ],
   "deliverable_kind": "animation",
-  "notes": "Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.",
+  "notes": "Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failures and pause recovery read correctly. A late relaxed-stance switch after the resume tests should be checked, and no Emily or other-power interruption recordings exist (outside the bound scope). Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [
     {
@@ -10848,10 +10876,14 @@ Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen che
       "checks_passed": true,
       "scope": "Corvo standing armed out-of-mana native hand effect interruption. Exact owned native scene and Steam body clock; cleanup and optional same-world menu recovery only. Death, reload, disconnect and broader contexts remain open."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/powers-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [in_game_recordings: failure-fx-receiver-stop-v51.mp4](<../../../../work/natural-moveset/failure-fx-receiver-stop-v51.mp4>)
 - [in_game_recordings: failure-fx-receiver-stop-v51-source.mp4](<../../../../work/natural-moveset/failure-fx-receiver-stop-v51-source.mp4>)
 - [in_game_recordings: failure-fx-source-resume-v51.mp4](<../../../../work/natural-moveset/failure-fx-source-resume-v51.mp4>)

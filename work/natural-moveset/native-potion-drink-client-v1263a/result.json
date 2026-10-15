@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "failure": "Remote body bank stopped",
+  "source": "client",
+  "kind": "health",
+  "wheelButton": "NativeHealth",
+  "networkContinuity": true,
+  "manaPreparation": false,
+  "statisticsValidated": false,
+  "leftY": 0,
+  "checks": [
+    "Exactly one scalar native potion granted without equipping or invoking consumption",
+    "Exact native callback consumed one potion in normal gameplay",
+    "Native health increases after consumption without a health setter",
+    "Both native isolated checkpoints restore health and unowned potion state",
+    "All fourteen protected save/settings hashes retained"
+  ],
+  "events": [
+    {
+      "videoTime": 2.31,
+      "input": "Exact native health-consume routine from engine thread; no keyboard input"
+    }
+  ],
+  "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+  "probe": "E631794B09C634C40947DDC93C11AAA49AC582611317F43218886FE0C19AAF90",
+  "finalDll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+  "scope": "Existing remote body walking/stopping continuity through source native potion consumption, over Steam. No dedicated drink gesture, remote drink audio or remote resource synchronization is implemented; all outcomes reset through isolated checkpoints."
+}

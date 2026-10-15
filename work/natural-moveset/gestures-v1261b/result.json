@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "coin",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T10:23:58.8179344+02:00",
+      "lootSamples": 1,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "food",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T10:24:55.4890826+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "coin",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T10:25:54.7526384+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "food",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T10:27:04.6466892+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    }
+  ],
+  "scope": "Pickup and food gestures (1214j): native LootObject47 drives the partner use reach toward the item, both source roles, product controller; fixture restored after every case."
+}

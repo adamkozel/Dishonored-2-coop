@@ -1,0 +1,82 @@
+# Visual sweep, counterattack and item gestures
+
+Stage 3, cards #9 and #11. Candidates 1214h–1214j, audits 1260 and 1264.
+
+## Visual-acceptance sweep (audit 1260)
+
+**What was reviewed:** the 73 runtime-bound checklist items that had recorded real-game videos but no accepted visuals.
+
+**Method** ([review instructions](../../work/movement-integration/visual-sweep-v1260/INSTRUCTIONS.md)):
+- five review passes (locomotion/stance, traversal, combat/paired, ranged/interactions, powers);
+- contact sheets from partner views only; the source's own first-person views were skipped;
+- functional-first criteria: accept when the action is recognizable and reads naturally enough to ship, and reject clear defects (T-pose, frozen or popping body, wrong action, stuck pose);
+- the lead reviewer spot-checked sheets before publishing.
+
+**Result** ([audit](../../work/movement-integration/visual-sweep-audit-v1260.json)): 55 accepted, 8 rejected, 10 insufficient. With audits 1264 and 1257, 72 of 105 items now have accepted visuals.
+
+**Rejected, with the defect:**
+- Corvo's crouched heavy attack snaps to standing for about 0.2 s before the windup (take v636).
+- The carried body appears on the shoulder in one frame, with no lift (take v13).
+- The high grenade throw pops the body 0.35–0.75 m sideways at release.
+- Pickups, food and elixirs showed no partner gesture. The native game plays none in first person. Fixed below.
+- Reading a note shows no gesture (open).
+
+**Insufficient (no judgeable view):**
+- fall loop: no long fall recorded;
+- Emily slides: not in the listed videos;
+- run in 8 directions: no dedicated run take;
+- doors: the partner is hidden;
+- key use: no view of Corvo as the partner;
+- map load: the camera faces a wall;
+- kick: only the legs are visible;
+- death and ragdoll: no Corvo-sourced take.
+
+**Scope notes on accepted powers:**
+- Devouring Swarm: the rats are not visible in the observer world.
+- Shadow Walk: the transformed material is not applied.
+- Possession: recorded only on an empty target.
+
+These are effect gaps, separate from the body acceptance.
+
+## Counterattack, sword locks and b-swing hits (#9)
+
+Harness [v1258](../../work/natural-moveset/make_counterattack_v1258.py) and its variants b and c face the guard and cycle the native parry follow-up: hold block 700 ms, then attack at once.
+
+- **Confirmed runtime (1258b): sword lock.**
+  - A sword lock runs the exclusive Versus31 state with the four-actor scene `combat/versus_low` (`versus_in` 533 ms, `versus_loop` 600 ms, then a win or lose subscene). Before 1214h it fell to the unbound hold.
+  - The Versus31 vtable RVA `1c405e8` comes from the probe's native state table (`--player-state-table`, take 1258c). Ghidra only located the class name.
+  - 1214h adds `versus_low` and `versus_elite` (census 1259, ids 118/119, kind 6). They are presented on the drawn sword with the parry-idle clip. A client-sourced lock holds the host NPC and never knocks it out. **Not yet observed at runtime.**
+- **Confirmed runtime (1256a, 1258b): b-swing hits.** `sword_attack_right_b_hit` and `sword_attack_left_b_hit` (Scene_1, 733 ms, player and right arm) fell to the unbound fallback. 1214h presents them as combat variants 22/23 with the slash-b clips.
+- **Confirmed runtime (1258d): combat-channel blocking.**
+  - The client's NPC-combat channels retired ("actor_unbound"). A retired channel then blocked its NPC forever.
+  - When the host re-armed with a new nonce, the client rejected all 48 hellos ("receive_binding").
+  - Result: the host's counter-kill finisher left the guard dead on the host and conscious on the client.
+  - 1214i re-binds a living NPC 2 s after a non-terminal retirement, with a fresh nonce and a new health comparison. Deaths still end the NPC for good (unit-tested).
+- **Confirmed runtime (1258f, 1214i): counterattack.** Corvo's timed parry win, then an attack, plays the counter-kill finisher `fatality_head_fast_b` (id 94). The partner presents it and the guard is dead in both worlds.
+- **Not yet produced:** Emily's counter. She parried and slashed in every take.
+
+## Pickup, food and elixir gestures (1214j)
+
+The native game plays no first-person gesture for these actions, so the partner showed none.
+
+1214j adds two triggers on the source:
+- **Pickup or food:** native `LootObject47` over Running0 or Sneaking6 presents the generic use reach ([chapter 92](92-native-use-interactions.md)) toward the focused item.
+- **Elixir:** a health or mana potion quantity drop presents the same reach to the mouth. The last valid count is kept across the item wheel.
+
+Both are presentation only: no item, inventory or health outcome is synthesized.
+
+**Confirmed runtime:**
+- **1261b:** coin and grapes in both roles. The partner reach reaches weight 1.0 with a valid target, and the item is taken. `LootObject47` lasts under the 80 ms sample interval, so the harness checks the item instead.
+- **1262a:**
+  - picking up the map health elixir plays the reach;
+  - none of the four D-pad slots drinks it in this save.
+- **1263a:** drinking through the native consume callback (isolated potion fixture, stream on), in both roles.
+  - The partner raises the hand to the face about 1 s later, because the two potion kinds are each polled every 1.2 s, alternating.
+  - The old harness then failed only its own bank-continuity check after the drink.
+
+**Visual:** pickup, food and health elixir are accepted from both windows as functional. The reach uses the sword hand. A dedicated gesture is left for animator polish.
+
+**Open:**
+- mana elixir: same path, not recorded;
+- note-reading pose: the native ReadNote4 UI suspends the stream and the observer holds the body frozen, so a reading pose would need observer-side playback during that hold;
+- body looting and pickpocketing.

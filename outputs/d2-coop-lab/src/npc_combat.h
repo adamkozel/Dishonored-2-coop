@@ -8,7 +8,7 @@
 struct NpcCombatChannel {
     std::uint64_t arm=0,peerArm=0,peerNonce=0,event=0,request=0,peerRequest=0,pending=0;
     bool ready=false,enabled=true,terminal=false,deathPending=false;
-    ULONGLONG started=0;const char* retired="none";
+    ULONGLONG started=0,retiredAt=0;const char* retired="none";
     ULONGLONG deathAt=0;unsigned deathSource=2;std::uint64_t deathRequest=0,deathEvent=0,deathSourceArm=0;
     NpcCombatDamage deathDamage=NpcCombatDamage::None;EnemyMeleeGeometry deathGeometry{};
     NativeHealth deathBefore{},deathAfter{};float deathInflicted=0;NpcCombatScriptDamage deathScript{};NpcCombatRangedDamage deathRanged{};
@@ -526,12 +526,15 @@ void beginNpcCombat(){
     if(npcCombat.channels.empty())npcCombat.result="waiting_for_actors";
 }
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason){
-    if(!b.enabled)return;b.enabled=b.ready=false;b.retired=reason;npcCombatLastRetire=reason;++npcCombatChannelsRetired;
+    if(!b.enabled)return;b.enabled=b.ready=false;b.retired=reason;b.retiredAt=GetTickCount64();npcCombatLastRetire=reason;++npcCombatChannelsRetired;
+}
+inline bool npcCombatChannelBlocks(const NpcCombatChannel& b,ULONGLONG tick){
+    return npcCombatChannelBlocksRebind(b.enabled,b.terminal,b.deathPending,b.retiredAt,tick);
 }
 void syncNpcCombatChannels(ULONGLONG tick){
     for(auto& b:npcCombat.channels){if(!b.enabled)continue;auto* c=npcCombatActor(b.arm);if(!c||!c->enabled||c->peerArm!=b.peerArm)retireNpcCombatChannel(b,"actor_unbound");}
     for(auto& c:npcChannels){if(!c.enabled||!c.ready||!c.peerArm||c.corpse||c.unconscious)continue;
-        if(std::any_of(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.arm==c.arm&&b.peerArm==c.peerArm;}))continue;
+        if(std::any_of(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.arm==c.arm&&b.peerArm==c.peerArm&&npcCombatChannelBlocks(b,tick);}))continue;
         NativeHealth h{};if(!npcCombatIdentity(c,h))continue;
         NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=tick;npcCombat.channels.push_back(b);++npcCombatChannelsAdded;}
     if(npcCombat.channels.size()>96)npcCombat.channels.erase(std::remove_if(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return !b.enabled&&!b.terminal&&!b.deathPending;}),npcCombat.channels.end());

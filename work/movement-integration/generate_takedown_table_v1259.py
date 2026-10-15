@@ -1,0 +1,111 @@
+"""Census 1259 (confirmed static) appends the native sword locks (combat/versus_low and versus_elite, read-only export
+native-versus-v1259; player state Versus31, take 1258b) as kind 6 to census 1255.
+Census 1255 (confirmed static) extends census 1253 with the native fatalities (sword-combat finishers, player/base/
+fatalities/, read-only export native-fatalities-v1255): every native player takedown scene under midnight/gameplay/player/
+base/{assassination,choke,fatalities}/ in the read-only asset exports, with each subscene name and its main player-body
+clip duration (one subscene per character; generic fatalities have only a right-arm clip). Writes the census JSON and
+generates outputs/d2-coop-lab/src/native_takedown_scenes.h, the exact table the paired reader, the wire and the NPC
+paired-hold path use. Ids 1-6 keep their earlier wire values, 7-89 are census 1253, fatalities are appended."""
+import re, json
+from pathlib import Path
+R = Path(__file__).resolve().parents[2]; E = R / 'outputs/d2-coop-lab/research/asset-exports'
+files = {}
+for f in sorted(E.glob('*/game1_patch/generated.decls.midnightscene.midnight.gameplay.player.base.*..midnightscene.decl')):
+    m = re.search(r'player\.base\.(assassination|choke|fatalities|combat)\.([a-z_]+)\.\.midnightscene', f.name)
+    if m and m.group(1) == 'combat' and not m.group(2).startswith('versus'): continue
+    if m: files.setdefault(f'{m.group(1)}/{m.group(2)}', f)
+census = {}
+for key, f in sorted(files.items()):
+    scenes = []; cur = None; pending = None; groups = []
+    for ln in f.read_text(encoding='utf-8', errors='replace').split('\n'):
+        s = ln.strip()
+        if s == 'm_class = "arkMidnightScene";': cur = dict(anims=[]); scenes.append(cur); continue
+        m = re.match(r'm_name = "([^"]+)";', s)
+        if cur is None:
+            if m: groups.append(m.group(1))
+            continue
+        d = re.match(r'm_duration = (-?\d+);', s)
+        if d: pending = int(d.group(1)); continue
+        a = re.match(r'm_AnimName = "([^"]+)";', s)
+        if a: cur['anims'].append((a.group(1), pending)); continue
+        if m and 'name' not in cur and cur['anims']: cur['name'] = m.group(1)
+    rows = []
+    for sc in scenes:
+        body = [(a, d) for a, d in sc['anims'] if a.startswith('ply_body')] or [(a, d) for a, d in sc['anims'] if a.startswith('ply_rightarm')]
+        if not sc.get('name') or not body or body[0][1] is None or body[0][1] <= 0: continue
+        ch = 'corvo' if 'corvo' in body[0][0] else 'emily' if 'emily' in body[0][0] else 'unnamed'
+        rows.append(dict(subscene=sc['name'], character=ch, playerClip=body[0][0], durationMs=body[0][1]))
+    census[key] = dict(source=str(f.relative_to(R)).replace('\\', '/'), groups=groups, subscenes=rows)
+# Kinds: 1 choke entry (a hold follows), 2 choke hold loop, 3 knockout (choke_win or a complete single-scene choke),
+# 4 choke lost/cancelled (presentation only), 5 lethal. Carry-corpse follow-ups and drop-ready poses are body
+# handling/airborne phases, not takedowns. Fatalities are lethal and run inside the sword attack state; generic
+# left/right bind only the owned right arm (groups PlayerRightArm, PlayerCamera, AIGroup1); the double kill binds no
+# AI group and stays outside.
+LEGACY = ['choke/choke_back', 'choke/choke_loop', 'choke/choke_win', 'choke/choke_combat_lose', 'assassination/assassination_fast_back', 'assassination/assassination_back']
+def kind(key):
+    name = key.split('/')[1]
+    if key.startswith('combat/versus'): return 6
+    if key.startswith(('assassination/', 'fatalities/')): return 5
+    if name in ('choke_back', 'choke_front', 'choke_left', 'choke_right', 'choke_grapple_back') or name.startswith('choke_sit_'): return 1
+    if name == 'choke_loop': return 2
+    if name in ('choke_combat_lose', 'choke_cancel', 'choke_throw_front'): return 4
+    return 3
+takedowns = [k for k in census if not k.startswith(('fatalities/', 'combat/'))]
+keys = LEGACY + [k for k in takedowns if k not in LEGACY and 'carry' not in k and not k.endswith('_ready') and census[k]['subscenes']]
+keys += [k for k in census if k.startswith('fatalities/') and census[k]['subscenes'] and 'AIGroup1' in census[k]['groups']]
+keys += [k for k in census if k.startswith('combat/versus') and census[k]['subscenes']]  # 1259: sword locks, appended
+for prior in ('v1253', 'v1255'):
+    previous = json.loads((R / f'work/movement-integration/native-takedown-scenes-{prior}.json').read_text(encoding='utf-8'))['table']
+    assert [t['scene'] for t in previous] == keys[:len(previous)], f'census {prior} ids must not move'
+table = []
+for i, k in enumerate(keys, 1):
+    subs = sorted({(r['subscene'], r['durationMs']) for r in census[k]['subscenes']})
+    fatality = k.startswith('fatalities/')
+    table.append(dict(id=i, scene=k, kind=kind(k), fatality=fatality, arms=2 if not fatality or 'PlayerLeftArm' in census[k]['groups'] else 1,
+                      subscenes=[dict(subscene=s, durationMs=d) for s, d in subs]))
+out = R / 'work/movement-integration/native-takedown-scenes-v1259.json'
+out.write_text(json.dumps(dict(finding='confirmed static', census=census, table=table), indent=1), encoding='utf-8')
+lines = ['#pragma once', '#include <cstring>', '// Generated by work/movement-integration/generate_takedown_table_v1259.py from census 1259 (confirmed static):',
+         '// every native player takedown and fatality scene (exact asset, subscene name and player clip duration per character).',
+         '// Kinds: 1 choke entry, 2 choke hold loop, 3 knockout, 4 choke lost/cancelled (presented only), 5 lethal,',
+         '// 6 sword lock (combat/versus_*, player state Versus31; presented with the parry-idle clip).',
+         '// Ids 1-6 keep their earlier wire values (choke back/loop/win/combat_lose, fast-back and back lethal); 7-89 are',
+         '// census 1253; fatalities (sword-combat finishers, run in the sword attack state) follow. arms: owned arms bound.',
+         'struct NativeTakedownSubscene {const char* name;unsigned durationMs;};',
+         'struct NativeTakedownScene {unsigned id,kind;const char* scene;unsigned first,count;bool fatality;unsigned arms;};',
+         'inline constexpr NativeTakedownSubscene kNativeTakedownSubscenes[]={']
+subs = []; scenes = []
+for t in table:
+    scenes.append((t['id'], t['kind'], t['scene'], len(subs), len(t['subscenes']), t['fatality'], t['arms']))
+    subs += [(s['subscene'], s['durationMs']) for s in t['subscenes']]
+lines += ['    ' + ','.join(f'{{"{n}",{d}}}' for n, d in subs[i:i + 6]) + ',' for i in range(0, len(subs), 6)]
+lines += ['};', 'inline constexpr NativeTakedownScene kNativeTakedownScenes[]={']
+lines += [f'    {{{i},{k},"{s}",{a},{c},{"true" if f else "false"},{m}}},' for i, k, s, a, c, f, m in scenes]
+lines += ['};',
+          f'inline constexpr unsigned kNativeTakedownSceneCount={len(scenes)};',
+          'inline const NativeTakedownScene* nativeTakedownScene(unsigned id){return id>=1&&id<=kNativeTakedownSceneCount?&kNativeTakedownScenes[id-1]:nullptr;}',
+          'inline unsigned nativeTakedownKind(unsigned id){const auto* s=nativeTakedownScene(id);return s?s->kind:0;}',
+          'inline bool nativeTakedownLethal(unsigned id){return nativeTakedownKind(id)==5;}',
+          '// The partner presents a drawn sword: lethal takedowns, finishers and sword locks.',
+          'inline bool nativeTakedownSword(unsigned id){const auto k=nativeTakedownKind(id);return k==5||k==6;}',
+          'inline bool nativeTakedownFatality(unsigned id){const auto* s=nativeTakedownScene(id);return s&&s->fatality;}',
+          'inline unsigned nativeTakedownArms(unsigned id){const auto* s=nativeTakedownScene(id);return s?s->arms:0;}',
+          '// The existing presentation clip for the scene kind (choke back/loop/win/lose, fast-back lethal).',
+          'inline unsigned nativeTakedownDonor(unsigned id){return nativeTakedownKind(id);}',
+          'inline bool nativeTakedownDuration(unsigned id,unsigned durationMs){const auto* s=nativeTakedownScene(id);if(!s)return false;',
+          '    for(unsigned i=0;i<s->count;++i)if(kNativeTakedownSubscenes[s->first+i].durationMs==durationMs)return true;return false;}',
+          '// Exact asset path, subscene name and duration; 0 when the scene is not in the census.',
+          'inline unsigned nativeTakedownId(const char* asset,const char* subscene,unsigned durationMs){',
+          '    constexpr char prefix[]="midnight/gameplay/player/base/",suffix[]=".midnightscene";',
+          '    const auto n=std::strlen(asset),p=sizeof(prefix)-1,x=sizeof(suffix)-1;',
+          '    if(n<=p+x||std::strncmp(asset,prefix,p)||std::strcmp(asset+n-x,suffix))return 0;',
+          '    for(const auto& s:kNativeTakedownScenes){const auto m=std::strlen(s.scene);',
+          '        if(m!=n-p-x||std::strncmp(asset+p,s.scene,m))continue;',
+          '        for(unsigned i=0;i<s.count;++i){const auto& u=kNativeTakedownSubscenes[s.first+i];',
+          '            if(u.durationMs==durationMs&&!std::strcmp(u.name,subscene))return s.id;}',
+          '        return 0;}',
+          '    return 0;}', '']
+hp = R / 'outputs/d2-coop-lab/src/native_takedown_scenes.h'
+hp.write_bytes('\r\n'.join(lines).encode('utf-8'))
+print(len(census), 'scenes in census;', len(table), 'in table;', len(subs), 'subscenes')
+for t in table[88:]: print(t['id'], t['kind'], t['scene'], t['arms'], [(s['subscene'], s['durationMs']) for s in t['subscenes']])

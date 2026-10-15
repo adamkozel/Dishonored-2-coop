@@ -1,0 +1,226 @@
+{
+  "at": "2026-10-15T10:03:01.706692+02:00",
+  "method": "Contact sheets from recorded real-game partner views (source first-person views skipped), functional-first criteria, five review passes plus lead spot checks.",
+  "counts": {
+    "accept": 55,
+    "reject": 8,
+    "insufficient": 10
+  },
+  "accepted": [
+    "stand_idle",
+    "armed_idle",
+    "walk_8_directions",
+    "sprint_forward_and_diagonals",
+    "start_stop_each_gait",
+    "gait_speed_changes",
+    "turn_in_place_90_180",
+    "moving_turns",
+    "reverse_and_direction_changes",
+    "slopes_and_stairs",
+    "crouch_idle",
+    "crouch_8_directions",
+    "stand_to_crouch",
+    "crouch_to_stand",
+    "crouched_turns",
+    "crouch_stop_start",
+    "stand_lean_left_right",
+    "crouch_lean_left_right",
+    "ledge_peek",
+    "standing_jump_takeoff",
+    "running_jump_takeoff",
+    "crouch_jump_transition",
+    "double_jump",
+    "rising_airborne",
+    "soft_landing",
+    "moving_landing",
+    "vault_low_obstacle",
+    "climb_high_ledge",
+    "ledge_hang_and_pull_up",
+    "sword_draw_holster",
+    "sword_ready_idle",
+    "light_attack_variants",
+    "moving_attack",
+    "crouched_attack",
+    "airborne_attack",
+    "block_enter_hold_exit",
+    "hit_reactions_directions",
+    "lethal_takedown_front_back_sides",
+    "nonlethal_takedown_front_back_sides",
+    "struggle_and_escape",
+    "pistol_draw_aim_fire_reload_holster",
+    "crossbow_draw_aim_fire_reload_holster",
+    "mine_or_razor_place",
+    "heart_equip_use_holster",
+    "lever_button_crank_wheel",
+    "corvo_blink_aim_cancel_release_arrive",
+    "corvo_possession_enter_loop_exit",
+    "corvo_bend_time_cast_end",
+    "corvo_windblast_cast",
+    "corvo_devouring_swarm_cast",
+    "emily_far_reach_aim_cancel_release_arrive",
+    "emily_domino_mark_link_cancel",
+    "emily_mesmerize_cast",
+    "emily_shadow_walk_enter_move_attack_exit",
+    "power_interruptions_and_no_mana"
+  ],
+  "rejected": [
+    {
+      "id": "heavy_attack_variants",
+      "summary": "The heavy attack reads for both characters, but Corvo's crouched heavy take pops from kneeling to standing and back at action entry, so Corvo is rejected until a re-take without the mid-take stream restart.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "accept"
+      }
+    },
+    {
+      "id": "carry_body_lift_idle_move_drop_throw",
+      "summary": "Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "grenade_equip_aim_throw",
+      "summary": "The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "health_elixir",
+      "summary": "Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused).",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "mana_elixir",
+      "summary": "Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "pickup_loot_steal",
+      "summary": "Both partners stay visible and stable, but neither makes any pickup or reach gesture (standing or crouched), so the loot action is not represented.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "read_object_or_note",
+      "summary": "In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    },
+    {
+      "id": "eat_drink",
+      "summary": "Both partners stay continuous but show no eating gesture, so the eat action is not represented.",
+      "characters": {
+        "corvo": "reject",
+        "emily": "reject"
+      }
+    }
+  ],
+  "insufficient": [
+    {
+      "id": "run_8_directions",
+      "summary": "The only listed footage is labelled walking and shows one default-speed standing gait in a few headings. A distinct run tier in 8 directions cannot be identified, though the body is fine. Run strides do appear in the moving-turn and sprint takes of other items.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "fall_loop",
+      "summary": "The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "slide_enter_loop_exit",
+      "summary": "Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed.",
+      "characters": {
+        "corvo": "accept",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "slide_to_crouch_or_stand",
+      "summary": "Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient.",
+      "characters": {
+        "corvo": "accept",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "kick_or_shove_if_present",
+      "summary": "Neither recording shows a partner's kick body, so this needs a partner-facing take.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "death_variants",
+      "summary": "The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "accept"
+      }
+    },
+    {
+      "id": "ragdoll_handoff",
+      "summary": "The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "accept"
+      }
+    },
+    {
+      "id": "door_open_close_locked",
+      "summary": "The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "insufficient"
+      }
+    },
+    {
+      "id": "key_use",
+      "summary": "Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "accept"
+      }
+    },
+    {
+      "id": "map_load_checkpoint_recovery",
+      "summary": "The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side.",
+      "characters": {
+        "corvo": "insufficient",
+        "emily": "accept"
+      }
+    }
+  ],
+  "scope_notes": {
+    "corvo_devouring_swarm_cast": "body accepted; the rat swarm is not visible in the observer world (effect gap)",
+    "emily_shadow_walk_enter_move_attack_exit": "body accepted; the shadow-walk transformed material is not applied and no attack is recorded",
+    "corvo_possession_enter_loop_exit": "body accepted for the empty-target aim and recovery only; possession of a real target is not recorded",
+    "lethal_takedown_front_back_sides": "rear presentation accepted (sweep); drop and slide accepted in audit 1257",
+    "nonlethal_takedown_front_back_sides": "rear presentation accepted (sweep); side/front runtime in audits 1257 and 1254c"
+  },
+  "findings": [
+    "Visual (sweep 1260): 55 items accepted, 8 rejected with concrete defects, 10 without a judgeable view.",
+    "Rejected defects to fix: Corvo crouched heavy attack snaps to standing for ~0.2 s before the windup (v636); the carried body appears on the shoulder in one frame with no lift (v13); the high grenade throw pops the body sideways 0.35-0.75 m at release; elixirs, pickups, notes and food show no partner gesture (the native game plays none in first person).",
+    "Insufficient: fall loop (no long fall recorded), Emily slides (not in the listed videos), run 8 directions (no dedicated run take), doors (partner hidden), key use (no Corvo view), map load (camera faces a wall), kick (legs only), death/ragdoll (no Corvo-sourced take)."
+  ]
+}
