@@ -685,8 +685,10 @@ void sampleLocalPlayer() {
                 readNativePlayerPresentationStance(memoryRead,base,states,presentation)){
             outgoing.playerStance=presentation;outgoing.playerStanceValid=1;
         }
+        // 1213r: motion is only valid on the wire with a wire stance (validCoopPose);
+        // an unmapped physical stance must not invalidate the whole root packet.
         const unsigned refusal=!stateValid?1u:states.player.game!=game||states.player.player!=player?2u:
-            states.player.current!=stance.current?3u:!nativePlayerMotion(states,base,motion)?4u:0u;
+            states.player.current!=stance.current?3u:!nativePlayerMotion(states,base,motion)?4u:!outgoing.playerStanceValid?5u:0u;
         if(!refusal) {
             outgoing.playerMotionValid=1;outgoing.playerMotion=motion;
             sampleBodyPose();

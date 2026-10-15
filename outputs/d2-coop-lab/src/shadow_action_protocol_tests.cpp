@@ -84,6 +84,7 @@ void chokePresentationTests(){
     check(!nativePresentationFallbackGround(native,base),"unknown choke phase cannot infer ordinary ground fallback");
     native.active[0].vtable++;check(!nativePlayerMotion(native,base,motion),"wrong choke class cannot publish root");native.active[0].vtable--;
     native.player.current=12;check(nativePlayerGroundChokeStates(native,base),"recorded native choke stance12 remains owned by exact state41");
+    {unsigned stance=99;check(readNativePlayerPresentationStance([](auto,auto,auto){return false;},base,native,stance)&&stance==0,"choke hold stance12 presents standing on the wire (1213r)");}
     native.player.current=13;check(!nativePlayerGroundChokeStates(native,base),"neighboring unobserved physical state refused");
     native.player.current=1;check(!nativePlayerMotion(native,base,motion),"unobserved crouched choke not inferred");native.player.current=0;
     native.active.push_back({0,2,base+0x1c85628});check(!nativePlayerGroundChokeStates(native,base),"unsupported concurrent choke state refused");
