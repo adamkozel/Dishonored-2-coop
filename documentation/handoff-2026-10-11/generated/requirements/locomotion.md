@@ -1,6 +1,6 @@
 # locomotion: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T06:44:30.519222+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T08:00:08.819338+02:00. All fields below retain the catalog wording.
 
 ## stand_idle
 

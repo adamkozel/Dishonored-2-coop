@@ -167,3 +167,29 @@ Found while measuring partner presentation on Edge of the World (take 1235e). Bo
 - **Client:** no slow `exchangePoses` (max 15 ms).
 - **Presentation:** these stalls caused the partner-presentation gaps. Stale-state records fell to 0, eligibility failures to 1–2 per case, and native-pose time to 0.9–1.9%.
 
+## Shared paired takedowns (#46; candidates 1213u–1214a, audit 1252)
+
+A rear choke or fast-back lethal by either player on a host-owned NPC now has one victim, in the same place and state in both worlds, under the product controller with natural guard AI ([audit 1252](../../work/movement-integration/paired-takedowns-audit-v1252.json)).
+
+**Native knockout (confirmed runtime, probes 1250–1251c):**
+- a native choke knocks out with `code_referenced/damage/generic_sleep_damage.damage`: health goes from 40/40 to the body's suppressed maximum (10/10), actor flag `0x20` at `+0xd1` is set and the AI trees are destroyed;
+- `components/base/damage/sleep_damage.damage` reproduces it with a drowsy collapse; `sleep_no_reaction_damage` leaves the body standing.
+
+**What was broken and what fixed it:**
+- **NPC combat was dead under the product controller (1248b–1248c):** the session bound only the NPCs present when it began, stopped when any retired and was never re-armed. 1213v joins and retires bindings per NPC, retires only a diverging NPC, and the product controller re-arms the session every 3 s.
+- **The choke's own knockout was suppressed (1248c–1248d):** the capture treated it as unknown damage. 1213w passes the sleep declarations through and shares unconsciousness on the NPC stream (`Unconscious` host→client, `PairedHold`/`PairedKnockout` client→host).
+- **The held host guard walked away (1248e–1248i):** the AI lease pauses decisions but not an in-progress walk. 1213x streams the client's native victim pose to the host (`PairedPose`; 1213z fixed its message size), and the distance gate applies only when a hold starts.
+- **Victims ended apart after the knockout (1248i):** 1214a pins the host NPC for 3 s at the client victim's last root while the native collapse plays, and keeps presenting an NPC that is unconscious (render identity `unconscious`: health above 0, AI destroyed).
+
+**Take [1248j](../../work/natural-moveset/paired-victim-product-v1248j)** (1214a, confirmed runtime), restoration passed:
+
+| Case | Result |
+|---|---|
+| Client choke | unconscious in both worlds, 0.1 m apart |
+| Client lethal | dead in both worlds, bodies together |
+| Host choke | unconscious in both worlds, 0.0 m apart |
+| Host lethal | outcome shared in 1248i; in 1248j the native scene was `assassination_back` (1933 ms), which the partner reader does not admit yet, so its partner phase was not presented |
+
+**Visual (host window):** the client-sourced choke and lethal are accepted. The host's guard struggles in remote Emily's arms, is lowered and lies unconscious at her feet, or falls dead.
+
+**Open:** `assassination_back` and the other takedown scenes (front, air, slide) and body sizes stay under their own checklist items.

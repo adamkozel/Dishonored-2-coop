@@ -1,0 +1,454 @@
+{
+  "at": "2026-10-15T08:00:04.723751+02:00",
+  "candidate": "candidate-npc-combat-v1214a",
+  "takes": [
+    {
+      "take": "../natural-moveset/npc-knockout-v1250",
+      "candidate": null,
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/npc-sleep-knockout-v1251",
+      "candidate": "candidate-npc-combat-v1213s",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": []
+    },
+    {
+      "take": "../natural-moveset/npc-sleep-knockout-v1251b",
+      "candidate": "candidate-npc-combat-v1213t",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": []
+    },
+    {
+      "take": "../natural-moveset/npc-sleep-knockout-v1251c",
+      "candidate": "candidate-npc-combat-v1213t",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": []
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248b",
+      "candidate": "candidate-npc-combat-v1213u",
+      "passed": false,
+      "failure": "3 case(s) failed: client-lethal: Outcome differs: source dead, observer conscious, expected dead | host-choke: Outcome differs: source unconscious, observer conscious, expected unconscious | host-lethal: Outcome differs: source dead, observer conscious, expected dead",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Outcome differs: source dead, observer conscious, expected dead",
+          "outcome": {
+            "source": "dead",
+            "observer": "conscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Outcome differs: source unconscious, observer conscious, expected unconscious",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "conscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Outcome differs: source dead, observer conscious, expected dead",
+          "outcome": {
+            "source": "dead",
+            "observer": "conscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248c",
+      "candidate": "candidate-npc-combat-v1213v",
+      "passed": false,
+      "failure": "3 case(s) failed: client-lethal: Native read failed --health | host-choke: Outcome differs: source conscious, observer conscious, expected unconscious | host-lethal: Native takedown not performed on the source (guard moved or noticed the source)",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Native read failed --health",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Outcome differs: source conscious, observer conscious, expected unconscious",
+          "outcome": {
+            "source": "conscious",
+            "observer": "conscious"
+          },
+          "victimGapM": null,
+          "attempts": null
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248d",
+      "candidate": "candidate-npc-combat-v1213w",
+      "passed": false,
+      "failure": "3 case(s) failed: client-choke: Outcome differs: source unconscious, observer conscious, expected unconscious | client-lethal: Observer victim moved 1.65 m during the scene | host-lethal: Native takedown not performed on the source (guard moved or noticed the source)",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Outcome differs: source unconscious, observer conscious, expected unconscious",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "conscious"
+          },
+          "victimGapM": null,
+          "attempts": 1
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Observer victim moved 1.65 m during the scene",
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": null,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": null,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248e",
+      "candidate": "candidate-npc-combat-v1213x",
+      "passed": false,
+      "failure": "1 case(s) failed: client-choke: Victim ends 5.41 m apart in the two worlds",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Victim ends 5.41 m apart in the two worlds",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 5.41,
+          "attempts": 1
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 0.69,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248f",
+      "candidate": "candidate-npc-combat-v1213y",
+      "passed": false,
+      "failure": "1 case(s) failed: client-choke: The term 'try' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "The term 'try' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248g",
+      "candidate": "candidate-npc-combat-v1213y",
+      "passed": false,
+      "failure": "1 case(s) failed: client-choke: No open spot behind the guard for the observer camera",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "No open spot behind the guard for the observer camera",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248h",
+      "candidate": "candidate-npc-combat-v1213y",
+      "passed": false,
+      "failure": "1 case(s) failed: client-choke: Victim ends 4.2 m apart in the two worlds",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Victim ends 4.2 m apart in the two worlds",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 4.2,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248i",
+      "candidate": "candidate-npc-combat-v1213z",
+      "passed": false,
+      "failure": "2 case(s) failed: client-choke: Victim ends 3.43 m apart in the two worlds | host-choke: Victim ends 2.19 m apart in the two worlds",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Victim ends 3.43 m apart in the two worlds",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 3.43,
+          "attempts": 1
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Victim ends 2.19 m apart in the two worlds",
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 2.19,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/paired-victim-product-v1248j",
+      "candidate": "candidate-npc-combat-v1214a",
+      "passed": false,
+      "failure": "1 case(s) failed: host-lethal: Remote phase 5 not presented",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 0.1,
+          "attempts": 1
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "dead",
+            "observer": "dead"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "outcome": {
+            "source": "unconscious",
+            "observer": "unconscious"
+          },
+          "victimGapM": 0.0,
+          "attempts": 1
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": false,
+          "failure": "Remote phase 5 not presented",
+          "outcome": null,
+          "victimGapM": null,
+          "attempts": null
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (probe 1250): a native choke knocks the NPC out with code_referenced generic_sleep_damage - health 40/40 -> 10/10 (the body's suppressed maximum), actor flag 0x20 at +0xd1, AI trees destroyed; a lethal sets health 0. The game's sleep_damage reproduces the knockout with a drowsy collapse; sleep_no_reaction_damage leaves the body standing (1251-1251c).",
+    "Confirmed runtime (1248b-1248c): under the product controller the NPC combat session was dead (\"no_ready_native_actors\"): it bound only the NPCs present when it began, stopped when any retired, and was never re-armed, so no hit or takedown outcome was shared. 1213v: bindings join and retire per NPC, per-NPC divergence retires only that NPC, the product controller re-arms it.",
+    "Confirmed runtime (1248c-1248d): with combat active, a choke's own knockout damage was captured as unknown, suppressed and stopped the session; 1213w passes knockout damage through and shares unconsciousness by the NPC stream (Unconscious host->client, PairedKnockout client->host).",
+    "Confirmed runtime (1248e-1248i): the AI lease pauses decisions but not an in-progress walk, so a walking held guard left the client's victim; 1213x streams the client's native victim pose to the host (PairedPose; 1213z fixed its message size), and 1214a pins the host NPC for 3 s after the knockout and keeps presenting an unconscious NPC.",
+    "Confirmed runtime (1248j, 1214a, product controller, natural AI): client choke unconscious in both worlds 0.1 m apart; client lethal dead in both, bodies together; host choke unconscious in both, 0.0 m apart. Host lethal: outcome shared in 1248i (dead in both worlds); in 1248j the native scene was assassination_back (1933 ms), which the partner reader does not admit yet (only assassination_fast_back), so its partner phase was not presented.",
+    "Visual (host window): client-sourced choke and lethal accepted - the host's guard is choked, lowered and lies unconscious, or falls dead, at remote Emily's feet."
+  ],
+  "complete": true,
+  "scope": "#46: shared outcome and victim for paired takedowns on host-owned NPCs, both source roles, choke and fast-back lethal; other takedown scenes (assassination_back, front, air, slide) remain under their own checklist items."
+}
