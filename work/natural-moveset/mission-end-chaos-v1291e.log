@@ -1,0 +1,12 @@
+{
+  "cases": [],
+  "failure": "The variable cannot be validated because the value System.Collections.Hashtable is not a valid value for the Chaos variable.",
+  "scope": "Edge of the World mission end through the carriage (host); both worlds sampled through prompt, ride, result screen and load; Dunwall fixture restored.",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionEnd-v1291.ps1:141[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 141 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe variable cannot be validated because the value System.Collections.Hashtable is not a valid value for the[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mChaos variable.[0m

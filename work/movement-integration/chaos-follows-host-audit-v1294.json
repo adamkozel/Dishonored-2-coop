@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-15T23:31:46.999783+02:00",
+  "candidate": "candidate-npc-combat-v1214ba",
+  "takes": [
+    {
+      "take": "mission-end-chaos-v1291e",
+      "passed": false,
+      "failure": "The variable cannot be validated because the value System.Collections.Hashtable is not a valid value for the Chaos variable.",
+      "note": "Harness defect: $chaos collided with the -Chaos parameter (PowerShell variables are case-insensitive); failed after load, lab restored."
+    },
+    {
+      "take": "mission-end-chaos-v1291f",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#16 stage 6: chaos follows the host, so both worlds load the same next-map variant.",
+  "findings": [
+    "Confirmed runtime: the player arkCpntPlayerChaos component (vtable +0x1b63248) holds the chaos level at +0x20 and the points at +0x24 (0/0 on the Dunwall fixture).",
+    "Confirmed static: the mission-end level is 0 below the mission high threshold, 1 from it, 2 from very high (0x1404ea390; Edge of the World 55/128).",
+    "1214ba: the host publishes its points about once a second (D2CH); the partner keeps its own equal in gameplay or scenes.",
+    "Take 1291f: the lab set the host to 60 points; the client followed (2 writes, from 0). Both computed level 1 at the end and both loaded campaign/institute/institute_p_highchaos (same map: True).",
+    "Before 1214ba each world used its own points, so a host-only chaos change would have sent the partner to the other variant."
+  ],
+  "next": [
+    "Client-originated mission end; product mode across the VM.",
+    "Hand-offs without a result screen and in-mission LevelTransition map changes (chapter 97)."
+  ]
+}

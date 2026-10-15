@@ -1,0 +1,92 @@
+{
+  "cases": [
+    {
+      "clientReachedNextMission": true,
+      "clientStates": [
+        "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "11/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "0/0@",
+        "15/5@",
+        "5/0@campaign/institute/institute_p_highchaos",
+        "1/0@campaign/institute/institute_p_highchaos"
+      ],
+      "hostReachedNextMission": true,
+      "used": "door-east",
+      "final": {
+        "client": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/institute/institute_p_highchaos",
+          "mapId": "f96bcd305c7bd7d3",
+          "epoch": 31,
+          "cine": 26,
+          "canSkip": 0,
+          "remoteMapId": "f96bcd305c7bd7d3",
+          "remoteLogic": 1,
+          "remoteFresh": true,
+          "connection": 3,
+          "pos": [
+            2.400522,
+            -28.401928,
+            12.642111
+          ],
+          "mirror": "applied",
+          "mirrorSent": 0,
+          "mirrorApplied": 1,
+          "mirrorState": 3,
+          "hold": "released",
+          "holdWaitMs": 0,
+          "chaos": "equal",
+          "chaosPoints": 60,
+          "chaosLevel": 1,
+          "chaosWrites": 2,
+          "responding": true
+        },
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/institute/institute_p_highchaos",
+          "mapId": "f96bcd305c7bd7d3",
+          "epoch": 31,
+          "cine": 30,
+          "canSkip": 0,
+          "remoteMapId": "f96bcd305c7bd7d3",
+          "remoteLogic": 1,
+          "remoteFresh": true,
+          "connection": 3,
+          "pos": [
+            2.400522,
+            -28.401928,
+            12.642112
+          ],
+          "mirror": "sent",
+          "mirrorSent": 1,
+          "mirrorApplied": 0,
+          "mirrorState": -1,
+          "hold": "released",
+          "holdWaitMs": 1328,
+          "chaos": "publishing",
+          "chaosPoints": 60,
+          "chaosLevel": 1,
+          "chaosWrites": 0,
+          "responding": true
+        }
+      },
+      "sameMap": true,
+      "hostStates": [
+        "1/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "9/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "5/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "11/0@campaign/edge_of_the_world/eotw_p_lowchaos",
+        "0/0@",
+        "15/5@",
+        "5/0@campaign/institute/institute_p_highchaos",
+        "1/0@campaign/institute/institute_p_highchaos"
+      ]
+    }
+  ],
+  "passed": true,
+  "failure": null,
+  "scope": "Edge of the World mission end through the carriage (host); both worlds sampled through prompt, ride, result screen and load; Dunwall fixture restored."
+}

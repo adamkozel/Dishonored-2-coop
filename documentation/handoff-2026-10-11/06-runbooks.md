@@ -91,6 +91,7 @@ Use these lab commands when a take needs them. All are refused outside the lab a
 |---|---|---|
 | Keep a player alive through a fight | `coop_player_health_hold on\|off` (1214ap) | `ark_god_player`, `god`, `ark_buddha_player`, `g_damageScale`, `g_playerIncomingDamageScale`, `pm_disableFatalFall`: stripped, nothing reads them (confirmed static, [chapter 96](96-external-research-references.md)) |
 | Give a native item in product mode | `coop_grant_item grenade\|health\|mana` (1214au; grenades are equipped too) | Editing the inventory by hand |
+| Make the two worlds' chaos differ | `coop_chaos_points <n>` (1214ba; the partner follows the host's points) | Killing NPCs only to raise chaos |
 | Drink a potion through the native wheel routine | `coop_use_item health\|mana` (1214av). A mana potion is only drunk after a native power has spent the pool | Writing the mana pool (1214aw: the drink still refuses) |
 | Film from any point, with the observer's arms hidden | Turn the observer (`setviewpos` at its own position with a yaw), set the pitch, then `coop_observer_camera hold_at x y z`; `off` in cleanup ([chapter 92](92-native-use-interactions.md)) | IGCS: its camera uses Ansel, which pauses the game |
 
