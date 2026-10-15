@@ -99,6 +99,7 @@ void chokePresentationTests(){
     native.player.current=12;check(!nativePlayerGroundAssassinationStates(native,base),"unobserved assassination stance refused");
     native.player.current=5;check(!nativePlayerGroundAssassinationStates(native,base)&&nativePlayerSlideTakedownStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0&&
           nativeTakedownStates(33,native,base)&&!nativeTakedownStates(5,native,base),"slide lethal (1254a) keeps sliding stance 5 in Assassination13; only census slide-capable ids admit it");
+    native.player.current=0;check(nativeTakedownStates(110,native,base)&&!nativeTakedownStates(92,native,base),"four-binding finishers (1256a) run in Assassination13, generic ones do not");
     native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");

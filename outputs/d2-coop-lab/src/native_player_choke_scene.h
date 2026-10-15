@@ -21,13 +21,14 @@ inline unsigned nativeChokeVariant(const std::string& asset,const std::string& s
 }
 // Ids 1-6 keep their observed native states (Choke41; Assassination13). Other census
 // scenes accept either ground paired state until their own state is observed.
-// Fatalities (census 1255) are sword-combat finishers: they run inside the native
-// sword attack state (Slash39; take 1248m: active [0,39]).
+// Fatalities (census 1255) are sword-combat finishers. Generic left/right (right arm
+// only) run inside the native sword attack state (Slash39 over Running0; takes 1248m,
+// 1254a); the four-binding finishers run in exclusive Assassination13 (take 1256a).
 inline bool nativeFatalityStates(const NativePlayerStates& s,std::uintptr_t base){
     unsigned action=0;return s.player.logic==1&&nativePlayerSwordAction(s,base,action)&&action==1;
 }
 inline bool nativeTakedownStates(unsigned variant,const NativePlayerStates& states,std::uintptr_t base){
-    if(nativeTakedownFatality(variant))return nativeFatalityStates(states,base);
+    if(nativeTakedownFatality(variant))return nativeTakedownArms(variant)==1?nativeFatalityStates(states,base):nativePlayerGroundAssassinationStates(states,base);
     if(variant>6)return nativePlayerGroundPairedStates(states,base)||nativePlayerSlideTakedownStates(states,base);
     return nativeTakedownLethal(variant)?nativePlayerGroundAssassinationStates(states,base):nativePlayerGroundChokeStates(states,base);
 }
