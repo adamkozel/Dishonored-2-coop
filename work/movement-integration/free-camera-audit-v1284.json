@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-15T20:22:54.370100+02:00",
+  "candidate": "candidate-npc-combat-v1214an",
+  "take": "use-variants-dunwall-v1228u",
+  "cases": [
+    {
+      "source": "host",
+      "target": "ld_ring_locker_01_1_lock",
+      "passed": true,
+      "shownSamples": 47,
+      "observerBody": [
+        -33,
+        -148,
+        66.9784
+      ]
+    },
+    {
+      "source": "client",
+      "target": "ld_ring_locker_01_1_lock",
+      "passed": true,
+      "shownSamples": 48,
+      "observerBody": [
+        -35.2148,
+        -168.679,
+        66.9781
+      ]
+    },
+    {
+      "source": "host",
+      "target": "ld_door_350cm_int_rich_wood_01",
+      "passed": true,
+      "shownSamples": 37,
+      "observerBody": [
+        -35.0202,
+        -169.417,
+        67.2171
+      ]
+    },
+    {
+      "source": "client",
+      "target": "ld_door_350cm_int_rich_wood_01",
+      "passed": true,
+      "shownSamples": 36,
+      "observerBody": [
+        -35.2858,
+        -154.164,
+        66.4036
+      ]
+    }
+  ],
+  "cameras": {
+    "observer-camera-client-ld_door_350cm_int_rich_wood_01.json": {
+      "result": "holding_at",
+      "position": [
+        -33.852001,
+        -154.106995,
+        68.304001
+      ]
+    },
+    "observer-camera-client-ld_ring_locker_01_1_lock.json": {
+      "result": "holding_at",
+      "position": [
+        -33.000999,
+        -169.130005,
+        69.116997
+      ]
+    },
+    "observer-camera-host-ld_door_350cm_int_rich_wood_01.json": {
+      "result": "holding_at",
+      "position": [
+        -33.867001,
+        -154.113998,
+        68.304001
+      ]
+    },
+    "observer-camera-host-ld_ring_locker_01_1_lock.json": {
+      "result": "holding_at",
+      "position": [
+        -33.203999,
+        -168.998993,
+        69.146004
+      ]
+    }
+  },
+  "findings": [
+    "Confirmed static: the lab observer camera already hooks the native render-view setter (game +0x890c50), the function the IGCS Dishonored 2 notes describe (view position at +A8/+C0, 3x3 basis at +CC); IGCS (BSD 2-Clause) was read as a reference only.",
+    "Feature (1214an): coop_observer_camera hold_at x y z holds the current native view orientation with the eye at a world point; the observer body stays where it stands. Lab command channel only, like hold.",
+    "Confirmed runtime (use-variants-dunwall-v1228u, harness 1228n -FreeCam): ring lock and office door pass in both roles; every case held its camera at the computed spot (holding_at) and released it afterwards; the lock views show the partner at the wall lock from behind (a candelabra overlaps the lower body).",
+    "IGCS current Dishonored 2 camera uses the native Ansel session, which pauses the game - not usable for motion videos (confirmed static from its notes)."
+  ],
+  "complete": true
+}

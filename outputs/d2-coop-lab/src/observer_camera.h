@@ -6,6 +6,9 @@
 // family). "hold" freezes the most active view at its current native pose;
 // nothing is synthesized, no gameplay entity or player transform is changed.
 // Holds expire after 120 s and on "off". Not network-visible.
+// 1214an (#61): "hold_at x y z" holds the same native view orientation with the eye
+// placed at a world point, so the observer's body never has to stand there (lab takes
+// lost views to platform edges, walls, candelabras and auto-crouch).
 struct ObserverViewRecord {std::uintptr_t view=0;float position[3]{},basis[9]{};ULONGLONG tick=0;std::uint64_t count=0;};
 using NativeRenderViewSet=void(*)(std::uintptr_t,const float*,const float*);
 NativeRenderViewSet realNativeRenderViewSet=nullptr;
@@ -14,7 +17,7 @@ SRWLOCK observerCameraLock=SRWLOCK_INIT;
 std::array<ObserverViewRecord,8> observerViews{};
 struct ObserverCameraHold {bool active=false;std::uintptr_t view=0;float position[3]{},basis[9]{};ULONGLONG until=0,started=0;std::uint64_t overrides=0;const char* result="off";};
 ObserverCameraHold observerCamera{};
-int observerCameraRequest=-1;
+int observerCameraRequest=-1;float observerCameraAt[3]{};
 void observeNativeRenderViewSet(std::uintptr_t view,const float* position,const float* basis){
     const auto tick=GetTickCount64();float p[3]{},b[9]{};bool override=false;
     AcquireSRWLockExclusive(&observerCameraLock);
@@ -46,15 +49,15 @@ void serviceObserverCamera(ULONGLONG tick){
     const int request=observerCameraRequest;observerCameraRequest=-1;
     AcquireSRWLockExclusive(&observerCameraLock);
     if(request==0){observerCamera.active=false;observerCamera.result="off";}
-    else if(request==1){
+    else if(request==1||request==2){
         // The main rendered view is the one updated most often recently.
         const ObserverViewRecord* best=nullptr;
         for(const auto& r:observerViews)if(r.view&&tick-r.tick<250&&(!best||r.count>best->count))best=&r;
         bool finite=best!=nullptr;
         if(best){for(float f:best->position)finite=finite&&std::isfinite(f);for(float f:best->basis)finite=finite&&std::isfinite(f);}
         if(!finite){observerCamera.active=false;observerCamera.result="no_active_view";}
-        else{observerCamera={};observerCamera.active=true;observerCamera.view=best->view;std::memcpy(observerCamera.position,best->position,12);
-            std::memcpy(observerCamera.basis,best->basis,36);observerCamera.started=tick;observerCamera.until=tick+120000;observerCamera.result="holding";}
+        else{observerCamera={};observerCamera.active=true;observerCamera.view=best->view;std::memcpy(observerCamera.position,request==2?observerCameraAt:best->position,12);
+            std::memcpy(observerCamera.basis,best->basis,36);observerCamera.started=tick;observerCamera.until=tick+120000;observerCamera.result=request==2?"holding_at":"holding";}
     }
     if(observerCamera.active&&tick>=observerCamera.until){observerCamera.active=false;observerCamera.result="expired";}
     ReleaseSRWLockExclusive(&observerCameraLock);

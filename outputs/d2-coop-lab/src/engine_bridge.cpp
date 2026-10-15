@@ -1496,6 +1496,8 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_door_fixture open")||!std::strcmp(text,"coop_door_fixture close"))return true;
+    if(!std::strncmp(text,"coop_observer_camera hold_at ",29)){float x=0,y=0,z=0;char extra=0;
+        return sscanf_s(text+29,"%f %f %f %c",&x,&y,&z,&extra,1u)==3&&std::isfinite(x)&&std::isfinite(y)&&std::isfinite(z)&&std::fabs(x)<100000.f&&std::fabs(y)<100000.f&&std::fabs(z)<100000.f;}
     if(!std::strncmp(text,"coop_usable_fixture ",20)){char name[192]{},extra=0;unsigned target=0;return sscanf_s(text+20,"%191s %u %c",name,static_cast<unsigned>(sizeof(name)),&target,&extra,1u)==2&&target<32;}
     if(!std::strcmp(text,"coop_climb_fixture spawn"))return true;
     if(!std::strcmp(text,"coop_spawn_probe emily")||!std::strcmp(text,"coop_spawn_probe corvo")||!std::strcmp(text,"coop_spawn_probe shadow_emily")||!std::strcmp(text,"coop_spawn_probe shadow_corvo"))return true;
@@ -1664,6 +1666,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_movement_fixture 60000")){beginObserverIsolation(GetTickCount64(),localRole==0,true);return;}
     if(!std::strcmp(request.command,"coop_movement_fixture off")){stopObserverIsolation("movement_fixture_cancelled");return;}
     if(!std::strcmp(request.command,"coop_observer_camera hold")){observerCameraRequest=1;return;}
+    if(!std::strncmp(request.command,"coop_observer_camera hold_at ",29)){float at[3]{};char extra=0;
+        if(sscanf_s(request.command+29,"%f %f %f %c",&at[0],&at[1],&at[2],&extra,1u)==3){std::memcpy(observerCameraAt,at,12);observerCameraRequest=2;}return;}
     if(!std::strcmp(request.command,"coop_observer_camera off")){observerCameraRequest=0;return;}
     if(!std::strcmp(request.command,"coop_power_fixture 20000")){powerFixtureRequest=1;return;}
     if(!std::strcmp(request.command,"coop_power_fixture off")){powerFixtureRequest=2;return;}
