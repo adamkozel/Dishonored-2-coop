@@ -34,6 +34,24 @@ Updated 2026-10-14.
   - In both roles the first focused press did not register and the second did; the harness retries.
 - The take is recorded as failed only because the optional turbine-lever case afterwards threw "Observer pitch did not settle" (#4).
 
+**Real mechanisms for every variant (#4, confirmed static, [resource reader](../../tools/diag/d2_resource_index.py)):**
+- Each usable's entityDef carries a native interaction name:
+
+  | Native name | Examples | Variant |
+  |---|---|---|
+  | `Usable_lever` | `lever_01`, `lever_template` | 2 lever |
+  | `Usable_vise`, `Usable_crank` | `vise_01`; `valve_set_01` (a turned valve wheel) | 3 crank; 4 by its `valve` name |
+  | `Usable_tap` | `rich_sink_tap_01`, dissection-table `tap` | 4 wheel/valve |
+  | `Usable_lock` | `ring_locker_01` | 5 key/lock |
+  | `Usable_latch` | `door_latch_01` | 5 key/lock |
+  | `Usable_redbutton` | `button_01` | 1 |
+
+- **Dunwall fixture** (`dunwall_escape_tower_p`): ring lockers `ld_ring_locker_01_{1,2}_{lock,open}` and `_3`, about 22 m from the window; a sink tap `esc_env_rich_sink_tap_01_1`.
+- **Edge of the World:** the turbine lever; sink taps and dissection-table taps; three door latches. No valve wheels.
+- **Elsewhere:** a real `wheel_01` (`ld_wheel_01_1_1`) is in the Royal Conservatory (`curator`). Valve sets and levers are in A Crack in the Slab (`bunker`) and the Clockwork Mansion (`madinventor`).
+- **Candidate 1213g** classifies whole-token `tap` and `faucet` as 4 and `latch` as 5 (unit-tested), and deploys the `--focus` probe.
+- **Harness `Test-UseVariants-v1228`** (`-Mission dunwall|eotw`): the source aims its native eye at the target point (`Set-NativeInteractionAim-v691`) on four sides at 1.0 m and 0.75 m, then sweeps pitch. No aim or pitch failure can throw. Each case records pass or fail, and the required cases decide the take.
+
 **Open:**
 - Lever, wheel and key variants are untested on real mechanisms. Crank/vise passes (1227b).
 - The early end of the host-source use (#5): not reproduced on the vise, which plays to 100%. Re-check on the window in the #4 run.

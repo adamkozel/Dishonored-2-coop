@@ -76,6 +76,12 @@ Start the preserved backend with the project launcher; specify `program: Dishono
 
 Standalone short-lived MCP clients should connect to an independently started backend: their Windows process cleanup can otherwise terminate a child Ghidra process. The fallback client detects errors embedded inside apparently successful MCP responses. A decompiled placeholder may still have a one-byte function body; inspect actual entry/unwind ranges before fixing the body.
 
+**Static asset lookup (no lab time):** [`tools/diag/d2_resource_index.py`](../../tools/diag/d2_resource_index.py) reads the game's `.index`/`.resources` containers read-only.
+- Point it at the game copy (`work/asset-game/base`), never at the Steam installation.
+- `list` prints entries; `grep --type <T> --match <source regex> --text <line regex>` searches inside them. It uses the newest index of each family (`gameNvoidmod.index`).
+- Mission entity files are type `File`, sources `maps/campaign/**/*.entities`; usable interaction names (`Usable_lever`, `Usable_tap` and so on) are in the `entityDef` decls.
+- Extract into the scratchpad: the output is game-derived and stays local.
+
 ## Cleanup after an experiment
 
 Send neutral input, disable only the experiment's owned leases/streams/fixtures, restore native equipment and physics through their cleanup paths, verify no dangling ownership and preserve evidence. Pause/load/peer-loss tests must retire references before any new world is used. Keep saves and native assets protected; do not recursively delete paths discovered through junctions.

@@ -453,6 +453,8 @@ int main(){unboundGroundTests();chokePresentationTests();
       check(line.push({160,1,0,0,0})&&line.push({200,2,1,0,2300}),"use ends and a newer use starts");
       check(!line.push({240,1,2,0,3200}),"older use incarnation refused");
       check(useVariantForName("script_lever_windturbine_1_1_1")==2&&useVariantForName("env_valve_wheel_03")==4&&useVariantForName("crank_gate_2")==3&&useVariantForName("door_lock_01")==5&&useVariantForName("env_vise_01_1_3")==3&&useVariantForName("env_keyhole_lock")==5&&useVariantForName("ld_rich_small_01_sndctr_4")==1,"use variant from the focused entity name");
+  check(useVariantForName("esc_env_rich_sink_tap_01_1")==4&&useVariantForName("env_interiors_tap_right")==4&&useVariantForName("tap")==4&&useVariantForName("env_tapestry_01")==1&&useVariantForName("script_desktape_2")==1&&
+        useVariantForName("script_door_latch_blackmarket_apartment")==5&&useVariantForName("ld_ring_locker_01_1_lock")==5&&useVariantForName("ld_wheel_01_1_1")==4&&useVariantForName("pa_ld_valve_set_01_2")==4,"1213g taps are valves, latches and ring lockers are locks");
     }
     {auto stun=p;stun.state=16;stun.stunVariant=1;stun.stunTimeMs=300;stun.stunDurationMs=800;
       for(unsigned v=1;v<=4;++v){stun.stunVariant=v;check(validShadowAction(stun,c,h),"owned native stun direction and clock accepted");}

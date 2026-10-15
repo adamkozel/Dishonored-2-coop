@@ -44,9 +44,16 @@ inline unsigned useVariantForName(const char* name){
     if(!name||!*name)return 1;
     char lower[192]{};for(unsigned i=0;i<sizeof(lower)-1&&name[i];++i){const char c=name[i];lower[i]=(c>='A'&&c<='Z')?char(c-'A'+'a'):c;}
     const auto has=[&](const char* s){return std::strstr(lower,s)!=nullptr;};
+    // Whole '_'-separated token: "rich_sink_tap_01" and "tap_right" are taps, "tapestry" is not.
+    const auto token=[&](const char* s){const auto n=std::strlen(s);
+        for(const char* at=std::strstr(lower,s);at;at=std::strstr(at+1,s))
+            if((at==lower||at[-1]=='_')&&(!at[n]||at[n]=='_'))return true;
+        return false;};
     if(has("lever"))return 2;
     if(has("crank")||has("vise"))return 3; // 1213c: a bench vise is turned by its screw handle
-    if(has("wheel")||has("valve"))return 4;
-    if((has("key")&&!has("keyhole"))||has("lock"))return 5;
+    // 1213g: sink and dissection-table taps are native Usable_tap valves (confirmed static, mission entities).
+    if(has("wheel")||has("valve")||has("faucet")||token("tap"))return 4;
+    // 1213g: door latches are native Usable_latch; ring lockers are Usable_lock (confirmed static).
+    if((has("key")&&!has("keyhole"))||has("lock")||has("latch"))return 5;
     return 1;
 }
