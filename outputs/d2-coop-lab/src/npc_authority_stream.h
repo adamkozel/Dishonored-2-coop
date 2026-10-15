@@ -267,20 +267,24 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     // 1214ac: per-player rank priority over candidates and bound NPCs together.
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     const auto playerSq=[](const float* p,const float* q){float d=0;for(unsigned k=0;k<3;++k){const float v=p[k]-q[k];d+=v*v;}return d;};
-    std::vector<std::array<float,2>> dist;std::vector<NpcAuthorityChannel*> owners;
-    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(nullptr);}
+    // 1214ag: bound NPCs are tracked by arm, never by pointer: bindNpcChannel appends to
+    // npcChannels, and a reallocation left the pointers dangling (take 1279a: the host
+    // crashed here with an access violation while many NPCs were bound in one scan).
+    std::vector<std::array<float,2>> dist;std::vector<std::uint64_t> owners;
+    const auto channelByArm=[](std::uint64_t arm)->NpcAuthorityChannel*{for(auto& c:npcChannels)if(c.enabled&&c.arm==arm)return &c;return nullptr;};
+    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(0);}
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority f{};
         if(!readNativeNpcAuthority(memoryRead,base,observedGame,c.lease.binding.npc.handle,f))continue;
-        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(&c);}
+        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(c.arm);}
     const auto priority=npcRelevancePriorities(dist,kNpcRelevanceAdd*kNpcRelevanceAdd);
     std::vector<unsigned> order;for(unsigned i=0;i<catalog.size();++i)order.push_back(i);
     std::stable_sort(order.begin(),order.end(),[&](unsigned a,unsigned b){return priority[a]<priority[b];});
     for(unsigned i:order){const auto& n=catalog[i];NpcAuthorityChannel* evict=nullptr;
         if(bound>=kNpcRelevanceMax){unsigned worst=0;int worstAt=-1;
-            for(unsigned j=catalog.size();j<owners.size();++j){auto* c=owners[j];if(!c||!c->enabled||c->localPaired||c->hostPairedLease)continue;
+            for(unsigned j=catalog.size();j<owners.size();++j){auto* c=owners[j]?channelByArm(owners[j]):nullptr;if(!c||c->localPaired||c->hostPairedLease)continue;
                 if(worstAt<0||priority[j]>worst){worst=priority[j];worstAt=int(j);}}
             if(worstAt<0||!npcRelevanceDisplaces(priority[i],worst))break;
-            evict=owners[worstAt];owners[worstAt]=nullptr;}
+            evict=channelByArm(owners[worstAt]);owners[worstAt]=0;}
         NativeNpcAuthority fresh{};
         if(!freshNpcCatalogEntry(n,fresh)){++npcCatalogStale;continue;}
         if(evict){stopNpcChannel(*evict,"relevance_evicted");++npcRelevanceEvicted;--bound;}
