@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-15T06:44:27.331408+02:00",
+  "candidate": "candidate-npc-combat-v1213r",
+  "take": {
+    "take": "../natural-moveset/paired-victim-product-v1248",
+    "passed": true,
+    "restoration": true,
+    "cases": [
+      {
+        "source": "host",
+        "passed": true,
+        "scenes": [
+          "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+          "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+          "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+        ],
+        "victim": {
+          "result": "client_replica",
+          "posesDelta": 94,
+          "rootsDelta": 442,
+          "bodyAppliedDelta": 442,
+          "positionBefore": [
+            -47.9503,
+            -152.449,
+            66.4
+          ],
+          "positionAfter": [
+            -47.9316,
+            -151.624,
+            66.6076
+          ]
+        },
+        "guardHealthObserverAfter": 40,
+        "restored": true
+      },
+      {
+        "source": "client",
+        "passed": true,
+        "scenes": [
+          "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+          "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+          "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+        ],
+        "victim": {
+          "result": "peer_timeout",
+          "posesDelta": -58,
+          "rootsDelta": 0,
+          "bodyAppliedDelta": 0,
+          "positionBefore": [
+            -48.1108,
+            -147.559,
+            66.4
+          ],
+          "positionAfter": [
+            -44.14,
+            -142.99,
+            66.4
+          ]
+        },
+        "guardHealthObserverAfter": 40,
+        "restored": true
+      }
+    ]
+  },
+  "findings": [
+    "Confirmed runtime (1248, product controller, natural guard AI, host source): the client's replica of the host-authoritative guard stays a ready client_replica through the choke and is driven by the host's native victim poses (94 poses, 442 body applications in ~10 s); it ends where the host's guard fell. Visual accepted: the guard struggles in remote Corvo's arms, collapses and lies at his feet.",
+    "Confirmed runtime (1248, client source): the partner presents every choke phase on the host, but the host's guard is host-authoritative and never learns of the client's takedown: it walked ~6 m on, and the client's channel for it ended in peer_timeout. Client-sourced takedowns on host-owned NPCs are not shared (#46).",
+    "Lab takes 1245-1247 armed the partner by hand with the NPC stream off, so their observer guards never moved; victim sync depends on the product controller's NPC stream."
+  ],
+  "complete": false,
+  "scope": "paired_victim_alignment: host-sourced rear choke victim synchronized and accepted; client-sourced takedowns need a shared outcome path."
+}

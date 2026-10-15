@@ -1,0 +1,108 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-choke: Victim ends 4.2 m apart in the two worlds",
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": false,
+      "failure": "Victim ends 4.2 m apart in the two worlds",
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -40.156,
+          -144.104,
+          66.4
+        ],
+        "observer": [
+          -39.6106,
+          -145.345,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:42:49.2162011+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 30364156,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1bf43037920",
+          "actor": "0x1bf45732970",
+          "attributes": "0x1bf454828d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 30364171,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x2c6376fcb80",
+          "actor": "0x2c64ac20aa0",
+          "attributes": "0x2c64a9848d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "victimEnd": {
+        "source": [
+          -39.7417,
+          -145.943,
+          66.6052
+        ],
+        "observer": [
+          -39.8253,
+          -150.143,
+          66.6012
+        ]
+      },
+      "victimGapM": 4.2,
+      "restored": true
+    }
+  ],
+  "scope": "paired_victim_alignment: rear choke under the product controller (NPC stream on, natural guard AI), both source roles; partner phases and the observer-world victim recorded; fixture restored after every case."
+}

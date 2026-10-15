@@ -1,0 +1,85 @@
+{
+  "source": "host",
+  "kind": "choke",
+  "observer": "client",
+  "passed": false,
+  "failure": "Outcome differs: source unconscious, observer conscious, expected unconscious",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented"
+  ],
+  "guardHandleSource": "0xb480764",
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -48.21,
+      -148.007,
+      66.4
+    ],
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T07:09:15.9285383+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "final": {
+    "source": {
+      "tick": 28351031,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x21f2e3fa320",
+      "actor": "0x21f459e5700",
+      "attributes": "0x21f457408d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 28351046,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2363cba8360",
+      "actor": "0x2364a5e8e50",
+      "attributes": "0x2364a3538e0",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "conscious"
+  },
+  "restored": true
+}

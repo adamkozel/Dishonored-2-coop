@@ -1,0 +1,388 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-lethal: Remote phase 5 not presented",
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Victim ends 0.1 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.7657,
+          -145.672,
+          66.4
+        ],
+        "source": [
+          -48.5806,
+          -149.751,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:54:40.8846637+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 31075671,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x139bb243170",
+          "actor": "0x139db2304b0",
+          "attributes": "0x139daf9a8d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 31075687,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1f7ca8a9c60",
+          "actor": "0x1f7d737cb20",
+          "attributes": "0x1f7d70f38d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "victimEnd": {
+        "source": [
+          -47.7102,
+          -145.773,
+          66.6511
+        ],
+        "observer": [
+          -47.767,
+          -145.692,
+          66.4114
+        ]
+      },
+      "victimGapM": 0.1,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 95,
+        "rootsDelta": 234,
+        "bodyAppliedDelta": 232,
+        "positionBefore": [
+          -47.7334,
+          -145.049,
+          66.4
+        ],
+        "positionAfter": [
+          -47.7661,
+          -145.69,
+          66.4084
+        ]
+      },
+      "guardHealthObserverAfter": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 5 presented",
+        "Same outcome in both worlds: dead",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.9896,
+          -147.009,
+          66.4
+        ],
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:55:40.1872162+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 31134968,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x139bb2202c0",
+          "actor": "0x139db1efc60",
+          "attributes": "0x139daf668d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 31135000,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1f7ca85dee0",
+          "actor": "0x1f7d732a1a0",
+          "attributes": "0x1f7d70988d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "victimEnd": {
+        "source": [
+          -47.6954,
+          -146.913,
+          66.5752
+        ],
+        "observer": [
+          -47.6954,
+          -146.913,
+          66.5752
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 95,
+        "rootsDelta": 42,
+        "bodyAppliedDelta": 42,
+        "positionBefore": [
+          -47.8501,
+          -146.377,
+          66.4
+        ],
+        "positionAfter": [
+          -47.6954,
+          -146.913,
+          66.5752
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "kind": "choke",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -48.1301,
+          -147.644,
+          66.4
+        ],
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:56:39.2542249+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 31194046,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1f7ca874df0",
+          "actor": "0x1f8dd704610",
+          "attributes": "0x1f8dd4548d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 31194062,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x139bb2102b0",
+          "actor": "0x139db223030",
+          "attributes": "0x139daf748d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "victimEnd": {
+        "source": [
+          -47.8992,
+          -146.766,
+          66.5821
+        ],
+        "observer": [
+          -47.8992,
+          -146.766,
+          66.5821
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "client_unconscious",
+        "posesDelta": 95,
+        "rootsDelta": 438,
+        "bodyAppliedDelta": 437,
+        "positionBefore": [
+          -47.9886,
+          -147.004,
+          66.4
+        ],
+        "positionAfter": [
+          -47.9194,
+          -146.747,
+          66.5925
+        ]
+      },
+      "guardHealthObserverAfter": 10,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "kind": "lethal",
+      "observer": "client",
+      "passed": false,
+      "failure": "Remote phase 5 not presented",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -48.1811,
+          -147.876,
+          66.4
+        ],
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:57:38.1875096+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|1933"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "paired_victim_alignment: rear choke under the product controller (NPC stream on, natural guard AI), both source roles; partner phases and the observer-world victim recorded; fixture restored after every case."
+}

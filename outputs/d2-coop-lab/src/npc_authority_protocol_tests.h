@@ -12,6 +12,21 @@ void npcAuthorityProtocolTests(){
         case 5:b.h.sourceArm=0;break;case 6:b.h.sourceHandle=0;break;case 7:b.h.rig=0;break;case 8:b.h.joints=257;break;case 9:b.h.joints=0;break;case 10:--b.h.size;break;
         case 11:b.h.targetArm=9;break;case 12:b.h.reserved=1;break;case 13:b.h.reserved2=1;break;case 14:b.h.role=1;break;case 15:b.h.sequence=0;break;case 16:b.spawner[191]='x';break;case 17:b.h.kind=NpcAuthorityMessage::Pose;break;}
         require(!validNpcControl(b,client,host),"malformed or stale NPC negotiation refused");}
+    {// 1213u (#46): the client's paired takedown hold/knockout, validated on the host.
+     CoopNpcControl q=p;q.h.role=1;q.h.sourceSession=22;q.h.targetSession=11;q.h.sourceEpoch=5;q.h.targetEpoch=3;q.h.targetArm=8;q.h.targetHandle=0x50009;
+     q.h.kind=NpcAuthorityMessage::PairedHold;q.h.reserved=2;require(validNpcControl(q,host,client),"client paired hold names the host NPC and its choke phase");
+     q.h.reserved=5;require(validNpcControl(q,host,client),"client paired hold for the fast-back lethal");
+     q.h.reserved=4;require(!validNpcControl(q,host,client),"breakout (4) is not a paired hold variant");
+     q.h.reserved=0;require(!validNpcControl(q,host,client),"paired hold needs a variant");
+     q.h.kind=NpcAuthorityMessage::PairedKnockout;q.h.reserved=3;require(validNpcControl(q,host,client),"client knockout request at choke_win");
+     q.h.reserved=5;require(!validNpcControl(q,host,client),"a lethal is never a knockout");
+     q.h.reserved=3;q.h.role=0;require(!validNpcControl(q,host,client),"the host never sends a paired request");
+     q.h.role=1;q.h.targetArm=0;require(!validNpcControl(q,host,client),"paired request names its host channel");}
+    {// 1213v: the host tells the client its NPC is natively unconscious.
+     CoopNpcControl u=p;u.h.kind=NpcAuthorityMessage::Unconscious;u.h.targetArm=8;u.h.targetHandle=0x50009;
+     require(validNpcControl(u,client,host),"host reports an unconscious NPC to the client");
+     u.h.reserved=3;require(!validNpcControl(u,client,host),"unconscious carries no variant");u.h.reserved=0;
+     u.h.targetArm=0;require(!validNpcControl(u,client,host),"unconscious names the client channel");}
     CoopNpcPose pose{};pose.h=p.h;pose.h.kind=NpcAuthorityMessage::Pose;pose.h.size=static_cast<unsigned short>(npcPoseBytes(pose.h.joints));pose.h.targetArm=8;pose.h.targetHandle=0x50009;
     pose.sampleUs=1000000;pose.health=pose.maximum=50;pose.root[3]=pose.root[7]=pose.root[11]=1;
     for(unsigned j=0;j<pose.h.joints;++j)pose.local[j][0]=pose.local[j][4]=pose.local[j][8]=1;
@@ -26,6 +41,11 @@ void npcAuthorityProtocolTests(){
         bad=wire;const std::int16_t outOfRange=32767;std::memcpy(bad.data()+176+8,&outOfRange,2);require(!decodeNpcPose(bad.data(),original.h.size,decoded),"out-of-range encoded joint translation refused");
     }
     auto b=pose;b.h.role=1;require(!validNpcPose(b,client,host),"client cannot send host-authoritative body poses");
+    {// 1213x: the client's paired victim pose, validated on the host.
+     auto v=pose;v.h.kind=NpcAuthorityMessage::PairedPose;v.h.role=1;v.h.sourceSession=22;v.h.targetSession=11;v.h.sourceEpoch=5;v.h.targetEpoch=3;
+     require(validNpcPose(v,host,client),"client streams its paired victim pose to the host");
+     v.h.role=0;v.h.sourceSession=11;v.h.targetSession=22;v.h.sourceEpoch=3;v.h.targetEpoch=5;require(!validNpcPose(v,client,host),"the host never sends a paired victim pose");
+     NpcPoseWire wire{};CoopNpcPose decoded{};auto w=pose;w.h.kind=NpcAuthorityMessage::PairedPose;require(encodeNpcPose(w,wire)&&decodeNpcPose(wire.data(),w.h.size,decoded)&&decoded.h.kind==NpcAuthorityMessage::PairedPose,"paired victim pose round-trips the compact wire");}
     b=pose;--b.h.size;require(!validNpcPose(b,client,host),"wire length must match joint count");
     b=pose;b.local[223][0]=-1;require(!validNpcPose(b,client,host),"reflected body joint refused");
     b=pose;b.local[223][10]=NAN;require(!validNpcPose(b,client,host),"nonfinite body joint refused");

@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T06:38:13.900188+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T08:00:08.819338+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 89 runtime-bound (fully or partially), 10 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 90 runtime-bound (fully or partially), 11 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -449,7 +449,7 @@ Captured 2026-10-15T06:38:13.900188+02:00; source [review-catalog.json](<../../.
 | sliding_takedown | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | wall_and_window_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | enemy_body_size_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
-| paired_victim_alignment | paired_actions | candidates | not_verified | not_accepted | work_remaining |
+| paired_victim_alignment | paired_actions | candidates | shared_victim_and_outcome_both_roles_choke_and_lethal_product | accepted_host_and_client_sourced_rear_choke_and_lethal_victims | work_remaining |
 | struggle_and_escape | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | not_accepted | work_remaining |
 | carry_body_lift_idle_move_drop_throw | paired_actions | candidates | bounded_native_source_paired_pickup_both_roles | not_accepted | work_remaining |
 | corvo_blink_aim_cancel_release_arrive | powers | candidates | partial_native_Blink_body_and_world_FX | not_accepted | work_remaining |

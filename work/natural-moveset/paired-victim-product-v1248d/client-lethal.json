@@ -1,0 +1,84 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": false,
+  "failure": "Observer victim moved 1.65 m during the scene",
+  "checks": [
+    "Remote phase 5 presented",
+    "Same outcome in both worlds: dead"
+  ],
+  "guardHandleSource": "0xb480764",
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -48.2199,
+      -148.053,
+      66.4
+    ],
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T07:25:19.1750783+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 29314062,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1f4c19b1da0",
+      "actor": "0x1f4c73eb400",
+      "attributes": "0x1f4c71598d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 29314078,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x20631148e00",
+      "actor": "0x20649cb7e20",
+      "attributes": "0x20649a108e0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "observerVictimMovedM": 1.65,
+  "restored": true
+}

@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T06:38:13.900188+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T08:00:08.819338+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -383,7 +383,7 @@ Tall and female native-rig stand-ins only. These are neutral-grey review targets
 
 ## paired_victim_alignment
 
-Native front/back attacker and matching victim clips are shown together at original speed. Initial placement uses the victim auxiliary anchor as a partner frame; contact looks plausible in the pilot, but production alignment and runtime authority are unverified.
+Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fast-back lethal by either player on a host-owned NPC, the victim is animated and ends in the same place and state in both worlds (host-sourced: the NPC stream carries the host victim; client-sourced: the host holds its NPC, follows the client victim pose and knocks it out at choke_win; deaths ride the combat relay). Visuals accepted for the host- and client-sourced choke and the client-sourced lethal. Other takedown scenes (assassination_back, front, air, slide) and body sizes remain open.
 
 ````json
 {
@@ -394,8 +394,8 @@ Native front/back attacker and matching victim clips are shown together at origi
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "shared_victim_and_outcome_both_roles_choke_and_lethal_product",
+  "visual_validation": "accepted_host_and_client_sourced_rear_choke_and_lethal_victims",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "paired victim alignment",
@@ -406,13 +406,26 @@ Native front/back attacker and matching victim clips are shown together at origi
     "paired_fast_back_female"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native front/back attacker and matching victim clips are shown together at original speed. Initial placement uses the victim auxiliary anchor as a partner frame; contact looks plausible in the pilot, but production alignment and runtime authority are unverified.",
+  "notes": "Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fast-back lethal by either player on a host-owned NPC, the victim is animated and ends in the same place and state in both worlds (host-sourced: the NPC stream carries the host victim; client-sourced: the host holds its NPC, follows the client victim pose and knocks it out at choke_win; deaths ride the combat relay). Visuals accepted for the host- and client-sourced choke and the client-sourced lethal. Other takedown scenes (assassination_back, front, air, slide) and body sizes remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "paired-victim-product-v1248/host-choke-observer.mp4",
+    "paired-victim-product-v1248j/client-choke-observer.mp4",
+    "paired-victim-product-v1248j/client-lethal-observer.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/paired-victim-audit-v1249.json",
+    "../movement-integration/paired-takedowns-audit-v1252.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/paired-victim-audit-v1249.json](<../../../../work/movement-integration/paired-victim-audit-v1249.json>)
+- [evidence: ../movement-integration/paired-takedowns-audit-v1252.json](<../../../../work/movement-integration/paired-takedowns-audit-v1252.json>)
+- [in_game_recordings: paired-victim-product-v1248/host-choke-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248/host-choke-observer.mp4>)
+- [in_game_recordings: paired-victim-product-v1248j/client-choke-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248j/client-choke-observer.mp4>)
+- [in_game_recordings: paired-victim-product-v1248j/client-lethal-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248j/client-lethal-observer.mp4>)
 ## struggle_and_escape
 
 Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).

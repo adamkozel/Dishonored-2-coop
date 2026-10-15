@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T06:38:13.588686+02:00",
+  "generated": "2026-10-15T08:00:08.471538+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -5039,8 +5039,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "shared_victim_and_outcome_both_roles_choke_and_lethal_product",
+      "visual_validation": "accepted_host_and_client_sourced_rear_choke_and_lethal_victims",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "paired victim alignment",
@@ -5051,10 +5051,18 @@
         "paired_fast_back_female"
       ],
       "deliverable_kind": "animation",
-      "notes": "Native front/back attacker and matching victim clips are shown together at original speed. Initial placement uses the victim auxiliary anchor as a partner frame; contact looks plausible in the pilot, but production alignment and runtime authority are unverified.",
+      "notes": "Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fast-back lethal by either player on a host-owned NPC, the victim is animated and ends in the same place and state in both worlds (host-sourced: the NPC stream carries the host victim; client-sourced: the host holds its NPC, follows the client victim pose and knocks it out at choke_win; deaths ride the combat relay). Visuals accepted for the host- and client-sourced choke and the client-sourced lethal. Other takedown scenes (assassination_back, front, air, slide) and body sizes remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [
+        "paired-victim-product-v1248/host-choke-observer.mp4",
+        "paired-victim-product-v1248j/client-choke-observer.mp4",
+        "paired-victim-product-v1248j/client-lethal-observer.mp4"
+      ],
+      "evidence": [
+        "../movement-integration/paired-victim-audit-v1249.json",
+        "../movement-integration/paired-takedowns-audit-v1252.json"
+      ]
     },
     {
       "id": "struggle_and_escape",
@@ -93686,6 +93694,88 @@
       "visual_accepted": true,
       "requirements": [
         "crouched_takedown"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248/host-choke-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Paired / rear choke victim under the product controller (source host) / paired-victim-product-v1248",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.92,
+      "container_fps": "337/13",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera behind the attacker; product controller with the NPC stream; natural guard AI.",
+      "review": "Held camera behind the attacker, client window, product controller: remote Corvo chokes the guard and the guard struggles in his arms, collapses and lies at his feet - the replica guard follows the host's native victim through the NPC stream. Natural paired takedown in the observer's world.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "paired_victim_alignment"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248/client-choke-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / rear choke victim under the product controller (source client) / paired-victim-product-v1248",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.99,
+      "container_fps": "10500/389",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera behind the attacker; product controller with the NPC stream; natural guard AI.",
+      "review": "Host window: remote Emily presents the choke, but the host's guard is host-authoritative and never learns of the client's takedown; it keeps walking. Not accepted (victim not shared).",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248j/client-choke-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / client-sourced rear choke with shared victim (product controller) / paired-victim-product-v1248j",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.85,
+      "container_fps": "349/13",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera on the host; client performs the takedown on a host-owned NPC with natural AI.",
+      "review": "Host window, product controller, client-sourced rear choke: the host's guard struggles in remote Emily's arms (it follows the client's native victim pose), is lowered and lies unconscious at her feet; the victim is in the same place in both worlds (0.1 m). Small in frame (camera far down the corridor; reviewed cropped).",
+      "candidate": "candidate-npc-combat-v1214a",
+      "dll": "6A3EF751090A1A8A574FE4660974687D598557C9118823405A6C667744AECE0C",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "paired_victim_alignment"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248j/client-lethal-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / client-sourced rear lethal with shared victim (product controller) / paired-victim-product-v1248j",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.85,
+      "container_fps": "349/13",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera on the host; client performs the takedown on a host-owned NPC with natural AI.",
+      "review": "Host window: remote Emily stabs from behind and the host's guard falls dead at her feet; the host game shows its own hide-the-body hint. Bodies together in both worlds.",
+      "candidate": "candidate-npc-combat-v1214a",
+      "dll": "6A3EF751090A1A8A574FE4660974687D598557C9118823405A6C667744AECE0C",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "paired_victim_alignment"
       ],
       "kind": "game"
     }
