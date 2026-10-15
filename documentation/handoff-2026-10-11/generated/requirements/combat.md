@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:03:05.690715+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -715,7 +715,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
 - [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
 ## counterattack
 
-Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
+Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.
 
 ````json
 {
@@ -726,7 +726,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 195,
   "priority": 2,
@@ -742,17 +742,19 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "guard_rr_counter_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
+  "notes": "Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
-    "../movement-integration/native-combat-use-observations-v1211.json"
+    "../movement-integration/native-combat-use-observations-v1211.json",
+    "../movement-integration/gestures-counter-audit-v1264.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
+- [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
 ## hit_reactions_directions
 
 Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.

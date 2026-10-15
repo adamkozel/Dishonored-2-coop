@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T10:03:05.690715+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T10:36:31.908186+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 93 runtime-bound (fully or partially), 69 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 94 runtime-bound (fully or partially), 72 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -426,7 +426,7 @@ Captured 2026-10-15T10:03:05.690715+02:00; source [review-catalog.json](<../../.
 | block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
 | parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
-| counterattack | combat | candidates | not_verified | not_accepted | work_remaining |
+| counterattack | combat | candidates | partial_native_counter_kill_finisher_shared_host_source | not_accepted | work_remaining |
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | accepted_sweep_1260_functional_both_roles | work_remaining |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
@@ -438,7 +438,7 @@ Captured 2026-10-15T10:03:05.690715+02:00; source [review-catalog.json](<../../.
 | grenade_equip_aim_throw | ranged_and_items | candidates | native_network_ground_grenade_partial_verified | not_accepted | work_remaining |
 | mine_or_razor_place | ranged_and_items | candidates | partial_native_steam_trap_body_and_held_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
 | heart_equip_use_holster | ranged_and_items | candidates | partial_native_steam_ground_heart_body_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
-| health_elixir | ranged_and_items | candidates | native_network_movement_during_health_use_partial_verified | not_accepted | work_remaining |
+| health_elixir | ranged_and_items | candidates | native_health_elixir_drink_reach_presented_both_roles | accepted_functional_both_roles_hand_to_mouth | work_remaining |
 | mana_elixir | ranged_and_items | candidates | native_network_movement_during_mana_use_partial_verified | not_accepted | work_remaining |
 | item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | lethal_takedown_front_back_sides | paired_actions | candidates | partial_census_lethals_back_drop_slide_finishers_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
@@ -470,10 +470,10 @@ Captured 2026-10-15T10:03:05.690715+02:00; source [review-catalog.json](<../../.
 | power_interruptions_and_no_mana | powers | candidates | partial_native_Corvo_Bend_Time_failure_and_same_world_pause | accepted_sweep_1260_functional_owner | work_remaining |
 | door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | not_accepted | work_remaining |
 | lever_button_crank_wheel | interactions | candidates | native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| pickup_loot_steal | interactions | candidates | partial_native_standing_and_crouched_pickup_both_roles | not_accepted | work_remaining |
+| pickup_loot_steal | interactions | candidates | native_pickup_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | work_remaining |
 | key_use | interactions | candidates | native_use_state75_real_lock_both_roles | not_accepted | work_remaining |
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | not_accepted | work_remaining |
-| eat_drink | interactions | candidates | partial_native_source_grapes_and_remote_body_both_roles | not_accepted | work_remaining |
+| eat_drink | interactions | candidates | native_food_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | work_remaining |
 | carry_object_place_throw | interactions | candidates | not_verified | not_accepted | work_remaining |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | work_remaining |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |

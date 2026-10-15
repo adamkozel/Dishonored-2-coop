@@ -156,3 +156,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Product partner-presentation recovery: pause, modal, load, restart; bank stall, stream handshake, congestion, usable hellos (candidates 1203–1203f)](91-product-presentation-recovery.md)
 - [Stage 3: native use interactions (state 75 -> authored reach), window/counter/knockdown investigations (candidates 1213–1213b)](92-native-use-interactions.md)
 - [Stage 3: takedown census, drop/slide/side variants and sword finishers (candidates 1214b–1214g)](93-takedown-census-variants-and-finishers.md)
+- [Stage 3: visual-acceptance sweep, counterattack, sword locks and item gestures (candidates 1214h–1214j)](94-visual-sweep-counterattack-and-gestures.md)

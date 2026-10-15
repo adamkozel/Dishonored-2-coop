@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T10:03:05.407967+02:00",
+  "generated": "2026-10-15T10:36:31.594591+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -2247,7 +2247,7 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
+      "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
       "visual_validation": "not_accepted",
       "native_reference_family_count": 195,
       "priority": 2,
@@ -2263,12 +2263,13 @@
         "guard_rr_counter_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
+      "notes": "Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
-        "../movement-integration/native-combat-use-observations-v1211.json"
+        "../movement-integration/native-combat-use-observations-v1211.json",
+        "../movement-integration/gestures-counter-audit-v1264.json"
       ]
     },
     {
@@ -4394,8 +4395,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "native_network_movement_during_health_use_partial_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_health_elixir_drink_reach_presented_both_roles",
+      "visual_validation": "accepted_functional_both_roles_hand_to_mouth",
       "native_reference_family_count": 251,
       "priority": 3,
       "title": "health elixir",
@@ -4403,7 +4404,7 @@
         "empty_idlebreak_drink_flask"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+      "notes": "Audit 1264 (1214j): a consumed health elixir (native consume, quantity drop) presents a hand-to-mouth reach about 1 s later in both roles (1263a). Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -4420,7 +4421,9 @@
         "potion-statistics-corvo-v66.mp4",
         "potion-statistics-corvo-v66-receiver.mp4",
         "potion-wheel-statistics-emily-v66.mp4",
-        "potion-wheel-control-corvo-v66.mp4"
+        "potion-wheel-control-corvo-v66.mp4",
+        "native-potion-drink-host-v1263a-receiver.mp4",
+        "native-potion-drink-client-v1263a-receiver.mp4"
       ],
       "native_integration": {
         "potion-wheel-corvo-v64b.mp4": {
@@ -4691,7 +4694,8 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/gestures-counter-audit-v1264.json"
       ]
     },
     {
@@ -4711,7 +4715,7 @@
         "empty_idlebreak_drink_flask"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+      "notes": "Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -4819,7 +4823,8 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/gestures-counter-audit-v1264.json"
       ]
     },
     {
@@ -17426,8 +17431,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "partial_native_standing_and_crouched_pickup_both_roles",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_pickup_reach_presented_both_roles_product",
+      "visual_validation": "accepted_functional_both_roles_generic_reach",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "pickup loot steal",
@@ -17438,7 +17443,7 @@
         "empty_distraction_loot_ground_out_fast"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay visible and stable, but neither makes any pickup or reach gesture (standing or crouched), so the loot action is not represented. 700/701 measures recurring55\u201365ms diagnostic batches, with over100ms spikes.702 staggers71 writers across frames (max4 and4ms soft budget), retaining core report cadence and all gameplay/250ms freshness guards.703Corvo/704Emily pass24 scoped runtime checks; baseline701 passes8. Both roles keep Steam ready and body weight>.999 during crouched loot. No status/slice reaches50ms in either new capture, versus52/51 source/observer stalls in baseline. Inventories/health14protected restored. Six game sheets inspected; rear views limit grip/contact judgment. No all-gap recovery or full movement claim. 785\u2013789: exact native coin lifecycle and currency path traced in Ghidra. Ordinary Corvo/Emily pickup adds one coin, repeated input does not recredit. Guarded direct claim/reward/removal passes both roles with three native calls and duplicate no-op; checkpoint restores currency0, full quantities, health and coin.787 retirement-bit refusal and788 inventory-reader failure retained. No shared pickup relay yet; extra native entity event and reliable host ordering remain. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications and coin removal recorded in both views. No shared Steam pickup channel yet. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications recorded in both views; coin removal visible for Corvo, while Emily camera points away and removal is established by native reads. No shared Steam pickup channel yet. 794\u2013798: first bounded native Steam coin channel passes ordinary Corvo and Emily pickups, simultaneous native awards, duplicate packets, pause/resume and coordinated fixed-SLOT82 reload. Both new coin bindings reject retired packets, then a fresh ordinary Emily pickup rewards each wallet once. Worker-thread source observation uses an immutable lease and bounded queue. All test inventories/currency/health restored; actual paired videos retained, including failed793 observer and797 fixture takes. Exact one authored coin only; movement and full shared-world work remain incomplete. 800\u2013808: one bounded native currency catalog replaces the single-item binding. Both games match19 ordinary type1 objects across6 values. Native API batch alternates sources and verifies all19 awards/removals (258 each), individual receipts and duplicate no-ops. Ordinary same-coin simultaneous pickup gives1 each with0 extra recipient calls. Catalog shared checkpoint/rebind/stale packets and fresh Emily pickup pass. Full catalog/inventory/currency/health baseline restored; outside-fixture exercise makes0 calls. Failed ordinary pouch/cupboard approaches retained. Functional family coverage; movement and playable co-op remain incomplete. 810\u2013818: shared pickup catalog expands by native family to24 objects (19 currency,4 ammunition,1 stored health potion). API source/Steam recipient batch gives258 money,6 bullets and1 potion each, with unchanged health; native box modifier2->3 is preserved. Partial ammo9->10 and full ammo/potion zero-grant recipients retire objects and acknowledge once; duplicate no-ops pass. Mixed-catalog ordinary coin shared-checkpoint/rebind/old-packet tests pass. Three ordinary stack approach/isolation failures are retained; ordinary ammo/potion remains unverified. Complete baseline restored. Movement and playable co-op remain incomplete. 820\u2013826: native food family expands Dunwall catalog to51 objects (27 health food,19 currency,4 ammo,1 stored potion). Batch gives14 health to native cap70,258 money,6 bullets and1 potion each;24 full-health food no-ops retire correctly. Unequal host/client health, duplicate rejection and coordinated checkpoint renewal pass. Representative ordinary ammo, stored potion and food inputs now pass. Previous potion setup failures were test-fixture preconditions, not relay failures. Complete native baseline/protected files restored. Movement/playable co-op remain incomplete.",
+      "notes": "Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reach toward the item in both roles (coin and grapes, product controller, 1261b). Body loot and pickpocketing not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay visible and stable, but neither makes any pickup or reach gesture (standing or crouched), so the loot action is not represented. 700/701 measures recurring55\u201365ms diagnostic batches, with over100ms spikes.702 staggers71 writers across frames (max4 and4ms soft budget), retaining core report cadence and all gameplay/250ms freshness guards.703Corvo/704Emily pass24 scoped runtime checks; baseline701 passes8. Both roles keep Steam ready and body weight>.999 during crouched loot. No status/slice reaches50ms in either new capture, versus52/51 source/observer stalls in baseline. Inventories/health14protected restored. Six game sheets inspected; rear views limit grip/contact judgment. No all-gap recovery or full movement claim. 785\u2013789: exact native coin lifecycle and currency path traced in Ghidra. Ordinary Corvo/Emily pickup adds one coin, repeated input does not recredit. Guarded direct claim/reward/removal passes both roles with three native calls and duplicate no-op; checkpoint restores currency0, full quantities, health and coin.787 retirement-bit refusal and788 inventory-reader failure retained. No shared pickup relay yet; extra native entity event and reliable host ordering remain. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications and coin removal recorded in both views. No shared Steam pickup channel yet. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications recorded in both views; coin removal visible for Corvo, while Emily camera points away and removal is established by native reads. No shared Steam pickup channel yet. 794\u2013798: first bounded native Steam coin channel passes ordinary Corvo and Emily pickups, simultaneous native awards, duplicate packets, pause/resume and coordinated fixed-SLOT82 reload. Both new coin bindings reject retired packets, then a fresh ordinary Emily pickup rewards each wallet once. Worker-thread source observation uses an immutable lease and bounded queue. All test inventories/currency/health restored; actual paired videos retained, including failed793 observer and797 fixture takes. Exact one authored coin only; movement and full shared-world work remain incomplete. 800\u2013808: one bounded native currency catalog replaces the single-item binding. Both games match19 ordinary type1 objects across6 values. Native API batch alternates sources and verifies all19 awards/removals (258 each), individual receipts and duplicate no-ops. Ordinary same-coin simultaneous pickup gives1 each with0 extra recipient calls. Catalog shared checkpoint/rebind/stale packets and fresh Emily pickup pass. Full catalog/inventory/currency/health baseline restored; outside-fixture exercise makes0 calls. Failed ordinary pouch/cupboard approaches retained. Functional family coverage; movement and playable co-op remain incomplete. 810\u2013818: shared pickup catalog expands by native family to24 objects (19 currency,4 ammunition,1 stored health potion). API source/Steam recipient batch gives258 money,6 bullets and1 potion each, with unchanged health; native box modifier2->3 is preserved. Partial ammo9->10 and full ammo/potion zero-grant recipients retire objects and acknowledge once; duplicate no-ops pass. Mixed-catalog ordinary coin shared-checkpoint/rebind/old-packet tests pass. Three ordinary stack approach/isolation failures are retained; ordinary ammo/potion remains unverified. Complete baseline restored. Movement and playable co-op remain incomplete. 820\u2013826: native food family expands Dunwall catalog to51 objects (27 health food,19 currency,4 ammo,1 stored potion). Batch gives14 health to native cap70,258 money,6 bullets and1 potion each;24 full-health food no-ops retire correctly. Unequal host/client health, duplicate rejection and coordinated checkpoint renewal pass. Representative ordinary ammo, stored potion and food inputs now pass. Previous potion setup failures were test-fixture preconditions, not relay failures. Complete native baseline/protected files restored. Movement/playable co-op remain incomplete.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -17536,7 +17541,9 @@
         "native-interactions-corvo-crouch-coin-v688/coin-observer.mp4",
         "native-interactions-corvo-crouch-coin-v688/coin-source.mp4",
         "native-interactions-corvo-crouch-coin-v692/coin-observer.mp4",
-        "native-interactions-corvo-crouch-coin-v692/coin-source.mp4"
+        "native-interactions-corvo-crouch-coin-v692/coin-source.mp4",
+        "gestures-v1261b/host-coin-observer.mp4",
+        "gestures-v1261b/client-coin-observer.mp4"
       ],
       "complete": false,
       "evidence": [
@@ -17572,7 +17579,8 @@
         "shared-pickup-food-input-v824/result.json",
         "shared-pickup-ammo-input-v824/result.json",
         "pickup-catalog-restoration-v825/result.json",
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/gestures-counter-audit-v1264.json"
       ]
     },
     {
@@ -17664,8 +17672,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "partial_native_source_grapes_and_remote_body_both_roles",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_food_reach_presented_both_roles_product",
+      "visual_validation": "accepted_functional_both_roles_generic_reach",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "eat drink",
@@ -17679,7 +17687,7 @@
         "empty_distraction_eat_apple_in"
       ],
       "deliverable_kind": "animation",
-      "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay continuous but show no eating gesture, so the eat action is not represented. 693 exact crouched LootObject47 now preserves Sneaking6/raw1. Both-role native classification verified;695Emily passes11 checks,699Corvo passes10/11 with body-weight dips retained as failure.696/697 native grapes consumption passes22: source health56->61, peer56 unchanged, source grapes removed, full body/Steam continuity. All source/observer sheets inspected; inventories/health14protected restored. No new reach/eating gesture or shared item/healing outcome. Protocol69 bank67/357 unchanged.",
+      "notes": "Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach to the plate in both roles while the item is taken in both worlds (1261b). Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay continuous but show no eating gesture, so the eat action is not represented. 693 exact crouched LootObject47 now preserves Sneaking6/raw1. Both-role native classification verified;695Emily passes11 checks,699Corvo passes10/11 with body-weight dips retained as failure.696/697 native grapes consumption passes22: source health56->61, peer56 unchanged, source grapes removed, full body/Steam continuity. All source/observer sheets inspected; inventories/health14protected restored. No new reach/eating gesture or shared item/healing outcome. Protocol69 bank67/357 unchanged.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -17690,14 +17698,17 @@
         "native-interactions-emily-food-v697/food-observer.mp4",
         "native-interactions-emily-food-v697/food-source.mp4",
         "native-interactions-corvo-v662/food-observer.mp4",
-        "native-interactions-corvo-v662/food-source.mp4"
+        "native-interactions-corvo-v662/food-source.mp4",
+        "gestures-v1261b/host-food-observer.mp4",
+        "gestures-v1261b/client-food-observer.mp4"
       ],
       "complete": false,
       "evidence": [
         "native-interactions-corvo-v663/result.json",
         "native-interactions-corvo-food-v696/result.json",
         "native-interactions-emily-food-v697/result.json",
-        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+        "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+        "../movement-integration/gestures-counter-audit-v1264.json"
       ]
     },
     {
@@ -94211,6 +94222,132 @@
       "visual_accepted": true,
       "requirements": [
         "sliding_takedown"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "gestures-v1261b/host-food-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Gesture / eat_drink (1214j) / gestures-v1261b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.87,
+      "container_fps": "6960/269",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Client window: remote Corvo stands at the table and reaches his hand to the plate as the grapes vanish in both worlds, then returns to idle. Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "eat_drink"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "gestures-v1261b/client-food-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Gesture / eat_drink (1214j) / gestures-v1261b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.56,
+      "container_fps": "248/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Host window: remote Emily reaches to the plate with her sword hand as the grapes are taken. Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "eat_drink"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "gestures-v1261b/host-coin-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Gesture / pickup_loot_steal (1214j) / gestures-v1261b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.78,
+      "container_fps": "232/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Client window: remote Corvo reaches toward the coin as it is taken. Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "pickup_loot_steal"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "gestures-v1261b/client-coin-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Gesture / pickup_loot_steal (1214j) / gestures-v1261b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.56,
+      "container_fps": "248/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Host window: remote Emily reaches toward the coin with her sword hand as it is taken. Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "pickup_loot_steal"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "native-potion-drink-host-v1263a-receiver.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Gesture / health_elixir (1214j) / native-potion-drink-host-v1263a-receiver.mp4",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.78,
+      "container_fps": "232/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Client window: remote Corvo raises his hand to his face for about 2 s and lowers it after the native health elixir is consumed (sword still in that hand). Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "health_elixir"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "native-potion-drink-client-v1263a-receiver.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Gesture / health_elixir (1214j) / native-potion-drink-client-v1263a-receiver.mp4",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.56,
+      "container_fps": "248/9",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Partner view while the source performs the native pickup, food or elixir action.",
+      "review": "Host window: remote Emily raises her hand to her face for about 2 s and lowers it after the native health elixir is consumed (sword still in that hand). Functional: the generic use reach (variant 1); a dedicated gesture is left for animator polish.",
+      "candidate": "candidate-npc-combat-v1214j",
+      "dll": "7563CEE7CA2C3F5C0E740C5BC29D2E4EC783A450B569C3618F87C5D69859EF63",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "health_elixir"
       ],
       "kind": "game"
     }

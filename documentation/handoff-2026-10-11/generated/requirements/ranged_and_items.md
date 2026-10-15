@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:03:05.690715+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:36:31.908186+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
@@ -2008,7 +2008,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The Heart equip, use, 
 - [in_game_recordings: heart-network-emily-v565/observer.mp4](<../../../../work/natural-moveset/heart-network-emily-v565/observer.mp4>)
 ## health_elixir
 
-Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
+Audit 1264 (1214j): a consumed health elixir (native consume, quantity drop) presents a hand-to-mouth reach about 1 s later in both roles (1263a). Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
 
 ````json
 {
@@ -2019,8 +2019,8 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping sta
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "native_network_movement_during_health_use_partial_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_health_elixir_drink_reach_presented_both_roles",
+  "visual_validation": "accepted_functional_both_roles_hand_to_mouth",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "health elixir",
@@ -2028,7 +2028,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping sta
     "empty_idlebreak_drink_flask"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+  "notes": "Audit 1264 (1214j): a consumed health elixir (native consume, quantity drop) presents a hand-to-mouth reach about 1 s later in both roles (1263a). Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2045,7 +2045,9 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping sta
     "potion-statistics-corvo-v66.mp4",
     "potion-statistics-corvo-v66-receiver.mp4",
     "potion-wheel-statistics-emily-v66.mp4",
-    "potion-wheel-control-corvo-v66.mp4"
+    "potion-wheel-control-corvo-v66.mp4",
+    "native-potion-drink-host-v1263a-receiver.mp4",
+    "native-potion-drink-client-v1263a-receiver.mp4"
   ],
   "native_integration": {
     "potion-wheel-corvo-v64b.mp4": {
@@ -2316,12 +2318,14 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping sta
     }
   },
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/gestures-counter-audit-v1264.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
 - [in_game_recordings: potion-wheel-corvo-v64b.mp4](<../../../../work/natural-moveset/potion-wheel-corvo-v64b.mp4>)
 - [in_game_recordings: potion-wheel-corvo-v64c.mp4](<../../../../work/natural-moveset/potion-wheel-corvo-v64c.mp4>)
 - [in_game_recordings: potion-health-corvo-v64d.mp4](<../../../../work/natural-moveset/potion-health-corvo-v64d.mp4>)
@@ -2336,9 +2340,11 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping sta
 - [in_game_recordings: potion-statistics-corvo-v66-receiver.mp4](<../../../../work/natural-moveset/potion-statistics-corvo-v66-receiver.mp4>)
 - [in_game_recordings: potion-wheel-statistics-emily-v66.mp4](<../../../../work/natural-moveset/potion-wheel-statistics-emily-v66.mp4>)
 - [in_game_recordings: potion-wheel-control-corvo-v66.mp4](<../../../../work/natural-moveset/potion-wheel-control-corvo-v66.mp4>)
+- [in_game_recordings: native-potion-drink-host-v1263a-receiver.mp4](<../../../../work/natural-moveset/native-potion-drink-host-v1263a-receiver.mp4>)
+- [in_game_recordings: native-potion-drink-client-v1263a-receiver.mp4](<../../../../work/natural-moveset/native-potion-drink-client-v1263a-receiver.mp4>)
 ## mana_elixir
 
-Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
+Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
 
 ````json
 {
@@ -2358,7 +2364,7 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are
     "empty_idlebreak_drink_flask"
   ],
   "deliverable_kind": "animation",
-  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+  "notes": "Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2466,12 +2472,14 @@ Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are
     }
   },
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
+    "../movement-integration/gestures-counter-audit-v1264.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
+- [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
 - [in_game_recordings: potion-mana-corvo-v67.mp4](<../../../../work/natural-moveset/potion-mana-corvo-v67.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68-receiver.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68-receiver.mp4>)
