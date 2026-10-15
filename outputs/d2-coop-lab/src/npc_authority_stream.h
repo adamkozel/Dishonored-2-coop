@@ -422,7 +422,10 @@ void serviceNpcStream(ULONGLONG tick){
             c.pairedVariant=pairedVariant;c.pairedUntil=tick+1500;
             if(tick-c.pairedHoldAt>=200){c.pairedHoldAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedHold,pairedVariant);}
             if(npcPairedKnockoutVariant(pairedVariant)&&!c.pairedKnockoutAt){c.pairedKnockoutAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedKnockout,pairedVariant);c.pairedResult="client_knockout_sent";}
-        }else if(localRole&&c.localPaired&&!c.unconscious&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult="client_paired_ended";}
+        // 1214v: a corpse ends the pairing kept for an unconscious victim, so the host's
+        // corpse stream drives it (take 1271l: a client-choked guard killed later lay 8.84 m
+        // apart, the client ragdoll never following the host body).
+        }else if(localRole&&c.localPaired&&(!c.unconscious||c.corpse)&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult=c.corpse?"client_paired_corpse":"client_paired_ended";}
         if(!localRole)serviceHostNpcPaired(c,tick);
         if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}
         if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}

@@ -11,7 +11,11 @@ enum class NpcCombatMessage:unsigned {Hello=1,Ready,Request,Commit,Stop};
 // NPC source, take 1270e: bloodflies on a checkpoint guard). The host lets it apply
 // natively and commits its observed native loss in event order; the client removes
 // exactly that loss by the native health subtraction. Never lethal, never a gain.
-enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld};
+// PeerNative (1214y, #14): a client hit the replay cannot reproduce (grenade,
+// power, tranquilizer or variant bolt), sent as a request carrying only its known
+// declaration and native amount. The host applies it natively with the partner
+// avatar as attacker; HostWorld and Dead share the outcome. Never a commit.
+enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld,PeerNative};
 #pragma pack(push,1)
 struct NpcCombatScriptDamage {std::uint64_t trigger=0,declaration=0;float amount=0;unsigned reserved=0;};
 struct NpcCombatRangedDamage {std::uint64_t declaration=0;float amount=0,distance=0;unsigned weapon=0;};
@@ -50,6 +54,23 @@ inline const NpcCombatRangedProfile* npcCombatRangedProfile(NpcCombatDamage d,co
 inline unsigned npcCombatRangedWeapon(std::uint64_t flags){
     for(const auto& p:npcCombatRangedProfiles)if(p.flags==flags)return p.weapon;
     return 0;
+}
+// 1214w (#14): declarations the combat replay reproduces exactly: player sword,
+// kick, fatality, assassination, corpse contact and the ranged profiles.
+inline bool npcCombatReplayableDeclaration(std::uint64_t key){
+    constexpr std::uint64_t keys[]={0x1b4f75938aa0c437ull,0xfe8a6479049dd8c8ull,0x2fe1234fd9ffa6aull,0xc277b040bc6873ccull,0xace60ad990b96dbdull};
+    for(auto k:keys)if(k==key)return true;
+    for(const auto& p:npcCombatRangedProfiles)if(p.key==key)return true;
+    return false;
+}
+// On the host, any other damage (grenade explosions, powers, thrown props, bolt
+// variants) applies natively; HostWorld and Dead share its outcome. World
+// sentinels (corpse contact, map triggers) stay captured.
+inline bool npcCombatHostNativeDeclaration(unsigned localRole,unsigned attacker,unsigned inflictor,std::uint64_t key){
+    return localRole==0&&attacker!=0x3fff0010u&&inflictor!=0x3fff0010u&&!npcCombatReplayableDeclaration(key);
+}
+inline bool validNpcPeerNative(const NpcCombatRangedDamage& r){
+    return npcDamageDeclarationName(r.declaration)&&!npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&!r.weapon;
 }
 inline bool validNpcRanged(NpcCombatDamage d,const NpcCombatRangedDamage& r){
     const auto* p=npcCombatRangedProfile(d,r);
@@ -90,7 +111,7 @@ inline bool npcCombatGeometry(NpcCombatDamage damage,const EnemyMeleeGeometry& g
         if(g.region!=1||!g.regions||(g.regions&~255u)||g.normal[0]!=0||g.normal[1]!=0||g.normal[2]!=0)return false;
         auto probe=g;probe.region=2;probe.regions=4;probe.normal[0]=1;return validEnemyMeleeGeometry(probe);
     }
-    if(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::HostWorld)return emptyEnemyMeleeGeometry(g);
+    if(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::HostWorld||damage==NpcCombatDamage::PeerNative)return emptyEnemyMeleeGeometry(g);
     if(damage==NpcCombatDamage::MapTrigger&&emptyEnemyMeleeGeometry(g))return true;
     if(damage==NpcCombatDamage::Corpse||damage==NpcCombatDamage::MapTrigger){
         if(g.region!=1||g.regions)return false;
@@ -113,7 +134,7 @@ inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,co
     if(p.magic!=0x434e3244||p.version!=7||p.size!=sizeof(p)||p.binding.kind!=NpcAuthorityMessage::Stop||
        !validNpcHeader(p.binding,local,peer)||!p.sourceNonce||static_cast<unsigned>(p.kind)<1||static_cast<unsigned>(p.kind)>5)return false;
     if(p.damage==NpcCombatDamage::MapTrigger?!validNpcScript(p.script):!emptyNpcScript(p.script))return false;
-    if(npcCombatRanged(p.damage)?!validNpcRanged(p.damage,p.ranged):!emptyNpcRanged(p.ranged))return false;
+    if(p.damage==NpcCombatDamage::PeerNative?!validNpcPeerNative(p.ranged):npcCombatRanged(p.damage)?!validNpcRanged(p.damage,p.ranged):!emptyNpcRanged(p.ranged))return false;
     if(p.kind==NpcCombatMessage::Hello)return !p.sourceActorArm&&!p.targetNonce&&!p.event&&!p.request&&p.sourceRole==2&&p.damage==NpcCombatDamage::None&&npcCombatHealth(p.before,p.maximum)&&!p.after&&!p.inflicted&&emptyEnemyMeleeGeometry(p.geometry);
     if(!p.targetNonce)return false;
     if(p.kind==NpcCombatMessage::Ready||p.kind==NpcCombatMessage::Stop)return !p.sourceActorArm&&!p.event&&!p.request&&p.sourceRole==2&&p.damage==NpcCombatDamage::None&&!p.before&&!p.after&&!p.maximum&&!p.inflicted&&emptyEnemyMeleeGeometry(p.geometry);
@@ -121,6 +142,7 @@ inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,co
     const bool world=npcCombatWorldDamage(p.damage);
     if(world?(p.sourceRole!=2||(p.damage==NpcCombatDamage::Corpse?!p.sourceActorArm:p.sourceActorArm!=0)):(p.sourceRole>1||p.sourceActorArm))return false;
     if(p.damage==NpcCombatDamage::HostWorld&&(p.kind!=NpcCombatMessage::Commit||!(p.after>0)||!(p.after<p.before)))return false;
+    if(p.damage==NpcCombatDamage::PeerNative&&p.kind!=NpcCombatMessage::Request)return false;
     if(p.kind==NpcCombatMessage::Request)return !world&&peer.role==1&&p.sourceRole==1&&p.request&&!p.event&&!p.before&&!p.after&&!p.maximum&&!p.inflicted;
     // Terminal native outcomes retain a scoped tombstone after pose/AI retirement.
     return peer.role==0&&p.event&&(p.sourceRole==1?p.request!=0:p.request==0)&&npcCombatHealth(p.before,p.maximum)&&

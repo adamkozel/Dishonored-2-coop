@@ -1,0 +1,49 @@
+{
+  "i": 0,
+  "test": {
+    "runs": 1,
+    "mode": "hostnative",
+    "result": "damaged",
+    "target": 189269860,
+    "source": 1,
+    "amount": 50.0,
+    "before": 40.0,
+    "after": 0.0,
+    "maximum": 40.0
+  },
+  "before": {
+    "host": 40,
+    "client": 40
+  },
+  "after": {
+    "host": 0,
+    "client": 0
+  },
+  "host": {
+    "result": "active_native_melee",
+    "hostNativePassed": 1,
+    "hostNativeLast": "components/equipment/damage/explosion_grenade.damage",
+    "hostWorldCommitted": 0,
+    "committed": 0,
+    "deaths": 0,
+    "lastRetire": "bound_actor_retired_without_combat_outcome"
+  },
+  "client": {
+    "result": "active_native_melee",
+    "hostWorldApplied": 0,
+    "followSubtractions": 0,
+    "applied": 0,
+    "deaths": 0,
+    "lastRetire": "bound_actor_retired_without_combat_outcome"
+  },
+  "hostRelevance": {
+    "deadReconciled": 3,
+    "deadSent": 15
+  },
+  "clientRelevance": {
+    "clientDeadApplied": 3,
+    "clientDeadAlready": 12,
+    "clientDeadRefused": 0,
+    "clientDeadLast": "client_dead_from_host"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "source": "host",
+  "kind": "choke",
+  "observer": "client",
+  "passed": false,
+  "failure": "The source did not kill the unconscious guard",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ],
+    "observer": [
+      -48.2089,
+      -148,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T15:11:16.1664203+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 853453,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x27fc59ce130",
+      "actor": "0x27fdf86f560",
+      "attributes": "0x27fdf5e7c20",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 853468,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x22b4630a1f0",
+      "actor": "0x22b5ba051c0",
+      "attributes": "0x22b5b76b8d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "killAttempts": 15,
+  "restored": true
+}

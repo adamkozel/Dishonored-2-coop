@@ -37,7 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
-    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -49,7 +49,7 @@ NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest
 // only that NPC, and the product controller re-arms a stopped session.
 bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
 const char* npcCombatLastRetire="none";
-std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0};std::uint64_t npcCombatFollowSubtractions=0;
+std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0},npcCombatHostNativePassed{0},npcCombatHostNativeLastKey{0};std::uint64_t npcCombatFollowSubtractions=0;
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
@@ -119,7 +119,12 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
         if(!localRole){unsigned inflictor=0,attacker=0;const auto i=reinterpret_cast<std::uintptr_t>(info),base=reinterpret_cast<std::uintptr_t>(gameImage);
             if(memoryRead(i+0x50,&inflictor,4)&&memoryRead(i+0x54,&attacker,4)){
                 const auto in=readNativeDamageSource(memoryRead,base,game,inflictor),at=readNativeDamageSource(memoryRead,base,game,attacker);
-                if(npcCombatHostWorldSource(localRole,attacker,inflictor,at.valid&&at.localOwned,in.valid&&in.localOwned)){npcCombatHostWorldPassed.fetch_add(1);break;}}}
+                if(npcCombatHostWorldSource(localRole,attacker,inflictor,at.valid&&at.localOwned,in.valid&&in.localOwned)){npcCombatHostWorldPassed.fetch_add(1);break;}
+                // 1214w: host damage the replay cannot reproduce (grenades, powers) used to be
+                // suppressed and retire the NPC; it applies natively and HostWorld/Dead share it.
+                std::uintptr_t name=0;std::string path;
+                if(decl&&memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,path)&&npcCombatHostNativeDeclaration(localRole,attacker,inflictor,npcDamageKey(path))){
+                    npcCombatHostNativePassed.fetch_add(1);npcCombatHostNativeLastKey.store(npcDamageKey(path));break;}}}
         handled=true;NpcCombatCapture e{};e.nonce=b.nonce;e.arm=b.arm;e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.component=c;
         if(npcCombatCaptures.size()>=64||!memoryRead(reinterpret_cast<std::uintptr_t>(info),e.info.data(),e.info.size())||!memoryRead(n.npc.actor+0x300,e.position,12))npcCombatCaptureFault.store(1);
         else{
@@ -359,15 +364,28 @@ bool npcCombatRetireBeforeDeath(NpcAuthorityChannel& c){
     c.corpse=true;c.corpseAt=GetTickCount64();c.corpseUntil=c.corpseAt+8000;c.result=localRole?"client_corpse":"host_corpse";npcCombat.preDeathReleased+=c.lease.released;
     return !c.lease.references&&!c.lease.lost&&!c.lease.retired;
 }
+std::uint64_t npcCombatReadMaximumChanged=0;const char* npcCombatReadFailure="none";unsigned npcCombatReadWords[4]{},npcCombatReadGeneration=0;bool npcCombatReadTerminal=false;
 bool npcCombatReadResult(NpcAuthorityChannel& c,const NativeHealth& before,void* result,NativeHealth& after,float& inflicted,bool terminal,bool allowZero=false){
     unsigned protectedRegions=0,generation=0;float mana=0;const auto r=reinterpret_cast<std::uintptr_t>(result);const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     npcCombatNativeStage="result_or_health_identity";
     memoryRead(r,&npcCombatNativeInflicted,4);memoryRead(before.component+0x20,&npcCombatNativeAfter,4);memoryRead(before.component+0x18,&npcCombatNativeGeneration,4);
-    if(!memoryRead(r,&inflicted,4)||!std::isfinite(inflicted)||(allowZero?inflicted<0:inflicted<=0)||!memoryRead(r+4,&mana,4)||mana!=0||
-       !memoryRead(r+8,&protectedRegions,4)||protectedRegions||!readNativeHealth(memoryRead,base,before.handle,after)||
-       after.game!=before.game||after.actor!=before.actor||after.component!=before.component||after.declaration!=before.declaration||
-       !memoryRead(after.component+0x18,&generation,4)||generation!=c.lease.binding.healthGeneration||after.maximum!=before.maximum)return false;
-    if(!terminal)return after.current>0&&npcCombatClose(before.current-after.current,inflicted)&&npcCombatIdentity(c,after);
+    // 1214s: which result condition failed (take 1271h: a client stab on an unconscious
+    // guard failed here on the host after the native kill).
+    memoryRead(r,npcCombatReadWords,sizeof(npcCombatReadWords));npcCombatReadTerminal=terminal;npcCombatReadGeneration=c.lease.binding.healthGeneration;
+    const auto fail=[](const char* why){npcCombatReadFailure=why;return false;};
+    if(!memoryRead(r,&inflicted,4)||!std::isfinite(inflicted)||(allowZero?inflicted<0:inflicted<=0))return fail("inflicted");
+    if(!memoryRead(r+4,&mana,4)||mana!=0)return fail("mana");
+    if(!memoryRead(r+8,&protectedRegions,4)||protectedRegions)return fail("protected_regions");
+    if(!readNativeHealth(memoryRead,base,before.handle,after))return fail("health_read");
+    if(after.game!=before.game||after.actor!=before.actor||after.component!=before.component)return fail("health_identity");
+    if(after.declaration!=before.declaration)return fail("health_declaration");
+    if(!memoryRead(after.component+0x18,&generation,4)||generation!=c.lease.binding.healthGeneration)return fail("health_generation");
+    // A native kill of an unconscious NPC changes its health maximum (take 1271i);
+    // only a terminal result may (the dead proof checks the post-death maximum).
+    if(after.maximum!=before.maximum&&!(terminal&&after.current==0))return fail("health_maximum");
+    if(after.maximum!=before.maximum)++npcCombatReadMaximumChanged;
+    if(!terminal)return (after.current>0||fail("lethal_not_terminal"))&&(npcCombatClose(before.current-after.current,inflicted)||fail("inflicted_mismatch"))&&(npcCombatIdentity(c,after)||fail("identity_after"));
+    npcCombatReadFailure="none";
     npcCombatNativeStage="await_native_death_completion";
     // This validates only the native damage result. Completion is separately
     // checked over following engine services, while this actor stays retired.
@@ -395,7 +413,10 @@ bool prepareNpcCombatSubtraction(void* component,float amount){
     if(a->reconcile&&!a->terminal){a->failed=true;return false;}
     if(a->terminal){
         npcCombatNativeStage="native_lethal_subtraction_ownership";
-        if(!npcCombatRetireBeforeDeath(*c)&&!(a->reconcile&&c->corpse)){a->failed=true;return false;}
+        // 1214u: an unconscious replica's AI lease is not clean to release (take 1271k:
+        // the client refused the host's committed kill); once the corpse is recorded
+        // the death proceeds, as for a reconciled death.
+        if(!npcCombatRetireBeforeDeath(*c)&&!((a->reconcile||c->unconscious)&&c->corpse)){a->failed=true;return false;}
         ++npcCombatLethalSubtractions;
     }
     return true;
@@ -498,6 +519,24 @@ bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float
     }
     return readNativeHealth(memoryRead,base,before.handle,after)&&after.actor==before.actor&&after.current==target;
 }
+// 1214y: the host applies a client PeerNative hit natively, the partner avatar as
+// attacker and inflictor; HostWorld commits a loss and Dead a death.
+bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const char* name=npcDamageDeclarationName(r.declaration);
+    if(localRole||!realNativeDamage||!name||!validNpcPeerNative(r)||!npcCombatNear(c,1,32)||npcCombatNativeApplication||(before.ownerFlags&8))return false;
+    const auto avatar=shadowDamageIdentity();if(!validCoopDamageAvatar(memoryRead,base,avatar))return false;
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,name,false,false);
+    std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138)return false;
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+    if(r.amount>0)std::memcpy(params.data()+8,&r.amount,4);
+    std::memcpy(params.data()+0x50,&avatar.handle,4);std::memcpy(params.data()+0x54,&avatar.handle,4);
+    NativeHealth recheck{};
+    if(!readNativeHealth(memoryRead,base,before.handle,recheck)||recheck.actor!=before.actor||recheck.component!=before.component||recheck.current!=before.current)return false;
+    realNativeDamage(reinterpret_cast<void*>(before.component),params.data(),result.data());
+    return true;
+}
 void npcCombatCommit(NpcAuthorityChannel& c,NpcCombatChannel& b,unsigned source,std::uint64_t request,NpcCombatDamage damage,const EnemyMeleeGeometry& geometry,const NativeHealth& before,const NativeHealth& after,float inflicted,std::uint64_t sourceArm=0,const NpcCombatScriptDamage& script={},const NpcCombatRangedDamage& ranged={}){
     auto p=npcCombatPacket(c,b,NpcCombatMessage::Commit);p.sourceRole=source;p.request=request;p.event=++b.event;p.damage=damage;p.geometry=geometry;
     p.before=before.current;p.after=after.current;p.maximum=before.maximum;p.inflicted=inflicted;
@@ -570,7 +609,19 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
             // attacks still require explicit native owner attribution.
             empty();++npcCombat.replicaWorldSuppressed;return true;
         }
-        else if(!npcCombatExtract(*c,info,damage,geometry,capture.position,sourceArm,sourcePending,script,ranged,capture))refusal="hit_damage_parameters";
+        else if(!npcCombatExtract(*c,info,damage,geometry,capture.position,sourceArm,sourcePending,script,ranged,capture)){
+            // 1214y: a client hit the replay cannot reproduce (grenade, power, bolt variant)
+            // used to be suppressed and retire the NPC; the host applies it natively.
+            NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
+            if(localRole&&playerOwned&&inflictor!=0x3fff0010u&&attacker!=0x3fff0010u&&validNpcPeerNative(native)){
+                empty();
+                if(b.pendingRequests.count){++npcCombat.peerNativeBusy;return true;}
+                auto p=npcCombatPacket(*c,b,NpcCombatMessage::Request);p.sourceRole=1;p.request=++b.request;p.damage=NpcCombatDamage::PeerNative;p.ranged=native;
+                if(npcCombat.outgoing.size()>=64){stopNpcCombat("request_queue_full");return true;}
+                npcCombat.outgoing.push_back(p);++npcCombat.requests;++npcCombat.peerNativeRequests;return true;
+            }
+            refusal="hit_damage_parameters";
+        }
         npcCombatLastOwnerFlags=before.ownerFlags;
         if(refusal){empty();++npcCombat.rejected;retireNpcCombatChannel(b,refusal);return true;}
         const bool world=npcCombatWorldDamage(damage);
@@ -699,6 +750,10 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
         if(!actor){retireNpcCombatChannel(b,"world_source_identity");return;}sourceArm=actor->arm;
     }
     if(!npcCombatIdentity(*c,before)){retireNpcCombatChannel(b,"actor_lifecycle_changed");return;}
+    if(p.damage==NpcCombatDamage::PeerNative){
+        if(localRole||p.kind!=NpcCombatMessage::Request||!npcCombatApplyPeerNative(*c,before,p.ranged)){retireNpcCombatChannel(b,"peer_native_failed");return;}
+        b.peerRequest=p.request;++npcCombat.requests;++npcCombat.peerNativeApplied;return;
+    }
     if(p.kind==NpcCombatMessage::Commit&&(before.current!=p.before||before.maximum!=p.maximum||
        (p.sourceRole==1&&b.pending!=p.request))){retireNpcCombatChannel(b,"replica_or_request_diverged");return;}
     if(p.damage==NpcCombatDamage::HostWorld){
@@ -789,7 +844,8 @@ void writeNpcCombat(){
     }fputs("]}",f);
     fprintf(f,",\"captured\":%llu,\"workerCaptured\":%llu,\"lastCaptureThread\":%lu,\"engineThread\":%lu,\"nativeAttempt\":{\"ownerFlags\":%u,\"declaration\":\"%s\",\"rawInfo\":\"",npcCombatCaptured.load(),npcCombatWorkerCaptured.load(),npcCombatLastCaptureThread,engineThread.load(),npcCombatLastOwnerFlags,npcCombatLastDecl.c_str());
     for(auto byte:npcCombatLastInfo)fprintf(f,"%02x",byte);fputs("\"}",f);
-    fprintf(f,",\"nativeOutcome\":{\"stage\":\"%s\",\"inflicted\":%.9g,\"after\":%.9g,\"healthGeneration\":%u}",npcCombatNativeStage,npcCombatNativeInflicted,npcCombatNativeAfter,npcCombatNativeGeneration);
+    fprintf(f,",\"nativeOutcome\":{\"stage\":\"%s\",\"inflicted\":%.9g,\"after\":%.9g,\"healthGeneration\":%u,\"readFailure\":\"%s\",\"readTerminal\":%s,\"bindingGeneration\":%u,\"resultWords\":[%u,%u,%u,%u],\"maximumChanged\":%llu}",npcCombatNativeStage,npcCombatNativeInflicted,npcCombatNativeAfter,npcCombatNativeGeneration,
+        npcCombatReadFailure,npcCombatReadTerminal?"true":"false",npcCombatReadGeneration,npcCombatReadWords[0],npcCombatReadWords[1],npcCombatReadWords[2],npcCombatReadWords[3],npcCombatReadMaximumChanged);
     const auto& fixture=npcCombatFixture;
     fprintf(f,",\"fixtureHoldsFrames\":%s,\"fixturePairedFrameReleases\":%llu",fixture.holdFrames?"true":"false",fixture.pairedFrameReleases);
     fprintf(f,",\"nativeSubtractions\":%llu,\"nativeLethalSubtractions\":%llu",npcCombatSubtractions,npcCombatLethalSubtractions);
@@ -804,7 +860,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load());
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy);
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

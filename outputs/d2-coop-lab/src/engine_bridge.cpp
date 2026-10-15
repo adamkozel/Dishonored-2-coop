@@ -1409,7 +1409,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_npc_combat fixture_ai40000"))return true;
     if(!std::strcmp(text,"coop_npc_combat trigger_fixture_once"))return true;
     if(!std::strcmp(text,"coop_npc_combat knockout_test")||!std::strcmp(text,"coop_npc_combat knockout_reaction_test")||!std::strcmp(text,"coop_npc_combat knockout_generic_test"))return true;
-    if(!std::strcmp(text,"coop_npc_combat hostworld_test"))return true;
+    if(!std::strcmp(text,"coop_npc_combat hostworld_test")||!std::strcmp(text,"coop_npc_combat hostnative_test"))return true;
     if(!std::strcmp(text,"coop_npc_combat on")||!std::strcmp(text,"coop_npc_combat off")||!std::strcmp(text,"coop_npc_combat duplicate"))return true;
     if(!std::strcmp(text,"coop_npc_stream on")||!std::strcmp(text,"coop_npc_stream off"))return true;
     if(!std::strcmp(text,"coop_guard_body on")||!std::strcmp(text,"coop_guard_body off"))return true;
@@ -1642,7 +1642,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_npc_combat fixture_ai40000")){npcCombatFixtureRequest=2;return;}
     if(!std::strcmp(request.command,"coop_npc_combat trigger_fixture_once")){if(npcCombat.enabled)npcCombatTriggerFixtureRequested=true;return;}
     if(!std::strcmp(request.command,"coop_npc_combat knockout_test")){npcKnockoutTest.decl=kNpcKnockoutDecl;npcKnockoutTest.requested=true;return;}
-    if(!std::strcmp(request.command,"coop_npc_combat hostworld_test")){npcHostWorldTest.requested=true;return;}
+    if(!std::strcmp(request.command,"coop_npc_combat hostworld_test")){npcHostWorldTest.player=false;npcHostWorldTest.requested=true;return;}
+    if(!std::strcmp(request.command,"coop_npc_combat hostnative_test")){npcHostWorldTest.player=true;npcHostWorldTest.requested=true;return;}
     if(!std::strcmp(request.command,"coop_npc_combat knockout_reaction_test")){npcKnockoutTest.decl="components/base/damage/sleep_damage.damage";npcKnockoutTest.requested=true;return;}
     if(!std::strcmp(request.command,"coop_npc_combat knockout_generic_test")){npcKnockoutTest.decl="code_referenced/damage/generic_sleep_damage.damage";npcKnockoutTest.requested=true;return;}
     if(!std::strcmp(request.command,"coop_npc_combat fixture_off")){npcCombatFixtureRequest=0;return;}

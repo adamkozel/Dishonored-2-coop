@@ -1,0 +1,147 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious",
+    "Source killed the unconscious guard (attempt 1)",
+    "Unconscious guard killed by the client is dead in both worlds (share: source none, observer combat)",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -47.7703,
+      -145.441,
+      66.4
+    ],
+    "source": [
+      -48.5743,
+      -149.698,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T15:21:14.5772322+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 1451796,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2cb377e9920",
+      "actor": "0x2cb4730e540",
+      "attributes": "0x2cb470708d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 1451812,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x25b9f801660",
+      "actor": "0x25cd363cee0",
+      "attributes": "0x25cd33868d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "killAttempts": 1,
+  "killOutcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "deathShare": {
+    "source": "none",
+    "observer": "combat",
+    "sourceRelevance": {
+      "deadReconciled": 0,
+      "deadSent": 0,
+      "combatSharedDeaths": 0
+    },
+    "observerRelevance": {
+      "clientDeadApplied": 0,
+      "clientDeadAlready": 0,
+      "clientDeadRefused": 0,
+      "clientDeadLast": "none",
+      "reconcileDecl": [
+        0.0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "victimEnd": {
+    "source": [
+      -47.7814,
+      -144.541,
+      66.5804
+    ],
+    "observer": [
+      -47.7815,
+      -144.542,
+      66.5803
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "host_authority",
+    "posesDelta": 93,
+    "rootsDelta": 324,
+    "bodyAppliedDelta": 323,
+    "positionBefore": [
+      -47.6565,
+      -144.865,
+      66.4
+    ],
+    "positionAfter": [
+      -47.7923,
+      -144.538,
+      66.5785
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}
