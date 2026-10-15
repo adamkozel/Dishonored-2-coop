@@ -4,6 +4,7 @@
 #include "movement_knee_pole.h"
 #include "movement_equipment_contact.h"
 #include "movement_vault_lift.h"
+#include "presentation_refusal.h"
 void requestMovementEquipment(bool drawn);
 void requestPossessionBodyVisibility(bool hide);
 SRWLOCK movementLock=SRWLOCK_INIT;
@@ -35,7 +36,7 @@ struct MovementPlayback {
     std::vector<MovementBank::Joint> airLast,secondFrom;
     std::uintptr_t game=0,actor=0,animation=0,skeleton=0;unsigned handle=0;
     std::uint64_t epoch=0,peerEpoch=0,session=0;ULONGLONG end=0,lease=0;
-    std::vector<std::int16_t> parents;std::uint64_t applied=0,refused=0;bool persistent=false,nativeFeet=false,currentFeet=false;
+    std::vector<std::int16_t> parents;std::uint64_t applied=0,refused=0;PresentationRefusalGate refusal;bool persistent=false,nativeFeet=false,currentFeet=false;
     std::uint64_t combatEvent=0;unsigned combatVariant=0,combatPhase=0,combatClip=0;float combatRecoveryStart=.5f;
     double combatLastTime=0;float combatAmount=0,combatWeight=0,combatTransition=0,combatAirMix=0,combatMoveMix=0;
     std::vector<MovementBank::Joint> combatFrom,combatLast;
@@ -108,15 +109,32 @@ bool movementHelperMatches(const NativeSkeleton& s){
         memoryRead(s.model+0xa8,&count,4)&&(count&0xffffff)>0&&(count&0xffffff)<=256&&
         memoryRead(s.animation+0x2d0,&words,4)&&words>0&&words<=8&&memoryRead(s.animation+0x2d4,&joints,4)&&joints==s.parents.size()&&(joints==215||joints==219);
 }
+// 1213i (#34/#35): why the last bank request was refused (status beginRefusal); 0 = accepted.
+// 1 load busy, 2 already active, 3 review/authoring, 4 partner avatar not held/followed, 5 body stream,
+// 6 shadow action active, 7 frame not owned, 8 gameplay not ready, 9 stale peer, 10 native functions,
+// 11 skeleton read/unstable/not gameplay/identity, 12 shadow target, 13 helpers, 14 sword read,
+// 15 sword not equipped/started, 16 bank path, 17 worker thread.
+unsigned movementBeginRefusal=0;std::array<std::uint64_t,18> movementBeginRefusals{};
+bool movementBeginRefused(unsigned reason){movementBeginRefusal=reason;if(reason<movementBeginRefusals.size())++movementBeginRefusals[reason];return false;}
 bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     const auto tick=GetTickCount64();
-    if(movementLoad.state.load(std::memory_order_acquire)||movementBankActive()||reviewClipActive()||authoringProof.end||!probeDoppelganger||!avatarAiHeld||!probeFollow||!locomotionEnabled||bodyStreamEnabled||
-        shadowAction.actor||!networkFrameOwned.load()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote)||
-        !lastReceive||tick-lastReceive>=presentationFreshMs()||!bodyNativeFunctions())return false;
+    if(movementLoad.state.load(std::memory_order_acquire))return movementBeginRefused(1);
+    if(movementBankActive())return movementBeginRefused(2);
+    if(reviewClipActive()||authoringProof.end)return movementBeginRefused(3);
+    if(!probeDoppelganger||!avatarAiHeld||!probeFollow||!locomotionEnabled)return movementBeginRefused(4);
+    if(bodyStreamEnabled)return movementBeginRefused(5);
+    if(shadowAction.actor)return movementBeginRefused(6);
+    if(!networkFrameOwned.load())return movementBeginRefused(7);
+    if(!coopGameplayReady(outgoing)||!coopGameplayReady(remote))return movementBeginRefused(8);
+    if(!lastReceive||tick-lastReceive>=presentationFreshMs())return movementBeginRefused(9);
+    if(!bodyNativeFunctions())return movementBeginRefused(10);
     NativeSkeleton s{};NativeSwordEquipment sword{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    if(!readNativeSkeleton(memoryRead,base,probeHandle,s)||!s.stable||s.logic!=1||s.actor!=probeActor||s.game!=observedGame||
-        !bodyShadowTarget(s)||!movementHelperMatches(s)||
-        !readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||!sword.equipped||!sword.started)return false;
+    if(!readNativeSkeleton(memoryRead,base,probeHandle,s)||!s.stable||s.logic!=1||s.actor!=probeActor||s.game!=observedGame)return movementBeginRefused(11);
+    if(!bodyShadowTarget(s))return movementBeginRefused(12);
+    if(!movementHelperMatches(s))return movementBeginRefused(13);
+    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily))return movementBeginRefused(14);
+    if(!sword.equipped||!sword.started)return movementBeginRefused(15);
+    movementBeginRefusal=0;
     // 1203b: a bank already committed for this exact partner actor/skeleton in
     // this world is dormant after a follow interruption (stale peer, menu,
     // modal). Reactivate it in place with fresh runtime state instead of
@@ -137,8 +155,8 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     }
     // 1181: an installed release keeps both partner banks in <game>\d2coop and
     // loads the one for the partner it renders (host renders Emily).
-    if(productMode){if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s\\%s-choke-bank.bin",productDataDir,localRole?"corvo":"emily")>=static_cast<int>(sizeof(movementLoad.path)))return false;}
-    else if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s.movement.bin",statusPath)>=sizeof(movementLoad.path))return false;
+    if(productMode){if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s\\%s-choke-bank.bin",productDataDir,localRole?"corvo":"emily")>=static_cast<int>(sizeof(movementLoad.path)))return movementBeginRefused(16);}
+    else if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s.movement.bin",statusPath)>=sizeof(movementLoad.path))return movementBeginRefused(16);
     MovementPlayback next{};next.nativeFeet=movementNativeFeetRequested;next.currentFeet=movementCurrentFeetRequested;
     next.game=s.game;next.actor=s.actor;next.animation=s.animation;next.skeleton=s.skeleton;next.handle=probeHandle;next.parents=s.parents;
     next.epoch=outgoing.worldEpoch;next.peerEpoch=remote.worldEpoch;next.session=remote.session;next.persistent=persistent;
@@ -146,7 +164,7 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     movementLoad.bind=s.bindLocal;movementLoad.bindMatches=false;
     movementLoad.expectedChecksum=expectedChecksum;movementLoad.requested=true;movementLoad.deadline=tick+5000;movementLoad.state.store(1,std::memory_order_release);
     HANDLE worker=CreateThread(nullptr,0,movementLoadWorker,nullptr,0,nullptr);
-    if(!worker){movementLoad.requested=false;movementLoad.state.store(0);return false;}CloseHandle(worker);return true;
+    if(!worker){movementLoad.requested=false;movementLoad.state.store(0);return movementBeginRefused(17);}CloseHandle(worker);return true;
 }
 void serviceMovementBank(ULONGLONG tick){
     const auto state=movementLoad.state.load(std::memory_order_acquire);
@@ -538,7 +556,13 @@ void applyMovementBank(void* component,void* actor,int phase){
     if(!p.end||tick>=p.end||tick>=p.lease||p.clock.weight<.001f||p.animation!=reinterpret_cast<std::uintptr_t>(component)||p.actor!=reinterpret_cast<std::uintptr_t>(actor)){
         ReleaseSRWLockExclusive(&movementLock);return;}
     NativeSkeleton s{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    bool ok=networkFrameOwned.load()&&readNativeSkeleton(memoryRead,base,p.handle,s)&&s.stable&&s.logic==1&&s.game==p.game&&s.actor==p.actor&&s.animation==p.animation&&s.skeleton==p.skeleton&&s.parents==p.parents&&movementHelperMatches(s);
+    unsigned refuseReason=PresentationRefusalGate::None;
+    bool ok=networkFrameOwned.load();if(!ok)refuseReason=PresentationRefusalGate::NotOwned;
+    if(ok&&!(ok=readNativeSkeleton(memoryRead,base,p.handle,s)))refuseReason=PresentationRefusalGate::SkeletonRead;
+    if(ok&&!(ok=s.stable))refuseReason=PresentationRefusalGate::Unstable;
+    if(ok&&!(ok=s.logic==1))refuseReason=PresentationRefusalGate::NotGameplay;
+    if(ok&&!(ok=s.game==p.game&&s.actor==p.actor&&s.animation==p.animation&&s.skeleton==p.skeleton&&s.parents==p.parents))refuseReason=PresentationRefusalGate::Identity;
+    if(ok&&!(ok=movementHelperMatches(s)))refuseReason=PresentationRefusalGate::Helpers;
     const unsigned count=p.bank.joints;std::vector<BodyMatrix> pose(count);
     if(p.bank.hasCarryPickupSettle())p.carryLast.resize(count);
     if(p.bank.hasTurns()&&p.turnSerial!=p.clock.turnSerial){p.turnSerial=p.clock.turnSerial;p.turnFrom=p.turnLast;}
@@ -750,6 +774,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             presentationRotation(x,y,p.clock.weight,r);for(unsigned c=0;c<3;++c)for(unsigned k=0;k<3;++k)pose[j].v[c*4+k]=r[c*3+k];
             for(unsigned k=12;k<15;++k)pose[j].v[k]=native.v[k]+(pose[j].v[k]-native.v[k])*p.clock.weight;}
     }
+    if(!ok&&!refuseReason)refuseReason=PresentationRefusalGate::PoseBuild;
     if(ok&&phase==0&&p.currentFeet&&p.clock.weight>.99f){
         // Build only the native primary chain; helper bones are recomputed by
         // the engine and are not treated as authored knee references.
@@ -758,11 +783,12 @@ void applyMovementBank(void* component,void* actor,int phase){
             p.kneeReference[j]=parent>=0?bodyMultiply(p.kneeReference[parent],local):local;
         }
         p.kneeReady=ok;p.kneeSequence=bodyPublication.sequence.load();
+        if(!ok)refuseReason=PresentationRefusalGate::KneeChain;
     }
     if(ok){for(unsigned j=2;j<count;++j)reinterpret_cast<void(*)(void*,std::uint16_t,const BodyMatrix*)>(gameImage+0x9cfa0)(reinterpret_cast<void*>(p.animation+0x40),static_cast<std::uint16_t>(j),&pose[j]);
         reinterpret_cast<void(*)(void*)>(gameImage+0x9dc40)(reinterpret_cast<void*>(p.animation+0x40));
-        reinterpret_cast<void(*)(void*,void*,void*)>(gameImage+0x23fca0)(reinterpret_cast<void*>(s.model),reinterpret_cast<void*>(p.animation+0x40),reinterpret_cast<void*>(p.animation+0x2b0));++p.applied;
-    }else{++p.refused;p.end=p.lease=0;}
+        reinterpret_cast<void(*)(void*,void*,void*)>(gameImage+0x23fca0)(reinterpret_cast<void*>(s.model),reinterpret_cast<void*>(p.animation+0x40),reinterpret_cast<void*>(p.animation+0x2b0));++p.applied;p.refusal.accept();
+    }else{++p.refused;if(p.refusal.refuse(refuseReason))p.end=p.lease=0;} // 1213i (#34): a transient refusal skips this frame only
     ReleaseSRWLockExclusive(&movementLock);
 }
 void writeMovementStatus(){
@@ -795,6 +821,12 @@ void writeMovementStatus(){
     fprintf(f,"\"swimWeight\":%.7f,\"swimMove\":%.7f,\"swimRise\":%.7f,\"swimSink\":%.7f,\"swimSpeed\":%.7f,\"swimVz\":%.7f,\"swimSamples\":%llu,",p.swimWeight,p.swimMove,p.swimRise,p.swimSink,p.swimSpeed,p.swimVz,p.swimSamples);
     fprintf(f,"\"trapStock\":%u,",p.trapStock);
     fprintf(f,"\"carrySampleAmount\":%.7f,\"carryAuthoredAmount\":%.7f,\"carrySettle\":%.7f,",p.carryAmount,(p.carryVariant==7||p.carryVariant==1)?carryPickupAmount(p.carryVariant,p.carryAmount):0.f,p.carrySettle);
+    fprintf(f,"\"beginRefusal\":%u,\"beginRefusals\":[",movementBeginRefusal);
+    for(unsigned i=0;i<movementBeginRefusals.size();++i)fprintf(f,"%s%llu",i?",":"",static_cast<unsigned long long>(movementBeginRefusals[i]));
+    fputs("],",f);
+    fprintf(f,"\"refuseStreak\":%u,\"refuseLongest\":%u,\"refuseLast\":%u,\"refuseReasons\":[",p.refusal.streak,p.refusal.longest,p.refusal.last);
+    for(unsigned i=0;i<p.refusal.reasons.size();++i)fprintf(f,"%s%llu",i?",":"",static_cast<unsigned long long>(p.refusal.reasons[i]));
+    fputs("],",f);
     fprintf(f,"\"experimental\":true,\"active\":%s,\"end\":%llu,\"joints\":%u,\"phase\":%.7f,\"speed\":%.6f,\"weight\":%.6f,\"a\":%u,\"b\":%u,\"mix\":%.6f,\"checksum\":%llu,\"applied\":%llu,\"refused\":%llu,\"gaits\":%u,\"runMix\":%.6f,\"version\":%u,\"stanceMix\":%.6f,\"sprintMix\":%.6f,\"sprintSide\":%u,\"sprintDirection\":%.6f,\"leanAmount\":%.6f,\"leanWeight\":%.6f,\"leanUp\":%.6f,\"slideState\":%u,\"slideTime\":%.6f,\"slideWeight\":%.6f,\"airState\":%u,\"airTime\":%.6f,\"airWeight\":%.6f,\"airProgress\":%.6f,\"airRun\":%.6f,\"airCrouch\":%.6f,\"combatVariant\":%u,\"combatPhase\":%u,\"combatClip\":%u,\"combatAmount\":%.6f,\"combatWeight\":%.6f,\"combatEvent\":%llu,\"equipmentVariant\":%u,\"equipmentAmount\":%.6f,\"equipmentWeight\":%.6f,\"armedMix\":%.6f,\"presentedDrawn\":%s,\"traversalVariant\":%u,\"traversalAmount\":%.6f,\"traversalWeight\":%.6f,\"traversalEvent\":%llu,\"powerVariant\":%u,\"powerAmount\":%.6f,\"powerWeight\":%.6f,\"powerEvent\":%llu,\"shadowWalkPhase\":%.6f,\"combatAirMix\":%.6f,\"combatMoveMix\":%.6f,\"nativeFeet\":%s,\"currentFeet\":%s,\"feetCasts\":%llu,\"feetSolves\":%llu,\"feetResetsAvoided\":%llu,\"feetReferences\":%llu,\"terrainWeight\":%.6f,\"terrainGrade\":%.6f,\"terrainDown\":%.6f,\"terrainRun\":%.6f,\"turnWeight\":%.6f,\"turnPhase\":%.6f,\"turnVelocity\":%.6f,\"turnClip\":%u,\"turnSerial\":%u,\"kneeCorrections\":%llu,\"kneeReject\":%u,\"kneeOffsetError\":%.8f,\"secondJump\":%s,\"secondJumpSerial\":%u,\"secondJumpProgress\":%.6f,\"secondJumpTransition\":%.6f,\"landingCrouchMix\":%.6f,\"rangedShot\":%u,\"rangedMechanism\":%u,\"rangedKind\":%u,\"rangedVariant\":%u,\"rangedAmount\":%.6f,\"rangedWeight\":%.6f,\"rangedEvent\":%llu,\"carryVariant\":%u,\"carryWeight\":%.6f,\"carryMove\":%.6f,\"carryPhase\":%.6f,\"carryCrouchPhase\":%.6f,\"carryEvent\":%llu}\n",p.end?"true":"false",p.end,p.bank.joints,p.clock.phase,p.clock.speed,p.clock.weight,p.clock.a,p.clock.b,p.clock.mix,p.bank.checksum,p.applied,p.refused,p.bank.gaits,p.clock.runMix,p.bank.version,p.clock.stanceMix,p.clock.sprintMix,p.clock.sprintSide,p.clock.sprintDirection,p.clock.leanAmount,p.clock.leanWeight,p.clock.leanUp,p.clock.slideState,p.clock.slideTime,p.clock.slideWeight,p.clock.airState,p.clock.airTime,p.clock.airWeight,p.clock.airProgress,p.clock.airRun,p.clock.airCrouch,p.combatVariant,p.combatPhase,p.combatClip,p.combatAmount,p.combatWeight,p.combatEvent,p.equipmentVariant,p.equipmentAmount,p.equipmentWeight,p.armedMix,p.presentedDrawn?"true":"false",p.traversalVariant,p.traversalAmount,p.traversalWeight,p.traversalEvent,p.powerVariant,p.powerAmount,p.powerWeight,p.powerEvent,p.shadowWalkPhase,p.combatAirMix,p.combatMoveMix,p.nativeFeet?"true":"false",p.currentFeet?"true":"false",movementFeetCasts.load(),movementFeetSolves.load(),movementFeetResetsAvoided.load(),movementFeetReferences.load(),p.clock.terrainWeight,p.clock.terrainGrade,p.clock.terrainDown,p.clock.terrainRun,p.clock.turnWeight,p.clock.turnPhase,p.clock.turnVelocity,p.clock.turnClip,p.clock.turnSerial,p.kneeCorrections,p.kneeReject,p.kneeOffsetError,p.secondJump.active?"true":"false",p.secondJump.serial,p.secondJump.progress,p.secondJump.transition,p.landingCrouchMix,p.rangedShot,p.rangedMechanism,p.rangedKind,p.rangedVariant,p.rangedAmount,p.rangedWeight,p.rangedEvent,p.carryVariant,p.carryWeight,p.carryMove,p.carryPhase[0],p.carryPhase[1],p.carryEvent);
     ReleaseSRWLockShared(&movementLock);const bool ok=!ferror(f);const int close=fclose(f);if(ok&&!close)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
