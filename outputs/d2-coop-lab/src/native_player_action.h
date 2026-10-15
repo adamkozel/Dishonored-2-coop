@@ -32,7 +32,7 @@ inline bool nativePlayerShadowAction(const NativePlayerStates& s,std::uintptr_t 
     // Native1041b (Edge of the World arkClimbable chain): ordinary interact
     // enters alternate-mode state29 arkPlayerStateClimb; up/down stay inside it.
     if(!s.defaultMode&&s.active.size()==1&&s.active[0].id==29&&s.active[0].vtable==base+0x1c78498){action=23;return true;}
-    if(nativePlayerGroundLootStates(s,base)){action=0;return true;}
+    if(nativePlayerGroundLootStates(s,base)||nativePlayerGroundHoldObjectStates(s,base)){action=0;return true;}
     if(nativePlayerAutoCrouchStates(s,base)){action=s.active.size()==2?7u:0u;return true;}
     if(nativePlayerGroundDrawRequestStates(s,base)){action=7;return true;}
     // v154: native holster runs separate left-power and right-sword

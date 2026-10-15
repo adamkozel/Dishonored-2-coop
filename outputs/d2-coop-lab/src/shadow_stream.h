@@ -138,7 +138,7 @@ unsigned shadowFocusedUseVariant(std::uintptr_t base){
 // Sneaking6) presents the generic use reach toward the focused item; a consumed elixir (health or
 // mana potion quantity drop, last valid count kept across the item wheel) presents the same reach
 // to the mouth. Presentation only: no item, inventory or health outcome is synthesized.
-struct ShadowGesture {bool wasLoot=false;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;} shadowGesture;
+struct ShadowGesture {bool wasLoot=false,wasHold=false;std::uint64_t holds=0;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;} shadowGesture;
 void startShadowUse(unsigned variant){
     shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);
     shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);
@@ -147,6 +147,11 @@ void serviceShadowGestures(const NativePlayerStates& states,std::uintptr_t base,
     bool loot=false;for(const auto& a:states.active)if(a.id==47&&a.vtable==base+0x1c7bcc8){loot=true;break;}
     if(loot&&!shadowGesture.wasLoot&&!useActive&&!shadowUse.variant){shadowFocusedUseVariant(base);startShadowUse(1);++shadowGesture.loots;}
     shadowGesture.wasLoot=loot;
+    // 1214m: a held native movable (HoldObject49) holds the reach; its end finishes it.
+    const bool hold=nativePlayerGroundHoldObjectStates(states,base);
+    if(hold&&!shadowGesture.wasHold&&!useActive){shadowUse.targetValid=false;startShadowUse(6);++shadowGesture.holds;}
+    else if(!hold&&shadowGesture.wasHold&&shadowUse.variant==6){shadowUse.targetValid=false;startShadowUse(7);}
+    shadowGesture.wasHold=hold;
     if(shadowGesture.epoch!=outgoing.worldEpoch){shadowGesture.epoch=outgoing.worldEpoch;shadowGesture.potions[0]=shadowGesture.potions[1]=-1;}
     const auto tick=GetTickCount64();if(tick<shadowGesture.nextPotionRead)return;
     shadowGesture.nextPotionRead=tick+600;const unsigned kind=shadowGesture.nextKind;shadowGesture.nextKind=kind==1?2:1;
@@ -164,7 +169,7 @@ void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
         if(variant){shadowUse.lastVariant=variant;shadowUse.endReason=0;shadowUse.variant=variant;shadowUse.duration=UsePresentation::duration(variant);shadowUse.start=GetTickCount64();++shadowUse.events;++shadowUse.uses;std::memcpy(shadowUse.origin,outgoing.position,12);}}
     shadowUse.wasActive=active;
     if(shadowUse.variant){
-        if(useMovedAway(shadowUse.origin,outgoing.position)){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
+        if(shadowUse.variant<6&&useMovedAway(shadowUse.origin,outgoing.position)){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
 }
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;

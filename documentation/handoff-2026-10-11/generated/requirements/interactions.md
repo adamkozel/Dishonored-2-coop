@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:05:53.687129+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T11:24:33.415441+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -920,7 +920,7 @@ Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach
 - [in_game_recordings: gestures-v1261b/client-food-observer.mp4](<../../../../work/natural-moveset/gestures-v1261b/client-food-observer.mp4>)
 ## carry_object_place_throw
 
-Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.
+Audit 1269 (1214m): holding a native movable (HoldObject49) presents a held reach and its throw finishes it, both roles; the object itself is not drawn in the partner's hand and movables are not world-synced yet. Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.
 
 ````json
 {
@@ -931,8 +931,8 @@ Recorded pickup, idle, walking, placement and throw studies with two palm contac
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "partial_native_hold_object_gesture_both_roles_product",
+  "visual_validation": "accepted_functional_both_roles_held_reach",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "carry object place throw",
@@ -944,13 +944,22 @@ Recorded pickup, idle, walking, placement and throw studies with two palm contac
     "carry_object_throw"
   ],
   "deliverable_kind": "animation",
-  "notes": "Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.",
+  "notes": "Audit 1269 (1214m): holding a native movable (HoldObject49) presents a held reach and its throw finishes it, both roles; the object itself is not drawn in the partner's hand and movables are not world-synced yet. Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [
+    "object-carry-v1269c/host-bottle-observer.mp4",
+    "object-carry-v1269c/client-bottle-observer.mp4"
+  ],
+  "evidence": [
+    "../movement-integration/object-carry-audit-v1269.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/object-carry-audit-v1269.json](<../../../../work/movement-integration/object-carry-audit-v1269.json>)
+- [in_game_recordings: object-carry-v1269c/host-bottle-observer.mp4](<../../../../work/natural-moveset/object-carry-v1269c/host-bottle-observer.mp4>)
+- [in_game_recordings: object-carry-v1269c/client-bottle-observer.mp4](<../../../../work/natural-moveset/object-carry-v1269c/client-bottle-observer.mp4>)
 ## shop_dialogue_gestures
 
 Candidates require animation review and appropriate game-state/contact binding.

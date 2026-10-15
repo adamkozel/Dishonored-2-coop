@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-15T11:24:29.236293+02:00",
+  "candidate": "candidate-npc-combat-v1214m",
+  "takes": [
+    {
+      "take": "../natural-moveset/object-carry-v1269a",
+      "passed": false,
+      "failure": "Expected candidate-npc-combat-v1214j",
+      "cases": []
+    },
+    {
+      "take": "../natural-moveset/object-carry-v1269b",
+      "passed": false,
+      "failure": "Fixture restore failed after host-bottle; restore: Checkpoint inventory differs (client)",
+      "cases": [
+        {
+          "source": "host",
+          "case": "bottle",
+          "passed": true,
+          "failure": "restore: Checkpoint inventory differs (client)",
+          "activeSets": [
+            "0",
+            "0,49,81",
+            "0,49"
+          ],
+          "peakUseWeight": 0.0
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/object-carry-v1269c",
+      "passed": true,
+      "failure": null,
+      "cases": [
+        {
+          "source": "client",
+          "case": "bottle",
+          "passed": true,
+          "failure": null,
+          "activeSets": [
+            "0",
+            "0,49,81",
+            "0,49"
+          ],
+          "peakUseWeight": 0.9999999
+        },
+        {
+          "source": "host",
+          "case": "bottle",
+          "passed": true,
+          "failure": null,
+          "activeSets": [
+            "0",
+            "0,49,81",
+            "0,49"
+          ],
+          "peakUseWeight": 0.9999999
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1269b, 1214l): picking up a native movable (esc_env_bottle_03_3) adds HoldObject49 (RVA 1c7a998, arkPlayerStateHoldObject) over Running0, with Undraw81 while the sword is put away; RT throws it and returns to Running0. The source classified none of it, dropped every sample (50 stage-2 refusals) and the partner presentation weight fell to 0 for the whole hold.",
+    "Confirmed runtime (1269c, 1214m): HoldObject is a ground action with valid root motion; the partner stays fully presented and shows use variant 6 (the generic reach held at its contact pose; legs keep the locomotion gait when moving) for the whole hold, then variant 7 (the reach finished in 1.3 s) on the throw, in both roles. Brief presentation dips at the pickup/release instants.",
+    "Open: the held object is not drawn in the partner's hand and thrown or placed movables are not shared between worlds (world object sync, stage 5)."
+  ],
+  "complete": false
+}

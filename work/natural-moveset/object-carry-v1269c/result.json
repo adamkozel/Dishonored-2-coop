@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "bottle",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T11:21:54.3842939+02:00",
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3665,
+          "slot": "RT throw"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49"
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "bottle",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-15T11:22:48.7490378+02:00",
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3619,
+          "slot": "RT throw"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Pickup and food gestures (1214j): native LootObject47 drives the partner use reach toward the item, both source roles, product controller; fixture restored after every case."
+}
