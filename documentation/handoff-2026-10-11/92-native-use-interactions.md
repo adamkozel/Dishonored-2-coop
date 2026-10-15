@@ -111,6 +111,11 @@ Harness options: `-LeversOnly` (1228i); `-Back`, `-ObserverPitch` and `-LeverSou
 
 `-Only` selects the Dunwall cases (1228l); 1228m samples both peers' shadow-stream status per case.
 
+**Free observer camera (#61, 1214an, [audit 1284](../../work/movement-integration/free-camera-audit-v1284.json)):** `coop_observer_camera hold_at x y z` holds the current native view orientation with the eye at any world point. The observer's body stays where it stands. It is lab-only, on the same command channel as `hold`.
+- **How it works (confirmed static):** the camera hooks the native render-view setter (+0x890c50), the function the [IGCS Dishonored 2 notes](https://github.com/FransBouma/InjectableGenericCameraSystem/tree/master/Cameras/Dishonored2) describe. IGCS was read as a reference only. Its current camera uses the native Ansel mode, which pauses the game.
+- **Harness 1228n `-FreeCam`:** the observer turns toward the use where it stands, takes the pitch, and the camera is held at the computed spot (`-Back`, `-Side`, `-EyeHeight`). No body teleport means no falls from platforms, no walls and no crouching at cramped spots.
+- **Take [use-variants-dunwall-v1228u](../../work/natural-moveset/use-variants-dunwall-v1228u):** lock and door pass in both roles with the camera held at the spot.
+
 **#5 verified (1213h, take `use-variants-dunwall-v1228e`, passed, restoration passed):**
 - The host's window use now plays to duration (100%, 31 frames) despite the 0.641 m drop off the ledge. Under the old rule it ended by movement after 12 frames (1228b).
 - The client's window use also plays to duration.
