@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:17:35.284561+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T05:31:28.777814+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -999,7 +999,7 @@ Not applicable (audit 1240, confirmed static): D2 has no player sitting state am
 - [evidence: ../movement-integration/not-applicable-audit-v1240.json](<../../../../work/movement-integration/not-applicable-audit-v1240.json>)
 ## scripted_scene_pose_handoff
 
-A context-dependent animation ownership transition. Requires a tested blend from the actual scene pose, rather than one universal clip.
+A context-dependent animation ownership transition. Audit 1241 (1213m): on the native confined mantle the partner holds the scene pose at full weight, then blends from that actual pose to locomotion over ~250 ms (traversal weight 0.34/0.07/0.02 while locomotion returns 0.49/0.89/0.97), in both roles. Use scenes recover the same way (vise reach videos, audit 1235). Other scene families, an unclassified-state frame at the scene end and visual acceptance (#33) remain open.
 
 ````json
 {
@@ -1010,20 +1010,28 @@ A context-dependent animation ownership transition. Requires a tested blend from
     "emily"
   ],
   "authoring": "missing",
-  "runtime_binding": "not_verified",
+  "runtime_binding": "partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles",
   "visual_validation": "not_accepted",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "scripted scene pose handoff",
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
-  "notes": "A context-dependent animation ownership transition. Requires a tested blend from the actual scene pose, rather than one universal clip.",
+  "notes": "A context-dependent animation ownership transition. Audit 1241 (1213m): on the native confined mantle the partner holds the scene pose at full weight, then blends from that actual pose to locomotion over ~250 ms (traversal weight 0.34/0.07/0.02 while locomotion returns 0.49/0.89/0.97), in both roles. Use scenes recover the same way (vise reach videos, audit 1235). Other scene families, an unclassified-state frame at the scene end and visual acceptance (#33) remain open.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "evidence": [
+    "../movement-integration/presentation-hold-audit-v1241.json",
+    "../movement-integration/window-traversal-audit-v1238.json",
+    "../movement-integration/use-reach-audit-v1235.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/presentation-hold-audit-v1241.json](<../../../../work/movement-integration/presentation-hold-audit-v1241.json>)
+- [evidence: ../movement-integration/window-traversal-audit-v1238.json](<../../../../work/movement-integration/window-traversal-audit-v1238.json>)
+- [evidence: ../movement-integration/use-reach-audit-v1235.json](<../../../../work/movement-integration/use-reach-audit-v1235.json>)
 ## cutscene_enter_exit
 
 Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.

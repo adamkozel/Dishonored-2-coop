@@ -5,8 +5,9 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-15. Live candidate-npc-combat-v1213l ([identity](../../work/movement-integration/candidate-npc-combat-v1213l/identity.json)), protocol 75, bank 71/374. Latest (stage 3):
-- **Checklist ([movement requirements](generated/movement-requirements.md)):** 87 of 105 runtime-bound, 9 visually accepted, 2 not applicable or excluded by policy. `sit_stand` is not applicable: D2 has no player sitting state (confirmed static, [audit 1240](../../work/movement-integration/not-applicable-audit-v1240.json)).
+Updated 2026-10-15. Live candidate-npc-combat-v1213m ([identity](../../work/movement-integration/candidate-npc-combat-v1213m/identity.json)), protocol 75, bank 71/374. Latest (stage 3):
+- **Presentation hold (1213m, [audit 1241](../../work/movement-integration/presentation-hold-audit-v1241.json)):** under the product controller the partner now holds through source gaps of up to 1 s. On the Edge of the World mantle, native-pose time fell from 29% to 1%, and the scene pose blends into locomotion ([chapter 91](91-product-presentation-recovery.md#holding-the-partner-through-source-gaps-candidate-1213m-audit-1241)).
+- **Checklist ([movement requirements](generated/movement-requirements.md)):** 88 of 105 runtime-bound, 9 visually accepted, 2 not applicable or excluded by policy. `sit_stand` is not applicable: D2 has no player sitting state (confirmed static, [audit 1240](../../work/movement-integration/not-applicable-audit-v1240.json)).
 - **Hand reach (#6), window traversal (#7) and cutscene entry/exit (#8):** the partner's right wrist reaches toward the used entity (audit 1235); the native confined mantle through a climbable window is presented in both roles (audit 1238; visual in #33); the partner retires for a native cinematic and is back 1.57 s after it (audit 1239, accepted on both windows).
 - **Use variants on real mechanisms, both roles (#4):** a native use (player state 75, plus the focused entity) plays the matching authored interaction on the partner's body ([chapter 92](92-native-use-interactions.md), [audit 1229](../../work/movement-integration/use-variants-audit-v1229.json)):
   - generic: window;

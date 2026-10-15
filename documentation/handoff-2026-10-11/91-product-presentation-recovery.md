@@ -98,6 +98,25 @@ Earlier attempts:
   - **Visual accepted on both windows.** The native scene plays without the partner intruding, and the partner is presented in front right after it.
   - From the pre-Mayhew save the partner stream can't arm, because the scene itself hands over the sword (take 1236). Entry is therefore gated on the avatar being present (follow + bank).
 
+## Holding the partner through source gaps (candidate 1213m, audit 1241)
+
+On mission maps the source's state stream gaps by 250–375 ms several times per 10 s. Under the product controller each gap snapped the partner to its native pose until the stream resumed ([audit 1241](../../work/movement-integration/presentation-hold-audit-v1241.json)).
+
+- **Measured on 1213l (take [1235d](../../work/natural-moveset/window-traversal-v1235d), confirmed runtime):** with the host as source, the client's partner was in its native pose for 29% of the samples, with 11 drops in 8 s. One drop hit the end of the window mantle.
+- **Cause (confirmed static):** 1203d relaxed only the stream lease to 1 s. Every presentation timeline (movement semantics and the 12 action timelines) still:
+  - invalidated its last sample after 200 ms;
+  - cleared itself on a 250 ms gap;
+  - ran an action on by at most 100 ms.
+
+  Eligibility mask 16 (stale source state) also used a fixed 250 ms. The root snap after a gap was then rejected as a 12–18 m/s step.
+- **1213m:** one shared `presentation_hold.h`. Under the product controller all of these follow the 1 s lease, so a held action keeps running on real time. The lab's strict values are unchanged.
+- **Verified (take [1235e](../../work/natural-moveset/window-traversal-v1235e), same harness, passed in both roles, restoration passed):**
+  - native-pose time is 1% in each direction (29% before);
+  - one drop per case;
+  - no host-source root-step rejections (3 before).
+- **Scene-to-locomotion handoff:** the mantle pose is presented at full weight. The partner then blends from that actual pose to locomotion over about 250 ms: traversal weight 0.34, 0.07, 0.02 while locomotion returns 0.49, 0.89, 0.97. `scripted_scene_pose_handoff` is now partly bound.
+- **Remaining:** one frame of the protocol-73 hold (state 24, an unclassified native state) at the mantle's end still drops to the native pose. The observer spot faces the stair alley, so the video is not reviewable (#33).
+
 ## Related: stability soak attribution (audit 1200)
 
 A 20-minute control soak with every co-op system off still grew about 5 MB/min at steady state. The product controller run grew 6–7 MB/min. The co-op systems are not the main source of the growth. See [chapter 90](90-release-packaging-and-steam-sessions.md).

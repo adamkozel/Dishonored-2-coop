@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T05:17:35.284561+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T05:31:28.777814+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 87 runtime-bound (fully or partially), 9 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 88 runtime-bound (fully or partially), 9 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -477,7 +477,7 @@ Captured 2026-10-15T05:17:35.284561+02:00; source [review-catalog.json](<../../.
 | carry_object_place_throw | interactions | candidates | not_verified | not_accepted | work_remaining |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | work_remaining |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
-| scripted_scene_pose_handoff | interactions | missing | not_verified | not_accepted | work_remaining |
+| scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | not_accepted | work_remaining |
 | cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | work_remaining |
 | map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | not_accepted | work_remaining |
 | incapacitation_and_rescue_if_supported | interactions | missing | not_verified | not_accepted | excluded_by_policy |

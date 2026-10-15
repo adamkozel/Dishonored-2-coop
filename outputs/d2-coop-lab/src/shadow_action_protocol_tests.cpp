@@ -107,7 +107,25 @@ void chokePresentationTests(){
     check(nativeChokeVariant("midnight/gameplay/player/base/choke/choke_win.midnightscene","Npc",1800)==3&&
           !nativeChokeVariant("midnight/gameplay/player/base/choke/choke_win.midnightscene","Player",1800),"native phase and target subscene exact");
 }
-int main(){unboundGroundTests();chokePresentationTests();
+void presentationHoldTests(){
+    // 1213m: the product controller holds every timeline across a gap up to the 1 s lease; the lab rules are unchanged.
+    setPresentationHold(true);
+    {MovementSemantics t;MovementSemantics::Sample o{};
+      check(t.push({100,1,0})&&t.push({140,1,0}),"product movement timeline accepted");
+      check(t.sample(1100,o)&&o.state==0,"product hold keeps the last movement state through a 960 ms gap");
+      check(!t.sample(1141,o),"product hold still expires after the 1 s lease");
+      check(t.push({540,1,0})&&t.sample(300,o),"a 400 ms source gap no longer clears the delayed body timeline");}
+    {RangedPresentation t;RangedPresentation::Sample o{};float phase=0;
+      check(t.push({100,1,1,3,0,666})&&t.sample(433,o,phase)&&o.variant==3&&std::fabs(phase-.5f)<1e-6f,"a held action keeps running on real time through a gap");
+      check(t.sample(1100,o,phase)&&phase==1.f,"held action progress stops at its end");}
+    setPresentationHold(false);
+    {MovementSemantics t;MovementSemantics::Sample o{};
+      check(t.push({100,1,0})&&!t.sample(301,o),"lab hold still expires after 200 ms");
+      check(t.push({400,1,0})&&!t.sample(300,o),"lab still clears the timeline on a 250 ms gap");}
+    {RangedPresentation t;RangedPresentation::Sample o{};float phase=0;
+      check(t.push({100,1,1,3,0,666})&&t.sample(300,o,phase)&&std::fabs(phase-100.f/666)<1e-6f,"lab action extrapolation still stops at 100 ms");}
+}
+int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests();
     grenadePresentationTests();
     carryPresentationTests();
     rangedShotTests();
