@@ -177,9 +177,13 @@ The combat JSON records each channel's retirement reason and shared health, plus
 - A state is applied once: an NPC that wakes up in one world stays unconscious in the other.
 - An NPC killed outside relevance dies silently in the other world, with no reaction.
 
+**Regressions on 1214ad:**
+- 1270h (three-guard fight, both players): every guard dead in both worlds.
+- 1271n: the host-kill case passed; the client case failed because its choke never started (the guard moved or noticed Emily).
+- 1271o (client case re-run): pass, the kill committed by the host, bodies 0.0 m apart.
+
 ## Open
 
 - Grenades and powers in both roles are verified through the lab fixture only (1274, 1275). Real sleep darts and chokes on a mission are verified (1276i, 1276m); a real grenade or power is not.
-- Regression of multi-guard fights on the relevance and life-roster changes (1214ac/1214ad).
 - The Hello follow (host lower at re-bind) is unit-tested but not yet observed at runtime.
 - Spawns, bodies and physics beyond the corpse stream are not covered by this chapter.
