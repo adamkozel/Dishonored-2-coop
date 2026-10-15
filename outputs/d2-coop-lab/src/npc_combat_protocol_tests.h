@@ -73,6 +73,22 @@ void npcCombatProtocolTests(){
     badScript=script;badScript.kind=NpcCombatMessage::Request;badScript.request=1;badScript.event=0;badScript.before=badScript.after=badScript.maximum=badScript.inflicted=0;require(!validNpcCombat(badScript,h,c),"client cannot submit a map-trigger event");
     badScript=script;badScript.version=3;require(!validNpcCombat(badScript,c,h),"old corpse-only wire cannot be mistaken for descriptor packet");
     auto noDamage=world;noDamage.after=noDamage.before;noDamage.inflicted=0;require(validNpcCombat(noDamage,c,h),"host-owned harmless corpse result can preserve health without inventing damage");
+    {// 1214o: host-world damage (creature or NPC source) follows the host's native loss.
+     auto hw=world;hw.damage=NpcCombatDamage::HostWorld;hw.sourceActorArm=0;hw.geometry={};
+     require(validNpcCombat(hw,c,h),"host-world loss is an ordered host commit without geometry or source identity");
+     auto bad=hw;bad.after=0;bad.inflicted=bad.before;require(!validNpcCombat(bad,c,h),"a host-world loss is never lethal");
+     bad=hw;bad.after=bad.before;bad.inflicted=0;require(!validNpcCombat(bad,c,h),"a host-world commit always removes health");
+     bad=hw;bad.geometry=world.geometry;require(!validNpcCombat(bad,c,h),"host-world loss carries no contact geometry");
+     bad=hw;bad.sourceActorArm=16;require(!validNpcCombat(bad,c,h),"host-world loss carries no source identity");
+     bad=hw;bad.sourceRole=0;require(!validNpcCombat(bad,c,h),"host-world loss is never a player action");
+     bad=hw;bad.kind=NpcCombatMessage::Request;bad.request=1;bad.event=0;bad.before=bad.after=bad.maximum=bad.inflicted=0;bad.sourceRole=1;require(!validNpcCombat(bad,h,c),"the client cannot request host-world damage");
+     bad=hw;bad.inflicted=2;require(!validNpcCombat(bad,c,h),"host-world loss conserves health");
+     require(npcCombatHostWorldSource(0,0x2dcd29e9u,0x2dcd29e9u,false,false),"creature-sourced damage on the host passes natively");
+     require(!npcCombatHostWorldSource(1,0x2dcd29e9u,0x2dcd29e9u,false,false),"the client never passes replica damage");
+     require(!npcCombatHostWorldSource(0,1,0x1234,false,true)&&!npcCombatHostWorldSource(0,0x2dcd29e9u,0x1234,false,true)&&!npcCombatHostWorldSource(0,0x2dcd29e9u,0x1234,true,false),"player-owned damage stays captured");
+     require(!npcCombatHostWorldSource(0,0x3fff0010u,7,false,false)&&!npcCombatHostWorldSource(0,7,0x3fff0010u,false,false),"world sentinels (corpse contact, map triggers) stay captured");
+     require(npcCombatHelloHealth(1,30,20)==1&&npcCombatHelloHealth(0,20,30)==2&&npcCombatHelloHealth(0,30,30)==0&&npcCombatHelloHealth(1,30,30)==0,"the client follows a lower host health; the host waits for it");
+     require(npcCombatHelloHealth(1,20,30)==-1&&npcCombatHelloHealth(0,30,20)==-1&&npcCombatHelloHealth(1,30,0)==-1,"a replica never gains health and never dies by handshake");}
     auto badWorld=world;badWorld.sourceActorArm=0;require(!validNpcCombat(badWorld,c,h),"unattributed world collision rejected");
     badWorld=world;badWorld.sourceRole=1;require(!validNpcCombat(badWorld,c,h),"corpse cannot be disguised as player damage");
     badWorld=world;badWorld.kind=NpcCombatMessage::Request;badWorld.request=1;badWorld.event=0;badWorld.before=badWorld.after=badWorld.maximum=badWorld.inflicted=0;require(!validNpcCombat(badWorld,h,c),"client cannot request host-owned world damage");

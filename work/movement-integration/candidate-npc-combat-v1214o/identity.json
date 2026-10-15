@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-15T12:08:25.837008+02:00",
+  "dll": "8975AA899AD11C1905D22222A84F2BC05094DA11CC8F4789D6CFD065BA0E1066",
+  "probe": "0CBD969C61EDFD226429F0A4B072EF6758E851B42BB5474B6F65EAB8915CB202",
+  "previous": "candidate-npc-combat-v1214n",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1266/corvo-choke-bank.bin",
+      "sha256": "08684FDC8E7A7F450885B5B68B929053CCCB64CCAFC61C9E816A3CE3A73303A6"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1266/emily-choke-bank.bin",
+      "sha256": "A4EDC6A26BB799AB86138AE03B3972F6A16E207911A38BCDC2E48933447F79DB"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1214o on 1214n (#14 multi-enemy combat): host-world damage (neither attacker nor inflictor is the local player, a player-owned entity or a world sentinel; take 1270e: bloodflies on a bound checkpoint guard were refused, its channel retired, and the host's next sword hits and the death went unshared) passes the host capture natively; the host commits its observed native loss as an ordered HostWorld commit and the client removes exactly that loss by the native health subtraction (health vtable +0xf8). A Hello with a lower host health makes the client follow it (the host waits) instead of retiring the NPC for good. Combat JSON records each channel's retirement reason and shared health."
+}
