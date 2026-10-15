@@ -63,7 +63,17 @@ Earlier attempts:
 
 - **Restore latency (14–19 s)** is too slow for final quality.
   - The resume policy suspends on pause, but in these takes it never completed a restore: it faults on the first transient loss, and the watchdog performs every restore.
-- **Restore latency after pause/modal** (14–19 s in 1204f on 1203e) must be re-measured on 1203f; the load/restart cases already restore in 2–3 s. The reliable backlog itself is solved in 1203f: the culprit was usable-channel hellos.
+- **Restore latency after pause, re-measured on 1213h (#10, take [1230](../../work/natural-moveset/mission-presentation-resume-v1230), [audit 1232](../../work/movement-integration/restore-latency-audit-v1232.json); confirmed runtime):**
+
+  | Case | 1204f (1203e) | 1230 (1213h) |
+  |---|---|---|
+  | Client pause | 19.0 s | 1.56 s |
+  | Host pause | 17.4 s | 1.57 s |
+  | After the 60 m warp | 15.5 s | 0.33 s |
+  | Armed, facing | 6.9 s | 0.34 s |
+
+  - The reliable backlog is solved in 1203f: the culprit was usable-channel hellos.
+  - **New regression (#35):** after the shared tutorial modal, every `coop_movement_bank on` repair is refused on both peers, and the presentation did not return within 30 s (14.5 s in 1204f). 1213i adds refusal reason codes to find the failing condition.
 - **Warp hold.** After a 60 m harness warp, the host-side partner stayed at the old spot for 7–15 s.
   - Root cause: the strict source pose timeline rejected samples during a latency spike. 1203f rebases it (product only); re-test pending.
 - **Client-side visual** of the Corvo partner after load/restart: the spots must keep at least 2 m of reachable separation.
