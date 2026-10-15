@@ -1,0 +1,48 @@
+{
+  "source": "client",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote choke phase 1 presented",
+    "Remote choke phase 2 presented",
+    "Remote choke phase 3 presented"
+  ],
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -48.203,
+      -147.977,
+      66.4
+    ],
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T06:42:27.4995055+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "victim": {
+    "result": "peer_timeout",
+    "posesDelta": -58,
+    "rootsDelta": 0,
+    "bodyAppliedDelta": 0,
+    "positionBefore": [
+      -48.1108,
+      -147.559,
+      66.4
+    ],
+    "positionAfter": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "guardHealthObserverAfter": 40,
+  "restored": true
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T06:38:13.588686+02:00",
+  "generated": "2026-10-15T06:44:30.187092+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -5039,8 +5039,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "partial_host_source_victim_driven_by_npc_stream_product",
+      "visual_validation": "accepted_host_source_rear_choke_victim",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "paired victim alignment",
@@ -5051,10 +5051,15 @@
         "paired_fast_back_female"
       ],
       "deliverable_kind": "animation",
-      "notes": "Native front/back attacker and matching victim clips are shown together at original speed. Initial placement uses the victim auxiliary anchor as a partner frame; contact looks plausible in the pilot, but production alignment and runtime authority are unverified.",
+      "notes": "Audit 1249 (1213r, product controller): for a host-sourced rear choke the observer's guard follows the host's native victim through the NPC stream (struggle, collapse, body at the attacker's feet; visual accepted). A client-sourced takedown is not shared: the host's authoritative guard never learns of it (#46). Other takedowns, directions and body sizes remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
-      "in_game_recordings": []
+      "in_game_recordings": [
+        "paired-victim-product-v1248/host-choke-observer.mp4"
+      ],
+      "evidence": [
+        "../movement-integration/paired-victim-audit-v1249.json"
+      ]
     },
     {
       "id": "struggle_and_escape",
@@ -93687,6 +93692,46 @@
       "requirements": [
         "crouched_takedown"
       ],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248/host-choke-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Paired / rear choke victim under the product controller (source host) / paired-victim-product-v1248",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 25.92,
+      "container_fps": "337/13",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera behind the attacker; product controller with the NPC stream; natural guard AI.",
+      "review": "Held camera behind the attacker, client window, product controller: remote Corvo chokes the guard and the guard struggles in his arms, collapses and lies at his feet - the replica guard follows the host's native victim through the NPC stream. Natural paired takedown in the observer's world.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "paired_victim_alignment"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "paired-victim-product-v1248/client-choke-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / rear choke victim under the product controller (source client) / paired-victim-product-v1248",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.99,
+      "container_fps": "10500/389",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera behind the attacker; product controller with the NPC stream; natural guard AI.",
+      "review": "Host window: remote Emily presents the choke, but the host's guard is host-authoritative and never learns of the client's takedown; it keeps walking. Not accepted (victim not shared).",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
       "kind": "game"
     }
   ],
