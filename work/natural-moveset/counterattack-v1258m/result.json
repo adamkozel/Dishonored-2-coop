@@ -1,0 +1,103 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: face-client-counter: Outcome differs: source conscious, observer conscious, expected dead",
+  "cases": [
+    {
+      "approach": "face",
+      "source": "client",
+      "kind": "counter",
+      "observer": "host",
+      "passed": false,
+      "failure": "Outcome differs: source conscious, observer conscious, expected dead",
+      "checks": [
+        "Remote phase 106 presented"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "camera": "side1",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -39.36,
+          -152.71,
+          66.4
+        ],
+        "source": [
+          -39.36,
+          -152.71,
+          66.4
+        ]
+      },
+      "counterStarted": true,
+      "inputAt": "2026-10-15T18:33:12.7697483+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/combat/sword_parry_hit_1.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_hit_2.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_idle.midnightscene|2133",
+        "midnight/gameplay/player/base/combat/sword_parry_in.midnightscene|533",
+        "midnight/gameplay/player/base/combat/sword_parry_out.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000",
+        "midnight/gameplay/player/base/fatalities/fatality_rightarm_fast_a.midnightscene|1500"
+      ],
+      "sceneIds": [
+        106
+      ],
+      "attempts": 7,
+      "final": {
+        "source": {
+          "tick": 12961640,
+          "handle": 189269860,
+          "logic": 13,
+          "component": "0x260170d9360",
+          "actor": "0x26054f25a00",
+          "attributes": "0x26054c978d0",
+          "current": 10,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 12961671,
+          "handle": 189269860,
+          "logic": 13,
+          "component": "0x1e336fff660",
+          "actor": "0x1e35836e980",
+          "attributes": "0x1e3580c68d0",
+          "current": 10,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "conscious",
+        "observer": "conscious"
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Counterattack (#9): parry follow-up cycles against a host-owned guard under the product controller, both source roles: native parry and finisher scenes, partner phase, shared death and victim position; fixture restored after every case."
+}

@@ -61,6 +61,13 @@ inline bool npcPairedVariant(std::uint32_t v){const auto k=nativeTakedownKind(v)
 // The client asks for the host knockout when its native knockout scene begins (choke_win,
 // or a single-scene drop/slide/window/shadow-walk choke).
 inline bool npcPairedKnockoutVariant(std::uint32_t v){return nativeTakedownKind(v)==3;}
+// 1214ai (#9): a client's lethal paired scene whose victim is already a corpse on the
+// host. A sword finisher kills at its start, so the replayed kill reaches the host
+// before the first PairedHold (take 1258l). The corpse follows the client's victim
+// pose when it died within 3 s, and keeps following while holds arrive.
+inline bool npcPairedCorpseFollows(std::uint32_t variant,bool ready,bool corpse,unsigned long long corpseAt,unsigned long long until,unsigned long long tick){
+    return ready&&corpse&&nativeTakedownLethal(variant)&&corpseAt&&tick>=corpseAt&&(tick<until||tick-corpseAt<3000);
+}
 #pragma pack(push,1)
 struct NpcAuthorityHeader {
     std::uint32_t magic=0x414e3244,build=0x67a50cde;

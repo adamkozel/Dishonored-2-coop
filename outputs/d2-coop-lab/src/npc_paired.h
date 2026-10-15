@@ -15,15 +15,34 @@ bool npcPairedPartnerNear(const NpcAuthorityChannel& c,float range){
     float d=0;for(unsigned i=0;i<3;++i){const float x=npc[i]-remote.position[i];d+=x*x;}return d<=range*range;
 }
 void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick){
+    // 1214ai (#9): Emily's counter finisher (fatality_leftleg_medium_a, take 1258l) killed
+    // the host guard before her first hold arrived; the hold was refused on the corpse,
+    // all 63 victim poses were rejected, and the host guard fell where it stood, ~2 m from
+    // her. A lethal hold on a fresh corpse now holds that corpse animated so it follows
+    // the client's victim pose until 1.6 s after the last hold (the client keeps sending
+    // poses 1.5 s after its scene, through the ragdoll fall).
+    if(p.h.kind==NpcAuthorityMessage::PairedHold&&npcPairedCorpseFollows(p.h.reserved,c.ready,c.corpse,c.corpseAt,c.pairedCorpseUntil,tick)){
+        if(tick>=c.pairedCorpseUntil&&!npcPairedPartnerNear(c,4.f)){++npcPairedRefused;c.pairedResult="host_paired_corpse_refused_distance";return;}
+        if(tick>=c.pairedCorpseUntil){++npcPairedCorpses;c.pairedResult="host_paired_corpse";}
+        c.pairedVariant=p.h.reserved;c.pairedCorpseUntil=tick+1600;return;
+    }
     if(!c.ready||c.corpse||c.unconscious||!npcPairedVariant(p.h.reserved)){++npcPairedRefused;c.pairedResult="host_paired_refused_state";return;}
     // 1213x: distance gates only the start of a hold; the held NPC then follows the
     // client's victim pose (PairedPose), which the native choke drags with the attacker.
-    if(!c.hostPairedLease&&!npcPairedPartnerNear(c,3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
+    if(!c.hostPairedLease&&!c.hostPairedFollow&&!npcPairedPartnerNear(c,3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
     c.pairedVariant=p.h.reserved;c.pairedUntil=tick+1500;
     if(p.h.kind==NpcAuthorityMessage::PairedHold){
         if(!c.hostPairedLease){
             if(acquireNpcAiLease(c.lease)){c.hostPairedLease=true;++npcPairedHolds;c.pairedResult="host_paired_hold";}
-            else{releaseNpcAiLease(c.lease);++npcPairedRefused;c.pairedResult="host_paired_hold_refused";}
+            // 1214aj (#9): an alerted guard refuses the AI lease, so during Emily's counter
+            // finisher (take 1258m, fatality_rightarm_fast_a) the host guard walked 3 m away,
+            // her 47 victim poses were rejected and the lethal replay failed its 3 m source
+            // check: the guard got up in both worlds and killed her. A lethal scene now
+            // follows the client's victim pose without the lease (its root is presented at
+            // the client's victim, which also keeps the replay's proximity check true).
+            else{releaseNpcAiLease(c.lease);
+                if(nativeTakedownLethal(c.pairedVariant)){if(!c.hostPairedFollow){c.hostPairedFollow=true;++npcPairedFollows;c.pairedResult="host_paired_follow";}}
+                else{++npcPairedRefused;c.pairedResult="host_paired_hold_refused";}}
         }
         return;
     }
@@ -43,6 +62,7 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
 std::uint64_t npcPairedPins=0;
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick){
     if(c.hostPairedLease&&tick>=c.pairedUntil){releaseNpcAiLease(c.lease);c.hostPairedLease=false;c.pairedResult="host_paired_released";}
+    if(c.hostPairedFollow&&tick>=c.pairedUntil){c.hostPairedFollow=false;c.pairedResult="host_paired_follow_ended";}
     if(c.unconscious&&c.reversePoses&&c.unconsciousAt&&tick-c.unconsciousAt<3000&&(!c.reversePoseAt||tick-c.reversePoseAt>=350)&&nativeMutationAllowed){
         float transform[12]{};std::memcpy(transform,c.reverseRoot,12);
         if(!memoryRead(c.lease.binding.npc.actor+0x30c,transform+3,36))return;

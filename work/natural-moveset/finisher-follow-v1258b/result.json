@@ -1,0 +1,44 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: front-client-fatality: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "fatality",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "camera": "shoulder1",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -39.36,
+          -152.71,
+          66.4
+        ],
+        "source": [
+          -39.36,
+          -152.71,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T19:03:23.6045185+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/combat/sword_attack_focus_in.midnightscene|266",
+        "midnight/gameplay/player/base/combat/sword_recoil_left.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_leftb.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_recoil_rightb.midnightscene|733",
+        "midnight/gameplay/player/base/combat/sword_slash_left.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_leftb.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_right.midnightscene|1000",
+        "midnight/gameplay/player/base/combat/sword_slash_rightb.midnightscene|1000"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Counterattack (#9): parry follow-up cycles against a host-owned guard under the product controller, both source roles: native parry and finisher scenes, partner phase, shared death and victim position; fixture restored after every case."
+}

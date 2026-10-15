@@ -274,7 +274,39 @@ Nothing re-armed it outside checkpoint recovery, while the combat channels alrea
 |---|---|---|
 | [1270i](../../work/natural-moveset/mission-multicombat-v1270i) | 1214ah | Inconclusive (Corvo died at 17.8 s). Relayed hits damaged Emily (70 → 55 → 40); 25 bindings added and 14 retired on each peer |
 | [1258k](../../work/natural-moveset/counterattack-v1258k) | 1214ah | Fail: the relay was active, but the guard never swung at Emily while she attacked |
-| [1258l](../../work/natural-moveset/counterattack-v1258l) | 1214ah | Pass: Emily's counter (block held 1.6 s per cycle); [chapter 94](94-visual-sweep-counterattack-and-gestures.md#counterattack-sword-locks-and-b-swing-hits-9) |
+| [1258l](../../work/natural-moveset/counterattack-v1258l) | 1214ah | Pass (harness): relayed hits reach Emily, and her killing-blow finisher after a blocked hit is shared (not a counter-kill, audit 1281); [chapter 94](94-visual-sweep-counterattack-and-gestures.md#counterattack-sword-locks-and-b-swing-hits-9) |
+
+## Client sword finishers on the host (1214ai–1214ak)
+
+A sword finisher (a census fatality, lethal kind 5) is a paired scene: in the source's world the victim is pulled into the finisher. When the client plays one on a host-owned guard, the host must show that guard following Emily's victim pose.
+
+**Finding 1 (confirmed runtime, 1258l on 1214ah):** the host refused the hold because its guard was already dead. The finisher kills at its start, and the replayed kill reaches the host before the client's first `PairedHold`. All 63 victim poses were rejected, and the host's guard fell where it stood, about 2 m from Emily.
+
+**Fix (1214ai):** a lethal paired hold on a corpse that died within 3 s keeps that corpse animated. The corpse follows the client's victim pose until 1.6 s after the last hold; the client keeps sending poses for 1.5 s after its scene. The rule `npcPairedCorpseFollows` is unit-tested.
+
+**Finding 2 (confirmed runtime, 1258m on 1214ai):** an alerted guard refuses the AI lease (`host_paired_hold_refused`). So during Emily's `fatality_rightarm_fast_a` the host guard walked 3 m away and her 47 victim poses were rejected. The lethal replay then failed its 3 m source check (`native_replay_failed`). The guard got up in both worlds and killed her.
+
+**Fix (1214aj):**
+- A lethal scene whose lease is refused still follows the client's victim pose (`host_paired_follow`). Its presented root sits at the client's victim, which also keeps the replay's proximity check true.
+- The NPC attack relay drops hits from a guard inside the client's paired scene.
+
+**Finding 3 (confirmed runtime, finisher-follow-v1258a/f on 1214aj, and earlier takes):** in Emily's own world the guard's body rose 7–26 m during her finisher:
+- takes 1256f and 1256g on 1214g: z 74 and 92.9;
+- take 1258l: z 74.
+
+The host's corpse stream used to pull the body back. Once the host followed the client pose, both bodies ended at z 75 (video of finisher-follow-v1258f).
+
+**Cause (confirmed runtime by the fix):** the host's kill reaches the client mid-finisher. The client then holds its corpse replica animated while the native ragdoll starts.
+
+**Fix (1214ak):** the client applies that hold only after its paired window ends.
+
+| Take | Candidate | Result |
+|---|---|---|
+| [finisher-follow-v1258a](../../work/natural-moveset/finisher-follow-v1258a) | 1214aj | Pass (runtime): `fatality_generic_right` (92). Hold, then corpse follow: 36 victim poses accepted, 0 rejected. Not filmed; body at z 74.6 in both worlds |
+| [finisher-follow-v1258c](../../work/natural-moveset/finisher-follow-v1258c) | 1214aj | Pass (runtime): `fatality_head_medium_b` (97); alerted guard, lease refused, `host_paired_follow`, 50 poses accepted. The fight sat at the bottom edge of the frame |
+| [finisher-follow-v1258f](../../work/natural-moveset/finisher-follow-v1258f) | 1214aj | Pass (runtime): `fatality_head_medium_a` (96), visual defect: the body launched to z 75 in both worlds |
+| [finisher-follow-v1258i](../../work/natural-moveset/finisher-follow-v1258i) | 1214ak | Pass: `fatality_generic_left` (91), 42 poses accepted. The guard falls at Emily's feet on Corvo's screen and stays on the floor (max z 67.4, final 66.7 in both worlds). **Visual: accepted (functional)** |
+| [lethal-regression-v1258a](../../work/natural-moveset/lethal-regression-v1258a) | 1214ak | Pass (regression): a client back lethal (`assassination_back`) still holds the host guard; 52 poses accepted, 0.0 m apart, body on the floor |
 
 ## Open
 
