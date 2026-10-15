@@ -37,6 +37,46 @@ void serviceNpcKnockoutTest(){
     if(!applyNativeKnockout(t.before,1,t.after,t.decl)){t.result="apply_refused";return;}
     t.result=nativeNpcUnconscious(t.after)?"unconscious":t.after.current<=0?"dead":"unchanged";
 }
+// Lab-only (coop_npc_combat hostworld_test, 1214r): host-world damage on a bound NPC
+// entering the installed damage observer exactly as a creature's hit does (take 1270e:
+// bloodfly damage_periodic, attacker and inflictor another NPC). Target: the bound,
+// ready, conscious combat NPC nearest the host player; source: another streamed NPC.
+constexpr char kNpcHostWorldTestDecl[]="components/characters/animals/bloodfly/damage_periodic.damage";
+struct NpcHostWorldTest{bool requested=false;const char* result="idle";std::uint32_t target=0,source=0;NativeHealth before{},after{};float amount=0;std::uint64_t runs=0;};
+NpcHostWorldTest npcHostWorldTest;
+void serviceNpcHostWorldTest(){
+    auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
+    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!npcCombat.enabled){t.result="context_refused";return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float best=1e12f;NpcAuthorityChannel* target=nullptr;
+    for(const auto& b:npcCombat.channels){if(!b.enabled||!b.ready||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
+        if(!c||c->unconscious||!npcCombatIdentity(*c,h)||h.current<=3)continue;
+        float root[3]{};if(!memoryRead(c->lease.binding.npc.actor+0x300,root,12))continue;
+        float d=0;for(unsigned i=0;i<3;++i){const float x=root[i]-outgoing.position[i];d+=x*x;}
+        if(d<best){best=d;target=c;}}
+    if(!target){t.result="no_bound_target";return;}
+    for(const auto& c:npcChannels)if(c.enabled&&c.arm!=target->arm&&c.lease.binding.npc.handle){t.source=c.lease.binding.npc.handle;break;}
+    if(!t.source){t.result="no_source_npc";return;}
+    t.target=target->lease.binding.npc.handle;
+    if(!readNativeHealth(memoryRead,base,t.target,t.before)||t.before.actor!=target->lease.binding.npc.actor){t.result="health_refused";return;}
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kNpcHostWorldTestDecl,false,false);
+    std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138){t.result="declaration_refused";return;}
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+    std::memcpy(&t.amount,params.data()+8,4);if(!(t.amount>0)||t.amount>=t.before.current){t.amount=2;std::memcpy(params.data()+8,&t.amount,4);}
+    std::memcpy(params.data()+0x50,&t.source,4);std::memcpy(params.data()+0x54,&t.source,4);
+    observeNativeDamage(reinterpret_cast<void*>(t.before.component),params.data(),result.data());
+    if(!readNativeHealth(memoryRead,base,t.target,t.after)){t.result="after_refused";return;}
+    t.result=t.after.current<t.before.current?"damaged":"unchanged";
+}
+void writeNpcHostWorldTest(){
+    if(!*statusPath||!npcHostWorldTest.runs)return;const auto& t=npcHostWorldTest;
+    char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-hostworld-test.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
+    fprintf(f,"{\"runs\":%llu,\"result\":\"%s\",\"target\":%u,\"source\":%u,\"amount\":%.4f,\"before\":%.4f,\"after\":%.4f,\"maximum\":%.3f}",
+        static_cast<unsigned long long>(t.runs),t.result,t.target,t.source,t.amount,t.before.current,t.after.current,t.before.maximum);
+    const bool ok=!ferror(f);if(!fclose(f)&&ok)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
+}
 void writeNpcKnockoutTest(){
     if(!*statusPath||!npcKnockoutTest.runs)return;const auto& t=npcKnockoutTest;
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-knockout.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);

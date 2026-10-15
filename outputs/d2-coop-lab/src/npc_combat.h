@@ -5,6 +5,9 @@
 // Both roles explicitly opt in after NPC authority negotiation. Client hits
 // become requests; only the host orders outcomes. Unsupported damage stops
 // this experiment rather than silently writing a different local health.
+// 1214o: host-world damage (creature or NPC sources) applies natively on the
+// host and reaches the client as an ordered HostWorld commit of the host's
+// observed native loss, removed by the native health subtraction.
 struct NpcCombatChannel {
     std::uint64_t arm=0,peerArm=0,peerNonce=0,event=0,request=0,peerRequest=0,pending=0;
     bool ready=false,enabled=true,terminal=false,deathPending=false;
@@ -13,6 +16,7 @@ struct NpcCombatChannel {
     NpcCombatDamage deathDamage=NpcCombatDamage::None;EnemyMeleeGeometry deathGeometry{};
     NativeHealth deathBefore{},deathAfter{};float deathInflicted=0;NpcCombatScriptDamage deathScript{};NpcCombatRangedDamage deathRanged{};
     NpcCombatPendingRequests pendingRequests{};
+    float health=0; // 1214o host: the health last shared on this channel
 };
 struct NpcCombatPacketTrace {
     ULONGLONG tick=0;const char* result="none";
@@ -33,6 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -44,6 +49,7 @@ NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest
 // only that NPC, and the product controller re-arms a stopped session.
 bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
 const char* npcCombatLastRetire="none";
+std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0};std::uint64_t npcCombatFollowSubtractions=0;
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
@@ -55,11 +61,11 @@ void traceNpcCombat(const CoopNpcCombat& p,bool sent,const char* result,std::uin
 void rejectNpcCombat(const CoopNpcCombat& p,const char* reason,std::uint64_t peerNonce=0){
     ++npcCombat.rejected;traceNpcCombat(p,false,reason,peerNonce);
 }
-struct NpcCombatNativeApplication {NpcAuthorityChannel* channel=nullptr;NativeHealth before{};bool seen=false,terminal=false,failed=false;};
+struct NpcCombatNativeApplication {NpcAuthorityChannel* channel=nullptr;NativeHealth before{};bool seen=false,terminal=false,failed=false,reconcile=false;};
 thread_local NpcCombatNativeApplication* npcCombatNativeApplication=nullptr;
 std::uint64_t npcCombatSubtractions=0,npcCombatLethalSubtractions=0;
 std::array<unsigned char,144> npcCombatLastInfo{};unsigned npcCombatLastOwnerFlags=0;std::string npcCombatLastDecl;
-struct NpcCombatCaptureBinding {NativeNpcAuthority native{};std::uint64_t nonce=0,arm=0;};
+struct NpcCombatCaptureBinding {NativeNpcAuthority native{};std::uint64_t nonce=0,arm=0;bool unconscious=false;};
 struct NpcCombatCapture {std::uint64_t nonce=0,arm=0;ULONGLONG tick=0;DWORD thread=0;std::uintptr_t component=0;float position[3]{};alignas(16) std::array<unsigned char,144> info{};NativeDamageSource inflictor{},attacker{};unsigned rangedWeapon=0;};
 SRWLOCK npcCombatCaptureLock=SRWLOCK_INIT;
 std::vector<NpcCombatCaptureBinding> npcCombatCaptureBindings;
@@ -107,6 +113,13 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
         if(!memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x39a5290,&game,8)||game!=n.health.game||worldIdentityEntity(memoryRead,n.health.game,n.npc.handle)!=n.npc.actor||!memoryRead(c+0x10,&owner,8)||owner!=n.npc.actor||
            !memoryRead(c+0x18,&generation,4)||generation!=n.healthGeneration)continue;
         std::uintptr_t decl=0;if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl)){++npcCombatPassedThrough;break;}
+        // 1214q: host hits on an unconscious NPC stay native; the loss is a HostWorld
+        // commit and the death is Dead (take 1271d).
+        if(!localRole&&b.unconscious){npcCombatHostUnconsciousPassed.fetch_add(1);break;}
+        if(!localRole){unsigned inflictor=0,attacker=0;const auto i=reinterpret_cast<std::uintptr_t>(info),base=reinterpret_cast<std::uintptr_t>(gameImage);
+            if(memoryRead(i+0x50,&inflictor,4)&&memoryRead(i+0x54,&attacker,4)){
+                const auto in=readNativeDamageSource(memoryRead,base,game,inflictor),at=readNativeDamageSource(memoryRead,base,game,attacker);
+                if(npcCombatHostWorldSource(localRole,attacker,inflictor,at.valid&&at.localOwned,in.valid&&in.localOwned)){npcCombatHostWorldPassed.fetch_add(1);break;}}}
         handled=true;NpcCombatCapture e{};e.nonce=b.nonce;e.arm=b.arm;e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.component=c;
         if(npcCombatCaptures.size()>=64||!memoryRead(reinterpret_cast<std::uintptr_t>(info),e.info.data(),e.info.size())||!memoryRead(n.npc.actor+0x300,e.position,12))npcCombatCaptureFault.store(1);
         else{
@@ -182,10 +195,19 @@ void stopNpcCombat(const char* reason,bool notify=true){
     if(npcCombat.enabled&&notify)for(auto& b:npcCombat.channels){auto* c=npcCombatActor(b.arm);if(c&&b.peerNonce)sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Stop));}
     npcCombat.enabled=false;npcCombat.result=reason;npcCombat.outgoing.clear();for(auto& b:npcCombat.channels)b.ready=false;
 }
+// 1214q: an unconscious replica's AI is not in the paused state; its exact
+// incarnation and life still bind it (take 1271e: unbound, the client's kill of
+// an unconscious guard applied only in its own world).
 bool npcCombatIdentity(NpcAuthorityChannel& c,NativeHealth& health){
     NativeNpcAuthority fresh{};return c.enabled&&c.ready&&c.peerArm&&c.lease.binding.npc.handle!=probeHandle&&
         readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh)&&
-        sameNpcAuthorityIdentity(c.lease.binding,fresh,false)&&npcAuthorityLiving(fresh)&&(!localRole||npcAuthorityPaused(fresh))&&(health=fresh.health,true);
+        sameNpcAuthorityIdentity(c.lease.binding,fresh,false)&&npcAuthorityLiving(fresh)&&(!localRole||c.unconscious||npcAuthorityPaused(fresh))&&(health=fresh.health,true);
+}
+// 1214p: Dead reconciliation identity: exact incarnation and alive, any AI state.
+bool npcReconcileIdentity(NpcAuthorityChannel& c,NativeHealth& health){
+    NativeNpcAuthority fresh{};return c.enabled&&c.ready&&c.lease.binding.npc.handle!=probeHandle&&
+        readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh)&&
+        sameNpcAuthorityIdentity(c.lease.binding,fresh,false)&&npcAuthorityLiving(fresh)&&(health=fresh.health,true);
 }
 bool npcCombatNear(NpcAuthorityChannel& c,unsigned role,float range=3){
     const float* p=role==localRole?outgoing.position:remote.position;float root[3]{},d=0;
@@ -334,7 +356,7 @@ bool npcCombatRetireBeforeDeath(NpcAuthorityChannel& c){
     // 1113: release the AI ownership for the native death, but keep the
     // channel as a corpse stream (host body authority for the settle window).
     releaseNpcAiLease(c.lease);{auto& s=npcStreamSessionState;s.released+=c.lease.released;s.retired+=c.lease.retired;s.lost+=c.lease.lost;}
-    c.corpse=true;c.corpseUntil=GetTickCount64()+8000;c.result=localRole?"client_corpse":"host_corpse";npcCombat.preDeathReleased+=c.lease.released;
+    c.corpse=true;c.corpseAt=GetTickCount64();c.corpseUntil=c.corpseAt+8000;c.result=localRole?"client_corpse":"host_corpse";npcCombat.preDeathReleased+=c.lease.released;
     return !c.lease.references&&!c.lease.lost&&!c.lease.retired;
 }
 bool npcCombatReadResult(NpcAuthorityChannel& c,const NativeHealth& before,void* result,NativeHealth& after,float& inflicted,bool terminal,bool allowZero=false){
@@ -362,13 +384,18 @@ bool prepareNpcCombatSubtraction(void* component,float amount){
     auto* a=npcCombatNativeApplication;
     if(!a||reinterpret_cast<std::uintptr_t>(component)!=a->before.component)return true;
     auto* c=a->channel;NativeHealth current{};
-    if(a->seen||!c||!npcCombatScope(GetTickCount64())||!npcCombatIdentity(*c,current)||
+    // 1214p: a reconciled death may target an unconscious replica, whose AI is not
+    // in the paused state (take 1271c refused every Dead); its identity and life
+    // are still exact, and the native kill may exceed the remaining health.
+    const bool identity=c&&(a->reconcile?npcReconcileIdentity(*c,current):npcCombatIdentity(*c,current));
+    if(a->seen||!c||(!a->reconcile&&!npcCombatScope(GetTickCount64()))||!identity||
        current.component!=a->before.component||current.actor!=a->before.actor||current.game!=a->before.game||
-       current.current!=a->before.current||!std::isfinite(amount)||amount<0||amount>current.current){a->failed=true;return false;}
+       current.current!=a->before.current||!std::isfinite(amount)||amount<0||(!a->reconcile&&amount>current.current)){a->failed=true;return false;}
     a->seen=true;++npcCombatSubtractions;a->terminal=npcCombatNativeLethal(current.current,amount);
+    if(a->reconcile&&!a->terminal){a->failed=true;return false;}
     if(a->terminal){
         npcCombatNativeStage="native_lethal_subtraction_ownership";
-        if(!npcCombatRetireBeforeDeath(*c)){a->failed=true;return false;}
+        if(!npcCombatRetireBeforeDeath(*c)&&!(a->reconcile&&c->corpse)){a->failed=true;return false;}
         ++npcCombatLethalSubtractions;
     }
     return true;
@@ -426,12 +453,57 @@ bool npcCombatApply(NpcAuthorityChannel& c,const NativeHealth& before,unsigned s
     return !application.failed&&npcCombatReadResult(c,before,result.data(),after,inflicted,application.terminal,world)&&
         (application.seen||(world&&inflicted==0&&after.current==before.current));
 }
+unsigned npcCombatDeathShare(std::uint64_t arm){unsigned share=0;
+    for(const auto& b:npcCombat.channels)if(b.arm==arm){if(b.terminal)return 2;if(b.deathPending)share=1;}return share;
+}
+// 1214n (#14): Dead from the host. The replica dies by the native silent kill
+// declaration inside the native entry; its AI ownership is released at the lethal
+// subtraction exactly as for a shared death, and the stream keeps presenting the
+// host's corpse. The attacker is the world (0x3fff0010), never the client player.
+constexpr char kNpcReconcileKillDecl[]="components/base/damage/kill_no_reaction_damage.damage";
+void clientNpcDead(NpcAuthorityChannel& c){
+    const auto refuse=[&](const char* why){++npcClientDeadRefused;npcClientDeadLast=why;c.deathShare=why;};
+    if(c.corpse){++npcClientDeadAlready;return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth before{},after{};
+    if(!readNativeHealth(memoryRead,base,c.lease.binding.npc.handle,before)||before.actor!=c.lease.binding.npc.actor){refuse("client_dead_identity");return;}
+    if(!(before.current>0)){++npcClientDeadAlready;return;}
+    if(npcCombatDeathShare(c.arm)==1)return;
+    if(!realNativeDamage||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||npcCombatNativeApplication||(before.ownerFlags&8)){refuse("client_dead_context");return;}
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kNpcReconcileKillDecl,false,false);
+    std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138){refuse("client_dead_declaration");return;}
+    memoryRead(decl+0x5c,&npcReconcileDeclAmount,4);memoryRead(decl+0x60,&npcReconcileDeclFlags,8);memoryRead(decl+0x68,npcReconcileDeclReactions,8);
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};const unsigned attacker=0x3fff0010u;
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());std::memcpy(params.data()+0x54,&attacker,4);
+    NpcCombatNativeApplication application{&c,before};application.reconcile=true;npcCombatNativeApplication=&application;
+    realNativeDamage(reinterpret_cast<void*>(before.component),params.data(),result.data());npcCombatNativeApplication=nullptr;
+    const bool read=readNativeHealth(memoryRead,base,before.handle,after)&&after.actor==before.actor;
+    if(read&&after.current<=0&&!c.corpse){npcCombatRetireBeforeDeath(c);refuse("client_dead_unhooked");return;}
+    if(application.failed||!application.seen||!application.terminal||!read||after.current>0){refuse("client_dead_not_lethal");return;}
+    ++npcClientDeadApplied;npcClientDeadLast=c.deathShare="client_dead_from_host";
+}
+// 1214o: the replica follows a host native loss it cannot replay (host-world damage,
+// or a host hit outside a bound channel) by the native per-component health
+// subtraction (health vtable +0xf8, where every native damage ends). Exact result,
+// never lethal, never a gain.
+bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float target,NativeHealth& after){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!localRole||!realNativeHealthSubtract||!std::isfinite(target)||!(target>0)||!(target<before.current)||
+       GetCurrentThreadId()!=engineThread.load()||npcCombatNativeApplication||before.actor!=c.lease.binding.npc.actor)return false;
+    for(unsigned pass=0;pass<2;++pass){NativeHealth now{};
+        if(!readNativeHealth(memoryRead,base,before.handle,now)||now.actor!=before.actor||now.component!=before.component||now.game!=before.game||(!pass&&now.current!=before.current))return false;
+        if(now.current==target){after=now;return true;}
+        if(!(now.current>target)||(pass&&!npcCombatClose(now.current,target)))return false;
+        realNativeHealthSubtract(reinterpret_cast<void*>(before.component),now.current-target);++npcCombatFollowSubtractions;
+    }
+    return readNativeHealth(memoryRead,base,before.handle,after)&&after.actor==before.actor&&after.current==target;
+}
 void npcCombatCommit(NpcAuthorityChannel& c,NpcCombatChannel& b,unsigned source,std::uint64_t request,NpcCombatDamage damage,const EnemyMeleeGeometry& geometry,const NativeHealth& before,const NativeHealth& after,float inflicted,std::uint64_t sourceArm=0,const NpcCombatScriptDamage& script={},const NpcCombatRangedDamage& ranged={}){
     auto p=npcCombatPacket(c,b,NpcCombatMessage::Commit);p.sourceRole=source;p.request=request;p.event=++b.event;p.damage=damage;p.geometry=geometry;
     p.before=before.current;p.after=after.current;p.maximum=before.maximum;p.inflicted=inflicted;
     p.sourceActorArm=sourceArm;p.script=script;p.ranged=ranged;
     if(npcCombat.outgoing.size()>=64||!validNpcCombat(p,remote,outgoing)){stopNpcCombat("commit_queue_or_validation");return;}
-    npcCombat.outgoing.push_back(p);++npcCombat.committed;if(after.current==0){b.terminal=true;b.pending=0;b.pendingRequests.clear();++npcCombat.deaths;}
+    npcCombat.outgoing.push_back(p);++npcCombat.committed;b.health=after.current;if(after.current==0){b.terminal=true;b.pending=0;b.pendingRequests.clear();++npcCombat.deaths;}
     if(source==2)++npcCombat.worldCommitted;
 }
 void npcCombatDeferDeath(NpcCombatChannel& b,unsigned source,std::uint64_t request,std::uint64_t event,NpcCombatDamage damage,
@@ -452,6 +524,20 @@ void serviceNpcCombatDeaths(ULONGLONG tick){
             npcCombatCommit(*c,b,b.deathSource,b.deathRequest,b.deathDamage,b.deathGeometry,b.deathBefore,b.deathAfter,b.deathInflicted,b.deathSourceArm,b.deathScript,b.deathRanged);
             if(!npcCombat.enabled)return;
         }else{b.event=b.deathEvent;b.terminal=true;b.pending=0;b.pendingRequests.clear();++npcCombat.applied;++npcCombat.deaths;if(b.deathSource==2)++npcCombat.worldApplied;}
+    }
+}
+// 1214o: host-world damage the capture passes natively (take 1270e: bloodflies on a
+// bound checkpoint guard were refused, the channel retired, and the host's next
+// sword hits and the guard's death went unshared). The host commits its observed
+// native loss in event order; a death stays the native combat outcome's or Dead's.
+void serviceNpcCombatHostWorld(){
+    for(auto& b:npcCombat.channels){if(!b.enabled||!b.ready||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
+        if(!c||!npcCombatIdentity(*c,h))continue;
+        if(!(b.health>0)){b.health=h.current;continue;}
+        if(h.current>b.health){++npcCombat.hostWorldGains;b.health=h.current;continue;}
+        if(h.current==b.health)continue;
+        NativeHealth before=h;before.current=b.health;
+        npcCombatCommit(*c,b,2,0,NpcCombatDamage::HostWorld,{},before,h,b.health-h.current);if(!npcCombat.enabled)return;++npcCombat.hostWorldCommitted;
     }
 }
 bool processNpcCombatCapture(NpcCombatCapture& capture){
@@ -521,7 +607,7 @@ void beginNpcCombat(){
     npcCombatSubtractions=npcCombatLethalSubtractions=0;
     npcCombatLastInfo={};npcCombatLastOwnerFlags=0;npcCombatLastDecl.clear();
     clearNpcCombatCapture();npcCombatCaptureFault.store(0);
-    for(auto& c:npcChannels){NativeHealth h{};if(c.enabled&&c.ready&&c.peerArm&&!c.corpse&&!c.unconscious&&npcCombatIdentity(c,h)){NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=npcCombat.started;npcCombat.channels.push_back(b);}}
+    for(auto& c:npcChannels){NativeHealth h{};if(c.enabled&&c.ready&&c.peerArm&&!c.corpse&&npcCombatIdentity(c,h)){NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=npcCombat.started;npcCombat.channels.push_back(b);}}
     if(!readNativeDamageTriggers(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,npcCombat.triggers)){stopNpcCombat("trigger_catalog_unavailable");return;}
     if(npcCombat.channels.empty())npcCombat.result="waiting_for_actors";
 }
@@ -533,7 +619,7 @@ inline bool npcCombatChannelBlocks(const NpcCombatChannel& b,ULONGLONG tick){
 }
 void syncNpcCombatChannels(ULONGLONG tick){
     for(auto& b:npcCombat.channels){if(!b.enabled)continue;auto* c=npcCombatActor(b.arm);if(!c||!c->enabled||c->peerArm!=b.peerArm)retireNpcCombatChannel(b,"actor_unbound");}
-    for(auto& c:npcChannels){if(!c.enabled||!c.ready||!c.peerArm||c.corpse||c.unconscious)continue;
+    for(auto& c:npcChannels){if(!c.enabled||!c.ready||!c.peerArm||c.corpse)continue;
         if(std::any_of(npcCombat.channels.begin(),npcCombat.channels.end(),[&](const auto& b){return b.arm==c.arm&&b.peerArm==c.peerArm&&npcCombatChannelBlocks(b,tick);}))continue;
         NativeHealth h{};if(!npcCombatIdentity(c,h))continue;
         NpcCombatChannel b{};b.arm=c.arm;b.peerArm=c.peerArm;b.started=tick;npcCombat.channels.push_back(b);++npcCombatChannelsAdded;}
@@ -582,7 +668,15 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
         if(b.terminal||b.deathPending){rejectNpcCombat(p,"receive_terminal_hello",b.peerNonce);return;}
         traceNpcCombat(p,false,"hello",b.peerNonce);
         if(b.ready&&b.peerNonce==p.sourceNonce){sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Ready));return;}
-        NativeHealth h{};if((b.peerNonce&&b.peerNonce!=p.sourceNonce)||!npcCombatIdentity(*c,h)||h.current!=p.before||h.maximum!=p.maximum){retireNpcCombatChannel(b,"initial_health_or_nonce_mismatch");return;}
+        NativeHealth h{};if((b.peerNonce&&b.peerNonce!=p.sourceNonce)||!npcCombatIdentity(*c,h)||h.maximum!=p.maximum){retireNpcCombatChannel(b,"initial_health_or_nonce_mismatch");return;}
+        // 1214o: a host loss outside a bound channel no longer retires the NPC for good.
+        switch(npcCombatHelloHealth(localRole,h.current,p.before)){
+        case 0:break;
+        case 1:{NativeHealth after{};if(!npcCombatFollowHost(*c,h,p.before,after)){retireNpcCombatChannel(b,"initial_health_follow_failed");return;}++npcCombat.helloFollowed;h=after;break;}
+        case 2:++npcCombat.helloWaited;return;
+        default:retireNpcCombatChannel(b,"initial_health_or_nonce_mismatch");return;
+        }
+        if(!localRole)b.health=h.current;
         b.peerNonce=p.sourceNonce;sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Ready));return;
     }
     if(p.targetNonce!=npcCombat.nonce||!b.peerNonce||p.sourceNonce!=b.peerNonce){rejectNpcCombat(p,"receive_nonce",b.peerNonce);return;}
@@ -607,7 +701,10 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
     if(!npcCombatIdentity(*c,before)){retireNpcCombatChannel(b,"actor_lifecycle_changed");return;}
     if(p.kind==NpcCombatMessage::Commit&&(before.current!=p.before||before.maximum!=p.maximum||
        (p.sourceRole==1&&b.pending!=p.request))){retireNpcCombatChannel(b,"replica_or_request_diverged");return;}
-    if(!npcCombatApply(*c,before,p.sourceRole,p.damage,p.geometry,after,inflicted,sourceArm,p.script,p.ranged)){retireNpcCombatChannel(b,"native_replay_failed");return;}
+    if(p.damage==NpcCombatDamage::HostWorld){
+        if(p.kind!=NpcCombatMessage::Commit||!npcCombatFollowHost(*c,before,p.after,after)){retireNpcCombatChannel(b,"host_world_follow_failed");return;}
+        inflicted=p.inflicted;++npcCombat.hostWorldApplied;
+    }else if(!npcCombatApply(*c,before,p.sourceRole,p.damage,p.geometry,after,inflicted,sourceArm,p.script,p.ranged)){retireNpcCombatChannel(b,"native_replay_failed");return;}
     if(p.kind==NpcCombatMessage::Commit&&(after.current!=p.after||inflicted!=p.inflicted)){retireNpcCombatChannel(b,"native_replica_result_diverged");return;}
     if(after.current==0){npcCombatDeferDeath(b,p.sourceRole,p.request,p.event,p.damage,p.geometry,before,after,inflicted,sourceArm,p.script,p.ranged);return;}
     if(p.kind==NpcCombatMessage::Request){b.peerRequest=p.request;++npcCombat.requests;npcCombatCommit(*c,b,1,p.request,p.damage,p.geometry,before,after,inflicted,0,{},p.ranged);}
@@ -659,6 +756,7 @@ void serviceNpcCombat(ULONGLONG tick){
     AcquireSRWLockExclusive(&npcCombatCaptureLock);captured.swap(npcCombatCaptures);ReleaseSRWLockExclusive(&npcCombatCaptureLock);
     for(auto& e:captured){processNpcCombatCapture(e);if(!npcCombat.enabled)return;}
     serviceNpcCombatDeaths(GetTickCount64());if(!npcCombat.enabled)return;
+    if(!localRole){serviceNpcCombatHostWorld();if(!npcCombat.enabled)return;}
     // Drain commits before any new handshake health comparison.
     auto queue=std::move(npcCombat.outgoing);npcCombat.outgoing.clear();for(const auto& p:queue)if(!sendNpcCombat(p)){stopNpcCombat("transport_failed");return;}
     if(tick-npcCombat.helloAt>=500){npcCombat.helloAt=tick;
@@ -672,14 +770,14 @@ void serviceNpcCombat(ULONGLONG tick){
     const bool ready=std::all_of(npcCombat.channels.begin(),npcCombat.channels.end(),[](const auto& b){return !b.enabled||b.ready;});
     npcCombat.result=!any?"waiting_for_actors":ready?"active_native_melee":"negotiating";
     std::vector<NpcCombatCaptureBinding> bindings;
-    if(npcCombat.enabled)for(const auto& b:npcCombat.channels)if(b.enabled&&b.ready&&!b.terminal&&!b.deathPending){auto* c=npcCombatActor(b.arm);if(c&&c->enabled)bindings.push_back({c->lease.binding,npcCombat.nonce,b.arm});}
+    if(npcCombat.enabled)for(const auto& b:npcCombat.channels)if(b.enabled&&b.ready&&!b.terminal&&!b.deathPending){auto* c=npcCombatActor(b.arm);if(c&&c->enabled)bindings.push_back({c->lease.binding,npcCombat.nonce,b.arm,c->unconscious});}
     AcquireSRWLockExclusive(&npcCombatCaptureLock);npcCombatCaptureBindings=std::move(bindings);ReleaseSRWLockExclusive(&npcCombatCaptureLock);
 }
 void repeatNpcCombat(){if(npcCombat.enabled&&npcCombat.lastSent.sourceNonce==npcCombat.nonce&&npcCombat.lastSent.event+npcCombat.lastSent.request)sendNpcCombat(npcCombat.lastSent);}
 void writeNpcCombat(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-combat.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     const auto& s=npcCombat;fprintf(f,"{\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
-    for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false");}
+    for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);
     for(unsigned i=0;i<s.sent.size();++i)fprintf(f,"%s%llu",i?",":"",s.sent[i]);
@@ -706,5 +804,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load());
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

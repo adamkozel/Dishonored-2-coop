@@ -1,0 +1,122 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-choke: Kill outcome differs: source dead, observer unconscious",
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": false,
+      "failure": "Kill outcome differs: source dead, observer unconscious",
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Source killed the unconscious guard (attempt 1)"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -42.7154,
+          -143.4,
+          66.4
+        ],
+        "observer": [
+          -39.6313,
+          -145.644,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T12:22:09.4284099+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 47145250,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x293cb1ea690",
+          "actor": "0x293d9f75460",
+          "attributes": "0x293d9cc88d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 47145265,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1c96eb9a690",
+          "actor": "0x1c98b711fd0",
+          "attributes": "0x1c98b48b8d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "killAttempts": 1,
+      "killOutcome": {
+        "source": "dead",
+        "observer": "unconscious"
+      },
+      "deathShare": {
+        "source": "none",
+        "observer": "none",
+        "sourceRelevance": {
+          "deadReconciled": 0,
+          "deadSent": 0,
+          "combatSharedDeaths": 0
+        },
+        "observerRelevance": {
+          "clientDeadApplied": 0,
+          "clientDeadAlready": 0,
+          "clientDeadRefused": 0,
+          "clientDeadLast": "none",
+          "reconcileDecl": [
+            0.0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 unshared death: the source chokes the Dunwall tutorial guard under the product controller, then kills the unconscious body; the guard must end dead in both worlds (1214n Dead reconciliation); fixture restored after every case."
+}

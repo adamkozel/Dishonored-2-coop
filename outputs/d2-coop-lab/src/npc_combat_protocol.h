@@ -7,14 +7,32 @@
 enum class NpcCombatMessage:unsigned {Hello=1,Ready,Request,Commit,Stop};
 // Kick (1106): native player kick, player_kick.damage (amount10, type0x80,
 // reactions 1/1, inflictor = the kicking player itself; confirmed 1105).
-enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick};
+// HostWorld (1214o, #14): host-world damage the client cannot replay (a creature or
+// NPC source, take 1270e: bloodflies on a checkpoint guard). The host lets it apply
+// natively and commits its observed native loss in event order; the client removes
+// exactly that loss by the native health subtraction. Never lethal, never a gain.
+enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld};
 #pragma pack(push,1)
 struct NpcCombatScriptDamage {std::uint64_t trigger=0,declaration=0;float amount=0;unsigned reserved=0;};
 struct NpcCombatRangedDamage {std::uint64_t declaration=0;float amount=0,distance=0;unsigned weapon=0;};
 #pragma pack(pop)
 inline bool emptyNpcScript(const NpcCombatScriptDamage& s){return !s.trigger&&!s.declaration&&s.amount==0&&!s.reserved;}
 inline bool validNpcScript(const NpcCombatScriptDamage& s){return s.trigger&&npcDamageDeclarationName(s.declaration)&&std::isfinite(s.amount)&&s.amount>=0&&s.amount<=1000000&&!s.reserved;}
-inline bool npcCombatWorldDamage(NpcCombatDamage d){return d==NpcCombatDamage::Corpse||d==NpcCombatDamage::MapTrigger;}
+inline bool npcCombatWorldDamage(NpcCombatDamage d){return d==NpcCombatDamage::Corpse||d==NpcCombatDamage::MapTrigger||d==NpcCombatDamage::HostWorld;}
+// Host-world damage passes the host capture natively: neither the attacker nor the
+// inflictor is the local player, a player-owned entity or a world sentinel (corpse
+// contact and map triggers stay captured and replayed).
+inline bool npcCombatHostWorldSource(unsigned localRole,unsigned attacker,unsigned inflictor,bool attackerOwned,bool inflictorOwned){
+    return localRole==0&&attacker!=1&&inflictor!=1&&attacker!=0x3fff0010u&&inflictor!=0x3fff0010u&&!attackerOwned&&!inflictorOwned;
+}
+// Hello health (1214o): 0 equal; 1 the client follows the host's lower health; 2 the
+// host waits for the client's corrected Hello; -1 diverged (a replica never gains).
+inline int npcCombatHelloHealth(unsigned localRole,float local,float peer){
+    if(local==peer)return 0;
+    if(localRole==1&&peer>0&&peer<local)return 1;
+    if(localRole==0&&local>0&&peer>local)return 2;
+    return -1;
+}
 inline bool npcCombatRanged(NpcCombatDamage d){return d==NpcCombatDamage::RangedSpread||d==NpcCombatDamage::RangedContact;}
 inline bool emptyNpcRanged(const NpcCombatRangedDamage& r){return !r.declaration&&r.amount==0&&r.distance==0&&!r.weapon;}
 // Exact declaration profiles share capture, geometry, ordering and native
@@ -72,7 +90,7 @@ inline bool npcCombatGeometry(NpcCombatDamage damage,const EnemyMeleeGeometry& g
         if(g.region!=1||!g.regions||(g.regions&~255u)||g.normal[0]!=0||g.normal[1]!=0||g.normal[2]!=0)return false;
         auto probe=g;probe.region=2;probe.regions=4;probe.normal[0]=1;return validEnemyMeleeGeometry(probe);
     }
-    if(damage==NpcCombatDamage::Assassination)return emptyEnemyMeleeGeometry(g);
+    if(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::HostWorld)return emptyEnemyMeleeGeometry(g);
     if(damage==NpcCombatDamage::MapTrigger&&emptyEnemyMeleeGeometry(g))return true;
     if(damage==NpcCombatDamage::Corpse||damage==NpcCombatDamage::MapTrigger){
         if(g.region!=1||g.regions)return false;
@@ -102,6 +120,7 @@ inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,co
     if(!npcCombatGeometry(p.damage,p.geometry))return false;
     const bool world=npcCombatWorldDamage(p.damage);
     if(world?(p.sourceRole!=2||(p.damage==NpcCombatDamage::Corpse?!p.sourceActorArm:p.sourceActorArm!=0)):(p.sourceRole>1||p.sourceActorArm))return false;
+    if(p.damage==NpcCombatDamage::HostWorld&&(p.kind!=NpcCombatMessage::Commit||!(p.after>0)||!(p.after<p.before)))return false;
     if(p.kind==NpcCombatMessage::Request)return !world&&peer.role==1&&p.sourceRole==1&&p.request&&!p.event&&!p.before&&!p.after&&!p.maximum&&!p.inflicted;
     // Terminal native outcomes retain a scoped tombstone after pose/AI retirement.
     return peer.role==0&&p.event&&(p.sourceRole==1?p.request!=0:p.request==0)&&npcCombatHealth(p.before,p.maximum)&&

@@ -1,0 +1,301 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Source killed the unconscious guard (attempt 3)",
+        "Unconscious guard killed by the client is dead in both worlds (share: source client_dead_from_host, observer reconcile_sent)",
+        "Victim ends 0.66 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -39.36,
+          -152.71,
+          66.4
+        ],
+        "observer": [
+          -39.36,
+          -152.71,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T12:31:40.1574855+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 47715765,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x191ca6f3700",
+          "actor": "0x191df9b5940",
+          "attributes": "0x191df71c8d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 47715781,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x25431f4b1f0",
+          "actor": "0x2544d428fb0",
+          "attributes": "0x2544d1408d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "killAttempts": 3,
+      "killOutcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "deathShare": {
+        "source": "client_dead_from_host",
+        "observer": "reconcile_sent",
+        "sourceRelevance": {
+          "deadReconciled": 0,
+          "deadSent": 0,
+          "combatSharedDeaths": 0
+        },
+        "observerRelevance": {
+          "clientDeadApplied": 0,
+          "clientDeadAlready": 0,
+          "clientDeadRefused": 0,
+          "clientDeadLast": "none",
+          "reconcileDecl": [
+            0.0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "victimEnd": {
+        "source": [
+          -39.1425,
+          -153.38,
+          75.2778
+        ],
+        "observer": [
+          -39.3714,
+          -152.756,
+          66.3969
+        ]
+      },
+      "victimGapM": 0.66,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 95,
+        "rootsDelta": 166,
+        "bodyAppliedDelta": 165,
+        "positionBefore": [
+          -39.36,
+          -152.71,
+          66.4
+        ],
+        "positionAfter": [
+          -39.3594,
+          -152.757,
+          66.402
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "kind": "choke",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Source killed the unconscious guard (attempt 1)",
+        "Unconscious guard killed by the host is dead in both worlds (share: source reconcile_sent, observer client_dead_from_host)",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ],
+        "observer": [
+          -48.0392,
+          -147.231,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T12:33:18.5819434+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 47814375,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x25431f35d20",
+          "actor": "0x2544d3d9500",
+          "attributes": "0x2544d1288d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 47814390,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x191ca6cfac0",
+          "actor": "0x191df9b0750",
+          "attributes": "0x191df7278e0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "killAttempts": 1,
+      "killOutcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "deathShare": {
+        "source": "reconcile_sent",
+        "observer": "client_dead_from_host",
+        "sourceRelevance": {
+          "deadReconciled": 3,
+          "deadSent": 9,
+          "combatSharedDeaths": 0
+        },
+        "observerRelevance": {
+          "clientDeadApplied": 3,
+          "clientDeadAlready": 6,
+          "clientDeadRefused": 0,
+          "clientDeadLast": "client_dead_from_host",
+          "reconcileDecl": [
+            0.0,
+            12,
+            0,
+            0
+          ]
+        }
+      },
+      "victimEnd": {
+        "source": [
+          -47.6213,
+          -146.262,
+          66.5998
+        ],
+        "observer": [
+          -47.6212,
+          -146.262,
+          66.5998
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "client_unconscious",
+        "posesDelta": 91,
+        "rootsDelta": 343,
+        "bodyAppliedDelta": 343,
+        "positionBefore": [
+          -47.9305,
+          -146.739,
+          66.4
+        ],
+        "positionAfter": [
+          -47.6012,
+          -146.279,
+          66.6008
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 unshared death: the source chokes the Dunwall tutorial guard under the product controller, then kills the unconscious body; the guard must end dead in both worlds (1214n Dead reconciliation); fixture restored after every case."
+}

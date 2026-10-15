@@ -1,0 +1,88 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": false,
+  "failure": "Cannot validate argument on parameter 'Pitch'. The 72 argument is greater than the maximum allowed range of 70. Supply an argument that is less than or equal to 70 and then try the command again.",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-15T12:27:54.9888768+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 47490406,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x191ca7477e0",
+      "actor": "0x191d7456260",
+      "attributes": "0x191d71d58e0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 47490421,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x25431f27360",
+      "actor": "0x2544d3a0990",
+      "attributes": "0x2544d0e78d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "restored": true
+}

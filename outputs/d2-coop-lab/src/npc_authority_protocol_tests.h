@@ -34,6 +34,19 @@ void npcAuthorityProtocolTests(){
      require(validNpcControl(u,client,host),"host reports an unconscious NPC to the client");
      u.h.reserved=3;require(!validNpcControl(u,client,host),"unconscious carries no variant");u.h.reserved=0;
      u.h.targetArm=0;require(!validNpcControl(u,client,host),"unconscious names the client channel");}
+    {// 1214n: the host tells the client its NPC died outside the shared combat outcome.
+     CoopNpcControl d=p;d.h.kind=NpcAuthorityMessage::Dead;d.h.targetArm=8;d.h.targetHandle=0x50009;
+     require(validNpcControl(d,client,host),"host reports an unshared death to the client");
+     d.h.reserved=5;require(!validNpcControl(d,client,host),"dead carries no variant");d.h.reserved=0;
+     d.h.targetHandle=0;require(!validNpcControl(d,client,host),"dead names the client replica");d.h.targetHandle=0x50009;
+     d.h.role=1;require(!validNpcControl(d,host,client),"the client never reports a death");
+     require(!npcDeadReconcileDue(true,true,true,1000,2400,0,0,0),"dead waits out the shared-death grace");
+     require(npcDeadReconcileDue(true,true,true,1000,2500,0,0,0),"an unshared host corpse is reconciled");
+     require(!npcDeadReconcileDue(true,true,true,1000,2500,1,0,0)&&!npcDeadReconcileDue(true,true,true,1000,2500,2,0,0),"a pending or committed combat death is never reconciled");
+     require(!npcDeadReconcileDue(false,true,true,1000,2500,0,0,0),"only the host reconciles");
+     require(!npcDeadReconcileDue(true,true,true,1000,2700,0,1,2500)&&npcDeadReconcileDue(true,true,true,1000,3000,0,1,2500),"repeats are spaced");
+     require(!npcDeadReconcileDue(true,true,true,1000,9000,0,5,2500),"at most five sends");
+     require(!npcDeadReconcileDue(true,true,true,0,9000,0,0,0)&&!npcDeadReconcileDue(true,false,true,1000,9000,0,0,0),"needs a timed corpse");}
     CoopNpcPose pose{};pose.h=p.h;pose.h.kind=NpcAuthorityMessage::Pose;pose.h.size=static_cast<unsigned short>(npcPoseBytes(pose.h.joints));pose.h.targetArm=8;pose.h.targetHandle=0x50009;
     pose.sampleUs=1000000;pose.health=pose.maximum=50;pose.root[3]=pose.root[7]=pose.root[11]=1;
     for(unsigned j=0;j<pose.h.joints;++j)pose.local[j][0]=pose.local[j][4]=pose.local[j][8]=1;

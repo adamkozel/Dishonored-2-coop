@@ -15,7 +15,16 @@ constexpr unsigned kNpcAuthorityMaxJoints=256;
 // client knocks its replica out silently so both worlds agree.
 // 1213x: PairedPose (client -> host) carries the client's native VICTIM pose while
 // its paired takedown runs, so the host's held NPC plays the same victim motion.
-enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose};
+// 1214n (#14): Dead (host -> client): the host NPC died without a shared combat
+// outcome (take 1270c: a host finisher on an unaware guard was never captured and
+// the client's replica stayed alive). The client kills its replica silently.
+enum class NpcAuthorityMessage : unsigned {Hello=1,Ready,Pose,Stop,PairedHold,PairedKnockout,Unconscious,PairedPose,Dead};
+// The host's combat channel for the NPC: 0 no outcome, 1 death pending, 2 death committed.
+// Dead follows a grace after the corpse appears, only for a death the combat channel
+// neither committed nor holds pending; up to five sends 500 ms apart.
+inline bool npcDeadReconcileDue(bool host,bool corpse,bool ready,unsigned long long corpseAt,unsigned long long tick,unsigned combatShare,unsigned sends,unsigned long long lastSent){
+    return host&&corpse&&ready&&corpseAt&&!combatShare&&sends<5&&tick>=corpseAt&&tick-corpseAt>=1500&&(!sends||tick-lastSent>=500);
+}
 inline bool npcPoseKind(NpcAuthorityMessage k){return k==NpcAuthorityMessage::Pose||k==NpcAuthorityMessage::PairedPose;}
 inline bool npcPairedVariant(std::uint32_t v){const auto k=nativeTakedownKind(v);return k&&k!=4;}
 // The client asks for the host knockout when its native knockout scene begins (choke_win,
@@ -71,6 +80,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&npcPairedKnockoutVariant(h.reserved);
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::Dead:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;
     }return false;
 }

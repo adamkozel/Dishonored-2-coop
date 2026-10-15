@@ -1,0 +1,39 @@
+{
+  "failure": "Guard outcomes differ: script_spawner_checkpoint_guard_02 host dead client alive",
+  "scope": "Stage 4 sustained multi-enemy fight on Edge of the World: both players fight the Wall of Light guard group at once under the product controller; guard outcomes compared in both worlds, combat session and player health sampled; Dunwall fixture restored.",
+  "cases": [
+    {
+      "guards": 3,
+      "outcomes": [
+        {
+          "spawner": "script_spawner_checkpoint_guard_01",
+          "host": "dead",
+          "client": "dead"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_02",
+          "host": "dead",
+          "client": "alive"
+        },
+        {
+          "spawner": "script_spawner_checkpoint_guard_04",
+          "host": "dead",
+          "client": "dead"
+        }
+      ],
+      "samples": 77,
+      "passed": false,
+      "failure": "Guard outcomes differ: script_spawner_checkpoint_guard_02 host dead client alive",
+      "checks": [],
+      "stuck": 0,
+      "hostCommitted": 8,
+      "clientRequests": 0,
+      "minHealth": {
+        "host": 55.0,
+        "client": 70.0
+      },
+      "gameOverSamples": 0
+    }
+  ],
+  "passed": false
+}
