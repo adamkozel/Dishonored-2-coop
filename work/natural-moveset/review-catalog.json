@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T03:40:02.678349+02:00",
+  "generated": "2026-10-15T04:25:29.337729+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -17230,17 +17230,20 @@
         "interact_wheel_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
+      "notes": "Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "use-interaction-v1214c/use-client-observed.mp4",
-        "mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4"
+        "mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4",
+        "use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4",
+        "use-reach-eotw-v1234b/use-client-env_vise_01_1_3-observed.mp4"
       ],
       "evidence": [
         "../movement-integration/native-combat-use-observations-v1211.json",
         "../movement-integration/use-interaction-audit-v1215.json",
-        "../movement-integration/use-variants-audit-v1229.json"
+        "../movement-integration/use-variants-audit-v1229.json",
+        "../movement-integration/use-reach-audit-v1235.json"
       ]
     },
     {
@@ -93313,6 +93316,86 @@
       "review": "Client view of remote Corvo (host source, 1213h), focus-line framing: the held camera stands about 3.3 m up (setviewpos z is the observer's feet), so only the top of Corvo's head is at the bottom of the frame. Not reviewable (#33).",
       "candidate": "candidate-npc-combat-v1213h",
       "dll": "3AA84F9A021FC29618B6462D0E19D36A5988B59EC42CBC3A059BC6FA173C658F",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Interaction / native use of env_vise_01_1_3 -> crank + hand reach (source host) / use-reach-eotw-v1234",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 17.16,
+      "container_fps": "1870/109",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window of the remote partner while the source natively uses the bench vise; the partner pulls its right wrist toward the used entity (hand reach, 1213k).",
+      "review": "Client view of remote Corvo (host source, 1213k, hand reach on), Edge of the World bench vise, daylight, side view: steps in, both hands on the vise screw handle cranking 2.5-5 s, recovers. Natural; reach applied at full weight through the contact window (target = vise entity origin behind the handle, arm at full extension toward it).",
+      "candidate": "candidate-npc-combat-v1213k",
+      "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
+      "runtime_test_passed": false,
+      "visual_accepted": true,
+      "requirements": [
+        "lever_button_crank_wheel"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "use-reach-eotw-v1234/use-client-env_vise_01_1_3-observed.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Interaction / native use of env_vise_01_1_3 -> crank + hand reach (source client) / use-reach-eotw-v1234",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 23.18,
+      "container_fps": "255/11",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window of the remote partner while the source natively uses the bench vise; the partner pulls its right wrist toward the used entity (hand reach, 1213k).",
+      "review": "Host view of remote Emily (client source): a wandering worker NPC occludes her for most of the clip. Runtime-bound; not reviewable.",
+      "candidate": "candidate-npc-combat-v1213k",
+      "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
+      "runtime_test_passed": false,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "use-reach-eotw-v1234b/use-client-env_vise_01_1_3-observed.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Interaction / native use of env_vise_01_1_3 -> crank + hand reach (source client) / use-reach-eotw-v1234b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 22.77,
+      "container_fps": "3735/164",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window of the remote partner while the source natively uses the bench vise; the partner pulls its right wrist toward the used entity (hand reach, 1213k).",
+      "review": "Host view of remote Emily (client source, 1213k), mirrored side, open sea, daylight: approaches the bench, right arm extended over it to the vise front screw 2.5-4.5 s, recovers at 6 s. Natural crank reach; the hand stops near the screw (target = entity origin behind it, full extension).",
+      "candidate": "candidate-npc-combat-v1213k",
+      "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "lever_button_crank_wheel"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "use-reach-eotw-v1234b/use-host-env_vise_01_1_3-observed.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Interaction / native use of env_vise_01_1_3 -> crank + hand reach (source host) / use-reach-eotw-v1234b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 18.2,
+      "container_fps": "2020/111",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Observer window of the remote partner while the source natively uses the bench vise; the partner pulls its right wrist toward the used entity (hand reach, 1213k).",
+      "review": "Client view of remote Corvo (host source, 1213k): not separately reviewed; the 1234 host video is the accepted Corvo reach.",
+      "candidate": "candidate-npc-combat-v1213k",
+      "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
       "runtime_test_passed": true,
       "visual_accepted": false,
       "requirements": [],

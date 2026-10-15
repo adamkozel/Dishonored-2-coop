@@ -105,10 +105,14 @@ Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and
   - Targets beyond reach clamp to the reachable shell.
 - **Application:** forward kinematics of this frame's authored pose gives the model-space chain. The reach weight is `useWeight` times `UsePresentation::contact(amount)`: none while reaching out (0–12%), full from 30% while operating, eased out over 72–92%. The authored local bone offsets stay exact.
 - **Status:** `useTargetValid`, `useTarget`, `useReachApplied`, `useReachRefused`, `useReachError`, `useReachWeight`.
+- **Verified (take [1234b](../../work/natural-moveset/use-reach-eotw-v1234b), passed; [audit 1235](../../work/movement-integration/use-reach-audit-v1235.json); confirmed runtime):** on the vise in both roles, the target arrived and the reach was applied on 88 and 131 frames, with no refusals, at full weight through the contact window.
+  - The vise entity origin sits behind its screw handle, beyond a fully extended arm at a 1 m stand-off (closest approach 0.52 and 0.69 m). The arm extends toward it, and the hands meet the screw handle.
+  - **Visual accepted:** Corvo (take 1234) and Emily (1234b, filmed from the mirrored side, away from the wandering worker NPC).
+  - Take 1234 itself failed on a harness bug; its runtime data is the same.
 
 **Open:**
 - Lever and valve visual acceptance (#33); latch (optional).
-- #6 runtime verification: reach applied, error, and a visual on the vise (good outdoor framing).
+- #6 follow-up: exact per-handle contact points; the target is the entity origin.
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

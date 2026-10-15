@@ -1,0 +1,207 @@
+{
+  "at": "2026-10-15T04:25:25.907650+02:00",
+  "candidate": "candidate-npc-combat-v1213k",
+  "cases": [
+    {
+      "take": "../natural-moveset/use-reach-eotw-v1234",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": false,
+      "failure": "host env_vise_01_1_3: Specified method is not supported.; client env_vise_01_1_3: Specified method is not supported.",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "env_vise_01_1_3"
+          ],
+          "expected": 3,
+          "optional": false,
+          "passed": false,
+          "failure": "Specified method is not supported.",
+          "target": "env_vise_01_1_3",
+          "focus": {
+            "handle": 437720625,
+            "name": "env_vise_01_1_3",
+            "dz": 0,
+            "side": 0,
+            "tries": 1,
+            "dist": 1.0
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "env_vise_01_1_3",
+          "sourceLastVariant": 3,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 109,
+          "shownSamples": 48,
+          "observedVariants": [
+            0,
+            3
+          ],
+          "maxWeight": 1.0,
+          "targetValidSamples": 93,
+          "reachSamples": 31,
+          "maxReachWeight": 1.0,
+          "reachApplied": 70,
+          "reachRefused": 0,
+          "minReachError": 0.5231
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "env_vise_01_1_3"
+          ],
+          "expected": 3,
+          "optional": false,
+          "passed": false,
+          "failure": "Specified method is not supported.",
+          "target": "env_vise_01_1_3",
+          "focus": {
+            "handle": 437720625,
+            "name": "env_vise_01_1_3",
+            "dz": 0,
+            "side": 0,
+            "tries": 1,
+            "dist": 1.0
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 1,
+          "sourceUseName": "env_vise_01_1_3",
+          "sourceLastVariant": 3,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 136,
+          "shownSamples": 66,
+          "observedVariants": [
+            0,
+            3
+          ],
+          "maxWeight": 1.0,
+          "targetValidSamples": 121,
+          "reachSamples": 39,
+          "maxReachWeight": 1.0,
+          "reachApplied": 136,
+          "reachRefused": 0,
+          "minReachError": 0.7058
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/use-reach-eotw-v1234b",
+      "candidate": "candidate-npc-combat-v1213k",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "observer": "client",
+          "candidates": [
+            "env_vise_01_1_3"
+          ],
+          "expected": 3,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "env_vise_01_1_3",
+          "focus": {
+            "handle": 437720625,
+            "name": "env_vise_01_1_3",
+            "dz": 0,
+            "dist": 1.0,
+            "side": 0,
+            "tries": 1
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "env_vise_01_1_3",
+          "sourceLastVariant": 3,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 116,
+          "shownSamples": 62,
+          "observedVariants": [
+            0,
+            3
+          ],
+          "maxWeight": 1.0,
+          "targetValidSamples": 102,
+          "reachSamples": 34,
+          "maxReachWeight": 1.0,
+          "reachApplied": 88,
+          "reachRefused": 0,
+          "minReachError": 0.5231,
+          "targetWorld": [
+            -39.8075,
+            164.0559,
+            4.3954
+          ],
+          "maxAmount": 1.0
+        },
+        {
+          "source": "client",
+          "observer": "host",
+          "candidates": [
+            "env_vise_01_1_3"
+          ],
+          "expected": 3,
+          "optional": false,
+          "passed": true,
+          "failure": null,
+          "target": "env_vise_01_1_3",
+          "focus": {
+            "handle": 437720625,
+            "name": "env_vise_01_1_3",
+            "dz": 0,
+            "dist": 1.0,
+            "side": 0,
+            "tries": 1
+          },
+          "observerPitch": true,
+          "sourceMaxDisplacement": 0.0,
+          "used": true,
+          "sourceUses": 2,
+          "sourceUseName": "env_vise_01_1_3",
+          "sourceLastVariant": 3,
+          "endReason": 3,
+          "endAction": 0,
+          "observerSamples": 137,
+          "shownSamples": 66,
+          "observedVariants": [
+            0,
+            3
+          ],
+          "maxWeight": 1.0,
+          "targetValidSamples": 123,
+          "reachSamples": 39,
+          "maxReachWeight": 1.0,
+          "reachApplied": 131,
+          "reachRefused": 0,
+          "minReachError": 0.6935,
+          "targetWorld": [
+            -39.8075,
+            164.0559,
+            4.3954
+          ],
+          "maxAmount": 1.0
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (1234b, pass): the source sends the focused entity origin with the use (protocol 75) and the partner applies the right-hand reach in both roles (88/131 frames, no refusal, full weight through the contact window).",
+    "The vise entity origin sits behind its screw handle and beyond a fully extended arm at a 1 m stand-off (closest approach 0.52/0.69 m); the arm extends toward it and the hands meet the screw handle in both videos.",
+    "Visual: Corvo (1234) and Emily (1234b) crank reaches accepted on real footage."
+  ],
+  "complete": true,
+  "scope": "#6 hand targeting to the used mechanism (entity origin); exact per-handle contact points remain approximate."
+}
