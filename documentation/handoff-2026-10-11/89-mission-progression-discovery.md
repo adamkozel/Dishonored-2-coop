@@ -60,6 +60,56 @@ When only one player crosses a scripted trigger, the partner's world doesn't adv
 
 **Mission end (hypothesis).** Edge of the World ends at Addermire Station, after the mission objectives. The partner's world is driven by mirrored triggers, shared usables and shared doors. If the mission end is a trigger or usable, the partner's world should run its own native `LevelTransition`. A real end-of-mission take still has to show this.
 
+**How Edge of the World ends (confirmed static, 2026-10-15, read with `tools/diag/d2_resource_index.py`):**
+- **Mission tree:** `models/gameflow/gameflow_eotw.arktree` declares `Mission_EotW`:
+  - `m_nextMissionMap = "campaign/institute/institute.mapinfo"`, `m_showResultScreen = true`.
+  - The required objective `Obj_EotW_A` ("Get to Addermire") runs its tasks in sequence: get past the Wall of Light (always succeeds), get to Addermire Station (`Task_EotW_A_02`), then activate the carriage (`Task_EotW_A_04`).
+  - The black market and Mindy objectives are optional side branches.
+- **The end is a usable plus a scene, not a `LevelTransition`.** In `maps/campaign/edge_of_the_world/eotw_p_lowchaos.entities`:
+  1. `script_kiscule_carriage` listens to the usable `script_kar_cable_car_inv_use` (and `_1`/`_2`), enters a cinematic and plays the `cablecar_enter_lever` scene.
+  2. A leave-or-stay prompt follows. `Carriage.Leave` plays `carriage_movement_toinstitute`.
+  3. In `script_kiscule_eotw_ui`, `Midnights.carriage_movement_toinstitute.OnEnded` fades to black over 2 s. Then `arkKisculeNodeActionGameflowTask` completes `Task_EotW_A_04`, and the gameflow mission completes: result screen, then the next mission map.
+- **Debug only:** the map's three `arkKisculeNodeLevelTransition` nodes are all in `script_debug`, behind the `Debug.PreviousMap` and `Debug.NextMap` events. They target `boat_eotw_p` and `institute_p_lowchaos` or `institute_p_highchaos` by chaos.
+- **Map list:** every mission opens on a Dreadful Wale map (`boat_<mission>_p`), and five missions span several maps ([chapter 96](96-external-research-references.md), disrev `docs/levels.md`). Stage 6 must therefore carry both in-mission and mission-to-mission map changes.
+
+So in co-op, the partner reaches the end through the shared carriage usable or a mirrored gameflow completion. Which one, and how both worlds then load the next map together, is the next runtime test.
+
+**Runtime (take mission-end-carriage-v1291a, candidate 1214aw, lab mode, follow off; [audit 1291](../../work/movement-integration/mission-end-audit-v1291.json)):**
+- **Setup:** the host was placed in `script_trigger_addermirestation_inside_area` with the trigger mirror and the lab health hold on. It used the carriage from its east door.
+- **Host (confirmed runtime):** the native end ran in full. Logic states, in order:
+  1. 1 → 5: the carriage-entry scene.
+  2. 9: the leave-or-stay prompt; A leaves.
+  3. 5: the ride.
+  4. 11: the native result screen, "Edge of the World — Mission Complete"; A continues.
+  5. 0 → 15/5: the map transition.
+  6. 5 → 1: the Good Doctor intro, then gameplay on `institute_p_lowchaos`, about 135 s after the use.
+- **Partner:** Emily's world stayed in gameplay on `eotw_p_lowchaos` throughout. Neither the shared usable nor the mirrored triggers carry the mission end, so the partner needs its own native completion.
+- **Transport:** the Steam connection stayed fresh with the peers on different maps.
+- **Restore:** the lab's SLOT81 checkpoints were unchanged, and the lab and protected files were restored.
+- **Side effect:** the host instance unlocked a Steam achievement ("Alternative Approach") on the shared lab account.
+
+**Mission end mirror (candidate 1214ax, take mission-end-mirror-v1291b, [audit 1292](../../work/movement-integration/mission-end-mirror-audit-v1292.json)):**
+- **Static (confirmed):** the gameflow set-state routine `0x1404e9bd0` takes the manager (game+0x1f7780), a node id and a state.
+  - The manager's hash table is at +0x18 (mask at +0x28). A node keeps its id at +8 and its state at +0xc.
+  - Mission requests (`0x14040f760`) allow 1→2 (active), 2→3 (complete), 2→4 and 2→5.
+  - A mission that reaches 3 with its result screen enabled switches the game to logic 11 (`0x1404ea020` → `SwitchState` `0x1407885b0`).
+- **Mechanism:**
+  1. When a world enters its own result screen with its mission complete, it sends `D2ME` with its mapinfo.
+  2. A partner on the same mapinfo, in ordinary gameplay, finds its **own** active mission node (state 2) and sets it to 3 through the native routine. Ids never cross processes, since they are localization string ids.
+  3. Scenes, prompts and menus wait, because `SwitchState` can refuse from them.
+  4. Lab command: `coop_mission_end_mirror on|off`. Always on in product mode.
+- **Runtime (pass):**
+  - The host sent once. Emily's world completed its own mission (1 of 18 mission nodes) and opened its own result screen in the same 400 ms sample as Corvo's.
+  - Both loaded `institute_p_lowchaos` and reached gameplay 1.6 s apart, with the connection fresh. The lab was restored.
+  - Visual (accepted): each player saw a native "Edge of the World — Mission 02 Complete" screen with their own portrait, then The Good Doctor.
+- **Open:**
+  - The partner must load the host's chaos variant.
+  - A both-ready hold at the next mission start.
+  - A client-originated end, and product mode across the VM.
+  - The boat and in-mission `LevelTransition` changes ([chapter 97](97-campaign-map-sequence.md)).
+
+**Next (superseded by the mirror above):** mirror gameflow state changes, so the partner's world completes its own mission: its own result screen, then the next map with its own character state. The game posts them as `arkMsgGameflowTaskChangeState`, `arkMsgGameflowObjectiveChangeState` and `arkMsgGameflowMissionChangeState` (confirmed static, string names). Shared objective progress (stage 5) uses the same path. The partner must load the host's chaos variant, behind a both-ready barrier.
+
 ## Next for this line
 
 1. Walk a whole mission with the mirror on.

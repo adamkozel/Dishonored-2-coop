@@ -159,3 +159,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Stage 3: visual-acceptance sweep, counterattack, sword locks and item gestures (candidates 1214h–1214j)](94-visual-sweep-counterattack-and-gestures.md)
 - [Stage 4: shared combat authority on missions — unshared deaths and host-world damage (candidates 1214n–1214o)](95-shared-combat-authority.md)
 - [96. External research references](96-external-research-references.md): public Dishonored 2 resources (camera, cvars, autosplitter, saves) and what was verified against the lab build.
+- [97. Campaign map sequence](97-campaign-map-sequence.md): every mission's maps in play order, how each one ends, and the map-change boundaries stage 6 must carry.

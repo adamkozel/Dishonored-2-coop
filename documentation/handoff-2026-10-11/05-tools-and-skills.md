@@ -35,7 +35,7 @@ Void pins: [toolchain-lock.json](../../outputs/d2-coop-lab/analysis/void-tools/t
 
 ## Build and capture
 
-Additional assessed tools: [Void Slice and Dishonored2-Debug](33-community-tool-assessment.md). Void Slice commit `cc58fc7` is built locally with pinned Go1.27.2 and tested against exact exported assets; use the optional [asset-lint wrapper](../../outputs/d2-coop-lab/Invoke-D2AssetLint.ps1). Known MD6 tuple false positives and warning exit-status behavior prevent blanket use as a hard import gate. Dishonored2-Debug remains the previously inspected source reference at commit `ed1a72b`; its overlapping proxy DLL is not installed.
+Additional assessed tools: [Void Slice and Dishonored2-Debug](33-community-tool-assessment.md). Public research references (IGCS camera, cvar lists, autosplitter offsets, disrev, save notes) and what was verified from them: [chapter 96](96-external-research-references.md); their practical use is in the [runbooks](06-runbooks.md#lab-only-commands-and-dead-cvars). Void Slice commit `cc58fc7` is built locally with pinned Go1.27.2 and tested against exact exported assets; use the optional [asset-lint wrapper](../../outputs/d2-coop-lab/Invoke-D2AssetLint.ps1). Known MD6 tuple false positives and warning exit-status behavior prevent blanket use as a hard import gate. Dishonored2-Debug remains the previously inspected source reference at commit `ed1a72b`; its overlapping proxy DLL is not installed.
 
 The established build uses Visual Studio's CMake and MSVC through the project scripts. The AnimGen capture helper records MSVC 14.44.35229, Windows SDK 10.0.26100.0 and .NET Framework 4.8.1 SDK. Do not assume those historical values identify every later compiler invocation; retain the current build log.
 

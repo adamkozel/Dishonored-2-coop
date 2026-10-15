@@ -80,7 +80,21 @@ Standalone short-lived MCP clients should connect to an independently started ba
 - Point it at the game copy (`work/asset-game/base`), never at the Steam installation.
 - `list` prints entries; `grep --type <T> --match <source regex> --text <line regex>` searches inside them. It uses the newest index of each family (`gameNvoidmod.index`).
 - Mission entity files are type `File`, sources `maps/campaign/**/*.entities`; usable interaction names (`Usable_lever`, `Usable_tap` and so on) are in the `entityDef` decls.
+- **Mission flow:** each mission's objective tree is the `arkTree` `models/gameflow/gameflow_<mission>.arktree`. It names the mission, its objectives and tasks, `m_nextMissionMap` and `m_showResultScreen`. The mission's scripts live in its `.entities` file as `script_kiscule_*` entities; grep them for `arkKisculeNode*` names, `m_eventName` and `m_mapName`.
 - Extract into the scratchpad: the output is game-derived and stays local.
+
+## Lab-only commands and dead cvars
+
+Use these lab commands when a take needs them. All are refused outside the lab allowlist (`engine_bridge.cpp`, `Send-D2Command.ps1`) and never ship.
+
+| Need | Use | Not this |
+|---|---|---|
+| Keep a player alive through a fight | `coop_player_health_hold on\|off` (1214ap) | `ark_god_player`, `god`, `ark_buddha_player`, `g_damageScale`, `g_playerIncomingDamageScale`, `pm_disableFatalFall`: stripped, nothing reads them (confirmed static, [chapter 96](96-external-research-references.md)) |
+| Give a native item in product mode | `coop_grant_item grenade\|health\|mana` (1214au; grenades are equipped too) | Editing the inventory by hand |
+| Drink a potion through the native wheel routine | `coop_use_item health\|mana` (1214av). A mana potion is only drunk after a native power has spent the pool | Writing the mana pool (1214aw: the drink still refuses) |
+| Film from any point, with the observer's arms hidden | Turn the observer (`setviewpos` at its own position with a yaw), set the pitch, then `coop_observer_camera hold_at x y z`; `off` in cleanup ([chapter 92](92-native-use-interactions.md)) | IGCS: its camera uses Ansel, which pauses the game |
+
+Before relying on any other cvar from a public list, check in Ghidra that game code reads it: a registered cvar can be stripped. Full cvar lists for this build are saved locally ([provenance](../../work/external-references/README.md)): `work/external-references/fakuivan-cvars-1.77.9.0/dishonored2_cvars.txt` gives each cvar's struct and value address, and `work/Dishonored2-Debug/cvars.md` gives descriptions. Live leads: `gp_manaEnable` (read by the mana component) and `ark_inventory_mana_potion_autouse`. Unverified leads (autosplitter loading flag and level name, save format) are tracked in [chapter 96](96-external-research-references.md).
 
 ## Cleanup after an experiment
 
