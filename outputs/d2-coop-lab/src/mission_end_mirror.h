@@ -59,6 +59,18 @@ bool scanMissionNodes(int wantState,MissionNodeScan& out){
     }
     return true;
 }
+// 1214bf: counts of all gameflow nodes by state (0..6) in this world, so
+// campaign takes can check that both worlds' objectives advance together.
+bool countGameflowStates(unsigned counts[7]){
+    for(unsigned i=0;i<7;++i)counts[i]=0;if(!observedGame)return false;
+    const auto manager=observedGame+0x1f7780;std::uintptr_t buckets=0;std::uint32_t mask=0;
+    if(!memoryRead(manager+0x18,&buckets,8)||!buckets||!memoryRead(manager+0x28,&mask,4)||mask>0xffff||(mask&(mask+1)))return false;
+    for(std::uint32_t b=0;b<=mask;++b){std::uintptr_t entry=0;if(!memoryRead(buckets+b*8ull,&entry,8))return false;
+        for(unsigned hops=0;entry&&hops<256;++hops){std::uintptr_t node=0,next=0;int state=-1;
+            if(!memoryRead(entry+8,&node,8)||!memoryRead(entry+0x10,&next,8))return false;
+            if(node&&memoryRead(node+0xc,&state,4)&&state>=0&&state<7)++counts[state];entry=next;}}
+    return true;
+}
 bool missionEndMirrorEnabled=false;
 struct MissionEndMirror {
     std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0;
@@ -253,8 +265,10 @@ void serviceChaosSync(std::uint64_t tick){
 void writeMissionEndMirror(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.missionend.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    unsigned states[7]{};const bool statesOk=GetCurrentThreadId()==engineThread.load()&&countGameflowStates(states);
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionEnd;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
+    if(statesOk)fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);else fprintf(f,"{\"gameflowStates\":null,");
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused);
