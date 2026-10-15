@@ -116,8 +116,9 @@ bool shadowStreamCurrent(ULONGLONG tick){
 // interaction whose variant comes from the entity the interaction sensor
 // (arkCpntPlayerSensorInteraction, vtable 0x1b403b8; +0x80 high dword = focused
 // handle, 1133) points at. Moving away (>0.6 m) or any other action ends it.
-struct ShadowUse {bool wasActive=false;unsigned variant=0,duration=0;ULONGLONG start=0;std::uint32_t events=0;float origin[3]{};char name[96]{};std::uint64_t uses=0,unfocused=0,frames=0,edges=0;unsigned endReason=0,endAction=0,lastVariant=0;} shadowUse;
+struct ShadowUse {bool wasActive=false;unsigned variant=0,duration=0;ULONGLONG start=0;std::uint32_t events=0;float origin[3]{};char name[96]{};std::uint64_t uses=0,unfocused=0,frames=0,edges=0;unsigned endReason=0,endAction=0,lastVariant=0;float target[3]{};bool targetValid=false;} shadowUse;
 unsigned shadowFocusedUseVariant(std::uintptr_t base){
+    shadowUse.targetValid=false;
     const auto player=worldIdentityEntity(memoryRead,observedGame,1);std::uintptr_t list=0,vt=0,sensor=0;unsigned count=0;std::uint64_t word=0;
     if(!player||!memoryRead(player+0x268,&list,8)||!list||!memoryRead(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 0;
     std::array<std::uintptr_t,256> members{};if(!memoryRead(list,members.data(),(count&0xffffff)*8))return 0;
@@ -126,7 +127,10 @@ unsigned shadowFocusedUseVariant(std::uintptr_t base){
     const auto handle=static_cast<std::uint32_t>(word>>32);if((handle>>16)==0x3fff){++shadowUse.unfocused;return 1;}
     const auto actor=worldIdentityEntity(memoryRead,observedGame,handle);std::uintptr_t name=0;std::string text;
     if(!actor||!memoryRead(actor+0x20,&name,8)||!worldIdentityString(memoryRead,name,text)){++shadowUse.unfocused;return 1;}
-    std::snprintf(shadowUse.name,sizeof(shadowUse.name),"%s",text.c_str());return useVariantForName(text.c_str());
+    std::snprintf(shadowUse.name,sizeof(shadowUse.name),"%s",text.c_str());
+    // #6: the focused entity's origin (actor+0x300, as readNativeUsable) is the hand target.
+    float origin[3]{};if(memoryRead(actor+0x300,origin,12)&&std::isfinite(origin[0])&&std::isfinite(origin[1])&&std::isfinite(origin[2])){std::memcpy(shadowUse.target,origin,12);shadowUse.targetValid=true;}
+    return useVariantForName(text.c_str());
 }
 void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
     bool active=false;for(const auto& a:states.active)if(a.id==75&&a.vtable==base+0x1c86ab8){active=true;break;}
@@ -187,7 +191,8 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     }
     if(shadowUse.variant&&action!=0){shadowUse.variant=0;shadowUse.endReason=2;shadowUse.endAction=action;} // any other action ends the interaction
     if(airPacket&&shadowUse.variant){const auto elapsed=static_cast<unsigned>(GetTickCount64()-shadowUse.start);
-        if(elapsed<shadowUse.duration){airPacket->useVariant=shadowUse.variant;airPacket->useTimeMs=elapsed;airPacket->useDurationMs=shadowUse.duration;airPacket->useEvent=shadowUse.events;}}
+        if(elapsed<shadowUse.duration){airPacket->useVariant=shadowUse.variant;airPacket->useTimeMs=elapsed;airPacket->useDurationMs=shadowUse.duration;airPacket->useEvent=shadowUse.events;
+            if(shadowUse.targetValid){for(unsigned k=0;k<3;++k)airPacket->useTarget[k]=shadowUse.target[k];airPacket->useTargetValid=1;}}}
     if(carryValid||carryPreparing){
         NativeWorldNpc native{},target{};const auto tick=GetTickCount64();
         const auto corpse=carryValid?carry.corpse:carryPreparation.corpse;
@@ -438,7 +443,7 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
        !grenadeTimeline.push({mapped,p.event,p.grenadeHeld,p.grenadeVariant,p.grenadeTimeMs,p.grenadeDurationMs})?17:
        !carryTimeline.push({mapped,p.event,p.carryVariant,p.carryTimeMs,p.carryDurationMs,p.carryStance,p.carryIncarnation,p.carrySpawner,p.carryDefinition,p.carryThrowVelocity})?18:
        !stunTimeline.push({mapped,p.event,p.stunVariant,p.stunTimeMs,p.stunDurationMs})?22:
-       !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs})?24:
+       !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})?24:
        !movementTimeline.push({mapped,p.event,p.state,p.leanSide,p.leanUp,p.airStartZ,p.airTargetZ,p.airStage,p.airRemaining})?19:0;
     if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-mapped;++shadowStreamRejected;return;}
     shadowStream.combat=std::move(combatTimeline);shadowStream.equipment=std::move(equipmentTimeline);shadowStream.traversal=std::move(traversalTimeline);shadowStream.power=std::move(powerTimeline);shadowStream.ranged=std::move(rangedTimeline);shadowStream.carry=std::move(carryTimeline);shadowStream.grenade=std::move(grenadeTimeline);shadowStream.heart=std::move(heartTimeline);shadowStream.trap=std::move(trapTimeline);shadowStream.choke=std::move(chokeTimeline);shadowStream.stun=std::move(stunTimeline);shadowStream.use=std::move(useTimeline);shadowStream.remoteCarryLocalHandle=carryTarget.handle;shadowStream.movement=std::move(movementTimeline);

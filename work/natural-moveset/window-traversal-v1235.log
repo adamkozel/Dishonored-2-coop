@@ -1,0 +1,15 @@
+{
+  "cases": [],
+  "passed": false,
+  "scope": "window_enter_exit: native mantle through a climbable Edge of the World window, both roles, partner traversal presentation filmed; Dunwall fixture restored.",
+  "failure": "Probe @{scope=Edge of the World openable windows: floors on both sides, native open, forward+jump crossing (host only); Dunwall fixture restored.; windows=System.Object[]; passed=False; failure=host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored} has no crossing for script_rich_small_01_sndctrl"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-WindowTraversal-v1235.ps1:117[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 117 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mProbe @{scope=Edge of the World openable windows: floors on both sides, native open, forward+jump crossing (host[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1monly); Dunwall fixture restored.; windows=System.Object[]; passed=False; failure=host did not reach a fresh[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mnative menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mnot restored} has no crossing for script_rich_small_01_sndctrl[0m
+exit=1

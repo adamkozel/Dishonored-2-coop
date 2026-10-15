@@ -5,6 +5,7 @@
 #include "movement_equipment_contact.h"
 #include "movement_vault_lift.h"
 #include "presentation_refusal.h"
+#include "movement_arm_reach.h"
 void requestMovementEquipment(bool drawn);
 void requestPossessionBodyVisibility(bool hide);
 SRWLOCK movementLock=SRWLOCK_INIT;
@@ -49,6 +50,8 @@ struct MovementPlayback {
     std::uint64_t rangedEvent=0;std::vector<MovementBank::Joint> rangedFrom,rangedLast;
     unsigned stunVariant=0;float stunAmount=0,stunWeight=0,stunTransition=0;std::uint64_t stunEvent=0;
     unsigned useVariant=0;float useAmount=0,useWeight=0,useTransition=0;std::uint64_t useEvent=0;std::vector<MovementBank::Joint> useFrom,useLast;
+    // 1213k (#6): the used mechanism (world) and the right-hand reach toward it.
+    float useTarget[3]{};bool useTargetValid=false;std::uint64_t useReachApplied=0,useReachRefused=0;float useReachError=0,useReachWeight=0;
     std::vector<MovementBank::Joint> stunFrom,stunLast;
     unsigned grenadeHeld=0,grenadeVariant=0;float grenadeAmount=0,grenadeWeight=0,grenadeTransition=0,grenadeMoveMix=0;
     std::uint64_t grenadeEvent=0;std::vector<MovementBank::Joint> grenadeFrom,grenadeLast;
@@ -269,7 +272,8 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&ground&&pose.motionValid&&p.clock.speed<.8f;
         if(combatDt>=0&&combatDt<.25f){
             if(useActive){if(use.event!=p.useEvent){p.useFrom=p.useLast;p.useTransition=0;p.useEvent=use.event;}
-                p.useVariant=use.variant;p.useAmount=useAmount;p.useTransition=(std::min)(1.f,p.useTransition+combatDt/.20f);}
+                p.useVariant=use.variant;p.useAmount=useAmount;p.useTransition=(std::min)(1.f,p.useTransition+combatDt/.20f);
+                std::memcpy(p.useTarget,use.target,sizeof(p.useTarget));p.useTargetValid=use.targetValid;}
             p.useWeight+=((useActive?1.f:0.f)-p.useWeight)*(1-std::exp(-combatDt/(useActive?.12f:.18f)));
         }else p.useWeight=0;
         GrenadePresentation::Sample grenade{};float grenadeAmount=0;
@@ -780,6 +784,26 @@ void applyMovementBank(void* component,void* actor,int phase){
             for(unsigned k=12;k<15;++k)pose[j].v[k]=native.v[k]+(pose[j].v[k]-native.v[k])*p.clock.weight;}
     }
     if(!ok&&!refuseReason)refuseReason=PresentationRefusalGate::PoseBuild;
+    // 1213k (#6): during the use clip's contact window, pull the right wrist (arm 14 -> elbow 15 -> wrist 16,
+    // parent shoulder 13) toward the used mechanism. Forward kinematics of this frame's authored pose
+    // gives the model-space chain; the target comes from the source's focused entity origin.
+    p.useReachWeight=0;
+    if(ok&&p.useWeight>.001f&&p.useVariant&&p.useTargetValid&&count>16&&p.parents.size()>16&&p.parents[14]==13&&p.parents[15]==14&&p.parents[16]==15){
+        const float w=p.useWeight*UsePresentation::contact(p.useAmount);p.useReachWeight=w;
+        if(w>.001f){
+            std::array<BodyMatrix,17> chainLocal{},chainGlobal{};bool fk=true;
+            for(unsigned j=0;j<17&&fk;++j){chainLocal[j]=pose[j];if(j<2)std::memcpy(chainLocal[j].v,s.localPose[j].data(),64);
+                const int parent=p.parents[j];if(parent>=static_cast<int>(j)||parent<-1||!bodyRigid(chainLocal[j])){fk=false;break;}
+                chainGlobal[j]=parent>=0?bodyMultiply(chainGlobal[parent],chainLocal[j]):chainLocal[j];}
+            float target[3]{};useModelTarget(s.root,p.useTarget,target);
+            BodyMatrix reach[3]{};float error=0;
+            if(fk&&movementArmReach(chainGlobal[13],chainGlobal.data()+14,target,w,reach,error)){
+                // Rotations change; the authored local bone offsets stay exact.
+                for(unsigned j=0;j<3;++j){for(unsigned k=12;k<15;++k)reach[j].v[k]=pose[14+j].v[k];pose[14+j]=reach[j];}
+                ++p.useReachApplied;p.useReachError=error;
+            }else ++p.useReachRefused;
+        }
+    }
     if(ok&&phase==0&&p.currentFeet&&p.clock.weight>.99f){
         // Build only the native primary chain; helper bones are recomputed by
         // the engine and are not treated as authored knee references.
@@ -826,6 +850,8 @@ void writeMovementStatus(){
     fprintf(f,"\"swimWeight\":%.7f,\"swimMove\":%.7f,\"swimRise\":%.7f,\"swimSink\":%.7f,\"swimSpeed\":%.7f,\"swimVz\":%.7f,\"swimSamples\":%llu,",p.swimWeight,p.swimMove,p.swimRise,p.swimSink,p.swimSpeed,p.swimVz,p.swimSamples);
     fprintf(f,"\"trapStock\":%u,",p.trapStock);
     fprintf(f,"\"carrySampleAmount\":%.7f,\"carryAuthoredAmount\":%.7f,\"carrySettle\":%.7f,",p.carryAmount,(p.carryVariant==7||p.carryVariant==1)?carryPickupAmount(p.carryVariant,p.carryAmount):0.f,p.carrySettle);
+    fprintf(f,"\"useTargetValid\":%s,\"useTarget\":[%.4f,%.4f,%.4f],\"useReachApplied\":%llu,\"useReachRefused\":%llu,\"useReachError\":%.4f,\"useReachWeight\":%.4f,",
+        p.useTargetValid?"true":"false",p.useTarget[0],p.useTarget[1],p.useTarget[2],static_cast<unsigned long long>(p.useReachApplied),static_cast<unsigned long long>(p.useReachRefused),p.useReachError,p.useReachWeight);
     fprintf(f,"\"beginRefusal\":%u,\"beginRefusals\":[",movementBeginRefusal);
     for(unsigned i=0;i<movementBeginRefusals.size();++i)fprintf(f,"%s%llu",i?",":"",static_cast<unsigned long long>(movementBeginRefusals[i]));
     fputs("],",f);

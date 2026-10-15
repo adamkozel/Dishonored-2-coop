@@ -1,0 +1,96 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "env_vise_01_1_3"
+      ],
+      "expected": 3,
+      "optional": false,
+      "passed": false,
+      "failure": "Specified method is not supported.",
+      "target": "env_vise_01_1_3",
+      "focus": {
+        "handle": 437720625,
+        "name": "env_vise_01_1_3",
+        "dz": 0,
+        "side": 0,
+        "tries": 1,
+        "dist": 1.0
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 1,
+      "sourceUseName": "env_vise_01_1_3",
+      "sourceLastVariant": 3,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 109,
+      "shownSamples": 48,
+      "observedVariants": [
+        0,
+        3
+      ],
+      "maxWeight": 1.0,
+      "targetValidSamples": 93,
+      "reachSamples": 31,
+      "maxReachWeight": 1.0,
+      "reachApplied": 70,
+      "reachRefused": 0,
+      "minReachError": 0.5231
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "env_vise_01_1_3"
+      ],
+      "expected": 3,
+      "optional": false,
+      "passed": false,
+      "failure": "Specified method is not supported.",
+      "target": "env_vise_01_1_3",
+      "focus": {
+        "handle": 437720625,
+        "name": "env_vise_01_1_3",
+        "dz": 0,
+        "side": 0,
+        "tries": 1,
+        "dist": 1.0
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 1,
+      "sourceUseName": "env_vise_01_1_3",
+      "sourceLastVariant": 3,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 136,
+      "shownSamples": 66,
+      "observedVariants": [
+        0,
+        3
+      ],
+      "maxWeight": 1.0,
+      "targetValidSamples": 121,
+      "reachSamples": 39,
+      "maxReachWeight": 1.0,
+      "reachApplied": 136,
+      "reachRefused": 0,
+      "minReachError": 0.7058
+    }
+  ],
+  "failure": "host env_vise_01_1_3: Specified method is not supported.; client env_vise_01_1_3: Specified method is not supported.",
+  "scope": "Use variants on real mechanisms (eotw): native use -> authored interaction on the partner body, both roles; fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-UseReach-v1234.ps1:172[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 172 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost env_vise_01_1_3: Specified method is not supported.; client env_vise_01_1_3: Specified method is not[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1msupported.[0m
+exit=1

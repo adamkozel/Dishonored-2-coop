@@ -14,7 +14,7 @@
 // Native semantic states and explicit unbound ground presentation18. No pointers, resource names or damage requests.
 struct CoopShadowActionPacket {
     std::uint32_t magic=0x48413244;
-    std::uint16_t version=74,size=sizeof(CoopShadowActionPacket);
+    std::uint16_t version=75,size=sizeof(CoopShadowActionPacket);
     std::uint32_t build=0x67a50cde,role=0;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0;
     std::uint64_t sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
@@ -41,9 +41,11 @@ struct CoopShadowActionPacket {
     std::uint32_t stunVariant=0,stunTimeMs=0,stunDurationMs=0;
     // 1213 (protocol 74): native use (player state 75) -> authored interaction.
     std::uint32_t useVariant=0,useTimeMs=0,useDurationMs=0,useEvent=0;
+    // 1213k (protocol 75, #6): the used mechanism's world position for the partner's hand reach.
+    std::array<float,3> useTarget{};std::uint32_t useTargetValid=0;
 };
 #pragma pack(pop)
-static_assert(sizeof(CoopShadowActionPacket)==416);
+static_assert(sizeof(CoopShadowActionPacket)==432);
 // Share equipment-context policy between source and wire validation so an
 // observed native reader cannot silently outgrow the source transport gate.
 inline bool shadowPowerSwordContext(unsigned variant,unsigned swordState){
@@ -108,9 +110,9 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         (p.chokeVariant?(p.kind==1&&p.state==21&&p.swordState==(p.chokeVariant==5?2u:1u)&&!p.trapHeld&&!p.heartHeld&&!p.grenadeHeld&&!p.rangedKind&&!p.carryVariant&&!p.powerVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant&&!p.airStage):p.state!=21);
     // 1213: a native use runs only on the ground action (state 0) and never
     // alongside another scene presentation.
-    const bool use=UsePresentation::valid({1.,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs})&&
+    const bool use=p.useTargetValid<=1&&UsePresentation::valid({1.,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})&&
         (!p.useVariant||(p.state==0&&!p.combatVariant&&!p.powerVariant&&!p.traversalVariant&&!p.rangedKind&&!p.grenadeHeld&&!p.carryVariant&&!p.chokeVariant&&!p.trapHeld&&!p.heartHeld&&!p.stunVariant));
-    return use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==74&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
+    return use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==75&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
         p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=24&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&

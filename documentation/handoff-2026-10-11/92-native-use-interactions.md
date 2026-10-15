@@ -93,9 +93,26 @@ Accepted visuals so far: Corvo at the vise and Emily at the ring lock. Lever and
 
 **Audit:** [use-variants-audit-v1229](../../work/movement-integration/use-variants-audit-v1229.json). Per-video reviews are in [use-variants-review-v1229](../../work/movement-integration/use-variants-review-v1229.json).
 
+**Hand targeting (#6, candidate 1213k):**
+- **Native IK exists (confirmed static):** `arkFabrIK`, `arkAnimIKRequest` (10-slot request manager) and IKinema task definitions. Each is referenced only from the large type-registration function, so driving them natively needs more RE. The mod corrects its own written pose instead, as the knee pole correction already does.
+- **Remote rig (confirmed runtime, `--skeleton`):**
+  - right arm: 13 `right_shoulder_jnt`, 14 `right_arm_jnt`, 15 `right_elbow_jnt`, 16 `right_wrist_jnt`, 17 `right_hand_attachment_jnt`;
+  - left arm: 6–10.
+- **Target:** the focused entity's origin (`actor+0x300`, as `readNativeUsable`) travels in the use packet (`useTarget`, protocol 75, 432 bytes). On the partner it maps into model space through the skeleton root (`actor+0x300`: position, then rotation columns). This is the exact inverse of the joint-to-world mapping in `grenade_fx` (unit-tested).
+- **Solver (`movement_arm_reach.h`, unit-tested):** a two-bone wrist reach.
+  - The arm joint stays fixed, segment lengths are kept exactly, and so is the authored elbow bend side.
+  - The hand keeps its orientation relative to the forearm.
+  - Targets beyond reach clamp to the reachable shell.
+- **Application:** forward kinematics of this frame's authored pose gives the model-space chain. The reach weight is `useWeight` times `UsePresentation::contact(amount)`: none while reaching out (0–12%), full from 30% while operating, eased out over 72–92%. The authored local bone offsets stay exact.
+- **Status:** `useTargetValid`, `useTarget`, `useReachApplied`, `useReachRefused`, `useReachError`, `useReachWeight`.
+- **Verified (take [1234b](../../work/natural-moveset/use-reach-eotw-v1234b), passed; [audit 1235](../../work/movement-integration/use-reach-audit-v1235.json); confirmed runtime):** on the vise in both roles, the target arrived and the reach was applied on 88 and 131 frames, with no refusals, at full weight through the contact window.
+  - The vise entity origin sits behind its screw handle, beyond a fully extended arm at a 1 m stand-off (closest approach 0.52 and 0.69 m). The arm extends toward it, and the hands meet the screw handle.
+  - **Visual accepted:** Corvo (take 1234) and Emily (1234b, filmed from the mirrored side, away from the wandering worker NPC).
+  - Take 1234 itself failed on a harness bug; its runtime data is the same.
+
 **Open:**
 - Lever and valve visual acceptance (#33); latch (optional).
-- One refused pose frame drops the whole partner presentation (#34).
+- #6 follow-up: exact per-handle contact points; the target is the entity origin.
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

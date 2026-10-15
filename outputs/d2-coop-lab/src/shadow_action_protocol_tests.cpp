@@ -462,6 +462,16 @@ int main(){unboundGroundTests();chokePresentationTests();
    g.accept();const bool afterAccept=g.streak==0;bool late=false;for(unsigned i=0;i<PresentationRefusalGate::stopStreak;++i)late=g.refuse(PresentationRefusalGate::NotGameplay);
    check(!stopped&&afterAccept&&late&&g.streak==0&&g.last==PresentationRefusalGate::NotGameplay&&g.reasons[PresentationRefusalGate::SkeletonRead]==PresentationRefusalGate::stopStreak-1&&g.longest==PresentationRefusalGate::stopStreak&&!g.refuse(99)&&g.last==0,
      "1213i a transient refused frame is skipped; only a sustained streak stops the presentation (1228e lever froze at 27%)");}
+  {using U=UsePresentation;
+   check(U::contact(.05f)==0&&U::contact(.5f)>.999f&&U::contact(.95f)==0&&U::contact(.21f)>0&&U::contact(.21f)<1&&U::contact(.82f)>0&&U::contact(.82f)<1&&U::contact(std::nanf(""))==0,
+     "1213k use contact window: none while reaching out, full while operating, none after recovery");
+   U::Sample t{1.,1,4,100,U::duration(4),{1.f,2.f,3.f},true},noUse{1.,0,0,0,0,{1.f,2.f,3.f},true},bad{1.,1,4,100,U::duration(4),{std::nanf(""),0,0},true},far{1.,1,4,100,U::duration(4),{2e5f,0,0},true};
+   check(U::valid(t)&&!U::valid(noUse)&&!U::valid(bad)&&!U::valid(far),"1213k a use target is finite, bounded and only travels with a use");
+   // Joint-to-world (grenade_fx): world = root.pos + R * model with R's columns at root[3..11]. useModelTarget inverts it.
+   const float c=std::cos(1.1f),sn=std::sin(1.1f);const float root[12]{10.f,-4.f,2.f, c,sn,0, -sn,c,0, 0,0,1};const float model[3]{.4f,.15f,.2f};float world[3]{},back[3]{};
+   for(unsigned r=0;r<3;++r){world[r]=root[r];for(unsigned k=0;k<3;++k)world[r]+=root[3+k*3+r]*model[k];}
+   useModelTarget(root,world,back);
+   check(std::fabs(back[0]-model[0])<1e-5f&&std::fabs(back[1]-model[1])<1e-5f&&std::fabs(back[2]-model[2])<1e-5f,"1213k useModelTarget inverts the native joint-to-world mapping");}
     }
     {auto stun=p;stun.state=16;stun.stunVariant=1;stun.stunTimeMs=300;stun.stunDurationMs=800;
       for(unsigned v=1;v<=4;++v){stun.stunVariant=v;check(validShadowAction(stun,c,h),"owned native stun direction and clock accepted");}

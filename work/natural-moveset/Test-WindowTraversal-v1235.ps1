@@ -1,0 +1,117 @@
+param([string]$Take='window-traversal-v1235',[string]$Candidate='candidate-npc-combat-v1213j',[string]$Probe='climbable-windows-v1231b',[string]$Window='script_rich_small_01_sndctrl')
+# 1235 (#7, window_enter_exit): the native mantle through a GENUINELY climbable window, both roles,
+# filmed on the partner. Probe 1231b found that Edge of the World windows script_rich_small_01_sndctrl
+# and _10 are climbable: forward + jump from 0.9 m crosses the window plane by about 2 m with the native
+# Mantle, Sneaking and AutoCrouch states (the low confined mantle, bound in 651/656). Each source starts
+# at the probe's measured start spot, faces through the window and pushes forward + jump; the observer
+# films side-on from 3.5 m. Pass: the source crosses, native Mantle is seen, and the partner shows the
+# traversal presentation (traversalWeight > 0.5). Native modals are dismissed. Dunwall fixture restored.
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab"
+$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$captures=[Collections.Generic.List[object]]::new();$rows=[Collections.Generic.List[object]]::new();$samplers=[Collections.Generic.List[object]]::new()
+function Save($p,$v){$v|ConvertTo-Json -Depth 15|Set-Content -LiteralPath $p}
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function S($r,$suffix=''){for($i=0;$i-lt40;$i++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
+function Q($r,$mode,$arg=0){for($i=0;$i-lt8;$i++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 50};throw "Native query failed $r $mode"}
+function F($r){for($i=0;$i-lt6;$i++){$raw=& "$lab/bin/d2_runtime_probe.exe" $pids[$r] --focus;if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 50};throw "Focus query failed $r"}
+function I($r,[string]$b='Neutral',[int]$ms=100){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms|Out-Null}
+function ProductStatus($r){S $r '.product.json'}
+function Live($r){$s=S $r;$m=S $r '.movement.json';$x=S $r '.shadow-stream.json';$a=$s.probeRenderPosition;$b=$s.remotePosition
+ $d=if($a-and$b){[Math]::Sqrt(($a[0]-$b[0])*($a[0]-$b[0])+($a[1]-$b[1])*($a[1]-$b[1])+($a[2]-$b[2])*($a[2]-$b[2]))}else{999}
+ @{follow=$s.probeFollowEnabled;distance=[Math]::Round($d,3);product=(S $r '.product.json').result;bank=[bool]$m.active;bankVersion=$m.version;stream=[bool]($x.armed-and$x.ready);ok=($s.probeActorHandle-and$s.probeFollowEnabled-and$d-lt1.0-and$m.active-and$x.armed-and$x.ready-and$s.remoteFresh)}}
+function WaitLive($tag,$limit=30000){$w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 300;$p=@{host=(Live host);client=(Live client)};$ok=$p.host.ok-and$p.client.ok}while(!$ok-and$w.ElapsedMilliseconds-lt$limit);$p.ok=$ok;$p.waitMs=$w.ElapsedMilliseconds;Save "$out/live-$tag.json" $p;return $p}
+$modals=[Collections.Generic.List[object]]::new()
+function ClearModals($tag){for($i=0;$i-lt4;$i++){$hit=$false;foreach($r in 'host','client'){$l=(S $r).localGameLogicState;if($l-in12,2){$hit=$true;$modals.Add(@{tag=$tag;role=$r;logic=$l;at=[DateTime]::Now.ToString('o')});I $r B 200;Start-Sleep -Milliseconds 300;I $r}};if(!$hit){return};Start-Sleep -Milliseconds 900}}
+function Pitch($r,$deg){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $r -Pitch $deg -Quick|Out-Null;$true}catch{$false}}
+function Crossing($src,$obs,$w,$a){
+ $row=[ordered]@{source=$src;observer=$obs;window=$Window;passed=$false;failure=$null}
+ try{
+  $bx=$a.before[0];$by=$a.before[1];$ax=$a.after[0];$ay=$a.after[1];$dx=$ax-$bx;$dy=$ay-$by;$len=[Math]::Sqrt($dx*$dx+$dy*$dy);$nx=$dx/$len;$ny=$dy/$len
+  $yaw=[Math]::Atan2($ny,$nx)*180/[Math]::PI
+  C $src ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$bx,$by,($a.before[2]+0.3),$yaw);Start-Sleep -Milliseconds 900;ClearModals "start-$src"
+  $p=$w.position;$start=(Q $src '--player').candidatePosition;$row.start=$start
+  $d0=($start[0]-$p[0])*$nx+($start[1]-$p[1])*$ny
+  $live=WaitLive "before-$src" 25000;if(!$live.ok){throw "Partner presentation not live before the $src crossing"}
+  # Observer side-on, 3.5 m from the window, perpendicular to the crossing direction.
+  $px=-$ny;$py=$nx;$ox=$p[0]+3.5*$px;$oy=$p[1]+3.5*$py;$oyaw=[Math]::Atan2($p[1]-$oy,$p[0]-$ox)*180/[Math]::PI
+  C $obs ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$ox,$oy,($start[2]+0.3),$oyaw);Start-Sleep -Milliseconds 900;ClearModals "observer-$obs"
+  $row.observerPitch=Pitch $obs 5
+  for($h=0;$h-lt3;$h++){C $obs 'coop_observer_camera hold';Start-Sleep -Milliseconds 500;$hold=S $obs '.observer-camera.json';if($hold.active){break};C $obs 'coop_observer_camera off';Start-Sleep -Milliseconds 700}
+  if(!$hold.active){throw "Observer camera hold failed on ${obs}: $($hold.result)"}
+  $live=WaitLive "camera-$src" 20000;if(!$live.ok){throw "Partner presentation not live with the $obs camera held"}
+  $hwnd=(Get-Process -Id $pids[$obs]).MainWindowHandle.ToInt64()
+  $ff=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t','9','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/cross-$src-observed.mp4")
+  $cap=Start-Process (Get-Command ffmpeg).Source -ArgumentList $ff -WindowStyle Hidden -RedirectStandardError "$out/cross-$src-capture.log" -PassThru;$captures.Add($cap)
+  $sampler=Start-Process (Get-Process -Id $PID).Path -ArgumentList @('-NoProfile','-File',"$PSScriptRoot/Sample-StatusFile-v1023.ps1",'-Path',"$root/work/lab-instances/$obs/coop-status.json.movement.json",'-Out',"$out/cross-$src-observer-movement.ndjson",'-DurationMs',8000) -WindowStyle Hidden -PassThru;$samplers.Add($sampler)
+  Start-Sleep -Milliseconds 1200
+  $types=@{};$sw=[Diagnostics.Stopwatch]::StartNew();& "$lab/Send-D2Input.ps1" -Role $src -Button A -DurationMs 1600 -LeftY 32767|Out-Null
+  while($sw.ElapsedMilliseconds-lt2200){try{foreach($st in (Q $src '--player-states').active){$types[$st.type]=1}}catch{};Start-Sleep -Milliseconds 100}
+  I $src;Start-Sleep -Milliseconds 800
+  $end=(Q $src '--player').candidatePosition;$d1=($end[0]-$p[0])*$nx+($end[1]-$p[1])*$ny
+  $row.end=$end;$row.signedBefore=[Math]::Round($d0,3);$row.signedAfter=[Math]::Round($d1,3);$row.crossed=($d0-lt0-and$d1-gt0.4);$row.states=@($types.Keys)
+  $row.mantle=[bool](@($types.Keys|Where-Object {$_-match'Mantle'}).Count)
+  if(!$sampler.WaitForExit(15000)){Stop-Process -Id $sampler.Id};if(!$cap.WaitForExit(30000)){Stop-Process -Id $cap.Id}
+  C $obs 'coop_observer_camera off'
+  $samples=@(Get-Content "$out/cross-$src-observer-movement.ndjson"|ForEach-Object {($_|ConvertFrom-Json).status})
+  $tr=@($samples|Where-Object {$_.traversalWeight-gt.5})
+  $row.observerSamples=$samples.Count;$row.traversalSamples=$tr.Count;$row.traversalVariants=@($samples|ForEach-Object {$_.traversalVariant}|Sort-Object -Unique)
+  $row.maxTraversalWeight=(($samples|ForEach-Object {[double]$_.traversalWeight}|Measure-Object -Maximum).Maximum);$row.minWeight=(($samples|ForEach-Object {[double]$_.weight}|Measure-Object -Minimum).Minimum)
+  if(!$row.crossed){throw "Source did not cross the window (${src}: $($row.signedBefore) -> $($row.signedAfter))"}
+  if(!$row.mantle){throw "No native Mantle state during the $src crossing"}
+  if(!$tr.Count){throw "Partner did not present the traversal ($src -> $obs)"}
+  $row.passed=$true
+ }catch{$row.failure=$_.Exception.Message;try{C $obs 'coop_observer_camera off'}catch{}}
+ $rows.Add($row);Save "$out/cross-$src.json" $row}
+function WaitGameplay($limitMs){$w=[Diagnostics.Stopwatch]::StartNew();$log=[Collections.Generic.List[object]]::new();$last=@{host=0;client=0}
+ do{Start-Sleep -Milliseconds 500;$ready=$true
+  foreach($r in 'host','client'){$s=S $r;$log.Add(@{ms=$w.ElapsedMilliseconds;role=$r;logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMapId})
+   if($s.localGameLogicState-ne1-or$s.localPendingGameLogicState){$ready=$false}
+   if($s.localGameLogicState-in8,15-and$w.ElapsedMilliseconds-gt5000-and$w.ElapsedMilliseconds-$last[$r]-gt1500){I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
+   elseif($s.localGameLogicState-eq5-and$w.ElapsedMilliseconds-$last[$r]-gt4000){I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
+   elseif($s.localGameLogicState-eq12-and$w.ElapsedMilliseconds-$last[$r]-gt1500){I $r B 200;$last[$r]=$w.ElapsedMilliseconds}}
+  if($ready-and(S host).localMapId-ne(S client).localMapId){$ready=$false}
+ }while(!$ready-and$w.ElapsedMilliseconds-lt$limitMs);return @{ready=$ready;log=@($log)}}
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Native operation active'}
+ if(Test-Path $out){throw 'Unique take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+ foreach($r in 'host','client'){$l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json;if((Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated process'};$pids[$r]=$l.pid;if((S $r).localGameLogicState-ne1){throw 'Gameplay required'}}
+ $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
+ $probe=Get-Content (Join-Path $PSScriptRoot "$Probe/result.json") -Raw|ConvertFrom-Json;$w=@($probe.windows|Where-Object name -eq $Window)[0]
+ $a=@($w.attempts|Where-Object crossed)[0];if(!$a){throw "Probe $Probe has no crossing for $Window"}
+ Save "$out/identity.json" @{candidate=$Candidate;dll=$pin.dll;probe=$Probe;window=$Window;attempt=$a}
+ $dirty=$true
+ foreach($r in 'host','client'){I $r;foreach($cmd in 'coop_checkpoint_sync off','coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off'){C $r $cmd}}
+ C host 'campaign campaign/edge_of_the_world/eotw.mapinfo low corvo';C client 'campaign campaign/edge_of_the_world/eotw.mapinfo low emily'
+ $g=WaitGameplay 300000;Save "$out/load-log.json" $g.log;if(!$g.ready){throw 'Both instances did not reach the same mission gameplay'}
+ foreach($r in 'host','client'){C $r $(if($r-eq'client'){'coop_checkpoint_delay 1500'}else{'coop_checkpoint_delay 0'})}
+ foreach($r in 'host','client'){C $r 'coop_product_auto on'}
+ $wt=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$ok=(ProductStatus host).result-eq'armed'-and(ProductStatus client).result-eq'armed'}while(!$ok-and$wt.ElapsedMilliseconds-lt60000)
+ if(!$ok){throw 'Product controller not armed'}
+ Crossing host client $w $a
+ Crossing client host $w $a
+ Save "$out/modals.json" @($modals)
+ $bad=@($rows|Where-Object {!$_.passed})
+ if($bad.Count){$failure=($bad|ForEach-Object {"$($_.source): $($_.failure)"})-join '; '}
+ Save "$out/verified.json" @{passed=!$bad.Count;cases=$rows.Count}
+}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
+finally{
+ if($owned){
+  $errors=[Collections.Generic.List[string]]::new()
+  foreach($s in $samplers){try{if(!$s.HasExited){Stop-Process -Id $s.Id}}catch{}}
+  foreach($c in @($captures)){try{if(!$c.HasExited-and!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}}
+  if($dirty){
+   $cw=[Diagnostics.Stopwatch]::StartNew()
+   do{$off=$true;foreach($r in 'host','client'){try{I $r;C $r 'coop_observer_camera off';C $r 'coop_product_auto off';C $r 'coop_movement_resume off';foreach($cmd in 'coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off','coop_shadow_stream off','coop_movement_bank off','coop_trigger_mirror off'){C $r $cmd};C $r 'coop_checkpoint_sync off';$st=S $r
+     if((S $r '.reset.json').enabled){$off=$false;if($st.localGameLogicState-in8,15){I $r A 300}elseif($st.localGameLogicState-eq2){I $r B 200}}}catch{}}
+    if(!$off){Start-Sleep -Milliseconds 1500}}while(!$off-and$cw.ElapsedMilliseconds-lt60000)
+   foreach($r in 'host','client'){try{if((S $r).localGameLogicState-in2,12){I $r B 200;Start-Sleep -Milliseconds 800}}catch{}}
+   try{& "$root/work/PrepareShadowSword.ps1" -EvidencePath "$out/restored-setup.json"|Out-Null;& "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$root/work/natural-moveset/native-coin-reward-v786c" -Evidence "$out/note-restoration"|Out-Null}catch{$errors.Add($_.Exception.Message)}
+  }
+  foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw 'Final gameplay/health/transport not restored'}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
+  foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}
+  Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '}
+  Save "$out/result.json" @{passed=(!$failure);failure=$failure;cases=@($rows);scope='window_enter_exit: native mantle through a climbable Edge of the World window, both roles, partner traversal presentation filmed; Dunwall fixture restored.'}
+  $mutex.ReleaseMutex()
+ };$mutex.Dispose()
+}
+Get-Content "$out/result.json";if($failure){throw $failure}
