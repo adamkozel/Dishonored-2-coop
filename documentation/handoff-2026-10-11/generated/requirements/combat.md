@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T08:00:08.819338+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1015,7 +1015,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
 - [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants
 
-Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
+Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.
 
 ````json
 {
@@ -1039,19 +1039,21 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "empty_stinghit_death"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
+  "notes": "Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-combat-v1117/combat-client.mp4"
   ],
   "evidence": [
-    "../movement-integration/mission-corpse-audit-v1118.json"
+    "../movement-integration/mission-corpse-audit-v1118.json",
+    "../movement-integration/takedown-variants-audit-v1257.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
+- [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
 ## ragdoll_handoff
 

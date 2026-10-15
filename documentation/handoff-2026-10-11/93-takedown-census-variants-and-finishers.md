@@ -51,7 +51,31 @@ One-off checks per scene don't scale, so the reader now uses a generated table.
 | 1254a | 1214c | slide lethal, both roles | not presented: stance 5 refused (fixed in 1214d) |
 | 1254a | 1214c | slide choke, client | host guard stayed conscious: knockout request capped (fixed in 1214d) |
 | 1256a | 1214d | host finisher `fatality_leftarm_medium_a` | ran in Assassination13; 1214d looked only in Slash39 (fixed in 1214e) |
-| 1256b | 1214e | host finisher `fatality_torso_medium_a` | five bindings, one empty (fixed in 1214f) |
-| 1256b | 1214e | client finisher `fatality_generic_right` | admitted on the source (id 92), not presented by the host; diagnosed in 1256c |
+| 1256b | 1214e | host finisher `fatality_torso_medium_a` | refused: five bindings, one of them empty (fixed in 1214f) |
+| 1256b | 1214e | client finisher `fatality_generic_right` | admitted on the source (id 92), not presented by the host; the source dropped the sample for lacking a combat scene (fixed in 1214g) |
+| 1254b | 1214e | drop choke, both roles (`choke_drop_back`) | id 58, unconscious in both worlds, 0.0/0.01 m |
+| 1254b | 1214e | drop lethal, both roles | id 19, dead in both worlds, 0.0 m |
+| 1254b | 1214e | slide choke, both roles | id 73, unconscious in both worlds, 0.0/0.29 m (client knockout request now sent) |
+| 1254b | 1214e | slide lethal, both roles (`assassination_slide_back`) | id 33 presented at stance 5, dead in both worlds, 0.0 m |
+| 1254b | 1214e | side chokes, Emily (`choke_left`, `choke_right`) | ids 68/69, then loop and win, 0.72/0.08 m |
+| 1256c–e | 1214f/g | host finishers `fatality_torso_fast_b`, `fatality_head_medium_a`, `fatality_rightleg_fast_a` | ids 113/96/109, dead in both worlds, 0.0 m |
+| 1256f–g | 1214g | client finishers `fatality_generic_right`, `fatality_head_fast_c` | ids 92/95, dead in both worlds, 0.0 m |
 
 Side and front lethals by a standing attacker were noticed by the guard and became sword fights (fixture limitation, not a reader refusal). In one of them the host's strike played a finisher.
+
+## Shared outcomes and visuals
+
+[Audit 1257](../../work/movement-integration/takedown-variants-audit-v1257.json) records all of the above.
+
+**Bound in both source roles (confirmed runtime):** `aerial_drop_kill`, `aerial_nonlethal_takedown` and `sliding_takedown`. For each, the partner presents the scene and both worlds agree on the outcome, with victims 0.0–0.29 m apart.
+
+**Visual acceptance (functional):** contact sheets from both windows show the partner dropping or sliding onto the guard, then stabbing, or holding and lowering him, with the body ending at their feet. The motion is the existing fast-back stab or choke donor normalized to the native scene clock. Drop- and slide-specific motion is left for the animator.
+
+Sword finishers (the 28 census-1255 fatalities) are presented as paired lethal scenes in both roles, and the death is shared (`death_variants` notes).
+
+**Still partial:**
+- side and front lethals (the guard notices a standing attacker);
+- Corvo's side chokes and Emily's front choke;
+- window and wall variants (`wall_and_window_variants`);
+- enemy body sizes (`enemy_body_size_variants`);
+- Emily's 2200 ms `assassination_back`, admitted statically but not yet seen at runtime.
