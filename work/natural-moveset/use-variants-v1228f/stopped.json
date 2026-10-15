@@ -1,0 +1,7 @@
+{
+  "take": "use-variants-v1228f",
+  "candidate": "candidate-npc-combat-v1214ag",
+  "state": "stopped_on_game_over",
+  "summary": "Both turbine-lever cases and both latch cases passed at runtime (use weight 1.0). After fixture_off released the AI hold, guards killed a player during the tap seeks; both games sat on Game Over (logic 13), which this harness does not detect, so it kept seeking. The user reported the stuck death screen; the harness was stopped, A was pressed on both peers (Restart From Last Checkpoint), Recover-InterruptedTake-v1055 restored the fixture (its note step failed to read the inventory once; recovery-note-restoration-retry passed), health 56 on both.",
+  "visualReview": "Not accepted (#33). Host-source lever: a city watch guard crosses the frame and Corvo is not clearly visible. Client-source lever: Emily never appears in the observer view. The AI hold acquired 18 NPCs for the host case and failed to acquire (fixture_acquire_failed) for the client case."
+}
