@@ -11,7 +11,8 @@
 // mission natively with its own character state. Node ids never cross
 // processes (they are localization string ids): each world finds its own.
 // 1214ay adds the both-ready hold at the next map's load end (below); 1214az
-// keeps the window responsive while it holds.
+// keeps the window responsive while it holds; 1214ba makes chaos follow the
+// host (below).
 #pragma pack(push,1)
 struct MissionEndPacket {
     std::uint32_t magic=0x454D3244; // "D2ME"
@@ -172,12 +173,78 @@ void serviceMissionEndMirror(std::uint64_t tick){
     m.appliedEpoch=outgoing.worldEpoch;m.sentEpoch=outgoing.worldEpoch;
     ++m.applied;m.pending=false;m.result="applied";expectMissionTransition(tick);
 }
+// 1214ba: chaos follows the host, as the world's authority. Each world picks
+// the next map's low/high chaos variant from its own chaos level, computed at
+// mission completion from the player's arkCpntPlayerChaos points (+0x24;
+// level at +0x20; vtable +0x1b63248, confirmed runtime) against the mission's
+// thresholds (0x1404ea390, confirmed static). While both peers are on the
+// same map, the host publishes its points about once a second and the
+// partner keeps its own equal, so either player's mission end computes the
+// same level and loads the same variant.
+#pragma pack(push,1)
+struct ChaosSyncPacket {
+    std::uint32_t magic=0x48433244; // "D2CH"
+    std::uint16_t version=1,size=sizeof(ChaosSyncPacket);
+    std::uint32_t role=0;std::int32_t points=0,level=0,reserved=0;
+    std::uint64_t session=0,mapId=0,sequence=0;
+};
+#pragma pack(pop)
+static_assert(sizeof(ChaosSyncPacket)==48);
+struct ChaosSync {
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,writes=0,missing=0,sentAt=0,hostMap=0;
+    std::int32_t hostPoints=-1,hostLevel=-1,localPoints=-1,localLevel=-1,before=-1;bool pending=false;const char* result="idle";
+};
+ChaosSync chaosSync{};
+std::uintptr_t findPlayerChaos(){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned count=0;
+    if(!observedPlayer||!memoryRead(observedPlayer+0x268,&list,8)||!list||!memoryRead(observedPlayer+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 0;
+    for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,vt=0,owner=0;
+        if(memoryRead(list+i*8,&c,8)&&c&&memoryRead(c,&vt,8)&&vt==base+0x1b63248&&memoryRead(c+0x10,&owner,8)&&owner==observedPlayer)return c;}
+    return 0;
+}
+// Lab only (refused in product mode): set this world's chaos points, so a
+// take can make the two worlds' chaos differ.
+std::uint64_t labChaosWrites=0,labChaosRefused=0;
+void labSetChaosPoints(const char* text){
+    char* end=nullptr;const long v=std::strtol(text,&end,10);const auto component=findPlayerChaos();
+    if(productMode||!end||*end||v<0||v>100000||!component||GetCurrentThreadId()!=engineThread.load()){++labChaosRefused;return;}
+    *reinterpret_cast<std::int32_t*>(component+0x24)=static_cast<std::int32_t>(v);++labChaosWrites;
+}
+void receiveChaosSync(const ChaosSyncPacket& p){
+    auto& c=chaosSync;++c.received;
+    if(p.magic!=0x48433244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||p.sequence<=c.peerSequence||
+       p.points<0||p.points>1000000||p.level<0||p.level>2||!p.mapId){++c.refused;return;}
+    c.peerSequence=p.sequence;c.hostPoints=p.points;c.hostLevel=p.level;c.hostMap=p.mapId;c.pending=true;
+}
+void serviceChaosSync(std::uint64_t tick){
+    if(GetCurrentThreadId()!=engineThread.load())return;
+    auto& c=chaosSync;if(!(missionEndMirrorEnabled||productMode)){c.pending=false;return;}
+    const auto component=findPlayerChaos();
+    if(component){memoryRead(component+0x20,&c.localLevel,4);memoryRead(component+0x24,&c.localPoints,4);}
+    const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected;
+    if(localRole==0){
+        if(!connected||!component||tick-c.sentAt<1000||!coopGameplayReady(outgoing))return;
+        ChaosSyncPacket p{};p.role=0;p.points=c.localPoints;p.level=c.localLevel;p.session=outgoing.session;p.mapId=outgoing.mapId;p.sequence=++c.sequence;
+        if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK){++c.sent;c.sentAt=tick;c.result="publishing";}
+        return;
+    }
+    if(!c.pending)return;
+    if(c.hostMap!=outgoing.mapId){c.result="other_map";return;}
+    // Ordinary gameplay or a scene only: never during loads or result screens.
+    const unsigned logic=outgoing.gameLogicState;
+    if(outgoing.pendingGameLogicState||(logic!=1&&logic!=5)){c.result="waiting_native_phase";return;}
+    if(!component){++c.missing;c.result="component_missing";return;}
+    c.pending=false;
+    if(c.localPoints==c.hostPoints){c.result="equal";return;}
+    c.before=c.localPoints;*reinterpret_cast<std::int32_t*>(component+0x24)=c.hostPoints;c.localPoints=c.hostPoints;++c.writes;c.result="matched_host";
+}
 void writeMissionEndMirror(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.missionend.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionEnd;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu}}\n",
+    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,
-        transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks);
+        transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
+        chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
