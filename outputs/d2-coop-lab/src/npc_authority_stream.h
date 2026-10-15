@@ -76,6 +76,8 @@ struct NpcAuthorityChannel {
     // 1214n: when the corpse appeared, and the host's Dead reconciliation for a death
     // the combat channel never shared.
     ULONGLONG corpseAt=0,deadSentAt=0;unsigned deadSends=0;const char* deathShare="none";
+    // 1214ae: a body the client carries (host: carriedUntil; client: localCarryUntil).
+    ULONGLONG carriedUntil=0,localCarryUntil=0,carryControlAt=0;std::uint64_t carryControls=0,carryPoses=0;
     // 1213u (#46): a paired takedown by the CLIENT on this host-owned NPC. Client:
     // localPaired keeps its native victim animation (host poses are not applied);
     // a choke that knocks the replica out keeps it natively unconscious. Host:
@@ -403,6 +405,7 @@ void receiveNpcControl(const CoopNpcControl& p,ULONGLONG tick){
         if((p.h.kind==NpcAuthorityMessage::PairedHold||p.h.kind==NpcAuthorityMessage::PairedKnockout)&&!localRole)hostNpcPaired(c,p,tick);
         if(p.h.kind==NpcAuthorityMessage::Unconscious&&localRole)clientNpcUnconscious(c);
         if(p.h.kind==NpcAuthorityMessage::Dead&&localRole)clientNpcDead(c);
+        if(p.h.kind==NpcAuthorityMessage::Carry&&!localRole){c.carriedUntil=tick+800;++c.carryControls;}
     }
     c.peerSequence=p.h.sequence;c.peerAt=tick;
 }
@@ -412,7 +415,7 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
     auto it=std::find_if(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&c.arm==p.h.targetArm;});
     if(it==npcChannels.end()){++npcPacketsRejected;return;}auto& c=*it;++c.received;
     const bool reverse=p.h.kind==NpcAuthorityMessage::PairedPose;
-    if(reverse?(localRole||!c.ready||c.corpse||!(c.hostPairedLease||(c.unconscious&&tick-c.unconsciousAt<3500))):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;return;}
+    if(reverse?(localRole||!c.ready||(c.corpse&&tick>=c.carriedUntil)||!(c.hostPairedLease||(c.unconscious&&tick-c.unconsciousAt<3500)||tick<c.carriedUntil)):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;return;}
     if(p.h.sourceArm!=c.peerArm||p.h.sourceHandle!=c.peerHandle||p.h.targetHandle!=c.lease.binding.npc.handle||
        p.h.rig!=c.rig||p.h.joints!=c.render.joints||!c.buffer.push(p,presentationClock())){++c.rejected;return;}
     c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);}else{c.poseAt=tick;++c.poses;}
@@ -479,6 +482,12 @@ void serviceNpcStream(ULONGLONG tick){
     unsigned pairedHandle=0,pairedVariant=0;
     if(localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         if(readNativePlayerStates(memoryRead,base,st)&&readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}}
+    // 1214ae: the bound replica the client carries (carry state 45 +0xf8, drop state 46 +0x38).
+    unsigned carriedHandle=0;
+    if(localRole){NativePlayerStates st{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+        if(readNativePlayerStates(memoryRead,base,st))for(const auto& a:st.active){unsigned h=0;
+            if(a.id==45&&a.vtable==base+0x1c77748&&memoryRead(a.pointer+0xf8,&h,4)&&h){carriedHandle=h;break;}
+            if(a.id==46&&a.vtable==base+0x1c790c8&&memoryRead(a.pointer+0x38,&h,4)&&h){carriedHandle=h;break;}}}
     for(auto& c:npcChannels){if(!c.enabled)continue;
         if(tick<c.started)continue;
         if(npcStreamPeerExpired(tick,c.started,c.peerAt,c.peerArm!=0)){stopNpcChannel(c,"peer_timeout");continue;}
@@ -492,6 +501,11 @@ void serviceNpcStream(ULONGLONG tick){
         // apart, the client ragdoll never following the host body).
         }else if(localRole&&c.localPaired&&(!c.unconscious||c.corpse)&&tick>=c.pairedUntil){c.localPaired=false;c.pairedResult=c.corpse?"client_paired_corpse":"client_paired_ended";}
         if(!localRole)serviceHostNpcPaired(c,tick);
+        if(localRole&&c.ready&&carriedHandle&&c.lease.binding.npc.handle==carriedHandle)c.localCarryUntil=tick+2500;
+        if(localRole&&c.ready&&tick<c.localCarryUntil){
+            if(tick-c.carryControlAt>=200){c.carryControlAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Carry))++c.carryControls;}
+            if(tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;++c.carryPoses;}}
+        if(!localRole&&c.ready&&tick<c.carriedUntil)npcCorpseHoldAnimated(c);
         if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}
         if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}
         if(!localRole&&c.corpse&&c.ready&&c.corpseAt&&c.deadSends<5){const unsigned share=npcCombatDeathShare(c.arm);
@@ -541,7 +555,7 @@ void presentNpcStream(ULONGLONG tick){
     std::vector<NpcRenderState> next;
     for(auto& c:npcChannels){
         const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
-        if(!hostVictim&&(!localRole||!c.enabled||!c.ready||c.localPaired||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
+        if(!hostVictim&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
         NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
@@ -553,7 +567,7 @@ void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs);
-    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends);}
+    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses));}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
     fputs("],\"poseDiagnostics\":[",f);for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"stale\":%s,\"gaps\":%llu,\"recoveries\":%llu,\"failures\":%llu,\"lastFailure\":\"%s\",\"joint\":%d,\"matrix\":[",i?",":"",c.arm,c.lease.binding.npc.handle,c.poseStale?"true":"false",c.poseGaps,c.poseRecoveries,c.poseFailures,c.poseFailure,c.poseFailureJoint);
         for(unsigned j=0;j<12;++j)fprintf(f,"%s%.9g",j?",":"",c.poseFailureMatrix[j]);fputs("],\"root\":[",f);

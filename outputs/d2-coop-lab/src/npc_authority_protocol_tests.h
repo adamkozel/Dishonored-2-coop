@@ -41,6 +41,12 @@ void npcAuthorityProtocolTests(){
      require(npcRelevanceDisplaces(pr[24],pr[23])&&!npcRelevanceDisplaces(pr[24],pr[1]),"the host's guard displaces the client's 24th NPC, not its nearest");
      require(!npcRelevanceDisplaces(5,6)&&npcRelevanceDisplaces(3,6),"two-rank margin against churn");
      require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");}
+    {// 1214ae: the client reports the body it carries.
+     CoopNpcControl k=p;k.h.kind=NpcAuthorityMessage::Carry;k.h.role=1;k.h.targetArm=8;k.h.targetHandle=0x50009;
+     std::swap(k.h.sourceSession,k.h.targetSession);std::swap(k.h.sourceEpoch,k.h.targetEpoch);
+     require(validNpcControl(k,host,client),"the client reports a carried bound NPC to the host");
+     auto x=k;x.h.reserved=1;require(!validNpcControl(x,host,client),"carry carries no variant");
+     x=k;x.h.targetArm=0;require(!validNpcControl(x,host,client),"carry names the host channel");}
     {// 1214ad: Life roster for unbound NPCs, either role.
      CoopNpcControl l=p;l.h.kind=NpcAuthorityMessage::Life;l.h.reserved=2;l.h.targetArm=0;l.h.targetHandle=0;l.h.rig=1;l.h.joints=1;l.h.sourceArm=l.h.sourceHandle=0x50009;
      require(validNpcControl(l,client,host),"the host reports an unbound NPC's death");

@@ -90,7 +90,7 @@ Updated 2026-10-14. Continues the Dunwall NPC work in chapters [70–72](70-gene
 
 **Open:**
 - Retiring distant corpses (dynamic relevance).
-- Physics interaction with a held client corpse, and carrying a streamed corpse.
+- Physics interaction with a held client corpse. Carrying a choked body is shared in both roles ([chapter 95](95-shared-combat-authority.md#carried-bodies-1214ae-harness-1277), 1214ae).
 - Guards engaging both players.
 - Shared player death and checkpoints on missions.
 
