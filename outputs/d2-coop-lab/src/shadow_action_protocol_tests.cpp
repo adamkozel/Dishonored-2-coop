@@ -97,6 +97,9 @@ void chokePresentationTests(){
     check(!nativePlayerGroundChokeStates(native,base)&&!nativePresentationFallbackGround(native,base),"lethal identity does not admit choke or generic fallback");
     native.player.current=1;check(nativePlayerGroundAssassinationStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0,"observed crouched fast-back lethal (1244b) keeps its crouched stance");
     native.player.current=12;check(!nativePlayerGroundAssassinationStates(native,base),"unobserved assassination stance refused");
+    native.player.current=5;check(!nativePlayerGroundAssassinationStates(native,base)&&nativePlayerSlideTakedownStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0&&
+          nativeTakedownStates(33,native,base)&&!nativeTakedownStates(5,native,base),"slide lethal (1254a) keeps sliding stance 5 in Assassination13; only census slide-capable ids admit it");
+    native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",2200)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
@@ -110,6 +113,11 @@ void chokePresentationTests(){
            !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_ready.midnightscene","Scene_1",366)&&
            !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1801)&&
            !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","Npc",1800),"census takedown scenes admitted by exact asset, subscene and duration; carry and drop-ready phases are not takedowns");}
+    {const auto right=nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_right.midnightscene","Scene_1",1333),
+         torso=nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_torso_fast_b.midnightscene","npc",1500);
+     check(right==92&&nativeTakedownFatality(right)&&nativeTakedownLethal(right)&&nativeTakedownArms(right)==1&&
+           torso>92&&nativeTakedownFatality(torso)&&nativeTakedownArms(torso)==2&&!nativeTakedownFatality(5)&&nativeTakedownArms(5)==2&&
+           !nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_double_kill.midnightscene","Emily",2166),"census-1255 fatalities are lethal scenes with their bound arms; the double kill binds no AI group");}
     ChokePresentation t;ChokePresentation::Sample out{};float amount=0;
     check(t.push({100,1,1,200,600,31,41})&&t.push({140,1,1,240,600,31,41}),"confirmed choke clock accepted");
     check(t.sample(120,out,amount)&&std::fabs(amount-220.f/600)<1e-6f,"choke uses delayed native clock");

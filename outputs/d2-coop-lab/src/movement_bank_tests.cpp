@@ -9,7 +9,7 @@ template<class T>void put(std::vector<unsigned char>& b,size_t off,T v){std::mem
 int main(int argc,char** argv){
     {MovementBank old;old.version=63;check(old.hasChoke(3)&&!old.hasChoke(4),"old choke bank cannot address absent breakout clip");}
     {MovementBank old;old.version=64;check(old.hasChoke(4)&&!old.hasChoke(5)&&!old.hasChoke(6)&&!old.hasChoke(58),"bank64 cannot address absent lethal clip");}
-    {MovementBank b;b.version=65;check(b.hasChoke(58)&&b.hasChoke(89)&&!b.hasChoke(90),"bank65 presents every census takedown scene, nothing else");}
+    {MovementBank b;b.version=65;check(b.hasChoke(58)&&b.hasChoke(92)&&b.hasChoke(kNativeTakedownSceneCount)&&!b.hasChoke(kNativeTakedownSceneCount+1),"bank65 presents every census takedown scene, nothing else");}
     {MovementBank old;old.version=65;check(!old.hasKick(),"old bank cannot address absent kick clip");}
     {MovementBank old;old.version=66;check(!old.hasCrouchHeavy(),"old bank cannot address crouched heavy clips");}
     check(argc==1||argc==3,"no args for protocol fixtures, or two actual native banks");
