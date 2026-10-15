@@ -44,6 +44,7 @@ NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest
 // only that NPC, and the product controller re-arms a stopped session.
 bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
 const char* npcCombatLastRetire="none";
+void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
 void traceNpcCombat(const CoopNpcCombat& p,bool sent,const char* result,std::uint64_t peerNonce=0){
@@ -84,6 +85,18 @@ void clearNpcCombatCapture(){
     npcCombatOrdinaryTestUntil.store(0);
     AcquireSRWLockExclusive(&npcCombatCaptureLock);npcCombatCaptureBindings.clear();npcCombatCaptures.clear();ReleaseSRWLockExclusive(&npcCombatCaptureLock);
 }
+// 1213w (#46): knockout damage passes through the capture. A native choke knocks
+// its victim out with code_referenced/damage/generic_sleep_damage (probe 1251c
+// reproduced the choke knockout exactly); captured, it was refused as unknown
+// ("hit_damage_parameters"), suppressed - no knockout - and stopped the session
+// (take 1248c host choke). Unconsciousness is shared by the NPC stream instead
+// (Unconscious host->client, PairedKnockout client->host).
+bool npcCombatPassThroughDecl(std::uintptr_t decl){
+    std::uintptr_t name=0;std::string path;
+    return decl&&memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,path)&&
+        (path=="code_referenced/damage/generic_sleep_damage.damage"||path=="components/base/damage/sleep_damage.damage"||path=="components/base/damage/sleep_no_reaction_damage.damage");
+}
+std::atomic<std::uint64_t> npcCombatPassedThrough{0};
 bool routeNpcCombatDamage(void* component,void* info,void* result){
     // Explicit applications call realNativeDamage directly. Nested damage
     // callbacks still need ordinary capture/ordering; do not bypass all of
@@ -93,6 +106,7 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
         std::uintptr_t owner=0,game=0;unsigned generation=0;
         if(!memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x39a5290,&game,8)||game!=n.health.game||worldIdentityEntity(memoryRead,n.health.game,n.npc.handle)!=n.npc.actor||!memoryRead(c+0x10,&owner,8)||owner!=n.npc.actor||
            !memoryRead(c+0x18,&generation,4)||generation!=n.healthGeneration)continue;
+        std::uintptr_t decl=0;if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl)){++npcCombatPassedThrough;break;}
         handled=true;NpcCombatCapture e{};e.nonce=b.nonce;e.arm=b.arm;e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.component=c;
         if(npcCombatCaptures.size()>=64||!memoryRead(reinterpret_cast<std::uintptr_t>(info),e.info.data(),e.info.size())||!memoryRead(n.npc.actor+0x300,e.position,12))npcCombatCaptureFault.store(1);
         else{
@@ -472,7 +486,7 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
         }
         else if(!npcCombatExtract(*c,info,damage,geometry,capture.position,sourceArm,sourcePending,script,ranged,capture))refusal="hit_damage_parameters";
         npcCombatLastOwnerFlags=before.ownerFlags;
-        if(refusal){empty();++npcCombat.rejected;stopNpcCombat(refusal);return true;}
+        if(refusal){empty();++npcCombat.rejected;retireNpcCombatChannel(b,refusal);return true;}
         const bool world=npcCombatWorldDamage(damage);
         if(world&&localRole){empty();++npcCombat.replicaWorldSuppressed;return true;}
         if(world&&sourcePending){
@@ -661,7 +675,7 @@ void serviceNpcCombat(ULONGLONG tick){
 void repeatNpcCombat(){if(npcCombat.enabled&&npcCombat.lastSent.sourceNonce==npcCombat.nonce&&npcCombat.lastSent.event+npcCombat.lastSent.request)sendNpcCombat(npcCombat.lastSent);}
 void writeNpcCombat(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-combat.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    const auto& s=npcCombat;fprintf(f,"{\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
+    const auto& s=npcCombat;fprintf(f,"{\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false");}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);

@@ -1,0 +1,252 @@
+{
+  "passed": false,
+  "failure": "3 case(s) failed: client-lethal: Native read failed --health | host-choke: Outcome differs: source conscious, observer conscious, expected unconscious | host-lethal: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious"
+      ],
+      "guardHandleSource": "0xb480764",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.5625,
+          -149.625,
+          66.4
+        ],
+        "observer": [
+          -47.6178,
+          -145.814,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:16:40.1268092+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "final": {
+        "source": {
+          "tick": 28794937,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x208bc4822b0",
+          "actor": "0x208c5888d50",
+          "attributes": "0x208c55dc8e0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 28794953,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x27a4963dee0",
+          "actor": "0x27a5b3d2380",
+          "attributes": "0x27a5b14a8d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "observerVictimMovedM": 0.89,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 92,
+        "rootsDelta": 0,
+        "bodyAppliedDelta": 0,
+        "positionBefore": [
+          -47.5865,
+          -145.741,
+          66.4
+        ],
+        "positionAfter": [
+          -47.3789,
+          -146.598,
+          66.6076
+        ]
+      },
+      "guardHealthObserverAfter": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native read failed --health",
+      "checks": [
+        "Remote phase 5 presented"
+      ],
+      "guardHandleSource": "0xb480764",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ],
+        "observer": [
+          -47.9945,
+          -147.029,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:17:39.6467645+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "kind": "choke",
+      "observer": "client",
+      "passed": false,
+      "failure": "Outcome differs: source conscious, observer conscious, expected unconscious",
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented"
+      ],
+      "guardHandleSource": "0xb480764",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ],
+        "observer": [
+          -48.129,
+          -147.847,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:18:38.4337238+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "final": {
+        "source": {
+          "tick": 28913453,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x27a49657b80",
+          "actor": "0x27a5b4066a0",
+          "attributes": "0x27a5b1628d0",
+          "current": 40,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 28913468,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x208ae7119d0",
+          "actor": "0x208c5894e20",
+          "attributes": "0x208c55ff8e0",
+          "current": 40,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "conscious",
+        "observer": "conscious"
+      },
+      "restored": true
+    },
+    {
+      "source": "host",
+      "kind": "lethal",
+      "observer": "client",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardHandleSource": "0xb480764",
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.59,
+          -150.07,
+          66.4
+        ],
+        "observer": [
+          -48.2848,
+          -148.346,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-15T07:19:37.1658854+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|1933"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "paired_victim_alignment: rear choke under the product controller (NPC stream on, natural guard AI), both source roles; partner phases and the observer-world victim recorded; fixture restored after every case."
+}
