@@ -97,20 +97,23 @@ template<class Read> bool readWorldNpcCatalog(Read read,std::uintptr_t base,std:
     const unsigned count=flags&0xffffff;
     std::vector<std::uint32_t> live(count);
     if(count&&!read(handles,live.data(),count*4))return false;
-    for(auto handle:live) {
-        const auto actor=worldIdentityEntity(read,game,handle);
-        if(!actor||!read(actor,&vt,8)||vt!=base+0x1c5e108)continue;
-        NativeWorldNpc n{};
-        if(readWorldNpcIdentity(read,base,game,handle,n))catalog.push_back(std::move(n));else ++unbound;
-    }
     // Include unused spawners in the duplicate-name check. Collect once so
     // validation stays linear in engine-memory reads, not NPCs x entities.
+    // 1213n: one pass - each live entity's vtable is read once for both NPC
+    // actors and spawner names (two passes read every entity twice; a mission
+    // catalog took ~100 ms of engine-thread reads, take 1235e).
     std::vector<std::string> names;
     for(auto handle:live) {
-        const auto entity=worldIdentityEntity(read,game,handle);std::uintptr_t name=0;
-        if(!entity||!read(entity,&vt,8)||vt!=base+0x1c5e948||!read(entity+0x20,&name,8))continue;
-        std::string text;if(!worldIdentityString(read,name,text))return false;
-        names.push_back(std::move(text));
+        const auto entity=worldIdentityEntity(read,game,handle);
+        if(!entity||!read(entity,&vt,8))continue;
+        if(vt==base+0x1c5e108){
+            NativeWorldNpc n{};
+            if(readWorldNpcIdentity(read,base,game,handle,n))catalog.push_back(std::move(n));else ++unbound;
+        }else if(vt==base+0x1c5e948){
+            std::uintptr_t name=0;if(!read(entity+0x20,&name,8))continue;
+            std::string text;if(!worldIdentityString(read,name,text))return false;
+            names.push_back(std::move(text));
+        }
     }
     for(auto& n:catalog) {
         unsigned matches=0;for(const auto& name:names)if(name==n.spawnerName)++matches;

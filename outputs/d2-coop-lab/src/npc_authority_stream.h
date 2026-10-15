@@ -206,12 +206,28 @@ void refreshNpcRelevance(ULONGLONG tick){
     for(const auto& n:catalog){if(bound>=kNpcRelevanceMax)break;if(bindNpcChannel(n,tick)){++bound;++npcRelevanceAdded;}}
 }
 // Client: bind the NPC named by a host Hello from the current eligible catalog.
+// 1213n: every unmatched host Hello re-read the whole native NPC catalog on the
+// client's engine thread (80-100 ms on Edge of the World), and a refused bind
+// repeated on the next Hello: 82 reads and 46 stalls in ~25 s (take 1235e).
+// One catalog snapshot now serves Hellos for up to 1 s (bindNpcChannel still
+// re-reads the NPC's skeleton and identity), and a refused spawner/definition
+// pair waits 3 s before it is tried again.
+struct NpcHelloCatalog{ULONGLONG at=0;std::uintptr_t game=0;std::uint64_t epoch=0;bool ok=false;std::vector<NativeNpcAuthority> entries;};
+struct NpcHelloRefusal{std::string spawner,definition;ULONGLONG until=0;};
+NpcHelloCatalog npcHelloCatalog;std::vector<NpcHelloRefusal> npcHelloRefusals;std::uint64_t npcHelloCatalogReads=0,npcClientBindDeferred=0;
 bool bindNpcForHostHello(const CoopNpcControl& p,ULONGLONG tick){
     if(!localRole||p.h.kind!=NpcAuthorityMessage::Hello||npcEnabledChannels()>=kNpcRelevanceMax)return false;
-    std::vector<NativeNpcAuthority> catalog;
-    if(!readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,npcStreamIneligible,npcStreamUnavailable,npcStreamUnbound)){++npcClientBindRefused;return false;}
-    for(const auto& n:catalog)if(n.npc.spawnerName==p.spawner&&n.npc.definition==p.definition){
+    const std::string spawner(p.spawner,strnlen(p.spawner,sizeof(p.spawner))),definition(p.definition,strnlen(p.definition,sizeof(p.definition)));
+    for(const auto& r:npcHelloRefusals)if(tick<r.until&&r.spawner==spawner&&r.definition==definition){++npcClientBindDeferred;return false;}
+    auto& c=npcHelloCatalog;
+    if(c.game!=observedGame||c.epoch!=outgoing.worldEpoch||tick-c.at>=1000){
+        c.ok=readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.entries,npcStreamIneligible,npcStreamUnavailable,npcStreamUnbound);
+        c.at=tick;c.game=observedGame;c.epoch=outgoing.worldEpoch;++npcHelloCatalogReads;
+    }
+    if(c.ok)for(const auto& n:c.entries)if(n.npc.spawnerName==spawner&&n.npc.definition==definition){
         if(bindNpcChannel(n,tick)){++npcClientBound;return true;}break;}
+    npcHelloRefusals.erase(std::remove_if(npcHelloRefusals.begin(),npcHelloRefusals.end(),[&](const auto& r){return tick>=r.until;}),npcHelloRefusals.end());
+    if(npcHelloRefusals.size()<128)npcHelloRefusals.push_back({spawner,definition,tick+3000});
     ++npcClientBindRefused;return false;
 }
 void beginNpcStream(ULONGLONG tick){
@@ -228,7 +244,7 @@ void beginNpcStream(ULONGLONG tick){
     else{catalog.erase(std::remove_if(catalog.begin(),catalog.end(),[&](const auto& n){return npcNearestPlayerSq(n.npc.position)>kNpcRelevanceAdd*kNpcRelevanceAdd;}),catalog.end());
      std::stable_sort(catalog.begin(),catalog.end(),[&](const auto& a,const auto& b){return npcNearestPlayerSq(a.npc.position)<npcNearestPlayerSq(b.npc.position);});
      if(catalog.size()>kNpcRelevanceMax)catalog.resize(kNpcRelevanceMax);}
-    clearNpcPresentation();npcChannels.clear();for(auto& c:npcActorBodyApplied)c.store(0);for(auto& c:npcActorBodySequence)c.store(0);
+    clearNpcPresentation();npcChannels.clear();npcHelloCatalog={};npcHelloRefusals.clear();for(auto& c:npcActorBodyApplied)c.store(0);for(auto& c:npcActorBodySequence)c.store(0);
     for(auto& n:catalog)bindNpcChannel(n,GetTickCount64());
     npcRelevanceAt=GetTickCount64();
     npcStreamSession=outgoing.session;npcStreamPeerSession=remote.session;npcStreamEpoch=outgoing.worldEpoch;npcStreamPeerEpoch=remote.worldEpoch;npcStreamMap=outgoing.mapId;
@@ -380,7 +396,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcClientBound,npcClientBindRefused);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"helloCatalogReads\":%llu",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcHelloCatalogReads);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}}\n",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

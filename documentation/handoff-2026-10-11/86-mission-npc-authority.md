@@ -141,3 +141,19 @@ Until now, the bound NPC set was fixed when the stream was armed: the 24 nearest
 
 **Not exercised:** no transport stall occurred in 1168, so the 1166b stall-suspend path is implemented but runtime-unverified. This harness recorded no video.
 
+## Engine-thread stalls from NPC catalog reads (#43; candidate 1213n, audit 1242)
+
+Found while measuring partner presentation on Edge of the World (take 1235e). Both peers' engine threads stalled on native NPC catalog reads ([audit 1242](../../work/movement-integration/npc-catalog-stalls-audit-v1242.json)):
+- **Client (confirmed runtime):** every host Hello for an NPC the client hadn't bound re-read the whole catalog. A refused bind repeated on the next Hello: 27 binds and 55 refusals gave 46 `exchangePoses` stalls of 79–103 ms (worst 925 ms).
+- **Host (confirmed runtime):** the 2 s relevance scan cost 90–162 ms.
+- **Why it is slow (confirmed static):** `memoryRead` is one `ReadProcessMemory` syscall per read. The walk read every live entity twice, and each NPC frame is read twice.
+
+1213n changes three things:
+- one catalog snapshot serves Hellos for up to 1 s (`bindNpcChannel` still re-reads the NPC's skeleton and identity);
+- a refused NPC is retried after 3 s;
+- the world walk reads each entity once.
+
+**Take [1235f](../../work/natural-moveset/window-traversal-v1235f)** passed in both roles, and restoration passed. It archives both peers' timings per case:
+- **Client:** catalog reads fell to 10 (101 Hellos deferred) and stalls to 10. Each read still costs 70–86 ms.
+- **Host:** the scan still stalls for 80–207 ms. **Open:** the catalog read has to move off the engine thread.
+
