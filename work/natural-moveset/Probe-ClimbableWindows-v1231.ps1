@@ -43,6 +43,8 @@ try{
  $g=WaitGameplay 300000;Save "$out/load-log.json" $g.log;if(!$g.ready){throw 'Both instances did not reach the same mission gameplay'}
  $live=@{};foreach($e in @((Q host '--entities').entities)){$live[$e.name]=$e}
  foreach($w in $list){$row=[ordered]@{name=$w.name;position=$w.position;sides=@();attempts=@();climbable=$false}
+  # Guards can kill the host (1228e): stop at a death screen (logic 13) instead of probing on.
+  if((S host).localGameLogicState-eq13-or(S client).localGameLogicState-eq13){$failure='A player died during the probe (logic 13); remaining windows not tested';break}
   try{
    if(!$live.ContainsKey($w.name)){$row.missing=$true;$rows.Add($row);continue}
    $p=$live[$w.name].position;$sides=[Collections.Generic.List[object]]::new()
@@ -69,7 +71,7 @@ try{
  Save "$out/modals.json" @($modals)
  $hits=@($rows|Where-Object {$_.climbable})
  Save "$out/verified.json" @{climbable=@($hits|ForEach-Object {$_.name});tested=$rows.Count}
- if(!$hits.Count){$failure='No climbable window found among the tested Edge of the World windows'}
+ if(!$hits.Count-and!$failure){$failure='No climbable window found among the tested Edge of the World windows'}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
 finally{
  if($owned){

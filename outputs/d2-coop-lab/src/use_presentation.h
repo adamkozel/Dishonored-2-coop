@@ -11,11 +11,21 @@
 // the clip runs once on its own authored duration. No gameplay, usable state
 // or camera effect: usable/door world state stays with usable/door sync.
 struct UsePresentation {
-    struct Sample {double time=0;std::uint32_t event=0;unsigned variant=0,elapsed=0,duration=0;};
+    // 1213k (#6, protocol 75): world position of the used mechanism (its entity origin), when known.
+    struct Sample {double time=0;std::uint32_t event=0;unsigned variant=0,elapsed=0,duration=0;float target[3]{};bool targetValid=false;};
     std::array<Sample,32> samples{};unsigned count=0;
     static unsigned duration(unsigned variant){static const unsigned d[]={0,2300,3200,4800,5200,3200};return variant<=5?d[variant]:0;}
     static unsigned clip(unsigned variant){return 368+variant;}
-    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.variant<=5&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
+    static bool valid(const Sample& s){
+        if(s.targetValid&&!s.variant)return false;
+        if(s.targetValid)for(float f:s.target)if(!std::isfinite(f)||std::fabs(f)>100000.f)return false;
+        return std::isfinite(s.time)&&s.variant<=5&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
+    // #6: hand-reach weight over a clip: none while reaching out (0-12%), eased in to full contact
+    // (30%), held while operating, eased out during recovery (72-92%).
+    static float contact(float amount){
+        const auto ease=[](float t){t=(std::max)(0.f,(std::min)(1.f,t));return t*t*(3-2*t);};
+        if(!std::isfinite(amount))return 0;
+        return ease((amount-.12f)/.18f)*(1-ease((amount-.72f)/.20f));}
     void clear(){count=0;}
     bool push(const Sample& s){
         if(!valid(s))return false;
@@ -45,6 +55,11 @@ struct UsePresentation {
 // as walking away and ended the clip at 20-40% (confirmed runtime).
 inline bool useMovedAway(const float* origin,const float* position){
     const float dx=position[0]-origin[0],dy=position[1]-origin[1];return dx*dx+dy*dy>.36f;}
+// #6: a world point into the model space of an actor whose transform is NativeSkeleton::root
+// (actor+0x300: position, then the rotation columns) - the inverse of the joint-to-world mapping
+// used by grenade_fx/grapple_fx.
+inline void useModelTarget(const float* root,const float* world,float* model){
+    for(unsigned c=0;c<3;++c){model[c]=0;for(unsigned r=0;r<3;++r)model[c]+=root[3+c*3+r]*(world[r]-root[r]);}}
 // Source classification of the focused usable's entity name (lower case).
 inline unsigned useVariantForName(const char* name){
     if(!name||!*name)return 1;

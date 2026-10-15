@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-15T04:18:31.637654+02:00",
+  "dll": "647B3705EFD01150F5458F5D6833A639C621D06ED4F56F840C278F0ACC8EAB9F",
+  "probe": "DF6ABDD85D7F2CD21186D899A4FB337BBCF1D382330AD4E4B2009D1655E7887B",
+  "previous": "candidate-npc-combat-v1213j",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1212/corvo-choke-bank.bin",
+      "sha256": "51C2DA55723BD0E9D41E00D7EB373032750EAEC617B2143BFC91C71FF58F7F18"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1212/emily-choke-bank.bin",
+      "sha256": "AC5831282A09EC809FB6826ADFA73B97766774D2B675C5237438238AB149583E"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1213k on 1213j (#6): hand targeting. The source sends the focused entity origin (actor+0x300) with the use (protocol 75, 432-byte action packet: useTarget/useTargetValid); the partner maps it into model space through the skeleton root and pulls the right wrist (arm 14 -> elbow 15 -> wrist 16) toward it with movementArmReach, weighted by useWeight x UsePresentation::contact(amount); authored bone offsets kept exactly. Status: useTargetValid/useTarget/useReachApplied/useReachRefused/useReachError/useReachWeight."
+}
