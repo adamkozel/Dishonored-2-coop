@@ -127,3 +127,10 @@ struct NpcCombatPendingRequests {
     }
     void clear(){*this={};}
 };
+
+// 1214i (take 1258d): a retired, non-terminal combat channel no longer blocks its NPC forever.
+// Once the NPC is bound and alive again, a fresh channel re-handshakes (new peer nonce, fresh
+// health comparison) 2 s after the retirement; a death or terminal outcome ends the NPC for good.
+inline bool npcCombatChannelBlocksRebind(bool enabled,bool terminal,bool deathPending,std::uint64_t retiredAt,std::uint64_t tick){
+    return enabled||terminal||deathPending||(tick>=retiredAt&&tick-retiredAt<2000);
+}

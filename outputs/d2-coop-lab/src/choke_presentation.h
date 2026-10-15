@@ -14,7 +14,8 @@
 struct ChokePresentation {
     struct Sample {double time=0;std::uint64_t event=0;unsigned variant=0,elapsed=0,duration=0;std::uint64_t spawner=0,definition=0;};
     std::array<Sample,32> samples{};unsigned count=0;
-    static unsigned clip(unsigned v){return 347+nativeTakedownDonor(v);}
+    // Sword locks (kind 6) hold the parry-idle combat clip (CombatPresentation variant 11).
+    static unsigned clip(unsigned v){return nativeTakedownKind(v)==6?54u:347+nativeTakedownDonor(v);}
     static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&(!s.variant||nativeTakedownDuration(s.variant,s.duration))&&(s.variant||!s.duration)&&s.elapsed<=s.duration&&
         (s.variant?(s.spawner&&s.definition):(!s.elapsed&&!s.spawner&&!s.definition));}
     void clear(){count=0;}

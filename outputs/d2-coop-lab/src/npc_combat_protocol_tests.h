@@ -2,6 +2,8 @@
 #include "npc_combat_protocol.h"
 #include "native_trigger_identity_tests.h"
 void npcCombatProtocolTests(){
+    require(npcCombatChannelBlocksRebind(true,false,false,0,9000)&&npcCombatChannelBlocksRebind(false,true,false,1000,9000)&&npcCombatChannelBlocksRebind(false,false,true,1000,9000)&&
+            npcCombatChannelBlocksRebind(false,false,false,8000,9000)&&!npcCombatChannelBlocksRebind(false,false,false,7000,9000),"a retired living NPC re-binds after 2 s; deaths and live channels keep blocking (1258d)");
     nativeTriggerIdentityTests();
     require(npcCombatNativeLethal(24.8662033f,24.8662033f)&&!npcCombatNativeLethal(40,15.1337957f),"native final amount, not base weapon amount, determines ownership retirement");
     require(npcCombatNativeLethal(1,0.6f)&&!npcCombatNativeLethal(1,0.5f)&&!npcCombatNativeLethal(40,NAN),"native half-health death threshold and finite values enforced");

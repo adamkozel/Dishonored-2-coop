@@ -1,0 +1,421 @@
+[
+  {
+    "id": "standing_jump_takeoff",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Standing jumps at ~2.5 s and ~6.0 s go from sword-drawn idle straight into an airborne pose, then a leg tuck, extended descent, crouched landing and recovery to idle. Limbs stay intact and the feet are planted before takeoff. The takeoff has almost no anticipation crouch: idle pops to airborne within ~0.1 s (polish)."
+      },
+      {
+        "path": "work/natural-moveset/native-feet-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Three standing jumps (1.6, 5.6, 9.6 s) leave idle cleanly into tuck and descent, then return to idle. This take also carries the airborne/landing sword strikes (overhead sword after landing is the scripted late strike, per result.json), not a stuck pose."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Same bank as Corvo: clean idle to airborne tuck to descent to crouched landing to idle at ~2.5 s and ~6.0 s, with the body intact. The long coat hangs as a stiff slab through the landing crouch (cloth polish)."
+      },
+      {
+        "path": "work/natural-moveset/native-feet-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Standing jumps at 1.6, 5.6 and 9.6 s read correctly from takeoff to recovery. The overhead sword after the 2nd landing is the scripted late strike, and she returns to idle by ~7.3 s."
+      }
+    ],
+    "summary": "Both characters take off from a standing idle into a readable tucked jump and recover cleanly; the only issues are polish (no anticipation dip, Emily's stiff coat)."
+  },
+  {
+    "id": "running_jump_takeoff",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Walk/run strides at 18.0-18.3 s lead into a running jump (18.4 s), tucked legs (18.5-18.6), arms flung on descent (18.8), deep landing crouch (19.0-19.3) and a recovery stride."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "With the sword holstered, the moving jump at ~18.5 s shows a forward stride, airborne tuck, crouched landing and a running recovery. Hands are free and the sword stays on the hip."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "The moving jump at ~18.4 s reads as stride, tuck, extended descent, crouched landing and recovery stride. The coat sticks out stiffly at landing (polish)."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "The unarmed moving jump at ~18.5 s gives a clear stride into a tucked jump and landing crouch. Limbs are intact; there is minor coat stiffness."
+      }
+    ],
+    "summary": "Running jumps read naturally for both characters, armed and unarmed, with a proper stride into the jump, tuck and landing recovery."
+  },
+  {
+    "id": "crouch_jump_transition",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "From the crouch idle (10.5-11.9 s) the body rises at 12.1 s, goes airborne (12.2-12.4), lands half-crouched with the sword forward (12.6) and settles back into crouch (12.8+)."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Unarmed crouch to jump at 12.0 s, landing at 12.5 s and back to crouch by 13.0 s. The transition is coherent with no pop."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Crouch to jump at 12.1 s, airborne with the sword arm raised (12.4-12.6), then a landing and return to crouch by 13.1 s. The overhead sword-arm flail on descent is theatrical but not broken."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Unarmed crouch jump at 12.0 s. On landing she straightens briefly (12.5 s) before dropping back into crouch (13.0 s): a minor extra stand-up, functional."
+      }
+    ],
+    "summary": "Crouch-to-jump-to-crouch transitions are readable for both characters; there is a brief upright moment on the landing before re-crouching (polish)."
+  },
+  {
+    "id": "double_jump",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/double-jump-corvo-v21-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Stationary and moving double jumps, drawn and holstered (~1.8, 6.5, 13.6, 18.3 s), show a first lift, a high tucked second ascent at the apex, an extended fall with arms out, a deep crouch landing and recovery to idle or walk. The framing is wide and low-angle but the body is clear."
+      },
+      {
+        "path": "work/natural-moveset/double-jump-emily-v21-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Emily matches Corvo in all four contexts: tuck at the higher apex, extended fall, crouch landing, recovery. No stuck pose, and the coat behaves acceptably."
+      }
+    ],
+    "summary": "The second impulse reads as a distinct high tuck followed by a long fall and landing for both characters, armed and unarmed, stationary and moving."
+  },
+  {
+    "id": "rising_airborne",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Each jump's rising phase shows legs extended at liftoff, then a knees-up tuck near the apex (e.g. 2.6-2.8 s, 18.5-18.6 s), following the root height smoothly."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "The unarmed rising phase shows the same liftoff and tuck progression with free hands, consistent across standing, crouched and moving jumps."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "The rising phase goes from liftoff to tuck (2.6-2.8 s, 12.2-12.3 s, 18.5-18.6 s), with the body intact and the sword held."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Unarmed rising tuck in all three jump types, clean and consistent."
+      }
+    ],
+    "summary": "The ascent pose (liftoff extension into tuck) is coherent and tracks height for both characters."
+  },
+  {
+    "id": "fall_loop",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "insufficient",
+      "emily": "insufficient"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "Only ordinary-jump descents are shown: a ~0.2-0.3 s legs-extended, arms-out fall pose between the apex and touchdown (e.g. 3.0 s, 18.8 s). The pose is fine, but there is no sustained fall, so loop behaviour (holding or cycling without freezing) cannot be judged."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "insufficient",
+        "review": "Same as the armed take: brief descents only, none long enough to exercise a fall loop."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "insufficient",
+        "review": "The brief descent pose (arms raised, legs extended) is correct, but no long fall is recorded."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "insufficient",
+        "review": "Brief unarmed descents only; no sustained fall is shown."
+      }
+    ],
+    "summary": "The short descent poses in ordinary jumps look correct, but no recording contains a long or hard fall, so the fall loop itself cannot be judged. The double-jump takes show a somewhat longer fall (~0.4 s) that also looks fine."
+  },
+  {
+    "id": "soft_landing",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Standing, crouched and running landings all touch down with bent knees, compress into a crouch and recover to idle, crouch or a stride within ~1 s. The feet are planted and nothing gets stuck."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-combat-corvo-v2.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "After the airborne strike and guard jumps (1.8, 5.8, 9.8 s) Corvo lands, finishes the sword motion and settles back into the armed idle by ~3.4, 7.4 and 11.4 s."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Landings compress and recover cleanly in all jump types. Her coat stays rigid and juts out during the landing crouch (polish)."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-combat-emily-v2.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Landings after airborne strikes and guard recover to the armed idle (3.4, 7.4, 11.4 s) with no lingering pose."
+      }
+    ],
+    "summary": "Landings compress and recover correctly for both characters, including after airborne combat. The only issue is Emily's stiff coat (polish)."
+  },
+  {
+    "id": "moving_landing",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-air-corvo-v5.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "The running jump lands at ~18.9-19.0 s into a deep crouch, then rises into a forward recovery stride (19.3-19.5 s). It reads as a moving landing."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "The unarmed moving landing at ~19.0 s goes from crouch into a recovery stride. There is mild foot slide during the crouch."
+      },
+      {
+        "path": "work/natural-moveset/integrated-air-emily-v5.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Moving landing at ~19.0 s into a crouch, then a forward recovery stride. The coat drags stiffly."
+      },
+      {
+        "path": "work/natural-moveset/integrated-unarmed-air-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Unarmed moving landing and recovery stride at ~19.0-19.5 s. Coherent."
+      }
+    ],
+    "summary": "Landings from running jumps compress and flow into a recovery stride for both characters."
+  },
+  {
+    "id": "vault_low_obstacle",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-vault-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "With the sword drawn: a run at the desk (2.7-2.9 s), a step up with a hand plant (3.0-3.4), the body swinging over (3.5-3.7) and a landing on the far side, standing by ~4.0 s. The camera is far and hazy, and the desk partly occludes the landing."
+      },
+      {
+        "path": "work/natural-moveset/integrated-vault-corvo-unarmed-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Unarmed: knee up onto the desk, then a near-horizontal swing over (3.3-3.4 s), a brief upright stance on the far edge (3.5-3.7) and a drop down behind the desk. The vault arc is acrobatic but recognizable."
+      },
+      {
+        "path": "work/natural-moveset/integrated-vault-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Same sequence with the sword: a run, a plant on the desk, a swinging vault (3.3-3.6 s), a stand on the far edge and a drop behind the desk by ~4.0 s. Limbs are intact."
+      },
+      {
+        "path": "work/natural-moveset/integrated-vault-emily-unarmed-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Unarmed vault over the desk with a plant, swing and drop, standing behind the desk afterwards. The distant, hazy view limits detail."
+      }
+    ],
+    "summary": "The desk vault is recognizable for both characters, armed and unarmed (approach, plant, swing over, land). The framing is distant and hazy and the landing is partly hidden by the desk."
+  },
+  {
+    "id": "climb_high_ledge",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/high-mantle-corvo-v20-lit-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "From standing: a jump at ~1.8 s, hands reaching the canopy edge with legs hanging (2.0), a pull-up with the knee over (2.1-2.5), then standing and walking on top (2.6+). The unarmed trial (~13.8 s) is identical. The scene is dark and needed heavy brightening."
+      },
+      {
+        "path": "work/natural-moveset/high-mantle-corvo-crouched-v20-lit-v1.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "A crouch-walk to the ledge (2.0-2.6 s), a jump and grab (2.8), a pull-up (2.9-3.3), then crouched on top (3.4+). The crouched exit is held correctly."
+      },
+      {
+        "path": "work/natural-moveset/high-mantle-emily-v20-lit-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "A jump and reach at 1.7-1.8 s, a hang and pull-up with the coat hanging (2.0-2.3), knees over (2.5), then standing on top (2.6+)."
+      },
+      {
+        "path": "work/natural-moveset/high-mantle-emily-crouched-v20-lit-v1.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "A crouched approach, then a grab, a pull-up and a crouched hold on top (3.4-4.6 s). Coherent, though dim."
+      }
+    ],
+    "summary": "The high canopy mantle reads as grab, hang, pull-up and stand or crouch for both characters, armed and unarmed. The scene is dark but the motion is clear after brightening."
+  },
+  {
+    "id": "ledge_hang_and_pull_up",
+    "verdict": "accept",
+    "characters": {
+      "corvo": "accept",
+      "emily": "accept"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/integrated-low-mantle-corvo-v2.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Corvo enters from the right, grabs the desk and pulls up through a knee-on-desk crouch (3.1-3.4 s), then stands on the desk (3.6 s+) with the sword. He is backlit to a silhouette. No sustained hang phase is shown."
+      },
+      {
+        "path": "work/natural-moveset/integrated-crouch-mantle-corvo-v3.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "From a crouch by the desk: a quick upright launch (2.6 s), a step and pull onto the desk (2.8-3.1), then a crouched hold on top (3.3 s+). The extended in-air pose at launch is slightly abrupt."
+      },
+      {
+        "path": "work/natural-moveset/integrated-low-mantle-emily-v2.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Pull-up onto the desk at 3.1-3.4 s, then standing on top at 3.6 s+. Silhouetted, but the motion is readable."
+      },
+      {
+        "path": "work/natural-moveset/integrated-crouch-mantle-emily-v3.mp4",
+        "character": "emily",
+        "verdict": "accept",
+        "review": "Crouched start, launch and pull-up (2.6-3.1 s), then a crouched hold on the desk (3.3 s+) with the coat intact."
+      }
+    ],
+    "summary": "The low desk mantle (standing and crouched exits) shows a readable grab and pull-up for both characters. A sustained hang is never exercised, and the backlit framing limits detail."
+  },
+  {
+    "id": "slide_enter_loop_exit",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "accept",
+      "emily": "insufficient"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/slide-corvo-jump-v28-v8.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Sprint (1.5-1.7 s), drop into a low slide with a leg extended (1.8-2.0), a jump out of the slide (2.1) into an airborne tuck, a landing at ~2.6 s and a walk or stand afterwards. Entry, hold and jump exit all read correctly. Around 8.1 s the partner jumps from the left edge to mid-frame. That is after the take's state log ends (7.75 s), so it is likely the harness resetting position (hypothesis), not part of the slide."
+      },
+      {
+        "path": "work/natural-moveset/slide-corvo-empty-crouch-v28-v8.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Unarmed: sprint, drop at 1.8 s, low slide hold (1.9-2.6 s), then decelerate into a crouch at the frame edge. Clean entry and exit; part of the body is near the frame edge and occluded by the steps."
+      }
+    ],
+    "summary": "Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed."
+  },
+  {
+    "id": "slide_to_crouch_or_stand",
+    "verdict": "insufficient",
+    "characters": {
+      "corvo": "accept",
+      "emily": "insufficient"
+    },
+    "videos": [
+      {
+        "path": "work/natural-moveset/slide-corvo-crouch-v28-v8.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Sprint into a slide (1.9-2.6 s), a smooth deceleration into a crouch (2.7 s), and the crouch idle held at the frame edge to ~7.9 s. The armed crouch exit is correct. Around 8.1 s the partner jumps from the left edge to mid-frame. That is after the take's state log ends (7.75 s), so it is likely the harness resetting position (hypothesis), not part of the slide."
+      },
+      {
+        "path": "work/natural-moveset/slide-corvo-stand-v28-v8.mp4",
+        "character": "corvo",
+        "verdict": "accept",
+        "review": "Sprint into a slide (1.9-2.6 s), a low recovery crouch (2.7-3.9), then standing up at ~4.1 s with the sword drawn. The stand exit is correct; the partner is dark and partly cut off at the left edge. Around 8.1 s the partner jumps from the left edge to mid-frame. That is after the take's state log ends (7.75 s), so it is likely the harness resetting position (hypothesis), not part of the slide."
+      }
+    ],
+    "summary": "Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient."
+  }
+]

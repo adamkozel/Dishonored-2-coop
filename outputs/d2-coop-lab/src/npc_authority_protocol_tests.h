@@ -19,6 +19,7 @@ void npcAuthorityProtocolTests(){
      q.h.reserved=6;require(validNpcControl(q,host,client),"back lethal (6) is a paired hold variant");
      q.h.reserved=58;require(validNpcControl(q,host,client)&&npcPairedKnockoutVariant(58)&&npcPairedKnockoutVariant(3)&&!npcPairedKnockoutVariant(5),"a drop choke (58) is a paired knockout scene");
      q.h.reserved=57;require(!validNpcControl(q,host,client),"choke cancel (57) is not a paired hold variant");
+     q.h.reserved=119;require(validNpcControl(q,host,client)&&!npcPairedKnockoutVariant(119),"a sword lock (119) holds the host NPC and never asks for a knockout");
      {auto k=q;k.h.kind=NpcAuthorityMessage::PairedKnockout;k.h.reserved=73;require(validNpcControl(k,host,client),"a slide choke (73) asks for the knockout (take 1254a: 1214c capped it at 3 and never sent it)");
       k.h.reserved=5;require(!validNpcControl(k,host,client),"a lethal never asks for a knockout");k.h.reserved=1;require(!validNpcControl(k,host,client),"a choke entry never asks for a knockout");}
      q.h.reserved=kNativeTakedownSceneCount+1;require(!validNpcControl(q,host,client),"unknown takedown scene refused");

@@ -35,8 +35,11 @@ inline unsigned nativeCombatVariant(const std::string& asset){
         "sword_slash_sneak_right","sword_slash_sneak_left","sword_attack_focus_in","sword_attack_focus_out",
         "sword_attack_focus_cancel","sword_parry_in","sword_parry_idle","sword_parry_out",
         "sword_parry_in_sneak","sword_parry_out_sneak","sword_sneak_attack_hit","sword_sneak_attack_left_hit","throwhit","sword_attack_focus_sneak_out",
-        "sword_parry_hit_1","sword_parry_hit_2","sword_parry_win"};
-    for(unsigned i=0;i<21;++i)if(asset==std::string("midnight/gameplay/player/base/combat/")+names[i]+".midnightscene")return i+1;
+        "sword_parry_hit_1","sword_parry_hit_2","sword_parry_win",
+        // Takes 1256a/1258b: a second (b) swing that connects plays its own short hit scene
+        // (Scene_1, 733 ms, owned player and right arm only).
+        "sword_attack_right_b_hit","sword_attack_left_b_hit"};
+    for(unsigned i=0;i<23;++i)if(asset==std::string("midnight/gameplay/player/base/combat/")+names[i]+".midnightscene")return i+1;
     return 0;
 }
 template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerCombatScene& out){
@@ -63,7 +66,8 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
        !worldIdentityString(read,subName,s.subscene)||s.subscene.empty()||s.subscene.size()>64||
        !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||!read(s.instance+0x10,&bindings,8)||!bindings||
        !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)<1||(bindingFlags&0xffffff)>3)return false;
-    if((s.action==1)!=(s.variant<=9||(s.variant>=15&&s.variant<=18)))return false;
+    if((s.action==1)!=(s.variant<=9||(s.variant>=15&&s.variant<=18)||s.variant>=22))return false;
+    if(s.variant>=22&&(s.subscene!="Scene_1"||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
     // Exact native611 kick, corroborated by the exported624 declaration:
     // PlayerRightArm, PlayerCamera and PlayerBody. Both latter groups bind
     // the SAME owned player. No NPC/partner is admitted by this exception.

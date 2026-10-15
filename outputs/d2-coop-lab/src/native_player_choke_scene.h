@@ -28,12 +28,14 @@ inline bool nativeFatalityStates(const NativePlayerStates& s,std::uintptr_t base
     unsigned action=0;return s.player.logic==1&&nativePlayerSwordAction(s,base,action)&&action==1;
 }
 inline bool nativeTakedownStates(unsigned variant,const NativePlayerStates& states,std::uintptr_t base){
+    if(nativeTakedownKind(variant)==6)return nativePlayerVersusStates(states,base);
     if(nativeTakedownFatality(variant))return nativeTakedownArms(variant)==1?nativeFatalityStates(states,base):nativePlayerGroundAssassinationStates(states,base);
     if(variant>6)return nativePlayerGroundPairedStates(states,base)||nativePlayerSlideTakedownStates(states,base);
     return nativeTakedownLethal(variant)?nativePlayerGroundAssassinationStates(states,base):nativePlayerGroundChokeStates(states,base);
 }
 template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerChokeScene& out){
-    if(!nativePlayerGroundPairedStates(states,base)&&!nativePlayerSlideTakedownStates(states,base)&&!nativeFatalityStates(states,base))return false;
+    if(!nativePlayerGroundPairedStates(states,base)&&!nativePlayerSlideTakedownStates(states,base)&&!nativeFatalityStates(states,base)&&
+       !nativePlayerVersusStates(states,base))return false;
     NativePlayerChokeScene s{};const auto game=states.player.game,manager=game+0x1f5338;
     std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
     std::uintptr_t declaration=0,scene=0,bindings=0;unsigned bindingFlags=0;
@@ -45,7 +47,7 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
             if(phase!=3)continue;
             if(!read(c,&d,8)||!d||!read(d,&vt,8)||vt!=base+0x1affbc8||!read(d+8,&name,8)||!worldIdentityString(read,name,asset))return false;
             if(asset.find("midnight/gameplay/player/base/choke/")!=0&&asset.find("midnight/gameplay/player/base/assassination/")!=0&&
-               asset.find("midnight/gameplay/player/base/fatalities/")!=0)continue;
+               asset.find("midnight/gameplay/player/base/fatalities/")!=0&&asset.find("midnight/gameplay/player/base/combat/versus_")!=0)continue;
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
             const auto variant=nativeChokeVariant(asset,sub,duration);if(!variant)return false;
             if(!nativeTakedownStates(variant,states,base))return false;

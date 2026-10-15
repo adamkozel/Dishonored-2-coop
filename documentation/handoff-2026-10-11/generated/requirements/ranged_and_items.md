@@ -1,10 +1,10 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:03:05.690715+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
-Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.
+Visual sweep 1260: accepted (corvo accept, emily accept). Both partners read the pistol draw, aim, fire and reload, and the holster and re-equip, cleanly, with the native prop in hand; the aim-stance yaw offset is only a polish issue. Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.
 
 ````json
 {
@@ -16,7 +16,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_ranged_five_phase_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "pistol draw aim fire reload holster",
@@ -35,7 +35,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "sword_gun_equip"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both partners read the pistol draw, aim, fire and reload, and the holster and re-equip, cleanly, with the native prop in hand; the aim-stance yaw offset is only a polish issue. Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Remote projectiles, impact/damage synchronization, audio and all upgraded/contextual variants are not established by these receipts. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope. 1088: pistol draw/reload/aim presentation with the native prop also verified on a mission map (Edge of the World) for both roles after the 1071 gate lift.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -76,7 +76,8 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "ranged-corvo-crouch-gun-moving-v30-v4/result.json",
     "ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json",
     "ranged-emily-standing-muzzle-bd99-v1/result.json",
-    "../movement-integration/mission-equipment-audit-v1089.json"
+    "../movement-integration/mission-equipment-audit-v1089.json",
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
   ],
   "complete": false,
   "visual_accepted": false
@@ -95,6 +96,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
 - [evidence: ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json](<../../../../work/natural-moveset/ranged-corvo-crouch-moving-muzzle-bd99-v1/result.json>)
 - [evidence: ranged-emily-standing-muzzle-bd99-v1/result.json](<../../../../work/natural-moveset/ranged-emily-standing-muzzle-bd99-v1/result.json>)
 - [evidence: ../movement-integration/mission-equipment-audit-v1089.json](<../../../../work/movement-integration/mission-equipment-audit-v1089.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: ranged-corvo-gun-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-corvo-gun-network-v29-v1.mp4>)
 - [in_game_recordings: ranged-corvo-gun-network-v29-v1-source.mp4](<../../../../work/natural-moveset/ranged-corvo-gun-network-v29-v1-source.mp4>)
 - [in_game_recordings: ranged-emily-gun-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-emily-gun-network-v29-v1.mp4>)
@@ -121,7 +123,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
 - [in_game_recordings: mission-equipment-emily-v1088/equip-host.mp4](<../../../../work/natural-moveset/mission-equipment-emily-v1088/equip-host.mp4>)
 ## crossbow_draw_aim_fire_reload_holster
 
-Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Ammunition switching, projectile/impact outcomes, precise attachment and broader variants remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
+Visual sweep 1260: accepted (corvo accept, emily accept). The crossbow aim, fire, reload and holster read correctly for both partners with the crossbow prop in hand; the stance reuses the generic one-arm ranged pose. Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Ammunition switching, projectile/impact outcomes, precise attachment and broader variants remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.
 
 ````json
 {
@@ -133,7 +135,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_ranged_five_phase_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "crossbow draw aim fire reload holster",
@@ -154,7 +156,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "crossbow_reload_native_timing"
   ],
   "deliverable_kind": "animation",
-  "notes": "Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Ammunition switching, projectile/impact outcomes, precise attachment and broader variants remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The crossbow aim, fire, reload and holster read correctly for both partners with the crossbow prop in hand; the stance reuses the generic one-arm ranged pose. Both-role standing native fire/reload/empty/equip/unequip clocks and automatic cosmetic hand prop passed on archived DLL30AB28F8. Ammunition switching, projectile/impact outcomes, precise attachment and broader variants remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -189,7 +191,8 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
     "ranged-emily-empty-crossbow-cache-0537-v1/result.json",
     "ranged-corvo-standing-crossbow-0537-v1/result.json",
     "ranged-emily-crossbow-air-v28-v1/result.json",
-    "ranged-emily-crouch-crossbow-moving-v30-v4/result.json"
+    "ranged-emily-crouch-crossbow-moving-v30-v4/result.json",
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
   ],
   "complete": false,
   "visual_accepted": false
@@ -206,6 +209,7 @@ Both-role standing native fire/reload/empty/equip/unequip clocks and automatic c
 - [evidence: ranged-corvo-standing-crossbow-0537-v1/result.json](<../../../../work/natural-moveset/ranged-corvo-standing-crossbow-0537-v1/result.json>)
 - [evidence: ranged-emily-crossbow-air-v28-v1/result.json](<../../../../work/natural-moveset/ranged-emily-crossbow-air-v28-v1/result.json>)
 - [evidence: ranged-emily-crouch-crossbow-moving-v30-v4/result.json](<../../../../work/natural-moveset/ranged-emily-crouch-crossbow-moving-v30-v4/result.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: ranged-corvo-crossbow-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-corvo-crossbow-network-v29-v1.mp4>)
 - [in_game_recordings: ranged-corvo-crossbow-network-v29-v1-source.mp4](<../../../../work/natural-moveset/ranged-corvo-crossbow-network-v29-v1-source.mp4>)
 - [in_game_recordings: ranged-emily-crossbow-network-v29-v1.mp4](<../../../../work/natural-moveset/ranged-emily-crossbow-network-v29-v1.mp4>)
@@ -258,7 +262,7 @@ Regular/sleep-bolt changes are recorded in both directions with native bolt mode
 
 ## grenade_equip_aim_throw
 
-Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.
+Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.
 
 ````json
 {
@@ -281,7 +285,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
     "sword_grenade_launch_down"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
+  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1787,10 +1791,14 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
       "checks_passed": true,
       "scope": "Standing armed native grenade body/held-prop presentation over Steam. Native source alone creates its real projectile. Receiver cosmetic prop has no projectile or damage component; projectile/world/damage replication remains unimplemented. Harness restores both checkpoints after firing. Visual acceptance separate."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: native-grenade-actions-corvo-high-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-corvo-high-v54.mp4>)
 - [in_game_recordings: native-grenade-actions-corvo-low-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-corvo-low-v54.mp4>)
 - [in_game_recordings: native-grenade-actions-emily-high-v54.mp4](<../../../../work/natural-moveset/native-grenade-actions-emily-high-v54.mp4>)
@@ -1868,7 +1876,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
 - [in_game_recordings: grenade-reader-emily-v320-source.mp4](<../../../../work/natural-moveset/grenade-reader-emily-v320-source.mp4>)
 ## mine_or_razor_place
 
-575 with Emily576 and Corvo578: Corvo spring razor and Emily stun mine each pass at least15 native Steam presentation checks. Shared observed equip500, holster500, ready-in200/loop666, place300 and empty333 or observed reload866 clocks drive existing authored bank62/348; selected idle and static native wrist props included. Stock consumption hides remote held gadget. Both checkpoints and14 protected hashes restored. Failed570 clock-offset interpretation corrected from probe definition; Emily572 observed native reload866 instead of expected empty333, now represented explicitly; both observer sheets viewed, fine polish deferred. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed. Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality. Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate. Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage. Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing. Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed.
+Visual sweep 1260: accepted (corvo accept, emily accept). The trap equip, ready, crouched place, empty or reload, and holster read correctly for both partners; contact with the floor is approximate. 575 with Emily576 and Corvo578: Corvo spring razor and Emily stun mine each pass at least15 native Steam presentation checks. Shared observed equip500, holster500, ready-in200/loop666, place300 and empty333 or observed reload866 clocks drive existing authored bank62/348; selected idle and static native wrist props included. Stock consumption hides remote held gadget. Both checkpoints and14 protected hashes restored. Failed570 clock-offset interpretation corrected from probe definition; Emily572 observed native reload866 instead of expected empty333, now represented explicitly; both observer sheets viewed, fine polish deferred. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed. Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality. Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate. Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage. Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing. Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed.
 
 ````json
 {
@@ -1880,7 +1888,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_trap_body_and_held_prop",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "mine or razor place",
@@ -1902,7 +1910,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
     "springrazor_wall_place_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "575 with Emily576 and Corvo578: Corvo spring razor and Emily stun mine each pass at least15 native Steam presentation checks. Shared observed equip500, holster500, ready-in200/loop666, place300 and empty333 or observed reload866 clocks drive existing authored bank62/348; selected idle and static native wrist props included. Stock consumption hides remote held gadget. Both checkpoints and14 protected hashes restored. Failed570 clock-offset interpretation corrected from probe definition; Emily572 observed native reload866 instead of expected empty333, now represented explicitly; both observer sheets viewed, fine polish deferred. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed. Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality. Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate. Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage. Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing. Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The trap equip, ready, crouched place, empty or reload, and holster read correctly for both partners; contact with the floor is approximate. 575 with Emily576 and Corvo578: Corvo spring razor and Emily stun mine each pass at least15 native Steam presentation checks. Shared observed equip500, holster500, ready-in200/loop666, place300 and empty333 or observed reload866 clocks drive existing authored bank62/348; selected idle and static native wrist props included. Stock consumption hides remote held gadget. Both checkpoints and14 protected hashes restored. Failed570 clock-offset interpretation corrected from probe definition; Emily572 observed native reload866 instead of expected empty333, now represented explicitly; both observer sheets viewed, fine polish deferred. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed. Visual polish remains unaccepted: fine grip, precise surface reach/contact, weapon clearance and continuous quality. Native source places one actual trap; remote body/held prop never spawns a trap or runs a native placement/damage event. Shared placed-trap worlds/outcomes remain separate. Additional stocked reload contexts, ready-out cancellation, slide, airborne, upgraded items and both gadget kinds on each role still need coverage. Holstering is inferred only with a unique acquired trap when neither is selected; ambiguous inventories fall back instead of guessing. Complete moveset and playable co-op remain unfinished; prioritize broad existing-pipeline bindings and defer polish. Corvo576 failed its ready-in body-weight check: phase3 arrived, but a250ms semantic freshness gap briefly faded overall body weight. Unchanged Corvo578 passed all15 checks. This intermittent continuity issue remains unresolved; no timing guards or assertions were relaxed.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1922,10 +1930,14 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
     "trap-network-corvo-razor-v578/observer.mp4"
   ],
   "complete": false,
-  "visual_accepted": false
+  "visual_accepted": false,
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: native-trap-corvo-razor-v568/source.mp4](<../../../../work/natural-moveset/native-trap-corvo-razor-v568/source.mp4>)
 - [in_game_recordings: native-trap-emily-stun-v568/source.mp4](<../../../../work/natural-moveset/native-trap-emily-stun-v568/source.mp4>)
 - [in_game_recordings: trap-network-corvo-razor-v570/source.mp4](<../../../../work/natural-moveset/trap-network-corvo-razor-v570/source.mp4>)
@@ -1942,7 +1954,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
 - [in_game_recordings: trap-network-corvo-razor-v578/observer.mp4](<../../../../work/natural-moveset/trap-network-corvo-razor-v578/observer.mp4>)
 ## heart_equip_use_holster
 
-564/565: Corvo and Emily each pass11 native Steam Heart body/prop checks; exact equip533/use1000/holster333 scenes plus selected idle, existing crouch composition, hide lifecycle and restored checkpoints. Bank60/340 appends four existing clips, prior336 payloads unchanged. Both actual observer sheets viewed; fine polish and internal Heart mechanism remain deferred. Fine grip/contact and continuous visual quality unaccepted; temporal sheets only. Crouch composes the existing lower-body locomotion with authored Heart posture; no new crouch authoring. Heart internal mechanism/heartbeat, secret-target reactions, dialogue and discovery outcomes are not synchronized. Airborne, sword-combat combinations, sprint/slide and interruptions beyond tested stream stop remain unverified. Trap animations still lack runtime binding. Complete moveset and playable co-op remain unfinished.
+Visual sweep 1260: accepted (corvo accept, emily accept). The Heart equip, use, crouched hold and holster read naturally for both partners with the held prop. 564/565: Corvo and Emily each pass11 native Steam Heart body/prop checks; exact equip533/use1000/holster333 scenes plus selected idle, existing crouch composition, hide lifecycle and restored checkpoints. Bank60/340 appends four existing clips, prior336 payloads unchanged. Both actual observer sheets viewed; fine polish and internal Heart mechanism remain deferred. Fine grip/contact and continuous visual quality unaccepted; temporal sheets only. Crouch composes the existing lower-body locomotion with authored Heart posture; no new crouch authoring. Heart internal mechanism/heartbeat, secret-target reactions, dialogue and discovery outcomes are not synchronized. Airborne, sword-combat combinations, sprint/slide and interruptions beyond tested stream stop remain unverified. Trap animations still lack runtime binding. Complete moveset and playable co-op remain unfinished.
 
 ````json
 {
@@ -1954,7 +1966,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_ground_heart_body_prop",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "heart equip use holster",
@@ -1968,7 +1980,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
     "heart_equip_cancel_70"
   ],
   "deliverable_kind": "animation",
-  "notes": "564/565: Corvo and Emily each pass11 native Steam Heart body/prop checks; exact equip533/use1000/holster333 scenes plus selected idle, existing crouch composition, hide lifecycle and restored checkpoints. Bank60/340 appends four existing clips, prior336 payloads unchanged. Both actual observer sheets viewed; fine polish and internal Heart mechanism remain deferred. Fine grip/contact and continuous visual quality unaccepted; temporal sheets only. Crouch composes the existing lower-body locomotion with authored Heart posture; no new crouch authoring. Heart internal mechanism/heartbeat, secret-target reactions, dialogue and discovery outcomes are not synchronized. Airborne, sword-combat combinations, sprint/slide and interruptions beyond tested stream stop remain unverified. Trap animations still lack runtime binding. Complete moveset and playable co-op remain unfinished.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The Heart equip, use, crouched hold and holster read naturally for both partners with the held prop. 564/565: Corvo and Emily each pass11 native Steam Heart body/prop checks; exact equip533/use1000/holster333 scenes plus selected idle, existing crouch composition, hide lifecycle and restored checkpoints. Bank60/340 appends four existing clips, prior336 payloads unchanged. Both actual observer sheets viewed; fine polish and internal Heart mechanism remain deferred. Fine grip/contact and continuous visual quality unaccepted; temporal sheets only. Crouch composes the existing lower-body locomotion with authored Heart posture; no new crouch authoring. Heart internal mechanism/heartbeat, secret-target reactions, dialogue and discovery outcomes are not synchronized. Airborne, sword-combat combinations, sprint/slide and interruptions beyond tested stream stop remain unverified. Trap animations still lack runtime binding. Complete moveset and playable co-op remain unfinished.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -1980,10 +1992,14 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
     "heart-network-emily-v565/observer.mp4"
   ],
   "complete": false,
-  "visual_accepted": false
+  "visual_accepted": false,
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: native-heart-corvo-v563/source.mp4](<../../../../work/natural-moveset/native-heart-corvo-v563/source.mp4>)
 - [in_game_recordings: heart-network-corvo-v565/source.mp4](<../../../../work/natural-moveset/heart-network-corvo-v565/source.mp4>)
 - [in_game_recordings: heart-network-corvo-v565/observer.mp4](<../../../../work/natural-moveset/heart-network-corvo-v565/observer.mp4>)
@@ -1992,7 +2008,7 @@ Native standing cooking/release/empty recovery drives the isolated remote body a
 - [in_game_recordings: heart-network-emily-v565/observer.mp4](<../../../../work/natural-moveset/heart-network-emily-v565/observer.mp4>)
 ## health_elixir
 
-Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
+Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
 
 ````json
 {
@@ -2012,7 +2028,7 @@ Native source consumption observed with inventory/health and checkpoint restorat
     "empty_idlebreak_drink_flask"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping stay continuous, but neither partner shows any drinking gesture, so the elixir action is not represented (the authored drinking clip is still unused). Native source consumption observed with inventory/health and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. Native callback and wheel use show no FP drinking gesture in these recordings. The queued native event is a drink sound, not a body scene. Authored drinking clip remains unused; remote drink sound and gameplay health synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2298,10 +2314,14 @@ Native source consumption observed with inventory/health and checkpoint restorat
       "checks_passed": true,
       "scope": "Source-only native potion and item-wheel observation. No remote animation or shared healing is claimed; all native effects are reset through isolated checkpoints."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: potion-wheel-corvo-v64b.mp4](<../../../../work/natural-moveset/potion-wheel-corvo-v64b.mp4>)
 - [in_game_recordings: potion-wheel-corvo-v64c.mp4](<../../../../work/natural-moveset/potion-wheel-corvo-v64c.mp4>)
 - [in_game_recordings: potion-health-corvo-v64d.mp4](<../../../../work/natural-moveset/potion-health-corvo-v64d.mp4>)
@@ -2318,7 +2338,7 @@ Native source consumption observed with inventory/health and checkpoint restorat
 - [in_game_recordings: potion-wheel-control-corvo-v66.mp4](<../../../../work/natural-moveset/potion-wheel-control-corvo-v66.mp4>)
 ## mana_elixir
 
-Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
+Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.
 
 ````json
 {
@@ -2338,7 +2358,7 @@ Native source consumption observed with inventory, resource and checkpoint resto
     "empty_idlebreak_drink_flask"
   ],
   "deliverable_kind": "animation",
-  "notes": "Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
+  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2444,10 +2464,14 @@ Native source consumption observed with inventory, resource and checkpoint resto
       "checks_passed": true,
       "scope": "Existing remote body walking/stopping continuity through source native potion consumption, over Steam. No dedicated drink gesture, remote drink audio or remote resource synchronization is implemented; all outcomes reset through isolated checkpoints."
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [in_game_recordings: potion-mana-corvo-v67.mp4](<../../../../work/natural-moveset/potion-mana-corvo-v67.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68.mp4>)
 - [in_game_recordings: potion-mana-movement-corvo-v68-receiver.mp4](<../../../../work/natural-moveset/potion-mana-movement-corvo-v68-receiver.mp4>)

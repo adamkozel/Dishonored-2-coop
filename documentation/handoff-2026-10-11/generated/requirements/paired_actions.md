@@ -1,10 +1,10 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T09:27:41.742661+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-15T10:03:05.690715+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
-Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.
+Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back lethal body action reads for both characters. Only the back direction is recorded, and victim reaction and alignment are not part of these takes. Scope: rear presentation accepted (sweep); drop and slide accepted in audit 1257. Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.
 
 ````json
 {
@@ -16,7 +16,7 @@ Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/d
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_census_lethals_back_drop_slide_finishers_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "lethal takedown front back sides",
@@ -29,7 +29,7 @@ Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/d
     "paired_fast_back_female"
   ],
   "deliverable_kind": "animation",
-  "notes": "Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back lethal body action reads for both characters. Only the back direction is recorded, and victim reaction and alignment are not part of these takes. Scope: rear presentation accepted (sweep); drop and slide accepted in audit 1257. Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -54,12 +54,14 @@ Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/d
   "complete": false,
   "visual_accepted": false,
   "evidence": [
-    "../movement-integration/takedown-variants-audit-v1257.json"
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: partner-sword-contexts-host-v392/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v392/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-rear-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-rear-standing.mp4>)
@@ -79,7 +81,7 @@ Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/d
 - [in_game_recordings: lethal-network-emily-v605/observer.mp4](<../../../../work/natural-moveset/lethal-network-emily-v605/observer.mp4>)
 ## nonlethal_takedown_front_back_sides
 
-Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
+Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry, hold and release read on both characters. Only rear chokes were judged, and the victim doesn't react in these older takes. Scope: rear presentation accepted (sweep); side/front runtime in audits 1257 and 1254c. Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
 
 ````json
 {
@@ -91,7 +93,7 @@ Audit 1257: rear choke in both roles; side chokes choke_left/choke_right present
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_census_chokes_back_both_roles_sides_emily_front_corvo",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "nonlethal takedown front back sides",
@@ -111,7 +113,7 @@ Audit 1257: rear choke in both roles; side chokes choke_left/choke_right present
     "nonlethal_right_release_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry, hold and release read on both characters. Only rear chokes were judged, and the victim doesn't react in these older takes. Scope: rear presentation accepted (sweep); side/front runtime in audits 1257 and 1254c. Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -148,13 +150,15 @@ Audit 1257: rear choke in both roles; side chokes choke_left/choke_right present
   "visual_accepted": false,
   "evidence": [
     "../movement-integration/crouched-takedown-audit-v1246.json",
-    "../movement-integration/takedown-variants-audit-v1257.json"
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: partner-takedown-exclusion-host-v388/host-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-host-v388/host-rear-choke.mp4>)
 - [in_game_recordings: partner-takedown-exclusion-client-v389/client-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-client-v389/client-rear-choke.mp4>)
 - [in_game_recordings: ordinary-guard-choke-control-v390/host-rear-choke.mp4](<../../../../work/natural-moveset/ordinary-guard-choke-control-v390/host-rear-choke.mp4>)
@@ -465,7 +469,7 @@ Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fa
 - [in_game_recordings: paired-victim-product-v1248j/client-lethal-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248j/client-lethal-observer.mp4>)
 ## struggle_and_escape
 
-Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
+Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (being thrown off and recovering) reads clearly for both characters in the newer takes. The victim's side is not synchronized. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).
 
 ````json
 {
@@ -477,7 +481,7 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_rear_choke_actor_and_breakout",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_sweep_1260_functional_both_roles",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "struggle and escape",
@@ -492,7 +496,7 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
     "nonlethal_right_release_sequence"
   ],
   "deliverable_kind": "animation",
-  "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
+  "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (being thrown off and recovering) reads clearly for both characters in the newer takes. The victim's side is not synchronized. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -508,12 +512,14 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
   "complete": false,
   "visual_accepted": false,
   "evidence": [
-    "../movement-integration/crouched-takedown-audit-v1246.json"
+    "../movement-integration/crouched-takedown-audit-v1246.json",
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
   ]
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: native-choke-cancel-corvo-v590/host-rear-choke.mp4](<../../../../work/natural-moveset/native-choke-cancel-corvo-v590/host-rear-choke.mp4>)
 - [in_game_recordings: native-choke-cancel-corvo-v591/host-rear-choke.mp4](<../../../../work/natural-moveset/native-choke-cancel-corvo-v591/host-rear-choke.mp4>)
 - [in_game_recordings: choke-breakout-corvo-v593/host-rear-choke.mp4](<../../../../work/natural-moveset/choke-breakout-corvo-v593/host-rear-choke.mp4>)
@@ -524,7 +530,7 @@ Candidate592: distinct native combat-lose1500 now drives the remote full body th
 - [in_game_recordings: choke-breakout-corvo-v597/observer.mp4](<../../../../work/natural-moveset/choke-breakout-corvo-v597/observer.mp4>)
 ## carry_body_lift_idle_move_drop_throw
 
-Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.
+Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.
 
 ````json
 {
@@ -553,7 +559,7 @@ Scoped native pickup, stance-change, low-drop, high-throw and compact-release ex
     "carry_pickup_supported_settle"
   ],
   "deliverable_kind": "animation",
-  "notes": "Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
+  "notes": "Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
   "phase_status": "work_remaining",
   "power_visual_requirements": [],
   "in_game_recordings": [
@@ -2329,10 +2335,14 @@ Scoped native pickup, stance-change, low-drop, high-throw and compact-release ex
       "passed_checks": 19,
       "video_sha256": "9F6650B55A1EEE00347CB1075EDCC88883425CF13DA173E80D58F88821C4E1D5"
     }
-  }
+  },
+  "evidence": [
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
+  ]
 }
 ````
 
+- [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [in_game_recordings: native-carry-corvo-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-corvo-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-emily-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-emily-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-carrier-corvo-v3/native.mp4](<../../../../work/natural-moveset/native-carry-carrier-corvo-v3/native.mp4>)
