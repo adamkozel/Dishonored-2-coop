@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T05:31:28.442916+02:00",
+  "generated": "2026-10-15T06:38:13.588686+02:00",
   "complete": false,
   "scope": "Work-in-progress full-body review library. Every original functional requirement remains listed; candidate source clips do not count as a complete moveset.",
   "first_person_constraints": false,
@@ -4839,7 +4839,7 @@
         "nonlethal_right_release_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved.",
+      "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -4873,7 +4873,10 @@
         "choke-finish-emily-v598/observer.mp4"
       ],
       "complete": false,
-      "visual_accepted": false
+      "visual_accepted": false,
+      "evidence": [
+        "../movement-integration/crouched-takedown-audit-v1246.json"
+      ]
     },
     {
       "id": "crouched_takedown",
@@ -4883,8 +4886,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles",
+      "visual_validation": "accepted_client_choke_client_lethal_host_choke_host_lethal",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "crouched takedown",
@@ -4895,14 +4898,21 @@
         "crouched_nonlethal_back_release_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Crouched approach rises into rear lethal and nonlethal paired actions. This is not a takedown performed entirely at crouch height. Initial contact, terrain and outcome ownership still need work.",
+      "notes": "Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. Native: the choke stands the player into Choke41 (same scenes as standing); the fast-back lethal keeps the player crouched (Assassination13 at stance 1, admitted by 1213p). The partner presents every native phase and returns to locomotion. The partner rises into the standing paired clips; a crouched-height lethal clip, victim alignment and shared outcomes remain open.",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "partner-sword-contexts-host-v398/host-front-crouched.mp4",
         "partner-sword-contexts-host-v398/host-rear-crouched.mp4",
         "partner-sword-contexts-client-v400/client-front-crouched.mp4",
-        "partner-sword-contexts-client-v400/client-rear-crouched.mp4"
+        "partner-sword-contexts-client-v400/client-rear-crouched.mp4",
+        "crouched-takedown-observed-v1247b/host-choke-observer.mp4",
+        "crouched-takedown-observed-v1247d/host-lethal-observer.mp4",
+        "crouched-takedown-observed-v1247d/client-choke-observer.mp4",
+        "crouched-takedown-observed-v1247d/client-lethal-observer.mp4"
+      ],
+      "evidence": [
+        "../movement-integration/crouched-takedown-audit-v1246.json"
       ]
     },
     {
@@ -5070,7 +5080,7 @@
         "nonlethal_right_release_sequence"
       ],
       "deliverable_kind": "animation",
-      "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved.",
+      "notes": "Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
       "phase_status": "work_remaining",
       "power_visual_requirements": [],
       "in_game_recordings": [
@@ -5084,7 +5094,10 @@
         "choke-breakout-corvo-v597/observer.mp4"
       ],
       "complete": false,
-      "visual_accepted": false
+      "visual_accepted": false,
+      "evidence": [
+        "../movement-integration/crouched-takedown-audit-v1246.json"
+      ]
     },
     {
       "id": "carry_body_lift_idle_move_drop_throw",
@@ -93533,6 +93546,147 @@
       "runtime_test_passed": true,
       "visual_accepted": false,
       "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247b/host-choke-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Paired / crouched rear choke (source host) / crouched-takedown-observed-v1247b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 24.83,
+      "container_fps": "149/6",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "Side view (held camera 2.8 m off the attacker-victim midpoint), client window, remote Corvo (host source, 1213r): rises from the crouched approach into a rear choke with both arms around the guard's neck, holds through the loop, releases and lowers into a crouch. Natural hold; the lowering reaches into empty air because the observer's guard is not animated (victim alignment is a separate item).",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "crouched_takedown"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247b/host-lethal-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Paired / crouched rear lethal (source host) / crouched-takedown-observed-v1247b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.08,
+      "container_fps": "313/12",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "Held camera inside a wall (fixed side offset after the guard turned). Not reviewable.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247b/client-choke-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / crouched rear choke (source client) / crouched-takedown-observed-v1247b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.83,
+      "container_fps": "167/6",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "Observer body fell to the lower floor before the hold; balcony underside only. Not reviewable.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247b/client-lethal-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / crouched rear lethal (source client) / crouched-takedown-observed-v1247b",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.67,
+      "container_fps": "83/3",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "Observer body fell to the lower floor before the hold. Not reviewable.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": false,
+      "requirements": [],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247d/host-lethal-observer.mp4",
+      "role": "client",
+      "character": "corvo",
+      "label": "Paired / crouched rear lethal (source host) / crouched-takedown-observed-v1247d",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 26.5,
+      "container_fps": "53/2",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "View along the corridor from behind and above the attacker, client window, remote Corvo (host source, 1213r): rises from the crouch with the blade raised over the guard's shoulder for the fast-back stab, then settles back into the crouched stance. Natural; the guard stays standing (no victim sync in this lab arming).",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "crouched_takedown"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247d/client-choke-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / crouched rear choke (source client) / crouched-takedown-observed-v1247d",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.92,
+      "container_fps": "335/12",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "View along the corridor from behind and above, host window, remote Emily (client source, 1213r): rear choke hold with both arms around the guard's neck through the loop, releases and returns to a crouch with the sword ready. Natural hold; the lowering has no body to lay down.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "crouched_takedown"
+      ],
+      "kind": "game"
+    },
+    {
+      "video": "crouched-takedown-observed-v1247d/client-lethal-observer.mp4",
+      "role": "host",
+      "character": "emily",
+      "label": "Paired / crouched rear lethal (source client) / crouched-takedown-observed-v1247d",
+      "travelling": false,
+      "gameplay_bound": true,
+      "actual_capture_hz": 27.83,
+      "container_fps": "9990/359",
+      "timing": "Native wall-time recording, no speedup",
+      "scope": "Held observer camera beyond the guard, looking back at the source, while the source performs a rear takedown started from crouch.",
+      "review": "View along the corridor from behind and above, host window, remote Emily (client source, 1213r): rises behind the guard and stabs over the shoulder, then crouches behind him with the sword ready. Natural.",
+      "candidate": "candidate-npc-combat-v1213r",
+      "dll": "2CB60C78CFF29827D6118EF906557E3AC9F4EFA1E9F186A2A104A1EF8EE67FA0",
+      "runtime_test_passed": true,
+      "visual_accepted": true,
+      "requirements": [
+        "crouched_takedown"
+      ],
       "kind": "game"
     }
   ],

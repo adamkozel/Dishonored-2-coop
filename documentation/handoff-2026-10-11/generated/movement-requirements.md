@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T05:31:28.777814+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-15T06:38:13.900188+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 88 runtime-bound (fully or partially), 9 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 89 runtime-bound (fully or partially), 10 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -443,7 +443,7 @@ Captured 2026-10-15T05:31:28.777814+02:00; source [review-catalog.json](<../../.
 | item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | lethal_takedown_front_back_sides | paired_actions | candidates | partial_native_steam_fast_back_lethal_actor | not_accepted | work_remaining |
 | nonlethal_takedown_front_back_sides | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | not_accepted | work_remaining |
-| crouched_takedown | paired_actions | candidates | not_verified | not_accepted | work_remaining |
+| crouched_takedown | paired_actions | candidates | native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles | accepted_client_choke_client_lethal_host_choke_host_lethal | work_remaining |
 | aerial_drop_kill | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | aerial_nonlethal_takedown | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | sliding_takedown | paired_actions | candidates | not_verified | not_accepted | work_remaining |

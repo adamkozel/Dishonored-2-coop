@@ -9,7 +9,8 @@ rd = lambda p: json.loads(p.read_text(encoding='utf-8-sig'))
 def wr(p, v): p.write_text(json.dumps(v, indent=2), encoding='utf-8')
 TAKES = {'crouched-takedown-v1244': None, 'crouched-takedown-v1244b': None, 'crouched-takedown-network-v1245': 'candidate-npc-combat-v1213p',
          'crouched-takedown-network-v1245b': 'candidate-npc-combat-v1213p', 'crouched-takedown-network-v1245c': 'candidate-npc-combat-v1213q',
-         'crouched-takedown-network-v1245d': 'candidate-npc-combat-v1213r', 'crouched-takedown-observed-v1247': 'candidate-npc-combat-v1213r'}
+         'crouched-takedown-network-v1245d': 'candidate-npc-combat-v1213r', 'crouched-takedown-observed-v1247': 'candidate-npc-combat-v1213r',
+         'crouched-takedown-observed-v1247b': 'candidate-npc-combat-v1213r', 'crouched-takedown-observed-v1247c': 'candidate-npc-combat-v1213r', 'crouched-takedown-observed-v1247d': 'candidate-npc-combat-v1213r'}
 CAND = 'candidate-npc-combat-v1213r'
 # Visual reviews of the observed take (contact-sheet inspection); filled after review.
 REVIEW = json.loads((W / 'crouched-takedown-review-v1246.json').read_text(encoding='utf-8')) if (W / 'crouched-takedown-review-v1246.json').exists() else {}
@@ -41,7 +42,7 @@ wr(W / 'crouched-takedown-audit-v1246.json', dict(at=at, candidate=CAND, takes=r
               'Confirmed runtime (1245, 1213p): the crouched lethal is presented in both roles (phase 5 at weight > 0.8, locomotion returns).',
               'Confirmed static and runtime (1245-1245c, 1213q engine_call_gap): during every choke hold (exclusive Choke41 at physical stance 12) the wire stance was invalid while the paired-state root motion stayed valid, so validCoopPose rejected each pose packet of the hold (8 rejected in 1245b); no engine stall (no engine-thread call gap of 50 ms or more on either peer), both windows kept rendering. The lab lease then retired the partner about 250 ms into the hold. The same rejection affected the standing rear choke.',
               'Confirmed runtime (1245d, 1213r, passed, restoration passed): with the choke hold mapped to presentation stance 0 and motion only sent with a wire stance, the crouched choke (phases 1/2/3), the crouched lethal (phase 5) and the standing choke regression case are presented in both roles and locomotion returns.',
-              f'Visual (1247, held observer camera): accepted for {", ".join(accepted) if accepted else "none"}.'],
+              f'Visual (1247-1247d, held observer camera; in front of the guard it hid the partner, side spots landed in walls, the view along the corridor from behind and above worked): accepted for {", ".join(accepted) if accepted else "none"}.'],
     complete=True, scope='crouched_takedown runtime binding in both roles (rear choke and fast-back lethal from crouch); other takedown directions, victim alignment and shared outcomes remain under their own items.'))
 p = N / 'review-evidence-annotations.json'; an = rd(p)
 it = an['items']['crouched_takedown']

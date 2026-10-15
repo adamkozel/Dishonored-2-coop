@@ -1,0 +1,616 @@
+{
+  "at": "2026-10-15T06:38:10.773325+02:00",
+  "candidate": "candidate-npc-combat-v1213r",
+  "takes": [
+    {
+      "take": "../natural-moveset/crouched-takedown-v1244",
+      "candidate": null,
+      "passed": false,
+      "failure": "Fixture restore failed after host-choke; restore: Checkpoint inventory differs (client)",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": "restore: Checkpoint inventory differs (client)",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|Npc|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|Npc|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|Npc|1800"
+          ],
+          "playerStates": [
+            "stance 0 / active 41",
+            "stance 1 / active 6",
+            "stance 1 / active 6,44",
+            "stance 1 / active 6,53",
+            "stance 1 / active 6,53,44",
+            "stance 12 / active 41"
+          ],
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": false
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-v1244b",
+      "candidate": null,
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|Npc|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|Npc|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|Npc|1800"
+          ],
+          "playerStates": [
+            "stance 0 / active 41",
+            "stance 1 / active 6",
+            "stance 1 / active 6,44",
+            "stance 1 / active 6,53",
+            "stance 1 / active 6,53,44",
+            "stance 12 / active 41"
+          ],
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|Npc|1333"
+          ],
+          "playerStates": [
+            "stance 0 / active 0",
+            "stance 1 / active 13",
+            "stance 1 / active 6",
+            "stance 1 / active 6,39",
+            "stance 1 / active 6,53"
+          ],
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|Npc|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|Npc|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|Npc|1800"
+          ],
+          "playerStates": [
+            "stance 0 / active 41",
+            "stance 1 / active 6",
+            "stance 1 / active 6,44",
+            "stance 1 / active 6,53,44",
+            "stance 12 / active 41"
+          ],
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|Npc|1333"
+          ],
+          "playerStates": [
+            "stance 0 / active 0",
+            "stance 1 / active 13",
+            "stance 1 / active 6",
+            "stance 1 / active 6,39",
+            "stance 1 / active 6,53"
+          ],
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-network-v1245",
+      "candidate": "candidate-npc-combat-v1213p",
+      "passed": false,
+      "failure": "2 case(s) failed: host-choke: Remote phase 2 not presented | client-choke: Remote phase 2 not presented",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Remote phase 2 not presented",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 72,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Remote phase 2 not presented",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 13,
+          "recoveredSamples": 73,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-network-v1245b",
+      "candidate": "candidate-npc-combat-v1213p",
+      "passed": false,
+      "failure": "2 case(s) failed: host-choke: Remote phase 2 not presented | client-choke: The process cannot access the file 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\lab-instances\\host\\coop-status.json' because it is being used by another process.",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Remote phase 2 not presented",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "The process cannot access the file 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\lab-instances\\host\\coop-status.json' because it is being used by another process.",
+          "scenes": null,
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-network-v1245c",
+      "candidate": "candidate-npc-combat-v1213q",
+      "passed": false,
+      "failure": "2 case(s) failed: host-choke: Remote phase 2 not presented | client-choke: Remote phase 2 not presented",
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Remote phase 2 not presented",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": false,
+          "failure": "Remote phase 2 not presented",
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": null,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-network-v1245d",
+      "candidate": "candidate-npc-combat-v1213r",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 27,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 13,
+          "recoveredSamples": 70,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "standing-choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 29,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 28,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 72,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "standing-choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 29,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-observed-v1247",
+      "candidate": "candidate-npc-combat-v1213r",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 28,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 70,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 29,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 73,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-observed-v1247b",
+      "candidate": "candidate-npc-combat-v1213r",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 24,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 70,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 28,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 73,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-observed-v1247c",
+      "candidate": "candidate-npc-combat-v1213r",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 67,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 29,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 72,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "take": "../natural-moveset/crouched-takedown-observed-v1247d",
+      "candidate": "candidate-npc-combat-v1213r",
+      "passed": true,
+      "failure": null,
+      "restoration": true,
+      "cases": [
+        {
+          "source": "host",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 26,
+          "restored": true
+        },
+        {
+          "source": "host",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 14,
+          "recoveredSamples": 72,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "choke",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+            "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+            "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": null,
+          "recoveredSamples": 29,
+          "restored": true
+        },
+        {
+          "source": "client",
+          "kind": "lethal",
+          "passed": true,
+          "failure": null,
+          "scenes": [
+            "midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene|1333"
+          ],
+          "playerStates": null,
+          "crouchedAssassinationSamples": 15,
+          "recoveredSamples": 72,
+          "restored": true
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Confirmed runtime (probe 1244b, both roles): a rear choke started from crouch stands the player into exclusive Choke41 with the standing scenes (choke_back 600, choke_loop 1400, choke_win 1800 ms); a fast-back lethal started from crouch plays assassination_fast_back (1333 ms) while the player stays crouched (exclusive Assassination13 at physical stance 1), which the reader refused.",
+    "Lab fixture: PrepareShadowSword alone drops the lab-restored note note_dw_frommeagan from the client (1244 stopped on the inventory check); every per-case restore now re-runs the note restore.",
+    "Confirmed runtime (1245, 1213p): the crouched lethal is presented in both roles (phase 5 at weight > 0.8, locomotion returns).",
+    "Confirmed static and runtime (1245-1245c, 1213q engine_call_gap): during every choke hold (exclusive Choke41 at physical stance 12) the wire stance was invalid while the paired-state root motion stayed valid, so validCoopPose rejected each pose packet of the hold (8 rejected in 1245b); no engine stall (no engine-thread call gap of 50 ms or more on either peer), both windows kept rendering. The lab lease then retired the partner about 250 ms into the hold. The same rejection affected the standing rear choke.",
+    "Confirmed runtime (1245d, 1213r, passed, restoration passed): with the choke hold mapped to presentation stance 0 and motion only sent with a wire stance, the crouched choke (phases 1/2/3), the crouched lethal (phase 5) and the standing choke regression case are presented in both roles and locomotion returns.",
+    "Visual (1247-1247d, held observer camera; in front of the guard it hid the partner, side spots landed in walls, the view along the corridor from behind and above worked): accepted for client-choke, client-lethal, host-choke, host-lethal."
+  ],
+  "complete": true,
+  "scope": "crouched_takedown runtime binding in both roles (rear choke and fast-back lethal from crouch); other takedown directions, victim alignment and shared outcomes remain under their own items."
+}

@@ -1,0 +1,38 @@
+{
+  "source": "host",
+  "observer": "client",
+  "kind": "choke",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Observer presents the partner at stance 1 before the takedown",
+    "Native scene(s) on the source: midnight/gameplay/player/base/choke/choke_back.midnightscene|600, midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400, midnight/gameplay/player/base/choke/choke_win.midnightscene|1800",
+    "Source phase 1 read and presented on the observer at weight > 0.8",
+    "Source phase 2 read and presented on the observer at weight > 0.8",
+    "Source phase 3 read and presented on the observer at weight > 0.8",
+    "Locomotion returns after the takedown"
+  ],
+  "bankVersion": 71,
+  "camera": {
+    "z": 68.5,
+    "yaw": -90.01316926280187,
+    "x": -39.439356428399996,
+    "side": 2.8,
+    "y": -145.90989656885,
+    "pitch": 10
+  },
+  "before": {
+    "waitMs": 221,
+    "follow": true,
+    "stanceMix": 1.0,
+    "weight": 1.0
+  },
+  "inputMs": 889,
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "recoveredSamples": 24,
+  "restored": true
+}
