@@ -1,0 +1,7 @@
+{
+  "take": "use-variants-v1228g",
+  "candidate": "candidate-npc-combat-v1214ag",
+  "state": "completed_game_over_detected",
+  "summary": "Both lever cases and the host latch passed at runtime; the client latch failed (observer camera hold off). Only the first AI hold acquired (18 NPCs); later holds failed (fixture_acquire_failed, likely alerted guards). Guards killed a player during the taps; ClearModals detected Game Over (new in 1228g), the cleanup pressed A and the restoration passed.",
+  "visualReview": "Not accepted (#33): the lever was focused from the turbine housing at z 20.5 (5 m above its base), so the over-the-shoulder observer showed only the empty lever base; the client-source view also shows no partner."
+}

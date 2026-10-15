@@ -1,0 +1,166 @@
+{
+  "passed": true,
+  "scope": "Use variants on real mechanisms (eotw): native use -> authored interaction on the partner body, both roles; fixture restored.",
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "script_lever_windturbine_1_1_1",
+      "focus": {
+        "side": 90,
+        "dz": 0,
+        "handle": 485890320,
+        "name": "script_lever_windturbine_1_1_1",
+        "dist": 1.0,
+        "tries": 9
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.006,
+      "used": true,
+      "sourceUses": 3,
+      "sourceUseName": "script_lever_windturbine_1_1_1",
+      "sourceLastVariant": 2,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 126,
+      "shownSamples": 41,
+      "observedVariants": [
+        0,
+        2
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 0.9992569
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "script_lever_windturbine_1_1_1",
+      "focus": {
+        "side": 90,
+        "dz": 0,
+        "handle": 485890320,
+        "name": "script_lever_windturbine_1_1_1",
+        "dist": 1.0,
+        "tries": 9
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 3,
+      "sourceUseName": "script_lever_windturbine_1_1_1",
+      "sourceLastVariant": 2,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 133,
+      "shownSamples": 41,
+      "observedVariants": [
+        0,
+        2
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 1.0
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "script_door_latch_blackmarket_apartment",
+        "script_door_latch_01_right_1",
+        "script_doorlatch_bm_backyard"
+      ],
+      "expected": 5,
+      "optional": true,
+      "passed": true,
+      "failure": null,
+      "target": "script_door_latch_blackmarket_apartment",
+      "focus": {
+        "side": 0,
+        "dz": 0,
+        "handle": 497621443,
+        "name": "script_door_latch_blackmarket_apartment",
+        "dist": 1.0,
+        "tries": 1
+      },
+      "observerPitch": true,
+      "sourceMaxDisplacement": 0.0,
+      "used": true,
+      "sourceUses": 4,
+      "sourceUseName": "script_door_latch_blackmarket_apartment",
+      "sourceLastVariant": 5,
+      "endReason": 3,
+      "endAction": 0,
+      "observerSamples": 127,
+      "shownSamples": 41,
+      "observedVariants": [
+        2,
+        5
+      ],
+      "maxWeight": 0.9999999,
+      "maxAmount": 0.9992569
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "script_door_latch_blackmarket_apartment",
+        "script_door_latch_01_right_1",
+        "script_doorlatch_bm_backyard"
+      ],
+      "expected": 5,
+      "optional": true,
+      "passed": false,
+      "failure": "Observer camera hold failed on host: off",
+      "target": "script_door_latch_blackmarket_apartment",
+      "focus": {
+        "side": 0,
+        "dz": 0,
+        "handle": 497621443,
+        "name": "script_door_latch_blackmarket_apartment",
+        "dist": 1.0,
+        "tries": 1
+      },
+      "observerPitch": true
+    },
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "env_interiors_tap_1",
+        "env_interiors_tap_right",
+        "env_interiors_rich_sink_tap_01_1_6"
+      ],
+      "expected": 4,
+      "optional": true,
+      "passed": false,
+      "failure": "Game Over on host (seek-host-env_interiors_tap_right)"
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "env_interiors_tap_1",
+        "env_interiors_tap_right",
+        "env_interiors_rich_sink_tap_01_1_6"
+      ],
+      "expected": 4,
+      "optional": true,
+      "passed": false,
+      "failure": "Game Over on host (seek-client-env_interiors_tap_1)"
+    }
+  ]
+}

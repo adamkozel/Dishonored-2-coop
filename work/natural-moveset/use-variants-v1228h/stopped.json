@@ -1,0 +1,8 @@
+{
+  "take": "use-variants-v1228h",
+  "candidate": "candidate-npc-combat-v1214ag",
+  "state": "host_crashed",
+  "crash": "Host Dishonored2.exe access violation at game RVA 0x242c94 (reads of 0x38/0x40) on three animation threads at once; our frame on the stack is the evaluateAnimation hook calling the native evaluation (dinput8+0x3d135, native_locomotion.h:120, resolved with a matching 1214ag symbol build; DLL base from the client process with the same image).",
+  "context": "During the host tap seek: 152 teleport poses around env_interiors_tap_1 in a small interior (1228h widened the search to 1.3 m and diagonal sides); several stands ended inside geometry or ~10 m below the floor (z 11.3 vs ~21). The AI-hold fixture held 18 NPCs at the start of the case. Hypothesis: the player out of the streamed world; harness behaviour, not product logic.",
+  "recovery": "Deploy-SourceClock relaunched the pair (protected saves unchanged); note restore retried into recovery-note-restoration-retry (passed); health 56 on both."
+}
