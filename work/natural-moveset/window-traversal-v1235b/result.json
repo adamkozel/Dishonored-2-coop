@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": false,
+      "failure": "Partner presentation not live before the host crossing",
+      "start": [
+        15.474,
+        90.131,
+        16.5536
+      ]
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "window": "script_rich_small_01_sndctrl",
+      "passed": false,
+      "failure": "Partner presentation not live before the client crossing",
+      "start": [
+        15.0156,
+        89.7086,
+        16.5536
+      ]
+    }
+  ],
+  "failure": "host: Partner presentation not live before the host crossing; client: Partner presentation not live before the client crossing",
+  "passed": false,
+  "scope": "window_enter_exit: native mantle through a climbable Edge of the World window, both roles, partner traversal presentation filmed; Dunwall fixture restored."
+}
