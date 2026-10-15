@@ -10,7 +10,13 @@ Updated 2026-10-14. Live candidate-npc-combat-v1213b ([identity](../../work/move
 - Window traversal, counterattack and knockdown were investigated and their native sources identified; none is bound yet.
 - Two machines (stage 2, 2026-10-15): the lab VM `D2CoopVM` now runs the user's second Steam account ([tools/vm](../../tools/vm/README.md)).
   - The first two-account connection passed in take [two-account-session-v1221](../../work/natural-moveset/two-account-session-v1221/result.json). The host lab instance on the main account opened a friends-only lobby, and the VM instance on the second account joined over Steam P2P. Movement synced both ways.
-  - Deployed DLL: `outputs/d2-coop-lab/bin/dinput8.dll` is hash-identical to candidate-npc-combat-v1213d. See [chapter 90](90-release-packaging-and-steam-sessions.md#two-account-connection-through-the-lab-vm-take-1221).
+  - Deployed DLL: `outputs/d2-coop-lab/bin/dinput8.dll` is hash-identical to candidate-npc-combat-v1213d.
+  - Stage 2 exit criteria met (2026-10-15):
+    - [1213e](../../work/movement-integration/candidate-npc-combat-v1213e/identity.json) fixes the stale lab link (#23);
+    - take 1222 shows disconnect and reconnect with no stale ownership;
+    - [1213f](../../work/movement-integration/candidate-npc-combat-v1213f/identity.json) links the C runtime statically (#22, take 1224);
+    - take [1225](../../work/release/product-two-account-v1225/result.json) covers the product path: release r6 installed in the VM, F7 host, Steam join, connected, uninstall rollback.
+  - The live DLL is now 1213f. See [chapter 90](90-release-packaging-and-steam-sessions.md#two-account-connection-through-the-lab-vm-take-1221).
 
 Previous header (1203f, history): Live candidate-npc-combat-v1203f ([identity](../../work/movement-integration/candidate-npc-combat-v1203f/identity.json)). Latest (stage 3 gate 4, product presentation):
 - In product mode the partner presentation now recovers by itself after pause menus and the tutorial modal (1204f).

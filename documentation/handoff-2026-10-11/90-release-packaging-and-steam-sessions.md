@@ -178,6 +178,31 @@ The second Steam account runs in the Hyper-V lab VM `D2CoopVM`. It has its own D
 - F7 product hosting with the invite overlay / Steam Join Game, from the release package installed in the VM;
 - disconnect and reconnect.
 
+## Stage 2 completed: lab fix, reconnect and the product path (1213e/1213f, takes 1222–1225)
+
+**1213e (#23):** `startOnlineHost`/`startOnlineJoin` now close the lab loopback link before the online session takes the transport.
+
+**Take [1222](../../work/natural-moveset/two-account-session-v1222/result.json):** two machines and two accounts, with the host's local client connected.
+- The VM joins and both sides connect.
+- Movement syncs both ways: 6.39 m and 4.28 m.
+- The VM leaves and the host releases the slot.
+- The VM rejoins and connects with no stale ownership (4.32 m).
+- The take is recorded as `passed=false` only because Defender quarantined the DLL during restoration (#25). Afterwards the project folder and `C:\D2Lab` were excluded by the user.
+
+**1213f (#22):** the C runtime is statically linked. Take [1224](../../work/natural-moveset/vm-clean-crt-v1224/result.json): the VM, with no VC++ runtime anywhere, runs the mod fully.
+
+**Release r6** (`outputs/release/d2coop-v1213f`, local; builder `work/release/build_release_v1225.py`): 1213f with the same payload layout as r5.
+
+**Take [1225](../../work/release/product-two-account-v1225/result.json)** walked the product path the way players use it, with two accounts on two machines:
+1. r6 was installed into the VM's own Steam game with its own installer.
+2. The game launched through Steam, and product mode activated.
+3. The host product instance (lab copy, isolated profile with the fixture save) reached gameplay from real keystrokes.
+4. **F7** created the friends-only lobby and opened the invite overlay.
+5. The VM joined through Steam's join route (`steam://joinlobby`, the mechanism behind Join Game and invite acceptance). Both sides reported connected (phase 5, state 3) with fresh data.
+6. The **uninstaller rolled back** the VM install: 12 added files were removed and `master.index` restored. The exe is unchanged.
+
+The joiner was still at its main menu when the link came up. Join-follow into the host's mission is part of the stage 6 and campaign work.
+
 ## What stage 7 still needs
 
 - **Two-account online validation** (host, join, invite, disconnect and reconnect) needs a second Steam account and the user. It remains outstanding until it is actually performed.
