@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Combat session active on both peers",
+    "NPC combat off on both peers",
+    "Host-only loss outside combat: host 40 -> 35, client stays 40",
+    "Re-binding: the client followed the host Hello (1); guard 35 in both worlds"
+  ],
+  "guardHost": "0xb480764",
+  "guardClient": "0xb480764",
+  "before": {
+    "host": 40,
+    "client": 40
+  },
+  "mid": {
+    "host": 35,
+    "client": 40
+  },
+  "test": {
+    "runs": 1,
+    "mode": "hostworld",
+    "result": "damaged",
+    "target": 189269860,
+    "source": 190252915,
+    "amount": 5.0,
+    "before": 40.0,
+    "after": 35.0,
+    "maximum": 40.0
+  },
+  "after": {
+    "host": 35,
+    "client": 35
+  },
+  "helloFollowed": 1,
+  "restored": true
+}
