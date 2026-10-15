@@ -1781,7 +1781,7 @@ void dispatchCoopCommand(void* system,const char* text) {
         return;
     }
     if(!std::strcmp(request.command,"coop_movement_bank 60000")){consoleOutput("COOP: movement bank %s\n",beginMovementBank()?"accepted":"refused");return;}
-    if(!std::strcmp(request.command,"coop_movement_bank on")){consoleOutput("COOP: continuous movement bank %s\n",beginMovementBank(true)?"accepted":"refused");return;}
+    if(!std::strcmp(request.command,"coop_movement_bank on")){const bool accepted=beginMovementBank(true);consoleOutput("COOP: continuous movement bank %s (reason %u)\n",accepted?"accepted":"refused",accepted?0u:movementBeginRefusal);return;}
     if(!std::strcmp(request.command,"coop_review_clip off")){stopReviewClip();return;}
     if(!std::strcmp(request.command,"coop_review_clip play")){consoleOutput("COOP: review clip %s\n",beginReviewClip(-1)?"accepted":"refused");return;}
     if(!std::strncmp(request.command,"coop_review_clip hold ",22)){consoleOutput("COOP: review hold %s\n",beginReviewClip(std::atoi(request.command+22))?"accepted":"refused");return;}

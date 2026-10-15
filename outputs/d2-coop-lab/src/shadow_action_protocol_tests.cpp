@@ -8,6 +8,7 @@
 #include "domino_world_protocol.h"
 #include "swarm_world_protocol.h"
 #include "doppelganger_world_protocol.h"
+#include "presentation_refusal.h"
 #include "swarm_spawn_fx_protocol.h"
 #include "possession_fx_protocol.h"
 #include "swarm_world_presentation.h"
@@ -457,6 +458,10 @@ int main(){unboundGroundTests();chokePresentationTests();
         useVariantForName("script_door_latch_blackmarket_apartment")==5&&useVariantForName("ld_ring_locker_01_1_lock")==5&&useVariantForName("ld_wheel_01_1_1")==4&&useVariantForName("pa_ld_valve_set_01_2")==4,"1213g taps are valves, latches and ring lockers are locks");
   {const float o[3]{-27.53f,-149.89f,66.97f},pushed[3]{-27.89f,-149.89f,66.40f},walked[3]{-27.53f,-150.55f,66.97f},fell[3]{-27.53f,-149.89f,64.0f};
    check(!useMovedAway(o,pushed)&&!useMovedAway(o,fell)&&useMovedAway(o,walked)&&!useMovedAway(o,o),"1213h a use ends only on horizontal travel beyond 0.6 m (1228b window drop does not end it)");}
+  {PresentationRefusalGate g{};bool stopped=false;for(unsigned i=0;i<PresentationRefusalGate::stopStreak-1;++i)stopped=stopped||g.refuse(PresentationRefusalGate::SkeletonRead);
+   g.accept();const bool afterAccept=g.streak==0;bool late=false;for(unsigned i=0;i<PresentationRefusalGate::stopStreak;++i)late=g.refuse(PresentationRefusalGate::NotGameplay);
+   check(!stopped&&afterAccept&&late&&g.streak==0&&g.last==PresentationRefusalGate::NotGameplay&&g.reasons[PresentationRefusalGate::SkeletonRead]==PresentationRefusalGate::stopStreak-1&&g.longest==PresentationRefusalGate::stopStreak&&!g.refuse(99)&&g.last==0,
+     "1213i a transient refused frame is skipped; only a sustained streak stops the presentation (1228e lever froze at 27%)");}
     }
     {auto stun=p;stun.state=16;stun.stunVariant=1;stun.stunTimeMs=300;stun.stunDurationMs=800;
       for(unsigned v=1;v<=4;++v){stun.stunVariant=v;check(validShadowAction(stun,c,h),"owned native stun direction and clock accepted");}
