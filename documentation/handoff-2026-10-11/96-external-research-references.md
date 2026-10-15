@@ -14,8 +14,17 @@ On 15 October 2026 the user researched public resources for reverse-engineering 
     - The `ark_god_player` object is at +0x398d500, value at +0x398d528, default "0", flags 9.
   - The only code reading the value is the `god` console toggle (+0x718f93); damage code never reads it.
   - **Confirmed runtime (take counterattack-v1258ai):** the source's health went 56 → 0 with the cvar set.
-  - The lab therefore uses its own health hold instead (`coop_player_health_hold`, 1214ap, lab only; built and deployed, not yet runtime-verified).
+  - The lab therefore uses its own health hold instead (`coop_player_health_hold`, 1214ap, lab only; confirmed runtime in take counterattack-v1258ap).
 - **AI cvars:** the build has 61 `ark_ai_*` cvars, but no notarget or perception switch among them (confirmed static).
+- **Damage cvars from [LordRadai cvars.md](https://github.com/LordRadai/Dishonored2-Debug/blob/main/cvars.md) (confirmed static by a reference scan):**
+  - Stripped like `ark_god_player`: `ark_buddha_player` (read only by its console toggle), and `g_damageScale`, `g_playerIncomingDamageScale` and `pm_disableFatalFall`, which have no readers beyond their registration.
+  - Live: `gp_manaEnable` is read five times in the mana component code (+0x745ab9…+0x746d0d). It is a candidate for free power use in lab power takes.
+  - `ark_inventory_mana_potion_autouse` (default 1) auto-drinks a mana potion when a power is cast without enough mana.
+- **Mana potion drink (confirmed runtime, takes coverage-v1287a/b):**
+  - The lab can grant a mana potion in product mode (`coop_grant_item mana`), but the native drink routine (+0x745b20) refused both on a full pool and after the lab wrote the pool to 0. Only the value changed; the component flags still read as before.
+  - In take potion-mana-corvo-v67 the pool was spent by a native power (flags 0x2800006a → 0x2800000a), and the wheel drink then consumed the potion.
+  - The mana elixir view therefore waits for a map with powers.
+- **disrev** ([chipolux/disrev](https://github.com/chipolux/disrev)): resource containers and `.entities` maps (world setup, objects, encounters). It is a lead for finding mission contexts for the remaining checklist items: windows, chains, shops.
 
 ## Leads not yet verified
 
