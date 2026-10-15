@@ -455,6 +455,8 @@ int main(){unboundGroundTests();chokePresentationTests();
       check(useVariantForName("script_lever_windturbine_1_1_1")==2&&useVariantForName("env_valve_wheel_03")==4&&useVariantForName("crank_gate_2")==3&&useVariantForName("door_lock_01")==5&&useVariantForName("env_vise_01_1_3")==3&&useVariantForName("env_keyhole_lock")==5&&useVariantForName("ld_rich_small_01_sndctr_4")==1,"use variant from the focused entity name");
   check(useVariantForName("esc_env_rich_sink_tap_01_1")==4&&useVariantForName("env_interiors_tap_right")==4&&useVariantForName("tap")==4&&useVariantForName("env_tapestry_01")==1&&useVariantForName("script_desktape_2")==1&&
         useVariantForName("script_door_latch_blackmarket_apartment")==5&&useVariantForName("ld_ring_locker_01_1_lock")==5&&useVariantForName("ld_wheel_01_1_1")==4&&useVariantForName("pa_ld_valve_set_01_2")==4,"1213g taps are valves, latches and ring lockers are locks");
+  {const float o[3]{-27.53f,-149.89f,66.97f},pushed[3]{-27.89f,-149.89f,66.40f},walked[3]{-27.53f,-150.55f,66.97f},fell[3]{-27.53f,-149.89f,64.0f};
+   check(!useMovedAway(o,pushed)&&!useMovedAway(o,fell)&&useMovedAway(o,walked)&&!useMovedAway(o,o),"1213h a use ends only on horizontal travel beyond 0.6 m (1228b window drop does not end it)");}
     }
     {auto stun=p;stun.state=16;stun.stunVariant=1;stun.stunTimeMs=300;stun.stunDurationMs=800;
       for(unsigned v=1;v<=4;++v){stun.stunVariant=v;check(validShadowAction(stun,c,h),"owned native stun direction and clock accepted");}

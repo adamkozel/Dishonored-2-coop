@@ -52,9 +52,20 @@ Updated 2026-10-14.
 - **Candidate 1213g** classifies whole-token `tap` and `faucet` as 4 and `latch` as 5 (unit-tested), and deploys the `--focus` probe.
 - **Harness `Test-UseVariants-v1228`** (`-Mission dunwall|eotw`): the source aims its native eye at the target point (`Set-NativeInteractionAim-v691`) on four sides at 1.0 m and 0.75 m, then sweeps pitch. No aim or pitch failure can throw. Each case records pass or fail, and the required cases decide the take.
 
+**Dunwall results (1213g, takes 1228 and 1228b, confirmed runtime):**
+- **Lock (ring locker), both roles, both takes:** the native use registered and was classified 5. The focus named the co-located twin `ld_ring_locker_01_1_open`. The partner played the key/lock clip at weight 1.0 to 100%, ending by duration.
+- **Tap:**
+  - client: 1228 and 1228b, variant 4, 80 frames, to 100%;
+  - host: failed in 1228 (focused, but no use registered), passed in 1228b (74 frames, to 100%).
+- **Harness press bug (confirmed static):** `Send-D2Input` publishes an expiring input packet and returns at once. `X 600` followed directly by Neutral therefore held the press for only about 50–150 ms, so the first press often did not register (1227b, 1228). 1228b holds the press (X 400, wait, Neutral), and every use registered on the first press.
+- **Window (#5), both roles in 1228:** the use ended by movement (`endReason` 1) after 0.5–0.8 s.
+  - 1228b sampled the source's position. The source had been placed on something about 0.57 m above the floor in front of the window, and the opening sash dropped it 0.46 m with 0.36 m of horizontal travel. The 3D distance of 0.668 m crossed the 0.6 m "walked away" rule.
+  - **Candidate 1213h:** a use ends only on more than 0.6 m of horizontal travel (`useMovedAway`, unit-tested with the measured numbers).
+- **Visual:** not accepted. The observer was too close or occluded (candelabra), and in the 1228 tap case it stood behind a wall. v1228c films from the source's own open approach side, 3.4 m from the target.
+
 **Open:**
-- Lever, wheel and key variants are untested on real mechanisms. Crank/vise passes (1227b).
-- The early end of the host-source use (#5): not reproduced on the vise, which plays to 100%. Re-check on the window in the #4 run.
+- Lever and latch on Edge of the World (v1228c); a better-framed lock/tap take for visual review.
+- The early end of the host-source use (#5): explained, with the fix in 1213h; verify on the window.
 - Hand targeting to the real handle geometry (the clips are stand-ins).
 
 ## Window traversal (`window_enter_exit`, audit 1207)

@@ -39,6 +39,12 @@ struct UsePresentation {
         amount=(std::min)(1.f,float(elapsed/out.duration));return true;
     }
 };
+// 1213h (#5): a use ends when the source walks away - more than 0.6 m of HORIZONTAL travel from where
+// it started. Vertical change never ends it: in 1228/1228b the Dunwall window's opening sash dropped the
+// source 0.46 m off a ledge with only 0.36 m of horizontal travel, which the old 3D rule (0.668 m) read
+// as walking away and ended the clip at 20-40% (confirmed runtime).
+inline bool useMovedAway(const float* origin,const float* position){
+    const float dx=position[0]-origin[0],dy=position[1]-origin[1];return dx*dx+dy*dy>.36f;}
 // Source classification of the focused usable's entity name (lower case).
 inline unsigned useVariantForName(const char* name){
     if(!name||!*name)return 1;
