@@ -1,6 +1,6 @@
 {
-  "at": "2026-10-16T03:42:48.346533+02:00",
-  "candidate": "candidate-npc-combat-v1214bf",
+  "at": "2026-10-16T03:56:26.210194+02:00",
+  "candidate": "candidate-npc-combat-v1214bh",
   "takes": [
     {
       "take": "mission-start-dunwall-v1299a",
@@ -163,6 +163,12 @@
       "candidate": "candidate-npc-combat-v1214bh",
       "passed": false,
       "failure": "No NPC matches meagan"
+    },
+    {
+      "take": "campaign-dunwall-vm-v1301c",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null
     }
   ],
   "complete": false,
@@ -188,9 +194,15 @@
     "Take campaign-dunwall-v1300t (pass, lab product mode, both windows recorded): one continuous run from the mission start (coup, character choice) through Mayhew, Ramsey, the ring, the vault, the tower exit, the streets, the boat and the Meagan debrief to both result screens and the Outsider visit (void_01_p); gameflow equal after all 17 steps; lab restored.",
     "Not yet covered in this mission take: a death and its recovery (the shared death path, chapter 88) and the two-account VM run; Dunwall has no powers yet.",
     "Take 1301a (two machines, two Steam accounts, product mode): the mission start, both character choices and steps 1-11 (Mayhew, Ramsey, the ring, the vault) kept both worlds equal; at the exit the VM applied the host transition, but the next step queried the host entity list while the host was still loading and the take stopped (harness timing; restore passed). The entity refresh now settles and retries.",
-    "Take 1301b (two machines, two Steam accounts, product mode): the whole mission played through with both worlds equal after every step: start, Mayhew, Ramsey, the ring, the vault, the tower exit (both to the streets), the streets, the boat (stepping onto the deck started the debrief), both result screens and both worlds in void_01_p. The take stopped afterwards because the talk step looked for Meagan on the next map; talk is now optional when the NPC is gone. Restore passed."
+    "Take 1301b (two machines, two Steam accounts, product mode): the whole mission played through with both worlds equal after every step: start, Mayhew, Ramsey, the ring, the vault, the tower exit (both to the streets), the streets, the boat (stepping onto the deck started the debrief), both result screens and both worlds in void_01_p. The take stopped afterwards because the talk step looked for Meagan on the next map; talk is now optional when the NPC is gone. Restore passed.",
+    "Take campaign-dunwall-vm-v1301c (pass; host on this PC as Corvo, the VM's second Steam account as Emily, product mode): the whole mission from the start (coup, both character choices) through Mayhew, Ramsey, the ring, the vault, the tower exit (D2LT applied on the VM), the streets, the boat and both result screens into the Outsider visit; gameflow equal after all 17 steps, both worlds end in campaign/void/void_01/void_01_p with gameflow [230, 1, 1, 15, 0, 1, 0]; the Meagan talk step was skipped because her scene had already run. Restore passed. Visual: the safe-room wait and the Dreadful Wale (\"Objective completed: Escape Dunwall\") show the same scene in both worlds."
   ],
   "next": [
-    "The same route across the VM with two Steam accounts in product mode; a death and recovery case."
-  ]
+    "A death and checkpoint recovery case inside the mission (shared death path, chapter 88).",
+    "Mission 3 (Edge of the World) from the Outsider visit."
+  ],
+  "evidence": {
+    "lab": "campaign-dunwall-v1300t",
+    "twoAccounts": "campaign-dunwall-vm-v1301c"
+  }
 }
