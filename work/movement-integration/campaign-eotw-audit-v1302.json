@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T04:06:30.675625+02:00",
-  "candidate": "candidate-npc-combat-v1214bn",
+  "candidate": "candidate-npc-combat-v1214bo",
   "takes": [
     {
       "take": "route-eotw-v1302a",
@@ -100,6 +100,13 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302o",
+      "candidate": "candidate-npc-combat-v1214bn",
+      "passed": false,
+      "failure": "Restart failed on client (session_peer_disconnected)",
+      "recovered": false
     }
   ],
   "complete": false,
@@ -124,7 +131,9 @@
     "Confirmed runtime (1302i, boat start): the press reached checkpoint sync in both worlds (requests 0 -> 1) and was rejected (rejected 10 -> 11). Confirmed static: checkpointMission.mapId is fixed when the session is armed and checkpointWorldReady requires the current map to equal it, so after any level transition every restart is refused; the maintenance re-issue of coop_checkpoint_sync on is itself rejected while the session is enabled.",
     "1214bl re-arms an idle session when the world reaches another map. Takes 1302j/1302k: the sessions re-armed once but never paired (peerArm 0, hellos rejected): the autosave identity's mission field differed between the worlds after the boat transition (host -254924741, client -464858806; map and chapter equal), so the digests differed.",
     "1214bm hashes only map and chapter. Take 1302l: paired again, the host's restart reached Preparing, but the client refused the Prepare and its own request once (rejected +2) and failed when hellos stopped; the pair stayed on GameOver. Take 1302m (same build): the shared restart completed in 6.7 s.",
-    "1214bn: a refused attempt ends in 8 s (Preparing/Requested), loading keeps 45 s from Accept/Begin, and a failed idle session on the same map re-arms after 3 s; the die step presses Restart again every 12 s while both stay on GameOver. Take route-eotw-boatdeath-v1302n (pass): the shared restart after the boat completed in 7.0 s, then the station and the carriage took both worlds to institute_p_lowchaos with equal gameflow."
+    "1214bn: a refused attempt ends in 8 s (Preparing/Requested), loading keeps 45 s from Accept/Begin, and a failed idle session on the same map re-arms after 3 s; the die step presses Restart again every 12 s while both stay on GameOver. Take route-eotw-boatdeath-v1302n (pass): the shared restart after the boat completed in 7.0 s, then the station and the carriage took both worlds to institute_p_lowchaos with equal gameflow.",
+    "Take campaign-eotw-vm-v1302o (two accounts, 1214bn): the route to Karnaca stayed equal; at the death the client refused the host's Prepare. Confirmed runtime: the client's paired-autosave receiver rejected every host packet (rejected 130 -> 189; peer counts 0/0/0) because the host had re-armed more often (checkpoint remaps 4 vs 2), so the pair never settled and fixtureMatches failed. The harness also stopped at the first failed attempt, before the 1214bn recovery.",
+    "1214bo: a newer peer arm (or a new session) restarts the local pair counts from the autosave held now, so both sides count from the same baseline; older arms are still rejected. The die step no longer stops on a failed attempt and presses Restart again."
   ],
   "next": [
     "Two-account take of the full route with the death in Karnaca on 1214bn."

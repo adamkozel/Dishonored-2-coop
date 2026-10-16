@@ -85,7 +85,19 @@ Mission autosaves are per-player script events. Without pairing, a player who cr
 
 **Visual acceptance (1160):** host role only. The host video shows the restored Emily partner standing on the docks after both restarts. In the client video the Corvo partner isn't in frame, so client-side partner visibility is unconfirmed, although the status reports it restored.
 
+## Deaths after a level transition (1214bl–1214bn, [audit 1302](../../work/movement-integration/campaign-eotw-audit-v1302.json))
+
+In the campaign takes, a death in Karnaca after arriving from the Dreadful Wale left both players on GameOver indefinitely. Three causes were found and fixed:
+
+| Candidate | Cause (confirmed runtime and static) | Fix |
+|---|---|---|
+| 1214bl | The session's map scope (`checkpointMission.mapId`) is fixed when it is armed, and `checkpointWorldReady` requires the current map. After any level transition, every restart was refused (take 1302i: requests 0→1, rejected +1). The maintenance re-issue of `coop_checkpoint_sync on` is itself rejected while a session is enabled. | An idle or failed session re-arms when the world reaches another map. The reset sidecar reports `remaps`. |
+| 1214bm | After re-arming, the peers' autosave identities differed in the `mission` field (host −254924741, client −464858806; map and chapter equal). The field depends on whether the mission-start autosave lands before or after the map's mission activation, so hellos were rejected (takes 1302j/1302k). | The identity digest is `map|chapter`. The details keep all three fields. |
+| 1214bn | Once, the client refused the host's Prepare and its own request (take 1302l). The host then sat in Preparing for 45 s, the client failed when hellos stopped, and nothing re-armed. | Preparing and Requested end in 8 s, while loading keeps 45 s from Accept/Begin. A failed idle session re-arms after 3 s, so pressing Restart again works. The reset sidecar reports `recoveries`. |
+
+Take route-eotw-boatdeath-v1302n (pass): the host falls in Karnaca after the boat. Both reach the death screens in 6.2 s, both restart together and are back in gameplay 7.0 s after the press, then the carriage takes both to the Good Doctor with equal objectives. The route harness's `die` step follows the 1151 press sequence, traces the session, and presses Restart again every 12 s while both stay on GameOver.
+
 ## Open
 
 - **Real script trigger.** A mission-script autosave crossed by one player alone hasn't been exercised. The same reader observes it, but these takes used the probe fixture.
-- **Not started:** transitions between missions, manual save and load selection, disconnect and rejoin.
+- **Not started:** manual save and load selection, disconnect and rejoin. Transitions between and within missions are covered in [chapter 97](97-campaign-map-sequence.md).

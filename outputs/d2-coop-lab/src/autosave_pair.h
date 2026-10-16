@@ -10,7 +10,7 @@
 #include "autosave_pair_protocol.h"
 struct AutosavePair {
     bool active=false,pending=false,peerSeen=false,peerPending=false;
-    std::uint64_t arm=0,epoch=0,peerEpoch=0,peerArm=0,sentAt=0,receivedAt=0,requestedAt=0,observedAt=0;
+    std::uint64_t arm=0,epoch=0,peerEpoch=0,peerArm=0,peerSession=0,peerRearms=0,sentAt=0,receivedAt=0,requestedAt=0,observedAt=0;
     int slot=-1;std::uint64_t stamp=0;
     unsigned saves=0,originated=0,mirrored=0,peerSaves=0,peerOriginated=0,peerMirrored=0;
     std::uint64_t requests=0,refused=0,sent=0,received=0,rejected=0,resets=0;
@@ -20,9 +20,9 @@ AutosavePair autosavePair{};
 std::uint64_t autosavePairArmSequence=0;
 bool missionAutosaveStamp(int& slot,std::uint64_t& stamp);
 void resetAutosavePair(const char* why){
-    auto& a=autosavePair;const auto arm=a.arm;const auto peerArm=a.peerArm;
+    auto& a=autosavePair;const auto arm=a.arm;const auto peerArm=a.peerArm;const auto peerSession=a.peerSession,peerRearms=a.peerRearms;
     const auto keepRequests=a.requests,keepRefused=a.refused,keepSent=a.sent,keepReceived=a.received,keepRejected=a.rejected,keepResets=a.resets+1;
-    a={};a.arm=arm;a.peerArm=peerArm;a.requests=keepRequests;a.refused=keepRefused;a.sent=keepSent;a.received=keepReceived;a.rejected=keepRejected;a.resets=keepResets;
+    a={};a.arm=arm;a.peerArm=peerArm;a.peerSession=peerSession;a.peerRearms=peerRearms;a.requests=keepRequests;a.refused=keepRefused;a.sent=keepSent;a.received=keepReceived;a.rejected=keepRejected;a.resets=keepResets;
     a.active=true;a.epoch=outgoing.worldEpoch;a.result=why;
     missionAutosaveStamp(a.slot,a.stamp); // baseline: the save present now is the shared starting point
 }
@@ -38,7 +38,14 @@ bool autosavePairReady(){
 void receiveAutosavePair(const AutosavePairPacket& p){
     auto& a=autosavePair;++a.received;
     if(!a.active||!validAutosavePair(p,localRole)||p.session!=remote.session||p.mapId!=outgoing.mapId){++a.rejected;return;}
-    if(a.peerArm&&p.arm!=a.peerArm){++a.rejected;return;}
+    // 1214bo: a peer that re-armed (checkpoint re-arm on a new map or after a
+    // failure) restarts its counts; counting on from the old baseline could
+    // never settle (take campaign-eotw-vm-v1302o: the client rejected every
+    // host packet after the host's re-arm, so the shared restart was refused).
+    // Both sides now count from the autosave each holds.
+    if(a.peerArm&&p.session==a.peerSession&&p.arm<a.peerArm){++a.rejected;return;}
+    if(a.peerArm&&(p.arm!=a.peerArm||p.session!=a.peerSession)){resetAutosavePair("peer_rearmed");++a.peerRearms;}
+    a.peerSession=p.session;
     if(p.epoch!=remote.worldEpoch){++a.rejected;return;} // stale world: ignore until the peer reports its current epoch
     if(a.peerSeen&&a.peerEpoch==p.epoch&&(p.saves<a.peerSaves||p.originated<a.peerOriginated||p.mirrored<a.peerMirrored)){++a.rejected;return;}
     a.peerArm=p.arm;a.peerEpoch=p.epoch;a.peerSeen=true;a.peerSaves=p.saves;a.peerOriginated=p.originated;a.peerMirrored=p.mirrored;a.peerPending=p.pending!=0;
