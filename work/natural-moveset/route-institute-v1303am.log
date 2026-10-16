@@ -1,0 +1,73 @@
+{
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "passed": false,
+  "notes": {
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 31,
+        "cine": 284,
+        "pos": [
+          -63.719879,
+          37.111305,
+          19.77371
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 31,
+        "cine": 24,
+        "pos": [
+          -1.542784,
+          -38.069988,
+          -10.837098
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 23,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      }
+    },
+    "gameflowEqual": true
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:211[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 211 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

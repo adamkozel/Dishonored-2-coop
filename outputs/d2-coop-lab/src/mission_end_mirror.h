@@ -81,7 +81,7 @@ bool countGameflowStates(unsigned counts[7]){
 }
 bool missionEndMirrorEnabled=false;
 struct MissionEndMirror {
-    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0;
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0,identityAt=0,attemptAt=0,unnamed=0;
     bool pending=false;unsigned lastLogic=0,missions=0;int appliedState=-1;MissionEndPacket incoming{};const char* result="idle";
 };
 MissionEndMirror missionEnd{};
@@ -196,15 +196,25 @@ void serviceMissionEndSender(std::uint64_t tick){
     // Sender: this world has just entered its own result screen.
     const std::uint64_t observedAt=missionResultsObservedAt.load();
     if(missionResultsObserved.load()&&tick>observedAt&&tick-observedAt>30000)missionResultsObserved.store(false);
-    if(((logic==11&&m.lastLogic!=11)||missionResultsObserved.load())&&m.sentEpoch!=outgoing.worldEpoch){
-        missionResultsObserved.store(false);
-        MissionNodeScan s{};MissionEndPacket p{};std::uint32_t high=0;
+    // 1214bu: keep this world's mission identity current during gameplay, so a
+    // Results switch inside a movie (no loaded map name) still names the mission.
+    if(logic==1&&!outgoing.pendingGameLogicState&&tick-m.identityAt>=1000){char t[160]{};std::uint32_t h=0;readCurrentMapinfo(t,sizeof(t),h);m.identityAt=tick;}
+    const bool entered=logic==11&&m.lastLogic!=11;
+    if((entered||missionResultsObserved.load())&&m.sentEpoch!=outgoing.worldEpoch&&(entered||tick-m.attemptAt>=500)){
+        m.attemptAt=tick;
+        MissionNodeScan s{};MissionEndPacket p{};std::uint32_t high=0;bool sent=false;
         if(!scanMissionNodes(3,s)){++m.scanFailed;m.result="scan_failed";}
         else if(!s.node){m.result="results_without_mission";}
-        else if(readCurrentMapinfo(p.mapinfo,sizeof(p.mapinfo),high)&&sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected){
+        else if(!readCurrentMapinfo(p.mapinfo,sizeof(p.mapinfo),high)){++m.unnamed;m.result="mapinfo_unreadable";}
+        else if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected){m.result="not_connected";}
+        else{
             p.role=localRole;p.highChaos=high;p.session=outgoing.session;p.epoch=outgoing.worldEpoch;p.mapId=outgoing.mapId;p.sequence=++m.sequence;
-            if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++m.sent;m.sentEpoch=outgoing.worldEpoch;m.result="sent";expectMissionTransition(tick);}
+            if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++m.sent;m.sentEpoch=outgoing.worldEpoch;m.result="sent";expectMissionTransition(tick);sent=true;}
+            else m.result="send_failed";
         }
+        // A failed attempt is retried every 500 ms while the observation lasts (30 s).
+        if(sent)missionResultsObserved.store(false);
+        else if(!missionResultsObserved.load()){missionResultsObservedAt.store(tick);missionResultsObserved.store(true);}
     }
     m.lastLogic=logic;
 }
@@ -498,8 +508,8 @@ void writeMissionEndMirror(){
     if(statesOk){fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],\"gameflowNodes\":[",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);
         for(unsigned i=0;i<gameflowListedCount;++i)fprintf(f,"%s[%u,%d]",i?",":"",gameflowListed[i].id,gameflowListed[i].state);fprintf(f,"],");}
     else fprintf(f,"{\"gameflowStates\":null,\"gameflowNodes\":null,");
-    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"resultsSwitches\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"reset\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
-        (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,static_cast<unsigned long long>(missionResultsSwitches.load()),
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"resultsSwitches\":%llu,\"unnamed\":%llu,\"identity\":\"%s\",\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"reset\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
+        (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,static_cast<unsigned long long>(missionResultsSwitches.load()),m.unnamed,lastMissionMapinfo,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused,
         (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,gameflowMirror.reset,

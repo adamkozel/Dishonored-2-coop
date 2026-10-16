@@ -86,7 +86,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The route harnesses record the active node names per step (`active`, from the local cache `work/natural-moveset/gameflow-names.local.json`). The cache is game-derived and not committed.
 - **Script gates:** `tools/diag/d2_kiscule_graph.py <base> <map> <entity>` prints one script entity's node graph, which shows the gate in front of an event.
 
-## The Good Doctor (takes 1303a–1303al)
+## The Good Doctor (takes 1303a–1303an)
 
 - **Required path (confirmed static and runtime):**
   1. The office note (it opens a reading screen, which B closes), then the master key.
@@ -97,11 +97,12 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   6. The watchtower's whale-oil tank. Its removal completes `Task_IS_Turn_OFF_the_watchtower`, the only event that evaluates the escape gate, which then activates `Task_IS_Talk_to_Meagan`.
   7. Meagan sails to the lower dock. The talk there plays the departure scene, the leave prompt and the debrief, then the result screen loads `boat_madinventor_p`.
 - **Route notes:**
-  - The watchtower moves and turns (`arkMover` nav drivers), so the tank is aimed from its live position, and the stand's offset is rotated by the live bearing from the tank to the tower body (`ld_watch_tower_3`). A fixed world-axis offset put the host off the deck or into the tower's generator wall (takes 1303ai–1303ak).
+  - The watchtower's body stays put; its top turns back and forth about the body's axis (−75.34, 42.92) and carries the tank about 1.45 m out (confirmed runtime, held take 1303am). The route stands 2.1 m out from the axis through the tank's live position, facing it, 20 degrees down. The deck carries the player along: one press opens the cover, the next carries the tank. Stands about 1 m from the axis are inside the turning top and fatal (takes 1303ai–1303al).
   - Guards on the walkway beside the tower attack a player at the tank, so the route clears them first and keeps the lab health hold on for that one stand.
   - Guards block plain sword strikes, so the fights use focused strikes.
   - Teleports beside wall-mounted objects at height can be fatal falls.
 - **Mission end in a cinematic (1214bq–1214bs):** this mission completes inside its debrief cinematic. The native switch to Results (caller `0x4ea07c`) and back to the cinematic happen in one tick, on the cinematic's thread, so the mission end mirror never sampled logic 11 and the partner stayed behind (takes 1303ac/1303ae/1303af). The logic-switch trace now records that switch from any thread (1214br).
   - The debrief is a movie, and movie playback and the following load bypass command execution, where the engine-thread services run (take 1303ah: 49 s from Results to gameplay on the next map, and the observation expired unsent). Since 1214bs the sender runs from the transport pump, which the native screen callback keeps running during movies and loads.
+  - The current mapinfo (`idCommonLocal+0x2b8`) is null during a mission started with the native `campaign` command, in both worlds (confirmed runtime, 1303am), so the sender could not name the mission. Since 1214bu it is derived from the loaded map's name when the declaration is absent (directory plus the name without `_p`, `_p_lowchaos` or `_p_highchaos`; an existing mapinfo for all 35 campaign maps, confirmed static). The same read names the host's mission for join-follow (`D2MF`).
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

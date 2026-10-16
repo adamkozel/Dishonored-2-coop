@@ -110,6 +110,7 @@ Every 5 s it also re-issues the idempotent session commands, so a system refused
 
 [Audit 1192](../../work/movement-integration/join-follow-audit-v1192.json).
 - The host publishes its current mission on `D2MF` packets: the `idDeclMapInfo` name from `idCommonLocal+0x2b8`, and chaos from the loaded map name.
+  - That declaration is null during a mission started with the `campaign` command (confirmed runtime, take route-institute-v1303am), so nothing was published then. Since 1214bu the mapinfo is derived from the loaded map's name when it is absent ([chapter 97](97-campaign-map-sequence.md)).
 - A joiner on another map loads the same mission natively with the game's own `campaign <mapinfo> <low|high> emily`. It does this once per host map, from gameplay or a menu, never while loading or in a cinematic.
 - Product mode follows automatically; the lab uses `coop_follow_host on`.
 

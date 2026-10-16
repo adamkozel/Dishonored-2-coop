@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T07:36:29.852205+02:00",
-  "candidate": "candidate-npc-combat-v1214bt",
+  "candidate": "candidate-npc-combat-v1214bu",
   "takes": [
     {
       "take": "route-institute-v1303a",
@@ -260,6 +260,28 @@
       "passed": false,
       "failure": "Host died at ld_kar_whaleoil_tank_01_3",
       "recovered": false
+    },
+    {
+      "take": "route-institute-v1303al",
+      "candidate": "candidate-npc-combat-v1214bt",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3 (restore found health 70/70 instead of 56; the next take started from the Dunwall fixture normally)",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303am",
+      "candidate": "candidate-npc-combat-v1214bt",
+      "passed": false,
+      "held": true,
+      "failure": "Held probe session; restore failed from the host's result screen",
+      "recovered": true
+    },
+    {
+      "take": "route-institute-v1303an",
+      "candidate": "candidate-npc-combat-v1214bu",
+      "passed": false,
+      "failure": "Harness reported a pass, but both worlds stayed in institute_p_lowchaos: the Meagan step counted a one-liner scene as the talk",
+      "recovered": false
     }
   ],
   "complete": false,
@@ -291,9 +313,14 @@
     "Take 1303aj (health hold at the tank): the host still died there. Frames: combat tutorials (block) appear and a strike lands while the cover is open, so a guard attacks the host at the tank; the health hold does not outpace it. The npcs dump puts an elite (8 m, z 19.6) and a guard (13 m, z 19.8) on the walkway beside the tank. The route now clears guards within 11 m of the tower before the tank (route institute-full-v1303ak).",
     "Take 1303aj's restore failed its final check (both roles; the message did not say which value), and 1303ak started normally from that state and restored cleanly; the check now reports logic, health and freshness.",
     "Take 1303ak: the clear step killed the three guards beside the tower (an elite and two guards), yet the host died on the teleport to the tank, before the first press ('You Have Passed from This World'). In 1303ai to 1303ak the host died exactly at the tank plus the fixed offset, while the tank's live position relative to the tower differed from 1303ah's: the tower turns as it moves (arkMover nav drivers), so a world-axis offset can put the stand off the deck or into the tower's generator wall (watch_tower prefab: shield door, generator wall, hack panel). The tank step now rotates the measured offset by the live bearing from the tank to the tower body (ld_watch_tower_3, 41.88 degrees at spawn) and saves the live positions per try.",
-    "1214bt (#87): confirmed static: the native set-state routine 0x1404e9bd0 stores any state (0x1404ea190 writes node+0xc after posting the change event) and its HUD notification (0x1404e9a30, 0x1404ea570) is only for states 2 to 4 and flagged 5. The client now resets to 0 a non-mission node that is absent from 10 consecutive complete host packets."
+    "1214bt (#87): confirmed static: the native set-state routine 0x1404e9bd0 stores any state (0x1404ea190 writes node+0xc after posting the change event) and its HUD notification (0x1404e9a30, 0x1404ea570) is only for states 2 to 4 and flagged 5. The client now resets to 0 a non-mission node that is absent from 10 consecutive complete host packets.",
+    "Take 1303al: the rotated-offset stand also died on the teleport. Its premise was wrong: held session 1303am sampled the prefab live (confirmed runtime): the tower body ld_watch_tower_3 stays at (-75.34, 42.92); only the top turns, sweeping back and forth (bearings 86, 43, 20, 29, 33, 49, 159, -165, 170 degrees over 32 s), and carries the tank about 1.45 m from that axis. Every failed stand was about 1 m from the axis, inside the turning top; 1303ah's working stand was 1.9 m out.",
+    "Held session 1303am: a stand 2.1 m out from the axis through the tank's live position, facing it, 20 degrees down, showed 'Whale Oil Tank Cover - Open'. The deck carries the player with the top. One press opened the cover ('Whale Oil Tank - Carry'), the next carried the tank: Task_IS_Turn_OFF_the_watchtower complete, Task_IS_Talk_to_Meagan active (named states). A press at Meagan first drops the carried tank; the next started the departure, and the host reached its result screen (logic 11, resultsSwitches 1) without sending the mission end (result armed).",
+    "Root cause (confirmed runtime, 1303am): idCommonLocal+0x2b8 (the idDeclMapInfo that readCurrentMapinfo reads) is null in both worlds during a mission started with the native campaign command, even in plain gameplay, so the sender's mapinfo read failed silently and the observation was consumed. The same read names the host's mission for join-follow (D2MF). 1214bu derives the mapinfo from the loaded map name when the declaration is absent (the directory plus the name without _p, _p_lowchaos or _p_highchaos; this names an existing mapinfo for all 35 campaign maps, confirmed static), keeps the last identity for moments without a loaded map name, refreshes it every second in gameplay, and reports (mapinfo_unreadable, not_connected, send_failed) and retries failed sends for 30 s.",
+    "The tank step now stands 2.1 m out from the watchtower axis through the tank's live position (orbit), with eight presses at 20 degrees (route institute-full-v1303an).",
+    "Take 1303an (1214bu): the orbit stand worked on the first two tries (cover, then carry; Task_IS_Turn_OFF_the_watchtower complete in both worlds), and the gameflow counts were equal in both worlds after the Vasco talk ([230,2,3,10,0,3,0]; before 1214bt the partner had one extra state 5), so #87's reset holds. The mission identity now reads campaign/institute/institute.mapinfo in both worlds. But the Meagan step's first press dropped the carried tank and its second, 6 degrees off, counted as the talk because Meagan's one-liner scene changed the cinematic epoch; the harness then reported a pass with both worlds still on the institute map. The Meagan step now counts only a press that leaves gameplay (expect logic), and routes end with an expect step that fails the take unless both worlds reach the next map."
   ],
   "next": [
-    "Take 1303al: the full route on 1214bt with the rotation-aware tank stand; the partner should follow the mission end, and the gameflow counts should be equal after the Vasco talk."
+    "Take 1303ao: the full route on 1214bu, ending with both worlds in boat_madinventor_p."
   ]
 }
