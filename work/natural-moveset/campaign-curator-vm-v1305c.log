@@ -1,0 +1,106 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bx",
+      "hostDll": "A5EDD2558F63ECE239C0998373EBC3066B14F83E7511A6E1166EA6EDF3802090",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "healthHold": [
+      "from step step19-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dust/boat_dust_p",
+        "epoch": 31,
+        "cine": 111,
+        "pos": [
+          -6.872689,
+          -14.347905,
+          0.094102
+        ],
+        "fresh": true,
+        "gameflow": [
+          221,
+          0,
+          3,
+          17,
+          0,
+          7,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/6875",
+        "ka": "14/0/0",
+        "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dust/boat_dust_p",
+        "epoch": 31,
+        "cine": 40,
+        "pos": [
+          -6.856483,
+          -15.325294,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          221,
+          0,
+          3,
+          17,
+          0,
+          7,
+          0
+        ],
+        "gfApplied": 38,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "4/9/0",
+        "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/void/void_02/void_02.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}

@@ -119,4 +119,14 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Passes:** lab take route-mi-v1304s and two-account take campaign-madinventor-vm-v1304a (host on this PC, client in the lab VM). Both worlds reached `void_02` with equal gameflow. In the VM take the host's both-ready hold reached its 90 s cap while the slower VM client loaded the Void (hypothesis); both still ended equal.
 - **Tools:** `tools/diag/d2_kiscule_vars.py` reads live script and story-flag variables (bool value at +0x19, confirmed static). `work/natural-moveset/Focus-Use-v1304.ps1` and the route's `focus` option press only while the native use focus is on the target.
 
+## The Royal Conservatory (takes 1305b–1305f, two accounts campaign-curator-vm-v1305c, [audit 1305](../../work/movement-integration/campaign-curator-audit-v1305.json))
+
+- **Required path (confirmed static and runtime):**
+  1. The Void (`void_02`): the brief and memories triggers, then the exit portal `script_usable_portal_exit`. Its use plays `player_leavingvoid` and the transition to the Dreadful Wale.
+  2. The Dreadful Wale: Meagan's briefing chair (`mdnt_briefing_chair`, about 90 s), then the skiff.
+  3. The Conservatory: an entrance trigger (`ld_trigger_main_entrance_door`), Ashworth's intro and her kill (`breanna_ashworth.def`; she sometimes fights back, so the route allows 200 presses). Then the mandatory `Obj_CU_DiscoverAshworthRole`: her office note (`ld_note_archived_journals`) and the audiograph (`ld_audiograph_01_1_2`). `Obj_CU_Escape` activates after it (confirmed static, `gameflow_curator.arktree`).
+  4. The escape: a talk with Meagan at the start dock plays her scene, the leave prompt and the result screen. Both worlds load `boat_dust`, and each world also ends the mission itself (both mirrors read `local_already_ending`), which is benign.
+- **A paused partner (1214bw–1214bx):** in the first two-account takes the VM client sat in the pause menu or a scene when the host left the boat, and the transition expired. The pause menu also stops the engine services. Received transitions and mission ends now stay pending while the partner is outside gameplay on the source map, time without a service call doesn't count toward their caps, and they apply when the partner resumes.
+- **Passes:** lab take route-cu-v1305f and two-account take campaign-curator-vm-v1305c (host on this PC, client in the lab VM), both ending in `boat_dust` with equal gameflow.
+
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

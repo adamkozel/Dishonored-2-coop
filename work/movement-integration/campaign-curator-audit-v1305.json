@@ -1,0 +1,87 @@
+{
+  "audit": "campaign-curator-v1305",
+  "card": 78,
+  "mission": "The Royal Conservatory",
+  "candidate": "candidate-npc-combat-v1214bx",
+  "maps": [
+    "campaign/void/void_02/void_02_p",
+    "campaign/boat/curator/boat_curator_p",
+    "campaign/curator/curator_p_lowchaos"
+  ],
+  "created": "2026-10-16T21:47:30+02:00",
+  "takes": [
+    {
+      "take": "route-cu-v1305b",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "held": true,
+      "scope": "held exploration of the whole mission; the mission end reached both worlds"
+    },
+    {
+      "take": "route-cu-v1305c",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Use of ld_note_archived_journals not registered (the step waited for the note to leave the world)"
+    },
+    {
+      "take": "route-cu-v1305d",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Use of ld_note_archived_journals not registered (no press: the native use focus never matched)"
+    },
+    {
+      "take": "route-cu-v1305e",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held at the note; the focus log showed the stand without its y offset; restored"
+    },
+    {
+      "take": "route-cu-v1305f",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true
+    },
+    {
+      "take": "campaign-curator-vm-v1305a",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "twoAccounts": true,
+      "failure": "breanna_ashworth still alive after 80 attacks; before that the VM client stayed on the Dreadful Wale (paused) when the host left"
+    },
+    {
+      "take": "campaign-curator-vm-v1305b",
+      "candidate": "candidate-npc-combat-v1214bw",
+      "passed": false,
+      "twoAccounts": true,
+      "failure": "Expected both worlds on curator/curator_p: the VM client stayed paused on boat_curator_p and its transition expired again"
+    },
+    {
+      "take": "campaign-curator-vm-v1305c",
+      "candidate": "candidate-npc-combat-v1214bx",
+      "passed": true,
+      "twoAccounts": true
+    }
+  ],
+  "findings": [
+    "Held take 1305b (confirmed runtime, lab product mode): the Void's triggers (enter, brief 1, memories 1, teleport 3, brief 2, teleport after brief 2, brief 3) do not leave by themselves; the exit is script_usable_portal_exit (53.5, -91.1, 69.9), whose use plays player_leavingvoid and the LevelTransition to boat_curator, mirrored to the partner (confirmed static: UseNotification on the portal starts the scene). On the Dreadful Wale the briefing chair (mdnt_briefing_chair) plays Meagan's briefing (about 90 s; Task_CU_GetBriefing complete, Task_CU_LeaveDreadfulWale active), and the skiff leaves for curator_p_lowchaos in both worlds.",
+    "In the Conservatory: ld_trigger_main_entrance_door completes Task_CU_EnterConservatory; Ashworth's intro trigger and looking at her complete Task_CU_FindAshworth; focused strikes killed breanna_ashworth.def (health 60 to 0 in 17 presses, health hold on) and completed Obj_CU_EliminateAshworth. Confirmed static (gameflow_curator.arktree): Obj_CU_DiscoverAshworthRole is mandatory and Obj_CU_Escape auto-activates after it: the archived-journals note (ld_note_archived_journals, Journal Location Found) and the audiograph (ld_audiograph_01_1_2, BunkerInformationFound) completed it, and Obj_CU_Escape and Task_CU_EscapeCanal became active.",
+    "The escape is a talk with Meagan at the start dock (-119.5, -131.9, -29.9): her scene, the leave prompt and the result screen; both worlds loaded boat_dust_p and stood in gameplay. Each world completed the mission itself (both mission end mirrors read local_already_ending when the peer's packet arrived), which is benign. Focus-guided stands from the probes are encoded in route cu-full-v1305c.",
+    "Take 1305c: the route ran through the Void portal, the briefing, the skiff, the entrance and the Ashworth kill in both worlds; the note step failed only on its check: a note opens a reading screen and stays in the world, so the route now counts the reading screen.",
+    "Take 1305d: the note step pressed nothing (no frames): at the stand where the held probe found the focus, the route's focus check never matched. The use step now logs each try's focused handle (<step>-focus.json); held take 1305e stops at the note to compare.",
+    "Held take 1305e: the use step's focus log stood at (-5.307, 52.234), the note's x plus 0.49 but its y unchanged. Harness bug: a one-stand offsets list ([[x,y]]) assigned through PowerShell's `$offs = if (...) {...}` is unrolled to the bare pair, so each number became a stand with y 0. Earlier single-offset steps lost their y offsets too and passed by their focus or aim sweeps. The use and carry steps now keep a one-stand list a list (verified with a test script).",
+    "Take 1305f (lab product mode): PASS. One continuous run from the Void: the triggers and the exit portal, Meagan's briefing chair and the skiff, the conservatory entrance, Ashworth's intro and the kill, her office note and the audiograph, and the escape talk with Meagan; both worlds loaded boat_dust_p with equal gameflow counts [221,0,3,17,0,7,0], and the restore passed.",
+    "Take campaign-curator-vm-v1305a (two accounts): when the host took the skiff, the VM client sat in the pause menu on boat_curator_p (screenshot: PAUSE over the Dreadful Wale; a game window that loses focus pauses itself) and its level transition mirror expired after 60 s (received 1, applied 0), so the host went to the Conservatory alone. The route's expect step passed wrongly because 'curator_p' also matches 'boat_curator_p'. The take then failed at Ashworth, who fought back (health 70 to 60 in 80 presses).",
+    "1214bw: a received level transition or mission end stays pending while the partner is outside gameplay on the source map (the pause menu, a scene) and applies when it resumes; the 60 s and 120 s caps count gameplay only, within 30 min of receiving. A real player who pauses as the host leaves now follows on resuming. The route harness's settle presses B on the pause menu, expect regexes now name the map's directory, and the Ashworth attack allows 200 presses.",
+    "Take campaign-curator-vm-v1305b (1214bw): the VM client paused at the same point (the host's skiff departure) and its level transition still expired (received 2, applied 1). Hypothesis confirmed by the code path: the pause menu stops the engine services, so 1214bw's refresh never ran while paused, and the first service after resuming saw more than 60 s. 1214bx shifts the timer by the time without a service call. The route's expect step also presses B for a world in the pause menu while waiting. Why the VM client loses focus at that moment is not known (hypothesis: a guest-side window or notification).",
+    "Take campaign-curator-vm-v1305c (1214bx, two Steam accounts: host Corvo on this PC, client Emily in the lab VM): PASS. Both level transitions reached the VM client (applied 2) and it followed into the Conservatory; the host's mission end was applied (identity campaign/boat/dust/boat_dust.mapinfo), both worlds loaded boat_dust_p through the both-ready hold (the host waited 6.9 s), gameflow was equal [221,0,3,17,0,7,0], and the restore passed. The host video (1333 s of presented frames) was reviewed at six points: the Void, the briefing scene and board, the Ashworth fight with the objective panel, Meagan at the skiff, and the end."
+  ],
+  "next": [
+    "The Dust District (#79): boat_dust, dust_p (the Jindosh lock), the bunker door."
+  ],
+  "evidence": {
+    "lab": "route-cu-v1305f",
+    "twoAccounts": "campaign-curator-vm-v1305c",
+    "route": "work/natural-moveset/routes/cu-full-v1305g.json"
+  },
+  "status": "complete"
+}

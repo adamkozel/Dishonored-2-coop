@@ -1,0 +1,159 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 8000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_player_entervoid",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_01",
+    "settle": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_memories_01",
+    "settle": 10000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_teleport_03",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_02",
+    "settle": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_teleport_afterbrief02",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_03",
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 10000
+  },
+  {
+    "do": "expect",
+    "map": "boat_curator",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "mdnt_briefing_chair",
+    "focus": true,
+    "pitches": [
+      20,
+      35,
+      5
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "curator_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_main_entrance_door",
+    "settle": 8000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_ashworth_intro_trigger",
+    "settle": 20000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -4.3,
+      45.3
+    ],
+    "settle": 1000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "attack",
+    "name": "ashworth",
+    "near": [
+      -4.3,
+      45.3
+    ],
+    "max": 80,
+    "settle": 15000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -119.0,
+      -134.6
+    ],
+    "settle": 1000
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "notes": {
+    "healthHold": [
+      "from step step19-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 91,
+        "cine": 323,
+        "pos": [
+          -4.456453,
+          51.990841,
+          9.358644
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          3,
+          8,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/8/0",
+        "hold": "released/0",
+        "ka": "6/0/0",
+        "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_AshworthJournal,Task_CU_ByrneInformation,Task_CU_FindAnotherWay,Task_CU_KillAshworth"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 91,
+        "cine": 155,
+        "pos": [
+          -119.863701,
+          -134.613129,
+          -29.857895
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          3,
+          8,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 11,
+        "lt": "applied/0/8",
+        "hold": "released/63",
+        "ka": "2/4/2",
+        "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_AshworthJournal,Task_CU_ByrneInformation,Task_CU_FindAnotherWay,Task_CU_KillAshworth"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "scope": "Campaign route steps for campaign/void/void_02/void_02.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:257[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 257 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

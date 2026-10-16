@@ -1,0 +1,270 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 8000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_player_entervoid",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_01",
+    "settle": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_memories_01",
+    "settle": 10000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_teleport_03",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_02",
+    "settle": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_teleport_afterbrief02",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_03",
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "script_usable_portal_exit",
+    "focus": true,
+    "offsets": [
+      [
+        -0.85,
+        0.85
+      ]
+    ],
+    "z": 71.15,
+    "pitches": [
+      10,
+      0,
+      20,
+      10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "expect",
+    "map": "boat_curator",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "mdnt_briefing_chair",
+    "focus": true,
+    "offsets": [
+      [
+        1.0,
+        0
+      ]
+    ],
+    "z": 1.55,
+    "pitches": [
+      40,
+      30,
+      50,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      25
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 90000
+  },
+  {
+    "do": "expect",
+    "map": "curator_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 30000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_main_entrance_door",
+    "settle": 8000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_ashworth_intro_trigger",
+    "settle": 15000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -5.6,
+      45.5
+    ],
+    "settle": 1000
+  },
+  {
+    "do": "attack",
+    "name": "breanna_ashworth",
+    "near": [
+      -5.6,
+      45.5
+    ],
+    "max": 80,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "ld_note_archived_journals",
+    "focus": true,
+    "offsets": [
+      [
+        0.49,
+        0.49
+      ]
+    ],
+    "z": 9.85,
+    "pitches": [
+      50,
+      40,
+      60,
+      50
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 5000,
+    "gone": true
+  },
+  {
+    "do": "use",
+    "name": "ld_audiograph_01_1_2",
+    "focus": true,
+    "offsets": [
+      [
+        0.8,
+        0
+      ]
+    ],
+    "z": -12.25,
+    "pitches": [
+      50,
+      40,
+      60,
+      50
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 8000
+  },
+  {
+    "do": "heal",
+    "on": false,
+    "settle": 1000
+  },
+  {
+    "do": "use",
+    "focus": true,
+    "offsets": [
+      [
+        1.6,
+        0
+      ]
+    ],
+    "z": -28.55,
+    "pitches": [
+      10,
+      0,
+      20,
+      10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 150000,
+    "expect": "logic",
+    "match": "meagan_foster"
+  },
+  {
+    "do": "expect",
+    "map": "boat_dust",
+    "ms": 300000,
+    "settle": 5000
+  }
+]

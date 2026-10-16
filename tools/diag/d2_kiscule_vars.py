@@ -12,7 +12,7 @@ decl (+0x68, name at +8). Only reads process memory; use it on the
 isolated lab instances. Names are game-derived: keep the output local.
 
 Usage:
-  python -I d2_kiscule_vars.py <pid> <entity name | storyflags> [--grep REGEX]
+  python -I d2_kiscule_vars.py <pid> <entity name | storyflags> [--grep REGEX] [--nested] [--raw]
 """
 import argparse
 import re
@@ -55,7 +55,7 @@ def variables(p, inst):
         v = p.u64(arr + i * 8)
         name = text(p, p.u64(v + 8))
         raw = p.read(v + 0x10, 0x10) or b''
-        yield name, raw
+        yield name, raw, v
 
 
 def main():
@@ -63,6 +63,8 @@ def main():
     ap.add_argument('pid', type=int)
     ap.add_argument('entity')
     ap.add_argument('--grep', default='')
+    ap.add_argument('--nested', action='store_true', help='read the decl instances the entity owns instead of its own graph')
+    ap.add_argument('--raw', action='store_true', help='also dump the words of each variable object (int and list layouts)')
     a = ap.parse_args()
     p = Proc(a.pid)
     game = p.u64(p.base + 0x39a5290)
@@ -70,10 +72,9 @@ def main():
     ents = json.loads(subprocess.run([str(PROBE), str(a.pid), '--entities'], capture_output=True, text=True).stdout)['entities']
     rx = re.compile(a.grep, re.I) if a.grep else None
     targets = []
-    if a.entity == 'storyflags':
-        world = next(int(e['handle'], 16) for e in ents if e['type'] == '.?AVidWorldspawn@@')
-        winst = instance_for(p, game, world)
-        table, n = p.u64(winst + 0x88), p.u32(winst + 0x90) & 0xffffff
+    def nested(owner):
+        # Decl instances an instance owns (story flags on the worldspawn, a DeclInstance node's decl): table +0x88.
+        table, n = p.u64(owner + 0x88), p.u32(owner + 0x90) & 0xffffff
         for b in range(min(n, 64)):
             node, hops = p.u64(table + b * 8), 0
             while node and hops < 64:
@@ -81,21 +82,36 @@ def main():
                 decl = p.u64(inst + 0x68)
                 targets.append((text(p, p.u64(decl + 8)) or hex(inst), inst))
                 node, hops = p.u64(node + 0x10), hops + 1
+    if a.entity == 'storyflags':
+        nested(instance_for(p, game, next(int(e['handle'], 16) for e in ents if e['type'] == '.?AVidWorldspawn@@')))
     else:
         for e in ents:
             if e['name'] == a.entity:
-                targets.append((a.entity, instance_for(p, game, int(e['handle'], 16))))
+                inst = instance_for(p, game, int(e['handle'], 16))
+                if a.nested and inst:
+                    nested(inst)
+                else:
+                    targets.append((a.entity, inst))
     if not targets:
         raise SystemExit('no instance for ' + a.entity)
     for label, inst in targets:
         if not inst:
             print(f'{label}: no script instance')
             continue
-        for name, raw in variables(p, inst):
+        for name, raw, v in variables(p, inst):
             line = f'{label} {name}: default {raw[8]} value {raw[9]} (bytes {raw.hex()})'
             if rx and not rx.search(line):
                 continue
             print(line)
+            if a.raw:
+                # Unknown layouts (int, lists): the object's words and, for heap pointers, the first ints they point at.
+                for off in range(0x10, 0x50, 8):
+                    w = p.u64(v + off)
+                    ints = ''
+                    if 0x10000 < w < 0x7fffffffffff:
+                        blob = p.read(w, 40)
+                        ints = ' -> ' + ' '.join(str(int.from_bytes(blob[i:i + 4], 'little', signed=True)) for i in range(0, 40, 4)) if blob else ''
+                    print(f'    +{off:#04x} {w:#018x}{ints}')
 
 
 if __name__ == '__main__':
