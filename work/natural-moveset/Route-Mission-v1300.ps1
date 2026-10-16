@@ -8,6 +8,7 @@ param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/es
 #   {"do":"wait","ms":<n>}
 #   {"do":"attack","name":<npc regex>,"near":[x,y],"max":<presses>}  fight it until its health is 0
 #   {"do":"loot","name":<npc regex>,"near":[x,y]}  use the body (search)
+#   {"do":"talk","name":<npc regex>,"near":[x,y]}  face and talk (scene must start)
 # After each step both worlds' logic, map, gameflow counts by state and a
 # frame per window are recorded; scenes are skipped with the ordinary hold.
 # Dunwall fixture restored.
@@ -59,7 +60,10 @@ try{
   C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,($p[2]+$eyeUp),$yaw)}
  foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do;$ents=(Q host '--entities').entities
   switch($st.do){
-   'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))}
+   'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;$back=(Snap host).pos
+    C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))
+    # bounce: the enter event fires on entry; return to the last stand before a volume without a floor drops the player.
+    if($st.bounce){Start-Sleep -Milliseconds 600;C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$back[0],$back[1],($back[2]+1.7))}}
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}))}
    'use'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing usable $($st.name)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
     $offs=if($st.offsets){$st.offsets}else{@(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))}
@@ -81,6 +85,10 @@ try{
      $hp=$null;try{$hp=Q host '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null});host=(Snap host).logic});if($hp-and$hp.current-le0){$dead=$true}
      if((Snap host).logic-eq13){throw 'Host died in the fight'}}
     Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
+   'talk'{$npc=Npc $st.name $st.near;$hit=$false
+    foreach($dp in @(@(1.5,5),@(1.2,10),@(2.0,0),@(1.0,15))){Face $npc.position $dp[0] 1.65;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
+     $b=Snap host;I host X 400;Start-Sleep -Milliseconds 2000;$a=Snap host;if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+    if(!$hit){throw "Talk to $($st.name) not registered"}}
    'loot'{$npc=Npc $st.name $st.near;$hit=$false
     foreach($dp in @(@(1.0,45),@(0.8,60),@(1.2,35),@(0.7,70),@(1.4,30))){$d=$dp[0];Face $npc.position $d 1.2;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
      # Done only when a gameflow node completes (state 3 count rises), after any scene.

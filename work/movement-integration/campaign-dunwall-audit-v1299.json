@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T02:41:25.314170+02:00",
+  "at": "2026-10-16T03:03:42.538009+02:00",
   "candidate": "candidate-npc-combat-v1214bf",
   "takes": [
     {
@@ -111,6 +111,34 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300o",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Host died at ld_ring_locker_01_3",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300p",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "host died during step11-trigger (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300q",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "host died during step11-at (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300r",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -129,9 +157,11 @@
     "Confirmed runtime (1300m): the exit button opens a leave prompt (logic 9) and a script LevelTransition enters logic 15 through 0x7a147d; its RestartFromMemoryCheckpoint (memory slot 62) was consumed by checkpoint sync and the host hung on black.",
     "Confirmed static: the LevelTransition run function 0x1407a1340 switches logic to 15 and stores map name and player start in the MapTransition state (manager+0x90, idStr +0x48/+0x70) through 0x1404f1d40; Kiscule node run functions are called through the type info by 0x1407c0e30.",
     "1214bh: checkpoint sync passes the continue through at logic 15; the level transition mirror (D2LT) makes the partner perform the same native calls. Take 1300n: host sent, client applied, both loaded dunwall_escape_streets_p, both-ready hold released, gameflow equal; lab restored from the streets.",
-    "Gap: the safe-room loadout (pistol, spyglass) is granted to the player who uses it; the partner picks up their own in play (Emily had only the sword after 1300n)."
+    "Gap: the safe-room loadout (pistol, spyglass) is granted to the player who uses it; the partner picks up their own in play (Emily had only the sword after 1300n).",
+    "Route stands can drop the player where a volume or button has no floor below (1300o: outside the vault; 1300p: above the boat deck; 1300q: under the reach-streets trigger). The trigger step can now bounce back after entry, and the vault exit uses inside stands only.",
+    "Take 1300r (pass, from the Dunwall fixture): Ramsey, the ring, the vault, the tower exit (D2LT), balcony and streets triggers, the boat deck, the Meagan debrief, then the result screens and the Outsider visit: both worlds in void_01_p with equal gameflow [230,1,1,15,0,1,0]; the lab restored."
   ],
   "next": [
-    "Streets: balcony and reach-streets triggers, the boat (ld_trigger_around_meagan), Meagan debrief, mission end into the Outsider visit."
+    "One continuous take from the mission start; then the same route across the VM (two accounts)."
   ]
 }
