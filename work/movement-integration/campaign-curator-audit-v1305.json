@@ -16,14 +16,36 @@
       "passed": true,
       "held": true,
       "scope": "held exploration of the whole mission; the mission end reached both worlds"
+    },
+    {
+      "take": "route-cu-v1305c",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Use of ld_note_archived_journals not registered (the step waited for the note to leave the world)"
+    },
+    {
+      "take": "route-cu-v1305d",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Use of ld_note_archived_journals not registered (no press: the native use focus never matched)"
+    },
+    {
+      "take": "route-cu-v1305e",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held at the note; the focus log showed the stand without its y offset; restored"
     }
   ],
   "findings": [
     "Held take 1305b (confirmed runtime, lab product mode): the Void's triggers (enter, brief 1, memories 1, teleport 3, brief 2, teleport after brief 2, brief 3) do not leave by themselves; the exit is script_usable_portal_exit (53.5, -91.1, 69.9), whose use plays player_leavingvoid and the LevelTransition to boat_curator, mirrored to the partner (confirmed static: UseNotification on the portal starts the scene). On the Dreadful Wale the briefing chair (mdnt_briefing_chair) plays Meagan's briefing (about 90 s; Task_CU_GetBriefing complete, Task_CU_LeaveDreadfulWale active), and the skiff leaves for curator_p_lowchaos in both worlds.",
     "In the Conservatory: ld_trigger_main_entrance_door completes Task_CU_EnterConservatory; Ashworth's intro trigger and looking at her complete Task_CU_FindAshworth; focused strikes killed breanna_ashworth.def (health 60 to 0 in 17 presses, health hold on) and completed Obj_CU_EliminateAshworth. Confirmed static (gameflow_curator.arktree): Obj_CU_DiscoverAshworthRole is mandatory and Obj_CU_Escape auto-activates after it: the archived-journals note (ld_note_archived_journals, Journal Location Found) and the audiograph (ld_audiograph_01_1_2, BunkerInformationFound) completed it, and Obj_CU_Escape and Task_CU_EscapeCanal became active.",
-    "The escape is a talk with Meagan at the start dock (-119.5, -131.9, -29.9): her scene, the leave prompt and the result screen; both worlds loaded boat_dust_p and stood in gameplay. Each world completed the mission itself (both mission end mirrors read local_already_ending when the peer's packet arrived), which is benign. Focus-guided stands from the probes are encoded in route cu-full-v1305c."
+    "The escape is a talk with Meagan at the start dock (-119.5, -131.9, -29.9): her scene, the leave prompt and the result screen; both worlds loaded boat_dust_p and stood in gameplay. Each world completed the mission itself (both mission end mirrors read local_already_ending when the peer's packet arrived), which is benign. Focus-guided stands from the probes are encoded in route cu-full-v1305c.",
+    "Take 1305c: the route ran through the Void portal, the briefing, the skiff, the entrance and the Ashworth kill in both worlds; the note step failed only on its check: a note opens a reading screen and stays in the world, so the route now counts the reading screen.",
+    "Take 1305d: the note step pressed nothing (no frames): at the stand where the held probe found the focus, the route's focus check never matched. The use step now logs each try's focused handle (<step>-focus.json); held take 1305e stops at the note to compare.",
+    "Held take 1305e: the use step's focus log stood at (-5.307, 52.234), the note's x plus 0.49 but its y unchanged. Harness bug: a one-stand offsets list ([[x,y]]) assigned through PowerShell's `$offs = if (...) {...}` is unrolled to the bare pair, so each number became a stand with y 0. Earlier single-offset steps lost their y offsets too and passed by their focus or aim sweeps. The use and carry steps now keep a one-stand list a list (verified with a test script)."
   ],
   "next": [
-    "Take 1305c: the whole mission in lab product mode."
+    "Take 1305f: the whole mission with the offsets fix."
   ]
 }
