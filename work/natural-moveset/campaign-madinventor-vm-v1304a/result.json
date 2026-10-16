@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bv",
+      "hostDll": "291BBBE472A911ED28047F7793D6E3724E00F387E342E1303371E9F1247CC96B",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "healthHold": [
+      "from step step08-heal",
+      "from step step16-heal",
+      "from step step18-heal",
+      "from step step24-heal"
+    ],
+    "skipped": [
+      "step27-wait",
+      "step28-use",
+      "step29-heal",
+      "step30-wait"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 146,
+        "cine": 317,
+        "pos": [
+          -6.934268,
+          -15.662356,
+          0.005094
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/14/0",
+        "hold": "timeout/90016",
+        "ka": "10/0/0",
+        "active": "Mission_Void02"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 19,
+        "pos": [
+          -6.796967,
+          -14.931885,
+          0.003649
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 19,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "2/8/0",
+        "active": "Mission_Void02"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}

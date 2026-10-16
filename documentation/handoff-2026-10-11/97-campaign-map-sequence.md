@@ -107,7 +107,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Lab pass (take route-institute-v1303ap, 1214bu):** one continuous run from the cable car to Meagan. The partner followed the host's mission end, both worlds loaded `boat_madinventor_p` through the both-ready hold, and gameflow counts were equal. 1214bv drops a Results observation after the world changes, so a partner that applied the mirrored end does not resend it on the next map.
 - **Two accounts (take campaign-institute-vm-v1303a, 1214bv, pass):** the same route with the host (Corvo) on this PC and the client (Emily) in the lab VM. The client applied the mission end, both worlds loaded `boat_madinventor_p` together, gameflow was equal, and the client dropped its stale Results observation. The host video was reviewed.
 
-## The Clockwork Mansion (takes 1304a–1304q, [audit 1304](../../work/movement-integration/campaign-madinventor-audit-v1304.json))
+## The Clockwork Mansion (takes 1304a–1304s, two accounts campaign-madinventor-vm-v1304a, [audit 1304](../../work/movement-integration/campaign-madinventor-audit-v1304.json))
 
 - **Required path (confirmed static and runtime):**
   1. The Dreadful Wale: talk to Meagan, then the skiff. Its `LevelTransition` to the streets is mirrored.
@@ -116,6 +116,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   4. The streets again: the return script rides the car down with Sokolov in it. Carry him to Meagan's skiff; the talk press there sets him down in the boat. The next talk plays the debrief with Sokolov and the prompt "Go to the Dreadful Wale". Both worlds then load `void_02`.
 - **The ending needs Sokolov (confirmed static):** Meagan's talk reaches the leave prompt only when `sokolov_with_meagan` is set, which the debrief with Sokolov does. With Jindosh dead and no Sokolov, the talk does nothing (takes 1304e–1304h). Without the car having gone up, the return scene never ends (take 1304l).
 - **Hazards:** the station's wall of light (its tank is in the lower office), guards on the car platform, and a clockwork soldier beside Sokolov that sword strikes don't hurt. Sokolov dropped off the dock drowns, which is a shared GameOver ("You have lost a critical ally"). The route keeps the lab health hold on for these stretches.
+- **Passes:** lab take route-mi-v1304s and two-account take campaign-madinventor-vm-v1304a (host on this PC, client in the lab VM). Both worlds reached `void_02` with equal gameflow. In the VM take the host's both-ready hold reached its 90 s cap while the slower VM client loaded the Void (hypothesis); both still ended equal.
 - **Tools:** `tools/diag/d2_kiscule_vars.py` reads live script and story-flag variables (bool value at +0x19, confirmed static). `work/natural-moveset/Focus-Use-v1304.ps1` and the route's `focus` option press only while the native use focus is on the target.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

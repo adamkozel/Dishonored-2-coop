@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-16T16:17:52+02:00",
+  "UpdatedAt": "2026-10-16T21:20:10+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22077,9 +22077,18 @@
       },
       "05-the-clockwork-mansion": {
         "Card": 77,
-        "Status": "route planning: boat_madinventor (talk to Meagan, skiff), madinv_streets (mansion door), madinventor (Jindosh, Sokolov, exterior doors), back to the streets and the boat"
+        "Audit": "work/movement-integration/campaign-madinventor-audit-v1304.json",
+        "Route": "work/natural-moveset/routes/mi-full-v1304s.json",
+        "LabTake": "route-mi-v1304s",
+        "TwoAccountTake": "campaign-madinventor-vm-v1304a",
+        "Status": "complete"
+      },
+      "06-the-royal-conservatory": {
+        "Card": 78,
+        "Route": "work/natural-moveset/routes/cu-hold-v1305b.json",
+        "Status": "route drafted (void_02, boat_curator, conservatory entrance, Ashworth)"
       }
     },
-    "NextAction": "The Clockwork Mansion: held exploration of the boat leg, then the streets and the mansion."
+    "NextAction": "The Royal Conservatory: held exploration from void_02 through Ashworth to the escape."
   }
 }

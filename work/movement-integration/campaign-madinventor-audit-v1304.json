@@ -148,6 +148,12 @@
       "take": "route-mi-v1304s",
       "candidate": "candidate-npc-combat-v1214bv",
       "passed": true
+    },
+    {
+      "take": "campaign-madinventor-vm-v1304a",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "twoAccounts": true
     }
   ],
   "findings": [
@@ -168,13 +174,16 @@
     "Held take 1304p (confirmed runtime): at Meagan's skiff with Sokolov carried, the use prompt on Meagan reads 'Talk' even while carrying, and that press sets Sokolov down in the boat beside her (cinematic epoch +2; Sokolov at (160.9, 155.0, -18.1), Sokolov_AroundSkiff 1). The next talk (focus-guided: from (162.0, 154.0) facing 138 degrees, 15 down) played the debrief with Sokolov (storyflags/madinventor_streets sokolov_with_meagan 1) and the prompt 'Go to the Dreadful Wale' / 'Stay at Lower Aventa District'. A sent the host's mission end (D2ME sent 1); the partner applied it, and both worlds loaded campaign/void/void_02/void_02_p through the both-ready hold and stood in gameplay: The Clockwork Mansion completes natively in both worlds.",
     "Take 1304q (lab product mode, the whole route): both worlds reached void_02 at the first Meagan step. The press set Sokolov down in the boat, and within that step's settle the debrief and the leave prompt followed (the settle answers prompts with A and scenes with use); the host's mission end and the both-ready hold moved both worlds together. The take failed only at the now redundant second talk (no Meagan in the Void). Steps gain unlessMap (skip once the host is on a matching map).",
     "Take 1304r: the attack step's own health hold ended with the kill, and the host died in the lab before the next step turned the hold on again. The route now keeps one hold from before the attack through the exterior door.",
-    "Take 1304s (lab product mode): PASS. One continuous run from the Dreadful Wale: Meagan and the skiff, the streets, the station and the cable car ride up, the mansion door, Jindosh, Sokolov carried out of the mansion, the return car ride, Sokolov carried to the skiff and set down by the talk, the debrief and 'Go to the Dreadful Wale'. The host's mission end reached the partner and both worlds loaded void_02 through the both-ready hold with equal gameflow counts [216,1,1,15,1,14,0]; the later steps were skipped in the Void (unlessMap); the restore passed."
+    "Take 1304s (lab product mode): PASS. One continuous run from the Dreadful Wale: Meagan and the skiff, the streets, the station and the cable car ride up, the mansion door, Jindosh, Sokolov carried out of the mansion, the return car ride, Sokolov carried to the skiff and set down by the talk, the debrief and 'Go to the Dreadful Wale'. The host's mission end reached the partner and both worlds loaded void_02 through the both-ready hold with equal gameflow counts [216,1,1,15,1,14,0]; the later steps were skipped in the Void (unlessMap); the restore passed.",
+    "Take campaign-madinventor-vm-v1304a (1214bv, two Steam accounts: host Corvo on this PC, client Emily in the lab VM, product mode): PASS. The 1304s route ran end to end; the host's mission end (identity campaign/void/void_02/void_02.mapinfo after the load) was applied by the VM client (staleDropped 1), both worlds reached void_02 with equal gameflow counts [216,1,1,15,1,14,0], and the restore passed. The host's final both-ready hold timed out at its 90 s cap while the client released at once on the host's ready: hypothesis, the VM client finished loading the Void after 90 s; both worlds still ended equal. The host video (fragmented MP4, 1354 s of presented frames) was reviewed at six points: the Dreadful Wale cabin, a load, entering the mansion, its interior, the cable car station carrying Sokolov, and the end."
   ],
   "next": [
-    "Two-account take campaign-madinventor-vm-v1304a on the 1304s route."
+    "The Royal Conservatory (#78): void_02, boat_curator, curator_p."
   ],
   "evidence": {
     "lab": "route-mi-v1304s",
+    "twoAccounts": "campaign-madinventor-vm-v1304a",
     "route": "work/natural-moveset/routes/mi-full-v1304s.json"
-  }
+  },
+  "status": "complete"
 }
