@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T03:32:06.440224+02:00",
+  "at": "2026-10-16T03:42:48.346533+02:00",
   "candidate": "candidate-npc-combat-v1214bf",
   "takes": [
     {
@@ -157,6 +157,12 @@
       "candidate": "candidate-npc-combat-v1214bh",
       "passed": false,
       "failure": "Native query failed host --entities"
+    },
+    {
+      "take": "campaign-dunwall-vm-v1301b",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "No NPC matches meagan"
     }
   ],
   "complete": false,
@@ -181,7 +187,8 @@
     "1300s: the loot step accepted Ramsey's delayed kill registration before the ring; the vault then refused. The loot step now waits for an expected completed count (6).",
     "Take campaign-dunwall-v1300t (pass, lab product mode, both windows recorded): one continuous run from the mission start (coup, character choice) through Mayhew, Ramsey, the ring, the vault, the tower exit, the streets, the boat and the Meagan debrief to both result screens and the Outsider visit (void_01_p); gameflow equal after all 17 steps; lab restored.",
     "Not yet covered in this mission take: a death and its recovery (the shared death path, chapter 88) and the two-account VM run; Dunwall has no powers yet.",
-    "Take 1301a (two machines, two Steam accounts, product mode): the mission start, both character choices and steps 1-11 (Mayhew, Ramsey, the ring, the vault) kept both worlds equal; at the exit the VM applied the host transition, but the next step queried the host entity list while the host was still loading and the take stopped (harness timing; restore passed). The entity refresh now settles and retries."
+    "Take 1301a (two machines, two Steam accounts, product mode): the mission start, both character choices and steps 1-11 (Mayhew, Ramsey, the ring, the vault) kept both worlds equal; at the exit the VM applied the host transition, but the next step queried the host entity list while the host was still loading and the take stopped (harness timing; restore passed). The entity refresh now settles and retries.",
+    "Take 1301b (two machines, two Steam accounts, product mode): the whole mission played through with both worlds equal after every step: start, Mayhew, Ramsey, the ring, the vault, the tower exit (both to the streets), the streets, the boat (stepping onto the deck started the debrief), both result screens and both worlds in void_01_p. The take stopped afterwards because the talk step looked for Meagan on the next map; talk is now optional when the NPC is gone. Restore passed."
   ],
   "next": [
     "The same route across the VM with two Steam accounts in product mode; a death and recovery case."
