@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-16T16:55:42.854450+02:00",
+  "note": "The harness restore left the client at health 70; its automatic relaunch recovery (Deploy-SourceClock) ran, but its re-check queried the processes from before the relaunch and reported native query failures, so the restored health was not verified here. The relaunch started both roles on the Dunwall fixture; the next take (route-mi-v1304e) passed its start check (both roles in gameplay) from that state. The harness now reloads the process ids after the relaunch.",
+  "passed": null,
+  "verified": "both roles in gameplay at the next take start; health not checked"
+}

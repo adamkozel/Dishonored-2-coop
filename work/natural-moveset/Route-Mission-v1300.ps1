@@ -78,7 +78,9 @@ try{
   C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,($p[2]+$eyeUp),$yaw)}
  # Entity list for a step; a world still loading from the previous step is settled first.
  function Ents(){for($k=0;$k-lt6;$k++){try{return (Q host '--entities').entities}catch{[void](Settle 'entities' 60);Start-Sleep 2}};throw 'Native query failed host --entities'}
- foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do;$ents=Ents
+ foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do
+  # unlessMap: skip a step once the host is already on a matching map (a talk that may already have ended the mission).
+  if($st.unlessMap-and"$((Snap host).map)"-match$st.unlessMap){$notes.skipped+=@($tag);continue};$ents=Ents
   switch($st.do){
    'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;$back=(Snap host).pos
     C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))
@@ -91,6 +93,10 @@ try{
     $pitches=if($st.pitches){$st.pitches}else{@(0)};$yaws=if($st.yaws){$st.yaws}else{@(0)};$k=0
     # Objectives can change a few seconds after the use (a door's task): compare with the step's start too.
     $g0="$((Snap host).gameflow)";$liveLog=[Collections.Generic.List[object]]::new()
+    # focus: press only while the native use focus (arkCpntPlayerSensorInteraction+0x80 high dword, take 1133) is on the target,
+    # so a press never lands on something else (a guard, a door, a carried body's drop).
+    $sensor=$null;$th=$null;if($st.focus){$pl=Q host '--player';$me=@((Q host '--entities').entities|Where-Object pointer -eq $pl.player);$th=[Convert]::ToUInt32(($e[0].handle-replace'^0x',''),16)
+     $sensor=@((Q host '--components' $me[0].handle).components|Where-Object type -eq '.?AVarkCpntPlayerSensorInteraction@@')[0].pointer}
     # heal: the lab health hold for a stand under fire (the Karnaca watchtower's searchlight); recorded in the take.
     if($st.heal){C host 'coop_player_health_hold on';$notes.healthHold+=@($st.name)}
     foreach($o in $offs){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
@@ -105,6 +111,7 @@ try{
       # aim: the pitch from the native eye to the target, plus the listed offsets.
       $pitch=$pt;if($st.aim){try{$eye=(Q host '--player').nativeViewPosition;$hd=[Math]::Sqrt([Math]::Pow($p[0]-$eye[0],2)+[Math]::Pow($p[1]-$eye[1],2));$pitch=[Math]::Max(-60,[Math]::Min(75,[Math]::Atan2($eye[2]-$p[2],[Math]::Max($hd,.2))*180/[Math]::PI+$pt))}catch{}}
       if($pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $pitch -Quick|Out-Null}catch{}}
+      if($sensor){$w=@((Q host '--object' $sensor).words|Where-Object offset -eq '0x80');$fh=[uint32]([Convert]::ToUInt64($w[0].word.Substring(2),16)-shr32);if($fh-ne$th){continue}}
       $b=Snap host;if($k-le6){Frame host "$tag-try$k"};I host X $(if($st.hold){$st.hold}else{250});Start-Sleep -Milliseconds 1500;$a=Snap host
       if($a.logic-eq13){throw "Host died at $($st.name)"}
       # gone: a pickup counts only when the entity has left the world.
@@ -117,6 +124,26 @@ try{
     if($st.heal){C host 'coop_player_health_hold off'}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
+   # at: stand at a pose (x, y, view z, yaw, optional pitch), e.g. to set a carried body down on a dock before a talk.
+   'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$st.yaw);Start-Sleep -Milliseconds 700;if($st.pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $st.pitch -Quick|Out-Null}catch{}}}
+   # heal: the lab health hold on or off across several steps (a carry under fire); recorded in the take.
+   'heal'{if($st.on){C host 'coop_player_health_hold on';$notes.healthHold+=@("from step $tag")}else{C host 'coop_player_health_hold off'}}
+   # carry: pick up an unconscious NPC (Sokolov). Each try stands beside the body's live position and holds use (900 ms or more
+   # picks a body up; a first press may talk to him instead); it counts when the player carries a body or the story flag
+   # the mission's script sets on Carried reads 1 (tools/diag/d2_kiscule_vars.py).
+   'carry'{$npc=Npc $st.name $st.near;$offs=if($st.offsets){$st.offsets}else{@(@(1.1,0),@(-1.1,0),@(0,1.1),@(0,-1.1))};$pitches=if($st.pitches){$st.pitches}else{@(50,65,35)};$done=$false;$k=0;$tries=[Collections.Generic.List[object]]::new()
+    foreach($o in $offs){foreach($pt in $pitches){$k++
+      $cur=@((Q host '--entities').entities|Where-Object handle -eq $npc.handle);$p=if($cur.Count){$cur[0].position}else{$npc.position};$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
+      C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$(if($st.z){$st.z}else{$p[2]+$(if($st.dz){$st.dz}else{1.4})}),$yaw);Start-Sleep -Milliseconds 600
+      try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $pt -Quick|Out-Null}catch{}
+      if($k-le6){Frame host "$tag-try$k"};I host X $(if($st.hold){$st.hold}else{400});Start-Sleep -Milliseconds 1500
+      $flag="$(& python -I "$root/tools/diag/d2_kiscule_vars.py" $pids.host storyflags --grep $st.flag 2>$null)";$tries.Add([ordered]@{try=$k;stand=@($x,$y);pitch=$pt;flag=$flag})
+      if((Snap host).logic-eq13){Save "$out/$tag-carry.json" @($tries);throw "Host died carrying $($st.name)"}
+      # Native player state 45 is carrying a body (Observe-NativeCarry); the flag can follow a moment later.
+      $carrying=$false;try{$carrying=@((Q host '--player-states').active|Where-Object id -eq 45).Count-gt0}catch{};$tries[$tries.Count-1].carrying=$carrying
+      if($flag-match'value 1'-or$carrying){$done=$true;break}}
+     if($done){break}}
+    Save "$out/$tag-carry.json" @($tries);if(!$done){throw "Carry of $($st.name) not registered"}}
    # expect: both worlds reach a map (regex) within ms, or the take fails (a mission end must move both worlds on).
    'expect'{$w=[Diagnostics.Stopwatch]::StartNew();do{$h=Snap host;$c=Snap client;if($h.map-match$st.map-and$c.map-match$st.map-and$h.logic-eq1-and$c.logic-eq1){break};Start-Sleep -Seconds 3}while($w.ElapsedMilliseconds-lt$(if($st.ms){$st.ms}else{180000}))
     if($h.map-notmatch$st.map-or$c.map-notmatch$st.map){throw "Expected both worlds on $($st.map): host $($h.map) logic $($h.logic), client $($c.map) logic $($c.logic)"}}
@@ -162,12 +189,14 @@ try{
     [void](DS 'end');Save "$out/$tag-death.json" @($trace)
     if(!$back){throw "Shared checkpoint restart did not complete ($who fell)"};C $who 'coop_player_health_hold on'}
    'attack'{$npc=Npc $st.name $st.near;$hd=[Convert]::ToInt64($npc.handle.Substring(2),16);$trace=[Collections.Generic.List[object]]::new();$max=if($st.max){$st.max}else{40};$dead=$false
+    if($st.heal){C host 'coop_player_health_hold on';$notes.healthHold+=@("attack $($st.name)")}
     # A story NPC's health may not be readable: an objective completed during the fight also ends it.
     $gf0=(Snap host).gameflow
     for($k=0;$k-lt$max-and!$dead;$k++){if($k%4-eq0){$npc=Npc $st.name $st.near;Face $npc.position 1.5 1.6;Start-Sleep -Milliseconds 500}
      & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
      $hp=$null;try{$hp=Q host '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null});host=(Snap host).logic});if($hp-and$hp.current-le0){$dead=$true};$gfn=(Snap host).gameflow;if($gf0-and$gfn-and$gfn[3]-gt$gf0[3]){$dead=$true}
      if((Snap host).logic-eq13){throw 'Host died in the fight'}}
+    if($st.heal){C host 'coop_player_health_hold off'}
     Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
    'talk'{$npc=$null;try{$npc=Npc $st.name $st.near}catch{if($st.optional){$notes["$tag"]='skipped: npc gone (scene already ran)';break}else{throw}};$hit=$false
     foreach($dp in @(@(1.5,5),@(1.2,10),@(2.0,0),@(1.0,15))){Face $npc.position $dp[0] 1.65;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
@@ -208,14 +237,15 @@ finally{
    try{& "$root/work/PrepareShadowSword.ps1" -EvidencePath "$out/restored-setup.json"|Out-Null;& "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$root/work/natural-moveset/native-coin-reward-v786c" -Evidence "$out/note-restoration"|Out-Null}catch{$errors.Add($_.Exception.Message)}
   }
   foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw "Final gameplay/health/transport not restored (logic $($s.localGameLogicState), health $($hp.current), fresh $($s.remoteFresh))"}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
-  # After a shared death the in-place fixture restore sometimes leaves full health (70, not 56; takes 1303aj, 1303al, 1303ao).
+  # After a shared death or a stuck scene the in-place fixture restore can fail (full health 70, not 56: takes 1303aj, 1303al, 1303ao; no fresh state: 1304l).
   # The recovery is the documented relaunch (Deploy-SourceClock: both roles restarted on the Dunwall fixture), then the same check.
-  $final=@($errors|Where-Object {$_-like'*Final gameplay*'})
+  $final=@($errors) # any restore error, in place or in the final check (before the protected-file check below)
   if($final.Count){$again=[Collections.Generic.List[string]]::new()
    try{& "$root/work/movement-integration/Deploy-SourceClock.ps1"|Out-Null
+    foreach($r in 'host','client'){$pids[$r]=(Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json).pid} # the relaunch starts new processes
     foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw "logic $($s.localGameLogicState), health $($hp.current), fresh $($s.remoteFresh)"}}catch{$again.Add("${r}: $($_.Exception.Message)")}}}catch{$again.Add("relaunch: $($_.Exception.Message)")}
    $notes.restoreRecovery=[ordered]@{before=@($final);after=@($again);method='Deploy-SourceClock (relaunch of both roles, Dunwall fixture)'}
-   if(!$again.Count){foreach($x in $final){[void]$errors.Remove($x)}}}
+   if(!$again.Count){$errors.Clear()}}
   foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}
   }
   Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '}

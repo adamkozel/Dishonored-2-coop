@@ -1,0 +1,76 @@
+{
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "Carry of anton_sokolov not registered",
+  "passed": false,
+  "notes": {
+    "healthHold": [
+      "attack kirin_jindosh[.]def",
+      "from step step14-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 18,
+        "pos": [
+          45.357517,
+          -38.933636,
+          -6.196373
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 9,
+        "lt": "applied/0/2",
+        "hold": "released/703",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 36,
+        "pos": [
+          -18.131001,
+          43.662037,
+          -21.472942
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      }
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:244[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 244 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCarry of anton_sokolov not registered[0m

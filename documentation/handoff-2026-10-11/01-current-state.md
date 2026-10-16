@@ -6,6 +6,7 @@
 ## Current measured co-op continuation
 
 Updated 2026-10-16. Live candidate-npc-combat-v1214bv ([identity](../../work/movement-integration/candidate-npc-combat-v1214bv/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Campaign take 5, The Clockwork Mansion (#77, [audit 1304](../../work/movement-integration/campaign-madinventor-audit-v1304.json)), complete:** played from the Dreadful Wale through the streets, the cable car, Jindosh and Sokolov back to Meagan, in the lab (route-mi-v1304s) and on two Steam accounts (campaign-madinventor-vm-v1304a). The route harness gained focus-guided use, carries, health-hold spans and a live reader for script variables ([chapter 97](97-campaign-map-sequence.md)).
 - **Campaign take 4, The Good Doctor (#76, 1214bp–1214bv, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json)), complete:** played from the cable car through Hypatia, Vasco, the Crown Killer, the watchtower and Meagan to the Dreadful Wale, in the lab (route-institute-v1303ap) and on two Steam accounts (campaign-institute-vm-v1303a) ([chapter 97](97-campaign-map-sequence.md)). On the way:
   - gameflow states are named from the game's own trees (FNV-1a of the lowercased name);
   - the mission end is sent from the transport pump, since this mission completes inside a movie (1214bq–1214bs);

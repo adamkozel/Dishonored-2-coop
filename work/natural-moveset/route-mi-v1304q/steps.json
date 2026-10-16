@@ -1,0 +1,336 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 15000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -6.0,
+      -15.0
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "madinv_streets",
+    "ms": 240000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_stationinterior",
+    "settle": 8000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "use",
+    "name": "script_kar_cable_car_inv_use_5",
+    "focus": true,
+    "offsets": [
+      [
+        0.9,
+        0
+      ],
+      [
+        1.3,
+        0
+      ],
+      [
+        0.9,
+        0.4
+      ]
+    ],
+    "z": 1.95,
+    "pitches": [
+      15,
+      0,
+      30
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 120000
+  },
+  {
+    "do": "heal",
+    "on": false,
+    "settle": 1000
+  },
+  {
+    "do": "use",
+    "name": "script_door_tr_mad_house",
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "house/madinventor_p",
+    "ms": 240000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_lab_medium",
+    "settle": 10000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      21.0,
+      89.0
+    ],
+    "settle": 1000
+  },
+  {
+    "do": "attack",
+    "name": "kirin_jindosh[.]def",
+    "near": [
+      21.0,
+      89.0
+    ],
+    "max": 80,
+    "heal": true,
+    "settle": 15000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "carry",
+    "name": "anton_sokolov",
+    "near": [
+      -18.3,
+      44.4
+    ],
+    "flag": "madinventor[.]kiscule sokolov_carried",
+    "pitches": [
+      55,
+      70,
+      40
+    ],
+    "hold": 1000,
+    "settle": 2000
+  },
+  {
+    "do": "use",
+    "name": "script_door_exterior_500_1_1",
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 30000,
+    "offsets": [
+      [
+        -1.4,
+        1.0
+      ],
+      [
+        -1.4,
+        0.4
+      ],
+      [
+        -1.0,
+        1.5
+      ]
+    ]
+  },
+  {
+    "do": "heal",
+    "on": false,
+    "settle": 1000
+  },
+  {
+    "do": "expect",
+    "map": "madinv_streets",
+    "ms": 240000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "carry",
+    "name": "anton_sokolov",
+    "near": [
+      240.9,
+      184.8
+    ],
+    "z": 1.95,
+    "offsets": [
+      [
+        0.64,
+        0.64
+      ],
+      [
+        0.9,
+        0
+      ],
+      [
+        0,
+        0.9
+      ],
+      [
+        -0.64,
+        0.64
+      ]
+    ],
+    "pitches": [
+      20,
+      35,
+      5,
+      50
+    ],
+    "hold": 1000,
+    "flag": "madinventor_streets[.]kiscule sokolov_with_meagan",
+    "settle": 2000
+  },
+  {
+    "do": "use",
+    "match": "meagan_foster",
+    "focus": true,
+    "offsets": [
+      [
+        1.62,
+        -1.45
+      ],
+      [
+        1.4,
+        -1.7
+      ]
+    ],
+    "z": -17.25,
+    "pitches": [
+      15,
+      25,
+      35,
+      40,
+      8
+    ],
+    "yaws": [
+      0,
+      -8,
+      8
+    ],
+    "hold": 300,
+    "settle": 8000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  },
+  {
+    "do": "use",
+    "match": "meagan_foster",
+    "focus": true,
+    "offsets": [
+      [
+        1.62,
+        -1.45
+      ],
+      [
+        1.4,
+        -1.7
+      ]
+    ],
+    "z": -17.25,
+    "pitches": [
+      15,
+      25,
+      35,
+      40,
+      8
+    ],
+    "yaws": [
+      0,
+      -8,
+      8
+    ],
+    "hold": 300,
+    "expect": "logic",
+    "settle": 90000
+  },
+  {
+    "do": "heal",
+    "on": false,
+    "settle": 1000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 10000
+  },
+  {
+    "do": "expect",
+    "map": "void_02",
+    "ms": 300000,
+    "settle": 5000
+  }
+]

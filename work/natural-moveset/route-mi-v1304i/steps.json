@@ -1,0 +1,117 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 15000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -6.0,
+      -15.0
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "madinv_streets",
+    "ms": 240000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_stationinterior",
+    "settle": 8000
+  },
+  {
+    "do": "use",
+    "name": "script_door_tr_mad_house",
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "house/madinventor_p",
+    "ms": 240000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_lab_medium",
+    "settle": 10000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      21.0,
+      89.0
+    ],
+    "settle": 1000
+  },
+  {
+    "do": "attack",
+    "name": "kirin_jindosh[.]def",
+    "near": [
+      21.0,
+      89.0
+    ],
+    "max": 80,
+    "heal": true,
+    "settle": 15000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_assessment_chamber",
+    "settle": 8000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -17.0,
+      44.6
+    ],
+    "settle": 1000
+  }
+]

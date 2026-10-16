@@ -1,7 +1,7 @@
 """Print one entity's Kiscule graph (read-only; game-derived output stays local).
 
 Each node is listed with its parameters, followed by its connections to
-other nodes: output connection point -> (node, input). Use it to read the
+other nodes: output connection point -> #node.input. Use it to read the
 gate in front of a scripted event when d2_mission_route.py shows only roots.
 
 Usage:
@@ -50,13 +50,14 @@ def main():
     rx = re.compile(a.grep, re.I) if a.grep else None
     nodes = list(parse_nodes(ents[a.entity]))
     names = {nid: cls for nid, cls, _, _ in nodes}
+    port_names = {(nid, pid): pname for nid, _, _, pts in nodes for pid, pname, _, _ in pts}  # point ids are unique per node
     for nid, cls, params, points in nodes:
         line = f'#{nid} {cls.replace("arkKisculeNode", "")} ' + ' '.join(f'{k}={v}' for k, v in params)
         outs = []
         for _pid, pname, ptype, ends in points:
             if ptype.startswith('Output'):
                 for en, ec in ends:
-                    outs.append(f'{pname} -> #{en} {names.get(en, "?").replace("arkKisculeNode", "")}')
+                    outs.append(f'{pname} -> #{en}.{port_names.get((en, ec), ec)} {names.get(en, "?").replace("arkKisculeNode", "")}')
         if rx and not rx.search(line + ' '.join(outs)):
             continue
         print(line)

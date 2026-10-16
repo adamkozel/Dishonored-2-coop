@@ -1,0 +1,72 @@
+{
+  "failure": "host died during step17-heal (GameOver)",
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "notes": {
+    "healthHold": [
+      "from step step08-heal",
+      "attack kirin_jindosh[.]def",
+      "from step step17-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 86,
+        "cine": 62,
+        "pos": [
+          45.357517,
+          -38.933636,
+          -6.196373
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          0,
+          3,
+          10,
+          1,
+          12,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "applied/0/8",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Sokolov,Task_MI_Find_Sokolov"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 86,
+        "cine": 169,
+        "pos": [
+          22.113686,
+          83.472519,
+          0.94305
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          0,
+          3,
+          10,
+          1,
+          12,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/8/0",
+        "hold": "released/79",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Sokolov,Task_MI_Find_Sokolov"
+      }
+    }
+  }
+}

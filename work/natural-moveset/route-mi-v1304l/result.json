@@ -1,0 +1,78 @@
+{
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "Expected both worlds on void: host campaign/madinventor/streets/madinv_streets_p_lowchaos logic 5, client campaign/madinventor/streets/madinv_streets_p_lowchaos logic 1",
+  "passed": false,
+  "notes": {
+    "healthHold": [
+      "attack kirin_jindosh[.]def",
+      "from step step14-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 51,
+        "cine": 73,
+        "pos": [
+          161.97113,
+          155.447998,
+          -18.544838
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/5/0",
+        "hold": "released/31",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 51,
+        "cine": 35,
+        "pos": [
+          292.681396,
+          -228.206055,
+          89.6483
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "applied/0/5",
+        "hold": "released/47",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  }
+}
