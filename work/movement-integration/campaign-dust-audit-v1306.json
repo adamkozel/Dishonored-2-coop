@@ -1,0 +1,28 @@
+{
+  "audit": "campaign-dust-v1306",
+  "card": 79,
+  "mission": "The Dust District",
+  "candidate": "candidate-npc-combat-v1214bx",
+  "maps": [
+    "campaign/boat/dust/boat_dust_p",
+    "campaign/dust/dust_p_lowchaos"
+  ],
+  "created": "2026-10-17T01:08:12+02:00",
+  "takes": [
+    {
+      "take": "route-dd-v1306a",
+      "candidate": "candidate-npc-combat-v1214bx",
+      "passed": true,
+      "held": true,
+      "scope": "held exploration of the whole mission; the mission end reached both worlds"
+    }
+  ],
+  "findings": [
+    "Held take 1306a (lab product mode): the Dreadful Wale (the briefing trigger, Sokolov's talk, the skiff) took both worlds to dust_p_lowchaos with Task_DD_TalkToMeagan active; Meagan's talk (focus-guided, 1.6 m north of her, facing south) played her briefing and activated the gang tasks (Deliver Byrne or Paolo, Find Another Way) with Task_DD_SolveThePuzzle pending.",
+    "The Jindosh lock, dialled natively (confirmed static and runtime): the lock entity ld_enigma_v2_kiscule owns a jindosh_enigma.kiscule decl instance, which owns one jindosh_enigma_wheel.kiscule instance per seat (its nested table has 256 buckets). In the wheel decl, a wheel's family stage maps through TranslatorFamily ([1,3,2,5,4] here) to a family id whose position in the randomised RandomFamily list ([-1,1,4,3,2,5]) is WheelFamilyIndex; heirlooms likewise (TranslatorHeirloom [5,2,1,3,4], RandomHeirloom [-1,3,2,1,4,5]); CombinationFound when both indices are equal, and the lock records 2^(index-1) per seat. Each use advances a wheel one stage (verified: index 4 to 5). Pressing seat i's two wheels to index i (focus-guided from 1 m west, facing east) gave Combination 1, 2, 4, 8, 16 and CombinationIndexSum 31: the door scene played, Task_DD_SolveThePuzzle completed and Task_DD_EnterTheBunker activated. New read-only tool tools/diag/d2_jindosh_lock.py; ints keep their value at +0x1c.",
+    "Using ld_jindosh_door_unlocked gave the prompt and the result screen: the host's mission end was applied by the partner and both worlds loaded bunker_p_lowchaos (A Crack in the Slab) in gameplay. The gang leaders (Paolo, Byrne, Durante) are not needed once the lock is dialled."
+  ],
+  "next": [
+    "Take 1306b: the whole mission in lab product mode (route dd-full-v1306b)."
+  ]
+}

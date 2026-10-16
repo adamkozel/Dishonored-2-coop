@@ -75,7 +75,7 @@ def main():
     def nested(owner):
         # Decl instances an instance owns (story flags on the worldspawn, a DeclInstance node's decl): table +0x88.
         table, n = p.u64(owner + 0x88), p.u32(owner + 0x90) & 0xffffff
-        for b in range(min(n, 64)):
+        for b in range(min(n, 4096)):
             node, hops = p.u64(table + b * 8), 0
             while node and hops < 64:
                 inst = p.u64(node + 8)

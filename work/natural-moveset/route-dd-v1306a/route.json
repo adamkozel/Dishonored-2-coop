@@ -1,0 +1,619 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -6.866299,
+        -14.884151,
+        0.111883
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.866296,
+        -14.884154,
+        0.111883
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -6.940614,
+        -14.489008,
+        0.177842
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.501557,
+        -15.248895,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step02-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_1",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        1.964,
+        6.798,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.501557,
+        -15.248895,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step03-talk",
+    "spec": {
+      "do": "talk",
+      "name": "sokolov",
+      "near": [
+        1.1,
+        12.1
+      ],
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 15,
+      "pos": [
+        0.869269,
+        8.181712,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.501557,
+        -15.248895,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 15,
+      "pos": [
+        0.869269,
+        8.181712,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.501557,
+        -15.248895,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    }
+  },
+  {
+    "step": "step05-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0
+        ]
+      ],
+      "z": 9.15,
+      "pitches": [
+        25,
+        15,
+        35,
+        25
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 90000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        -59.077583,
+        -49.998352,
+        -47.275002
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/32",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        -59.077583,
+        -49.998352,
+        -47.275005
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/16",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step06-expect",
+    "spec": {
+      "do": "expect",
+      "map": "dust/dust_p",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        -58.747463,
+        -50.536282,
+        -47.50563
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/32",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        -59.177773,
+        -49.835087,
+        -47.274998
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/16",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step07-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        -58.747463,
+        -50.536282,
+        -47.50563
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/32",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        -59.177773,
+        -49.835087,
+        -47.274998
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/16",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step08-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        -32.0,
+        -81.2
+      ],
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        -58.747463,
+        -50.536282,
+        -47.50563
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/32",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        -59.177773,
+        -49.835087,
+        -47.274998
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/16",
+      "ka": "0/0/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  }
+]

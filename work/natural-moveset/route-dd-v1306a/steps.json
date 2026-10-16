@@ -1,0 +1,70 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 15000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_1",
+    "settle": 10000
+  },
+  {
+    "do": "talk",
+    "name": "sokolov",
+    "near": [
+      1.1,
+      12.1
+    ],
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      25
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 90000
+  },
+  {
+    "do": "expect",
+    "map": "dust/dust_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -32.0,
+      -81.2
+    ],
+    "settle": 1000
+  }
+]
