@@ -73,6 +73,50 @@
       "passed": false,
       "held": true,
       "failure": "Held after the Jindosh kill; variables read; restored"
+    },
+    {
+      "take": "route-mi-v1304i",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "The host died near the assessment chamber while held",
+      "recovered": true
+    },
+    {
+      "take": "route-mi-v1304j",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Clockwork soldier unhurt by focused strikes (health 50 after 120 presses); the host died before the probe",
+      "recovered": true
+    },
+    {
+      "take": "route-mi-v1304k",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Carry of anton_sokolov not registered"
+    },
+    {
+      "take": "route-mi-v1304l",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Expected both worlds on void: the host stayed in a scene (logic 5) after returning to the streets with Sokolov",
+      "recovered": "automatic relaunch (notes.restoreRecovery)"
+    },
+    {
+      "take": "route-mi-v1304m",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held probe of the cable car; restored"
+    },
+    {
+      "take": "route-mi-v1304n",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held probe of the return; ended in a shared GameOver (Sokolov drowned when dropped off the dock)",
+      "recovered": true
     }
   ],
   "findings": [
@@ -83,9 +127,14 @@
     "Take 1304d: three focused strikes killed the walking Jindosh (kirin_jindosh.def, health 50 to 0) with the health hold on. The exterior door's default stands (0.9 m around the door entity) were outside the mansion's playable geometry (frames show the dunes beyond the map), and the host fell out of the world (z -587). Confirmed static: p_start_2 (45.36, -38.93), facing west, is the arrival just inside the double door at x 47.16, so the route now stands 1.4 m inside between the two leaves.",
     "Take 1304e: from inside the double door the exterior door's prompt and transition were mirrored: both worlds returned to madinv_streets_p_lowchaos at p_start_from_interior. Meagan (meagan_foster.def) waits by the skiff at (160.4, 155.4, -18.6) and shows 'Meagan Foster - Talk', but the talk changed nothing (1304e, 1304g, 1304h).",
     "New read-only tool tools/diag/d2_kiscule_vars.py prints Kiscule graph variables of an entity's script instance or of the story flag decls (worldspawn instance +0x88 table). Confirmed static: a bool variable keeps its default at +0x18 and its value at +0x19 (0x1408f7f10 copies the default on init). Confirmed runtime (1304h): after the kill, script_jindosh_kiscule jindosh_dead = 1 and storyflags/madinventor jindosh_is_alive = 0; after the return through the exterior door, script_kiscule_return_main jindosh_eliminated = 1.",
-    "Confirmed static (d2_kiscule_graph.py now names each connection's target input): Meagan's talk override (meagan_talk_override sets it, meagan_talk_normal clears it) leads to the leave prompt only when storyflags/madinventor_streets sokolov_with_meagan is set; that flag is set by the debrief_end_withsokolov scene, which plays only when Sokolov is carried or beside the skiff. With Jindosh eliminated and no Sokolov, the override talk does nothing, which matches 1304e to 1304h. The mansion sets storyflags/madinventor sokolov_carried when Sokolov's body is carried (a BodyNotification on script_spawner_sokolov's NPC). The route therefore has to carry Sokolov out through the exterior door to Meagan."
+    "Confirmed static (d2_kiscule_graph.py now names each connection's target input): Meagan's talk override (meagan_talk_override sets it, meagan_talk_normal clears it) leads to the leave prompt only when storyflags/madinventor_streets sokolov_with_meagan is set; that flag is set by the debrief_end_withsokolov scene, which plays only when Sokolov is carried or beside the skiff. With Jindosh eliminated and no Sokolov, the override talk does nothing, which matches 1304e to 1304h. The mansion sets storyflags/madinventor sokolov_carried when Sokolov's body is carried (a BodyNotification on script_spawner_sokolov's NPC). The route therefore has to carry Sokolov out through the exterior door to Meagan.",
+    "Held takes 1304i/1304j: Sokolov (anton_sokolov.def) lies at (-18.3, 44.4, -22.1) in the lower level with a clockwork soldier (clockwork_01) patrolling about 6 to 11 m away. Focused sword strikes do not hurt the clockwork soldier (health stayed 50 through three 40-press attempts with the health hold on), and it killed the held host both times. The route therefore takes Sokolov and leaves at once, under the lab health hold for those steps (new heal step), with a carry step that stands beside the body, presses use and counts only when storyflags/madinventor sokolov_carried reads 1 (d2_kiscule_vars.py).",
+    "Take 1304k (health hold on): Sokolov lies on a gurney showing 'Anton Sokolov - Talk'; the first press played his scene (helped up), after which he shows 'Anton Sokolov (unconscious) - Carry'. Presses of 400 ms at that prompt did not pick him up (storyflags/madinventor sokolov_carried stayed 0 through 12 tries); the earlier native carry harness (Observe-NativeCarry) holds use for 900 ms. The carry step now holds 1000 ms and also accepts native player state 45 (carrying a body).",
+    "Take 1304l: Sokolov's talk played first; the third try (1000 ms hold) carried him (native player state 45, storyflags/madinventor sokolov_carried 1). Leaving through the exterior door carrying him was mirrored to the partner, but on arrival in the streets the host entered a scene (logic 5, one cinematic node, not skippable) that never ended. Confirmed static: the mansion exit with Sokolov carried sets sokolov_in_carriage, and the streets' return script then puts him in the cable car (sok_in_carriage, cablecar_idle_sokolov under a Cinematic). The route had skipped the carriage ride up (cable car usables script_kar_cable_car_inv_use_5/6 start the entry scene and lever, carriage_fromA, the track scene and cablecar_middlestation for Task_MI_Carriage). Hypothesis: the return scene needs the carriage the player rode up. The harness's automatic relaunch recovery restored the lab.",
+    "Held take 1304m (confirmed runtime): the cable car (script_kar_cable_car_chassis_01_1, No 20) waits at the station (241.6, 186.2, 0.6) with guards on its platform. New tool work/natural-moveset/Focus-Use-v1304.ps1 sweeps stands, yaw and pitch and presses only when the native use focus (arkCpntPlayerSensorInteraction+0x80) is on the target: script_kar_cable_car_inv_use_5 took the focus from 0.9 m east, facing west, 15 degrees down, on the second try. The press played the car's entry scene, then a prompt (logic 9: 'Go to Upper Aventa District' / 'Stay at Lower Aventa District'); A rode the car to Upper Aventa (286.9, -62.7, 73.2) in about 35 s, completing Task_MI_Carriage and activating Task_MI_Mansion and the gate code tasks; the partner's gameflow mirror read equal. The station's wall of light (powered by script_kar_whaleoil_tank_01_3 in the lower office) shocked the host when it fell from the platform; its tank was pulled (cover, carry) in this probe. The harness's use step gains the same focus check ('focus').",
+    "Held take 1304n (confirmed runtime): with the car ridden up first, the mansion objectives activate in both worlds (Obj_MI_Jindosh, Obj_MI_Sokolov, Task_MI_Kill_Jindosh, Task_MI_Find_Sokolov); after the kill and the carry, leaving through the exterior door returns both worlds to the streets in plain gameplay, and the return script rides the car down by itself: the host stands at the lower station and Sokolov sits in the car (return_main sokolov_is_inside_carriage 1, meagan sokolov_back_from_mansion 1). So 1304l's endless scene was the return without the car having gone up. A focus-guided 1000 ms use carried Sokolov out of the car (native state 45); carried to Meagan's dock, the objective updated to 'Return to the Dreadful Wale' and Sokolov_AroundSkiff read 1, but the press there dropped him into the water: shared GameOver ('You have lost a critical ally: Anton Sokolov') in both worlds. The route now sets him down facing away from the water before talking to Meagan."
   ],
   "next": [
-    "Held take 1304i: Jindosh killed, the assessment chamber, Sokolov's NPC near (-17, 44.6, -22.1): find how he is freed and carried."
+    "Take 1304o: the whole mission end to end."
   ]
 }

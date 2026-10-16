@@ -1,0 +1,77 @@
+{
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "attack kirin_jindosh[.]def",
+      "clear clockwork"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 17,
+        "pos": [
+          45.482998,
+          -39.459293,
+          -6.196373
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 100,
+        "pos": [
+          -17.261303,
+          35.160587,
+          -22.262793
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/31",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": false,
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:229[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 229 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m
