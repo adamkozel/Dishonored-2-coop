@@ -22041,10 +22041,29 @@
     "HostNativeMissionEnd": true,
     "PartnerFollowsMissionEnd": true,
     "NextAction": "Campaign route takes per mission, two accounts in product mode (chapter 97).",
-    "Candidate": "candidate-npc-combat-v1214be",
+    "Candidate": "candidate-npc-combat-v1214bh",
     "BothReadyHold": true,
     "ChaosFollowsHost": true,
     "ClientOriginatedMissionEnd": true,
     "TwoAccountProductMissionEnd": true
+  },
+  "Campaign": {
+    "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
+    "Candidate": "candidate-npc-combat-v1214bh",
+    "Missions": {
+      "02-a-long-day-in-dunwall": {
+        "Card": 74,
+        "Audit": "work/movement-integration/campaign-dunwall-audit-v1299.json",
+        "LabTake": "campaign-dunwall-v1300t",
+        "TwoAccountTake": "campaign-dunwall-vm-v1301c",
+        "Open": "death and checkpoint recovery case"
+      },
+      "03-edge-of-the-world": {
+        "Card": 75,
+        "Route": "work/natural-moveset/routes/eotw-full-v1302a.json",
+        "Status": "route drafted"
+      }
+    },
+    "NextAction": "Edge of the World route in the lab pair, then two accounts."
   }
 }

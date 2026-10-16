@@ -1,0 +1,208 @@
+{
+  "at": "2026-10-16T03:56:26.210194+02:00",
+  "candidate": "candidate-npc-combat-v1214bh",
+  "takes": [
+    {
+      "take": "mission-start-dunwall-v1299a",
+      "passed": false,
+      "failure": "Both worlds did not reach mission gameplay",
+      "recovered": true
+    },
+    {
+      "take": "mission-start-dunwall-v1299b",
+      "passed": false,
+      "failure": "Both worlds did not reach mission gameplay",
+      "recovered": true
+    },
+    {
+      "take": "mission-start-dunwall-v1299c",
+      "passed": false,
+      "failure": "Both worlds did not reach mission gameplay",
+      "recovered": true
+    },
+    {
+      "take": "mission-start-dunwall-v1299d",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300a",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300b",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300c",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300d",
+      "candidate": "candidate-npc-combat-v1214bf",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300e",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300f",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_1_lock not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300g",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300h",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300i",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300j",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Loot of mortimer_ramsey not registered",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300l",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300m",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300n",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300o",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Host died at ld_ring_locker_01_3",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300p",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "host died during step11-trigger (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300q",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "host died during step11-at (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300r",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "campaign-dunwall-v1300s",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered"
+    },
+    {
+      "take": "campaign-dunwall-v1300t",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "take": "campaign-dunwall-vm-v1301a",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Native query failed host --entities"
+    },
+    {
+      "take": "campaign-dunwall-vm-v1301b",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "No NPC matches meagan"
+    },
+    {
+      "take": "campaign-dunwall-vm-v1301c",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null
+    }
+  ],
+  "complete": false,
+  "scope": "#74 campaign take 2 (A Long Day in Dunwall): the mission start in lab product mode with both worlds.",
+  "findings": [
+    "Confirmed runtime: the Dunwall start runs load (15) -> coup scene (5) -> native character choice (logic 14) -> confirmation (logic 3, defaults to No) -> intro scene (5) -> gameplay.",
+    "Choice input: Left highlights Corvo, Right highlights Emily, A opens the confirmation; Right then A confirms Yes. The host chose Corvo and the client Emily.",
+    "Takes 1299a-c stopped at the choice or the confirmation and left the lab there; Deploy-SourceClock relaunched it each time (recovery.json). Take 1299d passed: both worlds reached gameplay in 118068 ms at the same spot with equal gameflow counts [241, 4, 3, 0, 0, 0, 0], and the lab restored.",
+    "Visual: Corvo sees Emily's partner avatar in the Imperial Chambers with \"Objective updated: Escape Dunwall Tower\" and the native autosave.",
+    "Route harness Route-Mission-v1300 (steps: trigger, at, use, wait, attack, loot) records both worlds' gameflow counts after every step.",
+    "1300a: the bedroom trigger advanced only the host within the snapshot window; 1300b: both advanced (all host trigger events applied in the client world).",
+    "1300c: the Mayhew triggers ran the Mayhew goodbye scene in both worlds; both reached the Dunwall fixture state [239,2,5,2].",
+    "1300d: Ramsey (mortimer_ramsey NPC) was killed (health 50 -> 0) and his body searched (ring); the host gameflow advanced to [237,1,3,6,0,1,0], the client stayed at [239,2,5,2].",
+    "1214bg: gameflow follows the host (D2GF, native set-state for non-mission nodes). 1300e: both worlds share the id-set hash bb242f74 and match after every step, including Ramsey and the ring (client applied 13 node states).",
+    "Vault (confirmed static): the ring \"lockers\" are signet buttons that check Bool_Player_HasRing (set by the ring pickup scene, Get_Sigil); the exit button is made usable by makeSignetButtonsUsable. The route uses bearing and pitch sweeps for these small targets (1300l: the vault opened in both worlds; the first exit use took the safe-room loadout).",
+    "Confirmed runtime (1300m): the exit button opens a leave prompt (logic 9) and a script LevelTransition enters logic 15 through 0x7a147d; its RestartFromMemoryCheckpoint (memory slot 62) was consumed by checkpoint sync and the host hung on black.",
+    "Confirmed static: the LevelTransition run function 0x1407a1340 switches logic to 15 and stores map name and player start in the MapTransition state (manager+0x90, idStr +0x48/+0x70) through 0x1404f1d40; Kiscule node run functions are called through the type info by 0x1407c0e30.",
+    "1214bh: checkpoint sync passes the continue through at logic 15; the level transition mirror (D2LT) makes the partner perform the same native calls. Take 1300n: host sent, client applied, both loaded dunwall_escape_streets_p, both-ready hold released, gameflow equal; lab restored from the streets.",
+    "Gap: the safe-room loadout (pistol, spyglass) is granted to the player who uses it; the partner picks up their own in play (Emily had only the sword after 1300n).",
+    "Route stands can drop the player where a volume or button has no floor below (1300o: outside the vault; 1300p: above the boat deck; 1300q: under the reach-streets trigger). The trigger step can now bounce back after entry, and the vault exit uses inside stands only.",
+    "Take 1300r (pass, from the Dunwall fixture): Ramsey, the ring, the vault, the tower exit (D2LT), balcony and streets triggers, the boat deck, the Meagan debrief, then the result screens and the Outsider visit: both worlds in void_01_p with equal gameflow [230,1,1,15,0,1,0]; the lab restored.",
+    "1300s: the loot step accepted Ramsey's delayed kill registration before the ring; the vault then refused. The loot step now waits for an expected completed count (6).",
+    "Take campaign-dunwall-v1300t (pass, lab product mode, both windows recorded): one continuous run from the mission start (coup, character choice) through Mayhew, Ramsey, the ring, the vault, the tower exit, the streets, the boat and the Meagan debrief to both result screens and the Outsider visit (void_01_p); gameflow equal after all 17 steps; lab restored.",
+    "Not yet covered in this mission take: a death and its recovery (the shared death path, chapter 88) and the two-account VM run; Dunwall has no powers yet.",
+    "Take 1301a (two machines, two Steam accounts, product mode): the mission start, both character choices and steps 1-11 (Mayhew, Ramsey, the ring, the vault) kept both worlds equal; at the exit the VM applied the host transition, but the next step queried the host entity list while the host was still loading and the take stopped (harness timing; restore passed). The entity refresh now settles and retries.",
+    "Take 1301b (two machines, two Steam accounts, product mode): the whole mission played through with both worlds equal after every step: start, Mayhew, Ramsey, the ring, the vault, the tower exit (both to the streets), the streets, the boat (stepping onto the deck started the debrief), both result screens and both worlds in void_01_p. The take stopped afterwards because the talk step looked for Meagan on the next map; talk is now optional when the NPC is gone. Restore passed.",
+    "Take campaign-dunwall-vm-v1301c (pass; host on this PC as Corvo, the VM's second Steam account as Emily, product mode): the whole mission from the start (coup, both character choices) through Mayhew, Ramsey, the ring, the vault, the tower exit (D2LT applied on the VM), the streets, the boat and both result screens into the Outsider visit; gameflow equal after all 17 steps, both worlds end in campaign/void/void_01/void_01_p with gameflow [230, 1, 1, 15, 0, 1, 0]; the Meagan talk step was skipped because her scene had already run. Restore passed. Visual: the safe-room wait and the Dreadful Wale (\"Objective completed: Escape Dunwall\") show the same scene in both worlds."
+  ],
+  "next": [
+    "A death and checkpoint recovery case inside the mission (shared death path, chapter 88).",
+    "Mission 3 (Edge of the World) from the Outsider visit."
+  ],
+  "evidence": {
+    "lab": "campaign-dunwall-v1300t",
+    "twoAccounts": "campaign-dunwall-vm-v1301c"
+  }
+}

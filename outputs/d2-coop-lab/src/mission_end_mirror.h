@@ -59,6 +59,18 @@ bool scanMissionNodes(int wantState,MissionNodeScan& out){
     }
     return true;
 }
+// 1214bf: counts of all gameflow nodes by state (0..6) in this world, so
+// campaign takes can check that both worlds' objectives advance together.
+bool countGameflowStates(unsigned counts[7]){
+    for(unsigned i=0;i<7;++i)counts[i]=0;if(!observedGame)return false;
+    const auto manager=observedGame+0x1f7780;std::uintptr_t buckets=0;std::uint32_t mask=0;
+    if(!memoryRead(manager+0x18,&buckets,8)||!buckets||!memoryRead(manager+0x28,&mask,4)||mask>0xffff||(mask&(mask+1)))return false;
+    for(std::uint32_t b=0;b<=mask;++b){std::uintptr_t entry=0;if(!memoryRead(buckets+b*8ull,&entry,8))return false;
+        for(unsigned hops=0;entry&&hops<256;++hops){std::uintptr_t node=0,next=0;int state=-1;
+            if(!memoryRead(entry+8,&node,8)||!memoryRead(entry+0x10,&next,8))return false;
+            if(node&&memoryRead(node+0xc,&state,4)&&state>=0&&state<7)++counts[state];entry=next;}}
+    return true;
+}
 bool missionEndMirrorEnabled=false;
 struct MissionEndMirror {
     std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0;
@@ -250,13 +262,186 @@ void serviceChaosSync(std::uint64_t tick){
     if(c.localPoints==c.hostPoints){c.result="equal";return;}
     c.before=c.localPoints;*reinterpret_cast<std::int32_t*>(component+0x24)=c.hostPoints;c.localPoints=c.hostPoints;++c.writes;c.result="matched_host";
 }
+// 1214bg: gameflow follows the host. Story progress that comes from an NPC
+// death, a body search or a scene ran only in the host's world (take
+// route-dunwall-v1300d: Ramsey's death and the ring advanced the host's tasks
+// and objectives, not the partner's). The host publishes every non-mission
+// gameflow node's (id, state) about twice a second; a partner in ordinary
+// gameplay sets each node whose state differs through the native set-state
+// routine (0x1404e9bd0), which posts the native change messages its scripts
+// listen to. Mission nodes stay with the mission end mirror. Node ids are
+// localization string ids, equal in both worlds for the same language; the
+// status carries a hash of each world's id set to show it.
+struct GameflowNodeState {std::uint32_t id=0;std::int32_t state=0;};
+#pragma pack(push,1)
+struct GameflowMirrorPacket {
+    std::uint32_t magic=0x46473244; // "D2GF"
+    std::uint16_t version=1,size=sizeof(GameflowMirrorPacket);
+    std::uint32_t role=0,count=0;
+    std::uint64_t session=0,mapId=0,sequence=0;
+    GameflowNodeState nodes[200]{};
+};
+#pragma pack(pop)
+static_assert(sizeof(GameflowMirrorPacket)==1640);
+bool gameflowMirrorEnabled=false;
+struct GameflowMirror {
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,applied=0,notFound=0,skippedMission=0,sentAt=0,hostMap=0;
+    std::uint32_t idHash=0,peerIdHash=0,nodes=0;bool pending=false;GameflowNodeState incoming[200]{};std::uint32_t incomingCount=0;const char* result="idle";
+};
+GameflowMirror gameflowMirror{};
+// All gameflow nodes as (id, state, node, isMission); false when the table is not readable.
+bool readGameflowNodes(std::vector<std::pair<GameflowNodeState,std::uintptr_t>>& out,std::vector<bool>& mission){
+    out.clear();mission.clear();const auto base=reinterpret_cast<std::uintptr_t>(gameImage);if(!observedGame)return false;
+    const auto manager=observedGame+0x1f7780;std::uintptr_t buckets=0;std::uint32_t mask=0;int low=0,high=0;
+    if(!memoryRead(manager+0x18,&buckets,8)||!buckets||!memoryRead(manager+0x28,&mask,4)||mask>0xffff||(mask&(mask+1))||
+       !memoryRead(base+0x39e3240,&low,4)||!memoryRead(base+0x39e3244,&high,4)||low>high)return false;
+    for(std::uint32_t b=0;b<=mask;++b){std::uintptr_t entry=0;if(!memoryRead(buckets+b*8ull,&entry,8))return false;
+        for(unsigned hops=0;entry&&hops<256;++hops){std::uintptr_t node=0,next=0,vt=0,getter=0;GameflowNodeState s{};
+            if(!memoryRead(entry+8,&node,8)||!memoryRead(entry+0x10,&next,8))return false;
+            if(node&&memoryRead(node+8,&s.id,4)&&memoryRead(node+0xc,&s.state,4)){
+                bool isMission=false;
+                if(memoryRead(node,&vt,8)&&vt>base&&vt<base+0x4000000&&memoryRead(vt,&getter,8)&&getter>base&&getter<base+0x2000000){
+                    const auto type=reinterpret_cast<NativeGameflowType>(getter)(reinterpret_cast<void*>(node));int cls=0;
+                    isMission=type&&memoryRead(type+0x60,&cls,4)&&cls>=low&&cls<=high;}
+                out.push_back({s,node});mission.push_back(isMission);}
+            entry=next;}}
+    return true;
+}
+void receiveGameflowMirror(const GameflowMirrorPacket& p){
+    auto& g=gameflowMirror;++g.received;
+    if(!(gameflowMirrorEnabled||productMode)||p.magic!=0x46473244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||
+       p.session!=remote.session||p.sequence<=g.peerSequence||p.count>200||!p.mapId){++g.refused;return;}
+    g.peerSequence=p.sequence;g.hostMap=p.mapId;g.incomingCount=p.count;std::memcpy(g.incoming,p.nodes,sizeof(g.incoming));g.pending=true;
+}
+void serviceGameflowMirror(std::uint64_t tick){
+    if(GetCurrentThreadId()!=engineThread.load())return;
+    auto& g=gameflowMirror;if(!(gameflowMirrorEnabled||productMode)){g.pending=false;return;}
+    std::vector<std::pair<GameflowNodeState,std::uintptr_t>> nodes;std::vector<bool> mission;
+    const bool gameplay=outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;
+    if(localRole==0){
+        if(!gameplay||tick-g.sentAt<500||!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected)return;
+        if(!readGameflowNodes(nodes,mission)){g.result="scan_failed";return;}
+        GameflowMirrorPacket p{};std::uint32_t h=2166136261u;
+        std::vector<std::uint32_t> ids;for(const auto& n:nodes)ids.push_back(n.first.id);std::sort(ids.begin(),ids.end());for(auto id:ids){h^=id;h*=16777619u;}
+        g.idHash=h;g.nodes=static_cast<std::uint32_t>(nodes.size());
+        for(std::size_t i=0;i<nodes.size()&&p.count<200;++i){if(mission[i]||nodes[i].first.state==0)continue;p.nodes[p.count++]=nodes[i].first;}
+        p.role=0;p.session=outgoing.session;p.mapId=outgoing.mapId;p.sequence=++g.sequence;
+        if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK){++g.sent;g.sentAt=tick;g.result="publishing";}
+        return;
+    }
+    if(!g.pending)return;
+    if(g.hostMap!=outgoing.mapId){g.result="other_map";g.pending=false;return;}
+    if(!gameplay){g.result="waiting_native_phase";return;}
+    g.pending=false;
+    if(!readGameflowNodes(nodes,mission)){g.result="scan_failed";return;}
+    {std::uint32_t h=2166136261u;std::vector<std::uint32_t> ids;for(const auto& n:nodes)ids.push_back(n.first.id);std::sort(ids.begin(),ids.end());for(auto id:ids){h^=id;h*=16777619u;}g.idHash=h;g.nodes=static_cast<std::uint32_t>(nodes.size());}
+    if(std::memcmp(gameImage+0x4e9bd0,gameflowSetStatePrefix,sizeof(gameflowSetStatePrefix))){g.result="code_mismatch";return;}
+    unsigned changed=0;
+    for(std::uint32_t i=0;i<g.incomingCount&&changed<16;++i){const auto& want=g.incoming[i];bool found=false;
+        for(std::size_t j=0;j<nodes.size();++j){if(nodes[j].first.id!=want.id)continue;found=true;
+            if(mission[j]){++g.skippedMission;break;}
+            if(nodes[j].first.state!=want.state){
+                reinterpret_cast<NativeGameflowSetState>(gameImage+0x4e9bd0)(reinterpret_cast<void*>(observedGame+0x1f7780),&want.id,want.state);
+                ++g.applied;++changed;}
+            break;}
+        if(!found)++g.notFound;}
+    g.result=changed?"applied":"equal";
+}
+// 1214bh: script LevelTransitions (in-mission map changes, the Dreadful Wale
+// and Outsider hand-offs). The arkKisculeNodeLevelTransition run function
+// (0x1407a1340, confirmed static) switches logic to 15 (call returning at
+// 0x7a147d) and stores its map name and player start in the MapTransition
+// state (manager+0x90; idStr at +0x48 and +0x70) through 0x1404f1d40. A world
+// entering 15 that way sends both strings (D2LT); a partner in gameplay on the
+// same map performs the same two native calls, so its world changes map with
+// its own character state. Both expect the transition, so the both-ready hold
+// applies at the next map's load end.
+#pragma pack(push,1)
+struct LevelTransitionPacket {
+    std::uint32_t magic=0x544C3244; // "D2LT"
+    std::uint16_t version=1,size=sizeof(LevelTransitionPacket);
+    std::uint32_t role=0,reserved=0;
+    std::uint64_t session=0,fromMapId=0,sequence=0;
+    char map[160]{};char start[96]{};
+};
+#pragma pack(pop)
+static_assert(sizeof(LevelTransitionPacket)==296);
+const unsigned char mapTransitionTargetPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xd9,0x48,0x83,0xc1,0x48,0x49,0x8b,0xf8};
+const unsigned char idStrCtorPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74,0x24,0x10,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xda,0x48,0x8b};
+const unsigned char idStrDtorPrefix[16]={0x40,0x53,0x48,0x83,0xec,0x30,0x8b,0x51,0x0c,0x48,0x8b,0xd9,0x8b,0xc2,0xc1,0xe8};
+struct LevelTransitionMirror {
+    std::uint64_t sequence=0,peerSequence=0,observed=0,sent=0,received=0,applied=0,refused=0,otherMap=0,observedAt=0,pendingAt=0;
+    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0;LevelTransitionPacket incoming{};
+    char lastMap[160]{};char lastStart[96]{};const char* result="idle";
+};
+LevelTransitionMirror levelMirror{};
+// Called from the logic-switch trace when a script LevelTransition enters 15.
+void observeLevelTransition(const NativeSwitchEvent& e){
+    if(e.thread!=engineThread.load()||!(missionEndMirrorEnabled||productMode)||levelMirror.observedPending)return;
+    levelMirror.observedPending=true;levelMirror.observedAt=e.tick;levelMirror.observedFromMap=outgoing.mapId;++levelMirror.observed;
+}
+bool readNativeIdStr(std::uintptr_t at,char* out,std::size_t size){
+    std::uintptr_t text=0;std::uint32_t lenBits=0;if(!memoryRead(at,&text,8)||!text||!memoryRead(at+8,&lenBits,4))return false;
+    const std::uint32_t len=lenBits&0x1fffffff;if(len>=size)return false;
+    if(len&&!memoryRead(text,out,len))return false;out[len]=0;return true;
+}
+void receiveLevelTransition(const LevelTransitionPacket& p){
+    auto& m=levelMirror;++m.received;
+    if(!(missionEndMirrorEnabled||productMode)||p.magic!=0x544C3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||
+       p.session!=remote.session||p.sequence<=m.peerSequence||!p.fromMapId||!std::memchr(p.map,0,sizeof(p.map))||!std::memchr(p.start,0,sizeof(p.start))||
+       std::strncmp(p.map,"campaign/",9)||std::strpbrk(p.map,";\"")||std::strpbrk(p.start,";\"")){++m.refused;m.result="refused";return;}
+    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=GetTickCount64();m.result="received";
+}
+void serviceLevelTransitionMirror(std::uint64_t tick){
+    if(GetCurrentThreadId()!=engineThread.load())return;
+    auto& m=levelMirror;if(!(missionEndMirrorEnabled||productMode)){m.observedPending=false;m.pending=false;return;}
+    // Sender: read the target the native run function stored, then send it.
+    if(m.observedPending){
+        if(tick-m.observedAt>5000){m.observedPending=false;m.result="target_unread";}
+        else if(observedGame){
+            std::uintptr_t state=0;char map[160]{},start[96]{};
+            if(memoryRead(observedGame+0x1f6ec8+0x90,&state,8)&&state&&readNativeIdStr(state+0x48,map,sizeof(map))&&readNativeIdStr(state+0x70,start,sizeof(start))&&!std::strncmp(map,"campaign/",9)){
+                m.observedPending=false;std::snprintf(m.lastMap,sizeof(m.lastMap),"%s",map);std::snprintf(m.lastStart,sizeof(m.lastStart),"%s",start);
+                LevelTransitionPacket p{};p.role=localRole;p.session=outgoing.session;p.fromMapId=m.observedFromMap;p.sequence=++m.sequence;
+                std::snprintf(p.map,sizeof(p.map),"%s",map);std::snprintf(p.start,sizeof(p.start),"%s",start);
+                if(sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&
+                   coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++m.sent;m.result="sent";expectMissionTransition(tick);}
+            }
+        }
+    }
+    if(!m.pending)return;
+    if(tick-m.pendingAt>60000){m.pending=false;m.result="expired";return;}
+    const unsigned logic=outgoing.gameLogicState;
+    if(logic==15){m.pending=false;m.result="local_already_transitioning";return;}
+    if(m.incoming.fromMapId!=outgoing.mapId){++m.otherMap;m.pending=false;m.result="other_map";return;}
+    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";return;}
+    if(std::memcmp(gameImage+0x4f1d40,mapTransitionTargetPrefix,sizeof(mapTransitionTargetPrefix))||std::memcmp(gameImage+0x13f9d0,idStrCtorPrefix,sizeof(idStrCtorPrefix))||
+       std::memcmp(gameImage+0x13fd10,idStrDtorPrefix,sizeof(idStrDtorPrefix))||!realLogicSwitch){m.pending=false;m.result="code_mismatch";return;}
+    alignas(16) unsigned char mapStr[64]{},startStr[64]{};
+    using IdStrCtor=void*(*)(void*,const char*);using IdStrDtor=void(*)(void*);using SetTarget=void(*)(void*,void*,void*);
+    reinterpret_cast<IdStrCtor>(gameImage+0x13f9d0)(mapStr,m.incoming.map);reinterpret_cast<IdStrCtor>(gameImage+0x13f9d0)(startStr,m.incoming.start);
+    const auto manager=observedGame+0x1f6ec8;std::uintptr_t state=0;
+    if(memoryRead(manager+0x90,&state,8)&&state){
+        // Same order as the native run function: switch to MapTransition, then set its target.
+        realLogicSwitch(reinterpret_cast<void*>(manager),15);
+        reinterpret_cast<SetTarget>(gameImage+0x4f1d40)(reinterpret_cast<void*>(state),mapStr,startStr);
+        ++m.applied;m.result="applied";expectMissionTransition(tick);
+        std::snprintf(m.lastMap,sizeof(m.lastMap),"%s",m.incoming.map);std::snprintf(m.lastStart,sizeof(m.lastStart),"%s",m.incoming.start);
+    }else m.result="state_unreadable";
+    reinterpret_cast<IdStrDtor>(gameImage+0x13fd10)(mapStr);reinterpret_cast<IdStrDtor>(gameImage+0x13fd10)(startStr);
+    m.pending=false;
+}
 void writeMissionEndMirror(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.missionend.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    unsigned states[7]{};const bool statesOk=GetCurrentThreadId()==engineThread.load()&&countGameflowStates(states);
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionEnd;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu}}\n",
+    if(statesOk)fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);else fprintf(f,"{\"gameflowStates\":null,");
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
-        chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused);
+        chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused,
+        (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,
+        levelMirror.result,levelMirror.observed,levelMirror.sent,levelMirror.received,levelMirror.applied,levelMirror.refused,levelMirror.otherMap,levelMirror.lastMap,levelMirror.lastStart);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

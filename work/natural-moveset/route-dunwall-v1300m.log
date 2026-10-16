@@ -1,0 +1,66 @@
+{
+  "notes": {
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 11,
+        "pos": [
+          -33.0,
+          -148.0,
+          66.978355
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 11
+      },
+      "host": {
+        "logic": 15,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 46,
+        "pos": [
+          -52.289001,
+          -180.019165,
+          63.403549
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": false,
+  "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored",
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:119[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 119 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mgameplay/health/transport not restored[0m

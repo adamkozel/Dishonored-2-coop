@@ -187,9 +187,12 @@ bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
         }
     }
     // 1214bd: after a mission's result screen, Continue loads the next mission
-    // with RestartFromMemoryCheckpoint (take mission-end-product-v1291h). That is
-    // the mission transition, not a user reload: pass it through.
-    if(kind==1&&outgoing.gameLogicState==11){++checkpointMissionContinues;return false;}
+    // with RestartFromMemoryCheckpoint (take mission-end-product-v1291h). 1214bh:
+    // a script LevelTransition (logic 15, MapTransition) continues the same way
+    // (take route-dunwall-v1300m: the Dunwall vault exit). Both are native map
+    // transitions, not user reloads: pass them through unless this checkpoint
+    // sync is itself mid-reload.
+    if(kind==1&&(outgoing.gameLogicState==11||(outgoing.gameLogicState==15&&!s.expectBoundary&&!s.permitContinuation))){++checkpointMissionContinues;return false;}
     checkpointRequest(GetTickCount64());return true;
 }
 void checkpointContinuationReturned(unsigned char result) {

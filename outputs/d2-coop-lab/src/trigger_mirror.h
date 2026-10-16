@@ -5,7 +5,8 @@
 // once-triggers and sends the 0xd2/0xd3 messages (chapter 89, confirmed
 // static). Observation is always on. With coop_trigger_mirror on, a scripted
 // trigger (script_trigger*, not hideout/noswim volumes) entered or left by the
-// LOCAL player is sent to the partner, whose world runs the same native handler
+// LOCAL player is sent to the partner (name rule below, widened in 1214bf),
+// whose world runs the same native handler
 // for its own player. Once-triggers dedupe natively; mirrored calls never echo.
 using NativeTriggerEvent=void(*)(void*,void*,bool);
 NativeTriggerEvent realTriggerEvent=nullptr;
@@ -20,8 +21,16 @@ struct TriggerMirrorPacket {
 };
 #pragma pack(pop)
 static_assert(sizeof(TriggerMirrorPacket)==176);
+// 1214bf: campaign scripts listen to many trigger name families (ld_trigger
+// 428, script_trigger 301, mdnt_trigger 20, obj_trigger, ...; confirmed static
+// across the campaign maps), so any volume named *trigger* is mirrored except
+// those that describe a player's own position: audio, lighting/environment,
+// hideout, no-swim, death (kill volumes), vista and water volumes.
 inline bool triggerMirrorEligibleName(const char* name){
-    return name&&!std::strncmp(name,"script_trigger",14)&&!std::strstr(name,"hideout")&&!std::strstr(name,"noswim");
+    if(!name||!std::strstr(name,"trigger"))return false;
+    static const char* const excluded[]={"audio","light","env_","hideout","noswim","death","vista","water"};
+    for(const char* x:excluded)if(std::strstr(name,x))return false;
+    return true;
 }
 inline bool validTriggerMirror(const TriggerMirrorPacket& p,unsigned receiver){
     if(p.magic!=0x4D543244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==receiver||p.enter>1||!p.session||!p.epoch||!p.mapId||!p.sequence)return false;

@@ -5,7 +5,12 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-16. Live candidate-npc-combat-v1214be ([identity](../../work/movement-integration/candidate-npc-combat-v1214be/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-16. Live candidate-npc-combat-v1214bh ([identity](../../work/movement-integration/candidate-npc-combat-v1214bh/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Campaign take 2, A Long Day in Dunwall (#74, 1214bf–1214bh, [audit 1299](../../work/movement-integration/campaign-dunwall-audit-v1299.json)):** played start to finish in lab product mode, from the coup to both worlds entering the Outsider visit. On the way:
+  - all scripted trigger families are mirrored;
+  - objectives follow the host (gameflow mirror);
+  - script map changes take the partner along (level transition mirror).
+  The two-account VM run is next ([chapter 97](97-campaign-map-sequence.md)).
 - **Two-account mission end (#16, 1214bb–1214be, [audit 1296](../../work/movement-integration/mission-end-vm-audit-v1296.json)):** in product mode across this PC and the VM's second Steam account, finishing Edge of the World takes both players to The Good Doctor together.
   - Fixed on the way: checkpoint sync had swallowed the result screen's Continue (`RestartFromMemoryCheckpoint`).
   - Lab takes now host without the Steam invite overlay (`coop_session host_quiet`).
