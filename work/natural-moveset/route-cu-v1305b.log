@@ -1,0 +1,73 @@
+{
+  "notes": {
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 16,
+        "cine": 34,
+        "pos": [
+          50.435341,
+          -92.546997,
+          69.793457
+        ],
+        "fresh": true,
+        "gameflow": [
+          245,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 16,
+        "cine": 25,
+        "pos": [
+          27.494974,
+          -72.958435,
+          56.12746
+        ],
+        "fresh": true,
+        "gameflow": [
+          245,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 2,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+      }
+    }
+  },
+  "failure": "Expected both worlds on boat_curator: host campaign/void/void_02/void_02_p logic 1, client campaign/void/void_02/void_02_p logic 1",
+  "scope": "Campaign route steps for campaign/void/void_02/void_02.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:256[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 256 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mExpected both worlds on boat_curator: host campaign/void/void_02/void_02_p logic 1, client[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mcampaign/void/void_02/void_02_p logic 1[0m

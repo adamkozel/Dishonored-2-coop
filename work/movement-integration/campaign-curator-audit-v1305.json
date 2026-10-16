@@ -1,0 +1,29 @@
+{
+  "audit": "campaign-curator-v1305",
+  "card": 78,
+  "mission": "The Royal Conservatory",
+  "candidate": "candidate-npc-combat-v1214bv",
+  "maps": [
+    "campaign/void/void_02/void_02_p",
+    "campaign/boat/curator/boat_curator_p",
+    "campaign/curator/curator_p_lowchaos"
+  ],
+  "created": "2026-10-16T21:47:30+02:00",
+  "takes": [
+    {
+      "take": "route-cu-v1305b",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "held": true,
+      "scope": "held exploration of the whole mission; the mission end reached both worlds"
+    }
+  ],
+  "findings": [
+    "Held take 1305b (confirmed runtime, lab product mode): the Void's triggers (enter, brief 1, memories 1, teleport 3, brief 2, teleport after brief 2, brief 3) do not leave by themselves; the exit is script_usable_portal_exit (53.5, -91.1, 69.9), whose use plays player_leavingvoid and the LevelTransition to boat_curator, mirrored to the partner (confirmed static: UseNotification on the portal starts the scene). On the Dreadful Wale the briefing chair (mdnt_briefing_chair) plays Meagan's briefing (about 90 s; Task_CU_GetBriefing complete, Task_CU_LeaveDreadfulWale active), and the skiff leaves for curator_p_lowchaos in both worlds.",
+    "In the Conservatory: ld_trigger_main_entrance_door completes Task_CU_EnterConservatory; Ashworth's intro trigger and looking at her complete Task_CU_FindAshworth; focused strikes killed breanna_ashworth.def (health 60 to 0 in 17 presses, health hold on) and completed Obj_CU_EliminateAshworth. Confirmed static (gameflow_curator.arktree): Obj_CU_DiscoverAshworthRole is mandatory and Obj_CU_Escape auto-activates after it: the archived-journals note (ld_note_archived_journals, Journal Location Found) and the audiograph (ld_audiograph_01_1_2, BunkerInformationFound) completed it, and Obj_CU_Escape and Task_CU_EscapeCanal became active.",
+    "The escape is a talk with Meagan at the start dock (-119.5, -131.9, -29.9): her scene, the leave prompt and the result screen; both worlds loaded boat_dust_p and stood in gameplay. Each world completed the mission itself (both mission end mirrors read local_already_ending when the peer's packet arrived), which is benign. Focus-guided stands from the probes are encoded in route cu-full-v1305c."
+  ],
+  "next": [
+    "Take 1305c: the whole mission in lab product mode."
+  ]
+}
