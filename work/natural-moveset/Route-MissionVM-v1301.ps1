@@ -1,4 +1,4 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bq',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bt',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
@@ -114,11 +114,17 @@ try{
     # Sweep pitch and bearing at each stand (small targets such as signet buttons).
     $pitches=if($st.pitches){$st.pitches}else{@(0)};$yaws=if($st.yaws){$st.yaws}else{@(0)};$k=0
     # Objectives can change a few seconds after the use (a door's task): compare with the step's start too.
-    $g0="$((Snap host).gameflow)"
+    $g0="$((Snap host).gameflow)";$liveLog=[Collections.Generic.List[object]]::new()
+    # heal: the lab health hold for a stand under fire (the Karnaca watchtower's searchlight); recorded in the take.
+    if($st.heal){C host 'coop_player_health_hold on';$notes.healthHold+=@($st.name)}
     foreach($o in $offs){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
      foreach($pt in $pitches){foreach($yo in $yaws){$k++
       # live: a target on something that moves (a Karnaca watchtower) is re-read before each try.
-      if($st.live){$cur=@((Q host '--entities').entities|Where-Object {$_.name-eq$e[0].name});if($cur.Count){$p=$cur[0].position;$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI}}
+      # ref: the target turns with what carries it; the offset is rotated by the live bearing from the target to ref minus refAngle (the bearing when the offset was measured).
+      if($st.live){$all=@((Q host '--entities').entities);$cur=@($all|Where-Object {$_.name-eq$e[0].name});if($cur.Count){$p=$cur[0].position;$ox=$o[0];$oy=$o[1];$th=0
+        if($st.ref){$rf=@($all|Where-Object name -eq $st.ref);if($rf.Count){$th=([Math]::Atan2($rf[0].position[1]-$p[1],$rf[0].position[0]-$p[0])*180/[Math]::PI-$st.refAngle)*[Math]::PI/180;$ox=$o[0]*[Math]::Cos($th)-$o[1]*[Math]::Sin($th);$oy=$o[0]*[Math]::Sin($th)+$o[1]*[Math]::Cos($th)}
+         $liveLog.Add([ordered]@{try=$k;target=$p;ref=$(if($rf.Count){$rf[0].position}else{$null});turn=[Math]::Round($th*180/[Math]::PI,1)})}
+        $x=$p[0]+$ox;$y=$p[1]+$oy;$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI}}
       C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($yaw0+$yo));Start-Sleep -Milliseconds 700
       # aim: the pitch from the native eye to the target, plus the listed offsets.
       $pitch=$pt;if($st.aim){try{$eye=(Q host '--player').nativeViewPosition;$hd=[Math]::Sqrt([Math]::Pow($p[0]-$eye[0],2)+[Math]::Pow($p[1]-$eye[1],2));$pitch=[Math]::Max(-60,[Math]::Min(75,[Math]::Atan2($eye[2]-$p[2],[Math]::Max($hd,.2))*180/[Math]::PI+$pt))}catch{}}
@@ -130,6 +136,8 @@ try{
       if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"-or"$($a.gameflow)"-ne$g0){$hit=$true;break}}
       if($hit){break}}
      if($hit){break}}
+    if($st.heal){C host 'coop_player_health_hold off'}
+    if($liveLog.Count){Save "$out/$tag-live.json" @($liveLog)}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
    'clear'{$c=$st.near;$rad=if($st.radius){$st.radius}else{12};$max=if($st.max){$st.max}else{4};$fights=[Collections.Generic.List[object]]::new()

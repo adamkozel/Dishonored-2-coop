@@ -48,6 +48,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Problem: story progress from an NPC death, a body search or a scene ran only in the host's world (Ramsey and the ring in take 1300d).
   - The host publishes every non-mission gameflow node's (id, state) twice a second (`D2GF`). The partner sets each differing node through the native set-state routine, whose change messages its own scripts hear.
   - Both worlds report the same node-id hash, and objectives match after every route step.
+  - A node only the partner advanced is reset to 0 (1214bt, #87): it must be absent from 10 consecutive complete host packets (about 5 s), since the host sends only non-zero nodes. The native set-state routine stores any state, and its HUD notification covers only states 2 to 4 and flagged 5, so the reset is silent (confirmed static).
 - **Level transition mirror (1214bh):**
   - The `LevelTransition` run function (`0x1407a1340`) switches logic to 15 and stores the map name and player start in the MapTransition state (manager+0x90, idStr +0x48/+0x70) through `0x1404f1d40`. Kiscule node run functions are called through their type info by `0x1407c0e30` (all confirmed static).
   - A world entering 15 that way sends the target (`D2LT`). The partner performs the same native calls with idStrs built by the game's own constructor, and both expect the transition, so the both-ready hold applies.
@@ -75,5 +76,32 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Take 1302e: both players have the Mark and mana from the void to Addermire, and both reach the Good Doctor with equal objectives.
 
 **Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
+
+## Named gameflow states (1214bp, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json))
+
+- **Node id (confirmed runtime):** a gameflow node's id is the 32-bit FNV-1a hash of the lowercased task, objective or mission name. All 29 names of `gameflow_institute.arktree` match the live ids.
+- **Tools:**
+  - `tools/diag/d2_gameflow_dump.py <pid> --base work/asset-game/base` names every live node from the game's own gameflow trees. It is read-only.
+  - 1214bp lists every non-inactive node as `[id, state]` in `coop-status.json.missionend.json` (`gameflowNodes`).
+  - The route harnesses record the active node names per step (`active`, from the local cache `work/natural-moveset/gameflow-names.local.json`). The cache is game-derived and not committed.
+- **Script gates:** `tools/diag/d2_kiscule_graph.py <base> <map> <entity>` prints one script entity's node graph, which shows the gate in front of an event.
+
+## The Good Doctor (takes 1303a–1303al)
+
+- **Required path (confirmed static and runtime):**
+  1. The office note (it opens a reading screen, which B closes), then the master key.
+  2. The recuperation door: a held unlock of 1.5 s.
+  3. `ld_trigger_45`, then talking with Hypatia (`grim_alex.def`). This completes `Obj_IS_Investigate_Sokolov_whereabouts`.
+  4. Vasco: a talk or the scroll case on his belt. This sets `Task_Find_the_crownkiller_complet`.
+  5. A `ld_trigger_transfo_alone*` volume, then the transformation and the fight. This completes `Obj_IS_Eliminate_the_Crown_Killer`.
+  6. The watchtower's whale-oil tank. Its removal completes `Task_IS_Turn_OFF_the_watchtower`, the only event that evaluates the escape gate, which then activates `Task_IS_Talk_to_Meagan`.
+  7. Meagan sails to the lower dock. The talk there plays the departure scene, the leave prompt and the debrief, then the result screen loads `boat_madinventor_p`.
+- **Route notes:**
+  - The watchtower moves and turns (`arkMover` nav drivers), so the tank is aimed from its live position, and the stand's offset is rotated by the live bearing from the tank to the tower body (`ld_watch_tower_3`). A fixed world-axis offset put the host off the deck or into the tower's generator wall (takes 1303ai–1303ak).
+  - Guards on the walkway beside the tower attack a player at the tank, so the route clears them first and keeps the lab health hold on for that one stand.
+  - Guards block plain sword strikes, so the fights use focused strikes.
+  - Teleports beside wall-mounted objects at height can be fatal falls.
+- **Mission end in a cinematic (1214bq–1214bs):** this mission completes inside its debrief cinematic. The native switch to Results (caller `0x4ea07c`) and back to the cinematic happen in one tick, on the cinematic's thread, so the mission end mirror never sampled logic 11 and the partner stayed behind (takes 1303ac/1303ae/1303af). The logic-switch trace now records that switch from any thread (1214br).
+  - The debrief is a movie, and movie playback and the following load bypass command execution, where the engine-thread services run (take 1303ah: 49 s from Results to gameplay on the next map, and the observation expired unsent). Since 1214bs the sender runs from the transport pump, which the native screen callback keeps running during movies and loads.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

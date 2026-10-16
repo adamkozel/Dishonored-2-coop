@@ -76,6 +76,11 @@ Start the preserved backend with the project launcher; specify `program: Dishono
 
 Standalone short-lived MCP clients should connect to an independently started backend: their Windows process cleanup can otherwise terminate a child Ghidra process. The fallback client detects errors embedded inside apparently successful MCP responses. A decompiled placeholder may still have a one-byte function body; inspect actual entry/unwind ranges before fixing the body.
 
+**Mission state by name (lab):**
+- `python tools/diag/d2_gameflow_dump.py <lab pid> --base work/asset-game/base` lists every gameflow node with its name and state (0 inactive, 1 pending, 2 active, 3 complete). Node ids are FNV-1a hashes of the lowercased names.
+- The route harnesses record the active names per step.
+- To probe interactions without replaying a mission, run `Route-Mission-v1300.ps1 -HoldAtEnd`, then `Poke-Use-v1303.ps1` (place, pitch, frame, press). Finish with `Restore-RouteHold-v1303.ps1`. If its fixture check fails, use `work/movement-integration/Deploy-SourceClock.ps1`.
+
 **Static asset lookup (no lab time):** [`tools/diag/d2_resource_index.py`](../../tools/diag/d2_resource_index.py) reads the game's `.index`/`.resources` containers read-only.
 - Point it at the game copy (`work/asset-game/base`), never at the Steam installation.
 - `list` prints entries; `grep --type <T> --match <source regex> --text <line regex>` searches inside them. It uses the newest index of each family (`gameNvoidmod.index`).

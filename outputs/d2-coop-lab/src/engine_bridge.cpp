@@ -6,6 +6,7 @@
 #include <cstdarg>
 #include <cstdlib>
 #include <atomic>
+#include <unordered_map>
 #include <intrin.h>
 #include <isteamnetworkingsockets.h>
 #include "engine_bridge.h"
@@ -2140,7 +2141,7 @@ void pumpTransport(ULONGLONG tick) {
     if(tick-lastTransportPump<10)return;
     lastTransportPump=tick;NativeServiceTimer scope("transport_all");timedNativeService("initializeSteam",[&]{initializeSteam(tick);});timedNativeService("pumpConnections",[&]{pumpConnections(tick);});timedNativeService("sampleLocalPlayer",[&]{sampleLocalPlayer();});
     if(nativeMutationAllowed){finishCinematicHold(tick);serviceCinematicBarrier(tick);}
-    timedNativeService("prepareWorldObservation",[&]{prepareWorldObservation(tick);});relayConfirmedSkip(tick);timedNativeService("exchangePoses",[&]{exchangePoses(tick);});timedNativeService("checkpointService",[&]{checkpointService(tick);});timedNativeService("sendWorldObservation",[&]{sendWorldObservation(tick);});timedNativeService("sendArmStream",[&]{sendArmStream(tick);});timedNativeService("sendAvatarWeapon",[&]{sendAvatarWeapon(tick);});timedNativeService("sendShadowStream",[&]{sendShadowStream(tick);});timedNativeService("sampleNativeBlinkFx",[&]{sampleNativeBlinkFx(tick);});timedNativeService("sampleNativeGrappleFx",[&]{sampleNativeGrappleFx(tick);});
+    timedNativeService("prepareWorldObservation",[&]{prepareWorldObservation(tick);});serviceMissionEndSender(tick);relayConfirmedSkip(tick);timedNativeService("exchangePoses",[&]{exchangePoses(tick);});timedNativeService("checkpointService",[&]{checkpointService(tick);});timedNativeService("sendWorldObservation",[&]{sendWorldObservation(tick);});timedNativeService("sendArmStream",[&]{sendArmStream(tick);});timedNativeService("sendAvatarWeapon",[&]{sendAvatarWeapon(tick);});timedNativeService("sendShadowStream",[&]{sendShadowStream(tick);});timedNativeService("sampleNativeBlinkFx",[&]{sampleNativeBlinkFx(tick);});timedNativeService("sampleNativeGrappleFx",[&]{sampleNativeGrappleFx(tick);});
     timedNativeService("sampleNativeWindblastFx",[&]{sampleNativeWindblastFx(tick);});
     if(probeFollow&&(!coopPresentationReady(outgoing)||!coopPresentationReady(remote))) {
         if(!phaseFollowInvalidated)consoleOutput("COOP: follow phase invalidated local=%u/%u/%u/%u/%u remote=%u/%u/%u/%u/%u\n",

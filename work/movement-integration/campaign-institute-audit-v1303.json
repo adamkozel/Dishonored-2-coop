@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T07:36:29.852205+02:00",
-  "candidate": "candidate-npc-combat-v1214bp",
+  "candidate": "candidate-npc-combat-v1214bt",
   "takes": [
     {
       "take": "route-institute-v1303a",
@@ -211,6 +211,55 @@
       "passed": false,
       "failure": "Host died at ld_kar_whaleoil_tank_01_3 (held; restore failed its fixture check; recovered with Deploy-SourceClock)",
       "recovered": true
+    },
+    {
+      "take": "route-institute-v1303ae",
+      "candidate": "candidate-npc-combat-v1214bp",
+      "passed": false,
+      "failure": "Worlds ended on different maps: host boat_madinventor_p, client institute_p_lowchaos",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303af",
+      "candidate": "candidate-npc-combat-v1214bq",
+      "passed": false,
+      "failure": "Worlds ended on different maps: host boat_madinventor_p, client institute_p_lowchaos",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ag",
+      "candidate": "candidate-npc-combat-v1214br",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ah",
+      "candidate": "candidate-npc-combat-v1214br",
+      "passed": false,
+      "failure": "Worlds ended on different maps: host boat_madinventor_p, client institute_p_lowchaos",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ai",
+      "candidate": "candidate-npc-combat-v1214bs",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303aj",
+      "candidate": "candidate-npc-combat-v1214bs",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ak",
+      "candidate": "candidate-npc-combat-v1214bs",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+      "recovered": false
     }
   ],
   "complete": false,
@@ -233,9 +282,18 @@
     "Confirmed runtime (1303aa): a gameflow node id is the 32-bit FNV-1a hash of the lowercased task, objective or mission name (all 29 names of gameflow_institute.arktree match the live ids). tools/diag/d2_gameflow_dump.py --base names every live node; 1214bp lists every non-inactive node as [id, state] in the mission end status, and the harnesses name the active ones (local cache work/natural-moveset/gameflow-names.local.json, game-derived, not committed).",
     "Held sessions 1303z/1303aa with named states: after the talk with Hypatia, Obj_IS_Investigate_Sokolov_whereabouts is complete (office, key, recuperation area, locating and talking to Hypatia); after the fight Obj_IS_Eliminate_the_Crown_Killer is complete, Obj_IS_Escape ('Return to the Dreadful Wale') is active with Task_IS_continuemission and Task_IS_Talk_to_Meagan pending, and Task_IS_Turn_OFF_the_watchtower active. Confirmed static: the escape gate is evaluated only when Task_IS_Turn_OFF_the_watchtower completes; with both main objectives complete it activates Task_IS_Talk_to_Meagan (Prima's walkthrough: pull the whale oil from the tank on the side of the watchtower, then meet Meagan at the lower docks).",
     "Confirmed runtime (1303aa): the watchtower moves (arkMover nav drivers), so the tank is aimed from its live position; the second press removed it: Task_IS_Turn_OFF_the_watchtower complete, Task_IS_Talk_to_Meagan active, Meagan's boat sailed to the lower dock (-85.9, 51.7) within 30 s; talking to her from the dock edge (2.6 m, 18 degrees down) started the departure scene, the leave prompt (logic 9, A), the debrief and the result screen, and the host loaded boat_madinventor_p (The Clockwork Mansion).",
-    "Take 1303ac: the whole route ran in the host world (clear step brought the office guard to 1 HP with focused strikes, key, door, Hypatia, Vasco, transformation, fight, tank, Meagan) and the host reached boat_madinventor_p; the client stayed in institute_p_lowchaos: the mission end did not reach the partner. The harness now saves both mission end sidecars per step and fails a take whose worlds end on different maps. 1303ad (held) died at the tank (moving tower); the tank step now re-reads the tank's live position before each try."
+    "Take 1303ac: the whole route ran in the host world (clear step brought the office guard to 1 HP with focused strikes, key, door, Hypatia, Vasco, transformation, fight, tank, Meagan) and the host reached boat_madinventor_p; the client stayed in institute_p_lowchaos: the mission end did not reach the partner. The harness now saves both mission end sidecars per step and fails a take whose worlds end on different maps. 1303ad (held) died at the tank (moving tower); the tank step now re-reads the tank's live position before each try.",
+    "Take 1303ae (named states per step): both worlds followed the same objectives to Task_IS_Talk_to_Meagan; the host completed the mission and loaded boat_madinventor_p, the client stayed. Mission end sidecars: the host never sent D2ME (sent 0). Confirmed runtime (logic-switch trace): the mission-complete switch to Results (caller 0x4ea07c) and the switch back to the debrief cinematic happen in the same tick, so logic 11 was never sampled. 1214bq records that switch in the trace.",
+    "Take 1303af (1214bq): still not sent (resultsSwitches 0): the switch runs on the cinematic's thread (10640, engine 24804) and 1214bq accepted the engine thread only. 1214br records it atomically from any thread.",
+    "Take 1303ag (1214br): the host died at the watchtower tank. Frames: the first press opens the tank cover, the next press closes it again (the aim stays on the cover rim), then GameOver ('Your Death Is Upon You'). The tank step now alternates the aim between the cover (8 degrees) and the tank below it (24 degrees).",
+    "Take 1303ah (1214br): the alternating tank aim worked (the watchtower turned off, Task_IS_Talk_to_Meagan active in both worlds), and the host recorded the Results switch (resultsSwitches 1) but still sent nothing (result stayed armed). Confirmed runtime (logic-switch trace): Results at 81011656, back to the debrief (logic 5) in the same tick, the load (logic 15) 4 s later, gameplay on the next map 49 s after Results. The debrief is a movie: movie playback and the load bypass command execution, where the engine-thread services run, so the observation expired after 10 s unsent. 1214bs sends from the transport pump, which the native screen callback keeps running during movies and loads.",
+    "Take 1303ai (1214bs): the host died at the watchtower tank again, at deck height (z 16.7, so not a fall) under the searchlight's fire after the Crown Killer fight; the partner's world followed into GameOver (shared death). The tank step is the one stand under fire on the route, so it now runs with the lab health hold (coop_player_health_hold, 'heal' in the route; the take's notes list it). The route is a harness for the co-op checks, not a stealth playthrough.",
+    "Take 1303aj (health hold at the tank): the host still died there. Frames: combat tutorials (block) appear and a strike lands while the cover is open, so a guard attacks the host at the tank; the health hold does not outpace it. The npcs dump puts an elite (8 m, z 19.6) and a guard (13 m, z 19.8) on the walkway beside the tank. The route now clears guards within 11 m of the tower before the tank (route institute-full-v1303ak).",
+    "Take 1303aj's restore failed its final check (both roles; the message did not say which value), and 1303ak started normally from that state and restored cleanly; the check now reports logic, health and freshness.",
+    "Take 1303ak: the clear step killed the three guards beside the tower (an elite and two guards), yet the host died on the teleport to the tank, before the first press ('You Have Passed from This World'). In 1303ai to 1303ak the host died exactly at the tank plus the fixed offset, while the tank's live position relative to the tower differed from 1303ah's: the tower turns as it moves (arkMover nav drivers), so a world-axis offset can put the stand off the deck or into the tower's generator wall (watch_tower prefab: shield door, generator wall, hack panel). The tank step now rotates the measured offset by the live bearing from the tank to the tower body (ld_watch_tower_3, 41.88 degrees at spawn) and saves the live positions per try.",
+    "1214bt (#87): confirmed static: the native set-state routine 0x1404e9bd0 stores any state (0x1404ea190 writes node+0xc after posting the change event) and its HUD notification (0x1404e9a30, 0x1404ea570) is only for states 2 to 4 and flagged 5. The client now resets to 0 a non-mission node that is absent from 10 consecutive complete host packets."
   ],
   "next": [
-    "Take 1303ae: the full route with live tank tracking; find why the client did not follow the mission end."
+    "Take 1303al: the full route on 1214bt with the rotation-aware tank stand; the partner should follow the mission end, and the gameflow counts should be equal after the Vasco talk."
   ]
 }
