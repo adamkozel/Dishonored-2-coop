@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-16T04:06:30.675625+02:00",
+  "candidate": "candidate-npc-combat-v1214bh",
+  "takes": [
+    {
+      "take": "route-eotw-v1302a",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Missing trigger script_trigger_addermirestation_inside_area",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302b",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Use of script_kar_cable_car_01_1 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302c",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    }
+  ],
+  "complete": false,
+  "scope": "#75 campaign take 3 (Edge of the World): the Outsider visit (void_01), the Dreadful Wale (boat_eotw) and Karnaca (eotw_p) to the carriage and the result screen, in lab product mode and then across two Steam accounts.",
+  "findings": [
+    "Route (confirmed static, d2_mission_route): void_01 runs ld_trigger_23, ld_trigger, ld_trigger_15, ld_trigger_28, ld_trigger_34 and the rune pickup (the Heart); the boat leaves for eotw_p_lowchaos/highchaos on the LoadNextMap event, sent after the player_leaving scene, which the skiff usable (script_skiff_01_usable) or Meagan's ready-to-leave dialog starts.",
+    "Take route-eotw-v1302a (fail, lab product mode, from the void_01 mapinfo): the five void triggers and the Heart kept both worlds' gameflow equal (\"Cross the Floating Island\", \"Take the Heart\" on both); taking the Heart ran a script LevelTransition that the client applied (D2LT) and both worlds loaded boat_eotw_p, the both-ready hold released. The brief trigger and the Meagan talk kept gameflow equal ([230,2,3,11,0,2,0]). The route then looked for the Addermire station trigger while both were still on the boat: the boat's exit (skiff) was missing from the route. Restore passed.",
+    "Take route-eotw-v1302b (fail, from the boat_eotw mapinfo): the brief trigger and the Meagan talk kept gameflow equal; the skiff use opened the leave prompt (logic 9, A leaves), the player_leaving scene ran and its LevelTransition reached the client (D2LT applied), so both worlds loaded eotw_p_lowchaos (hold released after 313 ms) with equal gameflow [235,2,5,4,0,2,0]. The station trigger advanced both worlds equally. The carriage stand aimed at the car's centre and none of its nine uses registered; take mission-end-carriage-v1291a used the east door facing due west with a 27 degree downward pitch, which the route now uses. Restore passed.",
+    "Take route-eotw-v1302c (route pass, lab product mode, from the void_01 mapinfo): one continuous run through the Outsider visit (five triggers, the Heart), the Dreadful Wale (brief, Meagan, the skiff), Karnaca (the station trigger, the carriage from its east door), the leave prompt, the ride and both result screens. Both worlds loaded institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 15 steps; four level transitions were applied on the client and every both-ready hold released. Restore passed. Visual: the same boat cabin (Corvo visible in Emily's world) and the same Addermire arrival in both windows.",
+    "Blocking gap (confirmed runtime, visual): after the void Corvo's HUD shows the mana arc and Emily's does not, so the partner never received the Mark and its powers. Confirmed static: void_01_p grants them through player-scoped Kiscule actions in ld_kiscule_objectiv and ld_kiscule_master: arkKisculeNodeActionPlayerInventory (blink, grapple, the Heart, no_power), arkKisculeNodeMana, arkKisculeNodePlayerOutsiderMarkControl and arkKisculeNodeActionPlayerLoadout. These ran only in the world of the player who triggered them; the same class explains the Dunwall safe-room loadout gap."
+  ],
+  "next": [
+    "Mirror player-scoped Kiscule actions (inventory, loadout, mana, the Mark) natively into the partner's world, then re-run the void and the two-account take with a death case in Karnaca."
+  ]
+}

@@ -9,6 +9,8 @@ param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/es
 #   {"do":"attack","name":<npc regex>,"near":[x,y],"max":<presses>}  fight it until its health is 0
 #   {"do":"loot","name":<npc regex>,"near":[x,y]}  use the body (search)
 #   {"do":"talk","name":<npc regex>,"near":[x,y]}  face and talk (scene must start)
+#   {"do":"die","role":"host"|"client"}  native fall: shared GameOver, both restart
+#     from their own last checkpoint (chapter 88), held and released together
 # After each step both worlds' logic, map, gameflow counts by state and a
 # frame per window are recorded; scenes are skipped with the ordinary hold.
 # Dunwall fixture restored.
@@ -86,6 +88,17 @@ try{
      if($hit){break}}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
+   'die'{$who=if($st.role){$st.role}else{'host'};$other=if($who-eq'host'){'client'}else{'host'};$e0=@{host=(Snap host).epoch;client=(Snap client).epoch}
+    C $who 'coop_player_health_hold off';Start-Sleep -Milliseconds 400;$pos=(Snap $who).pos
+    C $who ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$pos[0],$pos[1],($pos[2]+45));$dw=[Diagnostics.Stopwatch]::StartNew();$trace=[Collections.Generic.List[object]]::new()
+    do{Start-Sleep -Milliseconds 250;$h=Snap host;$c=Snap client}while(!($h.logic-eq13-and$c.logic-eq13)-and$dw.ElapsedMilliseconds-lt30000)
+    $trace.Add([ordered]@{ms=$dw.ElapsedMilliseconds;event='gameover';host=$h;client=$c});if(!($h.logic-eq13-and$c.logic-eq13)){throw "Shared GameOver not reached ($who fell)"}
+    foreach($r in 'host','client'){Frame $r "$tag-gameover"};Start-Sleep -Seconds 3;I $who A 200;Start-Sleep -Milliseconds 300;I $other A 200;$dw.Restart();$lastA=@{host=0;client=0}
+    do{Start-Sleep -Milliseconds 300;$h=Snap host;$c=Snap client
+     foreach($r in 'host','client'){$x=if($r-eq'host'){$h}else{$c};if($x.logic-in 8,15,13-and$dw.ElapsedMilliseconds-$lastA[$r]-gt2500-and$dw.ElapsedMilliseconds-gt6000){I $r A 300;$lastA[$r]=$dw.ElapsedMilliseconds}elseif($x.logic-eq5-and$dw.ElapsedMilliseconds-$lastA[$r]-gt3500){I $r X 3000;$lastA[$r]=$dw.ElapsedMilliseconds}}
+     $back=$h.logic-eq1-and!$h.pending-and$c.logic-eq1-and!$c.pending-and$h.epoch-ne$e0.host-and$c.epoch-ne$e0.client}while(!$back-and$dw.ElapsedMilliseconds-lt180000)
+    $trace.Add([ordered]@{ms=$dw.ElapsedMilliseconds;event='restarted';host=$h;client=$c});Save "$out/$tag-death.json" @($trace)
+    if(!$back){throw "Shared checkpoint restart did not complete ($who fell)"};C $who 'coop_player_health_hold on'}
    'attack'{$npc=Npc $st.name $st.near;$hd=[Convert]::ToInt64($npc.handle.Substring(2),16);$trace=[Collections.Generic.List[object]]::new();$max=if($st.max){$st.max}else{40};$dead=$false
     for($k=0;$k-lt$max-and!$dead;$k++){if($k%4-eq0){$npc=Npc $st.name $st.near;Face $npc.position 1.5 1.6;Start-Sleep -Milliseconds 500}
      & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs 150|Out-Null;Start-Sleep -Milliseconds 700
