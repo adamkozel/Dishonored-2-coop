@@ -1,0 +1,147 @@
+{
+  "at": "2026-10-16T07:36:29.852205+02:00",
+  "candidate": "candidate-npc-combat-v1214bo",
+  "takes": [
+    {
+      "take": "route-institute-v1303a",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_door_glass_350cm_01_2_14 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303b",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_door_glass_350cm_01_2_14 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303c",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_door_glass_350cm_01_2_14 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303d",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_door_glass_350cm_01_2_14 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303e",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "No NPC matches grimalex",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303f",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303g",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303h",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303i",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_2 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303j",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_door_glass_350cm_01_2_14 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303k",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "hypat|alexandr|grim still alive after 80 attacks",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303l",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "hypat|alexandr|grim still alive after 80 attacks",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303m",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "hypat|alexandr|grim still alive after 80 attacks",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303n",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Talk to vasco not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303o",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_npc_belt_scroll_case_01 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303p",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "hypat|alexandr|grim still alive after 80 attacks",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303q",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "host died during step15-talk (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303r",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_hypatia_key not registered",
+      "recovered": false
+    }
+  ],
+  "complete": false,
+  "scope": "#76 campaign take 4 (The Good Doctor): institute_p from the cable car arrival to the result screen and the Clockwork Mansion boat, in lab product mode and then across two Steam accounts.",
+  "findings": [
+    "Route (confirmed static: gameflow_institute.arktree and d2_mission_route): the required objectives are Obj_IS_Investigate_Sokolov_whereabouts (Hypatia's office note ld_note_door_hypatia, the master key ld_hypatia_key, the recuperation door ld_door_glass_350cm_01_2_14, ld_trigger_45, talking to Dr Hypatia (the ld_grimalex spawner), the audiograph ld_audiograph_01_1_3) and Obj_IS_Eliminate_the_Crown_Killer (Crownkiller_dead on the incapacitation of ld_grimalex); then Task_IS_Talk_to_Meagan: talking to Meagan (ld_meagan) starts dial_foster_askdepart, then debrief_gooddoctor, whose end sends escapecompleted.",
+    "Take route-institute-v1303a (fail, lab product mode, from institute.mapinfo): the office note and the master key advanced the objectives in both worlds (gameflow equal); a guard fought the host on the way (lab health hold). The recuperation door shows 'Door (locked) - Unlock' with a hold bar; nine 250 ms presses did not open it. The route now holds X for 1.5 s. Restore passed.",
+    "Route harness additions while iterating (all takes restored): a press step (B closes a note; Settle also closes a left-open readable, logic 4); use options aim (pitch from the native eye to the target) and gone (a pickup counts only when its entity leaves the world); a use compares objectives with the step's start (a door's task completes seconds after it opens); npcs (nearest NPCs saved) and follow steps; a fight also ends when an objective completes.",
+    "Takes 1303b-1303d: the note opens its reading screen; the next press only closed it and the note's delayed objective change was taken for the key, which stayed on the desk (then a journalist's letter was picked instead). The recuperation door is a held unlock ('Door (locked) - Unlock' with a hold bar, 1.5 s). From 1303e the note, the key, the door and ld_trigger_45 advance both worlds equally; Hypatia's NPC is models/characters/def/story/grim_alex.def; talking to her completes three tasks in both worlds.",
+    "Confirmed static (d2_kiscule_graph, new read-only tool): the transformation triggers are enabled only after ld_kiscule_master/Task_Find_the_crownkiller_complet, which Task_IS_searcharea sets when the audiograph 01_1_2 plays, the player talks with Vasco, the transformation starts, or the scroll case on Vasco's belt is taken. Touching ld_trigger_transfo_alone* plays pre_hyp_transfo, which starts a 200 ms position timer: if Hypatia sees the player at more than 1 m she throws the player and transforms; when the scene ends without it she transforms alone. Her health is not readable in human form and sword attacks do nothing to her.",
+    "Take 1303p: Vasco (lying on a bed) talks when used at the scroll case on his belt; the talk completed a task in both worlds. After it the objectives differed in one node (state 5 counts host 2, client 3).",
+    "Take 1303q: after Vasco, standing in ld_trigger_transfo_alone_2 and waiting 60 s, the fight near Hypatia ended when two objectives completed in both worlds (completed 8 -> 10); the host then died during the Meagan talk (no frame; the harness now frames both worlds on any failure). Meagan waits at a skiff on the water by the institute (ld_meagan, mdnt_out_smallboat_1).",
+    "Take 1303r: a guard fought the host in Hypatia's office (failure frame) and the key pickup failed; a clear step now fights every living matching NPC near a point before such steps."
+  ],
+  "next": [
+    "Take 1303q: stay in ld_trigger_transfo_alone_2 and wait for the transformation, then fight Grim Alexandria."
+  ]
+}
