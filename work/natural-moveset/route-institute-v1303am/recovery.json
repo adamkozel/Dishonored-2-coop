@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-16T15:04:01.970044+02:00",
+  "note": "Held take (HoldAtEnd, steps through the guard clear). Probes in pokes/: the radial stand opened the tank cover and carried the tank (Task_IS_Turn_OFF_the_watchtower complete, Task_IS_Talk_to_Meagan active); Meagan's talk started the departure, and the host reached its result screen (logic 11, resultsSwitches 1) without sending the mission end: idCommonLocal+0x2b8 read null in both worlds. Restore-RouteHold-v1303 failed from the result screen; recovered with work/movement-integration/Deploy-SourceClock.ps1 (relaunch of both roles, Dunwall fixture, protected saves unchanged); afterwards both worlds are in dunwall_escape_tower_p gameplay with health 56 and fresh transport.",
+  "passed": true
+}

@@ -5,7 +5,12 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-16. Live candidate-npc-combat-v1214bo ([identity](../../work/movement-integration/candidate-npc-combat-v1214bo/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-16. Live candidate-npc-combat-v1214bv ([identity](../../work/movement-integration/candidate-npc-combat-v1214bv/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Campaign take 4, The Good Doctor (#76, 1214bp–1214bv, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json)), complete:** played from the cable car through Hypatia, Vasco, the Crown Killer, the watchtower and Meagan to the Dreadful Wale, in the lab (route-institute-v1303ap) and on two Steam accounts (campaign-institute-vm-v1303a) ([chapter 97](97-campaign-map-sequence.md)). On the way:
+  - gameflow states are named from the game's own trees (FNV-1a of the lowercased name);
+  - the mission end is sent from the transport pump, since this mission completes inside a movie (1214bq–1214bs);
+  - a gameflow node that only the partner advanced is reset (1214bt, #87).
+  - the mission is named from the loaded map when the native mapinfo declaration is absent, as it is during a mission started with the `campaign` command (1214bu); this also fixes join-follow (`D2MF`).
 - **Campaign take 3, Edge of the World (#75, 1214bi–1214bk, [audit 1302](../../work/movement-integration/campaign-eotw-audit-v1302.json)):** played from the Outsider visit through the Dreadful Wale and Karnaca to the Good Doctor in lab product mode. Both players now receive the Outsider's Mark and their own power (Corvo Blink, Emily Far Reach): before, only the host did.
   - Story grants that the scripts give the acting player are mirrored natively. These are the Heart, keys, loadouts and mana (script action mirror, `D2KA`, [chapter 97](97-campaign-map-sequence.md)).
   - The Mark and powers stay each player's own choice at the Outsider's offer.

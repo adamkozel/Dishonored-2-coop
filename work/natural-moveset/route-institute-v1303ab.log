@@ -1,0 +1,70 @@
+{
+  "passed": false,
+  "failure": "Use of ld_hypatia_key not registered",
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 306,
+        "cine": 627,
+        "pos": [
+          -4.261683,
+          51.676823,
+          41.003651
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          2,
+          6,
+          1,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 301,
+        "cine": 296,
+        "pos": [
+          2.339629,
+          -28.664753,
+          12.682956
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          2,
+          6,
+          1,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 4,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      }
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:196[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 196 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mUse of ld_hypatia_key not registered[0m

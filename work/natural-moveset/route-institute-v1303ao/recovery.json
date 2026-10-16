@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-16T15:35:27.442732+02:00",
+  "note": "The harness restore after the shared GameOver (host died in the tower clear) left health 70 instead of 56 in both worlds. Recovered with work/movement-integration/Deploy-SourceClock.ps1 (relaunch of both roles, Dunwall fixture, protected saves unchanged); afterwards both worlds are in gameplay with health 56 and fresh transport. From the next take the harness runs this recovery itself and records it in result.json notes.restoreRecovery.",
+  "passed": true
+}

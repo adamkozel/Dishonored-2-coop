@@ -1,0 +1,75 @@
+{
+  "notes": {
+    "healthHold": [
+      "ld_kar_whaleoil_tank_01_3"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 11,
+        "pos": [
+          2.331066,
+          -28.734901,
+          12.6887
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 23,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 118,
+        "pos": [
+          -75.625748,
+          41.884304,
+          16.595814
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      }
+    }
+  },
+  "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:212[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 212 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost died at ld_kar_whaleoil_tank_01_3[0m

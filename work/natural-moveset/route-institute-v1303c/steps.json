@@ -1,0 +1,122 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "ld_note_door_hypatia",
+    "pitches": [
+      0,
+      25,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "ld_hypatia_key",
+    "pitches": [
+      25,
+      45,
+      0
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "ld_door_glass_350cm_01_2_14",
+    "pitches": [
+      10,
+      0
+    ],
+    "yaws": [
+      0
+    ],
+    "settle": 5000,
+    "hold": 1500,
+    "offsets": [
+      [
+        1.3,
+        -1.5
+      ],
+      [
+        -1.3,
+        -1.5
+      ],
+      [
+        1.3,
+        -1.0
+      ],
+      [
+        -1.3,
+        -1.0
+      ]
+    ],
+    "z": 35.7
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_45",
+    "settle": 6000
+  },
+  {
+    "do": "talk",
+    "name": "grimalex",
+    "near": [
+      -49.0,
+      33.7
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "ld_audiograph_01_1_3",
+    "pitches": [
+      25,
+      45,
+      0
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "settle": 15000
+  },
+  {
+    "do": "attack",
+    "name": "grimalex",
+    "near": [
+      -49.0,
+      33.7
+    ],
+    "max": 60,
+    "settle": 8000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -184.9,
+      24.5
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 60000,
+    "settle": 5000
+  }
+]

@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-16T00:53:54.070234+02:00",
+  "UpdatedAt": "2026-10-16T16:17:52+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22049,7 +22049,7 @@
   },
   "Campaign": {
     "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
-    "Candidate": "candidate-npc-combat-v1214bo",
+    "Candidate": "candidate-npc-combat-v1214bv",
     "Missions": {
       "02-a-long-day-in-dunwall": {
         "Card": 74,
@@ -22069,10 +22069,17 @@
       },
       "04-the-good-doctor": {
         "Card": 76,
-        "Route": "work/natural-moveset/routes/institute-full-v1303a.json",
-        "Status": "route drafted"
+        "Audit": "work/movement-integration/campaign-institute-audit-v1303.json",
+        "Route": "work/natural-moveset/routes/institute-full-v1303ap.json",
+        "LabTake": "route-institute-v1303ap",
+        "TwoAccountTake": "campaign-institute-vm-v1303a",
+        "Status": "complete"
+      },
+      "05-the-clockwork-mansion": {
+        "Card": 77,
+        "Status": "route planning: boat_madinventor (talk to Meagan, skiff), madinv_streets (mansion door), madinventor (Jindosh, Sokolov, exterior doors), back to the streets and the boat"
       }
     },
-    "NextAction": "The Good Doctor route in the lab pair, then two accounts."
+    "NextAction": "The Clockwork Mansion: held exploration of the boat leg, then the streets and the mansion."
   }
 }

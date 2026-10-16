@@ -1,0 +1,70 @@
+{
+  "notes": {
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 216,
+        "cine": 210,
+        "pos": [
+          2.335255,
+          -28.70141,
+          12.68589
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          2,
+          3,
+          10,
+          0,
+          4,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 24,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 216,
+        "cine": 395,
+        "pos": [
+          -75.573471,
+          41.77721,
+          17.818972
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      }
+    }
+  },
+  "passed": false,
+  "failure": "Host died at ld_kar_whaleoil_tank_01_location_1",
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:192[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 192 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost died at ld_kar_whaleoil_tank_01_location_1[0m

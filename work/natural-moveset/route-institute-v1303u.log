@@ -1,0 +1,70 @@
+{
+  "passed": false,
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 231,
+        "cine": 220,
+        "pos": [
+          2.319189,
+          -28.833227,
+          12.696667
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          2,
+          3,
+          10,
+          0,
+          4,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 23,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 231,
+        "cine": 417,
+        "pos": [
+          -189.480606,
+          29.309338,
+          -5.433015
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      }
+    }
+  },
+  "failure": "Talk to meagan not registered"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:192[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 192 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mTalk to meagan not registered[0m

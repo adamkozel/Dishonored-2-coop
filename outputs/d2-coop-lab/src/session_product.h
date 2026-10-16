@@ -173,11 +173,34 @@ struct MissionFollow {
     ULONGLONG sentAt=0,loadAt=0;std::uint64_t loadedForMap=0;const char* result="idle";
 };
 MissionFollow missionFollow{};
+// 1214bu: idCommonLocal+0x2b8 (the idDeclMapInfo) is null during a mission
+// started with the native `campaign` command (held take route-institute-v1303am:
+// null in both worlds, so the mission end was never sent and D2MF published
+// nothing). Without it, the mapinfo is derived from the loaded map's name: the
+// map's directory plus its name without _p, _p_lowchaos or _p_highchaos, which
+// names an existing mapinfo for all 35 campaign maps (confirmed static). The last
+// identity read in this world covers moments without a loaded map name (a movie).
+char lastMissionMapinfo[160]{};std::uint32_t lastMissionHigh=0;
+bool mapinfoFromMapName(const char* map,char* out,std::size_t size){
+    if(std::strncmp(map,"campaign/",9)||!std::strncmp(map,"campaign/menu/",14))return false;
+    const char* slash=std::strrchr(map,'/');if(!slash||!slash[1])return false;
+    std::string leaf(slash+1);
+    for(const char* suffix:{"_p_lowchaos","_p_highchaos","_p"}){const std::size_t n=std::strlen(suffix);
+        if(leaf.size()>n&&!leaf.compare(leaf.size()-n,n,suffix)){leaf.resize(leaf.size()-n);
+            const int w=std::snprintf(out,size,"%.*s/%s.mapinfo",static_cast<int>(slash-map),map,leaf.c_str());return w>0&&static_cast<std::size_t>(w)<size;}}
+    return false;
+}
 bool readCurrentMapinfo(char* out,std::size_t size,std::uint32_t& high){
-    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t common=0,decl=0,name=0,vt=0;
-    if(!memoryRead(base+0x2274420,&common,8)||!common||!memoryRead(common,&vt,8)||vt!=base+0x1ac4d88||!memoryRead(common+0x2b8,&decl,8)||!decl)return false;
-    std::string text;if(!memoryRead(decl+8,&name,8)||!worldIdentityString(memoryRead,name,text)||text.size()>=size||text.rfind("campaign/",0)!=0)return false;
-    std::snprintf(out,size,"%s",text.c_str());high=std::strstr(mapName,"highchaos")?1u:0u;return true;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t common=0,decl=0,name=0,vt=0;std::string text;
+    const bool fromDecl=memoryRead(base+0x2274420,&common,8)&&common&&memoryRead(common,&vt,8)&&vt==base+0x1ac4d88&&memoryRead(common+0x2b8,&decl,8)&&decl&&
+        memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,text)&&text.size()<size&&text.rfind("campaign/",0)==0;
+    char derived[160]{};
+    if(fromDecl)std::snprintf(out,size,"%s",text.c_str());
+    else if(mapinfoFromMapName(mapName,derived,sizeof(derived))&&std::strlen(derived)<size)std::snprintf(out,size,"%s",derived);
+    else if(*lastMissionMapinfo&&std::strlen(lastMissionMapinfo)<size){std::snprintf(out,size,"%s",lastMissionMapinfo);high=lastMissionHigh;return true;}
+    else return false;
+    high=std::strstr(mapName,"highchaos")?1u:0u;
+    std::snprintf(lastMissionMapinfo,sizeof(lastMissionMapinfo),"%s",out);lastMissionHigh=high;return true;
 }
 void receiveMissionFollow(const MissionFollowPacket& p){
     auto& m=missionFollow;++m.received;
