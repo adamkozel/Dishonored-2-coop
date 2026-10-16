@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T03:03:42.538009+02:00",
+  "at": "2026-10-16T03:19:16.717770+02:00",
   "candidate": "candidate-npc-combat-v1214bf",
   "takes": [
     {
@@ -139,6 +139,18 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "campaign-dunwall-v1300s",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered"
+    },
+    {
+      "take": "campaign-dunwall-v1300t",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null
     }
   ],
   "complete": false,
@@ -159,9 +171,12 @@
     "1214bh: checkpoint sync passes the continue through at logic 15; the level transition mirror (D2LT) makes the partner perform the same native calls. Take 1300n: host sent, client applied, both loaded dunwall_escape_streets_p, both-ready hold released, gameflow equal; lab restored from the streets.",
     "Gap: the safe-room loadout (pistol, spyglass) is granted to the player who uses it; the partner picks up their own in play (Emily had only the sword after 1300n).",
     "Route stands can drop the player where a volume or button has no floor below (1300o: outside the vault; 1300p: above the boat deck; 1300q: under the reach-streets trigger). The trigger step can now bounce back after entry, and the vault exit uses inside stands only.",
-    "Take 1300r (pass, from the Dunwall fixture): Ramsey, the ring, the vault, the tower exit (D2LT), balcony and streets triggers, the boat deck, the Meagan debrief, then the result screens and the Outsider visit: both worlds in void_01_p with equal gameflow [230,1,1,15,0,1,0]; the lab restored."
+    "Take 1300r (pass, from the Dunwall fixture): Ramsey, the ring, the vault, the tower exit (D2LT), balcony and streets triggers, the boat deck, the Meagan debrief, then the result screens and the Outsider visit: both worlds in void_01_p with equal gameflow [230,1,1,15,0,1,0]; the lab restored.",
+    "1300s: the loot step accepted Ramsey's delayed kill registration before the ring; the vault then refused. The loot step now waits for an expected completed count (6).",
+    "Take campaign-dunwall-v1300t (pass, lab product mode, both windows recorded): one continuous run from the mission start (coup, character choice) through Mayhew, Ramsey, the ring, the vault, the tower exit, the streets, the boat and the Meagan debrief to both result screens and the Outsider visit (void_01_p); gameflow equal after all 17 steps; lab restored.",
+    "Not yet covered in this mission take: a death and its recovery (the shared death path, chapter 88) and the two-account VM run; Dunwall has no powers yet."
   ],
   "next": [
-    "One continuous take from the mission start; then the same route across the VM (two accounts)."
+    "The same route across the VM with two Steam accounts in product mode; a death and recovery case."
   ]
 }

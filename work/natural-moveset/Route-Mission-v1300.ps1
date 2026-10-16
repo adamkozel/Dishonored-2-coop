@@ -1,4 +1,4 @@
-param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bh',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad)
+param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bh',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0)
 # Campaign route take (chapter 97): both lab worlds load a mission start in lab
 # product mode with the mission end mirror, pass the native character choice
 # (host Corvo, client Emily), then the host runs a step list:
@@ -46,6 +46,11 @@ try{
  $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
  Save "$out/identity.json" @{dll=$pin.dll;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos}
  $dirty=$true
+ # -VideoSeconds records both windows for the whole take (evidence video; never committed).
+ $captures=[Collections.Generic.List[object]]::new()
+ if($VideoSeconds){foreach($r in 'host','client'){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
+  $va=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string]$VideoSeconds,'-an','-c:v','libx264','-preset','veryfast','-crf','23','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/take-$r.mp4")
+  $captures.Add((Start-Process (Get-Command ffmpeg).Source -ArgumentList $va -WindowStyle Hidden -RedirectStandardError "$out/take-$r-capture.log" -PassThru))}}
  foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_product_auto on'}
  # -NoLoad starts from the current Dunwall fixture (story state after Mayhew) to iterate later steps faster.
  if(!$NoLoad){C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"}
@@ -94,7 +99,7 @@ try{
      # Done only when a gameflow node completes (state 3 count rises), after any scene.
      $b=Snap host;I host X 600;$w2=[Diagnostics.Stopwatch]::StartNew()
      do{Start-Sleep -Milliseconds 600;$a=Snap host;if($a.logic-eq5){I host X 3000}
-      if($a.gameflow-and$b.gameflow-and$a.gameflow[3]-gt$b.gameflow[3]){$hit=$true}}while(!$hit-and$w2.ElapsedMilliseconds-lt9000)
+      if($a.gameflow-and$b.gameflow){if($st.expect){if($a.gameflow[3]-ge$st.expect){$hit=$true}}elseif($a.gameflow[3]-gt$b.gameflow[3]){$hit=$true}}}while(!$hit-and$w2.ElapsedMilliseconds-lt9000)
      if($hit){break}}
     if(!$hit){throw "Loot of $($st.name) not registered"}}}
   Start-Sleep -Milliseconds $(if($st.settle){$st.settle}else{3000})
@@ -107,6 +112,7 @@ try{
 finally{
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
+  if($captures){foreach($c in @($captures)){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}
   if($dirty){
    foreach($r in 'host','client'){try{I $r;C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off';C $r 'coop_gameflow_mirror off'}catch{}}
    # Product mode armed checkpoint sync: a shared death would block the fixture restore.
