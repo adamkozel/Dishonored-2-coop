@@ -131,6 +131,23 @@
       "passed": true,
       "held": true,
       "scope": "held probe of the ending; the mission end reached both worlds"
+    },
+    {
+      "take": "route-mi-v1304q",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Missing usable meagan_foster (the mission had already ended: both worlds in void_02)"
+    },
+    {
+      "take": "route-mi-v1304r",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "host died during step17-heal (GameOver) right after the Jindosh kill"
+    },
+    {
+      "take": "route-mi-v1304s",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true
     }
   ],
   "findings": [
@@ -148,9 +165,16 @@
     "Held take 1304m (confirmed runtime): the cable car (script_kar_cable_car_chassis_01_1, No 20) waits at the station (241.6, 186.2, 0.6) with guards on its platform. New tool work/natural-moveset/Focus-Use-v1304.ps1 sweeps stands, yaw and pitch and presses only when the native use focus (arkCpntPlayerSensorInteraction+0x80) is on the target: script_kar_cable_car_inv_use_5 took the focus from 0.9 m east, facing west, 15 degrees down, on the second try. The press played the car's entry scene, then a prompt (logic 9: 'Go to Upper Aventa District' / 'Stay at Lower Aventa District'); A rode the car to Upper Aventa (286.9, -62.7, 73.2) in about 35 s, completing Task_MI_Carriage and activating Task_MI_Mansion and the gate code tasks; the partner's gameflow mirror read equal. The station's wall of light (powered by script_kar_whaleoil_tank_01_3 in the lower office) shocked the host when it fell from the platform; its tank was pulled (cover, carry) in this probe. The harness's use step gains the same focus check ('focus').",
     "Held take 1304n (confirmed runtime): with the car ridden up first, the mansion objectives activate in both worlds (Obj_MI_Jindosh, Obj_MI_Sokolov, Task_MI_Kill_Jindosh, Task_MI_Find_Sokolov); after the kill and the carry, leaving through the exterior door returns both worlds to the streets in plain gameplay, and the return script rides the car down by itself: the host stands at the lower station and Sokolov sits in the car (return_main sokolov_is_inside_carriage 1, meagan sokolov_back_from_mansion 1). So 1304l's endless scene was the return without the car having gone up. A focus-guided 1000 ms use carried Sokolov out of the car (native state 45); carried to Meagan's dock, the objective updated to 'Return to the Dreadful Wale' and Sokolov_AroundSkiff read 1, but the press there dropped him into the water: shared GameOver ('You have lost a critical ally: Anton Sokolov') in both worlds. The route now sets him down facing away from the water before talking to Meagan.",
     "Take 1304o: the whole route ran to Meagan's dock: the car ride up, Jindosh, Sokolov carried out of the mansion and out of the car, and on arrival at the skiff Obj_MI_End and Task_MI_End ('Return to the Dreadful Wale') became active in both worlds. Setting Sokolov down facing away from Meagan also dropped him into the water (shared GameOver, 'You have lost a critical ally'). The stand's floor height (-18.56) matches Meagan's (-18.63): it is inside the narrow skiff, whose trigger script_trigger_around_skiff (159.95, 156.15, -17.85) sets Sokolov_AroundSkiff when his body touches it. Next: a held take at the dock to find a safe set-down.",
-    "Held take 1304p (confirmed runtime): at Meagan's skiff with Sokolov carried, the use prompt on Meagan reads 'Talk' even while carrying, and that press sets Sokolov down in the boat beside her (cinematic epoch +2; Sokolov at (160.9, 155.0, -18.1), Sokolov_AroundSkiff 1). The next talk (focus-guided: from (162.0, 154.0) facing 138 degrees, 15 down) played the debrief with Sokolov (storyflags/madinventor_streets sokolov_with_meagan 1) and the prompt 'Go to the Dreadful Wale' / 'Stay at Lower Aventa District'. A sent the host's mission end (D2ME sent 1); the partner applied it, and both worlds loaded campaign/void/void_02/void_02_p through the both-ready hold and stood in gameplay: The Clockwork Mansion completes natively in both worlds."
+    "Held take 1304p (confirmed runtime): at Meagan's skiff with Sokolov carried, the use prompt on Meagan reads 'Talk' even while carrying, and that press sets Sokolov down in the boat beside her (cinematic epoch +2; Sokolov at (160.9, 155.0, -18.1), Sokolov_AroundSkiff 1). The next talk (focus-guided: from (162.0, 154.0) facing 138 degrees, 15 down) played the debrief with Sokolov (storyflags/madinventor_streets sokolov_with_meagan 1) and the prompt 'Go to the Dreadful Wale' / 'Stay at Lower Aventa District'. A sent the host's mission end (D2ME sent 1); the partner applied it, and both worlds loaded campaign/void/void_02/void_02_p through the both-ready hold and stood in gameplay: The Clockwork Mansion completes natively in both worlds.",
+    "Take 1304q (lab product mode, the whole route): both worlds reached void_02 at the first Meagan step. The press set Sokolov down in the boat, and within that step's settle the debrief and the leave prompt followed (the settle answers prompts with A and scenes with use); the host's mission end and the both-ready hold moved both worlds together. The take failed only at the now redundant second talk (no Meagan in the Void). Steps gain unlessMap (skip once the host is on a matching map).",
+    "Take 1304r: the attack step's own health hold ended with the kill, and the host died in the lab before the next step turned the hold on again. The route now keeps one hold from before the attack through the exterior door.",
+    "Take 1304s (lab product mode): PASS. One continuous run from the Dreadful Wale: Meagan and the skiff, the streets, the station and the cable car ride up, the mansion door, Jindosh, Sokolov carried out of the mansion, the return car ride, Sokolov carried to the skiff and set down by the talk, the debrief and 'Go to the Dreadful Wale'. The host's mission end reached the partner and both worlds loaded void_02 through the both-ready hold with equal gameflow counts [216,1,1,15,1,14,0]; the later steps were skipped in the Void (unlessMap); the restore passed."
   ],
   "next": [
-    "Take 1304q: the whole mission end to end in lab product mode (route mi-full-v1304q), then two accounts."
-  ]
+    "Two-account take campaign-madinventor-vm-v1304a on the 1304s route."
+  ],
+  "evidence": {
+    "lab": "route-mi-v1304s",
+    "route": "work/natural-moveset/routes/mi-full-v1304s.json"
+  }
 }

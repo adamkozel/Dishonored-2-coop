@@ -102,7 +102,9 @@ try{
   C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,($p[2]+$eyeUp),$yaw)}
  # Entity list for a step; a world still loading from the previous step is settled first.
  function Ents(){for($k=0;$k-lt6;$k++){try{return (Q host '--entities').entities}catch{[void](Settle 'entities' 60);Start-Sleep 2}};throw 'Native query failed host --entities'}
- foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do;$ents=Ents
+ foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do
+  # unlessMap: skip a step once the host is already on a matching map (a talk that may already have ended the mission).
+  if($st.unlessMap-and"$((Snap host).map)"-match$st.unlessMap){$notes.skipped+=@($tag);continue};$ents=Ents
   switch($st.do){
    'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;$back=(Snap host).pos
     C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))

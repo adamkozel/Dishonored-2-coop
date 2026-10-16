@@ -1,0 +1,80 @@
+{
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": true,
+  "notes": {
+    "healthHold": [
+      "from step step08-heal",
+      "from step step16-heal",
+      "from step step18-heal",
+      "from step step24-heal"
+    ],
+    "skipped": [
+      "step27-wait",
+      "step28-use",
+      "step29-heal",
+      "step30-wait"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 116,
+        "cine": 83,
+        "pos": [
+          -7.225583,
+          -18.983694,
+          0.004261
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 23,
+        "lt": "applied/0/11",
+        "hold": "released/1500",
+        "ka": "2/8/0",
+        "active": "Mission_Void02"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 116,
+        "cine": 253,
+        "pos": [
+          -6.332459,
+          -19.04282,
+          0.003999
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/11/0",
+        "hold": "released/0",
+        "ka": "10/0/0",
+        "active": "Mission_Void02"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": null
+}
