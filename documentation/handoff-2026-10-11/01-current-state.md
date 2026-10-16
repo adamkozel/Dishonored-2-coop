@@ -5,7 +5,11 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-16. Live candidate-npc-combat-v1214bh ([identity](../../work/movement-integration/candidate-npc-combat-v1214bh/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+Updated 2026-10-16. Live candidate-npc-combat-v1214bk ([identity](../../work/movement-integration/candidate-npc-combat-v1214bk/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Campaign take 3, Edge of the World (#75, 1214bi–1214bk, [audit 1302](../../work/movement-integration/campaign-eotw-audit-v1302.json)):** played from the Outsider visit through the Dreadful Wale and Karnaca to the Good Doctor in lab product mode. Both players now receive the Outsider's Mark and their own power (Corvo Blink, Emily Far Reach): before, only the host did.
+  - Story grants that the scripts give the acting player are mirrored natively. These are the Heart, keys, loadouts and mana (script action mirror, `D2KA`, [chapter 97](97-campaign-map-sequence.md)).
+  - The Mark and powers stay each player's own choice at the Outsider's offer.
+- **Campaign take 2, A Long Day in Dunwall (#74):** the two-account VM take passed end to end (campaign-dunwall-vm-v1301c).
 - **Campaign take 2, A Long Day in Dunwall (#74, 1214bf–1214bh, [audit 1299](../../work/movement-integration/campaign-dunwall-audit-v1299.json)):** played start to finish in lab product mode, from the coup to both worlds entering the Outsider visit. On the way:
   - all scripted trigger families are mirrored;
   - objectives follow the host (gameflow mirror);

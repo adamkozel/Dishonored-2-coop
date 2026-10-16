@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T04:06:30.675625+02:00",
-  "candidate": "candidate-npc-combat-v1214bj",
+  "candidate": "candidate-npc-combat-v1214bk",
   "takes": [
     {
       "take": "route-eotw-v1302a",
@@ -37,6 +37,20 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302f",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-death-v1302g",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -53,9 +67,12 @@
     "Confirmed runtime (visual): Emily still had no mana arc after 1302d. Confirmed static: the Mark is given by ld_kiscule_master node 5114 (arkKisculeNodePlayerOutsiderMarkControl, input Give Mark) on the power_yes event, which the brief_outsider_powers scene sends after ld_trigger_19; the route never entered ld_trigger_19, so it skipped the Outsider's offer. The lab also armed the mirror only at product step 20, after both worlds reach gameplay; one mana action at the load ran before the map id was known and was not sent.",
     "1214bj: an action before the map id is known is counted at once and sent when the map id is; the route harnesses arm coop_kiscule_mirror before the mission load; route eotw-full-v1302e walks into ld_trigger_19 (the Outsider's offer) before the first Blink.",
     "Take route-eotw-v1302e (pass on 1214bj, route through the Outsider's offer): entering ld_trigger_19 ran the brief_outsider_powers scene in both worlds (the trigger mirror carries it); each accepted, power_yes ran Give Mark (5114): Emily's world applied the host's run from the mirror first and skipped its own handler later (suppressed 1), and each world's character-specific mana node reached the other. Visual: Corvo shows \"Tutorial: Blink\", Emily \"Tutorial: Far Reach\", both with the mana arc and the Mark, kept on the boat and at Addermire. Both reached institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 16 steps; restore passed. The Heart step still copied Corvo's Blink grant (5122) into Emily's world.",
-    "1214bk: the Outsider's offer is each player's own choice and its scene runs in both worlds, so the Mark control and inventory items that are powers (declaration type 9, models/powers/) or the no_power refusal are recorded as personal and never mirrored; the item is read through the node's own variable accessor (0x140534540 with the m_inventoryItem name, as the Add handler does; item decl vtable 0x1b9ea48, name +8, type +0x60)."
+    "1214bk: the Outsider's offer is each player's own choice and its scene runs in both worlds, so the Mark control and inventory items that are powers (declaration type 9, models/powers/) or the no_power refusal are recorded as personal and never mirrored; the item is read through the node's own variable accessor (0x140534540 with the m_inventoryItem name, as the Add handler does; item decl vtable 0x1b9ea48, name +8, type +0x60).",
+    "Take route-eotw-v1302f (fail on 1214bk): void, offer, Heart, boat and skiff kept both worlds equal (Emily's world now applied 5 actions and recorded none of Corvo's power grants as mirrored). In Karnaca the host fell, both worlds reached the native GameOver in 6.1 s, but the die step pressed A on GameOver every 2.5 s and neither world restarted within 180 s; the checkpoint session state was not traced. Restore passed.",
+    "The die step now follows Test-MissionCheckpoint-v1151: wait for both death screens ready (reset sidecar deathReady/peerDeathReady), one A on the fallen player then one on the partner, then A only on load prompts, tracing phase/result/slot/loads/completed.",
+    "Take route-eotw-death-v1302g (pass, from the eotw mapinfo, lab product mode): the host fell; both reached both_death_screens_ready at 6.2 s (checkpoint session armed on slot 62); after the presses both loaded (phase 4) and completed, back in gameplay about 7 s later with new world epochs; then the station trigger and the carriage took both worlds to institute_p_lowchaos with equal gameflow. Restore passed."
   ],
   "next": [
-    "1214bk lab take, then the two-account take with a death case in Karnaca."
+    "Two-account take of the full route with the death in Karnaca (Route-MissionVM-v1301, eotw-full-v1302f)."
   ]
 }
