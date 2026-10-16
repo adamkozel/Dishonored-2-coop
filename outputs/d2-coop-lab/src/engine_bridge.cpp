@@ -838,6 +838,7 @@ bool checkpointOwnsLoading();
 bool checkpointLoadingBoundary(const NativeSwitchEvent& event);
 bool missionTransitionBoundary(const NativeSwitchEvent& event);
 void observeLevelTransition(const NativeSwitchEvent& e);
+void observeMissionResults(const NativeSwitchEvent& e);
 void waitMissionTransition();
 void checkpointObserveLoadingEntry(const NativeSwitchEvent& event);
 bool captureCheckpointPresentation(bool& shadow,bool& exact);

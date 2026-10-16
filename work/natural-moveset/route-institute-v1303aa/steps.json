@@ -1,0 +1,201 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "ld_note_door_hypatia",
+    "pitches": [
+      0,
+      6,
+      -6
+    ],
+    "yaws": [
+      0,
+      -6,
+      6
+    ],
+    "settle": 4000,
+    "aim": true,
+    "gone": true,
+    "offsets": [
+      [
+        0.6,
+        0
+      ],
+      [
+        -0.6,
+        0
+      ],
+      [
+        0,
+        0.6
+      ],
+      [
+        0,
+        -0.6
+      ]
+    ]
+  },
+  {
+    "do": "press",
+    "button": "B",
+    "ms": 200,
+    "settle": 1500
+  },
+  {
+    "do": "wait",
+    "ms": 4000,
+    "settle": 2000
+  },
+  {
+    "do": "use",
+    "name": "ld_hypatia_key",
+    "pitches": [
+      0,
+      6,
+      -6
+    ],
+    "yaws": [
+      0,
+      -6,
+      6
+    ],
+    "settle": 4000,
+    "aim": true,
+    "gone": true,
+    "offsets": [
+      [
+        0.6,
+        0
+      ],
+      [
+        -0.6,
+        0
+      ],
+      [
+        0,
+        0.6
+      ],
+      [
+        0,
+        -0.6
+      ]
+    ]
+  },
+  {
+    "do": "use",
+    "name": "ld_door_glass_350cm_01_2_14",
+    "pitches": [
+      10,
+      0
+    ],
+    "yaws": [
+      0
+    ],
+    "settle": 5000,
+    "hold": 1500,
+    "offsets": [
+      [
+        1.3,
+        -1.5
+      ],
+      [
+        -1.3,
+        -1.5
+      ],
+      [
+        1.3,
+        -1.0
+      ],
+      [
+        -1.3,
+        -1.0
+      ]
+    ],
+    "z": 35.7
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_45",
+    "settle": 6000
+  },
+  {
+    "do": "talk",
+    "name": "hypat|alexandr|grim",
+    "near": [
+      -49.0,
+      33.7
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "ld_npc_belt_scroll_case_01",
+    "aim": true,
+    "offsets": [
+      [
+        0.6,
+        0
+      ],
+      [
+        -0.6,
+        0
+      ],
+      [
+        0,
+        0.6
+      ],
+      [
+        0,
+        -0.6
+      ]
+    ],
+    "pitches": [
+      0,
+      8,
+      -8
+    ],
+    "yaws": [
+      0,
+      -8,
+      8
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_transfo_alone_2",
+    "settle": 10000
+  },
+  {
+    "do": "wait",
+    "ms": 60000,
+    "settle": 10000
+  },
+  {
+    "do": "npcs",
+    "near": [
+      -49.0,
+      33.7
+    ],
+    "settle": 1000
+  },
+  {
+    "do": "attack",
+    "name": "hypat|alexandr|grim",
+    "near": [
+      -49.0,
+      33.7
+    ],
+    "max": 80,
+    "settle": 15000
+  }
+]

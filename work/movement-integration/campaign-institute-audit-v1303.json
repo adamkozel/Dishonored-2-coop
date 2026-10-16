@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T07:36:29.852205+02:00",
-  "candidate": "candidate-npc-combat-v1214bo",
+  "candidate": "candidate-npc-combat-v1214bp",
   "takes": [
     {
       "take": "route-institute-v1303a",
@@ -127,6 +127,90 @@
       "passed": false,
       "failure": "Use of ld_hypatia_key not registered",
       "recovered": false
+    },
+    {
+      "take": "route-institute-v1303s",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "host died during step17-talk (GameOver)",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303t",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_location_1",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303u",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Talk to meagan not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303v",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303w",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303x",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "held for probing (HoldAtEnd); restored with Restore-RouteHold-v1303 (passed)",
+      "recovered": true
+    },
+    {
+      "take": "route-institute-v1303y",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_audiograph_01_1_3 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303z",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "held for probing; restored (passed)",
+      "recovered": true
+    },
+    {
+      "take": "route-institute-v1303aa",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "held for probing; restored (passed)",
+      "recovered": true
+    },
+    {
+      "take": "route-institute-v1303ab",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Use of ld_hypatia_key not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ac",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "host loaded boat_madinventor_p; the client stayed in institute_p_lowchaos (recorded as a pass by the harness before the final-map check existed)",
+      "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ad",
+      "candidate": "candidate-npc-combat-v1214bp",
+      "passed": false,
+      "failure": "Host died at ld_kar_whaleoil_tank_01_3 (held; restore failed its fixture check; recovered with Deploy-SourceClock)",
+      "recovered": true
     }
   ],
   "complete": false,
@@ -139,9 +223,19 @@
     "Confirmed static (d2_kiscule_graph, new read-only tool): the transformation triggers are enabled only after ld_kiscule_master/Task_Find_the_crownkiller_complet, which Task_IS_searcharea sets when the audiograph 01_1_2 plays, the player talks with Vasco, the transformation starts, or the scroll case on Vasco's belt is taken. Touching ld_trigger_transfo_alone* plays pre_hyp_transfo, which starts a 200 ms position timer: if Hypatia sees the player at more than 1 m she throws the player and transforms; when the scene ends without it she transforms alone. Her health is not readable in human form and sword attacks do nothing to her.",
     "Take 1303p: Vasco (lying on a bed) talks when used at the scroll case on his belt; the talk completed a task in both worlds. After it the objectives differed in one node (state 5 counts host 2, client 3).",
     "Take 1303q: after Vasco, standing in ld_trigger_transfo_alone_2 and waiting 60 s, the fight near Hypatia ended when two objectives completed in both worlds (completed 8 -> 10); the host then died during the Meagan talk (no frame; the harness now frames both worlds on any failure). Meagan waits at a skiff on the water by the institute (ld_meagan, mdnt_out_smallboat_1).",
-    "Take 1303r: a guard fought the host in Hypatia's office (failure frame) and the key pickup failed; a clear step now fights every living matching NPC near a point before such steps."
+    "Take 1303r: a guard fought the host in Hypatia's office (failure frame) and the key pickup failed; a clear step now fights every living matching NPC near a point before such steps.",
+    "Take 1303s: the clear step fought guards near the office and the door for 4 x 40 sword presses each without lowering their health (frontal swings are blocked); clear steps are left out of the route. The key, the door, Hypatia, Vasco, the transformation trigger and the fight (completed 8 -> 10 in both worlds) passed again; the host then reached GameOver ('The Time of Your Demise Is At Hand') during the Meagan talk.",
+    "Take 1303t: teleporting beside the watchtower's whale-oil tank (optional task) ended in GameOver ('You Have Perished') before the first press: a stand beside a wall-mounted object at height is most likely a fatal fall, which the lab health hold does not prevent. The route now stands inside the skiff's noswim volume before talking to Meagan.",
+    "Take 1303u: standing in the skiff's noswim volume put the host in open water by Addermire with no Meagan to talk to: the mission's other required objective (where Sokolov was taken, audiograph ld_audiograph_01_1_3) was still open, so her departure was not available.",
+    "Takes 1303v/1303w: after the fight the audiograph 01_1_3 still did not respond to aimed uses (its interaction marker shows below the crosshair). Confirmed static: only AudioGraphNotification listeners reference it, nothing enables it. The harness gains -HoldAtEnd (leave the mission running) with Restore-RouteHold-v1303.ps1 (the same restoration and checks) and Poke-Use-v1303.ps1 (one placement, pitch, frame and press) for faster interaction probing.",
+    "Held session 1303x (probes in route-institute-v1303x/pokes): after the fight the journal shows the Crown Killer crossed out and 'Return to the Dreadful Wale' as the only objective (plus the optional watchtower). The audiograph 01_1_3 sits on a table and shows 'Audiograph - X Play' from 1.2 m south, facing north, 30 degrees down; it played but changed nothing. Meagan (meagan_foster.def) waits in her skiff at (-189.2, 28.4, -6.0); from (-189.5, 29.3) facing -72 degrees, 40 degrees down she shows 'Meagan Foster - X Talk', but the talk does nothing. Stands off solid ground fell out of the world (z -1680) or under the watchtower's searchlight fire; the host was moved back each time and the restore passed.",
+    "Confirmed static (d2_kiscule_graph): Meagan's talk override proceeds only when ld_kiscule_objectivs/objective_sokolov_complete and Obj_Eliminate_CKiller are both true. Audiograph 01_1_3 completes the Sokolov objective only through a listener gated on Task_IS_Find_where_Sokolov_was_taken_hypalive being active (after the talk with Hypatia) or on the talk task failing or being cancelled; each listener fires once. In 1303v-x it was played after the fight, when neither held. Route 1303y plays it right after the talk with Hypatia, from the probed stand, and talks to Meagan from the probed skiff stand.",
+    "Confirmed runtime (1303aa): a gameflow node id is the 32-bit FNV-1a hash of the lowercased task, objective or mission name (all 29 names of gameflow_institute.arktree match the live ids). tools/diag/d2_gameflow_dump.py --base names every live node; 1214bp lists every non-inactive node as [id, state] in the mission end status, and the harnesses name the active ones (local cache work/natural-moveset/gameflow-names.local.json, game-derived, not committed).",
+    "Held sessions 1303z/1303aa with named states: after the talk with Hypatia, Obj_IS_Investigate_Sokolov_whereabouts is complete (office, key, recuperation area, locating and talking to Hypatia); after the fight Obj_IS_Eliminate_the_Crown_Killer is complete, Obj_IS_Escape ('Return to the Dreadful Wale') is active with Task_IS_continuemission and Task_IS_Talk_to_Meagan pending, and Task_IS_Turn_OFF_the_watchtower active. Confirmed static: the escape gate is evaluated only when Task_IS_Turn_OFF_the_watchtower completes; with both main objectives complete it activates Task_IS_Talk_to_Meagan (Prima's walkthrough: pull the whale oil from the tank on the side of the watchtower, then meet Meagan at the lower docks).",
+    "Confirmed runtime (1303aa): the watchtower moves (arkMover nav drivers), so the tank is aimed from its live position; the second press removed it: Task_IS_Turn_OFF_the_watchtower complete, Task_IS_Talk_to_Meagan active, Meagan's boat sailed to the lower dock (-85.9, 51.7) within 30 s; talking to her from the dock edge (2.6 m, 18 degrees down) started the departure scene, the leave prompt (logic 9, A), the debrief and the result screen, and the host loaded boat_madinventor_p (The Clockwork Mansion).",
+    "Take 1303ac: the whole route ran in the host world (clear step brought the office guard to 1 HP with focused strikes, key, door, Hypatia, Vasco, transformation, fight, tank, Meagan) and the host reached boat_madinventor_p; the client stayed in institute_p_lowchaos: the mission end did not reach the partner. The harness now saves both mission end sidecars per step and fails a take whose worlds end on different maps. 1303ad (held) died at the tank (moving tower); the tank step now re-reads the tank's live position before each try."
   ],
   "next": [
-    "Take 1303q: stay in ld_trigger_transfo_alone_2 and wait for the transformation, then fight Grim Alexandria."
+    "Take 1303ae: the full route with live tank tracking; find why the client did not follow the mission end."
   ]
 }

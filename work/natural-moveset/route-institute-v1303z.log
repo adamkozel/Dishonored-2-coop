@@ -1,0 +1,71 @@
+{
+  "notes": {
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 281,
+        "cine": 554,
+        "pos": [
+          -40.275986,
+          33.692463,
+          27.003481
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          1,
+          4,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 281,
+        "cine": 275,
+        "pos": [
+          2.332256,
+          -28.726015,
+          12.687901
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          1,
+          4,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:196[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 196 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

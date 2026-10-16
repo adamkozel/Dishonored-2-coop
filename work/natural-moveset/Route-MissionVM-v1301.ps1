@@ -1,4 +1,4 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bo',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bq',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
@@ -30,10 +30,13 @@ function Frame($r,$name){
  if($r-eq'client'){try{Save-D2LabVMScreen -Path "$out/$name-vm.png"|Out-Null}catch{};return}
  $hwnd=(Get-Process -Id $pids.host).MainWindowHandle.ToInt64()
  & (Get-Command ffmpeg).Source -hide_banner -loglevel error -nostdin -f lavfi -i "gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra" -frames:v 1 -y "$out/$name-host.png" 2>$null|Out-Null}
+$gfNames=$null;try{$gfNames=Get-Content "$PSScriptRoot/gameflow-names.local.json" -Raw|ConvertFrom-Json}catch{}
+function ActiveNames($m){if(!$gfNames-or!$m-or!$m.gameflowNodes){return $null};(@($m.gameflowNodes|Where-Object {$_[1]-eq2}|ForEach-Object {$n=$gfNames."$($_[0])";if($n){$n}else{"#$($_[0])"}})|Sort-Object)-join ','}
 function Snap($r){$s=S $r;$m=$null;try{$m=S $r '.missionend.json'}catch{}
- $o=[ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$null;gfApplied=$null;lt=$null;hold=$null;ka=$null}
+ $o=[ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$null;gfApplied=$null;lt=$null;hold=$null;ka=$null;active=$null}
  if($m){$o.gameflow=$m.gameflowStates;if($m.gameflowMirror){$o.gfApplied=$m.gameflowMirror.applied};if($m.levelTransition){$o.lt="$($m.levelTransition.result)/$($m.levelTransition.sent)/$($m.levelTransition.applied)"};if($m.hold){$o.hold="$($m.hold.result)/$($m.hold.lastWaitMs)"}}
  try{$k=S $r '.kiscule.json';$o.ka="$($k.local)/$($k.applied)/$($k.suppressed)"}catch{}
+ $o.active=ActiveNames $m
  $o}
 function HO{try{Get-Content "$root/work/lab-instances/host/coop-status.json.online.json" -Raw|ConvertFrom-Json}catch{$null}}
 $safe='active','host','phase','result','connectionState','joinRequests','role','inviteOpened','lobbyMembers'
@@ -106,7 +109,7 @@ try{
     # bounce: the enter event fires on entry; return to the last stand before a volume without a floor drops the player.
     if($st.bounce){Start-Sleep -Milliseconds 600;C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$back[0],$back[1],($back[2]+1.7))}}
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}))}
-   'use'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing usable $($st.name)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
+   'use'{$e=if($st.match){@($ents|Where-Object {$_.name-match$st.match}|Select-Object -First 1)}else{@($ents|Where-Object name -eq $st.name)};if($e.Count-ne1){throw "Missing usable $($st.name)$($st.match)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
     $offs=if($st.offsets){$st.offsets}else{@(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))}
     # Sweep pitch and bearing at each stand (small targets such as signet buttons).
     $pitches=if($st.pitches){$st.pitches}else{@(0)};$yaws=if($st.yaws){$st.yaws}else{@(0)};$k=0
@@ -114,6 +117,8 @@ try{
     $g0="$((Snap host).gameflow)"
     foreach($o in $offs){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
      foreach($pt in $pitches){foreach($yo in $yaws){$k++
+      # live: a target on something that moves (a Karnaca watchtower) is re-read before each try.
+      if($st.live){$cur=@((Q host '--entities').entities|Where-Object {$_.name-eq$e[0].name});if($cur.Count){$p=$cur[0].position;$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI}}
       C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($yaw0+$yo));Start-Sleep -Milliseconds 700
       # aim: the pitch from the native eye to the target, plus the listed offsets.
       $pitch=$pt;if($st.aim){try{$eye=(Q host '--player').nativeViewPosition;$hd=[Math]::Sqrt([Math]::Pow($p[0]-$eye[0],2)+[Math]::Pow($p[1]-$eye[1],2));$pitch=[Math]::Max(-60,[Math]::Min(75,[Math]::Atan2($eye[2]-$p[2],[Math]::Max($hd,.2))*180/[Math]::PI+$pt))}catch{}}
@@ -132,7 +137,7 @@ try{
       $hp=$null;try{$hp=Q host '--health' ([Convert]::ToInt64($e.handle.Substring(2),16))}catch{};if($hp-and$hp.current-gt0){return $e}};return $null}
     for($n=0;$n-lt$max;$n++){$e=LiveNear;if(!$e){break};$hd=[Convert]::ToInt64($e.handle.Substring(2),16);$dead=$false;$trace=[Collections.Generic.List[object]]::new()
      for($k=0;$k-lt40-and!$dead;$k++){if($k%4-eq0){$cur=@((Q host '--entities').entities|Where-Object handle -eq $e.handle);if($cur.Count){Face $cur[0].position 1.5 1.6};Start-Sleep -Milliseconds 400}
-      & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs 150|Out-Null;Start-Sleep -Milliseconds 700
+      & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
       $hp=$null;try{$hp=Q host '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null})});if(!$hp-or$hp.current-le0){$dead=$true}
       if((Snap host).logic-eq13){throw 'Host died in the fight'}}
      $fights.Add([ordered]@{npc=$e.name;dead=$dead;presses=$trace.Count;trace=@($trace)})}
@@ -170,7 +175,7 @@ try{
     # A story NPC's health may not be readable: an objective completed during the fight also ends it.
     $gf0=(Snap host).gameflow
     for($k=0;$k-lt$max-and!$dead;$k++){if($k%4-eq0){$npc=Npc $st.name $st.near;Face $npc.position 1.5 1.6;Start-Sleep -Milliseconds 500}
-     & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs 150|Out-Null;Start-Sleep -Milliseconds 700
+     & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
      $hp=$null;try{$hp=Q host '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null});host=(Snap host).logic});if($hp-and$hp.current-le0){$dead=$true};$gfn=(Snap host).gameflow;if($gf0-and$gfn-and$gfn[3]-gt$gf0[3]){$dead=$true}
      if((Snap host).logic-eq13){throw 'Host died in the fight'}}
     Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
@@ -188,13 +193,15 @@ try{
     if(!$hit){throw "Loot of $($st.name) not registered"}}}
   Start-Sleep -Milliseconds $(if($st.settle){$st.settle}else{3000})
   [void](Settle $tag 120);Start-Sleep 2
-  $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r $tag;try{Save "$out/$tag-triggers-$r.json" (S $r '.triggers.json');Save "$out/$tag-loading-$r.json" (S $r '.loading.json')}catch{}}
+  $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r $tag;try{Save "$out/$tag-triggers-$r.json" (S $r '.triggers.json');Save "$out/$tag-loading-$r.json" (S $r '.loading.json');Save "$out/$tag-missionend-$r.json" (S $r '.missionend.json')}catch{}}
   Save "$out/route.json" @($rows)}
  $notes.final=@{host=(Snap host);client=(Snap client)}
  $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
+ # Both worlds must end on the same map (a mission end the partner did not follow fails the take).
+ if($notes.final.host.map-ne$notes.final.client.map){throw "Worlds ended on different maps: host $($notes.final.host.map), client $($notes.final.client.map)"}
  $notes.final=@{host=(Snap host);client=(Snap client)}
  $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
-}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{}}
+}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{};try{$notes.failureState=@{host=(Snap host);client=(Snap client)}}catch{}}
 finally{
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
