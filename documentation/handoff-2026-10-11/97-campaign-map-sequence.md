@@ -42,4 +42,18 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Trigger names:** the campaign's scripts listen to many trigger name families (`ld_trigger` 428 times, `script_trigger` 301, `mdnt_trigger` 20, `obj_trigger` and more). Since 1214bf the mirror sends every volume named *trigger* except the ones that describe a player's own position: audio, lighting and environment, hideout, no-swim, death (kill volumes), vista and water.
 - **Objective sync check:** `missionend.json` now reports both worlds' gameflow node counts by state.
 
+## Progress and map changes follow the host (1214bg–1214bh, [audit 1299](../../work/movement-integration/campaign-dunwall-audit-v1299.json))
+
+- **Gameflow mirror (1214bg):**
+  - Problem: story progress from an NPC death, a body search or a scene ran only in the host's world (Ramsey and the ring in take 1300d).
+  - The host publishes every non-mission gameflow node's (id, state) twice a second (`D2GF`). The partner sets each differing node through the native set-state routine, whose change messages its own scripts hear.
+  - Both worlds report the same node-id hash, and objectives match after every route step.
+- **Level transition mirror (1214bh):**
+  - The `LevelTransition` run function (`0x1407a1340`) switches logic to 15 and stores the map name and player start in the MapTransition state (manager+0x90, idStr +0x48/+0x70) through `0x1404f1d40`. Kiscule node run functions are called through their type info by `0x1407c0e30` (all confirmed static).
+  - A world entering 15 that way sends the target (`D2LT`). The partner performs the same native calls with idStrs built by the game's own constructor, and both expect the transition, so the both-ready hold applies.
+  - Checkpoint sync now lets `RestartFromMemoryCheckpoint` through at logic 15 as well as 11 (take 1300m hung on black without it).
+- **A Long Day in Dunwall (take campaign-dunwall-v1300t, lab product mode, pass):** one continuous run from the coup and both character choices through Mayhew, Ramsey, the ring, the vault, the tower exit (both worlds to the streets), the boat and the Meagan debrief. It ends with both result screens and both worlds in the Outsider visit, with objectives equal after all 17 steps.
+  - The route lives in `work/natural-moveset/routes/dunwall-full-v1300t.json`, run by `Route-Mission-v1300.ps1`.
+  - Known gap: items a script grants to the player who uses something (the safe-room loadout) reach only that player.
+
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
