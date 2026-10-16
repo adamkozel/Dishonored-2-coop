@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T04:06:30.675625+02:00",
-  "candidate": "candidate-npc-combat-v1214bh",
+  "candidate": "candidate-npc-combat-v1214bj",
   "takes": [
     {
       "take": "route-eotw-v1302a",
@@ -22,6 +22,21 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302d",
+      "candidate": "candidate-npc-combat-v1214bi",
+      "passed": true,
+      "failure": null,
+      "recovered": false,
+      "note": "route pass; the Mark gap remained"
+    },
+    {
+      "take": "route-eotw-v1302e",
+      "candidate": "candidate-npc-combat-v1214bj",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -31,9 +46,16 @@
     "Take route-eotw-v1302a (fail, lab product mode, from the void_01 mapinfo): the five void triggers and the Heart kept both worlds' gameflow equal (\"Cross the Floating Island\", \"Take the Heart\" on both); taking the Heart ran a script LevelTransition that the client applied (D2LT) and both worlds loaded boat_eotw_p, the both-ready hold released. The brief trigger and the Meagan talk kept gameflow equal ([230,2,3,11,0,2,0]). The route then looked for the Addermire station trigger while both were still on the boat: the boat's exit (skiff) was missing from the route. Restore passed.",
     "Take route-eotw-v1302b (fail, from the boat_eotw mapinfo): the brief trigger and the Meagan talk kept gameflow equal; the skiff use opened the leave prompt (logic 9, A leaves), the player_leaving scene ran and its LevelTransition reached the client (D2LT applied), so both worlds loaded eotw_p_lowchaos (hold released after 313 ms) with equal gameflow [235,2,5,4,0,2,0]. The station trigger advanced both worlds equally. The carriage stand aimed at the car's centre and none of its nine uses registered; take mission-end-carriage-v1291a used the east door facing due west with a 27 degree downward pitch, which the route now uses. Restore passed.",
     "Take route-eotw-v1302c (route pass, lab product mode, from the void_01 mapinfo): one continuous run through the Outsider visit (five triggers, the Heart), the Dreadful Wale (brief, Meagan, the skiff), Karnaca (the station trigger, the carriage from its east door), the leave prompt, the ride and both result screens. Both worlds loaded institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 15 steps; four level transitions were applied on the client and every both-ready hold released. Restore passed. Visual: the same boat cabin (Corvo visible in Emily's world) and the same Addermire arrival in both windows.",
-    "Blocking gap (confirmed runtime, visual): after the void Corvo's HUD shows the mana arc and Emily's does not, so the partner never received the Mark and its powers. Confirmed static: void_01_p grants them through player-scoped Kiscule actions in ld_kiscule_objectiv and ld_kiscule_master: arkKisculeNodeActionPlayerInventory (blink, grapple, the Heart, no_power), arkKisculeNodeMana, arkKisculeNodePlayerOutsiderMarkControl and arkKisculeNodeActionPlayerLoadout. These ran only in the world of the player who triggered them; the same class explains the Dunwall safe-room loadout gap."
+    "Blocking gap (confirmed runtime, visual): after the void Corvo's HUD shows the mana arc and Emily's does not, so the partner never received the Mark and its powers. Confirmed static: void_01_p grants them through player-scoped Kiscule actions in ld_kiscule_objectiv and ld_kiscule_master: arkKisculeNodeActionPlayerInventory (blink, grapple, the Heart, no_power), arkKisculeNodeMana, arkKisculeNodePlayerOutsiderMarkControl and arkKisculeNodeActionPlayerLoadout. These ran only in the world of the player who triggered them; the same class explains the Dunwall safe-room loadout gap.",
+    "Confirmed static (1214bi): every queued Kiscule signal is dispatched by 0x1407c0e30 (signal+0xc node id, +0x10 input id, +0x18 node instance whose vtable is the node class). node+0x20 is the node's arkKisculeInstance (+0x20/+0x28 node array, +0x60 owning entity handle, +0x70 graph, +0x88 nested instances); the Kiscule manager at game+0x1f6e48 hashes entity handle -> top-level instance (+0x18 buckets, +0x28 mask, sorted chains). node+0x28 is the node decl (+8 id, inputs at +0x40 with stride 0x48: +8 id, +0x20 descriptor with the handler at +0x30 (node) or +0x38 (node, desc, signal)). Class vtables (RVA): inventory 0x1b7ddf8, loadout 0x1b7df48, mana 0x1c65ef8, Outsider's Mark control 0x1cd4238.",
+    "1214bi mirrors those four classes (D2KA): each world counts handler runs per (entity, node, input) and sends the count; the peer runs the same node's native handler until its count matches; a later local request the mirror covered runs the dispatch with the handler stubbed, so outputs still fire.",
+    "Take route-eotw-v1302d (route pass on 1214bi): the host ran eight player-scoped actions (ld_kiscule_objectiv: mana Unlock, loadout Restore, inventory Add of Blink (5122) and the Heart (5127); script_kiscule_carriage: Remove of four Edge of the World keys and favours at the carriage) and Emily's world applied all eight natively on its engine thread; dispatch ran on the engine thread in both worlds. Both reached institute_p_lowchaos with equal gameflow; restore passed.",
+    "Confirmed runtime (visual): Emily still had no mana arc after 1302d. Confirmed static: the Mark is given by ld_kiscule_master node 5114 (arkKisculeNodePlayerOutsiderMarkControl, input Give Mark) on the power_yes event, which the brief_outsider_powers scene sends after ld_trigger_19; the route never entered ld_trigger_19, so it skipped the Outsider's offer. The lab also armed the mirror only at product step 20, after both worlds reach gameplay; one mana action at the load ran before the map id was known and was not sent.",
+    "1214bj: an action before the map id is known is counted at once and sent when the map id is; the route harnesses arm coop_kiscule_mirror before the mission load; route eotw-full-v1302e walks into ld_trigger_19 (the Outsider's offer) before the first Blink.",
+    "Take route-eotw-v1302e (pass on 1214bj, route through the Outsider's offer): entering ld_trigger_19 ran the brief_outsider_powers scene in both worlds (the trigger mirror carries it); each accepted, power_yes ran Give Mark (5114): Emily's world applied the host's run from the mirror first and skipped its own handler later (suppressed 1), and each world's character-specific mana node reached the other. Visual: Corvo shows \"Tutorial: Blink\", Emily \"Tutorial: Far Reach\", both with the mana arc and the Mark, kept on the boat and at Addermire. Both reached institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 16 steps; restore passed. The Heart step still copied Corvo's Blink grant (5122) into Emily's world.",
+    "1214bk: the Outsider's offer is each player's own choice and its scene runs in both worlds, so the Mark control and inventory items that are powers (declaration type 9, models/powers/) or the no_power refusal are recorded as personal and never mirrored; the item is read through the node's own variable accessor (0x140534540 with the m_inventoryItem name, as the Add handler does; item decl vtable 0x1b9ea48, name +8, type +0x60)."
   ],
   "next": [
-    "Mirror player-scoped Kiscule actions (inventory, loadout, mana, the Mark) natively into the partner's world, then re-run the void and the two-account take with a death case in Karnaca."
+    "1214bk lab take, then the two-account take with a death case in Karnaca."
   ]
 }

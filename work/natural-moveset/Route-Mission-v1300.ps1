@@ -1,4 +1,4 @@
-param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bh',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0)
+param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bj',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0)
 # Campaign route take (chapter 97): both lab worlds load a mission start in lab
 # product mode with the mission end mirror, pass the native character choice
 # (host Corvo, client Emily), then the host runs a step list:
@@ -24,7 +24,7 @@ function I($r,[string]$b='',[int]$ms=100){$a=@{Role=$r;DurationMs=$ms};if($b){$a
 function Frame($r,$name){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
  & (Get-Command ffmpeg).Source -hide_banner -loglevel error -nostdin -f lavfi -i "gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra" -frames:v 1 -y "$out/$name-$r.png" 2>$null|Out-Null}
 function Snap($r){$s=S $r;$m=$null;try{$m=S $r '.missionend.json'}catch{}
- [ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$(if($m){$m.gameflowStates}else{$null});gfMirror=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.result});idHash=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.idHash});gfApplied=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.applied});lt=$(if($m-and$m.levelTransition){"$($m.levelTransition.result)/$($m.levelTransition.sent)/$($m.levelTransition.applied)"});hold=$(if($m-and$m.hold){"$($m.hold.result)/$($m.hold.lastWaitMs)"})}}
+ [ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$(if($m){$m.gameflowStates}else{$null});gfMirror=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.result});idHash=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.idHash});gfApplied=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.applied});lt=$(if($m-and$m.levelTransition){"$($m.levelTransition.result)/$($m.levelTransition.sent)/$($m.levelTransition.applied)"});hold=$(if($m-and$m.hold){"$($m.hold.result)/$($m.hold.lastWaitMs)"});ka=$(try{$k=S $r '.kiscule.json';"$($k.local)/$($k.applied)/$($k.suppressed)"}catch{$null})}}
 # Drives both worlds through scenes, prompts, the character choice and loads
 # until both are in gameplay or the time runs out.
 function Settle($label,$sec){
@@ -53,7 +53,9 @@ try{
  if($VideoSeconds){foreach($r in 'host','client'){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
   $va=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string]$VideoSeconds,'-an','-c:v','libx264','-preset','veryfast','-crf','23','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/take-$r.mp4")
   $captures.Add((Start-Process (Get-Command ffmpeg).Source -ArgumentList $va -WindowStyle Hidden -RedirectStandardError "$out/take-$r-capture.log" -PassThru))}}
- foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_product_auto on'}
+ # The script action mirror is armed before the load: product auto arms its steps
+ # only after both worlds reach gameplay, after the intro's grants (1214bj).
+ foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_kiscule_mirror on';C $r 'coop_product_auto on'}
  # -NoLoad starts from the current Dunwall fixture (story state after Mayhew) to iterate later steps faster.
  if(!$NoLoad){C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"}
  if(!(Settle 'start' $LoadSeconds)){throw 'Both worlds did not reach mission gameplay'}
@@ -129,7 +131,7 @@ finally{
   $errors=[Collections.Generic.List[string]]::new()
   if($captures){foreach($c in @($captures)){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}
   if($dirty){
-   foreach($r in 'host','client'){try{I $r;C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off';C $r 'coop_gameflow_mirror off'}catch{}}
+   foreach($r in 'host','client'){try{I $r;C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off';C $r 'coop_gameflow_mirror off';C $r 'coop_kiscule_mirror off'}catch{}}
    # Product mode armed checkpoint sync: a shared death would block the fixture restore.
    foreach($r in 'host','client'){try{if((S $r).localGameLogicState-eq13){I $r A 400;Start-Sleep 5}}catch{}}
    foreach($r in 'host','client'){try{C $r 'coop_checkpoint_sync off';C $r 'coop_usable_sync off';C $r 'coop_player_health_hold off'}catch{}}
