@@ -22049,21 +22049,30 @@
   },
   "Campaign": {
     "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
-    "Candidate": "candidate-npc-combat-v1214bh",
+    "Candidate": "candidate-npc-combat-v1214bo",
     "Missions": {
       "02-a-long-day-in-dunwall": {
         "Card": 74,
         "Audit": "work/movement-integration/campaign-dunwall-audit-v1299.json",
         "LabTake": "campaign-dunwall-v1300t",
         "TwoAccountTake": "campaign-dunwall-vm-v1301c",
-        "Open": "death and checkpoint recovery case"
+        "Open": "death coverage is in mission 3 (campaign-eotw-vm-v1302q)"
       },
       "03-edge-of-the-world": {
         "Card": 75,
-        "Route": "work/natural-moveset/routes/eotw-full-v1302a.json",
+        "Audit": "work/movement-integration/campaign-eotw-audit-v1302.json",
+        "Route": "work/natural-moveset/routes/eotw-full-v1302f.json",
+        "LabTake": "route-eotw-v1302e",
+        "LabDeathTake": "route-eotw-boatdeath-v1302n",
+        "TwoAccountTake": "campaign-eotw-vm-v1302q",
+        "Status": "complete"
+      },
+      "04-the-good-doctor": {
+        "Card": 76,
+        "Route": "work/natural-moveset/routes/institute-full-v1303a.json",
         "Status": "route drafted"
       }
     },
-    "NextAction": "Edge of the World route in the lab pair, then two accounts."
+    "NextAction": "The Good Doctor route in the lab pair, then two accounts."
   }
 }

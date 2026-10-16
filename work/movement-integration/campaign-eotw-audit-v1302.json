@@ -107,9 +107,23 @@
       "passed": false,
       "failure": "Restart failed on client (session_peer_disconnected)",
       "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302p",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Both worlds did not reach mission gameplay",
+      "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302q",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
-  "complete": false,
+  "complete": true,
   "scope": "#75 campaign take 3 (Edge of the World): the Outsider visit (void_01), the Dreadful Wale (boat_eotw) and Karnaca (eotw_p) to the carriage and the result screen, in lab product mode and then across two Steam accounts.",
   "findings": [
     "Route (confirmed static, d2_mission_route): void_01 runs ld_trigger_23, ld_trigger, ld_trigger_15, ld_trigger_28, ld_trigger_34 and the rune pickup (the Heart); the boat leaves for eotw_p_lowchaos/highchaos on the LoadNextMap event, sent after the player_leaving scene, which the skiff usable (script_skiff_01_usable) or Meagan's ready-to-leave dialog starts.",
@@ -133,9 +147,16 @@
     "1214bm hashes only map and chapter. Take 1302l: paired again, the host's restart reached Preparing, but the client refused the Prepare and its own request once (rejected +2) and failed when hellos stopped; the pair stayed on GameOver. Take 1302m (same build): the shared restart completed in 6.7 s.",
     "1214bn: a refused attempt ends in 8 s (Preparing/Requested), loading keeps 45 s from Accept/Begin, and a failed idle session on the same map re-arms after 3 s; the die step presses Restart again every 12 s while both stay on GameOver. Take route-eotw-boatdeath-v1302n (pass): the shared restart after the boat completed in 7.0 s, then the station and the carriage took both worlds to institute_p_lowchaos with equal gameflow.",
     "Take campaign-eotw-vm-v1302o (two accounts, 1214bn): the route to Karnaca stayed equal; at the death the client refused the host's Prepare. Confirmed runtime: the client's paired-autosave receiver rejected every host packet (rejected 130 -> 189; peer counts 0/0/0) because the host had re-armed more often (checkpoint remaps 4 vs 2), so the pair never settled and fixtureMatches failed. The harness also stopped at the first failed attempt, before the 1214bn recovery.",
-    "1214bo: a newer peer arm (or a new session) restarts the local pair counts from the autosave held now, so both sides count from the same baseline; older arms are still rejected. The die step no longer stops on a failed attempt and presses Restart again."
+    "1214bo: a newer peer arm (or a new session) restarts the local pair counts from the autosave held now, so both sides count from the same baseline; older arms are still rejected. The die step no longer stops on a failed attempt and presses Restart again.",
+    "Take campaign-eotw-vm-v1302p (two accounts, 1214bo): the mission start timed out before step 1 (420 s) and the harness recorded no states; the host capture was cut before its index was written. Restore passed. The harnesses now record both worlds' states and frames on a start timeout; the immediate re-run (1302q) passed the start.",
+    "Take campaign-eotw-vm-v1302q (pass; host on this PC as Corvo, the lab VM's second Steam account as Emily, product mode): the Outsider visit with the offer (Corvo Blink, Emily Far Reach, each with the Mark), the Heart, the Dreadful Wale (brief, Meagan, skiff), Karnaca, a host fall with both native GameOver screens and one shared restart (both back in gameplay about 11 s after the press, checkpoint session re-armed on Karnaca), the station, the carriage, the leave prompt, the ride and both result screens; both worlds in institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 18 steps. Restore passed. Visual: Corvo's and Emily's own GameOver screens, then both at Addermire with the Mark's mana arc."
   ],
   "next": [
-    "Two-account take of the full route with the death in Karnaca on 1214bn."
-  ]
+    "Mission 4, The Good Doctor (#76)."
+  ],
+  "evidence": {
+    "lab": "route-eotw-v1302e",
+    "labDeath": "route-eotw-boatdeath-v1302n",
+    "twoAccounts": "campaign-eotw-vm-v1302q"
+  }
 }
