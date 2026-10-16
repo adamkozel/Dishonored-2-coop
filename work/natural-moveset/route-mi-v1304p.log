@@ -1,0 +1,79 @@
+{
+  "notes": {
+    "healthHold": [
+      "from step step08-heal",
+      "attack kirin_jindosh[.]def",
+      "from step step17-heal",
+      "from step step23-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 31,
+        "cine": 53,
+        "pos": [
+          241.560074,
+          185.226181,
+          1.701506
+        ],
+        "fresh": true,
+        "gameflow": [
+          220,
+          0,
+          3,
+          12,
+          1,
+          12,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/47",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Sokolov,Task_MI_Rescue"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 31,
+        "cine": 17,
+        "pos": [
+          292.681396,
+          -228.206055,
+          89.6483
+        ],
+        "fresh": true,
+        "gameflow": [
+          220,
+          0,
+          3,
+          12,
+          1,
+          12,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_MI,Obj_MI_Sokolov,Task_MI_Rescue"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": false,
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:254[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 254 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

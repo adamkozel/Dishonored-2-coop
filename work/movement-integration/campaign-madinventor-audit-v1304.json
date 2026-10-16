@@ -117,6 +117,20 @@
       "held": true,
       "failure": "Held probe of the return; ended in a shared GameOver (Sokolov drowned when dropped off the dock)",
       "recovered": true
+    },
+    {
+      "take": "route-mi-v1304o",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Shared GameOver when Sokolov was set down at Meagan's skiff (drowned)",
+      "recovered": "automatic relaunch (notes.restoreRecovery)"
+    },
+    {
+      "take": "route-mi-v1304p",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "held": true,
+      "scope": "held probe of the ending; the mission end reached both worlds"
     }
   ],
   "findings": [
@@ -132,9 +146,11 @@
     "Take 1304k (health hold on): Sokolov lies on a gurney showing 'Anton Sokolov - Talk'; the first press played his scene (helped up), after which he shows 'Anton Sokolov (unconscious) - Carry'. Presses of 400 ms at that prompt did not pick him up (storyflags/madinventor sokolov_carried stayed 0 through 12 tries); the earlier native carry harness (Observe-NativeCarry) holds use for 900 ms. The carry step now holds 1000 ms and also accepts native player state 45 (carrying a body).",
     "Take 1304l: Sokolov's talk played first; the third try (1000 ms hold) carried him (native player state 45, storyflags/madinventor sokolov_carried 1). Leaving through the exterior door carrying him was mirrored to the partner, but on arrival in the streets the host entered a scene (logic 5, one cinematic node, not skippable) that never ended. Confirmed static: the mansion exit with Sokolov carried sets sokolov_in_carriage, and the streets' return script then puts him in the cable car (sok_in_carriage, cablecar_idle_sokolov under a Cinematic). The route had skipped the carriage ride up (cable car usables script_kar_cable_car_inv_use_5/6 start the entry scene and lever, carriage_fromA, the track scene and cablecar_middlestation for Task_MI_Carriage). Hypothesis: the return scene needs the carriage the player rode up. The harness's automatic relaunch recovery restored the lab.",
     "Held take 1304m (confirmed runtime): the cable car (script_kar_cable_car_chassis_01_1, No 20) waits at the station (241.6, 186.2, 0.6) with guards on its platform. New tool work/natural-moveset/Focus-Use-v1304.ps1 sweeps stands, yaw and pitch and presses only when the native use focus (arkCpntPlayerSensorInteraction+0x80) is on the target: script_kar_cable_car_inv_use_5 took the focus from 0.9 m east, facing west, 15 degrees down, on the second try. The press played the car's entry scene, then a prompt (logic 9: 'Go to Upper Aventa District' / 'Stay at Lower Aventa District'); A rode the car to Upper Aventa (286.9, -62.7, 73.2) in about 35 s, completing Task_MI_Carriage and activating Task_MI_Mansion and the gate code tasks; the partner's gameflow mirror read equal. The station's wall of light (powered by script_kar_whaleoil_tank_01_3 in the lower office) shocked the host when it fell from the platform; its tank was pulled (cover, carry) in this probe. The harness's use step gains the same focus check ('focus').",
-    "Held take 1304n (confirmed runtime): with the car ridden up first, the mansion objectives activate in both worlds (Obj_MI_Jindosh, Obj_MI_Sokolov, Task_MI_Kill_Jindosh, Task_MI_Find_Sokolov); after the kill and the carry, leaving through the exterior door returns both worlds to the streets in plain gameplay, and the return script rides the car down by itself: the host stands at the lower station and Sokolov sits in the car (return_main sokolov_is_inside_carriage 1, meagan sokolov_back_from_mansion 1). So 1304l's endless scene was the return without the car having gone up. A focus-guided 1000 ms use carried Sokolov out of the car (native state 45); carried to Meagan's dock, the objective updated to 'Return to the Dreadful Wale' and Sokolov_AroundSkiff read 1, but the press there dropped him into the water: shared GameOver ('You have lost a critical ally: Anton Sokolov') in both worlds. The route now sets him down facing away from the water before talking to Meagan."
+    "Held take 1304n (confirmed runtime): with the car ridden up first, the mansion objectives activate in both worlds (Obj_MI_Jindosh, Obj_MI_Sokolov, Task_MI_Kill_Jindosh, Task_MI_Find_Sokolov); after the kill and the carry, leaving through the exterior door returns both worlds to the streets in plain gameplay, and the return script rides the car down by itself: the host stands at the lower station and Sokolov sits in the car (return_main sokolov_is_inside_carriage 1, meagan sokolov_back_from_mansion 1). So 1304l's endless scene was the return without the car having gone up. A focus-guided 1000 ms use carried Sokolov out of the car (native state 45); carried to Meagan's dock, the objective updated to 'Return to the Dreadful Wale' and Sokolov_AroundSkiff read 1, but the press there dropped him into the water: shared GameOver ('You have lost a critical ally: Anton Sokolov') in both worlds. The route now sets him down facing away from the water before talking to Meagan.",
+    "Take 1304o: the whole route ran to Meagan's dock: the car ride up, Jindosh, Sokolov carried out of the mansion and out of the car, and on arrival at the skiff Obj_MI_End and Task_MI_End ('Return to the Dreadful Wale') became active in both worlds. Setting Sokolov down facing away from Meagan also dropped him into the water (shared GameOver, 'You have lost a critical ally'). The stand's floor height (-18.56) matches Meagan's (-18.63): it is inside the narrow skiff, whose trigger script_trigger_around_skiff (159.95, 156.15, -17.85) sets Sokolov_AroundSkiff when his body touches it. Next: a held take at the dock to find a safe set-down.",
+    "Held take 1304p (confirmed runtime): at Meagan's skiff with Sokolov carried, the use prompt on Meagan reads 'Talk' even while carrying, and that press sets Sokolov down in the boat beside her (cinematic epoch +2; Sokolov at (160.9, 155.0, -18.1), Sokolov_AroundSkiff 1). The next talk (focus-guided: from (162.0, 154.0) facing 138 degrees, 15 down) played the debrief with Sokolov (storyflags/madinventor_streets sokolov_with_meagan 1) and the prompt 'Go to the Dreadful Wale' / 'Stay at Lower Aventa District'. A sent the host's mission end (D2ME sent 1); the partner applied it, and both worlds loaded campaign/void/void_02/void_02_p through the both-ready hold and stood in gameplay: The Clockwork Mansion completes natively in both worlds."
   ],
   "next": [
-    "Take 1304o: the whole mission end to end."
+    "Take 1304q: the whole mission end to end in lab product mode (route mi-full-v1304q), then two accounts."
   ]
 }
