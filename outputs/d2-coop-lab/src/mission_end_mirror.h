@@ -347,16 +347,101 @@ void serviceGameflowMirror(std::uint64_t tick){
         if(!found)++g.notFound;}
     g.result=changed?"applied":"equal";
 }
+// 1214bh: script LevelTransitions (in-mission map changes, the Dreadful Wale
+// and Outsider hand-offs). The arkKisculeNodeLevelTransition run function
+// (0x1407a1340, confirmed static) switches logic to 15 (call returning at
+// 0x7a147d) and stores its map name and player start in the MapTransition
+// state (manager+0x90; idStr at +0x48 and +0x70) through 0x1404f1d40. A world
+// entering 15 that way sends both strings (D2LT); a partner in gameplay on the
+// same map performs the same two native calls, so its world changes map with
+// its own character state. Both expect the transition, so the both-ready hold
+// applies at the next map's load end.
+#pragma pack(push,1)
+struct LevelTransitionPacket {
+    std::uint32_t magic=0x544C3244; // "D2LT"
+    std::uint16_t version=1,size=sizeof(LevelTransitionPacket);
+    std::uint32_t role=0,reserved=0;
+    std::uint64_t session=0,fromMapId=0,sequence=0;
+    char map[160]{};char start[96]{};
+};
+#pragma pack(pop)
+static_assert(sizeof(LevelTransitionPacket)==296);
+const unsigned char mapTransitionTargetPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xd9,0x48,0x83,0xc1,0x48,0x49,0x8b,0xf8};
+const unsigned char idStrCtorPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74,0x24,0x10,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xda,0x48,0x8b};
+const unsigned char idStrDtorPrefix[16]={0x40,0x53,0x48,0x83,0xec,0x30,0x8b,0x51,0x0c,0x48,0x8b,0xd9,0x8b,0xc2,0xc1,0xe8};
+struct LevelTransitionMirror {
+    std::uint64_t sequence=0,peerSequence=0,observed=0,sent=0,received=0,applied=0,refused=0,otherMap=0,observedAt=0,pendingAt=0;
+    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0;LevelTransitionPacket incoming{};
+    char lastMap[160]{};char lastStart[96]{};const char* result="idle";
+};
+LevelTransitionMirror levelMirror{};
+// Called from the logic-switch trace when a script LevelTransition enters 15.
+void observeLevelTransition(const NativeSwitchEvent& e){
+    if(e.thread!=engineThread.load()||!(missionEndMirrorEnabled||productMode)||levelMirror.observedPending)return;
+    levelMirror.observedPending=true;levelMirror.observedAt=e.tick;levelMirror.observedFromMap=outgoing.mapId;++levelMirror.observed;
+}
+bool readNativeIdStr(std::uintptr_t at,char* out,std::size_t size){
+    std::uintptr_t text=0;std::uint32_t lenBits=0;if(!memoryRead(at,&text,8)||!text||!memoryRead(at+8,&lenBits,4))return false;
+    const std::uint32_t len=lenBits&0x1fffffff;if(len>=size)return false;
+    if(len&&!memoryRead(text,out,len))return false;out[len]=0;return true;
+}
+void receiveLevelTransition(const LevelTransitionPacket& p){
+    auto& m=levelMirror;++m.received;
+    if(!(missionEndMirrorEnabled||productMode)||p.magic!=0x544C3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||
+       p.session!=remote.session||p.sequence<=m.peerSequence||!p.fromMapId||!std::memchr(p.map,0,sizeof(p.map))||!std::memchr(p.start,0,sizeof(p.start))||
+       std::strncmp(p.map,"campaign/",9)||std::strpbrk(p.map,";\"")||std::strpbrk(p.start,";\"")){++m.refused;m.result="refused";return;}
+    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=GetTickCount64();m.result="received";
+}
+void serviceLevelTransitionMirror(std::uint64_t tick){
+    if(GetCurrentThreadId()!=engineThread.load())return;
+    auto& m=levelMirror;if(!(missionEndMirrorEnabled||productMode)){m.observedPending=false;m.pending=false;return;}
+    // Sender: read the target the native run function stored, then send it.
+    if(m.observedPending){
+        if(tick-m.observedAt>5000){m.observedPending=false;m.result="target_unread";}
+        else if(observedGame){
+            std::uintptr_t state=0;char map[160]{},start[96]{};
+            if(memoryRead(observedGame+0x1f6ec8+0x90,&state,8)&&state&&readNativeIdStr(state+0x48,map,sizeof(map))&&readNativeIdStr(state+0x70,start,sizeof(start))&&!std::strncmp(map,"campaign/",9)){
+                m.observedPending=false;std::snprintf(m.lastMap,sizeof(m.lastMap),"%s",map);std::snprintf(m.lastStart,sizeof(m.lastStart),"%s",start);
+                LevelTransitionPacket p{};p.role=localRole;p.session=outgoing.session;p.fromMapId=m.observedFromMap;p.sequence=++m.sequence;
+                std::snprintf(p.map,sizeof(p.map),"%s",map);std::snprintf(p.start,sizeof(p.start),"%s",start);
+                if(sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&
+                   coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++m.sent;m.result="sent";expectMissionTransition(tick);}
+            }
+        }
+    }
+    if(!m.pending)return;
+    if(tick-m.pendingAt>60000){m.pending=false;m.result="expired";return;}
+    const unsigned logic=outgoing.gameLogicState;
+    if(logic==15){m.pending=false;m.result="local_already_transitioning";return;}
+    if(m.incoming.fromMapId!=outgoing.mapId){++m.otherMap;m.pending=false;m.result="other_map";return;}
+    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";return;}
+    if(std::memcmp(gameImage+0x4f1d40,mapTransitionTargetPrefix,sizeof(mapTransitionTargetPrefix))||std::memcmp(gameImage+0x13f9d0,idStrCtorPrefix,sizeof(idStrCtorPrefix))||
+       std::memcmp(gameImage+0x13fd10,idStrDtorPrefix,sizeof(idStrDtorPrefix))||!realLogicSwitch){m.pending=false;m.result="code_mismatch";return;}
+    alignas(16) unsigned char mapStr[64]{},startStr[64]{};
+    using IdStrCtor=void*(*)(void*,const char*);using IdStrDtor=void(*)(void*);using SetTarget=void(*)(void*,void*,void*);
+    reinterpret_cast<IdStrCtor>(gameImage+0x13f9d0)(mapStr,m.incoming.map);reinterpret_cast<IdStrCtor>(gameImage+0x13f9d0)(startStr,m.incoming.start);
+    const auto manager=observedGame+0x1f6ec8;std::uintptr_t state=0;
+    if(memoryRead(manager+0x90,&state,8)&&state){
+        // Same order as the native run function: switch to MapTransition, then set its target.
+        realLogicSwitch(reinterpret_cast<void*>(manager),15);
+        reinterpret_cast<SetTarget>(gameImage+0x4f1d40)(reinterpret_cast<void*>(state),mapStr,startStr);
+        ++m.applied;m.result="applied";expectMissionTransition(tick);
+        std::snprintf(m.lastMap,sizeof(m.lastMap),"%s",m.incoming.map);std::snprintf(m.lastStart,sizeof(m.lastStart),"%s",m.incoming.start);
+    }else m.result="state_unreadable";
+    reinterpret_cast<IdStrDtor>(gameImage+0x13fd10)(mapStr);reinterpret_cast<IdStrDtor>(gameImage+0x13fd10)(startStr);
+    m.pending=false;
+}
 void writeMissionEndMirror(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.missionend.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     unsigned states[7]{};const bool statesOk=GetCurrentThreadId()==engineThread.load()&&countGameflowStates(states);
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionEnd;
     if(statesOk)fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);else fprintf(f,"{\"gameflowStates\":null,");
-    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu}}\n",
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused,
-        (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission);
+        (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,
+        levelMirror.result,levelMirror.observed,levelMirror.sent,levelMirror.received,levelMirror.applied,levelMirror.refused,levelMirror.otherMap,levelMirror.lastMap,levelMirror.lastStart);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

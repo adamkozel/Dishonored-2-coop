@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-16T01:58:13.268205+02:00",
+  "at": "2026-10-16T02:41:25.314170+02:00",
   "candidate": "candidate-npc-combat-v1214bf",
   "takes": [
     {
@@ -55,6 +55,62 @@
       "candidate": "candidate-npc-combat-v1214bg",
       "passed": true,
       "failure": null
+    },
+    {
+      "take": "route-dunwall-v1300f",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_1_lock not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300g",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300h",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300i",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Use of ld_ring_locker_01_2_open not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300j",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "Loot of mortimer_ramsey not registered",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300l",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-dunwall-v1300m",
+      "candidate": "candidate-npc-combat-v1214bg",
+      "passed": false,
+      "failure": "host did not reach a fresh native menu/gameplay state.; host: Native query failed host --health; client: Final gameplay/health/transport not restored",
+      "recovered": true
+    },
+    {
+      "take": "route-dunwall-v1300n",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -68,9 +124,14 @@
     "1300a: the bedroom trigger advanced only the host within the snapshot window; 1300b: both advanced (all host trigger events applied in the client world).",
     "1300c: the Mayhew triggers ran the Mayhew goodbye scene in both worlds; both reached the Dunwall fixture state [239,2,5,2].",
     "1300d: Ramsey (mortimer_ramsey NPC) was killed (health 50 -> 0) and his body searched (ring); the host gameflow advanced to [237,1,3,6,0,1,0], the client stayed at [239,2,5,2].",
-    "1214bg: gameflow follows the host (D2GF, native set-state for non-mission nodes). 1300e: both worlds share the id-set hash bb242f74 and match after every step, including Ramsey and the ring (client applied 13 node states)."
+    "1214bg: gameflow follows the host (D2GF, native set-state for non-mission nodes). 1300e: both worlds share the id-set hash bb242f74 and match after every step, including Ramsey and the ring (client applied 13 node states).",
+    "Vault (confirmed static): the ring \"lockers\" are signet buttons that check Bool_Player_HasRing (set by the ring pickup scene, Get_Sigil); the exit button is made usable by makeSignetButtonsUsable. The route uses bearing and pitch sweeps for these small targets (1300l: the vault opened in both worlds; the first exit use took the safe-room loadout).",
+    "Confirmed runtime (1300m): the exit button opens a leave prompt (logic 9) and a script LevelTransition enters logic 15 through 0x7a147d; its RestartFromMemoryCheckpoint (memory slot 62) was consumed by checkpoint sync and the host hung on black.",
+    "Confirmed static: the LevelTransition run function 0x1407a1340 switches logic to 15 and stores map name and player start in the MapTransition state (manager+0x90, idStr +0x48/+0x70) through 0x1404f1d40; Kiscule node run functions are called through the type info by 0x1407c0e30.",
+    "1214bh: checkpoint sync passes the continue through at logic 15; the level transition mirror (D2LT) makes the partner perform the same native calls. Take 1300n: host sent, client applied, both loaded dunwall_escape_streets_p, both-ready hold released, gameflow equal; lab restored from the streets.",
+    "Gap: the safe-room loadout (pistol, spyglass) is granted to the player who uses it; the partner picks up their own in play (Emily had only the sword after 1300n)."
   ],
   "next": [
-    "Vault lockers with the ring, safe room, the vault exit LevelTransition to the streets (with the loading-entry stack), streets, boat, mission end."
+    "Streets: balcony and reach-streets triggers, the boat (ld_trigger_around_meagan), Meagan debrief, mission end into the Outsider visit."
   ]
 }

@@ -126,6 +126,7 @@ void traceLogicSwitch(void* manager,int target) {
             checkpointObserveLoadingEntry(e);
         }
     }
+    if(target==15&&e.caller==0x7a147d)observeLevelTransition(e); // 1214bh: script LevelTransition
     if(e.thread==engineThread.load()&&e.caller==0x7879cd&&target==1) {
         restoreLoadingRoleAtBoundary(e);
         nativeSwitchContext(reinterpret_cast<std::uintptr_t>(manager),e);

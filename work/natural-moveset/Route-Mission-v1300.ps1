@@ -1,4 +1,4 @@
-param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bg',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300)
+param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bh',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad)
 # Campaign route take (chapter 97): both lab worlds load a mission start in lab
 # product mode with the mission end mirror, pass the native character choice
 # (host Corvo, client Emily), then the host runs a step list:
@@ -21,7 +21,7 @@ function I($r,[string]$b='',[int]$ms=100){$a=@{Role=$r;DurationMs=$ms};if($b){$a
 function Frame($r,$name){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
  & (Get-Command ffmpeg).Source -hide_banner -loglevel error -nostdin -f lavfi -i "gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra" -frames:v 1 -y "$out/$name-$r.png" 2>$null|Out-Null}
 function Snap($r){$s=S $r;$m=$null;try{$m=S $r '.missionend.json'}catch{}
- [ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$(if($m){$m.gameflowStates}else{$null});gfMirror=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.result});idHash=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.idHash});gfApplied=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.applied})}}
+ [ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$(if($m){$m.gameflowStates}else{$null});gfMirror=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.result});idHash=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.idHash});gfApplied=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.applied});lt=$(if($m-and$m.levelTransition){"$($m.levelTransition.result)/$($m.levelTransition.sent)/$($m.levelTransition.applied)"});hold=$(if($m-and$m.hold){"$($m.hold.result)/$($m.hold.lastWaitMs)"})}}
 # Drives both worlds through scenes, prompts, the character choice and loads
 # until both are in gameplay or the time runs out.
 function Settle($label,$sec){
@@ -46,7 +46,8 @@ try{
  Save "$out/identity.json" @{dll=$pin.dll;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos}
  $dirty=$true
  foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_product_auto on'}
- C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"
+ # -NoLoad starts from the current Dunwall fixture (story state after Mayhew) to iterate later steps faster.
+ if(!$NoLoad){C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"}
  if(!(Settle 'start' $LoadSeconds)){throw 'Both worlds did not reach mission gameplay'}
  C host 'coop_player_health_hold on';C client 'coop_player_health_hold on'
  Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
@@ -61,9 +62,17 @@ try{
    'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))}
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}))}
    'use'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing usable $($st.name)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
-    foreach($o in @(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
-     C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,$yaw);Start-Sleep -Milliseconds 900;$b=Snap host;I host X 250;Start-Sleep -Milliseconds 1500;$a=Snap host
-     if($a.logic-eq13){throw "Host died at $($st.name)"};if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+    $offs=if($st.offsets){$st.offsets}else{@(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))}
+    # Sweep pitch and bearing at each stand (small targets such as signet buttons).
+    $pitches=if($st.pitches){$st.pitches}else{@(0)};$yaws=if($st.yaws){$st.yaws}else{@(0)};$k=0
+    foreach($o in $offs){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
+     foreach($pt in $pitches){foreach($yo in $yaws){$k++
+      C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($yaw0+$yo));Start-Sleep -Milliseconds 700
+      if($pt){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $pt -Quick|Out-Null}catch{}}
+      $b=Snap host;if($k-le6){Frame host "$tag-try$k"};I host X $(if($st.hold){$st.hold}else{250});Start-Sleep -Milliseconds 1500;$a=Snap host
+      if($a.logic-eq13){throw "Host died at $($st.name)"};if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+      if($hit){break}}
+     if($hit){break}}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
    'attack'{$npc=Npc $st.name $st.near;$hd=[Convert]::ToInt64($npc.handle.Substring(2),16);$trace=[Collections.Generic.List[object]]::new();$max=if($st.max){$st.max}else{40};$dead=$false
@@ -73,12 +82,16 @@ try{
      if((Snap host).logic-eq13){throw 'Host died in the fight'}}
     Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
    'loot'{$npc=Npc $st.name $st.near;$hit=$false
-    foreach($d in 1.0,0.7,1.3){Face $npc.position $d 1.2;Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch 45 -Quick|Out-Null
-     $b=Snap host;I host X 600;Start-Sleep -Milliseconds 1800;$a=Snap host;if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+    foreach($dp in @(@(1.0,45),@(0.8,60),@(1.2,35),@(0.7,70),@(1.4,30))){$d=$dp[0];Face $npc.position $d 1.2;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
+     # Done only when a gameflow node completes (state 3 count rises), after any scene.
+     $b=Snap host;I host X 600;$w2=[Diagnostics.Stopwatch]::StartNew()
+     do{Start-Sleep -Milliseconds 600;$a=Snap host;if($a.logic-eq5){I host X 3000}
+      if($a.gameflow-and$b.gameflow-and$a.gameflow[3]-gt$b.gameflow[3]){$hit=$true}}while(!$hit-and$w2.ElapsedMilliseconds-lt9000)
+     if($hit){break}}
     if(!$hit){throw "Loot of $($st.name) not registered"}}}
   Start-Sleep -Milliseconds $(if($st.settle){$st.settle}else{3000})
   [void](Settle $tag 120);Start-Sleep 2
-  $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r $tag;try{Copy-Item "$root/work/lab-instances/$r/coop-status.json.triggers.json" "$out/$tag-triggers-$r.json"}catch{}}
+  $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r $tag;try{Copy-Item "$root/work/lab-instances/$r/coop-status.json.triggers.json" "$out/$tag-triggers-$r.json";Copy-Item "$root/work/lab-instances/$r/coop-status.json.loading.json" "$out/$tag-loading-$r.json"}catch{}}
   Save "$out/route.json" @($rows)}
  $notes.final=@{host=(Snap host);client=(Snap client)}
  $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
@@ -87,7 +100,10 @@ finally{
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
   if($dirty){
-   foreach($r in 'host','client'){try{I $r;C $r 'coop_player_health_hold off';C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off'}catch{}}
+   foreach($r in 'host','client'){try{I $r;C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off';C $r 'coop_gameflow_mirror off'}catch{}}
+   # Product mode armed checkpoint sync: a shared death would block the fixture restore.
+   foreach($r in 'host','client'){try{if((S $r).localGameLogicState-eq13){I $r A 400;Start-Sleep 5}}catch{}}
+   foreach($r in 'host','client'){try{C $r 'coop_checkpoint_sync off';C $r 'coop_usable_sync off';C $r 'coop_player_health_hold off'}catch{}}
    $w=[Diagnostics.Stopwatch]::StartNew()
    do{$ok=$true;foreach($r in 'host','client'){try{$s=S $r;if($s.localGameLogicState-notin 1,2,6,13-or$s.localPendingGameLogicState){$ok=$false;if($s.localGameLogicState-eq5){I $r X 3000}elseif($s.localGameLogicState-eq3){I $r Right 250;Start-Sleep -Milliseconds 300;I $r A 600}elseif($s.localGameLogicState-eq14){I $r A 600}else{I $r A 300}}}catch{$ok=$false}};if(!$ok){Start-Sleep -Milliseconds 1500}}while(!$ok-and$w.ElapsedMilliseconds-lt120000)
    foreach($r in 'host','client'){try{if((S $r).localGameLogicState-eq13){I $r A 400}}catch{}}

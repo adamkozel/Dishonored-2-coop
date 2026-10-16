@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-16T02:35:13.794813+02:00",
+  "dll": "6EBE063D5A2B3456C49B98ADCDD354128C3F02B80BC8CABBF564A51D42CC0C0E",
+  "probe": "14C6CA5227A405A87A2F919B0E4655C1D289C3123917A03E141B914303EA0003",
+  "previous": "candidate-npc-combat-v1214bg",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1266/corvo-choke-bank.bin",
+      "sha256": "08684FDC8E7A7F450885B5B68B929053CCCB64CCAFC61C9E816A3CE3A73303A6"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1266/emily-choke-bank.bin",
+      "sha256": "A4EDC6A26BB799AB86138AE03B3972F6A16E207911A38BCDC2E48933447F79DB"
+    }
+  ],
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "Experimental1214bh on 1214bg (#74 campaign): checkpoint sync also passes RestartFromMemoryCheckpoint through at logic 15 (a script LevelTransition continues that way; take route-dunwall-v1300m hung on black); the level transition mirror sends a world own LevelTransition target (MapTransition state +0x48/+0x70, entered via 0x7a147d) as D2LT and a partner in gameplay on the same map performs the same native calls (SwitchState 15, 0x1404f1d40) with idStrs built by the game own constructor; both expect the transition for the both-ready hold."
+}

@@ -1,0 +1,12 @@
+[
+  {"do":"trigger","name":"ld_trigger_bedroom","settle":5000},
+  {"do":"trigger","name":"ld_trigger_nearmayhew","settle":4000},
+  {"do":"trigger","name":"ld_trigger_mayhew","settle":6000},
+  {"do":"wait","ms":8000,"settle":2000},
+  {"do":"attack","name":"mortimer_ramsey","near":[-44.1,-120.1],"max":40,"settle":4000},
+  {"do":"loot","name":"mortimer_ramsey","near":[-44.1,-120.1],"settle":6000},
+  {"do":"use","name":"ld_ring_locker_01_1_lock","z":68.0,"settle":8000},
+  {"do":"trigger","name":"ld_trigger_saferoom_enter","settle":4000},
+  {"do":"trigger","name":"ld_trigger_saferoom","settle":4000},
+  {"do":"use","name":"ld_ring_locker_01_3","z":65.0,"settle":15000}
+]
