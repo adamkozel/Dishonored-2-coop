@@ -1,0 +1,91 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "midnights_trigger_eotw_brief_meagan",
+    "settle": 20000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -5.8,
+      -31.6
+    ],
+    "optional": true,
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "die",
+    "role": "host",
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_addermirestation_inside_area",
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_kar_cable_car_01_1",
+    "offsets": [
+      [
+        2.0,
+        0.7
+      ]
+    ],
+    "z": 25.95,
+    "pitches": [
+      27,
+      22,
+      32
+    ],
+    "hold": 250,
+    "settle": 8000,
+    "yaws": [
+      -19.29,
+      -12,
+      -26
+    ]
+  },
+  {
+    "do": "wait",
+    "ms": 60000,
+    "settle": 5000
+  }
+]

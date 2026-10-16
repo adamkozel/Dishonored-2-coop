@@ -66,10 +66,16 @@ bool missionCheckpointDigest(unsigned char result[32]) {
     if(m.seenSlot>=0&&(slot!=m.seenSlot||stamp!=m.seenWrite))++m.generation;
     m.seenSlot=slot;m.seenWrite=stamp;m.slot=slot;
     std::snprintf(m.details,sizeof(m.details),"%s|%s|%s",map,chapter,mission);
+    // 1214bm: the identity is the map and chapter. The autosave's mission field
+    // depends on whether the mission-start autosave landed before or after the
+    // map's mission activation, so after a level transition the two worlds
+    // differ (take route-eotw-boatdeath-v1302k: -254924741 / -464858806) and
+    // the peers rejected each other's hello. Details keep all three fields.
+    char identity[sizeof(m.details)]{};std::snprintf(identity,sizeof(identity),"%s|%s",map,chapter);
     BCRYPT_ALG_HANDLE algorithm=nullptr;BCRYPT_HASH_HANDLE hash=nullptr;bool ok=false;
     if(BCryptOpenAlgorithmProvider(&algorithm,BCRYPT_SHA256_ALGORITHM,nullptr,0)>=0) {
         if(BCryptCreateHash(algorithm,&hash,nullptr,0,nullptr,0,0)>=0) {
-            ok=BCryptHashData(hash,reinterpret_cast<PUCHAR>(m.details),static_cast<ULONG>(std::strlen(m.details)),0)>=0&&BCryptFinishHash(hash,result,32,0)>=0;
+            ok=BCryptHashData(hash,reinterpret_cast<PUCHAR>(identity),static_cast<ULONG>(std::strlen(identity)),0)>=0&&BCryptFinishHash(hash,result,32,0)>=0;
             BCryptDestroyHash(hash);
         }
         BCryptCloseAlgorithmProvider(algorithm,0);

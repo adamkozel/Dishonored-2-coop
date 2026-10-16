@@ -86,12 +86,13 @@ bool checkpointPairReady(std::uint64_t tick) {
     return checkpointPeerFresh(tick)&&checkpointWorldReady(outgoing)&&checkpointWorldReady(remote)&&
         guardLink.phase==GuardPhase::Idle&&!aiDecisionHold.expires&&!cinematicHold.id&&!loadingProbe.held&&!loadingProbe.armed;
 }
+std::uint64_t checkpointFailedAt=0,checkpointRecoveries=0;
 void checkpointFail(const char* reason,bool notify=true) {
     auto& s=checkpointSync;if(s.phase==CheckpointPhase::Failed)return;
     if(doorSession.enabled)stopDoorSession("checkpoint_failed");
     if(coinSync.enabled)stopCoinSync("checkpoint_failed");
     if(notify&&s.key.transaction)checkpointSend(CheckpointMessage::Abort);
-    s.phase=CheckpointPhase::Failed;s.queueLoad=false;s.avatarPending=false;if(!s.expectBoundary)s.permitLoad=false;s.result=reason;++s.aborted;
+    s.phase=CheckpointPhase::Failed;s.queueLoad=false;s.avatarPending=false;if(!s.expectBoundary)s.permitLoad=false;s.result=reason;++s.aborted;checkpointFailedAt=GetTickCount64();
     consoleOutput("COOP: checkpoint failed transaction=%llu reason=%s\n",s.key.transaction,reason);
 }
 void checkpointEnable(bool on) {
@@ -135,7 +136,9 @@ void checkpointEnable(bool on) {
 }
 void checkpointStart(std::uint64_t tick) {
     auto& s=checkpointSync;s.key=checkpointScope(true);s.key.transaction=++checkpointTransaction;
-    s.phase=CheckpointPhase::Preparing;s.deadline=tick+45000;s.result="preparing";s.avatarReady=false;
+    // 1214bn: an attempt the peer refuses ends in 8 s (was 45 s with both on
+    // GameOver, take route-eotw-boatdeath-v1302l); loading keeps 45 s.
+    s.phase=CheckpointPhase::Preparing;s.deadline=tick+8000;s.result="preparing";s.avatarReady=false;
     s.heldAt=0;s.releasedAt=0;s.readyAt=0;s.completedAt=0;s.hostReady=0;s.clientReady=0;
     s.readySent=false;s.completeSent=false;s.peerComplete=false;s.samples=0;s.maxDistance=0;
     if(!checkpointSend(CheckpointMessage::Prepare))checkpointFail("prepare_send_failed");
@@ -146,7 +149,7 @@ void checkpointRequest(std::uint64_t tick) {
     if(s.deathActive&&(!s.deathReady||!s.peerDeathReady)){s.deathRetry=true;s.result="waiting_for_both_death_screens";return;}
     if(!checkpointPairReady(tick)||!checkpointFixtureMatches()){++s.rejected;s.result="request_refused";return;}
     if(!localRole){checkpointStart(tick);return;}
-    s.key=checkpointScope(true);s.phase=CheckpointPhase::Requested;s.deadline=tick+45000;s.result="requesting";
+    s.key=checkpointScope(true);s.phase=CheckpointPhase::Requested;s.deadline=tick+8000;s.result="requesting";
     if(!checkpointSend(CheckpointMessage::Request))checkpointFail("request_send_failed");
 }
 std::uint64_t checkpointMissionContinues=0;
@@ -256,8 +259,8 @@ void checkpointReceive(const CheckpointPacket& p,std::uint64_t tick) {
         if(!checkpointSameAttempt(p,s.key)){++s.rejected;return;}
         if(p.kind==CheckpointMessage::Accept) {
             if(!checkpointSend(CheckpointMessage::Begin)){checkpointFail("begin_send_failed");return;}
-            s.queueLoad=true;s.phase=CheckpointPhase::Loading;s.result="loading";
-        }else if(p.kind==CheckpointMessage::Begin){s.queueLoad=true;s.phase=CheckpointPhase::Loading;s.result="loading";}
+            s.queueLoad=true;s.phase=CheckpointPhase::Loading;s.result="loading";s.deadline=tick+45000;
+        }else if(p.kind==CheckpointMessage::Begin){s.queueLoad=true;s.phase=CheckpointPhase::Loading;s.result="loading";s.deadline=tick+45000;}
         else if(p.kind==CheckpointMessage::Ready) {
             auto& token=localRole?s.hostReady:s.clientReady;const auto incoming=localRole?p.hostReady:p.clientReady;
             if(token&&token!=incoming){++s.rejected;return;}token=incoming;
@@ -325,6 +328,7 @@ void checkpointService(std::uint64_t tick) {
     }
 }
 bool autosaveProbeRequested=false;std::uint64_t autosaveProbeCalls=0,autosaveProbeRefused=0;
+std::uint64_t checkpointRemaps=0;
 void checkpointEngineService(void* system) {
     serviceAutosavePair(GetTickCount64(),checkpointSync.enabled&&checkpointMission.mission);
     if(autosaveProbeRequested) {
@@ -335,6 +339,24 @@ void checkpointEngineService(void* system) {
         else ++autosaveProbeRefused;
     }
     auto& s=checkpointSync;if(!s.enabled)return;
+    // 1214bl: the session's map scope is fixed when it is armed. After a level
+    // transition or a mission end the world is on another map, so no restart
+    // could pass checkpointWorldReady (takes route-eotw-v1302f, campaign-eotw-vm-
+    // v1302h and route-eotw-boatdeath-v1302i: each death after the boat was
+    // refused). An idle session re-arms on the new map; if arming is refused,
+    // the product maintenance re-issues coop_checkpoint_sync on.
+    if((s.phase==CheckpointPhase::Idle||s.phase==CheckpointPhase::Failed)&&!s.expectBoundary&&!s.held&&!s.queueLoad&&
+       outgoing.mapId&&outgoing.mapId!=checkpointMapId()&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState){
+        ++checkpointRemaps;checkpointEnable(false);checkpointEnable(true);
+        if(!s.enabled)return;
+    }
+    // 1214bn: a failed session on the same map re-arms after 3 s, so the next
+    // restart press (or a later death) is shared again instead of refused.
+    if(s.phase==CheckpointPhase::Failed&&!s.expectBoundary&&!s.held&&!s.queueLoad&&GetTickCount64()-checkpointFailedAt>=3000&&
+       (outgoing.gameLogicState==1||outgoing.gameLogicState==2||outgoing.gameLogicState==13)&&!outgoing.pendingGameLogicState){
+        ++checkpointRecoveries;checkpointEnable(false);checkpointEnable(true);
+        if(!s.enabled)return;
+    }
     if(s.avatarPending&&s.phase==CheckpointPhase::Idle) {
         const auto tick=GetTickCount64();
         // Recreate only a presentation that was explicitly following when
@@ -434,8 +456,8 @@ void writeCheckpointSync() {
     for(unsigned i=0;i<32;++i)std::snprintf(digest+i*2,3,"%02x",s.digest[i]);
     if(std::snprintf(path,sizeof(path),"%s.reset.json",statusPath)>=sizeof(path)||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=sizeof(temp))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
-    fprintf(f,"{\"enabled\":%s,\"phase\":%u,\"result\":\"%s\",\"arm\":%llu,\"peerArm\":%llu,\"transaction\":%llu,\"digest\":\"%s\",\"held\":%s,\"expectBoundary\":%s,\"loads\":%llu,\"completed\":%llu,\"requests\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"aborted\":%llu,\"heldAt\":%llu,\"releasedAt\":%llu,\"readyAt\":%llu,\"completedAt\":%llu,\"hostReady\":%llu,\"clientReady\":%llu,\"readyDelay\":%u,\"sent\":%llu,\"received\":%llu,\"samples\":%llu,\"maxDistance\":%.9g,\"game\":\"0x%llx\",\"player\":\"0x%llx\",\"position\":[%.9g,%.9g,%.9g],",
-        s.enabled?"true":"false",static_cast<unsigned>(s.phase),s.result,s.arm,s.peerArm,s.key.transaction,digest,s.held?"true":"false",s.expectBoundary?"true":"false",s.loads,s.completed,s.requests,s.duplicates,s.rejected,s.aborted,s.heldAt,s.releasedAt,s.readyAt,s.completedAt,s.hostReady,s.clientReady,s.readyDelay,s.sent,s.received,s.samples,s.maxDistance,s.game,s.player,s.position[0],s.position[1],s.position[2]);
+    fprintf(f,"{\"enabled\":%s,\"phase\":%u,\"result\":\"%s\",\"arm\":%llu,\"peerArm\":%llu,\"transaction\":%llu,\"digest\":\"%s\",\"held\":%s,\"expectBoundary\":%s,\"loads\":%llu,\"completed\":%llu,\"requests\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"aborted\":%llu,\"remaps\":%llu,\"recoveries\":%llu,\"heldAt\":%llu,\"releasedAt\":%llu,\"readyAt\":%llu,\"completedAt\":%llu,\"hostReady\":%llu,\"clientReady\":%llu,\"readyDelay\":%u,\"sent\":%llu,\"received\":%llu,\"samples\":%llu,\"maxDistance\":%.9g,\"game\":\"0x%llx\",\"player\":\"0x%llx\",\"position\":[%.9g,%.9g,%.9g],",
+        s.enabled?"true":"false",static_cast<unsigned>(s.phase),s.result,s.arm,s.peerArm,s.key.transaction,digest,s.held?"true":"false",s.expectBoundary?"true":"false",s.loads,s.completed,s.requests,s.duplicates,s.rejected,s.aborted,checkpointRemaps,checkpointRecoveries,s.heldAt,s.releasedAt,s.readyAt,s.completedAt,s.hostReady,s.clientReady,s.readyDelay,s.sent,s.received,s.samples,s.maxDistance,s.game,s.player,s.position[0],s.position[1],s.position[2]);
     fprintf(f,"\"loadingEntryAt\":%llu,\"oldGame\":\"0x%llx\",",s.loadingEntryAt,s.oldGame);
     {const auto& a=autosavePair;fprintf(f,"\"autosavePair\":{\"active\":%s,\"ready\":%s,\"saves\":%u,\"originated\":%u,\"mirrored\":%u,\"pending\":%s,\"peerSaves\":%u,\"peerOriginated\":%u,\"peerMirrored\":%u,\"peerPending\":%s,\"requests\":%llu,\"refused\":%llu,\"resets\":%llu,\"received\":%llu,\"rejected\":%llu,\"slot\":%d,\"result\":\"%s\",\"probeCalls\":%llu,\"probeRefused\":%llu},",
         a.active?"true":"false",autosavePairReady()?"true":"false",a.saves,a.originated,a.mirrored,a.pending?"true":"false",a.peerSaves,a.peerOriginated,a.peerMirrored,a.peerPending?"true":"false",a.requests,a.refused,a.resets,a.received,a.rejected,a.slot,a.result,autosaveProbeCalls,autosaveProbeRefused);}

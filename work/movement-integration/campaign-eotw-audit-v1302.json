@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T04:06:30.675625+02:00",
-  "candidate": "candidate-npc-combat-v1214bk",
+  "candidate": "candidate-npc-combat-v1214bn",
   "takes": [
     {
       "take": "route-eotw-v1302a",
@@ -51,6 +51,55 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302h",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302i",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302j",
+      "candidate": "candidate-npc-combat-v1214bl",
+      "passed": false,
+      "failure": "Death failed on host (death_peer_unavailable)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302k",
+      "candidate": "candidate-npc-combat-v1214bl",
+      "passed": false,
+      "failure": "Death failed on host (death_peer_unavailable)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302l",
+      "candidate": "candidate-npc-combat-v1214bm",
+      "passed": false,
+      "failure": "Restart failed on client (session_peer_disconnected)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302m",
+      "candidate": "candidate-npc-combat-v1214bm",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302n",
+      "candidate": "candidate-npc-combat-v1214bn",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -68,11 +117,16 @@
     "1214bj: an action before the map id is known is counted at once and sent when the map id is; the route harnesses arm coop_kiscule_mirror before the mission load; route eotw-full-v1302e walks into ld_trigger_19 (the Outsider's offer) before the first Blink.",
     "Take route-eotw-v1302e (pass on 1214bj, route through the Outsider's offer): entering ld_trigger_19 ran the brief_outsider_powers scene in both worlds (the trigger mirror carries it); each accepted, power_yes ran Give Mark (5114): Emily's world applied the host's run from the mirror first and skipped its own handler later (suppressed 1), and each world's character-specific mana node reached the other. Visual: Corvo shows \"Tutorial: Blink\", Emily \"Tutorial: Far Reach\", both with the mana arc and the Mark, kept on the boat and at Addermire. Both reached institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 16 steps; restore passed. The Heart step still copied Corvo's Blink grant (5122) into Emily's world.",
     "1214bk: the Outsider's offer is each player's own choice and its scene runs in both worlds, so the Mark control and inventory items that are powers (declaration type 9, models/powers/) or the no_power refusal are recorded as personal and never mirrored; the item is read through the node's own variable accessor (0x140534540 with the m_inventoryItem name, as the Add handler does; item decl vtable 0x1b9ea48, name +8, type +0x60).",
-    "Take route-eotw-v1302f (fail on 1214bk): void, offer, Heart, boat and skiff kept both worlds equal (Emily's world now applied 5 actions and recorded none of Corvo's power grants as mirrored). In Karnaca the host fell, both worlds reached the native GameOver in 6.1 s, but the die step pressed A on GameOver every 2.5 s and neither world restarted within 180 s; the checkpoint session state was not traced. Restore passed.",
+    "Take route-eotw-v1302f (fail on 1214bk): void, offer, Heart, boat and skiff kept both worlds equal (Emily's world applied 5 actions). In Karnaca the host fell, both worlds reached the native GameOver in 6.1 s, but the die step pressed A on GameOver every 2.5 s and neither world restarted within 180 s; the checkpoint session state was not traced. Restore passed.",
     "The die step now follows Test-MissionCheckpoint-v1151: wait for both death screens ready (reset sidecar deathReady/peerDeathReady), one A on the fallen player then one on the partner, then A only on load prompts, tracing phase/result/slot/loads/completed.",
-    "Take route-eotw-death-v1302g (pass, from the eotw mapinfo, lab product mode): the host fell; both reached both_death_screens_ready at 6.2 s (checkpoint session armed on slot 62); after the presses both loaded (phase 4) and completed, back in gameplay about 7 s later with new world epochs; then the station trigger and the carriage took both worlds to institute_p_lowchaos with equal gameflow. Restore passed."
+    "Take route-eotw-death-v1302g (pass, from the eotw mapinfo, lab product mode): the host fell; both reached both_death_screens_ready at 6.2 s (checkpoint session armed on slot 62); after the presses both loaded (phase 4) and completed, back in gameplay about 7 s later with new world epochs; then the station trigger and the carriage took both worlds to institute_p_lowchaos with equal gameflow. Restore passed.",
+    "Take campaign-eotw-vm-v1302h (two accounts, 1214bk): the void with the offer (Corvo Blink, Emily Far Reach on the VM, both with the Mark), the Heart, the boat and Karnaca kept both worlds equal; the host's fall reached both death screens in 6.6 s, but the GameOver Restart press produced no shared restart in 180 s. Restore passed.",
+    "Confirmed runtime (1302i, boat start): the press reached checkpoint sync in both worlds (requests 0 -> 1) and was rejected (rejected 10 -> 11). Confirmed static: checkpointMission.mapId is fixed when the session is armed and checkpointWorldReady requires the current map to equal it, so after any level transition every restart is refused; the maintenance re-issue of coop_checkpoint_sync on is itself rejected while the session is enabled.",
+    "1214bl re-arms an idle session when the world reaches another map. Takes 1302j/1302k: the sessions re-armed once but never paired (peerArm 0, hellos rejected): the autosave identity's mission field differed between the worlds after the boat transition (host -254924741, client -464858806; map and chapter equal), so the digests differed.",
+    "1214bm hashes only map and chapter. Take 1302l: paired again, the host's restart reached Preparing, but the client refused the Prepare and its own request once (rejected +2) and failed when hellos stopped; the pair stayed on GameOver. Take 1302m (same build): the shared restart completed in 6.7 s.",
+    "1214bn: a refused attempt ends in 8 s (Preparing/Requested), loading keeps 45 s from Accept/Begin, and a failed idle session on the same map re-arms after 3 s; the die step presses Restart again every 12 s while both stay on GameOver. Take route-eotw-boatdeath-v1302n (pass): the shared restart after the boat completed in 7.0 s, then the station and the carriage took both worlds to institute_p_lowchaos with equal gameflow."
   ],
   "next": [
-    "Two-account take of the full route with the death in Karnaca (Route-MissionVM-v1301, eotw-full-v1302f)."
+    "Two-account take of the full route with the death in Karnaca on 1214bn."
   ]
 }
