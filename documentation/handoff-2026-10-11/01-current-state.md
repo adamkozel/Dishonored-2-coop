@@ -5,8 +5,8 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-16. Live candidate-npc-combat-v1214bu ([identity](../../work/movement-integration/candidate-npc-combat-v1214bu/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
-- **Campaign take 4, The Good Doctor (#76, 1214bp–1214bu, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json)), in progress:** the route runs from the cable car through Hypatia, Vasco, the Crown Killer, the watchtower and Meagan, and the host's world ends the mission natively ([chapter 97](97-campaign-map-sequence.md)). On the way:
+Updated 2026-10-16. Live candidate-npc-combat-v1214bv ([identity](../../work/movement-integration/candidate-npc-combat-v1214bv/identity.json)), protocol 75, bank 71/374 (bank 1266). Latest:
+- **Campaign take 4, The Good Doctor (#76, 1214bp–1214bv, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json)), complete:** played from the cable car through Hypatia, Vasco, the Crown Killer, the watchtower and Meagan to the Dreadful Wale, in the lab (route-institute-v1303ap) and on two Steam accounts (campaign-institute-vm-v1303a) ([chapter 97](97-campaign-map-sequence.md)). On the way:
   - gameflow states are named from the game's own trees (FNV-1a of the lowercased name);
   - the mission end is sent from the transport pump, since this mission completes inside a movie (1214bq–1214bs);
   - a gameflow node that only the partner advanced is reset (1214bt, #87).

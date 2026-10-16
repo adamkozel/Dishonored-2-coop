@@ -296,6 +296,14 @@
       "passed": true,
       "failure": null,
       "recovered": false
+    },
+    {
+      "take": "campaign-institute-vm-v1303a",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "failure": null,
+      "twoAccounts": true,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -335,13 +343,16 @@
     "Take 1303an (1214bu): the orbit stand worked on the first two tries (cover, then carry; Task_IS_Turn_OFF_the_watchtower complete in both worlds), and the gameflow counts were equal in both worlds after the Vasco talk ([230,2,3,10,0,3,0]; before 1214bt the partner had one extra state 5), so #87's reset holds. The mission identity now reads campaign/institute/institute.mapinfo in both worlds. But the Meagan step's first press dropped the carried tank and its second, 6 degrees off, counted as the talk because Meagan's one-liner scene changed the cinematic epoch; the harness then reported a pass with both worlds still on the institute map. The Meagan step now counts only a press that leaves gameplay (expect logic), and routes end with an expect step that fails the take unless both worlds reach the next map.",
     "Take 1303ao: the host died in the clear step beside the watchtower (the guards fight back), and the restore again left health 70 instead of 56 (recovered by relaunch, recovery.json). The tower clear now runs with the lab health hold, and the harness itself falls back to the relaunch recovery when the final restore check fails, recording both checks in notes.restoreRecovery.",
     "Take 1303ap (1214bu, lab product mode): PASS. The whole route ran from the cable car arrival: office note, master key, recuperation door, Hypatia, Vasco, the transformation and the Crown Killer fight, the tower guards (health hold), the watchtower tank (orbit stand), and Meagan. The host's mission end was sent (result sent, identity campaign/institute/institute.mapinfo); the partner received and applied it; both worlds loaded boat_madinventor_p through the both-ready hold (the host waited 23.3 s); both ended in gameplay with equal gameflow counts [225,2,3,13,0,5,0] and Mission_MI_Boat active; the restore passed.",
-    "1214bv: in 1303ap the partner, after applying the mirrored end, observed its own Results switch, and after the next map's load kept retrying that send (scan_failed) within the 30 s window; a successful scan there could have named the new map's mission. An observation is now dropped when the world epoch changes."
+    "1214bv: in 1303ap the partner, after applying the mirrored end, observed its own Results switch, and after the next map's load kept retrying that send (scan_failed) within the 30 s window; a successful scan there could have named the new map's mission. An observation is now dropped when the world epoch changes.",
+    "Take campaign-institute-vm-v1303a (1214bv, two Steam accounts: host Corvo on this PC, client Emily in the lab VM, friends-only lobby, product mode): PASS. The whole route ran as in 1303ap; the host sent the mission end, the VM client received and applied it, both worlds loaded boat_madinventor_p through the both-ready hold (the host waited 24.2 s), gameflow was equal, and the restore passed. The client dropped its own stale Results observation after the load (staleDropped 1, nothing resent). The host video (fragmented MP4, 1025 s of presented frames over the take) is readable and was reviewed at six points: Addermire arrival with the objective update, the institute interior, the lab, the watchtower tank, and the Dreadful Wale cabin at the end."
   ],
   "next": [
-    "Two-account take campaign-institute-vm-v1303a on 1214bv (host Corvo on this PC, VM Emily) with the 1303ap route and a host video."
+    "The Clockwork Mansion (#77): boat_madinventor, madinv_streets, madinventor."
   ],
   "evidence": {
     "lab": "route-institute-v1303ap",
+    "twoAccounts": "campaign-institute-vm-v1303a",
     "route": "work/natural-moveset/routes/institute-full-v1303ap.json"
-  }
+  },
+  "status": "complete"
 }
