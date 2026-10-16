@@ -33,15 +33,59 @@
       "candidate": "candidate-npc-combat-v1214bv",
       "passed": false,
       "failure": "jindosh still alive after 80 attacks"
+    },
+    {
+      "take": "route-mi-v1304d",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Host died at script_door_exterior_500_1_1 (fell out of the world)"
+    },
+    {
+      "take": "route-mi-v1304d",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Host died at script_door_exterior_500_1_1 (fell out of the world)",
+      "recovered": "relaunch (recovery.json; health not re-checked)"
+    },
+    {
+      "take": "route-mi-v1304e",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "Talk to meagan|megan|foster not registered"
+    },
+    {
+      "take": "route-mi-v1304f",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held route cut at the wrong talk (the boat's); restored"
+    },
+    {
+      "take": "route-mi-v1304g",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held at the streets return; Meagan shows Talk but pressing does nothing; restored"
+    },
+    {
+      "take": "route-mi-v1304h",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "held": true,
+      "failure": "Held after the Jindosh kill; variables read; restored"
     }
   ],
   "findings": [
     "Take 1304a (lab product mode): on the Dreadful Wale the talk with Meagan activated Obj_Boat_MI_TalkHyp and Task_Boat_MI_Meagan; using the skiff ran the departure, and the script LevelTransition was mirrored (D2LT sent by the host, applied by the partner): both worlds loaded madinv_streets_p_lowchaos with Mission_MI, Obj_MI_Streets, Task_MI_Rewire and Task_MI_Station active.",
     "Take 1304b: the station trigger completed Task_MI_Station (Task_MI_Carriage active in both worlds); the mansion door's prompt and transition were mirrored: both worlds loaded madinventor_p.",
     "Confirmed static: the mission ends in the streets when the player talks to Meagan with script_kiscule_return_main/jindosh_eliminated set (her debrief, with or without Sokolov, then the leave prompt, the key removal and transition_to_void02); the mansion's exterior doors (script_door_exterior_500_1_1/_2_1) prompt and transition back to the streets at p_start_from_interior.",
-    "Take 1304c: the attack picked kirin_jindosh_noweapon (the electroshock chair's stand-in at the electroshock spawner, 41.0, 96.6), whose health stayed 1 through 80 strikes; the walking Jindosh is kirin_jindosh.def (20.9, 88.8 after the lab trigger). The route now names kirin_jindosh[.]def near (21, 89)."
+    "Take 1304c: the attack picked kirin_jindosh_noweapon (the electroshock chair's stand-in at the electroshock spawner, 41.0, 96.6), whose health stayed 1 through 80 strikes; the walking Jindosh is kirin_jindosh.def (20.9, 88.8 after the lab trigger). The route now names kirin_jindosh[.]def near (21, 89).",
+    "Take 1304d: three focused strikes killed the walking Jindosh (kirin_jindosh.def, health 50 to 0) with the health hold on. The exterior door's default stands (0.9 m around the door entity) were outside the mansion's playable geometry (frames show the dunes beyond the map), and the host fell out of the world (z -587). Confirmed static: p_start_2 (45.36, -38.93), facing west, is the arrival just inside the double door at x 47.16, so the route now stands 1.4 m inside between the two leaves.",
+    "Take 1304e: from inside the double door the exterior door's prompt and transition were mirrored: both worlds returned to madinv_streets_p_lowchaos at p_start_from_interior. Meagan (meagan_foster.def) waits by the skiff at (160.4, 155.4, -18.6) and shows 'Meagan Foster - Talk', but the talk changed nothing (1304e, 1304g, 1304h).",
+    "New read-only tool tools/diag/d2_kiscule_vars.py prints Kiscule graph variables of an entity's script instance or of the story flag decls (worldspawn instance +0x88 table). Confirmed static: a bool variable keeps its default at +0x18 and its value at +0x19 (0x1408f7f10 copies the default on init). Confirmed runtime (1304h): after the kill, script_jindosh_kiscule jindosh_dead = 1 and storyflags/madinventor jindosh_is_alive = 0; after the return through the exterior door, script_kiscule_return_main jindosh_eliminated = 1.",
+    "Confirmed static (d2_kiscule_graph.py now names each connection's target input): Meagan's talk override (meagan_talk_override sets it, meagan_talk_normal clears it) leads to the leave prompt only when storyflags/madinventor_streets sokolov_with_meagan is set; that flag is set by the debrief_end_withsokolov scene, which plays only when Sokolov is carried or beside the skiff. With Jindosh eliminated and no Sokolov, the override talk does nothing, which matches 1304e to 1304h. The mansion sets storyflags/madinventor sokolov_carried when Sokolov's body is carried (a BodyNotification on script_spawner_sokolov's NPC). The route therefore has to carry Sokolov out through the exterior door to Meagan."
   ],
   "next": [
-    "Take 1304d: as 1304c with the walking Jindosh."
+    "Held take 1304i: Jindosh killed, the assessment chamber, Sokolov's NPC near (-17, 44.6, -22.1): find how he is freed and carried."
   ]
 }

@@ -215,6 +215,7 @@ finally{
   $final=@($errors|Where-Object {$_-like'*Final gameplay*'})
   if($final.Count){$again=[Collections.Generic.List[string]]::new()
    try{& "$root/work/movement-integration/Deploy-SourceClock.ps1"|Out-Null
+    foreach($r in 'host','client'){$pids[$r]=(Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json).pid} # the relaunch starts new processes
     foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw "logic $($s.localGameLogicState), health $($hp.current), fresh $($s.remoteFresh)"}}catch{$again.Add("${r}: $($_.Exception.Message)")}}}catch{$again.Add("relaunch: $($_.Exception.Message)")}
    $notes.restoreRecovery=[ordered]@{before=@($final);after=@($again);method='Deploy-SourceClock (relaunch of both roles, Dunwall fixture)'}
    if(!$again.Count){foreach($x in $final){[void]$errors.Remove($x)}}}
