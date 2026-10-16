@@ -81,7 +81,7 @@ bool countGameflowStates(unsigned counts[7]){
 }
 bool missionEndMirrorEnabled=false;
 struct MissionEndMirror {
-    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0,identityAt=0,attemptAt=0,unnamed=0,observedEpoch=0,staleDropped=0,receivedAt=0;
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0,identityAt=0,attemptAt=0,unnamed=0,observedEpoch=0,staleDropped=0,receivedAt=0,serviceAt=0;
     bool observedStamped=false;
     bool pending=false;unsigned lastLogic=0,missions=0;int appliedState=-1;MissionEndPacket incoming{};const char* result="idle";
 };
@@ -232,7 +232,10 @@ void serviceMissionEndMirror(std::uint64_t tick){
     const unsigned logic=outgoing.gameLogicState;
     serviceMissionEndSender(tick);
     {const auto& h=transitionHold;if(!h.held&&h.releasedAt&&*h.localMap&&tick-h.releasedAt<30000&&tick-mapReadySentAt>=1000)sendMapReady(tick);}
-    if(!m.pending)return;
+    if(!m.pending){m.serviceAt=0;return;}
+    // 1214bx: time without a service call (the pause menu) does not count.
+    if(m.serviceAt&&tick-m.serviceAt>1000)m.pendingAt+=tick-m.serviceAt;
+    m.serviceAt=tick;
     if(tick-m.pendingAt>120000){m.pending=false;m.result="expired";return;}
     if(m.appliedEpoch==outgoing.worldEpoch){m.pending=false;m.result="already_applied";return;}
     if(logic==11||logic==15){m.pending=false;m.result="local_already_ending";return;}
@@ -449,7 +452,7 @@ const unsigned char idStrCtorPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74
 const unsigned char idStrDtorPrefix[16]={0x40,0x53,0x48,0x83,0xec,0x30,0x8b,0x51,0x0c,0x48,0x8b,0xd9,0x8b,0xc2,0xc1,0xe8};
 struct LevelTransitionMirror {
     std::uint64_t sequence=0,peerSequence=0,observed=0,sent=0,received=0,applied=0,refused=0,otherMap=0,observedAt=0,pendingAt=0;
-    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0,receivedAt=0;LevelTransitionPacket incoming{};
+    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0,receivedAt=0,serviceAt=0;LevelTransitionPacket incoming{};
     char lastMap[160]{};char lastStart[96]{};const char* result="idle";
 };
 LevelTransitionMirror levelMirror{};
@@ -487,7 +490,10 @@ void serviceLevelTransitionMirror(std::uint64_t tick){
             }
         }
     }
-    if(!m.pending)return;
+    if(!m.pending){m.serviceAt=0;return;}
+    // 1214bx: the pause menu stops these services, so time without a service call does not count.
+    if(m.serviceAt&&tick-m.serviceAt>1000)m.pendingAt+=tick-m.serviceAt;
+    m.serviceAt=tick;
     if(tick-m.pendingAt>60000){m.pending=false;m.result="expired";return;}
     const unsigned logic=outgoing.gameLogicState;
     if(logic==15){m.pending=false;m.result="local_already_transitioning";return;}

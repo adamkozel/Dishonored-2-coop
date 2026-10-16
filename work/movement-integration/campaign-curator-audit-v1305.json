@@ -2,7 +2,7 @@
   "audit": "campaign-curator-v1305",
   "card": 78,
   "mission": "The Royal Conservatory",
-  "candidate": "candidate-npc-combat-v1214bw",
+  "candidate": "candidate-npc-combat-v1214bx",
   "maps": [
     "campaign/void/void_02/void_02_p",
     "campaign/boat/curator/boat_curator_p",
@@ -47,6 +47,13 @@
       "passed": false,
       "twoAccounts": true,
       "failure": "breanna_ashworth still alive after 80 attacks; before that the VM client stayed on the Dreadful Wale (paused) when the host left"
+    },
+    {
+      "take": "campaign-curator-vm-v1305b",
+      "candidate": "candidate-npc-combat-v1214bw",
+      "passed": false,
+      "twoAccounts": true,
+      "failure": "Expected both worlds on curator/curator_p: the VM client stayed paused on boat_curator_p and its transition expired again"
     }
   ],
   "findings": [
@@ -58,10 +65,11 @@
     "Held take 1305e: the use step's focus log stood at (-5.307, 52.234), the note's x plus 0.49 but its y unchanged. Harness bug: a one-stand offsets list ([[x,y]]) assigned through PowerShell's `$offs = if (...) {...}` is unrolled to the bare pair, so each number became a stand with y 0. Earlier single-offset steps lost their y offsets too and passed by their focus or aim sweeps. The use and carry steps now keep a one-stand list a list (verified with a test script).",
     "Take 1305f (lab product mode): PASS. One continuous run from the Void: the triggers and the exit portal, Meagan's briefing chair and the skiff, the conservatory entrance, Ashworth's intro and the kill, her office note and the audiograph, and the escape talk with Meagan; both worlds loaded boat_dust_p with equal gameflow counts [221,0,3,17,0,7,0], and the restore passed.",
     "Take campaign-curator-vm-v1305a (two accounts): when the host took the skiff, the VM client sat in the pause menu on boat_curator_p (screenshot: PAUSE over the Dreadful Wale; a game window that loses focus pauses itself) and its level transition mirror expired after 60 s (received 1, applied 0), so the host went to the Conservatory alone. The route's expect step passed wrongly because 'curator_p' also matches 'boat_curator_p'. The take then failed at Ashworth, who fought back (health 70 to 60 in 80 presses).",
-    "1214bw: a received level transition or mission end stays pending while the partner is outside gameplay on the source map (the pause menu, a scene) and applies when it resumes; the 60 s and 120 s caps count gameplay only, within 30 min of receiving. A real player who pauses as the host leaves now follows on resuming. The route harness's settle presses B on the pause menu, expect regexes now name the map's directory, and the Ashworth attack allows 200 presses."
+    "1214bw: a received level transition or mission end stays pending while the partner is outside gameplay on the source map (the pause menu, a scene) and applies when it resumes; the 60 s and 120 s caps count gameplay only, within 30 min of receiving. A real player who pauses as the host leaves now follows on resuming. The route harness's settle presses B on the pause menu, expect regexes now name the map's directory, and the Ashworth attack allows 200 presses.",
+    "Take campaign-curator-vm-v1305b (1214bw): the VM client paused at the same point (the host's skiff departure) and its level transition still expired (received 2, applied 1). Hypothesis confirmed by the code path: the pause menu stops the engine services, so 1214bw's refresh never ran while paused, and the first service after resuming saw more than 60 s. 1214bx shifts the timer by the time without a service call. The route's expect step also presses B for a world in the pause menu while waiting. Why the VM client loses focus at that moment is not known (hypothesis: a guest-side window or notification)."
   ],
   "next": [
-    "Two-account take campaign-curator-vm-v1305b on 1214bw (route cu-full-v1305g)."
+    "Two-account take campaign-curator-vm-v1305c on 1214bx."
   ],
   "evidence": {
     "lab": "route-cu-v1305f",
