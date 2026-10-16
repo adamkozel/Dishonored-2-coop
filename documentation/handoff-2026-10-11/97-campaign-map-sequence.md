@@ -86,7 +86,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The route harnesses record the active node names per step (`active`, from the local cache `work/natural-moveset/gameflow-names.local.json`). The cache is game-derived and not committed.
 - **Script gates:** `tools/diag/d2_kiscule_graph.py <base> <map> <entity>` prints one script entity's node graph, which shows the gate in front of an event.
 
-## The Good Doctor (takes 1303a–1303an)
+## The Good Doctor (takes 1303a–1303ap)
 
 - **Required path (confirmed static and runtime):**
   1. The office note (it opens a reading screen, which B closes), then the master key.
@@ -104,5 +104,6 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Mission end in a cinematic (1214bq–1214bs):** this mission completes inside its debrief cinematic. The native switch to Results (caller `0x4ea07c`) and back to the cinematic happen in one tick, on the cinematic's thread, so the mission end mirror never sampled logic 11 and the partner stayed behind (takes 1303ac/1303ae/1303af). The logic-switch trace now records that switch from any thread (1214br).
   - The debrief is a movie, and movie playback and the following load bypass command execution, where the engine-thread services run (take 1303ah: 49 s from Results to gameplay on the next map, and the observation expired unsent). Since 1214bs the sender runs from the transport pump, which the native screen callback keeps running during movies and loads.
   - The current mapinfo (`idCommonLocal+0x2b8`) is null during a mission started with the native `campaign` command, in both worlds (confirmed runtime, 1303am), so the sender could not name the mission. Since 1214bu it is derived from the loaded map's name when the declaration is absent (directory plus the name without `_p`, `_p_lowchaos` or `_p_highchaos`; an existing mapinfo for all 35 campaign maps, confirmed static). The same read names the host's mission for join-follow (`D2MF`).
+- **Lab pass (take route-institute-v1303ap, 1214bu):** one continuous run from the cable car to Meagan. The partner followed the host's mission end, both worlds loaded `boat_madinventor_p` through the both-ready hold, and gameflow counts were equal. 1214bv drops a Results observation after the world changes, so a partner that applied the mirrored end does not resend it on the next map.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

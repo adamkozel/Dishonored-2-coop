@@ -1,6 +1,6 @@
 {
   "at": "2026-10-16T07:36:29.852205+02:00",
-  "candidate": "candidate-npc-combat-v1214bu",
+  "candidate": "candidate-npc-combat-v1214bv",
   "takes": [
     {
       "take": "route-institute-v1303a",
@@ -282,6 +282,20 @@
       "passed": false,
       "failure": "Harness reported a pass, but both worlds stayed in institute_p_lowchaos: the Meagan step counted a one-liner scene as the talk",
       "recovered": false
+    },
+    {
+      "take": "route-institute-v1303ao",
+      "candidate": "candidate-npc-combat-v1214bu",
+      "passed": false,
+      "failure": "host died during the tower guard clear (GameOver); restore left health 70",
+      "recovered": true
+    },
+    {
+      "take": "route-institute-v1303ap",
+      "candidate": "candidate-npc-combat-v1214bu",
+      "passed": true,
+      "failure": null,
+      "recovered": false
     }
   ],
   "complete": false,
@@ -318,9 +332,16 @@
     "Held session 1303am: a stand 2.1 m out from the axis through the tank's live position, facing it, 20 degrees down, showed 'Whale Oil Tank Cover - Open'. The deck carries the player with the top. One press opened the cover ('Whale Oil Tank - Carry'), the next carried the tank: Task_IS_Turn_OFF_the_watchtower complete, Task_IS_Talk_to_Meagan active (named states). A press at Meagan first drops the carried tank; the next started the departure, and the host reached its result screen (logic 11, resultsSwitches 1) without sending the mission end (result armed).",
     "Root cause (confirmed runtime, 1303am): idCommonLocal+0x2b8 (the idDeclMapInfo that readCurrentMapinfo reads) is null in both worlds during a mission started with the native campaign command, even in plain gameplay, so the sender's mapinfo read failed silently and the observation was consumed. The same read names the host's mission for join-follow (D2MF). 1214bu derives the mapinfo from the loaded map name when the declaration is absent (the directory plus the name without _p, _p_lowchaos or _p_highchaos; this names an existing mapinfo for all 35 campaign maps, confirmed static), keeps the last identity for moments without a loaded map name, refreshes it every second in gameplay, and reports (mapinfo_unreadable, not_connected, send_failed) and retries failed sends for 30 s.",
     "The tank step now stands 2.1 m out from the watchtower axis through the tank's live position (orbit), with eight presses at 20 degrees (route institute-full-v1303an).",
-    "Take 1303an (1214bu): the orbit stand worked on the first two tries (cover, then carry; Task_IS_Turn_OFF_the_watchtower complete in both worlds), and the gameflow counts were equal in both worlds after the Vasco talk ([230,2,3,10,0,3,0]; before 1214bt the partner had one extra state 5), so #87's reset holds. The mission identity now reads campaign/institute/institute.mapinfo in both worlds. But the Meagan step's first press dropped the carried tank and its second, 6 degrees off, counted as the talk because Meagan's one-liner scene changed the cinematic epoch; the harness then reported a pass with both worlds still on the institute map. The Meagan step now counts only a press that leaves gameplay (expect logic), and routes end with an expect step that fails the take unless both worlds reach the next map."
+    "Take 1303an (1214bu): the orbit stand worked on the first two tries (cover, then carry; Task_IS_Turn_OFF_the_watchtower complete in both worlds), and the gameflow counts were equal in both worlds after the Vasco talk ([230,2,3,10,0,3,0]; before 1214bt the partner had one extra state 5), so #87's reset holds. The mission identity now reads campaign/institute/institute.mapinfo in both worlds. But the Meagan step's first press dropped the carried tank and its second, 6 degrees off, counted as the talk because Meagan's one-liner scene changed the cinematic epoch; the harness then reported a pass with both worlds still on the institute map. The Meagan step now counts only a press that leaves gameplay (expect logic), and routes end with an expect step that fails the take unless both worlds reach the next map.",
+    "Take 1303ao: the host died in the clear step beside the watchtower (the guards fight back), and the restore again left health 70 instead of 56 (recovered by relaunch, recovery.json). The tower clear now runs with the lab health hold, and the harness itself falls back to the relaunch recovery when the final restore check fails, recording both checks in notes.restoreRecovery.",
+    "Take 1303ap (1214bu, lab product mode): PASS. The whole route ran from the cable car arrival: office note, master key, recuperation door, Hypatia, Vasco, the transformation and the Crown Killer fight, the tower guards (health hold), the watchtower tank (orbit stand), and Meagan. The host's mission end was sent (result sent, identity campaign/institute/institute.mapinfo); the partner received and applied it; both worlds loaded boat_madinventor_p through the both-ready hold (the host waited 23.3 s); both ended in gameplay with equal gameflow counts [225,2,3,13,0,5,0] and Mission_MI_Boat active; the restore passed.",
+    "1214bv: in 1303ap the partner, after applying the mirrored end, observed its own Results switch, and after the next map's load kept retrying that send (scan_failed) within the 30 s window; a successful scan there could have named the new map's mission. An observation is now dropped when the world epoch changes."
   ],
   "next": [
-    "Take 1303ao: the full route on 1214bu, ending with both worlds in boat_madinventor_p."
-  ]
+    "Two-account take campaign-institute-vm-v1303a on 1214bv (host Corvo on this PC, VM Emily) with the 1303ap route and a host video."
+  ],
+  "evidence": {
+    "lab": "route-institute-v1303ap",
+    "route": "work/natural-moveset/routes/institute-full-v1303ap.json"
+  }
 }
