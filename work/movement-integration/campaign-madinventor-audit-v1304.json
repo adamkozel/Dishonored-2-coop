@@ -1,0 +1,47 @@
+{
+  "audit": "campaign-madinventor-v1304",
+  "card": 77,
+  "mission": "The Clockwork Mansion",
+  "candidate": "candidate-npc-combat-v1214bv",
+  "maps": [
+    "campaign/boat/madinventor/boat_madinventor_p",
+    "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+    "campaign/madinventor/house/madinventor_p"
+  ],
+  "created": "2026-10-16T16:19:25+02:00",
+  "plan": [
+    "Boat (Mission_MI_Boat): the monologue, then Meagan's ask-depart (gated by foster_readytoleave and foster_spoketoplayer, or the skiff usable); its Launch_Madinv event plays player_leaving and the LevelTransition to madinv_streets by chaos (confirmed static).",
+    "Streets: station, security panel, carriage, gate code; the mansion door (script_door_tr_mad_house) asks a prompt and transitions to madinventor_p with no script gate (confirmed static).",
+    "Mansion: Jindosh (kill or electroshock), Sokolov in the assessment chamber, the maze exit; the exterior doors prompt and transition back to the streets at p_start_from_interior (confirmed static).",
+    "Streets again: Task_MI_Escape at mdnt_story_trigger_intotheboat, Task_MI_End on transition_to_void02 (gate to read)."
+  ],
+  "takes": [
+    {
+      "take": "route-mi-v1304a",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "scope": "boat leg"
+    },
+    {
+      "take": "route-mi-v1304b",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true,
+      "scope": "boat and streets to the mansion"
+    },
+    {
+      "take": "route-mi-v1304c",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "failure": "jindosh still alive after 80 attacks"
+    }
+  ],
+  "findings": [
+    "Take 1304a (lab product mode): on the Dreadful Wale the talk with Meagan activated Obj_Boat_MI_TalkHyp and Task_Boat_MI_Meagan; using the skiff ran the departure, and the script LevelTransition was mirrored (D2LT sent by the host, applied by the partner): both worlds loaded madinv_streets_p_lowchaos with Mission_MI, Obj_MI_Streets, Task_MI_Rewire and Task_MI_Station active.",
+    "Take 1304b: the station trigger completed Task_MI_Station (Task_MI_Carriage active in both worlds); the mansion door's prompt and transition were mirrored: both worlds loaded madinventor_p.",
+    "Confirmed static: the mission ends in the streets when the player talks to Meagan with script_kiscule_return_main/jindosh_eliminated set (her debrief, with or without Sokolov, then the leave prompt, the key removal and transition_to_void02); the mansion's exterior doors (script_door_exterior_500_1_1/_2_1) prompt and transition back to the streets at p_start_from_interior.",
+    "Take 1304c: the attack picked kirin_jindosh_noweapon (the electroshock chair's stand-in at the electroshock spawner, 41.0, 96.6), whose health stayed 1 through 80 strikes; the walking Jindosh is kirin_jindosh.def (20.9, 88.8 after the lab trigger). The route now names kirin_jindosh[.]def near (21, 89)."
+  ],
+  "next": [
+    "Take 1304d: as 1304c with the walking Jindosh."
+  ]
+}

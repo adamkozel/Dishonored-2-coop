@@ -1,0 +1,886 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 62,
+      "pos": [
+        -6.867696,
+        -14.884361,
+        0.111616
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "sent/3/0",
+      "hold": "released/500",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 44,
+      "pos": [
+        -6.86767,
+        -14.884274,
+        0.111718
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "applied/0/3",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 62,
+      "pos": [
+        -6.965642,
+        -15.212735,
+        0.0892
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/3/0",
+      "hold": "released/500",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 44,
+      "pos": [
+        -6.482097,
+        -14.498703,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/3",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+    }
+  },
+  {
+    "step": "step02-talk",
+    "spec": {
+      "do": "talk",
+      "name": "meagan",
+      "near": [
+        -6.0,
+        -15.0
+      ],
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 62,
+      "pos": [
+        1.628,
+        -7.463,
+        0.006724
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        5,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/3/0",
+      "hold": "released/500",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_TalkHyp,Obj_Boat_MI_ToStreets,Task_Boat_MI_Hyp,Task_Boat_MI_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 44,
+      "pos": [
+        -6.482097,
+        -14.498703,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        5,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/3",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_TalkHyp,Obj_Boat_MI_ToStreets,Task_Boat_MI_Hyp,Task_Boat_MI_Meagan"
+    }
+  },
+  {
+    "step": "step03-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 62,
+      "pos": [
+        1.628,
+        -7.463,
+        0.006724
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        5,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/3/0",
+      "hold": "released/500",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_TalkHyp,Obj_Boat_MI_ToStreets,Task_Boat_MI_Hyp,Task_Boat_MI_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/madinventor/boat_madinventor_p",
+      "epoch": 51,
+      "cine": 44,
+      "pos": [
+        -6.482097,
+        -14.498703,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        5,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/3",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI_Boat,Obj_Boat_MI_TalkHyp,Obj_Boat_MI_ToStreets,Task_Boat_MI_Hyp,Task_Boat_MI_Meagan"
+    }
+  },
+  {
+    "step": "step04-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "pitches": [
+        0,
+        20,
+        40
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 60000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 76,
+      "pos": [
+        162.303177,
+        154.249496,
+        -18.436424
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 50,
+      "pos": [
+        162.303177,
+        154.249496,
+        -18.436426
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    }
+  },
+  {
+    "step": "step05-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 76,
+      "pos": [
+        161.907501,
+        153.864914,
+        -18.565777
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 50,
+      "pos": [
+        162.548737,
+        154.521317,
+        -18.356138
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    }
+  },
+  {
+    "step": "step06-expect",
+    "spec": {
+      "do": "expect",
+      "map": "madinv_streets",
+      "ms": 240000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 76,
+      "pos": [
+        161.907501,
+        153.864914,
+        -18.565777
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 50,
+      "pos": [
+        162.548737,
+        154.521317,
+        -18.356138
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        3,
+        1,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Rewire,Task_MI_Station"
+    }
+  },
+  {
+    "step": "step07-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_stationinterior",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 76,
+      "pos": [
+        238.881012,
+        183.982773,
+        -6.0021
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+      "epoch": 56,
+      "cine": 50,
+      "pos": [
+        162.548737,
+        154.521317,
+        -18.356138
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  },
+  {
+    "step": "step08-use",
+    "spec": {
+      "do": "use",
+      "name": "script_door_tr_mad_house",
+      "pitches": [
+        0,
+        10,
+        -10
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 78,
+      "pos": [
+        45.357525,
+        -38.933701,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 50,
+      "pos": [
+        45.357525,
+        -38.933701,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/5",
+      "hold": "released/63",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  },
+  {
+    "step": "step09-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 78,
+      "pos": [
+        45.284824,
+        -38.629147,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 50,
+      "pos": [
+        45.489056,
+        -39.484692,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/5",
+      "hold": "released/63",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  },
+  {
+    "step": "step10-expect",
+    "spec": {
+      "do": "expect",
+      "map": "house/madinventor_p",
+      "ms": 240000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 78,
+      "pos": [
+        45.284824,
+        -38.629147,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 50,
+      "pos": [
+        45.489056,
+        -39.484692,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/5",
+      "hold": "released/63",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  },
+  {
+    "step": "step11-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_lab_medium",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 80,
+      "pos": [
+        41.805439,
+        86.463013,
+        1.091202
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 50,
+      "pos": [
+        45.489056,
+        -39.484692,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/5",
+      "hold": "released/63",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  },
+  {
+    "step": "step12-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        40.0,
+        82.0
+      ],
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 80,
+      "pos": [
+        41.805439,
+        86.463013,
+        1.091202
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/madinventor/house/madinventor_p",
+      "epoch": 61,
+      "cine": 50,
+      "pos": [
+        45.489056,
+        -39.484692,
+        -6.196373
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        4,
+        1,
+        5,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 9,
+      "lt": "applied/0/5",
+      "hold": "released/63",
+      "ka": "0/0/0",
+      "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+    }
+  }
+]
