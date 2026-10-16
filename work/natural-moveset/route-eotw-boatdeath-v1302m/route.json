@@ -1,0 +1,799 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 38,
+      "pos": [
+        -6.869448,
+        -14.884665,
+        0.111374
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/47",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 25,
+      "pos": [
+        -6.869511,
+        -14.884396,
+        0.111282
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 8000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 38,
+      "pos": [
+        -6.862198,
+        -15.179758,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/47",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 25,
+      "pos": [
+        -6.875924,
+        -14.311095,
+        0.087378
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step02-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "midnights_trigger_eotw_brief_meagan",
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 38,
+      "pos": [
+        5.279311,
+        4.289936,
+        1.069368
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/47",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 25,
+      "pos": [
+        -6.875924,
+        -14.311095,
+        0.087378
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step03-talk",
+    "spec": {
+      "do": "talk",
+      "name": "meagan",
+      "near": [
+        -5.8,
+        -31.6
+      ],
+      "optional": true,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 43,
+      "pos": [
+        1.169332,
+        5.901659,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        2,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/47",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 25,
+      "pos": [
+        -6.875924,
+        -14.311095,
+        0.087378
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        2,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 43,
+      "pos": [
+        1.169332,
+        5.901659,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        2,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/47",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+      "epoch": 31,
+      "cine": 25,
+      "pos": [
+        -6.875924,
+        -14.311095,
+        0.087378
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        2,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step05-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "pitches": [
+        0,
+        20,
+        40
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 60000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 36,
+      "cine": 54,
+      "pos": [
+        -30.814009,
+        192.748062,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/16",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 36,
+      "cine": 30,
+      "pos": [
+        -30.814009,
+        192.748062,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/2",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step06-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 36,
+      "cine": 54,
+      "pos": [
+        -32.642117,
+        199.874146,
+        -0.278902
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/16",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 36,
+      "cine": 30,
+      "pos": [
+        -32.642117,
+        200.681335,
+        -0.85676
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/2",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step07-die",
+    "spec": {
+      "do": "die",
+      "role": "host",
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 54,
+      "pos": [
+        -30.806087,
+        192.740097,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/16",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 30,
+      "pos": [
+        -31.319733,
+        193.253723,
+        1.205706
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/2",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step08-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 5000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 54,
+      "pos": [
+        -30.806087,
+        192.740097,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/16",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 30,
+      "pos": [
+        -31.319733,
+        193.253723,
+        1.205706
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        5,
+        4,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/2",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step09-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_addermirestation_inside_area",
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 54,
+      "pos": [
+        54.120533,
+        47.589054,
+        19.64201
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        4,
+        5,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/16",
+      "ka": "1/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 41,
+      "cine": 30,
+      "pos": [
+        -31.319733,
+        193.253723,
+        1.205706
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        4,
+        5,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/2",
+      "hold": "released/32",
+      "ka": "1/0/0"
+    }
+  },
+  {
+    "step": "step10-use",
+    "spec": {
+      "do": "use",
+      "name": "script_kar_cable_car_01_1",
+      "offsets": [
+        [
+          2.0,
+          0.7
+        ]
+      ],
+      "z": 25.95,
+      "pitches": [
+        27,
+        22,
+        32
+      ],
+      "hold": 250,
+      "settle": 8000,
+      "yaws": [
+        -19.29,
+        -12,
+        -26
+      ]
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 46,
+      "cine": 65,
+      "pos": [
+        2.400522,
+        -28.165827,
+        12.642111
+      ],
+      "fresh": true,
+      "gameflow": [
+        225,
+        3,
+        6,
+        8,
+        0,
+        6,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/922",
+      "ka": "5/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 46,
+      "cine": 36,
+      "pos": [
+        2.400522,
+        -28.165827,
+        12.64211
+      ],
+      "fresh": true,
+      "gameflow": [
+        225,
+        3,
+        6,
+        8,
+        0,
+        6,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 11,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "1/4/0"
+    }
+  },
+  {
+    "step": "step11-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 60000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 46,
+      "cine": 65,
+      "pos": [
+        2.425673,
+        -28.023895,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        225,
+        3,
+        6,
+        8,
+        0,
+        6,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/922",
+      "ka": "5/0/0"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 46,
+      "cine": 36,
+      "pos": [
+        2.322922,
+        -28.800777,
+        12.694162
+      ],
+      "fresh": true,
+      "gameflow": [
+        225,
+        3,
+        6,
+        8,
+        0,
+        6,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 11,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "1/4/0"
+    }
+  }
+]

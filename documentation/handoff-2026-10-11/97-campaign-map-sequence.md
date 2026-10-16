@@ -57,4 +57,23 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - **Two Steam accounts (take campaign-dunwall-vm-v1301c, pass):** the same route with the host on this PC as Corvo and the lab VM's second account as Emily, joined through the friends-only lobby in product mode. Objectives were equal after all 17 steps, the VM applied the tower exit transition, and both worlds ended in `void_01_p`. `Route-MissionVM-v1301.ps1` runs it, with `routes/dunwall-full-v1301c.json` (the Meagan talk step is optional because stepping onto the boat can start her scene first).
   - Known gap: items a script grants to the player who uses something (the safe-room loadout) reach only that player.
 
+## Story grants in both worlds (1214bi–1214bk, [audit 1302](../../work/movement-integration/campaign-eotw-audit-v1302.json))
+
+- **Problem (take route-eotw-v1302c, confirmed runtime, visual):** after the Outsider visit, Corvo had the Mark and mana and Emily had neither. Scripts give items, loadouts, mana and the Mark to the player of the world that runs them. Dunwall's safe-room loadout is the same gap.
+- **Native path (confirmed static):** every queued Kiscule signal goes through the dispatcher `0x1407c0e30`. The signal holds the node id (+0xc), the input id (+0x10) and the node instance (+0x18), whose vtable names its class. From there:
+  - The node's `arkKisculeInstance` (node+0x20) keeps the owning entity's handle at +0x60, and the Kiscule manager (`game+0x1f6e48`) maps entity handles to instances.
+  - The node decl (node+0x28) lists the inputs, and each input's descriptor holds the handler.
+  - Class vtables (RVA): inventory `0x1b7ddf8`, loadout `0x1b7df48`, mana `0x1c65ef8`, Outsider's Mark control `0x1cd4238`.
+- **Script action mirror (`D2KA`, `coop_kiscule_mirror`, product step 20):**
+  1. Each world counts its handler runs per (entity, node, input) for those classes and sends the count.
+  2. The peer runs the same node's native handler in its own world until its count matches.
+  3. A later local request the mirror already covered runs the dispatch with the handler stubbed, so the node's outputs still fire.
+  4. Mirrored runs never echo.
+- **Personal choices (1214bk):** the Outsider's offer (`ld_trigger_19`, `brief_outsider_powers`, `power_yes` → Give Mark) runs in both worlds through the trigger mirror, so each player accepts or refuses for themselves. The Mark control, power items (declaration type 9) and the `no_power` refusal item are therefore recorded but never mirrored. Each character keeps its own power: Corvo gets Blink and Emily gets Far Reach.
+- **Runtime:**
+  - Take 1302d: eight actions crossed, including the mission keys the carriage removes.
+  - Take 1302e: both players have the Mark and mana from the void to Addermire, and both reach the Good Doctor with equal objectives.
+
+**Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
+
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

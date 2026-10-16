@@ -1,0 +1,162 @@
+{
+  "at": "2026-10-16T04:06:30.675625+02:00",
+  "candidate": "candidate-npc-combat-v1214bo",
+  "takes": [
+    {
+      "take": "route-eotw-v1302a",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Missing trigger script_trigger_addermirestation_inside_area",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302b",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": false,
+      "failure": "Use of script_kar_cable_car_01_1 not registered",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302c",
+      "candidate": "candidate-npc-combat-v1214bh",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302d",
+      "candidate": "candidate-npc-combat-v1214bi",
+      "passed": true,
+      "failure": null,
+      "recovered": false,
+      "note": "route pass; the Mark gap remained"
+    },
+    {
+      "take": "route-eotw-v1302e",
+      "candidate": "candidate-npc-combat-v1214bj",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-v1302f",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-death-v1302g",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302h",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302i",
+      "candidate": "candidate-npc-combat-v1214bk",
+      "passed": false,
+      "failure": "Shared checkpoint restart did not complete (host fell)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302j",
+      "candidate": "candidate-npc-combat-v1214bl",
+      "passed": false,
+      "failure": "Death failed on host (death_peer_unavailable)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302k",
+      "candidate": "candidate-npc-combat-v1214bl",
+      "passed": false,
+      "failure": "Death failed on host (death_peer_unavailable)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302l",
+      "candidate": "candidate-npc-combat-v1214bm",
+      "passed": false,
+      "failure": "Restart failed on client (session_peer_disconnected)",
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302m",
+      "candidate": "candidate-npc-combat-v1214bm",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "route-eotw-boatdeath-v1302n",
+      "candidate": "candidate-npc-combat-v1214bn",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302o",
+      "candidate": "candidate-npc-combat-v1214bn",
+      "passed": false,
+      "failure": "Restart failed on client (session_peer_disconnected)",
+      "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302p",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": false,
+      "failure": "Both worlds did not reach mission gameplay",
+      "recovered": false
+    },
+    {
+      "take": "campaign-eotw-vm-v1302q",
+      "candidate": "candidate-npc-combat-v1214bo",
+      "passed": true,
+      "failure": null,
+      "recovered": false
+    }
+  ],
+  "complete": true,
+  "scope": "#75 campaign take 3 (Edge of the World): the Outsider visit (void_01), the Dreadful Wale (boat_eotw) and Karnaca (eotw_p) to the carriage and the result screen, in lab product mode and then across two Steam accounts.",
+  "findings": [
+    "Route (confirmed static, d2_mission_route): void_01 runs ld_trigger_23, ld_trigger, ld_trigger_15, ld_trigger_28, ld_trigger_34 and the rune pickup (the Heart); the boat leaves for eotw_p_lowchaos/highchaos on the LoadNextMap event, sent after the player_leaving scene, which the skiff usable (script_skiff_01_usable) or Meagan's ready-to-leave dialog starts.",
+    "Take route-eotw-v1302a (fail, lab product mode, from the void_01 mapinfo): the five void triggers and the Heart kept both worlds' gameflow equal (\"Cross the Floating Island\", \"Take the Heart\" on both); taking the Heart ran a script LevelTransition that the client applied (D2LT) and both worlds loaded boat_eotw_p, the both-ready hold released. The brief trigger and the Meagan talk kept gameflow equal ([230,2,3,11,0,2,0]). The route then looked for the Addermire station trigger while both were still on the boat: the boat's exit (skiff) was missing from the route. Restore passed.",
+    "Take route-eotw-v1302b (fail, from the boat_eotw mapinfo): the brief trigger and the Meagan talk kept gameflow equal; the skiff use opened the leave prompt (logic 9, A leaves), the player_leaving scene ran and its LevelTransition reached the client (D2LT applied), so both worlds loaded eotw_p_lowchaos (hold released after 313 ms) with equal gameflow [235,2,5,4,0,2,0]. The station trigger advanced both worlds equally. The carriage stand aimed at the car's centre and none of its nine uses registered; take mission-end-carriage-v1291a used the east door facing due west with a 27 degree downward pitch, which the route now uses. Restore passed.",
+    "Take route-eotw-v1302c (route pass, lab product mode, from the void_01 mapinfo): one continuous run through the Outsider visit (five triggers, the Heart), the Dreadful Wale (brief, Meagan, the skiff), Karnaca (the station trigger, the carriage from its east door), the leave prompt, the ride and both result screens. Both worlds loaded institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 15 steps; four level transitions were applied on the client and every both-ready hold released. Restore passed. Visual: the same boat cabin (Corvo visible in Emily's world) and the same Addermire arrival in both windows.",
+    "Blocking gap (confirmed runtime, visual): after the void Corvo's HUD shows the mana arc and Emily's does not, so the partner never received the Mark and its powers. Confirmed static: void_01_p grants them through player-scoped Kiscule actions in ld_kiscule_objectiv and ld_kiscule_master: arkKisculeNodeActionPlayerInventory (blink, grapple, the Heart, no_power), arkKisculeNodeMana, arkKisculeNodePlayerOutsiderMarkControl and arkKisculeNodeActionPlayerLoadout. These ran only in the world of the player who triggered them; the same class explains the Dunwall safe-room loadout gap.",
+    "Confirmed static (1214bi): every queued Kiscule signal is dispatched by 0x1407c0e30 (signal+0xc node id, +0x10 input id, +0x18 node instance whose vtable is the node class). node+0x20 is the node's arkKisculeInstance (+0x20/+0x28 node array, +0x60 owning entity handle, +0x70 graph, +0x88 nested instances); the Kiscule manager at game+0x1f6e48 hashes entity handle -> top-level instance (+0x18 buckets, +0x28 mask, sorted chains). node+0x28 is the node decl (+8 id, inputs at +0x40 with stride 0x48: +8 id, +0x20 descriptor with the handler at +0x30 (node) or +0x38 (node, desc, signal)). Class vtables (RVA): inventory 0x1b7ddf8, loadout 0x1b7df48, mana 0x1c65ef8, Outsider's Mark control 0x1cd4238.",
+    "1214bi mirrors those four classes (D2KA): each world counts handler runs per (entity, node, input) and sends the count; the peer runs the same node's native handler until its count matches; a later local request the mirror covered runs the dispatch with the handler stubbed, so outputs still fire.",
+    "Take route-eotw-v1302d (route pass on 1214bi): the host ran eight player-scoped actions (ld_kiscule_objectiv: mana Unlock, loadout Restore, inventory Add of Blink (5122) and the Heart (5127); script_kiscule_carriage: Remove of four Edge of the World keys and favours at the carriage) and Emily's world applied all eight natively on its engine thread; dispatch ran on the engine thread in both worlds. Both reached institute_p_lowchaos with equal gameflow; restore passed.",
+    "Confirmed runtime (visual): Emily still had no mana arc after 1302d. Confirmed static: the Mark is given by ld_kiscule_master node 5114 (arkKisculeNodePlayerOutsiderMarkControl, input Give Mark) on the power_yes event, which the brief_outsider_powers scene sends after ld_trigger_19; the route never entered ld_trigger_19, so it skipped the Outsider's offer. The lab also armed the mirror only at product step 20, after both worlds reach gameplay; one mana action at the load ran before the map id was known and was not sent.",
+    "1214bj: an action before the map id is known is counted at once and sent when the map id is; the route harnesses arm coop_kiscule_mirror before the mission load; route eotw-full-v1302e walks into ld_trigger_19 (the Outsider's offer) before the first Blink.",
+    "Take route-eotw-v1302e (pass on 1214bj, route through the Outsider's offer): entering ld_trigger_19 ran the brief_outsider_powers scene in both worlds (the trigger mirror carries it); each accepted, power_yes ran Give Mark (5114): Emily's world applied the host's run from the mirror first and skipped its own handler later (suppressed 1), and each world's character-specific mana node reached the other. Visual: Corvo shows \"Tutorial: Blink\", Emily \"Tutorial: Far Reach\", both with the mana arc and the Mark, kept on the boat and at Addermire. Both reached institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 16 steps; restore passed. The Heart step still copied Corvo's Blink grant (5122) into Emily's world.",
+    "1214bk: the Outsider's offer is each player's own choice and its scene runs in both worlds, so the Mark control and inventory items that are powers (declaration type 9, models/powers/) or the no_power refusal are recorded as personal and never mirrored; the item is read through the node's own variable accessor (0x140534540 with the m_inventoryItem name, as the Add handler does; item decl vtable 0x1b9ea48, name +8, type +0x60).",
+    "Take route-eotw-v1302f (fail on 1214bk): void, offer, Heart, boat and skiff kept both worlds equal (Emily's world applied 5 actions). In Karnaca the host fell, both worlds reached the native GameOver in 6.1 s, but the die step pressed A on GameOver every 2.5 s and neither world restarted within 180 s; the checkpoint session state was not traced. Restore passed.",
+    "The die step now follows Test-MissionCheckpoint-v1151: wait for both death screens ready (reset sidecar deathReady/peerDeathReady), one A on the fallen player then one on the partner, then A only on load prompts, tracing phase/result/slot/loads/completed.",
+    "Take route-eotw-death-v1302g (pass, from the eotw mapinfo, lab product mode): the host fell; both reached both_death_screens_ready at 6.2 s (checkpoint session armed on slot 62); after the presses both loaded (phase 4) and completed, back in gameplay about 7 s later with new world epochs; then the station trigger and the carriage took both worlds to institute_p_lowchaos with equal gameflow. Restore passed.",
+    "Take campaign-eotw-vm-v1302h (two accounts, 1214bk): the void with the offer (Corvo Blink, Emily Far Reach on the VM, both with the Mark), the Heart, the boat and Karnaca kept both worlds equal; the host's fall reached both death screens in 6.6 s, but the GameOver Restart press produced no shared restart in 180 s. Restore passed.",
+    "Confirmed runtime (1302i, boat start): the press reached checkpoint sync in both worlds (requests 0 -> 1) and was rejected (rejected 10 -> 11). Confirmed static: checkpointMission.mapId is fixed when the session is armed and checkpointWorldReady requires the current map to equal it, so after any level transition every restart is refused; the maintenance re-issue of coop_checkpoint_sync on is itself rejected while the session is enabled.",
+    "1214bl re-arms an idle session when the world reaches another map. Takes 1302j/1302k: the sessions re-armed once but never paired (peerArm 0, hellos rejected): the autosave identity's mission field differed between the worlds after the boat transition (host -254924741, client -464858806; map and chapter equal), so the digests differed.",
+    "1214bm hashes only map and chapter. Take 1302l: paired again, the host's restart reached Preparing, but the client refused the Prepare and its own request once (rejected +2) and failed when hellos stopped; the pair stayed on GameOver. Take 1302m (same build): the shared restart completed in 6.7 s.",
+    "1214bn: a refused attempt ends in 8 s (Preparing/Requested), loading keeps 45 s from Accept/Begin, and a failed idle session on the same map re-arms after 3 s; the die step presses Restart again every 12 s while both stay on GameOver. Take route-eotw-boatdeath-v1302n (pass): the shared restart after the boat completed in 7.0 s, then the station and the carriage took both worlds to institute_p_lowchaos with equal gameflow.",
+    "Take campaign-eotw-vm-v1302o (two accounts, 1214bn): the route to Karnaca stayed equal; at the death the client refused the host's Prepare. Confirmed runtime: the client's paired-autosave receiver rejected every host packet (rejected 130 -> 189; peer counts 0/0/0) because the host had re-armed more often (checkpoint remaps 4 vs 2), so the pair never settled and fixtureMatches failed. The harness also stopped at the first failed attempt, before the 1214bn recovery.",
+    "1214bo: a newer peer arm (or a new session) restarts the local pair counts from the autosave held now, so both sides count from the same baseline; older arms are still rejected. The die step no longer stops on a failed attempt and presses Restart again.",
+    "Take campaign-eotw-vm-v1302p (two accounts, 1214bo): the mission start timed out before step 1 (420 s) and the harness recorded no states; the host capture was cut before its index was written. Restore passed. The harnesses now record both worlds' states and frames on a start timeout; the immediate re-run (1302q) passed the start.",
+    "Take campaign-eotw-vm-v1302q (pass; host on this PC as Corvo, the lab VM's second Steam account as Emily, product mode): the Outsider visit with the offer (Corvo Blink, Emily Far Reach, each with the Mark), the Heart, the Dreadful Wale (brief, Meagan, skiff), Karnaca, a host fall with both native GameOver screens and one shared restart (both back in gameplay about 11 s after the press, checkpoint session re-armed on Karnaca), the station, the carriage, the leave prompt, the ride and both result screens; both worlds in institute_p_lowchaos with equal gameflow [213,3,6,18,0,8,0] after all 18 steps. Restore passed. Visual: Corvo's and Emily's own GameOver screens, then both at Addermire with the Mark's mana arc."
+  ],
+  "next": [
+    "Mission 4, The Good Doctor (#76)."
+  ],
+  "evidence": {
+    "lab": "route-eotw-v1302e",
+    "labDeath": "route-eotw-boatdeath-v1302n",
+    "twoAccounts": "campaign-eotw-vm-v1302q"
+  }
+}

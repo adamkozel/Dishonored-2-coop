@@ -51,6 +51,7 @@ const char* productStep(unsigned i){
     case 17:return "coop_movement_resume on";
     case 18:return "coop_mission_end_mirror on"; // 1214bb: mission end, both-ready hold, chaos
     case 19:return "coop_gameflow_mirror on"; // 1214bg: objectives follow the host
+    case 20:return "coop_kiscule_mirror on"; // 1214bi: story grants (Mark, powers, loadouts) in both worlds
     default:return nullptr;
     }
 }

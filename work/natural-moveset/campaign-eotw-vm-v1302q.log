@@ -1,0 +1,101 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bo",
+      "hostDll": "50AB66A474AFC9872FF4FF89B9AC4F580CE127031C96582F3FADE028FE451DF0",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 58,
+        "pos": [
+          1.701604,
+          -27.994726,
+          13.03764
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/3125",
+        "ka": "12/2/0"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          2.500016,
+          -28.183481,
+          12.642112
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 22,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "5/6/0"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}
