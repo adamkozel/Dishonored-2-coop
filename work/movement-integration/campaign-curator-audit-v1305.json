@@ -54,6 +54,12 @@
       "passed": false,
       "twoAccounts": true,
       "failure": "Expected both worlds on curator/curator_p: the VM client stayed paused on boat_curator_p and its transition expired again"
+    },
+    {
+      "take": "campaign-curator-vm-v1305c",
+      "candidate": "candidate-npc-combat-v1214bx",
+      "passed": true,
+      "twoAccounts": true
     }
   ],
   "findings": [
@@ -66,13 +72,16 @@
     "Take 1305f (lab product mode): PASS. One continuous run from the Void: the triggers and the exit portal, Meagan's briefing chair and the skiff, the conservatory entrance, Ashworth's intro and the kill, her office note and the audiograph, and the escape talk with Meagan; both worlds loaded boat_dust_p with equal gameflow counts [221,0,3,17,0,7,0], and the restore passed.",
     "Take campaign-curator-vm-v1305a (two accounts): when the host took the skiff, the VM client sat in the pause menu on boat_curator_p (screenshot: PAUSE over the Dreadful Wale; a game window that loses focus pauses itself) and its level transition mirror expired after 60 s (received 1, applied 0), so the host went to the Conservatory alone. The route's expect step passed wrongly because 'curator_p' also matches 'boat_curator_p'. The take then failed at Ashworth, who fought back (health 70 to 60 in 80 presses).",
     "1214bw: a received level transition or mission end stays pending while the partner is outside gameplay on the source map (the pause menu, a scene) and applies when it resumes; the 60 s and 120 s caps count gameplay only, within 30 min of receiving. A real player who pauses as the host leaves now follows on resuming. The route harness's settle presses B on the pause menu, expect regexes now name the map's directory, and the Ashworth attack allows 200 presses.",
-    "Take campaign-curator-vm-v1305b (1214bw): the VM client paused at the same point (the host's skiff departure) and its level transition still expired (received 2, applied 1). Hypothesis confirmed by the code path: the pause menu stops the engine services, so 1214bw's refresh never ran while paused, and the first service after resuming saw more than 60 s. 1214bx shifts the timer by the time without a service call. The route's expect step also presses B for a world in the pause menu while waiting. Why the VM client loses focus at that moment is not known (hypothesis: a guest-side window or notification)."
+    "Take campaign-curator-vm-v1305b (1214bw): the VM client paused at the same point (the host's skiff departure) and its level transition still expired (received 2, applied 1). Hypothesis confirmed by the code path: the pause menu stops the engine services, so 1214bw's refresh never ran while paused, and the first service after resuming saw more than 60 s. 1214bx shifts the timer by the time without a service call. The route's expect step also presses B for a world in the pause menu while waiting. Why the VM client loses focus at that moment is not known (hypothesis: a guest-side window or notification).",
+    "Take campaign-curator-vm-v1305c (1214bx, two Steam accounts: host Corvo on this PC, client Emily in the lab VM): PASS. Both level transitions reached the VM client (applied 2) and it followed into the Conservatory; the host's mission end was applied (identity campaign/boat/dust/boat_dust.mapinfo), both worlds loaded boat_dust_p through the both-ready hold (the host waited 6.9 s), gameflow was equal [221,0,3,17,0,7,0], and the restore passed. The host video (1333 s of presented frames) was reviewed at six points: the Void, the briefing scene and board, the Ashworth fight with the objective panel, Meagan at the skiff, and the end."
   ],
   "next": [
-    "Two-account take campaign-curator-vm-v1305c on 1214bx."
+    "The Dust District (#79): boat_dust, dust_p (the Jindosh lock), the bunker door."
   ],
   "evidence": {
     "lab": "route-cu-v1305f",
-    "route": "work/natural-moveset/routes/cu-full-v1305f.json"
-  }
+    "twoAccounts": "campaign-curator-vm-v1305c",
+    "route": "work/natural-moveset/routes/cu-full-v1305g.json"
+  },
+  "status": "complete"
 }
