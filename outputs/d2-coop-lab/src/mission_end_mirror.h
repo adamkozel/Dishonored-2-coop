@@ -81,7 +81,7 @@ bool countGameflowStates(unsigned counts[7]){
 }
 bool missionEndMirrorEnabled=false;
 struct MissionEndMirror {
-    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0,identityAt=0,attemptAt=0,unnamed=0,observedEpoch=0,staleDropped=0;
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,applied=0,refused=0,noActive=0,notSameMission=0,scanFailed=0,sentEpoch=0,appliedEpoch=0,pendingAt=0,identityAt=0,attemptAt=0,unnamed=0,observedEpoch=0,staleDropped=0,receivedAt=0;
     bool observedStamped=false;
     bool pending=false;unsigned lastLogic=0,missions=0;int appliedState=-1;MissionEndPacket incoming{};const char* result="idle";
 };
@@ -168,7 +168,7 @@ void waitMissionTransition(){
 void receiveMissionEnd(const MissionEndPacket& p){
     auto& m=missionEnd;++m.received;
     if(!(missionEndMirrorEnabled||productMode)||!validMissionEnd(p,localRole)||p.session!=remote.session||p.sequence<=m.peerSequence){++m.refused;m.result="refused";return;}
-    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=GetTickCount64();m.result="received";
+    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=m.receivedAt=GetTickCount64();m.result="received";
 }
 // 1214bq: The Good Doctor's mission completes inside its debrief cinematic:
 // the native switch to Results (caller 0x4ea07c, the mission-complete path)
@@ -238,7 +238,8 @@ void serviceMissionEndMirror(std::uint64_t tick){
     if(logic==11||logic==15){m.pending=false;m.result="local_already_ending";return;}
     // Only from ordinary gameplay: the native logic switch to Results can
     // refuse from other states. Scenes, prompts and menus wait.
-    if(logic!=1||outgoing.pendingGameLogicState){m.result="waiting_native_phase";return;}
+    // 1214bw: as for level transitions, a paused partner keeps the mission end until it resumes (30 min cap).
+    if(logic!=1||outgoing.pendingGameLogicState){m.result="waiting_native_phase";if(tick-m.receivedAt<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
     char here[160]{};std::uint32_t high=0;
     if(!readCurrentMapinfo(here,sizeof(here),high)||std::strcmp(here,m.incoming.mapinfo)){++m.notSameMission;m.pending=false;m.result="not_same_mission";return;}
     MissionNodeScan s{};if(!scanMissionNodes(2,s)){++m.scanFailed;m.result="scan_failed";return;}
@@ -448,7 +449,7 @@ const unsigned char idStrCtorPrefix[20]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74
 const unsigned char idStrDtorPrefix[16]={0x40,0x53,0x48,0x83,0xec,0x30,0x8b,0x51,0x0c,0x48,0x8b,0xd9,0x8b,0xc2,0xc1,0xe8};
 struct LevelTransitionMirror {
     std::uint64_t sequence=0,peerSequence=0,observed=0,sent=0,received=0,applied=0,refused=0,otherMap=0,observedAt=0,pendingAt=0;
-    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0;LevelTransitionPacket incoming{};
+    bool observedPending=false,pending=false;std::uint64_t observedFromMap=0,receivedAt=0;LevelTransitionPacket incoming{};
     char lastMap[160]{};char lastStart[96]{};const char* result="idle";
 };
 LevelTransitionMirror levelMirror{};
@@ -467,7 +468,7 @@ void receiveLevelTransition(const LevelTransitionPacket& p){
     if(!(missionEndMirrorEnabled||productMode)||p.magic!=0x544C3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||
        p.session!=remote.session||p.sequence<=m.peerSequence||!p.fromMapId||!std::memchr(p.map,0,sizeof(p.map))||!std::memchr(p.start,0,sizeof(p.start))||
        std::strncmp(p.map,"campaign/",9)||std::strpbrk(p.map,";\"")||std::strpbrk(p.start,";\"")){++m.refused;m.result="refused";return;}
-    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=GetTickCount64();m.result="received";
+    m.peerSequence=p.sequence;m.incoming=p;m.pending=true;m.pendingAt=m.receivedAt=GetTickCount64();m.result="received";
 }
 void serviceLevelTransitionMirror(std::uint64_t tick){
     if(GetCurrentThreadId()!=engineThread.load())return;
@@ -491,7 +492,10 @@ void serviceLevelTransitionMirror(std::uint64_t tick){
     const unsigned logic=outgoing.gameLogicState;
     if(logic==15){m.pending=false;m.result="local_already_transitioning";return;}
     if(m.incoming.fromMapId!=outgoing.mapId){++m.otherMap;m.pending=false;m.result="other_map";return;}
-    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";return;}
+    // 1214bw: a partner outside gameplay on the source map (the pause menu, a scene) keeps the transition and
+    // follows on resuming; the 60 s cap counts gameplay only (take campaign-curator-vm-v1305a: the VM client
+    // paused on losing focus and the transition expired), within 30 min of receiving it.
+    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";if(tick-m.receivedAt<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
     if(std::memcmp(gameImage+0x4f1d40,mapTransitionTargetPrefix,sizeof(mapTransitionTargetPrefix))||std::memcmp(gameImage+0x13f9d0,idStrCtorPrefix,sizeof(idStrCtorPrefix))||
        std::memcmp(gameImage+0x13fd10,idStrDtorPrefix,sizeof(idStrDtorPrefix))||!realLogicSwitch){m.pending=false;m.result="code_mismatch";return;}
     alignas(16) unsigned char mapStr[64]{},startStr[64]{};

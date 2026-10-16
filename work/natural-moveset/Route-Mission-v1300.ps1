@@ -1,4 +1,4 @@
-param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bv',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0,[switch]$HoldAtEnd)
+param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bw',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0,[switch]$HoldAtEnd)
 # Campaign route take (chapter 97): both lab worlds load a mission start in lab
 # product mode with the mission end mirror, pass the native character choice
 # (host Corvo, client Emily), then the host runs a step list:
@@ -46,6 +46,7 @@ function Settle($label,$sec){
     5{I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
     {$_-in 8,15,12,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
     4{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # a readable (ReadNote) left open
+    2{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # the pause menu (a game window that lost focus pauses itself): resume
     13{throw "$r died during $label (GameOver)"}}}
  }while(!$ready-and$w.ElapsedMilliseconds-lt($sec*1000))
  return $ready}

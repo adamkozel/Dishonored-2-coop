@@ -2,7 +2,7 @@
   "audit": "campaign-curator-v1305",
   "card": 78,
   "mission": "The Royal Conservatory",
-  "candidate": "candidate-npc-combat-v1214bv",
+  "candidate": "candidate-npc-combat-v1214bw",
   "maps": [
     "campaign/void/void_02/void_02_p",
     "campaign/boat/curator/boat_curator_p",
@@ -35,6 +35,18 @@
       "passed": false,
       "held": true,
       "failure": "Held at the note; the focus log showed the stand without its y offset; restored"
+    },
+    {
+      "take": "route-cu-v1305f",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": true
+    },
+    {
+      "take": "campaign-curator-vm-v1305a",
+      "candidate": "candidate-npc-combat-v1214bv",
+      "passed": false,
+      "twoAccounts": true,
+      "failure": "breanna_ashworth still alive after 80 attacks; before that the VM client stayed on the Dreadful Wale (paused) when the host left"
     }
   ],
   "findings": [
@@ -43,9 +55,16 @@
     "The escape is a talk with Meagan at the start dock (-119.5, -131.9, -29.9): her scene, the leave prompt and the result screen; both worlds loaded boat_dust_p and stood in gameplay. Each world completed the mission itself (both mission end mirrors read local_already_ending when the peer's packet arrived), which is benign. Focus-guided stands from the probes are encoded in route cu-full-v1305c.",
     "Take 1305c: the route ran through the Void portal, the briefing, the skiff, the entrance and the Ashworth kill in both worlds; the note step failed only on its check: a note opens a reading screen and stays in the world, so the route now counts the reading screen.",
     "Take 1305d: the note step pressed nothing (no frames): at the stand where the held probe found the focus, the route's focus check never matched. The use step now logs each try's focused handle (<step>-focus.json); held take 1305e stops at the note to compare.",
-    "Held take 1305e: the use step's focus log stood at (-5.307, 52.234), the note's x plus 0.49 but its y unchanged. Harness bug: a one-stand offsets list ([[x,y]]) assigned through PowerShell's `$offs = if (...) {...}` is unrolled to the bare pair, so each number became a stand with y 0. Earlier single-offset steps lost their y offsets too and passed by their focus or aim sweeps. The use and carry steps now keep a one-stand list a list (verified with a test script)."
+    "Held take 1305e: the use step's focus log stood at (-5.307, 52.234), the note's x plus 0.49 but its y unchanged. Harness bug: a one-stand offsets list ([[x,y]]) assigned through PowerShell's `$offs = if (...) {...}` is unrolled to the bare pair, so each number became a stand with y 0. Earlier single-offset steps lost their y offsets too and passed by their focus or aim sweeps. The use and carry steps now keep a one-stand list a list (verified with a test script).",
+    "Take 1305f (lab product mode): PASS. One continuous run from the Void: the triggers and the exit portal, Meagan's briefing chair and the skiff, the conservatory entrance, Ashworth's intro and the kill, her office note and the audiograph, and the escape talk with Meagan; both worlds loaded boat_dust_p with equal gameflow counts [221,0,3,17,0,7,0], and the restore passed.",
+    "Take campaign-curator-vm-v1305a (two accounts): when the host took the skiff, the VM client sat in the pause menu on boat_curator_p (screenshot: PAUSE over the Dreadful Wale; a game window that loses focus pauses itself) and its level transition mirror expired after 60 s (received 1, applied 0), so the host went to the Conservatory alone. The route's expect step passed wrongly because 'curator_p' also matches 'boat_curator_p'. The take then failed at Ashworth, who fought back (health 70 to 60 in 80 presses).",
+    "1214bw: a received level transition or mission end stays pending while the partner is outside gameplay on the source map (the pause menu, a scene) and applies when it resumes; the 60 s and 120 s caps count gameplay only, within 30 min of receiving. A real player who pauses as the host leaves now follows on resuming. The route harness's settle presses B on the pause menu, expect regexes now name the map's directory, and the Ashworth attack allows 200 presses."
   ],
   "next": [
-    "Take 1305f: the whole mission with the offsets fix."
-  ]
+    "Two-account take campaign-curator-vm-v1305b on 1214bw (route cu-full-v1305g)."
+  ],
+  "evidence": {
+    "lab": "route-cu-v1305f",
+    "route": "work/natural-moveset/routes/cu-full-v1305f.json"
+  }
 }

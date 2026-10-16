@@ -1,4 +1,4 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bv',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bw',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
@@ -54,6 +54,7 @@ function Settle($label,$sec){
     5{I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
     {$_-in 8,15,12,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
     4{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # a readable (ReadNote) left open
+    2{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # the pause menu (a game window that lost focus pauses itself): resume
     13{throw "$r died during $label (GameOver)"}}}
  }while(!$ready-and$w.ElapsedMilliseconds-lt($sec*1000))
  return $ready}
