@@ -145,72 +145,101 @@ def heading(sub, moving=0.2, timeout=60.0):
 
 
 def crouched():
-    return 6 in [s['id'] for s in probe('--player-states')['active']]
+    """True or False; None while the player state is unreadable (a takedown or scene in progress)."""
+    try:
+        return 6 in [s['id'] for s in probe('--player-states')['active']]
+    except RuntimeError:
+        return None
 
 
 def crouch():
-    for _ in range(4):
-        if crouched():
+    end = time.time() + 20
+    while time.time() < end:
+        c = crouched()
+        if c:
             return True
-        packet(['B'], 150)
+        if c is False:
+            packet(['B'], 150)
         time.sleep(0.9)
-    return crouched()
+    return False
 
 
 def done(task):
     return not any(task == a for a in active_tasks())
 
 
-def chase_hold(a):
+def attempts(a, one):
+    """Up to a['tries'] attempts; an attempt whose native reads stay unavailable is logged and retried."""
     for k in range(a.get('tries', 6)):
-        if a.get('crouch', True):
-            crouch()
-        npc, h = heading(a['npc'])
-        if not npc:
+        try:
+            result = one(a, k)
+        except RuntimeError as e:
+            print(json.dumps({'try': k, 'error': str(e)}), flush=True)
+            time.sleep(2.0)
             continue
-        p, d = npc['position'], a.get('dist', 0.85)
-        teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])))
-        time.sleep(0.12)
-        packet([a.get('button', 'RightShoulder')], a.get('ms', 3500), ly=a.get('ly', 0))
-        time.sleep(a.get('ms', 3500) / 1000 + 2.0)
-        ok = done(a['until'])
-        print(json.dumps({'try': k, 'npc': npc['name'], 'at': [round(v, 2) for v in p], 'done': ok}), flush=True)
-        if ok:
-            return 0
-        time.sleep(3.0)
+        if result is not None:
+            return result
     return 1
+
+
+def chase_try(a, k):
+    """None to try again, 0 when the task is done."""
+    if a.get('crouch', True):
+        crouch()
+    npc, h = heading(a['npc'])
+    if not npc:
+        return None
+    p, d = npc['position'], a.get('dist', 0.85)
+    teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])))
+    time.sleep(0.12)
+    packet([a.get('button', 'RightShoulder')], a.get('ms', 3500), ly=a.get('ly', 0))
+    time.sleep(a.get('ms', 3500) / 1000 + 2.0)
+    ok = done(a['until'])
+    print(json.dumps({'try': k, 'npc': npc['name'], 'at': [round(v, 2) for v in p], 'done': ok}), flush=True)
+    if ok:
+        return 0
+    time.sleep(3.0)
+    return None
+
+
+def chase_hold(a):
+    return attempts(a, chase_try)
+
+
+def pickpocket_try(a, k):
+    """None to try again; 0 (or the follow-up use's result) when the theft is done."""
+    sx, sy = a['stand']
+    crouch()
+    hit = None
+    end = time.time() + 60
+    while time.time() < end and not hit:
+        p0 = npcs(a['npc'])
+        time.sleep(0.1)
+        p1 = npcs(a['npc'])
+        if not p0 or not p1:
+            continue
+        q0, q1 = p0[-1]['position'], p1[-1]['position']
+        step = math.hypot(q1[0] - q0[0], q1[1] - q0[1])
+        d0, d1 = math.hypot(q0[0] - sx, q0[1] - sy), math.hypot(q1[0] - sx, q1[1] - sy)
+        if step > 0.03 and d1 < a.get('radius', 0.9) and d1 < d0:
+            hit = (q1, ((q1[0] - q0[0]) / step, (q1[1] - q0[1]) / step))
+    if not hit:
+        return None
+    p, h = hit
+    d = a.get('dist', 0.7)
+    teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 0))
+    packet(['X'], 400, ly=12000)
+    time.sleep(1.2)
+    ok = done(a['until'])
+    print(json.dumps({'try': k, 'at': [round(v, 2) for v in p], 'done': ok, 'active': active_tasks()}), flush=True)
+    if ok:
+        return then_use(a['then']) if a.get('then') else 0
+    time.sleep(4.0)
+    return None
 
 
 def pickpocket(a):
-    sx, sy = a['stand']
-    for k in range(a.get('tries', 6)):
-        crouch()
-        hit = None
-        end = time.time() + 60
-        while time.time() < end and not hit:
-            p0 = npcs(a['npc'])
-            time.sleep(0.1)
-            p1 = npcs(a['npc'])
-            if not p0 or not p1:
-                continue
-            q0, q1 = p0[-1]['position'], p1[-1]['position']
-            step = math.hypot(q1[0] - q0[0], q1[1] - q0[1])
-            d0, d1 = math.hypot(q0[0] - sx, q0[1] - sy), math.hypot(q1[0] - sx, q1[1] - sy)
-            if step > 0.03 and d1 < a.get('radius', 0.9) and d1 < d0:
-                hit = (q1, ((q1[0] - q0[0]) / step, (q1[1] - q0[1]) / step))
-        if not hit:
-            continue
-        p, h = hit
-        d = a.get('dist', 0.7)
-        teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 0))
-        packet(['X'], 400, ly=12000)
-        time.sleep(1.2)
-        ok = done(a['until'])
-        print(json.dumps({'try': k, 'at': [round(v, 2) for v in p], 'done': ok, 'active': active_tasks()}), flush=True)
-        if ok:
-            return then_use(a['then']) if a.get('then') else 0
-        time.sleep(4.0)
-    return 1
+    return attempts(a, pickpocket_try)
 
 
 def then_use(t):
@@ -260,7 +289,10 @@ def shoot(a):
 
 
 def face(sub):
-    found = npcs(sub)
+    try:
+        found = npcs(sub)
+    except RuntimeError:
+        return
     if not found:
         return
     p = found[-1]['position']
