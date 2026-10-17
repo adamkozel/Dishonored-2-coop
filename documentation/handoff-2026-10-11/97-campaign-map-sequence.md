@@ -14,8 +14,8 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 | 4 | The Good Doctor | `institute_p_*chaos` | `Mission_IS`: result screen, then `boat_madinventor` |
 | 5 | The Clockwork Mansion | `boat_madinventor_p` → `madinv_streets_p_*chaos` ↔ `madinventor_p` | `Mission_MI`: result screen, then `void_02` |
 | 6 | The Royal Conservatory | `void_02_p` (Another Strange Visit) → `boat_curator_p` → `curator_p_*chaos` | `Mission_CU`: result screen, then `boat_dust` |
-| 7 | The Dust District | `boat_dust_p` → `dust_p_*chaos` → `dust_return_p` (`void_03_p` is reachable from these maps' scripts) | `Mission_DD`: result screen, then `bunker` |
-| 8 | A Crack in the Slab | `bunker_p_*chaos` ↔ `bunker_backyard_p` | `Mission_BK`: result screen, then `boat_palace` |
+| 7 | The Dust District | `boat_dust_p` → `dust_p_*chaos` | `Mission_DD`: Stilton's door, result screen, then `bunker` |
+| 8 | A Crack in the Slab | `bunker_p_*chaos` (present and past layers) → `void_03_p` → `dust_p_*chaos` (Stilton mad or dead) or `dust_return_p` (Stilton saved) | `Mission_BK`: Sokolov at the skiff, result screen, then `boat_palace` |
 | 9 | The Grand Palace | `boat_palace_p` → `palace_streets_p_*chaos` ↔ `palace_p_*chaos` | `Mission_PA`: result screen, then `boat_dunwall_return` |
 | 10 | Death to the Empress | `boat_dunwall_return_p` → `dunwall_return_streets_p` ↔ `_interior_p` ↔ `_tower_p` | `Mission_DTTE` (last mission): result screen, then `end_p` |
 
@@ -142,5 +142,28 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Each use advances a wheel one stage. Seat *i* is dialled to index *i* with focus-guided presses (the route's `jindosh` step). The lists change per load, so the step reads them live with `tools/diag/d2_jindosh_lock.py`.
 - **Tool notes:** int variables keep their value at +0x1c and lists at +0x28. The lock's nested decl table has 256 buckets.
 - **Passes:** lab take route-dd-v1306d and two-account take campaign-dust-vm-v1306a, both ending in `bunker_p` with equal gameflow.
+
+## A Crack in the Slab (takes 1307a–1307d, two accounts campaign-bunker-vm-v1307a, [audit 1307](../../work/movement-integration/campaign-bunker-audit-v1307.json))
+
+- **Required path (confirmed static and runtime):**
+  1. The present (z ≈ −300): the Outsider trigger (`pr_a_ld_trigger_outsider`) plays his scene and activates `Task_BK_Pick_TimeDevice`.
+  2. The Timepiece (`pr_a_ld_timeshift_device_pickup_1`) is picked up through the native use focus. Its tutorial page closes with B, and LT shifts to the past (z ≈ +300).
+  3. The past:
+     - `pa_ld_trigger_61`;
+     - then trigger 38 with the look-at on `pa_ld_target_43`, which starts the guests' ritual (`ritual_has_started`);
+     - then the ritual hall floor (below).
+  4. Back in the present, the exit door `pr_a_ld_door_tr_bunker_todust_01` and its prompt lead to `void_03`. This needs `update_last_obj`, which is set once the ritual is seen; without it the door leads straight to the Dust District.
+  5. `void_03`: the door (`script_usable_door`: fall and first brief), the portal to the ritual memory, then the exit portal.
+  6. Stilton mad or dead: `dust_p_*chaos` from the bunker. The sewer trigger `ld_trigger_karnaca_discovery` spawns the return Meagan and Sokolov. Talking to Sokolov at the skiff plays his scene, then the leave prompt and the result screen. Both worlds load `boat_palace`.
+- **The ritual (confirmed static and runtime):**
+  - It counts as seen (`player_has_seen_ritual`, and `Task_BK_WatcheRitual` completes) only while the player is inside `pa_ld_trigger_1` when the second ritual scene emits Delilah's spirit.
+  - That trigger's volume is the ritual hall (world x −40.7…−21.8, y 16.3…37.2, z 300…313.5), 6 m north of its entity origin, which lies outside it.
+  - The volume comes from the trigger's Havok shape `<map>/<trigger>.cvd._100_100_100.0`, a tagfile 5 bytes into the blob. Its first float4 pair (min, max, min.w = 0.5) is the AABB relative to the origin. New tool: `tools/diag/d2_trigger_box.py`.
+  - The upper gallery and the origin did not register. The hall floor (−30, 24, 300) did, and the scene played there.
+  - The route's `flag` step waits there for the story flag (26 s in take 1307d).
+- **Timepiece notes:**
+  - LT is refused where the other time is obstructed (the ritual hall). The route shifts back from the stand where it entered the past.
+  - A pickup's effects can arrive after the use step's 1.5 s check, so pickups use `gone` (take 1307c failed there).
+- **Passes:** lab take route-bk-v1307d and two-account take campaign-bunker-vm-v1307a, both ending in `boat_palace_p` with equal gameflow.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

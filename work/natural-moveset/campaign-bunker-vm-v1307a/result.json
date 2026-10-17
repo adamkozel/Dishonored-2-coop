@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214bx",
+      "hostDll": "A5EDD2558F63ECE239C0998373EBC3066B14F83E7511A6E1166EA6EDF3802090",
+      "guestDllMatches": true
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "step11-flag": {
+      "variable": "player_has_seen_ritual",
+      "value": 1,
+      "ms": 20469
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 31,
+        "cine": 10,
+        "pos": [
+          -6.852249,
+          -15.113046,
+          0.010210
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "2/19/3",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 56,
+        "cine": 68,
+        "pos": [
+          -6.869442,
+          -14.231296,
+          0.056479
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/4/0",
+        "hold": "released/29781",
+        "ka": "21/0/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}
