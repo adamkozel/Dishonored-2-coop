@@ -1,0 +1,69 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 20000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "at",
+    "pos": [
+      39.3,
+      -42.8,
+      -298.6
+    ],
+    "yaw": -90,
+    "settle": 12000
+  },
+  {
+    "do": "use",
+    "name": "pr_a_ld_timeshift_device_pickup_1",
+    "focus": true,
+    "offsets": [
+      [
+        0.7,
+        0
+      ]
+    ],
+    "z": -298.65,
+    "pitches": [
+      25,
+      40,
+      55,
+      25
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 20000
+  },
+  {
+    "do": "press",
+    "leftTrigger": true,
+    "ms": 300,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "pa_ld_trigger_61",
+    "settle": 6000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -21.85,
+      16.62,
+      311.0
+    ],
+    "yaw": -90,
+    "pitch": 10,
+    "settle": 3000
+  }
+]

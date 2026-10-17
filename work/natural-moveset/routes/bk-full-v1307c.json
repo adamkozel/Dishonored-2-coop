@@ -1,0 +1,270 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 20000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "at",
+    "pos": [
+      33.2,
+      -40.7,
+      -295.4
+    ],
+    "yaw": -90,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "pr_a_ld_timeshift_device_pickup_1",
+    "focus": true,
+    "offsets": [
+      [
+        0.7,
+        0
+      ]
+    ],
+    "z": -298.65,
+    "pitches": [
+      25,
+      40,
+      55,
+      70
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 20000
+  },
+  {
+    "do": "press",
+    "leftTrigger": true,
+    "ms": 300,
+    "settle": 8000
+  },
+  {
+    "do": "trigger",
+    "name": "pa_ld_trigger_61",
+    "settle": 8000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -21.85,
+      16.62,
+      311.0
+    ],
+    "yaw": -90,
+    "pitch": 10,
+    "settle": 10000
+  },
+  {
+    "do": "wait",
+    "ms": 90000,
+    "settle": 30000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -30.0,
+      24.0,
+      301.4
+    ],
+    "yaw": 90,
+    "settle": 10000
+  },
+  {
+    "do": "flag",
+    "entity": "storyflags",
+    "name": "player_has_seen_ritual",
+    "value": 1,
+    "ms": 300000,
+    "settle": 10000
+  },
+  {
+    "do": "at",
+    "pos": [
+      39.3,
+      -42.8,
+      301.4
+    ],
+    "yaw": -90,
+    "settle": 3000
+  },
+  {
+    "do": "press",
+    "leftTrigger": true,
+    "ms": 300,
+    "settle": 8000
+  },
+  {
+    "do": "use",
+    "name": "pr_a_ld_door_tr_bunker_todust_01",
+    "focus": true,
+    "offsets": [
+      [
+        0,
+        1.0
+      ]
+    ],
+    "z": -303.65,
+    "pitches": [
+      0,
+      10,
+      -10,
+      20
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "void/void_03/",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_usable_door",
+    "focus": true,
+    "offsets": [
+      [
+        1.0,
+        0
+      ]
+    ],
+    "z": -24.18,
+    "pitches": [
+      0,
+      10,
+      -10,
+      20
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 120000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_02",
+    "settle": 60000
+  },
+  {
+    "do": "use",
+    "name": "script_usable_portal_toritual",
+    "focus": true,
+    "offsets": [
+      [
+        0,
+        1.0
+      ]
+    ],
+    "z": -75.75,
+    "pitches": [
+      0,
+      10,
+      -10,
+      20
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 30000
+  },
+  {
+    "do": "use",
+    "name": "script_usable_portal_exit",
+    "focus": true,
+    "offsets": [
+      [
+        0,
+        1.0
+      ]
+    ],
+    "z": -80.55,
+    "pitches": [
+      0,
+      10,
+      -10,
+      20
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "dust/dust_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 10000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_karnaca_discovery",
+    "settle": 10000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -59.2,
+      -55.0,
+      -45.6
+    ],
+    "yaw": 90,
+    "settle": 3000
+  },
+  {
+    "do": "talk",
+    "name": "anton_sokolov",
+    "near": [
+      -59.5,
+      -51.5
+    ],
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "boat/duke_palace/boat_palace",
+    "ms": 300000,
+    "settle": 5000
+  }
+]

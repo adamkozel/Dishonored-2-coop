@@ -1,0 +1,76 @@
+{
+  "failure": null,
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "step11-flag": {
+      "variable": "player_has_seen_ritual",
+      "value": 1,
+      "ms": 26018
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 31,
+        "cine": 13,
+        "pos": [
+          -6.87642,
+          -14.343577,
+          0.093816
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 17,
+        "lt": "applied/0/2",
+        "hold": "released/719",
+        "ka": "2/19/3",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 31,
+        "cine": 34,
+        "pos": [
+          -6.861759,
+          -15.273538,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/0",
+        "ka": "21/0/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": true
+}

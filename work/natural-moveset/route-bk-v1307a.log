@@ -1,0 +1,73 @@
+{
+  "passed": false,
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "notes": {
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 16,
+        "cine": 5,
+        "pos": [
+          -0.234221,
+          -118.177757,
+          -304.996307
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          5,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 16,
+        "cine": 6,
+        "pos": [
+          -0.866655,
+          -118.810745,
+          -304.934479
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          5,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+      }
+    },
+    "gameflowEqual": true
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:285[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 285 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

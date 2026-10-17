@@ -1,0 +1,58 @@
+{
+ "audit": "campaign-bunker-v1307",
+ "card": 80,
+ "mission": "A Crack in the Slab",
+ "candidate": "candidate-npc-combat-v1214bx",
+ "maps": [
+  "campaign/bunker/bunker_p_lowchaos",
+  "campaign/void/void_03/void_03_p",
+  "campaign/dust/dust_p_lowchaos",
+  "campaign/boat/duke_palace/boat_palace_p"
+ ],
+ "created": "2026-10-17T04:48:27+02:00",
+ "takes": [
+  {
+   "take": "route-bk-v1307a",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "held": true,
+   "scope": "held exploration of the mission start (NPC census); restored with Restore-RouteHold",
+   "failure": "held: restore with Restore-RouteHold-v1303.ps1 (a held exploration records this as its failure)"
+  },
+  {
+   "take": "route-bk-v1307b",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "held": true,
+   "failure": "Use of pr_a_ld_timeshift_device_pickup_1 not registered (the Outsider trigger had not run)",
+   "scope": "held; continued by hand through the ritual, the Void and the Dust District to boat_palace (manual-continuation.json)"
+  },
+  {
+   "take": "route-bk-v1307c",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "failure": "Use of pr_a_ld_timeshift_device_pickup_1 not registered: the pickup landed on try 1 but its effects came after the 1.5 s check"
+  },
+  {
+   "take": "route-bk-v1307d",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": true
+  },
+  {
+   "take": "campaign-bunker-vm-v1307a",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": true,
+   "twoAccounts": true
+  }
+ ],
+ "findings": [
+  "The ritual counts as seen only inside pa_ld_trigger_1 when dial_ritual_withstilton02 emits delilah_fx_spirit (confirmed static: pa_ld_past_scripting; confirmed runtime: player_has_seen_ritual 1 and Task_BK_WatcheRitual complete in take 1307b's hold and in take 1307d after 26 s on the hall floor).",
+  "pa_ld_trigger_1's volume is the ritual hall (world x -40.7..-21.8, y 16.3..37.2, z 300..313.5), 6 m north of its entity origin, which lies outside it. The volume comes from the trigger's Havok shape <map>/<trigger>.cvd._100_100_100.0 (a tagfile 5 bytes into the blob; the first float4 pair min, max with min.w 0.5 is the AABB relative to the origin). Confirmed static; confirmed runtime: the origin and the upper gallery (-24.2, 17.7, 307) did not register, the hall floor (-30, 24, 300) did. New read-only tool tools/diag/d2_trigger_box.py.",
+  "The exit door pr_a_ld_door_tr_bunker_todust_01 tests update_last_obj and visited_void_3: once the ritual is seen it leads to void_03 (Task_BK_Escape completes on player_leaves_estate); otherwise to dust_p or dust_return by Stilton's state (confirmed static). With Stilton alive and mad, void_03 leads to dust_p_lowchaos from the bunker start (confirmed runtime).",
+  "dust_p from the bunker: ld_trigger_karnaca_discovery (the sewer entrance) spawns the return Meagan and Sokolov; the talk override on Sokolov needs dust_return_missionstart, his spawn and player_has_seen_ritual. His talk plays the clickme scene, the Go to the Dreadful Wale prompt and the result screen; both worlds load boat_palace (confirmed runtime, take 1307d: gameflow [229,0,3,13,0,3,0] on both).",
+  "The Timepiece shift is refused where the other time is obstructed (the ritual hall); the route shifts back from (39.3, -42.8), where it entered the past.",
+  "Harness: a flag step waits for a native script variable (tools/diag/d2_kiscule_vars.py); logic-12 tutorial pages alternate B and A; press holds LT; pickups use gone.",
+  "Two-account take campaign-bunker-vm-v1307a (host Corvo on this PC, client Emily in the lab VM over the friends-only Steam lobby) ran the same route: both worlds ended in boat_palace_p with equal gameflow [229,0,3,13,0,3,0]; restoration passed. Host video frames show the present, the past with the Timepiece, the Void's ritual memory and Sokolov's leave prompt."
+ ],
+ "complete": true
+}
