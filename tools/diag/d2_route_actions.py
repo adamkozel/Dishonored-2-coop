@@ -10,7 +10,7 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
   chase_hold  {"npc": str, "dist": 0.85, "up": 1.0, "button": "RightShoulder", "ms": 3500, "ly": 0,
                "crouch": true, "until": task, "tries": 6}
               stand behind the NPC along its walking heading and hold a button (ly: walk after it)
-  pickpocket  {"npc": str, "stand": [x, y], "radius": 0.9, "dist": 0.7, "up": 1.0, "pitch": 15,
+  pickpocket  {"npc": str, "stand": [x, y], "radius": 0.9, "dist": 0.7, "up": 1.0, "pitch": 0,
                "until": task, "tries": 6}
               as the NPC walks into its stand, press X from behind while walking after it;
               "then": {"stand": [x, y, eyeZ], "yaw": deg, "until": task} uses a target at once after the theft
@@ -194,7 +194,7 @@ def pickpocket(a):
             continue
         p, h = hit
         d = a.get('dist', 0.7)
-        teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 15))
+        teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 0))
         packet(['X'], 400, ly=12000)
         time.sleep(1.2)
         ok = done(a['until'])

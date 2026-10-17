@@ -185,7 +185,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The Duke fights back. One take died in that fight: a single hit above current health kills even with the lab health hold. The attack step's `behind` option stands at the NPC's back, using rotation row 0 at entity +0x84 (confirmed runtime).
 - **Passes:** lab take route-pa-v1308f and two-account take campaign-palace-vm-v1308a, both ending in `boat_dunwall_return_p` with equal gameflow.
 
-## Death to the Empress (takes 1309a–1309e, [audit 1309](../../work/movement-integration/campaign-empress-audit-v1309.json))
+## Death to the Empress (takes 1309a–1309e, two accounts campaign-empress-vm-v1309a, [audit 1309](../../work/movement-integration/campaign-empress-audit-v1309.json))
 
 - **1214by (confirmed static and runtime):**
   - The boat's LevelTransition names `campaign\dunwall\return\streets\dunwall_return_streets_p.map` with backslashes. The level transition mirror required `campaign/`, so the host read `target_unread` and the partner stayed on the boat.
@@ -208,5 +208,30 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - In `end_p` the partner keeps `Obj_DTTE_EndGame_asCorvo` and `Task_DTTE_ReclaimThrone_Corvo` active. Gameflow counts: host [226,0,0,14,0,8,0], client [226,2,2,12,0,6,0].
   - Cause: the host completes them during the rescue scene, and the gameflow mirror runs only in gameplay, which `end_p` never returns to.
   - The credits play the same in both worlds.
+
+## Memories of Training (takes 1310a–1310c, [audit 1310](../../work/movement-integration/campaign-training-audit-v1310.json))
+
+- **Start:** the menu starts `tutorial_p` as Emily with no character choice; Corvo is the trainer NPC. The route harnesses take `-HostCharacter emily`. Take 1310a asked the lab `campaign` command for Corvo, and the host game exited as the map loaded (no Windows error event).
+- **Required path (confirmed static and runtime, held take 1310b):**
+  1. Mobility: `ld_trigger_beforecrouch` completes Task_Intro_FollowCorvo. `ld_trigger_roof_3` ends the course, plays Corvo's success scene and moves both players to the stealth yard. The client follows through its own scripts.
+  2. Stealth, which restarts whenever the patrolling Corvo sees a player (`Player_Busted`, then `Stealth_Failed` and `Restart_Stealth`). Standing at the start in his view is enough; the partner's avatar there did not trigger it.
+     - Choke: crouched, behind the walking Corvo, RB held.
+     - Key: X from 0.7 m behind as he walks into his north stand. Pressed on the standing Corvo, the theft is noticed and fails the task. The key never takes the use focus itself.
+     - Gate: `ld_door_grid_metal_350_01_6` from its south-west side. This completes the stealth objective and moves both players to the crossbow yard.
+  3. Crossbow: `ld_invisible_usable_1` beside the crossbow (its use sends `Crossbow_PickedUp`).
+     - Then the crossbow (LT) breaks the three `Crossbow_Targets` bottles (`ld_bottle_01_2`, `ld_mulberry_mead_01_4`, `ld_rivera_fig_wine_01`), then the marked `ld_turnbuckle_01_small`, whose fall breaks `ld_door_interior_350cm_02` (`Crossbow_Door_Broken`).
+     - `ld_trigger_endcrossbow` ends the section.
+  4. Combat with Corvo:
+     - RT attacks;
+     - RB held blocks;
+     - a block cycle (RB 1.2 s on, 0.32 s off) produces the timed parries;
+     - a parry followed by a fresh RB held chokes him off balance;
+     - a parry followed by RT performs the fatality.
+  5. End: `Combat_Fatality_Success` plays Corvo's success scene, then `Start_Level_Transition` and `arkKisculeNodeActionTutorialEnd`, which returns the world to the main menu.
+- **1214bz (confirmed static):** only the world that played the fatality ran the tutorial end, so in take 1310b the host went to the menu and the partner stayed in the combat room. The Kiscule action mirror now carries this node like a story grant: the vtable is `0x141b7b628`, confirmed by its RTTI type descriptor `.?AVarkKisculeNodeActionTutorialEnd@@`.
+- **Route notes:**
+  - The harness's `action` step runs the timed host actions in `tools/diag/d2_route_actions.py`.
+  - `setviewpos` ignores its pitch argument; pitch comes from `Set-ObserverPitch.ps1`.
+  - The tutorial grants no powers.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
