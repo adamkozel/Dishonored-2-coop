@@ -203,5 +203,10 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Route notes:**
   - The flag step reads `sf_temp_kiscule`'s mission-step bools at each stage.
   - Restoring from the credits failed natively once; Deploy-SourceClock relaunched the lab.
+- **Passes:** lab take route-dtte-v1309e and two-account take campaign-empress-vm-v1309a, both ending in `end_p` (the credits).
+- **Known limitation ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94), confirmed static):**
+  - In `end_p` the partner keeps `Obj_DTTE_EndGame_asCorvo` and `Task_DTTE_ReclaimThrone_Corvo` active. Gameflow counts: host [226,0,0,14,0,8,0], client [226,2,2,12,0,6,0].
+  - Cause: the host completes them during the rescue scene, and the gameflow mirror runs only in gameplay, which `end_p` never returns to.
+  - The credits play the same in both worlds.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
