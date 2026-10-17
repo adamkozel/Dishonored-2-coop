@@ -1,0 +1,73 @@
+{
+  "passed": false,
+  "notes": {
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 79,
+        "pos": [
+          -52.200005,
+          -22.399996,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/93",
+        "ka": "4/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_LeaveTower"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 53,
+        "pos": [
+          -52.200005,
+          -22.399996,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 13,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "0/4/1",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_LeaveTower"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:314[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 314 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

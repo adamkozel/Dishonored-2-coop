@@ -57,6 +57,35 @@ bool kisculePlayerScopedItem(std::uintptr_t node,std::string& item){
        !memoryRead(decl+0x60,&type,4)||!memoryRead(decl+8,&name,8)||!worldIdentityString(memoryRead,name,item))return false;
     return type==9||item.find("/powers/")!=std::string::npos||item.find("no_power")!=std::string::npos;
 }
+// 1214cb (#85): a few grants differ by character. CompareEntityDef(player,
+// corvo/body.def) feeds an ActionTestBool whose True and False outputs give
+// Corvo's or Emily's item (confirmed static; tools/diag/d2_character_grants.py
+// over every campaign map finds these three). The host's run carries its own
+// branch, so a partner of the other character runs the other branch's node
+// (take loadout-dunwall-v1311c: Emily received gun_player, which her item
+// wheel does not show, instead of gun_emily).
+struct KisculeCharacterGrant{const char* map;const char* entity;std::uint32_t corvoNode,corvoInput,emilyNode,emilyInput;};
+const KisculeCharacterGrant kisculeCharacterGrants[]={
+    {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule",2305,2,3778,2},      // gun_player / gun_emily
+    {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule_coup",4209,2,4215,2}, // gun_player / gun_emily
+    {"campaign/boat/edge_of_the_world/boat_eotw_p","script_kiscule",7033,2,7038,2},          // crossbow_corvo / crossbow_emily
+};
+// The local player's character: 1 Corvo, 2 Emily, 0 unknown (body definition at actor+0x2e8).
+int kisculeLocalCharacter(){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t definition=0,vt=0,name=0;std::string body;
+    if(!observedPlayer||!memoryRead(observedPlayer+0x2e8,&definition,8)||!definition||!memoryRead(definition,&vt,8)||vt!=base+0x1ab58f8||
+       !memoryRead(definition+8,&name,8)||!worldIdentityString(memoryRead,name,body))return 0;
+    return body=="models/characters/player/corvo/body.def"?1:body=="models/characters/player/emily/body.def"?2:0;
+}
+// The node and input this world runs for a peer's (node, input): the same one, or the other character's branch.
+void kisculeCharacterCounterpart(const char* entity,std::uint32_t& node,std::uint32_t& input){
+    const int character=kisculeLocalCharacter();if(!character)return;
+    for(const auto& g:kisculeCharacterGrants){
+        if(std::strcmp(g.entity,entity)||std::strcmp(g.map,mapName))continue;
+        if(character==2&&node==g.corvoNode&&input==g.corvoInput){node=g.emilyNode;input=g.emilyInput;return;}
+        if(character==1&&node==g.emilyNode&&input==g.emilyInput){node=g.corvoNode;input=g.corvoInput;return;}
+    }
+}
 #pragma pack(push,1)
 struct KisculeActionPacket {
     std::uint32_t magic=0x414B3244; // "D2KA"
@@ -217,17 +246,18 @@ void serviceKisculeMirror(std::uint64_t tick){
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
         if(loading||p.mapId!=outgoing.mapId){if(!loading&&outgoing.gameLogicState==1&&tick-w.at>20000){++k.otherMap;k.result="other_map";continue;}keep.push_back(w);continue;}
         if(k.dispatchThread&&k.dispatchThread!=GetCurrentThreadId()){++k.threadMismatch;k.result="thread_mismatch";continue;}
-        const auto instance=kisculeInstanceByName(p.entity);const auto node=instance?kisculeNodeIn(instance,p.node):0;
-        const auto desc=node?kisculeInputDescriptor(node,p.input):0;std::uintptr_t h0=0,h1=0;
+        std::uint32_t nodeId=p.node,inputId=p.input;kisculeCharacterCounterpart(p.entity,nodeId,inputId);
+        const auto instance=kisculeInstanceByName(p.entity);const auto node=instance?kisculeNodeIn(instance,nodeId):0;
+        const auto desc=node?kisculeInputDescriptor(node,inputId):0;std::uintptr_t h0=0,h1=0;
         if(!node||kisculeClassOf(node)!=static_cast<int>(p.classIndex)||!desc||!memoryRead(desc+0x30,&h0,8)||!memoryRead(desc+0x38,&h1,8)||
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         for(unsigned guard=0;guard<4;++guard){
-            AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,p.node,p.input,p.classIndex,node);
-            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent("applied",p.classIndex,p.entity,p.node,p.input,c.executed);}
+            AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
+            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent(nodeId==p.node?"applied":"applied_counterpart",p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
-            alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&p.node,4);std::memcpy(signal+0x10,&p.input,4);std::memcpy(signal+0x18,&node,8);
+            alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);
             applyingKiscule=true;
             if(h1)reinterpret_cast<NativeKisculeHandlerEx>(h1)(reinterpret_cast<void*>(node),reinterpret_cast<void*>(desc),signal);
             else reinterpret_cast<NativeKisculeHandler>(h0)(reinterpret_cast<void*>(node));
