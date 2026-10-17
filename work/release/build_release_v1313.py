@@ -1,4 +1,4 @@
-"""Builds release 0.7.0 (r7, take 1313, #30) from candidate 1214ce (the DLL) and the pinned d2coop_setup.exe. The package ships no game files: everything
+"""Builds release 0.7.0 (r7, take 1313, #30) from candidate 1214cf (the DLL; 1214ce plus join-follow from the main menu) and the pinned d2coop_setup.exe. The package ships no game files: everything
 game-derived is built by the installer from the player's own install with bin/d2coop_setup.exe:
 - base/master.index and base/game{1..4}voidmod.{index,resources}: from data/decl-recipes.bin (D2RCP004) and the
   player's resource containers; byte-identical to the lab's files, so the manifest pins their SHA-256;
@@ -15,11 +15,11 @@ import hashlib, json, shutil, datetime, subprocess, sys, tempfile, zipfile
 R = Path(__file__).resolve().parents[2]
 VERSION = '0.7.0'
 LAB = R / 'work/asset-game'; ORIG = Path(r'C:\Program Files (x86)\Steam\steamapps\common\Dishonored2')
-CAND = R / 'work/movement-integration/candidate-npc-combat-v1214ce'
+CAND = R / 'work/movement-integration/candidate-npc-combat-v1214cf'
 REL = R / 'work/release'
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest().upper()
 ident = json.loads((CAND / 'identity.json').read_text(encoding='utf-8-sig'))
-assert sha(LAB / 'dinput8.dll') == ident['dll'], 'live DLL is not candidate 1214ce'
+assert sha(LAB / 'dinput8.dll') == ident['dll'], 'live DLL is not candidate 1214cf'
 # The builder: built after 1214ce from the same DLL sources plus the final patch format (copy references,
 # unit quaternions); pinned in work/release/setup-tool-v1313 with the commit that built it.
 SETUP = REL / 'setup-tool-v1313/d2coop_setup.exe'; setup_pin = json.loads((REL / 'setup-tool-v1313/identity.json').read_text(encoding='utf-8'))

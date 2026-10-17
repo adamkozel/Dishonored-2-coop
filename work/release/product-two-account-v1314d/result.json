@@ -1,0 +1,139 @@
+{
+  "passed": false,
+  "failure": "The VM did not reach the host mission in gameplay",
+  "notes": {
+    "zip": {
+      "path": "outputs/release/d2coop-v0.7.0.zip",
+      "bytes": 36708379,
+      "sha256": "3915DBC065B87A1C9B2EBB8745C44343B6C0DA3B910F526BC9B8548BA398DA9B"
+    },
+    "vmInstall": {
+      "exit": 0,
+      "seconds": 68.3,
+      "output": [
+        "Dishonored 2 found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Building the co-op resource packages from your game files...",
+        "Building the corvo movement bank from your game files...",
+        "Building the emily movement bank from your game files...",
+        "Building the prop animation tables from your game files...",
+        "Installed Dishonored 2 co-op 0.7.0: 14 files; originals backed up in d2coop-backup\\20261017-192003",
+        ""
+      ],
+      "receipt": true,
+      "dll": true,
+      "built": [
+        "base\\master.index",
+        "base\\game1voidmod.index",
+        "d2coop\\corvo-choke-bank.bin",
+        "d2coop\\emily-choke-bank.bin",
+        "d2coop\\native-tables.bin"
+      ],
+      "defender": {
+        "realTime": true,
+        "antivirus": true,
+        "steamExcluded": false,
+        "detections": []
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "c9ffd840-9d03-45cb-bac9-c8a51a0e56b5",
+      "PSShowComputerName": true
+    },
+    "vmProductBoot": true,
+    "hostPid": 39896,
+    "focus1": true,
+    "focus2": true,
+    "focus3": true,
+    "focus4": true,
+    "focus5": true,
+    "focus6": true,
+    "focus7": true,
+    "focus8": true,
+    "hostGameplay": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+    },
+    "hostOnlineAfterF7": {
+      "active": true,
+      "host": true,
+      "phase": 2,
+      "result": "hosting_lobby",
+      "connectionState": 0,
+      "joinRequests": 0,
+      "role": 0,
+      "inviteOpened": true,
+      "lobbyMembers": 1,
+      "steamReady": true
+    },
+    "connected": {
+      "host": {
+        "connectionState": 3,
+        "remoteFresh": true
+      },
+      "vm": {
+        "connectionState": 3,
+        "remoteFresh": true
+      }
+    },
+    "vmKeys": 12,
+    "vmSkips": 59,
+    "vmChoice": 1,
+    "sameMission": {
+      "hostMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmLogic": 3,
+      "same": true
+    },
+    "vmFinal": {
+      "follow": {
+        "enabled": true,
+        "result": "same_mission",
+        "hostMapinfo": "campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo",
+        "hostHigh": 0,
+        "hostMap": "12727000173429924044",
+        "localMap": "12727000173429924044",
+        "sent": 0,
+        "received": 297,
+        "loads": 1,
+        "refused": 0,
+        "role": 1,
+        "PSComputerName": "D2CoopVM",
+        "RunspaceId": "fb830c59-bf6b-49d6-a652-f69de87dce4f",
+        "PSShowComputerName": true
+      },
+      "online": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 1,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 1,
+        "steamReady": true
+      },
+      "logic": 3,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": false
+    },
+    "vmUninstall": {
+      "exit": 0,
+      "receiptGone": true,
+      "dllGone": true,
+      "dataGone": true,
+      "voidmodGone": true,
+      "exeHash": "B671F8249422862B",
+      "masterHash": "E76D1A13AC95F561",
+      "output": [
+        "Co-op installation found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Rolled back: 13 added files removed, 1 originals restored.",
+        ""
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "6311a0df-70fe-4750-be4b-f94013822d01",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Release 0.7.0 clean-PC path, two machines/two accounts: zip extracted in the VM Downloads folder, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on), host product instance F7, VM joins via steam://joinlobby and follows the host mission, both walk and see each other, F8 leaves; then Uninstall.cmd (rollback). The zip was copied into the VM, not downloaded from GitHub (private repository)."
+}

@@ -30,9 +30,10 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 
 1. Both players start Dishonored 2 from Steam as usual.
 2. **Host (Corvo):** start a new game as Corvo, or load a Corvo save. In game, press **F7**. A friends-only Steam lobby is created and Steam's invite window opens. Invite your friend.
-3. **Partner (Emily):** accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself.
-4. Once both players are in the same mission, every co-op system turns on by itself.
-5. **F8** leaves the session.
+3. **Partner (Emily):** start the game and wait in the main menu (or anywhere in a mission). Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded.
+4. If the game asks who to play (the start of *A Long Day in Dunwall*), the host chooses **Corvo** and the partner **Emily**.
+5. Once both players are in the same mission, every co-op system turns on by itself.
+6. **F8** leaves the session.
 
 ## Saves, deaths and missions
 

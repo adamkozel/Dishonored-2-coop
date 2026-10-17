@@ -61,3 +61,38 @@ The Edge evaluator (`FUN_1412e2c30` and 13 callees) uses 24 `RCPPS` and 10 `RSQR
 - The bank patches' residuals: about 5% of the native motion energy of the purely native clips, and the motion the model cannot place in the rest. This is a difference signal, not usable animation on its own. Publishing it is the user's decision (#30 Needs you).
 - Two tiny curves compiled into the DLL: the vault pelvis lift (240 floats) and the equipment contact phases (8 floats).
 - The takedown scene table holds names and durations only.
+
+## Release 0.7.0 (builder 1313)
+
+[`build_release_v1313.py`](../../work/release/build_release_v1313.py) builds `d2coop-v0.7.0.zip` (37 MB). It contains:
+- `dinput8.dll` (candidate 1214cf);
+- `bin\d2coop_setup.exe`, pinned in [setup-tool-v1313](../../work/release/setup-tool-v1313/identity.json) with its source commit;
+- the decl recipes, both bank patches and the tables recipe;
+- `Install.cmd`, `Uninstall.cmd` and the README ([release notes](../../work/release/RELEASE-NOTES.md)).
+
+The builder checks two things:
+- It builds the packages from the original install (read only) and pins them to the lab's own files.
+- No package file equals a game file.
+
+**Installer** ([`Install-D2Coop.ps1`](../../work/release/Install-D2Coop.ps1), Windows PowerShell 5.1 or 7):
+- It finds Dishonored 2 through Steam's library folders (app 403640) when no folder is given.
+- It checks the executable, `steam_api64.dll`, the original `master.index` and the package hashes.
+- It builds every game-derived file into a staging folder and checks them.
+- It then backs up what it replaces and writes the receipt *before* copying. Any failure while copying rolls back by itself.
+- It refuses while that folder's game runs. It hashes through .NET, and the `.cmd` wrappers clear `PSModulePath`: Windows PowerShell started from PowerShell 7 otherwise loads 7's modules and has no `Get-FileHash`.
+
+**Install test ([`Test-ReleaseInstall-v1313.ps1`](../../work/release/Test-ReleaseInstall-v1313.ps1), scratch copies only):**
+
+| Take | Result |
+|---|---|
+| 1313a | Failed: no `Get-FileHash` in Windows PowerShell started from PowerShell 7. |
+| 1313b | Failed: the receipt write ("Argument types do not match", generic lists in `ConvertTo-Json` under 5.1) came after the copy and left a partial install without a receipt. This led to the receipt-first, self-rolling-back install. |
+| [1313c](../../work/release/release-install-v1313c/result.json) | All 8 cases pass. The install builds everything from a full copy of the original game in 51 s (builder peak 1.24 GB). Packages are at their pinned hashes, the rebuilt banks pass `d2_movement_bank_tests`, and the 17 tables parse. Reinstall is refused, the rollback is byte-identical, a wrong exe and a modified `master.index` are refused with nothing changed, the Steam install is untouched and the protected saves are unchanged. |
+
+**Clean-PC path in the VM ([`Test-ProductTwoAccount-v1314.ps1`](../../work/release/Test-ProductTwoAccount-v1314.ps1)).** Second Steam account, Defender on, no exclusion over the Steam folder. The zip is extracted into Downloads and `Install.cmd` runs with no arguments.
+
+| Take | Result |
+|---|---|
+| 1314a (1214ce) | The install found the game and built everything (77 s), with no Defender detection. Product boot, F7 hosting and the Steam join connected both ways, and the uninstall rolled back. **But the VM stayed in its main menu:** join-follow only covered gameplay and pause menus (logic 1–3), not the front end (`campaign/menu/menu_p`, logic 6). Candidate 1214cf adds it. |
+| 1314b (1214cf) | The VM loaded the host's mission from the main menu (`loads 1`), then waited at the native "Press any key" mission card (logic 15). The harness now presses a key, as a player does. |
+| 1314c | `same_mission`, then the native character choice of *A Long Day in Dunwall* (logic 14). The harness now confirms Emily (Right, Enter), and the README tells the partner to choose Emily. |

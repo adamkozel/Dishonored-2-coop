@@ -4,7 +4,9 @@ A two-player co-op mod for Dishonored 2: Corvo and Emily play the campaign toget
 - Native first person, UI and Steam (the game's own `steam_api64`, never replaced).
 - Partner presentation on the game's own Doppelganger rigs.
 
-Private development repository.
+**Players:** download the latest release from [Releases](https://github.com/adamkozel/Dishonored-2-coop/releases) and follow its README. Both players need their own copy of Dishonored 2 on Steam. The release contains no game files: its installer builds everything game-derived from your own install.
+
+The rest of this repository is the development lab: source, harnesses and evidence.
 
 ## Where to start
 
@@ -20,7 +22,7 @@ Private development repository.
 
 These stay on the development machine:
 - Copies of the game (`work/asset-game`, `work/lab-game`), lab instances and save profiles.
-- Game-derived partner assets and release packages. Rebuild packages with `work/release/build_release_*.py` from a local game copy.
+- Game-derived data and release packages. Rebuild packages with `work/release/build_release_*.py` from a local game copy; releases are published on GitHub without game files ([chapter 98](documentation/handoff-2026-10-11/98-release-without-game-files.md)).
 - Videos, movement banks and other binaries.
 - Data dumps over 256 KB. The exceptions are the live `work/current-task-state.json` and `work/natural-moveset/review-catalog.json`, which are tracked up to 45 MB (GitHub warns at 50 MB).
 - Ghidra databases and installed tools.
