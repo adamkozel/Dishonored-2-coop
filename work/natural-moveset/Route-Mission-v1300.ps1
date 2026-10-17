@@ -88,7 +88,7 @@ try{
     # bounce: the enter event fires on entry; return to the last stand before a volume without a floor drops the player.
     if($st.bounce){Start-Sleep -Milliseconds 600;C host ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$back[0],$back[1],($back[2]+1.7))}}
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}))}
-   'use'{$e=if($st.match){@($ents|Where-Object {$_.name-match$st.match}|Select-Object -First 1)}else{@($ents|Where-Object name -eq $st.name)};if($e.Count-ne1){throw "Missing usable $($st.name)$($st.match)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
+   'use'{$e=if($st.match){@($ents|Where-Object {$_.name-match$st.match}|Sort-Object {if($st.near){[Math]::Pow($_.position[0]-$st.near[0],2)+[Math]::Pow($_.position[1]-$st.near[1],2)}else{0}}|Select-Object -First 1)}else{@($ents|Where-Object name -eq $st.name)};if($e.Count-ne1){throw "Missing usable $($st.name)$($st.match)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
     $offs=if($st.offsets){$st.offsets}else{@(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))}
     # A one-stand list ([[x,y]]) comes out of the if as the bare pair; keep it a list of stands.
     if($offs.Count-gt0-and$offs[0]-isnot[Collections.IList]){$offs=@(,@($offs))}
@@ -130,6 +130,29 @@ try{
    'wait'{Start-Sleep -Milliseconds $st.ms}
    # at: stand at a pose (x, y, view z, yaw, optional pitch), e.g. to set a carried body down on a dock before a talk.
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$st.yaw);Start-Sleep -Milliseconds 700;if($st.pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $st.pitch -Quick|Out-Null}catch{}}}
+   # jindosh: dial the Dust District's Jindosh lock. tools/diag/d2_jindosh_lock.py reads each seat's family and heirloom
+   # indices; seat i is pressed to index i (each use advances a wheel one stage; take route-dd-v1306a), aiming each wheel
+   # from stands 1 to 1.4 m west of it, pressing only while the native use focus is on it. The lock opens at index sum 31.
+   'jindosh'{$dial=[Collections.Generic.List[object]]::new()
+    $pl=Q host '--player';$me=@((Q host '--entities').entities|Where-Object pointer -eq $pl.player);$sensor=@((Q host '--components' $me[0].handle).components|Where-Object type -eq '.?AVarkCpntPlayerSensorInteraction@@')[0].pointer
+    foreach($seat in 1..5){foreach($kind in 'family','herloom'){
+      $name="ld_wheel_${kind}_$seat";$key=if($kind-eq'family'){'WheelFamilyIndex'}else{'WheelHeirloomIndex'}
+      $w=@((Q host '--entities').entities|Where-Object name -eq $name)[0];$th=[Convert]::ToUInt32(($w.handle-replace'^0x',''),16);$p=$w.position
+      for($n=0;$n-lt7;$n++){
+       $lock=& python -I "$root/tools/diag/d2_jindosh_lock.py" $root $pids.host|ConvertFrom-Json
+       $row=@($lock.wheels|Where-Object {(@($_.WheelFamily)+@($_.WheelHeirloom))-contains$name})[0];$cur=$row.$key;$dial.Add([ordered]@{wheel=$name;press=$n;index=$cur});if($cur-eq$seat){break}
+       $hit=$false
+       foreach($stand in @(@(1.0,180),@(1.4,180),@(1.0,160),@(1.0,200),@(1.4,160),@(1.4,200))){$ang=$stand[1]*[Math]::PI/180;$sx=$p[0]+$stand[0]*[Math]::Cos($ang);$sy=$p[1]+$stand[0]*[Math]::Sin($ang);$yaw0=[Math]::Atan2($p[1]-$sy,$p[0]-$sx)*180/[Math]::PI
+       foreach($pt in 10,0,20,-10,30,40,-20){foreach($yo in 0,-10,10){
+         C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$sx,$sy,($p[2]+1.35),($yaw0+$yo));Start-Sleep -Milliseconds 400
+         try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $pt -Quick|Out-Null}catch{}
+         $wd=@((Q host '--object' $sensor).words|Where-Object offset -eq '0x80');$fh=[uint32]([Convert]::ToUInt64($wd[0].word.Substring(2),16)-shr32)
+         if($fh-eq$th){I host X 300;Start-Sleep -Milliseconds 1200;$hit=$true;break}}
+        if($hit){break}}
+       if($hit){break}}
+       if(!$hit){Save "$out/$tag-dial.json" @($dial);throw "Jindosh wheel $name never took the focus"}}}}
+    Save "$out/$tag-dial.json" @($dial);$sum=(& python -I "$root/tools/diag/d2_jindosh_lock.py" $root $pids.host|ConvertFrom-Json).combination.CombinationIndexSum
+    $notes.jindosh=$sum;if($sum-ne31){throw "Jindosh lock index sum $sum, not 31"}}
    # heal: the lab health hold on or off across several steps (a carry under fire); recorded in the take.
    'heal'{if($st.on){C host 'coop_player_health_hold on';$notes.healthHold+=@("from step $tag")}else{C host 'coop_player_health_hold off'}}
    # carry: pick up an unconscious NPC (Sokolov). Each try stands beside the body's live position and holds use (900 ms or more
