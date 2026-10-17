@@ -1,0 +1,76 @@
+{
+  "passed": false,
+  "failure": "Host plays models/characters/player/emily/body.def, expected corvo",
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 31,
+        "cine": 48,
+        "pos": [
+          -28.092138,
+          -153.962173,
+          66.403618
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "applied/0/1",
+        "hold": "released/171",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 39,
+        "cine": 92,
+        "pos": [
+          -28.092138,
+          -153.962173,
+          66.403633
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      }
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:319[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 319 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost plays models/characters/player/emily/body.def, expected corvo[0m

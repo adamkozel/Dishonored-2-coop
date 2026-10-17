@@ -1,0 +1,72 @@
+{
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 56,
+        "cine": 95,
+        "pos": [
+          -52.200005,
+          -22.399996,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 6,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "0/4/1",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_LeaveTower"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 64,
+        "cine": 168,
+        "pos": [
+          -52.200005,
+          -22.399996,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          3,
+          7,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/31",
+        "ka": "4/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_LeaveTower"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}

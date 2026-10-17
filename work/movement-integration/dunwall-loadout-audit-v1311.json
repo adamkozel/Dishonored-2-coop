@@ -1,0 +1,63 @@
+{
+ "audit": "dunwall-loadout-v1311",
+ "card": 85,
+ "candidate": "candidate-npc-combat-v1214cb",
+ "created": "2026-10-17T16:32:30+02:00",
+ "takes": [
+  {
+   "take": "loadout-dunwall-v1311a",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": false,
+   "held": true,
+   "failure": "the attack step ended Ramsey's fight at 40 health on an unrelated objective completion; the attack step now uses that fallback only when health is unreadable"
+  },
+  {
+   "take": "loadout-dunwall-v1311b",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": false,
+   "held": true,
+   "failure": "the fixed-aim body search missed; searched by hand with the native focus (manual continuation in 1311c)"
+  },
+  {
+   "take": "loadout-dunwall-v1311c",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": false,
+   "held": true,
+   "note": "-NoLoad continuation to the safe room: the partner applied all four grants but received Corvo's gun_player, absent from her item wheel"
+  },
+  {
+   "take": "loadout-dunwall-v1311d",
+   "candidate": "candidate-npc-combat-v1214cb",
+   "passed": false,
+   "held": true,
+   "note": "the host started as Emily (remembered choice), so both worlds took the Emily branch; both wheels show the pistol"
+  },
+  {
+   "take": "choice-dunwall-v1311e",
+   "candidate": "candidate-npc-combat-v1214cb",
+   "passed": false,
+   "failure": "HostChoice Right with the stick still started the host as Emily"
+  },
+  {
+   "take": "choice-dunwall-v1311f",
+   "candidate": "candidate-npc-combat-v1214cb",
+   "passed": true,
+   "note": "HostChoice Left (D-pad and stick after the screen settles) starts the host as Corvo"
+  },
+  {
+   "take": "loadout-dunwall-v1311g",
+   "candidate": "candidate-npc-combat-v1214cb",
+   "passed": true,
+   "held": true,
+   "note": "exit check: host Corvo, partner Emily; the partner applied the sword, gun_emily (counterpart of gun_player), bullets and spyglass; both item wheels show the pistol, the bullet quick slot and the spyglass"
+  }
+ ],
+ "findings": [
+  "Confirmed runtime: the Dunwall safe-room grants reach the partner through the Kiscule action mirror (1214bi), host-authoritative since 1214ca (the partner sends nothing).",
+  "Confirmed static: the pistol grant is character-gated: CompareEntityDef(player, corvo/body.def) feeds ActionTestBool #2577, True gives #2305 gun_player and False #3778 gun_emily (dunwall_escape_tower_p ld_kiscule). tools/diag/d2_character_grants.py finds three such pairs feeding mirrored nodes in the whole campaign (two Dunwall gun grants, the Edge of the World boat crossbow).",
+  "1214cb (confirmed runtime, 1311g): a partner of the other character runs the other branch's node; the partner's mirror log records applied_counterpart 3778 for the host's 2305.",
+  "Confirmed runtime: the native character choice falls back to the remembered character when the steering press lands too early; the route harnesses wait 1.5 s at the choice and press Left (Corvo) twice with the D-pad and the stick, then verify both worlds' characters after the start (notes.characters) and fail on a mismatch.",
+  "Visual: with a Corvo host, the Emily partner's item wheel shows the pistol (Pistol Bullet 6-10), the bullet quick slot and the spyglass, matching the host's."
+ ],
+ "complete": true
+}

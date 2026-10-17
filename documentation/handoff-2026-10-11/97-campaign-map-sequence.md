@@ -73,6 +73,9 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   5. 1214ca: only the host sends its counts, the same host authority as the gameflow mirror. A partner's own runs stay local and are only counted.
      - The reason (held take route-tut-v1310g, confirmed runtime): the partner's world looped its own stealth restart in Memories of Training.
      - Each restart's empty loadout was replayed in the host's world, emptying the host's hands.
+  6. 1214cb ([audit 1311](../../work/movement-integration/dunwall-loadout-audit-v1311.json), confirmed static and runtime): a few grants differ by character. CompareEntityDef(player, `corvo/body.def`) feeds an ActionTestBool whose branches give Corvo's or Emily's item.
+     - `tools/diag/d2_character_grants.py` finds three such pairs in the campaign: two Dunwall pistol grants (`gun_player` or `gun_emily`) and the Edge of the World boat's crossbow.
+     - A partner of the other character runs the other branch's node. With a Corvo host, Emily's mirror log shows `applied_counterpart` for `gun_emily`, and her item wheel shows the pistol and the spyglass (take 1311g, card #85).
 - **Personal choices (1214bk):** the Outsider's offer (`ld_trigger_19`, `brief_outsider_powers`, `power_yes` → Give Mark) runs in both worlds through the trigger mirror, so each player accepts or refuses for themselves. The Mark control, power items (declaration type 9) and the `no_power` refusal item are therefore recorded but never mirrored. Each character keeps its own power: Corvo gets Blink and Emily gets Far Reach.
 - **Runtime:**
   - Take 1302d: eight actions crossed, including the mission keys the carriage removes.

@@ -1,4 +1,4 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[string]$Candidate='candidate-npc-combat-v1214cb',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[ValidateSet('Left','Right')][string]$HostChoice='Left',[string]$Candidate='candidate-npc-combat-v1214cb',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
@@ -50,7 +50,9 @@ function Settle($label,$sec){
   foreach($r in 'host','client'){$x=Snap $r;if($x.logic-ne1-or$x.pending){$ready=$false}
    if($w.ElapsedMilliseconds-$last[$r]-lt3500){continue}
    switch($x.logic){
-    14{$choice[$r]++;I $r $(if($r-eq'host'){'Left'}else{'Right'}) 250;Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
+    # 14: the character choice. The host steers with the D-pad and the stick after the screen settles (the remembered
+    # choice wins when the press lands too early: take loadout-dunwall-v1311d started the host as Emily); -HostChoice names the side (Left is Corvo, take choice-dunwall-v1311f).
+    14{$choice[$r]++;if($r-eq'host'){Start-Sleep -Milliseconds 1500;foreach($k in 1,2){& "$lab/Send-D2Input.ps1" -Role host -Button $HostChoice -LeftX $(if($HostChoice-eq'Left'){-32000}else{32000}) -DurationMs 250|Out-Null;Start-Sleep -Milliseconds 600}}else{I $r Right 250};Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
     3{I $r Right 250;Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
     5{I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
     {$_-in 8,15,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
@@ -95,6 +97,9 @@ try{
  foreach($r in 'host','client'){C $r 'coop_kiscule_mirror on';C $r 'coop_product_auto on'}
  C host "campaign $MapInfo $Chaos $HostCharacter";C client "campaign $MapInfo $Chaos emily"
  if(!(Settle 'start' $LoadSeconds)){$notes.startState=@{host=(Snap host);client=(Snap client)};foreach($r in 'host','client'){Frame $r 'start-timeout'};throw 'Both worlds did not reach mission gameplay'}
+ # The characters the worlds play (the native choice decides on a mission start; -HostCharacter is what the host must be).
+ $chars=@{};foreach($r in 'host','client'){try{$chars[$r]=(Q $r '--character').definition}catch{$chars[$r]=$null}};$notes.characters=$chars
+ if($chars.host-and$chars.host-notmatch"/$HostCharacter/"){throw "Host plays $($chars.host), expected $HostCharacter"}
  C host 'coop_player_health_hold on';C client 'coop_player_health_hold on'
  Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
  $i=0

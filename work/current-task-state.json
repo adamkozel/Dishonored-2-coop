@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-17T15:39:00+02:00",
+  "UpdatedAt": "2026-10-17T16:32:30+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22049,7 +22049,7 @@
   },
   "Campaign": {
     "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
-    "Candidate": "candidate-npc-combat-v1214ca",
+    "Candidate": "candidate-npc-combat-v1214cb",
     "Missions": {
       "01-memories-of-training": {
         "Card": 73,
@@ -22133,6 +22133,16 @@
         "KnownLimitation": "in end_p the partner keeps the two Corvo end-game gameflow nodes active (the mirror runs only in gameplay)"
       }
     },
-    "NextAction": "Follow-ups #85 (Dunwall safe-room loadout on 1214ca) and #94 (post-credits check); then stage 7 release (#30: banks and decls rebuilt from the player's own install)."
+    "NextAction": "Stage 7 release (#30): rebuild the movement banks and the voidmod decl package from the player's own install (bank XOR patches against bases sampled with the player's executable; classification in issue #30).",
+    "FollowUps": {
+      "85-dunwall-loadout": {
+        "Audit": "work/movement-integration/dunwall-loadout-audit-v1311.json",
+        "Take": "loadout-dunwall-v1311g",
+        "Status": "complete"
+      },
+      "94-endp-gameflow": {
+        "Status": "static check posted; runtime post-credits check pending"
+      }
+    }
   }
 }
