@@ -101,7 +101,9 @@ try {
         $notes["focus$step"] = Focus $hwnd; Key 0x0D; Start-Sleep -Seconds 6
     }
     $notes.hostGameplay = [ordered]@{ logic = $hs.localGameLogicState; map = $hs.localMap }
-    if ($hs.localGameLogicState -ne 1) { throw "Host product instance did not reach gameplay (logic $($hs.localGameLogicState))" }
+    if ($hs.localGameLogicState -ne 1) {
+        try { & (Get-Command ffmpeg).Source -hide_banner -loglevel error -y -f lavfi -i "gfxcapture=hwnd=$($hwnd.ToInt64()):capture_cursor=0,hwdownload,format=bgra" -frames:v 1 "$out/host-menu.png" 2>$null } catch { }
+        throw "Host product instance did not reach gameplay (logic $($hs.localGameLogicState))" }
     Focus $hwnd | Out-Null; Key 0x76 200
     $d = (Get-Date).AddSeconds(40); do { Start-Sleep 2; $ho = Json (Join-Path $data 'coop-status.json.online.json') } while ((Get-Date) -lt $d -and !($ho.lobby -and "$($ho.lobby)" -ne '0'))
     $notes.hostOnlineAfterF7 = Safe $ho

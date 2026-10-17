@@ -1,0 +1,112 @@
+{
+  "passed": false,
+  "failure": "Host product instance did not reach gameplay (logic 6)",
+  "notes": {
+    "zip": {
+      "path": "outputs/release/d2coop-v0.7.0.zip",
+      "bytes": 36708379,
+      "sha256": "3915DBC065B87A1C9B2EBB8745C44343B6C0DA3B910F526BC9B8548BA398DA9B"
+    },
+    "vmInstall": {
+      "exit": 0,
+      "seconds": 66.8,
+      "output": [
+        "Dishonored 2 found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Building the co-op resource packages from your game files...",
+        "Building the corvo movement bank from your game files...",
+        "Building the emily movement bank from your game files...",
+        "Building the prop animation tables from your game files...",
+        "Installed Dishonored 2 co-op 0.7.0: 14 files; originals backed up in d2coop-backup\\20261017-193331",
+        ""
+      ],
+      "receipt": true,
+      "dll": true,
+      "built": [
+        "base\\master.index",
+        "base\\game1voidmod.index",
+        "d2coop\\corvo-choke-bank.bin",
+        "d2coop\\emily-choke-bank.bin",
+        "d2coop\\native-tables.bin"
+      ],
+      "defender": {
+        "realTime": true,
+        "antivirus": true,
+        "steamExcluded": false,
+        "detections": []
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "97e5f2d3-a40e-4ef4-a3c7-1ec0bb0eacc2",
+      "PSShowComputerName": true
+    },
+    "vmProductBoot": true,
+    "hostPid": 41108,
+    "focus1": false,
+    "focus2": false,
+    "focus3": false,
+    "focus4": false,
+    "focus5": false,
+    "focus6": false,
+    "focus7": false,
+    "focus8": false,
+    "focus9": false,
+    "focus10": false,
+    "focus11": true,
+    "focus12": false,
+    "hostGameplay": {
+      "logic": 6,
+      "map": "campaign/menu/menu_p"
+    },
+    "vmFinal": {
+      "follow": {
+        "enabled": true,
+        "result": "idle",
+        "hostMapinfo": "",
+        "hostHigh": 0,
+        "hostMap": "0",
+        "localMap": "0",
+        "sent": 0,
+        "received": 0,
+        "loads": 0,
+        "refused": 0,
+        "role": 0,
+        "PSComputerName": "D2CoopVM",
+        "RunspaceId": "4a4e617e-9718-4fcc-9383-c937cb7a612a",
+        "PSShowComputerName": true
+      },
+      "online": {
+        "active": false,
+        "host": false,
+        "phase": 0,
+        "result": "off",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 0,
+        "steamReady": true
+      },
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "fresh": false
+    },
+    "vmUninstall": {
+      "exit": 0,
+      "receiptGone": true,
+      "dllGone": true,
+      "dataGone": true,
+      "voidmodGone": true,
+      "exeHash": "B671F8249422862B",
+      "masterHash": "E76D1A13AC95F561",
+      "output": [
+        "Co-op installation found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Rolled back: 13 added files removed, 1 originals restored.",
+        ""
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "733609d9-1782-4370-b3d3-4f2f1dc5a7f4",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Release 0.7.0 clean-PC path, two machines/two accounts: zip extracted in the VM Downloads folder, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on), host product instance F7, VM joins via steam://joinlobby and follows the host mission, both walk and see each other, F8 leaves; then Uninstall.cmd (rollback). The zip was copied into the VM, not downloaded from GitHub (private repository)."
+}
