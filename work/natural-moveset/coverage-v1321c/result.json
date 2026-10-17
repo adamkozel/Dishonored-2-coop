@@ -1,0 +1,97 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-fall",
+  "cases": [
+    {
+      "source": "host",
+      "case": "jumps",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, crouched and holstered standing jumps each presented an air episode that landed and settled; crouched take-off started crouched; armed mix followed the sword"
+      ],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "air": [
+        {
+          "from": 1357,
+          "to": 2868,
+          "samples": 13
+        },
+        {
+          "from": 4655,
+          "to": 5806,
+          "samples": 10
+        },
+        {
+          "from": 10949,
+          "to": 12579,
+          "samples": 14
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "runjump",
+      "observer": "client",
+      "passed": false,
+      "failure": "No moving landing after the run jump",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5017.0
+      ],
+      "air": [
+        {
+          "from": 1781,
+          "to": 2653,
+          "samples": 8
+        },
+        {
+          "from": 6995,
+          "to": 7880,
+          "samples": 8
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "fall",
+      "observer": "client",
+      "passed": true,
+      "failure": "restore: Native inventory read failed",
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner fall presented (13 air samples), landed and settled",
+        "Source fell 6.34 m"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1002.0
+      ],
+      "air": [
+        {
+          "from": 1344,
+          "to": 2868,
+          "samples": 13
+        }
+      ],
+      "landingCrouchMax": 0.0,
+      "fallMetres": 6.34,
+      "restored": false
+    }
+  ],
+  "scope": "Traversal completion coverage (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-18T00:20:50.955900+02:00",
+  "dll": "F27BF749A4E7CB7590BC3F9ECB6F2C4DD909913EDEA00F3B114B6DEC4DB30D0D",
+  "probe": "14C6CA5227A405A87A2F919B0E4655C1D289C3123917A03E141B914303EA0003",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214cg",
+  "protocol": 75,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 71,
+  "clips": 374,
+  "banks": [
+    {
+      "path": "work/natural-moveset/use-banks-v1266/corvo-choke-bank.bin",
+      "sha256": "08684FDC8E7A7F450885B5B68B929053CCCB64CCAFC61C9E816A3CE3A73303A6"
+    },
+    {
+      "path": "work/natural-moveset/use-banks-v1266/emily-choke-bank.bin",
+      "sha256": "A4EDC6A26BB799AB86138AE03B3972F6A16E207911A38BCDC2E48933447F79DB"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214ch (#11): 1214cg plus a transient-eligibility grace: when a packet is ineligible for presentation (an unclassified native state or invalid root motion at a classification boundary, such as keyhole entry in take 1319d), the receiver holds the presented pose for at most 150 ms instead of flashing the actor native pose; a native shadow-action actor still takes over at once. Otherwise 1214cg."
+}

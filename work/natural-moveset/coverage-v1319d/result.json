@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-keyhole: Partner presentation weight dropped in 4 samples",
+  "cases": [
+    {
+      "source": "host",
+      "case": "keyhole",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 4 samples",
+      "checks": [],
+      "lowWeightSamples": 4,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "keyhole",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Standing and crouched native keyhole peeks presented on the partner (traversal variant >= 7) in stance and recovered after the native exit"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "peeks": [
+        {
+          "peek": "enter-standing",
+          "nativePeeking": 27,
+          "presented": 26,
+          "inStance": 26,
+          "recovered": 7
+        },
+        {
+          "peek": "enter-crouched",
+          "nativePeeking": 25,
+          "presented": 24,
+          "inStance": 24,
+          "recovered": 9
+        }
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Stance completion coverage (1319, #11): side leans and upward peeks standing and crouched, stance changes while still, walking and turning, crouched-walk interruptions; both source roles, product controller; checked from the partner presentation state; fixture restored after every case."
+}

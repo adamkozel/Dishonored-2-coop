@@ -31,8 +31,8 @@ struct MovementPlayback {
         double firstRoot=0,lastRoot=0,renderTime=0;
     };
     std::array<EligibilityRecord,16> eligibilityRecords{};
-    std::uint64_t eligibilityFailures=0,eligibilityRecordCount=0;
-    unsigned eligibilityMask=0;
+    std::uint64_t eligibilityFailures=0,eligibilityRecordCount=0,eligibilityGraceFrames=0;
+    unsigned eligibilityMask=0;double lastEligibleNow=0;
     MovementBank bank;MovementClock clock;MovementSecondJump secondJump;
     std::vector<MovementBank::Joint> airLast,secondFrom;
     std::uintptr_t game=0,actor=0,animation=0,skeleton=0;unsigned handle=0;
@@ -526,7 +526,13 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         if(!p.clockTraceFrozen)p.clockTrace[p.clockTraceCount++%p.clockTrace.size()]={now,pose.time,position[2],airState?pose.motion:0,p.clock.airState,pose.airTrajectory,eligible};
         const float shadowDx=position[0]-p.clock.position[0],shadowDy=position[1]-p.clock.position[1];
         const bool shadowStep=powerActive&&power.variant==33&&eligible&&p.clock.positioned&&!pose.teleport;
-        if(!p.clock.advance(p.bank,now,position,pose.orientation,eligible,stance,semantic.state==4,horizontalLean,semantic.leanSide,sliding,airState?pose.motion:0,rise,p.armedMix,semantic.leanUp,traversalActive,transportPower,p.combatWeight<.001f&&p.equipmentWeight<.001f&&!powerActive&&!rangedActive&&!carryActive,pose.airTrajectory)){
+        // 1214ch (#11): a native state can go unclassified, or the root motion invalid, for a packet at a classification
+        // boundary (keyhole entry, holster end). Hold the presented pose (clock frozen, weight kept) for at most 150 ms
+        // instead of flashing the actor's native pose; a native shadow-action actor (mask 64) still takes over at once.
+        const bool graceHold=!eligible&&!(eligibilityMask&64u)&&p.clock.positioned&&p.clock.weight>.5f&&p.lastEligibleNow>0&&now-p.lastEligibleNow<150.;
+        if(eligible)p.lastEligibleNow=now;
+        if(graceHold)++p.eligibilityGraceFrames;
+        else if(!p.clock.advance(p.bank,now,position,pose.orientation,eligible,stance,semantic.state==4,horizontalLean,semantic.leanSide,sliding,airState?pose.motion:0,rise,p.armedMix,semantic.leanUp,traversalActive,transportPower,p.combatWeight<.001f&&p.equipmentWeight<.001f&&!powerActive&&!rangedActive&&!carryActive,pose.airTrajectory)){
             ++p.refused;
             if(!p.clockTraceFrozen){
                 p.clockTraceFrozen=true;p.clockRootCount=(std::min)(poseInterpolation.count,unsigned(p.clockRoots.size()));
@@ -535,7 +541,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         }
         else if(shadowStep)p.shadowWalkPhase=p.bank.shadowWalkDistancePhase(p.shadowWalkPhase,shadowDx,shadowDy,pose.orientation[0],pose.orientation[1]);
         equipmentRequest=eligible&&equipmentValid;
-        if(!eligible)p.clock.weight=0; // native action has immediate priority
+        if(!eligible&&!graceHold)p.clock.weight=0; // native action has priority after the grace
     }ReleaseSRWLockExclusive(&movementLock);
     requestPossessionBodyVisibility(possessionHidden);
     if(possessionHidden)requestMovementEquipment(false);
@@ -864,7 +870,7 @@ void writeMovementStatus(){
     for(unsigned i=0;i<p.clockRootCount;++i){const auto& e=p.clockRoots[i];fprintf(f,"%s{\"time\":%.6f,\"z\":%.8f,\"sequence\":%u,\"motion\":%u,\"valid\":%s}",i?",":"",e.time,e.z,e.sequence,e.motion,e.valid?"true":"false");}
     fputs("]},",f);
     fprintf(f,"\"clockRejection\":{\"code\":%u,\"count\":%u,\"dt\":%.8f,\"dz\":%.8f,\"rate\":%.8f,\"motion\":%u,\"previousAirState\":%u},",p.clock.rejectCode,p.clock.rejectCount,p.clock.rejectDt,p.clock.rejectDz,p.clock.rejectRate,p.clock.rejectMotion,p.clock.rejectAirState);
-    fprintf(f,"\"eligibility\":{\"mask\":%u,\"failures\":%llu,\"recordCount\":%llu,\"records\":[",p.eligibilityMask,p.eligibilityFailures,p.eligibilityRecordCount);
+    fprintf(f,"\"eligibility\":{\"mask\":%u,\"failures\":%llu,\"graceFrames\":%llu,\"recordCount\":%llu,\"records\":[",p.eligibilityMask,p.eligibilityFailures,p.eligibilityGraceFrames,p.eligibilityRecordCount);
     const auto eligibilityCount=(std::min)(p.eligibilityRecordCount,std::uint64_t(p.eligibilityRecords.size()));
     for(std::uint64_t i=0;i<eligibilityCount;++i){const auto& e=p.eligibilityRecords[(p.eligibilityRecordCount-eligibilityCount+i)%p.eligibilityRecords.size()];
         fprintf(f,"%s{\"now\":%.6f,\"poseTime\":%.6f,\"firstSemantic\":%.6f,\"lastSemantic\":%.6f,\"mask\":%u,\"state\":%u,\"motion\":%u,\"stance\":%u,\"semanticCount\":%u,\"stateAge\":%llu,\"motionValid\":%s,\"rootCount\":%u,\"rootResets\":%llu,\"firstRoot\":%.6f,\"lastRoot\":%.6f,\"renderTime\":%.6f}",i?",":"",e.now,e.poseTime,e.firstSemantic,e.lastSemantic,e.mask,e.state,e.motion,e.stance,e.semanticCount,e.stateAge,e.motionValid?"true":"false",e.rootCount,e.rootResets,e.firstRoot,e.lastRoot,e.renderTime);

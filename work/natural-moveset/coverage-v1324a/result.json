@@ -1,0 +1,653 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-airattack: Partner presentation weight dropped in 6 samples",
+  "cases": [
+    {
+      "source": "host",
+      "case": "swing",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Light, combo, heavy, crouched light and crouched heavy presented (5 episodes, variants 1,2,4,5,7,8,18), crouched ones crouched, settled"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "combat": [
+        {
+          "from": 1073,
+          "to": 1585,
+          "samples": 5,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 2871,
+          "to": 4025,
+          "samples": 10,
+          "variants": [
+            2,
+            7,
+            1,
+            4
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 5931,
+          "to": 8063,
+          "samples": 18,
+          "variants": [
+            2,
+            7,
+            8
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 9605,
+          "to": 9995,
+          "samples": 4,
+          "variants": [
+            5
+          ],
+          "crouched": 4,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 10887,
+          "to": 13002,
+          "samples": 18,
+          "variants": [
+            5,
+            7,
+            18
+          ],
+          "crouched": 18,
+          "moving": 0,
+          "air": 0
+        }
+      ],
+      "air": [],
+      "variants": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        18
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "block",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Standing, crouched and airborne blocks presented the guard in context for most of each hold, then recovered"
+      ],
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "combat": [
+        {
+          "from": 1027,
+          "to": 2519,
+          "samples": 13,
+          "variants": [
+            10,
+            11
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 4185,
+          "to": 5567,
+          "samples": 12,
+          "variants": [
+            13,
+            11,
+            14
+          ],
+          "crouched": 12,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 7502,
+          "to": 8160,
+          "samples": 6,
+          "variants": [
+            10,
+            11
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 6
+        }
+      ],
+      "air": [
+        {
+          "from": 7377,
+          "to": 8907,
+          "samples": 13
+        }
+      ],
+      "blocks": [
+        {
+          "block": "block",
+          "samples": 10,
+          "guard": 10,
+          "inContext": 10
+        },
+        {
+          "block": "crouched-block",
+          "samples": 10,
+          "guard": 10,
+          "inContext": 10
+        },
+        {
+          "block": "air-block",
+          "samples": 4,
+          "guard": 4,
+          "inContext": 4
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "moveattack",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Light attacks presented while walking forward, right, back and running, with the partner still travelling"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        3715.0,
+        7389.0,
+        10958.0
+      ],
+      "combat": [
+        {
+          "from": 1693,
+          "to": 2440,
+          "samples": 5,
+          "variants": [
+            1,
+            2
+          ],
+          "crouched": 0,
+          "moving": 4,
+          "air": 0
+        },
+        {
+          "from": 5242,
+          "to": 5988,
+          "samples": 5,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 5,
+          "air": 0
+        },
+        {
+          "from": 9201,
+          "to": 9699,
+          "samples": 5,
+          "variants": [
+            2,
+            1
+          ],
+          "crouched": 0,
+          "moving": 5,
+          "air": 0
+        },
+        {
+          "from": 12406,
+          "to": 13275,
+          "samples": 6,
+          "variants": [
+            2,
+            7,
+            1
+          ],
+          "crouched": 0,
+          "moving": 6,
+          "air": 0
+        }
+      ],
+      "air": [
+        {
+          "from": 7389,
+          "to": 8698,
+          "samples": 10
+        }
+      ],
+      "moving": [
+        {
+          "attack": "walk-forward",
+          "travellingAttackSamples": 4
+        },
+        {
+          "attack": "walk-right",
+          "travellingAttackSamples": 5
+        },
+        {
+          "attack": "walk-back",
+          "travellingAttackSamples": 5
+        },
+        {
+          "attack": "run",
+          "travellingAttackSamples": 6
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "airattack",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 6 samples",
+      "checks": [],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 6,
+      "teleports": [
+        6829.0
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "swing",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Light, combo, heavy, crouched light and crouched heavy presented (6 episodes, variants 1,2,3,5,7,8,18), crouched ones crouched, settled"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "combat": [
+        {
+          "from": 1162,
+          "to": 1536,
+          "samples": 4,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 2813,
+          "to": 3703,
+          "samples": 8,
+          "variants": [
+            2,
+            3
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 3969,
+          "to": 4343,
+          "samples": 4,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 5996,
+          "to": 8022,
+          "samples": 17,
+          "variants": [
+            2,
+            7,
+            8
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 9551,
+          "to": 9924,
+          "samples": 4,
+          "variants": [
+            5
+          ],
+          "crouched": 4,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 10938,
+          "to": 13010,
+          "samples": 17,
+          "variants": [
+            5,
+            7,
+            18
+          ],
+          "crouched": 17,
+          "moving": 0,
+          "air": 0
+        }
+      ],
+      "air": [],
+      "variants": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        18
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "block",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Standing, crouched and airborne blocks presented the guard in context for most of each hold, then recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "combat": [
+        {
+          "from": 1180,
+          "to": 2437,
+          "samples": 11,
+          "variants": [
+            10,
+            11,
+            12
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 4105,
+          "to": 5349,
+          "samples": 11,
+          "variants": [
+            13,
+            11
+          ],
+          "crouched": 11,
+          "moving": 0,
+          "air": 0
+        },
+        {
+          "from": 7523,
+          "to": 8148,
+          "samples": 6,
+          "variants": [
+            10,
+            11
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 6
+        }
+      ],
+      "air": [
+        {
+          "from": 7397,
+          "to": 9036,
+          "samples": 14
+        }
+      ],
+      "blocks": [
+        {
+          "block": "block",
+          "samples": 9,
+          "guard": 9,
+          "inContext": 9
+        },
+        {
+          "block": "crouched-block",
+          "samples": 10,
+          "guard": 10,
+          "inContext": 10
+        },
+        {
+          "block": "air-block",
+          "samples": 4,
+          "guard": 4,
+          "inContext": 4
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "moveattack",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Light attacks presented while walking forward, right, back and running, with the partner still travelling"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        3770.0,
+        7378.0,
+        10912.0
+      ],
+      "combat": [
+        {
+          "from": 1653,
+          "to": 2523,
+          "samples": 6,
+          "variants": [
+            1,
+            2
+          ],
+          "crouched": 0,
+          "moving": 5,
+          "air": 0
+        },
+        {
+          "from": 5619,
+          "to": 6243,
+          "samples": 6,
+          "variants": [
+            7,
+            4
+          ],
+          "crouched": 0,
+          "moving": 6,
+          "air": 0
+        },
+        {
+          "from": 8779,
+          "to": 9649,
+          "samples": 6,
+          "variants": [
+            2,
+            1
+          ],
+          "crouched": 0,
+          "moving": 6,
+          "air": 0
+        },
+        {
+          "from": 12442,
+          "to": 13313,
+          "samples": 6,
+          "variants": [
+            2,
+            4
+          ],
+          "crouched": 0,
+          "moving": 6,
+          "air": 0
+        }
+      ],
+      "air": [
+        {
+          "from": 7378,
+          "to": 8655,
+          "samples": 9
+        }
+      ],
+      "moving": [
+        {
+          "attack": "walk-forward",
+          "travellingAttackSamples": 5
+        },
+        {
+          "attack": "walk-right",
+          "travellingAttackSamples": 6
+        },
+        {
+          "attack": "walk-back",
+          "travellingAttackSamples": 6
+        },
+        {
+          "attack": "run",
+          "travellingAttackSamples": 6
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "airattack",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Early, late and running jump attacks presented combat in the air, then settled"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        6892.0
+      ],
+      "combat": [
+        {
+          "from": 1351,
+          "to": 1724,
+          "samples": 4,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 4
+        },
+        {
+          "from": 4877,
+          "to": 5261,
+          "samples": 4,
+          "variants": [
+            2
+          ],
+          "crouched": 0,
+          "moving": 0,
+          "air": 4
+        },
+        {
+          "from": 8927,
+          "to": 9534,
+          "samples": 4,
+          "variants": [
+            1
+          ],
+          "crouched": 0,
+          "moving": 4,
+          "air": 4
+        }
+      ],
+      "air": [
+        {
+          "from": 1086,
+          "to": 2723,
+          "samples": 14
+        },
+        {
+          "from": 4362,
+          "to": 5895,
+          "samples": 13
+        },
+        {
+          "from": 8802,
+          "to": 9783,
+          "samples": 7
+        }
+      ],
+      "airAttacks": [
+        {
+          "jump": "early",
+          "combatInAir": 4
+        },
+        {
+          "jump": "late",
+          "combatInAir": 4
+        },
+        {
+          "jump": "running",
+          "combatInAir": 4
+        }
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Combat coverage without an opponent (1324, #11): light, combo, heavy, crouched light and heavy attacks; standing, crouched and airborne block; attacks while walking forward, right, back and running; early, late and running jump attacks. Traversal base (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

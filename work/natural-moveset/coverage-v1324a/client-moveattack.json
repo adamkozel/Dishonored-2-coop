@@ -1,0 +1,98 @@
+{
+  "source": "client",
+  "case": "moveattack",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Light attacks presented while walking forward, right, back and running, with the partner still travelling"
+  ],
+  "camera": [
+    -31.0,
+    -148.5,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    3770.0,
+    7378.0,
+    10912.0
+  ],
+  "combat": [
+    {
+      "from": 1653,
+      "to": 2523,
+      "samples": 6,
+      "variants": [
+        1,
+        2
+      ],
+      "crouched": 0,
+      "moving": 5,
+      "air": 0
+    },
+    {
+      "from": 5619,
+      "to": 6243,
+      "samples": 6,
+      "variants": [
+        7,
+        4
+      ],
+      "crouched": 0,
+      "moving": 6,
+      "air": 0
+    },
+    {
+      "from": 8779,
+      "to": 9649,
+      "samples": 6,
+      "variants": [
+        2,
+        1
+      ],
+      "crouched": 0,
+      "moving": 6,
+      "air": 0
+    },
+    {
+      "from": 12442,
+      "to": 13313,
+      "samples": 6,
+      "variants": [
+        2,
+        4
+      ],
+      "crouched": 0,
+      "moving": 6,
+      "air": 0
+    }
+  ],
+  "air": [
+    {
+      "from": 7378,
+      "to": 8655,
+      "samples": 9
+    }
+  ],
+  "moving": [
+    {
+      "attack": "walk-forward",
+      "travellingAttackSamples": 5
+    },
+    {
+      "attack": "walk-right",
+      "travellingAttackSamples": 6
+    },
+    {
+      "attack": "walk-back",
+      "travellingAttackSamples": 6
+    },
+    {
+      "attack": "run",
+      "travellingAttackSamples": 6
+    }
+  ],
+  "restored": true
+}

@@ -39,7 +39,7 @@ function Disarm{$cw=[Diagnostics.Stopwatch]::StartNew()
 function Restore($tag){Disarm
  & "$root/work/PrepareShadowSword.ps1" *>> "$out/checkpoint-restore.log"
  & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-$tag" *>> "$out/note-restoration.log"
- foreach($r in 'host','client'){$restored=Q $r '--player-inventory'
+ foreach($r in 'host','client'){$restored=$null;for($ra=0;$ra-lt25-and!$restored;$ra++){try{$restored=Q $r '--player-inventory'}catch{Start-Sleep -Milliseconds 200}};if(!$restored){throw "Native inventory read failed after restore ($r)"}
   if(Compare-Object @($inventory[$r].items|ForEach-Object {"$($_.name):$($_.quantity)"}) @($restored.items|ForEach-Object {"$($_.name):$($_.quantity)"})){throw "Checkpoint inventory differs ($r)"}
   if((Q $r '--health' 1).current-ne56){throw "Restored player health differs ($r)"}}}
 try{

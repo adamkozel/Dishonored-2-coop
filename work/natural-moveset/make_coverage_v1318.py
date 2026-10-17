@@ -30,6 +30,9 @@ rep("# 1287 (#11): 'mana'", "# 1318 (#11, locomotion completion): walk8, crouch8
 # pwsh -File passes "-Cases a,b" as one string (take 1321b ran one case named "jumps,runjump,..."): split it, and
 # refuse anything that is still not a plain case name.
 rep("""$ErrorActionPreference='Stop';$root=""", """$Cases=@($Cases|ForEach-Object {$_-split','}|Where-Object {$_});if(@($Cases|Where-Object {$_-notmatch'^[a-z0-9]+$'}).Count){throw "Bad case list: $($Cases-join ' | ')"};$ErrorActionPreference='Stop';$root=""")
+# The checkpoint reload can still be settling when the restored inventory is read (take 1321c: "Native inventory read
+# failed" after host-fall); retry the read for up to 5 s.
+rep("""foreach($r in 'host','client'){$restored=Q $r '--player-inventory'""", """foreach($r in 'host','client'){$restored=$null;for($ra=0;$ra-lt25-and!$restored;$ra++){try{$restored=Q $r '--player-inventory'}catch{Start-Sleep -Milliseconds 200}};if(!$restored){throw "Native inventory read failed after restore ($r)"}""")
 # Per-case recording length.
 rep("""   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0""",
     """   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$segments=[Collections.Generic.List[object]]::new();$placed=$false;$teleports=[Collections.Generic.List[double]]::new()""")
