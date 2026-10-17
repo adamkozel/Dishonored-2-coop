@@ -1,0 +1,77 @@
+{
+  "notes": {
+    "healthHold": [
+      "from step step09-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dust/dust_p_lowchaos",
+        "epoch": 41,
+        "cine": 34,
+        "pos": [
+          -58.773884,
+          -50.493244,
+          -47.50563
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          3,
+          4,
+          5,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 8,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "0/0/0",
+        "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dust/dust_p_lowchaos",
+        "epoch": 41,
+        "cine": 63,
+        "pos": [
+          2.249744,
+          -83.692848,
+          -25.535624
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          3,
+          4,
+          5,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/141",
+        "ka": "0/0/0",
+        "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "Native inventory read failed"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "failure": "Jindosh wheel ld_wheel_family_3 never took the focus",
+  "passed": false,
+  "scope": "Campaign route steps for campaign/boat/dust/boat_dust.mapinfo in lab product mode; Dunwall fixture restored."
+}
