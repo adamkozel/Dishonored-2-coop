@@ -33,6 +33,12 @@
       "take": "route-dd-v1306d",
       "candidate": "candidate-npc-combat-v1214bx",
       "passed": true
+    },
+    {
+      "take": "campaign-dust-vm-v1306a",
+      "candidate": "candidate-npc-combat-v1214bx",
+      "passed": true,
+      "twoAccounts": true
     }
   ],
   "findings": [
@@ -41,13 +47,16 @@
     "Using ld_jindosh_door_unlocked gave the prompt and the result screen: the host's mission end was applied by the partner and both worlds loaded bunker_p_lowchaos (A Crack in the Slab) in gameplay. The gang leaders (Paolo, Byrne, Durante) are not needed once the lock is dialled.",
     "Take 1306b: the boat, the skiff and Meagan's briefing passed; the jindosh step dialled seats 1 and 2 (the lists differ per load, and the step reads them live) but family wheel 3 never took the focus from the single stand 1 m west. The step now tries stands at 1 and 1.4 m and bearings 160 to 200 degrees, as the held probes did.",
     "Take 1306c: the jindosh step dialled all five seats from live state (index sum 31) with the broader stands; within that step's settle the door scene and the door itself ran (the settle answers scenes with use) and both worlds loaded bunker_p_lowchaos with equal gameflow [227,5,3,8,0,5,0]. The take failed only at the now redundant door step, which is skipped once the host is in the bunker.",
-    "Take 1306d (lab product mode): PASS. One continuous run: the Dreadful Wale (Sokolov, the skiff), Meagan's briefing, the Jindosh lock dialled from live state (index sum 31), the door and the result screen; the host's mission end reached the partner and both worlds loaded bunker_p_lowchaos with equal gameflow [227,5,3,8,0,5,0]; the restore passed."
+    "Take 1306d (lab product mode): PASS. One continuous run: the Dreadful Wale (Sokolov, the skiff), Meagan's briefing, the Jindosh lock dialled from live state (index sum 31), the door and the result screen; the host's mission end reached the partner and both worlds loaded bunker_p_lowchaos with equal gameflow [227,5,3,8,0,5,0]; the restore passed.",
+    "Take campaign-dust-vm-v1306a (1214bx, two Steam accounts: host Corvo on this PC, client Emily in the lab VM): PASS. The lock was dialled from live state (index sum 31), the host's mission end (identity campaign/bunker/bunker.mapinfo) was applied by the VM client, both worlds reached bunker_p_lowchaos with equal gameflow [227,5,3,8,0,5,0], and the restore passed. The host's final both-ready hold reached its 90 s cap while the VM client loaded (as in vm-v1304a). The host video (1095 s of presented frames) was reviewed at six points: the boat, Sokolov at the skiff prompt, Meagan's briefing, the lock's family wheels, a load and the closing scene."
   ],
   "next": [
-    "Two-account take campaign-dust-vm-v1306a on the 1306d route."
+    "A Crack in the Slab (#80): bunker_p (present and past), bunker_backyard_p, dust_return_p, void_03."
   ],
   "evidence": {
     "lab": "route-dd-v1306d",
+    "twoAccounts": "campaign-dust-vm-v1306a",
     "route": "work/natural-moveset/routes/dd-full-v1306d.json"
-  }
+  },
+  "status": "complete"
 }

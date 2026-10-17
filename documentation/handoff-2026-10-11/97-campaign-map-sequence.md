@@ -129,7 +129,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **A paused partner (1214bw–1214bx):** in the first two-account takes the VM client sat in the pause menu or a scene when the host left the boat, and the transition expired. The pause menu also stops the engine services. Received transitions and mission ends now stay pending while the partner is outside gameplay on the source map, time without a service call doesn't count toward their caps, and they apply when the partner resumes.
 - **Passes:** lab take route-cu-v1305f and two-account take campaign-curator-vm-v1305c (host on this PC, client in the lab VM), both ending in `boat_dust` with equal gameflow.
 
-## The Dust District (takes 1306a–1306d, [audit 1306](../../work/movement-integration/campaign-dust-audit-v1306.json))
+## The Dust District (takes 1306a–1306d, two accounts campaign-dust-vm-v1306a, [audit 1306](../../work/movement-integration/campaign-dust-audit-v1306.json))
 
 - **Required path (confirmed static and runtime):**
   1. The Dreadful Wale: the briefing trigger, Sokolov's talk, then the skiff.
@@ -141,5 +141,6 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - A seat is right when both indices are equal. The lock records 2^(index−1) per seat and opens at index sum 31.
   - Each use advances a wheel one stage. Seat *i* is dialled to index *i* with focus-guided presses (the route's `jindosh` step). The lists change per load, so the step reads them live with `tools/diag/d2_jindosh_lock.py`.
 - **Tool notes:** int variables keep their value at +0x1c and lists at +0x28. The lock's nested decl table has 256 buckets.
+- **Passes:** lab take route-dd-v1306d and two-account take campaign-dust-vm-v1306a, both ending in `bunker_p` with equal gameflow.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
