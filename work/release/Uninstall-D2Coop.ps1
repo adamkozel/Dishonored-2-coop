@@ -3,7 +3,8 @@ param([string]$GameDirectory,[switch]$KeepBackup)
 # removes added files, restores every backed-up original byte-identically and verifies the restored hashes.
 # The executable and steam_api64.dll are never touched.
 $ErrorActionPreference='Stop'
-function Get-Sha256Hash($p){(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash}
+# SHA-256 through .NET: Windows PowerShell started from PowerShell 7 may not load Get-FileHash.
+function Get-Sha256Hash($p){$s=[IO.File]::OpenRead((Resolve-Path -LiteralPath $p).Path);try{$h=[Security.Cryptography.SHA256]::Create();-join($h.ComputeHash($s)|ForEach-Object {$_.ToString('X2')})}finally{$s.Dispose()}}
 function Find-Dishonored2{
   $steam=$null;foreach($k in 'HKCU:\Software\Valve\Steam','HKLM:\SOFTWARE\WOW6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam'){
     $v=Get-ItemProperty -Path $k -ErrorAction SilentlyContinue;if($v){if($v.SteamPath){$steam=$v.SteamPath}elseif($v.InstallPath){$steam=$v.InstallPath}};if($steam){break}}

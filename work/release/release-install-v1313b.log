@@ -1,0 +1,56 @@
+{
+  "package": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0",
+  "failure": "One or more release cases failed",
+  "cases": [
+    {
+      "case": "install",
+      "message": "Building the co-op resource packages from your game files...\nBuilding the corvo movement bank from your game files...\nBuilding the emily movement bank from your game files...\nBuilding the prop animation tables from your game files...\nArgument types do not match\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0\\Install-D2Coop.ps1:71 char:1\r\n+ @{installed=(Get-Date).ToString('o');version=$manifest.version;candid ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (:) [], ArgumentException\r\n    + FullyQualifiedErrorId : System.ArgumentException\r\n \r\n\r\n",
+      "passed": false
+    },
+    {
+      "case": "built_banks_load",
+      "message": "PASS: both actual banks, closed cycles, malformed payloads, layout/root/event guards, angle seam and distance-based phase\r\n",
+      "passed": true
+    },
+    {
+      "case": "built_tables_parse",
+      "message": "17",
+      "passed": true
+    },
+    {
+      "case": "reinstall_refused",
+      "message": "base/master.index is not the original; restore it (Steam: Properties > Installed Files > Verify) first.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0\\Install-D2Coop.ps1:33 char:98\r\n+ ... ndexSha256){throw 'base/master.index is not the original; restore it  ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (base/master.ind... Verify) first.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : base/master.index is not the original; restore it (Steam: Properties > Installed Files > \r\n    Verify) first.\r\n \r\n\r\n",
+      "passed": false
+    },
+    {
+      "case": "rollback_byte_identical",
+      "message": "No co-op install receipt here; nothing to roll back.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0\\Uninstall-D2Coop.ps1:23 char:44\r\n+ ... ceiptPath)){throw 'No co-op install receipt here; nothing to roll bac ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (No co-op instal...g to roll back.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : No co-op install receipt here; nothing to roll back.\r\n \r\n\r\n",
+      "passed": false
+    },
+    {
+      "case": "wrong_exe_refused_unchanged",
+      "message": "Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing changed.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0\\Install-D2Coop.ps1:29 char:95\r\n+ ... ableSha256){throw 'Unsupported Dishonored2.exe build (the mod needs t ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Unsupported Dis...othing changed.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing cha \r\n   nged.\r\n \r\n\r\n",
+      "passed": true
+    },
+    {
+      "case": "modified_master_refused_unchanged",
+      "message": "base/master.index is not the original; restore it (Steam: Properties > Installed Files > Verify) first.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.7.0\\Install-D2Coop.ps1:33 char:98\r\n+ ... ndexSha256){throw 'base/master.index is not the original; restore it  ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (base/master.ind... Verify) first.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : base/master.index is not the original; restore it (Steam: Properties > Installed Files > \r\n    Verify) first.\r\n \r\n\r\n",
+      "passed": true
+    },
+    {
+      "case": "steam_install_untouched",
+      "message": null,
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "timing": {
+    "peakSetupMB": 1262.0,
+    "seconds": 49.4
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Test-ReleaseInstall-v1313.ps1:64[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  64 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mOne or more release cases failed[0m

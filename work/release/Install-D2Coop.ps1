@@ -8,7 +8,8 @@ param([string]$GameDirectory)
 # file has been built and checked.
 $ErrorActionPreference='Stop'
 $package=$PSScriptRoot;$manifest=Get-Content (Join-Path $package 'manifest.json') -Raw|ConvertFrom-Json
-function Get-Sha256Hash($p){(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash}
+# SHA-256 through .NET: Windows PowerShell started from PowerShell 7 may not load Get-FileHash.
+function Get-Sha256Hash($p){$s=[IO.File]::OpenRead((Resolve-Path -LiteralPath $p).Path);try{$h=[Security.Cryptography.SHA256]::Create();-join($h.ComputeHash($s)|ForEach-Object {$_.ToString('X2')})}finally{$s.Dispose()}}
 function Find-Dishonored2{
   # Steam's library folders list every library; Dishonored 2 is app 403640.
   $steam=$null;foreach($k in 'HKCU:\Software\Valve\Steam','HKLM:\SOFTWARE\WOW6432Node\Valve\Steam','HKLM:\SOFTWARE\Valve\Steam'){
@@ -54,18 +55,31 @@ try{
   Invoke-Setup @('tables',$game,(Join-Path $package 'data\native-tables.recipe'),(Join-Path $stage 'd2coop')) 'the prop animation tables'|Out-Null
   foreach($g in $manifest.generated){if(!(Test-Path -LiteralPath (Join-Path $stage $g.path))){throw "Missing built file: $($g.path); nothing changed."}}
 }catch{Remove-Item -LiteralPath $stage -Recurse -Force -ErrorAction SilentlyContinue;throw}
-# Install: back up what is replaced, copy shipped and built files, verify, write the receipt.
+# Install: back up what is replaced, write the receipt, then copy and verify. Any failure while copying or
+# verifying rolls everything back, and the receipt lets Uninstall-D2Coop.ps1 finish a rollback that was cut short.
 $items=@($manifest.files|ForEach-Object {[pscustomobject]@{path=$_.path;source=(Join-Path $package "files/$($_.path)")}})+@($manifest.generated|ForEach-Object {[pscustomobject]@{path=$_.path;source=(Join-Path $stage $_.path)}})
 $stamp=Get-Date -Format 'yyyyMMdd-HHmmss';$backup=Join-Path $game "d2coop-backup/$stamp"
 New-Item -ItemType Directory -Force $backup|Out-Null
-$backedUp=New-Object System.Collections.Generic.List[object];$added=New-Object System.Collections.Generic.List[string];$installed=New-Object System.Collections.Generic.List[object]
+$backedUp=@();$added=@();$installed=@()
 foreach($i in $items){
   $target=Join-Path $game $i.path
-  if(Test-Path -LiteralPath $target){$dest=Join-Path $backup $i.path;New-Item -ItemType Directory -Force (Split-Path $dest)|Out-Null;Copy-Item -LiteralPath $target $dest;$backedUp.Add(@{path=$i.path;sha256=(Get-Sha256Hash $target)})}
-  else{$added.Add($i.path)}
+  if(Test-Path -LiteralPath $target){$dest=Join-Path $backup $i.path;New-Item -ItemType Directory -Force (Split-Path $dest)|Out-Null;Copy-Item -LiteralPath $target $dest;$backedUp+=[pscustomobject]@{path=$i.path;sha256=(Get-Sha256Hash $target)}}
+  else{$added+=$i.path}
+  $installed+=[pscustomobject]@{path=$i.path;sha256=(Get-Sha256Hash $i.source)}
 }
-foreach($i in $items){$dest=Join-Path $game $i.path;New-Item -ItemType Directory -Force (Split-Path $dest)|Out-Null;Copy-Item -LiteralPath $i.source $dest -Force;$installed.Add(@{path=$i.path;sha256=(Get-Sha256Hash $i.source)})}
-foreach($i in $installed){if((Get-Sha256Hash (Join-Path $game $i.path))-ne$i.sha256){throw "Installed file mismatch: $($i.path) (run Uninstall.cmd to roll back)"}}
+[pscustomobject]@{installed=(Get-Date).ToString('o');version=$manifest.version;candidate=$manifest.candidate;backup="d2coop-backup/$stamp";backedUp=$backedUp;added=$added;files=$installed}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $receiptPath -Encoding UTF8
+try{
+  foreach($i in $items){$dest=Join-Path $game $i.path;New-Item -ItemType Directory -Force (Split-Path $dest)|Out-Null;Copy-Item -LiteralPath $i.source $dest -Force}
+  foreach($i in $installed){if((Get-Sha256Hash (Join-Path $game $i.path))-ne$i.sha256){throw "Installed file mismatch: $($i.path)"}}
+}catch{
+  $problem=$_.Exception.Message
+  foreach($a in $added){$t=Join-Path $game $a;if(Test-Path -LiteralPath $t){Remove-Item -LiteralPath $t -Force}}
+  foreach($b in $backedUp){Copy-Item -LiteralPath (Join-Path $backup $b.path) (Join-Path $game $b.path) -Force}
+  $restored=@($backedUp|Where-Object {(Get-Sha256Hash (Join-Path $game $_.path))-ne$_.sha256}).Count-eq0
+  if($restored){Remove-Item -LiteralPath $receiptPath -Force;Remove-Item -LiteralPath $backup -Recurse -Force}
+  Remove-Item -LiteralPath $stage -Recurse -Force -ErrorAction SilentlyContinue
+  if($restored){throw "Install failed and was rolled back: $problem"}
+  throw "Install failed: $problem. Run Uninstall.cmd to restore the original files."
+}
 Remove-Item -LiteralPath $stage -Recurse -Force
-@{installed=(Get-Date).ToString('o');version=$manifest.version;candidate=$manifest.candidate;backup="d2coop-backup/$stamp";backedUp=@($backedUp);added=@($added);files=@($installed)}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $receiptPath -Encoding UTF8
 "Installed Dishonored 2 co-op $($manifest.version): $($installed.Count) files; originals backed up in d2coop-backup\$stamp"

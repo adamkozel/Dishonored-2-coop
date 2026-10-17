@@ -1,0 +1,84 @@
+# Dishonored 2 Corvo/Emily co-op 0.7.0
+
+Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
+
+**This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Requirements
+
+- Windows 10 or 11, 64-bit.
+- Dishonored 2 on Steam, current version: `Dishonored2.exe` SHA-256 `B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180`. The installer checks this for you.
+- **Both players own the game** and install the **same mod version**.
+- The two Steam accounts are **Steam friends**, and the Steam overlay is enabled (it shows the invite).
+- No other Dishonored 2 mods: `base\master.index` must be the original.
+- About 1 GB of free disk space in the game folder and 2 GB of free memory while installing.
+
+## Install (both players)
+
+1. Close Dishonored 2.
+2. Download `d2coop-v0.7.0.zip` from the GitHub release and extract it anywhere.
+3. Double-click **`Install.cmd`**.
+   - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
+   - It checks the game version and the package files.
+   - It then builds the co-op files from your game: resource packages, the partner movement banks and prop animation tables. This takes one to three minutes.
+   - It changes nothing in the game folder until every file is built and checked.
+   - It backs up `base\master.index` (and any existing `dinput8.dll`) into `d2coop-backup\` and writes `d2coop-install-receipt.json`.
+
+`Dishonored2.exe` and `steam_api64.dll` are never replaced.
+
+## Play
+
+1. Both players start Dishonored 2 from Steam as usual.
+2. **Host (Corvo):** start a new game as Corvo, or load a Corvo save. In game, press **F7**. A friends-only Steam lobby is created and Steam's invite window opens. Invite your friend.
+3. **Partner (Emily):** accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself.
+4. Once both players are in the same mission, every co-op system turns on by itself.
+5. **F8** leaves the session.
+
+## Saves, deaths and missions
+
+- Each game keeps its own saves in its usual profile: the host's are Corvo saves, the partner's are Emily saves.
+- To continue later, the host loads their save and presses F7, and the partner joins again. The partner's game follows the host's mission.
+- When either player dies, both see the game-over screen. Restarting from the last checkpoint restarts both games together.
+- Cutscenes play for both players. Mission ends take both players to the next mission together.
+
+## Uninstall
+
+Double-click **`Uninstall.cmd`** (or `Uninstall.cmd "<your Dishonored2 folder>"`).
+- It removes everything the installer added.
+- It restores the original files byte for byte and checks them.
+
+To be completely sure afterwards, let Steam verify the game files: *Properties > Installed Files > Verify integrity of game files*.
+
+## Troubleshooting
+
+| Problem | What to do |
+|---|---|
+| "Unsupported Dishonored2.exe build" | Update the game in Steam. The mod supports only the version above. |
+| "base/master.index is not the original" | Another mod or an old install changed it. Verify the game files in Steam, then install again. |
+| "Dishonored 2 was not found" | Pass your game folder to `Install.cmd` (see Install). |
+| "Co-op is already installed here" | Run `Uninstall.cmd` first. |
+| Windows Defender reports `dinput8.dll` (for example `Trojan:Win32/Bearfoos.A!ml`) | This is a false positive. The mod hooks the game's own functions, which is what this heuristic looks for. Restore the file from *Protection history*, or add the game folder as an exclusion, then install again. |
+| F7 does nothing | Check that `d2coop\d2coop.cfg` exists in the game folder (re-install). The game window must have focus. |
+| The invite window does not open | Enable the Steam overlay for Dishonored 2. |
+| The partner cannot join | Both players need the same mod version and must be Steam friends. The lobby is friends-only. |
+| Something went wrong during install | Nothing in the game folder changed unless the installer said "Installed". Run `Uninstall.cmd` if a receipt exists. |
+
+## Known limitations
+
+- Two players only. The host is always Corvo and the partner is always Emily.
+- Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
+- In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
+- A few combat moves are not yet shown on the partner, for example Emily's counterattack and knockdowns ([#9](https://github.com/adamkozel/Dishonored-2-coop/issues/9)).
+- The partner's movement banks are rebuilt from your game's animations. On a different CPU the values can differ from ours in their last digits, which is invisible.
+- Some partner movement clips are retargeted from Adobe Mixamo motion.
+- The game uses a little more memory over long sessions, with or without the mod. Restart the game after several hours.
+
+## What the installer builds
+
+| File | Built from |
+|---|---|
+| `base\master.index`, `base\game1voidmod.*` to `game4voidmod.*` | your resource containers and `data\decl-recipes.bin` (our text and line copies from your own decl files) |
+| `d2coop\corvo-choke-bank.bin`, `d2coop\emily-choke-bank.bin` | your animations, sampled through your own `Dishonored2.exe`, and `data\*-bank.patch` (which animations, times and blends, plus our corrections) |
+| `d2coop\native-tables.bin` | your prop and first-person animations and `data\native-tables.recipe` |
+
+The release ships only our own files: `dinput8.dll` (the mod), `bin\d2coop_setup.exe` (the builder), the data above and these scripts.
