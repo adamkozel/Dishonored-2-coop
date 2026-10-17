@@ -4,7 +4,7 @@ The release must not redistribute game files. This folder records where each gam
 
 | File | Content |
 |---|---|
-| `bank-clips.json` | Every clip of the shipped movement banks (`use-banks-v1212`, 374 clips per role), traced through 77 bank manifests to its sources. Each clip records its category (`native-sampled`, `mixamo` or `authored`), donor files, native assets, Mixamo sources and whether it embeds the game's bind translations. |
+| `bank-clips.json.gz` (gzip) | Every clip of the shipped movement banks (`use-banks-v1212`, 374 clips per role), traced through 77 bank manifests to its sources. Each clip records its category (`native-sampled`, `mixamo` or `authored`), donor files, native assets, Mixamo sources and whether it embeds the game's bind translations. |
 | `chain_table.md`, `chain_table.json` | The bank chain from `D2MOVE02` (`native-gaits`) to `D2MOVE71` (`use-banks-v1212`): manifests, builders, the clips each version added, and parent hashes. |
 | `bank-tools/` | The read-only scripts that built the two tables. They were run once from the session scratchpad, so their paths point there. |
 | `decl-match.json` | Each of the 45 decls in `game1voidmod.resources`, matched against the game's decls of the same type by line Jaccard and `difflib` ratio. |
