@@ -1,0 +1,68 @@
+{
+ "audit": "campaign-palace-v1308",
+ "card": 81,
+ "mission": "The Grand Palace",
+ "candidate": "candidate-npc-combat-v1214bx",
+ "maps": [
+  "campaign/boat/duke_palace/boat_palace_p",
+  "campaign/palace/streets/palace_streets_p_lowchaos",
+  "campaign/palace/palace_p_lowchaos",
+  "campaign/boat/dunwall_return/boat_dunwall_return_p"
+ ],
+ "created": "2026-10-17T07:25:41+02:00",
+ "takes": [
+  {
+   "take": "route-pa-v1308a",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "held": true,
+   "failure": "held: restore with Restore-RouteHold-v1303.ps1 (a held exploration records this as its failure)",
+   "scope": "held start of the mission, continued by hand to boat_dunwall_return (manual-continuation.json)"
+  },
+  {
+   "take": "route-pa-v1308b",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "failure": "Use of script_skiff_01_usable not registered: the skiff never took the focus (made unusable when Meagan reached script_waypoint_5)"
+  },
+  {
+   "take": "route-pa-v1308c",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "failure": "Use of ld_button_01_5 not registered: the vault button never took the focus at pitches 20 to -10"
+  },
+  {
+   "take": "route-pa-v1308d",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "held": true,
+   "failure": "held at the vault entry: the button takes the focus at pitch 30 from the same stand; restored"
+  },
+  {
+   "take": "route-pa-v1308e",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "failure": "Host died in the fight with the real Duke (GameOver on both worlds)"
+  },
+  {
+   "take": "route-pa-v1308f",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": true
+  },
+  {
+   "take": "campaign-palace-vm-v1308a",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": true,
+   "twoAccounts": true
+  }
+ ],
+ "findings": [
+  "Boat: script_trigger_brief_meeting_room, then a talk with meagan_foster plays the briefing (brief_done, Task_PA_Boat_Deck complete); script_skiff_01_usable becomes usable on brief_done while the player is fit for a midnight scene, unusable again when an actor reaches script_waypoint_5, and usable again on the player's next fit-state change (confirmed static; runtime: the 1308b failure and the drop in 1308c).",
+  "Palace: the arrival triggers complete Task_PA_Get_Inside_The_Palace; killing the real Duke (luca_abele.def) completes Obj_PA_Eliminate_The_Duke; ld_trigger_enter_vault_1 completes Task_PA_Find_The_Vault; the button ld_button_01_5 (UsableNotification Used -> ActionUsable Next Stage on the locked ld_breakout_saferoom_01_1_2) opens the vault and Task_PA_Open_The_Vault completes after a 1 s delay and an autosave with a 3 s security delay (confirmed static and runtime).",
+  "Using ld_delilah_golem_01 (its UseNotification is reset when Task_PA_Capture_the_spirit becomes active) bends time, spawns Jessamine, plays dial_jessamine, swaps the Heart for heart_delilah_palace and completes Obj_PA_Capture_Delilah_Spirit; afterwards the script kills the NPCs inside ld_trigger_listvault (confirmed static; runtime in the held session and 1308f).",
+  "Leaving: Task_PA_Meet_Meagan enables ld_trigger_dukesdock; its touch sends player_ready_for_skiff_pickup (3 s), Meagan's meagan_approachingpalace scene leaves its loop and ld_trigger_extract_skiff at her boat is enabled; with Stilton mad the scene's actor is the one-armed meagan_foster.def. Her talk plays debrief_foster_end and dial_readytoleave (prompt A: player_wants_to_leave), then the result screen; both worlds load boat_dunwall_return (1308f: gameflow [228,1,3,14,0,2,0] on both).",
+  "A single hit above the current health kills through the lab health hold; the attack step's behind option reads the NPC's facing from entity rotation row 0 at +0x84 (confirmed runtime) and stands at its back.",
+  "Two-account take campaign-palace-vm-v1308a (host Corvo on this PC, client Emily in the lab VM over the friends-only Steam lobby) ran route pa-full-v1308f: both worlds ended in boat_dunwall_return_p with equal gameflow [228,1,3,14,0,2,0]; restoration passed. Host video frames show Meagan's skiff scene, the palace loading screen, the golem capture (objective Escape the Palace) and the Death to the Empress intro."
+ ],
+ "complete": true
+}
