@@ -1,0 +1,75 @@
+{
+  "failure": "Host died in the fight",
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 101,
+        "cine": 94,
+        "pos": [
+          54.718689,
+          47.140202,
+          -3.749642
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          6,
+          5,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 6,
+        "lt": "applied/0/8",
+        "hold": "released/94",
+        "ka": "0/1/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 101,
+        "cine": 378,
+        "pos": [
+          240.487335,
+          21.206985,
+          1.701644
+        ],
+        "fresh": true,
+        "gameflow": [
+          236,
+          1,
+          6,
+          5,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/8/0",
+        "hold": "released/0",
+        "ka": "1/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      }
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:296[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 296 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost died in the fight[0m

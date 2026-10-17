@@ -1,0 +1,235 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 30000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_brief_meeting_room",
+    "settle": 10000
+  },
+  {
+    "do": "talk",
+    "name": "story/meagan_foster\\.def",
+    "near": [
+      -3.9,
+      14.8
+    ],
+    "settle": 150000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -6.34,
+      -34.67,
+      10.6
+    ],
+    "yaw": 180,
+    "settle": 4000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 200000
+  },
+  {
+    "do": "expect",
+    "map": "palace/streets/palace_streets",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "ld_streets_door_tr_palace_ext_topalace",
+    "focus": true,
+    "offsets": [
+      [
+        -0.707,
+        -0.707
+      ],
+      [
+        -1.06,
+        -1.06
+      ]
+    ],
+    "z": -3.46,
+    "pitches": [
+      -10,
+      0,
+      10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "palace/palace_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_player_reach_palace",
+    "settle": 8000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_task_entering_palace",
+    "settle": 8000
+  },
+  {
+    "do": "attack",
+    "name": "story/luca_abele\\.def",
+    "near": [
+      255.6,
+      -25.9
+    ],
+    "max": 80,
+    "settle": 10000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_enter_vault_1",
+    "settle": 8000
+  },
+  {
+    "do": "use",
+    "name": "ld_button_01_5",
+    "focus": true,
+    "offsets": [
+      [
+        -0.8,
+        0
+      ],
+      [
+        -1.1,
+        0
+      ]
+    ],
+    "z": -7.65,
+    "pitches": [
+      20,
+      30,
+      25,
+      35,
+      10,
+      40,
+      0
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "checkMs": 6000,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "ld_delilah_golem_01",
+    "focus": true,
+    "offsets": [
+      [
+        -1.2,
+        0
+      ],
+      [
+        -1.6,
+        0
+      ]
+    ],
+    "z": -7.65,
+    "pitches": [
+      10,
+      0,
+      20,
+      30,
+      -10,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 200000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 30000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_dukesdock",
+    "settle": 8000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 15000
+  },
+  {
+    "do": "at",
+    "pos": [
+      370.56,
+      17.08,
+      -15.9
+    ],
+    "yaw": -60,
+    "settle": 5000
+  },
+  {
+    "do": "talk",
+    "name": "story/meagan_foster\\.def",
+    "near": [
+      372.7,
+      14.1
+    ],
+    "settle": 300000
+  },
+  {
+    "do": "expect",
+    "map": "boat/dunwall_return/boat_dunwall_return",
+    "ms": 300000,
+    "settle": 5000
+  }
+]

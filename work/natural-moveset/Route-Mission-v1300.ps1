@@ -6,7 +6,7 @@ param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/es
 #   {"do":"use","name":<entity>,"z":<eye z>?}       stand beside it and press X
 #   {"do":"at","pos":[x,y,z],"yaw":<deg>}           move there
 #   {"do":"wait","ms":<n>}
-#   {"do":"attack","name":<npc regex>,"near":[x,y],"max":<presses>}  fight it until its health is 0
+#   {"do":"attack","name":<npc regex>,"near":[x,y],"max":<presses>,"behind":true}  fight it until its health is 0 (behind: from its back)
 #   {"do":"loot","name":<npc regex>,"near":[x,y]}  use the body (search)
 #   {"do":"talk","name":<npc regex>,"near":[x,y]}  face and talk (scene must start)
 #   {"do":"press","button":"B","ms":200,"role":"host"}  one controller press (close a note)
@@ -76,6 +76,12 @@ try{
  $i=0
  function Npc($rx,$near){$all=@((Q host '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'-and$_.name-match$rx})
   if(!$all.Count){$near2=if($near){$near}else{(Snap host).pos};$names=@((Q host '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'}|Sort-Object {[Math]::Pow($_.position[0]-$near2[0],2)+[Math]::Pow($_.position[1]-$near2[1],2)}|Select-Object -First 8|ForEach-Object {"$($_.name)@$([int]$_.position[0]),$([int]$_.position[1])"});throw "No NPC matches $rx (nearest: $($names -join ' '))"};if($near){$all=@($all|Sort-Object {[Math]::Pow($_.position[0]-$near[0],2)+[Math]::Pow($_.position[1]-$near[1],2)})};$all[0]}
+# Behind: stand $dist m behind an NPC (its forward axis is the entity's rotation row 0 at +0x84; confirmed runtime,
+# take route-pa-v1308e) and face it, for a takedown from behind instead of a stand-up fight.
+ function Behind($e,$dist,$eyeUp){$w=@((Q host '--object' $e.pointer).words);$f=@($w|Where-Object offset -eq '0x80')[0];$g=@($w|Where-Object offset -eq '0x88')[0]
+  $fx=[BitConverter]::ToSingle([BitConverter]::GetBytes([Convert]::ToUInt64($f.word.Substring(2),16)),4);$fy=[BitConverter]::ToSingle([BitConverter]::GetBytes([Convert]::ToUInt64($g.word.Substring(2),16)),0)
+  $n=[Math]::Max([Math]::Sqrt($fx*$fx+$fy*$fy),.001);$fx/=$n;$fy/=$n;$p=$e.position
+  C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f($p[0]-$dist*$fx),($p[1]-$dist*$fy),($p[2]+$eyeUp),([Math]::Atan2($fy,$fx)*180/[Math]::PI))}
  function Face($p,$dist,$eyeUp){$h=(Snap host).pos;$dx=$h[0]-$p[0];$dy=$h[1]-$p[1];$n=[Math]::Max([Math]::Sqrt($dx*$dx+$dy*$dy),.001)
   $x=$p[0]+$dist*$dx/$n;$y=$p[1]+$dist*$dy/$n;$yaw=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
   C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,($p[2]+$eyeUp),$yaw)}
@@ -232,7 +238,7 @@ try{
     if($st.heal){C host 'coop_player_health_hold on';$notes.healthHold+=@("attack $($st.name)")}
     # A story NPC's health may not be readable: an objective completed during the fight also ends it.
     $gf0=(Snap host).gameflow
-    for($k=0;$k-lt$max-and!$dead;$k++){if($k%4-eq0){$npc=Npc $st.name $st.near;Face $npc.position 1.5 1.6;Start-Sleep -Milliseconds 500}
+    for($k=0;$k-lt$max-and!$dead;$k++){if($k%4-eq0){$npc=Npc $st.name $st.near;if($st.behind){Behind $npc 1.0 1.6}else{Face $npc.position 1.5 1.6};Start-Sleep -Milliseconds 500}
      & "$lab/Send-D2Input.ps1" -Role host -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
      $hp=$null;try{$hp=Q host '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null});host=(Snap host).logic});if($hp-and$hp.current-le0){$dead=$true};$gfn=(Snap host).gameflow;if($gf0-and$gfn-and$gfn[3]-gt$gf0[3]){$dead=$true}
      if((Snap host).logic-eq13){throw 'Host died in the fight'}}
