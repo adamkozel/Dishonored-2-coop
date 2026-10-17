@@ -1,0 +1,73 @@
+{
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "passed": false,
+  "notes": {
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          16.53791,
+          12.362123,
+          -4.841838
+        ],
+        "fresh": true,
+        "gameflow": [
+          242,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 8,
+        "pos": [
+          15.801695,
+          11.922181,
+          -4.829113
+        ],
+        "fresh": true,
+        "gameflow": [
+          242,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo in lab product mode; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:305[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 305 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

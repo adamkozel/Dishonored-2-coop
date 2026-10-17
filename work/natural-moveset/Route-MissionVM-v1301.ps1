@@ -1,11 +1,12 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214by',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[string]$Candidate='candidate-npc-combat-v1214bz',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
 # lobby (coop_session host_quiet / join), both in product mode
 # (coop_product_auto: mission end mirror, both-ready hold, chaos, gameflow and
 # level transition mirrors). Both load the mission start, pass the native
-# character choice (host Corvo, VM Emily), then the host runs the step list of
+# character choice (host Corvo, VM Emily; -HostCharacter emily for Memories of
+# Training, which the menu starts as Emily), then the host runs the step list of
 # Route-Mission-v1300. After each step both worlds' logic, map and gameflow
 # counts are recorded, with a host frame and a VM screen. Online sidecars
 # contain SteamIDs: only whitelisted fields are recorded. Restores: sessions
@@ -71,7 +72,7 @@ try{
  try{Stop-D2LabVMRole -Role client|Out-Null}catch{}
  & "$root/tools/vm/Sync-D2LabVMWorkspace.ps1" -Role client -SkipGameCopy *> "$out/vm-sync.log"
  $guest=Invoke-D2LabVM {(Get-FileHash C:\D2Lab\ws\outputs\d2-coop-lab\bin\dinput8.dll).Hash}
- $notes.identity=[ordered]@{candidate=$Candidate;hostDll=$pin.dll;guestDllMatches=($guest-eq$pin.dll)}
+ $notes.identity=[ordered]@{candidate=$Candidate;hostDll=$pin.dll;guestDllMatches=($guest-eq$pin.dll);hostCharacter=$HostCharacter}
  if(!$notes.identity.guestDllMatches){throw 'Guest DLL differs from the host candidate'}
  Save "$out/identity.json" $notes.identity
  $dirty=$true
@@ -92,7 +93,7 @@ try{
   $va=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string]$VideoSeconds,'-an','-c:v','libx264','-preset','veryfast','-crf','23','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+frag_keyframe+empty_moov+default_base_moof',"$out/take-host.mp4")
   $captures.Add((Start-Process (Get-Command ffmpeg).Source -ArgumentList $va -WindowStyle Hidden -RedirectStandardError "$out/take-host-capture.log" -PassThru))}
  foreach($r in 'host','client'){C $r 'coop_kiscule_mirror on';C $r 'coop_product_auto on'}
- C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"
+ C host "campaign $MapInfo $Chaos $HostCharacter";C client "campaign $MapInfo $Chaos emily"
  if(!(Settle 'start' $LoadSeconds)){$notes.startState=@{host=(Snap host);client=(Snap client)};foreach($r in 'host','client'){Frame $r 'start-timeout'};throw 'Both worlds did not reach mission gameplay'}
  C host 'coop_player_health_hold on';C client 'coop_player_health_hold on'
  Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
@@ -160,6 +161,8 @@ try{
     if($st.heal){C host 'coop_player_health_hold off'}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
+   # action: a timed host action from tools/diag/d2_route_actions.py (chase_hold, pickpocket, shoot, cycle); its args and output are kept with the step.
+   'action'{Save "$out/$tag-action-args.json" $st.args;$lines=@(python -I "$root/tools/diag/d2_route_actions.py" $root $st.name "@$out/$tag-action-args.json" 2>&1);$code=$LASTEXITCODE;$lines|Set-Content "$out/$tag-action.log";if($code){throw "Action $($st.name) failed (exit $code)"}}
    # at: stand at a pose (x, y, view z, yaw, optional pitch), e.g. to set a carried body down on a dock before a talk.
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$st.yaw);Start-Sleep -Milliseconds 700;if($st.pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $st.pitch -Quick|Out-Null}catch{}}}
    # jindosh: dial the Dust District's Jindosh lock. tools/diag/d2_jindosh_lock.py reads each seat's family and heirloom
