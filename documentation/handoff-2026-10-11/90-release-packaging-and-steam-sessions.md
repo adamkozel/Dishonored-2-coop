@@ -106,6 +106,13 @@ Every 5 s it also re-issues the idempotent session commands, so a system refused
 - With the product controller (1186) the steady rate was 6.0 and 7.1 MB/min. The co-op systems add at most about 1–2 MB/min; most of the growth is present without them (confirmed runtime).
 - Still open: a vanilla baseline without the proxy (needs a lab instance relaunched without `dinput8`), and a 2-hour soak to see whether the growth plateaus.
 
+**2-hour soak (1316, candidate 1214cf, [take](../../work/natural-moveset/mission-soak-v1316a/result.json), pass, confirmed runtime).** Same course as 1186 for 120 minutes, armed only by the product controller.
+- 19 shared deaths, alternating host and client: both death screens appeared and both worlds restarted every time.
+- At the end the transport was fresh. Product and checkpoint were armed, and the door, usable and NPC sessions had renewed after the last shared checkpoint.
+- Handle counts stayed flat (host 1413→1409, client 1394→1394).
+- Private memory grew steadily at 7.75 MB/min (host) and 7.56 MB/min (client), restarts included. That matches the 20-minute run (6.0–7.1) against the game's own rate in control 1198 (about 5 MB/min plus about 60 MB per restart). No degradation over time was seen.
+- Still open (#13): a matched control without the co-op systems or the proxy.
+
 ## Join-follow (candidate 1188, audit 1192)
 
 [Audit 1192](../../work/movement-integration/join-follow-audit-v1192.json).
