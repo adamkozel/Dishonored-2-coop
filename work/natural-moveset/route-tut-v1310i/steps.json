@@ -1,0 +1,281 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 30000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_beforecrouch",
+    "settle": 4000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_roof_3",
+    "settle": 20000
+  },
+  {
+    "do": "partner",
+    "pos": [
+      694.9,
+      -33.4,
+      -0.6
+    ],
+    "yaw": 45,
+    "crouch": true,
+    "settle": 2000
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 2000
+  },
+  {
+    "do": "action",
+    "name": "chase_hold",
+    "args": {
+      "npc": "corvo_attano_tutorial_stealth",
+      "dist": 0.85,
+      "up": 1.0,
+      "button": "RightShoulder",
+      "ms": 4500,
+      "ly": 12000,
+      "crouch": true,
+      "until": "Task_Intro_ChokeCorvo",
+      "tries": 10
+    },
+    "settle": 15000
+  },
+  {
+    "do": "action",
+    "name": "pickpocket",
+    "args": {
+      "npc": "corvo_attano_tutorial_stealth",
+      "stand": [
+        698.84,
+        -22.7
+      ],
+      "radius": 0.9,
+      "dist": 0.7,
+      "up": 1.0,
+      "pitch": 0,
+      "until": "Task_Intro_StealKey",
+      "tries": 10,
+      "then": {
+        "stand": [
+          695.48,
+          -32.33,
+          -0.6
+        ],
+        "yaw": 45,
+        "until": "Task_Intro_UnlockDoor_02"
+      },
+      "next": "Task_Intro_UnlockDoor_02"
+    },
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "ld_invisible_usable_1",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0.72
+      ],
+      [
+        1.0,
+        0.6
+      ]
+    ],
+    "z": 12.4,
+    "pitches": [
+      25,
+      35,
+      20,
+      45
+    ],
+    "yaws": [
+      0,
+      -8,
+      8
+    ],
+    "settle": 5000
+  },
+  {
+    "do": "action",
+    "name": "shoot",
+    "args": {
+      "target": "ld_bottle_01_2",
+      "stand": [
+        530.5,
+        -8.6,
+        12.4
+      ]
+    },
+    "settle": 1500
+  },
+  {
+    "do": "action",
+    "name": "shoot",
+    "args": {
+      "target": "ld_mulberry_mead_01_4",
+      "stand": [
+        530.5,
+        -8.6,
+        12.4
+      ]
+    },
+    "settle": 1500
+  },
+  {
+    "do": "action",
+    "name": "shoot",
+    "args": {
+      "target": "ld_rivera_fig_wine_01",
+      "stand": [
+        530.5,
+        -8.6,
+        12.4
+      ]
+    },
+    "settle": 3000
+  },
+  {
+    "do": "action",
+    "name": "shoot",
+    "args": {
+      "target": "ld_turnbuckle_01_small",
+      "stand": [
+        530.5,
+        -8.6,
+        12.4
+      ],
+      "up": 0.0,
+      "until": "Task_Intro_ShootBottle"
+    },
+    "settle": 3000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_endcrossbow",
+    "settle": 12000
+  },
+  {
+    "do": "action",
+    "name": "cycle",
+    "args": {
+      "face": "corvo_attano_tutorial.def",
+      "seq": [
+        {
+          "rt": 255,
+          "ms": 200
+        },
+        {
+          "ms": 1000
+        }
+      ],
+      "until": "Task_Intro_SwordAttack",
+      "ms": 40000
+    },
+    "settle": 3000
+  },
+  {
+    "do": "action",
+    "name": "cycle",
+    "args": {
+      "face": "corvo_attano_tutorial.def",
+      "seq": [
+        {
+          "b": [
+            "RightShoulder"
+          ],
+          "ms": 6000
+        },
+        {
+          "ms": 300
+        }
+      ],
+      "until": "Task_Intro_BlockAttacks",
+      "ms": 90000,
+      "faceEvery": 1
+    },
+    "settle": 3000
+  },
+  {
+    "do": "action",
+    "name": "cycle",
+    "args": {
+      "face": "corvo_attano_tutorial.def",
+      "seq": [
+        {
+          "b": [
+            "RightShoulder"
+          ],
+          "ms": 1200
+        },
+        {
+          "ms": 320
+        }
+      ],
+      "until": "Task_Intro_ParryAttack",
+      "ms": 240000
+    },
+    "settle": 3000
+  },
+  {
+    "do": "action",
+    "name": "grab",
+    "args": {
+      "face": "corvo_attano_tutorial.def",
+      "until": "Task_Intro_ChokeOffBalance",
+      "ms": 420000,
+      "press": 700,
+      "gap": 150,
+      "hold": 5500,
+      "state": 41
+    },
+    "settle": 3000
+  },
+  {
+    "do": "action",
+    "name": "cycle",
+    "args": {
+      "face": "corvo_attano_tutorial.def",
+      "seq": [
+        {
+          "b": [
+            "RightShoulder"
+          ],
+          "ms": 1200
+        },
+        {
+          "ms": 100
+        },
+        {
+          "rt": 255,
+          "ms": 200
+        },
+        {
+          "ms": 400
+        }
+      ],
+      "until": "Task_Intro_FatalityCorvo",
+      "untilLogic": true,
+      "ms": 300000
+    },
+    "settle": 20000
+  },
+  {
+    "do": "expect",
+    "map": "campaign/menu/menu_p",
+    "anyLogic": true,
+    "ms": 180000,
+    "settle": 3000
+  }
+]

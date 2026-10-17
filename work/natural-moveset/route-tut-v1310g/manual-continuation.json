@@ -1,0 +1,13 @@
+{
+  "scope": "Manual continuation of the held session route-tut-v1310g (stopped at the pickpocket, which missed 9 tries and once read a stealth restart as success). Diagnosis only.",
+  "when": "2026-10-17T14:24:11+02:00",
+  "steps": [
+    "pickpocket with six X taps while walking after Corvo and success read as the next task (Task_Intro_UnlockDoor_02) being active: theft on the second try, gate unlocked at once (d2_route_actions.py)",
+    "crossbow pickup: ld_invisible_usable_1 from 1.4 m at bearing 31 deg, pitch 25 (Task_Intro_ShootBottle active)",
+    "a crossbow shot at ld_bottle_01_2 fired nothing: Emily's hands were empty (no crossbow, no sword, no ammo counter); the D-pad quick slots did not bring the crossbow back",
+    "confirmed runtime: the partner's coop-status.json.kiscule.json counted 51 local runs of the empty-loadout node 1868853291 (ActionPlayerLoadout with no loadout), every 5 to 20 s; the host applied each one (applied 47 to 51 after the crossbow grant), emptying its hands",
+    "confirmed runtime: the partner's world has its own key Corvo; walking east from his stand he perceives the idle partner at the stealth start (--ai-targets: player1 perceived 2), so the partner's world restarts its stealth lesson in a loop and resets the partner there while the host moves on",
+    "held take 1310b's partner followed every lesson only because it had been moved, crouched, next to the gate during the stealth lesson",
+    "fixes: 1214ca makes the Kiscule action mirror host-authoritative (a partner's own runs stay local); the route harnesses gain a partner step that hides the partner, crouched, for the stealth lesson"
+  ]
+}

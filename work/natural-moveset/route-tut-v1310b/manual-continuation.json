@@ -1,0 +1,19 @@
+{
+  "scope": "Manual continuation of the held session route-tut-v1310b (Memories of Training, both worlds started as Emily). Exploration only; the route take follows.",
+  "when": "2026-10-17T13:36:36+02:00",
+  "steps": [
+    "start: both worlds load tutorial_p as Emily with Corvo as an NPC (take 1310a: the lab campaign command with corvo for the host made the host game exit at once, so the harness gains -HostCharacter emily; the menu's tutorial offers no character choice)",
+    "mobility: ld_trigger_beforecrouch completes Task_Intro_FollowCorvo; ld_trigger_roof_3 ends Obj_Intro_Mobility, plays corvo_mobility_success and moves both players to the stealth yard (722.5, -32.2); the client followed through its own scripts",
+    "stealth tutorial pages (logic 12) close with B in each world",
+    "stealth: the patrolling Corvo restarts the section (Player_Busted -> Stealth_Failed -> corvo_spotplayer -> Restart_Stealth) when he sees a player at the start; the client avatar standing at the start did not trigger it (45 s with the host hidden)",
+    "Task_Intro_ChokeCorvo: crouched, teleported 0.8-0.9 m behind the walking Corvo and RB held (choke) completes it",
+    "Task_Intro_StealKey: X pressed (while walking forward) 0.7 m behind Corvo as he arrives at his north stand (698.84, -22.7), pitch 15; pressing on the standing Corvo failed the task (Stealth_Failed); the key itself never takes the use focus",
+    "Task_Intro_UnlockDoor_02: ld_door_grid_metal_350_01_6 from (695.48, -32.33) yaw 45 takes the focus; X completes Obj_Intro_Stealth and moves both players to the crossbow yard (538.9, -4.8)",
+    "lab note: setviewpos ignores its pitch argument; pitch comes from Set-ObserverPitch.ps1",
+    "Task_Intro_GrabCrossbow: ld_invisible_usable_1 from 1.4 m at bearing 31 deg, pitch 25 (UseNotification -> Crossbow_PickedUp)",
+    "Task_Intro_ShootBottle: the crossbow (LT) breaks the Crossbow_Targets bottles ld_bottle_01_2, ld_mulberry_mead_01_4 and ld_rivera_fig_wine_01 (aimed from the native eye), then the marked ld_turnbuckle_01_small, which breaks ld_door_interior_350cm_02 (Crossbow_Door_Broken)",
+    "Task_Intro_ExitRoom: ld_trigger_endcrossbow completes Obj_Intro_Crossbow; both players move to the combat room",
+    "combat: RT completes Task_Intro_SwordAttack; RB held completes Task_Intro_BlockAttacks; a block cycle (RB 1200 ms on, 320 ms off) produces timed parries for Task_Intro_ParryAttack; block, then a fresh RB held 4.5 s chokes the off-balance Corvo (Task_Intro_ChokeOffBalance, 65 s); block then RT performs the fatality (Task_Intro_FatalityCorvo, 37 s)",
+    "end: Combat_Fatality_Success plays corvo_combat_success, then Start_Level_Transition, a fade and arkKisculeNodeActionTutorialEnd: the host returned to the main menu (menu_p) while the client stayed in the combat room with Task_Intro_FatalityCorvo active (no mirror carries the tutorial end; fixed by 1214bz)"
+  ]
+}

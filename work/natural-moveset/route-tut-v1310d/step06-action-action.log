@@ -1,0 +1,28 @@
+{"try": 0, "npc": "models/characters/def/maps/training/corvo_attano_tutorial_stealth.def_1003", "at": [710.39, -14.17, -4.71], "done": false}
+Traceback (most recent call last):
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 290, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 286, in main
+    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'shoot': shoot, 'cycle': cycle}[sys.argv[2]](args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 159, in chase_hold
+    crouch()
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 145, in crouch
+    if crouched():
+       ^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 140, in crouched
+    return 6 in [s['id'] for s in probe('--player-states')['active']]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 53, in probe
+    return json.loads(r.stdout)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

@@ -8,7 +8,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 
 | # | Mission | Maps, in play order | How it ends (gameflow) |
 |---|---|---|---|
-| 1 | Memories of Training | `tutorial_p` | Not part of the campaign chain |
+| 1 | Memories of Training | `tutorial_p` | Not part of the campaign chain: `arkKisculeNodeActionTutorialEnd` returns to the main menu (1214bz carries it to the partner) |
 | 2 | A Long Day in Dunwall | `dunwall_escape_tower_p` ↔ `dunwall_escape_streets_p` | `Mission_DW`: result screen, then `void_01` |
 | 3 | Edge of the World | `void_01_p` (A Strange Visit) → `boat_eotw_p` → `eotw_p_*chaos` | `Mission_EotW`: carriage scene, result screen, then `institute` ([chapter 89](89-mission-progression-discovery.md)) |
 | 4 | The Good Doctor | `institute_p_*chaos` | `Mission_IS`: result screen, then `boat_madinventor` |
@@ -64,12 +64,15 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Native path (confirmed static):** every queued Kiscule signal goes through the dispatcher `0x1407c0e30`. The signal holds the node id (+0xc), the input id (+0x10) and the node instance (+0x18), whose vtable names its class. From there:
   - The node's `arkKisculeInstance` (node+0x20) keeps the owning entity's handle at +0x60, and the Kiscule manager (`game+0x1f6e48`) maps entity handles to instances.
   - The node decl (node+0x28) lists the inputs, and each input's descriptor holds the handler.
-  - Class vtables (RVA): inventory `0x1b7ddf8`, loadout `0x1b7df48`, mana `0x1c65ef8`, Outsider's Mark control `0x1cd4238`.
+  - Class vtables (RVA): inventory `0x1b7ddf8`, loadout `0x1b7df48`, mana `0x1c65ef8`, Outsider's Mark control `0x1cd4238`, and the tutorial end `0x1b7b628` (1214bz).
 - **Script action mirror (`D2KA`, `coop_kiscule_mirror`, product step 20):**
   1. Each world counts its handler runs per (entity, node, input) for those classes and sends the count.
   2. The peer runs the same node's native handler in its own world until its count matches.
   3. A later local request the mirror already covered runs the dispatch with the handler stubbed, so the node's outputs still fire.
   4. Mirrored runs never echo.
+  5. 1214ca: only the host sends its counts, the same host authority as the gameflow mirror. A partner's own runs stay local and are only counted.
+     - The reason (held take route-tut-v1310g, confirmed runtime): the partner's world looped its own stealth restart in Memories of Training.
+     - Each restart's empty loadout was replayed in the host's world, emptying the host's hands.
 - **Personal choices (1214bk):** the Outsider's offer (`ld_trigger_19`, `brief_outsider_powers`, `power_yes` → Give Mark) runs in both worlds through the trigger mirror, so each player accepts or refuses for themselves. The Mark control, power items (declaration type 9) and the `no_power` refusal item are therefore recorded but never mirrored. Each character keeps its own power: Corvo gets Blink and Emily gets Far Reach.
 - **Runtime:**
   - Take 1302d: eight actions crossed, including the mission keys the carriage removes.
@@ -185,7 +188,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The Duke fights back. One take died in that fight: a single hit above current health kills even with the lab health hold. The attack step's `behind` option stands at the NPC's back, using rotation row 0 at entity +0x84 (confirmed runtime).
 - **Passes:** lab take route-pa-v1308f and two-account take campaign-palace-vm-v1308a, both ending in `boat_dunwall_return_p` with equal gameflow.
 
-## Death to the Empress (takes 1309a–1309e, [audit 1309](../../work/movement-integration/campaign-empress-audit-v1309.json))
+## Death to the Empress (takes 1309a–1309e, two accounts campaign-empress-vm-v1309a, [audit 1309](../../work/movement-integration/campaign-empress-audit-v1309.json))
 
 - **1214by (confirmed static and runtime):**
   - The boat's LevelTransition names `campaign\dunwall\return\streets\dunwall_return_streets_p.map` with backslashes. The level transition mirror required `campaign/`, so the host read `target_unread` and the partner stayed on the boat.
@@ -208,5 +211,33 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - In `end_p` the partner keeps `Obj_DTTE_EndGame_asCorvo` and `Task_DTTE_ReclaimThrone_Corvo` active. Gameflow counts: host [226,0,0,14,0,8,0], client [226,2,2,12,0,6,0].
   - Cause: the host completes them during the rescue scene, and the gameflow mirror runs only in gameplay, which `end_p` never returns to.
   - The credits play the same in both worlds.
+
+## Memories of Training (takes 1310a–1310j, two accounts campaign-training-vm-v1310b, [audit 1310](../../work/movement-integration/campaign-training-audit-v1310.json))
+
+- **Start:** the menu starts `tutorial_p` as Emily with no character choice; Corvo is the trainer NPC. The route harnesses take `-HostCharacter emily`. Take 1310a asked the lab `campaign` command for Corvo, and the host game exited as the map loaded (no Windows error event).
+- **Required path (confirmed static and runtime, held take 1310b):**
+  1. Mobility: `ld_trigger_beforecrouch` completes Task_Intro_FollowCorvo. `ld_trigger_roof_3` ends the course, plays Corvo's success scene and moves both players to the stealth yard. The client follows through its own scripts.
+  2. Stealth, which restarts whenever the patrolling Corvo sees a player (`Player_Busted`, then `Stealth_Failed` and `Restart_Stealth`). Standing at the start in his view is enough; the partner's avatar in the host's world did not trigger it.
+     - The partner's world runs the same lesson with its own Corvo. An idle partner at the start is seen there, so that world restarts in a loop and keeps resetting the partner (confirmed runtime, take 1310g). The route hides the partner, crouched, beside the gate for this lesson (`partner` step), as a human partner would hide.
+     - Choke: crouched, behind the walking Corvo, RB held.
+     - Key: X from 0.7 m behind as he walks into his north stand. Pressed on the standing Corvo, the theft is noticed and fails the task. The key never takes the use focus itself.
+     - Gate: `ld_door_grid_metal_350_01_6` from its south-west side. This completes the stealth objective and moves both players to the crossbow yard.
+  3. Crossbow: `ld_invisible_usable_1` beside the crossbow (its use sends `Crossbow_PickedUp`).
+     - Then the crossbow (LT) breaks the three `Crossbow_Targets` bottles (`ld_bottle_01_2`, `ld_mulberry_mead_01_4`, `ld_rivera_fig_wine_01`), then the marked `ld_turnbuckle_01_small`, whose fall breaks `ld_door_interior_350cm_02` (`Crossbow_Door_Broken`).
+     - `ld_trigger_endcrossbow` ends the section.
+  4. Combat with Corvo:
+     - RT attacks;
+     - RB held blocks;
+     - a block cycle (RB 1.2 s on, 0.32 s off) produces the timed parries;
+     - a parry followed by a fresh RB held chokes him off balance;
+     - a parry followed by RT performs the fatality.
+  5. End: `Combat_Fatality_Success` plays Corvo's success scene, then `Start_Level_Transition` and `arkKisculeNodeActionTutorialEnd`, which returns the world to the main menu.
+- **1214bz (confirmed static):** only the world that played the fatality ran the tutorial end, so in take 1310b the host went to the menu and the partner stayed in the combat room. The Kiscule action mirror now carries this node like a story grant: the vtable is `0x141b7b628`, confirmed by its RTTI type descriptor `.?AVarkKisculeNodeActionTutorialEnd@@`.
+- **1214ca (confirmed runtime cause):** each of those restarts ran the empty-loadout node, and the Kiscule action mirror replayed it in the host's world. The host's hands were emptied after the crossbow pickup (take 1310f broke one bottle of three). The mirror is now host-authoritative.
+- **Route notes:**
+  - The harness's `action` step runs the timed host actions in `tools/diag/d2_route_actions.py`.
+  - `setviewpos` ignores its pitch argument; pitch comes from `Set-ObserverPitch.ps1`.
+  - The tutorial grants no powers.
+- **Passes:** lab takes route-tut-v1310h and route-tut-v1310j and two-account take campaign-training-vm-v1310b, all ending with both worlds at the main menu (`menu_p`) with equal gameflow. Failed and held takes 1310a–1310g, 1310i and campaign-training-vm-v1310a are recorded in the audit.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

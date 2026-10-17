@@ -11,11 +11,17 @@
 // +0x18, mask +0x28, sorted chains {key, value +8, next +0x10}). node+0x28 is
 // the node decl (+8 id, inputs at +0x40, stride 0x48, input+8 id, input+0x20
 // descriptor with the handler at +0x30 (node) or +0x38 (node, desc, signal)).
-// For four classes (inventory, loadout, mana, the Outsider's Mark) each world
+// For five classes (inventory, loadout, mana, the Outsider's Mark, the tutorial end) each world
 // counts its handler runs per (entity, node, input) and sends the count. The
 // peer runs the same node's native handler in its own world until its count
 // matches, and a later local request the mirror already covered skips only
 // the handler, so the node's outputs still fire. Mirrored runs never echo.
+// 1214ca (#73): the host's world is the story authority, as for gameflow.
+// Only the host sends its counts; a partner's own runs stay local and are
+// only counted. In held take route-tut-v1310g the partner's world looped its
+// stealth restart (its own Corvo kept seeing the idle partner at the start)
+// and each restart's empty loadout (node 1868853291, 51 runs) was mirrored
+// into the host's world, emptying the host's hands in the crossbow lesson.
 using NativeKisculeDispatch=unsigned char*(*)(void*,unsigned char*,unsigned char*);
 using NativeKisculeHandler=char(*)(void*);
 using NativeKisculeHandlerEx=char(*)(void*,void*,void*);
@@ -28,7 +34,15 @@ struct KisculeMirrorClass{std::uintptr_t vtable;const char* name;bool mirrored;}
 // own scripts (take route-eotw-v1302e); 1214bi copied Corvo's Blink grant
 // into Emily's world (take route-eotw-v1302d). The Mark control and power or
 // no-power inventory items stay local and are only recorded.
-const KisculeMirrorClass kisculeMirrorClasses[4]={{0x1b7ddf8,"inventory",true},{0x1b7df48,"loadout",true},{0x1c65ef8,"mana",true},{0x1cd4238,"mark",false}};
+// 1214bz (#73): Memories of Training ends with arkKisculeNodeActionTutorialEnd
+// (its vtable at 0x141b7b628 follows the parameters vtable; RTTI type
+// descriptor .?AVarkKisculeNodeActionTutorialEnd@@, confirmed static), which
+// returns the world that runs it to the main menu. Only the world that played
+// Corvo's fatality ran it (held take route-tut-v1310b: the host went to the
+// menu, the partner stayed in the combat room), so it is mirrored like a
+// story grant: the peer runs the same node in its own world.
+constexpr int kisculeMirrorClassCount=5;
+const KisculeMirrorClass kisculeMirrorClasses[kisculeMirrorClassCount]={{0x1b7ddf8,"inventory",true},{0x1b7df48,"loadout",true},{0x1c65ef8,"mana",true},{0x1cd4238,"mark",false},{0x1b7b628,"tutorial_end",true}};
 const unsigned char kisculeVariableAccessorPrefix[19]={0x48,0x89,0x5c,0x24,0x10,0x57,0x48,0x83,0xec,0x30,0x48,0x8b,0x01,0x48,0x8b,0xfa,0x48,0x8b,0xd9};
 using NativeKisculeVariable=std::uintptr_t*(*)(void*,const void*);
 // The item an inventory node acts on, through the node's own variable
@@ -72,7 +86,7 @@ void kisculeEvent(const char* what,std::uint32_t cls,const std::string& entity,s
 }
 int kisculeClassOfVtable(std::uintptr_t vt){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    for(int i=0;i<4;++i)if(vt==base+kisculeMirrorClasses[i].vtable)return i;
+    for(int i=0;i<kisculeMirrorClassCount;++i)if(vt==base+kisculeMirrorClasses[i].vtable)return i;
     return -1;
 }
 int kisculeClassOf(std::uintptr_t node){std::uintptr_t vt=0;return node&&memoryRead(node,&vt,8)?kisculeClassOfVtable(vt):-1;}
@@ -137,9 +151,9 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
-            KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
+            if(localRole==0){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
             std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
-            if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
+            if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}}
     ReleaseSRWLockExclusive(&kisculeLock);
     if(!skip)return realKisculeDispatch(self,out,signal);
     // The mirror already ran this handler here: dispatch with the handler
@@ -169,8 +183,8 @@ bool installKisculeDispatchObserver(){
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
-    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||p.session!=remote.session||
-       p.sequence<=k.peerSequence||p.classIndex>3||!kisculeMirrorClasses[p.classIndex].mirrored||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
+    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||
+       p.sequence<=k.peerSequence||p.classIndex>=static_cast<std::uint32_t>(kisculeMirrorClassCount)||!kisculeMirrorClasses[p.classIndex].mirrored||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
     else{k.peerSequence=p.sequence;if(k.pending.size()<128)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
     ReleaseSRWLockExclusive(&kisculeLock);
 }
@@ -230,7 +244,7 @@ void writeKisculeMirror(){
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>24?k.eventCount-24:0;
     for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%24];
-        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<4?kisculeMirrorClasses[e.cls].name:"?",e.entity,e.node,e.input,e.count);}
+        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:"?",e.entity,e.node,e.input,e.count);}
     fprintf(f,"]}\n");
     ReleaseSRWLockShared(&kisculeLock);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);

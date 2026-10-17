@@ -1,7 +1,8 @@
-param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214by',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0,[switch]$HoldAtEnd)
+param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[string]$Candidate='candidate-npc-combat-v1214ca',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0,[switch]$HoldAtEnd)
 # Campaign route take (chapter 97): both lab worlds load a mission start in lab
 # product mode with the mission end mirror, pass the native character choice
-# (host Corvo, client Emily), then the host runs a step list:
+# (host Corvo, client Emily; -HostCharacter emily for Memories of Training, which the
+# menu starts as Emily with Corvo as an NPC), then the host runs a step list:
 #   {"do":"trigger","name":<arkTrigger>}            stand in the volume
 #   {"do":"use","name":<entity>,"z":<eye z>?}       stand beside it and press X
 #   {"do":"at","pos":[x,y,z],"yaw":<deg>}           move there
@@ -16,6 +17,8 @@ param([string]$Take='route-dunwall-v1300a',[string]$MapInfo='campaign/dunwall/es
 #   {"do":"npcs","near":[x,y]}  save the NPCs nearest a point (names, positions, health)
 #   {"do":"clear","name":<npc regex>,"near":[x,y],"radius":12,"max":4}  fight every living match nearby
 #   {"do":"follow","name":<npc regex>,"near":[x,y],"ms":<n>,"dist":2.0}  stay beside an NPC
+#   {"do":"action","name":"cycle","args":{...}}  timed host action (tools/diag/d2_route_actions.py)
+#   {"do":"partner","pos":[x,y,z],"yaw":<deg>,"crouch":true}  move the partner (client) to a stand
 #   {"do":"die","role":"host"|"client"}  native fall: shared GameOver, both restart
 #     from their own last checkpoint (chapter 88), held and released together
 # After each step both worlds' logic, map, gameflow counts by state and a
@@ -60,7 +63,7 @@ try{
  $steps=Get-Content $StepsFile -Raw|ConvertFrom-Json
  foreach($r in 'host','client'){$l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json;if((Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated process'};$pids[$r]=$l.pid;if((S $r).localGameLogicState-ne1){throw 'Gameplay required'}}
  $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
- Save "$out/identity.json" @{dll=$pin.dll;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos}
+ Save "$out/identity.json" @{dll=$pin.dll;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;hostCharacter=$HostCharacter}
  $dirty=$true
  # -VideoSeconds records both windows for the whole take (evidence video; never committed).
  $captures=[Collections.Generic.List[object]]::new()
@@ -71,7 +74,7 @@ try{
  # only after both worlds reach gameplay, after the intro's grants (1214bj).
  foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_kiscule_mirror on';C $r 'coop_product_auto on'}
  # -NoLoad starts from the current Dunwall fixture (story state after Mayhew) to iterate later steps faster.
- if(!$NoLoad){C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"}
+ if(!$NoLoad){C host "campaign $MapInfo $Chaos $HostCharacter";C client "campaign $MapInfo $Chaos emily"}
  if(!(Settle 'start' $LoadSeconds)){$notes.startState=@{host=(Snap host);client=(Snap client)};foreach($r in 'host','client'){Frame $r 'start-timeout'};throw 'Both worlds did not reach mission gameplay'}
  C host 'coop_player_health_hold on';C client 'coop_player_health_hold on'
  Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
@@ -139,6 +142,12 @@ try{
     if($st.heal){C host 'coop_player_health_hold off'}
     if(!$hit){throw "Use of $($st.name) not registered"}}
    'wait'{Start-Sleep -Milliseconds $st.ms}
+   # partner: move the partner to a stand, optionally crouched (Memories of Training: an idle partner in view of its own
+   # stealth Corvo restarts that lesson in its world in a loop, take route-tut-v1310g).
+   'partner'{C client ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}));Start-Sleep -Milliseconds 700
+    if($st.crouch){for($k=0;$k-lt4;$k++){$ids=@();try{$ids=@((Q client '--player-states').active|ForEach-Object {$_.id})}catch{};if($ids-contains6){break};I client B 150;Start-Sleep -Milliseconds 900}}}
+   # action: a timed host action from tools/diag/d2_route_actions.py (chase_hold, pickpocket, shoot, cycle); its args and output are kept with the step.
+   'action'{Save "$out/$tag-action-args.json" $st.args;$lines=@(python -I "$root/tools/diag/d2_route_actions.py" $root $st.name "@$out/$tag-action-args.json" 2>&1);$code=$LASTEXITCODE;$lines|Set-Content "$out/$tag-action.log";if($code){throw "Action $($st.name) failed (exit $code)"}}
    # at: stand at a pose (x, y, view z, yaw, optional pitch), e.g. to set a carried body down on a dock before a talk.
    'at'{C host ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$st.yaw);Start-Sleep -Milliseconds 700;if($st.pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $st.pitch -Quick|Out-Null}catch{}}}
    # jindosh: dial the Dust District's Jindosh lock. tools/diag/d2_jindosh_lock.py reads each seat's family and heirloom

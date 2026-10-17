@@ -1,0 +1,79 @@
+{
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "Action pickpocket failed (exit 1)",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 12,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 32,
+        "pos": [
+          706.309998,
+          -34.25,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          3,
+          4,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "4/0/0",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 16,
+        "pos": [
+          706.309998,
+          -34.25,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          3,
+          4,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/2/2",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "host did not reach a fresh native menu/gameplay state.",
+        "host: Native query failed host --health",
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  }
+}

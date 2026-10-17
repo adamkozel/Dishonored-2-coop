@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 298, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 294, in main
+    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'shoot': shoot, 'cycle': cycle}[sys.argv[2]](args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 187, in pickpocket
+    crouch()
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 153, in crouch
+    if crouched():
+       ^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 148, in crouched
+    return 6 in [s['id'] for s in probe('--player-states')['active']]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adako\Documents\Codex\2026-10-08\i-x20/tools/diag/d2_route_actions.py", line 61, in probe
+    raise RuntimeError(f'native read failed: {args}')
+RuntimeError: native read failed: ('--player-states',)
