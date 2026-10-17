@@ -1,0 +1,90 @@
+{
+  "failure": "Talk to story/emily_kaldwin not registered",
+  "passed": false,
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "step18-flag": {
+      "variable": "Bool_MissionStep_ThroneRoom_Reached",
+      "value": 1,
+      "ms": 606
+    },
+    "step20-flag": {
+      "variable": "Bool_MissionStep_Portal_IsActive",
+      "value": 1,
+      "ms": 611
+    },
+    "step23-flag": {
+      "variable": "Bool_MissionStep_UDW_Reached",
+      "value": 1,
+      "ms": 627
+    },
+    "step25-flag": {
+      "variable": "Bool_MissionStep_Delilah_IsDead",
+      "value": 1,
+      "ms": 598
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 36,
+        "cine": 20,
+        "pos": [
+          -47.740513,
+          27.914948,
+          61.059372
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          2,
+          3,
+          11,
+          0,
+          6,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 21,
+        "lt": "applied/0/4",
+        "hold": "released/625",
+        "ka": "12/1/0",
+        "active": "Mission_DTTE,Obj_DTTE_EndGame_asCorvo,Task_DTTE_ReclaimThrone_Corvo"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 36,
+        "cine": 41,
+        "pos": [
+          -42.496994,
+          22.638063,
+          61.038548
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          2,
+          3,
+          11,
+          0,
+          6,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/4/0",
+        "hold": "released/0",
+        "ka": "13/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_EndGame_asCorvo,Task_DTTE_ReclaimThrone_Corvo"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo in lab product mode; Dunwall fixture restored."
+}

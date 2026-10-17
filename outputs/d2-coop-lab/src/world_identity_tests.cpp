@@ -2,6 +2,7 @@
 #include "native_possession_target_fx.h"
 #include "native_mesmerize_eye.h"
 #include "world_identity.h"
+#include "map_path.h"
 #include "carry_identity.h"
 #include "world_protocol.h"
 #include "native_ai_state.h"
@@ -2045,7 +2046,13 @@ void mesmerizeTargetTests(){
 #include "npc_authority_protocol_tests.h"
 #include "npc_combat_protocol_tests.h"
 #include "npc_attack_protocol_tests.h"
+void mapPathTests(){
+    char a[]="campaign\\dunwall\\return\\streets\\dunwall_return_streets_p.map";
+    require(normalizeCampaignMapPath(a)&&!std::strcmp(a,"campaign/dunwall/return/streets/dunwall_return_streets_p.map"),"1214by a backslash level-transition map normalizes to a campaign path");
+    char c[]="campaign/dust/dust_return_p.map";require(normalizeCampaignMapPath(c)&&!std::strcmp(c,"campaign/dust/dust_return_p.map"),"1214by a slash path is unchanged");
+    char m[]="menu\\main.map";require(!normalizeCampaignMapPath(m),"1214by a non-campaign map is still refused");}
 int main() {
+    mapPathTests();
     npcAuthorityProtocolTests();
     npcCombatProtocolTests();
     npcAttackProtocolTests();

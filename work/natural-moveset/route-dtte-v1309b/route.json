@@ -1,0 +1,555 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.878783,
+        -14.885103,
+        0.109642
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.878784,
+        -14.885104,
+        0.109642
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.719754,
+        -14.513072,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.868566,
+        -15.409138,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        -6.719754,
+        -14.513072,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.868566,
+        -15.409138,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step03-talk",
+    "spec": {
+      "do": "talk",
+      "name": "dtte/meagan_foster\\.def",
+      "near": [
+        -6.6,
+        1.2
+      ],
+      "settle": 150000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        -6.184391,
+        -0.213271,
+        5.015122
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.868566,
+        -15.409138,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        -6.184391,
+        -0.213271,
+        5.015122
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.868566,
+        -15.409138,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step05-at",
+    "spec": {
+      "do": "at",
+      "pos": [
+        -6.34,
+        -34.67,
+        10.6
+      ],
+      "yaw": 180,
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        -6.32646,
+        -34.667923,
+        8.023825
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.868566,
+        -15.409138,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+    }
+  },
+  {
+    "step": "step06-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0
+        ]
+      ],
+      "z": 9.15,
+      "pitches": [
+        25,
+        15,
+        35,
+        45
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 200000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        71.627579,
+        -103.072479,
+        -8.716198
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        3,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/0",
+      "ka": "6/0/0",
+      "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+      "epoch": 21,
+      "cine": 16,
+      "pos": [
+        71.627724,
+        -103.072159,
+        -8.716262
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        3,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 3,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "6/0/0",
+      "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+    }
+  },
+  {
+    "step": "step07-expect",
+    "spec": {
+      "do": "expect",
+      "map": "dunwall/return/streets/dunwall_return_streets",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+      "epoch": 21,
+      "cine": 26,
+      "pos": [
+        71.106468,
+        -103.743721,
+        -8.544806
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        3,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/0",
+      "ka": "6/0/0",
+      "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+      "epoch": 21,
+      "cine": 16,
+      "pos": [
+        71.667877,
+        -103.019318,
+        -8.716262
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        3,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 3,
+      "lt": "applied/0/1",
+      "hold": "released/32",
+      "ka": "6/0/0",
+      "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+    }
+  }
+]

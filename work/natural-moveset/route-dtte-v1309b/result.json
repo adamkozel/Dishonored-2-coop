@@ -1,0 +1,71 @@
+{
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+        "epoch": 21,
+        "cine": 16,
+        "pos": [
+          71.667877,
+          -103.019318,
+          -8.716262
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          3,
+          3,
+          3,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "applied/0/1",
+        "hold": "released/32",
+        "ka": "6/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/streets/dunwall_return_streets_p",
+        "epoch": 21,
+        "cine": 26,
+        "pos": [
+          71.106468,
+          -103.743721,
+          -8.544806
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          3,
+          3,
+          3,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/0",
+        "ka": "6/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_GetToTheTower"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": false,
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1"
+}

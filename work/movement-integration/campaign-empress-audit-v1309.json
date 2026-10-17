@@ -1,0 +1,66 @@
+{
+ "audit": "campaign-empress-v1309",
+ "card": 82,
+ "mission": "Death to the Empress",
+ "candidate": "candidate-npc-combat-v1214by",
+ "maps": [
+  "campaign/boat/dunwall_return/boat_dunwall_return_p",
+  "campaign/dunwall/return/streets/dunwall_return_streets_p",
+  "campaign/dunwall/return/tower/dunwall_return_tower_p",
+  "campaign/dunwall/return/interior/dunwall_return_interior_p",
+  "campaign/end/end_p"
+ ],
+ "created": "2026-10-17T12:28:49+02:00",
+ "takes": [
+  {
+   "take": "route-dtte-v1309a",
+   "candidate": "candidate-npc-combat-v1214bx",
+   "passed": false,
+   "held": true,
+   "failure": "held on the boat: the skiff loaded the streets in the host's world only (the LevelTransition names its map with backslashes); restored"
+  },
+  {
+   "take": "route-dtte-v1309b",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": false,
+   "held": true,
+   "failure": "held exploration with 1214by, continued by hand to the Tower top level (manual-continuation.json); restored"
+  },
+  {
+   "take": "route-dtte-v1309c",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": false,
+   "held": true,
+   "failure": "held exploration from the Tower top level to the ending (manual-continuation.json); the restore from end_p fell back to Deploy-SourceClock (recovery.json)"
+  },
+  {
+   "take": "route-dtte-v1309d",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": false,
+   "failure": "Talk to story/emily_kaldwin not registered: the rescue talk was tried from the south of the statue"
+  },
+  {
+   "take": "route-dtte-v1309e",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": true
+  },
+  {
+   "take": "campaign-empress-vm-v1309a",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": true,
+   "twoAccounts": true
+  }
+ ],
+ "findings": [
+  "1214by (confirmed static and runtime): the boat's LevelTransition names campaign\\dunwall\\return\\streets\\dunwall_return_streets_p.map with backslashes; the level transition mirror required campaign/, so the partner stayed on the boat (1309a). map_path.h normalizes the name before the check; d2_world_identity_tests covers backslash, slash and non-campaign names.",
+  "Boat to Tower (confirmed static and runtime): a talk with Meagan plays her briefing and a dialogue choice; the skiff (after a drop beside it) loads the streets; script_door_tr_street_totower loads the Tower; script_cy_door_tr_tower_toint loads the interior; the note script_note_missionstep_dtlocked completes Find_Delilah and Find_DT_TR and activates the elevator power task.",
+  "No-power path (confirmed runtime): back through script_door_tr_int_totowe_2, the safe-room trigger script_tr_trigger_saferoom with the power off cancels the power task and activates Task_DTTE_ReachDelilah. Placing a whale oil tank in its holder through the cover's focus did not work in the held sessions.",
+  "Throne room (confirmed static and runtime): script_tr_trigger_reachthroneroom is a compound of thin doorway slabs (decoded with d2_trigger_box.py), so the route walks through the south door slab; ThroneRoom_Reached sets in under a second.",
+  "Delilah (confirmed runtime): the Heart raised with LT about 1.6 m from her sends Heart_Used and opens the portal (Portal_IsActive); script_tr_trigger_portal enters the painted world (UDW_Reached); she is killed on her pedestal (Delilah_IsDead) and script_udw_trigger_portal leads back.",
+  "Rescue (confirmed runtime): the talk with the stone Emily registers from the north of the statue (1309d failed from the south). It plays the rescue scene, the result screen and loads campaign/end/end_p (the credits) in both worlds.",
+  "Known limitation (confirmed static, runtime in 1309e and the VM take): in end_p the gameflow counts differ, host [226,0,0,14,0,8,0] and client [226,2,2,12,0,6,0]; the client keeps Obj_DTTE_EndGame_asCorvo and Task_DTTE_ReclaimThrone_Corvo active. The gameflow mirror (1214bg) publishes and applies only in gameplay (logic 1); the host completes those nodes during the rescue scene and end_p never returns to gameplay. The credits play the same in both worlds; whether anything after the credits reads those nodes is a hypothesis to check on its own card.",
+  "Restoring from end_p failed natively once (1309c); the route harness now falls back to Deploy-SourceClock and records it in notes.restoreRecovery.",
+  "Two-account take campaign-empress-vm-v1309a (host Corvo on this PC, client Emily in the lab VM over the friends-only Steam lobby) ran route dtte-full-v1309e: all four flags set (690, 1405, 725 and 674 ms), both worlds ended in campaign/end/end_p, restoration passed. Host video frames show Meagan's briefing card, the skiff, the Tower doors, the throne room, the painted world, Delilah's defeat, the result screen (Death to the Empress, mission complete, low chaos) and the credits; the VM frames show Emily in the Tower during the throne-room steps and the credits at the end."
+ ],
+ "complete": true
+}

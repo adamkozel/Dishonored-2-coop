@@ -1,0 +1,12 @@
+{
+  "scope": "Manual continuation of the held session route-dtte-v1309c (Death to the Empress), held in the throne room after the encoded steps. Exploration only.",
+  "steps": [
+    "the throne room trigger script_tr_trigger_reachthroneroom registers only at its doorway slabs (a compound of thin boxes; the south door slab x -38.45..-36.52, y 12.34..12.66): walking through it from (-37.5, 12.5) set ThroneRoom_Reached and completed Task_DTTE_ReachDelilah (confirmed runtime)",
+    "the Heart: facing Delilah from about 1.6 m and holding LT (1.5 s) sent Heart_Used (DelilahNotification), played delilah_teleportpainting_2 and set Portal_IsActive; Task_DTTE_Use_Heart complete",
+    "walking west through script_tr_trigger_portal set UDW_Reached (the painted world near x 457); Task_DTTE_Kill_Delilah active",
+    "Delilah (story/delilah_copperspoon.def) killed with focused strikes on her pedestal (2 presses): Delilah_IsDead",
+    "walking through script_udw_trigger_portal returned the player to the throne room",
+    "facing the stone Emily (story/emily_kaldwin.def on the pedestal) and pressing use played the rescue scene; both worlds reached the result screen (logic 11), then loaded campaign/end/end_p and the credits (logic 5)"
+  ],
+  "result": "Death to the Empress reached the campaign ending on both lab worlds."
+}

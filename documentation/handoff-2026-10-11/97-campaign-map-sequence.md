@@ -17,7 +17,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 | 7 | The Dust District | `boat_dust_p` → `dust_p_*chaos` | `Mission_DD`: Stilton's door, result screen, then `bunker` |
 | 8 | A Crack in the Slab | `bunker_p_*chaos` (present and past layers) → `void_03_p` → `dust_p_*chaos` (Stilton mad or dead) or `dust_return_p` (Stilton saved) | `Mission_BK`: Sokolov at the skiff, result screen, then `boat_palace` |
 | 9 | The Grand Palace | `boat_palace_p` → `palace_streets_p_*chaos` ↔ `palace_p_*chaos` | `Mission_PA`: Meagan at her boat, result screen, then `boat_dunwall_return` |
-| 10 | Death to the Empress | `boat_dunwall_return_p` → `dunwall_return_streets_p` ↔ `_interior_p` ↔ `_tower_p` | `Mission_DTTE` (last mission): result screen, then `end_p` |
+| 10 | Death to the Empress | `boat_dunwall_return_p` → `dunwall_return_streets_p` → `_tower_p` ↔ `_interior_p` (and the painted world inside `_tower_p`) | `Mission_DTTE` (last mission): the rescue scene, result screen, then `end_p` (credits) |
 
 `*chaos` maps come in `lowchaos` and `highchaos` variants. Each world picks its variant from its own chaos level, so the partner must load the variant the host loads.
 
@@ -184,5 +184,29 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The vault button takes the focus only near pitch 30.
   - The Duke fights back. One take died in that fight: a single hit above current health kills even with the lab health hold. The attack step's `behind` option stands at the NPC's back, using rotation row 0 at entity +0x84 (confirmed runtime).
 - **Passes:** lab take route-pa-v1308f and two-account take campaign-palace-vm-v1308a, both ending in `boat_dunwall_return_p` with equal gameflow.
+
+## Death to the Empress (takes 1309a–1309e, [audit 1309](../../work/movement-integration/campaign-empress-audit-v1309.json))
+
+- **1214by (confirmed static and runtime):**
+  - The boat's LevelTransition names `campaign\dunwall\return\streets\dunwall_return_streets_p.map` with backslashes. The level transition mirror required `campaign/`, so the host read `target_unread` and the partner stayed on the boat.
+  - `map_path.h` now normalizes the name, and a unit test covers it.
+- **Required path (confirmed static and runtime):**
+  1. The Dreadful Wale: a talk with Meagan (her briefing and a dialogue choice), then the skiff, after a short drop beside it.
+  2. The streets: the door to the Tower.
+  3. The Tower courtyard: the door into the interior.
+  4. The interior: the note `script_note_missionstep_dtlocked`. It completes Find_Delilah and Find_DT_TR and activates the elevator power task (three whale oil holders).
+  5. Back up the interior's top door to the Tower's top level. The safe-room trigger `script_tr_trigger_saferoom` with the power off cancels the power task and activates Task_DTTE_ReachDelilah. This is the game's own no-power path; placing a whale oil tank in its holder through the cover's focus did not work.
+  6. The throne room: its trigger registers only at the doorway slabs (`script_tr_trigger_reachthroneroom`, a compound of thin boxes), so the route walks through the south door.
+  7. The Heart: raised (LT) at Delilah, it sends `Heart_Used`, plays her painting teleport and opens the portal (`Portal_IsActive`).
+  8. Walking through `script_tr_trigger_portal` enters the painted world (`UDW_Reached`). Delilah is killed on her pedestal (`Delilah_IsDead`), and `script_udw_trigger_portal` leads back.
+  9. The rescue: a talk with the stone Emily (as Corvo), from the north of the statue. It plays the rescue scene, then the result screen, and both worlds load `campaign/end/end_p` (the credits).
+- **Route notes:**
+  - The flag step reads `sf_temp_kiscule`'s mission-step bools at each stage.
+  - Restoring from the credits failed natively once; Deploy-SourceClock relaunched the lab.
+- **Passes:** lab take route-dtte-v1309e and two-account take campaign-empress-vm-v1309a, both ending in `end_p` (the credits).
+- **Known limitation ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94), confirmed static):**
+  - In `end_p` the partner keeps `Obj_DTTE_EndGame_asCorvo` and `Task_DTTE_ReclaimThrone_Corvo` active. Gameflow counts: host [226,0,0,14,0,8,0], client [226,2,2,12,0,6,0].
+  - Cause: the host completes them during the rescue scene, and the gameflow mirror runs only in gameplay, which `end_p` never returns to.
+  - The credits play the same in both worlds.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.

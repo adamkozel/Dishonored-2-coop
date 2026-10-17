@@ -1,4 +1,4 @@
-param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214bx',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
+param([string]$Take='campaign-dunwall-vm-v1301a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[string]$Candidate='candidate-npc-combat-v1214by',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0)
 # Campaign route take across two machines and two Steam accounts (chapter 97):
 # the host lab instance on this PC (main account, Corvo) and the client lab
 # instance in the lab VM (second account, Emily) meet in a friends-only Steam
@@ -212,7 +212,7 @@ try{
      if($done){break}}
     Save "$out/$tag-carry.json" @($tries);if(!$done){throw "Carry of $($st.name) not registered"}}
    # expect: both worlds reach a map (regex) within ms, or the take fails (a mission end must move both worlds on).
-   'expect'{$w=[Diagnostics.Stopwatch]::StartNew();do{$h=Snap host;$c=Snap client;if($h.map-match$st.map-and$c.map-match$st.map-and$h.logic-eq1-and$c.logic-eq1){break}
+   'expect'{$w=[Diagnostics.Stopwatch]::StartNew();do{$h=Snap host;$c=Snap client;if($h.map-match$st.map-and$c.map-match$st.map-and(($h.logic-eq1-and$c.logic-eq1)-or$st.anyLogic)){break}
      foreach($x in @(@('host',$h),@('client',$c))){if($x[1].logic-eq2){I $x[0] B 250}} # a paused world (focus lost) resumes and follows
      Start-Sleep -Seconds 3}while($w.ElapsedMilliseconds-lt$(if($st.ms){$st.ms}else{180000}))
     if($h.map-notmatch$st.map-or$c.map-notmatch$st.map){throw "Expected both worlds on $($st.map): host $($h.map) logic $($h.logic), client $($c.map) logic $($c.logic)"}}
@@ -232,7 +232,7 @@ try{
    'follow'{$fw=[Diagnostics.Stopwatch]::StartNew();$d=if($st.dist){$st.dist}else{2.0};$trace=[Collections.Generic.List[object]]::new()
     while($fw.ElapsedMilliseconds-lt$st.ms){$npc=Npc $st.name $st.near;Face $npc.position $d 1.6;$trace.Add([ordered]@{ms=$fw.ElapsedMilliseconds;npc=$npc.name;position=$npc.position;host=(Snap host).logic});Start-Sleep -Milliseconds 1500;$x=Snap host;if($x.logic-eq13){throw 'Host died while following'};if($x.logic-ne1){[void](Settle $tag 60)}}
     Save "$out/$tag-follow.json" @($trace)}
-   'press'{$who=if($st.role){$st.role}else{'host'};if($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}} # leftTrigger: the Timepiece's timeline change
+   'press'{$who=if($st.role){$st.role}else{'host'};if($st.leftY){& "$lab/Send-D2Input.ps1" -Role $who -LeftY $st.leftY -DurationMs $(if($st.ms){$st.ms}else{800})|Out-Null}elseif($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}} # leftTrigger: the Timepiece's timeline change
    'die'{$who=if($st.role){$st.role}else{'host'};$other=if($who-eq'host'){'client'}else{'host'};$e0=@{host=(Snap host).epoch;client=(Snap client).epoch}
     # Same sequence as Test-MissionCheckpoint-v1151: both death screens ready, one
     # A each, then A only on load prompts; the checkpoint session state is traced.
@@ -269,7 +269,7 @@ try{
     Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
    'talk'{$npc=$null;try{$npc=Npc $st.name $st.near}catch{if($st.optional){$notes["$tag"]='skipped: npc gone (scene already ran)';break}else{throw}};$hit=$false
     foreach($dp in @(@(1.5,5),@(1.2,10),@(2.0,0),@(1.0,15))){Face $npc.position $dp[0] 1.65;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
-     $b=Snap host;I host X 400;Start-Sleep -Milliseconds 2000;$a=Snap host;if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+     $b=Snap host;if($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role host -LeftTrigger 255 -DurationMs $(if($st.hold){$st.hold}else{1500})|Out-Null}else{I host X 400};Start-Sleep -Milliseconds 2000;$a=Snap host;if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
     if(!$hit){throw "Talk to $($st.name) not registered"}}
    'loot'{$npc=Npc $st.name $st.near;$hit=$false
     foreach($dp in @(@(1.0,45),@(0.8,60),@(1.2,35),@(0.7,70),@(1.4,30))){$d=$dp[0];Face $npc.position $d 1.2;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role host -Pitch $dp[1] -Quick|Out-Null}catch{}
