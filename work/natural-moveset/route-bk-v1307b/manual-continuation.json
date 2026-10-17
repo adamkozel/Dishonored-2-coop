@@ -1,0 +1,15 @@
+{
+  "scope": "Manual continuation of the held session route-bk-v1307b (after its pickup step failed and the hold began), used to discover the rest of A Crack in the Slab. Exploration only; the route take is route-bk-v1307c.",
+  "steps": [
+    "pr_a_ld_trigger_outsider (stand 33.2,-40.7,-295.4) starts the Outsider scene; Task_BK_Pick_TimeDevice active about 40 s later",
+    "Timepiece pickup through the native use focus (0.7 m east, pitch 25); tutorial page closed with B; LT shifts to the past",
+    "pa_ld_trigger_61 and trigger 38 with the look-at on pa_ld_target_43: ritual_has_started 1",
+    "pa_ld_trigger_1's volume is the hall (world x -40.7..-21.8, y 16.3..37.2, z 300..313.5, decoded from its .cvd shape), not its origin; the upper gallery did not register",
+    "standing on the hall floor (-30, 24, 300): player_is_in_trigger_for_ritual 1, dial_ritual_withstilton02 plays, player_has_seen_ritual 1 (confirmed runtime), Task_BK_WatcheRitual complete",
+    "LT from the hall is refused (present-day obstruction); from (39.3,-42.8,301.4) it returns to the present",
+    "pr_a_ld_door_tr_bunker_todust_01 use, prompt A: void_03 (update_last_obj 1, visited_void_3 0); Task_BK_Escape complete",
+    "void_03: script_usable_door (fall, brief 1), script_usable_portal_toritual, script_usable_portal_exit: dust_p_lowchaos from the bunker (Stilton alive and crazy)",
+    "dust_p: ld_trigger_karnaca_discovery spawns the return Meagan and Sokolov; talking to Sokolov at the skiff, prompt A, results: boat_palace_p on both lab worlds"
+  ],
+  "result": "Mission 8 reached boat_palace in lab product mode on both worlds (host and lab client followed every load)."
+}

@@ -52,7 +52,8 @@ function Settle($label,$sec){
     14{$choice[$r]++;I $r $(if($r-eq'host'){'Left'}else{'Right'}) 250;Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
     3{I $r Right 250;Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
     5{I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
-    {$_-in 8,15,12,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
+    {$_-in 8,15,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
+    12{$choice[$r]++;I $r $(if($choice[$r]%2){'B'}else{'A'}) 300;$last[$r]=$w.ElapsedMilliseconds} # a tutorial page closes with B (the Timepiece's); other logic-12 screens take A
     4{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # a readable (ReadNote) left open
     2{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # the pause menu (a game window that lost focus pauses itself): resume
     13{throw "$r died during $label (GameOver)"}}}
@@ -177,6 +178,14 @@ try{
        if(!$hit){Save "$out/$tag-dial.json" @($dial);throw "Jindosh wheel $name never took the focus"}}}}
     Save "$out/$tag-dial.json" @($dial);$sum=(& python -I "$root/tools/diag/d2_jindosh_lock.py" $root $pids.host|ConvertFrom-Json).combination.CombinationIndexSum
     $notes.jindosh=$sum;if($sum-ne31){throw "Jindosh lock index sum $sum, not 31"}}
+   # flag: wait until a native Kiscule variable reaches a value (tools/diag/d2_kiscule_vars.py reads the host's script
+   # memory; entity "storyflags" or a script entity, name an exact variable). Scenes and prompts on the way settle as usual.
+   # A Crack in the Slab: the ritual counts as seen only while the player stands on the hall floor (pa_ld_trigger_1's volume).
+   'flag'{$fw=[Diagnostics.Stopwatch]::StartNew();$want=if($null-ne$st.value){[int]$st.value}else{1};$seen=$null
+    do{$line=@(& python -I "$root/tools/diag/d2_kiscule_vars.py" $pids.host $st.entity --grep " $($st.name): "|Where-Object {$_-match" $([regex]::Escape($st.name)): default"})[0]
+     if($line-match'value (-?\d+)'){$seen=[int]$Matches[1]};if($seen-eq$want){break}
+     Start-Sleep -Milliseconds 2000;$x=Snap host;if($x.logic-eq13){throw "Host died waiting for $($st.name)"};if($x.logic-ne1){[void](Settle $tag 60)}}while($fw.ElapsedMilliseconds-lt$st.ms)
+    $notes."$tag"=[ordered]@{variable=$st.name;value=$seen;ms=$fw.ElapsedMilliseconds};if($seen-ne$want){throw "$($st.name) stayed $seen, not $want"}}
    # heal: the lab health hold on or off across several steps (a carry under fire); recorded in the take.
    'heal'{if($st.on){C host 'coop_player_health_hold on';$notes.healthHold+=@("from step $tag")}else{C host 'coop_player_health_hold off'}}
    # carry: pick up an unconscious NPC (Sokolov). Each try stands beside the body's live position and holds use (900 ms or more
@@ -216,7 +225,7 @@ try{
    'follow'{$fw=[Diagnostics.Stopwatch]::StartNew();$d=if($st.dist){$st.dist}else{2.0};$trace=[Collections.Generic.List[object]]::new()
     while($fw.ElapsedMilliseconds-lt$st.ms){$npc=Npc $st.name $st.near;Face $npc.position $d 1.6;$trace.Add([ordered]@{ms=$fw.ElapsedMilliseconds;npc=$npc.name;position=$npc.position;host=(Snap host).logic});Start-Sleep -Milliseconds 1500;$x=Snap host;if($x.logic-eq13){throw 'Host died while following'};if($x.logic-ne1){[void](Settle $tag 60)}}
     Save "$out/$tag-follow.json" @($trace)}
-   'press'{I $(if($st.role){$st.role}else{'host'}) $st.button $(if($st.ms){$st.ms}else{200})}
+   'press'{$who=if($st.role){$st.role}else{'host'};if($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}} # leftTrigger: the Timepiece's timeline change
    'die'{$who=if($st.role){$st.role}else{'host'};$other=if($who-eq'host'){'client'}else{'host'};$e0=@{host=(Snap host).epoch;client=(Snap client).epoch}
     # Same sequence as Test-MissionCheckpoint-v1151: both death screens ready, one
     # A each, then A only on load prompts; the checkpoint session state is traced.
