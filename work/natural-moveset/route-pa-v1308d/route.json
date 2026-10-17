@@ -1,0 +1,1046 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 290,
+      "pos": [
+        -6.869997,
+        -14.876363,
+        0.111587
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.870007,
+        -14.876322,
+        0.111587
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 290,
+      "pos": [
+        -6.553468,
+        -15.192891,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 290,
+      "pos": [
+        -6.553468,
+        -15.192891,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_brief_meeting_room",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 290,
+      "pos": [
+        -1.194,
+        15.706,
+        5.015123
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step04-talk",
+    "spec": {
+      "do": "talk",
+      "name": "story/meagan_foster\\.def",
+      "near": [
+        -3.9,
+        14.8
+      ],
+      "settle": 150000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 296,
+      "pos": [
+        -3.181047,
+        15.662618,
+        5.015035
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "1/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/1/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    }
+  },
+  {
+    "step": "step05-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 296,
+      "pos": [
+        -3.181047,
+        15.662618,
+        5.015035
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "1/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/1/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    }
+  },
+  {
+    "step": "step06-at",
+    "spec": {
+      "do": "at",
+      "pos": [
+        -6.34,
+        -34.67,
+        10.6
+      ],
+      "yaw": 180,
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 296,
+      "pos": [
+        -6.330391,
+        -34.668526,
+        8.028854
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/4/0",
+      "hold": "released/0",
+      "ka": "1/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 71,
+      "cine": 70,
+      "pos": [
+        -6.918517,
+        -14.412021,
+        0.14055
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/4",
+      "hold": "released/78",
+      "ka": "0/1/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    }
+  },
+  {
+    "step": "step07-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0
+        ]
+      ],
+      "z": 9.15,
+      "pitches": [
+        25,
+        15,
+        35,
+        45
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 200000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/streets/palace_streets_p_lowchaos",
+      "epoch": 76,
+      "cine": 307,
+      "pos": [
+        -22.071877,
+        156.039673,
+        -17.848499
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/453",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/streets/palace_streets_p_lowchaos",
+      "epoch": 76,
+      "cine": 75,
+      "pos": [
+        -22.071877,
+        156.039673,
+        -17.848499
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/5",
+      "hold": "released/0",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step08-expect",
+    "spec": {
+      "do": "expect",
+      "map": "palace/streets/palace_streets",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/streets/palace_streets_p_lowchaos",
+      "epoch": 76,
+      "cine": 307,
+      "pos": [
+        -21.782562,
+        156.073013,
+        -17.848495
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/5/0",
+      "hold": "released/453",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/streets/palace_streets_p_lowchaos",
+      "epoch": 76,
+      "cine": 75,
+      "pos": [
+        -22.664694,
+        155.971191,
+        -17.848495
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/5",
+      "hold": "released/0",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step09-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_streets_door_tr_palace_ext_topalace",
+      "focus": true,
+      "offsets": [
+        [
+          -0.707,
+          -0.707
+        ],
+        [
+          -1.06,
+          -1.06
+        ]
+      ],
+      "z": -3.46,
+      "pitches": [
+        -10,
+        0,
+        10
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 150000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 309,
+      "pos": [
+        54.667233,
+        47.433643,
+        -3.820289
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.667233,
+        47.433643,
+        -3.820289
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step10-expect",
+    "spec": {
+      "do": "expect",
+      "map": "palace/palace_p",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 309,
+      "pos": [
+        54.667233,
+        47.433643,
+        -3.820289
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.516365,
+        47.930988,
+        -3.969483
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step11-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_player_reach_palace",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 309,
+      "pos": [
+        148.513641,
+        40.253914,
+        -24.372231
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        0,
+        5,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.444447,
+        48.109737,
+        -4.14024
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        0,
+        5,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step12-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_task_entering_palace",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 309,
+      "pos": [
+        235.134003,
+        2.792237,
+        7.003669
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        6,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.444447,
+        48.109737,
+        -4.14024
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        6,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    }
+  },
+  {
+    "step": "step13-attack",
+    "spec": {
+      "do": "attack",
+      "name": "story/luca_abele\\.def",
+      "near": [
+        255.6,
+        -25.9
+      ],
+      "max": 80,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 345,
+      "pos": [
+        233.752762,
+        -37.236855,
+        14.003644
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        0,
+        3,
+        7,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Find_The_Vault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.444447,
+        48.109737,
+        -4.14024
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        0,
+        3,
+        7,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Find_The_Vault"
+    }
+  },
+  {
+    "step": "step14-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_enter_vault_1",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 345,
+      "pos": [
+        274.68454,
+        -33.864506,
+        -8.996206
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/6/0",
+      "hold": "released/16",
+      "ka": "1/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Open_The_Vault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 81,
+      "cine": 75,
+      "pos": [
+        54.444447,
+        48.109737,
+        -4.14024
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        0,
+        3,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "applied/0/6",
+      "hold": "released/31",
+      "ka": "0/1/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Open_The_Vault"
+    }
+  }
+]
