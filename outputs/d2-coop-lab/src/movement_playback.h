@@ -491,7 +491,10 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // the independent root channel continues to own world placement.
         const bool slideRecovery=p.bank.hasSlide()&&p.clock.slideState&&(semantic.state==0||semantic.state==4);
         const bool physicalEligible=((pose.motionValid&&(ground||crouched))||sliding||slideRecovery||airState||traversalActive||powerActive||carryActive||chokeActive||swimActive||climbActive);
-        const bool actionEligible=(semantic.state==0||semantic.state==18||(p.bank.hasSprint()&&semantic.state==4)||horizontalLean||sliding||airState||(p.bank.hasAir()&&semantic.state==3)||
+        // 1214cg (#11): the protocol-73 hold (state 24) covers a native state no binding classifies for a packet or two
+        // (holster end, draw start, a holstered landing, a slide end). Keep the authored body on the replicated physical
+        // state through it; yielding to the actor's native pose flashed it upright for about two frames (take 1321a).
+        const bool actionEligible=(semantic.state==0||semantic.state==18||semantic.state==24||(p.bank.hasSprint()&&semantic.state==4)||horizontalLean||sliding||airState||(p.bank.hasAir()&&semantic.state==3)||
                 (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10));
         const unsigned eligibilityMask=(!semanticValid?1u:0u)|(!physicalEligible?2u:0u)|
             (shadowStream.until<=tick?4u:0u)|(!shadowStream.peerReady?8u:0u)|
