@@ -1,0 +1,100 @@
+{
+ "audit": "campaign-training-v1310",
+ "card": 73,
+ "mission": "Memories of Training",
+ "candidate": "candidate-npc-combat-v1214ca",
+ "maps": [
+  "campaign/tutorial/tutorial_p",
+  "campaign/menu/menu_p"
+ ],
+ "created": "2026-10-17T15:38:44+02:00",
+ "takes": [
+  {
+   "take": "route-tut-v1310a",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": false,
+   "failure": "Cannot find a process with the process identifier 9628.; the lab campaign command with corvo made the host game exit as the tutorial loaded; recovered with Deploy-SourceClock (recovery.json)"
+  },
+  {
+   "take": "route-tut-v1310b",
+   "candidate": "candidate-npc-combat-v1214by",
+   "passed": false,
+   "held": true,
+   "failure": "held: restore with Restore-RouteHold-v1303.ps1; held exploration of the whole tutorial by hand (manual-continuation.json); only the host left the tutorial at its end"
+  },
+  {
+   "take": "route-tut-v1310c",
+   "candidate": "candidate-npc-combat-v1214bz",
+   "passed": false,
+   "failure": "Action pickpocket failed (exit 1)"
+  },
+  {
+   "take": "route-tut-v1310d",
+   "candidate": "candidate-npc-combat-v1214bz",
+   "passed": false,
+   "failure": "Action chase_hold failed (exit 1)"
+  },
+  {
+   "take": "route-tut-v1310e",
+   "candidate": "candidate-npc-combat-v1214bz",
+   "passed": false,
+   "failure": "Action pickpocket failed (exit 1)"
+  },
+  {
+   "take": "route-tut-v1310f",
+   "candidate": "candidate-npc-combat-v1214bz",
+   "passed": false,
+   "failure": "Action shoot failed (exit 1); only one of three bottles broke: the partner loop emptied the host hands (diagnosed in 1310g)"
+  },
+  {
+   "take": "route-tut-v1310g",
+   "candidate": "candidate-npc-combat-v1214bz",
+   "passed": false,
+   "held": true,
+   "failure": "Action pickpocket failed (exit 1); held for diagnosis (manual-continuation.json): the partner world looped its stealth restart; 1214ca"
+  },
+  {
+   "take": "route-tut-v1310h",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": true
+  },
+  {
+   "take": "campaign-training-vm-v1310a",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": false,
+   "failure": "Action cycle failed (exit 1)",
+   "twoAccounts": true
+  },
+  {
+   "take": "route-tut-v1310i",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": false,
+   "failure": "Use of ld_invisible_usable_1 not registered; the gate check took a failed task (state 5 after a stealth restart) for success; done now means state 3"
+  },
+  {
+   "take": "route-tut-v1310j",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": true
+  },
+  {
+   "take": "campaign-training-vm-v1310b",
+   "candidate": "candidate-npc-combat-v1214ca",
+   "passed": true,
+   "twoAccounts": true
+  }
+ ],
+ "findings": [
+  "Start (confirmed runtime): the menu starts tutorial_p as Emily with Corvo as the trainer NPC; the route harnesses take -HostCharacter emily (the lab campaign command with corvo made the host game exit, take 1310a).",
+  "Mobility (confirmed static and runtime): ld_trigger_beforecrouch completes Task_Intro_FollowCorvo; ld_trigger_roof_3 ends Obj_Intro_Mobility, plays corvo_mobility_success and moves both players to the stealth yard.",
+  "Stealth (confirmed static and runtime): Player_Busted (AIAttentionStateChanged BUSTED on NPC_Corvo_Stealth) sends Stealth_Failed, corvo_spotplayer and Restart_Stealth. The choke completes from behind the walking Corvo (RB held); the key is stolen with X from 0.7 m behind as he walks into his north stand (698.84, -22.7) - pressed on the standing Corvo the theft is noticed; ld_door_grid_metal_350_01_6 then completes Obj_Intro_Stealth.",
+  "The partner's world runs the stealth lesson with its own Corvo: an idle partner at the start is seen there and that world restarts in a loop, resetting the partner (confirmed runtime, 1310g, --ai-targets). The route hides the partner, crouched, beside the gate (partner step).",
+  "1214ca (confirmed runtime cause): each partner restart ran the empty-loadout node 1868853291 (ActionPlayerLoadout with no loadout) and the Kiscule action mirror replayed it in the host's world (51 runs), emptying the host's hands after the crossbow pickup (1310f broke one bottle of three). The mirror is now host-authoritative: in 1310h the partner counted 6 local runs and sent none.",
+  "Crossbow (confirmed static and runtime): ld_invisible_usable_1 (Crossbow_PickedUp); the crossbow (LT, aimed from the native eye) breaks the Crossbow_Targets bottles ld_bottle_01_2, ld_mulberry_mead_01_4 and ld_rivera_fig_wine_01, then the marked ld_turnbuckle_01_small, whose fall breaks ld_door_interior_350cm_02 (Crossbow_Door_Broken); ld_trigger_endcrossbow ends the lesson.",
+  "Combat (confirmed runtime): RT attacks; RB held blocks; a block cycle (RB 1.2 s on, 0.32 s off) gives the timed parries; the off-balance choke needs a fresh RB press after a parry, held until the choke ends (grab action watches player state 41, arkPlayerStateChoke); block then RT performs the fatality.",
+  "1214bz (confirmed static and runtime): Combat_Fatality_Success plays corvo_combat_success, Start_Level_Transition and arkKisculeNodeActionTutorialEnd (vtable 0x141b7b628, RTTI .?AVarkKisculeNodeActionTutorialEnd@@), which returns the world to the main menu; only the world that played the fatality ran it (1310b). The Kiscule action mirror carries it, and both worlds reach menu_p with equal gameflow (1310h, 1310j).",
+  "Lab notes: setviewpos ignores its pitch argument (Set-ObserverPitch.ps1 sets pitch); a task that leaves the active list may have failed in a restart, so route actions test gameflow state 3.",
+  "The tutorial grants no powers; Corvo is the only opponent. A death and its recovery are covered by the campaign missions (Edge of the World onward).",
+  "Two-account take campaign-training-vm-v1310b (host Emily on this PC, partner Emily in the lab VM over the friends-only Steam lobby) ran route tut-full-v1310j: every lesson completed (parry 86 s, off-balance choke 32 s with 2 grabs, fatality 68 s), both worlds ended at menu_p with equal gameflow and restoration passed. Host video frames show the docks, the stealth page and yard, the gate, the crossbow range, the combat lessons with Corvo, the fatality and the title screen; the VM frames show the partner hidden by the gate, in the crossbow yard, in the combat room and at the title screen."
+ ],
+ "complete": true
+}

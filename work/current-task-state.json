@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-17T12:29:31+02:00",
+  "UpdatedAt": "2026-10-17T15:39:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22049,8 +22049,16 @@
   },
   "Campaign": {
     "Plan": "documentation/handoff-2026-10-11/97-campaign-map-sequence.md",
-    "Candidate": "candidate-npc-combat-v1214by",
+    "Candidate": "candidate-npc-combat-v1214ca",
     "Missions": {
+      "01-memories-of-training": {
+        "Card": 73,
+        "Audit": "work/movement-integration/campaign-training-audit-v1310.json",
+        "Route": "work/natural-moveset/routes/tut-full-v1310j.json",
+        "LabTake": "route-tut-v1310j",
+        "TwoAccountTake": "campaign-training-vm-v1310b",
+        "Status": "complete"
+      },
       "02-a-long-day-in-dunwall": {
         "Card": 74,
         "Audit": "work/movement-integration/campaign-dunwall-audit-v1299.json",
@@ -22125,6 +22133,6 @@
         "KnownLimitation": "in end_p the partner keeps the two Corvo end-game gameflow nodes active (the mirror runs only in gameplay)"
       }
     },
-    "NextAction": "Memories of Training (#73): held exploration of tutorial_p, started from the menu in both worlds."
+    "NextAction": "Follow-ups #85 (Dunwall safe-room loadout on 1214ca) and #94 (post-credits check); then stage 7 release (#30: banks and decls rebuilt from the player's own install)."
   }
 }

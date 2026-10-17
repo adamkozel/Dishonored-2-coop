@@ -8,7 +8,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 
 | # | Mission | Maps, in play order | How it ends (gameflow) |
 |---|---|---|---|
-| 1 | Memories of Training | `tutorial_p` | Not part of the campaign chain |
+| 1 | Memories of Training | `tutorial_p` | Not part of the campaign chain: `arkKisculeNodeActionTutorialEnd` returns to the main menu (1214bz carries it to the partner) |
 | 2 | A Long Day in Dunwall | `dunwall_escape_tower_p` ↔ `dunwall_escape_streets_p` | `Mission_DW`: result screen, then `void_01` |
 | 3 | Edge of the World | `void_01_p` (A Strange Visit) → `boat_eotw_p` → `eotw_p_*chaos` | `Mission_EotW`: carriage scene, result screen, then `institute` ([chapter 89](89-mission-progression-discovery.md)) |
 | 4 | The Good Doctor | `institute_p_*chaos` | `Mission_IS`: result screen, then `boat_madinventor` |
@@ -212,7 +212,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Cause: the host completes them during the rescue scene, and the gameflow mirror runs only in gameplay, which `end_p` never returns to.
   - The credits play the same in both worlds.
 
-## Memories of Training (takes 1310a–1310c, [audit 1310](../../work/movement-integration/campaign-training-audit-v1310.json))
+## Memories of Training (takes 1310a–1310j, two accounts campaign-training-vm-v1310b, [audit 1310](../../work/movement-integration/campaign-training-audit-v1310.json))
 
 - **Start:** the menu starts `tutorial_p` as Emily with no character choice; Corvo is the trainer NPC. The route harnesses take `-HostCharacter emily`. Take 1310a asked the lab `campaign` command for Corvo, and the host game exited as the map loaded (no Windows error event).
 - **Required path (confirmed static and runtime, held take 1310b):**
@@ -238,5 +238,6 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - The harness's `action` step runs the timed host actions in `tools/diag/d2_route_actions.py`.
   - `setviewpos` ignores its pitch argument; pitch comes from `Set-ObserverPitch.ps1`.
   - The tutorial grants no powers.
+- **Passes:** lab takes route-tut-v1310h and route-tut-v1310j and two-account take campaign-training-vm-v1310b, all ending with both worlds at the main menu (`menu_p`) with equal gameflow. Failed and held takes 1310a–1310g, 1310i and campaign-training-vm-v1310a are recorded in the audit.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
