@@ -21,6 +21,9 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
                "untilLogic": false, "ms": 180000, "faceEvery": 5}
               repeat an input sequence facing the NPC until the task leaves the active list
               (or, with untilLogic, the host leaves gameplay: a fatality scene)
+  grab        {"face": str, "until": task, "ms": 300000, "press": 700, "gap": 150, "hold": 5500, "state": 41}
+              block in short RB presses; a press that becomes a grab (player state 41, the choke)
+              is held on until the choke ends (choke an off-balance enemy)
 Task names come from the gameflow name cache (work/natural-moveset/gameflow-names.local.json).
 Pitch is set with Set-ObserverPitch.ps1 (setviewpos ignores its pitch argument).
 """
@@ -324,12 +327,47 @@ def cycle(a):
     return 1
 
 
+def player_state(sid):
+    try:
+        return sid in [x['id'] for x in probe('--player-states')['active']]
+    except RuntimeError:
+        return False
+
+
+def grab(a):
+    """Block in short presses; when a press turns into a grab (choke state), keep the button held until the choke ends."""
+    start, n, grabs = time.time(), 0, 0
+    face(a['face'])
+    while time.time() - start < a.get('ms', 300000) / 1000:
+        packet(['RightShoulder'], a.get('press', 700) + 100)
+        t = time.time()
+        grabbed = False
+        while time.time() - t < a.get('press', 700) / 1000:
+            if player_state(a.get('state', 41)):
+                grabbed = True
+                break
+        if grabbed:
+            grabs += 1
+            packet(['RightShoulder'], a.get('hold', 5500))  # replaces the press while it is still down: no release
+            time.sleep(a.get('hold', 5500) / 1000 + 0.5)
+        packet([], a.get('gap', 150))
+        time.sleep(a.get('gap', 150) / 1000)
+        n += 1
+        if done(a['until']):
+            print(json.dumps({'presses': n, 'grabs': grabs, 'seconds': round(time.time() - start, 1), 'active': active_tasks()}), flush=True)
+            return 0
+        if n % a.get('faceEvery', 6) == 0:
+            face(a['face'])
+    print(json.dumps({'presses': n, 'grabs': grabs, 'timeout': True, 'active': active_tasks()}), flush=True)
+    return 1
+
+
 def main():
     global REPO
     REPO = sys.argv[1]
     raw = sys.argv[3] if len(sys.argv) > 3 else '{}'
     args = json.load(open(raw[1:], encoding='utf-8-sig')) if raw.startswith('@') else json.loads(raw)
-    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'shoot': shoot, 'cycle': cycle}[sys.argv[2]](args)
+    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'shoot': shoot, 'cycle': cycle, 'grab': grab}[sys.argv[2]](args)
 
 
 if __name__ == '__main__':
