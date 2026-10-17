@@ -1,0 +1,13 @@
+{
+  "scope": "Manual continuation of the held session route-dtte-v1309b (Death to the Empress), used to discover the route. Exploration only.",
+  "steps": [
+    "boat: a talk with the one-armed Meagan plays the briefing and a dialogue choice (A); the skiff (dropped beside it first) and its prompt load dunwall_return_streets on both worlds (1214by: the backslash map name now reaches the partner, confirmed runtime)",
+    "streets: script_door_tr_street_totower (1 m east) and its prompt load dunwall_return_tower",
+    "tower courtyard: script_cy_door_tr_tower_toint and its prompt load dunwall_return_interior",
+    "interior: the note script_note_missionstep_dtlocked completes Task_DTTE_Find_Delilah and Task_DTTE_Find_DT_TR and activates Task_DTTE_DTPowerSupply (the elevator's three whale oil holders; two are plugged, script_whaleoil_tank_location_1 is empty)",
+    "whale oil: the dispenser lever script_kar_whale_oil_disp_right_lever dispenses a tank; the tank is held (player state 50, HoldObject); the holder's cover script_shield_door_3 takes the use focus over the slot, and no tried drop or throw left a released tank on the socket (OilTank_3_Plugged stayed 0)",
+    "bypass (confirmed static and runtime): script_door_tr_int_totowe_2 at the top of the interior leads to the tower's top level; touching script_tr_trigger_saferoom with the power off cancels Task_DTTE_DTPowerSupply (state 5) and activates Task_DTTE_ReachDelilah",
+    "the throne room trigger script_tr_trigger_reachthroneroom fires once; touched before ReachDelilah was active it did not complete it, so this session cannot go on; route-dtte-v1309c runs the order safe room then throne room"
+  ],
+  "result": "Route found to the throne room; the Heart, the portal, the painting world and Delilah remain to explore."
+}

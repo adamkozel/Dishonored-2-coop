@@ -1,0 +1,218 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 30000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "talk",
+    "name": "dtte/meagan_foster\\.def",
+    "near": [
+      -6.6,
+      1.2
+    ],
+    "settle": 150000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -6.34,
+      -34.67,
+      10.6
+    ],
+    "yaw": 180,
+    "settle": 4000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 200000
+  },
+  {
+    "do": "expect",
+    "map": "dunwall/return/streets/dunwall_return_streets",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_door_tr_street_totower",
+    "focus": true,
+    "offsets": [
+      [
+        1.0,
+        0
+      ],
+      [
+        1.5,
+        0
+      ]
+    ],
+    "z": 7.95,
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "dunwall/return/tower/dunwall_return_tower",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_cy_door_tr_tower_toint",
+    "focus": true,
+    "offsets": [
+      [
+        0.707,
+        -0.707
+      ],
+      [
+        1.06,
+        -1.06
+      ]
+    ],
+    "z": 36.4,
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "dunwall/return/interior/dunwall_return_interior",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_note_missionstep_dtlocked",
+    "focus": true,
+    "offsets": [
+      [
+        0.8,
+        0
+      ],
+      [
+        1.1,
+        0
+      ]
+    ],
+    "z": 35.75,
+    "pitches": [
+      30,
+      45,
+      20,
+      60
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "script_door_tr_int_totowe_2",
+    "focus": true,
+    "offsets": [
+      [
+        0,
+        -1.0
+      ],
+      [
+        0,
+        -1.5
+      ]
+    ],
+    "z": 61.25,
+    "pitches": [
+      0,
+      10,
+      -10
+    ],
+    "yaws": [
+      -15,
+      0,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000
+  },
+  {
+    "do": "expect",
+    "map": "dunwall/return/tower/dunwall_return_tower",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -54.66,
+      -20.6,
+      64.8
+    ],
+    "yaw": 0,
+    "settle": 5000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -40.0,
+      20.0,
+      62.4
+    ],
+    "yaw": 135,
+    "settle": 5000
+  }
+]
