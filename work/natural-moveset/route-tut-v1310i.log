@@ -1,0 +1,75 @@
+{
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 38,
+        "pos": [
+          533.192993,
+          -8.265,
+          11.247706
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          2,
+          3,
+          4,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "11/0/0",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 19,
+        "pos": [
+          706.309998,
+          -34.25,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          2,
+          3,
+          4,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 15,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/9/4",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      }
+    }
+  },
+  "failure": "Use of ld_invisible_usable_1 not registered",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:313[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 313 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mUse of ld_invisible_usable_1 not registered[0m

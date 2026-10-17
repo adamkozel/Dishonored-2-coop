@@ -16,10 +16,10 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
               "then": {"stand": [x, y, eyeZ], "yaw": deg, "until": task} uses a target at once after the theft
   shoot       {"target": entity, "stand": [x, y, eyeZ], "up": 0.08, "until": task?}
               aim from the native eye at the entity and fire the left-hand weapon (LT); with until,
-              the task must leave the active list within 6 s
+              the task must be complete within 6 s
   cycle       {"face": str, "seq": [{"b": ["RightShoulder"], "ms": 1200}, {"ms": 320}], "until": task,
                "untilLogic": false, "ms": 180000, "faceEvery": 5}
-              repeat an input sequence facing the NPC until the task leaves the active list
+              repeat an input sequence facing the NPC until the task is complete
               (or, with untilLogic, the host leaves gameplay: a fatality scene)
   grab        {"face": str, "until": task, "ms": 300000, "press": 700, "gap": 150, "hold": 5500, "state": 41}
               block in short RB presses; a press that becomes a grab (player state 41, the choke)
@@ -74,6 +74,17 @@ def status(suffix=''):
 
 
 NAMES = None
+
+
+def task_states():
+    """{name: native state} for the named gameflow nodes (2 active, 3 complete, 5 failed or cancelled)."""
+    active_tasks()
+    nodes = status('.missionend.json').get('gameflowNodes') or []
+    return {NAMES.get(str(n[0]), '#%d' % n[0]): n[1] for n in nodes}
+
+
+def completed(task):
+    return task_states().get(task) == 3
 
 
 def active_tasks():
@@ -168,7 +179,8 @@ def crouch():
 
 
 def done(task):
-    return not any(task == a for a in active_tasks())
+    """Completed (state 3); a task that only left the active list may have failed in a restart."""
+    return completed(task)
 
 
 def attempts(a, one):
@@ -242,7 +254,10 @@ def pickpocket_try(a, k):
     ok = any(a['next'] == x for x in active_tasks()) if a.get('next') else done(a['until'])
     print(json.dumps({'try': k, 'at': [round(v, 2) for v in p], 'done': ok, 'active': active_tasks()}), flush=True)
     if ok:
-        return then_use(a['then']) if a.get('then') else 0
+        if not a.get('then') or then_use(a['then']) == 0:
+            return 0
+        time.sleep(4.0)  # the follow-up use failed (a restart): steal the key again
+        return None
     time.sleep(4.0)
     return None
 
@@ -264,10 +279,13 @@ def then_use(t):
     for ms in t.get('press', [250, 900, 900, 1500]):
         packet(['X'], ms)
         time.sleep(ms / 1000 + 1.2)
-        if done(t['until']):
+        state = task_states().get(t['until'])
+        if state == 3:
             print(json.dumps({'then': t['until'], 'done': True}), flush=True)
             return 0
-    print(json.dumps({'then': t['until'], 'done': False, 'active': active_tasks()}), flush=True)
+        if state != 2:  # failed or cancelled: the lesson restarted
+            break
+    print(json.dumps({'then': t['until'], 'done': False, 'state': task_states().get(t['until']), 'active': active_tasks()}), flush=True)
     return 1
 
 
