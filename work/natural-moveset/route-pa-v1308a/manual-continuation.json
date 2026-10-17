@@ -1,0 +1,12 @@
+{
+  "scope": "Manual continuation of the held session route-pa-v1308a (a held start of The Grand Palace), used to discover the mission. Exploration only; the route take is route-pa-v1308b.",
+  "steps": [
+    "boat_palace: script_trigger_brief_meeting_room, then a talk with meagan_foster (1.5 m east of her) plays the briefing (Task_PA_Boat_Deck complete); script_skiff_01_usable (1.2 m east, pitch 25), the prompt (A) and Meagan's skiff scene load palace_streets_p_lowchaos on both worlds",
+    "palace_streets: ld_streets_door_tr_palace_ext_topalace (1 m south-west, pitch -10) and its prompt load palace_p_lowchaos",
+    "palace_p: ld_trigger_player_reach_palace and ld_trigger_task_entering_palace (Task_PA_Get_Inside_The_Palace complete); the real Duke (luca_abele.def, not the double) killed with focused strikes: Obj_PA_Eliminate_The_Duke complete",
+    "the vault: ld_trigger_enter_vault_1 (Task_PA_Find_The_Vault complete); the vault door ld_breakout_saferoom_01_1_2 is locked and opens through the button ld_button_01_5 (its UsableNotification steps the door's stage; confirmed static), Task_PA_Open_The_Vault completes after an autosave delay",
+    "a clockwork soldier attacks in the vault; sword strikes do not lower its health; using the Delilah golem ld_delilah_golem_01 bends time, spawns Jessamine's ghost and plays dial_jessamine; the Heart becomes heart_delilah_palace and Obj_PA_Capture_Delilah_Spirit completes",
+    "Task_PA_Meet_Meagan: ld_trigger_dukesdock enables ld_trigger_extract_skiff at Meagan's boat (Stilton mad: the one-armed Meagan); a talk with her there plays the debrief, the ready-to-leave prompt (A) and the result screen; both worlds load boat_dunwall_return_p"
+  ],
+  "result": "Mission 9 reached boat_dunwall_return in lab product mode on both worlds."
+}
