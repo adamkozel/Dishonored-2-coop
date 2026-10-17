@@ -85,3 +85,10 @@ if(MSVC)
     target_compile_options(d2_movement_bank_tests PRIVATE /W4 /permissive- /EHsc)
     target_compile_options(d2_review_clip_tests PRIVATE /W4 /permissive- /EHsc)
 endif()
+
+# #30 (stage 7 release): the installer's zlib/deflate decoder.
+add_executable(d2_inflate_tests src/inflate_tests.cpp)
+target_compile_features(d2_inflate_tests PRIVATE cxx_std_17)
+if(MSVC)
+    target_compile_options(d2_inflate_tests PRIVATE /W4 /permissive- /EHsc)
+endif()
