@@ -532,7 +532,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         const bool graceHold=!eligible&&!(eligibilityMask&64u)&&p.clock.positioned&&p.clock.weight>.5f&&p.lastEligibleNow>0&&now-p.lastEligibleNow<150.;
         if(eligible)p.lastEligibleNow=now;
         if(graceHold)++p.eligibilityGraceFrames;
-        else if(!p.clock.advance(p.bank,now,position,pose.orientation,eligible,stance,semantic.state==4,horizontalLean,semantic.leanSide,sliding,airState?pose.motion:0,rise,p.armedMix,semantic.leanUp,traversalActive,transportPower,p.combatWeight<.001f&&p.equipmentWeight<.001f&&!powerActive&&!rangedActive&&!carryActive,pose.airTrajectory)){
+        else if(!p.clock.advance(p.bank,now,position,pose.orientation,eligible,stance,semantic.state==4,horizontalLean,semantic.leanSide,sliding,airState?pose.motion:0,rise,p.armedMix,semantic.leanUp,traversalActive,transportPower,p.combatWeight<.001f&&p.equipmentWeight<.001f&&!powerActive&&!rangedActive&&!carryActive,pose.airTrajectory,p.traversalWeight>.001f)){
             ++p.refused;
             if(!p.clockTraceFrozen){
                 p.clockTraceFrozen=true;p.clockRootCount=(std::min)(poseInterpolation.count,unsigned(p.clockRoots.size()));

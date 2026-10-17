@@ -1,6 +1,6 @@
 # locomotion: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T00:58:40.854295+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T01:10:22.395619+02:00. All fields below retain the catalog wording.
 
 ## stand_idle
 
@@ -26,7 +26,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters hold n
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both characters hold natural, planted standing idles, armed and holstered, in the v645 observer views. Emily is partly cropped at the left edge in some segments. Candidates require animation review and appropriate game-state/contact binding. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-gait-batch-v645/host-gait-batch.mp4",
@@ -34,16 +34,43 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters hold n
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1320d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Still standing idle with the sword drawn and, after the native holster (X held), holstered; both roles; the partner holds speed 0 with armed mix 1, then armed mix 0 holstered, and returns to armed after the native redraw.",
+    "takes": [
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1320b/host-gait-observer.mp4",
+        "verdict": "Corvo stands planted, armed and then holstered (upright, arms down); the holster ends and the redraw starts without a pop at 15 fps."
+      },
+      {
+        "video": "coverage-v1320b/client-gait-observer.mp4",
+        "verdict": "Emily holds her idle unarmed, then draws into her wide armed stance continuously at 15 fps."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: native-gait-batch-v645/host-gait-batch.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/host-gait-batch.mp4>)
 - [in_game_recordings: native-gait-batch-v645/host-observer.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/host-observer.mp4>)
 - [in_game_recordings: native-gait-batch-v645/client-gait-batch.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/client-gait-batch.mp4>)
@@ -70,7 +97,9 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The armed idle reads c
     "corvo-walking.mp4",
     "emily-walking.mp4",
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1320d/result.json",
+    "coverage-v1319e/result.json"
   ],
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The armed idle reads correctly for both: Corvo's sword is low and Emily holds a wide ready stance. Native attack and jump interrupt and recover cleanly. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
   "title": "armed idle",
@@ -79,7 +108,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The armed idle reads c
     "armed_idle"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
@@ -89,12 +118,46 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The armed idle reads c
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false
+  "complete": true,
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Armed standing idle in both roles before and after movement, and its recovery after the native redraw; attack and jump interruptions recover (coverage 1319b interrupt).",
+    "takes": [
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      },
+      {
+        "take": "coverage-v1319e",
+        "cases": [
+          "host-interrupt",
+          "client-interrupt"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1320b/host-gait-observer.mp4",
+        "verdict": "Corvo's armed idle holds the sword low and settles after each stop."
+      },
+      {
+        "video": "coverage-v1320b/client-gait-observer.mp4",
+        "verdict": "Emily's armed idle keeps her wide ready stance after the redraw."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
+- [evidence: coverage-v1319e/result.json](<../../../../work/natural-moveset/coverage-v1319e/result.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: native-gait-batch-v645/host-gait-batch.mp4](<../../../../work/natural-moveset/native-gait-batch-v645/host-gait-batch.mp4>)
@@ -122,7 +185,9 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Standing walking reads
     "walk-test-3/result.json",
     "corvo-walking.mp4",
     "emily-walking.mp4",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json",
+    "coverage-v1320d/result.json"
   ],
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Standing walking reads with alternating strides in forward, back, lateral and diagonal headings for both characters, including through the missing-binding fault. Not every one of the 8 directions is shown in isolation. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending.",
   "title": "walk 8 directions",
@@ -141,7 +206,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Standing walking reads
     "walk_forward_right"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
@@ -149,11 +214,46 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Standing walking reads
     "unbound-presentation-v559c-host.mp4",
     "unbound-presentation-v559c-client.mp4",
     "unbound-presentation-v559b-host.mp4"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Half-stick walks in all 8 direction sectors in both roles, staying in the walk gait; holstered walking forward and back; walking reversals.",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-walk8",
+          "client-walk8"
+        ]
+      },
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318a/host-walk8-observer.mp4",
+        "verdict": "Corvo walks with alternating strides in every heading."
+      },
+      {
+        "video": "coverage-v1318a/client-walk8-observer.mp4",
+        "verdict": "Emily walks with alternating strides, coat swinging, sword in hand, in every heading."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: unbound-presentation-v559c-host.mp4](<../../../../work/natural-moveset/unbound-presentation-v559c-host.mp4>)
@@ -193,7 +293,7 @@ Audit 1267: runs in 8 directions accepted in both roles (coverage 1267a). Visual
     "run_forward_right"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
@@ -203,13 +303,41 @@ Audit 1267: runs in 8 directions accepted in both roles (coverage 1267a). Visual
   ],
   "evidence": [
     "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "coverage-v1320d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Full-stick runs in all 8 direction sectors presented in the run gait (run mix > .5) in both roles; consecutive opposite directions.",
+    "takes": [
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-run8",
+          "client-run8"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1320a/client-run8-observer.mp4",
+        "verdict": "Emily runs with extended strides in each heading and changes direction without pops."
+      },
+      {
+        "video": "coverage-v1320b/host-run8-observer.mp4",
+        "verdict": "Corvo runs in each heading with a distinct run stride."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: coverage-v1267a/client-run8-observer.mp4](<../../../../work/natural-moveset/coverage-v1267a/client-run8-observer.mp4>)
@@ -239,19 +367,43 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters sprint
     "sprint_forward_right"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-sprint-corvo-v2.mp4",
     "integrated-sprint-emily-v2.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Sprints forward, forward-left and forward-right in both roles, each presenting the sprint gait (sprint mix > .5).",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-sprint3",
+          "client-sprint3"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318c/client-sprint3-observer.mp4",
+        "verdict": "Emily sprints with long forward-leaning strides and pumping arms, ending close to the observer."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
 - [in_game_recordings: integrated-sprint-emily-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-emily-v2.mp4>)
 ## start_stop_each_gait
@@ -305,7 +457,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Walk, run and sprint s
     "mixamo_run_to_stop"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-sprint-corvo-v2.mp4",
@@ -319,16 +471,48 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Walk, run and sprint s
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json",
+    "coverage-v1320d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Walk, run and sprint starts and stops in both roles (five settled stops each), the run stop and walk stops of the gait course, holstered stop.",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-startstop",
+          "client-startstop"
+        ]
+      },
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318c/client-startstop-observer.mp4",
+        "verdict": "Emily starts into stride and stops planted between segments."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
 - [in_game_recordings: integrated-sprint-emily-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-emily-v2.mp4>)
 - [in_game_recordings: moving-turn-corvo-knee-v4b.mp4](<../../../../work/natural-moveset/moving-turn-corvo-knee-v4b.mp4>)
@@ -362,7 +546,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Walk-to-sprint-to-stop
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Walk-to-sprint-to-stop and walk-to-idle speed changes blend plausibly for both characters. Emily is partly cropped in the v645 batch. Standing/crouched bank passes both-role directional, distance-phase and native action-priority checks. Root source timestamps and bounded recovery from packet gaps passed the recorded sprint trace. Terrain, equipment, visual acceptance and automatic session integration remain pending. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
@@ -374,16 +558,48 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Walk-to-sprint-to-stop
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json",
+    "coverage-v1320d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "A walk-run-sprint speed ramp and walk-to-run acceleration in both roles; run and sprint mixes engage and settle.",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-startstop",
+          "client-startstop"
+        ]
+      },
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318c/client-startstop-observer.mp4",
+        "verdict": "The ramp blends walk into run into sprint without a pop."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
@@ -419,7 +635,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). In-place turns step th
     "turn-stance-corvo-unarmed-knee-v4/result.json",
     "turn-stance-emily-knee-v4/result.json",
     "turn-stance-emily-unarmed-knee-v4/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json"
   ],
   "title": "turn in place 90 180",
   "motions": [
@@ -431,7 +648,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). In-place turns step th
     "mixamo_right_turn"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "turn-corvo-v18-v2.mp4",
@@ -443,8 +660,37 @@ Visual sweep 1260: accepted (corvo accept, emily accept). In-place turns step th
     "turn-stance-emily-knee-v4.mp4",
     "turn-stance-emily-unarmed-knee-v4.mp4"
   ],
-  "complete": false,
-  "visual_accepted": false
+  "complete": true,
+  "visual_accepted": false,
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "In-place turns left and right of 45, 90 and 180 degrees standing, then crouched, in both roles; all six turn variants presented; the crouch holds through crouched turns (stance mix >= .96).",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-turns",
+          "client-turns"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318b/host-turns-observer.mp4",
+        "verdict": "Corvo steps his feet through the 180 degree turns and faces about."
+      },
+      {
+        "video": "coverage-v1318c/host-turns-observer.mp4",
+        "verdict": "Corvo's crouched turns stay low with stepping feet, no upright flashes."
+      },
+      {
+        "video": "coverage-v1318c/client-turns-observer.mp4",
+        "verdict": "Emily's crouched turns stay low with stepping feet, no upright flashes."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
@@ -453,6 +699,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). In-place turns step th
 - [evidence: turn-stance-emily-knee-v4/result.json](<../../../../work/natural-moveset/turn-stance-emily-knee-v4/result.json>)
 - [evidence: turn-stance-emily-unarmed-knee-v4/result.json](<../../../../work/natural-moveset/turn-stance-emily-unarmed-knee-v4/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
 - [in_game_recordings: turn-corvo-v18-v2.mp4](<../../../../work/natural-moveset/turn-corvo-v18-v2.mp4>)
 - [in_game_recordings: turn-corvo-unarmed-v18-v2.mp4](<../../../../work/natural-moveset/turn-corvo-unarmed-v18-v2.mp4>)
 - [in_game_recordings: turn-emily-v18-v2.mp4](<../../../../work/natural-moveset/turn-emily-v18-v2.mp4>)
@@ -499,7 +746,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Curved walk, run and s
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Curved walk, run and sprint loops read with the stride following the curve, and sprint lean in the tight arcs past the camera, for both characters armed and holstered. Candidates require animation review and appropriate game-state/contact binding. 645/646: both roles pass11 independent functional checks in one batched native course: walk/run start-stop, speed change, forward/back and diagonal reversals, moving turns, holstered idle/movement and redraw. Steam/body stays ready; minimum settled body weight exceeds0.9998. Full inventories/health and14protected hashes restored. Both observer sheets inspected; fine pose polish deferred, Emily moving-turn framing partly cropped. This is a fixed-course subset, not all movement.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "moving-turn-corvo-knee-v4b.mp4",
@@ -511,16 +758,52 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Curved walk, run and s
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1320d/result.json",
+    "coverage-v1321e/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Walking turns forward and backward (gait course) and walk, run and sprint arcs on the open course in both roles; each gait presented while turning and no in-place turn clip while travelling.",
+    "takes": [
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      },
+      {
+        "take": "coverage-v1321e",
+        "cases": [
+          "host-arcs",
+          "client-arcs"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321e/host-arcs-observer.mp4",
+        "verdict": "Corvo walks, runs and sprints through right-hand arcs with the body following the curve; the run arc ends close to the camera in a planted stop."
+      },
+      {
+        "video": "coverage-v1320c/host-gait-observer.mp4",
+        "verdict": "Corvo walks forward and backward through the moving turns with his body following the curve and legs in stride."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
+- [evidence: coverage-v1321e/result.json](<../../../../work/natural-moveset/coverage-v1321e/result.json>)
 - [in_game_recordings: moving-turn-corvo-knee-v4b.mp4](<../../../../work/natural-moveset/moving-turn-corvo-knee-v4b.mp4>)
 - [in_game_recordings: moving-turn-corvo-unarmed-knee-v4.mp4](<../../../../work/natural-moveset/moving-turn-corvo-unarmed-knee-v4.mp4>)
 - [in_game_recordings: moving-turn-emily-knee-v4.mp4](<../../../../work/natural-moveset/moving-turn-emily-knee-v4.mp4>)
@@ -569,7 +852,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Reversals and directio
     "run_forward_right"
   ],
   "deliverable_kind": "animation",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-stance-corvo-v1.mp4",
@@ -581,16 +864,46 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Reversals and directio
     "native-gait-batch-v645/client-gait-batch.mp4",
     "native-gait-batch-v645/client-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-gait-batch-v645/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1320d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "complete",
+    "scope": "Forward-to-back and diagonal reversals presenting opposite sectors (4 apart) in both roles; consecutive opposite run directions in run8.",
+    "takes": [
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-gait",
+          "client-gait"
+        ]
+      },
+      {
+        "take": "coverage-v1320d",
+        "cases": [
+          "host-run8",
+          "client-run8"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1320a/client-run8-observer.mp4",
+        "verdict": "Emily's direction changes at run speed blend without pops."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-gait-batch-v645/result.json](<../../../../work/natural-moveset/native-gait-batch-v645/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1320d/result.json](<../../../../work/natural-moveset/coverage-v1320d/result.json>)
 - [in_game_recordings: integrated-stance-corvo-v1.mp4](<../../../../work/natural-moveset/integrated-stance-corvo-v1.mp4>)
 - [in_game_recordings: integrated-stance-emily-v1.mp4](<../../../../work/natural-moveset/integrated-stance-emily-v1.mp4>)
 - [in_game_recordings: integrated-sprint-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-sprint-corvo-v2.mp4>)
@@ -650,8 +963,35 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
     "terrain-corvo-unarmed-knee-v4/result.json",
     "terrain-emily-knee-v4b/result.json",
     "terrain-emily-unarmed-knee-v4/result.json",
-    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
+    "coverage-v1318e/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1323-locomotion.json",
+    "decision": "open",
+    "scope": "The Dunwall safe-room staircase up and down in both roles: terrain weight engages with positive and negative grade (24 up and 41 down samples in 1318b).",
+    "takes": [
+      {
+        "take": "coverage-v1318e",
+        "cases": [
+          "host-stairs",
+          "client-stairs"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318a/host-stairs-observer.mp4",
+        "verdict": "Corvo steps down the staircase with alternating feet, sword in hand."
+      },
+      {
+        "video": "coverage-v1318c/client-stairs-observer.mp4",
+        "verdict": "Emily climbs the staircase stepping, upright."
+      }
+    ],
+    "lifecycle": "See method.",
+    "remaining": "A non-stepped slope (ramp or sloped street) in a mission map, up and down, in both roles."
+  }
 }
 ````
 
@@ -660,6 +1000,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
 - [evidence: terrain-emily-knee-v4b/result.json](<../../../../work/natural-moveset/terrain-emily-knee-v4b/result.json>)
 - [evidence: terrain-emily-unarmed-knee-v4/result.json](<../../../../work/natural-moveset/terrain-emily-unarmed-knee-v4/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
+- [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
 - [in_game_recordings: native-feet-stairs-corvo-v5b.mp4](<../../../../work/natural-moveset/native-feet-stairs-corvo-v5b.mp4>)
 - [in_game_recordings: native-feet-stairs-emily-v5.mp4](<../../../../work/natural-moveset/native-feet-stairs-emily-v5.mp4>)
 - [in_game_recordings: terrain-corvo-v17-v2.mp4](<../../../../work/natural-moveset/terrain-corvo-v17-v2.mp4>)

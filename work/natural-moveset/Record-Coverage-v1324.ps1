@@ -176,7 +176,7 @@ try{
      if($step-gt0-and$step-lt3-and$t-ge$ar[$step][0]-900-and!$placed){C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),$Course[1].ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t);$placed=$true}
      if($step-lt3-and$t-ge$ar[$step][0]){$d=$ar[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[1] -LeftY $d[2] -RightX $d[3] -DurationMs $d[4]|Out-Null;$segments.Add(@{ms=$t;arc=$d[5];durationMs=$d[4]});$step++;$placed=$false}}
     if($case-eq'slideexit'){
-     if($step-eq0-and$t-ge800){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=1;$sprintAt=$t}
+     if($step-eq0-and$t-ge800){C $source 'setviewpos -29.6 -153 68.1 180 0';$teleports.Add($t);Start-Sleep -Milliseconds 700;& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=1;$sprintAt=$watch.ElapsedMilliseconds}
      elseif($step-eq1-and$t-ge$sprintAt+350){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 500 -LeftY 32767|Out-Null;$segments.Add(@{ms=$t;slide='jump-exit'});$step=2}
      elseif($step-eq2-and$t-ge$sprintAt+680){& "$lab/Send-D2Input.ps1" -Role $source -Button A -DurationMs 180 -LeftY 20000|Out-Null;$segments.Add(@{ms=$t;takeoff='slide'});$step=3}
      elseif($step-eq3-and$t-ge5200){C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),$Course[1].ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t);$step=4}

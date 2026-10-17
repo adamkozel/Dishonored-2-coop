@@ -273,7 +273,7 @@ struct MovementClock {
     unsigned slideState=0;float slideTime=0,slideWeight=0,leanUp=0;
     unsigned airState=0;float airTime=0,airWeight=0,airProgress=0,airRun=0,airCrouch=0,fallMix=0;
     bool positioned=false;double last=0;float position[3]{},phase=0,idle=0,crouchIdle=0,speed=0,weight=0,runMix=0,sprintMix=0,sprintDirection=0,leanAmount=0,leanWeight=0,stanceProgress=0,stanceMix=0,angleX=1,angleY=0;unsigned a=1,b=2,sprintSide=27;float mix=0;
-    bool advance(const MovementBank& bank,double now,const float* p,const float* rotation,bool eligible,unsigned stance=0,bool sprinting=false,bool leaning=false,float lean=0,bool sliding=false,unsigned motion=0,float riseProgress=0,float armedAmount=1,float verticalPeek=0,bool traversing=false,bool powered=false,bool turningAllowed=true,bool airTrajectory=false){
+    bool advance(const MovementBank& bank,double now,const float* p,const float* rotation,bool eligible,unsigned stance=0,bool sprinting=false,bool leaning=false,float lean=0,bool sliding=false,unsigned motion=0,float riseProgress=0,float armedAmount=1,float verticalPeek=0,bool traversing=false,bool powered=false,bool turningAllowed=true,bool airTrajectory=false,bool settling=false){
         if(!bank.joints||!std::isfinite(now))return false;
         for(unsigned k=0;k<3;++k)if(!std::isfinite(p[k]))return false;
         for(unsigned k=0;k<9;++k)if(!std::isfinite(rotation[k]))return false;
@@ -294,7 +294,9 @@ struct MovementClock {
         // still names the older sample. Only the validated interpolation span
         // can extend this vertical allowance; it never selects an action pose.
         const bool interpolatedAir=bank.hasAir()&&eligible&&!sliding&&!traversing&&!powered&&airTrajectory;
-        if(physicalRate>(powered?500.f:10.f)||std::fabs(dz)>(powered?500.f*float(dt):(traversing&&bank.hasLowMantle())?20.f*float(dt):(airborne||landingStep||interpolatedAir)?60.f*float(dt):.15f)){
+        // 1214ci (#11): while a traversal presentation is still blending out, its exit can snap the root down a step in
+        // one frame (vault exit: 0.16-0.20 m, take 1326a); keep the traversal's vertical allowance until it has ended.
+        if(physicalRate>(powered?500.f:10.f)||std::fabs(dz)>(powered?500.f*float(dt):((traversing||settling)&&bank.hasLowMantle())?20.f*float(dt):(airborne||landingStep||interpolatedAir)?60.f*float(dt):.15f)){
             rejectStep(physicalRate>(powered?500.f:10.f)?2u:3u,dt,dz,physicalRate,motion);clearTerrain();clearTurn();positioned=false;weight=0;return false;}
         const float alpha=1-std::exp(-float(dt)/.10f);speed+=(rate-speed)*alpha;
         // Full-body reversible stance blend; never adjust just the pelvis/legs.
