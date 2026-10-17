@@ -1,0 +1,12 @@
+{
+  "scope": "Manual continuation of the held sessions loadout-dunwall-v1311b and v1311c (Dunwall safe-room loadout, card #85). Diagnosis.",
+  "when": "2026-10-17T15:55:49+02:00",
+  "steps": [
+    "1311b stopped at the loot of Ramsey's body (the step's fixed aims missed); by hand, a use with the native focus on mortimer_ramsey (eye 62.8, 0.9 m, pitch 50) searched the body and completed Task_DW_GetRing",
+    "1311c (-NoLoad, the route's steps 7-12) used the vault locker, entered the safe room and used ld_ring_locker_01_3 twice",
+    "confirmed runtime (kiscule-host.json, kiscule-client.json): the host ran four inventory actions (2310 sword, 2305 gun_player, 2306 five bullets, 3741 spyglass); the partner applied all four and sent nothing (1214ca)",
+    "visual: the host's item wheel shows the pistol (Pistol Bullet 6-10) and a bullet quick slot; the partner's wheel shows the spyglass and elixirs but an empty radial ring, no pistol",
+    "confirmed static (dunwall_escape_tower_p ld_kiscule): the pistol grant sits behind ActionTestBool #2577 fed by CompareEntityDef(player, models/characters/player/corvo/body.def): True gives #2305 gun_player (Corvo), False gives #3778 gun_emily; both continue to #2306 bullets and #3741 spyglass. The mirror replayed the host's Corvo-only node in Emily's world",
+    "fix to implement (1214cb): character-gated grants map to the partner's own branch through a table generated from every campaign map's scripts"
+  ]
+}
