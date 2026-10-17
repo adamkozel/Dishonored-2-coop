@@ -162,11 +162,21 @@ int bankEncode(const fs::path& game,const fs::path& paramsFile,const fs::path& l
     d2bank::Patch patch;patch.exe=fileSha(game/"Dishonored2.exe");patch.skeletons=inputs.skeletonSha;patch.assets=inputs.assetSha;
     std::memcpy(patch.header.data(),lab.data(),32);patch.params=params;
     std::vector<std::vector<float>> clips;double worst=0;
+    // Frames identical to an earlier frame of the lab bank are copied, keeping the bank's continuity exact.
+    const std::size_t frameBytes=J*28;std::multimap<std::uint64_t,std::uint32_t> seen;
+    auto frameAt=[&](std::uint32_t id){return lab.data()+32+std::size_t(id/d2bank::frames)*clipSize+24+std::size_t(id%d2bank::frames)*frameBytes;};
+    auto fnv=[&](const std::uint8_t* p){std::uint64_t h=14695981039346656037ull;for(std::size_t k=0;k<frameBytes;++k){h^=p[k];h*=1099511628211ull;}return h;};
     for(std::size_t c=0;c<params.clips.size();++c){
         const auto* rec=lab.data()+32+c*clipSize;std::array<std::uint8_t,24> h;std::memcpy(h.data(),rec,24);patch.clipHeaders.push_back(h);
         std::vector<float> labValues(std::size_t(d2bank::frames)*J*7);std::memcpy(labValues.data(),rec+24,labValues.size()*4);
+        std::vector<std::uint32_t> refs(d2bank::frames,d2bank::noCopy);
+        for(unsigned f=0;f<d2bank::frames;++f){
+            const std::uint32_t id=std::uint32_t(c*d2bank::frames+f);const auto* p=frameAt(id);const auto key=fnv(p);
+            for(auto [it,end]=seen.equal_range(key);it!=end;++it)if(!std::memcmp(frameAt(it->second),p,frameBytes)){refs[f]=it->second;break;}
+            if(refs[f]==d2bank::noCopy)seen.emplace(key,id);
+        }
         std::vector<std::uint8_t> flips;std::vector<std::int32_t> residual;
-        auto v=rebuild.clip(c,labValues.data(),patch.step,flips,residual);
+        auto v=rebuild.clip(c,labValues.data(),patch.step,flips,residual,refs);patch.refs.push_back(refs);
         for(std::size_t k=0;k<v.size();++k)worst=std::max(worst,double(std::fabs(v[k]-labValues[k])));
         patch.flips.push_back(std::move(flips));patch.residual.push_back(std::move(residual));patch.sums.push_back(sums(v));clips.push_back(std::move(v));
     }
@@ -236,7 +246,7 @@ int banks(const fs::path& game,const fs::path& patchFile,const fs::path& out){
     std::vector<std::vector<float>> clips;
     for(std::size_t c=0;c<params.clips.size();++c){
         auto flips=patch.flips[c];auto residual=patch.residual[c];
-        auto v=rebuild.clip(c,nullptr,patch.step,flips,residual);
+        auto v=rebuild.clip(c,nullptr,patch.step,flips,residual,patch.refs[c]);
         // Native samples may differ in their last bits between CPUs (RCPPS/RSQRTPS): sums, not hashes.
         const auto s=sums(v);const double count=double(v.size());
         if(std::fabs(s[0]-patch.sums[c][0])>1e-6*count||std::fabs(s[1]-patch.sums[c][1])>1e-6*count)throw std::runtime_error("rebuilt clip "+std::to_string(c)+" differs from the release build");

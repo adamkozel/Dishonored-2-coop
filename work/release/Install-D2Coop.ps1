@@ -22,7 +22,9 @@ function Find-Dishonored2{
 }
 if(!$GameDirectory){$GameDirectory=Find-Dishonored2;"Dishonored 2 found: $GameDirectory"}
 $game=(Resolve-Path -LiteralPath $GameDirectory).Path
-if(Get-Process -Name Dishonored2 -ErrorAction SilentlyContinue){throw 'Close Dishonored 2 first; nothing changed.'}
+# Refuse while this game folder's Dishonored2.exe runs (a process whose path cannot be read counts as running).
+$running=@(Get-Process -Name Dishonored2 -ErrorAction SilentlyContinue|Where-Object {$path=$null;try{$path=$_.Path}catch{};!$path-or([IO.Path]::GetFullPath($path)-ieq[IO.Path]::GetFullPath((Join-Path $game 'Dishonored2.exe')))})
+if($running.Count){throw 'Close Dishonored 2 first; nothing changed.'}
 if((Get-Sha256Hash (Join-Path $game 'Dishonored2.exe'))-ne$manifest.requiredExecutableSha256){throw 'Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing changed.'}
 if((Get-Sha256Hash (Join-Path $game 'steam_api64.dll'))-ne$manifest.requiredSteamApiSha256){throw 'Unexpected steam_api64.dll; nothing changed.'}
 $receiptPath=Join-Path $game 'd2coop-install-receipt.json'

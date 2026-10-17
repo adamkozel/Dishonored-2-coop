@@ -91,7 +91,8 @@ def main():
     report = dict(mode=mode, file=out.name, bytes=out.stat().st_size, sha256=hashlib.sha256(out.read_bytes()).hexdigest(),
                   storedBytes=stored.stat().st_size, encoded=encoded, decoded=decoded, maximumError=worst,
                   sameAsEncoder=decoded['sha256'] == encoded['rebuiltSha256'])
-    if not report['sameAsEncoder'] or worst > step / 2 * 1.05:
+    # Quaternions are renormalized after the residual: up to three half-steps per component.
+    if not report['sameAsEncoder'] or worst > step * 1.5 * 1.05:
         raise SystemExit(json.dumps(report))
     print(json.dumps(report))
 

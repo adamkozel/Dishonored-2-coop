@@ -264,11 +264,15 @@ inline Params readParams(In& r){
 //   magic, exe SHA-256, u32 n + n skeleton SHA-256, u32 n + n asset SHA-256 (in parameter order), the bank's
 //   32-byte header, u32 clips + per clip (f64 sum, f64 sum of squares) of its values, u32 residual step exponent,
 //   u64 body size, u32 stream size, a zlib stream of the body: the parameters, then per clip its 24-byte header,
-//   the quaternion sign flips (frames x joints bits) and the residual (frames x joints x 7 int32).
+//   per frame a u32 copy reference (clip * frames + frame of an earlier identical frame, or 0xffffffff), the
+//   quaternion sign flips (frames x joints bits) and the residual (frames x joints x 7 int32). Copies keep the
+//   bank's exact continuity between clips (a clip that ends in another clip's pose).
 struct Patch {
     Hash exe{};std::vector<Hash> skeletons,assets;std::array<std::uint8_t,32> header{};std::vector<std::array<double,2>> sums;std::uint32_t step=17;
     Params params;std::vector<std::array<std::uint8_t,24>> clipHeaders;std::vector<std::vector<std::uint8_t>> flips;std::vector<std::vector<std::int32_t>> residual;
+    std::vector<std::vector<std::uint32_t>> refs;
 };
+constexpr std::uint32_t noCopy=0xffffffffu;
 inline std::size_t flipBytes(const Params& p){return (std::size_t(frames)*p.joints+7)/8;}
 inline Patch readPatch(const Bytes& d,const std::function<Bytes(const std::uint8_t*,std::size_t,std::size_t)>& inflate){
     In r{d};r.need(8);if(std::memcmp(d.data(),"D2BNK001",8))throw std::runtime_error("bank patch: bad magic");r.at=8;
@@ -286,6 +290,7 @@ inline Patch readPatch(const Bytes& d,const std::function<Bytes(const std::uint8
     if(p.skeletons.size()!=P.skeletons.size()||p.assets.size()!=P.assets.size()||p.sums.size()!=P.clips.size())throw std::runtime_error("bank patch: counts");
     for(std::size_t c=0;c<P.clips.size();++c){
         b.need(24);std::array<std::uint8_t,24> h;std::memcpy(h.data(),body.data()+b.at,24);b.at+=24;p.clipHeaders.push_back(h);
+        b.need(frames*4);std::vector<std::uint32_t> refs(frames);std::memcpy(refs.data(),body.data()+b.at,frames*4);b.at+=frames*4;p.refs.push_back(std::move(refs));
         const auto fb=flipBytes(P);b.need(fb);p.flips.emplace_back(body.begin()+std::ptrdiff_t(b.at),body.begin()+std::ptrdiff_t(b.at+fb));b.at+=fb;
         const std::size_t n=std::size_t(frames)*P.joints*7;b.need(n*4);std::vector<std::int32_t> res(n);std::memcpy(res.data(),body.data()+b.at,n*4);b.at+=n*4;p.residual.push_back(std::move(res));
     }
@@ -304,7 +309,7 @@ inline Bytes storedZlib(const Bytes& data){
 }
 inline Bytes writePatch(const Patch& p,const Bytes& paramsBytes){
     Out body;body.raw(paramsBytes.data(),paramsBytes.size());
-    for(std::size_t c=0;c<p.params.clips.size();++c){body.raw(p.clipHeaders[c].data(),24);body.raw(p.flips[c].data(),p.flips[c].size());body.raw(p.residual[c].data(),p.residual[c].size()*4);}
+    for(std::size_t c=0;c<p.params.clips.size();++c){body.raw(p.clipHeaders[c].data(),24);body.raw(p.refs[c].data(),p.refs[c].size()*4);body.raw(p.flips[c].data(),p.flips[c].size());body.raw(p.residual[c].data(),p.residual[c].size()*4);}
     const Bytes stream=storedZlib(body.d);
     Out o;o.raw("D2BNK001",8);o.raw(p.exe.data(),32);
     o.put(std::uint32_t(p.skeletons.size()));for(const auto& h:p.skeletons)o.raw(h.data(),32);
@@ -317,7 +322,8 @@ inline Bytes writePatch(const Patch& p,const Bytes& paramsBytes){
 // ---- Rebuilding a bank from parameters and the player's samples. ----
 // Each clip's base: per frame and body part a blend of two sources at their times; joints 0-1 identity, joint
 // translations from the rig's bind pose except the root's; helper joints recomputed. With `lab` given (encoding),
-// the residual and flips are measured against it; otherwise the patch's are applied.
+// the residual and flips are measured against it; otherwise the patch's are applied. A frame with a copy reference
+// takes the referenced, already rebuilt frame exactly (its flips and residual stay zero).
 class Rebuilder {
 public:
     using Sampler=std::function<Sample(std::size_t asset)>;
@@ -334,15 +340,23 @@ public:
         for(std::size_t c=0;c<P.clips.size();++c)for(const auto& s:P.clips[c].sources)if(s.kind==2)clipLastUse[s.index]=c;
     }
     // One clip: values (frames x joints x 7 floats). Encoding fills flips and residual from `lab`.
-    std::vector<float> clip(std::size_t c,const float* lab,std::uint32_t step,std::vector<std::uint8_t>& flips,std::vector<std::int32_t>& residual){
+    std::vector<float> clip(std::size_t c,const float* lab,std::uint32_t step,std::vector<std::uint8_t>& flips,std::vector<std::int32_t>& residual,
+                            const std::vector<std::uint32_t>& refs){
         const auto& C=P.clips[c];const auto& rig=rigs[P.rig];const std::size_t J=P.joints;const double unit=std::ldexp(1.0,-int(step));
         std::vector<const Track*> src(C.sources.size()+1,nullptr);
         for(std::size_t k=0;k<C.sources.size();++k)src[k+1]=&track(C.sources[k],c);
         if(lab){flips.assign(flipBytes(P),0);residual.assign(std::size_t(frames)*J*7,0);}
         else if(flips.size()!=flipBytes(P)||residual.size()!=std::size_t(frames)*J*7)throw std::runtime_error("rebuild: residual size");
+        if(refs.size()!=frames)throw std::runtime_error("rebuild: copy references");
         std::vector<float> out(std::size_t(frames)*J*7);
         auto value=[&](std::uint16_t s,float u,std::size_t j)->Value{return s?at(*src[s],u,j):bind[j];};
         for(unsigned f=0;f<frames;++f){
+            if(refs[f]!=noCopy){
+                const std::size_t rc=refs[f]/frames,rf=refs[f]%frames;
+                if(rc>c||(rc==c&&rf>=f))throw std::runtime_error("rebuild: copy reference not earlier");
+                const float* from=(rc==c?out.data():decoded[rc].data())+rf*J*7;std::memcpy(out.data()+std::size_t(f)*J*7,from,J*7*sizeof(float));
+                continue;
+            }
             Pose pose=bind;
             for(std::size_t j=2;j<J;++j){const auto& ch=C.choices[std::size_t(f)*P.parts+P.part[j]];pose[j]=nlerp(value(ch.a,ch.ua,j),value(ch.b,ch.ub,j),ch.w);}
             pose[0]=pose[1]=Value{0,0,0,1,0,0,0};for(std::size_t j=3;j<J;++j)for(int k=4;k<7;++k)pose[j][k]=bind[j][k];
@@ -352,12 +366,16 @@ public:
             for(std::size_t j=0;j<J;++j){
                 const std::size_t bit=std::size_t(f)*J+j,at7=bit*7;
                 if(lab){double dot=0;for(int k=0;k<4;++k)dot+=double(lab[at7+k])*pose[j][k];if(dot<0)flips[bit/8]|=std::uint8_t(1u<<(bit%8));}
-                const bool flip=(flips[bit/8]>>(bit%8))&1;
+                const bool flip=(flips[bit/8]>>(bit%8))&1;double v[7];
                 for(int k=0;k<7;++k){
                     const double base=k<4&&flip?-pose[j][k]:pose[j][k];
                     if(lab){const double r=std::nearbyint((double(lab[at7+k])-base)/unit);if(!(std::fabs(r)<2147483647.0))throw std::runtime_error("rebuild: residual range");residual[at7+k]=std::int32_t(r);}
-                    out[at7+k]=float(base+double(residual[at7+k])*unit);
+                    v[k]=base+double(residual[at7+k])*unit;
                 }
+                // Unit quaternions: the bank loader compares loop ends by an unnormalized dot product (>= 0.999999).
+                // (A degenerate one stays as is; the loader's norm check refuses it.)
+                const double n=std::sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]+v[3]*v[3]),scale=n>.5?1/n:1;
+                for(int k=0;k<7;++k)out[at7+k]=float(k<4?v[k]*scale:v[k]);
             }
         }
         if(C.loop)std::memcpy(out.data()+std::size_t(frames-1)*J*7,out.data(),J*7*sizeof(float));

@@ -15,7 +15,9 @@ function Find-Dishonored2{
 }
 if(!$GameDirectory){$GameDirectory=Find-Dishonored2;"Co-op installation found: $GameDirectory"}
 $game=(Resolve-Path -LiteralPath $GameDirectory).Path
-if(Get-Process -Name Dishonored2 -ErrorAction SilentlyContinue){throw 'Close Dishonored 2 first; nothing changed.'}
+# Refuse while this game folder's Dishonored2.exe runs (a process whose path cannot be read counts as running).
+$running=@(Get-Process -Name Dishonored2 -ErrorAction SilentlyContinue|Where-Object {$path=$null;try{$path=$_.Path}catch{};!$path-or([IO.Path]::GetFullPath($path)-ieq[IO.Path]::GetFullPath((Join-Path $game 'Dishonored2.exe')))})
+if($running.Count){throw 'Close Dishonored 2 first; nothing changed.'}
 $receiptPath=Join-Path $game 'd2coop-install-receipt.json'
 if(!(Test-Path -LiteralPath $receiptPath)){throw 'No co-op install receipt here; nothing to roll back.'}
 $receipt=Get-Content -LiteralPath $receiptPath -Raw|ConvertFrom-Json

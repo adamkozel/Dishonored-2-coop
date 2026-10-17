@@ -1,4 +1,4 @@
-"""Builds release 0.7.0 (r7, take 1313, #30) from candidate 1214ce. The package ships no game files: everything
+"""Builds release 0.7.0 (r7, take 1313, #30) from candidate 1214ce (the DLL) and the pinned d2coop_setup.exe. The package ships no game files: everything
 game-derived is built by the installer from the player's own install with bin/d2coop_setup.exe:
 - base/master.index and base/game{1..4}voidmod.{index,resources}: from data/decl-recipes.bin (D2RCP004) and the
   player's resource containers; byte-identical to the lab's files, so the manifest pins their SHA-256;
@@ -20,8 +20,11 @@ REL = R / 'work/release'
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest().upper()
 ident = json.loads((CAND / 'identity.json').read_text(encoding='utf-8-sig'))
 assert sha(LAB / 'dinput8.dll') == ident['dll'], 'live DLL is not candidate 1214ce'
-assert sha(CAND / 'd2coop_setup.exe') == ident['setup']
-OUT = R / f'outputs/release/d2coop-v{VERSION}'; ZIP = OUT.with_suffix('.zip')
+# The builder: built after 1214ce from the same DLL sources plus the final patch format (copy references,
+# unit quaternions); pinned in work/release/setup-tool-v1313 with the commit that built it.
+SETUP = REL / 'setup-tool-v1313/d2coop_setup.exe'; setup_pin = json.loads((REL / 'setup-tool-v1313/identity.json').read_text(encoding='utf-8'))
+assert sha(SETUP) == setup_pin['sha256']
+OUT = R / f'outputs/release/d2coop-v{VERSION}'; ZIP = OUT.parent / (OUT.name + '.zip')
 if OUT.exists() or ZIP.exists():
     sys.exit('release folder exists; never overwrite a published package')
 data = {'data/decl-recipes.bin': REL / 'decl-recipes-v1/decl-recipes.bin',
@@ -31,7 +34,7 @@ data = {'data/decl-recipes.bin': REL / 'decl-recipes-v1/decl-recipes.bin',
 for p in data.values():
     assert p.exists(), p
 # Prove the generated packages from the original install (read only) and pin them to the lab's own files.
-setup = CAND / 'd2coop_setup.exe'
+setup = SETUP
 with tempfile.TemporaryDirectory(dir=REL) as tmp:
     r = subprocess.run([str(setup), 'packages', str(ORIG / 'base'), str(data['data/decl-recipes.bin']), str(Path(tmp) / 'base')], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr

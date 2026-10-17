@@ -1,5 +1,6 @@
 // #30: bank rebuild (bank_rebuild.h) on a synthetic skeleton and samples: the .edgeskl reader, rotation math,
-// copies by name, retarget and mirror identities, parameters, and a patch encoded and decoded back.
+// copies by name, retarget and mirror identities, parameters, and a patch encoded and decoded back with unit
+// quaternions whose loop ends pass the bank loader.
 #include "bank_rebuild.h"
 #include "inflate.h"
 #include <cstdio>
@@ -91,27 +92,37 @@ int main(){
         // A "lab bank": each clip's base plus edits and sign flips. Encoding against zeros measures the base.
         const std::uint32_t step=17;const double unit=std::ldexp(1.0,-int(step));std::vector<std::vector<float>> lab;
         auto sampler=[&](std::size_t){return motion(js,12,0);};
+        const std::vector<std::uint32_t> none(frames,noCopy);
+        // Clip 1 frame 7 repeats clip 0 frame 3; clip 1 frame 9 repeats its own frame 2.
+        std::vector<std::uint32_t> copies=none;copies[7]=3;copies[9]=frames+2;
         auto measured=[&](Rebuilder& r,std::size_t c){std::vector<std::uint8_t> fl;std::vector<std::int32_t> res;std::vector<float> zero(std::size_t(frames)*9*7,0.f);
-            r.clip(c,zero.data(),step,fl,res);std::vector<float> v(zero.size());for(std::size_t k=0;k<v.size();++k)v[k]=float(-double(res[k])*unit);
+            r.clip(c,zero.data(),step,fl,res,none);std::vector<float> v(zero.size());for(std::size_t k=0;k<v.size();++k)v[k]=float(-double(res[k])*unit);
             for(std::size_t k=0;k<v.size();k+=7)if((k/7)%5==3&&(k/7)%9>=2)for(int q=0;q<4;++q)v[k+q]=-v[k+q];
-            v[7*20+4]+=.01f;if(params.clips[c].loop)std::memcpy(v.data()+std::size_t(frames-1)*9*7,v.data(),9*7*4);return v;};
+            v[7*20+4]+=.01f;
+            for(std::size_t k=0;k<v.size();k+=7){double n=0;for(int q=0;q<4;++q)n+=double(v[k+q])*v[k+q];n=std::sqrt(n);for(int q=0;q<4;++q)v[k+q]=float(v[k+q]/n);}  // banks hold unit quaternions
+            if(params.clips[c].loop)std::memcpy(v.data()+std::size_t(frames-1)*9*7,v.data(),9*7*4);return v;};
         {Rebuilder x(params,{parsed},sampler);lab.push_back(measured(x,0));}
-        {Rebuilder y(params,{parsed},sampler);std::vector<std::uint8_t> fl;std::vector<std::int32_t> res;y.clip(0,lab[0].data(),step,fl,res);lab.push_back(measured(y,1));}
+        {Rebuilder y(params,{parsed},sampler);std::vector<std::uint8_t> fl;std::vector<std::int32_t> res;y.clip(0,lab[0].data(),step,fl,res,none);lab.push_back(measured(y,1));}
+        std::memcpy(lab[1].data()+7*9*7,lab[0].data()+3*9*7,9*7*4);std::memcpy(lab[1].data()+9*9*7,lab[1].data()+2*9*7,9*7*4);  // the copies
         Rebuilder enc(params,{parsed},sampler);Patch patch;patch.params=params;double worst=0;
-        for(std::size_t c=0;c<2;++c){std::vector<std::uint8_t> fl;std::vector<std::int32_t> res;auto v=enc.clip(c,lab[c].data(),step,fl,res);
+        for(std::size_t c=0;c<2;++c){std::vector<std::uint8_t> fl;std::vector<std::int32_t> res;auto v=enc.clip(c,lab[c].data(),step,fl,res,c?copies:none);patch.refs.push_back(c?copies:none);
             for(std::size_t k=0;k<v.size();++k)worst=std::max(worst,double(std::fabs(v[k]-lab[c][k])));
             patch.flips.push_back(fl);patch.residual.push_back(res);patch.clipHeaders.push_back({});patch.sums.push_back({0,0});patch.skeletons.push_back({});lab[c]=v;}
         patch.skeletons.resize(1);patch.assets.resize(1);
-        require(worst<=unit*.5*1.01,"encoded values within half a step of the lab bank");
+        require(worst<=unit*1.5*1.01,"encoded values within three half-steps of the lab bank (quaternions are renormalized)");
         require(!std::memcmp(lab[0].data(),lab[0].data()+std::size_t(frames-1)*9*7,9*7*4),"loop clip repeats its first frame");
+        for(std::size_t k=0;k<lab[1].size();k+=7){double n=0;for(int q=0;q<4;++q)n+=double(lab[1][k+q])*lab[1][k+q];require(std::fabs(n-1)<1e-6,"rebuilt quaternions are unit");}
         // Patch file round trip, then decoding gives the encoder's values exactly.
         const Bytes file=writePatch(patch,p.d);
         const Patch back=readPatch(file,[](const std::uint8_t* d,std::size_t n,std::size_t e){return d2inflate::zlib(d,n,e);});
         require(back.residual==patch.residual&&back.flips==patch.flips&&back.params.clips.size()==2,"patch round trip");
         Rebuilder dec(back.params,{parsed},[&](std::size_t){return motion(js,12,0);});
-        for(std::size_t c=0;c<2;++c){auto fl=back.flips[c];auto res=back.residual[c];auto v=dec.clip(c,nullptr,back.step,fl,res);require(v==lab[c],"decoded clip equals the encoded clip");}
+        for(std::size_t c=0;c<2;++c){auto fl=back.flips[c];auto res=back.residual[c];auto v=dec.clip(c,nullptr,back.step,fl,res,back.refs[c]);require(v==lab[c],"decoded clip equals the encoded clip");}
+        require(!std::memcmp(lab[1].data()+7*9*7,lab[0].data()+3*9*7,9*7*4)&&!std::memcmp(lab[1].data()+9*9*7,lab[1].data()+2*9*7,9*7*4),"copied frames are exact");
         Rebuilder short_(back.params,{parsed},[&](std::size_t){return motion(js,12,0);});std::vector<std::uint8_t> fl;std::vector<std::int32_t> res(3);
-        require(throws([&]{short_.clip(0,nullptr,17,fl,res);}),"residual size checked");
+        require(throws([&]{short_.clip(0,nullptr,17,fl,res,none);}),"residual size checked");
+        {Rebuilder late(back.params,{parsed},sampler);auto f2=back.flips[0];auto r2=back.residual[0];auto later=none;later[4]=6;
+            require(throws([&]{late.clip(0,nullptr,17,f2,r2,later);}),"copy from a later frame refused");}
         auto truncated=file;truncated.pop_back();require(throws([&]{readPatch(truncated,[](const std::uint8_t* d,std::size_t n,std::size_t e){return d2inflate::zlib(d,n,e);});}),"truncated patch refused");
         std::puts("d2_bank_rebuild_tests passed");
         return 0;
