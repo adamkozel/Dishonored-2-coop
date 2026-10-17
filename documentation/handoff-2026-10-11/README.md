@@ -161,3 +161,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [96. External research references](96-external-research-references.md): public Dishonored 2 resources (camera, cvars, autosplitter, saves) and what was verified against the lab build.
 - [97. Campaign map sequence](97-campaign-map-sequence.md): every mission's maps in play order, how each one ends, and the map-change boundaries stage 6 must carry.
 - [98. Release without game files](98-release-without-game-files.md): how the installer builds the voidmod packages, movement banks and prop tables from the player's own install, release 0.7.0, its installer and the clean-PC path in the VM.
+- [99. Movement completion coverage](99-movement-completion-coverage.md): the product-controller coverage harnesses (1318–1326), lab geometry and native input facts, the hold and grace receiver fixes (1214cg, 1214ch) and the per-item completion audits.

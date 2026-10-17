@@ -33,6 +33,8 @@ rep("""$ErrorActionPreference='Stop';$root=""", """$Cases=@($Cases|ForEach-Objec
 # The checkpoint reload can still be settling when the restored inventory is read (take 1321c: "Native inventory read
 # failed" after host-fall); retry the read for up to 5 s.
 rep("""foreach($r in 'host','client'){$restored=Q $r '--player-inventory'""", """foreach($r in 'host','client'){$restored=$null;for($ra=0;$ra-lt25-and!$restored;$ra++){try{$restored=Q $r '--player-inventory'}catch{Start-Sleep -Milliseconds 200}};if(!$restored){throw "Native inventory read failed after restore ($r)"}""")
+# A restore can trip over a transient lock on a status file (take 1321d: "being used by another process"); retry once.
+rep("""try{Restore $key;$row.restored=$true}catch{""", """try{try{Restore $key}catch{$row.restoreRetried=$_.Exception.Message;Start-Sleep -Milliseconds 1500;Restore "$key-retry"};$row.restored=$true}catch{""")
 # Per-case recording length.
 rep("""   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0""",
     """   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$segments=[Collections.Generic.List[object]]::new();$placed=$false;$teleports=[Collections.Generic.List[double]]::new()""")

@@ -215,7 +215,7 @@ try{
    $row.passed=$true
   }catch{$row.failure=$_.Exception.Message}
   foreach($c in $capture,$peerCapture){if($c){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}
-  try{Restore $key;$row.restored=$true}catch{$row.restored=$false;$row.failure=(("$($row.failure); restore: "+$_.Exception.Message)).TrimStart('; ')}
+  try{try{Restore $key}catch{$row.restoreRetried=$_.Exception.Message;Start-Sleep -Milliseconds 1500;Restore "$key-retry"};$row.restored=$true}catch{$row.restored=$false;$row.failure=(("$($row.failure); restore: "+$_.Exception.Message)).TrimStart('; ')}
   $rows.Add([pscustomobject]$row);Save "$out/$key.json" ([pscustomobject]$row)
   if(!$row.restored){throw "Fixture restore failed after $key"}
  }}

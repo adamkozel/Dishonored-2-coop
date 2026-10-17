@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-15T22:07:09.255657+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T00:58:40.854295+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 10 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -387,16 +387,16 @@ Captured 2026-10-15T22:07:09.255657+02:00; source [review-catalog.json](<../../.
 | moving_turns | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | reverse_and_direction_changes | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | slopes_and_stairs | locomotion | candidates | partial_native_steam_dunwall_stairs_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_idle | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_8_directions | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| stand_to_crouch | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_to_stand | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouched_turns | stance | candidates | partial_native_steam_stance_turns_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_stop_start | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| stand_lean_left_right | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_lean_left_right | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| ledge_peek | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| keyhole_enter_look_exit | stance | candidates | partial_native_keyhole_phases_through_Steam | bounded_actual_game_recordings_inspected | work_remaining |
+| crouch_idle | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouch_8_directions | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| stand_to_crouch | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouch_to_stand | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouched_turns | stance | candidates | partial_native_steam_stance_turns_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouch_stop_start | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| stand_lean_left_right | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouch_lean_left_right | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| ledge_peek | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| keyhole_enter_look_exit | stance | candidates | partial_native_keyhole_phases_through_Steam | bounded_actual_game_recordings_inspected | complete |
 | standing_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | running_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | crouch_jump_transition | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
