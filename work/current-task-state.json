@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-17T19:45:00+02:00",
+  "UpdatedAt": "2026-10-17T20:15:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22133,7 +22133,7 @@
         "KnownLimitation": "in end_p the partner keeps the two Corvo end-game gameflow nodes active (the mirror runs only in gameplay)"
       }
     },
-    "NextAction": "Stage 7 release (#30): finish the clean-PC take (1314), merge #97, publish GitHub release v0.7.0 and repeat the clean-PC take downloading it from GitHub.",
+    "NextAction": "Stage 7: stability soak #13 (Test-MissionSoak-v1316.ps1, 2 hours) and a vanilla control; #94 post-credits check; then the remaining roadmap stage exit criteria (movement checklist #11, #9, stage 4-6 umbrellas).",
     "FollowUps": {
       "85-dunwall-loadout": {
         "Audit": "work/movement-integration/dunwall-loadout-audit-v1311.json",
@@ -22149,24 +22149,25 @@
     "Version": "0.7.0",
     "Card": 30,
     "Chapter": "documentation/handoff-2026-10-11/98-release-without-game-files.md",
-    "Package": "outputs/release/d2coop-v0.7.0.zip (local; GitHub release after the clean-PC take)",
+    "Package": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.7.0 (d2coop-v0.7.0.zip, SHA-256 484FF854DA210A611AC62DCCFCCDB1C8508B3F570A9CCF2B98CA2CBF10946EFF)",
     "Candidate": "candidate-npc-combat-v1214cf",
     "Builder": "work/release/build_release_v1313.py",
     "SetupTool": "work/release/setup-tool-v1313/identity.json",
     "NoGameFiles": "banks (bank-patches-v1), native tables (native-tables-v1) and decl packages (decl-recipes-v1) are built by d2coop_setup from the player's install",
     "InstallTest": {
-      "Take": "work/release/release-install-v1313c/result.json",
-      "Status": "pass (8/8)"
+      "Take": "work/release/release-install-v1313d/result.json",
+      "Status": "pass (8/8, final package)"
     },
     "CleanPc": {
-      "Harness": "work/release/Test-ProductTwoAccount-v1314.ps1",
-      "Takes": "1314a-1314e: install, Defender, product boot, F7, join and uninstall pass; join-follow from the main menu fixed in 1214cf; harness answers the mission card and the character choice",
-      "Status": "in progress"
+      "Harness": "work/release/Test-ProductTwoAccount-v1315.ps1",
+      "Take": "work/release/product-two-account-v1315b/result.json",
+      "Status": "pass: downloaded from GitHub in the VM, Install.cmd alone, Defender on without detection, join, follow into the mission as Emily, both walk, F8 leave, uninstall rollback"
     },
     "NeedsYou": {
       "98": "repository made public by the user (2026-10-17); Mixamo and history decisions remain",
       "99": "final human playtest",
       "25": "Microsoft false-positive submission"
-    }
+    },
+    "Merged": "652e8e81 (#97, closes #30)"
   }
 }
