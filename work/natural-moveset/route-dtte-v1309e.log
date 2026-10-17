@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "step18-flag": {
+      "variable": "Bool_MissionStep_ThroneRoom_Reached",
+      "value": 1,
+      "ms": 607
+    },
+    "step20-flag": {
+      "variable": "Bool_MissionStep_Portal_IsActive",
+      "value": 1,
+      "ms": 629
+    },
+    "step23-flag": {
+      "variable": "Bool_MissionStep_UDW_Reached",
+      "value": 1,
+      "ms": 595
+    },
+    "step25-flag": {
+      "variable": "Bool_MissionStep_Delilah_IsDead",
+      "value": 1,
+      "ms": 577
+    },
+    "final": {
+      "client": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/end/end_p",
+        "epoch": 71,
+        "cine": 48,
+        "pos": [
+          -42.699997,
+          -13.2,
+          59.365269
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          2,
+          2,
+          12,
+          0,
+          6,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 21,
+        "lt": "applied/0/8",
+        "hold": "released/0",
+        "ka": "12/1/0",
+        "active": "Obj_DTTE_EndGame_asCorvo,Task_DTTE_ReclaimThrone_Corvo"
+      },
+      "host": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/end/end_p",
+        "epoch": 71,
+        "cine": 83,
+        "pos": [
+          -42.699997,
+          -13.2,
+          59.365269
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          0,
+          0,
+          14,
+          0,
+          8,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/8/0",
+        "hold": "released/63",
+        "ka": "13/0/0",
+        "active": ""
+      }
+    },
+    "gameflowEqual": false,
+    "restoreRecovery": {
+      "before": [
+        "host did not reach a fresh native menu/gameplay state.",
+        "host: Native query failed host --health",
+        "client: Native query failed client --health"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo in lab product mode; Dunwall fixture restored."
+}
