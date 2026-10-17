@@ -48,9 +48,17 @@ def pid():
 
 
 def probe(*args):
-    r = subprocess.run([f'{REPO}/outputs/d2-coop-lab/bin/d2_runtime_probe.exe', str(pid()), *map(str, args)],
-                       capture_output=True, text=True)
-    return json.loads(r.stdout)
+    """A native read; retried like the harness's Q (a read can fail for a moment during a fade or restart)."""
+    for attempt in range(12):
+        r = subprocess.run([f'{REPO}/outputs/d2-coop-lab/bin/d2_runtime_probe.exe', str(pid()), *map(str, args)],
+                           capture_output=True, text=True)
+        if r.returncode == 0:
+            try:
+                return json.loads(r.stdout)
+            except ValueError:
+                pass
+        time.sleep(0.25)
+    raise RuntimeError(f'native read failed: {args}')
 
 
 def status(suffix=''):

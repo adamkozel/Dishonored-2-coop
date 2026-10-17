@@ -1,0 +1,84 @@
+{
+  "failure": "Action chase_hold failed (exit 1)",
+  "passed": false,
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 26,
+        "cine": 76,
+        "pos": [
+          706.309998,
+          -34.25,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          3,
+          4,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "3/0/0",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      },
+      "client": {
+        "logic": 12,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 26,
+        "cine": 113,
+        "pos": [
+          722.984131,
+          -31.937717,
+          3.709688
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          2,
+          3,
+          3,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "waiting_native_phase",
+        "idHash": "bb242f74",
+        "gfApplied": 1,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/2/1",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "host did not reach a fresh native menu/gameplay state.",
+        "host: Native query failed host --health",
+        "client: Native query failed client --health"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:308[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 308 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mAction chase_hold failed (exit 1)[0m
