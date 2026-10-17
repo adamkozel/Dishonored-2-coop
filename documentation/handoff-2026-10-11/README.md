@@ -160,3 +160,4 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Stage 4: shared combat authority on missions — unshared deaths and host-world damage (candidates 1214n–1214o)](95-shared-combat-authority.md)
 - [96. External research references](96-external-research-references.md): public Dishonored 2 resources (camera, cvars, autosplitter, saves) and what was verified against the lab build.
 - [97. Campaign map sequence](97-campaign-map-sequence.md): every mission's maps in play order, how each one ends, and the map-change boundaries stage 6 must carry.
+- [98. Release without game files](98-release-without-game-files.md): how the installer builds the voidmod packages, movement banks and prop tables from the player's own install, release 0.7.0, its installer and the clean-PC path in the VM.

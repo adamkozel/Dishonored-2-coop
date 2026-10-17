@@ -226,7 +226,10 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     if(outgoing.mapId==m.hostMap){m.result="same_mission";m.loadedForMap=m.hostMap;return;}
     if(m.loadedForMap==m.hostMap&&tick-m.loadAt<60000){m.result="loading_host_mission";return;}
     const unsigned logic=outgoing.gameLogicState;
-    if(outgoing.pendingGameLogicState||(logic!=1&&logic!=2&&logic!=3)){m.result="waiting_native_phase";return;}
+    // 1214cf: also from the front-end main menu (campaign/menu/menu_p, logic 6), where a partner waits for the
+    // invite; the 0.7.0 clean-PC take 1314a stayed there (join-follow had only covered gameplay and pause menus).
+    const bool frontEnd=logic==6&&!std::strcmp(mapName,"campaign/menu/menu_p");
+    if(outgoing.pendingGameLogicState||(logic!=1&&logic!=2&&logic!=3&&!frontEnd)){m.result="waiting_native_phase";return;}
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
     dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.result="loading_host_mission";
 }

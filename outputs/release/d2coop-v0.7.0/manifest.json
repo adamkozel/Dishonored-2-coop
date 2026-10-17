@@ -1,0 +1,129 @@
+{
+  "name": "Dishonored 2 Corvo/Emily co-op",
+  "version": "0.7.0",
+  "candidate": "candidate-npc-combat-v1214cf",
+  "built": "2026-10-17T19:52:47.292616+02:00",
+  "requiredExecutableSha256": "B671F8249422862BF557D00AAB2F4BB671ED4515CC10AD8A8A9DECAD84516180",
+  "requiredSteamApiSha256": "71AF8666392ACAD2080A816B9F1196FE9CCB950E1DB8A549F8312C4D231F55A8",
+  "originalMasterIndexSha256": "E76D1A13AC95F5614300BE65F55EBC1CDE68974E792BF72D96E5E5D206AAC147",
+  "files": [
+    {
+      "path": "dinput8.dll",
+      "sha256": "B95ED2DDB96E6D6733C52CBA521B28CC7A2E52820C997018443F5FEDBD8E4E1E",
+      "size": 6052352
+    },
+    {
+      "path": "d2coop/d2coop.cfg",
+      "sha256": "23D2FB03DC8DC0BCDD3C03DC2849852EB1858F9E6BBDC42640278BED9198F831",
+      "size": 177
+    }
+  ],
+  "tools": [
+    {
+      "path": "bin/d2coop_setup.exe",
+      "sha256": "C186049775887CA1B2D18CC8E2A84AF3D6060A68A8716DDB99983AC48074F88C",
+      "size": 2058240
+    }
+  ],
+  "data": [
+    {
+      "path": "data/decl-recipes.bin",
+      "sha256": "8414D8B5F3A3CFBC6218859146B103CAA09DD956E5A30B405CC3B5ED34E8A08E",
+      "size": 115262
+    },
+    {
+      "path": "data/corvo-bank.patch",
+      "sha256": "6EFFD58AB8451F510F35385A98E8AFBA579DA9635AC9F0C8237773F0E7318E03",
+      "size": 18671671
+    },
+    {
+      "path": "data/emily-bank.patch",
+      "sha256": "E94F0485AA63C392E476DAA41EBCC24532B3D8F265DE174E2F6EA63704F50C13",
+      "size": 17405095
+    },
+    {
+      "path": "data/native-tables.recipe",
+      "sha256": "3B4B773C8CAD2D8983BA47048AEDA7FC1320E073C5B1FCD61E581C56AF5AB4C7",
+      "size": 14993
+    }
+  ],
+  "generated": [
+    {
+      "path": "base/game1voidmod.index",
+      "sha256": "A20FD3AA4D025484B70BECCA8638BB39D588993DCD16C3F5E9621888EBF55236",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game1voidmod.resources",
+      "sha256": "E88FFBE7BBB2E8BA700C813A71D1704474DE0D2CACFDE9E97F9D78F7730D5FE6",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game2voidmod.index",
+      "sha256": "25F74D3F1FCF7D4E8889C008E4CE885A13A4932564923874A6901855AFF57936",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game2voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game3voidmod.index",
+      "sha256": "9268D81FA6EB00E3DC0F0B08E50B3BE0D12BEB3D128941BD85F41371CFDE015A",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game3voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game4voidmod.index",
+      "sha256": "C65204710727D136E6D05E3B66D762DFDF44D91F26473E8B38B1A736BE6524C8",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/game4voidmod.resources",
+      "sha256": "D960D289CDB233C9408840FE252F2C081D0B8818962DC30EC283B6D2BBF22159",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": false
+    },
+    {
+      "path": "base/master.index",
+      "sha256": "DF8FF7ED1FD727EC68E93866D5912E341C1A068E9D4F34783B1B478EC047BBB4",
+      "builtFrom": "data/decl-recipes.bin and the player resource containers",
+      "replacesOriginal": true
+    },
+    {
+      "path": "d2coop/corvo-choke-bank.bin",
+      "sha256": null,
+      "builtFrom": "data/corvo-bank.patch and the player animations through the player Dishonored2.exe",
+      "verifiedBy": "d2coop_setup per-clip or per-table sums"
+    },
+    {
+      "path": "d2coop/emily-choke-bank.bin",
+      "sha256": null,
+      "builtFrom": "data/emily-bank.patch and the player animations through the player Dishonored2.exe",
+      "verifiedBy": "d2coop_setup per-clip or per-table sums"
+    },
+    {
+      "path": "d2coop/native-tables.bin",
+      "sha256": null,
+      "builtFrom": "data/native-tables.recipe and the player animations through the player Dishonored2.exe",
+      "verifiedBy": "d2coop_setup per-clip or per-table sums"
+    }
+  ],
+  "notes": [
+    "No game files are shipped: every game-derived file is built by the installer from the player install.",
+    "Never replaces Dishonored2.exe or steam_api64.dll (native Steam).",
+    "Install backs up master.index and any existing dinput8.dll; Uninstall restores them byte-identically."
+  ]
+}

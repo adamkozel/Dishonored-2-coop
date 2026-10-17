@@ -1,5 +1,5 @@
 #pragma once
-#include "grenade_mechanism_data.h"
+#include "native_tables_runtime.h"
 // Pure native model transforms on the exact cosmetic-only child. No native
 // animation events, equipment component, projectile or source-player writes.
 SRWLOCK grenadeMechanismLock=SRWLOCK_INIT;
@@ -16,6 +16,11 @@ bool publishGrenadeMechanism(unsigned handle,unsigned variant,float amount,ULONG
        prop.owner!=probeActor||prop.ownerHandle!=probeHandle||
        !readNativeSkeleton(memoryRead,base,handle,s,NativeSkeletonScope::CosmeticRanged)||!s.stable||s.logic!=1||
        s.game!=observedGame||s.actor!=prop.actor||s.animation!=prop.animation||s.parents.size()!=6)return false;
+    // #30: grenade_{idle,cooking_in,cooking_idle,parents,bind}, rebuilt by the installer from the player's samples.
+    const auto* parentTable=nativeTables().find("grenade_parents",{6});const auto* bindTable=nativeTables().find("grenade_bind",{6,7});
+    const auto* clipTable=nativeTables().find(variant==3?"grenade_cooking_in":variant>=4?"grenade_cooking_idle":"grenade_idle",{0,6,7});
+    if(!parentTable||!bindTable||!clipTable)return false;
+    const auto* grenadeMechanismParents=parentTable->s.data();const auto* grenadeMechanismBind=reinterpret_cast<const float(*)[7]>(bindTable->f.data());
     for(unsigned j=0;j<6;++j){
         if(s.parents[j]!=grenadeMechanismParents[j])return false;
         float same=0,opposite=0;
@@ -23,7 +28,7 @@ bool publishGrenadeMechanism(unsigned handle,unsigned variant,float amount,ULONG
         if((std::min)(same,opposite)>.00001f)return false;
         for(unsigned k=4;k<7;++k)if(std::fabs(s.bindLocal[j][k]-grenadeMechanismBind[j][k])>.00001f)return false;
     }
-    const auto clip=grenadeMechanismClip(variant);
+    const struct {unsigned joints,frames;const float (*qts)[7];} clip{6,clipTable->dims[0],reinterpret_cast<const float(*)[7]>(clipTable->f.data())};
     // Cooking entry/loop follow their exact replicated native phase. During
     // release the armed mechanism stays at the loop's terminal pose until Hide.
     const float phase=variant>=5?1.f:amount,f=phase*(clip.frames-1);
