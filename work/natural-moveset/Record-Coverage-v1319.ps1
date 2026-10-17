@@ -102,12 +102,12 @@ try{
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
    if($case-notin'kick','crouchheavy','note','mana','stairs'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
-   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=19000;startstop=16500;stairs=13000;lean=20500;stance=15500;interrupt=13500}[$case];if(!$caseMs){$caseMs=9500}
+   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;lean=20500;stance=15500;interrupt=13500}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
     if($pair[1]-eq'source'){$capture=$p}else{$peerCapture=$p}}
-   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$segments=[Collections.Generic.List[object]]::new()
+   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$segments=[Collections.Generic.List[object]]::new();$placed=$false;$teleports=[Collections.Generic.List[double]]::new()
    $runs=@(@(0,32767),@(0,-32767),@(-32767,0),@(32767,0),@(-23170,23170),@(23170,-23170),@(23170,23170),@(-23170,-23170))
    while($watch.ElapsedMilliseconds-lt$caseMs){
     $t=$watch.ElapsedMilliseconds
@@ -118,19 +118,21 @@ try{
      if($step-eq0-and$t-ge500){I $source B 180;$step=1}
      elseif($step-ge1-and$step-le8-and$t-ge1500+($step-1)*1300){$d=$runs[$step-1];& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 1000 -LeftX $d[0] -LeftY $d[1]|Out-Null;$segments.Add(@{ms=$t;dir=$step-1});$step++}
      elseif($step-eq9-and$t-ge12600){I $source B 180;$step=10}}
-    if($case-eq'sprint3'){$spr=@(@(0,32767),@(-23170,23170),@(23170,23170))
-     if($step-lt3-and$t-ge800+$step*3200){$d=$spr[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1600 -LeftX $d[0] -LeftY $d[1]|Out-Null;$segments.Add(@{ms=$t;sprint=$step});$step++}}
-    if($case-eq'turns'){$tn=@(@(-22000,300),@(22000,300),@(-22000,650),@(22000,650),@(-22000,1300),@(22000,1300))
-     if($step-lt6-and$t-ge800+$step*1400){$d=$tn[$step];& "$lab/Send-D2Input.ps1" -Role $source -RightX $d[0] -DurationMs $d[1]|Out-Null;$segments.Add(@{ms=$t;turn=$d});$step++}
-     elseif($step-eq6-and$t-ge9600){I $source B 180;$step=7}
-     elseif($step-ge7-and$step-lt11-and$t-ge10400+($step-7)*1900){$d=$tn[$step-5];& "$lab/Send-D2Input.ps1" -Role $source -RightX $d[0] -DurationMs $d[1]|Out-Null;$segments.Add(@{ms=$t;crouchedTurn=$d});$step++}
-     elseif($step-eq11-and$t-ge18300){I $source B 180;$step=12}}
-    if($case-eq'startstop'){$ss=@(@(800,14000,1300,'Neutral'),@(3300,32767,1300,'Neutral'),@(5800,32767,1500,'LeftThumb'),@(8800,9000,900,'Neutral'),@(9700,32767,900,'Neutral'),@(10600,32767,1400,'LeftThumb'),@(13300,-14000,1100,'Neutral'))
-     if($step-lt$ss.Count-and$t-ge$ss[$step][0]){$d=$ss[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[3] -DurationMs $d[2] -LeftY $d[1]|Out-Null;$segments.Add(@{ms=$t;start=$step});$step++}}
+    if($case-eq'sprint3'){$spr=@(@(0,32767,0),@(-23170,23170,315),@(23170,23170,45))
+     if($step-gt0-and$step-lt3-and$t-ge200+$step*3200-and!$placed){C $source ('setviewpos -35 -153 68.1 {0} 0' -f $spr[$step][2]);$teleports.Add($t);$placed=$true}
+     if($step-lt3-and$t-ge800+$step*3200){$d=$spr[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1100 -LeftX $d[0] -LeftY $d[1]|Out-Null;$segments.Add(@{ms=$t;sprint=$step});$step++;$placed=$false}}
+    if($case-eq'turns'){$tn=@(@(-22000,300),@(22000,300),@(-22000,650),@(22000,650),@(-32767,1500),@(32767,1500))
+     if($step-lt6-and$t-ge800+$step*2000){$d=$tn[$step];& "$lab/Send-D2Input.ps1" -Role $source -RightX $d[0] -DurationMs $d[1]|Out-Null;$segments.Add(@{ms=$t;turn=$d});$step++}
+     elseif($step-eq6-and$t-ge12800){I $source B 180;$step=7}
+     elseif($step-ge7-and$step-lt11-and$t-ge13600+($step-7)*2200){$d=$tn[$step-5];& "$lab/Send-D2Input.ps1" -Role $source -RightX $d[0] -DurationMs $d[1]|Out-Null;$segments.Add(@{ms=$t;crouchedTurn=$d});$step++}
+     elseif($step-eq11-and$t-ge22600){I $source B 180;$step=12}}
+    if($case-eq'startstop'){$ss=@(@(800,14000,1200,'Neutral',0),@(3600,32767,1000,'Neutral',1),@(6400,32767,700,'LeftThumb',1),@(9400,9000,500,'Neutral',1),@(9900,32767,400,'Neutral',0),@(10300,32767,500,'LeftThumb',0),@(13600,-14000,1000,'Neutral',0))
+     if($step-lt$ss.Count-and$t-ge$ss[$step][0]-600-and$ss[$step][4]-and!$placed){C $source 'setviewpos -35 -153 68.1 0 0';$teleports.Add($t);$placed=$true}
+     if($step-lt$ss.Count-and$t-ge$ss[$step][0]){$d=$ss[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[3] -DurationMs $d[2] -LeftY $d[1]|Out-Null;$segments.Add(@{ms=$t;start=$step});$step++;$placed=$false}}
     if($case-eq'stairs'){
-     if($step-eq0-and$t-ge800){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 3200 -LeftY 14000|Out-Null;$segments.Add(@{ms=$t;stairs='up'});$step=1}
-     elseif($step-eq1-and$t-ge5600){C $source 'setviewpos -37.5 -179 68.1 180 0';$step=2}
-     elseif($step-eq2-and$t-ge7000){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 3200 -LeftY 14000|Out-Null;$segments.Add(@{ms=$t;stairs='down'});$step=3}}
+     if($step-eq0-and$t-ge800){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 6000 -LeftY 14000|Out-Null;$segments.Add(@{ms=$t;stairs='up'});$step=1}
+     elseif($step-eq1-and$t-ge8000){C $source 'setviewpos -37.5 -179 68.1 180 0';$step=2}
+     elseif($step-eq2-and$t-ge9400){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 6000 -LeftY 14000|Out-Null;$segments.Add(@{ms=$t;stairs='down'});$step=3}}
     if($case-eq'lean'){$ln=@(@(0,-32767,0),@(0,32767,0),@(1,-32767,0),@(1,32767,0),@(0,0,32767),@(1,0,32767))
      if($step-lt12){$k=[Math]::Floor($step/2);$at=600+$k*3200
       if($step%2-eq0-and$t-ge$at){$d=$ln[$k];if($k-eq2-or$k-eq5){I $source B 180;Start-Sleep -Milliseconds 400};& "$lab/Send-D2Input.ps1" -Role $source -Button Y -DurationMs 1300 -LeftX $d[1] -LeftY $d[2]|Out-Null;$segments.Add(@{ms=$t;lean=$k;crouched=$d[0];side=[Math]::Sign($d[1]);up=($d[2]-gt0)});$step++}
@@ -161,7 +163,7 @@ try{
    foreach($c in $capture,$peerCapture){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$capture=$peerCapture=$null
    Save "$out/$key-samples.json" @($samples)
    foreach($q in 'host','client'){foreach($suffix in '.movement.json','.shadow-stream.json','.product.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
-   $low=@($samples|Where-Object {$_.weight-lt.9});$row.lowWeightSamples=$low.Count;if($case-notin'kick','crouchheavy','note','mana','stairs','interrupt'-and$low.Count-gt3){throw "Partner presentation weight dropped in $($low.Count) samples"};$row.checks.Add('Partner presentation stayed live')
+   $tp=@($teleports);$low=@($samples|Where-Object {$x=$_;$_.weight-lt.9-and!@($tp|Where-Object {$x.ms-ge$_-and$x.ms-lt$_+1200}).Count});$row.lowWeightSamples=$low.Count;$row.teleports=$tp;if($case-notin'kick','crouchheavy','note','mana','stairs','interrupt'-and$low.Count-gt3){throw "Partner presentation weight dropped in $($low.Count) samples"};$row.checks.Add('Partner presentation stayed live')
    if($case-eq'slide'){if(!@($samples|Where-Object {$_.slideWeight-gt.8}).Count){throw 'Partner slide not presented'};$row.checks.Add('Partner slide presented')}
    Save "$out/$key-segments.json" @($segments)
    function Sector($x){if([double]$x.mix-lt.5){[int]$x.a}else{[int]$x.b}}
@@ -175,8 +177,8 @@ try{
    if($case-eq'turns'){$tc=@($samples|Where-Object {[double]$_.turnWeight-gt.5}|ForEach-Object {[int]$_.turnClip}|Sort-Object -Unique);$row.turnClips=$tc
     $kinds=@($tc|ForEach-Object {$o=($_-149)%6;@('45','45','90','90','180','180')[$o]+@('L','R')[$o%2]}|Sort-Object -Unique);$row.turnKinds=$kinds
     $row.turnSerials=@($samples|ForEach-Object {$_.turnSerial}|Sort-Object -Unique).Count
-    if($kinds.Count-lt4){throw "Partner turn variants $($kinds-join ',') (at least 4 of 45/90/180 left/right required)"};$row.checks.Add("Partner turn variants $($kinds-join ',')")}
-   if($case-eq'startstop'){$stops=0;$prev=$null;foreach($x in $samples){if($prev-and[double]$prev.speed-gt.2-and[double]$x.speed-lt.05){$stops++};$prev=$x};$row.stops=$stops
+    if($kinds.Count-lt6){throw "Partner turn variants $($kinds-join ',') (45, 90 and 180 left and right required)"};$row.checks.Add("Partner turn variants $($kinds-join ',')")}
+   if($case-eq'startstop'){$stops=0;$moving=$false;foreach($x in $samples){if([double]$x.speed-gt.2){$moving=$true}elseif($moving-and[double]$x.speed-lt.05){$stops++;$moving=$false}};$row.stops=$stops
     $run=@($samples|Where-Object {[double]$_.runMix-gt.5}).Count;$spr=@($samples|Where-Object {[double]$_.sprintMix-gt.5}).Count;$row.runSamples=$run;$row.sprintSamples=$spr
     if($stops-lt4-or!$run-or!$spr){throw "Starts/stops incomplete (stops $stops, run $run, sprint $spr)"};$row.checks.Add("Partner settled $stops stops; run and sprint engaged")}
    if($case-eq'lean'){$row.leanTrials=@()
