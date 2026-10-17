@@ -1,0 +1,79 @@
+{
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "Use of pr_a_ld_timeshift_device_pickup_1 not registered",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 56,
+        "cine": 22,
+        "pos": [
+          -0.908115,
+          -118.852524,
+          -304.927002
+        ],
+        "fresh": true,
+        "gameflow": [
+          238,
+          5,
+          3,
+          1,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "3/2/2",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_Pick_TimeDevice"
+      },
+      "host": {
+        "logic": 12,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 56,
+        "cine": 56,
+        "pos": [
+          39.034,
+          -49.729,
+          -299.759369
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          5,
+          3,
+          2,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/297",
+        "ka": "5/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "host did not reach a fresh native menu/gameplay state.",
+        "host: Native query failed host --health",
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  }
+}
