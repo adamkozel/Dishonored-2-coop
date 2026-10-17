@@ -1,0 +1,67 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 30000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "talk",
+    "name": "dtte/meagan_foster\\.def",
+    "near": [
+      -6.6,
+      1.2
+    ],
+    "settle": 150000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "at",
+    "pos": [
+      -6.34,
+      -34.67,
+      10.6
+    ],
+    "yaw": 180,
+    "settle": 4000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 200000
+  },
+  {
+    "do": "expect",
+    "map": "dunwall/return/streets/dunwall_return_streets",
+    "ms": 300000,
+    "settle": 5000
+  }
+]

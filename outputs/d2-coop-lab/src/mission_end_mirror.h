@@ -13,6 +13,7 @@
 // 1214ay adds the both-ready hold at the next map's load end (below); 1214az
 // keeps the window responsive while it holds; 1214ba makes chaos follow the
 // host (below).
+#include "map_path.h"
 #pragma pack(push,1)
 struct MissionEndPacket {
     std::uint32_t magic=0x454D3244; // "D2ME"
@@ -481,7 +482,7 @@ void serviceLevelTransitionMirror(std::uint64_t tick){
         if(tick-m.observedAt>5000){m.observedPending=false;m.result="target_unread";}
         else if(observedGame){
             std::uintptr_t state=0;char map[160]{},start[96]{};
-            if(memoryRead(observedGame+0x1f6ec8+0x90,&state,8)&&state&&readNativeIdStr(state+0x48,map,sizeof(map))&&readNativeIdStr(state+0x70,start,sizeof(start))&&!std::strncmp(map,"campaign/",9)){
+            if(memoryRead(observedGame+0x1f6ec8+0x90,&state,8)&&state&&readNativeIdStr(state+0x48,map,sizeof(map))&&readNativeIdStr(state+0x70,start,sizeof(start))&&normalizeCampaignMapPath(map)){
                 m.observedPending=false;std::snprintf(m.lastMap,sizeof(m.lastMap),"%s",map);std::snprintf(m.lastStart,sizeof(m.lastStart),"%s",start);
                 LevelTransitionPacket p{};p.role=localRole;p.session=outgoing.session;p.fromMapId=m.observedFromMap;p.sequence=++m.sequence;
                 std::snprintf(p.map,sizeof(p.map),"%s",map);std::snprintf(p.start,sizeof(p.start),"%s",start);
