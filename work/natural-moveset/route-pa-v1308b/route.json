@@ -1,0 +1,331 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 216,
+      "pos": [
+        -6.87,
+        -14.876323,
+        0.111589
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/5391",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 38,
+      "pos": [
+        -6.870009,
+        -14.876303,
+        0.111588
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 216,
+      "pos": [
+        -6.519846,
+        -15.226477,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/5391",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 38,
+      "pos": [
+        -6.887973,
+        -14.39589,
+        0.104214
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 216,
+      "pos": [
+        -6.519846,
+        -15.226477,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/5391",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 38,
+      "pos": [
+        -6.887973,
+        -14.39589,
+        0.104214
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_brief_meeting_room",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 216,
+      "pos": [
+        -1.194,
+        15.706,
+        5.015123
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/5391",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 38,
+      "pos": [
+        -6.887973,
+        -14.39589,
+        0.104214
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+    }
+  },
+  {
+    "step": "step04-talk",
+    "spec": {
+      "do": "talk",
+      "name": "story/meagan_foster\\.def",
+      "near": [
+        -3.9,
+        14.8
+      ],
+      "settle": 150000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 222,
+      "pos": [
+        -3.181043,
+        15.662619,
+        5.01503
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/5391",
+      "ka": "1/0/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/duke_palace/boat_palace_p",
+      "epoch": 41,
+      "cine": 38,
+      "pos": [
+        -6.887973,
+        -14.39589,
+        0.104214
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "0/1/0",
+      "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+    }
+  }
+]

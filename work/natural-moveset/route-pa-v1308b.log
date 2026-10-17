@@ -1,0 +1,75 @@
+{
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 41,
+        "cine": 38,
+        "pos": [
+          -6.887973,
+          -14.39589,
+          0.104214
+        ],
+        "fresh": true,
+        "gameflow": [
+          244,
+          0,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 2,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "0/1/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 41,
+        "cine": 222,
+        "pos": [
+          -6.339273,
+          -34.668743,
+          8.042014
+        ],
+        "fresh": true,
+        "gameflow": [
+          244,
+          0,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/5391",
+        "ka": "1/0/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "Use of script_skiff_01_usable not registered",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:296[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 296 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mUse of script_skiff_01_usable not registered[0m

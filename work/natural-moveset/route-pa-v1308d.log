@@ -1,0 +1,76 @@
+{
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 81,
+        "cine": 75,
+        "pos": [
+          54.444447,
+          48.109737,
+          -4.14024
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          8,
+          0,
+          2,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 10,
+        "lt": "applied/0/6",
+        "hold": "released/31",
+        "ka": "0/1/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Open_The_Vault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 81,
+        "cine": 345,
+        "pos": [
+          274.68454,
+          -33.864506,
+          -8.996206
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          8,
+          0,
+          2,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/6/0",
+        "hold": "released/16",
+        "ka": "1/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Task_PA_Open_The_Vault"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:296[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 296 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

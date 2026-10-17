@@ -16,7 +16,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 | 6 | The Royal Conservatory | `void_02_p` (Another Strange Visit) → `boat_curator_p` → `curator_p_*chaos` | `Mission_CU`: result screen, then `boat_dust` |
 | 7 | The Dust District | `boat_dust_p` → `dust_p_*chaos` | `Mission_DD`: Stilton's door, result screen, then `bunker` |
 | 8 | A Crack in the Slab | `bunker_p_*chaos` (present and past layers) → `void_03_p` → `dust_p_*chaos` (Stilton mad or dead) or `dust_return_p` (Stilton saved) | `Mission_BK`: Sokolov at the skiff, result screen, then `boat_palace` |
-| 9 | The Grand Palace | `boat_palace_p` → `palace_streets_p_*chaos` ↔ `palace_p_*chaos` | `Mission_PA`: result screen, then `boat_dunwall_return` |
+| 9 | The Grand Palace | `boat_palace_p` → `palace_streets_p_*chaos` ↔ `palace_p_*chaos` | `Mission_PA`: Meagan at her boat, result screen, then `boat_dunwall_return` |
 | 10 | Death to the Empress | `boat_dunwall_return_p` → `dunwall_return_streets_p` ↔ `_interior_p` ↔ `_tower_p` | `Mission_DTTE` (last mission): result screen, then `end_p` |
 
 `*chaos` maps come in `lowchaos` and `highchaos` variants. Each world picks its variant from its own chaos level, so the partner must load the variant the host loads.
@@ -165,5 +165,24 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - LT is refused where the other time is obstructed (the ritual hall). The route shifts back from the stand where it entered the past.
   - A pickup's effects can arrive after the use step's 1.5 s check, so pickups use `gone` (take 1307c failed there).
 - **Passes:** lab take route-bk-v1307d and two-account take campaign-bunker-vm-v1307a, both ending in `boat_palace_p` with equal gameflow.
+
+## The Grand Palace (takes 1308a–1308f, two accounts campaign-palace-vm-v1308a, [audit 1308](../../work/movement-integration/campaign-palace-audit-v1308.json))
+
+- **Required path (confirmed static and runtime):**
+  1. The Dreadful Wale (`boat_palace`): the meeting-room trigger, Meagan's briefing (a talk), then the skiff and its prompt. Both worlds load `palace_streets`.
+  2. The streets: the palace door `ld_streets_door_tr_palace_ext_topalace` and its prompt load `palace_p`.
+  3. The palace:
+     - the arrival triggers `ld_trigger_player_reach_palace` and `ld_trigger_task_entering_palace`;
+     - the real Duke (`luca_abele.def`, not the double), killed: `Obj_PA_Eliminate_The_Duke`;
+     - the vault: its entry trigger, then the button `ld_button_01_5`. The button steps the locked door `ld_breakout_saferoom_01_1_2` (static), and `Task_PA_Open_The_Vault` completes after an autosave delay.
+  4. The Delilah golem `ld_delilah_golem_01` bends time, spawns Jessamine's ghost and plays `dial_jessamine`. The Heart becomes `heart_delilah_palace` and `Obj_PA_Capture_Delilah_Spirit` completes. The script then kills the vault's NPCs, including a clockwork soldier that sword strikes do not hurt.
+  5. `Task_PA_Meet_Meagan`:
+     - `ld_trigger_dukesdock` enables `ld_trigger_extract_skiff` at Meagan's boat. With Stilton mad, the boat carries the one-armed Meagan.
+     - A talk with her there plays the debrief, the ready-to-leave prompt and the result screen. Both worlds load `boat_dunwall_return`.
+- **Route notes:**
+  - The boat's skiff becomes unusable when Meagan reaches `script_waypoint_5`. It turns usable again on the player's next fit-state change (a landing), so the route drops the player beside it.
+  - The vault button takes the focus only near pitch 30.
+  - The Duke fights back. One take died in that fight: a single hit above current health kills even with the lab health hold. The attack step's `behind` option stands at the NPC's back, using rotation row 0 at entity +0x84 (confirmed runtime).
+- **Passes:** lab take route-pa-v1308f and two-account take campaign-palace-vm-v1308a, both ending in `boat_dunwall_return_p` with equal gameflow.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
