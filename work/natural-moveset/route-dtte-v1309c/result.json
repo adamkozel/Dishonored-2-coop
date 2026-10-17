@@ -1,0 +1,71 @@
+{
+  "passed": false,
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 76,
+        "cine": 34,
+        "pos": [
+          -61.299999,
+          80.5,
+          59.828007
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          3,
+          3,
+          6,
+          0,
+          2,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 5,
+        "lt": "applied/0/10",
+        "hold": "released/0",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_ReachDelilah"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 76,
+        "cine": 99,
+        "pos": [
+          -39.993111,
+          19.99832,
+          61.034435
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          3,
+          3,
+          6,
+          0,
+          2,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/10/0",
+        "hold": "released/453",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_ReachDelilah"
+      }
+    },
+    "gameflowEqual": true
+  }
+}
