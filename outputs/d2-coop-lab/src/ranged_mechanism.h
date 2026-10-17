@@ -1,5 +1,5 @@
 #pragma once
-#include "crossbow_mechanism_data.h"
+#include "native_tables_runtime.h"
 // Only our exact, purely cosmetic crossbow child is eligible. Source weapon
 // components, native firing messages, inventory and projectiles are untouched.
 SRWLOCK rangedMechanismLock=SRWLOCK_INIT;
@@ -15,9 +15,13 @@ bool publishRangedMechanism(unsigned handle,unsigned variant,float phase,unsigne
        !readNativeSkeleton(memoryRead,base,handle,s,NativeSkeletonScope::CosmeticRanged)||!s.stable||s.logic!=1||s.game!=observedGame||
        prop.owner!=probeActor||prop.ownerHandle!=probeHandle)return false;
     if(variant!=7&&!mechanism){stopRangedMechanism();return true;} // Unknown native state supplies no guessed mechanical pose.
-    const auto clip=crossbowMechanism(prop.character,variant==7?7:mechanism==2?2:0);if(s.parents.size()!=clip.joints)return false;
-    const auto* parents=prop.character==1?crossbow_corvo_parents:crossbow_emily_parents;
-    const auto* bind=prop.character==1?crossbow_corvo_bind:crossbow_emily_bind;
+    // #30: crossbow_<character>_{idle,fire,outofammo,parents,bind}, rebuilt by the installer from the player's samples.
+    const std::string who=prop.character==1?"crossbow_corvo_":"crossbow_emily_";const unsigned joints=unsigned(s.parents.size());
+    const auto* clipTable=nativeTables().find((who+(variant==7?"fire":mechanism==2?"outofammo":"idle")).c_str(),{0,joints,7});
+    const auto* parentTable=nativeTables().find((who+"parents").c_str(),{joints});const auto* bindTable=nativeTables().find((who+"bind").c_str(),{joints,7});
+    if(!clipTable||!parentTable||!bindTable)return false;
+    const struct {unsigned joints,frames;const float (*qts)[7];} clip{joints,clipTable->dims[0],reinterpret_cast<const float(*)[7]>(clipTable->f.data())};
+    const auto* parents=parentTable->s.data();const auto* bind=reinterpret_cast<const float(*)[7]>(bindTable->f.data());
     for(unsigned j=0;j<clip.joints;++j){
         if(s.parents[j]!=parents[j])return false;
         float same=0,opposite=0;for(unsigned k=0;k<4;++k){same+=std::fabs(s.bindLocal[j][k]-bind[j][k]);opposite+=std::fabs(s.bindLocal[j][k]+bind[j][k]);}

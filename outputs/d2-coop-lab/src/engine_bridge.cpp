@@ -43,6 +43,8 @@
 #include "native_child_frames.h"
 #include "enemy_outcome_protocol.h"
 #include "enemy_melee_protocol.h"
+#include "native_tables.h"
+#include <mutex>
 
 namespace {
 unsigned char* gameImage=nullptr;
@@ -1533,7 +1535,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_movement_bank 60000")||!std::strcmp(text,"coop_movement_bank on")||!std::strcmp(text,"coop_movement_bank off"))return true;
     if(!std::strcmp(text,"coop_movement_resume on")||!std::strcmp(text,"coop_movement_resume off"))return true;
     if(!std::strcmp(text,"coop_movement_feet on")||!std::strcmp(text,"coop_movement_feet off")||!std::strcmp(text,"coop_movement_feet authored"))return true;
-    if(!std::strcmp(text,"coop_decl_probe"))return true;
+    if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_door_fixture open")||!std::strcmp(text,"coop_door_fixture close"))return true;
@@ -1881,6 +1883,7 @@ void dispatchCoopCommand(void* system,const char* text) {
         }return;
     }
     if(!std::strcmp(request.command,"coop_decl_probe")){probePartnerDefinitions();return;}
+    if(!std::strcmp(request.command,"coop_tables_probe")){probeNativeTables();return;}
     if(!std::strcmp(request.command,"coop_door_sync on")){doorSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_usable_sync on")){usableSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_door_sync session")){doorSyncEnableRequest=2;return;}

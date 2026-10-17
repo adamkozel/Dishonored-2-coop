@@ -1,6 +1,6 @@
 #pragma once
 #include "ranged_prop_calibration.h"
-#include "ranged_hand_tracks.h"
+#include "native_tables_runtime.h"
 #include "ranged_mechanism.h"
 // Local, finite cosmetic attachment experiment. These custom idEntity assets
 // contain only native rendering/animation, never inventory, firing or pickups.
@@ -108,7 +108,10 @@ void serviceRangedProp(ULONGLONG tick){
     if(automatic&&rangedProp.network&&rangedProp.until&&rangedProp.kind==presentedKind){
         if(!rangedPropIdentity(true)||!rangedPropApiMatches()){hideRangedProp();++rangedPropRefused;rangedPropResult="network_attachment_changed";return;}
         const auto slot=presentedVariant?RangedPresentation::slot(presentedVariant):0;
-        const auto& track=rangedHandTracks[localRole?0:1][presentedKind-1][slot];
+        // #30: ranged_hand_tracks_<character> [kind gun, crossbow x slot][120][7], rebuilt by the installer.
+        const auto* tracks=nativeTables().find(localRole?"ranged_hand_tracks_corvo":"ranged_hand_tracks_emily",{12,120,7});
+        if(!tracks){hideRangedProp();++rangedPropRefused;rangedPropResult="native_tables_missing";return;}
+        const float (*track)[7]=reinterpret_cast<const float(*)[7]>(tracks->f.data()+std::size_t((presentedKind-1)*6+slot)*120*7);
         const float f=(std::max)(0.f,(std::min)(1.f,presentedAmount))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
         MovementBank::Joint x{},y{};std::copy(track[a],track[a]+7,x.begin());std::copy(track[b],track[b]+7,y.begin());
         const auto q=MovementBank::blend(x,y,f-a);std::array<float,12> qts{};std::copy(q.begin(),q.end(),qts.begin());qts[8]=qts[9]=qts[10]=1;
