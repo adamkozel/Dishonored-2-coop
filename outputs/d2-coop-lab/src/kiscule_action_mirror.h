@@ -16,6 +16,12 @@
 // peer runs the same node's native handler in its own world until its count
 // matches, and a later local request the mirror already covered skips only
 // the handler, so the node's outputs still fire. Mirrored runs never echo.
+// 1214ca (#73): the host's world is the story authority, as for gameflow.
+// Only the host sends its counts; a partner's own runs stay local and are
+// only counted. In held take route-tut-v1310g the partner's world looped its
+// stealth restart (its own Corvo kept seeing the idle partner at the start)
+// and each restart's empty loadout (node 1868853291, 51 runs) was mirrored
+// into the host's world, emptying the host's hands in the crossbow lesson.
 using NativeKisculeDispatch=unsigned char*(*)(void*,unsigned char*,unsigned char*);
 using NativeKisculeHandler=char(*)(void*);
 using NativeKisculeHandlerEx=char(*)(void*,void*,void*);
@@ -145,9 +151,9 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
-            KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
+            if(localRole==0){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
             std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
-            if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
+            if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}}
     ReleaseSRWLockExclusive(&kisculeLock);
     if(!skip)return realKisculeDispatch(self,out,signal);
     // The mirror already ran this handler here: dispatch with the handler
@@ -177,7 +183,7 @@ bool installKisculeDispatchObserver(){
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
-    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||p.session!=remote.session||
+    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||
        p.sequence<=k.peerSequence||p.classIndex>=static_cast<std::uint32_t>(kisculeMirrorClassCount)||!kisculeMirrorClasses[p.classIndex].mirrored||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
     else{k.peerSequence=p.sequence;if(k.pending.size()<128)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
     ReleaseSRWLockExclusive(&kisculeLock);

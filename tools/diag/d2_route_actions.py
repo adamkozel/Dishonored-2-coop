@@ -10,7 +10,7 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
   chase_hold  {"npc": str, "dist": 0.85, "up": 1.0, "button": "RightShoulder", "ms": 3500, "ly": 0,
                "crouch": true, "until": task, "tries": 6}
               stand behind the NPC along its walking heading and hold a button (ly: walk after it)
-  pickpocket  {"npc": str, "stand": [x, y], "radius": 0.9, "dist": 0.7, "up": 1.0, "pitch": 0,
+  pickpocket  {"npc": str, "stand": [x, y], "radius": 0.9, "dist": 0.7, "up": 1.0, "pitch": 0, "taps": 6, "next": task?,
                "until": task, "tries": 6}
               as the NPC walks into its stand, press X from behind while walking after it;
               "then": {"stand": [x, y, eyeZ], "yaw": deg, "until": task} uses a target at once after the theft
@@ -228,9 +228,15 @@ def pickpocket_try(a, k):
     p, h = hit
     d = a.get('dist', 0.7)
     teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 0))
-    packet(['X'], 400, ly=12000)
-    time.sleep(1.2)
-    ok = done(a['until'])
+    # Several X taps while walking after him: a tap counts only once the use focus is on him.
+    for _ in range(a.get('taps', 6)):
+        packet(['X'], 120, ly=12000)
+        time.sleep(0.12)
+        packet([], 100, ly=12000)
+        time.sleep(0.1)
+    time.sleep(1.0)
+    # Done means the next task is active (a stealth restart also drops the theft task for a moment).
+    ok = any(a['next'] == x for x in active_tasks()) if a.get('next') else done(a['until'])
     print(json.dumps({'try': k, 'at': [round(v, 2) for v in p], 'done': ok, 'active': active_tasks()}), flush=True)
     if ok:
         return then_use(a['then']) if a.get('then') else 0
