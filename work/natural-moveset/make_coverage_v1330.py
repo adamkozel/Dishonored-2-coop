@@ -40,14 +40,16 @@ rep("""    if($case-eq'mana'){
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'));
-     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/mesmerize/mesmerize.inventoryitem'})),@(1500,'grant','mana'),@(2600,'lt',$(if($source-eq'host'){250}else{1200})),@(3000,'usewhenspent','mana'))}
+     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/mesmerize/mesmerize.inventoryitem'})),@(2600,'lt',$(if($source-eq'host'){250}else{1200})),@(3000,'usewhenspent','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      # 1330e: Emily's mana stayed full at a fixed drink time. Trace the source's live mana (itemUse.manaNow) and drink the
      # moment it first drops below full after the cast, for up to 5 s.
      if($case-eq'manaelixir'){$mn=try{[double](S $source '.observer-camera.json').itemUse.manaNow}catch{$null};$manaTrace.Add([pscustomobject]@{ms=$t;mana=$mn})
       # 1330f: drinking the moment mana dropped (0.4 s after windblast) refilled the pool, but the still-running cast ended
       # the use presentation; drink 1.2 s after the drop, once the cast has ended (fixed 4.4 s in 1330e worked for Corvo).
-      if($manaWatch-and!$manaSpentAt-and$mn-ne$null-and$mn-lt99){$manaSpentAt=$t}
+      # mana-drain-probe-v1344b: Emily's casts do spend mana; a potion already in the inventory is auto-used the moment the
+      # pool drops (ark_inventory_mana_potion_autouse), so 1330e/g never saw it drop. Grant the potion only after the drop.
+      if($manaWatch-and!$manaSpentAt-and$mn-ne$null-and$mn-lt99){$manaSpentAt=$t;C $source 'coop_grant_item mana';$segments.Add(@{ms=$t;item='grant';arg='mana';afterDrop=$mn})}
       if($manaSpentAt-and!$manaDrunk-and$t-ge$manaSpentAt+1200){C $source 'coop_use_item mana';$manaDrunk=$t;$segments.Add(@{ms=$t;item='use';arg='mana';manaAtDrink=$mn;spentAt=$manaSpentAt})}
       elseif($manaWatch-and!$manaDrunk-and$t-gt$manaWatch+5000){$manaDrunk=-1}}
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
@@ -70,9 +72,12 @@ rep("""   if($case-eq'stairs'){C $peer 'coop_observer_camera off'""",
      'heart'{$row.heartVariants=Shown 'heartWeight' 'heartVariant';if(@($row.heartVariants).Count-lt2){throw "Heart variants $($row.heartVariants-join ',')"};$row.checks.Add("Heart presented: variants $($row.heartVariants-join ',')")}
      'manaelixir'{Save "$out/$key-mana-trace.json" @($manaTrace);$row.manaMin=($manaTrace|Where-Object {$_.mana-ne$null}|Measure-Object mana -Minimum).Minimum
       if($manaDrunk-le0){throw "Mana never dropped below full after the cast (minimum $($row.manaMin); trace saved)"}
-      $u=@($samples|Where-Object {$_.ms-ge$manaDrunk-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow;$row.drankAtMs=$manaDrunk
-      if($row.use.result-ne'mana_use_requested'){throw "Mana use $($row.use.result)"};if([double]$row.manaBefore-ge100){throw "Mana was full before the drink ($($row.manaBefore))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
-      $row.checks.Add("$(if($source-eq'host'){'Windblast'}else{'Mesmerize'}) spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
+      $u=@($samples|Where-Object {$_.ms-ge$manaSpentAt-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow;$row.drankAtMs=$manaDrunk
+      # Either native path counts: the explicit drink, or the game's auto-use of the potion granted after the drop (the
+      # partner presents both from the potion quantity drop). The pool must have dropped and be refilled afterwards.
+      $row.autoUsed=$row.use.result-ne'mana_use_requested'-or[double]$row.manaBefore-ge100
+      if([double]$row.manaMin-ge99){throw "Mana never dropped ($($row.manaMin))"};if([double]$row.manaNow-lt99){throw "Mana not refilled after the drink ($($row.manaNow))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
+      $row.checks.Add("$(if($source-eq'host'){'Windblast'}else{'Mesmerize'}) spent mana to $($row.manaMin); the mana elixir drink$(if($row.autoUsed){' (auto-used by the game)'}) presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
      'health'{$u=@($samples|Where-Object {[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.useVariants=@($u|ForEach-Object {[int]$_.useVariant}|Sort-Object -Unique);if(!$u.Count){throw 'Elixir use reach not presented'};$row.checks.Add("Health elixir drink presented as the use reach ($($u.Count) samples)")}}}
    if($case-eq'stairs'){C $peer 'coop_observer_camera off'""")
 rep("scope='Locomotion completion coverage (1318, #11): walks and crouch walks in 8 directions, sprint and diagonals, in-place turns by size, starts/stops and speed changes, stairs; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case.'",
