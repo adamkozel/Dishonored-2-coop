@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:55:50.740722+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T12:08:41.373220+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -5539,7 +5539,7 @@ Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture an
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture and its recovery read correctly, and the native mark effect appears on the target. Framing in v218 is cramped at the screen edge. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "domino",
@@ -7282,29 +7282,36 @@ Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture an
   },
   "evidence": [
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1354a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "The cast gesture is presented (power variants 19, 20, 22) with no target.",
+    "audit": "completion-audit-v1352-domino.json",
+    "decision": "complete",
+    "scope": "Domino in the Emily source role in product mode: the cast, select and release gestures (variants 19-22), a mark on each of two real guards and the native link beam between them are presented on the host and held between casts (17 samples with both marks), and a native X cancellation of a third aim adds no mark. Marks and beam are cosmetic native FX on the partner presentation; the partner never links, damages or spends mana.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1354a",
         "cases": [
-          "client-domino"
+          "client-dominolink"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "Marking and linking real targets (mission guards) and the link effect on the observer."
-  }
+    "visual": [
+      {
+        "video": "coverage-v1354a/client-dominolink-observer.mp4",
+        "verdict": "On the upper floor Emily throws her hand toward the guard and a golden mark flares on him; downstairs she casts at the second guard and a bright golden link beam runs up to the first, staying in place while she aims once more and lowers her hand."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1354a/result.json](<../../../../work/natural-moveset/coverage-v1354a/result.json>)
 - [in_game_recordings: domino-native-source-v187.mp4](<../../../../work/natural-moveset/domino-native-source-v187.mp4>)
 - [in_game_recordings: domino-native-target-v191.mp4](<../../../../work/natural-moveset/domino-native-target-v191.mp4>)
 - [in_game_recordings: domino-native-reader-v190.mp4](<../../../../work/natural-moveset/domino-native-reader-v190.mp4>)

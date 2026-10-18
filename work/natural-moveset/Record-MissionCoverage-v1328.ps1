@@ -268,18 +268,18 @@ try{
      # The two guards stand about 10.7 m apart along their facing (1328zl/zm), so "behind" them put Emily beside guard 02
      # (zl: mobbed) or 17 m from guard 01 (zm: no target). Stand 7 m to either side of the middle of the pair (both within
      # about 9 m), then 8 m behind as a fallback, and crouch before casting.
-     foreach($o in @(@($oy,-$ox,7),@(-$oy,$ox,7),@(-$ox,-$oy,8))){$tx=$mx+$o[2]*$o[0];$ty=$my+$o[2]*$o[1];$tyaw=[Math]::Atan2([double]$pa[1]-$ty,[double]$pa[0]-$tx)*180/[Math]::PI
+     # 1328zn: the +x side (offset 1) stood in an alcove with guard 01 behind crates; try the -x side first.
+     foreach($o in @(@(-$oy,$ox,7),@($oy,-$ox,7),@(-$ox,-$oy,8))){$tx=$mx+$o[2]*$o[0];$ty=$my+$o[2]*$o[1];$tyaw=[Math]::Atan2([double]$pa[1]-$ty,[double]$pa[0]-$tx)*180/[Math]::PI
       C $source (P $tx $ty ($mz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;[void](WaitGameplay 15000);$me=$null
       for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
       $ok=[bool]$me-and[Math]::Abs([double]$me[2]-$mz)-lt.8-and(Dist2 $me @($mx,$my))-lt9.5;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
       if($ok){$placed=@([double]$me[0],[double]$me[1],[double]$me[2]);break}}
      if(!$placed){throw 'No spot near the checkpoint guards at their level'}
-     # Free camera beside the line from Emily to the guards (5 m off it at 40 % of the way, 2.5 m up), looking at its middle,
-     # so Emily and both marked guards share the frame (1328zl: from behind her the marks were lost among the guards).
+     # Free camera 1.5 m behind Emily and 3 m up, looking toward the middle of the pair, so she and both marked guards share
+     # the frame (1328zl: level behind her the marks were lost among the guards; 1328zn: 5 m to the side was inside a wall).
      $dx=$mx-$placed[0];$dy=$my-$placed[1];$dl=[Math]::Max(.1,[Math]::Sqrt($dx*$dx+$dy*$dy));$dx/=$dl;$dy/=$dl
-     $ax=$placed[0]+0.4*$dl*$dx;$ay=$placed[1]+0.4*$dl*$dy;$cx=$ax-5*$dy;$cy=$ay+5*$dx;$cz=$placed[2]+2.5
-     $lx=$placed[0]+0.5*$dl*$dx;$ly=$placed[1]+0.5*$dl*$dy;$cyaw=[Math]::Atan2($ly-$cy,$lx-$cx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
+     $cx=$placed[0]-1.5*$dx;$cy=$placed[1]-1.5*$dy;$cz=$placed[2]+3.0;$cyaw=[Math]::Atan2($dy,$dx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 16 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      $l=WaitLive "$key-near-guards" 20000;if(!$l.ok){throw 'Partner presentation not live near the guards'}
      & "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 200|Out-Null;Start-Sleep -Milliseconds 900;$row.stanceBeforeCast=try{(Q $source '--player-states').stance}catch{$null}
@@ -307,7 +307,10 @@ try{
      C $peer 'coop_observer_camera off';try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 0 -Quick|Out-Null}catch{}
      $cast=@($samples|Where-Object {[double]$_.powerWeight-gt.5-and[int]$_.powerVariant-ge19-and[int]$_.powerVariant-le22});$row.castSamples=$cast.Count;$row.castVariants=@($cast|ForEach-Object {[int]$_.powerVariant}|Sort-Object -Unique)
      $row.marksMax=$marksMax;$row.beamsMax=$beamsMax;$row.readyMasks=$masks;$row.marksStarted=[int]$w1.started-[int]$w0.started;$row.beamsStarted=[int]$l1.started-[int]$l0.started
-     $row.marksAfterCancel=if($marksAtCancel-ne$null){[int]$w1.started-[int]$marksAtCancel}else{$null}
+     # 1328zn: the FX start counter also rises when the presentation restarts after a lease gap; compare presented marks.
+     $before=@($samples|Where-Object {$_.ms-ge9000-and$_.ms-lt12000}|ForEach-Object {[int]$_.dominoMarks}|Measure-Object -Maximum).Maximum
+     $after=@($samples|Where-Object {$_.ms-ge13600}|ForEach-Object {[int]$_.dominoMarks}|Measure-Object -Maximum).Maximum
+     $row.marksAfterCancel=[Math]::Max(0,[int]$after-[int]$before)
      if($row.grant.result-notin'granted_named','named_power_equip_requested'){throw "Domino grant $($row.grant.result)"}
      if($cast.Count-lt3){throw "Domino casts presented in $($cast.Count) samples"}
      if($marksMax-lt2){throw "Partner Domino marks presented: at most $marksMax at once (ready masks $(@($masks.Keys)-join ','))"}

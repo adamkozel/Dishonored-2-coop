@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T11:55:50.740722+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T12:08:41.373220+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 73 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 74 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -462,7 +462,7 @@ Captured 2026-10-18T11:55:50.740722+02:00; source [review-catalog.json](<../../.
 | emily_far_reach_aim_cancel_release_arrive | powers | candidates | partial_native_Far_Reach_body_and_world_FX | accepted_sweep_1260_functional_owner | complete |
 | emily_far_reach_pull_variants | powers | candidates | not_verified | not_accepted | work_remaining |
 | emily_dark_vision_cast_end | powers | candidates | partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam | bounded_actual_game_frames_inspected | complete |
-| emily_domino_mark_link_cancel | powers | candidates | native_domino_standing_armed_body_and_mark_partial_verified | accepted_sweep_1260_functional_owner | work_remaining |
+| emily_domino_mark_link_cancel | powers | candidates | native_domino_standing_armed_body_and_mark_partial_verified | accepted_sweep_1260_functional_owner | complete |
 | emily_doppelganger_cast | powers | candidates | grounded_armed_and_holstered_scoped | not_accepted | complete |
 | emily_mesmerize_cast | powers | candidates | native_observed_mesmerize_body_and_cosmetic_world_contexts_partial_verified | accepted_sweep_1260_functional_owner | complete |
 | emily_shadow_walk_enter_move_attack_exit | powers | candidates | partial_native_standing_sneaking_entry_crawl_exit_through_Steam | accepted_sweep_1260_functional_owner | work_remaining |

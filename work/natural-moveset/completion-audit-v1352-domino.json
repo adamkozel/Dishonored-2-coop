@@ -1,0 +1,28 @@
+{
+  "audit": "completion-audit-v1352-domino",
+  "family": "powers",
+  "candidate": "candidate-npc-combat-v1214cs",
+  "method": "The decision rests on coverage-v1354a (candidate 1214cs, Dunwall tower, product controller): Emily, granted Domino by name (lab-only coop_grant_named), casts with the native left trigger at tutorial guard 2 from the upper floor, then at tutorial guard 1 on the lower floor, which links the two, then aims a third time and cancels with X. The host observer is checked from its own power presentation and Domino status: the casts (variants 19-22), the partner marks and link beam as cosmetic native FX (phlink_validated_01.fx, phlink_links_01.fx) at the source's world transforms, the marks held between casts, and no mark from the cancelled aim. 1214cr lets the marks and beam run in an armed product session on any map (before, only in the lab fixture); 1214cs keeps the marks when only the link part of the native read fails (after the casts in mission-coverage-v1328zl the beam check failed and the marks vanished). The mission takes 1328zl-zo are kept: the Edge of the World checkpoint guards turned hostile or stood out of reach. Receiver retirement of an owned mark is verified in the lab (v209) and the checkpoint reload ends every case; the linked guards' shared fate is NPC gameplay (stage 4). Domino is Emily-only; the Corvo source role has no Domino.",
+  "items": [
+    {
+      "id": "emily_domino_mark_link_cancel",
+      "decision": "complete",
+      "scope": "Domino in the Emily source role in product mode: the cast, select and release gestures (variants 19-22), a mark on each of two real guards and the native link beam between them are presented on the host and held between casts (17 samples with both marks), and a native X cancellation of a third aim adds no mark. Marks and beam are cosmetic native FX on the partner presentation; the partner never links, damages or spends mana.",
+      "takes": [
+        {
+          "take": "coverage-v1354a",
+          "cases": [
+            "client-dominolink"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1354a/client-dominolink-observer.mp4",
+          "verdict": "On the upper floor Emily throws her hand toward the guard and a golden mark flares on him; downstairs she casts at the second guard and a bright golden link beam runs up to the first, staying in place while she aims once more and lowers her hand."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}
