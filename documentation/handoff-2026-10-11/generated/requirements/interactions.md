@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T16:58:34.947006+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:09:55.969915+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -1226,7 +1226,7 @@ Audit 1286: the partner is filmed upright and whole on both peers after the map 
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Audit 1286: the partner is filmed upright and whole on both peers after the map load and the shared checkpoint restart (mission-lifecycle-v1199h); accepted in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-lifecycle-v1199d/load-host.mp4",
@@ -1235,14 +1235,52 @@ Audit 1286: the partner is filmed upright and whole on both peers after the map 
   "evidence": [
     "../movement-integration/lifecycle-audit-v1202.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/views-audit-v1286.json"
-  ]
+    "../movement-integration/views-audit-v1286.json",
+    "mission-lifecycle-v1199i/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1358-lifecycle.json",
+    "decision": "complete",
+    "scope": "The partner avatar in both roles after a native map load (join-follow, product controller) and after a shared death and native checkpoint restart: present, upright and whole in the other window, with its presentation re-armed.",
+    "takes": [
+      {
+        "take": "mission-lifecycle-v1199i",
+        "cases": [
+          "host-load",
+          "client-load",
+          "host-restart",
+          "client-restart"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-lifecycle-v1199i/load-client.mp4",
+        "verdict": "After the map load Corvo stands upright and whole on the dock in front of the wall posters, idling naturally."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/load-host.mp4",
+        "verdict": "After the map load Emily stands upright and whole on the boat deck beside the pilot, idling naturally."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/restart-client.mp4",
+        "verdict": "After the checkpoint restart Corvo is back, upright at the left edge of the frame by the same wall."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/restart-host.mp4",
+        "verdict": "After the checkpoint restart Emily is back, upright at the left edge of the frame on the boat."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/lifecycle-audit-v1202.json](<../../../../work/movement-integration/lifecycle-audit-v1202.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/views-audit-v1286.json](<../../../../work/movement-integration/views-audit-v1286.json>)
+- [evidence: mission-lifecycle-v1199i/result.json](<../../../../work/natural-moveset/mission-lifecycle-v1199i/result.json>)
 - [in_game_recordings: mission-lifecycle-v1199d/load-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/load-host.mp4>)
 - [in_game_recordings: mission-lifecycle-v1199d/restart-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/restart-host.mp4>)
 ## incapacitation_and_rescue_if_supported

@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T16:58:34.947006+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T17:09:55.969915+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 80 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 81 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -479,7 +479,7 @@ Captured 2026-10-18T16:58:34.947006+02:00; source [review-catalog.json](<../../.
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
 | scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | work_remaining |
 | cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | work_remaining |
-| map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | accepted_functional_both_roles | work_remaining |
+| map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | accepted_functional_both_roles | complete |
 | incapacitation_and_rescue_if_supported | interactions | missing | not_verified | not_accepted | excluded_by_policy |
 
 ## Full per-family records

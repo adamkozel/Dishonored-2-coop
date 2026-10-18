@@ -1,0 +1,245 @@
+{
+  "cases": [
+    {
+      "epochsBefore": {
+        "host": 106,
+        "client": 106
+      },
+      "loadFacing": {
+        "tag": "load-facing",
+        "host": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.961033,
+            193.084305,
+            1.25397
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 812330147,
+          "render": [
+            -30.961033,
+            193.084305,
+            1.25397
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        },
+        "waitMs": 411,
+        "ok": true,
+        "client": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 811609239,
+          "render": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        }
+      },
+      "passed": true,
+      "restartFacing": {
+        "tag": "restart-facing",
+        "host": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.402847,
+            193.725021,
+            1.25397
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 633690420,
+          "render": [
+            -30.402847,
+            193.725021,
+            1.25397
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        },
+        "waitMs": 407,
+        "ok": true,
+        "client": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 814045497,
+          "render": [
+            -31.813999,
+            192.748001,
+            1.205706
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        }
+      },
+      "clientFollow": {
+        "enabled": true,
+        "result": "same_mission",
+        "hostMapinfo": "campaign/edge_of_the_world/eotw.mapinfo",
+        "hostHigh": 0,
+        "hostMap": "6963703508939449882",
+        "localMap": "6963703508939449882",
+        "sent": 0,
+        "received": 86,
+        "loads": 1,
+        "refused": 0,
+        "role": 1
+      },
+      "epochsAfter": {
+        "host": 111,
+        "client": 111
+      },
+      "restart": {
+        "tag": "restart",
+        "host": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.222528,
+            193.255798,
+            1.116525
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 633690420,
+          "render": [
+            -30.222528,
+            193.255798,
+            1.116525
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        },
+        "waitMs": 2914,
+        "ok": true,
+        "client": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.178667,
+            192.240204,
+            1.061689
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 814045497,
+          "render": [
+            -30.178667,
+            192.240204,
+            1.061689
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        }
+      },
+      "source": "both",
+      "load": {
+        "tag": "load",
+        "host": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.819183,
+            192.742859,
+            1.25397
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 812330147,
+          "render": [
+            -30.819183,
+            192.742859,
+            1.25397
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        },
+        "waitMs": 1688,
+        "ok": true,
+        "client": {
+          "follow": true,
+          "bank": true,
+          "remote": [
+            -30.300215,
+            193.248932,
+            1.217321
+          ],
+          "map": "60a40b72337a261a",
+          "bodyApplied": 0,
+          "handle": 811609239,
+          "render": [
+            -30.300215,
+            193.248932,
+            1.217321
+          ],
+          "fresh": true,
+          "stream": true,
+          "distance": 0.0
+        }
+      },
+      "completed": {
+        "host": 1,
+        "client": 1
+      },
+      "case": "lifecycle"
+    },
+    {
+      "source": "host",
+      "video": "load-client.mp4",
+      "case": "load",
+      "observer": "client",
+      "passed": true
+    },
+    {
+      "source": "client",
+      "video": "load-host.mp4",
+      "case": "load",
+      "observer": "host",
+      "passed": true
+    },
+    {
+      "source": "host",
+      "video": "restart-client.mp4",
+      "case": "restart",
+      "observer": "client",
+      "passed": true
+    },
+    {
+      "source": "client",
+      "video": "restart-host.mp4",
+      "case": "restart",
+      "observer": "host",
+      "passed": true
+    }
+  ],
+  "scope": "Lifecycle: partner avatar after a native map load (join-follow + product controller) and after a shared checkpoint restart, filmed from both windows; Dunwall fixture restored.",
+  "passed": true,
+  "failure": null
+}
