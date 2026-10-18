@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-18T15:58:18.020864+02:00",
+  "dll": "A2455E628C26FD7490B3A42653A2EA9C7DACBDDDEF27F4280F28F1947BB3B25C",
+  "probe": "0714F5B9B8898C2286880C04BB34B1022FA07CE9C6190C79E973E82FC6916EBB",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214cv",
+  "protocol": 76,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 72,
+  "clips": 378,
+  "banks": [
+    {
+      "path": "work/natural-moveset/death-banks-v1362/corvo-choke-bank.bin",
+      "sha256": "766E67DA2C97CA8D1CF8901F1CCE1610DEE18AB19CF6D305DE71619D9B865EA1"
+    },
+    {
+      "path": "work/natural-moveset/death-banks-v1362/emily-choke-bank.bin",
+      "sha256": "A0FFE6E7C4432CF5DD91939DD43EA70751C127D8530BFC7AC425046A769F612E"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214cw (#11 death_variants): 1214cv plus the NPC finisher on the player (native state 38 arkPlayerStateNpcFatality, vtable RVA 0x1c3d878) presented as the death collapse for the whole fatality, holding its first frame until the native body falls on the fatality scene clock (per-NPC leads from the offline ply_body fatality samples, npc-fatality-timing-v1362.json); the partner faded at the finisher before (1361c, 1361f)."
+}

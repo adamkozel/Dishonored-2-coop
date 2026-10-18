@@ -109,7 +109,9 @@ These are confirmed runtime. The probes are kept as evidence.
 - Shadow Walk's attack needs a target: in the open RT plays nothing (probe 1350a); `power_shadow_walk_attack_out` (1166 ms) plays `ply_body_sw_timeout` (confirmed static).
 - Blink Assault is a kick: `blink_attack_focus`, subscene kick, 800 ms, over Running0 + Slash39, playing `ply_body_throw_hit_kick` and binding the kicked NPC (probe 1360a, runtime and static).
 - The native `throwhit` kick did not play in product mode at the railing (1355a/b, 1356 prepared); take 611 got it with the guard's AI held.
-- A player's death plays no scene: health reaches 0, native state 15 (Dead) alone, native GameOver about 4.5 s later (probe 1361a). The bank has no death clip yet.
+- A player's death plays no scene: health reaches 0, native state 15 (Dead) alone, native GameOver about 4.5 s later (probe 1361a). The Dead state is `arkPlayerStateDead`, vtable RVA 0x1c82478 (from its RTTI; confirmed static). Since 1214cv the partner plays a directional collapse (see Receiver fixes).
+- A guard often kills the player with a finisher instead: native state 38 (`arkPlayerStateNpcFatality`, vtable RVA 0x1c3d878 from its RTTI) beside Running, playing `npc_fatality_guards` (subscene `npc`, 4000 ms) until GameOver (probes 1361c, 1361f). The scene binds PlayerBody to `ply_body_generic_npc_guard_fatality` and the guard to `generic_npc_guard_fatality` (confirmed static). Sampled offline on the first-person body skeleton, the player's pelvis reaches half height at 2.9 s for the guards, 1.4 s elite, 1.5 s howler, 2.3 s overseer, 0.73 s witch and 3.47 s clockwork (`npc-fatality-timing-v1362.json`).
+- In the Edge of the World guard fights the host never relays a guard's hit on the joiner: the attacking guard has no NPC authority channel on the host (capture-miss reason 3 in 1328zzi; [#108](https://github.com/adamkozel/Dishonored-2-coop/issues/108)). Before 1214cv the unrelayed hits killed the host's Emily presentation clone (40 to 0 health in about 8 s, 1328zzh), which dropped its sword, and the presentation could not restart (`clone_equipment_unreadable`).
 - A counter press 400 ms after the source's `sword_parry_win` produced no counter-kill; killing blows later played `fatality_*` finishers (1328zp, zr).
 - Re-aiming with `setviewpos` is a teleport and the partner fades through each one; turning by native look-stick pulses (about 48.5 deg/s at RightX 20000) does not.
 
@@ -153,6 +155,17 @@ These are confirmed runtime. The probes are kept as evidence.
 
 **1214ct: the Blink Assault kick** (`blink_attack_focus`) is presented as the kick (variant 17, the native kick clip), standing, binding the player body, the right arm and the kicked NPC.
 
+**1214cu: the left-hand EquipChange beside sword states.** While a power is selected, blocks and swings run with a second EquipChange (state 64: the power hidden and shown again). The sword classifier allowed only two states and failed closed, so the source read missed at stage 2 and the stream restarted (1328zz, zza). It now ignores one such EquipChange; two still fail closed. Source misses dropped from 143 to 1–5 per fight (1328zzb–zzg).
+
+**1214cv: the partner's death, and a clone that cannot be killed.**
+- Protocol 76: the native Dead state is action 25 with one directional collapse, chosen once at the death edge from the nearest living catalogued NPC within 10 m relative to the facing (24 front, 25 back, 26 left, 27 right; a death without one is front). The shadow-stream status reports `death` (count, variant, bearing).
+- Bank 72 adds clips 374–377: the native `generic_sleepdart_{front,back,left,right}` falls, exported read-only, sampled offline (`sample_sleepdart_v1362.py`) and retargeted per role from the role's own skeleton (tall to Corvo, female to Emily). Each native clip staggers 1–4 s before falling, so only the collapse is kept (from 0.5 s before the pelvis drops to 0.5 s after it settles; 1.8–2.2 s, pelvis from about 1.0 m to 0.1–0.2 m). The receiver plays it at full body (no leg locomotion blend) without requiring a valid root motion, and holds the end pose.
+- The presentation clone gets the native empty result for any world damage the NPC-attack relay does not route (`cloneWorldDamageBlocked` in the damage status), and the relay counts capture misses by reason (`captureMisses`: no source scope, victim identity, unbound attacker, contact shape).
+- Probe 1361b (Corvo dies to a Dunwall guard): the source sent variant 24 (guard at bearing -0.31 rad), and the host presented it at full weight through native GameOver. Before 1214cv the partner dropped to weight 0 at death (1361a). The guard's hits knock the source back out of a fixed camera's view (1361b, 1361d, 1361e), so the death probe now re-aims the observer camera at the source after each health drop (1361f on).
+- Probe 1361g (Emily, right collapse, variant 27): filmed from the host, she staggers, falls to the floor and stays down while the guard stands over her (visual accepted).
+
+**1214cw: the finisher is a death too.** In 1361c and 1361f the partner faded out as the guard's finisher began (no dead state yet, physical ineligibility). The source now sends the death action for the whole finisher: the collapse holds its first (standing) frame and starts on the native fatality scene clock once the NPC type's body falls, less the collapse's own 0.9 s to half height (guards 2.0 s, elite 0.5, howler 0.6, overseer 1.4, witch 0, clockwork 2.57; an unread scene uses 2.0 s from the state edge). The shadow-stream `death` status reports the scene, its time and the lead.
+
 ## Lab-only grants
 
 The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two lab commands put them in through the game's own inventory routines. They are lab only and refused outside the lab.
@@ -160,7 +173,7 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 - **`coop_grant_named <declaration>`** (1214cm): adds one entry by its exact declaration name, restricted to powers (`models/powers/...`) and player attributes (`components/characters/player/base/attributes/...`). A granted power is selected in the left hand with the native equip. Agility is `super_jump.inventoryitem`.
 - Probes `power-cast-probe-v1334a`–`d` confirm every granted power casts natively, product mode included.
 
-## Takes on the current candidates (1214cq-1214ct)
+## Takes on the current candidates (1214cq-1214cv)
 
 | Take | Result |
 |---|---|
@@ -180,6 +193,9 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | coverage-v1357a, 1358a/b | Body loot passes for Corvo (Emily's choke did not hold); pickpocketing finds no focus on the living guard |
 | coverage-v1359a/b | Blink Assault kick presented (1214ct) |
 | mission-coverage-v1328zp-zz | Guard fights with counter presses and side stuns: Corvo's back stun at full weight (zt); right/left stuns only at weight 0; Emily's presentation dropped in several fights (diagnosis in zz) |
+| mission-coverage-v1328zzb-zzg | Guard fights on 1214cu: source misses fixed; Emily-source fights lost the partner after the host clone was killed (zzb-zze fail, zzf/zzg pass) |
+| mission-coverage-v1328zzh, zzi | Clone health sampled: killed by unrelayed guard hits on 1214cu (zzh); survives on 1214cv (zzi), where all 23 capture misses are an unbound attacker (#108). Short stale-stream drops remain: about 1 s of late-mapped packets (reject 11) without a host frame hitch |
+| player-death-probe-v1361b-g | Deaths on 1214cv: Corvo and Emily plain deaths presented (front 24, right 27) at full weight through GameOver; finishers (1361c Emily, 1361f Corvo) faded the partner (fixed in 1214cw); 1361g films Emily's collapse |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
 
 Earlier takes, failed ones included, are kept; each commit message records what it found.
