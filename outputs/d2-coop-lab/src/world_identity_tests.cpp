@@ -1628,11 +1628,22 @@ void playerStanceTests() {
         bad=lm;bad.d(instance+0x160,1001);require(!inspect(bad),"expired landing scene refused");
         bad=lm;bad.d(scene+0x28,999);require(!inspect(bad),"unobserved landing duration refused");
         bad=lm;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene");require(!inspect(bad),"damaging landing refused at the light landing duration");
+        bad.d(scene+0x28,1066);require(!inspect(bad),"damaging landing refused with only the body bound (its arms share the scene, 1214co)");
+        constexpr auto right=instance+0x8000,left=instance+0x9000,rd=instance+0xa000,ld=instance+0xb000,children=instance+0xc000;
         auto strong=lm;strong.str(names,"midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene");strong.d(scene+0x28,1066);strong.d(instance+0x160,1040);
-        require(inspect(strong)&&result.strong&&result.character==1&&result.durationMs==1066&&result.timeMs==1040,"Corvo damaging landing body scene (1214cn, observed 1066 ms)");
-        auto strongEmily=strong;strongEmily.str(names+0x100,"Scene_1");strongEmily.str(names+0x200,"models/characters/player/emily/body.def");require(inspect(strongEmily)&&result.strong&&result.character==2,"Emily damaging landing body scene");
+        strong.d(instance+0x18,3);strong.q(bindings+0x28,right);strong.q(bindings+0x48,left);strong.q(game+0x3130b8,right);strong.q(game+0x3130c0,left);
+        strong.q(player+0xb0,children);strong.d(player+0xb8,2);strong.q(children,right);strong.q(children+8,left);
+        for(unsigned i=0;i<2;++i){const auto arm=i?left:right,ad=i?ld:rd;strong.q(arm,base+0x1c5e428);strong.d(arm+0xa8,i?0x20003:0x10002);strong.d(arm+0xac,1);strong.q(arm+0x20,names+0x300+i*0x100);strong.str(names+0x300+i*0x100,i?"left_arm_1":"right_arm_2");strong.q(arm+0x2e8,ad);strong.q(ad,base+0x1ab58f8);strong.q(ad+8,names+0x500+i*0x100);strong.str(names+0x500+i*0x100,i?"models/characters/player/corvo/left_arm.def":"models/characters/player/corvo/right_arm.def");}
+        require(inspect(strong)&&result.strong&&result.character==1&&result.durationMs==1066&&result.timeMs==1040&&result.rightArm.side==2&&result.leftArm.side==1,"Corvo damaging landing binds the body and both native arms (1214co, observed 1066 ms)");
+        auto strongEmily=strong;strongEmily.str(names+0x100,"Scene_1");strongEmily.str(names+0x200,"models/characters/player/emily/body.def");
+        strongEmily.str(names+0x500,"models/characters/player/emily/right_arm.def");strongEmily.str(names+0x600,"models/characters/player/emily/left_arm.def");
+        require(inspect(strongEmily)&&result.strong&&result.character==2,"Emily damaging landing binds her body and arms");
         bad=lm;bad.d(scene+0x28,1066);require(!inspect(bad),"light landing refused at the strong landing duration");
+        bad=strong;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_light.midnightscene");bad.d(scene+0x28,1000);require(!inspect(bad),"light landing refused with three bindings");
         bad=strong;bad.d(instance+0x160,1067);require(!inspect(bad),"expired damaging landing refused");
+        bad=strong;bad.q(bindings+0x28,left);bad.q(bindings+0x48,right);require(!inspect(bad),"damaging landing arms in the observed order (right, then left)");
+        bad=strong;bad.str(names+0x500,"models/characters/player/emily/right_arm.def");require(!inspect(bad),"other character's arm refused");
+        bad=strong;bad.q(bindings+0x48,right);require(!inspect(bad),"one arm bound twice refused");
         bad=strong;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_light_leftarm.midnightscene");require(!inspect(bad),"first-person arm landing scene refused");
         bad=lm;bad.str(names+0x100,"Scene_1");require(!inspect(bad),"other character landing subscene refused");
         bad=lm;bad.d(landingInput+0x6c,64);require(!inspect(bad),"unobserved native landing input mapping refused");

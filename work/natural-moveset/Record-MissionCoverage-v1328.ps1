@@ -167,16 +167,23 @@ try{
      if($row.climbing-lt20-or$row.phases-lt5-or$row.ascending-lt3-or$row.descending-lt3){throw "Climbing presented $($row.climbing), phases $($row.phases), ascending $($row.ascending), descending $($row.descending)"}
      $row.checks.Add("Partner presented native chain climbing ($($row.climbing) samples, $($row.phases) phases), ascending $($row.ascending), descending $($row.descending)")}
     if($case-eq'guardfight'){$gname=if($source-eq'host'){$GuardHost}else{$GuardClient};$g=@(Living $source|Where-Object spawnerName -eq $gname);if($g.Count-ne1){throw "Guard $gname missing"};$gp=$g[0].position
-     # In front of the guard along its own facing, in plain view (1328d/e: the alerting swing from 1.6 m killed the unaware
-     # guard outright, so no attack ever met the block); the free camera behind and to the side, raised.
-     # 1328d: +y put the source on a parapet beyond the railing, out of the guard's reach (no swing in either role); stand
-     # 1.6 m in front of the guard along its own facing instead, the camera behind the source and to the side.
-     $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl
-     $sx=$gx+3.0*$fx;$sy=$gy+3.0*$fy;$yaw=[Math]::Atan2($gy-$sy,$gx-$sx)*180/[Math]::PI;$mx=($gx+$sx)/2;$my=($gy+$sy)/2;$row.guardFacing=@($fx,$fy)
-     $cx=$sx+2.2*$fx-2.0*$fy;$cy=$sy+2.2*$fy+2.0*$fx;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
-     C $peer (P $cx $cy ($gz+2.4) $cyaw);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) 0);Start-Sleep -Milliseconds 600
-     C $source 'coop_player_health_hold on';C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
+     # Placement history: +y 1.6 m stood on a parapet beyond the railing (1328b-e: no swing reached the source, and the
+     # alerting slash killed the unaware guard); 3 m in front along the guard's facing was over the canal (1328f: the guard
+     # faces the water from the railing; the observer, teleported 5 m out for the camera, fell in). Now: try 2.5 m to either
+     # side, then behind, then in front, and keep the first spot where the source rests at the guard's level; no slash.
+     $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl;$row.guardFacing=@($fx,$fy)
+     C $source 'coop_player_health_hold on';$placed=$null;$row.placementTrials=@()
+     foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
+      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'
+      $ok=$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
+      if($ok){$placed=@($tx,$ty,$tyaw);break}}
+     if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
+     $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2
+     # Free camera behind the source (away from the guard) and to the side, raised; hold_at leaves the observer on the dock.
+     $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$sx+2.2*$dx-1.6*$dy;$cy=$sy+2.2*$dy+1.6*$dx;$cz=$gz+2.4;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
      # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
      $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=3500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
@@ -209,6 +216,9 @@ try{
     $row.passed=$true
    }catch{$row.failure=$_.Exception.Message}
    finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
+    # 1328f: after a failed placement both peers sat in a menu (logic 12) and every later case failed its first read;
+    # dismiss menus and prompts on both peers before the reset reads the source.
+    foreach($r in 'host','client'){for($m=0;$m-lt4;$m++){$lg=try{(S $r).localGameLogicState}catch{1};if($lg-in2,12){I $r B 200;Start-Sleep -Milliseconds 900}elseif($lg-in8,15){I $r A 300;Start-Sleep -Milliseconds 1500}else{break}}}
     try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
      $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
