@@ -1,0 +1,40 @@
+{
+  "source": "client",
+  "case": "gait",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Still armed idle, run reached and settled, both reversals presented opposite sectors, moving turns kept walking",
+    "Native holster lowered the partner armed mix, holstered walk presented, native redraw raised it again"
+  ],
+  "swordEquippedAfterHolster": false,
+  "swordEquippedAfterRedraw": true,
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "reversals": [
+    {
+      "before": [
+        1
+      ],
+      "after": [
+        5
+      ],
+      "apart": 4
+    },
+    {
+      "before": [
+        2
+      ],
+      "after": [
+        6
+      ],
+      "apart": 4
+    }
+  ],
+  "movingTurnSamples": 14,
+  "movingTurnMaxTurnWeight": 0.0,
+  "unarmedMoving": 13,
+  "restored": true
+}

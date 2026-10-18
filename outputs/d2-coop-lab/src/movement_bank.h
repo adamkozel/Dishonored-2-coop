@@ -296,7 +296,10 @@ struct MovementClock {
         const bool interpolatedAir=bank.hasAir()&&eligible&&!sliding&&!traversing&&!powered&&airTrajectory;
         // 1214ci (#11): while a traversal presentation is still blending out, its exit can snap the root down a step in
         // one frame (vault exit: 0.16-0.20 m, take 1326a); keep the traversal's vertical allowance until it has ended.
-        if(physicalRate>(powered?500.f:10.f)||std::fabs(dz)>(powered?500.f*float(dt):((traversing||settling)&&bank.hasLowMantle())?20.f*float(dt):(airborne||landingStep||interpolatedAir)?60.f*float(dt):.15f)){
+        // 1214cj (#11): a grounded vertical step is bounded by max(0.15 m, 6 m/s x dt), not a flat 0.15 m per frame: a
+        // 0.18 m step in a 38 ms frame (about 4.9 m/s, a jump landing on a ledge edge, take 1326b) reset the clock and
+        // re-ramped the body weight. A 10 m/s grounded discontinuity is still refused.
+        if(physicalRate>(powered?500.f:10.f)||std::fabs(dz)>(powered?500.f*float(dt):((traversing||settling)&&bank.hasLowMantle())?20.f*float(dt):(airborne||landingStep||interpolatedAir)?60.f*float(dt):(std::max)(.15f,6.f*float(dt)))){
             rejectStep(physicalRate>(powered?500.f:10.f)?2u:3u,dt,dz,physicalRate,motion);clearTerrain();clearTurn();positioned=false;weight=0;return false;}
         const float alpha=1-std::exp(-float(dt)/.10f);speed+=(rate-speed)*alpha;
         // Full-body reversible stance blend; never adjust just the pelvis/legs.
