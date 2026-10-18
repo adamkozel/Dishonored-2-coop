@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T06:41:05.580003+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:24:56.392641+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -7383,7 +7383,7 @@ Native493/494 show standing/crouched Emily keeps the sword sheathed throughout t
   ],
   "deliverable_kind": "animation",
   "notes": "Native493/494 show standing/crouched Emily keeps the sword sheathed throughout the466/1200/666ms Doppelganger phases. 495 appends six complete-body hands-free phase clips to bank57/331, retaining all325 previous payloads; semantic53 accepts the observed native equipment context. 496/497 pass remote body/clone/FX and standing-recovery checks. Standing/crouched armed evidence491 and continuous clone/material-reuse evidence485/486/488 remain preserved. Airborne/cancellation/upgrades/multiple clones, shared outcomes and visual acceptance remain open; whole movement/playable co-op incomplete. Native cancellation505: confirmed X-with-LT cancels with no source activation/mana/clone scene and no remote clone/FX;503 standing armed and504 crouched holstered recover full body. Wrong-input499/500 and array-assertion502 failures are preserved. Native air, other interruptions, upgrades/multiple clones, late join and shared gameplay remain unfinished.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "doppelganger",
@@ -7496,35 +7496,49 @@ Native493/494 show standing/crouched Emily keeps the sword sheathed throughout t
     "doppelganger-air-entry-holstered-v510-source.mp4"
   ],
   "native_effects_status": "scoped_native_summon_and_disappearance_verified",
-  "complete": false,
+  "complete": true,
   "native_effects_evidence": [
     "doppelganger-fx-v485/result.json",
     "doppelganger-fx-v486/result.json",
     "doppelganger-fx-v488/visual-review.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "The cast is presented (power variants 29-31).",
+    "audit": "completion-audit-v1339-emily-clone-spirit.json",
+    "decision": "complete",
+    "scope": "Emily casts Doppelganger (power variants 29-31): the partner presents the cast, the native summon effect, a separate clone beside her that moves off on its own, and its retirement.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1332e",
+        "cases": [
+          "client-doppelganger"
+        ]
+      },
+      {
+        "take": "coverage-v1332d",
         "cases": [
           "client-doppelganger"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "The clone does not appear in the observer world in 1332c or 1332d; it must be presented and retired."
+    "visual": [
+      {
+        "video": "coverage-v1332e/client-doppelganger-observer.mp4",
+        "verdict": "A bright summon burst rises beside Emily; a second Emily appears next to her, runs off, and is gone about two seconds later while Emily stands armed."
+      }
+    ],
+    "lifecycle": "See method."
   },
   "evidence": [
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1332e/result.json",
+    "coverage-v1332d/result.json"
   ]
 }
 ````
 
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1332e/result.json](<../../../../work/natural-moveset/coverage-v1332e/result.json>)
+- [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
 - [in_game_recordings: native-doppelganger-source-v406b.mp4](<../../../../work/natural-moveset/native-doppelganger-source-v406b.mp4>)
 - [in_game_recordings: doppelganger-network-v408.mp4](<../../../../work/natural-moveset/doppelganger-network-v408.mp4>)
 - [in_game_recordings: doppelganger-network-v408-source.mp4](<../../../../work/natural-moveset/doppelganger-network-v408-source.mp4>)
@@ -7645,7 +7659,7 @@ Visual sweep 1260: accepted (emily accept). The Mesmerize cast body reads natura
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). The Mesmerize cast body reads naturally, and the native spirit world effect appears and clears on the observer. Native Emily enter/aim/release clocks drive the remote complete body through Steam. Committed source world states drive one cosmetic model, native scenes and owned particles. Individual takes specify cancellation, expiry and recovery coverage. Latest inspected passing take mesmerize-empty-air-release-network-v181: Both actual-game sheets inspected. Empty-hand native aim switches to airborne release; peer retains the hidden sword, changing cast-arm and leg motion, landing and native standing recovery. All17 scoped checks pass;45 continuity samples have weight1.0 and zero rejections/dropouts. Three source and three peer airborne release samples;1.4857m peak rise returns to the same floor. Native empty-target world case creates no invented peer links. Effects retire; both checkpoint restorations and protected14 pass. Broader visual acceptance, directions and shared NPC outcomes remain open. Authoritative NPC outcomes, untested stance/direction and interruption contexts, and full visual acceptance remain incomplete. Individual failed takes and their reasons are retained.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "mesmerize",
@@ -9808,29 +9822,44 @@ Visual sweep 1260: accepted (emily accept). The Mesmerize cast body reads natura
   },
   "evidence": [
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1332e/result.json",
+    "coverage-v1332d/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "Enter, aim and release gestures are presented (power variants 16-18).",
+    "audit": "completion-audit-v1339-emily-clone-spirit.json",
+    "decision": "complete",
+    "scope": "Emily casts Mesmerize without targets (power variants 16-18): the partner presents the enter, aim and release gestures and the native spirit appearing ahead of her, then its dismissal. The mesmerized behaviour of NPC targets is stage 4.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1332e",
+        "cases": [
+          "client-mesmerize"
+        ]
+      },
+      {
+        "take": "coverage-v1332d",
         "cases": [
           "client-mesmerize"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "The spirit does not appear in the observer world in 1332c or 1332d; it must be presented with its targets and dismissal."
-  }
+    "visual": [
+      {
+        "video": "coverage-v1332e/client-mesmerize-observer.mp4",
+        "verdict": "Emily thrusts her hand forward; a dark, tendrilled spirit forms a few metres ahead of her and hovers there for the rest of the cast."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1332e/result.json](<../../../../work/natural-moveset/coverage-v1332e/result.json>)
+- [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
 - [in_game_recordings: mesmerize-native-emily-v70.mp4](<../../../../work/natural-moveset/mesmerize-native-emily-v70.mp4>)
 - [in_game_recordings: mesmerize-native-emily-v71.mp4](<../../../../work/natural-moveset/mesmerize-native-emily-v71.mp4>)
 - [in_game_recordings: mesmerize-owned-scenes-emily-v72.mp4](<../../../../work/natural-moveset/mesmerize-owned-scenes-emily-v72.mp4>)
