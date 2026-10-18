@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-18T16:39:28.563976+02:00",
+  "dll": "1101E048BF99BED6AF16A2899A99E9A5E71059F3B2665C8934C4F1AAC31D407B",
+  "probe": "0714F5B9B8898C2286880C04BB34B1022FA07CE9C6190C79E973E82FC6916EBB",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214cx",
+  "protocol": 76,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 72,
+  "clips": 378,
+  "banks": [
+    {
+      "path": "work/natural-moveset/death-banks-v1362/corvo-choke-bank.bin",
+      "sha256": "766E67DA2C97CA8D1CF8901F1CCE1610DEE18AB19CF6D305DE71619D9B865EA1"
+    },
+    {
+      "path": "work/natural-moveset/death-banks-v1362/emily-choke-bank.bin",
+      "sha256": "A0FFE6E7C4432CF5DD91939DD43EA70751C127D8530BFC7AC425046A769F612E"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214cy (#108): 1214cx plus the client binding an NPC that is already attacking in its world: on each host Hello it re-reads that NPC from the catalog snapshot life roster and binds as soon as its attack AI is momentarily inactive, with no 3 s refusal cooldown (the guard fighting Emily never got a channel in 1328zzl, so no hit relay and no shared death)."
+}

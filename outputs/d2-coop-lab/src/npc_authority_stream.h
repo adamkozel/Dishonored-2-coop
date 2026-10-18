@@ -317,7 +317,7 @@ void refreshNpcRelevance(ULONGLONG tick){
 // snapshot comes from the worker; without a current one the Hello is deferred
 // (the host repeats it) while the worker reads.
 struct NpcHelloRefusal{std::string spawner,definition;ULONGLONG until=0;};
-NpcCatalogSnapshot npcHelloCatalog;std::vector<NpcHelloRefusal> npcHelloRefusals;std::uint64_t npcHelloCatalogReads=0,npcClientBindDeferred=0;
+NpcCatalogSnapshot npcHelloCatalog;std::vector<NpcHelloRefusal> npcHelloRefusals;std::uint64_t npcHelloCatalogReads=0,npcClientBindDeferred=0,npcClientBoundLive=0,npcClientBindBusy=0;
 bool bindNpcForHostHello(const CoopNpcControl& p,ULONGLONG tick){
     if(!localRole||p.h.kind!=NpcAuthorityMessage::Hello||npcEnabledChannels()>=kNpcRelevanceMax)return false;
     const std::string spawner(p.spawner,strnlen(p.spawner,sizeof(p.spawner))),definition(p.definition,strnlen(p.definition,sizeof(p.definition)));
@@ -328,6 +328,18 @@ bool bindNpcForHostHello(const CoopNpcControl& p,ULONGLONG tick){
     for(const auto& n:c.entries)if(n.npc.spawnerName==spawner&&n.npc.definition==definition){
         NativeNpcAuthority fresh{};if(!freshNpcCatalogEntry(n,fresh)){++npcCatalogStale;break;}
         if(bindNpcChannel(fresh,tick)){++npcClientBound;return true;}break;}
+    // 1214cy (#108): an NPC already attacking in this world (attack AI active) is not acquire-eligible, so it is missing
+    // from the eligible catalog and its Hello was refused for 3 s at a time: the guard fighting Emily never got a
+    // channel, so its hits were not relayed and its death was not shared (mission-coverage-v1328zzl: the client's guard
+    // ineligible, 0 replies to the host's Hellos; zzk). Re-read that one NPC from the life roster on each Hello
+    // (every 500 ms) and bind it as soon as its attack is momentarily inactive; no refusal cooldown meanwhile.
+    for(const auto& l:c.life)if(l.spawner==spawner&&l.definition==definition&&l.state==0){
+        NativeNpcAuthority fresh{};
+        if(readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,l.handle,fresh)&&fresh.npc.actor==l.actor&&
+           fresh.npc.spawnerName==spawner&&fresh.npc.definition==definition){
+            if(!npcAuthorityAcquireEligible(fresh)){++npcClientBindBusy;return false;}
+            if(bindNpcChannel(fresh,tick)){++npcClientBound;++npcClientBoundLive;return true;}}
+        break;}
     npcHelloRefusals.erase(std::remove_if(npcHelloRefusals.begin(),npcHelloRefusals.end(),[&](const auto& r){return tick>=r.until;}),npcHelloRefusals.end());
     if(npcHelloRefusals.size()<128)npcHelloRefusals.push_back({spawner,definition,tick+3000});
     ++npcClientBindRefused;return false;
@@ -588,7 +600,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcDeadReconciled,npcDeadSent,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcDeadReconciled,npcDeadSent,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}}\n",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
