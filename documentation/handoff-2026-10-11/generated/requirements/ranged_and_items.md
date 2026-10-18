@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:24:56.392641+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:35:04.114763+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
@@ -300,21 +300,38 @@ Regular/sleep-bolt changes are recorded in both directions with native bolt mode
   ],
   "deliverable_kind": "animation",
   "notes": "Regular/sleep-bolt changes are recorded in both directions with native bolt models and exact native attachment tags. The lower/holster/equip choreography is authored, not a confirmed native FP ammo-selection gesture. Inventory state, selection timing, additional ammunition and live equipment binding remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "completion": {
-    "audit": "completion-audit-v1338-ranged-items.json",
-    "decision": "open",
-    "scope": "Not yet recorded.",
-    "takes": [],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "The mission quick-slot switch to sleep darts and back with the crossbow drawn (mission harness boltswitch, take 1328j on 1214cp)."
-  }
+    "audit": "completion-audit-v1340-switching.json",
+    "decision": "complete",
+    "scope": "With the crossbow drawn, selecting sleep darts (the native ammo switch, equip change 64) and switching back to bolts in both roles: the partner presents the crossbow through both switches (59 samples, variants 0 and 7-10), fires one dart, and never drops the presentation.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328j",
+        "cases": [
+          "host-boltswitch",
+          "client-boltswitch"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328j/host-boltswitch-observer.mp4",
+        "verdict": "Corvo holds the crossbow aimed through the dart selection, raises it to fire a dart, re-aims after switching back and finally lowers his arm to holster."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "mission-coverage-v1328j/result.json"
+  ]
 }
 ````
 
+- [evidence: mission-coverage-v1328j/result.json](<../../../../work/natural-moveset/mission-coverage-v1328j/result.json>)
 ## grenade_equip_aim_throw
 
 Audit 1267: release pop fixed in bank 1266 (pelvis travel scaled to 25%); throw accepted from both windows. Visual sweep 1260: reject (corvo reject, emily reject). The cook and throw are recognizable for both partners, but on the high throw the body pops sideways at release (Corvo about 0.5-0.75 m over two frames, Emily about 0.35 m in one frame); the low throws are acceptable. Native standing cooking/release/empty recovery drives the isolated remote body and held prop over Steam. Crouched phases have passed in the individually recorded contexts. Passed takes also verify six-joint native mechanisms, owned in-hand effects and specific same-world menu recovery cases; consult each result for its exact scope. Release hide, duplicate refusal, inventory rollback and checkpoint restoration checked. Projectile/explosion/world/damage replication, untested movement/stance/air contexts, broader interruption recovery and fine hand/foot acceptance remain incomplete.
@@ -2693,28 +2710,43 @@ Three native item switches and equip cancellation at 30/70 percent are recorded,
   ],
   "deliverable_kind": "animation",
   "notes": "Three native item switches and equip cancellation at 30/70 percent are recorded, with at most one left-hand item visible. Arbitrary-time interruption, inventory state and runtime prop binding remain pending. 1088 (candidate1074j, Edge of the World, both roles): opening/closing the native item wheel no longer retires partner presentation (protocol73 holds; neutral body during the wheel), and a native D-pad quick-slot switch from sword to pistol is presented with the native pistol prop. Arbitrary-time interruption of other items remains open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-equipment-v1088/equip-client.mp4",
     "mission-equipment-emily-v1088/equip-host.mp4"
   ],
   "evidence": [
-    "../movement-integration/mission-equipment-audit-v1089.json"
+    "../movement-integration/mission-equipment-audit-v1089.json",
+    "mission-coverage-v1328j/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1338-ranged-items.json",
-    "decision": "open",
-    "scope": "Not yet recorded on the current candidate.",
-    "takes": [],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "Switching weapons mid-aim, selecting a power and redrawing (mission harness itemswitch, take 1328j on 1214cp)."
-  }
+    "audit": "completion-audit-v1340-switching.json",
+    "decision": "complete",
+    "scope": "Aiming the pistol and switching to the crossbow mid-aim, selecting Blink, holstering and redrawing in both roles: the partner presents the pistol (20-21 samples), then the crossbow (24-26), lowers it for Blink and presents the redrawn crossbow (27-28), with no presentation drop.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328j",
+        "cases": [
+          "host-itemswitch",
+          "client-itemswitch"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328j/client-itemswitch-observer.mp4",
+        "verdict": "Emily raises the pistol, swaps to the wrist crossbow without lowering her arm fully, drops the arm when Blink is selected, then raises the crossbow again and puts it away."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/mission-equipment-audit-v1089.json](<../../../../work/movement-integration/mission-equipment-audit-v1089.json>)
+- [evidence: mission-coverage-v1328j/result.json](<../../../../work/natural-moveset/mission-coverage-v1328j/result.json>)
 - [in_game_recordings: mission-equipment-v1088/equip-client.mp4](<../../../../work/natural-moveset/mission-equipment-v1088/equip-client.mp4>)
 - [in_game_recordings: mission-equipment-emily-v1088/equip-host.mp4](<../../../../work/natural-moveset/mission-equipment-emily-v1088/equip-host.mp4>)
 
