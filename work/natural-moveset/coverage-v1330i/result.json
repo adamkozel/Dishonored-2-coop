@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "manaelixir",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Windblast spent mana to 50; the mana elixir drink presented as the use reach (18 samples), mana now 100"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_mana_potion",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 3,
+        "refused": 0,
+        "result": "mana_use_requested",
+        "manaBefore": 50.0,
+        "manaNow": 100.0
+      },
+      "manaMin": 50.0,
+      "useSamples": 18,
+      "manaBefore": 50.0,
+      "manaNow": 100.0,
+      "drankAtMs": 5635,
+      "autoUsed": false,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "manaelixir",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Mesmerize spent mana to 40; the mana elixir drink presented as the use reach (19 samples), mana now 100"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_mana_potion",
+        "named": {
+          "grants": 10,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 1,
+        "refused": 0,
+        "result": "mana_use_requested",
+        "manaBefore": 40.0,
+        "manaNow": 100.0
+      },
+      "manaMin": 40.0,
+      "useSamples": 19,
+      "manaBefore": 40.0,
+      "manaNow": 100.0,
+      "drankAtMs": 6067,
+      "autoUsed": false,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

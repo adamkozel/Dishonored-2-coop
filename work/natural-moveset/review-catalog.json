@@ -6099,7 +6099,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1290: in product mode the lab grants a mana potion, but the native drink needs a natively spent pool (power use); the view waits for a map with powers. Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "potion-mana-corvo-v67.mp4",
@@ -6209,24 +6209,31 @@
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
         "../movement-integration/gestures-counter-audit-v1264.json",
         "../movement-integration/mana-attempt-audit-v1290.json",
-        "coverage-v1330e/result.json"
+        "coverage-v1330e/result.json",
+        "coverage-v1330i/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1338-ranged-items.json",
-        "decision": "open",
-        "scope": "Corvo spends mana with Windblast (to 50) and drinks a mana elixir; the drink is presented as the use reach (coverage-v1330e host).",
+        "audit": "completion-audit-v1346-mana.json",
+        "decision": "complete",
+        "scope": "Drinking a mana elixir in both roles after a power spent mana (Corvo 100 -> 50, Emily 100 -> 40): the partner presents the drink as the hand-to-mouth use reach (18-19 samples) and the pool is refilled to 100.",
         "takes": [
           {
-            "take": "coverage-v1330e",
+            "take": "coverage-v1330i",
             "cases": [
-              "host-manaelixir"
+              "host-manaelixir",
+              "client-manaelixir"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "Emily's drink: her mana was full at the fixed drink time in 1330e; the case now drinks as soon as her live mana drops after the Doppelganger cast, with the trace recorded."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1330i/client-manaelixir-observer.mp4",
+            "verdict": "Emily thrusts her hand out to cast Mesmerize, the spirit forms above her, then she turns and lifts her hand to her mouth to drink before lowering it."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "item_switch_interruptions",
