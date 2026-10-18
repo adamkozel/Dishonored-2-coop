@@ -166,6 +166,10 @@ These are confirmed runtime. The probes are kept as evidence.
 
 **1214cw: the finisher is a death too.** In 1361c and 1361f the partner faded out as the guard's finisher began (no dead state yet, physical ineligibility). The source now sends the death action for the whole finisher: the collapse holds its first (standing) frame and starts on the native fatality scene clock once the NPC type's body falls, less the collapse's own 0.9 s to half height (guards 2.0 s, elite 0.5, howler 0.6, overseer 1.4, witch 0, clockwork 2.57; an unread scene uses 2.0 s from the state edge). The shadow-stream `death` status reports the scene, its time and the lead.
 
+**1214cx: down before GameOver.** Native GameOver, about 3.8 s into the guards' finisher, retires the dead source's stream, and in 1361o (Emily, 1214cw) she vanished while still kneeling. Finisher collapses now start 0.4 s earlier (guards 1.6 s), and the fatality scene reader reports the stage it fails at (on the client in 1361o the scene was not read and the 2.0 s fallback applied). 1361q and 1361s (Corvo's finishers) read the scene clock and pass; 1361q films the guard seizing Corvo, who sinks to his knees and lies face down before GameOver.
+
+**1214cy: a guard that is already fighting gets a channel ([#108](https://github.com/adamkozel/Dishonored-2-coop/issues/108)).** The client binds an NPC only when it is acquire-eligible, which requires its attack AI to be inactive. A guard already attacking the joiner in the client's world was refused on every host Hello, with a 3 s cooldown (1328zzl: 0 replies to the host's Hellos), so its hits were never relayed and its death was not shared (1328zzk). The client now re-reads that one NPC from the catalog snapshot's life roster on each Hello and binds it as soon as its attack pauses (`clientBoundLive`, `clientBusy`). In 1328zzm the guard bound after 19 busy retries, the host relayed 17 hits, the client applied 14 natively (2 blocked, 1 lost parry), Emily's health dropped and the guard's death was shared.
+
 ## Lab-only grants
 
 The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two lab commands put them in through the game's own inventory routines. They are lab only and refused outside the lab.
@@ -196,6 +200,9 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | mission-coverage-v1328zzb-zzg | Guard fights on 1214cu: source misses fixed; Emily-source fights lost the partner after the host clone was killed (zzb-zze fail, zzf/zzg pass) |
 | mission-coverage-v1328zzh, zzi | Clone health sampled: killed by unrelayed guard hits on 1214cu (zzh); survives on 1214cv (zzi), where all 23 capture misses are an unbound attacker (#108). Short stale-stream drops remain: about 1 s of late-mapped packets (reject 11) without a host frame hitch |
 | player-death-probe-v1361b-g | Deaths on 1214cv: Corvo and Emily plain deaths presented (front 24, right 27) at full weight through GameOver; finishers (1361c Emily, 1361f Corvo) faded the partner (fixed in 1214cw); 1361g films Emily's collapse |
+| player-death-probe-v1361h-s | Deaths on 1214cw/cx with the probe's own verdict: every plain death and finisher passes in both roles; 1361h, 1361q film Corvo's finishers, 1361i, 1361j the plain deaths; 1361o (Emily's finisher on 1214cw) vanished while kneeling |
+| mission-coverage-v1328zzj-zzm | Guard fights: zzj (Emily turned 75 deg) steady stream but no damage to Emily (#108); zzk (Corvo) guard death not shared; zzl snapshots the NPC catalogs (#108 root cause); zzm (1214cy) relays the guard's hits to Emily and shares its death |
+| use-variants-dunwall-v1228x-za | Ring lock in both roles passes functionally; the free camera stood in a wall (x/y) and test-dropped spots found no floor at the source's level (z/za, one fell 14 m) |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
 
 Earlier takes, failed ones included, are kept; each commit message records what it found.
