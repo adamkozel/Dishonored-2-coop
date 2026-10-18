@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T10:17:34.524050+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T11:09:01.929256+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 68 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 70 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -424,8 +424,8 @@ Captured 2026-10-18T10:17:34.524050+02:00; source [review-catalog.json](<../../.
 | crouched_attack | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_sweep_1260_functional_both_roles | complete |
 | airborne_attack | combat | candidates | partial_native_airborne_combat_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
-| parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
-| parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
+| parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | complete |
+| parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | complete |
 | counterattack | combat | candidates | partial_native_counter_kill_finisher_shared_host_source | not_accepted | work_remaining |
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | accepted_sweep_1260_functional_both_roles | work_remaining |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
