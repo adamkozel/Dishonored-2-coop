@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T08:16:51.495945+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T09:11:20.630088+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -524,7 +524,7 @@ Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in b
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in both roles (coverage-v1283a), accepted functionally. Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "hard-landing-corvo-stand-v23-v5.mp4",
@@ -538,25 +538,35 @@ Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in b
     "hard-landing-emily-stand-v23-v5/result.json",
     "hard-landing-emily-crouch-v23-v1/result.json",
     "../movement-integration/coverage-audit-v1283.json",
-    "coverage-v1321h/result.json"
+    "coverage-v1321h/result.json",
+    "mission-coverage-v1328q/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1331-traversal.json",
-    "decision": "open",
-    "scope": "The 6 m fall lands and settles in both roles (1321h); earlier takes cover the native CatFall light landing standing and crouched.",
+    "audit": "completion-audit-v1344-traversal-2.json",
+    "decision": "complete",
+    "scope": "A damaging ~12 m fall onto the dock in both roles (health held): the source enters the native CatFall with the strong landing scene (cat_fall_strong, 1066 ms, bound to the body and both arms), the partner presents it as the hard landing (traversal variant 6, 15 samples) and walks on. The light landing after 5-6 m falls was accepted earlier (audit 1283).",
     "takes": [
       {
-        "take": "coverage-v1321h",
+        "take": "mission-coverage-v1328q",
         "cases": [
-          "host-fall",
-          "client-fall"
+          "host-hardfall",
+          "client-hardfall"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "A damaging fall (higher, with the health held) presenting the native strong landing or roll, and a travelling landing recovery, in both roles."
-  }
+    "visual": [
+      {
+        "video": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+        "verdict": "Corvo drops onto the dock and lands in a deep crouch with one hand on the planks, holds it a moment, rises and walks on."
+      },
+      {
+        "video": "mission-coverage-v1328q/client-hardfall-observer.mp4",
+        "verdict": "Emily lands from the fall in the same braced crouch, pushes up and walks away along the dock."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -566,6 +576,7 @@ Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in b
 - [evidence: hard-landing-emily-crouch-v23-v1/result.json](<../../../../work/natural-moveset/hard-landing-emily-crouch-v23-v1/result.json>)
 - [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
 - [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
+- [evidence: mission-coverage-v1328q/result.json](<../../../../work/natural-moveset/mission-coverage-v1328q/result.json>)
 - [in_game_recordings: hard-landing-corvo-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-corvo-stand-v23-v5.mp4>)
 - [in_game_recordings: hard-landing-corvo-crouch-v23-v1.mp4](<../../../../work/natural-moveset/hard-landing-corvo-crouch-v23-v1.mp4>)
 - [in_game_recordings: hard-landing-emily-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-emily-stand-v23-v5.mp4>)
@@ -884,29 +895,44 @@ Candidates require animation review and appropriate game-state/contact binding. 
   ],
   "deliverable_kind": "animation",
   "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33). Audit 1241 (1213m): the same mantle passes again in both roles with the partner held through source gaps (native-pose time 29% -> 1% on the host-source side).",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
     "../movement-integration/window-traversal-audit-v1207.json",
     "../movement-integration/window-traversal-audit-v1238.json",
-    "../movement-integration/presentation-hold-audit-v1241.json"
+    "../movement-integration/presentation-hold-audit-v1241.json",
+    "window-traversal-v1235i/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1331-traversal.json",
-    "decision": "open",
-    "scope": "Earlier take 1235: the native low confined mantle through the climbable Edge of the World window is presented on the partner.",
-    "takes": [],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "A product-controller take on the current candidate through the climbable window in both roles, with the observer video reviewed."
-  }
+    "audit": "completion-audit-v1344-traversal-2.json",
+    "decision": "complete",
+    "scope": "Crossing the climbable Edge of the World window in both roles: the native mantle through the window (crossed from one side to the other) is presented on the partner (traversal weight 1, presentation weight 1 throughout).",
+    "takes": [
+      {
+        "take": "window-traversal-v1235i",
+        "cases": [
+          "host-script_rich_small_01_sndctrl",
+          "client-script_rich_small_01_sndctrl"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "window-traversal-v1235i/cross-client-observed.mp4",
+        "verdict": "Emily steps up to the window, plants her hands on the sill, swings through the opening and drops out of sight on the far side."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/window-traversal-audit-v1207.json](<../../../../work/movement-integration/window-traversal-audit-v1207.json>)
 - [evidence: ../movement-integration/window-traversal-audit-v1238.json](<../../../../work/movement-integration/window-traversal-audit-v1238.json>)
 - [evidence: ../movement-integration/presentation-hold-audit-v1241.json](<../../../../work/movement-integration/presentation-hold-audit-v1241.json>)
+- [evidence: window-traversal-v1235i/result.json](<../../../../work/natural-moveset/window-traversal-v1235i/result.json>)
 ## slide_enter_loop_exit
 
 Audit 1267: sprint-to-slide with crouched exit accepted for both characters (1267a); Corvo stand/jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.
@@ -1319,7 +1345,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "deliverable_kind": "animation",
   "notes": "1035/1038c-f/1046/1049: native swimming (Edge of the World, native campaign command) is arkPlayerStateSwimming in the alternate mode table, sent as action state22 (protocol71+); the receiver presents authored tread/stroke/up/down blended by replicated horizontal speed and vertical velocity, root and depth network-owned. Both roles verified as source (Corvo 1038c-f/1049, Emily 1046/1047/1048/1049). Overhead actual-game videos (1049, both roles) show tread, horizontal stroke and dive/surface on the remote body (bounded visual acceptance). Swim mantle/exit and polish remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-swim-v1035/host-swim.mp4",
@@ -1344,13 +1370,46 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "evidence": [
     "../movement-integration/mission-swim-audit-v1040.json",
-    "../movement-integration/traversal-parity-audit-v1050.json"
-  ]
+    "../movement-integration/traversal-parity-audit-v1050.json",
+    "mission-coverage-v1328o/result.json",
+    "mission-coverage-v1328h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1344-traversal-2.json",
+    "decision": "complete",
+    "scope": "Native swimming in both roles: forward, lateral and backward strokes, treading, sinking and rising are presented (about 184 samples per role, strokes 82-98 with 37-39 lateral, sink and rise episodes).",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328o",
+        "cases": [
+          "host-swim",
+          "client-swim"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1328h",
+        "cases": [
+          "host-swim",
+          "client-swim"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328o/client-swim-observer.mp4",
+        "verdict": "From behind, Emily strokes away through the murky water, slips under and surfaces again, then treads water with her arms out."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/mission-swim-audit-v1040.json](<../../../../work/movement-integration/mission-swim-audit-v1040.json>)
 - [evidence: ../movement-integration/traversal-parity-audit-v1050.json](<../../../../work/movement-integration/traversal-parity-audit-v1050.json>)
+- [evidence: mission-coverage-v1328o/result.json](<../../../../work/natural-moveset/mission-coverage-v1328o/result.json>)
+- [evidence: mission-coverage-v1328h/result.json](<../../../../work/natural-moveset/mission-coverage-v1328h/result.json>)
 - [in_game_recordings: native-swim-v1035/host-swim.mp4](<../../../../work/natural-moveset/native-swim-v1035/host-swim.mp4>)
 - [in_game_recordings: swim-coop-eotw-v1038c/client.mp4](<../../../../work/natural-moveset/swim-coop-eotw-v1038c/client.mp4>)
 - [in_game_recordings: swim-coop-eotw-v1038c/host.mp4](<../../../../work/natural-moveset/swim-coop-eotw-v1038c/host.mp4>)
@@ -1397,7 +1456,7 @@ Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both
   ],
   "deliverable_kind": "animation",
   "notes": "Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both roles). Water exits (1052-1057): steps hand over swimming->running (remote body rises and runs up the steps, 1052); ledge exits use the native high mantle (state8, mantle_idle/sneak, 833 ms) presented as traversal variant4/5 - candidate1056 raised the mantle rise bound to 4 m (swim-depth exits rise ~3.1 m, which retired the action stream on 1042) and adds a protocol73 hold so unclassified states no longer kill the stream. Both roles verified with observer videos (1057). Native arkPlayerStateSwimMantle not yet observed; wading/exit polish deferred.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-swim-v1035/host-swim.mp4",
@@ -1437,12 +1496,36 @@ Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both
     "swim-exit-deep-emily-v1057/exit-host.mp4"
   ],
   "evidence": [
-    "../movement-integration/water-exit-audit-v1058.json"
-  ]
+    "../movement-integration/water-exit-audit-v1058.json",
+    "mission-coverage-v1328h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1344-traversal-2.json",
+    "decision": "complete",
+    "scope": "Swimming to the dock and climbing out in both roles: the partner swims, then presents the native ledge exit (traversal variants 1, 4) and stands on land; dives and surfacing are presented within swimming (sink and rise).",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328h",
+        "cases": [
+          "host-waterexit",
+          "client-waterexit"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328h/host-waterexit-observer.mp4",
+        "verdict": "Corvo swims up to the dock edge, pulls himself up onto it in one movement, stands and steps forward."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/water-exit-audit-v1058.json](<../../../../work/movement-integration/water-exit-audit-v1058.json>)
+- [evidence: mission-coverage-v1328h/result.json](<../../../../work/natural-moveset/mission-coverage-v1328h/result.json>)
 - [in_game_recordings: native-swim-v1035/host-swim.mp4](<../../../../work/natural-moveset/native-swim-v1035/host-swim.mp4>)
 - [in_game_recordings: swim-coop-eotw-v1038c/client.mp4](<../../../../work/natural-moveset/swim-coop-eotw-v1038c/client.mp4>)
 - [in_game_recordings: swim-coop-eotw-v1038c/host.mp4](<../../../../work/natural-moveset/swim-coop-eotw-v1038c/host.mp4>)

@@ -1,0 +1,193 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-guardfight: No spot beside, behind or in front of the guard at its level | client-guardfight: No hit reaction presented",
+  "cases": [
+    {
+      "source": "host",
+      "case": "hardfall",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "12.05 m fall onto the dock: native hard landing (14 polls) presented as variant 6 (17 samples), then travelling on"
+      ],
+      "fallMetres": 12.05,
+      "nativeHardLanding": 14,
+      "nativeStates": [
+        0,
+        3,
+        4
+      ],
+      "hardLandingSamples": 17,
+      "walkOn": 20
+    },
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "No spot beside, behind or in front of the guard at its level",
+      "checks": [],
+      "guardFacing": [
+        -0.9224493378356012,
+        -0.3861181414109688
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            0.3861181414109688,
+            -0.9224493378356012
+          ],
+          "rest": [
+            -35.608,
+            114.66,
+            16.2241
+          ],
+          "readable": false,
+          "ok": false
+        },
+        {
+          "offset": [
+            -0.3861181414109688,
+            0.9224493378356012
+          ],
+          "rest": [
+            -37.539,
+            119.272,
+            16.2506
+          ],
+          "readable": false,
+          "ok": false
+        },
+        {
+          "offset": [
+            0.9224493378356012,
+            0.3861181414109688
+          ],
+          "rest": [
+            -34.267,
+            117.931,
+            16.2506
+          ],
+          "readable": false,
+          "ok": false
+        },
+        {
+          "offset": [
+            -0.9224493378356012,
+            -0.3861181414109688
+          ],
+          "rest": [
+            -38.88,
+            116.001,
+            16.2506
+          ],
+          "readable": false,
+          "ok": false
+        }
+      ]
+    },
+    {
+      "source": "client",
+      "case": "hardfall",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "11.99 m fall onto the dock: native hard landing (10 polls) presented as variant 6 (11 samples), then travelling on"
+      ],
+      "fallMetres": 11.99,
+      "nativeHardLanding": 10,
+      "nativeStates": [
+        0,
+        3,
+        4
+      ],
+      "hardLandingSamples": 11,
+      "walkOn": 21
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No hit reaction presented",
+      "checks": [],
+      "guardFacing": [
+        -0.17093294183341004,
+        0.9852826647192043
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.9852826647192043,
+            -0.17093294183341004
+          ],
+          "rest": [
+            1.90434,
+            58.8157,
+            14.6574
+          ],
+          "readable": true,
+          "ok": false
+        },
+        {
+          "offset": [
+            0.9852826647192043,
+            0.17093294183341004
+          ],
+          "rest": [
+            6.90673,
+            59.7017,
+            16.5781
+          ],
+          "readable": true,
+          "ok": false
+        },
+        {
+          "offset": [
+            0.17093294183341004,
+            -0.9852826647192043
+          ],
+          "rest": [
+            4.93268,
+            56.7726,
+            16.6074
+          ],
+          "readable": true,
+          "ok": false
+        },
+        {
+          "offset": [
+            -0.17093294183341004,
+            0.9852826647192043
+          ],
+          "rest": [
+            4.01005,
+            61.6544,
+            15.9659
+          ],
+          "readable": true,
+          "ok": true
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 670,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 5,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 25,
+      "attackVariants": [
+        1,
+        2
+      ],
+      "minSourceHealth": 55.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

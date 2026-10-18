@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "swim",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (184 samples): strokes 93 (lateral 37), sink 12, rise 14"
+      ],
+      "sourceSwimming": true,
+      "swimming": 184,
+      "lateral": 37,
+      "moving": 93,
+      "sinking": 12,
+      "rising": 14
+    },
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (99 samples, 9 phases), ascending 14, descending 35"
+      ],
+      "climbing": 99,
+      "ascending": 14,
+      "descending": 35,
+      "phases": 9
+    },
+    {
+      "source": "host",
+      "case": "climbtop",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 114 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        0
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7296,
+        73.3611,
+        8.56114
+      ],
+      "climbing": 114,
+      "lastClimbMs": 11429,
+      "topTraversal": []
+    },
+    {
+      "source": "client",
+      "case": "swim",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (182 samples): strokes 82 (lateral 39), sink 18, rise 32"
+      ],
+      "sourceSwimming": true,
+      "swimming": 182,
+      "lateral": 39,
+      "moving": 82,
+      "sinking": 18,
+      "rising": 32
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (85 samples, 9 phases), ascending 30, descending 37"
+      ],
+      "climbing": 85,
+      "ascending": 30,
+      "descending": 37,
+      "phases": 9
+    },
+    {
+      "source": "client",
+      "case": "climbtop",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 111 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        6
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7298,
+        73.3612,
+        8.56114
+      ],
+      "climbing": 111,
+      "lastClimbMs": 11213,
+      "topTraversal": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

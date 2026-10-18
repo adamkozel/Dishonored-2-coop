@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T08:16:51.495945+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T09:11:20.630088+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 59 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 63 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -404,18 +404,18 @@ Captured 2026-10-18T08:16:51.495945+02:00; source [review-catalog.json](<../../.
 | rising_airborne | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | fall_loop | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles_long_fall | complete |
 | soft_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
-| hard_landing | traversal | candidates | native_light_landing_standing_and_crouched_verified_dunwall | accepted_functional_both_roles_long_fall_landing | work_remaining |
+| hard_landing | traversal | candidates | native_light_landing_standing_and_crouched_verified_dunwall | accepted_functional_both_roles_long_fall_landing | complete |
 | moving_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | vault_low_obstacle | traversal | candidates | partial_isolated_Dunwall_native_vault | accepted_sweep_1260_functional_both_roles | complete |
 | climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | accepted_sweep_1260_functional_both_roles | complete |
 | ledge_hang_and_pull_up | traversal | candidates | partial_isolated_Dunwall_low_mantle | accepted_sweep_1260_functional_both_roles | complete |
-| window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted | work_remaining |
+| window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted | complete |
 | slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
 | slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
 | ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | work_remaining |
-| swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
-| dive_surface_water_exit | traversal | candidates | partial_native_steam_water_exit_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
+| swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
+| dive_surface_water_exit | traversal | candidates | partial_native_steam_water_exit_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
 | sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | sword_ready_idle | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | light_attack_variants | combat | candidates | partial_native_steam_target_bearing_standing_slash | accepted_sweep_1260_functional_both_roles | complete |

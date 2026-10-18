@@ -176,7 +176,11 @@ try{
      # 1333a: indoors the 12 m drop met an upper floor; here the source drops 12 m onto the open spawn dock, health held. The native
      # hard landing is CatFall, player state 4 (the playback's shadow action 11 is a different numbering; native 11 is WallCrouch).
      $yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;C $source 'coop_player_health_hold on'
-     C $peer (P ($sp.x+5*$px) ($sp.y+5*$py) ($sp.z+1.7) ([Math]::Atan2(-$py,-$px)*180/[Math]::PI));Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null
+     # 1328n: the observer body placed 5 m to the side landed in the water and filmed its own hands; hold the free camera on
+     # the dock 6 m ahead of the landing spot, 2.5 m up, facing back at it (Set-ObserverPitch: positive looks down).
+     $hcx=$sp.x+6*$fx;$hcy=$sp.y+6*$fy;$hcz=$sp.z+2.5;$hyaw=[Math]::Atan2($sp.y-$hcy,$sp.x-$hcx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 8 -Quick|Out-Null
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hcx.ToString('F3',$inv),$hcy.ToString('F3',$inv),$hcz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      $caps=Capture $key 11;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$dropped=$false;$walked=$false;$states=[Collections.Generic.List[object]]::new();$midnight=$null
      while($watch.ElapsedMilliseconds-lt9000){$t=$watch.ElapsedMilliseconds
       # 1328d: the source reached CatFall but the partner never presented it; the landing reader accepts only the light
@@ -195,7 +199,7 @@ try{
      $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
     if($case-eq'climbtop'){
      $lz=$ChainZ-2.22
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0 12);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null;Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -210,8 +214,9 @@ try{
     if($case-eq'climb'){
      $lz=$ChainZ-2.22
      # 1328d: from 4.5 m the upper climb left the frame (Emily); 7.5 m back, raised and tilted up keeps the chain in view.
-     # setviewpos pitch: negative looks down (1328h's -12 filmed the ground); look up 10 degrees at the chain.
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0 10);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     # 1328h/o: the setviewpos pitch argument did not tilt the view (both -12 and +10 filmed the ground); set the pitch with
+     # Set-ObserverPitch (positive looks down) before the hold, -8 to look slightly up at the chain.
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -8 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -233,8 +238,11 @@ try{
      foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
       # 1328h: the first read after the teleport failed outright; retry for up to 3 s and record an unreadable spot as failed.
       C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=$null;$ms=$null
-      for($r=0;$r-lt6-and!$ms;$r++){try{$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'}catch{$ms=$null;Start-Sleep -Milliseconds 500}}
-      $ok=[bool]$ms-and$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;readable=[bool]$ms;ok=$ok}
+      # 1328n: near Corvo's guard the --player-states read fails at every spot while --player works and rests at the guard's
+      # level; accept the position read alone (default mode is only required when the states read succeeds).
+      for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
+      $ms=try{Q $source '--player-states'}catch{$null}
+      $ok=[bool]$me-and(!$ms-or$ms.defaultMode)-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;statesReadable=[bool]$ms;ok=$ok}
       if($ok){$placed=@($tx,$ty,$tyaw);break}}
      if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
      $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2
