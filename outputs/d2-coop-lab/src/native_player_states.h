@@ -108,15 +108,19 @@ inline bool nativePlayerGroundCarryStates(const NativePlayerStates& s,std::uintp
 }
 // Exact native Stun14 and optional fast sword-holster overlay, observed on
 // both roles in grenade-stun-scenes-*-v60. No health or raw-input inference.
+// 1214de (#11 hit reactions): a stun taken in a guard fight with a power selected also carries the left hand's own
+// EquipChange (state 64, the same vtable; 1214cu admitted it beside blocks and swings). Failing closed on it refused
+// every such stun (1371f [14,64,53], 1328zzh/zzc/zzf), so the partner dropped out instead of staggering.
 inline bool nativePlayerStunStates(const NativePlayerStates& s,std::uintptr_t base){
-    if(s.player.logic!=1||!s.defaultMode||s.player.current!=0||s.active.empty()||s.active.size()>2)return false;
-    unsigned stun=0,equipment=0;
+    if(s.player.logic!=1||!s.defaultMode||s.player.current!=0||s.active.empty()||s.active.size()>3)return false;
+    unsigned stun=0,equipment=0,leftEquip=0;
     for(const auto& a:s.active){
         if(a.id==14&&a.vtable==base+0x1c86768)++stun;
         else if(a.id==53&&a.vtable==base+0x1c79cf8)++equipment;
+        else if(a.id==64&&a.vtable==base+0x1c79cf8)++leftEquip;
         else return false;
     }
-    return stun==1&&equipment<=1;
+    return stun==1&&equipment<=1&&leftEquip<=1;
 }
 inline bool nativePlayerGroundGrenadeStates(const NativePlayerStates& s,std::uintptr_t base){
     // v54/v56h standing and v60/v62 crouched native action observations.

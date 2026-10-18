@@ -93,6 +93,12 @@ void chokePresentationTests(){
           !nativeChokeVariant("midnight/gameplay/player/base/choke/choke_cancel.midnightscene","Npc",400)&&
           !nativeChokeVariant("midnight/gameplay/player/base/choke/choke_combat_lose.midnightscene","Npc",400),"native combat lose distinguished from cancel");
     check(ChokePresentation::valid({0,1,4,750,1500,31,41})&&!ChokePresentation::valid({0,1,4,1501,1500,31,41}),"breakout owns exactly1500ms");
+    // 1214de: a stun keeps the sword holster (53) and the left hand's EquipChange (64) as overlays, one of each.
+    {auto st=native;st.player.current=0;st.active.resize(3);st.active[0].id=14;st.active[0].vtable=base+0x1c86768;
+     st.active[1].id=64;st.active[1].vtable=base+0x1c79cf8;st.active[2].id=53;st.active[2].vtable=base+0x1c79cf8;
+     check(nativePlayerStunStates(st,base)&&nativePlayerMotion(st,base,motion)&&motion==0,"stun with the left-hand EquipChange (1371f) admitted");
+     st.active[2].id=64;check(!nativePlayerStunStates(st,base),"two left-hand EquipChanges refused");
+     st.active[2].id=39;st.active[2].vtable=base+0x1c85d28;check(!nativePlayerStunStates(st,base),"stun with a swing refused");}
     native.active.resize(1);native.active[0].id=13;native.active[0].vtable=base+0x1c83468;native.player.current=0;
     check(nativePlayerGroundAssassinationStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0,"native assassination carries independent standing root");
     check(!nativePlayerGroundChokeStates(native,base)&&!nativePresentationFallbackGround(native,base),"lethal identity does not admit choke or generic fallback");
@@ -432,6 +438,9 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_right_b_hit.midnightscene")==22&&
             nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_left_b_hit.midnightscene")==23&&
             CombatPresentation::clip(22,1)==CombatPresentation::clip(2,1)&&CombatPresentation::clip(23,1)==CombatPresentation::clip(4,1),"b-swing hit scenes (1258b) present their slash-b clips");
+      check(nativeCombatTargetScene(3,"Scene_1",1000)&&nativeCombatTargetScene(3,"Scene_2",1000)&&nativeCombatTargetScene(4,"Corvo",1000)&&
+            nativeCombatTargetScene(4,"emily",1000)&&!nativeCombatTargetScene(3,"Scene_1",999)&&!nativeCombatTargetScene(4,"Scene_1",1000)&&
+            !nativeCombatTargetScene(3,"Scene_1",1000,1),"1214de: left slashes bind the struck guard (1371a/b)");
       check(nativeCombatVariant("midnight/gameplay/player/base/combat/blink_attack_focus.midnightscene")==17&&CombatPresentation::clip(17,1)==353,"Blink Assault kick (1214ct) presents the native kick clip");
       {CombatPresentation t;check(t.push({10,1,22,1,100,733})&&!t.push({20,2,23,1,100,700})&&!t.push({30,3,24,1,100,733}),"b-swing hits own exactly 733 ms; no variant past 23");}
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");

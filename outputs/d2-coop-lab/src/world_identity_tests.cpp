@@ -1495,7 +1495,7 @@ void playerStanceTests() {
             invalid=hit;invalid.d(spawner+0x38,2);invalid.d(spawned+4,npcHandle+1);require(!combat(invalid),"ambiguous target spawner refused");
             invalid=hit;invalid.q(npc,base+0x1c5e428);require(!combat(invalid),"another player cannot become target NPC");
             invalid=hit;invalid.d(component+0x50,1);require(!combat(invalid),"unobserved crouched target scene refused");
-            invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_slash_left.midnightscene");require(!combat(invalid),"unobserved target-bearing asset refused");
+            invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_attack_focus_out.midnightscene");require(!combat(invalid),"unobserved target-bearing asset refused");invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_slash_left.midnightscene");require(combat(invalid),"1214de: the left slash binding its guard (1371a/b) admitted");
             invalid=hit;invalid.str(names+0x400,"Unknown");require(!combat(invalid),"unobserved target subscene refused");
             invalid=hit;invalid.d(scene+0x28,999);require(!combat(invalid),"unobserved target duration refused");
             invalid=hit;invalid.d(instance+0x18,4);require(!combat(invalid),"four-actor scene cannot enter sword hit path");

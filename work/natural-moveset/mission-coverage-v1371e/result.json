@@ -1,0 +1,74 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-guardfight: No block impact or timed parry presented (hits 0, attacks 35)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 35)",
+      "checks": [],
+      "guardFacing": [
+        -0.17090702777085612,
+        0.9852871601003089
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.17090702777085612,
+            0.9852871601003089
+          ],
+          "rest": [
+            4.01175,
+            61.6648,
+            15.966
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3530
+        },
+        {
+          "guardSamples": 0,
+          "phase": "open",
+          "ms": 25617
+        },
+        {
+          "hitSamples": 0,
+          "phase": "attack",
+          "ms": 42123
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 2652,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "combatSceneWindows": 3,
+      "attackSamples": 35,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        23,
+        28
+      ],
+      "minSourceHealth": 55.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
