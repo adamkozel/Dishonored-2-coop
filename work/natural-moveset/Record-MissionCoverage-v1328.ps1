@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -81,7 +81,9 @@ try{
      # Lab-only exploration, no presentation checks: drop the source (health held) on a 4 m grid around the chain street and
      # record where it comes to rest, to find a smooth ramp for the slope case (slopes_and_stairs; the stairs are stepped).
      C $source 'coop_player_health_hold on';$grid=[Collections.Generic.List[object]]::new()
-     foreach($gx in @(0..9|ForEach-Object {-58+4*$_})){foreach($gy in @(0..10|ForEach-Object {60+4*$_})){
+     # -ScanGrid x0,dx,nx,y0,dy,ny (1328g/i: the default grid around the chain is bay water; the spawn dock is near y 192).
+     $sg=@("$ScanGrid"-split','|ForEach-Object {[double]$_});if($sg.Count-ne6){throw 'ScanGrid needs x0,dx,nx,y0,dy,ny'}
+     foreach($gx in @(0..([int]$sg[2]-1)|ForEach-Object {$sg[0]+$sg[1]*$_})){foreach($gy in @(0..([int]$sg[5]-1)|ForEach-Object {$sg[3]+$sg[4]*$_})){
       C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
       $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})
       # mission-slopescan-v1328g: a point in the canal left the source swimming, and every later teleport kept it on the
