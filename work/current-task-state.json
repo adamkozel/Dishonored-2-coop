@@ -22173,16 +22173,18 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214cm",
-    "NextCandidate": "candidate-npc-combat-v1214cn (built: damaging landing scene cat_fall_strong 1066 ms accepted)",
-    "Complete": "41 of 105",
+    "Candidate": "candidate-npc-combat-v1214cn (deployed); 1214cp built, deploys after the running chain",
+    "NextCandidate": "candidate-npc-combat-v1214cp: 1214co damaging-landing arm bindings + product-mode Doppelganger clone and Mesmerize spirit (#104); 1214co archived without deployment",
+    "Complete": "51 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
       "1214ci": "traversal settling allowance: the body clock survives a vault exit",
       "1214cj": "grounded vertical bound max(0.15, 6*dt): ledge steps in long frames keep the body clock",
       "1214cl": "re-anchor on a fresh code-3 vertical refusal: jump-attack landings keep the body",
-      "1214cn": "the damaging landing scene (cat_fall_strong, 1066 ms) is presented as the hard landing (variant 6)"
+      "1214cn": "the damaging landing scene (cat_fall_strong, 1066 ms) is presented as the hard landing (variant 6)",
+      "1214co": "the damaging landing scene binds the body and both native arms; validated with the arm identity reader",
+      "1214cp": "Doppelganger clone and networked Mesmerize spirit run in an armed product session (productSessionArmed), not only in the lab fixture (#104)"
     },
     "LabGrants": {
       "1214ck": "coop_grant_item pistol|crossbow|stunmine|springrazor|heart",
@@ -22209,16 +22211,24 @@
       "coverage-v1324g",
       "coverage-v1333b",
       "coverage-v1330a",
-      "coverage-v1330b"
+      "coverage-v1330b",
+      "coverage-v1332c",
+      "coverage-v1332d",
+      "coverage-v1330e (15/16)"
     ],
     "Audits": {
       "completion-audit-v1323-locomotion": "applied: 10",
       "completion-audit-v1325-stance": "applied: 10",
       "completion-audit-v1331-traversal": "applied: 12",
       "completion-audit-v1335-combat": "applied: 8",
-      "completion-audit-v1336-double-jump": "applied: 1"
+      "completion-audit-v1336-double-jump": "applied: 1",
+      "completion-audit-v1337-powers": "applied: 4 (Dark Vision both, Windblast, Swarm)",
+      "completion-audit-v1338-ranged-items": "applied: 6 (pistol, crossbow, grenade, mine/razor, Heart, health elixir)"
     },
-    "Running": "coverage-v1332c (powers), coverage-v1330d (items, close camera, mana elixir at once after dark vision); then deploy 1214cn and a mission take for the hard landing, guard fight (approach, no slash), water-exit lane y 193.25, lower swim camera and reframed chain climb",
-    "Remaining": "hard landing, window crossing, slope, swim and water exit, chain/ladder, opponent-dependent combat (parry, counter, hit reactions, stagger, kick, deaths, ragdoll), ranged/items and powers audits, paired actions, interactions; then a final regression on the release candidate"
+    "Running": "takedown-variants-v1254d (1214cn); then interaction re-takes; then deploy 1214cp and mission 1328h, powers 1332e (wide camera), window 1235h, slope scan 1328i, switch cases 1328j, mana elixir 1330f",
+    "Remaining": "hard landing, window crossing, slope, swim and water exit, chain/ladder, opponent-dependent combat (parry, counter, hit reactions, stagger, kick, deaths, ragdoll), ranged/items and powers audits, paired actions, interactions; then a final regression on the release candidate",
+    "Issues": {
+      "104": "Doppelganger clone and Mesmerize spirit in product mode (In Progress, 1214cp)"
+    }
   }
 }
