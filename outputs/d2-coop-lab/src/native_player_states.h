@@ -231,6 +231,19 @@ inline bool nativePlayerSlideTakedownStates(const NativePlayerStates& s,std::uin
     return s.player.logic==1&&s.defaultMode&&s.player.current==5&&s.active.size()==1&&
         ((s.active[0].id==13&&s.active[0].vtable==base+0x1c83468)||(s.active[0].id==41&&s.active[0].vtable==base+0x1c77c18));
 }
+// 1214db (#11 Shadow Walk attack; probe 1350b and take 1254y, confirmed runtime): inside Shadow Walk the player runs the
+// form's own state mode (defaultMode false; id 0 is arkPlayerStateShadowWalk, RVA 1c7ed28) at physical stance 2, and the
+// form's attack is the exclusive Assassination13 (the same vtable) in that mode, playing assassination_sw_* (ids 37-44).
+inline bool nativePlayerShadowWalkAssassinationStates(const NativePlayerStates& s,std::uintptr_t base){
+    return s.player.logic==1&&!s.defaultMode&&s.player.current==2&&s.active.size()==1&&
+        s.active[0].id==13&&s.active[0].vtable==base+0x1c83468;
+}
+// 1214db: the form's choke (choke_sw_*, ids 77-84) holds the exclusive Choke41 at physical stance 2 for its whole length
+// (take 1254y, confirmed runtime). Its state mode is not yet observed (hypothesis: the form's own mode, as the attack), so
+// either mode is admitted for those ids only.
+inline bool nativePlayerShadowWalkChokeStates(const NativePlayerStates& s,std::uintptr_t base){
+    return s.player.logic==1&&s.player.current==2&&s.active.size()==1&&s.active[0].id==41&&s.active[0].vtable==base+0x1c77c18;
+}
 // Take 1258b (state table 1259: RVA 1c405e8, arkPlayerStateVersus): a sword lock runs
 // the exclusive Versus31 state on the ground.
 inline bool nativePlayerVersusStates(const NativePlayerStates& s,std::uintptr_t base){
@@ -284,7 +297,8 @@ inline bool nativePlayerGroundLootStates(const NativePlayerStates& s,std::uintpt
 inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,std::uint32_t& motion) {
     if(nativePlayerGroundLootStates(s,base)||nativePlayerGroundHoldObjectStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerAutoCrouchStates(s,base)){motion=1;return true;}
-    if(nativePlayerGroundPairedStates(s,base)||nativePlayerSlideTakedownStates(s,base)||nativePlayerVersusStates(s,base)){motion=0;return true;}
+    if(nativePlayerGroundPairedStates(s,base)||nativePlayerSlideTakedownStates(s,base)||nativePlayerVersusStates(s,base)||
+       nativePlayerShadowWalkAssassinationStates(s,base)||nativePlayerShadowWalkChokeStates(s,base)){motion=0;return true;}
     if(nativePlayerGroundTrapStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundHeartStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundDrawRequestStates(s,base)){motion=s.player.current;return true;}

@@ -174,6 +174,8 @@ These are confirmed runtime. The probes are kept as evidence.
 
 **1214da: Shadow Walk's attack.** Probe 1350b (confirmed runtime) shows the attack from the shadow form as a paired `assassination_sw_back_short` (subscene npc, 2666 ms) under player state 13 with the sword holstered throughout, then `power_shadow_walk_attack_out` (subscene Emily, 1166 ms, phase 5), ending crouched. The shadow-form assassinations (takedown ids 37–44) are now hands-free on the partner, and the attack exit is power variant 36, presented with the existing exit body (clip 334). Take 1254y (swback: Shadow Walk entered 2.4 m behind the paused guard, crawl, attack or choke) checks it.
 
+**1214db: the form's own state mode.** In 1254y (1214da) Emily's shadow-form attack (`assassination_sw_back`, id 37) and choke (`choke_sw_back`, id 77) both ran natively, but the source refused every packet during them (source failure stage 2, 152 times): the partner vanished in the host window for the whole kill and the guard stayed alive there. Inside Shadow Walk the player runs the form's own state mode (`defaultMode` false; id 0 is `arkPlayerStateShadowWalk`, RVA 0x1c7ed28) at physical stance 2 (probe 1350b, confirmed runtime), and the attack is the exclusive Assassination 13 there; the choke holds Choke 41 at stance 2 (1254y). The ground guards require the default mode and stance 0/1 (attack) or 0/12 (choke), so neither was read. 1214db admits exactly those states for the shadow-form ids only (37–44 attack, 77–84 choke; the choke's mode is not yet observed, so either mode is admitted for it), with motion 0. Take 1254z re-runs both and records the mode.
+
 ## Lab-only grants
 
 The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two lab commands put them in through the game's own inventory routines. They are lab only and refused outside the lab.
@@ -209,6 +211,7 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | use-variants-dunwall-v1228x-za | Ring lock in both roles passes functionally; the free camera stood in a wall (x/y) and test-dropped spots found no floor at the source's level (z/za, one fell 14 m) |
 | coverage-v1359c, d | Bend Time: 1359c lost the free camera; 1359d presents both presses (cast and end) and recovers (audit 1370) |
 | takedown-variants-v1254w | Emily's front lethal approached standing (-FrontStand) at 1.0 m: assassination_front (id 26) presented, guard dead in both worlds (audit 1369) |
+| takedown-variants-v1254y | Shadow Walk swback on 1214da: the native attack (id 37) and choke (id 77) ran, but the source refused them (form mode, stance 2): no partner in the host window, guard alive there (fixed in 1214db) |
 | cutscene-transition-v1236c | Mayhew cinematic (1214cz): no partner sample in either window during the 30 s scene; both partners back 1.875 s after it (audit 1359) |
 | takedown-variants-v1254u | Emily's drop kill with the corpse release filmed from the host (1254t harness): the body slumps into a sprawl, 0.37 m from the joiner body (audit 1368) |
 | mission-coverage-v1328zzn, zzo | Guard fights on 1214cz: stuns presented (variant 2) and the guard's death shared; Corvo recoiled (state 40) 3 times in zzo but no stagger (28/29) reached the partner, so the recoil reader still rejects the guard-fight recoil scene |

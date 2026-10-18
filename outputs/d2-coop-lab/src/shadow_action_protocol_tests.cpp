@@ -101,6 +101,16 @@ void chokePresentationTests(){
     native.player.current=5;check(!nativePlayerGroundAssassinationStates(native,base)&&nativePlayerSlideTakedownStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0&&
           nativeTakedownStates(33,native,base)&&!nativeTakedownStates(5,native,base),"slide lethal (1254a) keeps sliding stance 5 in Assassination13; only census slide-capable ids admit it");
     native.player.current=0;check(nativeTakedownStates(110,native,base)&&!nativeTakedownStates(92,native,base),"four-binding finishers (1256a) run in Assassination13, generic ones do not");
+    // 1214db: Shadow Walk's own mode (defaultMode false, stance 2) admits only the shadow-form assassinations.
+    {auto sw=native;sw.defaultMode=false;sw.player.current=2;
+     check(nativePlayerShadowWalkAssassinationStates(sw,base)&&!nativePlayerGroundAssassinationStates(sw,base)&&nativePlayerMotion(sw,base,motion)&&motion==0,"shadow-form assassination (1254y) in Shadow Walk's mode");
+     check(nativeTakedownStates(37,sw,base)&&nativeTakedownStates(44,sw,base)&&!nativeTakedownStates(6,sw,base)&&!nativeTakedownStates(36,sw,base),"only assassination_sw ids run in the form");
+     auto ground=sw;ground.defaultMode=true;ground.player.current=0;check(!nativeTakedownStates(37,ground,base)&&nativeTakedownStates(6,ground,base),"sw ids refused outside the form");
+     sw.player.current=0;check(!nativePlayerShadowWalkAssassinationStates(sw,base),"unobserved form stance refused");
+     auto swChoke=native;swChoke.player.current=2;swChoke.active[0].id=41;swChoke.active[0].vtable=base+0x1c77c18;
+     check(nativePlayerShadowWalkChokeStates(swChoke,base)&&nativeTakedownStates(77,swChoke,base)&&nativeTakedownStates(84,swChoke,base)&&
+           !nativeTakedownStates(1,swChoke,base)&&nativePlayerMotion(swChoke,base,motion)&&motion==0,"shadow-form choke (1254y) holds Choke41 at stance 2, sw choke ids only");
+     swChoke.player.current=0;check(!nativeTakedownStates(77,swChoke,base)&&!nativePlayerShadowWalkChokeStates(swChoke,base),"sw choke ids refused at ground stance");}
     native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");

@@ -28,6 +28,10 @@ inline bool nativeFatalityStates(const NativePlayerStates& s,std::uintptr_t base
     unsigned action=0;return s.player.logic==1&&nativePlayerSwordAction(s,base,action)&&action==1;
 }
 inline bool nativeTakedownStates(unsigned variant,const NativePlayerStates& states,std::uintptr_t base){
+    // 1214db: the shadow-form assassinations run only in Shadow Walk's mode, and nothing else runs there.
+    if(variant>=37&&variant<=44)return nativePlayerShadowWalkAssassinationStates(states,base);
+    if(variant>=77&&variant<=84)return nativePlayerShadowWalkChokeStates(states,base);
+    if(nativePlayerShadowWalkAssassinationStates(states,base)||nativePlayerShadowWalkChokeStates(states,base))return false;
     if(nativeTakedownKind(variant)==6)return nativePlayerVersusStates(states,base);
     if(nativeTakedownFatality(variant))return nativeTakedownArms(variant)==1?nativeFatalityStates(states,base):nativePlayerGroundAssassinationStates(states,base);
     if(variant>6)return nativePlayerGroundPairedStates(states,base)||nativePlayerSlideTakedownStates(states,base);
@@ -35,7 +39,8 @@ inline bool nativeTakedownStates(unsigned variant,const NativePlayerStates& stat
 }
 template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerChokeScene& out){
     if(!nativePlayerGroundPairedStates(states,base)&&!nativePlayerSlideTakedownStates(states,base)&&!nativeFatalityStates(states,base)&&
-       !nativePlayerVersusStates(states,base))return false;
+       !nativePlayerVersusStates(states,base)&&!nativePlayerShadowWalkAssassinationStates(states,base)&&
+       !nativePlayerShadowWalkChokeStates(states,base))return false;
     NativePlayerChokeScene s{};const auto game=states.player.game,manager=game+0x1f5338;
     std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
     std::uintptr_t declaration=0,scene=0,bindings=0;unsigned bindingFlags=0;
