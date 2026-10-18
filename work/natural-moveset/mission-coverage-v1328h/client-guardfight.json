@@ -1,0 +1,82 @@
+{
+  "source": "client",
+  "case": "guardfight",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Block impacts 5, timed parries 6, hit reactions 3 (variants 2), attacks 14 (variants 1,2); guard dead in both worlds"
+  ],
+  "guardFacing": [
+    -0.1695100780692405,
+    0.9855284538931182
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.9855284538931182,
+        -0.1695100780692405
+      ],
+      "rest": [
+        1.85059,
+        58.9129,
+        14.6416
+      ],
+      "ok": false
+    },
+    {
+      "offset": [
+        0.9855284538931182,
+        0.1695100780692405
+      ],
+      "rest": [
+        6.44298,
+        59.5701,
+        17.3091
+      ],
+      "ok": false
+    },
+    {
+      "offset": [
+        0.1695100780692405,
+        -0.9855284538931182
+      ],
+      "rest": [
+        4.86377,
+        56.9249,
+        16.5731
+      ],
+      "ok": false
+    },
+    {
+      "offset": [
+        -0.1695100780692405,
+        0.9855284538931182
+      ],
+      "rest": [
+        3.98536,
+        61.8326,
+        15.9666
+      ],
+      "ok": true
+    }
+  ],
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcomeWaitMs": 676,
+  "guard": "script_spawner_checkpoint_guard_01",
+  "blockImpacts": 5,
+  "timedParries": 6,
+  "hitReactions": 3,
+  "stunVariants": [
+    2
+  ],
+  "attackSamples": 14,
+  "attackVariants": [
+    1,
+    2
+  ],
+  "minSourceHealth": 55.0
+}

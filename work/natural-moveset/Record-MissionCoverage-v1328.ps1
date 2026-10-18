@@ -143,7 +143,9 @@ try{
      $st=Q $source '--player-states';Save "$out/$key-source-in-water.json" $st;$row.sourceSwimming=(!$st.defaultMode-and@($st.active|Where-Object {$_.id-eq0}).Count-gt0)
      C $peer (P $sp.x $sp.y ($sp.z+1.7) $vyaw);Start-Sleep -Milliseconds 900
      & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $SwimPitch -Quick|Out-Null
-     C $peer (P ($wx-4.5*$px+3.5*$fx) ($wy-4.5*$py+3.5*$fy) $CameraHeight $vyaw);Start-Sleep -Milliseconds 150;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     # 1328h: from 4.5 m up and beside the lane the swimmer stayed out of frame; follow from 4 m behind the swimmer along
+     # the lane, 2.6 m above the water, looking the way it swims (the source swims forward from its entry point).
+     C $peer (P ($wx-4.0*$fx) ($wy-4.0*$fy) 3.6 $yaw -15);Start-Sleep -Milliseconds 150;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) $vyaw);Start-Sleep -Milliseconds 900
      $caps=Capture $key 19
      $s=Run $key 17500 @(@(1500,'Neutral',2200,32000),@(4100,'B',1500,0),@(5900,'A',1500,0),@(7700,'Neutral',2000,-32000),@(10000,'Neutral',1800,0,-32000),@(12100,'Neutral',1800,0,32000),@(14200,'Neutral',100,0))
@@ -191,7 +193,7 @@ try{
      $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
     if($case-eq'climbtop'){
      $lz=$ChainZ-2.22
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0 -15);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0 12);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -206,7 +208,8 @@ try{
     if($case-eq'climb'){
      $lz=$ChainZ-2.22
      # 1328d: from 4.5 m the upper climb left the frame (Emily); 7.5 m back, raised and tilted up keeps the chain in view.
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0 -12);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     # setviewpos pitch: negative looks down (1328h's -12 filmed the ground); look up 10 degrees at the chain.
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0 10);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -233,9 +236,10 @@ try{
       if($ok){$placed=@($tx,$ty,$tyaw);break}}
      if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
      $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2
-     # Free camera behind the source (away from the guard) and to the side, raised; hold_at leaves the observer on the dock.
-     $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$sx+2.2*$dx-1.6*$dy;$cy=$sy+2.2*$dy+1.6*$dx;$cz=$gz+2.4;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null
+     # Free camera 4.5 m to the side of the fight line at its midpoint, raised 2 m (1328h: from behind the source the guard
+     # and the hit reaction left the frame); hold_at leaves the observer on the dock.
+     $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$mx-4.5*$dy;$cy=$my+4.5*$dx;$cz=$gz+2.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
