@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-18T20:30:00+02:00",
+  "UpdatedAt": "2026-10-18T23:10:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 87/105 complete (part 6 merged as fa5f66c54, #107); branch stage3/movement-completion-7, draft #109. Live 1214dc (action clock clamp); 1214dd built (shadow-form kill slot, ammo grant) with deploy, 1254za and the knockdown probes 1375a/b queued. Next: Emily left stun (1371e-g) and better-framed front stuns, then the hit_reactions audit; Shadow Walk kill (1254za) and the partner shadow-form appearance; knockdown presentation (state 16: collapse, ground recovery, rise) once 1375 confirms; Choke41-from-block in guard fights and the 500 ms action offset; counter-kill, Emily kick, Far Reach pulls, upgrades, no-mana; door, pickpocket, object carry, shop, struggle, body carry video, wall/window and body sizes.",
+  "NextAction": "Movement completion (#11, chapter 99): 88/105 complete (doors applied, audit 1378); branch stage3/movement-completion-7, draft #109. Live 1214dh (lab-only partner material effect survey; hold_at moves an active observer hold). Queued on 1214dh: effect survey 1381a, Emily counter-on-parry 1376h/i, following-camera carries 1277o/p, Emily no-mana probe 1382a, Far Reach body pull 1380b. Next: choose the Shadow Walk partner appearance from 1381a; admit Emily's power_outofmana from 1382a; read and present the Far Reach grab_corpse from 1380b; the hit_reactions audit (Emily left and a well-framed front stun); counter-kill, Emily ledge kick, knockdown (needs a clockwork soldier), upgrades, pickpocket (no focus on tutorial guard 2 from the side; try from behind crouched), object carry, shop, struggle, body carry video, wall/window and body sizes.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214cp (deployed)",
-    "NextCandidate": "candidate-npc-combat-v1214cq: damaging-landing arms bound left then right (confirmed runtime); deploy queued after the 1214cp takes",
-    "Complete": "55 of 105",
+    "Candidate": "candidate-npc-combat-v1214dh (deployed)",
+    "NextCandidate": "none built; next fixes come from the 1381a/1382a/1380b probes",
+    "Complete": "88 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",

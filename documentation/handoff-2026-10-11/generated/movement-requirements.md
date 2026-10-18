@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T17:49:57.263629+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T19:25:10.745598+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 87 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 88 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -468,7 +468,7 @@ Captured 2026-10-18T17:49:57.263629+02:00; source [review-catalog.json](<../../.
 | emily_shadow_walk_enter_move_attack_exit | powers | candidates | partial_native_standing_sneaking_entry_crawl_exit_through_Steam | accepted_sweep_1260_functional_owner | work_remaining |
 | power_upgrade_variants | powers | candidates | not_verified | not_accepted | work_remaining |
 | power_interruptions_and_no_mana | powers | candidates | partial_native_Corvo_Bend_Time_failure_and_same_world_pause | accepted_sweep_1260_functional_owner | work_remaining |
-| door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | accepted_functional_both_roles_crouched_rise | work_remaining |
+| door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | accepted_functional_both_roles_crouched_rise | complete |
 | lever_button_crank_wheel | interactions | candidates | native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | pickup_loot_steal | interactions | candidates | native_pickup_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | work_remaining |
 | key_use | interactions | candidates | native_use_state75_real_lock_both_roles | accepted_functional_both_roles | complete |

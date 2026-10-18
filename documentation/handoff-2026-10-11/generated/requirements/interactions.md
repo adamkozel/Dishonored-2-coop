@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:49:57.263629+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T19:25:10.745598+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -28,7 +28,7 @@ Audit 1283: the partner reaches the office door in both roles (use-variants-dunw
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1283: the partner reaches the office door in both roles (use-variants-dunwall-v1228s, 1214am); a crouched use rises into the standing reach (polish). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828–834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-door-api-corvo-v708/host-unlocked-door-tap.mp4",
@@ -160,7 +160,7 @@ Audit 1283: the partner reaches the office door in both roles (use-variants-dunw
     "native-unlocked-door-emily-v642/client-unlocked-door-tap.mp4",
     "native-unlocked-door-emily-v642/observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-unlocked-door-corvo-v641/result.json",
     "native-unlocked-door-emily-v642/result.json",
@@ -204,8 +204,62 @@ Audit 1283: the partner reaches the office door in both roles (use-variants-dunw
     "shared-window-family-v832b/result.json",
     "shared-window-recovery-v833b/result.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/coverage-audit-v1283.json"
-  ]
+    "../movement-integration/coverage-audit-v1283.json",
+    "use-variants-dunwall-v1228zf/result.json",
+    "use-variants-dunwall-v1228zg/result.json",
+    "use-variants-dunwall-v1228zj/result.json",
+    "use-variants-dunwall-v1228zk/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1378-doors.json",
+    "decision": "complete",
+    "scope": "Opening and closing an unlocked door and trying a locked one, in both roles: the partner reaches for the handle on the native use clock and settles back; the door leaf and its state are native and shared.",
+    "takes": [
+      {
+        "take": "use-variants-dunwall-v1228zf",
+        "cases": [
+          "host-ld_door_350cm_int_rich_wood_01"
+        ]
+      },
+      {
+        "take": "use-variants-dunwall-v1228zg",
+        "cases": [
+          "client-ld_door_350cm_int_rich_wood_01"
+        ]
+      },
+      {
+        "take": "use-variants-dunwall-v1228zj",
+        "cases": [
+          "host-ld_door_350cm_int_rich_wood_01_3"
+        ]
+      },
+      {
+        "take": "use-variants-dunwall-v1228zk",
+        "cases": [
+          "client-ld_door_350cm_int_rich_wood_01_3"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "use-variants-dunwall-v1228zf/use-host-ld_door_350cm_int_rich_wood_01-observed.mp4",
+        "verdict": "Locked door: Corvo reaches his right hand forward to the handle of the office door, which stays shut, and lowers it again."
+      },
+      {
+        "video": "use-variants-dunwall-v1228zg/use-client-ld_door_350cm_int_rich_wood_01-observed.mp4",
+        "verdict": "Locked door: Emily steps to the office door, reaches her right hand to the handle and returns to stand when it does not open."
+      },
+      {
+        "video": "use-variants-dunwall-v1228zj/use-host-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+        "verdict": "Unlocked door: the leaf swings open toward the camera and Corvo stands in the doorway, his right hand out at the door edge; he lowers it, and the leaf closes on the second tap."
+      },
+      {
+        "video": "use-variants-dunwall-v1228zk/use-client-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+        "verdict": "Unlocked door: the leaf swings open and Emily stands in the doorway with her right hand out at the door edge, lowers it and stands while the leaf closes on the second tap."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
@@ -252,6 +306,10 @@ Audit 1283: the partner reaches the office door in both roles (use-variants-dunw
 - [evidence: shared-window-recovery-v833b/result.json](<../../../../work/natural-moveset/shared-window-recovery-v833b/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
+- [evidence: use-variants-dunwall-v1228zf/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228zf/result.json>)
+- [evidence: use-variants-dunwall-v1228zg/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228zg/result.json>)
+- [evidence: use-variants-dunwall-v1228zj/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228zj/result.json>)
+- [evidence: use-variants-dunwall-v1228zk/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228zk/result.json>)
 - [in_game_recordings: native-door-api-corvo-v708/host-unlocked-door-tap.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v708/host-unlocked-door-tap.mp4>)
 - [in_game_recordings: native-door-api-corvo-v708/observer.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v708/observer.mp4>)
 - [in_game_recordings: native-door-api-corvo-v711/host-unlocked-door-tap.mp4](<../../../../work/natural-moveset/native-door-api-corvo-v711/host-unlocked-door-tap.mp4>)

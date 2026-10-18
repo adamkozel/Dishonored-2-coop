@@ -7,7 +7,7 @@ Updated 2026-10-18. This chapter covers how checklist items in [movement require
 - the lab-only grants that put items, powers and upgrades in the isolated save (1214ck, 1214cm);
 - the completion audits that record each item's decision in `review-catalog.json`.
 
-**Status: 79 of 105 items complete; 2 are not applicable or excluded, 24 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, and paired takedowns from every side, from above and sliding). Live candidate: 1214ct.
+**Status: 88 of 105 items complete; 2 are not applicable or excluded, 15 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, paired takedowns from every side, from above and sliding, lethal takedowns, ragdoll hand-off, scene hand-back and cutscenes, key use, Bend Time and doors). Live candidate: 1214dh.
 
 ## Coverage harnesses
 
@@ -230,6 +230,9 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | takedown-variants-v1254u | Emily's drop kill with the corpse release filmed from the host (1254t harness): the body slumps into a sprawl, 0.37 m from the joiner body (audit 1368) |
 | mission-coverage-v1328zzn, zzo | Guard fights on 1214cz: stuns presented (variant 2) and the guard's death shared; Corvo recoiled (state 40) 3 times in zzo but no stagger (28/29) reached the partner, so the recoil reader still rejects the guard-fight recoil scene |
 | use-variants-dunwall-v1228zb-ze | Ring lock filmed from behind the partner: over the left shoulder (zb/zc) the body hides the reaching arm; over the right shoulder (zd Corvo, ze Emily) the right hand reaches the lock plate and returns (audit 1366) |
+| use-variants-dunwall-v1228zf-zk | Doors: the locked office door over the right shoulder (zf Corvo, zg Emily: the reach and the native 'key needed'); the unlocked door opened and closed with two taps, where the over-shoulder spot is inside the wall (zh/zi), so the camera holds inside the office facing the doorway (zj Corvo, zk Emily on 1214dg; audit 1378) |
+| mission-coverage-v1376a-g | Guard fights with the native scene watcher: blocks, parries and attacks shared every time; Corvo's hit reactions 5 (1376b); Emily's recoil staggers 28/29 presented with the camera blocked (1376e); Emily's counter not produced (one parry in 1376d and 1376g); in 1376f the guard outlived the take in both worlds |
+| coverage-v1381a | Shadow Walk appearance survey on 1214dh: refused before any effect, since the lab's Send-D2Command.ps1 allow-list lacked `coop_partner_effect` (added; 1381b queued) |
 | coverage-v1363a-c | Self-grenade stuns (1363a/b: pitch 75 over the 70 limit). 1363c reported 4/4 passes that are not evidence: the view-levelling step blocked sampling across the blast and `@($null).Count` is 1, so a missing stun passed; Corvo is seen staggering at the blast. 1363e/f re-run with the stun window sampled |
 | coverage-v1363e, f | Corrected stun takes (stun window sampled, null variants fail): of the four turns only the 90-degree left turn stunned, in both roles: Corvo stun_right (variant 1), Emily stun_back (variant 4), each at full stun weight. The partner's locomotion weight is 0 by design while a stun is presented (as in every guard-fight stun), which the low-weight check wrongly failed; 1363g excludes presented stuns and names cases by blast side |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
@@ -279,13 +282,14 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1366-key-use | 1: key use (the ring lock filmed over the partner's right shoulder in both roles, 1228zd/ze on 1214cy) |
 | completion-audit-v1369-lethal | 1: lethal takedowns from the back, both sides and the front in both roles (1254h/i; Emily's standing front lethal 1254w on 1214cz) |
 | completion-audit-v1370-bend-time | 1: Corvo's Bend Time cast and end (1359d on 1214cz: variants 12 and 14 at full weight, recovered) |
+| completion-audit-v1378-doors | 1: doors (the locked office door refuses with the native message and the unlocked one opens and closes, both roles: 1228zf/zg, 1228zj/zk) |
 | completion-audit-v1368-ragdoll | 1: ragdoll hand-off (corpse release in frame after a drop kill by either player: 1254o Corvo, 1254u Emily; bodies end 0.02 and 0.37 m apart) |
 
-**Still open (16):**
+**Still open (15):**
 - combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced);
 - paired actions: wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
 - powers: Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
-- interactions: doors, pickup and loot (pickpocketing), object carry, shop and dialogue gestures.
+- interactions: pickup and loot (pickpocketing), object carry, shop and dialogue gestures.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 
