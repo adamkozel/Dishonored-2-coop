@@ -321,6 +321,12 @@ bool npcCombatExtract(NpcAuthorityChannel& c,void* info,NpcCombatDamage& damage,
             if(source&&source->lease.binding.npc.handle==inflictor&&npcCombatCorpseSource(b.arm,false,h,sourcePending)){sourceArm=b.arm;break;}}
         if(!sourceArm||sourceArm==c.arm)return false;
     }else if(attacker==1&&inflictor==1&&amount==10&&flags==0x80&&npcCombatDeclaration(decl,NpcCombatDamage::Kick))damage=NpcCombatDamage::Kick;
+    // 1214df (#11 Shadow Walk attack): the shadow-form kill (assassination_sw_*, sword holstered) deals the ordinary
+    // assassination damage with the player as attacker and no inflictor (0x3fff0010), everything else as a sword
+    // assassination (take 1254za: amount 0, flags 0x8c, reactions 0/0, absent-hit sentinels; confirmed runtime). Refused
+    // as hit_damage_parameters, the kill never reached the host and the guard lived there.
+    else if(attacker==1&&inflictor==0x3fff0010&&amount==0&&flags==0x8c&&npcCombatDeclaration(decl,NpcCombatDamage::Assassination))
+        damage=NpcCombatDamage::Assassination;
     else if(attacker!=1||!enemyPlayerSword(inflictor))return false;
     else if(amount==10&&flags==0x80)damage=NpcCombatDamage::Sword;
     else if(amount==1000&&flags==0x84)damage=NpcCombatDamage::Fatality;

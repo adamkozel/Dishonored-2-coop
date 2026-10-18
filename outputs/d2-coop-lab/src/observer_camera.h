@@ -126,7 +126,12 @@ char labGrantName[192]{};bool labGrantNamedRequest=false;std::uint64_t labNamedG
 std::uintptr_t labNamedEquipDecl=0;ULONGLONG labNamedEquipUntil=0;bool labNamedEquipSent=false;
 bool labGrantNameAllowed(const char* n){const auto len=std::strlen(n);if(len<20||len>=sizeof(labGrantName))return false;
     for(std::size_t i=0;i<len;++i){const char c=n[i];if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'||c=='/'||c=='.'))return false;}
-    if(std::strstr(n,".."))return false;const char* suffix=".inventoryitem";if(len<14||std::strcmp(n+len-14,suffix))return false;
+    if(std::strstr(n,".."))return false;
+    // 1214df (#11 knockdown, lab only): a player equipment upgrade (attributes/*.equipmentupgrade) too; explosive rounds
+    // fire only with gun_explosive_bullets unlocked (1375a/b: the pistol kept its regular rounds, no burst).
+    const bool item=len>=14&&!std::strcmp(n+len-14,".inventoryitem");
+    const bool upgrade=len>=18&&!std::strcmp(n+len-18,".equipmentupgrade")&&!std::strncmp(n,"components/characters/player/base/attributes/",45);
+    if(!item&&!upgrade)return false;
     // 1214dd (#11 knockdown, lab only): pistol ammunition too (components/equipment/ammo/bullet_explosive), whose
     // explosion carries PLAYER_HITREACT_KNOCKDOWN (bullet_explosive_damage, confirmed static); never equipped.
     return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45)||
