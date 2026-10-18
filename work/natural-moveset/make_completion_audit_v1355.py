@@ -1,0 +1,24 @@
+"""Writes completion-audit-v1355-slide.json (#11): sliding takedowns on 1214cs."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("The decision rests on the standing-guard takedown takes takedown-variants-v1254h and v1254k (candidate 1214cs) under the "
+     "product controller with natural guard AI and the NPC stream on: the source starts 4.5 m behind Dunwall tutorial guard 2 "
+     "while he stands at his patrol pause, sprints, slides and attacks; the source must play the native slide takedown, the "
+     "partner must present it, both worlds must agree on the outcome and the victim must end within 2 m; the checkpoint is "
+     "reloaded after every case. The nonlethal slide (choke_slide_back, census 73) was presented and shared in both roles in "
+     "audit 1257 and accepted functionally from both windows; in 1254h/k/m the slide-choke input never slid (the source "
+     "walked up and choked from behind, and the guard broke free), so those cases are kept as failed.")
+items = [
+ dict(id='sliding_takedown', decision='complete',
+      scope='The slide assassination (assassination_slide_back, 2000-2333 ms) in both source roles in two takes: presented on the partner, the guard dead in both worlds at the same place; the slide choke (census 73) from audit 1257.',
+      takes=[{'take': 'takedown-variants-v1254k', 'cases': ['client-slide-lethal', 'host-slide-lethal']},
+             {'take': 'takedown-variants-v1254h', 'cases': ['client-slide-lethal', 'host-slide-lethal']}],
+      visual=[{'video': 'takedown-variants-v1254h/slide-host-lethal-observer.mp4', 'verdict': 'Corvo slides in behind the guard and strikes as he rises; the guard falls and Corvo stands over the body.'},
+              {'video': 'takedown-variants-v1254k/slide-client-lethal-observer.mp4', 'verdict': 'Emily slides in low behind the guard and strikes; he pitches forward onto the floor and she straightens behind him.'}]),
+]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1355-slide', family='paired_actions', candidate='candidate-npc-combat-v1214cs', method=M, items=items)
+(N / 'completion-audit-v1355-slide.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))

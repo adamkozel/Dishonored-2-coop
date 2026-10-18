@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:13:53.382193+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:26:56.488990+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -498,7 +498,7 @@ Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presente
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presented and shared in both source roles; slide takedowns keep physical stance 5 inside the paired state (0.0-0.29 m). Visual accepted from both windows as functional. Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "takedown-variants-v1254b/slide-client-lethal-observer.mp4",
@@ -507,12 +507,49 @@ Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presente
     "takedown-variants-v1254b/slide-host-choke-observer.mp4"
   ],
   "evidence": [
-    "../movement-integration/takedown-variants-audit-v1257.json"
-  ]
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "takedown-variants-v1254k/result.json",
+    "takedown-variants-v1254h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1355-slide.json",
+    "decision": "complete",
+    "scope": "The slide assassination (assassination_slide_back, 2000-2333 ms) in both source roles in two takes: presented on the partner, the guard dead in both worlds at the same place; the slide choke (census 73) from audit 1257.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254k",
+        "cases": [
+          "client-slide-lethal",
+          "host-slide-lethal"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254h",
+        "cases": [
+          "client-slide-lethal",
+          "host-slide-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254h/slide-host-lethal-observer.mp4",
+        "verdict": "Corvo slides in behind the guard and strikes as he rises; the guard falls and Corvo stands over the body."
+      },
+      {
+        "video": "takedown-variants-v1254k/slide-client-lethal-observer.mp4",
+        "verdict": "Emily slides in low behind the guard and strikes; he pitches forward onto the floor and she straightens behind him."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: takedown-variants-v1254k/result.json](<../../../../work/natural-moveset/takedown-variants-v1254k/result.json>)
+- [evidence: takedown-variants-v1254h/result.json](<../../../../work/natural-moveset/takedown-variants-v1254h/result.json>)
 - [in_game_recordings: takedown-variants-v1254b/slide-client-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-client-lethal-observer.mp4>)
 - [in_game_recordings: takedown-variants-v1254b/slide-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-host-lethal-observer.mp4>)
 - [in_game_recordings: takedown-variants-v1254b/slide-client-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-client-choke-observer.mp4>)
