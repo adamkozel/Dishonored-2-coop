@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[string]$WalkStarts='',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[string]$WalkStarts='',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01',[switch]$CounterOnParry,[double]$BlockYawOffset=0)
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -366,7 +366,7 @@ try{
         $mxx=($tx+[double]$q[0])/2;$myy=($ty+[double]$q[1])/2;$hyaw=[Math]::Atan2($myy-$hy,$mxx-$hx)*180/[Math]::PI
         C $peer 'coop_observer_camera off';C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 250
         C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}}catch{}}
-     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new();$script:camAnchor=$null
+     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new();$script:camAnchor=$null;$yawAt=0;$lastParry=$false;$row.counterPresses=[Collections.Generic.List[object]]::new()
      while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
       if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}
       elseif($phase-eq'block'-and($guardSamples-ge6-or$t-$phaseStart-ge22000)){$phase='open';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;guardSamples=$guardSamples})}
@@ -374,12 +374,22 @@ try{
       elseif($phase-eq'attack'-and$t-$phaseStart-ge14000){break}
       if($phase-eq'provoke'){if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
       elseif($phase-in'block','open'){if($t-$closeAt-ge3000){$closeAt=$t;& $close 2.4}
+       # 1359 (#11, hit_reactions_directions): -BlockYawOffset turns the source away from the guard while it blocks and stands
+       # open, so his swings land from the side (left/right stuns); the re-aim keeps the offset.
+       if($BlockYawOffset-and$t-$yawAt-ge1500){$yawAt=$t;try{$me2=(Q $source '--player').candidatePosition;$g2=@(Living $source|Where-Object spawnerName -eq $gname)
+        if($g2.Count){$ay2=[Math]::Atan2([double]$g2[0].position[1]-[double]$me2[1],[double]$g2[0].position[0]-[double]$me2[0])*180/[Math]::PI+$BlockYawOffset;C $source (P $me2[0] $me2[1] ([double]$me2[2]+1.7) $ay2)}}catch{}}
        if($phase-eq'block'-and$t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
       else{if($t-$aimAt-ge2500){$aimAt=$t;& $close 1.8}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
       # Source native states every sample, to name the hit reactions the guard causes (1328w: health dropped, no stun scene).
       $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$x|Add-Member sourceActive $(try{@((Q $source '--player-states').active|ForEach-Object {$_.id})}catch{$null});$samples.Add($x)
-      if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++};Start-Sleep -Milliseconds 80}
+      if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++}
+      # 1359 (#11, counterattack): -CounterOnParry attacks the moment the partner presents a timed parry win (variant 21),
+      # inside the guard's stagger, and records the source's player scenes (counter-kill finishers are fatality scenes).
+      if($CounterOnParry){$parry=[int]$x.combatVariant-eq21-and[double]$x.combatWeight-gt.5
+       if($parry-and!$lastParry){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null;$row.counterPresses.Add($t);$nextBlock=$t+2500}
+       $lastParry=$parry;$md=try{Q $source '--midnight'}catch{$null};$x|Add-Member sourceScenes @($md.instances|Where-Object {$_.asset-like'*gameplay/player/*'}|ForEach-Object {($_.asset-split'/')[-1]})}
+      Start-Sleep -Milliseconds 80}
      # Keep the health hold through the reset (1328za: released beside the still-alert checkpoint guard 01, the next case
      # could not read the source).
      Save "$out/$key-samples.json" @($samples)

@@ -75,7 +75,7 @@ function Focus($r){$o=Q $r '--object' $script:sensor[$r];$w=@($o.words|Where-Obj
  $h=[uint32]([Convert]::ToUInt64($w[0].word.Substring(2),16)-shr32);$e=$script:byHandle[$r][$h];if(!$e){return [pscustomobject]@{handle=('0x{0:x}'-f$h);name=$null}};[pscustomobject]@{handle=$e.handle;name=$e.name}}
 function InvSafe($r){for($a=0;$a-lt8;$a++){try{return @((Q $r '--player-inventory').items|Where-Object {$_.quantity-gt0}|ForEach-Object {"$($_.name)=$($_.quantity)"})}catch{Start-Sleep -Milliseconds 400}};$null}
 function SweepFocus($r,$x,$y,$baseYaw,$pitches,$pattern){$tr=[Collections.Generic.List[object]]::new()
- foreach($pt in $pitches){foreach($off in 0,-12,12,-24,24){C $r ('setviewpos {0} {1} 68.1 {2} 0' -f (F $x),(F $y),(F ($baseYaw+$off)));& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $r -Pitch $pt -Quick|Out-Null;Start-Sleep -Milliseconds 200
+ foreach($pt in $pitches){foreach($off in 0,-12,12,-24,24){C $r ('setviewpos {0} {1} 68.1 {2} 0' -f (F $x),(F $y),(F ($baseYaw+$off)));try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $r -Pitch $pt -Quick|Out-Null}catch{};Start-Sleep -Milliseconds 200
   $f=Focus $r;$tr.Add([pscustomobject]@{pitch=$pt;yaw=$baseYaw+$off;focus=$(if($f){$f.name}else{$null})});if($f-and$f.name-and$f.name-match$pattern){return [pscustomobject]@{found=$true;trials=@($tr);focus=$f.name}}}}
  [pscustomobject]@{found=$false;trials=@($tr);focus=$null}}
 $domAim={param($target,$stand)
