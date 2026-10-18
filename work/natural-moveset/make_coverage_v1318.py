@@ -123,6 +123,10 @@ rep("""  if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
  foreach($r in 'host','client'){
   $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
  }""")
+# The native shove (throwhit, combat variant 17) comes only when an attack meets the guard's raised block; in 1318i the
+# guard parried and countered all 8 attacks in both roles. 16 attacks 700 ms apart over a 13 s case.
+rep("if($case-eq'kick'-and$step-lt8-and$t-ge1000+$step*800)", "if($case-eq'kick'-and$step-lt16-and$t-ge1000+$step*700)")
+rep("if(!$caseMs){$caseMs=9500}", "if(!$caseMs){$caseMs=if($case-eq'kick'){13000}else{9500}}")
 out = s.replace('\n', '\r\n') if crlf else s
 (N / 'Record-Coverage-v1318.ps1').write_bytes(out.encode('utf-8'))
 print('ok')
