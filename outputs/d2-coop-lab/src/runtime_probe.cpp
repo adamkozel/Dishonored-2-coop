@@ -458,7 +458,7 @@ int main(int argc, char** argv) {
     }
     if(argc==4&&!std::strcmp(argv[2],"--watch-combat-scene")){
         // Read-only diagnostic: the shared combat-scene reader result plus the
-        // raw instance it would inspect (state39/44 +24 handle), on change.
+        // raw instance it would inspect (state39/44/40 +24 handle), on change.
         char* end=nullptr;const auto duration=std::strtoul(argv[3],&end,10);
         if(!end||*end||duration<100||duration>20000)return 2;
         auto reader=[&](auto p,auto d,auto n){return read(process.value,p,d,n);};
@@ -466,7 +466,8 @@ int main(int argc, char** argv) {
         std::cout<<"{\"readOnly\":true,\"records\":[";
         do{
             NativePlayerStates s{};++samples;if(!readNativePlayerStates(reader,base,s)){Sleep(5);continue;}
-            std::uintptr_t statePointer=0;unsigned stateId=0;for(const auto& a:s.active)if(a.id==39||a.id==44){statePointer=a.pointer;stateId=a.id;}
+            // 1371 (#11 stagger): Recoil40 too, so a recoil the reader rejects still shows its raw scene.
+            std::uintptr_t statePointer=0;unsigned stateId=0;for(const auto& a:s.active)if(a.id==39||a.id==44||a.id==40){statePointer=a.pointer;stateId=a.id;}
             if(!statePointer){Sleep(5);continue;}
             NativePlayerCombatScene c{};const bool ok=readNativePlayerCombatScene(reader,base,s,c);
             unsigned handle=0;read(process.value,statePointer+0x24,&handle,4);
