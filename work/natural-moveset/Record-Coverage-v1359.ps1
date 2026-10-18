@@ -137,7 +137,9 @@ $corvoPowers=@('blink','darkvision','bendtime','windblast','possession','swarm',
      else{Start-Sleep -Milliseconds 500}}while(!$still-and$bw.ElapsedMilliseconds-lt150000)
     if(!$still){throw 'Guard 2 never stood still at his patrol pause'};$row.guardWaitMs=$bw.ElapsedMilliseconds;$bg=$b1[0];$row.guard=$bg.position
     $gx=[double]$bg.position[0];$gy=[double]$bg.position[1];$bfx=[double]$bg.orientation[0];$bfy=[double]$bg.orientation[1];$bfl=[Math]::Max(1e-3,[Math]::Sqrt($bfx*$bfx+$bfy*$bfy));$bfx/=$bfl;$bfy/=$bfl
-    $cx=$gx+2.0*$bfx+3.2*$bfy;$cy=$gy+2.0*$bfy-3.2*$bfx;$cz=[double]$bg.position[2]+1.9;$cyaw=[Math]::Atan2(($gy+2.0*$bfy)-$cy,($gx+2.0*$bfx)-$cx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
+    # 1359a: aimed 2 m ahead of the guard from 3.2 m, the guard and the kick sat at the frame edge; now 4.5 m to his side,
+    # 1 m ahead, looking at the guard himself.
+    $cx=$gx+1.0*$bfx+4.5*$bfy;$cy=$gy+1.0*$bfy-4.5*$bfx;$cz=[double]$bg.position[2]+1.9;$cyaw=[Math]::Atan2($gy-$cy,$gx-$cx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
     $op=(Q $peer '--player').candidatePosition;C $peer ('setviewpos {0} {1} {2} {3} 0' -f (F $op[0]),(F $op[1]),(F ([double]$op[2]+1.7)),(F $cyaw));Start-Sleep -Milliseconds 300
     try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null}catch{}
     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f (F $cx),(F $cy),(F $cz));Start-Sleep -Milliseconds 300

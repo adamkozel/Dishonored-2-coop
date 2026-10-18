@@ -376,8 +376,14 @@ try{
       elseif($phase-in'block','open'){if($t-$closeAt-ge3000){$closeAt=$t;& $close 2.4}
        # 1359 (#11, hit_reactions_directions): -BlockYawOffset turns the source away from the guard while it blocks and stands
        # open, so his swings land from the side (left/right stuns); the re-aim keeps the offset.
-       if($BlockYawOffset-and$t-$yawAt-ge1500){$yawAt=$t;try{$me2=(Q $source '--player').candidatePosition;$g2=@(Living $source|Where-Object spawnerName -eq $gname)
-        if($g2.Count){$ay2=[Math]::Atan2([double]$g2[0].position[1]-[double]$me2[1],[double]$g2[0].position[0]-[double]$me2[0])*180/[Math]::PI+$BlockYawOffset;C $source (P $me2[0] $me2[1] ([double]$me2[2]+1.7) $ay2)}}catch{}}
+       # 1328zs/zu: re-aiming with setviewpos every 1.5 s is a teleport each time, and the partner faded through every one
+       # (most samples below weight 0.5); the offset is now kept with short native look-stick pulses (about 48.5 deg/s at
+       # RightX 20000, Set-NativeInteractionAim-v691), carrying the block button while blocking.
+       if($BlockYawOffset-and$t-$yawAt-ge400){$yawAt=$t;try{$pv=Q $source '--player';$me2=$pv.candidatePosition;$o2=$pv.nativeViewOrientation;$g2=@(Living $source|Where-Object spawnerName -eq $gname)
+        if($g2.Count){$want=[Math]::Atan2([double]$g2[0].position[1]-[double]$me2[1],[double]$g2[0].position[0]-[double]$me2[0])*180/[Math]::PI+$BlockYawOffset;$have=[Math]::Atan2([double]$o2[1],[double]$o2[0])*180/[Math]::PI
+         $err=$want-$have;while($err-gt180){$err-=360};while($err-lt-180){$err+=360}
+         if([Math]::Abs($err)-gt10){$rx=if($err-gt0){-20000}else{20000};$pms=[int][Math]::Min(400,[Math]::Max(100,[Math]::Abs($err)/48.5*1000))
+          if($phase-eq'block'-and$t-lt$nextBlock-300){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -RightX $rx -DurationMs $pms|Out-Null}else{& "$lab/Send-D2Input.ps1" -Role $source -RightX $rx -DurationMs $pms|Out-Null}}}}catch{}}
        if($phase-eq'block'-and$t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
       else{if($t-$aimAt-ge2500){$aimAt=$t;& $close 1.8}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
