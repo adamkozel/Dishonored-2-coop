@@ -27,9 +27,16 @@ rep("jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500}[
 # Fixture spots: the source at the approach, the peer looking at the obstacle (Test-Vault / Test-LowMantle).
 rep("""   }elseif($case-in'runjump','arcs','slideexit'){$inv=""", """   }elseif($case-in'vault','lowmantle','highmantle'){$fx=@{vault=@('setviewpos -30.7 -150.5 68.1 90 0','setviewpos -35.5 -152.5 68.1 58 0');lowmantle=@('setviewpos -32 -148.5 68.1 90 0','setviewpos -34.5 -150 68.1 50.2 0');highmantle=@('setviewpos -30.7 -153.6 68.1 270 0','setviewpos -28 -149.2 68.1 245 0')}[$case]
     C $source $fx[0];C $peer $fx[1];Start-Sleep -Milliseconds 700;$approach=$fx[0]
+    # 1326d+: a side-on free camera from the open lane at x -34 (the peer's own view lost the vault within frames: 1326c).
+    $ca=@{vault=@(-34.0,-147.0,68.0,-31.0,-147.0);lowmantle=@(-34.0,-147.5,68.0,-31.5,-147.5);highmantle=@(-34.0,-155.0,68.2,-30.7,-155.0)}[$case];$inv=[Globalization.CultureInfo]::InvariantCulture
+    $op=(Q $peer '--player').candidatePosition;$cyaw=[Math]::Atan2($ca[4]-$ca[1],$ca[3]-$ca[0])*180/[Math]::PI
+    C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 5 -Quick|Out-Null
+    C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $ca[0].ToString('F3',$inv),$ca[1].ToString('F3',$inv),$ca[2].ToString('F3',$inv));Start-Sleep -Milliseconds 500
+    $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($ca[0],$ca[1],$ca[2])
    }elseif($case-in'runjump','arcs','slideexit'){$inv=""")
 rep("if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit'){& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8})",
-    "if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit'){& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-eq'fall'){0}elseif($case-in'vault','lowmantle','highmantle'){0}else{8})")
+    "if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit','vault','lowmantle','highmantle'){& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8})")
 rep("""    if($case-eq'arcs'){""", """    if($case-eq'vault'){
      if(($step-eq0-and$t-ge800)-or($step-eq3-and$t-ge7600)){
       if($step-eq3){C $source $approach;$teleports.Add($t);Start-Sleep -Milliseconds 700}
@@ -48,6 +55,7 @@ rep("""    if($case-eq'arcs'){""", """    if($case-eq'vault'){
      elseif($step-eq3-and$t-ge8600){$st=[int](Q $source '--player-states').stance;if($st){I $source B 180};$step=4}}
     if($case-eq'arcs'){""")
 rep("""$samples.Add([pscustomobject]@{ms=$t;armedMix=$mv.armedMix;""", """$samples.Add([pscustomobject]@{ms=$t;traversalValid=$player.traversalSceneValid;traversalStage=$player.traversalReaderStage;traversalLine=$player.traversalResearch.line;traversalVariant=$mv.traversalVariant;traversalAmount=$mv.traversalAmount;traversalEvent=$mv.traversalEvent;armedMix=$mv.armedMix;""")
+rep("""   if($case-in'runjump','arcs','slideexit'){C $peer 'coop_observer_camera off'}""", """   if($case-in'runjump','arcs','slideexit','vault','lowmantle','highmantle'){C $peer 'coop_observer_camera off'}""")
 rep("""   if($case-eq'arcs'){$row.arcs=@()""", """   function Traversals($variant){$eps=[Collections.Generic.List[object]]::new();$cur=$null
     foreach($x in $samples){if([double]$x.traversalWeight-gt.7-and[int]$x.traversalVariant-eq$variant){if(!$cur){$cur=[ordered]@{variant=$variant;from=$x.ms;to=$x.ms;samples=0;minAmount=1.0;maxAmount=0.0}};$cur.to=$x.ms;$cur.samples++;$cur.minAmount=[Math]::Min($cur.minAmount,[double]$x.traversalAmount);$cur.maxAmount=[Math]::Max($cur.maxAmount,[double]$x.traversalAmount)}elseif($cur){$eps.Add($cur);$cur=$null}}
     if($cur){$eps.Add($cur)};@($eps)}

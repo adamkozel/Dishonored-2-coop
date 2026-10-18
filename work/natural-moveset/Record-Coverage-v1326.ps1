@@ -103,6 +103,13 @@ try{
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($cx,$cy,$cz)
    }elseif($case-in'vault','lowmantle','highmantle'){$fx=@{vault=@('setviewpos -30.7 -150.5 68.1 90 0','setviewpos -35.5 -152.5 68.1 58 0');lowmantle=@('setviewpos -32 -148.5 68.1 90 0','setviewpos -34.5 -150 68.1 50.2 0');highmantle=@('setviewpos -30.7 -153.6 68.1 270 0','setviewpos -28 -149.2 68.1 245 0')}[$case]
     C $source $fx[0];C $peer $fx[1];Start-Sleep -Milliseconds 700;$approach=$fx[0]
+    # 1326d+: a side-on free camera from the open lane at x -34 (the peer's own view lost the vault within frames: 1326c).
+    $ca=@{vault=@(-34.0,-147.0,68.0,-31.0,-147.0);lowmantle=@(-34.0,-147.5,68.0,-31.5,-147.5);highmantle=@(-34.0,-155.0,68.2,-30.7,-155.0)}[$case];$inv=[Globalization.CultureInfo]::InvariantCulture
+    $op=(Q $peer '--player').candidatePosition;$cyaw=[Math]::Atan2($ca[4]-$ca[1],$ca[3]-$ca[0])*180/[Math]::PI
+    C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 5 -Quick|Out-Null
+    C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $ca[0].ToString('F3',$inv),$ca[1].ToString('F3',$inv),$ca[2].ToString('F3',$inv));Start-Sleep -Milliseconds 500
+    $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($ca[0],$ca[1],$ca[2])
    }elseif($case-in'runjump','arcs','slideexit'){$inv=[Globalization.CultureInfo]::InvariantCulture
     C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),$Course[1].ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));Start-Sleep -Milliseconds 600
     $mx=$Course[0]+3*[Math]::Cos($Course[3]*[Math]::PI/180);$my=$Course[1]+3*[Math]::Sin($Course[3]*[Math]::PI/180);$cyaw=[Math]::Atan2($my-$CourseCamera[1],$mx-$CourseCamera[0])*180/[Math]::PI
@@ -113,7 +120,7 @@ try{
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=$CourseCamera
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
-   if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}elseif($case-in'vault','lowmantle','highmantle'){0}else{8}) -Quick|Out-Null}
+   if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit','vault','lowmantle','highmantle'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
    $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500;vault=15500;lowmantle=9500;highmantle=9500}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
@@ -264,7 +271,7 @@ try{
    if($case-eq'stairs'){C $peer 'coop_observer_camera off'
     $up=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.05}).Count;$dn=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.05}).Count;$row.stairsUp=$up;$row.stairsDown=$dn
     if(!$up-or!$dn){throw "Stair gait not presented (up $up, down $dn)"};$row.checks.Add("Partner stair gait up ($up samples) and down ($dn samples)")}
-   if($case-in'runjump','arcs','slideexit'){C $peer 'coop_observer_camera off'}
+   if($case-in'runjump','arcs','slideexit','vault','lowmantle','highmantle'){C $peer 'coop_observer_camera off'}
    if($case-eq'mana'){C $peer 'coop_observer_camera off'
     $drink=@($samples|Where-Object {$_.useVariant-eq1-and[double]$_.useWeight-gt.5});$row.drinkSamples=$drink.Count
     if(!($row.manaBefore-ge1-and$row.manaAfter-lt$row.manaBefore)){throw "Mana potion not consumed ($($row.manaBefore) -> $($row.manaAfter))"};$row.checks.Add("Mana potion consumed ($($row.manaBefore) -> $($row.manaAfter))")

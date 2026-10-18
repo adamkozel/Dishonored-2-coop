@@ -1,0 +1,51 @@
+{
+  "source": "host",
+  "case": "lowmantle",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Standing and crouched lowmantle presented (variants 1 and 2) with native state 8 on the source, recovered"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    4205.0,
+    5016.0
+  ],
+  "mantles": [
+    {
+      "mantle": "standing",
+      "crouchExit": false,
+      "variant": 1,
+      "episodes": [
+        {
+          "variant": 1,
+          "from": 1697,
+          "to": 1946,
+          "samples": 3,
+          "minAmount": 0.327604,
+          "maxAmount": 0.764703
+        }
+      ],
+      "nativeSamples": 4
+    },
+    {
+      "mantle": "crouched",
+      "crouchExit": true,
+      "variant": 2,
+      "episodes": [
+        {
+          "variant": 2,
+          "from": 7729,
+          "to": 8103,
+          "samples": 4,
+          "minAmount": 0.166908,
+          "maxAmount": 0.937215
+        }
+      ],
+      "nativeSamples": 4
+    }
+  ],
+  "restored": true
+}

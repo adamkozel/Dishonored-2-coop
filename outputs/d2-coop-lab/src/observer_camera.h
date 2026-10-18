@@ -79,31 +79,44 @@ void serviceLabItemUse(){
     labManaBefore=mana.current;
     reinterpret_cast<void(*)(void*)>(gameImage+0x745b20)(reinterpret_cast<void*>(mana.component));++labUses;labUseResult="mana_use_requested";
 }
+// 1214ck (#11 ranged and item coverage; lab only): "coop_grant_item pistol|crossbow|stunmine|springrazor|heart" grant
+// the weapon with six rounds of its current ammunition, two of a trap, or the Heart, through the same native add, and
+// select it once with the native equip when the left-hand slot is free; the takes restore the checkpoint after each case.
+unsigned labGrantEquipKind=0;
+struct LabGrantItem {std::uintptr_t inventory=0,entry=0,declaration=0,component=0,ammo=0;int quantity=0;bool equipped=false,slotBusy=false;};
+bool readLabGrantItem(unsigned r,LabGrantItem& g){const auto base=reinterpret_cast<std::uintptr_t>(gameImage);g={};
+    if(r==1){NativePlayerGrenade x{};if(!readNativePlayerGrenade(memoryRead,base,x))return false;
+        g.inventory=x.player.sword.inventory;g.entry=x.entry;g.declaration=x.declaration;g.component=x.component;g.quantity=x.quantity;g.equipped=x.equipped;g.slotBusy=x.player.sword.slots[1]!=0;return true;}
+    if(r==2||r==3){NativePlayerPotion x{};if(!readNativePlayerPotion(memoryRead,base,r==2?1u:2u,x))return false;g.inventory=x.player.sword.inventory;g.declaration=x.declaration;return true;}
+    if(r==4||r==5){NativePlayerRangedItem x{};NativeRangedAmmo a{};if(!readNativePlayerRangedItem(memoryRead,base,r-3,x)||!readNativeRangedAmmo(memoryRead,base,x,a))return false;
+        g.inventory=x.player.sword.inventory;g.entry=x.entry;g.declaration=x.declaration;g.component=x.component;g.ammo=a.declaration;g.quantity=x.quantity;g.equipped=x.equipped;g.slotBusy=x.player.sword.slots[1]!=0;return true;}
+    if(r==6||r==7){NativePlayerPlaceable x{};if(!readNativePlayerPlaceable(memoryRead,base,r-5,x))return false;
+        g.inventory=x.player.sword.inventory;g.entry=x.entry;g.declaration=x.declaration;g.component=x.component;g.quantity=x.quantity;g.equipped=x.equipped;g.slotBusy=x.player.sword.slots[1]!=0;return true;}
+    if(r==8){NativePlayerHeart x{};if(!readNativePlayerHeart(memoryRead,base,x))return false;
+        g.inventory=x.player.sword.inventory;g.entry=x.entry;g.declaration=x.declaration;g.component=x.component;g.quantity=x.quantity;g.equipped=x.equipped;g.slotBusy=x.player.sword.slots[1]!=0;return true;}
+    return false;}
 void serviceLabItemGrant(){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
-    // A granted grenade is then selected once with the native equip (+0x614b20, as the isolated fixture does) when the
-    // left-hand slot is free, so the trigger throws it.
+    // A granted left-hand item is then selected once with the native equip (+0x614b20, as the isolated fixtures do) when
+    // the left-hand slot is free, so the trigger uses it.
     if(labGrantEquipUntil&&!labGrantRequest){const auto tick=GetTickCount64();
-        if(tick>=labGrantEquipUntil){labGrantEquipUntil=0;if(!labGrantEquipSent)labGrantResult="grenade_equip_timeout";return;}
-        NativePlayerGrenade g{};if(!readNativePlayerGrenade(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),g))return;
-        if(g.equipped){labGrantEquipUntil=0;labGrantResult="granted_grenade_equipped";return;}
-        if(!labGrantEquipSent&&g.quantity>=1){
-            if(g.player.sword.slots[1]){labGrantEquipUntil=0;labGrantResult="grenade_slot_occupied";return;}
-            labGrantEquipSent=true;reinterpret_cast<void(*)(void*,void*,bool)>(gameImage+0x614b20)(reinterpret_cast<void*>(g.player.sword.inventory),reinterpret_cast<void*>(g.entry),true);
-            labGrantResult="grenade_equip_requested";}
+        if(tick>=labGrantEquipUntil){labGrantEquipUntil=0;if(!labGrantEquipSent)labGrantResult="grant_equip_timeout";return;}
+        LabGrantItem g{};if(!readLabGrantItem(labGrantEquipKind,g))return;
+        if(g.equipped){labGrantEquipUntil=0;labGrantResult="granted_item_equipped";return;}
+        if(!labGrantEquipSent&&g.quantity>=1&&g.component){
+            if(g.slotBusy){labGrantEquipUntil=0;labGrantResult="grant_slot_occupied";return;}
+            labGrantEquipSent=true;reinterpret_cast<void(*)(void*,void*,bool)>(gameImage+0x614b20)(reinterpret_cast<void*>(g.inventory),reinterpret_cast<void*>(g.entry),true);
+            labGrantResult="grant_equip_requested";}
         return;}
     if(!labGrantRequest)return;
-    const unsigned r=labGrantRequest;labGrantRequest=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    const unsigned r=labGrantRequest;labGrantRequest=0;
     if(!coopGameplayReady(outgoing)){++labGrantRefused;labGrantResult="refused_not_gameplay";return;}
-    std::uintptr_t inventory=0,declaration=0;
-    if(r==1){NativePlayerGrenade g{};if(!readNativePlayerGrenade(memoryRead,base,g)){++labGrantRefused;labGrantResult="grenade_read_failed";return;}
-        inventory=g.player.sword.inventory;declaration=g.declaration;}
-    else{NativePlayerPotion p{};if(!readNativePlayerPotion(memoryRead,base,r==2?1u:2u,p)){++labGrantRefused;labGrantResult="potion_read_failed";return;}
-        inventory=p.player.sword.inventory;declaration=p.declaration;}
-    if(!inventory||!declaration){++labGrantRefused;labGrantResult="no_inventory_or_declaration";return;}
-    reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(inventory),reinterpret_cast<void*>(declaration),1);
-    ++labGrants;labGrantResult=r==1?"granted_grenade":r==2?"granted_health_potion":"granted_mana_potion";
-    if(r==1){labGrantEquipUntil=GetTickCount64()+3000;labGrantEquipSent=false;}
+    LabGrantItem g{};if(!readLabGrantItem(r,g)){++labGrantRefused;labGrantResult="grant_read_failed";return;}
+    if(!g.inventory||!g.declaration||((r==4||r==5)&&!g.ammo)){++labGrantRefused;labGrantResult="no_inventory_or_declaration";return;}
+    reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(g.inventory),reinterpret_cast<void*>(g.declaration),(r==6||r==7)?2:1);
+    if(r==4||r==5)reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(g.inventory),reinterpret_cast<void*>(g.ammo),6);
+    ++labGrants;static const char* names[]={"","granted_grenade","granted_health_potion","granted_mana_potion","granted_pistol","granted_crossbow","granted_stun_mine","granted_spring_razor","granted_heart"};labGrantResult=names[r];
+    if(r!=2&&r!=3){labGrantEquipKind=r;labGrantEquipUntil=GetTickCount64()+3000;labGrantEquipSent=false;}
 }
 void servicePlayerHealthHold(){
     if(!playerHealthHold||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;

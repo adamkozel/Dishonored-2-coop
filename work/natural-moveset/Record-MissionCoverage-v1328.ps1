@@ -8,8 +8,8 @@ param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[
 # - climb: the source grabs chain1 (X), climbs up, climbs down and lets go (A); the partner must present climbing
 #   (climb weight > .5, >= 20 samples) ascending and descending through at least 5 cycle phases;
 # - guardfight (with an opponent): the source (health held, coop_player_health_hold) faces a fresh mission guard
-#   (Corvo the windmill guard, Emily checkpoint guard 01): it blocks in cycles while the guard attacks, stands unguarded,
-#   then attacks to the kill with re-aims; the partner must present block impacts or timed parries (combat variants
+#   (Corvo the windmill guard, Emily checkpoint guard 01): one attack alerts it (1328a: unaware guards never attacked),
+#   then it blocks in cycles while the guard attacks, stands unguarded, then attacks to the kill with re-aims; the partner must present block impacts or timed parries (combat variants
 #   19-21), a hit reaction (stun weight > .5), at least three target-bearing attacks, and the guard must end dead or
 #   unconscious in both worlds alike.
 # Both peers load the mission with the native `campaign` command (host Corvo, client Emily) and pass its modals; the
@@ -112,10 +112,13 @@ try{
      C $peer (P $cx $cy ($gz+2.4) $cyaw);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source 'coop_player_health_hold on';C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
-     $caps=Capture $key 28;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=0;$aimAt=-9999;$hitAt=-9999;$phase=''
-     while($watch.ElapsedMilliseconds-lt26000){$t=$watch.ElapsedMilliseconds
-      if($t-lt9000){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
-      elseif($t-lt13000){$phase='open'}
+     # 1328b: in 1328a the guards never attacked (unaware of a silently placed, blocking source): one attack alerts the
+     # guard first, then block cycles, an unguarded stretch, and attacks to the kill.
+     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=1500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
+     while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
+      if($t-lt1500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null;$provoked=$true}}
+      elseif($t-lt12500){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
+      elseif($t-lt18000){$phase='open'}
       else{$phase='attack'
        if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
          if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
