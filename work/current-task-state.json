@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214cn (deployed); 1214cp built, deploys after the running chain",
-    "NextCandidate": "candidate-npc-combat-v1214cp: 1214co damaging-landing arm bindings + product-mode Doppelganger clone and Mesmerize spirit (#104); 1214co archived without deployment",
-    "Complete": "51 of 105",
+    "Candidate": "candidate-npc-combat-v1214cp (deployed)",
+    "NextCandidate": "candidate-npc-combat-v1214cq: damaging-landing arms bound left then right (confirmed runtime); deploy queued after the 1214cp takes",
+    "Complete": "55 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
@@ -22184,7 +22184,8 @@
       "1214cl": "re-anchor on a fresh code-3 vertical refusal: jump-attack landings keep the body",
       "1214cn": "the damaging landing scene (cat_fall_strong, 1066 ms) is presented as the hard landing (variant 6)",
       "1214co": "the damaging landing scene binds the body and both native arms; validated with the arm identity reader",
-      "1214cp": "Doppelganger clone and networked Mesmerize spirit run in an armed product session (productSessionArmed), not only in the lab fixture (#104)"
+      "1214cp": "Doppelganger clone and networked Mesmerize spirit run in an armed product session (productSessionArmed), not only in the lab fixture (#104)",
+      "1214cq": "the damaging landing binds the player, then the left and the right native arm (observed order)"
     },
     "LabGrants": {
       "1214ck": "coop_grant_item pistol|crossbow|stunmine|springrazor|heart",
@@ -22214,7 +22215,12 @@
       "coverage-v1330b",
       "coverage-v1332c",
       "coverage-v1332d",
-      "coverage-v1330e (15/16)"
+      "coverage-v1330e (15/16)",
+      "coverage-v1332e",
+      "mission-coverage-v1328h (Emily guard fight, swim, water exit, climbs)",
+      "mission-coverage-v1328j",
+      "window-traversal-v1235h",
+      "carry-body-v1277g"
     ],
     "Audits": {
       "completion-audit-v1323-locomotion": "applied: 10",
@@ -22223,12 +22229,18 @@
       "completion-audit-v1335-combat": "applied: 8",
       "completion-audit-v1336-double-jump": "applied: 1",
       "completion-audit-v1337-powers": "applied: 4 (Dark Vision both, Windblast, Swarm)",
-      "completion-audit-v1338-ranged-items": "applied: 6 (pistol, crossbow, grenade, mine/razor, Heart, health elixir)"
+      "completion-audit-v1338-ranged-items": "applied: 6 (pistol, crossbow, grenade, mine/razor, Heart, health elixir)",
+      "completion-audit-v1339-emily-clone-spirit": "applied: 2 (Doppelganger, Mesmerize)",
+      "completion-audit-v1340-switching": "applied: 2 (ammo switch, item switch interruptions)"
     },
-    "Running": "takedown-variants-v1254d (1214cn); then interaction re-takes; then deploy 1214cp and mission 1328h, powers 1332e (wide camera), window 1235h, slope scan 1328i, switch cases 1328j, mana elixir 1330f",
+    "Running": "takedown-variants-v1254e; then possesshuman 1332f, pickups 1261d, held object 1269d, Dunwall uses 1228v, framed carry 1277h, kick 1318j, Emily lever 1228w; deploy 1214cq; mission 1328k (hard fall, guard fight), 1328l (swim, climbs re-filmed), window 1235i, slope scan 1328m, mana elixir 1330g",
     "Remaining": "hard landing, window crossing, slope, swim and water exit, chain/ladder, opponent-dependent combat (parry, counter, hit reactions, stagger, kick, deaths, ragdoll), ranged/items and powers audits, paired actions, interactions; then a final regression on the release candidate",
     "Issues": {
-      "104": "Doppelganger clone and Mesmerize spirit in product mode (In Progress, 1214cp)"
-    }
+      "104": "closed: clone and spirit shown in product mode (1214cp)"
+    },
+    "Merged": [
+      "#101 a52824eb7",
+      "#103 527877ca9"
+    ]
   }
 }

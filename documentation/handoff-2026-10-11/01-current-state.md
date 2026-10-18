@@ -5,8 +5,8 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
-Updated 2026-10-18. Live candidate-npc-combat-v1214cn ([identity](../../work/movement-integration/candidate-npc-combat-v1214cn/identity.json)), protocol 75, bank 71/374 (bank 1266); 1214cp (damaging-landing arm bindings, clone and spirit in product mode, #104) is built and deploys next. Latest:
-- **Movement completion coverage (#11, [chapter 99](99-movement-completion-coverage.md)): 51 of 105 items complete.** Coverage harnesses 1318–1333 and the Edge of the World mission harness 1328 drive locomotion, stance, gait, traversal, combat, ranged weapons, items, powers, swimming and climbing under the product controller in both roles, and check the partner from its presentation state. Completion audits record each item's decision in the catalog (stance, locomotion, traversal, opponent-free combat, double jump). Receiver fixes that came from them:
+Updated 2026-10-18. Live candidate-npc-combat-v1214cp ([identity](../../work/movement-integration/candidate-npc-combat-v1214cp/identity.json)), protocol 75, bank 71/374 (bank 1266); 1214cq (damaging landing arms bound left first) deploys after the queued takes. Latest:
+- **Movement completion coverage (#11, [chapter 99](99-movement-completion-coverage.md)): 55 of 105 items complete.** Coverage harnesses 1318–1333 and the Edge of the World mission harness 1328 drive locomotion, stance, gait, traversal, combat, ranged weapons, items, powers, swimming and climbing under the product controller in both roles, and check the partner from its presentation state. Completion audits record each item's decision in the catalog (stance, locomotion, traversal, opponent-free combat, double jump). Receiver fixes that came from them:
   - 1214cg: the protocol-73 hold keeps the authored body instead of flashing the actor's native pose;
   - 1214ch: a 150 ms grace before yielding the body on a transient ineligible packet;
   - 1214ci, 1214cj, 1214cl: the body clock survives vault exits, ledge steps in long frames and jump-attack landings;

@@ -3,11 +3,11 @@
 Updated 2026-10-18. This chapter covers how checklist items in [movement requirements](generated/movement-requirements.md) are closed:
 - the coverage harnesses that drive every case under the product controller in both roles;
 - what they found;
-- the receiver and presentation fixes they led to (candidates 1214cg to 1214cl, 1214cn to 1214cp);
+- the receiver and presentation fixes they led to (candidates 1214cg to 1214cl, 1214cn to 1214cq);
 - the lab-only grants that put items, powers and upgrades in the isolated save (1214ck, 1214cm);
 - the completion audits that record each item's decision in `review-catalog.json`.
 
-**Status: 51 of 105 items complete** (audits for stance, locomotion, traversal, combat without an opponent, the double jump, powers, and ranged weapons and items).
+**Status: 55 of 105 items complete** (audits for stance, locomotion, traversal, combat without an opponent, the double jump, powers, ranged weapons and items, and switching).
 
 ## Coverage harnesses
 
@@ -65,6 +65,12 @@ These are confirmed runtime. The probes are kept as evidence.
 - The guard fight tries 2.5 m to either side of the guard, then behind, then in front, and keeps the first spot where the source rests at the guard's level, without an alerting slash. From +y (1328b–e) the source stood on a parapet beyond the railing and the slash killed the unaware guard; 3 m in front (1328f) was over the canal, which the guard faces from the railing.
 - The chain street around (−58…−22, 60…100) is water at the surface height 6.0 almost everywhere (slope scan 1328g, which also stayed swimming after its first canal point; the scan now leaves the water between points).
 - After a failed placement, each case's reset dismisses menus and prompts on both peers (1328f sat in a menu, logic 12, and every later case failed its first read).
+- The chain-street grid (x −58…−22, y 60…100) is bay water: the chain hangs from a structure above it (scans 1328g, 1328i). The spawn dock is at (−30.3, 193.3) facing −y with the water on the +x side; `-ScanGrid` sets the scan grid.
+
+**Cameras.** Most failed reviews were framing, not presentation:
+- `setviewpos` pitch: negative looks down (Set-ObserverPitch: positive looks down). 1328h's climb camera at −12 filmed the ground.
+- A body placed with `setviewpos` near a wall or water ends up in it; use `coop_observer_camera hold_at x y z` for the free camera and leave the observer's body where it is. The window harness 1235h stood the observer along the wall plane at floor height and filmed a staircase (1235i fixes it).
+- The camera must follow where the action goes: the body carry walks 8 m out of the takedown framing (1277h holds beside the path), the swimmer swims away from a camera beside its entry point (1328l follows from behind), and the guard fight needs the side of the fight line, not the back of the source.
 - Chain1 has no top exit: the source releases with A.
 
 **Native input:**
@@ -103,12 +109,13 @@ These are confirmed runtime. The probes are kept as evidence.
 - An ~11 m fall plays a different body scene in the same CatFall state: `cat_fall_strong`, 1066 ms, Corvo `Scene_2`, Emily `Scene_1`, phase 3. Confirmed runtime by the read-only midnight watch in mission-coverage-v1328e. The scene name also appears in the game's resource index (confirmed static).
 - The landing reader accepted only the light scene (`cat_fall_light`, 1000 ms), so the partner never presented the hard landing (1328d, 1328e).
 - 1214cn accepts both scenes, each only at its own observed duration, and the traversal presentation accepts variant 6 at 1000 or 1066 ms.
-- 1328f on 1214cn still refused every strong landing read (source stage 6): unlike the light body scene, whose arms run separate scenes, `cat_fall_strong` binds three actors, the player and then both first-person arms (right, then left). 1214co validates that binding with the native arm identity reader.
+- 1328f on 1214cn still refused every strong landing read (source stage 6): unlike the light body scene, whose arms run separate scenes, `cat_fall_strong` binds three actors, the player and then both first-person arms. 1214co validates that binding with the native arm identity reader, but assumed the keyhole order (right, then left); 1328h on 1214cp still refused. The runtime probe identifies the bindings as `left_arm_1`, then `right_arm_2` (confirmed runtime); 1214cq reads them in that order (deploy queued).
 
 **1214cp: Emily's clone and spirit in product mode** ([#104](https://github.com/adamkozel/Dishonored-2-coop/issues/104)).
 - In 1332c/d the partner world never showed the Doppelganger clone or the Mesmerize spirit, although the clone's world state crossed (client sent 265, host presented 239).
 - The visual clone service and the networked spirit only ran inside the isolated lab fixture (the spirit only on the guard map): clone created 0, spirit refused 64 times as `unsupported_scope`.
 - 1214cp adds `productSessionArmed()` (the product controller's `armed` state) and lets both run in an armed product session. The spirit's local experiment stays lab-only; both stay cosmetic. 1214co was archived from its build without deployment, superseded by 1214cp.
+- Verified in coverage-v1332e: the host created, showed and retired the clone (278 pose updates) and the spirit (native effect started and stopped). #104 is closed.
 
 ## Lab-only grants
 
@@ -117,22 +124,23 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 - **`coop_grant_named <declaration>`** (1214cm): adds one entry by its exact declaration name, restricted to powers (`models/powers/...`) and player attributes (`components/characters/player/base/attributes/...`). A granted power is selected in the left hand with the native equip. Agility is `super_jump.inventoryitem`.
 - Probes `power-cast-probe-v1334a`–`d` confirm every granted power casts natively, product mode included.
 
-## Takes on the current candidates (1214cm, 1214cn)
+## Takes on the current candidates (1214cn, 1214cp)
 
 | Take | Result |
 |---|---|
-| coverage-v1324g (1214cm) | Pass, 10/10: combat without an opponent, including holster and draw crouched and walking |
-| coverage-v1333b (1214cm) | Pass, 2/2: three double jumps per role (armed, running, holstered), each second impulse presented |
-| coverage-v1332c (1214cm), 1332d (1214cn) | Pass, 12/12 each: every power of both characters; 1332d films from the close camera |
-| coverage-v1330e (1214cn) | 15/16: pistol, crossbow, grenade, traps, Heart, health elixir both roles, Corvo's mana elixir; Emily's mana stayed full at the fixed drink time |
-| coverage-v1330a–d | Earlier items takes: the shot counting, trap pitch, close camera and mana timing fixes |
-| mission-coverage-v1328d, e | Swim, climb, climb to the top, water exit (each in at least one role); the midnight watch names the damaging landing scene |
-| mission-coverage-v1328f (1214cn) | Fail: no hard landing (the arm bindings, fixed in 1214co); the guard placement over the canal left both peers in a menu |
-| takedown-variants-v1254d (1214cn) | Running: back, side, front, drop and slide chokes and lethals in both roles |
+| coverage-v1332c, d (1214cm/cn) | Pass, 12/12 each: every power of both characters |
+| coverage-v1332e (1214cp) | Doppelganger, Mesmerize, Domino pass from the wider camera; Far Reach presented only 2 samples |
+| coverage-v1330e (1214cn) | 15/16: every item in both roles and Corvo's mana elixir; Emily's mana stayed full |
+| coverage-v1330f (1214cp) | Mana elixir fails both ways: Corvo drank during the cast, Emily's Doppelganger spent no mana (re-take 1330g queued) |
+| mission-coverage-v1328h (1214cp) | Emily's guard fight passes (5 block impacts, 6 timed parries, 3 hit reactions, 14 attacks); swimming, water exit, both climbs pass in both roles; hard landing fails (fixed in 1214cq) |
+| mission-coverage-v1328j (1214cp) | Ammo switch and item switch pass in both roles |
+| window-traversal-v1235h (1214cp) | The window crossing passes in both roles (re-filmed in 1235i) |
+| takedown-variants-v1254d (1214cn) | 14/24: back takedowns both roles; drop, slide, front and left for Corvo; Emily's drop and left lethal |
+| carry-body-v1277g (1214cn) | Pass in both roles (re-filmed in 1277h) |
+| coverage-v1318i (1214cn) | Note reach passes; kicks fail (more attempts in 1318j) |
+| gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
 
-On 1214cl: coverage-v1318h, 1319h, 1320g and 1321h (12/12) and 1326d (6/6) pass. Earlier takes, failed ones included, are kept; each commit message records what it found.
-
-Queued on 1214cp: interaction re-takes (note and kick, pickups and food, a held bottle, body carry, Dunwall locks, taps and door, the Edge of the World levers), the mission take 1328h (hard fall, guard fight, water exit, swim, climbs), powers 1332e for the clone, spirit, marks and far reach from a wider camera, the window crossing 1235h, a second slope scan, the switch cases 1328j, and Emily's mana elixir 1330f.
+Earlier takes, failed ones included, are kept; each commit message records what it found.
 
 ## Completion audits
 
@@ -152,7 +160,9 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1335-combat | 8: draw and holster, ready idle, light, heavy, moving, crouched and airborne attacks, block |
 | completion-audit-v1336-double-jump | 1 |
 | completion-audit-v1337-powers | 4: both Dark Visions, Windblast, Devouring Swarm (8 open with what remains) |
-| completion-audit-v1338-ranged-items | 6: pistol, crossbow, grenade, mine or razor, Heart, health elixir (mana elixir, ammo switch, item switch open) |
+| completion-audit-v1338-ranged-items | 6: pistol, crossbow, grenade, mine or razor, Heart, health elixir (mana elixir open) |
+| completion-audit-v1339-emily-clone-spirit | 2: Doppelganger, Mesmerize (1214cp) |
+| completion-audit-v1340-switching | 2: ammo switch, item switch interruptions (mission take 1328j) |
 
 **Still open in these families:** the hard landing (1214co/cp), the window crossing, the stairs-and-slopes item (a slope), swimming and diving (the mission swim camera was too high to review: next take films lower), the chain and ladder items (the game has one climb state, `arkPlayerStateClimb` on `arkClimbable`, and its only ladders are step-ladder props; confirmed static), and every item that needs an opponent (parry, counter, hit reactions, stagger, kick, deaths, ragdoll).
 
