@@ -1,0 +1,279 @@
+{
+  "passed": false,
+  "failure": "7 case(s) failed: host-windblast: windblast presented 0 samples (variants ) | host-possession: possession presented 0 samples (variants ) | host-swarm: swarm presented 0 samples (variants ) | client-farreach: farreach presented 0 samples (variants ) | client-domino: domino presented 0 samples (variants ) | client-doppelganger: doppelganger presented 0 samples (variants ) | client-mesmerize: mesmerize presented 0 samples (variants )",
+  "cases": [
+    {
+      "source": "host",
+      "case": "blink",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "blink presented (17 samples, variants 1,2,3) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 17,
+      "powerVariants": [
+        1,
+        2,
+        3
+      ],
+      "recovered": 9,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "darkvision",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "darkvision presented (16 samples, variants 10) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 16,
+      "powerVariants": [
+        10
+      ],
+      "recovered": 9,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "bendtime",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "bendtime presented (16 samples, variants 12,14) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 16,
+      "powerVariants": [
+        12,
+        14
+      ],
+      "recovered": 9,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "windblast",
+      "observer": "client",
+      "passed": false,
+      "failure": "windblast presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 4,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "possession",
+      "observer": "client",
+      "passed": false,
+      "failure": "possession presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 5,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "swarm",
+      "observer": "client",
+      "passed": false,
+      "failure": "swarm presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 6,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "darkvision",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "darkvision presented (16 samples, variants 10) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 16,
+      "powerVariants": [
+        10
+      ],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "farreach",
+      "observer": "host",
+      "passed": false,
+      "failure": "farreach presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "domino",
+      "observer": "host",
+      "passed": false,
+      "failure": "domino presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 9,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "doppelganger",
+      "observer": "host",
+      "passed": false,
+      "failure": "doppelganger presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 4,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "mesmerize",
+      "observer": "host",
+      "passed": false,
+      "failure": "mesmerize presented 0 samples (variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 5,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 0,
+      "powerVariants": [],
+      "recovered": 10,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "shadowwalk",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "shadowwalk presented (45 samples, variants 32,33,34) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 6,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 45,
+      "powerVariants": [
+        32,
+        33,
+        34
+      ],
+      "recovered": 10,
+      "restored": true
+    }
+  ],
+  "scope": "Powers coverage (1332, #11): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}

@@ -1,0 +1,159 @@
+{
+  "passed": false,
+  "failure": "4 case(s) failed: host-doublejump: Second impulse not presented (armed) | host-hardfall: Source fell only 3.75 m | client-doublejump: Second impulse not presented (running) | client-hardfall: Source fell only 4.31 m",
+  "cases": [
+    {
+      "source": "host",
+      "case": "doublejump",
+      "observer": "client",
+      "passed": false,
+      "failure": "Second impulse not presented (armed)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5302.0
+      ],
+      "air": [
+        {
+          "from": 2778,
+          "to": 4414,
+          "samples": 14
+        },
+        {
+          "from": 6906,
+          "to": 8149,
+          "samples": 7
+        },
+        {
+          "from": 13563,
+          "to": 15195,
+          "samples": 14
+        }
+      ],
+      "grant": {
+        "grants": 7,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "doubles": [
+        {
+          "jump": "armed",
+          "serials": [
+            0
+          ],
+          "secondSamples": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "hardfall",
+      "observer": "client",
+      "passed": false,
+      "failure": "Source fell only 3.75 m",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1060.0
+      ],
+      "air": [
+        {
+          "from": 1060,
+          "to": 2916,
+          "samples": 14
+        }
+      ],
+      "nativeHardLanding": 0,
+      "hardLandingSamples": 0,
+      "walkOnSamples": 12,
+      "fallMetres": 3.75,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "doublejump",
+      "observer": "host",
+      "passed": false,
+      "failure": "Second impulse not presented (running)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5216.0
+      ],
+      "air": [
+        {
+          "from": 2828,
+          "to": 4845,
+          "samples": 17
+        },
+        {
+          "from": 6881,
+          "to": 8003,
+          "samples": 6
+        },
+        {
+          "from": 13468,
+          "to": 15099,
+          "samples": 14
+        }
+      ],
+      "grant": {
+        "grants": 7,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "doubles": [
+        {
+          "jump": "armed",
+          "serials": [
+            0,
+            1
+          ],
+          "secondSamples": 6
+        },
+        {
+          "jump": "running",
+          "serials": [
+            1
+          ],
+          "secondSamples": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "hardfall",
+      "observer": "host",
+      "passed": false,
+      "failure": "Source fell only 4.31 m",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1117.0
+      ],
+      "air": [
+        {
+          "from": 1350,
+          "to": 2966,
+          "samples": 14
+        }
+      ],
+      "nativeHardLanding": 0,
+      "hardLandingSamples": 0,
+      "walkOnSamples": 14,
+      "fallMetres": 4.31,
+      "restored": true
+    }
+  ],
+  "scope": "Traversal coverage part 3 (1333, #11): double jumps (Agility granted by name) armed, running and holstered; a 12 m hard landing with the health held. Traversal base (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

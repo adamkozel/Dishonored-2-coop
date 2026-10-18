@@ -1,0 +1,116 @@
+{
+  "passed": false,
+  "failure": "12 case(s) failed: host-hardfall: Hard landing not presented (traversal variant 6) | host-guardfight: Observer pitch did not settle; reset: Native read failed --player-states | host-waterexit: Partner presentation not live after placement; reset: Native read failed --player-states | host-swim: Partner presentation not live after placement; reset: Native read failed --player-states | host-climb: Partner presentation not live after placement; reset: Native read failed --player-states | host-climbtop: Partner presentation not live after placement; reset: Native read failed --player-states | client-hardfall: Partner presentation not live after placement; reset: Native read failed --player-states | client-guardfight: Partner presentation not live after placement; reset: Native read failed --player-states | client-waterexit: Partner presentation not live after placement; reset: Native read failed --player-states | client-swim: Partner presentation not live after placement; reset: Native read failed --player-states | client-climb: Partner presentation not live after placement; reset: Native read failed --player-states | client-climbtop: Partner presentation not live after placement; reset: Native read failed --player-states",
+  "cases": [
+    {
+      "source": "host",
+      "case": "hardfall",
+      "observer": "client",
+      "passed": false,
+      "failure": "Hard landing not presented (traversal variant 6)",
+      "checks": [],
+      "fallMetres": 11.93,
+      "nativeHardLanding": 14,
+      "nativeStates": [
+        0,
+        3,
+        4
+      ],
+      "hardLandingSamples": 0,
+      "walkOn": 21
+    },
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "Observer pitch did not settle; reset: Native read failed --player-states",
+      "checks": [],
+      "guardFacing": [
+        -0.9225373791749893,
+        -0.38590774030192987
+      ]
+    },
+    {
+      "source": "host",
+      "case": "waterexit",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "host",
+      "case": "swim",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "host",
+      "case": "climbtop",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "hardfall",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "waterexit",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "swim",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "climbtop",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation not live after placement; reset: Native read failed --player-states",
+      "checks": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

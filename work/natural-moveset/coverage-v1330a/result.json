@@ -1,0 +1,433 @@
+{
+  "passed": false,
+  "failure": "8 case(s) failed: host-pistol: pistol presented 76 samples, variants 0,3,4,5,6, shots 1 | host-crossbow: crossbow presented 82 samples, variants 0,7,8,9,10, shots 0 | host-stunmine: stunmine variants 0 | host-springrazor: springrazor variants 0 | client-pistol: pistol presented 79 samples, variants 0,3,4,5,6, shots 1 | client-crossbow: crossbow presented 82 samples, variants 0,7,8,9,10, shots 0 | client-stunmine: stunmine variants 0 | client-springrazor: springrazor variants 0",
+  "cases": [
+    {
+      "source": "host",
+      "case": "pistol",
+      "observer": "client",
+      "passed": false,
+      "failure": "pistol presented 76 samples, variants 0,3,4,5,6, shots 1",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "rangedSamples": 76,
+      "rangedVariants": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "shots": 1,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "crossbow",
+      "observer": "client",
+      "passed": false,
+      "failure": "crossbow presented 82 samples, variants 0,7,8,9,10, shots 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "rangedSamples": 82,
+      "rangedVariants": [
+        0,
+        7,
+        8,
+        9,
+        10
+      ],
+      "shots": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "grenade",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Grenade presented: variants 0,3,4,5,6"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "grenadeVariants": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "stunmine",
+      "observer": "client",
+      "passed": false,
+      "failure": "stunmine variants 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 4,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "trapVariants": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "springrazor",
+      "observer": "client",
+      "passed": false,
+      "failure": "springrazor variants 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 5,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "trapVariants": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "heart",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Heart presented: variants 0,3"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 6,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "heartVariants": [
+        0,
+        3
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "health",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Health elixir drink presented as the use reach (19 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 7,
+        "refused": 0,
+        "result": "granted_health_potion"
+      },
+      "use": {
+        "uses": 1,
+        "refused": 0,
+        "result": "health_use_requested",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "useSamples": 19,
+      "useVariants": [
+        1
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "pistol",
+      "observer": "host",
+      "passed": false,
+      "failure": "pistol presented 79 samples, variants 0,3,4,5,6, shots 1",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "rangedSamples": 79,
+      "rangedVariants": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "shots": 1,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "crossbow",
+      "observer": "host",
+      "passed": false,
+      "failure": "crossbow presented 82 samples, variants 0,7,8,9,10, shots 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "rangedSamples": 82,
+      "rangedVariants": [
+        0,
+        7,
+        8,
+        9,
+        10
+      ],
+      "shots": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "grenade",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Grenade presented: variants 0,3,4,5,6"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "grenadeVariants": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "stunmine",
+      "observer": "host",
+      "passed": false,
+      "failure": "stunmine variants 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 4,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "trapVariants": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "springrazor",
+      "observer": "host",
+      "passed": false,
+      "failure": "springrazor variants 0",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 5,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "trapVariants": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "heart",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Heart presented: variants 0,3"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 6,
+        "refused": 0,
+        "result": "granted_item_equipped"
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "heartVariants": [
+        0,
+        3
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "health",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Health elixir drink presented as the use reach (19 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 7,
+        "refused": 0,
+        "result": "granted_health_potion"
+      },
+      "use": {
+        "uses": 1,
+        "refused": 0,
+        "result": "health_use_requested",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "useSamples": 19,
+      "useVariants": [
+        1
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

@@ -1,0 +1,165 @@
+{
+  "passed": false,
+  "failure": "6 case(s) failed: host-climbtop: Source still on the chain after 9 s up (states 29) | host-waterexit: Source did not enter native swimming | host-guardfight: No block impact or timed parry presented (hits 0, attacks 0) | client-climbtop: Source still on the chain after 9 s up (states 29) | client-waterexit: Source did not enter native swimming | client-guardfight: No block impact or timed parry presented (hits 0, attacks 0)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "swim",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (184 samples): strokes 96 (lateral 39), sink 13, rise 14"
+      ],
+      "sourceSwimming": true,
+      "swimming": 184,
+      "lateral": 39,
+      "moving": 96,
+      "sinking": 13,
+      "rising": 14
+    },
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (82 samples, 10 phases), ascending 9, descending 35"
+      ],
+      "climbing": 82,
+      "ascending": 9,
+      "descending": 35,
+      "phases": 10
+    },
+    {
+      "source": "host",
+      "case": "climbtop",
+      "observer": "client",
+      "passed": false,
+      "failure": "Source still on the chain after 9 s up (states 29)",
+      "checks": [],
+      "sourceAfter": [
+        29
+      ],
+      "defaultModeAfter": false,
+      "sourcePosition": [
+        -41.7308,
+        73.36,
+        16.0402
+      ],
+      "climbing": 134,
+      "lastClimbMs": 13484,
+      "topTraversal": []
+    },
+    {
+      "source": "host",
+      "case": "waterexit",
+      "observer": "client",
+      "passed": false,
+      "failure": "Source did not enter native swimming",
+      "checks": []
+    },
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 0)",
+      "checks": [],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "outcomeWaitMs": 683,
+      "guard": "script_spawner_streets_windmill_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 0,
+      "attackVariants": [],
+      "minSourceHealth": 70.0
+    },
+    {
+      "source": "client",
+      "case": "swim",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (185 samples): strokes 95 (lateral 38), sink 15, rise 29"
+      ],
+      "sourceSwimming": true,
+      "swimming": 185,
+      "lateral": 38,
+      "moving": 95,
+      "sinking": 15,
+      "rising": 29
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (83 samples, 10 phases), ascending 34, descending 34"
+      ],
+      "climbing": 83,
+      "ascending": 34,
+      "descending": 34,
+      "phases": 10
+    },
+    {
+      "source": "client",
+      "case": "climbtop",
+      "observer": "host",
+      "passed": false,
+      "failure": "Source still on the chain after 9 s up (states 29)",
+      "checks": [],
+      "sourceAfter": [
+        29
+      ],
+      "defaultModeAfter": false,
+      "sourcePosition": [
+        -41.7307,
+        73.36,
+        10.354
+      ],
+      "climbing": 135,
+      "lastClimbMs": 13485,
+      "topTraversal": []
+    },
+    {
+      "source": "client",
+      "case": "waterexit",
+      "observer": "host",
+      "passed": false,
+      "failure": "Source did not enter native swimming",
+      "checks": []
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 0)",
+      "checks": [],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "outcomeWaitMs": 661,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 0,
+      "attackVariants": [],
+      "minSourceHealth": 70.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

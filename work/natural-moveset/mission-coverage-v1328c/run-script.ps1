@@ -1,0 +1,211 @@
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+# 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
+# beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
+# source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
+# presentation state on the observer:
+# - swim: the source drops into the canal lane, swims forward, dives (B), rises (A) and swims back; the partner must
+#   present swimming (swim weight > .5, >= 20 samples), moving strokes (>= 5), a sink and a rise;
+# - climb: the source grabs chain1 (X), climbs up, climbs down and lets go (A); the partner must present climbing
+#   (climb weight > .5, >= 20 samples) ascending and descending through at least 5 cycle phases;
+# - guardfight (with an opponent): the source (health held, coop_player_health_hold) faces a fresh mission guard
+#   (Corvo the windmill guard, Emily checkpoint guard 01): one attack alerts it (1328a: unaware guards never attacked),
+#   then it blocks in cycles while the guard attacks, stands unguarded, then attacks to the kill with re-aims; the partner must present block impacts or timed parries (combat variants
+#   19-21), a hit reaction (stun weight > .5), at least three target-bearing attacks, and the guard must end dead or
+#   unconscious in both worlds alike.
+# Both peers load the mission with the native `campaign` command (host Corvo, client Emily) and pass its modals; the
+# Dunwall fixture is restored afterwards (PrepareShadowSword, note inventory) and the protected files are checked.
+$Sources=@($Sources|ForEach-Object {$_-split','}|Where-Object {$_});$Cases=@($Cases|ForEach-Object {$_-split','}|Where-Object {$_})
+if(@($Sources+$Cases|Where-Object {$_-notmatch'^[a-z0-9]+$'}).Count){throw "Bad case or source list: $($Sources-join ' | ') / $($Cases-join ' | ')"}
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null
+$pids=@{};$rows=[Collections.Generic.List[object]]::new();$inv=[Globalization.CultureInfo]::InvariantCulture;$spawn=@{}
+function Save($p,$v){$v|ConvertTo-Json -Depth 15|Set-Content -LiteralPath $p}
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function I($r,$b='Neutral',$ms=100,$ly=0,$lx=0){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms -LeftY $ly -LeftX $lx|Out-Null}
+function S($r,$suffix=''){for($a=0;$a-lt40;$a++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
+function Q($r,$mode,$arg=0){for($a=0;$a-lt8;$a++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 20};throw "Native read failed $mode"}
+function P($x,$y,$z,$yaw,$pitch=0){'setviewpos {0} {1} {2} {3} {4}' -f ([double]$x).ToString('F3',$inv),([double]$y).ToString('F3',$inv),([double]$z).ToString('F3',$inv),([double]$yaw).ToString('F2',$inv),([double]$pitch).ToString('F1',$inv)}
+function Live($r){$s=S $r;$m=S $r '.movement.json';$x=S $r '.shadow-stream.json';$a=$s.probeRenderPosition;$b=$s.remotePosition
+ $d=if($a-and$b){[Math]::Sqrt(($a[0]-$b[0])*($a[0]-$b[0])+($a[1]-$b[1])*($a[1]-$b[1])+($a[2]-$b[2])*($a[2]-$b[2]))}else{999}
+ @{follow=$s.probeFollowEnabled;distance=[Math]::Round($d,3);product=(S $r '.product.json').result;bank=[bool]$m.active;stream=[bool]($x.armed-and$x.ready);ok=($s.probeActorHandle-and$s.probeFollowEnabled-and$d-lt1.0-and$m.active-and$x.armed-and$x.ready-and$s.remoteFresh)}}
+function WaitLive($tag,$limit=30000){$w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 300;$p=@{host=(Live host);client=(Live client)};$ok=$p.host.ok-and$p.client.ok}while(!$ok-and$w.ElapsedMilliseconds-lt$limit);$p.ok=$ok;$p.waitMs=$w.ElapsedMilliseconds;Save "$out/live-$tag.json" $p;$p}
+function WaitGameplay($limitMs){$w=[Diagnostics.Stopwatch]::StartNew();$log=[Collections.Generic.List[object]]::new();$last=@{host=0;client=0}
+ do{Start-Sleep -Milliseconds 500;$ready=$true
+  foreach($r in 'host','client'){$s=S $r;$log.Add(@{ms=$w.ElapsedMilliseconds;role=$r;logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMapId})
+   if($s.localGameLogicState-ne1-or$s.localPendingGameLogicState){$ready=$false}
+   if($s.localGameLogicState-in8,15-and$w.ElapsedMilliseconds-gt5000-and$w.ElapsedMilliseconds-$last[$r]-gt1500){I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
+   elseif($s.localGameLogicState-eq5-and$w.ElapsedMilliseconds-$last[$r]-gt4000){I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
+   elseif($s.localGameLogicState-eq12-and$w.ElapsedMilliseconds-$last[$r]-gt1500){I $r B 200;$last[$r]=$w.ElapsedMilliseconds}}
+  if($ready-and(S host).localMapId-ne(S client).localMapId){$ready=$false}
+ }while(!$ready-and$w.ElapsedMilliseconds-lt$limitMs);@{ready=$ready;log=@($log)}}
+function Capture($key,$seconds){$list=@();foreach($pair in @(@($script:source,'source'),@($script:peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
+  $list+=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string]$seconds,'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru};$list}
+function Living($r){@((Q $r '--world-npcs').npcs)}
+function Dist2($a,$b){[Math]::Sqrt(([double]$a[0]-[double]$b[0])*([double]$a[0]-[double]$b[0])+([double]$a[1]-[double]$b[1])*([double]$a[1]-[double]$b[1]))}
+function Outcome($r,$spawner){$n=@((Q $r '--world-npcs').npcs|Where-Object spawnerName -eq $spawner);if(!$n.Count){return 'absent'};$h=try{Q $r '--health' $n[0].handle}catch{$null}
+ if(!$h){return 'unreadable'};if($h.current-le0){'dead'}elseif($h.ownerSuppressed){'unconscious'}else{'alive'}}
+function Sample($t){$mv=S $script:peer '.movement.json';[pscustomobject]@{ms=$t;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;stunVariant=$mv.stunVariant;stunWeight=$mv.stunWeight;weight=$mv.weight;speed=$mv.speed;swimWeight=$mv.swimWeight;swimMove=$mv.swimMove;swimRise=$mv.swimRise;swimSink=$mv.swimSink;swimVz=$mv.swimVz;climbWeight=$mv.climbWeight;climbPhase=$mv.climbPhase;climbDescend=$mv.climbDescend;climbVz=$mv.climbVz;traversalVariant=$mv.traversalVariant;traversalWeight=$mv.traversalWeight;airWeight=$mv.airWeight}}
+function Run($key,$ms,$plan){$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$k=0
+ while($watch.ElapsedMilliseconds-lt$ms){$t=$watch.ElapsedMilliseconds
+  if($k-lt$plan.Count-and$t-ge$plan[$k][0]){$d=$plan[$k];I $script:source $d[1] $d[2] $d[3] $(if($d.Count-gt4){$d[4]}else{0});$k++}
+  $samples.Add((Sample $t));Start-Sleep -Milliseconds 90}
+ Save "$out/$key-samples.json" @($samples);@($samples)}
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Another native operation remains active'}
+ if(Test-Path -LiteralPath $out){throw 'Unique evidence take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+ [ordered]@{pid=$PID;operation='MissionCoverage1328';take=$Take;started=(Get-Date).ToString('o');state='running'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+ $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;$dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;if($dll-ne$pin.dll){throw "Expected $Candidate"}
+ foreach($r in 'host','client'){$l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
+  if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid
+  if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}}
+ Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;mapInfo=$MapInfo;chaos=$Chaos;sources=$Sources;cases=$Cases})
+ $dirty=$true
+ foreach($r in 'host','client'){I $r;foreach($cmd in 'coop_checkpoint_sync off','coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off'){C $r $cmd}}
+ C host "campaign $MapInfo $Chaos corvo";C client "campaign $MapInfo $Chaos emily"
+ $g=WaitGameplay 300000;Save "$out/load-log.json" $g.log;if(!$g.ready){throw 'Both instances did not reach the same mission gameplay'}
+ foreach($r in 'host','client'){C $r $(if($r-eq'client'){'coop_checkpoint_delay 1500'}else{'coop_checkpoint_delay 0'})}
+ foreach($r in 'host','client'){I $r;C $r 'coop_movement_fixture off';C $r 'coop_product_auto on'}
+ $w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$ok=(S host '.product.json').result-eq'armed'-and(S client '.product.json').result-eq'armed'}while(!$ok-and$w.ElapsedMilliseconds-lt60000)
+ if(!$ok){throw 'Product controller not armed on the mission'}
+ $live=WaitLive 'armed' 60000;if(!$live.ok){foreach($q in 'host','client'){Save "$out/movement-armed-$q.json" (S $q '.movement.json')};throw 'Partner presentation not live after arming'}
+ foreach($r in 'host','client'){$sp=Q $r '--player';$o=$sp.nativeViewOrientation;$n=[Math]::Sqrt($o[0]*$o[0]+$o[1]*$o[1]);$spawn[$r]=@{x=[double]$sp.candidatePosition[0];y=[double]$sp.candidatePosition[1];z=[double]$sp.candidatePosition[2];fx=$o[0]/$n;fy=$o[1]/$n}}
+ Save "$out/spawn.json" $spawn
+ foreach($script:source in $Sources){$script:peer=if($source-eq'host'){'client'}else{'host'}
+  foreach($case in $Cases){$key="$source-$case";$row=[ordered]@{source=$source;case=$case;observer=$peer;passed=$false;failure=$null;checks=[Collections.Generic.List[string]]::new()};$caps=@()
+   try{
+    $sp=$spawn[$source];$fx=$sp.fx;$fy=$sp.fy;$px=-$fy;$py=$fx
+    # Both players start on the spawn dock, the observer 2.5 m in front of the source, facing it.
+    C $source (P $sp.x $sp.y ($sp.z+1.7) ([Math]::Atan2($fy,$fx)*180/[Math]::PI));C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) ([Math]::Atan2(-$fy,-$fx)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
+    $l=WaitLive "$key-placed" 30000;if(!$l.ok){throw 'Partner presentation not live after placement'}
+    if($case-eq'swim'){
+     $wx=$sp.x+$SwimLane*$px;$wy=$sp.y+$SwimLane*$py;$yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;$vyaw=[Math]::Atan2($py,$px)*180/[Math]::PI
+     C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800
+     $st=Q $source '--player-states';Save "$out/$key-source-in-water.json" $st;$row.sourceSwimming=(!$st.defaultMode-and@($st.active|Where-Object {$_.id-eq0}).Count-gt0)
+     C $peer (P $sp.x $sp.y ($sp.z+1.7) $vyaw);Start-Sleep -Milliseconds 900
+     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $SwimPitch -Quick|Out-Null
+     C $peer (P ($wx-4.5*$px+3.5*$fx) ($wy-4.5*$py+3.5*$fy) $CameraHeight $vyaw);Start-Sleep -Milliseconds 150;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P $sp.x $sp.y ($sp.z+1.7) $vyaw);Start-Sleep -Milliseconds 900
+     $caps=Capture $key 19
+     $s=Run $key 17500 @(@(1500,'Neutral',2200,32000),@(4100,'B',1500,0),@(5900,'A',1500,0),@(7700,'Neutral',2000,-32000),@(10000,'Neutral',1800,0,-32000),@(12100,'Neutral',1800,0,32000),@(14200,'Neutral',100,0))
+     $sw=@($s|Where-Object {[double]$_.swimWeight-gt.5});$row.swimming=$sw.Count;$row.lateral=@($sw|Where-Object {$_.ms-ge10200-and$_.ms-lt14000-and[double]$_.swimMove-gt.5}).Count;$row.moving=@($sw|Where-Object {[double]$_.swimMove-gt.5}).Count;$row.sinking=@($sw|Where-Object {[double]$_.swimSink-gt.3}).Count;$row.rising=@($sw|Where-Object {[double]$_.swimRise-gt.3}).Count
+     C $peer 'coop_observer_camera off'
+     if(!$row.sourceSwimming){throw 'Source not in native swimming'};if($row.lateral-lt4){throw "Lateral strokes presented $($row.lateral)"};if($row.swimming-lt20-or$row.moving-lt5-or!$row.sinking-or!$row.rising){throw "Swimming presented $($row.swimming), moving $($row.moving), sinking $($row.sinking), rising $($row.rising)"}
+     $row.checks.Add("Partner presented native swimming ($($row.swimming) samples): strokes $($row.moving) (lateral $($row.lateral)), sink $($row.sinking), rise $($row.rising)")}
+    if($case-eq'waterexit'){
+     # 1057: enter the canal lane facing the dock and pulse forward with A until the source stands on land.
+     $wx=$sp.x+$SwimLane*$px;$wy=$sp.y+$SwimLane*$py;$yaw=[Math]::Atan2(-$py,-$px)*180/[Math]::PI
+     C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800
+     $st=Q $source '--player-states';Save "$out/$key-source-in-water.json" $st;if($st.defaultMode-or!@($st.active|Where-Object {$_.id-eq0}).Count){throw 'Source did not enter native swimming'}
+     $tx=$wx-2*$px;$ty=$wy-2*$py;$oyaw=[Math]::Atan2($ty-($sp.y+2.5*$fy),$tx-($sp.x+2.5*$fx))*180/[Math]::PI
+     C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) $oyaw);Start-Sleep -Milliseconds 900;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null
+     $caps=Capture $key 14
+     $s=Run $key 12000 @(@(800,'A',700,32000),@(2300,'A',700,32000),@(3800,'A',700,32000),@(5300,'A',700,32000),@(6800,'Neutral',800,32000),@(7800,'Neutral',100,0))
+     $after=Q $source '--player-states';Save "$out/$key-source-after.json" $after;$row.exited=[bool]$after.defaultMode;$row.sourcePosition=(Q $source '--player').candidatePosition
+     $row.swimming=@($s|Where-Object {[double]$_.swimWeight-gt.5}).Count;$row.exitTraversal=@($s|Where-Object {[double]$_.traversalWeight-gt.5}|ForEach-Object {[int]$_.traversalVariant}|Sort-Object -Unique)
+     $row.landSamples=@($s|Where-Object {$_.ms-gt6000-and[double]$_.swimWeight-lt.05-and[double]$_.weight-gt.9}).Count
+     if(!$row.exited){throw 'Source did not leave the water'};if(!$row.swimming){throw 'Partner swimming not presented before the exit'};if(!@($row.exitTraversal).Count-and!$row.landSamples){throw 'Partner exit not presented'}
+     $row.checks.Add("Source left the water onto the dock; partner swam ($($row.swimming)), exit traversal $(@($row.exitTraversal)-join ','), land samples $($row.landSamples)")}
+    if($case-eq'hardfall'){
+     # 1333a: indoors the 12 m drop met an upper floor; here the source drops 12 m onto the open spawn dock, health held.
+     $yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;C $source 'coop_player_health_hold on'
+     C $peer (P ($sp.x+5*$px) ($sp.y+5*$py) ($sp.z+1.7) ([Math]::Atan2(-$py,-$px)*180/[Math]::PI));Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null
+     $caps=Capture $key 11;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$dropped=$false;$walked=$false;$states=[Collections.Generic.List[object]]::new()
+     while($watch.ElapsedMilliseconds-lt9000){$t=$watch.ElapsedMilliseconds
+      if(!$dropped-and$t-ge800){C $source (P $sp.x $sp.y ($sp.z+13.7) $yaw);$dropped=$true}
+      if(!$walked-and$t-ge5200){I $source 'Neutral' 1600 14000;$walked=$true}
+      $ps=try{Q $source '--player-states'}catch{$null};$states.Add([pscustomobject]@{ms=$t;active=@($ps.active|ForEach-Object {$_.id});z=$(if($ps){[double]$ps.position[2]}else{$null})})
+      $x=Sample $t;$samples.Add($x);Start-Sleep -Milliseconds 40}
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-states.json" @($states);C $source 'coop_player_health_hold off'
+     $zs=@($states|Where-Object {$_.z-ne$null-and$_.ms-gt900}|ForEach-Object {$_.z});$row.fallMetres=[Math]::Round((($zs|Measure-Object -Maximum).Maximum)-$zs[-1],2)
+     $row.nativeHardLanding=@($states|Where-Object {@($_.active)-contains11}).Count;$row.nativeStates=@($states|ForEach-Object {$_.active}|Sort-Object -Unique)
+     $row.hardLandingSamples=@($samples|Where-Object {[double]$_.traversalWeight-gt.5-and[int]$_.traversalVariant-eq6}).Count;$row.walkOn=@($samples|Where-Object {$_.ms-ge5300-and[double]$_.speed-gt.3}).Count
+     if($row.fallMetres-lt9){throw "Source fell only $($row.fallMetres) m"};if(!$row.nativeHardLanding){throw "No native hard landing (states $($row.nativeStates-join ','))"};if(!$row.hardLandingSamples){throw 'Hard landing not presented (traversal variant 6)'};if(!$row.walkOn){throw 'No travel after the hard landing'}
+     $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
+    if($case-eq'climbtop'){
+     $lz=$ChainZ-2.22
+     C $peer (P ($ChainX-4.5) ($ChainY-1.5) ($lz+3.5) 0 5);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
+     C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
+     $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
+     $caps=Capture $key 15
+     $s=Run $key 13500 @(@(300,'X',600,0),@(1700,'Neutral',9000,32000),@(11000,'Neutral',100,0))
+     $after=Q $source '--player-states';Save "$out/$key-source-after.json" $after;$row.sourceAfter=@($after.active|ForEach-Object {$_.id});$row.defaultModeAfter=[bool]$after.defaultMode;$row.sourcePosition=(Q $source '--player').candidatePosition
+     $cl=@($s|Where-Object {[double]$_.climbWeight-gt.5});$row.climbing=$cl.Count;$row.lastClimbMs=if($cl.Count){$cl[-1].ms}else{0};$row.topTraversal=@($s|Where-Object {$_.ms-gt$row.lastClimbMs-and[double]$_.traversalWeight-gt.5}|ForEach-Object {[int]$_.traversalVariant}|Sort-Object -Unique)
+     C $peer 'coop_observer_camera off'
+     if($row.climbing-lt20){throw "Climbing presented $($row.climbing)"};if(!$row.defaultModeAfter){throw "Source still on the chain after 9 s up (states $($row.sourceAfter-join ','))"}
+     $row.checks.Add("Climbed chain1 to the end: $($row.climbing) climb samples, source back in default mode at $(@($row.sourcePosition|ForEach-Object {[Math]::Round([double]$_,2)})-join ','), top traversal $(@($row.topTraversal)-join ',')")}
+    if($case-eq'climb'){
+     $lz=$ChainZ-2.22
+     C $peer (P ($ChainX-4.5) ($ChainY-1.5) ($lz+1.9) 0 5);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
+     C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
+     $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
+     $caps=Capture $key 13
+     $s=Run $key 11500 @(@(300,'X',600,0),@(1700,'Neutral',3000,32000),@(4900,'Neutral',3000,-32000),@(8100,'A',300,0),@(9000,'Neutral',100,0))
+     $states=Q $source '--player-states';Save "$out/$key-source-after.json" $states
+     $cl=@($s|Where-Object {[double]$_.climbWeight-gt.5});$row.climbing=$cl.Count;$row.ascending=@($cl|Where-Object {[double]$_.climbDescend-lt.5-and[double]$_.climbVz-gt.05}).Count;$row.descending=@($cl|Where-Object {[double]$_.climbDescend-gt.5}).Count
+     $row.phases=@($cl|ForEach-Object {[Math]::Floor([double]$_.climbPhase*10)}|Sort-Object -Unique).Count
+     C $peer 'coop_observer_camera off'
+     if($row.climbing-lt20-or$row.phases-lt5-or$row.ascending-lt3-or$row.descending-lt3){throw "Climbing presented $($row.climbing), phases $($row.phases), ascending $($row.ascending), descending $($row.descending)"}
+     $row.checks.Add("Partner presented native chain climbing ($($row.climbing) samples, $($row.phases) phases), ascending $($row.ascending), descending $($row.descending)")}
+    if($case-eq'guardfight'){$gname=if($source-eq'host'){$GuardHost}else{$GuardClient};$g=@(Living $source|Where-Object spawnerName -eq $gname);if($g.Count-ne1){throw "Guard $gname missing"};$gp=$g[0].position
+     # 1.6 m along +y from the guard, facing it, so the alerting swing lands (1328b started 3.5 m away: the guard never
+     # noticed); the free camera behind and to the side, raised.
+     $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$sx=$gx;$sy=$gy+1.6;$yaw=[Math]::Atan2($gy-$sy,$gx-$sx)*180/[Math]::PI;$mx=($gx+$sx)/2;$my=($gy+$sy)/2
+     $cx=$sx-2.5;$cy=$sy+3.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
+     C $peer (P $cx $cy ($gz+2.4) $cyaw);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) 0);Start-Sleep -Milliseconds 600
+     C $source 'coop_player_health_hold on';C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
+     # 1328b: in 1328a the guards never attacked (unaware of a silently placed, blocking source): one attack alerts the
+     # guard first, then block cycles, an unguarded stretch, and attacks to the kill.
+     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=1500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
+     while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
+      if($t-lt1500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null;$provoked=$true}}
+      elseif($t-lt12500){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
+      elseif($t-lt18000){$phase='open'}
+      else{$phase='attack'
+       if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
+         if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
+          if($d-gt1.8){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k};C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}catch{}}
+       if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
+      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x);Start-Sleep -Milliseconds 80}
+     Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
+     # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
+     $ow=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)}}while($row.outcome.host-ne$row.outcome.client-and$ow.ElapsedMilliseconds-lt8000)
+     $row.outcomeWaitMs=$ow.ElapsedMilliseconds;$row.guard=$gname
+     foreach($q in 'host','client'){foreach($suffix in '.npc-combat.json','.npc-stream.json','.npc-attack.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
+     $row.blockImpacts=@($samples|Where-Object {[int]$_.combatVariant-in19,20-and[double]$_.combatWeight-gt.5}).Count;$row.timedParries=@($samples|Where-Object {[int]$_.combatVariant-eq21-and[double]$_.combatWeight-gt.5}).Count
+     $row.hitReactions=@($samples|Where-Object {[double]$_.stunWeight-gt.5}).Count;$row.stunVariants=@($samples|Where-Object {[double]$_.stunWeight-gt.5}|ForEach-Object {[int]$_.stunVariant}|Sort-Object -Unique)
+     $atk=@($samples|Where-Object {$_.phase-eq'attack'-and[double]$_.combatWeight-gt.5-and[int]$_.combatVariant-notin19,20,21});$row.attackSamples=$atk.Count;$row.attackVariants=@($atk|ForEach-Object {[int]$_.combatVariant}|Sort-Object -Unique)
+     $row.minSourceHealth=($samples|ForEach-Object {$_.sourceHealth}|Where-Object {$_-ne$null}|Measure-Object -Minimum).Minimum
+     C $peer 'coop_observer_camera off'
+     if(!($row.blockImpacts+$row.timedParries)){throw "No block impact or timed parry presented (hits $($row.hitReactions), attacks $($row.attackSamples))"}
+     if(!$row.hitReactions){throw 'No hit reaction presented'};if($row.attackSamples-lt3){throw "Attacks presented $($row.attackSamples)"}
+     if($row.outcome.host-ne$row.outcome.client-or$row.outcome.host-notin'dead','unconscious'){throw "Guard outcome host $($row.outcome.host), client $($row.outcome.client)"}
+     $row.checks.Add("Block impacts $($row.blockImpacts), timed parries $($row.timedParries), hit reactions $($row.hitReactions) (variants $($row.stunVariants-join ',')), attacks $($row.attackSamples) (variants $($row.attackVariants-join ',')); guard $($row.outcome.host) in both worlds")}
+    foreach($c in $caps){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$caps=@()
+    foreach($q in 'host','client'){foreach($suffix in '.movement.json','.shadow-stream.json','.product.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
+    $row.passed=$true
+   }catch{$row.failure=$_.Exception.Message}
+   finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
+    try{$sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
+   Save "$out/$key.json" $row;$rows.Add($row)}}
+ $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
+}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
+finally{
+ if($owned){$errors=[Collections.Generic.List[string]]::new()
+  if($dirty){
+   $cw=[Diagnostics.Stopwatch]::StartNew()
+   do{$off=$true;foreach($r in 'host','client'){try{I $r;C $r 'coop_observer_camera off';C $r 'coop_product_auto off';C $r 'coop_movement_resume off';foreach($cmd in 'coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off','coop_shadow_stream off','coop_movement_bank off','coop_trigger_mirror off'){C $r $cmd};C $r 'coop_checkpoint_sync off';$st=S $r
+     if((S $r '.reset.json').enabled){$off=$false;if($st.localGameLogicState-in8,15){I $r A 300}elseif($st.localGameLogicState-eq2){I $r B 200}}}catch{}}
+    if(!$off){Start-Sleep -Milliseconds 1500}}while(!$off-and$cw.ElapsedMilliseconds-lt60000)
+   foreach($r in 'host','client'){try{if((S $r).localGameLogicState-in2,12){I $r B 200;Start-Sleep -Milliseconds 800}}catch{}}
+   try{& "$root/work/PrepareShadowSword.ps1" -EvidencePath "$out/restored-setup.json"|Out-Null;& "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$root/work/natural-moveset/native-coin-reward-v786c" -Evidence "$out/note-restoration"|Out-Null}catch{$errors.Add($_.Exception.Message)}}
+  foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw 'Final gameplay/health/transport not restored'}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
+  foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}
+  Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '}
+  Save "$out/result.json" ([ordered]@{passed=(!$failure);failure=$failure;cases=@($rows);scope='Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored.'})
+  [ordered]@{pid=$PID;operation='MissionCoverage1328';take=$Take;ended=(Get-Date).ToString('o');state='finished'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+  $mutex.ReleaseMutex()}
+ $mutex.Dispose()}
+if($failure){throw $failure};"PASS_MISSION_COVERAGE $($rows.Count) cases"

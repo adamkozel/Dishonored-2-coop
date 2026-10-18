@@ -1,0 +1,58 @@
+{
+  "source": "host",
+  "case": "doublejump",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Armed, running and holstered double jumps: each second impulse presented in the air"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    5212.0
+  ],
+  "air": [
+    {
+      "from": 2601,
+      "to": 4712,
+      "samples": 12
+    },
+    {
+      "from": 6953,
+      "to": 8210,
+      "samples": 5
+    },
+    {
+      "from": 13241,
+      "to": 15422,
+      "samples": 13
+    }
+  ],
+  "grant": {
+    "grants": 19,
+    "refused": 0,
+    "result": "granted_named"
+  },
+  "doubles": [
+    {
+      "jump": "armed",
+      "serialBefore": 0,
+      "serialAfter": 1.0,
+      "secondSamples": 3
+    },
+    {
+      "jump": "running",
+      "serialBefore": 1,
+      "serialAfter": 2.0,
+      "secondSamples": 2
+    },
+    {
+      "jump": "holstered",
+      "serialBefore": 2,
+      "serialAfter": 3.0,
+      "secondSamples": 3
+    }
+  ],
+  "restored": true
+}

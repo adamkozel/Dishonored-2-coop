@@ -1,0 +1,123 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "doublejump",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, running and holstered double jumps: each second impulse presented in the air"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5212.0
+      ],
+      "air": [
+        {
+          "from": 2601,
+          "to": 4712,
+          "samples": 12
+        },
+        {
+          "from": 6953,
+          "to": 8210,
+          "samples": 5
+        },
+        {
+          "from": 13241,
+          "to": 15422,
+          "samples": 13
+        }
+      ],
+      "grant": {
+        "grants": 19,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "doubles": [
+        {
+          "jump": "armed",
+          "serialBefore": 0,
+          "serialAfter": 1.0,
+          "secondSamples": 3
+        },
+        {
+          "jump": "running",
+          "serialBefore": 1,
+          "serialAfter": 2.0,
+          "secondSamples": 2
+        },
+        {
+          "jump": "holstered",
+          "serialBefore": 2,
+          "serialAfter": 3.0,
+          "secondSamples": 3
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "doublejump",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, running and holstered double jumps: each second impulse presented in the air"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5273.0
+      ],
+      "air": [
+        {
+          "from": 2595,
+          "to": 4651,
+          "samples": 12
+        },
+        {
+          "from": 6955,
+          "to": 8165,
+          "samples": 5
+        },
+        {
+          "from": 13219,
+          "to": 15299,
+          "samples": 12
+        }
+      ],
+      "grant": {
+        "grants": 8,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "doubles": [
+        {
+          "jump": "armed",
+          "serialBefore": 0,
+          "serialAfter": 1.0,
+          "secondSamples": 3
+        },
+        {
+          "jump": "running",
+          "serialBefore": 1,
+          "serialAfter": 2.0,
+          "secondSamples": 3
+        },
+        {
+          "jump": "holstered",
+          "serialBefore": 2,
+          "serialAfter": 3.0,
+          "secondSamples": 3
+        }
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Traversal coverage part 3 (1333, #11): double jumps (Agility granted by name) armed, running and holstered; a 12 m hard landing with the health held. Traversal base (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

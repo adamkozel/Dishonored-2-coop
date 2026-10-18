@@ -1,0 +1,309 @@
+{
+  "audit": "completion-audit-v1331-traversal",
+  "family": "traversal",
+  "candidate": "candidate-npc-combat-v1214cl",
+  "method": "Each decision rests on coverage takes on candidate 1214cl under the product controller (both source roles, the partner checked from its own presentation state on the observer, the checkpoint reloaded after every case), on the reviewed observer videos listed per item, and on the earlier visual sweep 1260 acceptance recorded in the item notes. Lifecycle: every coverage case re-arms the product controller after a checkpoint reload and waits for the partner presentation to come back; the 2-hour soak mission-soak-v1316a covers 19 shared restarts and session renewals; the clean-PC take product-two-account-v1315b covers the two-account Steam session, leave and rejoin.",
+  "items": [
+    {
+      "id": "standing_jump_takeoff",
+      "decision": "complete",
+      "scope": "Standing jumps armed and holstered in both roles: each presents an air episode (air weight > .5) that lands and settles; the armed mix follows the sword.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-jumps",
+            "client-jumps"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/host-jumps-observer.mp4",
+          "verdict": "Corvo takes off from a planted idle, tucks, lands with a compression and recovers, armed and holstered."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "running_jump_takeoff",
+      "decision": "complete",
+      "scope": "Running and sprint (maximum-speed) jumps in both roles, presented from the run and sprint gaits with air episodes and moving landings.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-runjump",
+            "client-runjump"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/client-runjump-observer.mp4",
+          "verdict": "Emily runs into the jump, carries through the air toward the camera and keeps running."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouch_jump_transition",
+      "decision": "complete",
+      "scope": "Crouched jumps in both roles: the take-off starts crouched, an air episode lands and settles, and the native landing returns to the crouch.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-jumps",
+            "client-jumps"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/host-jumps-observer.mp4",
+          "verdict": "Corvo jumps from the crouch, tucks and lands back into the crouch."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "rising_airborne",
+      "decision": "complete",
+      "scope": "The rising part of standing, crouched, holstered, running and sprint jumps and the start of the 6 m fall, presented as air episodes tracking native height in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-jumps",
+            "host-runjump",
+            "host-fall",
+            "client-jumps",
+            "client-runjump",
+            "client-fall"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/host-jumps-observer.mp4",
+          "verdict": "The ascent pose extends, then tucks with height."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "fall_loop",
+      "decision": "complete",
+      "scope": "A 6 m fall in both roles: the partner presents the fall as an air episode of at least 3 samples that lands and settles.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-fall",
+            "client-fall"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/host-fall-observer.mp4",
+          "verdict": "Corvo drops from height in the falling pose and lands."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "soft_landing",
+      "decision": "complete",
+      "scope": "Landings after standing, crouched and holstered jumps settle (speed and air weight back near zero) in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-jumps",
+            "client-jumps"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/host-jumps-observer.mp4",
+          "verdict": "Each landing compresses and recovers to a planted idle."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "moving_landing",
+      "decision": "complete",
+      "scope": "Landings after running and sprint jumps keep moving (speed > 1 within 0.8 s) in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-runjump",
+            "client-runjump"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/client-runjump-observer.mp4",
+          "verdict": "Emily lands from the run jump into a continuing stride."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "vault_low_obstacle",
+      "decision": "complete",
+      "scope": "Native vaults (state 9) over the safe-room obstacle, armed and holstered, in both roles: the partner presents the vault (traversal variant 3) and recovers; the vault-exit clock reset is fixed (1214ci).",
+      "takes": [
+        {
+          "take": "coverage-v1326d",
+          "cases": [
+            "host-vault",
+            "client-vault"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1326d/host-vault-observer.mp4",
+          "verdict": "Seen side-on, Corvo runs in, goes over the obstacle airborne with legs tucked and carries on."
+        },
+        {
+          "video": "coverage-v1326d/client-vault-observer.mp4",
+          "verdict": "Seen side-on, Emily vaults the obstacle the same way."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "climb_high_ledge",
+      "decision": "complete",
+      "scope": "Native high mantles (state 8, kind 2) standing and crouched in both roles: the partner presents variants 4 and 5 matching the native exit stance and recovers.",
+      "takes": [
+        {
+          "take": "coverage-v1326d",
+          "cases": [
+            "host-highmantle",
+            "client-highmantle"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1326c/client-highmantle-observer.mp4",
+          "verdict": "Emily jumps, reaches up and pulls onto the canopy, then stands on top."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "ledge_hang_and_pull_up",
+      "decision": "complete",
+      "scope": "The native game has no sustained ledge hang: its only climbing state is arkPlayerStateClimb on arkClimbable, and ledge grabs are the native mantle (confirmed static, d2-ghidra string search). The low and high mantles (grab, pull-up, standing or crouched exit) are presented in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1326d",
+          "cases": [
+            "host-lowmantle",
+            "host-highmantle",
+            "client-lowmantle",
+            "client-highmantle"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1326c/client-highmantle-observer.mp4",
+          "verdict": "The grab and pull-up read as a reach and climb onto the ledge."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "slide_enter_loop_exit",
+      "decision": "complete",
+      "scope": "Native slides from a sprint in both roles: entry, hold and recovery presented (slide weight > .8), with crouched, jump-out and stand exits.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-slide",
+            "host-slideexit",
+            "client-slide",
+            "client-slideexit"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/client-slideexit-observer.mp4",
+          "verdict": "Emily sprints, drops into the slide and jumps out of it; the second slide enters low."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "slide_to_crouch_or_stand",
+      "decision": "complete",
+      "scope": "Slide exits to the crouch (the native default), to a jump and to standing (B once the slide has ended) in both roles; the partner ends standing.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-slide",
+            "host-slideexit",
+            "client-slide",
+            "client-slideexit"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321h/client-slideexit-observer.mp4",
+          "verdict": "The slide recovers into a crouch, and the jump exit lands standing."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "double_jump",
+      "decision": "open",
+      "scope": "Earlier bounded takes: the native Agility second impulse is presented as a distinct tuck (22 checks).",
+      "takes": [],
+      "visual": [],
+      "remaining": "A product-controller take on the current candidate with the Agility upgrade (product mode needs a lab grant: the isolated agility fixture refuses product mode), stationary and moving, armed and holstered, in both roles.",
+      "lifecycle": "See method."
+    },
+    {
+      "id": "hard_landing",
+      "decision": "open",
+      "scope": "The 6 m fall lands and settles in both roles (1321h); earlier takes cover the native CatFall light landing standing and crouched.",
+      "takes": [
+        {
+          "take": "coverage-v1321h",
+          "cases": [
+            "host-fall",
+            "client-fall"
+          ]
+        }
+      ],
+      "visual": [],
+      "remaining": "A damaging fall (higher, with the health held) presenting the native strong landing or roll, and a travelling landing recovery, in both roles.",
+      "lifecycle": "See method."
+    },
+    {
+      "id": "window_enter_exit",
+      "decision": "open",
+      "scope": "Earlier take 1235: the native low confined mantle through the climbable Edge of the World window is presented on the partner.",
+      "takes": [],
+      "visual": [],
+      "remaining": "A product-controller take on the current candidate through the climbable window in both roles, with the observer video reviewed.",
+      "lifecycle": "See method."
+    }
+  ]
+}

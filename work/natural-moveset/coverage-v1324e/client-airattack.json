@@ -1,0 +1,88 @@
+{
+  "source": "client",
+  "case": "airattack",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Early, late and running jump attacks presented combat in the air, then settled"
+  ],
+  "camera": [
+    -30.5,
+    -148.5,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    6863.0
+  ],
+  "combat": [
+    {
+      "from": 1420,
+      "to": 2059,
+      "samples": 6,
+      "variants": [
+        1,
+        3
+      ],
+      "crouched": 0,
+      "moving": 0,
+      "air": 6
+    },
+    {
+      "from": 4844,
+      "to": 5234,
+      "samples": 4,
+      "variants": [
+        2
+      ],
+      "crouched": 0,
+      "moving": 0,
+      "air": 4
+    },
+    {
+      "from": 8968,
+      "to": 9562,
+      "samples": 4,
+      "variants": [
+        1
+      ],
+      "crouched": 0,
+      "moving": 4,
+      "air": 4
+    }
+  ],
+  "air": [
+    {
+      "from": 1155,
+      "to": 2802,
+      "samples": 14
+    },
+    {
+      "from": 4329,
+      "to": 5855,
+      "samples": 13
+    },
+    {
+      "from": 8826,
+      "to": 9562,
+      "samples": 5
+    }
+  ],
+  "airAttacks": [
+    {
+      "jump": "early",
+      "combatInAir": 6
+    },
+    {
+      "jump": "late",
+      "combatInAir": 4
+    },
+    {
+      "jump": "running",
+      "combatInAir": 4
+    }
+  ],
+  "restored": true
+}

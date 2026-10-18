@@ -600,6 +600,9 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(validShadowAction(landing,c,h),"owned hard landing semantic packet");landing.swordState=1;check(validShadowAction(landing,c,h),"holstered landing packet");
       auto bad=landing;bad.traversalDurationMs=999;check(!validShadowAction(bad,c,h),"unobserved landing duration refused");
       bad=landing;bad.traversalTimeMs=1001;check(!validShadowAction(bad,c,h),"expired landing refused");
+      bad=landing;bad.traversalDurationMs=1066;bad.traversalTimeMs=1040;check(validShadowAction(bad,c,h),"native damaging landing (1066 ms, 1214cn) accepted");
+      bad.traversalTimeMs=1067;check(!validShadowAction(bad,c,h),"expired damaging landing refused");
+      bad=landing;bad.traversalDurationMs=1033;check(!validShadowAction(bad,c,h),"unobserved landing duration between the two refused");
       bad=landing;bad.traversalGoal[2]=1;check(!validShadowAction(bad,c,h),"landing cannot carry root trajectory");
       bad=landing;bad.traversalEndStance=1;check(validShadowAction(bad,c,h),"observed native crouch latch can select landing recovery");
       bad.traversalEndStance=2;check(!validShadowAction(bad,c,h),"unknown landing exit refused");

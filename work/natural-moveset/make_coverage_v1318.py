@@ -113,6 +113,16 @@ rep("""   if($case-eq'slide'){if(!@($samples|Where-Object {$_.slideWeight-gt.8})
 rep("if($case-notin'kick','crouchheavy','note','mana'-and$low.Count-gt3){", "if($case-notin'kick','crouchheavy','note','mana','stairs'-and$low.Count-gt3){")
 rep("scope='Visual coverage (sweep 1260): runs in 8 directions and sprint-to-slide, both source roles, product controller; fixture restored after every case.'",
     "scope='Locomotion completion coverage (1318, #11): walks and crouch walks in 8 directions, sprint and diagonals, in-place turns by size, starts/stops and speed changes, stairs; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case.'")
+# Start every take from the note baseline (1332b: a client left with one note fewer by an earlier probe's bare checkpoint
+# reload made the first case's restore compare against the wrong starting inventory).
+rep("""  if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+  $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
+ }""", """  if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+ }
+ & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-start" *>> "$out/note-restoration.log"
+ foreach($r in 'host','client'){
+  $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
+ }""")
 out = s.replace('\n', '\r\n') if crlf else s
 (N / 'Record-Coverage-v1318.ps1').write_bytes(out.encode('utf-8'))
 print('ok')

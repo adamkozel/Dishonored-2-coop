@@ -32,7 +32,7 @@ struct MovementPlayback {
     };
     std::array<EligibilityRecord,16> eligibilityRecords{};
     std::uint64_t eligibilityFailures=0,eligibilityRecordCount=0,eligibilityGraceFrames=0;
-    unsigned eligibilityMask=0;double lastEligibleNow=0;
+    unsigned eligibilityMask=0;double lastEligibleNow=0;std::uint64_t clockReanchors=0;
     MovementBank bank;MovementClock clock;MovementSecondJump secondJump;
     std::vector<MovementBank::Joint> airLast,secondFrom;
     std::uintptr_t game=0,actor=0,animation=0,skeleton=0;unsigned handle=0;
@@ -532,8 +532,14 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         const bool graceHold=!eligible&&!(eligibilityMask&64u)&&p.clock.positioned&&p.clock.weight>.5f&&p.lastEligibleNow>0&&now-p.lastEligibleNow<150.;
         if(eligible)p.lastEligibleNow=now;
         if(graceHold)++p.eligibilityGraceFrames;
+        const float weightBefore=p.clock.weight;const auto rejectsBefore=p.clock.rejectCount;
+        if(graceHold){}
         else if(!p.clock.advance(p.bank,now,position,pose.orientation,eligible,stance,semantic.state==4,horizontalLean,semantic.leanSide,sliding,airState?pose.motion:0,rise,p.armedMix,semantic.leanUp,traversalActive,transportPower,p.combatWeight<.001f&&p.equipmentWeight<.001f&&!powerActive&&!rangedActive&&!carryActive,pose.airTrajectory,p.traversalWeight>.001f)){
             ++p.refused;
+            // 1214cl (#11): a vertical-only discontinuity (code 3) while the body is presented and eligible re-anchors
+            // the clock at the new root and keeps the body, instead of a reset and a 0.4 s re-ramp (take 1324d: two
+            // jump-attack landings). The root is network-owned; horizontal warps (code 2) and gaps (code 1) still reset.
+            if(p.clock.rejectCount!=rejectsBefore&&p.clock.rejectCode==3&&eligible&&weightBefore>.5f){p.clock.positioned=true;std::memcpy(p.clock.position,position,12);p.clock.last=now;p.clock.weight=weightBefore;++p.clockReanchors;}
             if(!p.clockTraceFrozen){
                 p.clockTraceFrozen=true;p.clockRootCount=(std::min)(poseInterpolation.count,unsigned(p.clockRoots.size()));
                 for(unsigned i=0;i<p.clockRootCount;++i){const auto& q=poseInterpolation.samples[i];p.clockRoots[i]={q.time,q.position[2],q.sequence,q.motion,q.motionValid};}
@@ -869,7 +875,7 @@ void writeMovementStatus(){
     fputs("],\"roots\":[",f);
     for(unsigned i=0;i<p.clockRootCount;++i){const auto& e=p.clockRoots[i];fprintf(f,"%s{\"time\":%.6f,\"z\":%.8f,\"sequence\":%u,\"motion\":%u,\"valid\":%s}",i?",":"",e.time,e.z,e.sequence,e.motion,e.valid?"true":"false");}
     fputs("]},",f);
-    fprintf(f,"\"clockRejection\":{\"code\":%u,\"count\":%u,\"dt\":%.8f,\"dz\":%.8f,\"rate\":%.8f,\"motion\":%u,\"previousAirState\":%u},",p.clock.rejectCode,p.clock.rejectCount,p.clock.rejectDt,p.clock.rejectDz,p.clock.rejectRate,p.clock.rejectMotion,p.clock.rejectAirState);
+    fprintf(f,"\"clockRejection\":{\"code\":%u,\"count\":%u,\"dt\":%.8f,\"dz\":%.8f,\"rate\":%.8f,\"motion\":%u,\"previousAirState\":%u,\"reanchors\":%llu},",p.clock.rejectCode,p.clock.rejectCount,p.clock.rejectDt,p.clock.rejectDz,p.clock.rejectRate,p.clock.rejectMotion,p.clock.rejectAirState,static_cast<unsigned long long>(p.clockReanchors));
     fprintf(f,"\"eligibility\":{\"mask\":%u,\"failures\":%llu,\"graceFrames\":%llu,\"recordCount\":%llu,\"records\":[",p.eligibilityMask,p.eligibilityFailures,p.eligibilityGraceFrames,p.eligibilityRecordCount);
     const auto eligibilityCount=(std::min)(p.eligibilityRecordCount,std::uint64_t(p.eligibilityRecords.size()));
     for(std::uint64_t i=0;i<eligibilityCount;++i){const auto& e=p.eligibilityRecords[(p.eligibilityRecordCount-eligibilityCount+i)%p.eligibilityRecords.size()];

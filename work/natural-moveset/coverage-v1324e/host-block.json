@@ -1,0 +1,80 @@
+{
+  "source": "host",
+  "case": "block",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Standing, crouched and airborne blocks presented the guard in context for most of each hold, then recovered"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "combat": [
+    {
+      "from": 1275,
+      "to": 2513,
+      "samples": 11,
+      "variants": [
+        10,
+        11,
+        12
+      ],
+      "crouched": 0,
+      "moving": 0,
+      "air": 0
+    },
+    {
+      "from": 4179,
+      "to": 5429,
+      "samples": 11,
+      "variants": [
+        13,
+        11
+      ],
+      "crouched": 11,
+      "moving": 0,
+      "air": 0
+    },
+    {
+      "from": 7484,
+      "to": 8108,
+      "samples": 6,
+      "variants": [
+        10,
+        11
+      ],
+      "crouched": 0,
+      "moving": 0,
+      "air": 6
+    }
+  ],
+  "air": [
+    {
+      "from": 7360,
+      "to": 8979,
+      "samples": 14
+    }
+  ],
+  "blocks": [
+    {
+      "block": "block",
+      "samples": 10,
+      "guard": 9,
+      "inContext": 9
+    },
+    {
+      "block": "crouched-block",
+      "samples": 9,
+      "guard": 9,
+      "inContext": 9
+    },
+    {
+      "block": "air-block",
+      "samples": 4,
+      "guard": 4,
+      "inContext": 4
+    }
+  ],
+  "restored": true
+}

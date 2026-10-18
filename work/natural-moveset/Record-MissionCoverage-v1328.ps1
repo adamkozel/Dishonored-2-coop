@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -21,7 +21,7 @@ $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65')
 $pids=@{};$rows=[Collections.Generic.List[object]]::new();$inv=[Globalization.CultureInfo]::InvariantCulture;$spawn=@{}
 function Save($p,$v){$v|ConvertTo-Json -Depth 15|Set-Content -LiteralPath $p}
 function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
-function I($r,$b='Neutral',$ms=100,$ly=0){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms -LeftY $ly|Out-Null}
+function I($r,$b='Neutral',$ms=100,$ly=0,$lx=0){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms -LeftY $ly -LeftX $lx|Out-Null}
 function S($r,$suffix=''){for($a=0;$a-lt40;$a++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
 function Q($r,$mode,$arg=0){for($a=0;$a-lt8;$a++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 20};throw "Native read failed $mode"}
 function P($x,$y,$z,$yaw,$pitch=0){'setviewpos {0} {1} {2} {3} {4}' -f ([double]$x).ToString('F3',$inv),([double]$y).ToString('F3',$inv),([double]$z).ToString('F3',$inv),([double]$yaw).ToString('F2',$inv),([double]$pitch).ToString('F1',$inv)}
@@ -47,7 +47,7 @@ function Outcome($r,$spawner){$n=@((Q $r '--world-npcs').npcs|Where-Object spawn
 function Sample($t){$mv=S $script:peer '.movement.json';[pscustomobject]@{ms=$t;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;stunVariant=$mv.stunVariant;stunWeight=$mv.stunWeight;weight=$mv.weight;speed=$mv.speed;swimWeight=$mv.swimWeight;swimMove=$mv.swimMove;swimRise=$mv.swimRise;swimSink=$mv.swimSink;swimVz=$mv.swimVz;climbWeight=$mv.climbWeight;climbPhase=$mv.climbPhase;climbDescend=$mv.climbDescend;climbVz=$mv.climbVz;traversalVariant=$mv.traversalVariant;traversalWeight=$mv.traversalWeight;airWeight=$mv.airWeight}}
 function Run($key,$ms,$plan){$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$k=0
  while($watch.ElapsedMilliseconds-lt$ms){$t=$watch.ElapsedMilliseconds
-  if($k-lt$plan.Count-and$t-ge$plan[$k][0]){$d=$plan[$k];I $script:source $d[1] $d[2] $d[3];$k++}
+  if($k-lt$plan.Count-and$t-ge$plan[$k][0]){$d=$plan[$k];I $script:source $d[1] $d[2] $d[3] $(if($d.Count-gt4){$d[4]}else{0});$k++}
   $samples.Add((Sample $t));Start-Sleep -Milliseconds 90}
  Save "$out/$key-samples.json" @($samples);@($samples)}
 try{
@@ -77,6 +77,14 @@ try{
     # Both players start on the spawn dock, the observer 2.5 m in front of the source, facing it.
     C $source (P $sp.x $sp.y ($sp.z+1.7) ([Math]::Atan2($fy,$fx)*180/[Math]::PI));C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) ([Math]::Atan2(-$fy,-$fx)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
     $l=WaitLive "$key-placed" 30000;if(!$l.ok){throw 'Partner presentation not live after placement'}
+    if($case-eq'slopescan'){
+     # Lab-only exploration, no presentation checks: drop the source (health held) on a 4 m grid around the chain street and
+     # record where it comes to rest, to find a smooth ramp for the slope case (slopes_and_stairs; the stairs are stepped).
+     C $source 'coop_player_health_hold on';$grid=[Collections.Generic.List[object]]::new()
+     foreach($gx in @(0..9|ForEach-Object {-58+4*$_})){foreach($gy in @(0..10|ForEach-Object {60+4*$_})){
+      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
+      $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})}}
+     C $source 'coop_player_health_hold off';Save "$out/$key-grid.json" @($grid);$row.points=$grid.Count;$row.checks.Add("Resting heights at $($grid.Count) grid points")}
     if($case-eq'swim'){
      $wx=$sp.x+$SwimLane*$px;$wy=$sp.y+$SwimLane*$py;$yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;$vyaw=[Math]::Atan2($py,$px)*180/[Math]::PI
      C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800
@@ -85,15 +93,68 @@ try{
      & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $SwimPitch -Quick|Out-Null
      C $peer (P ($wx-4.5*$px+3.5*$fx) ($wy-4.5*$py+3.5*$fy) $CameraHeight $vyaw);Start-Sleep -Milliseconds 150;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) $vyaw);Start-Sleep -Milliseconds 900
-     $caps=Capture $key 15
-     $s=Run $key 13500 @(@(1500,'Neutral',2200,32000),@(4100,'B',1500,0),@(5900,'A',1500,0),@(7700,'Neutral',2000,-32000),@(10000,'Neutral',100,0))
-     $sw=@($s|Where-Object {[double]$_.swimWeight-gt.5});$row.swimming=$sw.Count;$row.moving=@($sw|Where-Object {[double]$_.swimMove-gt.5}).Count;$row.sinking=@($sw|Where-Object {[double]$_.swimSink-gt.3}).Count;$row.rising=@($sw|Where-Object {[double]$_.swimRise-gt.3}).Count
+     $caps=Capture $key 19
+     $s=Run $key 17500 @(@(1500,'Neutral',2200,32000),@(4100,'B',1500,0),@(5900,'A',1500,0),@(7700,'Neutral',2000,-32000),@(10000,'Neutral',1800,0,-32000),@(12100,'Neutral',1800,0,32000),@(14200,'Neutral',100,0))
+     $sw=@($s|Where-Object {[double]$_.swimWeight-gt.5});$row.swimming=$sw.Count;$row.lateral=@($sw|Where-Object {$_.ms-ge10200-and$_.ms-lt14000-and[double]$_.swimMove-gt.5}).Count;$row.moving=@($sw|Where-Object {[double]$_.swimMove-gt.5}).Count;$row.sinking=@($sw|Where-Object {[double]$_.swimSink-gt.3}).Count;$row.rising=@($sw|Where-Object {[double]$_.swimRise-gt.3}).Count
      C $peer 'coop_observer_camera off'
-     if(!$row.sourceSwimming){throw 'Source not in native swimming'};if($row.swimming-lt20-or$row.moving-lt5-or!$row.sinking-or!$row.rising){throw "Swimming presented $($row.swimming), moving $($row.moving), sinking $($row.sinking), rising $($row.rising)"}
-     $row.checks.Add("Partner presented native swimming ($($row.swimming) samples): strokes $($row.moving), sink $($row.sinking), rise $($row.rising)")}
+     if(!$row.sourceSwimming){throw 'Source not in native swimming'};if($row.lateral-lt4){throw "Lateral strokes presented $($row.lateral)"};if($row.swimming-lt20-or$row.moving-lt5-or!$row.sinking-or!$row.rising){throw "Swimming presented $($row.swimming), moving $($row.moving), sinking $($row.sinking), rising $($row.rising)"}
+     $row.checks.Add("Partner presented native swimming ($($row.swimming) samples): strokes $($row.moving) (lateral $($row.lateral)), sink $($row.sinking), rise $($row.rising)")}
+    if($case-eq'waterexit'){
+     # 1057: enter the canal lane facing the dock and pulse forward with A until the source stands on land. The lane runs at
+     # y = WaterExitY: from the host spawn's y 192.24 (1328c/e) a moored boat blocks the swim; y 192.75 and 193.25 reach the dock.
+     $wx=$sp.x+$SwimLane*$px;$wy=$WaterExitY;$yaw=[Math]::Atan2(-$py,-$px)*180/[Math]::PI
+     C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800
+     $st=Q $source '--player-states';Save "$out/$key-source-in-water.json" $st;if($st.defaultMode-or!@($st.active|Where-Object {$_.id-eq0}).Count){throw 'Source did not enter native swimming'}
+     # 1328d: Emily dove under the dock wall (pitch still down from the swim case) and never surfaced; look slightly up.
+     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch -12 -Quick|Out-Null
+     $tx=$wx-2*$px;$ty=$wy-2*$py;$oyaw=[Math]::Atan2($ty-($sp.y+2.5*$fy),$tx-($sp.x+2.5*$fx))*180/[Math]::PI
+     C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) $oyaw);Start-Sleep -Milliseconds 900;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null
+     $caps=Capture $key 14
+     $s=Run $key 12000 @(@(800,'A',700,32000),@(2300,'A',700,32000),@(3800,'A',700,32000),@(5300,'A',700,32000),@(6800,'Neutral',800,32000),@(7800,'Neutral',100,0))
+     $after=Q $source '--player-states';Save "$out/$key-source-after.json" $after;$row.exited=[bool]$after.defaultMode;$row.sourcePosition=(Q $source '--player').candidatePosition
+     $row.swimming=@($s|Where-Object {[double]$_.swimWeight-gt.5}).Count;$row.exitTraversal=@($s|Where-Object {[double]$_.traversalWeight-gt.5}|ForEach-Object {[int]$_.traversalVariant}|Sort-Object -Unique)
+     $row.landSamples=@($s|Where-Object {$_.ms-gt6000-and[double]$_.swimWeight-lt.05-and[double]$_.weight-gt.9}).Count
+     if(!$row.exited){throw 'Source did not leave the water'};if(!$row.swimming){throw 'Partner swimming not presented before the exit'};if(!@($row.exitTraversal).Count-and!$row.landSamples){throw 'Partner exit not presented'}
+     $row.checks.Add("Source left the water onto the dock; partner swam ($($row.swimming)), exit traversal $(@($row.exitTraversal)-join ','), land samples $($row.landSamples)")}
+    if($case-eq'hardfall'){
+     # 1333a: indoors the 12 m drop met an upper floor; here the source drops 12 m onto the open spawn dock, health held. The native
+     # hard landing is CatFall, player state 4 (the playback's shadow action 11 is a different numbering; native 11 is WallCrouch).
+     $yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;C $source 'coop_player_health_hold on'
+     C $peer (P ($sp.x+5*$px) ($sp.y+5*$py) ($sp.z+1.7) ([Math]::Atan2(-$py,-$px)*180/[Math]::PI));Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null
+     $caps=Capture $key 11;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$dropped=$false;$walked=$false;$states=[Collections.Generic.List[object]]::new();$midnight=$null
+     while($watch.ElapsedMilliseconds-lt9000){$t=$watch.ElapsedMilliseconds
+      # 1328d: the source reached CatFall but the partner never presented it; the landing reader accepts only the light
+      # landing scene. Record every native midnight scene through the landing (read-only) to name the damaging one.
+      if(!$dropped-and$t-ge800){C $source (P $sp.x $sp.y ($sp.z+13.7) $yaw);$dropped=$true
+       $midnight=Start-Process "$lab/bin/d2_runtime_probe.exe" -ArgumentList @([string]$pids[$source],'--watch-midnight','4500') -WindowStyle Hidden -RedirectStandardOutput "$out/$key-midnight.json" -RedirectStandardError "$out/$key-midnight.err" -PassThru}
+      if(!$walked-and$t-ge5200){I $source 'Neutral' 1600 14000;$walked=$true}
+      $ps=try{Q $source '--player-states'}catch{$null};$states.Add([pscustomobject]@{ms=$t;active=@($ps.active|ForEach-Object {$_.id});z=$(if($ps){[double]$ps.position[2]}else{$null})})
+      $x=Sample $t;$samples.Add($x);Start-Sleep -Milliseconds 40}
+     if($midnight){try{$midnight.WaitForExit(3000)|Out-Null}catch{}}
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-states.json" @($states);C $source 'coop_player_health_hold off'
+     $zs=@($states|Where-Object {$_.z-ne$null-and$_.ms-gt900}|ForEach-Object {$_.z});$row.fallMetres=[Math]::Round((($zs|Measure-Object -Maximum).Maximum)-$zs[-1],2)
+     $row.nativeHardLanding=@($states|Where-Object {@($_.active)-contains4}).Count;$row.nativeStates=@($states|ForEach-Object {$_.active}|Sort-Object -Unique)
+     $row.hardLandingSamples=@($samples|Where-Object {[double]$_.traversalWeight-gt.5-and[int]$_.traversalVariant-eq6}).Count;$row.walkOn=@($samples|Where-Object {$_.ms-ge5300-and[double]$_.speed-gt.3}).Count
+     if($row.fallMetres-lt9){throw "Source fell only $($row.fallMetres) m"};if(!$row.nativeHardLanding){throw "No native hard landing (CatFall, state 4; states seen $($row.nativeStates-join ','))"};if(!$row.hardLandingSamples){throw 'Hard landing not presented (traversal variant 6)'};if(!$row.walkOn){throw 'No travel after the hard landing'}
+     $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
+    if($case-eq'climbtop'){
+     $lz=$ChainZ-2.22
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0 -15);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
+     C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
+     $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
+     $caps=Capture $key 15
+     # Chain1 has no top exit (1328c: 9 s up still hangs on it, state 29): climb to the top, then let go with A, the native exit.
+     $s=Run $key 13500 @(@(300,'X',600,0),@(1700,'Neutral',9000,32000),@(10900,'A',300,0),@(11400,'Neutral',100,0))
+     $after=Q $source '--player-states';Save "$out/$key-source-after.json" $after;$row.sourceAfter=@($after.active|ForEach-Object {$_.id});$row.defaultModeAfter=[bool]$after.defaultMode;$row.sourcePosition=(Q $source '--player').candidatePosition
+     $cl=@($s|Where-Object {[double]$_.climbWeight-gt.5});$row.climbing=$cl.Count;$row.lastClimbMs=if($cl.Count){$cl[-1].ms}else{0};$row.topTraversal=@($s|Where-Object {$_.ms-gt$row.lastClimbMs-and[double]$_.traversalWeight-gt.5}|ForEach-Object {[int]$_.traversalVariant}|Sort-Object -Unique)
+     C $peer 'coop_observer_camera off'
+     if($row.climbing-lt20){throw "Climbing presented $($row.climbing)"};if(!$row.defaultModeAfter){throw "Source still on the chain after the release (states $($row.sourceAfter-join ','))"}
+     $row.checks.Add("Climbed chain1 to its top and let go: $($row.climbing) climb samples, source back in default mode at $(@($row.sourcePosition|ForEach-Object {[Math]::Round([double]$_,2)})-join ','), top traversal $(@($row.topTraversal)-join ',')")}
     if($case-eq'climb'){
      $lz=$ChainZ-2.22
-     C $peer (P ($ChainX-4.5) ($ChainY-1.5) ($lz+1.9) 0 5);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     # 1328d: from 4.5 m the upper climb left the frame (Emily); 7.5 m back, raised and tilted up keeps the chain in view.
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0 -12);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -106,27 +167,41 @@ try{
      if($row.climbing-lt20-or$row.phases-lt5-or$row.ascending-lt3-or$row.descending-lt3){throw "Climbing presented $($row.climbing), phases $($row.phases), ascending $($row.ascending), descending $($row.descending)"}
      $row.checks.Add("Partner presented native chain climbing ($($row.climbing) samples, $($row.phases) phases), ascending $($row.ascending), descending $($row.descending)")}
     if($case-eq'guardfight'){$gname=if($source-eq'host'){$GuardHost}else{$GuardClient};$g=@(Living $source|Where-Object spawnerName -eq $gname);if($g.Count-ne1){throw "Guard $gname missing"};$gp=$g[0].position
-     # The 1270 fight spot: 3.5 m along +y from the guard, facing it; the free camera behind and to the side, raised.
-     $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$sx=$gx;$sy=$gy+3.5;$yaw=[Math]::Atan2($gy-$sy,$gx-$sx)*180/[Math]::PI;$mx=($gx+$sx)/2;$my=($gy+$sy)/2
-     $cx=$sx-2.5;$cy=$sy+3.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
-     C $peer (P $cx $cy ($gz+2.4) $cyaw);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) 0);Start-Sleep -Milliseconds 600
-     C $source 'coop_player_health_hold on';C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
-     # 1328b: in 1328a the guards never attacked (unaware of a silently placed, blocking source): one attack alerts the
-     # guard first, then block cycles, an unguarded stretch, and attacks to the kill.
-     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=1500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
+     # Placement history: +y 1.6 m stood on a parapet beyond the railing (1328b-e: no swing reached the source, and the
+     # alerting slash killed the unaware guard); 3 m in front along the guard's facing was over the canal (1328f: the guard
+     # faces the water from the railing; the observer, teleported 5 m out for the camera, fell in). Now: try 2.5 m to either
+     # side, then behind, then in front, and keep the first spot where the source rests at the guard's level; no slash.
+     $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl;$row.guardFacing=@($fx,$fy)
+     C $source 'coop_player_health_hold on';$placed=$null;$row.placementTrials=@()
+     foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
+      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'
+      $ok=$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
+      if($ok){$placed=@($tx,$ty,$tyaw);break}}
+     if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
+     $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2
+     # Free camera behind the source (away from the guard) and to the side, raised; hold_at leaves the observer on the dock.
+     $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$sx+2.2*$dx-1.6*$dy;$cy=$sy+2.2*$dy+1.6*$dx;$cz=$gz+2.4;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
+     # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
+     # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
+     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=3500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
      while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
-      if($t-lt1500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null;$provoked=$true}}
-      elseif($t-lt12500){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
-      elseif($t-lt18000){$phase='open'}
+      if($t-lt3500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
+      elseif($t-lt14000){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
+      elseif($t-lt19000){$phase='open'}
       else{$phase='attack'
        if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
          if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
           if($d-gt1.8){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k};C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}catch{}}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
       $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x);Start-Sleep -Milliseconds 80}
-     Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off';Start-Sleep -Seconds 2
-     $row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)};$row.guard=$gname
+     Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
+     # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
+     $ow=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)}}while($row.outcome.host-ne$row.outcome.client-and$ow.ElapsedMilliseconds-lt8000)
+     $row.outcomeWaitMs=$ow.ElapsedMilliseconds;$row.guard=$gname
+     foreach($q in 'host','client'){foreach($suffix in '.npc-combat.json','.npc-stream.json','.npc-attack.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
      $row.blockImpacts=@($samples|Where-Object {[int]$_.combatVariant-in19,20-and[double]$_.combatWeight-gt.5}).Count;$row.timedParries=@($samples|Where-Object {[int]$_.combatVariant-eq21-and[double]$_.combatWeight-gt.5}).Count
      $row.hitReactions=@($samples|Where-Object {[double]$_.stunWeight-gt.5}).Count;$row.stunVariants=@($samples|Where-Object {[double]$_.stunWeight-gt.5}|ForEach-Object {[int]$_.stunVariant}|Sort-Object -Unique)
      $atk=@($samples|Where-Object {$_.phase-eq'attack'-and[double]$_.combatWeight-gt.5-and[int]$_.combatVariant-notin19,20,21});$row.attackSamples=$atk.Count;$row.attackVariants=@($atk|ForEach-Object {[int]$_.combatVariant}|Sort-Object -Unique)
@@ -141,7 +216,11 @@ try{
     $row.passed=$true
    }catch{$row.failure=$_.Exception.Message}
    finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
-    try{$sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
+    # 1328f: after a failed placement both peers sat in a menu (logic 12) and every later case failed its first read;
+    # dismiss menus and prompts on both peers before the reset reads the source.
+    foreach($r in 'host','client'){for($m=0;$m-lt4;$m++){$lg=try{(S $r).localGameLogicState}catch{1};if($lg-in2,12){I $r B 200;Start-Sleep -Milliseconds 900}elseif($lg-in8,15){I $r A 300;Start-Sleep -Milliseconds 1500}else{break}}}
+    try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
+     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
  $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}

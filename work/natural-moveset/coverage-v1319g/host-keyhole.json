@@ -1,0 +1,30 @@
+{
+  "source": "host",
+  "case": "keyhole",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Standing and crouched native keyhole peeks presented on the partner (traversal variant >= 7) in stance and recovered after the native exit"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "peeks": [
+    {
+      "peek": "enter-standing",
+      "nativePeeking": 27,
+      "presented": 26,
+      "inStance": 26,
+      "recovered": 9
+    },
+    {
+      "peek": "enter-crouched",
+      "nativePeeking": 27,
+      "presented": 26,
+      "inStance": 26,
+      "recovered": 8
+    }
+  ],
+  "restored": true
+}

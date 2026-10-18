@@ -1,0 +1,34 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-blink; restore: Checkpoint inventory differs (client)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "blink",
+      "observer": "client",
+      "passed": true,
+      "failure": "restore: Checkpoint inventory differs (client)",
+      "checks": [
+        "Partner presentation stayed live",
+        "blink presented (17 samples, variants 1,2,3) and recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 18,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 17,
+      "powerVariants": [
+        1,
+        2,
+        3
+      ],
+      "recovered": 9,
+      "restoreRetried": "Checkpoint inventory differs (client)",
+      "restored": false
+    }
+  ],
+  "scope": "Powers coverage (1332, #11): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
