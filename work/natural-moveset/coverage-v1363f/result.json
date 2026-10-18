@@ -1,0 +1,149 @@
+{
+  "passed": false,
+  "failure": "4 case(s) failed: client-stunfront: No stun presented (source stun samples 0) | client-stunright: No stun presented (source stun samples 0) | client-stunleft: Partner presentation weight dropped in 8 samples | client-stunback: No stun presented (source stun samples 0)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "stunfront",
+      "observer": "host",
+      "passed": false,
+      "failure": "No stun presented (source stun samples 0)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "yawBefore": 2.4,
+      "yawAfter": 2.5,
+      "yawTurned": -0.1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 2,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "stunVariants": null,
+      "sourceStunSamples": 0,
+      "expectedStun": 2,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "stunright",
+      "observer": "host",
+      "passed": false,
+      "failure": "No stun presented (source stun samples 0)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "yawBefore": 2.2,
+      "yawAfter": 2.4,
+      "yawTurned": 100.1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 2,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "stunVariants": null,
+      "sourceStunSamples": 0,
+      "expectedStun": 1,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "stunleft",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 8 samples",
+      "checks": [],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "yawBefore": 2.3,
+      "yawAfter": 2.4,
+      "yawTurned": -90.6,
+      "lowWeightSamples": 8,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "stunback",
+      "observer": "host",
+      "passed": false,
+      "failure": "No stun presented (source stun samples 0)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "yawBefore": 2.3,
+      "yawAfter": 2.4,
+      "yawTurned": 90.4,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 4,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 2,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "stunVariants": null,
+      "sourceStunSamples": 0,
+      "expectedStun": 4,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}
