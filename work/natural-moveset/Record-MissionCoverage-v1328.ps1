@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -44,7 +44,7 @@ function Living($r){@((Q $r '--world-npcs').npcs)}
 function Dist2($a,$b){[Math]::Sqrt(([double]$a[0]-[double]$b[0])*([double]$a[0]-[double]$b[0])+([double]$a[1]-[double]$b[1])*([double]$a[1]-[double]$b[1]))}
 function Outcome($r,$spawner){$n=@((Q $r '--world-npcs').npcs|Where-Object spawnerName -eq $spawner);if(!$n.Count){return 'absent'};$h=try{Q $r '--health' $n[0].handle}catch{$null}
  if(!$h){return 'unreadable'};if($h.current-le0){'dead'}elseif($h.ownerSuppressed){'unconscious'}else{'alive'}}
-function Sample($t){$mv=S $script:peer '.movement.json';[pscustomobject]@{ms=$t;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;stunVariant=$mv.stunVariant;stunWeight=$mv.stunWeight;weight=$mv.weight;speed=$mv.speed;swimWeight=$mv.swimWeight;swimMove=$mv.swimMove;swimRise=$mv.swimRise;swimSink=$mv.swimSink;swimVz=$mv.swimVz;climbWeight=$mv.climbWeight;climbPhase=$mv.climbPhase;climbDescend=$mv.climbDescend;climbVz=$mv.climbVz;traversalVariant=$mv.traversalVariant;traversalWeight=$mv.traversalWeight;airWeight=$mv.airWeight}}
+function Sample($t){$mv=S $script:peer '.movement.json';[pscustomobject]@{ms=$t;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;stunVariant=$mv.stunVariant;stunWeight=$mv.stunWeight;weight=$mv.weight;speed=$mv.speed;swimWeight=$mv.swimWeight;swimMove=$mv.swimMove;swimRise=$mv.swimRise;swimSink=$mv.swimSink;swimVz=$mv.swimVz;climbWeight=$mv.climbWeight;climbPhase=$mv.climbPhase;climbDescend=$mv.climbDescend;climbVz=$mv.climbVz;traversalVariant=$mv.traversalVariant;traversalWeight=$mv.traversalWeight;airWeight=$mv.airWeight;rangedKind=$mv.rangedKind;rangedVariant=$mv.rangedVariant;rangedWeight=$mv.rangedWeight;equipmentVariant=$mv.equipmentVariant;equipmentWeight=$mv.equipmentWeight;armedMix=$mv.armedMix;powerVariant=$mv.powerVariant;powerWeight=$mv.powerWeight;terrainWeight=$mv.terrainWeight;terrainGrade=$mv.terrainGrade}}
 function Run($key,$ms,$plan){$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$k=0
  while($watch.ElapsedMilliseconds-lt$ms){$t=$watch.ElapsedMilliseconds
   if($k-lt$plan.Count-and$t-ge$plan[$k][0]){$d=$plan[$k];I $script:source $d[1] $d[2] $d[3] $(if($d.Count-gt4){$d[4]}else{0});$k++}
@@ -83,8 +83,60 @@ try{
      C $source 'coop_player_health_hold on';$grid=[Collections.Generic.List[object]]::new()
      foreach($gx in @(0..9|ForEach-Object {-58+4*$_})){foreach($gy in @(0..10|ForEach-Object {60+4*$_})){
       C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
-      $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})}}
+      $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})
+      # mission-slopescan-v1328g: a point in the canal left the source swimming, and every later teleport kept it on the
+      # water surface (z 6.0). Leave the water at the spawn dock before the next point.
+      if($ps-and!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 600;C $source (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 1200}}}
      C $source 'coop_player_health_hold off';Save "$out/$key-grid.json" @($grid);$row.points=$grid.Count;$row.checks.Add("Resting heights at $($grid.Count) grid points")}
+    if($case-eq'slope'){
+     # A smooth ramp (slopes_and_stairs; the Dunwall stairs are stepped). -SlopeStart/-SlopeEnd x,y,z (resting ground heights
+     # from the slopescan grid) bound it. Walk up, walk down, run up; the partner must present the terrain grade both ways.
+     $SlopeStart=@($SlopeStart|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_});$SlopeEnd=@($SlopeEnd|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_})
+     if($SlopeStart.Count-ne3-or$SlopeEnd.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
+     $ax=$SlopeStart[0];$ay=$SlopeStart[1];$az=$SlopeStart[2];$bx=$SlopeEnd[0];$by=$SlopeEnd[1];$bz=$SlopeEnd[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
+     $ux=($bx-$ax)/$len;$uy=($by-$ay)/$len;$up=[Math]::Atan2($uy,$ux)*180/[Math]::PI;$dn=[Math]::Atan2(-$uy,-$ux)*180/[Math]::PI;$row.slopeGrade=[Math]::Round(($bz-$az)/$len,3)
+     $cx=($ax+$bx)/2-3.5*$uy;$cy=($ay+$by)/2+3.5*$ux;$cz=($az+$bz)/2+2.2;$cyaw=[Math]::Atan2(($ay+$by)/2-$cy,($ax+$bx)/2-$cx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+     C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200
+     $walkMs=[int][Math]::Min(9000,[Math]::Max(2500,$len/1.7*1000));$runMs=[int][Math]::Min(6000,[Math]::Max(1500,$len/5.0*1000))
+     $caps=Capture $key ([Math]::Ceiling(($walkMs*2+$runMs+6000)/1000));$samples=[Collections.Generic.List[object]]::new();$zs=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$seg=@()
+     $steps=@(@(500,'walkup'),@(500+$walkMs+800,'turn'),@(500+$walkMs+1600,'walkdown'),@(500+2*$walkMs+2400,'place'),@(500+2*$walkMs+3400,'runup'));$k=0
+     while($watch.ElapsedMilliseconds-lt(500+2*$walkMs+3400+$runMs+1500)){$t=$watch.ElapsedMilliseconds
+      if($k-lt$steps.Count-and$t-ge$steps[$k][0]){switch($steps[$k][1]){'walkup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'turn'{$me=(Q $source '--player').candidatePosition;C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $dn)};'walkdown'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'place'{C $source (P $ax $ay ($az+1.7) $up)};'runup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs $runMs|Out-Null}};$seg+=[ordered]@{ms=$t;step=$steps[$k][1]};$k++}
+      $x=Sample $t;$samples.Add($x);if($zs.Count-lt400){$me=try{(Q $source '--player').candidatePosition}catch{$null};if($me){$zs.Add([pscustomobject]@{ms=$t;x=[double]$me[0];y=[double]$me[1];z=[double]$me[2]})}};Start-Sleep -Milliseconds 60}
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-path.json" @($zs);Save "$out/$key-segments.json" $seg
+     $upS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.03}).Count;$dnS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.03}).Count
+     $row.upSamples=$upS;$row.downSamples=$dnS;$row.climbedMetres=[Math]::Round((($zs|Measure-Object z -Maximum).Maximum)-(($zs|Measure-Object z -Minimum).Minimum),2)
+     $row.lowWeight=@($samples|Where-Object {$_.ms-ge1500-and[double]$_.weight-lt.9}).Count
+     if($row.climbedMetres-lt.8){throw "Source climbed only $($row.climbedMetres) m"};if(!$upS-or!$dnS){throw "Slope gait not presented (up $upS, down $dnS)"}
+     $row.checks.Add("Ramp grade $($row.slopeGrade): partner slope gait up ($upS samples) and down ($dnS samples) over $($row.climbedMetres) m")}
+    if($case-in'boltswitch','itemswitch'){
+     # Mission quick slots (chapter 85): D-pad Left pistol, Right crossbow, Up sleep darts, Down Blink.
+     # boltswitch: draw the crossbow, select sleep darts (the native ammo switch), fire one, back to bolts, holster.
+     # itemswitch: aim the pistol and switch to the crossbow mid-aim (interruption), select Blink, holster, redraw, holster.
+     # The partner must present each ranged kind in turn and the presentation must stay live through every switch.
+     $plan=if($case-eq'boltswitch'){@(@(800,'Right',0,180),@(3600,'Up',0,180),@(6600,'Neutral',255,250),@(9200,'Right',0,180),@(12200,'X',0,1500))}
+      else{@(@(800,'Left',0,180),@(3000,'Neutral',255,1400),@(3500,'Right',255,180),@(6300,'Down',0,180),@(8800,'X',0,1500),@(11400,'Right',0,180),@(13900,'X',0,1500))}
+     $caps=Capture $key 18;$samples=[Collections.Generic.List[object]]::new();$states=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$k=0;$n=0
+     while($watch.ElapsedMilliseconds-lt16500){$t=$watch.ElapsedMilliseconds
+      if($k-lt$plan.Count-and$t-ge$plan[$k][0]){$d=$plan[$k];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[1] -LeftTrigger $d[2] -DurationMs $d[3]|Out-Null;$k++}
+      $samples.Add((Sample $t));if(($n++)%3-eq0){$ps=try{Q $source '--player-states'}catch{$null};$states.Add([pscustomobject]@{ms=$t;active=@($ps.active|ForEach-Object {$_.id})})};Start-Sleep -Milliseconds 70}
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-states.json" @($states)
+     $row.nativeStates=@($states|ForEach-Object {$_.active}|Sort-Object -Unique);$row.lowWeight=@($samples|Where-Object {$_.ms-ge1500-and[double]$_.weight-lt.9}).Count
+     $ranged=@($samples|Where-Object {[double]$_.rangedWeight-gt.5});$row.rangedKinds=@($ranged|ForEach-Object {[int]$_.rangedKind}|Sort-Object -Unique);$row.rangedVariants=@($ranged|ForEach-Object {[int]$_.rangedVariant}|Sort-Object -Unique)
+     if($case-eq'boltswitch'){
+      $after=@($samples|Where-Object {$_.ms-ge3600-and$_.ms-lt9000-and[double]$_.rangedWeight-gt.5-and[int]$_.rangedKind-eq2});$row.crossbowAfterSwitch=$after.Count
+      $row.switchStates=@($states|Where-Object {$_.ms-ge3600-and$_.ms-lt6000}|ForEach-Object {$_.active}|Sort-Object -Unique)
+      if(2-notin$row.rangedKinds){throw "Crossbow not presented (kinds $($row.rangedKinds-join ','))"};if($after.Count-lt5){throw "Crossbow not presented through the ammo switch ($($after.Count) samples)"}
+      if($row.lowWeight-gt3){throw "Partner presentation dropped through the switches ($($row.lowWeight) samples)"}
+      $row.checks.Add("Crossbow presented through the sleep-dart switch and back (variants $($row.rangedVariants-join ','); native states in the switch $($row.switchStates-join ','))")}
+     else{
+      $pistol=@($samples|Where-Object {$_.ms-lt3500-and[int]$_.rangedKind-eq1-and[double]$_.rangedWeight-gt.5}).Count;$cross=@($samples|Where-Object {$_.ms-ge3500-and$_.ms-lt6300-and[int]$_.rangedKind-eq2-and[double]$_.rangedWeight-gt.5}).Count
+      $redraw=@($samples|Where-Object {$_.ms-ge11400-and[int]$_.rangedKind-eq2-and[double]$_.rangedWeight-gt.5}).Count;$row.pistolSamples=$pistol;$row.crossbowSamples=$cross;$row.redrawSamples=$redraw
+      if(!$pistol-or!$cross){throw "Interrupted switch not presented (pistol $pistol, crossbow $cross)"};if(!$redraw){throw 'Redrawn crossbow not presented'}
+      if($row.lowWeight-gt3){throw "Partner presentation dropped through the switches ($($row.lowWeight) samples)"}
+      $row.checks.Add("Pistol aim interrupted by the crossbow ($pistol, then $cross samples), Blink selected, holstered and redrawn ($redraw); presentation stayed live")}}
     if($case-eq'swim'){
      $wx=$sp.x+$SwimLane*$px;$wy=$sp.y+$SwimLane*$py;$yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;$vyaw=[Math]::Atan2($py,$px)*180/[Math]::PI
      C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800
