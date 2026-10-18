@@ -84,7 +84,8 @@ try{
      # -ScanGrid x0,dx,nx,y0,dy,ny (1328g/i: the default grid around the chain is bay water; the spawn dock is near y 192).
      $sg=@("$ScanGrid"-split','|ForEach-Object {[double]$_});if($sg.Count-ne6){throw 'ScanGrid needs x0,dx,nx,y0,dy,ny'}
      foreach($gx in @(0..([int]$sg[2]-1)|ForEach-Object {$sg[0]+$sg[1]*$_})){foreach($gy in @(0..([int]$sg[5]-1)|ForEach-Object {$sg[3]+$sg[4]*$_})){
-      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
+      # 1328u: after (-60,140) a native modal froze every later point; pass modals before each read.
+      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;[void](WaitGameplay 8000);$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
       $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})
       # mission-slopescan-v1328g: a point in the canal left the source swimming, and every later teleport kept it on the
       # water surface (z 6.0). Leave the water at the spawn dock before the next point.
@@ -278,7 +279,8 @@ try{
        if($phase-eq'block'-and$t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
       else{if($t-$aimAt-ge2500){$aimAt=$t;& $close 1.8}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
-      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x)
+      # Source native states every sample, to name the hit reactions the guard causes (1328w: health dropped, no stun scene).
+      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$x|Add-Member sourceActive $(try{@((Q $source '--player-states').active|ForEach-Object {$_.id})}catch{$null});$samples.Add($x)
       if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++};Start-Sleep -Milliseconds 80}
      Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
      # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
