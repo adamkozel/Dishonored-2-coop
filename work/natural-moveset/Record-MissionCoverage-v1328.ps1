@@ -12,6 +12,8 @@ param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[
 #   then it blocks in cycles while the guard attacks, stands unguarded, then attacks to the kill with re-aims; the partner must present block impacts or timed parries (combat variants
 #   19-21), a hit reaction (stun weight > .5), at least three target-bearing attacks, and the guard must end dead or
 #   unconscious in both worlds alike.
+# - domino (1352, client source): Emily marks both checkpoint guards with native Domino casts and cancels a third aim; the
+#   host must present the casts, the partner marks and the link beam (1214cr).
 # Both peers load the mission with the native `campaign` command (host Corvo, client Emily) and pass its modals; the
 # Dunwall fixture is restored afterwards (PrepareShadowSword, note inventory) and the protected files are checked.
 $Sources=@($Sources|ForEach-Object {$_-split','}|Where-Object {$_});$Cases=@($Cases|ForEach-Object {$_-split','}|Where-Object {$_})
@@ -253,6 +255,57 @@ try{
      C $peer 'coop_observer_camera off'
      if($row.climbing-lt20-or$row.phases-lt5-or$row.ascending-lt3-or$row.descending-lt3){throw "Climbing presented $($row.climbing), phases $($row.phases), ascending $($row.ascending), descending $($row.descending)"}
      $row.checks.Add("Partner presented native chain climbing ($($row.climbing) samples, $($row.phases) phases), ascending $($row.ascending), descending $($row.descending)")}
+    if($case-eq'domino'){
+     # 1352 (#11, emily_domino_mark_link_cancel): Emily (client source only; Domino is her power) marks both checkpoint
+     # guards with native Domino casts (LT held 1.8 s on each, as the lab link take v225), then aims once more and cancels
+     # with X. The host observer must present the casts and (1214cr, product mode) the partner Domino marks and the link
+     # beam as cosmetic native FX at the source's world transforms; the cancelled aim adds no mark. Both healths are held.
+     if($source-ne'client'){throw 'Domino is the Emily power: client source only'}
+     $ga=@(Living $source|Where-Object spawnerName -eq $GuardClient);$gb=@(Living $source|Where-Object spawnerName -eq $GuardHost);if($ga.Count-ne1-or$gb.Count-ne1){throw 'Checkpoint guards missing'}
+     $pa=$ga[0].position;$pb=$gb[0].position;$mx=([double]$pa[0]+[double]$pb[0])/2;$my=([double]$pa[1]+[double]$pb[1])/2;$mz=([double]$pa[2]+[double]$pb[2])/2
+     $ox=[double]$ga[0].orientation[0];$oy=[double]$ga[0].orientation[1];$ol=[Math]::Max(1e-3,[Math]::Sqrt($ox*$ox+$oy*$oy));$ox/=$ol;$oy/=$ol;$row.guards=@($pa,$pb);$row.guardFacing=@($ox,$oy)
+     foreach($q in 'host','client'){C $q 'coop_player_health_hold on'};$placed=$null;$row.placementTrials=@()
+     # The guards face the canal from the railing: try 6 m behind them (the land side) first, then either side.
+     foreach($o in @(@(-$ox,-$oy),@(-$oy,$ox),@($oy,-$ox))){$tx=$mx+6*$o[0];$ty=$my+6*$o[1];$tyaw=[Math]::Atan2([double]$pa[1]-$ty,[double]$pa[0]-$tx)*180/[Math]::PI
+      C $source (P $tx $ty ($mz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;[void](WaitGameplay 15000);$me=$null
+      for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
+      $ok=[bool]$me-and[Math]::Abs([double]$me[2]-$mz)-lt.8-and(Dist2 $me @($mx,$my))-lt7.5;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
+      if($ok){$placed=@([double]$me[0],[double]$me[1],[double]$me[2]);break}}
+     if(!$placed){throw 'No spot near the checkpoint guards at their level'}
+     # Free camera 3 m behind the source and 2.2 m up, looking past her toward the guards.
+     $dx=$mx-$placed[0];$dy=$my-$placed[1];$dl=[Math]::Max(.1,[Math]::Sqrt($dx*$dx+$dy*$dy));$dx/=$dl;$dy/=$dl
+     $cx=$placed[0]-3*$dx;$cy=$placed[1]-3*$dy;$cz=$placed[2]+2.2;$cyaw=[Math]::Atan2($dy,$dx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
+     $l=WaitLive "$key-near-guards" 20000;if(!$l.ok){throw 'Partner presentation not live near the guards'}
+     C $source 'coop_grant_named models/powers/phantasmallink/phantasmal_link.inventoryitem';Start-Sleep -Milliseconds 1800;$row.grant=(S $source '.observer-camera.json').itemGrant.named
+     $aim={param($spawnerName)$me=(Q $source '--player').candidatePosition;$tg=@(Living $source|Where-Object spawnerName -eq $spawnerName);if(!$tg.Count){return $null};$tp=$tg[0].position
+      $yaw=[Math]::Atan2([double]$tp[1]-[double]$me[1],[double]$tp[0]-[double]$me[0])*180/[Math]::PI;$h=Dist2 $tp $me;$pitch=[Math]::Atan2(([double]$me[2]+1.6)-([double]$tp[2]+1.3),[Math]::Max(.5,$h))*180/[Math]::PI
+      C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $yaw);& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $pitch -Quick|Out-Null;[ordered]@{target=$spawnerName;yaw=$yaw;pitch=$pitch;distance=$h}}
+     $w0=S $peer '.domino-world.json';$l0=S $peer '.domino-links.json';$row.before=[ordered]@{marks=$w0.started;beams=$l0.started}
+     $caps=Capture $key 26;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$row.aims=@();$marksMax=0;$beamsMax=0;$masks=@{};$marksAtCancel=$null
+     while($watch.ElapsedMilliseconds-lt22000){$t=$watch.ElapsedMilliseconds
+      if($step-eq0-and$t-ge1000){$row.aims+=(& $aim $GuardClient);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 1800|Out-Null;$step=1}
+      elseif($step-eq1-and$t-ge5500){$row.aims+=(& $aim $GuardHost);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 1800|Out-Null;$step=2}
+      elseif($step-eq2-and$t-ge12000){$row.aims+=(& $aim $GuardClient);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 3000|Out-Null;$step=3}
+      elseif($step-eq3-and$t-ge13300){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -Button X -DurationMs 200|Out-Null;$step=4}
+      elseif($step-eq4-and$t-ge13600){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 100|Out-Null;$marksAtCancel=(S $peer '.domino-world.json').started;$step=5}
+      $x=Sample $t;$dw=S $peer '.domino-world.json';$dk=S $peer '.domino-links.json';$sw=S $source '.domino-world.json'
+      $nm=($dw.marks|Measure-Object).Count;$nb=($dk.beams|Measure-Object).Count
+      $x|Add-Member -NotePropertyName dominoMask -NotePropertyValue $dw.readyMask;$x|Add-Member -NotePropertyName dominoMarks -NotePropertyValue $nm;$x|Add-Member -NotePropertyName dominoBeams -NotePropertyValue $nb
+      $x|Add-Member -NotePropertyName dominoSent -NotePropertyValue $sw.sent;$x|Add-Member -NotePropertyName markCount -NotePropertyValue $dw.markCount
+      $samples.Add($x);$marksMax=[Math]::Max($marksMax,$nm);$beamsMax=[Math]::Max($beamsMax,$nb);$mk="$($dw.readyMask)";$masks[$mk]=1+[int]$masks[$mk];Start-Sleep -Milliseconds 90}
+     Save "$out/$key-samples.json" @($samples);$w1=S $peer '.domino-world.json';$l1=S $peer '.domino-links.json';Save "$out/$key-domino-world.json" $w1;Save "$out/$key-domino-links.json" $l1;Save "$out/$key-source-domino-world.json" (S $source '.domino-world.json')
+     C $peer 'coop_observer_camera off';try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 0 -Quick|Out-Null}catch{}
+     $cast=@($samples|Where-Object {[double]$_.powerWeight-gt.5-and[int]$_.powerVariant-ge19-and[int]$_.powerVariant-le22});$row.castSamples=$cast.Count;$row.castVariants=@($cast|ForEach-Object {[int]$_.powerVariant}|Sort-Object -Unique)
+     $row.marksMax=$marksMax;$row.beamsMax=$beamsMax;$row.readyMasks=$masks;$row.marksStarted=[int]$w1.started-[int]$w0.started;$row.beamsStarted=[int]$l1.started-[int]$l0.started
+     $row.marksAfterCancel=if($marksAtCancel-ne$null){[int]$w1.started-[int]$marksAtCancel}else{$null}
+     if($row.grant.result-notin'granted_named','named_power_equip_requested'){throw "Domino grant $($row.grant.result)"}
+     if($cast.Count-lt3){throw "Domino casts presented in $($cast.Count) samples"}
+     if($marksMax-lt2){throw "Partner Domino marks presented: at most $marksMax at once (ready masks $(@($masks.Keys)-join ','))"}
+     if($beamsMax-lt1){throw "Partner Domino link beam not presented (marks $marksMax)"}
+     if($row.marksAfterCancel-gt0){throw "The cancelled aim started $($row.marksAfterCancel) marks"}
+     $row.checks.Add("Partner presented the Domino casts ($($cast.Count) samples, variants $($row.castVariants-join ',')), the marks ($marksMax at once, $($row.marksStarted) started) and the link beam ($beamsMax at once); the cancelled aim started no mark")}
     if($case-eq'guardfight'){$gname=if($source-eq'host'){$GuardHost}else{$GuardClient};$g=@(Living $source|Where-Object spawnerName -eq $gname);if($g.Count-ne1){throw "Guard $gname missing"};$gp=$g[0].position
      # Placement history: +y 1.6 m stood on a parapet beyond the railing (1328b-e: no swing reached the source, and the
      # alerting slash killed the unaware guard); 3 m in front along the guard's facing was over the canal (1328f: the guard

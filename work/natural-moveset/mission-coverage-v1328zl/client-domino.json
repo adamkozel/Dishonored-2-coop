@@ -1,0 +1,91 @@
+{
+  "source": "client",
+  "case": "domino",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presented the Domino casts (45 samples, variants 19,20,21,22), the marks (2 at once, 6 started) and the link beam (1 at once); the cancelled aim started no mark"
+  ],
+  "guards": [
+    [
+      4.43504,
+      59.2029,
+      15.953
+    ],
+    [
+      8.40966,
+      49.2189,
+      16.515
+    ]
+  ],
+  "guardFacing": [
+    -0.16125496415350923,
+    0.986912780612274
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        0.16125496415350923,
+        -0.986912780612274
+      ],
+      "rest": [
+        7.29274,
+        48.114,
+        16.5437
+      ],
+      "ok": true
+    }
+  ],
+  "camera": [
+    7.716719689254986,
+    45.144110907272925,
+    18.7437
+  ],
+  "grant": {
+    "grants": 2,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "before": {
+    "marks": 0,
+    "beams": 0
+  },
+  "aims": [
+    {
+      "target": "script_spawner_checkpoint_guard_01",
+      "yaw": 106.44761084395655,
+      "pitch": 4.628507423026483,
+      "distance": 12.778091953061688
+    },
+    {
+      "target": "script_spawner_checkpoint_guard_02",
+      "yaw": 107.76974433489491,
+      "pitch": 13.402639071992446,
+      "distance": 2.9817576108899266
+    },
+    {
+      "target": "script_spawner_checkpoint_guard_01",
+      "yaw": 105.00167497229752,
+      "pitch": 12.129366813084474,
+      "distance": 3.551128644529788
+    }
+  ],
+  "castSamples": 45,
+  "castVariants": [
+    19,
+    20,
+    21,
+    22
+  ],
+  "marksMax": 2,
+  "beamsMax": 1,
+  "readyMasks": {
+    "6": 6,
+    "0": 46,
+    "4": 109
+  },
+  "marksStarted": 6,
+  "beamsStarted": 2,
+  "marksAfterCancel": 0
+}

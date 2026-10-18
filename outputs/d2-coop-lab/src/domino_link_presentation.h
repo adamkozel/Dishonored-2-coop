@@ -14,9 +14,8 @@ void serviceDominoBeams(ULONGLONG tick){
     for(auto& beam:dominoBeams)if(beam.sourceId&&(beam.fx.game!=observedGame||beam.fx.epoch!=outgoing.worldEpoch)){beam={};++dominoBeamRetired;}
     if(!coopGameplayReady(outgoing))return;
     const auto& stream=dominoWorldStream;const auto& p=stream.presented;
-    const bool ready=localRole==0&&dominoWorldCurrent(tick)&&stream.lease>tick&&movementBankActive()&&coopGameplayReady(remote)&&
-        !std::strcmp(mapName,kGuardMap)&&observerIsolation.ready&&observerIsolation.movementFixture&&probeDoppelganger&&avatarAiHeld&&probeFollowExact&&
-        avatarAiTarget.actor==probeActor&&worldIdentityEntity(memoryRead,observedGame,probeHandle)==probeActor;
+    // 1214cr (#11): the same readiness as the marks (lab fixture or armed product session).
+    const bool ready=!dominoPresentationReadyMask(tick);
     const bool snapshot=ready&&p.sequence!=dominoBeamSequence;
     for(auto& beam:dominoBeams)if(beam.sourceId){
         bool retain=ready&&beam.fx.actor==probeActor&&beam.fx.owner==probeHandle&&beam.token==stream.token&&beam.peerToken==stream.peerToken&&beam.event==p.event;
