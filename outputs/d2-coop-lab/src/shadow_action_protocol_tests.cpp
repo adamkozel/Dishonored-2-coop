@@ -101,6 +101,16 @@ void chokePresentationTests(){
     native.player.current=5;check(!nativePlayerGroundAssassinationStates(native,base)&&nativePlayerSlideTakedownStates(native,base)&&nativePlayerMotion(native,base,motion)&&motion==0&&
           nativeTakedownStates(33,native,base)&&!nativeTakedownStates(5,native,base),"slide lethal (1254a) keeps sliding stance 5 in Assassination13; only census slide-capable ids admit it");
     native.player.current=0;check(nativeTakedownStates(110,native,base)&&!nativeTakedownStates(92,native,base),"four-binding finishers (1256a) run in Assassination13, generic ones do not");
+    // 1214db: Shadow Walk's own mode (defaultMode false, stance 2) admits only the shadow-form assassinations.
+    {auto sw=native;sw.defaultMode=false;sw.player.current=2;
+     check(nativePlayerShadowWalkAssassinationStates(sw,base)&&!nativePlayerGroundAssassinationStates(sw,base)&&nativePlayerMotion(sw,base,motion)&&motion==0,"shadow-form assassination (1254y) in Shadow Walk's mode");
+     check(nativeTakedownStates(37,sw,base)&&nativeTakedownStates(44,sw,base)&&!nativeTakedownStates(6,sw,base)&&!nativeTakedownStates(36,sw,base),"only assassination_sw ids run in the form");
+     auto ground=sw;ground.defaultMode=true;ground.player.current=0;check(!nativeTakedownStates(37,ground,base)&&nativeTakedownStates(6,ground,base),"sw ids refused outside the form");
+     sw.player.current=0;check(!nativePlayerShadowWalkAssassinationStates(sw,base),"unobserved form stance refused");
+     auto swChoke=native;swChoke.player.current=2;swChoke.active[0].id=41;swChoke.active[0].vtable=base+0x1c77c18;
+     check(nativePlayerShadowWalkChokeStates(swChoke,base)&&nativeTakedownStates(77,swChoke,base)&&nativeTakedownStates(84,swChoke,base)&&
+           !nativeTakedownStates(1,swChoke,base)&&nativePlayerMotion(swChoke,base,motion)&&motion==0,"shadow-form choke (1254y) holds Choke41 at stance 2, sw choke ids only");
+     swChoke.player.current=0;check(!nativeTakedownStates(77,swChoke,base)&&!nativePlayerShadowWalkChokeStates(swChoke,base),"sw choke ids refused at ground stance");}
     native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
@@ -121,6 +131,9 @@ void chokePresentationTests(){
            torso>92&&nativeTakedownFatality(torso)&&nativeTakedownArms(torso)==2&&!nativeTakedownFatality(5)&&nativeTakedownArms(5)==2&&
            !nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_double_kill.midnightscene","Emily",2166),"census-1255 fatalities are lethal scenes with their bound arms; the double kill binds no AI group");}
     {const auto lock=nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",600);
+     // 1214da: the shadow-form assassinations (37-44) run hands-free; the sword stays for the ordinary ones.
+     check(nativeTakedownSword(36)&&nativeTakedownSword(45)&&nativeTakedownLethal(38),"ordinary assassinations keep the sword; sw stays lethal");
+     for(unsigned id=37;id<=44;++id)check(!nativeTakedownSword(id),"assassination_sw holsters the sword");
      check(lock==119&&nativeTakedownKind(lock)==6&&nativeTakedownSword(lock)&&!nativeTakedownLethal(lock)&&ChokePresentation::clip(lock)==CombatPresentation::clip(11,2)&&
            nativeChokeVariant("midnight/gameplay/player/base/combat/versus_elite.midnightscene","versus_mediumwin",1033)==118&&
            !nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",601),
@@ -362,7 +375,26 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
        auto bad=swim;bad.combatVariant=10;bad.combatPhase=1;bad.combatDurationMs=533;check(!validShadowAction(bad,context,peer),"swimming cannot carry a combat scene");
        bad=swim;bad.powerVariant=1;check(!validShadowAction(bad,context,peer),"swimming cannot carry a power scene");
        bad=swim;bad.airStage=2;check(!validShadowAction(bad,context,peer),"swimming is not airborne");
-       bad=swim;bad.state=25;check(!validShadowAction(bad,context,peer),"unknown action state refused");
+       bad=swim;bad.state=25;check(!validShadowAction(bad,context,peer),"dead state without a collapse refused");
+       bad=swim;bad.state=26;check(!validShadowAction(bad,context,peer),"unknown action state refused");
+       {auto dead=swim;dead.state=25;dead.swordState=1;dead.combatPhase=1;
+        for(unsigned v=24;v<=27;++v){dead.combatVariant=v;dead.combatDurationMs=CombatPresentation::deathDuration(v);dead.combatTimeMs=0;
+         check(validShadowAction(dead,context,peer),"native death state25 carries one directional collapse (1214cv)");
+         dead.combatTimeMs=dead.combatDurationMs;check(validShadowAction(dead,context,peer),"death end pose held at its duration");
+         auto badDead=dead;badDead.combatTimeMs++;check(!validShadowAction(badDead,context,peer),"death past its collapse refused");
+         badDead=dead;badDead.combatDurationMs++;check(!validShadowAction(badDead,context,peer),"unobserved death duration refused");
+         badDead=dead;badDead.state=1;check(!validShadowAction(badDead,context,peer),"a collapse cannot ride a slash");
+         badDead=dead;badDead.powerVariant=1;check(!validShadowAction(badDead,context,peer),"death carries no power scene");
+         check(CombatPresentation::clip(v,1)==374+v-24&&!CombatPresentation::recovery(v),"death collapse addresses bank72 clips 374-377");}
+        auto badDead=dead;badDead.combatVariant=10;badDead.combatDurationMs=533;check(!validShadowAction(badDead,context,peer),"dead state carries only a death collapse");
+        CombatPresentation timeline;check(timeline.push({1.,1,24,1,0,2233})&&!timeline.push({2.,2,25,1,0,2233}),"death collapse timeline accepts only its exact duration");}
+       {auto rec=swim;rec.state=1;rec.swordState=2;rec.combatPhase=1;
+        for(unsigned v:{28u,29u})for(unsigned d:{666u,733u}){rec.combatVariant=v;rec.combatDurationMs=d;rec.combatTimeMs=d/2;
+         check(validShadowAction(rec,context,peer),"recoil stagger rides the slash state (1214cz)");
+         auto badRec=rec;badRec.combatDurationMs=700;check(!validShadowAction(badRec,context,peer),"unobserved recoil duration refused");
+         badRec=rec;badRec.state=2;check(!validShadowAction(badRec,context,peer),"recoil cannot ride the block state");
+         check(CombatPresentation::clip(v,1)==378+v-28,"recoil addresses bank73 clips 378-379");}
+        check(nativeCombatVariant("midnight/gameplay/player/base/combat/sword_parry_rl.midnightscene")==28&&nativeCombatVariant("midnight/gameplay/player/base/combat/sword_recoil_rightb.midnightscene")==29,"native recoil scenes map to their side");}
        {auto hold=swim;hold.state=24;hold.swordState=1;check(validShadowAction(hold,context,peer),"unclassified native state holds the stream without an action");
         hold.swordState=2;check(validShadowAction(hold,context,peer),"hold carries drawn equipment state only");
         auto badHold=hold;badHold.swordState=0;check(!validShadowAction(badHold,context,peer),"hold requires validated equipment state");
@@ -622,7 +654,7 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(validShadowAction(power,c,h),"native Corvo Blink phase packet");
       auto emily=power;emily.role=1;emily.character=2;emily.powerVariant=7;emily.powerDurationMs=266;auto eh=h,ec=c;eh.role=1;ec.role=0;
       check(validShadowAction(emily,ec,eh),"native Emily Far Reach pull phase packet");
-      for(unsigned v=32;v<=35;++v){
+      for(unsigned v=32;v<=36;++v){
         auto shadow=emily;shadow.powerVariant=v;shadow.powerDurationMs=PowerPresentation::duration(v);shadow.swordState=1;
         check(validShadowAction(shadow,ec,eh)&&shadowPowerSwordContext(v,1),"owned Emily shadow form phases accepted hands-free");
         auto bad=shadow;bad.swordState=2;check(!validShadowAction(bad,ec,eh),"shadow form cannot retain drawn sword");

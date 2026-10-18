@@ -85,3 +85,17 @@ bool suppressShadowDamage(void* info,void* result){
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result);
     ++shadowDamageBlocked;return true;
 }
+// 1214cv (#11/#14): the partner presentation clone is never a gameplay victim; partner damage reaches the actual
+// player only through the NPC attack relay (routeNpcAttackDamage runs first and relays its bound guards' contacts).
+// Unrouted native hits used to land on the clone: a host guard killed the 40-health Emily clone in about 8 s (take
+// 1328zzh), its sword was dropped and the presentation could not restart (clone_equipment_unreadable).
+std::atomic<std::uint64_t> cloneWorldDamageBlocked{0};
+bool suppressCloneWorldDamage(void* component,void* result){
+    const unsigned char ctor[]={0x33,0xc0,0x48,0x89,0x01,0x89,0x41,0x08,0x48,0x89,0x41,0x10};
+    const auto a=shadowDamageIdentity();std::uintptr_t owner=0,activeGame=0;std::uint32_t handle=0;
+    if(!component||!result||!a.actor||!a.handle||std::memcmp(gameImage+0x780470,ctor,sizeof(ctor))||
+       !memoryRead(reinterpret_cast<std::uintptr_t>(component)+0x10,&owner,8)||owner!=a.actor||
+       !memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x39a5290,&activeGame,8)||activeGame!=a.game||
+       !memoryRead(owner+0xa8,&handle,4)||handle!=a.handle||worldIdentityEntity(memoryRead,a.game,a.handle)!=a.actor)return false;
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result);++cloneWorldDamageBlocked;return true;
+}

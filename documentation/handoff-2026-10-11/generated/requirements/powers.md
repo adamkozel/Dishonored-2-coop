@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:59:02.174475+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:49:57.263629+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -1934,7 +1934,7 @@ Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time cast
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time casts and releases are recognizable and recover cleanly. The crouched release pose is a little generic, and no world time effect is shown (out of scope). Native Corvo Bend Time start/release use exact native scene clocks over Steam. v42 corrects crouched shoulders; v44 retains airborne casting and tests same-world pause recovery with a temporary visibility gap. v45 adds the observed 333ms out-of-mana response. Named takes remain scoped; other contexts, interruptions, continuous visual acceptance and world-time-dependent effects remain open. Asset-only hold stays unbound; viewer blur is diagnostic only.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "bend_time",
@@ -3721,21 +3721,16 @@ Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time cast
   "evidence": [
     "../movement-integration/visual-sweep-v1260/powers-review.json",
     "coverage-v1332c/result.json",
-    "coverage-v1332d/result.json"
+    "coverage-v1332d/result.json",
+    "coverage-v1359d/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "Cast and release gestures are presented (power variants 12, 14; 1332c/d).",
+    "audit": "completion-audit-v1370-bend-time.json",
+    "decision": "complete",
+    "scope": "Corvo's Bend Time cast and its end on the partner body, on the native scene clocks, recovering to locomotion.",
     "takes": [
       {
-        "take": "coverage-v1332c",
-        "cases": [
-          "host-bendtime"
-        ]
-      },
-      {
-        "take": "coverage-v1332d",
+        "take": "coverage-v1359d",
         "cases": [
           "host-bendtime"
         ]
@@ -3743,19 +3738,20 @@ Visual sweep 1260: accepted (corvo accept). Standing and crouched Bend Time cast
     ],
     "visual": [
       {
-        "video": "coverage-v1332d/host-bendtime-observer.mp4",
-        "verdict": "Corvo raises his left hand to cast and extends it to release; readable but dark."
+        "video": "coverage-v1359d/host-bendtime-observer.mp4",
+        "verdict": "Corvo raises his left hand palm-out for the cast, holds it for about half a second and lowers it with the sword still in his right hand; the second press ends the power with the same gesture, and he settles back into his standing idle each time."
       }
     ],
-    "lifecycle": "See method.",
-    "remaining": "What the partner world does during Bend Time (shared world time) is a stage 4 authority decision; the visual of the cast in better light."
-  }
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
 - [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
+- [evidence: coverage-v1359d/result.json](<../../../../work/natural-moveset/coverage-v1359d/result.json>)
 - [in_game_recordings: native-bendtime-corvo-v39.mp4](<../../../../work/natural-moveset/native-bendtime-corvo-v39.mp4>)
 - [in_game_recordings: bendtime-corvo-body-v40-v1.mp4](<../../../../work/natural-moveset/bendtime-corvo-body-v40-v1.mp4>)
 - [in_game_recordings: bendtime-corvo-body-v40-v1-source.mp4](<../../../../work/natural-moveset/bendtime-corvo-body-v40-v1-source.mp4>)

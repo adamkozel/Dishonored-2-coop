@@ -1,0 +1,30 @@
+"""Writes completion-audit-v1368-ragdoll.json (#11): the corpse release after a takedown kill, filmed for both source roles
+with the release in frame (1254o host on 1214cy, 1254u client on 1214cz)."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("After a shared NPC death the host owns the corpse: it streams the body while the client holds its ragdoll animated at "
+     "the host pose (the native physics mode switch, 1113d/1117), and the ragdoll is released to native physics when the "
+     "channel stops (chapter 86, corpse authority). The takedown harness with -CorpseRelease (1254o) films the kill from "
+     "above (a drop assassination on tutorial guard 2, product controller) and then samples the victim in both worlds "
+     "every ~170 ms through the release: the client's corpse entry goes from streamed to disabled, the body is released "
+     "and must settle where the host's body lies. Each case passes when the remote takedown phase is presented, the "
+     "outcome is the same in both worlds (dead) and the two corpses end within 2 m (measured: 0.02 m for Corvo's kill, 0.37 m for Emily's). A client-sourced kill (1254t+) "
+     "also samples both worlds and pitches the observer camera down so the body stays in frame. The player character's "
+     "own death is the authored collapse of audit 1357; dropping a carried body belongs to carry_body_lift_idle_move_drop_throw.")
+items = [
+ dict(id='ragdoll_handoff', decision='complete',
+      scope=('NPC corpse hand-off from the takedown scene to ragdoll and to shared corpse authority, for kills by either '
+             'player, with the release filmed in the observer world and the bodies ending together in both worlds.'),
+      takes=[{'take': 'takedown-variants-v1254o', 'cases': ['host-drop-lethal']},
+             {'take': 'takedown-variants-v1254u', 'cases': ['client-drop-lethal']}],
+      visual=[{'video': 'takedown-variants-v1254o/drop-host-lethal-observer.mp4',
+               'verdict': 'Corvo drops onto the guard; the body slumps out of the takedown into a sprawl on the floorboards and lies still, ending 2 cm from the host body.'},
+              {'video': 'takedown-variants-v1254u/drop-client-lethal-observer.mp4',
+               'verdict': 'Emily lands on the guard and drives him face down at her feet; the body then slackens and rolls into a sprawl beside her and stays down, ending 0.37 m from the same body in the joiner world.'}]),
+]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1368-ragdoll', family='combat', candidate='candidate-npc-combat-v1214cz', method=M, items=items)
+(N / 'completion-audit-v1368-ragdoll.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))

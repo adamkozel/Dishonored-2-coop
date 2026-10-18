@@ -1,5 +1,6 @@
 #pragma once
 #include "arm_protocol.h"
+#include "combat_presentation.h"
 #include "traversal_presentation.h"
 #include "power_presentation.h"
 #include "ranged_presentation.h"
@@ -14,7 +15,7 @@
 // Native semantic states and explicit unbound ground presentation18. No pointers, resource names or damage requests.
 struct CoopShadowActionPacket {
     std::uint32_t magic=0x48413244;
-    std::uint16_t version=75,size=sizeof(CoopShadowActionPacket);
+    std::uint16_t version=77,size=sizeof(CoopShadowActionPacket);
     std::uint32_t build=0x67a50cde,role=0;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0;
     std::uint64_t sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
@@ -50,7 +51,7 @@ static_assert(sizeof(CoopShadowActionPacket)==432);
 // observed native reader cannot silently outgrow the source transport gate.
 inline bool shadowPowerSwordContext(unsigned variant,unsigned swordState){
     // Native successful host entry holsters the sword before release400ms.
-    if(variant==28||(variant>=32&&variant<=35))return swordState==1;
+    if(variant==28||(variant>=32&&variant<=36))return swordState==1;
     if(variant>=29&&variant<=31)return swordState==1||swordState==2;
     return variant>=1&&variant<=27&&variant!=13&&(swordState==2||(swordState==1&&variant>=10&&variant<=25));
 }
@@ -63,7 +64,13 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     // 19/20 native block impact (533 ms) and 21 defender timed parry (500 ms)
     // occur only inside the block state; exact single-phase durations.
     const bool defenseImpact=p.combatVariant>=19&&p.combatVariant<=21;
-    const bool combat=p.combatVariant<=23&&(!defenseImpact||((p.state==2||p.state==3)&&p.combatPhase==1&&p.combatDurationMs==(p.combatVariant==21?500u:533u)&&p.combatTimeMs<=p.combatDurationMs))&&
+    // 1214cv (protocol 76): a death collapse belongs only to the dead state (25), single phase, its exact duration.
+    const bool deathCombat=CombatPresentation::death(p.combatVariant);
+    // 1214cz (protocol 77): a recoil stagger rides the slash state, single phase, at a native recoil duration.
+    const bool staggerCombat=CombatPresentation::stagger(p.combatVariant);
+    const bool combat=deathCombat?(p.state==25&&p.combatPhase==1&&p.combatDurationMs==CombatPresentation::deathDuration(p.combatVariant)&&p.combatTimeMs<=p.combatDurationMs):
+        staggerCombat?(p.state==1&&p.combatPhase==1&&(p.combatDurationMs==666||p.combatDurationMs==733)&&p.combatTimeMs<=p.combatDurationMs):
+        p.combatVariant<=23&&p.state!=25&&(!defenseImpact||((p.state==2||p.state==3)&&p.combatPhase==1&&p.combatDurationMs==(p.combatVariant==21?500u:533u)&&p.combatTimeMs<=p.combatDurationMs))&&
         (p.combatVariant<15||defenseImpact||(p.combatVariant>=22&&p.state==1&&p.combatPhase==1&&p.combatDurationMs==733&&p.combatTimeMs<=733)||(p.combatVariant<22&&p.state==1&&p.combatPhase==1&&
         (p.combatVariant==18?(p.combatDurationMs==833||p.combatDurationMs==1000):p.combatDurationMs==(p.combatVariant==17?800u:p.combatVariant==15?866u:666u))&&p.combatTimeMs<=p.combatDurationMs))&&(p.combatVariant?
         ((p.state==1||p.state==2||p.state==3)&&p.combatPhase>=1&&p.combatPhase<=2&&p.combatDurationMs&&p.combatDurationMs<=10000&&p.combatTimeMs<=3600000&&
@@ -78,9 +85,9 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         ((p.equipmentVariant==1&&p.equipmentDurationMs==1066)||(p.equipmentVariant==3&&p.equipmentDurationMs==1133));
     const bool equipment=(p.equipmentVariant<7||(p.role==1&&p.character==2&&p.equipmentDurationMs==333&&p.equipmentTimeMs<=333))&&(p.kind==0?p.swordState==0:p.swordState>=1&&p.swordState<=2)&&p.equipmentVariant<=8&&
         (p.equipmentVariant?((p.state==7||possessionDraw)&&p.equipmentDurationMs&&p.equipmentDurationMs<=10000&&p.equipmentTimeMs<=3600000):
-            (p.state!=7&&!p.equipmentTimeMs&&!p.equipmentDurationMs))&&(!p.combatVariant||p.swordState==2);
+            (p.state!=7&&!p.equipmentTimeMs&&!p.equipmentDurationMs))&&(!p.combatVariant||p.swordState==2||deathCombat);
     const bool power=PowerPresentation::valid({0,1,p.powerVariant,p.powerTimeMs,p.powerDurationMs})&&
-        (p.powerVariant?(p.state==10&&shadowPowerSwordContext(p.powerVariant,p.swordState)&&(p.powerVariant==10||(p.character==1?(p.powerVariant<=3||(p.powerVariant>=11&&p.powerVariant<=15)||(p.powerVariant>=23&&p.powerVariant<=28)):((p.powerVariant>=4&&p.powerVariant<=9)||(p.powerVariant>=16&&p.powerVariant<=22)||(p.powerVariant>=29&&p.powerVariant<=35))))):p.state!=10);
+        (p.powerVariant?(p.state==10&&shadowPowerSwordContext(p.powerVariant,p.swordState)&&(p.powerVariant==10||(p.character==1?(p.powerVariant<=3||(p.powerVariant>=11&&p.powerVariant<=15)||(p.powerVariant>=23&&p.powerVariant<=28)):((p.powerVariant>=4&&p.powerVariant<=9)||(p.powerVariant>=16&&p.powerVariant<=22)||(p.powerVariant>=29&&p.powerVariant<=36))))):p.state!=10);
     const bool ranged=RangedPresentation::valid({0,1,p.rangedKind,p.rangedVariant,p.rangedTimeMs,p.rangedDurationMs,p.rangedMechanism,p.rangedShot})&&
         (p.rangedVariant?p.state==13:p.state!=13)&&(!p.rangedKind||p.kind==1)&&
         (!p.rangedKind||(p.state==13||((p.state==0||p.state==3)&&p.swordState==2&&!p.combatVariant)))&&
@@ -112,8 +119,12 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     // alongside another scene presentation.
     const bool use=p.useTargetValid<=1&&UsePresentation::valid({1.,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})&&
         (!p.useVariant||(p.state==0&&!p.combatVariant&&!p.powerVariant&&!p.traversalVariant&&!p.rangedKind&&!p.grenadeHeld&&!p.carryVariant&&!p.chokeVariant&&!p.trapHeld&&!p.heartHeld&&!p.stunVariant));
-    return use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==75&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
-        p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=24&&
+    // 1214cv: native death (player state 15) -> state 25 with one directional collapse and no other channel.
+    const bool dead=p.state!=25||(p.kind==1&&deathCombat&&!p.equipmentVariant&&!p.traversalVariant&&!p.powerVariant&&!p.rangedKind&&!p.rangedVariant&&
+        !p.grenadeHeld&&!p.grenadeVariant&&!p.carryVariant&&!p.stunVariant&&!p.airStage&&!p.heartHeld&&!p.heartVariant&&!p.trapHeld&&!p.trapVariant&&
+        !p.chokeVariant&&!p.useVariant&&!p.leanSide&&!p.leanUp);
+    return dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==77&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
+        p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=25&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&
         (p.kind==0?(p.state==0&&!p.event):(p.targetToken&&p.event))&&coopPresentationPairReady(local,peer)&&

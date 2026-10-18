@@ -38,6 +38,9 @@ SRWLOCK npcAttackCaptureLock=SRWLOCK_INIT;NpcAttackCaptureScope npcAttackCapture
 std::vector<NpcAttackContact> npcAttackContacts;
 std::atomic<unsigned> npcAttackFault{0};
 std::atomic<std::uint64_t> npcAttackCaptured{0},npcAttackReplicaBlocked{0},npcAttackTerminalBlocked{0};
+// 1214cv: hits on the registered victim that were not relayed, by reason: no live source scope, victim identity,
+// attacker without a ready binding, contact shape (weapon, amount, flags, declaration). Cumulative per process.
+std::atomic<std::uint64_t> npcAttackCaptureMisses[4]{};std::atomic<unsigned> npcAttackLastMissAttacker{0};
 thread_local bool npcAttackApplying=false;
 // Passive observer of native arkPlayerStateBlock melee resolution 140859980
 // (block 0, parry-lose 1, parry-win 2). It never changes arguments or result;
@@ -244,20 +247,23 @@ bool routeNpcAttackDamage(void* component,void* info,void* result){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);bool handled=false;
     AcquireSRWLockExclusive(&npcAttackCaptureLock);
     const auto& s=npcAttackCaptureScope;std::uintptr_t game=0,owner=0;unsigned generation=0;
+    const bool victim=s.victim.component&&reinterpret_cast<std::uintptr_t>(component)==s.victim.component;
+    unsigned miss=victim?(s.sources.empty()||GetTickCount64()>=s.until?1u:2u):0u,missAttacker=0;
     if(!s.sources.empty()&&GetTickCount64()<s.until&&reinterpret_cast<std::uintptr_t>(component)==s.victim.component&&
        memoryRead(base+0x39a5290,&game,8)&&game==s.victim.game&&worldIdentityEntity(memoryRead,game,s.victim.handle)==s.victim.actor&&
        memoryRead(s.victim.component+0x10,&owner,8)&&owner==s.victim.actor&&memoryRead(s.victim.component+0x18,&generation,4)&&generation==s.generation){
-        std::array<unsigned char,144> data{};
+        miss=3;std::array<unsigned char,144> data{};
         if(memoryRead(reinterpret_cast<std::uintptr_t>(info),data.data(),data.size())){
             std::uintptr_t decl=0;unsigned attacker=0,inflictor=0;float amount=0;std::uint64_t flags=0;
             std::memcpy(&decl,data.data(),8);std::memcpy(&amount,data.data()+8,4);std::memcpy(&flags,data.data()+0x10,8);
             std::memcpy(&inflictor,data.data()+0x50,4);std::memcpy(&attacker,data.data()+0x54,4);
+            missAttacker=attacker;
             for(const auto& b:s.sources)if(attacker==b.source.npc.handle){
-                const auto& n=b.source;unsigned parent=0;
+                miss=4;const auto& n=b.source;unsigned parent=0;
                 const auto weapon=worldIdentityEntity(memoryRead,game,inflictor);
                 if(worldIdentityEntity(memoryRead,game,attacker)!=n.npc.actor||!weapon||!memoryRead(weapon+0xac,&parent,4)||parent!=attacker||
                    amount!=20||flags!=0x80||!nativeSwordDeclaration(decl))break;
-                handled=true;
+                handled=true;miss=0;
                 if(s.host&&!s.terminal){
                     NpcAttackContact e{};e.arm=b.arm;e.nonce=b.nonce;e.tick=GetTickCount64();e.attacker=attacker;e.inflictor=inflictor;
                     if(!nativeMeleeAttackFlags(weapon,e.flags)){npcAttackFault.store(1);break;}
@@ -273,6 +279,7 @@ bool routeNpcAttackDamage(void* component,void* info,void* result){
         }
     }
     ReleaseSRWLockExclusive(&npcAttackCaptureLock);
+    if(miss){++npcAttackCaptureMisses[miss-1];npcAttackLastMissAttacker.store(missAttacker);}
     if(handled)reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result);
     return handled;
 }
@@ -489,8 +496,9 @@ void repeatNpcAttack(){
 void writeNpcAttack(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-attack.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"entries\":[",
-        npcAttack.enabled?"true":"false",npcAttack.result,npcAttack.nonce,npcAttack.event,npcAttack.consumed,npcAttack.acked,npcAttack.pending.size(),npcAttackCaptured.load(),npcAttackReplicaBlocked.load(),npcAttack.sent,npcAttack.applied,npcAttack.duplicates,npcAttack.rejected,npcAttack.before,npcAttack.after,npcAttack.inflicted,npcAttack.lastAttacker,npcAttack.blocked,npcAttack.parryLose,npcAttack.parryWin,npcAttack.reactions,npcAttack.reactionFailures,static_cast<unsigned>(npcAttack.lastDefense));
+    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"captureMisses\":[%llu,%llu,%llu,%llu],\"lastMissAttacker\":%u,\"entries\":[",
+        npcAttack.enabled?"true":"false",npcAttack.result,npcAttack.nonce,npcAttack.event,npcAttack.consumed,npcAttack.acked,npcAttack.pending.size(),npcAttackCaptured.load(),npcAttackReplicaBlocked.load(),npcAttack.sent,npcAttack.applied,npcAttack.duplicates,npcAttack.rejected,npcAttack.before,npcAttack.after,npcAttack.inflicted,npcAttack.lastAttacker,npcAttack.blocked,npcAttack.parryLose,npcAttack.parryWin,npcAttack.reactions,npcAttack.reactionFailures,static_cast<unsigned>(npcAttack.lastDefense),
+        npcAttackCaptureMisses[0].load(),npcAttackCaptureMisses[1].load(),npcAttackCaptureMisses[2].load(),npcAttackCaptureMisses[3].load(),npcAttackLastMissAttacker.load());
     for(unsigned i=0;i<npcAttack.bindings.size();++i){const auto& b=npcAttack.bindings[i];fprintf(f,"%s{\"arm\":%llu,\"peerNonce\":%llu,\"ready\":%s}",i?",":"",b.arm,b.peerNonce,b.ready?"true":"false");}
     std::array<MeleeDefenseObservation,64> defense{};std::uint64_t defenseCount=0;
     AcquireSRWLockShared(&meleeDefenseObserveLock);defense=meleeDefenseObservations;defenseCount=meleeDefenseObservationCount;ReleaseSRWLockShared(&meleeDefenseObserveLock);

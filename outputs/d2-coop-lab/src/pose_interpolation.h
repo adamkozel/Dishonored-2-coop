@@ -54,6 +54,22 @@ struct SourcePoseTimeline {
         lastSource=us;lastArrival=arrival;lastMapped=mapped;return true;
     }
 };
+// 1214dc (#11 guard-fight stream drops): an action packet is mapped with the ROOT stream's clock offset. In guard fights
+// that offset rebases (late root packets) and the action packets then land just outside the presentation window
+// (1328zzo: all refused as reject 11, 87 ms early, then 262 ms late), so no action is accepted for over a second, both
+// peers stop the stream as native_state_stale and the handshake restart hides the partner for about 5 s. A packet
+// mapped up to 400 ms early or 1000 ms late is now clamped to the window edge (80 ms ahead, 250 ms behind) instead;
+// beyond that band it is still refused. Accepted packets are already in sequence order, so the clamped time is also
+// kept strictly after the previous accepted one, which every action timeline requires.
+// Returns 0 in the window, 1 clamped early, 2 clamped late, 3 refused.
+inline unsigned clampActionMappedTime(double& mapped,double now,double lastMapped){
+    if(!std::isfinite(mapped)||!std::isfinite(now))return 3;
+    unsigned kind=0;
+    if(mapped>now+80.){if(mapped>now+400.)return 3;mapped=now+80.;kind=1;}
+    else if(now-mapped>250.){if(now-mapped>1000.)return 3;mapped=now-250.;kind=2;}
+    if(lastMapped>0&&mapped<=lastMapped){if(lastMapped>=now+80.)return 3;mapped=(std::min)(now+80.,lastMapped+.001);}
+    return kind;
+}
 // Quarantine an initial burst before publishing a clock to root/action/world
 // streams. A queued first sample can carry >150ms of startup delay. Its arrival
 // is not a trustworthy offset. Established clocks retain the strict mapper

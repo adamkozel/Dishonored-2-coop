@@ -173,7 +173,9 @@ inline const NativeTakedownScene* nativeTakedownScene(unsigned id){return id>=1&
 inline unsigned nativeTakedownKind(unsigned id){const auto* s=nativeTakedownScene(id);return s?s->kind:0;}
 inline bool nativeTakedownLethal(unsigned id){return nativeTakedownKind(id)==5;}
 // The partner presents a drawn sword: lethal takedowns, finishers and sword locks.
-inline bool nativeTakedownSword(unsigned id){const auto k=nativeTakedownKind(id);return k==5||k==6;}
+// 1214da (#11 shadow walk): the shadow-form assassinations (37-44, assassination_sw_*) run with the sword holstered
+// (probe 1350b: sword_unequip_fast before trans_in, sword_equip_sneak_fast after attack_out; confirmed runtime).
+inline bool nativeTakedownSword(unsigned id){const auto k=nativeTakedownKind(id);return (k==5||k==6)&&!(id>=37&&id<=44);}
 inline bool nativeTakedownFatality(unsigned id){const auto* s=nativeTakedownScene(id);return s&&s->fatality;}
 inline unsigned nativeTakedownArms(unsigned id){const auto* s=nativeTakedownScene(id);return s?s->arms:0;}
 // The existing presentation clip for the scene kind (choke back/loop/win/lose, fast-back lethal).

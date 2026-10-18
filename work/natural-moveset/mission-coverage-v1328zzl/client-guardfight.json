@@ -1,0 +1,79 @@
+{
+  "source": "client",
+  "case": "guardfight",
+  "observer": "host",
+  "passed": false,
+  "failure": "Guard outcome host alive, client alive",
+  "checks": [],
+  "guardFacing": [
+    -0.1692370640736723,
+    0.9855753731418636
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.1692370640736723,
+        0.9855753731418636
+      ],
+      "rest": [
+        4.01366,
+        61.6551,
+        15.966
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "phaseLog": [
+    {
+      "phase": "block",
+      "ms": 3547
+    },
+    {
+      "ms": 18483,
+      "phase": "open",
+      "guardSamples": 6
+    },
+    {
+      "ms": 33547,
+      "phase": "attack",
+      "hitSamples": 0
+    }
+  ],
+  "counterPresses": [],
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcomeWaitMs": 664,
+  "guard": "script_spawner_checkpoint_guard_01",
+  "blockImpacts": 7,
+  "timedParries": 0,
+  "hitReactions": 0,
+  "stunVariants": [],
+  "attackSamples": 27,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    4,
+    7,
+    22
+  ],
+  "minSourceHealth": 55.0,
+  "healthDrops": [
+    {
+      "ms": 24475,
+      "states": 0
+    },
+    {
+      "ms": 29245,
+      "states": 0
+    },
+    {
+      "ms": 40908,
+      "states": 0
+    }
+  ]
+}

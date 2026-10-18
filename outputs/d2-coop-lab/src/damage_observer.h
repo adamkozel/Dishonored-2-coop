@@ -51,6 +51,7 @@ void observeNativeDamage(void* component,void* info,void* result){
     if(routeNpcParryWinDamage(component,info,result))return;
     if(suppressFriendlyFire(component,info,result)||suppressShadowDamage(info,result)||suppressCarryPresentationDamage(info,result))return;
     if(routeNpcAttackDamage(component,info,result))return;
+    if(suppressCloneWorldDamage(component,result))return;
     if(routeNpcCombatDamage(component,info,result))return;
     const auto tick=GetTickCount64(),generation=damageObserveGeneration.load();
     if(tick>=damageObserveUntil.load()){realNativeDamage(component,info,result);return;}
@@ -109,7 +110,7 @@ void writeDamageObservation(ULONGLONG tick){
             if(s.bytesValid)for(auto byte:s.bytes)fprintf(f,"%02x",byte);fputs("\"}",f);}
         fputs("}",f);
     }
-    fprintf(f,"],\"carryPresentationDamageBlocked\":%llu}\n",carryDamageBlocked.load());const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+    fprintf(f,"],\"carryPresentationDamageBlocked\":%llu,\"cloneWorldDamageBlocked\":%llu}\n",carryDamageBlocked.load(),cloneWorldDamageBlocked.load());const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
 bool installDamageObserver(){
     // Fifteen bytes of complete non-relative instructions, including the live

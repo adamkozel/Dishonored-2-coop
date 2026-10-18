@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 1, timed parries 0, hit reactions 2 (variants 2), attacks 18 (variants 1,2,7); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.8913239511264808,
+        -0.453366975140756
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.8913239511264808,
+            -0.453366975140756
+          ],
+          "rest": [
+            6.1579,
+            48.1021,
+            16.4645
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "ms": 3527,
+          "phase": "block"
+        },
+        {
+          "ms": 26542,
+          "guardSamples": 1,
+          "phase": "open"
+        },
+        {
+          "hitSamples": 2,
+          "ms": 41556,
+          "phase": "attack"
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 671,
+      "guard": "script_spawner_checkpoint_guard_02",
+      "blockImpacts": 1,
+      "timedParries": 0,
+      "hitReactions": 2,
+      "stunVariants": [
+        2
+      ],
+      "attackSamples": 18,
+      "attackVariants": [
+        1,
+        2,
+        7
+      ],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 10778,
+          "states": [
+            0,
+            64
+          ]
+        },
+        {
+          "ms": 20190,
+          "states": [
+            0,
+            64
+          ]
+        },
+        {
+          "ms": 38982,
+          "states": 0
+        },
+        {
+          "ms": 40544,
+          "states": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

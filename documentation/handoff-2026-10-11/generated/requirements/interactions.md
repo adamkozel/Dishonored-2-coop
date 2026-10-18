@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:59:02.174475+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:49:57.263629+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -804,7 +804,7 @@ Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's c
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's crouched lock use is presented since 1214am. Accepted functionally in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4"
@@ -814,8 +814,41 @@ Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's c
     "../movement-integration/use-interaction-audit-v1215.json",
     "../movement-integration/use-variants-audit-v1229.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/coverage-audit-v1283.json"
-  ]
+    "../movement-integration/coverage-audit-v1283.json",
+    "use-variants-dunwall-v1228zd/result.json",
+    "use-variants-dunwall-v1228ze/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1366-key-use.json",
+    "decision": "complete",
+    "scope": "Using a key on a real lock in both roles: the partner reaches the lock with the right arm, holds it while the native use runs and draws the arm back to its idle, on the native use clock.",
+    "takes": [
+      {
+        "take": "use-variants-dunwall-v1228zd",
+        "cases": [
+          "host-ld_ring_locker_01_1_lock"
+        ]
+      },
+      {
+        "take": "use-variants-dunwall-v1228ze",
+        "cases": [
+          "client-ld_ring_locker_01_1_lock"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "use-variants-dunwall-v1228zd/use-host-ld_ring_locker_01_1_lock-observed.mp4",
+        "verdict": "Corvo stands at the locker, raises his right forearm to the lock plate on the bookcase, holds the hand at the lock for about two seconds and lowers it back to his side."
+      },
+      {
+        "video": "use-variants-dunwall-v1228ze/use-client-ld_ring_locker_01_1_lock-observed.mp4",
+        "verdict": "Emily steps to the locker, reaches her right hand to the lock plate, keeps it there through the use and lets the arm fall back as she settles."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -824,6 +857,8 @@ Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's c
 - [evidence: ../movement-integration/use-variants-audit-v1229.json](<../../../../work/movement-integration/use-variants-audit-v1229.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
+- [evidence: use-variants-dunwall-v1228zd/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228zd/result.json>)
+- [evidence: use-variants-dunwall-v1228ze/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228ze/result.json>)
 - [in_game_recordings: use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4](<../../../../work/natural-moveset/use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4>)
 ## read_object_or_note
 
@@ -1153,15 +1188,96 @@ Audit 1289: the hand-back from a native use scene to locomotion has no pop at 10
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Audit 1289: the hand-back from a native use scene to locomotion has no pop at 10 fps (1228t) and reads in both roles across the accepted use takes; accepted functionally. A context-dependent animation ownership transition. Audit 1241 (1213m): on the native confined mantle the partner holds the scene pose at full weight, then blends from that actual pose to locomotion over ~250 ms (traversal weight 0.34/0.07/0.02 while locomotion returns 0.49/0.89/0.97), in both roles. Use scenes recover the same way (vise reach videos, audit 1235). Other scene families, an unclassified-state frame at the scene end and visual acceptance (#33) remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
     "../movement-integration/presentation-hold-audit-v1241.json",
     "../movement-integration/window-traversal-audit-v1238.json",
     "../movement-integration/use-reach-audit-v1235.json",
-    "../movement-integration/handoff-audit-v1289.json"
-  ]
+    "../movement-integration/handoff-audit-v1289.json",
+    "use-variants-eotw-v1228v/result.json",
+    "use-variants-eotw-v1228w/result.json",
+    "coverage-v1326d/result.json",
+    "mission-coverage-v1328q/result.json",
+    "takedown-variants-v1254k/result.json",
+    "cutscene-transition-v1236c/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1359-scene-handoff.json",
+    "decision": "complete",
+    "scope": "Hand-back from a native scene to locomotion in both roles for every family that takes over the body: use mechanisms (lever, tap), traversal scenes (high mantle), the damaging landing, paired drop takedowns and cinematics (partner retired and restored).",
+    "takes": [
+      {
+        "take": "use-variants-eotw-v1228v",
+        "cases": [
+          "host-script_lever_windturbine_1_1_1"
+        ]
+      },
+      {
+        "take": "use-variants-eotw-v1228w",
+        "cases": [
+          "client-script_lever_windturbine_1_1_1"
+        ]
+      },
+      {
+        "take": "coverage-v1326d",
+        "cases": [
+          "host-highmantle",
+          "client-highmantle"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1328q",
+        "cases": [
+          "host-hardfall",
+          "client-hardfall"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254k",
+        "cases": [
+          "host-drop-lethal",
+          "client-drop-lethal"
+        ]
+      },
+      {
+        "take": "cutscene-transition-v1236c",
+        "cases": [
+          "host-cutscene",
+          "client-cutscene"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+        "verdict": "Corvo reaches up, pulls the lever down and lets his arm fall back as he settles into his standing idle; no pop at the hand-back."
+      },
+      {
+        "video": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+        "verdict": "Emily steps to the lever, pulls it and returns smoothly to standing beside it."
+      },
+      {
+        "video": "coverage-v1326c/client-highmantle-observer.mp4",
+        "verdict": "Emily hauls herself up the high ledge and straightens into a stand on top without a jump between the climb and the idle."
+      },
+      {
+        "video": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+        "verdict": "Corvo lands from the long fall in a deep crouch, rises and walks straight on along the dock."
+      },
+      {
+        "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+        "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+      },
+      {
+        "video": "cutscene-transition-v1236c/after-scene-host.mp4",
+        "verdict": "After the Mayhew cinematic Emily stands in the hall again, sword in hand, in her standing idle and steady from the first frame she reappears; no pop."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -1169,6 +1285,12 @@ Audit 1289: the hand-back from a native use scene to locomotion has no pop at 10
 - [evidence: ../movement-integration/window-traversal-audit-v1238.json](<../../../../work/movement-integration/window-traversal-audit-v1238.json>)
 - [evidence: ../movement-integration/use-reach-audit-v1235.json](<../../../../work/movement-integration/use-reach-audit-v1235.json>)
 - [evidence: ../movement-integration/handoff-audit-v1289.json](<../../../../work/movement-integration/handoff-audit-v1289.json>)
+- [evidence: use-variants-eotw-v1228v/result.json](<../../../../work/natural-moveset/use-variants-eotw-v1228v/result.json>)
+- [evidence: use-variants-eotw-v1228w/result.json](<../../../../work/natural-moveset/use-variants-eotw-v1228w/result.json>)
+- [evidence: coverage-v1326d/result.json](<../../../../work/natural-moveset/coverage-v1326d/result.json>)
+- [evidence: mission-coverage-v1328q/result.json](<../../../../work/natural-moveset/mission-coverage-v1328q/result.json>)
+- [evidence: takedown-variants-v1254k/result.json](<../../../../work/natural-moveset/takedown-variants-v1254k/result.json>)
+- [evidence: cutscene-transition-v1236c/result.json](<../../../../work/natural-moveset/cutscene-transition-v1236c/result.json>)
 ## cutscene_enter_exit
 
 Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.
@@ -1190,19 +1312,51 @@ Native cutscene animation remains scene-specific. Entry/exit ownership and blend
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "cutscene-transition-v1236b/scene-host.mp4",
     "cutscene-transition-v1236b/scene-client.mp4"
   ],
   "evidence": [
-    "../movement-integration/cutscene-transition-audit-v1239.json"
-  ]
+    "../movement-integration/cutscene-transition-audit-v1239.json",
+    "cutscene-transition-v1236c/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1359-scene-handoff.json",
+    "decision": "complete",
+    "scope": "Both peers enter a native cinematic together (Mayhew, Cinematic5); the partner presentation is retired on both peers for the whole scene and restored at the live pose of the partner after it, in both windows.",
+    "takes": [
+      {
+        "take": "cutscene-transition-v1236c",
+        "cases": [
+          "host-cutscene",
+          "client-cutscene"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "cutscene-transition-v1236c/scene-host.mp4",
+        "verdict": "The host window shows only the native Mayhew cinematic for its 30 s; no partner body is drawn into the scene, and the room is empty at the cut back to gameplay."
+      },
+      {
+        "video": "cutscene-transition-v1236c/after-scene-host.mp4",
+        "verdict": "Emily reappears 1.9 s after the scene, standing at the panelled wall with her sword, and stays steady in her idle."
+      },
+      {
+        "video": "cutscene-transition-v1236c/after-scene-client.mp4",
+        "verdict": "In the client window Corvo stands with his sword lowered in the dark hall after the scene, steady in his idle."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/cutscene-transition-audit-v1239.json](<../../../../work/movement-integration/cutscene-transition-audit-v1239.json>)
+- [evidence: cutscene-transition-v1236c/result.json](<../../../../work/natural-moveset/cutscene-transition-v1236c/result.json>)
 - [in_game_recordings: cutscene-transition-v1236b/scene-host.mp4](<../../../../work/natural-moveset/cutscene-transition-v1236b/scene-host.mp4>)
 - [in_game_recordings: cutscene-transition-v1236b/scene-client.mp4](<../../../../work/natural-moveset/cutscene-transition-v1236b/scene-client.mp4>)
 ## map_load_checkpoint_recovery
@@ -1226,7 +1380,7 @@ Audit 1286: the partner is filmed upright and whole on both peers after the map 
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Audit 1286: the partner is filmed upright and whole on both peers after the map load and the shared checkpoint restart (mission-lifecycle-v1199h); accepted in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). The Emily partner visibly re-appears upright after both the map load and the checkpoint restart; no recording shows the Corvo partner on the client side. This is a lifecycle integration requirement, not a standalone animation clip. 1199d (candidate 1203f): after a native map load (client follows the host mission) and after a shared death + native checkpoint restart, the product controller re-arms and the partner avatar is re-created at the remote player on both peers; filmed face to face from both windows. Supporting: 1160 renewal, 1183 product controller. Mission-to-mission transitions, manual save/load and rejoin remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-lifecycle-v1199d/load-host.mp4",
@@ -1235,14 +1389,52 @@ Audit 1286: the partner is filmed upright and whole on both peers after the map 
   "evidence": [
     "../movement-integration/lifecycle-audit-v1202.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/views-audit-v1286.json"
-  ]
+    "../movement-integration/views-audit-v1286.json",
+    "mission-lifecycle-v1199i/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1358-lifecycle.json",
+    "decision": "complete",
+    "scope": "The partner avatar in both roles after a native map load (join-follow, product controller) and after a shared death and native checkpoint restart: present, upright and whole in the other window, with its presentation re-armed.",
+    "takes": [
+      {
+        "take": "mission-lifecycle-v1199i",
+        "cases": [
+          "host-load",
+          "client-load",
+          "host-restart",
+          "client-restart"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-lifecycle-v1199i/load-client.mp4",
+        "verdict": "After the map load Corvo stands upright and whole on the dock in front of the wall posters, idling naturally."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/load-host.mp4",
+        "verdict": "After the map load Emily stands upright and whole on the boat deck beside the pilot, idling naturally."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/restart-client.mp4",
+        "verdict": "After the checkpoint restart Corvo is back, upright at the left edge of the frame by the same wall."
+      },
+      {
+        "video": "mission-lifecycle-v1199i/restart-host.mp4",
+        "verdict": "After the checkpoint restart Emily is back, upright at the left edge of the frame on the boat."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/lifecycle-audit-v1202.json](<../../../../work/movement-integration/lifecycle-audit-v1202.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/views-audit-v1286.json](<../../../../work/movement-integration/views-audit-v1286.json>)
+- [evidence: mission-lifecycle-v1199i/result.json](<../../../../work/natural-moveset/mission-lifecycle-v1199i/result.json>)
 - [in_game_recordings: mission-lifecycle-v1199d/load-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/load-host.mp4>)
 - [in_game_recordings: mission-lifecycle-v1199d/restart-host.mp4](<../../../../work/natural-moveset/mission-lifecycle-v1199d/restart-host.mp4>)
 ## incapacitation_and_rescue_if_supported

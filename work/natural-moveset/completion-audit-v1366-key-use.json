@@ -1,0 +1,38 @@
+{
+  "audit": "completion-audit-v1366-key-use",
+  "family": "interactions",
+  "candidate": "candidate-npc-combat-v1214cy",
+  "method": "A key or lock use has no native player animation: the native use enters player state 75 briefly (audit 1211, the same source as levers), and the focused entity's name selects use variant 5 (key or lock, audit 1215), which the partner plays as the authored reach-insert-turn clip 373 on the use event's own clock (wire protocol 74). Each take uses the real ring lock of the Dunwall Tower locker (ld_ring_locker_01_1_lock) with the product controller; the case passes when the source's native use fires (sourceUses, the locker's open event), the observer presents variant 5 at full weight, the source stays in place and the fixture is restored. The observer camera stands over the partner's right shoulder (free camera, back 0.9 m, side -0.6 m, eye height 2.1 m, pitch 28), where the earlier takes from the left hid the reaching arm (visual sweep 1260: no usable Corvo recording).",
+  "items": [
+    {
+      "id": "key_use",
+      "decision": "complete",
+      "scope": "Using a key on a real lock in both roles: the partner reaches the lock with the right arm, holds it while the native use runs and draws the arm back to its idle, on the native use clock.",
+      "takes": [
+        {
+          "take": "use-variants-dunwall-v1228zd",
+          "cases": [
+            "host-ld_ring_locker_01_1_lock"
+          ]
+        },
+        {
+          "take": "use-variants-dunwall-v1228ze",
+          "cases": [
+            "client-ld_ring_locker_01_1_lock"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "use-variants-dunwall-v1228zd/use-host-ld_ring_locker_01_1_lock-observed.mp4",
+          "verdict": "Corvo stands at the locker, raises his right forearm to the lock plate on the bookcase, holds the hand at the lock for about two seconds and lowers it back to his side."
+        },
+        {
+          "video": "use-variants-dunwall-v1228ze/use-client-ld_ring_locker_01_1_lock-observed.mp4",
+          "verdict": "Emily steps to the locker, reaches her right hand to the lock plate, keeps it there through the use and lets the arm fall back as she settles."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

@@ -36,6 +36,7 @@ bool movementOwnsCombat();
 // Native Steam transports semantic state;
 // the receiver uses native clone clips, never native damage/AI attack calls.
 struct ShadowStreamState {
+    double lastMapped=0; // 1214dc: presentation time of the last accepted action packet
     // Diagnostic history survives brief native loop incarnations which a
     // slower file observer can miss. Reset with this stream's token/world.
     // It observes successful sends / fully accepted states; never drives them.
@@ -78,7 +79,7 @@ ShadowStreamState shadowStream{};
 std::uint64_t shadowStreamNonce=0,shadowStreamSequence=0,shadowStreamSent=0,shadowStreamReceived=0,shadowStreamAccepted=0,
     shadowStreamRejected=0,shadowStreamRefused=0,shadowStreamStarted=0,shadowStreamApplied=0,shadowStreamReleases=0;
 CoopShadowActionPacket shadowStreamLastPacket{};
-unsigned shadowStreamStateRejectReason=0;double shadowStreamRejectedAge=0;
+unsigned shadowStreamStateRejectReason=0;double shadowStreamRejectedAge=0;std::uint64_t shadowActionEarlyClamped=0,shadowActionLateClamped=0;
 std::uint64_t shadowStreamRejectedEvent=0,shadowStreamExpectedEvent=0,shadowStreamRejectedSequence=0,shadowStreamExpectedSequence=0;
 unsigned shadowStreamRejectedState=0,shadowStreamExpectedState=0;
 unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
@@ -174,12 +175,91 @@ void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
     if(shadowUse.variant){
         if(shadowUse.variant<6&&useMovedAway(shadowUse.origin,outgoing.position)){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
 }
+// 1214cv (#11 death_variants): the native Dead state (player state 15, arkPlayerStateDead, vtable RVA 0x1c82478 from
+// its RTTI; confirmed static) plays no scene (probe 1361a). The source read failed closed on it, the stream stopped
+// and the partner vanished. It is now action 25 with one directional collapse chosen once at the death edge: the
+// nearest living catalogued NPC within 10 m relative to the facing (24 front, 25 back, 26 left, 27 right); a death
+// without one (a fall) collapses as front.
+struct ShadowDeath {std::uint64_t epoch=0,deaths=0,fatalities=0;ULONGLONG start=0;unsigned variant=0,leadMs=0,sceneMs=0,sceneStage=0;float bearing=0;bool nearby=false,fatality=false,sceneRead=false;std::string scene;};
+ShadowDeath shadowDeath{};
+inline bool nativePlayerDead(const NativePlayerStates& s,std::uintptr_t base){
+    return s.active.size()==1&&s.active[0].id==15&&s.active[0].vtable==base+0x1c82478;
+}
+// 1214cw: an NPC finisher on the player is native state 38 (arkPlayerStateNpcFatality, vtable RVA 0x1c3d878 from its
+// RTTI; confirmed static) beside Running, playing midnight/gameplay/player/base/death/npc_fatality_<npc>.midnightscene
+// (probe 1361c: guards, subscene npc, 4000 ms; it binds PlayerBody to ply_body_generic_npc_<npc>_fatality). The body
+// is held, then dropped: its pelvis reaches half height at guards 2.9 s, elite 1.4, howler 1.5, overseer 2.3, witch
+// 0.73, clockwork 3.47 (offline native samples, npc-fatality-timing-v1362.json). The partner's collapse reaches half
+// height about 0.9 s in, so it starts that much earlier on the native scene clock and holds its first frame before.
+// 1214cx: 0.4 s earlier still: native GameOver (about 3.8 s into the guards' finisher) retires the dead source's
+// stream, and in 1361o Emily vanished while still kneeling.
+inline bool nativePlayerNpcFatality(const NativePlayerStates& s,std::uintptr_t base,std::uintptr_t& pointer){
+    for(const auto& a:s.active)if(a.id==38&&a.vtable==base+0x1c3d878){pointer=a.pointer;return true;}
+    return false;
+}
+inline unsigned npcFatalityCollapseLeadMs(const std::string& asset){
+    static const std::pair<const char*,unsigned> leads[]={{"guards",1600},{"elite",100},{"howler",200},{"overseer",1000},{"witch",0},{"clockwork",2170}};
+    for(const auto& e:leads)if(asset==std::string("midnight/gameplay/player/base/death/npc_fatality_")+e.first+".midnightscene")return e.second;
+    return 1600;
+}
+// The state's scene handle (+0x24) names the playing instance in the midnight manager lists, as for sword scenes.
+// stage (1214cx): 1 no scene handle, 2 manager list unreadable, 3 no instance, 4 declaration/name/time; 0 read.
+template<class Read> bool readNativeNpcFatalityScene(Read read,std::uintptr_t base,std::uintptr_t game,std::uintptr_t pointer,std::string& asset,unsigned& timeMs,unsigned* stage=nullptr){
+    unsigned handle=0;std::uintptr_t instance=0;unsigned local=0;unsigned& at=stage?*stage:local;at=1;
+    if(!pointer||!read(pointer+0x24,&handle,4)||!handle)return false;
+    at=2;
+    for(unsigned field=0;field<2;++field){std::uintptr_t list=0;unsigned flags=0;const auto at=game+0x1f5338+(field?0x610:0);
+        if(!read(at,&list,8)||!read(at+8,&flags,4)||(flags&0xffffff)>512||((flags&0xffffff)&&!list))return false;
+        for(unsigned i=0;i<(flags&0xffffff);++i){std::uintptr_t candidate=0;unsigned id=0;
+            if(!read(list+i*8,&candidate,8)||!candidate||!read(candidate+0x158,&id,4))return false;
+            if(id==handle){if(instance&&instance!=candidate)return false;instance=candidate;}}
+    }
+    at=instance?4:3;
+    std::uintptr_t declaration=0,vt=0,name=0;std::string text;unsigned t=0;
+    if(!instance||!read(instance,&declaration,8)||!read(declaration,&vt,8)||vt!=base+0x1affbc8||!read(declaration+8,&name,8)||
+       !worldIdentityString(read,name,text)||text.rfind("midnight/gameplay/player/base/death/npc_fatality_",0)!=0||!read(instance+0x160,&t,4)||t>60000)return false;
+    asset=std::move(text);timeMs=t;at=0;return true;
+}
+unsigned shadowDeathVariant(ULONGLONG tick){
+    shadowDeath.nearby=false;shadowDeath.bearing=0;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    const float fx=outgoing.orientation[0],fy=outgoing.orientation[1],fl=std::sqrt(fx*fx+fy*fy);
+    if(!(fl>.1f)||!worldObservationReady(tick)||!worldCatalogTick||tick-worldCatalogTick>750)return 24;
+    float best=100.f,bx=0,by=0;
+    for(const auto& n:worldCatalog){float root[3]{};NativeHealth h{};
+        if(!n.actor||n.actor==probeActor||!memoryRead(n.actor+0x300,root,12)||!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||h.current<=0)continue;
+        const float dx=root[0]-outgoing.position[0],dy=root[1]-outgoing.position[1],dz=root[2]-outgoing.position[2],d=dx*dx+dy*dy+dz*dz;
+        if(std::isfinite(d)&&d>.01f&&d<best){best=d;bx=dx;by=dy;}
+    }
+    if(best>=100.f)return 24;
+    const float a=std::atan2((by*fx-bx*fy)/fl,(bx*fx+by*fy)/fl);shadowDeath.nearby=true;shadowDeath.bearing=a;
+    return std::fabs(a)<=.7853981634f?24u:std::fabs(a)>=2.356194490f?25u:a>0?26u:27u;
+}
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates states{};NativePlayerSword sword{};
     NativePlayerPowerScene power{};NativePlayerStunScene stun{};
     const bool nativeStateValid=shadowTimedRead(0,[&]{return readNativePlayerStates(memoryRead,base,states);})&&states.player.game==observedGame&&states.player.player==observedPlayer;
     if(nativeStateValid)serviceShadowUse(states,base);
+    std::uintptr_t fatalityState=0;
+    const bool fatality=nativeStateValid&&nativePlayerNpcFatality(states,base,fatalityState);
+    if(nativeStateValid&&(fatality||nativePlayerDead(states,base))){
+        const auto tick=GetTickCount64();
+        if(!shadowDeath.start||shadowDeath.epoch!=outgoing.worldEpoch){shadowDeath.epoch=outgoing.worldEpoch;shadowDeath.start=tick;shadowDeath.variant=shadowDeathVariant(tick);++shadowDeath.deaths;
+            shadowDeath.fatality=fatality;shadowDeath.leadMs=fatality?1600:0;shadowDeath.sceneRead=false;shadowDeath.sceneMs=0;shadowDeath.scene.clear();if(fatality)++shadowDeath.fatalities;}
+        // A finisher's clock is its native scene time; a plain death (or a read miss) uses the time since the edge.
+        std::string scene;unsigned sceneMs=0;
+        const bool sceneRead=fatality&&readNativeNpcFatalityScene(memoryRead,base,states.player.game,fatalityState,scene,sceneMs,&shadowDeath.sceneStage);
+        if(sceneRead){shadowDeath.sceneRead=true;shadowDeath.sceneMs=sceneMs;shadowDeath.leadMs=npcFatalityCollapseLeadMs(scene);shadowDeath.scene=std::move(scene);}
+        const ULONGLONG clock=sceneRead?sceneMs:tick-shadowDeath.start;
+        action=25;
+        if(airPacket){const unsigned duration=CombatPresentation::deathDuration(shadowDeath.variant);
+            airPacket->combatVariant=shadowDeath.variant;airPacket->combatPhase=1;airPacket->combatDurationMs=duration;
+            airPacket->combatTimeMs=unsigned((std::min<ULONGLONG>)(duration,clock>shadowDeath.leadMs?clock-shadowDeath.leadMs:0));
+            airPacket->swordState=shadowStreamLastPacket.swordState==2?2u:1u;}
+        if(leanSide)*leanSide=0;if(leanUp)*leanUp=0;shadowSourceReadStage=0;return true;
+    }
+    if(nativeStateValid)shadowDeath.start=0;
     const bool stunValid=nativeStateValid&&shadowTimedRead(1,[&]{return readNativePlayerStunScene(memoryRead,base,states,stun);});
     const bool powerValid=nativeStateValid&&!stunValid&&shadowTimedRead(2,[&]{return (readNativePlayerPowerScene(memoryRead,base,states,power,true)||readNativePlayerDominoScene(memoryRead,base,states,power)||readNativePlayerDoppelgangerScene(memoryRead,base,states,power)||readNativePlayerSwarmScene(memoryRead,base,states,power)||readNativePlayerPossessionScene(memoryRead,base,states,power,true)||readNativePlayerShadowWalkScene(memoryRead,base,states,power));});
     const bool possessionOccupied=nativeStateValid&&!stunValid&&!powerValid&&readNativeHumanPossessionOccupation(memoryRead,base,states);
@@ -466,11 +546,13 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
         !resolveCarryIdentity(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,worldCatalog,p.carrySpawner,p.carryDefinition,carryTarget))){
         ++shadowStreamRejected;return;
     }
-    // Use the already-established root clock mapping, without modifying it.
-    const double mapped=double(p.sampleTimeUs)*.001+sourcePoseTimeline.offset,now=presentationClock();
+    // Use the already-established root clock mapping, without modifying it; 1214dc clamps a bounded miss (see
+    // clampActionMappedTime) instead of refusing every action while the root offset settles.
+    double mapped=double(p.sampleTimeUs)*.001+sourcePoseTimeline.offset;const double now=presentationClock(),rawMapped=mapped;
+    const unsigned clampKind=sourcePoseTimeline.session==p.sourceSession?clampActionMappedTime(mapped,now,shadowStream.lastMapped):0;
     auto combatTimeline=shadowStream.combat;auto equipmentTimeline=shadowStream.equipment;auto traversalTimeline=shadowStream.traversal;auto powerTimeline=shadowStream.power;auto rangedTimeline=shadowStream.ranged;auto carryTimeline=shadowStream.carry;auto grenadeTimeline=shadowStream.grenade;auto heartTimeline=shadowStream.heart;auto trapTimeline=shadowStream.trap;auto chokeTimeline=shadowStream.choke;auto stunTimeline=shadowStream.stun;auto useTimeline=shadowStream.use;auto movementTimeline=shadowStream.movement;
     const unsigned timelineReject=(sourcePoseTimeline.session!=p.sourceSession||sourcePoseTimeline.epoch!=p.sourceWorldEpoch||sourcePoseTimeline.map!=p.mapId)?10:
-       (mapped>now+80.||now-mapped>250.)?11:
+       (clampKind==3||mapped>now+80.||now-mapped>250.)?11:
        !combatTimeline.push({mapped,p.event,p.combatVariant,p.combatPhase,p.combatTimeMs,p.combatDurationMs})?12:
        !equipmentTimeline.push({mapped,p.event,p.swordState,p.equipmentVariant,p.equipmentTimeMs,p.equipmentDurationMs})?13:
        !traversalTimeline.push({mapped,p.event,p.traversalVariant,p.traversalTimeMs,p.traversalDurationMs,p.traversalEndStance,p.traversalStart,p.traversalGoal,p.traversalPoint,p.traversalHeight})?14:
@@ -484,8 +566,9 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
        !stunTimeline.push({mapped,p.event,p.stunVariant,p.stunTimeMs,p.stunDurationMs})?22:
        !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})?24:
        !movementTimeline.push({mapped,p.event,p.state,p.leanSide,p.leanUp,p.airStartZ,p.airTargetZ,p.airStage,p.airRemaining})?19:0;
-    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-mapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
+    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-rawMapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
     if(p.useVariant)++shadowUseAccepted;
+    shadowStream.lastMapped=mapped;if(clampKind==1)++shadowActionEarlyClamped;else if(clampKind==2)++shadowActionLateClamped;
     shadowStream.combat=std::move(combatTimeline);shadowStream.equipment=std::move(equipmentTimeline);shadowStream.traversal=std::move(traversalTimeline);shadowStream.power=std::move(powerTimeline);shadowStream.ranged=std::move(rangedTimeline);shadowStream.carry=std::move(carryTimeline);shadowStream.grenade=std::move(grenadeTimeline);shadowStream.heart=std::move(heartTimeline);shadowStream.trap=std::move(trapTimeline);shadowStream.choke=std::move(chokeTimeline);shadowStream.stun=std::move(stunTimeline);shadowStream.use=std::move(useTimeline);shadowStream.remoteCarryLocalHandle=carryTarget.handle;shadowStream.movement=std::move(movementTimeline);
     shadowStream.lastSequence=p.sequence;
     const bool changed=p.event!=shadowStream.lastEvent;
@@ -569,6 +652,9 @@ void writeShadowStream(ULONGLONG tick){
         }fprintf(f,"],");
     }
     fprintf(f,"\"wireRefused\":%llu,\"stopServiceTick\":%llu,\"stopLastState\":%llu,",shadowWireRefused,shadowStopServiceTick,shadowStopLastState);
+    fprintf(f,"\"death\":{\"deaths\":%llu,\"fatalities\":%llu,\"active\":%s,\"fatality\":%s,\"variant\":%u,\"nearby\":%s,\"bearing\":%.4f,\"sceneRead\":%s,\"sceneMs\":%u,\"leadMs\":%u,\"sceneStage\":%u,\"scene\":\"%s\"},",
+        shadowDeath.deaths,shadowDeath.fatalities,shadowDeath.start?"true":"false",shadowDeath.fatality?"true":"false",shadowDeath.variant,shadowDeath.nearby?"true":"false",shadowDeath.bearing,
+        shadowDeath.sceneRead?"true":"false",shadowDeath.sceneMs,shadowDeath.leadMs,shadowDeath.sceneStage,shadowDeath.scene.c_str());
     fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
@@ -582,7 +668,8 @@ void writeShadowStream(ULONGLONG tick){
     fputs("},",f);
     fprintf(f,"\"sourceAttempts\":%llu,\"sourceMisses\":%llu,\"sourceReadMaxMs\":%.4f,\"sendGapMaxMs\":%llu,\"stoppedStateAgeMs\":%llu,\"stoppedRootAgeMs\":%llu,",shadowSourceAttempts,shadowSourceMisses,shadowSourceReadMaxMs,shadowSendGapMax,shadowStoppedStateAge,shadowStoppedRootAge);
     fprintf(f,"\"rejectedEvent\":%llu,\"expectedEvent\":%llu,\"rejectedSequence\":%llu,\"expectedSequence\":%llu,\"rejectedState\":%u,\"expectedState\":%u,",shadowStreamRejectedEvent,shadowStreamExpectedEvent,shadowStreamRejectedSequence,shadowStreamExpectedSequence,shadowStreamRejectedState,shadowStreamExpectedState);
-    fprintf(f,"\"stateRejectReason\":%u,\"rejectedAgeMs\":%.5f,",shadowStreamStateRejectReason,shadowStreamRejectedAge);
+    fprintf(f,"\"stateRejectReason\":%u,\"rejectedAgeMs\":%.5f,\"actionClamped\":[%llu,%llu],",shadowStreamStateRejectReason,shadowStreamRejectedAge,
+        static_cast<unsigned long long>(shadowActionEarlyClamped),static_cast<unsigned long long>(shadowActionLateClamped));
     fprintf(f,"\"rejectReason\":%u,\"retireReason\":%u,\"retireRootAge\":%llu,\"retireHelloAge\":%llu,\"sourceGrenadeHeld\":%u,\"sourceGrenade\":%u,\"remoteGrenadeHeld\":%u,\"remoteGrenade\":%u,",shadowStreamRejectReason,shadowStreamRetireReason,shadowStreamRetireRootAge,shadowStreamRetireHelloAge,shadowStream.sourceGrenadeHeld,shadowStream.sourceGrenade,shadowStream.remoteGrenadeHeld,shadowStream.remoteGrenade);
     fprintf(f,"\"armed\":%s,\"ready\":%s,\"remainingMs\":%llu,\"token\":%llu,\"peerToken\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"handle\":%u,\"sourceState\":%u,\"remoteState\":%u,\"sourceEvent\":%llu,\"remoteEvent\":%llu,\"lastSequence\":%llu,\"started\":%llu,\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"applied\":%llu,\"rejected\":%llu,\"refused\":%llu,\"released\":%llu,\"actionActive\":%s,\"result\":\"%s\",\"leanSide\":%.6f,\"leanUp\":%.6f,\"sourceVariant\":%u,\"sourcePhase\":%u,\"remoteVariant\":%u,\"remotePhase\":%u,\"carrySource\":%u,\"carryRemote\":%u,\"carrySourceIncarnation\":%u,\"carryRemoteIncarnation\":%u,\"carryLocalHandle\":%u,\"carrySpawner\":%llu,\"carryDefinition\":%llu,\"corpseMutations\":false}\n",
         shadowStream.until>tick?"true":"false",shadowStream.peerReady?"true":"false",shadowStream.until>tick?shadowStream.until-tick:0,

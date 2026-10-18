@@ -8,8 +8,8 @@
 // scene at state+24. Native 7ce7e0 builds the instance's target bindings.
 // Both were correlated on Corvo and Emily in native-combat-timing-v2.
 struct NativePlayerCombatScene {
-    std::uintptr_t instance=0,statePointer=0;
-    unsigned handle=0,action=0,variant=0,timeMs=0,durationMs=0,character=0;
+    std::uintptr_t instance=0,statePointer=0,stateVtable=0;
+    unsigned handle=0,action=0,variant=0,timeMs=0,durationMs=0,character=0,stateId=0;
     std::string asset,subscene;
     NativeWorldNpc target{}; // Optional native hit target; presentation never replays its events.
 };
@@ -43,12 +43,18 @@ inline unsigned nativeCombatVariant(const std::string& asset){
     // 1214ct (#11): Blink Assault plays its kick through blink_attack_focus (subscene kick, 800 ms, the native
     // ply_body_throw_hit_kick animations; confirmed static and runtime, blink-assault-probe-v1360a): the same motion as 17.
     if(asset=="midnight/gameplay/player/base/combat/blink_attack_focus.midnightscene")return 17;
+    // 1214cz (#11 stagger): a parried or blocked swing recoils (player state 40) with one of these first-person scenes,
+    // binding only the camera and the right arm (native-stagger-scenes-v1365, confirmed static): 28 left, 29 right.
+    for(const char* n:{"sword_parry_ll","sword_parry_rl","sword_recoil_left","sword_recoil_leftb","sword_sneak_recoil_left"})
+        if(asset==std::string("midnight/gameplay/player/base/combat/")+n+".midnightscene")return 28;
+    for(const char* n:{"sword_parry_lr","sword_parry_rr","sword_recoil_right","sword_recoil_rightb","sword_sneak_recoil_right"})
+        if(asset==std::string("midnight/gameplay/player/base/combat/")+n+".midnightscene")return 29;
     return 0;
 }
 template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerCombatScene& out){
     NativePlayerCombatScene s{};
     if(states.player.logic!=1||!nativePlayerSwordAction(states,base,s.action)||!s.action)return false;
-    for(const auto& a:states.active)if(a.id==39||a.id==44)s.statePointer=a.pointer;
+    for(const auto& a:states.active)if(a.id==39||a.id==44||a.id==40){s.statePointer=a.pointer;s.stateId=a.id;s.stateVtable=a.vtable;}
     if(!s.statePointer||!read(s.statePointer+0x24,&s.handle,4)||!s.handle)return false;
     const auto game=states.player.game,manager=game+0x1f5338;
     std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
@@ -70,7 +76,10 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
        !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||!read(s.instance+0x10,&bindings,8)||!bindings||
        !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)<1||(bindingFlags&0xffffff)>3)return false;
     if((s.action==1)!=(s.variant<=9||(s.variant>=15&&s.variant<=18)||s.variant>=22))return false;
-    if(s.variant>=22&&(s.subscene!="Scene_1"||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
+    if(s.variant>=22&&s.variant<=23&&(s.subscene!="Scene_1"||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
+    // A recoil runs only under Recoil40, at its observed native durations, with the camera and right arm bound.
+    const bool stagger=s.variant==28||s.variant==29;
+    if(stagger!=(s.stateId==40)||(stagger&&((s.durationMs!=666&&s.durationMs!=733)||s.timeMs>s.durationMs||(bindingFlags&0xffffff)!=2)))return false;
     // Exact native611 kick, corroborated by the exported624 declaration:
     // PlayerRightArm, PlayerCamera and PlayerBody. Both latter groups bind
     // the SAME owned player. No NPC/partner is admitted by this exception.
@@ -114,8 +123,8 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
     std::uintptr_t again=0;unsigned number=0;
     if(!read(base+0x39a5290,&again,8)||again!=game||worldIdentityEntity(read,game,1)!=states.player.player||
        !read(s.statePointer+0x24,&number,4)||number!=s.handle||!read(s.statePointer+0x10,&again,8)||again!=states.component||
-       !read(s.statePointer,&again,8)||again!=base+(s.action==1?0x1c85d28:0x1c81a68)||
-       !read(states.component+0x90,&again,8)||again!=states.mode||!read(states.mode+0x10+(s.action==1?39:44)*8,&again,8)||again!=s.statePointer||
+       !read(s.statePointer,&again,8)||again!=s.stateVtable||
+       !read(states.component+0x90,&again,8)||again!=states.mode||!read(states.mode+0x10+s.stateId*8,&again,8)||again!=s.statePointer||
        !read(s.instance+0x158,&number,4)||number!=s.handle||!read(s.instance+0x27c,&number,4)||number!=3||
        !read(s.instance,&again,8)||again!=declaration||!read(s.instance+8,&again,8)||again!=scene||
        !read(s.instance+0x10,&again,8)||again!=bindings||!read(s.instance+0x18,&number,4)||number!=bindingFlags)return false;
@@ -131,7 +140,7 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
     if(!readNativePlayerStates(read,base,finalStates)||finalStates.player.logic!=1||finalStates.player.game!=game||
        finalStates.player.player!=states.player.player||finalStates.player.current!=states.player.current||finalStates.component!=states.component||finalStates.mode!=states.mode)return false;
     unsigned finalAction=0;if(!nativePlayerSwordAction(finalStates,base,finalAction)||finalAction!=s.action)return false;
-    bool sameState=false;for(const auto& a:finalStates.active)if((a.id==39||a.id==44)&&a.pointer==s.statePointer)sameState=true;
+    bool sameState=false;for(const auto& a:finalStates.active)if(a.id==s.stateId&&a.pointer==s.statePointer)sameState=true;
     if(!sameState)return false;
     out=std::move(s);return true;
 }

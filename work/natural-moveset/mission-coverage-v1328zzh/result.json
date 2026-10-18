@@ -1,0 +1,66 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-guardfight: Attacks presented 0",
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "Attacks presented 0",
+      "checks": [],
+      "guardFacing": [
+        -0.16088097000881368,
+        0.9869738160098388
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.16088097000881368,
+            0.9869738160098388
+          ],
+          "rest": [
+            4.03216,
+            61.6694,
+            15.9662
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "ms": 3612,
+          "phase": "block"
+        },
+        {
+          "ms": 25774,
+          "guardSamples": 4,
+          "phase": "open"
+        },
+        {
+          "hitSamples": 0,
+          "ms": 40893,
+          "phase": "attack"
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "outcomeWaitMs": 680,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 4,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 0,
+      "attackVariants": [],
+      "minSourceHealth": 70.0,
+      "healthDrops": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

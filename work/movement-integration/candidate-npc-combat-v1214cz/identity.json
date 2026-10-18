@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-18T17:25:54.832587+02:00",
+  "dll": "5CBE45931CDC93A1F963064C470B665DE3BA9C9FF79E79BB669CC10C962CA795",
+  "probe": "321F1416BAB3262F2AD21D0F51DBA65EA24B19FC2E123A580FCF5F4350628457",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214cy",
+  "protocol": 77,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 73,
+  "clips": 380,
+  "banks": [
+    {
+      "path": "work/natural-moveset/recoil-banks-v1365/corvo-choke-bank.bin",
+      "sha256": "0794EB13984D67AD4A5428048C5C103464BDA9AECB91C3C9BA00231C97CF8D66"
+    },
+    {
+      "path": "work/natural-moveset/recoil-banks-v1365/emily-choke-bank.bin",
+      "sha256": "E786B01092F7AE27CE84660D87ED840FC8A190B4E7BCC411D4B8AF924A0E7A34"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214cz (#11 stagger_knockdown_recovery): 1214cy plus the recoil stagger (protocol 77): a parried or blocked swing continues as player state 40 Recoil (vtable RVA 0x1c83c98) playing sword_parry_ll/lr/rl/rr or sword_recoil_* (666/733 ms, camera and right arm only); the source reads it as combat variant 28 (left) or 29 (right) on the slash state and the partner plays the native NPC sword_parry_lose stagger (bank73 clips 378-379, the first 0.8 s)."
+}

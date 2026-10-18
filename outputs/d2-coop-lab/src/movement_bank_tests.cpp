@@ -65,7 +65,7 @@ int main(int argc,char** argv){
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,0,0,1,0)-.2f)<1e-6f,"stationary shadow crawl cannot advance");
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,stride*.25f,0,1,0)-.45f)<1e-6f,"crawl cadence follows measured quarter-stride");
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,-stride*.25f,0,1,0)-.95f)<1e-6f,"backward crawl reverses and wraps");
-            for(unsigned v:{32u,33u,34u})for(float t:{0.f,.5f,1.f})for(unsigned j=0;j<joints;++j){
+            for(unsigned v:{32u,33u,34u,36u})for(float t:{0.f,.5f,1.f})for(unsigned j=0;j<joints;++j){
                 auto pose=bank.sampleShadowWalk(v,j,t,.4f,.7f);for(float x:pose)check(std::isfinite(x),"whole shadow body stays finite");
                 if(j<2)for(unsigned k=0;k<7;++k)check(std::fabs(pose[k]-(k==3?1.f:0.f))<1e-6f,"shadow body cannot move network root");
             }
@@ -163,6 +163,11 @@ int main(int argc,char** argv){
         check(bank.hasStun()==(bank.version>=43),"stun clips require their appended bank");
         check(bank.hasUse()==(bank.version>=71),"interaction clips require bank71");
         if(bank.hasUse())for(unsigned c=369;c<374;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"interaction pelvis pose finite");
+        check(bank.hasDeath()==(bank.version>=72),"death collapse clips require bank72");
+        check(bank.hasRecoil()==(bank.version>=73),"recoil stagger clips require bank73");
+        if(bank.hasRecoil())for(unsigned c=378;c<380;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"recoil pelvis pose finite");
+        if(bank.hasDeath())for(unsigned c=374;c<378;++c){check(bank.sampleParameter(c,2,1.f)[6]<bank.sampleParameter(c,2,0.f)[6]-.5f,"death collapse lowers the pelvis to the ground");
+            for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"death pelvis pose finite");}
         check(bank.hasCrouchedGrenade()==(bank.version>=44),"crouched grenade clips require their appended bank");
         if(bank.hasCrouchedGrenade())for(unsigned c=264;c<273;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"crouched grenade pelvis finite");
         if(bank.hasStun())for(unsigned c=260;c<264;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"stun pelvis pose finite");

@@ -231,7 +231,8 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         CombatPresentation::Sample combat{};float amount=0;
         const bool combatValid=p.bank.hasCombat()&&shadowStream.combat.sample(pose.time,combat,amount);
         const bool combatAir=p.bank.hasAirCombat()&&pose.motionValid&&(pose.motion==2||pose.motion==3);
-        const bool combatActive=combatValid&&combat.variant&&(combat.variant!=17||p.bank.hasKick())&&(combat.variant!=18||p.bank.hasCrouchHeavy())&&(combat.variant<19||p.bank.hasParryImpact())&&pose.motionValid&&(ground||crouched||combatAir);
+        const bool deathActive=combatValid&&CombatPresentation::death(combat.variant)&&p.bank.hasDeath();
+        const bool combatActive=deathActive||(combatValid&&combat.variant&&!CombatPresentation::death(combat.variant)&&(combat.variant!=17||p.bank.hasKick())&&(combat.variant!=18||p.bank.hasCrouchHeavy())&&(combat.variant<19||p.bank.hasParryImpact())&&(!CombatPresentation::stagger(combat.variant)||p.bank.hasRecoil())&&pose.motionValid&&(ground||crouched||combatAir));
         const float combatDt=p.combatLastTime?float((now-p.combatLastTime)*.001):0;p.combatLastTime=now;
         CarryPresentation::Sample carry{};float carryAmount=0;
         const bool carryValid=p.bank.hasCarry()&&shadowStream.carry.sample(pose.time,carry,carryAmount);
@@ -417,7 +418,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // Alternate native mode has no default Running/Crouch motion flag.
         // Its exact owned power reader supplies presentation eligibility;
         // replicated root placement and gameplay remain independent.
-        const bool shadowWalkActive=((power.variant>=32&&power.variant<=34&&p.bank.hasShadowWalk())||(power.variant==35&&p.bank.hasShadowWalkSneak()))&&equipmentValid&&equipment.sword==1;
+        const bool shadowWalkActive=(((power.variant>=32&&power.variant<=34||power.variant==36)&&p.bank.hasShadowWalk())||(power.variant==35&&p.bank.hasShadowWalkSneak()))&&equipmentValid&&equipment.sword==1;
         const bool powerActive=powerValid&&power.variant&&(shadowWalkActive||doppelgangerActive||possessionActive||swarmActive||dominoActive||(power.variant>=16&&power.variant<=18&&p.bank.hasMesmerize()&&((p.bank.hasMesmerizeContexts()&&(ground||crouched||combatAir))||(ground&&p.presentedDrawn)))||power.variant<=9||
             (power.variant==10&&p.bank.hasDarkVision()&&(p.bank.hasDarkVisionContexts()||(ground&&p.presentedDrawn)))||
             (power.variant==11&&p.bank.hasWindblast()&&((p.bank.hasWindblastContexts()&&(ground||crouched||combatAir))||(ground&&p.presentedDrawn)))||
@@ -490,7 +491,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // channel. Its exact-class action packet validates presentation while
         // the independent root channel continues to own world placement.
         const bool slideRecovery=p.bank.hasSlide()&&p.clock.slideState&&(semantic.state==0||semantic.state==4);
-        const bool physicalEligible=((pose.motionValid&&(ground||crouched))||sliding||slideRecovery||airState||traversalActive||powerActive||carryActive||chokeActive||swimActive||climbActive);
+        const bool physicalEligible=(deathActive||(pose.motionValid&&(ground||crouched))||sliding||slideRecovery||airState||traversalActive||powerActive||carryActive||chokeActive||swimActive||climbActive);
         // 1214cg (#11): the protocol-73 hold (state 24) covers a native state no binding classifies for a packet or two
         // (holster end, draw start, a holstered landing, a slide end). Keep the authored body on the replicated physical
         // state through it; yielding to the actor's native pose flashed it upright for about two frames (take 1321a).
@@ -705,7 +706,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             if(p.combatClip>=53&&p.combatClip<=55)action=MovementBank::blend(action,p.bank.sampleCombat(p.combatClip+3,j,p.combatAmount,p.combatAirMix),p.clock.stanceMix);
             if(p.combatFrom.size()==count)action=MovementBank::blend(p.combatFrom[j],action,p.combatTransition*p.combatTransition*(3-2*p.combatTransition));
             if(p.combatLast.size()!=count)p.combatLast.resize(count);p.combatLast[j]=action;
-            if(p.combatVariant!=17&&p.bank.hasAirCombat()&&MovementBank::combatLocomotionJoint(j,p.parents))
+            if(p.combatVariant!=17&&!CombatPresentation::death(p.combatVariant)&&p.bank.hasAirCombat()&&MovementBank::combatLocomotionJoint(j,p.parents))
                 action=MovementBank::blend(action,v,p.combatMoveMix*(1-p.combatAirMix));
             v=MovementBank::blend(v,action,p.combatWeight);
         }
@@ -727,7 +728,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             }
             v=MovementBank::blend(v,climb,p.traversalWeight);
         }
-        if(p.bank.hasPowers()&&p.powerWeight>.001f&&p.powerVariant>=1&&(p.powerVariant<=9||(p.powerVariant==10&&p.bank.hasDarkVision())||(p.powerVariant==11&&p.bank.hasWindblast())||(p.powerVariant>=12&&p.powerVariant<=14&&p.bank.hasBendTime())||(p.powerVariant==15&&p.bank.hasOutOfMana())||(p.powerVariant>=16&&p.powerVariant<=18&&p.bank.hasMesmerize())||(p.powerVariant>=19&&p.powerVariant<=22&&p.bank.hasDomino())||(p.powerVariant>=23&&p.powerVariant<=25&&p.bank.hasSwarm())||(p.powerVariant>=26&&p.powerVariant<=27&&p.bank.hasPossession())||(p.powerVariant==28&&p.bank.hasPossessionRelease())||(p.powerVariant>=29&&p.powerVariant<=31&&p.bank.hasDoppelganger())||(p.powerVariant>=32&&p.powerVariant<=34&&p.bank.hasShadowWalk())||(p.powerVariant==35&&p.bank.hasShadowWalkSneak()))){
+        if(p.bank.hasPowers()&&p.powerWeight>.001f&&p.powerVariant>=1&&(p.powerVariant<=9||(p.powerVariant==10&&p.bank.hasDarkVision())||(p.powerVariant==11&&p.bank.hasWindblast())||(p.powerVariant>=12&&p.powerVariant<=14&&p.bank.hasBendTime())||(p.powerVariant==15&&p.bank.hasOutOfMana())||(p.powerVariant>=16&&p.powerVariant<=18&&p.bank.hasMesmerize())||(p.powerVariant>=19&&p.powerVariant<=22&&p.bank.hasDomino())||(p.powerVariant>=23&&p.powerVariant<=25&&p.bank.hasSwarm())||(p.powerVariant>=26&&p.powerVariant<=27&&p.bank.hasPossession())||(p.powerVariant==28&&p.bank.hasPossessionRelease())||(p.powerVariant>=29&&p.powerVariant<=31&&p.bank.hasDoppelganger())||((p.powerVariant>=32&&p.powerVariant<=34||p.powerVariant==36)&&p.bank.hasShadowWalk())||(p.powerVariant==35&&p.bank.hasShadowWalkSneak()))){
             auto power=p.powerVariant>=32?p.bank.sampleShadowWalk(p.powerVariant,j,p.powerAmount,p.shadowWalkPhase,p.powerMoveMix):p.powerVariant>=29?p.bank.sampleDoppelganger(p.powerVariant,j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant>=26?p.bank.samplePossession(p.powerVariant,j,p.powerAmount,p.clock.stanceMix):p.powerVariant>=23?p.bank.sampleSwarm(p.powerVariant,j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant>=19?p.bank.sampleDomino(p.powerVariant,j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant>=16?p.bank.sampleMesmerize(p.powerVariant,j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant==15?p.bank.sampleOutOfMana(j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant>=12?p.bank.sampleBendTime(p.powerVariant,j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant==10?p.bank.sampleDarkVision(j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.powerVariant==11?p.bank.sampleWindblast(j,p.powerAmount,p.clock.stanceMix,p.armedMix):p.bank.sampleParameter(116+p.powerVariant,j,p.powerAmount);
             if(p.powerFrom.size()==count)power=MovementBank::blend(p.powerFrom[j],power,p.powerTransition*p.powerTransition*(3-2*p.powerTransition));
             if(p.powerLast.size()!=count)p.powerLast.resize(count);p.powerLast[j]=power;

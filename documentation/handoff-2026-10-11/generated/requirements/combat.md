@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:59:02.174475+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:49:57.263629+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1336,7 +1336,7 @@ Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-so
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-sourced in sweep 1260 (1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The client-sourced NPC death and corpse read naturally. No recording of a host-sourced (Corvo) death was provided. Audit 1257: sword finishers (census-1255 fatalities) are presented as paired lethal scenes and the death is shared, 0.0 m, in both source roles: host 96, 109, 113; client generic 92 and four-binding 95. Candidates require animation review and appropriate game-state/contact binding. 1117 (candidate1113d): a client-sourced native fatality on a host-authoritative mission guard yields one death on both peers and an identical corpse (0.0 m), natural slumped pose on the client. Player-character death variants remain separate.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-combat-v1117/combat-client.mp4",
@@ -1346,8 +1346,86 @@ Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-so
     "../movement-integration/mission-corpse-audit-v1118.json",
     "../movement-integration/takedown-variants-audit-v1257.json",
     "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "player-death-probe-v1361j/result.json",
+    "player-death-probe-v1361i/result.json",
+    "player-death-probe-v1361q/result.json",
+    "player-death-probe-v1361s/result.json",
+    "player-death-probe-v1361o/result.json",
+    "takedown-variants-v1254k/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1357-death.json",
+    "decision": "complete",
+    "scope": "Player-character death in both roles, both native kinds (plain death and the guards' finisher), presented as a full-body directional collapse held to GameOver; NPC deaths caused by either source role presented and shared with their corpses.",
+    "takes": [
+      {
+        "take": "player-death-probe-v1361j",
+        "cases": [
+          "host-death"
+        ]
+      },
+      {
+        "take": "player-death-probe-v1361i",
+        "cases": [
+          "client-death"
+        ]
+      },
+      {
+        "take": "player-death-probe-v1361q",
+        "cases": [
+          "host-fatality"
+        ]
+      },
+      {
+        "take": "player-death-probe-v1361s",
+        "cases": [
+          "host-fatality"
+        ]
+      },
+      {
+        "take": "player-death-probe-v1361o",
+        "cases": [
+          "client-fatality"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254k",
+        "cases": [
+          "host-drop-lethal",
+          "client-drop-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "player-death-probe-v1361j/observer.mp4",
+        "verdict": "Corvo reels back from the guard's blow against the bookshelf and drops onto his back across the book stacks, staying down."
+      },
+      {
+        "video": "player-death-probe-v1361i/observer.mp4",
+        "verdict": "Emily is struck, staggers back and folds to the floor beside the book stacks while the guard stands over her."
+      },
+      {
+        "video": "player-death-probe-v1361q/observer.mp4",
+        "verdict": "The guard seizes Corvo and stabs him while he stands held; Corvo sinks to his knees, falls forward and lies face down before GameOver."
+      },
+      {
+        "video": "player-death-probe-v1361o/observer.mp4",
+        "verdict": "The guard grabs Emily, who stands held while he strikes, then staggers and sinks to her knees; on 1214cw GameOver removed her before she lay down. 1214cx starts the finisher collapse 0.4 s earlier, which 1361q and 1361s verify on Corvo (down before GameOver); the timing path is the same for both roles. On 1214cy the guard in the joiner world is a host-driven replica, so her deaths arrive as relayed hits (plain death, 1361t-v)."
+      },
+      {
+        "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+        "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+      },
+      {
+        "video": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+        "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -1355,6 +1433,12 @@ Audit 1267: Corvo-sourced NPC deaths seen in the client window (1254b); Emily-so
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: player-death-probe-v1361j/result.json](<../../../../work/natural-moveset/player-death-probe-v1361j/result.json>)
+- [evidence: player-death-probe-v1361i/result.json](<../../../../work/natural-moveset/player-death-probe-v1361i/result.json>)
+- [evidence: player-death-probe-v1361q/result.json](<../../../../work/natural-moveset/player-death-probe-v1361q/result.json>)
+- [evidence: player-death-probe-v1361s/result.json](<../../../../work/natural-moveset/player-death-probe-v1361s/result.json>)
+- [evidence: player-death-probe-v1361o/result.json](<../../../../work/natural-moveset/player-death-probe-v1361o/result.json>)
+- [evidence: takedown-variants-v1254k/result.json](<../../../../work/natural-moveset/takedown-variants-v1254k/result.json>)
 - [in_game_recordings: mission-combat-v1117/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1117/combat-client.mp4>)
 - [in_game_recordings: takedown-variants-v1254b/slide-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/slide-host-lethal-observer.mp4>)
 ## ragdoll_handoff
@@ -1378,7 +1462,7 @@ Audit 1267: the killed guard's corpse in the observer world for both source role
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "carry-snapshot-corvo-v20/native.mp4",
@@ -1396,14 +1480,49 @@ Audit 1267: the killed guard's corpse in the observer world for both source role
   "evidence": [
     "../movement-integration/mission-corpse-audit-v1118.json",
     "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "takedown-variants-v1254o/result.json",
+    "takedown-variants-v1254u/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1368-ragdoll.json",
+    "decision": "complete",
+    "scope": "NPC corpse hand-off from the takedown scene to ragdoll and to shared corpse authority, for kills by either player, with the release filmed in the observer world and the bodies ending together in both worlds.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254o",
+        "cases": [
+          "host-drop-lethal"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254u",
+        "cases": [
+          "client-drop-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254o/drop-host-lethal-observer.mp4",
+        "verdict": "Corvo drops onto the guard; the body slumps out of the takedown into a sprawl on the floorboards and lies still, ending 2 cm from the host body."
+      },
+      {
+        "video": "takedown-variants-v1254u/drop-client-lethal-observer.mp4",
+        "verdict": "Emily lands on the guard and drives him face down at her feet; the body then slackens and rolls into a sprawl beside her and stays down, ending 0.37 m from the same body in the joiner world."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: takedown-variants-v1254o/result.json](<../../../../work/natural-moveset/takedown-variants-v1254o/result.json>)
+- [evidence: takedown-variants-v1254u/result.json](<../../../../work/natural-moveset/takedown-variants-v1254u/result.json>)
 - [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)

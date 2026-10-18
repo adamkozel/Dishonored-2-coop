@@ -1,0 +1,26 @@
+"""Writes completion-audit-v1358-lifecycle.json (#11): map load and checkpoint recovery on candidate 1214cy."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("The decision rests on mission-lifecycle-v1199i (harness 1199i, candidate 1214cy, free camera): only the host is told "
+     "to load Edge of the World; the client follows natively (join-follow) and the product controller arms every system "
+     "for the new shared world. The partner avatar must then be present on both peers (probe actor live at the remote "
+     "player's position, within 1.5 m of its facing spot) and is filmed from both windows. A shared death and native "
+     "checkpoint restart follows; the partner must be restored and filmed again on both peers. Each wait throws if the "
+     "partner is missing, so the audit cases (one per observed partner and phase) pass only after both phases. The "
+     "earlier functional audit is 1286 (mission-lifecycle-v1199h, 1214ap, the same result).")
+T = lambda cases: {'take': 'mission-lifecycle-v1199i', 'cases': cases}
+items = [
+ dict(id='map_load_checkpoint_recovery', decision='complete',
+      scope='The partner avatar in both roles after a native map load (join-follow, product controller) and after a shared death and native checkpoint restart: present, upright and whole in the other window, with its presentation re-armed.',
+      takes=[T(['host-load', 'client-load', 'host-restart', 'client-restart'])],
+      visual=[{'video': 'mission-lifecycle-v1199i/load-client.mp4', 'verdict': 'After the map load Corvo stands upright and whole on the dock in front of the wall posters, idling naturally.'},
+              {'video': 'mission-lifecycle-v1199i/load-host.mp4', 'verdict': 'After the map load Emily stands upright and whole on the boat deck beside the pilot, idling naturally.'},
+              {'video': 'mission-lifecycle-v1199i/restart-client.mp4', 'verdict': 'After the checkpoint restart Corvo is back, upright at the left edge of the frame by the same wall.'},
+              {'video': 'mission-lifecycle-v1199i/restart-host.mp4', 'verdict': 'After the checkpoint restart Emily is back, upright at the left edge of the frame on the boat.'}]),
+]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1358-lifecycle', family='interactions', candidate='candidate-npc-combat-v1214cy', method=M, items=items)
+(N / 'completion-audit-v1358-lifecycle.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))

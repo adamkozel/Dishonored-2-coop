@@ -13,7 +13,7 @@ struct MovementBank {
     struct Clip {float stride=0,angle=0;std::vector<Joint> values;};
     unsigned joints=0,gaits=0,version=0;std::uint64_t checksum=0,layout=0;std::vector<Clip> clips;
     static constexpr unsigned frames=121;
-    static constexpr size_t maximumBytes=32+374*(24+size_t(frames)*219*sizeof(Joint));
+    static constexpr size_t maximumBytes=32+380*(24+size_t(frames)*219*sizeof(Joint));
     bool hasClimb()const{return version>=70;}
     bool hasSwim()const{return version>=69;}
     bool hasParryImpact()const{return version>=68;}
@@ -27,7 +27,7 @@ struct MovementBank {
     Joint sampleShadowWalk(unsigned variant,unsigned joint,float amount,float travelPhase,float moving)const{
         if(variant==35)return sampleParameter(335,joint,amount);
         if(variant==32)return sampleParameter(331,joint,amount);
-        if(variant==34)return sampleParameter(334,joint,amount);
+        if(variant==34||variant==36)return sampleParameter(334,joint,amount); // 36: attack_out exit (1214da)
         return blend(sample(332,joint,amount),sample(333,joint,travelPhase),moving);
     }
     float shadowWalkDistancePhase(float phase,float dx,float dy,float forwardX,float forwardY)const{
@@ -88,6 +88,8 @@ struct MovementBank {
     bool hasCrouchedGrenade()const{return version>=44;}
     bool hasStun()const{return version>=43;}
     bool hasUse()const{return version>=71;} // 1213: clips 369-373 authored interactions
+    bool hasDeath()const{return version>=72;} // 1214cv: clips 374-377 partner death collapse (front, back, left, right)
+    bool hasRecoil()const{return version>=73;} // 1214cz: clips 378-379 recoil stagger (left, right)
     bool hasGrenade()const{return version>=42;}
     bool hasCrouch()const{return version>=3;}
     bool hasSprint()const{return version>=4;}
@@ -170,7 +172,7 @@ struct MovementBank {
             if(parents[joint]<0)return false;joint=unsigned(parents[joint]);
         }return false;
     }
-    static unsigned clipCount(unsigned v){constexpr unsigned counts[]={0,9,17,26,29,33,37,44,59,89,107,111,113,115,117,126,141,149,161,173,177,179,181,183,193,194,197,198,201,213,225,229,231,232,232,233,234,235,238,247,248,251,260,264,273,276,285,289,301,304,313,315,316,318,319,322,325,331,335,336,340,347,348,351,352,353,354,357,359,365,369,374};return v<=71?counts[v]:0;}
+    static unsigned clipCount(unsigned v){constexpr unsigned counts[]={0,9,17,26,29,33,37,44,59,89,107,111,113,115,117,126,141,149,161,173,177,179,181,183,193,194,197,198,201,213,225,229,231,232,232,233,234,235,238,247,248,251,260,264,273,276,285,289,301,304,313,315,316,318,319,322,325,331,335,336,340,347,348,351,352,353,354,357,359,365,369,374,378,380};return v<=73?counts[v]:0;}
     static Joint blend(const Joint& a,const Joint& b,float t){
         Joint v{};float dot=0,n=0;for(unsigned k=0;k<4;++k)dot+=a[k]*b[k];
         for(unsigned k=0;k<4;++k){v[k]=a[k]+((dot<0?-b[k]:b[k])-a[k])*t;n+=v[k]*v[k];}
@@ -180,7 +182,7 @@ struct MovementBank {
     bool decode(const std::vector<unsigned char>& bytes,std::uint64_t expectedLayout,unsigned expectedJoints){
         *this={};if(bytes.size()<32||bytes.size()>maximumBytes)return false;
         unsigned format=0;
-        for(unsigned v=1;v<=71;++v){char magic[]="D2MOVE00";magic[6]=char('0'+v/10);magic[7]=char('0'+v%10);if(!std::memcmp(bytes.data(),magic,8)){format=v;break;}}
+        for(unsigned v=1;v<=73;++v){char magic[]="D2MOVE00";magic[6]=char('0'+v/10);magic[7]=char('0'+v%10);if(!std::memcmp(bytes.data(),magic,8)){format=v;break;}}
         if(!format)return false;
         std::uint32_t h[4]{};std::uint64_t hash=0;std::memcpy(h,bytes.data()+8,16);std::memcpy(&hash,bytes.data()+24,8);
         if(h[0]!=format||(h[1]!=215&&h[1]!=219)||h[1]!=expectedJoints||h[2]!=clipCount(format)||h[3]!=60||!expectedLayout||hash!=expectedLayout)return false;
