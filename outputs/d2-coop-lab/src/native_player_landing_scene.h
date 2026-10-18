@@ -5,9 +5,12 @@
 #include <string>
 // Confirmed native CatFall4 on both characters after a non-damaging >6m fall.
 // The last scene stored at state+24 is the BODY scene, not either FP arm.
+// 1214cn: a damaging ~11 m fall plays the strong body scene in the same CatFall4 (confirmed runtime,
+// mission-coverage-v1328e midnight watch: cat_fall_strong, 1066 ms, phase 3, Corvo Scene_2, Emily Scene_1).
+constexpr unsigned kNativeLightLandingMs=1000,kNativeStrongLandingMs=1066;
 struct NativePlayerLandingScene {
     std::uintptr_t instance=0,statePointer=0;unsigned handle=0,timeMs=0,durationMs=0,character=0,endStance=0;
-    std::string asset,subscene;
+    std::string asset,subscene;bool strong=false;
 };
 template<class Read> bool readNativePlayerLandingScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerLandingScene& out){
     NativePlayerLandingScene s{};
@@ -25,8 +28,9 @@ template<class Read> bool readNativePlayerLandingScene(Read read,std::uintptr_t 
     std::uintptr_t declaration=0,scene=0,vt=0,name=0,subName=0,bindings=0,bound=0,body=0,bodyName=0;unsigned phase=0,bindingFlags=0;std::string bodyAsset;
     if(!s.instance||!read(s.instance+0x27c,&phase,4)||phase!=3||!read(s.instance,&declaration,8)||
         !read(declaration,&vt,8)||vt!=base+0x1affbc8||!read(declaration+8,&name,8)||!worldIdentityString(read,name,s.asset)||
-        s.asset!="midnight/gameplay/player/base/mobility/cat_fall_light.midnightscene"||
-        !read(s.instance+8,&scene,8)||!read(scene,&vt,8)||vt!=base+0x1b00198||!read(scene+0x28,&s.durationMs,4)||s.durationMs!=1000||
+        (s.asset!="midnight/gameplay/player/base/mobility/cat_fall_light.midnightscene"&&s.asset!="midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene")||
+        !read(s.instance+8,&scene,8)||!read(scene,&vt,8)||vt!=base+0x1b00198||!read(scene+0x28,&s.durationMs,4)||
+        s.durationMs!=((s.strong=s.asset=="midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene")?kNativeStrongLandingMs:kNativeLightLandingMs)||
         !read(scene+0x30,&subName,8)||!worldIdentityString(read,subName,s.subscene)||
         !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>s.durationMs||!read(s.instance+0x10,&bindings,8)||!bindings||
         !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)!=1||!read(bindings+8,&bound,8)||bound!=states.player.player||

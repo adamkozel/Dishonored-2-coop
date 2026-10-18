@@ -22173,29 +22173,52 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214ch",
+    "Candidate": "candidate-npc-combat-v1214cm",
+    "NextCandidate": "candidate-npc-combat-v1214cn (built: damaging landing scene cat_fall_strong 1066 ms accepted)",
+    "Complete": "41 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
-      "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once"
+      "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
+      "1214ci": "traversal settling allowance: the body clock survives a vault exit",
+      "1214cj": "grounded vertical bound max(0.15, 6*dt): ledge steps in long frames keep the body clock",
+      "1214cl": "re-anchor on a fresh code-3 vertical refusal: jump-attack landings keep the body",
+      "1214cn": "the damaging landing scene (cat_fall_strong, 1066 ms) is presented as the hard landing (variant 6)"
+    },
+    "LabGrants": {
+      "1214ck": "coop_grant_item pistol|crossbow|stunmine|springrazor|heart",
+      "1214cm": "coop_grant_named <powers or player attribute declaration>"
     },
     "Harnesses": {
       "1318": "locomotion",
       "1319": "stance (lean, stance, interrupt, keyhole)",
       "1320": "gait (run8, gait course)",
       "1321": "traversal (jumps, runjump, fall, slide, slideexit, arcs)",
-      "1324": "combat without an opponent",
-      "1326": "vault and mantles"
+      "1324": "combat without an opponent (+ sheathe)",
+      "1326": "vault and mantles",
+      "1330": "ranged and items (close camera)",
+      "1332": "powers (both characters)",
+      "1333": "double jump",
+      "1328": "Edge of the World mission: swim, climb, climbtop, waterexit, hardfall, guardfight"
     },
-    "PassingTakesOn1214ch": [
-      "coverage-v1318e",
-      "coverage-v1319e",
-      "coverage-v1320d",
-      "coverage-v1324b"
+    "PassingTakes": [
+      "coverage-v1318h",
+      "coverage-v1319h",
+      "coverage-v1320g",
+      "coverage-v1321h",
+      "coverage-v1326d",
+      "coverage-v1324g",
+      "coverage-v1333b",
+      "coverage-v1330a",
+      "coverage-v1330b"
     ],
     "Audits": {
-      "completion-audit-v1325-stance": "applied: 10 stance items complete",
-      "completion-audit-v1323-locomotion": "drafted; waits for the arcs of coverage-v1321e (moving_turns); slopes_and_stairs open (needs a non-stepped slope)"
+      "completion-audit-v1323-locomotion": "applied: 10",
+      "completion-audit-v1325-stance": "applied: 10",
+      "completion-audit-v1331-traversal": "applied: 12",
+      "completion-audit-v1335-combat": "applied: 8",
+      "completion-audit-v1336-double-jump": "applied: 1"
     },
-    "Remaining": "traversal (1321e, 1326a running), opponent-dependent combat (parry, counter, hit reactions, stagger, kick, deaths) on Edge of the World, ranged and items, paired actions, powers, interactions; then a final regression on the release candidate"
+    "Running": "coverage-v1332c (powers), coverage-v1330d (items, close camera, mana elixir at once after dark vision); then deploy 1214cn and a mission take for the hard landing, guard fight (approach, no slash), water-exit lane y 193.25, lower swim camera and reframed chain climb",
+    "Remaining": "hard landing, window crossing, slope, swim and water exit, chain/ladder, opponent-dependent combat (parry, counter, hit reactions, stagger, kick, deaths, ragdoll), ranged/items and powers audits, paired actions, interactions; then a final regression on the release candidate"
   }
 }

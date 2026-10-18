@@ -21,7 +21,8 @@ struct TraversalPresentation {
         if(s.variant==6?s.endStance>1:s.endStance!=((s.variant==2||s.variant==5)?1u:0u))return false;
         if(s.variant==3)return s.duration==1000&&s.elapsed<=1000&&validVaultGeometry(s.start,s.point,s.goal,s.height);
         if(s.point!=std::array<float,3>{}||s.height!=0)return false;
-        if(s.variant==6)return s.duration==1000&&s.elapsed<=1000&&s.start==std::array<float,3>{}&&s.goal==std::array<float,3>{};
+        // 1214cn: the native light (1000 ms) and strong, damaging (1066 ms) landing scenes.
+        if(s.variant==6)return (s.duration==1000||s.duration==1066)&&s.elapsed<=s.duration&&s.start==std::array<float,3>{}&&s.goal==std::array<float,3>{};
         if(s.variant)return s.duration==(s.variant>=4?833u:500u)&&s.elapsed<=s.duration&&validTraversalGeometry(s.start,s.goal);
         return !s.duration&&!s.elapsed&&s.start==std::array<float,3>{}&&s.goal==std::array<float,3>{};
     }

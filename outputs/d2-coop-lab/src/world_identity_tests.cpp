@@ -1627,7 +1627,13 @@ void playerStanceTests() {
         bad=lm;bad.d(instance+0x158,43);require(!inspect(bad),"landing scene generation required");
         bad=lm;bad.d(instance+0x160,1001);require(!inspect(bad),"expired landing scene refused");
         bad=lm;bad.d(scene+0x28,999);require(!inspect(bad),"unobserved landing duration refused");
-        bad=lm;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene");require(!inspect(bad),"damaging landing requires separate evidence");
+        bad=lm;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene");require(!inspect(bad),"damaging landing refused at the light landing duration");
+        auto strong=lm;strong.str(names,"midnight/gameplay/player/base/mobility/cat_fall_strong.midnightscene");strong.d(scene+0x28,1066);strong.d(instance+0x160,1040);
+        require(inspect(strong)&&result.strong&&result.character==1&&result.durationMs==1066&&result.timeMs==1040,"Corvo damaging landing body scene (1214cn, observed 1066 ms)");
+        auto strongEmily=strong;strongEmily.str(names+0x100,"Scene_1");strongEmily.str(names+0x200,"models/characters/player/emily/body.def");require(inspect(strongEmily)&&result.strong&&result.character==2,"Emily damaging landing body scene");
+        bad=lm;bad.d(scene+0x28,1066);require(!inspect(bad),"light landing refused at the strong landing duration");
+        bad=strong;bad.d(instance+0x160,1067);require(!inspect(bad),"expired damaging landing refused");
+        bad=strong;bad.str(names,"midnight/gameplay/player/base/mobility/cat_fall_light_leftarm.midnightscene");require(!inspect(bad),"first-person arm landing scene refused");
         bad=lm;bad.str(names+0x100,"Scene_1");require(!inspect(bad),"other character landing subscene refused");
         bad=lm;bad.d(landingInput+0x6c,64);require(!inspect(bad),"unobserved native landing input mapping refused");
         for(auto location:{state+0x24,instance+8,scene,bindings+8,player+0x2e8,body,body+8,machine+0x2f8,landingInput+0x6c}){

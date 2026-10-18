@@ -94,7 +94,7 @@ try{
     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null
     C $peer 'coop_observer_camera hold_at -47.6 -175.9 67.4';Start-Sleep -Milliseconds 500
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@(-47.6,-175.9,67.4)
-   }elseif($case-in'crouchheavy','mana'){$inv=[Globalization.CultureInfo]::InvariantCulture
+   }elseif($case-in'crouchheavy','mana','pistol','crossbow','grenade','stunmine','springrazor','heart','health','manaelixir'){$inv=[Globalization.CultureInfo]::InvariantCulture
     C $source 'setviewpos -35 -153 68.1 0 0';Start-Sleep -Milliseconds 400
     $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0
     $op=(Q $peer '--player').candidatePosition
@@ -104,7 +104,7 @@ try{
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($cx,$cy,$cz)
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
-   if($case-notin'kick','crouchheavy','note','mana','stairs'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
+   if($case-notin'kick','crouchheavy','note','mana','stairs','pistol','crossbow','grenade','stunmine','springrazor','heart','health','manaelixir'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
    $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;pistol=15000;crossbow=15000;grenade=9500;stunmine=8500;springrazor=8500;heart=9500;health=7500;manaelixir=10500}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
@@ -144,7 +144,7 @@ try{
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'));
-     manaelixir=@(@(700,'named','models/powers/darkvision/darkvision.inventoryitem'),@(2600,'lt',250),@(5200,'lt',250),@(6200,'grant','mana'),@(7400,'use','mana'))}
+     manaelixir=@(@(700,'named','models/powers/darkvision/darkvision.inventoryitem'),@(1500,'grant','mana'),@(2600,'lt',250),@(6000,'lt',250),@(6400,'use','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
       switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'named'{C $source "coop_grant_named $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
@@ -199,7 +199,7 @@ try{
      'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';if(@($row.grenadeVariants).Count-lt2){throw "Grenade variants $($row.grenadeVariants-join ',')"};$row.checks.Add("Grenade presented: variants $($row.grenadeVariants-join ',')")}
      {$_-in'stunmine','springrazor'}{$row.trapVariants=Shown 'trapWeight' 'trapVariant';if(@($row.trapVariants).Count-lt2){throw "$case variants $($row.trapVariants-join ',')"};$row.checks.Add("$case presented: variants $($row.trapVariants-join ',')")}
      'heart'{$row.heartVariants=Shown 'heartWeight' 'heartVariant';if(@($row.heartVariants).Count-lt2){throw "Heart variants $($row.heartVariants-join ',')"};$row.checks.Add("Heart presented: variants $($row.heartVariants-join ',')")}
-     'manaelixir'{$u=@($samples|Where-Object {$_.ms-ge7400-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow
+     'manaelixir'{$u=@($samples|Where-Object {$_.ms-ge6400-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow
       if($row.use.result-ne'mana_use_requested'){throw "Mana use $($row.use.result)"};if([double]$row.manaBefore-ge100){throw "Mana was full before the drink ($($row.manaBefore))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
       $row.checks.Add("Dark vision spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
      'health'{$u=@($samples|Where-Object {[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.useVariants=@($u|ForEach-Object {[int]$_.useVariant}|Sort-Object -Unique);if(!$u.Count){throw 'Elixir use reach not presented'};$row.checks.Add("Health elixir drink presented as the use reach ($($u.Count) samples)")}}}

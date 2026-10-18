@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T03:52:45.609410+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T05:29:21.049348+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 32 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 41 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -400,7 +400,7 @@ Captured 2026-10-18T03:52:45.609410+02:00; source [review-catalog.json](<../../.
 | standing_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | running_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | crouch_jump_transition | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
-| double_jump | traversal | candidates | partial_native_double_jump_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| double_jump | traversal | candidates | partial_native_double_jump_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | rising_airborne | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | fall_loop | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles_long_fall | complete |
 | soft_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
@@ -416,14 +416,14 @@ Captured 2026-10-18T03:52:45.609410+02:00; source [review-catalog.json](<../../.
 | chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | work_remaining |
 | swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | dive_surface_water_exit | traversal | candidates | partial_native_steam_water_exit_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
-| sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| sword_ready_idle | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| light_attack_variants | combat | candidates | partial_native_steam_target_bearing_standing_slash | accepted_sweep_1260_functional_both_roles | work_remaining |
-| heavy_attack_variants | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_functional_both_roles_crouched_heavy_retake | work_remaining |
-| moving_attack | combat | candidates | partial_native_moving_combat_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouched_attack | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_sweep_1260_functional_both_roles | work_remaining |
-| airborne_attack | combat | candidates | partial_native_airborne_combat_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| sword_ready_idle | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| light_attack_variants | combat | candidates | partial_native_steam_target_bearing_standing_slash | accepted_sweep_1260_functional_both_roles | complete |
+| heavy_attack_variants | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_functional_both_roles_crouched_heavy_retake | complete |
+| moving_attack | combat | candidates | partial_native_moving_combat_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouched_attack | combat | candidates | partial_native_steam_standing_and_crouched_combat | accepted_sweep_1260_functional_both_roles | complete |
+| airborne_attack | combat | candidates | partial_native_airborne_combat_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| block_enter_hold_exit | combat | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | parry_directions | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
 | parry_recovery | combat | candidates | partial_native_steam_block_impact_and_timed_parry_both_roles | not_accepted | work_remaining |
 | counterattack | combat | candidates | partial_native_counter_kill_finisher_shared_host_source | not_accepted | work_remaining |

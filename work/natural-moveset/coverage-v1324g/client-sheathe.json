@@ -1,0 +1,38 @@
+{
+  "source": "client",
+  "case": "sheathe",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Native holster and draw while crouched and while walking: the partner armed mix follows each, in context"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    8106.0
+  ],
+  "sheathe": [
+    {
+      "action": "holster-crouched",
+      "armedMatched": 11,
+      "inContext": 11
+    },
+    {
+      "action": "draw-crouched",
+      "armedMatched": 11,
+      "inContext": 11
+    },
+    {
+      "action": "holster-walking",
+      "armedMatched": 11,
+      "inContext": 10
+    },
+    {
+      "action": "draw-walking",
+      "armedMatched": 9,
+      "inContext": 11
+    }
+  ],
+  "restored": true
+}

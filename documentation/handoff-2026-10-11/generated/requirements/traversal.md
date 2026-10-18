@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T03:52:45.609410+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T05:29:21.049348+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -231,7 +231,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The second impulse rea
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The second impulse reads as a distinct high tuck followed by a long fall and landing for both characters, armed and unarmed, stationary and moving. Confirmed native Agility second impulse (remaining 1 to 0, apex +2.5 m) drives a distinct whole-body tuck/extension from the same delayed Steam root. Two actual D2 recordings and22checks cover stationary/moving, drawn/holstered, single impulses, landing recovery, native equipment/first person and restoration of the temporary upgrade. All8contact sheets inspected. Crouched launch, midair actions, interruptions and final visual acceptance remain unfinished.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "double-jump-corvo-v21-v1.mp4",
@@ -240,23 +240,42 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The second impulse rea
   "evidence": [
     "double-jump-corvo-v21-v1/result.json",
     "double-jump-emily-v21-v1/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1333b/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1331-traversal.json",
-    "decision": "open",
-    "scope": "Earlier bounded takes: the native Agility second impulse is presented as a distinct tuck (22 checks).",
-    "takes": [],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "A product-controller take on the current candidate with the Agility upgrade (product mode needs a lab grant: the isolated agility fixture refuses product mode), stationary and moving, armed and holstered, in both roles."
-  }
+    "audit": "completion-audit-v1336-double-jump.json",
+    "decision": "complete",
+    "scope": "Native Agility double jumps standing armed, running on the open course and holstered in both roles: each second impulse is presented in the air (the partner second-jump serial advances once per jump, 3 of 3 in each role) inside an air episode that lands.",
+    "takes": [
+      {
+        "take": "coverage-v1333b",
+        "cases": [
+          "host-doublejump",
+          "client-doublejump"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1333b/host-doublejump-observer.mp4",
+        "verdict": "Corvo springs from a crouched take-off, tucks, kicks into a second tuck near the top and comes down arms spread into a compressed crouched landing, then recovers."
+      },
+      {
+        "video": "coverage-v1333b/client-doublejump-observer.mp4",
+        "verdict": "Emily takes off, tucks with her coat flaring, tucks again for the second impulse and lands in a crouch before standing."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: double-jump-corvo-v21-v1/result.json](<../../../../work/natural-moveset/double-jump-corvo-v21-v1/result.json>)
 - [evidence: double-jump-emily-v21-v1/result.json](<../../../../work/natural-moveset/double-jump-emily-v21-v1/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1333b/result.json](<../../../../work/natural-moveset/coverage-v1333b/result.json>)
 - [in_game_recordings: double-jump-corvo-v21-v1.mp4](<../../../../work/natural-moveset/double-jump-corvo-v21-v1.mp4>)
 - [in_game_recordings: double-jump-emily-v21-v1.mp4](<../../../../work/natural-moveset/double-jump-emily-v21-v1.mp4>)
 ## rising_airborne
