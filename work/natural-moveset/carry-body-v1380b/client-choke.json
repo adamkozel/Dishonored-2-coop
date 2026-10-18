@@ -1,0 +1,93 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": false,
+  "failure": "The source did not pick up the body (no native carry state)",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-18T19:36:04.1424961+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 275938187,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x125daf7f070",
+      "actor": "0x125e3f186b0",
+      "attributes": "0x125e3c7d8d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 275938203,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x122372abd30",
+      "actor": "0x1223a99bf90",
+      "attributes": "0x1223a6fa8e0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "farReachFrom": [
+    -43.84969390291695,
+    -147.1085794761569
+  ],
+  "farReachCarry": false,
+  "restored": true
+}
