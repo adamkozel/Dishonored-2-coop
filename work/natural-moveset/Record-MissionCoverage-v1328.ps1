@@ -386,9 +386,12 @@ try{
       if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++}
       # 1359 (#11, counterattack): -CounterOnParry attacks the moment the partner presents a timed parry win (variant 21),
       # inside the guard's stagger, and records the source's player scenes (counter-kill finishers are fatality scenes).
-      if($CounterOnParry){$parry=[int]$x.combatVariant-eq21-and[double]$x.combatWeight-gt.5
+      # 1328zp: triggered from the partner's variant 21 the press came ~400 ms after the source's parry win and no counter
+      # followed; the source's own sword_parry_win scene now triggers the attack (polled before the sample).
+      if($CounterOnParry){$md=try{Q $source '--midnight'}catch{$null};$scn=@($md.instances|Where-Object {$_.asset-like'*gameplay/player/*'}|ForEach-Object {($_.asset-split'/')[-1]});$x|Add-Member sourceScenes $scn
+       $parry=[bool]@($scn|Where-Object {$_-like'sword_parry_win*'}).Count
        if($parry-and!$lastParry){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null;$row.counterPresses.Add($t);$nextBlock=$t+2500}
-       $lastParry=$parry;$md=try{Q $source '--midnight'}catch{$null};$x|Add-Member sourceScenes @($md.instances|Where-Object {$_.asset-like'*gameplay/player/*'}|ForEach-Object {($_.asset-split'/')[-1]})}
+       $lastParry=$parry}
       Start-Sleep -Milliseconds 80}
      # Keep the health hold through the reset (1328za: released beside the still-alert checkpoint guard 01, the next case
      # could not read the source).
