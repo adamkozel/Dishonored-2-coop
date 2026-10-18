@@ -16,7 +16,8 @@ CATALOG = N / 'review-catalog.json'
 
 def case_results(take):
     result = json.loads((N / take / 'result.json').read_text(encoding='utf-8-sig'))
-    return {f"{c['source']}-{c['case']}": c for c in result.get('cases', [])}
+    # Use-variant takes name a case by its target mechanism instead of a case name.
+    return {f"{c['source']}-{c.get('case') or c.get('target')}": c for c in result.get('cases', [])}
 
 def main():
     audit_path = Path(sys.argv[1]); dry = '--dry-run' in sys.argv

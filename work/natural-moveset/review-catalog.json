@@ -19078,7 +19078,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (functional) in both roles (use-variants-v1228i/j, use-variants-dunwall-v1228k/l). Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "use-interaction-v1214c/use-client-observed.mp4",
@@ -19092,8 +19092,53 @@
         "../movement-integration/use-variants-audit-v1229.json",
         "../movement-integration/use-reach-audit-v1235.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/lever-valve-audit-v1282.json"
-      ]
+        "../movement-integration/lever-valve-audit-v1282.json",
+        "use-variants-eotw-v1228v/result.json",
+        "use-variants-eotw-v1228w/result.json",
+        "use-variants-dunwall-v1228v/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1343-lever.json",
+        "decision": "complete",
+        "scope": "Pulling the turbine lever in both roles and turning the sink tap in both roles: the partner steps in, reaches to the mechanism, operates it and recovers to standing. Cranks and wheels share the use presentation family (use variants 2-4 by mechanism name).",
+        "takes": [
+          {
+            "take": "use-variants-eotw-v1228v",
+            "cases": [
+              "host-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "use-variants-eotw-v1228w",
+            "cases": [
+              "client-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228v",
+            "cases": [
+              "host-esc_env_rich_sink_tap_01_1",
+              "client-esc_env_rich_sink_tap_01_1"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Corvo raises his arm to the lever on the turbine platform, pulls it down and stands back as the blades turn."
+          },
+          {
+            "video": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Emily turns to the lever post, works it with her hand and returns to standing."
+          },
+          {
+            "video": "use-variants-dunwall-v1228v/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+            "verdict": "Emily reaches up to the tap on the wall and turns it, then lowers her arm."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "pickup_loot_steal",
