@@ -1,0 +1,283 @@
+{
+  "passed": false,
+  "failure": "3 case(s) failed: host-hardfall: Hard landing not presented (traversal variant 6) | host-guardfight: Native read failed --player-states | client-hardfall: Hard landing not presented (traversal variant 6)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "hardfall",
+      "observer": "client",
+      "passed": false,
+      "failure": "Hard landing not presented (traversal variant 6)",
+      "checks": [],
+      "fallMetres": 12.84,
+      "nativeHardLanding": 14,
+      "nativeStates": [
+        0,
+        3,
+        4
+      ],
+      "hardLandingSamples": 0,
+      "walkOn": 21
+    },
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "Native read failed --player-states",
+      "checks": [],
+      "guardFacing": [
+        -0.9224481202203653,
+        -0.38612105032219446
+      ],
+      "placementTrials": []
+    },
+    {
+      "source": "host",
+      "case": "waterexit",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Source left the water onto the dock; partner swam (45), exit traversal 4, land samples 63"
+      ],
+      "exited": true,
+      "sourcePosition": [
+        -32.6421,
+        193.254,
+        1.20571
+      ],
+      "swimming": 45,
+      "exitTraversal": [
+        4
+      ],
+      "landSamples": 63
+    },
+    {
+      "source": "host",
+      "case": "swim",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (185 samples): strokes 98 (lateral 39), sink 12, rise 13"
+      ],
+      "sourceSwimming": true,
+      "swimming": 185,
+      "lateral": 39,
+      "moving": 98,
+      "sinking": 12,
+      "rising": 13
+    },
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (94 samples, 10 phases), ascending 13, descending 34"
+      ],
+      "climbing": 94,
+      "ascending": 13,
+      "descending": 34,
+      "phases": 10
+    },
+    {
+      "source": "host",
+      "case": "climbtop",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 112 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        0
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7324,
+        73.3583,
+        8.56117
+      ],
+      "climbing": 112,
+      "lastClimbMs": 11471,
+      "topTraversal": []
+    },
+    {
+      "source": "client",
+      "case": "hardfall",
+      "observer": "host",
+      "passed": false,
+      "failure": "Hard landing not presented (traversal variant 6)",
+      "checks": [],
+      "fallMetres": 11.43,
+      "nativeHardLanding": 13,
+      "nativeStates": [
+        0,
+        3,
+        4
+      ],
+      "hardLandingSamples": 0,
+      "walkOn": 21
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 5, timed parries 6, hit reactions 3 (variants 2), attacks 14 (variants 1,2); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.1695100780692405,
+        0.9855284538931182
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.9855284538931182,
+            -0.1695100780692405
+          ],
+          "rest": [
+            1.85059,
+            58.9129,
+            14.6416
+          ],
+          "ok": false
+        },
+        {
+          "offset": [
+            0.9855284538931182,
+            0.1695100780692405
+          ],
+          "rest": [
+            6.44298,
+            59.5701,
+            17.3091
+          ],
+          "ok": false
+        },
+        {
+          "offset": [
+            0.1695100780692405,
+            -0.9855284538931182
+          ],
+          "rest": [
+            4.86377,
+            56.9249,
+            16.5731
+          ],
+          "ok": false
+        },
+        {
+          "offset": [
+            -0.1695100780692405,
+            0.9855284538931182
+          ],
+          "rest": [
+            3.98536,
+            61.8326,
+            15.9666
+          ],
+          "ok": true
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 676,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 5,
+      "timedParries": 6,
+      "hitReactions": 3,
+      "stunVariants": [
+        2
+      ],
+      "attackSamples": 14,
+      "attackVariants": [
+        1,
+        2
+      ],
+      "minSourceHealth": 55.0
+    },
+    {
+      "source": "client",
+      "case": "waterexit",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Source left the water onto the dock; partner swam (33), exit traversal 1,4, land samples 57"
+      ],
+      "exited": true,
+      "sourcePosition": [
+        -32.6421,
+        193.308,
+        1.20571
+      ],
+      "swimming": 33,
+      "exitTraversal": [
+        1,
+        4
+      ],
+      "landSamples": 57
+    },
+    {
+      "source": "client",
+      "case": "swim",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (184 samples): strokes 95 (lateral 37), sink 13, rise 15"
+      ],
+      "sourceSwimming": true,
+      "swimming": 184,
+      "lateral": 37,
+      "moving": 95,
+      "sinking": 13,
+      "rising": 15
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (104 samples, 9 phases), ascending 15, descending 33"
+      ],
+      "climbing": 104,
+      "ascending": 15,
+      "descending": 33,
+      "phases": 9
+    },
+    {
+      "source": "client",
+      "case": "climbtop",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 111 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        6
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7287,
+        73.3621,
+        8.56113
+      ],
+      "climbing": 111,
+      "lastClimbMs": 11438,
+      "topTraversal": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

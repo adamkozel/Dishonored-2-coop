@@ -115,7 +115,7 @@ try{
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
    if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit','moveattack','airattack'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
-   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500;swing=14500;block=10000;moveattack=15500;airattack=11500;sheathe=17500}[$case];if(!$caseMs){$caseMs=9500}
+   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500;swing=14500;block=10000;moveattack=15500;airattack=11500;sheathe=17500}[$case];if(!$caseMs){$caseMs=if($case-eq'kick'){13000}else{9500}}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
@@ -202,7 +202,7 @@ try{
      elseif($step-eq1-and$t-ge2000){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 1500|Out-Null;$step=2}
      elseif($step-eq2-and$t-ge5000){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 1500|Out-Null;$step=3}
      elseif($step-eq3-and$t-ge8300){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 200|Out-Null;$step=4}}
-    if($case-eq'kick'-and$step-lt8-and$t-ge1000+$step*800){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 200|Out-Null;$step++}
+    if($case-eq'kick'-and$step-lt16-and$t-ge1000+$step*700){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 200|Out-Null;$step++}
     if($case-eq'fall'-and$step-eq0-and$t-ge1000){C $source ('setviewpos -35 -153 {0} 0 0' -f (68.1+$FallHeight).ToString('F2',[Globalization.CultureInfo]::InvariantCulture));$teleports.Add($t);$step=1}
     if($case-eq'slide'-and$step-eq0-and$t-ge1000){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=1;$sprintAt=$t}
     if($case-eq'slide'-and$step-eq1-and$t-ge$sprintAt+350){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 500 -LeftY 32767|Out-Null;$step=2}

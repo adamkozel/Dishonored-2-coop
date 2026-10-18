@@ -1,0 +1,79 @@
+{
+  "failure": "client script_lever_windturbine_1_1_1: Observer camera hold failed on host: off",
+  "passed": false,
+  "cases": [
+    {
+      "source": "host",
+      "observer": "client",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": true,
+      "failure": null,
+      "target": "script_lever_windturbine_1_1_1",
+      "focus": {
+        "side": 90,
+        "dz": 0,
+        "handle": 485890320,
+        "name": "script_lever_windturbine_1_1_1",
+        "dist": 1.0,
+        "tries": 1
+      },
+      "observerPitch": true,
+      "observerBody": [
+        -30.9872,
+        192.575,
+        1.25397
+      ],
+      "sourceMaxDisplacement": 0.007,
+      "used": true,
+      "sourceUses": 5,
+      "sourceUseName": "script_lever_windturbine_1_1_1",
+      "sourceLastVariant": 2,
+      "endReason": 3,
+      "endAction": 14,
+      "observerSamples": 126,
+      "shownSamples": 42,
+      "observedVariants": [
+        0,
+        2
+      ],
+      "maxWeight": 1.0,
+      "maxAmount": 0.9980615
+    },
+    {
+      "source": "client",
+      "observer": "host",
+      "candidates": [
+        "script_lever_windturbine_1_1_1"
+      ],
+      "expected": 2,
+      "optional": false,
+      "passed": false,
+      "failure": "Observer camera hold failed on host: off",
+      "target": "script_lever_windturbine_1_1_1",
+      "focus": {
+        "side": 90,
+        "dz": 0,
+        "handle": 485890320,
+        "name": "script_lever_windturbine_1_1_1",
+        "dist": 1.0,
+        "tries": 1
+      },
+      "observerPitch": true,
+      "observerBody": [
+        -41.9568,
+        121.792,
+        20.5332
+      ]
+    }
+  ],
+  "scope": "Use variants on real mechanisms (eotw): native use -> authored interaction on the partner body, both roles; fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-UseVariants-v1228n.ps1:216[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 216 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mclient script_lever_windturbine_1_1_1: Observer camera hold failed on host: off[0m

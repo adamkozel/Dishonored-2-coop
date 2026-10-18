@@ -1,0 +1,93 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-kick: Partner kick (combat variant 17) not presented | client-kick: Partner kick (combat variant 17) not presented",
+  "cases": [
+    {
+      "source": "host",
+      "case": "note",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner reading hold presented in 12 samples"
+      ],
+      "camera": [
+        -28.2543,
+        -146.205,
+        68.7537
+      ],
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "readingSamples": 12,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kick",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner kick (combat variant 17) not presented",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -51.2375855,
+        -150.0868389,
+        68.10000000000001
+      ],
+      "lowWeightSamples": 27,
+      "teleports": [],
+      "kickSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "note",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner reading hold presented in 12 samples"
+      ],
+      "camera": [
+        -28.2536,
+        -146.206,
+        68.7537
+      ],
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "readingSamples": 12,
+      "sourceLogics": [
+        1,
+        4
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kick",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner kick (combat variant 17) not presented",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -51.12135945,
+        -149.02348462,
+        68.10000000000001
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "kickSamples": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Locomotion completion coverage (1318, #11): walks and crouch walks in 8 directions, sprint and diagonals, in-place turns by size, starts/stops and speed changes, stairs; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

@@ -1,0 +1,120 @@
+{
+  "approach": "drop",
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 19 presented",
+    "Same outcome in both worlds: dead",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -48.4988,
+      -149.31,
+      66.4
+    ],
+    "observer": [
+      -47.6579,
+      -145.972,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-18T06:55:49.4781325+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene|2000",
+    "midnight/gameplay/player/base/assassination/assassination_drop_ready.midnightscene|366"
+  ],
+  "sceneIds": [
+    19
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 230301640,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x23bc1066ad0",
+      "actor": "0x23bcaca4d20",
+      "attributes": "0x23bcaa018d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 230301656,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x228d86e0a90",
+      "actor": "0x228df4e2600",
+      "attributes": "0x228df2448d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "victimEnd": {
+    "source": [
+      -47.4552,
+      -145.057,
+      66.5642
+    ],
+    "observer": [
+      -47.4552,
+      -145.057,
+      66.5642
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "host_authority",
+    "posesDelta": 94,
+    "rootsDelta": 152,
+    "bodyAppliedDelta": 153,
+    "positionBefore": [
+      -47.6214,
+      -145.885,
+      66.4
+    ],
+    "positionAfter": [
+      -47.4557,
+      -145.058,
+      66.5645
+    ]
+  },
+  "guardHealthObserverAfter": 0,
+  "restored": true
+}

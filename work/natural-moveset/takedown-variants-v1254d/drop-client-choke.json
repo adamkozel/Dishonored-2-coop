@@ -1,0 +1,91 @@
+{
+  "approach": "drop",
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": false,
+  "failure": "Outcome differs: source conscious, observer conscious, expected unconscious",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -48.59,
+      -150.07,
+      66.4
+    ],
+    "observer": [
+      -47.8984,
+      -146.595,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-18T06:54:49.1174883+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_combat_lose.midnightscene|1500",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400"
+  ],
+  "sceneIds": [
+    1,
+    2
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 230241125,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x23bc1064480",
+      "actor": "0x23bcacb8df0",
+      "attributes": "0x23bcaa1d8d0",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 230241140,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x228d8685ee0",
+      "actor": "0x228df4f7580",
+      "attributes": "0x228df24b8d0",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "conscious",
+    "observer": "conscious"
+  },
+  "restored": true
+}

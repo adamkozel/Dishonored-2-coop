@@ -63,7 +63,7 @@ def main():
             item['phase_status'] = 'complete'; item['complete'] = True
         for ref in entry.get('takes', []):
             ev = f"{ref['take']}/result.json"
-            if ev not in item['evidence']:
+            if ev not in item.setdefault('evidence', []):
                 item['evidence'].append(ev)
     done = sum(1 for i in catalog['items'] if i.get('phase_status') == 'complete')
     print(json.dumps({'audit': audit_path.name, 'items': len(audit['items']), 'complete_now': done,

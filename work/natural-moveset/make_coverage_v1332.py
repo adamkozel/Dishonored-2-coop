@@ -63,6 +63,30 @@ rep("if($case-notin'kick','crouchheavy','note','mana','stairs'){& \"$PSScriptRoo
     "if($case-notin'kick','crouchheavy','note','mana','stairs'," + powers + "){& \"$PSScriptRoot/Set-ObserverPitch.ps1\"")
 # Standing cases look nearly level (1330d: pitch 15 cut off the head and the aimed arm); the crouched heavy keeps 15.
 rep("& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch 15 -Quick|Out-Null", "& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null")
+# Powers whose effect appears ahead of the caster (clone, spirit, marks, far reach travel) are filmed from 5.6 m and 2 m
+# further along the cast direction, so the caster and the effect point share the frame (1332c/d: out of frame).
+rep("$cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0", "$cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0;if($case-in'doppelganger','mesmerize','domino','farreach'){$cx=-33.0;$cy=-147.4;$cz=68.4}")
+# possesshuman (Corvo): grant Possession and its parasite upgrade (possession of humans) by name, stand 1 m in front of the
+# upper-floor guard (the kick placement, free camera beside), cast with LT toward the guard, stay in the host, then leave
+# with LT (take 326). The partner must present the cast, hide Corvo's body while he occupies the guard and show it again.
+rep("   if($case-eq'kick'){\n    $gs=@(", "   if($case-in'kick','possesshuman'){\n    $gs=@(")
+rep("$corvoPowers=@('blink','darkvision','bendtime','windblast','possession','swarm')", "$corvoPowers=@('blink','darkvision','bendtime','windblast','possession','swarm','possesshuman')")
+rep("windblast=8000;possession=9000;", "windblast=8000;possession=9000;possesshuman=12000;")
+rep("    if($powerNames.ContainsKey($case)){$pp=$powerPlans[$case]", """    if($case-eq'possesshuman'){
+     if($step-eq0-and$t-ge700){C $source 'coop_grant_named models/powers/possession/possession.inventoryitem';$step=1}
+     elseif($step-eq1-and$t-ge1300){C $source 'coop_grant_named components/characters/player/base/attributes/possession_parasite.inventoryitem';$step=2}
+     elseif($step-eq2-and$t-ge3000){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 900|Out-Null;$segments.Add(@{ms=$t;possess='cast'});$step=3}
+     elseif($step-eq3-and$t-ge7600){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 150|Out-Null;$segments.Add(@{ms=$t;possess='leave'});$step=4}}
+    if($powerNames.ContainsKey($case)){$pp=$powerPlans[$case]""")
+rep("   if($case-eq'kick'){C $peer 'coop_observer_camera off'", """   if($case-eq'possesshuman'){C $peer 'coop_observer_camera off';$row.grant=(S $source '.observer-camera.json').itemGrant.named
+    $row.body=S $peer '.possession-body.json';$row.sourceStatesAfter=@((Q $source '--player-states').active|ForEach-Object {$_.id})
+    $cast=@($samples|Where-Object {[double]$_.powerWeight-gt.5-and[int]$_.powerVariant-in26,27,28});$row.castSamples=$cast.Count;$row.castVariants=@($cast|ForEach-Object {[int]$_.powerVariant}|Sort-Object -Unique)
+    if(!$cast.Count){throw 'Possession cast not presented'};if([int]$row.body.hideCalls-lt1){throw "Corvo's body was not hidden while he possessed the guard ($($row.body.result))"}
+    if([int]$row.body.showCalls-lt1-or$row.body.hidden){throw "Corvo's body was not shown again after leaving the guard ($($row.body.result))"}
+    $row.checks.Add("Possession cast presented (variants $($row.castVariants-join ',')), body hidden while occupying the guard and shown again on leaving")}
+   if($case-eq'kick'){C $peer 'coop_observer_camera off'""")
+# The partner's body is hidden on purpose while Corvo occupies the guard: not a presentation drop.
+rep("if($case-notin'kick','crouchheavy','note','mana','stairs'-and$low.Count-gt3)", "if($case-notin'kick','crouchheavy','note','mana','stairs','possesshuman'-and$low.Count-gt3)")
 out = s.replace('\n', '\r\n') if crlf else s
 (N / 'Record-Coverage-v1332.ps1').write_bytes(out.encode('utf-8'))
 print('ok')

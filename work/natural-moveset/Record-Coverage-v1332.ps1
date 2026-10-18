@@ -57,7 +57,7 @@ try{
   $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
  }
  Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;sources=$Sources})
- $corvoPowers=@('blink','darkvision','bendtime','windblast','possession','swarm');$emilyPowers=@('farreach','domino','doppelganger','mesmerize','shadowwalk','darkvision')
+ $corvoPowers=@('blink','darkvision','bendtime','windblast','possession','swarm','possesshuman');$emilyPowers=@('farreach','domino','doppelganger','mesmerize','shadowwalk','darkvision')
  foreach($source in $Sources){foreach($case in @($Cases|Where-Object {$_-in$(if($source-eq'host'){$corvoPowers}else{$emilyPowers})})){
   $peer=if($source-eq'host'){'client'}else{'host'};$key="$source-$case"
   $row=[ordered]@{source=$source;case=$case;observer=$peer;passed=$false;failure=$null;checks=[Collections.Generic.List[string]]::new()}
@@ -66,7 +66,7 @@ try{
    $dirty=$true;Arm
    foreach($q in 'host','client'){C $q 'setviewpos -33 -153 68.1 90 0'}
    $live=WaitLive "$key-armed" 45000;if(!$live.ok){throw 'Partner presentation not live after arming'}
-   if($case-eq'kick'){
+   if($case-in'kick','possesshuman'){
     $gs=@((Q $source '--world-npcs').npcs|Where-Object {$_.spawnerName-eq'ld_spawner_guard_tutorial_2'-and$_.unique-and$_.reciprocal})
     if($gs.Count-ne1){throw 'Upper-floor guard absent'};$g=$gs[0];$fx=[double]$g.orientation[0];$fy=[double]$g.orientation[1];$inv=[Globalization.CultureInfo]::InvariantCulture
     $sx=[double]$g.position[0]+1.0*$fx;$sy=[double]$g.position[1]+1.0*$fy;$syaw=[Math]::Atan2(-$fy,-$fx)*180/[Math]::PI
@@ -97,7 +97,7 @@ try{
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@(-47.6,-175.9,67.4)
    }elseif($case-in'crouchheavy','mana','blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'){$inv=[Globalization.CultureInfo]::InvariantCulture
     C $source 'setviewpos -35 -153 68.1 0 0';Start-Sleep -Milliseconds 400
-    $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0
+    $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0;if($case-in'doppelganger','mesmerize','domino','farreach'){$cx=-33.0;$cy=-147.4;$cz=68.4}
     $op=(Q $peer '--player').candidatePosition
     C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null
@@ -106,7 +106,7 @@ try{
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
    if($case-notin'kick','crouchheavy','note','mana','stairs','blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
-   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;blink=9000;darkvision=9000;bendtime=9500;windblast=8000;possession=9000;swarm=9000;farreach=9000;domino=9000;doppelganger=10000;mesmerize=9500;shadowwalk=12000}[$case];if(!$caseMs){$caseMs=9500}
+   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;blink=9000;darkvision=9000;bendtime=9500;windblast=8000;possession=9000;possesshuman=12000;swarm=9000;farreach=9000;domino=9000;doppelganger=10000;mesmerize=9500;shadowwalk=12000}[$case];if(!$caseMs){$caseMs=if($case-eq'kick'){13000}else{9500}}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
@@ -143,6 +143,11 @@ try{
      windblast=@(,@(2600,'lt',250));possession=@(,@(2600,'lt',1600));swarm=@(,@(2600,'lt',250));
      farreach=@(,@(2600,'lt',1200));domino=@(,@(2600,'lt',1400));doppelganger=@(,@(2600,'lt',800));mesmerize=@(,@(2600,'lt',1200));
      shadowwalk=@(@(2600,'lt',250),@(4400,'move',1600),@(7600,'lt',250))}
+    if($case-eq'possesshuman'){
+     if($step-eq0-and$t-ge700){C $source 'coop_grant_named models/powers/possession/possession.inventoryitem';$step=1}
+     elseif($step-eq1-and$t-ge1300){C $source 'coop_grant_named components/characters/player/base/attributes/possession_parasite.inventoryitem';$step=2}
+     elseif($step-eq2-and$t-ge3000){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 900|Out-Null;$segments.Add(@{ms=$t;possess='cast'});$step=3}
+     elseif($step-eq3-and$t-ge7600){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 150|Out-Null;$segments.Add(@{ms=$t;possess='leave'});$step=4}}
     if($powerNames.ContainsKey($case)){$pp=$powerPlans[$case]
      if($step-eq0-and$t-ge700){C $source "coop_grant_named $($powerNames[$case])";& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 20 -Quick|Out-Null;$step=1}
      elseif($step-ge1-and$step-le$pp.Count-and$t-ge$pp[$step-1][0]){$d=$pp[$step-1]
@@ -160,7 +165,7 @@ try{
      elseif($step-eq1-and$t-ge2000){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 1500|Out-Null;$step=2}
      elseif($step-eq2-and$t-ge5000){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 1500|Out-Null;$step=3}
      elseif($step-eq3-and$t-ge8300){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 200|Out-Null;$step=4}}
-    if($case-eq'kick'-and$step-lt8-and$t-ge1000+$step*800){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 200|Out-Null;$step++}
+    if($case-eq'kick'-and$step-lt16-and$t-ge1000+$step*700){& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 200|Out-Null;$step++}
     if($case-eq'fall'-and$step-eq0-and$t-ge1000){C $source ('setviewpos -35 -153 {0} 0 0' -f (68.1+$FallHeight).ToString('F2',[Globalization.CultureInfo]::InvariantCulture));$step=1}
     if($case-eq'slide'-and$step-eq0-and$t-ge1000){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=1;$sprintAt=$t}
     if($case-eq'slide'-and$step-eq1-and$t-ge$sprintAt+350){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 500 -LeftY 32767|Out-Null;$step=2}
@@ -170,7 +175,7 @@ try{
    foreach($c in $capture,$peerCapture){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$capture=$peerCapture=$null
    Save "$out/$key-samples.json" @($samples)
    foreach($q in 'host','client'){foreach($suffix in '.movement.json','.shadow-stream.json','.product.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
-   $tp=@($teleports);$low=@($samples|Where-Object {$x=$_;$_.weight-lt.9-and!@($tp|Where-Object {$x.ms-ge$_-and$x.ms-lt$_+1200}).Count});$row.lowWeightSamples=$low.Count;$row.teleports=$tp;if($case-notin'kick','crouchheavy','note','mana','stairs'-and$low.Count-gt3){throw "Partner presentation weight dropped in $($low.Count) samples"};$row.checks.Add('Partner presentation stayed live')
+   $tp=@($teleports);$low=@($samples|Where-Object {$x=$_;$_.weight-lt.9-and!@($tp|Where-Object {$x.ms-ge$_-and$x.ms-lt$_+1200}).Count});$row.lowWeightSamples=$low.Count;$row.teleports=$tp;if($case-notin'kick','crouchheavy','note','mana','stairs','possesshuman'-and$low.Count-gt3){throw "Partner presentation weight dropped in $($low.Count) samples"};$row.checks.Add('Partner presentation stayed live')
    if($case-eq'slide'){if(!@($samples|Where-Object {$_.slideWeight-gt.8}).Count){throw 'Partner slide not presented'};$row.checks.Add('Partner slide presented')}
    Save "$out/$key-segments.json" @($segments)
    function Sector($x){if([double]$x.mix-lt.5){[int]$x.a}else{[int]$x.b}}
@@ -210,6 +215,12 @@ try{
     $heavy=@($samples|Where-Object {$_.combatVariant-eq18-and[double]$_.combatWeight-gt.5});$row.heavySamples=$heavy.Count
     $row.combatVariants=@($samples|ForEach-Object {$_.combatVariant}|Sort-Object -Unique)
     if(!$heavy.Count){throw 'Partner crouched heavy (combat variant 18) not presented'};$row.checks.Add("Partner crouched heavy presented in $($heavy.Count) samples")}
+   if($case-eq'possesshuman'){C $peer 'coop_observer_camera off';$row.grant=(S $source '.observer-camera.json').itemGrant.named
+    $row.body=S $peer '.possession-body.json';$row.sourceStatesAfter=@((Q $source '--player-states').active|ForEach-Object {$_.id})
+    $cast=@($samples|Where-Object {[double]$_.powerWeight-gt.5-and[int]$_.powerVariant-in26,27,28});$row.castSamples=$cast.Count;$row.castVariants=@($cast|ForEach-Object {[int]$_.powerVariant}|Sort-Object -Unique)
+    if(!$cast.Count){throw 'Possession cast not presented'};if([int]$row.body.hideCalls-lt1){throw "Corvo's body was not hidden while he possessed the guard ($($row.body.result))"}
+    if([int]$row.body.showCalls-lt1-or$row.body.hidden){throw "Corvo's body was not shown again after leaving the guard ($($row.body.result))"}
+    $row.checks.Add("Possession cast presented (variants $($row.castVariants-join ',')), body hidden while occupying the guard and shown again on leaving")}
    if($case-eq'kick'){C $peer 'coop_observer_camera off'
     $kicks=@($samples|Where-Object {$_.combatVariant-eq17-and[double]$_.combatWeight-gt.5});$row.kickSamples=$kicks.Count
     if(!$kicks.Count){throw 'Partner kick (combat variant 17) not presented'};$row.checks.Add("Partner kick presented in $($kicks.Count) samples")}
