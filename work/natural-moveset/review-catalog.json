@@ -19309,7 +19309,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1287 (1214at): while the source reads a note the partner holds the held-object reach and returns to idle afterwards, in both roles (coverage-v1286e); accepted functionally, a two-handed reading pose is polish. Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-interactions-corvo-note-v685/note-source.mp4",
@@ -19329,14 +19329,36 @@
         "native-interactions-corvo-note-v682/note-observer.mp4",
         "native-interactions-corvo-note-v682/note-source.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-interactions-corvo-note-v685/result.json",
         "../../work/movement-integration/readable-resume-audit-v684.json",
         "native-interactions-emily-note-v683/result.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/reading-audit-v1287.json"
-      ]
+        "../movement-integration/reading-audit-v1287.json",
+        "coverage-v1318i/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1342-interactions.json",
+        "decision": "complete",
+        "scope": "Reading the table note in both roles: while the source reads, the partner holds the note out in a held reach and returns to its idle when the source closes it (coverage-v1318i on 1214cn; coverage-v1286e earlier).",
+        "takes": [
+          {
+            "take": "coverage-v1318i",
+            "cases": [
+              "host-note",
+              "client-note"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1318i/client-note-observer.mp4",
+            "verdict": "Emily lifts her left hand and holds the note out in front of her while she reads, then lowers it and stands at ease."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "eat_drink",
@@ -19362,7 +19384,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach to the plate in both roles while the item is taken in both worlds (1261b). Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay continuous but show no eating gesture, so the eat action is not represented. 693 exact crouched LootObject47 now preserves Sneaking6/raw1. Both-role native classification verified;695Emily passes11 checks,699Corvo passes10/11 with body-weight dips retained as failure.696/697 native grapes consumption passes22: source health56->61, peer56 unchanged, source grapes removed, full body/Steam continuity. All source/observer sheets inspected; inventories/health14protected restored. No new reach/eating gesture or shared item/healing outcome. Protocol69 bank67/357 unchanged.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-interactions-corvo-v663/food-source.mp4",
@@ -19376,14 +19398,36 @@
         "gestures-v1261b/host-food-observer.mp4",
         "gestures-v1261b/client-food-observer.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-interactions-corvo-v663/result.json",
         "native-interactions-corvo-food-v696/result.json",
         "native-interactions-emily-food-v697/result.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/gestures-counter-audit-v1264.json"
-      ]
+        "../movement-integration/gestures-counter-audit-v1264.json",
+        "gestures-v1261d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1342-interactions.json",
+        "decision": "complete",
+        "scope": "Eating native food (grapes) in both roles: the native pickup presents the use reach toward the plate on the partner, and the item is taken. D2 eats food instantly on pickup without a first-person eating motion, so the reach is the faithful gesture. Drinking elixirs is presented hand to mouth (health_elixir).",
+        "takes": [
+          {
+            "take": "gestures-v1261d",
+            "cases": [
+              "host-food",
+              "client-food"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "gestures-v1261d/client-food-observer.mp4",
+            "verdict": "Emily steps to the table and reaches down to the plate, then straightens."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "carry_object_place_throw",
