@@ -238,7 +238,8 @@ try{
      # 1328r: from the side the seated guard never saw Emily; try in front (its view) first, then the sides, then behind.
      foreach($o in @(@($fx,$fy),@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
       # 1328h: the first read after the teleport failed outright; retry for up to 3 s and record an unreadable spot as failed.
-      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=$null;$ms=$null
+      # 1328s: entering Corvo's guard area opens the native 'Play Your Way' tutorial; pass modals before reading.
+      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$wg=WaitGameplay 15000;$row.modalsAfterPlacement=@($wg.log|Where-Object {$_.logic-ne1}).Count;$me=$null;$ms=$null
       # 1328n: near Corvo's guard the --player-states read fails at every spot while --player works and rests at the guard's
       # level; accept the position read alone (default mode is only required when the states read succeeds).
       for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
@@ -252,14 +253,14 @@ try{
      $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$mx-4.5*$dy;$cy=$my+4.5*$dx;$cz=$gz+2.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
+     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800;[void](WaitGameplay 15000)
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
      # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
      $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=3500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
      while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
       if($t-lt3500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
       elseif($t-lt14000){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
-      elseif($t-lt19000){$phase='open'}
+      elseif($t-lt21000){$phase='open'} # 7 s unguarded so the guard lands a hit (1328r/s: none in 5 s)
       else{$phase='attack'
        if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
          if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
