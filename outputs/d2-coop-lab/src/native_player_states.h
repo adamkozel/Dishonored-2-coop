@@ -239,8 +239,8 @@ inline bool nativePlayerShadowWalkAssassinationStates(const NativePlayerStates& 
         s.active[0].id==13&&s.active[0].vtable==base+0x1c83468;
 }
 // 1214db: the form's choke (choke_sw_*, ids 77-84) holds the exclusive Choke41 at physical stance 2 for its whole length
-// (take 1254y, confirmed runtime). Its state mode is not yet observed (hypothesis: the form's own mode, as the attack), so
-// either mode is admitted for those ids only.
+// (take 1254y, confirmed runtime), in the form's own mode (1254z: defaultMode false, confirmed runtime); either mode
+// stays admitted for those ids only.
 inline bool nativePlayerShadowWalkChokeStates(const NativePlayerStates& s,std::uintptr_t base){
     return s.player.logic==1&&s.player.current==2&&s.active.size()==1&&s.active[0].id==41&&s.active[0].vtable==base+0x1c77c18;
 }

@@ -127,7 +127,10 @@ std::uintptr_t labNamedEquipDecl=0;ULONGLONG labNamedEquipUntil=0;bool labNamedE
 bool labGrantNameAllowed(const char* n){const auto len=std::strlen(n);if(len<20||len>=sizeof(labGrantName))return false;
     for(std::size_t i=0;i<len;++i){const char c=n[i];if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'||c=='/'||c=='.'))return false;}
     if(std::strstr(n,".."))return false;const char* suffix=".inventoryitem";if(len<14||std::strcmp(n+len-14,suffix))return false;
-    return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45);}
+    // 1214dd (#11 knockdown, lab only): pistol ammunition too (components/equipment/ammo/bullet_explosive), whose
+    // explosion carries PLAYER_HITREACT_KNOCKDOWN (bullet_explosive_damage, confirmed static); never equipped.
+    return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45)||
+           !std::strncmp(n,"components/equipment/ammo/",26);}
 void serviceLabNamedEquip(){
     if(!labNamedEquipUntil||labGrantNamedRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     if(GetTickCount64()>=labNamedEquipUntil){labNamedEquipUntil=0;if(!labNamedEquipSent)labNamedResult="named_equip_timeout";return;}

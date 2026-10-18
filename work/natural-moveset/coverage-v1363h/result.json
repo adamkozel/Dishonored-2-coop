@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "stunright",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Stun presented: variants 4 (expected 1)"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "yawBefore": 2.3,
+      "yawAfter": 2.3,
+      "yawTurned": -76.1,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 0,
+          "refused": 0,
+          "result": "idle"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "stunVariants": 4,
+      "sourceStunSamples": 6,
+      "expectedStun": 1,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}
