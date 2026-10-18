@@ -260,17 +260,26 @@ try{
      C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800;[void](WaitGameplay 15000)
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
      # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
-     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=3500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
-     while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
-      if($t-lt3500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
-      elseif($t-lt14000){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
-      elseif($t-lt21000){$phase='open'} # 7 s unguarded so the guard lands a hit (1328r/s: none in 5 s)
-      else{$phase='attack'
-       if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
-         if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
-          if($d-gt1.8){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k};C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}catch{}}
+     # 1328t: the guards engage on their own timing (Corvo's never swung during a fixed block window, Emily's never hit her in
+     # the unguarded one), so the phases follow the partner presentation: block until block impacts or timed parries are
+     # presented, stay unguarded until a hit reaction is presented, then attack to the kill; the source keeps within reach.
+     $caps=Capture $key 58;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=0;$aimAt=-9999;$hitAt=-9999;$closeAt=0;$phase='provoke';$phaseStart=0;$provoked=$false
+     $close={param($reach)try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
+      if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
+       if($d-gt$reach){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k;C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}}catch{}}
+     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new()
+     while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
+      if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}
+      elseif($phase-eq'block'-and($guardSamples-ge6-or$t-$phaseStart-ge22000)){$phase='open';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;guardSamples=$guardSamples})}
+      elseif($phase-eq'open'-and($hitSamples-ge3-or$t-$phaseStart-ge15000)){$phase='attack';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;hitSamples=$hitSamples})}
+      elseif($phase-eq'attack'-and$t-$phaseStart-ge14000){break}
+      if($phase-eq'provoke'){if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
+      elseif($phase-in'block','open'){if($t-$closeAt-ge3000){$closeAt=$t;& $close 2.4}
+       if($phase-eq'block'-and$t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
+      else{if($t-$aimAt-ge2500){$aimAt=$t;& $close 1.8}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
-      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x);Start-Sleep -Milliseconds 80}
+      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x)
+      if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++};Start-Sleep -Milliseconds 80}
      Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
      # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
      $ow=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)}}while($row.outcome.host-ne$row.outcome.client-and$ow.ElapsedMilliseconds-lt8000)
