@@ -1,0 +1,35 @@
+{
+  "source": "client",
+  "case": "vault",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Armed and holstered vaults: native state 9 on the source, vault presented on the partner (variant 3), recovered"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    3671.0,
+    7699.0
+  ],
+  "vaults": [
+    {
+      "variant": 3,
+      "from": 1543,
+      "to": 2039,
+      "samples": 5,
+      "minAmount": 0.0,
+      "maxAmount": 1.0
+    },
+    {
+      "variant": 3,
+      "from": 9444,
+      "to": 9944,
+      "samples": 5,
+      "minAmount": 0.281438,
+      "maxAmount": 1.0
+    }
+  ],
+  "restored": true
+}

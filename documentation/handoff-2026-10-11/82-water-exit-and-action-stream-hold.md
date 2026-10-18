@@ -40,7 +40,7 @@ Updated 2026-10-14. Continues [swimming and climbing](50-swimming-climbing-mode-
    - *When it is sent:* only when neither a binding nor the ground fallback accepts the state.
    - *What it proves* (`readNativePresentationHold`): the same live game and player in gameplay, a stable state list across two reads, and validated equipment.
    - *What it carries:* only `swordState` 1 or 2. The protocol refuses any action, scene, held item, lean or air stage.
-   - *Receiver behaviour:* it renews the stream but presents nothing authored (bank weight 0, root still network-owned).
+   - *Receiver behaviour:* it renews the stream but presents nothing authored (bank weight 0, root still network-owned). **Changed in 1214cg ([chapter 99](99-movement-completion-coverage.md)):** the hold is action-eligible, so the authored body continues on the replicated physical state; yielding to the native pose flashed it upright for about two frames.
    - *What still retires the stream:* loads, menus and identity changes, as before.
    - *Status:* the field `holdSamples` was added to the stream status.
 3. **Tests:** the protocol suite covers the hold (valid with sword 1 or 2; refused with sword 0, traversal, combat, power, air, lean or protocol 72) and the water-mantle geometry (3.07 m accepted, 4.7 m refused). All Build-1056 suites pass.

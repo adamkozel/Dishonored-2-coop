@@ -1561,6 +1561,7 @@ bool allowedCommand(const char* text) {
     }
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
+    if(!std::strcmp(text,"coop_grant_item pistol")||!std::strcmp(text,"coop_grant_item crossbow")||!std::strcmp(text,"coop_grant_item stunmine")||!std::strcmp(text,"coop_grant_item springrazor")||!std::strcmp(text,"coop_grant_item heart"))return true;
     if(!std::strcmp(text,"coop_use_item health")||!std::strcmp(text,"coop_use_item mana"))return true;
     const char* commands[]={"getviewpos","where","Ansel_PlayerVisible","LoadGame","listDecls","debugEntityByName","trigger","teleport","setviewpos","find","listModels"};
     for(const auto* name:commands){const auto n=std::strlen(name);if(!std::strncmp(text,name,n)&&(text[n]==0||text[n]==' '))return true;}
@@ -1726,6 +1727,11 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_grant_item grenade")){labGrantRequest=1;return;}
     if(!std::strcmp(request.command,"coop_grant_item health")){labGrantRequest=2;return;}
     if(!std::strcmp(request.command,"coop_grant_item mana")){labGrantRequest=3;return;}
+    if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}
+    if(!std::strcmp(request.command,"coop_grant_item crossbow")){labGrantRequest=5;return;}
+    if(!std::strcmp(request.command,"coop_grant_item stunmine")){labGrantRequest=6;return;}
+    if(!std::strcmp(request.command,"coop_grant_item springrazor")){labGrantRequest=7;return;}
+    if(!std::strcmp(request.command,"coop_grant_item heart")){labGrantRequest=8;return;}
     if(!std::strcmp(request.command,"coop_use_item health")){labUseRequest=1;return;}
     if(!std::strcmp(request.command,"coop_use_item mana")){labUseRequest=2;return;}
     if(!std::strncmp(request.command,"coop_observer_camera hold_at ",29)){float at[3]{};char extra=0;

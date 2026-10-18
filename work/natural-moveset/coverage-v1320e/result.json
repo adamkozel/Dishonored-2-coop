@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "run8",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors in the run gait (23 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 23,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "gait",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Still armed idle, run reached and settled, both reversals presented opposite sectors, moving turns kept walking",
+        "Native holster lowered the partner armed mix, holstered walk presented, native redraw raised it again"
+      ],
+      "swordEquippedAfterHolster": false,
+      "swordEquippedAfterRedraw": true,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "reversals": [
+        {
+          "before": [
+            1
+          ],
+          "after": [
+            5
+          ],
+          "apart": 4
+        },
+        {
+          "before": [
+            2
+          ],
+          "after": [
+            6
+          ],
+          "apart": 4
+        }
+      ],
+      "movingTurnSamples": 12,
+      "movingTurnMaxTurnWeight": 0.0,
+      "unarmedMoving": 12,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "run8",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors in the run gait (27 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 27,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "gait",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Still armed idle, run reached and settled, both reversals presented opposite sectors, moving turns kept walking",
+        "Native holster lowered the partner armed mix, holstered walk presented, native redraw raised it again"
+      ],
+      "swordEquippedAfterHolster": false,
+      "swordEquippedAfterRedraw": true,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "reversals": [
+        {
+          "before": [
+            1
+          ],
+          "after": [
+            5
+          ],
+          "apart": 4
+        },
+        {
+          "before": [
+            2
+          ],
+          "after": [
+            6
+          ],
+          "apart": 4
+        }
+      ],
+      "movingTurnSamples": 14,
+      "movingTurnMaxTurnWeight": 0.0,
+      "unarmedMoving": 13,
+      "restored": true
+    }
+  ],
+  "scope": "Locomotion completion coverage part 2 (1320, #11): runs in 8 directions; the native gait course (armed and holstered idle and walking, run stop, forward/back and diagonal reversals, moving turns, native holster and redraw); both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

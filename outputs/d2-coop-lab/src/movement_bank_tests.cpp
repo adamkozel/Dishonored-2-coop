@@ -422,6 +422,8 @@ int main(int argc,char** argv){
                 auto lost=falling;bp[2]=.8f;check(!lost.advance(bank,30,bp,r,false)&&lost.rejectCode==3,"interrupted ownership cannot use the landing allowance");
                 MovementClock ground;bp[2]=1;ground.advance(bank,0,bp,r,true);bp[2]=.8f;
                 check(!ground.advance(bank,20,bp,r,true)&&ground.rejectCode==3,"ordinary ground movement never gains an airborne allowance");
+                MovementClock ledge;bp[2]=1;ledge.advance(bank,0,bp,r,true);bp[2]=1-.18f;
+                check(ledge.advance(bank,37.6,bp,r,true)&&!ledge.rejectCount,"a 4.8 m/s grounded step in a long frame keeps the body clock (1214cj)");
             }
         }
         if(bank.hasSlide()){

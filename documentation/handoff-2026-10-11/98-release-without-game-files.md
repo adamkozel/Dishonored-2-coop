@@ -104,3 +104,11 @@ The builder checks two things:
 | Take | Result |
 |---|---|
 | [1315a](../../work/release/product-two-account-v1315a/result.json) | **Everything up to leaving passed (confirmed runtime):** <ul><li>The VM's install built every file from the VM's game in 65 s, with Defender on and no detection.</li><li>The VM's game followed the host from its main menu into *A Long Day in Dunwall* and took Emily.</li><li>Both partner banks were active. The VM's rebuilt Corvo bank has the same checksum as this PC's rebuild.</li><li>Each side saw the other walk (6.8 m and 7.8 m).</li><li>The uninstall rolled back, and the lab loopback reconnected.</li></ul> **Failed only on leaving:** the harness tapped F8 instantly, and the product hotkeys poll the key state. It now holds the key. |
+| [1315b](../../work/release/product-two-account-v1315b/result.json) | **Pass (confirmed runtime), the clean-PC proof:** <ul><li>The VM downloaded the published [v0.7.0 release](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.7.0) itself (7 s; SHA-256 matches the zip).</li><li>It extracted it into Downloads, and `Install.cmd` alone found the game and built every file in 59 s. Defender was on, with no exclusion over the Steam folder and no detection.</li><li>The VM joined the host's lobby through Steam, followed it from the main menu into *A Long Day in Dunwall* as Emily, and both partner banks were active.</li><li>Each side saw the other walk (3.8 m and 7.8 m), and F8 left the session (`left_by_player`).</li><li>`Uninstall.cmd` restored the originals, and the lab loopback reconnected.</li></ul> |
+
+## Release 0.7.0 on GitHub
+
+Published as [v0.7.0](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.7.0) from `main` (squash merge 652e8e81 of #97). The asset is `d2coop-v0.7.0.zip`, SHA-256 `484FF854DA210A611AC62DCCFCCDB1C8508B3F570A9CCF2B98CA2CBF10946EFF`. The user made the repository public on 2026-10-17. Still open with the user:
+- the history decisions in #98: game-derived headers before #30, Mixamo, the personal email;
+- the Microsoft false-positive submission (#25);
+- the human playtest (#99).

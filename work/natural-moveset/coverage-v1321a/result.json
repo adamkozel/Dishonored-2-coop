@@ -1,0 +1,208 @@
+{
+  "passed": false,
+  "failure": "6 case(s) failed: host-jumps: Partner presentation weight dropped in 6 samples | host-runjump: No runMix before the run take-off | host-slideexit: No air episode after the slide jump | client-jumps: Partner presentation weight dropped in 4 samples | client-runjump: No moving landing after the run jump | client-slideexit: Partner presentation weight dropped in 4 samples",
+  "cases": [
+    {
+      "source": "host",
+      "case": "jumps",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 6 samples",
+      "checks": [],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 6,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "runjump",
+      "observer": "client",
+      "passed": false,
+      "failure": "No runMix before the run take-off",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5035.0
+      ],
+      "air": [
+        {
+          "from": 1775,
+          "to": 2897,
+          "samples": 10
+        },
+        {
+          "from": 7201,
+          "to": 8076,
+          "samples": 8
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "fall",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner fall presented (15 air samples), landed and settled",
+        "Source fell 6.18 m"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1003.0
+      ],
+      "air": [
+        {
+          "from": 1003,
+          "to": 2936,
+          "samples": 15
+        }
+      ],
+      "landingCrouchMax": 0.0,
+      "fallMetres": 6.18,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "slide",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "slideexit",
+      "observer": "client",
+      "passed": false,
+      "failure": "No air episode after the slide jump",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 3,
+      "teleports": [
+        5210.0
+      ],
+      "air": [],
+      "slideSamples": [
+        3,
+        14
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "jumps",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 4 samples",
+      "checks": [],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 4,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "runjump",
+      "observer": "host",
+      "passed": false,
+      "failure": "No moving landing after the run jump",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -31.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5040.0
+      ],
+      "air": [
+        {
+          "from": 1780,
+          "to": 2777,
+          "samples": 9
+        },
+        {
+          "from": 7112,
+          "to": 7859,
+          "samples": 7
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "fall",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner fall presented (14 air samples), landed and settled",
+        "Source fell 6.52 m"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1015.0
+      ],
+      "air": [
+        {
+          "from": 1326,
+          "to": 2948,
+          "samples": 14
+        }
+      ],
+      "landingCrouchMax": 0.0,
+      "fallMetres": 6.52,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "slide",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "slideexit",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 4 samples",
+      "checks": [],
+      "lowWeightSamples": 4,
+      "teleports": [
+        5321.0
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Traversal completion coverage (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

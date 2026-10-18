@@ -1,0 +1,271 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-startstop: Starts/stops incomplete (stops 0, run 10, sprint 0) | client-startstop: Starts/stops incomplete (stops 0, run 9, sprint 0)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "walk8",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors (walk8, 64 samples)",
+        "Half-stick walks stayed in the walk gait"
+      ],
+      "lowWeightSamples": 0,
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 64,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "crouch8",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors (crouch8, 77 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 77,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "sprint3",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Sprint presented in all 3 segments (sides 27,28)"
+      ],
+      "lowWeightSamples": 0,
+      "sprintSegments": [
+        8,
+        11,
+        2
+      ],
+      "sprintSides": [
+        27,
+        28
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "turns",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner turn variants 45L,45R,90L,90R"
+      ],
+      "lowWeightSamples": 0,
+      "turnClips": [
+        149,
+        150,
+        151,
+        152
+      ],
+      "turnKinds": [
+        "45L",
+        "45R",
+        "90L",
+        "90R"
+      ],
+      "turnSerials": 19,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "startstop",
+      "observer": "client",
+      "passed": false,
+      "failure": "Starts/stops incomplete (stops 0, run 10, sprint 0)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "stops": 0,
+      "runSamples": 10,
+      "sprintSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "stairs",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner stair gait up (1 samples) and down (19 samples)"
+      ],
+      "camera": [
+        -47.6,
+        -175.9,
+        67.4
+      ],
+      "lowWeightSamples": 3,
+      "stairsUp": 1,
+      "stairsDown": 19,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "walk8",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors (walk8, 66 samples)",
+        "Half-stick walks stayed in the walk gait"
+      ],
+      "lowWeightSamples": 0,
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 66,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "crouch8",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner presented all 8 direction sectors (crouch8, 75 samples)"
+      ],
+      "lowWeightSamples": 0,
+      "sectors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "movingSamples": 75,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "sprint3",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Sprint presented in all 3 segments (sides 27,28)"
+      ],
+      "lowWeightSamples": 0,
+      "sprintSegments": [
+        7,
+        10,
+        1
+      ],
+      "sprintSides": [
+        27,
+        28
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "turns",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner turn variants 45L,45R,90L,90R"
+      ],
+      "lowWeightSamples": 0,
+      "turnClips": [
+        149,
+        150,
+        151,
+        152
+      ],
+      "turnKinds": [
+        "45L",
+        "45R",
+        "90L",
+        "90R"
+      ],
+      "turnSerials": 19,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "startstop",
+      "observer": "host",
+      "passed": false,
+      "failure": "Starts/stops incomplete (stops 0, run 9, sprint 0)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "stops": 0,
+      "runSamples": 9,
+      "sprintSamples": 0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "stairs",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner stair gait up (2 samples) and down (19 samples)"
+      ],
+      "camera": [
+        -47.6,
+        -175.9,
+        67.4
+      ],
+      "lowWeightSamples": 2,
+      "stairsUp": 2,
+      "stairsDown": 19,
+      "restored": true
+    }
+  ],
+  "scope": "Locomotion completion coverage (1318, #11): walks and crouch walks in 8 directions, sprint and diagonals, in-place turns by size, starts/stops and speed changes, stairs; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

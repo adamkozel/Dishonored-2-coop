@@ -1,0 +1,45 @@
+{
+  "source": "client",
+  "case": "runjump",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Running and sprint take-offs presented from the run and sprint gaits, with air episodes and moving landings"
+  ],
+  "camera": [
+    -30.5,
+    -148.5,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    5104.0
+  ],
+  "air": [
+    {
+      "from": 1531,
+      "to": 2537,
+      "samples": 7
+    },
+    {
+      "from": 6738,
+      "to": 7737,
+      "samples": 7
+    }
+  ],
+  "takeoffs": [
+    {
+      "ms": 1531,
+      "movingLanding": 6,
+      "takeoff": "run"
+    },
+    {
+      "ms": 6738,
+      "movingLanding": 6,
+      "takeoff": "sprint"
+    }
+  ],
+  "restored": true
+}

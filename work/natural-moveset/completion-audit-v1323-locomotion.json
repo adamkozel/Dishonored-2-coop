@@ -1,0 +1,314 @@
+{
+  "audit": "completion-audit-v1323-locomotion",
+  "family": "locomotion",
+  "candidate": "candidate-npc-combat-v1214ch",
+  "method": "Each decision rests on coverage takes on candidate 1214ch under the product controller (both source roles, the partner checked from its own presentation state on the observer, the checkpoint reloaded after every case), on the reviewed observer videos listed per item, and on the earlier visual sweep 1260 acceptance recorded in the item notes. Lifecycle: every coverage case re-arms the product controller after a checkpoint reload and waits for the partner presentation to come back; the 2-hour soak mission-soak-v1316a covers 19 shared restarts and session renewals; the clean-PC take product-two-account-v1315b covers the two-account Steam session, leave and rejoin.",
+  "items": [
+    {
+      "id": "stand_idle",
+      "decision": "complete",
+      "scope": "Still standing idle with the sword drawn and, after the native holster (X held), holstered; both roles; the partner holds speed 0 with armed mix 1, then armed mix 0 holstered, and returns to armed after the native redraw.",
+      "takes": [
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1320b/host-gait-observer.mp4",
+          "verdict": "Corvo stands planted, armed and then holstered (upright, arms down); the holster ends and the redraw starts without a pop at 15 fps."
+        },
+        {
+          "video": "coverage-v1320b/client-gait-observer.mp4",
+          "verdict": "Emily holds her idle unarmed, then draws into her wide armed stance continuously at 15 fps."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "armed_idle",
+      "decision": "complete",
+      "scope": "Armed standing idle in both roles before and after movement, and its recovery after the native redraw; attack and jump interruptions recover (coverage 1319b interrupt).",
+      "takes": [
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        },
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-interrupt",
+            "client-interrupt"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1320b/host-gait-observer.mp4",
+          "verdict": "Corvo's armed idle holds the sword low and settles after each stop."
+        },
+        {
+          "video": "coverage-v1320b/client-gait-observer.mp4",
+          "verdict": "Emily's armed idle keeps her wide ready stance after the redraw."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "walk_8_directions",
+      "decision": "complete",
+      "scope": "Half-stick walks in all 8 direction sectors in both roles, staying in the walk gait; holstered walking forward and back; walking reversals.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-walk8",
+            "client-walk8"
+          ]
+        },
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318a/host-walk8-observer.mp4",
+          "verdict": "Corvo walks with alternating strides in every heading."
+        },
+        {
+          "video": "coverage-v1318a/client-walk8-observer.mp4",
+          "verdict": "Emily walks with alternating strides, coat swinging, sword in hand, in every heading."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "run_8_directions",
+      "decision": "complete",
+      "scope": "Full-stick runs in all 8 direction sectors presented in the run gait (run mix > .5) in both roles; consecutive opposite directions.",
+      "takes": [
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-run8",
+            "client-run8"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1320a/client-run8-observer.mp4",
+          "verdict": "Emily runs with extended strides in each heading and changes direction without pops."
+        },
+        {
+          "video": "coverage-v1320b/host-run8-observer.mp4",
+          "verdict": "Corvo runs in each heading with a distinct run stride."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "sprint_forward_and_diagonals",
+      "decision": "complete",
+      "scope": "Sprints forward, forward-left and forward-right in both roles, each presenting the sprint gait (sprint mix > .5).",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-sprint3",
+            "client-sprint3"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/client-sprint3-observer.mp4",
+          "verdict": "Emily sprints with long forward-leaning strides and pumping arms, ending close to the observer."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "start_stop_each_gait",
+      "decision": "complete",
+      "scope": "Walk, run and sprint starts and stops in both roles (five settled stops each), the run stop and walk stops of the gait course, holstered stop.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-startstop",
+            "client-startstop"
+          ]
+        },
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/client-startstop-observer.mp4",
+          "verdict": "Emily starts into stride and stops planted between segments."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "gait_speed_changes",
+      "decision": "complete",
+      "scope": "A walk-run-sprint speed ramp and walk-to-run acceleration in both roles; run and sprint mixes engage and settle.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-startstop",
+            "client-startstop"
+          ]
+        },
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/client-startstop-observer.mp4",
+          "verdict": "The ramp blends walk into run into sprint without a pop."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "turn_in_place_90_180",
+      "decision": "complete",
+      "scope": "In-place turns left and right of 45, 90 and 180 degrees standing, then crouched, in both roles; all six turn variants presented; the crouch holds through crouched turns (stance mix >= .96).",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-turns",
+            "client-turns"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318b/host-turns-observer.mp4",
+          "verdict": "Corvo steps his feet through the 180 degree turns and faces about."
+        },
+        {
+          "video": "coverage-v1318c/host-turns-observer.mp4",
+          "verdict": "Corvo's crouched turns stay low with stepping feet, no upright flashes."
+        },
+        {
+          "video": "coverage-v1318c/client-turns-observer.mp4",
+          "verdict": "Emily's crouched turns stay low with stepping feet, no upright flashes."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "moving_turns",
+      "decision": "complete",
+      "scope": "Walking turns forward and backward (gait course) and walk, run and sprint arcs on the open course in both roles; each gait presented while turning and no in-place turn clip while travelling.",
+      "takes": [
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        },
+        {
+          "take": "coverage-v1321e",
+          "cases": [
+            "host-arcs",
+            "client-arcs"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1321e/host-arcs-observer.mp4",
+          "verdict": "Corvo walks, runs and sprints through right-hand arcs with the body following the curve; the run arc ends close to the camera in a planted stop."
+        },
+        {
+          "video": "coverage-v1320c/host-gait-observer.mp4",
+          "verdict": "Corvo walks forward and backward through the moving turns with his body following the curve and legs in stride."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "reverse_and_direction_changes",
+      "decision": "complete",
+      "scope": "Forward-to-back and diagonal reversals presenting opposite sectors (4 apart) in both roles; consecutive opposite run directions in run8.",
+      "takes": [
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-gait",
+            "client-gait"
+          ]
+        },
+        {
+          "take": "coverage-v1320d",
+          "cases": [
+            "host-run8",
+            "client-run8"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1320a/client-run8-observer.mp4",
+          "verdict": "Emily's direction changes at run speed blend without pops."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "slopes_and_stairs",
+      "decision": "open",
+      "scope": "The Dunwall safe-room staircase up and down in both roles: terrain weight engages with positive and negative grade (24 up and 41 down samples in 1318b).",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-stairs",
+            "client-stairs"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318a/host-stairs-observer.mp4",
+          "verdict": "Corvo steps down the staircase with alternating feet, sword in hand."
+        },
+        {
+          "video": "coverage-v1318c/client-stairs-observer.mp4",
+          "verdict": "Emily climbs the staircase stepping, upright."
+        }
+      ],
+      "remaining": "A non-stepped slope (ramp or sloped street) in a mission map, up and down, in both roles.",
+      "lifecycle": "See method."
+    }
+  ]
+}

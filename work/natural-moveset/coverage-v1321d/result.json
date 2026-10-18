@@ -1,0 +1,66 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-runjump",
+  "cases": [
+    {
+      "source": "host",
+      "case": "jumps",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, crouched and holstered standing jumps each presented an air episode that landed and settled; crouched take-off started crouched; armed mix followed the sword"
+      ],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "air": [
+        {
+          "from": 1469,
+          "to": 2885,
+          "samples": 12
+        },
+        {
+          "from": 4675,
+          "to": 5954,
+          "samples": 11
+        },
+        {
+          "from": 10882,
+          "to": 12509,
+          "samples": 14
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "runjump",
+      "observer": "client",
+      "passed": false,
+      "failure": "No moving landing after the run jump; restore: The process cannot access the file 'C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\lab-instances\\client\\coop-status.json' because it is being used by another process.",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 2,
+      "teleports": [
+        5065.0
+      ],
+      "air": [
+        {
+          "from": 1819,
+          "to": 2685,
+          "samples": 8
+        }
+      ],
+      "restored": false
+    }
+  ],
+  "scope": "Traversal completion coverage (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}

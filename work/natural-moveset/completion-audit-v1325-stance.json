@@ -1,0 +1,260 @@
+{
+  "audit": "completion-audit-v1325-stance",
+  "family": "stance",
+  "candidate": "candidate-npc-combat-v1214ch",
+  "method": "Each decision rests on coverage takes on candidate 1214ch under the product controller (both source roles, the partner checked from its own presentation state on the observer, the checkpoint reloaded after every case), on the reviewed observer videos listed per item, and on the earlier visual sweep 1260 acceptance recorded in the item notes. Lifecycle: every coverage case re-arms the product controller after a checkpoint reload and waits for the partner presentation to come back; the 2-hour soak mission-soak-v1316a covers 19 shared restarts and session renewals; the clean-PC take product-two-account-v1315b covers the two-account Steam session, leave and rejoin.",
+  "items": [
+    {
+      "id": "crouch_idle",
+      "decision": "complete",
+      "scope": "Held crouch while still between crouched moves, before and after crouched leans, and through crouched in-place turns (stance mix >= .96); both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-crouch8",
+            "client-crouch8",
+            "host-turns",
+            "client-turns"
+          ]
+        },
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-stance",
+            "client-stance",
+            "host-lean",
+            "client-lean"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/host-crouch8-observer.mp4",
+          "verdict": "Corvo holds a low crouch between crouched moves."
+        },
+        {
+          "video": "coverage-v1319c/client-stance-observer.mp4",
+          "verdict": "Emily holds a planted crouch while still."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouch_8_directions",
+      "decision": "complete",
+      "scope": "Crouched walks in all 8 direction sectors presented crouched in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-crouch8",
+            "client-crouch8"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/host-crouch8-observer.mp4",
+          "verdict": "Corvo crouch-walks in a low stepping posture in every heading."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "stand_to_crouch",
+      "decision": "complete",
+      "scope": "Stand-to-crouch changes while still, while walking and while turning; at least three presented per role (four in 1319c), settling; crouching during a lean keeps the lean (probe 1322a).",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-stance",
+            "client-stance"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319c/client-stance-observer.mp4",
+          "verdict": "Emily's crouches blend continuously, still and moving."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouch_to_stand",
+      "decision": "complete",
+      "scope": "Crouch-to-stand changes while still, while walking and while turning; at least three per role (four in 1319c), settling standing at the end.",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-stance",
+            "client-stance"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319c/client-stance-observer.mp4",
+          "verdict": "Emily rises continuously into a planted stand."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouched_turns",
+      "decision": "complete",
+      "scope": "Crouched in-place turns left and right of 90 and 180 degrees in both roles, crouch held throughout (stance mix >= .96), all turn variants presented; the sweep's upright flashes came from per-trial teleports and do not reproduce.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-turns",
+            "client-turns"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/host-turns-observer.mp4",
+          "verdict": "Corvo's crouched turns stay low with stepping feet."
+        },
+        {
+          "video": "coverage-v1318c/client-turns-observer.mp4",
+          "verdict": "Emily's crouched turns stay low with stepping feet."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouch_stop_start",
+      "decision": "complete",
+      "scope": "Crouched starts and stops in each of the 8 directions, and crouched walks interrupted by an attack and a jump that resume the crouched gait, in both roles.",
+      "takes": [
+        {
+          "take": "coverage-v1318e",
+          "cases": [
+            "host-crouch8",
+            "client-crouch8"
+          ]
+        },
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-interrupt",
+            "client-interrupt"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1318c/host-crouch8-observer.mp4",
+          "verdict": "Corvo's crouched starts and stops are clean into a held crouch."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "stand_lean_left_right",
+      "decision": "complete",
+      "scope": "Native standing leans left and right (state 18) presented at full weight with the matching side in both roles, each recovering after the native exit (Y tap); the native lean persists after Y is released and ends on a Y tap, forward movement, a turn or the opposite side (probe 1322a).",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-lean",
+            "client-lean"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319c/host-lean-observer.mp4",
+          "verdict": "Corvo's standing leans shift the whole body sideways over planted feet and recover (modest amplitude)."
+        },
+        {
+          "video": "coverage-v1319c/client-lean-observer.mp4",
+          "verdict": "Emily's standing leans shift visibly each way and recover."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouch_lean_left_right",
+      "decision": "complete",
+      "scope": "Native crouched leans left and right presented crouched at full weight with the matching side in both roles, each recovering.",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-lean",
+            "client-lean"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319c/host-lean-observer.mp4",
+          "verdict": "Corvo's crouched leans are clear both ways and recover."
+        },
+        {
+          "video": "coverage-v1319c/client-lean-observer.mp4",
+          "verdict": "Emily's crouched leans are clear both ways and recover."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "ledge_peek",
+      "decision": "complete",
+      "scope": "Native upward peeks standing and crouched (lean up 1.0) presented in both roles and recovering. The crouched peek unfolds the crouch clearly; the standing peek is a tiptoe rise (18 degree heel pivot, about 5 cm of head lift, bones unstretched) by design: the first-person camera rise is not reachable by a body.",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-lean",
+            "client-lean"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319c/host-lean-observer.mp4",
+          "verdict": "Corvo's crouched peek rises clearly; the standing peek is a subtle tiptoe rise."
+        },
+        {
+          "video": "coverage-v1319c/client-lean-observer.mp4",
+          "verdict": "Emily's crouched peek rises clearly; the standing peek is a subtle tiptoe rise."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "keyhole_enter_look_exit",
+      "decision": "complete",
+      "scope": "Native keyhole peeks at the lab-spot door, standing and crouched, in both roles: the source enters native Peeking (state 24) and the partner presents the owned keyhole scene (traversal variant >= 7) in stance through entry, look and the native B exit, then recovers. Earlier bounded takes covered both door sides and holstered starts.",
+      "takes": [
+        {
+          "take": "coverage-v1319e",
+          "cases": [
+            "host-keyhole",
+            "client-keyhole"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1319e/host-keyhole-observer.mp4",
+          "verdict": "Corvo bends to the keyhole at the door, holds, and rises back on exit, standing and crouched."
+        },
+        {
+          "video": "coverage-v1319e/client-keyhole-observer.mp4",
+          "verdict": "Emily bends to the keyhole, holds, and rises back on exit, standing and crouched."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

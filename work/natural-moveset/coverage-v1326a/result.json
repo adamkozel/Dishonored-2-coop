@@ -1,0 +1,192 @@
+{
+  "passed": false,
+  "failure": "3 case(s) failed: host-vault: Partner presentation weight dropped in 4 samples | host-lowmantle: Mantle variant 1 (standing) not presented | client-highmantle: Partner presentation weight dropped in 6 samples",
+  "cases": [
+    {
+      "source": "host",
+      "case": "vault",
+      "observer": "client",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 4 samples",
+      "checks": [],
+      "lowWeightSamples": 4,
+      "teleports": [
+        3680.0,
+        7689.0
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "lowmantle",
+      "observer": "client",
+      "passed": false,
+      "failure": "Mantle variant 1 (standing) not presented",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        4301.0,
+        5082.0
+      ],
+      "mantles": [
+        {
+          "mantle": "standing",
+          "variant": 1,
+          "episodes": [],
+          "nativeSamples": 6
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "highmantle",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Standing and crouched highmantle presented (variants 4 and 5) with native state 8 on the source, recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        4203.0,
+        5043.0
+      ],
+      "mantles": [
+        {
+          "mantle": "standing",
+          "variant": 4,
+          "episodes": [
+            {
+              "variant": 4,
+              "from": 1276,
+              "to": 1899,
+              "samples": 6,
+              "minAmount": 0.18082,
+              "maxAmount": 0.91
+            }
+          ],
+          "nativeSamples": 7
+        },
+        {
+          "mantle": "crouched",
+          "variant": 5,
+          "episodes": [
+            {
+              "variant": 5,
+              "from": 7162,
+              "to": 7909,
+              "samples": 7,
+              "minAmount": 0.080528,
+              "maxAmount": 0.950409
+            }
+          ],
+          "nativeSamples": 7
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "vault",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed and holstered vaults: native state 9 on the source, vault presented on the partner (variant 3), recovered"
+      ],
+      "lowWeightSamples": 2,
+      "teleports": [
+        3674.0,
+        7614.0
+      ],
+      "vaults": [
+        {
+          "variant": 3,
+          "from": 1637,
+          "to": 2150,
+          "samples": 5,
+          "minAmount": 0.0,
+          "maxAmount": 1.0
+        },
+        {
+          "variant": 3,
+          "from": 9285,
+          "to": 9658,
+          "samples": 4,
+          "minAmount": 0.323718,
+          "maxAmount": 1.0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "lowmantle",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Standing and crouched lowmantle presented (variants 1 and 2) with native state 8 on the source, recovered"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        4227.0,
+        5039.0
+      ],
+      "mantles": [
+        {
+          "mantle": "standing",
+          "variant": 1,
+          "episodes": [
+            {
+              "variant": 1,
+              "from": 1788,
+              "to": 2036,
+              "samples": 3,
+              "minAmount": 0.307304,
+              "maxAmount": 0.83237
+            }
+          ],
+          "nativeSamples": 5
+        },
+        {
+          "mantle": "crouched",
+          "variant": 2,
+          "episodes": [
+            {
+              "variant": 2,
+              "from": 7622,
+              "to": 7995,
+              "samples": 4,
+              "minAmount": 0.209734,
+              "maxAmount": 1.0
+            }
+          ],
+          "nativeSamples": 4
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "highmantle",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 6 samples",
+      "checks": [],
+      "lowWeightSamples": 6,
+      "teleports": [
+        4278.0,
+        5027.0
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Traversal coverage part 2 (1326, #11): armed and holstered vaults, standing and crouched low and high mantles at the safe-room fixtures. Traversal base (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}
