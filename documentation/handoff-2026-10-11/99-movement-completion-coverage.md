@@ -7,7 +7,7 @@ Updated 2026-10-18. This chapter covers how checklist items in [movement require
 - the lab-only grants that put items, powers and upgrades in the isolated save (1214ck, 1214cm);
 - the completion audits that record each item's decision in `review-catalog.json`.
 
-**Status: 71 of 105 items complete; 2 are not applicable or excluded, 32 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers, ranged weapons and items, switching, interactions and two paired items). Live candidate: 1214cq.
+**Status: 79 of 105 items complete; 2 are not applicable or excluded, 24 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, and paired takedowns from every side, from above and sliding). Live candidate: 1214ct.
 
 ## Coverage harnesses
 
@@ -36,7 +36,13 @@ The partner is always checked from its own presentation state on the observer: d
 | 1330 ranged and items | `pistol`, `crossbow`, `grenade`, `stunmine`, `springrazor`, `heart`, `health`, `manaelixir`; filmed from a close side-on free camera |
 | 1332 powers | Corvo: `blink`, `darkvision`, `bendtime`, `windblast`, `possession`, `swarm`; Emily: `farreach`, `domino`, `doppelganger`, `mesmerize`, `shadowwalk`, `darkvision` |
 | 1333 traversal part 3 | `doublejump` (Agility granted by name; armed, running and holstered) |
-| [Record-MissionCoverage-v1328.ps1](../../work/natural-moveset/Record-MissionCoverage-v1328.ps1) (hand-written, Edge of the World) | `swim`, `climb`, `climbtop`, `waterexit`, `hardfall`, `guardfight` (`-GuardHost`/`-GuardClient`), `boltswitch`, `itemswitch`, `slope` (a ramp given by `-SlopeStart`/`-SlopeEnd` as "x,y,z" strings), and the lab-only `slopescan` grid (`-ScanGrid`) and `slopewalk` traces (`-WalkStarts`) |
+| 1350, 1353 power cancellation | `blinkcancel`, `farreachcancel` (aim, native X cancel while LT is held, then a second cast), `farreachfar` (Far Reach down the 10 m lane, filmed from behind) |
+| 1354 Domino | `dominolink`: Emily marks Dunwall tutorial guard 2 from the upper floor, then guard 1 on the lower floor (the link), then cancels a third aim; the camera re-aims over her shoulder |
+| 1355, 1356 kick | `kickledge`, `kickledge2`: tutorial guard 2 at his railing pause, attacked from the 611 placement or after an alerting slash (no native kick in product mode) |
+| 1357, 1358 loot | `pickpocket`, `bodyloot` on tutorial guard 2 at his long pause; 1358 aims by the native use focus and retries inventory reads |
+| 1359 Blink Assault | `blinkkick`: Corvo, granted Blink and `blink_assault`, blinks to the standing guard and kicks on arrival |
+| [Test-TakedownVariants-v1254h](../../work/natural-moveset/Test-TakedownVariants-v1254h.ps1) to v1254m | every approach waits until tutorial guard 2 stands still at his 44 s patrol pause; 1254l crouches only when not crouched (B toggles); 1254m holds the slide choke |
+| [Record-MissionCoverage-v1328.ps1](../../work/natural-moveset/Record-MissionCoverage-v1328.ps1) (hand-written, Edge of the World) | `swim`, `climb`, `climbtop`, `waterexit`, `hardfall`, `guardfight` (`-GuardHost`/`-GuardClient`), `boltswitch`, `itemswitch`, `slope` (a ramp given by `-SlopeStart`/`-SlopeEnd` as "x,y,z" strings), the lab-only `slopescan` grid (`-ScanGrid`) and `slopewalk` traces (`-WalkStarts`), `domino` on the checkpoint guards, and the guard-fight options `-CounterOnParry` (attack at the source's `sword_parry_win`) and `-BlockYawOffset` (block with the guard off to one side, turned by native look-stick pulses) |
 
 **Run:**
 
@@ -70,6 +76,13 @@ These are confirmed runtime. The probes are kept as evidence.
 - **The sloped street** runs from (−14.1, 75.3, 11.5) up to (3.2, 57.0, 15.0), heading 315, grade 0.14 (about 8°), 25 m without a step (slopewalk 1328zg). The incline from (−35.4, 65.6) toward the chain street is a stone staircase (1328ze video).
 - **Guards:** the windmill guard sits in a scripted tutorial spot and stays unaware, and the "Play Your Way" tutorial modal opens near it. The guard fights use checkpoint guards 02 (Corvo) and 01 (Emily). The street's guards turn hostile: hold both peers' health on the street (1328zj killed the observer).
 
+**Dunwall tower guards** (traced 2026-10-18, product mode):
+- The tutorial guards are friendly. Guard 2 patrols the upper floor in a loop of about 100 s: a 44 s pause near (-47.95, -152.45) facing about +y, a 12 s pause at the railing spot (-44.14, -142.99), shorter ones near (-38.99, -148.71) and (-39.36, -152.71). Guard 1 stands still on the lower floor at (-43.44, -140.09, 61.03).
+- Guard 2 carries `dunwall_key_emilyoffice` on his belt; searching his unconscious body takes it (coverage-v1357a, 1358a).
+- Waiting for him to stand still at the long pause makes every takedown approach reliable (1254h onward); the free camera 3.6 m ahead of him films them cleanly.
+- RT behind an unaware guard is the native back assassination (1355a). B toggles the crouch: tapping it on an already crouched source stands it up in the guard's view (Emily's front takedowns failed until 1254l).
+- The Edge of the World checkpoint guards stand 10.7 m apart along their facing and turn hostile at sight; Domino needs friendly guards (1328zl-zo).
+
 **Cameras.** Most failed reviews were framing, not presentation:
 - `setviewpos` pitch: negative looks down (Set-ObserverPitch: positive looks down). 1328h's climb camera at −12 filmed the ground.
 - A body placed with `setviewpos` near a wall or water ends up in it; use `coop_observer_camera hold_at x y z` for the free camera and leave the observer's body where it is. The window harness 1235h stood the observer along the wall plane at floor height and filmed a staircase (1235i fixes it).
@@ -90,6 +103,15 @@ These are confirmed runtime. The probes are kept as evidence.
 - Block and choke share RightShoulder: pressed at an unaware or stunned guard it chokes (state 41, 1328y).
 - A plain sword hit on the player has no full-body native state; only stuns do (state 14, `hit_react_stun_{right,front,left,back}`), so the guard fight records hit reactions with the source state at each health drop instead of requiring them (1328za). `hit_react_stumble` and `hit_react_knocked_down` exist in the resource index (confirmed static) but have not been seen on the player.
 - A power's cast spends mana, and a mana potion held in the inventory is auto-used when mana drops (probe 1344b). Far Reach and Domino without a target spend nothing. The items harness therefore grants the potion only after the drop and drinks 1.2 s later (1330i).
+
+- A power's X cancellation while LT is held ends the cast with no release scene (Far Reach: native Undraw, state 81).
+- The Far Reach aim loop runs as `power_grapple_cast_in_loop` Scene_1 with a valid target and Scene_2 without one; the release plays `cast_out`, a 466 ms Scene_2, then `power_grapple_pull` pullIn and a loop named `pull` (power-scenes-probe-v1351a/b).
+- Shadow Walk's attack needs a target: in the open RT plays nothing (probe 1350a); `power_shadow_walk_attack_out` (1166 ms) plays `ply_body_sw_timeout` (confirmed static).
+- Blink Assault is a kick: `blink_attack_focus`, subscene kick, 800 ms, over Running0 + Slash39, playing `ply_body_throw_hit_kick` and binding the kicked NPC (probe 1360a, runtime and static).
+- The native `throwhit` kick did not play in product mode at the railing (1355a/b, 1356 prepared); take 611 got it with the guard's AI held.
+- A player's death plays no scene: health reaches 0, native state 15 (Dead) alone, native GameOver about 4.5 s later (probe 1361a). The bank has no death clip yet.
+- A counter press 400 ms after the source's `sword_parry_win` produced no counter-kill; killing blows later played `fatality_*` finishers (1328zp, zr).
+- Re-aiming with `setviewpos` is a teleport and the partner fades through each one; turning by native look-stick pulses (about 48.5 deg/s at RightX 20000) does not.
 
 **Re-placing the source mid-case** (`setviewpos`) is a teleport. The partner presentation fades through it by design: weight 0, then 1 over about 0.5 s. Weight samples within 1.2 s after a deliberate re-placement are therefore not counted as drops.
 
@@ -125,6 +147,12 @@ These are confirmed runtime. The probes are kept as evidence.
 - 1214cp adds `productSessionArmed()` (the product controller's `armed` state) and lets both run in an armed product session. The spirit's local experiment stays lab-only; both stay cosmetic. 1214co was archived from its build without deployment, superseded by 1214cp.
 - Verified in coverage-v1332e: the host created, showed and retired the clone (278 pose updates) and the spirit (native effect started and stopped). #104 is closed.
 
+**1214cr: Domino in product mode** (and the Far Reach aim loop). The partner's Domino marks and link beam (cosmetic native FX at the source's world transforms) ran only in the lab fixture on the guard map; they now also run in an armed product session on any map, and `domino-world.json` reports a `readyMask`. The Far Reach aim loop is also accepted as Scene_2 (before, the aim hold was never presented: coverage-v1350a).
+
+**1214cs: Domino marks held between casts.** After each cast the source's link reader failed at stage 14 (a beam FX check) and the whole snapshot was dropped, so the partner's marks vanished (1328zl). When only the link part fails, the source now publishes the marks alone (`marksOnly`); the probe's `--domino-links` lists each beam FX lookup on such a failure. The Far Reach pull loop `pull` maps to variant 8.
+
+**1214ct: the Blink Assault kick** (`blink_attack_focus`) is presented as the kick (variant 17, the native kick clip), standing, binding the player body, the right arm and the kicked NPC.
+
 ## Lab-only grants
 
 The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two lab commands put them in through the game's own inventory routines. They are lab only and refused outside the lab.
@@ -132,7 +160,7 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 - **`coop_grant_named <declaration>`** (1214cm): adds one entry by its exact declaration name, restricted to powers (`models/powers/...`) and player attributes (`components/characters/player/base/attributes/...`). A granted power is selected in the left hand with the native equip. Agility is `super_jump.inventoryitem`.
 - Probes `power-cast-probe-v1334a`–`d` confirm every granted power casts natively, product mode included.
 
-## Takes on the current candidate (1214cq)
+## Takes on the current candidates (1214cq-1214ct)
 
 | Take | Result |
 |---|---|
@@ -146,6 +174,12 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | takedown-variants-v1254f, g | 11/24 and 15/24: back takedowns in both roles; front and side chokes rarely trigger |
 | carry-body-v1277i–l | The carry passes at runtime; the library walkway frames it poorly |
 | use-variants-dunwall-v1228w | Emily's lock reach is not presented as variant 5 on the host |
+| coverage-v1350a, 1353a | Blink cancel (1350a) and Far Reach cancel (1353a, 1214cr) pass; the long Far Reach travels 9.6 m |
+| mission-coverage-v1328zl-zo; coverage-v1354a | Domino on the Edge of the World guards fails (hostile or out of reach); on the Dunwall tutorial guards (1354a, 1214cs) marks, link beam and cancel pass |
+| takedown-variants-v1254h-n | Side, back, front, drop and slide takedowns on the standing guard: everything passes except Emily's front lethal and the slide chokes (the slide never starts) |
+| coverage-v1357a, 1358a/b | Body loot passes for Corvo (Emily's choke did not hold); pickpocketing finds no focus on the living guard |
+| coverage-v1359a/b | Blink Assault kick presented (1214ct) |
+| mission-coverage-v1328zp-zz | Guard fights with counter presses and side stuns: Corvo's back stun at full weight (zt); right/left stuns only at weight 0; Emily's presentation dropped in several fights (diagnosis in zz) |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
 
 Earlier takes, failed ones included, are kept; each commit message records what it found.
@@ -180,12 +214,19 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1347-climb | 2: chain climb, ladder (the game's ladders are props; its one climb state is on chains) |
 | completion-audit-v1348-parry | 2: parry directions, parry recovery (guard fights 1328zh, 1328h) |
 | completion-audit-v1349-slopes | 1: slopes and stairs (sloped street 1328zk, staircase 1318e) |
+| completion-audit-v1350-blink | 1: Blink aim, cancel, release, arrival |
+| completion-audit-v1351-far-reach | 1: Far Reach aim, cancel, release, arrival (1214cr) |
+| completion-audit-v1352-domino | 1: Domino marks, link and cancel (1214cs) |
+| completion-audit-v1353-aerial | 2: drop assassination and drop choke |
+| completion-audit-v1354-chokes | 1: nonlethal takedowns from every side |
+| completion-audit-v1355-slide | 1: sliding takedown |
+| completion-audit-v1356-blink-assault | 1: Blink pull and kick variants (the Blink Assault kick, 1214ct) |
 
-**Still open (32):**
-- combat: counterattack, hit reactions from every direction (front and back stuns seen; left and right not yet), stagger and knockdown, kick (never triggered by the harness), death variants, ragdoll handoff;
-- paired actions: lethal and nonlethal takedowns from every side, aerial drop kill and aerial nonlethal takedown, sliding takedown, wall and window variants, enemy body sizes, struggle and escape, body carry (passes at runtime; needs a reviewable video);
-- powers: Blink and Far Reach aim, cancel, release and arrival, their pull and kick variants, Bend Time, Domino marking with targets, Shadow Walk, upgrades, interruptions and no mana;
-- interactions: doors, pickup and loot, keys (Emily's lock reach), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes, map load and checkpoint recovery.
+**Still open (24):**
+- combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced), death variants (no death clip), ragdoll handoff;
+- paired actions: lethal takedowns (all but Emily's front), wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
+- powers: Bend Time, Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
+- interactions: doors, pickup and loot (pickpocketing), keys (Emily's lock reach), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes, map load and checkpoint recovery.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 

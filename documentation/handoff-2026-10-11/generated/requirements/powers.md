@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:26:56.488990+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:59:02.174475+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -141,7 +141,7 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
   ],
   "deliverable_kind": "animation",
   "notes": "Exact native assets confirm Blink Assault. Full-body kick and slash sequences are recorded. No Corvo pulling variant was confirmed; pulling remains under Emily Far Reach. Teleport/target timing, contact, knockdown and runtime binding are pending. Emily is a comparison adaptation. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "blink",
@@ -165,10 +165,43 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
     }
   ],
   "in_game_recordings": [],
-  "native_effects_status": "not_verified"
+  "native_effects_status": "not_verified",
+  "completion": {
+    "audit": "completion-audit-v1356-blink-assault.json",
+    "decision": "complete",
+    "scope": "Blink Assault in the Corvo source role: the blink (power variants 1-3, departure and arrival effects) followed by the native kick on arrival, presented on the partner as the kick (variant 17, 5-6 samples per take). Corvo-only (Blink).",
+    "takes": [
+      {
+        "take": "coverage-v1359b",
+        "cases": [
+          "host-blinkkick"
+        ]
+      },
+      {
+        "take": "coverage-v1359a",
+        "cases": [
+          "host-blinkkick"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+        "verdict": "Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "coverage-v1359b/result.json",
+    "coverage-v1359a/result.json"
+  ]
 }
 ````
 
+- [evidence: coverage-v1359b/result.json](<../../../../work/natural-moveset/coverage-v1359b/result.json>)
+- [evidence: coverage-v1359a/result.json](<../../../../work/natural-moveset/coverage-v1359a/result.json>)
 ## corvo_dark_vision_cast_end
 
 Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.
