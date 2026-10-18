@@ -1,0 +1,34 @@
+{
+  "audit": "completion-audit-v1356-blink-assault",
+  "family": "powers",
+  "candidate": "candidate-npc-combat-v1214ct",
+  "method": "The decision rests on coverage-v1359a/b (candidate 1214ct, Dunwall tower, product controller): Corvo, granted Blink and the blink_assault upgrade by name (lab-only coop_grant_named), stands 6 m in front of tutorial guard 2 while the guard stands at his patrol pause, aims Blink at him, releases and attacks on arrival. The native scene is blink_attack_focus, subscene kick, 800 ms, over Running0 + Slash39 (blink-assault-probe-v1360a, confirmed runtime); its declaration plays the native ply_body_throw_hit_kick animations and binds the player body, the right arm and the kicked NPC (confirmed static). 1214ct presents it as the kick (combat variant 17, the native kick clip). Blink Assault has no other attack scene among the native player scenes, and Corvo has no pull (pulling is Emily's Far Reach, emily_far_reach_pull_variants). The kicked guard's reaction is NPC gameplay (stage 4). The checkpoint is reloaded after every case.",
+  "items": [
+    {
+      "id": "corvo_blink_pull_and_kick_variants",
+      "decision": "complete",
+      "scope": "Blink Assault in the Corvo source role: the blink (power variants 1-3, departure and arrival effects) followed by the native kick on arrival, presented on the partner as the kick (variant 17, 5-6 samples per take). Corvo-only (Blink).",
+      "takes": [
+        {
+          "take": "coverage-v1359b",
+          "cases": [
+            "host-blinkkick"
+          ]
+        },
+        {
+          "take": "coverage-v1359a",
+          "cases": [
+            "host-blinkkick"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+          "verdict": "Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

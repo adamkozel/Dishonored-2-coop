@@ -40,6 +40,9 @@ inline unsigned nativeCombatVariant(const std::string& asset){
         // (Scene_1, 733 ms, owned player and right arm only).
         "sword_attack_right_b_hit","sword_attack_left_b_hit"};
     for(unsigned i=0;i<23;++i)if(asset==std::string("midnight/gameplay/player/base/combat/")+names[i]+".midnightscene")return i+1;
+    // 1214ct (#11): Blink Assault plays its kick through blink_attack_focus (subscene kick, 800 ms, the native
+    // ply_body_throw_hit_kick animations; confirmed static and runtime, blink-assault-probe-v1360a): the same motion as 17.
+    if(asset=="midnight/gameplay/player/base/combat/blink_attack_focus.midnightscene")return 17;
     return 0;
 }
 template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerCombatScene& out){
@@ -72,7 +75,12 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
     // PlayerRightArm, PlayerCamera and PlayerBody. Both latter groups bind
     // the SAME owned player. No NPC/partner is admitted by this exception.
     const bool kick=s.variant==17;
-    if(kick&&(s.subscene!="kick"||s.durationMs!=800||s.timeMs>s.durationMs||
+    // Blink Assault (1214ct): standing (Running0 + Slash39, physical 0 or 1), binding the owned player body, the right arm
+    // and the one kicked NPC (AIGroup1) instead of the player twice.
+    const bool blinkKick=kick&&s.asset=="midnight/gameplay/player/base/combat/blink_attack_focus.midnightscene";
+    if(blinkKick&&(s.subscene!="kick"||s.durationMs!=800||s.timeMs>s.durationMs||(bindingFlags&0xffffff)!=3||states.player.current>1||
+       !std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==0||a.id==6;})))return false;
+    if(kick&&!blinkKick&&(s.subscene!="kick"||s.durationMs!=800||s.timeMs>s.durationMs||
        (bindingFlags&0xffffff)!=3||states.player.current!=1||
        !std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==6;})))return false;
     if((bindingFlags&0xffffff)==3&&!kick&&!nativeCombatTargetScene(s.variant,s.subscene,s.durationMs,states.player.current))return false;
@@ -91,16 +99,16 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
         unsigned handle=0;std::uintptr_t actorVt=0;
         if(!read(bindings+i*0x20+8,&actors[i],8)||!actors[i]||!read(actors[i]+0xa8,&handle,4)||
            worldIdentityEntity(read,game,handle)!=actors[i]||!read(actors[i],&actorVt,8))return false;
-        if(actors[i]==states.player.player){if(++playerCount>(kick?2u:1u)||handle!=1)return false;}
+        if(actors[i]==states.player.player){if(++playerCount>(kick&&!blinkKick?2u:1u)||handle!=1)return false;}
         else if(actorVt==base+0x1c5e108){
-            if(kick||++targetCount>1||(bindingFlags&0xffffff)!=3||!readWorldNpcIdentity(read,base,game,handle,s.target)||
+            if((kick&&!blinkKick)||++targetCount>1||(bindingFlags&0xffffff)!=3||!readWorldNpcIdentity(read,base,game,handle,s.target)||
                !s.target.unique||!s.target.reciprocal||s.target.actor!=actors[i])return false;
         }
         else{NativePlayerArm candidate{};if(++armCount>1||!readNativePlayerArm(read,base,game,handle,candidate)||candidate.side!=2||candidate.actor!=actors[i]||candidate.player!=states.player.player)return false;arm=candidate;}
     }
     // Parry idle targets the right arm only. Other observed scenes bind both
     // the native player and arm, plus an optional validated native hit target.
-    if(armCount!=1||(s.variant!=11&&playerCount!=(kick?2u:1u))||(!kick&&(bindingFlags&0xffffff)==3&&targetCount!=1))return false;s.character=arm.character;
+    if(armCount!=1||(s.variant!=11&&playerCount!=(kick&&!blinkKick?2u:1u))||((!kick||blinkKick)&&(bindingFlags&0xffffff)==3&&targetCount!=1))return false;s.character=arm.character;
     // Corvo634 selected Scene_1 too: these are attack variants, not roles.
     if(s.variant==18&&!((s.subscene=="Scene_1"&&s.durationMs==833)||(s.subscene=="Scene_2"&&s.durationMs==1000)))return false;
     std::uintptr_t again=0;unsigned number=0;

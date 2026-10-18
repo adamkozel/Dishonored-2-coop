@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:59:02.174475+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -32,7 +32,7 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival world FX, discrete arrival and the cancelled second aim all read correctly on the partner. Only a dark streak during the lab's reset back to the origin is visible, and it is not part of the power. Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "blink",
@@ -66,13 +66,20 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
     "blink-regression-v26-v2/result.json",
     "../movement-integration/visual-sweep-v1260/powers-review.json",
     "coverage-v1332c/result.json",
-    "coverage-v1332d/result.json"
+    "coverage-v1332d/result.json",
+    "coverage-v1350a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "Aim, release, departure burst and arrival are presented (power variants 1-3; 1332c/d).",
+    "audit": "completion-audit-v1350-blink.json",
+    "decision": "complete",
+    "scope": "Blink in the Corvo source role: aim (variants 1, 2), release (3), the departure burst and arrival presented (1332c/d); a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion within about 0.3 s, and a following cast still releases and travels 4.8 m (1350a). Blink is Corvo-only; the Emily source role has no Blink.",
     "takes": [
+      {
+        "take": "coverage-v1350a",
+        "cases": [
+          "host-blinkcancel"
+        ]
+      },
       {
         "take": "coverage-v1332c",
         "cases": [
@@ -88,13 +95,17 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
     ],
     "visual": [
       {
+        "video": "coverage-v1350a/host-blinkcancel-observer.mp4",
+        "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+      },
+      {
         "video": "coverage-v1332d/host-blink-observer.mp4",
         "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
       }
     ],
-    "lifecycle": "See method.",
-    "remaining": "A cancelled aim on the current candidate (the coverage cases always release)."
-  }
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -102,6 +113,7 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
 - [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
+- [evidence: coverage-v1350a/result.json](<../../../../work/natural-moveset/coverage-v1350a/result.json>)
 - [in_game_recordings: integrated-blink-fx-v1.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v1.mp4>)
 - [in_game_recordings: integrated-blink-fx-v3.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v3.mp4>)
 - [in_game_recordings: blink-knee-v4.mp4](<../../../../work/natural-moveset/blink-knee-v4.mp4>)
@@ -129,7 +141,7 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
   ],
   "deliverable_kind": "animation",
   "notes": "Exact native assets confirm Blink Assault. Full-body kick and slash sequences are recorded. No Corvo pulling variant was confirmed; pulling remains under Emily Far Reach. Teleport/target timing, contact, knockdown and runtime binding are pending. Emily is a comparison adaptation. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "blink",
@@ -153,10 +165,43 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
     }
   ],
   "in_game_recordings": [],
-  "native_effects_status": "not_verified"
+  "native_effects_status": "not_verified",
+  "completion": {
+    "audit": "completion-audit-v1356-blink-assault.json",
+    "decision": "complete",
+    "scope": "Blink Assault in the Corvo source role: the blink (power variants 1-3, departure and arrival effects) followed by the native kick on arrival, presented on the partner as the kick (variant 17, 5-6 samples per take). Corvo-only (Blink).",
+    "takes": [
+      {
+        "take": "coverage-v1359b",
+        "cases": [
+          "host-blinkkick"
+        ]
+      },
+      {
+        "take": "coverage-v1359a",
+        "cases": [
+          "host-blinkkick"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+        "verdict": "Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "coverage-v1359b/result.json",
+    "coverage-v1359a/result.json"
+  ]
 }
 ````
 
+- [evidence: coverage-v1359b/result.json](<../../../../work/natural-moveset/coverage-v1359b/result.json>)
+- [evidence: coverage-v1359a/result.json](<../../../../work/natural-moveset/coverage-v1359a/result.json>)
 ## corvo_dark_vision_cast_end
 
 Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.
@@ -5221,7 +5266,7 @@ Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pu
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pull, impact and recovery read correctly. The only visible artifact is the reset streak back to the origin, which is a fixture move. Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "far_reach",
@@ -5253,30 +5298,49 @@ Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pu
   "evidence": [
     "grapple-regression-v26-v2/result.json",
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1353a/result.json",
+    "coverage-v1350a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "The aim is presented (power variant 4); the pull toward a floor point is too short to film from the side.",
+    "audit": "completion-audit-v1351-far-reach.json",
+    "decision": "complete",
+    "scope": "Far Reach in the Emily source role: cast-in and aim loop (variants 4, 5), release (6) and the pull-in (7) are presented; a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion, and a following cast releases and travels 9.2 m to its arrival (1353a); a long reach travels 9.6 m down the lane with the tether at her hand (1350a). Far Reach is Emily-only; the Corvo source role has Blink instead.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1353a",
         "cases": [
-          "client-farreach"
+          "client-farreachcancel"
+        ]
+      },
+      {
+        "take": "coverage-v1350a",
+        "cases": [
+          "client-farreachfar"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "A far reach to a distant target with travel and arrival in frame, and a cancelled aim."
-  }
+    "visual": [
+      {
+        "video": "coverage-v1350a/client-farreachfar-observer.mp4",
+        "verdict": "From behind, Emily reaches her left hand down the lane, is pulled off her feet with the tether light at her hand, flies about ten metres and lands at the far end."
+      },
+      {
+        "video": "coverage-v1353a/client-farreachcancel-observer.mp4",
+        "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away down the lane; the scene is dim but the poses read."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: grapple-regression-v26-v2/result.json](<../../../../work/natural-moveset/grapple-regression-v26-v2/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1353a/result.json](<../../../../work/natural-moveset/coverage-v1353a/result.json>)
+- [evidence: coverage-v1350a/result.json](<../../../../work/natural-moveset/coverage-v1350a/result.json>)
 - [in_game_recordings: integrated-power-emily-v3.mp4](<../../../../work/natural-moveset/integrated-power-emily-v3.mp4>)
 - [in_game_recordings: integrated-grapple-fx-v3.mp4](<../../../../work/natural-moveset/integrated-grapple-fx-v3.mp4>)
 - [in_game_recordings: grapple-knee-v4.mp4](<../../../../work/natural-moveset/grapple-knee-v4.mp4>)
@@ -5508,7 +5572,7 @@ Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture an
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture and its recovery read correctly, and the native mark effect appears on the target. Framing in v218 is cramped at the screen edge. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "domino",
@@ -7251,29 +7315,36 @@ Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture an
   },
   "evidence": [
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1354a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "The cast gesture is presented (power variants 19, 20, 22) with no target.",
+    "audit": "completion-audit-v1352-domino.json",
+    "decision": "complete",
+    "scope": "Domino in the Emily source role in product mode: the cast, select and release gestures (variants 19-22), a mark on each of two real guards and the native link beam between them are presented on the host and held between casts (17 samples with both marks), and a native X cancellation of a third aim adds no mark. Marks and beam are cosmetic native FX on the partner presentation; the partner never links, damages or spends mana.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1354a",
         "cases": [
-          "client-domino"
+          "client-dominolink"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "Marking and linking real targets (mission guards) and the link effect on the observer."
-  }
+    "visual": [
+      {
+        "video": "coverage-v1354a/client-dominolink-observer.mp4",
+        "verdict": "On the upper floor Emily throws her hand toward the guard and a golden mark flares on him; downstairs she casts at the second guard and a bright golden link beam runs up to the first, staying in place while she aims once more and lowers her hand."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1354a/result.json](<../../../../work/natural-moveset/coverage-v1354a/result.json>)
 - [in_game_recordings: domino-native-source-v187.mp4](<../../../../work/natural-moveset/domino-native-source-v187.mp4>)
 - [in_game_recordings: domino-native-target-v191.mp4](<../../../../work/natural-moveset/domino-native-target-v191.mp4>)
 - [in_game_recordings: domino-native-reader-v190.mp4](<../../../../work/natural-moveset/domino-native-reader-v190.mp4>)

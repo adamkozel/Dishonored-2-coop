@@ -1,0 +1,181 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: front-client-lethal: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 62 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Victim ends 0.35 m apart in the two worlds"
+      ],
+      "guardWaitMs": 77115,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.1153824,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": false,
+      "stanceBefore": [
+        0,
+        1
+      ],
+      "inputAt": "2026-10-18T14:10:07.8932629+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_front.midnightscene|1333",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "sceneIds": [
+        62,
+        2,
+        3
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 256358687,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1a2791358e0",
+          "actor": "0x1a285ce49b0",
+          "attributes": "0x1a285a398d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 256358718,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x21f2811d610",
+          "actor": "0x21f44c17340",
+          "attributes": "0x21f450658e0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "victimEnd": {
+        "source": [
+          -48.1555,
+          -152.225,
+          66.7101
+        ],
+        "observer": [
+          -48.43,
+          -152.015,
+          66.5728
+        ]
+      },
+      "victimGapM": 0.35,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 94,
+        "rootsDelta": 351,
+        "bodyAppliedDelta": 351,
+        "positionBefore": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "positionAfter": [
+          -48.4344,
+          -152.016,
+          66.5731
+        ]
+      },
+      "guardHealthObserverAfter": 10,
+      "restored": true
+    },
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [],
+      "guardWaitMs": 81594,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.1153824,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": true,
+      "stanceBefore": [
+        0,
+        1
+      ],
+      "inputAt": "2026-10-18T14:12:30.5095721+02:00",
+      "scenes": [],
+      "restored": true
+    }
+  ],
+  "scope": "Takedown variants (side, front, drop, slide; choke and lethal; both source roles) on a host-owned NPC under the product controller: native scene, partner phases, shared outcome and victim position; fixture restored after every case."
+}

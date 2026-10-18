@@ -39,9 +39,15 @@ inline unsigned nativePowerVariant(unsigned character,const std::string& asset,c
             if(asset==prefix+"power_grapple_cast_in_loop.midnightscene"&&duration==200)return 5;
             if(asset==prefix+"power_grapple_cast_out.midnightscene"&&duration==133)return 6;
         }
+        // 1214cr (#11): the live Far Reach aim loop runs as Scene_2 when the aim has no valid target (confirmed runtime,
+        // power-scenes-probe-v1351a; Scene_1 with a valid target, 1351b); with Scene_1 only, the partner never presented
+        // the aim hold (coverage-v1350a).
+        if(sub=="Scene_2"&&asset==prefix+"power_grapple_cast_in_loop.midnightscene"&&duration==200)return 5;
         if(asset==prefix+"power_grapple_pull.midnightscene"){
             if(sub=="pullIn"&&duration==266)return 7;
             if(sub=="pullLoop"&&duration==100)return 8;
+            // 1214cs: the live pull loop runs as subscene "pull" (confirmed runtime, power-scenes-probe-v1351b).
+            if(sub=="pull"&&duration==100)return 8;
             if(sub=="pullOut"&&duration==366)return 9;
         }
     }

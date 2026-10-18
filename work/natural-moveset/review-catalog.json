@@ -6505,7 +6505,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry, hold and release read on both characters. Only rear chokes were judged, and the victim doesn't react in these older takes. Scope: rear presentation accepted (sweep); side/front runtime in audits 1257 and 1254c. Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "partner-takedown-exclusion-host-v388/host-rear-choke.mp4",
@@ -6537,13 +6537,83 @@
         "choke-finish-emily-v598/client-rear-choke.mp4",
         "choke-finish-emily-v598/observer.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "visual_accepted": false,
       "evidence": [
         "../movement-integration/crouched-takedown-audit-v1246.json",
         "../movement-integration/takedown-variants-audit-v1257.json",
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "takedown-variants-v1254i/result.json",
+        "takedown-variants-v1254h/result.json",
+        "takedown-variants-v1254j/result.json",
+        "takedown-variants-v1254l/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1354-chokes.json",
+        "decision": "complete",
+        "scope": "Chokes from behind (choke_back), the left and right sides (choke_left/choke_right) and the front (choke_front), each followed by choke_loop and choke_win, in both source roles: presented on the partner and the guard unconscious in both worlds at the same place.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254i",
+            "cases": [
+              "client-back-choke",
+              "host-back-choke"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254h",
+            "cases": [
+              "client-left-choke",
+              "host-left-choke",
+              "host-right-choke",
+              "host-front-choke"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254j",
+            "cases": [
+              "client-right-choke"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254l",
+            "cases": [
+              "client-front-choke"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254i/back-client-choke-observer.mp4",
+            "verdict": "Emily takes the guard from behind, holds him in the choke while he struggles and lowers him to the floor."
+          },
+          {
+            "video": "takedown-variants-v1254h/left-client-choke-observer.mp4",
+            "verdict": "Emily comes in at the guard's left side, wraps him in the choke and lowers him unconscious."
+          },
+          {
+            "video": "takedown-variants-v1254h/left-host-choke-observer.mp4",
+            "verdict": "Corvo seizes the guard from his left side, holds him through the struggle and lets him sag to the floor."
+          },
+          {
+            "video": "takedown-variants-v1254h/right-host-choke-observer.mp4",
+            "verdict": "Corvo grabs the guard from the right, holds the choke while the guard kicks, and lowers him."
+          },
+          {
+            "video": "takedown-variants-v1254j/right-client-choke-observer.mp4",
+            "verdict": "Emily steps in from the guard's right and chokes him; he folds to the floor beside her."
+          },
+          {
+            "video": "takedown-variants-v1254h/front-host-choke-observer.mp4",
+            "verdict": "Corvo seizes the guard face to face; the guard sinks to the floor in front of him (partly hidden behind Corvo)."
+          },
+          {
+            "video": "takedown-variants-v1254l/front-client-choke-observer.mp4",
+            "verdict": "Emily faces the guard, seizes him and holds the choke, then lowers him to the floor."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "crouched_takedown",
@@ -6628,15 +6698,42 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1257 (1214e+, product controller, natural guard AI): assassination_drop_back (census id 19) is presented by the partner and the death is shared in both source roles (victims 0.0 m apart). Visual accepted from both windows as functional (fast-back stab donor normalized to the native clock). Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "takedown-variants-v1254b/drop-client-lethal-observer.mp4",
         "takedown-variants-v1254b/drop-host-lethal-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/takedown-variants-audit-v1257.json"
-      ]
+        "../movement-integration/takedown-variants-audit-v1257.json",
+        "takedown-variants-v1254k/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1353-aerial.json",
+        "decision": "complete",
+        "scope": "The drop assassination (assassination_drop_back, 1800-2000 ms) in both source roles: presented on the partner from the native scene, the guard dead in both worlds at the same place.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254k",
+            "cases": [
+              "client-drop-lethal",
+              "host-drop-lethal"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+            "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+          },
+          {
+            "video": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+            "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "aerial_nonlethal_takedown",
@@ -6656,15 +6753,42 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1257: choke_drop_back (census id 58) is presented and the knockout shared in both source roles (the client asks the host for the knockout when the scene begins; 0.0-0.01 m). Visual accepted from both windows as functional (choke donor). Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "takedown-variants-v1254b/drop-client-choke-observer.mp4",
         "takedown-variants-v1254b/drop-host-choke-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/takedown-variants-audit-v1257.json"
-      ]
+        "../movement-integration/takedown-variants-audit-v1257.json",
+        "takedown-variants-v1254k/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1353-aerial.json",
+        "decision": "complete",
+        "scope": "The drop choke (choke_drop_ready then choke_drop_back, 2166-2633 ms) in both source roles: presented on the partner, the guard unconscious in both worlds at the same place.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254k",
+            "cases": [
+              "client-drop-choke",
+              "host-drop-choke"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254k/drop-host-choke-observer.mp4",
+            "verdict": "Corvo drops onto the guard, forces him to his knees and holds him in the choke until he slumps to the floor."
+          },
+          {
+            "video": "takedown-variants-v1254k/drop-client-choke-observer.mp4",
+            "verdict": "Emily lands on the guard from above and takes him down; he lies unconscious at her feet."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "sliding_takedown",
@@ -6684,7 +6808,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1257: choke_slide_back (73) and assassination_slide_back (33) are presented and shared in both source roles; slide takedowns keep physical stance 5 inside the paired state (0.0-0.29 m). Visual accepted from both windows as functional. Rear nonlethal prototype only. Revision required: initial sweep/body overlap, recovery and Corvo hand contact (up to 4cm residual) need work. Emily wrist targets fit within 0.3mm, which does not establish acceptable hand/mesh contact. Targets hold their native ragdoll-time pose; physics and live pairing are absent.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "takedown-variants-v1254b/slide-client-lethal-observer.mp4",
@@ -6693,8 +6817,43 @@
         "takedown-variants-v1254b/slide-host-choke-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/takedown-variants-audit-v1257.json"
-      ]
+        "../movement-integration/takedown-variants-audit-v1257.json",
+        "takedown-variants-v1254k/result.json",
+        "takedown-variants-v1254h/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1355-slide.json",
+        "decision": "complete",
+        "scope": "The slide assassination (assassination_slide_back, 2000-2333 ms) in both source roles in two takes: presented on the partner, the guard dead in both worlds at the same place; the slide choke (census 73) from audit 1257.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254k",
+            "cases": [
+              "client-slide-lethal",
+              "host-slide-lethal"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254h",
+            "cases": [
+              "client-slide-lethal",
+              "host-slide-lethal"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254h/slide-host-lethal-observer.mp4",
+            "verdict": "Corvo slides in behind the guard and strikes as he rises; the guard falls and Corvo stands over the body."
+          },
+          {
+            "video": "takedown-variants-v1254k/slide-client-lethal-observer.mp4",
+            "verdict": "Emily slides in low behind the guard and strikes; he pitches forward onto the floor and she straightens behind him."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "wall_and_window_variants",
@@ -8685,7 +8844,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival world FX, discrete arrival and the cancelled second aim all read correctly on the partner. Only a dark streak during the lab's reset back to the origin is visible, and it is not part of the power. Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "blink",
@@ -8719,13 +8878,20 @@
         "blink-regression-v26-v2/result.json",
         "../movement-integration/visual-sweep-v1260/powers-review.json",
         "coverage-v1332c/result.json",
-        "coverage-v1332d/result.json"
+        "coverage-v1332d/result.json",
+        "coverage-v1350a/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "Aim, release, departure burst and arrival are presented (power variants 1-3; 1332c/d).",
+        "audit": "completion-audit-v1350-blink.json",
+        "decision": "complete",
+        "scope": "Blink in the Corvo source role: aim (variants 1, 2), release (3), the departure burst and arrival presented (1332c/d); a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion within about 0.3 s, and a following cast still releases and travels 4.8 m (1350a). Blink is Corvo-only; the Emily source role has no Blink.",
         "takes": [
+          {
+            "take": "coverage-v1350a",
+            "cases": [
+              "host-blinkcancel"
+            ]
+          },
           {
             "take": "coverage-v1332c",
             "cases": [
@@ -8741,13 +8907,17 @@
         ],
         "visual": [
           {
+            "video": "coverage-v1350a/host-blinkcancel-observer.mp4",
+            "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+          },
+          {
             "video": "coverage-v1332d/host-blink-observer.mp4",
             "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
           }
         ],
-        "lifecycle": "See method.",
-        "remaining": "A cancelled aim on the current candidate (the coverage cases always release)."
-      }
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "corvo_blink_pull_and_kick_variants",
@@ -8767,7 +8937,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Exact native assets confirm Blink Assault. Full-body kick and slash sequences are recorded. No Corvo pulling variant was confirmed; pulling remains under Emily Far Reach. Teleport/target timing, contact, knockdown and runtime binding are pending. Emily is a comparison adaptation. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "blink",
@@ -8791,7 +8961,38 @@
         }
       ],
       "in_game_recordings": [],
-      "native_effects_status": "not_verified"
+      "native_effects_status": "not_verified",
+      "completion": {
+        "audit": "completion-audit-v1356-blink-assault.json",
+        "decision": "complete",
+        "scope": "Blink Assault in the Corvo source role: the blink (power variants 1-3, departure and arrival effects) followed by the native kick on arrival, presented on the partner as the kick (variant 17, 5-6 samples per take). Corvo-only (Blink).",
+        "takes": [
+          {
+            "take": "coverage-v1359b",
+            "cases": [
+              "host-blinkkick"
+            ]
+          },
+          {
+            "take": "coverage-v1359a",
+            "cases": [
+              "host-blinkkick"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+            "verdict": "Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true,
+      "evidence": [
+        "coverage-v1359b/result.json",
+        "coverage-v1359a/result.json"
+      ]
     },
     {
       "id": "corvo_dark_vision_cast_end",
@@ -13548,7 +13749,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pull, impact and recovery read correctly. The only visible artifact is the reset streak back to the origin, which is a fixture move. Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "far_reach",
@@ -13580,24 +13781,41 @@
       "evidence": [
         "grapple-regression-v26-v2/result.json",
         "../movement-integration/visual-sweep-v1260/powers-review.json",
-        "coverage-v1332c/result.json"
+        "coverage-v1332c/result.json",
+        "coverage-v1353a/result.json",
+        "coverage-v1350a/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "The aim is presented (power variant 4); the pull toward a floor point is too short to film from the side.",
+        "audit": "completion-audit-v1351-far-reach.json",
+        "decision": "complete",
+        "scope": "Far Reach in the Emily source role: cast-in and aim loop (variants 4, 5), release (6) and the pull-in (7) are presented; a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion, and a following cast releases and travels 9.2 m to its arrival (1353a); a long reach travels 9.6 m down the lane with the tether at her hand (1350a). Far Reach is Emily-only; the Corvo source role has Blink instead.",
         "takes": [
           {
-            "take": "coverage-v1332c",
+            "take": "coverage-v1353a",
             "cases": [
-              "client-farreach"
+              "client-farreachcancel"
+            ]
+          },
+          {
+            "take": "coverage-v1350a",
+            "cases": [
+              "client-farreachfar"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "A far reach to a distant target with travel and arrival in frame, and a cancelled aim."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1350a/client-farreachfar-observer.mp4",
+            "verdict": "From behind, Emily reaches her left hand down the lane, is pulled off her feet with the tether light at her hand, flies about ten metres and lands at the far end."
+          },
+          {
+            "video": "coverage-v1353a/client-farreachcancel-observer.mp4",
+            "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away down the lane; the scene is dim but the poses read."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "emily_far_reach_pull_variants",
@@ -13772,7 +13990,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (emily accept). The Domino point-and-link gesture and its recovery read correctly, and the native mark effect appears on the target. Framing in v218 is cramped at the screen edge. Domino scoped body/marks, partner exclusion, beams, aim cancellation, target deselection and standing final recovery remain preserved. Paired armed crouchv250/v256 verifies all ordinary/final gestures, continuous root, target removal and standing recovery; railing/darkness limit fine visual acceptance. Native holsteredv253 confirms ordinary phases with sword remaining unequipped in standing and crouch. Standing source passes; crouched source fails inventory audit because native X pickpockets a nearby key (checkpoint/protected14 restore). Candidate258 validates the same equipment identity across reads and enables bank48 empty-hand contexts, but its first paired run exposed a remaining source/wire armed-only gate. Candidate261 shares that equipment-context rule between sender and receiver and uses semantic protocol45/336bytes. Paired tests look away before holstering. Native v263 standing/crouched holstered final observations each pass7 checks; candidate264 accepts their exact400ms scene and grounded recovery with equipment/ownership guards retained. Bank48/301 and protocol45 remain unchanged. Completed paired contexts: domino-context-crouched-holstered-final-v264 PASS; domino-context-crouched-holstered-moving-v263 PASS; domino-context-crouched-holstered-target-v262 PASS; domino-context-crouched-holstered-v261 PASS; domino-context-standing-holstered-final-v264 PASS; domino-context-standing-holstered-v258 FAIL: Native transport/presentation retired: native_state_stale; domino-context-standing-holstered-v261 PASS. Broader air/slide/interruptions, shared NPC authority and gameplay outcomes remain unfinished. No complete-power or final visual acceptance.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "domino",
@@ -15515,24 +15733,30 @@
       },
       "evidence": [
         "../movement-integration/visual-sweep-v1260/powers-review.json",
-        "coverage-v1332c/result.json"
+        "coverage-v1332c/result.json",
+        "coverage-v1354a/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "The cast gesture is presented (power variants 19, 20, 22) with no target.",
+        "audit": "completion-audit-v1352-domino.json",
+        "decision": "complete",
+        "scope": "Domino in the Emily source role in product mode: the cast, select and release gestures (variants 19-22), a mark on each of two real guards and the native link beam between them are presented on the host and held between casts (17 samples with both marks), and a native X cancellation of a third aim adds no mark. Marks and beam are cosmetic native FX on the partner presentation; the partner never links, damages or spends mana.",
         "takes": [
           {
-            "take": "coverage-v1332c",
+            "take": "coverage-v1354a",
             "cases": [
-              "client-domino"
+              "client-dominolink"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "Marking and linking real targets (mission guards) and the link effect on the observer."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1354a/client-dominolink-observer.mp4",
+            "verdict": "On the upper floor Emily throws her hand toward the guard and a golden mark flares on him; downstairs she casts at the second guard and a bright golden link beam runs up to the first, staying in place while she aims once more and lowers her hand."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "emily_doppelganger_cast",

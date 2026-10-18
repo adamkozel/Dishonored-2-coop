@@ -1,0 +1,77 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-kickledge: No native kick at the railing (source throwhit never seen; partner combat variants 1,2,7) | client-kickledge: No native kick at the railing (source throwhit never seen; partner combat variants 1,2,7)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "kickledge",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native kick at the railing (source throwhit never seen; partner combat variants 1,2,7)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "kickWaitMs": 52835,
+      "kickGuard": [
+        -44.2624,
+        -143.053,
+        66.4
+      ],
+      "kickGuardFacing": [
+        0.8880602317264709,
+        0.45972711995914156
+      ],
+      "camera": [
+        -47.7624,
+        -143.953,
+        68.0
+      ],
+      "lowWeightSamples": 21,
+      "teleports": [],
+      "sourceKickSamples": 0,
+      "kickSamples": 0,
+      "combatVariants": [
+        1,
+        2,
+        7
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kickledge",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native kick at the railing (source throwhit never seen; partner combat variants 1,2,7)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "kickWaitMs": 8336,
+      "kickGuard": [
+        -44.1444,
+        -142.992,
+        66.4
+      ],
+      "kickGuardFacing": [
+        -0.0009100866231066568,
+        0.9999995858710836
+      ],
+      "camera": [
+        -47.6444,
+        -143.892,
+        68.0
+      ],
+      "lowWeightSamples": 6,
+      "teleports": [],
+      "sourceKickSamples": 0,
+      "kickSamples": 0,
+      "combatVariants": [
+        1,
+        2,
+        7
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "The native kick at the balcony railing (1355, #11), Domino on the Dunwall tutorial guards (1354), power cancellation and long Far Reach (1350), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}

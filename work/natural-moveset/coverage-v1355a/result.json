@@ -1,0 +1,56 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-kickledge: No native kick at the railing (source throwhit never seen; partner combat variants ) | client-kickledge: Partner presentation weight dropped in 9 samples",
+  "cases": [
+    {
+      "source": "host",
+      "case": "kickledge",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native kick at the railing (source throwhit never seen; partner combat variants )",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "kickWaitMs": 24095,
+      "kickGuard": [
+        -44.4622,
+        -143.168,
+        66.4
+      ],
+      "camera": [
+        -47.9622,
+        -144.068,
+        68.0
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "sourceKickSamples": 0,
+      "kickSamples": 0,
+      "combatVariants": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kickledge",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner presentation weight dropped in 9 samples",
+      "checks": [],
+      "kickWaitMs": 7014,
+      "kickGuard": [
+        -44.4926,
+        -143.172,
+        66.4
+      ],
+      "camera": [
+        -47.9926,
+        -144.072,
+        68.0
+      ],
+      "lowWeightSamples": 9,
+      "teleports": [],
+      "restored": true
+    }
+  ],
+  "scope": "The native kick at the balcony railing (1355, #11), Domino on the Dunwall tutorial guards (1354), power cancellation and long Far Reach (1350), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}

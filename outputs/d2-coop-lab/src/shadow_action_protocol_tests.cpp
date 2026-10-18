@@ -400,6 +400,7 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_right_b_hit.midnightscene")==22&&
             nativeCombatVariant("midnight/gameplay/player/base/combat/sword_attack_left_b_hit.midnightscene")==23&&
             CombatPresentation::clip(22,1)==CombatPresentation::clip(2,1)&&CombatPresentation::clip(23,1)==CombatPresentation::clip(4,1),"b-swing hit scenes (1258b) present their slash-b clips");
+      check(nativeCombatVariant("midnight/gameplay/player/base/combat/blink_attack_focus.midnightscene")==17&&CombatPresentation::clip(17,1)==353,"Blink Assault kick (1214ct) presents the native kick clip");
       {CombatPresentation t;check(t.push({10,1,22,1,100,733})&&!t.push({20,2,23,1,100,700})&&!t.push({30,3,24,1,100,733}),"b-swing hits own exactly 733 ms; no variant past 23");}
       check(!heavyClock.push({250,2,18,2,0,833})&&!heavyClock.push({250,2,18,1,0,834}),"heavy loop and duration guarded");
     }

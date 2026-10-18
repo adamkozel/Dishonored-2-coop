@@ -992,6 +992,17 @@ int main(int argc, char** argv) {
             if(valid&&s.network.equipment.instantiated){known=s.network.equipment;discovered=true;}else if(!valid&&stage==1)discovered=false;
             std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"valid\":"<<(valid?"true":"false")<<",\"stage\":"<<stage
                 <<",\"cached\":"<<(cached?"true":"false")<<",\"readMs\":"<<(end.QuadPart-begin.QuadPart)*1000.0/frequency.QuadPart;
+            // 1214cs: when the connection part fails (stages 11-15), list each connection's beam FX lookup to show which check fails.
+            if(!valid&&stage>=11&&stage<=15){NativeDominoTargets n{};unsigned st=0;
+                if(readNativeDominoTargetsFrame(reader,base,n,&st,nullptr)&&n.present){std::uintptr_t list=0;unsigned count=0;
+                    if(reader(n.component+0x15b0,&list,8)&&reader(n.component+0x15b8,&count,4)&&list){std::cout<<",\"diagnostic\":[";
+                        for(unsigned i=0;i<(count&0xffffff)&&i<12;++i){std::uintptr_t ptr=0;unsigned fx=0,owner=0;float progress=0;
+                            const bool fields=reader(list+i*8,&ptr,8)&&ptr&&reader(ptr+0x2c,&fx,4)&&reader(ptr+0x30,&owner,4)&&reader(ptr+0x28,&progress,4);
+                            NativeWindblastFxRecord r{};const bool found=fields&&fx!=~0u&&readNativeFxRecordById(reader,base,n.equipment.player.sword.game,fx,r);
+                            if(i)std::cout<<',';std::cout<<"{\"fields\":"<<(fields?"true":"false")<<",\"fx\":"<<fx<<",\"owner\":"<<owner<<",\"progress\":"<<progress<<",\"found\":"<<(found?"true":"false");
+                            if(found)std::cout<<",\"recordOwner\":"<<r.owner<<",\"ownerIsPlayer\":"<<(r.ownerActor==n.equipment.player.sword.actor?"true":"false")<<",\"name\":\""<<r.name<<"\"";
+                            std::cout<<'}';}
+                        std::cout<<']';}}}
             if(valid){std::cout<<",\"present\":"<<(s.network.present?"true":"false")<<",\"networkHandle\":"<<s.network.handle<<",\"targets\":"<<s.network.targets.size()<<",\"connections\":[";
                 bool first=true;for(const auto& x:s.connections){if(!first)std::cout<<',';first=false;
                     std::cout<<"{\"from\":"<<x.from<<",\"to\":"<<x.to<<",\"state\":"<<x.state<<",\"progress\":"<<x.progress<<",\"hasBeam\":"<<(x.hasBeam?"true":"false")

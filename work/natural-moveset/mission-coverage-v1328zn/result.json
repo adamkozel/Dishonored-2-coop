@@ -1,0 +1,98 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-domino: Partner Domino marks presented: at most 1 at once (ready masks 6,4,38,0)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "domino",
+      "observer": "host",
+      "passed": false,
+      "failure": "Partner Domino marks presented: at most 1 at once (ready masks 6,4,38,0)",
+      "checks": [],
+      "guards": [
+        [
+          4.43459,
+          59.1991,
+          15.9529
+        ],
+        [
+          8.39047,
+          49.2112,
+          16.5128
+        ]
+      ],
+      "guardFacing": [
+        -0.1620448991529278,
+        0.9867833858849253
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            0.9867833858849253,
+            0.1620448991529278,
+            7
+          ],
+          "rest": [
+            12.9206,
+            55.6059,
+            16.9379
+          ],
+          "ok": true
+        }
+      ],
+      "camera": [
+        11.369443092713865,
+        50.15753837846986,
+        19.4379
+      ],
+      "stanceBeforeCast": 1,
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "before": {
+        "marks": 0,
+        "beams": 0
+      },
+      "aims": [
+        {
+          "target": "script_spawner_checkpoint_guard_01",
+          "yaw": 155.09288315421892,
+          "pitch": 4.2561537561599545,
+          "distance": 9.422092739280378
+        },
+        {
+          "target": "script_spawner_checkpoint_guard_02",
+          "yaw": -130.2327531369356,
+          "pitch": 1.0836167653382491,
+          "distance": 9.34182400331434
+        },
+        {
+          "target": "script_spawner_checkpoint_guard_01",
+          "yaw": 157.7804677999945,
+          "pitch": 4.0342522163870305,
+          "distance": 9.953553734038916
+        }
+      ],
+      "castSamples": 40,
+      "castVariants": [
+        19,
+        20,
+        22
+      ],
+      "marksMax": 1,
+      "beamsMax": 0,
+      "readyMasks": {
+        "6": 12,
+        "4": 50,
+        "38": 6,
+        "0": 104
+      },
+      "marksStarted": 9,
+      "beamsStarted": 0,
+      "marksAfterCancel": 4
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

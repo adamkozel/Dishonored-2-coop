@@ -1,0 +1,99 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: slide-client-choke: Remote phase 1 not presented | slide-host-choke: Remote phase 1 not presented",
+  "cases": [
+    {
+      "approach": "slide",
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": false,
+      "failure": "Remote phase 1 not presented",
+      "checks": [],
+      "guardWaitMs": 82261,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.115386,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": true,
+      "stanceBefore": [
+        0,
+        1
+      ],
+      "inputAt": "2026-10-18T14:23:13.1730812+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_combat_lose.midnightscene|1500",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400"
+      ],
+      "sceneIds": [
+        1,
+        2
+      ],
+      "restored": true
+    },
+    {
+      "approach": "slide",
+      "source": "host",
+      "kind": "choke",
+      "observer": "client",
+      "passed": false,
+      "failure": "Remote phase 1 not presented",
+      "checks": [],
+      "guardWaitMs": 75247,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.115386,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": true,
+      "stanceBefore": [
+        0,
+        1
+      ],
+      "inputAt": "2026-10-18T14:25:27.8804368+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_combat_lose.midnightscene|1500",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400"
+      ],
+      "sceneIds": [
+        1,
+        2
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Takedown variants (side, front, drop, slide; choke and lethal; both source roles) on a host-owned NPC under the product controller: native scene, partner phases, shared outcome and victim position; fixture restored after every case."
+}

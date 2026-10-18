@@ -1,0 +1,44 @@
+{
+  "audit": "completion-audit-v1350-blink",
+  "family": "powers",
+  "candidate": "candidate-npc-combat-v1214cq",
+  "method": "The decision rests on Dunwall safe-room takes under the product controller with Blink granted by name (lab-only coop_grant_named) and cast with the native left trigger, the partner checked from its own power presentation state on the observer: coverage-v1332c/d (aim, release, departure and arrival, candidates 1214cm/cn) and coverage-v1350a (candidate 1214cq): Corvo aims, cancels natively with X while LT is held (the cancel of the v26 power regression), then aims and releases again. The partner must present the aim (variants 1, 2), no release (3) and no source movement after the cancel, a return to locomotion, then the second release. The departure and arrival effects are the native network power FX (chapter 99, 1071). The checkpoint is reloaded after every case.",
+  "items": [
+    {
+      "id": "corvo_blink_aim_cancel_release_arrive",
+      "decision": "complete",
+      "scope": "Blink in the Corvo source role: aim (variants 1, 2), release (3), the departure burst and arrival presented (1332c/d); a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion within about 0.3 s, and a following cast still releases and travels 4.8 m (1350a). Blink is Corvo-only; the Emily source role has no Blink.",
+      "takes": [
+        {
+          "take": "coverage-v1350a",
+          "cases": [
+            "host-blinkcancel"
+          ]
+        },
+        {
+          "take": "coverage-v1332c",
+          "cases": [
+            "host-blink"
+          ]
+        },
+        {
+          "take": "coverage-v1332d",
+          "cases": [
+            "host-blink"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1350a/host-blinkcancel-observer.mp4",
+          "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+        },
+        {
+          "video": "coverage-v1332d/host-blink-observer.mp4",
+          "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

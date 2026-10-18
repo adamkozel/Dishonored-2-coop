@@ -1,0 +1,71 @@
+{
+  "source": "client",
+  "case": "guardfight",
+  "observer": "host",
+  "passed": false,
+  "failure": "No block impact or timed parry presented (hits 0, attacks 0); reset: Native read failed --player-states",
+  "checks": [],
+  "guardFacing": [
+    -0.253421956814368,
+    -0.9673558351529062
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.253421956814368,
+        -0.9673558351529062
+      ],
+      "rest": [
+        3.635,
+        44.126,
+        -28.1456
+      ],
+      "statesReadable": true,
+      "ok": false
+    },
+    {
+      "offset": [
+        0.9673558351529062,
+        -0.253421956814368
+      ],
+      "rest": [
+        5.73005,
+        45.7315,
+        16.525
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "phaseLog": [
+    {
+      "phase": "block",
+      "ms": 3689
+    },
+    {
+      "phase": "open",
+      "guardSamples": 0,
+      "ms": 26194
+    },
+    {
+      "phase": "attack",
+      "hitSamples": 0,
+      "ms": 41722
+    }
+  ],
+  "counterPresses": [],
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcomeWaitMs": 697,
+  "guard": "script_spawner_checkpoint_guard_01",
+  "blockImpacts": 0,
+  "timedParries": 0,
+  "hitReactions": 0,
+  "stunVariants": [],
+  "attackSamples": 0,
+  "attackVariants": [],
+  "minSourceHealth": 0.0
+}

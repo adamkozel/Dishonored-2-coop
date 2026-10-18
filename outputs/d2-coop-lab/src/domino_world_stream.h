@@ -7,7 +7,7 @@ struct DominoWorldStream {
     std::uint64_t token=0,peerToken=0,sourceEvent=0;ULONGLONG nextSample=0,lease=0;
     NativeDominoItem known{};bool discovered=false;DominoWorldOrder order{};CoopDominoWorldPacket presented{};
 } dominoWorldStream;
-std::uint64_t dominoWorldSequence=0,dominoWorldEvent=0,dominoWorldSent=0,dominoWorldReceived=0,dominoWorldRejected=0,dominoWorldUnknown=0,dominoWorldPresented=0;
+std::uint64_t dominoWorldSequence=0,dominoWorldEvent=0,dominoWorldSent=0,dominoWorldReceived=0,dominoWorldRejected=0,dominoWorldUnknown=0,dominoWorldPresented=0,dominoWorldMarksOnly=0;
 double dominoReadMaxMs=0,dominoScopedReadMaxMs=0;std::uint64_t dominoReadCount=0,dominoScopedReadCount=0;unsigned dominoReadStage=0;
 bool dominoWorldCurrent(ULONGLONG tick){return shadowStreamCurrent(tick)&&shadowStream.peerReady&&dominoWorldStream.token==shadowStream.token&&dominoWorldStream.peerToken==shadowStream.peerToken;}
 void sampleDominoWorld(ULONGLONG tick){
@@ -19,7 +19,13 @@ void sampleDominoWorld(ULONGLONG tick){
     const bool valid=readNativeDominoLinks(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),links,&dominoReadStage,cached?&s.known:nullptr);
     const double elapsed=presentationClock()-start;dominoReadMaxMs=(std::max)(dominoReadMaxMs,elapsed);++dominoReadCount;
     if(cached){dominoScopedReadMaxMs=(std::max)(dominoScopedReadMaxMs,elapsed);++dominoScopedReadCount;}
-    if(!valid){if(dominoReadStage==1)s.discovered=false;++dominoWorldUnknown;return;}
+    // 1214cs (#11): after the casts in mission-coverage-v1328zl the connection part failed at stage 14 (a link's beam FX no
+    // longer validated) while both marks stayed on the guards, and the whole snapshot was dropped, so the partner marks
+    // vanished between casts. When only the connection part (stages 11-16) fails, publish the exactly read marks alone.
+    bool marksOnly=false;
+    if(!valid&&dominoReadStage>=11&&dominoReadStage<=16){links={};unsigned targetStage=0;
+        if(readNativeDominoTargets(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),links.network,&targetStage,cached?&s.known:nullptr)){marksOnly=true;++dominoWorldMarksOnly;}}
+    if(!valid&&!marksOnly){if(dominoReadStage==1)s.discovered=false;++dominoWorldUnknown;return;}
     if(world.equipment.instantiated){s.known=world.equipment;s.discovered=true;}
     const auto handle=world.present?world.handle:0u;
     if(!s.sourceEvent&&!handle)return;

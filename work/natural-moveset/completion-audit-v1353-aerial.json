@@ -1,0 +1,58 @@
+{
+  "audit": "completion-audit-v1353-aerial",
+  "family": "paired_actions",
+  "candidate": "candidate-npc-combat-v1214cs",
+  "method": "The decisions rest on takedown-variants-v1254k (candidate 1214cs, harness 1254h) under the product controller with natural guard AI and the NPC stream on, both source roles: the case waits until Dunwall tutorial guard 2 stands still at his long patrol pause, holds the free camera 3.6 m ahead of him looking back, places the source 3 m above and slightly behind him, and presses the attack (lethal) or choke (nonlethal) while falling. The source must play a native drop takedown, the partner must present every census scene it played, both worlds must reach the same outcome (dead or unconscious) and the victim must end within 2 m in both worlds; the checkpoint is reloaded after every case. Earlier functional evidence: audit 1257 (drop scenes 19 and 58 presented and shared) and takedown-variants-v1254g (passing, poorly framed).",
+  "items": [
+    {
+      "id": "aerial_drop_kill",
+      "decision": "complete",
+      "scope": "The drop assassination (assassination_drop_back, 1800-2000 ms) in both source roles: presented on the partner from the native scene, the guard dead in both worlds at the same place.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254k",
+          "cases": [
+            "client-drop-lethal",
+            "host-drop-lethal"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+          "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+        },
+        {
+          "video": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+          "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "aerial_nonlethal_takedown",
+      "decision": "complete",
+      "scope": "The drop choke (choke_drop_ready then choke_drop_back, 2166-2633 ms) in both source roles: presented on the partner, the guard unconscious in both worlds at the same place.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254k",
+          "cases": [
+            "client-drop-choke",
+            "host-drop-choke"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254k/drop-host-choke-observer.mp4",
+          "verdict": "Corvo drops onto the guard, forces him to his knees and holds him in the choke until he slumps to the floor."
+        },
+        {
+          "video": "takedown-variants-v1254k/drop-client-choke-observer.mp4",
+          "verdict": "Emily lands on the guard from above and takes him down; he lies unconscious at her feet."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

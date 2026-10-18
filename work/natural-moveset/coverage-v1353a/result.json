@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachcancel",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "farreachcancel presented (24 samples, variants 4,5,6,7) and recovered",
+        "Aim presented (8 samples), cancelled with X: no release, source moved 0 m, locomotion returned (14 samples); second cast released (1 samples)"
+      ],
+      "camera": [
+        -34.0,
+        -155.6,
+        68.4
+      ],
+      "lowWeightSamples": 3,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 24,
+      "powerVariants": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "recovered": 9,
+      "cancel": {
+        "aimSamples": 8,
+        "releaseAfterCancel": 0,
+        "idleAfterCancel": 14,
+        "sourceMovedAfterCancel": 0.0,
+        "releaseSecondCast": 1
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Power cancellation and long Far Reach (1350, #11), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
