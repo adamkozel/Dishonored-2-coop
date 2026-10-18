@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "slope",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Ramp grade 0.144: partner slope gait up (151 samples) and down (116 samples) over 1.7 m"
+      ],
+      "slopeGrade": 0.144,
+      "upSamples": 151,
+      "downSamples": 116,
+      "climbedMetres": 1.7,
+      "lowWeight": 4
+    },
+    {
+      "source": "client",
+      "case": "slope",
+      "observer": "host",
+      "passed": true,
+      "failure": "reset: Native read failed --player-states",
+      "checks": [
+        "Ramp grade 0.144: partner slope gait up (81 samples) and down (51 samples) over 2.78 m"
+      ],
+      "slopeGrade": 0.144,
+      "upSamples": 81,
+      "downSamples": 51,
+      "climbedMetres": 2.78,
+      "lowWeight": 149
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

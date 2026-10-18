@@ -115,7 +115,9 @@ try{
      if($slopeA.Count-ne3-or$slopeB.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
      $ax=$slopeA[0];$ay=$slopeA[1];$az=$slopeA[2];$bx=$slopeB[0];$by=$slopeB[1];$bz=$slopeB[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
      $ux=($bx-$ax)/$len;$uy=($by-$ay)/$len;$up=[Math]::Atan2($uy,$ux)*180/[Math]::PI;$dn=[Math]::Atan2(-$uy,-$ux)*180/[Math]::PI;$row.slopeGrade=[Math]::Round(($bz-$az)/$len,3)
-     $cx=($ax+$bx)/2-3.5*$uy;$cy=($ay+$by)/2+3.5*$ux;$cz=($az+$bz)/2+2.2;$cyaw=[Math]::Atan2(($ay+$by)/2-$cy,($ax+$bx)/2-$cx)*180/[Math]::PI
+     # 1328zj: a camera beside the midpoint sat inside a wall of the narrow street; hold it 3 m behind the start along the
+     # slope, 2.4 m up, looking up the street. Both players' health is held (the observer was killed in 1328zj).
+     $cx=$ax-3*$ux;$cy=$ay-3*$uy;$cz=$az+2.4;$cyaw=$up;C $source 'coop_player_health_hold on';C $peer 'coop_player_health_hold on'
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      # 1328zi: the 120 m placement left the shadow stream stale for 3 s after the walk began (weight 0, mask 8|16); wait
@@ -340,7 +342,7 @@ try{
     foreach($r in 'host','client'){for($m=0;$m-lt4;$m++){$lg=try{(S $r).localGameLogicState}catch{1};if($lg-in2,12){I $r B 200;Start-Sleep -Milliseconds 900}elseif($lg-in8,15){I $r A 300;Start-Sleep -Milliseconds 1500}else{break}}}
     try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
      $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}
-    try{C $source 'coop_player_health_hold off'}catch{}}
+    try{C $source 'coop_player_health_hold off'}catch{};try{C $peer 'coop_player_health_hold off'}catch{}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
  $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
