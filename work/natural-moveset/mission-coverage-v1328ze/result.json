@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-slope: Slope gait not presented (up 10, down 0)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "slope",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Ramp grade 0.629: partner slope gait up (38 samples) and down (38 samples) over 3.24 m"
+      ],
+      "slopeGrade": 0.629,
+      "upSamples": 38,
+      "downSamples": 38,
+      "climbedMetres": 3.24,
+      "lowWeight": 25
+    },
+    {
+      "source": "client",
+      "case": "slope",
+      "observer": "host",
+      "passed": false,
+      "failure": "Slope gait not presented (up 10, down 0)",
+      "checks": [],
+      "slopeGrade": 0.629,
+      "upSamples": 10,
+      "downSamples": 0,
+      "climbedMetres": 3.36,
+      "lowWeight": 90
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

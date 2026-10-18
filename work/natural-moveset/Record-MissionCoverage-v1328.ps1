@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[string]$WalkStarts='',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -81,7 +81,9 @@ try{
      # Lab-only exploration (scans 1328g-x lost the source in the bay): walk from known ground in 8 headings for 6 s each,
      # tracing the source position every 100 ms, to find a smooth incline (z rising without step jumps) for the slope case.
      C $source 'coop_player_health_hold on';$walks=[Collections.Generic.List[object]]::new()
-     foreach($start in @(@($sp.x,$sp.y,$sp.z,'dock'),@(($ChainX-1.2),$ChainY,($ChainZ-2.22),'chain'))){foreach($h in 0..7){
+     # -WalkStarts 'x,y,z;x,y,z' replaces the default starts (1328ze: the incline found from the chain street is stairs).
+     $starts=if($WalkStarts){@($WalkStarts-split';'|Where-Object {$_}|ForEach-Object {$v=@($_-split','|ForEach-Object {[double]$_});,@($v[0],$v[1],$v[2],"$($v[0]),$($v[1])")})}else{@(@($sp.x,$sp.y,$sp.z,'dock'),@(($ChainX-1.2),$ChainY,($ChainZ-2.22),'chain'))}
+     foreach($start in $starts){foreach($h in 0..7){
       C $source (P $start[0] $start[1] ([double]$start[2]+1.7) ($h*45));Start-Sleep -Milliseconds 1200;[void](WaitGameplay 6000)
       & "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs 6000|Out-Null;$tr=[Collections.Generic.List[object]]::new();$w=[Diagnostics.Stopwatch]::StartNew()
       while($w.ElapsedMilliseconds-lt6200){$pp=try{(Q $source '--player').candidatePosition}catch{$null};if($pp){$tr.Add(@([double]$pp[0],[double]$pp[1],[double]$pp[2]))};Start-Sleep -Milliseconds 100}
