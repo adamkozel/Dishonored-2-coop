@@ -244,9 +244,10 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1354-chokes | 1: nonlethal takedowns from every side |
 | completion-audit-v1355-slide | 1: sliding takedown |
 | completion-audit-v1356-blink-assault | 1: Blink pull and kick variants (the Blink Assault kick, 1214ct) |
+| completion-audit-v1357-death | 1: death variants (player plain deaths and finishers in both roles, 1214cv-cx; NPC deaths from both source roles, 1254k) |
 
-**Still open (24):**
-- combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced), death variants (no death clip), ragdoll handoff;
+**Still open (23):**
+- combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced), ragdoll handoff (corpse release filmed for Corvo, 1254o);
 - paired actions: lethal takedowns (all but Emily's front), wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
 - powers: Bend Time, Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
 - interactions: doors, pickup and loot (pickpocketing), keys (Emily's lock reach), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes, map load and checkpoint recovery.

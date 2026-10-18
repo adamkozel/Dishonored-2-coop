@@ -34,7 +34,7 @@ items = [
       visual=[{'video': 'player-death-probe-v1361j/observer.mp4', 'verdict': 'Corvo reels back from the guard\'s blow against the bookshelf and drops onto his back across the book stacks, staying down.'},
               {'video': 'player-death-probe-v1361i/observer.mp4', 'verdict': 'Emily is struck, staggers back and folds to the floor beside the book stacks while the guard stands over her.'},
               {'video': 'player-death-probe-v1361q/observer.mp4', 'verdict': 'The guard seizes Corvo and stabs him while he stands held; Corvo sinks to his knees, falls forward and lies face down before GameOver.'},
-              {'video': f'{EMILY_FINISHER}/observer.mp4', 'verdict': 'EMILY_FINISHER_VERDICT'},
+              {'video': f'{EMILY_FINISHER}/observer.mp4', 'verdict': 'The guard grabs Emily, who stands held while he strikes, then staggers and sinks to her knees; on 1214cw GameOver removed her before she lay down. 1214cx starts the finisher collapse 0.4 s earlier, which 1361q and 1361s verify on Corvo (down before GameOver); the timing path is the same for both roles. On 1214cy the guard in the joiner world is a host-driven replica, so her deaths arrive as relayed hits (plain death, 1361t-v).'},
               {'video': 'takedown-variants-v1254k/drop-host-lethal-observer.mp4', 'verdict': 'Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body.'},
               {'video': 'takedown-variants-v1254k/drop-client-lethal-observer.mp4', 'verdict': 'Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body.'}]),
 ]

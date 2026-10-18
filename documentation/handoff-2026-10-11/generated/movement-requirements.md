@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T14:59:02.174475+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T16:58:34.947006+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 79 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 80 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -430,7 +430,7 @@ Captured 2026-10-18T14:59:02.174475+02:00; source [review-catalog.json](<../../.
 | hit_reactions_directions | combat | candidates | native_network_standing_stun_partial_verified | accepted_sweep_1260_functional_both_roles | work_remaining |
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
-| death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | accepted_functional_both_roles | work_remaining |
+| death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | accepted_functional_both_roles | complete |
 | ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | accepted_functional_both_roles | work_remaining |
 | pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
