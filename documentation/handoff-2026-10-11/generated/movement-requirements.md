@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T11:09:01.929256+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T11:19:51.781025+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 70 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 71 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -386,7 +386,7 @@ Captured 2026-10-18T11:09:01.929256+02:00; source [review-catalog.json](<../../.
 | turn_in_place_90_180 | locomotion | candidates | partial_native_steam_stance_turns_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | moving_turns | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | reverse_and_direction_changes | locomotion | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | complete |
-| slopes_and_stairs | locomotion | candidates | partial_native_steam_dunwall_stairs_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| slopes_and_stairs | locomotion | candidates | partial_native_steam_dunwall_stairs_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | crouch_idle | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | crouch_8_directions | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | stand_to_crouch | stance | candidates | partial_native_manual_and_automatic_crouch_both_roles | accepted_sweep_1260_functional_both_roles | complete |
