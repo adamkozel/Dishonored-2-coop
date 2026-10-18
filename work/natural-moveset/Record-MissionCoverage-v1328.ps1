@@ -77,6 +77,14 @@ try{
     # Both players start on the spawn dock, the observer 2.5 m in front of the source, facing it.
     C $source (P $sp.x $sp.y ($sp.z+1.7) ([Math]::Atan2($fy,$fx)*180/[Math]::PI));C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) ([Math]::Atan2(-$fy,-$fx)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
     $l=WaitLive "$key-placed" 30000;if(!$l.ok){throw 'Partner presentation not live after placement'}
+    if($case-eq'slopescan'){
+     # Lab-only exploration, no presentation checks: drop the source (health held) on a 4 m grid around the chain street and
+     # record where it comes to rest, to find a smooth ramp for the slope case (slopes_and_stairs; the stairs are stepped).
+     C $source 'coop_player_health_hold on';$grid=[Collections.Generic.List[object]]::new()
+     foreach($gx in @(0..9|ForEach-Object {-58+4*$_})){foreach($gy in @(0..10|ForEach-Object {60+4*$_})){
+      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
+      $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})}}
+     C $source 'coop_player_health_hold off';Save "$out/$key-grid.json" @($grid);$row.points=$grid.Count;$row.checks.Add("Resting heights at $($grid.Count) grid points")}
     if($case-eq'swim'){
      $wx=$sp.x+$SwimLane*$px;$wy=$sp.y+$SwimLane*$py;$yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;$vyaw=[Math]::Atan2($py,$px)*180/[Math]::PI
      C $source (P $wx $wy 1.0 $yaw);Start-Sleep -Milliseconds 1800

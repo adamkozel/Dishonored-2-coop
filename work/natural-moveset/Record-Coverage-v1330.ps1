@@ -99,7 +99,7 @@ try{
     $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0
     $op=(Q $peer '--player').candidatePosition
     C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null
+    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null
     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 500
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($cx,$cy,$cz)
    }else{
@@ -144,7 +144,7 @@ try{
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'));
-     manaelixir=@(@(700,'named','models/powers/darkvision/darkvision.inventoryitem'),@(1500,'grant','mana'),@(2600,'lt',250),@(6000,'lt',250),@(6400,'use','mana'))}
+     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/doppelganger/doppelganger.inventoryitem'})),@(1500,'grant','mana'),@(2600,'lt',$(if($source-eq'host'){250}else{800})),@(4400,'use','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
       switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'named'{C $source "coop_grant_named $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
@@ -199,7 +199,7 @@ try{
      'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';if(@($row.grenadeVariants).Count-lt2){throw "Grenade variants $($row.grenadeVariants-join ',')"};$row.checks.Add("Grenade presented: variants $($row.grenadeVariants-join ',')")}
      {$_-in'stunmine','springrazor'}{$row.trapVariants=Shown 'trapWeight' 'trapVariant';if(@($row.trapVariants).Count-lt2){throw "$case variants $($row.trapVariants-join ',')"};$row.checks.Add("$case presented: variants $($row.trapVariants-join ',')")}
      'heart'{$row.heartVariants=Shown 'heartWeight' 'heartVariant';if(@($row.heartVariants).Count-lt2){throw "Heart variants $($row.heartVariants-join ',')"};$row.checks.Add("Heart presented: variants $($row.heartVariants-join ',')")}
-     'manaelixir'{$u=@($samples|Where-Object {$_.ms-ge6400-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow
+     'manaelixir'{$u=@($samples|Where-Object {$_.ms-ge4400-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow
       if($row.use.result-ne'mana_use_requested'){throw "Mana use $($row.use.result)"};if([double]$row.manaBefore-ge100){throw "Mana was full before the drink ($($row.manaBefore))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
       $row.checks.Add("Dark vision spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
      'health'{$u=@($samples|Where-Object {[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.useVariants=@($u|ForEach-Object {[int]$_.useVariant}|Sort-Object -Unique);if(!$u.Count){throw 'Elixir use reach not presented'};$row.checks.Add("Health elixir drink presented as the use reach ($($u.Count) samples)")}}}

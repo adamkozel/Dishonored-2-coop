@@ -55,6 +55,14 @@ rep("""   if($case-eq'stairs'){C $peer 'coop_observer_camera off'""",
    if($case-eq'stairs'){C $peer 'coop_observer_camera off'""")
 rep("scope='Locomotion completion coverage (1318, #11): walks and crouch walks in 8 directions, sprint and diagonals, in-place turns by size, starts/stops and speed changes, stairs; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case.'",
     "scope='Powers coverage (1332, #11): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case.'")
+# Film every power from the close side-on free camera of the crouched-heavy case (2.8 m to the source's left, pitch 15):
+# in 1332c the observer's own view from 9 m left the tether, the spirit and the marks too small to review.
+powers = "'blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'"
+rep("}elseif($case-in'crouchheavy','mana'){", "}elseif($case-in'crouchheavy','mana'," + powers + "){")
+rep("if($case-notin'kick','crouchheavy','note','mana','stairs'){& \"$PSScriptRoot/Set-ObserverPitch.ps1\"",
+    "if($case-notin'kick','crouchheavy','note','mana','stairs'," + powers + "){& \"$PSScriptRoot/Set-ObserverPitch.ps1\"")
+# Standing cases look nearly level (1330d: pitch 15 cut off the head and the aimed arm); the crouched heavy keeps 15.
+rep("& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch 15 -Quick|Out-Null", "& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null")
 out = s.replace('\n', '\r\n') if crlf else s
 (N / 'Record-Coverage-v1332.ps1').write_bytes(out.encode('utf-8'))
 print('ok')

@@ -95,17 +95,17 @@ try{
     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null
     C $peer 'coop_observer_camera hold_at -47.6 -175.9 67.4';Start-Sleep -Milliseconds 500
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@(-47.6,-175.9,67.4)
-   }elseif($case-in'crouchheavy','mana'){$inv=[Globalization.CultureInfo]::InvariantCulture
+   }elseif($case-in'crouchheavy','mana','blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'){$inv=[Globalization.CultureInfo]::InvariantCulture
     C $source 'setviewpos -35 -153 68.1 0 0';Start-Sleep -Milliseconds 400
     $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0
     $op=(Q $peer '--player').candidatePosition
     C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 15 -Quick|Out-Null
+    & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null
     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 500
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@($cx,$cy,$cz)
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
-   if($case-notin'kick','crouchheavy','note','mana','stairs'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
+   if($case-notin'kick','crouchheavy','note','mana','stairs','blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
    $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;blink=9000;darkvision=9000;bendtime=9500;windblast=8000;possession=9000;swarm=9000;farreach=9000;domino=9000;doppelganger=10000;mesmerize=9500;shadowwalk=12000}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
