@@ -118,7 +118,9 @@ try{
      $cx=($ax+$bx)/2-3.5*$uy;$cy=($ay+$by)/2+3.5*$ux;$cz=($az+$bz)/2+2.2;$cyaw=[Math]::Atan2(($ay+$by)/2-$cy,($ax+$bx)/2-$cx)*180/[Math]::PI
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-     C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200
+     # 1328zi: the 120 m placement left the shadow stream stale for 3 s after the walk began (weight 0, mask 8|16); wait
+     # until the partner presentation is live before walking.
+     C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200;$l2=WaitLive "$key-slope-start" 20000;if(!$l2.ok){throw 'Partner presentation not live at the slope start'}
      $walkMs=[int][Math]::Min(9000,[Math]::Max(2500,$len/1.7*1000));$runMs=[int][Math]::Min(6000,[Math]::Max(1500,$len/5.0*1000))
      $caps=Capture $key ([Math]::Ceiling(($walkMs*2+$runMs+6000)/1000));$samples=[Collections.Generic.List[object]]::new();$zs=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$seg=@()
      # The comma binds tighter than +: each time is parenthesized (1328zc added an array to $walkMs).
@@ -127,7 +129,9 @@ try{
       if($k-lt$steps.Count-and$t-ge$steps[$k][0]){switch($steps[$k][1]){'walkup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'turn'{$me=(Q $source '--player').candidatePosition;C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $dn)};'walkdown'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'place'{C $source (P $ax $ay ($az+1.7) $up)};'runup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs $runMs|Out-Null}};$seg+=[ordered]@{ms=$t;step=$steps[$k][1]};$k++}
       $x=Sample $t;$samples.Add($x);if($zs.Count-lt400){$me=try{(Q $source '--player').candidatePosition}catch{$null};if($me){$zs.Add([pscustomobject]@{ms=$t;x=[double]$me[0];y=[double]$me[1];z=[double]$me[2]})}};Start-Sleep -Milliseconds 60}
      Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-path.json" @($zs);Save "$out/$key-segments.json" $seg
-     $upS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.03}).Count;$dnS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.03}).Count
+     # The stair blend scales with the grade (near 0 on an 8-degree street, by design); require the presented grade to track
+     # the slope with the right sign while the partner walks at full presentation weight.
+     $upS=@($samples|Where-Object {[double]$_.weight-gt.9-and[double]$_.speed-gt.3-and[double]$_.terrainGrade-gt.05}).Count;$dnS=@($samples|Where-Object {[double]$_.weight-gt.9-and[double]$_.speed-gt.3-and[double]$_.terrainGrade-lt-.05}).Count
      $row.upSamples=$upS;$row.downSamples=$dnS;$row.climbedMetres=[Math]::Round((($zs|Measure-Object z -Maximum).Maximum)-(($zs|Measure-Object z -Minimum).Minimum),2)
      $row.lowWeight=@($samples|Where-Object {$_.ms-ge1500-and[double]$_.weight-lt.9}).Count
      if($row.climbedMetres-lt.8){throw "Source climbed only $($row.climbedMetres) m"};if(!$upS-or!$dnS){throw "Slope gait not presented (up $upS, down $dnS)"}
