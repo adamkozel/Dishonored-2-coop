@@ -121,6 +121,9 @@ void chokePresentationTests(){
            torso>92&&nativeTakedownFatality(torso)&&nativeTakedownArms(torso)==2&&!nativeTakedownFatality(5)&&nativeTakedownArms(5)==2&&
            !nativeChokeVariant("midnight/gameplay/player/base/fatalities/fatality_generic_double_kill.midnightscene","Emily",2166),"census-1255 fatalities are lethal scenes with their bound arms; the double kill binds no AI group");}
     {const auto lock=nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",600);
+     // 1214da: the shadow-form assassinations (37-44) run hands-free; the sword stays for the ordinary ones.
+     check(nativeTakedownSword(36)&&nativeTakedownSword(45)&&nativeTakedownLethal(38),"ordinary assassinations keep the sword; sw stays lethal");
+     for(unsigned id=37;id<=44;++id)check(!nativeTakedownSword(id),"assassination_sw holsters the sword");
      check(lock==119&&nativeTakedownKind(lock)==6&&nativeTakedownSword(lock)&&!nativeTakedownLethal(lock)&&ChokePresentation::clip(lock)==CombatPresentation::clip(11,2)&&
            nativeChokeVariant("midnight/gameplay/player/base/combat/versus_elite.midnightscene","versus_mediumwin",1033)==118&&
            !nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",601),
@@ -641,7 +644,7 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(validShadowAction(power,c,h),"native Corvo Blink phase packet");
       auto emily=power;emily.role=1;emily.character=2;emily.powerVariant=7;emily.powerDurationMs=266;auto eh=h,ec=c;eh.role=1;ec.role=0;
       check(validShadowAction(emily,ec,eh),"native Emily Far Reach pull phase packet");
-      for(unsigned v=32;v<=35;++v){
+      for(unsigned v=32;v<=36;++v){
         auto shadow=emily;shadow.powerVariant=v;shadow.powerDurationMs=PowerPresentation::duration(v);shadow.swordState=1;
         check(validShadowAction(shadow,ec,eh)&&shadowPowerSwordContext(v,1),"owned Emily shadow form phases accepted hands-free");
         auto bad=shadow;bad.swordState=2;check(!validShadowAction(bad,ec,eh),"shadow form cannot retain drawn sword");

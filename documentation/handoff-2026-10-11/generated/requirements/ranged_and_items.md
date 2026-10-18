@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:09:55.969915+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:31:13.216528+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 

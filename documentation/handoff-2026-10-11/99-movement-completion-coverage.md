@@ -170,6 +170,10 @@ These are confirmed runtime. The probes are kept as evidence.
 
 **1214cy: a guard that is already fighting gets a channel ([#108](https://github.com/adamkozel/Dishonored-2-coop/issues/108)).** The client binds an NPC only when it is acquire-eligible, which requires its attack AI to be inactive. A guard already attacking the joiner in the client's world was refused on every host Hello, with a 3 s cooldown (1328zzl: 0 replies to the host's Hellos), so its hits were never relayed and its death was not shared (1328zzk). The client now re-reads that one NPC from the catalog snapshot's life roster on each Hello and binds it as soon as its attack pauses (`clientBoundLive`, `clientBusy`). In 1328zzm the guard bound after 19 busy retries, the host relayed 17 hits, the client applied 14 natively (2 blocked, 1 lost parry), Emily's health dropped and the guard's death was shared.
 
+**1214cz: the recoil stagger.** A swing that is parried or blocked continues as player state 40 (`arkPlayerStateRecoil`, vtable RVA 0x1c83c98, confirmed static) playing `sword_parry_ll/lr/rl/rr` (666 ms) or `sword_recoil_left/right` (733 ms), which bind only the camera and right arm. The source sends it as combat variant 28 (left) or 29 (right) on the slash state (protocol 77), and the partner plays the first 0.8 s of the native NPC `sword_parry_lose_left/right` from bank 73 (clips 378–379). `hit_react_stumble` (camera only, 1333 ms) and `hit_react_knocked_down` are not handled yet.
+
+**1214da: Shadow Walk's attack.** Probe 1350b (confirmed runtime) shows the attack from the shadow form as a paired `assassination_sw_back_short` (subscene npc, 2666 ms) under player state 13 with the sword holstered throughout, then `power_shadow_walk_attack_out` (subscene Emily, 1166 ms, phase 5), ending crouched. The shadow-form assassinations (takedown ids 37–44) are now hands-free on the partner, and the attack exit is power variant 36, presented with the existing exit body (clip 334). Take 1254y (swback: Shadow Walk entered 2.4 m behind the paused guard, crawl, attack or choke) checks it.
+
 ## Lab-only grants
 
 The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two lab commands put them in through the game's own inventory routines. They are lab only and refused outside the lab.
@@ -203,6 +207,8 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | player-death-probe-v1361h-s | Deaths on 1214cw/cx with the probe's own verdict: every plain death and finisher passes in both roles; 1361h, 1361q film Corvo's finishers, 1361i, 1361j the plain deaths; 1361o (Emily's finisher on 1214cw) vanished while kneeling |
 | mission-coverage-v1328zzj-zzm | Guard fights: zzj (Emily turned 75 deg) steady stream but no damage to Emily (#108); zzk (Corvo) guard death not shared; zzl snapshots the NPC catalogs (#108 root cause); zzm (1214cy) relays the guard's hits to Emily and shares its death |
 | use-variants-dunwall-v1228x-za | Ring lock in both roles passes functionally; the free camera stood in a wall (x/y) and test-dropped spots found no floor at the source's level (z/za, one fell 14 m) |
+| use-variants-dunwall-v1228zb-ze | Ring lock filmed from behind the partner: over the left shoulder (zb/zc) the body hides the reaching arm; over the right shoulder (zd Corvo, ze Emily) the right hand reaches the lock plate and returns (audit 1366) |
+| coverage-v1363a-c | Self-grenade stuns (1363a/b: pitch 75 over the 70 limit). 1363c reported 4/4 passes that are not evidence: the view-levelling step blocked sampling across the blast and `@($null).Count` is 1, so a missing stun passed; Corvo is seen staggering at the blast. 1363e/f re-run with the stun window sampled |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
 
 Earlier takes, failed ones included, are kept; each commit message records what it found.
@@ -246,12 +252,13 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1356-blink-assault | 1: Blink pull and kick variants (the Blink Assault kick, 1214ct) |
 | completion-audit-v1357-death | 1: death variants (player plain deaths and finishers in both roles, 1214cv-cx; NPC deaths from both source roles, 1254k) |
 | completion-audit-v1358-lifecycle | 1: map load and checkpoint recovery (both partners after a native load and a shared restart, 1199i on 1214cy) |
+| completion-audit-v1366-key-use | 1: key use (the ring lock filmed over the partner's right shoulder in both roles, 1228zd/ze on 1214cy) |
 
-**Still open (22):**
+**Still open (21):**
 - combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced), ragdoll handoff (corpse release filmed for Corvo, 1254o);
 - paired actions: lethal takedowns (all but Emily's front), wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
 - powers: Bend Time, Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
-- interactions: doors, pickup and loot (pickpocketing), keys (Emily's lock reach), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes.
+- interactions: doors, pickup and loot (pickpocketing), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 

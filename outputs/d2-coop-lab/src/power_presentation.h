@@ -7,9 +7,9 @@
 struct PowerPresentation {
     struct Sample{double time=0;std::uint64_t event=0;unsigned variant=0,elapsed=0,duration=0;};
     std::array<Sample,32> samples{};unsigned count=0;
-    static unsigned duration(unsigned v){constexpr unsigned d[]={0,333,333,333,200,200,133,266,100,366,933,1000,533,300,433,333,466,1200,666,266,1333,400,266,400,333,1600,333,200,400,466,1200,666,1000,1000,1133,1000};return v<=35?d[v]:0;}
+    static unsigned duration(unsigned v){constexpr unsigned d[]={0,333,333,333,200,200,133,266,100,366,933,1000,533,300,433,333,466,1200,666,266,1333,400,266,400,333,1600,333,200,400,466,1200,666,1000,1000,1133,1000,1166};return v<=36?d[v]:0;}
     static bool loop(unsigned v){return v==2||v==5||v==8||v==13||v==17||v==20||v==24||v==27||v==30||v==33;}
-    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=35&&s.variant!=13&&s.duration==duration(s.variant)&&s.elapsed<=3600000&&(s.variant||!s.elapsed);}
+    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=36&&s.variant!=13&&s.duration==duration(s.variant)&&s.elapsed<=3600000&&(s.variant||!s.elapsed);}
     void clear(){count=0;}
     bool push(const Sample& s){
         if(!valid(s))return false;

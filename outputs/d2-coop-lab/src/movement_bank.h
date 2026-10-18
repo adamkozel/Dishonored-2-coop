@@ -27,7 +27,7 @@ struct MovementBank {
     Joint sampleShadowWalk(unsigned variant,unsigned joint,float amount,float travelPhase,float moving)const{
         if(variant==35)return sampleParameter(335,joint,amount);
         if(variant==32)return sampleParameter(331,joint,amount);
-        if(variant==34)return sampleParameter(334,joint,amount);
+        if(variant==34||variant==36)return sampleParameter(334,joint,amount); // 36: attack_out exit (1214da)
         return blend(sample(332,joint,amount),sample(333,joint,travelPhase),moving);
     }
     float shadowWalkDistancePhase(float phase,float dx,float dy,float forwardX,float forwardY)const{

@@ -19892,7 +19892,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1283: Corvo reaches the ring lock (use-variants-dunwall-v1228t); Emily's crouched lock use is presented since 1214am. Accepted functionally in both roles. Visual sweep 1260: insufficient (corvo insufficient, emily accept). Emily's lock reach reads acceptably; there is no usable recording of the Corvo partner using a lock, so the item cannot be fully accepted. Reach, insert/turn and recovery study using a neutral key fixture. Exact lock geometry, key inventory/visibility and gameplay timing remain pending. 1210c (audit 1211): native use enters player state 75 briefly (same source as levers); no native key animation; binding pending. 1213b (audit 1215): key/lock uses map to clip 373 by focused entity name through the same native use source; not yet runtime-tested on a real lock. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "use-variants-dunwall-v1228b/use-client-ld_ring_locker_01_1_lock-observed.mp4"
@@ -19902,8 +19902,41 @@
         "../movement-integration/use-interaction-audit-v1215.json",
         "../movement-integration/use-variants-audit-v1229.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/coverage-audit-v1283.json"
-      ]
+        "../movement-integration/coverage-audit-v1283.json",
+        "use-variants-dunwall-v1228zd/result.json",
+        "use-variants-dunwall-v1228ze/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1366-key-use.json",
+        "decision": "complete",
+        "scope": "Using a key on a real lock in both roles: the partner reaches the lock with the right arm, holds it while the native use runs and draws the arm back to its idle, on the native use clock.",
+        "takes": [
+          {
+            "take": "use-variants-dunwall-v1228zd",
+            "cases": [
+              "host-ld_ring_locker_01_1_lock"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228ze",
+            "cases": [
+              "client-ld_ring_locker_01_1_lock"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "use-variants-dunwall-v1228zd/use-host-ld_ring_locker_01_1_lock-observed.mp4",
+            "verdict": "Corvo stands at the locker, raises his right forearm to the lock plate on the bookcase, holds the hand at the lock for about two seconds and lowers it back to his side."
+          },
+          {
+            "video": "use-variants-dunwall-v1228ze/use-client-ld_ring_locker_01_1_lock-observed.mp4",
+            "verdict": "Emily steps to the locker, reaches her right hand to the lock plate, keeps it there through the use and lets the arm fall back as she settles."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "read_object_or_note",

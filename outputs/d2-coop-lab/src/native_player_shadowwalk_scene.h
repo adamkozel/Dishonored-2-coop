@@ -10,6 +10,9 @@ inline unsigned nativeShadowWalkVariant(unsigned phase,const std::string& asset,
     if(phase==3&&asset==prefix+"trans_in.midnightscene"&&sub=="emily"&&duration==1000)return 32;
     if(phase==3&&asset==prefix+"trans_in_sneak.midnightscene"&&sub=="emily"&&duration==1000)return 35;
     if(phase==5&&asset==prefix+"trans_out.midnightscene"&&sub=="Emily"&&duration==1133)return 34;
+    // 1214da: after a shadow-form assassination the form exits through attack_out (1350b: subscene Emily, 1166 ms,
+    // ply_body_sw_timeout; confirmed runtime and static).
+    if(phase==5&&asset==prefix+"attack_out.midnightscene"&&sub=="Emily"&&duration==1166)return 36;
     return 0;
 }
 template<class Read> bool readNativePlayerShadowWalkScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerPowerScene& out){
@@ -32,7 +35,8 @@ template<class Read> bool readNativePlayerShadowWalkScene(Read read,std::uintptr
             if(!read(c,&d,8)||!d||!read(d,&vt,8)||vt!=base+0x1affbc8||!read(d+8,&name,8)||!worldIdentityString(read,name,asset))return false;
             const std::string expected=std::string("midnight/gameplay/player/base/powers/power_shadow_walk_trans_")+(native.phase==3?"in":"out")+".midnightscene";
             const bool sneak=native.phase==3&&asset=="midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene";
-            if(asset!=expected&&!sneak)continue;
+            const bool attackOut=native.phase==5&&asset=="midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene";
+            if(asset!=expected&&!sneak&&!attackOut)continue;
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
             const auto variant=nativeShadowWalkVariant(native.phase,asset,sub,duration);if(!variant)return false;
             if(s.instance){if(s.instance==c)continue;return false;}

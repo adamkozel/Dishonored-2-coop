@@ -559,6 +559,9 @@ void healthTests(){
                         require(nativeShadowWalkVariant(3,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene","emily",1000)==32,"exact native Shadow Walk entry resource and clock");
                         require(nativeShadowWalkVariant(5,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_out.midnightscene","Emily",1133)==34,"exact native Shadow Walk exit resource and clock");
                         require(nativeShadowWalkVariant(3,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene","emily",1000)==35,"547b exact native sneaking entry resource and clock");
+                        require(nativeShadowWalkVariant(5,"midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene","Emily",1166)==36,"1214da exact native attack exit resource and clock");
+                        require(!nativeShadowWalkVariant(5,"midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene","Emily",1133),"attack exit requires its own clock");
+                        require(!nativeShadowWalkVariant(3,"midnight/gameplay/player/base/powers/power_shadow_walk_attack_out.midnightscene","Emily",1166),"attack exit cannot impersonate entry");
                         require(!nativeShadowWalkVariant(3,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene","emily",999),"sneaking scene requires recorded clock");
                         require(!nativeShadowWalkVariant(3,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_in_sneak.midnightscene","Corvo",1000),"Corvo cannot borrow Emily sneaking form");
                         require(!nativeShadowWalkVariant(4,"midnight/gameplay/player/base/powers/power_shadow_walk_trans_in.midnightscene","emily",1000),"entry resource cannot impersonate sustained form");

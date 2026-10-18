@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:09:55.969915+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:31:13.216528+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 

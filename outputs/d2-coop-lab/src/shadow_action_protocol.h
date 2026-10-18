@@ -51,7 +51,7 @@ static_assert(sizeof(CoopShadowActionPacket)==432);
 // observed native reader cannot silently outgrow the source transport gate.
 inline bool shadowPowerSwordContext(unsigned variant,unsigned swordState){
     // Native successful host entry holsters the sword before release400ms.
-    if(variant==28||(variant>=32&&variant<=35))return swordState==1;
+    if(variant==28||(variant>=32&&variant<=36))return swordState==1;
     if(variant>=29&&variant<=31)return swordState==1||swordState==2;
     return variant>=1&&variant<=27&&variant!=13&&(swordState==2||(swordState==1&&variant>=10&&variant<=25));
 }
@@ -87,7 +87,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         (p.equipmentVariant?((p.state==7||possessionDraw)&&p.equipmentDurationMs&&p.equipmentDurationMs<=10000&&p.equipmentTimeMs<=3600000):
             (p.state!=7&&!p.equipmentTimeMs&&!p.equipmentDurationMs))&&(!p.combatVariant||p.swordState==2||deathCombat);
     const bool power=PowerPresentation::valid({0,1,p.powerVariant,p.powerTimeMs,p.powerDurationMs})&&
-        (p.powerVariant?(p.state==10&&shadowPowerSwordContext(p.powerVariant,p.swordState)&&(p.powerVariant==10||(p.character==1?(p.powerVariant<=3||(p.powerVariant>=11&&p.powerVariant<=15)||(p.powerVariant>=23&&p.powerVariant<=28)):((p.powerVariant>=4&&p.powerVariant<=9)||(p.powerVariant>=16&&p.powerVariant<=22)||(p.powerVariant>=29&&p.powerVariant<=35))))):p.state!=10);
+        (p.powerVariant?(p.state==10&&shadowPowerSwordContext(p.powerVariant,p.swordState)&&(p.powerVariant==10||(p.character==1?(p.powerVariant<=3||(p.powerVariant>=11&&p.powerVariant<=15)||(p.powerVariant>=23&&p.powerVariant<=28)):((p.powerVariant>=4&&p.powerVariant<=9)||(p.powerVariant>=16&&p.powerVariant<=22)||(p.powerVariant>=29&&p.powerVariant<=36))))):p.state!=10);
     const bool ranged=RangedPresentation::valid({0,1,p.rangedKind,p.rangedVariant,p.rangedTimeMs,p.rangedDurationMs,p.rangedMechanism,p.rangedShot})&&
         (p.rangedVariant?p.state==13:p.state!=13)&&(!p.rangedKind||p.kind==1)&&
         (!p.rangedKind||(p.state==13||((p.state==0||p.state==3)&&p.swordState==2&&!p.combatVariant)))&&

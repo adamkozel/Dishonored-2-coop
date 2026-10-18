@@ -65,7 +65,7 @@ int main(int argc,char** argv){
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,0,0,1,0)-.2f)<1e-6f,"stationary shadow crawl cannot advance");
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,stride*.25f,0,1,0)-.45f)<1e-6f,"crawl cadence follows measured quarter-stride");
             check(std::fabs(bank.shadowWalkDistancePhase(.2f,-stride*.25f,0,1,0)-.95f)<1e-6f,"backward crawl reverses and wraps");
-            for(unsigned v:{32u,33u,34u})for(float t:{0.f,.5f,1.f})for(unsigned j=0;j<joints;++j){
+            for(unsigned v:{32u,33u,34u,36u})for(float t:{0.f,.5f,1.f})for(unsigned j=0;j<joints;++j){
                 auto pose=bank.sampleShadowWalk(v,j,t,.4f,.7f);for(float x:pose)check(std::isfinite(x),"whole shadow body stays finite");
                 if(j<2)for(unsigned k=0;k<7;++k)check(std::fabs(pose[k]-(k==3?1.f:0.f))<1e-6f,"shadow body cannot move network root");
             }
