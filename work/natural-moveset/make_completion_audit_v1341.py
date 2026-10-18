@@ -1,0 +1,20 @@
+"""Writes completion-audit-v1341-possession.json (#11): Corvo's human possession on candidate 1214cp."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("The decision rests on coverage-v1332f on candidate 1214cp under the product controller: Corvo (host) is granted "
+     "Possession and its parasite upgrade by name (lab-only coop_grant_named; the isolated save has neither), stands 1 m in front "
+     "of the upper-floor guard, casts with the native left trigger, occupies the guard and leaves with the left trigger again. "
+     "The partner is checked from its own power presentation and the possession body-visibility status on the observer "
+     "(hide and show calls), and the checkpoint is reloaded afterwards. The empty-target entry and aim were already presented "
+     "in coverage-v1332c/d. The possessed guard's motion in the partner world follows the host-owned NPC stream (stage 4).")
+items = [
+ dict(id='corvo_possession_enter_loop_exit', decision='complete',
+      scope='Corvo possesses a human guard and leaves: the partner presents the cast (power variants 26-28), hides Corvo\'s body while he occupies the guard (one hide), and shows it again where he leaves the host (one show, original visibility restored).',
+      takes=[{'take': 'coverage-v1332f', 'cases': ['host-possesshuman']}, {'take': 'coverage-v1332d', 'cases': ['host-possession']}],
+      visual=[{'video': 'coverage-v1332f/host-possesshuman-observer.mp4', 'verdict': 'Corvo thrusts his arm toward the guard and vanishes; for about three seconds only the guard is seen, then Corvo reappears beside him and stands.'}],
+      lifecycle='See method.'),
+]
+audit = dict(audit='completion-audit-v1341-possession', family='powers', candidate='candidate-npc-combat-v1214cp', method=M, items=items)
+(N / 'completion-audit-v1341-possession.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))

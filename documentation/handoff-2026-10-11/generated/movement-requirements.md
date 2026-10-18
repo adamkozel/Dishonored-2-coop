@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T07:35:04.114763+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T07:58:51.009840+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 55 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 56 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -455,7 +455,7 @@ Captured 2026-10-18T07:35:04.114763+02:00; source [review-catalog.json](<../../.
 | corvo_blink_aim_cancel_release_arrive | powers | candidates | partial_native_Blink_body_and_world_FX | accepted_sweep_1260_functional_owner | work_remaining |
 | corvo_blink_pull_and_kick_variants | powers | candidates | not_verified | not_accepted | work_remaining |
 | corvo_dark_vision_cast_end | powers | candidates | partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam | bounded_actual_game_frames_inspected | complete |
-| corvo_possession_enter_loop_exit | powers | candidates | native_empty_target_entry_aim_remote_body_verified_target_pending | accepted_sweep_1260_functional_owner | work_remaining |
+| corvo_possession_enter_loop_exit | powers | candidates | native_empty_target_entry_aim_remote_body_verified_target_pending | accepted_sweep_1260_functional_owner | complete |
 | corvo_bend_time_cast_end | powers | candidates | partial_native_Bend_Time_stance_equipment_air_and_pause_through_Steam | accepted_sweep_1260_functional_owner | work_remaining |
 | corvo_windblast_cast | powers | candidates | partial_native_steam_windblast_body_and_finite_world_fx | accepted_sweep_1260_functional_owner | complete |
 | corvo_devouring_swarm_cast | powers | candidates | native_swarm_grounded_contexts_incrementally_verified_world_pending | accepted_sweep_1260_functional_owner | complete |

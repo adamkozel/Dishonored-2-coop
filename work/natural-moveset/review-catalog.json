@@ -8649,7 +8649,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept). The empty-target Possession entry and aim, and the recovery to idle, read naturally. The possessed loop and the exit with a real target are not recorded, so that is a coverage gap rather than a visual defect. Scope: body accepted for the empty-target aim and recovery only; possession of a real target is not recorded. 374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "possession",
@@ -10072,24 +10072,37 @@
       },
       "evidence": [
         "../movement-integration/visual-sweep-v1260/powers-review.json",
-        "coverage-v1332c/result.json"
+        "coverage-v1332c/result.json",
+        "coverage-v1332f/result.json",
+        "coverage-v1332d/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "The empty-target entry and aim are presented (power variants 26, 27; 1332c/d). Human-target occupation was verified on the tutorial guard in take 372 (older candidate).",
+        "audit": "completion-audit-v1341-possession.json",
+        "decision": "complete",
+        "scope": "Corvo possesses a human guard and leaves: the partner presents the cast (power variants 26-28), hides Corvo's body while he occupies the guard (one hide), and shows it again where he leaves the host (one show, original visibility restored).",
         "takes": [
           {
-            "take": "coverage-v1332c",
+            "take": "coverage-v1332f",
+            "cases": [
+              "host-possesshuman"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
             "cases": [
               "host-possession"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "A human-target possession on the current candidate (entry, hidden body, exit and reappearance); control of the possessed NPC in the partner world is stage 4."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1332f/host-possesshuman-observer.mp4",
+            "verdict": "Corvo thrusts his arm toward the guard and vanishes; for about three seconds only the guard is seen, then Corvo reappears beside him and stands."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "corvo_bend_time_cast_end",
