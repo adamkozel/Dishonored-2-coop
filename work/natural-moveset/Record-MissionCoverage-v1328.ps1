@@ -287,10 +287,13 @@ try{
        # 1328zd: the fight drifts and several checkpoint guards fill the frame; keep the free camera 3.5 m beside the source,
        # perpendicular to the fight line, 1.6 m up (the yaw toward the source is the observer's view, set below).
        $fl=[Math]::Max(.1,$d);$nx=([double]$q[0]-$tx)/$fl;$ny=([double]$q[1]-$ty)/$fl;$hx=$tx-3.5*$ny+0.8*$nx;$hy=$ty+3.5*$nx+0.8*$ny
-       $mxx=($tx+[double]$q[0])/2;$myy=($ty+[double]$q[1])/2;$hyaw=[Math]::Atan2($myy-$hy,$mxx-$hx)*180/[Math]::PI
-       C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 120
-       C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}catch{}}
-     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new()
+       # 1328zf: re-holding every 3 s while the hold was active showed the observer's own dock view for up to 2 s; re-aim
+       # only after the source moved 1.5 m from the last anchor, with the hold off just while the body turns.
+       if(!$script:camAnchor-or(Dist2 @($tx,$ty) $script:camAnchor)-gt1.5){$script:camAnchor=@($tx,$ty)
+        $mxx=($tx+[double]$q[0])/2;$myy=($ty+[double]$q[1])/2;$hyaw=[Math]::Atan2($myy-$hy,$mxx-$hx)*180/[Math]::PI
+        C $peer 'coop_observer_camera off';C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 250
+        C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}}catch{}}
+     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new();$script:camAnchor=$null
      while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
       if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}
       elseif($phase-eq'block'-and($guardSamples-ge6-or$t-$phaseStart-ge22000)){$phase='open';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;guardSamples=$guardSamples})}
