@@ -1,0 +1,74 @@
+{
+  "audit": "completion-audit-v1354-chokes",
+  "family": "paired_actions",
+  "candidate": "candidate-npc-combat-v1214cs",
+  "method": "The decision rests on the standing-guard takedown takes (candidate 1214cs, harness 1254h and its stance-aware 1254l) under the product controller with natural guard AI and the NPC stream on: each case waits until Dunwall tutorial guard 2 stands still at his long patrol pause, holds the free camera 3.6 m ahead of him looking back, places the crouched source behind him, 0.85 m to either side (0.4 m back) or 1 m in front facing him, and holds the choke. The source must play a native choke takedown, the partner must present every census scene it played, both worlds must agree the guard is unconscious and the victim must end within 2 m in both worlds; the checkpoint is reloaded after every case. Takes: takedown-variants-v1254i (back), v1254h (sides and Corvo's front), v1254j (Emily's right side), v1254l (Emily's front; 1254h/j failed because B toggles crouch and stood her up in the guard's view). The guard breaking free (choke_combat_lose) is struggle_and_escape.",
+  "items": [
+    {
+      "id": "nonlethal_takedown_front_back_sides",
+      "decision": "complete",
+      "scope": "Chokes from behind (choke_back), the left and right sides (choke_left/choke_right) and the front (choke_front), each followed by choke_loop and choke_win, in both source roles: presented on the partner and the guard unconscious in both worlds at the same place.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254i",
+          "cases": [
+            "client-back-choke",
+            "host-back-choke"
+          ]
+        },
+        {
+          "take": "takedown-variants-v1254h",
+          "cases": [
+            "client-left-choke",
+            "host-left-choke",
+            "host-right-choke",
+            "host-front-choke"
+          ]
+        },
+        {
+          "take": "takedown-variants-v1254j",
+          "cases": [
+            "client-right-choke"
+          ]
+        },
+        {
+          "take": "takedown-variants-v1254l",
+          "cases": [
+            "client-front-choke"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254i/back-client-choke-observer.mp4",
+          "verdict": "Emily takes the guard from behind, holds him in the choke while he struggles and lowers him to the floor."
+        },
+        {
+          "video": "takedown-variants-v1254h/left-client-choke-observer.mp4",
+          "verdict": "Emily comes in at the guard's left side, wraps him in the choke and lowers him unconscious."
+        },
+        {
+          "video": "takedown-variants-v1254h/left-host-choke-observer.mp4",
+          "verdict": "Corvo seizes the guard from his left side, holds him through the struggle and lets him sag to the floor."
+        },
+        {
+          "video": "takedown-variants-v1254h/right-host-choke-observer.mp4",
+          "verdict": "Corvo grabs the guard from the right, holds the choke while the guard kicks, and lowers him."
+        },
+        {
+          "video": "takedown-variants-v1254j/right-client-choke-observer.mp4",
+          "verdict": "Emily steps in from the guard's right and chokes him; he folds to the floor beside her."
+        },
+        {
+          "video": "takedown-variants-v1254h/front-host-choke-observer.mp4",
+          "verdict": "Corvo seizes the guard face to face; the guard sinks to the floor in front of him (partly hidden behind Corvo)."
+        },
+        {
+          "video": "takedown-variants-v1254l/front-client-choke-observer.mp4",
+          "verdict": "Emily faces the guard, seizes him and holds the choke, then lowers him to the floor."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

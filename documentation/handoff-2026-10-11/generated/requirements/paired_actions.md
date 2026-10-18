@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:07:12.019999+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:13:53.382193+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -114,7 +114,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry, hold and release read on both characters. Only rear chokes were judged, and the victim doesn't react in these older takes. Scope: rear presentation accepted (sweep); side/front runtime in audits 1257 and 1254c. Audit 1257: rear choke in both roles; side chokes choke_left/choke_right presented for Emily (ids 68/69, then loop and win, knockout shared); front choke choke_front for Corvo (62). Corvo's side and Emily's front chokes not yet reached by the fixture. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "partner-takedown-exclusion-host-v388/host-rear-choke.mp4",
@@ -146,19 +146,93 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The rear choke's entry
     "choke-finish-emily-v598/client-rear-choke.mp4",
     "choke-finish-emily-v598/observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "visual_accepted": false,
   "evidence": [
     "../movement-integration/crouched-takedown-audit-v1246.json",
     "../movement-integration/takedown-variants-audit-v1257.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "takedown-variants-v1254i/result.json",
+    "takedown-variants-v1254h/result.json",
+    "takedown-variants-v1254j/result.json",
+    "takedown-variants-v1254l/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1354-chokes.json",
+    "decision": "complete",
+    "scope": "Chokes from behind (choke_back), the left and right sides (choke_left/choke_right) and the front (choke_front), each followed by choke_loop and choke_win, in both source roles: presented on the partner and the guard unconscious in both worlds at the same place.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254i",
+        "cases": [
+          "client-back-choke",
+          "host-back-choke"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254h",
+        "cases": [
+          "client-left-choke",
+          "host-left-choke",
+          "host-right-choke",
+          "host-front-choke"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254j",
+        "cases": [
+          "client-right-choke"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254l",
+        "cases": [
+          "client-front-choke"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254i/back-client-choke-observer.mp4",
+        "verdict": "Emily takes the guard from behind, holds him in the choke while he struggles and lowers him to the floor."
+      },
+      {
+        "video": "takedown-variants-v1254h/left-client-choke-observer.mp4",
+        "verdict": "Emily comes in at the guard's left side, wraps him in the choke and lowers him unconscious."
+      },
+      {
+        "video": "takedown-variants-v1254h/left-host-choke-observer.mp4",
+        "verdict": "Corvo seizes the guard from his left side, holds him through the struggle and lets him sag to the floor."
+      },
+      {
+        "video": "takedown-variants-v1254h/right-host-choke-observer.mp4",
+        "verdict": "Corvo grabs the guard from the right, holds the choke while the guard kicks, and lowers him."
+      },
+      {
+        "video": "takedown-variants-v1254j/right-client-choke-observer.mp4",
+        "verdict": "Emily steps in from the guard's right and chokes him; he folds to the floor beside her."
+      },
+      {
+        "video": "takedown-variants-v1254h/front-host-choke-observer.mp4",
+        "verdict": "Corvo seizes the guard face to face; the guard sinks to the floor in front of him (partly hidden behind Corvo)."
+      },
+      {
+        "video": "takedown-variants-v1254l/front-client-choke-observer.mp4",
+        "verdict": "Emily faces the guard, seizes him and holds the choke, then lowers him to the floor."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: takedown-variants-v1254i/result.json](<../../../../work/natural-moveset/takedown-variants-v1254i/result.json>)
+- [evidence: takedown-variants-v1254h/result.json](<../../../../work/natural-moveset/takedown-variants-v1254h/result.json>)
+- [evidence: takedown-variants-v1254j/result.json](<../../../../work/natural-moveset/takedown-variants-v1254j/result.json>)
+- [evidence: takedown-variants-v1254l/result.json](<../../../../work/natural-moveset/takedown-variants-v1254l/result.json>)
 - [in_game_recordings: partner-takedown-exclusion-host-v388/host-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-host-v388/host-rear-choke.mp4>)
 - [in_game_recordings: partner-takedown-exclusion-client-v389/client-rear-choke.mp4](<../../../../work/natural-moveset/partner-takedown-exclusion-client-v389/client-rear-choke.mp4>)
 - [in_game_recordings: ordinary-guard-choke-control-v390/host-rear-choke.mp4](<../../../../work/natural-moveset/ordinary-guard-choke-control-v390/host-rear-choke.mp4>)
