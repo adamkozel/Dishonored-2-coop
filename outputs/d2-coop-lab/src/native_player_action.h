@@ -5,9 +5,14 @@
 // Observed on both roles in B671F824: Slash 39 / VT1c85d28 and
 // Block 44 / VT1c81a68, alongside ordinary Running. Unknown states fail closed.
 inline bool nativePlayerSwordAction(const NativePlayerStates& s,std::uintptr_t base,unsigned& action){
-    if(!s.defaultMode||s.active.empty()||s.active.size()>2)return false;
+    // 1214cu (#11): with a power selected, the left hand runs its own EquipChange (state 64, the power hidden and
+    // shown again around blocks and swings: power_unequip/power_equip) beside the sword states. It does not change the
+    // body action; failing closed on it starved the stream in every guard fight (mission-coverage-v1328zz/zza).
+    unsigned leftEquip=0;for(const auto& a:s.active)if(a.id==64&&a.vtable==base+0x1c79cf8)++leftEquip;
+    if(!s.defaultMode||s.active.empty()||leftEquip>1||s.active.size()-leftEquip>2)return false;
     bool motion=false,slash=false,block=false;
     for(const auto& a:s.active){
+        if(a.id==64&&a.vtable==base+0x1c79cf8)continue;
         if(a.id==39&&a.vtable==base+0x1c85d28){if(slash)return false;slash=true;}
         else if(a.id==44&&a.vtable==base+0x1c81a68){if(block)return false;block=true;}
         else {
