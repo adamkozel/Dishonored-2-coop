@@ -24,10 +24,10 @@ rep("if($case-notin'kick','crouchheavy','note','mana','stairs','pistol','crossbo
 rep("grenade=9500;", "grenade=9500;stunfront=10500;stunright=10500;stunleft=10500;stunback=11500;")
 rep("     grenade=@(@(800,'grant','grenade'),@(3000,'lt',1300));\n",
     "     grenade=@(@(800,'grant','grenade'),@(3000,'lt',1300));\n"
-    "     stunfront=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',0),@(7500,'pitch',0),@(9000,'hold','off'));\n"
-    "     stunright=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',90),@(7500,'pitch',0),@(9000,'hold','off'));\n"
-    "     stunleft=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',-90),@(7500,'pitch',0),@(9000,'hold','off'));\n"
-    "     stunback=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',180),@(8500,'pitch',0),@(10000,'hold','off'));\n")
+    "     stunfront=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',0),@(7500,'pitch',0),@(9000,'hold','off'));\n"
+    "     stunright=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',90),@(7500,'pitch',0),@(9000,'hold','off'));\n"
+    "     stunleft=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',-90),@(7500,'pitch',0),@(9000,'hold','off'));\n"
+    "     stunback=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',180),@(8500,'pitch',0),@(10000,'hold','off'));\n")
 rep("'pitch'{& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $source -Pitch $d[2] -Quick|Out-Null}",
     "'pitch'{& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $source -Pitch $d[2] -Quick|Out-Null}"
     ";'hold'{C $source \"coop_player_health_hold $($d[2])\"};'turn'{$row.yawBefore=try{$vo=(Q $source '--player').nativeViewOrientation;[Math]::Round([Math]::Atan2([double]$vo[1],[double]$vo[0])*180/[Math]::PI,1)}catch{$null};if([int]$d[2]){& \"$lab/Send-D2Input.ps1\" -Role $source -RightX $(if([int]$d[2]-gt0){32767}else{-32767}) -DurationMs ([int]([Math]::Abs([int]$d[2])*1000/80))|Out-Null};$row.yawAfter=try{$vo=(Q $source '--player').nativeViewOrientation;[Math]::Round([Math]::Atan2([double]$vo[1],[double]$vo[0])*180/[Math]::PI,1)}catch{$null}}")
@@ -37,6 +37,7 @@ rep("     'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';
     "      $row.expectedStun=@{stunfront=2;stunright=1;stunleft=3;stunback=4}[$case]\n"
     "      if(!@($row.stunVariants).Count){throw \"No stun presented (source stun samples $($row.sourceStunSamples))\"};$row.checks.Add(\"Stun presented: variants $($row.stunVariants-join ',') (expected $($row.expectedStun))\")}\n"
     "     'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';")
+rep("foreach($r in 'host','client'){try{I $r;C $r 'coop_observer_camera off';", "foreach($r in 'host','client'){try{I $r;C $r 'coop_player_health_hold off';C $r 'coop_observer_camera off';")  # a failed stun case must not leave the hold on
 # pwsh -File passes a comma list as one string: split -Sources and -Cases right after the param line.
 i = s.index('\n') + 1
 s = s[:i] + "$Sources=@($Sources|ForEach-Object {$_-split','});$Cases=@($Cases|ForEach-Object {$_-split','})\n" + s[i:]

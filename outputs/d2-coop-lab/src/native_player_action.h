@@ -15,6 +15,9 @@ inline bool nativePlayerSwordAction(const NativePlayerStates& s,std::uintptr_t b
         if(a.id==64&&a.vtable==base+0x1c79cf8)continue;
         if(a.id==39&&a.vtable==base+0x1c85d28){if(slash)return false;slash=true;}
         else if(a.id==44&&a.vtable==base+0x1c81a68){if(block)return false;block=true;}
+        // 1214cz (#11 stagger): a parried or blocked swing continues as player state 40, arkPlayerStateRecoil (vtable RVA
+        // 0x1c83c98 from its RTTI; confirmed static), playing sword_parry_* (1361d: sword_parry_rl, 666 ms).
+        else if(a.id==40&&a.vtable==base+0x1c83c98){if(slash)return false;slash=true;}
         else {
             bool known=false;
             for(const auto& e:{NativePlayerActiveState{0,0,0x1c85628},NativePlayerActiveState{6,0,0x1c84258},

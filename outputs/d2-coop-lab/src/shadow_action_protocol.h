@@ -15,7 +15,7 @@
 // Native semantic states and explicit unbound ground presentation18. No pointers, resource names or damage requests.
 struct CoopShadowActionPacket {
     std::uint32_t magic=0x48413244;
-    std::uint16_t version=76,size=sizeof(CoopShadowActionPacket);
+    std::uint16_t version=77,size=sizeof(CoopShadowActionPacket);
     std::uint32_t build=0x67a50cde,role=0;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0;
     std::uint64_t sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
@@ -66,7 +66,10 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     const bool defenseImpact=p.combatVariant>=19&&p.combatVariant<=21;
     // 1214cv (protocol 76): a death collapse belongs only to the dead state (25), single phase, its exact duration.
     const bool deathCombat=CombatPresentation::death(p.combatVariant);
+    // 1214cz (protocol 77): a recoil stagger rides the slash state, single phase, at a native recoil duration.
+    const bool staggerCombat=CombatPresentation::stagger(p.combatVariant);
     const bool combat=deathCombat?(p.state==25&&p.combatPhase==1&&p.combatDurationMs==CombatPresentation::deathDuration(p.combatVariant)&&p.combatTimeMs<=p.combatDurationMs):
+        staggerCombat?(p.state==1&&p.combatPhase==1&&(p.combatDurationMs==666||p.combatDurationMs==733)&&p.combatTimeMs<=p.combatDurationMs):
         p.combatVariant<=23&&p.state!=25&&(!defenseImpact||((p.state==2||p.state==3)&&p.combatPhase==1&&p.combatDurationMs==(p.combatVariant==21?500u:533u)&&p.combatTimeMs<=p.combatDurationMs))&&
         (p.combatVariant<15||defenseImpact||(p.combatVariant>=22&&p.state==1&&p.combatPhase==1&&p.combatDurationMs==733&&p.combatTimeMs<=733)||(p.combatVariant<22&&p.state==1&&p.combatPhase==1&&
         (p.combatVariant==18?(p.combatDurationMs==833||p.combatDurationMs==1000):p.combatDurationMs==(p.combatVariant==17?800u:p.combatVariant==15?866u:666u))&&p.combatTimeMs<=p.combatDurationMs))&&(p.combatVariant?
@@ -120,7 +123,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     const bool dead=p.state!=25||(p.kind==1&&deathCombat&&!p.equipmentVariant&&!p.traversalVariant&&!p.powerVariant&&!p.rangedKind&&!p.rangedVariant&&
         !p.grenadeHeld&&!p.grenadeVariant&&!p.carryVariant&&!p.stunVariant&&!p.airStage&&!p.heartHeld&&!p.heartVariant&&!p.trapHeld&&!p.trapVariant&&
         !p.chokeVariant&&!p.useVariant&&!p.leanSide&&!p.leanUp);
-    return dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==76&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
+    return dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==77&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
         p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=25&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&

@@ -164,6 +164,8 @@ int main(int argc,char** argv){
         check(bank.hasUse()==(bank.version>=71),"interaction clips require bank71");
         if(bank.hasUse())for(unsigned c=369;c<374;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"interaction pelvis pose finite");
         check(bank.hasDeath()==(bank.version>=72),"death collapse clips require bank72");
+        check(bank.hasRecoil()==(bank.version>=73),"recoil stagger clips require bank73");
+        if(bank.hasRecoil())for(unsigned c=378;c<380;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"recoil pelvis pose finite");
         if(bank.hasDeath())for(unsigned c=374;c<378;++c){check(bank.sampleParameter(c,2,1.f)[6]<bank.sampleParameter(c,2,0.f)[6]-.5f,"death collapse lowers the pelvis to the ground");
             for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"death pelvis pose finite");}
         check(bank.hasCrouchedGrenade()==(bank.version>=44),"crouched grenade clips require their appended bank");

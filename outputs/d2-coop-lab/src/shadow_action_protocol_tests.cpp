@@ -375,6 +375,13 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
          check(CombatPresentation::clip(v,1)==374+v-24&&!CombatPresentation::recovery(v),"death collapse addresses bank72 clips 374-377");}
         auto badDead=dead;badDead.combatVariant=10;badDead.combatDurationMs=533;check(!validShadowAction(badDead,context,peer),"dead state carries only a death collapse");
         CombatPresentation timeline;check(timeline.push({1.,1,24,1,0,2233})&&!timeline.push({2.,2,25,1,0,2233}),"death collapse timeline accepts only its exact duration");}
+       {auto rec=swim;rec.state=1;rec.swordState=2;rec.combatPhase=1;
+        for(unsigned v:{28u,29u})for(unsigned d:{666u,733u}){rec.combatVariant=v;rec.combatDurationMs=d;rec.combatTimeMs=d/2;
+         check(validShadowAction(rec,context,peer),"recoil stagger rides the slash state (1214cz)");
+         auto badRec=rec;badRec.combatDurationMs=700;check(!validShadowAction(badRec,context,peer),"unobserved recoil duration refused");
+         badRec=rec;badRec.state=2;check(!validShadowAction(badRec,context,peer),"recoil cannot ride the block state");
+         check(CombatPresentation::clip(v,1)==378+v-28,"recoil addresses bank73 clips 378-379");}
+        check(nativeCombatVariant("midnight/gameplay/player/base/combat/sword_parry_rl.midnightscene")==28&&nativeCombatVariant("midnight/gameplay/player/base/combat/sword_recoil_rightb.midnightscene")==29,"native recoil scenes map to their side");}
        {auto hold=swim;hold.state=24;hold.swordState=1;check(validShadowAction(hold,context,peer),"unclassified native state holds the stream without an action");
         hold.swordState=2;check(validShadowAction(hold,context,peer),"hold carries drawn equipment state only");
         auto badHold=hold;badHold.swordState=0;check(!validShadowAction(badHold,context,peer),"hold requires validated equipment state");

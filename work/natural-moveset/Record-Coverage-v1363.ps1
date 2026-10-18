@@ -35,7 +35,7 @@ function Arm{foreach($r in 'host','client'){I $r;C $r 'coop_movement_fixture off
  $w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$ok=(S host '.product.json').result-eq'armed'-and(S client '.product.json').result-eq'armed'}while(!$ok-and$w.ElapsedMilliseconds-lt60000)
  if(!$ok){throw 'Product controller not armed'}}
 function Disarm{$cw=[Diagnostics.Stopwatch]::StartNew()
- do{$off=$true;foreach($r in 'host','client'){try{I $r;C $r 'coop_observer_camera off';C $r 'coop_product_auto off';C $r 'coop_movement_resume off';foreach($cmd in 'coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off','coop_shadow_stream off','coop_movement_bank off','coop_trigger_mirror off'){C $r $cmd};C $r 'coop_checkpoint_sync off'
+ do{$off=$true;foreach($r in 'host','client'){try{I $r;C $r 'coop_player_health_hold off';C $r 'coop_observer_camera off';C $r 'coop_product_auto off';C $r 'coop_movement_resume off';foreach($cmd in 'coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off','coop_shadow_stream off','coop_movement_bank off','coop_trigger_mirror off'){C $r $cmd};C $r 'coop_checkpoint_sync off'
    if((S $r '.reset.json').enabled){$off=$false;$st=S $r;if($st.localGameLogicState-in8,15){I $r A 300}elseif($st.localGameLogicState-eq2){I $r B 200}}}catch{}}
   if(!$off){Start-Sleep -Milliseconds 1500}}while(!$off-and$cw.ElapsedMilliseconds-lt60000)
  foreach($r in 'host','client'){try{if((S $r).localGameLogicState-in2,12){I $r B 200;Start-Sleep -Milliseconds 800}}catch{}}}
@@ -143,10 +143,10 @@ try{
      pistol=@(@(800,'grant','pistol'),@(3000,'lt',250),@(4700,'lt',250),@(6400,'lt',250),@(8800,'x',1500),@(12000,'x',650));
      crossbow=@(@(800,'grant','crossbow'),@(3000,'lt',250),@(4700,'lt',250),@(6400,'lt',250),@(8800,'x',1500),@(12000,'x',650));
      grenade=@(@(800,'grant','grenade'),@(3000,'lt',1300));
-     stunfront=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',0),@(7500,'pitch',0),@(9000,'hold','off'));
-     stunright=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',90),@(7500,'pitch',0),@(9000,'hold','off'));
-     stunleft=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',-90),@(7500,'pitch',0),@(9000,'hold','off'));
-     stunback=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',75),@(3000,'lt',300),@(3400,'turn',180),@(8500,'pitch',0),@(10000,'hold','off'));
+     stunfront=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',0),@(7500,'pitch',0),@(9000,'hold','off'));
+     stunright=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',90),@(7500,'pitch',0),@(9000,'hold','off'));
+     stunleft=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',-90),@(7500,'pitch',0),@(9000,'hold','off'));
+     stunback=@(@(600,'hold','on'),@(800,'grant','grenade'),@(2200,'pitch',65),@(3000,'lt',300),@(3400,'turn',180),@(8500,'pitch',0),@(10000,'hold','off'));
      stunmine=@(@(800,'grant','stunmine'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
