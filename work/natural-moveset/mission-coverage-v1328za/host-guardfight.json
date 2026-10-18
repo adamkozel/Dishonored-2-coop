@@ -1,0 +1,62 @@
+{
+  "source": "host",
+  "case": "guardfight",
+  "observer": "client",
+  "passed": false,
+  "failure": "No hit reaction presented; reset: Native read failed --player-states",
+  "checks": [],
+  "guardFacing": [
+    -0.8916521814757579,
+    -0.45272109214120143
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.8916521814757579,
+        -0.45272109214120143
+      ],
+      "rest": [
+        6.15298,
+        48.1,
+        16.4644
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "phaseLog": [
+    {
+      "ms": 3552,
+      "phase": "block"
+    },
+    {
+      "phase": "open",
+      "ms": 12536,
+      "guardSamples": 6
+    },
+    {
+      "phase": "attack",
+      "ms": 27579,
+      "hitSamples": 0
+    }
+  ],
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcomeWaitMs": 672,
+  "guard": "script_spawner_checkpoint_guard_02",
+  "blockImpacts": 5,
+  "timedParries": 3,
+  "hitReactions": 0,
+  "stunVariants": [],
+  "attackSamples": 22,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    7
+  ],
+  "minSourceHealth": 55.0
+}

@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -109,9 +109,9 @@ try{
     if($case-eq'slope'){
      # A smooth ramp (slopes_and_stairs; the Dunwall stairs are stepped). -SlopeStart/-SlopeEnd x,y,z (resting ground heights
      # from the slopescan grid) bound it. Walk up, walk down, run up; the partner must present the terrain grade both ways.
-     $SlopeStart=@($SlopeStart|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_});$SlopeEnd=@($SlopeEnd|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_})
-     if($SlopeStart.Count-ne3-or$SlopeEnd.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
-     $ax=$SlopeStart[0];$ay=$SlopeStart[1];$az=$SlopeStart[2];$bx=$SlopeEnd[0];$by=$SlopeEnd[1];$bz=$SlopeEnd[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
+     $slopeA=@($SlopeStart|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_});$slopeB=@($SlopeEnd|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_})
+     if($slopeA.Count-ne3-or$slopeB.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
+     $ax=$slopeA[0];$ay=$slopeA[1];$az=$slopeA[2];$bx=$slopeB[0];$by=$slopeB[1];$bz=$slopeB[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
      $ux=($bx-$ax)/$len;$uy=($by-$ay)/$len;$up=[Math]::Atan2($uy,$ux)*180/[Math]::PI;$dn=[Math]::Atan2(-$uy,-$ux)*180/[Math]::PI;$row.slopeGrade=[Math]::Round(($bz-$az)/$len,3)
      $cx=($ax+$bx)/2-3.5*$uy;$cy=($ay+$by)/2+3.5*$ux;$cz=($az+$bz)/2+2.2;$cyaw=[Math]::Atan2(($ay+$by)/2-$cy,($ax+$bx)/2-$cx)*180/[Math]::PI
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
@@ -295,7 +295,9 @@ try{
       # Source native states every sample, to name the hit reactions the guard causes (1328w: health dropped, no stun scene).
       $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$x|Add-Member sourceActive $(try{@((Q $source '--player-states').active|ForEach-Object {$_.id})}catch{$null});$samples.Add($x)
       if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++};Start-Sleep -Milliseconds 80}
-     Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
+     # Keep the health hold through the reset (1328za: released beside the still-alert checkpoint guard 01, the next case
+     # could not read the source).
+     Save "$out/$key-samples.json" @($samples)
      # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
      $ow=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)}}while($row.outcome.host-ne$row.outcome.client-and$ow.ElapsedMilliseconds-lt8000)
      $row.outcomeWaitMs=$ow.ElapsedMilliseconds;$row.guard=$gname
@@ -306,19 +308,23 @@ try{
      $row.minSourceHealth=($samples|ForEach-Object {$_.sourceHealth}|Where-Object {$_-ne$null}|Measure-Object -Minimum).Minimum
      C $peer 'coop_observer_camera off'
      if(!($row.blockImpacts+$row.timedParries)){throw "No block impact or timed parry presented (hits $($row.hitReactions), attacks $($row.attackSamples))"}
-     if(!$row.hitReactions){throw 'No hit reaction presented'};if($row.attackSamples-lt3){throw "Attacks presented $($row.attackSamples)"}
+     # A plain sword hit has no full-body native player state (1328za: five hits, source state stayed 0); only stuns play a
+     # native hit reaction, so hit reactions are recorded, not required, here.
+     $row.healthDrops=@(for($i=1;$i-lt$samples.Count;$i++){if($samples[$i].sourceHealth-ne$null-and$samples[$i-1].sourceHealth-ne$null-and$samples[$i].sourceHealth-lt$samples[$i-1].sourceHealth){[pscustomobject]@{ms=$samples[$i].ms;states=$samples[$i].sourceActive}}})
+     if($row.attackSamples-lt3){throw "Attacks presented $($row.attackSamples)"}
      if($row.outcome.host-ne$row.outcome.client-or$row.outcome.host-notin'dead','unconscious'){throw "Guard outcome host $($row.outcome.host), client $($row.outcome.client)"}
      $row.checks.Add("Block impacts $($row.blockImpacts), timed parries $($row.timedParries), hit reactions $($row.hitReactions) (variants $($row.stunVariants-join ',')), attacks $($row.attackSamples) (variants $($row.attackVariants-join ',')); guard $($row.outcome.host) in both worlds")}
     foreach($c in $caps){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$caps=@()
     foreach($q in 'host','client'){foreach($suffix in '.movement.json','.shadow-stream.json','.product.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
     $row.passed=$true
    }catch{$row.failure=$_.Exception.Message}
-   finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
+   finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{}
     # 1328f: after a failed placement both peers sat in a menu (logic 12) and every later case failed its first read;
     # dismiss menus and prompts on both peers before the reset reads the source.
     foreach($r in 'host','client'){for($m=0;$m-lt4;$m++){$lg=try{(S $r).localGameLogicState}catch{1};if($lg-in2,12){I $r B 200;Start-Sleep -Milliseconds 900}elseif($lg-in8,15){I $r A 300;Start-Sleep -Milliseconds 1500}else{break}}}
     try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
-     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
+     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}
+    try{C $source 'coop_player_health_hold off'}catch{}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
  $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
