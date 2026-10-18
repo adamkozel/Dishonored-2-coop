@@ -53,6 +53,9 @@ try{
   $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
   if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
   if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+ }
+ & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-start" *>> "$out/note-restoration.log"
+ foreach($r in 'host','client'){
   $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
  }
  Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;sources=$Sources})
@@ -112,7 +115,7 @@ try{
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
    if($case-notin'kick','crouchheavy','note','mana','stairs','runjump','arcs','slideexit','moveattack','airattack'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
-   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500;swing=14500;block=10000;moveattack=15500;airattack=11500}[$case];if(!$caseMs){$caseMs=9500}
+   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;jumps=15000;runjump=10500;fall=7000;slide=7000;slideexit=12500;arcs=12500;swing=14500;block=10000;moveattack=15500;airattack=11500;sheathe=17500}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
@@ -153,6 +156,10 @@ try{
      elseif($step-eq3-and$t-ge6200){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 2000 -LeftY 32767|Out-Null;$segments.Add(@{ms=$t;run='sprint'});$step=4;$runAt=$t}
      elseif($step-eq4-and$t-ge$runAt+450){& "$lab/Send-D2Input.ps1" -Role $source -Button A,LeftThumb -LeftY 32767 -DurationMs 200|Out-Null;$segments.Add(@{ms=$t;takeoff='sprint'});Start-Sleep -Milliseconds 210;& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -LeftY 32767 -DurationMs 1400|Out-Null;$step=5}}
     function Course{C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),$Course[1].ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t)}
+    if($case-eq'sheathe'){$sh=@(@(800,'B',180,0,'crouch'),@(1800,'X',1500,0,'holster-crouched'),@(5000,'X',650,0,'draw-crouched'),@(7600,'B',180,0,'stand'),@(8600,'X',1500,14000,'holster-walking'),@(12400,'X',650,14000,'draw-walking'))
+     if($step-eq4-and$t-ge8100-and!$placed){Course;$placed=$true}
+     if($step-lt$sh.Count-and$t-ge$sh[$step][0]){$d=$sh[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[1] -DurationMs $d[2] -LeftY $d[3]|Out-Null;if($d[3]){$keep=$d[3]};$segments.Add(@{ms=$t;sheathe=$d[4]});$step++}
+     if($step-in5,6-and$t-ge$sh[$step-1][0]+$sh[$step-1][2]+50-and$t-lt$sh[$step-1][0]+$sh[$step-1][2]+250){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 1600|Out-Null}}
     if($case-eq'swing'){$sw=@(@(800,'Neutral',180,255,'light'),@(2500,'Neutral',180,255,'combo'),@(3050,'Neutral',180,255,'combo'),@(3600,'Neutral',180,255,'combo'),@(5600,'Neutral',1500,255,'heavy'),@(8200,'B',180,0,'crouch'),@(9200,'Neutral',180,255,'crouched-light'),@(10600,'Neutral',1500,255,'crouched-heavy'),@(13300,'B',180,0,'stand'))
      if($step-lt$sw.Count-and$t-ge$sw[$step][0]){$d=$sw[$step];& "$lab/Send-D2Input.ps1" -Role $source -Button $d[1] -DurationMs $d[2] -RightTrigger $d[3]|Out-Null;$segments.Add(@{ms=$t;swing=$d[4]});$step++}}
     if($case-eq'block'){$bl=@(@(800,'RightShoulder',1400,'block'),@(3000,'B',180,'crouch'),@(3800,'RightShoulder',1400,'crouched-block'),@(6000,'B',180,'stand'),@(7000,'A',180,'jump'),@(7150,'RightShoulder',700,'air-block'))
@@ -245,6 +252,11 @@ try{
       if([double]$x.stanceMix-gt.5){$cur.crouched++};if([double]$x.speed-gt.3){$cur.moving++};if([double]$x.airWeight-gt.5){$cur.air++}}elseif($cur){$eps.Add($cur);$cur=$null}}
     if($cur){$eps.Add($cur)};@($eps|ForEach-Object {[ordered]@{from=$_.from;to=$_.to;samples=$_.samples;variants=@($_.variants);crouched=$_.crouched;moving=$_.moving;air=$_.air}})}
    if($case-in'swing','block','moveattack','airattack'){$row.combat=@(CombatEpisodes);$row.air=@(AirEpisodes)}
+   if($case-eq'sheathe'){$row.sheathe=@()
+    foreach($g in @($segments|Where-Object {$_.sheathe-like'holster-*'-or$_.sheathe-like'draw-*'})){$w=@($samples|Where-Object {$_.ms-ge$g.ms+1200-and$_.ms-lt$g.ms+2600});$want=if($g.sheathe-like'holster-*'){0}else{1}
+     $ok=@($w|Where-Object {[math]::Abs([double]$_.armedMix-$want)-lt.1}).Count;$ctx=if($g.sheathe-like'*crouched'){@($w|Where-Object {[double]$_.stanceMix-gt.5}).Count}else{@($samples|Where-Object {$_.ms-ge$g.ms-and$_.ms-lt$g.ms+1500-and[double]$_.speed-gt.3}).Count}
+     $row.sheathe+=[ordered]@{action=$g.sheathe;armedMatched=$ok;inContext=$ctx};if(!$ok-or!$ctx){throw "$($g.sheathe): armed mix matched $ok, in context $ctx"}}
+    $row.checks.Add('Native holster and draw while crouched and while walking: the partner armed mix follows each, in context')}
    if($case-eq'swing'){$vars=@($row.combat|ForEach-Object {$_.variants}|Sort-Object -Unique);$row.variants=$vars
     if($row.combat.Count-lt5){throw "Combat episodes $($row.combat.Count) (5 required)"};if($vars.Count-lt3){throw "Combat variants $($vars-join ',') (3 required)"}
     $cr=@($row.combat|Where-Object {$_.from-ge8800-and$_.crouched-gt0});if($cr.Count-lt2){throw "Crouched attacks presented crouched: $($cr.Count) (2 required)"}

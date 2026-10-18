@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -105,6 +105,23 @@ try{
      $row.landSamples=@($s|Where-Object {$_.ms-gt6000-and[double]$_.swimWeight-lt.05-and[double]$_.weight-gt.9}).Count
      if(!$row.exited){throw 'Source did not leave the water'};if(!$row.swimming){throw 'Partner swimming not presented before the exit'};if(!@($row.exitTraversal).Count-and!$row.landSamples){throw 'Partner exit not presented'}
      $row.checks.Add("Source left the water onto the dock; partner swam ($($row.swimming)), exit traversal $(@($row.exitTraversal)-join ','), land samples $($row.landSamples)")}
+    if($case-eq'hardfall'){
+     # 1333a: indoors the 12 m drop met an upper floor; here the source drops 12 m onto the open spawn dock, health held. The native
+     # hard landing is CatFall, player state 4 (the playback's shadow action 11 is a different numbering; native 11 is WallCrouch).
+     $yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;C $source 'coop_player_health_hold on'
+     C $peer (P ($sp.x+5*$px) ($sp.y+5*$py) ($sp.z+1.7) ([Math]::Atan2(-$py,-$px)*180/[Math]::PI));Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null
+     $caps=Capture $key 11;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$dropped=$false;$walked=$false;$states=[Collections.Generic.List[object]]::new()
+     while($watch.ElapsedMilliseconds-lt9000){$t=$watch.ElapsedMilliseconds
+      if(!$dropped-and$t-ge800){C $source (P $sp.x $sp.y ($sp.z+13.7) $yaw);$dropped=$true}
+      if(!$walked-and$t-ge5200){I $source 'Neutral' 1600 14000;$walked=$true}
+      $ps=try{Q $source '--player-states'}catch{$null};$states.Add([pscustomobject]@{ms=$t;active=@($ps.active|ForEach-Object {$_.id});z=$(if($ps){[double]$ps.position[2]}else{$null})})
+      $x=Sample $t;$samples.Add($x);Start-Sleep -Milliseconds 40}
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-states.json" @($states);C $source 'coop_player_health_hold off'
+     $zs=@($states|Where-Object {$_.z-ne$null-and$_.ms-gt900}|ForEach-Object {$_.z});$row.fallMetres=[Math]::Round((($zs|Measure-Object -Maximum).Maximum)-$zs[-1],2)
+     $row.nativeHardLanding=@($states|Where-Object {@($_.active)-contains4}).Count;$row.nativeStates=@($states|ForEach-Object {$_.active}|Sort-Object -Unique)
+     $row.hardLandingSamples=@($samples|Where-Object {[double]$_.traversalWeight-gt.5-and[int]$_.traversalVariant-eq6}).Count;$row.walkOn=@($samples|Where-Object {$_.ms-ge5300-and[double]$_.speed-gt.3}).Count
+     if($row.fallMetres-lt9){throw "Source fell only $($row.fallMetres) m"};if(!$row.nativeHardLanding){throw "No native hard landing (CatFall, state 4; states seen $($row.nativeStates-join ','))"};if(!$row.hardLandingSamples){throw 'Hard landing not presented (traversal variant 6)'};if(!$row.walkOn){throw 'No travel after the hard landing'}
+     $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
     if($case-eq'climbtop'){
      $lz=$ChainZ-2.22
      C $peer (P ($ChainX-4.5) ($ChainY-1.5) ($lz+3.5) 0 5);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
@@ -112,12 +129,13 @@ try{
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
      $caps=Capture $key 15
-     $s=Run $key 13500 @(@(300,'X',600,0),@(1700,'Neutral',9000,32000),@(11000,'Neutral',100,0))
+     # Chain1 has no top exit (1328c: 9 s up still hangs on it, state 29): climb to the top, then let go with A, the native exit.
+     $s=Run $key 13500 @(@(300,'X',600,0),@(1700,'Neutral',9000,32000),@(10900,'A',300,0),@(11400,'Neutral',100,0))
      $after=Q $source '--player-states';Save "$out/$key-source-after.json" $after;$row.sourceAfter=@($after.active|ForEach-Object {$_.id});$row.defaultModeAfter=[bool]$after.defaultMode;$row.sourcePosition=(Q $source '--player').candidatePosition
      $cl=@($s|Where-Object {[double]$_.climbWeight-gt.5});$row.climbing=$cl.Count;$row.lastClimbMs=if($cl.Count){$cl[-1].ms}else{0};$row.topTraversal=@($s|Where-Object {$_.ms-gt$row.lastClimbMs-and[double]$_.traversalWeight-gt.5}|ForEach-Object {[int]$_.traversalVariant}|Sort-Object -Unique)
      C $peer 'coop_observer_camera off'
-     if($row.climbing-lt20){throw "Climbing presented $($row.climbing)"};if(!$row.defaultModeAfter){throw "Source still on the chain after 9 s up (states $($row.sourceAfter-join ','))"}
-     $row.checks.Add("Climbed chain1 to the end: $($row.climbing) climb samples, source back in default mode at $(@($row.sourcePosition|ForEach-Object {[Math]::Round([double]$_,2)})-join ','), top traversal $(@($row.topTraversal)-join ',')")}
+     if($row.climbing-lt20){throw "Climbing presented $($row.climbing)"};if(!$row.defaultModeAfter){throw "Source still on the chain after the release (states $($row.sourceAfter-join ','))"}
+     $row.checks.Add("Climbed chain1 to its top and let go: $($row.climbing) climb samples, source back in default mode at $(@($row.sourcePosition|ForEach-Object {[Math]::Round([double]$_,2)})-join ','), top traversal $(@($row.topTraversal)-join ',')")}
     if($case-eq'climb'){
      $lz=$ChainZ-2.22
      C $peer (P ($ChainX-4.5) ($ChainY-1.5) ($lz+1.9) 0 5);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
@@ -172,7 +190,8 @@ try{
     $row.passed=$true
    }catch{$row.failure=$_.Exception.Message}
    finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
-    try{$sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
+    try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
+     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
  $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}

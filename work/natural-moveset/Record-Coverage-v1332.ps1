@@ -51,6 +51,9 @@ try{
   $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
   if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
   if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+ }
+ & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-start" *>> "$out/note-restoration.log"
+ foreach($r in 'host','client'){
   $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
  }
  Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;sources=$Sources})
@@ -137,8 +140,8 @@ try{
     $powerNames=@{blink='models/powers/blink/blink.inventoryitem';darkvision='models/powers/darkvision/darkvision.inventoryitem';bendtime='models/powers/bendtime/bendtime.inventoryitem';windblast='models/powers/windblast/windblast.inventoryitem';possession='models/powers/possession/possession.inventoryitem';swarm='models/powers/devouring_swarm/devouring_swarm.inventoryitem';farreach='models/powers/grapple/grapple.inventoryitem';domino='models/powers/phantasmallink/phantasmal_link.inventoryitem';doppelganger='models/powers/doppelganger/doppelganger.inventoryitem';mesmerize='models/powers/mesmerize/mesmerize.inventoryitem';shadowwalk='models/powers/shadow_walk/shadow_walk.inventoryitem'}
     $powerPlans=@{
      blink=@(@(2600,'lt',1200),@(6000,'lt',250));darkvision=@(@(2600,'lt',250),@(6000,'lt',250));bendtime=@(@(2600,'lt',250),@(6200,'lt',250));
-     windblast=@(@(2600,'lt',900));possession=@(@(2600,'lt',1600));swarm=@(@(2600,'lt',250));
-     farreach=@(@(2600,'lt',1200));domino=@(@(2600,'lt',1400));doppelganger=@(@(2600,'lt',800));mesmerize=@(@(2600,'lt',1200));
+     windblast=@(,@(2600,'lt',250));possession=@(,@(2600,'lt',1600));swarm=@(,@(2600,'lt',250));
+     farreach=@(,@(2600,'lt',1200));domino=@(,@(2600,'lt',1400));doppelganger=@(,@(2600,'lt',800));mesmerize=@(,@(2600,'lt',1200));
      shadowwalk=@(@(2600,'lt',250),@(4400,'move',1600),@(7600,'lt',250))}
     if($powerNames.ContainsKey($case)){$pp=$powerPlans[$case]
      if($step-eq0-and$t-ge700){C $source "coop_grant_named $($powerNames[$case])";& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 20 -Quick|Out-Null;$step=1}

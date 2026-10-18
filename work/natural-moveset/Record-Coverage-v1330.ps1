@@ -51,6 +51,9 @@ try{
   $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
   if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
   if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+ }
+ & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-start" *>> "$out/note-restoration.log"
+ foreach($r in 'host','client'){
   $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
  }
  Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash;sources=$Sources})
@@ -102,7 +105,7 @@ try{
    }else{
    C $source 'setviewpos -35 -153 68.1 0 0';C $peer 'setviewpos -29 -146 68.1 238 0';Start-Sleep -Milliseconds 600}
    if($case-notin'kick','crouchheavy','note','mana','stairs'){& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-eq'fall'){0}else{8}) -Quick|Out-Null}
-   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;pistol=15000;crossbow=15000;grenade=9500;stunmine=8500;springrazor=8500;heart=9500;health=7500}[$case];if(!$caseMs){$caseMs=9500}
+   $caseMs=@{walk8=11500;crouch8=13800;sprint3=11000;turns=23500;startstop=17500;stairs=17500;pistol=15000;crossbow=15000;grenade=9500;stunmine=8500;springrazor=8500;heart=9500;health=7500;manaelixir=10500}[$case];if(!$caseMs){$caseMs=9500}
    $live=WaitLive "$key-placed" 20000;if(!$live.ok){throw 'Partner presentation not live after placement'}
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
@@ -140,10 +143,11 @@ try{
      stunmine=@(@(800,'grant','stunmine'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
-     health=@(@(800,'grant','health'),@(2500,'use','health'))}
+     health=@(@(800,'grant','health'),@(2500,'use','health'));
+     manaelixir=@(@(700,'named','models/powers/darkvision/darkvision.inventoryitem'),@(2600,'lt',250),@(5200,'lt',250),@(6200,'grant','mana'),@(7400,'use','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
-      switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
+      switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'named'{C $source "coop_grant_named $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
       $segments.Add(@{ms=$t;item=$d[1];arg=$d[2]});$step++}}
     if($case-eq'mana'){
      if($step-eq0-and$t-ge800){C $source 'coop_grant_item mana';$step=1}
@@ -195,6 +199,9 @@ try{
      'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';if(@($row.grenadeVariants).Count-lt2){throw "Grenade variants $($row.grenadeVariants-join ',')"};$row.checks.Add("Grenade presented: variants $($row.grenadeVariants-join ',')")}
      {$_-in'stunmine','springrazor'}{$row.trapVariants=Shown 'trapWeight' 'trapVariant';if(@($row.trapVariants).Count-lt2){throw "$case variants $($row.trapVariants-join ',')"};$row.checks.Add("$case presented: variants $($row.trapVariants-join ',')")}
      'heart'{$row.heartVariants=Shown 'heartWeight' 'heartVariant';if(@($row.heartVariants).Count-lt2){throw "Heart variants $($row.heartVariants-join ',')"};$row.checks.Add("Heart presented: variants $($row.heartVariants-join ',')")}
+     'manaelixir'{$u=@($samples|Where-Object {$_.ms-ge7400-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow
+      if($row.use.result-ne'mana_use_requested'){throw "Mana use $($row.use.result)"};if([double]$row.manaBefore-ge100){throw "Mana was full before the drink ($($row.manaBefore))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
+      $row.checks.Add("Dark vision spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
      'health'{$u=@($samples|Where-Object {[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.useVariants=@($u|ForEach-Object {[int]$_.useVariant}|Sort-Object -Unique);if(!$u.Count){throw 'Elixir use reach not presented'};$row.checks.Add("Health elixir drink presented as the use reach ($($u.Count) samples)")}}}
    if($case-eq'stairs'){C $peer 'coop_observer_camera off'
     $up=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.05}).Count;$dn=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.05}).Count;$row.stairsUp=$up;$row.stairsDown=$dn

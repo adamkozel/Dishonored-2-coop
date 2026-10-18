@@ -1,0 +1,54 @@
+{
+  "source": "client",
+  "case": "doublejump",
+  "observer": "host",
+  "passed": false,
+  "failure": "Second impulse not presented (running)",
+  "checks": [
+    "Partner presentation stayed live"
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    5216.0
+  ],
+  "air": [
+    {
+      "from": 2828,
+      "to": 4845,
+      "samples": 17
+    },
+    {
+      "from": 6881,
+      "to": 8003,
+      "samples": 6
+    },
+    {
+      "from": 13468,
+      "to": 15099,
+      "samples": 14
+    }
+  ],
+  "grant": {
+    "grants": 7,
+    "refused": 0,
+    "result": "granted_named"
+  },
+  "doubles": [
+    {
+      "jump": "armed",
+      "serials": [
+        0,
+        1
+      ],
+      "secondSamples": 6
+    },
+    {
+      "jump": "running",
+      "serials": [
+        1
+      ],
+      "secondSamples": 0
+    }
+  ],
+  "restored": true
+}
