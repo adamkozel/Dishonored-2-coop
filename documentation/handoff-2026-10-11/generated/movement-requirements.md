@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T06:25:25.756421+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T06:41:05.580003+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 45 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 51 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -432,13 +432,13 @@ Captured 2026-10-18T06:25:25.756421+02:00; source [review-catalog.json](<../../.
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
 | death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | accepted_functional_both_roles | work_remaining |
 | ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | accepted_functional_both_roles | work_remaining |
-| pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | bolt_or_ammo_switch | ranged_and_items | candidates | not_verified | not_accepted | work_remaining |
-| grenade_equip_aim_throw | ranged_and_items | candidates | native_network_ground_grenade_partial_verified | accepted_functional_both_roles_bank_1266 | work_remaining |
-| mine_or_razor_place | ranged_and_items | candidates | partial_native_steam_trap_body_and_held_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
-| heart_equip_use_holster | ranged_and_items | candidates | partial_native_steam_ground_heart_body_prop | accepted_sweep_1260_functional_both_roles | work_remaining |
-| health_elixir | ranged_and_items | candidates | native_health_elixir_drink_reach_presented_both_roles | accepted_functional_both_roles_hand_to_mouth | work_remaining |
+| grenade_equip_aim_throw | ranged_and_items | candidates | native_network_ground_grenade_partial_verified | accepted_functional_both_roles_bank_1266 | complete |
+| mine_or_razor_place | ranged_and_items | candidates | partial_native_steam_trap_body_and_held_prop | accepted_sweep_1260_functional_both_roles | complete |
+| heart_equip_use_holster | ranged_and_items | candidates | partial_native_steam_ground_heart_body_prop | accepted_sweep_1260_functional_both_roles | complete |
+| health_elixir | ranged_and_items | candidates | native_health_elixir_drink_reach_presented_both_roles | accepted_functional_both_roles_hand_to_mouth | complete |
 | mana_elixir | ranged_and_items | candidates | native_network_movement_during_mana_use_partial_verified | not_accepted | work_remaining |
 | item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | lethal_takedown_front_back_sides | paired_actions | candidates | partial_census_lethals_back_drop_slide_finishers_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |

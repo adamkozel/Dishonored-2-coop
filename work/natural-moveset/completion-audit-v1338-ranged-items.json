@@ -1,0 +1,170 @@
+{
+  "audit": "completion-audit-v1338-ranged-items",
+  "family": "ranged_and_items",
+  "candidate": "candidate-npc-combat-v1214cn",
+  "method": "Each decision rests on the items coverage take coverage-v1330e on candidate 1214cn (15/16; earlier coverage-v1330b and coverage-v1330d on 1214cm/cn agree), under the product controller in both source roles: each item is granted with the lab-only coop_grant_item (1214ck; the isolated save has none), selected with the native equip and used with native input; the partner is checked from its own presentation state on the observer (ranged kind and variants, shots, grenade, trap and Heart variants, the use reach) and the checkpoint is reloaded after every case. The observer films from a close side-on free camera, nearly level for standing cases. Remote presentation is cosmetic: shots, traps and grenades act only in the source world; their outcomes belong to stage 4. Lifecycle: every case re-arms the product controller after a checkpoint reload; the 2-hour soak mission-soak-v1316a covers 19 shared restarts and session renewals.",
+  "items": [
+    {
+      "id": "pistol_draw_aim_fire_reload_holster",
+      "decision": "complete",
+      "scope": "The pistol in both roles: native draw, three shots with the reloads they cause, holster (X held) and redraw; the partner presents the gun (kind 1) through variants 0, 3, 4, 5 and 6 with every shot counted.",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-pistol",
+            "client-pistol"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/host-pistol-observer.mp4",
+          "verdict": "Corvo raises the pistol at arm's length for each shot, lowers it to reload, puts it away and draws it again."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crossbow_draw_aim_fire_reload_holster",
+      "decision": "complete",
+      "scope": "The crossbow in both roles: native draw, three bolts with reloads, holster and redraw; the partner presents the crossbow (kind 2) through variants 0 and 7-10, three shots each.",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-crossbow",
+            "client-crossbow"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/host-crossbow-observer.mp4",
+          "verdict": "Corvo extends the wrist crossbow and holds it level for each bolt, recocks between shots, then lowers the arm to holster and raises it again."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "grenade_equip_aim_throw",
+      "decision": "complete",
+      "scope": "Cooking (left trigger held) and throwing a grenade in both roles; the partner presents grenade variants 0 and 3-6 (hold, wind-up, release, recovery).",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-grenade",
+            "client-grenade"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/client-grenade-observer.mp4",
+          "verdict": "Emily draws her arm back over her shoulder with the grenade, steps into the throw with her coat swinging, and recovers to the armed stance."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "mine_or_razor_place",
+      "decision": "complete",
+      "scope": "Placing a stun mine and a spring razor on the floor in both roles; the partner presents trap variants 0, 4, 5 and 7 (hold, bend, place, recovery).",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-stunmine",
+            "host-springrazor",
+            "client-stunmine",
+            "client-springrazor"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/host-stunmine-observer.mp4",
+          "verdict": "Corvo looks down, bends and reaches toward the floor to set the mine, then straightens."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "heart_equip_use_holster",
+      "decision": "complete",
+      "scope": "Raising the Heart (left trigger held) and lowering it in both roles; the partner presents Heart variants 0 and 3.",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-heart",
+            "client-heart"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/host-heart-observer.mp4",
+          "verdict": "Corvo lifts the Heart in his left hand in front of his chest, holds it there, and lowers it again."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "health_elixir",
+      "decision": "complete",
+      "scope": "Drinking a health elixir in both roles: the native drink is presented as the use reach, hand to mouth (18-19 samples), and recovers.",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-health",
+            "client-health"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1330e/client-health-observer.mp4",
+          "verdict": "Emily brings her hand up to her mouth to drink, holds it briefly and lowers it."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "mana_elixir",
+      "decision": "open",
+      "scope": "Corvo spends mana with Windblast (to 50) and drinks a mana elixir; the drink is presented as the use reach (coverage-v1330e host).",
+      "takes": [
+        {
+          "take": "coverage-v1330e",
+          "cases": [
+            "host-manaelixir"
+          ]
+        }
+      ],
+      "visual": [],
+      "remaining": "Emily's drink: her mana was full at the fixed drink time in 1330e; the case now drinks as soon as her live mana drops after the Doppelganger cast, with the trace recorded.",
+      "lifecycle": "See method."
+    },
+    {
+      "id": "bolt_or_ammo_switch",
+      "decision": "open",
+      "scope": "Not yet recorded.",
+      "takes": [],
+      "visual": [],
+      "remaining": "The mission quick-slot switch to sleep darts and back with the crossbow drawn (mission harness boltswitch, take 1328j on 1214cp).",
+      "lifecycle": "See method."
+    },
+    {
+      "id": "item_switch_interruptions",
+      "decision": "open",
+      "scope": "Not yet recorded on the current candidate.",
+      "takes": [],
+      "visual": [],
+      "remaining": "Switching weapons mid-aim, selecting a power and redrawing (mission harness itemswitch, take 1328j on 1214cp).",
+      "lifecycle": "See method."
+    }
+  ]
+}
