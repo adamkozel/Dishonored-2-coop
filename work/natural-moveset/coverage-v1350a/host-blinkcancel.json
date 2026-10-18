@@ -1,0 +1,39 @@
+{
+  "source": "host",
+  "case": "blinkcancel",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "blinkcancel presented (23 samples, variants 1,2,3) and recovered",
+    "Aim presented (8 samples), cancelled with X: no release, source moved 0 m, locomotion returned (14 samples); second cast released (4 samples)"
+  ],
+  "camera": [
+    -35.0,
+    -150.2,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 5,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "powerSamples": 23,
+  "powerVariants": [
+    1,
+    2,
+    3
+  ],
+  "recovered": 9,
+  "cancel": {
+    "aimSamples": 8,
+    "releaseAfterCancel": 0,
+    "idleAfterCancel": 14,
+    "sourceMovedAfterCancel": 0.0,
+    "releaseSecondCast": 4
+  },
+  "restored": true
+}

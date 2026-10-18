@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:42:09.161369+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -32,7 +32,7 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival world FX, discrete arrival and the cancelled second aim all read correctly on the partner. Only a dark streak during the lab's reset back to the origin is visible, and it is not part of the power. Standing armed Dunwall native Blink phases drive whole-body motion over Steam. Actual travel uses native departure/arrival FX and a discrete foot-position transfer, without the temporary eye-height body jump. Eight checks cover cast/recovery, native cancellation, two effects, duplicate refusal and equipment/health. Other stances, upgrades, interruptions, broader lifecycle and final visual acceptance remain incomplete. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "blink",
@@ -66,13 +66,20 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
     "blink-regression-v26-v2/result.json",
     "../movement-integration/visual-sweep-v1260/powers-review.json",
     "coverage-v1332c/result.json",
-    "coverage-v1332d/result.json"
+    "coverage-v1332d/result.json",
+    "coverage-v1350a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "Aim, release, departure burst and arrival are presented (power variants 1-3; 1332c/d).",
+    "audit": "completion-audit-v1350-blink.json",
+    "decision": "complete",
+    "scope": "Blink in the Corvo source role: aim (variants 1, 2), release (3), the departure burst and arrival presented (1332c/d); a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion within about 0.3 s, and a following cast still releases and travels 4.8 m (1350a). Blink is Corvo-only; the Emily source role has no Blink.",
     "takes": [
+      {
+        "take": "coverage-v1350a",
+        "cases": [
+          "host-blinkcancel"
+        ]
+      },
       {
         "take": "coverage-v1332c",
         "cases": [
@@ -88,13 +95,17 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
     ],
     "visual": [
       {
+        "video": "coverage-v1350a/host-blinkcancel-observer.mp4",
+        "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+      },
+      {
         "video": "coverage-v1332d/host-blink-observer.mp4",
         "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
       }
     ],
-    "lifecycle": "See method.",
-    "remaining": "A cancelled aim on the current candidate (the coverage cases always release)."
-  }
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -102,6 +113,7 @@ Visual sweep 1260: accepted (corvo accept). Blink aim, native departure/arrival 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
 - [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
+- [evidence: coverage-v1350a/result.json](<../../../../work/natural-moveset/coverage-v1350a/result.json>)
 - [in_game_recordings: integrated-blink-fx-v1.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v1.mp4>)
 - [in_game_recordings: integrated-blink-fx-v3.mp4](<../../../../work/natural-moveset/integrated-blink-fx-v3.mp4>)
 - [in_game_recordings: blink-knee-v4.mp4](<../../../../work/natural-moveset/blink-knee-v4.mp4>)

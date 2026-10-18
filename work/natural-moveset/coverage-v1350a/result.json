@@ -1,0 +1,120 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-farreachcancel: farreachcancel second cast release not presented",
+  "cases": [
+    {
+      "source": "host",
+      "case": "blinkcancel",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "blinkcancel presented (23 samples, variants 1,2,3) and recovered",
+        "Aim presented (8 samples), cancelled with X: no release, source moved 0 m, locomotion returned (14 samples); second cast released (4 samples)"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 5,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 23,
+      "powerVariants": [
+        1,
+        2,
+        3
+      ],
+      "recovered": 9,
+      "cancel": {
+        "aimSamples": 8,
+        "releaseAfterCancel": 0,
+        "idleAfterCancel": 14,
+        "sourceMovedAfterCancel": 0.0,
+        "releaseSecondCast": 4
+      },
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "farreachcancel",
+      "observer": "host",
+      "passed": false,
+      "failure": "farreachcancel second cast release not presented",
+      "checks": [
+        "Partner presentation stayed live",
+        "farreachcancel presented (4 samples, variants 4) and recovered"
+      ],
+      "camera": [
+        -33.0,
+        -147.4,
+        68.4
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 12,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 4,
+      "powerVariants": [
+        4
+      ],
+      "recovered": 9,
+      "cancel": {
+        "aimSamples": 2,
+        "releaseAfterCancel": 0,
+        "idleAfterCancel": 15,
+        "sourceMovedAfterCancel": 0.0,
+        "releaseSecondCast": 0
+      },
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "farreachfar",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "farreachfar presented (15 samples, variants 4,5,6,7,9) and recovered",
+        "Far Reach released (2 samples) and travelled 9.59 m down the lane"
+      ],
+      "camera": [
+        -34.0,
+        -155.6,
+        68.4
+      ],
+      "lowWeightSamples": 3,
+      "teleports": [],
+      "grant": {
+        "grants": 13,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 15,
+      "powerVariants": [
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "recovered": 10,
+      "farReach": {
+        "travel": 9.59,
+        "releaseSamples": 2
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Power cancellation and long Far Reach (1350, #11), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
