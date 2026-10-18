@@ -86,6 +86,23 @@ void serviceShadowWalkMaterial(ULONGLONG tick){
     if(words!=s.written){shadowWalkMaterialApply(false,words);s.written=words;s.fade=fade;++s.updates;
         NativeMaterialParams after{};if(!shadowWalkMaterialOwned(after)){s.active=false;s.blocked=true;++s.refused;}}
 }
+// 1214dh (#11 Shadow Walk appearance; lab only): "coop_partner_effect E P" applies native material effect E (0-15) at
+// fade P% (0-100) to the presented partner body for 6 s through the same native parameter routine, then restores it.
+// The native form has no third-person body; 544 tried effect 4 at 45% (bright patches, rejected). The survey films the
+// other effects (renderparm materialeffects: burnt, devouring, disapear, electrocution, immolation, layerchange,
+// shadowkill, teleportation) to choose one; it changes nothing outside the partner's own render parameters.
+unsigned labPartnerEffect=0,labPartnerFadePct=0;ULONGLONG labPartnerEffectUntil=0;std::uint64_t labPartnerEffectApplied=0;
+bool labPartnerEffectAllowed(const char* t){unsigned e=0,p=0;char tail=0;
+    return std::sscanf(t,"%u %u%c",&e,&p,&tail)==2&&e<=15&&p<=100;}
+void requestLabPartnerEffect(const char* t){unsigned e=0,p=0;if(std::sscanf(t,"%u %u",&e,&p)!=2||e>15||p>100)return;
+    labPartnerEffect=e;labPartnerFadePct=p;labPartnerEffectUntil=GetTickCount64()+6000;}
+void serviceLabPartnerEffect(ULONGLONG tick){
+    if(!labPartnerEffectUntil||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=shadowWalkMaterial;
+    if(tick>=labPartnerEffectUntil||!shadowWalkMaterialApi()||!coopGameplayReady(outgoing)){labPartnerEffectUntil=0;stopShadowWalkMaterial();s.blocked=false;return;}
+    if(!s.active){s.blocked=false;if(!startShadowWalkMaterial(tick)){labPartnerEffectUntil=0;return;}}
+    auto words=s.written;words[0][0]=labPartnerEffect;const float fade=labPartnerFadePct/100.f;std::memcpy(&words[1][0],&fade,4);
+    if(words!=s.written){shadowWalkMaterialApply(false,words);s.written=words;s.fade=fade;s.variant=labPartnerEffect;++s.updates;++labPartnerEffectApplied;}
+}
 void writeShadowWalkMaterial(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.shadowwalk-material.json",statusPath)>=sizeof(path)||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=sizeof(temp))return;

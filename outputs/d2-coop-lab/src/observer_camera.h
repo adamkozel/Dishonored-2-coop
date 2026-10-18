@@ -198,12 +198,16 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
     AcquireSRWLockExclusive(&observerCameraLock);
     if(request==0){observerCamera.active=false;observerCamera.result="off";}
+    // 1214dh (#11, lab only): hold_at during an active hold moves the eye and keeps the held orientation, so a take can
+    // follow a walking partner. A held view stops refreshing its native record, so the old path found no active view
+    // and dropped the hold (the 1328zf flashes, carry takes 1277k-m losing the carrier).
+    else if(request==2&&observerCamera.active){std::memcpy(observerCamera.position,observerCameraAt,12);observerCamera.until=tick+120000;observerCamera.result="holding_at";}
     else if(request==1||request==2){
         // The main rendered view is the one updated most often recently.
         const ObserverViewRecord* best=nullptr;

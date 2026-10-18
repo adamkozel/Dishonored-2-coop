@@ -804,6 +804,7 @@ bool movementShadowWalkFixtureBusy();
 #include "carry_attachment_fixture.h"
 #include "native_power_fx.h"
 #include "shadowwalk_fx.h"
+#include "shadowwalk_material.h"
 #include "power_fx_stream.h"
 #include "mesmerize_world_stream.h"
 #include "domino_world_stream.h"
@@ -1562,6 +1563,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
     if(!std::strncmp(text,"coop_grant_named ",17))return labGrantNameAllowed(text+17);
+    if(!std::strncmp(text,"coop_partner_effect ",20))return labPartnerEffectAllowed(text+20);
     if(!std::strcmp(text,"coop_grant_item pistol")||!std::strcmp(text,"coop_grant_item crossbow")||!std::strcmp(text,"coop_grant_item stunmine")||!std::strcmp(text,"coop_grant_item springrazor")||!std::strcmp(text,"coop_grant_item heart"))return true;
     if(!std::strcmp(text,"coop_use_item health")||!std::strcmp(text,"coop_use_item mana"))return true;
     const char* commands[]={"getviewpos","where","Ansel_PlayerVisible","LoadGame","listDecls","debugEntityByName","trigger","teleport","setviewpos","find","listModels"};
@@ -1729,6 +1731,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_grant_item health")){labGrantRequest=2;return;}
     if(!std::strcmp(request.command,"coop_grant_item mana")){labGrantRequest=3;return;}
     if(!std::strncmp(request.command,"coop_grant_named ",17)&&labGrantNameAllowed(request.command+17)){strcpy_s(labGrantName,request.command+17);labGrantNamedRequest=true;return;}
+    if(!std::strncmp(request.command,"coop_partner_effect ",20)&&labPartnerEffectAllowed(request.command+20)){requestLabPartnerEffect(request.command+20);return;}
     if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}
     if(!std::strcmp(request.command,"coop_grant_item crossbow")){labGrantRequest=5;return;}
     if(!std::strcmp(request.command,"coop_grant_item stunmine")){labGrantRequest=6;return;}
