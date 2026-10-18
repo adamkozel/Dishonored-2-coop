@@ -1,0 +1,93 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-guardfight: No block impact or timed parry presented (hits 0, attacks 13) | client-guardfight: No hit reaction presented",
+  "cases": [
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 13)",
+      "checks": [],
+      "guardFacing": [
+        -0.922800620320684,
+        -0.3852778414803544
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.922800620320684,
+            -0.3852778414803544
+          ],
+          "rest": [
+            -38.8803,
+            116.002,
+            15.6458
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 6,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 667,
+      "guard": "script_spawner_streets_windmill_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 13,
+      "attackVariants": [
+        1,
+        2,
+        3
+      ],
+      "minSourceHealth": 70.0
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No hit reaction presented",
+      "checks": [],
+      "guardFacing": [
+        -0.16387793754244265,
+        0.98648062403011
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.16387793754244265,
+            0.98648062403011
+          ],
+          "rest": [
+            4.02639,
+            61.6666,
+            15.9661
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "outcomeWaitMs": 661,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 5,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 0,
+      "attackVariants": [],
+      "minSourceHealth": 70.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

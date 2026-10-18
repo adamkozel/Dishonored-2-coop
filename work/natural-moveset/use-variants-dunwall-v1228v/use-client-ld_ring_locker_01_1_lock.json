@@ -1,0 +1,30 @@
+{
+  "source": "client",
+  "observer": "host",
+  "candidates": [
+    "ld_ring_locker_01_1_lock",
+    "ld_ring_locker_01_2_lock",
+    "ld_ring_locker_01_1_open",
+    "ld_ring_locker_01_2_open",
+    "ld_ring_locker_01_3"
+  ],
+  "expected": 5,
+  "optional": false,
+  "passed": false,
+  "failure": "Method invocation failed because [System.Diagnostics.Process] does not contain a method named 'op_Addition'.",
+  "target": "ld_ring_locker_01_1_lock",
+  "focus": {
+    "handle": 93061542,
+    "dist": 1.0,
+    "name": "ld_ring_locker_01_1_open",
+    "dz": 0,
+    "side": 0,
+    "tries": 1
+  },
+  "observerPitch": true,
+  "observerBody": [
+    -35.2141,
+    -168.693,
+    67.0037
+  ]
+}

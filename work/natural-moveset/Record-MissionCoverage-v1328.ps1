@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[string]$SlopeStart='',[string]$SlopeEnd='',[string]$ScanGrid='-58,4,10,60,4,11',[string]$WalkStarts='',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -77,6 +77,19 @@ try{
     # Both players start on the spawn dock, the observer 2.5 m in front of the source, facing it.
     C $source (P $sp.x $sp.y ($sp.z+1.7) ([Math]::Atan2($fy,$fx)*180/[Math]::PI));C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) ([Math]::Atan2(-$fy,-$fx)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
     $l=WaitLive "$key-placed" 30000;if(!$l.ok){throw 'Partner presentation not live after placement'}
+    if($case-eq'slopewalk'){
+     # Lab-only exploration (scans 1328g-x lost the source in the bay): walk from known ground in 8 headings for 6 s each,
+     # tracing the source position every 100 ms, to find a smooth incline (z rising without step jumps) for the slope case.
+     C $source 'coop_player_health_hold on';$walks=[Collections.Generic.List[object]]::new()
+     # -WalkStarts 'x,y,z;x,y,z' replaces the default starts (1328ze: the incline found from the chain street is stairs).
+     $starts=if($WalkStarts){@($WalkStarts-split';'|Where-Object {$_}|ForEach-Object {$v=@($_-split','|ForEach-Object {[double]$_});,@($v[0],$v[1],$v[2],"$($v[0]),$($v[1])")})}else{@(@($sp.x,$sp.y,$sp.z,'dock'),@(($ChainX-1.2),$ChainY,($ChainZ-2.22),'chain'))}
+     foreach($start in $starts){foreach($h in 0..7){
+      C $source (P $start[0] $start[1] ([double]$start[2]+1.7) ($h*45));Start-Sleep -Milliseconds 1200;[void](WaitGameplay 6000)
+      & "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs 6000|Out-Null;$tr=[Collections.Generic.List[object]]::new();$w=[Diagnostics.Stopwatch]::StartNew()
+      while($w.ElapsedMilliseconds-lt6200){$pp=try{(Q $source '--player').candidatePosition}catch{$null};if($pp){$tr.Add(@([double]$pp[0],[double]$pp[1],[double]$pp[2]))};Start-Sleep -Milliseconds 100}
+      $ps=try{Q $source '--player-states'}catch{$null};$walks.Add([pscustomobject]@{start=$start[3];heading=$h*45;trace=@($tr);endDefault=$(if($ps){[bool]$ps.defaultMode}else{$null})})
+      if($ps-and!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 600}}}
+     C $source 'coop_player_health_hold off';Save "$out/$key-walks.json" @($walks);$row.walks=$walks.Count;$row.checks.Add("Traced $($walks.Count) walks")}
     if($case-eq'slopescan'){
      # Lab-only exploration, no presentation checks: drop the source (health held) on a 4 m grid around the chain street and
      # record where it comes to rest, to find a smooth ramp for the slope case (slopes_and_stairs; the stairs are stepped).
@@ -84,31 +97,43 @@ try{
      # -ScanGrid x0,dx,nx,y0,dy,ny (1328g/i: the default grid around the chain is bay water; the spawn dock is near y 192).
      $sg=@("$ScanGrid"-split','|ForEach-Object {[double]$_});if($sg.Count-ne6){throw 'ScanGrid needs x0,dx,nx,y0,dy,ny'}
      foreach($gx in @(0..([int]$sg[2]-1)|ForEach-Object {$sg[0]+$sg[1]*$_})){foreach($gy in @(0..([int]$sg[5]-1)|ForEach-Object {$sg[3]+$sg[4]*$_})){
-      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
+      # 1328u: after (-60,140) a native modal froze every later point; pass modals before each read.
+      C $source (P $gx $gy 30 0);Start-Sleep -Milliseconds 2300;[void](WaitGameplay 8000);$pp=try{(Q $source '--player').candidatePosition}catch{$null};$ps=try{Q $source '--player-states'}catch{$null}
       $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})
       # mission-slopescan-v1328g: a point in the canal left the source swimming, and every later teleport kept it on the
       # water surface (z 6.0). Leave the water at the spawn dock before the next point.
-      if($ps-and!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 600;C $source (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 1200}}}
+      # 1328p: swim mode persists through teleports, so every later point reported the water surface; swim out through
+      # the known water-exit lane (the waterexit case) before the next point.
+      if($ps-and!$ps.defaultMode){$px2=-$sp.fy;$py2=$sp.fx;$wx2=$sp.x+$SwimLane*$px2;C $source (P $wx2 $WaterExitY 1.0 ([Math]::Atan2(-$py2,-$px2)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
+       foreach($k in 1..5){I $source A 700 32000;Start-Sleep -Milliseconds 1500;$ps2=try{Q $source '--player-states'}catch{$null};if($ps2-and$ps2.defaultMode){break}}
+       $grid[-1]|Add-Member -NotePropertyName waterExit -NotePropertyValue ([bool]($ps2-and$ps2.defaultMode))}}}
      C $source 'coop_player_health_hold off';Save "$out/$key-grid.json" @($grid);$row.points=$grid.Count;$row.checks.Add("Resting heights at $($grid.Count) grid points")}
     if($case-eq'slope'){
      # A smooth ramp (slopes_and_stairs; the Dunwall stairs are stepped). -SlopeStart/-SlopeEnd x,y,z (resting ground heights
      # from the slopescan grid) bound it. Walk up, walk down, run up; the partner must present the terrain grade both ways.
-     $SlopeStart=@($SlopeStart|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_});$SlopeEnd=@($SlopeEnd|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_})
-     if($SlopeStart.Count-ne3-or$SlopeEnd.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
-     $ax=$SlopeStart[0];$ay=$SlopeStart[1];$az=$SlopeStart[2];$bx=$SlopeEnd[0];$by=$SlopeEnd[1];$bz=$SlopeEnd[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
+     $slopeA=@($SlopeStart|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_});$slopeB=@($SlopeEnd|ForEach-Object {"$_"-split','}|Where-Object {$_}|ForEach-Object {[double]$_})
+     if($slopeA.Count-ne3-or$slopeB.Count-ne3){throw 'slope needs -SlopeStart x,y,z and -SlopeEnd x,y,z'}
+     $ax=$slopeA[0];$ay=$slopeA[1];$az=$slopeA[2];$bx=$slopeB[0];$by=$slopeB[1];$bz=$slopeB[2];$len=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
      $ux=($bx-$ax)/$len;$uy=($by-$ay)/$len;$up=[Math]::Atan2($uy,$ux)*180/[Math]::PI;$dn=[Math]::Atan2(-$uy,-$ux)*180/[Math]::PI;$row.slopeGrade=[Math]::Round(($bz-$az)/$len,3)
-     $cx=($ax+$bx)/2-3.5*$uy;$cy=($ay+$by)/2+3.5*$ux;$cz=($az+$bz)/2+2.2;$cyaw=[Math]::Atan2(($ay+$by)/2-$cy,($ax+$bx)/2-$cx)*180/[Math]::PI
+     # 1328zj: a camera beside the midpoint sat inside a wall of the narrow street; hold it 3 m behind the start along the
+     # slope, 2.4 m up, looking up the street. Both players' health is held (the observer was killed in 1328zj).
+     $cx=$ax-3*$ux;$cy=$ay-3*$uy;$cz=$az+2.4;$cyaw=$up;C $source 'coop_player_health_hold on';C $peer 'coop_player_health_hold on'
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-     C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200
+     # 1328zi: the 120 m placement left the shadow stream stale for 3 s after the walk began (weight 0, mask 8|16); wait
+     # until the partner presentation is live before walking.
+     C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200;$l2=WaitLive "$key-slope-start" 20000;if(!$l2.ok){throw 'Partner presentation not live at the slope start'}
      $walkMs=[int][Math]::Min(9000,[Math]::Max(2500,$len/1.7*1000));$runMs=[int][Math]::Min(6000,[Math]::Max(1500,$len/5.0*1000))
      $caps=Capture $key ([Math]::Ceiling(($walkMs*2+$runMs+6000)/1000));$samples=[Collections.Generic.List[object]]::new();$zs=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$seg=@()
-     $steps=@(@(500,'walkup'),@(500+$walkMs+800,'turn'),@(500+$walkMs+1600,'walkdown'),@(500+2*$walkMs+2400,'place'),@(500+2*$walkMs+3400,'runup'));$k=0
+     # The comma binds tighter than +: each time is parenthesized (1328zc added an array to $walkMs).
+     $steps=@(@(500,'walkup'),@((500+$walkMs+800),'turn'),@((500+$walkMs+1600),'walkdown'),@((500+2*$walkMs+2400),'place'),@((500+2*$walkMs+3400),'runup'));$k=0
      while($watch.ElapsedMilliseconds-lt(500+2*$walkMs+3400+$runMs+1500)){$t=$watch.ElapsedMilliseconds
       if($k-lt$steps.Count-and$t-ge$steps[$k][0]){switch($steps[$k][1]){'walkup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'turn'{$me=(Q $source '--player').candidatePosition;C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $dn)};'walkdown'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'place'{C $source (P $ax $ay ($az+1.7) $up)};'runup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs $runMs|Out-Null}};$seg+=[ordered]@{ms=$t;step=$steps[$k][1]};$k++}
       $x=Sample $t;$samples.Add($x);if($zs.Count-lt400){$me=try{(Q $source '--player').candidatePosition}catch{$null};if($me){$zs.Add([pscustomobject]@{ms=$t;x=[double]$me[0];y=[double]$me[1];z=[double]$me[2]})}};Start-Sleep -Milliseconds 60}
      Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-path.json" @($zs);Save "$out/$key-segments.json" $seg
-     $upS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.03}).Count;$dnS=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.03}).Count
+     # The stair blend scales with the grade (near 0 on an 8-degree street, by design); require the presented grade to track
+     # the slope with the right sign while the partner walks at full presentation weight.
+     $upS=@($samples|Where-Object {[double]$_.weight-gt.9-and[double]$_.speed-gt.3-and[double]$_.terrainGrade-gt.05}).Count;$dnS=@($samples|Where-Object {[double]$_.weight-gt.9-and[double]$_.speed-gt.3-and[double]$_.terrainGrade-lt-.05}).Count
      $row.upSamples=$upS;$row.downSamples=$dnS;$row.climbedMetres=[Math]::Round((($zs|Measure-Object z -Maximum).Maximum)-(($zs|Measure-Object z -Minimum).Minimum),2)
      $row.lowWeight=@($samples|Where-Object {$_.ms-ge1500-and[double]$_.weight-lt.9}).Count
      if($row.climbedMetres-lt.8){throw "Source climbed only $($row.climbedMetres) m"};if(!$upS-or!$dnS){throw "Slope gait not presented (up $upS, down $dnS)"}
@@ -176,7 +201,11 @@ try{
      # 1333a: indoors the 12 m drop met an upper floor; here the source drops 12 m onto the open spawn dock, health held. The native
      # hard landing is CatFall, player state 4 (the playback's shadow action 11 is a different numbering; native 11 is WallCrouch).
      $yaw=[Math]::Atan2($fy,$fx)*180/[Math]::PI;C $source 'coop_player_health_hold on'
-     C $peer (P ($sp.x+5*$px) ($sp.y+5*$py) ($sp.z+1.7) ([Math]::Atan2(-$py,-$px)*180/[Math]::PI));Start-Sleep -Milliseconds 700;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null
+     # 1328n: the observer body placed 5 m to the side landed in the water and filmed its own hands; hold the free camera on
+     # the dock 6 m ahead of the landing spot, 2.5 m up, facing back at it (Set-ObserverPitch: positive looks down).
+     $hcx=$sp.x+6*$fx;$hcy=$sp.y+6*$fy;$hcz=$sp.z+2.5;$hyaw=[Math]::Atan2($sp.y-$hcy,$sp.x-$hcx)*180/[Math]::PI
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 8 -Quick|Out-Null
+     C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hcx.ToString('F3',$inv),$hcy.ToString('F3',$inv),$hcz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      $caps=Capture $key 11;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$dropped=$false;$walked=$false;$states=[Collections.Generic.List[object]]::new();$midnight=$null
      while($watch.ElapsedMilliseconds-lt9000){$t=$watch.ElapsedMilliseconds
       # 1328d: the source reached CatFall but the partner never presented it; the landing reader accepts only the light
@@ -195,7 +224,7 @@ try{
      $row.checks.Add("$($row.fallMetres) m fall onto the dock: native hard landing ($($row.nativeHardLanding) polls) presented as variant 6 ($($row.hardLandingSamples) samples), then travelling on")}
     if($case-eq'climbtop'){
      $lz=$ChainZ-2.22
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0 12);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+4.0) 0);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -10 -Quick|Out-Null;Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -210,8 +239,9 @@ try{
     if($case-eq'climb'){
      $lz=$ChainZ-2.22
      # 1328d: from 4.5 m the upper climb left the frame (Emily); 7.5 m back, raised and tilted up keeps the chain in view.
-     # setviewpos pitch: negative looks down (1328h's -12 filmed the ground); look up 10 degrees at the chain.
-     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0 10);Start-Sleep -Milliseconds 400;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
+     # 1328h/o: the setviewpos pitch argument did not tilt the view (both -12 and +10 filmed the ground); set the pitch with
+     # Set-ObserverPitch (positive looks down) before the hold, -8 to look slightly up at the chain.
+     C $peer (P ($ChainX-7.5) ($ChainY-1.5) ($lz+3.0) 0);Start-Sleep -Milliseconds 400;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch -8 -Quick|Out-Null;C $peer 'coop_observer_camera hold';Start-Sleep -Milliseconds 300
      C $peer (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 600
      C $source (P ($ChainX-1.2) $ChainY ($ChainZ+0.5) 0);Start-Sleep -Milliseconds 1500
      $land=Q $source '--player';C $source (P $land.candidatePosition[0] $land.candidatePosition[1] ($land.candidatePosition[2]+1.7) 0 20);Start-Sleep -Milliseconds 500
@@ -230,34 +260,62 @@ try{
      # side, then behind, then in front, and keep the first spot where the source rests at the guard's level; no slash.
      $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl;$row.guardFacing=@($fx,$fy)
      C $source 'coop_player_health_hold on';$placed=$null;$row.placementTrials=@()
-     foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
+     # 1328r: from the side the seated guard never saw Emily; try in front (its view) first, then the sides, then behind.
+     foreach($o in @(@($fx,$fy),@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
       # 1328h: the first read after the teleport failed outright; retry for up to 3 s and record an unreadable spot as failed.
-      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=$null;$ms=$null
-      for($r=0;$r-lt6-and!$ms;$r++){try{$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'}catch{$ms=$null;Start-Sleep -Milliseconds 500}}
-      $ok=[bool]$ms-and$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;readable=[bool]$ms;ok=$ok}
+      # 1328s: entering Corvo's guard area opens the native 'Play Your Way' tutorial; pass modals before reading.
+      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$wg=WaitGameplay 15000;$row.modalsAfterPlacement=@($wg.log|Where-Object {$_.logic-ne1}).Count;$me=$null;$ms=$null
+      # 1328n: near Corvo's guard the --player-states read fails at every spot while --player works and rests at the guard's
+      # level; accept the position read alone (default mode is only required when the states read succeeds).
+      for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
+      $ms=try{Q $source '--player-states'}catch{$null}
+      $ok=[bool]$me-and(!$ms-or$ms.defaultMode)-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;statesReadable=[bool]$ms;ok=$ok}
       if($ok){$placed=@($tx,$ty,$tyaw);break}}
      if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
      $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2
      # Free camera 4.5 m to the side of the fight line at its midpoint, raised 2 m (1328h: from behind the source the guard
      # and the hit reaction left the frame); hold_at leaves the observer on the dock.
      $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$mx-4.5*$dy;$cy=$my+4.5*$dx;$cz=$gz+2.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
-     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
+     C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800;[void](WaitGameplay 15000)
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
      # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
-     $caps=Capture $key 32;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=3500;$aimAt=-9999;$hitAt=-9999;$phase='';$provoked=$false
-     while($watch.ElapsedMilliseconds-lt30000){$t=$watch.ElapsedMilliseconds
-      if($t-lt3500){$phase='provoke';if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
-      elseif($t-lt14000){$phase='block';if($t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
-      elseif($t-lt19000){$phase='open'}
-      else{$phase='attack'
-       if($t-$aimAt-ge2500){$aimAt=$t;try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
-         if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
-          if($d-gt1.8){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k};C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}catch{}}
+     # 1328y: Corvo's windmill guard sits in a scripted tutorial spot and never turns hostile (the block button, which is also
+     # the choke button, choked it three times); Corvo now fights checkpoint guard 02, beside Emily's checkpoint guard 01.
+     # 1328t: the guards engage on their own timing (Corvo's never swung during a fixed block window, Emily's never hit her in
+     # the unguarded one), so the phases follow the partner presentation: block until block impacts or timed parries are
+     # presented, stay unguarded until a hit reaction is presented, then attack to the kill; the source keeps within reach.
+     $caps=Capture $key 58;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=0;$aimAt=-9999;$hitAt=-9999;$closeAt=0;$phase='provoke';$phaseStart=0;$provoked=$false
+     $close={param($reach)try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
+      if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
+       if($d-gt$reach){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k;C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}
+       # 1328zd: the fight drifts and several checkpoint guards fill the frame; keep the free camera 3.5 m beside the source,
+       # perpendicular to the fight line, 1.6 m up (the yaw toward the source is the observer's view, set below).
+       $fl=[Math]::Max(.1,$d);$nx=([double]$q[0]-$tx)/$fl;$ny=([double]$q[1]-$ty)/$fl;$hx=$tx-3.5*$ny+0.8*$nx;$hy=$ty+3.5*$nx+0.8*$ny
+       # 1328zf: re-holding every 3 s while the hold was active showed the observer's own dock view for up to 2 s; re-aim
+       # only after the source moved 1.5 m from the last anchor, with the hold off just while the body turns.
+       if(!$script:camAnchor-or(Dist2 @($tx,$ty) $script:camAnchor)-gt1.5){$script:camAnchor=@($tx,$ty)
+        $mxx=($tx+[double]$q[0])/2;$myy=($ty+[double]$q[1])/2;$hyaw=[Math]::Atan2($myy-$hy,$mxx-$hx)*180/[Math]::PI
+        C $peer 'coop_observer_camera off';C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 250
+        C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}}catch{}}
+     $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new();$script:camAnchor=$null
+     while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
+      if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}
+      elseif($phase-eq'block'-and($guardSamples-ge6-or$t-$phaseStart-ge22000)){$phase='open';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;guardSamples=$guardSamples})}
+      elseif($phase-eq'open'-and($hitSamples-ge3-or$t-$phaseStart-ge15000)){$phase='attack';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;hitSamples=$hitSamples})}
+      elseif($phase-eq'attack'-and$t-$phaseStart-ge14000){break}
+      if($phase-eq'provoke'){if(!$provoked-and$t-ge300){& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs 700|Out-Null;$provoked=$true}}
+      elseif($phase-in'block','open'){if($t-$closeAt-ge3000){$closeAt=$t;& $close 2.4}
+       if($phase-eq'block'-and$t-ge$nextBlock){& "$lab/Send-D2Input.ps1" -Role $source -Button RightShoulder -DurationMs 1200|Out-Null;$nextBlock=$t+1500}}
+      else{if($t-$aimAt-ge2500){$aimAt=$t;& $close 1.8}
        if($t-$hitAt-ge700){$hitAt=$t;& "$lab/Send-D2Input.ps1" -Role $source -RightTrigger 255 -DurationMs 180|Out-Null}}
-      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$samples.Add($x);Start-Sleep -Milliseconds 80}
-     Save "$out/$key-samples.json" @($samples);C $source 'coop_player_health_hold off'
+      # Source native states every sample, to name the hit reactions the guard causes (1328w: health dropped, no stun scene).
+      $x=Sample $t;$x|Add-Member phase $phase;$x|Add-Member sourceHealth $(try{(Q $source '--health' 1).current}catch{$null});$x|Add-Member sourceActive $(try{@((Q $source '--player-states').active|ForEach-Object {$_.id})}catch{$null});$samples.Add($x)
+      if([int]$x.combatVariant-in19,20,21-and[double]$x.combatWeight-gt.5){$guardSamples++};if([double]$x.stunWeight-gt.5){$hitSamples++};Start-Sleep -Milliseconds 80}
+     # Keep the health hold through the reset (1328za: released beside the still-alert checkpoint guard 01, the next case
+     # could not read the source).
+     Save "$out/$key-samples.json" @($samples)
      # Both worlds must agree; a shared death can take a moment (1328b read once after 2 s: client dead, host alive).
      $ow=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$row.outcome=[ordered]@{host=(Outcome host $gname);client=(Outcome client $gname)}}while($row.outcome.host-ne$row.outcome.client-and$ow.ElapsedMilliseconds-lt8000)
      $row.outcomeWaitMs=$ow.ElapsedMilliseconds;$row.guard=$gname
@@ -268,19 +326,23 @@ try{
      $row.minSourceHealth=($samples|ForEach-Object {$_.sourceHealth}|Where-Object {$_-ne$null}|Measure-Object -Minimum).Minimum
      C $peer 'coop_observer_camera off'
      if(!($row.blockImpacts+$row.timedParries)){throw "No block impact or timed parry presented (hits $($row.hitReactions), attacks $($row.attackSamples))"}
-     if(!$row.hitReactions){throw 'No hit reaction presented'};if($row.attackSamples-lt3){throw "Attacks presented $($row.attackSamples)"}
+     # A plain sword hit has no full-body native player state (1328za: five hits, source state stayed 0); only stuns play a
+     # native hit reaction, so hit reactions are recorded, not required, here.
+     $row.healthDrops=@(for($i=1;$i-lt$samples.Count;$i++){if($samples[$i].sourceHealth-ne$null-and$samples[$i-1].sourceHealth-ne$null-and$samples[$i].sourceHealth-lt$samples[$i-1].sourceHealth){[pscustomobject]@{ms=$samples[$i].ms;states=$samples[$i].sourceActive}}})
+     if($row.attackSamples-lt3){throw "Attacks presented $($row.attackSamples)"}
      if($row.outcome.host-ne$row.outcome.client-or$row.outcome.host-notin'dead','unconscious'){throw "Guard outcome host $($row.outcome.host), client $($row.outcome.client)"}
      $row.checks.Add("Block impacts $($row.blockImpacts), timed parries $($row.timedParries), hit reactions $($row.hitReactions) (variants $($row.stunVariants-join ',')), attacks $($row.attackSamples) (variants $($row.attackVariants-join ',')); guard $($row.outcome.host) in both worlds")}
     foreach($c in $caps){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$caps=@()
     foreach($q in 'host','client'){foreach($suffix in '.movement.json','.shadow-stream.json','.product.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/$key-$q$suffix" -ErrorAction Stop}catch{}}}
     $row.passed=$true
    }catch{$row.failure=$_.Exception.Message}
-   finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{};try{C $source 'coop_player_health_hold off'}catch{}
+   finally{foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}};try{C $peer 'coop_observer_camera off'}catch{}
     # 1328f: after a failed placement both peers sat in a menu (logic 12) and every later case failed its first read;
     # dismiss menus and prompts on both peers before the reset reads the source.
     foreach($r in 'host','client'){for($m=0;$m-lt4;$m++){$lg=try{(S $r).localGameLogicState}catch{1};if($lg-in2,12){I $r B 200;Start-Sleep -Milliseconds 900}elseif($lg-in8,15){I $r A 300;Start-Sleep -Milliseconds 1500}else{break}}}
     try{$ps=Q $source '--player-states';if(!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 1800}
-     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}}
+     $sp=$spawn[$source];C $source (P $sp.x $sp.y ($sp.z+1.7) 0);I $source;Start-Sleep -Milliseconds 1500;if(!(Q $source '--player-states').defaultMode){throw 'Source still in an alternate mode (chain or water) after the reset'}if((S $source).localGameLogicState-ne1){throw 'Source left gameplay'}}catch{$row.failure=(("$($row.failure); reset: "+$_.Exception.Message)).TrimStart('; ')}
+    try{C $source 'coop_player_health_hold off'}catch{};try{C $peer 'coop_player_health_hold off'}catch{}}
    Save "$out/$key.json" $row;$rows.Add($row)}}
  $bad=@($rows|Where-Object {!$_.passed});if($bad.Count){$failure="$($bad.Count) case(s) failed: "+(($bad|ForEach-Object {"$($_.source)-$($_.case): $($_.failure)"})-join ' | ')}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}

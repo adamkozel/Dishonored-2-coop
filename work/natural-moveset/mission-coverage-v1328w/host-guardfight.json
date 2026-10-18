@@ -1,0 +1,64 @@
+{
+  "source": "host",
+  "case": "guardfight",
+  "observer": "client",
+  "passed": false,
+  "failure": "No block impact or timed parry presented (hits 0, attacks 99)",
+  "checks": [],
+  "guardFacing": [
+    -0.9224436058583803,
+    -0.38613183501362475
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.9224436058583803,
+        -0.38613183501362475
+      ],
+      "rest": [
+        -38.8801,
+        116.001,
+        15.6458
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 6,
+  "phaseLog": [
+    {
+      "ms": 3589,
+      "phase": "block"
+    },
+    {
+      "phase": "open",
+      "ms": 25695,
+      "guardSamples": 0
+    },
+    {
+      "hitSamples": 0,
+      "phase": "attack",
+      "ms": 40809
+    }
+  ],
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcomeWaitMs": 679,
+  "guard": "script_spawner_streets_windmill_guard_01",
+  "blockImpacts": 0,
+  "timedParries": 0,
+  "hitReactions": 0,
+  "stunVariants": [],
+  "attackSamples": 99,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    4,
+    7,
+    9
+  ],
+  "minSourceHealth": 65.0
+}

@@ -1,0 +1,41 @@
+{
+  "source": "host",
+  "case": "manaelixir",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Windblast spent mana to 50; the mana elixir drink presented as the use reach (19 samples), mana now 100"
+  ],
+  "camera": [
+    -35.0,
+    -150.2,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 1,
+    "refused": 0,
+    "result": "granted_mana_potion",
+    "named": {
+      "grants": 1,
+      "refused": 0,
+      "result": "named_power_equip_requested"
+    }
+  },
+  "use": {
+    "uses": 1,
+    "refused": 0,
+    "result": "mana_use_requested",
+    "manaBefore": 50.0,
+    "manaNow": 100.0
+  },
+  "manaMin": 50.0,
+  "useSamples": 19,
+  "manaBefore": 50.0,
+  "manaNow": 100.0,
+  "drankAtMs": 4437,
+  "restored": true
+}

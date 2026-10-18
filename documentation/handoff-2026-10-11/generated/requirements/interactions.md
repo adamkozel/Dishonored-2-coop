@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:35:04.114763+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -406,7 +406,7 @@ Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (fu
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (functional) in both roles (use-variants-v1228i/j, use-variants-dunwall-v1228k/l). Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "use-interaction-v1214c/use-client-observed.mp4",
@@ -420,8 +420,53 @@ Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (fu
     "../movement-integration/use-variants-audit-v1229.json",
     "../movement-integration/use-reach-audit-v1235.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/lever-valve-audit-v1282.json"
-  ]
+    "../movement-integration/lever-valve-audit-v1282.json",
+    "use-variants-eotw-v1228v/result.json",
+    "use-variants-eotw-v1228w/result.json",
+    "use-variants-dunwall-v1228v/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1343-lever.json",
+    "decision": "complete",
+    "scope": "Pulling the turbine lever in both roles and turning the sink tap in both roles: the partner steps in, reaches to the mechanism, operates it and recovers to standing. Cranks and wheels share the use presentation family (use variants 2-4 by mechanism name).",
+    "takes": [
+      {
+        "take": "use-variants-eotw-v1228v",
+        "cases": [
+          "host-script_lever_windturbine_1_1_1"
+        ]
+      },
+      {
+        "take": "use-variants-eotw-v1228w",
+        "cases": [
+          "client-script_lever_windturbine_1_1_1"
+        ]
+      },
+      {
+        "take": "use-variants-dunwall-v1228v",
+        "cases": [
+          "host-esc_env_rich_sink_tap_01_1",
+          "client-esc_env_rich_sink_tap_01_1"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+        "verdict": "Corvo raises his arm to the lever on the turbine platform, pulls it down and stands back as the blades turn."
+      },
+      {
+        "video": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+        "verdict": "Emily turns to the lever post, works it with her hand and returns to standing."
+      },
+      {
+        "video": "use-variants-dunwall-v1228v/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+        "verdict": "Emily reaches up to the tap on the wall and turns it, then lowers her arm."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -431,6 +476,9 @@ Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (fu
 - [evidence: ../movement-integration/use-reach-audit-v1235.json](<../../../../work/movement-integration/use-reach-audit-v1235.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/lever-valve-audit-v1282.json](<../../../../work/movement-integration/lever-valve-audit-v1282.json>)
+- [evidence: use-variants-eotw-v1228v/result.json](<../../../../work/natural-moveset/use-variants-eotw-v1228v/result.json>)
+- [evidence: use-variants-eotw-v1228w/result.json](<../../../../work/natural-moveset/use-variants-eotw-v1228w/result.json>)
+- [evidence: use-variants-dunwall-v1228v/result.json](<../../../../work/natural-moveset/use-variants-dunwall-v1228v/result.json>)
 - [in_game_recordings: use-interaction-v1214c/use-client-observed.mp4](<../../../../work/natural-moveset/use-interaction-v1214c/use-client-observed.mp4>)
 - [in_game_recordings: mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/mission-mechanisms-v1227b/use-host-env_vise_01_1_3-observed.mp4>)
 - [in_game_recordings: use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4](<../../../../work/natural-moveset/use-reach-eotw-v1234/use-host-env_vise_01_1_3-observed.mp4>)
@@ -805,7 +853,7 @@ Audit 1287 (1214at): while the source reads a note the partner holds the held-ob
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1287 (1214at): while the source reads a note the partner holds the held-object reach and returns to idle afterwards, in both roles (coverage-v1286e); accepted functionally, a two-handed reading pose is polish. Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-interactions-corvo-note-v685/note-source.mp4",
@@ -825,14 +873,36 @@ Audit 1287 (1214at): while the source reads a note the partner holds the held-ob
     "native-interactions-corvo-note-v682/note-observer.mp4",
     "native-interactions-corvo-note-v682/note-source.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-interactions-corvo-note-v685/result.json",
     "../../work/movement-integration/readable-resume-audit-v684.json",
     "native-interactions-emily-note-v683/result.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/reading-audit-v1287.json"
-  ]
+    "../movement-integration/reading-audit-v1287.json",
+    "coverage-v1318i/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1342-interactions.json",
+    "decision": "complete",
+    "scope": "Reading the table note in both roles: while the source reads, the partner holds the note out in a held reach and returns to its idle when the source closes it (coverage-v1318i on 1214cn; coverage-v1286e earlier).",
+    "takes": [
+      {
+        "take": "coverage-v1318i",
+        "cases": [
+          "host-note",
+          "client-note"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1318i/client-note-observer.mp4",
+        "verdict": "Emily lifts her left hand and holds the note out in front of her while she reads, then lowers it and stands at ease."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
@@ -841,6 +911,7 @@ Audit 1287 (1214at): while the source reads a note the partner holds the held-ob
 - [evidence: native-interactions-emily-note-v683/result.json](<../../../../work/natural-moveset/native-interactions-emily-note-v683/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/reading-audit-v1287.json](<../../../../work/movement-integration/reading-audit-v1287.json>)
+- [evidence: coverage-v1318i/result.json](<../../../../work/natural-moveset/coverage-v1318i/result.json>)
 - [in_game_recordings: native-interactions-corvo-note-v685/note-source.mp4](<../../../../work/natural-moveset/native-interactions-corvo-note-v685/note-source.mp4>)
 - [in_game_recordings: native-interactions-corvo-note-v685/note-observer.mp4](<../../../../work/natural-moveset/native-interactions-corvo-note-v685/note-observer.mp4>)
 - [in_game_recordings: native-interactions-emily-note-v683/note-source.mp4](<../../../../work/natural-moveset/native-interactions-emily-note-v683/note-source.mp4>)
@@ -886,7 +957,7 @@ Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach to the plate in both roles while the item is taken in both worlds (1261b). Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay continuous but show no eating gesture, so the eat action is not represented. 693 exact crouched LootObject47 now preserves Sneaking6/raw1. Both-role native classification verified;695Emily passes11 checks,699Corvo passes10/11 with body-weight dips retained as failure.696/697 native grapes consumption passes22: source health56->61, peer56 unchanged, source grapes removed, full body/Steam continuity. All source/observer sheets inspected; inventories/health14protected restored. No new reach/eating gesture or shared item/healing outcome. Protocol69 bank67/357 unchanged.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-interactions-corvo-v663/food-source.mp4",
@@ -900,14 +971,36 @@ Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach
     "gestures-v1261b/host-food-observer.mp4",
     "gestures-v1261b/client-food-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-interactions-corvo-v663/result.json",
     "native-interactions-corvo-food-v696/result.json",
     "native-interactions-emily-food-v697/result.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/gestures-counter-audit-v1264.json"
-  ]
+    "../movement-integration/gestures-counter-audit-v1264.json",
+    "gestures-v1261d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1342-interactions.json",
+    "decision": "complete",
+    "scope": "Eating native food (grapes) in both roles: the native pickup presents the use reach toward the plate on the partner, and the item is taken. D2 eats food instantly on pickup without a first-person eating motion, so the reach is the faithful gesture. Drinking elixirs is presented hand to mouth (health_elixir).",
+    "takes": [
+      {
+        "take": "gestures-v1261d",
+        "cases": [
+          "host-food",
+          "client-food"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "gestures-v1261d/client-food-observer.mp4",
+        "verdict": "Emily steps to the table and reaches down to the plate, then straightens."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
@@ -916,6 +1009,7 @@ Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach
 - [evidence: native-interactions-emily-food-v697/result.json](<../../../../work/natural-moveset/native-interactions-emily-food-v697/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
+- [evidence: gestures-v1261d/result.json](<../../../../work/natural-moveset/gestures-v1261d/result.json>)
 - [in_game_recordings: native-interactions-corvo-v663/food-source.mp4](<../../../../work/natural-moveset/native-interactions-corvo-v663/food-source.mp4>)
 - [in_game_recordings: native-interactions-corvo-v663/food-observer.mp4](<../../../../work/natural-moveset/native-interactions-corvo-v663/food-observer.mp4>)
 - [in_game_recordings: native-interactions-corvo-food-v696/food-observer.mp4](<../../../../work/natural-moveset/native-interactions-corvo-food-v696/food-observer.mp4>)

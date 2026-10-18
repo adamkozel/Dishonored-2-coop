@@ -1,0 +1,67 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-coin: Ground vantage produces unsupported steep pitch",
+  "cases": [
+    {
+      "source": "client",
+      "case": "coin",
+      "observer": "host",
+      "passed": false,
+      "failure": "Ground vantage produces unsupported steep pitch",
+      "checks": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "food",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-18T07:59:42.5095243+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "coin",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-18T08:00:40.9613239+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "food",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source"
+      ],
+      "inputAt": "2026-10-18T08:01:38.0487505+02:00",
+      "lootSamples": 0,
+      "peakUseWeight": 0.9999999,
+      "targetValid": true,
+      "itemTaken": true,
+      "restored": true
+    }
+  ],
+  "scope": "Pickup and food gestures (1214j): native LootObject47 drives the partner use reach toward the item, both source roles, product controller; fixture restored after every case."
+}

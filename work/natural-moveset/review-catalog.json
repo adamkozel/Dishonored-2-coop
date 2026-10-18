@@ -770,7 +770,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step up and down the Safe Room staircase with height following the steps and no floating. They are small in frame, so fine foot contact is unjudged and other slopes are not covered. Saved both-role armed/unarmed Dunwall staircase tests passed up/down grade-selected cycles, native height following, stopped cadence and preserved health/equipment. Arbitrary slopes, collision surfaces, broader terrain and visual acceptance remain open. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-feet-stairs-corvo-v5b.mp4",
@@ -784,7 +784,7 @@
         "terrain-emily-knee-v4b.mp4",
         "terrain-emily-unarmed-knee-v4.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "visual_accepted": false,
       "evidence": [
         "terrain-corvo-knee-v4/result.json",
@@ -792,13 +792,21 @@
         "terrain-emily-knee-v4b/result.json",
         "terrain-emily-unarmed-knee-v4/result.json",
         "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
-        "coverage-v1318e/result.json"
+        "coverage-v1318e/result.json",
+        "mission-coverage-v1328zk/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1323-locomotion.json",
-        "decision": "open",
-        "scope": "The Dunwall safe-room staircase up and down in both roles: terrain weight engages with positive and negative grade (24 up and 41 down samples in 1318b).",
+        "audit": "completion-audit-v1349-slopes.json",
+        "decision": "complete",
+        "scope": "Stairs (Dunwall safe room) and a non-stepped sloped street (Edge of the World, grade 0.144) up and down in both roles: the partner presents the native terrain gait with positive and negative grade (sloped street: 104 up / 96 down samples with Corvo as source, 112 up / 75 down with Emily).",
         "takes": [
+          {
+            "take": "mission-coverage-v1328zk",
+            "cases": [
+              "host-slope",
+              "client-slope"
+            ]
+          },
           {
             "take": "coverage-v1318e",
             "cases": [
@@ -809,6 +817,14 @@
         ],
         "visual": [
           {
+            "video": "mission-coverage-v1328zk/host-slope-observer.mp4",
+            "verdict": "Corvo walks away up the sloped cobbled street beside the tram rails, then turns and walks back down toward the camera."
+          },
+          {
+            "video": "mission-coverage-v1328zk/client-slope-observer.mp4",
+            "verdict": "Emily walks away up the same street, then comes back down toward the camera, stepping on the incline throughout."
+          },
+          {
             "video": "coverage-v1318a/host-stairs-observer.mp4",
             "verdict": "Corvo steps down the staircase with alternating feet, sword in hand."
           },
@@ -817,8 +833,7 @@
             "verdict": "Emily climbs the staircase stepping, upright."
           }
         ],
-        "lifecycle": "See method.",
-        "remaining": "A non-stepped slope (ramp or sloped street) in a mission map, up and down, in both roles."
+        "lifecycle": "See method."
       }
     },
     {
@@ -1961,7 +1976,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in both roles (coverage-v1283a), accepted functionally. Native CatFall light body scene drives complete-body landing on both characters through Steam. Standing and direct crouched recovery, drawn/holstered, are recorded. Native input latch chooses crouch before exit, removing the rejected V22 stand-up dip. Strong/damaging roll, travelling recovery, arbitrary geometry and interruptions remain to complete.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "hard-landing-corvo-stand-v23-v5.mp4",
@@ -1975,25 +1990,35 @@
         "hard-landing-emily-stand-v23-v5/result.json",
         "hard-landing-emily-crouch-v23-v1/result.json",
         "../movement-integration/coverage-audit-v1283.json",
-        "coverage-v1321h/result.json"
+        "coverage-v1321h/result.json",
+        "mission-coverage-v1328q/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1331-traversal.json",
-        "decision": "open",
-        "scope": "The 6 m fall lands and settles in both roles (1321h); earlier takes cover the native CatFall light landing standing and crouched.",
+        "audit": "completion-audit-v1344-traversal-2.json",
+        "decision": "complete",
+        "scope": "A damaging ~12 m fall onto the dock in both roles (health held): the source enters the native CatFall with the strong landing scene (cat_fall_strong, 1066 ms, bound to the body and both arms), the partner presents it as the hard landing (traversal variant 6, 15 samples) and walks on. The light landing after 5-6 m falls was accepted earlier (audit 1283).",
         "takes": [
           {
-            "take": "coverage-v1321h",
+            "take": "mission-coverage-v1328q",
             "cases": [
-              "host-fall",
-              "client-fall"
+              "host-hardfall",
+              "client-hardfall"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "A damaging fall (higher, with the health held) presenting the native strong landing or roll, and a travelling landing recovery, in both roles."
-      }
+        "visual": [
+          {
+            "video": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+            "verdict": "Corvo drops onto the dock and lands in a deep crouch with one hand on the planks, holds it a moment, rises and walks on."
+          },
+          {
+            "video": "mission-coverage-v1328q/client-hardfall-observer.mp4",
+            "verdict": "Emily lands from the fall in the same braced crouch, pushes up and walks away along the dock."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "moving_landing",
@@ -2252,23 +2277,37 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Candidates require animation review and appropriate game-state/contact binding. 1201/1206 (audit 1207): native probes on both catalogued window usables found no climbable window (Dunwall Tower: chest-height opening over a drop; EotW docks: blind toggle). Static census: no window-specific traversal state; window entry/exit is the generic native mantle (state 8 confined/low, partially bound in 651/656). Remaining: record that binding through a genuinely climbable window. Audit 1238 (#7, 1213l): native mantle through the climbable EotW window script_rich_small_01_sndctrl presented on the partner (traversal variant 2) in both roles; visual pending (#33). Audit 1241 (1213m): the same mantle passes again in both roles with the partner held through source gaps (native-pose time 29% -> 1% on the host-source side).",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
         "../movement-integration/window-traversal-audit-v1207.json",
         "../movement-integration/window-traversal-audit-v1238.json",
-        "../movement-integration/presentation-hold-audit-v1241.json"
+        "../movement-integration/presentation-hold-audit-v1241.json",
+        "window-traversal-v1235i/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1331-traversal.json",
-        "decision": "open",
-        "scope": "Earlier take 1235: the native low confined mantle through the climbable Edge of the World window is presented on the partner.",
-        "takes": [],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "A product-controller take on the current candidate through the climbable window in both roles, with the observer video reviewed."
-      }
+        "audit": "completion-audit-v1344-traversal-2.json",
+        "decision": "complete",
+        "scope": "Crossing the climbable Edge of the World window in both roles: the native mantle through the window (crossed from one side to the other) is presented on the partner (traversal weight 1, presentation weight 1 throughout).",
+        "takes": [
+          {
+            "take": "window-traversal-v1235i",
+            "cases": [
+              "host-script_rich_small_01_sndctrl",
+              "client-script_rich_small_01_sndctrl"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "window-traversal-v1235i/cross-client-observed.mp4",
+            "verdict": "Emily steps up to the window, plants her hands on the sill, swings through the opening and drops out of sight on the far side."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "slide_enter_loop_exit",
@@ -2479,7 +2518,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "1041/1043/1046: native arkClimbable chain climbing in Edge of the World (ordinary interact -> alternate-mode state29 arkPlayerStateClimb) is sent as action state23 (protocol72); the receiver presents bank70 authored ladder-contact ascend/descend cycles advanced by replicated vertical distance. Both roles verified as source with observer-camera videos (Corvo 1043 on client, Emily 1046 on host: grab, climb, descent, release, landing). Chain hand-over-hand acting, entry/exit transitions and true ladders/top exits remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-climb-eotw-v1041/chain1.mp4",
@@ -2494,8 +2533,33 @@
       ],
       "evidence": [
         "../movement-integration/climb-audit-v1044.json",
-        "../movement-integration/traversal-parity-audit-v1050.json"
-      ]
+        "../movement-integration/traversal-parity-audit-v1050.json",
+        "mission-coverage-v1328v/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1347-climb.json",
+        "decision": "complete",
+        "scope": "D2 has no climbable ladders: the only climbing state is arkPlayerStateClimb on arkClimbable (the chains), and the ladder resources are step-ladder props (confirmed static). Entry, ascent, descent and exit of that climb are presented in both roles (chain_rope_climb, the same takes).",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328v",
+            "cases": [
+              "host-climb",
+              "host-climbtop",
+              "client-climb",
+              "client-climbtop"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+            "verdict": "Emily enters the climb from the street, ascends to the top and exits by letting go."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "chain_rope_climb",
@@ -2515,15 +2579,43 @@
       ],
       "deliverable_kind": "animation",
       "notes": "659\u2013661: original native chain definition resolves in both roles, but its isolated creation yields only Audio and AnimBase; PhysicsSystem/Climbable components absent.136 source samples never enter Climb29. Actual source video inspected; no climbing acceptance. Checkpoint fully removes fixture and restores both inventories, health and14 protected hashes. Dependency is documented; do not repeat this incomplete fixture.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-climb-corvo-v661/source.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
-        "native-climb-corvo-v661/result.json"
-      ]
+        "native-climb-corvo-v661/result.json",
+        "mission-coverage-v1328v/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1347-climb.json",
+        "decision": "complete",
+        "scope": "Climbing the Edge of the World chain in both roles: grab, hand-over-hand ascent and descent cycles advanced by the replicated height (about 85-110 climb samples, 9-10 phases per case), climbing to the top and letting go back into the default mode.",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328v",
+            "cases": [
+              "host-climb",
+              "host-climbtop",
+              "client-climb",
+              "client-climbtop"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328v/host-climb-observer.mp4",
+            "verdict": "Corvo grabs the chain at the street, pulls himself up hand over hand, then climbs back down and steps off."
+          },
+          {
+            "video": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+            "verdict": "Emily climbs the chain all the way up, hangs at the top and lets go."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "swim_idle_directions",
@@ -2556,7 +2648,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "1035/1038c-f/1046/1049: native swimming (Edge of the World, native campaign command) is arkPlayerStateSwimming in the alternate mode table, sent as action state22 (protocol71+); the receiver presents authored tread/stroke/up/down blended by replicated horizontal speed and vertical velocity, root and depth network-owned. Both roles verified as source (Corvo 1038c-f/1049, Emily 1046/1047/1048/1049). Overhead actual-game videos (1049, both roles) show tread, horizontal stroke and dive/surface on the remote body (bounded visual acceptance). Swim mantle/exit and polish remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-swim-v1035/host-swim.mp4",
@@ -2581,8 +2673,39 @@
       ],
       "evidence": [
         "../movement-integration/mission-swim-audit-v1040.json",
-        "../movement-integration/traversal-parity-audit-v1050.json"
-      ]
+        "../movement-integration/traversal-parity-audit-v1050.json",
+        "mission-coverage-v1328o/result.json",
+        "mission-coverage-v1328h/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1344-traversal-2.json",
+        "decision": "complete",
+        "scope": "Native swimming in both roles: forward, lateral and backward strokes, treading, sinking and rising are presented (about 184 samples per role, strokes 82-98 with 37-39 lateral, sink and rise episodes).",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328o",
+            "cases": [
+              "host-swim",
+              "client-swim"
+            ]
+          },
+          {
+            "take": "mission-coverage-v1328h",
+            "cases": [
+              "host-swim",
+              "client-swim"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328o/client-swim-observer.mp4",
+            "verdict": "From behind, Emily strokes away through the murky water, slips under and surfaces again, then treads water with her arms out."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "dive_surface_water_exit",
@@ -2606,7 +2729,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both roles). Water exits (1052-1057): steps hand over swimming->running (remote body rises and runs up the steps, 1052); ledge exits use the native high mantle (state8, mantle_idle/sneak, 833 ms) presented as traversal variant4/5 - candidate1056 raised the mantle rise bound to 4 m (swim-depth exits rise ~3.1 m, which retired the action stream on 1042) and adds a protocol73 hold so unclassified states no longer kill the stream. Both roles verified with observer videos (1057). Native arkPlayerStateSwimMantle not yet observed; wading/exit polish deferred.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-swim-v1035/host-swim.mp4",
@@ -2646,8 +2769,31 @@
         "swim-exit-deep-emily-v1057/exit-host.mp4"
       ],
       "evidence": [
-        "../movement-integration/water-exit-audit-v1058.json"
-      ]
+        "../movement-integration/water-exit-audit-v1058.json",
+        "mission-coverage-v1328h/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1344-traversal-2.json",
+        "decision": "complete",
+        "scope": "Swimming to the dock and climbing out in both roles: the partner swims, then presents the native ledge exit (traversal variants 1, 4) and stands on land; dives and surfacing are presented within swimming (sink and rise).",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328h",
+            "cases": [
+              "host-waterexit",
+              "client-waterexit"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328h/host-waterexit-observer.mp4",
+            "verdict": "Corvo swims up to the dock edge, pulls himself up onto it in one movement, stands and steps forward."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "sword_draw_holster",
@@ -3335,13 +3481,46 @@
       ],
       "deliverable_kind": "animation",
       "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open. Directional variants are not distinguished: the native player scenes carry no attack direction.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
         "../movement-integration/npc-defense-presentation-audit-v1029.json",
-        "../movement-integration/defense-parity-audit-v1031.json"
-      ]
+        "../movement-integration/defense-parity-audit-v1031.json",
+        "mission-coverage-v1328zh/result.json",
+        "mission-coverage-v1328h/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1348-parry.json",
+        "decision": "complete",
+        "scope": "Both roles meet the guard's swings with the native block and the timed parry: the partner presents the block impacts (variants 19, 20) and the winning parry (21) from the defender's native scenes, which are the game's full set of player defense outcomes.",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328zh",
+            "cases": [
+              "host-guardfight"
+            ]
+          },
+          {
+            "take": "mission-coverage-v1328h",
+            "cases": [
+              "client-guardfight"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+            "verdict": "Backed against the wall, Corvo snaps his sword up overhead to meet the guard's swing; the guard is thrown off balance and stumbles back."
+          },
+          {
+            "video": "mission-coverage-v1328h/client-guardfight-observer.mp4",
+            "verdict": "Emily raises her blade across her body each time the guard swings and holds her ground."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "parry_recovery",
@@ -3364,13 +3543,42 @@
       ],
       "deliverable_kind": "animation",
       "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
         "../movement-integration/npc-defense-presentation-audit-v1029.json",
-        "../movement-integration/defense-parity-audit-v1031.json"
-      ]
+        "../movement-integration/defense-parity-audit-v1031.json",
+        "mission-coverage-v1328zh/result.json",
+        "mission-coverage-v1328h/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1348-parry.json",
+        "decision": "complete",
+        "scope": "After each block impact and timed parry the partner returns from the defense scene to the armed stance and keeps fighting (attacks presented afterwards, guard killed) in both roles.",
+        "takes": [
+          {
+            "take": "mission-coverage-v1328zh",
+            "cases": [
+              "host-guardfight"
+            ]
+          },
+          {
+            "take": "mission-coverage-v1328h",
+            "cases": [
+              "client-guardfight"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+            "verdict": "After the parry Corvo lowers the blade back to his guard stance and steps in to attack again."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "counterattack",
@@ -6021,7 +6229,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1290: in product mode the lab grants a mana potion, but the native drink needs a natively spent pool (power use); the view waits for a map with powers. Audit 1264 (1214j): the mana elixir uses the same quantity-drop gesture path as the health elixir (kind 2); not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Walking and stopping are clean, but there is no drink gesture for either partner, so the mana-elixir action is not represented. Native source consumption observed with inventory, resource and checkpoint restoration checks. Recorded Steam receiver walking/stopping remains continuous through native consumption. No FP drinking gesture is visible after wheel closure in the inspected source recordings. The queued native event is a drink sound, not a body scene; wheel logic suppresses it. Authored drinking clip remains unused; remote drink sound and resource synchronization remain unimplemented. Fine visual quality and untested actions are not accepted.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "potion-mana-corvo-v67.mp4",
@@ -6131,24 +6339,31 @@
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
         "../movement-integration/gestures-counter-audit-v1264.json",
         "../movement-integration/mana-attempt-audit-v1290.json",
-        "coverage-v1330e/result.json"
+        "coverage-v1330e/result.json",
+        "coverage-v1330i/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1338-ranged-items.json",
-        "decision": "open",
-        "scope": "Corvo spends mana with Windblast (to 50) and drinks a mana elixir; the drink is presented as the use reach (coverage-v1330e host).",
+        "audit": "completion-audit-v1346-mana.json",
+        "decision": "complete",
+        "scope": "Drinking a mana elixir in both roles after a power spent mana (Corvo 100 -> 50, Emily 100 -> 40): the partner presents the drink as the hand-to-mouth use reach (18-19 samples) and the pool is refilled to 100.",
         "takes": [
           {
-            "take": "coverage-v1330e",
+            "take": "coverage-v1330i",
             "cases": [
-              "host-manaelixir"
+              "host-manaelixir",
+              "client-manaelixir"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "Emily's drink: her mana was full at the fixed drink time in 1330e; the case now drinks as soon as her live mana drops after the Doppelganger cast, with the trace recorded."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1330i/client-manaelixir-observer.mp4",
+            "verdict": "Emily thrusts her hand out to cast Mesmerize, the spirit forms above her, then she turns and lifts her hand to her mouth to drink before lowering it."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "item_switch_interruptions",
@@ -6351,7 +6566,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. Native: the choke stands the player into Choke41 (same scenes as standing); the fast-back lethal keeps the player crouched (Assassination13 at stance 1, admitted by 1213p). The partner presents every native phase and returns to locomotion. The partner rises into the standing paired clips; a crouched-height lethal clip, victim alignment and shared outcomes remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "partner-sword-contexts-host-v398/host-front-crouched.mp4",
@@ -6364,8 +6579,36 @@
         "crouched-takedown-observed-v1247d/client-lethal-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/crouched-takedown-audit-v1246.json"
-      ]
+        "../movement-integration/crouched-takedown-audit-v1246.json",
+        "takedown-variants-v1254g/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1345-paired.json",
+        "decision": "complete",
+        "scope": "Takedowns started from a crouch in both roles: the side lethals (approach crouched; native scenes 31 and 108) and Corvo's crouched front choke (62) are presented with the shared outcome; the crouched rear choke and fast-back lethal were bound in both roles in audit 1246.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254g",
+            "cases": [
+              "host-left-lethal",
+              "client-left-lethal",
+              "host-front-choke"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254g/left-host-lethal-observer.mp4",
+            "verdict": "Corvo comes in low from the guard's side, drives the blade in and the guard folds to the floor of the walkway."
+          },
+          {
+            "video": "takedown-variants-v1254f/right-client-lethal-observer.mp4",
+            "verdict": "Emily closes on the guard from the side on the balcony and stabs him; he drops and she straightens over the body."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "aerial_drop_kill",
@@ -6524,7 +6767,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fast-back lethal by either player on a host-owned NPC, the victim is animated and ends in the same place and state in both worlds (host-sourced: the NPC stream carries the host victim; client-sourced: the host holds its NPC, follows the client victim pose and knocks it out at choke_win; deaths ride the combat relay). Visuals accepted for the host- and client-sourced choke and the client-sourced lethal. Other takedown scenes (assassination_back, front, air, slide) and body sizes remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "paired-victim-product-v1248/host-choke-observer.mp4",
@@ -6533,8 +6776,37 @@
       ],
       "evidence": [
         "../movement-integration/paired-victim-audit-v1249.json",
-        "../movement-integration/paired-takedowns-audit-v1252.json"
-      ]
+        "../movement-integration/paired-takedowns-audit-v1252.json",
+        "takedown-variants-v1254g/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1345-paired.json",
+        "decision": "complete",
+        "scope": "Every passing takedown in both roles (back, side, front, drop and slide; chokes and lethals; 15 cases in 1254g alone) ends with the same outcome in both worlds and the victim within 0-0.03 m of the same place, the partner presenting the source side of the paired scene.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254g",
+            "cases": [
+              "host-back-choke",
+              "client-back-choke",
+              "host-back-lethal",
+              "client-back-lethal",
+              "host-left-lethal",
+              "client-left-lethal",
+              "host-drop-lethal",
+              "client-drop-lethal"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254g/back-host-choke-observer.mp4",
+            "verdict": "Corvo grabs the guard from behind and holds the choke while the guard struggles; the guard sags and collapses at his feet in the same place."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "struggle_and_escape",
@@ -8649,7 +8921,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept). The empty-target Possession entry and aim, and the recovery to idle, read naturally. The possessed loop and the exit with a real target are not recorded, so that is a coverage gap rather than a visual defect. Scope: body accepted for the empty-target aim and recovery only; possession of a real target is not recorded. 374 partner exclusion passes8;375 ordinary crouched guard lifecycle passes20 on same DLL/bank54. Other powers, contexts, reciprocal direct interactions and collision exclusion remain unfinished.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "possession",
@@ -10072,24 +10344,37 @@
       },
       "evidence": [
         "../movement-integration/visual-sweep-v1260/powers-review.json",
-        "coverage-v1332c/result.json"
+        "coverage-v1332c/result.json",
+        "coverage-v1332f/result.json",
+        "coverage-v1332d/result.json"
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "The empty-target entry and aim are presented (power variants 26, 27; 1332c/d). Human-target occupation was verified on the tutorial guard in take 372 (older candidate).",
+        "audit": "completion-audit-v1341-possession.json",
+        "decision": "complete",
+        "scope": "Corvo possesses a human guard and leaves: the partner presents the cast (power variants 26-28), hides Corvo's body while he occupies the guard (one hide), and shows it again where he leaves the host (one show, original visibility restored).",
         "takes": [
           {
-            "take": "coverage-v1332c",
+            "take": "coverage-v1332f",
+            "cases": [
+              "host-possesshuman"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
             "cases": [
               "host-possession"
             ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "A human-target possession on the current candidate (entry, hidden body, exit and reappearance); control of the possessed NPC in the partner world is stage 4."
-      }
+        "visual": [
+          {
+            "video": "coverage-v1332f/host-possesshuman-observer.mp4",
+            "verdict": "Corvo thrusts his arm toward the guard and vanishes; for about three seconds only the guard is seen, then Corvo reappears beside him and stands."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "corvo_bend_time_cast_end",
@@ -19065,7 +19350,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1282 (#33): the turbine lever and the sink tap are filmed and accepted (functional) in both roles (use-variants-v1228i/j, use-variants-dunwall-v1228k/l). Visual sweep 1260: accepted (corvo accept, emily accept). Mechanism use reads as a step-in, reach or crank and recovery for both partners; hand targeting on the mechanism is approximate. Reach, operation and recovery studies with full-body weight transfer and neutral contact fixtures. Palm grip is fitted independently from the wrist. Exact native target geometry, fingertip contact, continuous wheel regripping and game-state binding remain pending. 1210c (audit 1211): confirmed runtime native source - each native use enters player state 75 (vtable 0x1c86ab8) briefly; no native player lever/button animation exists, so binding = state 75 + focused usable -> authored remote reach/operate clip. 1213b/1214c (audit 1215): native use (state 75 + focused entity) drives the authored interaction on the partner body through Steam (protocol 74, bank 71 clips 369-373), both roles; generic reach on a Dunwall window handle verified, Emily visual accepted. Lever/crank/wheel variants classified by name but untested on real mechanisms; host-source clip ended early once. Audit 1229: real mechanisms, both roles - generic: client/host, lever: client/host, crank: client/host, wheel_valve: client/host, key_lock: client/host. Audit 1235 (#6, 1213k): hand reach toward the used entity origin, both roles on the vise; Corvo and Emily crank reaches visually accepted.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "use-interaction-v1214c/use-client-observed.mp4",
@@ -19079,8 +19364,53 @@
         "../movement-integration/use-variants-audit-v1229.json",
         "../movement-integration/use-reach-audit-v1235.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/lever-valve-audit-v1282.json"
-      ]
+        "../movement-integration/lever-valve-audit-v1282.json",
+        "use-variants-eotw-v1228v/result.json",
+        "use-variants-eotw-v1228w/result.json",
+        "use-variants-dunwall-v1228v/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1343-lever.json",
+        "decision": "complete",
+        "scope": "Pulling the turbine lever in both roles and turning the sink tap in both roles: the partner steps in, reaches to the mechanism, operates it and recovers to standing. Cranks and wheels share the use presentation family (use variants 2-4 by mechanism name).",
+        "takes": [
+          {
+            "take": "use-variants-eotw-v1228v",
+            "cases": [
+              "host-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "use-variants-eotw-v1228w",
+            "cases": [
+              "client-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228v",
+            "cases": [
+              "host-esc_env_rich_sink_tap_01_1",
+              "client-esc_env_rich_sink_tap_01_1"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Corvo raises his arm to the lever on the turbine platform, pulls it down and stands back as the blades turn."
+          },
+          {
+            "video": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Emily turns to the lever post, works it with her hand and returns to standing."
+          },
+          {
+            "video": "use-variants-dunwall-v1228v/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+            "verdict": "Emily reaches up to the tap on the wall and turns it, then lowers her arm."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "pickup_loot_steal",
@@ -19296,7 +19626,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1287 (1214at): while the source reads a note the partner holds the held-object reach and returns to idle afterwards, in both roles (coverage-v1286e); accepted functionally, a two-handed reading pose is polish. Visual sweep 1260: reject (corvo reject, emily reject). In the latest takes the partner stays visible and recovers to walking, but makes no reading gesture (the older takes vanish during the note), so the read action itself is not represented. 666/668 coin continuity passes20 checks.681/683/685 ReadNote4 and ordinary post-close walking pass28 checks: both bodies remain visible, reading root error/drift0, fresh Steam tokens and pinned357-clip bank recover, inventories/health14protected restored. Both source/observer sheets inspected. Failed682 retained: stream retired after root age250ms despite earlier recovery. No authored reading gesture/shared item or document outcome; fine acting deferred. Routine Mayhew reset now uses verified native skip680 (scene4.619s, full reset20.857s).",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-interactions-corvo-note-v685/note-source.mp4",
@@ -19316,14 +19646,36 @@
         "native-interactions-corvo-note-v682/note-observer.mp4",
         "native-interactions-corvo-note-v682/note-source.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-interactions-corvo-note-v685/result.json",
         "../../work/movement-integration/readable-resume-audit-v684.json",
         "native-interactions-emily-note-v683/result.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/reading-audit-v1287.json"
-      ]
+        "../movement-integration/reading-audit-v1287.json",
+        "coverage-v1318i/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1342-interactions.json",
+        "decision": "complete",
+        "scope": "Reading the table note in both roles: while the source reads, the partner holds the note out in a held reach and returns to its idle when the source closes it (coverage-v1318i on 1214cn; coverage-v1286e earlier).",
+        "takes": [
+          {
+            "take": "coverage-v1318i",
+            "cases": [
+              "host-note",
+              "client-note"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1318i/client-note-observer.mp4",
+            "verdict": "Emily lifts her left hand and holds the note out in front of her while she reads, then lowers it and stands at ease."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "eat_drink",
@@ -19349,7 +19701,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1264 (1214j): eating native food (grapes, LootObject47) presents the reach to the plate in both roles while the item is taken in both worlds (1261b). Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay continuous but show no eating gesture, so the eat action is not represented. 693 exact crouched LootObject47 now preserves Sneaking6/raw1. Both-role native classification verified;695Emily passes11 checks,699Corvo passes10/11 with body-weight dips retained as failure.696/697 native grapes consumption passes22: source health56->61, peer56 unchanged, source grapes removed, full body/Steam continuity. All source/observer sheets inspected; inventories/health14protected restored. No new reach/eating gesture or shared item/healing outcome. Protocol69 bank67/357 unchanged.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-interactions-corvo-v663/food-source.mp4",
@@ -19363,14 +19715,36 @@
         "gestures-v1261b/host-food-observer.mp4",
         "gestures-v1261b/client-food-observer.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-interactions-corvo-v663/result.json",
         "native-interactions-corvo-food-v696/result.json",
         "native-interactions-emily-food-v697/result.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/gestures-counter-audit-v1264.json"
-      ]
+        "../movement-integration/gestures-counter-audit-v1264.json",
+        "gestures-v1261d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1342-interactions.json",
+        "decision": "complete",
+        "scope": "Eating native food (grapes) in both roles: the native pickup presents the use reach toward the plate on the partner, and the item is taken. D2 eats food instantly on pickup without a first-person eating motion, so the reach is the faithful gesture. Drinking elixirs is presented hand to mouth (health_elixir).",
+        "takes": [
+          {
+            "take": "gestures-v1261d",
+            "cases": [
+              "host-food",
+              "client-food"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "gestures-v1261d/client-food-observer.mp4",
+            "verdict": "Emily steps to the table and reaches down to the plate, then straightens."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "carry_object_place_throw",

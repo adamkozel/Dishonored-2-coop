@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:35:04.114763+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -857,18 +857,53 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
   ],
   "deliverable_kind": "animation",
   "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open. Directional variants are not distinguished: the native player scenes carry no attack direction.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
     "../movement-integration/npc-defense-presentation-audit-v1029.json",
-    "../movement-integration/defense-parity-audit-v1031.json"
-  ]
+    "../movement-integration/defense-parity-audit-v1031.json",
+    "mission-coverage-v1328zh/result.json",
+    "mission-coverage-v1328h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1348-parry.json",
+    "decision": "complete",
+    "scope": "Both roles meet the guard's swings with the native block and the timed parry: the partner presents the block impacts (variants 19, 20) and the winning parry (21) from the defender's native scenes, which are the game's full set of player defense outcomes.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328zh",
+        "cases": [
+          "host-guardfight"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1328h",
+        "cases": [
+          "client-guardfight"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+        "verdict": "Backed against the wall, Corvo snaps his sword up overhead to meet the guard's swing; the guard is thrown off balance and stumbles back."
+      },
+      {
+        "video": "mission-coverage-v1328h/client-guardfight-observer.mp4",
+        "verdict": "Emily raises her blade across her body each time the guard swings and holds her ground."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/npc-defense-presentation-audit-v1029.json](<../../../../work/movement-integration/npc-defense-presentation-audit-v1029.json>)
 - [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
+- [evidence: mission-coverage-v1328zh/result.json](<../../../../work/natural-moveset/mission-coverage-v1328zh/result.json>)
+- [evidence: mission-coverage-v1328h/result.json](<../../../../work/natural-moveset/mission-coverage-v1328h/result.json>)
 ## parry_recovery
 
 1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open.
@@ -895,18 +930,49 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
   ],
   "deliverable_kind": "animation",
   "notes": "1022/1026: the receiving player's exact native defense scenes (sword_parry_hit_1/hit_2 Scene_1/533, sword_parry_win Scene_1/500, correlated with native 140859980 block/parry results) drive the remote full body over Steam (protocol70) as bank68 clips357/358, native NPC deflection donors sword_parry_ll_out / sword_parry_rl_out. Verified with Emily as defender (1023/1025/1028c) and Corvo as defender against host-native enemies (1030: 4 blocks, 2 timed parries -> client clips357 x13, 358 x11). Crouched/sneak impacts, direction-specific acting, block-idle transition and visual acceptance remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
     "../movement-integration/npc-defense-presentation-audit-v1029.json",
-    "../movement-integration/defense-parity-audit-v1031.json"
-  ]
+    "../movement-integration/defense-parity-audit-v1031.json",
+    "mission-coverage-v1328zh/result.json",
+    "mission-coverage-v1328h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1348-parry.json",
+    "decision": "complete",
+    "scope": "After each block impact and timed parry the partner returns from the defense scene to the armed stance and keeps fighting (attacks presented afterwards, guard killed) in both roles.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328zh",
+        "cases": [
+          "host-guardfight"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1328h",
+        "cases": [
+          "client-guardfight"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+        "verdict": "After the parry Corvo lowers the blade back to his guard stance and steps in to attack again."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/npc-defense-presentation-audit-v1029.json](<../../../../work/movement-integration/npc-defense-presentation-audit-v1029.json>)
 - [evidence: ../movement-integration/defense-parity-audit-v1031.json](<../../../../work/movement-integration/defense-parity-audit-v1031.json>)
+- [evidence: mission-coverage-v1328zh/result.json](<../../../../work/natural-moveset/mission-coverage-v1328zh/result.json>)
+- [evidence: mission-coverage-v1328h/result.json](<../../../../work/natural-moveset/mission-coverage-v1328h/result.json>)
 ## counterattack
 
 Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rarely attacks her clone; native god mode is stripped). Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.

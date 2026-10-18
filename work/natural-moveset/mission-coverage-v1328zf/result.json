@@ -1,0 +1,161 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-guardfight: No block impact or timed parry presented (hits 3, attacks 29)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 5, timed parries 0, hit reactions 0 (variants ), attacks 21 (variants 1,2,7,9); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.8910872112799216,
+        -0.45383210760519394
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.8910872112799216,
+            -0.45383210760519394
+          ],
+          "rest": [
+            6.17937,
+            48.0897,
+            16.4675
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3630
+        },
+        {
+          "guardSamples": 4,
+          "ms": 25865,
+          "phase": "open"
+        },
+        {
+          "hitSamples": 0,
+          "ms": 40988,
+          "phase": "attack"
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 745,
+      "guard": "script_spawner_checkpoint_guard_02",
+      "blockImpacts": 5,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 21,
+      "attackVariants": [
+        1,
+        2,
+        7,
+        9
+      ],
+      "minSourceHealth": 40.0,
+      "healthDrops": [
+        {
+          "ms": 1243,
+          "states": 0
+        },
+        {
+          "ms": 19810,
+          "states": [
+            0,
+            64
+          ]
+        },
+        {
+          "ms": 33996,
+          "states": 0
+        },
+        {
+          "ms": 38873,
+          "states": 0
+        },
+        {
+          "ms": 52805,
+          "states": 0
+        }
+      ]
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 3, attacks 29)",
+      "checks": [],
+      "guardFacing": [
+        0.9750694072080833,
+        0.2219000926698251
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            0.9750694072080833,
+            0.2219000926698251
+          ],
+          "rest": [
+            7.02775,
+            50.0405,
+            16.2941
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3538
+        },
+        {
+          "guardSamples": 0,
+          "ms": 25935,
+          "phase": "open"
+        },
+        {
+          "hitSamples": 3,
+          "ms": 39665,
+          "phase": "attack"
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 654,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 3,
+      "stunVariants": [
+        4
+      ],
+      "attackSamples": 29,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "minSourceHealth": 55.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

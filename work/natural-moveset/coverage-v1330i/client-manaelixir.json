@@ -1,0 +1,42 @@
+{
+  "source": "client",
+  "case": "manaelixir",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "Mesmerize spent mana to 40; the mana elixir drink presented as the use reach (19 samples), mana now 100"
+  ],
+  "camera": [
+    -35.0,
+    -150.2,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 2,
+    "refused": 0,
+    "result": "granted_mana_potion",
+    "named": {
+      "grants": 10,
+      "refused": 0,
+      "result": "named_power_equip_requested"
+    }
+  },
+  "use": {
+    "uses": 1,
+    "refused": 0,
+    "result": "mana_use_requested",
+    "manaBefore": 40.0,
+    "manaNow": 100.0
+  },
+  "manaMin": 40.0,
+  "useSamples": 19,
+  "manaBefore": 40.0,
+  "manaNow": 100.0,
+  "drankAtMs": 6067,
+  "autoUsed": false,
+  "restored": true
+}

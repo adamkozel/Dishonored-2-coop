@@ -1,0 +1,138 @@
+{
+  "source": "host",
+  "kind": "choke",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious",
+    "Source carries the body (native carry state)",
+    "Carried body ends 0 m apart (moved: source 2.09 m, observer 2.09 m; max gap 0.22 m)",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -48.3957,
+      -148.846,
+      66.4
+    ],
+    "observer": [
+      -47.7484,
+      -145.232,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-18T09:51:59.0298504+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 240893546,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1f934e43110",
+      "actor": "0x1f937583e50",
+      "attributes": "0x1f9372eb8e0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 240893562,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x21ed86ecde0",
+      "actor": "0x21ee0340d90",
+      "attributes": "0x21ee00958d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "carryCamera": [
+    -46.80754359758207,
+    -142.20969580445131,
+    68.0039154
+  ],
+  "carryWalkYaw": 72.22842105803832,
+  "carryCameraHeld": true,
+  "carryRecorded": 2,
+  "carry": {
+    "moved": {
+      "source": 2.09,
+      "observer": 2.09
+    },
+    "maxGap": 0.22,
+    "endGap": 0.0,
+    "stillCarrying": false
+  },
+  "victimEnd": {
+    "source": [
+      -46.266,
+      -142.582,
+      66.5456
+    ],
+    "observer": [
+      -46.266,
+      -142.582,
+      66.5456
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "client_unconscious",
+    "posesDelta": 92,
+    "rootsDelta": 401,
+    "bodyAppliedDelta": 401,
+    "positionBefore": [
+      -47.6089,
+      -144.769,
+      66.4001
+    ],
+    "positionAfter": [
+      -47.4616,
+      -144.274,
+      66.6102
+    ]
+  },
+  "guardHealthObserverAfter": 10,
+  "restored": true
+}

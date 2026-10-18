@@ -1,0 +1,65 @@
+{
+  "source": "client",
+  "case": "guardfight",
+  "observer": "host",
+  "passed": false,
+  "failure": "No block impact or timed parry presented (hits 3, attacks 29)",
+  "checks": [],
+  "guardFacing": [
+    0.9750694072080833,
+    0.2219000926698251
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        0.9750694072080833,
+        0.2219000926698251
+      ],
+      "rest": [
+        7.02775,
+        50.0405,
+        16.2941
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "phaseLog": [
+    {
+      "phase": "block",
+      "ms": 3538
+    },
+    {
+      "guardSamples": 0,
+      "ms": 25935,
+      "phase": "open"
+    },
+    {
+      "hitSamples": 3,
+      "ms": 39665,
+      "phase": "attack"
+    }
+  ],
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcomeWaitMs": 654,
+  "guard": "script_spawner_checkpoint_guard_01",
+  "blockImpacts": 0,
+  "timedParries": 0,
+  "hitReactions": 3,
+  "stunVariants": [
+    4
+  ],
+  "attackSamples": 29,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    4,
+    7
+  ],
+  "minSourceHealth": 55.0
+}

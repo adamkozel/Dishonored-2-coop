@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "possesshuman",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Possession cast presented (variants 26,27,28), body hidden while occupying the guard and shown again on leaving"
+      ],
+      "camera": [
+        -46.76140365,
+        -142.61817906000002,
+        68.10000000000001
+      ],
+      "lowWeightSamples": 27,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "body": {
+        "cosmeticOnly": true,
+        "active": false,
+        "restoring": false,
+        "hidden": false,
+        "handle": 0,
+        "hideCalls": 1,
+        "showCalls": 1,
+        "refused": 0,
+        "retired": 0,
+        "lost": 0,
+        "result": "original_visibility_restored"
+      },
+      "sourceStatesAfter": [
+        0
+      ],
+      "castSamples": 11,
+      "castVariants": [
+        26,
+        27,
+        28
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Powers coverage (1332, #11): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}

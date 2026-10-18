@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (81 samples, 10 phases), ascending 10, descending 34"
+      ],
+      "climbing": 81,
+      "ascending": 10,
+      "descending": 34,
+      "phases": 10
+    },
+    {
+      "source": "host",
+      "case": "climbtop",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 113 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        6
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7297,
+        73.3611,
+        8.56114
+      ],
+      "climbing": 113,
+      "lastClimbMs": 11439,
+      "topTraversal": []
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (85 samples, 10 phases), ascending 10, descending 36"
+      ],
+      "climbing": 85,
+      "ascending": 10,
+      "descending": 36,
+      "phases": 10
+    },
+    {
+      "source": "client",
+      "case": "climbtop",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Climbed chain1 to its top and let go: 114 climb samples, source back in default mode at -41.73,73.36,8.56, top traversal "
+      ],
+      "sourceAfter": [
+        6
+      ],
+      "defaultModeAfter": true,
+      "sourcePosition": [
+        -41.7303,
+        73.3605,
+        8.56115
+      ],
+      "climbing": 114,
+      "lastClimbMs": 11610,
+      "topTraversal": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:35:04.114763+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -213,7 +213,7 @@ Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. 
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. Native: the choke stands the player into Choke41 (same scenes as standing); the fast-back lethal keeps the player crouched (Assassination13 at stance 1, admitted by 1213p). The partner presents every native phase and returns to locomotion. The partner rises into the standing paired clips; a crouched-height lethal clip, victim alignment and shared outcomes remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "partner-sword-contexts-host-v398/host-front-crouched.mp4",
@@ -226,12 +226,41 @@ Audit 1246 (1213r): a rear takedown started from crouch is bound in both roles. 
     "crouched-takedown-observed-v1247d/client-lethal-observer.mp4"
   ],
   "evidence": [
-    "../movement-integration/crouched-takedown-audit-v1246.json"
-  ]
+    "../movement-integration/crouched-takedown-audit-v1246.json",
+    "takedown-variants-v1254g/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1345-paired.json",
+    "decision": "complete",
+    "scope": "Takedowns started from a crouch in both roles: the side lethals (approach crouched; native scenes 31 and 108) and Corvo's crouched front choke (62) are presented with the shared outcome; the crouched rear choke and fast-back lethal were bound in both roles in audit 1246.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254g",
+        "cases": [
+          "host-left-lethal",
+          "client-left-lethal",
+          "host-front-choke"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254g/left-host-lethal-observer.mp4",
+        "verdict": "Corvo comes in low from the guard's side, drives the blade in and the guard folds to the floor of the walkway."
+      },
+      {
+        "video": "takedown-variants-v1254f/right-client-lethal-observer.mp4",
+        "verdict": "Emily closes on the guard from the side on the balcony and stabs him; he drops and she straightens over the body."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
+- [evidence: takedown-variants-v1254g/result.json](<../../../../work/natural-moveset/takedown-variants-v1254g/result.json>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-front-crouched.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-front-crouched.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-rear-crouched.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-rear-crouched.mp4>)
 - [in_game_recordings: partner-sword-contexts-client-v400/client-front-crouched.mp4](<../../../../work/natural-moveset/partner-sword-contexts-client-v400/client-front-crouched.mp4>)
@@ -448,7 +477,7 @@ Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fa
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fast-back lethal by either player on a host-owned NPC, the victim is animated and ends in the same place and state in both worlds (host-sourced: the NPC stream carries the host victim; client-sourced: the host holds its NPC, follows the client victim pose and knocks it out at choke_win; deaths ride the combat relay). Visuals accepted for the host- and client-sourced choke and the client-sourced lethal. Other takedown scenes (assassination_back, front, air, slide) and body sizes remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "paired-victim-product-v1248/host-choke-observer.mp4",
@@ -457,13 +486,43 @@ Audit 1252 (1214a, product controller, natural guard AI): for a rear choke or fa
   ],
   "evidence": [
     "../movement-integration/paired-victim-audit-v1249.json",
-    "../movement-integration/paired-takedowns-audit-v1252.json"
-  ]
+    "../movement-integration/paired-takedowns-audit-v1252.json",
+    "takedown-variants-v1254g/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1345-paired.json",
+    "decision": "complete",
+    "scope": "Every passing takedown in both roles (back, side, front, drop and slide; chokes and lethals; 15 cases in 1254g alone) ends with the same outcome in both worlds and the victim within 0-0.03 m of the same place, the partner presenting the source side of the paired scene.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254g",
+        "cases": [
+          "host-back-choke",
+          "client-back-choke",
+          "host-back-lethal",
+          "client-back-lethal",
+          "host-left-lethal",
+          "client-left-lethal",
+          "host-drop-lethal",
+          "client-drop-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254g/back-host-choke-observer.mp4",
+        "verdict": "Corvo grabs the guard from behind and holds the choke while the guard struggles; the guard sags and collapses at his feet in the same place."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/paired-victim-audit-v1249.json](<../../../../work/movement-integration/paired-victim-audit-v1249.json>)
 - [evidence: ../movement-integration/paired-takedowns-audit-v1252.json](<../../../../work/movement-integration/paired-takedowns-audit-v1252.json>)
+- [evidence: takedown-variants-v1254g/result.json](<../../../../work/natural-moveset/takedown-variants-v1254g/result.json>)
 - [in_game_recordings: paired-victim-product-v1248/host-choke-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248/host-choke-observer.mp4>)
 - [in_game_recordings: paired-victim-product-v1248j/client-choke-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248j/client-choke-observer.mp4>)
 - [in_game_recordings: paired-victim-product-v1248j/client-lethal-observer.mp4](<../../../../work/natural-moveset/paired-victim-product-v1248j/client-lethal-observer.mp4>)

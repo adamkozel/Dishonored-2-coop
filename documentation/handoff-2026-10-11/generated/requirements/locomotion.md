@@ -1,6 +1,6 @@
 # locomotion: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T07:35:04.114763+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:19:51.781025+02:00. All fields below retain the catalog wording.
 
 ## stand_idle
 
@@ -942,7 +942,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step up and down the Safe Room staircase with height following the steps and no floating. They are small in frame, so fine foot contact is unjudged and other slopes are not covered. Saved both-role armed/unarmed Dunwall staircase tests passed up/down grade-selected cycles, native height following, stopped cadence and preserved health/equipment. Arbitrary slopes, collision surfaces, broader terrain and visual acceptance remain open. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-feet-stairs-corvo-v5b.mp4",
@@ -956,7 +956,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
     "terrain-emily-knee-v4b.mp4",
     "terrain-emily-unarmed-knee-v4.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "visual_accepted": false,
   "evidence": [
     "terrain-corvo-knee-v4/result.json",
@@ -964,13 +964,21 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
     "terrain-emily-knee-v4b/result.json",
     "terrain-emily-unarmed-knee-v4/result.json",
     "../movement-integration/visual-sweep-v1260/locomotion_stance-review.json",
-    "coverage-v1318e/result.json"
+    "coverage-v1318e/result.json",
+    "mission-coverage-v1328zk/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1323-locomotion.json",
-    "decision": "open",
-    "scope": "The Dunwall safe-room staircase up and down in both roles: terrain weight engages with positive and negative grade (24 up and 41 down samples in 1318b).",
+    "audit": "completion-audit-v1349-slopes.json",
+    "decision": "complete",
+    "scope": "Stairs (Dunwall safe room) and a non-stepped sloped street (Edge of the World, grade 0.144) up and down in both roles: the partner presents the native terrain gait with positive and negative grade (sloped street: 104 up / 96 down samples with Corvo as source, 112 up / 75 down with Emily).",
     "takes": [
+      {
+        "take": "mission-coverage-v1328zk",
+        "cases": [
+          "host-slope",
+          "client-slope"
+        ]
+      },
       {
         "take": "coverage-v1318e",
         "cases": [
@@ -981,6 +989,14 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
     ],
     "visual": [
       {
+        "video": "mission-coverage-v1328zk/host-slope-observer.mp4",
+        "verdict": "Corvo walks away up the sloped cobbled street beside the tram rails, then turns and walks back down toward the camera."
+      },
+      {
+        "video": "mission-coverage-v1328zk/client-slope-observer.mp4",
+        "verdict": "Emily walks away up the same street, then comes back down toward the camera, stepping on the incline throughout."
+      },
+      {
         "video": "coverage-v1318a/host-stairs-observer.mp4",
         "verdict": "Corvo steps down the staircase with alternating feet, sword in hand."
       },
@@ -989,8 +1005,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
         "verdict": "Emily climbs the staircase stepping, upright."
       }
     ],
-    "lifecycle": "See method.",
-    "remaining": "A non-stepped slope (ramp or sloped street) in a mission map, up and down, in both roles."
+    "lifecycle": "See method."
   }
 }
 ````
@@ -1001,6 +1016,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters step u
 - [evidence: terrain-emily-unarmed-knee-v4/result.json](<../../../../work/natural-moveset/terrain-emily-unarmed-knee-v4/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/locomotion_stance-review.json](<../../../../work/movement-integration/visual-sweep-v1260/locomotion_stance-review.json>)
 - [evidence: coverage-v1318e/result.json](<../../../../work/natural-moveset/coverage-v1318e/result.json>)
+- [evidence: mission-coverage-v1328zk/result.json](<../../../../work/natural-moveset/mission-coverage-v1328zk/result.json>)
 - [in_game_recordings: native-feet-stairs-corvo-v5b.mp4](<../../../../work/natural-moveset/native-feet-stairs-corvo-v5b.mp4>)
 - [in_game_recordings: native-feet-stairs-emily-v5.mp4](<../../../../work/natural-moveset/native-feet-stairs-emily-v5.mp4>)
 - [in_game_recordings: terrain-corvo-v17-v2.mp4](<../../../../work/natural-moveset/terrain-corvo-v17-v2.mp4>)
