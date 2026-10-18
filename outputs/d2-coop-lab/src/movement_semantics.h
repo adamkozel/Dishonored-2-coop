@@ -15,7 +15,7 @@ struct MovementSemantics {
     std::array<Sample,32> samples{};unsigned count=0;
     void clear(){count=0;}
     bool push(const Sample& s){
-        if(!std::isfinite(s.time)||!s.event||s.state>24||!std::isfinite(s.leanSide)||!std::isfinite(s.leanUp)||
+        if(!std::isfinite(s.time)||!s.event||s.state>25||!std::isfinite(s.leanSide)||!std::isfinite(s.leanUp)||
            std::fabs(s.leanSide)>1||s.leanUp<0||s.leanUp>1||(s.state!=5&&(s.leanSide||s.leanUp))||
            !std::isfinite(s.startZ)||!std::isfinite(s.targetZ)||std::fabs(s.startZ)>100000||std::fabs(s.targetZ)>100000||s.remaining>3)return false;
         // Packet validation independently owns each power/ranged/grenade

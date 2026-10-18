@@ -231,7 +231,8 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         CombatPresentation::Sample combat{};float amount=0;
         const bool combatValid=p.bank.hasCombat()&&shadowStream.combat.sample(pose.time,combat,amount);
         const bool combatAir=p.bank.hasAirCombat()&&pose.motionValid&&(pose.motion==2||pose.motion==3);
-        const bool combatActive=combatValid&&combat.variant&&(combat.variant!=17||p.bank.hasKick())&&(combat.variant!=18||p.bank.hasCrouchHeavy())&&(combat.variant<19||p.bank.hasParryImpact())&&pose.motionValid&&(ground||crouched||combatAir);
+        const bool deathActive=combatValid&&CombatPresentation::death(combat.variant)&&p.bank.hasDeath();
+        const bool combatActive=deathActive||(combatValid&&combat.variant&&!CombatPresentation::death(combat.variant)&&(combat.variant!=17||p.bank.hasKick())&&(combat.variant!=18||p.bank.hasCrouchHeavy())&&(combat.variant<19||p.bank.hasParryImpact())&&pose.motionValid&&(ground||crouched||combatAir));
         const float combatDt=p.combatLastTime?float((now-p.combatLastTime)*.001):0;p.combatLastTime=now;
         CarryPresentation::Sample carry{};float carryAmount=0;
         const bool carryValid=p.bank.hasCarry()&&shadowStream.carry.sample(pose.time,carry,carryAmount);
@@ -490,7 +491,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // channel. Its exact-class action packet validates presentation while
         // the independent root channel continues to own world placement.
         const bool slideRecovery=p.bank.hasSlide()&&p.clock.slideState&&(semantic.state==0||semantic.state==4);
-        const bool physicalEligible=((pose.motionValid&&(ground||crouched))||sliding||slideRecovery||airState||traversalActive||powerActive||carryActive||chokeActive||swimActive||climbActive);
+        const bool physicalEligible=(deathActive||(pose.motionValid&&(ground||crouched))||sliding||slideRecovery||airState||traversalActive||powerActive||carryActive||chokeActive||swimActive||climbActive);
         // 1214cg (#11): the protocol-73 hold (state 24) covers a native state no binding classifies for a packet or two
         // (holster end, draw start, a holstered landing, a slide end). Keep the authored body on the replicated physical
         // state through it; yielding to the actor's native pose flashed it upright for about two frames (take 1321a).
@@ -705,7 +706,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             if(p.combatClip>=53&&p.combatClip<=55)action=MovementBank::blend(action,p.bank.sampleCombat(p.combatClip+3,j,p.combatAmount,p.combatAirMix),p.clock.stanceMix);
             if(p.combatFrom.size()==count)action=MovementBank::blend(p.combatFrom[j],action,p.combatTransition*p.combatTransition*(3-2*p.combatTransition));
             if(p.combatLast.size()!=count)p.combatLast.resize(count);p.combatLast[j]=action;
-            if(p.combatVariant!=17&&p.bank.hasAirCombat()&&MovementBank::combatLocomotionJoint(j,p.parents))
+            if(p.combatVariant!=17&&!CombatPresentation::death(p.combatVariant)&&p.bank.hasAirCombat()&&MovementBank::combatLocomotionJoint(j,p.parents))
                 action=MovementBank::blend(action,v,p.combatMoveMix*(1-p.combatAirMix));
             v=MovementBank::blend(v,action,p.combatWeight);
         }

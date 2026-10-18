@@ -1,0 +1,91 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-guardfight: Attacks presented 0",
+  "cases": [
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "Attacks presented 0",
+      "checks": [],
+      "guardFacing": [
+        -0.8910835565665078,
+        -0.4538392834658358
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.8910835565665078,
+            -0.4538392834658358
+          ],
+          "rest": [
+            6.17609,
+            48.0892,
+            16.4673
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3603
+        },
+        {
+          "phase": "open",
+          "ms": 25753,
+          "guardSamples": 2
+        },
+        {
+          "phase": "attack",
+          "ms": 40756,
+          "hitSamples": 0
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 659,
+      "guard": "script_spawner_checkpoint_guard_02",
+      "blockImpacts": 2,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 0,
+      "attackVariants": [],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 9535,
+          "states": [
+            0,
+            44,
+            64
+          ]
+        },
+        {
+          "ms": 11949,
+          "states": [
+            0,
+            44,
+            64
+          ]
+        },
+        {
+          "ms": 13792,
+          "states": [
+            0,
+            44,
+            64
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

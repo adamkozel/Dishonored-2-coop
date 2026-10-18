@@ -8,8 +8,12 @@
 // No game calls, root writes, native animation events or damage outcomes.
 struct CombatPresentation {
     static bool recovery(unsigned v){return v==15||v==16;}
+    // 1214cv (#11 death_variants): the native Dead state plays no scene; the source sends one directional collapse
+    // (24 front, 25 back, 26 left, 27 right: the native sleep-dart falls, bank72 clips 374-377), held at its end pose.
+    static bool death(unsigned v){return v>=24&&v<=27;}
+    static unsigned deathDuration(unsigned v){return v==24?2233u:v==25?2000u:v==26?1800u:1900u;}
     static unsigned clip(unsigned v,unsigned phase){
-        return v==22?45:v==23?47:v==21?358:v==19||v==20?357:v==18?356:v==17?353:v>=15?48+v-15:v<=4?44+v-1:v<=6?48+v-5:v==7?(phase==2?51:50):v<=9?52:v==10||v==13?53:v==11?54:55;
+        return death(v)?374+v-24:v==22?45:v==23?47:v==21?358:v==19||v==20?357:v==18?356:v==17?353:v>=15?48+v-15:v<=4?44+v-1:v<=6?48+v-5:v==7?(phase==2?51:50):v<=9?52:v==10||v==13?53:v==11?54:55;
     }
     static float continuationStart(unsigned v,unsigned previous,float amount,float weight){
         // A missed entry starts from the authored follow-through rather than
@@ -25,8 +29,9 @@ struct CombatPresentation {
     std::array<Sample,32> samples{};unsigned count=0;
     void clear(){count=0;}
     bool push(const Sample& s){
-        if(!std::isfinite(s.time)||!s.event||s.variant>23||
-           (s.variant>=22&&(s.duration!=733||s.phase!=1||s.elapsed>s.duration))||
+        if(!std::isfinite(s.time)||!s.event||s.variant>27||
+           (death(s.variant)&&(s.duration!=deathDuration(s.variant)||s.phase!=1||s.elapsed>s.duration))||
+           (s.variant>=22&&s.variant<=23&&(s.duration!=733||s.phase!=1||s.elapsed>s.duration))||
            (s.variant>=19&&s.variant<=21&&(s.duration!=(s.variant==21?500u:533u)||s.phase!=1||s.elapsed>s.duration))||
            (s.variant==18&&((s.duration!=1000&&s.duration!=833)||s.phase!=1||s.elapsed>s.duration))||
            (s.variant==17&&(s.duration!=800||s.phase!=1||s.elapsed>s.duration))||

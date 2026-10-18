@@ -163,6 +163,9 @@ int main(int argc,char** argv){
         check(bank.hasStun()==(bank.version>=43),"stun clips require their appended bank");
         check(bank.hasUse()==(bank.version>=71),"interaction clips require bank71");
         if(bank.hasUse())for(unsigned c=369;c<374;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"interaction pelvis pose finite");
+        check(bank.hasDeath()==(bank.version>=72),"death collapse clips require bank72");
+        if(bank.hasDeath())for(unsigned c=374;c<378;++c){check(bank.sampleParameter(c,2,1.f)[6]<bank.sampleParameter(c,2,0.f)[6]-.5f,"death collapse lowers the pelvis to the ground");
+            for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"death pelvis pose finite");}
         check(bank.hasCrouchedGrenade()==(bank.version>=44),"crouched grenade clips require their appended bank");
         if(bank.hasCrouchedGrenade())for(unsigned c=264;c<273;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"crouched grenade pelvis finite");
         if(bank.hasStun())for(unsigned c=260;c<264;++c)for(float a:{0.f,.5f,1.f})for(float v:bank.sampleParameter(c,2,a))check(std::isfinite(v),"stun pelvis pose finite");

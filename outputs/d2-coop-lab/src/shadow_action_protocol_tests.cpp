@@ -362,7 +362,19 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
        auto bad=swim;bad.combatVariant=10;bad.combatPhase=1;bad.combatDurationMs=533;check(!validShadowAction(bad,context,peer),"swimming cannot carry a combat scene");
        bad=swim;bad.powerVariant=1;check(!validShadowAction(bad,context,peer),"swimming cannot carry a power scene");
        bad=swim;bad.airStage=2;check(!validShadowAction(bad,context,peer),"swimming is not airborne");
-       bad=swim;bad.state=25;check(!validShadowAction(bad,context,peer),"unknown action state refused");
+       bad=swim;bad.state=25;check(!validShadowAction(bad,context,peer),"dead state without a collapse refused");
+       bad=swim;bad.state=26;check(!validShadowAction(bad,context,peer),"unknown action state refused");
+       {auto dead=swim;dead.state=25;dead.swordState=1;dead.combatPhase=1;
+        for(unsigned v=24;v<=27;++v){dead.combatVariant=v;dead.combatDurationMs=CombatPresentation::deathDuration(v);dead.combatTimeMs=0;
+         check(validShadowAction(dead,context,peer),"native death state25 carries one directional collapse (1214cv)");
+         dead.combatTimeMs=dead.combatDurationMs;check(validShadowAction(dead,context,peer),"death end pose held at its duration");
+         auto badDead=dead;badDead.combatTimeMs++;check(!validShadowAction(badDead,context,peer),"death past its collapse refused");
+         badDead=dead;badDead.combatDurationMs++;check(!validShadowAction(badDead,context,peer),"unobserved death duration refused");
+         badDead=dead;badDead.state=1;check(!validShadowAction(badDead,context,peer),"a collapse cannot ride a slash");
+         badDead=dead;badDead.powerVariant=1;check(!validShadowAction(badDead,context,peer),"death carries no power scene");
+         check(CombatPresentation::clip(v,1)==374+v-24&&!CombatPresentation::recovery(v),"death collapse addresses bank72 clips 374-377");}
+        auto badDead=dead;badDead.combatVariant=10;badDead.combatDurationMs=533;check(!validShadowAction(badDead,context,peer),"dead state carries only a death collapse");
+        CombatPresentation timeline;check(timeline.push({1.,1,24,1,0,2233})&&!timeline.push({2.,2,25,1,0,2233}),"death collapse timeline accepts only its exact duration");}
        {auto hold=swim;hold.state=24;hold.swordState=1;check(validShadowAction(hold,context,peer),"unclassified native state holds the stream without an action");
         hold.swordState=2;check(validShadowAction(hold,context,peer),"hold carries drawn equipment state only");
         auto badHold=hold;badHold.swordState=0;check(!validShadowAction(badHold,context,peer),"hold requires validated equipment state");

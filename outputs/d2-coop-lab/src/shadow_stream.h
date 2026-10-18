@@ -174,12 +174,48 @@ void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
     if(shadowUse.variant){
         if(shadowUse.variant<6&&useMovedAway(shadowUse.origin,outgoing.position)){shadowUse.variant=0;shadowUse.endReason=1;}else if(GetTickCount64()-shadowUse.start>=shadowUse.duration){shadowUse.variant=0;shadowUse.endReason=3;}}
 }
+// 1214cv (#11 death_variants): the native Dead state (player state 15, arkPlayerStateDead, vtable RVA 0x1c82478 from
+// its RTTI; confirmed static) plays no scene (probe 1361a). The source read failed closed on it, the stream stopped
+// and the partner vanished. It is now action 25 with one directional collapse chosen once at the death edge: the
+// nearest living catalogued NPC within 10 m relative to the facing (24 front, 25 back, 26 left, 27 right); a death
+// without one (a fall) collapses as front.
+struct ShadowDeath {std::uint64_t epoch=0,deaths=0;ULONGLONG start=0;unsigned variant=0;float bearing=0;bool nearby=false;};
+ShadowDeath shadowDeath{};
+inline bool nativePlayerDead(const NativePlayerStates& s,std::uintptr_t base){
+    return s.active.size()==1&&s.active[0].id==15&&s.active[0].vtable==base+0x1c82478;
+}
+unsigned shadowDeathVariant(ULONGLONG tick){
+    shadowDeath.nearby=false;shadowDeath.bearing=0;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    const float fx=outgoing.orientation[0],fy=outgoing.orientation[1],fl=std::sqrt(fx*fx+fy*fy);
+    if(!(fl>.1f)||!worldObservationReady(tick)||!worldCatalogTick||tick-worldCatalogTick>750)return 24;
+    float best=100.f,bx=0,by=0;
+    for(const auto& n:worldCatalog){float root[3]{};NativeHealth h{};
+        if(!n.actor||n.actor==probeActor||!memoryRead(n.actor+0x300,root,12)||!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||h.current<=0)continue;
+        const float dx=root[0]-outgoing.position[0],dy=root[1]-outgoing.position[1],dz=root[2]-outgoing.position[2],d=dx*dx+dy*dy+dz*dz;
+        if(std::isfinite(d)&&d>.01f&&d<best){best=d;bx=dx;by=dy;}
+    }
+    if(best>=100.f)return 24;
+    const float a=std::atan2((by*fx-bx*fy)/fl,(bx*fx+by*fy)/fl);shadowDeath.nearby=true;shadowDeath.bearing=a;
+    return std::fabs(a)<=.7853981634f?24u:std::fabs(a)>=2.356194490f?25u:a>0?26u:27u;
+}
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates states{};NativePlayerSword sword{};
     NativePlayerPowerScene power{};NativePlayerStunScene stun{};
     const bool nativeStateValid=shadowTimedRead(0,[&]{return readNativePlayerStates(memoryRead,base,states);})&&states.player.game==observedGame&&states.player.player==observedPlayer;
     if(nativeStateValid)serviceShadowUse(states,base);
+    if(nativeStateValid&&nativePlayerDead(states,base)){
+        const auto tick=GetTickCount64();
+        if(!shadowDeath.start||shadowDeath.epoch!=outgoing.worldEpoch){shadowDeath.epoch=outgoing.worldEpoch;shadowDeath.start=tick;shadowDeath.variant=shadowDeathVariant(tick);++shadowDeath.deaths;}
+        action=25;
+        if(airPacket){const unsigned duration=CombatPresentation::deathDuration(shadowDeath.variant);
+            airPacket->combatVariant=shadowDeath.variant;airPacket->combatPhase=1;airPacket->combatDurationMs=duration;
+            airPacket->combatTimeMs=unsigned((std::min<ULONGLONG>)(duration,tick-shadowDeath.start));
+            airPacket->swordState=shadowStreamLastPacket.swordState==2?2u:1u;}
+        if(leanSide)*leanSide=0;if(leanUp)*leanUp=0;shadowSourceReadStage=0;return true;
+    }
+    if(nativeStateValid)shadowDeath.start=0;
     const bool stunValid=nativeStateValid&&shadowTimedRead(1,[&]{return readNativePlayerStunScene(memoryRead,base,states,stun);});
     const bool powerValid=nativeStateValid&&!stunValid&&shadowTimedRead(2,[&]{return (readNativePlayerPowerScene(memoryRead,base,states,power,true)||readNativePlayerDominoScene(memoryRead,base,states,power)||readNativePlayerDoppelgangerScene(memoryRead,base,states,power)||readNativePlayerSwarmScene(memoryRead,base,states,power)||readNativePlayerPossessionScene(memoryRead,base,states,power,true)||readNativePlayerShadowWalkScene(memoryRead,base,states,power));});
     const bool possessionOccupied=nativeStateValid&&!stunValid&&!powerValid&&readNativeHumanPossessionOccupation(memoryRead,base,states);
@@ -569,6 +605,7 @@ void writeShadowStream(ULONGLONG tick){
         }fprintf(f,"],");
     }
     fprintf(f,"\"wireRefused\":%llu,\"stopServiceTick\":%llu,\"stopLastState\":%llu,",shadowWireRefused,shadowStopServiceTick,shadowStopLastState);
+    fprintf(f,"\"death\":{\"deaths\":%llu,\"active\":%s,\"variant\":%u,\"nearby\":%s,\"bearing\":%.4f},",shadowDeath.deaths,shadowDeath.start?"true":"false",shadowDeath.variant,shadowDeath.nearby?"true":"false",shadowDeath.bearing);
     fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
