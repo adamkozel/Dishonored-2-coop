@@ -119,7 +119,8 @@ try{
      C $source (P $ax $ay ($az+1.7) $up);Start-Sleep -Milliseconds 1200
      $walkMs=[int][Math]::Min(9000,[Math]::Max(2500,$len/1.7*1000));$runMs=[int][Math]::Min(6000,[Math]::Max(1500,$len/5.0*1000))
      $caps=Capture $key ([Math]::Ceiling(($walkMs*2+$runMs+6000)/1000));$samples=[Collections.Generic.List[object]]::new();$zs=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$seg=@()
-     $steps=@(@(500,'walkup'),@(500+$walkMs+800,'turn'),@(500+$walkMs+1600,'walkdown'),@(500+2*$walkMs+2400,'place'),@(500+2*$walkMs+3400,'runup'));$k=0
+     # The comma binds tighter than +: each time is parenthesized (1328zc added an array to $walkMs).
+     $steps=@(@(500,'walkup'),@((500+$walkMs+800),'turn'),@((500+$walkMs+1600),'walkdown'),@((500+2*$walkMs+2400),'place'),@((500+2*$walkMs+3400),'runup'));$k=0
      while($watch.ElapsedMilliseconds-lt(500+2*$walkMs+3400+$runMs+1500)){$t=$watch.ElapsedMilliseconds
       if($k-lt$steps.Count-and$t-ge$steps[$k][0]){switch($steps[$k][1]){'walkup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'turn'{$me=(Q $source '--player').candidatePosition;C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $dn)};'walkdown'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 14000 -DurationMs $walkMs|Out-Null};'place'{C $source (P $ax $ay ($az+1.7) $up)};'runup'{& "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs $runMs|Out-Null}};$seg+=[ordered]@{ms=$t;step=$steps[$k][1]};$k++}
       $x=Sample $t;$samples.Add($x);if($zs.Count-lt400){$me=try{(Q $source '--player').candidatePosition}catch{$null};if($me){$zs.Add([pscustomobject]@{ms=$t;x=[double]$me[0];y=[double]$me[1];z=[double]$me[2]})}};Start-Sleep -Milliseconds 60}
@@ -280,7 +281,13 @@ try{
      $caps=Capture $key 58;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$nextBlock=0;$aimAt=-9999;$hitAt=-9999;$closeAt=0;$phase='provoke';$phaseStart=0;$provoked=$false
      $close={param($reach)try{$me=(Q $source '--player').candidatePosition;$live=@(Living $source|Where-Object spawnerName -eq $gname)
       if($live.Count){$q=$live[0].position;$d=Dist2 $q $me;$ay=[Math]::Atan2([double]$q[1]-[double]$me[1],[double]$q[0]-[double]$me[0])*180/[Math]::PI;$tx=[double]$me[0];$ty=[double]$me[1]
-       if($d-gt$reach){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k;C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}}}catch{}}
+       if($d-gt$reach){$k=($d-1.4)/$d;$tx=$tx+([double]$q[0]-$tx)*$k;$ty=$ty+([double]$q[1]-$ty)*$k;C $source (P $tx $ty ([double]$me[2]+1.7) $ay)}
+       # 1328zd: the fight drifts and several checkpoint guards fill the frame; keep the free camera 3.5 m beside the source,
+       # perpendicular to the fight line, 1.6 m up (the yaw toward the source is the observer's view, set below).
+       $fl=[Math]::Max(.1,$d);$nx=([double]$q[0]-$tx)/$fl;$ny=([double]$q[1]-$ty)/$fl;$hx=$tx-3.5*$ny+0.8*$nx;$hy=$ty+3.5*$nx+0.8*$ny
+       $mxx=($tx+[double]$q[0])/2;$myy=($ty+[double]$q[1])/2;$hyaw=[Math]::Atan2($myy-$hy,$mxx-$hx)*180/[Math]::PI
+       C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $hyaw);Start-Sleep -Milliseconds 120
+       C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}catch{}}
      $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new()
      while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
       if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}

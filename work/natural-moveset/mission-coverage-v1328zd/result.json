@@ -1,0 +1,196 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 3, timed parries 2, hit reactions 6 (variants 2), attacks 34 (variants 1,2,3,4,7); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.8913030658347664,
+        -0.4534080334903055
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.8913030658347664,
+            -0.4534080334903055
+          ],
+          "rest": [
+            6.16525,
+            48.1045,
+            16.4647
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "ms": 3568,
+          "phase": "block"
+        },
+        {
+          "phase": "open",
+          "guardSamples": 5,
+          "ms": 25573
+        },
+        {
+          "phase": "attack",
+          "hitSamples": 6,
+          "ms": 25715
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 658,
+      "guard": "script_spawner_checkpoint_guard_02",
+      "blockImpacts": 3,
+      "timedParries": 2,
+      "hitReactions": 6,
+      "stunVariants": [
+        2
+      ],
+      "attackSamples": 34,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 8761,
+          "states": [
+            0,
+            64,
+            44
+          ]
+        },
+        {
+          "ms": 12090,
+          "states": [
+            0,
+            44
+          ]
+        },
+        {
+          "ms": 15971,
+          "states": [
+            0,
+            64
+          ]
+        },
+        {
+          "ms": 23527,
+          "states": [
+            0,
+            44,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 6, timed parries 0, hit reactions 0 (variants ), attacks 14 (variants 1,2,7); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        0.05433578476721916,
+        -0.9985227200688678
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            0.05433578476721916,
+            -0.9985227200688678
+          ],
+          "rest": [
+            5.78599,
+            45.9393,
+            16.6321
+          ],
+          "statesReadable": true,
+          "ok": false
+        },
+        {
+          "offset": [
+            0.9985227200688678,
+            0.05433578476721916
+          ],
+          "rest": [
+            8.17562,
+            49.4562,
+            16.4678
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "ms": 3558,
+          "phase": "block"
+        },
+        {
+          "phase": "open",
+          "guardSamples": 6,
+          "ms": 6537
+        },
+        {
+          "phase": "attack",
+          "hitSamples": 0,
+          "ms": 21644
+        }
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 665,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 6,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 14,
+      "attackVariants": [
+        1,
+        2,
+        7
+      ],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 3138,
+          "states": 0
+        },
+        {
+          "ms": 8174,
+          "states": 0
+        },
+        {
+          "ms": 17244,
+          "states": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
