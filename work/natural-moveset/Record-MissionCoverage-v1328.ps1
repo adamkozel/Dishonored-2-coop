@@ -88,7 +88,11 @@ try{
       $grid.Add([pscustomobject]@{x=$gx;y=$gy;px=$(if($pp){[double]$pp[0]}else{$null});py=$(if($pp){[double]$pp[1]}else{$null});z=$(if($pp){[double]$pp[2]}else{$null});defaultMode=$(if($ps){[bool]$ps.defaultMode}else{$null})})
       # mission-slopescan-v1328g: a point in the canal left the source swimming, and every later teleport kept it on the
       # water surface (z 6.0). Leave the water at the spawn dock before the next point.
-      if($ps-and!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 600;C $source (P $sp.x $sp.y ($sp.z+1.7) 0);Start-Sleep -Milliseconds 1200}}}
+      # 1328p: swim mode persists through teleports, so every later point reported the water surface; swim out through
+      # the known water-exit lane (the waterexit case) before the next point.
+      if($ps-and!$ps.defaultMode){$px2=-$sp.fy;$py2=$sp.fx;$wx2=$sp.x+$SwimLane*$px2;C $source (P $wx2 $WaterExitY 1.0 ([Math]::Atan2(-$py2,-$px2)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
+       foreach($k in 1..5){I $source A 700 32000;Start-Sleep -Milliseconds 1500;$ps2=try{Q $source '--player-states'}catch{$null};if($ps2-and$ps2.defaultMode){break}}
+       $grid[-1]|Add-Member -NotePropertyName waterExit -NotePropertyValue ([bool]($ps2-and$ps2.defaultMode))}}}
      C $source 'coop_player_health_hold off';Save "$out/$key-grid.json" @($grid);$row.points=$grid.Count;$row.checks.Add("Resting heights at $($grid.Count) grid points")}
     if($case-eq'slope'){
      # A smooth ramp (slopes_and_stairs; the Dunwall stairs are stepped). -SlopeStart/-SlopeEnd x,y,z (resting ground heights

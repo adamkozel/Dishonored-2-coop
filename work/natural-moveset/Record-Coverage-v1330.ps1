@@ -144,7 +144,7 @@ try{
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'));
-     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/mesmerize/mesmerize.inventoryitem'})),@(2600,'lt',$(if($source-eq'host'){250}else{1200})),@(3000,'usewhenspent','mana'))}
+     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/mesmerize/mesmerize.inventoryitem'})),@(2000,'pitch',20),@(2600,'lt',$(if($source-eq'host'){250}else{1200})),@(3000,'usewhenspent','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      # 1330e: Emily's mana stayed full at a fixed drink time. Trace the source's live mana (itemUse.manaNow) and drink the
      # moment it first drops below full after the cast, for up to 5 s.
