@@ -11,7 +11,8 @@ int main(){
     check(timeline.mapTime(1000000,10000,1,2,3,mapped)&&mapped==10000,"map unrelated source/receiver clocks");
     {double m=1050;check(clampActionMappedTime(m,1000,0)==0&&m==1050,"1214dc: in-window action time unchanged");
      m=1087;check(clampActionMappedTime(m,1000,0)==1&&m==1080,"1214dc: 87 ms early (1328zzo) clamped to the window edge");
-     m=1401;check(clampActionMappedTime(m,1000,0)==3,"1214dc: beyond the early band refused");
+     m=1583;check(clampActionMappedTime(m,1000,0)==1&&m==1080,"1214dg: 583 ms early (1376b) clamped");
+     m=2501;check(clampActionMappedTime(m,1000,0)==3,"1214dg: beyond the 1500 ms early band refused");
      m=738;check(clampActionMappedTime(m,1000,0)==2&&m==750,"1214dc: 262 ms late (1328zzo) clamped");
      m=-1;check(clampActionMappedTime(m,1000,0)==3,"1214dc: beyond the late band refused");
      m=1000;check(clampActionMappedTime(m,1000,1070)==0&&m>1070&&m<=1070.01,"1214dc: kept strictly after the previous accepted time");
