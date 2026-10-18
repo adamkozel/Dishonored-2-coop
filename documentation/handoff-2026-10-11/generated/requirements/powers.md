@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:42:09.161369+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T11:55:50.740722+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -5233,7 +5233,7 @@ Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pu
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pull, impact and recovery read correctly. The only visible artifact is the reset streak back to the origin, which is a fixture move. Standing armed Dunwall body phases, native tether from the authored left wrist to the observed static floor target, and native impact are transported over Steam. Eight checks cover cast/recovery, cancellation, exact effect counts, replay refusal and health/equipment. Attachment updates after the remote root each native frame; fast-pull final-pose samples match the wrist. Recovery-boundary attachment tolerance, stance/equipment/target variants and complete lifecycle remain unfinished. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "far_reach",
@@ -5265,30 +5265,49 @@ Visual sweep 1260: accepted (emily accept). The Far Reach aim, native tether, pu
   "evidence": [
     "grapple-regression-v26-v2/result.json",
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1353a/result.json",
+    "coverage-v1350a/result.json"
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "The aim is presented (power variant 4); the pull toward a floor point is too short to film from the side.",
+    "audit": "completion-audit-v1351-far-reach.json",
+    "decision": "complete",
+    "scope": "Far Reach in the Emily source role: cast-in and aim loop (variants 4, 5), release (6) and the pull-in (7) are presented; a native X cancellation during the aim presents no release, the source stays put (0.0 m) and the partner returns to locomotion, and a following cast releases and travels 9.2 m to its arrival (1353a); a long reach travels 9.6 m down the lane with the tether at her hand (1350a). Far Reach is Emily-only; the Corvo source role has Blink instead.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1353a",
         "cases": [
-          "client-farreach"
+          "client-farreachcancel"
+        ]
+      },
+      {
+        "take": "coverage-v1350a",
+        "cases": [
+          "client-farreachfar"
         ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "A far reach to a distant target with travel and arrival in frame, and a cancelled aim."
-  }
+    "visual": [
+      {
+        "video": "coverage-v1350a/client-farreachfar-observer.mp4",
+        "verdict": "From behind, Emily reaches her left hand down the lane, is pulled off her feet with the tether light at her hand, flies about ten metres and lands at the far end."
+      },
+      {
+        "video": "coverage-v1353a/client-farreachcancel-observer.mp4",
+        "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away down the lane; the scene is dim but the poses read."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: grapple-regression-v26-v2/result.json](<../../../../work/natural-moveset/grapple-regression-v26-v2/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1353a/result.json](<../../../../work/natural-moveset/coverage-v1353a/result.json>)
+- [evidence: coverage-v1350a/result.json](<../../../../work/natural-moveset/coverage-v1350a/result.json>)
 - [in_game_recordings: integrated-power-emily-v3.mp4](<../../../../work/natural-moveset/integrated-power-emily-v3.mp4>)
 - [in_game_recordings: integrated-grapple-fx-v3.mp4](<../../../../work/natural-moveset/integrated-grapple-fx-v3.mp4>)
 - [in_game_recordings: grapple-knee-v4.mp4](<../../../../work/natural-moveset/grapple-knee-v4.mp4>)

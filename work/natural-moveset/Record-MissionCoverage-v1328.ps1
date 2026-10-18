@@ -265,37 +265,45 @@ try{
      $pa=$ga[0].position;$pb=$gb[0].position;$mx=([double]$pa[0]+[double]$pb[0])/2;$my=([double]$pa[1]+[double]$pb[1])/2;$mz=([double]$pa[2]+[double]$pb[2])/2
      $ox=[double]$ga[0].orientation[0];$oy=[double]$ga[0].orientation[1];$ol=[Math]::Max(1e-3,[Math]::Sqrt($ox*$ox+$oy*$oy));$ox/=$ol;$oy/=$ol;$row.guards=@($pa,$pb);$row.guardFacing=@($ox,$oy)
      foreach($q in 'host','client'){C $q 'coop_player_health_hold on'};$placed=$null;$row.placementTrials=@()
-     # The guards face the canal from the railing: try 6 m behind them (the land side) first, then either side.
-     foreach($o in @(@(-$ox,-$oy),@(-$oy,$ox),@($oy,-$ox))){$tx=$mx+6*$o[0];$ty=$my+6*$o[1];$tyaw=[Math]::Atan2([double]$pa[1]-$ty,[double]$pa[0]-$tx)*180/[Math]::PI
+     # The two guards stand about 10.7 m apart along their facing (1328zl/zm), so "behind" them put Emily beside guard 02
+     # (zl: mobbed) or 17 m from guard 01 (zm: no target). Stand 7 m to either side of the middle of the pair (both within
+     # about 9 m), then 8 m behind as a fallback, and crouch before casting.
+     foreach($o in @(@($oy,-$ox,7),@(-$oy,$ox,7),@(-$ox,-$oy,8))){$tx=$mx+$o[2]*$o[0];$ty=$my+$o[2]*$o[1];$tyaw=[Math]::Atan2([double]$pa[1]-$ty,[double]$pa[0]-$tx)*180/[Math]::PI
       C $source (P $tx $ty ($mz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;[void](WaitGameplay 15000);$me=$null
       for($r=0;$r-lt6-and!$me;$r++){try{$me=(Q $source '--player').candidatePosition}catch{Start-Sleep -Milliseconds 500}}
-      $ok=[bool]$me-and[Math]::Abs([double]$me[2]-$mz)-lt.8-and(Dist2 $me @($mx,$my))-lt7.5;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
+      $ok=[bool]$me-and[Math]::Abs([double]$me[2]-$mz)-lt.8-and(Dist2 $me @($mx,$my))-lt9.5;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
       if($ok){$placed=@([double]$me[0],[double]$me[1],[double]$me[2]);break}}
      if(!$placed){throw 'No spot near the checkpoint guards at their level'}
-     # Free camera 3 m behind the source and 2.2 m up, looking past her toward the guards.
+     # Free camera beside the line from Emily to the guards (5 m off it at 40 % of the way, 2.5 m up), looking at its middle,
+     # so Emily and both marked guards share the frame (1328zl: from behind her the marks were lost among the guards).
      $dx=$mx-$placed[0];$dy=$my-$placed[1];$dl=[Math]::Max(.1,[Math]::Sqrt($dx*$dx+$dy*$dy));$dx/=$dl;$dy/=$dl
-     $cx=$placed[0]-3*$dx;$cy=$placed[1]-3*$dy;$cz=$placed[2]+2.2;$cyaw=[Math]::Atan2($dy,$dx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
+     $ax=$placed[0]+0.4*$dl*$dx;$ay=$placed[1]+0.4*$dl*$dy;$cx=$ax-5*$dy;$cy=$ay+5*$dx;$cz=$placed[2]+2.5
+     $lx=$placed[0]+0.5*$dl*$dx;$ly=$placed[1]+0.5*$dl*$dy;$cyaw=[Math]::Atan2($ly-$cy,$lx-$cx)*180/[Math]::PI;$row.camera=@($cx,$cy,$cz)
      C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 12 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      $l=WaitLive "$key-near-guards" 20000;if(!$l.ok){throw 'Partner presentation not live near the guards'}
+     & "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 200|Out-Null;Start-Sleep -Milliseconds 900;$row.stanceBeforeCast=try{(Q $source '--player-states').stance}catch{$null}
      C $source 'coop_grant_named models/powers/phantasmallink/phantasmal_link.inventoryitem';Start-Sleep -Milliseconds 1800;$row.grant=(S $source '.observer-camera.json').itemGrant.named
-     $aim={param($spawnerName)$me=(Q $source '--player').candidatePosition;$tg=@(Living $source|Where-Object spawnerName -eq $spawnerName);if(!$tg.Count){return $null};$tp=$tg[0].position
-      $yaw=[Math]::Atan2([double]$tp[1]-[double]$me[1],[double]$tp[0]-[double]$me[0])*180/[Math]::PI;$h=Dist2 $tp $me;$pitch=[Math]::Atan2(([double]$me[2]+1.6)-([double]$tp[2]+1.3),[Math]::Max(.5,$h))*180/[Math]::PI
+     # 1328zm: aim from the native eye (crouched it is about 1 m above the feet, not 1.6 m) at the guard's chest.
+     $aim={param($spawnerName)$pl=Q $source '--player';$me=$pl.candidatePosition;$eye=[double]$pl.nativeViewPosition[2];$tg=@(Living $source|Where-Object spawnerName -eq $spawnerName);if(!$tg.Count){return $null};$tp=$tg[0].position
+      $yaw=[Math]::Atan2([double]$tp[1]-[double]$me[1],[double]$tp[0]-[double]$me[0])*180/[Math]::PI;$h=Dist2 $tp $me;$pitch=[Math]::Atan2($eye-([double]$tp[2]+1.3),[Math]::Max(.5,$h))*180/[Math]::PI
       C $source (P $me[0] $me[1] ([double]$me[2]+1.7) $yaw);& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $pitch -Quick|Out-Null;[ordered]@{target=$spawnerName;yaw=$yaw;pitch=$pitch;distance=$h}}
      $w0=S $peer '.domino-world.json';$l0=S $peer '.domino-links.json';$row.before=[ordered]@{marks=$w0.started;beams=$l0.started}
-     $caps=Capture $key 26;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$row.aims=@();$marksMax=0;$beamsMax=0;$masks=@{};$marksAtCancel=$null
+     $caps=Capture $key 26;$samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$row.aims=@();$marksMax=0;$beamsMax=0;$masks=@{};$marksAtCancel=$null;$nextLinkRead=0;$linkReads=[Collections.Generic.List[object]]::new()
      while($watch.ElapsedMilliseconds-lt22000){$t=$watch.ElapsedMilliseconds
       if($step-eq0-and$t-ge1000){$row.aims+=(& $aim $GuardClient);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 1800|Out-Null;$step=1}
       elseif($step-eq1-and$t-ge5500){$row.aims+=(& $aim $GuardHost);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 1800|Out-Null;$step=2}
       elseif($step-eq2-and$t-ge12000){$row.aims+=(& $aim $GuardClient);& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 3000|Out-Null;$step=3}
       elseif($step-eq3-and$t-ge13300){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -Button X -DurationMs 200|Out-Null;$step=4}
       elseif($step-eq4-and$t-ge13600){& "$lab/Send-D2Input.ps1" -Role $source -DurationMs 100|Out-Null;$marksAtCancel=(S $peer '.domino-world.json').started;$step=5}
+      # 1214cs: the raw source link read (stage and, on a connection failure, each beam FX lookup) every ~0.5 s.
+      if($t-ge$nextLinkRead){$nextLinkRead=$t+500;$raw=& "$lab/bin/d2_runtime_probe.exe" $pids[$source] --domino-links 2>&1;$linkReads.Add([pscustomobject]@{ms=$t;read=(($raw|Out-String).Trim())})}
       $x=Sample $t;$dw=S $peer '.domino-world.json';$dk=S $peer '.domino-links.json';$sw=S $source '.domino-world.json'
       $nm=($dw.marks|Measure-Object).Count;$nb=($dk.beams|Measure-Object).Count
       $x|Add-Member -NotePropertyName dominoMask -NotePropertyValue $dw.readyMask;$x|Add-Member -NotePropertyName dominoMarks -NotePropertyValue $nm;$x|Add-Member -NotePropertyName dominoBeams -NotePropertyValue $nb
       $x|Add-Member -NotePropertyName dominoSent -NotePropertyValue $sw.sent;$x|Add-Member -NotePropertyName markCount -NotePropertyValue $dw.markCount
       $samples.Add($x);$marksMax=[Math]::Max($marksMax,$nm);$beamsMax=[Math]::Max($beamsMax,$nb);$mk="$($dw.readyMask)";$masks[$mk]=1+[int]$masks[$mk];Start-Sleep -Milliseconds 90}
-     Save "$out/$key-samples.json" @($samples);$w1=S $peer '.domino-world.json';$l1=S $peer '.domino-links.json';Save "$out/$key-domino-world.json" $w1;Save "$out/$key-domino-links.json" $l1;Save "$out/$key-source-domino-world.json" (S $source '.domino-world.json')
+     Save "$out/$key-samples.json" @($samples);Save "$out/$key-source-link-reads.json" @($linkReads);$w1=S $peer '.domino-world.json';$l1=S $peer '.domino-links.json';Save "$out/$key-domino-world.json" $w1;Save "$out/$key-domino-links.json" $l1;Save "$out/$key-source-domino-world.json" (S $source '.domino-world.json')
      C $peer 'coop_observer_camera off';try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 0 -Quick|Out-Null}catch{}
      $cast=@($samples|Where-Object {[double]$_.powerWeight-gt.5-and[int]$_.powerVariant-ge19-and[int]$_.powerVariant-le22});$row.castSamples=$cast.Count;$row.castVariants=@($cast|ForEach-Object {[int]$_.powerVariant}|Sort-Object -Unique)
      $row.marksMax=$marksMax;$row.beamsMax=$beamsMax;$row.readyMasks=$masks;$row.marksStarted=[int]$w1.started-[int]$w0.started;$row.beamsStarted=[int]$l1.started-[int]$l0.started
@@ -305,7 +313,10 @@ try{
      if($marksMax-lt2){throw "Partner Domino marks presented: at most $marksMax at once (ready masks $(@($masks.Keys)-join ','))"}
      if($beamsMax-lt1){throw "Partner Domino link beam not presented (marks $marksMax)"}
      if($row.marksAfterCancel-gt0){throw "The cancelled aim started $($row.marksAfterCancel) marks"}
-     $row.checks.Add("Partner presented the Domino casts ($($cast.Count) samples, variants $($row.castVariants-join ',')), the marks ($marksMax at once, $($row.marksStarted) started) and the link beam ($beamsMax at once); the cancelled aim started no mark")}
+     # 1214cs: the marks stay presented between the second cast and the cancelled aim (1328zl: they vanished after each cast).
+     $row.marksBetweenCasts=@($samples|Where-Object {$_.ms-ge9000-and$_.ms-lt12000-and$_.dominoMarks-ge2}).Count
+     if($row.marksBetweenCasts-lt10){throw "Partner marks presented between casts in $($row.marksBetweenCasts) samples"}
+     $row.checks.Add("Partner presented the Domino casts ($($cast.Count) samples, variants $($row.castVariants-join ',')), the marks ($marksMax at once, $($row.marksStarted) started) and the link beam ($beamsMax at once), marks held between casts ($($row.marksBetweenCasts) samples); the cancelled aim started no mark")}
     if($case-eq'guardfight'){$gname=if($source-eq'host'){$GuardHost}else{$GuardClient};$g=@(Living $source|Where-Object spawnerName -eq $gname);if($g.Count-ne1){throw "Guard $gname missing"};$gp=$g[0].position
      # Placement history: +y 1.6 m stood on a parapet beyond the railing (1328b-e: no swing reached the source, and the
      # alerting slash killed the unaware guard); 3 m in front along the guard's facing was over the canal (1328f: the guard
