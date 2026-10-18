@@ -77,6 +77,17 @@ try{
     # Both players start on the spawn dock, the observer 2.5 m in front of the source, facing it.
     C $source (P $sp.x $sp.y ($sp.z+1.7) ([Math]::Atan2($fy,$fx)*180/[Math]::PI));C $peer (P ($sp.x+2.5*$fx) ($sp.y+2.5*$fy) ($sp.z+1.7) ([Math]::Atan2(-$fy,-$fx)*180/[Math]::PI));Start-Sleep -Milliseconds 1500
     $l=WaitLive "$key-placed" 30000;if(!$l.ok){throw 'Partner presentation not live after placement'}
+    if($case-eq'slopewalk'){
+     # Lab-only exploration (scans 1328g-x lost the source in the bay): walk from known ground in 8 headings for 6 s each,
+     # tracing the source position every 100 ms, to find a smooth incline (z rising without step jumps) for the slope case.
+     C $source 'coop_player_health_hold on';$walks=[Collections.Generic.List[object]]::new()
+     foreach($start in @(@($sp.x,$sp.y,$sp.z,'dock'),@(($ChainX-1.2),$ChainY,($ChainZ-2.22),'chain'))){foreach($h in 0..7){
+      C $source (P $start[0] $start[1] ([double]$start[2]+1.7) ($h*45));Start-Sleep -Milliseconds 1200;[void](WaitGameplay 6000)
+      & "$lab/Send-D2Input.ps1" -Role $source -LeftY 32767 -DurationMs 6000|Out-Null;$tr=[Collections.Generic.List[object]]::new();$w=[Diagnostics.Stopwatch]::StartNew()
+      while($w.ElapsedMilliseconds-lt6200){$pp=try{(Q $source '--player').candidatePosition}catch{$null};if($pp){$tr.Add(@([double]$pp[0],[double]$pp[1],[double]$pp[2]))};Start-Sleep -Milliseconds 100}
+      $ps=try{Q $source '--player-states'}catch{$null};$walks.Add([pscustomobject]@{start=$start[3];heading=$h*45;trace=@($tr);endDefault=$(if($ps){[bool]$ps.defaultMode}else{$null})})
+      if($ps-and!$ps.defaultMode){I $source A 300;Start-Sleep -Milliseconds 600}}}
+     C $source 'coop_player_health_hold off';Save "$out/$key-walks.json" @($walks);$row.walks=$walks.Count;$row.checks.Add("Traced $($walks.Count) walks")}
     if($case-eq'slopescan'){
      # Lab-only exploration, no presentation checks: drop the source (health held) on a 4 m grid around the chain street and
      # record where it comes to rest, to find a smooth ramp for the slope case (slopes_and_stairs; the stairs are stepped).
