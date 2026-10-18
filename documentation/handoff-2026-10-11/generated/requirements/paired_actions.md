@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:31:13.216528+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:47:48.827917+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -30,7 +30,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back let
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back lethal body action reads for both characters. Only the back direction is recorded, and victim reaction and alignment are not part of these takes. Scope: rear presentation accepted (sweep); drop and slide accepted in audit 1257. Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "partner-sword-contexts-host-v392/host-front-standing.mp4",
@@ -51,17 +51,88 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back let
     "lethal-network-emily-v605/client-rear-lethal.mp4",
     "lethal-network-emily-v605/observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "visual_accepted": false,
   "evidence": [
     "../movement-integration/takedown-variants-audit-v1257.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "takedown-variants-v1254i/result.json",
+    "takedown-variants-v1254h/result.json",
+    "takedown-variants-v1254w/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1369-lethal.json",
+    "decision": "complete",
+    "scope": "Lethal takedowns from behind, from either side and from the front, by either player, presented on the partner as the native assassination with a shared death.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254i",
+        "cases": [
+          "host-back-lethal",
+          "client-back-lethal"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254h",
+        "cases": [
+          "host-left-lethal",
+          "client-left-lethal",
+          "host-right-lethal",
+          "client-right-lethal",
+          "host-front-lethal"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254w",
+        "cases": [
+          "client-front-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254i/back-host-lethal-observer.mp4",
+        "verdict": "Corvo seizes the guard from behind and stabs; the guard arches, drops to his knees and slumps at Corvo's feet."
+      },
+      {
+        "video": "takedown-variants-v1254i/back-client-lethal-observer.mp4",
+        "verdict": "Emily takes the guard from behind and drives the blade in; he crumples to the floor while she crouches over him with the sword raised."
+      },
+      {
+        "video": "takedown-variants-v1254h/left-host-lethal-observer.mp4",
+        "verdict": "Corvo comes in at the guard's left, grabs him and brings him down; the guard ends kneeling and slumped beside him."
+      },
+      {
+        "video": "takedown-variants-v1254h/left-client-lethal-observer.mp4",
+        "verdict": "Emily strikes at the guard's left side and he slumps to the floor beside her."
+      },
+      {
+        "video": "takedown-variants-v1254h/right-host-lethal-observer.mp4",
+        "verdict": "Corvo lunges at the guard's right side and hauls him over; the body falls away out of frame behind the railing while Corvo straightens."
+      },
+      {
+        "video": "takedown-variants-v1254h/right-client-lethal-observer.mp4",
+        "verdict": "Emily grabs the guard from his right; he folds and drops to the floor at her feet."
+      },
+      {
+        "video": "takedown-variants-v1254h/front-host-lethal-observer.mp4",
+        "verdict": "Corvo walks up to the guard face to face, grabs him and drives him down; the guard sinks at his feet and Corvo straightens with the sword raised."
+      },
+      {
+        "video": "takedown-variants-v1254w/front-client-lethal-observer.mp4",
+        "verdict": "Emily steps in to the guard standing and drives into him from the front; he goes down at her feet and she stands over the body."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: takedown-variants-v1254i/result.json](<../../../../work/natural-moveset/takedown-variants-v1254i/result.json>)
+- [evidence: takedown-variants-v1254h/result.json](<../../../../work/natural-moveset/takedown-variants-v1254h/result.json>)
+- [evidence: takedown-variants-v1254w/result.json](<../../../../work/natural-moveset/takedown-variants-v1254w/result.json>)
 - [in_game_recordings: partner-sword-contexts-host-v392/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v392/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-front-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-front-standing.mp4>)
 - [in_game_recordings: partner-sword-contexts-host-v398/host-rear-standing.mp4](<../../../../work/natural-moveset/partner-sword-contexts-host-v398/host-rear-standing.mp4>)

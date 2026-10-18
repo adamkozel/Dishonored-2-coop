@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T17:31:13.216528+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T17:47:48.827917+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 82 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 86 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -431,7 +431,7 @@ Captured 2026-10-18T17:31:13.216528+02:00; source [review-catalog.json](<../../.
 | stagger_knockdown_recovery | combat | candidates | not_verified | not_accepted | work_remaining |
 | kick_or_shove_if_present | combat | candidates | partial_native_steam_player_kick_outcome_host_source_mission_map | not_accepted | work_remaining |
 | death_variants | combat | candidates | partial_native_steam_npc_death_and_corpse_both_peers_mission_map | accepted_functional_both_roles | complete |
-| ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | accepted_functional_both_roles | work_remaining |
+| ragdoll_handoff | combat | missing | partial_native_steam_npc_corpse_authority_mission_map | accepted_functional_both_roles | complete |
 | pistol_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | crossbow_draw_aim_fire_reload_holster | ranged_and_items | candidates | partial_native_steam_ranged_five_phase_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | bolt_or_ammo_switch | ranged_and_items | candidates | not_verified | not_accepted | complete |
@@ -441,7 +441,7 @@ Captured 2026-10-18T17:31:13.216528+02:00; source [review-catalog.json](<../../.
 | health_elixir | ranged_and_items | candidates | native_health_elixir_drink_reach_presented_both_roles | accepted_functional_both_roles_hand_to_mouth | complete |
 | mana_elixir | ranged_and_items | candidates | native_network_movement_during_mana_use_partial_verified | not_accepted | complete |
 | item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
-| lethal_takedown_front_back_sides | paired_actions | candidates | partial_census_lethals_back_drop_slide_finishers_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| lethal_takedown_front_back_sides | paired_actions | candidates | partial_census_lethals_back_drop_slide_finishers_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | nonlethal_takedown_front_back_sides | paired_actions | candidates | partial_census_chokes_back_both_roles_sides_emily_front_corvo | accepted_sweep_1260_functional_both_roles | complete |
 | crouched_takedown | paired_actions | candidates | native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles | accepted_client_choke_client_lethal_host_choke_host_lethal | complete |
 | aerial_drop_kill | paired_actions | candidates | native_drop_lethal_presented_and_shared_both_roles_product | accepted_functional_both_roles_fast_back_donor | complete |
@@ -477,8 +477,8 @@ Captured 2026-10-18T17:31:13.216528+02:00; source [review-catalog.json](<../../.
 | carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | work_remaining |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | work_remaining |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
-| scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | work_remaining |
-| cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | work_remaining |
+| scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | complete |
+| cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | complete |
 | map_load_checkpoint_recovery | interactions | missing | partial_native_steam_map_load_and_checkpoint_restart_both_peers | accepted_functional_both_roles | complete |
 | incapacitation_and_rescue_if_supported | interactions | missing | not_verified | not_accepted | excluded_by_policy |
 

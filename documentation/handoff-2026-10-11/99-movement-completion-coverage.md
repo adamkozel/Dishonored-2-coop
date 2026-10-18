@@ -207,6 +207,10 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | player-death-probe-v1361h-s | Deaths on 1214cw/cx with the probe's own verdict: every plain death and finisher passes in both roles; 1361h, 1361q film Corvo's finishers, 1361i, 1361j the plain deaths; 1361o (Emily's finisher on 1214cw) vanished while kneeling |
 | mission-coverage-v1328zzj-zzm | Guard fights: zzj (Emily turned 75 deg) steady stream but no damage to Emily (#108); zzk (Corvo) guard death not shared; zzl snapshots the NPC catalogs (#108 root cause); zzm (1214cy) relays the guard's hits to Emily and shares its death |
 | use-variants-dunwall-v1228x-za | Ring lock in both roles passes functionally; the free camera stood in a wall (x/y) and test-dropped spots found no floor at the source's level (z/za, one fell 14 m) |
+| takedown-variants-v1254w | Emily's front lethal approached standing (-FrontStand) at 1.0 m: assassination_front (id 26) presented, guard dead in both worlds (audit 1369) |
+| cutscene-transition-v1236c | Mayhew cinematic (1214cz): no partner sample in either window during the 30 s scene; both partners back 1.875 s after it (audit 1359) |
+| takedown-variants-v1254u | Emily's drop kill with the corpse release filmed from the host (1254t harness): the body slumps into a sprawl, 0.37 m from the joiner body (audit 1368) |
+| mission-coverage-v1328zzn, zzo | Guard fights on 1214cz: stuns presented (variant 2) and the guard's death shared; Corvo recoiled (state 40) 3 times in zzo but no stagger (28/29) reached the partner, so the recoil reader still rejects the guard-fight recoil scene |
 | use-variants-dunwall-v1228zb-ze | Ring lock filmed from behind the partner: over the left shoulder (zb/zc) the body hides the reaching arm; over the right shoulder (zd Corvo, ze Emily) the right hand reaches the lock plate and returns (audit 1366) |
 | coverage-v1363a-c | Self-grenade stuns (1363a/b: pitch 75 over the 70 limit). 1363c reported 4/4 passes that are not evidence: the view-levelling step blocked sampling across the blast and `@($null).Count` is 1, so a missing stun passed; Corvo is seen staggering at the blast. 1363e/f re-run with the stun window sampled |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
@@ -252,13 +256,16 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1356-blink-assault | 1: Blink pull and kick variants (the Blink Assault kick, 1214ct) |
 | completion-audit-v1357-death | 1: death variants (player plain deaths and finishers in both roles, 1214cv-cx; NPC deaths from both source roles, 1254k) |
 | completion-audit-v1358-lifecycle | 1: map load and checkpoint recovery (both partners after a native load and a shared restart, 1199i on 1214cy) |
+| completion-audit-v1359-scene-handoff | 2: scripted scene hand-back (use mechanisms, high mantle, hard landing, drop takedowns, cinematic) and cutscene enter/exit (Mayhew scene, partner retired in both windows and restored 1.9 s after, 1236c on 1214cz) |
 | completion-audit-v1366-key-use | 1: key use (the ring lock filmed over the partner's right shoulder in both roles, 1228zd/ze on 1214cy) |
+| completion-audit-v1369-lethal | 1: lethal takedowns from the back, both sides and the front in both roles (1254h/i; Emily's standing front lethal 1254w on 1214cz) |
+| completion-audit-v1368-ragdoll | 1: ragdoll hand-off (corpse release in frame after a drop kill by either player: 1254o Corvo, 1254u Emily; bodies end 0.02 and 0.37 m apart) |
 
-**Still open (21):**
-- combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced), ragdoll handoff (corpse release filmed for Corvo, 1254o);
-- paired actions: lethal takedowns (all but Emily's front), wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
+**Still open (17):**
+- combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced);
+- paired actions: wall and window variants, enemy body sizes, struggle and escape, body carry (needs a reviewable video);
 - powers: Bend Time, Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
-- interactions: doors, pickup and loot (pickpocketing), object carry, shop and dialogue gestures, scripted scene handoff, cutscenes.
+- interactions: doors, pickup and loot (pickpocketing), object carry, shop and dialogue gestures.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 

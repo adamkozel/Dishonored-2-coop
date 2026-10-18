@@ -3997,7 +3997,7 @@
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
       "notes": "Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "carry-snapshot-corvo-v20/native.mp4",
@@ -4015,8 +4015,41 @@
       "evidence": [
         "../movement-integration/mission-corpse-audit-v1118.json",
         "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-        "../movement-integration/sweep-defects-audit-v1267.json"
-      ]
+        "../movement-integration/sweep-defects-audit-v1267.json",
+        "takedown-variants-v1254o/result.json",
+        "takedown-variants-v1254u/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1368-ragdoll.json",
+        "decision": "complete",
+        "scope": "NPC corpse hand-off from the takedown scene to ragdoll and to shared corpse authority, for kills by either player, with the release filmed in the observer world and the bodies ending together in both worlds.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254o",
+            "cases": [
+              "host-drop-lethal"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254u",
+            "cases": [
+              "client-drop-lethal"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254o/drop-host-lethal-observer.mp4",
+            "verdict": "Corvo drops onto the guard; the body slumps out of the takedown into a sprawl on the floorboards and lies still, ending 2 cm from the host body."
+          },
+          {
+            "video": "takedown-variants-v1254u/drop-client-lethal-observer.mp4",
+            "verdict": "Emily lands on the guard and drives him face down at her feet; the body then slackens and rolls into a sprawl beside her and stays down, ending 0.37 m from the same body in the joiner world."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "pistol_draw_aim_fire_reload_holster",
@@ -6525,7 +6558,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The rear fast-back lethal body action reads for both characters. Only the back direction is recorded, and victim reaction and alignment are not part of these takes. Scope: rear presentation accepted (sweep); drop and slide accepted in audit 1257. Audit 1257: every census-1255 lethal scene is admitted by exact asset/subscene/duration; runtime: fast-back and assassination_back (Corvo), drop and slide in both roles, host-sourced four-binding sword finishers. Side and front lethals were not reached by the fixture (the guard notices a standing attacker). 604/605: Corvo and Emily each pass10 native/Steam fast-back lethal actor checks. Exact state13/standing0 and owned Npc1333 scene drive existing native third-person donor; native sword equipped/started confirmed, root and idle recovery preserved, receiver victim health40 unchanged. Body sequence observed for both roles. Shared victim alignment/animation/death/corpse and world outcomes remain unimplemented; visual polish deferred. Exact fast-back ordinary-guard actor presentation only; front/side/air/slide, different victim sizes, interruptions and campaign coverage remain incomplete. Receiver target health remained40 before/after each605 test, so cosmetic body playback did not duplicate damage. Shared victim death/corpse/animation and world outcomes are still separate unfinished work. Both native sword equipped and started were independently observed during state13; source first-person and inputs unchanged. Actual observer body sheets viewed for both roles; contact/grip/footwork polish deferred, no visual acceptance. Existing352 clip payloads unchanged; earlier592 breakout/finish receipts retain their own build attribution.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "partner-sword-contexts-host-v392/host-front-standing.mp4",
@@ -6546,12 +6579,80 @@
         "lethal-network-emily-v605/client-rear-lethal.mp4",
         "lethal-network-emily-v605/observer.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "visual_accepted": false,
       "evidence": [
         "../movement-integration/takedown-variants-audit-v1257.json",
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "takedown-variants-v1254i/result.json",
+        "takedown-variants-v1254h/result.json",
+        "takedown-variants-v1254w/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1369-lethal.json",
+        "decision": "complete",
+        "scope": "Lethal takedowns from behind, from either side and from the front, by either player, presented on the partner as the native assassination with a shared death.",
+        "takes": [
+          {
+            "take": "takedown-variants-v1254i",
+            "cases": [
+              "host-back-lethal",
+              "client-back-lethal"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254h",
+            "cases": [
+              "host-left-lethal",
+              "client-left-lethal",
+              "host-right-lethal",
+              "client-right-lethal",
+              "host-front-lethal"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254w",
+            "cases": [
+              "client-front-lethal"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "takedown-variants-v1254i/back-host-lethal-observer.mp4",
+            "verdict": "Corvo seizes the guard from behind and stabs; the guard arches, drops to his knees and slumps at Corvo's feet."
+          },
+          {
+            "video": "takedown-variants-v1254i/back-client-lethal-observer.mp4",
+            "verdict": "Emily takes the guard from behind and drives the blade in; he crumples to the floor while she crouches over him with the sword raised."
+          },
+          {
+            "video": "takedown-variants-v1254h/left-host-lethal-observer.mp4",
+            "verdict": "Corvo comes in at the guard's left, grabs him and brings him down; the guard ends kneeling and slumped beside him."
+          },
+          {
+            "video": "takedown-variants-v1254h/left-client-lethal-observer.mp4",
+            "verdict": "Emily strikes at the guard's left side and he slumps to the floor beside her."
+          },
+          {
+            "video": "takedown-variants-v1254h/right-host-lethal-observer.mp4",
+            "verdict": "Corvo lunges at the guard's right side and hauls him over; the body falls away out of frame behind the railing while Corvo straightens."
+          },
+          {
+            "video": "takedown-variants-v1254h/right-client-lethal-observer.mp4",
+            "verdict": "Emily grabs the guard from his right; he folds and drops to the floor at her feet."
+          },
+          {
+            "video": "takedown-variants-v1254h/front-host-lethal-observer.mp4",
+            "verdict": "Corvo walks up to the guard face to face, grabs him and drives him down; the guard sinks at his feet and Corvo straightens with the sword raised."
+          },
+          {
+            "video": "takedown-variants-v1254w/front-client-lethal-observer.mp4",
+            "verdict": "Emily steps in to the guard standing and drives into him from the front; he goes down at her feet and she stands over the body."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "nonlethal_takedown_front_back_sides",
@@ -20184,15 +20285,96 @@
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
       "notes": "Audit 1289: the hand-back from a native use scene to locomotion has no pop at 10 fps (1228t) and reads in both roles across the accepted use takes; accepted functionally. A context-dependent animation ownership transition. Audit 1241 (1213m): on the native confined mantle the partner holds the scene pose at full weight, then blends from that actual pose to locomotion over ~250 ms (traversal weight 0.34/0.07/0.02 while locomotion returns 0.49/0.89/0.97), in both roles. Use scenes recover the same way (vise reach videos, audit 1235). Other scene families, an unclassified-state frame at the scene end and visual acceptance (#33) remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
         "../movement-integration/presentation-hold-audit-v1241.json",
         "../movement-integration/window-traversal-audit-v1238.json",
         "../movement-integration/use-reach-audit-v1235.json",
-        "../movement-integration/handoff-audit-v1289.json"
-      ]
+        "../movement-integration/handoff-audit-v1289.json",
+        "use-variants-eotw-v1228v/result.json",
+        "use-variants-eotw-v1228w/result.json",
+        "coverage-v1326d/result.json",
+        "mission-coverage-v1328q/result.json",
+        "takedown-variants-v1254k/result.json",
+        "cutscene-transition-v1236c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1359-scene-handoff.json",
+        "decision": "complete",
+        "scope": "Hand-back from a native scene to locomotion in both roles for every family that takes over the body: use mechanisms (lever, tap), traversal scenes (high mantle), the damaging landing, paired drop takedowns and cinematics (partner retired and restored).",
+        "takes": [
+          {
+            "take": "use-variants-eotw-v1228v",
+            "cases": [
+              "host-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "use-variants-eotw-v1228w",
+            "cases": [
+              "client-script_lever_windturbine_1_1_1"
+            ]
+          },
+          {
+            "take": "coverage-v1326d",
+            "cases": [
+              "host-highmantle",
+              "client-highmantle"
+            ]
+          },
+          {
+            "take": "mission-coverage-v1328q",
+            "cases": [
+              "host-hardfall",
+              "client-hardfall"
+            ]
+          },
+          {
+            "take": "takedown-variants-v1254k",
+            "cases": [
+              "host-drop-lethal",
+              "client-drop-lethal"
+            ]
+          },
+          {
+            "take": "cutscene-transition-v1236c",
+            "cases": [
+              "host-cutscene",
+              "client-cutscene"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Corvo reaches up, pulls the lever down and lets his arm fall back as he settles into his standing idle; no pop at the hand-back."
+          },
+          {
+            "video": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+            "verdict": "Emily steps to the lever, pulls it and returns smoothly to standing beside it."
+          },
+          {
+            "video": "coverage-v1326c/client-highmantle-observer.mp4",
+            "verdict": "Emily hauls herself up the high ledge and straightens into a stand on top without a jump between the climb and the idle."
+          },
+          {
+            "video": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+            "verdict": "Corvo lands from the long fall in a deep crouch, rises and walks straight on along the dock."
+          },
+          {
+            "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+            "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+          },
+          {
+            "video": "cutscene-transition-v1236c/after-scene-host.mp4",
+            "verdict": "After the Mayhew cinematic Emily stands in the hall again, sword in hand, in her standing idle and steady from the first frame she reappears; no pop."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "cutscene_enter_exit",
@@ -20210,15 +20392,46 @@
       "motions": [],
       "deliverable_kind": "lifecycle_transition",
       "notes": "Native cutscene animation remains scene-specific. Entry/exit ownership and blends must be tested against real scenes; one generic clip cannot cover them. Audit 1239 (#8, 1213l): both peers enter the native Mayhew scene together, the partner presentation retires for the scene and is live again 1.57 s after it; visual accepted on both windows.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "cutscene-transition-v1236b/scene-host.mp4",
         "cutscene-transition-v1236b/scene-client.mp4"
       ],
       "evidence": [
-        "../movement-integration/cutscene-transition-audit-v1239.json"
-      ]
+        "../movement-integration/cutscene-transition-audit-v1239.json",
+        "cutscene-transition-v1236c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1359-scene-handoff.json",
+        "decision": "complete",
+        "scope": "Both peers enter a native cinematic together (Mayhew, Cinematic5); the partner presentation is retired on both peers for the whole scene and restored at the live pose of the partner after it, in both windows.",
+        "takes": [
+          {
+            "take": "cutscene-transition-v1236c",
+            "cases": [
+              "host-cutscene",
+              "client-cutscene"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "cutscene-transition-v1236c/scene-host.mp4",
+            "verdict": "The host window shows only the native Mayhew cinematic for its 30 s; no partner body is drawn into the scene, and the room is empty at the cut back to gameplay."
+          },
+          {
+            "video": "cutscene-transition-v1236c/after-scene-host.mp4",
+            "verdict": "Emily reappears 1.9 s after the scene, standing at the panelled wall with her sword, and stays steady in her idle."
+          },
+          {
+            "video": "cutscene-transition-v1236c/after-scene-client.mp4",
+            "verdict": "In the client window Corvo stands with his sword lowered in the dark hall after the scene, steady in his idle."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "map_load_checkpoint_recovery",

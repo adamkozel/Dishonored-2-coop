@@ -1,0 +1,73 @@
+{
+  "audit": "completion-audit-v1369-lethal",
+  "family": "paired_actions",
+  "candidate": "candidate-npc-combat-v1214cz",
+  "method": "A lethal takedown is a native assassination scene under player state 13, admitted by its exact asset, subscene and duration (census 1255, audit 1257) and presented on the partner as that native scene with the sword drawn; the victim's death and corpse are shared through host NPC authority. The takedown harness places the source by tutorial guard 2 while he stands paused (back 0.9 m, left and right at his shoulder, front at 1.0 m), with the product controller, and presses the attack. A case passes when the source performs the native takedown, the observer presents the remote takedown phase, the outcome is dead in both worlds and the victim ends in the same place in both worlds. Crouched in front of a guard, Emily's attack is the sneak attack (sword_slash_sneak_right, 1254j-s), not a takedown; standing (-FrontStand, 1254w) she plays assassination_front (id 26), as she did in 1254g. Drop and slide lethals are audits 1353 and 1355.",
+  "items": [
+    {
+      "id": "lethal_takedown_front_back_sides",
+      "decision": "complete",
+      "scope": "Lethal takedowns from behind, from either side and from the front, by either player, presented on the partner as the native assassination with a shared death.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254i",
+          "cases": [
+            "host-back-lethal",
+            "client-back-lethal"
+          ]
+        },
+        {
+          "take": "takedown-variants-v1254h",
+          "cases": [
+            "host-left-lethal",
+            "client-left-lethal",
+            "host-right-lethal",
+            "client-right-lethal",
+            "host-front-lethal"
+          ]
+        },
+        {
+          "take": "takedown-variants-v1254w",
+          "cases": [
+            "client-front-lethal"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254i/back-host-lethal-observer.mp4",
+          "verdict": "Corvo seizes the guard from behind and stabs; the guard arches, drops to his knees and slumps at Corvo's feet."
+        },
+        {
+          "video": "takedown-variants-v1254i/back-client-lethal-observer.mp4",
+          "verdict": "Emily takes the guard from behind and drives the blade in; he crumples to the floor while she crouches over him with the sword raised."
+        },
+        {
+          "video": "takedown-variants-v1254h/left-host-lethal-observer.mp4",
+          "verdict": "Corvo comes in at the guard's left, grabs him and brings him down; the guard ends kneeling and slumped beside him."
+        },
+        {
+          "video": "takedown-variants-v1254h/left-client-lethal-observer.mp4",
+          "verdict": "Emily strikes at the guard's left side and he slumps to the floor beside her."
+        },
+        {
+          "video": "takedown-variants-v1254h/right-host-lethal-observer.mp4",
+          "verdict": "Corvo lunges at the guard's right side and hauls him over; the body falls away out of frame behind the railing while Corvo straightens."
+        },
+        {
+          "video": "takedown-variants-v1254h/right-client-lethal-observer.mp4",
+          "verdict": "Emily grabs the guard from his right; he folds and drops to the floor at her feet."
+        },
+        {
+          "video": "takedown-variants-v1254h/front-host-lethal-observer.mp4",
+          "verdict": "Corvo walks up to the guard face to face, grabs him and drives him down; the guard sinks at his feet and Corvo straightens with the sword raised."
+        },
+        {
+          "video": "takedown-variants-v1254w/front-client-lethal-observer.mp4",
+          "verdict": "Emily steps in to the guard standing and drives into him from the front; he goes down at her feet and she stands over the body."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

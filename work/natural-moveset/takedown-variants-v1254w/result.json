@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "approach": "front",
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 26 presented",
+        "Same outcome in both worlds: dead",
+        "Victim ends 0 m apart in the two worlds"
+      ],
+      "guardWaitMs": 65071,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.115386,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": false,
+      "stanceBefore": [
+        0,
+        0
+      ],
+      "inputAt": "2026-10-18T17:44:52.6897147+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_front.midnightscene|2000"
+      ],
+      "sceneIds": [
+        26
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 269244046,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1cdc8dd1ef0",
+          "actor": "0x1cddd2e4eb0",
+          "attributes": "0x1cddd0558d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 269244062,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x227c6bd7cd0",
+          "actor": "0x227dbba0510",
+          "attributes": "0x227db8f58d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "victimEnd": {
+        "source": [
+          -48.1003,
+          -151.763,
+          66.5752
+        ],
+        "observer": [
+          -48.1002,
+          -151.763,
+          66.5752
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 93,
+        "rootsDelta": 178,
+        "bodyAppliedDelta": 177,
+        "positionBefore": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "positionAfter": [
+          -48.101,
+          -151.764,
+          66.5753
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Takedown variants (side, front, drop, slide; choke and lethal; both source roles) on a host-owned NPC under the product controller: native scene, partner phases, shared outcome and victim position; fixture restored after every case."
+}

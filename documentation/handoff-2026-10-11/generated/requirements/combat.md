@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:31:13.216528+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T17:47:48.827917+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1462,7 +1462,7 @@ Audit 1267: the killed guard's corpse in the observer world for both source role
   "motions": [],
   "deliverable_kind": "lifecycle_transition",
   "notes": "Audit 1267: the killed guard's corpse in the observer world for both source roles (1254b, 1117). Visual sweep 1260: insufficient (corvo insufficient, emily accept). The corpse hold after a client-sourced kill is stable, but there is no host-sourced (Corvo) recording, and the release transition isn't in frame. This requires native ragdoll ownership and a tested transition, not a baked animation alone. 1113d/1117: after a shared NPC death the host streams the corpse while the client holds its ragdoll animated (native physics mode switch) at the host pose; ragdoll release happens at channel stop. Player-character ragdoll and carry handoff remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "carry-snapshot-corvo-v20/native.mp4",
@@ -1480,14 +1480,49 @@ Audit 1267: the killed guard's corpse in the observer world for both source role
   "evidence": [
     "../movement-integration/mission-corpse-audit-v1118.json",
     "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "takedown-variants-v1254o/result.json",
+    "takedown-variants-v1254u/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1368-ragdoll.json",
+    "decision": "complete",
+    "scope": "NPC corpse hand-off from the takedown scene to ragdoll and to shared corpse authority, for kills by either player, with the release filmed in the observer world and the bodies ending together in both worlds.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254o",
+        "cases": [
+          "host-drop-lethal"
+        ]
+      },
+      {
+        "take": "takedown-variants-v1254u",
+        "cases": [
+          "client-drop-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254o/drop-host-lethal-observer.mp4",
+        "verdict": "Corvo drops onto the guard; the body slumps out of the takedown into a sprawl on the floorboards and lies still, ending 2 cm from the host body."
+      },
+      {
+        "video": "takedown-variants-v1254u/drop-client-lethal-observer.mp4",
+        "verdict": "Emily lands on the guard and drives him face down at her feet; the body then slackens and rolls into a sprawl beside her and stays down, ending 0.37 m from the same body in the joiner world."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/mission-corpse-audit-v1118.json](<../../../../work/movement-integration/mission-corpse-audit-v1118.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: takedown-variants-v1254o/result.json](<../../../../work/natural-moveset/takedown-variants-v1254o/result.json>)
+- [evidence: takedown-variants-v1254u/result.json](<../../../../work/natural-moveset/takedown-variants-v1254u/result.json>)
 - [in_game_recordings: carry-snapshot-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-corvo-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-emily-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-emily-v20/native.mp4>)
 - [in_game_recordings: carry-snapshot-cancel-corvo-v20/native.mp4](<../../../../work/natural-moveset/carry-snapshot-cancel-corvo-v20/native.mp4>)
