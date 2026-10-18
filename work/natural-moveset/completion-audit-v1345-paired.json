@@ -1,0 +1,61 @@
+{
+  "audit": "completion-audit-v1345-paired",
+  "family": "paired_actions",
+  "candidate": "candidate-npc-combat-v1214cq",
+  "method": "Each decision rests on the takedown variant takes takedown-variants-v1254d-g (candidates 1214cn, cp, cq) under the product controller with natural guard AI and the NPC stream on, both source roles: the source performs a native takedown on the upper-floor Dunwall guard (side and front approaches start crouched), the partner presents every census-1253 takedown scene the source played, both worlds must reach the same outcome (unconscious or dead) and the victim must end within 2 m in both worlds; the checkpoint is reloaded after every case. Reviewed observer videos are listed per item.",
+  "items": [
+    {
+      "id": "paired_victim_alignment",
+      "decision": "complete",
+      "scope": "Every passing takedown in both roles (back, side, front, drop and slide; chokes and lethals; 15 cases in 1254g alone) ends with the same outcome in both worlds and the victim within 0-0.03 m of the same place, the partner presenting the source side of the paired scene.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254g",
+          "cases": [
+            "host-back-choke",
+            "client-back-choke",
+            "host-back-lethal",
+            "client-back-lethal",
+            "host-left-lethal",
+            "client-left-lethal",
+            "host-drop-lethal",
+            "client-drop-lethal"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254g/back-host-choke-observer.mp4",
+          "verdict": "Corvo grabs the guard from behind and holds the choke while the guard struggles; the guard sags and collapses at his feet in the same place."
+        }
+      ],
+      "lifecycle": "See method."
+    },
+    {
+      "id": "crouched_takedown",
+      "decision": "complete",
+      "scope": "Takedowns started from a crouch in both roles: the side lethals (approach crouched; native scenes 31 and 108) and Corvo's crouched front choke (62) are presented with the shared outcome; the crouched rear choke and fast-back lethal were bound in both roles in audit 1246.",
+      "takes": [
+        {
+          "take": "takedown-variants-v1254g",
+          "cases": [
+            "host-left-lethal",
+            "client-left-lethal",
+            "host-front-choke"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "takedown-variants-v1254g/left-host-lethal-observer.mp4",
+          "verdict": "Corvo comes in low from the guard's side, drives the blade in and the guard folds to the floor of the walkway."
+        },
+        {
+          "video": "takedown-variants-v1254f/right-client-lethal-observer.mp4",
+          "verdict": "Emily closes on the guard from the side on the balcony and stabs him; he drops and she straightens over the body."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

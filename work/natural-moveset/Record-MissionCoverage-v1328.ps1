@@ -235,7 +235,8 @@ try{
      # side, then behind, then in front, and keep the first spot where the source rests at the guard's level; no slash.
      $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl;$row.guardFacing=@($fx,$fy)
      C $source 'coop_player_health_hold on';$placed=$null;$row.placementTrials=@()
-     foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
+     # 1328r: from the side the seated guard never saw Emily; try in front (its view) first, then the sides, then behind.
+     foreach($o in @(@($fx,$fy),@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
       # 1328h: the first read after the teleport failed outright; retry for up to 3 s and record an unreadable spot as failed.
       C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=$null;$ms=$null
       # 1328n: near Corvo's guard the --player-states read fails at every spot while --player works and rests at the guard's
@@ -249,7 +250,7 @@ try{
      # Free camera 4.5 m to the side of the fight line at its midpoint, raised 2 m (1328h: from behind the source the guard
      # and the hit reaction left the frame); hold_at leaves the observer on the dock.
      $dx=($sx-$gx)/2.5;$dy=($sy-$gy)/2.5;$cx=$mx-4.5*$dy;$cy=$my+4.5*$dx;$cz=$gz+2.0;$cyaw=[Math]::Atan2($my-$cy,$mx-$cx)*180/[Math]::PI
-     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null
+     C $peer (P $spawn[$peer].x $spawn[$peer].y ($spawn[$peer].z+1.7) $cyaw);Start-Sleep -Milliseconds 500;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch 10 -Quick|Out-Null}catch{$row.observerPitchError=$_.Exception.Message}
      C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $cx.ToString('F3',$inv),$cy.ToString('F3',$inv),$cz.ToString('F3',$inv));Start-Sleep -Milliseconds 400
      C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short

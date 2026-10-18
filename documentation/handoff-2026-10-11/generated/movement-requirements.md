@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T09:11:20.630088+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T09:44:35.038655+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 63 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 65 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -443,13 +443,13 @@ Captured 2026-10-18T09:11:20.630088+02:00; source [review-catalog.json](<../../.
 | item_switch_interruptions | ranged_and_items | candidates | partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
 | lethal_takedown_front_back_sides | paired_actions | candidates | partial_census_lethals_back_drop_slide_finishers_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
 | nonlethal_takedown_front_back_sides | paired_actions | candidates | partial_census_chokes_back_both_roles_sides_emily_front_corvo | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouched_takedown | paired_actions | candidates | native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles | accepted_client_choke_client_lethal_host_choke_host_lethal | work_remaining |
+| crouched_takedown | paired_actions | candidates | native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles | accepted_client_choke_client_lethal_host_choke_host_lethal | complete |
 | aerial_drop_kill | paired_actions | candidates | native_drop_lethal_presented_and_shared_both_roles_product | accepted_functional_both_roles_fast_back_donor | work_remaining |
 | aerial_nonlethal_takedown | paired_actions | candidates | native_drop_choke_presented_and_knockout_shared_both_roles_product | accepted_functional_both_roles_choke_donor | work_remaining |
 | sliding_takedown | paired_actions | candidates | native_slide_choke_and_lethal_presented_and_shared_both_roles_product | accepted_functional_both_roles_choke_and_lethal | work_remaining |
 | wall_and_window_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | enemy_body_size_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
-| paired_victim_alignment | paired_actions | candidates | shared_victim_and_outcome_both_roles_choke_and_lethal_product | accepted_host_and_client_sourced_rear_choke_and_lethal_victims | work_remaining |
+| paired_victim_alignment | paired_actions | candidates | shared_victim_and_outcome_both_roles_choke_and_lethal_product | accepted_host_and_client_sourced_rear_choke_and_lethal_victims | complete |
 | struggle_and_escape | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | accepted_sweep_1260_functional_both_roles | work_remaining |
 | carry_body_lift_idle_move_drop_throw | paired_actions | candidates | bounded_native_source_paired_pickup_both_roles | accepted_functional_both_roles_v38 | work_remaining |
 | corvo_blink_aim_cancel_release_arrive | powers | candidates | partial_native_Blink_body_and_world_FX | accepted_sweep_1260_functional_owner | work_remaining |
