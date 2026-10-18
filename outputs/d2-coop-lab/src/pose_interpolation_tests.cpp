@@ -9,6 +9,13 @@ PresentationPose pose(double t,unsigned seq,float x,float y=0,float z=0,float ya
 int main(){
     SourcePoseTimeline timeline;double mapped=0;
     check(timeline.mapTime(1000000,10000,1,2,3,mapped)&&mapped==10000,"map unrelated source/receiver clocks");
+    {double m=1050;check(clampActionMappedTime(m,1000,0)==0&&m==1050,"1214dc: in-window action time unchanged");
+     m=1087;check(clampActionMappedTime(m,1000,0)==1&&m==1080,"1214dc: 87 ms early (1328zzo) clamped to the window edge");
+     m=1401;check(clampActionMappedTime(m,1000,0)==3,"1214dc: beyond the early band refused");
+     m=738;check(clampActionMappedTime(m,1000,0)==2&&m==750,"1214dc: 262 ms late (1328zzo) clamped");
+     m=-1;check(clampActionMappedTime(m,1000,0)==3,"1214dc: beyond the late band refused");
+     m=1000;check(clampActionMappedTime(m,1000,1070)==0&&m>1070&&m<=1070.01,"1214dc: kept strictly after the previous accepted time");
+     m=1000;check(clampActionMappedTime(m,1000,1080.5)==3,"1214dc: no room left in the window");}
     check(timeline.mapTime(1033000,10070,1,2,3,mapped),"delayed source packet");const double previous=mapped;
     check(timeline.mapTime(1066000,10072,1,2,3,mapped)&&mapped-previous>32.9&&mapped-previous<33.1,"batched arrivals preserve source cadence instead of 2ms sprint step");
     check(!timeline.mapTime(1066000,10073,1,2,3,mapped)&&!timeline.mapTime(1065000,10074,1,2,3,mapped),"duplicate/backward source clock refused");

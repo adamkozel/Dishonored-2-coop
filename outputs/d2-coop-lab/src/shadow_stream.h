@@ -36,6 +36,7 @@ bool movementOwnsCombat();
 // Native Steam transports semantic state;
 // the receiver uses native clone clips, never native damage/AI attack calls.
 struct ShadowStreamState {
+    double lastMapped=0; // 1214dc: presentation time of the last accepted action packet
     // Diagnostic history survives brief native loop incarnations which a
     // slower file observer can miss. Reset with this stream's token/world.
     // It observes successful sends / fully accepted states; never drives them.
@@ -78,7 +79,7 @@ ShadowStreamState shadowStream{};
 std::uint64_t shadowStreamNonce=0,shadowStreamSequence=0,shadowStreamSent=0,shadowStreamReceived=0,shadowStreamAccepted=0,
     shadowStreamRejected=0,shadowStreamRefused=0,shadowStreamStarted=0,shadowStreamApplied=0,shadowStreamReleases=0;
 CoopShadowActionPacket shadowStreamLastPacket{};
-unsigned shadowStreamStateRejectReason=0;double shadowStreamRejectedAge=0;
+unsigned shadowStreamStateRejectReason=0;double shadowStreamRejectedAge=0;std::uint64_t shadowActionEarlyClamped=0,shadowActionLateClamped=0;
 std::uint64_t shadowStreamRejectedEvent=0,shadowStreamExpectedEvent=0,shadowStreamRejectedSequence=0,shadowStreamExpectedSequence=0;
 unsigned shadowStreamRejectedState=0,shadowStreamExpectedState=0;
 unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
@@ -545,11 +546,13 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
         !resolveCarryIdentity(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,worldCatalog,p.carrySpawner,p.carryDefinition,carryTarget))){
         ++shadowStreamRejected;return;
     }
-    // Use the already-established root clock mapping, without modifying it.
-    const double mapped=double(p.sampleTimeUs)*.001+sourcePoseTimeline.offset,now=presentationClock();
+    // Use the already-established root clock mapping, without modifying it; 1214dc clamps a bounded miss (see
+    // clampActionMappedTime) instead of refusing every action while the root offset settles.
+    double mapped=double(p.sampleTimeUs)*.001+sourcePoseTimeline.offset;const double now=presentationClock(),rawMapped=mapped;
+    const unsigned clampKind=sourcePoseTimeline.session==p.sourceSession?clampActionMappedTime(mapped,now,shadowStream.lastMapped):0;
     auto combatTimeline=shadowStream.combat;auto equipmentTimeline=shadowStream.equipment;auto traversalTimeline=shadowStream.traversal;auto powerTimeline=shadowStream.power;auto rangedTimeline=shadowStream.ranged;auto carryTimeline=shadowStream.carry;auto grenadeTimeline=shadowStream.grenade;auto heartTimeline=shadowStream.heart;auto trapTimeline=shadowStream.trap;auto chokeTimeline=shadowStream.choke;auto stunTimeline=shadowStream.stun;auto useTimeline=shadowStream.use;auto movementTimeline=shadowStream.movement;
     const unsigned timelineReject=(sourcePoseTimeline.session!=p.sourceSession||sourcePoseTimeline.epoch!=p.sourceWorldEpoch||sourcePoseTimeline.map!=p.mapId)?10:
-       (mapped>now+80.||now-mapped>250.)?11:
+       (clampKind==3||mapped>now+80.||now-mapped>250.)?11:
        !combatTimeline.push({mapped,p.event,p.combatVariant,p.combatPhase,p.combatTimeMs,p.combatDurationMs})?12:
        !equipmentTimeline.push({mapped,p.event,p.swordState,p.equipmentVariant,p.equipmentTimeMs,p.equipmentDurationMs})?13:
        !traversalTimeline.push({mapped,p.event,p.traversalVariant,p.traversalTimeMs,p.traversalDurationMs,p.traversalEndStance,p.traversalStart,p.traversalGoal,p.traversalPoint,p.traversalHeight})?14:
@@ -563,8 +566,9 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
        !stunTimeline.push({mapped,p.event,p.stunVariant,p.stunTimeMs,p.stunDurationMs})?22:
        !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})?24:
        !movementTimeline.push({mapped,p.event,p.state,p.leanSide,p.leanUp,p.airStartZ,p.airTargetZ,p.airStage,p.airRemaining})?19:0;
-    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-mapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
+    if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-rawMapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
     if(p.useVariant)++shadowUseAccepted;
+    shadowStream.lastMapped=mapped;if(clampKind==1)++shadowActionEarlyClamped;else if(clampKind==2)++shadowActionLateClamped;
     shadowStream.combat=std::move(combatTimeline);shadowStream.equipment=std::move(equipmentTimeline);shadowStream.traversal=std::move(traversalTimeline);shadowStream.power=std::move(powerTimeline);shadowStream.ranged=std::move(rangedTimeline);shadowStream.carry=std::move(carryTimeline);shadowStream.grenade=std::move(grenadeTimeline);shadowStream.heart=std::move(heartTimeline);shadowStream.trap=std::move(trapTimeline);shadowStream.choke=std::move(chokeTimeline);shadowStream.stun=std::move(stunTimeline);shadowStream.use=std::move(useTimeline);shadowStream.remoteCarryLocalHandle=carryTarget.handle;shadowStream.movement=std::move(movementTimeline);
     shadowStream.lastSequence=p.sequence;
     const bool changed=p.event!=shadowStream.lastEvent;
@@ -664,7 +668,8 @@ void writeShadowStream(ULONGLONG tick){
     fputs("},",f);
     fprintf(f,"\"sourceAttempts\":%llu,\"sourceMisses\":%llu,\"sourceReadMaxMs\":%.4f,\"sendGapMaxMs\":%llu,\"stoppedStateAgeMs\":%llu,\"stoppedRootAgeMs\":%llu,",shadowSourceAttempts,shadowSourceMisses,shadowSourceReadMaxMs,shadowSendGapMax,shadowStoppedStateAge,shadowStoppedRootAge);
     fprintf(f,"\"rejectedEvent\":%llu,\"expectedEvent\":%llu,\"rejectedSequence\":%llu,\"expectedSequence\":%llu,\"rejectedState\":%u,\"expectedState\":%u,",shadowStreamRejectedEvent,shadowStreamExpectedEvent,shadowStreamRejectedSequence,shadowStreamExpectedSequence,shadowStreamRejectedState,shadowStreamExpectedState);
-    fprintf(f,"\"stateRejectReason\":%u,\"rejectedAgeMs\":%.5f,",shadowStreamStateRejectReason,shadowStreamRejectedAge);
+    fprintf(f,"\"stateRejectReason\":%u,\"rejectedAgeMs\":%.5f,\"actionClamped\":[%llu,%llu],",shadowStreamStateRejectReason,shadowStreamRejectedAge,
+        static_cast<unsigned long long>(shadowActionEarlyClamped),static_cast<unsigned long long>(shadowActionLateClamped));
     fprintf(f,"\"rejectReason\":%u,\"retireReason\":%u,\"retireRootAge\":%llu,\"retireHelloAge\":%llu,\"sourceGrenadeHeld\":%u,\"sourceGrenade\":%u,\"remoteGrenadeHeld\":%u,\"remoteGrenade\":%u,",shadowStreamRejectReason,shadowStreamRetireReason,shadowStreamRetireRootAge,shadowStreamRetireHelloAge,shadowStream.sourceGrenadeHeld,shadowStream.sourceGrenade,shadowStream.remoteGrenadeHeld,shadowStream.remoteGrenade);
     fprintf(f,"\"armed\":%s,\"ready\":%s,\"remainingMs\":%llu,\"token\":%llu,\"peerToken\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"handle\":%u,\"sourceState\":%u,\"remoteState\":%u,\"sourceEvent\":%llu,\"remoteEvent\":%llu,\"lastSequence\":%llu,\"started\":%llu,\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"applied\":%llu,\"rejected\":%llu,\"refused\":%llu,\"released\":%llu,\"actionActive\":%s,\"result\":\"%s\",\"leanSide\":%.6f,\"leanUp\":%.6f,\"sourceVariant\":%u,\"sourcePhase\":%u,\"remoteVariant\":%u,\"remotePhase\":%u,\"carrySource\":%u,\"carryRemote\":%u,\"carrySourceIncarnation\":%u,\"carryRemoteIncarnation\":%u,\"carryLocalHandle\":%u,\"carrySpawner\":%llu,\"carryDefinition\":%llu,\"corpseMutations\":false}\n",
         shadowStream.until>tick?"true":"false",shadowStream.peerReady?"true":"false",shadowStream.until>tick?shadowStream.until-tick:0,
