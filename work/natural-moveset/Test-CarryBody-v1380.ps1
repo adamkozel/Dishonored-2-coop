@@ -148,16 +148,16 @@ try{
    # 1277c: look down in place, then sweep the yaw around the source (1277b: the client's pitch never applied and it faced a shelf).
    $carryRows.Add((& $bodyAt 'before'));$me=try{(Q $source '--player-states').position}catch{(Q $source '--player').candidatePosition}
    $plan=[Collections.Generic.List[object]]::new();foreach($pv in 50,65){$plan.Add(@{yaw=$null;pitch=$pv})};foreach($yv in 0..7){$plan.Add(@{yaw=$yv*45;pitch=55})}
-   if($FarReach){C $source 'coop_grant_named models/powers/grapple/grapple.inventoryitem';Start-Sleep -Milliseconds 1800
+   if($FarReach){C $source 'coop_player_health_hold on';C $source 'coop_grant_named models/powers/grapple/grapple.inventoryitem';Start-Sleep -Milliseconds 1800
     $gp=try{(Guard $source).position}catch{$null}
-    if($gp){$dx=[double]$me[0]-[double]$gp[0];$dy=[double]$me[1]-[double]$gp[1];$dl=[Math]::Max(.1,[Math]::Sqrt($dx*$dx+$dy*$dy));$fx2=[double]$gp[0]+4.5*$dx/$dl;$fy2=[double]$gp[1]+4.5*$dy/$dl
+    if($gp){$dx=-[double]$walkFx;$dy=-[double]$walkFy;$dl=[Math]::Max(.1,[Math]::Sqrt($dx*$dx+$dy*$dy));$fx2=[double]$gp[0]+4.5*$dx/$dl;$fy2=[double]$gp[1]+4.5*$dy/$dl
      $fyaw=[Math]::Atan2([double]$gp[1]-$fy2,[double]$gp[0]-$fx2)*180/[Math]::PI;$row.farReachFrom=@($fx2,$fy2)
      C $source ('setviewpos {0} {1} {2} {3} 0' -f (F $fx2),(F $fy2),(F ([double]$me[2]+1.7)),$fyaw.ToString('F4',$inv));Start-Sleep -Milliseconds 500
      for($t=0;$t-lt2;$t++){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch 20 -Quick|Out-Null;break}catch{Start-Sleep -Milliseconds 300}}
      $fm=Start-Process "$lab/bin/d2_runtime_probe.exe" -ArgumentList @($pids[$source],'--watch-midnight','12000') -WindowStyle Hidden -RedirectStandardOutput "$out/$key-farreach-scenes.ndjson" -RedirectStandardError "$out/$key-farreach-scenes.stderr" -PassThru;Start-Sleep -Milliseconds 300
      for($k=0;$k-lt3-and!$carrying;$k++){& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs 900|Out-Null;Start-Sleep -Milliseconds 2600
       $r=& $bodyAt "farreach$k";$carryRows.Add($r);$carrying=@($r.active|Where-Object {$_-eq45-or$_-eq46}).Count-gt0}
-     $row.farReachCarry=$carrying;$me=try{(Q $source '--player-states').position}catch{$me};if(!$fm.WaitForExit(14000)){Stop-Process -Id $fm.Id}}}
+     $row.farReachCarry=$carrying;$me=try{(Q $source '--player-states').position}catch{$me};if(!$fm.WaitForExit(14000)){Stop-Process -Id $fm.Id}};C $source 'coop_player_health_hold off'}
    for($k=0;$k-lt$plan.Count-and!$carrying;$k++){$step=$plan[$k]
     if($null-ne$step.yaw){C $source ('setviewpos {0} {1} {2} {3} 0' -f (F $me[0]),(F $me[1]),(F ([double]$me[2]+1.7)),([double]$step.yaw).ToString('F4',$inv));Start-Sleep -Milliseconds 350}
     for($t=0;$t-lt2;$t++){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $step.pitch -Quick|Out-Null;break}catch{Start-Sleep -Milliseconds 300}}
