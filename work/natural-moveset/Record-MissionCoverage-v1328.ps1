@@ -1,4 +1,4 @@
-param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_streets_windmill_guard_01',[string]$GuardClient='script_spawner_checkpoint_guard_01')
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='mission-coverage-v1328a',[string]$Candidate='candidate-npc-combat-v1214ci',[string[]]$Sources=@('host','client'),[string[]]$Cases=@('swim','climb','climbtop','waterexit','hardfall','guardfight'),[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[double]$SwimLane=5.5,[double]$SwimPitch=50,[double]$CameraHeight=9.3,[double]$WaterExitY=193.25,[double[]]$SlopeStart=@(),[double[]]$SlopeEnd=@(),[string]$ScanGrid='-58,4,10,60,4,11',[double]$ChainX=-41.3809,[double]$ChainY=73.1098,[double]$ChainZ=17.9602,[string]$GuardHost='script_spawner_checkpoint_guard_02',[string]$GuardClient='script_spawner_checkpoint_guard_01')
 # 1328 (#11, mission traversal completion): the Edge of the World traversal fixtures of 1049 (native swimming in the canal
 # beside the spawn dock, native chain climbing on chain1) under the product controller on the current build, both
 # source roles, filmed (both windows, the observer's free camera held on the action) and checked from the partner's
@@ -272,6 +272,8 @@ try{
      C $source (P $sx $sy ($gz+1.7) $yaw);Start-Sleep -Milliseconds 800;[void](WaitGameplay 15000)
      # 1328a: the guards never attacked an unseen, blocking source; 1328b-e: an alerting slash killed them. Now a short
      # walk toward the guard in its view first, then block cycles, an unguarded stretch, and attacks to the kill.
+     # 1328y: Corvo's windmill guard sits in a scripted tutorial spot and never turns hostile (the block button, which is also
+     # the choke button, choked it three times); Corvo now fights checkpoint guard 02, beside Emily's checkpoint guard 01.
      # 1328t: the guards engage on their own timing (Corvo's never swung during a fixed block window, Emily's never hit her in
      # the unguarded one), so the phases follow the partner presentation: block until block impacts or timed parries are
      # presented, stay unguarded until a hit reaction is presented, then attack to the kill; the source keeps within reach.
