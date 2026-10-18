@@ -110,7 +110,7 @@ try{
    foreach($pair in @(@($source,'source'),@($peer,'observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
     $p=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string][Math]::Ceiling($caseMs/1000+2),'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/$key-$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$key-$($pair[1])-capture.log" -RedirectStandardOutput "$out/$key-$($pair[1])-capture.stdout" -PassThru
     if($pair[1]-eq'source'){$capture=$p}else{$peerCapture=$p}}
-   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$manaWatch=0;$manaDrunk=0;$manaTrace=[Collections.Generic.List[object]]::new();$segments=[Collections.Generic.List[object]]::new();$placed=$false;$teleports=[Collections.Generic.List[double]]::new()
+   $samples=[Collections.Generic.List[object]]::new();$watch=[Diagnostics.Stopwatch]::StartNew();$step=0;$manaWatch=0;$manaDrunk=0;$manaSpentAt=0;$manaTrace=[Collections.Generic.List[object]]::new();$segments=[Collections.Generic.List[object]]::new();$placed=$false;$teleports=[Collections.Generic.List[double]]::new()
    $runs=@(@(0,32767),@(0,-32767),@(-32767,0),@(32767,0),@(-23170,23170),@(23170,-23170),@(23170,23170),@(-23170,-23170))
    while($watch.ElapsedMilliseconds-lt$caseMs){
     $t=$watch.ElapsedMilliseconds
@@ -144,12 +144,15 @@ try{
      springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'));
-     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/doppelganger/doppelganger.inventoryitem'})),@(1500,'grant','mana'),@(2600,'lt',$(if($source-eq'host'){250}else{800})),@(3000,'usewhenspent','mana'))}
+     manaelixir=@(@(700,'named',$(if($source-eq'host'){'models/powers/windblast/windblast.inventoryitem'}else{'models/powers/mesmerize/mesmerize.inventoryitem'})),@(1500,'grant','mana'),@(2600,'lt',$(if($source-eq'host'){250}else{1200})),@(3000,'usewhenspent','mana'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      # 1330e: Emily's mana stayed full at a fixed drink time. Trace the source's live mana (itemUse.manaNow) and drink the
      # moment it first drops below full after the cast, for up to 5 s.
      if($case-eq'manaelixir'){$mn=try{[double](S $source '.observer-camera.json').itemUse.manaNow}catch{$null};$manaTrace.Add([pscustomobject]@{ms=$t;mana=$mn})
-      if($manaWatch-and!$manaDrunk-and$mn-ne$null-and$mn-lt99){C $source 'coop_use_item mana';$manaDrunk=$t;$segments.Add(@{ms=$t;item='use';arg='mana';manaAtDrink=$mn})}
+      # 1330f: drinking the moment mana dropped (0.4 s after windblast) refilled the pool, but the still-running cast ended
+      # the use presentation; drink 1.2 s after the drop, once the cast has ended (fixed 4.4 s in 1330e worked for Corvo).
+      if($manaWatch-and!$manaSpentAt-and$mn-ne$null-and$mn-lt99){$manaSpentAt=$t}
+      if($manaSpentAt-and!$manaDrunk-and$t-ge$manaSpentAt+1200){C $source 'coop_use_item mana';$manaDrunk=$t;$segments.Add(@{ms=$t;item='use';arg='mana';manaAtDrink=$mn;spentAt=$manaSpentAt})}
       elseif($manaWatch-and!$manaDrunk-and$t-gt$manaWatch+5000){$manaDrunk=-1}}
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
       switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'named'{C $source "coop_grant_named $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'usewhenspent'{$manaWatch=$t};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
@@ -171,7 +174,7 @@ try{
     if($case-eq'slide'-and$step-eq0-and$t-ge1000){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=1;$sprintAt=$t}
     if($case-eq'slide'-and$step-eq1-and$t-ge$sprintAt+350){& "$lab/Send-D2Input.ps1" -Role $source -Button B -DurationMs 500 -LeftY 32767|Out-Null;$step=2}
     $player=try{Q $source '--player-states'}catch{$null};$mv=S $peer '.movement.json';$ss=S $peer '.shadow-stream.json'
-    $samples.Add([pscustomobject]@{ms=$t;rangedKind=$mv.rangedKind;rangedVariant=$mv.rangedVariant;rangedWeight=$mv.rangedWeight;rangedShot=$mv.rangedShot;rangedMechanism=$mv.rangedMechanism;grenadeHeld=$mv.grenadeHeld;grenadeVariant=$mv.grenadeVariant;grenadeWeight=$mv.grenadeWeight;trapHeld=$mv.trapHeld;trapVariant=$mv.trapVariant;trapWeight=$mv.trapWeight;trapStock=$mv.trapStock;heartHeld=$mv.heartHeld;heartVariant=$mv.heartVariant;heartWeight=$mv.heartWeight;a=$mv.a;b=$mv.b;mix=$mv.mix;speed=$mv.speed;runMix=$mv.runMix;stanceMix=$mv.stanceMix;sprintMix=$mv.sprintMix;sprintSide=$mv.sprintSide;turnWeight=$mv.turnWeight;turnClip=$mv.turnClip;turnSerial=$mv.turnSerial;terrainWeight=$mv.terrainWeight;terrainGrade=$mv.terrainGrade;stance=$player.stance;active=@($player.active|ForEach-Object {$_.id});position=$player.position;remoteState=$ss.remoteState;weight=$mv.weight;slideState=$mv.slideState;slideWeight=$mv.slideWeight;active2=$mv.active;traversal=$mv.traversalState;traversalWeight=$mv.traversalWeight;airborne=$mv.airborne;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;readingHold=$mv.readingHold;readingFrames=$mv.readingFrames;useVariant=$mv.useVariant;useWeight=$mv.useWeight;sourceLogic=(S $source).localGameLogicState})
+    $samples.Add([pscustomobject]@{ms=$t;powerVariant=$mv.powerVariant;powerWeight=$mv.powerWeight;rangedKind=$mv.rangedKind;rangedVariant=$mv.rangedVariant;rangedWeight=$mv.rangedWeight;rangedShot=$mv.rangedShot;rangedMechanism=$mv.rangedMechanism;grenadeHeld=$mv.grenadeHeld;grenadeVariant=$mv.grenadeVariant;grenadeWeight=$mv.grenadeWeight;trapHeld=$mv.trapHeld;trapVariant=$mv.trapVariant;trapWeight=$mv.trapWeight;trapStock=$mv.trapStock;heartHeld=$mv.heartHeld;heartVariant=$mv.heartVariant;heartWeight=$mv.heartWeight;a=$mv.a;b=$mv.b;mix=$mv.mix;speed=$mv.speed;runMix=$mv.runMix;stanceMix=$mv.stanceMix;sprintMix=$mv.sprintMix;sprintSide=$mv.sprintSide;turnWeight=$mv.turnWeight;turnClip=$mv.turnClip;turnSerial=$mv.turnSerial;terrainWeight=$mv.terrainWeight;terrainGrade=$mv.terrainGrade;stance=$player.stance;active=@($player.active|ForEach-Object {$_.id});position=$player.position;remoteState=$ss.remoteState;weight=$mv.weight;slideState=$mv.slideState;slideWeight=$mv.slideWeight;active2=$mv.active;traversal=$mv.traversalState;traversalWeight=$mv.traversalWeight;airborne=$mv.airborne;combatVariant=$mv.combatVariant;combatWeight=$mv.combatWeight;readingHold=$mv.readingHold;readingFrames=$mv.readingFrames;useVariant=$mv.useVariant;useWeight=$mv.useWeight;sourceLogic=(S $source).localGameLogicState})
     Start-Sleep -Milliseconds 90}
    foreach($c in $capture,$peerCapture){if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}};$capture=$peerCapture=$null
    Save "$out/$key-samples.json" @($samples)
@@ -208,7 +211,7 @@ try{
       if($manaDrunk-le0){throw "Mana never dropped below full after the cast (minimum $($row.manaMin); trace saved)"}
       $u=@($samples|Where-Object {$_.ms-ge$manaDrunk-and[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.manaBefore=$row.use.manaBefore;$row.manaNow=$row.use.manaNow;$row.drankAtMs=$manaDrunk
       if($row.use.result-ne'mana_use_requested'){throw "Mana use $($row.use.result)"};if([double]$row.manaBefore-ge100){throw "Mana was full before the drink ($($row.manaBefore))"};if(!$u.Count){throw 'Mana elixir use reach not presented'}
-      $row.checks.Add("$(if($source-eq'host'){'Windblast'}else{'Doppelganger'}) spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
+      $row.checks.Add("$(if($source-eq'host'){'Windblast'}else{'Mesmerize'}) spent mana to $($row.manaBefore); the mana elixir drink presented as the use reach ($($u.Count) samples), mana now $($row.manaNow)")}
      'health'{$u=@($samples|Where-Object {[double]$_.useWeight-gt.5});$row.useSamples=$u.Count;$row.useVariants=@($u|ForEach-Object {[int]$_.useVariant}|Sort-Object -Unique);if(!$u.Count){throw 'Elixir use reach not presented'};$row.checks.Add("Health elixir drink presented as the use reach ($($u.Count) samples)")}}}
    if($case-eq'stairs'){C $peer 'coop_observer_camera off'
     $up=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-gt.05}).Count;$dn=@($samples|Where-Object {[double]$_.terrainWeight-gt.5-and[double]$_.terrainGrade-lt-.05}).Count;$row.stairsUp=$up;$row.stairsDown=$dn
