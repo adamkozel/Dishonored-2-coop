@@ -28,6 +28,9 @@ struct ProductArm {
     const char* result="idle";const char* last="";
 };
 ProductArm productArm{};
+// 1214cp (#104): power world visuals that were scoped to the isolated lab fixture also run while the product
+// controller holds an armed session (installed release or lab coop_product_auto).
+bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
 const char* productStep(unsigned i){
     switch(i){

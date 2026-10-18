@@ -97,7 +97,7 @@ try{
     $cam=S $peer '.observer-camera.json';Save "$out/$key-observer-camera.json" $cam;if(!$cam.active){throw "Free camera not held: $($cam.result)"};$row.camera=@(-47.6,-175.9,67.4)
    }elseif($case-in'crouchheavy','mana','blink','darkvision','bendtime','windblast','possession','swarm','farreach','domino','doppelganger','mesmerize','shadowwalk'){$inv=[Globalization.CultureInfo]::InvariantCulture
     C $source 'setviewpos -35 -153 68.1 0 0';Start-Sleep -Milliseconds 400
-    $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0
+    $cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0;if($case-in'doppelganger','mesmerize','domino','farreach'){$cx=-33.0;$cy=-147.4;$cz=68.4}
     $op=(Q $peer '--player').candidatePosition
     C $peer ('setviewpos {0} {1} {2} {3} 0' -f ([double]$op[0]).ToString('F4',$inv),([double]$op[1]).ToString('F4',$inv),([double]$op[2]+1.7).ToString('F3',$inv),$cyaw.ToString('F3',$inv));Start-Sleep -Milliseconds 400
     & "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null

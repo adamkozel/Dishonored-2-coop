@@ -63,6 +63,9 @@ rep("if($case-notin'kick','crouchheavy','note','mana','stairs'){& \"$PSScriptRoo
     "if($case-notin'kick','crouchheavy','note','mana','stairs'," + powers + "){& \"$PSScriptRoot/Set-ObserverPitch.ps1\"")
 # Standing cases look nearly level (1330d: pitch 15 cut off the head and the aimed arm); the crouched heavy keeps 15.
 rep("& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch 15 -Quick|Out-Null", "& \"$PSScriptRoot/Set-ObserverPitch.ps1\" -Role $peer -Pitch $(if($case-in'crouchheavy','mana'){15}else{4}) -Quick|Out-Null")
+# Powers whose effect appears ahead of the caster (clone, spirit, marks, far reach travel) are filmed from 5.6 m and 2 m
+# further along the cast direction, so the caster and the effect point share the frame (1332c/d: out of frame).
+rep("$cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0", "$cx=-35.0;$cy=-153.0+2.8;$cz=66.4+1.5;$cyaw=-90.0;if($case-in'doppelganger','mesmerize','domino','farreach'){$cx=-33.0;$cy=-147.4;$cz=68.4}")
 out = s.replace('\n', '\r\n') if crlf else s
 (N / 'Record-Coverage-v1332.ps1').write_bytes(out.encode('utf-8'))
 print('ok')

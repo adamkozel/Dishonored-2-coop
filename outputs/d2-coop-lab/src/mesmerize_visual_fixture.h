@@ -99,10 +99,13 @@ void serviceMesmerizeVisual(ULONGLONG tick){
         else if(!p.until&&!p.pendingHide&&(stream.presented.state==1||activeSnapshot)&&
                 (p.event!=stream.presented.event||p.streamToken!=stream.token||p.peerToken!=stream.peerToken))request=activeSnapshot?2:1;
     }
-    if(request==4||(p.until&&tick>=p.until)||!observerIsolation.ready||!observerIsolation.movementFixture){p.wanted=0;if(p.until)p.pendingHide=true;}
+    // 1214cp (#104): the networked spirit also runs in an armed product session; the local experiment stays lab-only.
+    const bool productScope=automatic&&productSessionArmed(),fixtureScope=observerIsolation.ready&&observerIsolation.movementFixture;
+    if(request==4||(p.until&&tick>=p.until)||!(fixtureScope||productScope)){p.wanted=0;if(p.until)p.pendingHide=true;}
     if(!coopGameplayReady(outgoing)||!powerFixtureApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
     if(request>=1&&request<=3){
-        if(std::strcmp(mapName,kGuardMap)||!partnerAssetsEnabled||!observerIsolation.ready||!observerIsolation.movementFixture||observerIsolation.until<tick+14000){refuse("unsupported_scope");return;}
+        const bool labScope=!std::strcmp(mapName,kGuardMap)&&fixtureScope&&observerIsolation.until>=tick+14000;
+        if(!partnerAssetsEnabled||!(labScope||productScope)){refuse("unsupported_scope");return;}
         if(!p.target.actor){
             if(request!=1&&!(request==2&&activeSnapshot)){refuse("spawn_required");return;}
             const auto definition=lookupEntityDefinition(kMesmerizeVisualDefinition);if(!definition){refuse("visual_definition_missing");return;}

@@ -57,7 +57,7 @@ void serviceDoppelgangerVisual(ULONGLONG tick){
     const auto refuse=[&](const char* why){++doppelgangerVisualRefused;doppelgangerVisualResult=why;clearDoppelgangerCloneLease();};
     if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){clearDoppelgangerCloneLease();p={};}
     const bool active=localRole==0&&doppelgangerWorldCurrent(tick)&&s.lease>tick&&s.presented.present&&movementBankActive()&&
-        coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&observerIsolation.ready&&observerIsolation.movementFixture;
+        coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&((observerIsolation.ready&&observerIsolation.movementFixture)||productSessionArmed()); // 1214cp: product mode too (#104)
     if(!active){
         if(p.visible){
             const unsigned mask=(!doppelgangerWorldCurrent(tick)?1u:0u)|(s.lease<=tick?2u:0u)|(!s.presented.present?4u:0u)|(!movementBankActive()?8u:0u)|

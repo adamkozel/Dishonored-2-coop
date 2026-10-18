@@ -8244,8 +8244,37 @@
       "native_effects_status": "partial_standing_armed_Dunwall_departure_arrival",
       "evidence": [
         "blink-regression-v26-v2/result.json",
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "Aim, release, departure burst and arrival are presented (power variants 1-3; 1332c/d).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-blink"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "host-blink"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/host-blink-observer.mp4",
+            "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
+          }
+        ],
+        "lifecycle": "See method.",
+        "remaining": "A cancelled aim on the current candidate (the coverage cases always release)."
+      }
     },
     {
       "id": "corvo_blink_pull_and_kick_variants",
@@ -8313,7 +8342,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "dark_vision",
@@ -8366,8 +8395,37 @@
         "darkvision-corvo-crouched-empty-moving-v26-v1/result.json",
         "darkvision-corvo-air-v26-v3/result.json",
         "darkvision-corvo-air-empty-v26-v1/result.json",
-        "darkvision-corvo-balanced-v28-v1/result.json"
-      ]
+        "darkvision-corvo-balanced-v28-v1/result.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "complete",
+        "scope": "Corvo casts and ends Dark Vision (power variant 10) standing armed; the partner presents both gestures and recovers. Dark Vision has no world-visible effect: its reveal and screen effect stay with the caster (first-person scope).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-darkvision"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "host-darkvision"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/host-darkvision-observer.mp4",
+            "verdict": "Corvo raises his left hand to his eye to cast, holds the armed stance, and repeats the gesture to end it; no effect appears in the observer world."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "corvo_possession_enter_loop_exit",
@@ -9812,8 +9870,25 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "The empty-target entry and aim are presented (power variants 26, 27; 1332c/d). Human-target occupation was verified on the tutorial guard in take 372 (older candidate).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-possession"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "A human-target possession on the current candidate (entry, hidden body, exit and reappearance); control of the possessed NPC in the partner world is stage 4."
+      }
     },
     {
       "id": "corvo_bend_time_cast_end",
@@ -11621,8 +11696,37 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "Cast and release gestures are presented (power variants 12, 14; 1332c/d).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-bendtime"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "host-bendtime"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/host-bendtime-observer.mp4",
+            "verdict": "Corvo raises his left hand to cast and extends it to release; readable but dark."
+          }
+        ],
+        "lifecycle": "See method.",
+        "remaining": "What the partner world does during Bend Time (shared world time) is a stage 4 authority decision; the visual of the cast in better light."
+      }
     },
     {
       "id": "corvo_windblast_cast",
@@ -11642,7 +11746,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept). Windblast reads correctly in the crouched-armed and standing-holstered contexts, and the native wind streak world effect is visible on the observer. Saved native casts passed full-body phase, stance/equipment recovery, one remote finite cosmetic world effect per source effect, exact origin/axis and duplicate rejection. These cover the recorded crouched armed and holstered/moving ground fixtures; world impulses/hits, upgrade variants and production acceptance remain incomplete. Coverage label reconciled from archived receipts600; no new runtime or visual acceptance is inferred. Existing additional recordings retain their own scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "windblast",
@@ -11683,10 +11787,42 @@
         "windblast-corvo-balanced-empty-moving-v28-v3/result.json",
         "windblast-corvo-air-network-v28-v1/result.json",
         "windblast-corvo-air-empty-moving-v28-v1/result.json",
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
       ],
-      "complete": false,
-      "visual_accepted": false
+      "complete": true,
+      "visual_accepted": false,
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "complete",
+        "scope": "Corvo casts Windblast (power variant 11): the partner presents the push and recovery, and the native wind streak plays once in the observer world at the cast.",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-windblast"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "host-windblast"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/host-windblast-observer.mp4",
+            "verdict": "Corvo braces and thrusts his left arm; a single wind streak sweeps out in front of him on the observer, then he returns to the armed stance."
+          },
+          {
+            "video": "coverage-v1332c/host-windblast-observer.mp4",
+            "verdict": "From a distance the streak fans out ahead of Corvo and clears within about a second."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "corvo_devouring_swarm_cast",
@@ -11709,7 +11845,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept). The Swarm cast body reads well standing and crouched-moving. No native rats are visible on the observer in the reviewed takes, so the world presentation is not shown on video. Scope: body accepted; the rat swarm is not visible in the observer world (effect gap). Grounded armed/holstered Swarm contexts retained.25 cosmetic rats receive strict native transforms through Steam with120ms interpolation, native scale and measured-distance gait.320 passes25 checks: one native summon effect and7 native rat trails, guarded per-frame transforms, finite cleanup, duplicate refusal, bodyweight1.0, checkpoint restoration and protected14.319 trail cleanup succeeded but body eligibility failed when semantic history ended235.5ms before the root pose.320 removes idle full grenade inventory scans; observed source read maximum 100.8959ms -> 10.931ms and send gap 281ms -> 78ms. This single run supports improvement, not a universal latency guarantee. Both grenade throw regressions plus source equip/unequip reader regression pass. Source and peer trails visible in viewed temporal sheets; audio, fine grip and subjective movement acceptance remain unverified. Rat skins/advanced states, targeting marker, death effects and shared gameplay outcomes incomplete. 753 videos indexed; full movement and playable co-op remain incomplete.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "devouring_swarm",
@@ -12865,8 +13001,41 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "complete",
+        "scope": "Corvo casts Devouring Swarm (power variants 23 and 25): the partner presents the cast and recovery, and the swarm appears in the observer world, spreads across the floor and disperses.",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "host-swarm"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "host-swarm"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/host-swarm-observer.mp4",
+            "verdict": "Corvo lunges and throws his left hand forward to summon the swarm, then recovers."
+          },
+          {
+            "video": "coverage-v1332c/host-swarm-observer.mp4",
+            "verdict": "A dark mass of rats spreads over the floor ahead of Corvo for about a second and disperses."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "emily_far_reach_aim_cancel_release_arrive",
@@ -12924,8 +13093,25 @@
       "native_effects_status": "partial_standing_armed_Dunwall_tether_impact",
       "evidence": [
         "grapple-regression-v26-v2/result.json",
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "The aim is presented (power variant 4); the pull toward a floor point is too short to film from the side.",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-farreach"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "A far reach to a distant target with travel and arrival in frame, and a cancelled aim."
+      }
     },
     {
       "id": "emily_far_reach_pull_variants",
@@ -12993,7 +13179,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "dark_vision",
@@ -13046,8 +13232,37 @@
         "darkvision-emily-crouched-empty-moving-v26-v1/result.json",
         "darkvision-emily-air-v26-v2/result.json",
         "darkvision-emily-air-empty-v26-v1/result.json",
-        "darkvision-emily-balanced-empty-moving-v28-v1/result.json"
-      ]
+        "darkvision-emily-balanced-empty-moving-v28-v1/result.json",
+        "coverage-v1332c/result.json",
+        "coverage-v1332d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "complete",
+        "scope": "Emily casts and ends Dark Vision (power variant 10) standing armed; the partner presents both gestures and recovers. The reveal and screen effect stay with the caster.",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-darkvision"
+            ]
+          },
+          {
+            "take": "coverage-v1332d",
+            "cases": [
+              "client-darkvision"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1332d/client-darkvision-observer.mp4",
+            "verdict": "Emily lifts her hand to her face to cast and again to end Dark Vision, sword held low, then settles."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "emily_domino_mark_link_cancel",
@@ -14813,8 +15028,25 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "The cast gesture is presented (power variants 19, 20, 22) with no target.",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-domino"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "Marking and linking real targets (mission guards) and the link effect on the observer."
+      }
     },
     {
       "id": "emily_doppelganger_cast",
@@ -14967,6 +15199,25 @@
         "doppelganger-fx-v485/result.json",
         "doppelganger-fx-v486/result.json",
         "doppelganger-fx-v488/visual-review.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "The cast is presented (power variants 29-31).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-doppelganger"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "The clone does not appear in the observer world in 1332c or 1332d; it must be presented and retired."
+      },
+      "evidence": [
+        "coverage-v1332c/result.json"
       ]
     },
     {
@@ -17152,8 +17403,25 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "Enter, aim and release gestures are presented (power variants 16-18).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-mesmerize"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "The spirit does not appear in the observer world in 1332c or 1332d; it must be presented with its targets and dismissal."
+      }
     },
     {
       "id": "emily_shadow_walk_enter_move_attack_exit",
@@ -17245,7 +17513,8 @@
         "native-shadowwalk-sneak-v551/result.json",
         "native-shadowwalk-standing-v552/result.json",
         "native-shadowwalk-sneak-clear-v554/result.json",
-        "../movement-integration/visual-sweep-v1260/powers-review.json"
+        "../movement-integration/visual-sweep-v1260/powers-review.json",
+        "coverage-v1332c/result.json"
       ],
       "remaining_behaviors": [
         "Correct whole-body Shadow Walk appearance; ordinary human body is still visible.",
@@ -17253,7 +17522,23 @@
         "Attack and victim contact/outcomes, upgraded sprint, wall and rat-hole traversal.",
         "Relevant interruptions and recovery; entry/crawl/requested exit tests do not establish all lifecycle cases.",
         "509 airborne landing dropout and540 stream-start freshness refusal remain separate unresolved issues."
-      ]
+      ],
+      "completion": {
+        "audit": "completion-audit-v1337-powers.json",
+        "decision": "open",
+        "scope": "Entry, crawl and exit are presented (power variants 32-34; 45 samples).",
+        "takes": [
+          {
+            "take": "coverage-v1332c",
+            "cases": [
+              "client-shadowwalk"
+            ]
+          }
+        ],
+        "visual": [],
+        "lifecycle": "See method.",
+        "remaining": "An attack from shadow form and the transformed material on the observer."
+      }
     },
     {
       "id": "power_upgrade_variants",
