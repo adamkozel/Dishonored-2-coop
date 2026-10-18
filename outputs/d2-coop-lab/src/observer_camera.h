@@ -118,6 +118,44 @@ void serviceLabItemGrant(){
     ++labGrants;static const char* names[]={"","granted_grenade","granted_health_potion","granted_mana_potion","granted_pistol","granted_crossbow","granted_stun_mine","granted_spring_razor","granted_heart"};labGrantResult=names[r];
     if(r!=2&&r!=3){labGrantEquipKind=r;labGrantEquipUntil=GetTickCount64()+3000;labGrantEquipSent=false;}
 }
+// 1214cm (#11 powers and upgrades coverage; lab only): "coop_grant_named <name>" adds one native inventory entry by its exact
+// declaration name, restricted to powers (models/powers/...) and player attributes (upgrades, Agility's super_jump), through the
+// same native add (+0x618de0); the entry list is the one the probe's --player-inventory reads. Takes reload the checkpoint after.
+char labGrantName[192]{};bool labGrantNamedRequest=false;std::uint64_t labNamedGrants=0,labNamedRefused=0;const char* labNamedResult="idle";
+// A granted power is then selected once in the left hand with the native equip (+0x614b20), as the item grants are.
+std::uintptr_t labNamedEquipDecl=0;ULONGLONG labNamedEquipUntil=0;bool labNamedEquipSent=false;
+bool labGrantNameAllowed(const char* n){const auto len=std::strlen(n);if(len<20||len>=sizeof(labGrantName))return false;
+    for(std::size_t i=0;i<len;++i){const char c=n[i];if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'||c=='/'||c=='.'))return false;}
+    if(std::strstr(n,".."))return false;const char* suffix=".inventoryitem";if(len<14||std::strcmp(n+len-14,suffix))return false;
+    return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45);}
+void serviceLabNamedEquip(){
+    if(!labNamedEquipUntil||labGrantNamedRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    if(GetTickCount64()>=labNamedEquipUntil){labNamedEquipUntil=0;if(!labNamedEquipSent)labNamedResult="named_equip_timeout";return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerSword s{};if(!readNativePlayerSword(memoryRead,base,s)||!s.sword.items||s.sword.itemCount>4096)return;
+    for(unsigned i=0;i<s.sword.itemCount;++i){const auto entry=s.sword.items+i*56;std::uintptr_t decl=0;int quantity=0;
+        if(!memoryRead(entry,&decl,8)||decl!=labNamedEquipDecl||!memoryRead(entry+32,&quantity,4))continue;
+        if(quantity<1)return;
+        if(!labNamedEquipSent){if(s.sword.slots[1]){labNamedEquipUntil=0;labNamedResult="named_slot_occupied";return;}
+            labNamedEquipSent=true;reinterpret_cast<void(*)(void*,void*,bool)>(gameImage+0x614b20)(reinterpret_cast<void*>(s.sword.inventory),reinterpret_cast<void*>(entry),true);
+            labNamedEquipUntil=0;labNamedResult="named_power_equip_requested";}
+        return;}
+}
+void serviceLabNamedGrant(){
+    serviceLabNamedEquip();
+    if(!labGrantNamedRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    labGrantNamedRequest=false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!coopGameplayReady(outgoing)){++labNamedRefused;labNamedResult="refused_not_gameplay";return;}
+    NativePlayerSword s{};if(!readNativePlayerSword(memoryRead,base,s)||!s.sword.inventory||!s.sword.items||!s.sword.itemCount||s.sword.itemCount>4096){++labNamedRefused;labNamedResult="inventory_read_failed";return;}
+    std::vector<std::array<unsigned char,56>> raw(s.sword.itemCount);if(!memoryRead(s.sword.items,raw.data(),raw.size()*56)){++labNamedRefused;labNamedResult="inventory_read_failed";return;}
+    for(const auto& r:raw){std::uintptr_t decl=0,vt=0,name=0;std::string text;std::memcpy(&decl,r.data(),8);
+        if(!decl||!memoryRead(decl,&vt,8)||(vt!=base+0x1b9ea48&&vt!=base+0x1b555a8)||!memoryRead(decl+8,&name,8)||!worldIdentityString(memoryRead,name,text))continue;
+        if(text!=labGrantName)continue;
+        reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(s.sword.inventory),reinterpret_cast<void*>(decl),1);
+        ++labNamedGrants;labNamedResult="granted_named";
+        if(!std::strncmp(labGrantName,"models/powers/",14)){labNamedEquipDecl=decl;labNamedEquipUntil=GetTickCount64()+3000;labNamedEquipSent=false;}
+        return;}
+    ++labNamedRefused;labNamedResult="name_not_in_inventory";
+}
 void servicePlayerHealthHold(){
     if(!playerHealthHold||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     NativeHealth h{};if(!readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),1,h)||!h.component){++playerHealthHoldMisses;return;}
@@ -152,7 +190,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();serviceLabItemUse();
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -181,7 +219,7 @@ void writeObserverCamera(){
     bool first=true;for(const auto& r:views)if(r.view){fprintf(f,"%s{\"view\":\"%llx\",\"count\":%llu,\"tick\":%llu,\"position\":[%.6f,%.6f,%.6f]}",first?"":",",static_cast<unsigned long long>(r.view),r.count,r.tick,r.position[0],r.position[1],r.position[2]);first=false;}
     fprintf(f,"],\"armsHidden\":{\"hides\":%llu,\"shows\":%llu,\"left\":%s,\"right\":%s},",static_cast<unsigned long long>(observerArmHides),
         static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
-    fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult);
+    fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\",\"named\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"}},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult,static_cast<unsigned long long>(labNamedGrants),static_cast<unsigned long long>(labNamedRefused),labNamedResult);
     {NativePlayerMana m{};const bool mr=readNativePlayerMana(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),m);
      fprintf(f,"\"itemUse\":{\"uses\":%llu,\"refused\":%llu,\"result\":\"%s\",\"manaBefore\":%.3f,\"manaNow\":%.3f},",static_cast<unsigned long long>(labUses),static_cast<unsigned long long>(labUseRefused),labUseResult,labManaBefore,mr?m.current:-1.f);}
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",

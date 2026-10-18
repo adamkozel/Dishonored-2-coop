@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T01:10:22.395619+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T03:52:45.609410+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 20 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 32 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -397,21 +397,21 @@ Captured 2026-10-18T01:10:22.395619+02:00; source [review-catalog.json](<../../.
 | crouch_lean_left_right | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | ledge_peek | stance | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | keyhole_enter_look_exit | stance | candidates | partial_native_keyhole_phases_through_Steam | bounded_actual_game_recordings_inspected | complete |
-| standing_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| running_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| crouch_jump_transition | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| standing_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| running_jump_takeoff | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| crouch_jump_transition | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | double_jump | traversal | candidates | partial_native_double_jump_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| rising_airborne | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| fall_loop | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles_long_fall | work_remaining |
-| soft_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
+| rising_airborne | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| fall_loop | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles_long_fall | complete |
+| soft_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
 | hard_landing | traversal | candidates | native_light_landing_standing_and_crouched_verified_dunwall | accepted_functional_both_roles_long_fall_landing | work_remaining |
-| moving_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | work_remaining |
-| vault_low_obstacle | traversal | candidates | partial_isolated_Dunwall_native_vault | accepted_sweep_1260_functional_both_roles | work_remaining |
-| climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | accepted_sweep_1260_functional_both_roles | work_remaining |
-| ledge_hang_and_pull_up | traversal | candidates | partial_isolated_Dunwall_low_mantle | accepted_sweep_1260_functional_both_roles | work_remaining |
+| moving_landing | traversal | candidates | isolated_Dunwall_both_roles | accepted_sweep_1260_functional_both_roles | complete |
+| vault_low_obstacle | traversal | candidates | partial_isolated_Dunwall_native_vault | accepted_sweep_1260_functional_both_roles | complete |
+| climb_high_ledge | traversal | candidates | partial_isolated_Dunwall_native_high_mantle | accepted_sweep_1260_functional_both_roles | complete |
+| ledge_hang_and_pull_up | traversal | candidates | partial_isolated_Dunwall_low_mantle | accepted_sweep_1260_functional_both_roles | complete |
 | window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted | work_remaining |
-| slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | work_remaining |
-| slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | work_remaining |
+| slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
+| slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
 | ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
 | chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | work_remaining |
 | swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |

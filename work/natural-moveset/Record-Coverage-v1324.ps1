@@ -160,7 +160,7 @@ try{
     if($case-eq'moveattack'){$ma=@(@(800,0,14000,'walk-forward'),@(4400,14000,0,'walk-right'),@(8000,0,-14000,'walk-back'),@(11600,0,32767,'run'))
      $k=[Math]::Floor($step/2)
      if($k-lt4){$d=$ma[$k]
-      if($step%2-eq0-and$t-ge$d[0]-700-and!$placed){if($d[3]-eq'walk-back'){C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),($Course[1]+6).ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t)}elseif($k-gt0){Course};$placed=$true}
+      if($step%2-eq0-and$t-ge$d[0]-700-and!$placed){if($d[3]-eq'walk-right'){C $source ('setviewpos -34 -153 {0} {1} 0' -f $Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t)}elseif($d[3]-eq'walk-back'){C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),($Course[1]+6).ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t)}elseif($k-gt0){Course};$placed=$true}
       if($step%2-eq0-and$t-ge$d[0]){& "$lab/Send-D2Input.ps1" -Role $source -LeftX $d[1] -LeftY $d[2] -DurationMs 2000|Out-Null;$moveAt=$t;$step++}
       elseif($step%2-eq1-and$t-ge$moveAt+700){& "$lab/Send-D2Input.ps1" -Role $source -LeftX $d[1] -LeftY $d[2] -RightTrigger 255 -DurationMs 200|Out-Null;Start-Sleep -Milliseconds 210;& "$lab/Send-D2Input.ps1" -Role $source -LeftX $d[1] -LeftY $d[2] -DurationMs 1000|Out-Null;$segments.Add(@{ms=$t;moveattack=$d[3]});$step++;$placed=$false}}}
     if($case-eq'airattack'){

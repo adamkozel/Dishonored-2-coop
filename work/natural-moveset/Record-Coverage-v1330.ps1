@@ -137,13 +137,13 @@ try{
      pistol=@(@(800,'grant','pistol'),@(3000,'lt',250),@(4700,'lt',250),@(6400,'lt',250),@(8800,'x',1500),@(12000,'x',650));
      crossbow=@(@(800,'grant','crossbow'),@(3000,'lt',250),@(4700,'lt',250),@(6400,'lt',250),@(8800,'x',1500),@(12000,'x',650));
      grenade=@(@(800,'grant','grenade'),@(3000,'lt',1300));
-     stunmine=@(@(800,'grant','stunmine'),@(3000,'lt',300));
-     springrazor=@(@(800,'grant','springrazor'),@(3000,'lt',300));
+     stunmine=@(@(800,'grant','stunmine'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
+     springrazor=@(@(800,'grant','springrazor'),@(2200,'pitch',50),@(3200,'lt',300),@(6200,'pitch',0));
      heart=@(@(800,'grant','heart'),@(3000,'lt',2200));
      health=@(@(800,'grant','health'),@(2500,'use','health'))}
     if($itemPlans.ContainsKey($case)){$ip=$itemPlans[$case]
      if($step-lt$ip.Count-and$t-ge$ip[$step][0]){$d=$ip[$step]
-      switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]}}
+      switch($d[1]){'grant'{C $source "coop_grant_item $($d[2])"};'use'{C $source "coop_use_item $($d[2])"};'lt'{& "$lab/Send-D2Input.ps1" -Role $source -LeftTrigger 255 -DurationMs $d[2]|Out-Null};'x'{I $source X $d[2]};'pitch'{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $source -Pitch $d[2] -Quick|Out-Null}}
       $segments.Add(@{ms=$t;item=$d[1];arg=$d[2]});$step++}}
     if($case-eq'mana'){
      if($step-eq0-and$t-ge800){C $source 'coop_grant_item mana';$step=1}
@@ -189,7 +189,7 @@ try{
     function Shown($w,$v){@($samples|Where-Object {[double]$_.$w-gt.5}|ForEach-Object {[int]$_.$v}|Sort-Object -Unique)}
     switch($case){
      {$_-in'pistol','crossbow'}{$kind=if($case-eq'pistol'){1}else{2};$on=@($samples|Where-Object {[double]$_.rangedWeight-gt.5-and[int]$_.rangedKind-eq$kind});$row.rangedSamples=$on.Count
-      $row.rangedVariants=@($on|ForEach-Object {[int]$_.rangedVariant}|Sort-Object -Unique);$row.shots=@($samples|ForEach-Object {[int]$_.rangedShot}|Sort-Object -Unique|Where-Object {$_-gt0}).Count
+      $row.rangedVariants=@($on|ForEach-Object {[int]$_.rangedVariant}|Sort-Object -Unique);$row.shots=0;$pf=$false;foreach($x in $samples){$f=[int]$x.rangedVariant-in3,7-and[double]$x.rangedWeight-gt.5;if($f-and!$pf){$row.shots++};$pf=$f}
       if($on.Count-lt5-or@($row.rangedVariants).Count-lt3-or$row.shots-lt2){throw "$case presented $($on.Count) samples, variants $($row.rangedVariants-join ','), shots $($row.shots)"}
       $row.checks.Add("$case presented (kind $kind): variants $($row.rangedVariants-join ','), $($row.shots) shots")}
      'grenade'{$row.grenadeVariants=Shown 'grenadeWeight' 'grenadeVariant';if(@($row.grenadeVariants).Count-lt2){throw "Grenade variants $($row.grenadeVariants-join ',')"};$row.checks.Add("Grenade presented: variants $($row.grenadeVariants-join ',')")}

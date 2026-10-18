@@ -1,0 +1,117 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-guardfight: No block impact or timed parry presented (hits 0, attacks 29) | client-guardfight: No block impact or timed parry presented (hits 0, attacks 22)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "swim",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (142 samples): strokes 52, sink 12, rise 16"
+      ],
+      "sourceSwimming": true,
+      "swimming": 142,
+      "moving": 52,
+      "sinking": 12,
+      "rising": 16
+    },
+    {
+      "source": "host",
+      "case": "climb",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (82 samples, 10 phases), ascending 11, descending 35"
+      ],
+      "climbing": 82,
+      "ascending": 11,
+      "descending": 35,
+      "phases": 10
+    },
+    {
+      "source": "host",
+      "case": "guardfight",
+      "observer": "client",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 29)",
+      "checks": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "guard": "script_spawner_streets_windmill_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 29,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "minSourceHealth": 70.0
+    },
+    {
+      "source": "client",
+      "case": "swim",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native swimming (142 samples): strokes 51, sink 18, rise 28"
+      ],
+      "sourceSwimming": true,
+      "swimming": 142,
+      "moving": 51,
+      "sinking": 18,
+      "rising": 28
+    },
+    {
+      "source": "client",
+      "case": "climb",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presented native chain climbing (85 samples, 10 phases), ascending 32, descending 40"
+      ],
+      "climbing": 85,
+      "ascending": 32,
+      "descending": 40,
+      "phases": 10
+    },
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 22)",
+      "checks": [],
+      "outcome": {
+        "host": "alive",
+        "client": "dead"
+      },
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "attackSamples": 22,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ],
+      "minSourceHealth": 70.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

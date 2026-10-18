@@ -1,0 +1,83 @@
+{
+  "source": "host",
+  "case": "moveattack",
+  "observer": "client",
+  "passed": false,
+  "failure": "Attack while walk-right not presented while travelling",
+  "checks": [
+    "Partner presentation stayed live"
+  ],
+  "camera": [
+    -30.5,
+    -148.5,
+    67.9
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [
+    3788.0,
+    7329.0,
+    10978.0
+  ],
+  "combat": [
+    {
+      "from": 1669,
+      "to": 2414,
+      "samples": 5,
+      "variants": [
+        1
+      ],
+      "crouched": 0,
+      "moving": 5,
+      "air": 0
+    },
+    {
+      "from": 5673,
+      "to": 6186,
+      "samples": 5,
+      "variants": [
+        1
+      ],
+      "crouched": 0,
+      "moving": 0,
+      "air": 0
+    },
+    {
+      "from": 8835,
+      "to": 9706,
+      "samples": 6,
+      "variants": [
+        2,
+        7,
+        1
+      ],
+      "crouched": 0,
+      "moving": 6,
+      "air": 0
+    },
+    {
+      "from": 12377,
+      "to": 13246,
+      "samples": 6,
+      "variants": [
+        2,
+        7,
+        1
+      ],
+      "crouched": 0,
+      "moving": 6,
+      "air": 0
+    }
+  ],
+  "air": [],
+  "moving": [
+    {
+      "attack": "walk-forward",
+      "travellingAttackSamples": 5
+    },
+    {
+      "attack": "walk-right",
+      "travellingAttackSamples": 0
+    }
+  ],
+  "restored": true
+}

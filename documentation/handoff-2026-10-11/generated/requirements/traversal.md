@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T01:10:22.395619+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T03:52:45.609410+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -22,7 +22,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters take o
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Both characters take off from a standing idle into a readable tucked jump and recover cleanly; the only issues are polish (no anticipation dip, Emily's stiff coat). Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
   "evidence": [
     "priority-2/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
   ],
   "title": "standing jump takeoff",
   "motions": [
@@ -31,7 +32,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters take o
   ],
   "deliverable_kind": "animation",
   "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
@@ -40,11 +41,34 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Both characters take o
     "integrated-unarmed-air-emily-v3.mp4",
     "native-feet-air-corvo-v5.mp4",
     "native-feet-air-emily-v5.mp4"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Standing jumps armed and holstered in both roles: each presents an air episode (air weight > .5) that lands and settles; the armed mix follows the sword.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-jumps",
+          "client-jumps"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/host-jumps-observer.mp4",
+        "verdict": "Corvo takes off from a planted idle, tucks, lands with a compression and recovers, armed and holstered."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -74,7 +98,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Running jumps read nat
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Running jumps read naturally for both characters, armed and unarmed, with a proper stride into the jump, tuck and landing recovery. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
@@ -83,12 +107,36 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Running jumps read nat
     "integrated-unarmed-air-emily-v3.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Running and sprint (maximum-speed) jumps in both roles, presented from the run and sprint gaits with air episodes and moving landings.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-runjump",
+          "client-runjump"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/client-runjump-observer.mp4",
+        "verdict": "Emily runs into the jump, carries through the air toward the camera and keeps running."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -117,7 +165,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-to-jump-to-crou
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-to-jump-to-crouch transitions are readable for both characters; there is a brief upright moment on the landing before re-crouching (polish). Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
@@ -126,12 +174,36 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Crouch-to-jump-to-crou
     "integrated-unarmed-air-emily-v3.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Crouched jumps in both roles: the take-off starts crouched, an air episode lands and settles, and the native landing returns to the crouch.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-jumps",
+          "client-jumps"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/host-jumps-observer.mp4",
+        "verdict": "Corvo jumps from the crouch, tucks and lands back into the crouch."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -169,7 +241,16 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The second impulse rea
     "double-jump-corvo-v21-v1/result.json",
     "double-jump-emily-v21-v1/result.json",
     "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "open",
+    "scope": "Earlier bounded takes: the native Agility second impulse is presented as a distinct tuck (22 checks).",
+    "takes": [],
+    "visual": [],
+    "lifecycle": "See method.",
+    "remaining": "A product-controller take on the current candidate with the Agility upgrade (product mode needs a lab grant: the isolated agility fixture refuses product mode), stationary and moving, armed and holstered, in both roles."
+  }
 }
 ````
 
@@ -198,7 +279,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The ascent pose (lifto
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The ascent pose (liftoff extension into tuck) is coherent and tracks height for both characters. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
   "evidence": [
     "priority-2/result.json",
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
   ],
   "title": "rising airborne",
   "motions": [
@@ -207,18 +289,45 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The ascent pose (lifto
   ],
   "deliverable_kind": "animation",
   "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
     "integrated-air-emily-v5.mp4",
     "integrated-unarmed-air-corvo-v3.mp4",
     "integrated-unarmed-air-emily-v3.mp4"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "The rising part of standing, crouched, holstered, running and sprint jumps and the start of the 6 m fall, presented as air episodes tracking native height in both roles.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-jumps",
+          "host-runjump",
+          "host-fall",
+          "client-jumps",
+          "client-runjump",
+          "client-fall"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/host-jumps-observer.mp4",
+        "verdict": "The ascent pose extends, then tucks with height."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -244,7 +353,8 @@ Audit 1283: a 5-6 m fall in both roles shows the falling pose with arms out (cov
   "evidence": [
     "priority-2/result.json",
     "../movement-integration/visual-sweep-v1260/traversal-review.json",
-    "../movement-integration/coverage-audit-v1283.json"
+    "../movement-integration/coverage-audit-v1283.json",
+    "coverage-v1321h/result.json"
   ],
   "title": "fall loop",
   "motions": [
@@ -253,19 +363,42 @@ Audit 1283: a 5-6 m fall in both roles shows the falling pose with arms out (cov
   ],
   "deliverable_kind": "animation",
   "runtime_priority": "Existing native action suppresses the walking/running bank; this does not validate new donor gameplay binding.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
     "integrated-air-emily-v5.mp4",
     "integrated-unarmed-air-corvo-v3.mp4",
     "integrated-unarmed-air-emily-v3.mp4"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "A 6 m fall in both roles: the partner presents the fall as an air episode of at least 3 samples that lands and settles.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-fall",
+          "client-fall"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/host-fall-observer.mp4",
+        "verdict": "Corvo drops from height in the falling pose and lands."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
 - [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -293,7 +426,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Landings compress and 
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Landings compress and recover correctly for both characters, including after airborne combat. The only issue is Emily's stiff coat (polish). Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
@@ -306,12 +439,36 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Landings compress and 
     "native-feet-air-emily-v5.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Landings after standing, crouched and holstered jumps settle (speed and air weight back near zero) in both roles.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-jumps",
+          "client-jumps"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/host-jumps-observer.mp4",
+        "verdict": "Each landing compresses and recovers to a planted idle."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -361,8 +518,26 @@ Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in b
     "hard-landing-corvo-crouch-v23-v1/result.json",
     "hard-landing-emily-stand-v23-v5/result.json",
     "hard-landing-emily-crouch-v23-v1/result.json",
-    "../movement-integration/coverage-audit-v1283.json"
-  ]
+    "../movement-integration/coverage-audit-v1283.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "open",
+    "scope": "The 6 m fall lands and settles in both roles (1321h); earlier takes cover the native CatFall light landing standing and crouched.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-fall",
+          "client-fall"
+        ]
+      }
+    ],
+    "visual": [],
+    "lifecycle": "See method.",
+    "remaining": "A damaging fall (higher, with the health held) presenting the native strong landing or roll, and a travelling landing recovery, in both roles."
+  }
 }
 ````
 
@@ -371,6 +546,7 @@ Audit 1283: the landing after a 5-6 m fall shows a deep crouch and recovery in b
 - [evidence: hard-landing-emily-stand-v23-v5/result.json](<../../../../work/natural-moveset/hard-landing-emily-stand-v23-v5/result.json>)
 - [evidence: hard-landing-emily-crouch-v23-v1/result.json](<../../../../work/natural-moveset/hard-landing-emily-crouch-v23-v1/result.json>)
 - [evidence: ../movement-integration/coverage-audit-v1283.json](<../../../../work/movement-integration/coverage-audit-v1283.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: hard-landing-corvo-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-corvo-stand-v23-v5.mp4>)
 - [in_game_recordings: hard-landing-corvo-crouch-v23-v1.mp4](<../../../../work/natural-moveset/hard-landing-corvo-crouch-v23-v1.mp4>)
 - [in_game_recordings: hard-landing-emily-stand-v23-v5.mp4](<../../../../work/natural-moveset/hard-landing-emily-stand-v23-v5.mp4>)
@@ -399,7 +575,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Landings from running 
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). Landings from running jumps compress and flow into a recovery stride for both characters. Exact native Jumping/Falling states, delayed motion semantics and native start/apex heights drive the authored full-body bank. Both roles pass rise/fall/landing and slide interruption checks. Actual D2 ordinary-jump recordings show the complete body. Maximum-speed takeoff, double jump, hard falls, terrain contact, airborne combat and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-air-corvo-v5.mp4",
@@ -408,12 +584,36 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Landings from running 
     "integrated-unarmed-air-emily-v3.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Landings after running and sprint jumps keep moving (speed > 1 within 0.8 s) in both roles.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-runjump",
+          "client-runjump"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/client-runjump-observer.mp4",
+        "verdict": "Emily lands from the run jump into a continuing stride."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: integrated-air-corvo-v5.mp4](<../../../../work/natural-moveset/integrated-air-corvo-v5.mp4>)
 - [in_game_recordings: integrated-air-emily-v5.mp4](<../../../../work/natural-moveset/integrated-air-emily-v5.mp4>)
 - [in_game_recordings: integrated-unarmed-air-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-unarmed-air-corvo-v3.mp4>)
@@ -449,7 +649,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The desk vault is reco
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The desk vault is recognizable for both characters, armed and unarmed (approach, plant, swing over, land). The framing is distant and hazy and the landing is partly hidden by the desk. Native state9, exact player/owned-arm scene, obstacle geometry and distance phase drive both characters armed and unarmed over Steam. Eight repeated cases pass recovery, equipment, health and monotonic progress; four actual D2 recordings exist. Arbitrary support contacts, window/high variants and final visual acceptance remain incomplete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-vault-corvo-v3.mp4",
@@ -458,12 +658,40 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The desk vault is reco
     "integrated-vault-emily-unarmed-v3.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1326d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Native vaults (state 9) over the safe-room obstacle, armed and holstered, in both roles: the partner presents the vault (traversal variant 3) and recovers; the vault-exit clock reset is fixed (1214ci).",
+    "takes": [
+      {
+        "take": "coverage-v1326d",
+        "cases": [
+          "host-vault",
+          "client-vault"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1326d/host-vault-observer.mp4",
+        "verdict": "Seen side-on, Corvo runs in, goes over the obstacle airborne with legs tucked and carries on."
+      },
+      {
+        "video": "coverage-v1326d/client-vault-observer.mp4",
+        "verdict": "Seen side-on, Emily vaults the obstacle the same way."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1326d/result.json](<../../../../work/natural-moveset/coverage-v1326d/result.json>)
 - [in_game_recordings: integrated-vault-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-vault-corvo-v3.mp4>)
 - [in_game_recordings: integrated-vault-corvo-unarmed-v3.mp4](<../../../../work/natural-moveset/integrated-vault-corvo-unarmed-v3.mp4>)
 - [in_game_recordings: integrated-vault-emily-v3.mp4](<../../../../work/natural-moveset/integrated-vault-emily-v3.mp4>)
@@ -499,7 +727,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The high canopy mantle
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The high canopy mantle reads as grab, hang, pull-up and stand or crouch for both characters, armed and unarmed. The scene is dark but the motion is clear after brightening. Native kind-2, 833 ms mantle scenes drive both characters over Steam with standing or crouched recovery, drawn or holstered swords. Four actual D2 recordings and 36 checks cover exact player/left-arm ownership, native timing, single events, recovery, equipment and preserved health/saves. The full-body donor keeps native bone lengths and root authority. Support contact is calibrated to the Dunwall canopy; other ledges, interruptions and close grip/contact visual acceptance remain unfinished.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "high-mantle-corvo-v20-lit-v1.mp4",
@@ -508,12 +736,36 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The high canopy mantle
     "high-mantle-emily-crouched-v20-lit-v1.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1326d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Native high mantles (state 8, kind 2) standing and crouched in both roles: the partner presents variants 4 and 5 matching the native exit stance and recovers.",
+    "takes": [
+      {
+        "take": "coverage-v1326d",
+        "cases": [
+          "host-highmantle",
+          "client-highmantle"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1326c/client-highmantle-observer.mp4",
+        "verdict": "Emily jumps, reaches up and pulls onto the canopy, then stands on top."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1326d/result.json](<../../../../work/natural-moveset/coverage-v1326d/result.json>)
 - [in_game_recordings: high-mantle-corvo-v20-lit-v1.mp4](<../../../../work/natural-moveset/high-mantle-corvo-v20-lit-v1.mp4>)
 - [in_game_recordings: high-mantle-corvo-crouched-v20-lit-v1.mp4](<../../../../work/natural-moveset/high-mantle-corvo-crouched-v20-lit-v1.mp4>)
 - [in_game_recordings: high-mantle-emily-v20-lit-v1.mp4](<../../../../work/natural-moveset/high-mantle-emily-v20-lit-v1.mp4>)
@@ -541,7 +793,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The low desk mantle (s
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The low desk mantle (standing and crouched exits) shows a readable grab and pull-up for both characters. A sustained hang is never exercised, and the backlit framing limits detail. Native low mantle with standing or crouched exit is bound on both roles, armed and unarmed. Exact owned scenes, native timing and short sword recovery pass runtime checks; actual D2 videos show both exits. Sustained hanging, higher ledges, vaults, arbitrary geometry contacts and visual acceptance remain incomplete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "integrated-low-mantle-corvo-v2.mp4",
@@ -550,12 +802,38 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The low desk mantle (s
     "integrated-crouch-mantle-emily-v3.mp4"
   ],
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/traversal-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/traversal-review.json",
+    "coverage-v1326d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "The native game has no sustained ledge hang: its only climbing state is arkPlayerStateClimb on arkClimbable, and ledge grabs are the native mantle (confirmed static, d2-ghidra string search). The low and high mantles (grab, pull-up, standing or crouched exit) are presented in both roles.",
+    "takes": [
+      {
+        "take": "coverage-v1326d",
+        "cases": [
+          "host-lowmantle",
+          "host-highmantle",
+          "client-lowmantle",
+          "client-highmantle"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1326c/client-highmantle-observer.mp4",
+        "verdict": "The grab and pull-up read as a reach and climb onto the ledge."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
+- [evidence: coverage-v1326d/result.json](<../../../../work/natural-moveset/coverage-v1326d/result.json>)
 - [in_game_recordings: integrated-low-mantle-corvo-v2.mp4](<../../../../work/natural-moveset/integrated-low-mantle-corvo-v2.mp4>)
 - [in_game_recordings: integrated-low-mantle-emily-v2.mp4](<../../../../work/natural-moveset/integrated-low-mantle-emily-v2.mp4>)
 - [in_game_recordings: integrated-crouch-mantle-corvo-v3.mp4](<../../../../work/natural-moveset/integrated-crouch-mantle-corvo-v3.mp4>)
@@ -594,7 +872,16 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "../movement-integration/window-traversal-audit-v1207.json",
     "../movement-integration/window-traversal-audit-v1238.json",
     "../movement-integration/presentation-hold-audit-v1241.json"
-  ]
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "open",
+    "scope": "Earlier take 1235: the native low confined mantle through the climbable Edge of the World window is presented on the partner.",
+    "takes": [],
+    "visual": [],
+    "lifecycle": "See method.",
+    "remaining": "A product-controller take on the current candidate through the climbable window in both roles, with the observer video reviewed."
+  }
 }
 ````
 
@@ -628,7 +915,7 @@ Audit 1267: sprint-to-slide with crouched exit accepted for both characters (126
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1267: sprint-to-slide with crouched exit accepted for both characters (1267a); Corvo stand/jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide entry, hold and both exits (recovery and jump interrupt) read correctly. No Emily slide recording is listed, so Emily cannot be judged. The folder does contain older integrated-slide-emily-v6 and integrated-slide-jump-emily-v3 recordings, which were not reviewed. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "slide-corvo-crouch-v28-v8.mp4",
@@ -672,8 +959,33 @@ Audit 1267: sprint-to-slide with crouched exit accepted for both characters (126
     "slide-emily-empty-stand-v28-v9/result.json",
     "slide-emily-empty-jump-v28-v9/result.json",
     "../movement-integration/visual-sweep-v1260/traversal-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Native slides from a sprint in both roles: entry, hold and recovery presented (slide weight > .8), with crouched, jump-out and stand exits.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-slide",
+          "host-slideexit",
+          "client-slide",
+          "client-slideexit"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/client-slideexit-observer.mp4",
+        "verdict": "Emily sprints, drops into the slide and jumps out of it; the second slide enters low."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -691,6 +1003,7 @@ Audit 1267: sprint-to-slide with crouched exit accepted for both characters (126
 - [evidence: slide-emily-empty-jump-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8.mp4>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8-source.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8-source.mp4>)
 - [in_game_recordings: slide-corvo-stand-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-stand-v28-v8.mp4>)
@@ -741,7 +1054,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exits accepted in sweep 1260. Visual sweep 1260: insufficient (corvo accept, emily insufficient). Corvo's slide recovers correctly into both crouch and stand. No Emily recording is listed for this item, so Emily is insufficient. Native Sliding selects authored full-body entry, hold and recovery; native jump interrupts into the authored air bank. Both roles pass state/priority checks. Collision-dependent exits, slopes, low ceilings, contact and final visual acceptance remain pending.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "slide-corvo-crouch-v28-v8.mp4",
@@ -783,8 +1096,33 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
     "slide-emily-empty-stand-v28-v9/result.json",
     "slide-emily-empty-jump-v28-v9/result.json",
     "../movement-integration/visual-sweep-v1260/traversal-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "coverage-v1321h/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1331-traversal.json",
+    "decision": "complete",
+    "scope": "Slide exits to the crouch (the native default), to a jump and to standing (B once the slide has ended) in both roles; the partner ends standing.",
+    "takes": [
+      {
+        "take": "coverage-v1321h",
+        "cases": [
+          "host-slide",
+          "host-slideexit",
+          "client-slide",
+          "client-slideexit"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1321h/client-slideexit-observer.mp4",
+        "verdict": "The slide recovers into a crouch, and the jump exit lands standing."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -802,6 +1140,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
 - [evidence: slide-emily-empty-jump-v28-v9/result.json](<../../../../work/natural-moveset/slide-emily-empty-jump-v28-v9/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/traversal-review.json](<../../../../work/movement-integration/visual-sweep-v1260/traversal-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: coverage-v1321h/result.json](<../../../../work/natural-moveset/coverage-v1321h/result.json>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8.mp4>)
 - [in_game_recordings: slide-corvo-crouch-v28-v8-source.mp4](<../../../../work/natural-moveset/slide-corvo-crouch-v28-v8-source.mp4>)
 - [in_game_recordings: slide-corvo-stand-v28-v8.mp4](<../../../../work/natural-moveset/slide-corvo-stand-v28-v8.mp4>)

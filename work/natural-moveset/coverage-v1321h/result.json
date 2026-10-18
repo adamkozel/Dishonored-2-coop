@@ -1,0 +1,391 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "jumps",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, crouched and holstered standing jumps each presented an air episode that landed and settled; crouched take-off started crouched; armed mix followed the sword"
+      ],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "air": [
+        {
+          "from": 1374,
+          "to": 2919,
+          "samples": 13
+        },
+        {
+          "from": 4575,
+          "to": 5854,
+          "samples": 11
+        },
+        {
+          "from": 10932,
+          "to": 12459,
+          "samples": 13
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "runjump",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Running and sprint take-offs presented from the run and sprint gaits, with air episodes and moving landings"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5010.0
+      ],
+      "air": [
+        {
+          "from": 1509,
+          "to": 2519,
+          "samples": 7
+        },
+        {
+          "from": 6799,
+          "to": 7792,
+          "samples": 7
+        }
+      ],
+      "takeoffs": [
+        {
+          "takeoff": "run",
+          "ms": 1509,
+          "movingLanding": 6
+        },
+        {
+          "takeoff": "sprint",
+          "ms": 6799,
+          "movingLanding": 6
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "fall",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner fall presented (15 air samples), landed and settled",
+        "Source fell 6.07 m"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1117.0
+      ],
+      "air": [
+        {
+          "from": 1117,
+          "to": 3048,
+          "samples": 15
+        }
+      ],
+      "landingCrouchMax": 0.0,
+      "fallMetres": 6.07,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "slide",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "slideexit",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Both slides presented, jump out of the slide airborne, stand exit settled standing"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        876.0,
+        5227.0
+      ],
+      "air": [
+        {
+          "from": 2808,
+          "to": 3683,
+          "samples": 8
+        }
+      ],
+      "slideSamples": [
+        9,
+        22
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "arcs",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Walk, run and sprint arcs presented in their gaits while turning, without in-place turn clips"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        3781.0,
+        7716.0
+      ],
+      "arcs": [
+        {
+          "arc": "walk",
+          "moving": 15,
+          "gait": 15,
+          "inPlaceTurn": 0
+        },
+        {
+          "arc": "run",
+          "moving": 10,
+          "gait": 10,
+          "inPlaceTurn": 0
+        },
+        {
+          "arc": "sprint",
+          "moving": 9,
+          "gait": 9,
+          "inPlaceTurn": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "jumps",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Armed, crouched and holstered standing jumps each presented an air episode that landed and settled; crouched take-off started crouched; armed mix followed the sword"
+      ],
+      "crouchedAfterLanding": 1,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "air": [
+        {
+          "from": 1301,
+          "to": 2955,
+          "samples": 14
+        },
+        {
+          "from": 4621,
+          "to": 5742,
+          "samples": 10
+        },
+        {
+          "from": 10934,
+          "to": 12552,
+          "samples": 14
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "runjump",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Running and sprint take-offs presented from the run and sprint gaits, with air episodes and moving landings"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        5053.0
+      ],
+      "air": [
+        {
+          "from": 1557,
+          "to": 2684,
+          "samples": 8
+        },
+        {
+          "from": 6802,
+          "to": 7923,
+          "samples": 8
+        }
+      ],
+      "takeoffs": [
+        {
+          "takeoff": "run",
+          "ms": 1557,
+          "movingLanding": 6
+        },
+        {
+          "takeoff": "sprint",
+          "ms": 6802,
+          "movingLanding": 5
+        }
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "fall",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner fall presented (14 air samples), landed and settled",
+        "Source fell 5.45 m"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        1119.0
+      ],
+      "air": [
+        {
+          "from": 1119,
+          "to": 3019,
+          "samples": 14
+        }
+      ],
+      "landingCrouchMax": 0.0,
+      "fallMetres": 5.45,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "slide",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Partner slide presented"
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "slideexit",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Both slides presented, jump out of the slide airborne, stand exit settled standing"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        893.0,
+        5244.0
+      ],
+      "air": [
+        {
+          "from": 2842,
+          "to": 4246,
+          "samples": 12
+        }
+      ],
+      "slideSamples": [
+        11,
+        22
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "arcs",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Walk, run and sprint arcs presented in their gaits while turning, without in-place turn clips"
+      ],
+      "camera": [
+        -30.5,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [
+        3804.0,
+        7745.0
+      ],
+      "arcs": [
+        {
+          "arc": "walk",
+          "moving": 15,
+          "gait": 15,
+          "inPlaceTurn": 0
+        },
+        {
+          "arc": "run",
+          "moving": 10,
+          "gait": 10,
+          "inPlaceTurn": 0
+        },
+        {
+          "arc": "sprint",
+          "moving": 9,
+          "gait": 9,
+          "inPlaceTurn": 0
+        }
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Traversal completion coverage (1321, #11): armed, crouched and holstered standing jumps, running and sprint jumps with moving landings, a 6 m fall, slides with crouched, jump and stand exits; both source roles, product controller, free camera; checked from the partner presentation state; fixture restored after every case."
+}
