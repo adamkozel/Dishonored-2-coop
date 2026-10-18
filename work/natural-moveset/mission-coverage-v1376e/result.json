@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 5, timed parries 0, hit reactions 0 (variants ), attacks 51 (variants 1,2,3,4,28,29); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.16681892368828377,
+        0.985987548957634
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.16681892368828377,
+            0.985987548957634
+          ],
+          "rest": [
+            4.01783,
+            61.6556,
+            15.966
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3612
+        },
+        {
+          "phase": "open",
+          "ms": 25732,
+          "guardSamples": 5
+        },
+        {
+          "phase": "attack",
+          "hitSamples": 0,
+          "ms": 40899
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 666,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 5,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "combatSceneWindows": 0,
+      "sceneWindows": 2,
+      "attackSamples": 51,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        28,
+        29
+      ],
+      "minSourceHealth": 70.0,
+      "healthDrops": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
