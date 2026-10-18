@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T12:08:41.373220+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T14:07:12.019999+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -292,19 +292,47 @@ Audit 1257 (1214e+, product controller, natural guard AI): assassination_drop_ba
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1257 (1214e+, product controller, natural guard AI): assassination_drop_back (census id 19) is presented by the partner and the death is shared in both source roles (victims 0.0 m apart). Visual accepted from both windows as functional (fast-back stab donor normalized to the native clock). Revision required: actor/target overlap during impact, sword contact and recovery foot clearance need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "takedown-variants-v1254b/drop-client-lethal-observer.mp4",
     "takedown-variants-v1254b/drop-host-lethal-observer.mp4"
   ],
   "evidence": [
-    "../movement-integration/takedown-variants-audit-v1257.json"
-  ]
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "takedown-variants-v1254k/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1353-aerial.json",
+    "decision": "complete",
+    "scope": "The drop assassination (assassination_drop_back, 1800-2000 ms) in both source roles: presented on the partner from the native scene, the guard dead in both worlds at the same place.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254k",
+        "cases": [
+          "client-drop-lethal",
+          "host-drop-lethal"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+        "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+      },
+      {
+        "video": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+        "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: takedown-variants-v1254k/result.json](<../../../../work/natural-moveset/takedown-variants-v1254k/result.json>)
 - [in_game_recordings: takedown-variants-v1254b/drop-client-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-client-lethal-observer.mp4>)
 - [in_game_recordings: takedown-variants-v1254b/drop-host-lethal-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-host-lethal-observer.mp4>)
 ## aerial_nonlethal_takedown
@@ -330,19 +358,47 @@ Audit 1257: choke_drop_back (census id 58) is presented and the knockout shared 
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1257: choke_drop_back (census id 58) is presented and the knockout shared in both source roles (the client asks the host for the knockout when the scene begins; 0.0-0.01 m). Visual accepted from both windows as functional (choke donor). Revision required: initial body collision and weight transfer need work. Native victim playback stops at the exact ragdoll event; subsequent physics is NOT simulated. No live paired outcome is implemented.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "takedown-variants-v1254b/drop-client-choke-observer.mp4",
     "takedown-variants-v1254b/drop-host-choke-observer.mp4"
   ],
   "evidence": [
-    "../movement-integration/takedown-variants-audit-v1257.json"
-  ]
+    "../movement-integration/takedown-variants-audit-v1257.json",
+    "takedown-variants-v1254k/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1353-aerial.json",
+    "decision": "complete",
+    "scope": "The drop choke (choke_drop_ready then choke_drop_back, 2166-2633 ms) in both source roles: presented on the partner, the guard unconscious in both worlds at the same place.",
+    "takes": [
+      {
+        "take": "takedown-variants-v1254k",
+        "cases": [
+          "client-drop-choke",
+          "host-drop-choke"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "takedown-variants-v1254k/drop-host-choke-observer.mp4",
+        "verdict": "Corvo drops onto the guard, forces him to his knees and holds him in the choke until he slumps to the floor."
+      },
+      {
+        "video": "takedown-variants-v1254k/drop-client-choke-observer.mp4",
+        "verdict": "Emily lands on the guard from above and takes him down; he lies unconscious at her feet."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/takedown-variants-audit-v1257.json](<../../../../work/movement-integration/takedown-variants-audit-v1257.json>)
+- [evidence: takedown-variants-v1254k/result.json](<../../../../work/natural-moveset/takedown-variants-v1254k/result.json>)
 - [in_game_recordings: takedown-variants-v1254b/drop-client-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-client-choke-observer.mp4>)
 - [in_game_recordings: takedown-variants-v1254b/drop-host-choke-observer.mp4](<../../../../work/natural-moveset/takedown-variants-v1254b/drop-host-choke-observer.mp4>)
 ## sliding_takedown

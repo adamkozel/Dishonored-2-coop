@@ -1,0 +1,127 @@
+{
+  "approach": "drop",
+  "source": "host",
+  "kind": "choke",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 58 presented",
+    "Same outcome in both worlds: unconscious",
+    "Victim ends 0 m apart in the two worlds"
+  ],
+  "guardWaitMs": 77238,
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -47.9503,
+      -152.449,
+      66.4
+    ],
+    "source": [
+      -47.9503,
+      -152.449,
+      66.4
+    ]
+  },
+  "takedownCamera": [
+    -49.115386,
+    -149.0427448,
+    68.30000000000001
+  ],
+  "takedownCameraHeld": true,
+  "inputAt": "2026-10-18T13:53:40.7273072+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_drop_back.midnightscene|2166",
+    "midnight/gameplay/player/base/choke/choke_drop_ready.midnightscene|366"
+  ],
+  "sceneIds": [
+    58
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 255371546,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x21f280fa320",
+      "actor": "0x21f453338d0",
+      "attributes": "0x21f450808d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 255371562,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1a279148ee0",
+      "actor": "0x1a285ca0b40",
+      "attributes": "0x1a285a158d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "victimEnd": {
+    "source": [
+      -47.9391,
+      -152.413,
+      66.5474
+    ],
+    "observer": [
+      -47.9391,
+      -152.413,
+      66.5474
+    ]
+  },
+  "victimGapM": 0.0,
+  "victim": {
+    "result": "client_unconscious",
+    "posesDelta": 91,
+    "rootsDelta": 421,
+    "bodyAppliedDelta": 421,
+    "positionBefore": [
+      -47.9503,
+      -152.449,
+      66.4
+    ],
+    "positionAfter": [
+      -47.9391,
+      -152.413,
+      66.5474
+    ]
+  },
+  "guardHealthObserverAfter": 10,
+  "restored": true
+}
