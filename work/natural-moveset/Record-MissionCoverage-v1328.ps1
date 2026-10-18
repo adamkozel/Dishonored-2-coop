@@ -226,8 +226,10 @@ try{
      $gx=[double]$gp[0];$gy=[double]$gp[1];$gz=[double]$gp[2];$fx=[double]$g[0].orientation[0];$fy=[double]$g[0].orientation[1];$fl=[Math]::Max(1e-3,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl;$row.guardFacing=@($fx,$fy)
      C $source 'coop_player_health_hold on';$placed=$null;$row.placementTrials=@()
      foreach($o in @(@(-$fy,$fx),@($fy,-$fx),@(-$fx,-$fy),@($fx,$fy))){$tx=$gx+2.5*$o[0];$ty=$gy+2.5*$o[1];$tyaw=[Math]::Atan2($gy-$ty,$gx-$tx)*180/[Math]::PI
-      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'
-      $ok=$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;ok=$ok}
+      # 1328h: the first read after the teleport failed outright; retry for up to 3 s and record an unreadable spot as failed.
+      C $source (P $tx $ty ($gz+1.7) $tyaw);Start-Sleep -Milliseconds 1000;$me=$null;$ms=$null
+      for($r=0;$r-lt6-and!$ms;$r++){try{$me=(Q $source '--player').candidatePosition;$ms=Q $source '--player-states'}catch{$ms=$null;Start-Sleep -Milliseconds 500}}
+      $ok=[bool]$ms-and$ms.defaultMode-and[Math]::Abs([double]$me[2]-$gz)-lt.6-and(Dist2 $me $gp)-lt3.2;$row.placementTrials+=[ordered]@{offset=$o;rest=$me;readable=[bool]$ms;ok=$ok}
       if($ok){$placed=@($tx,$ty,$tyaw);break}}
      if(!$placed){throw 'No spot beside, behind or in front of the guard at its level'}
      $sx=$placed[0];$sy=$placed[1];$yaw=$placed[2];$mx=($gx+$sx)/2;$my=($gy+$sy)/2

@@ -10,6 +10,8 @@
 // mission-coverage-v1328e midnight watch: cat_fall_strong, 1066 ms, phase 3, Corvo Scene_2, Emily Scene_1).
 // 1214co: unlike the light body scene (its arms run separate scenes), the strong scene binds three actors: the
 // player first, then both first-person arms (1328e: handles 1, then two arm entities; 1328f refused it at stage 6).
+// 1214cq: the arms are bound left first, then right (confirmed runtime, mission-coverage-v1328h: left_arm_1, right_arm_2);
+// 1214co assumed the keyhole order (right, then left) and still refused every strong landing.
 constexpr unsigned kNativeLightLandingMs=1000,kNativeStrongLandingMs=1066;
 struct NativePlayerLandingScene {
     std::uintptr_t instance=0,statePointer=0;unsigned handle=0,timeMs=0,durationMs=0,character=0,endStance=0;
@@ -45,8 +47,8 @@ template<class Read> bool readNativePlayerLandingScene(Read read,std::uintptr_t 
     std::array<std::uintptr_t,2> armActors{};std::array<unsigned,2> armHandles{};
     if(s.strong){
         for(unsigned i=0;i<2;++i)if(!read(bindings+(i+1)*0x20+8,&armActors[i],8)||!armActors[i]||!read(armActors[i]+0xa8,&armHandles[i],4)||worldIdentityEntity(read,game,armHandles[i])!=armActors[i])return false;
-        if(!readNativePlayerArm(read,base,game,armHandles[0],s.rightArm)||s.rightArm.actor!=armActors[0]||s.rightArm.side!=2||s.rightArm.player!=bound||s.rightArm.character!=s.character||
-           !readNativePlayerArm(read,base,game,armHandles[1],s.leftArm)||s.leftArm.actor!=armActors[1]||s.leftArm.side!=1||s.leftArm.player!=bound||s.leftArm.character!=s.character)return false;
+        if(!readNativePlayerArm(read,base,game,armHandles[0],s.leftArm)||s.leftArm.actor!=armActors[0]||s.leftArm.side!=1||s.leftArm.player!=bound||s.leftArm.character!=s.character||
+           !readNativePlayerArm(read,base,game,armHandles[1],s.rightArm)||s.rightArm.actor!=armActors[1]||s.rightArm.side!=2||s.rightArm.player!=bound||s.rightArm.character!=s.character)return false;
     }
     // Native CatFall exit 14085b1e0 uses this owned input processor's crouch
     // latch, not the capsule's temporary landing stance. Read-only.
@@ -67,7 +69,7 @@ template<class Read> bool readNativePlayerLandingScene(Read read,std::uintptr_t 
     for(unsigned i=0;i<2;++i){const auto at=manager+(i?0x610:0);if(!read(at,&again,8)||again!=lists[i]||!read(at+8,&number,4)||number!=flags[i])return false;}
     if(s.strong){NativePlayerArm arm{};
         for(unsigned i=0;i<2;++i)if(!read(bindings+(i+1)*0x20+8,&again,8)||again!=armActors[i]||worldIdentityEntity(read,game,armHandles[i])!=armActors[i])return false;
-        if(!readNativePlayerArm(read,base,game,armHandles[0],arm)||!sameNativePlayerArm(arm,s.rightArm)||!readNativePlayerArm(read,base,game,armHandles[1],arm)||!sameNativePlayerArm(arm,s.leftArm))return false;
+        if(!readNativePlayerArm(read,base,game,armHandles[0],arm)||!sameNativePlayerArm(arm,s.leftArm)||!readNativePlayerArm(read,base,game,armHandles[1],arm)||!sameNativePlayerArm(arm,s.rightArm))return false;
     }
     NativePlayerStates final{};
     if(!readNativePlayerStates(read,base,final)||final.player.game!=game||final.player.player!=states.player.player||final.component!=states.component||final.mode!=states.mode||
