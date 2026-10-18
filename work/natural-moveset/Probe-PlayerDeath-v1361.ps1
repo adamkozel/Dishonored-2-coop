@@ -48,6 +48,12 @@ try{
  try{C $peer 'coop_observer_camera off'}catch{};foreach($r in 'host','client'){try{C $r 'coop_product_auto off'}catch{}}
  try{& "$root/work/PrepareShadowSword.ps1" *>> "$out/checkpoint-restore.log"}catch{"restore failed: $_"|Add-Content "$out/checkpoint-restore.log"}
  try{& "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration" *>> "$out/note-restoration.log"}catch{"note restore failed: $_"|Add-Content "$out/note-restoration.log"}
- [ordered]@{role=$Role;trace=@($trace)}|ConvertTo-Json -Depth 8|Set-Content "$out/result.json"
+ # 1361i: the probe's own verdict for the completion audit. From the first dead or finisher sample to native GameOver
+ # the partner must present a death collapse (combat 24-27) at full presentation and combat weight in 80% of samples.
+ $di=-1;for($i=0;$i-lt$trace.Count;$i++){if(@($trace[$i].active)-match'^(15:\.Dead|38:\.NpcFatality)$'){$di=$i;break}}
+ $kind=if(@($trace|ForEach-Object {$_.active})-match'^38:\.NpcFatality$'){'fatality'}else{'death'};$post=@();$hit=0
+ if($di-ge0){$post=@($trace[$di..($trace.Count-1)]|Where-Object {$_.logic-ne13});$hit=@($post|Where-Object {[int]$_.partnerCombat-ge24-and[int]$_.partnerCombat-le27-and[double]$_.partnerWeight-ge.9-and[double]$_.partnerCombatWeight-ge.9}).Count}
+ $case=[ordered]@{source=$Role;case=$kind;passed=($di-ge0-and$post.Count-ge5-and$hit-ge.8*$post.Count);deathMs=$(if($di-ge0){$trace[$di].ms}else{$null});samples=$post.Count;presented=$hit;variants=@($post|ForEach-Object {$_.partnerCombat}|Sort-Object -Unique);reframes=$frames}
+ [ordered]@{role=$Role;cases=@($case);trace=@($trace)}|ConvertTo-Json -Depth 8|Set-Content "$out/result.json"
  if($owned){$mutex.ReleaseMutex()}}
 $prev='';foreach($r in $trace){$k="L$($r.logic)/$($r.peerLogic) hp$($r.health) $(@($r.scenes)-join ' + ') || $(@($r.active)-join ',') || pw$([Math]::Round([double]$r.partnerWeight,1))";if($k-ne$prev){"$($r.ms) $k";$prev=$k}}
