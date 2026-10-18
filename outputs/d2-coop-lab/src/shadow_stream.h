@@ -179,7 +179,7 @@ void serviceShadowUse(const NativePlayerStates& states,std::uintptr_t base){
 // and the partner vanished. It is now action 25 with one directional collapse chosen once at the death edge: the
 // nearest living catalogued NPC within 10 m relative to the facing (24 front, 25 back, 26 left, 27 right); a death
 // without one (a fall) collapses as front.
-struct ShadowDeath {std::uint64_t epoch=0,deaths=0,fatalities=0;ULONGLONG start=0;unsigned variant=0,leadMs=0,sceneMs=0;float bearing=0;bool nearby=false,fatality=false,sceneRead=false;std::string scene;};
+struct ShadowDeath {std::uint64_t epoch=0,deaths=0,fatalities=0;ULONGLONG start=0;unsigned variant=0,leadMs=0,sceneMs=0,sceneStage=0;float bearing=0;bool nearby=false,fatality=false,sceneRead=false;std::string scene;};
 ShadowDeath shadowDeath{};
 inline bool nativePlayerDead(const NativePlayerStates& s,std::uintptr_t base){
     return s.active.size()==1&&s.active[0].id==15&&s.active[0].vtable==base+0x1c82478;
@@ -190,29 +190,34 @@ inline bool nativePlayerDead(const NativePlayerStates& s,std::uintptr_t base){
 // is held, then dropped: its pelvis reaches half height at guards 2.9 s, elite 1.4, howler 1.5, overseer 2.3, witch
 // 0.73, clockwork 3.47 (offline native samples, npc-fatality-timing-v1362.json). The partner's collapse reaches half
 // height about 0.9 s in, so it starts that much earlier on the native scene clock and holds its first frame before.
+// 1214cx: 0.4 s earlier still: native GameOver (about 3.8 s into the guards' finisher) retires the dead source's
+// stream, and in 1361o Emily vanished while still kneeling.
 inline bool nativePlayerNpcFatality(const NativePlayerStates& s,std::uintptr_t base,std::uintptr_t& pointer){
     for(const auto& a:s.active)if(a.id==38&&a.vtable==base+0x1c3d878){pointer=a.pointer;return true;}
     return false;
 }
 inline unsigned npcFatalityCollapseLeadMs(const std::string& asset){
-    static const std::pair<const char*,unsigned> leads[]={{"guards",2000},{"elite",500},{"howler",600},{"overseer",1400},{"witch",0},{"clockwork",2570}};
+    static const std::pair<const char*,unsigned> leads[]={{"guards",1600},{"elite",100},{"howler",200},{"overseer",1000},{"witch",0},{"clockwork",2170}};
     for(const auto& e:leads)if(asset==std::string("midnight/gameplay/player/base/death/npc_fatality_")+e.first+".midnightscene")return e.second;
-    return 2000;
+    return 1600;
 }
 // The state's scene handle (+0x24) names the playing instance in the midnight manager lists, as for sword scenes.
-template<class Read> bool readNativeNpcFatalityScene(Read read,std::uintptr_t base,std::uintptr_t game,std::uintptr_t pointer,std::string& asset,unsigned& timeMs){
-    unsigned handle=0;std::uintptr_t instance=0;
+// stage (1214cx): 1 no scene handle, 2 manager list unreadable, 3 no instance, 4 declaration/name/time; 0 read.
+template<class Read> bool readNativeNpcFatalityScene(Read read,std::uintptr_t base,std::uintptr_t game,std::uintptr_t pointer,std::string& asset,unsigned& timeMs,unsigned* stage=nullptr){
+    unsigned handle=0;std::uintptr_t instance=0;unsigned local=0;unsigned& at=stage?*stage:local;at=1;
     if(!pointer||!read(pointer+0x24,&handle,4)||!handle)return false;
+    at=2;
     for(unsigned field=0;field<2;++field){std::uintptr_t list=0;unsigned flags=0;const auto at=game+0x1f5338+(field?0x610:0);
         if(!read(at,&list,8)||!read(at+8,&flags,4)||(flags&0xffffff)>512||((flags&0xffffff)&&!list))return false;
         for(unsigned i=0;i<(flags&0xffffff);++i){std::uintptr_t candidate=0;unsigned id=0;
             if(!read(list+i*8,&candidate,8)||!candidate||!read(candidate+0x158,&id,4))return false;
             if(id==handle){if(instance&&instance!=candidate)return false;instance=candidate;}}
     }
+    at=instance?4:3;
     std::uintptr_t declaration=0,vt=0,name=0;std::string text;unsigned t=0;
     if(!instance||!read(instance,&declaration,8)||!read(declaration,&vt,8)||vt!=base+0x1affbc8||!read(declaration+8,&name,8)||
        !worldIdentityString(read,name,text)||text.rfind("midnight/gameplay/player/base/death/npc_fatality_",0)!=0||!read(instance+0x160,&t,4)||t>60000)return false;
-    asset=std::move(text);timeMs=t;return true;
+    asset=std::move(text);timeMs=t;at=0;return true;
 }
 unsigned shadowDeathVariant(ULONGLONG tick){
     shadowDeath.nearby=false;shadowDeath.bearing=0;
@@ -240,10 +245,10 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(nativeStateValid&&(fatality||nativePlayerDead(states,base))){
         const auto tick=GetTickCount64();
         if(!shadowDeath.start||shadowDeath.epoch!=outgoing.worldEpoch){shadowDeath.epoch=outgoing.worldEpoch;shadowDeath.start=tick;shadowDeath.variant=shadowDeathVariant(tick);++shadowDeath.deaths;
-            shadowDeath.fatality=fatality;shadowDeath.leadMs=fatality?2000:0;shadowDeath.sceneRead=false;shadowDeath.sceneMs=0;shadowDeath.scene.clear();if(fatality)++shadowDeath.fatalities;}
+            shadowDeath.fatality=fatality;shadowDeath.leadMs=fatality?1600:0;shadowDeath.sceneRead=false;shadowDeath.sceneMs=0;shadowDeath.scene.clear();if(fatality)++shadowDeath.fatalities;}
         // A finisher's clock is its native scene time; a plain death (or a read miss) uses the time since the edge.
         std::string scene;unsigned sceneMs=0;
-        const bool sceneRead=fatality&&readNativeNpcFatalityScene(memoryRead,base,states.player.game,fatalityState,scene,sceneMs);
+        const bool sceneRead=fatality&&readNativeNpcFatalityScene(memoryRead,base,states.player.game,fatalityState,scene,sceneMs,&shadowDeath.sceneStage);
         if(sceneRead){shadowDeath.sceneRead=true;shadowDeath.sceneMs=sceneMs;shadowDeath.leadMs=npcFatalityCollapseLeadMs(scene);shadowDeath.scene=std::move(scene);}
         const ULONGLONG clock=sceneRead?sceneMs:tick-shadowDeath.start;
         action=25;
@@ -643,9 +648,9 @@ void writeShadowStream(ULONGLONG tick){
         }fprintf(f,"],");
     }
     fprintf(f,"\"wireRefused\":%llu,\"stopServiceTick\":%llu,\"stopLastState\":%llu,",shadowWireRefused,shadowStopServiceTick,shadowStopLastState);
-    fprintf(f,"\"death\":{\"deaths\":%llu,\"fatalities\":%llu,\"active\":%s,\"fatality\":%s,\"variant\":%u,\"nearby\":%s,\"bearing\":%.4f,\"sceneRead\":%s,\"sceneMs\":%u,\"leadMs\":%u,\"scene\":\"%s\"},",
+    fprintf(f,"\"death\":{\"deaths\":%llu,\"fatalities\":%llu,\"active\":%s,\"fatality\":%s,\"variant\":%u,\"nearby\":%s,\"bearing\":%.4f,\"sceneRead\":%s,\"sceneMs\":%u,\"leadMs\":%u,\"sceneStage\":%u,\"scene\":\"%s\"},",
         shadowDeath.deaths,shadowDeath.fatalities,shadowDeath.start?"true":"false",shadowDeath.fatality?"true":"false",shadowDeath.variant,shadowDeath.nearby?"true":"false",shadowDeath.bearing,
-        shadowDeath.sceneRead?"true":"false",shadowDeath.sceneMs,shadowDeath.leadMs,shadowDeath.scene.c_str());
+        shadowDeath.sceneRead?"true":"false",shadowDeath.sceneMs,shadowDeath.leadMs,shadowDeath.sceneStage,shadowDeath.scene.c_str());
     fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);

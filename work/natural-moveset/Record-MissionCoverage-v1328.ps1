@@ -368,7 +368,8 @@ try{
         C $peer ('coop_observer_camera hold_at {0} {1} {2}' -f $hx.ToString('F3',$inv),$hy.ToString('F3',$inv),([double]$me[2]+1.6).ToString('F3',$inv))}}}catch{}}
      $guardSamples=0;$hitSamples=0;$row.phaseLog=[Collections.Generic.List[object]]::new();$script:camAnchor=$null;$yawAt=0;$lastParry=$false;$row.counterPresses=[Collections.Generic.List[object]]::new()
      while($watch.ElapsedMilliseconds-lt56000){$t=$watch.ElapsedMilliseconds
-      if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})}
+      if($phase-eq'provoke'-and$t-ge3500){$phase='block';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase})
+       foreach($wr in 'host','client'){try{(Q $wr '--world-npcs')|ConvertTo-Json -Depth 6|Set-Content "$out/$key-world-npcs-$wr-block.json"}catch{};try{Copy-Item "$root/work/lab-instances/$wr/coop-status.json.npc-stream.json" "$out/$key-$wr-npc-stream-block.json"}catch{}}}
       elseif($phase-eq'block'-and($guardSamples-ge6-or$t-$phaseStart-ge22000)){$phase='open';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;guardSamples=$guardSamples})}
       elseif($phase-eq'open'-and($hitSamples-ge3-or$t-$phaseStart-ge15000)){$phase='attack';$phaseStart=$t;$row.phaseLog.Add(@{ms=$t;phase=$phase;hitSamples=$hitSamples})}
       elseif($phase-eq'attack'-and$t-$phaseStart-ge14000){break}
