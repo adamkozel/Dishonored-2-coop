@@ -182,7 +182,7 @@ try{
      elseif($step-eq3-and$t-ge5200){C $source ('setviewpos {0} {1} {2} {3} 0' -f $Course[0].ToString('F3',$inv),$Course[1].ToString('F3',$inv),$Course[2].ToString('F3',$inv),$Course[3].ToString('F1',$inv));$teleports.Add($t);$step=4}
      elseif($step-eq4-and$t-ge6400){& "$lab/Send-D2Input.ps1" -Role $source -Button LeftThumb -DurationMs 1000 -LeftY 32767|Out-Null;$step=5;$sprintAt=$t}
      elseif($step-eq5-and$t-ge$sprintAt+350){& "$lab/Send-D2Input.ps1" -Role $source -Button B,LeftThumb -DurationMs 500 -LeftY 32767|Out-Null;$segments.Add(@{ms=$t;slide='stand-exit'});$step=6}
-     elseif($step-eq6-and$t-ge$sprintAt+1500){$st=[int](Q $source '--player-states').stance;if($st-ne5){if($st){I $source B 180};$segments.Add(@{ms=$t;stand='after-slide';stance=$st});$step=7}}}
+     elseif($step-eq6-and$t-ge$sprintAt+1500){$ps=Q $source '--player-states';$st=[int]$ps.stance;if($st-ne5-and!@($ps.active|Where-Object {$_.id-eq7}).Count){if($st){I $source B 180};$segments.Add(@{ms=$t;stand='after-slide';stance=$st});$step=7}}}
     if($case-eq'mana'){
      if($step-eq0-and$t-ge800){C $source 'coop_grant_item mana';$step=1}
      elseif($step-eq1-and$t-ge2000){$row.manaBefore=try{(Q $source '--player-potion' 2).quantity}catch{$null};C $source 'coop_use_item mana';$step=2}
