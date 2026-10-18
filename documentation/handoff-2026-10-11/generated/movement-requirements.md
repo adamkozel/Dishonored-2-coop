@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-18T10:07:10.757611+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-18T10:17:34.524050+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 66 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 68 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -412,8 +412,8 @@ Captured 2026-10-18T10:07:10.757611+02:00; source [review-catalog.json](<../../.
 | window_enter_exit | traversal | candidates | native_confined_low_mantle_through_climbable_eotw_window_both_roles | not_accepted | complete |
 | slide_enter_loop_exit | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
 | slide_to_crouch_or_stand | traversal | candidates | isolated_Dunwall_both_roles | accepted_functional_both_roles | complete |
-| ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected | work_remaining |
-| chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | work_remaining |
+| ladder_up_down_entry_exit | traversal | candidates | partial_native_steam_chain_climb_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
+| chain_rope_climb | traversal | candidates | blocked_native_fixture_missing_components | not_accepted | complete |
 | swim_idle_directions | traversal | candidates | partial_native_steam_swimming_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
 | dive_surface_water_exit | traversal | candidates | partial_native_steam_water_exit_both_roles_mission_map | bounded_actual_game_frames_inspected | complete |
 | sword_draw_holster | combat | candidates | partial_native_steam_batched_locomotion_both_roles | accepted_sweep_1260_functional_both_roles | complete |

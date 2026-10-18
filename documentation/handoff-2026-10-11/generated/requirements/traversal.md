@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T10:07:10.757611+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T10:17:34.524050+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -1241,7 +1241,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "deliverable_kind": "animation",
   "notes": "1041/1043/1046: native arkClimbable chain climbing in Edge of the World (ordinary interact -> alternate-mode state29 arkPlayerStateClimb) is sent as action state23 (protocol72); the receiver presents bank70 authored ladder-contact ascend/descend cycles advanced by replicated vertical distance. Both roles verified as source with observer-camera videos (Corvo 1043 on client, Emily 1046 on host: grab, climb, descent, release, landing). Chain hand-over-hand acting, entry/exit transitions and true ladders/top exits remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-climb-eotw-v1041/chain1.mp4",
@@ -1256,13 +1256,39 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "evidence": [
     "../movement-integration/climb-audit-v1044.json",
-    "../movement-integration/traversal-parity-audit-v1050.json"
-  ]
+    "../movement-integration/traversal-parity-audit-v1050.json",
+    "mission-coverage-v1328v/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1347-climb.json",
+    "decision": "complete",
+    "scope": "D2 has no climbable ladders: the only climbing state is arkPlayerStateClimb on arkClimbable (the chains), and the ladder resources are step-ladder props (confirmed static). Entry, ascent, descent and exit of that climb are presented in both roles (chain_rope_climb, the same takes).",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328v",
+        "cases": [
+          "host-climb",
+          "host-climbtop",
+          "client-climb",
+          "client-climbtop"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+        "verdict": "Emily enters the climb from the street, ascends to the top and exits by letting go."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/climb-audit-v1044.json](<../../../../work/movement-integration/climb-audit-v1044.json>)
 - [evidence: ../movement-integration/traversal-parity-audit-v1050.json](<../../../../work/movement-integration/traversal-parity-audit-v1050.json>)
+- [evidence: mission-coverage-v1328v/result.json](<../../../../work/natural-moveset/mission-coverage-v1328v/result.json>)
 - [in_game_recordings: native-climb-eotw-v1041/chain1.mp4](<../../../../work/natural-moveset/native-climb-eotw-v1041/chain1.mp4>)
 - [in_game_recordings: native-climb-eotw-v1041/chain2.mp4](<../../../../work/natural-moveset/native-climb-eotw-v1041/chain2.mp4>)
 - [in_game_recordings: native-climb-eotw-v1041/chain3.mp4](<../../../../work/natural-moveset/native-climb-eotw-v1041/chain3.mp4>)
@@ -1295,19 +1321,48 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "deliverable_kind": "animation",
   "notes": "659–661: original native chain definition resolves in both roles, but its isolated creation yields only Audio and AnimBase; PhysicsSystem/Climbable components absent.136 source samples never enter Climb29. Actual source video inspected; no climbing acceptance. Checkpoint fully removes fixture and restores both inventories, health and14 protected hashes. Dependency is documented; do not repeat this incomplete fixture.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-climb-corvo-v661/source.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
-    "native-climb-corvo-v661/result.json"
-  ]
+    "native-climb-corvo-v661/result.json",
+    "mission-coverage-v1328v/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1347-climb.json",
+    "decision": "complete",
+    "scope": "Climbing the Edge of the World chain in both roles: grab, hand-over-hand ascent and descent cycles advanced by the replicated height (about 85-110 climb samples, 9-10 phases per case), climbing to the top and letting go back into the default mode.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1328v",
+        "cases": [
+          "host-climb",
+          "host-climbtop",
+          "client-climb",
+          "client-climbtop"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1328v/host-climb-observer.mp4",
+        "verdict": "Corvo grabs the chain at the street, pulls himself up hand over hand, then climbs back down and steps off."
+      },
+      {
+        "video": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+        "verdict": "Emily climbs the chain all the way up, hangs at the top and lets go."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: native-climb-corvo-v661/result.json](<../../../../work/natural-moveset/native-climb-corvo-v661/result.json>)
+- [evidence: mission-coverage-v1328v/result.json](<../../../../work/natural-moveset/mission-coverage-v1328v/result.json>)
 - [in_game_recordings: native-climb-corvo-v661/source.mp4](<../../../../work/natural-moveset/native-climb-corvo-v661/source.mp4>)
 ## swim_idle_directions
 
