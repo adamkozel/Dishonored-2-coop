@@ -3637,7 +3637,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "grenade-stun-scenes-corvo-v60.mp4",
@@ -3804,8 +3804,107 @@
         }
       },
       "evidence": [
-        "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-      ]
+        "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+        "coverage-v1403c/result.json",
+        "coverage-v1407a/result.json",
+        "coverage-v1403e/result.json",
+        "coverage-v1407b/result.json",
+        "coverage-v1407e/result.json",
+        "coverage-v1407c/result.json",
+        "coverage-v1403i/result.json",
+        "coverage-v1407d/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1414-hit-reactions.json",
+        "decision": "complete",
+        "scope": "The partner staggers from a heavy hit from the left, front, right and back, in both roles, on the native stun clock with its body kept, and recovers.",
+        "takes": [
+          {
+            "take": "coverage-v1403c",
+            "cases": [
+              "client-labblastleft"
+            ]
+          },
+          {
+            "take": "coverage-v1407a",
+            "cases": [
+              "client-labblastfront"
+            ]
+          },
+          {
+            "take": "coverage-v1403e",
+            "cases": [
+              "client-labblastright"
+            ]
+          },
+          {
+            "take": "coverage-v1407b",
+            "cases": [
+              "client-labblastback"
+            ]
+          },
+          {
+            "take": "coverage-v1407e",
+            "cases": [
+              "host-labblastleft"
+            ]
+          },
+          {
+            "take": "coverage-v1407c",
+            "cases": [
+              "host-labblastfront"
+            ]
+          },
+          {
+            "take": "coverage-v1403i",
+            "cases": [
+              "host-labblastright"
+            ]
+          },
+          {
+            "take": "coverage-v1407d",
+            "cases": [
+              "host-labblastback"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1403c/client-labblastleft-observer.mp4",
+            "verdict": "Left (variant 3): the blast from her left flings Emily away from the camera; she staggers with her arms out and recovers upright."
+          },
+          {
+            "video": "coverage-v1407a/client-labblastfront-observer.mp4",
+            "verdict": "Front (variant 2): facing the camera, Emily reels back from the blast in front of her with her arms flung out, then steadies and stands."
+          },
+          {
+            "video": "coverage-v1403e/client-labblastright-observer.mp4",
+            "verdict": "Right (variant 1): thrown toward the camera, she staggers, drops low with one arm out and recovers."
+          },
+          {
+            "video": "coverage-v1407b/client-labblastback-observer.mp4",
+            "verdict": "Back (variant 4): the blast behind her throws Emily toward the camera; she stumbles forward and recovers standing."
+          },
+          {
+            "video": "coverage-v1407e/host-labblastleft-observer.mp4",
+            "verdict": "Left (variant 3): the blast from his left flings Corvo away from the camera; he lands in a crouched stagger with his arms out and straightens up."
+          },
+          {
+            "video": "coverage-v1407c/host-labblastfront-observer.mp4",
+            "verdict": "Front (variant 2): facing the camera, Corvo is thrown back, staggers with his arms out and recovers his stance."
+          },
+          {
+            "video": "coverage-v1403i/host-labblastright-observer.mp4",
+            "verdict": "Right (variant 1): thrown toward the camera, Corvo staggers low with his arms out and straightens up."
+          },
+          {
+            "video": "coverage-v1407d/host-labblastback-observer.mp4",
+            "verdict": "Back (variant 4): the blast behind him pitches Corvo forward toward the camera; he stumbles bent over and recovers."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "stagger_knockdown_recovery",

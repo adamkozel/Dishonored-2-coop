@@ -1,0 +1,98 @@
+{
+  "audit": "completion-audit-v1414-hit-reactions",
+  "family": "combat",
+  "candidate": "candidate-npc-combat-v1214dq",
+  "method": "A heavy hit on the player (PLAYER_HITREACT_BIG: a guard's sword blow or a grenade blast, damage decl census 1372, confirmed static) puts the player in the native Stun state 14 playing hit_react_stun_right/front/left/back (800 ms, Scene_1, body only; the game picks the side from the hit direction). The source reads the scene on its own clock and sends stun variants 1-4; the partner plays the matching authored stagger (bank clips 260-263) at full stun weight with its body clock kept (1214dp), then recovers. The lab-only hit (coop_lab_hit blast <side>, 1214dp) applies the grenade's own explosion damage (explosion_grenade.damage) 1.2 m out on a chosen side through the original native damage function, so each direction is provoked natively and on demand; the blast also throws the player about a metre, which the partner follows on its network-owned root. Harness 1403 requires the source to enter Stun 14, the partner to present a stun at full stun weight, and the partner's clock weight to stay at or above 0.9 throughout; 1407 frames front and back blasts along the push. Every case below passed with the clock weight at 1.0.",
+  "items": [
+    {
+      "id": "hit_reactions_directions",
+      "decision": "complete",
+      "scope": "The partner staggers from a heavy hit from the left, front, right and back, in both roles, on the native stun clock with its body kept, and recovers.",
+      "takes": [
+        {
+          "take": "coverage-v1403c",
+          "cases": [
+            "client-labblastleft"
+          ]
+        },
+        {
+          "take": "coverage-v1407a",
+          "cases": [
+            "client-labblastfront"
+          ]
+        },
+        {
+          "take": "coverage-v1403e",
+          "cases": [
+            "client-labblastright"
+          ]
+        },
+        {
+          "take": "coverage-v1407b",
+          "cases": [
+            "client-labblastback"
+          ]
+        },
+        {
+          "take": "coverage-v1407e",
+          "cases": [
+            "host-labblastleft"
+          ]
+        },
+        {
+          "take": "coverage-v1407c",
+          "cases": [
+            "host-labblastfront"
+          ]
+        },
+        {
+          "take": "coverage-v1403i",
+          "cases": [
+            "host-labblastright"
+          ]
+        },
+        {
+          "take": "coverage-v1407d",
+          "cases": [
+            "host-labblastback"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1403c/client-labblastleft-observer.mp4",
+          "verdict": "Left (variant 3): the blast from her left flings Emily away from the camera; she staggers with her arms out and recovers upright."
+        },
+        {
+          "video": "coverage-v1407a/client-labblastfront-observer.mp4",
+          "verdict": "Front (variant 2): facing the camera, Emily reels back from the blast in front of her with her arms flung out, then steadies and stands."
+        },
+        {
+          "video": "coverage-v1403e/client-labblastright-observer.mp4",
+          "verdict": "Right (variant 1): thrown toward the camera, she staggers, drops low with one arm out and recovers."
+        },
+        {
+          "video": "coverage-v1407b/client-labblastback-observer.mp4",
+          "verdict": "Back (variant 4): the blast behind her throws Emily toward the camera; she stumbles forward and recovers standing."
+        },
+        {
+          "video": "coverage-v1407e/host-labblastleft-observer.mp4",
+          "verdict": "Left (variant 3): the blast from his left flings Corvo away from the camera; he lands in a crouched stagger with his arms out and straightens up."
+        },
+        {
+          "video": "coverage-v1407c/host-labblastfront-observer.mp4",
+          "verdict": "Front (variant 2): facing the camera, Corvo is thrown back, staggers with his arms out and recovers his stance."
+        },
+        {
+          "video": "coverage-v1403i/host-labblastright-observer.mp4",
+          "verdict": "Right (variant 1): thrown toward the camera, Corvo staggers low with his arms out and straightens up."
+        },
+        {
+          "video": "coverage-v1407d/host-labblastback-observer.mp4",
+          "verdict": "Back (variant 4): the blast behind him pitches Corvo forward toward the camera; he stumbles bent over and recovers."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}
