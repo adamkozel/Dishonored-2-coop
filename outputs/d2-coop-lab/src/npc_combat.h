@@ -37,7 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
-    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0,impliedReady=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -759,7 +759,12 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
     traceNpcCombat(p,false,"accepted",b.peerNonce);
     if(p.kind==NpcCombatMessage::Ready){b.ready=true;return;}
     if(p.kind==NpcCombatMessage::Stop){b.enabled=b.ready=false;return;}
-    if(!b.ready){rejectNpcCombat(p,"receive_not_ready",b.peerNonce);return;}
+    // 1214fo (#117): after a re-arm the peer's Ready can arrive before its Hello and is refused (no peer nonce yet);
+    // the peer is then ready and the local channel is not until the next Hello round, and a request in between was
+    // dropped (1654a: Domino's linked knockout, receive_not_ready 30 ms before recovery). A Request or Commit under
+    // matching nonces is only sent by a ready peer, so it proves readiness.
+    if(!b.ready){if(p.kind!=NpcCombatMessage::Request&&p.kind!=NpcCombatMessage::Commit){rejectNpcCombat(p,"receive_not_ready",b.peerNonce);return;}
+        b.ready=true;++npcCombat.impliedReady;traceNpcCombat(p,false,"implied_ready",b.peerNonce);}
     if(b.deathPending){
         if((p.kind==NpcCombatMessage::Request&&p.request==b.deathRequest)||(p.kind==NpcCombatMessage::Commit&&p.event==b.deathEvent))++npcCombat.duplicates;
         else ++npcCombat.rejected;return;
@@ -885,7 +890,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied);
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu,\"impliedReady\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied,s.impliedReady);
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
