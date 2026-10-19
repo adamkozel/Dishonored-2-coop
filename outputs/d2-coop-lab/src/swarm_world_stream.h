@@ -15,6 +15,7 @@ struct SwarmWorldStream {
     CoopSwarmWorldPacket sent{},presented{};double presentedTime=0;
 } swarmWorldStream;
 std::uint64_t swarmWorldSequence=0,swarmWorldEvent=0,swarmWorldSent=0,swarmWorldReceived=0,swarmWorldRejected=0,swarmWorldUnknown=0,swarmWorldPresented=0;
+std::uint64_t swarmOlderSamples=0;unsigned swarmOlderAgents=0,swarmOlderHandle=0; // 1214ek: Double Swarm's older swarm
 double swarmReadMaxMs=0,swarmScopedReadMaxMs=0;std::uint64_t swarmReadCount=0,swarmScopedReadCount=0;unsigned swarmReadStage=0;
 struct SwarmWorldRecord {std::uint64_t sequence=0,event=0,digest=0;unsigned handle=0,count=0,bytes=0;};
 std::array<SwarmWorldRecord,128> swarmWorldHistory{};std::uint64_t swarmWorldHistoryCount=0;
@@ -42,6 +43,15 @@ void sampleSwarmWorld(ULONGLONG tick){
     if(!memoryRead(world.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
     for(const auto& a:world.agents){if(p.count>=100)return;p.agents[p.count++]={a.index,a.handle,a.incarnation,a.state,a.transform,a.scale,a.drivingFrame?1u:0u};}
     sampleSwarmTrails(world,p);
+    // 1214ek: Double Swarm's older swarm rides in the same packet with its pool indices moved by 50 (mod 100); the newest
+    // keeps its own (its trails and spawn effect stay keyed to it). An older rat whose moved index is taken is left out.
+    swarmOlderAgents=0;swarmOlderHandle=0;
+    if(world.present){NativeSwarmWorld older{};
+        if(readNativeSwarmWorld(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),older,nullptr,&s.known,true)&&older.present&&older.handle!=world.handle){
+            const unsigned newest=p.count;for(const auto& a:older.agents){if(p.count>=100)break;const unsigned index=(a.index+50)%100;
+                if(std::any_of(p.agents.begin(),p.agents.begin()+newest,[&](const auto& n){return n.index==index;}))continue;
+                p.agents[p.count++]={index,a.handle,a.incarnation,a.state,a.transform,a.scale,a.drivingFrame?1u:0u};++swarmOlderAgents;}
+            ++swarmOlderSamples;swarmOlderHandle=older.handle;}}
     p.size=static_cast<std::uint16_t>(swarmWorldWireSize(p.count));
     if(!validSwarmWorldPacket(p,remote,outgoing)||!sockets||!connection)return;
     if(coopSendMessage(connection,&p,p.size,k_nSteamNetworkingSend_UnreliableNoDelay,nullptr)==k_EResultOK){s.sent=p;recordSwarmWorld(p);++swarmWorldSent;sampleSwarmSpawnFx(world,p,tick);}
@@ -64,7 +74,7 @@ void presentSwarmWorld(ULONGLONG tick){
 void writeSwarmWorld(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.swarm-world.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=swarmWorldStream;const auto& p=localRole==0?s.sent:s.presented;
-    fprintf(f,"{\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"unknown\":%llu,\"presented\":%llu,\"sequence\":%llu,\"event\":%llu,\"nativeHandle\":%u,\"present\":%u,\"count\":%u,\"bytes\":%u,\"leased\":%s,\"readCount\":%llu,\"scopedReadCount\":%llu,\"readMaxMs\":%.4f,\"scopedReadMaxMs\":%.4f,\"readStage\":%u,\"agents\":[",swarmWorldSent,swarmWorldReceived,swarmWorldRejected,swarmWorldUnknown,swarmWorldPresented,p.sequence,p.event,p.nativeHandle,p.present,p.count,p.size,s.lease>GetTickCount64()?"true":"false",swarmReadCount,swarmScopedReadCount,swarmReadMaxMs,swarmScopedReadMaxMs,swarmReadStage);
+    fprintf(f,"{\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"unknown\":%llu,\"presented\":%llu,\"sequence\":%llu,\"event\":%llu,\"nativeHandle\":%u,\"present\":%u,\"count\":%u,\"bytes\":%u,\"leased\":%s,\"readCount\":%llu,\"scopedReadCount\":%llu,\"readMaxMs\":%.4f,\"scopedReadMaxMs\":%.4f,\"readStage\":%u,\"olderSamples\":%llu,\"olderAgents\":%u,\"olderHandle\":%u,\"agents\":[",swarmWorldSent,swarmWorldReceived,swarmWorldRejected,swarmWorldUnknown,swarmWorldPresented,p.sequence,p.event,p.nativeHandle,p.present,p.count,p.size,s.lease>GetTickCount64()?"true":"false",swarmReadCount,swarmScopedReadCount,swarmReadMaxMs,swarmScopedReadMaxMs,swarmReadStage,swarmOlderSamples,swarmOlderAgents,swarmOlderHandle);
     for(unsigned i=0;i<p.count;++i){const auto& a=p.agents[i];fprintf(f,"%s{\"index\":%u,\"handle\":%u,\"incarnation\":%u,\"state\":%u,\"directDriver\":%u,\"scale\":%.6f,\"transform\":[",i?",":"",a.index,a.handle,a.incarnation,a.state,a.directDriver,a.scale);
         for(unsigned k=0;k<12;++k)fprintf(f,"%s%.6f",k?",":"",a.transform[k]);fputs("]}",f);}
     fputs("],\"history\":[",f);const auto n=(std::min)(swarmWorldHistoryCount,128ull);

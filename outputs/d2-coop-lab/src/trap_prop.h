@@ -46,7 +46,8 @@ void serviceTrapProp(ULONGLONG tick){
     if(p.network&&!automatic)hideTrapProp();
     if(automatic&&p.network&&p.until)p.until=tick+250;
     if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++trapPropRetired;trapPropResult="old_world_retired";}
-    if(request==2||(p.until&&(tick>=p.until||rangedProp.until||!observerIsolation.ready||!observerIsolation.movementFixture||!shadowEquipmentAiReady()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote))))hideTrapProp();
+    // 1214ej: the lab isolation scope applies to fixture props only; a network prop follows the source (product sessions).
+    if(request==2||(p.until&&(tick>=p.until||rangedProp.until||(!p.network&&(!observerIsolation.ready||!observerIsolation.movementFixture))||!shadowEquipmentAiReady()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote))))hideTrapProp();
     if(p.pendingHide)hideTrapProp();
     if(automatic&&!p.until&&!p.pendingHide)request=1;
     if(automatic&&p.network&&p.until){

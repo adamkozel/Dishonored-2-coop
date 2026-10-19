@@ -24,6 +24,14 @@ void swarmWorldTests(Memory initial,std::uintptr_t base,std::uintptr_t game,std:
     m.d(equipment+0xd4,worldHandle);
     const bool ok=inspect(m);if(!ok)std::cerr<<"Swarm world stage "<<stage<<'\n';
     require(ok&&s.present&&s.agents.size()==1&&s.agents[0].index==3&&s.agents[0].incarnation==17,"Swarm indexed nonzero pool slot with reciprocal entity/frame/animation and live generation");
+    // 1214ek: Double Swarm's older committed swarm (array +b8/+c0 beside the newest +d4).
+    {NativeSwarmWorld o{};const auto older=[&](Memory& x){return readNativeSwarmWorld([&](auto a,auto b,auto n){return x.read(a,b,n);},base,o,nullptr,nullptr,true);};
+     auto two=m;two.q(equipment+0xb8,a+0x20000);two.d(equipment+0xc0,1);two.d(a+0x20000,worldHandle);
+     require(older(two)&&!o.present,"one committed swarm has no older swarm");
+     two.d(equipment+0xc0,2);two.d(a+0x20004,worldHandle);require(!older(two),"duplicate committed swarm entries refused");
+     two.d(a+0x20004,0x90007);two.d(equipment+0xc0,3);require(!older(two),"more swarms than Double Swarm's two refused");
+     two.d(equipment+0xc0,2);two.q(game+0x3130b0+9*8,0);require(older(two)&&!o.present,"a stale older entry reads as absent");
+     two.d(a+0x20000,0x90007);two.d(a+0x20004,0x90008);require(!older(two),"the newest swarm must be one of the committed entries");}
     const auto known=s.equipment;
     const auto scoped=[&](Memory& x){return readNativeSwarmWorld([&](auto a,auto b,auto n){return x.read(a,b,n);},base,s,&stage,&known);};
     require(scoped(m)&&s.present,"discovered Swarm item revalidates current ownership without unrelated first-person pose");

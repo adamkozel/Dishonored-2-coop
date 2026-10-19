@@ -1,0 +1,82 @@
+{
+  "source": "host",
+  "case": "takedown",
+  "observer": "client",
+  "passed": false,
+  "failure": "No native takedown on the source (states 0,44,64)",
+  "checks": [],
+  "sceneHandles": [
+    "469964829",
+    "471078958",
+    "469899292",
+    "470095903",
+    "470030366",
+    "770910735",
+    "769272310",
+    "469833755",
+    "773663289",
+    "470161440",
+    "775432788"
+  ],
+  "targetCandidates": [
+    "script_spawner_docks_musician_violin=models/characters/def/generic/lower_class_female_01.def",
+    "script_spawner_docks_civilian_05=models/characters/def/generic/lower_class_female_01.def",
+    "script_spawner_addermirestation_office_guard_02=models/characters/def/generic/lower_guard_male_small_01.def",
+    "script_spawner_addermirestation_office_guard_07=models/characters/def/generic/guard_male_small_01.def"
+  ],
+  "reachTries": [
+    {
+      "spawner": "script_spawner_docks_musician_violin",
+      "err": 0.58,
+      "dz": 0.09
+    },
+    {
+      "spawner": "script_spawner_docks_civilian_05",
+      "err": 0.0,
+      "dz": 0.01
+    }
+  ],
+  "targetChosen": "script_spawner_docks_civilian_05=models/characters/def/generic/lower_class_female_01.def",
+  "target": {
+    "spawner": "script_spawner_docks_civilian_05",
+    "definition": "models/characters/def/generic/lower_class_female_01.def",
+    "position": [
+      -22.0731,
+      176.429,
+      1.32106
+    ],
+    "forward": [
+      0.049061089178370834,
+      0.9987957796910398
+    ]
+  },
+  "kind": "choke",
+  "camera": [
+    -25.09156482920339,
+    176.12672516667416,
+    2.9210599999999998
+  ],
+  "sourceStart": [
+    -22.117,
+    175.53,
+    1.3298
+  ],
+  "replacedAt": 501,
+  "cameraMoved": [
+    -25.09156482920339,
+    176.12672516667416,
+    2.9210599999999998
+  ],
+  "targetMoved": 0.0,
+  "actedAt": 1098,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    44,
+    64
+  ],
+  "windowScenes": []
+}

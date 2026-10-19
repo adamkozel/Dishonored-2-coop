@@ -1,0 +1,72 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-farreachbottle: The pull was not presented (power variants 7-9 with the loop 8)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachbottle",
+      "observer": "host",
+      "passed": false,
+      "failure": "The pull was not presented (power variants 7-9 with the loop 8)",
+      "checks": [
+        "Pull states 63@, 84@, component@; moved in host ; moved in client esc_env_dunwall_streets_interior_bayle_104:gone",
+        "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.4439,-163.081,67.252",
+        "Far Reach pull: source GrabGrappledEntity (84) samples 16; presented power variants 4,5,6,7,9"
+      ],
+      "grantResult": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "inputAt": "2026-10-19T07:48:57.1379305+02:00",
+      "holdDumps": 5,
+      "holdStateType": [
+        ".?AVarkPlayerStateUsePower@@",
+        ".?AVarkPlayerStateUsePower@@",
+        ".?AVarkPlayerStateGrabGrappledEntity@@",
+        ".?AVarkCpntPlayerSensorGrappleToMantle@@",
+        ".?AVarkCpntPlayerSensorGrapple@@"
+      ],
+      "lootSamples": 0,
+      "slotPresses": [],
+      "potionCounts": [],
+      "peakUseWeight": 0.0,
+      "holdSamples": 0,
+      "bottleAfter": [
+        -43.4439,
+        -163.081,
+        67.252
+      ],
+      "bottleBefore": [
+        -43.4437,
+        -163.081,
+        67.252
+      ],
+      "stateVtables": [
+        "63@",
+        "84@",
+        "component@"
+      ],
+      "movers": {
+        "host": [],
+        "client": [
+          {
+            "name": "esc_env_dunwall_streets_interior_bayle_104",
+            "handle": "0x73a0354",
+            "change": "gone"
+          }
+        ]
+      },
+      "pullVariants": [
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "pullState": 16,
+      "restored": true
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}

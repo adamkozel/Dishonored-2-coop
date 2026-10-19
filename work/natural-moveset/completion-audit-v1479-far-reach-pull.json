@@ -1,0 +1,28 @@
+{
+  "audit": "completion-audit-v1479-far-reach-pull",
+  "family": "powers",
+  "candidate": "candidate-npc-combat-v1214ed",
+  "method": "With the pull upgrades granted (grapple_pull_objects, grapple_pull_npcs; lab-only native grants), Far Reach aimed at a pickable object locks onto it (UsePower 63; the 'Cancel Far Reach' prompt) and pulls it: the native GrabGrappledEntity state 84 (vtable RVA 0x1c3f8e8; 1452a) runs under power_grapple_pull, whose subscenes are pullIn (266 ms), the pull loop ('pull', 100 ms, when the native plays it) and pullOut (366 ms). The source sends the power variants from the scene (4/5 aim, 6 release, 7 pullIn, 8 loop, 9 pullOut); since 1214ec state 84 is accepted as a movement overlay and as Emily's grapple state, so the partner presents the pull through to pullOut (1457b showed it fading after pullIn before that). Harness 1446/1450/1452/1457/1460/1471 stands Emily inside the bottle's room, aims at the bottle with the native interaction aim helper and holds the power 1.5 s; 1471b pulled the bottle 2.4 m toward her and the partner presented 4, 5, 6, 7 and 9 (the native skipped the loop for this short pull, as in 1442a). Limits, outside movement: the pulled object moves only in the caster's world, and a body pull is refused in the client's world where bodies are host replicas; both are world authority (stage 4, #115).",
+  "items": [
+    {
+      "id": "emily_far_reach_pull_variants",
+      "decision": "complete",
+      "scope": "Emily: the Far Reach pull (aim, release, pullIn, the loop when native, pullOut) presented on the partner from the native pull state and scenes, after the native lock onto a target. The pulled object's physics and the body pull are stage 4 world authority (#115).",
+      "takes": [
+        {
+          "take": "object-carry-v1471b",
+          "cases": [
+            "client-farreachbottle"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
+          "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

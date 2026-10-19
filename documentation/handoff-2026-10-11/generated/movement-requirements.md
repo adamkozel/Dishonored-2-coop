@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-19T07:09:00.198184+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-19T10:11:55.851792+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 98 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 101 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -460,13 +460,13 @@ Captured 2026-10-19T07:09:00.198184+02:00; source [review-catalog.json](<../../.
 | corvo_windblast_cast | powers | candidates | partial_native_steam_windblast_body_and_finite_world_fx | accepted_sweep_1260_functional_owner | complete |
 | corvo_devouring_swarm_cast | powers | candidates | native_swarm_grounded_contexts_incrementally_verified_world_pending | accepted_sweep_1260_functional_owner | complete |
 | emily_far_reach_aim_cancel_release_arrive | powers | candidates | partial_native_Far_Reach_body_and_world_FX | accepted_sweep_1260_functional_owner | complete |
-| emily_far_reach_pull_variants | powers | candidates | not_verified | not_accepted | work_remaining |
+| emily_far_reach_pull_variants | powers | candidates | not_verified | not_accepted | complete |
 | emily_dark_vision_cast_end | powers | candidates | partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam | bounded_actual_game_frames_inspected | complete |
 | emily_domino_mark_link_cancel | powers | candidates | native_domino_standing_armed_body_and_mark_partial_verified | accepted_sweep_1260_functional_owner | complete |
 | emily_doppelganger_cast | powers | candidates | grounded_armed_and_holstered_scoped | not_accepted | complete |
 | emily_mesmerize_cast | powers | candidates | native_observed_mesmerize_body_and_cosmetic_world_contexts_partial_verified | accepted_sweep_1260_functional_owner | complete |
 | emily_shadow_walk_enter_move_attack_exit | powers | candidates | partial_native_standing_sneaking_entry_crawl_exit_through_Steam | accepted_sweep_1260_functional_owner | complete |
-| power_upgrade_variants | powers | candidates | not_verified | not_accepted | work_remaining |
+| power_upgrade_variants | powers | candidates | not_verified | not_accepted | complete |
 | power_interruptions_and_no_mana | powers | candidates | partial_native_Corvo_Bend_Time_failure_and_same_world_pause | accepted_sweep_1260_functional_owner | complete |
 | door_open_close_locked | interactions | candidates | native_ordinary_door_continuous_manual_and_death_checkpoint_recovery | accepted_functional_both_roles_crouched_rise | complete |
 | lever_button_crank_wheel | interactions | candidates | native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles | accepted_sweep_1260_functional_both_roles | complete |
@@ -474,7 +474,7 @@ Captured 2026-10-19T07:09:00.198184+02:00; source [review-catalog.json](<../../.
 | key_use | interactions | candidates | native_use_state75_real_lock_both_roles | accepted_functional_both_roles | complete |
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | accepted_functional_both_roles_held_reach_reading | complete |
 | eat_drink | interactions | candidates | native_food_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | complete |
-| carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | work_remaining |
+| carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | complete |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | complete |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
 | scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | complete |

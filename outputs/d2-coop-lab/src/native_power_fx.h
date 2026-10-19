@@ -38,6 +38,10 @@ const char* powerFxName(unsigned kind){
         kind==21?"models/effects/gameplay/powers/rat_swarm/rat/rat_spawn_trail_01.fx":
         kind==19?"models/effects/gameplay/powers/phantasmal_link/links/phlink_links_01.fx":
         kind==12?"models/effects/d2coop/grenade_inhand_remote.fx":
+        // 1214ej: remote copies of the Shockwave's ground wave and the Greater Windblast blast (native particles and
+        // sound; the native screen particle and full-screen quad stay with the caster).
+        kind==29?"models/effects/d2coop/windblast_wave_remote.fx":
+        kind==30?"models/effects/d2coop/windblast_stronger_remote.fx":
         // Isolated native-derived world effects retain character sound/light
         // and all layers except the long 1p spark streaks (30% length).
         // The source player's native first-person declarations are unchanged.

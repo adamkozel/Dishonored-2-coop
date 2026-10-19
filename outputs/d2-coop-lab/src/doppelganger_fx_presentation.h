@@ -4,13 +4,15 @@ struct DoppelgangerFxPresentation {
     std::uintptr_t game=0;std::uint64_t epoch=0,event=0,token=0,peerToken=0;
     unsigned sourceScene=0,sourceVariant=0,elapsed=0,nativeTime=0;
     std::array<unsigned,8> attempted{};unsigned attempts=0;
-} doppelgangerFxPresentation;
+};
+std::array<DoppelgangerFxPresentation,kDoppelgangerWireSlots> doppelgangerFxPresentations{}; // 1214eh: one per clone slot
+DoppelgangerFxPresentation& doppelgangerFxPresentation=doppelgangerFxPresentations[0];
 struct DoppelgangerFxStartRecord {std::uint64_t sequence,event;unsigned sourceScene,nativeScene,variant,elapsed,nativeTime;bool verified;};
 std::array<DoppelgangerFxStartRecord,32> doppelgangerFxHistory{};std::uint64_t doppelgangerFxHistoryCount=0;
 std::array<std::uint64_t,2> doppelgangerFxStarted{};std::uint64_t doppelgangerFxStopped=0,doppelgangerFxRefused=0;
 const char* doppelgangerFxResult="idle";
-void serviceDoppelgangerFx(ULONGLONG tick,const NativeDoppelgangerVisual& target,std::uintptr_t game,std::uint64_t epoch,bool active){
-    auto& f=doppelgangerFxPresentation;const auto& stream=doppelgangerWorldStream;const auto& p=stream.presented;
+void serviceDoppelgangerFx(ULONGLONG tick,unsigned slot,const NativeDoppelgangerVisual& target,std::uintptr_t game,std::uint64_t epoch,bool active){
+    auto& f=doppelgangerFxPresentations[slot];const auto& stream=doppelgangerWorldStreams[slot];const auto& p=stream.presented;
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     if(f.game&&(f.game!=observedGame||f.epoch!=outgoing.worldEpoch)){f={};doppelgangerFxResult="world_retired";}
     const auto stop=[&](){if(!f.scene.handle)return true;if(!stopDoppelgangerFxScene(f.scene,f.target))return false;++doppelgangerFxStopped;return true;};

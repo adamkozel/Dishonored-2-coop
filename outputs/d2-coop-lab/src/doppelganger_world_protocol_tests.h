@@ -10,6 +10,8 @@ void doppelgangerPacketTests(const CoopPosePacket& h,const CoopPosePacket& c){
     p.sourceToken=4;p.targetToken=9;p.event=1;p.sampleTimeUs=1000000;p.rootSequence=c.sequence;p.nativeHandle=0xc871210;p.equipmentHandle=0xa1234;p.present=1;p.generation=8826;p.rig=kDoppelgangerRig;for(auto& j:p.local){j={1,0,0,0,1,0,0,0,1,0,0,0};}
     for(unsigned i=0;i<3;++i)p.sourceOrigin[i]=c.position[i];p.transform={c.position[0]+3,c.position[1],c.position[2],1,0,0,0,1,0,0,0,1};
     check(validDoppelgangerWorldPacket(p,h,c),"exact Emily clone identity packet accepted");
+    {auto second=p;second.slot=1;check(validDoppelgangerWorldPacket(second,h,c)&&!sameDoppelgangerIncarnation(p,second),"Twin Shade's second clone slot accepted as its own clone");
+     second.slot=2;check(!validDoppelgangerWorldPacket(second,h,c),"clone slot beyond Twin Shade's two refused");}
     // Native480: exact matrices captured at the sender's validation failure,
     // rather than an independent later read after the marker has recovered.
     const std::array<float,12> leftMarker={.00661819614f,-.724930584f,.688790083f,.730769217f,-.466677248f,-.498185158f,.682592392f,.506643653f,.526668549f,-2.01066375f,-4.17935562f,2.20471048f};

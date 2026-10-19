@@ -82,6 +82,10 @@ struct NpcAuthorityChannel {
     ULONGLONG pairedCorpseUntil=0;
     // 1214aj: host NPC following a client's lethal paired scene without an AI lease.
     bool hostPairedFollow=false;
+    // 1214ef: the host's own paired takedown on this NPC (poses every 50 ms until 3 s after).
+    ULONGLONG hostOwnPairedUntil=0;std::uint64_t priorityPoses=0;
+    // 1214eg: receiver pose rejections by reason: not ready, AI lease not ready, identity, replay, source clock.
+    std::array<std::uint64_t,5> poseRejects{};double lastPoseLateMs=0;
     // 1213u (#46): a paired takedown by the CLIENT on this host-owned NPC. Client:
     // localPaired keeps its native victim animation (host poses are not applied);
     // a choke that knocks the replica out keeps it natively unconscious. Host:
@@ -124,7 +128,7 @@ void clientNpcDead(NpcAuthorityChannel& c);
 unsigned npcCombatDeathShare(std::uint64_t arm);
 float npcReconcileDeclAmount=0;std::uint64_t npcReconcileDeclFlags=0;unsigned npcReconcileDeclReactions[2]{};
 std::uint64_t npcDeadReconciled=0,npcDeadSent=0,npcCombatSharedDeaths=0,npcClientDeadApplied=0,npcClientDeadAlready=0,npcClientDeadRefused=0;const char* npcClientDeadLast="none";
-std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0,npcPairedCorpses=0,npcPairedFollows=0;
+std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0,npcPairedCorpses=0,npcPairedFollows=0,npcHostOwnPaired=0,npcPriorityPoses=0;
 NpcAuthorityHeader npcHeader(const NpcAuthorityChannel& c,NpcAuthorityMessage kind){
     NpcAuthorityHeader h{};h.role=localRole;h.kind=kind;h.sequence=c.sequence+1;h.sourceSession=npcStreamSession;h.targetSession=npcStreamPeerSession;
     h.sourceEpoch=npcStreamEpoch;h.targetEpoch=npcStreamPeerEpoch;h.map=npcStreamMap;h.sourceArm=c.arm;h.sourceHandle=c.lease.binding.npc.handle;
@@ -453,9 +457,11 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
     auto it=std::find_if(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&c.arm==p.h.targetArm;});
     if(it==npcChannels.end()){++npcPacketsRejected;return;}auto& c=*it;++c.received;
     const bool reverse=p.h.kind==NpcAuthorityMessage::PairedPose;
-    if(reverse?(localRole||!c.ready||(c.corpse&&tick>=c.carriedUntil&&tick>=c.pairedCorpseUntil)||!(c.hostPairedLease||c.hostPairedFollow||(c.unconscious&&tick-c.unconsciousAt<3500)||tick<c.carriedUntil||tick<c.pairedCorpseUntil)):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;return;}
+    if(reverse?(localRole||!c.ready||(c.corpse&&tick>=c.carriedUntil&&tick>=c.pairedCorpseUntil)||!(c.hostPairedLease||c.hostPairedFollow||(c.unconscious&&tick-c.unconsciousAt<3500)||tick<c.carriedUntil||tick<c.pairedCorpseUntil)):(!localRole||!c.ready||(!c.lease.ready&&!c.corpse))){++c.rejected;++c.poseRejects[!c.ready?0:1];return;}
     if(p.h.sourceArm!=c.peerArm||p.h.sourceHandle!=c.peerHandle||p.h.targetHandle!=c.lease.binding.npc.handle||
-       p.h.rig!=c.rig||p.h.joints!=c.render.joints||!c.buffer.push(p,presentationClock())){++c.rejected;return;}
+       p.h.rig!=c.rig||p.h.joints!=c.render.joints){++c.rejected;++c.poseRejects[2];return;}
+    if(!c.buffer.push(p,presentationClock())){++c.rejected;++c.poseRejects[c.buffer.lastReject==1?3:4];
+        if(c.buffer.lastReject==2)c.lastPoseLateMs=presentationClock()-(double(p.sampleUs)*.001+c.buffer.clock.offset);return;}
     c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);}else{c.poseAt=tick;++c.poses;}
 }
 void sendNpcPose(NpcAuthorityChannel& c,NpcAuthorityMessage kind=NpcAuthorityMessage::Pose){
@@ -520,6 +526,15 @@ void serviceNpcStream(ULONGLONG tick){
     unsigned pairedHandle=0,pairedVariant=0;
     if(localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         if(readNativePlayerStates(memoryRead,base,st)&&readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}}
+    // 1214ef (#11 enemy_body_size_variants): the host's own native paired takedown. The client's
+    // replica follows the victim by this stream alone, and the budget above gave 24 bound NPCs one
+    // pose per 400 ms each while the client expires render data at 350 ms: in take 1491a (curator
+    // map) every client channel was client_pose_stale and the witch's replica got 1 pose, so it stood
+    // still through Corvo's choke. The victim's pose now goes every 50 ms, like the client's own
+    // victim (PairedPose), from the scene until 3 s after it.
+    unsigned hostPairedHandle=0;
+    if(!localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+        if(readNativePlayerStates(memoryRead,base,st)&&readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant))hostPairedHandle=scene.target.handle;}
     // 1214ae: the bound replica the client carries (carry state 45 +0xf8, drop state 46 +0x38).
     unsigned carriedHandle=0;
     if(localRole){NativePlayerStates st{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
@@ -529,6 +544,7 @@ void serviceNpcStream(ULONGLONG tick){
     for(auto& c:npcChannels){if(!c.enabled)continue;
         if(tick<c.started)continue;
         if(npcStreamPeerExpired(tick,c.started,c.peerAt,c.peerArm!=0)){stopNpcChannel(c,"peer_timeout");continue;}
+        if(!localRole&&c.ready&&hostPairedHandle&&c.lease.binding.npc.handle==hostPairedHandle){if(tick>=c.hostOwnPairedUntil)++npcHostOwnPaired;c.hostOwnPairedUntil=tick+3000;}
         if(localRole&&c.ready&&pairedHandle&&c.lease.binding.npc.handle==pairedHandle){
             if(!c.localPaired){c.localPaired=true;++npcPairedLocal;c.pairedResult="client_paired";}
             c.pairedVariant=pairedVariant;c.pairedUntil=tick+1500;
@@ -578,7 +594,8 @@ void serviceNpcStream(ULONGLONG tick){
         }
         if(tick-c.helloAt>=500){c.helloAt=tick;sendNpcControl(c,NpcAuthorityMessage::Hello);}
         if(localRole&&c.ready&&tick-c.readyAt>=500){c.readyAt=tick;sendNpcControl(c,NpcAuthorityMessage::Ready);}
-        if(!localRole&&c.ready&&tick-c.lastSend>=poseInterval){if(bulkTransportCongested(tick))++bulkCongestionSkips;else{c.lastSend=tick;sendNpcPose(c);}}
+        const bool priority=!localRole&&tick<c.hostOwnPairedUntil;
+        if(!localRole&&c.ready&&tick-c.lastSend>=(priority?50:poseInterval)){if(!priority&&bulkTransportCongested(tick))++bulkCongestionSkips;else{c.lastSend=tick;sendNpcPose(c);if(priority){++c.priorityPoses;++npcPriorityPoses;}}}
         if(localRole&&c.ready){
             const bool stale=npcStreamPoseStale(tick,c.started,c.poseAt);
             if(stale&&!c.poseStale)++c.poseGaps;
@@ -612,7 +629,8 @@ void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs);
-    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses));}
+    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),c.lease.ready?"true":"false",
+        static_cast<unsigned long long>(c.poseRejects[0]),static_cast<unsigned long long>(c.poseRejects[1]),static_cast<unsigned long long>(c.poseRejects[2]),static_cast<unsigned long long>(c.poseRejects[3]),static_cast<unsigned long long>(c.poseRejects[4]),c.lastPoseLateMs);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
     fputs("],\"poseDiagnostics\":[",f);for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"stale\":%s,\"gaps\":%llu,\"recoveries\":%llu,\"failures\":%llu,\"lastFailure\":\"%s\",\"joint\":%d,\"matrix\":[",i?",":"",c.arm,c.lease.binding.npc.handle,c.poseStale?"true":"false",c.poseGaps,c.poseRecoveries,c.poseFailures,c.poseFailure,c.poseFailureJoint);
         for(unsigned j=0;j<12;++j)fprintf(f,"%s%.9g",j?",":"",c.poseFailureMatrix[j]);fputs("],\"root\":[",f);
@@ -620,7 +638,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcDeadReconciled,npcDeadSent,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}}\n",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

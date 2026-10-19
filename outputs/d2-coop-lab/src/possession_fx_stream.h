@@ -57,7 +57,8 @@ void servicePossessionTargetFx(ULONGLONG tick){
     if(m.sourceId&&(m.fx.game!=observedGame||m.fx.epoch!=outgoing.worldEpoch)){m={};++possessionFxRetired;}
     if(!coopGameplayReady(outgoing))return; // Native pause freezes world; cleanup before resume playback.
     const bool ready=localRole==1&&possessionFxCurrent(tick)&&s.lease>tick&&movementBankActive()&&coopGameplayReady(remote)&&
-        !std::strcmp(mapName,kGuardMap)&&observerIsolation.ready&&observerIsolation.movementFixture&&probeDoppelganger&&avatarAiHeld&&probeFollowExact&&
+        // 1214ej: product sessions too, on any paired map.
+        ((!std::strcmp(mapName,kGuardMap)&&observerIsolation.ready&&observerIsolation.movementFixture)||productSessionArmed())&&probeDoppelganger&&avatarAiHeld&&probeFollowExact&&
         avatarAiTarget.actor==probeActor&&worldIdentityEntity(memoryRead,observedGame,probeHandle)==probeActor;
     const bool snapshot=ready&&p.sequence!=possessionFxAppliedSequence;
     if(m.sourceId&&(!ready||!p.present||m.fx.actor!=probeActor||m.fx.owner!=probeHandle||m.token!=s.token||m.peerToken!=s.peerToken||m.event!=p.event||m.sourceId!=p.id||m.target!=p.target))stopPossessionTargetFx();

@@ -1,0 +1,59 @@
+"""Writes completion-audit-v1511-power-upgrades.json (#11 power_upgrade_variants): every power upgrade that changes what the
+partner sees of the caster, of the power's own entities or of its effects is presented; upgrades whose effect is a world
+outcome are stage 4 (#117, #115)."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("The 35 power upgrades were classified from their exported attribute declarations (power-upgrade-attributes-v1499; "
+     "confirmed static) and granted by name in lab-only takes under the product controller. Action, body, entity and effect "
+     "variants are presented: Blink Assault (the kick, audit v1356); Windblast Shockwave (the landing cast, variant 11, and "
+     "since 1214ej its blast and ground wave as remote copies of the native effects without their screen layers, 1503a); "
+     "Greater Windblast (the stronger blast, 1503b); Possession of humans (Corvo hidden while he occupies a human, audit "
+     "v1341, and the native possession of a walking mission overseer, 1492a); Doppelganger Transposition (the swap, 1487a); "
+     "Twin Shade (two clone slots since 1214eh, 1497a); Devouring Swarm Bigger, Follow Player and Double (25-rat packs, rats "
+     "following Corvo, and two packs since 1214ek, the older one in the same packet; the partner's rats now also run in "
+     "product sessions, 1503c, 1506a); Far Reach object pull (audit v1479). Numeric upgrades change no presented motion "
+     "(Bend Time and Possession durations, Blink distance, Mesmerize duration, Shadow Walk reach and extra attacks, which "
+     "repeat the accepted form kill of audit v1393); Domino links 3 and 4 and Mesmerize three and four fit the presentations' "
+     "capacities (4 marks and 6 beams; 5 eyes and 15 links; confirmed static); Dark Vision Greater and Premonition are "
+     "first-person and keep the native viewer scope. Upgrades whose effect is a world outcome (time factors of Bend Time, "
+     "Blink and Far Reach; kills and confusion from Greater Windblast, Deadly and Baffling Shade, Domino Death Link, Shadow "
+     "Kill and Rat Shadow; possessed corpses and host swaps; Mesmerize in combat) are stage 4 world authority (#117), and the "
+     "body pull is #115.")
+items = [dict(id='power_upgrade_variants', decision='complete',
+    scope=("Both roles: every power upgrade that changes the caster's presented action or the power's presented entities and "
+           "effects (Blink Assault, Shockwave, Greater Windblast, Possession of humans, Transposition, Twin Shade, Bigger, "
+           "Follow and Double Swarm, Far Reach object pull), with numeric and first-person upgrades unchanged in presentation. "
+           "World outcomes of upgrades are stage 4 (#117, #115)."),
+    takes=[{'take': 'coverage-v1503a', 'cases': ['host-upgshockwave2']},
+           {'take': 'coverage-v1503b', 'cases': ['host-upgwbgreater']},
+           {'take': 'coverage-v1503c', 'cases': ['host-upgswarmfollow']},
+           {'take': 'coverage-v1504a', 'cases': ['host-upgswarmdouble']},
+           {'take': 'coverage-v1506a', 'cases': ['host-upgswarmdouble2']},
+           {'take': 'coverage-v1497a', 'cases': ['client-upgtwinshade2']},
+           {'take': 'coverage-v1487a', 'cases': ['client-upgtransposition']},
+           {'take': 'mission-coverage-v1492a', 'cases': ['host-takedown']},
+           {'take': 'coverage-v1332f', 'cases': ['host-possesshuman']},
+           {'take': 'coverage-v1359b', 'cases': ['host-blinkkick']}],
+    visual=[
+        {'video': 'coverage-v1503a/host-upgshockwave2-observer.mp4',
+         'verdict': "Emily's window: Corvo drops in and lands crouched inside a large swirling wind blast while a wave runs along the floor around him. Accepted."},
+        {'video': 'coverage-v1503b/host-upgwbgreater-observer.mp4',
+         'verdict': "Emily's window: Corvo thrusts his hand out and heavy white wind streaks fly from it, wider than the plain blast. Accepted."},
+        {'video': 'coverage-v1503c/host-upgswarmfollow-observer.mp4',
+         'verdict': "Emily's window (product session): Corvo summons the swarm and the rats run after him as he walks off. Accepted."},
+        {'video': 'coverage-v1506a/host-upgswarmdouble2-observer.mp4',
+         'verdict': "Emily's window: each cast throws a smoke burst and a pack of rats; after the second both packs, about thirty rats, swarm around Corvo's feet. Accepted."},
+        {'video': 'coverage-v1497a/client-upgtwinshade2-observer.mp4',
+         'verdict': "Corvo's window: Emily casts, the first shade appears beside her and walks off, she turns and casts again and the second shade rises in smoke; both are shown at once (status). Accepted."},
+        {'video': 'coverage-v1487a/client-upgtransposition-observer.mp4',
+         'verdict': "Corvo's window: Emily casts, the shade rises, and she reappears at the shade's place. Accepted."},
+        {'video': 'mission-coverage-v1492a/host-takedown-source.mp4',
+         'verdict': "Corvo's own film on Edge of the World: the possession cast, the vortex, the possessed walk and the overseer staggering with a hand to his head after the exit; the partner side of possessing a human is coverage-v1332f. Accepted."},
+        {'video': 'coverage-v1332f/host-possesshuman-observer.mp4',
+         'verdict': "Emily's window: Corvo thrusts his arm toward the guard and vanishes; only the guard is seen, then Corvo reappears beside him (audit v1341). Accepted."}])]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1511-power-upgrades', family='powers', candidate='candidate-npc-combat-v1214ek', method=M, items=items)
+(N / 'completion-audit-v1511-power-upgrades.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))

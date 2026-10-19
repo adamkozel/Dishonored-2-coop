@@ -1,0 +1,71 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,39,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,39,64)",
+      "checks": [],
+      "targetCandidates": [
+        "script_spawner_clock_gallery_2=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_private=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_gallery_1=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_lab_office_2=models/characters/def/generic/clockwork_01.def",
+        "script_spawner_clock_atrium=models/characters/def/generic/clockwork_01.def",
+        "script_spawner_clock_ambush_2=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_ambush_1=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_showcase=models/characters/def/generic/clockwork_defender_01.def",
+        "script_spawner_clock_lab_office_1=models/characters/def/generic/clockwork_01.def",
+        "script_spawner_clock_maze=models/characters/def/generic/clockwork_01.def",
+        "script_spawner_clock_upstairs=models/characters/def/generic/clockwork_defender_01.def"
+      ],
+      "targetChosen": "script_spawner_clock_gallery_2=models/characters/def/generic/clockwork_defender_01.def",
+      "target": {
+        "spawner": "script_spawner_clock_gallery_2",
+        "definition": "models/characters/def/generic/clockwork_defender_01.def",
+        "position": [
+          37.2866,
+          20.6648,
+          1.40986
+        ],
+        "forward": [
+          0.9999763886104068,
+          0.006871842670532631
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        36.81599509711372,
+        23.661636836629484,
+        3.0098599999999998
+      ],
+      "sourceStart": [
+        36.387,
+        20.659,
+        1.41351
+      ],
+      "replacedAt": 491,
+      "cameraMoved": [
+        36.81599509711372,
+        23.661636836629484,
+        3.0098599999999998
+      ],
+      "targetMoved": 0.0,
+      "actedAt": 1042,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        39,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

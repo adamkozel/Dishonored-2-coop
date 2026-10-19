@@ -1,0 +1,107 @@
+{
+  "source": "host",
+  "case": "heldbottle",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presents the use reach (peak weight 1)",
+    "Native pickup took the item on the source",
+    "Held object: source phases 0,1,2,3,4; source holds 1, releases 1, settles 1, breaks 1; observer pinned samples 13, applied 92, followed 32, settled 220, broken 1, refused 3, results idle,held,following,settled,broken",
+    "Release gesture: observer use variants 0,6,8; source throws 1, drops 0",
+    "Held at 2796 ms: observer bottle 0.47 m from the partner, 1.25 m up",
+    "Held at 3439 ms: observer bottle 0.47 m from the partner, 1.25 m up",
+    "Both copies broken"
+  ],
+  "inputAt": "2026-10-19T08:37:10.3524811+02:00",
+  "holdDumps": 0,
+  "holdStateType": [],
+  "lootSamples": 0,
+  "slotPresses": [
+    {
+      "ms": 3710,
+      "slot": "RT throw"
+    }
+  ],
+  "potionCounts": [],
+  "peakUseWeight": 0.9999999,
+  "targetValid": false,
+  "itemTaken": true,
+  "activeSets": [
+    "0",
+    "0,49,81",
+    "0,49"
+  ],
+  "caseCounts": {
+    "sourceBreaks": 1,
+    "observerBroken": 1,
+    "observerFollowed": 32
+  },
+  "heldFinal": {
+    "ms": 13881,
+    "src": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 1,
+      "releases": 1,
+      "settles": 1,
+      "breaks": 1,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 192,
+      "followed": 93,
+      "settledApplied": 654,
+      "broken": 1,
+      "presentRefused": 12,
+      "throws": 1,
+      "drops": 0,
+      "result": "settled"
+    },
+    "obs": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 2,
+      "releases": 2,
+      "settles": 2,
+      "breaks": 1,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 92,
+      "followed": 32,
+      "settledApplied": 220,
+      "broken": 1,
+      "presentRefused": 3,
+      "throws": 1,
+      "drops": 1,
+      "result": "broken"
+    }
+  },
+  "sourcePhases": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "observerResults": [
+    "idle",
+    "held",
+    "following",
+    "settled",
+    "broken"
+  ],
+  "observerUseVariants": [
+    0,
+    6,
+    8
+  ],
+  "sourceBottle": null,
+  "observerBottle": [
+    -43.4866,
+    -163.004,
+    67.3238
+  ],
+  "restored": true
+}

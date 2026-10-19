@@ -19,7 +19,14 @@ inline void doppelgangerWorldTests(Memory initial,std::uintptr_t base,std::uintp
     auto inlineDecl=m;inlineDecl.str(name+0x200,"unnamed");inlineDecl.q(decl+0x48,parent);inlineDecl.q(parent,base+0x1d20068);inlineDecl.q(parent+8,name+0x400);inlineDecl.str(name+0x400,"components/characters/player/base/powers/decoy/decoy.cpntdecoy");
     require(inspect(inlineDecl)&&out.parentDeclaration==parent,"inherited native decoy component remains exact");
     auto bad=inlineDecl;bad.q(parent,base+0x1b52118);require(!inspect(bad),"power declaration cannot impersonate decoy component");
-    bad=m;bad.d(pc+0xc0,2);require(!inspect(bad),"unobserved multiple-clone scope refused");
+    // 1214eh: Twin Shade keeps two committed clones; each slot reads its own entry.
+    bad=m;bad.d(pc+0xc0,3);require(!inspect(bad),"more clones than Twin Shade's two refused");
+    bad=m;bad.d(pc+0xc0,2);bad.d(array+4,handle);require(!inspect(bad),"duplicate committed clone entries refused");
+    bad=m;bad.d(pc+0xc0,2);bad.d(array+4,handle+0x10000);bad.d(pc+0xd4,handle+0x20000);require(!inspect(bad),"last clone must be one of two committed entries");
+    {auto two=m;two.d(pc+0xc0,2);two.d(array+4,handle+0x10000);two.d(pc+0xd4,handle+0x10000);two.q(game+0x3130b0+((handle+0x10000)>>16)*8,0);
+     require(inspect(two)&&out.present&&out.handle==handle,"first of two committed clones read in slot 0");
+     NativeDoppelgangerWorld second{};require(readNativeDoppelgangerWorld([&](auto a,auto b,auto n){return two.read(a,b,n);},base,second,nullptr,nullptr,1)&&second.handle==handle+0x10000&&!second.present&&second.retired,"second committed clone read in slot 1 (unregistered here, so retired)");
+     NativeDoppelgangerWorld third{};require(readNativeDoppelgangerWorld([&](auto a,auto b,auto n){return two.read(a,b,n);},base,third,nullptr,nullptr,2)&&!third.present&&!third.retired,"slot beyond the committed clones reports absence");}
     bad=m;bad.d(pc+0xd4,handle+1);require(!inspect(bad),"last clone must agree with committed array");
     bad=m;bad.d(actor+0xa8,handle+1);require(inspect(bad)&&!out.present&&out.retired,"recycled registry slot proves tracked incarnation retired");
     bad=m;bad.q(game+0x3130b0+(handle>>16)*8,0);require(inspect(bad)&&out.retired&&!out.present,"stable empty registry slot proves tracked incarnation retired");

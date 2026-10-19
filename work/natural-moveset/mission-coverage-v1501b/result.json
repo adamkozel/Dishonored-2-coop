@@ -1,0 +1,74 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,44,64)",
+      "checks": [],
+      "targetCandidates": [
+        "ld_spawner_elite_male_2=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_elite_male_1=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_elite_male=models/characters/def/generic/elite_male_tall_01.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "ld_spawner_elite_male_2",
+          "err": 0.0,
+          "dz": 0.02
+        }
+      ],
+      "targetChosen": "ld_spawner_elite_male_2=models/characters/def/generic/elite_male_tall_01.def",
+      "target": {
+        "spawner": "ld_spawner_elite_male_2",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          -88.5109,
+          -60.4796,
+          -19.2626
+        ],
+        "forward": [
+          0.2064590510257414,
+          -0.9784552418223076
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -85.66844084749467,
+        -59.41991798810274,
+        -17.662599999999998
+      ],
+      "sourceStart": [
+        -88.9678,
+        -58.3296,
+        -19.2459
+      ],
+      "replacedAt": 506,
+      "cameraMoved": [
+        -85.24581921798213,
+        -64.45183948924375,
+        -17.674899999999997
+      ],
+      "targetMoved": 3.32,
+      "crept": 1385,
+      "creptEnd": 1715,
+      "stanceAfterCreep": 1,
+      "actedAt": 1749,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

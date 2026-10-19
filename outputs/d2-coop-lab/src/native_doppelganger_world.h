@@ -5,6 +5,8 @@
 // generated names, preview handles and the co-op avatar never select it.
 // Static43c950 and raw406b/409/411 identify +b8/+c0/+d4. Runtime reciprocal
 // validation is required before this observer can source presentation.
+// 1214eh (#11 power_upgrade_variants): Twin Shade keeps two committed clones at once.
+constexpr unsigned kDoppelgangerArraySlots=2;
 struct NativeDoppelgangerWorld {
     NativeDoppelgangerItem equipment{};
     std::uintptr_t handles=0,actor=0,definition=0,components=0,component=0,declaration=0,parentDeclaration=0;
@@ -19,16 +21,23 @@ inline bool validDoppelgangerTransform(const std::array<float,12>& t){
     for(unsigned i=0;i<3;++i)for(unsigned j=i;j<3;++j){float dot=0;for(unsigned k=0;k<3;++k)dot+=t[3+i*3+k]*t[3+j*3+k];if(std::fabs(dot-(i==j?1.f:0.f))>.02f)return false;}
     const float det=t[3]*(t[7]*t[11]-t[10]*t[8])-t[6]*(t[4]*t[11]-t[10]*t[5])+t[9]*(t[4]*t[8]-t[7]*t[5]);return det>.98f&&det<1.02f;
 }
-template<class Read> bool readNativeDoppelgangerWorldFrame(Read read,std::uintptr_t base,NativeDoppelgangerWorld& s,unsigned* stage=nullptr,const NativeDoppelgangerItem* known=nullptr){
+template<class Read> bool readNativeDoppelgangerWorldFrame(Read read,std::uintptr_t base,NativeDoppelgangerWorld& s,unsigned* stage=nullptr,const NativeDoppelgangerItem* known=nullptr,unsigned cloneSlot=0){
     const auto mark=[&](unsigned n){if(stage)*stage=n;};mark(1);
     if(!(known?readCurrentNativeDoppelgangerEquipment(read,base,*known,s.equipment):readNativeDoppelgangerItem(read,base,s.equipment)))return false;
     if(!s.equipment.instantiated){mark(0);return true;}
     const auto pc=s.equipment.component,game=s.equipment.player.sword.game;
     mark(2);
-    if(!read(pc+0xb8,&s.handles,8)||!read(pc+0xc0,&s.arrayFlags,4)||(s.arrayFlags&0xffffff)>1||
+    // 1214eh: each slot reads its own committed entry (Twin Shade: two); the last spawned (+d4)
+    // must be the one entry, or one of the two.
+    if(!read(pc+0xb8,&s.handles,8)||!read(pc+0xc0,&s.arrayFlags,4)||(s.arrayFlags&0xffffff)>kDoppelgangerArraySlots||
        !read(pc+0xb0,&s.preview,4)||!read(pc+0xd4,&s.last,4))return false;
-    if(!(s.arrayFlags&0xffffff)){mark(0);return true;}
-    if(!s.handles||!read(s.handles,&s.handle,4)||s.handle==0x3fff0010||s.handle==1||s.handle!=s.last)return false;
+    const unsigned committed=s.arrayFlags&0xffffff;
+    if(cloneSlot>=committed){mark(0);return true;}
+    std::array<unsigned,kDoppelgangerArraySlots> entries{};
+    if(!s.handles||!read(s.handles,entries.data(),committed*4))return false;
+    for(unsigned i=0;i<committed;++i)if(entries[i]==0x3fff0010||entries[i]==1)return false;
+    if(committed==2&&entries[0]==entries[1])return false;
+    s.handle=entries[cloneSlot];if(committed==1?s.handle!=s.last:(entries[0]!=s.last&&entries[1]!=s.last))return false;
     mark(3);
     // A stale array entry is native behavior:43c950 prunes it on a later cast.
     // Successful registry reads can prove retirement. A read failure cannot.
@@ -61,9 +70,9 @@ template<class Read> bool readNativeDoppelgangerWorldFrame(Read read,std::uintpt
     mark(5);if(!read(s.component+0xa0,&s.rawA0,4)||!read(s.actor+0x300,s.transform.data(),sizeof(s.transform))||!validDoppelgangerTransform(s.transform))return false;
     s.present=true;mark(0);return true;
 }
-template<class Read> bool readNativeDoppelgangerWorld(Read read,std::uintptr_t base,NativeDoppelgangerWorld& out,unsigned* stage=nullptr,const NativeDoppelgangerItem* known=nullptr){
+template<class Read> bool readNativeDoppelgangerWorld(Read read,std::uintptr_t base,NativeDoppelgangerWorld& out,unsigned* stage=nullptr,const NativeDoppelgangerItem* known=nullptr,unsigned slot=0){
     NativeDoppelgangerWorld a{},b{};
-    if(!readNativeDoppelgangerWorldFrame(read,base,a,stage,known)||!readNativeDoppelgangerWorldFrame(read,base,b,stage,known))return false;
+    if(!readNativeDoppelgangerWorldFrame(read,base,a,stage,known,slot)||!readNativeDoppelgangerWorldFrame(read,base,b,stage,known,slot))return false;
     if(stage)*stage=6;
     const auto& x=a.equipment;const auto& y=b.equipment;
     if(!sameSwordEquipmentIdentity(x.player.sword,y.player.sword)||x.entry!=y.entry||x.component!=y.component||x.entity!=y.entity||x.handle!=y.handle||

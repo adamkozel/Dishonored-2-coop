@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:09:00.198184+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T10:11:55.851792+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -5365,7 +5365,7 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
   ],
   "deliverable_kind": "animation",
   "notes": "Full-body cast studies with native caster acting and D2 first-person phase timing/finger articulation. Wrists follow the body freely. Effects, target contact, character availability, gameplay binding and visual acceptance remain pending. Pull gesture only; object/enemy attachment, weight, trajectories and variants are not demonstrated. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "far_reach",
@@ -5388,10 +5388,35 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
     }
   ],
   "in_game_recordings": [],
-  "native_effects_status": "not_verified"
+  "native_effects_status": "not_verified",
+  "completion": {
+    "audit": "completion-audit-v1479-far-reach-pull.json",
+    "decision": "complete",
+    "scope": "Emily: the Far Reach pull (aim, release, pullIn, the loop when native, pullOut) presented on the partner from the native pull state and scenes, after the native lock onto a target. The pulled object's physics and the body pull are stage 4 world authority (#115).",
+    "takes": [
+      {
+        "take": "object-carry-v1471b",
+        "cases": [
+          "client-farreachbottle"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
+        "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "object-carry-v1471b/result.json"
+  ]
 }
 ````
 
+- [evidence: object-carry-v1471b/result.json](<../../../../work/natural-moveset/object-carry-v1471b/result.json>)
 ## emily_dark_vision_cast_end
 
 Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.
@@ -10252,7 +10277,7 @@ Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, 
   ],
   "deliverable_kind": "animation",
   "notes": "Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, effects and action/state variants are not covered by these clips. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "power_variants",
@@ -10270,10 +10295,135 @@ Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, 
     }
   ],
   "in_game_recordings": [],
-  "native_effects_status": "not_verified"
+  "native_effects_status": "not_verified",
+  "completion": {
+    "audit": "completion-audit-v1511-power-upgrades.json",
+    "decision": "complete",
+    "scope": "Both roles: every power upgrade that changes the caster's presented action or the power's presented entities and effects (Blink Assault, Shockwave, Greater Windblast, Possession of humans, Transposition, Twin Shade, Bigger, Follow and Double Swarm, Far Reach object pull), with numeric and first-person upgrades unchanged in presentation. World outcomes of upgrades are stage 4 (#117, #115).",
+    "takes": [
+      {
+        "take": "coverage-v1503a",
+        "cases": [
+          "host-upgshockwave2"
+        ]
+      },
+      {
+        "take": "coverage-v1503b",
+        "cases": [
+          "host-upgwbgreater"
+        ]
+      },
+      {
+        "take": "coverage-v1503c",
+        "cases": [
+          "host-upgswarmfollow"
+        ]
+      },
+      {
+        "take": "coverage-v1504a",
+        "cases": [
+          "host-upgswarmdouble"
+        ]
+      },
+      {
+        "take": "coverage-v1506a",
+        "cases": [
+          "host-upgswarmdouble2"
+        ]
+      },
+      {
+        "take": "coverage-v1497a",
+        "cases": [
+          "client-upgtwinshade2"
+        ]
+      },
+      {
+        "take": "coverage-v1487a",
+        "cases": [
+          "client-upgtransposition"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1492a",
+        "cases": [
+          "host-takedown"
+        ]
+      },
+      {
+        "take": "coverage-v1332f",
+        "cases": [
+          "host-possesshuman"
+        ]
+      },
+      {
+        "take": "coverage-v1359b",
+        "cases": [
+          "host-blinkkick"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1503a/host-upgshockwave2-observer.mp4",
+        "verdict": "Emily's window: Corvo drops in and lands crouched inside a large swirling wind blast while a wave runs along the floor around him. Accepted."
+      },
+      {
+        "video": "coverage-v1503b/host-upgwbgreater-observer.mp4",
+        "verdict": "Emily's window: Corvo thrusts his hand out and heavy white wind streaks fly from it, wider than the plain blast. Accepted."
+      },
+      {
+        "video": "coverage-v1503c/host-upgswarmfollow-observer.mp4",
+        "verdict": "Emily's window (product session): Corvo summons the swarm and the rats run after him as he walks off. Accepted."
+      },
+      {
+        "video": "coverage-v1506a/host-upgswarmdouble2-observer.mp4",
+        "verdict": "Emily's window: each cast throws a smoke burst and a pack of rats; after the second both packs, about thirty rats, swarm around Corvo's feet. Accepted."
+      },
+      {
+        "video": "coverage-v1497a/client-upgtwinshade2-observer.mp4",
+        "verdict": "Corvo's window: Emily casts, the first shade appears beside her and walks off, she turns and casts again and the second shade rises in smoke; both are shown at once (status). Accepted."
+      },
+      {
+        "video": "coverage-v1487a/client-upgtransposition-observer.mp4",
+        "verdict": "Corvo's window: Emily casts, the shade rises, and she reappears at the shade's place. Accepted."
+      },
+      {
+        "video": "mission-coverage-v1492a/host-takedown-source.mp4",
+        "verdict": "Corvo's own film on Edge of the World: the possession cast, the vortex, the possessed walk and the overseer staggering with a hand to his head after the exit; the partner side of possessing a human is coverage-v1332f. Accepted."
+      },
+      {
+        "video": "coverage-v1332f/host-possesshuman-observer.mp4",
+        "verdict": "Emily's window: Corvo thrusts his arm toward the guard and vanishes; only the guard is seen, then Corvo reappears beside him (audit v1341). Accepted."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "coverage-v1503a/result.json",
+    "coverage-v1503b/result.json",
+    "coverage-v1503c/result.json",
+    "coverage-v1504a/result.json",
+    "coverage-v1506a/result.json",
+    "coverage-v1497a/result.json",
+    "coverage-v1487a/result.json",
+    "mission-coverage-v1492a/result.json",
+    "coverage-v1332f/result.json",
+    "coverage-v1359b/result.json"
+  ]
 }
 ````
 
+- [evidence: coverage-v1503a/result.json](<../../../../work/natural-moveset/coverage-v1503a/result.json>)
+- [evidence: coverage-v1503b/result.json](<../../../../work/natural-moveset/coverage-v1503b/result.json>)
+- [evidence: coverage-v1503c/result.json](<../../../../work/natural-moveset/coverage-v1503c/result.json>)
+- [evidence: coverage-v1504a/result.json](<../../../../work/natural-moveset/coverage-v1504a/result.json>)
+- [evidence: coverage-v1506a/result.json](<../../../../work/natural-moveset/coverage-v1506a/result.json>)
+- [evidence: coverage-v1497a/result.json](<../../../../work/natural-moveset/coverage-v1497a/result.json>)
+- [evidence: coverage-v1487a/result.json](<../../../../work/natural-moveset/coverage-v1487a/result.json>)
+- [evidence: mission-coverage-v1492a/result.json](<../../../../work/natural-moveset/mission-coverage-v1492a/result.json>)
+- [evidence: coverage-v1332f/result.json](<../../../../work/natural-moveset/coverage-v1332f/result.json>)
+- [evidence: coverage-v1359b/result.json](<../../../../work/natural-moveset/coverage-v1359b/result.json>)
 ## power_interruptions_and_no_mana
 
 Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failures and pause recovery read correctly. A late relaxed-stance switch after the resume tests should be checked, and no Emily or other-power interruption recordings exist (outside the bound scope). Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.

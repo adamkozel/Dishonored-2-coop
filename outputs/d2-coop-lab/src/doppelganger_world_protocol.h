@@ -6,7 +6,7 @@
 // This presentation channel cannot authorize AI, interactions or damage.
 #pragma pack(push,1)
 struct CoopDoppelgangerWorldPacket {
-    std::uint32_t magic=0x43443244;std::uint16_t version=4,size=10712;
+    std::uint32_t magic=0x43443244;std::uint16_t version=5,size=10716;
     std::uint32_t build=0x67a50cde,role=1;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0,sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
     std::uint64_t sourceToken=0,targetToken=0,event=0,sampleTimeUs=0;
@@ -17,9 +17,12 @@ struct CoopDoppelgangerWorldPacket {
     std::uint64_t rig=0;
     std::array<std::array<float,12>,kDoppelgangerJoints> local{};
     std::uint32_t fxKnown=0,fxScene=0,fxVariant=0,fxTimeMs=0;
+    // 1214eh (#11 power_upgrade_variants): the clone's slot; each slot is its own ordered stream.
+    std::uint32_t slot=0;
 };
 #pragma pack(pop)
-static_assert(sizeof(CoopDoppelgangerWorldPacket)==10712);
+static_assert(sizeof(CoopDoppelgangerWorldPacket)==10716);
+constexpr unsigned kDoppelgangerWireSlots=2; // Twin Shade keeps two shades
 inline unsigned doppelgangerFxDuration(unsigned variant){return variant==1?1000:variant==2?466:0;}
 inline std::uint64_t doppelgangerWorldDigest(const CoopDoppelgangerWorldPacket& p){
     std::uint64_t h=14695981039346656037ull;const auto* bytes=reinterpret_cast<const unsigned char*>(&p);
@@ -27,7 +30,7 @@ inline std::uint64_t doppelgangerWorldDigest(const CoopDoppelgangerWorldPacket& 
 }
 inline bool validDoppelgangerWorldPacket(const CoopDoppelgangerWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer,unsigned* failure=nullptr){
     if(failure)*failure=0;const auto fail=[&](unsigned line){if(failure)*failure=line;return false;};
-    if(p.magic!=0x43443244||p.version!=4||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x43443244||p.version!=5||p.slot>=kDoppelgangerWireSlots||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return fail(__LINE__);
@@ -47,7 +50,7 @@ inline bool validDoppelgangerWorldPacket(const CoopDoppelgangerWorldPacket& p,co
     return true;
 }
 inline bool sameDoppelgangerIncarnation(const CoopDoppelgangerWorldPacket& a,const CoopDoppelgangerWorldPacket& b){
-    return a.present==b.present&&a.nativeHandle==b.nativeHandle&&a.equipmentHandle==b.equipmentHandle&&a.generation==b.generation;
+    return a.slot==b.slot&&a.present==b.present&&a.nativeHandle==b.nativeHandle&&a.equipmentHandle==b.equipmentHandle&&a.generation==b.generation;
 }
 struct DoppelgangerWorldOrder {
     CoopDoppelgangerWorldPacket last{};
