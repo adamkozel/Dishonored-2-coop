@@ -4,8 +4,9 @@ param([string]$Take='sitting-survey-v1528a',[string]$Maps='campaign/edge_of_the_
 # TIProvide_ProvideTargetIsSitting 0x14082d200; chapter 100, confirmed static). Each map is loaded in both instances
 # (low chaos, host Corvo, client Emily) and the host is sampled every IntervalMs for Samples samples while the players
 # stay at the mission start. Read-only probes; Dunwall fixture restored.
+# 1528b: the map rows are $mapRows (1528a: a list named $maps overwrote the -Maps parameter; PowerShell names ignore case).
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
-$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$maps=[Collections.Generic.List[object]]::new()
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$mapRows=[Collections.Generic.List[object]]::new()
 function Save($p,$v){$v|ConvertTo-Json -Depth 15|Set-Content -LiteralPath $p}
 function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
 function S($r,$suffix=''){for($i=0;$i-lt40;$i++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
@@ -32,16 +33,16 @@ try{
  $dirty=$true
  foreach($map in @($Maps-split';'|Where-Object {$_})){$tag=($map-replace'^campaign/','')-replace'[^a-z0-9]+','-'
   C host "campaign $map low corvo";C client "campaign $map low emily"
-  $g=WaitGameplay 300000;Save "$out/$tag-load-log.json" $g.log;if(!$g.ready){$maps.Add([ordered]@{map=$map;loaded=$false});continue}
+  $g=WaitGameplay 300000;Save "$out/$tag-load-log.json" $g.log;if(!$g.ready){$mapRows.Add([ordered]@{map=$map;loaded=$false});continue}
   $seen=@{};$trace=[Collections.Generic.List[object]]::new()
   for($k=0;$k-lt$Samples;$k++){$q=try{Q host '--sitting'}catch{$null};if(!$q){Start-Sleep -Milliseconds $IntervalMs;continue}
    $sit=@($q.npcs|Where-Object {$_.sitting});$trace.Add([ordered]@{k=$k;tick=$q.tick;npcs=@($q.npcs).Count;sitting=@($sit|ForEach-Object {$_.spawnerName})})
    foreach($n in $sit){$key=$n.spawnerName;if(!$seen.ContainsKey($key)){$seen[$key]=[ordered]@{spawnerName=$n.spawnerName;definition=$n.definition;unique=$n.unique;handle=$n.handle;first=$k;count=0;position=$n.position;requests=$n.requests}};$seen[$key].count++}
    Start-Sleep -Milliseconds $IntervalMs}
   Save "$out/$tag-trace.json" @($trace);$last=try{Q host '--sitting'}catch{$null};if($last){Save "$out/$tag-last.json" $last}
-  $maps.Add([ordered]@{map=$map;loaded=$true;samples=$trace.Count;npcs=$(if($last){@($last.npcs).Count}else{$null});seated=@($seen.Values)})}
- Save "$out/survey.json" @($maps)
- if(!@($maps|Where-Object {$_.loaded}).Count){$failure='No map loaded'}
+  $mapRows.Add([ordered]@{map=$map;loaded=$true;samples=$trace.Count;npcs=$(if($last){@($last.npcs).Count}else{$null});seated=@($seen.Values)})}
+ Save "$out/survey.json" @($mapRows)
+ if(!@($mapRows|Where-Object {$_.loaded}).Count){$failure='No map loaded'}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}
 finally{
  if($owned){
@@ -57,7 +58,7 @@ finally{
   foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw 'Final gameplay/health/transport not restored'}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
   foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}
   Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '}
-  Save "$out/result.json" @{passed=(!$failure);failure=$failure;maps=@($maps);scope='Seated NPC survey with the native seated test input (type-1 navigation request), per map at the mission start; Dunwall fixture restored.'}
+  Save "$out/result.json" @{passed=(!$failure);failure=$failure;maps=@($mapRows);scope='Seated NPC survey with the native seated test input (type-1 navigation request), per map at the mission start; Dunwall fixture restored.'}
   [ordered]@{pid=$PID;operation='SittingSurvey1528';take=$Take;ended=(Get-Date).ToString('o');state='finished'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
   $mutex.ReleaseMutex()
  };$mutex.Dispose()

@@ -1,4 +1,4 @@
-param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[string]$Candidate='candidate-npc-combat-v1214em',[int]$MaxBeyond=60,[switch]$Shots)
+param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[string]$Candidate='candidate-npc-combat-v1214em',[int]$MaxBeyond=60,[switch]$Shots,[string]$Yaws='0,45,90,135,180,225,270,315')
 # 1527 (#11 wall_and_window_variants): find natural "window" geometry for the native window takedown with the native
 # sensor itself (probe --window-sensor, 1214em; chapter 100). The sensor's shin sweep and opening queries run every frame
 # whatever the target (0x1403d64c0, confirmed static), so no NPC is needed: the host is stood on a grid in each region
@@ -8,6 +8,7 @@ param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo=
 # point and the landing is recorded (an NPC must stand there at about the same level). Host only, health held; the
 # client idles at its spawn. Read-only probes, setviewpos and the lab health hold; Dunwall fixture restored.
 # -Shots (1527b): one frame of the host window from each passing stand (shot-<n>.jpg) for review.
+# -Yaws (1527c): the headings tried at each stand (default every 45 degrees), for a fine local scan of one window.
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
 $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$inv=[Globalization.CultureInfo]::InvariantCulture
 $samples=[Collections.Generic.List[object]]::new();$beyond=[Collections.Generic.List[object]]::new();$modals=[Collections.Generic.List[object]]::new()
@@ -52,9 +53,9 @@ try{
   for($i=-$n;$i-le$n;$i++){for($j=-$n;$j-le$n;$j++){if([Math]::Sqrt($i*$i+$j*$j)*$rg[4]-gt$rg[3]){continue}
    if((S host).localGameLogicState-eq13){throw 'The host died during the scan (logic 13)'}
    $x=$rg[0]+$i*$rg[4];$y=$rg[1]+$j*$rg[4]
-   foreach($h in 0..7){$c=Place $x $y $rg[2] ($h*45);if(!$c){$samples.Add([ordered]@{x=$x;y=$y;yaw=$h*45;drop=$true});break}
+   foreach($yw in @($Yaws-split','|ForEach-Object {[double]$_})){$c=Place $x $y $rg[2] $yw;if(!$c){$samples.Add([ordered]@{x=$x;y=$y;yaw=$yw;drop=$true});break}
     Start-Sleep -Milliseconds 120;$w=Q host '--window-sensor'
-    $row=[ordered]@{x=$x;y=$y;yaw=$h*45;at=$c;point=$(if($w.hasPoint){$w.point}else{$null});sill=$w.sill;sillOk=$w.sillOk;grounded=$w.grounded;angleOk=$w.angleOk;target=$w.targetName;forward=$w.forward}
+    $row=[ordered]@{x=$x;y=$y;yaw=$yw;at=$c;point=$(if($w.hasPoint){$w.point}else{$null});sill=$w.sill;sillOk=$w.sillOk;grounded=$w.grounded;angleOk=$w.angleOk;target=$w.targetName;forward=$w.forward}
     $row.pass=($w.hasPoint-and$w.sillOk-and$w.grounded-and$w.sill-ge0.9-and$w.sill-le1.1);$samples.Add($row)}
    if($samples.Count%64-lt8){ClearModals 'scan';Save "$out/samples-progress.json" @($samples)}}}}
  Save "$out/samples.json" @($samples)
