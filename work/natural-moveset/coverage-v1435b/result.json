@@ -1,0 +1,112 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "wallswing",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Wall swings: source states 0@, 3@, 39@, 40@; presented combat variants 1,2,3,4,7,28,29"
+      ],
+      "camera": [
+        -29.3,
+        -150.4,
+        67.9
+      ],
+      "labHitAt": 1041,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 0,
+          "refused": 0,
+          "result": "idle"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "3@",
+        "39@",
+        "40@"
+      ],
+      "combatVariants": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        28,
+        29
+      ],
+      "recoilSource": true,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "wallswing",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Wall swings: source states 0@, 3@, 39@, 40@; presented combat variants 1,2,4,7,28,29"
+      ],
+      "camera": [
+        -29.3,
+        -150.4,
+        67.9
+      ],
+      "labHitAt": 995,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 0,
+          "refused": 0,
+          "result": "idle"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "3@",
+        "39@",
+        "40@"
+      ],
+      "combatVariants": [
+        1,
+        2,
+        4,
+        7,
+        28,
+        29
+      ],
+      "recoilSource": true,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}
