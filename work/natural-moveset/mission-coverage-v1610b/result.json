@@ -1,0 +1,77 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,44,64)",
+      "checks": [],
+      "target": {
+        "spawner": "script_spawner_clock_gallery_2",
+        "definition": "models/characters/def/generic/clockwork_defender_01.def",
+        "position": [
+          37.2866,
+          20.6648,
+          1.40986
+        ],
+        "forward": [
+          0.9999763886104068,
+          0.006871842670532631
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        36.81599509711372,
+        23.661636836629484,
+        3.0098599999999998
+      ],
+      "sourceStart": [
+        35.5833,
+        20.654,
+        1.06936
+      ],
+      "takedownAtPress": {
+        "t": 1569,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "models/characters/def/generic/clockwork_defender_01.def_11711",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 607,
+      "cameraMoved": [
+        36.81599509711372,
+        23.661636836629484,
+        3.0098599999999998
+      ],
+      "targetMoved": 0.0,
+      "crept": 1154,
+      "creptEnd": 1527,
+      "stanceAfterCreep": 1,
+      "actedAt": 1569,
+      "takedownAfter": 1778,
+      "trackSamples": 50,
+      "takedownSamples": 4,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -1,0 +1,76 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,39)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,39)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_hound_office_2",
+        "definition": "models/characters/def/generic/gravehound_01.def",
+        "position": [
+          -7.09949,
+          47.6348,
+          8.50003
+        ],
+        "forward": [
+          -0.00043880895775293713,
+          0.9999999037233446
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -10.099292247139045,
+        47.183483616451234,
+        10.10003
+      ],
+      "sourceStart": [
+        -7.03197,
+        45.9673,
+        8.87099
+      ],
+      "takedownAtPress": {
+        "t": 1667,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "models/characters/def/generic/gravehound_01.def_12232",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 587,
+      "cameraMoved": [
+        -10.099297816858769,
+        48.436668112601495,
+        10.10003
+      ],
+      "targetMoved": 1.24,
+      "crept": 1265,
+      "creptEnd": 1628,
+      "stanceAfterCreep": 1,
+      "actedAt": 1667,
+      "takedownAfter": 1861,
+      "trackSamples": 47,
+      "takedownSamples": 4,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        39
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
