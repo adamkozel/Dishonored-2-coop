@@ -1488,6 +1488,41 @@ int main(int argc, char** argv) {
             <<",\"entry\":\"0x"<<std::hex<<p.entry<<"\",\"component\":\"0x"<<p.component
             <<"\",\"equipmentDeclaration\":\"0x"<<p.equipmentDeclaration<<"\",\"entity\":\"0x"<<p.entity<<"\"}\n";return 0;
     }
+    // 1214et (#102, research): the Timepiece's native identities read generically (item declaration type, component,
+    // equipment declaration name and slot, entity, flags and selection) before an exact reader is written. Read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--player-timepiece-research")){
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};NativePlayerSword player{};
+        if(!readNativePlayerSword(reader,base,player))return 59;
+        const auto& inv=player.sword;std::uintptr_t entry=0,decl=0;
+        for(unsigned i=0;i<inv.itemCount;++i){std::uintptr_t d=0,vt=0,name=0;std::string text;
+            if(!reader(inv.items+i*56,&d,8)||!d||!reader(d,&vt,8))return 59;
+            if(vt!=base+0x1b9ea48)continue;
+            if(!reader(d+8,&name,8)||!worldIdentityString(reader,name,text))return 59;
+            if(text=="models/weapons/timeshift_device/timeshift_device.inventoryitem"){if(entry)return 59;entry=inv.items+i*56;decl=d;}
+        }
+        if(!entry){std::cerr<<"No Timepiece entry\n";return 59;}
+        unsigned type=0,handle=0,flags=0,parent=0,listCount=0,membership=0;int quantity=0,maximum=0,slot=-1;
+        std::uintptr_t component=0,equipDecl=0,componentVt=0,equipVt=0,equipName=0,entity=0,entityVt=0,owner=0,componentEntity=0,list=0;
+        std::string equipText,slot1Text;
+        reader(decl+0x60,&type,4);reader(entry+8,&handle,4);reader(entry+0x10,&component,8);reader(entry+0x18,&equipDecl,8);reader(entry+0x20,&quantity,4);reader(entry+0x24,&maximum,4);
+        if(component){reader(component,&componentVt,8);reader(component+8,&owner,8);reader(component+0x10,&componentEntity,8);reader(component+0x1c,&flags,4);}
+        if(equipDecl){reader(equipDecl,&equipVt,8);if(reader(equipDecl+8,&equipName,8))worldIdentityString(reader,equipName,equipText);reader(equipDecl+0x68,&slot,4);}
+        if(inv.slots[1]){std::uintptr_t d=0,name=0;if(reader(inv.slots[1],&d,8)&&d&&reader(d+8,&name,8))worldIdentityString(reader,name,slot1Text);}
+        entity=handle?worldIdentityEntity(reader,inv.game,handle):0;
+        if(entity){reader(entity,&entityVt,8);reader(entity+0xac,&parent,4);
+            if(reader(entity+0x268,&list,8)&&list&&reader(entity+0x270,&listCount,4))
+                for(unsigned i=0;i<(listCount&0xffffff)&&i<64;++i){std::uintptr_t c=0;if(reader(list+i*8,&c,8)&&c==component)++membership;}}
+        std::cout<<"{\"readOnly\":true,\"research\":true,\"tick\":"<<GetTickCount64()<<",\"character\":"<<player.character<<",\"type\":"<<type<<",\"handle\":"<<handle
+            <<",\"quantity\":"<<quantity<<",\"maximum\":"<<maximum<<",\"slot\":"<<slot<<",\"flags\":"<<flags<<",\"parent\":"<<parent<<",\"membership\":"<<membership
+            <<",\"equipmentName\":"<<jsonString(equipText)<<",\"slot1Item\":"<<jsonString(slot1Text)
+            <<",\"componentType\":"<<jsonString(component?objectType(process.value,base,component):std::string())
+            <<",\"equipmentType\":"<<jsonString(equipDecl?objectType(process.value,base,equipDecl):std::string())
+            <<",\"entityType\":"<<jsonString(entity?objectType(process.value,base,entity):std::string())<<",\"selectedSlots\":[";
+        for(unsigned i=0;i<inv.slots.size();++i)std::cout<<(i?",":"")<<(inv.slots[i]==entry?"true":"false");
+        std::cout<<std::hex<<"],\"entry\":\"0x"<<entry<<"\",\"component\":\"0x"<<component<<"\",\"componentVtableRva\":\"0x"<<(componentVt?componentVt-base:0)
+            <<"\",\"owner\":\"0x"<<owner<<"\",\"equipmentDeclaration\":\"0x"<<equipDecl<<"\",\"equipmentVtableRva\":\"0x"<<(equipVt?equipVt-base:0)
+            <<"\",\"entity\":\"0x"<<entity<<"\",\"entityVtableRva\":\"0x"<<(entityVt?entityVt-base:0)<<"\",\"componentEntity\":\"0x"<<componentEntity<<"\"}\n";return 0;
+    }
     if(argc==3&&!std::strcmp(argv[2],"--player-heart")){
         NativePlayerHeart p{};unsigned stage=0;
         if(!readNativePlayerHeart([&](auto a,auto d,auto n){return read(process.value,a,d,n);},base,p,&stage)){std::cerr<<"Heart reader refused stage="<<stage<<'\n';return 59;}

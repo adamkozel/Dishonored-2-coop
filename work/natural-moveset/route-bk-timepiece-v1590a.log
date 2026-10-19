@@ -1,0 +1,80 @@
+{
+  "passed": false,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 1341,
+        "cine": 1176,
+        "pos": [
+          33.200001,
+          -43.5,
+          -299.996368
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          5,
+          3,
+          2,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 5,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/3/3",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 1341,
+        "cine": 1269,
+        "pos": [
+          39.034,
+          -49.729,
+          -299.996429
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          5,
+          3,
+          2,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "5/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1590.ps1:320[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 320 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m
