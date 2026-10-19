@@ -279,7 +279,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
             p.rangedMoveMix+=(moving-p.rangedMoveMix)*(1-std::exp(-combatDt/.07f));
         }else p.rangedWeight=0;
         StunPresentation::Sample stun{};float stunAmount=0;
-        const bool stunActive=p.bank.hasStun()&&shadowStream.stun.sample(pose.time,stun,stunAmount)&&stun.variant&&ground&&pose.motionValid;
+        const bool stunActive=p.bank.hasStun()&&shadowStream.stun.sample(pose.time,stun,stunAmount)&&stun.variant&&(stun.variant!=5||p.bank.hasKnockdown())&&ground&&pose.motionValid;
         if(combatDt>=0&&combatDt<.25f){
             if(stunActive){if(stun.event!=p.stunEvent){p.stunFrom=p.stunLast;p.stunTransition=0;p.stunEvent=stun.event;}
                 p.stunVariant=stun.variant;p.stunAmount=stunAmount;p.stunTransition=(std::min)(1.f,p.stunTransition+combatDt/.035f);}

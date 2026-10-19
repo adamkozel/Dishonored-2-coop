@@ -92,7 +92,13 @@ void serviceLabKnockdown(){
     alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
-    const unsigned regions=1,region=0;const std::uint32_t attacker=0x3fff0010;
+    // 1214dn: the hit starts 0.6 m out on the side it comes from; a sword hit names the nearest living NPC as attacker.
+    for(unsigned k=0;k<2;++k)position[k]-=direction[k]*.6f;
+    std::uint32_t attacker=0x3fff0010;
+    if(labHitKind==2){std::vector<NativeWorldNpc> catalog;unsigned unbound=0;float best=1600.f;
+        if(readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound))for(const auto& n:catalog){if(!n.unique)continue;
+            const float dx=n.position[0]-position[0],dy=n.position[1]-position[1],d=dx*dx+dy*dy;if(d<best){best=d;attacker=n.handle;}}}
+    const unsigned regions=1,region=0;
     std::memcpy(params.data()+0x20,&regions,4);std::memcpy(params.data()+0x4c,&region,4);
     std::memcpy(params.data()+0x24,position,12);std::memcpy(params.data()+0x3c,direction,12);std::memcpy(params.data()+0x54,&attacker,4);
     realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());

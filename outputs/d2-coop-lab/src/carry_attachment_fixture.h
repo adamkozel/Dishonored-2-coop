@@ -18,7 +18,15 @@ struct CarryAttachmentFixture {
     unsigned dropStage=0,dropVariant=0;bool crouchedPickup=false,releasePhysicsRequested=false;
     std::uint64_t throwEvent=0;std::array<float,3> throwVelocity{};bool throwRagdollRequested=false;
     float dropRoot[12]{};
+    bool product=false;unsigned victimState=0;ULONGLONG lostAt=0;
 } carryAttachmentFixture;
+// 1214dm (#11 carry_body_lift_idle_move_drop_throw): product mode. When the partner picks up or carries a body in an
+// armed product session, the observer attaches its own copy of that body (resolved by the streamed spawner/definition
+// and the local handle) to the presented partner with this fixture's native machinery: any map, any human NPC, dead or
+// unconscious, a rolling 3 s lease renewed while the partner's carry samples arrive, ending on the native drop, compact
+// drop or throw, a sample gap or peer loss. The NPC stream leaves the body alone meanwhile (npcCarrySuppression).
+bool carryAttachmentProductRequested=false;std::uint64_t carryProductStarts=0,carryProductRefused=0,carryProductLost=0;
+unsigned carryProductAttempts=0,carryProductIncarnation=0;ULONGLONG carryProductLastTry=0;const char* carryProductResult="idle";
 unsigned carryAttachmentRequest=0;
 bool carryAttachmentSnapshotRequested=false;
 bool carryAttachmentPickupRequested=false;
@@ -83,22 +91,23 @@ bool carryAttachmentJoint(const NativeSkeleton& s,const char* wanted,std::uint16
     }
     return matches==1;
 }
-bool carryAttachmentPeerHeld(ULONGLONG tick){
+bool carryAttachmentScope(bool product){return product?productSessionArmed():(observerIsolation.ready&&observerIsolation.movementFixture);}
+bool carryAttachmentPeerHeld(ULONGLONG tick,bool product=false){
     return shadowStreamCurrent(tick)&&shadowStream.peerReady&&shadowStream.lastState&&tick-shadowStream.lastState<200&&
         shadowStream.remoteState==14&&(shadowStream.remoteCarry==2||shadowStream.remoteCarry==3)&&
-        observerIsolation.ready&&observerIsolation.movementFixture&&movementBankActive();
+        carryAttachmentScope(product)&&movementBankActive();
 }
-bool carryAttachmentPeerCurrent(ULONGLONG tick){
+bool carryAttachmentPeerCurrent(ULONGLONG tick,bool product=false){
     return shadowStreamCurrent(tick)&&shadowStream.peerReady&&shadowStream.lastState&&tick-shadowStream.lastState<200&&
-        observerIsolation.ready&&observerIsolation.movementFixture&&movementBankActive();
+        carryAttachmentScope(product)&&movementBankActive();
 }
 bool carryAttachmentSource(const CarryAttachmentFixture& f,CarryPresentation::Sample& sample,float& amount){
     const double at=presentationClock()-(poseSmoothingEnabled?PoseInterpolation::delayMs:0.);
     return shadowStream.carry.sample(at,sample,amount)&&sample.incarnation==f.sourceIncarnation&&
         sample.spawner==carryIdentityKey(f.target.spawnerName)&&sample.definition==carryIdentityKey(f.target.definition);
 }
-bool carryAttachmentPeerPickup(ULONGLONG tick,unsigned* stance=nullptr){
-    if(!carryAttachmentPeerCurrent(tick)||shadowStream.remoteState!=14)return false;
+bool carryAttachmentPeerPickup(ULONGLONG tick,unsigned* stance=nullptr,bool product=false){
+    if(!carryAttachmentPeerCurrent(tick,product)||shadowStream.remoteState!=14)return false;
     AcquireSRWLockShared(&movementLock);
     const bool carrier=movementPlayback.end>tick&&movementPlayback.lease>tick&&movementPlayback.bank.hasCarryPickup();
     const bool crouched=movementPlayback.bank.hasCrouchedCarryPickup();
@@ -120,9 +129,9 @@ bool prepareCarrySnapshotPhysics(CarryAttachmentFixture& f){
         if(!memoryRead(list+i*8,&p,8)||!p||!memoryRead(p,&vt,8))return false;
         if(vt==base+0x1c54008){if(f.physics)return false;f.physics=p;}
     }
-    if(!carryAttachmentPhysicsOwned(f)||!memoryRead(f.physics+0x238,&mode,4)||mode!=0||
+    if(!carryAttachmentPhysicsOwned(f)||!memoryRead(f.physics+0x238,&mode,4)||(mode!=0&&!(f.product&&mode==3))||
        !memoryRead(f.physics+0x23c,&pending,4)||pending!=0xffffffff)return false;
-    reinterpret_cast<void(*)(void*)>(gameImage+0x736ef0)(reinterpret_cast<void*>(f.physics));
+    if(mode==0)reinterpret_cast<void(*)(void*)>(gameImage+0x736ef0)(reinterpret_cast<void*>(f.physics));
     f.physicsOwned=true;f.attachmentPending=true;return true;
 }
 bool finishCarrySnapshotAttachment(CarryAttachmentFixture& f,const NativeRetargeting& current){
@@ -269,6 +278,7 @@ bool rebaseCarryThrowAnchor(const CarryAttachmentFixture& f,const NativeRetarget
 void serviceCarryAttachmentFixture(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const auto request=carryAttachmentRequest;carryAttachmentRequest=0;
+    const bool product=request==1&&carryAttachmentProductRequested;if(request==1)carryAttachmentProductRequested=false;
     auto& f=carryAttachmentFixture;
     if(request==1){
         carryAttachmentRequestScopeMs=observerIsolation.until>tick?observerIsolation.until-tick:0;
@@ -279,14 +289,16 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
             std::uintptr_t frame=0,owner=0;std::uint16_t ownerJoint=0xffff,targetJoint=0xffff;std::uint64_t emptyName=0;
             unsigned char carryFlags=0;unsigned pickupStance=0;
             carryAttachmentRefusalStage=1;
-            bool valid=carryAttachmentApi()&&guardNativeApiMatches()&&!std::strcmp(mapName,kGuardMap)&&probeDoppelganger&&
-                (carryAttachmentPickupRequested?carryAttachmentPeerPickup(tick,&pickupStance):carryAttachmentPeerHeld(tick))&&
+            bool valid=carryAttachmentApi()&&guardNativeApiMatches()&&(product||!std::strcmp(mapName,kGuardMap))&&probeDoppelganger&&
+                (carryAttachmentPickupRequested?carryAttachmentPeerPickup(tick,&pickupStance,product):carryAttachmentPeerHeld(tick,product))&&
                 (carryAttachmentRefusalStage=2,true)&&
-                (carryAttachmentDuration==8000||carryAttachmentDuration==16000)&&
-                observerIsolation.until>tick+carryAttachmentDuration+2000&&worldCatalogTick&&tick-worldCatalogTick<750&&
+                (product||((carryAttachmentDuration==8000||carryAttachmentDuration==16000)&&
+                observerIsolation.until>tick+carryAttachmentDuration+2000))&&worldCatalogTick&&tick-worldCatalogTick<750&&
                 (carryAttachmentRefusalStage=3,true)&&resolveCarryIdentity(memoryRead,base,observedGame,worldCatalog,shadowStream.remoteCarrySpawner,shadowStream.remoteCarryDefinition,target)&&
-                target.spawnerName=="ld_spawner_alexi_escape"&&target.definition=="models/characters/def/story/alexi_mayhew.def"&&
-                target.handle==shadowStream.remoteCarryLocalHandle&&readNativeHealth(memoryRead,base,target.handle,health)&&health.current==0&&
+                (product?[&]{std::uintptr_t v=0;return memoryRead(target.actor,&v,8)&&v==base+0x1c5e108;}():
+                 (target.spawnerName=="ld_spawner_alexi_escape"&&target.definition=="models/characters/def/story/alexi_mayhew.def"))&&
+                target.handle==shadowStream.remoteCarryLocalHandle&&readNativeHealth(memoryRead,base,target.handle,health)&&
+                (product?(health.logic==1&&((health.current<=0&&health.maximum>0)||((health.ownerFlags&0x20)&&health.current>0))):health.current==0)&&
                 (carryAttachmentRefusalStage=4,true)&&readNativeRetargeting(memoryRead,base,probeHandle,before)&&!before.count&&before.actor==probeActor&&
                 readNativeSkeleton(memoryRead,base,probeHandle,carrier)&&readNativeSkeleton(memoryRead,base,target.handle,victim)&&
                 (carryAttachmentRefusalStage=51,true)&&carryAttachmentJoint(carrier,"center_spine03_jnt",ownerJoint)&&
@@ -295,15 +307,19 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
                 (carryAttachmentRefusalStage=54,true)&&memoryRead(target.actor+0x368,&carryFlags,1)&&!(carryFlags&6)&&
                 (carryAttachmentRefusalStage=55,true)&&memoryRead(base+0x2293f48,&emptyName,8);
             if(valid)carryAttachmentRefusalStage=6;
+            // A knockout destroys the AI (npc_authority_stream.h), so in product an unreadable AI component counts as inactive.
             for(auto kind:{NativeAiKind::Decision,NativeAiKind::Reflex,NativeAiKind::Attack})if(valid){NativeAiComponentState ai{};
-                valid=readNativeAiComponent(memoryRead,base,observedGame,target.handle,kind,ai)&&!ai.schedulerActive&&!(ai.flags&0xc);}
+                const bool readable=readNativeAiComponent(memoryRead,base,observedGame,target.handle,kind,ai);
+                valid=readable?(!ai.schedulerActive&&!(ai.flags&0xc)):product;}
             std::array<unsigned,4> original{};
             if(valid){carryAttachmentRefusalStage=7;valid=memoryRead(before.component+0x34,original.data(),16);}
-            if(!valid){++carryAttachmentRefused;carryAttachmentResult="unsupported_or_claimed_target";}
+            if(!valid){++carryAttachmentRefused;carryAttachmentResult="unsupported_or_claimed_target";
+                if(product){++carryProductRefused;carryProductResult="refused";npcCarryAttachRelease(tick,0);}}
             else{
                 carryAttachmentRefusalStage=0;
                 f.before=before;f.target=target;f.settings=original;f.epoch=outgoing.worldEpoch;f.peerEpoch=remote.worldEpoch;
-                f.peerSession=remote.session;f.sourceIncarnation=shadowStream.remoteCarryIncarnation;f.startedAt=f.lastHeldAt=tick;f.until=tick+carryAttachmentDuration;
+                f.peerSession=remote.session;f.sourceIncarnation=shadowStream.remoteCarryIncarnation;f.startedAt=f.lastHeldAt=tick;
+                f.product=product;f.until=tick+(product?3000:carryAttachmentDuration);f.victimState=health.current>0?2:1;if(product){++carryProductStarts;carryProductResult="started";}
                 f.sourcePickup=carryAttachmentPickupRequested;f.crouchedPickup=f.sourcePickup&&pickupStance==1;
                 // Exact-build native Carry45 crouched victim root is 0.674m
                 // lower in both archived role references. Bounded Mayhew
@@ -313,7 +329,7 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
                 if(carryAttachmentSnapshotRequested&&!startCarrySnapshot(f.snapshot,victim,victimFrame)){
                     f.restoring=true;carryAttachmentResult="native_snapshot_refused";
                 }else{
-                registerCarryDamageLease(target.actor,target.handle,f.until+2000);
+                registerCarryDamageLease(target.actor,target.handle,f.until+2000,product?target.definition.c_str():nullptr);
                 // Native Carry45 sets NPC+368 bit1 at 828845 and clears it
                 // on cleanup (829a10). Physics tick 736ccb otherwise returns
                 // dead NPCs to ragdoll even while a Midnight clip is active.
@@ -369,10 +385,12 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
         }
     }
     if(!f.until)return;
-    if(f.epoch!=outgoing.worldEpoch||f.before.game!=observedGame){retireCarryDamageLease();f={};++carryAttachmentRetired;carryAttachmentResult="old_world_retired";return;}
-    if(request==2||tick>=f.until||!carryAttachmentPeerCurrent(tick)||f.peerEpoch!=remote.worldEpoch||f.peerSession!=remote.session)f.restoring=true;
+    if(f.epoch!=outgoing.worldEpoch||f.before.game!=observedGame){retireCarryDamageLease();if(f.product)npcCarryAttachRelease(tick,300);f={};++carryAttachmentRetired;carryAttachmentResult="old_world_retired";return;}
+    if(request==2||tick>=f.until||!carryAttachmentPeerCurrent(tick,f.product)||f.peerEpoch!=remote.worldEpoch||f.peerSession!=remote.session)f.restoring=true;
     CarryPresentation::Sample source{};float amount=0;
     const bool sourceOwned=carryAttachmentSource(f,source,amount);
+    // Product: a rolling lease while the partner's carry samples arrive (the drop and throw stages included).
+    if(f.product&&sourceOwned&&!f.restoring){f.until=tick+3000;renewCarryDamageLease(f.target.actor,f.target.handle,f.until+2000);}
     float pickupAmount=0;const bool pickupOwned=f.sourcePickup&&sourceOwned&&carryVictimPickupAmount(source.variant,source.stance,amount,pickupAmount,f.crouchedPickup);
     if(pickupOwned)f.pickupBlend=(std::max)(f.pickupBlend,pickupAmount);
     if(!f.restoring&&!(f.sourcePickup?tickCarrySnapshotAmount(f.snapshot,f.pickupBlend):tickCarrySnapshot(f.snapshot,tick))){
@@ -392,7 +410,17 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
     if(!coopGameplayReady(outgoing))return;
     NativeRetargeting current{};
     if(!readNativeRetargeting(memoryRead,base,f.before.handle,current)||current.actor!=f.before.actor||current.component!=f.before.component||
-       (current.count&&(current.targetHandle!=f.target.handle||current.target!=f.target.actor))){f.restoring=true;carryAttachmentResult="waiting_for_owned_attachment";return;}
+       (current.count&&(current.targetHandle!=f.target.handle||current.target!=f.target.actor))){
+        // Product: the presented partner can be replaced (product repair) mid-carry; after 1 s release the body alone.
+        if(f.product){if(!f.lostAt)f.lostAt=tick;
+            if(tick-f.lostAt>=1000){stopCarrySnapshot(f.snapshot);stopCarryVictimScene(f.scene,f.target);
+                if(f.carriedFlag||f.compactReleaseFlag)*reinterpret_cast<unsigned char*>(f.target.actor+0x368)&=static_cast<unsigned char>(~6u);
+                if(f.physicsOwned&&carryAttachmentPhysicsOwned(f)&&carryAttachmentApi()){
+                    reinterpret_cast<void(*)(void*)>(gameImage+0x734d90)(reinterpret_cast<void*>(f.physics));
+                    reinterpret_cast<void(*)(void*)>(gameImage+0x734a10)(reinterpret_cast<void*>(f.physics));}
+                retireCarryDamageLease();npcCarryAttachRelease(tick,300);f={};++carryAttachmentRetired;++carryProductLost;carryAttachmentResult="product_carrier_lost";return;}}
+        f.restoring=true;carryAttachmentResult="waiting_for_owned_attachment";return;}
+    f.lostAt=0;
     if(!f.restoring&&f.attachmentPending){
         if(current.count){f.restoring=true;carryAttachmentResult="unexpected_attachment_during_snapshot";}
         else if(f.sourcePickup?(f.snapshot.restoredAt&&tick>=f.snapshot.restoredAt+50):(tick>=f.snapshot.started+850)){
@@ -563,9 +591,44 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
                 if(!memoryRead(f.physics+0x238,&mode,4)||mode!=0||!memoryRead(f.physics+0x23c,&pending,4)||pending!=0xffffffff){carryAttachmentResult="waiting_for_native_ragdoll";return;}
             }
             finishCarryDamageLease(f.target.actor,f.target.handle,tick);
+            if(f.product){npcCarryAttachRelease(tick,f.dropVariant==8?1500:300);carryProductResult="released";}
             f={};++carryAttachmentReleased;carryAttachmentResult="native_attachment_released";
         }else carryAttachmentResult="native_release_unconfirmed";
     }
+}
+// 1214do: every change of the fixture's result, with its refusal stage and the source's carry sample, so a take shows
+// which step ends a product attempt (1277s: three product pickups on the host released without a native attachment,
+// while the client's held start in 1277t attached).
+struct CarryResultEntry{ULONGLONG tick=0;const char* result="";unsigned stage=0,variant=0,stance=0;float amount=0,blend=0;bool pickup=false,snapshot=false,pending=false;};
+std::array<CarryResultEntry,32> carryResultLog{};unsigned carryResultLogCount=0;const char* carryResultLast="";
+void logCarryResult(ULONGLONG tick){
+    if(carryAttachmentResult==carryResultLast)return;carryResultLast=carryAttachmentResult;const auto& f=carryAttachmentFixture;
+    CarryPresentation::Sample s{};float amount=0;const double at=presentationClock()-(poseSmoothingEnabled?PoseInterpolation::delayMs:0.);
+    const bool owned=shadowStream.carry.sample(at,s,amount);
+    carryResultLog[carryResultLogCount%carryResultLog.size()]={tick,carryAttachmentResult,carryAttachmentRefusalStage,owned?s.variant:99u,owned?s.stance:99u,amount,f.pickupBlend,f.sourcePickup,f.snapshot.captured,f.attachmentPending};
+    ++carryResultLogCount;
+}
+void serviceCarryAttachmentProduct(ULONGLONG tick){
+    logCarryResult(tick);
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!productSessionArmed()||carryAttachmentFixture.until||
+       carryAttachmentRequest||observerIsolation.until||!probeDoppelganger)return;
+    if(!carryAttachmentPeerCurrent(tick,true)||shadowStream.remoteState!=14||!shadowStream.remoteCarryLocalHandle)return;
+    CarryPresentation::Sample sample{};float amount=0;
+    const double at=presentationClock()-(poseSmoothingEnabled?PoseInterpolation::delayMs:0.);
+    if(!shadowStream.carry.sample(at,sample,amount)||sample.incarnation!=shadowStream.remoteCarryIncarnation)return;
+    const bool pickup=sample.variant==7||(sample.variant==1&&amount<.15f),held=sample.variant==2||sample.variant==3;
+    if(!pickup&&!held)return;
+    if(carryProductIncarnation!=sample.incarnation){carryProductIncarnation=sample.incarnation;carryProductAttempts=0;}
+    if(carryProductAttempts>=3||tick-carryProductLastTry<250)return;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    // Never while the local player carries the same body in this world.
+    NativePlayerStates st{};if(readNativePlayerStates(memoryRead,base,st))for(const auto& a:st.active){unsigned h=0;
+        if(a.id==45&&a.vtable==base+0x1c77748&&memoryRead(a.pointer+0xf8,&h,4)&&h==shadowStream.remoteCarryLocalHandle){carryProductResult="local_carry_same_body";return;}
+        if(a.id==46&&a.vtable==base+0x1c790c8&&memoryRead(a.pointer+0x38,&h,4)&&h==shadowStream.remoteCarryLocalHandle){carryProductResult="local_carry_same_body";return;}}
+    const auto actor=worldIdentityEntity(memoryRead,observedGame,shadowStream.remoteCarryLocalHandle);if(!actor){carryProductResult="no_local_body";return;}
+    ++carryProductAttempts;carryProductLastTry=tick;npcCarryAttachClaim(shadowStream.remoteCarryLocalHandle,actor);
+    carryAttachmentPickupRequested=pickup;carryAttachmentSnapshotRequested=true;carryAttachmentProductRequested=true;carryAttachmentRequest=1;
+    carryProductResult=pickup?"pickup_requested":"held_requested";
 }
 void writeCarryAttachmentFixture(ULONGLONG tick){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.carry-attachment.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
@@ -578,6 +641,16 @@ void writeCarryAttachmentFixture(ULONGLONG tick){
     fprintf(file,"{\"throwQueued\":%llu,\"throwRefused\":%llu,\"lastThrowVelocity\":[%.7f,%.7f,%.7f],",carryThrowQueued,carryThrowRefused,carryLastThrowVelocity[0],carryLastThrowVelocity[1],carryLastThrowVelocity[2]);
     fprintf(file,"\"physicsMode\":%u,\"physicsPending\":%u,\"physicsFlags\":%u,\"throwRagdollRequested\":%s,",throwMode,throwPending,throwFlags,f.throwRagdollRequested?"true":"false");
     fprintf(file,"\"attachmentPending\":%s,",f.attachmentPending?"true":"false");
+    fprintf(file,"\"resultLog\":[");
+    {const unsigned total=(std::min)(carryResultLogCount,unsigned(carryResultLog.size()));
+     for(unsigned i=0;i<total;++i){const auto& e=carryResultLog[(carryResultLogCount-total+i)%carryResultLog.size()];
+        fprintf(file,"%s{\"tick\":%llu,\"result\":\"%s\",\"stage\":%u,\"variant\":%u,\"stance\":%u,\"amount\":%.3f,\"blend\":%.3f,\"pickup\":%s,\"snapshot\":%s,\"pending\":%s}",
+            i?",":"",e.tick,e.result,e.stage,e.variant,e.stance,e.amount,e.blend,e.pickup?"true":"false",e.snapshot?"true":"false",e.pending?"true":"false");}}
+    fprintf(file,"],");
+    fprintf(file,"\"product\":%s,\"productResult\":\"%s\",\"productStarts\":%llu,\"productRefused\":%llu,\"productLost\":%llu,\"productAttempts\":%u,\"victimState\":%u,",
+        f.product?"true":"false",carryProductResult,carryProductStarts,carryProductRefused,carryProductLost,carryProductAttempts,f.victimState);
+    {const auto& s=npcCarrySuppression;fprintf(file,"\"streamSuppressed\":{\"handle\":%u,\"claims\":%llu,\"releases\":%llu,\"presentSkips\":%llu,\"holdSkips\":%llu,\"physicsSkips\":%llu,\"evictSkips\":%llu},",
+        s.handle,s.claims,s.releases,s.presentSkips,s.holdSkips,s.physicsSkips,s.evictSkips);}
     fprintf(file,"\"releasePhysicsRequested\":%s,",f.releasePhysicsRequested?"true":"false");
     fprintf(file,"\"sourcePickup\":%s,\"pickupBlend\":%.7f,",f.sourcePickup?"true":"false",f.pickupBlend);
     fprintf(file,"\"snapshotRestoredAfterMs\":%llu,\"attachmentStartedAfterMs\":%llu,",f.snapshot.restoredAt&&f.snapshot.restoredAt>=f.snapshot.started?f.snapshot.restoredAt-f.snapshot.started:0,f.attachedAt&&f.attachedAt>=f.snapshot.started?f.attachedAt-f.snapshot.started:0);

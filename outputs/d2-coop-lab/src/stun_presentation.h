@@ -8,8 +8,9 @@
 struct StunPresentation {
     struct Sample {double time=0;std::uint64_t event=0;unsigned variant=0,elapsed=0,duration=0;};
     std::array<Sample,32> samples{};unsigned count=0;
-    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=4&&s.duration==(s.variant?800u:0u)&&s.elapsed<=s.duration;}
-    static unsigned clip(unsigned variant){return 259+variant;}
+    static bool valid(const Sample& s){return std::isfinite(s.time)&&s.event&&s.variant<=5&&s.duration==(s.variant==5?2599u:s.variant?800u:0u)&&s.elapsed<=s.duration;}
+    // 1214dn: 5 is the knockdown, bank74 clip 380 (fall, lie, get up, rise; build_knockdown_bank_v1400.py).
+    static unsigned clip(unsigned variant){return variant==5?380:259+variant;}
     void clear(){count=0;}
     bool push(const Sample& s){
         if(!valid(s))return false;

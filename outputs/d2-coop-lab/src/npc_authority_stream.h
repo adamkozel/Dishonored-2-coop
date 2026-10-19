@@ -142,8 +142,24 @@ bool sendNpcControl(NpcAuthorityChannel& c,NpcAuthorityMessage kind,std::uint32_
     if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK)return false;
     ++c.sent;return true;
 }
+// 1214dm (#11 carry_body_lift_idle_move_drop_throw): while the observer attaches the partner's carried body to the
+// presented partner (carry_attachment_fixture.h in product mode), the stream leaves that exact body alone: no streamed
+// root or bones, no animated hold, no ragdoll request when a channel stops, no relevance eviction. It resumes 300 ms
+// after the attachment ends (1500 ms after a throw). In 1277p/r the streamed root and bones kept the observer's copy
+// at the carrier's feet (a carried body's root stays at the carrier's root) while the partner presented the carry.
+struct NpcCarrySuppression{std::uint32_t handle=0;std::uintptr_t actor=0;ULONGLONG resumeAt=0;
+    std::uint64_t claims=0,releases=0,presentSkips=0,holdSkips=0,physicsSkips=0,evictSkips=0;} npcCarrySuppression;
+bool npcCarrySuppressedHandle(std::uint32_t handle,std::uintptr_t actor,ULONGLONG tick){
+    const auto& s=npcCarrySuppression;return s.handle&&handle==s.handle&&actor==s.actor&&(!s.resumeAt||tick<s.resumeAt);}
+bool npcCarrySuppressed(const NpcAuthorityChannel& c,ULONGLONG tick){return npcCarrySuppressedHandle(c.lease.binding.npc.handle,c.lease.binding.npc.actor,tick);}
+void npcCarryAttachClaim(std::uint32_t handle,std::uintptr_t actor){
+    auto& s=npcCarrySuppression;s.handle=handle;s.actor=actor;s.resumeAt=0;++s.claims;
+    for(auto& c:npcChannels)if(c.enabled&&c.lease.binding.npc.handle==handle&&c.lease.binding.npc.actor==actor){clearNpcPresentation(c.arm);c.corpsePhysics=0;}
+}
+void npcCarryAttachRelease(ULONGLONG tick,ULONGLONG graceMs){auto& s=npcCarrySuppression;if(s.handle&&!s.resumeAt){s.resumeAt=tick+graceMs;++s.releases;}}
 void stopNpcChannel(NpcAuthorityChannel& c,const char* reason,bool notify=true){
     if(!c.enabled)return;clearNpcPresentation(c.arm);
+    if(c.corpsePhysics&&npcCarrySuppressed(c,GetTickCount64())){c.corpsePhysics=0;++npcCarrySuppression.physicsSkips;}
     if(c.corpsePhysics){std::uintptr_t vt=0;
         if(memoryRead(c.corpsePhysics,&vt,8)&&vt==reinterpret_cast<std::uintptr_t>(gameImage)+0x1c54008){
             reinterpret_cast<void(*)(void*)>(gameImage+0x734d90)(reinterpret_cast<void*>(c.corpsePhysics));
@@ -155,6 +171,7 @@ void stopNpcChannel(NpcAuthorityChannel& c,const char* reason,bool notify=true){
     c.enabled=c.ready=false;c.result=reason;c.buffer={};
 }
 bool npcCorpseHoldAnimated(NpcAuthorityChannel& c){
+    if(npcCarrySuppressed(c,GetTickCount64())){++npcCarrySuppression.holdSkips;return false;}
     if(c.corpsePhysics)return true;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned flags=0,mode=99,pending=0;std::uintptr_t physics=0;
     if(!memoryRead(c.lease.binding.npc.actor+0x268,&list,8)||!list||!memoryRead(c.lease.binding.npc.actor+0x270,&flags,4)||(flags&0xffffff)>256)return false;
@@ -286,6 +303,7 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     for(unsigned i:order){const auto& n=catalog[i];NpcAuthorityChannel* evict=nullptr;
         if(bound>=kNpcRelevanceMax){unsigned worst=0;int worstAt=-1;
             for(unsigned j=catalog.size();j<owners.size();++j){auto* c=owners[j]?channelByArm(owners[j]):nullptr;if(!c||c->localPaired||c->hostPairedLease||c->hostPairedFollow)continue;
+                if(npcCarrySuppressed(*c,GetTickCount64())){++npcCarrySuppression.evictSkips;continue;}
                 if(worstAt<0||priority[j]>worst){worst=priority[j];worstAt=int(j);}}
             if(worstAt<0||!npcRelevanceDisplaces(priority[i],worst))break;
             evict=channelByArm(owners[worstAt]);owners[worstAt]=0;}
@@ -578,7 +596,9 @@ void serviceNpcStream(ULONGLONG tick){
 void presentNpcStream(ULONGLONG tick){
     if(!npcStreamContext(tick)){clearNpcPresentation();return;}
     std::vector<NpcRenderState> next;
+    {auto& s=npcCarrySuppression;if(s.handle&&s.resumeAt&&tick>=s.resumeAt){s.handle=0;s.actor=0;s.resumeAt=0;}}
     for(auto& c:npcChannels){
+        if(npcCarrySuppressed(c,tick)){++npcCarrySuppression.presentSkips;continue;}
         const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
         if(!hostVictim&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
         NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;

@@ -7,6 +7,8 @@ struct CarryDamageLease {
     std::uintptr_t actor=0;
     std::uint32_t handle=0;
     std::uint64_t until=0;
+    // 1214dm: product carries any human NPC; the lab fixture's Mayhew stays the default.
+    std::string definition="models/characters/def/story/alexi_mayhew.def";
 };
 template<class Read> bool isCarryPresentationDamage(Read read,std::uintptr_t base,const CarryDamageLease& s,
     std::uint64_t tick,std::uint32_t inflictor,std::uint32_t attacker){
@@ -16,7 +18,7 @@ template<class Read> bool isCarryPresentationDamage(Read read,std::uintptr_t bas
     std::uintptr_t vt=0,decl=0,name=0,frame=0,frameOwner=0,again=0;std::string path;
     if(!read(s.actor,&vt,8)||vt!=base+0x1c5e108||!read(s.actor+0x2e8,&decl,8)||!decl||
        !read(decl,&vt,8)||vt!=base+0x1ab58f8||!read(decl+8,&name,8)||!worldIdentityString(read,name,path)||
-       path!="models/characters/def/story/alexi_mayhew.def"||
+       path!=s.definition||
        !read(s.actor+0x358,&frame,8)||!frame||!read(frame,&vt,8)||vt!=base+0x1c573e8||
        !read(frame+0x10,&again,8)||again!=s.actor||!read(frame+0x3f0,&frameOwner,8)||
        (frameOwner&&frameOwner!=s.owner.actor))return false;
