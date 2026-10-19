@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Window fixture: target placed placed; takedown scenes ",
+        "Native choke of models/characters/def/generic/overseer_male_tall_01_office.def: source states 0,6,41,64; unconscious in both worlds"
+      ],
+      "approach": [
+        15.349648620315927,
+        90.04808762716863
+      ],
+      "placed": {
+        "placed": 1,
+        "refused": 0,
+        "result": "placed"
+      },
+      "placedSeen": [
+        16.9305,
+        91.6373,
+        16.2152
+      ],
+      "placedWaitMs": 476,
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          16.9259,
+          91.6625,
+          16.1984
+        ],
+        "forward": [
+          -0.09927044907967052,
+          0.9950604895882061
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        13.98539023332123,
+        90.9169114324463,
+        17.7984
+      ],
+      "sourceStart": [
+        17.479,
+        90.3333,
+        16.7978
+      ],
+      "bendStates": [
+        0
+      ],
+      "replacedAt": 470,
+      "cameraMoved": [
+        13.77706574662018,
+        92.7928437660578,
+        15.688699999999999
+      ],
+      "targetMoved": 3.28,
+      "crept": 1082,
+      "creptEnd": 1423,
+      "stanceAfterCreep": 1,
+      "actedAt": 1449,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        6,
+        41,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
