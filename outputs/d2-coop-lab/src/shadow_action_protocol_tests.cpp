@@ -144,6 +144,9 @@ void chokePresentationTests(){
      // 1214da: the shadow-form assassinations (37-44) run hands-free; the sword stays for the ordinary ones.
      check(nativeTakedownSword(36)&&nativeTakedownSword(45)&&nativeTakedownLethal(38),"ordinary assassinations keep the sword; sw stays lethal");
      for(unsigned id=37;id<=44;++id)check(!nativeTakedownSword(id),"assassination_sw holsters the sword");
+     check(nativeTakedownKnockdownChoke(64)&&nativeTakedownKnockdownChoke(67)&&!nativeTakedownKnockdownChoke(63)&&!nativeTakedownKnockdownChoke(68)&&
+           std::strstr(nativeTakedownScene(66)->scene,"choke_knockdown_left")&&std::strstr(nativeTakedownScene(64)->scene,"choke_knockdown_back"),
+           "1214eo: the knocked-down chokes are scenes 64-67");
      check(lock==119&&nativeTakedownKind(lock)==6&&nativeTakedownSword(lock)&&!nativeTakedownLethal(lock)&&ChokePresentation::clip(lock)==CombatPresentation::clip(11,2)&&
            nativeChokeVariant("midnight/gameplay/player/base/combat/versus_elite.midnightscene","versus_mediumwin",1033)==118&&
            !nativeChokeVariant("midnight/gameplay/player/base/combat/versus_low.midnightscene","versus_loop",601),

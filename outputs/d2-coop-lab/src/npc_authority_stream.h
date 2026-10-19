@@ -87,6 +87,8 @@ struct NpcAuthorityChannel {
     // 1214en: the NPC is down (knocked down) on the host: host poses carry it (priority while down); the client keeps
     // its replica laying so its own native rules offer the knocked-down takedowns (take 1529b).
     ULONGLONG hostDownUntil=0,peerDownAt=0;bool downApplied=false;std::uint64_t downSent=0,downReceived=0,downApplies=0;
+    // 1214eo: host: the knocked-out body is held animated while a client's knocked-down choke victim pose drives it.
+    bool victimHeld=false;std::uint64_t victimHolds=0,victimReleases=0;
     // 1214eg: receiver pose rejections by reason: not ready, AI lease not ready, identity, replay, source clock.
     std::array<std::uint64_t,5> poseRejects{};double lastPoseLateMs=0;
     // 1213u (#46): a paired takedown by the CLIENT on this host-owned NPC. Client:
@@ -164,26 +166,32 @@ void npcCarryAttachClaim(std::uint32_t handle,std::uintptr_t actor){
     for(auto& c:npcChannels)if(c.enabled&&c.lease.binding.npc.handle==handle&&c.lease.binding.npc.actor==actor){clearNpcPresentation(c.arm);c.corpsePhysics=0;}
 }
 void npcCarryAttachRelease(ULONGLONG tick,ULONGLONG graceMs){auto& s=npcCarrySuppression;if(s.handle&&!s.resumeAt){s.resumeAt=tick+graceMs;++s.releases;}}
-void stopNpcChannel(NpcAuthorityChannel& c,const char* reason,bool notify=true){
-    if(!c.enabled)return;clearNpcPresentation(c.arm);
-    if(c.corpsePhysics&&npcCarrySuppressed(c,GetTickCount64())){c.corpsePhysics=0;++npcCarrySuppression.physicsSkips;}
+// The physics held animated by npcCorpseHoldAnimated falls again: 0x734d90 copies the presented bones into the ragdoll
+// bodies, 0x734a10 requests ragdoll mode 0.
+void npcPhysicsRelease(NpcAuthorityChannel& c){
     if(c.corpsePhysics){std::uintptr_t vt=0;
         if(memoryRead(c.corpsePhysics,&vt,8)&&vt==reinterpret_cast<std::uintptr_t>(gameImage)+0x1c54008){
             reinterpret_cast<void(*)(void*)>(gameImage+0x734d90)(reinterpret_cast<void*>(c.corpsePhysics));
             reinterpret_cast<void(*)(void*)>(gameImage+0x734a10)(reinterpret_cast<void*>(c.corpsePhysics));}
         c.corpsePhysics=0;}
+}
+void stopNpcChannel(NpcAuthorityChannel& c,const char* reason,bool notify=true){
+    if(!c.enabled)return;clearNpcPresentation(c.arm);
+    if(c.corpsePhysics&&npcCarrySuppressed(c,GetTickCount64())){c.corpsePhysics=0;++npcCarrySuppression.physicsSkips;}
+    npcPhysicsRelease(c);
     if(notify&&c.peerArm)sendNpcControl(c,NpcAuthorityMessage::Stop);
     releaseNpcAiLease(c.lease);
     auto& s=npcStreamSessionState;s.released+=c.lease.released;s.retired+=c.lease.retired;s.lost+=c.lease.lost;
     c.enabled=c.ready=false;c.result=reason;c.buffer={};
 }
-bool npcCorpseHoldAnimated(NpcAuthorityChannel& c){
+// 1214eo: knockedDown also takes a body in the knockdown ragdoll mode 2 (IsOnGround, chapter 100).
+bool npcCorpseHoldAnimated(NpcAuthorityChannel& c,bool knockedDown=false){
     if(npcCarrySuppressed(c,GetTickCount64())){++npcCarrySuppression.holdSkips;return false;}
     if(c.corpsePhysics)return true;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned flags=0,mode=99,pending=0;std::uintptr_t physics=0;
     if(!memoryRead(c.lease.binding.npc.actor+0x268,&list,8)||!list||!memoryRead(c.lease.binding.npc.actor+0x270,&flags,4)||(flags&0xffffff)>256)return false;
     for(unsigned i=0;i<(flags&0xffffff);++i){std::uintptr_t p=0,vt=0;if(!memoryRead(list+i*8,&p,8)||!p||!memoryRead(p,&vt,8))return false;if(vt==base+0x1c54008){if(physics)return false;physics=p;}}
-    if(!physics||!memoryRead(physics+0x238,&mode,4)||mode!=0||!memoryRead(physics+0x23c,&pending,4)||pending!=0xffffffff)return false;
+    if(!physics||!memoryRead(physics+0x238,&mode,4)||(mode!=0&&!(knockedDown&&mode==2))||!memoryRead(physics+0x23c,&pending,4)||pending!=0xffffffff)return false;
     reinterpret_cast<void(*)(void*)>(gameImage+0x736ef0)(reinterpret_cast<void*>(physics));c.corpsePhysics=physics;return true;
 }
 void stopNpcCombatFixture(const char* reason);
@@ -578,6 +586,12 @@ void serviceNpcStream(ULONGLONG tick){
             if(tick-c.carryControlAt>=200){c.carryControlAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Carry))++c.carryControls;}
             if(tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;++c.carryPoses;}}
         if(!localRole&&c.ready&&(tick<c.carriedUntil||(c.corpse&&tick<c.pairedCorpseUntil)))npcCorpseHoldAnimated(c);
+        // 1214eo (#11): a client's knocked-down choke (64-67) knocks the host NPC out at the scene start, and its ragdoll
+        // ignored the client's victim pose (take 1535a: 58 victim bodies applied, the host body never moved). The body is
+        // held animated while the victim poses arrive and falls again 400 ms after the last one.
+        if(!localRole&&c.ready&&!c.corpse&&c.unconscious&&nativeTakedownKnockdownChoke(c.pairedVariant)&&c.reversePoseAt){
+            if(tick-c.reversePoseAt<350){if(!c.victimHeld&&npcCorpseHoldAnimated(c,true)){c.victimHeld=true;++c.victimHolds;}}
+            else if(c.victimHeld&&tick-c.reversePoseAt>=400){npcPhysicsRelease(c);c.victimHeld=false;++c.victimReleases;}}
         if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}
         if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}
         if(!localRole&&c.corpse&&c.ready&&c.corpseAt&&c.deadSends<5){const unsigned share=npcCombatDeathShare(c.arm);
@@ -648,7 +662,7 @@ void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs);
-    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",c.lease.ready?"true":"false",
+    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"victimHolds\":%llu,\"victimReleases\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",static_cast<unsigned long long>(c.victimHolds),static_cast<unsigned long long>(c.victimReleases),c.lease.ready?"true":"false",
         static_cast<unsigned long long>(c.poseRejects[0]),static_cast<unsigned long long>(c.poseRejects[1]),static_cast<unsigned long long>(c.poseRejects[2]),static_cast<unsigned long long>(c.poseRejects[3]),static_cast<unsigned long long>(c.poseRejects[4]),c.lastPoseLateMs);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
     fputs("],\"poseDiagnostics\":[",f);for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"stale\":%s,\"gaps\":%llu,\"recoveries\":%llu,\"failures\":%llu,\"lastFailure\":\"%s\",\"joint\":%d,\"matrix\":[",i?",":"",c.arm,c.lease.binding.npc.handle,c.poseStale?"true":"false",c.poseGaps,c.poseRecoveries,c.poseFailures,c.poseFailure,c.poseFailureJoint);

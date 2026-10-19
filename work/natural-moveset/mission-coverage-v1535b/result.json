@@ -1,0 +1,79 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,6,44,54,63,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,44,54,63,64)",
+      "checks": [],
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          -25.1779,
+          47.2425,
+          14.6197
+        ],
+        "forward": [
+          0.5946922970271702,
+          -0.80395340154548
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -23.033651329025787,
+        49.38835592177698,
+        16.2197
+      ],
+      "sourceStart": [
+        -25.7657,
+        48.0522,
+        14.6191
+      ],
+      "prePitch": 32.0,
+      "windblastFrom": [
+        -26.961976891081513,
+        49.65436020463644
+      ],
+      "blastedAt": 217,
+      "lastKnock": [
+        -23.0382,
+        44.3043,
+        15.8414
+      ],
+      "settledAt": 1229,
+      "knockedAt": [
+        -23.0382,
+        44.3043,
+        15.8414
+      ],
+      "knockFlight": 3.63,
+      "cameraMoved": [
+        -20.077447103385317,
+        45.00178688742118,
+        16.2197
+      ],
+      "knockCrouch": 1951,
+      "actedAt": 1975,
+      "knockSamples": 41,
+      "knockDown": 16,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        44,
+        54,
+        63,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
