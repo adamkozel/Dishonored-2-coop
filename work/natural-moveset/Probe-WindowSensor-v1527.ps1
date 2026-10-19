@@ -1,4 +1,4 @@
-param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[string]$Candidate='candidate-npc-combat-v1214em',[int]$MaxBeyond=60)
+param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo='campaign/edge_of_the_world/eotw.mapinfo',[string]$Candidate='candidate-npc-combat-v1214em',[int]$MaxBeyond=60,[switch]$Shots)
 # 1527 (#11 wall_and_window_variants): find natural "window" geometry for the native window takedown with the native
 # sensor itself (probe --window-sensor, 1214em; chapter 100). The sensor's shin sweep and opening queries run every frame
 # whatever the target (0x1403d64c0, confirmed static), so no NPC is needed: the host is stood on a grid in each region
@@ -7,6 +7,7 @@ param([string]$Take='window-sensor-v1527a',[string]$Regions='',[string]$MapInfo=
 # player is grounded. For each pass (up to MaxBeyond) the far side is tested: the host is stood 0.7 m past the window
 # point and the landing is recorded (an NPC must stand there at about the same level). Host only, health held; the
 # client idles at its spawn. Read-only probes, setviewpos and the lab health hold; Dunwall fixture restored.
+# -Shots (1527b): one frame of the host window from each passing stand (shot-<n>.jpg) for review.
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
 $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$inv=[Globalization.CultureInfo]::InvariantCulture
 $samples=[Collections.Generic.List[object]]::new();$beyond=[Collections.Generic.List[object]]::new();$modals=[Collections.Generic.List[object]]::new()
@@ -17,6 +18,7 @@ function Q($r,$mode,$arg=0){for($i=0;$i-lt8;$i++){$raw=if($arg){& "$lab/bin/d2_r
 function I($r,[string]$b='Neutral',[int]$ms=100,[int]$ly=0){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms -LeftY $ly|Out-Null}
 function ClearModals($tag){for($i=0;$i-lt4;$i++){$hit=$false;foreach($r in 'host','client'){$l=(S $r).localGameLogicState;if($l-in12,2){$hit=$true;$modals.Add(@{tag=$tag;role=$r;logic=$l});I $r B 200;Start-Sleep -Milliseconds 300;I $r}};if(!$hit){return};Start-Sleep -Milliseconds 900}}
 function Pos{(Q host '--player').candidatePosition}
+function Shot($name){$hwnd=(Get-Process -Id $pids.host).MainWindowHandle.ToInt64();$sp=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-y','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=10:width=-2:height=-2,hwdownload,format=bgra",'-frames:v','1','-q:v','4',"$out/shot-$name.jpg") -WindowStyle Hidden -PassThru;[void]$sp.WaitForExit(8000)}
 $script:safe=$null
 function Place($x,$y,$z,$yaw){C host ("setviewpos {0} {1} {2} {3} 0"-f([double]$x).ToString('F3',$inv),([double]$y).ToString('F3',$inv),([double]$z+1.7).ToString('F3',$inv),([double]$yaw).ToString('F2',$inv))
  for($i=0;$i-lt2;$i++){Start-Sleep -Milliseconds 110;$c=Pos;if($c[2]-lt$z-3.0){if($script:safe){C host ("setviewpos {0} {1} {2} 0 0"-f([double]$script:safe[0]).ToString('F3',$inv),([double]$script:safe[1]).ToString('F3',$inv),([double]$script:safe[2]+1.9).ToString('F3',$inv))};Start-Sleep -Milliseconds 600;return $null}}
@@ -59,7 +61,8 @@ try{
  $passes=@($samples|Where-Object {$_.pass})
  foreach($p in @($passes|Select-Object -First $MaxBeyond)){$fx=[double]$p.forward[0];$fy=[double]$p.forward[1];$fl=[Math]::Max(.1,[Math]::Sqrt($fx*$fx+$fy*$fy));$fx/=$fl;$fy/=$fl
   $bx=[double]$p.point[0]+0.7*$fx;$by=[double]$p.point[1]+0.7*$fy;$c=Place $bx $by ([double]$p.at[2]) $p.yaw
-  $beyond.Add([ordered]@{x=$p.x;y=$p.y;yaw=$p.yaw;stand=$p.at;point=$p.point;sill=$p.sill;far=@($bx,$by);landing=$c;dz=$(if($c){[Math]::Round([double]$c[2]-[double]$p.at[2],3)}else{$null});push=$(if($c){[Math]::Round([Math]::Sqrt(([double]$c[0]-$bx)*([double]$c[0]-$bx)+([double]$c[1]-$by)*([double]$c[1]-$by)),3)}else{$null})})}
+  $n=$beyond.Count;if($Shots){$null=Place $p.x $p.y ([double]$p.at[2]) $p.yaw;Start-Sleep -Milliseconds 400;Shot $n;$null=Place $bx $by ([double]$p.at[2]) $p.yaw}
+  $beyond.Add([ordered]@{n=$n;x=$p.x;y=$p.y;yaw=$p.yaw;stand=$p.at;point=$p.point;sill=$p.sill;far=@($bx,$by);landing=$c;dz=$(if($c){[Math]::Round([double]$c[2]-[double]$p.at[2],3)}else{$null});push=$(if($c){[Math]::Round([Math]::Sqrt(([double]$c[0]-$bx)*([double]$c[0]-$bx)+([double]$c[1]-$by)*([double]$c[1]-$by)),3)}else{$null})})}
  Save "$out/beyond.json" @($beyond)
  $good=@($beyond|Where-Object {$null-ne$_.dz-and[Math]::Abs($_.dz)-le0.45-and$_.push-lt0.3})
  Save "$out/verified.json" @{samples=$samples.Count;passes=$passes.Count;sameLevelFarSide=@($good)}
