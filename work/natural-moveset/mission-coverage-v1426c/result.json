@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/overseer_male_tall_01_office.def: source states 0,41; unconscious in both worlds"
+      ],
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          -25.1916,
+          47.2607,
+          14.6196
+        ],
+        "forward": [
+          0.5946630344327747,
+          -0.8039750465525685
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -23.047273225837046,
+        49.40647787424698,
+        16.2196
+      ],
+      "sourceStart": [
+        -25.7173,
+        47.9922,
+        14.6192
+      ],
+      "replacedAt": 509,
+      "cameraMoved": [
+        -21.795605865867735,
+        47.71431013454724,
+        16.2271
+      ],
+      "targetMoved": 2.11,
+      "actedAt": 1083,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        41
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

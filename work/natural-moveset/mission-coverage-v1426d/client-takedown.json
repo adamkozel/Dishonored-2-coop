@@ -1,0 +1,53 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Native lethal of models/characters/def/generic/overseer_male_tall_01_office.def: source states 0,13,39,54,64; dead in both worlds"
+  ],
+  "target": {
+    "spawner": "script_spawner_square_overseer_02",
+    "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+    "position": [
+      -25.1859,
+      47.2544,
+      14.6196
+    ],
+    "forward": [
+      0.5943946319803803,
+      -0.8041735020957282
+    ]
+  },
+  "kind": "lethal",
+  "camera": [
+    -23.040857078103986,
+    49.399461971884215,
+    16.2196
+  ],
+  "sourceStart": [
+    -25.7175,
+    47.981,
+    14.6195
+  ],
+  "replacedAt": 468,
+  "cameraMoved": [
+    -21.518987020933235,
+    47.34029107885322,
+    16.2289
+  ],
+  "targetMoved": 2.56,
+  "actedAt": 1141,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "sourceStates": [
+    0,
+    13,
+    39,
+    54,
+    64
+  ]
+}
