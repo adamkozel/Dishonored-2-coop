@@ -225,6 +225,8 @@ void beforeNpcNativeLoad(){
 // retires channels whose NPC is beyond 75 m of both players (Stop to the
 // client). The client binds only on a host Hello, so both sets are the host's.
 constexpr float kNpcRelevanceAdd=55.f,kNpcRelevanceDrop=75.f;constexpr unsigned kNpcRelevanceMax=24;
+constexpr float kNpcCivilianRelevanceAdd=15.f,kNpcCivilianRelevanceDrop=20.f; // 1214ey (#113)
+inline bool npcCivilian(const NativeNpcAuthority& n){return n.ai[0].kind==NativeAiKind::DecisionCivilian;}
 ULONGLONG npcRelevanceAt=0;std::uint64_t npcRelevanceScans=0,npcRelevanceAdded=0,npcRelevanceDropped=0,npcRelevanceEvicted=0,npcClientBound=0,npcClientBindRefused=0;
 float npcNearestPlayerSq(const float* p){
     float best=1e30f;
@@ -300,6 +302,7 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     unsigned bound=npcEnabledChannels();
     catalog.erase(std::remove_if(catalog.begin(),catalog.end(),[&](const auto& n){
         if(npcNearestPlayerSq(n.npc.position)>kNpcRelevanceAdd*kNpcRelevanceAdd)return true;
+        if(npcCivilian(n)&&npcNearestPlayerSq(n.npc.position)>kNpcCivilianRelevanceAdd*kNpcCivilianRelevanceAdd)return true;
         return std::any_of(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&(c.lease.binding.npc.handle==n.npc.handle||
             (c.lease.binding.npc.spawnerName==n.npc.spawnerName&&c.lease.binding.npc.definition==n.npc.definition));});}),catalog.end());
     std::stable_sort(catalog.begin(),catalog.end(),[&](const auto& a,const auto& b){return npcNearestPlayerSq(a.npc.position)<npcNearestPlayerSq(b.npc.position);});
@@ -309,13 +312,14 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     // 1214ag: bound NPCs are tracked by arm, never by pointer: bindNpcChannel appends to
     // npcChannels, and a reallocation left the pointers dangling (take 1279a: the host
     // crashed here with an access violation while many NPCs were bound in one scan).
-    std::vector<std::array<float,2>> dist;std::vector<std::uint64_t> owners;
+    std::vector<std::array<float,2>> dist;std::vector<std::uint64_t> owners;std::vector<bool> civilian;
     const auto channelByArm=[](std::uint64_t arm)->NpcAuthorityChannel*{for(auto& c:npcChannels)if(c.enabled&&c.arm==arm)return &c;return nullptr;};
-    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(0);}
+    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(0);civilian.push_back(npcCivilian(n));}
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority f{};
         if(!readNativeNpcAuthority(memoryRead,base,observedGame,c.lease.binding.npc.handle,f))continue;
-        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(c.arm);}
-    const auto priority=npcRelevancePriorities(dist,kNpcRelevanceAdd*kNpcRelevanceAdd);
+        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(c.arm);civilian.push_back(npcCivilian(c.lease.binding));}
+    auto priority=npcRelevancePriorities(dist,kNpcRelevanceAdd*kNpcRelevanceAdd);
+    for(unsigned i=0;i<priority.size();++i)if(civilian[i])priority[i]=npcRelevanceCivilianRank(priority[i]);
     std::vector<unsigned> order;for(unsigned i=0;i<catalog.size();++i)order.push_back(i);
     std::stable_sort(order.begin(),order.end(),[&](unsigned a,unsigned b){return priority[a]<priority[b];});
     for(unsigned i:order){const auto& n=catalog[i];NpcAuthorityChannel* evict=nullptr;
@@ -341,7 +345,8 @@ void refreshNpcRelevance(ULONGLONG tick){
     // Retire channels whose NPC is far from both players (corpses included).
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority fresh{};
         if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh))continue;
-        if(npcNearestPlayerSq(fresh.npc.position)>kNpcRelevanceDrop*kNpcRelevanceDrop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
+        const float drop=npcCivilian(fresh)&&!c.localPaired&&!c.hostPairedLease&&!c.hostPairedFollow?kNpcCivilianRelevanceDrop:kNpcRelevanceDrop;
+        if(npcNearestPlayerSq(fresh.npc.position)>drop*drop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
     npcCatalogRequest(); // 1214aa: also at the cap, so a nearer NPC can displace a far one
 }
 // Client: bind the NPC named by a host Hello from the current eligible catalog.
@@ -662,7 +667,7 @@ void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs);
-    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"victimHolds\":%llu,\"victimReleases\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",static_cast<unsigned long long>(c.victimHolds),static_cast<unsigned long long>(c.victimReleases),c.lease.ready?"true":"false",
+    for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"civilian\":%s,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"victimHolds\":%llu,\"victimReleases\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,npcCivilian(c.lease.binding)?"true":"false",c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",static_cast<unsigned long long>(c.victimHolds),static_cast<unsigned long long>(c.victimReleases),c.lease.ready?"true":"false",
         static_cast<unsigned long long>(c.poseRejects[0]),static_cast<unsigned long long>(c.poseRejects[1]),static_cast<unsigned long long>(c.poseRejects[2]),static_cast<unsigned long long>(c.poseRejects[3]),static_cast<unsigned long long>(c.poseRejects[4]),c.lastPoseLateMs);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
     fputs("],\"poseDiagnostics\":[",f);for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"stale\":%s,\"gaps\":%llu,\"recoveries\":%llu,\"failures\":%llu,\"lastFailure\":\"%s\",\"joint\":%d,\"matrix\":[",i?",":"",c.arm,c.lease.binding.npc.handle,c.poseStale?"true":"false",c.poseGaps,c.poseRecoveries,c.poseFailures,c.poseFailure,c.poseFailureJoint);
