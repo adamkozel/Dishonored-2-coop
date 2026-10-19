@@ -1,0 +1,63 @@
+{
+  "scope": "Native player states entered by held inputs in the current lab fixture (read-only probes; no commands).",
+  "rows": [
+    {
+      "trigger": "RightThumb:400",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 63,
+        "76:.?AVarkPlayerStateSpyglass@@": 64
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "X:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 58,
+        "76:.?AVarkPlayerStateSpyglass@@": 58
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "X:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 43,
+        "76:.?AVarkPlayerStateSpyglass@@": 43
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "RightThumb:400",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 62
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    }
+  ],
+  "passed": true,
+  "failure": null
+}
