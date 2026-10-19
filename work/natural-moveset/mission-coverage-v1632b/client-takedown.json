@@ -1,0 +1,184 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Native choke of models/characters/def/generic/middle_class_female_01.def: source states 0,41; unconscious in both worlds",
+    "Target physics: host mode 0 then 0, client mode 0 then 0 (0 ragdoll)",
+    "Far Reach body: spots 180:0x2dc029dc; chosen 180; pulled 0x3fff0010; states 0,84; body moved source 7.83 m, host 7.65 m; health client 10/10, host 10/10"
+  ],
+  "target": {
+    "spawner": "script_spawner_docks_photograph",
+    "definition": "models/characters/def/generic/middle_class_female_01.def",
+    "position": [
+      -34.5354,
+      216.344,
+      4.43588
+    ],
+    "forward": [
+      0.13761805166533556,
+      0.9904853718535358
+    ]
+  },
+  "kind": "choke",
+  "camera": [
+    -37.56878423881001,
+    216.3111357376619,
+    6.035880000000001
+  ],
+  "sourceStart": [
+    -34.714,
+    215.056,
+    4.43751
+  ],
+  "prePitch": 20.0,
+  "actedAt": 344,
+  "pressedWhenReady": {
+    "t": 344,
+    "entry": 1,
+    "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+    "state": 3
+  },
+  "trackSamples": 58,
+  "outcome": {
+    "host": "unconscious",
+    "client": "unconscious"
+  },
+  "sourceStates": [
+    0,
+    41
+  ],
+  "windowScenes": [],
+  "targetPhysics": {
+    "verdict": {
+      "host": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -34.4901,
+          215.418,
+          4.58902
+        ],
+        "physics": "0x282a193d210",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 10,
+        "ownerSuppressed": true,
+        "hidden": false
+      },
+      "client": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -34.6522,
+          215.664,
+          4.60746
+        ],
+        "physics": "0x24e9ad53210",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 10,
+        "ownerSuppressed": true,
+        "hidden": false
+      }
+    },
+    "later": {
+      "host": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -34.4898,
+          215.418,
+          4.58852
+        ],
+        "physics": "0x282a193d210",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 10,
+        "ownerSuppressed": true,
+        "hidden": false
+      },
+      "client": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -34.6523,
+          215.658,
+          4.60753
+        ],
+        "physics": "0x24e9ad53210",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 10,
+        "ownerSuppressed": true,
+        "hidden": false
+      }
+    }
+  },
+  "farReachGrant": "named_power_equip_requested",
+  "farReach": {
+    "body": [
+      -34.6565,
+      215.644,
+      4.60638
+    ],
+    "handle": "0x2dc029dc",
+    "hostBody": [
+      -34.4898,
+      215.418,
+      4.58801
+    ],
+    "hostHandle": "0x2dc029dc",
+    "spots": [
+      {
+        "offset": 180,
+        "at": [
+          -35.27578123249401,
+          211.18681582665909
+        ],
+        "yaw": 82.08996348701626,
+        "aimed": [
+          "0x2dc029dc"
+        ],
+        "hit": 1,
+        "sweep": [
+          0,
+          0
+        ]
+      }
+    ],
+    "chosen": 180,
+    "released": false,
+    "health": {
+      "client": {
+        "current": 10,
+        "maximum": 10,
+        "suppressed": true
+      },
+      "host": {
+        "current": 10,
+        "maximum": 10,
+        "suppressed": true
+      }
+    },
+    "end": {
+      "source": [
+        -36.4736,
+        208.128,
+        3.36739
+      ],
+      "host": [
+        -36.4734,
+        208.128,
+        3.36744
+      ]
+    },
+    "pulled": [
+      "0x3fff0010"
+    ],
+    "states": [
+      0,
+      84
+    ],
+    "sourceMoved": 7.83,
+    "hostMoved": 7.65
+  }
+}

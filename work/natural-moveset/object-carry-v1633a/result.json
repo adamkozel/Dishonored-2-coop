@@ -1,0 +1,204 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachbottle",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Pull states ; moved in host esc_env_bottle_03_3:2.52 gs_elite_female_sword_3175:0.022; moved in client esc_env_bottle_03_3:absent",
+        "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.4393,-160.761,68.2397",
+        "Far Reach pull: source GrabGrappledEntity (84) samples 9; presented power variants 4,5,6,7,9",
+        "Far Reach timeline: source phases 0>2>3, pulls 1, fallback packets 31, breaks 0, settles 1; observer 0/idle > 2/following > 3/settled, broken 0; client health 2 first zero never ms, unresolved from never ms; host health 2 first zero never ms, unresolved from never ms",
+        "Partner follows the pull: 5 of 5 flight samples on a remote phase"
+      ],
+      "grantResult": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "healthComponents": {
+        "client": "0x1c6c4a10b70",
+        "host": "0x1bbff0467e0"
+      },
+      "inputAt": "2026-10-19T21:18:56.4693743+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [],
+      "potionCounts": [],
+      "peakUseWeight": 0.0,
+      "holdSamples": 0,
+      "bottleAfter": [
+        -43.4393,
+        -160.761,
+        68.2397
+      ],
+      "bottleBefore": [
+        -43.4437,
+        -163.081,
+        67.252
+      ],
+      "stateVtables": [],
+      "movers": {
+        "host": [
+          {
+            "name": "esc_env_bottle_03_3",
+            "handle": "0x73c0356",
+            "change": 2.52,
+            "to": [
+              -43.4393,
+              -160.761,
+              68.2356
+            ]
+          },
+          {
+            "name": "gs_elite_female_sword_3175",
+            "handle": "0xc67088a",
+            "change": 0.022,
+            "to": [
+              -39.1284,
+              -162.85,
+              66.6982
+            ]
+          }
+        ],
+        "client": [
+          {
+            "name": "esc_env_bottle_03_3",
+            "handle": "0x73c0356",
+            "change": "absent",
+            "resolves": false
+          }
+        ]
+      },
+      "heldAfterMovers": {
+        "src": {
+          "phase": 4,
+          "handle": 121373526,
+          "holds": 0,
+          "pulls": 1,
+          "fallback": 31,
+          "bodies": 0,
+          "bodyLost": 0,
+          "releases": 0,
+          "settles": 1,
+          "breaks": 1,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 0,
+          "followed": 0,
+          "settledApplied": 0,
+          "broken": 0,
+          "presentRefused": 0,
+          "throws": 0,
+          "drops": 0,
+          "result": "idle"
+        },
+        "obs": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 0,
+          "pulls": 0,
+          "fallback": 0,
+          "bodies": 0,
+          "bodyLost": 0,
+          "releases": 0,
+          "settles": 0,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 4,
+          "remoteHandle": 121373526,
+          "applied": 0,
+          "followed": 53,
+          "settledApplied": 217,
+          "broken": 1,
+          "presentRefused": 0,
+          "throws": 0,
+          "drops": 0,
+          "result": "broken"
+        }
+      },
+      "pullVariants": [
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "pullState": 9,
+      "heldTimeline": {
+        "source": [
+          "0",
+          "2",
+          "3"
+        ],
+        "observer": [
+          "0/idle",
+          "2/following",
+          "3/settled"
+        ],
+        "final": {
+          "ms": 7597,
+          "src": {
+            "phase": 3,
+            "handle": 121373526,
+            "holds": 0,
+            "pulls": 1,
+            "fallback": 31,
+            "bodies": 0,
+            "bodyLost": 0,
+            "releases": 0,
+            "settles": 1,
+            "breaks": 0,
+            "refused": 0,
+            "remotePhase": 0,
+            "remoteHandle": 0,
+            "applied": 0,
+            "followed": 0,
+            "settledApplied": 0,
+            "broken": 0,
+            "presentRefused": 0,
+            "throws": 0,
+            "drops": 0,
+            "result": "idle"
+          },
+          "obs": {
+            "phase": 0,
+            "handle": 0,
+            "holds": 0,
+            "pulls": 0,
+            "fallback": 0,
+            "bodies": 0,
+            "bodyLost": 0,
+            "releases": 0,
+            "settles": 0,
+            "breaks": 0,
+            "refused": 0,
+            "remotePhase": 3,
+            "remoteHandle": 121373526,
+            "applied": 0,
+            "followed": 53,
+            "settledApplied": 116,
+            "broken": 0,
+            "presentRefused": 0,
+            "throws": 0,
+            "drops": 0,
+            "result": "settled"
+          }
+        }
+      },
+      "flightFollow": {
+        "flight": 5,
+        "lost": 0,
+        "lostAt": []
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}

@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T20:30:00+02:00",
+  "UpdatedAt": "2026-10-19T21:20:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22310,5 +22310,45 @@
       "candidate-npc-combat-v1214fa",
       "candidate-npc-combat-v1214fb"
     ]
+  },
+  "FarReachPulls": {
+    "Card": 115,
+    "Status": "done: object pulls (1620a) and body pulls (Emily's own victim 1627a, 1629b, 1630b, 1632b; host-streamed corpse 1628a, 1630a, 1631a) follow in both worlds through the held-object path; bodies are never broken; Corvo's victim pulled by Emily untested",
+    "Chapter": "documentation/handoff-2026-10-11/103-far-reach-pulls.md",
+    "Evidence": [
+      "object-carry-v1616b",
+      "object-carry-v1617a",
+      "object-carry-v1618a",
+      "object-carry-v1619b",
+      "object-carry-v1620a",
+      "carry-body-v1621a",
+      "carry-body-v1622a",
+      "mission-coverage-v1623a",
+      "mission-coverage-v1624a",
+      "mission-coverage-v1625a",
+      "mission-coverage-v1625b",
+      "mission-coverage-v1626a",
+      "mission-coverage-v1626b",
+      "mission-coverage-v1627a",
+      "mission-coverage-v1627b",
+      "mission-coverage-v1627c",
+      "mission-coverage-v1628a",
+      "mission-coverage-v1629a",
+      "mission-coverage-v1629b",
+      "mission-coverage-v1630a",
+      "mission-coverage-v1630b",
+      "mission-coverage-v1631a",
+      "mission-coverage-v1632a",
+      "mission-coverage-v1632b"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214fc",
+      "candidate-npc-combat-v1214fd",
+      "candidate-npc-combat-v1214fe",
+      "candidate-npc-combat-v1214ff",
+      "candidate-npc-combat-v1214fg",
+      "candidate-npc-combat-v1214fh"
+    ],
+    "Open": "#127: Corvo's copy of Emily's lethal victim never enters its ragdoll (physics mode 3, 1631a) and stands; 1214fg's ragdoll request inverted Emily's copy (1632a) and was reverted in 1214fh"
   }
 }
