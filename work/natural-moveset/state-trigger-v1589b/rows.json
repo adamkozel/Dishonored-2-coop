@@ -1,0 +1,66 @@
+[
+  {
+    "trigger": "LT:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 62,
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 63
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "LT:2500",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 48,
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 48
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "LT:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 49,
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 229
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "X:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "81:.?AVarkPlayerStateUndraw@@",
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@",
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 52,
+      "81:.?AVarkPlayerStateUndraw@@": 230,
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@": 230,
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@": 792
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  }
+]
