@@ -1,0 +1,72 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": false,
+  "failure": "No native takedown on the source (states 0,3,6,39)",
+  "checks": [],
+  "targetCandidates": [
+    "ld_spawner_hound_office_2=models/characters/def/generic/gravehound_01.def",
+    "ld_spawner_hound_office_1=models/characters/def/generic/gravehound_01.def",
+    "ld_spawner_hound_basement=models/characters/def/generic/gravehound_01.def"
+  ],
+  "reachTries": [
+    {
+      "spawner": "ld_spawner_hound_office_2",
+      "err": 0.44,
+      "dz": 0.11
+    },
+    {
+      "spawner": "ld_spawner_hound_office_1",
+      "err": 0.0,
+      "dz": 0.0
+    }
+  ],
+  "targetChosen": "ld_spawner_hound_office_1=models/characters/def/generic/gravehound_01.def",
+  "target": {
+    "spawner": "ld_spawner_hound_office_1",
+    "definition": "models/characters/def/generic/gravehound_01.def",
+    "position": [
+      -4.75809,
+      48.5056,
+      8.50003
+    ],
+    "forward": [
+      0.887251607258163,
+      0.4612857958118876
+    ]
+  },
+  "kind": "lethal",
+  "camera": [
+    -6.541210610701836,
+    50.95977621365914,
+    10.10003
+  ],
+  "sourceStart": [
+    -6.71,
+    47.491,
+    8.50368
+  ],
+  "replacedAt": 467,
+  "cameraMoved": [
+    -6.1778996324794555,
+    51.12510404958407,
+    10.10003
+  ],
+  "targetMoved": 0.13,
+  "crept": 942,
+  "creptEnd": 1267,
+  "stanceAfterCreep": 1,
+  "actedAt": 1298,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    3,
+    6,
+    39
+  ],
+  "windowScenes": []
+}
