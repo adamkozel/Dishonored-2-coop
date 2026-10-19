@@ -1,0 +1,166 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "approach": "swback",
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 38 presented",
+        "Same outcome in both worlds: dead",
+        "Victim ends 0 m apart in the two worlds",
+        "Guard after the kill: host present True hidden False, client present True hidden False"
+      ],
+      "guardWaitMs": 32670,
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "source": [
+          -47.9503,
+          -152.449,
+          66.4
+        ]
+      },
+      "takedownCamera": [
+        -49.115386,
+        -149.0427448,
+        68.30000000000001
+      ],
+      "takedownCameraHeld": false,
+      "stanceBefore": [
+        0,
+        1
+      ],
+      "granted": [
+        {
+          "item": "components/characters/player/base/attributes/shadow_walk_rat_shadow.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "inputAt": "2026-10-20T00:11:24.8053049+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_sw_back_short.midnightscene|2666"
+      ],
+      "sceneIds": [
+        38
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 102209734,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1544bb6cde0",
+          "actor": "0x1545f8c7530",
+          "attributes": "0x1545f6168d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 102209781,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x20b5d552130",
+          "actor": "0x20b628d98d0",
+          "attributes": "0x20b626568e0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "victimEnd": {
+        "source": [
+          -48.0579,
+          -153.093,
+          66.5784
+        ],
+        "observer": [
+          -48.0579,
+          -153.093,
+          66.5784
+        ]
+      },
+      "victimGapM": 0.0,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 84,
+        "rootsDelta": 135,
+        "bodyAppliedDelta": 264,
+        "positionBefore": [
+          -47.9503,
+          -152.449,
+          66.4
+        ],
+        "positionAfter": [
+          -48.0579,
+          -153.093,
+          66.5784
+        ]
+      },
+      "guardHealthObserverAfter": 0,
+      "guardEnd": {
+        "host": {
+          "present": true,
+          "position": [
+            -48.0579,
+            -153.093,
+            66.5784
+          ],
+          "current": 0,
+          "hidden": false
+        },
+        "client": {
+          "present": true,
+          "position": [
+            -48.0579,
+            -153.093,
+            66.5784
+          ],
+          "current": 0,
+          "hidden": false
+        }
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Takedown variants (side, front, drop, slide; choke and lethal; both source roles) on a host-owned NPC under the product controller: native scene, partner phases, shared outcome and victim position; fixture restored after every case."
+}

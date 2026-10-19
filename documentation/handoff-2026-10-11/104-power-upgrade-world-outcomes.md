@@ -7,7 +7,7 @@ it is shared between the two worlds or confined to the caster's world, and why. 
   authority.
 - Emily's outcomes happen in her world, on host-streamed copies, and need a path back to the host.
 
-The live candidate is 1214fl.
+The live candidate is 1214fp.
 
 ## Time factor (shared for NPCs; players keep real time)
 
@@ -50,11 +50,68 @@ The live candidate is 1214fl.
   through shared combat authority (chapter 95) and the ash through ASH1.
   - Bloody Swarm (`shadow_kill_bloody_swarm`) also spawns a bloodfly swarm (`bloodflyswarm_shadowkill.def`), which
     exists only in the killer's world (hypothesis).
-- **Open, Emily's NPC outcomes:**
-  - **Domino** (`domino_death_link`, and Domino's base multi-target outcomes, which chapter 30 left unfinished):
-    - carry-body-v1645a tried to link the two tutorial guards and then assassinate one.
-    - No mark was made (mark count 0), and the guard noticed Emily, so there was no takedown.
-  - **Deadly Shade and Baffling Shade, Rat Shadow, Mesmerize in combat:** still to take.
+- **Domino** (Emily; base linked outcomes, chapter 30): shared in both worlds through Linked requests (1214fm-fp).
+  - **Fixture:** Test-CarryBody v1644-v1651 `-DominoLink -HoldAi`.
+    - 1645a cast while the movement fixture still held Emily's input, so no mark was made.
+    - From v1644 the casts run after arming, from behind each guard, with every step recorded and filmed.
+    - The tutorial guards wander and noticed Emily in 1647a-1651b (fixture failures, kept). From v1649, `-HoldAi`
+      holds the host NPCs' AI (lab-only `coop_npc_combat fixture_ai40000`).
+  - **Native link (confirmed runtime):** each cast enters `UsePhantasmalLink`. Corvo's world presents both marks, and
+    Emily's film shows the native link beam between the guards (1646a).
+  - **Without a fix** (1648a, 1214fl): Emily's assassination of guard 2 was shared, but linked guard 1 lived at full
+    health in both worlds.
+    - About 1 s after guard 2, the native network repeated the hit on guard 1's copy with bit 40 of the damage flags
+      set (`0x10000000000`).
+    - No replay matched it, so the client refused it as `hit_damage_parameters` and suppressed it. 1647a's fatality
+      shows the same.
+  - **1214fm:** the client sends a player-owned hit carrying the link flag as a `Linked` combat request. The request
+    carries the declaration, the native amount and the native flags without the link bit. The host applies it
+    natively with the partner avatar as attacker, up to 96 m away, and HostWorld and Dead share the outcome.
+  - **1214fn:** Domino's linked knockout is sleep damage, which passed through the client natively.
+    - Emily's copy was knocked out locally, its channel ended (`ai_ownership_changed`), and only the Life roster carried
+      the knockout to the host. The bodies ended up to 4.5 m apart (1649b, 1653b, 1655a).
+    - A linked sleep hit on the client is now captured and sent as a Linked request.
+  - **1214fo:** a peer's Request or Commit under matching nonces marks the combat channel ready.
+    - After a re-arm, the client's Ready could reach the host before its Hello and be refused. The client was then
+      ready and the host was not.
+    - In 1654a the host dropped the linked knockout request as `receive_not_ready`, 30 ms before the next Hello round.
+  - **1214fp:** a knockout sets the owner suppression flag, and the native maximum drops from 40 to the suppressed 10.
+    - The host then committed a HostWorld loss from a baseline above the new maximum. The commit failed validation and
+      stopped the host's whole combat session after every choke (`commit_queue_or_validation`; 1652b, 1654a, 1655a).
+    - The host now rebases instead (`hostWorldRebased`). This is a general fix: any choke used to re-arm combat.
+  - **Result (confirmed runtime):**
+    - Lethal: guard 1 dies in both worlds with the same body position (1652a, 1653a, 1654b, 1655b, 1657b).
+    - Choke (1657a, 1214fp): guard 1 is unconscious in both worlds at the same position.
+      - The host's combat session stays up: 2 rebases and no re-arm.
+      - The Linked request is applied, the channel is kept, and the unconscious body streams to Emily (389 poses).
+  - **Not covered:** `domino_death_link` and links of three or four NPCs (hypothesis: the same Linked path). The death
+    of a linked NPC caused by Corvo is applied to Emily's copy through Dead, outside the native network, so in her world
+    it is not repeated on the other linked NPCs (hypothesis, not taken).
+- **Rat Shadow** (`shadow_walk_rat_shadow`; takedown-variants-v1656a, Test-TakedownVariants-v1655 `-GrantNamed`):
+  - Emily's Shadow Walk kill (`assassination_sw_back_short`) is shared. The guard is dead in both worlds, 0 m apart.
+  - The corpse stays visible in both worlds, and no rats appear in either.
+  - The host orders the kill: the client's own native kill is suppressed, and the death is applied by the host's
+    commit. So the upgrade's native corpse-to-rats outcome never runs.
+  - **Decision:** known limitation for the release. The body stays consistent in both worlds and can be hidden by hand.
+    Making the rats would mean triggering the native rat outcome on the host for the partner's kill (#131).
+- **Mesmerize in combat** (`mesmerize_incombat`; carry-body-v1658a, Test-CarryBody-v1652 `-CastPower mesmerize`):
+  - The native power takes a target in Emily's world: guard 1's handle in the target list. The aim came from the
+    floor below and missed guard 2.
+  - Guard 2 kept walking in step in both worlds: 14.5 m in 10 s, 0.06 m apart.
+  - NPC AI runs on the host, and the host has only the cosmetic Mesmerize model (chapter 25), so no NPC can be
+    mesmerized in either world (confirmed static).
+- **Deadly Shade and Baffling Shade** (carry-body-v1658b, `-CastPower doppelganger`):
+  - The host's NPCs do not perceive Emily's shade. Guard 2 is unaffected and in step in both worlds (0.001 m apart).
+  - In Emily's world, one `kill_damage` event that was not player-owned was suppressed as a replica-world event, so
+    it changed nothing.
+- **Decision for Mesmerize, the shades and Rat Shadow:** confined to Emily's world as presentation (the spirit, the
+  shade, the target effects); the outcome on NPCs is missing but never diverges.
+  - The reason: these powers act through native world objects (`arkCpntMesmerize` sends `arkMsgTryMesmerizeNpc` and
+    `arkMsgUnmesmerizeNpc`; the shade is a perceived entity). Those objects exist only in her world, while the AI
+    that would react runs on the host.
+  - Sharing them means creating the native object on the host for the partner's cast: #131 (stage 4, Todo). Until
+    then they are known limitations for the release notes.
+  - The takedowns in 1658a/b failed because the guard had walked off. Kept as evidence.
 
 ## Possessed bodies (host world; consistent)
 
@@ -74,3 +131,11 @@ The live candidate is 1214fl.
 - Record-MissionCoverage-v1633 and Test-CarryBody-v1640/v1641 `-GrantNamed`. `coop_grant_named` enables power
   enhancements; Shadow Kill ran on the lab guard.
 - Test-CarryBody-v1641 tolerates a guard turned to ash; v1642 `-PossessCorpse`; v1643 `-DominoLink`.
+- Test-CarryBody v1644-v1651:
+  - Domino casts after arming, from behind each guard, with each step recorded and filmed;
+  - placement at the guard's floor height;
+  - the guard 1 sample after any kill of guard 2;
+  - the source's health held, the aim pitch clamped and a missed mark retried;
+  - `-HoldAi` from arming, with no renewal.
+- v1652 `-CastPower mesmerize|doppelganger`.
+- Test-TakedownVariants-v1655 `-GrantNamed` and the guard's presence after the kill.

@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-19T23:28:11.031770+02:00",
+  "dll": "4B92FC79786087B70660AD595EF0477A4A7F15E2D2A9D0619CB5829964CFA152",
+  "probe": "CF056EE6D96EE3062EBAD345726F0E6FF8F4F7A8BA551A6258A2672180B52502",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214fl",
+  "protocol": 80,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 75,
+  "clips": 382,
+  "banks": [
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/corvo-choke-bank.bin",
+      "sha256": "AA8DA1AE7F5123B257D482CA73AFA56CDB2F9987D1F4298EE2EBE63631E96154"
+    },
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/emily-choke-bank.bin",
+      "sha256": "0CC6EBD2CC349B3462985412C91F314F8972B5149AE9366982EE8A145CA815AD"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214fm (protocol 80, #117): 1214fl plus Domino linked outcomes. The native Domino network repeats a hit on each linked NPC with bit 40 of the damage flags set; on the client no replay matched that copy, it was refused as hit_damage_parameters and suppressed, and the linked guard lived in both worlds (carry-body-v1648a). The client now sends it as a Linked request with its declaration, native amount and flags, and the host applies it natively, with HostWorld and Dead sharing the outcome; unit tests cover the Linked request."
+}

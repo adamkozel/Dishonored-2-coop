@@ -11,11 +11,15 @@ enum class NpcCombatMessage:unsigned {Hello=1,Ready,Request,Commit,Stop};
 // NPC source, take 1270e: bloodflies on a checkpoint guard). The host lets it apply
 // natively and commits its observed native loss in event order; the client removes
 // exactly that loss by the native health subtraction. Never lethal, never a gain.
+// Linked (1214fm, #117): a client hit the native Domino network repeated on a linked
+// NPC (the link flag set). The host applies it natively with the partner avatar as
+// attacker, its declaration, native amount and flags; HostWorld and Dead share the
+// outcome. Never a commit.
 // PeerNative (1214y, #14): a client hit the replay cannot reproduce (grenade,
 // power, tranquilizer or variant bolt), sent as a request carrying only its known
 // declaration and native amount. The host applies it natively with the partner
 // avatar as attacker; HostWorld and Dead share the outcome. Never a commit.
-enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld,PeerNative};
+enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld,PeerNative,Linked};
 #pragma pack(push,1)
 struct NpcCombatScriptDamage {std::uint64_t trigger=0,declaration=0;float amount=0;unsigned reserved=0;};
 struct NpcCombatRangedDamage {std::uint64_t declaration=0;float amount=0,distance=0;unsigned weapon=0;};
@@ -72,6 +76,17 @@ inline bool npcCombatHostNativeDeclaration(unsigned localRole,unsigned attacker,
 inline bool validNpcPeerNative(const NpcCombatRangedDamage& r){
     return npcDamageDeclarationName(r.declaration)&&!npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&!r.weapon;
 }
+// 1214fm (#117): the native Domino network repeats a hit on each linked NPC with bit 40 of the damage flags set
+// (takes 1647a fatality and 1648a assassination; confirmed runtime). A Linked request carries a replayable player
+// declaration, its native amount, and its native flags without the link flag in weapon.
+// 1214fn: or a linked knockout (sleep damage), which used to pass through the client natively (1653b).
+constexpr std::uint64_t kNpcCombatLinkedFlag=0x10000000000ull;
+inline bool npcCombatLinkedSleepDeclaration(std::uint64_t key){
+    return key==0xba6f17ec4e0523d7ull||key==0xa0b9d817837f7916ull||key==0x23cd8d2d89e9665aull;
+}
+inline bool validNpcLinked(const NpcCombatRangedDamage& r){
+    return npcDamageDeclarationName(r.declaration)&&(npcCombatReplayableDeclaration(r.declaration)||npcCombatLinkedSleepDeclaration(r.declaration))&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&r.weapon&&!(r.weapon&~0xffu);
+}
 inline bool validNpcRanged(NpcCombatDamage d,const NpcCombatRangedDamage& r){
     const auto* p=npcCombatRangedProfile(d,r);
     return p&&std::isfinite(r.amount)&&r.amount>0&&r.amount>=p->minimum&&r.amount<=p->maximum&&
@@ -111,7 +126,7 @@ inline bool npcCombatGeometry(NpcCombatDamage damage,const EnemyMeleeGeometry& g
         if(g.region!=1||!g.regions||(g.regions&~255u)||g.normal[0]!=0||g.normal[1]!=0||g.normal[2]!=0)return false;
         auto probe=g;probe.region=2;probe.regions=4;probe.normal[0]=1;return validEnemyMeleeGeometry(probe);
     }
-    if(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::HostWorld||damage==NpcCombatDamage::PeerNative)return emptyEnemyMeleeGeometry(g);
+    if(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::HostWorld||damage==NpcCombatDamage::PeerNative||damage==NpcCombatDamage::Linked)return emptyEnemyMeleeGeometry(g);
     if(damage==NpcCombatDamage::MapTrigger&&emptyEnemyMeleeGeometry(g))return true;
     if(damage==NpcCombatDamage::Corpse||damage==NpcCombatDamage::MapTrigger){
         if(g.region!=1||g.regions)return false;
@@ -129,12 +144,18 @@ inline bool npcCombatNativeLethal(float before,float inflicted){
     return std::isfinite(before)&&before>0&&std::isfinite(inflicted)&&inflicted>=0&&before-inflicted<0.5f;
 }
 inline bool npcCombatReplicaWorldEvent(unsigned localRole,bool localPlayerOwned){return localRole==1&&!localPlayerOwned;}
+// 1214fp (#117): a knockout sets the owner suppression flag, and the native maximum drops to the suppressed maximum
+// (40 to 10 for the tutorial guard; native_health.h). A HostWorld baseline above the new maximum is no loss to
+// commit: it failed validation and stopped the host's whole combat session after every choke (1652b, 1654a, 1655a).
+inline bool npcCombatHostWorldRebase(float baseline,float current,float maximum){
+    return std::isfinite(baseline)&&std::isfinite(maximum)&&baseline>maximum&&std::isfinite(current)&&current<=maximum;
+}
 inline bool npcCombatHealth(float current,float maximum){return std::isfinite(current)&&std::isfinite(maximum)&&current>0&&maximum>0&&current<=maximum&&maximum<=1000000;}
 inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,const CoopPosePacket& peer){
     if(p.magic!=0x434e3244||p.version!=7||p.size!=sizeof(p)||p.binding.kind!=NpcAuthorityMessage::Stop||
        !validNpcHeader(p.binding,local,peer)||!p.sourceNonce||static_cast<unsigned>(p.kind)<1||static_cast<unsigned>(p.kind)>5)return false;
     if(p.damage==NpcCombatDamage::MapTrigger?!validNpcScript(p.script):!emptyNpcScript(p.script))return false;
-    if(p.damage==NpcCombatDamage::PeerNative?!validNpcPeerNative(p.ranged):npcCombatRanged(p.damage)?!validNpcRanged(p.damage,p.ranged):!emptyNpcRanged(p.ranged))return false;
+    if(p.damage==NpcCombatDamage::PeerNative?!validNpcPeerNative(p.ranged):p.damage==NpcCombatDamage::Linked?!validNpcLinked(p.ranged):npcCombatRanged(p.damage)?!validNpcRanged(p.damage,p.ranged):!emptyNpcRanged(p.ranged))return false;
     if(p.kind==NpcCombatMessage::Hello)return !p.sourceActorArm&&!p.targetNonce&&!p.event&&!p.request&&p.sourceRole==2&&p.damage==NpcCombatDamage::None&&npcCombatHealth(p.before,p.maximum)&&!p.after&&!p.inflicted&&emptyEnemyMeleeGeometry(p.geometry);
     if(!p.targetNonce)return false;
     if(p.kind==NpcCombatMessage::Ready||p.kind==NpcCombatMessage::Stop)return !p.sourceActorArm&&!p.event&&!p.request&&p.sourceRole==2&&p.damage==NpcCombatDamage::None&&!p.before&&!p.after&&!p.maximum&&!p.inflicted&&emptyEnemyMeleeGeometry(p.geometry);
@@ -142,7 +163,7 @@ inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,co
     const bool world=npcCombatWorldDamage(p.damage);
     if(world?(p.sourceRole!=2||(p.damage==NpcCombatDamage::Corpse?!p.sourceActorArm:p.sourceActorArm!=0)):(p.sourceRole>1||p.sourceActorArm))return false;
     if(p.damage==NpcCombatDamage::HostWorld&&(p.kind!=NpcCombatMessage::Commit||!(p.after>0)||!(p.after<p.before)))return false;
-    if(p.damage==NpcCombatDamage::PeerNative&&p.kind!=NpcCombatMessage::Request)return false;
+    if((p.damage==NpcCombatDamage::PeerNative||p.damage==NpcCombatDamage::Linked)&&p.kind!=NpcCombatMessage::Request)return false;
     if(p.kind==NpcCombatMessage::Request)return !world&&peer.role==1&&p.sourceRole==1&&p.request&&!p.event&&!p.before&&!p.after&&!p.maximum&&!p.inflicted;
     // Terminal native outcomes retain a scoped tombstone after pose/AI retirement.
     return peer.role==0&&p.event&&(p.sourceRole==1?p.request!=0:p.request==0)&&npcCombatHealth(p.before,p.maximum)&&

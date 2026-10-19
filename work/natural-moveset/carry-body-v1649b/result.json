@@ -1,0 +1,219 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Domino casts: grant named_power_equip_requested, at most 0 native marks",
+        "Domino-linked guard 1 after guard 2's kill: host health 10 (suppressed True), client health 1 (suppressed True)",
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Guard after the takedown: host present True hidden False, client present True hidden False"
+      ],
+      "dominoGrant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "dominoAims": [
+        {
+          "target": [
+            -44.14,
+            -142.99,
+            66.4
+          ],
+          "stand": [
+            -44.39,
+            -153.27,
+            66.4036
+          ],
+          "yaw": 88.60689474009625,
+          "pitch": 2.2198368129010615,
+          "distance": 10.283039433941699
+        },
+        {
+          "target": [
+            -44.3849,
+            -148.359,
+            61
+          ],
+          "stand": [
+            -46.6869,
+            -146.463,
+            61.0036
+          ],
+          "yaw": -39.47594934433616,
+          "pitch": 7.495747412058793,
+          "distance": 2.9822843593460457
+        }
+      ],
+      "dominoLinks": {
+        "readyMask": 5,
+        "marksOnly": 371,
+        "sent": 826,
+        "received": 0,
+        "rejected": 0,
+        "unknown": 1,
+        "presented": 0,
+        "event": 0,
+        "nativeHandle": 0,
+        "markCount": 0,
+        "leased": false,
+        "readCount": 994,
+        "scopedReadCount": 841,
+        "readMaxMs": 21.4674,
+        "scopedReadMaxMs": 2.1216,
+        "readStage": 0,
+        "started": 0,
+        "stopped": 0,
+        "updated": 0,
+        "refused": 0,
+        "retired": 0,
+        "marks": []
+      },
+      "dominoPeerLinks": {
+        "readyMask": 0,
+        "marksOnly": 0,
+        "sent": 0,
+        "received": 825,
+        "rejected": 0,
+        "unknown": 0,
+        "presented": 823,
+        "event": 2,
+        "nativeHandle": 210178549,
+        "markCount": 2,
+        "leased": true,
+        "readCount": 0,
+        "scopedReadCount": 0,
+        "readMaxMs": 0.0,
+        "scopedReadMaxMs": 0.0,
+        "readStage": 0,
+        "started": 8,
+        "stopped": 6,
+        "updated": 1129,
+        "refused": 0,
+        "retired": 0,
+        "marks": [
+          {
+            "sourceId": 272,
+            "target": 189269860,
+            "id": 286,
+            "owner": 209916411
+          },
+          {
+            "sourceId": 282,
+            "target": 190252915,
+            "id": 295,
+            "owner": 209916411
+          }
+        ]
+      },
+      "dominoMarksMax": 0.0,
+      "guardHandleSource": "0xb480764",
+      "filmed": false,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -39.0219,
+          -148.63,
+          66.4
+        ],
+        "observer": [
+          -38.99,
+          -148.71,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-19T23:32:11.8498303+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 99889093,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1d5cb52be90",
+          "actor": "0x1d5e331c5e0",
+          "attributes": "0x1d5e30928e0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 99889140,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x27ede0c7b80",
+          "actor": "0x27ee25a2020",
+          "attributes": "0x27ee230d8d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "guardEnd": {
+        "host": {
+          "present": true,
+          "position": [
+            -38.4408,
+            -149.411,
+            66.5804
+          ],
+          "current": 10,
+          "hidden": false
+        },
+        "client": {
+          "present": true,
+          "position": [
+            -38.3755,
+            -148.985,
+            66.5893
+          ],
+          "current": 10,
+          "hidden": false
+        }
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 carried body: the source chokes the Dunwall tutorial guard under the product controller, carries the unconscious body forward and drops it; the body must end < 2 m apart in both worlds; fixture restored after every case."
+}

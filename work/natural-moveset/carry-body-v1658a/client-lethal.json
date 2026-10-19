@@ -1,0 +1,78 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": false,
+  "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+  "checks": [
+    "mesmerize at guard 2: host moved 14.48 m, client copy moved 14.43 m in 10 s; health host 40 client 40"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -38.99,
+      -148.71,
+      66.4
+    ],
+    "observer": [
+      -38.99,
+      -148.71,
+      66.4
+    ]
+  },
+  "castGranted": [
+    {
+      "item": "models/powers/mesmerize/mesmerize.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/mesmerize_incombat.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "castAim": {
+    "target": [
+      -38.99,
+      -148.71,
+      66.4
+    ],
+    "stand": [
+      -44.9196,
+      -148.051,
+      61.0646
+    ],
+    "yaw": -6.341676493663942,
+    "pitch": -40,
+    "distance": 5.966107370807203
+  },
+  "castAt": "2026-10-20T00:19:17.6564812+02:00",
+  "castGuard": {
+    "hostMove": 14.48,
+    "clientMove": 14.43,
+    "hostEnd": {
+      "position": [
+        -52.5157,
+        -153.884,
+        66.4279
+      ],
+      "current": 40,
+      "maximum": 40,
+      "suppressed": false
+    },
+    "clientEnd": {
+      "position": [
+        -52.4587,
+        -153.888,
+        66.4279
+      ],
+      "current": 40,
+      "maximum": 40,
+      "suppressed": false
+    }
+  },
+  "inputAt": "2026-10-20T00:19:30.2710770+02:00",
+  "scenes": [],
+  "restored": true
+}

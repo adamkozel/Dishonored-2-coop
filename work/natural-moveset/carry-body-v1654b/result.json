@@ -1,0 +1,223 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Domino casts: grant named_power_equip_requested, at most 0 native marks",
+        "Domino-linked guard 1 after guard 2's kill: host health 0 (suppressed False), client health 0 (suppressed False)",
+        "Remote phase 6 presented",
+        "Same outcome in both worlds: dead",
+        "Guard after the takedown: host present True hidden False, client present True hidden False"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": false,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "source": [
+          -44.14,
+          -142.99,
+          66.4
+        ]
+      },
+      "dominoGrant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "dominoAims": [
+        {
+          "target": [
+            -52.3343,
+            -145.486,
+            61
+          ],
+          "stand": [
+            -56.2003,
+            -144.459,
+            61.0036
+          ],
+          "yaw": -14.876979837577576,
+          "pitch": 6,
+          "distance": 4.00008562408356
+        },
+        {
+          "target": [
+            -44.14,
+            -142.99,
+            66.4
+          ],
+          "stand": [
+            -44.39,
+            -153.27,
+            66.4036
+          ],
+          "yaw": 88.60689474009625,
+          "pitch": 2,
+          "distance": 10.283039433941699
+        }
+      ],
+      "dominoLinks": {
+        "readyMask": 5,
+        "marksOnly": 19,
+        "sent": 993,
+        "received": 0,
+        "rejected": 0,
+        "unknown": 3,
+        "presented": 0,
+        "event": 0,
+        "nativeHandle": 0,
+        "markCount": 0,
+        "leased": false,
+        "readCount": 1242,
+        "scopedReadCount": 991,
+        "readMaxMs": 32.2454,
+        "scopedReadMaxMs": 7.5951,
+        "readStage": 0,
+        "started": 0,
+        "stopped": 0,
+        "updated": 0,
+        "refused": 0,
+        "retired": 0,
+        "marks": []
+      },
+      "dominoPeerLinks": {
+        "readyMask": 0,
+        "marksOnly": 0,
+        "sent": 0,
+        "received": 993,
+        "rejected": 12,
+        "unknown": 0,
+        "presented": 979,
+        "event": 2,
+        "nativeHandle": 210178549,
+        "markCount": 2,
+        "leased": true,
+        "readCount": 0,
+        "scopedReadCount": 0,
+        "readMaxMs": 0.0,
+        "scopedReadMaxMs": 0.0,
+        "readStage": 0,
+        "started": 4,
+        "stopped": 2,
+        "updated": 981,
+        "refused": 0,
+        "retired": 0,
+        "marks": [
+          {
+            "sourceId": 236,
+            "target": 190252915,
+            "id": 612,
+            "owner": 209916411
+          },
+          {
+            "sourceId": 303,
+            "target": 189269860,
+            "id": 615,
+            "owner": 209916411
+          }
+        ]
+      },
+      "dominoMarksMax": 0.0,
+      "inputAt": "2026-10-19T23:59:37.2385680+02:00",
+      "aiHoldEnd": {
+        "active": false,
+        "ready": false,
+        "result": "fixture_actor_changed",
+        "acquired": 10,
+        "released": 10,
+        "lost": 0
+      },
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|2200"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 101533687,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x2a7c629a690",
+          "actor": "0x2a7e23a8d70",
+          "attributes": "0x2a7e21118e0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 101533734,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x261dfe1f070",
+          "actor": "0x261e255fdd0",
+          "attributes": "0x261e22ba8d0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "guardEnd": {
+        "host": {
+          "present": true,
+          "position": [
+            -41.5811,
+            -143.706,
+            67.6387
+          ],
+          "current": 0,
+          "hidden": false
+        },
+        "client": {
+          "present": true,
+          "position": [
+            -41.5811,
+            -143.706,
+            67.6387
+          ],
+          "current": 0,
+          "hidden": false
+        }
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 carried body: the source chokes the Dunwall tutorial guard under the product controller, carries the unconscious body forward and drops it; the body must end < 2 m apart in both worlds; fixture restored after every case."
+}
