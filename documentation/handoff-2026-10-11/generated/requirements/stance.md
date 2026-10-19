@@ -1,6 +1,6 @@
 # stance: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:42:30.651957+02:00. All fields below retain the catalog wording.
 
 ## crouch_idle
 

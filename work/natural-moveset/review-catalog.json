@@ -3962,12 +3962,68 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Candidates require animation review and appropriate game-state/contact binding. 1209 (audit 1211): no player knockdown provoked in an attack spree; native Corvo knockdown fall/front/land/recovery assets identified (PLAYER_HITREACT_KNOCKDOWN blowback).",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [],
       "evidence": [
-        "../movement-integration/native-combat-use-observations-v1211.json"
-      ]
+        "../movement-integration/native-combat-use-observations-v1211.json",
+        "coverage-v1403a/result.json",
+        "coverage-v1403b/result.json",
+        "coverage-v1435b/result.json",
+        "coverage-v1440a/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1441-stagger-knockdown.json",
+        "decision": "complete",
+        "scope": "Both roles: the recoil stagger after a parried or wall-struck swing (left and right) and the knockdown with the lying phase and the recovery to standing, presented on the partner from the native states.",
+        "takes": [
+          {
+            "take": "coverage-v1403a",
+            "cases": [
+              "client-labknock"
+            ]
+          },
+          {
+            "take": "coverage-v1403b",
+            "cases": [
+              "host-labknock"
+            ]
+          },
+          {
+            "take": "coverage-v1435b",
+            "cases": [
+              "client-wallswing",
+              "host-wallswing"
+            ]
+          },
+          {
+            "take": "coverage-v1440a",
+            "cases": [
+              "client-wallswing"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "coverage-v1403a/client-labknock-observer.mp4",
+            "verdict": "Emily recoils, drops to her knees, lies face down, pushes up to a crouch and rises to her guard."
+          },
+          {
+            "video": "coverage-v1403b/host-labknock-observer.mp4",
+            "verdict": "Corvo drops to his knees, lies face down, pushes up to a crouch and rises to standing."
+          },
+          {
+            "video": "coverage-v1440a/client-wallswing-observer.mp4",
+            "verdict": "From behind her inside the room: Emily swings at the wall, her arms fly out wide and her body is thrown back off the blow, then she recovers to her guard."
+          },
+          {
+            "video": "coverage-v1440a/host-wallswing-observer.mp4",
+            "verdict": "From behind him inside the room: Corvo swings at the wall, his sword arm is flung back, his body twists and he stumbles back a step before recovering."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "kick_or_shove_if_present",

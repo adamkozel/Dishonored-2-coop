@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:42:30.651957+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1398,16 +1398,76 @@ Candidates require animation review and appropriate game-state/contact binding. 
   ],
   "deliverable_kind": "animation",
   "notes": "Candidates require animation review and appropriate game-state/contact binding. 1209 (audit 1211): no player knockdown provoked in an attack spree; native Corvo knockdown fall/front/land/recovery assets identified (PLAYER_HITREACT_KNOCKDOWN blowback).",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
-    "../movement-integration/native-combat-use-observations-v1211.json"
-  ]
+    "../movement-integration/native-combat-use-observations-v1211.json",
+    "coverage-v1403a/result.json",
+    "coverage-v1403b/result.json",
+    "coverage-v1435b/result.json",
+    "coverage-v1440a/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1441-stagger-knockdown.json",
+    "decision": "complete",
+    "scope": "Both roles: the recoil stagger after a parried or wall-struck swing (left and right) and the knockdown with the lying phase and the recovery to standing, presented on the partner from the native states.",
+    "takes": [
+      {
+        "take": "coverage-v1403a",
+        "cases": [
+          "client-labknock"
+        ]
+      },
+      {
+        "take": "coverage-v1403b",
+        "cases": [
+          "host-labknock"
+        ]
+      },
+      {
+        "take": "coverage-v1435b",
+        "cases": [
+          "client-wallswing",
+          "host-wallswing"
+        ]
+      },
+      {
+        "take": "coverage-v1440a",
+        "cases": [
+          "client-wallswing"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1403a/client-labknock-observer.mp4",
+        "verdict": "Emily recoils, drops to her knees, lies face down, pushes up to a crouch and rises to her guard."
+      },
+      {
+        "video": "coverage-v1403b/host-labknock-observer.mp4",
+        "verdict": "Corvo drops to his knees, lies face down, pushes up to a crouch and rises to standing."
+      },
+      {
+        "video": "coverage-v1440a/client-wallswing-observer.mp4",
+        "verdict": "From behind her inside the room: Emily swings at the wall, her arms fly out wide and her body is thrown back off the blow, then she recovers to her guard."
+      },
+      {
+        "video": "coverage-v1440a/host-wallswing-observer.mp4",
+        "verdict": "From behind him inside the room: Corvo swings at the wall, his sword arm is flung back, his body twists and he stumbles back a step before recovering."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/native-combat-use-observations-v1211.json](<../../../../work/movement-integration/native-combat-use-observations-v1211.json>)
+- [evidence: coverage-v1403a/result.json](<../../../../work/natural-moveset/coverage-v1403a/result.json>)
+- [evidence: coverage-v1403b/result.json](<../../../../work/natural-moveset/coverage-v1403b/result.json>)
+- [evidence: coverage-v1435b/result.json](<../../../../work/natural-moveset/coverage-v1435b/result.json>)
+- [evidence: coverage-v1440a/result.json](<../../../../work/natural-moveset/coverage-v1440a/result.json>)
 ## kick_or_shove_if_present
 
 Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close attacks per role; view still open. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.
