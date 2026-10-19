@@ -2,8 +2,8 @@
 
 Emily's Far Reach pulls map movables and bodies toward her. Before this work, a pull changed only her world: the
 pulled object stayed put in Corvo's world, and the body pull looked refused. Candidates 1214fc to 1214fe make both
-pulls end the same way in both worlds; 1214fh is the live candidate (its source equals 1214ff). A separate bug found on
-the way, Corvo's standing copy of Emily's lethal victim, is open as #127 (see the last section).
+pulls end the same way in both worlds. A separate bug found on the way, Corvo's standing copy of Emily's lethal victim
+(#127), is fixed in 1214fj, the live candidate (see the last section).
 
 ## Native pull (confirmed runtime)
 
@@ -95,7 +95,7 @@ All in [shadow_stream.h](../../outputs/d2-coop-lab/src/shadow_stream.h) and
 - The spot search is a lab fixture: a spot can lose the body behind the partner (1632a), and Far Reach's failed casts
   move Emily.
 
-## Corvo's copy of Emily's lethal victim stands up (#127, open)
+## Corvo's copy of Emily's lethal victim stood up (#127, fixed in 1214fj)
 
 - **Seen:** in Corvo's window, after Emily's lethal takedown of the photographer, the corpse falls, then stands in an
   idle pose and shifts it until something moves it (1628a, 1630a). Both worlds read it dead (health 0).
@@ -109,5 +109,24 @@ All in [shadow_stream.h](../../outputs/d2-coop-lab/src/shadow_stream.h) and
   - In mission-coverage-v1632a Corvo's corpse reached mode 0 and lay on the deck.
   - But Emily's copy, which follows the host's streamed pose, then balanced upside down beside the tripod. Without the
     call, her copy lay correctly (1630a, 1631a).
-  - 1214fh reverts the call. The fix needs the host's ragdoll and its streamed pose to agree, or the death to reach the
-    ragdoll natively.
+  - 1214fh reverts the call.
+- **Measured, 1214fi** (the request behind the lab toggle `coop_npc_corpse_ragdoll`; Record-MissionCoverage-v1631/v1632
+  record each world's root, physics mode and skeleton for 8 s and film both copies):
+  - Toggle off (1634a, 1635b): Corvo's skeleton is a standing idle (head 1.6 m above the root), while Emily's copy lies
+    face down.
+  - Toggle on (1634c, 1635a): Corvo's corpse lies in ragdoll mode 0, but Emily's copy stands upright (head +0.47 m,
+    ankles -0.92 m around the root).
+  - Both roots stay upright and coincide. Emily's skeleton never equals the host's, although her client applies the
+    host's bones (85-112 body applications, none refused); how the two compose is unexplained (hypothesis: her held
+    corpse and the host's ragdoll sample different pose buffers).
+- **Fix, 1214fj** ([npc_authority_stream.h](../../outputs/d2-coop-lab/src/npc_authority_stream.h)):
+  - The host keeps presenting the bones of the client's last victim pose (`NpcPoseBuffer::latest`) on that corpse.
+    The root stays native, so a pull still moves it.
+  - It stops once a carry touches the body: the host's own carry, or the partner's carry suppression.
+  - The NPC stream status counts frozen frames and freeze ends.
+- **Result (confirmed runtime, films reviewed):**
+  - mission-coverage-v1636a: both copies lie on the deck for the whole series; the host presented 96 frozen frames by
+    the verdict.
+  - v1636b: Emily's Far Reach then pulled the corpse 6.22 m in both worlds. In Corvo's window it flies lying, not
+    upright as in 1630a, and both copies are dead.
+- **Not covered:** Corvo carrying Emily's lethal victim ends the freeze; the corpse's pose after his drop is untested.

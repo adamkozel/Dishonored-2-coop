@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T21:20:00+02:00",
+  "UpdatedAt": "2026-10-19T23:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22349,6 +22349,30 @@
       "candidate-npc-combat-v1214fg",
       "candidate-npc-combat-v1214fh"
     ],
-    "Open": "#127: Corvo's copy of Emily's lethal victim never enters its ragdoll (physics mode 3, 1631a) and stands; 1214fg's ragdoll request inverted Emily's copy (1632a) and was reverted in 1214fh"
+    "Open": "none for #127 (fixed in 1214fj); Corvo's knocked-out victim pulled by Emily untested"
+  },
+  "StandingHostCorpse": {
+    "Card": 127,
+    "Status": "done: the host keeps the bones of the client's last victim pose on a corpse from her lethal paired takedown until a carry touches it; both copies lie (1636a) and a Far Reach pull still moves it (1636b)",
+    "Chapter": "documentation/handoff-2026-10-11/103-far-reach-pulls.md",
+    "Evidence": [
+      "mission-coverage-v1628a",
+      "mission-coverage-v1630a",
+      "mission-coverage-v1631a",
+      "mission-coverage-v1632a",
+      "mission-coverage-v1634a",
+      "mission-coverage-v1634b",
+      "mission-coverage-v1634c",
+      "mission-coverage-v1635a",
+      "mission-coverage-v1635b",
+      "mission-coverage-v1636a",
+      "mission-coverage-v1636b"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214fg",
+      "candidate-npc-combat-v1214fh",
+      "candidate-npc-combat-v1214fi",
+      "candidate-npc-combat-v1214fj"
+    ]
   }
 }
