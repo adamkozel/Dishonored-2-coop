@@ -295,6 +295,31 @@ int main(int argc, char** argv) {
         }
         std::cout<<"]}\n";return 0;
     }
+    if(argc==3&&!std::strcmp(argv[2],"--choke-sensor")){
+        // 1214er (#11 seated): the native choke sensor, read-only (arkCpntPlayerSensorChoke: a 0x60-byte player component,
+        // factory 0x140916670, ctor 0x1403a6310 sets vtable 0x1b3e158, +0x50 = 0x3fff0010 (no target), +0x54 = 0 and
+        // +0x58 = -1; its init 0x1403a67d0 stores sensor slot 0x21 at +0x40, a 0x39c5be0 component at +0x48 and two decl
+        // values at +0x58/+0x5c; confirmed static). +0x50 is read as the target handle (hypothesis), with its name.
+        // 1553-1565: a seated NPC passes every NPC-side takedown gate but was never offered a choke.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0,slot21=0;unsigned count=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b3e158){sensor=m;break;}
+        unsigned char enabled=0,flag54=0;std::uint32_t target=0,word58=0,word5c=0;
+        if(!sensor||!reader(sensor+0x38,&enabled,1)||!reader(sensor+0x50,&target,4)||!reader(sensor+0x54,&flag54,1)||
+           !reader(sensor+0x58,&word58,4)||!reader(sensor+0x5c,&word5c,4)||!reader(sensor+0x40,&slot21,8))return 59;
+        float f58=0,f5c=0;std::memcpy(&f58,&word58,4);std::memcpy(&f5c,&word5c,4);
+        std::string name;bool named=(target>>16)!=0x3fff&&target;
+        if(named){const auto actor=worldIdentityEntity(reader,game,target);std::uintptr_t text=0;
+            if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))named=false;}
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"enabled\":"<<(enabled?"true":"false")<<",\"target\":"<<target
+            <<",\"targetName\":"<<jsonString(named?name:std::string())<<",\"flag54\":"<<unsigned(flag54)<<",\"value58\":"<<f58<<",\"value5c\":"<<f5c
+            <<",\"raw58\":"<<word58<<",\"slot21Type\":"<<jsonString(slot21?objectType(process.value,base,slot21):std::string())<<"}\n";
+        return 0;
+    }
     if(argc==3&&!std::strcmp(argv[2],"--window-sensor")){
         // 1214em (#11 wall_and_window_variants): the native window-takedown sensor, read-only
         // (arkCpntPlayerSensorWindowAssassination, vtable 0x1b43a28 set by its ctor 0x1403d5700; chapter 100,
