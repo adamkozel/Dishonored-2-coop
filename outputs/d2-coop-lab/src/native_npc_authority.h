@@ -1,6 +1,7 @@
 #pragma once
 #include "native_ai_state.h"
 #include "native_health.h"
+#include "native_npc_down.h"
 #include <array>
 
 // General authored-NPC binding. No names, health maxima, or local handles are
