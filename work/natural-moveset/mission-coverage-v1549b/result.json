@@ -1,0 +1,81 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,44,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_streets_guard_transfer_1",
+        "definition": "models/characters/def/generic/guard_male_small_01.def",
+        "position": [
+          78.8255,
+          33.8877,
+          -3.7831
+        ],
+        "forward": [
+          0.04972030898940558,
+          0.998763180575855
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 59,
+        "requests": [
+          1
+        ],
+        "position": [
+          78.8255,
+          33.8877,
+          -3.7831
+        ]
+      },
+      "approachYaw": 90.0,
+      "camera": [
+        79.12578250429092,
+        30.869036319227206,
+        -2.1831
+      ],
+      "sourceStart": [
+        80.6552,
+        33.654,
+        -3.02401
+      ],
+      "prePitch": 15.0,
+      "replacedAt": 516,
+      "cameraMoved": [
+        79.12578250429092,
+        30.869036319227206,
+        -2.1831
+      ],
+      "targetMoved": 0.0,
+      "crept": 1286,
+      "creptEnd": 1628,
+      "stanceAfterCreep": 1,
+      "stanceBeforePress": 0,
+      "sittingAtPress": {
+        "t": 1980,
+        "source": true,
+        "sourceRequests": 1,
+        "host": true
+      },
+      "actedAt": 1980,
+      "trackSamples": 45,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
