@@ -223,6 +223,10 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       CoopWindblastFxPacket w{};w.sequence=1;w.sourceSession=11;w.targetSession=22;w.sourceWorldEpoch=3;w.targetWorldEpoch=7;w.mapId=99;
       w.sourceToken=4;w.targetToken=9;w.event=1;w.sampleTimeUs=1000000;w.rootSequence=99;w.nativeFxId=300;w.powerEvent=2;w.castTimeMs=200;w.position[2]=1.7f;w.axis={1,0,0,0,1,0,0,0,1};
       check(validWindblastFxPacket(w,c,h),"basic Windblast native origin and axis in scoped Corvo cast");
+      {auto s=w;s.variant=3;s.waveValid=1;s.wave={0,0,-.3f};s.waveAxis={1,0,0,0,1,0,0,0,1};check(validWindblastFxPacket(s,c,h),"Shockwave carries its ground wave");
+       auto b=s;b.variant=1;check(!validWindblastFxPacket(b,c,h),"only the Shockwave carries a ground wave");b=s;b.wave[0]=5;check(!validWindblastFxPacket(b,c,h),"ground wave beyond body range refused");
+       b=s;b.waveAxis[0]=-1;check(!validWindblastFxPacket(b,c,h),"mirrored ground wave refused");b=w;b.variant=4;check(!validWindblastFxPacket(b,c,h),"unknown Windblast variant refused");
+       b=w;b.wave[1]=1;check(!validWindblastFxPacket(b,c,h),"absent ground wave cannot carry a position");auto g=w;g.variant=2;check(validWindblastFxPacket(g,c,h),"Greater Windblast accepted");}
       auto bad=w;bad.role=1;check(!validWindblastFxPacket(bad,c,h),"Windblast wrong role refused");bad=w;bad.targetWorldEpoch++;check(!validWindblastFxPacket(bad,c,h),"Windblast old world refused");
       bad=w;bad.sourceToken=0;check(!validWindblastFxPacket(bad,c,h),"Windblast missing incarnation token refused");bad=w;bad.powerEvent=0;check(!validWindblastFxPacket(bad,c,h),"Windblast requires owning cast event");
       bad=w;bad.position[0]=5;check(!validWindblastFxPacket(bad,c,h),"Windblast cannot place effects beyond native body range");bad=w;bad.axis[0]=-1;check(!validWindblastFxPacket(bad,c,h),"mirrored effect transform refused");

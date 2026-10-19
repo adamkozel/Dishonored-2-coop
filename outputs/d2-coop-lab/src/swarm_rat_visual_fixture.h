@@ -159,7 +159,8 @@ void serviceSwarmRatSlot(ULONGLONG tick,unsigned index,bool& mayCreate){
     const auto refuse=[&](const char* why){++swarmRatRefused;swarmRatResult=why;p.pendingHide=true;};
     if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++swarmRatRetired;swarmRatResult="world_retired";}
     const bool automatic=localRole==1&&swarmWorldCurrent(tick)&&s.lease>tick&&s.presented.present&&s.presented.count&&movementBankActive()&&coopGameplayReady(remote)&&
-        observerIsolation.ready&&observerIsolation.movementFixture&&observerIsolation.until>tick+2000&&!std::strcmp(mapName,kGuardMap)&&partnerAssetsEnabled;
+        // 1214ej: product sessions too (1500a: 0 rat models while the stream presented 15 rats).
+        ((observerIsolation.ready&&observerIsolation.movementFixture&&observerIsolation.until>tick+2000&&!std::strcmp(mapName,kGuardMap))||productSessionArmed())&&partnerAssetsEnabled;
     const CoopSwarmAgent* source=nullptr;
     if(automatic){
         if(p.until&&p.event==s.presented.event&&p.streamToken==s.token&&p.peerToken==s.peerToken){

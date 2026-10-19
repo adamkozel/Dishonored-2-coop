@@ -38,17 +38,26 @@ inline bool sameSwarmAgentIdentity(const NativeSwarmAgent& a,const NativeSwarmAg
         a.animationGeneration==b.animationGeneration&&a.frameGeneration==b.frameGeneration&&
         a.animationFlags==b.animationFlags&&a.frameFlags==b.frameFlags&&a.drivingFrame==b.drivingFrame&&a.frameDriver==b.frameDriver;
 }
-template<class Read> bool readNativeSwarmWorldFrame(Read read,std::uintptr_t base,NativeSwarmWorld& s,unsigned* stage=nullptr,const NativeSwarmItem* known=nullptr){
+template<class Read> bool readNativeSwarmWorldFrame(Read read,std::uintptr_t base,NativeSwarmWorld& s,unsigned* stage=nullptr,const NativeSwarmItem* known=nullptr,bool older=false){
     const auto mark=[&](unsigned n){if(stage)*stage=n;};mark(1);
     if(!(known?readCurrentNativeSwarmEquipment(read,base,*known,s.equipment):readNativeSwarmItem(read,base,s.equipment)))return false;
     if(!s.equipment.instantiated){mark(0);return true;}
     if(!read(s.equipment.component+0xd4,&s.handle,4))return false;
+    // 1214ek (#11 power_upgrade_variants): Double Swarm keeps two committed swarms. The swarm power shares the spawner
+    // release 43c950 with Doppelganger (both vtables at +0x120; confirmed static), so its committed array is +b8/+c0 and
+    // +d4 the newest. 'older' reads the other committed entry; a stale (retired) entry reads as absent.
+    if(older){const unsigned newest=s.handle;std::uintptr_t array=0;unsigned flags=0;std::array<unsigned,2> entries{};s.handle=0x3fff0010;
+        if(!read(s.equipment.component+0xb8,&array,8)||!read(s.equipment.component+0xc0,&flags,4)||(flags&0xffffff)>2)return false;
+        if((flags&0xffffff)<2||newest==0x3fff0010){mark(0);return true;}
+        if(!array||!read(array,entries.data(),8)||entries[0]==entries[1]||(entries[0]!=newest&&entries[1]!=newest))return false;
+        s.handle=entries[0]==newest?entries[1]:entries[0];if(s.handle==1)return false;}
     if(s.handle==0x3fff0010){mark(0);return true;}
     const auto game=s.equipment.player.sword.game;
     const auto eq=[&](std::uintptr_t p,std::uintptr_t expected){std::uintptr_t x=0;return read(p,&x,8)&&x==expected;};
     const auto named=[&](std::uintptr_t d,std::uintptr_t vt,const char* name){std::uintptr_t p=0;std::string text;
         return d&&eq(d,base+vt)&&read(d+8,&p,8)&&worldIdentityString(read,p,text)&&text==name;};
     mark(2);s.actor=worldIdentityEntity(read,game,s.handle);
+    if(older&&!s.actor){s.handle=0x3fff0010;mark(0);return true;}
     unsigned parent=0;
     if(!s.actor||s.actor==s.equipment.entity||!eq(s.actor,base+0x1c44b98)||
        !read(s.actor+0xac,&parent,4)||parent!=1||
@@ -121,13 +130,13 @@ template<class Read> bool readNativeSwarmWorldFrame(Read read,std::uintptr_t bas
        (n&&(!read(s.indicesPointer,indices.data(),n*4)||indices!=s.indices))||
        !eq(s.component+0x80,s.pool)||!eq(s.component+0x138,s.pipeline)||!eq(s.pipeline+0x1a8,s.pool)||
        !eq(s.pipeline+0x138,s.transforms)||!eq(s.component+0x10,s.actor)||
-       !read(s.equipment.component+0xd4,&handleAgain,4)||handleAgain!=s.handle||
+       (!older&&(!read(s.equipment.component+0xd4,&handleAgain,4)||handleAgain!=s.handle))||
        worldIdentityEntity(read,game,s.handle)!=s.actor)return false;
     s.present=true;mark(0);return true;
 }
-template<class Read> bool readNativeSwarmWorld(Read read,std::uintptr_t base,NativeSwarmWorld& out,unsigned* stage=nullptr,const NativeSwarmItem* known=nullptr){
+template<class Read> bool readNativeSwarmWorld(Read read,std::uintptr_t base,NativeSwarmWorld& out,unsigned* stage=nullptr,const NativeSwarmItem* known=nullptr,bool older=false){
     NativeSwarmWorld a{},b{};
-    if(!readNativeSwarmWorldFrame(read,base,a,stage,known)||!readNativeSwarmWorldFrame(read,base,b,stage,known))return false;
+    if(!readNativeSwarmWorldFrame(read,base,a,stage,known,older)||!readNativeSwarmWorldFrame(read,base,b,stage,known,older))return false;
     if(stage)*stage=9;
     if(!sameSwordEquipmentIdentity(a.equipment.player.sword,b.equipment.player.sword)||
        a.equipment.entry!=b.equipment.entry||a.equipment.handle!=b.equipment.handle||a.equipment.component!=b.equipment.component||

@@ -45,7 +45,8 @@ void serviceGrenadeProp(ULONGLONG tick){
     if(p.network&&!automatic)hideGrenadeProp();
     if(automatic&&p.network&&p.until)p.until=tick+250;
     if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++grenadePropRetired;grenadePropResult="old_world_retired";}
-    if(request==2||(p.until&&(tick>=p.until||rangedProp.until||!observerIsolation.ready||!observerIsolation.movementFixture||!shadowEquipmentAiReady()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote))))hideGrenadeProp();
+    // 1214ej: the lab isolation scope applies to fixture props only; a network prop follows the source (product sessions).
+    if(request==2||(p.until&&(tick>=p.until||rangedProp.until||(!p.network&&(!observerIsolation.ready||!observerIsolation.movementFixture))||!shadowEquipmentAiReady()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote))))hideGrenadeProp();
     if(p.pendingHide)hideGrenadeProp();
     if(automatic&&!p.until&&!p.pendingHide)request=1;
     if(automatic&&p.network&&p.until){
