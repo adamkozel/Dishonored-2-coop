@@ -1,0 +1,124 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": false,
+  "failure": "The source did not pick up the body (no native carry state)",
+  "checks": [
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-19T05:35:53.7564409+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 35302593,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1794b52c2e0",
+      "actor": "0x179622ba280",
+      "attributes": "0x1796202e8e0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 35302609,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2ccc44734f0",
+      "actor": "0x2ccd389bc30",
+      "attributes": "0x2ccd35f58d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "grant_grapple_pull_objects": "granted_named",
+  "grant_grapple_pull_npcs": "granted_named",
+  "farReachFrom": [
+    -43.83469345400021,
+    -147.45657945410287
+  ],
+  "farReachPitch": 15.75335120075513,
+  "farReachTries": [
+    {
+      "pitch": 15.75335120075513,
+      "sourceMoved": 2.86,
+      "bodyMoved": 0.01,
+      "carrying": false
+    },
+    {
+      "pitch": 12.75335120075513,
+      "sourceMoved": 8.01,
+      "bodyMoved": 0.01,
+      "carrying": false
+    },
+    {
+      "pitch": 18.75335120075513,
+      "sourceMoved": 8.29,
+      "bodyMoved": 0.02,
+      "carrying": false
+    }
+  ],
+  "farReachCamera": [
+    -42.84745494477971,
+    -149.21024992654407,
+    68.4039154,
+    105.34133335158903
+  ],
+  "farReachCameraHeld": true,
+  "farReachCarry": false,
+  "farReachRecorded": 2,
+  "restored": true
+}
