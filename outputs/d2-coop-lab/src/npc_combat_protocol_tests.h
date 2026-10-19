@@ -113,6 +113,22 @@ void npcCombatProtocolTests(){
      bad=q;bad.geometry=p.geometry;require(!validNpcCombat(bad,h,c),"no contact geometry");
      bad=q;bad.kind=NpcCombatMessage::Commit;bad.sourceRole=1;bad.event=1;bad.before=40;bad.maximum=40;bad.after=30;bad.inflicted=10;require(!validNpcCombat(bad,c,h),"PeerNative is never a commit");
      bad=q;bad.sourceRole=0;require(!validNpcCombat(bad,c,h),"the host never requests");}
+    {// 1214fm (#117): Domino's linked copy of a client hit is a Linked request.
+     auto q=p;q.kind=NpcCombatMessage::Request;q.binding.role=1;std::swap(q.binding.sourceSession,q.binding.targetSession);std::swap(q.binding.sourceEpoch,q.binding.targetEpoch);
+     std::swap(q.binding.sourceArm,q.binding.targetArm);std::swap(q.binding.sourceHandle,q.binding.targetHandle);q.sourceRole=1;q.request=1;q.event=0;q.before=q.after=q.maximum=q.inflicted=0;q.geometry={};
+     q.damage=NpcCombatDamage::Linked;q.ranged={npcDamageKey("components/characters/player/base/damage/assassination_damage.damage"),0,0,0x84};
+     require(validNpcCombat(q,h,c),"a linked assassination is a Linked request with its declaration, amount and flags");
+     auto good=q;good.ranged={npcDamageKey("components/characters/player/base/damage/generic_fatality.damage"),1000,0,0x84};require(validNpcCombat(good,h,c),"a linked fatality");
+     auto bad=q;bad.ranged.declaration=npcDamageKey("components/equipment/damage/explosion_grenade.damage");require(!validNpcCombat(bad,h,c),"Linked carries replayable declarations only");
+     bad=q;bad.ranged.declaration=123;require(!validNpcCombat(bad,h,c),"unknown declarations are refused");
+     bad=q;bad.ranged.weapon=0;require(!validNpcCombat(bad,h,c),"Linked carries the native flags");
+     bad=q;bad.ranged.weapon=0x184;require(!validNpcCombat(bad,h,c),"Linked flags are bounded");
+     bad=q;bad.ranged.amount=1001;require(!validNpcCombat(bad,h,c),"native amount is bounded");
+     bad=q;bad.ranged.distance=3;require(!validNpcCombat(bad,h,c),"no ranged distance");
+     bad=q;bad.geometry=p.geometry;require(!validNpcCombat(bad,h,c),"no contact geometry");
+     bad=q;bad.kind=NpcCombatMessage::Commit;bad.sourceRole=1;bad.event=1;bad.before=40;bad.maximum=40;bad.after=0;bad.inflicted=40;require(!validNpcCombat(bad,c,h),"Linked is never a commit");
+     bad=q;bad.sourceRole=0;require(!validNpcCombat(bad,c,h),"the host never requests");
+     bad=q;bad.damage=NpcCombatDamage::PeerNative;require(!validNpcCombat(bad,h,c),"a replayable declaration is never PeerNative");}
     auto badWorld=world;badWorld.sourceActorArm=0;require(!validNpcCombat(badWorld,c,h),"unattributed world collision rejected");
     badWorld=world;badWorld.sourceRole=1;require(!validNpcCombat(badWorld,c,h),"corpse cannot be disguised as player damage");
     badWorld=world;badWorld.kind=NpcCombatMessage::Request;badWorld.request=1;badWorld.event=0;badWorld.before=badWorld.after=badWorld.maximum=badWorld.inflicted=0;require(!validNpcCombat(badWorld,h,c),"client cannot request host-owned world damage");

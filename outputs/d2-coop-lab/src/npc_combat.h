@@ -37,7 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
-    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -527,16 +527,18 @@ bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float
 }
 // 1214y: the host applies a client PeerNative hit natively, the partner avatar as
 // attacker and inflictor; HostWorld commits a loss and Dead a death.
-bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r){
+// 1214fm (#117): a Linked hit too, with its native amount and flags, up to 96 m from the partner (Domino links far).
+bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r,bool linked=false){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const char* name=npcDamageDeclarationName(r.declaration);
-    if(localRole||!realNativeDamage||!name||!validNpcPeerNative(r)||!npcCombatNear(c,1,32)||npcCombatNativeApplication||(before.ownerFlags&8))return false;
+    if(localRole||!realNativeDamage||!name||!(linked?validNpcLinked(r):validNpcPeerNative(r))||!npcCombatNear(c,1,linked?96.f:32.f)||npcCombatNativeApplication||(before.ownerFlags&8))return false;
     const auto avatar=shadowDamageIdentity();if(!validCoopDamageAvatar(memoryRead,base,avatar))return false;
     const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,name,false,false);
     std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138)return false;
     alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
-    if(r.amount>0)std::memcpy(params.data()+8,&r.amount,4);
+    if(r.amount>0||linked)std::memcpy(params.data()+8,&r.amount,4);
+    if(linked){const std::uint64_t flags=r.weapon;std::memcpy(params.data()+0x10,&flags,8);}
     std::memcpy(params.data()+0x50,&avatar.handle,4);std::memcpy(params.data()+0x54,&avatar.handle,4);
     NativeHealth recheck{};
     if(!readNativeHealth(memoryRead,base,before.handle,recheck)||recheck.actor!=before.actor||recheck.component!=before.component||recheck.current!=before.current)return false;
@@ -618,6 +620,17 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
         else if(!npcCombatExtract(*c,info,damage,geometry,capture.position,sourceArm,sourcePending,script,ranged,capture)){
             // 1214y: a client hit the replay cannot reproduce (grenade, power, bolt variant)
             // used to be suppressed and retire the NPC; the host applies it natively.
+            // 1214fm (#117): Domino's linked outcome. The native network repeats Emily's hit on each linked NPC with the
+            // link flag (1648a: guard 1's copy took her assassination 1 s after guard 2). No replay matched it, so the
+            // linked guard lived in both worlds. It goes to the host as a Linked request, applied there natively.
+            if(localRole&&playerOwned&&(capturedFlags&kNpcCombatLinkedFlag)){
+                NpcCombatRangedDamage linked{npcDamageKey(npcCombatLastDecl),0,0,static_cast<unsigned>(capturedFlags&0xffffffffull)};std::memcpy(&linked.amount,capture.info.data()+8,4);
+                if(validNpcLinked(linked)){empty();
+                    if(b.pendingRequests.count){++npcCombat.peerNativeBusy;return true;}
+                    auto p=npcCombatPacket(*c,b,NpcCombatMessage::Request);p.sourceRole=1;p.request=++b.request;p.damage=NpcCombatDamage::Linked;p.ranged=linked;
+                    if(npcCombat.outgoing.size()>=64){stopNpcCombat("request_queue_full");return true;}
+                    npcCombat.outgoing.push_back(p);++npcCombat.requests;++npcCombat.linkedRequests;return true;}
+            }
             NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
             if(localRole&&playerOwned&&inflictor!=0x3fff0010u&&attacker!=0x3fff0010u&&validNpcPeerNative(native)){
                 empty();
@@ -756,9 +769,9 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
         if(!actor){retireNpcCombatChannel(b,"world_source_identity");return;}sourceArm=actor->arm;
     }
     if(!npcCombatIdentity(*c,before)){retireNpcCombatChannel(b,"actor_lifecycle_changed");return;}
-    if(p.damage==NpcCombatDamage::PeerNative){
-        if(localRole||p.kind!=NpcCombatMessage::Request||!npcCombatApplyPeerNative(*c,before,p.ranged)){retireNpcCombatChannel(b,"peer_native_failed");return;}
-        b.peerRequest=p.request;++npcCombat.requests;++npcCombat.peerNativeApplied;return;
+    if(p.damage==NpcCombatDamage::PeerNative||p.damage==NpcCombatDamage::Linked){const bool linked=p.damage==NpcCombatDamage::Linked;
+        if(localRole||p.kind!=NpcCombatMessage::Request||!npcCombatApplyPeerNative(*c,before,p.ranged,linked)){retireNpcCombatChannel(b,linked?"linked_failed":"peer_native_failed");return;}
+        b.peerRequest=p.request;++npcCombat.requests;++(linked?npcCombat.linkedApplied:npcCombat.peerNativeApplied);return;
     }
     if(p.kind==NpcCombatMessage::Commit&&(before.current!=p.before||before.maximum!=p.maximum||
        (p.sourceRole==1&&b.pending!=p.request))){retireNpcCombatChannel(b,"replica_or_request_diverged");return;}
@@ -866,7 +879,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy);
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied);
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
