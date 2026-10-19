@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T02:49:54.398822+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T04:21:40.568480+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -567,7 +567,7 @@ Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reac
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reach toward the item in both roles (coin and grapes, product controller, 1261b). Body loot and pickpocketing not yet recorded. Visual sweep 1260: reject (corvo reject, emily reject). Both partners stay visible and stable, but neither makes any pickup or reach gesture (standing or crouched), so the loot action is not represented. 700/701 measures recurring55–65ms diagnostic batches, with over100ms spikes.702 staggers71 writers across frames (max4 and4ms soft budget), retaining core report cadence and all gameplay/250ms freshness guards.703Corvo/704Emily pass24 scoped runtime checks; baseline701 passes8. Both roles keep Steam ready and body weight>.999 during crouched loot. No status/slice reaches50ms in either new capture, versus52/51 source/observer stalls in baseline. Inventories/health14protected restored. Six game sheets inspected; rear views limit grip/contact judgment. No all-gap recovery or full movement claim. 785–789: exact native coin lifecycle and currency path traced in Ghidra. Ordinary Corvo/Emily pickup adds one coin, repeated input does not recredit. Guarded direct claim/reward/removal passes both roles with three native calls and duplicate no-op; checkpoint restores currency0, full quantities, health and coin.787 retirement-bit refusal and788 inventory-reader failure retained. No shared pickup relay yet; extra native entity event and reliable host ordering remain. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications and coin removal recorded in both views. No shared Steam pickup channel yet. 790/791: exact native coin fixture now includes pickedUp(true,false) entity/script event and variant cleanup, matching the decompiled native ordering before removal. Both roles pass currency0->1, five direct calls, duplicate no-op, outside-fixture refusal, and checkpoint/full inventory/health/coin restoration. Original788 feasibility and failed attempts are preserved. Native UI money notifications recorded in both views; coin removal visible for Corvo, while Emily camera points away and removal is established by native reads. No shared Steam pickup channel yet. 794–798: first bounded native Steam coin channel passes ordinary Corvo and Emily pickups, simultaneous native awards, duplicate packets, pause/resume and coordinated fixed-SLOT82 reload. Both new coin bindings reject retired packets, then a fresh ordinary Emily pickup rewards each wallet once. Worker-thread source observation uses an immutable lease and bounded queue. All test inventories/currency/health restored; actual paired videos retained, including failed793 observer and797 fixture takes. Exact one authored coin only; movement and full shared-world work remain incomplete. 800–808: one bounded native currency catalog replaces the single-item binding. Both games match19 ordinary type1 objects across6 values. Native API batch alternates sources and verifies all19 awards/removals (258 each), individual receipts and duplicate no-ops. Ordinary same-coin simultaneous pickup gives1 each with0 extra recipient calls. Catalog shared checkpoint/rebind/stale packets and fresh Emily pickup pass. Full catalog/inventory/currency/health baseline restored; outside-fixture exercise makes0 calls. Failed ordinary pouch/cupboard approaches retained. Functional family coverage; movement and playable co-op remain incomplete. 810–818: shared pickup catalog expands by native family to24 objects (19 currency,4 ammunition,1 stored health potion). API source/Steam recipient batch gives258 money,6 bullets and1 potion each, with unchanged health; native box modifier2->3 is preserved. Partial ammo9->10 and full ammo/potion zero-grant recipients retire objects and acknowledge once; duplicate no-ops pass. Mixed-catalog ordinary coin shared-checkpoint/rebind/old-packet tests pass. Three ordinary stack approach/isolation failures are retained; ordinary ammo/potion remains unverified. Complete baseline restored. Movement and playable co-op remain incomplete. 820–826: native food family expands Dunwall catalog to51 objects (27 health food,19 currency,4 ammo,1 stored potion). Batch gives14 health to native cap70,258 money,6 bullets and1 potion each;24 full-health food no-ops retire correctly. Unequal host/client health, duplicate rejection and coordinated checkpoint renewal pass. Representative ordinary ammo, stored potion and food inputs now pass. Previous potion setup failures were test-fixture preconditions, not relay failures. Complete native baseline/protected files restored. Movement/playable co-op remain incomplete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-interactions-corvo-coin-v667/coin-source.mp4",
@@ -668,7 +668,7 @@ Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reac
     "gestures-v1261b/host-coin-observer.mp4",
     "gestures-v1261b/client-coin-observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-interactions-corvo-coin-v667/result.json",
     "native-interactions-emily-coin-v668/result.json",
@@ -703,8 +703,80 @@ Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reac
     "shared-pickup-ammo-input-v824/result.json",
     "pickup-catalog-restoration-v825/result.json",
     "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-    "../movement-integration/gestures-counter-audit-v1264.json"
-  ]
+    "../movement-integration/gestures-counter-audit-v1264.json",
+    "gestures-v1261b/result.json",
+    "coverage-v1398c/result.json",
+    "coverage-v1398d/result.json",
+    "coverage-v1398h/result.json",
+    "coverage-v1398i/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1413-pickup-loot-steal.json",
+    "decision": "complete",
+    "scope": "The partner reaches for what the player picks up, pickpockets or searches on a body, in both roles, standing or crouched, and recovers.",
+    "takes": [
+      {
+        "take": "gestures-v1261b",
+        "cases": [
+          "host-coin",
+          "host-food",
+          "client-coin",
+          "client-food"
+        ]
+      },
+      {
+        "take": "coverage-v1398c",
+        "cases": [
+          "host-pickpocket"
+        ]
+      },
+      {
+        "take": "coverage-v1398d",
+        "cases": [
+          "client-pickpocket"
+        ]
+      },
+      {
+        "take": "coverage-v1398h",
+        "cases": [
+          "host-bodyloot"
+        ]
+      },
+      {
+        "take": "coverage-v1398i",
+        "cases": [
+          "client-bodyloot"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "gestures-v1261b/host-coin-observer.mp4",
+        "verdict": "Corvo, seen from behind, reaches his right hand out to the coin on the lectern and draws it back as the coin is taken."
+      },
+      {
+        "video": "gestures-v1261b/client-food-observer.mp4",
+        "verdict": "Emily reaches her hand to the grapes on the table and lowers it; the grapes are gone from the plate."
+      },
+      {
+        "video": "coverage-v1398c/host-pickpocket-observer.mp4",
+        "verdict": "Seen from the guard's side, Corvo crouches behind him, reaches to his belt and takes the key; the guard reacts."
+      },
+      {
+        "video": "coverage-v1398d/client-pickpocket-observer.mp4",
+        "verdict": "Seen from the guard's side, Emily crouches behind him, reaches to his belt and takes the key; the guard reacts."
+      },
+      {
+        "video": "coverage-v1398h/host-bodyloot-observer.mp4",
+        "verdict": "Corvo stands over the choked guard, bends down and reaches into the body at the belt; the key then hangs at his hip."
+      },
+      {
+        "video": "coverage-v1398i/client-bodyloot-observer.mp4",
+        "verdict": "Emily bends over the choked guard and reaches to his belt, then straightens up as another guard arrives."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
@@ -742,6 +814,11 @@ Audit 1264 (1214j): a native pickup (LootObject47) presents the generic use reac
 - [evidence: pickup-catalog-restoration-v825/result.json](<../../../../work/natural-moveset/pickup-catalog-restoration-v825/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/ranged_interactions-review.json](<../../../../work/movement-integration/visual-sweep-v1260/ranged_interactions-review.json>)
 - [evidence: ../movement-integration/gestures-counter-audit-v1264.json](<../../../../work/movement-integration/gestures-counter-audit-v1264.json>)
+- [evidence: gestures-v1261b/result.json](<../../../../work/natural-moveset/gestures-v1261b/result.json>)
+- [evidence: coverage-v1398c/result.json](<../../../../work/natural-moveset/coverage-v1398c/result.json>)
+- [evidence: coverage-v1398d/result.json](<../../../../work/natural-moveset/coverage-v1398d/result.json>)
+- [evidence: coverage-v1398h/result.json](<../../../../work/natural-moveset/coverage-v1398h/result.json>)
+- [evidence: coverage-v1398i/result.json](<../../../../work/natural-moveset/coverage-v1398i/result.json>)
 - [in_game_recordings: native-interactions-corvo-coin-v667/coin-source.mp4](<../../../../work/natural-moveset/native-interactions-corvo-coin-v667/coin-source.mp4>)
 - [in_game_recordings: native-interactions-corvo-coin-v667/coin-observer.mp4](<../../../../work/natural-moveset/native-interactions-corvo-coin-v667/coin-observer.mp4>)
 - [in_game_recordings: native-interactions-emily-coin-v668/coin-source.mp4](<../../../../work/natural-moveset/native-interactions-emily-coin-v668/coin-source.mp4>)

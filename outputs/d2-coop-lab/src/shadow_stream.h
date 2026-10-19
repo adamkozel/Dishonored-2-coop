@@ -37,6 +37,8 @@ bool movementOwnsCombat();
 // the receiver uses native clone clips, never native damage/AI attack calls.
 struct ShadowStreamState {
     double lastMapped=0; // 1214dc: presentation time of the last accepted action packet
+    ULONGLONG lastLateAction=0; // 1214dv: arrival of the last action packet refused only for being too late (reject 11)
+    std::uint64_t lateHolds=0;
     // Diagnostic history survives brief native loop incarnations which a
     // slower file observer can miss. Reset with this stream's token/world.
     // It observes successful sends / fully accepted states; never drives them.
@@ -85,6 +87,8 @@ unsigned shadowStreamRejectedState=0,shadowStreamExpectedState=0;
 unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
 std::uint64_t shadowSourceAttempts=0,shadowSourceMisses=0,shadowWireRefused=0;
 unsigned shadowSourceReadStage=0,shadowSourceLastFailure=0;
+// 1214du: Recoil 40 samples on the source, the combat reads refused in them (last step and variant), the staggers sent.
+unsigned shadowRecoilStep=0,shadowRecoilVariant=0;std::uint64_t shadowRecoilSamples=0,shadowRecoilRefused=0,shadowRecoilSent=0,shadowRecoilOther=0;
 std::uint64_t shadowUnboundSamples=0,shadowUnboundRefused=0,shadowHoldSamples=0;
 ULONGLONG shadowUnboundProbeUntil=0; // Explicit bounded missing-binding test, off by default.
 std::array<std::uint64_t,8> shadowSourceFailureCounts{};
@@ -406,7 +410,12 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     // sword attack state but is owned by the takedown channel; it has no combat scene
     // (take 1256b: the client finisher was admitted and never sent).
     if(swordAction&&!chokeValid){if(!sword.sword.equipped)return false;NativePlayerCombatScene combat{};
-        if(!readNativePlayerCombatScene(memoryRead,base,states,combat)||combat.character!=localRole+1||
+        const bool recoilState=std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==40;});
+        if(recoilState)++shadowRecoilSamples;
+        if(!readNativePlayerCombatScene(memoryRead,base,states,combat)){
+            if(recoilState){++shadowRecoilRefused;shadowRecoilStep=nativeCombatSceneStep;shadowRecoilVariant=nativeCombatSceneVariant;}return false;}
+        if(recoilState){if(combat.variant==28||combat.variant==29)++shadowRecoilSent;else{++shadowRecoilOther;shadowRecoilVariant=combat.variant;}}
+        if(combat.character!=localRole+1||
            (combat.target.actor&&(combat.target.actor==probeActor||combat.target.handle==probeHandle)))return false;
         if(sceneHandle)*sceneHandle=combat.handle;
         if(airPacket){airPacket->combatVariant=combat.variant;airPacket->combatPhase=combat.subscene=="Loop"||combat.variant==11?2u:1u;
@@ -566,6 +575,7 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
        !stunTimeline.push({mapped,p.event,p.stunVariant,p.stunTimeMs,p.stunDurationMs})?22:
        !useTimeline.push({mapped,p.useEvent,p.useVariant,p.useTimeMs,p.useDurationMs,{p.useTarget[0],p.useTarget[1],p.useTarget[2]},p.useTargetValid==1})?24:
        !movementTimeline.push({mapped,p.event,p.state,p.leanSide,p.leanUp,p.airStartZ,p.airTargetZ,p.airStage,p.airRemaining})?19:0;
+    if(timelineReject==11)shadowStream.lastLateAction=tick;
     if(timelineReject){shadowStreamStateRejectReason=shadowStreamRejectReason=timelineReject;shadowStreamRejectedAge=now-rawMapped;++shadowStreamRejected;if(p.useVariant){++shadowUseRejected;shadowUseRejectReason=100+timelineReject;}return;}
     if(p.useVariant)++shadowUseAccepted;
     shadowStream.lastMapped=mapped;if(clampKind==1)++shadowActionEarlyClamped;else if(clampKind==2)++shadowActionLateClamped;
@@ -611,6 +621,12 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
         shadowAction.until=(std::min)(tick+250,shadowStream.until);shadowActionDeadline.store(shadowAction.until);
     }
 }
+// 1214dv (#11): while the source's action packets keep arriving but late (a hitch on either peer delays delivery; 1416a:
+// 1.3-1.6 s after the black market), the stream is alive: it holds for up to 5 s since the last accepted state instead
+// of stopping after 1 s, so the presentation resumes as soon as delivery catches up rather than after a restart.
+bool shadowStreamLateHold(ULONGLONG tick){
+    return shadowStream.lastLateAction&&tick-shadowStream.lastLateAction<presentationFreshMs()&&shadowStream.lastState&&tick-shadowStream.lastState<5000;
+}
 void serviceShadowStream(ULONGLONG tick){
     if(!shadowStream.until)return;
     if(!shadowStreamCurrent(tick)||(shadowStream.peerReady&&tick-shadowStream.lastPeer>presentationHelloMs())){
@@ -618,7 +634,8 @@ void serviceShadowStream(ULONGLONG tick){
         shadowStreamRetireReason=tick>=shadowStream.until?1:!shadowStreamPairReady(tick)?2:!shadowStreamCurrent(tick)?3:4;
         stopShadowStream(tick>=shadowStream.until?"expired":"scope_or_peer_changed");return;
     }
-    if(shadowStream.lastState&&tick-shadowStream.lastState>presentationFreshMs()){shadowStopServiceTick=tick;shadowStopLastState=shadowStream.lastState;stopShadowStream("native_state_stale");return;}
+    if(shadowStream.lastState&&tick-shadowStream.lastState>presentationFreshMs()&&shadowStreamLateHold(tick))++shadowStream.lateHolds;
+    if(shadowStream.lastState&&tick-shadowStream.lastState>presentationFreshMs()&&!shadowStreamLateHold(tick)){shadowStopServiceTick=tick;shadowStopLastState=shadowStream.lastState;stopShadowStream("native_state_stale");return;}
     // Only a current, mutually ready pair renews. No timeout, load, pause,
     // disconnect or identity change can implicitly recreate a retired stream.
     if(shadowStream.persistent&&shadowStream.peerReady)shadowStream.until=tick+15000;
@@ -657,6 +674,9 @@ void writeShadowStream(ULONGLONG tick){
         shadowDeath.sceneRead?"true":"false",shadowDeath.sceneMs,shadowDeath.leadMs,shadowDeath.sceneStage,shadowDeath.scene.c_str());
     fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
+    fprintf(f,"\"recoilDiag\":{\"samples\":%llu,\"refused\":%llu,\"sent\":%llu,\"other\":%llu,\"step\":%u,\"variant\":%u},",
+        shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
+    fprintf(f,"\"lateHolds\":%llu,\"lateActionAgeMs\":%llu,",shadowStream.lateHolds,shadowStream.lastLateAction?GetTickCount64()-shadowStream.lastLateAction:0ull);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");
     fprintf(f,"\"unboundSamples\":%llu,\"unboundRefused\":%llu,\"holdSamples\":%llu,\"unboundProbeActive\":%s,",shadowUnboundSamples,shadowUnboundRefused,shadowHoldSamples,tick<shadowUnboundProbeUntil?"true":"false");

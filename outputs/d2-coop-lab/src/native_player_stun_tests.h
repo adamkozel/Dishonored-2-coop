@@ -1,5 +1,6 @@
 #pragma once
 #include "native_player_stun_scene.h"
+#include "stun_presentation.h"
 void nativePlayerStunTests(){
     constexpr std::uintptr_t base=0x140000000,game=0x200000000,actor=0x300000000,stack=0x400000000;
     constexpr auto list=stack+0x1000,physics=list+0x1000,machine=physics+0x1000,mode=machine+0x1000,active=mode+0x1000,state=active+0x1000;
@@ -30,5 +31,20 @@ void nativePlayerStunTests(){
     auto overlay=m;const auto eq=state+0x20000;overlay.d(machine+0xb0,2);overlay.d(active+4,53);overlay.q(mode+0x10+53*8,eq);overlay.q(eq,base+0x1c79cf8);overlay.d(eq+8,53);overlay.q(eq+0x10,machine);require(inspect(overlay),"observed fast equipment overlay during stun");
     auto read=[&](auto p,auto d,auto n){return m.read(p,d,n);};NativePlayerStates states{};NativePlayerStunScene out{};require(readNativePlayerStates(read,base,states),"stun fixture state");
     unsigned bindingReads=0;auto concurrent=m;require(!readNativePlayerStunScene([&](auto p,auto d,auto n){const bool ok=concurrent.read(p,d,n);if(p==bindings+8&&++bindingReads==1)concurrent.q(p,actor+1);return ok;},base,states,out),"concurrent scene ownership change refused");
+    {   // 1214dn: the knockdown (KnockedDown 16, hit_react_knocked_down Scene_1 2599 ms, an arm then the player bound).
+        auto kd=m;const auto arm=actor+0x8000;kd.d(active,16);kd.q(mode+0x10+16*8,state);kd.q(state,base+0x1c827b8);kd.d(state+8,16);
+        kd.str(name,"midnight/gameplay/player/base/hitreact/hit_react_knocked_down.midnightscene");kd.d(scene+0x28,2599);kd.d(instance+0x160,1200);
+        kd.d(instance+0x18,2);kd.q(bindings+8,arm);kd.q(bindings+0x28,actor);
+        const auto inspectKd=[&](Memory& mem){auto read=[&](auto p,auto d,auto n){return mem.read(p,d,n);};NativePlayerStates states{};NativePlayerStunScene out{};
+            return readNativePlayerStates(read,base,states)&&readNativePlayerStunScene(read,base,states,out)&&out.variant==5&&out.durationMs==2599&&out.timeMs==1200;};
+        require(inspectKd(kd),"native knockdown scene with the arm and the player bound");
+        auto b=kd;b.q(state,base+0x1c86768);b.d(state+8,16);require(!inspectKd(b),"knockdown requires the KnockedDown class");
+        b=kd;b.d(active,14);b.q(mode+0x10+14*8,state);b.q(state,base+0x1c86768);b.d(state+8,14);require(!inspectKd(b),"a stun state cannot carry the knockdown scene");
+        b=kd;b.d(scene+0x28,800);require(!inspectKd(b),"knockdown requires its native duration");
+        b=kd;b.d(instance+0x18,1);require(!inspectKd(b),"knockdown requires both bindings");
+        b=kd;b.q(bindings+0x28,actor+0x1000);require(!inspectKd(b),"knockdown cannot bind a foreign player");
+        b=m;b.str(name,"midnight/gameplay/player/base/hitreact/hit_react_knocked_down.midnightscene");b.d(scene+0x28,2599);require(!inspect(b),"the stun state cannot claim a knockdown");
+        require(StunPresentation::valid({1,1,5,1200,2599})&&!StunPresentation::valid({1,1,5,1200,800})&&StunPresentation::clip(5)==380&&StunPresentation::clip(1)==260,"knockdown presentation variant 5, clip 380");
+    }
     std::cout<<"PASS: native stun class, scene, clock, binding, world identity and concurrent retirement\n";
 }

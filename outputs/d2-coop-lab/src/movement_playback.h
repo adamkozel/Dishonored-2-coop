@@ -49,6 +49,7 @@ struct MovementPlayback {
     unsigned rangedKind=0,rangedVariant=0,rangedMechanism=0,rangedShot=0;float rangedAmount=0,rangedWeight=0,rangedTransition=0,rangedMoveMix=0;
     std::uint64_t rangedEvent=0;std::vector<MovementBank::Joint> rangedFrom,rangedLast;
     unsigned stunVariant=0;float stunAmount=0,stunWeight=0,stunTransition=0;std::uint64_t stunEvent=0;
+    float shopWeight=0,shopPhase=0; // 1214dr: black market gestures (clip 381)
     unsigned useVariant=0;float useAmount=0,useWeight=0,useTransition=0;std::uint64_t useEvent=0;std::vector<MovementBank::Joint> useFrom,useLast;
     // 1213k (#6): the used mechanism (world) and the right-hand reach toward it.
     float useTarget[3]{};bool useTargetValid=false;std::uint64_t useReachApplied=0,useReachRefused=0;float useReachError=0,useReachWeight=0;
@@ -279,12 +280,22 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
             p.rangedMoveMix+=(moving-p.rangedMoveMix)*(1-std::exp(-combatDt/.07f));
         }else p.rangedWeight=0;
         StunPresentation::Sample stun{};float stunAmount=0;
-        const bool stunActive=p.bank.hasStun()&&shadowStream.stun.sample(pose.time,stun,stunAmount)&&stun.variant&&ground&&pose.motionValid;
+        const bool stunActive=p.bank.hasStun()&&shadowStream.stun.sample(pose.time,stun,stunAmount)&&stun.variant&&(stun.variant!=5||p.bank.hasKnockdown())&&ground&&pose.motionValid;
         if(combatDt>=0&&combatDt<.25f){
             if(stunActive){if(stun.event!=p.stunEvent){p.stunFrom=p.stunLast;p.stunTransition=0;p.stunEvent=stun.event;}
                 p.stunVariant=stun.variant;p.stunAmount=stunAmount;p.stunTransition=(std::min)(1.f,p.stunTransition+combatDt/.035f);}
             p.stunWeight+=((stunActive?1.f:0.f)-p.stunWeight)*(1-std::exp(-combatDt/(stunActive?.025f:.10f)));
         }else p.stunWeight=0;
+        // 1214dr (#11 shop_dialogue_gestures): while the partner is in the black market (its pose packet's logic 10,
+        // the action stream's hold) and standing at the counter, it plays native NPC conversation gestures (clip 381,
+        // looping on its own clock); the walk there and away stays locomotion.
+        const bool shopActive=p.bank.hasShop()&&remote.gameLogicState==10&&!remote.pendingGameLogicState&&semantic.state==24&&
+            ground&&pose.motionValid&&p.clock.speed<.3f&&p.bank.clips.size()>381&&p.bank.clips[381].angle>.05f;
+        if(combatDt>=0&&combatDt<.25f){
+            if(shopActive||p.shopWeight>.001f)p.shopPhase=std::fmod(p.shopPhase+combatDt/p.bank.clips[381].angle,1.f);
+            p.shopWeight+=((shopActive?1.f:0.f)-p.shopWeight)*(1-std::exp(-combatDt/(shopActive?.35f:.20f)));
+            if(p.shopWeight<.001f&&!shopActive)p.shopPhase=0;
+        }else p.shopWeight=0;
         // 1213: authored interaction for a native use; fades out once the
         // remote player moves (root stays network owned).
         UsePresentation::Sample use{};float useAmount=0;
@@ -495,11 +506,14 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // 1214cg (#11): the protocol-73 hold (state 24) covers a native state no binding classifies for a packet or two
         // (holster end, draw start, a holstered landing, a slide end). Keep the authored body on the replicated physical
         // state through it; yielding to the actor's native pose flashed it upright for about two frames (take 1321a).
+        // 1214dp (#11): a presented stun (protocol state 16) is an authored action. Without it the clock refused every
+        // stun packet (eligibility mask 32), its weight fell to 0 and the body returned to the actor's native pose, so the
+        // stun and knockdown clips never showed (1397k/l: the knockdown read as a crouch; 1363g: weight 0 through the stun).
         const bool actionEligible=(semantic.state==0||semantic.state==18||semantic.state==24||(p.bank.hasSprint()&&semantic.state==4)||horizontalLean||sliding||airState||(p.bank.hasAir()&&semantic.state==3)||
-                (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10));
+                (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10)||stunActive);
         const unsigned eligibilityMask=(!semanticValid?1u:0u)|(!physicalEligible?2u:0u)|
             (shadowStream.until<=tick?4u:0u)|(!shadowStream.peerReady?8u:0u)|
-            (!shadowStream.lastState||tick-shadowStream.lastState>=presentationFreshMs()?16u:0u)|(!actionEligible?32u:0u)|(shadowAction.actor?64u:0u);
+            (!shadowStream.lastState||(tick-shadowStream.lastState>=presentationFreshMs()&&!shadowStreamLateHold(tick))?16u:0u)|(!actionEligible?32u:0u)|(shadowAction.actor?64u:0u);
         const bool eligible=eligibilityMask==0;
         if(!eligible){
             ++p.eligibilityFailures;
@@ -554,7 +568,8 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
     if(possessionHidden)requestMovementEquipment(false);
     else if(equipmentRequest)requestMovementEquipment(equipmentDrawn);
 }
-bool movementFootGrounded(const MovementPlayback& p){return p.clock.airWeight<.001f&&p.clock.slideWeight<.001f&&p.traversalWeight<.001f&&p.powerWeight<.001f;}
+bool movementFootGrounded(const MovementPlayback& p){return p.clock.airWeight<.001f&&p.clock.slideWeight<.001f&&p.traversalWeight<.001f&&p.powerWeight<.001f&&
+    !(p.stunVariant==5&&p.stunWeight>.001f);} // 1214dp: the knockdown lies down; no standing foot plant
 void applyMovementBank(void* component,void* actor,int phase){
     const auto tick=GetTickCount64();AcquireSRWLockExclusive(&movementLock);auto& p=movementPlayback;
     // The native callback visits every animated actor. Unrelated actors must
@@ -792,6 +807,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             if(p.stunLast.size()!=count)p.stunLast.resize(count);p.stunLast[j]=stun;
             v=MovementBank::blend(v,stun,p.stunWeight);
         }
+        if(p.bank.hasShop()&&p.shopWeight>.001f)v=MovementBank::blend(v,p.bank.sample(381,j,p.shopPhase),p.shopWeight);
         if(p.bank.hasUse()&&p.useWeight>.001f&&p.useVariant){
             auto use=p.bank.sampleParameter(UsePresentation::clip(p.useVariant),j,p.useAmount);
             if(p.useFrom.size()==count)use=MovementBank::blend(p.useFrom[j],use,p.useTransition*p.useTransition*(3-2*p.useTransition));
@@ -886,6 +902,7 @@ void writeMovementStatus(){
     fprintf(f,"\"carryPlaybackStance\":%u,",p.carryStance);
     fprintf(f,"\"combatRecoveryStart\":%.7f,\"combatAuthoredAmount\":%.7f,",p.combatRecoveryStart,CombatPresentation::authoredAmount(p.combatVariant,p.combatAmount,p.combatRecoveryStart));
     fprintf(f,"\"stunVariant\":%u,\"stunAmount\":%.7f,\"stunWeight\":%.7f,\"stunEvent\":%llu,",p.stunVariant,p.stunAmount,p.stunWeight,p.stunEvent);
+    fprintf(f,"\"shopWeight\":%.7f,\"shopPhase\":%.7f,",p.shopWeight,p.shopPhase);
     fprintf(f,"\"readingHold\":%s,\"readingLeaseFail\":%u,\"readingHolds\":%llu,\"readingFrames\":%llu,\"useVariant\":%u,\"useAmount\":%.7f,\"useWeight\":%.7f,\"useEvent\":%llu,\"sourceUses\":%llu,\"sourceUseUnfocused\":%llu,\"sourceUseName\":\"%s\",\"sourceUseFrames\":%llu,\"sourceUseEdges\":%llu,\"sourceUseLastVariant\":%u,\"sourceUseEndReason\":%u,\"sourceUseEndAction\":%u,",movementReadingHold?"true":"false",movementReadingLeaseFail,static_cast<unsigned long long>(movementReadingHolds),static_cast<unsigned long long>(movementReadingFrames),p.useVariant,p.useAmount,p.useWeight,p.useEvent,shadowUse.uses,shadowUse.unfocused,shadowUse.name,shadowUse.frames,shadowUse.edges,shadowUse.lastVariant,shadowUse.endReason,shadowUse.endAction);
     fprintf(f,"\"grenadeHeld\":%u,\"grenadeVariant\":%u,\"grenadeAmount\":%.7f,\"grenadeWeight\":%.7f,\"grenadeEvent\":%llu,",p.grenadeHeld,p.grenadeVariant,p.grenadeAmount,p.grenadeWeight,p.grenadeEvent);
     fprintf(f,"\"heartHeld\":%u,\"heartVariant\":%u,\"heartAmount\":%.7f,\"heartWeight\":%.7f,\"heartEvent\":%llu,",p.heartHeld,p.heartVariant,p.heartAmount,p.heartWeight,p.heartEvent);

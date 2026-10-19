@@ -63,7 +63,7 @@ std::uint64_t npcPairedPins=0;
 void serviceHostNpcPaired(NpcAuthorityChannel& c,ULONGLONG tick){
     if(c.hostPairedLease&&tick>=c.pairedUntil){releaseNpcAiLease(c.lease);c.hostPairedLease=false;c.pairedResult="host_paired_released";}
     if(c.hostPairedFollow&&tick>=c.pairedUntil){c.hostPairedFollow=false;c.pairedResult="host_paired_follow_ended";}
-    if(c.unconscious&&c.reversePoses&&c.unconsciousAt&&tick-c.unconsciousAt<3000&&(!c.reversePoseAt||tick-c.reversePoseAt>=350)&&nativeMutationAllowed){
+    if(c.unconscious&&c.reversePoses&&c.unconsciousAt&&tick-c.unconsciousAt<3000&&!npcCarrySuppressed(c,tick)&&(!c.reversePoseAt||tick-c.reversePoseAt>=350)&&nativeMutationAllowed){
         float transform[12]{};std::memcpy(transform,c.reverseRoot,12);
         if(!memoryRead(c.lease.binding.npc.actor+0x30c,transform+3,36))return;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),transform,transform+3,true,0);++npcPairedPins;

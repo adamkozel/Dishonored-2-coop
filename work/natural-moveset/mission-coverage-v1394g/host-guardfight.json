@@ -1,0 +1,250 @@
+{
+  "source": "host",
+  "case": "guardfight",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Block impacts 2, timed parries 1, hit reactions 3 (variants 2), attacks 27 (variants 1,2,3,4,7); guard dead in both worlds"
+  ],
+  "guardFacing": [
+    -0.891331656780333,
+    -0.4533518254305663
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.891331656780333,
+        -0.4533518254305663
+      ],
+      "rest": [
+        6.1589,
+        48.0918,
+        16.4658
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "cameraFollowMoves": 55,
+  "cameraStart": [
+    9.320198643462138,
+    44.635717762700295,
+    18.5131,
+    116.9589378253662,
+    7.280115429024584,
+    48.646710218211794
+  ],
+  "cameraTrace": [
+    {
+      "t": 708,
+      "source": [
+        4.23277,
+        47.8917,
+        16.2166
+      ],
+      "guard": [
+        6.73601,
+        48.425,
+        16.4636
+      ],
+      "command": "coop_observer_camera hold_at 7.524 44.147 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        9.32,
+        44.636002,
+        18.513
+      ]
+    },
+    {
+      "t": 1438,
+      "source": [
+        4.53698,
+        48.0526,
+        16.2582
+      ],
+      "guard": [
+        6.24205,
+        48.9171,
+        16.3866
+      ],
+      "command": "coop_observer_camera hold_at 7.430 44.474 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        7.524,
+        44.146999,
+        18.513
+      ]
+    },
+    {
+      "t": 2038,
+      "source": [
+        4.53698,
+        48.0526,
+        16.2582
+      ],
+      "guard": [
+        6.23215,
+        48.929,
+        16.3656
+      ],
+      "command": "coop_observer_camera hold_at 7.425 44.480 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        7.425,
+        44.48,
+        18.513
+      ]
+    },
+    {
+      "t": 2731,
+      "source": [
+        4.53698,
+        48.0526,
+        16.2582
+      ],
+      "guard": [
+        6.23215,
+        48.929,
+        16.3655
+      ],
+      "command": "coop_observer_camera hold_at 7.425 44.480 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        7.425,
+        44.48,
+        18.513
+      ]
+    },
+    {
+      "t": 3393,
+      "source": [
+        4.53698,
+        48.0526,
+        16.2582
+      ],
+      "guard": [
+        5.70433,
+        48.6571,
+        16.3555
+      ],
+      "command": "coop_observer_camera hold_at 7.161 44.344 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        7.425,
+        44.48,
+        18.513
+      ]
+    },
+    {
+      "t": 4472,
+      "source": [
+        3.67652,
+        48.3636,
+        16.0991
+      ],
+      "guard": [
+        5.90628,
+        48.429,
+        16.3949
+      ],
+      "command": "coop_observer_camera hold_at 6.831 44.385 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        7.161,
+        44.344002,
+        18.513
+      ]
+    },
+    {
+      "t": 5129,
+      "source": [
+        3.29279,
+        48.62,
+        16.048
+      ],
+      "guard": [
+        4.32531,
+        48.429,
+        16.2061
+      ],
+      "command": "coop_observer_camera hold_at 5.849 44.514 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        5.849,
+        44.514,
+        18.513
+      ]
+    },
+    {
+      "t": 5741,
+      "source": [
+        3.27275,
+        48.6328,
+        16.0192
+      ],
+      "guard": [
+        4.87794,
+        48.429,
+        16.2891
+      ],
+      "command": "coop_observer_camera hold_at 6.115 44.520 18.513",
+      "active": true,
+      "result": "holding_at",
+      "position": [
+        5.849,
+        44.514,
+        18.513
+      ]
+    }
+  ],
+  "phaseLog": [
+    {
+      "phase": "block",
+      "ms": 3954
+    },
+    {
+      "phase": "open",
+      "ms": 26016,
+      "guardSamples": 3
+    },
+    {
+      "phase": "attack",
+      "ms": 26174,
+      "hitSamples": 3
+    }
+  ],
+  "counterPresses": [],
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcomeWaitMs": 660,
+  "guard": "script_spawner_checkpoint_guard_02",
+  "blockImpacts": 2,
+  "timedParries": 1,
+  "hitReactions": 3,
+  "stunVariants": [
+    2
+  ],
+  "combatSceneWindows": 0,
+  "sceneWindows": 2,
+  "attackSamples": 27,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    4,
+    7
+  ],
+  "minSourceHealth": 70.0,
+  "healthDrops": []
+}

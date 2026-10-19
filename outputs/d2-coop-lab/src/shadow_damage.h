@@ -17,13 +17,18 @@ CoopDamageAvatar shadowDamageIdentity(){
     return a;
 }
 void retireShadowDamageIdentity(){shadowDamageActor.store(0,std::memory_order_release);shadowDamageHandle.store(0);shadowDamageGame.store(0);}
-void registerCarryDamageLease(std::uintptr_t actor,std::uint32_t handle,ULONGLONG until){
-    const CarryDamageLease next{shadowDamageIdentity(),actor,handle,until};
+void registerCarryDamageLease(std::uintptr_t actor,std::uint32_t handle,ULONGLONG until,const char* definition=nullptr){
+    CarryDamageLease next{shadowDamageIdentity(),actor,handle,until};if(definition)next.definition=definition;
     AcquireSRWLockExclusive(&carryDamageLock);carryDamageLease=next;ReleaseSRWLockExclusive(&carryDamageLock);
 }
 void finishCarryDamageLease(std::uintptr_t actor,std::uint32_t handle,ULONGLONG tick){
     AcquireSRWLockExclusive(&carryDamageLock);
     if(carryDamageLease.actor==actor&&carryDamageLease.handle==handle)carryDamageLease.until=tick+2000;
+    ReleaseSRWLockExclusive(&carryDamageLock);
+}
+void renewCarryDamageLease(std::uintptr_t actor,std::uint32_t handle,ULONGLONG until){
+    AcquireSRWLockExclusive(&carryDamageLock);
+    if(carryDamageLease.actor==actor&&carryDamageLease.handle==handle)carryDamageLease.until=until;
     ReleaseSRWLockExclusive(&carryDamageLock);
 }
 void retireCarryDamageLease(){

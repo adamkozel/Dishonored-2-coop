@@ -360,6 +360,10 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
      {auto unread=wheel;unread.cinematicMetadataValid=0;check(coopPresentationReady(unread),"wheel without native cinematic metadata stays presentation-ready (1075)");
       unread.cinematicMetadataValid=1;unread.cinematicNodeCount=2;check(!coopPresentationReady(unread),"wheel during a cinematic is not presentation-ready");}
      auto menu=h;menu.gameLogicState=2;check(!coopPresentationReady(menu),"pause menu is not presentation-ready");
+     {auto shop=h;shop.gameLogicState=10;check(!coopGameplayReady(shop)&&coopPresentationReady(shop),"black market keeps presentation but not gameplay readiness (1214dr)");
+      auto opening=h;opening.pendingGameLogicState=10;check(coopPresentationReady(opening),"black market opening keeps presentation");
+      shop.cinematicMetadataValid=1;shop.cinematicNodeCount=1;check(!coopPresentationReady(shop),"black market during a cinematic is not presentation-ready");
+      auto other=h;other.gameLogicState=11;check(!coopPresentationReady(other),"other overlays stay refused");}
      {auto opening=h;opening.pendingGameLogicState=8;check(coopPresentationReady(opening)&&!coopGameplayReady(opening),"wheel sampled as logic1 pending8 keeps presentation (1079)");}
      auto loading=wheel;loading.pendingGameLogicState=15;check(!coopPresentationReady(loading),"pending load is not presentation-ready");
      auto peer=c;peer.gameLogicState=8;check(coopPresentationPairReady(h,peer)&&!coopWorldPairReady(h,peer),"partner wheel keeps the presentation pair");}

@@ -61,6 +61,57 @@ unsigned labGrantRequest=0;std::uint64_t labGrants=0,labGrantRefused=0;const cha
 // item wheel calls (health +0x7194a0 on the health component, mana +0x745b20 on the mana component), with the same
 // byte guards as the isolated potion fixture; eligibility, quantity and effects stay native. Product mode included.
 unsigned labUseRequest=0;std::uint64_t labUses=0,labUseRefused=0;const char* labUseResult="idle";float labManaBefore=-1;
+// 1214dl (#11 stagger_knockdown_recovery, hit_reactions_directions; lab only): "coop_lab_hit shove|sword
+// front|back|left|right" applies a native damage declaration to the local player from that side, through the original
+// native damage function (not the hooked entry, so no damage record or relay). shove is
+// components/base/damage/shove_damage.damage (DAMAGETYPE_SHOVED, no amount, PLAYER_HITREACT_KNOCKDOWN; export
+// knockdown-decls-v1367): the native knockdown (KnockedDown, state 16). sword is the guards' npc_sword.damage (20,
+// PLAYER_HITREACT_BIG): the native directional stun (state 14). The lab fixtures have no natural knockdown source
+// (1375), and the source's own grenade stuns only after one turn, in an unreliable direction (1363, 1390c-f).
+// 1214dp: the sword hit applied in every direction without a stun (1397m-o); blast is the grenade's own
+// explosion_grenade.damage (PLAYER_HITREACT_BIG), centred 1.2 m out on the chosen side.
+unsigned labHitKind=0,labHitSide=0;bool labKnockdownRequest=false;std::uint64_t labKnockdowns=0,labKnockdownRefused=0;const char* labKnockdownResult="idle";
+void serviceLabKnockdown(){
+    if(!labKnockdownRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    labKnockdownRequest=false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    const auto refuse=[](const char* why){++labKnockdownRefused;labKnockdownResult=why;};
+    NativeHealth h{};float position[3]{},direction[3]{};
+    if(!swordDamageApiMatches()||!coopGameplayReady(outgoing)||!readNativeHealth(memoryRead,base,1,h)||h.logic!=1||h.current<1.f||
+       !memoryRead(h.actor+0x300,position,12)||!memoryRead(h.actor+0x30c,direction,12)){refuse("refused_player_state");return;}
+    float length=0;for(float v:direction){if(!std::isfinite(v)){refuse("direction");return;}length+=v*v;}
+    for(float v:position)if(!std::isfinite(v)){refuse("position");return;}
+    if(length<.99f||length>1.01f){refuse("direction");return;}
+    const char* declName=labHitKind==3?"components/equipment/damage/explosion_grenade.damage":
+        labHitKind==2?"components/equipment/damage/npc_sword.damage":"components/base/damage/shove_damage.damage";
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,declName,false,false);
+    std::uintptr_t vt=0,manager=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138||!memoryRead(decl+0x10,&manager,8)||manager!=base+0x3990b60){refuse("declaration");return;}
+    // The parameter is the direction the hit travels: from the front it runs against the facing, from behind along
+    // it, from the left toward the player's right and from the right toward the left (z up).
+    const float fx=direction[0],fy=direction[1];
+    if(labHitSide==0)for(float& v:direction)v=-v;
+    else if(labHitSide==2){direction[0]=fy;direction[1]=-fx;direction[2]=0;}
+    else if(labHitSide==3){direction[0]=-fy;direction[1]=fx;direction[2]=0;}
+    position[2]+=1;
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+    // 1214dn: the hit starts 0.6 m out on the side it comes from; a sword hit names the nearest living NPC as attacker.
+    for(unsigned k=0;k<2;++k)position[k]-=direction[k]*(labHitKind==3?1.2f:.6f);
+    std::uint32_t attacker=0x3fff0010;
+    if(labHitKind==2){std::vector<NativeWorldNpc> catalog;unsigned unbound=0;float best=1600.f;
+        if(readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound))for(const auto& n:catalog){if(!n.unique)continue;
+            const float dx=n.position[0]-position[0],dy=n.position[1]-position[1],d=dx*dx+dy*dy;if(d<best){best=d;attacker=n.handle;}}}
+    const unsigned regions=1,region=0;
+    std::memcpy(params.data()+0x20,&regions,4);std::memcpy(params.data()+0x4c,&region,4);
+    std::memcpy(params.data()+0x24,position,12);std::memcpy(params.data()+0x3c,direction,12);std::memcpy(params.data()+0x54,&attacker,4);
+    realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());
+    ++labKnockdowns;labKnockdownResult=labHitKind==3?"blast_applied":labHitKind==2?"sword_applied":"shove_applied";
+}
+bool labHitAllowed(const char* t,unsigned* kind=nullptr,unsigned* side=nullptr){
+    const char* kinds[]={"shove ","sword ","blast "};const char* sides[]={"front","back","left","right"};
+    for(unsigned k=0;k<3;++k){const auto n=std::strlen(kinds[k]);if(std::strncmp(t,kinds[k],n))continue;
+        for(unsigned d=0;d<4;++d)if(!std::strcmp(t+n,sides[d])){if(kind)*kind=k+1;if(side)*side=d;return true;}}
+    return false;}
 void serviceLabItemUse(){
     if(!labUseRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     const unsigned u=labUseRequest;labUseRequest=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
@@ -198,7 +249,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);serviceLabKnockdown();
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -233,6 +284,7 @@ void writeObserverCamera(){
         static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
     fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\",\"named\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"}},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult,static_cast<unsigned long long>(labNamedGrants),static_cast<unsigned long long>(labNamedRefused),labNamedResult);
     {NativePlayerMana m{};const bool mr=readNativePlayerMana(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),m);
+     fprintf(f,"\"labKnockdown\":{\"applied\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labKnockdowns),static_cast<unsigned long long>(labKnockdownRefused),labKnockdownResult);
      fprintf(f,"\"itemUse\":{\"uses\":%llu,\"refused\":%llu,\"result\":\"%s\",\"manaBefore\":%.3f,\"manaNow\":%.3f},",static_cast<unsigned long long>(labUses),static_cast<unsigned long long>(labUseRefused),labUseResult,labManaBefore,mr?m.current:-1.f);}
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
         static_cast<unsigned long long>(playerHealthRefills),static_cast<unsigned long long>(playerHealthHoldMisses),playerHealthLast);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

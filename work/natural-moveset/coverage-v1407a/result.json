@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "labblastfront",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Lab hit blast_applied: source states 0@, 14@, 53@; presented stun variants 2",
+        "Stun presented with the clock weight at least 1"
+      ],
+      "camera": [
+        -35.0,
+        -148.5,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 0,
+          "refused": 0,
+          "result": "idle"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "14@",
+        "53@"
+      ],
+      "labHit": {
+        "applied": 1,
+        "refused": 0,
+        "result": "blast_applied"
+      },
+      "stunVariants": [
+        2
+      ],
+      "stunClockWeightMin": 1.0,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

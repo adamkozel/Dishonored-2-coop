@@ -11,6 +11,8 @@ struct NativePlayerStance {
 };
 // allowWheel (1074c): the action-stream hold alone may read the native item
 // wheel (logic8); every other caller keeps the gameplay-only contract.
+// 1214dr: and the black market (arkGameLogicStateBlackMarket, logic 10, vtable RVA 0x1b69178), pushed on InGame for the
+// whole shop: the walk to the counter, the paired shopkeeper scene and the menu (1402a, confirmed runtime).
 template<class Read> bool readNativePlayerStance(Read read,std::uintptr_t base,NativePlayerStance& out,bool allowWheel=false) {
     NativePlayerStance s{};
     std::uintptr_t vt=0,list=0,owner=0,stack=0;std::uint32_t flags=0,handle=0,count=0,pending=0,phase=0;
@@ -18,7 +20,7 @@ template<class Read> bool readNativePlayerStance(Read read,std::uintptr_t base,N
        !read(s.game+0x341058,&phase,4)||phase!=3||
        !read(s.game+0x1f6ed0,&owner,8)||owner!=s.game||
        !read(s.game+0x1f73f0,&stack,8)||!stack||!read(s.game+0x1f73f8,&count,4)||
-       !(count&0xffffff)||(count&0xffffff)>32||!read(stack+((count&0xffffff)-1)*4,&s.logic,4)||(s.logic!=1&&!(allowWheel&&s.logic==8))||
+       !(count&0xffffff)||(count&0xffffff)>32||!read(stack+((count&0xffffff)-1)*4,&s.logic,4)||(s.logic!=1&&!(allowWheel&&(s.logic==8||s.logic==10)))||
        !read(s.game+0x1f7400,&pending,4)||pending||
        !read(s.game+0x3130b0,&s.player,8)||!s.player||!read(s.player,&vt,8)||vt!=base+0x1c5e428||
        !read(s.player+0xa8,&handle,4)||handle!=1||

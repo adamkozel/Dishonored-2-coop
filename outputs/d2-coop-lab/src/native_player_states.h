@@ -122,6 +122,19 @@ inline bool nativePlayerStunStates(const NativePlayerStates& s,std::uintptr_t ba
     }
     return stun==1&&equipment<=1&&leftEquip<=1;
 }
+// 1214dn (#11 stagger_knockdown_recovery): the native knockdown (PLAYER_HITREACT_KNOCKDOWN), KnockedDown (16) alone in
+// coverage-v1397f/g (the lab shove), with the stun's optional equipment overlays.
+inline bool nativePlayerKnockdownStates(const NativePlayerStates& s,std::uintptr_t base){
+    if(s.player.logic!=1||!s.defaultMode||s.active.empty()||s.active.size()>3)return false;
+    unsigned knocked=0,equipment=0,leftEquip=0;
+    for(const auto& a:s.active){
+        if(a.id==16&&a.vtable==base+0x1c827b8)++knocked;
+        else if(a.id==53&&a.vtable==base+0x1c79cf8)++equipment;
+        else if(a.id==64&&a.vtable==base+0x1c79cf8)++leftEquip;
+        else return false;
+    }
+    return knocked==1&&equipment<=1&&leftEquip<=1;
+}
 inline bool nativePlayerGroundGrenadeStates(const NativePlayerStates& s,std::uintptr_t base){
     // v54/v56h standing and v60/v62 crouched native action observations.
     // This preserves only motion; the owned native scene grants the gesture.
@@ -315,6 +328,7 @@ inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,s
         }if(ground==1&&domino==1){motion=s.player.current;return true;}
     }
     if(nativePlayerStunStates(s,base)){motion=0;return true;} // Native Stun inherits Navigation; exact standing class only.
+    if(nativePlayerKnockdownStates(s,base)){motion=0;return true;} // 1214dn: the knockdown is presented as stun variant 5.
     if(nativePlayerGroundGrenadeStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerAirGrenadeStates(s,base)){
         for(const auto& a:s.active)if(a.id==2||a.id==3){motion=a.id;return true;}
