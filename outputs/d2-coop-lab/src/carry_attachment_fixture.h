@@ -656,7 +656,9 @@ void writeCarryAttachmentFixture(ULONGLONG tick){
     fprintf(file,"{\"throwQueued\":%llu,\"throwRefused\":%llu,\"lastThrowVelocity\":[%.7f,%.7f,%.7f],",carryThrowQueued,carryThrowRefused,carryLastThrowVelocity[0],carryLastThrowVelocity[1],carryLastThrowVelocity[2]);
     fprintf(file,"\"physicsMode\":%u,\"physicsPending\":%u,\"physicsFlags\":%u,\"throwRagdollRequested\":%s,",throwMode,throwPending,throwFlags,f.throwRagdollRequested?"true":"false");
     fprintf(file,"\"attachmentPending\":%s,",f.attachmentPending?"true":"false");
-    fprintf(file,"\"restoreCause\":%u,\"restoreResult\":\"%s\",\"restoreTick\":%llu,",carryRestoreCause,carryRestoreResult,carryRestoreTick);
+    fprintf(file,"\"restoreCause\":%u,\"restoreResult\":\"%s\",\"restoreTick\":%llu,\"snapshotRefusal\":%u,",carryRestoreCause,carryRestoreResult,carryRestoreTick,carrySnapshotRefusal);
+    {std::uintptr_t a=0,b=0;std::memcpy(&a,carrySnapshotOldInput.data(),8);std::memcpy(&b,carrySnapshotOldInput.data()+8,8);
+     fprintf(file,"\"snapshotOldInput\":[\"0x%llx\",\"0x%llx\"],\"snapshotReusedNative\":%s,",(unsigned long long)a,(unsigned long long)b,carrySnapshotReusedNative?"true":"false");}
     fprintf(file,"\"resultLog\":[");
     {const unsigned total=(std::min)(carryResultLogCount,unsigned(carryResultLog.size()));
      for(unsigned i=0;i<total;++i){const auto& e=carryResultLog[(carryResultLogCount-total+i)%carryResultLog.size()];
