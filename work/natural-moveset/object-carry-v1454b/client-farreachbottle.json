@@ -1,0 +1,52 @@
+{
+  "source": "client",
+  "case": "farreachbottle",
+  "observer": "host",
+  "passed": false,
+  "failure": "The bottle was not pulled into the hand",
+  "checks": [
+    "Pull states 63@, 84@, component@; moved in host ; moved in client esc_env_bottle_03_3:gone",
+    "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after "
+  ],
+  "grantResult": {
+    "grants": 3,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "inputAt": "2026-10-19T07:21:22.6479148+02:00",
+  "holdDumps": 5,
+  "holdStateType": [
+    ".?AVarkPlayerStateUsePower@@",
+    ".?AVarkPlayerStateUsePower@@",
+    ".?AVarkPlayerStateGrabGrappledEntity@@",
+    ".?AVarkCpntPlayerSensorGrappleToMantle@@",
+    ".?AVarkCpntPlayerSensorGrapple@@"
+  ],
+  "lootSamples": 0,
+  "slotPresses": [],
+  "potionCounts": [],
+  "peakUseWeight": 0.0,
+  "holdSamples": 0,
+  "bottleAfter": null,
+  "bottleBefore": [
+    -43.4437,
+    -163.081,
+    67.252
+  ],
+  "stateVtables": [
+    "63@",
+    "84@",
+    "component@"
+  ],
+  "movers": {
+    "host": [],
+    "client": [
+      {
+        "name": "esc_env_bottle_03_3",
+        "handle": "0x73c0356",
+        "change": "gone"
+      }
+    ]
+  },
+  "restored": true
+}

@@ -165,7 +165,9 @@ void serviceShadowGestures(const NativePlayerStates& states,std::uintptr_t base,
     // 1214eb: the release waits for the held object's flight (fillShadowHeldObject decides within 160 ms: 25 cm or more
     // is a throw, 8, otherwise a placement or drop, 7); without the object's track it falls back to 7 after 250 ms.
     if(hold&&!shadowGesture.wasHold&&!useActive){shadowUse.targetValid=false;startShadowUse(6);++shadowGesture.holds;shadowGesture.releasePending=0;}
-    else if(!hold&&shadowGesture.wasHold&&shadowUse.variant==6)shadowGesture.releasePending=GetTickCount64();
+    // 1214ec: a native placement replaces HoldObject 49 with state 81 in the same read (1457a); it is the release at once.
+    else if(!hold&&shadowGesture.wasHold&&shadowUse.variant==6){bool place=false;for(const auto& a:states.active)if(a.id==81&&a.vtable==base+0x1c7df88){place=true;break;}
+        if(place){shadowUse.targetValid=false;startShadowUse(7);++shadowGesture.drops;shadowGesture.releasePending=0;}else shadowGesture.releasePending=GetTickCount64();}
     if(shadowGesture.releasePending&&(shadowUse.variant!=6||GetTickCount64()-shadowGesture.releasePending>=250)){
         if(shadowUse.variant==6){shadowUse.targetValid=false;startShadowUse(7);++shadowGesture.drops;}shadowGesture.releasePending=0;}
     shadowGesture.wasHold=hold;
@@ -269,12 +271,14 @@ void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,C
         if(!readHeldObjectTransform(states.player.game,holding,0,position,axis,&key)){++shadowHeldRefused;return;}
         if(h.phase!=1||h.handle!=holding)++shadowHeldHolds;
         h.handle=holding;h.key=key;h.phase=1;h.releasedAt=h.stillSince=h.endAt=0;std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
-    }else if(h.handle&&(h.phase==1||h.phase==2)){
+    // 1214ec: a settled object stays watched until 10 s after the release (1457a lost a bottle that broke after it rested).
+    }else if(h.handle&&(h.phase==1||h.phase==2||(h.phase==3&&tick-h.releasedAt<10000))){
         if(h.phase==1){h.phase=2;h.releasedAt=tick;h.stillSince=0;++shadowHeldReleases;std::memcpy(h.releaseFrom,h.last,12);}
         if(!readHeldObjectTransform(states.player.game,h.handle,h.key,position,axis)){h.phase=4;h.endAt=tick+1000;++shadowHeldBreaks;}
         else{float d=0;for(unsigned i=0;i<3;++i){const float v=position[i]-h.last[i];d+=v*v;}std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
             if(d<1e-4f){if(!h.stillSince)h.stillSince=tick;}else h.stillSince=0;
-            if((h.stillSince&&tick-h.stillSince>=600)||tick-h.releasedAt>=6000){h.phase=3;h.endAt=tick+1000;++shadowHeldSettles;}}
+            if(h.phase==3){if(d>=4e-4f){h.phase=2;h.stillSince=0;}}
+            else if((h.stillSince&&tick-h.stillSince>=600)||(!h.endAt&&tick-h.releasedAt>=6000)||(h.endAt&&tick>=h.endAt)){h.phase=3;if(!h.endAt)h.endAt=h.releasedAt+10000;++shadowHeldSettles;}}
     }else if(h.phase>=3&&tick>=h.endAt)h=ShadowHeldObject{};
     // 1214eb: throw or drop, decided from the released object's first 160 ms.
     if(shadowGesture.releasePending&&shadowUse.variant==6){float d=0;

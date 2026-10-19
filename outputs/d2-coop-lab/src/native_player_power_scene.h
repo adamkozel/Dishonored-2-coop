@@ -85,6 +85,8 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
         if((darkVision||windblast||bendTime||mesmerize)&&states.player.current==0&&
            ((a.id==2&&a.vtable==base+0x1c85028)||(a.id==3&&a.vtable==base+0x1c845c8)))continue;
         if(a.id==63&&a.vtable==base+0x1c80ed8)continue;
+        // 1214ec: Far Reach's object pull runs GrabGrappledEntity 84 (vtable RVA 0x1c3f8e8; 1452a, 1457b) under the pull scene.
+        if(!darkVision&&!windblast&&!bendTime&&!mesmerize&&s.power.player.character==2&&a.id==84&&a.vtable==base+0x1c3f8e8)continue;
         if(!darkVision&&!windblast&&!bendTime&&!mesmerize&&s.power.player.character==1&&a.id==12&&a.vtable==base+0x1c815d8){blinking=true;continue;}
         if(!darkVision&&!windblast&&!bendTime&&!mesmerize&&s.power.player.character==2&&a.id==27&&a.vtable==base+0x1c7a328){grappling=true;continue;}
         return false;
