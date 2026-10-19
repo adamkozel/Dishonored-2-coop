@@ -37,7 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
-    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0,impliedReady=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0,impliedReady=0,hostWorldRebased=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -588,6 +588,7 @@ void serviceNpcCombatHostWorld(){
         if(!c||!npcCombatIdentity(*c,h))continue;
         if(!(b.health>0)){b.health=h.current;continue;}
         if(h.current>b.health){++npcCombat.hostWorldGains;b.health=h.current;continue;}
+        if(npcCombatHostWorldRebase(b.health,h.current,h.maximum)){++npcCombat.hostWorldRebased;b.health=h.current;continue;}
         if(h.current==b.health)continue;
         NativeHealth before=h;before.current=b.health;
         npcCombatCommit(*c,b,2,0,NpcCombatDamage::HostWorld,{},before,h,b.health-h.current);if(!npcCombat.enabled)return;++npcCombat.hostWorldCommitted;
@@ -890,7 +891,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu,\"impliedReady\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied,s.impliedReady);
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu,\"impliedReady\":%llu,\"hostWorldRebased\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied,s.impliedReady,s.hostWorldRebased);
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

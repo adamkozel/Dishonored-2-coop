@@ -131,6 +131,9 @@ void npcCombatProtocolTests(){
      bad=q;bad.damage=NpcCombatDamage::PeerNative;require(!validNpcCombat(bad,h,c),"a replayable declaration is never PeerNative");
      good=q;good.ranged={npcDamageKey("code_referenced/damage/generic_sleep_damage.damage"),0,0,0x84};require(validNpcCombat(good,h,c),"1214fn: a linked knockout is a Linked request");
      good.damage=NpcCombatDamage::PeerNative;good.ranged.weapon=0;require(validNpcCombat(good,h,c),"1214fn: a linked knockout without flags is a PeerNative request");}
+    require(npcCombatHostWorldRebase(40,10,10),"1214fp: a knockout lowers the maximum below the baseline: rebase, no commit");
+    require(!npcCombatHostWorldRebase(40,30,40)&&!npcCombatHostWorldRebase(10,5,10),"1214fp: ordinary and unconscious losses still commit");
+    require(!npcCombatHostWorldRebase(NAN,10,10)&&!npcCombatHostWorldRebase(40,20,10),"1214fp: rebase needs finite health within the maximum");
     auto badWorld=world;badWorld.sourceActorArm=0;require(!validNpcCombat(badWorld,c,h),"unattributed world collision rejected");
     badWorld=world;badWorld.sourceRole=1;require(!validNpcCombat(badWorld,c,h),"corpse cannot be disguised as player damage");
     badWorld=world;badWorld.kind=NpcCombatMessage::Request;badWorld.request=1;badWorld.event=0;badWorld.before=badWorld.after=badWorld.maximum=badWorld.inflicted=0;require(!validNpcCombat(badWorld,h,c),"client cannot request host-owned world damage");

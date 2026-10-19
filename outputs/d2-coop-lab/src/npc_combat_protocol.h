@@ -144,6 +144,12 @@ inline bool npcCombatNativeLethal(float before,float inflicted){
     return std::isfinite(before)&&before>0&&std::isfinite(inflicted)&&inflicted>=0&&before-inflicted<0.5f;
 }
 inline bool npcCombatReplicaWorldEvent(unsigned localRole,bool localPlayerOwned){return localRole==1&&!localPlayerOwned;}
+// 1214fp (#117): a knockout sets the owner suppression flag, and the native maximum drops to the suppressed maximum
+// (40 to 10 for the tutorial guard; native_health.h). A HostWorld baseline above the new maximum is no loss to
+// commit: it failed validation and stopped the host's whole combat session after every choke (1652b, 1654a, 1655a).
+inline bool npcCombatHostWorldRebase(float baseline,float current,float maximum){
+    return std::isfinite(baseline)&&std::isfinite(maximum)&&baseline>maximum&&std::isfinite(current)&&current<=maximum;
+}
 inline bool npcCombatHealth(float current,float maximum){return std::isfinite(current)&&std::isfinite(maximum)&&current>0&&maximum>0&&current<=maximum&&maximum<=1000000;}
 inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,const CoopPosePacket& peer){
     if(p.magic!=0x434e3244||p.version!=7||p.size!=sizeof(p)||p.binding.kind!=NpcAuthorityMessage::Stop||
