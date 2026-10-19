@@ -8,6 +8,8 @@
 // thread only, through the native entity transform setter (0x87d200, as guard_link's nudge).
 // 1214ed: the health component is found in the movable's own component list (readNativeHealth accepts only NPC and
 // player actors; 1460a skipped every break); returns nullptr when broken, else the failing step.
+// 1214fe (#115): never a character. A Far Reach pull crosses as a held object, and character health (0x1c51588) on the
+// partner's copy means an NPC body, which the explosion hit would kill (mission-coverage-v1625b counted a break on one).
 const char* breakPartnerHeldObject(std::uint32_t handle,const float* at){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!realNativeDamage||!swordDamageApiMatches())return "break_no_damage_api";
@@ -15,7 +17,8 @@ const char* breakPartnerHeldObject(std::uint32_t handle,const float* at){
     if(!actor||!memoryRead(actor+0x268,&list,8)||!list||!memoryRead(actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return "break_no_components";
     for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,cv=0;if(!memoryRead(list+i*8,&c,8)||!c||!memoryRead(c,&cv,8))return "break_no_components";
         // 1214ee: a map movable's health is the plain arkCpntHealth (0x1c51268, 1471a); characters use 0x1c51588.
-        if(cv==base+0x1c51588||cv==base+0x1c51268){if(component)return "break_two_health";component=c;}}
+        if(cv==base+0x1c51588)return "break_character";
+        if(cv==base+0x1c51268){if(component)return "break_two_health";component=c;}}
     if(!component||!memoryRead(component+0x10,&owner,8)||owner!=actor||!memoryRead(component+0x20,&current,4))return "break_no_health";
     if(!(current>0))return "break_already";
     const auto lookup=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030);

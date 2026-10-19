@@ -257,7 +257,7 @@ unsigned shadowDeathVariant(ULONGLONG tick){
 // (1433b/c, confirmed runtime; map entities share handles across the two worlds). While it is held the source sends phase
 // 1 with its handle, name key and world transform; after the throw or drop it sends the flight (phase 2) until the object
 // rests 0.6 s (phase 3, sent 1 s) or is gone (phase 4, sent 1 s); 6 s after the release it counts as settled.
-struct ShadowHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;ULONGLONG releasedAt=0,stillSince=0,endAt=0;float last[3]{},axis[9]{},releaseFrom[3]{};};
+struct ShadowHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;ULONGLONG releasedAt=0,stillSince=0,endAt=0;float last[3]{},axis[9]{},releaseFrom[3]{};bool character=false;};
 ShadowHeldObject shadowHeld{};std::uint64_t shadowHeldHolds=0,shadowHeldReleases=0,shadowHeldSettles=0,shadowHeldBreaks=0,shadowHeldRefused=0;
 inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std::uint64_t key,float* position,float* axis,std::uint64_t* keyOut=nullptr){
     const auto actor=worldIdentityEntity(memoryRead,game,handle);std::uintptr_t text=0;std::string name;
@@ -269,6 +269,15 @@ inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std
     return true;}
 std::uint64_t shadowHeldPulls=0; // 1214fc (#115)
 std::uint64_t shadowHeldFallback=0; // 1214fd (#115): fallback packets that carried the held object
+// 1214fe (#115): Far Reach also pulls NPC bodies, and their flight crosses as a held object too (mission-coverage-v1625b:
+// the host followed Emily's pulled body 184 times). A body carries character health (0x1c51588), unlike a map movable
+// (0x1c51268); it is never reported broken, because its fate belongs to NPC authority, so a lost body ends its report.
+std::uint64_t shadowHeldBodies=0,shadowHeldBodyLost=0;
+inline bool heldObjectCharacter(std::uintptr_t game,std::uintptr_t base,std::uint32_t handle){
+    const auto actor=worldIdentityEntity(memoryRead,game,handle);std::uintptr_t list=0;std::uint32_t count=0;
+    if(!actor||!memoryRead(actor+0x268,&list,8)||!list||!memoryRead(actor+0x270,&count,4)||(count&0xffffff)>256)return false;
+    for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,cv=0;if(memoryRead(list+i*8,&c,8)&&c&&memoryRead(c,&cv,8)&&cv==base+0x1c51588)return true;}
+    return false;}
 void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,CoopShadowActionPacket& p){
     const auto tick=GetTickCount64();std::uint32_t holding=0;auto& h=shadowHeld;float position[3]{},axis[9]{};
     for(const auto& a:states.active)if(a.id==49&&a.vtable==base+0x1c7a998){if(!memoryRead(a.pointer+0x48,&holding,4))holding=0;break;}
@@ -278,7 +287,7 @@ void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,C
     // or is held with it (phase 1) instead of staying put in the partner's world.
     if(!holding){std::uint32_t pulled=0;for(const auto& a:states.active)if(a.id==84&&a.vtable==base+0x1c3f8e8){if(!memoryRead(a.pointer+0x38,&pulled,4))pulled=0;break;}
         if(pulled&&(pulled>>16)!=0x3fff&&(h.handle!=pulled||!h.phase)){std::uint64_t key=0;
-            if(readHeldObjectTransform(states.player.game,pulled,0,position,axis,&key)){h=ShadowHeldObject{};h.handle=pulled;h.key=key;h.phase=2;h.releasedAt=tick;
+            if(readHeldObjectTransform(states.player.game,pulled,0,position,axis,&key)){h=ShadowHeldObject{};h.handle=pulled;h.key=key;h.phase=2;h.releasedAt=tick;h.character=heldObjectCharacter(states.player.game,base,pulled);if(h.character)++shadowHeldBodies;
                 std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);std::memcpy(h.releaseFrom,position,12);++shadowHeldPulls;}}}
     if(holding&&(holding>>16)!=0x3fff){std::uint64_t key=0;
         if(!readHeldObjectTransform(states.player.game,holding,0,position,axis,&key)){++shadowHeldRefused;return;}
@@ -287,7 +296,7 @@ void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,C
     // 1214ec: a settled object stays watched until 10 s after the release (1457a lost a bottle that broke after it rested).
     }else if(h.handle&&(h.phase==1||h.phase==2||(h.phase==3&&tick-h.releasedAt<10000))){
         if(h.phase==1){h.phase=2;h.releasedAt=tick;h.stillSince=0;++shadowHeldReleases;std::memcpy(h.releaseFrom,h.last,12);}
-        if(!readHeldObjectTransform(states.player.game,h.handle,h.key,position,axis)){h.phase=4;h.endAt=tick+1000;++shadowHeldBreaks;}
+        if(!readHeldObjectTransform(states.player.game,h.handle,h.key,position,axis)){if(h.character){h=ShadowHeldObject{};++shadowHeldBodyLost;}else{h.phase=4;h.endAt=tick+1000;++shadowHeldBreaks;}}
         else{float d=0;for(unsigned i=0;i<3;++i){const float v=position[i]-h.last[i];d+=v*v;}std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
             if(d<1e-4f){if(!h.stillSince)h.stillSince=tick;}else h.stillSince=0;
             if(h.phase==3){if(d>=4e-4f){h.phase=2;h.stillSince=0;}}
@@ -783,8 +792,8 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
-    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"pulls\":%llu,\"fallback\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
-        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldPulls),static_cast<unsigned long long>(shadowHeldFallback),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
+    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"pulls\":%llu,\"fallback\":%llu,\"bodies\":%llu,\"bodyLost\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
+        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldPulls),static_cast<unsigned long long>(shadowHeldFallback),static_cast<unsigned long long>(shadowHeldBodies),static_cast<unsigned long long>(shadowHeldBodyLost),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
         static_cast<unsigned long long>(shadowHeldBreaks),static_cast<unsigned long long>(shadowHeldRefused),remoteHeld.phase,remoteHeld.handle,static_cast<unsigned long long>(partnerHeld.applied),
         static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),static_cast<unsigned long long>(shadowGesture.throws),static_cast<unsigned long long>(shadowGesture.drops),partnerHeld.result);
     fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",
