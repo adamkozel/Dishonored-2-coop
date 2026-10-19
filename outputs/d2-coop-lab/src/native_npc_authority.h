@@ -54,6 +54,14 @@ inline bool npcAuthorityAcquireEligible(const NativeNpcAuthority& s){
     for(unsigned i=0;i<2;++i)if((s.ai[i].flags&12)!=8||(s.ai[i].flags&0x7fffff0)||!s.ai[i].schedulerActive)return false;
     return true;
 }
+// 1214el (#118): the host streams its own NPCs without pausing them, so an NPC whose decision and reflex AI the game
+// itself has paused is streamable on the host (1514a: the dormant office gravehound had one pause reference and an
+// inactive scheduler, so the host never bound it); the client still needs a running AI to take its lease.
+inline bool npcAuthorityHostStreamEligible(const NativeNpcAuthority& s){
+    if(!s.npc.unique||!s.npc.reciprocal||!npcAuthorityLiving(s)||!npcAuthorityAttackInactive(s)||!s.ai[0].tree)return false;
+    for(unsigned i=0;i<2;++i)if((s.ai[i].flags&12)!=8)return false;
+    return true;
+}
 inline bool npcAuthorityPaused(const NativeNpcAuthority& s){
     if(!npcAuthorityLiving(s)||!npcAuthorityAttackInactive(s))return false;
     for(unsigned i=0;i<2;++i)if((s.ai[i].flags&12)!=8||((s.ai[i].flags>>6)&0x1fffff)<1||
@@ -93,7 +101,7 @@ struct NativeNpcLife{std::string spawner,definition;std::uint32_t handle=0;std::
 // Catalog uniqueness includes unused authored spawners. Single-handle reads
 // establish local lifetime only; they cannot discover cross-process targets.
 template<class Read> bool readNativeNpcAuthorityCatalog(Read read,std::uintptr_t base,std::uintptr_t game,
-        std::vector<NativeNpcAuthority>& entries,unsigned& ineligible,unsigned& unavailable,unsigned& unbound,std::vector<NativeNpcLife>* life=nullptr){
+        std::vector<NativeNpcAuthority>& entries,unsigned& ineligible,unsigned& unavailable,unsigned& unbound,std::vector<NativeNpcLife>* life=nullptr,bool hostStream=false){
     std::vector<NativeWorldNpc> catalog;entries.clear();ineligible=unavailable=0;
     if(!readWorldNpcCatalog(read,base,game,catalog,unbound))return false;
     for(const auto& n:catalog){
@@ -105,7 +113,7 @@ template<class Read> bool readNativeNpcAuthorityCatalog(Read read,std::uintptr_t
         if(h.game!=game||h.actor!=n.actor||h.logic!=1||h.current<=0){++ineligible;continue;}
         NativeNpcAuthority s{};
         if(!readNativeNpcAuthority(read,base,game,n.handle,s)){++unavailable;continue;}
-        if(!npcAuthorityAcquireEligible(s)){++ineligible;continue;}
+        if(!(hostStream?npcAuthorityHostStreamEligible(s):npcAuthorityAcquireEligible(s))){++ineligible;continue;}
         if(s.npc.spawner!=n.spawner||s.npc.component!=n.component||s.npc.spawnerName!=n.spawnerName||s.npc.definition!=n.definition){++unavailable;continue;}
         if(entries.size()>=1024)return false;
         entries.push_back(std::move(s));

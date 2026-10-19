@@ -33,12 +33,15 @@ void nativeNpcAuthorityTests(){
     require(inspect(m)&&npcAuthorityAcquireEligible(s)&&s.health.maximum==50,"generic NPC authority permits non-guard health and names");const auto original=s;
     auto paused=m;for(unsigned i=0;i<2;++i){paused.d(components[i]+0x1c,0xa000006a);paused.d(registries[i]+0x38,0);paused.q(registries[i]+0x28,indices[i]);}
     require(inspect(paused)&&sameNpcAuthorityIdentity(original,s)&&npcAuthorityPaused(s)&&!npcAuthorityAcquireEligible(s),"owned pauses preserve identity and block reacquisition");
+    require(npcAuthorityHostStreamEligible(s),"1214el: a paused NPC stays streamable by the host");
     {auto swapped=original;swapped.ai[0].tree^=0x10;require(!sameNpcAuthorityIdentity(original,swapped)&&sameNpcAuthorityIdentity(original,swapped,false),"combat behaviour-tree swap keeps the ongoing incarnation (1104)");
      swapped=original;swapped.ai[0].component^=0x10;require(!sameNpcAuthorityIdentity(original,swapped,false),"a replaced AI component is still a new incarnation");}
     auto b=paused;b.d(components[0]+0x1c,0xa00000aa);require(inspect(b)&&npcAuthorityPaused(s),"additional native pause reference retained");
     b=m;b.d(registries[0]+0x38,0);b.q(registries[0]+0x28,indices[0]);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"script-inactive scheduler excluded despite started flags");
     b=m;b.d(components[2]+0x1c,0xa000000a);b.d(registries[2]+0x38,1);b.q(registries[2]+0x28,indices[2]+2);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"native active attack excluded");
+    require(!npcAuthorityHostStreamEligible(s),"1214el: an attacking NPC is not host-streamable either");
     b=m;float zero=0;b.put(health+0x20,&zero,4);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"zero health cannot become an authority target");
+    require(!npcAuthorityHostStreamEligible(s),"1214el: a dead NPC is not host-streamable");
     b=m;b.d(spComp+0x38,2);b.d(children+4,0x30005);require(!inspect(b),"multi-child authored spawner refused");
     b=m;b.q(frame+0x10,spawner);require(!inspect(b),"foreign reference frame refused");
     b=m;b.q(list,health);require(!inspect(b),"frame not a unique owned component refused");
