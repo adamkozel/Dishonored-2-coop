@@ -1,0 +1,181 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": false,
+  "failure": "Outcome differs: source conscious, observer conscious, expected dead",
+  "checks": [
+    "Domino casts: grant named_power_equip_requested, at most 0 native marks",
+    "Domino-linked guard 1 after guard 2's kill: host health 19 (suppressed False), client health 19 (suppressed False)"
+  ],
+  "dominoGrant": {
+    "grants": 1,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "dominoAims": [
+    {
+      "target": [
+        -44.14,
+        -142.99,
+        66.4
+      ],
+      "stand": [
+        -44.39,
+        -153.27,
+        66.4036
+      ],
+      "yaw": 88.60689474009625,
+      "pitch": 2.184785857399989,
+      "distance": 10.283039433941699
+    },
+    {
+      "target": [
+        -51.4774,
+        -145.712,
+        61.024
+      ],
+      "stand": [
+        -55.3426,
+        -144.682,
+        61.0036
+      ],
+      "yaw": -14.921452373916804,
+      "pitch": 5.252044276640785,
+      "distance": 4.000083879120532
+    }
+  ],
+  "dominoLinks": {
+    "readyMask": 5,
+    "marksOnly": 0,
+    "sent": 201,
+    "received": 0,
+    "rejected": 0,
+    "unknown": 1,
+    "presented": 0,
+    "event": 0,
+    "nativeHandle": 0,
+    "markCount": 0,
+    "leased": false,
+    "readCount": 279,
+    "scopedReadCount": 200,
+    "readMaxMs": 21.4674,
+    "scopedReadMaxMs": 0.9163,
+    "readStage": 0,
+    "started": 0,
+    "stopped": 0,
+    "updated": 0,
+    "refused": 0,
+    "retired": 0,
+    "marks": []
+  },
+  "dominoPeerLinks": {
+    "readyMask": 0,
+    "marksOnly": 0,
+    "sent": 0,
+    "received": 202,
+    "rejected": 0,
+    "unknown": 0,
+    "presented": 201,
+    "event": 1,
+    "nativeHandle": 210178549,
+    "markCount": 2,
+    "leased": true,
+    "readCount": 0,
+    "scopedReadCount": 0,
+    "readMaxMs": 0.0,
+    "scopedReadMaxMs": 0.0,
+    "readStage": 0,
+    "started": 2,
+    "stopped": 0,
+    "updated": 155,
+    "refused": 0,
+    "retired": 0,
+    "marks": [
+      {
+        "sourceId": 369,
+        "target": 189269860,
+        "id": 297,
+        "owner": 209916411
+      },
+      {
+        "sourceId": 380,
+        "target": 190252915,
+        "id": 303,
+        "owner": 209916411
+      }
+    ]
+  },
+  "dominoMarksMax": 0.0,
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -38.2175,
+      -148.806,
+      66.4
+    ],
+    "source": [
+      -38.99,
+      -148.71,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-19T23:30:09.0043309+02:00",
+  "scenes": [],
+  "attempts": 3,
+  "final": {
+    "source": {
+      "tick": 99765390,
+      "handle": 189269860,
+      "logic": 13,
+      "component": "0x1d5c6e38310",
+      "actor": "0x1d5dadef680",
+      "attributes": "0x1d5dab458d0",
+      "current": 20,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 99765437,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x27edc058230",
+      "actor": "0x27ede7754b0",
+      "attributes": "0x27ede4d88d0",
+      "current": 20,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "conscious",
+    "observer": "conscious"
+  },
+  "restored": true
+}
