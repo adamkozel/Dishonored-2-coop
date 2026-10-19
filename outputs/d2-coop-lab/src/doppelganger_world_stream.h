@@ -7,9 +7,13 @@ struct DoppelgangerWorldStream {
     struct Pending{CoopDoppelgangerWorldPacket packet{};double time=0;};
     std::array<Pending,8> pending{};unsigned count=0;
     std::uint64_t token=0,peerToken=0;ULONGLONG nextSample=0,lease=0;
-    NativeDoppelgangerItem known{};bool discovered=false;
+    NativeDoppelgangerItem known{};bool discovered=false;unsigned alternate=0;
     DoppelgangerWorldOrder order{};CoopDoppelgangerWorldPacket sent{},presented{};double presentedTime=0;
-} doppelgangerWorldStream;
+};
+// 1214eh (#11 power_upgrade_variants): one stream per clone slot (Twin Shade keeps two shades). Slot 0
+// also holds the source's discovery and sampling state; both slots carry the same session tokens.
+std::array<DoppelgangerWorldStream,kDoppelgangerWireSlots> doppelgangerWorldStreams{};
+DoppelgangerWorldStream& doppelgangerWorldStream=doppelgangerWorldStreams[0];
 std::uint64_t doppelgangerWorldSequence=0,doppelgangerWorldEvent=0,doppelgangerWorldSent=0,doppelgangerWorldReceived=0,doppelgangerWorldRejected=0,doppelgangerWorldUnknown=0,doppelgangerWorldPresented=0;
 double doppelgangerReadMaxMs=0,doppelgangerPoseReadMaxMs=0;std::uint64_t doppelgangerPoseReadFailed=0;unsigned doppelgangerReadStage=0;
 unsigned doppelgangerPoseReadLine=0,doppelgangerPoseLogic=0,doppelgangerPoseJoints=0;
@@ -22,28 +26,10 @@ struct DoppelgangerWorldRecord{std::uint64_t sequence=0,event=0,digest=0;unsigne
 std::array<DoppelgangerWorldRecord,128> doppelgangerWorldHistory{};std::uint64_t doppelgangerWorldHistoryCount=0;
 void recordDoppelgangerWorld(const CoopDoppelgangerWorldPacket& p){doppelgangerWorldHistory[doppelgangerWorldHistoryCount++%128]={p.sequence,p.event,doppelgangerWorldDigest(p),p.nativeHandle,p.generation,p.present,p.fxKnown,p.fxScene,p.fxVariant,p.fxTimeMs};}
 bool doppelgangerWorldCurrent(ULONGLONG tick){return shadowStreamCurrent(tick)&&shadowStream.peerReady&&doppelgangerWorldStream.token==shadowStream.token&&doppelgangerWorldStream.peerToken==shadowStream.peerToken;}
-void sampleDoppelgangerWorld(ULONGLONG tick){
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=doppelgangerWorldStream;
-    if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){s={};return;}
-    if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
-    if(localRole!=1||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500);
-    // Discover from the selected exact power only. Never scan the full mixed
-    // inventory on the engine thread. Late join with unequipped clone is pending.
-    if(!s.discovered){
-        NativeDoppelgangerItem item{};if(!readNativeDoppelgangerItem(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),item,true)||!item.instantiated)return;
-        s.known=item;s.discovered=true;
-    }
-    NativeDoppelgangerWorld w{};const double start=presentationClock();
-    const bool valid=readNativeDoppelgangerWorld(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),w,&doppelgangerReadStage,&s.known);
-    doppelgangerReadMaxMs=(std::max)(doppelgangerReadMaxMs,presentationClock()-start);
-    if(!valid){if(doppelgangerReadStage==1)s.discovered=false;++doppelgangerWorldUnknown;return;}
-    // Successful rediscovery must immediately return to the active cadence.
-    // The discovery backoff was chosen before discovery above; retaining its
-    // 500ms deadline after a valid snapshot exceeds the peer's 300ms lease.
-    s.nextSample=tick+33;s.known=w.equipment;if(!s.sent.event&&!w.present)return;
+void sendDoppelgangerWorldSlot(ULONGLONG tick,DoppelgangerWorldStream& s,const NativeDoppelgangerWorld& w,unsigned slot){
     CoopDoppelgangerWorldPacket p{};p.sequence=++doppelgangerWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
-    p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.present=w.present?1u:0u;
+    p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.present=w.present?1u:0u;p.slot=slot;
     if(!memoryRead(w.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
     if(w.present){
         const double sceneStart=presentationClock();NativeDoppelgangerFxScene scene{};
@@ -75,8 +61,47 @@ void sampleDoppelgangerWorld(ULONGLONG tick){
     if(result==k_EResultOK){s.sent=p;recordDoppelgangerWorld(p);++doppelgangerWorldSent;}
     else{++doppelgangerSendFailed;if(tick>=doppelgangerSendStatusNext){doppelgangerSendStatusNext=tick+500;sockets->GetConnectionRealTimeStatus(connection,&doppelgangerFailedSendStatus,0,nullptr);}}
 }
+void sampleDoppelgangerWorld(ULONGLONG tick){
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=doppelgangerWorldStream;
+    if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){for(auto& x:doppelgangerWorldStreams)x={};return;}
+    if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){for(auto& x:doppelgangerWorldStreams){x={};x.token=shadowStream.token;x.peerToken=shadowStream.peerToken;}}
+    if(localRole!=1||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500);
+    // Discover from the selected exact power only. Never scan the full mixed
+    // inventory on the engine thread. Late join with unequipped clone is pending.
+    if(!s.discovered){
+        NativeDoppelgangerItem item{};if(!readNativeDoppelgangerItem(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),item,true)||!item.instantiated)return;
+        s.known=item;s.discovered=true;
+    }
+    std::array<NativeDoppelgangerWorld,kDoppelgangerWireSlots> worlds{};const double start=presentationClock();
+    for(unsigned a=0;a<worlds.size();++a)if(!readNativeDoppelgangerWorld(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),worlds[a],&doppelgangerReadStage,&s.known,a)){
+        doppelgangerReadMaxMs=(std::max)(doppelgangerReadMaxMs,presentationClock()-start);if(doppelgangerReadStage==1)s.discovered=false;++doppelgangerWorldUnknown;return;}
+    doppelgangerReadMaxMs=(std::max)(doppelgangerReadMaxMs,presentationClock()-start);
+    // Successful rediscovery must immediately return to the active cadence.
+    // The discovery backoff was chosen before discovery above; retaining its
+    // 500ms deadline after a valid snapshot exceeds the peer's 300ms lease.
+    s.nextSample=tick+33;s.known=worlds[0].equipment;
+    // 1214eh (#11 power_upgrade_variants): a clone keeps its wire slot while it stays committed, so the
+    // partner's two visuals never swap shades; a new clone takes a free slot. With two clones the slots
+    // take turns (about 15 Hz each, the single clone's 30 Hz budget), and a slot whose clone is gone sends
+    // that change once (reliable) instead of an absence packet every sample.
+    std::array<int,kDoppelgangerWireSlots> wire{};wire.fill(-1);
+    for(unsigned a=0;a<wire.size();++a)if(worlds[a].present)for(unsigned k=0;k<wire.size();++k){const auto& x=doppelgangerWorldStreams[k].sent;
+        if(x.present&&x.nativeHandle==worlds[a].handle&&x.generation==worlds[a].generation&&std::find(wire.begin(),wire.end(),static_cast<int>(k))==wire.end()){wire[a]=static_cast<int>(k);break;}}
+    for(unsigned a=0;a<wire.size();++a)if(worlds[a].present&&wire[a]<0)for(unsigned k=0;k<wire.size();++k)
+        if(std::find(wire.begin(),wire.end(),static_cast<int>(k))==wire.end()){wire[a]=static_cast<int>(k);break;}
+    unsigned present=0;for(const auto& w:worlds)present+=w.present?1u:0u;
+    const unsigned turn=present>1?(s.alternate++&1u):kDoppelgangerWireSlots;
+    for(unsigned k=0;k<kDoppelgangerWireSlots;++k){auto& x=doppelgangerWorldStreams[k];
+        NativeDoppelgangerWorld absent{};absent.equipment=worlds[0].equipment;const NativeDoppelgangerWorld* w=&absent;
+        for(unsigned a=0;a<wire.size();++a)if(wire[a]==static_cast<int>(k))w=&worlds[a];
+        const bool fresh=x.sent.present!=(w->present?1u:0u)||(w->present&&(x.sent.nativeHandle!=w->handle||x.sent.generation!=w->generation));
+        if(!w->present&&(!x.sent.event||!fresh))continue;
+        if(w->present&&turn<kDoppelgangerWireSlots&&turn!=k&&x.sent.event&&!fresh)continue;
+        sendDoppelgangerWorldSlot(tick,x,*w,k);
+    }
+}
 void receiveDoppelgangerWorld(const CoopDoppelgangerWorldPacket& p,ULONGLONG tick){
-    ++doppelgangerWorldReceived;auto& s=doppelgangerWorldStream;
+    ++doppelgangerWorldReceived;auto& s=doppelgangerWorldStreams[p.slot<kDoppelgangerWireSlots?p.slot:0];
     if(!nativeMutationAllowed||!doppelgangerWorldCurrent(tick)||!validDoppelgangerWorldPacket(p,outgoing,remote)||p.sourceToken!=shadowStream.peerToken||
        p.targetToken!=shadowStream.token||!movementBankActive()||s.count>=8){++doppelgangerWorldRejected;return;}
     const double now=presentationClock(),mapped=double(p.sampleTimeUs)*.001+sourcePoseTimeline.offset;auto order=s.order;
@@ -85,10 +110,10 @@ void receiveDoppelgangerWorld(const CoopDoppelgangerWorldPacket& p,ULONGLONG tic
     s.order=order;s.pending[s.count++]={p,mapped};recordDoppelgangerWorld(p);
 }
 void presentDoppelgangerWorld(ULONGLONG tick){
-    auto& s=doppelgangerWorldStream;if(!doppelgangerWorldCurrent(tick)||!movementBankActive()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote)){s.lease=0;return;}
+    for(auto& s:doppelgangerWorldStreams){if(!doppelgangerWorldCurrent(tick)||!movementBankActive()||!coopGameplayReady(outgoing)||!coopGameplayReady(remote)){s.lease=0;continue;}
     const double now=presentationClock()-120.;while(s.count&&s.pending[0].time<=now){const auto p=s.pending[0];for(unsigned i=1;i<s.count;++i)s.pending[i-1]=s.pending[i];--s.count;
         if(now-p.time>250){++doppelgangerWorldRejected;continue;}s.presented=p.packet;s.presentedTime=p.time;s.lease=p.packet.present?tick+300:0;++doppelgangerWorldPresented;
-    }
+    }}
 }
 void writeDoppelgangerWorld(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.doppelganger-world.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
@@ -99,5 +124,8 @@ void writeDoppelgangerWorld(){
     fprintf(f,"],\"sceneReadMaxMs\":%.4f,\"sceneReadLine\":%u,\"sceneUnknown\":%llu,\"fxKnown\":%u,\"fxScene\":%u,\"fxVariant\":%u,\"fxTimeMs\":%u",doppelgangerSceneReadMaxMs,doppelgangerSceneReadLine,doppelgangerSceneUnknown,p.fxKnown,p.fxScene,p.fxVariant,p.fxTimeMs);
     fprintf(f,",\"refusedSequence\":%llu,\"refusedJointMatrix\":[",doppelgangerRefusedSequence);for(unsigned i=0;i<12;++i){if(i)fputs(",",f);if(std::isfinite(doppelgangerRefusedJointMatrix[i]))fprintf(f,"%.9g",doppelgangerRefusedJointMatrix[i]);else fputs("null",f);}fputs("]",f);
     fprintf(f,",\"prepared\":%llu,\"packetRefused\":%llu,\"packetRefusedLine\":%u,\"packetRefusedJoint\":%u,\"sendFailed\":%llu,\"lastSendResult\":%d,\"failureSendRate\":%d,\"failurePendingBytes\":%d,\"failureQueueUs\":%lld",doppelgangerWorldSequence,doppelgangerPacketRefused,doppelgangerPacketRefusedLine,doppelgangerPacketRefusedJoint,doppelgangerSendFailed,doppelgangerLastSendResult,doppelgangerFailedSendStatus.m_nSendRateBytesPerSecond,doppelgangerFailedSendStatus.m_cbPendingUnreliable+doppelgangerFailedSendStatus.m_cbPendingReliable,doppelgangerFailedSendStatus.m_usecQueueTime);
+    fputs(",\"slots\":[",f);for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& x=doppelgangerWorldStreams[k];const auto& q=localRole==1?x.sent:x.presented;
+        fprintf(f,"%s{\"present\":%u,\"handle\":%u,\"generation\":%u,\"event\":%llu,\"sequence\":%llu,\"leased\":%s,\"fxScene\":%u,\"fxVariant\":%u}",k?",":"",q.present,q.nativeHandle,q.generation,q.event,q.sequence,x.lease>GetTickCount64()?"true":"false",q.fxScene,q.fxVariant);}
+    fputs("]",f);
     fprintf(f,",\"poseReadMaxMs\":%.4f,\"poseReadFailed\":%llu,\"poseReadLine\":%u,\"poseLogic\":%u,\"poseJoints\":%u,\"poseRig\":\"%016llx\",\"poseStable\":%s,\"poseOwner\":%s}\n",doppelgangerPoseReadMaxMs,doppelgangerPoseReadFailed,doppelgangerPoseReadLine,doppelgangerPoseLogic,doppelgangerPoseJoints,doppelgangerPoseRigObserved,doppelgangerPoseStable?"true":"false",doppelgangerPoseOwner?"true":"false");const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

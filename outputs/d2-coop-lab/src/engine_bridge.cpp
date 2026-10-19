@@ -868,7 +868,11 @@ bool prepareCheckpointPresentation(bool shadow);
 #include "gameover_probe.h"
 void exchangePoses(ULONGLONG tick) {
     if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected)return;
+    // 1214eh: drain the receive queue every frame (up to 32 batches of 16). One batch per frame took only
+    // ~320 messages/s at the curator map's 17-22 FPS, fewer than the host sends, so the queue grew and NPC
+    // poses arrived 1.3-3.3 s late and were refused (1495a: all 757 client rejections were the source clock).
     SteamNetworkingMessage_t* messages[16]{};
+    for(int batch=0;batch<32;++batch){
     const int count=sockets->ReceiveMessagesOnConnection(connection,messages,16);
     for(int i=0;i<count;++i) {
         std::uint32_t magic=0;if(messages[i]->m_cbSize>=4)std::memcpy(&magic,messages[i]->m_pData,4);
@@ -1107,6 +1111,7 @@ void exchangePoses(ULONGLONG tick) {
         }else ++rejected;
         messages[i]->Release();
     }
+    if(count<16)break;}
     if(tick-lastSend>=33) {
         lastSend=tick;++outgoing.sequence;if(!outgoing.sequence)++outgoing.sequence;
         if(coopSendMessage(connection,&outgoing,sizeof(outgoing),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK)++sent;

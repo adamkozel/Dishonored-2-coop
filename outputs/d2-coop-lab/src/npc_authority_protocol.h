@@ -172,10 +172,11 @@ inline std::uint64_t npcAuthorityRig(const NativeSkeleton& s){
 struct NpcPoseSample {double at=0;CoopNpcPose pose{};};
 struct NpcPoseBuffer {
     std::array<NpcPoseSample,8> samples{};unsigned count=0;SourcePoseTimeline clock{};std::uint64_t replayFloor=0;
+    unsigned lastReject=0; // 1214eg: 1 replayed sequence, 2 source clock refused (late, early or discontinuous)
     void resume(){count=0;clock={};} // Preserve replay floor while dropping pre-menu interpolation.
     bool push(const CoopNpcPose& p,double arrival){
-        if(p.h.sequence<=replayFloor)return false;
-        auto trial=clock;double at=0;if(!trial.mapTime(p.sampleUs,arrival,p.h.sourceSession,p.h.sourceEpoch,p.h.map,at))return false;
+        if(p.h.sequence<=replayFloor){lastReject=1;return false;}
+        auto trial=clock;double at=0;if(!trial.mapTime(p.sampleUs,arrival,p.h.sourceSession,p.h.sourceEpoch,p.h.map,at)){lastReject=2;return false;}
         if(count){const auto& last=samples[count-1];float distance=0;for(unsigned i=0;i<3;++i){const auto d=last.pose.root[i]-p.root[i];distance+=d*d;}
             if(at-last.at>250.||distance>9.f)count=0;}
         if(count==samples.size()){for(unsigned i=1;i<count;++i)samples[i-1]=samples[i];--count;}
