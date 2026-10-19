@@ -1,0 +1,216 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Domino casts: grant named_power_equip_requested, at most 0 native marks",
+    "Domino-linked guard 1 after guard 2's kill: host health 0 (suppressed False), client health 0 (suppressed False)",
+    "Remote phase 6 presented",
+    "Same outcome in both worlds: dead",
+    "Guard after the takedown: host present True hidden False, client present True hidden False"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -44.5354,
+      -143.15,
+      66.4
+    ],
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "dominoGrant": {
+    "grants": 2,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "dominoAims": [
+    {
+      "target": [
+        -57.9506,
+        -144.466,
+        61.4543
+      ],
+      "stand": [
+        -57.9506,
+        -148.312,
+        61.0036
+      ],
+      "yaw": 90.0,
+      "pitch": -1,
+      "distance": 3.8460000000000036
+    },
+    {
+      "target": [
+        -44.14,
+        -142.99,
+        66.4
+      ],
+      "stand": [
+        -44.39,
+        -153.27,
+        66.4036
+      ],
+      "yaw": 88.60689474009625,
+      "pitch": 2,
+      "distance": 10.283039433941699
+    }
+  ],
+  "dominoLinks": {
+    "readyMask": 5,
+    "marksOnly": 19,
+    "sent": 1021,
+    "received": 0,
+    "rejected": 0,
+    "unknown": 2,
+    "presented": 0,
+    "event": 0,
+    "nativeHandle": 0,
+    "markCount": 0,
+    "leased": false,
+    "readCount": 1268,
+    "scopedReadCount": 1020,
+    "readMaxMs": 16.3794,
+    "scopedReadMaxMs": 0.8728,
+    "readStage": 0,
+    "started": 0,
+    "stopped": 0,
+    "updated": 0,
+    "refused": 0,
+    "retired": 0,
+    "marks": []
+  },
+  "dominoPeerLinks": {
+    "readyMask": 0,
+    "marksOnly": 0,
+    "sent": 0,
+    "received": 1022,
+    "rejected": 11,
+    "unknown": 0,
+    "presented": 1009,
+    "event": 2,
+    "nativeHandle": 210178549,
+    "markCount": 2,
+    "leased": true,
+    "readCount": 0,
+    "scopedReadCount": 0,
+    "readMaxMs": 0.0,
+    "scopedReadMaxMs": 0.0,
+    "readStage": 0,
+    "started": 4,
+    "stopped": 2,
+    "updated": 444,
+    "refused": 0,
+    "retired": 0,
+    "marks": [
+      {
+        "sourceId": 212,
+        "target": 190252915,
+        "id": 249,
+        "owner": 209916411
+      },
+      {
+        "sourceId": 265,
+        "target": 189269860,
+        "id": 278,
+        "owner": 209916411
+      }
+    ]
+  },
+  "dominoMarksMax": 0.0,
+  "inputAt": "2026-10-20T00:16:45.2814465+02:00",
+  "aiHoldEnd": {
+    "active": false,
+    "ready": false,
+    "result": "fixture_actor_changed",
+    "acquired": 10,
+    "released": 10,
+    "lost": 0
+  },
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|2200"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 102562203,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2a1bc499d30",
+      "actor": "0x2a1cbd368f0",
+      "attributes": "0x2a1cbaa78d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 102562234,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x19c2eb61af0",
+      "actor": "0x19c41901d50",
+      "attributes": "0x19c416858e0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "guardEnd": {
+    "host": {
+      "present": true,
+      "position": [
+        -44.1515,
+        -142.433,
+        67.7654
+      ],
+      "current": 0,
+      "hidden": false
+    },
+    "client": {
+      "present": true,
+      "position": [
+        -44.1515,
+        -142.433,
+        67.7654
+      ],
+      "current": 0,
+      "hidden": false
+    }
+  },
+  "restored": true
+}
