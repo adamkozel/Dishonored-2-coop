@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:09:00.198184+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T08:16:26.630838+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -5365,7 +5365,7 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
   ],
   "deliverable_kind": "animation",
   "notes": "Full-body cast studies with native caster acting and D2 first-person phase timing/finger articulation. Wrists follow the body freely. Effects, target contact, character availability, gameplay binding and visual acceptance remain pending. Pull gesture only; object/enemy attachment, weight, trajectories and variants are not demonstrated. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "far_reach",
@@ -5388,10 +5388,35 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
     }
   ],
   "in_game_recordings": [],
-  "native_effects_status": "not_verified"
+  "native_effects_status": "not_verified",
+  "completion": {
+    "audit": "completion-audit-v1479-far-reach-pull.json",
+    "decision": "complete",
+    "scope": "Emily: the Far Reach pull (aim, release, pullIn, the loop when native, pullOut) presented on the partner from the native pull state and scenes, after the native lock onto a target. The pulled object's physics and the body pull are stage 4 world authority (#115).",
+    "takes": [
+      {
+        "take": "object-carry-v1471b",
+        "cases": [
+          "client-farreachbottle"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
+        "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "object-carry-v1471b/result.json"
+  ]
 }
 ````
 
+- [evidence: object-carry-v1471b/result.json](<../../../../work/natural-moveset/object-carry-v1471b/result.json>)
 ## emily_dark_vision_cast_end
 
 Native Dark Vision casts now cover ordinary jumps as well as tested ground stance/equipment/travel contexts. Exact native cast clock and airborne semantics travel together; native private reveal, sword state and landing recovery are preserved. Other contexts and lifecycle remain.

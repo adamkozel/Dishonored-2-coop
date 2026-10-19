@@ -1,0 +1,102 @@
+{
+  "source": "host",
+  "case": "heldbottle",
+  "observer": "client",
+  "passed": false,
+  "failure": "Source bottle broke but the observer copy did not",
+  "checks": [
+    "Partner presents the use reach (peak weight 1)",
+    "Native pickup took the item on the source",
+    "Held object: source phases 0,1,2,3,4; source holds 1, releases 1, settles 1, breaks 1; observer pinned samples 14, applied 97, followed 31, settled 223, broken 0, refused 4, results idle,held,following,settled,break_no_health",
+    "Release gesture: observer use variants 0,1,6,8; source throws 1, drops 0",
+    "Held at 2681 ms: observer bottle 0.47 m from the partner, 1.25 m up",
+    "Held at 3464 ms: observer bottle 0.47 m from the partner, 1.24 m up"
+  ],
+  "inputAt": "2026-10-19T08:12:17.1614552+02:00",
+  "holdDumps": 0,
+  "holdStateType": [],
+  "lootSamples": 0,
+  "slotPresses": [
+    {
+      "ms": 3723,
+      "slot": "RT throw"
+    }
+  ],
+  "potionCounts": [],
+  "peakUseWeight": 0.9999999,
+  "targetValid": true,
+  "itemTaken": true,
+  "activeSets": [
+    "0",
+    "0,75",
+    "0,49,81",
+    "0,49"
+  ],
+  "caseCounts": {
+    "sourceBreaks": 1,
+    "observerBroken": 0,
+    "observerFollowed": 31
+  },
+  "heldFinal": {
+    "ms": 13977,
+    "src": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 1,
+      "releases": 1,
+      "settles": 1,
+      "breaks": 1,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 188,
+      "followed": 83,
+      "settledApplied": 632,
+      "broken": 0,
+      "presentRefused": 9,
+      "throws": 1,
+      "drops": 0,
+      "result": "settled"
+    },
+    "obs": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 2,
+      "releases": 2,
+      "settles": 2,
+      "breaks": 1,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 97,
+      "followed": 31,
+      "settledApplied": 223,
+      "broken": 0,
+      "presentRefused": 4,
+      "throws": 1,
+      "drops": 1,
+      "result": "break_no_health"
+    }
+  },
+  "sourcePhases": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "observerResults": [
+    "idle",
+    "held",
+    "following",
+    "settled",
+    "break_no_health"
+  ],
+  "observerUseVariants": [
+    0,
+    1,
+    6,
+    8
+  ],
+  "restored": true
+}

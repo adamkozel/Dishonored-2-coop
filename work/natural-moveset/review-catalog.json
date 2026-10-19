@@ -14354,7 +14354,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Full-body cast studies with native caster acting and D2 first-person phase timing/finger articulation. Wrists follow the body freely. Effects, target contact, character availability, gameplay binding and visual acceptance remain pending. Pull gesture only; object/enemy attachment, weight, trajectories and variants are not demonstrated. Completion also requires native power effects/entities, synchronized phase and targets, cleanup and no duplicate outcomes. First-person-only effects must retain native viewer scope.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "far_reach",
@@ -14377,7 +14377,31 @@
         }
       ],
       "in_game_recordings": [],
-      "native_effects_status": "not_verified"
+      "native_effects_status": "not_verified",
+      "completion": {
+        "audit": "completion-audit-v1479-far-reach-pull.json",
+        "decision": "complete",
+        "scope": "Emily: the Far Reach pull (aim, release, pullIn, the loop when native, pullOut) presented on the partner from the native pull state and scenes, after the native lock onto a target. The pulled object's physics and the body pull are stage 4 world authority (#115).",
+        "takes": [
+          {
+            "take": "object-carry-v1471b",
+            "cases": [
+              "client-farreachbottle"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
+            "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true,
+      "evidence": [
+        "object-carry-v1471b/result.json"
+      ]
     },
     {
       "id": "emily_dark_vision_cast_end",

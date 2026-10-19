@@ -14,7 +14,8 @@ const char* breakPartnerHeldObject(std::uint32_t handle,const float* at){
     const auto actor=worldIdentityEntity(memoryRead,observedGame,handle);std::uintptr_t list=0,component=0,owner=0;std::uint32_t count=0;float current=0;
     if(!actor||!memoryRead(actor+0x268,&list,8)||!list||!memoryRead(actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return "break_no_components";
     for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,cv=0;if(!memoryRead(list+i*8,&c,8)||!c||!memoryRead(c,&cv,8))return "break_no_components";
-        if(cv==base+0x1c51588){if(component)return "break_two_health";component=c;}}
+        // 1214ee: a map movable's health is the plain arkCpntHealth (0x1c51268, 1471a); characters use 0x1c51588.
+        if(cv==base+0x1c51588||cv==base+0x1c51268){if(component)return "break_two_health";component=c;}}
     if(!component||!memoryRead(component+0x10,&owner,8)||owner!=actor||!memoryRead(component+0x20,&current,4))return "break_no_health";
     if(!(current>0))return "break_already";
     const auto lookup=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030);
