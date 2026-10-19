@@ -55,6 +55,7 @@ const char* productStep(unsigned i){
     case 18:return "coop_mission_end_mirror on"; // 1214bb: mission end, both-ready hold, chaos
     case 19:return "coop_gameflow_mirror on"; // 1214bg: objectives follow the host
     case 20:return "coop_kiscule_mirror on"; // 1214bi: story grants (Mark, powers, loadouts) in both worlds
+    case 21:return "coop_breakable_sync on"; // 1214fq (#132): broken glass and barriers in both worlds
     default:return nullptr;
     }
 }
@@ -87,7 +88,7 @@ void serviceProductSession(void* system,ULONGLONG tick){
         // Maintenance: re-issue idempotent session commands every 5 s so a
         // system refused transiently (e.g. a checkpoint before the mission
         // autosave lands, or a session that ended) is armed again.
-        static const char* maintain[]={"coop_checkpoint_sync on","coop_door_sync session","coop_usable_sync session","coop_coin_sync on","coop_npc_stream on","coop_trigger_mirror on","coop_movement_resume on"};
+        static const char* maintain[]={"coop_checkpoint_sync on","coop_door_sync session","coop_usable_sync session","coop_coin_sync on","coop_npc_stream on","coop_trigger_mirror on","coop_movement_resume on","coop_breakable_sync on"};
         constexpr unsigned kMaintain=sizeof(maintain)/sizeof(*maintain);
         a.result="armed";
         // 1203b targeted repair: only the missing pieces, in order, never a

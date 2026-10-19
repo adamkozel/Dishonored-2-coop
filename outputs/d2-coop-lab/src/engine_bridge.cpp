@@ -262,6 +262,7 @@ void sendGuardBody(ULONGLONG tick);
 void sendGuardWeapon(ULONGLONG tick);
 void stopGuardWeapon(const char* reason);
 #include "shadow_damage.h"
+#include "breakable_hits.h"
 #include "damage_observer.h"
 std::uintptr_t shadowActionParameter(std::uintptr_t anim);
 #include "native_locomotion.h"
@@ -780,6 +781,7 @@ bool avatarWeaponArmed();
 #include "npc_authority_stream.h"
 #include "door_sync.h"
 #include "usable_sync.h"
+#include "breakable_sync.h"
 bool movementRangedFixtureBusy();
 bool movementGrenadeFixtureBusy();
 bool movementPotionFixtureBusy();
@@ -1052,6 +1054,11 @@ void exchangePoses(ULONGLONG tick) {
         if(magic==0x4C433244) {
             if(messages[i]->m_cbSize==sizeof(CoopCoinCatalogPacket)){static CoopCoinCatalogPacket p;std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveCoinCatalog(p,tick);}
             else ++coinSync.rejected;
+            messages[i]->Release();continue;
+        }
+        if(magic==0x4b423244) {
+            if(messages[i]->m_cbSize==sizeof(CoopBreakablePacket)){CoopBreakablePacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveBreakablePacket(p,tick);}
+            else ++breakableSync.rejected;
             messages[i]->Release();continue;
         }
         if(magic==0x53553244) {
@@ -1551,6 +1558,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_movement_feet on")||!std::strcmp(text,"coop_movement_feet off")||!std::strcmp(text,"coop_movement_feet authored"))return true;
     if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
+    if(!std::strcmp(text,"coop_breakable_sync on")||!std::strcmp(text,"coop_breakable_sync off"))return true;
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_door_fixture open")||!std::strcmp(text,"coop_door_fixture close"))return true;
     if(!std::strncmp(text,"coop_observer_camera hold_at ",29)){float x=0,y=0,z=0;char extra=0;
@@ -1918,6 +1926,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_usable_sync session")){usableSyncEnableRequest=2;return;}
     if(!std::strcmp(request.command,"coop_door_sync off")){doorSyncEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_usable_sync off")){usableSyncEnableRequest=0;return;}
+    if(!std::strcmp(request.command,"coop_breakable_sync on")){breakableSyncEnableRequest=1;return;}
+    if(!std::strcmp(request.command,"coop_breakable_sync off")){breakableSyncEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_door_sync duplicate")){doorSyncDuplicateRequest=true;return;}
     if(!std::strcmp(request.command,"coop_usable_sync duplicate")){usableSyncDuplicateRequest=true;return;}
     if(!std::strcmp(request.command,"coop_door_fixture open")){doorFixtureRequest=2;return;}
@@ -2092,7 +2102,7 @@ void writeDiagnosticSlice(ULONGLONG tick){
         case 67:timedNativeService("writeSwitchTrace",[&]{writeSwitchTrace();});break;
         case 68:timedNativeService("writeReplacementTrace",[&]{writeReplacementTrace();});break;
         case 69:timedNativeService("writeCheckpointSync",[&]{writeCheckpointSync();});break;
-        case 71:timedNativeService("writeDoorSync",[&]{writeDoorSync();writeCoinSync();writeUsableSync();writeAvatarPerception();writeNpcAttack();writeObserverCamera();});break;
+        case 71:timedNativeService("writeDoorSync",[&]{writeDoorSync();writeCoinSync();writeUsableSync();writeBreakableSync();writeAvatarPerception();writeNpcAttack();writeObserverCamera();});break;
         case 70:timedNativeService("writeMixamoStatus",[&]{{char path[MAX_PATH]{},temp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.mixamo.json",statusPath);std::snprintf(temp,sizeof(temp),"%s.tmp",path);FILE* f=nullptr;
      if(!fopen_s(&f,temp,"wb")&&f){fprintf(f,"{\"experimental\":true,\"active\":%s,\"persistent\":%s,\"until\":%llu,\"phase\":%.6f,\"applied\":%llu,\"gripApplied\":%llu,\"actionApplied\":%llu,\"epoch\":%llu}\n",mixamoResearch.active(tick)?"true":"false",mixamoResearch.persistent?"true":"false",mixamoResearch.until,mixamoResearch.phase,mixamoApplied.load(),mixamoGripApplied.load(),mixamoActionApplied.load(),mixamoResearch.epoch);const bool ok=!ferror(f);const auto closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);}}});break;
         }
@@ -2193,7 +2203,7 @@ void executeBuffer(void* system) {
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();
             lastPump=tick;nativeMutationAllowed=true;pumpTransport(tick);nativeMutationAllowed=false;
-            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});serviceTriggerMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
+            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});timedNativeService("serviceBreakableSync",[&]{serviceBreakableSync(tick);});serviceTriggerMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
         }
         // Render presentation at each native engine frame, independent of
         // transport/gameplay service cadence. QPC avoids coarse tick stepping.
