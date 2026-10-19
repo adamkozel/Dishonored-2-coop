@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/middle_class_female_01.def: source states 0,41; unconscious in both worlds"
+      ],
+      "target": {
+        "spawner": "script_spawner_docks_photograph",
+        "definition": "models/characters/def/generic/middle_class_female_01.def",
+        "position": [
+          -34.4851,
+          216.337,
+          4.43588
+        ],
+        "forward": [
+          0.13761805166533556,
+          0.9904853718535358
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -37.51848423881001,
+        216.3041357376619,
+        6.035880000000001
+      ],
+      "sourceStart": [
+        -34.664,
+        215.049,
+        4.43751
+      ],
+      "prePitch": 20.0,
+      "actedAt": 449,
+      "pressedWhenReady": {
+        "t": 449,
+        "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+        "state": 3
+      },
+      "takedownAfter": 449,
+      "chokeAfter": 449,
+      "trackSamples": 46,
+      "takedownSamples": 1,
+      "chokeSamples": 1,
+      "chokeTargeted": 1,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        41
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
