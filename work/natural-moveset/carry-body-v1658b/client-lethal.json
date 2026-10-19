@@ -1,0 +1,82 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": false,
+  "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+  "checks": [
+    "doppelganger at guard 2: host moved 4.84 m, client copy moved 4.84 m in 10 s; health host 40 client 40"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "castGranted": [
+    {
+      "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/doppelganger_deadlyshade.inventoryitem",
+      "result": "granted_named"
+    },
+    {
+      "item": "components/characters/player/base/attributes/doppelganger_baffling_shade.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "castAim": {
+    "target": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "stand": [
+      -44.2819,
+      -147.049,
+      61.0036
+    ],
+    "yaw": 87.99779221827397,
+    "pitch": -51,
+    "distance": 4.061479608467828
+  },
+  "castAt": "2026-10-20T00:21:07.5278443+02:00",
+  "castGuard": {
+    "hostMove": 4.84,
+    "clientMove": 4.84,
+    "hostEnd": {
+      "position": [
+        -39.6165,
+        -144.71,
+        66.4
+      ],
+      "current": 40,
+      "maximum": 40,
+      "suppressed": false
+    },
+    "clientEnd": {
+      "position": [
+        -39.6171,
+        -144.709,
+        66.4
+      ],
+      "current": 40,
+      "maximum": 40,
+      "suppressed": false
+    }
+  },
+  "inputAt": "2026-10-20T00:21:19.8363430+02:00",
+  "scenes": [],
+  "restored": true
+}

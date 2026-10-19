@@ -93,8 +93,25 @@ The live candidate is 1214fp.
   - The host orders the kill: the client's own native kill is suppressed, and the death is applied by the host's
     commit. So the upgrade's native corpse-to-rats outcome never runs.
   - **Decision:** known limitation for the release. The body stays consistent in both worlds and can be hidden by hand.
-    Making the rats would mean triggering the native rat outcome on the host for the partner's kill (not started).
-- **Deadly Shade, Baffling Shade and Mesmerize in combat:** see the takes below.
+    Making the rats would mean triggering the native rat outcome on the host for the partner's kill (#131).
+- **Mesmerize in combat** (`mesmerize_incombat`; carry-body-v1658a, Test-CarryBody-v1652 `-CastPower mesmerize`):
+  - The native power takes a target in Emily's world: guard 1's handle in the target list. The aim came from the
+    floor below and missed guard 2.
+  - Guard 2 kept walking in step in both worlds: 14.5 m in 10 s, 0.06 m apart.
+  - NPC AI runs on the host, and the host has only the cosmetic Mesmerize model (chapter 25), so no NPC can be
+    mesmerized in either world (confirmed static).
+- **Deadly Shade and Baffling Shade** (carry-body-v1658b, `-CastPower doppelganger`):
+  - The host's NPCs do not perceive Emily's shade. Guard 2 is unaffected and in step in both worlds (0.001 m apart).
+  - In Emily's world, one `kill_damage` event that was not player-owned was suppressed as a replica-world event, so
+    it changed nothing.
+- **Decision for Mesmerize, the shades and Rat Shadow:** confined to Emily's world as presentation (the spirit, the
+  shade, the target effects); the outcome on NPCs is missing but never diverges.
+  - The reason: these powers act through native world objects (`arkCpntMesmerize` sends `arkMsgTryMesmerizeNpc` and
+    `arkMsgUnmesmerizeNpc`; the shade is a perceived entity). Those objects exist only in her world, while the AI
+    that would react runs on the host.
+  - Sharing them means creating the native object on the host for the partner's cast: #131 (stage 4, Todo). Until
+    then they are known limitations for the release notes.
+  - The takedowns in 1658a/b failed because the guard had walked off. Kept as evidence.
 
 ## Possessed bodies (host world; consistent)
 
