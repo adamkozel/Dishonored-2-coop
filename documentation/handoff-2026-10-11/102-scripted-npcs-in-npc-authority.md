@@ -80,8 +80,24 @@ Candidates 1214ex and 1214ey fix both causes.
     no other NPC points at it. NPC authority, combat outcomes, chokes and carry then reach it.
   - 47 of 49 Institute NPCs are readable in both worlds (1602a); only the Outsider and Meagan are not.
 - **Clockwork soldiers** with normal spawners were already readable and lease-eligible (8 on the house map).
-- **Still open: a native takedown per kind.**
-  - The Conservatory gravehound refuses the lab approach (sensor state 4 from the first sample; 1600a/b).
-  - The Institute's orphans keep unstarted AI until mission script events wake them: still inactive with a player 6 m
-    away for 10 s (1603a). The lab takedowns found no sensor entry (1602b-e).
-  - These takes need a takedown harness inside a mission hold at an awake state.
+- **Takedown takes per kind (confirmed runtime; partner films reviewed).**
+  - **Wolfhound, both roles:** the Dunwall return docks wolfhounds are awake at map start (state-trigger-v1605d; also at
+    the Dust District Overseer HQ and in the Grand Palace).
+    - Emily's native assassination (mission-coverage-v1608a): the host took a paired hold and followed her victim pose
+      (47 reverse poses on the 105-joint rig). The death was shared and the hound is dead in both worlds; in Corvo's window
+      she seizes it from behind and it ends dead on the ground.
+    - Corvo's (1608b): Emily's copy followed the host's stream to a corpse.
+  - **Gravehound, Corvo:** the native assassination (1614a, harness 1612 with a 5 s pre-settle so the host binds the
+    hound first). The host shared the death; in Emily's window the hound collapses into bones, burns with the resurrection
+    glow and rises again. The native revival plays in both worlds, so both end alive, as in single player.
+    - In the lab the dormant hound refuses the approach (sensor state 4) for about 1.6 s, then offers it. Harness 1611
+      therefore holds its fixed press until 5 s, and the assassination still runs in only about a quarter of the tries
+      (1609-1615).
+    - Candidate 1214fb also sends Dead when a host NPC vanishes within 10 s of a takedown. In 1612b the killed hound's
+      entity was removed without one, and Emily's copy lived on.
+  - **Clockwork soldier:** no native stealth takedown. The takedown sensor never offers it, lethal or choke (states 6,
+    7, 15; 1610a/b), so its destruction is a combat outcome (#14).
+  - **Institute orphans:** they keep unstarted AI until mission scripts wake them. They are still unstarted after the
+    Hypatia route (route-institute-v1604a) and with a player near (1603a); their binding is in place for when they wake.
+- Harnesses: 1600 (lethal -PressWhenReady), 1605 (-NoLoad, cases inside a route hold), 1611 (the fixed press waits under
+  -PressWhenReady), 1612 (-PreSettleMs).
