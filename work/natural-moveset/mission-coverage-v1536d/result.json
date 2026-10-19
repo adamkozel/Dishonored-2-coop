@@ -1,0 +1,77 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states ); reset: Native read failed --player-states",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states ); reset: Native read failed --player-states",
+      "checks": [
+        "Window fixture: target placed placed; takedown scenes "
+      ],
+      "approach": [
+        17.23,
+        94.51
+      ],
+      "placed": {
+        "placed": 10,
+        "refused": 2,
+        "result": "placed"
+      },
+      "placedSeen": [
+        17.23,
+        95.56,
+        14.86
+      ],
+      "placedWaitMs": 1023,
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          17.23,
+          95.56,
+          14.86
+        ],
+        "forward": [
+          -4.371139999999996E-08,
+          0.9999999999999991
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        16.03,
+        93.01,
+        16.61
+      ],
+      "sourceStart": [
+        17.2201,
+        94.5247,
+        14.6913
+      ],
+      "prePitch": "failed: Observer pitch did not settle",
+      "hold2": 11645,
+      "windowAtPress": {
+        "t": 700,
+        "targetName": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+        "hasPoint": true,
+        "sill": 0.91456,
+        "angleOk": false,
+        "sillOk": true,
+        "grounded": true
+      },
+      "actedAt": 700,
+      "windowAfter": 1818,
+      "windowSamples": 2,
+      "windowAvailable": 0,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

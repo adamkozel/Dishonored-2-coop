@@ -1,0 +1,56 @@
+{
+  "source": "host",
+  "case": "takedown",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Escape: choke_combat_lose ran after the hit",
+    "Native choke of models/characters/def/generic/overseer_male_tall_01_office.def: source states 0,41; alive in both worlds"
+  ],
+  "target": {
+    "spawner": "script_spawner_square_overseer_02",
+    "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+    "position": [
+      -25.1906,
+      47.2609,
+      14.6196
+    ],
+    "forward": [
+      0.594444651419542,
+      -0.8041365284568904
+    ]
+  },
+  "kind": "choke",
+  "camera": [
+    -23.04569050776812,
+    49.40609539206422,
+    16.2196
+  ],
+  "sourceStart": [
+    -25.7122,
+    47.9966,
+    14.6188
+  ],
+  "replacedAt": 515,
+  "cameraMoved": [
+    -21.752154105120194,
+    47.656458994871535,
+    16.2274
+  ],
+  "targetMoved": 2.18,
+  "actedAt": 1081,
+  "hitDone": true,
+  "hitAtMs": 2284,
+  "hitResult": "idle",
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    41
+  ],
+  "windowScenes": [],
+  "escapeScene": true
+}
