@@ -1,0 +1,129 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-labpowerblast: Power presentation left after the hit (max weight 1)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "labpowerblast",
+      "observer": "client",
+      "passed": false,
+      "failure": "Power presentation left after the hit (max weight 1)",
+      "checks": [
+        "Partner presentation stayed live",
+        "Lab hit blast_applied: source states 0@, 12@, 14@, 3@, 53@, 63@, 64@; presented stun variants 2"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "aimAt": 2533,
+      "labHitAt": 3408,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "12@",
+        "14@",
+        "3@",
+        "53@",
+        "63@",
+        "64@"
+      ],
+      "labHit": {
+        "applied": 2,
+        "refused": 0,
+        "result": "blast_applied"
+      },
+      "stunVariants": [
+        2
+      ],
+      "stunClockWeightMin": 1.0,
+      "aimVariants": [
+        1,
+        2
+      ],
+      "powerAfterMax": 1.0,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "labpowerblast",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Lab hit blast_applied: source states 0@, 14@, 53@, 63@, 64@; presented stun variants 2",
+        "Aim presented (variants 4,5), interrupted by the hit; no power presentation 1.5 s after it",
+        "Stun presented with the clock weight at least 1"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "aimAt": 2563,
+      "labHitAt": 3544,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 2,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "14@",
+        "53@",
+        "63@",
+        "64@"
+      ],
+      "labHit": {
+        "applied": 2,
+        "refused": 0,
+        "result": "blast_applied"
+      },
+      "stunVariants": [
+        2
+      ],
+      "stunClockWeightMin": 1.0,
+      "aimVariants": [
+        4,
+        5
+      ],
+      "powerAfterMax": 1.4E-05,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

@@ -1,0 +1,61 @@
+{
+  "source": "host",
+  "case": "labpowerblast",
+  "observer": "client",
+  "passed": false,
+  "failure": "Power presentation left after the hit (max weight 1)",
+  "checks": [
+    "Partner presentation stayed live",
+    "Lab hit blast_applied: source states 0@, 12@, 14@, 3@, 53@, 63@, 64@; presented stun variants 2"
+  ],
+  "camera": [
+    -35.0,
+    -150.2,
+    67.9
+  ],
+  "aimAt": 2533,
+  "labHitAt": 3408,
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 0,
+    "refused": 0,
+    "result": "idle",
+    "named": {
+      "grants": 4,
+      "refused": 0,
+      "result": "named_power_equip_requested"
+    }
+  },
+  "use": {
+    "uses": 0,
+    "refused": 0,
+    "result": "idle",
+    "manaBefore": -1.0,
+    "manaNow": 100.0
+  },
+  "sourceStates": [
+    "0@",
+    "12@",
+    "14@",
+    "3@",
+    "53@",
+    "63@",
+    "64@"
+  ],
+  "labHit": {
+    "applied": 2,
+    "refused": 0,
+    "result": "blast_applied"
+  },
+  "stunVariants": [
+    2
+  ],
+  "stunClockWeightMin": 1.0,
+  "aimVariants": [
+    1,
+    2
+  ],
+  "powerAfterMax": 1.0,
+  "restored": true
+}
