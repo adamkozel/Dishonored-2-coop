@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T14:32:28+02:00",
+  "UpdatedAt": "2026-10-19T15:27:50+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214er (deployed; probe-only on the 1214eo DLL, protocol 79: 1214en host down state on NPC poses and client replica laying timer; 1214eo host holding its knocked-out body animated while a client knocked-down choke victim pose drives it; read-only probes 1214em-er incl. --takedown-gates and --choke-sensor)",
+    "Candidate": "candidate-npc-combat-v1214es (deployed; probe-only on the 1214eo DLL, protocol 79; read-only probes 1214em-es incl. --takedown-gates, --choke-sensor, --takedown-sensor)",
     "NextCandidate": "none pending; fixtures running: seated choke sensor (1567) and seated approach sweep (1568), Corvo's window takedowns with the client's copy pre-bound (1569) and the remaining window directions (1570); then the completion audits for wall_and_window_variants (make_completion_audit_v1571.py) and enemy_body_size_variants (v1572)",
-    "Complete": "101 of 105 (power_upgrade_variants audit v1511)",
+    "Complete": "102 of 105 (wall_and_window_variants audit v1571); remaining: enemy_body_size_variants (seated chokes, chain 1577)",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",

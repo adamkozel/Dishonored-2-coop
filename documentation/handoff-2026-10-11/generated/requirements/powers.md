@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T10:11:55.851792+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:27:28.596268+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 

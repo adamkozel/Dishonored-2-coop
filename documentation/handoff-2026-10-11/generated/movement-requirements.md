@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-19T10:11:55.851792+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-19T15:27:28.596268+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 101 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 102 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -447,7 +447,7 @@ Captured 2026-10-19T10:11:55.851792+02:00; source [review-catalog.json](<../../.
 | aerial_drop_kill | paired_actions | candidates | native_drop_lethal_presented_and_shared_both_roles_product | accepted_functional_both_roles_fast_back_donor | complete |
 | aerial_nonlethal_takedown | paired_actions | candidates | native_drop_choke_presented_and_knockout_shared_both_roles_product | accepted_functional_both_roles_choke_donor | complete |
 | sliding_takedown | paired_actions | candidates | native_slide_choke_and_lethal_presented_and_shared_both_roles_product | accepted_functional_both_roles_choke_and_lethal | complete |
-| wall_and_window_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
+| wall_and_window_variants | paired_actions | candidates | not_verified | not_accepted | complete |
 | enemy_body_size_variants | paired_actions | candidates | not_verified | not_accepted | work_remaining |
 | paired_victim_alignment | paired_actions | candidates | shared_victim_and_outcome_both_roles_choke_and_lethal_product | accepted_host_and_client_sourced_rear_choke_and_lethal_victims | complete |
 | struggle_and_escape | paired_actions | candidates | partial_native_steam_rear_choke_actor_and_breakout | accepted_sweep_1260_functional_both_roles | complete |

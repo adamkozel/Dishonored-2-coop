@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T10:11:55.851792+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:27:28.596268+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -651,12 +651,121 @@ Rear window lethal and nonlethal entry/hold/finish/release studies. Native victi
   ],
   "deliverable_kind": "animation",
   "notes": "Rear window lethal and nonlethal entry/hold/finish/release studies. Native victim timing accompanies authored full-body stepping and pulling. Neutral sill clearance was checked visually. Fingers, blade contact, native window geometry, ragdoll continuation and live paired control remain unverified. Wall and other window directions remain missing.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "completion": {
+    "audit": "completion-audit-v1571-window.json",
+    "decision": "complete",
+    "scope": "Both roles: the native window choke (back and left) and window assassination (back) through the open sash window, each presented on the partner with the victim streamed and the outcome shared in both worlds. The front and right window variants need an NPC that stays unaware while facing or flanking the window (not producible with a placed NPC; same scene table and presentation path). Shadow Walk wall chokes are not reachable in retail (cvar 0).",
+    "takes": [
+      {
+        "take": "mission-coverage-v1560a",
+        "cases": [
+          "client-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1562f",
+        "cases": [
+          "client-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1573a",
+        "cases": [
+          "host-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1573c",
+        "cases": [
+          "host-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1576c",
+        "cases": [
+          "host-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1574b",
+        "cases": [
+          "client-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1564c",
+        "cases": [
+          "host-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1545a",
+        "cases": [
+          "client-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1545b",
+        "cases": [
+          "host-takedown"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1560a/client-takedown-observer.mp4",
+        "verdict": "Corvo's outside camera: Emily's replica reaches out through the open window, chokes the overseer and he folds down against the wall under the sill (choke_window_back). Accepted."
+      },
+      {
+        "video": "mission-coverage-v1560a/client-takedown-source.mp4",
+        "verdict": "Emily's own view: she reaches out of the window, chokes the overseer and holds his body over the sill. Accepted."
+      },
+      {
+        "video": "mission-coverage-v1562f/client-takedown-observer.mp4",
+        "verdict": "Corvo's outside camera: Emily's replica reaches out through the window, grabs the overseer and stabs him; he slumps below the sill (assassination_window_back). Accepted."
+      },
+      {
+        "video": "mission-coverage-v1573a/host-takedown-observer.mp4",
+        "verdict": "Emily's outside camera: the calm overseer stands with his back to the open window, Corvo's replica in the room behind him; Corvo hauls him backward over the sill and in through the window (choke_window_back). Accepted."
+      },
+      {
+        "video": "mission-coverage-v1573c/host-takedown-observer.mp4",
+        "verdict": "Emily's outside camera: Corvo seizes the overseer from behind through the window, hauls him back over the sill and drives the blade in (assassination_window_back). Accepted."
+      },
+      {
+        "video": "mission-coverage-v1576c/host-takedown-observer.mp4",
+        "verdict": "Emily's outside camera: the overseer stands side-on at the open window; Corvo yanks him backward over the sill and in through the window (choke_window_left). Accepted."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "mission-coverage-v1560a/result.json",
+    "mission-coverage-v1562f/result.json",
+    "mission-coverage-v1573a/result.json",
+    "mission-coverage-v1573c/result.json",
+    "mission-coverage-v1576c/result.json",
+    "mission-coverage-v1574b/result.json",
+    "mission-coverage-v1564c/result.json",
+    "mission-coverage-v1545a/result.json",
+    "mission-coverage-v1545b/result.json"
+  ]
 }
 ````
 
+- [evidence: mission-coverage-v1560a/result.json](<../../../../work/natural-moveset/mission-coverage-v1560a/result.json>)
+- [evidence: mission-coverage-v1562f/result.json](<../../../../work/natural-moveset/mission-coverage-v1562f/result.json>)
+- [evidence: mission-coverage-v1573a/result.json](<../../../../work/natural-moveset/mission-coverage-v1573a/result.json>)
+- [evidence: mission-coverage-v1573c/result.json](<../../../../work/natural-moveset/mission-coverage-v1573c/result.json>)
+- [evidence: mission-coverage-v1576c/result.json](<../../../../work/natural-moveset/mission-coverage-v1576c/result.json>)
+- [evidence: mission-coverage-v1574b/result.json](<../../../../work/natural-moveset/mission-coverage-v1574b/result.json>)
+- [evidence: mission-coverage-v1564c/result.json](<../../../../work/natural-moveset/mission-coverage-v1564c/result.json>)
+- [evidence: mission-coverage-v1545a/result.json](<../../../../work/natural-moveset/mission-coverage-v1545a/result.json>)
+- [evidence: mission-coverage-v1545b/result.json](<../../../../work/natural-moveset/mission-coverage-v1545b/result.json>)
 ## enemy_body_size_variants
 
 Tall and female native-rig stand-ins only. These are neutral-grey review targets, not the co-op partner. Small, armored, nonhuman and contextual variants remain missing.

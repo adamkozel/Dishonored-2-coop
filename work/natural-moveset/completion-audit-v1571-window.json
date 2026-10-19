@@ -1,0 +1,96 @@
+{
+  "audit": "completion-audit-v1571-window",
+  "family": "paired_actions",
+  "candidate": "candidate-npc-combat-v1214es",
+  "method": "Window takedowns are native: the player's window sensor (arkCpntPlayerSensorWindowAssassination, read every loop with probe --window-sensor) must hold the target, a window point, a sill and the target within the angle of the wall normal (chapter 100). The choke rule handler (isBehindWindow plus the 4-way direction) or the window assassination rule handler (unaware, direction, height difference at most 0.45 m) then picks choke_window_* or assassination_window_*. The fixture (harnesses 1545-1576) places the Edge of the World square overseer outside the sash window script_rich_small_01_sndctrl, stands the source inside, turns it through headings until the sensor is ready and presses at once, with the outside camera on the partner. For a Corvo source, the client's copy of the overseer is first stood 3 m beyond the window and bound in the NPC stream (-ClientPrebind -PrebindOffset 3). Otherwise the client's scripted copy stays at its post and never binds (#113), and the partner's world shows no victim. The partner presents the source's native scene with the authored clip of its kind (choke entry, loop and win; lethal) on the native scene clock, as for every takedown (audits v1354, v1369). The victim follows by the NPC stream: the host's own victim at the priority rate, a client's victim by reverse poses and the host's paired hold or follow. Outcomes are checked in both worlds. Direction: back (choke and lethal) and left (choke) ran natively in both roles and are filmed from the partner side. An overseer turned toward the sill or side-on enough for the right and front variants noticed the source before the press and fought (1564a/b, 1570a-f). The lethal window rules need an unaware target in every direction, so those variants cannot be produced with a placed NPC. They use the same scene table and presentation path (kinds 3 and 5). Wall variants: choke_sw_wall_* needs Shadow Walk's hide-on-wall mode, gated by ark_shadow_walk_hiding_enabled, which is 0 in retail and set by no config (chapter 100, 1469a), so they are not applicable.",
+  "items": [
+    {
+      "id": "wall_and_window_variants",
+      "decision": "complete",
+      "scope": "Both roles: the native window choke (back and left) and window assassination (back) through the open sash window, each presented on the partner with the victim streamed and the outcome shared in both worlds. The front and right window variants need an NPC that stays unaware while facing or flanking the window (not producible with a placed NPC; same scene table and presentation path). Shadow Walk wall chokes are not reachable in retail (cvar 0).",
+      "takes": [
+        {
+          "take": "mission-coverage-v1560a",
+          "cases": [
+            "client-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1562f",
+          "cases": [
+            "client-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1573a",
+          "cases": [
+            "host-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1573c",
+          "cases": [
+            "host-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1576c",
+          "cases": [
+            "host-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1574b",
+          "cases": [
+            "client-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1564c",
+          "cases": [
+            "host-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1545a",
+          "cases": [
+            "client-takedown"
+          ]
+        },
+        {
+          "take": "mission-coverage-v1545b",
+          "cases": [
+            "host-takedown"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "mission-coverage-v1560a/client-takedown-observer.mp4",
+          "verdict": "Corvo's outside camera: Emily's replica reaches out through the open window, chokes the overseer and he folds down against the wall under the sill (choke_window_back). Accepted."
+        },
+        {
+          "video": "mission-coverage-v1560a/client-takedown-source.mp4",
+          "verdict": "Emily's own view: she reaches out of the window, chokes the overseer and holds his body over the sill. Accepted."
+        },
+        {
+          "video": "mission-coverage-v1562f/client-takedown-observer.mp4",
+          "verdict": "Corvo's outside camera: Emily's replica reaches out through the window, grabs the overseer and stabs him; he slumps below the sill (assassination_window_back). Accepted."
+        },
+        {
+          "video": "mission-coverage-v1573a/host-takedown-observer.mp4",
+          "verdict": "Emily's outside camera: the calm overseer stands with his back to the open window, Corvo's replica in the room behind him; Corvo hauls him backward over the sill and in through the window (choke_window_back). Accepted."
+        },
+        {
+          "video": "mission-coverage-v1573c/host-takedown-observer.mp4",
+          "verdict": "Emily's outside camera: Corvo seizes the overseer from behind through the window, hauls him back over the sill and drives the blade in (assassination_window_back). Accepted."
+        },
+        {
+          "video": "mission-coverage-v1576c/host-takedown-observer.mp4",
+          "verdict": "Emily's outside camera: the overseer stands side-on at the open window; Corvo yanks him backward over the sill and in through the window (choke_window_left). Accepted."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}
