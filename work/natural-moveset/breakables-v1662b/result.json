@@ -1,0 +1,194 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-sword: The sword broke nothing in the source world",
+  "cases": [
+    {
+      "source": "host",
+      "case": "sword",
+      "target": "esc_env_display_case_glass_01a_4",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Breakable catalogs: host 51, client 51",
+        "Source broke esc_env_display_case_glass_01b_5:gone at 5306 ms (4 presses)",
+        "Peer world broke at 5306 ms (0 ms after the source)",
+        "Same broken set in both worlds: esc_env_display_case_glass_01b_5:gone"
+      ],
+      "catalog": {
+        "host": 51,
+        "client": 51
+      },
+      "before": {
+        "host": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        },
+        "client": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        }
+      },
+      "catalogBefore": {
+        "host": 51,
+        "client": 51
+      },
+      "stand": [
+        -31.5401,
+        -155.44,
+        0.0
+      ],
+      "standFeet": [
+        -31.6547108,
+        -155.818558,
+        67.3629761
+      ],
+      "cameraHeld": true,
+      "presses": 4,
+      "sourceBrokeAtMs": 5306,
+      "peerBrokeAtMs": 5306,
+      "after": {
+        "source": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        },
+        "observer": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        }
+      },
+      "allBroken": {
+        "source": [
+          "esc_env_display_case_glass_01b_5:gone"
+        ],
+        "observer": [
+          "esc_env_display_case_glass_01b_5:gone"
+        ]
+      },
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "sword",
+      "target": "esc_env_display_case_glass_01a_4",
+      "observer": "host",
+      "passed": false,
+      "failure": "The sword broke nothing in the source world",
+      "checks": [
+        "Breakable catalogs: host 51, client 51"
+      ],
+      "catalog": {
+        "host": 51,
+        "client": 51
+      },
+      "before": {
+        "host": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        },
+        "client": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        }
+      },
+      "catalogBefore": {
+        "host": 51,
+        "client": 51
+      },
+      "stand": [
+        -31.5401,
+        -155.44,
+        0.0
+      ],
+      "standFeet": [
+        -31.6537952,
+        -155.81842,
+        67.3588333
+      ],
+      "cameraHeld": false,
+      "presses": 6,
+      "sourceBrokeAtMs": null,
+      "peerBrokeAtMs": null,
+      "after": {
+        "source": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        },
+        "observer": {
+          "handle": 114492141,
+          "name": "esc_env_display_case_glass_01a_4",
+          "step": 0,
+          "steps": 1,
+          "health": 10,
+          "position": [
+            -29.5401,
+            -155.44,
+            66.4
+          ]
+        }
+      },
+      "allBroken": {
+        "source": [],
+        "observer": []
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 breakables (#132): the source breaks the lab cupboard glass with the sword under the product controller; the glass must break in the peer world too and both worlds must end with the same broken set; fixture restored after every case."
+}

@@ -1,0 +1,97 @@
+{
+  "source": "client",
+  "case": "sword",
+  "target": "esc_env_display_case_glass_01a_4",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Breakable catalogs: host 51, client 51",
+    "Source broke esc_env_display_case_glass_01a_5:gone at 898 ms (1 presses)",
+    "Peer world broke at 898 ms (0 ms after the source)",
+    "Same broken set in both worlds: esc_env_display_case_glass_01a_5:gone"
+  ],
+  "catalog": {
+    "host": 51,
+    "client": 51
+  },
+  "before": {
+    "host": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    },
+    "client": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    }
+  },
+  "catalogBefore": {
+    "host": 51,
+    "client": 51
+  },
+  "stand": [
+    -30.740099999999998,
+    -154.24,
+    -44.99999999999975
+  ],
+  "standFeet": [
+    -30.7401009,
+    -154.240005,
+    66.4036484
+  ],
+  "cameraHeld": false,
+  "presses": 1,
+  "sourceBrokeAtMs": 898,
+  "peerBrokeAtMs": 898,
+  "after": {
+    "source": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    },
+    "observer": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    }
+  },
+  "allBroken": {
+    "source": [
+      "esc_env_display_case_glass_01a_5:gone"
+    ],
+    "observer": [
+      "esc_env_display_case_glass_01a_5:gone"
+    ]
+  },
+  "restored": true
+}
