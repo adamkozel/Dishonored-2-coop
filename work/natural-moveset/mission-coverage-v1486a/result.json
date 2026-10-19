@@ -1,0 +1,107 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,64)",
+      "checks": [],
+      "targetCandidates": [
+        "ld_spawner_witch_8=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_6=models/characters/def/generic/witch_female_01_support.def",
+        "ld_spawner_witch_9=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_13=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_5=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_10=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_witch_11=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_14=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_12=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_witch_3=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_4=models/characters/def/generic/witch_female_01_support.def",
+        "ld_spawner_witch_16=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_witch_17=models/characters/def/generic/witch_female_01_support.def",
+        "ld_spawner_witch_7=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_witch_2=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_vine_lobby=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_witch_1=models/characters/def/generic/witch_female_01_fighter.def",
+        "ld_spawner_vine_lobby_2=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_vine_roof=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_vine_roof_2=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_vine_roof_3=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_vine_skybridge=models/characters/def/generic/witch_vine_01.def",
+        "ld_spawner_witch_alleyambus_2=models/characters/def/generic/witch_female_01_caster.def",
+        "ld_spawner_witch_alleyambus_1=models/characters/def/generic/witch_female_01_support.def",
+        "ld_spawner_witch_bonus_2=models/characters/def/generic/witch_female_01_fighter.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "ld_spawner_witch_8",
+          "err": 0.64,
+          "dz": 0.04
+        },
+        {
+          "spawner": "ld_spawner_witch_6",
+          "err": 0.0,
+          "dz": 6.15
+        },
+        {
+          "spawner": "ld_spawner_witch_9",
+          "err": 0.37,
+          "dz": 0.47
+        },
+        {
+          "spawner": "ld_spawner_witch_13",
+          "err": 0.05,
+          "dz": 0.16
+        }
+      ],
+      "targetChosen": "ld_spawner_witch_13=models/characters/def/generic/witch_female_01_caster.def",
+      "target": {
+        "spawner": "ld_spawner_witch_13",
+        "definition": "models/characters/def/generic/witch_female_01_caster.def",
+        "position": [
+          41.8984,
+          50.6546,
+          9.15001
+        ],
+        "forward": [
+          -0.023799693980949988,
+          0.999716747167123
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        38.90995962079006,
+        50.133328381831944,
+        10.75001
+      ],
+      "sourceStart": [
+        42.0018,
+        49.6732,
+        8.9068
+      ],
+      "replacedAt": 476,
+      "cameraMoved": [
+        38.90995941234076,
+        50.13332957686926,
+        10.75001
+      ],
+      "targetMoved": 0.0,
+      "actedAt": 1225,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
