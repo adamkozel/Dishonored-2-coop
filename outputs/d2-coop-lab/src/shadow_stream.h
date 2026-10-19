@@ -267,9 +267,18 @@ inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std
     for(unsigned i=0;i<3;++i)if(!std::isfinite(position[i])||std::fabs(position[i])>100000.f)return false;
     for(unsigned i=0;i<9;++i)if(!std::isfinite(axis[i])||std::fabs(axis[i])>2.f)return false;
     return true;}
+std::uint64_t shadowHeldPulls=0; // 1214fc (#115)
 void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,CoopShadowActionPacket& p){
     const auto tick=GetTickCount64();std::uint32_t holding=0;auto& h=shadowHeld;float position[3]{},axis[9]{};
     for(const auto& a:states.active)if(a.id==49&&a.vtable==base+0x1c7a998){if(!memoryRead(a.pointer+0x48,&holding,4))holding=0;break;}
+    // 1214fc (#115): Far Reach's object pull. GrabGrappledEntity (84, VT 1c3f8e8) holds the pulled movable's handle at +0x38
+    // (object-carry-v1616b, confirmed runtime; arkCpntPowerGrapple +0xdc holds it while aiming). The pulled object is
+    // reported as flying (phase 2) from the pull's start, so the partner's copy follows it and breaks with it (phase 4)
+    // or is held with it (phase 1) instead of staying put in the partner's world.
+    if(!holding){std::uint32_t pulled=0;for(const auto& a:states.active)if(a.id==84&&a.vtable==base+0x1c3f8e8){if(!memoryRead(a.pointer+0x38,&pulled,4))pulled=0;break;}
+        if(pulled&&(pulled>>16)!=0x3fff&&(h.handle!=pulled||!h.phase)){std::uint64_t key=0;
+            if(readHeldObjectTransform(states.player.game,pulled,0,position,axis,&key)){h=ShadowHeldObject{};h.handle=pulled;h.key=key;h.phase=2;h.releasedAt=tick;
+                std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);std::memcpy(h.releaseFrom,position,12);++shadowHeldPulls;}}}
     if(holding&&(holding>>16)!=0x3fff){std::uint64_t key=0;
         if(!readHeldObjectTransform(states.player.game,holding,0,position,axis,&key)){++shadowHeldRefused;return;}
         if(h.phase!=1||h.handle!=holding)++shadowHeldHolds;
@@ -768,8 +777,8 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
-    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
-        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
+    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"pulls\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
+        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldPulls),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
         static_cast<unsigned long long>(shadowHeldBreaks),static_cast<unsigned long long>(shadowHeldRefused),remoteHeld.phase,remoteHeld.handle,static_cast<unsigned long long>(partnerHeld.applied),
         static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),static_cast<unsigned long long>(shadowGesture.throws),static_cast<unsigned long long>(shadowGesture.drops),partnerHeld.result);
     fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",

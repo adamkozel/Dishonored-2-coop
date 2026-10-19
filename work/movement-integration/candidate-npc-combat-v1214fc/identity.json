@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-19T19:38:23.104598+02:00",
+  "dll": "CFC355750BE43A94E9196BFC5C63A1B6B1685B6672B76AE013142C678F7F3BDB",
+  "probe": "CF056EE6D96EE3062EBAD345726F0E6FF8F4F7A8BA551A6258A2672180B52502",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214fb",
+  "protocol": 80,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 75,
+  "clips": 382,
+  "banks": [
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/corvo-choke-bank.bin",
+      "sha256": "AA8DA1AE7F5123B257D482CA73AFA56CDB2F9987D1F4298EE2EBE63631E96154"
+    },
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/emily-choke-bank.bin",
+      "sha256": "0CC6EBD2CC349B3462985412C91F314F8972B5149AE9366982EE8A145CA815AD"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214fc (protocol 80, #115): 1214fb plus the Far Reach object pull. GrabGrappledEntity (84) holds the pulled movable handle at +0x38 (object-carry-v1616b); the source reports that movable as a flying held object (phase 2) from the start of the pull, so the partner copy follows it and breaks or is held with it. The held status counts pulls."
+}
