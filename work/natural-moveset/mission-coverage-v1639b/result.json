@@ -1,0 +1,145 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native lethal of models/characters/def/generic/middle_class_female_01.def: source states 0,6,13,53,54,64; dead in both worlds",
+        "Target physics: host mode 0 then 0, client mode 3 then 3 (0 ragdoll)"
+      ],
+      "granted": [
+        {
+          "item": "components/characters/player/base/attributes/shadow_kill.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "target": {
+        "spawner": "script_spawner_docks_photograph",
+        "definition": "models/characters/def/generic/middle_class_female_01.def",
+        "position": [
+          -34.5335,
+          216.344,
+          4.43588
+        ],
+        "forward": [
+          0.13761805166533556,
+          0.9904853718535358
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -37.566884238810005,
+        216.3111357376619,
+        6.035880000000001
+      ],
+      "sourceStart": [
+        -34.712,
+        215.056,
+        4.43751
+      ],
+      "prePitch": 20.0,
+      "replacedAt": 619,
+      "cameraMoved": [
+        -37.566884238810005,
+        216.3111357376619,
+        6.035880000000001
+      ],
+      "targetMoved": 0.0,
+      "crept": 1430,
+      "creptEnd": 1787,
+      "stanceAfterCreep": 1,
+      "actedAt": 5126,
+      "trackSamples": 25,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "sourceStates": [
+        0,
+        6,
+        13,
+        53,
+        54,
+        64
+      ],
+      "windowScenes": [],
+      "targetPhysics": {
+        "verdict": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.6942,
+              216.165,
+              4.61299
+            ],
+            "physics": "0x2941f6ab220",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.6941,
+              216.165,
+              4.61298
+            ],
+            "physics": "0x270bffd5220",
+            "mode": 3,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        },
+        "later": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.6937,
+              216.164,
+              4.61237
+            ],
+            "physics": "0x2941f6ab220",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.6937,
+              216.164,
+              4.61238
+            ],
+            "physics": "0x270bffd5220",
+            "mode": 3,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        }
+      },
+      "corpseView": [
+        -36.106754154996004,
+        213.19254388443937
+      ],
+      "corpsePoseSamples": 9,
+      "corpseRagdollStatus": {
+        "enabled": null,
+        "ragdolls": null
+      }
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
