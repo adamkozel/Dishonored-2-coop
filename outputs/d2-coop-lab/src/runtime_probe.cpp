@@ -118,6 +118,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "native_player_grapple.h"
 #include "native_faction.h"
 #include "native_ai_targets.h"
+#include "native_breakable.h"
 // Read-only reconstruction of idAnimationLocal::GetJointName (23cb00).
 // Interned IDs are process-local; these labels are diagnostic only.
 bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16_t>& ids,std::vector<std::string>& out){
@@ -2087,6 +2088,22 @@ int main(int argc, char** argv) {
             std::cout << "{\"pointer\":\"0x" << cpnt << "\",\"vtableRva\":\"0x" << vtable-base << "\",\"owner\":\"0x" << owner << "\",\"flags\":\"0x" << componentState << "\",\"type\":" << jsonString(type?readString(process.value,base+type+16):"") << '}';
         }
         std::cout << "]}\n";return 0;
+    }
+    // 1214fq (#132): read-only list of breakables with their step, health and position.
+    if(argc==3 && std::strcmp(argv[2],"--breakables")==0) {
+        std::uintptr_t game=0,handles=0;std::uint32_t flags=0;
+        if(!read(process.value,base+0x39a5290,&game,8)||!game||!read(process.value,game+0x601c0,&handles,8)||!read(process.value,game+0x601c8,&flags,4))return 15;
+        const auto count=flags&0xffffff;if(count>16384)return 16;
+        const auto rd=[&](std::uintptr_t a,void* out,std::size_t n){return read(process.value,a,out,n);};
+        std::cout<<"{\"readOnly\":true,\"breakables\":[";bool first=true;
+        for(std::uint32_t i=0;i<count;++i){std::uint32_t handle=0;NativeBreakable b{};
+            if(!read(process.value,handles+i*4,&handle,4)||!handle||!readNativeBreakable(rd,base,game,handle,b,true))continue;
+            float position[3]{};read(process.value,b.actor+0x300,position,sizeof(position));
+            if(!first)std::cout<<',';first=false;
+            std::cout<<"{\"handle\":"<<handle<<",\"name\":"<<jsonString(b.name)<<",\"step\":"<<b.step<<",\"steps\":"<<b.stepCount<<",\"health\":"<<b.current
+                <<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
+        }
+        std::cout<<"]}\n";return 0;
     }
     if(argc==3 && std::strcmp(argv[2],"--entities")==0) {
         std::uintptr_t game=0,handles=0;std::uint32_t flags=0;

@@ -47,6 +47,7 @@ bool installNativeHealthSubtractObserver(){
     return VirtualProtect(slot,sizeof(void*),old,&unused)!=0;
 }
 void observeNativeDamage(void* component,void* info,void* result){
+    noteBreakableDamage(component,info); // 1214fq (#132): read-only, the hit that may break a breakable
     // Host-only scoped native parry-win blowback from the owned clone.
     if(routeNpcParryWinDamage(component,info,result))return;
     if(suppressFriendlyFire(component,info,result)||suppressShadowDamage(info,result)||suppressCarryPresentationDamage(info,result))return;
