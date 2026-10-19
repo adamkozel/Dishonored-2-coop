@@ -134,8 +134,7 @@ void clientNpcDead(NpcAuthorityChannel& c);
 unsigned npcCombatDeathShare(std::uint64_t arm);
 float npcReconcileDeclAmount=0;std::uint64_t npcReconcileDeclFlags=0;unsigned npcReconcileDeclReactions[2]{};
 std::uint64_t npcVanishedDead=0; // 1214fb (#118)
-// 1214fk (#117): a Dead marked ASH1 means the peer's copy turned to ash (Shadow Kill); see serviceNpcAsh.
-constexpr std::uint32_t kNpcDeadAshed=0x31485341u; // 'ASH1'
+// 1214fk (#117): a Dead marked ASH1 (kNpcDeadAshed, npc_authority_protocol.h) means the peer's copy turned to ash.
 struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;};
 std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0;
 std::uint64_t npcDeadReconciled=0,npcDeadSent=0,npcCombatSharedDeaths=0,npcClientDeadApplied=0,npcClientDeadAlready=0,npcClientDeadRefused=0;const char* npcClientDeadLast="none";

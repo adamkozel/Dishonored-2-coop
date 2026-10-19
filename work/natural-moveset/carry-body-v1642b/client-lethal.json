@@ -1,0 +1,84 @@
+{
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Remote phase 6 presented",
+    "Same outcome in both worlds: dead",
+    "Guard after the takedown: host present True hidden False, client present False hidden "
+  ],
+  "granted": [
+    {
+      "item": "components/characters/player/base/attributes/shadow_kill.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "inputAt": "2026-10-19T22:38:28.2498993+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|2200"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": null,
+    "observer": {
+      "tick": 96657203,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x20d9f212160",
+      "actor": "0x20dcbfb4e40",
+      "attributes": "0x20dcbd198d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "dead"
+  },
+  "guardEnd": {
+    "host": {
+      "present": true,
+      "position": [
+        -43.984,
+        -142.515,
+        66.5791
+      ],
+      "current": 0,
+      "hidden": false
+    },
+    "client": {
+      "present": false
+    }
+  },
+  "restored": true
+}
