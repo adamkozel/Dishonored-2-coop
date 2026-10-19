@@ -1,0 +1,88 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": false,
+  "failure": "No native takedown on the source (states 0,6,39,40,64,67)",
+  "checks": [],
+  "targetCandidates": [
+    "script_spawner_docks_wolfhound_6=models/characters/def/generic/wolfhound_01.def",
+    "script_spawner_docks_wolfhound_3=models/characters/def/generic/wolfhound_01.def",
+    "script_spawner_docks_wolfhound_1=models/characters/def/generic/wolfhound_01_treacherous.def",
+    "script_spawner_docks_wolfhound_4=models/characters/def/generic/wolfhound_01.def",
+    "script_spawner_docks_wolfhound_2=models/characters/def/generic/wolfhound_01_treacherous.def",
+    "script_spawner_docks_wolfhound_5=models/characters/def/generic/wolfhound_01_treacherous.def"
+  ],
+  "reachTries": [
+    {
+      "spawner": "script_spawner_docks_wolfhound_6",
+      "err": 0.24,
+      "dz": 0.14
+    }
+  ],
+  "targetChosen": "script_spawner_docks_wolfhound_6=models/characters/def/generic/wolfhound_01.def",
+  "target": {
+    "spawner": "script_spawner_docks_wolfhound_6",
+    "definition": "models/characters/def/generic/wolfhound_01.def",
+    "position": [
+      -45.7164,
+      -98.654,
+      6.94156
+    ],
+    "forward": [
+      0.45503124194336086,
+      0.8904754734721684
+    ]
+  },
+  "kind": "lethal",
+  "camera": [
+    -48.59259047929101,
+    -97.68962023723239,
+    8.54156
+  ],
+  "sourceStart": [
+    -46.463,
+    -100.315,
+    7.08411
+  ],
+  "takedownAtPress": {
+    "t": 1670,
+    "mode": 2,
+    "active": 1,
+    "ready": 0,
+    "names": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "replacedAt": 617,
+  "cameraMoved": [
+    -48.59259091811349,
+    -97.68962154598854,
+    8.54156
+  ],
+  "targetMoved": 0.0,
+  "crept": 1258,
+  "creptEnd": 1634,
+  "stanceAfterCreep": 1,
+  "actedAt": 1670,
+  "takedownAfter": 1899,
+  "trackSamples": 48,
+  "takedownSamples": 4,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    6,
+    39,
+    40,
+    64,
+    67
+  ],
+  "windowScenes": []
+}

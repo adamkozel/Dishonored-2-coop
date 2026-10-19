@@ -1,0 +1,75 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Native lethal of models/characters/def/generic/wolfhound_01.def: source states 0,6,13,53,54,64,67; dead in both worlds"
+  ],
+  "target": {
+    "spawner": "script_spawner_docks_wolfhound_3",
+    "definition": "models/characters/def/generic/wolfhound_01.def",
+    "position": [
+      50.0125,
+      -103.489,
+      3.59968
+    ],
+    "forward": [
+      -0.9851593785746559,
+      -0.17164206595819667
+    ]
+  },
+  "kind": "lethal",
+  "camera": [
+    50.97074791823319,
+    -106.36723920604278,
+    5.199680000000001
+  ],
+  "sourceStart": [
+    51.1828,
+    -103.306,
+    3.5737
+  ],
+  "takedownAtPress": {
+    "t": 1626,
+    "mode": 2,
+    "active": 1,
+    "ready": 1,
+    "names": [
+      "models/characters/def/generic/wolfhound_01.def_4743",
+      "models/characters/def/generic/wolfhound_01.def_4743",
+      "",
+      "",
+      ""
+    ]
+  },
+  "replacedAt": 578,
+  "cameraMoved": [
+    44.870781974885986,
+    -105.24202259662921,
+    5.24223
+  ],
+  "targetMoved": 4.79,
+  "crept": 1234,
+  "creptEnd": 1589,
+  "stanceAfterCreep": 1,
+  "actedAt": 1626,
+  "takedownAfter": 1813,
+  "trackSamples": 47,
+  "takedownSamples": 4,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "sourceStates": [
+    0,
+    6,
+    13,
+    53,
+    54,
+    64,
+    67
+  ],
+  "windowScenes": []
+}
