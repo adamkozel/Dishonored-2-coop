@@ -1,0 +1,48 @@
+{
+  "source": "host",
+  "case": "stoptime",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Stop Time: guard head moved host 85.3/14.5/123.7 mm, client 84.1/14/140 mm (before/during/after)",
+    "Stop Time: guard moved host 0/0/0 m, client 0/0/0 m (before/during/after); Emily walked 0.04 m during the stop",
+    "Partner presentation stayed live",
+    "stoptime presented (3 samples, variants 12,14) and recovered"
+  ],
+  "stopUpgrade": true,
+  "faced": true,
+  "peerWalk": 4193,
+  "stopTime": {
+    "guardHostBefore": 0.0,
+    "guardHostDuring": 0.0,
+    "guardHostAfter": 0.0,
+    "guardClientBefore": 0.0,
+    "guardClientDuring": 0.0,
+    "guardClientAfter": 0.0,
+    "emilyDuring": 0.04,
+    "corvoDuring": 0.0,
+    "headMm": {
+      "hostBefore": 85.3,
+      "hostDuring": 14.5,
+      "hostAfter": 123.7,
+      "clientBefore": 84.1,
+      "clientDuring": 14.0,
+      "clientAfter": 140.0
+    }
+  },
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 4,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "powerSamples": 3,
+  "powerVariants": [
+    12,
+    14
+  ],
+  "recovered": 2,
+  "restored": true
+}
