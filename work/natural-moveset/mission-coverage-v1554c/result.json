@@ -1,0 +1,67 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,3,39,53,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,3,39,53,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_clockwork_int01",
+        "definition": "models/characters/def/generic/clockwork_01.def",
+        "position": [
+          235.74,
+          -24.53,
+          7
+        ],
+        "forward": [
+          1.0,
+          0.0
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        235.29000000000002,
+        -21.53,
+        8.6
+      ],
+      "sourceStart": [
+        234.34,
+        -24.53,
+        7.00365
+      ],
+      "prePitch": 60.0,
+      "replacedAt": 487,
+      "cameraMoved": [
+        234.32384125556274,
+        -27.750924467198615,
+        8.6
+      ],
+      "targetMoved": 1.85,
+      "dropFrom": [
+        234.55693268721228,
+        -24.914294913552798,
+        10.0
+      ],
+      "actedAt": 1051,
+      "dropPresses": 4,
+      "trackSamples": 51,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        3,
+        39,
+        53,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
