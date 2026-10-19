@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-19T04:21:40.568480+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-19T04:58:07.994349+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 91 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 92 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -475,7 +475,7 @@ Captured 2026-10-19T04:21:40.568480+02:00; source [review-catalog.json](<../../.
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | accepted_functional_both_roles_held_reach_reading | complete |
 | eat_drink | interactions | candidates | native_food_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | complete |
 | carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | work_remaining |
-| shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | work_remaining |
+| shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | complete |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
 | scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | complete |
 | cutscene_enter_exit | interactions | missing | native_cinematic5_partner_retired_and_restored_both_roles | accepted_mayhew_scene_both_windows | complete |

@@ -1,0 +1,31 @@
+"""Writes completion-audit-v1422-shop.json (#11): the black market interaction presented on the partner in both roles: the
+walk to the counter, native NPC conversation gestures while the shop is open, and the partner kept through the
+post-menu delivery hitch (mission-coverage-v1416b/c on 1214dv)."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("Pressing X at a black market counter pushes arkGameLogicStateBlackMarket (logic 10, vtable RVA 0x1b69178) on the "
+     "InGame state for the whole shop: the native walk to the counter's loco target, the paired shopkeeper_interact scene "
+     "(player channel 1: in 1333 ms, interact_wait 4833 ms; first-person body tracks only on the 20-joint player body) and "
+     "the menu (1402a, confirmed runtime; export shop-scenes-v1402, confirmed static). Before 1214dr the presentation pair "
+     "check refused logic 10 and the partner vanished for the whole shop (1399a). 1214dr accepts logic 10 as an overlay "
+     "like the item wheel: the source's action stream holds (state 24) on two stable stance reads, it sends a standing "
+     "ground motion, and the partner standing at the counter plays native NPC conversation gestures retargeted per role "
+     "from its own skeleton (bank 75 clip 381: gesture_think, then gesture_calm, looping; tall for Corvo, female for Emily; "
+     "retarget and previews 1409). After the menu closes, delivery from the source can lag 1-1.6 s (1416a); 1214dv holds "
+     "the stream and the partner's clock while late action packets keep arriving instead of stopping (which hid the body "
+     "for about 8 s). Harness 1416 films the shop from inside it for 22 s with the observer clock saved. A case passes "
+     "when the source's native state changed through the shop and the partner presentation stayed live.")
+items = [dict(id='shop_dialogue_gestures', decision='complete',
+    scope=("The partner at a black market: it walks to the counter, gestures toward the shopkeeper while the shop is open "
+           "(hand to the chin, an open hand), and stays presented through and after the menu, in both roles."),
+    takes=[{'take': 'mission-coverage-v1416b', 'cases': ['host-shop']}, {'take': 'mission-coverage-v1416c', 'cases': ['client-shop']},
+           {'take': 'mission-coverage-v1402b', 'cases': ['host-shop']}, {'take': 'mission-coverage-v1402c', 'cases': ['client-shop']}],
+    visual=[{'video': 'mission-coverage-v1402b/host-shop-observer.mp4', 'verdict': 'Corvo walks up to the counter and stands at it; his hand goes to his chin and then out toward the shopkeeper while the shop is open.'},
+            {'video': 'mission-coverage-v1416b/host-shop-observer.mp4', 'verdict': 'Corvo stays at the counter in his own body through the end of the menu and the seconds after it (9.5 to 18.5 s), with no fall back to the actor pose.'},
+            {'video': 'mission-coverage-v1416c/client-shop-observer.mp4', 'verdict': 'Emily walks up to the counter, puts a hand to her chin, then opens it toward the shopkeeper, and stays at the counter through and after the menu.'}])]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1422-shop', family='interactions', candidate='candidate-npc-combat-v1214dv', method=M, items=items)
+(N / 'completion-audit-v1422-shop.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))
