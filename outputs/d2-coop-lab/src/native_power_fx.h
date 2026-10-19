@@ -42,6 +42,11 @@ const char* powerFxName(unsigned kind){
         // sound; the native screen particle and full-screen quad stay with the caster).
         kind==29?"models/effects/d2coop/windblast_wave_remote.fx":
         kind==30?"models/effects/d2coop/windblast_stronger_remote.fx":
+        // 1214fk (#117): native Shadow Kill ash for the partner's copy of a body that turned to ash.
+        kind==31?"models/effects/gameplay/shadow_kill/sk_spine_01.fx":
+        kind==32?"models/effects/gameplay/shadow_kill/sk_spine_head.fx":
+        kind==33?"models/effects/gameplay/shadow_kill/sk_left_femur.fx":
+        kind==34?"models/effects/gameplay/shadow_kill/sk_right_femur.fx":
         // Isolated native-derived world effects retain character sound/light
         // and all layers except the long 1p spark streaks (30% length).
         // The source player's native first-person declarations are unchanged.
