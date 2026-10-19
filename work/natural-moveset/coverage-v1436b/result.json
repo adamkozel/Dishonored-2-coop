@@ -1,0 +1,407 @@
+{
+  "passed": false,
+  "failure": "7 case(s) failed: client-kicks: No native throwhit kick | client-kicke: No native throwhit kick | client-kickw: No native throwhit kick | host-kickn: No native throwhit kick | host-kicks: No native throwhit kick | host-kicke: No native throwhit kick | host-kickw: No native throwhit kick",
+  "cases": [
+    {
+      "source": "client",
+      "case": "kickn",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit True; source states 0@, 39@, 6@; presented combat variants 17"
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 1,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1273,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "39@",
+        "6@"
+      ],
+      "combatVariants": [
+        17
+      ],
+      "throwhit": true,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kicks",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 39@, 6@; presented combat variants 3,5"
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 3,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1090,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "39@",
+        "6@"
+      ],
+      "combatVariants": [
+        3,
+        5
+      ],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kicke",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 13@, 53@, 6@; presented combat variants "
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 5,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1316,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "13@",
+        "53@",
+        "6@"
+      ],
+      "combatVariants": [],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "kickw",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 39@, 6@; presented combat variants 5"
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 7,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1297,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "39@",
+        "6@"
+      ],
+      "combatVariants": [
+        5
+      ],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kickn",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 39@, 6@; presented combat variants "
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 9,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1282,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "39@",
+        "6@"
+      ],
+      "combatVariants": [],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kicks",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 13@, 6@; presented combat variants "
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 12,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1316,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "13@",
+        "6@"
+      ],
+      "combatVariants": [],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kicke",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 13@, 6@; presented combat variants "
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 14,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1266,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "13@",
+        "6@"
+      ],
+      "combatVariants": [],
+      "throwhit": false,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "kickw",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native throwhit kick",
+      "checks": [
+        "Partner presentation stayed live",
+        "Kick try: placement placed; throwhit False; source states 0@, 13@, 6@; presented combat variants "
+      ],
+      "camera": [
+        -41.6,
+        -141.0,
+        68.0
+      ],
+      "hostPlace": {
+        "placed": 16,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 1305,
+      "lowWeightSamples": 1,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_power_equip_requested"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "13@",
+        "6@"
+      ],
+      "combatVariants": [],
+      "throwhit": false,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

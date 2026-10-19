@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "upgshockwave",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Upgrade survey: grants 2 (refused 0); source states 0@, 3@, 63@; presented power variants 11; teleports 0"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "labHitAt": 2805,
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 2,
+          "refused": 0,
+          "result": "granted_named"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 70.0
+      },
+      "sourceStates": [
+        "0@",
+        "3@",
+        "63@"
+      ],
+      "powerVariants": 11,
+      "teleportCount": 0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "upgpossess",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Upgrade survey: grants 4 (refused 0); source states 0@, 63@; presented power variants 26,27; teleports 0"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "hostPlace": {
+        "placed": 1,
+        "refused": 0,
+        "result": "placed"
+      },
+      "labHitAt": 2748,
+      "lowWeightSamples": 2,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 4,
+          "refused": 0,
+          "result": "granted_named"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "sourceStates": [
+        "0@",
+        "63@"
+      ],
+      "powerVariants": [
+        26,
+        27
+      ],
+      "teleportCount": 0,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

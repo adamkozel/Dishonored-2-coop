@@ -308,7 +308,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // 1214am (#11): a native use made while crouched (Emily at the ring lock and the office door,
         // takes 1228m-1228r: native stance 1 throughout) is presented too; before, only a standing
         // use was, and the partner showed nothing.
-        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&(ground||crouched)&&pose.motionValid&&(p.clock.speed<.8f||use.variant>=6);
+        const bool useActive=p.bank.hasUse()&&shadowStream.use.sample(pose.time,use,useAmount)&&use.variant&&(use.variant!=8||p.bank.hasGrenade())&&(ground||crouched)&&pose.motionValid&&(p.clock.speed<.8f||use.variant>=6);
         if(combatDt>=0&&combatDt<.25f){
             if(useActive){if(use.event!=p.useEvent){p.useFrom=p.useLast;p.useTransition=0;p.useEvent=use.event;}
                 p.useVariant=use.variant;p.useAmount=useAmount;p.useTransition=(std::min)(1.f,p.useTransition+combatDt/.20f);
@@ -871,6 +871,17 @@ void applyMovementBank(void* component,void* actor,int phase){
                 ++p.useReachApplied;p.useReachError=error;
             }else ++p.useReachRefused;
         }
+    }
+    // 1214ea (#11 carry_object_place_throw): while the partner plays the held reach (use variant 6, HoldObject 49 on the
+    // source), publish its right wrist (16) and elbow (15) in world space for the observer's copy of the held object.
+    if(ok&&p.useVariant==6&&p.useWeight>.3f&&count>16&&p.parents.size()>16&&p.parents[14]==13&&p.parents[15]==14&&p.parents[16]==15){
+        std::array<BodyMatrix,17> heldLocal{},heldGlobal{};bool fk=true;
+        for(unsigned j=0;j<17&&fk;++j){heldLocal[j]=pose[j];if(j<2)std::memcpy(heldLocal[j].v,s.localPose[j].data(),64);
+            const int parent=p.parents[j];if(parent>=static_cast<int>(j)||parent<-1||!bodyRigid(heldLocal[j])){fk=false;break;}
+            heldGlobal[j]=parent>=0?bodyMultiply(heldGlobal[parent],heldLocal[j]):heldLocal[j];}
+        if(fk){float w[3]{},e[3]{};for(unsigned r=0;r<3;++r){w[r]=e[r]=s.root[r];
+                for(unsigned c=0;c<3;++c){w[r]+=s.root[3+c*3+r]*heldGlobal[16].v[12+c];e[r]+=s.root[3+c*3+r]*heldGlobal[15].v[12+c];}}
+            publishPartnerHeldWrist(w,e);}
     }
     if(ok&&phase==0&&p.currentFeet&&p.clock.weight>.99f){
         // Build only the native primary chain; helper bones are recomputed by

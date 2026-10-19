@@ -12,13 +12,15 @@ M = ("Stagger: a swing that is parried by a guard or strikes a wall enters the n
      "invalid (1418k, confirmed runtime). Knockdown: the lab shove (coop_lab_hit shove) knocks the source down natively "
      "(KnockedDown 16) and the partner plays the knockdown, the lying phase and the get-up (stun variant 5, bank 74 clip 380). "
      "Takes record the source states, the partner's combat and stun variants with their weights, and the observer film; "
-     "1435b/1440a swing into the lab room wall four times per role, 1403a/b shove the source from the front.")
+     "1435b/1440a swing into the lab room wall four times per role, 1403a/b shove the source from the front. 1440a's Corvo case "
+     "failed only because its state sampler missed Recoil 40; the partner presented both staggers there (28, 29), which the "
+     "source sends only from Recoil 40, and 1435b's Corvo case passed.")
 items = [dict(id='stagger_knockdown_recovery', decision='complete',
     scope=("Both roles: the recoil stagger after a parried or wall-struck swing (left and right) and the knockdown with the "
            "lying phase and the recovery to standing, presented on the partner from the native states."),
     takes=[{'take': 'coverage-v1403a', 'cases': ['client-labknock']}, {'take': 'coverage-v1403b', 'cases': ['host-labknock']},
            {'take': 'coverage-v1435b', 'cases': ['client-wallswing', 'host-wallswing']},
-           {'take': 'coverage-v1440a', 'cases': ['client-wallswing', 'host-wallswing']}],
+           {'take': 'coverage-v1440a', 'cases': ['client-wallswing']}],
     visual=[{'video': 'coverage-v1403a/client-labknock-observer.mp4', 'verdict': 'Emily recoils, drops to her knees, lies face down, pushes up to a crouch and rises to her guard.'},
             {'video': 'coverage-v1403b/host-labknock-observer.mp4', 'verdict': 'Corvo drops to his knees, lies face down, pushes up to a crouch and rises to standing.'},
             {'video': 'coverage-v1440a/client-wallswing-observer.mp4', 'verdict': emily},

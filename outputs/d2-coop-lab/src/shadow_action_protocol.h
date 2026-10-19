@@ -15,7 +15,7 @@
 // Native semantic states and explicit unbound ground presentation18. No pointers, resource names or damage requests.
 struct CoopShadowActionPacket {
     std::uint32_t magic=0x48413244;
-    std::uint16_t version=77,size=sizeof(CoopShadowActionPacket);
+    std::uint16_t version=79,size=sizeof(CoopShadowActionPacket);
     std::uint32_t build=0x67a50cde,role=0;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0;
     std::uint64_t sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
@@ -44,9 +44,13 @@ struct CoopShadowActionPacket {
     std::uint32_t useVariant=0,useTimeMs=0,useDurationMs=0,useEvent=0;
     // 1213k (protocol 75, #6): the used mechanism's world position for the partner's hand reach.
     std::array<float,3> useTarget{};std::uint32_t useTargetValid=0;
+    // 1214ea (protocol 78, #11 carry_object_place_throw): the held native movable (HoldObject 49 +0x48 handle, 1433b/c):
+    // phase 1 held, 2 flying after the release, 3 settled, 4 destroyed at the source; its name key and world transform.
+    std::uint32_t heldObjectHandle=0,heldObjectPhase=0;std::uint64_t heldObjectKey=0;
+    std::array<float,3> heldObjectPosition{};std::array<float,9> heldObjectAxis{};
 };
 #pragma pack(pop)
-static_assert(sizeof(CoopShadowActionPacket)==432);
+static_assert(sizeof(CoopShadowActionPacket)==496);
 // Share equipment-context policy between source and wire validation so an
 // observed native reader cannot silently outgrow the source transport gate.
 inline bool shadowPowerSwordContext(unsigned variant,unsigned swordState){
@@ -123,7 +127,11 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     const bool dead=p.state!=25||(p.kind==1&&deathCombat&&!p.equipmentVariant&&!p.traversalVariant&&!p.powerVariant&&!p.rangedKind&&!p.rangedVariant&&
         !p.grenadeHeld&&!p.grenadeVariant&&!p.carryVariant&&!p.stunVariant&&!p.airStage&&!p.heartHeld&&!p.heartVariant&&!p.trapHeld&&!p.trapVariant&&
         !p.chokeVariant&&!p.useVariant&&!p.leanSide&&!p.leanUp);
-    return dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==77&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
+    // 1214ea: the held object needs its handle and key with a finite transform; no phase carries none.
+    bool heldTransform=true;for(float v:p.heldObjectPosition)heldTransform=heldTransform&&std::isfinite(v)&&std::fabs(v)<=100000.f;
+    for(float v:p.heldObjectAxis)heldTransform=heldTransform&&std::isfinite(v)&&std::fabs(v)<=2.f;
+    const bool heldObject=p.heldObjectPhase<=4&&heldTransform&&(p.heldObjectPhase?(p.heldObjectHandle&&p.heldObjectKey):(!p.heldObjectHandle&&!p.heldObjectKey));
+    return heldObject&&dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==79&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
         p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=25&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&

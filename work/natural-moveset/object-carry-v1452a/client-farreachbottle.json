@@ -1,0 +1,54 @@
+{
+  "source": "client",
+  "case": "farreachbottle",
+  "observer": "host",
+  "passed": false,
+  "failure": "The bottle was not pulled into the hand",
+  "checks": [
+    "Pull states 63@, 84@; moved in host ; moved in client esc_env_dunwall_streets_interior_bayle_104:gone",
+    "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.4441,-163.082,67.252"
+  ],
+  "grantResult": {
+    "grants": 3,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "inputAt": "2026-10-19T07:09:30.6466631+02:00",
+  "holdDumps": 4,
+  "holdStateType": [
+    ".?AVarkPlayerStateUsePower@@",
+    ".?AVarkPlayerStateUsePower@@",
+    ".?AVarkPlayerStateGrabGrappledEntity@@",
+    ".?AVarkPlayerStateGrabGrappledEntity@@"
+  ],
+  "lootSamples": 0,
+  "slotPresses": [],
+  "potionCounts": [],
+  "peakUseWeight": 0.0,
+  "holdSamples": 0,
+  "bottleAfter": [
+    -43.4441,
+    -163.082,
+    67.252
+  ],
+  "bottleBefore": [
+    -43.4437,
+    -163.081,
+    67.252
+  ],
+  "stateVtables": [
+    "63@",
+    "84@"
+  ],
+  "movers": {
+    "host": [],
+    "client": [
+      {
+        "name": "esc_env_dunwall_streets_interior_bayle_104",
+        "handle": "0x73a0354",
+        "change": "gone"
+      }
+    ]
+  },
+  "restored": true
+}

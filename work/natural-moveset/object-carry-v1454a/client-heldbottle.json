@@ -1,0 +1,107 @@
+{
+  "source": "client",
+  "case": "heldbottle",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presents the use reach (peak weight 1)",
+    "Native pickup took the item on the source",
+    "Held object: source phases 0,1,2,3; source holds 1, releases 1, settles 1, breaks 0; observer pinned samples 14, applied 96, followed 31, settled 50, broken 0, refused 5, results idle,no_wrist,held,following,settled",
+    "Release gesture: observer use variants 0,6,8; source throws 1, drops 0",
+    "Held at 2742 ms: observer bottle 0.46 m from the partner, 1.24 m up",
+    "Held at 3390 ms: observer bottle 0.46 m from the partner, 1.23 m up",
+    "Resting bottles 0.058 m apart"
+  ],
+  "inputAt": "2026-10-19T07:17:30.2633093+02:00",
+  "holdDumps": 0,
+  "holdStateType": [],
+  "lootSamples": 0,
+  "slotPresses": [
+    {
+      "ms": 3653,
+      "slot": "RT throw"
+    }
+  ],
+  "potionCounts": [],
+  "peakUseWeight": 0.9999999,
+  "targetValid": false,
+  "itemTaken": false,
+  "activeSets": [
+    "0",
+    "0,75",
+    "0,49,81",
+    "0,49"
+  ],
+  "heldFinal": {
+    "ms": 7419,
+    "src": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 1,
+      "releases": 1,
+      "settles": 1,
+      "breaks": 0,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 0,
+      "followed": 0,
+      "settledApplied": 0,
+      "broken": 0,
+      "presentRefused": 0,
+      "throws": 1,
+      "drops": 0,
+      "result": "idle"
+    },
+    "obs": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 0,
+      "releases": 0,
+      "settles": 0,
+      "breaks": 0,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 96,
+      "followed": 31,
+      "settledApplied": 50,
+      "broken": 0,
+      "presentRefused": 5,
+      "throws": 0,
+      "drops": 0,
+      "result": "settled"
+    }
+  },
+  "sourcePhases": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "observerResults": [
+    "idle",
+    "no_wrist",
+    "held",
+    "following",
+    "settled"
+  ],
+  "observerUseVariants": [
+    0,
+    6,
+    8
+  ],
+  "sourceBottle": [
+    -43.4494,
+    -162.888,
+    67.3592
+  ],
+  "observerBottle": [
+    -43.4247,
+    -162.907,
+    67.3097
+  ],
+  "restGap": 0.058,
+  "restored": true
+}

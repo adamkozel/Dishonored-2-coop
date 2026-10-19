@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:09:00.198184+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -794,7 +794,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (be
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (being thrown off and recovering) reads clearly for both characters in the newer takes. The victim's side is not synchronized. Candidate592: distinct native combat-lose1500 now drives the remote full body through Steam, with unchanged source first-person and independent network root. Corvo593/597 and Emily595 pass12 checks each; Corvo/Emily598 finish regression each passes12. Breakout body observed on both roles; no visual acceptance. All previous351 clip payloads preserved in bank64/352. Receiver victim alignment/animation and shared outcomes remain unimplemented. Actor-body presentation only; receiver guard animation/placement, knockout/death, corpse and world outcomes remain unsynchronized by this change. Native cancel400 still unverified; combat_lose1500 is a separate branch. Corvo593 guard occludes most actor; Corvo597 and Emily595 show actual breakout body. Corvo finish598 camera clips geometry and is numerical regression only; unchanged prior clips retain earlier scoped recordings. Visual/contact/grip polish deferred; no visual acceptance or completed moveset claim. Earlier trap576 freshness fade and other archived intermittent cases remain unresolved. Audit 1246 (1213r): the choke hold (Choke41 at stance 12) sent root motion without a wire stance, so peers rejected every pose packet of the hold and the lab lease retired the partner; fixed and re-verified with a standing choke in both roles (1245d).",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-choke-cancel-corvo-v590/host-rear-choke.mp4",
@@ -806,17 +806,51 @@ Visual sweep 1260: accepted (corvo accept, emily accept). The choke breakout (be
     "choke-breakout-corvo-v597/host-rear-choke.mp4",
     "choke-breakout-corvo-v597/observer.mp4"
   ],
-  "complete": false,
+  "complete": true,
   "visual_accepted": false,
   "evidence": [
     "../movement-integration/crouched-takedown-audit-v1246.json",
-    "../movement-integration/visual-sweep-v1260/combat_paired-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
+    "mission-coverage-v1448a/result.json",
+    "mission-coverage-v1448b/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1447-struggle-escape.json",
+    "decision": "complete",
+    "scope": "Both roles: the victim's struggle in the rear choke and its escape (the choker thrown off, the victim free and alive), presented on the partner with the victim's side following in the observer's world.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1448a",
+        "cases": [
+          "client-takedown"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1448b",
+        "cases": [
+          "host-takedown"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1448a/client-takedown-observer.mp4",
+        "verdict": "Emily's rear choke of the tall overseer on Edge of the World, Corvo's window: Emily grabs him from behind and he struggles in the hold; after the lab hit he elbows free, Emily stumbles back and recovers standing, and he turns on her alive and alert (sword drawn), matching choke_combat_lose in the scene watch. Accepted."
+      },
+      {
+        "video": "mission-coverage-v1448b/host-takedown-observer.mp4",
+        "verdict": "Corvo's rear choke of the tall overseer, Emily's window: Corvo grabs him from behind, the overseer flails his arms in the hold, then elbows Corvo in the face; Corvo doubles over and straightens while the overseer walks off alive and later attacks him. Natural full-body breakout matching choke_combat_lose. Accepted."
+      }
+    ],
+    "lifecycle": "See method."
+  }
 }
 ````
 
 - [evidence: ../movement-integration/crouched-takedown-audit-v1246.json](<../../../../work/movement-integration/crouched-takedown-audit-v1246.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
+- [evidence: mission-coverage-v1448a/result.json](<../../../../work/natural-moveset/mission-coverage-v1448a/result.json>)
+- [evidence: mission-coverage-v1448b/result.json](<../../../../work/natural-moveset/mission-coverage-v1448b/result.json>)
 - [in_game_recordings: native-choke-cancel-corvo-v590/host-rear-choke.mp4](<../../../../work/natural-moveset/native-choke-cancel-corvo-v590/host-rear-choke.mp4>)
 - [in_game_recordings: native-choke-cancel-corvo-v591/host-rear-choke.mp4](<../../../../work/natural-moveset/native-choke-cancel-corvo-v591/host-rear-choke.mp4>)
 - [in_game_recordings: choke-breakout-corvo-v593/host-rear-choke.mp4](<../../../../work/natural-moveset/choke-breakout-corvo-v593/host-rear-choke.mp4>)

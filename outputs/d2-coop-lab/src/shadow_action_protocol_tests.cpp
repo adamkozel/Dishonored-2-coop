@@ -374,6 +374,13 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     CoopShadowActionPacket p{};p.sampleTimeUs=1000000;p.sequence=1;p.sourceSession=11;p.targetSession=22;p.sourceWorldEpoch=3;p.targetWorldEpoch=7;p.mapId=99;p.sourceToken=4;p.rootSequence=99;p.character=1;
     check(validShadowAction(p,c,h),"initial hello");p.targetToken=9;check(validShadowAction(p,c,h)&&shadowActionTokensMatch(p,9,4),"two tokens");
     p.kind=1;p.event=1;p.swordState=2;for(unsigned state=0;state<=6;++state){p.state=state;p.airStage=state==3?2:0;p.combatVariant=state==1?1:state==2?10:0;p.combatPhase=p.combatVariant?1:0;p.combatDurationMs=p.combatVariant?1000:0;check(validShadowAction(p,c,h),"known native state");}p.state=5;
+    // 1214ea (protocol 78): the held object needs its handle, key and a finite transform; no phase carries none.
+    {auto held=p;held.heldObjectPhase=1;check(!validShadowAction(held,c,h),"held phase needs an object");
+     held.heldObjectHandle=0x073c0356;held.heldObjectKey=7;held.heldObjectPosition={-40.f,-140.f,67.f};held.heldObjectAxis={1,0,0,0,1,0,0,0,1};
+     check(validShadowAction(held,c,h),"held object with handle, key and transform");
+     held.heldObjectPhase=5;check(!validShadowAction(held,c,h),"unknown held phase refused");
+     held.heldObjectPhase=2;held.heldObjectPosition[0]=1e30f;check(!validShadowAction(held,c,h),"unbounded flight refused");
+     auto none=p;none.heldObjectHandle=3;check(!validShadowAction(none,c,h),"handle without a phase refused");}
     {auto hit=p;hit.state=1;hit.combatPhase=1;
       for(unsigned v:{15u,16u,17u}){hit.combatVariant=v;hit.combatDurationMs=v==17?800:v==15?866:666;check(validShadowAction(hit,c,h),"native hit recovery wire");
         auto bad=hit;bad.combatDurationMs++;check(!validShadowAction(bad,c,h),"unobserved recovery wire timing refused");
@@ -541,13 +548,15 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     }
     {   // 1213: native use (state 75) -> authored interaction on the ground action only.
       auto use=p;use.state=0;use.combatVariant=0;use.combatPhase=0;use.combatDurationMs=0;use.airStage=0;use.useEvent=3;
-      for(unsigned v=1;v<=7;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
+      for(unsigned v=1;v<=8;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
       use.useVariant=2;use.useDurationMs=3200;use.useTimeMs=100;
       auto bad=use;bad.version=73;check(!validShadowAction(bad,c,h),"pre-use wire refused");
       bad=use;bad.useDurationMs=2300;check(!validShadowAction(bad,c,h),"use duration bound to its variant");
       bad=use;bad.useTimeMs=3201;check(!validShadowAction(bad,c,h),"use clock bounded");
       bad=use;bad.useEvent=0;check(!validShadowAction(bad,c,h),"use needs an incarnation");
-      bad=use;bad.useVariant=8;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      bad=use;bad.useVariant=9;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      check(UsePresentation::clip(8)==256&&UsePresentation::duration(8)==330&&std::fabs(UsePresentation::clipAmount(8,0,330)-.35f)<1e-6f&&
+            std::fabs(UsePresentation::clipAmount(8,330,330)-1.f)<1e-6f,"1214eb: a held object's throw plays the grenade overhand throw from its wind-up's end");
       check(UsePresentation::clip(6)==369&&UsePresentation::clip(7)==369&&std::fabs(UsePresentation::clipAmount(6,30000,60000)-UsePresentation::kHoldAmount)<1e-6f&&
             UsePresentation::clipAmount(6,800,60000)<UsePresentation::kHoldAmount&&std::fabs(UsePresentation::clipAmount(7,0,1300)-UsePresentation::kHoldAmount)<1e-6f&&
             std::fabs(UsePresentation::clipAmount(7,1300,1300)-1.f)<1e-6f&&UsePresentation::contact(UsePresentation::kHoldAmount)>.99f,"held objects (1269b) hold the reach at full contact, then finish it");

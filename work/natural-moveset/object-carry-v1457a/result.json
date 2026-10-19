@@ -1,0 +1,414 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: client-heldbottle: Resting bottle missing in a world | host-heldbottle: Resting bottle missing in a world",
+  "cases": [
+    {
+      "source": "client",
+      "case": "heldbottle",
+      "observer": "host",
+      "passed": false,
+      "failure": "Resting bottle missing in a world",
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source",
+        "Held object: source phases 0,1,2,3; source holds 3, releases 3, settles 3, breaks 0; observer pinned samples 13, applied 289, followed 116, settled 140, broken 0, refused 14, results settled,held,following",
+        "Release gesture: observer use variants 0,6,8; source throws 3, drops 0",
+        "Held at 2810 ms: observer bottle 0.46 m from the partner, 1.24 m up",
+        "Held at 3480 ms: observer bottle 0.46 m from the partner, 1.24 m up"
+      ],
+      "inputAt": "2026-10-19T07:24:28.3236577+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3613,
+          "slot": "RT throw"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49"
+      ],
+      "heldFinal": {
+        "ms": 7484,
+        "src": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 3,
+          "releases": 3,
+          "settles": 3,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 178,
+          "followed": 82,
+          "settledApplied": 78,
+          "broken": 0,
+          "presentRefused": 10,
+          "throws": 3,
+          "drops": 0,
+          "result": "settled"
+        },
+        "obs": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 2,
+          "releases": 2,
+          "settles": 2,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 289,
+          "followed": 116,
+          "settledApplied": 140,
+          "broken": 0,
+          "presentRefused": 14,
+          "throws": 1,
+          "drops": 1,
+          "result": "settled"
+        }
+      },
+      "sourcePhases": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "observerResults": [
+        "settled",
+        "held",
+        "following"
+      ],
+      "observerUseVariants": [
+        0,
+        6,
+        8
+      ],
+      "sourceBottle": null,
+      "observerBottle": [
+        -43.413,
+        -162.896,
+        67.3097
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "placebottle",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source",
+        "Held object: source phases 0,1,2,3; source holds 4, releases 4, settles 4, breaks 0; observer pinned samples 16, applied 383, followed 170, settled 186, broken 0, refused 20, results settled,no_wrist,held,following",
+        "Release gesture: observer use variants 0,6,7; source throws 3, drops 1",
+        "Held at 2811 ms: observer bottle 0.46 m from the partner, 1.23 m up",
+        "Held at 3460 ms: observer bottle 0.46 m from the partner, 1.24 m up",
+        "Resting bottles 0 m apart"
+      ],
+      "inputAt": "2026-10-19T07:25:24.1785447+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3722,
+          "slot": "X place"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49",
+        "0,81"
+      ],
+      "heldFinal": {
+        "ms": 7477,
+        "src": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 4,
+          "releases": 4,
+          "settles": 4,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 178,
+          "followed": 82,
+          "settledApplied": 78,
+          "broken": 0,
+          "presentRefused": 10,
+          "throws": 3,
+          "drops": 1,
+          "result": "settled"
+        },
+        "obs": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 2,
+          "releases": 2,
+          "settles": 2,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 383,
+          "followed": 170,
+          "settledApplied": 186,
+          "broken": 0,
+          "presentRefused": 20,
+          "throws": 1,
+          "drops": 1,
+          "result": "settled"
+        }
+      },
+      "sourcePhases": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "observerResults": [
+        "settled",
+        "no_wrist",
+        "held",
+        "following"
+      ],
+      "observerUseVariants": [
+        0,
+        6,
+        7
+      ],
+      "sourceBottle": [
+        -43.7175,
+        -162.397,
+        66.4325
+      ],
+      "observerBottle": [
+        -43.7176,
+        -162.397,
+        66.4327
+      ],
+      "restGap": 0.0,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "heldbottle",
+      "observer": "client",
+      "passed": false,
+      "failure": "Resting bottle missing in a world",
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source",
+        "Held object: source phases 0,1,2,3; source holds 3, releases 3, settles 3, breaks 0; observer pinned samples 14, applied 261, followed 111, settled 118, broken 0, refused 17, results settled,held,following",
+        "Release gesture: observer use variants 0,6,8; source throws 2, drops 1",
+        "Held at 2772 ms: observer bottle 0.47 m from the partner, 1.25 m up",
+        "Held at 3449 ms: observer bottle 0.47 m from the partner, 1.24 m up"
+      ],
+      "inputAt": "2026-10-19T07:26:20.2926421+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3701,
+          "slot": "RT throw"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49"
+      ],
+      "heldFinal": {
+        "ms": 7464,
+        "src": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 3,
+          "releases": 3,
+          "settles": 3,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 383,
+          "followed": 170,
+          "settledApplied": 186,
+          "broken": 0,
+          "presentRefused": 20,
+          "throws": 2,
+          "drops": 1,
+          "result": "settled"
+        },
+        "obs": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 4,
+          "releases": 4,
+          "settles": 4,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 261,
+          "followed": 111,
+          "settledApplied": 118,
+          "broken": 0,
+          "presentRefused": 17,
+          "throws": 3,
+          "drops": 1,
+          "result": "settled"
+        }
+      },
+      "sourcePhases": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "observerResults": [
+        "settled",
+        "held",
+        "following"
+      ],
+      "observerUseVariants": [
+        0,
+        6,
+        8
+      ],
+      "sourceBottle": null,
+      "observerBottle": [
+        -43.4937,
+        -163.001,
+        67.3036
+      ],
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "placebottle",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presents the use reach (peak weight 1)",
+        "Native pickup took the item on the source",
+        "Held object: source phases 0,1,2,3; source holds 4, releases 4, settles 4, breaks 0; observer pinned samples 15, applied 345, followed 156, settled 159, broken 0, refused 21, results settled,held,following",
+        "Release gesture: observer use variants 0,6,7; source throws 2, drops 2",
+        "Held at 2737 ms: observer bottle 0.47 m from the partner, 1.25 m up",
+        "Held at 3414 ms: observer bottle 0.47 m from the partner, 1.24 m up",
+        "Resting bottles 0 m apart"
+      ],
+      "inputAt": "2026-10-19T07:27:16.1439130+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [
+        {
+          "ms": 3679,
+          "slot": "X place"
+        }
+      ],
+      "potionCounts": [],
+      "peakUseWeight": 0.9999999,
+      "targetValid": false,
+      "itemTaken": false,
+      "activeSets": [
+        "0",
+        "0,49,81",
+        "0,49",
+        "0,81"
+      ],
+      "heldFinal": {
+        "ms": 7483,
+        "src": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 4,
+          "releases": 4,
+          "settles": 4,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 383,
+          "followed": 170,
+          "settledApplied": 186,
+          "broken": 0,
+          "presentRefused": 20,
+          "throws": 2,
+          "drops": 2,
+          "result": "settled"
+        },
+        "obs": {
+          "phase": 0,
+          "handle": 0,
+          "holds": 4,
+          "releases": 4,
+          "settles": 4,
+          "breaks": 0,
+          "refused": 0,
+          "remotePhase": 0,
+          "remoteHandle": 0,
+          "applied": 345,
+          "followed": 156,
+          "settledApplied": 159,
+          "broken": 0,
+          "presentRefused": 21,
+          "throws": 3,
+          "drops": 1,
+          "result": "settled"
+        }
+      },
+      "sourcePhases": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "observerResults": [
+        "settled",
+        "held",
+        "following"
+      ],
+      "observerUseVariants": [
+        0,
+        6,
+        7
+      ],
+      "sourceBottle": [
+        -43.656,
+        -162.375,
+        66.4327
+      ],
+      "observerBottle": [
+        -43.656,
+        -162.375,
+        66.4328
+      ],
+      "restGap": 0.0,
+      "restored": true
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}
