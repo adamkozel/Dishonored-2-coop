@@ -1,0 +1,132 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/middle_class_female_01.def: source states 0,41; unconscious in both worlds",
+        "Far Reach body: spots 180:0x2dc029dc; chosen 180; pulled 0x3fff0010; states 0,63,84; body moved source 6.31 m, host 5.7 m; health client 10/10, host 10/10"
+      ],
+      "target": {
+        "spawner": "script_spawner_docks_photograph",
+        "definition": "models/characters/def/generic/middle_class_female_01.def",
+        "position": [
+          -34.2445,
+          216.304,
+          4.44472
+        ],
+        "forward": [
+          0.13761805166533556,
+          0.9904853718535358
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -37.27788423881001,
+        216.27113573766192,
+        6.04472
+      ],
+      "sourceStart": [
+        -34.423,
+        215.016,
+        4.43751
+      ],
+      "prePitch": 20.0,
+      "replacedAt": 532,
+      "cameraMoved": [
+        -37.27788423881001,
+        216.27113573766192,
+        6.04472
+      ],
+      "targetMoved": 0.0,
+      "actedAt": 1174,
+      "pressedWhenReady": {
+        "t": 1174,
+        "entry": 1,
+        "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+        "state": 3
+      },
+      "trackSamples": 51,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        41
+      ],
+      "windowScenes": [],
+      "farReachGrant": "named_power_equip_requested",
+      "farReach": {
+        "body": [
+          -34.2922,
+          216.529,
+          4.75167
+        ],
+        "handle": "0x2dc029dc",
+        "hostBody": [
+          -34.2963,
+          215.936,
+          4.43851
+        ],
+        "hostHandle": "0x2dc029dc",
+        "spots": [
+          {
+            "offset": 180,
+            "at": [
+              -34.91148123249401,
+              212.07181582665908
+            ],
+            "yaw": 82.08996348701626,
+            "aimed": [
+              "0x2dc029dc"
+            ],
+            "hit": 6
+          }
+        ],
+        "chosen": 180,
+        "released": false,
+        "health": {
+          "client": {
+            "current": 10,
+            "maximum": 10,
+            "suppressed": true
+          },
+          "host": {
+            "current": 10,
+            "maximum": 10,
+            "suppressed": true
+          }
+        },
+        "end": {
+          "source": [
+            -35.0567,
+            210.291,
+            4.20247
+          ],
+          "host": [
+            -35.0567,
+            210.291,
+            4.20247
+          ]
+        },
+        "pulled": [
+          "0x3fff0010"
+        ],
+        "states": [
+          0,
+          63,
+          84
+        ],
+        "sourceMoved": 6.31,
+        "hostMoved": 5.7
+      }
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -1,0 +1,294 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native lethal of models/characters/def/generic/middle_class_female_01.def: source states 0,13,53,64; dead in both worlds",
+        "Target physics: host mode 0 then 0, client mode 0 then 0 (0 ragdoll)",
+        "Far Reach body: spots 180:0x3fff0010 135:0x3fff0010 225:0x3fff0010 90:0x3fff0010 270:0x3fff0010 45:0x3fff0010 315:0x3fff0010/0x2dc029dc; chosen 315; pulled ; states 0,27; body moved source 0 m, host 0 m; health client 0/10, host 0/10"
+      ],
+      "target": {
+        "spawner": "script_spawner_docks_photograph",
+        "definition": "models/characters/def/generic/middle_class_female_01.def",
+        "position": [
+          -34.5336,
+          216.344,
+          4.43588
+        ],
+        "forward": [
+          0.13761805166533556,
+          0.9904853718535358
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -37.56698423881001,
+        216.3111357376619,
+        6.035880000000001
+      ],
+      "sourceStart": [
+        -34.713,
+        215.056,
+        4.43751
+      ],
+      "prePitch": 20.0,
+      "actedAt": 349,
+      "pressedWhenReady": {
+        "t": 349,
+        "entry": 0,
+        "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+        "state": 3
+      },
+      "trackSamples": 57,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "sourceStates": [
+        0,
+        13,
+        53,
+        64
+      ],
+      "windowScenes": [],
+      "targetPhysics": {
+        "verdict": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.0173,
+              217.303,
+              4.5445
+            ],
+            "physics": "0x282a42b2210",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.0173,
+              217.303,
+              4.5445
+            ],
+            "physics": "0x24e9ad38220",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        },
+        "later": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.0173,
+              217.303,
+              4.5445
+            ],
+            "physics": "0x282a42b2210",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -35.0173,
+              217.303,
+              4.5445
+            ],
+            "physics": "0x24e9ad38220",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        }
+      },
+      "farReachGrant": "named_slot_occupied",
+      "farReachCorpseEntry": {
+        "result": "client_corpse",
+        "localPaired": false,
+        "pairedResult": "client_paired_corpse",
+        "waitMs": 4
+      },
+      "farReach": {
+        "body": [
+          -35.0173,
+          217.303,
+          4.5445
+        ],
+        "handle": "0x2dc029dc",
+        "hostBody": [
+          -35.0173,
+          217.303,
+          4.5445
+        ],
+        "hostHandle": "0x2dc029dc",
+        "spots": [
+          {
+            "offset": 180,
+            "at": [
+              -35.63658123249401,
+              212.84581582665908
+            ],
+            "yaw": 82.08996348701626,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 135,
+            "at": [
+              -38.60690311292479,
+              214.58919280499137
+            ],
+            "yaw": 37.089963487016156,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 225,
+            "at": [
+              -32.303492804991365,
+              213.7133968870752
+            ],
+            "yaw": 127.0899634870161,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 90,
+            "at": [
+              -39.47448417334091,
+              217.92228123249402
+            ],
+            "yaw": -7.910036512983844,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 270,
+            "at": [
+              -30.56011582665909,
+              216.68371876750598
+            ],
+            "yaw": 172.08996348701615,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 45,
+            "at": [
+              -37.73110719500863,
+              220.89260311292477
+            ],
+            "yaw": -52.910036512983666,
+            "aimed": [
+              "0x3fff0010"
+            ],
+            "hit": 0,
+            "sweep": [
+              1,
+              -1
+            ]
+          },
+          {
+            "offset": 315,
+            "at": [
+              -31.427696887075207,
+              220.01680719500862
+            ],
+            "yaw": -142.91003651298385,
+            "aimed": [
+              "0x3fff0010",
+              "0x2dc029dc"
+            ],
+            "hit": 1,
+            "sweep": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "chosen": 315,
+        "released": false,
+        "health": {
+          "client": {
+            "current": 0,
+            "maximum": 10,
+            "suppressed": false
+          },
+          "host": {
+            "current": 0,
+            "maximum": 10,
+            "suppressed": false
+          }
+        },
+        "end": {
+          "source": [
+            -35.0173,
+            217.303,
+            4.5445
+          ],
+          "host": [
+            -35.0173,
+            217.303,
+            4.5445
+          ]
+        },
+        "pulled": [],
+        "states": [
+          0,
+          27
+        ],
+        "sourceMoved": 0.0,
+        "hostMoved": 0.0
+      }
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

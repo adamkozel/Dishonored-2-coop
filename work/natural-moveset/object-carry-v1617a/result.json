@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachbottle",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Pull states 63@, power@, 84@, component@; moved in host esc_env_dunwall_streets_interior_bayle_104:2.656 gs_elite_female_sword_3175:0.027; moved in client esc_env_dunwall_streets_interior_bayle_104:gone",
+        "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.444,-163.082,67.252",
+        "Far Reach pull: source GrabGrappledEntity (84) samples 12; presented power variants 5,6,7,9"
+      ],
+      "grantResult": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "inputAt": "2026-10-19T19:39:48.2397932+02:00",
+      "holdDumps": 8,
+      "holdStateType": [
+        ".?AVarkPlayerStateUsePower@@",
+        ".?AVarkCpntPowerGrapple@@",
+        ".?AVarkPlayerStateUsePower@@",
+        ".?AVarkCpntPowerGrapple@@",
+        ".?AVarkPlayerStateGrabGrappledEntity@@",
+        ".?AVarkCpntPlayerSensorGrappleToMantle@@",
+        ".?AVarkCpntPlayerSensorGrapple@@",
+        ".?AVarkPlayerStateGrabGrappledEntity@@"
+      ],
+      "lootSamples": 0,
+      "slotPresses": [],
+      "potionCounts": [],
+      "peakUseWeight": 0.0,
+      "holdSamples": 0,
+      "bottleAfter": [
+        -43.444,
+        -163.082,
+        67.252
+      ],
+      "bottleBefore": [
+        -43.4437,
+        -163.081,
+        67.252
+      ],
+      "stateVtables": [
+        "63@",
+        "power@",
+        "84@",
+        "component@"
+      ],
+      "movers": {
+        "host": [
+          {
+            "name": "esc_env_dunwall_streets_interior_bayle_104",
+            "handle": "0x73a0354",
+            "change": 2.656,
+            "to": [
+              -43.4368,
+              -160.538,
+              68.2099
+            ]
+          },
+          {
+            "name": "gs_elite_female_sword_3175",
+            "handle": "0xc67088a",
+            "change": 0.027,
+            "to": [
+              -39.1414,
+              -162.858,
+              66.6944
+            ]
+          }
+        ],
+        "client": [
+          {
+            "name": "esc_env_dunwall_streets_interior_bayle_104",
+            "handle": "0x73a0354",
+            "change": "gone"
+          }
+        ]
+      },
+      "pullVariants": [
+        5,
+        6,
+        7,
+        9
+      ],
+      "pullState": 12,
+      "restored": true
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}

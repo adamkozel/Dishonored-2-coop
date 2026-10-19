@@ -1,0 +1,113 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Native choke of models/characters/def/generic/middle_class_female_01.def: source states 0,41; unconscious in both worlds",
+    "Far Reach body: spots 180:0x2dc029dc; chosen 180; pulled 0x3fff0010; states 0,63,84; body moved source 7.81 m, host 8.15 m"
+  ],
+  "target": {
+    "spawner": "script_spawner_docks_photograph",
+    "definition": "models/characters/def/generic/middle_class_female_01.def",
+    "position": [
+      -34.427,
+      216.329,
+      4.43588
+    ],
+    "forward": [
+      0.13761805166533556,
+      0.9904853718535358
+    ]
+  },
+  "kind": "choke",
+  "camera": [
+    -37.46038423881001,
+    216.29613573766193,
+    6.035880000000001
+  ],
+  "sourceStart": [
+    -34.606,
+    215.041,
+    4.43751
+  ],
+  "prePitch": 20.0,
+  "replacedAt": 562,
+  "cameraMoved": [
+    -37.73518423881001,
+    216.3341357376619,
+    6.035880000000001
+  ],
+  "targetMoved": 0.28,
+  "actedAt": 562,
+  "pressedWhenReady": {
+    "t": 562,
+    "entry": 1,
+    "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+    "state": 3
+  },
+  "trackSamples": 53,
+  "outcome": {
+    "host": "unconscious",
+    "client": "unconscious"
+  },
+  "sourceStates": [
+    0,
+    41
+  ],
+  "windowScenes": [],
+  "farReachGrant": "named_power_equip_requested",
+  "farReach": {
+    "body": [
+      -34.4866,
+      216.414,
+      4.60547
+    ],
+    "handle": "0x2dc029dc",
+    "hostBody": [
+      -34.9334,
+      216.823,
+      4.60173
+    ],
+    "hostHandle": "0x2dc029dc",
+    "spots": [
+      {
+        "offset": 180,
+        "at": [
+          -35.10588123249401,
+          211.95681582665907
+        ],
+        "yaw": 82.08996348701626,
+        "aimed": [
+          "0x2dc029dc"
+        ],
+        "hit": 7
+      }
+    ],
+    "chosen": 180,
+    "released": false,
+    "end": {
+      "source": [
+        -35.8617,
+        208.753,
+        3.91901
+      ],
+      "host": [
+        -35.8619,
+        208.753,
+        3.91908
+      ]
+    },
+    "pulled": [
+      "0x3fff0010"
+    ],
+    "states": [
+      0,
+      63,
+      84
+    ],
+    "sourceMoved": 7.81,
+    "hostMoved": 8.15
+  }
+}

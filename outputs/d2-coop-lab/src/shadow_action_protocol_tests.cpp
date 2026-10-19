@@ -388,7 +388,11 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
      check(validShadowAction(held,c,h),"held object with handle, key and transform");
      held.heldObjectPhase=5;check(!validShadowAction(held,c,h),"unknown held phase refused");
      held.heldObjectPhase=2;held.heldObjectPosition[0]=1e30f;check(!validShadowAction(held,c,h),"unbounded flight refused");
-     auto none=p;none.heldObjectHandle=3;check(!validShadowAction(none,c,h),"handle without a phase refused");}
+     auto none=p;none.heldObjectHandle=3;check(!validShadowAction(none,c,h),"handle without a phase refused");
+     // 1214fd (#115): the presentation fallbacks (18 unbound, 24 hold) carry the revalidated held or pulled object too.
+     auto fallback=p;fallback.state=18;fallback.heldObjectPhase=2;fallback.heldObjectHandle=0x073c0356;fallback.heldObjectKey=7;
+     fallback.heldObjectPosition={-40.f,-140.f,67.f};fallback.heldObjectAxis={1,0,0,0,1,0,0,0,1};check(validShadowAction(fallback,c,h),"unbound fallback carries a pulled object");
+     fallback.state=24;fallback.heldObjectPhase=4;check(validShadowAction(fallback,c,h),"hold fallback carries a broken object");}
     {auto hit=p;hit.state=1;hit.combatPhase=1;
       for(unsigned v:{15u,16u,17u}){hit.combatVariant=v;hit.combatDurationMs=v==17?800:v==15?866:666;check(validShadowAction(hit,c,h),"native hit recovery wire");
         auto bad=hit;bad.combatDurationMs++;check(!validShadowAction(bad,c,h),"unobserved recovery wire timing refused");

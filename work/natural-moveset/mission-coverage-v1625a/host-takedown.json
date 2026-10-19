@@ -1,0 +1,172 @@
+{
+  "source": "host",
+  "case": "takedown",
+  "observer": "client",
+  "passed": true,
+  "failure": "reset: Native read failed --player-states",
+  "checks": [
+    "Native choke of models/characters/def/generic/guard_male_small_01.def: source states 0,41; unconscious in both worlds",
+    "Far Reach body: spots 180:0x3fff0010 135:0x3fff0010 225: 90: 270: 45: 315: 0:; chosen ; pulled ; states ; body moved source 0.44 m, host 0.01 m"
+  ],
+  "target": {
+    "spawner": "script_spawner_checkpoint_guard_01",
+    "definition": "models/characters/def/generic/guard_male_small_01.def",
+    "position": [
+      4.43816,
+      59.1975,
+      15.953
+    ],
+    "forward": [
+      -0.16624491461247767,
+      0.9860844935224822
+    ]
+  },
+  "kind": "choke",
+  "camera": [
+    1.5547167310081687,
+    58.25502723407745,
+    17.553
+  ],
+  "sourceStart": [
+    4.65387,
+    57.9159,
+    15.952
+  ],
+  "prePitch": 20.0,
+  "actedAt": 343,
+  "pressedWhenReady": {
+    "t": 343,
+    "entry": 1,
+    "name": "models/characters/def/generic/guard_male_small_01.def_10724",
+    "state": 3
+  },
+  "trackSamples": 54,
+  "outcome": {
+    "host": "unconscious",
+    "client": "unconscious"
+  },
+  "sourceStates": [
+    0,
+    41
+  ],
+  "windowScenes": [],
+  "farReachGrant": "named_power_equip_requested",
+  "farReach": {
+    "body": [
+      4.64783,
+      58.6131,
+      16.2053
+    ],
+    "handle": "0x2dc829e4",
+    "hostBody": [
+      4.64827,
+      58.6126,
+      16.2065
+    ],
+    "hostHandle": "0x2dc829e4",
+    "spots": [
+      {
+        "offset": 180,
+        "at": [
+          5.395932115756148,
+          54.175719779148835
+        ],
+        "yaw": 99.56956172170489,
+        "aimed": [
+          "0x3fff0010"
+        ],
+        "hit": 0
+      },
+      {
+        "offset": 135,
+        "at": [
+          2.039116434204254,
+          54.946410276061904
+        ],
+        "yaw": 54.56956172170489,
+        "aimed": [
+          "0x3fff0010"
+        ],
+        "hit": 0
+      },
+      {
+        "offset": 225,
+        "at": [
+          8.314519723938098,
+          56.00438643420426
+        ],
+        "yaw": 144.5695617217049,
+        "aimed": [],
+        "hit": 0
+      },
+      {
+        "offset": 90,
+        "at": [
+          0.21044977914883045,
+          57.864997884243856
+        ],
+        "yaw": 9.569561721704867,
+        "aimed": [],
+        "hit": 0
+      },
+      {
+        "offset": 270,
+        "at": [
+          9.08521022085117,
+          59.36120211575615
+        ],
+        "yaw": -170.43043827829513,
+        "aimed": [],
+        "hit": 0
+      },
+      {
+        "offset": 45,
+        "at": [
+          0.9811402760619017,
+          61.22181356579575
+        ],
+        "yaw": -35.43043827829513,
+        "aimed": [],
+        "hit": 0
+      },
+      {
+        "offset": 315,
+        "at": [
+          7.256543565795747,
+          62.2797897239381
+        ],
+        "yaw": -125.43043827829513,
+        "aimed": [],
+        "hit": 0
+      },
+      {
+        "offset": 0,
+        "at": [
+          3.89972788424385,
+          63.05048022085117
+        ],
+        "yaw": -80.4304382782951,
+        "aimed": [],
+        "hit": 0
+      }
+    ],
+    "chosen": null,
+    "released": false,
+    "end": {
+      "source": [
+        4.91325,
+        58.2764,
+        16.1109
+      ],
+      "host": [
+        4.64212,
+        58.6062,
+        16.2039
+      ]
+    },
+    "pulled": [],
+    "states": [],
+    "sourceMoved": 0.44,
+    "hostMoved": 0.01
+  }
+}

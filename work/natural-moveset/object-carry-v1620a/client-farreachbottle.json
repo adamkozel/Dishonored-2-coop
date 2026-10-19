@@ -1,0 +1,189 @@
+{
+  "source": "client",
+  "case": "farreachbottle",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Pull states ; moved in host esc_env_dunwall_streets_interior_bayle_104:2.586 gs_elite_female_sword_3175:0.055; moved in client esc_env_dunwall_streets_interior_bayle_104:absent",
+    "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.444,-163.082,67.252",
+    "Far Reach pull: source GrabGrappledEntity (84) samples 9; presented power variants 4,5,6,7,9",
+    "Far Reach timeline: source phases 0>2>3, pulls 1, fallback packets 32, breaks 0, settles 1; observer 0/idle > 2/following > 3/settled, broken 0; client health 2 first zero never ms, unresolved from never ms; host health 2 first zero never ms, unresolved from never ms",
+    "Partner follows the pull: 6 of 6 flight samples on a remote phase"
+  ],
+  "grantResult": {
+    "grants": 3,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "healthComponents": {
+    "host": "0x1e74cbb2b80",
+    "client": "0x1f34bafbb70"
+  },
+  "inputAt": "2026-10-19T19:59:23.6221151+02:00",
+  "holdDumps": 0,
+  "holdStateType": [],
+  "lootSamples": 0,
+  "slotPresses": [],
+  "potionCounts": [],
+  "peakUseWeight": 0.0,
+  "holdSamples": 0,
+  "bottleAfter": [
+    -43.444,
+    -163.082,
+    67.252
+  ],
+  "bottleBefore": [
+    -43.4437,
+    -163.081,
+    67.252
+  ],
+  "stateVtables": [],
+  "movers": {
+    "host": [
+      {
+        "name": "esc_env_dunwall_streets_interior_bayle_104",
+        "handle": "0x73a0354",
+        "change": 2.586,
+        "to": [
+          -43.4339,
+          -160.614,
+          68.214
+        ]
+      },
+      {
+        "name": "gs_elite_female_sword_3175",
+        "handle": "0xc67088a",
+        "change": 0.055,
+        "to": [
+          -39.1308,
+          -162.845,
+          66.6991
+        ]
+      }
+    ],
+    "client": [
+      {
+        "name": "esc_env_dunwall_streets_interior_bayle_104",
+        "handle": "0x73a0354",
+        "change": "absent",
+        "resolves": false
+      }
+    ]
+  },
+  "heldAfterMovers": {
+    "src": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 0,
+      "pulls": 1,
+      "fallback": 32,
+      "releases": 0,
+      "settles": 1,
+      "breaks": 1,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 0,
+      "followed": 0,
+      "settledApplied": 0,
+      "broken": 0,
+      "presentRefused": 0,
+      "throws": 0,
+      "drops": 0,
+      "result": "idle"
+    },
+    "obs": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 0,
+      "pulls": 0,
+      "fallback": 0,
+      "releases": 0,
+      "settles": 0,
+      "breaks": 0,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 0,
+      "followed": 54,
+      "settledApplied": 192,
+      "broken": 1,
+      "presentRefused": 0,
+      "throws": 0,
+      "drops": 0,
+      "result": "broken"
+    }
+  },
+  "pullVariants": [
+    4,
+    5,
+    6,
+    7,
+    9
+  ],
+  "pullState": 9,
+  "heldTimeline": {
+    "source": [
+      "0",
+      "2",
+      "3"
+    ],
+    "observer": [
+      "0/idle",
+      "2/following",
+      "3/settled"
+    ],
+    "final": {
+      "ms": 7498,
+      "src": {
+        "phase": 3,
+        "handle": 121242452,
+        "holds": 0,
+        "pulls": 1,
+        "fallback": 32,
+        "releases": 0,
+        "settles": 1,
+        "breaks": 0,
+        "refused": 0,
+        "remotePhase": 0,
+        "remoteHandle": 0,
+        "applied": 0,
+        "followed": 0,
+        "settledApplied": 0,
+        "broken": 0,
+        "presentRefused": 0,
+        "throws": 0,
+        "drops": 0,
+        "result": "idle"
+      },
+      "obs": {
+        "phase": 0,
+        "handle": 0,
+        "holds": 0,
+        "pulls": 0,
+        "fallback": 0,
+        "releases": 0,
+        "settles": 0,
+        "breaks": 0,
+        "refused": 0,
+        "remotePhase": 3,
+        "remoteHandle": 121242452,
+        "applied": 0,
+        "followed": 54,
+        "settledApplied": 124,
+        "broken": 0,
+        "presentRefused": 0,
+        "throws": 0,
+        "drops": 0,
+        "result": "settled"
+      }
+    }
+  },
+  "flightFollow": {
+    "flight": 6,
+    "lost": 0,
+    "lostAt": []
+  },
+  "restored": true
+}

@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "corpsepull",
+      "observer": "host",
+      "passed": true,
+      "failure": "reset: Native read failed --player-states",
+      "checks": [
+        "Far Reach body: spots 180: 135: 225: 90: 270: 45: 315: 0:; chosen ; pulled ; states ; body moved source 0 m, host 0 m"
+      ],
+      "corpse": [
+        -84.4486,
+        91.518,
+        37.4764
+      ],
+      "farReachGrant": "refused_not_gameplay",
+      "farReach": {
+        "body": [
+          -84.4485,
+          91.5179,
+          37.4763
+        ],
+        "handle": "0x2df72a13",
+        "hostBody": [
+          -84.4486,
+          91.518,
+          37.4764
+        ],
+        "hostHandle": "0x2df72a13",
+        "spots": [
+          {
+            "offset": 180,
+            "at": [
+              -88.9485,
+              91.5179
+            ],
+            "yaw": 0.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 135,
+            "at": [
+              -87.63048051533946,
+              94.69988051533946
+            ],
+            "yaw": -45.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 225,
+            "at": [
+              -87.63048051533946,
+              88.33591948466054
+            ],
+            "yaw": 45.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 90,
+            "at": [
+              -84.4485,
+              96.0179
+            ],
+            "yaw": -90.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 270,
+            "at": [
+              -84.4485,
+              87.0179
+            ],
+            "yaw": 90.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 45,
+            "at": [
+              -81.26651948466053,
+              94.69988051533946
+            ],
+            "yaw": -135.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 315,
+            "at": [
+              -81.26651948466053,
+              88.33591948466054
+            ],
+            "yaw": 135.0,
+            "aimed": [],
+            "hit": 0
+          },
+          {
+            "offset": 0,
+            "at": [
+              -79.9485,
+              91.5179
+            ],
+            "yaw": 180.0,
+            "aimed": [],
+            "hit": 0
+          }
+        ],
+        "chosen": null,
+        "released": false,
+        "end": {
+          "source": [
+            -84.4485,
+            91.5179,
+            37.4763
+          ],
+          "host": [
+            -84.4486,
+            91.518,
+            37.4764
+          ]
+        },
+        "pulled": [],
+        "states": [],
+        "sourceMoved": 0.0,
+        "hostMoved": 0.0
+      }
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
