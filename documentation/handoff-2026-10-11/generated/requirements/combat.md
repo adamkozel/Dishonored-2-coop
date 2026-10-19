@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:00:21.970571+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:09:00.198184+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1492,7 +1492,7 @@ Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close 
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close attacks per role; view still open. Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). Neither recording shows a partner's kick body, so this needs a partner-facing take. Candidates require animation review and appropriate game-state/contact binding. 1109 (candidate1108, Edge of the World): the native player kick (player_kick.damage, zero-normal hit) on a host-authoritative guard is captured once on the host and applied once on the client; guard health converges. Kick body presentation on the remote player and client-sourced kicks remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "mission-combat-v1109/combat-client.mp4",
@@ -1501,14 +1501,65 @@ Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close 
   "evidence": [
     "../movement-integration/mission-outcome-audit-v1110.json",
     "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-    "../movement-integration/counter-parked-audit-v1285.json"
-  ]
+    "../movement-integration/counter-parked-audit-v1285.json",
+    "coverage-v1445a/result.json",
+    "coverage-v1445b/result.json",
+    "coverage-v1359a/result.json",
+    "coverage-v1359b/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1453-kick.json",
+    "decision": "complete",
+    "scope": "Both roles: the native player kick presented on the partner as the kick clip (variant 17) from the source's throwhit kick scene: Emily's crouched-attack kick at a guard by a railing, Corvo's Blink Assault kick. A plain crouched-attack kick by Corvo is not reproduced in the lab because the host's guard always perceives him.",
+    "takes": [
+      {
+        "take": "coverage-v1445a",
+        "cases": [
+          "client-kickn"
+        ]
+      },
+      {
+        "take": "coverage-v1445b",
+        "cases": [
+          "client-kickn"
+        ]
+      },
+      {
+        "take": "coverage-v1359a",
+        "cases": [
+          "host-blinkkick"
+        ]
+      },
+      {
+        "take": "coverage-v1359b",
+        "cases": [
+          "host-blinkkick"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1445a/client-kickn-observer.mp4",
+        "verdict": "Corvo's window, from the walkway west of the railing: Emily, crouched in front of the guard, rises into a high kick to his chest; he reels back against the railing, then draws and fights her. Natural full-body kick. Accepted."
+      },
+      {
+        "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+        "verdict": "(Reviewed for audit v1356.) Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/mission-outcome-audit-v1110.json](<../../../../work/movement-integration/mission-outcome-audit-v1110.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [evidence: ../movement-integration/counter-parked-audit-v1285.json](<../../../../work/movement-integration/counter-parked-audit-v1285.json>)
+- [evidence: coverage-v1445a/result.json](<../../../../work/natural-moveset/coverage-v1445a/result.json>)
+- [evidence: coverage-v1445b/result.json](<../../../../work/natural-moveset/coverage-v1445b/result.json>)
+- [evidence: coverage-v1359a/result.json](<../../../../work/natural-moveset/coverage-v1359a/result.json>)
+- [evidence: coverage-v1359b/result.json](<../../../../work/natural-moveset/coverage-v1359b/result.json>)
 - [in_game_recordings: mission-combat-v1109/combat-client.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-client.mp4>)
 - [in_game_recordings: mission-combat-v1109/combat-host.mp4](<../../../../work/natural-moveset/mission-combat-v1109/combat-host.mp4>)
 ## death_variants

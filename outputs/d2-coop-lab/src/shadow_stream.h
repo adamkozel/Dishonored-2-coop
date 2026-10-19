@@ -148,7 +148,7 @@ unsigned shadowFocusedUseVariant(std::uintptr_t base){
 // Sneaking6) presents the generic use reach toward the focused item; a consumed elixir (health or
 // mana potion quantity drop, last valid count kept across the item wheel) presents the same reach
 // to the mouth. Presentation only: no item, inventory or health outcome is synthesized.
-struct ShadowGesture {bool wasLoot=false,wasHold=false;std::uint64_t holds=0;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;} shadowGesture;
+struct ShadowGesture {bool wasLoot=false,wasHold=false;std::uint64_t holds=0;int potions[2]{-1,-1};std::uint64_t epoch=0;unsigned nextKind=1;ULONGLONG nextPotionRead=0;std::uint64_t loots=0,drinks=0;ULONGLONG releasePending=0;std::uint64_t throws=0,drops=0;} shadowGesture;
 // 1214al (#11): use-path diagnostics. Takes 1228m-1228q: the client's lock and door uses register at the
 // source but the host never presents them, while client taps and host locks/doors do.
 std::uint64_t shadowUseSent=0,shadowUseReceived=0,shadowUseAccepted=0,shadowUseRejected=0;unsigned shadowUseRejectReason=0,shadowUseLastVariant=0,shadowUseLastEvent=0;
@@ -162,8 +162,12 @@ void serviceShadowGestures(const NativePlayerStates& states,std::uintptr_t base,
     shadowGesture.wasLoot=loot;
     // 1214m: a held native movable (HoldObject49) holds the reach; its end finishes it.
     const bool hold=nativePlayerGroundHoldObjectStates(states,base);
-    if(hold&&!shadowGesture.wasHold&&!useActive){shadowUse.targetValid=false;startShadowUse(6);++shadowGesture.holds;}
-    else if(!hold&&shadowGesture.wasHold&&shadowUse.variant==6){shadowUse.targetValid=false;startShadowUse(7);}
+    // 1214eb: the release waits for the held object's flight (fillShadowHeldObject decides within 160 ms: 25 cm or more
+    // is a throw, 8, otherwise a placement or drop, 7); without the object's track it falls back to 7 after 250 ms.
+    if(hold&&!shadowGesture.wasHold&&!useActive){shadowUse.targetValid=false;startShadowUse(6);++shadowGesture.holds;shadowGesture.releasePending=0;}
+    else if(!hold&&shadowGesture.wasHold&&shadowUse.variant==6)shadowGesture.releasePending=GetTickCount64();
+    if(shadowGesture.releasePending&&(shadowUse.variant!=6||GetTickCount64()-shadowGesture.releasePending>=250)){
+        if(shadowUse.variant==6){shadowUse.targetValid=false;startShadowUse(7);++shadowGesture.drops;}shadowGesture.releasePending=0;}
     shadowGesture.wasHold=hold;
     if(shadowGesture.epoch!=outgoing.worldEpoch){shadowGesture.epoch=outgoing.worldEpoch;shadowGesture.potions[0]=shadowGesture.potions[1]=-1;}
     const auto tick=GetTickCount64();if(tick<shadowGesture.nextPotionRead)return;
@@ -248,7 +252,7 @@ unsigned shadowDeathVariant(ULONGLONG tick){
 // (1433b/c, confirmed runtime; map entities share handles across the two worlds). While it is held the source sends phase
 // 1 with its handle, name key and world transform; after the throw or drop it sends the flight (phase 2) until the object
 // rests 0.6 s (phase 3, sent 1 s) or is gone (phase 4, sent 1 s); 6 s after the release it counts as settled.
-struct ShadowHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;ULONGLONG releasedAt=0,stillSince=0,endAt=0;float last[3]{},axis[9]{};};
+struct ShadowHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;ULONGLONG releasedAt=0,stillSince=0,endAt=0;float last[3]{},axis[9]{},releaseFrom[3]{};};
 ShadowHeldObject shadowHeld{};std::uint64_t shadowHeldHolds=0,shadowHeldReleases=0,shadowHeldSettles=0,shadowHeldBreaks=0,shadowHeldRefused=0;
 inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std::uint64_t key,float* position,float* axis,std::uint64_t* keyOut=nullptr){
     const auto actor=worldIdentityEntity(memoryRead,game,handle);std::uintptr_t text=0;std::string name;
@@ -266,12 +270,17 @@ void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,C
         if(h.phase!=1||h.handle!=holding)++shadowHeldHolds;
         h.handle=holding;h.key=key;h.phase=1;h.releasedAt=h.stillSince=h.endAt=0;std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
     }else if(h.handle&&(h.phase==1||h.phase==2)){
-        if(h.phase==1){h.phase=2;h.releasedAt=tick;h.stillSince=0;++shadowHeldReleases;}
+        if(h.phase==1){h.phase=2;h.releasedAt=tick;h.stillSince=0;++shadowHeldReleases;std::memcpy(h.releaseFrom,h.last,12);}
         if(!readHeldObjectTransform(states.player.game,h.handle,h.key,position,axis)){h.phase=4;h.endAt=tick+1000;++shadowHeldBreaks;}
         else{float d=0;for(unsigned i=0;i<3;++i){const float v=position[i]-h.last[i];d+=v*v;}std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
             if(d<1e-4f){if(!h.stillSince)h.stillSince=tick;}else h.stillSince=0;
             if((h.stillSince&&tick-h.stillSince>=600)||tick-h.releasedAt>=6000){h.phase=3;h.endAt=tick+1000;++shadowHeldSettles;}}
     }else if(h.phase>=3&&tick>=h.endAt)h=ShadowHeldObject{};
+    // 1214eb: throw or drop, decided from the released object's first 160 ms.
+    if(shadowGesture.releasePending&&shadowUse.variant==6){float d=0;
+        if(h.handle&&h.phase>=2)for(unsigned i=0;i<3;++i){const float v=h.last[i]-h.releaseFrom[i];d+=v*v;}
+        if(d>=.0625f){shadowUse.targetValid=false;startShadowUse(8);++shadowGesture.throws;shadowGesture.releasePending=0;}
+        else if(tick-shadowGesture.releasePending>=160){shadowUse.targetValid=false;startShadowUse(7);++shadowGesture.drops;shadowGesture.releasePending=0;}}
     if(!h.phase||!h.handle||!h.key)return;
     p.heldObjectHandle=h.handle;p.heldObjectKey=h.key;p.heldObjectPhase=h.phase;
     for(unsigned i=0;i<3;++i)p.heldObjectPosition[i]=h.last[i];for(unsigned i=0;i<9;++i)p.heldObjectAxis[i]=h.axis[i];
@@ -735,10 +744,10 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
-    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"result\":\"%s\"},",
+    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
         shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
         static_cast<unsigned long long>(shadowHeldBreaks),static_cast<unsigned long long>(shadowHeldRefused),remoteHeld.phase,remoteHeld.handle,static_cast<unsigned long long>(partnerHeld.applied),
-        static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),partnerHeld.result);
+        static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),static_cast<unsigned long long>(shadowGesture.throws),static_cast<unsigned long long>(shadowGesture.drops),partnerHeld.result);
     fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",
         static_cast<unsigned long long>(shadowStaggerReceived),static_cast<unsigned long long>(shadowStaggerAccepted),static_cast<unsigned long long>(shadowStaggerRejected),shadowStaggerLastReject,shadowStaggerLastStateReject);
     fprintf(f,"\"lateHolds\":%llu,\"lateActionAgeMs\":%llu,",shadowStream.lateHolds,shadowStream.lastLateAction?GetTickCount64()-shadowStream.lastLateAction:0ull);

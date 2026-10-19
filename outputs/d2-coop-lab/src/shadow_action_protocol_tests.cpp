@@ -548,13 +548,15 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     }
     {   // 1213: native use (state 75) -> authored interaction on the ground action only.
       auto use=p;use.state=0;use.combatVariant=0;use.combatPhase=0;use.combatDurationMs=0;use.airStage=0;use.useEvent=3;
-      for(unsigned v=1;v<=7;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
+      for(unsigned v=1;v<=8;++v){use.useVariant=v;use.useDurationMs=UsePresentation::duration(v);use.useTimeMs=use.useDurationMs/2;check(validShadowAction(use,c,h),"native use interaction accepted on the ground");}
       use.useVariant=2;use.useDurationMs=3200;use.useTimeMs=100;
       auto bad=use;bad.version=73;check(!validShadowAction(bad,c,h),"pre-use wire refused");
       bad=use;bad.useDurationMs=2300;check(!validShadowAction(bad,c,h),"use duration bound to its variant");
       bad=use;bad.useTimeMs=3201;check(!validShadowAction(bad,c,h),"use clock bounded");
       bad=use;bad.useEvent=0;check(!validShadowAction(bad,c,h),"use needs an incarnation");
-      bad=use;bad.useVariant=8;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      bad=use;bad.useVariant=9;bad.useDurationMs=0;check(!validShadowAction(bad,c,h),"unknown use variant refused");
+      check(UsePresentation::clip(8)==256&&UsePresentation::duration(8)==330&&std::fabs(UsePresentation::clipAmount(8,0,330)-.35f)<1e-6f&&
+            std::fabs(UsePresentation::clipAmount(8,330,330)-1.f)<1e-6f,"1214eb: a held object's throw plays the grenade overhand throw from its wind-up's end");
       check(UsePresentation::clip(6)==369&&UsePresentation::clip(7)==369&&std::fabs(UsePresentation::clipAmount(6,30000,60000)-UsePresentation::kHoldAmount)<1e-6f&&
             UsePresentation::clipAmount(6,800,60000)<UsePresentation::kHoldAmount&&std::fabs(UsePresentation::clipAmount(7,0,1300)-UsePresentation::kHoldAmount)<1e-6f&&
             std::fabs(UsePresentation::clipAmount(7,1300,1300)-1.f)<1e-6f&&UsePresentation::contact(UsePresentation::kHoldAmount)>.99f,"held objects (1269b) hold the reach at full contact, then finish it");

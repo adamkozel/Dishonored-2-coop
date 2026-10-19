@@ -18,17 +18,20 @@ struct UsePresentation {
     // 1214m (#11 carry_object_place_throw, take 1269b): 6 holds a native movable object - the
     // generic reach approaches its contact pose and holds it while HoldObject49 lasts (up to 60 s);
     // 7 releases it (thrown or put down) by finishing the same reach in 1.3 s.
-    static unsigned duration(unsigned variant){static const unsigned d[]={0,2300,3200,4800,5200,3200,60000,1300};return variant<=7?d[variant]:0;}
-    static unsigned clip(unsigned variant){return variant>=6?369:368+variant;}
+    // 1214eb (protocol 79): 8 throws it - the native grenade overhand throw (throw_high, clip 256) from the end of its
+    // wind-up (35%) in 330 ms; the source picks 8 when the released object travels 25 cm within 160 ms.
+    static unsigned duration(unsigned variant){static const unsigned d[]={0,2300,3200,4800,5200,3200,60000,1300,330};return variant<=8?d[variant]:0;}
+    static unsigned clip(unsigned variant){return variant==8?256:variant>=6?369:368+variant;}
     static constexpr float kHoldAmount=.45f;
     static float clipAmount(unsigned variant,double elapsed,unsigned duration){
         if(variant==6)return (std::min)(kHoldAmount,float(elapsed/2300.));
         if(variant==7)return kHoldAmount+(1-kHoldAmount)*(std::min)(1.f,float(elapsed/duration));
+        if(variant==8)return .35f+.65f*(std::min)(1.f,float(elapsed/duration));
         return (std::min)(1.f,float(elapsed/duration));}
     static bool valid(const Sample& s){
         if(s.targetValid&&!s.variant)return false;
         if(s.targetValid)for(float f:s.target)if(!std::isfinite(f)||std::fabs(f)>100000.f)return false;
-        return std::isfinite(s.time)&&s.variant<=7&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
+        return std::isfinite(s.time)&&s.variant<=8&&s.duration==duration(s.variant)&&s.elapsed<=s.duration&&(!s.variant||s.event);}
     // #6: hand-reach weight over a clip: none while reaching out (0-12%), eased in to full contact
     // (30%), held while operating, eased out during recovery (72-92%).
     static float contact(float amount){

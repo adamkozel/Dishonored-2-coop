@@ -1,0 +1,96 @@
+{
+  "source": "host",
+  "case": "heldbottle",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presents the use reach (peak weight 1)",
+    "Native pickup took the item on the source",
+    "Held object: source phases 0,1,2,3; source holds 1, releases 1, settles 1, breaks 0; observer pinned samples 13, applied 81, followed 22, settled 33, broken 0, refused 5, results idle,no_wrist,held,following,settled",
+    "Held at 2769 ms: observer bottle 0.47 m from the partner, 1.35 m up",
+    "Held at 3399 ms: observer bottle 0.47 m from the partner, 1.35 m up",
+    "Resting bottles 0.047 m apart"
+  ],
+  "inputAt": "2026-10-19T07:07:26.0336693+02:00",
+  "holdDumps": 0,
+  "holdStateType": [],
+  "lootSamples": 0,
+  "slotPresses": [
+    {
+      "ms": 3668,
+      "slot": "RT throw"
+    }
+  ],
+  "potionCounts": [],
+  "peakUseWeight": 0.9999999,
+  "targetValid": false,
+  "itemTaken": false,
+  "activeSets": [
+    "0",
+    "0,49,81",
+    "0,49"
+  ],
+  "heldFinal": {
+    "ms": 7407,
+    "src": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 1,
+      "releases": 1,
+      "settles": 1,
+      "breaks": 0,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 194,
+      "followed": 89,
+      "settledApplied": 94,
+      "broken": 0,
+      "presentRefused": 13,
+      "result": "settled"
+    },
+    "obs": {
+      "phase": 0,
+      "handle": 0,
+      "holds": 2,
+      "releases": 2,
+      "settles": 2,
+      "breaks": 0,
+      "refused": 0,
+      "remotePhase": 0,
+      "remoteHandle": 0,
+      "applied": 81,
+      "followed": 22,
+      "settledApplied": 33,
+      "broken": 0,
+      "presentRefused": 5,
+      "result": "settled"
+    }
+  },
+  "sourcePhases": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "observerResults": [
+    "idle",
+    "no_wrist",
+    "held",
+    "following",
+    "settled"
+  ],
+  "sourceBottle": [
+    -43.4493,
+    -162.886,
+    67.3538
+  ],
+  "observerBottle": [
+    -43.4369,
+    -162.901,
+    67.311
+  ],
+  "restGap": 0.047,
+  "restored": true
+}

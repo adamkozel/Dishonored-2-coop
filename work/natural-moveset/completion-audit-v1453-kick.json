@@ -1,0 +1,50 @@
+{
+  "audit": "completion-audit-v1453-kick",
+  "family": "combat",
+  "candidate": "candidate-npc-combat-v1214dz",
+  "method": "The player kick is one native move: the throwhit scene's kick subscene (800 ms) over Running 0 + Slash 39, playing ply_body_throw_hit_kick and binding the kicked NPC (probe 1360a, runtime and static). The player's throw-hit sensor (arkCpntPlayerSensorThrowHit: NPCs, potential ledges, breakable targets; static, names only) picks it when the attacked NPC is unaware and has a ledge or breakable behind it; Blink Assault (Corvo, blink_attack_focus) plays the same kick on arrival. The source sends it as combat variant 17 with the scene clock, and the partner plays the native kick clip at full weight. Emily: harness 1436/1445 places the Dunwall Tower railing guard on the host (coop_lab_npc_place, lab only) 1.1 m in front of her; she crouches and attacks, and the host's guard, which does not perceive the partner, is still idle, so the native kick plays (1445a/b: throwhit seen in the scene watch, variant 17 in 5 and 6 samples). Corvo: in the host's own world the placed guard always perceives him at that range, even facing away, and his crouched attack becomes a sneak slash or a combat fatality (1436b, 1445a/b, 1449a); his kick is recorded through Blink Assault (1359a/b: blink presented, then the kick as variant 17 in 5 and 6 samples). The kick's damage on a host-authoritative guard is applied once in each world (1109).",
+  "items": [
+    {
+      "id": "kick_or_shove_if_present",
+      "decision": "complete",
+      "scope": "Both roles: the native player kick presented on the partner as the kick clip (variant 17) from the source's throwhit kick scene: Emily's crouched-attack kick at a guard by a railing, Corvo's Blink Assault kick. A plain crouched-attack kick by Corvo is not reproduced in the lab because the host's guard always perceives him.",
+      "takes": [
+        {
+          "take": "coverage-v1445a",
+          "cases": [
+            "client-kickn"
+          ]
+        },
+        {
+          "take": "coverage-v1445b",
+          "cases": [
+            "client-kickn"
+          ]
+        },
+        {
+          "take": "coverage-v1359a",
+          "cases": [
+            "host-blinkkick"
+          ]
+        },
+        {
+          "take": "coverage-v1359b",
+          "cases": [
+            "host-blinkkick"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "coverage-v1445a/client-kickn-observer.mp4",
+          "verdict": "Corvo's window, from the walkway west of the railing: Emily, crouched in front of the guard, rises into a high kick to his chest; he reels back against the railing, then draws and fights her. Natural full-body kick. Accepted."
+        },
+        {
+          "video": "coverage-v1359b/host-blinkkick-observer.mp4",
+          "verdict": "(Reviewed for audit v1356.) Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}
