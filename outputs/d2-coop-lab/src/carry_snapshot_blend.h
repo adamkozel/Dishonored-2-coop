@@ -67,7 +67,9 @@ bool startCarrySnapshot(CarrySnapshotBlend& out,const NativeSkeleton& victim,con
     carrySnapshotRefusal=6;carrySnapshotOldInput=s.oldInput;carrySnapshotReusedNative=false;
     {bool empty=true;for(unsigned char v:s.oldInput)if(v)empty=false;
      std::uintptr_t bound=0;std::memcpy(&bound,s.oldInput.data(),8);
-     if(!empty){if(bound!=s.animation+0x2c60)return false;carrySnapshotReusedNative=true;}}
+     // 1214dv: 1277x read [0x0, 0x201] there: nothing bound, only flag bits. Only a non-null binding of another buffer
+     // is a native recovery owner.
+     if(bound&&bound!=s.animation+0x2c60)return false;if(!empty)carrySnapshotReusedNative=true;}
     carrySnapshotRefusal=7;MEMORY_BASIC_INFORMATION region{};
     if(!VirtualQuery(reinterpret_cast<void*>(s.buffer),&region,sizeof(region))||region.State!=MEM_COMMIT||
        (region.Protect&(PAGE_GUARD|PAGE_NOACCESS))||!(region.Protect&(PAGE_READWRITE|PAGE_WRITECOPY))||

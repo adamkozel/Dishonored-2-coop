@@ -513,7 +513,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
                 (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10)||stunActive);
         const unsigned eligibilityMask=(!semanticValid?1u:0u)|(!physicalEligible?2u:0u)|
             (shadowStream.until<=tick?4u:0u)|(!shadowStream.peerReady?8u:0u)|
-            (!shadowStream.lastState||tick-shadowStream.lastState>=presentationFreshMs()?16u:0u)|(!actionEligible?32u:0u)|(shadowAction.actor?64u:0u);
+            (!shadowStream.lastState||(tick-shadowStream.lastState>=presentationFreshMs()&&!shadowStreamLateHold(tick))?16u:0u)|(!actionEligible?32u:0u)|(shadowAction.actor?64u:0u);
         const bool eligible=eligibilityMask==0;
         if(!eligible){
             ++p.eligibilityFailures;
