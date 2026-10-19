@@ -295,6 +295,32 @@ int main(int argc, char** argv) {
         }
         std::cout<<"]}\n";return 0;
     }
+    if(argc==3&&!std::strcmp(argv[2],"--takedown-sensor")){
+        // 1214es (#11 seated): the player's takedown sensor, read-only (component type 0x39c5be0, ctor 0x1403af060 sets
+        // vtable 0x1b3f998: five 0x38-byte target entries at +0x40, each with a handle at entry+0x20 (0x3fff0010 none);
+        // the choke sensor's picker 0x1403a6460 needs +0x1dd set and the entry chosen by the table at 0x22ffed8 indexed
+        // by +0x1d8 to name its target; confirmed static). Every entry is printed with its first 14 dwords, the mode
+        // +0x1d8, the bytes +0x1dc..+0x1e0 and +0x1e4.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0;unsigned count=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b3f998){sensor=m;break;}
+        std::int32_t mode=0,word1e4=0,table[5]{};unsigned char bytes[5]{};std::uint32_t entries[5][14]{};
+        if(!sensor||!reader(sensor+0x1d8,&mode,4)||!reader(sensor+0x1dc,bytes,5)||!reader(sensor+0x1e4,&word1e4,4)||
+           !reader(base+0x22ffed8,table,sizeof(table))||!reader(sensor+0x40,entries,sizeof(entries)))return 59;
+        const int active=(mode>=0&&mode<5)?table[mode]:-1;
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"mode\":"<<mode<<",\"active\":"<<active<<",\"ready1dd\":"<<unsigned(bytes[1])
+            <<",\"bytes1dc\":["<<unsigned(bytes[0])<<","<<unsigned(bytes[1])<<","<<unsigned(bytes[2])<<","<<unsigned(bytes[3])<<","<<unsigned(bytes[4])<<"],\"word1e4\":"<<word1e4<<",\"entries\":[";
+        for(unsigned i=0;i<5;++i){const std::uint32_t h=entries[i][8];std::string name;bool named=(h>>16)!=0x3fff&&h;
+            if(named){const auto actor=worldIdentityEntity(reader,game,h);std::uintptr_t text=0;
+                if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))named=false;}
+            std::cout<<(i?",":"")<<"{\"index\":"<<i<<",\"handle\":"<<h<<",\"name\":"<<jsonString(named?name:std::string())<<",\"dwords\":[";
+            for(unsigned k=0;k<14;++k)std::cout<<(k?",":"")<<entries[i][k];std::cout<<"]}";}
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3&&!std::strcmp(argv[2],"--choke-sensor")){
         // 1214er (#11 seated): the native choke sensor, read-only (arkCpntPlayerSensorChoke: a 0x60-byte player component,
         // factory 0x140916670, ctor 0x1403a6310 sets vtable 0x1b3e158, +0x50 = 0x3fff0010 (no target), +0x54 = 0 and

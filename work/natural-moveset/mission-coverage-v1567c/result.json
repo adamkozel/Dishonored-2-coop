@@ -1,0 +1,103 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,44,54,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,54,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_37",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ],
+        "forward": [
+          -0.9997180572072879,
+          0.023744601358747338
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 52,
+        "requests": [
+          1
+        ],
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ]
+      },
+      "approachYaw": -90.0,
+      "camera": [
+        0.9797207577667,
+        57.99826067833296,
+        42.601
+      ],
+      "sourceStart": [
+        4.16122,
+        56.1708,
+        42.2447
+      ],
+      "prePitch": 35.0,
+      "chokeAtPress": {
+        "t": 2059,
+        "target": 1073676304,
+        "targetName": "",
+        "flag54": 0
+      },
+      "windowAtPress": {
+        "t": 2059,
+        "targetName": "",
+        "hasPoint": true,
+        "sill": 1.1,
+        "angleOk": false,
+        "sillOk": false,
+        "grounded": true
+      },
+      "replacedAt": 608,
+      "cameraMoved": [
+        0.9797207577667,
+        57.99826067833296,
+        42.601
+      ],
+      "targetMoved": 0.0,
+      "sittingAtPress": {
+        "t": 608,
+        "source": true,
+        "sourceRequests": 1,
+        "host": true
+      },
+      "crept": 1393,
+      "creptEnd": 1721,
+      "stanceAfterCreep": 1,
+      "stanceBeforePress": 0,
+      "actedAt": 2059,
+      "chokeAfter": 2260,
+      "windowAfter": 2260,
+      "trackSamples": 47,
+      "chokeSamples": 4,
+      "chokeTargeted": 0,
+      "windowSamples": 4,
+      "windowAvailable": 0,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        54,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
