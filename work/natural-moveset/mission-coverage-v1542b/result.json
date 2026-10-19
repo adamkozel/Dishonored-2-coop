@@ -1,0 +1,81 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,3,6,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,3,6,44,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_108",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          2.79835,
+          38.308,
+          20
+        ],
+        "forward": [
+          -0.9227750712631532,
+          -0.3853390297585784
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 56,
+        "requests": [
+          1
+        ],
+        "position": [
+          2.79835,
+          38.308,
+          20
+        ]
+      },
+      "camera": [
+        4.369615871344155,
+        35.7130773496019,
+        21.6
+      ],
+      "sourceStart": [
+        3.98526,
+        38.847,
+        21.0036
+      ],
+      "prePitch": 22.0,
+      "replacedAt": 528,
+      "cameraMoved": [
+        4.369615871344155,
+        35.7130773496019,
+        21.6
+      ],
+      "targetMoved": 0.0,
+      "crept": 1103,
+      "creptEnd": 1449,
+      "stanceAfterCreep": 1,
+      "sittingAtPress": {
+        "t": 1486,
+        "source": true,
+        "sourceRequests": 1,
+        "host": true
+      },
+      "actedAt": 1486,
+      "trackSamples": 49,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        3,
+        6,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
