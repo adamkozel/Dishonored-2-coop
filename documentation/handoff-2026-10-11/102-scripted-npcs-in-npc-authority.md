@@ -67,7 +67,7 @@ Candidates 1214ex and 1214ey fix both causes.
 - Meagan (a companion) is still unreadable; she is never a takedown target.
 - The `-PlaceBoth` and `-ClientPrebind` fixture options are no longer needed for posted NPCs.
 
-## Orphan and nonhuman NPCs (#118, 1214fa; in progress)
+## Orphan and nonhuman NPCs (#118, 1214fa-fb)
 
 - **Dormant gravehounds** are paused by the game itself (state-trigger-v1594b), so 1214ex's lease rule binds them on both
   sides. Nonhuman rigs (22 and 86 joints) are bound in both worlds (1599a/b).
@@ -87,6 +87,8 @@ Candidates 1214ex and 1214ey fix both causes.
       (47 reverse poses on the 105-joint rig). The death was shared and the hound is dead in both worlds; in Corvo's window
       she seizes it from behind and it ends dead on the ground.
     - Corvo's (1608b): Emily's copy followed the host's stream to a corpse.
+  - **Gravehound, Emily:** the native assassination (1615a). In Corvo's window she seizes the hound and it collapses
+    into its glowing bones, as in her world (the host shared the death). Both end alive after the native revival.
   - **Gravehound, Corvo:** the native assassination (1614a, harness 1612 with a 5 s pre-settle so the host binds the
     hound first). The host shared the death; in Emily's window the hound collapses into bones, burns with the resurrection
     glow and rises again. The native revival plays in both worlds, so both end alive, as in single player.

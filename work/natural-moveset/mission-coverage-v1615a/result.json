@@ -1,0 +1,84 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: Target outcome host alive, client alive, expected dead",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "Target outcome host alive, client alive, expected dead",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_hound_office_2",
+        "definition": "models/characters/def/generic/gravehound_01.def",
+        "position": [
+          -7.09744,
+          47.639,
+          8.50003
+        ],
+        "forward": [
+          -0.002205969044476287,
+          0.9999975668473273
+        ]
+      },
+      "kind": "lethal",
+      "approachYaw": -135.0,
+      "camera": [
+        -5.299703597309135,
+        50.0824900913325,
+        10.10003
+      ],
+      "preSettled": 5000,
+      "sourceStart": [
+        -8.231,
+        48.768,
+        8.50368
+      ],
+      "takedownAtPress": {
+        "t": 2367,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 557,
+      "cameraMoved": [
+        -5.297181437107076,
+        51.239742861305,
+        10.10003
+      ],
+      "targetMoved": 1.16,
+      "crept": 1387,
+      "creptEnd": 1738,
+      "stanceAfterCreep": 1,
+      "actedAt": 2570,
+      "pressedWhenReady": {
+        "t": 2570,
+        "entry": 0,
+        "name": "models/characters/def/generic/gravehound_01.def_12232",
+        "state": 3
+      },
+      "takedownAfter": 2570,
+      "trackSamples": 44,
+      "takedownSamples": 7,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        13
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
