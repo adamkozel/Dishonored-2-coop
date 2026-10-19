@@ -204,10 +204,41 @@ int main(int argc, char** argv) {
         vt=0;
         if(nav&&reader(nav+0xa8,&link,8)&&link&&reader(link+0xd8,&object,8)&&object&&reader(object,&vt,8)&&vt&&reader(vt+0x20,&fn,8)&&fn)reader(fn,code,16);
         if(object)objectType=nativeComponentTypeOf(reader,object);
+        // 1214eq (#11 seated): the other NPC-side gates of 0x1403b00a0 (confirmed static), read-only. 1559a: the gates
+        // above read the same for seated and standing NPCs (flags 0x41, bit 3 of +0xd1 clear, no navigation object).
+        // (a) the gate's own lookup: component 0x39e2a00 -> +0xa8 -> +0xd8 (0x1405f7150); a null object passes.
+        // (b) the midnight (scene) component 0x39ba280 (the scene manager +0x1f5338 keys on it, 0x1406868b0): while
+        //     its state (+0x1c & 3) is above 1 and it holds requests (list +0x90, count +0x98, 28-byte entries), the
+        //     first request's priority (dword 3, 0x1407659c0 with id 0 and mask 2) above 23 refuses.
+        // (c) components 0x39e27c0 and 0x39b3e50: a set byte at the 0x39b3e50 component +0x101c refuses (0x1405bfbb0).
+        // (d) component 0x39ae2b0: refuses unless its +0xb8 entity has a component 0x39dcca0 in state 2 (+0x2c) whose
+        //     midnight (+0xf8 id in the +0x100 component) is not running (0x1403ee810, 0x1404b3a90, 0x1407c7ac0);
+        //     only the midnight component's own two slots (+0x20, +0x30) are read here, not the manager fallback.
+        const auto gateNav=findNativeComponentOfType(reader,actor,base+0x39e2a00);std::uintptr_t gateLink=0,gateObject=0;
+        if(gateNav&&reader(gateNav+0xa8,&gateLink,8)&&gateLink)reader(gateLink+0xd8,&gateObject,8);
+        const auto midnight=findNativeComponentOfType(reader,actor,base+0x39ba280);std::uint32_t mState=0,mCount=0;std::uintptr_t mList=0;std::int32_t mIds[2]{};std::vector<std::int32_t> mEntries;
+        if(midnight&&reader(midnight+0x1c,&mState,4)&&reader(midnight+0x20,&mIds[0],4)&&reader(midnight+0x30,&mIds[1],4)&&reader(midnight+0x90,&mList,8)&&reader(midnight+0x98,&mCount,4)){
+            mCount&=0xffffff;if(mCount&&mList&&mCount<=16){mEntries.resize(mCount*7);if(!reader(mList,mEntries.data(),mEntries.size()*4))mEntries.clear();}}
+        const int gatePriority=(midnight&&(mState&3)>1&&!mEntries.empty())?mEntries[3]:0;
+        const auto cE27c0=findNativeComponentOfType(reader,actor,base+0x39e27c0),cB3e50=findNativeComponentOfType(reader,actor,base+0x39b3e50);unsigned char b101c=0;
+        if(cB3e50)reader(cB3e50+0x101c,&b101c,1);
+        const auto cAe2b0=findNativeComponentOfType(reader,actor,base+0x39ae2b0);std::uint32_t useHandle=0,useState=0;std::int32_t useMidnight=0,useIds[2]{};
+        std::uintptr_t useEntity=0,useCpnt=0,useMidnightCpnt=0;bool useRunning=false;
+        if(cAe2b0&&reader(cAe2b0+0xb8,&useHandle,4)&&useHandle&&(useEntity=worldIdentityEntity(reader,game,useHandle))&&(useCpnt=findNativeComponentOfType(reader,useEntity,base+0x39dcca0))){
+            reader(useCpnt+0x2c,&useState,4);reader(useCpnt+0xf8,&useMidnight,4);
+            if(reader(useCpnt+0x100,&useMidnightCpnt,8)&&useMidnightCpnt&&useMidnight&&reader(useMidnightCpnt+0x20,&useIds[0],4)&&reader(useMidnightCpnt+0x30,&useIds[1],4))
+                useRunning=useIds[0]==useMidnight||useIds[1]==useMidnight;}
+        const bool refusePriority=gatePriority>23,refuseB101c=cE27c0&&cB3e50&&b101c,refuseUse=cAe2b0&&!(useCpnt&&useState==2&&!useRunning);
         std::cout<<"{\"readOnly\":true,\"handle\":"<<handle<<",\"flags368\":"<<unsigned(flags368)<<",\"flagsD1\":"<<unsigned(flagsD1)<<",\"nav\":"<<(nav?"true":"false")
             <<",\"navObject\":\"0x"<<std::hex<<object<<"\",\"navObjectVtable\":\"0x"<<(vt?vt-base:0)<<"\",\"navObjectVirtual20\":\"0x"<<(fn?fn-base:0)<<"\",\"navObjectType\":\"0x"<<(objectType?objectType-base:0)<<"\",\"code\":\"";
         for(unsigned i=0;i<16;++i){static const char* hx="0123456789abcdef";std::cout<<hx[code[i]>>4]<<hx[code[i]&15];}
-        std::cout<<std::dec<<"\"}\n";return 0;
+        std::cout<<"\",\"gateNav\":"<<(gateNav?"true":"false")<<",\"gateObject\":\"0x"<<gateObject<<"\""<<std::dec
+            <<",\"midnight\":"<<(midnight?"true":"false")<<",\"midnightState\":"<<mState<<",\"midnightIds\":["<<mIds[0]<<","<<mIds[1]<<"],\"midnightRequests\":[";
+        for(std::size_t i=0;i+6<mEntries.size();i+=7){std::cout<<(i?",":"")<<"[";for(unsigned k=0;k<7;++k)std::cout<<(k?",":"")<<mEntries[i+k];std::cout<<"]";}
+        std::cout<<"],\"gatePriority\":"<<gatePriority<<",\"e27c0\":"<<(cE27c0?"true":"false")<<",\"b3e50\":"<<(cB3e50?"true":"false")<<",\"b101c\":"<<unsigned(b101c)
+            <<",\"ae2b0\":"<<(cAe2b0?"true":"false")<<",\"useHandle\":"<<useHandle<<",\"useEntity\":"<<(useEntity?"true":"false")<<",\"useComponent\":"<<(useCpnt?"true":"false")
+            <<",\"useState\":"<<useState<<",\"useMidnight\":"<<useMidnight<<",\"useRunning\":"<<(useRunning?"true":"false")
+            <<",\"refuses\":{\"priority\":"<<(refusePriority?"true":"false")<<",\"b101c\":"<<(refuseB101c?"true":"false")<<",\"use\":"<<(refuseUse?"true":"false")<<"}}\n";return 0;
     }
     if(argc==4&&!std::strcmp(argv[2],"--on-ground")){
         // 1214em (#11 enemy_body_size_variants): the knocked-down takedown condition for one NPC, read-only, as

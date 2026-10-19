@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/elite_male_tall_01.def: source states 0,6,41; unconscious in both worlds"
+      ],
+      "target": {
+        "spawner": "ld_spawner_30",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          -70.0929,
+          29.2305,
+          19.7701
+        ],
+        "forward": [
+          -0.9999794990281449,
+          -0.006403243195464084
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -69.62369949585094,
+        26.23344296235352,
+        21.3701
+      ],
+      "sourceStart": [
+        -68.893,
+        29.238,
+        19.7737
+      ],
+      "prePitch": 8.0,
+      "replacedAt": 507,
+      "cameraMoved": [
+        -71.60360787528383,
+        26.220719968705232,
+        21.3701
+      ],
+      "targetMoved": 1.98,
+      "crept": 1049,
+      "creptEnd": 1389,
+      "stanceAfterCreep": 1,
+      "actedAt": 1426,
+      "trackSamples": 51,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        6,
+        41
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

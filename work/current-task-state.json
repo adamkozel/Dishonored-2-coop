@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T12:22:40+02:00",
+  "UpdatedAt": "2026-10-19T14:00:52+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,8 +22173,8 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214eo (deployed; protocol 79: 1214en plus the host holding its knocked-out body animated while a client knocked-down choke victim pose drives it; 1214en: host down state on NPC poses, client replica laying timer; 1214em probes)",
-    "NextCandidate": "none pending; fixtures running: knocked-down chokes on the landed body (1535/1538), window chokes at the sensor-scan stands (1536), seated survey (1528b)",
+    "Candidate": "candidate-npc-combat-v1214ep (deployed; probe-only on the 1214eo DLL, protocol 79: 1214en host down state on NPC poses and client replica laying timer; 1214eo host holding its knocked-out body animated while a client knocked-down choke victim pose drives it; 1214em/ep read-only probes incl. --takedown-gates)",
+    "NextCandidate": "candidate-npc-combat-v1214eq (probe-only: --takedown-gates reads every NPC-side gate of 0x1403b00a0; built and deployed by chain 1563 for seated survey 1563a); fixtures running: stationary armored elite chokes (1562a-d), Emily's lethal window retry (1562e/f)",
     "Complete": "101 of 105 (power_upgrade_variants audit v1511)",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
