@@ -697,6 +697,13 @@ void sampleLocalPlayer() {
             sampleBodyPose();
         }else recordNativeMotionRefusal(refusal,states,stance.current,base);
     }
+    // 1214dr: in the black market (logic 10) the player state machine is unreadable, but the player stands on the
+    // ground at the counter (the native walk there, the paired scene, the menu; 1402a). Its standing stance and
+    // ground motion keep the partner's body clock eligible; the root stays the native one.
+    else if(outgoing.gameLogicState==10&&!outgoing.pendingGameLogicState&&(outgoing.flags&1)&&
+            readNativePlayerStance(memoryRead,base,stance,true)&&stance.logic==10&&stance.game==game&&stance.player==player&&stance.current<=1){
+        outgoing.playerStance=stance.current;outgoing.playerStanceValid=1;outgoing.playerMotionValid=1;outgoing.playerMotion=0;
+    }
 }
 void cinematicSkipConfirmed(void* state) {
     nativeSkipCallbacks.fetch_add(1,std::memory_order_relaxed);nativeSkipThread.store(GetCurrentThreadId(),std::memory_order_relaxed);

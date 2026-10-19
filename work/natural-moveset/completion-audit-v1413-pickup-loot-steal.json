@@ -1,0 +1,75 @@
+{
+  "audit": "completion-audit-v1413-pickup-loot-steal",
+  "family": "interactions",
+  "candidate": "candidate-npc-combat-v1214dp",
+  "method": "Every loot action is an ordinary native use: an item pickup, a body search and a pickpocket all fire the player's use (state 75 for one frame), and the item's pickup runs natively; a body search adds the LootObject state 47, and a pickpocket is the use of the item riding on the guard (the game references it only through the AI message arkMsgAIPickpocketedOn, confirmed static). The source reads the use edge every frame (1213b) and sends use variant 1, the generic reach toward the focused entity; the partner presents the authored reach (bank use clips) at full weight and recovers, crouched or standing as the source is. Pickups are filmed in the Dunwall tower (a coin on a lectern and grapes on a table, gestures-v1261b); pickpocketing walks in from behind tutorial guard 2 and takes the key on his belt, filmed from his side (coverage-v1398c/d); body loot chokes the same guard, aims the use focus at the body and searches it (coverage-v1398h/i). A case passes when the native action happened on the source (the item joined the inventory or the coin count rose), the partner presented the reach at full weight and its presentation stayed live, and the checkpoint restore returned inventory and health. The item itself, the guard's reaction and the body are the native world, shared by the existing sync systems.",
+  "items": [
+    {
+      "id": "pickup_loot_steal",
+      "decision": "complete",
+      "scope": "The partner reaches for what the player picks up, pickpockets or searches on a body, in both roles, standing or crouched, and recovers.",
+      "takes": [
+        {
+          "take": "gestures-v1261b",
+          "cases": [
+            "host-coin",
+            "host-food",
+            "client-coin",
+            "client-food"
+          ]
+        },
+        {
+          "take": "coverage-v1398c",
+          "cases": [
+            "host-pickpocket"
+          ]
+        },
+        {
+          "take": "coverage-v1398d",
+          "cases": [
+            "client-pickpocket"
+          ]
+        },
+        {
+          "take": "coverage-v1398h",
+          "cases": [
+            "host-bodyloot"
+          ]
+        },
+        {
+          "take": "coverage-v1398i",
+          "cases": [
+            "client-bodyloot"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "gestures-v1261b/host-coin-observer.mp4",
+          "verdict": "Corvo, seen from behind, reaches his right hand out to the coin on the lectern and draws it back as the coin is taken."
+        },
+        {
+          "video": "gestures-v1261b/client-food-observer.mp4",
+          "verdict": "Emily reaches her hand to the grapes on the table and lowers it; the grapes are gone from the plate."
+        },
+        {
+          "video": "coverage-v1398c/host-pickpocket-observer.mp4",
+          "verdict": "Seen from the guard's side, Corvo crouches behind him, reaches to his belt and takes the key; the guard reacts."
+        },
+        {
+          "video": "coverage-v1398d/client-pickpocket-observer.mp4",
+          "verdict": "Seen from the guard's side, Emily crouches behind him, reaches to his belt and takes the key; the guard reacts."
+        },
+        {
+          "video": "coverage-v1398h/host-bodyloot-observer.mp4",
+          "verdict": "Corvo stands over the choked guard, bends down and reaches into the body at the belt; the key then hangs at his hip."
+        },
+        {
+          "video": "coverage-v1398i/client-bodyloot-observer.mp4",
+          "verdict": "Emily bends over the choked guard and reaches to his belt, then straightens up as another guard arrives."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

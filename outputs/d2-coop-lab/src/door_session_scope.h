@@ -24,7 +24,8 @@ inline bool doorSessionRenewalReady(const DoorSessionScope& s,const CoopPosePack
 // 1123e: native UI overlays that pause input without changing the world:
 // menus (2/4), the item wheel (arkGameLogicStatePowerwheel, 8) and tutorial
 // modals (12, "Play Your Way"). They suspend sessions instead of ending them.
-inline bool doorSessionUiState(unsigned state){return nativeMovementMenuState(state)||state==8||state==12;}
+// 1214dr: the black market (arkGameLogicStateBlackMarket, 10) suspends sessions the same way.
+inline bool doorSessionUiState(unsigned state){return nativeMovementMenuState(state)||state==8||state==10||state==12;}
 inline bool doorSessionMenuContext(const CoopPosePacket& p){
     const auto allowed=[](unsigned state){return state==1||doorSessionUiState(state);};
     // Opening an overlay samples as logic 1 with the overlay pending; native

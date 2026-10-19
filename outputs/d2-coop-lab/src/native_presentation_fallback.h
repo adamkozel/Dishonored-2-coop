@@ -55,10 +55,12 @@ template<class Read> bool readNativePresentationHold(Read read,std::uintptr_t ba
     // (states read fails, stance read succeeds with logic8), so the identity
     // proof is two stable stance reads of the same live player and physics.
     NativePlayerStance wheelFirst{},wheelLast{};
-    const auto wheelHold=[&](){return (lastSword==1||lastSword==2)&&readNativePlayerStance(read,base,wheelFirst,true)&&(wheelFirst.logic==8||wheelFirst.logic==1)&&
+    const auto wheelHold=[&](){return (lastSword==1||lastSword==2)&&readNativePlayerStance(read,base,wheelFirst,true)&&(wheelFirst.logic==8||wheelFirst.logic==10||wheelFirst.logic==1)&&
        wheelFirst.game==game&&wheelFirst.player==player&&readNativePlayerStance(read,base,wheelLast,true)&&wheelLast.logic==wheelFirst.logic&&
        wheelLast.game==game&&wheelLast.player==player&&wheelLast.physics==wheelFirst.physics;};
-    if(wheelHold()&&wheelFirst.logic==8){swordState=lastSword;return true;}
+    // 1214dr: the black market (logic 10) holds the same way: the stream keeps the partner on its replicated root, so it
+    // walks to the counter and stands there instead of vanishing for the whole shop (1399a).
+    if(wheelHold()&&(wheelFirst.logic==8||wheelFirst.logic==10)){swordState=lastSword;return true;}
     if(!readNativePlayerStates(read,base,first)||!readNativePlayerSword(read,base,sword)||!valid(first,sword)||
        !readNativePlayerStates(read,base,last)||!readNativePlayerSword(read,base,finalSword)||!valid(last,finalSword)||
        first.component!=last.component||first.mode!=last.mode||first.active.size()!=last.active.size()||

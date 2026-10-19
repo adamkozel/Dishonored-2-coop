@@ -99,7 +99,7 @@ inline bool validCoopPose(const CoopPosePacket& p,std::uint32_t localRole) {
        p.role>1 || p.role==localRole || !p.sequence || !p.session || (p.flags&~1u) || ((p.flags&1)&&(!p.worldEpoch||!p.mapId))) return false;
     if(p.gameLogicState>=17||p.pendingGameLogicState>=17)return false;
     if(p.playerStanceValid>1||p.playerStance>1||(!p.playerStanceValid&&p.playerStance)||
-       (p.playerStanceValid&&(!(p.flags&1)||p.gameLogicState!=1||p.pendingGameLogicState)))return false;
+       (p.playerStanceValid&&(!(p.flags&1)||(p.gameLogicState!=1&&p.gameLogicState!=10)||p.pendingGameLogicState)))return false; // 1214dr: black market
     if(p.playerMotionValid>1||p.playerMotion>3||(!p.playerMotionValid&&p.playerMotion)||
        (p.playerMotionValid&&!p.playerStanceValid))return false;
     if(p.bodyPoseValid>1||(p.bodyPoseValid&&!p.playerMotionValid))return false;
@@ -150,7 +150,9 @@ inline bool coopPresentationReady(const CoopPosePacket& p) {
     // unavailable metadata, or valid metadata with no cinematic nodes.
     // 1079 (diagnostic 1074e): the wheel is sampled as logic1 with pending8
     // while it opens/stays open, and as logic8 while closing.
-    const bool wheel=(p.gameLogicState==8&&p.pendingGameLogicState==0)||(p.gameLogicState==1&&p.pendingGameLogicState==8);
+    const bool wheel=(p.gameLogicState==8&&p.pendingGameLogicState==0)||(p.gameLogicState==1&&p.pendingGameLogicState==8)||
+        // 1214dr: the black market (logic 10) is an overlay on the same world, like the wheel (1402a).
+        (p.gameLogicState==10&&(p.pendingGameLogicState==0||p.pendingGameLogicState==1))||(p.gameLogicState==1&&p.pendingGameLogicState==10);
     return coopGameplayReady(p)||((p.flags&1)&&wheel&&(!p.cinematicMetadataValid||p.cinematicNodeCount==0));
 }
 inline std::uint64_t coopSkipSceneId(const CoopPosePacket& p) {

@@ -49,6 +49,7 @@ struct MovementPlayback {
     unsigned rangedKind=0,rangedVariant=0,rangedMechanism=0,rangedShot=0;float rangedAmount=0,rangedWeight=0,rangedTransition=0,rangedMoveMix=0;
     std::uint64_t rangedEvent=0;std::vector<MovementBank::Joint> rangedFrom,rangedLast;
     unsigned stunVariant=0;float stunAmount=0,stunWeight=0,stunTransition=0;std::uint64_t stunEvent=0;
+    float shopWeight=0,shopPhase=0; // 1214dr: black market gestures (clip 381)
     unsigned useVariant=0;float useAmount=0,useWeight=0,useTransition=0;std::uint64_t useEvent=0;std::vector<MovementBank::Joint> useFrom,useLast;
     // 1213k (#6): the used mechanism (world) and the right-hand reach toward it.
     float useTarget[3]{};bool useTargetValid=false;std::uint64_t useReachApplied=0,useReachRefused=0;float useReachError=0,useReachWeight=0;
@@ -285,6 +286,16 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
                 p.stunVariant=stun.variant;p.stunAmount=stunAmount;p.stunTransition=(std::min)(1.f,p.stunTransition+combatDt/.035f);}
             p.stunWeight+=((stunActive?1.f:0.f)-p.stunWeight)*(1-std::exp(-combatDt/(stunActive?.025f:.10f)));
         }else p.stunWeight=0;
+        // 1214dr (#11 shop_dialogue_gestures): while the partner is in the black market (its pose packet's logic 10,
+        // the action stream's hold) and standing at the counter, it plays native NPC conversation gestures (clip 381,
+        // looping on its own clock); the walk there and away stays locomotion.
+        const bool shopActive=p.bank.hasShop()&&remote.gameLogicState==10&&!remote.pendingGameLogicState&&semantic.state==24&&
+            ground&&pose.motionValid&&p.clock.speed<.3f&&p.bank.clips.size()>381&&p.bank.clips[381].angle>.05f;
+        if(combatDt>=0&&combatDt<.25f){
+            if(shopActive||p.shopWeight>.001f)p.shopPhase=std::fmod(p.shopPhase+combatDt/p.bank.clips[381].angle,1.f);
+            p.shopWeight+=((shopActive?1.f:0.f)-p.shopWeight)*(1-std::exp(-combatDt/(shopActive?.35f:.20f)));
+            if(p.shopWeight<.001f&&!shopActive)p.shopPhase=0;
+        }else p.shopWeight=0;
         // 1213: authored interaction for a native use; fades out once the
         // remote player moves (root stays network owned).
         UsePresentation::Sample use{};float useAmount=0;
@@ -796,6 +807,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             if(p.stunLast.size()!=count)p.stunLast.resize(count);p.stunLast[j]=stun;
             v=MovementBank::blend(v,stun,p.stunWeight);
         }
+        if(p.bank.hasShop()&&p.shopWeight>.001f)v=MovementBank::blend(v,p.bank.sample(381,j,p.shopPhase),p.shopWeight);
         if(p.bank.hasUse()&&p.useWeight>.001f&&p.useVariant){
             auto use=p.bank.sampleParameter(UsePresentation::clip(p.useVariant),j,p.useAmount);
             if(p.useFrom.size()==count)use=MovementBank::blend(p.useFrom[j],use,p.useTransition*p.useTransition*(3-2*p.useTransition));
@@ -890,6 +902,7 @@ void writeMovementStatus(){
     fprintf(f,"\"carryPlaybackStance\":%u,",p.carryStance);
     fprintf(f,"\"combatRecoveryStart\":%.7f,\"combatAuthoredAmount\":%.7f,",p.combatRecoveryStart,CombatPresentation::authoredAmount(p.combatVariant,p.combatAmount,p.combatRecoveryStart));
     fprintf(f,"\"stunVariant\":%u,\"stunAmount\":%.7f,\"stunWeight\":%.7f,\"stunEvent\":%llu,",p.stunVariant,p.stunAmount,p.stunWeight,p.stunEvent);
+    fprintf(f,"\"shopWeight\":%.7f,\"shopPhase\":%.7f,",p.shopWeight,p.shopPhase);
     fprintf(f,"\"readingHold\":%s,\"readingLeaseFail\":%u,\"readingHolds\":%llu,\"readingFrames\":%llu,\"useVariant\":%u,\"useAmount\":%.7f,\"useWeight\":%.7f,\"useEvent\":%llu,\"sourceUses\":%llu,\"sourceUseUnfocused\":%llu,\"sourceUseName\":\"%s\",\"sourceUseFrames\":%llu,\"sourceUseEdges\":%llu,\"sourceUseLastVariant\":%u,\"sourceUseEndReason\":%u,\"sourceUseEndAction\":%u,",movementReadingHold?"true":"false",movementReadingLeaseFail,static_cast<unsigned long long>(movementReadingHolds),static_cast<unsigned long long>(movementReadingFrames),p.useVariant,p.useAmount,p.useWeight,p.useEvent,shadowUse.uses,shadowUse.unfocused,shadowUse.name,shadowUse.frames,shadowUse.edges,shadowUse.lastVariant,shadowUse.endReason,shadowUse.endAction);
     fprintf(f,"\"grenadeHeld\":%u,\"grenadeVariant\":%u,\"grenadeAmount\":%.7f,\"grenadeWeight\":%.7f,\"grenadeEvent\":%llu,",p.grenadeHeld,p.grenadeVariant,p.grenadeAmount,p.grenadeWeight,p.grenadeEvent);
     fprintf(f,"\"heartHeld\":%u,\"heartVariant\":%u,\"heartAmount\":%.7f,\"heartWeight\":%.7f,\"heartEvent\":%llu,",p.heartHeld,p.heartVariant,p.heartAmount,p.heartWeight,p.heartEvent);

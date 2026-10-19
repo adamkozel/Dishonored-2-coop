@@ -13,7 +13,8 @@ int main(int argc,char** argv){
     {MovementBank old;old.version=65;check(!old.hasKick(),"old bank cannot address absent kick clip");}
     {MovementBank old;old.version=66;check(!old.hasCrouchHeavy(),"old bank cannot address crouched heavy clips");}
     {MovementBank b;b.version=73;check(!b.hasKnockdown()&&MovementBank::clipCount(73)==380,"bank73 cannot address the knockdown clip");
-     b.version=74;check(b.hasKnockdown()&&MovementBank::clipCount(74)==381&&MovementBank::clipCount(75)==0,"bank74 adds the knockdown clip 380");}
+     b.version=74;check(b.hasKnockdown()&&!b.hasShop()&&MovementBank::clipCount(74)==381,"bank74 adds the knockdown clip 380");
+     b.version=75;check(b.hasShop()&&MovementBank::clipCount(75)==382&&MovementBank::clipCount(76)==0,"bank75 adds the shop gesture clip 381");}
     check(argc==1||argc==3,"no args for protocol fixtures, or two actual native banks");
     for(unsigned format=(argc==1?1:59);format<=59;++format)for(unsigned role=0;role<2;++role){std::vector<unsigned char> bytes;
         const unsigned joints=role?219:215;const auto layout=role?0x84db84f5d1336b80ull:0x00db32d37719931full;MovementBank bank;
