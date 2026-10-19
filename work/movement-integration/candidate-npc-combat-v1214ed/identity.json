@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-19T08:09:03.565638+02:00",
+  "dll": "FC35AC9CC32800941DB0FCB7E81519D3493C60C7E8B8D9E0DC91EA109F7A87B5",
+  "probe": "AD0E31884E99144C4DC47D2A868B4FB31B34D3035BE2BD56D8EC858D19424554",
+  "setup": "F3E58676BA9901BEFAE97E1783ED8EFFCD2E5F3164DA24EB452BCCF86545568E",
+  "previous": "candidate-npc-combat-v1214ec",
+  "protocol": 79,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 75,
+  "clips": 382,
+  "banks": [
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/corvo-choke-bank.bin",
+      "sha256": "AA8DA1AE7F5123B257D482CA73AFA56CDB2F9987D1F4298EE2EBE63631E96154"
+    },
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/emily-choke-bank.bin",
+      "sha256": "0CC6EBD2CC349B3462985412C91F314F8972B5149AE9366982EE8A145CA815AD"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214ed (protocol 79, #11 carry_object_place_throw): 1214ec plus the observer copy of a broken movable broken natively: its health component is found in the movable own component list (readNativeHealth accepts only NPC and player actors, so 1460a skipped every break), the damage decl falls back from explosion_grenade to player_sword, and the status names the failing step."
+}
