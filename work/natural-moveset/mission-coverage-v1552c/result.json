@@ -1,0 +1,210 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,39,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,39,64)",
+      "checks": [
+        "Window fixture: target placed placed; takedown scenes "
+      ],
+      "approach": [
+        16.00662174301594,
+        90.02118613829957
+      ],
+      "placed": {
+        "placed": 100,
+        "refused": 0,
+        "result": "placed"
+      },
+      "placedSeen": [
+        17.089,
+        91.5948,
+        16.2873
+      ],
+      "placedWaitMs": 472,
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          17.089,
+          91.5948,
+          16.2873
+        ],
+        "forward": [
+          -0.26185412585170553,
+          0.965107463847648
+        ]
+      },
+      "kind": "lethal",
+      "cameraYaw": -125.64395478041642,
+      "camera": [
+        17.998217306093427,
+        92.79851347102975,
+        18.07
+      ],
+      "sourceStart": [
+        16.0055,
+        90.02,
+        17.014
+      ],
+      "prePitch": 15.0,
+      "hold1": 351,
+      "windowAtPress": {
+        "t": 7498,
+        "targetName": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+        "hasPoint": true,
+        "sill": 0.996321,
+        "angleOk": true,
+        "sillOk": true,
+        "grounded": true
+      },
+      "hold2": 1134,
+      "seek": [
+        {
+          "yaw": 5.0,
+          "target": "",
+          "hasPoint": true,
+          "point": [
+            16.3885,
+            90.1686,
+            17.4997
+          ],
+          "sill": 1.1,
+          "angleOk": false,
+          "sillOk": false,
+          "grounded": true,
+          "position": [
+            16.0055,
+            90.02,
+            17.014
+          ],
+          "ok": false
+        },
+        {
+          "yaw": 10.0,
+          "target": "",
+          "hasPoint": true,
+          "point": [
+            16.3677,
+            90.1997,
+            17.4997
+          ],
+          "sill": 1.1,
+          "angleOk": false,
+          "sillOk": false,
+          "grounded": true,
+          "position": [
+            16.0058,
+            90.0202,
+            17.0116
+          ],
+          "ok": false
+        },
+        {
+          "yaw": 15.0,
+          "target": "",
+          "hasPoint": true,
+          "point": [
+            16.3621,
+            90.208,
+            17.0436
+          ],
+          "sill": 0.996323,
+          "angleOk": false,
+          "sillOk": true,
+          "grounded": true,
+          "position": [
+            15.9441,
+            89.979,
+            16.5536
+          ],
+          "ok": false
+        },
+        {
+          "yaw": 20.0,
+          "target": "",
+          "hasPoint": true,
+          "point": [
+            16.329,
+            90.2576,
+            17.0436
+          ],
+          "sill": 0.996321,
+          "angleOk": false,
+          "sillOk": true,
+          "grounded": true,
+          "position": [
+            16.007,
+            90.021,
+            16.5536
+          ],
+          "ok": false
+        },
+        {
+          "yaw": 25.0,
+          "target": "",
+          "hasPoint": true,
+          "point": [
+            16.3105,
+            90.2854,
+            17.4997
+          ],
+          "sill": 1.1,
+          "angleOk": false,
+          "sillOk": false,
+          "grounded": true,
+          "position": [
+            16.007,
+            90.021,
+            17.0106
+          ],
+          "ok": false
+        },
+        {
+          "yaw": 30.0,
+          "target": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+          "hasPoint": true,
+          "point": [
+            16.2934,
+            90.311,
+            17.0436
+          ],
+          "sill": 0.996321,
+          "angleOk": true,
+          "sillOk": true,
+          "grounded": true,
+          "position": [
+            15.9745,
+            89.9993,
+            16.5536
+          ],
+          "ok": true
+        }
+      ],
+      "seekFound": 30.0,
+      "actedAt": 7498,
+      "pressHolds": 2,
+      "windowAfter": 8207,
+      "pressHoldEnd": 9009,
+      "pressHoldTakedown": false,
+      "trackSamples": 11,
+      "windowSamples": 3,
+      "windowAvailable": 2,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        39,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
