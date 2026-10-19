@@ -1,0 +1,38 @@
+{
+  "source": "host",
+  "case": "stoptime",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Stop Time: guard moved host 0/0/0 m, client 0/0/0 m (before/during/after); Emily walked 1.23 m during the stop",
+    "Partner presentation stayed live",
+    "stoptime presented (7 samples, variants 12,14) and recovered"
+  ],
+  "stopUpgrade": true,
+  "peerWalk": 4089,
+  "stopTime": {
+    "guardHostBefore": 0.0,
+    "guardHostDuring": 0.0,
+    "guardHostAfter": 0.0,
+    "guardClientBefore": 0.0,
+    "guardClientDuring": 0.0,
+    "guardClientAfter": 0.0,
+    "emilyDuring": 1.23,
+    "corvoDuring": 0.0
+  },
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 2,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "powerSamples": 7,
+  "powerVariants": [
+    12,
+    14
+  ],
+  "recovered": 2,
+  "restored": true
+}
