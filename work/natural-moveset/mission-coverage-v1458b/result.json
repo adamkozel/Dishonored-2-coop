@@ -1,0 +1,65 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,44,54,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,54,64)",
+      "checks": [
+        "Window fixture: target placed placed; takedown scenes "
+      ],
+      "placed": {
+        "placed": 3,
+        "refused": 0,
+        "result": "placed"
+      },
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          16.68,
+          90.937,
+          16.47
+        ],
+        "forward": [
+          0.8314698396094833,
+          0.5555698928305779
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        14.639128893684001,
+        93.18140306705469,
+        18.07
+      ],
+      "sourceStart": [
+        15.765,
+        90.326,
+        16.5536
+      ],
+      "replacedAt": 460,
+      "cameraMoved": [
+        13.977552239001321,
+        90.89280324540577,
+        17.5428
+      ],
+      "targetMoved": 1.09,
+      "actedAt": 1102,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        54,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
