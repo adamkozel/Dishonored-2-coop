@@ -2189,6 +2189,13 @@ int main() {
     changed=a;changed.q(game+0x3130b0+3*8,spawner+0x10000);changed.d(game+0x601c8,3);changed.d(0x400000008,0x30003);
     changed.q(spawner+0x10000,base+0x1c5e948);changed.d(spawner+0x100a8,0x30003);changed.q(spawner+0x10020,0x400002000);
     require(!catalog(changed)[0].unique,"duplicate authored spawner name refused");
+    // 1214fa (#118): orphans of childless spawners (1601a/b).
+    changed=a;changed.d(component+0x38,0);{auto c=catalog(changed);require(c.size()==1&&c[0].orphan&&c[0].unique&&c[0].reciprocal,"orphan of a childless spawner identified by its spawner");}
+    {auto two=a;two.d(component+0x38,0);constexpr std::uintptr_t actor2=0x300005000;constexpr std::uint32_t handle2=0x50005;
+     two.d(game+0x601c8,3);two.d(0x400000008,handle2);two.q(game+0x3130b0+(handle2>>16)*8,actor2);
+     two.q(actor2,base+0x1c5e108);two.d(actor2+0xa8,handle2);two.d(actor2+0xac,0x20002);two.q(actor2+0x2e8,definition);
+     const float t2[]={4,5,6,1,0,0,0,1,0,0,0,1};two.put(actor2+0x300,t2,sizeof(t2));
+     auto c=catalog(two);require(c.size()==2&&!c[0].unique&&!c[1].unique,"two orphans of one spawner are ambiguous");}
     CoopPosePacket host{},client{};host.role=0;client.role=1;host.sequence=client.sequence=1;host.flags=client.flags=1;
     host.sampleTimeUs=client.sampleTimeUs=1000000;
     host.session=11;client.session=22;host.worldEpoch=3;client.worldEpoch=7;host.mapId=client.mapId=123;

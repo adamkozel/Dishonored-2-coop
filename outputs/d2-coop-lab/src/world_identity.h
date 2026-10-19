@@ -15,6 +15,7 @@ struct NativeWorldNpc {
     std::string spawnerName,definition;
     float position[3]{},orientation[9]{};
     bool reciprocal=false,unique=false;
+    bool orphan=false; // 1214fa (#118): its spawner lists no child
 };
 template<class Read> bool worldIdentityString(Read read,std::uintptr_t pointer,std::string& text) {
     text.clear();
@@ -76,7 +77,12 @@ template<class Read> bool readWorldNpcIdentity(Read read,std::uintptr_t base,std
     n.reciprocal=matches==1;
     // Until spawn generations/ordinals are replicated, accept only a sole
     // child. Ambiguous multi-child spawners cannot select a mutation target.
-    n.unique=n.reciprocal&&n.childCount==1;
+    // 1214fa (#118): an orphan, whose spawner lists no child at all, is identified by its spawner alone (the spawner
+    // name is unique; the actor points at it). Examples: the Addermire Institute's guards, wolfhounds and elites, and
+    // the Clockwork Mansion's reinforcements and some clockwork soldiers (25 of 49 and 11 of 34 living NPCs, both worlds,
+    // takes 1601a/b). readWorldNpcCatalog keeps it unique only while no other NPC points at the same spawner.
+    n.orphan=!n.childCount;if(n.orphan)n.reciprocal=true;
+    n.unique=n.reciprocal&&(n.childCount==1||n.orphan);
     if(!read(n.actor+0x300,n.position,sizeof(n.position))||!read(n.actor+0x30c,n.orientation,sizeof(n.orientation)))return false;
     for(float f:n.position)if(!std::isfinite(f))return false;
     for(float f:n.orientation)if(!std::isfinite(f))return false;
@@ -85,7 +91,7 @@ template<class Read> bool readWorldNpcIdentity(Read read,std::uintptr_t base,std
        !read(n.actor+0xac,&parentAgain,4)||parentAgain!=n.spawnerHandle||
        !read(n.component+0x30,&childrenAgain,8)||childrenAgain!=children||
        !read(n.component+0x38,&flagsAgain,4)||flagsAgain!=childFlags)return false;
-    if(n.unique){std::uint32_t child=0;if(!read(children,&child,4)||child!=handle)return false;}
+    if(n.unique&&!n.orphan){std::uint32_t child=0;if(!read(children,&child,4)||child!=handle)return false;}
     out=std::move(n);return true;
 }
 template<class Read> bool readWorldNpcCatalog(Read read,std::uintptr_t base,std::uintptr_t game,
@@ -118,6 +124,7 @@ template<class Read> bool readWorldNpcCatalog(Read read,std::uintptr_t base,std:
     for(auto& n:catalog) {
         unsigned matches=0;for(const auto& name:names)if(name==n.spawnerName)++matches;
         n.unique=n.unique&&matches==1;
+        if(n.orphan){unsigned siblings=0;for(const auto& m:catalog)if(m.spawnerHandle==n.spawnerHandle)++siblings;n.unique=n.unique&&siblings==1;}
     }
     std::uintptr_t handlesAgain=0;std::uint32_t flagsAgain=0;
     if(!read(game+0x601c0,&handlesAgain,8)||handlesAgain!=handles||!read(game+0x601c8,&flagsAgain,4)||flagsAgain!=flags)return false;

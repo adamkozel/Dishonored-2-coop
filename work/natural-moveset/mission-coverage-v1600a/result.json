@@ -1,0 +1,89 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,39)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,39)",
+      "checks": [],
+      "targetCandidates": [
+        "ld_spawner_hound_office_2=models/characters/def/generic/gravehound_01.def",
+        "ld_spawner_hound_office_1=models/characters/def/generic/gravehound_01.def",
+        "ld_spawner_hound_basement=models/characters/def/generic/gravehound_01.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "ld_spawner_hound_office_2",
+          "err": 0.01,
+          "dz": 0.0
+        }
+      ],
+      "targetChosen": "ld_spawner_hound_office_2=models/characters/def/generic/gravehound_01.def",
+      "target": {
+        "spawner": "ld_spawner_hound_office_2",
+        "definition": "models/characters/def/generic/gravehound_01.def",
+        "position": [
+          -7.10033,
+          48.4472,
+          8.50003
+        ],
+        "forward": [
+          0.0009449115781638383,
+          0.999999553570955
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -10.100753870923038,
+        48.00003493562757,
+        10.10003
+      ],
+      "sourceStart": [
+        -7.16548,
+        46.9794,
+        8.50368
+      ],
+      "takedownAtPress": {
+        "t": 1755,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 710,
+      "cameraMoved": [
+        -3.490143199378748,
+        47.19065207108284,
+        10.10003
+      ],
+      "targetMoved": 1.62,
+      "crept": 710,
+      "creptEnd": 1706,
+      "stanceAfterCreep": 1,
+      "actedAt": 1755,
+      "takedownAfter": 2018,
+      "trackSamples": 38,
+      "takedownSamples": 3,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        39
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

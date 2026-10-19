@@ -54,6 +54,8 @@ void nativeNpcAuthorityTests(){
     b=m;float zero=0;b.put(health+0x20,&zero,4);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"zero health cannot become an authority target");
     require(!npcAuthorityHostStreamEligible(s),"1214el: a dead NPC is not host-streamable");
     b=m;b.d(spComp+0x38,2);b.d(children+4,0x30005);require(!inspect(b),"multi-child authored spawner refused");
+    b=m;b.d(spComp+0x38,0);require(inspect(b)&&s.npc.orphan&&s.npc.unique&&s.npc.reciprocal&&s.npc.childCount==0,"1214fa: an orphan of a childless spawner is identified by its spawner");
+    b=m;b.d(children,0x30005);require(!inspect(b),"1214fa: a spawner listing another child is still refused");
     b=m;b.q(frame+0x10,spawner);require(!inspect(b),"foreign reference frame refused");
     b=m;b.q(list,health);require(!inspect(b),"frame not a unique owned component refused");
     b=m;b.d(components[0]+0x18,~0u);require(!inspect(b),"retired component generation refused");
