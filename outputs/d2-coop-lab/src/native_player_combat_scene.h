@@ -56,13 +56,17 @@ inline unsigned nativeCombatVariant(const std::string& asset){
         if(asset==std::string("midnight/gameplay/player/base/combat/")+n+".midnightscene")return 29;
     return 0;
 }
+// 1214du: the step of the last refused read (1 state or action, 2 scene handle, 3 scene lists, 4 instance and scene,
+// 5 action against variant, 6 b-hit, 7 recoil contract, 8 bindings, 9 final consistency) and the variant it read.
+inline unsigned nativeCombatSceneStep=0,nativeCombatSceneVariant=0;
 template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t base,const NativePlayerStates& states,NativePlayerCombatScene& out){
+    nativeCombatSceneVariant=0;
     NativePlayerCombatScene s{};
-    if(states.player.logic!=1||!nativePlayerSwordAction(states,base,s.action)||!s.action)return false;
+    nativeCombatSceneStep=1;if(states.player.logic!=1||!nativePlayerSwordAction(states,base,s.action)||!s.action)return false;
     for(const auto& a:states.active)if(a.id==39||a.id==44||a.id==40){s.statePointer=a.pointer;s.stateId=a.id;s.stateVtable=a.vtable;}
-    if(!s.statePointer||!read(s.statePointer+0x24,&s.handle,4)||!s.handle)return false;
+    nativeCombatSceneStep=2;if(!s.statePointer||!read(s.statePointer+0x24,&s.handle,4)||!s.handle)return false;
     const auto game=states.player.game,manager=game+0x1f5338;
-    std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
+    nativeCombatSceneStep=3;std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> flags{};
     for(unsigned field=0;field<2;++field){
         const auto at=manager+(field?0x610:0);
         if(!read(at,&lists[field],8)||!read(at+8,&flags[field],4)||(flags[field]&0xffffff)>512||((flags[field]&0xffffff)&&!lists[field]))return false;
@@ -72,7 +76,7 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
             if(id==s.handle){if(s.instance&&s.instance!=candidate)return false;s.instance=candidate;}
         }
     }
-    std::uintptr_t declaration=0,scene=0,vt=0,name=0,subName=0,bindings=0;unsigned phase=0,bindingFlags=0;
+    nativeCombatSceneStep=4;std::uintptr_t declaration=0,scene=0,vt=0,name=0,subName=0,bindings=0;unsigned phase=0,bindingFlags=0;
     if(!s.instance||!read(s.instance+0x27c,&phase,4)||phase!=3||!read(s.instance,&declaration,8)||
        !read(declaration,&vt,8)||vt!=base+0x1affbc8||!read(declaration+8,&name,8)||!worldIdentityString(read,name,s.asset)||
        !(s.variant=nativeCombatVariant(s.asset))||!read(s.instance+8,&scene,8)||!read(scene,&vt,8)||vt!=base+0x1b00198||
@@ -80,11 +84,13 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
        !worldIdentityString(read,subName,s.subscene)||s.subscene.empty()||s.subscene.size()>64||
        !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||!read(s.instance+0x10,&bindings,8)||!bindings||
        !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)<1||(bindingFlags&0xffffff)>3)return false;
+    nativeCombatSceneStep=5;nativeCombatSceneVariant=s.variant;
     if((s.action==1)!=(s.variant<=9||(s.variant>=15&&s.variant<=18)||s.variant>=22))return false;
+    nativeCombatSceneStep=6;
     // 1214de: the right b-hit also plays its Scene_2 (1371a, 733 ms, player and right arm; confirmed runtime).
     if(s.variant>=22&&s.variant<=23&&((s.subscene!="Scene_1"&&!(s.variant==22&&s.subscene=="Scene_2"))||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
     // A recoil runs only under Recoil40, at its observed native durations, with the camera and right arm bound.
-    const bool stagger=s.variant==28||s.variant==29;
+    nativeCombatSceneStep=7;const bool stagger=s.variant==28||s.variant==29;
     if(stagger!=(s.stateId==40)||(stagger&&((s.durationMs!=666&&s.durationMs!=733)||s.timeMs>s.durationMs||(bindingFlags&0xffffff)!=2)))return false;
     // Exact native611 kick, corroborated by the exported624 declaration:
     // PlayerRightArm, PlayerCamera and PlayerBody. Both latter groups bind
@@ -108,7 +114,7 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
     // Native629/630: crouched release binds only owned player and right arm.
     if(s.variant==18&&((bindingFlags&0xffffff)!=2||s.timeMs>s.durationMs||states.player.current!=1||
        !std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==6;})))return false;
-    unsigned playerCount=0,armCount=0,targetCount=0;NativePlayerArm arm{};
+    nativeCombatSceneStep=8;unsigned playerCount=0,armCount=0,targetCount=0;NativePlayerArm arm{};
     std::array<std::uintptr_t,3> actors{};
     for(unsigned i=0;i<(bindingFlags&0xffffff);++i){
         unsigned handle=0;std::uintptr_t actorVt=0;
@@ -126,7 +132,7 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
     if(armCount!=1||(s.variant!=11&&playerCount!=(kick&&!blinkKick?2u:1u))||((!kick||blinkKick)&&(bindingFlags&0xffffff)==3&&targetCount!=1))return false;s.character=arm.character;
     // Corvo634 selected Scene_1 too: these are attack variants, not roles.
     if(s.variant==18&&!((s.subscene=="Scene_1"&&s.durationMs==833)||(s.subscene=="Scene_2"&&s.durationMs==1000)))return false;
-    std::uintptr_t again=0;unsigned number=0;
+    nativeCombatSceneStep=9;std::uintptr_t again=0;unsigned number=0;
     if(!read(base+0x39a5290,&again,8)||again!=game||worldIdentityEntity(read,game,1)!=states.player.player||
        !read(s.statePointer+0x24,&number,4)||number!=s.handle||!read(s.statePointer+0x10,&again,8)||again!=states.component||
        !read(s.statePointer,&again,8)||again!=s.stateVtable||

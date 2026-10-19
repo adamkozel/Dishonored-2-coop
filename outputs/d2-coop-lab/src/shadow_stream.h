@@ -85,6 +85,8 @@ unsigned shadowStreamRejectedState=0,shadowStreamExpectedState=0;
 unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
 std::uint64_t shadowSourceAttempts=0,shadowSourceMisses=0,shadowWireRefused=0;
 unsigned shadowSourceReadStage=0,shadowSourceLastFailure=0;
+// 1214du: Recoil 40 samples on the source, the combat reads refused in them (last step and variant), the staggers sent.
+unsigned shadowRecoilStep=0,shadowRecoilVariant=0;std::uint64_t shadowRecoilSamples=0,shadowRecoilRefused=0,shadowRecoilSent=0,shadowRecoilOther=0;
 std::uint64_t shadowUnboundSamples=0,shadowUnboundRefused=0,shadowHoldSamples=0;
 ULONGLONG shadowUnboundProbeUntil=0; // Explicit bounded missing-binding test, off by default.
 std::array<std::uint64_t,8> shadowSourceFailureCounts{};
@@ -406,7 +408,12 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     // sword attack state but is owned by the takedown channel; it has no combat scene
     // (take 1256b: the client finisher was admitted and never sent).
     if(swordAction&&!chokeValid){if(!sword.sword.equipped)return false;NativePlayerCombatScene combat{};
-        if(!readNativePlayerCombatScene(memoryRead,base,states,combat)||combat.character!=localRole+1||
+        const bool recoilState=std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==40;});
+        if(recoilState)++shadowRecoilSamples;
+        if(!readNativePlayerCombatScene(memoryRead,base,states,combat)){
+            if(recoilState){++shadowRecoilRefused;shadowRecoilStep=nativeCombatSceneStep;shadowRecoilVariant=nativeCombatSceneVariant;}return false;}
+        if(recoilState){if(combat.variant==28||combat.variant==29)++shadowRecoilSent;else{++shadowRecoilOther;shadowRecoilVariant=combat.variant;}}
+        if(combat.character!=localRole+1||
            (combat.target.actor&&(combat.target.actor==probeActor||combat.target.handle==probeHandle)))return false;
         if(sceneHandle)*sceneHandle=combat.handle;
         if(airPacket){airPacket->combatVariant=combat.variant;airPacket->combatPhase=combat.subscene=="Loop"||combat.variant==11?2u:1u;
@@ -657,6 +664,8 @@ void writeShadowStream(ULONGLONG tick){
         shadowDeath.sceneRead?"true":"false",shadowDeath.sceneMs,shadowDeath.leadMs,shadowDeath.sceneStage,shadowDeath.scene.c_str());
     fprintf(f,"\"useDiag\":{\"sent\":%llu,\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"rejectReason\":%u,\"lastVariant\":%u,\"lastEvent\":%u},",
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
+    fprintf(f,"\"recoilDiag\":{\"samples\":%llu,\"refused\":%llu,\"sent\":%llu,\"other\":%llu,\"step\":%u,\"variant\":%u},",
+        shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");
     fprintf(f,"\"unboundSamples\":%llu,\"unboundRefused\":%llu,\"holdSamples\":%llu,\"unboundProbeActive\":%s,",shadowUnboundSamples,shadowUnboundRefused,shadowHoldSamples,tick<shadowUnboundProbeUntil?"true":"false");
