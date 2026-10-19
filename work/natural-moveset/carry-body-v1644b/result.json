@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "kind": "lethal",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 6 presented",
+        "Same outcome in both worlds: dead",
+        "Guard after the takedown: host present True hidden False, client present True hidden False",
+        "Possessed corpse: moved host 0 m, client 0 m, end gap 0 m; source moved 0.93 m; states 0,26,53,63"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": false,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "observer": [
+          -44.14,
+          -142.99,
+          66.4
+        ],
+        "source": [
+          -44.14,
+          -142.99,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-19T22:50:10.7975087+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/assassination/assassination_back.midnightscene|1933"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 97358968,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x255cb06d2b0",
+          "actor": "0x255df401610",
+          "attributes": "0x255df85c8e0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 97359000,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x234c685c7a0",
+          "actor": "0x234de25f950",
+          "attributes": "0x234ddfd78e0",
+          "current": 0,
+          "maximum": 40,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": false,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "dead",
+        "observer": "dead"
+      },
+      "guardEnd": {
+        "host": {
+          "present": true,
+          "position": [
+            -43.6325,
+            -142.781,
+            66.5833
+          ],
+          "current": 0,
+          "hidden": false
+        },
+        "client": {
+          "present": true,
+          "position": [
+            -43.6325,
+            -142.781,
+            66.5833
+          ],
+          "current": 0,
+          "hidden": false
+        }
+      },
+      "possessCorpse": {
+        "hostMoved": 0.0,
+        "clientMoved": 0.0,
+        "sourceMoved": 0.93,
+        "endGap": 0.0,
+        "states": [
+          0,
+          26,
+          53,
+          63
+        ]
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 carried body: the source chokes the Dunwall tutorial guard under the product controller, carries the unconscious body forward and drops it; the body must end < 2 m apart in both worlds; fixture restored after every case."
+}
