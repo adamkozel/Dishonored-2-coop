@@ -396,11 +396,19 @@ int main(int argc, char** argv) {
         std::cout<<"{\"readOnly\":true,\"research\":true,\"pid\":"<<pid<<",\"unbound\":"<<unbound<<",\"entries\":[";
         bool first=true;
         for(const auto& n:catalog){
-            if(!n.unique||!n.reciprocal)continue;
+            // 1214ez (#118): non-unique NPCs too (wolfhound packs: multi-child spawners), with any AI decision-like
+            // component types, so nonhuman and pack NPCs can be classified.
             NativeHealth h{};const bool health=readNativeHealth(reader,base,n.handle,h)&&h.game==game&&h.actor==n.actor;
             NativeNpcAuthority s{};const bool authority=health&&readNativeNpcAuthority(reader,base,game,n.handle,s);
             std::cout<<(first?"":",")<<"{\"handle\":"<<n.handle<<",\"name\":"<<jsonString(n.spawnerName)<<",\"definition\":"<<jsonString(n.definition)
+                <<",\"unique\":"<<(n.unique?"true":"false")<<",\"reciprocal\":"<<(n.reciprocal?"true":"false")<<",\"children\":"<<n.childCount
                 <<",\"position\":["<<n.position[0]<<","<<n.position[1]<<","<<n.position[2]<<"]";first=false;
+            {std::uintptr_t list=0;unsigned count=0;std::cout<<",\"aiTypes\":[";bool firstType=true;
+             if(n.actor&&reader(n.actor+0x268,&list,8)&&list&&reader(n.actor+0x270,&count,4)&&(count&0xffffff)<=256)
+                for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0;if(!reader(list+i*8,&c,8)||!c)continue;const auto type=objectType(process.value,base,c);
+                    if(type.find("AIDecision")!=std::string::npos||type.find("AIReflex")!=std::string::npos||type.find("AICombatAttack")!=std::string::npos){
+                        std::uintptr_t vt=0;reader(c,&vt,8);std::cout<<(firstType?"":",")<<"{\"type\":"<<jsonString(type)<<",\"vtableRva\":\"0x"<<std::hex<<(vt?vt-base:0)<<std::dec<<"\"}";firstType=false;}}
+             std::cout<<"]";}
             if(health)std::cout<<",\"health\":"<<h.current<<",\"maximum\":"<<h.maximum<<",\"logic\":"<<h.logic<<",\"ownerFlags\":"<<unsigned(h.ownerFlags);
             std::cout<<",\"authority\":"<<(authority?"true":"false");
             if(authority){
