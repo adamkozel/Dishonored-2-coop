@@ -1,0 +1,134 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-lethal: Native takedown not performed on the source (guard moved or noticed the source)",
+  "cases": [
+    {
+      "source": "client",
+      "kind": "lethal",
+      "observer": "host",
+      "passed": false,
+      "failure": "Native takedown not performed on the source (guard moved or noticed the source)",
+      "checks": [
+        "Domino casts: grant named_power_equip_requested, at most 0 native marks"
+      ],
+      "dominoGrant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "dominoAims": [
+        {
+          "target": [
+            -39.36,
+            -152.71,
+            66.4
+          ],
+          "stand": [
+            -39.36,
+            -148.71,
+            66.4036
+          ],
+          "yaw": -90.0,
+          "pitch": 5.633999477687075,
+          "distance": 4.0
+        },
+        {
+          "target": [
+            -43.44,
+            -140.09,
+            61.0278
+          ],
+          "stand": [
+            -43.44,
+            -144.09,
+            61.0036
+          ],
+          "yaw": 90.0,
+          "pitch": 5.2351086266983975,
+          "distance": 4.0
+        }
+      ],
+      "dominoLinks": {
+        "readyMask": 5,
+        "marksOnly": 0,
+        "sent": 656,
+        "received": 0,
+        "rejected": 0,
+        "unknown": 1,
+        "presented": 0,
+        "event": 0,
+        "nativeHandle": 0,
+        "markCount": 0,
+        "leased": false,
+        "readCount": 3268,
+        "scopedReadCount": 654,
+        "readMaxMs": 45.5492,
+        "scopedReadMaxMs": 2.5782,
+        "readStage": 0,
+        "started": 0,
+        "stopped": 0,
+        "updated": 0,
+        "refused": 0,
+        "retired": 0,
+        "marks": []
+      },
+      "dominoPeerLinks": {
+        "readyMask": 0,
+        "marksOnly": 0,
+        "sent": 0,
+        "received": 655,
+        "rejected": 24,
+        "unknown": 0,
+        "presented": 629,
+        "event": 2,
+        "nativeHandle": 210178740,
+        "markCount": 2,
+        "leased": true,
+        "readCount": 0,
+        "scopedReadCount": 0,
+        "readMaxMs": 0.0,
+        "scopedReadMaxMs": 0.0,
+        "readStage": 0,
+        "started": 3,
+        "stopped": 1,
+        "updated": 235,
+        "refused": 0,
+        "retired": 0,
+        "marks": [
+          {
+            "sourceId": 747,
+            "target": 189269860,
+            "id": 931,
+            "owner": 209916411
+          },
+          {
+            "sourceId": 751,
+            "target": 190252915,
+            "id": 941,
+            "owner": 209916411
+          }
+        ]
+      },
+      "dominoMarksMax": 0.0,
+      "guardHandleSource": "0xb480764",
+      "filmed": false,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -58.9441,
+          -150.069,
+          65.175
+        ],
+        "observer": [
+          -50.9124,
+          -145.918,
+          61.0239
+        ]
+      },
+      "inputAt": "2026-10-19T23:13:01.1605917+02:00",
+      "scenes": [],
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 carried body: the source chokes the Dunwall tutorial guard under the product controller, carries the unconscious body forward and drops it; the body must end < 2 m apart in both worlds; fixture restored after every case."
+}
