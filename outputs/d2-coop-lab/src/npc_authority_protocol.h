@@ -188,6 +188,8 @@ struct NpcPoseBuffer {
         if(count==samples.size()){for(unsigned i=1;i<count;++i)samples[i-1]=samples[i];--count;}
         samples[count++]={at,p};clock=trial;replayFloor=p.h.sequence;return true;
     }
+    // 1214fj (#127): the newest accepted pose, whatever its age (the host's frozen corpse pose).
+    bool latest(CoopNpcPose& out)const{if(!count)return false;out=samples[count-1].pose;return true;}
     bool sample(double now,CoopNpcPose& out)const{
         if(!count||now-samples[count-1].at>350.)return false;
         const double target=now-80.;unsigned upper=0;while(upper<count&&samples[upper].at<target)++upper;

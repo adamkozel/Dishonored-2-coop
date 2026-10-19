@@ -112,6 +112,7 @@ void npcAuthorityProtocolTests(){
     next.h.sequence=3;next.sampleUs+=100000;next.root[0]=10;
     require(timeline.push(next,2200.)&&timeline.count==1&&timeline.sample(2201.,rendered)&&rendered.root[0]==10,"teleport clears interpolation instead of sweeping NPC through geometry");
     require(!timeline.sample(2600.,rendered),"stale body is not extrapolated indefinitely");
+    {CoopNpcPose frozen{};require(timeline.latest(frozen)&&frozen.root[0]==10&&frozen.h.sequence==3,"1214fj: the newest pose stays readable after the 350 ms window (frozen host corpse)");}
     timeline.resume();require(!timeline.sample(2601.,rendered)&&!timeline.push(next,2601.),"menu resume clears prior interpolation while rejecting replay of the last source pose");
     ++next.h.sequence;next.sampleUs+=6000000;require(timeline.push(next,8200.)&&timeline.sample(8201.,rendered),"fresh post-menu source pose anchors resumed body clock");
     const auto session=doorSessionScope(host,client);auto menuHost=host;menuHost.gameLogicState=2;
