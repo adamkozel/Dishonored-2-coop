@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "trigger": "RightThumb:400",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 73,
+        "76:.?AVarkPlayerStateSpyglass@@": 74
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "RightThumb:400",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 59
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    }
+  ],
+  "scope": "Native player states entered by held inputs in the current lab fixture (read-only probes; no commands).",
+  "failure": null
+}
