@@ -30,6 +30,8 @@ constexpr NpcDamageDeclarationName kNpcDamageDeclarationNames[]={
     {0x6574c9822045a103ull,"components/base/damage/ragdoll_hit_world_speed_damage.damage"},
     {0xe8c67ebb8439e574ull,"components/base/damage/shove_damage.damage"},
     {0xa0b9d817837f7916ull,"components/base/damage/sleep_damage.damage"},
+    // 1214fn (#117): code-referenced knockout damage (a choke, and Domino's linked copy of it); runtime name, not a Void export.
+    {0xba6f17ec4e0523d7ull,"code_referenced/damage/generic_sleep_damage.damage"},
     {0x23cd8d2d89e9665aull,"components/base/damage/sleep_no_reaction_damage.damage"},
     {0xade74cb8469d197ull,"components/base/damage/sliding_damage.damage"},
     {0xd5fa193fbc859cb6ull,"components/base/damage/stone_shroud_damage.damage"},

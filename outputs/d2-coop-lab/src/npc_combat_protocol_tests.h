@@ -128,7 +128,9 @@ void npcCombatProtocolTests(){
      bad=q;bad.geometry=p.geometry;require(!validNpcCombat(bad,h,c),"no contact geometry");
      bad=q;bad.kind=NpcCombatMessage::Commit;bad.sourceRole=1;bad.event=1;bad.before=40;bad.maximum=40;bad.after=0;bad.inflicted=40;require(!validNpcCombat(bad,c,h),"Linked is never a commit");
      bad=q;bad.sourceRole=0;require(!validNpcCombat(bad,c,h),"the host never requests");
-     bad=q;bad.damage=NpcCombatDamage::PeerNative;require(!validNpcCombat(bad,h,c),"a replayable declaration is never PeerNative");}
+     bad=q;bad.damage=NpcCombatDamage::PeerNative;require(!validNpcCombat(bad,h,c),"a replayable declaration is never PeerNative");
+     good=q;good.ranged={npcDamageKey("code_referenced/damage/generic_sleep_damage.damage"),0,0,0x84};require(validNpcCombat(good,h,c),"1214fn: a linked knockout is a Linked request");
+     good.damage=NpcCombatDamage::PeerNative;good.ranged.weapon=0;require(validNpcCombat(good,h,c),"1214fn: a linked knockout without flags is a PeerNative request");}
     auto badWorld=world;badWorld.sourceActorArm=0;require(!validNpcCombat(badWorld,c,h),"unattributed world collision rejected");
     badWorld=world;badWorld.sourceRole=1;require(!validNpcCombat(badWorld,c,h),"corpse cannot be disguised as player damage");
     badWorld=world;badWorld.kind=NpcCombatMessage::Request;badWorld.request=1;badWorld.event=0;badWorld.before=badWorld.after=badWorld.maximum=badWorld.inflicted=0;require(!validNpcCombat(badWorld,h,c),"client cannot request host-owned world damage");

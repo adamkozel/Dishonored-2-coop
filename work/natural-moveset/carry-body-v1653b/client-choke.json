@@ -1,0 +1,220 @@
+{
+  "source": "client",
+  "kind": "choke",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Domino casts: grant named_power_equip_requested, at most 0 native marks",
+    "Domino-linked guard 1 after guard 2's kill: host health 10 (suppressed True), client health 10 (suppressed True)",
+    "Remote phase 1 presented",
+    "Remote phase 2 presented",
+    "Remote phase 3 presented",
+    "Same outcome in both worlds: unconscious",
+    "Guard after the takedown: host present True hidden False, client present True hidden False"
+  ],
+  "guardHandleSource": "0xb480764",
+  "filmed": false,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "observer": [
+      -44.14,
+      -142.99,
+      66.4
+    ],
+    "source": [
+      -44.14,
+      -142.99,
+      66.4
+    ]
+  },
+  "dominoGrant": {
+    "grants": 10,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "dominoAims": [
+    {
+      "target": [
+        -56.8415,
+        -143.545,
+        61.0342
+      ],
+      "stand": [
+        -59.8365,
+        -141.934,
+        61.0057
+      ],
+      "yaw": -28.275652064328796,
+      "pitch": 6,
+      "distance": 3.400786085598439
+    },
+    {
+      "target": [
+        -44.14,
+        -142.99,
+        66.4
+      ],
+      "stand": [
+        -44.39,
+        -153.27,
+        66.4036
+      ],
+      "yaw": 88.60689474009625,
+      "pitch": 2,
+      "distance": 10.283039433941699
+    }
+  ],
+  "dominoLinks": {
+    "readyMask": 5,
+    "marksOnly": 493,
+    "sent": 5475,
+    "received": 0,
+    "rejected": 0,
+    "unknown": 112,
+    "presented": 0,
+    "event": 0,
+    "nativeHandle": 0,
+    "markCount": 0,
+    "leased": false,
+    "readCount": 6689,
+    "scopedReadCount": 5595,
+    "readMaxMs": 81.7186,
+    "scopedReadMaxMs": 3.5891,
+    "readStage": 0,
+    "started": 0,
+    "stopped": 0,
+    "updated": 0,
+    "refused": 0,
+    "retired": 0,
+    "marks": []
+  },
+  "dominoPeerLinks": {
+    "readyMask": 0,
+    "marksOnly": 0,
+    "sent": 0,
+    "received": 5474,
+    "rejected": 67,
+    "unknown": 0,
+    "presented": 5396,
+    "event": 10,
+    "nativeHandle": 210178549,
+    "markCount": 2,
+    "leased": true,
+    "readCount": 0,
+    "scopedReadCount": 0,
+    "readMaxMs": 0.0,
+    "scopedReadMaxMs": 0.0,
+    "readStage": 0,
+    "started": 34,
+    "stopped": 32,
+    "updated": 3557,
+    "refused": 0,
+    "retired": 0,
+    "marks": [
+      {
+        "sourceId": 317,
+        "target": 190252915,
+        "id": 282,
+        "owner": 209916411
+      },
+      {
+        "sourceId": 357,
+        "target": 189269860,
+        "id": 285,
+        "owner": 209916411
+      }
+    ]
+  },
+  "dominoMarksMax": 0.0,
+  "inputAt": "2026-10-19T23:50:36.3781267+02:00",
+  "aiHoldEnd": {
+    "active": false,
+    "ready": false,
+    "result": "disabled",
+    "acquired": 10,
+    "released": 10,
+    "lost": 0
+  },
+  "scenes": [
+    "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+    "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+    "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 100993734,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1d5cb552160",
+      "actor": "0x1d5e4c2e660",
+      "attributes": "0x1d5e503a8e0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 100993765,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x27ee1d0c2e0",
+      "actor": "0x27ee53e4090",
+      "attributes": "0x27ee51458d0",
+      "current": 10,
+      "maximum": 10,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": true,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "unconscious",
+    "observer": "unconscious"
+  },
+  "guardEnd": {
+    "host": {
+      "present": true,
+      "position": [
+        -42.3394,
+        -143.64,
+        66.5702
+      ],
+      "current": 10,
+      "hidden": false
+    },
+    "client": {
+      "present": true,
+      "position": [
+        -42.5864,
+        -143.578,
+        66.5923
+      ],
+      "current": 10,
+      "hidden": false
+    }
+  },
+  "restored": true
+}

@@ -79,9 +79,13 @@ inline bool validNpcPeerNative(const NpcCombatRangedDamage& r){
 // 1214fm (#117): the native Domino network repeats a hit on each linked NPC with bit 40 of the damage flags set
 // (takes 1647a fatality and 1648a assassination; confirmed runtime). A Linked request carries a replayable player
 // declaration, its native amount, and its native flags without the link flag in weapon.
+// 1214fn: or a linked knockout (sleep damage), which used to pass through the client natively (1653b).
 constexpr std::uint64_t kNpcCombatLinkedFlag=0x10000000000ull;
+inline bool npcCombatLinkedSleepDeclaration(std::uint64_t key){
+    return key==0xba6f17ec4e0523d7ull||key==0xa0b9d817837f7916ull||key==0x23cd8d2d89e9665aull;
+}
 inline bool validNpcLinked(const NpcCombatRangedDamage& r){
-    return npcDamageDeclarationName(r.declaration)&&npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&r.weapon&&!(r.weapon&~0xffu);
+    return npcDamageDeclarationName(r.declaration)&&(npcCombatReplayableDeclaration(r.declaration)||npcCombatLinkedSleepDeclaration(r.declaration))&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&r.weapon&&!(r.weapon&~0xffu);
 }
 inline bool validNpcRanged(NpcCombatDamage d,const NpcCombatRangedDamage& r){
     const auto* p=npcCombatRangedProfile(d,r);

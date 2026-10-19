@@ -102,7 +102,7 @@ bool npcCombatPassThroughDecl(std::uintptr_t decl){
     return decl&&memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,path)&&
         (path=="code_referenced/damage/generic_sleep_damage.damage"||path=="components/base/damage/sleep_damage.damage"||path=="components/base/damage/sleep_no_reaction_damage.damage");
 }
-std::atomic<std::uint64_t> npcCombatPassedThrough{0};
+std::atomic<std::uint64_t> npcCombatPassedThrough{0},npcCombatLinkedSleepCaptured{0};
 bool routeNpcCombatDamage(void* component,void* info,void* result){
     // Explicit applications call realNativeDamage directly. Nested damage
     // callbacks still need ordinary capture/ordering; do not bypass all of
@@ -112,7 +112,13 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
         std::uintptr_t owner=0,game=0;unsigned generation=0;
         if(!memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x39a5290,&game,8)||game!=n.health.game||worldIdentityEntity(memoryRead,n.health.game,n.npc.handle)!=n.npc.actor||!memoryRead(c+0x10,&owner,8)||owner!=n.npc.actor||
            !memoryRead(c+0x18,&generation,4)||generation!=n.healthGeneration)continue;
-        std::uintptr_t decl=0;if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl)){++npcCombatPassedThrough;break;}
+        std::uintptr_t decl=0;if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl)){
+            // 1214fn (#117): Domino's linked knockout passed through and knocked the client's copy out locally; its channel
+            // ended (ai_ownership_changed) and only the Life roster carried it to the host (1653b). A linked knockout on the
+            // client is captured instead and goes to the host as a Linked (or PeerNative) request.
+            std::uint64_t passFlags=0;
+            if(!localRole||!memoryRead(reinterpret_cast<std::uintptr_t>(info)+0x10,&passFlags,8)||!(passFlags&kNpcCombatLinkedFlag)){++npcCombatPassedThrough;break;}
+            ++npcCombatLinkedSleepCaptured;}
         // 1214q: host hits on an unconscious NPC stay native; the loss is a HostWorld
         // commit and the death is Dead (take 1271d).
         if(!localRole&&b.unconscious){npcCombatHostUnconsciousPassed.fetch_add(1);break;}
@@ -850,7 +856,7 @@ void serviceNpcCombat(ULONGLONG tick){
 void repeatNpcCombat(){if(npcCombat.enabled&&npcCombat.lastSent.sourceNonce==npcCombat.nonce&&npcCombat.lastSent.event+npcCombat.lastSent.request)sendNpcCombat(npcCombat.lastSent);}
 void writeNpcCombat(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-combat.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    const auto& s=npcCombat;fprintf(f,"{\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
+    const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);
