@@ -84,7 +84,9 @@ CoopShadowActionPacket shadowStreamLastPacket{};
 unsigned shadowStreamStateRejectReason=0;double shadowStreamRejectedAge=0;std::uint64_t shadowActionEarlyClamped=0,shadowActionLateClamped=0;
 std::uint64_t shadowStreamRejectedEvent=0,shadowStreamExpectedEvent=0,shadowStreamRejectedSequence=0,shadowStreamExpectedSequence=0;
 unsigned shadowStreamRejectedState=0,shadowStreamExpectedState=0;
-unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
+unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;
+// 1214dy: observer outcome of stagger packets (combat 28/29): received, accepted, rejected and the last reject reasons.
+std::uint64_t shadowStaggerReceived=0,shadowStaggerAccepted=0,shadowStaggerRejected=0;unsigned shadowStaggerLastReject=0,shadowStaggerLastStateReject=0;ULONGLONG shadowStreamRetireRootAge=0,shadowStreamRetireHelloAge=0;
 std::uint64_t shadowSourceAttempts=0,shadowSourceMisses=0,shadowWireRefused=0;
 unsigned shadowSourceReadStage=0,shadowSourceLastFailure=0;
 // 1214du: Recoil 40 samples on the source, the combat reads refused in them (last step and variant), the staggers sent.
@@ -525,8 +527,11 @@ void duplicateShadowStream(){
     if(shadowStreamCurrent(GetTickCount64())&&shadowStreamLastPacket.sequence&&validShadowAction(shadowStreamLastPacket,remote,outgoing))
         coopSendMessage(connection,&shadowStreamLastPacket,sizeof(shadowStreamLastPacket),k_nSteamNetworkingSend_ReliableNoNagle,nullptr);
 }
+struct ShadowStaggerTrace {bool on=false,accepted=false;
+    ~ShadowStaggerTrace(){if(!on)return;if(accepted)++shadowStaggerAccepted;else{++shadowStaggerRejected;shadowStaggerLastReject=shadowStreamRejectReason;shadowStaggerLastStateReject=shadowStreamStateRejectReason;}}};
 void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
     ++shadowStreamReceived;
+    ShadowStaggerTrace staggerTrace{p.kind==1&&CombatPresentation::stagger(p.combatVariant)};if(staggerTrace.on)++shadowStaggerReceived;
     if(productMode||productAutoArm){
         if(p.kind==0&&!shadowStreamCurrent(tick)&&validShadowAction(p,outgoing,remote))shadowPeerHelloAt=tick;
         if(p.kind==0&&nativeMutationAllowed&&shadowStreamCurrent(tick)&&shadowStream.peerToken&&p.sourceToken>shadowStream.peerToken&&
@@ -586,7 +591,7 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
     if(p.useVariant)++shadowUseAccepted;
     shadowStream.lastMapped=mapped;if(clampKind==1)++shadowActionEarlyClamped;else if(clampKind==2)++shadowActionLateClamped;
     shadowStream.combat=std::move(combatTimeline);shadowStream.equipment=std::move(equipmentTimeline);shadowStream.traversal=std::move(traversalTimeline);shadowStream.power=std::move(powerTimeline);shadowStream.ranged=std::move(rangedTimeline);shadowStream.carry=std::move(carryTimeline);shadowStream.grenade=std::move(grenadeTimeline);shadowStream.heart=std::move(heartTimeline);shadowStream.trap=std::move(trapTimeline);shadowStream.choke=std::move(chokeTimeline);shadowStream.stun=std::move(stunTimeline);shadowStream.use=std::move(useTimeline);shadowStream.remoteCarryLocalHandle=carryTarget.handle;shadowStream.movement=std::move(movementTimeline);
-    shadowStream.lastSequence=p.sequence;
+    shadowStream.lastSequence=p.sequence;staggerTrace.accepted=true;
     const bool changed=p.event!=shadowStream.lastEvent;
     if(changed){
         const bool ground=p.state==0||p.state==4||p.state==5||p.state==18;
@@ -684,6 +689,8 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
+    fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",
+        static_cast<unsigned long long>(shadowStaggerReceived),static_cast<unsigned long long>(shadowStaggerAccepted),static_cast<unsigned long long>(shadowStaggerRejected),shadowStaggerLastReject,shadowStaggerLastStateReject);
     fprintf(f,"\"lateHolds\":%llu,\"lateActionAgeMs\":%llu,",shadowStream.lateHolds,shadowStream.lastLateAction?GetTickCount64()-shadowStream.lastLateAction:0ull);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");

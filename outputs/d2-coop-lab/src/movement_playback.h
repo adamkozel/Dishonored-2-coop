@@ -14,6 +14,9 @@ bool movementCurrentFeetRequested=false;
 // 1203b: in-place reactivation of a dormant, already validated bank and the
 // engine-thread commit cost (diagnostics for the 1204 transport stalls).
 std::uint64_t movementReactivations=0;double movementCommitMs=0,movementCommitMaxMs=0;
+// 1214dy: playback of sampled staggers (28/29): samples, active samples, the largest weight, and the context of the last
+// inactive one (bits: 1 no recoil bank, 2 motion invalid, 4 not ground, 8 not crouched, 16 not airborne; stance, motion).
+std::uint64_t movementStaggerSamples=0,movementStaggerActive=0;float movementStaggerWeightMax=0;unsigned movementStaggerRefusal=0,movementStaggerStance=0,movementStaggerMotion=0;
 extern std::atomic<std::uint64_t> movementFeetCasts,movementFeetSolves,movementFeetResetsAvoided,movementFeetReferences;
 struct MovementPlayback {
     // Freeze bounded local root evidence on the first clock rejection. No
@@ -234,6 +237,9 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         const bool combatAir=p.bank.hasAirCombat()&&pose.motionValid&&(pose.motion==2||pose.motion==3);
         const bool deathActive=combatValid&&CombatPresentation::death(combat.variant)&&p.bank.hasDeath();
         const bool combatActive=deathActive||(combatValid&&combat.variant&&!CombatPresentation::death(combat.variant)&&(combat.variant!=17||p.bank.hasKick())&&(combat.variant!=18||p.bank.hasCrouchHeavy())&&(combat.variant<19||p.bank.hasParryImpact())&&(!CombatPresentation::stagger(combat.variant)||p.bank.hasRecoil())&&pose.motionValid&&(ground||crouched||combatAir));
+        if(combatValid&&CombatPresentation::stagger(combat.variant)){++movementStaggerSamples;
+            if(combatActive)++movementStaggerActive;
+            else{movementStaggerRefusal=(p.bank.hasRecoil()?0u:1u)|(pose.motionValid?0u:2u)|(ground?0u:4u)|(crouched?0u:8u)|(combatAir?0u:16u);movementStaggerStance=pose.stance;movementStaggerMotion=pose.motion;}}
         const float combatDt=p.combatLastTime?float((now-p.combatLastTime)*.001):0;p.combatLastTime=now;
         CarryPresentation::Sample carry{};float carryAmount=0;
         const bool carryValid=p.bank.hasCarry()&&shadowStream.carry.sample(pose.time,carry,carryAmount);
@@ -478,6 +484,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
             travelling=travelling*travelling*(3-2*travelling);
             p.combatMoveMix+=(travelling-p.combatMoveMix)*(1-std::exp(-combatDt/.07f));
             p.combatWeight+=((combatActive?1.f:0.f)-p.combatWeight)*(1-std::exp(-combatDt/(combatActive?.06f:.16f)));
+            if(combatActive&&CombatPresentation::stagger(p.combatVariant))movementStaggerWeightMax=(std::max)(movementStaggerWeightMax,p.combatWeight);
         }else p.combatWeight=p.combatAirMix=p.combatMoveMix=0;
         // Fast arm recovery after a climb does not reach toward the hip. Keep
         // the full-body traversal recovery and track actual native equipment.
@@ -903,6 +910,8 @@ void writeMovementStatus(){
     fprintf(f,"\"combatRecoveryStart\":%.7f,\"combatAuthoredAmount\":%.7f,",p.combatRecoveryStart,CombatPresentation::authoredAmount(p.combatVariant,p.combatAmount,p.combatRecoveryStart));
     fprintf(f,"\"stunVariant\":%u,\"stunAmount\":%.7f,\"stunWeight\":%.7f,\"stunEvent\":%llu,",p.stunVariant,p.stunAmount,p.stunWeight,p.stunEvent);
     fprintf(f,"\"shopWeight\":%.7f,\"shopPhase\":%.7f,",p.shopWeight,p.shopPhase);
+    fprintf(f,"\"stagger\":{\"samples\":%llu,\"active\":%llu,\"weightMax\":%.4f,\"refusal\":%u,\"stance\":%u,\"motion\":%u},",static_cast<unsigned long long>(movementStaggerSamples),
+        static_cast<unsigned long long>(movementStaggerActive),movementStaggerWeightMax,movementStaggerRefusal,movementStaggerStance,movementStaggerMotion);
     fprintf(f,"\"readingHold\":%s,\"readingLeaseFail\":%u,\"readingHolds\":%llu,\"readingFrames\":%llu,\"useVariant\":%u,\"useAmount\":%.7f,\"useWeight\":%.7f,\"useEvent\":%llu,\"sourceUses\":%llu,\"sourceUseUnfocused\":%llu,\"sourceUseName\":\"%s\",\"sourceUseFrames\":%llu,\"sourceUseEdges\":%llu,\"sourceUseLastVariant\":%u,\"sourceUseEndReason\":%u,\"sourceUseEndAction\":%u,",movementReadingHold?"true":"false",movementReadingLeaseFail,static_cast<unsigned long long>(movementReadingHolds),static_cast<unsigned long long>(movementReadingFrames),p.useVariant,p.useAmount,p.useWeight,p.useEvent,shadowUse.uses,shadowUse.unfocused,shadowUse.name,shadowUse.frames,shadowUse.edges,shadowUse.lastVariant,shadowUse.endReason,shadowUse.endAction);
     fprintf(f,"\"grenadeHeld\":%u,\"grenadeVariant\":%u,\"grenadeAmount\":%.7f,\"grenadeWeight\":%.7f,\"grenadeEvent\":%llu,",p.grenadeHeld,p.grenadeVariant,p.grenadeAmount,p.grenadeWeight,p.grenadeEvent);
     fprintf(f,"\"heartHeld\":%u,\"heartVariant\":%u,\"heartAmount\":%.7f,\"heartWeight\":%.7f,\"heartEvent\":%llu,",p.heartHeld,p.heartVariant,p.heartAmount,p.heartWeight,p.heartEvent);
