@@ -46,7 +46,9 @@ void npcAuthorityProtocolTests(){
      require(pr[24]==0&&pr[0]==0&&pr[23]==23,"each player ranks its own nearest NPCs; the guard 5 m from the host has rank 0");
      require(npcRelevanceDisplaces(pr[24],pr[23])&&!npcRelevanceDisplaces(pr[24],pr[1]),"the host's guard displaces the client's 24th NPC, not its nearest");
      require(!npcRelevanceDisplaces(5,6)&&npcRelevanceDisplaces(3,6),"two-rank margin against churn");
-     require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");}
+     require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");
+     require(npcRelevanceCivilianRank(0)==8&&npcRelevanceCivilianRank(kNpcRelevanceUnranked)==kNpcRelevanceUnranked,"1214ey: civilians rank 8 places behind");
+     require(!npcRelevanceDisplaces(npcRelevanceCivilianRank(2),9)&&npcRelevanceDisplaces(npcRelevanceCivilianRank(0),20),"1214ey: a nearby civilian displaces only a far combat NPC");}
     {// 1214ae: the client reports the body it carries.
      CoopNpcControl k=p;k.h.kind=NpcAuthorityMessage::Carry;k.h.role=1;k.h.targetArm=8;k.h.targetHandle=0x50009;
      std::swap(k.h.sourceSession,k.h.targetSession);std::swap(k.h.sourceEpoch,k.h.targetEpoch);

@@ -137,7 +137,7 @@ bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16
     out=std::move(names);return true;
 }
 int main(int argc, char** argv) {
-    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-timepiece-scene")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
+    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--npc-ai-registries")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-timepiece-scene")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
     const bool detail = argc == 3 && std::strcmp(argv[2], "--detail") == 0;
     const DWORD pid = std::stoul(argv[1]);
     ProcessHandle snapshot{CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)};
@@ -385,6 +385,68 @@ int main(int argc, char** argv) {
         if(!reader(base+0x39a5290,&game,8)||!readNativeNpcAuthorityCatalog(reader,base,game,catalog,ineligible,unavailable,unbound))return 59;
         std::cout<<"{\"readOnly\":true,\"pid\":"<<pid<<",\"scanMs\":"<<(GetTickCount64()-begin)<<",\"ineligible\":"<<ineligible<<",\"unavailable\":"<<unavailable<<",\"unbound\":"<<unbound<<",\"entries\":[";
         for(unsigned i=0;i<catalog.size();++i){const auto& n=catalog[i];std::cout<<(i?",":"")<<"{\"handle\":"<<n.npc.handle<<",\"name\":"<<jsonString(n.npc.spawnerName)<<",\"definition\":"<<jsonString(n.npc.definition)<<",\"health\":"<<n.health.current<<",\"maximum\":"<<n.health.maximum<<",\"aiGenerations\":["<<n.aiGeneration[0]<<','<<n.aiGeneration[1]<<','<<n.aiGeneration[2]<<"],\"frameGeneration\":"<<n.frameGeneration<<",\"healthGeneration\":"<<n.healthGeneration<<",\"spawnerGeneration\":"<<n.spawnerGeneration<<"}";}
+        std::cout<<"]}\n";return 0;
+    }
+    // 1214ev (#113, research): every unique world NPC with its AI flags and the three eligibility rules, including the
+    // NPCs --npc-authority skips (scripted civilians the client never binds). Read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--npc-authority-all")){
+        std::uintptr_t game=0;std::vector<NativeWorldNpc> catalog;unsigned unbound=0;
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        if(!reader(base+0x39a5290,&game,8)||!readWorldNpcCatalog(reader,base,game,catalog,unbound))return 59;
+        std::cout<<"{\"readOnly\":true,\"research\":true,\"pid\":"<<pid<<",\"unbound\":"<<unbound<<",\"entries\":[";
+        bool first=true;
+        for(const auto& n:catalog){
+            if(!n.unique||!n.reciprocal)continue;
+            NativeHealth h{};const bool health=readNativeHealth(reader,base,n.handle,h)&&h.game==game&&h.actor==n.actor;
+            NativeNpcAuthority s{};const bool authority=health&&readNativeNpcAuthority(reader,base,game,n.handle,s);
+            std::cout<<(first?"":",")<<"{\"handle\":"<<n.handle<<",\"name\":"<<jsonString(n.spawnerName)<<",\"definition\":"<<jsonString(n.definition)
+                <<",\"position\":["<<n.position[0]<<","<<n.position[1]<<","<<n.position[2]<<"]";first=false;
+            if(health)std::cout<<",\"health\":"<<h.current<<",\"maximum\":"<<h.maximum<<",\"logic\":"<<h.logic<<",\"ownerFlags\":"<<unsigned(h.ownerFlags);
+            std::cout<<",\"authority\":"<<(authority?"true":"false");
+            if(authority){
+                std::cout<<",\"acquireEligible\":"<<(npcAuthorityAcquireEligible(s)?"true":"false")<<",\"hostStreamEligible\":"<<(npcAuthorityHostStreamEligible(s)?"true":"false")
+                    <<",\"paused\":"<<(npcAuthorityPaused(s)?"true":"false")<<",\"gamePaused\":"<<(npcAuthorityGamePaused(s)?"true":"false")
+                    <<",\"leaseEligible\":"<<(npcAuthorityLeaseEligible(s)?"true":"false")<<",\"civilian\":"<<(s.ai[0].kind==NativeAiKind::DecisionCivilian?"true":"false")<<",\"ai\":[";
+                for(unsigned i=0;i<3;++i){const auto& a=s.ai[i];
+                    std::cout<<(i?",":"")<<"{\"flags\":"<<a.flags<<",\"low\":"<<(a.flags&15)<<",\"pauseRefs\":"<<((a.flags>>6)&0x1fffff)<<",\"mode\":"<<((a.flags>>4)&3)
+                        <<",\"scheduler\":"<<(a.schedulerActive?"true":"false")<<",\"tree\":"<<(a.tree?"true":"false")<<",\"live\":"<<a.liveCount<<",\"activeCount\":"<<a.activeCount<<"}";}
+                std::cout<<"]";
+            }
+            std::cout<<"}";
+        }
+        std::cout<<"]}\n";return 0;
+    }
+    // 1214ev (#113, research): for one NPC, every AI-like component (vtables of the decision, civilian decision, reflex
+    // and attack classes) and each AI-manager registry (offsets 0x100-0x900) whose pool blocks hold it, with its pool
+    // index and scheduler membership. Civilians carry arkCpntAIDecisionCivilian (VT 1ccb1f8, 0x48 bytes) instead of
+    // arkCpntAIDecision (VT 1cc4108, 0x40). Read-only.
+    if(argc==4&&!std::strcmp(argv[2],"--npc-ai-registries")){
+        const auto handle=static_cast<unsigned>(std::strtoul(argv[3],nullptr,0));std::uintptr_t game=0,manager=0,list=0,vt=0;unsigned count=0;
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game+0x1e8960,&manager,8)||!manager)return 59;
+        const auto actor=worldIdentityEntity(reader,game,handle);
+        if(!actor||!reader(actor+0x268,&list,8)||!list||!reader(actor+0x270,&count,4)||(count&0xffffff)>256)return 59;
+        const std::uintptr_t classes[]={0x1cc4108,0x1ccb1f8,0x1b8a588,0x1b93a88,0x1b4cec8};
+        std::cout<<"{\"readOnly\":true,\"research\":true,\"handle\":"<<handle<<",\"components\":[";bool first=true;
+        for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0;unsigned flags=0;
+            if(!reader(list+i*8,&c,8)||!c||!reader(c,&vt,8))continue;
+            bool known=false;for(auto k:classes)if(vt==base+k)known=true;if(!known)continue;
+            reader(c+0x1c,&flags,4);
+            std::cout<<(first?"":",")<<"{\"vtableRva\":\"0x"<<std::hex<<(vt-base)<<"\",\"flags\":\"0x"<<flags<<std::dec<<"\",\"registries\":[";first=false;
+            bool firstRegistry=true;
+            for(std::uintptr_t off=0x100;off<0x900;off+=8){std::uintptr_t registry=0,blocks=0,type=0,indices=0;unsigned blockSize=0,blockFlags=0,stride=0,live=0,active=0;
+                if(!reader(manager+off,&registry,8)||!registry||!reader(registry+8,&blockSize,4)||!blockSize||blockSize>65536||
+                   !reader(registry+0x40,&blocks,8)||!blocks||!reader(registry+0x48,&blockFlags,4)||!(blockFlags&0xffffff)||(blockFlags&0xffffff)>256||
+                   !reader(registry+0x58,&type,8)||!type||!reader(type+0x5c,&stride,4)||!stride||stride>65536)continue;
+                for(unsigned k=0;k<(blockFlags&0xffffff);++k){std::uintptr_t block=0;if(!reader(blocks+k*8,&block,8)||!block)break;
+                    if(c<block||c-block>=std::uint64_t(stride)*blockSize||(c-block)%stride)continue;
+                    const auto index=std::uint64_t(k)*blockSize+(c-block)/stride;bool scheduled=false;
+                    if(reader(registry+0x10,&indices,8)&&indices&&reader(registry+0x30,&live,4)&&reader(registry+0x38,&active,4)&&active<=live&&live<=65536){
+                        std::vector<std::uint16_t> v(active);if(!active||reader(indices,v.data(),v.size()*2))for(auto x:v)if(x==index)scheduled=true;}
+                    std::cout<<(firstRegistry?"":",")<<"{\"managerOffset\":\"0x"<<std::hex<<off<<std::dec<<"\",\"stride\":"<<stride<<",\"index\":"<<index
+                        <<",\"live\":"<<live<<",\"active\":"<<active<<",\"scheduled\":"<<(scheduled?"true":"false")<<"}";firstRegistry=false;}}
+            std::cout<<"]}";
+        }
         std::cout<<"]}\n";return 0;
     }
     if(argc==4&&!std::strcmp(argv[2],"--usable")){

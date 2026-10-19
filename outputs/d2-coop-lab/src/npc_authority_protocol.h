@@ -50,6 +50,11 @@ inline std::vector<unsigned> npcRelevancePriorities(const std::vector<std::array
         for(unsigned r=0;r<order.size();++r)priority[order[r]]=(std::min)(priority[order[r]],r);}
     return priority;
 }
+// 1214ey (#113): civilians (arkCpntAIDecisionCivilian, readable since 1214ex: 49 on Edge of the World) rank 8 places
+// behind combat NPCs for the 24 channels, so a crowd near a player cannot push out the guards whose fights and deaths
+// must be shared; they are only bound within 15 m of a player and dropped beyond 20 m (npc_authority_stream.h).
+constexpr unsigned kNpcCivilianRankOffset=8;
+inline unsigned npcRelevanceCivilianRank(unsigned priority){return priority==kNpcRelevanceUnranked?priority:priority+kNpcCivilianRankOffset;}
 inline bool npcRelevanceDisplaces(unsigned candidate,unsigned bound){
     return candidate!=kNpcRelevanceUnranked&&(bound==kNpcRelevanceUnranked||candidate+2<bound);
 }

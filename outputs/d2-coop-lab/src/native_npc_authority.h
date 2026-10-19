@@ -69,13 +69,22 @@ inline bool npcAuthorityPaused(const NativeNpcAuthority& s){
         ((s.ai[i].flags>>4)&3)!=2||s.ai[i].schedulerActive)return false;
     return true;
 }
+// 1214ex (#113): an NPC whose decision and reflex AI the game itself has paused for a scripted post or activity
+// (the Edge of the World overseers at their posts: mode 2, one pause reference, scheduler inactive, in both worlds; take
+// 1594a). The client refused their Hellos as busy (#113). A lease adds one reference on top of the game's and releases
+// only its own (acquireNpcAiLease). The mod's other pause owners cannot run beside the NPC stream (beginNpcStream).
+inline bool npcAuthorityGamePaused(const NativeNpcAuthority& s){return s.npc.unique&&s.npc.reciprocal&&s.ai[0].tree&&npcAuthorityPaused(s);}
+inline bool npcAuthorityLeaseEligible(const NativeNpcAuthority& s){return npcAuthorityAcquireEligible(s)||npcAuthorityGamePaused(s);}
 template<class Read> bool readNativeNpcAuthorityFrame(Read read,std::uintptr_t base,std::uintptr_t game,unsigned handle,NativeNpcAuthority& out){
     NativeNpcAuthority s{};
     if(!readWorldNpcIdentity(read,base,game,handle,s.npc)||!s.npc.unique||!s.npc.reciprocal||
        !readNativeHealth(read,base,handle,s.health)||s.health.game!=game||s.health.actor!=s.npc.actor||s.health.logic!=1)return false;
     constexpr NativeAiKind kinds[]={NativeAiKind::Decision,NativeAiKind::Reflex,NativeAiKind::Attack};
     for(unsigned i=0;i<3;++i){
-        if(!readNativeAiComponent(read,base,game,handle,kinds[i],s.ai[i])||s.ai[i].actor!=s.npc.actor||
+        // 1214ex (#113): a civilian's decision is arkCpntAIDecisionCivilian.
+        const bool found=readNativeAiComponent(read,base,game,handle,kinds[i],s.ai[i])||
+            (!i&&readNativeAiComponent(read,base,game,handle,NativeAiKind::DecisionCivilian,s.ai[i]));
+        if(!found||s.ai[i].actor!=s.npc.actor||
            !read(s.ai[i].component+0x18,&s.aiGeneration[i],4)||s.aiGeneration[i]==~0u)return false;
     }
     std::uintptr_t vt=0,owner=0,list=0;unsigned count=0;
@@ -114,7 +123,7 @@ template<class Read> bool readNativeNpcAuthorityCatalog(Read read,std::uintptr_t
         if(h.game!=game||h.actor!=n.actor||h.logic!=1||h.current<=0){++ineligible;continue;}
         NativeNpcAuthority s{};
         if(!readNativeNpcAuthority(read,base,game,n.handle,s)){++unavailable;continue;}
-        if(!(hostStream?npcAuthorityHostStreamEligible(s):npcAuthorityAcquireEligible(s))){++ineligible;continue;}
+        if(!(hostStream?npcAuthorityHostStreamEligible(s):npcAuthorityLeaseEligible(s))){++ineligible;continue;}
         if(s.npc.spawner!=n.spawner||s.npc.component!=n.component||s.npc.spawnerName!=n.spawnerName||s.npc.definition!=n.definition){++unavailable;continue;}
         if(entries.size()>=1024)return false;
         entries.push_back(std::move(s));

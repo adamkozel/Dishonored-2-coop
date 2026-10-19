@@ -37,6 +37,17 @@ void nativeNpcAuthorityTests(){
     {auto swapped=original;swapped.ai[0].tree^=0x10;require(!sameNpcAuthorityIdentity(original,swapped)&&sameNpcAuthorityIdentity(original,swapped,false),"combat behaviour-tree swap keeps the ongoing incarnation (1104)");
      swapped=original;swapped.ai[0].component^=0x10;require(!sameNpcAuthorityIdentity(original,swapped,false),"a replaced AI component is still a new incarnation");}
     auto b=paused;b.d(components[0]+0x1c,0xa00000aa);require(inspect(b)&&npcAuthorityPaused(s),"additional native pause reference retained");
+    // 1214ex (#113): the game's own pause (a scripted post) is lease-eligible; a civilian decision reads as the decision AI.
+    require(inspect(paused)&&npcAuthorityGamePaused(s)&&npcAuthorityLeaseEligible(s),"1214ex: a game-paused NPC at a scripted post is lease-eligible");
+    require(inspect(m)&&!npcAuthorityGamePaused(s)&&npcAuthorityLeaseEligible(s),"1214ex: a running NPC stays lease-eligible");
+    {auto c=paused;c.d(components[2]+0x1c,0xa000000a);c.d(registries[2]+0x38,1);c.q(registries[2]+0x28,indices[2]+2);
+     require(inspect(c)&&!npcAuthorityLeaseEligible(s),"1214ex: a paused NPC whose attack AI runs is not lease-eligible");}
+    {auto c=m;c.q(components[0],base+nativeAiVtable(NativeAiKind::DecisionCivilian));c.q(manager+nativeAiRegistryOffset(NativeAiKind::DecisionCivilian),registries[0]);
+     c.q(manager+nativeAiRegistryOffset(NativeAiKind::Decision),0);
+     require(inspect(c)&&s.ai[0].kind==NativeAiKind::DecisionCivilian&&npcAuthorityAcquireEligible(s),"1214ex: a civilian decision (arkCpntAIDecisionCivilian) reads as the decision AI");
+     auto w=c;w.q(manager+nativeAiRegistryOffset(NativeAiKind::DecisionCivilian),0);w.q(manager+nativeAiRegistryOffset(NativeAiKind::Decision),registries[0]);
+     require(!inspect(w),"1214ex: a civilian decision is found only in its own registry");}
+    require(nativeAiVtable(NativeAiKind::DecisionCivilian)==0x1ccb1f8&&nativeAiRegistryOffset(NativeAiKind::DecisionCivilian)==0x458,"1214ex: civilian decision class and registry (1595a)");
     b=m;b.d(registries[0]+0x38,0);b.q(registries[0]+0x28,indices[0]);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"script-inactive scheduler excluded despite started flags");
     b=m;b.d(components[2]+0x1c,0xa000000a);b.d(registries[2]+0x38,1);b.q(registries[2]+0x28,indices[2]+2);require(inspect(b)&&!npcAuthorityAcquireEligible(s),"native active attack excluded");
     require(!npcAuthorityHostStreamEligible(s),"1214el: an attacking NPC is not host-streamable either");
