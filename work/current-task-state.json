@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T18:00:00+02:00",
+  "UpdatedAt": "2026-10-19T19:00:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,8 +22173,8 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214ey (deployed; protocol 80, bank 75/382): scripted civilians and posted NPCs in NPC authority (#113), with civilian relevance limits; 1214eu Timepiece kept",
-    "NextCandidate": "none pending; next stage 4 cards: #118 (hounds and clockworks), #115 (Far Reach pulls), #117 (power upgrade outcomes)",
+    "Candidate": "candidate-npc-combat-v1214fa (deployed; protocol 80, bank 75/382): orphan NPCs identified (#118), scripted civilians and posted NPCs (#113), Timepiece (#102)",
+    "NextCandidate": "#118 continues: takedown takes inside a mission hold at an awake state; then #115, #117",
     "Complete": "103 of 105 (2 not applicable or excluded); the checklist is complete. #102 (native player states outside the checklist) decided in chapter 101; next: stage 4",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
@@ -22279,5 +22279,24 @@
       "mission-coverage-v1598e"
     ],
     "Result": "civilians (arkCpntAIDecisionCivilian) readable; game-paused posted NPCs leased with one added reference; photographer and seated servant takedowns presented in both roles; posted overseer bound without prebind"
+  },
+  "NonhumanNpcAuthority": {
+    "Card": 118,
+    "Status": "in progress (binding done: dormant hounds, orphans, clockworks; takedown takes per kind open)",
+    "Chapter": "documentation/handoff-2026-10-11/102-scripted-npcs-in-npc-authority.md",
+    "Evidence": [
+      "mission-coverage-v1599a",
+      "mission-coverage-v1599b",
+      "mission-coverage-v1600a",
+      "mission-coverage-v1600b",
+      "state-trigger-v1601a",
+      "state-trigger-v1601b",
+      "state-trigger-v1602a",
+      "mission-coverage-v1602b",
+      "mission-coverage-v1602c",
+      "mission-coverage-v1602d",
+      "mission-coverage-v1602e",
+      "state-trigger-v1603a"
+    ]
   }
 }

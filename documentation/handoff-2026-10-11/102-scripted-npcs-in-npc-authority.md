@@ -66,3 +66,22 @@ Candidates 1214ex and 1214ey fix both causes.
 
 - Meagan (a companion) is still unreadable; she is never a takedown target.
 - The `-PlaceBoth` and `-ClientPrebind` fixture options are no longer needed for posted NPCs.
+
+## Orphan and nonhuman NPCs (#118, 1214fa; in progress)
+
+- **Dormant gravehounds** are paused by the game itself (state-trigger-v1594b), so 1214ex's lease rule binds them on both
+  sides. Nonhuman rigs (22 and 86 joints) are bound in both worlds (1599a/b).
+- **Orphans.**
+  - The Addermire Institute's guards, wolfhounds and elites, and the Clockwork Mansion's reinforcements and some
+    clockwork soldiers, were outside NPC authority: 25 of 49 and 11 of 34 living NPCs, both worlds (state-trigger-v1601a/b,
+    probe-only 1214ez).
+  - Their spawners list no child, which fails the reciprocal check. Every one has a distinct spawner name and definition.
+  - 1214fa ([world_identity.h](../../outputs/d2-coop-lab/src/world_identity.h)) identifies an orphan by its spawner while
+    no other NPC points at it. NPC authority, combat outcomes, chokes and carry then reach it.
+  - 47 of 49 Institute NPCs are readable in both worlds (1602a); only the Outsider and Meagan are not.
+- **Clockwork soldiers** with normal spawners were already readable and lease-eligible (8 on the house map).
+- **Still open: a native takedown per kind.**
+  - The Conservatory gravehound refuses the lab approach (sensor state 4 from the first sample; 1600a/b).
+  - The Institute's orphans keep unstarted AI until mission script events wake them: still inactive with a player 6 m
+    away for 10 s (1603a). The lab takedowns found no sensor entry (1602b-e).
+  - These takes need a takedown harness inside a mission hold at an awake state.

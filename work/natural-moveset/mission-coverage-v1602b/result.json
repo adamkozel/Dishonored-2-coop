@@ -1,0 +1,122 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,44,64)",
+      "checks": [],
+      "targetCandidates": [
+        "ld_spawner_111=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_154=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_127=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_153=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_148=models/characters/def/generic/lower_guard_male_small_01.def",
+        "ld_spawner_149=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_106=models/characters/def/generic/lower_guard_male_small_01.def",
+        "ld_spawner_104=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_98=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_97=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_96=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_93=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_88=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_87=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_79=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_78=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_74=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_72=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_12=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_38=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_163=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_156=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_1=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_34=models/characters/def/generic/lower_guard_male_small_01.def",
+        "ld_spawner_31=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_29=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_17=models/characters/def/generic/guard_male_small_01.def",
+        "ld_spawner_165=models/characters/def/generic/lower_guard_male_small_01.def",
+        "ld_spawner_143=models/characters/def/generic/guard_male_small_01.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "ld_spawner_111",
+          "err": 0.32,
+          "dz": 0.81
+        },
+        {
+          "spawner": "ld_spawner_154",
+          "err": 0.0,
+          "dz": 0.0
+        }
+      ],
+      "targetChosen": "ld_spawner_154=models/characters/def/generic/guard_male_small_01.def",
+      "target": {
+        "spawner": "ld_spawner_154",
+        "definition": "models/characters/def/generic/guard_male_small_01.def",
+        "position": [
+          -3.50245,
+          64.3258,
+          34
+        ],
+        "forward": [
+          -0.04906832085183542,
+          0.9987954244432548
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -6.4767555289464385,
+        63.72913709644503,
+        35.6
+      ],
+      "sourceStart": [
+        -3.439,
+        63.027,
+        34.0037
+      ],
+      "takedownAtPress": {
+        "t": 1710,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 557,
+      "cameraMoved": [
+        -6.4767555289464385,
+        63.72913709644503,
+        35.6
+      ],
+      "targetMoved": 0.0,
+      "crept": 1266,
+      "creptEnd": 1661,
+      "stanceAfterCreep": 1,
+      "actedAt": 1710,
+      "takedownAfter": 1957,
+      "trackSamples": 39,
+      "takedownSamples": 4,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
