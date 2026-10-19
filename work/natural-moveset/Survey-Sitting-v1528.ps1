@@ -1,9 +1,11 @@
-param([string]$Take='sitting-survey-v1528a',[string]$Maps='campaign/edge_of_the_world/eotw.mapinfo',[int]$Samples=30,[int]$IntervalMs=2000,[string]$Candidate='candidate-npc-combat-v1214em')
+param([string]$Take='sitting-survey-v1528a',[switch]$Gates,[string]$Maps='campaign/edge_of_the_world/eotw.mapinfo',[int]$Samples=30,[int]$IntervalMs=2000,[string]$Candidate='candidate-npc-combat-v1214em')
 # 1528 (#11 enemy_body_size_variants, seated): which NPCs the game counts as seated, per mission map, read with the
 # native seated test's own input (probe --sitting, 1214em: a type-1 request in the NPC's navigation request list,
 # TIProvide_ProvideTargetIsSitting 0x14082d200; chapter 100, confirmed static). Each map is loaded in both instances
 # (low chaos, host Corvo, client Emily) and the host is sampled every IntervalMs for Samples samples while the players
 # stay at the mission start. Read-only probes; Dunwall fixture restored.
+# 1559 (-Gates): after sampling, the takedown gates (probe --takedown-gates, 1214ep) of every seated NPC and of the first
+# five unique standing NPCs are read on the host.
 # 1528b: the map rows are $mapRows (1528a: a list named $maps overwrote the -Maps parameter; PowerShell names ignore case).
 $ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
 $mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$mapRows=[Collections.Generic.List[object]]::new()
@@ -40,6 +42,11 @@ try{
    foreach($n in $sit){$key=$n.spawnerName;if(!$seen.ContainsKey($key)){$seen[$key]=[ordered]@{spawnerName=$n.spawnerName;definition=$n.definition;unique=$n.unique;handle=$n.handle;first=$k;count=0;position=$n.position;requests=$n.requests}};$seen[$key].count++}
    Start-Sleep -Milliseconds $IntervalMs}
   Save "$out/$tag-trace.json" @($trace);$last=try{Q host '--sitting'}catch{$null};if($last){Save "$out/$tag-last.json" $last}
+  if($Gates-and$last){$gl=[Collections.Generic.List[object]]::new();$std=0
+   foreach($n in @($last.npcs)){if(!$n.unique){continue};if(!$n.sitting){if($std-ge5){continue};$std++}
+    $h=[Convert]::ToUInt64(([string]$n.handle-replace'^0x',''),16);$g=try{Q host '--takedown-gates' $h}catch{$null}
+    $gl.Add([ordered]@{spawnerName=$n.spawnerName;definition=$n.definition;sitting=$n.sitting;gates=$g})}
+   Save "$out/$tag-gates.json" @($gl)}
   $mapRows.Add([ordered]@{map=$map;loaded=$true;samples=$trace.Count;npcs=$(if($last){@($last.npcs).Count}else{$null});seated=@($seen.Values)})}
  Save "$out/survey.json" @($mapRows)
  if(!@($mapRows|Where-Object {$_.loaded}).Count){$failure='No map loaded'}
