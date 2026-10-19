@@ -221,6 +221,7 @@ float npcNearestPlayerSq(const float* p){
     return best;
 }
 unsigned npcEnabledChannels(){unsigned n=0;for(const auto& c:npcChannels)if(c.enabled)++n;return n;}
+bool npcHostStreamScope(){return !localRole&&std::strcmp(mapName,kGuardMap)!=0;} // 1214el (#118)
 bool bindNpcChannel(const NativeNpcAuthority& n,ULONGLONG tick){
     NativeSkeleton s{};unsigned generation=0;
     if(!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),n.npc.handle,s)||s.game!=n.health.game||s.actor!=n.npc.actor||
@@ -243,17 +244,18 @@ bool bindNpcChannel(const NativeNpcAuthority& n,ULONGLONG tick){
 // re-reads the few NPCs it is about to bind (freshNpcCatalogEntry) before
 // bindNpcChannel, which re-reads their skeleton and identity again.
 struct NpcCatalogSnapshot{ULONGLONG at=0;std::uintptr_t game=0;std::uint64_t epoch=0;bool ok=false;unsigned ineligible=0,unavailable=0,unbound=0;double ms=0;std::vector<NativeNpcAuthority> entries;std::vector<NativeNpcLife> life;};
-struct NpcCatalogWorker{SRWLOCK lock=SRWLOCK_INIT;HANDLE wake=nullptr;bool started=false,pending=false;std::uintptr_t game=0;std::uint64_t epoch=0;
+// 1214el (#118): hostStream: the host's catalog off the lab map, where the mod's own fixtures pause guards.
+struct NpcCatalogWorker{SRWLOCK lock=SRWLOCK_INIT;HANDLE wake=nullptr;bool started=false,pending=false,hostStream=false;std::uintptr_t game=0;std::uint64_t epoch=0;
     NpcCatalogSnapshot result;std::uint64_t requests=0,completed=0,taken=0,failed=0;double maxMs=0,lastMs=0;};
 NpcCatalogWorker npcCatalogWorker;
 DWORD WINAPI npcCatalogWorkerMain(void*){
     auto& w=npcCatalogWorker;
     for(;;){
         WaitForSingleObject(w.wake,INFINITE);
-        AcquireSRWLockExclusive(&w.lock);const bool pending=w.pending;const auto game=w.game;const auto epoch=w.epoch;ReleaseSRWLockExclusive(&w.lock);
+        AcquireSRWLockExclusive(&w.lock);const bool pending=w.pending;const auto game=w.game;const auto epoch=w.epoch;const bool hostStream=w.hostStream;ReleaseSRWLockExclusive(&w.lock);
         if(!pending)continue;
         NpcCatalogSnapshot s{};s.game=game;s.epoch=epoch;const double start=presentationClock();
-        s.ok=readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),game,s.entries,s.ineligible,s.unavailable,s.unbound,&s.life);
+        s.ok=readNativeNpcAuthorityCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),game,s.entries,s.ineligible,s.unavailable,s.unbound,&s.life,hostStream);
         s.ms=presentationClock()-start;s.at=GetTickCount64();
         AcquireSRWLockExclusive(&w.lock);w.lastMs=s.ms;w.maxMs=(std::max)(w.maxMs,s.ms);if(!s.ok)++w.failed;
         w.result=std::move(s);w.pending=false;++w.completed;ReleaseSRWLockExclusive(&w.lock);
@@ -264,7 +266,7 @@ void npcCatalogRequest(){
     auto& w=npcCatalogWorker;
     if(!w.started){w.wake=CreateEventW(nullptr,FALSE,FALSE,nullptr);if(!w.wake)return;
         HANDLE t=CreateThread(nullptr,0,npcCatalogWorkerMain,nullptr,0,nullptr);if(!t){CloseHandle(w.wake);w.wake=nullptr;return;}CloseHandle(t);w.started=true;}
-    AcquireSRWLockExclusive(&w.lock);const bool idle=!w.pending;if(idle){w.pending=true;w.game=observedGame;w.epoch=outgoing.worldEpoch;++w.requests;}ReleaseSRWLockExclusive(&w.lock);
+    AcquireSRWLockExclusive(&w.lock);const bool idle=!w.pending;if(idle){w.pending=true;w.game=observedGame;w.epoch=outgoing.worldEpoch;w.hostStream=npcHostStreamScope();++w.requests;}ReleaseSRWLockExclusive(&w.lock);
     if(idle)SetEvent(w.wake);
 }
 void processNpcLife(const NpcCatalogSnapshot& s);
@@ -277,9 +279,10 @@ bool npcCatalogTake(NpcCatalogSnapshot& out){
 }
 // Engine thread: the snapshot entry is still the same eligible living NPC.
 bool freshNpcCatalogEntry(const NativeNpcAuthority& n,NativeNpcAuthority& fresh){
+    const bool hostStream=npcHostStreamScope();
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth h{};
     if(!readNativeHealth(memoryRead,base,n.npc.handle,h)||h.game!=observedGame||h.actor!=n.npc.actor||h.logic!=1||h.current<=0)return false;
-    return readNativeNpcAuthority(memoryRead,base,observedGame,n.npc.handle,fresh)&&npcAuthorityAcquireEligible(fresh)&&sameNpcAuthorityIdentity(n,fresh);
+    return readNativeNpcAuthority(memoryRead,base,observedGame,n.npc.handle,fresh)&&(hostStream?npcAuthorityHostStreamEligible(fresh):npcAuthorityAcquireEligible(fresh))&&sameNpcAuthorityIdentity(n,fresh);
 }
 std::uint64_t npcCatalogStale=0;
 void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){

@@ -1,0 +1,67 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: Target outcome host alive, client alive, expected unconscious",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "Target outcome host alive, client alive, expected unconscious",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_overseer",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          -107.355,
+          -73.8152,
+          -14.3998
+        ],
+        "forward": [
+          0.9180795329191582,
+          -0.39639623009678104
+        ]
+      },
+      "kind": "choke",
+      "waitScene": "midnight/gameplay/human/common/sleep/sleep_armchair.midnightscene",
+      "waitSceneMs": 1570,
+      "approachYaw": -90.0,
+      "camera": [
+        -104.42238309769897,
+        -74.59125290047672,
+        -12.799800000000001
+      ],
+      "sourceStart": [
+        -106.8,
+        -72.53,
+        -14.3962
+      ],
+      "prePitch": 22.0,
+      "replacedAt": 471,
+      "cameraMoved": [
+        -103.36302923508869,
+        -75.10734700397968,
+        -12.799900000000001
+      ],
+      "targetMoved": 1.18,
+      "crept": 1067,
+      "creptEnd": 1406,
+      "stanceAfterCreep": 1,
+      "actedAt": 1434,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        41,
+        44,
+        53,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

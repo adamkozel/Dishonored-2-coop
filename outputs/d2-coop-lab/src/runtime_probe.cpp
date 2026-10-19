@@ -136,7 +136,7 @@ bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16
     out=std::move(names);return true;
 }
 int main(int argc, char** argv) {
-    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
+    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
     const bool detail = argc == 3 && std::strcmp(argv[2], "--detail") == 0;
     const DWORD pid = std::stoul(argv[1]);
     ProcessHandle snapshot{CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)};
@@ -186,6 +186,92 @@ int main(int argc, char** argv) {
         if(focused){const auto actor=worldIdentityEntity(reader,game,handle);std::uintptr_t text=0;
             if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))focused=false;}
         std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"focused\":"<<(focused?"true":"false")<<",\"handle\":"<<handle<<",\"name\":"<<jsonString(name)<<"}\n";
+        return 0;
+    }
+    if(argc==4&&!std::strcmp(argv[2],"--on-ground")){
+        // 1214em (#11 enemy_body_size_variants): the knocked-down takedown condition for one NPC, read-only, as
+        // IsOnGround 0x14082cc80 evaluates it (chapter 100, confirmed static): the physics component (type
+        // 0x39b4630) in mode 0 or 2 (0x1405bf440), or the AIPhysicsReaction (type 0x39e2340, vtable 0x1b88928, pose
+        // +0x13c = 3 at construction) in recovery pose 1 (0x1405bf480), or laying (+0x152 bit 3, +0x150 bit 1, timer
+        // +0x138 > 0, or pose 0; 0x1405bf4c0). Components are matched like D2_Entity_GetComponent 0x140877720: the
+        // class index the component's type getter returns (lea rax,[descriptor]; ret) within the type's index range.
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        const auto handle=static_cast<std::uint32_t>(std::strtoul(argv[3],nullptr,0));
+        std::uintptr_t game=0,actor=0,list=0;unsigned count=0;float root[3]{};
+        if(!reader(base+0x39a5290,&game,8)||!game||!(actor=worldIdentityEntity(reader,game,handle))||!reader(actor+0x300,root,12)||
+           !reader(actor+0x268,&list,8)||!list||!reader(actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        const auto descriptorOf=[&](std::uintptr_t component)->std::uintptr_t{std::uintptr_t vt=0,fn=0;unsigned char code[8]{};std::int32_t rel=0;
+            if(!component||!reader(component,&vt,8)||!reader(vt,&fn,8)||!reader(fn,code,8)||code[0]!=0x48||code[1]!=0x8d||code[2]!=0x05||code[7]!=0xc3)return 0;
+            std::memcpy(&rel,code+3,4);return fn+7+static_cast<std::intptr_t>(rel);};
+        const auto findComponent=[&](std::uintptr_t type)->std::uintptr_t{std::int32_t lo=0,hi=0,index=0;if(!reader(type+0x60,&lo,4)||!reader(type+0x64,&hi,4))return 0;
+            for(const auto m:members){const auto d=descriptorOf(m);if(d&&reader(d+0x60,&index,4)&&lo<=index&&index<=hi)return m;}return 0;};
+        const auto physics=findComponent(base+0x39b4630),reaction=findComponent(base+0x39e2340);
+        std::uint32_t mode=0xffffffff;std::int32_t pose=-1;float timer=0;unsigned char b150=0,b152=0;
+        if(physics&&!reader(physics+0x238,&mode,4))return 59;
+        if(reaction&&(!reader(reaction+0x138,&timer,4)||!reader(reaction+0x13c,&pose,4)||!reader(reaction+0x150,&b150,1)||!reader(reaction+0x152,&b152,1)))return 59;
+        const bool ragdoll=physics&&(mode&0xfffffffdu)==0,getUp=reaction&&pose==1,laying=reaction&&((b152&8)||timer>0||(b150&2)||pose==0);
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"handle\":"<<handle<<",\"root\":["<<root[0]<<','<<root[1]<<','<<root[2]
+            <<"],\"physics\":"<<(physics?"true":"false")<<",\"mode\":"<<static_cast<std::int64_t>(physics?mode:-1)<<",\"reaction\":"<<(reaction?"true":"false")
+            <<",\"pose\":"<<pose<<",\"timer\":"<<timer<<",\"flags150\":"<<unsigned(b150)<<",\"flags152\":"<<unsigned(b152)
+            <<",\"ragdoll\":"<<(ragdoll?"true":"false")<<",\"getUp\":"<<(getUp?"true":"false")<<",\"laying\":"<<(laying?"true":"false")
+            <<",\"onGround\":"<<((ragdoll||getUp||laying)?"true":"false")<<"}\n";
+        return 0;
+    }
+    if(argc==3&&!std::strcmp(argv[2],"--sitting")){
+        // 1214em (#11 enemy_body_size_variants): which NPCs the game counts as seated right now, read-only. The
+        // seated takedown condition (TIProvide_ProvideTargetIsSitting 0x14082d200; chapter 100, confirmed static) looks
+        // for a type-1 entry in the arkNavigationReqMgr at arkCpntNavigation+0xab8 (navigation vtable 0x1b97898 set by
+        // its ctor 0x1405f3420; list +0xac0, count +0xac8, 28-byte entries, type = first dword).
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        std::uintptr_t game=0;unsigned unbound=0;std::vector<NativeWorldNpc> catalog;
+        if(!reader(base+0x39a5290,&game,8)||!readWorldNpcCatalog(reader,base,game,catalog,unbound))return 45;
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"npcs\":[";bool first=true;
+        for(const auto& n:catalog){
+            std::uintptr_t list=0,vt=0,nav=0,entries=0;unsigned count=0,requests=0;
+            if(!n.actor||!reader(n.actor+0x268,&list,8)||!list||!reader(n.actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)continue;
+            std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))continue;
+            for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b97898){nav=m;break;}
+            if(!nav||!reader(nav+0xac0,&entries,8)||!reader(nav+0xac8,&requests,4))continue;
+            requests&=0xffffff;if(requests>64||(requests&&!entries))continue;
+            std::vector<unsigned char> raw(requests*28);if(requests&&!reader(entries,raw.data(),raw.size()))continue;
+            bool sitting=false;std::cout<<(first?"":",")<<"{\"handle\":\"0x"<<std::hex<<n.handle<<std::dec<<"\",\"spawnerName\":"<<jsonString(n.spawnerName)
+                <<",\"definition\":"<<jsonString(n.definition)<<",\"unique\":"<<(n.unique?"true":"false")
+                <<",\"position\":["<<n.position[0]<<','<<n.position[1]<<','<<n.position[2]<<"],\"requests\":[";first=false;
+            for(unsigned i=0;i<requests;++i){std::uint32_t type=0;std::memcpy(&type,raw.data()+i*28,4);if(type==1)sitting=true;std::cout<<(i?",":"")<<type;}
+            std::cout<<"],\"sitting\":"<<(sitting?"true":"false")<<"}";
+        }
+        std::cout<<"]}\n";return 0;
+    }
+    if(argc==3&&!std::strcmp(argv[2],"--window-sensor")){
+        // 1214em (#11 wall_and_window_variants): the native window-takedown sensor, read-only
+        // (arkCpntPlayerSensorWindowAssassination, vtable 0x1b43a28 set by its ctor 0x1403d5700; chapter 100,
+        // confirmed static). Its evaluate 0x1403d6050 writes every frame: +0x1c4 the interaction sensor's target,
+        // +0x1d8 the window point (first non-character shin-sweep hit; the sentinel 0x31af620 when none),
+        // +0x1e4 the sill height above the player origin, +0x1e8 the target within the decl angle of the wall
+        // normal, +0x1e9 the opening box free with a sill within 0.2 m below it, +0x1ea the player grounded.
+        // The shin and opening queries run whatever the target (0x1403d64c0), so a harness can test window
+        // geometry with no NPC in view.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0,entity=0;unsigned count=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b43a28){sensor=m;break;}
+        unsigned char enabled=0,flags[3]{};std::uint32_t target=0;float point[3]{},sentinel[3]{},sill=0,position[3]{},forward[3]{};
+        if(!sensor||!reader(sensor+0x38,&enabled,1)||!reader(sensor+0x1c4,&target,4)||!reader(sensor+0x1d8,point,12)||
+           !reader(sensor+0x1e4,&sill,4)||!reader(sensor+0x1e8,flags,3)||!reader(base+0x31af620,sentinel,12)||
+           !reader(sensor+0x10,&entity,8)||!entity||!reader(entity+0x300,position,12)||!reader(entity+0x30c,forward,12))return 59;
+        const bool hasPoint=std::memcmp(point,sentinel,12)!=0;
+        std::string name;bool named=(target>>16)!=0x3fff;
+        if(named){const auto actor=worldIdentityEntity(reader,game,target);std::uintptr_t text=0;
+            if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))named=false;}
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"enabled\":"<<(enabled?"true":"false")<<",\"target\":"<<target
+            <<",\"targetName\":"<<jsonString(named?name:std::string())<<",\"hasPoint\":"<<(hasPoint?"true":"false")
+            <<",\"point\":["<<point[0]<<','<<point[1]<<','<<point[2]<<"],\"sill\":"<<sill<<",\"angleOk\":"<<(flags[0]?"true":"false")
+            <<",\"sillOk\":"<<(flags[1]?"true":"false")<<",\"grounded\":"<<(flags[2]?"true":"false")
+            <<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"],\"forward\":["<<forward[0]<<','<<forward[1]<<','<<forward[2]<<"]}\n";
         return 0;
     }
     if(argc==3&&!std::strcmp(argv[2],"--npc-authority")){

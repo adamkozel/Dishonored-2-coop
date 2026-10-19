@@ -1,0 +1,41 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-blinkkickchoke: Blink Assault kick never played on the source",
+  "cases": [
+    {
+      "source": "host",
+      "case": "blinkkickchoke",
+      "observer": "client",
+      "passed": false,
+      "failure": "Blink Assault kick never played on the source",
+      "checks": [
+        "Partner presentation stayed live",
+        "Knockdown choke scene samples 0 (kick at  ms, choke pressed at  ms)"
+      ],
+      "grant": {
+        "grants": 10,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "guardWaitMs": 54258,
+      "guard": [
+        -47.9503,
+        -152.449,
+        66.4
+      ],
+      "camera": [
+        -44.01611598101559,
+        -150.04646048840655,
+        68.30000000000001
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "knockdownChokeSamples": 0,
+      "sourceKickSamples": 0,
+      "kickSamples": 0,
+      "blinkSamples": 7,
+      "restored": true
+    }
+  ],
+  "scope": "Pickpocket from behind aimed at the belt key (1389, #11), Far Reach pull (1388), Blink Assault kick (1359, #11), pickpocket and body loot by the native use focus (1358), on the standing tutorial guard (1357), the native kick with the railing behind an alerted guard (1356), at the balcony railing (1355), Domino on the Dunwall tutorial guards (1354), power cancellation and long Far Reach (1350), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
