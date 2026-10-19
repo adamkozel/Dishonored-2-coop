@@ -1,0 +1,119 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,6,14,44,53,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,14,44,53,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_108",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          2.79835,
+          38.308,
+          20
+        ],
+        "forward": [
+          -0.9227750712631532,
+          -0.3853390297585784
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 53,
+        "requests": [
+          1
+        ],
+        "position": [
+          2.79835,
+          38.308,
+          20
+        ]
+      },
+      "approachYaw": -135.0,
+      "camera": [
+        -0.14759015542550502,
+        39.03183465007662,
+        21.6
+      ],
+      "sourceStart": [
+        2.304,
+        37.106,
+        20.0036
+      ],
+      "prePitch": 30.0,
+      "takedownAtPress": {
+        "t": 1779,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "chokeAtPress": {
+        "t": 1779,
+        "target": 1073676304,
+        "targetName": "",
+        "flag54": 0
+      },
+      "windowAtPress": {
+        "t": 1779,
+        "targetName": "",
+        "hasPoint": true,
+        "sill": 0,
+        "angleOk": false,
+        "sillOk": false,
+        "grounded": true
+      },
+      "replacedAt": 613,
+      "cameraMoved": [
+        0.5763816327368563,
+        36.04408941895157,
+        21.6
+      ],
+      "targetMoved": 0.14,
+      "sittingAtPress": {
+        "t": 613,
+        "source": false,
+        "sourceRequests": null,
+        "host": false
+      },
+      "crept": 1403,
+      "creptEnd": 1743,
+      "stanceAfterCreep": 1,
+      "actedAt": 1779,
+      "takedownAfter": 2013,
+      "chokeAfter": 2013,
+      "windowAfter": 2013,
+      "trackSamples": 50,
+      "takedownSamples": 4,
+      "chokeSamples": 4,
+      "chokeTargeted": 0,
+      "windowSamples": 4,
+      "windowAvailable": 0,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        14,
+        44,
+        53,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
