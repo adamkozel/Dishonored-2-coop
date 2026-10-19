@@ -1,0 +1,86 @@
+{
+  "source": "client",
+  "case": "sword",
+  "target": "esc_env_display_case_glass_01a_4",
+  "observer": "host",
+  "passed": false,
+  "failure": "The sword did not break the target in the source world",
+  "checks": [
+    "Breakable catalogs: host 51, client 51"
+  ],
+  "catalog": {
+    "host": 51,
+    "client": 51
+  },
+  "before": {
+    "host": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    },
+    "client": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    }
+  },
+  "stand": [
+    -30.8401,
+    -155.44,
+    0.0
+  ],
+  "standFeet": [
+    -31.0184345,
+    -155.878174,
+    66.6724396
+  ],
+  "cameraHeld": false,
+  "presses": 3,
+  "sourceBrokeAtMs": null,
+  "peerBrokeAtMs": null,
+  "after": {
+    "source": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    },
+    "observer": {
+      "handle": 114492141,
+      "name": "esc_env_display_case_glass_01a_4",
+      "step": 0,
+      "steps": 1,
+      "health": 10,
+      "position": [
+        -29.5401,
+        -155.44,
+        66.4
+      ]
+    }
+  },
+  "allBroken": {
+    "source": [],
+    "observer": []
+  },
+  "restored": true
+}
