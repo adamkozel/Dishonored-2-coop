@@ -30,7 +30,9 @@ void prepareWorldObservation(ULONGLONG tick) {
     worldCatalogTick=tick;
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()){resetWorldObservation();return;}
     const auto started=GetTickCount64();
-    if(!readWorldNpcCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,worldCatalog,worldUnbound)||worldCatalog.size()>128)
+    // 1214dx: missions have more than 128 NPC entries (Edge of the World 141); the catalog serves choke and carry identity
+    // resolution there, so it is kept up to 1024 entries (the observation send below keeps its 128 limit).
+    if(!readWorldNpcCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,worldCatalog,worldUnbound)||worldCatalog.size()>1024)
         worldCatalog.clear();
     worldScanMs=static_cast<unsigned>(GetTickCount64()-started);worldScanMaxMs=(std::max)(worldScanMaxMs,worldScanMs);
 }
@@ -58,7 +60,7 @@ void receiveWorldNpc(const CoopWorldNpcPacket& p,ULONGLONG tick) {
 }
 void sendWorldObservation(ULONGLONG tick) {
     if(!worldObservationReady(tick)){resetWorldObservation();return;}
-    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||tick-worldLastSend<500||worldCatalog.empty())return;
+    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||tick-worldLastSend<500||worldCatalog.empty()||worldCatalog.size()>128)return;
     if(bulkTransportCongested(tick)){++bulkCongestionSkips;return;}  // 1203e: retry next frame
     worldLastSend=tick;worldEntries.clear();const auto started=GetTickCount64();
     for(const auto& n:worldCatalog) {
