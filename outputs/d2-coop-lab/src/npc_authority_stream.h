@@ -134,6 +134,10 @@ void clientNpcDead(NpcAuthorityChannel& c);
 unsigned npcCombatDeathShare(std::uint64_t arm);
 float npcReconcileDeclAmount=0;std::uint64_t npcReconcileDeclFlags=0;unsigned npcReconcileDeclReactions[2]{};
 std::uint64_t npcVanishedDead=0; // 1214fb (#118)
+// 1214fk (#117): a Dead marked ASH1 means the peer's copy turned to ash (Shadow Kill); see serviceNpcAsh.
+constexpr std::uint32_t kNpcDeadAshed=0x31485341u; // 'ASH1'
+struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;};
+std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0;
 std::uint64_t npcDeadReconciled=0,npcDeadSent=0,npcCombatSharedDeaths=0,npcClientDeadApplied=0,npcClientDeadAlready=0,npcClientDeadRefused=0;const char* npcClientDeadLast="none";
 std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0,npcPairedCorpses=0,npcPairedFollows=0,npcHostOwnPaired=0,npcPriorityPoses=0;
 NpcAuthorityHeader npcHeader(const NpcAuthorityChannel& c,NpcAuthorityMessage kind){
@@ -527,9 +531,6 @@ void sendNpcPose(NpcAuthorityChannel& c,NpcAuthorityMessage kind=NpcAuthorityMes
 // 1214fk (#117): Shadow Kill turns its victim to ash in the killer's world only (carry-body-v1640a: Corvo's guard vanished
 // from his world and stayed dead in Emily's; 1640b the reverse). A dead NPC that vanishes within 8 s of its death sends
 // Dead with kNpcDeadAshed; the peer hides its copy (native hide 0x8784b0) and plays native ash effects at its body.
-constexpr std::uint32_t kNpcDeadAshed=0x31485341u; // 'ASH1'
-struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;};
-std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0;
 bool startNativePowerFx(unsigned kind,const float* origin,ULONGLONG tick,bool network,const float* axis,unsigned* createdId);
 void serviceNpcAsh(ULONGLONG tick){
     if(npcAshPending.empty()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
