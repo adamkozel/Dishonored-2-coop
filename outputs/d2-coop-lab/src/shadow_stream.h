@@ -268,6 +268,7 @@ inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std
     for(unsigned i=0;i<9;++i)if(!std::isfinite(axis[i])||std::fabs(axis[i])>2.f)return false;
     return true;}
 std::uint64_t shadowHeldPulls=0; // 1214fc (#115)
+std::uint64_t shadowHeldFallback=0; // 1214fd (#115): fallback packets that carried the held object
 void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,CoopShadowActionPacket& p){
     const auto tick=GetTickCount64();std::uint32_t holding=0;auto& h=shadowHeld;float position[3]{},axis[9]{};
     for(const auto& a:states.active)if(a.id==49&&a.vtable==base+0x1c7a998){if(!memoryRead(a.pointer+0x48,&holding,4))holding=0;break;}
@@ -594,6 +595,11 @@ void sendShadowStream(ULONGLONG tick){
         }else if(readNativePresentationHold(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,observedPlayer,localRole+1,swordState,shadowStreamLastPacket.swordState)){
             p=shadowStreamPacket(1);p.swordState=swordState;action=24;scene=0;leanSide=leanUp=0;++shadowHoldSamples;
         }else{++shadowUnboundRefused;return;}
+        // 1214fd (#115): the held or pulled movable is revalidated on its own (handle, name key and world transform), so it
+        // crosses the fallback too. Far Reach's GrabGrappledEntity (84) has no action of its own: every source read failed at
+        // stage 2 during the pull, and the partner's copy stopped following for the whole pull (object-carry-v1619b).
+        {const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates held{};
+         if(readNativePlayerStates(memoryRead,base,held)&&held.player.game==observedGame&&held.player.player==observedPlayer){fillShadowHeldObject(held,base,p);if(p.heldObjectPhase)++shadowHeldFallback;}}
     }
     if(p.chokeVariant!=shadowStream.sourceChoke||p.chokeSpawner!=shadowStream.sourceChokeSpawner||p.chokeDefinition!=shadowStream.sourceChokeDefinition||(p.chokeVariant==2&&p.chokeTimeMs<shadowStream.sourceChokeTime)||p.trapHeld!=shadowStream.sourceTrapHeld||p.trapStock!=shadowStream.sourceTrapStock||p.trapVariant!=shadowStream.sourceTrap||(p.trapVariant==4&&p.trapTimeMs<shadowStream.sourceTrapTime)||p.heartHeld!=shadowStream.sourceHeartHeld||p.heartVariant!=shadowStream.sourceHeart||action!=shadowStream.sourceState||scene!=shadowStream.sourceScene||p.stunVariant!=shadowStream.sourceStun||p.combatVariant!=shadowStream.sourceVariant||p.combatPhase!=shadowStream.sourcePhase||p.swordState!=shadowStream.sourceSword||p.equipmentVariant!=shadowStream.sourceEquipment||p.powerVariant!=shadowStream.sourcePower||p.traversalVariant!=shadowStream.sourceTraversal||p.rangedKind!=shadowStream.sourceRangedKind||p.rangedVariant!=shadowStream.sourceRanged||p.carryVariant!=shadowStream.sourceCarry||p.carryIncarnation!=shadowStream.sourceCarryIncarnation||p.carrySpawner!=shadowStream.sourceCarrySpawner||p.carryDefinition!=shadowStream.sourceCarryDefinition||p.grenadeHeld!=shadowStream.sourceGrenadeHeld||p.grenadeVariant!=shadowStream.sourceGrenade||(p.grenadeVariant==4&&p.grenadeTimeMs<shadowStream.sourceGrenadeTime)){
         shadowStream.sourceChoke=p.chokeVariant;shadowStream.sourceChokeSpawner=p.chokeSpawner;shadowStream.sourceChokeDefinition=p.chokeDefinition;
@@ -777,8 +783,8 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
-    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"pulls\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
-        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldPulls),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
+    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"pulls\":%llu,\"fallback\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"throws\":%llu,\"drops\":%llu,\"result\":\"%s\"},",
+        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldPulls),static_cast<unsigned long long>(shadowHeldFallback),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
         static_cast<unsigned long long>(shadowHeldBreaks),static_cast<unsigned long long>(shadowHeldRefused),remoteHeld.phase,remoteHeld.handle,static_cast<unsigned long long>(partnerHeld.applied),
         static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),static_cast<unsigned long long>(shadowGesture.throws),static_cast<unsigned long long>(shadowGesture.drops),partnerHeld.result);
     fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",
