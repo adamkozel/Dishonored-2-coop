@@ -5,12 +5,15 @@
 // Inspected retail build only. The native OnPause/OnResume callbacks remove/add
 // the component's pool index in the registry's active prefix (48ff60/48fe10).
 // Reading that prefix checks scheduler membership independently of pause bits.
-enum class NativeAiKind { Decision,Reflex,Attack,IdleBreak };
+// 1214ex (#113): civilians carry arkCpntAIDecisionCivilian (VT 1ccb1f8, 0x48 bytes, AI-manager registry +0x458) in
+// place of arkCpntAIDecision (VT 1cc4108, 0x40, +0x2e0); both are built on the same base (5880a0). Confirmed at
+// runtime in both roles (ai-registry-research-v1595a); their reflex, attack and idle-break components are the guards'.
+enum class NativeAiKind { Decision,Reflex,Attack,IdleBreak,DecisionCivilian };
 inline std::uintptr_t nativeAiVtable(NativeAiKind kind) {
-    return kind==NativeAiKind::Decision?0x1cc4108:kind==NativeAiKind::Reflex?0x1b8a588:kind==NativeAiKind::Attack?0x1b93a88:0x1b4cec8;
+    return kind==NativeAiKind::Decision?0x1cc4108:kind==NativeAiKind::Reflex?0x1b8a588:kind==NativeAiKind::Attack?0x1b93a88:kind==NativeAiKind::DecisionCivilian?0x1ccb1f8:0x1b4cec8;
 }
 inline std::uintptr_t nativeAiRegistryOffset(NativeAiKind kind) {
-    return kind==NativeAiKind::Decision?0x2e0:kind==NativeAiKind::Reflex?0x580:kind==NativeAiKind::Attack?0x600:0x530;
+    return kind==NativeAiKind::Decision?0x2e0:kind==NativeAiKind::Reflex?0x580:kind==NativeAiKind::Attack?0x600:kind==NativeAiKind::DecisionCivilian?0x458:0x530;
 }
 struct NativeAiComponentState {
     std::uintptr_t game=0,actor=0,component=0,manager=0,registry=0,tree=0;
@@ -38,7 +41,7 @@ template<class Read> bool readNativeAiComponent(Read read,std::uintptr_t base,st
         s.component=component;
     }
     if(!s.component||!read(s.component+0x1c,&s.flags,4)||
-       (kind==NativeAiKind::Decision&&!read(s.component+0x30,&s.tree,8))||
+       ((kind==NativeAiKind::Decision||kind==NativeAiKind::DecisionCivilian)&&!read(s.component+0x30,&s.tree,8))||
        !read(game+0x1e8960,&s.manager,8)||!s.manager)return false;
     // Verified native accessors: 8f6610 decision, 5a3100 reflex, 5cc230 attack,
     // 425020 idle-break. Idle state and autoplay follow 425c90/426070.

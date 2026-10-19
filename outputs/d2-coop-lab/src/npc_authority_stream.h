@@ -293,7 +293,7 @@ bool freshNpcCatalogEntry(const NativeNpcAuthority& n,NativeNpcAuthority& fresh)
     const bool hostStream=npcHostStreamScope();
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth h{};
     if(!readNativeHealth(memoryRead,base,n.npc.handle,h)||h.game!=observedGame||h.actor!=n.npc.actor||h.logic!=1||h.current<=0)return false;
-    return readNativeNpcAuthority(memoryRead,base,observedGame,n.npc.handle,fresh)&&(hostStream?npcAuthorityHostStreamEligible(fresh):npcAuthorityAcquireEligible(fresh))&&sameNpcAuthorityIdentity(n,fresh);
+    return readNativeNpcAuthority(memoryRead,base,observedGame,n.npc.handle,fresh)&&(hostStream?npcAuthorityHostStreamEligible(fresh):npcAuthorityLeaseEligible(fresh))&&sameNpcAuthorityIdentity(n,fresh);
 }
 std::uint64_t npcCatalogStale=0;
 void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
@@ -373,7 +373,7 @@ bool bindNpcForHostHello(const CoopNpcControl& p,ULONGLONG tick){
         NativeNpcAuthority fresh{};
         if(readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,l.handle,fresh)&&fresh.npc.actor==l.actor&&
            fresh.npc.spawnerName==spawner&&fresh.npc.definition==definition){
-            if(!npcAuthorityAcquireEligible(fresh)){++npcClientBindBusy;return false;}
+            if(!npcAuthorityLeaseEligible(fresh)){++npcClientBindBusy;return false;}
             if(bindNpcChannel(fresh,tick)){++npcClientBound;++npcClientBoundLive;return true;}}
         break;}
     npcHelloRefusals.erase(std::remove_if(npcHelloRefusals.begin(),npcHelloRefusals.end(),[&](const auto& r){return tick>=r.until;}),npcHelloRefusals.end());

@@ -41,14 +41,16 @@ bool acquireNpcAiLease(NpcAiLease& lease){
     if(lease.references||outgoing.worldEpoch!=lease.epoch||!nativeAiRequestsMatch())return false;
     NativeNpcAuthority fresh{};
     if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,lease.binding.npc.handle,fresh)||
-       !sameNpcAuthorityIdentity(lease.binding,fresh)||!npcAuthorityAcquireEligible(fresh))return false;
+       !sameNpcAuthorityIdentity(lease.binding,fresh)||!npcAuthorityLeaseEligible(fresh))return false;
     lease.binding=std::move(fresh);
     for(unsigned i=0;i<2;++i){
         const auto& s=lease.binding.ai[i];
         if(!npcLeaseGenerationCurrent(lease,i))return false;
+        // 1214ex (#113): the game's own pause references (a scripted post) stay; the lease adds exactly one.
+        const unsigned before=(s.flags>>6)&0x1fffff;
         reinterpret_cast<void(*)(void*,void*)>(gameImage+0x7e7800)(reinterpret_cast<void*>(s.component),reinterpret_cast<void*>(s.manager));
         ++lease.references;++lease.acquired;
-        unsigned flags=0;if(!memoryRead(s.component+0x1c,&flags,4)||((flags>>6)&0x1fffff)!=1)return false;
+        unsigned flags=0;if(!memoryRead(s.component+0x1c,&flags,4)||((flags>>6)&0x1fffff)!=before+1)return false;
     }
     return true;
 }
