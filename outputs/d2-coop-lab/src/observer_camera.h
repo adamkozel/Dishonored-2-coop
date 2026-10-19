@@ -68,6 +68,8 @@ unsigned labUseRequest=0;std::uint64_t labUses=0,labUseRefused=0;const char* lab
 // knockdown-decls-v1367): the native knockdown (KnockedDown, state 16). sword is the guards' npc_sword.damage (20,
 // PLAYER_HITREACT_BIG): the native directional stun (state 14). The lab fixtures have no natural knockdown source
 // (1375), and the source's own grenade stuns only after one turn, in an unreliable direction (1363, 1390c-f).
+// 1214dp: the sword hit applied in every direction without a stun (1397m-o); blast is the grenade's own
+// explosion_grenade.damage (PLAYER_HITREACT_BIG), centred 1.2 m out on the chosen side.
 unsigned labHitKind=0,labHitSide=0;bool labKnockdownRequest=false;std::uint64_t labKnockdowns=0,labKnockdownRefused=0;const char* labKnockdownResult="idle";
 void serviceLabKnockdown(){
     if(!labKnockdownRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
@@ -79,7 +81,8 @@ void serviceLabKnockdown(){
     float length=0;for(float v:direction){if(!std::isfinite(v)){refuse("direction");return;}length+=v*v;}
     for(float v:position)if(!std::isfinite(v)){refuse("position");return;}
     if(length<.99f||length>1.01f){refuse("direction");return;}
-    const char* declName=labHitKind==2?"components/equipment/damage/npc_sword.damage":"components/base/damage/shove_damage.damage";
+    const char* declName=labHitKind==3?"components/equipment/damage/explosion_grenade.damage":
+        labHitKind==2?"components/equipment/damage/npc_sword.damage":"components/base/damage/shove_damage.damage";
     const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,declName,false,false);
     std::uintptr_t vt=0,manager=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138||!memoryRead(decl+0x10,&manager,8)||manager!=base+0x3990b60){refuse("declaration");return;}
     // The parameter is the direction the hit travels: from the front it runs against the facing, from behind along
@@ -93,7 +96,7 @@ void serviceLabKnockdown(){
     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
     // 1214dn: the hit starts 0.6 m out on the side it comes from; a sword hit names the nearest living NPC as attacker.
-    for(unsigned k=0;k<2;++k)position[k]-=direction[k]*.6f;
+    for(unsigned k=0;k<2;++k)position[k]-=direction[k]*(labHitKind==3?1.2f:.6f);
     std::uint32_t attacker=0x3fff0010;
     if(labHitKind==2){std::vector<NativeWorldNpc> catalog;unsigned unbound=0;float best=1600.f;
         if(readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound))for(const auto& n:catalog){if(!n.unique)continue;
@@ -102,11 +105,11 @@ void serviceLabKnockdown(){
     std::memcpy(params.data()+0x20,&regions,4);std::memcpy(params.data()+0x4c,&region,4);
     std::memcpy(params.data()+0x24,position,12);std::memcpy(params.data()+0x3c,direction,12);std::memcpy(params.data()+0x54,&attacker,4);
     realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());
-    ++labKnockdowns;labKnockdownResult=labHitKind==2?"sword_applied":"shove_applied";
+    ++labKnockdowns;labKnockdownResult=labHitKind==3?"blast_applied":labHitKind==2?"sword_applied":"shove_applied";
 }
 bool labHitAllowed(const char* t,unsigned* kind=nullptr,unsigned* side=nullptr){
-    const char* kinds[]={"shove ","sword "};const char* sides[]={"front","back","left","right"};
-    for(unsigned k=0;k<2;++k){const auto n=std::strlen(kinds[k]);if(std::strncmp(t,kinds[k],n))continue;
+    const char* kinds[]={"shove ","sword ","blast "};const char* sides[]={"front","back","left","right"};
+    for(unsigned k=0;k<3;++k){const auto n=std::strlen(kinds[k]);if(std::strncmp(t,kinds[k],n))continue;
         for(unsigned d=0;d<4;++d)if(!std::strcmp(t+n,sides[d])){if(kind)*kind=k+1;if(side)*side=d;return true;}}
     return false;}
 void serviceLabItemUse(){

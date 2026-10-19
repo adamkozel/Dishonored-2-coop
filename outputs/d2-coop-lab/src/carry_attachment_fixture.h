@@ -36,6 +36,12 @@ ULONGLONG carryAttachmentRequestScopeMs=0,carryAttachmentRequestCatalogAge=0;
 std::uint64_t carryAttachmentStarted=0,carryAttachmentReleased=0,carryAttachmentRetired=0,carryAttachmentRefused=0;
 std::uint64_t carryThrowQueued=0,carryThrowRefused=0;std::array<float,3> carryLastThrowVelocity{};
 const char* carryAttachmentResult="idle";
+// 1214dq: the first reason an attempt turned to restoring, and the fixture result at that moment. 1277u: the host
+// product attempt reached waiting_for_native_victim_scene_stop in the tick its snapshot started (pickup at 14%), so the
+// per-tick result log could not name the cause. Bits 0x10000 | peer mask (1 stop request, 2 lease, 4 stream not
+// current, 8 peer not ready, 16 no state within 200 ms, 32 scope, 64 bank, 128 epoch, 256 session); 0x40000 the
+// Carry45 to Drop46 gap; 0x200000 the drop handoff; 0x800000 any other cause, named by the saved result.
+unsigned carryRestoreCause=0;const char* carryRestoreResult="";ULONGLONG carryRestoreTick=0;
 bool carryAttachmentApi(){
     constexpr unsigned char setup[]={0x48,0x8b,0xc4,0x55,0x41,0x55,0x41,0x56,0x48,0x8d,0x68,0xb8,0x48,0x81,0xec,0x30,0x01,0,0};
     constexpr unsigned char start[]={0x4c,0x8b,0xdc,0x55,0x56,0x41,0x56,0x48,0x81,0xec,0xb0,0,0,0};
@@ -318,7 +324,7 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
             else{
                 carryAttachmentRefusalStage=0;
                 f.before=before;f.target=target;f.settings=original;f.epoch=outgoing.worldEpoch;f.peerEpoch=remote.worldEpoch;
-                f.peerSession=remote.session;f.sourceIncarnation=shadowStream.remoteCarryIncarnation;f.startedAt=f.lastHeldAt=tick;
+                f.peerSession=remote.session;f.sourceIncarnation=shadowStream.remoteCarryIncarnation;f.startedAt=f.lastHeldAt=tick;carryRestoreCause=0;carryRestoreResult="";carryRestoreTick=0;
                 f.product=product;f.until=tick+(product?3000:carryAttachmentDuration);f.victimState=health.current>0?2:1;if(product){++carryProductStarts;carryProductResult="started";}
                 f.sourcePickup=carryAttachmentPickupRequested;f.crouchedPickup=f.sourcePickup&&pickupStance==1;
                 // Exact-build native Carry45 crouched victim root is 0.674m
@@ -386,7 +392,11 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
     }
     if(!f.until)return;
     if(f.epoch!=outgoing.worldEpoch||f.before.game!=observedGame){retireCarryDamageLease();if(f.product)npcCarryAttachRelease(tick,300);f={};++carryAttachmentRetired;carryAttachmentResult="old_world_retired";return;}
-    if(request==2||tick>=f.until||!carryAttachmentPeerCurrent(tick,f.product)||f.peerEpoch!=remote.worldEpoch||f.peerSession!=remote.session)f.restoring=true;
+    {const unsigned peerMask=(request==2?1u:0u)|(tick>=f.until?2u:0u)|(!shadowStreamCurrent(tick)?4u:0u)|(!shadowStream.peerReady?8u:0u)|
+        (!shadowStream.lastState||tick-shadowStream.lastState>=200?16u:0u)|(!carryAttachmentScope(f.product)?32u:0u)|(!movementBankActive()?64u:0u)|
+        (f.peerEpoch!=remote.worldEpoch?128u:0u)|(f.peerSession!=remote.session?256u:0u);
+     if(peerMask&&!f.restoring&&!carryRestoreCause){carryRestoreCause=0x10000u|peerMask;carryRestoreResult=carryAttachmentResult;carryRestoreTick=tick;}
+     if(peerMask)f.restoring=true;}
     CarryPresentation::Sample source{};float amount=0;
     const bool sourceOwned=carryAttachmentSource(f,source,amount);
     // Product: a rolling lease while the partner's carry samples arrive (the drop and throw stages included).
@@ -405,7 +415,9 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
             bool finite=true;for(float value:f.dropRoot)finite=finite&&std::isfinite(value);
             if(finite){f.dropStage=1;f.dropVariant=source.variant;f.throwEvent=source.event;f.throwVelocity=source.throwVelocity;carryAttachmentResult="native_drop_pending";}
             else f.restoring=true;
-        }else if(tick>f.lastHeldAt+180)f.restoring=true; // Bounded native Carry45 -> Drop46 gap.
+        }else if(tick>f.lastHeldAt+180){ // Bounded native Carry45 -> Drop46 gap.
+            if(!carryRestoreCause){carryRestoreCause=0x40000u|(sourceOwned?source.variant:99u);carryRestoreResult=carryAttachmentResult;carryRestoreTick=tick;}
+            f.restoring=true;}
     }
     if(!coopGameplayReady(outgoing))return;
     NativeRetargeting current{};
@@ -436,7 +448,9 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
     }
     if(!f.restoring&&f.dropStage==1){
         const unsigned handoff=carryReleaseHandoffMs(f.dropVariant);
-        if(!sourceOwned||source.variant!=f.dropVariant||carryReleaseElapsedMs(source.variant,amount)>=handoff)f.restoring=true;
+        if(!sourceOwned||source.variant!=f.dropVariant||carryReleaseElapsedMs(source.variant,amount)>=handoff){
+            if(!carryRestoreCause){carryRestoreCause=0x200000u;carryRestoreResult=carryAttachmentResult;carryRestoreTick=tick;}
+            f.restoring=true;}
         else if(stopCarryVictimScene(f.scene,f.target)){
             // Scene retirement may put this exact body back in ragdoll mode.
             // Wait for the verified animation request to settle BEFORE binding
@@ -541,6 +555,7 @@ void serviceCarryAttachmentFixture(ULONGLONG tick){
         }
     }
     if(f.restoring){
+        if(!carryRestoreCause){carryRestoreCause=0x800000u;carryRestoreResult=carryAttachmentResult;carryRestoreTick=tick;}
         if(f.attachmentPending&&f.snapshot.bound&&f.physicsOwned&&!current.count){
             // Preserve the visible blended pose until native physics has
             // consumed it. Clearing the blend first exposes the folded clip
@@ -641,6 +656,7 @@ void writeCarryAttachmentFixture(ULONGLONG tick){
     fprintf(file,"{\"throwQueued\":%llu,\"throwRefused\":%llu,\"lastThrowVelocity\":[%.7f,%.7f,%.7f],",carryThrowQueued,carryThrowRefused,carryLastThrowVelocity[0],carryLastThrowVelocity[1],carryLastThrowVelocity[2]);
     fprintf(file,"\"physicsMode\":%u,\"physicsPending\":%u,\"physicsFlags\":%u,\"throwRagdollRequested\":%s,",throwMode,throwPending,throwFlags,f.throwRagdollRequested?"true":"false");
     fprintf(file,"\"attachmentPending\":%s,",f.attachmentPending?"true":"false");
+    fprintf(file,"\"restoreCause\":%u,\"restoreResult\":\"%s\",\"restoreTick\":%llu,",carryRestoreCause,carryRestoreResult,carryRestoreTick);
     fprintf(file,"\"resultLog\":[");
     {const unsigned total=(std::min)(carryResultLogCount,unsigned(carryResultLog.size()));
      for(unsigned i=0;i<total;++i){const auto& e=carryResultLog[(carryResultLogCount-total+i)%carryResultLog.size()];

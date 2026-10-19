@@ -495,8 +495,11 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         // 1214cg (#11): the protocol-73 hold (state 24) covers a native state no binding classifies for a packet or two
         // (holster end, draw start, a holstered landing, a slide end). Keep the authored body on the replicated physical
         // state through it; yielding to the actor's native pose flashed it upright for about two frames (take 1321a).
+        // 1214dp (#11): a presented stun (protocol state 16) is an authored action. Without it the clock refused every
+        // stun packet (eligibility mask 32), its weight fell to 0 and the body returned to the actor's native pose, so the
+        // stun and knockdown clips never showed (1397k/l: the knockdown read as a crouch; 1363g: weight 0 through the stun).
         const bool actionEligible=(semantic.state==0||semantic.state==18||semantic.state==24||(p.bank.hasSprint()&&semantic.state==4)||horizontalLean||sliding||airState||(p.bank.hasAir()&&semantic.state==3)||
-                (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10));
+                (p.bank.hasCombat()&&(semantic.state==1||semantic.state==2))||combatActive||p.combatWeight>.001f||(p.bank.hasEquipment()&&semantic.state==7)||traversalActive||(p.bank.hasLowMantle()&&semantic.state==8)||(p.bank.hasVault()&&semantic.state==9)||(p.bank.hasHardLanding()&&semantic.state==11)||powerActive||rangedActive||grenadeActive||heartActive||trapActive||chokeActive||swimActive||climbActive||carryActive||carryUnbound||(p.bank.hasRanged()&&semantic.state==13)||(p.bank.hasPowers()&&semantic.state==10)||stunActive);
         const unsigned eligibilityMask=(!semanticValid?1u:0u)|(!physicalEligible?2u:0u)|
             (shadowStream.until<=tick?4u:0u)|(!shadowStream.peerReady?8u:0u)|
             (!shadowStream.lastState||tick-shadowStream.lastState>=presentationFreshMs()?16u:0u)|(!actionEligible?32u:0u)|(shadowAction.actor?64u:0u);
@@ -554,7 +557,8 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
     if(possessionHidden)requestMovementEquipment(false);
     else if(equipmentRequest)requestMovementEquipment(equipmentDrawn);
 }
-bool movementFootGrounded(const MovementPlayback& p){return p.clock.airWeight<.001f&&p.clock.slideWeight<.001f&&p.traversalWeight<.001f&&p.powerWeight<.001f;}
+bool movementFootGrounded(const MovementPlayback& p){return p.clock.airWeight<.001f&&p.clock.slideWeight<.001f&&p.traversalWeight<.001f&&p.powerWeight<.001f&&
+    !(p.stunVariant==5&&p.stunWeight>.001f);} // 1214dp: the knockdown lies down; no standing foot plant
 void applyMovementBank(void* component,void* actor,int phase){
     const auto tick=GetTickCount64();AcquireSRWLockExclusive(&movementLock);auto& p=movementPlayback;
     // The native callback visits every animated actor. Unrelated actors must
