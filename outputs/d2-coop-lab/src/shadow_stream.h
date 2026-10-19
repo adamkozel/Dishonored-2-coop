@@ -88,7 +88,10 @@ unsigned shadowStreamRejectReason=0,shadowStreamRetireReason=0;ULONGLONG shadowS
 std::uint64_t shadowSourceAttempts=0,shadowSourceMisses=0,shadowWireRefused=0;
 unsigned shadowSourceReadStage=0,shadowSourceLastFailure=0;
 // 1214du: Recoil 40 samples on the source, the combat reads refused in them (last step and variant), the staggers sent.
-unsigned shadowRecoilStep=0,shadowRecoilVariant=0;std::uint64_t shadowRecoilSamples=0,shadowRecoilRefused=0,shadowRecoilSent=0,shadowRecoilOther=0;
+unsigned shadowRecoilStep=0,shadowRecoilVariant=0;
+// 1214dw: source reads while Recoil 40 is active, by outcome stage (0 sent, else the failing stage), and the last such
+// active-state list (ids).
+bool shadowRecoilActive=false;std::array<std::uint64_t,8> shadowRecoilStageCounts{};std::array<unsigned,6> shadowRecoilStates{};unsigned shadowRecoilStateCount=0;std::uint64_t shadowRecoilSamples=0,shadowRecoilRefused=0,shadowRecoilSent=0,shadowRecoilOther=0;
 std::uint64_t shadowUnboundSamples=0,shadowUnboundRefused=0,shadowHoldSamples=0;
 ULONGLONG shadowUnboundProbeUntil=0; // Explicit bounded missing-binding test, off by default.
 std::array<std::uint64_t,8> shadowSourceFailureCounts{};
@@ -245,6 +248,8 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     NativePlayerPowerScene power{};NativePlayerStunScene stun{};
     const bool nativeStateValid=shadowTimedRead(0,[&]{return readNativePlayerStates(memoryRead,base,states);})&&states.player.game==observedGame&&states.player.player==observedPlayer;
     if(nativeStateValid)serviceShadowUse(states,base);
+    shadowRecoilActive=nativeStateValid&&std::any_of(states.active.begin(),states.active.end(),[](const auto& a){return a.id==40;});
+    if(shadowRecoilActive){shadowRecoilStateCount=0;for(const auto& a:states.active)if(shadowRecoilStateCount<shadowRecoilStates.size())shadowRecoilStates[shadowRecoilStateCount++]=a.id;}
     std::uintptr_t fatalityState=0;
     const bool fatality=nativeStateValid&&nativePlayerNpcFatality(states,base,fatalityState);
     if(nativeStateValid&&(fatality||nativePlayerDead(states,base))){
@@ -490,6 +495,7 @@ void sendShadowStream(ULONGLONG tick){
     // actual native action, controls, root and inventory remain untouched.
     if(sourceValid&&action==7&&tick<shadowUnboundProbeUntil){sourceValid=false;shadowSourceReadStage=5;}
     shadowSourceReadMaxMs=(std::max)(shadowSourceReadMaxMs,presentationClock()-readStart);
+    if(shadowRecoilActive)++shadowRecoilStageCounts[sourceValid?0u:(std::min)(7u,shadowSourceReadStage)];
     if(!sourceValid){++shadowSourceMisses;shadowSourceLastFailure=shadowSourceReadStage;
         ++shadowSourceFailureCounts[(std::min)(7u,shadowSourceReadStage)];
         unsigned swordState=0;
@@ -676,6 +682,8 @@ void writeShadowStream(ULONGLONG tick){
         static_cast<unsigned long long>(shadowUseSent),static_cast<unsigned long long>(shadowUseReceived),static_cast<unsigned long long>(shadowUseAccepted),static_cast<unsigned long long>(shadowUseRejected),shadowUseRejectReason,shadowUseLastVariant,shadowUseLastEvent);
     fprintf(f,"\"recoilDiag\":{\"samples\":%llu,\"refused\":%llu,\"sent\":%llu,\"other\":%llu,\"step\":%u,\"variant\":%u},",
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
+    fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
+    fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
     fprintf(f,"\"lateHolds\":%llu,\"lateActionAgeMs\":%llu,",shadowStream.lateHolds,shadowStream.lastLateAction?GetTickCount64()-shadowStream.lastLateAction:0ull);
     fprintf(f,"\"sourceLastFailure\":%u,\"sourceFailureCounts\":[",shadowSourceLastFailure);
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");
