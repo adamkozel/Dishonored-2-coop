@@ -20807,15 +20807,52 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1269 (1214m): holding a native movable (HoldObject49) presents a held reach and its throw finishes it, both roles; the object itself is not drawn in the partner's hand and movables are not world-synced yet. Recorded pickup, idle, walking, placement and throw studies with two palm contacts and a neutral box. Placement reverses the lift study; lowering dynamics need refinement. The release trajectory is illustrative, with no native object attachment or physics ownership.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "object-carry-v1269c/host-bottle-observer.mp4",
         "object-carry-v1269c/client-bottle-observer.mp4"
       ],
       "evidence": [
-        "../movement-integration/object-carry-audit-v1269.json"
-      ]
+        "../movement-integration/object-carry-audit-v1269.json",
+        "object-carry-v1478a/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1470-object-carry.json",
+        "decision": "complete",
+        "scope": "Both roles: a held native movable presented in the partner's hand, its throw (arm throw) and its placement (reach finish), with the object's flight, rest or break the same in both worlds.",
+        "takes": [
+          {
+            "take": "object-carry-v1478a",
+            "cases": [
+              "client-heldbottle",
+              "client-placebottle",
+              "host-heldbottle",
+              "host-placebottle"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "object-carry-v1478a/client-heldbottle-observer.mp4",
+            "verdict": "Corvo's window: Emily carries the bottle in her right hand at her side with her fingers around its body; on the throw her arm rises and swings over, the bottle leaves her hand and she draws her sword; the bottle breaks where it lands in both worlds. Accepted."
+          },
+          {
+            "video": "object-carry-v1478a/host-heldbottle-observer.mp4",
+            "verdict": "Emily's window: Corvo holds the bottle in his right hand, swings the arm forward in the throw and the bottle flies off; it breaks in both worlds. Accepted."
+          },
+          {
+            "video": "object-carry-v1478a/client-placebottle-observer.mp4",
+            "verdict": "Corvo's window: Emily holds the bottle, tips it down as she lowers her arm and lets it go, and the bottle rests where hers did (0 m apart). Accepted."
+          },
+          {
+            "video": "object-carry-v1478a/host-placebottle-observer.mp4",
+            "verdict": "Emily's window: Corvo lowers the bottle and lets it go with his hand opening, and it rests where his did (0 m apart). Accepted."
+          }
+        ],
+        "lifecycle": "See method."
+      },
+      "complete": true
     },
     {
       "id": "shop_dialogue_gestures",

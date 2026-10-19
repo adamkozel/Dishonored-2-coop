@@ -1,0 +1,43 @@
+{
+  "audit": "completion-audit-v1470-object-carry",
+  "family": "interactions",
+  "candidate": "candidate-npc-combat-v1214ee",
+  "method": "Pick-up: the native LootObject 47 and HoldObject 49 start the partner's use reach, which holds at its contact pose while 49 lasts (use variant 6). The object: HoldObject 49 keeps the held entity's handle at +0x48 (1433b/c); the source sends it with its name key and world transform (protocol 78-79), and the observer pins its own copy of the same map entity by the partner's presented right wrist, 7 cm along the forearm and 10 cm down so the hand holds its body. Release: a placement replaces 49 with state 81 in the same read (1457a) and plays the reach's finish (variant 7); otherwise an object that travels 25 cm within 160 ms is a throw, played as the native grenade overhand throw from its wind-up's end (variant 8). The observer's copy follows the source's flight and rest, is watched until 10 s after the release, and is broken natively when the source's breaks (its own health component, the plain arkCpntHealth). Harness 1451/1454/1457/1460: the bottle esc_env_bottle_03_3 picked up with X, held 2.4 s, then thrown with RT or put down with X; checks: the source's held phases, the observer's copy within 1.2 m of the partner and 0.4-2.0 m up while held (twice), the release gesture (8 for the throw, 7 only for the placement) and both worlds agreeing at the end (both broken, or resting within 0.75 m).",
+  "items": [
+    {
+      "id": "carry_object_place_throw",
+      "decision": "complete",
+      "scope": "Both roles: a held native movable presented in the partner's hand, its throw (arm throw) and its placement (reach finish), with the object's flight, rest or break the same in both worlds.",
+      "takes": [
+        {
+          "take": "object-carry-v1478a",
+          "cases": [
+            "client-heldbottle",
+            "client-placebottle",
+            "host-heldbottle",
+            "host-placebottle"
+          ]
+        }
+      ],
+      "visual": [
+        {
+          "video": "object-carry-v1478a/client-heldbottle-observer.mp4",
+          "verdict": "Corvo's window: Emily carries the bottle in her right hand at her side with her fingers around its body; on the throw her arm rises and swings over, the bottle leaves her hand and she draws her sword; the bottle breaks where it lands in both worlds. Accepted."
+        },
+        {
+          "video": "object-carry-v1478a/host-heldbottle-observer.mp4",
+          "verdict": "Emily's window: Corvo holds the bottle in his right hand, swings the arm forward in the throw and the bottle flies off; it breaks in both worlds. Accepted."
+        },
+        {
+          "video": "object-carry-v1478a/client-placebottle-observer.mp4",
+          "verdict": "Corvo's window: Emily holds the bottle, tips it down as she lowers her arm and lets it go, and the bottle rests where hers did (0 m apart). Accepted."
+        },
+        {
+          "video": "object-carry-v1478a/host-placebottle-observer.mp4",
+          "verdict": "Emily's window: Corvo lowers the bottle and lets it go with his hand opening, and it rests where his did (0 m apart). Accepted."
+        }
+      ],
+      "lifecycle": "See method."
+    }
+  ]
+}

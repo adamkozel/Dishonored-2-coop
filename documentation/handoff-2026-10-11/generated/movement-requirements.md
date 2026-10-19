@@ -1,8 +1,8 @@
 # Complete functional movement requirements
 
-Captured 2026-10-19T08:16:26.630838+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
+Captured 2026-10-19T08:39:36.407633+02:00; source [review-catalog.json](<../../../work/natural-moveset/review-catalog.json>).
 
-105 requirements: 99 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
+105 requirements: 100 complete (decided by a completion audit; see each item's `completion` record), 95 runtime-bound (fully or partially), 87 with accepted visuals, 2 not applicable or excluded by policy. Candidate material and recordings do not establish completion.
 
 ## Acceptance contract
 
@@ -474,7 +474,7 @@ Captured 2026-10-19T08:16:26.630838+02:00; source [review-catalog.json](<../../.
 | key_use | interactions | candidates | native_use_state75_real_lock_both_roles | accepted_functional_both_roles | complete |
 | read_object_or_note | interactions | candidates | partial_native_note_visible_root_hold_and_resume_both_roles | accepted_functional_both_roles_held_reach_reading | complete |
 | eat_drink | interactions | candidates | native_food_reach_presented_both_roles_product | accepted_functional_both_roles_generic_reach | complete |
-| carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | work_remaining |
+| carry_object_place_throw | interactions | candidates | partial_native_hold_object_gesture_both_roles_product | accepted_functional_both_roles_held_reach | complete |
 | shop_dialogue_gestures | interactions | candidates | not_verified | not_accepted | complete |
 | sit_stand | interactions | candidates | not_verified | not_accepted | not_applicable |
 | scripted_scene_pose_handoff | interactions | missing | partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles | accepted_functional_both_roles_use_scene_handback | complete |
