@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: Target outcome host alive, client alive, expected unconscious",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "Target outcome host alive, client alive, expected unconscious",
+      "checks": [],
+      "target": {
+        "spawner": "script_spawner_addermirestation_office_guard_07",
+        "definition": "models/characters/def/generic/guard_male_small_01.def",
+        "position": [
+          80.5386,
+          47.843,
+          19.6
+        ],
+        "forward": [
+          -0.5450660635533441,
+          -0.838393097754545
+        ]
+      },
+      "kind": "choke",
+      "waitScene": "midnight/campaign/eotw/overheard/oh_guards_sittingaround.midnightscene",
+      "waitSceneMs": 1612,
+      "camera": [
+        83.29905902186263,
+        46.585078703329515,
+        21.200000000000003
+      ],
+      "sourceStart": [
+        81.2181,
+        48.8322,
+        19.642
+      ],
+      "replacedAt": 472,
+      "cameraMoved": [
+        83.29905902186263,
+        46.585078703329515,
+        21.200000000000003
+      ],
+      "targetMoved": 0.0,
+      "crept": 992,
+      "creptEnd": 1332,
+      "stanceAfterCreep": 1,
+      "actedAt": 1361,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        41
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
