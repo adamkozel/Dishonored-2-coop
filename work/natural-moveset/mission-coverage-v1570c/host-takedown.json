@@ -1,0 +1,135 @@
+{
+  "source": "host",
+  "case": "takedown",
+  "observer": "client",
+  "passed": false,
+  "failure": "No native takedown on the source (states 0,40,54,64)",
+  "checks": [
+    "Window fixture: target placed placed; takedown scenes "
+  ],
+  "targetYaw": 255.0,
+  "prebind": {
+    "ms": 8236,
+    "bound": false,
+    "result": null,
+    "position": [
+      -25.1841,
+      47.2512,
+      14.6197
+    ]
+  },
+  "approach": [
+    16.00662174301594,
+    90.02118613829957
+  ],
+  "placed": {
+    "placed": 392,
+    "refused": 0,
+    "result": "placed"
+  },
+  "placedSeen": [
+    17.9322,
+    91.1089,
+    16.5126
+  ],
+  "placedWaitMs": 476,
+  "target": {
+    "spawner": "script_spawner_square_overseer_02",
+    "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+    "position": [
+      17.9322,
+      91.1089,
+      16.5127
+    ],
+    "forward": [
+      -0.9605617059082295,
+      -0.278066914865239
+    ]
+  },
+  "kind": "lethal",
+  "cameraYaw": -125.64395478041642,
+  "camera": [
+    17.998217306093427,
+    92.79851347102975,
+    18.07
+  ],
+  "sourceStart": [
+    14.8885,
+    89.9391,
+    16.5536
+  ],
+  "prePitch": 15.0,
+  "hold1": 362,
+  "windowAtPress": {
+    "t": 2684,
+    "targetName": "models/characters/base/human_dead_10796",
+    "hasPoint": true,
+    "sill": 0,
+    "angleOk": false,
+    "sillOk": false,
+    "grounded": true
+  },
+  "hold2": 689,
+  "seek": [
+    {
+      "yaw": 5.0,
+      "target": "",
+      "hasPoint": true,
+      "point": [
+        16.4021,
+        90.1483,
+        17.0436
+      ],
+      "sill": 0.996321,
+      "angleOk": false,
+      "sillOk": true,
+      "grounded": true,
+      "position": [
+        15.9685,
+        89.9953,
+        16.5536
+      ],
+      "ok": false
+    },
+    {
+      "yaw": 10.0,
+      "target": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+      "hasPoint": true,
+      "point": [
+        16.4908,
+        90.0154,
+        17.0436
+      ],
+      "sill": 0.996321,
+      "angleOk": true,
+      "sillOk": true,
+      "grounded": true,
+      "position": [
+        15.4796,
+        89.4764,
+        16.5536
+      ],
+      "ok": true
+    }
+  ],
+  "seekFound": 10.0,
+  "actedAt": 2684,
+  "pressHolds": 4,
+  "windowAfter": 3099,
+  "pressHoldEnd": 4426,
+  "pressHoldTakedown": false,
+  "trackSamples": 39,
+  "windowSamples": 3,
+  "windowAvailable": 0,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    40,
+    54,
+    64
+  ],
+  "windowScenes": []
+}

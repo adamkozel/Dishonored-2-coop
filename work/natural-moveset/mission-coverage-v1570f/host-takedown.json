@@ -1,0 +1,114 @@
+{
+  "source": "host",
+  "case": "takedown",
+  "observer": "client",
+  "passed": false,
+  "failure": "No native takedown on the source (states 0,39,64)",
+  "checks": [
+    "Window fixture: target placed placed; takedown scenes "
+  ],
+  "targetYaw": 213.8,
+  "prebind": {
+    "ms": 8001,
+    "bound": false,
+    "result": null,
+    "position": [
+      -25.1743,
+      47.236,
+      14.6198
+    ]
+  },
+  "approach": [
+    16.00662174301594,
+    90.02118613829957
+  ],
+  "placed": {
+    "placed": 416,
+    "refused": 0,
+    "result": "placed"
+  },
+  "placedSeen": [
+    17.8251,
+    91.2391,
+    16.5141
+  ],
+  "placedWaitMs": 565,
+  "target": {
+    "spawner": "script_spawner_square_overseer_02",
+    "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+    "position": [
+      17.8251,
+      91.2391,
+      16.5141
+    ],
+    "forward": [
+      -0.8309841463064056,
+      -0.5562960979437249
+    ]
+  },
+  "kind": "lethal",
+  "cameraYaw": -125.64395478041642,
+  "camera": [
+    17.998217306093427,
+    92.79851347102975,
+    18.07
+  ],
+  "sourceStart": [
+    13.9433,
+    89.3307,
+    16.5536
+  ],
+  "prePitch": 15.0,
+  "hold1": 354,
+  "windowAtPress": {
+    "t": 1617,
+    "targetName": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+    "hasPoint": true,
+    "sill": 1.00031,
+    "angleOk": true,
+    "sillOk": true,
+    "grounded": true
+  },
+  "hold2": 714,
+  "seek": [
+    {
+      "yaw": 25.0,
+      "target": "models/characters/def/generic/overseer_male_tall_01_office.def_10728",
+      "hasPoint": true,
+      "point": [
+        16.3185,
+        90.2733,
+        17.0397
+      ],
+      "sill": 1.00031,
+      "angleOk": true,
+      "sillOk": true,
+      "grounded": true,
+      "position": [
+        15.9284,
+        89.9685,
+        16.552
+      ],
+      "ok": true
+    }
+  ],
+  "seekFound": 25.0,
+  "actedAt": 1617,
+  "pressHolds": 4,
+  "windowAfter": 1994,
+  "pressHoldEnd": 3609,
+  "pressHoldTakedown": false,
+  "trackSamples": 42,
+  "windowSamples": 3,
+  "windowAvailable": 2,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "sourceStates": [
+    0,
+    39,
+    64
+  ],
+  "windowScenes": []
+}
