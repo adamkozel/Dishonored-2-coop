@@ -357,7 +357,8 @@ inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,s
         if(!known){
             // A native Slash/Block can coexist with its movement state. Keep
             // that movement channel valid without guessing from controller input.
-            if(overlay||!((a.id==39&&a.vtable==base+0x1c85d28)||(a.id==44&&a.vtable==base+0x1c81a68)||
+            // 1214dz: a parried swing's Recoil 40 (vtable RVA 0x1c83c98) is such an overlay too (1418k).
+            if(overlay||!((a.id==39&&a.vtable==base+0x1c85d28)||(a.id==44&&a.vtable==base+0x1c81a68)||(a.id==40&&a.vtable==base+0x1c83c98)||
                 (a.id==18&&a.vtable==base+0x1c82b28)||(a.id==63&&a.vtable==base+0x1c80ed8)||
                 ((resolved==0||resolved==1)&&a.id==75&&a.vtable==base+0x1c86ab8)||
                 ((resolved==0||resolved==1)&&((a.id==53&&a.vtable==base+0x1c79cf8)||(a.id==54&&a.vtable==base+0x1c78a68)||(a.id==81&&a.vtable==base+0x1c7df88)))))return false;
