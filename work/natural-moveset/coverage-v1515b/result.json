@@ -1,0 +1,134 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "stunmine",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "stunmine presented: variants 0,4,5,7"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_slot_occupied"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "trapVariants": [
+        0,
+        4,
+        5,
+        7
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "heart",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "Heart presented: variants 0,3"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_slot_occupied"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "heartVariants": [
+        0,
+        3
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "crossbow",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "crossbow presented (kind 2): variants 0,7,8,9,10, 3 shots"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 3,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 1,
+          "refused": 0,
+          "result": "named_slot_occupied"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "rangedSamples": 80,
+      "rangedVariants": [
+        0,
+        7,
+        8,
+        9,
+        10
+      ],
+      "shots": 3,
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}
