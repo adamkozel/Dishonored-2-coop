@@ -1,0 +1,26 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-farreachbottle: Cannot convert value \"4611404613243895808\" to type \"System.UInt32\". Error: \"Value was either too large or too small for a UInt32.\"",
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachbottle",
+      "observer": "host",
+      "passed": false,
+      "failure": "Cannot convert value \"4611404613243895808\" to type \"System.UInt32\". Error: \"Value was either too large or too small for a UInt32.\"",
+      "checks": [],
+      "grantResult": {
+        "grants": 9,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "healthComponents": {
+        "host": "0x22e5a250b80",
+        "client": "0x18d40fba7e0"
+      },
+      "inputAt": "2026-10-19T19:50:31.5241227+02:00",
+      "restored": true
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}
