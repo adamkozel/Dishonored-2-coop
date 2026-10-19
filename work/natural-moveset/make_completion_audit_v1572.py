@@ -18,14 +18,16 @@ M = ("No native player takedown scene varies by victim body: the same choke and 
      "assassination_wolfhound_* scenes, 1550a/b). Contextual victim states: knocked down after Windblast "
      "(choke_knockdown_*, the client's replica given the host's down state by 1214en and the host's body held for a "
      "client's victim pose by 1214eo; 1541a/b) and seated (choke_sit_*: the choke rule handler offers them from the back "
-     "and the sides, while front_choke_sit has no action, so a seated NPC approached from the front gets no choke; "
-     "1563a showed every NPC-side gate of the takedown eligibility passes for seated NPCs). Gravehounds and clockwork "
+     "and the sides, while front_choke_sit has no action; the player's takedown sensor takes a seated NPC only from behind "
+     "her shoulder while she is unaware, so the fixture presses at the first ready sample: choke_sit_left in both roles, "
+     "1577a, 1578e, 1579a; seated combat NPCs stand up when the source arrives, so seated victims are civilians, whose "
+     "own pose in the partner's world needs the scripted-civilian binding of #113). Gravehounds and clockwork "
      "soldiers run native takedowns too (1508b; Emily's clockwork drop behead 1554b), but their outcomes and the behead "
      "state are world authority (#118, stage 4); scripted civilians not bound in the NPC stream are #113.")
 items = [dict(id='enemy_body_size_variants', decision='complete',
     scope=("Both roles: takedowns of small, tall, female, armored and wolfhound victims and of knocked-down and seated "
-           "victims, each presented on the partner with the outcome shared. Gravehound and clockwork outcomes are stage 4 "
-           "(#118); scripted civilians #113."),
+           "victims, each presented on the partner with the outcome shared (the seated victim, a scripted civilian, by its outcome "
+           "only until #113). Gravehound and clockwork outcomes are stage 4 (#118); scripted civilians #113."),
     takes=[{'take': 'takedown-variants-v1254i', 'cases': ['client-back-choke', 'host-back-choke']},
            {'take': 'mission-coverage-v1426b', 'cases': ['host-takedown']},
            {'take': 'mission-coverage-v1426c', 'cases': ['client-takedown']},
