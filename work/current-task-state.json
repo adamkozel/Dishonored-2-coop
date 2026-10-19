@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T06:30:00+02:00",
+  "UpdatedAt": "2026-10-19T08:40:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 93/105 on branch stage3/movement-completion-10, draft #112 (body carry audited, v1431; shop v1422 merged in #111). Running on 1214dy: 1426c/d (Emily on the tall overseer), 1425c (Corvo no-mana under Windblast/Blink), 1429a (power aim interrupted by a lab hit), 1418j-l (Emily recoil stagger), 1430a (Far Reach grapple sensor sweep); 1432 (combat choke breakout) is ready. Open: counterattack (Corvo), stagger (Emily), kick, wall/window, enemy body sizes (civilians need NPC authority: #113), struggle/escape, Far Reach pull, upgrades, interruptions/no mana, object carry.",
+  "NextAction": "Movement completion (#11, chapter 99): 94/105 on branch stage3/movement-completion-10, draft #112 (counterattack v1443, body carry v1431). Running on 1214dz: 1437a/b (rear choke of an alerted guard: breakout), 1438a (Corvo aim interrupted, short hold), 1433b/c (held-object state dump), 1440a (wall-swing stagger filmed from behind), 1436b (kick fixture), 1442a (Far Reach pull, upgrades first). Ready audits: v1439 (power interruptions and no mana, needs 1438a), v1441 (stagger and knockdown, needs 1440a). Open: kick, wall/window, enemy body sizes (female #113, clockwork mission 4), struggle/escape, Far Reach pull, upgrades, object carry.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214dy (deployed; 1214dx catalog fix plus Corvo failed cast under any power and the observer stagger diagnostic)",
-    "NextCandidate": "none queued; next fixes come from 1425c (Corvo no-mana presentation), 1429a (power aim interrupted by a hit) and the 1430a grapple sensor sweep",
-    "Complete": "93 of 105",
+    "Candidate": "candidate-npc-combat-v1214dz (deployed; 1214dy plus the Recoil 40 overlay and the lab-only coop_lab_npc_place)",
+    "NextCandidate": "none queued; next fixes come from 1442a (Far Reach pull with upgrades granted first), 1433b/c (held-object state), 1436b (kick fixture) and 1437 (breakout)",
+    "Complete": "94 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
