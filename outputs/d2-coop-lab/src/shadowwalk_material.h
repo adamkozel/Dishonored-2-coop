@@ -75,6 +75,10 @@ void serviceShadowWalkMaterial(ULONGLONG tick){
     AcquireSRWLockShared(&movementLock);const auto& p=movementPlayback;
     if(localRole==0&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
        p.clock.weight>.9f&&p.powerWeight>.9f&&p.powerVariant>=32&&p.powerVariant<=36&&!p.presentedDrawn){variant=p.powerVariant;amount=p.powerAmount;}
+    // 1214dj: the form's own kill and choke are presented as takedowns (ids 37-44 and 77-84, 1214db), not as power
+    // variants; in 1254zc Emily showed her ordinary body for the whole throw. The silhouette holds at full fade through them.
+    else if(localRole==0&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
+       p.clock.weight>.9f&&p.chokeWeight>.5f&&((p.chokeVariant>=37&&p.chokeVariant<=44)||(p.chokeVariant>=77&&p.chokeVariant<=84))){variant=33;amount=1;}
     ReleaseSRWLockShared(&movementLock);
     if(!variant||!coopGameplayReady(outgoing)||!shadowStreamCurrent(tick)||!shadowStream.peerReady){stopShadowWalkMaterial();if(!variant)s.blocked=false;return;}
     if(s.active&&(tick>=s.deadline||s.token!=shadowStream.token||s.peer!=shadowStream.peerToken||s.handle!=probeHandle)){

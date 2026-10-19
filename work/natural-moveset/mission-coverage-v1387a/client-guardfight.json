@@ -1,0 +1,81 @@
+{
+  "source": "client",
+  "case": "guardfight",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Block impacts 0, timed parries 1, hit reactions 0 (variants ), attacks 17 (variants 1,2,3,4); guard dead in both worlds"
+  ],
+  "guardFacing": [
+    -0.15950291241593806,
+    0.9871974579236079
+  ],
+  "placementTrials": [
+    {
+      "offset": [
+        -0.15950291241593806,
+        0.9871974579236079
+      ],
+      "rest": [
+        4.03184,
+        61.6569,
+        15.9661
+      ],
+      "statesReadable": true,
+      "ok": true
+    }
+  ],
+  "modalsAfterPlacement": 0,
+  "cameraFollowMoves": 66,
+  "phaseLog": [
+    {
+      "phase": "block",
+      "ms": 3964
+    },
+    {
+      "phase": "open",
+      "ms": 26014,
+      "guardSamples": 1
+    },
+    {
+      "phase": "attack",
+      "ms": 41343,
+      "hitSamples": 0
+    }
+  ],
+  "counterPresses": [
+    7152,
+    12168
+  ],
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcomeWaitMs": 685,
+  "guard": "script_spawner_checkpoint_guard_01",
+  "blockImpacts": 0,
+  "timedParries": 1,
+  "hitReactions": 0,
+  "stunVariants": [],
+  "combatSceneWindows": 0,
+  "sceneWindows": 2,
+  "attackSamples": 17,
+  "attackVariants": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "minSourceHealth": 55.0,
+  "healthDrops": [
+    {
+      "ms": 2616,
+      "states": 0
+    },
+    {
+      "ms": 10226,
+      "states": 0
+    }
+  ]
+}
