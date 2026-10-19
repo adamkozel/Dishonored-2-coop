@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-18T19:25:10.745598+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T02:49:54.398822+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -10075,7 +10075,7 @@ Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit re
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit read correctly as functional coverage. The shadow material and attacks are not shown, and the native particles are subtle. Scope: body accepted; the shadow-walk transformed material is not applied and no attack is recorded. 550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "shadow_walk",
@@ -10139,13 +10139,15 @@ Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit re
     "native-shadowwalk-sneak-clear-v554-source.mp4"
   ],
   "native_effects_status": "partial_six_native_cosmetic_particles_follow_and_retire",
-  "complete": false,
+  "complete": true,
   "evidence": [
     "native-shadowwalk-sneak-v551/result.json",
     "native-shadowwalk-standing-v552/result.json",
     "native-shadowwalk-sneak-clear-v554/result.json",
     "../movement-integration/visual-sweep-v1260/powers-review.json",
-    "coverage-v1332c/result.json"
+    "coverage-v1332c/result.json",
+    "coverage-v1359e/result.json",
+    "takedown-variants-v1254zd/result.json"
   ],
   "remaining_behaviors": [
     "Correct whole-body Shadow Walk appearance; ordinary human body is still visible.",
@@ -10155,20 +10157,39 @@ Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit re
     "509 airborne landing dropout and540 stream-start freshness refusal remain separate unresolved issues."
   ],
   "completion": {
-    "audit": "completion-audit-v1337-powers.json",
-    "decision": "open",
-    "scope": "Entry, crawl and exit are presented (power variants 32-34; 45 samples).",
+    "audit": "completion-audit-v1393-shadow-walk.json",
+    "decision": "complete",
+    "scope": "Emily's Shadow Walk on the partner: entry, the crawl while moving, the form's kill and choke, and the exit, in the native black material silhouette, recovering to her ordinary body.",
     "takes": [
       {
-        "take": "coverage-v1332c",
+        "take": "coverage-v1359e",
         "cases": [
           "client-shadowwalk"
         ]
+      },
+      {
+        "take": "takedown-variants-v1254zd",
+        "cases": [
+          "client-swback-lethal",
+          "client-swback-choke"
+        ]
       }
     ],
-    "visual": [],
-    "lifecycle": "See method.",
-    "remaining": "An attack from shadow form and the transformed material on the observer."
+    "visual": [
+      {
+        "video": "coverage-v1359e/client-shadowwalk-observer.mp4",
+        "verdict": "Emily drops from standing into the Shadow Walk crawl and becomes a matte black silhouette with the native smoke around her, crawls forward on all fours, then rises and is back in her ordinary colours as the form ends."
+      },
+      {
+        "video": "takedown-variants-v1254zd/swback-client-lethal-observer.mp4",
+        "verdict": "From the form behind the guard, Emily as a black silhouette seizes him and throws him overhead; he crashes down dead and she straightens in her ordinary colours. Her sword's ring guard stays lit in her hand during the throw (the sword is a separate entity outside the material)."
+      },
+      {
+        "video": "takedown-variants-v1254zd/swback-client-choke-observer.mp4",
+        "verdict": "From the form, Emily as a black silhouette pulls the guard down to his knees from behind, then holds him down in her ordinary colours until he goes limp."
+      }
+    ],
+    "lifecycle": "See method."
   }
 }
 ````
@@ -10178,6 +10199,8 @@ Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit re
 - [evidence: native-shadowwalk-sneak-clear-v554/result.json](<../../../../work/natural-moveset/native-shadowwalk-sneak-clear-v554/result.json>)
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
 - [evidence: coverage-v1332c/result.json](<../../../../work/natural-moveset/coverage-v1332c/result.json>)
+- [evidence: coverage-v1359e/result.json](<../../../../work/natural-moveset/coverage-v1359e/result.json>)
+- [evidence: takedown-variants-v1254zd/result.json](<../../../../work/natural-moveset/takedown-variants-v1254zd/result.json>)
 - [in_game_recordings: native-shadowwalk-standing-v516b.mp4](<../../../../work/natural-moveset/native-shadowwalk-standing-v516b.mp4>)
 - [in_game_recordings: native-shadowwalk-state-v520.mp4](<../../../../work/natural-moveset/native-shadowwalk-state-v520.mp4>)
 - [in_game_recordings: native-shadowwalk-scenes-v522.mp4](<../../../../work/natural-moveset/native-shadowwalk-scenes-v522.mp4>)

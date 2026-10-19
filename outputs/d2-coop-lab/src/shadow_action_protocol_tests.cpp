@@ -862,7 +862,8 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       check(validShadowAction(empty,c,h),"owned Corvo insufficient-mana response");
       auto invalidEmpty=empty;invalidEmpty.airStage=2;check(!validShadowAction(invalidEmpty,c,h),"unobserved airborne failure refused");
       invalidEmpty=empty;invalidEmpty.swordState=1;check(validShadowAction(invalidEmpty,c,h),"observed empty-hand failure retains holstered equipment");
-      invalidEmpty=empty;invalidEmpty.role=1;invalidEmpty.character=2;check(!validShadowAction(invalidEmpty,ec,eh),"Emily failure requires separate observed binding");
+      invalidEmpty=empty;invalidEmpty.role=1;invalidEmpty.character=2;check(validShadowAction(invalidEmpty,ec,eh),"Emily's observed failure (power_outofmana, 1390a) is presented");
+      invalidEmpty.airStage=2;check(!validShadowAction(invalidEmpty,ec,eh),"Emily's airborne failure stays refused");
       invalidEmpty=empty;invalidEmpty.version=35;check(!validShadowAction(invalidEmpty,c,h),"older peer cannot receive expanded failure contexts");
       auto hold=power;hold.powerVariant=13;hold.powerDurationMs=300;check(!validShadowAction(hold,c,h),"asset-only Bend Time hold stays unbound until observed");
       auto invalid=power;invalid.state=0;check(!validShadowAction(invalid,c,h),"idle cannot carry power phase");

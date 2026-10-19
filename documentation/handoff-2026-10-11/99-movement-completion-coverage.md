@@ -7,7 +7,7 @@ Updated 2026-10-18. This chapter covers how checklist items in [movement require
 - the lab-only grants that put items, powers and upgrades in the isolated save (1214ck, 1214cm);
 - the completion audits that record each item's decision in `review-catalog.json`.
 
-**Status: 88 of 105 items complete; 2 are not applicable or excluded, 15 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, paired takedowns from every side, from above and sliding, lethal takedowns, ragdoll hand-off, scene hand-back and cutscenes, key use, Bend Time and doors). Live candidate: 1214dh.
+**Status: 89 of 105 items complete; 2 are not applicable or excluded, 14 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, paired takedowns from every side, from above and sliding, lethal takedowns, ragdoll hand-off, scene hand-back and cutscenes, key use, Bend Time, doors and Shadow Walk). Live candidate: 1214dk.
 
 ## Coverage harnesses
 
@@ -248,6 +248,8 @@ The isolated save has no ranged weapons, traps, Heart, powers or upgrades. Two l
 | mission-coverage-v1387a, b | Following guard-fight camera (1387). a: a parry win at 7.2 s answered at once plays the counter-kill `fatality_head_fast_a` (state 13), dead in both worlds (the second confirmed Emily counter-kill), but the camera showed an empty street throughout. b: no block impact or parry |
 | coverage-v1388a | Far Reach pull of the coin pouch on the safe-room floor (1214di): aim, cast and pull presented (variants 4, 5, 6, 7 and 9) and recovered |
 | coverage-v1389a, b | Pickpocket from 0.75 m behind tutorial guard 2, aimed at the belt key's live position (ld_key_01, 1.1 m above the floor): in all 25 aim trials per role the interaction focus is the empty handle 0x3fff0010, so the key is never a use target from the ordinary interaction sensor |
+| coverage-v1390b | Emily out of mana on 1214dk: the one native failure (power_outofmana at the fourth press; the second and third presses started no native scene) is presented as variant 15 at weight 0.99; the left-hand gesture is too small to judge from this camera |
+| mission-coverage-v1391a | Traced following camera: the follow spots are right, but the approach helper re-aims the camera after 1.5 m of movement (hold off, turn, hold again 250 ms later); a follow move in that gap starts a hold with the observer's own view direction, which explains the empty street of 1387a. Harness 1394 leaves the camera to the follow |
 | coverage-v1363a-c | Self-grenade stuns (1363a/b: pitch 75 over the 70 limit). 1363c reported 4/4 passes that are not evidence: the view-levelling step blocked sampling across the blast and `@($null).Count` is 1, so a missing stun passed; Corvo is seen staggering at the blast. 1363e/f re-run with the stun window sampled |
 | coverage-v1363e, f | Corrected stun takes (stun window sampled, null variants fail): of the four turns only the 90-degree left turn stunned, in both roles: Corvo stun_right (variant 1), Emily stun_back (variant 4), each at full stun weight. The partner's locomotion weight is 0 by design while a stun is presented (as in every guard-fight stun), which the low-weight check wrongly failed; 1363g excludes presented stuns and names cases by blast side |
 | gestures-v1261c, object-carry-v1269b, use-variants-dunwall-v1228u | Old take names reused by mistake; the refused reruns wrote into the old folders, restored from git (logs kept as `refused-rerun-*.log`) |
@@ -298,12 +300,13 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1369-lethal | 1: lethal takedowns from the back, both sides and the front in both roles (1254h/i; Emily's standing front lethal 1254w on 1214cz) |
 | completion-audit-v1370-bend-time | 1: Corvo's Bend Time cast and end (1359d on 1214cz: variants 12 and 14 at full weight, recovered) |
 | completion-audit-v1378-doors | 1: doors (the locked office door refuses with the native message and the unlocked one opens and closes, both roles: 1228zf/zg, 1228zj/zk) |
+| completion-audit-v1393-shadow-walk | 1: Emily's Shadow Walk entry, crawl, form kill and choke, and exit in the native black material silhouette (1359e on 1214di, 1254zd on 1214dj) |
 | completion-audit-v1368-ragdoll | 1: ragdoll hand-off (corpse release in frame after a drop kill by either player: 1254o Corvo, 1254u Emily; bodies end 0.02 and 0.37 m apart) |
 
-**Still open (15):**
+**Still open (14):**
 - combat: counterattack (no counter-kill yet), hit reactions from every direction (front and back seen; side stuns only at weight 0), stagger and knockdown (never provoked), kick (Emily's `throwhit` not reproduced);
 - paired actions: wall and window variants, enemy body sizes, struggle and escape, body carry (the product presentation lacks the shoulder attachment and carry pose: 1277p);
-- powers: Far Reach pull variants, Shadow Walk (attack and material), upgrades, interruptions and no mana;
+- powers: Far Reach pull variants, upgrades, interruptions and no mana;
 - interactions: pickup and loot (pickpocketing), object carry, shop and dialogue gestures.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.

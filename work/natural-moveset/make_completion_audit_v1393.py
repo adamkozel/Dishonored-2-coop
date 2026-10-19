@@ -1,0 +1,33 @@
+"""Writes completion-audit-v1393-shadow-walk.json (#11): Emily's Shadow Walk entry, crawl, form attacks and exit presented on the
+partner with the native material silhouette (coverage-v1359e on 1214di, takedown-variants-v1254zd on 1214dj)."""
+import json
+from pathlib import Path
+N = Path(__file__).resolve().parent
+M = ("Shadow Walk is Emily's power only. The coverage harness grants it by name (lab only) and the source enters the form, "
+     "crawls forward and leaves it with the product controller in the Dunwall tower safe room (coverage-v1359e); the takedown "
+     "harness approaches tutorial guard 2 from behind in the form and attacks (the form's kill, assassination_sw_back_short, "
+     "id 38) or chokes (choke_sw_back, id 77) him (takedown-variants-v1254zd). The source reads the native Shadow Walk scenes "
+     "in the form's own state mode (stance 2; 1214db) and sends power variants 32-36, and the form's kill and choke as "
+     "takedown ids 37-44 and 77-84; the partner presents the authored crawl (bank clips, visual sweep 1260) and the native "
+     "takedown scenes. The native form has no third-person body: survey 1381b filmed native material effects on the partner "
+     "and effect 1, a complete matte black silhouette, was chosen; 1214di applies it while variants 32-36 are presented "
+     "(fading in over the entry and out over the exit) and 1214dj holds it through the form's kill and choke. The native "
+     "Shadow Walk particles follow the partner (1214cz). A case passes when the partner presentation stays live, the form "
+     "phases are presented at full weight and recovered, and for the attacks when the outcome is shared in both worlds.")
+items = [
+ dict(id='emily_shadow_walk_enter_move_attack_exit', decision='complete',
+      scope="Emily's Shadow Walk on the partner: entry, the crawl while moving, the form's kill and choke, and the exit, in the native black material silhouette, recovering to her ordinary body.",
+      takes=[{'take': 'coverage-v1359e', 'cases': ['client-shadowwalk']},
+             {'take': 'takedown-variants-v1254zd', 'cases': ['client-swback-lethal', 'client-swback-choke']}],
+      visual=[{'video': 'coverage-v1359e/client-shadowwalk-observer.mp4',
+               'verdict': 'Emily drops from standing into the Shadow Walk crawl and becomes a matte black silhouette with the native smoke around her, crawls forward on all fours, then rises and is back in her ordinary colours as the form ends.'},
+              {'video': 'takedown-variants-v1254zd/swback-client-lethal-observer.mp4',
+               'verdict': "From the form behind the guard, Emily as a black silhouette seizes him and throws him overhead; he crashes down dead and she straightens in her ordinary colours. Her sword's ring guard stays lit in her hand during the throw (the sword is a separate entity outside the material)."},
+              {'video': 'takedown-variants-v1254zd/swback-client-choke-observer.mp4',
+               'verdict': 'From the form, Emily as a black silhouette pulls the guard down to his knees from behind, then holds him down in her ordinary colours until he goes limp.'}]),
+]
+for i in items:
+    i['lifecycle'] = 'See method.'
+audit = dict(audit='completion-audit-v1393-shadow-walk', family='powers', candidate='candidate-npc-combat-v1214dj', method=M, items=items)
+(N / 'completion-audit-v1393-shadow-walk.json').write_text(json.dumps(audit, indent=2) + '\n', encoding='utf-8')
+print('ok', len(items))
