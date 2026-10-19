@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T07:40:00+02:00",
+  "UpdatedAt": "2026-10-19T06:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 90/105 on branch stage3/movement-completion-8, draft #110 (pickup_loot_steal audited, v1413). Running: carry 1277v on 1214dq (restore cause), then 1407a-e (front, back and Corvo left lab blasts re-framed), then deploy 1214dr and shop takes 1402b/c, then 1412a (Emily out-of-mana from behind-left). Next: hit_reactions and stagger_knockdown_recovery audits from 1403/1407, product carry fix from the 1277v restore cause, shop review, single-guard counter-kill framing, Far Reach body pull aim.",
+  "NextAction": "Movement completion (#11, chapter 99): 93/105 on branch stage3/movement-completion-10, draft #112 (body carry audited, v1431; shop v1422 merged in #111). Running on 1214dy: 1426c/d (Emily on the tall overseer), 1425c (Corvo no-mana under Windblast/Blink), 1429a (power aim interrupted by a lab hit), 1418j-l (Emily recoil stagger), 1430a (Far Reach grapple sensor sweep); 1432 (combat choke breakout) is ready. Open: counterattack (Corvo), stagger (Emily), kick, wall/window, enemy body sizes (civilians need NPC authority: #113), struggle/escape, Far Reach pull, upgrades, interruptions/no mana, object carry.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214dq (deployed; 1214dp plus carry restore-cause telemetry)",
-    "NextCandidate": "1214dr (built, deploys after the 1407 takes): black market hold (logic 10 accepted by the hold, presentation readiness and door sessions), standing ground motion in the shop, and the partner counter gestures (bank75 clip 381 from native NPC think and calm gestures)",
-    "Complete": "90 of 105",
+    "Candidate": "candidate-npc-combat-v1214dy (deployed; 1214dx catalog fix plus Corvo failed cast under any power and the observer stagger diagnostic)",
+    "NextCandidate": "none queued; next fixes come from 1425c (Corvo no-mana presentation), 1429a (power aim interrupted by a hit) and the 1430a grapple sensor sweep",
+    "Complete": "93 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",

@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T04:58:07.994349+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T05:49:10.313219+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -857,7 +857,7 @@ Audit 1267: lift, carry and throw accepted for both characters from the v38 reco
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1267: lift, carry and throw accepted for both characters from the v38 recordings (the sweep had judged v13). Visual sweep 1260: reject (corvo reject, emily reject). Carrying and dropping work, but in both roles the pickup is a one-frame shoulder attachment pop with no lift, and no throw is recorded. Scoped native pickup, stance-change, low-drop, high-throw and compact-release experiments are preserved by build. v38 removes the compact-release upright pop in both roles; named high throws and low drops regress successfully. Final hand contact, recovery, arbitrary bodies and interrupted lifecycle remain unfinished. Historical failed comparisons remain explicitly labelled.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [
     "native-carry-corvo-reader-v2/native.mp4",
@@ -2635,13 +2635,96 @@ Audit 1267: lift, carry and throw accepted for both characters from the v38 reco
   },
   "evidence": [
     "../movement-integration/visual-sweep-v1260/combat_paired-review.json",
-    "../movement-integration/sweep-defects-audit-v1267.json"
-  ]
+    "../movement-integration/sweep-defects-audit-v1267.json",
+    "carry-body-v1277y/result.json",
+    "carry-body-v1277z/result.json",
+    "carry-body-v1423b/result.json",
+    "carry-body-v1423c/result.json",
+    "carry-body-v1428a/result.json",
+    "carry-body-v1428b/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1431-carry-body.json",
+    "decision": "complete",
+    "scope": "The partner lifting an unconscious body onto the shoulder, standing and walking with it, dropping it and throwing it, in both roles, with the observer's own body attached and ending where the source's body ends.",
+    "takes": [
+      {
+        "take": "carry-body-v1277y",
+        "cases": [
+          "host-choke"
+        ]
+      },
+      {
+        "take": "carry-body-v1277z",
+        "cases": [
+          "client-choke"
+        ]
+      },
+      {
+        "take": "carry-body-v1423b",
+        "cases": [
+          "host-choke"
+        ]
+      },
+      {
+        "take": "carry-body-v1423c",
+        "cases": [
+          "client-choke"
+        ]
+      },
+      {
+        "take": "carry-body-v1428a",
+        "cases": [
+          "client-choke"
+        ]
+      },
+      {
+        "take": "carry-body-v1428b",
+        "cases": [
+          "host-choke"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "carry-body-v1428a/client-choke-pickup-observer.mp4",
+        "verdict": "Emily bends over the choked guard, reaches down and rises with him over her shoulder, then stands with him (backlit, silhouette)."
+      },
+      {
+        "video": "carry-body-v1428b/host-choke-pickup-observer.mp4",
+        "verdict": "Corvo bends over the guard lying at his feet, gathers him up and rises with him on his shoulder, then stands with the body on the shoulder."
+      },
+      {
+        "video": "carry-body-v1277y/host-choke-carry-observer.mp4",
+        "verdict": "Corvo walks with the guard over his shoulder, then lowers him to the floor at his left side and stands beside the body."
+      },
+      {
+        "video": "carry-body-v1277z/client-choke-carry-observer.mp4",
+        "verdict": "Emily walks with the guard draped over her shoulder, his legs hanging in front, then drops him."
+      },
+      {
+        "video": "carry-body-v1423b/host-choke-carry-observer.mp4",
+        "verdict": "Corvo walks with the guard over his shoulder, then the body leaves his shoulder to the left and drops past the railing while his left arm swings out."
+      },
+      {
+        "video": "carry-body-v1423c/client-choke-carry-observer.mp4",
+        "verdict": "Emily carries the guard over her shoulder, then the body slides off to her left and falls past the railing while her arm follows."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/combat_paired-review.json](<../../../../work/movement-integration/visual-sweep-v1260/combat_paired-review.json>)
 - [evidence: ../movement-integration/sweep-defects-audit-v1267.json](<../../../../work/movement-integration/sweep-defects-audit-v1267.json>)
+- [evidence: carry-body-v1277y/result.json](<../../../../work/natural-moveset/carry-body-v1277y/result.json>)
+- [evidence: carry-body-v1277z/result.json](<../../../../work/natural-moveset/carry-body-v1277z/result.json>)
+- [evidence: carry-body-v1423b/result.json](<../../../../work/natural-moveset/carry-body-v1423b/result.json>)
+- [evidence: carry-body-v1423c/result.json](<../../../../work/natural-moveset/carry-body-v1423c/result.json>)
+- [evidence: carry-body-v1428a/result.json](<../../../../work/natural-moveset/carry-body-v1428a/result.json>)
+- [evidence: carry-body-v1428b/result.json](<../../../../work/natural-moveset/carry-body-v1428b/result.json>)
 - [in_game_recordings: native-carry-corvo-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-corvo-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-emily-reader-v2/native.mp4](<../../../../work/natural-moveset/native-carry-emily-reader-v2/native.mp4>)
 - [in_game_recordings: native-carry-carrier-corvo-v3/native.mp4](<../../../../work/natural-moveset/native-carry-carrier-corvo-v3/native.mp4>)
