@@ -51,5 +51,28 @@ void nativeNpcAuthorityTests(){
         b=m;unsigned reads=0;require(!readNativeNpcAuthority([&](auto a,auto d,auto n){const bool ok=b.read(a,d,n);if(a==p&&++reads==1)b.d(p,500);return ok;},base,game,handle,s),"component incarnation change between snapshots refused");
     }
     b=m;b.d(components[1]+0x18,1010);require(inspect(b)&&!sameNpcAuthorityIdentity(original,s),"same-address recycled AI invalidates saved lease");
+    {// 1214en: the knocked-down state read the way IsOnGround evaluates it.
+     constexpr std::uintptr_t down=0x600000000,dlist=down+0x100,phys=down+0x1000,react=down+0x2000,other=down+0x3000,code=base+0x3000000; // lea reach: within 2 GB of the types
+     Memory k;k.q(down+0x268,dlist);k.d(down+0x270,3);k.q(dlist,other);k.q(dlist+8,phys);k.q(dlist+16,react);
+     const auto getter=[&](std::uintptr_t at,std::uintptr_t type){const std::int32_t rel=static_cast<std::int32_t>(type-(at+7));unsigned char c[8]{0x48,0x8d,0x05,0,0,0,0,0xc3};std::memcpy(c+3,&rel,4);k.put(at,c,8);};
+     const auto physType=base+kNativePhysicsComponentType,reactType=base+kNativeAiPhysicsReactionType,physClass=code+0x800,otherClass=code+0x900;
+     k.d(physType+0x60,40);k.d(physType+0x64,44);k.d(reactType+0x60,90);k.d(reactType+0x64,90);k.d(physClass+0x60,42);k.d(otherClass+0x60,7);
+     k.q(phys,code+0x100);k.q(code+0x100,code+0x10);getter(code+0x10,physClass);
+     k.q(react,base+0x1b88928);k.q(base+0x1b88928,code+0x20);getter(code+0x20,reactType);
+     k.q(other,code+0x200);k.q(code+0x200,code+0x30);getter(code+0x30,otherClass);
+     k.d(phys+0x238,3);k.d(react+0x13c,3);float zero=0;k.put(react+0x138,&zero,4);unsigned char none=0;k.put(react+0x150,&none,1);k.put(react+0x152,&none,1);
+     NativeNpcDown d{};const auto readDown=[&](Memory& mem){return readNativeNpcDown([&](auto a,auto p,auto n){return mem.read(a,p,n);},base,down,d);};
+     require(readDown(k)&&d.physics==phys&&d.reaction==react&&!nativeNpcDown(d),"1214en: a standing NPC (mode 3, pose 3) is not down");
+     auto b=k;b.d(phys+0x238,2);require(readDown(b)&&nativeNpcRagdoll(d)&&nativeNpcDown(d),"1214en: ragdoll mode 2 is down");
+     b=k;b.d(phys+0x238,0);require(readDown(b)&&nativeNpcDown(d),"1214en: ragdoll mode 0 is down");
+     b=k;b.d(react+0x13c,1);require(readDown(b)&&nativeNpcDown(d),"1214en: recovery pose 1 (getting up) is down");
+     b=k;b.d(react+0x13c,0);require(readDown(b)&&nativeNpcDown(d),"1214en: pose 0 is down");
+     b=k;float laying=.4f;b.put(react+0x138,&laying,4);require(readDown(b)&&nativeNpcDown(d),"1214en: a running laying timer is down");
+     b=k;unsigned char bit=8;b.put(react+0x152,&bit,1);require(readDown(b)&&nativeNpcDown(d),"1214en: +0x152 bit 3 is down");
+     b=k;bit=2;b.put(react+0x150,&bit,1);require(readDown(b)&&nativeNpcDown(d),"1214en: +0x150 bit 1 is down");
+     b=k;b.d(physClass+0x60,45);require(readDown(b)&&!d.physics&&d.reaction,"1214en: a class outside the type range is not the physics component");
+     b=k;unsigned char ret=0xc3;b.put(code+0x10,&ret,1);require(readDown(b)&&!d.physics,"1214en: a type getter that is not lea/ret is not matched");
+     b=k;b.q(react,base+0x1b88930);b.q(base+0x1b88930,code+0x20);require(!readDown(b),"1214en: a reaction-range component with a foreign vtable is refused");
+     require(npcDownTimerNeedsRefresh(0)&&npcDownTimerNeedsRefresh(.2f)&&!npcDownTimerNeedsRefresh(.5f)&&npcDownTimerNeedsRefresh(std::nanf("")),"1214en: the replica laying timer is refreshed below half");}
     std::cout<<"PASS: generic NPC binding, native generations, active/script-held selection, attack exclusion and pause lifetime\n";
 }

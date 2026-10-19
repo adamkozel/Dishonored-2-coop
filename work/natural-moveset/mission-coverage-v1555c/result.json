@@ -1,0 +1,81 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,44,64)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_37",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ],
+        "forward": [
+          -0.9997180548334921,
+          0.02374470130237209
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 55,
+        "requests": [
+          1
+        ],
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ]
+      },
+      "approachYaw": -90.0,
+      "camera": [
+        0.9797207199134563,
+        57.99826097923204,
+        42.601
+      ],
+      "sourceStart": [
+        4.30672,
+        56.1636,
+        42.0958
+      ],
+      "prePitch": 35.0,
+      "replacedAt": 491,
+      "cameraMoved": [
+        0.9797206442070596,
+        57.998261581030214,
+        42.601
+      ],
+      "targetMoved": 0.0,
+      "crept": 1226,
+      "creptEnd": 1551,
+      "stanceAfterCreep": 1,
+      "stanceBeforePress": 0,
+      "sittingAtPress": {
+        "t": 1883,
+        "source": true,
+        "sourceRequests": 1,
+        "host": true
+      },
+      "actedAt": 1883,
+      "trackSamples": 48,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

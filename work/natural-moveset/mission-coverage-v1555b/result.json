@@ -1,0 +1,80 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,44,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,44,64)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_37",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ],
+        "forward": [
+          -0.9997180524596863,
+          0.02374480124599613
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 55,
+        "requests": [
+          1
+        ],
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ]
+      },
+      "camera": [
+        4.368198719868871,
+        55.36706068206024,
+        42.601
+      ],
+      "sourceStart": [
+        5.789,
+        58.334,
+        41.9567
+      ],
+      "prePitch": 35.0,
+      "replacedAt": 505,
+      "cameraMoved": [
+        4.187441881119097,
+        55.3582569747839,
+        42.601
+      ],
+      "targetMoved": 0.01,
+      "crept": 1132,
+      "creptEnd": 1475,
+      "stanceAfterCreep": 1,
+      "stanceBeforePress": 0,
+      "sittingAtPress": {
+        "t": 1815,
+        "source": false,
+        "sourceRequests": null,
+        "host": false
+      },
+      "actedAt": 1815,
+      "trackSamples": 48,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        44,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

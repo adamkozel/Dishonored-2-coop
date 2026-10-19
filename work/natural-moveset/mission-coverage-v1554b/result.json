@@ -1,0 +1,67 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: Target outcome host alive, client alive, expected dead",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "Target outcome host alive, client alive, expected dead",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_clockwork_inner",
+        "definition": "models/characters/def/generic/clockwork_01.def",
+        "position": [
+          301.78,
+          -27.51,
+          -8.99917
+        ],
+        "forward": [
+          0.9999999999999976,
+          7.138499999999983E-08
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        301.32999978584496,
+        -24.51000003212326,
+        -7.39917
+      ],
+      "sourceStart": [
+        300.38,
+        -27.51,
+        -8.99211
+      ],
+      "prePitch": 60.0,
+      "replacedAt": 525,
+      "cameraMoved": [
+        302.5392822383361,
+        -29.85941273986035,
+        -7.40001
+      ],
+      "targetMoved": 0.85,
+      "dropFrom": [
+        301.08038632039296,
+        -27.19122757500293,
+        -6.00001
+      ],
+      "actedAt": 1215,
+      "dropPresses": 4,
+      "trackSamples": 51,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        3,
+        13,
+        53,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

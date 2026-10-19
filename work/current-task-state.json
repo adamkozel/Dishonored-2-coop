@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T11:27:04+02:00",
+  "UpdatedAt": "2026-10-19T15:39:17+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214em (deployed; probe-only on the 1214el DLL: --window-sensor, --sitting, --on-ground read the native window, seated and knocked-down takedown inputs; 1214el: protocol 79, clone wire 5, Windblast wire 2, host streams NPCs the game itself has paused)",
-    "NextCandidate": "none pending; fixtures: window geometry scan with the native sensor (1527), seated survey (1528), knocked-down trace (1529), gravehound kill presentation",
-    "Complete": "101 of 105 (power_upgrade_variants audit v1511)",
+    "Candidate": "candidate-npc-combat-v1214es (deployed; probe-only on the 1214eo DLL, protocol 79; read-only probes 1214em-es incl. --takedown-gates, --choke-sensor, --takedown-sensor)",
+    "NextCandidate": "none pending; next work #102 (spyglass, Timepiece, stumble/recoil and other native player states)",
+    "Complete": "103 of 105 (enemy_body_size_variants audit v1572; 2 not applicable or excluded); the checklist is complete. Next: #102 native player states outside the checklist, then stage 4",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",

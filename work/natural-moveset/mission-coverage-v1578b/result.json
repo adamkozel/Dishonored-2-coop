@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/elite_male_tall_01.def: source states 0,41; unconscious in both worlds"
+      ],
+      "target": {
+        "spawner": "ld_spawner_37",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ],
+        "forward": [
+          -0.9997180572072879,
+          0.023744601358747338
+        ]
+      },
+      "kind": "choke",
+      "sittingWait": {
+        "ms": 56,
+        "requests": [
+          1
+        ],
+        "position": [
+          3.98956,
+          58.3769,
+          41.001
+        ]
+      },
+      "approachYaw": 135.0,
+      "camera": [
+        5.850099306489909,
+        60.77291617043918,
+        42.601
+      ],
+      "sourceStart": [
+        3.22004,
+        59.318,
+        41.6912
+      ],
+      "prePitch": 30.0,
+      "takedownAtPress": {
+        "t": 628,
+        "mode": 2,
+        "active": 1,
+        "ready": 1,
+        "names": [
+          "models/characters/def/generic/elite_male_tall_01.def_9203",
+          "models/characters/def/generic/elite_male_tall_01.def_9203",
+          "",
+          "",
+          ""
+        ]
+      },
+      "chokeAtPress": {
+        "t": 628,
+        "target": 668410867,
+        "targetName": "models/characters/def/generic/elite_male_tall_01.def_9203",
+        "flag54": 0
+      },
+      "windowAtPress": {
+        "t": 628,
+        "targetName": "models/characters/def/generic/elite_male_tall_01.def_9203",
+        "hasPoint": false,
+        "sill": 0,
+        "angleOk": false,
+        "sillOk": false,
+        "grounded": true
+      },
+      "replacedAt": 628,
+      "cameraMoved": [
+        4.640715493294924,
+        63.048077521477325,
+        42.6
+      ],
+      "targetMoved": 1.99,
+      "sittingAtPress": {
+        "t": 628,
+        "source": false,
+        "sourceRequests": null,
+        "host": false
+      },
+      "actedAt": 1505,
+      "pressedWhenReady": {
+        "t": 1505,
+        "name": "models/characters/def/generic/elite_male_tall_01.def_9203",
+        "state": 3
+      },
+      "takedownAfter": 1505,
+      "chokeAfter": 1505,
+      "windowAfter": 1505,
+      "trackSamples": 51,
+      "takedownSamples": 3,
+      "chokeSamples": 3,
+      "chokeTargeted": 2,
+      "windowSamples": 3,
+      "windowAvailable": 0,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        41
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -136,7 +136,7 @@ bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16
     out=std::move(names);return true;
 }
 int main(int argc, char** argv) {
-    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
+    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
     const bool detail = argc == 3 && std::strcmp(argv[2], "--detail") == 0;
     const DWORD pid = std::stoul(argv[1]);
     ProcessHandle snapshot{CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)};
@@ -187,6 +187,58 @@ int main(int argc, char** argv) {
             if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))focused=false;}
         std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"focused\":"<<(focused?"true":"false")<<",\"handle\":"<<handle<<",\"name\":"<<jsonString(name)<<"}\n";
         return 0;
+    }
+    if(argc==4&&!std::strcmp(argv[2],"--takedown-gates")){
+        // 1214ep (#11 seated): some of the native takedown eligibility inputs of one NPC (0x1403b00a0, confirmed static),
+        // read-only: the NPC entity flag +0x368 bit 0 (must be set), +0xd1 bit 3 (must be clear), and the object its
+        // navigation currently uses (arkCpntNavigation +0xa8 -> +0xd8), whose virtual +0x20 must answer true; that
+        // object's vtable, its virtual +0x20 address and first code bytes, and its own type are printed for analysis.
+        // 1542-1555: seated NPCs (a type-1 navigation request) were never offered a takedown.
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        const auto handle=static_cast<std::uint32_t>(std::strtoul(argv[3],nullptr,0));
+        std::uintptr_t game=0,actor=0,list=0,nav=0,link=0,object=0,vt=0,fn=0,objectType=0;unsigned count=0;unsigned char flags368=0,flagsD1=0,code[16]{};
+        if(!reader(base+0x39a5290,&game,8)||!game||!(actor=worldIdentityEntity(reader,game,handle))||!reader(actor+0x368,&flags368,1)||!reader(actor+0xd1,&flagsD1,1)||
+           !reader(actor+0x268,&list,8)||!list||!reader(actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b97898){nav=m;break;}
+        vt=0;
+        if(nav&&reader(nav+0xa8,&link,8)&&link&&reader(link+0xd8,&object,8)&&object&&reader(object,&vt,8)&&vt&&reader(vt+0x20,&fn,8)&&fn)reader(fn,code,16);
+        if(object)objectType=nativeComponentTypeOf(reader,object);
+        // 1214eq (#11 seated): the other NPC-side gates of 0x1403b00a0 (confirmed static), read-only. 1559a: the gates
+        // above read the same for seated and standing NPCs (flags 0x41, bit 3 of +0xd1 clear, no navigation object).
+        // (a) the gate's own lookup: component 0x39e2a00 -> +0xa8 -> +0xd8 (0x1405f7150); a null object passes.
+        // (b) the midnight (scene) component 0x39ba280 (the scene manager +0x1f5338 keys on it, 0x1406868b0): while
+        //     its state (+0x1c & 3) is above 1 and it holds requests (list +0x90, count +0x98, 28-byte entries), the
+        //     first request's priority (dword 3, 0x1407659c0 with id 0 and mask 2) above 23 refuses.
+        // (c) components 0x39e27c0 and 0x39b3e50: a set byte at the 0x39b3e50 component +0x101c refuses (0x1405bfbb0).
+        // (d) component 0x39ae2b0: refuses unless its +0xb8 entity has a component 0x39dcca0 in state 2 (+0x2c) whose
+        //     midnight (+0xf8 id in the +0x100 component) is not running (0x1403ee810, 0x1404b3a90, 0x1407c7ac0);
+        //     only the midnight component's own two slots (+0x20, +0x30) are read here, not the manager fallback.
+        const auto gateNav=findNativeComponentOfType(reader,actor,base+0x39e2a00);std::uintptr_t gateLink=0,gateObject=0;
+        if(gateNav&&reader(gateNav+0xa8,&gateLink,8)&&gateLink)reader(gateLink+0xd8,&gateObject,8);
+        const auto midnight=findNativeComponentOfType(reader,actor,base+0x39ba280);std::uint32_t mState=0,mCount=0;std::uintptr_t mList=0;std::int32_t mIds[2]{};std::vector<std::int32_t> mEntries;
+        if(midnight&&reader(midnight+0x1c,&mState,4)&&reader(midnight+0x20,&mIds[0],4)&&reader(midnight+0x30,&mIds[1],4)&&reader(midnight+0x90,&mList,8)&&reader(midnight+0x98,&mCount,4)){
+            mCount&=0xffffff;if(mCount&&mList&&mCount<=16){mEntries.resize(mCount*7);if(!reader(mList,mEntries.data(),mEntries.size()*4))mEntries.clear();}}
+        const int gatePriority=(midnight&&(mState&3)>1&&!mEntries.empty())?mEntries[3]:0;
+        const auto cE27c0=findNativeComponentOfType(reader,actor,base+0x39e27c0),cB3e50=findNativeComponentOfType(reader,actor,base+0x39b3e50);unsigned char b101c=0;
+        if(cB3e50)reader(cB3e50+0x101c,&b101c,1);
+        const auto cAe2b0=findNativeComponentOfType(reader,actor,base+0x39ae2b0);std::uint32_t useHandle=0,useState=0;std::int32_t useMidnight=0,useIds[2]{};
+        std::uintptr_t useEntity=0,useCpnt=0,useMidnightCpnt=0;bool useRunning=false;
+        if(cAe2b0&&reader(cAe2b0+0xb8,&useHandle,4)&&useHandle&&(useEntity=worldIdentityEntity(reader,game,useHandle))&&(useCpnt=findNativeComponentOfType(reader,useEntity,base+0x39dcca0))){
+            reader(useCpnt+0x2c,&useState,4);reader(useCpnt+0xf8,&useMidnight,4);
+            if(reader(useCpnt+0x100,&useMidnightCpnt,8)&&useMidnightCpnt&&useMidnight&&reader(useMidnightCpnt+0x20,&useIds[0],4)&&reader(useMidnightCpnt+0x30,&useIds[1],4))
+                useRunning=useIds[0]==useMidnight||useIds[1]==useMidnight;}
+        const bool refusePriority=gatePriority>23,refuseB101c=cE27c0&&cB3e50&&b101c,refuseUse=cAe2b0&&!(useCpnt&&useState==2&&!useRunning);
+        std::cout<<"{\"readOnly\":true,\"handle\":"<<handle<<",\"flags368\":"<<unsigned(flags368)<<",\"flagsD1\":"<<unsigned(flagsD1)<<",\"nav\":"<<(nav?"true":"false")
+            <<",\"navObject\":\"0x"<<std::hex<<object<<"\",\"navObjectVtable\":\"0x"<<(vt?vt-base:0)<<"\",\"navObjectVirtual20\":\"0x"<<(fn?fn-base:0)<<"\",\"navObjectType\":\"0x"<<(objectType?objectType-base:0)<<"\",\"code\":\"";
+        for(unsigned i=0;i<16;++i){static const char* hx="0123456789abcdef";std::cout<<hx[code[i]>>4]<<hx[code[i]&15];}
+        std::cout<<"\",\"gateNav\":"<<(gateNav?"true":"false")<<",\"gateObject\":\"0x"<<gateObject<<"\""<<std::dec
+            <<",\"midnight\":"<<(midnight?"true":"false")<<",\"midnightState\":"<<mState<<",\"midnightIds\":["<<mIds[0]<<","<<mIds[1]<<"],\"midnightRequests\":[";
+        for(std::size_t i=0;i+6<mEntries.size();i+=7){std::cout<<(i?",":"")<<"[";for(unsigned k=0;k<7;++k)std::cout<<(k?",":"")<<mEntries[i+k];std::cout<<"]";}
+        std::cout<<"],\"gatePriority\":"<<gatePriority<<",\"e27c0\":"<<(cE27c0?"true":"false")<<",\"b3e50\":"<<(cB3e50?"true":"false")<<",\"b101c\":"<<unsigned(b101c)
+            <<",\"ae2b0\":"<<(cAe2b0?"true":"false")<<",\"useHandle\":"<<useHandle<<",\"useEntity\":"<<(useEntity?"true":"false")<<",\"useComponent\":"<<(useCpnt?"true":"false")
+            <<",\"useState\":"<<useState<<",\"useMidnight\":"<<useMidnight<<",\"useRunning\":"<<(useRunning?"true":"false")
+            <<",\"refuses\":{\"priority\":"<<(refusePriority?"true":"false")<<",\"b101c\":"<<(refuseB101c?"true":"false")<<",\"use\":"<<(refuseUse?"true":"false")<<"}}\n";return 0;
     }
     if(argc==4&&!std::strcmp(argv[2],"--on-ground")){
         // 1214em (#11 enemy_body_size_variants): the knocked-down takedown condition for one NPC, read-only, as
@@ -242,6 +294,57 @@ int main(int argc, char** argv) {
             std::cout<<"],\"sitting\":"<<(sitting?"true":"false")<<"}";
         }
         std::cout<<"]}\n";return 0;
+    }
+    if(argc==3&&!std::strcmp(argv[2],"--takedown-sensor")){
+        // 1214es (#11 seated): the player's takedown sensor, read-only (component type 0x39c5be0, ctor 0x1403af060 sets
+        // vtable 0x1b3f998: five 0x38-byte target entries at +0x40, each with a handle at entry+0x20 (0x3fff0010 none);
+        // the choke sensor's picker 0x1403a6460 needs +0x1dd set and the entry chosen by the table at 0x22ffed8 indexed
+        // by +0x1d8 to name its target; confirmed static). Every entry is printed with its first 14 dwords, the mode
+        // +0x1d8, the bytes +0x1dc..+0x1e0 and +0x1e4.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0;unsigned count=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b3f998){sensor=m;break;}
+        std::int32_t mode=0,word1e4=0,table[5]{};unsigned char bytes[5]{};std::uint32_t entries[5][14]{};
+        if(!sensor||!reader(sensor+0x1d8,&mode,4)||!reader(sensor+0x1dc,bytes,5)||!reader(sensor+0x1e4,&word1e4,4)||
+           !reader(base+0x22ffed8,table,sizeof(table))||!reader(sensor+0x40,entries,sizeof(entries)))return 59;
+        const int active=(mode>=0&&mode<5)?table[mode]:-1;
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"mode\":"<<mode<<",\"active\":"<<active<<",\"ready1dd\":"<<unsigned(bytes[1])
+            <<",\"bytes1dc\":["<<unsigned(bytes[0])<<","<<unsigned(bytes[1])<<","<<unsigned(bytes[2])<<","<<unsigned(bytes[3])<<","<<unsigned(bytes[4])<<"],\"word1e4\":"<<word1e4<<",\"entries\":[";
+        for(unsigned i=0;i<5;++i){const std::uint32_t h=entries[i][8];std::string name;bool named=(h>>16)!=0x3fff&&h;
+            if(named){const auto actor=worldIdentityEntity(reader,game,h);std::uintptr_t text=0;
+                if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))named=false;}
+            std::cout<<(i?",":"")<<"{\"index\":"<<i<<",\"handle\":"<<h<<",\"name\":"<<jsonString(named?name:std::string())<<",\"dwords\":[";
+            for(unsigned k=0;k<14;++k)std::cout<<(k?",":"")<<entries[i][k];std::cout<<"]}";}
+        std::cout<<"]}\n";return 0;
+    }
+    if(argc==3&&!std::strcmp(argv[2],"--choke-sensor")){
+        // 1214er (#11 seated): the native choke sensor, read-only (arkCpntPlayerSensorChoke: a 0x60-byte player component,
+        // factory 0x140916670, ctor 0x1403a6310 sets vtable 0x1b3e158, +0x50 = 0x3fff0010 (no target), +0x54 = 0 and
+        // +0x58 = -1; its init 0x1403a67d0 stores sensor slot 0x21 at +0x40, a 0x39c5be0 component at +0x48 and two decl
+        // values at +0x58/+0x5c; confirmed static). +0x50 is read as the target handle (hypothesis), with its name.
+        // 1553-1565: a seated NPC passes every NPC-side takedown gate but was never offered a choke.
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::uintptr_t game=0,list=0,vt=0,sensor=0,slot21=0;unsigned count=0;
+        if(!reader(base+0x39a5290,&game,8)||!game)return 59;
+        const auto player=worldIdentityEntity(reader,game,1);
+        if(!player||!reader(player+0x268,&list,8)||!list||!reader(player+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return 59;
+        std::vector<std::uintptr_t> members(count&0xffffff);if(!reader(list,members.data(),members.size()*8))return 59;
+        for(const auto m:members)if(m&&reader(m,&vt,8)&&vt==base+0x1b3e158){sensor=m;break;}
+        unsigned char enabled=0,flag54=0;std::uint32_t target=0,word58=0,word5c=0;
+        if(!sensor||!reader(sensor+0x38,&enabled,1)||!reader(sensor+0x50,&target,4)||!reader(sensor+0x54,&flag54,1)||
+           !reader(sensor+0x58,&word58,4)||!reader(sensor+0x5c,&word5c,4)||!reader(sensor+0x40,&slot21,8))return 59;
+        float f58=0,f5c=0;std::memcpy(&f58,&word58,4);std::memcpy(&f5c,&word5c,4);
+        std::string name;bool named=(target>>16)!=0x3fff&&target;
+        if(named){const auto actor=worldIdentityEntity(reader,game,target);std::uintptr_t text=0;
+            if(!actor||!reader(actor+0x20,&text,8)||!worldIdentityString(reader,text,name))named=false;}
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"enabled\":"<<(enabled?"true":"false")<<",\"target\":"<<target
+            <<",\"targetName\":"<<jsonString(named?name:std::string())<<",\"flag54\":"<<unsigned(flag54)<<",\"value58\":"<<f58<<",\"value5c\":"<<f5c
+            <<",\"raw58\":"<<word58<<",\"slot21Type\":"<<jsonString(slot21?objectType(process.value,base,slot21):std::string())<<"}\n";
+        return 0;
     }
     if(argc==3&&!std::strcmp(argv[2],"--window-sensor")){
         // 1214em (#11 wall_and_window_variants): the native window-takedown sensor, read-only

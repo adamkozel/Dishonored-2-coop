@@ -1,0 +1,85 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,6,14,44,53,64)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,14,44,53,64)",
+      "checks": [],
+      "targetCandidates": [
+        "ld_spawner_108=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_155=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_37=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_30=models/characters/def/generic/elite_male_tall_01.def",
+        "ld_spawner_18=models/characters/def/generic/elite_male_tall_01.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "ld_spawner_108",
+          "err": 0.39,
+          "dz": 1.89
+        },
+        {
+          "spawner": "ld_spawner_155",
+          "err": 0.21,
+          "dz": 0.36
+        }
+      ],
+      "targetChosen": "ld_spawner_155=models/characters/def/generic/elite_male_tall_01.def",
+      "target": {
+        "spawner": "ld_spawner_155",
+        "definition": "models/characters/def/generic/elite_male_tall_01.def",
+        "position": [
+          -13.2876,
+          75.1511,
+          20.1653
+        ],
+        "forward": [
+          -0.08136681822624092,
+          0.9966842232581681
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -16.241037601572696,
+        74.45849164485509,
+        21.7653
+      ],
+      "sourceStart": [
+        -13.0948,
+        73.1269,
+        19.8036
+      ],
+      "prePitch": 8.0,
+      "replacedAt": 526,
+      "cameraMoved": [
+        -10.631641312906503,
+        78.42229333381724,
+        21.400000000000002
+      ],
+      "targetMoved": 2.44,
+      "crept": 1072,
+      "creptEnd": 1410,
+      "stanceAfterCreep": 1,
+      "actedAt": 1448,
+      "trackSamples": 52,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        14,
+        44,
+        53,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

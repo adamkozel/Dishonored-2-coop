@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-takedown: No native takedown on the source (states 0,6,39)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,39)",
+      "checks": [],
+      "target": {
+        "spawner": "ld_spawner_dog_2",
+        "definition": "models/characters/def/generic/wolfhound_01.def",
+        "position": [
+          205.819,
+          -5.62173,
+          -5.96046E-08
+        ],
+        "forward": [
+          -0.09801628141167026,
+          -0.9951848112678511
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        208.84866176043877,
+        -5.467945679164478,
+        1.5999999403954002
+      ],
+      "sourceStart": [
+        206.035,
+        -3.432,
+        0.701858
+      ],
+      "prePitch": 30.0,
+      "replacedAt": 516,
+      "cameraMoved": [
+        208.84866176043877,
+        -5.467945679164478,
+        1.5999999403954002
+      ],
+      "targetMoved": 0.0,
+      "crept": 1123,
+      "creptEnd": 1460,
+      "stanceAfterCreep": 1,
+      "actedAt": 1499,
+      "trackSamples": 50,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "sourceStates": [
+        0,
+        6,
+        39
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native choke of models/characters/def/generic/overseer_male_tall_01_office.def: source states 0,6,41,63,64; unconscious in both worlds"
+      ],
+      "target": {
+        "spawner": "script_spawner_square_overseer_02",
+        "definition": "models/characters/def/generic/overseer_male_tall_01_office.def",
+        "position": [
+          -25.1888,
+          47.2583,
+          14.6196
+        ],
+        "forward": [
+          0.5942807511375591,
+          -0.8042576632071209
+        ]
+      },
+      "kind": "choke",
+      "camera": [
+        -23.04345334839054,
+        49.40305820185588,
+        16.2196
+      ],
+      "sourceStart": [
+        -25.7768,
+        48.0682,
+        14.619
+      ],
+      "prePitch": 42.0,
+      "windblastFrom": [
+        -26.97164225341268,
+        49.67107298962136
+      ],
+      "blastedAt": 218,
+      "lastKnock": [
+        -20.4655,
+        41.2545,
+        14.8769
+      ],
+      "settledAt": 2516,
+      "knockedAt": [
+        -20.4655,
+        41.2545,
+        14.8769
+      ],
+      "knockFlight": 7.64,
+      "cameraMoved": [
+        -18.21357854302006,
+        42.91848610318517,
+        16.2196
+      ],
+      "knockCrouch": 2998,
+      "actedAt": 3019,
+      "trackSamples": 34,
+      "knockSamples": 41,
+      "knockDown": 34,
+      "outcome": {
+        "host": "unconscious",
+        "client": "unconscious"
+      },
+      "sourceStates": [
+        0,
+        6,
+        41,
+        63,
+        64
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
