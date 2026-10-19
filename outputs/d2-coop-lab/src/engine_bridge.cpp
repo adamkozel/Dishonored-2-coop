@@ -1469,6 +1469,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_npc_combat hostworld_test")||!std::strcmp(text,"coop_npc_combat hostnative_test"))return true;
     if(!std::strcmp(text,"coop_npc_combat on")||!std::strcmp(text,"coop_npc_combat off")||!std::strcmp(text,"coop_npc_combat duplicate"))return true;
     if(!std::strcmp(text,"coop_npc_stream on")||!std::strcmp(text,"coop_npc_stream off"))return true;
+    if(!std::strcmp(text,"coop_npc_corpse_ragdoll on")||!std::strcmp(text,"coop_npc_corpse_ragdoll off"))return true;
     if(!std::strcmp(text,"coop_guard_body on")||!std::strcmp(text,"coop_guard_body off"))return true;
     if(!std::strcmp(text,"coop_guard_equipment 2000")||!std::strcmp(text,"coop_guard_equipment off"))return true;
     if(!std::strcmp(text,"coop_guard_weapon on")||!std::strcmp(text,"coop_guard_weapon off"))return true;
@@ -1729,6 +1730,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_npc_combat duplicate")){repeatNpcCombat();return;}
     if(!std::strcmp(request.command,"coop_npc_stream on")){npcStreamRequest=1;return;}
     if(!std::strcmp(request.command,"coop_npc_stream off")){npcStreamRequest=0;return;}
+    if(!std::strcmp(request.command,"coop_npc_corpse_ragdoll on")){npcCorpseRagdollEnabled=true;return;}
+    if(!std::strcmp(request.command,"coop_npc_corpse_ragdoll off")){npcCorpseRagdollEnabled=false;return;}
     if(!std::strcmp(request.command,"coop_guard_link escape 60000")){beginGuardLink(GetTickCount64(),true);return;}
     if(!std::strcmp(request.command,"coop_guard_body on")||!std::strcmp(request.command,"coop_guard_body off")){
         stopGuardBody();guardBodyEnabled=!std::strcmp(request.command,"coop_guard_body on");return;
