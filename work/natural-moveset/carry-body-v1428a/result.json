@@ -1,0 +1,155 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "kind": "choke",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Remote phase 1 presented",
+        "Remote phase 2 presented",
+        "Remote phase 3 presented",
+        "Same outcome in both worlds: unconscious",
+        "Source carries the body (native carry state)",
+        "Carried body ends 0.36 m apart (moved: source 3.66 m, observer 3.03 m; max gap 0.8 m)",
+        "Victim ends 0.36 m apart in the two worlds"
+      ],
+      "guardHandleSource": "0xb480764",
+      "filmed": true,
+      "guardHandleObserver": "0xb480764",
+      "guardBefore": {
+        "source": [
+          -48.3805,
+          -148.773,
+          66.4
+        ],
+        "observer": [
+          -46.5878,
+          -143.836,
+          66.4
+        ]
+      },
+      "inputAt": "2026-10-19T05:44:57.2023515+02:00",
+      "scenes": [
+        "midnight/gameplay/player/base/choke/choke_back.midnightscene|600",
+        "midnight/gameplay/player/base/choke/choke_loop.midnightscene|1400",
+        "midnight/gameplay/player/base/choke/choke_win.midnightscene|1800"
+      ],
+      "attempts": 1,
+      "final": {
+        "source": {
+          "tick": 35845734,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x1ad5f3b38e0",
+          "actor": "0x1ad63ba6d30",
+          "attributes": "0x1ad638f28d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "observer": {
+          "tick": 35845765,
+          "handle": 189269860,
+          "logic": 1,
+          "component": "0x29830574220",
+          "actor": "0x2983b5d3c80",
+          "attributes": "0x2983ba168d0",
+          "current": 10,
+          "maximum": 10,
+          "baseMaximum": 40,
+          "suppressedMaximum": 10,
+          "explicitHidden": false,
+          "ownerSuppressed": true,
+          "maximumIndex": -1,
+          "suppressedIndex": -1,
+          "attributeCount": 10,
+          "attributeValues": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "outcome": {
+        "source": "unconscious",
+        "observer": "unconscious"
+      },
+      "pickupCamera": [
+        -47.39779860470415,
+        -141.12274802574854,
+        68.0038,
+        -80.16134726293704
+      ],
+      "pickupCameraHeld": true,
+      "pickupRecorded": 2,
+      "carryCamera": [
+        -43.75865234212622,
+        -143.3928619753343,
+        68.7039154
+      ],
+      "carryWalkYaw": -171.12008737964163,
+      "carryCameraHeld": true,
+      "cameraFollowMoves": 6,
+      "released": "throw",
+      "carryRecorded": 2,
+      "carry": {
+        "moved": {
+          "source": 3.66,
+          "observer": 3.03
+        },
+        "maxGap": 0.8,
+        "endGap": 0.36,
+        "stillCarrying": false
+      },
+      "victimEnd": {
+        "source": [
+          -49.1638,
+          -145.249,
+          66.6055
+        ],
+        "observer": [
+          -49.0772,
+          -145.599,
+          66.606
+        ]
+      },
+      "victimGapM": 0.36,
+      "victim": {
+        "result": "host_authority",
+        "posesDelta": 95,
+        "rootsDelta": 167,
+        "bodyAppliedDelta": 166,
+        "positionBefore": [
+          -45.7612,
+          -143.715,
+          66.4
+        ],
+        "positionAfter": [
+          -46.6215,
+          -143.831,
+          66.4037
+        ]
+      },
+      "guardHealthObserverAfter": 10,
+      "restored": true
+    }
+  ],
+  "scope": "Stage 4 carried body: the source chokes the Dunwall tutorial guard under the product controller, carries the unconscious body forward and drops it; the body must end < 2 m apart in both worlds; fixture restored after every case."
+}

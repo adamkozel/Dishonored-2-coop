@@ -93,6 +93,10 @@ void chokePresentationTests(){
           !nativeChokeVariant("midnight/gameplay/player/base/choke/choke_cancel.midnightscene","Npc",400)&&
           !nativeChokeVariant("midnight/gameplay/player/base/choke/choke_combat_lose.midnightscene","Npc",400),"native combat lose distinguished from cancel");
     check(ChokePresentation::valid({0,1,4,750,1500,31,41})&&!ChokePresentation::valid({0,1,4,1501,1500,31,41}),"breakout owns exactly1500ms");
+    // 1214dz: Recoil 40 over Running 0 keeps the standing root valid (1418k), like Slash 39.
+    {auto rc=native;rc.player.current=0;rc.active.resize(2);rc.active[0].id=0;rc.active[0].vtable=base+0x1c85628;rc.active[1].id=40;rc.active[1].vtable=base+0x1c83c98;
+     check(nativePlayerMotion(rc,base,motion)&&motion==0,"recoil over running keeps the standing root");
+     rc.active[1].vtable++;check(!nativePlayerMotion(rc,base,motion),"recoil of another class refused");}
     // 1214de: a stun keeps the sword holster (53) and the left hand's EquipChange (64) as overlays, one of each.
     {auto st=native;st.player.current=0;st.active.resize(3);st.active[0].id=14;st.active[0].vtable=base+0x1c86768;
      st.active[1].id=64;st.active[1].vtable=base+0x1c79cf8;st.active[2].id=53;st.active[2].vtable=base+0x1c79cf8;

@@ -79,7 +79,7 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
     bool blinking=false,grappling=false;
     for(const auto& a:states.active){
         if(a.id==0&&a.vtable==base+0x1c85628){if(mesmerize&&states.player.current!=0)return false;continue;}
-        if((darkVision||windblast||bendTime||mesmerize)&&a.id==6&&a.vtable==base+0x1c84258){if(mesmerize&&states.player.current!=1)return false;continue;}
+        if((darkVision||windblast||bendTime||mesmerize||s.power.player.character==1)&&a.id==6&&a.vtable==base+0x1c84258){if(mesmerize&&states.player.current!=1)return false;continue;}
         // Exact owned scenes persist through Jump/Fall. Bend Time v43 also
         // observes Jump/Fall plus UsePower, with unchanged arm/player bindings.
         if((darkVision||windblast||bendTime||mesmerize)&&states.player.current==0&&
@@ -89,7 +89,7 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
         if(!darkVision&&!windblast&&!bendTime&&!mesmerize&&s.power.player.character==2&&a.id==27&&a.vtable==base+0x1c7a328){grappling=true;continue;}
         return false;
     }
-    if(states.player.current!=0&&!((darkVision||windblast||bendTime||mesmerize)&&states.player.current==1)&&!(blinking&&states.player.current==4)&&!(grappling&&states.player.current==8))return false;
+    if(states.player.current!=0&&!((darkVision||windblast||bendTime||mesmerize||s.power.player.character==1)&&states.player.current==1)&&!(blinking&&states.player.current==4)&&!(grappling&&states.player.current==8))return false;
     const auto game=states.player.game,manager=game+0x1f5338;
     std::array<std::uintptr_t,2> lists{};std::array<unsigned,2> counts{};
     std::uintptr_t declaration=0,scene=0,bindings=0;unsigned bindingFlags=0;
@@ -104,7 +104,8 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
             const unsigned variant=nativePowerVariant(s.power.player.character,asset,sub,duration);if(!variant)continue;
             // A failed cast (15) is Corvo's under Bend Time (v44/v45) and Emily's under her own selected power (1214dk).
-            if(variant==15?(darkVision||windblast||(s.power.player.character==1)!=bendTime):
+            // 1214dy: Corvo's failure plays the same scene under Windblast, Dark Vision or Blink (coverage-v1425a).
+            if(variant==15?(s.power.player.character==2&&(darkVision||windblast||bendTime)):
                ((variant==10)!=darkVision||(variant==11)!=windblast||(variant>=12&&variant<=14)!=bendTime||(variant>=16)!=mesmerize))continue;
             // Exact v44/v45 failed casts confirm Corvo standing/crouched,
             // drawn/holstered, inactive selected Bend Time and sole ground state.
@@ -114,6 +115,8 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
             s.instance=c;s.variant=variant;s.asset=std::move(asset);s.subscene=std::move(sub);s.durationMs=duration;declaration=d;scene=sc;
         }
     }
+    // 1214dy: a crouched generic power (Blink) is accepted only for the failed cast.
+    if(!darkVision&&!windblast&&!bendTime&&!mesmerize&&s.power.player.character==1&&states.player.current==1&&s.variant!=15)return false;
     const unsigned expectedBindings=s.variant==15?1:bendTime?(s.variant==12?2:1):windblast?2:darkVision||mesmerize||s.power.player.character==1?1:s.variant==5?2:3;
     if(!s.instance||!read(s.instance+0x158,&s.handle,4)||!s.handle||!read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||
        !read(s.instance+0x10,&bindings,8)||!bindings||!read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)!=expectedBindings)return false;
@@ -124,7 +127,7 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
         else if(actors[i]==states.player.player){if(++playerCount>1||handle!=1)return false;}
         else if(++armCount>1||!readNativePlayerArm(read,base,game,handle,s.arm)||s.arm.actor!=actors[i]||s.arm.player!=states.player.player||s.arm.side!=1||s.arm.character!=s.power.player.character)return false;
     }
-    if(armCount!=1||powerCount!=(!darkVision&&!windblast&&!mesmerize&&s.power.player.character==2&&s.variant!=15?1u:0u)||playerCount!=(windblast||(bendTime&&s.variant==12)||expectedBindings==3?1u:0u))return false;
+    if(armCount!=1||powerCount!=(!darkVision&&!windblast&&!mesmerize&&s.power.player.character==2&&s.variant!=15?1u:0u)||playerCount!=((windblast&&s.variant!=15)||(bendTime&&s.variant==12)||expectedBindings==3?1u:0u))return false;
     std::uintptr_t again=0;unsigned number=0;
     if(!read(s.instance,&again,8)||again!=declaration||!read(s.instance+8,&again,8)||again!=scene||!read(s.instance+0x158,&number,4)||number!=s.handle||
        !read(s.instance+0x27c,&number,4)||number!=3||!read(s.instance+0x10,&again,8)||again!=bindings||!read(s.instance+0x18,&number,4)||number!=bindingFlags)return false;

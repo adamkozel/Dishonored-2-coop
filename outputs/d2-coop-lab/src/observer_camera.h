@@ -107,6 +107,31 @@ void serviceLabKnockdown(){
     realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());
     ++labKnockdowns;labKnockdownResult=labHitKind==3?"blast_applied":labHitKind==2?"sword_applied":"shove_applied";
 }
+// 1214dz (#11 kick, wall and window variants; lab only): "coop_lab_npc_place <spawner> <x> <y> <z> <yaw>" stands one unique
+// catalogued NPC at a position facing yaw degrees, through the native entity transform setter guard_link's nudge uses
+// (0x87d200). Fixtures place a patrolling NPC at a ledge or a window just before the action; on the host the NPC
+// authority stream carries the new root to the client's replica.
+char labPlaceSpawner[96]{};float labPlaceAt[4]{};bool labPlaceRequest=false;std::uint64_t labPlaces=0,labPlaceRefused=0;const char* labPlaceResult="idle";
+bool labNpcPlaceAllowed(const char* t,char* spawner=nullptr,float* at=nullptr){
+    char name[96]{};float v[4]{};int used=0;
+    if(sscanf_s(t,"%95s %f %f %f %f%n",name,static_cast<unsigned>(sizeof(name)),&v[0],&v[1],&v[2],&v[3],&used)!=5||t[used])return false;
+    const auto len=std::strlen(name);if(len<3)return false;
+    for(std::size_t i=0;i<len;++i){const char c=name[i];if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'))return false;}
+    for(unsigned k=0;k<4;++k)if(!std::isfinite(v[k])||std::fabs(v[k])>10000.f)return false;
+    if(spawner)strcpy_s(spawner,96,name);if(at)std::memcpy(at,v,sizeof(v));return true;}
+void serviceLabNpcPlace(){
+    if(!labPlaceRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    labPlaceRequest=false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(!coopGameplayReady(outgoing)){++labPlaceRefused;labPlaceResult="refused_not_gameplay";return;}
+    std::vector<NativeWorldNpc> catalog;unsigned unbound=0;const NativeWorldNpc* npc=nullptr;
+    if(!readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound)){++labPlaceRefused;labPlaceResult="catalog_unavailable";return;}
+    for(const auto& n:catalog)if(n.unique&&n.spawnerName==labPlaceSpawner){if(npc){++labPlaceRefused;labPlaceResult="ambiguous";return;}npc=&n;}
+    if(!npc||!npc->actor){++labPlaceRefused;labPlaceResult="not_found";return;}
+    const float yaw=labPlaceAt[3]*3.14159265f/180.f,c=std::cos(yaw),s=std::sin(yaw);
+    const float orientation[9]={c,s,0,-s,c,0,0,0,1};
+    reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(npc->actor),labPlaceAt,orientation,true,0);
+    ++labPlaces;labPlaceResult="placed";
+}
 bool labHitAllowed(const char* t,unsigned* kind=nullptr,unsigned* side=nullptr){
     const char* kinds[]={"shove ","sword ","blast "};const char* sides[]={"front","back","left","right"};
     for(unsigned k=0;k<3;++k){const auto n=std::strlen(kinds[k]);if(std::strncmp(t,kinds[k],n))continue;
@@ -249,7 +274,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);serviceLabKnockdown();
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);serviceLabKnockdown();serviceLabNpcPlace();
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -284,6 +309,7 @@ void writeObserverCamera(){
         static_cast<unsigned long long>(observerArmShows),observerHiddenArms[0].actor?"true":"false",observerHiddenArms[1].actor?"true":"false");
     fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\",\"named\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"}},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult,static_cast<unsigned long long>(labNamedGrants),static_cast<unsigned long long>(labNamedRefused),labNamedResult);
     {NativePlayerMana m{};const bool mr=readNativePlayerMana(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),m);
+     fprintf(f,"\"labNpcPlace\":{\"placed\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labPlaces),static_cast<unsigned long long>(labPlaceRefused),labPlaceResult);
      fprintf(f,"\"labKnockdown\":{\"applied\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labKnockdowns),static_cast<unsigned long long>(labKnockdownRefused),labKnockdownResult);
      fprintf(f,"\"itemUse\":{\"uses\":%llu,\"refused\":%llu,\"result\":\"%s\",\"manaBefore\":%.3f,\"manaNow\":%.3f},",static_cast<unsigned long long>(labUses),static_cast<unsigned long long>(labUseRefused),labUseResult,labManaBefore,mr?m.current:-1.f);}
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",

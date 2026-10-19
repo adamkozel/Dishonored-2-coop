@@ -958,6 +958,13 @@ void healthTests(){
                         badWind=wind;badWind.q(bindings+0x28,entity);require(!inspectCast(badWind),"Windblast equipment cannot impersonate player camera binding");
                         badWind=wind;badWind.str(texts+0x300,"Scene_1");require(!inspectCast(badWind),"unobserved Windblast subscene refused");
                         badWind=wind;badWind.str(strings,"models/powers/darkvision/darkvision.inventoryitem");require(!inspectCast(badWind),"another selected power cannot source Windblast cast");
+                        // 1214dy: Corvo's failed cast under Windblast binds only his left arm, standing or crouched.
+                        auto windEmpty=wind;windEmpty.str(texts+0x200,"midnight/gameplay/player/base/powers/power_outofmana.midnightscene");windEmpty.str(texts+0x300,"Scene_1");windEmpty.d(scene+0x28,333);windEmpty.d(instance+0x18,1);
+                        require(inspectCast(windEmpty)&&observedCast.variant==15,"Corvo's failed cast under Windblast binds his owned left arm");
+                        auto lowWindEmpty=lowWind;lowWindEmpty.str(texts+0x200,"midnight/gameplay/player/base/powers/power_outofmana.midnightscene");lowWindEmpty.str(texts+0x300,"Scene_1");lowWindEmpty.d(scene+0x28,333);lowWindEmpty.d(instance+0x18,1);
+                        require(inspectCast(lowWindEmpty)&&observedCast.variant==15,"Corvo's crouched failed cast under Windblast binds his owned left arm");
+                        badWind=windEmpty;badWind.d(instance+0x18,2);require(!inspectCast(badWind),"Windblast failure refuses an extra player binding");
+                        badWind=windEmpty;badWind.d(scene+0x28,334);require(!inspectCast(badWind),"Windblast failure requires the native scene duration");
                     }
                     {
                         auto bend=cast;bend.str(strings,"models/powers/bendtime/bendtime.inventoryitem");bend.str(strings+0x100,"components/characters/player/base/powers/bendtime/bendtime.cpntpowerbendtime");bend.q(pc,base+0x1b9b748);bend.q(ped,base+0x1b9b608);const unsigned char inactive=0;bend.put(pc+0xd0,&inactive,1);

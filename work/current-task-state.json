@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T07:40:00+02:00",
+  "UpdatedAt": "2026-10-19T09:10:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 90/105 on branch stage3/movement-completion-8, draft #110 (pickup_loot_steal audited, v1413). Running: carry 1277v on 1214dq (restore cause), then 1407a-e (front, back and Corvo left lab blasts re-framed), then deploy 1214dr and shop takes 1402b/c, then 1412a (Emily out-of-mana from behind-left). Next: hit_reactions and stagger_knockdown_recovery audits from 1403/1407, product carry fix from the 1277v restore cause, shop review, single-guard counter-kill framing, Far Reach body pull aim.",
+  "NextAction": "Movement completion (#11, chapter 99): 95/105 on branch stage3/movement-completion-10, draft #112 (power interruptions v1439, counterattack v1443, body carry v1431). Running on 1214dz: 1433b/c (held-object state dump), 1440a (wall-swing stagger filmed from behind), 1436b (kick fixture), 1442a (Far Reach pull, upgrades first). Ready audit: v1441 (stagger and knockdown, needs 1440a). Open: kick, wall/window, enemy body sizes (female #113, clockwork mission 4), struggle/escape, Far Reach pull, upgrades, object carry.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214dq (deployed; 1214dp plus carry restore-cause telemetry)",
-    "NextCandidate": "1214dr (built, deploys after the 1407 takes): black market hold (logic 10 accepted by the hold, presentation readiness and door sessions), standing ground motion in the shop, and the partner counter gestures (bank75 clip 381 from native NPC think and calm gestures)",
-    "Complete": "90 of 105",
+    "Candidate": "candidate-npc-combat-v1214dz (deployed; 1214dy plus the Recoil 40 overlay and the lab-only coop_lab_npc_place)",
+    "NextCandidate": "none queued; next fixes come from 1442a (Far Reach pull with upgrades granted first), 1433b/c (held-object state), 1436b (kick fixture) and 1437 (breakout)",
+    "Complete": "95 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",

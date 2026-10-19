@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T04:58:07.994349+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -1003,7 +1003,7 @@ Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rare
   ],
   "deliverable_kind": "animation",
   "notes": "Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rarely attacks her clone; native god mode is stripped). Audit 1281 (1214ak): client finishers now follow on the host (corpse follow 1214ai, follow without AI lease 1214aj) and no longer launch the body (1214ak); finisher-follow-v1258i accepted functionally. Correction: the 1258l finisher was a killing blow (4th wound after a blocked hit), not the counter-kill. Emily counter-kill (parry win then attack) not yet produced. Audit 1280 (1214ah): Emily's timed parry win against a relayed guard hit then attack plays the counter finisher fatality_leftleg_medium_a, presented by the host (phase 105) and dead in both worlds (1258l). This needed the NPC attack relay to follow dynamic relevance. Visual review pending (1258l view too far). Audit 1264: Corvo's timed parry win then attack plays a counter-kill finisher (fatality_head_fast_b) presented by the partner and dead in both worlds (1258f, 1214i). Sword locks (Versus31, versus_low/elite) are presented since 1214h but not yet observed; Emily's counter not yet produced. Candidates require animation review and appropriate game-state/contact binding. 1208/1208b (audit 1211): native timed parry (off-balance) observed; follow-up attack capture failed on input ownership; parry-win (knockdown -> fatality_knockdown) is 0% in this save.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
   "in_game_recordings": [],
   "evidence": [
@@ -1011,8 +1011,41 @@ Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rare
     "../movement-integration/gestures-counter-audit-v1264.json",
     "../movement-integration/counter-relay-audit-v1280.json",
     "../movement-integration/finisher-follow-audit-v1281.json",
-    "../movement-integration/counter-parked-audit-v1285.json"
-  ]
+    "../movement-integration/counter-parked-audit-v1285.json",
+    "mission-coverage-v1418a/result.json",
+    "mission-coverage-v1418l/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1443-counterattack.json",
+    "decision": "complete",
+    "scope": "Both roles in a mission fight: the timed parry win, the immediate counter-kill finisher on the staggered guard, and the guard dead in both worlds, presented on the partner.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1418a",
+        "cases": [
+          "client-guardfight"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1418l",
+        "cases": [
+          "host-guardfight"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1418a/client-guardfight-observer.mp4",
+        "verdict": "From above the street: the guard lunges, Emily catches him and the two lock together through the finisher, and he drops as other guards close in."
+      },
+      {
+        "video": "mission-coverage-v1418l/host-guardfight-observer.mp4",
+        "verdict": "From above the street: Corvo parries the guard's swing, steps in and drives his sword forward into him with the arm fully extended, and the guard falls back onto the street."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
@@ -1021,6 +1054,8 @@ Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rare
 - [evidence: ../movement-integration/counter-relay-audit-v1280.json](<../../../../work/movement-integration/counter-relay-audit-v1280.json>)
 - [evidence: ../movement-integration/finisher-follow-audit-v1281.json](<../../../../work/movement-integration/finisher-follow-audit-v1281.json>)
 - [evidence: ../movement-integration/counter-parked-audit-v1285.json](<../../../../work/movement-integration/counter-parked-audit-v1285.json>)
+- [evidence: mission-coverage-v1418a/result.json](<../../../../work/natural-moveset/mission-coverage-v1418a/result.json>)
+- [evidence: mission-coverage-v1418l/result.json](<../../../../work/natural-moveset/mission-coverage-v1418l/result.json>)
 ## hit_reactions_directions
 
 Visual sweep 1260: accepted (corvo accept, emily accept). The standing stun reaction reads well on both characters. Only the recorded standing direction is covered (source views skipped). Both-role v61b verifies exact owned standing Stun14 scene, directional full-body reaction, same-token Steam continuity and post-stun native travel. Only individually recorded directions are covered; crouched/airborne and all direction variants remain incomplete. See handoff 21.
