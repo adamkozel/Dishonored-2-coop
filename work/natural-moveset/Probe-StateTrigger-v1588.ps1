@@ -46,7 +46,7 @@ try{
  if($MapInfo){foreach($r in 'host','client'){I $r;foreach($cmd in 'coop_checkpoint_sync off','coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off'){C $r $cmd}};$dirty=$true
   C host "campaign $MapInfo low corvo";C client "campaign $MapInfo low emily"
   $g=WaitGameplay 300000;Save "$out/load-log.json" $g.log;if(!$g.ready){throw 'Map did not reach gameplay'};Start-Sleep -Milliseconds 1500}
- if($At){$at=@($At-split','|ForEach-Object {[double]$_});C $Role ('setviewpos {0} {1} {2} {3} 0' -f $at[0].ToString('F3',$inv),$at[1].ToString('F3',$inv),($at[2]+1.7).ToString('F3',$inv),$at[3].ToString('F2',$inv));Start-Sleep -Milliseconds 1200;$dirty=$true}
+ if($At){$atv=@($At-split','|ForEach-Object {[double]$_});C $Role ('setviewpos {0} {1} {2} {3} 0' -f $atv[0].ToString('F3',$inv),$atv[1].ToString('F3',$inv),($atv[2]+1.7).ToString('F3',$inv),$atv[3].ToString('F2',$inv));Start-Sleep -Milliseconds 1200;$dirty=$true}
  foreach($gi in @($Grant-split';'|Where-Object {$_})){C $Role "coop_grant_named $gi";Start-Sleep -Milliseconds 900;$dirty=$true}
  Save "$out/inventory.json" (Q $Role '--player-inventory')
  Save "$out/state-table.json" (Q $Role '--player-state-table')
