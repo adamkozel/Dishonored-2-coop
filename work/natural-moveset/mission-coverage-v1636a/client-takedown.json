@@ -1,0 +1,127 @@
+{
+  "source": "client",
+  "case": "takedown",
+  "observer": "host",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Native lethal of models/characters/def/generic/middle_class_female_01.def: source states 0,13,39,54,64; dead in both worlds",
+    "Target physics: host mode 3 then 3, client mode 0 then 0 (0 ragdoll)"
+  ],
+  "target": {
+    "spawner": "script_spawner_docks_photograph",
+    "definition": "models/characters/def/generic/middle_class_female_01.def",
+    "position": [
+      -34.5326,
+      216.344,
+      4.43588
+    ],
+    "forward": [
+      0.13761805166533556,
+      0.9904853718535358
+    ]
+  },
+  "kind": "lethal",
+  "camera": [
+    -37.56598423881001,
+    216.3111357376619,
+    6.035880000000001
+  ],
+  "sourceStart": [
+    -34.712,
+    215.056,
+    4.43751
+  ],
+  "prePitch": 20.0,
+  "actedAt": 260,
+  "pressedWhenReady": {
+    "t": 260,
+    "entry": 0,
+    "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+    "state": 3
+  },
+  "trackSamples": 47,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "sourceStates": [
+    0,
+    13,
+    39,
+    54,
+    64
+  ],
+  "windowScenes": [],
+  "targetPhysics": {
+    "verdict": {
+      "host": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -35.1932,
+          216.734,
+          4.8539
+        ],
+        "physics": "0x29422d9f210",
+        "mode": 3,
+        "pending": "0xffffffff",
+        "current": 0,
+        "ownerSuppressed": false,
+        "hidden": false
+      },
+      "client": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -35.1932,
+          216.734,
+          4.8539
+        ],
+        "physics": "0x270a965a220",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 0,
+        "ownerSuppressed": false,
+        "hidden": false
+      }
+    },
+    "later": {
+      "host": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -35.1932,
+          216.734,
+          4.8539
+        ],
+        "physics": "0x29422d9f210",
+        "mode": 3,
+        "pending": "0xffffffff",
+        "current": 0,
+        "ownerSuppressed": false,
+        "hidden": false
+      },
+      "client": {
+        "handle": "0x2dc029dc",
+        "position": [
+          -35.1932,
+          216.734,
+          4.8539
+        ],
+        "physics": "0x270a965a220",
+        "mode": 0,
+        "pending": "0xffffffff",
+        "current": 0,
+        "ownerSuppressed": false,
+        "hidden": false
+      }
+    }
+  },
+  "corpseView": [
+    -35.606054154996,
+    213.7625438844394
+  ],
+  "corpsePoseSamples": 9,
+  "corpseRagdollStatus": {
+    "enabled": null,
+    "ragdolls": null
+  }
+}
