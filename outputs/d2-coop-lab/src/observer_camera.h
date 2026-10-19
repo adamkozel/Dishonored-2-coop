@@ -210,8 +210,10 @@ bool labGrantNameAllowed(const char* n){const auto len=std::strlen(n);if(len<20|
     if(!item&&!upgrade)return false;
     // 1214dd (#11 knockdown, lab only): pistol ammunition too (components/equipment/ammo/bullet_explosive), whose
     // explosion carries PLAYER_HITREACT_KNOCKDOWN (bullet_explosive_damage, confirmed static); never equipped.
+    // 1214eu (#102, lab only): the Timepiece, so its presentation can be tested outside A Crack in the Slab; it is
+    // selected in the left hand like a granted power.
     return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45)||
-           !std::strncmp(n,"components/equipment/ammo/",26);}
+           !std::strncmp(n,"components/equipment/ammo/",26)||!std::strcmp(n,"models/weapons/timeshift_device/timeshift_device.inventoryitem");}
 void serviceLabNamedEquip(){
     if(!labNamedEquipUntil||labGrantNamedRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     if(GetTickCount64()>=labNamedEquipUntil){labNamedEquipUntil=0;if(!labNamedEquipSent)labNamedResult="named_equip_timeout";return;}
@@ -236,7 +238,7 @@ void serviceLabNamedGrant(){
         if(text!=labGrantName)continue;
         reinterpret_cast<int(*)(void*,void*,int)>(gameImage+0x618de0)(reinterpret_cast<void*>(s.sword.inventory),reinterpret_cast<void*>(decl),1);
         ++labNamedGrants;labNamedResult="granted_named";
-        if(!std::strncmp(labGrantName,"models/powers/",14)){labNamedEquipDecl=decl;labNamedEquipUntil=GetTickCount64()+3000;labNamedEquipSent=false;}
+        if(!std::strncmp(labGrantName,"models/powers/",14)||!std::strncmp(labGrantName,"models/weapons/timeshift_device/",32)){labNamedEquipDecl=decl;labNamedEquipUntil=GetTickCount64()+3000;labNamedEquipSent=false;}
         return;}
     ++labNamedRefused;labNamedResult="name_not_in_inventory";
 }

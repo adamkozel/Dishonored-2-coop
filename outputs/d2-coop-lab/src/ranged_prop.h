@@ -22,6 +22,8 @@ const char* rangedPropDefinition(unsigned kind){
     if(kind==4)return "models/weapons/d2coop/heart_prop.def";
     if(kind==5)return "models/weapons/d2coop/stunmine_prop.def";
     if(kind==6)return "models/weapons/d2coop/springrazor_prop.def";
+    // 1214eu (#102): the Timepiece, held by the partner like the Heart.
+    if(kind==7)return "models/weapons/d2coop/timeshift_prop.def";
     return "";
 }
 bool rangedPropApiMatches(){

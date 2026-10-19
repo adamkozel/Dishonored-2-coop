@@ -15,7 +15,7 @@
 // Native semantic states and explicit unbound ground presentation18. No pointers, resource names or damage requests.
 struct CoopShadowActionPacket {
     std::uint32_t magic=0x48413244;
-    std::uint16_t version=79,size=sizeof(CoopShadowActionPacket);
+    std::uint16_t version=80,size=sizeof(CoopShadowActionPacket); // 1214eu (protocol 80, #102): heartHeld 2 is the Timepiece
     std::uint32_t build=0x67a50cde,role=0;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0;
     std::uint64_t sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
@@ -131,7 +131,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     bool heldTransform=true;for(float v:p.heldObjectPosition)heldTransform=heldTransform&&std::isfinite(v)&&std::fabs(v)<=100000.f;
     for(float v:p.heldObjectAxis)heldTransform=heldTransform&&std::isfinite(v)&&std::fabs(v)<=2.f;
     const bool heldObject=p.heldObjectPhase<=4&&heldTransform&&(p.heldObjectPhase?(p.heldObjectHandle&&p.heldObjectKey):(!p.heldObjectHandle&&!p.heldObjectKey));
-    return heldObject&&dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==79&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
+    return heldObject&&dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==80&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
         p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=25&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&
