@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-19",
+  "reason": "The user's own tests: the original Steam install of Dishonored 2 was launched from Steam three times on 2026-10-18 between 19:53 and 20:22 (Steam gameprocess_log; plain executable, no lab arguments), after the PC shut down at 19:45 and ended the lab session. The user confirmed it. No lab process ran in that window (lab status last written 19:45).",
+  "action": "Only the guard baseline is re-recorded. The protected files themselves were not modified, restored or copied. The previous baseline is kept as protected-save-hashes-before-v4-pre-2026-10-19.json; the other 12 protected files are unchanged.",
+  "detectedBy": "Deploy-SourceClock.ps1 refused the 1214di deploy: 'Protected save differs'",
+  "changed": [
+    {
+      "file": "Arkane Studios\\Dishonored2\\base\\dishonored2Config.cfg",
+      "old": "DAF550BC901E7ADE8CB173EA78A5CA51EF612A4814DB92575A783FF1EF09E8C2",
+      "new": "98838469EC010B0007F2DFBC4CD6F81F529E57C775B9FAF16B063E854D6CB1D7",
+      "lastWrite": "2026-10-18T20:18:20.3371309+02:00"
+    },
+    {
+      "file": "Arkane Studios\\Dishonored2\\base\\savegame\\profile.bin",
+      "old": "31707636BC01ECA8B1AEA11F5ED84F1DEEB3BFAD403BF4AF457F0BB865C264A3",
+      "new": "C539A78E99C36FB8D1DCD478A0BD7ADEE75D55DD510B775DE0AB6CAF9692815C",
+      "lastWrite": "2026-10-18T20:21:41.1605066+02:00"
+    }
+  ]
+}

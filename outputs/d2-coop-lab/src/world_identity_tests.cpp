@@ -834,6 +834,18 @@ void healthTests(){
                             bad=m;unsigned reads=0;NativePlayerStates st{};require(readNativePlayerStates([&](auto a,auto d,auto n){return bad.read(a,d,n);},base,st),"Mesmerize concurrent test initial state");
                             require(!readNativePlayerPowerScene([&](auto a,auto d,auto n){const bool ok=bad.read(a,d,n);if(a==instance+0x158&&++reads==1)bad.d(a,220);return ok;},base,st,observedCast,true),"recycled Mesmerize scene incarnation refused");
                         }
+                        {
+                            // 1214dk: Emily's failed Mesmerize cast (1390a): power_outofmana, Scene_1, 333 ms, only her left arm bound.
+                            auto fail=mesmer;fail.str(texts+0x200,"midnight/gameplay/player/base/powers/power_outofmana.midnightscene");fail.d(scene+0x28,333);
+                            require(inspect(fail)&&observedCast.variant==15&&observedCast.arm.character==2&&observedCast.arm.side==1,"Emily's out-of-mana response binds only her owned left arm");
+                            auto bad=fail;bad.d(scene+0x28,334);require(!inspect(bad),"Emily's failure requires the native scene duration");
+                            bad=fail;bad.d(instance+0x18,2);require(!inspect(bad),"Emily's failure refuses an extra binding");
+                            bad=fail;bad.q(bindings+8,actor);require(!inspect(bad),"Emily's failure refuses a body binding");
+                            auto low=fail;low.d(physics+0x50,1);low.d(active,6);low.q(mode+0x10+6*8,ground);low.d(ground+8,6);low.q(ground,base+0x1c84258);
+                            require(inspect(low)&&observedCast.variant==15,"Emily's crouched failure keeps the exact arm");
+                            auto air=fail;air.d(active,3);air.q(mode+0x10+3*8,ground);air.d(ground+8,3);air.q(ground,base+0x1c845c8);
+                            require(!inspect(air),"Emily's airborne failure stays refused");
+                        }
                         std::cout<<"PASS: Mesmerize three exact phase identities, reciprocal Emily arm, scope, stale scene and concurrent incarnation guards\n";
                     }
                     for(unsigned role=1;role<=2;++role)for(unsigned kind=1;kind<=2;++kind){
@@ -1495,7 +1507,7 @@ void playerStanceTests() {
             invalid=hit;invalid.d(spawner+0x38,2);invalid.d(spawned+4,npcHandle+1);require(!combat(invalid),"ambiguous target spawner refused");
             invalid=hit;invalid.q(npc,base+0x1c5e428);require(!combat(invalid),"another player cannot become target NPC");
             invalid=hit;invalid.d(component+0x50,1);require(!combat(invalid),"unobserved crouched target scene refused");
-            invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_slash_left.midnightscene");require(!combat(invalid),"unobserved target-bearing asset refused");
+            invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_attack_focus_out.midnightscene");require(!combat(invalid),"unobserved target-bearing asset refused");invalid=hit;invalid.str(names+0x300,"midnight/gameplay/player/base/combat/sword_slash_left.midnightscene");require(combat(invalid),"1214de: the left slash binding its guard (1371a/b) admitted");
             invalid=hit;invalid.str(names+0x400,"Unknown");require(!combat(invalid),"unobserved target subscene refused");
             invalid=hit;invalid.d(scene+0x28,999);require(!combat(invalid),"unobserved target duration refused");
             invalid=hit;invalid.d(instance+0x18,4);require(!combat(invalid),"four-actor scene cannot enter sword hit path");

@@ -18353,7 +18353,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Visual sweep 1260: accepted (emily accept). Shadow Walk entry, crawl and exit read correctly as functional coverage. The shadow material and attacks are not shown, and the native particles are subtle. Scope: body accepted; the shadow-walk transformed material is not applied and no attack is recorded. 550/551/552/554: Emily crouched and standing Shadow Walk entry, full-body crawl and requested crouched exit pass14 checks each through native Steam. Native crouched phase2 and trans_in_sneak/emily1000ms added; missing crouched fast sword holster repaired with exact equipment8/333ms. All six native particle resources follow/retire, no body-clock refusals, protected checkpoints/health/inventory retained. Paired temporal sheets viewed; clearer side view554 retained. Shadow material and full Shadow Walk coverage remain unfinished. Protocol58, bank59/336;544 material code disconnected.509 air landing and540 startup freshness remain open.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [
         {
           "id": "shadow_walk",
@@ -18417,13 +18417,15 @@
         "native-shadowwalk-sneak-clear-v554-source.mp4"
       ],
       "native_effects_status": "partial_six_native_cosmetic_particles_follow_and_retire",
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-shadowwalk-sneak-v551/result.json",
         "native-shadowwalk-standing-v552/result.json",
         "native-shadowwalk-sneak-clear-v554/result.json",
         "../movement-integration/visual-sweep-v1260/powers-review.json",
-        "coverage-v1332c/result.json"
+        "coverage-v1332c/result.json",
+        "coverage-v1359e/result.json",
+        "takedown-variants-v1254zd/result.json"
       ],
       "remaining_behaviors": [
         "Correct whole-body Shadow Walk appearance; ordinary human body is still visible.",
@@ -18433,20 +18435,39 @@
         "509 airborne landing dropout and540 stream-start freshness refusal remain separate unresolved issues."
       ],
       "completion": {
-        "audit": "completion-audit-v1337-powers.json",
-        "decision": "open",
-        "scope": "Entry, crawl and exit are presented (power variants 32-34; 45 samples).",
+        "audit": "completion-audit-v1393-shadow-walk.json",
+        "decision": "complete",
+        "scope": "Emily's Shadow Walk on the partner: entry, the crawl while moving, the form's kill and choke, and the exit, in the native black material silhouette, recovering to her ordinary body.",
         "takes": [
           {
-            "take": "coverage-v1332c",
+            "take": "coverage-v1359e",
             "cases": [
               "client-shadowwalk"
             ]
+          },
+          {
+            "take": "takedown-variants-v1254zd",
+            "cases": [
+              "client-swback-lethal",
+              "client-swback-choke"
+            ]
           }
         ],
-        "visual": [],
-        "lifecycle": "See method.",
-        "remaining": "An attack from shadow form and the transformed material on the observer."
+        "visual": [
+          {
+            "video": "coverage-v1359e/client-shadowwalk-observer.mp4",
+            "verdict": "Emily drops from standing into the Shadow Walk crawl and becomes a matte black silhouette with the native smoke around her, crawls forward on all fours, then rises and is back in her ordinary colours as the form ends."
+          },
+          {
+            "video": "takedown-variants-v1254zd/swback-client-lethal-observer.mp4",
+            "verdict": "From the form behind the guard, Emily as a black silhouette seizes him and throws him overhead; he crashes down dead and she straightens in her ordinary colours. Her sword's ring guard stays lit in her hand during the throw (the sword is a separate entity outside the material)."
+          },
+          {
+            "video": "takedown-variants-v1254zd/swback-client-choke-observer.mp4",
+            "verdict": "From the form, Emily as a black silhouette pulls the guard down to his knees from behind, then holds him down in her ordinary colours until he goes limp."
+          }
+        ],
+        "lifecycle": "See method."
       }
     },
     {
@@ -19548,7 +19569,7 @@
       ],
       "deliverable_kind": "animation",
       "notes": "Audit 1283: the partner reaches the office door in both roles (use-variants-dunwall-v1228s, 1214am); a crouched use rises into the standing reach (polish). Visual sweep 1260: insufficient (corvo insufficient, emily insufficient). The recordings show the door state but not the partner's body, so the door use cannot be judged visually for either character. 782/783/784: four consecutive same-map fixed-SLOT82 recoveries pass under original checkpoint arms: reload requested by each player, Corvo death, and Emily death with Corvo paused. Native shared GameOver, survivor health56 and zero input displacement, exactly one load/counterpart per role, fresh six-door catalog and native use after every retry.779 corrected GameOver13 mislabeled as wheel;782 closes pending-death retirement ordering gap reproduced in780.778 diagnostic race and note-quantity cleanup discrepancy retained and resolved. All item names/quantities, health and14 protected files restored.16 new paired recordings reviewed/indexed; complete co-op and movement remain unfinished. 828\u2013834: exact owned native state-list reader and indexed animation API verified, then one Steam desired-state adapter covers four Dunwall windows. Ordinary host opening/client closing, whole-family batch, duplicate no-op, native menu retention with deferred local intent, one shared checkpoint each and fresh client use pass. Protected files and full isolated baseline restored. Other48 state-list objects, quest/AI side effects and full co-op remain incomplete.",
-      "phase_status": "work_remaining",
+      "phase_status": "complete",
       "power_visual_requirements": [],
       "in_game_recordings": [
         "native-door-api-corvo-v708/host-unlocked-door-tap.mp4",
@@ -19680,7 +19701,7 @@
         "native-unlocked-door-emily-v642/client-unlocked-door-tap.mp4",
         "native-unlocked-door-emily-v642/observer.mp4"
       ],
-      "complete": false,
+      "complete": true,
       "evidence": [
         "native-unlocked-door-corvo-v641/result.json",
         "native-unlocked-door-emily-v642/result.json",
@@ -19724,8 +19745,62 @@
         "shared-window-family-v832b/result.json",
         "shared-window-recovery-v833b/result.json",
         "../movement-integration/visual-sweep-v1260/ranged_interactions-review.json",
-        "../movement-integration/coverage-audit-v1283.json"
-      ]
+        "../movement-integration/coverage-audit-v1283.json",
+        "use-variants-dunwall-v1228zf/result.json",
+        "use-variants-dunwall-v1228zg/result.json",
+        "use-variants-dunwall-v1228zj/result.json",
+        "use-variants-dunwall-v1228zk/result.json"
+      ],
+      "completion": {
+        "audit": "completion-audit-v1378-doors.json",
+        "decision": "complete",
+        "scope": "Opening and closing an unlocked door and trying a locked one, in both roles: the partner reaches for the handle on the native use clock and settles back; the door leaf and its state are native and shared.",
+        "takes": [
+          {
+            "take": "use-variants-dunwall-v1228zf",
+            "cases": [
+              "host-ld_door_350cm_int_rich_wood_01"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228zg",
+            "cases": [
+              "client-ld_door_350cm_int_rich_wood_01"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228zj",
+            "cases": [
+              "host-ld_door_350cm_int_rich_wood_01_3"
+            ]
+          },
+          {
+            "take": "use-variants-dunwall-v1228zk",
+            "cases": [
+              "client-ld_door_350cm_int_rich_wood_01_3"
+            ]
+          }
+        ],
+        "visual": [
+          {
+            "video": "use-variants-dunwall-v1228zf/use-host-ld_door_350cm_int_rich_wood_01-observed.mp4",
+            "verdict": "Locked door: Corvo reaches his right hand forward to the handle of the office door, which stays shut, and lowers it again."
+          },
+          {
+            "video": "use-variants-dunwall-v1228zg/use-client-ld_door_350cm_int_rich_wood_01-observed.mp4",
+            "verdict": "Locked door: Emily steps to the office door, reaches her right hand to the handle and returns to stand when it does not open."
+          },
+          {
+            "video": "use-variants-dunwall-v1228zj/use-host-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+            "verdict": "Unlocked door: the leaf swings open toward the camera and Corvo stands in the doorway, his right hand out at the door edge; he lowers it, and the leaf closes on the second tap."
+          },
+          {
+            "video": "use-variants-dunwall-v1228zk/use-client-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+            "verdict": "Unlocked door: the leaf swings open and Emily stands in the doorway with her right hand out at the door edge, lowers it and stands while the leaf closes on the second tap."
+          }
+        ],
+        "lifecycle": "See method."
+      }
     },
     {
       "id": "lever_button_crank_wheel",

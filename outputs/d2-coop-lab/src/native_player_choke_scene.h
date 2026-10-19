@@ -66,9 +66,10 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
        !read(s.instance+0x18,&bindingFlags,4))return false;
     // Player, target and the owned arms (both; generic fatalities bind the right arm only).
     // Four-binding finishers also carry one empty slot (take 1256b: NPC, player, two
-    // arms, null), which binds no actor.
+    // arms, null), which binds no actor; so does the shadow-form assassination (1214dd, takes 1254y/z:
+    // assassination_sw_back binds the NPC, the player, both ordinary arms and one empty slot).
     const unsigned wantArms=nativeTakedownArms(s.variant),bound=bindingFlags&0xffffff,empty=bound-(2+wantArms);
-    if(bound!=2+wantArms&&!(nativeTakedownFatality(s.variant)&&wantArms==2&&bound==5))return false;
+    if(bound!=2+wantArms&&!((nativeTakedownFatality(s.variant)||(s.variant>=37&&s.variant<=44))&&wantArms==2&&bound==5))return false;
     s.timeMs=clocks[1];std::array<std::uintptr_t,5> actors{};unsigned players=0,targets=0,arms=0,sides=0,nulls=0;
     for(unsigned i=0;i<bound;++i){unsigned handle=0;std::uintptr_t vt=0;
         if(!read(bindings+i*0x20+8,&actors[i],8))return false;

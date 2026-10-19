@@ -21,6 +21,11 @@ inline bool nativeDefenseImpactScene(unsigned variant,const std::string& sub,uns
 // and one reciprocal guard. Keep unobserved target-bearing scenes closed.
 inline bool nativeCombatTargetScene(unsigned variant,const std::string& sub,unsigned duration,unsigned stance=0){
     return ((variant==1||variant==2)&&(sub=="Scene_1"||sub=="Scene_2")&&duration==1000&&stance==0)||
+        // 1214de (#11 guard-fight stream drops): the left slashes bind the struck guard too (recoil watcher 1371a/b, both
+        // roles, confirmed runtime): sword_slash_left in Scene_1/Scene_2 and sword_slash_leftb in its character subscene
+        // (Corvo, emily), 1000 ms. Refusing them starved the stream on every left swing that connected.
+        (variant==3&&(sub=="Scene_1"||sub=="Scene_2")&&duration==1000&&stance==0)||
+        (variant==4&&(sub=="Corvo"||sub=="emily")&&duration==1000&&stance==0)||
         ((variant==5||variant==6)&&sub=="Scene_1"&&duration==933&&stance<=1)||
         // Native1021 block impact (hit_1, asset-equal hit_2 alternative) and
         // defender-side timed parry: player camera, owned right arm and the
@@ -76,7 +81,8 @@ template<class Read> bool readNativePlayerCombatScene(Read read,std::uintptr_t b
        !read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||!read(s.instance+0x10,&bindings,8)||!bindings||
        !read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)<1||(bindingFlags&0xffffff)>3)return false;
     if((s.action==1)!=(s.variant<=9||(s.variant>=15&&s.variant<=18)||s.variant>=22))return false;
-    if(s.variant>=22&&s.variant<=23&&(s.subscene!="Scene_1"||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
+    // 1214de: the right b-hit also plays its Scene_2 (1371a, 733 ms, player and right arm; confirmed runtime).
+    if(s.variant>=22&&s.variant<=23&&((s.subscene!="Scene_1"&&!(s.variant==22&&s.subscene=="Scene_2"))||s.durationMs!=733||(bindingFlags&0xffffff)!=2))return false;
     // A recoil runs only under Recoil40, at its observed native durations, with the camera and right arm bound.
     const bool stagger=s.variant==28||s.variant==29;
     if(stagger!=(s.stateId==40)||(stagger&&((s.durationMs!=666&&s.durationMs!=733)||s.timeMs>s.durationMs||(bindingFlags&0xffffff)!=2)))return false;

@@ -1,0 +1,98 @@
+{
+  "approach": "swback",
+  "source": "client",
+  "kind": "lethal",
+  "observer": "host",
+  "passed": false,
+  "failure": "Outcome differs: source dead, observer conscious, expected dead",
+  "checks": [
+    "Remote phase 37 presented"
+  ],
+  "guardWaitMs": 78462,
+  "guardHandleSource": "0xb480764",
+  "filmed": true,
+  "guardHandleObserver": "0xb480764",
+  "guardBefore": {
+    "source": [
+      -47.9503,
+      -152.449,
+      66.4
+    ],
+    "observer": [
+      -47.9503,
+      -152.449,
+      66.4
+    ]
+  },
+  "takedownCamera": [
+    -49.115386,
+    -149.0427448,
+    68.30000000000001
+  ],
+  "takedownCameraHeld": false,
+  "stanceBefore": [
+    0,
+    1
+  ],
+  "inputAt": "2026-10-18T18:33:14.6737708+02:00",
+  "scenes": [
+    "midnight/gameplay/player/base/assassination/assassination_sw_back.midnightscene|2666"
+  ],
+  "sceneIds": [
+    37
+  ],
+  "attempts": 1,
+  "final": {
+    "source": {
+      "tick": 272145187,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x2145a304d50",
+      "actor": "0x2145ca293a0",
+      "attributes": "0x2145c78e8d0",
+      "current": 0,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "observer": {
+      "tick": 272145203,
+      "handle": 189269860,
+      "logic": 1,
+      "component": "0x1ca3eec32c0",
+      "actor": "0x1ca4b957500",
+      "attributes": "0x1ca4b6a68d0",
+      "current": 40,
+      "maximum": 40,
+      "baseMaximum": 40,
+      "suppressedMaximum": 10,
+      "explicitHidden": false,
+      "ownerSuppressed": false,
+      "maximumIndex": -1,
+      "suppressedIndex": -1,
+      "attributeCount": 10,
+      "attributeValues": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "outcome": {
+    "source": "dead",
+    "observer": "conscious"
+  },
+  "restored": true
+}

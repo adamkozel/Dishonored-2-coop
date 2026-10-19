@@ -1,0 +1,49 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-knockdown: No knockdown or stumble (states seen: 0 0+56 0+59)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "knockdown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No knockdown or stumble (states seen: 0 0+56 0+59)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_item_equipped",
+        "named": {
+          "grants": 3,
+          "refused": 0,
+          "result": "granted_named"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "knockdownSamples": 0,
+      "stumbleSamples": 0,
+      "stateSets": [
+        "0",
+        "0+56",
+        "0+59"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

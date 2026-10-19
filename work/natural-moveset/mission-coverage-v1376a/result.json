@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 3, timed parries 7, hit reactions 0 (variants ), attacks 14 (variants 1,2,4); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.1837079746827465,
+        0.9829808645329589
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.1837079746827465,
+            0.9829808645329589
+          ],
+          "rest": [
+            3.97458,
+            61.6377,
+            15.9656
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3582
+        },
+        {
+          "ms": 13972,
+          "phase": "open",
+          "guardSamples": 6
+        },
+        {
+          "ms": 29844,
+          "phase": "attack",
+          "hitSamples": 0
+        }
+      ],
+      "counterPresses": [],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 2627,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 3,
+      "timedParries": 7,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "combatSceneWindows": 0,
+      "sceneWindows": 2,
+      "attackSamples": 14,
+      "attackVariants": [
+        1,
+        2,
+        4
+      ],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 1686,
+          "states": 0
+        },
+        {
+          "ms": 17517,
+          "states": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Block impacts 0, timed parries 1, hit reactions 0 (variants ), attacks 36 (variants 1,2,3,4,7,23); guard dead in both worlds"
+      ],
+      "guardFacing": [
+        -0.1652929193474885,
+        0.9862445187749257
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.1652929193474885,
+            0.9862445187749257
+          ],
+          "rest": [
+            4.02462,
+            61.6627,
+            15.9661
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "phaseLog": [
+        {
+          "ms": 3647,
+          "phase": "block"
+        },
+        {
+          "phase": "open",
+          "ms": 26821,
+          "guardSamples": 1
+        },
+        {
+          "phase": "attack",
+          "ms": 41891,
+          "hitSamples": 0
+        }
+      ],
+      "counterPresses": [
+        20031
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 1078,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 1,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "combatSceneWindows": 0,
+      "sceneWindows": 2,
+      "attackSamples": 36,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        23
+      ],
+      "minSourceHealth": 55.0,
+      "healthDrops": [
+        {
+          "ms": 3210,
+          "states": 0
+        },
+        {
+          "ms": 36484,
+          "states": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

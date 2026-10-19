@@ -1,0 +1,255 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-guardfight: No block impact or timed parry presented (hits 0, attacks 17)",
+  "cases": [
+    {
+      "source": "client",
+      "case": "guardfight",
+      "observer": "host",
+      "passed": false,
+      "failure": "No block impact or timed parry presented (hits 0, attacks 17)",
+      "checks": [],
+      "guardFacing": [
+        -0.1841180265921685,
+        0.9829041419608554
+      ],
+      "placementTrials": [
+        {
+          "offset": [
+            -0.1841180265921685,
+            0.9829041419608554
+          ],
+          "rest": [
+            3.97753,
+            61.641,
+            15.9656
+          ],
+          "statesReadable": true,
+          "ok": true
+        }
+      ],
+      "modalsAfterPlacement": 0,
+      "cameraFollowMoves": 65,
+      "cameraStart": [
+        -0.21409617206406129,
+        59.584399057786314,
+        17.9529,
+        10.609715778107946,
+        4.208972466759789,
+        60.412930177451074
+      ],
+      "cameraTrace": [
+        {
+          "t": 771,
+          "source": [
+            3.8011,
+            63.416,
+            15.9732
+          ],
+          "guard": [
+            3.95979,
+            61.3528,
+            15.9604
+          ],
+          "command": "coop_observer_camera hold_at -0.543 61.556 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.214,
+            59.584,
+            17.952999
+          ]
+        },
+        {
+          "t": 1644,
+          "source": [
+            3.84972,
+            63.1565,
+            15.9723
+          ],
+          "guard": [
+            4.16007,
+            60.6776,
+            15.9585
+          ],
+          "command": "coop_observer_camera hold_at -0.418 61.089 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.214,
+            59.584,
+            17.952999
+          ]
+        },
+        {
+          "t": 2446,
+          "source": [
+            3.84972,
+            63.1565,
+            15.9723
+          ],
+          "guard": [
+            4.16007,
+            60.6776,
+            15.9585
+          ],
+          "command": "coop_observer_camera hold_at -0.418 61.089 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.418,
+            61.089001,
+            17.952999
+          ]
+        },
+        {
+          "t": 3200,
+          "source": [
+            3.84972,
+            63.1565,
+            15.9723
+          ],
+          "guard": [
+            4.16007,
+            60.6776,
+            15.9585
+          ],
+          "command": "coop_observer_camera hold_at -0.418 61.089 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.418,
+            61.089001,
+            17.952999
+          ]
+        },
+        {
+          "t": 3828,
+          "source": [
+            3.9152,
+            62.9433,
+            15.9717
+          ],
+          "guard": [
+            3.98446,
+            62.3047,
+            15.9643
+          ],
+          "command": "coop_observer_camera hold_at -0.473 61.795 17.953",
+          "active": false,
+          "result": "off",
+          "position": [
+            -0.418,
+            61.089001,
+            17.952999
+          ]
+        },
+        {
+          "t": 5999,
+          "source": [
+            3.47766,
+            64.5969,
+            15.977
+          ],
+          "guard": [
+            3.90928,
+            63.0474,
+            15.9685
+          ],
+          "command": "coop_observer_camera hold_at -0.730 62.994 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.473,
+            61.794998,
+            17.952999
+          ]
+        },
+        {
+          "t": 6782,
+          "source": [
+            3.47766,
+            64.5969,
+            15.977
+          ],
+          "guard": [
+            3.97621,
+            62.3887,
+            15.9657
+          ],
+          "command": "coop_observer_camera hold_at -0.696 62.664 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.73,
+            62.993999,
+            17.952999
+          ]
+        },
+        {
+          "t": 7654,
+          "source": [
+            3.35417,
+            65.6312,
+            15.981
+          ],
+          "guard": [
+            3.91517,
+            62.9894,
+            15.9687
+          ],
+          "command": "coop_observer_camera hold_at -0.788 63.482 17.953",
+          "active": true,
+          "result": "holding_at",
+          "position": [
+            -0.788,
+            63.481998,
+            17.952999
+          ]
+        }
+      ],
+      "phaseLog": [
+        {
+          "phase": "block",
+          "ms": 3828
+        },
+        {
+          "phase": "open",
+          "guardSamples": 0,
+          "ms": 26404
+        },
+        {
+          "hitSamples": 0,
+          "phase": "attack",
+          "ms": 41800
+        }
+      ],
+      "counterPresses": [
+        11337,
+        21680,
+        25515
+      ],
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcomeWaitMs": 660,
+      "guard": "script_spawner_checkpoint_guard_01",
+      "blockImpacts": 0,
+      "timedParries": 0,
+      "hitReactions": 0,
+      "stunVariants": [],
+      "combatSceneWindows": 0,
+      "sceneWindows": 2,
+      "attackSamples": 17,
+      "attackVariants": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "minSourceHealth": 55.0
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

@@ -17,6 +17,9 @@ struct NativePlayerPowerScene {
 inline unsigned nativePowerVariant(unsigned character,const std::string& asset,const std::string& sub,unsigned duration){
     const std::string prefix="midnight/gameplay/player/base/powers/";
     if((character==1||character==2)&&sub=="Scene_1"&&duration==933&&asset==prefix+"power_darkvision_cast.midnightscene")return 10;
+    // 1214dk (#11 power_interruptions_and_no_mana): Emily's failed cast plays the same native power_outofmana (Scene_1,
+    // 333 ms, only her left arm bound) under her selected power (Mesmerize in coverage-v1390a, confirmed runtime).
+    if(character==2&&sub=="Scene_1"&&duration==333&&asset==prefix+"power_outofmana.midnightscene")return 15;
     if(character==1&&sub=="Cast_Ou_Shockwave"&&duration==1000&&asset==prefix+"power_windblast_cast.midnightscene")return 11;
     if(character==1&&sub=="Scene_1"){
         if(asset==prefix+"power_outofmana.midnightscene"&&duration==333)return 15;
@@ -99,16 +102,19 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
             if(!read(c,&d,8)||!d||!read(d,&vt,8)||vt!=base+0x1affbc8||!read(d+8,&name,8)||!worldIdentityString(read,name,asset))return false;
             if(asset.find("midnight/gameplay/player/base/powers/power_")!=0)continue;
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
-            const unsigned variant=nativePowerVariant(s.power.player.character,asset,sub,duration);if(!variant||(variant==10)!=darkVision||(variant==11)!=windblast||(variant>=12&&variant<=15)!=bendTime||(variant>=16)!=mesmerize)continue;
+            const unsigned variant=nativePowerVariant(s.power.player.character,asset,sub,duration);if(!variant)continue;
+            // A failed cast (15) is Corvo's under Bend Time (v44/v45) and Emily's under her own selected power (1214dk).
+            if(variant==15?(darkVision||windblast||(s.power.player.character==1)!=bendTime):
+               ((variant==10)!=darkVision||(variant==11)!=windblast||(variant>=12&&variant<=14)!=bendTime||(variant>=16)!=mesmerize))continue;
             // Exact v44/v45 failed casts confirm Corvo standing/crouched,
             // drawn/holstered, inactive selected Bend Time and sole ground state.
-            if(variant==15&&(states.player.current>1||bend.powerActive||
+            if(variant==15&&(states.player.current>1||(bendTime&&bend.powerActive)||
                 states.active.size()!=1||states.active[0].id!=(states.player.current==1?6u:0u)))continue;
             if(s.instance){if(s.instance==c)continue;return false;} // No guessing across overlapping native scenes.
             s.instance=c;s.variant=variant;s.asset=std::move(asset);s.subscene=std::move(sub);s.durationMs=duration;declaration=d;scene=sc;
         }
     }
-    const unsigned expectedBindings=bendTime?(s.variant==12?2:1):windblast?2:darkVision||mesmerize||s.power.player.character==1?1:s.variant==5?2:3;
+    const unsigned expectedBindings=s.variant==15?1:bendTime?(s.variant==12?2:1):windblast?2:darkVision||mesmerize||s.power.player.character==1?1:s.variant==5?2:3;
     if(!s.instance||!read(s.instance+0x158,&s.handle,4)||!s.handle||!read(s.instance+0x160,&s.timeMs,4)||s.timeMs>3600000||
        !read(s.instance+0x10,&bindings,8)||!bindings||!read(s.instance+0x18,&bindingFlags,4)||(bindingFlags&0xffffff)!=expectedBindings)return false;
     std::array<std::uintptr_t,3> actors{};unsigned armCount=0,powerCount=0,playerCount=0;
@@ -118,7 +124,7 @@ template<class Read> bool readNativePlayerPowerScene(Read read,std::uintptr_t ba
         else if(actors[i]==states.player.player){if(++playerCount>1||handle!=1)return false;}
         else if(++armCount>1||!readNativePlayerArm(read,base,game,handle,s.arm)||s.arm.actor!=actors[i]||s.arm.player!=states.player.player||s.arm.side!=1||s.arm.character!=s.power.player.character)return false;
     }
-    if(armCount!=1||powerCount!=(!darkVision&&!windblast&&!mesmerize&&s.power.player.character==2?1u:0u)||playerCount!=(windblast||(bendTime&&s.variant==12)||expectedBindings==3?1u:0u))return false;
+    if(armCount!=1||powerCount!=(!darkVision&&!windblast&&!mesmerize&&s.power.player.character==2&&s.variant!=15?1u:0u)||playerCount!=(windblast||(bendTime&&s.variant==12)||expectedBindings==3?1u:0u))return false;
     std::uintptr_t again=0;unsigned number=0;
     if(!read(s.instance,&again,8)||again!=declaration||!read(s.instance+8,&again,8)||again!=scene||!read(s.instance+0x158,&number,4)||number!=s.handle||
        !read(s.instance+0x27c,&number,4)||number!=3||!read(s.instance+0x10,&again,8)||again!=bindings||!read(s.instance+0x18,&number,4)||number!=bindingFlags)return false;
