@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "host",
+      "case": "stoptime",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Stop Time: guard moved host 0/0/0 m, client 0/0/0 m (before/during/after); Emily walked 1.23 m during the stop",
+        "Partner presentation stayed live",
+        "stoptime presented (7 samples, variants 12,14) and recovered"
+      ],
+      "stopUpgrade": true,
+      "peerWalk": 4089,
+      "stopTime": {
+        "guardHostBefore": 0.0,
+        "guardHostDuring": 0.0,
+        "guardHostAfter": 0.0,
+        "guardClientBefore": 0.0,
+        "guardClientDuring": 0.0,
+        "guardClientAfter": 0.0,
+        "emilyDuring": 1.23,
+        "corvoDuring": 0.0
+      },
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 7,
+      "powerVariants": [
+        12,
+        14
+      ],
+      "recovered": 2,
+      "restored": true
+    }
+  ],
+  "scope": "Pickpocket from behind aimed at the belt key (1389, #11), Far Reach pull (1388), Blink Assault kick (1359, #11), pickpocket and body loot by the native use focus (1358), on the standing tutorial guard (1357), the native kick with the railing behind an alerted guard (1356), at the balcony railing (1355), Domino on the Dunwall tutorial guards (1354), power cancellation and long Far Reach (1350), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
