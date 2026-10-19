@@ -211,6 +211,20 @@ inline bool nativePlayerGroundHeartStates(const NativePlayerStates& s,std::uintp
     }
     return ground==1&&heart==1&&right<=1&&left<=1&&draw<=1;
 }
+// 1214eu (#102): the Timepiece's native states over Running0 or Sneaking6 (takes 1589b, 1590b/c; vtables from their
+// state table): UseTimeShiftDevice 68 (the shift), UnfoldTimeShiftDevice 69, with Undraw 81 at its start (the unfold
+// and the fold), and UnfoldTimeShiftLoop 70 (the peek). Returns the one Timepiece state present, 0 when none.
+inline unsigned nativePlayerGroundTimepieceState(const NativePlayerStates& s,std::uintptr_t base){
+    if(s.player.logic!=1||!s.defaultMode||s.player.current>1||s.active.size()<2||s.active.size()>3)return 0;
+    unsigned ground=0,device=0,draw=0,found=0;
+    for(const auto& a:s.active){
+        if((s.player.current==0&&a.id==0&&a.vtable==base+0x1c85628)||(s.player.current==1&&a.id==6&&a.vtable==base+0x1c84258))++ground;
+        else if((a.id==68&&a.vtable==base+0x1c415f8)||(a.id==69&&a.vtable==base+0x1c3e878)||(a.id==70&&a.vtable==base+0x1c3eb98)){++device;found=a.id;}
+        else if(a.id==81&&a.vtable==base+0x1c7df88)++draw;
+        else return 0;
+    }
+    return ground==1&&device==1&&draw<=1?found:0;
+}
 // Exact native568 observations for both roles and both placeable gadgets.
 inline bool nativePlayerGroundTrapStates(const NativePlayerStates& s,std::uintptr_t base){
     if(s.player.logic!=1||!s.defaultMode||s.player.current>1||s.active.empty()||s.active.size()>5)return false;
@@ -318,6 +332,7 @@ inline bool nativePlayerMotion(const NativePlayerStates& s,std::uintptr_t base,s
        nativePlayerShadowWalkAssassinationStates(s,base)||nativePlayerShadowWalkChokeStates(s,base)){motion=0;return true;}
     if(nativePlayerGroundTrapStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundHeartStates(s,base)){motion=s.player.current;return true;}
+    if(nativePlayerGroundTimepieceState(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundDrawRequestStates(s,base)){motion=s.player.current;return true;}
     if(nativePlayerGroundPowerDrawStates(s,base)){motion=s.player.current;return true;}
     // Native v187/v191/v245: Domino72 overlays Running0 or Sneaking6. Keep source

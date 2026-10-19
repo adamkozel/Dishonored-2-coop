@@ -20,6 +20,7 @@
 #include "native_player_ranged_scene.h"
 #include "native_player_grenade_scene.h"
 #include "native_player_heart_scene.h"
+#include "native_player_timepiece.h"
 #include "native_player_trap_scene.h"
 #include "native_player_choke_scene.h"
 #include "native_player_potion.h"
@@ -65,6 +66,8 @@ struct ShadowStreamState {
     std::uint64_t sourceChokeSpawner=0,sourceChokeDefinition=0,remoteChokeSpawner=0,remoteChokeDefinition=0;
     unsigned sourceTrapHeld=0,sourceTrap=0,sourceTrapTime=0,sourceTrapStock=0,remoteTrapHeld=0,remoteTrap=0,remoteTrapDuration=0,remoteTrapStock=0;
     unsigned sourceHeartHeld=0,sourceHeart=0,remoteHeartHeld=0,remoteHeart=0,remoteHeartDuration=0;
+    // 1214eu (#102): the Timepiece's looping shift raise (scan_loop) is sent as the time since its instance began.
+    unsigned timepieceLoopHandle=0;ULONGLONG timepieceLoopStart=0;
     unsigned sourceStun=0,remoteStun=0,remoteStunDuration=0;
     unsigned sourceGrenadeHeld=0,sourceGrenade=0,sourceGrenadeTime=0,remoteGrenadeHeld=0,remoteGrenade=0,remoteGrenadeDuration=0;
     CarryPreparationClock carryPreparationClock;
@@ -338,10 +341,15 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     const bool heartValid=nativeStateValid&&!powerValid&&!rangedValid&&!grenadeValid&&readNativePlayerHeartScene(memoryRead,base,states,heart);
     const bool heartIdle=nativeStateValid&&!heartValid&&nativePlayerGroundHeartStates(states,base)&&states.active.size()==2&&
         readNativePlayerHeart(memoryRead,base,heldHeart,nullptr,true)&&heldHeart.quantity==1;
+    // 1214eu (#102): the Timepiece in the left hand, sent as held kind 2 on the Heart fields (action 19 for its scenes).
+    NativePlayerTimepieceScene timepiece{};NativePlayerTimepiece heldTimepiece{};
+    const bool timepieceValid=nativeStateValid&&!powerValid&&!rangedValid&&!grenadeValid&&!heartValid&&!heartIdle&&readNativePlayerTimepieceScene(memoryRead,base,states,timepiece);
+    const bool timepieceIdle=nativeStateValid&&!timepieceValid&&!heartValid&&!heartIdle&&states.active.size()==1&&states.player.current<=1&&
+        readNativePlayerTimepiece(memoryRead,base,heldTimepiece,nullptr,true)&&heldTimepiece.quantity==1;
     NativePlayerTrapScene trap{};NativePlayerPlaceable heldTrap{};
-    const bool trapValid=nativeStateValid&&!powerValid&&!rangedValid&&!grenadeValid&&!heartValid&&!heartIdle&&readNativePlayerTrapScene(memoryRead,base,states,trap);
+    const bool trapValid=nativeStateValid&&!powerValid&&!rangedValid&&!grenadeValid&&!heartValid&&!heartIdle&&!timepieceValid&&!timepieceIdle&&readNativePlayerTrapScene(memoryRead,base,states,trap);
     bool trapIdle=false;
-    if(nativeStateValid&&!trapValid&&!heartValid&&!heartIdle&&states.active.size()==1&&states.player.current<=1){
+    if(nativeStateValid&&!trapValid&&!heartValid&&!heartIdle&&!timepieceValid&&!timepieceIdle&&states.active.size()==1&&states.player.current<=1){
         for(unsigned kind=1;kind<=2;++kind)if(readNativePlayerPlaceable(memoryRead,base,kind,heldTrap,nullptr,true)){trapIdle=true;break;}
     }
     NativePlayerCarryScene carry{};
@@ -352,9 +360,9 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(!carryPreparing)shadowStream.carryPreparationClock.clear();
     NativePlayerChokeScene choke{};
     const bool chokeValid=nativeStateValid&&readNativePlayerChokeScene(memoryRead,base,states,choke);
-    if(chokeValid)action=21;else if(trapValid)action=20;else if(trapIdle)action=0;else if(heartValid)action=19;else if(heartIdle)action=0;else if(possessionOccupied)action=17;else if(stunValid)action=16;else if(powerValid)action=10;else if(rangedValid)action=13;else if(grenadeValid)action=15;else if(carryValid||carryPreparing)action=14;
+    if(chokeValid)action=21;else if(trapValid)action=20;else if(trapIdle)action=0;else if(heartValid||timepieceValid)action=19;else if(heartIdle||timepieceIdle)action=0;else if(possessionOccupied)action=17;else if(stunValid)action=16;else if(powerValid)action=10;else if(rangedValid)action=13;else if(grenadeValid)action=15;else if(carryValid||carryPreparing)action=14;
     shadowSourceReadStage=2;
-    const bool valid=nativeStateValid&&(chokeValid||trapValid||trapIdle||heartValid||heartIdle||possessionOccupied||stunValid||powerValid||rangedValid||grenadeValid||carryValid||carryPreparing||nativePlayerShadowAction(states,base,action))&&
+    const bool valid=nativeStateValid&&(chokeValid||trapValid||trapIdle||heartValid||heartIdle||timepieceValid||timepieceIdle||possessionOccupied||stunValid||powerValid||rangedValid||grenadeValid||carryValid||carryPreparing||nativePlayerShadowAction(states,base,action))&&
         shadowTimedRead(7,[&]{return readNativePlayerSword(memoryRead,base,sword);})&&sword.character==localRole+1&&sword.sword.game==states.player.game&&
         sword.sword.actor==states.player.player&&sword.sword.logic==1&&sword.sword.quantity==1&&sword.sword.equipped==sword.sword.started;
     float side=0,up=0;
@@ -414,6 +422,18 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         if(item.player.character!=localRole+1||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
         if(heartValid&&sceneHandle)*sceneHandle=heart.handle;
         if(airPacket){airPacket->heartHeld=1;airPacket->heartVariant=heart.variant;airPacket->heartTimeMs=heart.timeMs;airPacket->heartDurationMs=heart.durationMs;}
+    }
+    if(timepieceValid||timepieceIdle){
+        const auto& item=timepieceValid?timepiece.timepiece:heldTimepiece;
+        if(item.player.character!=localRole+1||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
+        unsigned timeMs=timepiece.timeMs;
+        // The peek (5) holds one pose; the shift's raise (7) loops natively, so it is timed from its instance's start.
+        if(timepieceValid&&timepiece.variant==5)timeMs=0;
+        if(timepieceValid&&timepiece.variant==7){const auto now=GetTickCount64();
+            if(shadowStream.timepieceLoopHandle!=timepiece.handle){shadowStream.timepieceLoopHandle=timepiece.handle;shadowStream.timepieceLoopStart=now;}
+            timeMs=unsigned((std::min)(ULONGLONG(500),now-shadowStream.timepieceLoopStart));}
+        if(timepieceValid&&sceneHandle)*sceneHandle=timepiece.handle;
+        if(airPacket){airPacket->heartHeld=2;airPacket->heartVariant=timepiece.variant;airPacket->heartTimeMs=timeMs;airPacket->heartDurationMs=timepiece.durationMs;}
     }
     if(grenadeValid){
         if(grenade.grenade.player.character!=localRole+1)return false;

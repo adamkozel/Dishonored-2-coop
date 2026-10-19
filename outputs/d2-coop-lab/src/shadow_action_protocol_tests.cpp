@@ -22,6 +22,7 @@
 #include "native_player_trap_scene.h"
 #include "native_player_choke_scene.h"
 #include "native_player_combat_scene.h"
+#include "native_player_timepiece.h"
 #include <iostream>
 #include <cstdlib>
 void check(bool ok,const char* m){if(!ok){std::cerr<<"FAIL: "<<m<<'\n';std::exit(1);}}
@@ -522,6 +523,33 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
       st.active={{0,1,base+0x1c85628},{67,2,base+0x1c80b78}};unsigned motion=99;
       check(nativePlayerMotion(st,base,motion)&&motion==0,"Heart overlay retains exact Running root");
       st.active[1].vtable++;check(!nativePlayerGroundHeartStates(st,base),"Heart overlay rejects unknown vtable");
+    }
+    {   // 1214eu (protocol 80, #102): the Timepiece on the Heart fields (held 2) and its native states.
+      auto tp=p;tp.state=19;tp.heartHeld=2;tp.heartVariant=4;tp.heartDurationMs=500;tp.heartTimeMs=250;
+      check(validShadowAction(tp,c,h),"Timepiece scan_in on the Heart fields");
+      for(unsigned v=4;v<=8;++v){auto x=tp;x.heartVariant=v;x.heartDurationMs=HeartPresentation::duration(2,v);x.heartTimeMs=0;check(validShadowAction(x,c,h),"each Timepiece scene variant accepted");}
+      auto bad=tp;bad.version=79;check(!validShadowAction(bad,c,h),"pre-Timepiece wire refused");
+      bad=tp;bad.heartVariant=3;bad.heartDurationMs=1000;check(!validShadowAction(bad,c,h),"a Heart use is not a Timepiece variant");
+      bad=tp;bad.heartHeld=1;check(!validShadowAction(bad,c,h),"a Timepiece variant is not a Heart variant");
+      bad=tp;bad.heartHeld=3;check(!validShadowAction(bad,c,h),"unknown held kind refused");
+      bad=tp;bad.heartDurationMs=533;check(!validShadowAction(bad,c,h),"Timepiece duration exact");
+      bad=tp;bad.heartTimeMs=501;check(!validShadowAction(bad,c,h),"Timepiece clock bounded");
+      bad=tp;bad.grenadeHeld=1;check(!validShadowAction(bad,c,h),"Timepiece cannot coexist with grenade");
+      bad=tp;bad.heartVariant=0;bad.heartDurationMs=0;bad.heartTimeMs=0;bad.state=0;check(validShadowAction(bad,c,h),"selected Timepiece idle has no scene clock");
+      check(HeartPresentation::clip(2,0)==336&&HeartPresentation::clip(2,5)==339&&HeartPresentation::clip(1,2)==338,"Timepiece plays the Heart idle and use clips");
+      check(HeartPresentation::clipAmount(2,5,.9f)==.60f&&HeartPresentation::clipAmount(2,6,1)==1.f&&HeartPresentation::clipAmount(1,3,.3f)==.3f,"Timepiece clip times stay within the use clip");
+      check(HeartPresentation::visible(2,5,0)&&!HeartPresentation::visible(2,3,.5f),"Timepiece peek visible, Heart-only variant hidden");
+      HeartPresentation timeline;check(timeline.push({100,1,2,7,10,500})&&timeline.push({140,1,2,7,500,500}),"Timepiece raise observed to its cap");
+      check(!timeline.push({150,1,2,7,0,500}),"Timepiece raise cannot rewind within its event");
+      NativePlayerStates st{};const std::uintptr_t base=0x140000000;st.player.logic=1;st.defaultMode=true;st.player.current=0;unsigned motion=99;
+      st.active={{0,1,base+0x1c85628},{68,2,base+0x1c415f8}};check(nativePlayerGroundTimepieceState(st,base)==68&&nativePlayerMotion(st,base,motion)&&motion==0,"Timepiece shift retains Running root");
+      st.active={{0,1,base+0x1c85628},{81,2,base+0x1c7df88},{69,3,base+0x1c3e878}};check(nativePlayerGroundTimepieceState(st,base)==69,"Timepiece unfold with Undraw");
+      st.active={{0,1,base+0x1c85628},{70,2,base+0x1c3eb98}};check(nativePlayerGroundTimepieceState(st,base)==70,"Timepiece peek loop");
+      st.active[1].vtable++;check(!nativePlayerGroundTimepieceState(st,base),"Timepiece state rejects unknown vtable");
+      st.active={{0,1,base+0x1c85628},{68,2,base+0x1c415f8},{70,3,base+0x1c3eb98}};check(!nativePlayerGroundTimepieceState(st,base),"one Timepiece state at a time");
+      check(nativeTimepieceVariant("midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene","Scene_4",500)==7&&
+            !nativeTimepieceVariant("midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene","Scene_2",3333)&&
+            !nativeTimepieceVariant("midnight/gameplay/player/base/gadgets/gadget_timeshift_equip.midnightscene","Scene_1",500),"only the observed Timepiece scenes map to variants");
     }
     {auto unbound=p;unbound.state=18;
       check(validShadowAction(unbound,c,h),"explicit unbound standing/crouching presentation crosses scoped Steam wire");

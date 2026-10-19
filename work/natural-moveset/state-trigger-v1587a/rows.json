@@ -1,0 +1,76 @@
+[
+  {
+    "trigger": "B:200",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "6:.?AVarkPlayerStateSneaking@@"
+    ],
+    "firstSeenMs": {
+      "6:.?AVarkPlayerStateSneaking@@": 61
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "Y+LXL:1300",
+    "before": [
+      "6:.?AVarkPlayerStateSneaking@@"
+    ],
+    "entered": [
+      "18:.?AVarkPlayerStateLeaning@@"
+    ],
+    "firstSeenMs": {
+      "6:.?AVarkPlayerStateSneaking@@": 55,
+      "18:.?AVarkPlayerStateLeaning@@": 55
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "Y+LX:1300",
+    "before": [
+      "6:.?AVarkPlayerStateSneaking@@",
+      "18:.?AVarkPlayerStateLeaning@@"
+    ],
+    "entered": [],
+    "firstSeenMs": {
+      "6:.?AVarkPlayerStateSneaking@@": 51,
+      "18:.?AVarkPlayerStateLeaning@@": 51
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "Y+LY:1300",
+    "before": [
+      "6:.?AVarkPlayerStateSneaking@@",
+      "18:.?AVarkPlayerStateLeaning@@"
+    ],
+    "entered": [],
+    "firstSeenMs": {
+      "6:.?AVarkPlayerStateSneaking@@": 45,
+      "18:.?AVarkPlayerStateLeaning@@": 45
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  },
+  {
+    "trigger": "B:200",
+    "before": [
+      "6:.?AVarkPlayerStateSneaking@@",
+      "18:.?AVarkPlayerStateLeaning@@"
+    ],
+    "entered": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "firstSeenMs": {
+      "6:.?AVarkPlayerStateSneaking@@": 58,
+      "18:.?AVarkPlayerStateLeaning@@": 58,
+      "0:.?AVarkPlayerStateRunning@@": 242
+    },
+    "closedWithB": 0,
+    "logicAfter": 1
+  }
+]

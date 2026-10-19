@@ -1,0 +1,111 @@
+{
+  "scope": "Native player states entered by held inputs in the current lab fixture (read-only probes; no commands).",
+  "failure": null,
+  "rows": [
+    {
+      "trigger": "RightThumb:1500",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 53,
+        "76:.?AVarkPlayerStateSpyglass@@": 228
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "Up:600",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [
+        "64:.?AVarkPlayerStateEquipChange@@",
+        "53:.?AVarkPlayerStateEquipChange@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 51,
+        "76:.?AVarkPlayerStateSpyglass@@": 51,
+        "64:.?AVarkPlayerStateEquipChange@@": 765,
+        "53:.?AVarkPlayerStateEquipChange@@": 765
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "Down:600",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [
+        "64:.?AVarkPlayerStateEquipChange@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 50,
+        "76:.?AVarkPlayerStateSpyglass@@": 50,
+        "64:.?AVarkPlayerStateEquipChange@@": 740
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "Left:600",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [
+        "64:.?AVarkPlayerStateEquipChange@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 39,
+        "76:.?AVarkPlayerStateSpyglass@@": 39,
+        "64:.?AVarkPlayerStateEquipChange@@": 708
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "Right:600",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [
+        "64:.?AVarkPlayerStateEquipChange@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 42,
+        "76:.?AVarkPlayerStateSpyglass@@": 42,
+        "64:.?AVarkPlayerStateEquipChange@@": 715
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    },
+    {
+      "trigger": "LeftShoulder:800",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "76:.?AVarkPlayerStateSpyglass@@"
+      ],
+      "entered": [
+        "82:.?AVarkPlayerStatePowerwheel@@",
+        "64:.?AVarkPlayerStateEquipChange@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 40,
+        "76:.?AVarkPlayerStateSpyglass@@": 40,
+        "82:.?AVarkPlayerStatePowerwheel@@": 870,
+        "64:.?AVarkPlayerStateEquipChange@@": 1038
+      },
+      "closedWithB": 0,
+      "logicAfter": 1
+    }
+  ],
+  "passed": true
+}

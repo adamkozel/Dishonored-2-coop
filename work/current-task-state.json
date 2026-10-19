@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T15:39:17+02:00",
+  "UpdatedAt": "2026-10-19T17:20:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214es (deployed; probe-only on the 1214eo DLL, protocol 79; read-only probes 1214em-es incl. --takedown-gates, --choke-sensor, --takedown-sensor)",
-    "NextCandidate": "none pending; next work #102 (spyglass, Timepiece, stumble/recoil and other native player states)",
-    "Complete": "103 of 105 (enemy_body_size_variants audit v1572; 2 not applicable or excluded); the checklist is complete. Next: #102 native player states outside the checklist, then stage 4",
+    "Candidate": "candidate-npc-combat-v1214eu (deployed; protocol 80, bank 75/382): the Timepiece presented on the partner like the Heart (held kind 2, prop kind 7); 1214et research probe kept",
+    "NextCandidate": "none pending; #102 closes with the bunker shift takes 1593b/c, then stage 4 (#113, #118, #117, #115)",
+    "Complete": "103 of 105 (2 not applicable or excluded); the checklist is complete. #102 (native player states outside the checklist) decided in chapter 101; next: stage 4",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
@@ -22241,6 +22241,21 @@
     "Merged": [
       "#101 a52824eb7",
       "#103 527877ca9"
-    ]
+    ],
+    "NativePlayerStates": {
+      "Card": 102,
+      "Chapter": "documentation/handoff-2026-10-11/101-native-player-states.md",
+      "Decided": "all: Timepiece presented (1214eu), spyglass first person only, WallCrouch unused (hypothesis), the rest not applicable or covered",
+      "Evidence": [
+        "state-trigger-v1589b",
+        "state-trigger-v1590b",
+        "state-trigger-v1590c",
+        "timepiece-research-v1591b",
+        "coverage-timepiece-v1592a",
+        "state-trigger-v1593b",
+        "state-trigger-v1593c"
+      ],
+      "Gaps": "prop bind pose (no fold mechanism); equip/unequip scenes not presented; release decl recipes must add timeshift_prop.def"
+    }
   }
 }

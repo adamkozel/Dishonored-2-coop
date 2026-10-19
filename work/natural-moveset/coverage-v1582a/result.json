@@ -1,0 +1,89 @@
+{
+  "passed": false,
+  "failure": "2 case(s) failed: host-spyglass: No Spyglass state (states seen: 0 0+81) | client-spyglass: No Spyglass state (states seen: 0 0+81)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "spyglass",
+      "observer": "client",
+      "passed": false,
+      "failure": "No Spyglass state (states seen: 0 0+81)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 6,
+          "refused": 0,
+          "result": "named_slot_occupied"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "spyglassSamples": 0,
+      "zoomSamples": 0,
+      "stateSets": [
+        "0",
+        "0+81"
+      ],
+      "restored": true
+    },
+    {
+      "source": "client",
+      "case": "spyglass",
+      "observer": "host",
+      "passed": false,
+      "failure": "No Spyglass state (states seen: 0 0+81)",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "camera": [
+        -35.0,
+        -150.2,
+        67.9
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle",
+        "named": {
+          "grants": 0,
+          "refused": 0,
+          "result": "idle"
+        }
+      },
+      "use": {
+        "uses": 0,
+        "refused": 0,
+        "result": "idle",
+        "manaBefore": -1.0,
+        "manaNow": 100.0
+      },
+      "spyglassSamples": 0,
+      "zoomSamples": 0,
+      "stateSets": [
+        "0",
+        "0+81"
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Ranged and item coverage (1330, #11): pistol and crossbow (draw, shots, reload, holster, redraw), grenade cook and throw, stun mine and spring razor placement, the Heart, the health elixir; granted in product mode (lab only), used natively; both source roles; checked from the partner presentation state; fixture restored after every case."
+}

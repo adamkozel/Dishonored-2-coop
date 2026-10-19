@@ -59,6 +59,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "native_player_keyhole_scene.h"
 #include "native_player_grenade.h"
 #include "native_player_heart.h"
+#include "native_player_timepiece.h"
 #include "native_player_choke_scene.h"
 #include "native_player_placeable.h"
 #include "native_player_potion.h"
@@ -136,7 +137,7 @@ bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16
     out=std::move(names);return true;
 }
 int main(int argc, char** argv) {
-    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
+    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-timepiece-scene")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
     const bool detail = argc == 3 && std::strcmp(argv[2], "--detail") == 0;
     const DWORD pid = std::stoul(argv[1]);
     ProcessHandle snapshot{CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)};
@@ -1487,6 +1488,64 @@ int main(int argc, char** argv) {
             <<",\"lowThrowCandidate\":"<<(p.lowThrowCandidate?"true":"false")<<",\"flags\":"<<p.flags
             <<",\"entry\":\"0x"<<std::hex<<p.entry<<"\",\"component\":\"0x"<<p.component
             <<"\",\"equipmentDeclaration\":\"0x"<<p.equipmentDeclaration<<"\",\"entity\":\"0x"<<p.entity<<"\"}\n";return 0;
+    }
+    // 1214et (#102, research): the Timepiece's native identities read generically (item declaration type, component,
+    // equipment declaration name and slot, entity, flags and selection) before an exact reader is written. Read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--player-timepiece-research")){
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};NativePlayerSword player{};
+        if(!readNativePlayerSword(reader,base,player))return 59;
+        const auto& inv=player.sword;std::uintptr_t entry=0,decl=0;
+        for(unsigned i=0;i<inv.itemCount;++i){std::uintptr_t d=0,vt=0,name=0;std::string text;
+            if(!reader(inv.items+i*56,&d,8)||!d||!reader(d,&vt,8))return 59;
+            if(vt!=base+0x1b9ea48)continue;
+            if(!reader(d+8,&name,8)||!worldIdentityString(reader,name,text))return 59;
+            if(text=="models/weapons/timeshift_device/timeshift_device.inventoryitem"){if(entry)return 59;entry=inv.items+i*56;decl=d;}
+        }
+        if(!entry){std::cerr<<"No Timepiece entry\n";return 59;}
+        unsigned type=0,handle=0,flags=0,parent=0,listCount=0,membership=0;int quantity=0,maximum=0,slot=-1;
+        std::uintptr_t component=0,equipDecl=0,componentVt=0,equipVt=0,equipName=0,entity=0,entityVt=0,owner=0,componentEntity=0,list=0;
+        std::string equipText,slot1Text;
+        reader(decl+0x60,&type,4);reader(entry+8,&handle,4);reader(entry+0x10,&component,8);reader(entry+0x18,&equipDecl,8);reader(entry+0x20,&quantity,4);reader(entry+0x24,&maximum,4);
+        if(component){reader(component,&componentVt,8);reader(component+8,&owner,8);reader(component+0x10,&componentEntity,8);reader(component+0x1c,&flags,4);}
+        if(equipDecl){reader(equipDecl,&equipVt,8);if(reader(equipDecl+8,&equipName,8))worldIdentityString(reader,equipName,equipText);reader(equipDecl+0x68,&slot,4);}
+        if(inv.slots[1]){std::uintptr_t d=0,name=0;if(reader(inv.slots[1],&d,8)&&d&&reader(d+8,&name,8))worldIdentityString(reader,name,slot1Text);}
+        entity=handle?worldIdentityEntity(reader,inv.game,handle):0;
+        if(entity){reader(entity,&entityVt,8);reader(entity+0xac,&parent,4);
+            if(reader(entity+0x268,&list,8)&&list&&reader(entity+0x270,&listCount,4))
+                for(unsigned i=0;i<(listCount&0xffffff)&&i<64;++i){std::uintptr_t c=0;if(reader(list+i*8,&c,8)&&c==component)++membership;}}
+        std::cout<<"{\"readOnly\":true,\"research\":true,\"tick\":"<<GetTickCount64()<<",\"character\":"<<player.character<<",\"type\":"<<type<<",\"handle\":"<<handle
+            <<",\"quantity\":"<<quantity<<",\"maximum\":"<<maximum<<",\"slot\":"<<slot<<",\"flags\":"<<flags<<",\"parent\":"<<parent<<",\"membership\":"<<membership
+            <<",\"equipmentName\":"<<jsonString(equipText)<<",\"slot1Item\":"<<jsonString(slot1Text)
+            <<",\"componentType\":"<<jsonString(component?objectType(process.value,base,component):std::string())
+            <<",\"equipmentType\":"<<jsonString(equipDecl?objectType(process.value,base,equipDecl):std::string())
+            <<",\"entityType\":"<<jsonString(entity?objectType(process.value,base,entity):std::string())<<",\"selectedSlots\":[";
+        for(unsigned i=0;i<inv.slots.size();++i)std::cout<<(i?",":"")<<(inv.slots[i]==entry?"true":"false");
+        std::cout<<std::hex<<"],\"entry\":\"0x"<<entry<<"\",\"component\":\"0x"<<component<<"\",\"componentVtableRva\":\"0x"<<(componentVt?componentVt-base:0)
+            <<"\",\"owner\":\"0x"<<owner<<"\",\"equipmentDeclaration\":\"0x"<<equipDecl<<"\",\"equipmentVtableRva\":\"0x"<<(equipVt?equipVt-base:0)
+            <<"\",\"entity\":\"0x"<<entity<<"\",\"entityVtableRva\":\"0x"<<(entityVt?entityVt-base:0)<<"\",\"componentEntity\":\"0x"<<componentEntity<<"\"}\n";return 0;
+    }
+    // 1214eu (#102): the exact Timepiece reader (native_player_timepiece.h) and its owned scene reader, read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--player-timepiece")){
+        NativePlayerTimepiece p{};unsigned stage=0;
+        if(!readNativePlayerTimepiece([&](auto a,auto d,auto n){return read(process.value,a,d,n);},base,p,&stage)){std::cerr<<"Timepiece reader refused stage="<<stage<<'\n';return 59;}
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"character\":"<<p.player.character
+            <<",\"quantity\":"<<p.quantity<<",\"maximum\":"<<p.maximum<<",\"handle\":"<<p.handle<<",\"slot\":"<<p.slot
+            <<",\"equipped\":"<<(p.equipped?"true":"false")<<",\"started\":"<<(p.started?"true":"false")<<",\"flags\":"<<p.flags
+            <<",\"entry\":\"0x"<<std::hex<<p.entry<<"\",\"component\":\"0x"<<p.component
+            <<"\",\"equipmentDeclaration\":\"0x"<<p.equipmentDeclaration<<"\",\"entity\":\"0x"<<p.entity<<"\"}\n";return 0;
+    }
+    if(argc==4&&!std::strcmp(argv[2],"--watch-timepiece-scene")){
+        char* end=nullptr;const auto milliseconds=std::strtoul(argv[3],&end,10);
+        if(!end||*end||milliseconds<100||milliseconds>18000)return 2;
+        const auto started=GetTickCount64();const auto reader=[&](auto a,auto b,auto n){return read(process.value,a,b,n);};
+        do{NativePlayerStates states{};NativePlayerTimepieceScene scene{};
+            const bool statesValid=readNativePlayerStates(reader,base,states);
+            const bool valid=statesValid&&readNativePlayerTimepieceScene(reader,base,states,scene);
+            std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"valid\":"<<(valid?"true":"false")<<",\"state\":"<<(statesValid?nativePlayerGroundTimepieceState(states,base):0u);
+            if(valid)std::cout<<",\"variant\":"<<scene.variant<<",\"handle\":"<<scene.handle<<",\"timeMs\":"<<scene.timeMs<<",\"durationMs\":"<<scene.durationMs
+                <<",\"armHandle\":"<<scene.arm.handle<<",\"itemHandle\":"<<scene.timepiece.handle<<",\"asset\":"<<jsonString(scene.asset);
+            std::cout<<"}\n";Sleep(15);
+        }while(GetTickCount64()-started<milliseconds);return 0;
     }
     if(argc==3&&!std::strcmp(argv[2],"--player-heart")){
         NativePlayerHeart p{};unsigned stage=0;

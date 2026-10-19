@@ -59,7 +59,8 @@ struct MovementPlayback {
     std::vector<MovementBank::Joint> stunFrom,stunLast;
     unsigned grenadeHeld=0,grenadeVariant=0;float grenadeAmount=0,grenadeWeight=0,grenadeTransition=0,grenadeMoveMix=0;
     std::uint64_t grenadeEvent=0;std::vector<MovementBank::Joint> grenadeFrom,grenadeLast;
-    unsigned heartHeld=0,heartVariant=0;float heartAmount=0,heartWeight=0,heartTransition=0,heartMoveMix=0;
+    // 1214eu (#102): heartKind keeps the last held kind (1 Heart, 2 Timepiece) while the weight fades out.
+    unsigned heartHeld=0,heartVariant=0,heartKind=1;float heartAmount=0,heartWeight=0,heartTransition=0,heartMoveMix=0;
     std::uint64_t heartEvent=0;std::vector<MovementBank::Joint> heartFrom,heartLast;
     unsigned chokeVariant=0;float chokeAmount=0,chokeWeight=0,chokeTransition=0;
     // Bank69 swimming: 359 tread loop, 360 stroke loop, 361 surface/up, 362 dive/down.
@@ -335,7 +336,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
         if(combatDt>=0&&combatDt<.25f){
             if(heartActive){
                 if(heart.event!=p.heartEvent){p.heartFrom=p.heartLast;p.heartTransition=0;p.heartEvent=heart.event;}
-                p.heartHeld=heart.held;p.heartVariant=heart.variant;
+                p.heartHeld=heart.held;p.heartKind=heart.held;p.heartVariant=heart.variant;
                 p.heartAmount=heart.variant?heartAmount:std::fmod(float(pose.time*.001)/p.bank.clips[336].angle,1.f);
                 p.heartTransition=(std::min)(1.f,p.heartTransition+combatDt/.06f);
             }else p.heartHeld=0;
@@ -779,7 +780,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             v=MovementBank::blend(v,grenade,p.grenadeWeight);
         }
         if(p.bank.hasHeart()&&p.heartWeight>.001f){
-            auto heart=p.bank.sampleParameter(HeartPresentation::clip(p.heartVariant),j,p.heartAmount);
+            auto heart=p.bank.sampleParameter(HeartPresentation::clip(p.heartKind,p.heartVariant),j,HeartPresentation::clipAmount(p.heartKind,p.heartVariant,p.heartAmount));
             if(p.heartFrom.size()==count)heart=MovementBank::blend(p.heartFrom[j],heart,p.heartTransition*p.heartTransition*(3-2*p.heartTransition));
             if(p.heartLast.size()!=count)p.heartLast.resize(count);p.heartLast[j]=heart;
             if(MovementBank::combatLocomotionJoint(j,p.parents))heart=MovementBank::blend(heart,v,(std::max)(p.heartMoveMix,p.clock.stanceMix));

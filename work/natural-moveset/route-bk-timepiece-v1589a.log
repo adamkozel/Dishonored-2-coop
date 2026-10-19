@@ -1,0 +1,80 @@
+{
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 1326,
+        "cine": 1260,
+        "pos": [
+          39.034,
+          -49.729,
+          -299.996429
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          5,
+          3,
+          2,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "182/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 1326,
+        "cine": 1166,
+        "pos": [
+          -0.871225,
+          -118.815132,
+          -304.933655
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          5,
+          3,
+          2,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 512,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "12/170/168",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1300.ps1:319[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 319 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mheld: restore with Restore-RouteHold-v1303.ps1[0m

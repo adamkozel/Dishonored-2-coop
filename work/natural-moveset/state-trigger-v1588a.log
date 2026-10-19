@@ -1,0 +1,8 @@
+{
+  "rows": [],
+  "failure": "Cannot find an overload for \"ToString\" and the argument count: \"2\".",
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Probe-StateTrigger-v1588.ps1:95[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  95 | [0m . $out/result.json"|Select-Object -First 3;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCannot find an overload for "ToString" and the argument count: "2".[0m

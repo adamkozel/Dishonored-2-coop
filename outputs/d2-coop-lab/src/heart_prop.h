@@ -2,12 +2,14 @@
 #include "heart_hand_tracks.h"
 // Finite isolated visual experiment. Uses only the native heart mesh and
 // animation component, never the source heart's gameplay components.
-RangedProp heartProp;
+// 1214eu (#102): two props like the traps: [0] the Heart (definition kind 4), [1] the Timepiece (kind 7), chosen by
+// the source's held kind; the Timepiece follows the Heart's hand tracks at its clip times (HeartPresentation).
+RangedProp heartProps[2];RangedProp* currentHeartProp=&heartProps[0];
 unsigned heartPropRequest=0;
 std::uint64_t heartPropCreated=0,heartPropAttached=0,heartPropHidden=0,heartPropRefused=0,heartPropRetired=0;
 const char* heartPropResult="idle";
 void hideHeartProp(){
-    auto& p=heartProp;if(!p.actor||(!p.until&&!p.pendingHide))return;p.until=0;p.pendingHide=true;
+    auto& p=*currentHeartProp;if(!p.actor||(!p.until&&!p.pendingHide))return;p.until=0;p.pendingHide=true;
     if(!coopGameplayReady(outgoing)||!rangedPropApiMatches()||!rangedPropIdentityFor(p,false))return;
     reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(p.actor));
     // The parked/reusable helper deliberately rejects pendingHide. Confirm
@@ -15,11 +17,11 @@ void hideHeartProp(){
     unsigned char flags=0;
     if(memoryRead(p.actor+0xd0,&flags,1)&&(flags&1)){p.pendingHide=false;++heartPropHidden;heartPropResult="native_heart_prop_hidden";}
 }
-bool updateHeartPropTrack(unsigned variant,float amount){
-    auto& p=heartProp;
-    if(variant>3||!rangedPropIdentityFor(p,true)||!rangedPropApiMatches())return false;
-    const auto& track=heartHandTracks[localRole?0:1][variant];
-    const float f=(std::max)(0.f,(std::min)(1.f,amount))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
+bool updateHeartPropTrack(unsigned held,unsigned variant,float amount){
+    auto& p=*currentHeartProp;
+    if(!HeartPresentation::variantFor(held,variant)||!rangedPropIdentityFor(p,true)||!rangedPropApiMatches())return false;
+    const auto& track=heartHandTracks[localRole?0:1][HeartPresentation::trackVariant(held,variant)];
+    const float f=(std::max)(0.f,(std::min)(1.f,HeartPresentation::clipAmount(held,variant,amount)))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
     MovementBank::Joint x{},y{};std::copy(track[a],track[a]+7,x.begin());std::copy(track[b],track[b]+7,y.begin());
     const auto q=MovementBank::blend(x,y,f-a);std::array<float,12> qts{};std::copy(q.begin(),q.end(),qts.begin());qts[8]=qts[9]=qts[10]=1;
     BodyMatrix m{};if(!bodyFromQts(qts,m))return false;
@@ -29,16 +31,20 @@ bool updateHeartPropTrack(unsigned variant,float amount){
 }
 void serviceHeartProp(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
-    auto& p=heartProp;auto request=heartPropRequest;heartPropRequest=0;
-    unsigned variant=0;float amount=0;bool presented=false;
+    auto request=heartPropRequest;heartPropRequest=0;
+    unsigned held=0,variant=0;float amount=0;bool presented=false;
     AcquireSRWLockShared(&movementLock);const auto& movement=movementPlayback;
     if(movement.end>tick&&movement.lease>tick&&movement.bank.hasHeart()&&movement.clock.weight>.5f&&movement.heartWeight>.1f&&
        movement.actor==probeActor&&movement.game==observedGame&&movement.epoch==outgoing.worldEpoch&&
        shadowStreamCurrent(tick)&&shadowStream.peerReady&&shadowStream.lastState&&tick-shadowStream.lastState<250){
-        variant=movement.heartVariant;amount=movement.heartAmount;presented=HeartPresentation::visible(movement.heartHeld,variant,amount);
+        held=movement.heartHeld;variant=movement.heartVariant;amount=movement.heartAmount;presented=HeartPresentation::visible(held,variant,amount);
     }
     ReleaseSRWLockShared(&movementLock);
     const bool automatic=presented&&!request;
+    if(automatic&&held>=1&&held<=2&&currentHeartProp!=&heartProps[held-1]){
+        hideHeartProp();if(currentHeartProp->pendingHide)return;currentHeartProp=&heartProps[held-1];
+    }
+    auto& p=*currentHeartProp;
     if(p.network&&!automatic)hideHeartProp();
     if(automatic&&p.network&&p.until)p.until=tick+250;
     if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++heartPropRetired;heartPropResult="old_world_retired";}
@@ -47,7 +53,7 @@ void serviceHeartProp(ULONGLONG tick){
     if(p.pendingHide)hideHeartProp();
     if(automatic&&!p.until&&!p.pendingHide)request=1;
     if(automatic&&p.network&&p.until){
-        if(!updateHeartPropTrack(variant,amount)){hideHeartProp();++heartPropRefused;heartPropResult="network_attachment_changed";}
+        if(!updateHeartPropTrack(held,variant,amount)){hideHeartProp();++heartPropRefused;heartPropResult="network_attachment_changed";}
         return;
     }
     if(request!=1)return;
@@ -62,13 +68,14 @@ void serviceHeartProp(ULONGLONG tick){
         if(!memoryRead(probeActor+0x300,pos,12)||!memoryRead(probeActor+0x30c,axis,36)){refuse("avatar_transform_unavailable");return;}
         for(float v:pos)if(!std::isfinite(v)){refuse("invalid_avatar_transform");return;}
         for(float v:axis)if(!std::isfinite(v)){refuse("invalid_avatar_transform");return;}
-        const auto definition=lookupEntityDefinition(rangedPropDefinition(4));if(!definition){refuse("visual_definition_missing");return;}
+        const unsigned kind=currentHeartProp==&heartProps[1]?7u:4u;
+        const auto definition=lookupEntityDefinition(rangedPropDefinition(kind));if(!definition){refuse("visual_definition_missing");return;}
         unsigned char parameters[12]{};reinterpret_cast<void*(*)(void*)>(gameImage+0x146520)(parameters);
         const auto actor=reinterpret_cast<std::uintptr_t>(reinterpret_cast<void*(*)(void*,void*,void*)>(gameImage+0x8a78f0)(reinterpret_cast<void*>(observedGame),reinterpret_cast<void*>(definition),parameters));
         if(!actor){refuse("native_creation_refused");return;}
         // Cache immediately, including a failed creation, to avoid duplicating
         // an unconfirmed native object on a later manual request.
-        p={};p.game=observedGame;p.actor=actor;p.definition=definition;p.kind=4;p.epoch=outgoing.worldEpoch;p.parent=probeActor;p.parentHandle=probeHandle;++heartPropCreated;
+        p={};p.game=observedGame;p.actor=actor;p.definition=definition;p.kind=kind;p.epoch=outgoing.worldEpoch;p.parent=probeActor;p.parentHandle=probeHandle;++heartPropCreated;
         std::uintptr_t vt=0,d=0;unsigned parent=0;
         if(!memoryRead(actor,&vt,8)||vt!=base+0x1c87d58||!memoryRead(actor+0x2e8,&d,8)||d!=definition||
            !memoryRead(actor+0xac,&parent,4)||parent!=0x3fff0010||worldIdentityEntity(memoryRead,observedGame,probeHandle)!=probeActor){refuse("creation_owner_unconfirmed");return;}
@@ -100,12 +107,12 @@ void serviceHeartProp(ULONGLONG tick){
     reinterpret_cast<void(*)(void*)>(gameImage+0x87c590)(reinterpret_cast<void*>(p.actor));
     reinterpret_cast<void(*)(void*)>(gameImage+0x87c5d0)(reinterpret_cast<void*>(p.actor));
     p.network=automatic;p.until=tick+(automatic?250:15000);
-    if(automatic&&!updateHeartPropTrack(variant,amount)){hideHeartProp();refuse("network_track_unconfirmed");return;}
+    if(automatic&&!updateHeartPropTrack(held,variant,amount)){hideHeartProp();refuse("network_track_unconfirmed");return;}
     heartPropResult="native_heart_prop_attached";
 }
 void writeHeartProp(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.heart-prop.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
-    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& p=heartProp;
-    fprintf(f,"{\"testFixtureOnly\":true,\"active\":%s,\"pendingHide\":%s,\"handle\":%u,\"parentHandle\":%u,\"joint\":%u,\"created\":%llu,\"attached\":%llu,\"hidden\":%llu,\"refused\":%llu,\"retired\":%llu,\"result\":\"%s\"}\n",p.until?"true":"false",p.pendingHide?"true":"false",p.handle,p.parentHandle,p.joint,heartPropCreated,heartPropAttached,heartPropHidden,heartPropRefused,heartPropRetired,heartPropResult);
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& p=*currentHeartProp;
+    fprintf(f,"{\"testFixtureOnly\":true,\"active\":%s,\"pendingHide\":%s,\"handle\":%u,\"parentHandle\":%u,\"joint\":%u,\"kind\":%u,\"created\":%llu,\"attached\":%llu,\"hidden\":%llu,\"refused\":%llu,\"retired\":%llu,\"result\":\"%s\"}\n",p.until?"true":"false",p.pendingHide?"true":"false",p.handle,p.parentHandle,p.joint,p.kind,heartPropCreated,heartPropAttached,heartPropHidden,heartPropRefused,heartPropRetired,heartPropResult);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
