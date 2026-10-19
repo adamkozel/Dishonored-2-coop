@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T19:00:00+02:00",
+  "UpdatedAt": "2026-10-19T20:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22173,8 +22173,8 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214fa (deployed; protocol 80, bank 75/382): orphan NPCs identified (#118), scripted civilians and posted NPCs (#113), Timepiece (#102)",
-    "NextCandidate": "#118 continues: takedown takes inside a mission hold at an awake state; then #115, #117",
+    "Candidate": "candidate-npc-combat-v1214fb (deployed; protocol 80, bank 75/382): vanished NPC Dead and orphan NPCs (#118), scripted civilians (#113), Timepiece (#102)",
+    "NextCandidate": "stage 4 continues: #115 (Far Reach pulls), #117 (power upgrade outcomes), #14 umbrella",
     "Complete": "103 of 105 (2 not applicable or excluded); the checklist is complete. #102 (native player states outside the checklist) decided in chapter 101; next: stage 4",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
@@ -22282,7 +22282,7 @@
   },
   "NonhumanNpcAuthority": {
     "Card": 118,
-    "Status": "in progress (binding done: dormant hounds, orphans, clockworks; takedown takes per kind open)",
+    "Status": "done: wolfhound both roles (1608a/b), gravehound both roles with native revival (1614a, 1615a), clockwork soldiers have no native takedown (1610a/b); orphans and dormant hounds bound",
     "Chapter": "documentation/handoff-2026-10-11/102-scripted-npcs-in-npc-authority.md",
     "Evidence": [
       "mission-coverage-v1599a",
@@ -22296,7 +22296,19 @@
       "mission-coverage-v1602c",
       "mission-coverage-v1602d",
       "mission-coverage-v1602e",
-      "state-trigger-v1603a"
+      "state-trigger-v1603a",
+      "state-trigger-v1605d",
+      "mission-coverage-v1608a",
+      "mission-coverage-v1608b",
+      "mission-coverage-v1610a",
+      "mission-coverage-v1610b",
+      "mission-coverage-v1614a",
+      "mission-coverage-v1615a"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214ez",
+      "candidate-npc-combat-v1214fa",
+      "candidate-npc-combat-v1214fb"
     ]
   }
 }

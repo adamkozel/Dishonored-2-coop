@@ -1,0 +1,99 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-takedown: No native takedown on the source (states 0,6,39,54,64,67)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "takedown",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native takedown on the source (states 0,6,39,54,64,67)",
+      "checks": [],
+      "targetCandidates": [
+        "env_spawner_62=models/characters/base/wolfhound_dead.def",
+        "env_spawner=models/characters/base/wolfhound_dead.def",
+        "env_spawner_61=models/characters/base/wolfhound_dead.def",
+        "script_spawner_docks_wolfhound_6=models/characters/def/generic/wolfhound_01.def",
+        "script_spawner_docks_wolfhound_3=models/characters/def/generic/wolfhound_01.def",
+        "script_spawner_docks_wolfhound_1=models/characters/def/generic/wolfhound_01_treacherous.def",
+        "script_spawner_docks_wolfhound_4=models/characters/def/generic/wolfhound_01.def",
+        "script_spawner_docks_wolfhound_2=models/characters/def/generic/wolfhound_01_treacherous.def",
+        "script_spawner_docks_wolfhound_5=models/characters/def/generic/wolfhound_01_treacherous.def",
+        "env_spawner_75=models/characters/base/wolfhound_dead.def"
+      ],
+      "reachTries": [
+        {
+          "spawner": "env_spawner_62",
+          "err": 0.06,
+          "dz": 0.04
+        }
+      ],
+      "targetChosen": "env_spawner_62=models/characters/base/wolfhound_dead.def",
+      "target": {
+        "spawner": "env_spawner_62",
+        "definition": "models/characters/base/wolfhound_dead.def",
+        "position": [
+          -89.9677,
+          -84.7528,
+          2.83786
+        ],
+        "forward": [
+          0.9950101337188189,
+          0.09977391340855676
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -90.71477630039912,
+        -81.8126678598774,
+        4.437860000000001
+      ],
+      "sourceStart": [
+        -91.6076,
+        -84.8312,
+        2.74815
+      ],
+      "takedownAtPress": {
+        "t": 1407,
+        "mode": 2,
+        "active": 1,
+        "ready": 0,
+        "names": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "replacedAt": 590,
+      "cameraMoved": [
+        -90.71477630039912,
+        -81.8126678598774,
+        4.437860000000001
+      ],
+      "targetMoved": 0.0,
+      "crept": 997,
+      "creptEnd": 1369,
+      "stanceAfterCreep": 1,
+      "actedAt": 1407,
+      "takedownAfter": 1605,
+      "trackSamples": 51,
+      "takedownSamples": 4,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "sourceStates": [
+        0,
+        6,
+        39,
+        54,
+        64,
+        67
+      ],
+      "windowScenes": []
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}
