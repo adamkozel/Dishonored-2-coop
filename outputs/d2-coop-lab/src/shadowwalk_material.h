@@ -2,6 +2,11 @@
 #include "native_material_params.h"
 // Isolated544 visual feasibility candidate. No shared material edits, model
 // changes or attachment propagation. Body particles/native FP remain533.
+// 1214di (#11 emily_shadow_walk_enter_move_attack_exit): the product partner wears native material effect 1 while it
+// presents Shadow Walk (variants 32-36). The native form has no third-person body; survey 1381b filmed effects 1-8 at
+// 50% and 100% on the partner: effect 1 keeps the whole outline as a matte black shadow, 3 dissolves into embers, 4
+// is the rejected bright patches, 5 scatters into fragments, 6 glows purple, 3-6 vanish at full fade, and 2, 7 and 8
+// change nothing. Only the partner's own render parameters change, and they are restored on exit.
 struct ShadowWalkMaterial {
     std::uintptr_t game=0,actor=0,render=0;unsigned handle=0;
     std::array<std::uintptr_t,2> declarations{};std::array<unsigned,2> ids{};
@@ -60,8 +65,8 @@ bool startShadowWalkMaterial(ULONGLONG tick){
     }
     if(ids[0]==ids[1])return false;
     s.actor=rig.actor;s.handle=rig.handle;s.render=rig.render;s.game=rig.game;s.declarations=declarations;s.ids=ids;
-    s.token=shadowStream.token;s.peer=shadowStream.peerToken;s.epoch=outgoing.worldEpoch;s.deadline=tick+15000;
-    s.written={};s.written[0][0]=4;shadowWalkMaterialApply(false,s.written);s.active=true;
+    s.token=shadowStream.token;s.peer=shadowStream.peerToken;s.epoch=outgoing.worldEpoch;s.deadline=tick+60000;
+    s.written={};s.written[0][0]=1;shadowWalkMaterialApply(false,s.written);s.active=true;
     NativeMaterialParams after{};if(!shadowWalkMaterialOwned(after)){s.blocked=true;++s.refused;stopShadowWalkMaterial();return false;}
     ++s.starts;return true;
 }
@@ -69,7 +74,7 @@ void serviceShadowWalkMaterial(ULONGLONG tick){
     if(!shadowWalkMaterialApi())return;auto& s=shadowWalkMaterial;unsigned variant=0;float amount=0;
     AcquireSRWLockShared(&movementLock);const auto& p=movementPlayback;
     if(localRole==0&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
-       p.clock.weight>.9f&&p.powerWeight>.9f&&p.powerVariant>=32&&p.powerVariant<=34&&!p.presentedDrawn){variant=p.powerVariant;amount=p.powerAmount;}
+       p.clock.weight>.9f&&p.powerWeight>.9f&&p.powerVariant>=32&&p.powerVariant<=36&&!p.presentedDrawn){variant=p.powerVariant;amount=p.powerAmount;}
     ReleaseSRWLockShared(&movementLock);
     if(!variant||!coopGameplayReady(outgoing)||!shadowStreamCurrent(tick)||!shadowStream.peerReady){stopShadowWalkMaterial();if(!variant)s.blocked=false;return;}
     if(s.active&&(tick>=s.deadline||s.token!=shadowStream.token||s.peer!=shadowStream.peerToken||s.handle!=probeHandle)){
@@ -77,11 +82,10 @@ void serviceShadowWalkMaterial(ULONGLONG tick){
     }
     if(!s.active){if(s.blocked)return;if(!startShadowWalkMaterial(tick)){++s.refused;s.blocked=true;return;}}
     NativeMaterialParams before{};if(!shadowWalkMaterialOwned(before)){s.active=false;s.blocked=true;++s.refused;return;}
-    // Bounded hypothesis for visual comparison: native effect4 at partial fade.
-    // The original power dissolves FP helper arms completely. A full fade would
-    // erase the partner; this retains an inspectable complete-body silhouette.
+    // 1214di: effect 1 at full fade is a complete black silhouette (1381b); it fades in over the entry (32) and out
+    // over the exit (34), and holds through the crawl, the attack and its recovery (33, 35, 36).
     const float mix=(std::max)(0.f,(std::min)(1.f,amount));
-    const float fade=.45f*(variant==32?mix:variant==34?1.f-mix:1.f);
+    const float fade=variant==32?mix:variant==34?1.f-mix:1.f;
     auto words=s.written;std::memcpy(&words[1][0],&fade,4);s.variant=variant;
     if(words!=s.written){shadowWalkMaterialApply(false,words);s.written=words;s.fade=fade;++s.updates;
         NativeMaterialParams after{};if(!shadowWalkMaterialOwned(after)){s.active=false;s.blocked=true;++s.refused;}}
