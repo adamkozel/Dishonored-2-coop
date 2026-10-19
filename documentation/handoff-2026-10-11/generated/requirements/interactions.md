@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:26:33.781876+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 

@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:26:33.781876+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:33:11.166616+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -10304,7 +10304,7 @@ Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failur
   ],
   "deliverable_kind": "animation",
   "notes": "Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failures and pause recovery read correctly. A late relaxed-stance switch after the resume tests should be checked, and no Emily or other-power interruption recordings exist (outside the bound scope). Corvo standing/crouched and drawn/holstered Bend Time failures pass thirteen checks each with automatic finite native hand effects in v48. Source-confirmed event and delayed body clock prevent duplicate and late playback. Other characters, powers, air/slide, arbitrary interruption phases, precise tattoo alignment and seamless visibility remain open; this requirement is not complete.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [
     {
       "id": "power_variants",
@@ -11315,12 +11315,112 @@ Visual sweep 1260: accepted (corvo accept). Corvo's Bend Time out-of-mana failur
     }
   },
   "evidence": [
-    "../movement-integration/visual-sweep-v1260/powers-review.json"
-  ]
+    "../movement-integration/visual-sweep-v1260/powers-review.json",
+    "coverage-v1417a/result.json",
+    "coverage-v1425c/result.json",
+    "coverage-v1434a/result.json",
+    "coverage-v1438a/result.json",
+    "coverage-v1350a/result.json",
+    "coverage-v1353a/result.json",
+    "coverage-v1332d/result.json"
+  ],
+  "completion": {
+    "audit": "completion-audit-v1439-power-interruptions.json",
+    "decision": "complete",
+    "scope": "Both roles: the native failed cast without mana under the selected power, an aim cut off by a knockdown hit, an aim cancelled with X, and a cast with no valid target, each presented on the partner and ending without a leftover power pose or effect.",
+    "takes": [
+      {
+        "take": "coverage-v1417a",
+        "cases": [
+          "client-nomana3"
+        ]
+      },
+      {
+        "take": "coverage-v1425c",
+        "cases": [
+          "host-nomana4"
+        ]
+      },
+      {
+        "take": "coverage-v1434a",
+        "cases": [
+          "client-labpowerblast"
+        ]
+      },
+      {
+        "take": "coverage-v1438a",
+        "cases": [
+          "host-labpowerblast"
+        ]
+      },
+      {
+        "take": "coverage-v1350a",
+        "cases": [
+          "host-blinkcancel"
+        ]
+      },
+      {
+        "take": "coverage-v1353a",
+        "cases": [
+          "client-farreachcancel"
+        ]
+      },
+      {
+        "take": "coverage-v1332d",
+        "cases": [
+          "host-possession",
+          "client-domino"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "coverage-v1417a/client-nomana3-observer.mp4",
+        "verdict": "Emily twists slightly and flicks her left hand at the hip, the native out-of-mana response, then settles."
+      },
+      {
+        "video": "coverage-v1425c/host-nomana4-observer.mp4",
+        "verdict": "Corvo flicks his left hand out at the hip with the native out-of-mana wisps curling around it, then the hand drops back."
+      },
+      {
+        "video": "coverage-v1434a/client-labpowerblast-observer.mp4",
+        "verdict": "Emily holds her left hand out aiming Far Reach; the blast throws her back toward the pillar and she recovers with no Far Reach effect left."
+      },
+      {
+        "video": "coverage-v1438a/host-labpowerblast-observer.mp4",
+        "verdict": "Corvo holds his left arm out aiming Blink; the blast throws him back against the pillar, he recovers standing, and no Blink follows."
+      },
+      {
+        "video": "coverage-v1350a/host-blinkcancel-observer.mp4",
+        "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+      },
+      {
+        "video": "coverage-v1353a/client-farreachcancel-observer.mp4",
+        "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away."
+      },
+      {
+        "video": "coverage-v1332d/host-possession-observer.mp4",
+        "verdict": "Corvo raises his left arm up and out to aim Possession at nothing, holds it, then lowers it and stands; nothing is possessed."
+      },
+      {
+        "video": "coverage-v1332d/client-domino-observer.mp4",
+        "verdict": "Emily makes the Domino cast with no target: a short gesture of her left hand at her side and a shift of stance, then she settles (dark, small at this distance)."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true
 }
 ````
 
 - [evidence: ../movement-integration/visual-sweep-v1260/powers-review.json](<../../../../work/movement-integration/visual-sweep-v1260/powers-review.json>)
+- [evidence: coverage-v1417a/result.json](<../../../../work/natural-moveset/coverage-v1417a/result.json>)
+- [evidence: coverage-v1425c/result.json](<../../../../work/natural-moveset/coverage-v1425c/result.json>)
+- [evidence: coverage-v1434a/result.json](<../../../../work/natural-moveset/coverage-v1434a/result.json>)
+- [evidence: coverage-v1438a/result.json](<../../../../work/natural-moveset/coverage-v1438a/result.json>)
+- [evidence: coverage-v1350a/result.json](<../../../../work/natural-moveset/coverage-v1350a/result.json>)
+- [evidence: coverage-v1353a/result.json](<../../../../work/natural-moveset/coverage-v1353a/result.json>)
+- [evidence: coverage-v1332d/result.json](<../../../../work/natural-moveset/coverage-v1332d/result.json>)
 - [in_game_recordings: failure-fx-receiver-stop-v51.mp4](<../../../../work/natural-moveset/failure-fx-receiver-stop-v51.mp4>)
 - [in_game_recordings: failure-fx-receiver-stop-v51-source.mp4](<../../../../work/natural-moveset/failure-fx-receiver-stop-v51-source.mp4>)
 - [in_game_recordings: failure-fx-source-resume-v51.mp4](<../../../../work/natural-moveset/failure-fx-source-resume-v51.mp4>)
