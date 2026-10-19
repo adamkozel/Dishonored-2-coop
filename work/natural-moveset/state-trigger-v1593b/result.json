@@ -1,0 +1,255 @@
+{
+  "passed": false,
+  "scope": "Native player states entered by held inputs in the current lab fixture (read-only probes; no commands).",
+  "failure": "host: Final gameplay/health/transport not restored; client: Final gameplay/health/transport not restored",
+  "rows": [
+    {
+      "trigger": "X:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "81:.?AVarkPlayerStateUndraw@@",
+        "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@",
+        "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 89,
+        "81:.?AVarkPlayerStateUndraw@@": 336,
+        "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@": 336,
+        "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@": 760
+      },
+      "closedWithB": 0,
+      "logicAfter": 1,
+      "midnight": [
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_in.midnightscene",
+          "subscene": "Scene_1",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 188,
+          "lastMs": 657,
+          "maxClock1": 458
+        },
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_unfold_idle_loop.midnightscene",
+          "subscene": "Scene_1",
+          "durationMs": 3333,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 703,
+          "lastMs": 4188,
+          "maxClock1": 3275
+        }
+      ],
+      "partnerHeld": [
+        2
+      ],
+      "partnerVariants": [
+        0,
+        4,
+        5
+      ],
+      "partnerProps": [
+        7
+      ],
+      "posBefore": [
+        39.034,
+        -49.729,
+        -299.996
+      ],
+      "posAfter": [
+        39.034,
+        -49.729,
+        -299.996
+      ]
+    },
+    {
+      "trigger": "X:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@",
+        "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@"
+      ],
+      "entered": [
+        "81:.?AVarkPlayerStateUndraw@@",
+        "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 48,
+        "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@": 48,
+        "81:.?AVarkPlayerStateUndraw@@": 222,
+        "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@": 222
+      },
+      "closedWithB": 0,
+      "logicAfter": 1,
+      "midnight": [
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_unfold_idle_loop.midnightscene",
+          "subscene": "Scene_1",
+          "durationMs": 3333,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 0,
+          "lastMs": 297,
+          "maxClock1": 1861
+        },
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_out.midnightscene",
+          "subscene": "Scene_1",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 266,
+          "lastMs": 781,
+          "maxClock1": 491
+        }
+      ],
+      "partnerHeld": [
+        2
+      ],
+      "partnerVariants": [
+        0,
+        5,
+        6
+      ],
+      "partnerProps": [
+        7
+      ],
+      "posBefore": [
+        39.034,
+        -49.729,
+        -299.996
+      ],
+      "posAfter": [
+        39.034,
+        -49.729,
+        -299.996
+      ]
+    },
+    {
+      "trigger": "LT:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 46,
+        "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 46
+      },
+      "closedWithB": 0,
+      "logicAfter": 1,
+      "midnight": [
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene",
+          "subscene": "Scene_4",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 250,
+          "lastMs": 1094,
+          "maxClock1": 447
+        },
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_teleport.midnightscene",
+          "subscene": "Scene_2",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 1141,
+          "lastMs": 1547,
+          "maxClock1": 370
+        }
+      ],
+      "partnerHeld": [
+        2
+      ],
+      "partnerVariants": [
+        0,
+        7,
+        8
+      ],
+      "partnerProps": [
+        7
+      ],
+      "posBefore": [
+        39.034,
+        -49.729,
+        -299.996
+      ],
+      "posAfter": [
+        39.034,
+        -49.729,
+        300.014
+      ]
+    },
+    {
+      "trigger": "LT:300",
+      "before": [
+        "0:.?AVarkPlayerStateRunning@@"
+      ],
+      "entered": [
+        "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+      ],
+      "firstSeenMs": {
+        "0:.?AVarkPlayerStateRunning@@": 51,
+        "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 51
+      },
+      "closedWithB": 0,
+      "logicAfter": 1,
+      "midnight": [
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene",
+          "subscene": "Scene_4",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 250,
+          "lastMs": 1125,
+          "maxClock1": 457
+        },
+        {
+          "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_teleport.midnightscene",
+          "subscene": "Scene_2",
+          "durationMs": 500,
+          "state": 3,
+          "playerChannel": -1,
+          "bindings": 2,
+          "firstMs": 1125,
+          "lastMs": 1641,
+          "maxClock1": 457
+        }
+      ],
+      "partnerHeld": [
+        2
+      ],
+      "partnerVariants": [
+        0,
+        7,
+        8
+      ],
+      "partnerProps": [
+        7
+      ],
+      "posBefore": [
+        39.034,
+        -49.729,
+        300.014
+      ],
+      "posAfter": [
+        39.034,
+        -49.729,
+        -299.996
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scope": "Native player states entered by held inputs in the current lab fixture (read-only probes; no commands).",
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Probe-StateTrigger-v1593.ps1:110[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 110 | [0m . $out/result.json"|Select-Object -First 3;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost: Final gameplay/health/transport not restored; client: Final gameplay/health/transport not restored[0m

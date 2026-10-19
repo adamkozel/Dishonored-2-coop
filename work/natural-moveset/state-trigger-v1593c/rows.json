@@ -1,0 +1,262 @@
+[
+  {
+    "trigger": "X:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "81:.?AVarkPlayerStateUndraw@@",
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@",
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 77,
+      "81:.?AVarkPlayerStateUndraw@@": 267,
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@": 267,
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@": 818
+    },
+    "closedWithB": 0,
+    "logicAfter": 1,
+    "midnight": [
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_in.midnightscene",
+        "subscene": "Scene_1",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 344,
+        "lastMs": 891,
+        "maxClock1": 466
+      },
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_unfold_idle_loop.midnightscene",
+        "subscene": "Scene_1",
+        "durationMs": 3333,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 938,
+        "lastMs": 4188,
+        "maxClock1": 3166
+      }
+    ],
+    "partnerHeld": [
+      2
+    ],
+    "partnerVariants": [
+      0,
+      4,
+      5
+    ],
+    "partnerProps": [
+      7
+    ],
+    "posBefore": [
+      33.2,
+      -43.5,
+      -299.996
+    ],
+    "posAfter": [
+      33.2,
+      -43.5,
+      -299.996
+    ]
+  },
+  {
+    "trigger": "X:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@",
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@"
+    ],
+    "entered": [
+      "81:.?AVarkPlayerStateUndraw@@",
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 46,
+      "70:.?AVarkPlayerStateUnfoldTimeShiftLoop@@": 46,
+      "81:.?AVarkPlayerStateUndraw@@": 210,
+      "69:.?AVarkPlayerStateUnfoldTimeShiftDevice@@": 210
+    },
+    "closedWithB": 0,
+    "logicAfter": 1,
+    "midnight": [
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_unfold_idle_loop.midnightscene",
+        "subscene": "Scene_1",
+        "durationMs": 3333,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 0,
+        "lastMs": 312,
+        "maxClock1": 1527
+      },
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_out.midnightscene",
+        "subscene": "Scene_1",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 312,
+        "lastMs": 750,
+        "maxClock1": 450
+      }
+    ],
+    "partnerHeld": [
+      2
+    ],
+    "partnerVariants": [
+      0,
+      5,
+      6
+    ],
+    "partnerProps": [
+      7
+    ],
+    "posBefore": [
+      33.2,
+      -43.5,
+      -299.996
+    ],
+    "posAfter": [
+      33.2,
+      -43.5,
+      -299.996
+    ]
+  },
+  {
+    "trigger": "LT:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 43,
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 216
+    },
+    "closedWithB": 0,
+    "logicAfter": 1,
+    "midnight": [
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene",
+        "subscene": "Scene_4",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 282,
+        "lastMs": 1172,
+        "maxClock1": 470
+      },
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene",
+        "subscene": "Scene_2",
+        "durationMs": 3333,
+        "state": 10,
+        "playerChannel": -1,
+        "bindings": 0,
+        "firstMs": 1203,
+        "lastMs": 1250,
+        "maxClock1": 0
+      },
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_teleport.midnightscene",
+        "subscene": "Scene_2",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 1203,
+        "lastMs": 1828,
+        "maxClock1": 473
+      }
+    ],
+    "partnerHeld": [
+      2
+    ],
+    "partnerVariants": [
+      0,
+      7,
+      8
+    ],
+    "partnerProps": [
+      7
+    ],
+    "posBefore": [
+      33.2,
+      -43.5,
+      -299.996
+    ],
+    "posAfter": [
+      33.2,
+      -43.5,
+      300.014
+    ]
+  },
+  {
+    "trigger": "LT:300",
+    "before": [
+      "0:.?AVarkPlayerStateRunning@@"
+    ],
+    "entered": [
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@"
+    ],
+    "firstSeenMs": {
+      "0:.?AVarkPlayerStateRunning@@": 44,
+      "68:.?AVarkPlayerStateUseTimeShiftDevice@@": 224
+    },
+    "closedWithB": 0,
+    "logicAfter": 1,
+    "midnight": [
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_loop.midnightscene",
+        "subscene": "Scene_4",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 250,
+        "lastMs": 1188,
+        "maxClock1": 452
+      },
+      {
+        "asset": "midnight/gameplay/player/base/gadgets/gadget_timeshift_scan_teleport.midnightscene",
+        "subscene": "Scene_2",
+        "durationMs": 500,
+        "state": 3,
+        "playerChannel": -1,
+        "bindings": 2,
+        "firstMs": 1141,
+        "lastMs": 1719,
+        "maxClock1": 452
+      }
+    ],
+    "partnerHeld": [
+      0,
+      2
+    ],
+    "partnerVariants": [
+      0,
+      7,
+      8
+    ],
+    "partnerProps": [
+      7
+    ],
+    "posBefore": [
+      33.2,
+      -43.5,
+      300.014
+    ],
+    "posAfter": [
+      33.2,
+      -43.5,
+      -299.996
+    ]
+  }
+]
