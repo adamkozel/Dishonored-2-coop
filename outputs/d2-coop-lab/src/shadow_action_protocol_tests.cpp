@@ -374,6 +374,13 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     CoopShadowActionPacket p{};p.sampleTimeUs=1000000;p.sequence=1;p.sourceSession=11;p.targetSession=22;p.sourceWorldEpoch=3;p.targetWorldEpoch=7;p.mapId=99;p.sourceToken=4;p.rootSequence=99;p.character=1;
     check(validShadowAction(p,c,h),"initial hello");p.targetToken=9;check(validShadowAction(p,c,h)&&shadowActionTokensMatch(p,9,4),"two tokens");
     p.kind=1;p.event=1;p.swordState=2;for(unsigned state=0;state<=6;++state){p.state=state;p.airStage=state==3?2:0;p.combatVariant=state==1?1:state==2?10:0;p.combatPhase=p.combatVariant?1:0;p.combatDurationMs=p.combatVariant?1000:0;check(validShadowAction(p,c,h),"known native state");}p.state=5;
+    // 1214ea (protocol 78): the held object needs its handle, key and a finite transform; no phase carries none.
+    {auto held=p;held.heldObjectPhase=1;check(!validShadowAction(held,c,h),"held phase needs an object");
+     held.heldObjectHandle=0x073c0356;held.heldObjectKey=7;held.heldObjectPosition={-40.f,-140.f,67.f};held.heldObjectAxis={1,0,0,0,1,0,0,0,1};
+     check(validShadowAction(held,c,h),"held object with handle, key and transform");
+     held.heldObjectPhase=5;check(!validShadowAction(held,c,h),"unknown held phase refused");
+     held.heldObjectPhase=2;held.heldObjectPosition[0]=1e30f;check(!validShadowAction(held,c,h),"unbounded flight refused");
+     auto none=p;none.heldObjectHandle=3;check(!validShadowAction(none,c,h),"handle without a phase refused");}
     {auto hit=p;hit.state=1;hit.combatPhase=1;
       for(unsigned v:{15u,16u,17u}){hit.combatVariant=v;hit.combatDurationMs=v==17?800:v==15?866:666;check(validShadowAction(hit,c,h),"native hit recovery wire");
         auto bad=hit;bad.combatDurationMs++;check(!validShadowAction(bad,c,h),"unobserved recovery wire timing refused");

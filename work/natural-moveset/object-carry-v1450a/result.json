@@ -1,0 +1,41 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: client-farreachbottle: The bottle was not pulled into the hand",
+  "cases": [
+    {
+      "source": "client",
+      "case": "farreachbottle",
+      "observer": "host",
+      "passed": false,
+      "failure": "The bottle was not pulled into the hand",
+      "checks": [
+        "Far Reach at the bottle: HoldObject samples 0; bottle before -43.4437,-163.081,67.252, after -43.4441,-163.082,67.252"
+      ],
+      "grantResult": {
+        "grants": 13,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "inputAt": "2026-10-19T07:02:12.3861664+02:00",
+      "holdDumps": 0,
+      "holdStateType": [],
+      "lootSamples": 0,
+      "slotPresses": [],
+      "potionCounts": [],
+      "peakUseWeight": 0.0,
+      "holdSamples": 0,
+      "bottleAfter": [
+        -43.4441,
+        -163.082,
+        67.252
+      ],
+      "bottleBefore": [
+        -43.4437,
+        -163.081,
+        67.252
+      ],
+      "restored": true
+    }
+  ],
+  "scope": "Pickup and food gestures (1214j): native LootObject47 drives the partner use reach toward the item, both source roles, product controller; fixture restored after every case."
+}

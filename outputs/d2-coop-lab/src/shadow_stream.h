@@ -244,6 +244,49 @@ unsigned shadowDeathVariant(ULONGLONG tick){
     const float a=std::atan2((by*fx-bx*fy)/fl,(bx*fx+by*fy)/fl);shadowDeath.nearby=true;shadowDeath.bearing=a;
     return std::fabs(a)<=.7853981634f?24u:std::fabs(a)>=2.356194490f?25u:a>0?26u:27u;
 }
+// 1214ea (#11 carry_object_place_throw): the held native movable. HoldObject 49 keeps the held entity's handle at +0x48
+// (1433b/c, confirmed runtime; map entities share handles across the two worlds). While it is held the source sends phase
+// 1 with its handle, name key and world transform; after the throw or drop it sends the flight (phase 2) until the object
+// rests 0.6 s (phase 3, sent 1 s) or is gone (phase 4, sent 1 s); 6 s after the release it counts as settled.
+struct ShadowHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;ULONGLONG releasedAt=0,stillSince=0,endAt=0;float last[3]{},axis[9]{};};
+ShadowHeldObject shadowHeld{};std::uint64_t shadowHeldHolds=0,shadowHeldReleases=0,shadowHeldSettles=0,shadowHeldBreaks=0,shadowHeldRefused=0;
+inline bool readHeldObjectTransform(std::uintptr_t game,std::uint32_t handle,std::uint64_t key,float* position,float* axis,std::uint64_t* keyOut=nullptr){
+    const auto actor=worldIdentityEntity(memoryRead,game,handle);std::uintptr_t text=0;std::string name;
+    if(!actor||!memoryRead(actor+0x20,&text,8)||!text||!worldIdentityString(memoryRead,text,name)||name.empty())return false;
+    const auto k=carryIdentityKey(name);if(key&&k!=key)return false;if(keyOut)*keyOut=k;
+    if(!memoryRead(actor+0x300,position,12)||!memoryRead(actor+0x30c,axis,36))return false;
+    for(unsigned i=0;i<3;++i)if(!std::isfinite(position[i])||std::fabs(position[i])>100000.f)return false;
+    for(unsigned i=0;i<9;++i)if(!std::isfinite(axis[i])||std::fabs(axis[i])>2.f)return false;
+    return true;}
+void fillShadowHeldObject(const NativePlayerStates& states,std::uintptr_t base,CoopShadowActionPacket& p){
+    const auto tick=GetTickCount64();std::uint32_t holding=0;auto& h=shadowHeld;float position[3]{},axis[9]{};
+    for(const auto& a:states.active)if(a.id==49&&a.vtable==base+0x1c7a998){if(!memoryRead(a.pointer+0x48,&holding,4))holding=0;break;}
+    if(holding&&(holding>>16)!=0x3fff){std::uint64_t key=0;
+        if(!readHeldObjectTransform(states.player.game,holding,0,position,axis,&key)){++shadowHeldRefused;return;}
+        if(h.phase!=1||h.handle!=holding)++shadowHeldHolds;
+        h.handle=holding;h.key=key;h.phase=1;h.releasedAt=h.stillSince=h.endAt=0;std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
+    }else if(h.handle&&(h.phase==1||h.phase==2)){
+        if(h.phase==1){h.phase=2;h.releasedAt=tick;h.stillSince=0;++shadowHeldReleases;}
+        if(!readHeldObjectTransform(states.player.game,h.handle,h.key,position,axis)){h.phase=4;h.endAt=tick+1000;++shadowHeldBreaks;}
+        else{float d=0;for(unsigned i=0;i<3;++i){const float v=position[i]-h.last[i];d+=v*v;}std::memcpy(h.last,position,12);std::memcpy(h.axis,axis,36);
+            if(d<1e-4f){if(!h.stillSince)h.stillSince=tick;}else h.stillSince=0;
+            if((h.stillSince&&tick-h.stillSince>=600)||tick-h.releasedAt>=6000){h.phase=3;h.endAt=tick+1000;++shadowHeldSettles;}}
+    }else if(h.phase>=3&&tick>=h.endAt)h=ShadowHeldObject{};
+    if(!h.phase||!h.handle||!h.key)return;
+    p.heldObjectHandle=h.handle;p.heldObjectKey=h.key;p.heldObjectPhase=h.phase;
+    for(unsigned i=0;i<3;++i)p.heldObjectPosition[i]=h.last[i];for(unsigned i=0;i<9;++i)p.heldObjectAxis[i]=h.axis[i];
+}
+// 1214ea: observer side. The partner's presented right wrist and elbow in world space (published by playback while the
+// held reach plays), the latest accepted held object of the source, and the service's own counters.
+struct PartnerHeldWrist {float wrist[3]{},elbow[3]{};ULONGLONG tick=0;};
+SRWLOCK partnerHeldWristLock=SRWLOCK_INIT;PartnerHeldWrist partnerHeldWrist{};
+inline void publishPartnerHeldWrist(const float* w,const float* e){for(unsigned i=0;i<3;++i)if(!std::isfinite(w[i])||!std::isfinite(e[i]))return;
+    AcquireSRWLockExclusive(&partnerHeldWristLock);std::memcpy(partnerHeldWrist.wrist,w,12);std::memcpy(partnerHeldWrist.elbow,e,12);partnerHeldWrist.tick=GetTickCount64();
+    ReleaseSRWLockExclusive(&partnerHeldWristLock);}
+struct RemoteHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;float position[3]{},axis[9]{};ULONGLONG at=0;};
+RemoteHeldObject remoteHeld{};
+struct PartnerHeldObject {std::uint32_t handle=0,lastPhase=0;std::uint64_t applied=0,followed=0,settled=0,broken=0,refused=0;const char* result="idle";};
+PartnerHeldObject partnerHeld{};
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates states{};NativePlayerSword sword{};
@@ -432,6 +475,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     const bool grenadeAir=grenadeValid&&nativePlayerAirGrenadeStates(states,base);
     if(action==3||powerAir||rangedAir||grenadeAir){unsigned stage=0,remaining=0;float startZ=0,targetZ=0;if(!nativePlayerAir(memoryRead,states,base,stage,startZ,targetZ,remaining,powerAir,rangedAir,grenadeAir))return false;
         if(airPacket){airPacket->airStage=stage;airPacket->airRemaining=remaining;airPacket->airStartZ=startZ;airPacket->airTargetZ=targetZ;}}
+    if(airPacket)fillShadowHeldObject(states,base,*airPacket);
     if(leanSide)*leanSide=side;if(leanUp)*leanUp=up;shadowSourceReadStage=0;return true;
 }
 void stopShadowStream(const char* reason){
@@ -612,6 +656,8 @@ void receiveShadowStream(const CoopShadowActionPacket& p,ULONGLONG tick){
     shadowStream.remoteVariant=p.combatVariant;shadowStream.remotePhase=p.combatPhase;shadowStream.remoteDuration=p.combatDurationMs;
     shadowStream.remoteSword=p.swordState;shadowStream.remoteEquipment=p.equipmentVariant;shadowStream.remoteEquipmentDuration=p.equipmentDurationMs;shadowStream.remotePower=p.powerVariant;shadowStream.remotePowerDuration=p.powerDurationMs;shadowStream.remoteRangedKind=p.rangedKind;shadowStream.remoteRanged=p.rangedVariant;shadowStream.remoteRangedDuration=p.rangedDurationMs;shadowStream.remoteCarry=p.carryVariant;shadowStream.remoteCarryDuration=p.carryDurationMs;shadowStream.remoteCarryIncarnation=p.carryIncarnation;shadowStream.remoteCarrySpawner=p.carrySpawner;shadowStream.remoteCarryDefinition=p.carryDefinition;
     shadowStream.remoteStun=p.stunVariant;shadowStream.remoteStunDuration=p.stunDurationMs;
+    {RemoteHeldObject r{};r.handle=p.heldObjectHandle;r.phase=p.heldObjectPhase;r.key=p.heldObjectKey;r.at=tick;
+     for(unsigned i=0;i<3;++i)r.position[i]=p.heldObjectPosition[i];for(unsigned i=0;i<9;++i)r.axis[i]=p.heldObjectAxis[i];remoteHeld=r;}
     shadowStream.remoteChoke=p.chokeVariant;shadowStream.remoteChokeDuration=p.chokeDurationMs;shadowStream.remoteChokeSpawner=p.chokeSpawner;shadowStream.remoteChokeDefinition=p.chokeDefinition;
     shadowStream.remoteTrapHeld=p.trapHeld;shadowStream.remoteTrapStock=p.trapStock;shadowStream.remoteTrap=p.trapVariant;shadowStream.remoteTrapDuration=p.trapDurationMs;
     shadowStream.remoteHeartHeld=p.heartHeld;shadowStream.remoteHeart=p.heartVariant;shadowStream.remoteHeartDuration=p.heartDurationMs;
@@ -689,6 +735,10 @@ void writeShadowStream(ULONGLONG tick){
         shadowRecoilSamples,shadowRecoilRefused,shadowRecoilSent,shadowRecoilOther,shadowRecoilStep,shadowRecoilVariant);
     fprintf(f,"\"recoilStages\":[");for(unsigned i=0;i<shadowRecoilStageCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowRecoilStageCounts[i]);
     fprintf(f,"],\"recoilStates\":[");for(unsigned i=0;i<shadowRecoilStateCount;++i)fprintf(f,"%s%u",i?",":"",shadowRecoilStates[i]);fprintf(f,"],");
+    fprintf(f,"\"heldObject\":{\"phase\":%u,\"handle\":%u,\"holds\":%llu,\"releases\":%llu,\"settles\":%llu,\"breaks\":%llu,\"refused\":%llu,\"remotePhase\":%u,\"remoteHandle\":%u,\"applied\":%llu,\"followed\":%llu,\"settledApplied\":%llu,\"broken\":%llu,\"presentRefused\":%llu,\"result\":\"%s\"},",
+        shadowHeld.phase,shadowHeld.handle,static_cast<unsigned long long>(shadowHeldHolds),static_cast<unsigned long long>(shadowHeldReleases),static_cast<unsigned long long>(shadowHeldSettles),
+        static_cast<unsigned long long>(shadowHeldBreaks),static_cast<unsigned long long>(shadowHeldRefused),remoteHeld.phase,remoteHeld.handle,static_cast<unsigned long long>(partnerHeld.applied),
+        static_cast<unsigned long long>(partnerHeld.followed),static_cast<unsigned long long>(partnerHeld.settled),static_cast<unsigned long long>(partnerHeld.broken),static_cast<unsigned long long>(partnerHeld.refused),partnerHeld.result);
     fprintf(f,"\"staggerObserved\":{\"received\":%llu,\"accepted\":%llu,\"rejected\":%llu,\"lastReject\":%u,\"lastStateReject\":%u},",
         static_cast<unsigned long long>(shadowStaggerReceived),static_cast<unsigned long long>(shadowStaggerAccepted),static_cast<unsigned long long>(shadowStaggerRejected),shadowStaggerLastReject,shadowStaggerLastStateReject);
     fprintf(f,"\"lateHolds\":%llu,\"lateActionAgeMs\":%llu,",shadowStream.lateHolds,shadowStream.lastLateAction?GetTickCount64()-shadowStream.lastLateAction:0ull);

@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T06:42:30.651957+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T07:00:21.970571+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 

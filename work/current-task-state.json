@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-19T09:40:00+02:00",
+  "UpdatedAt": "2026-10-19T07:06:46+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 96/105 on branch stage3/movement-completion-11 (part 10 merged as #112; stagger v1441, power interruptions v1439, counterattack v1443, body carry v1431). Running on 1214dz: 1436b (kick fixture), 1442a (Far Reach pull, upgrades first). Next: object carry candidate 1214ea (held handle at HoldObject +0x48). Open: kick, wall/window, enemy body sizes (female #113, clockwork mission 4), struggle/escape, Far Reach pull, upgrades, object carry.",
+  "NextAction": "Movement completion (#11, chapter 99): 97/105 on branch stage3/movement-completion-11 (struggle and escape audited in v1447 from 1448a/b). Running on 1214ea: 1451a (held bottle thrown and placed, both roles), then 1452a (Far Reach pull states 63/84 dumped, moved entities in both worlds). Open: Corvo's kick (host guard always alert, 1449a), wall/window, enemy body sizes (female #113, clockwork mission 4), Far Reach pull sync, upgrades, object carry (1451a).",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22173,9 +22173,9 @@
   "MovementCompletion": {
     "Card": 11,
     "Chapter": "documentation/handoff-2026-10-11/99-movement-completion-coverage.md",
-    "Candidate": "candidate-npc-combat-v1214dz (deployed; 1214dy plus the Recoil 40 overlay and the lab-only coop_lab_npc_place)",
-    "NextCandidate": "none queued; next fixes come from 1442a (Far Reach pull with upgrades granted first), 1433b/c (held-object state), 1436b (kick fixture) and 1437 (breakout)",
-    "Complete": "96 of 105",
+    "Candidate": "candidate-npc-combat-v1214ea (deployed; protocol 78: 1214dz plus the held object pinned to the partner hand, its throw or placement followed)",
+    "NextCandidate": "from 1452a: sync the Far Reach pulled object (state 84 target) the way 1214ea syncs a held one",
+    "Complete": "97 of 105",
     "ReceiverFixes": {
       "1214cg": "protocol-73 hold (state 24) keeps the authored body on the replicated physical state",
       "1214ch": "150 ms grace holds the presented pose on a transient ineligible packet; a native shadow-action actor still takes over at once",
