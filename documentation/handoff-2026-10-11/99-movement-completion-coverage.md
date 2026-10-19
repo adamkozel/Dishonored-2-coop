@@ -7,7 +7,7 @@ Updated 2026-10-18. This chapter covers how checklist items in [movement require
 - the lab-only grants that put items, powers and upgrades in the isolated save (1214ck, 1214cm);
 - the completion audits that record each item's decision in `review-catalog.json`.
 
-**Status: 91 of 105 items complete; 2 are not applicable or excluded, 12 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, paired takedowns from every side, from above and sliding, lethal takedowns, ragdoll hand-off, scene hand-back and cutscenes, key use, Bend Time, doors and Shadow Walk). Live candidate: 1214dk.
+**Status: 92 of 105 items complete; 2 are not applicable or excluded, 11 remain** (audits for stance, locomotion with slopes, traversal with swimming and climbing, combat including blocks and parries against a guard, the double jump, powers including Blink and Far Reach cancellation, Domino and Blink Assault, ranged weapons and items, switching, interactions, paired takedowns from every side, from above and sliding, lethal takedowns, ragdoll hand-off, scene hand-back and cutscenes, key use, Bend Time, doors and Shadow Walk). Live candidate: 1214dk.
 
 ## Coverage harnesses
 
@@ -339,14 +339,15 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1378-doors | 1: doors (the locked office door refuses with the native message and the unlocked one opens and closes, both roles: 1228zf/zg, 1228zj/zk) |
 | completion-audit-v1393-shadow-walk | 1: Emily's Shadow Walk entry, crawl, form kill and choke, and exit in the native black material silhouette (1359e on 1214di, 1254zd on 1214dj) |
 | completion-audit-v1368-ragdoll | 1: ragdoll hand-off (corpse release in frame after a drop kill by either player: 1254o Corvo, 1254u Emily; bodies end 0.02 and 0.37 m apart) |
+| completion-audit-v1422-shop | 1: the black market in both roles: walk to the counter, native NPC conversation gestures while the shop is open (bank 75), the partner kept through the post-menu delivery hitch (1214dr/dv; 1402b, 1416b/c) |
 | completion-audit-v1414-hit-reactions | 1: directional hit reactions from the left, front, right and back in both roles on 1214dp/dq (lab blasts 1403c/e/i, 1407a-e; clock weight 1.0 throughout); supersedes the v1377 draft |
 | completion-audit-v1413-pickup-loot-steal | 1: pickups (1261b), pickpocketing (1398c/d) and body loot (1398h on 1214dn, 1398i on 1214dp), both roles, with the native use reach presented |
 
-**Still open (12):**
-- combat: counterattack (Emily's counter-kills run natively, 1394c, but the guard crowd hides the kill; needs a single-guard framing), stagger and knockdown (knockdown presented on 1214dp, 1403a/b; Emily's recoil stagger needs a framed take: 1394f/g), kick (Emily's `throwhit` not reproduced);
+**Still open (11):**
+- combat: counterattack (Emily's counter-kill filmed clearly from above, 1418a; Corvo's pending, 1418d-f), stagger and knockdown (knockdown presented on 1214dp, 1403a/b; Emily's recoil stagger needs a framed take: 1394f/g), kick (Emily's `throwhit` not reproduced);
 - paired actions: wall and window variants, enemy body sizes, struggle and escape (a natural breakout seen in 1398g), body carry (product attempts on the host restore in the tick their snapshot starts: 1277u; 1214dq records the cause);
 - powers: Far Reach pull variants (1388a was a travel; the body pull needs aim on the torso: 1405a), upgrades, interruptions and no mana (Emily's response presented, 1412 re-films it);
-- interactions: object carry, shop and dialogue gestures (1214dr: black market hold and counter gestures, takes 1402b/c).
+- interactions: object carry.
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 

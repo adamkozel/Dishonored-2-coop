@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T04:21:40.568480+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T04:58:07.994349+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -1258,12 +1258,69 @@ Candidates require animation review and appropriate game-state/contact binding.
   ],
   "deliverable_kind": "animation",
   "notes": "Candidates require animation review and appropriate game-state/contact binding.",
-  "phase_status": "work_remaining",
+  "phase_status": "complete",
   "power_visual_requirements": [],
-  "in_game_recordings": []
+  "in_game_recordings": [],
+  "completion": {
+    "audit": "completion-audit-v1422-shop.json",
+    "decision": "complete",
+    "scope": "The partner at a black market: it walks to the counter, gestures toward the shopkeeper while the shop is open (hand to the chin, an open hand), and stays presented through and after the menu, in both roles.",
+    "takes": [
+      {
+        "take": "mission-coverage-v1416b",
+        "cases": [
+          "host-shop"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1416c",
+        "cases": [
+          "client-shop"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1402b",
+        "cases": [
+          "host-shop"
+        ]
+      },
+      {
+        "take": "mission-coverage-v1402c",
+        "cases": [
+          "client-shop"
+        ]
+      }
+    ],
+    "visual": [
+      {
+        "video": "mission-coverage-v1402b/host-shop-observer.mp4",
+        "verdict": "Corvo walks up to the counter and stands at it; his hand goes to his chin and then out toward the shopkeeper while the shop is open."
+      },
+      {
+        "video": "mission-coverage-v1416b/host-shop-observer.mp4",
+        "verdict": "Corvo stays at the counter in his own body through the end of the menu and the seconds after it (9.5 to 18.5 s), with no fall back to the actor pose."
+      },
+      {
+        "video": "mission-coverage-v1416c/client-shop-observer.mp4",
+        "verdict": "Emily walks up to the counter, puts a hand to her chin, then opens it toward the shopkeeper, and stays at the counter through and after the menu."
+      }
+    ],
+    "lifecycle": "See method."
+  },
+  "complete": true,
+  "evidence": [
+    "mission-coverage-v1416b/result.json",
+    "mission-coverage-v1416c/result.json",
+    "mission-coverage-v1402b/result.json",
+    "mission-coverage-v1402c/result.json"
+  ]
 }
 ````
 
+- [evidence: mission-coverage-v1416b/result.json](<../../../../work/natural-moveset/mission-coverage-v1416b/result.json>)
+- [evidence: mission-coverage-v1416c/result.json](<../../../../work/natural-moveset/mission-coverage-v1416c/result.json>)
+- [evidence: mission-coverage-v1402b/result.json](<../../../../work/natural-moveset/mission-coverage-v1402b/result.json>)
+- [evidence: mission-coverage-v1402c/result.json](<../../../../work/natural-moveset/mission-coverage-v1402c/result.json>)
 ## sit_stand
 
 Not applicable (audit 1240, confirmed static): D2 has no player sitting state among its arkPlayerState classes; the only sitting strings are NPC AI providers. Seated story moments are native cinematics, covered by cutscene_enter_exit. The authored NPC bench clips remain in the library unbound.
