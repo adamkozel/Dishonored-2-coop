@@ -52,7 +52,8 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
             if(phase!=3)continue;
             if(!read(c,&d,8)||!d||!read(d,&vt,8)||vt!=base+0x1affbc8||!read(d+8,&name,8)||!worldIdentityString(read,name,asset))return false;
             if(asset.find("midnight/gameplay/player/base/choke/")!=0&&asset.find("midnight/gameplay/player/base/assassination/")!=0&&
-               asset.find("midnight/gameplay/player/base/fatalities/")!=0&&asset.find("midnight/gameplay/player/base/combat/versus_")!=0)continue;
+               asset.find("midnight/gameplay/player/base/fatalities/")!=0&&asset.find("midnight/gameplay/player/base/combat/versus_")!=0&&
+               asset.find("midnight/gameplay/player/base/keytarget_finish/")!=0)continue; // 1214gc (#140): key-target finishers
             if(!read(c+8,&sc,8)||!sc||!read(sc,&vt,8)||vt!=base+0x1b00198||!read(sc+0x28,&duration,4)||!read(sc+0x30,&name,8)||!worldIdentityString(read,name,sub))return false;
             const auto variant=nativeChokeVariant(asset,sub,duration);if(!variant)return false;
             if(!nativeTakedownStates(variant,states,base))return false;
@@ -69,7 +70,9 @@ template<class Read> bool readNativePlayerChokeScene(Read read,std::uintptr_t ba
     // arms, null), which binds no actor; so does the shadow-form assassination (1214dd, takes 1254y/z:
     // assassination_sw_back binds the NPC, the player, both ordinary arms and one empty slot).
     const unsigned wantArms=nativeTakedownArms(s.variant),bound=bindingFlags&0xffffff,empty=bound-(2+wantArms);
-    if(bound!=2+wantArms&&!((nativeTakedownFatality(s.variant)||(s.variant>=37&&s.variant<=44))&&wantArms==2&&bound==5))return false;
+    // 1214gc (#140): a key-target finisher (census 1707) binds the NPC, the player and both arms like the other lethal
+    // scenes; it may also carry an empty slot, as the four-binding finishers do.
+    if(bound!=2+wantArms&&!((nativeTakedownFatality(s.variant)||(s.variant>=37&&s.variant<=44)||nativeTakedownKeyTarget(s.variant))&&wantArms==2&&bound==5))return false;
     s.timeMs=clocks[1];std::array<std::uintptr_t,5> actors{};unsigned players=0,targets=0,arms=0,sides=0,nulls=0;
     for(unsigned i=0;i<bound;++i){unsigned handle=0;std::uintptr_t vt=0;
         if(!read(bindings+i*0x20+8,&actors[i],8))return false;
