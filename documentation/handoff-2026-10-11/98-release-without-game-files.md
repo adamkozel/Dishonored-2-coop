@@ -112,3 +112,23 @@ Published as [v0.7.0](https://github.com/adamkozel/Dishonored-2-coop/releases/ta
 - the history decisions in #98: game-derived headers before #30, Mixamo, the personal email;
 - the Microsoft false-positive submission (#25);
 - the human playtest (#99).
+
+## Release 0.8.0 (builder 1668, candidate 1214fx)
+
+What changed since 0.7.0: shared NPC combat authority (stage 4), partner-led story steps and the mid-mission join (#134, #135), the real autosave pair (#136), breakables (#132), power outcomes (#117), and the Ramsey campaign blocker fix (1214fw, 1214fx; chapter 106).
+
+- **Data:**
+  - decl recipes v2: 48 decls, adding the Timepiece prop (#122) and the two remote Windblast effects;
+  - bank patches v2 for bank 75/382 (payload classification v1667);
+  - native tables v1, unchanged.
+- **Setup tool:** setup-tool-v1669. `d2coop_setup.exe` 0.8.0 from the 1214fr build; only its version resource differs from 0.7.0.
+- **Build** ([log](../../work/release/build-release-v1668.log)):
+  - `d2coop-v0.8.0.zip`, 37,205,349 bytes, SHA-256 `F485423567B0C51CC2C60DE73A2D11CEE8C3BCA36D8F2A9023C420B350A71DE0`;
+  - the live DLL is 1214fx's, the generated packages match the lab's, and no package file equals a game file.
+
+| Take | Result |
+|---|---|
+| [release-install-v1669a](../../work/release/release-install-v1669a/result.json) | **Pass, 8/8,** on scratch copies of the original install: <ul><li>install in 51 s, with a 1.3 GB setup peak;</li><li>the built banks load and the tables parse;</li><li>a reinstall is refused, and rollback is byte-identical;</li><li>a wrong executable and a modified `master.index` are refused unchanged;</li><li>the Steam install is untouched.</li></ul> |
+| [product-two-account-v1670a](../../work/release/product-two-account-v1670a/result.json) | **Pass (confirmed runtime), the clean-PC proof for 0.8.0:** <ul><li>The VM downloaded the published [v0.8.0 release](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.0) itself (2.5 s; SHA-256 matches the zip).</li><li>It extracted it into Downloads, and `Install.cmd` alone found the game and built every file (14 files) in 90 s, with Defender on.</li><li>The lab host on this PC was in *A Long Day in Dunwall* and hosted a friends-only lobby.</li><li>The VM joined through Steam on the second account and followed the host's mission (`loads` 1, the same map, both partner banks active).</li><li>Each side saw the other walk (6.7 m and 7.8 m), and F8 left the session (`left_by_player`).</li><li>`Uninstall.cmd` removed 13 added files and restored the original `master.index`, and the lab loopback reconnected.</li></ul> |
+
+Published as [v0.8.0](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.0) (Latest) from `main` (squash merge 4db178fc1 of #141), with the release notes and the zip's SHA-256.
