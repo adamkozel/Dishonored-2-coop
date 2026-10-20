@@ -295,6 +295,38 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   Dunwall. Ramsey died in both worlds (0/50 each), every story step ended the same in both worlds, and both reached the
   Void with gameflow equal.
 
+## The mid-mission join on two Steam accounts (#135, Route-MissionVM-v1703)
+
+[Route-MissionVM-v1703](../../work/natural-moveset/Route-MissionVM-v1703.ps1) adds `-JoinAfterStep`, `-LeaveAfterStep` and `-RejoinAfterStep` to the VM campaign harness. The VM waits unconnected in its main menu while the host alone plays the first steps. It then joins the lobby and follows the host's mission (join-follow), and later leaves as F8 does and joins the same lobby again.
+
+**[campaign-join-vm-v1703a](../../work/natural-moveset/campaign-join-vm-v1703a/result.json) (pass, 1214fz, confirmed runtime):** Dunwall, joining after step 5, leaving after 6 and rejoining after 7.
+- **Join:** the host alone had killed Ramsey. The VM followed the host's mission from its main menu (`loads` 1), and the placement moved Emily 53.66 m, to 2.83 m from Corvo. Gameflow was equal (237,1,4,5).
+  - Ramsey and Alexi were alive in her fresh world, as in the lab takes 1679a and 1682a. This is the known limitation.
+- **Leave:** the session ended. The host kept hosting its lobby.
+- **Rejoin:** she reconnected in 4.5 s and converged to the step the host had played alone (237,1,3,6 to 236,1,3,7). Both sides rearmed, with banks active.
+  - She stayed 69 m from the host, because the placement ran once per followed map.
+  - **1214ga** (`join_warp.h` `joinWarpDue`, unit test) makes it due again on each new connection.
+- **To the Void:** both played the rest of Dunwall together.
+  - In the Void the joined partner's `Mission_DW` stayed 0 while the host's completed (3).
+  - The gameflow mirror leaves mission nodes to each world's own script, because setting one natively would drive the mission flow. Non-blocking, like #94.
+
+## The partner's kill of a key target (#140, candidates 1214ga-1214ge)
+
+| Take | Candidate | Finding (confirmed runtime) |
+|---|---|---|
+| route-dunwall-lead-v1702a-c | 1214fz | 1702a: the kill was shared, then her corpse vanished and the search failed. 1702c: her kill was refused as `hit_range` (8.55 m, then 13.35 m), so Ramsey lived on in Corvo's world. In no take was her kill a paired scene. |
+| route-dunwall-lead-v1706a-c | 1214ga (scene probe, `player_scene_probe.h`) | Her kill plays **`player/base/keytarget_finish/assassination_keytarget_right`** (subscene `assassination`, 3266 ms) in Assassination13. No takedown census held that folder. |
+| route-dunwall-lead-v1708a-c | 1214gc (census 1707: the four key-target finishers, ids 120-123) | Her kill is now paired (variant 123). The host held Ramsey, and he died in both worlds at the same spot, with no `hit_range` refusal. But her corpse vanished 3/3: her world held an `ARK_CUE_NPC_DISAPPEARED` cue at the spot. |
+| route-dunwall-lead-v1710a | 1214gd (corpse trace, `npc_corpse_trace.h`) | Vanished again. Her channel ended `native_lifecycle_changed` (entity gone). No trace was recorded, because combat kills set the corpse elsewhere. |
+| route-dunwall-lead-v1711a-c | 1214ge | The hold kept: the corpse stayed and the search passed. The hold skipped: once vanished (at 9.95 s), once stayed. The root never moved or fell, and the mod's ash, Dead and roster paths applied nothing. |
+
+- **Ring pickups:**
+  - In the host's world, `ld_imperial_ring_pickup_corvo` moves onto the corpse at death; that is the ring the search gives.
+  - In her world, after a vanish, `ld_imperial_ring_pickup_emily` is gone and a parentless `imperial_ring` sits at (0,0,0).
+- **Hypothesis:** a native removal, such as a level-script despawn of the key-target NPC. The source of `ARK_CUE_NPC_DISAPPEARED` is the next step, in Ghidra.
+- **Release 0.8.2** ships the paired key-target finishers: the kill is shared and the worlds no longer diverge. The release notes keep the search limitation, with the host searching as the workaround.
+- **Census 1707:** the table generator (`generate_takedown_table_v1707.py`) now also emits the two helpers that 1214eo and 1214da had added to the generated header by hand (`nativeTakedownKnockdownChoke` and the shadow-form sword exception). The first 1214gc build failed without them.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

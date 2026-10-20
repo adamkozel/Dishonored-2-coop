@@ -81,7 +81,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Take 1302d: eight actions crossed, including the mission keys the carriage removes.
   - Take 1302e: both players have the Mark and mana from the void to Addermire, and both reach the Good Doctor with equal objectives.
 
-**Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
+**Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). On Dunwall's first map (the guard map), campaign-dunwall-die-vm-v1707a (1214gb, #148) has a host fall and a partner fall first: each restarted both worlds from the mission autosave (slot 61) in about 10.5 s. A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
 
 ## Named gameflow states (1214bp, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json))
 
