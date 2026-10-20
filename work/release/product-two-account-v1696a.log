@@ -1,0 +1,189 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             102 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Story progress did not reach the VM (host 239,2,5,2,0,0,0, VM 239,2,5,2,0,0,0)",
+  "notes": {
+    "labBefore": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": true,
+      "dll": "F6EA58C960B1A87EEA6397D4E73A741ABE44E32E93C300402AAA5658E9D8E677"
+    },
+    "download": {
+      "url": "https://github.com/adamkozel/Dishonored-2-coop/releases/download/v0.8.1/d2coop-v0.8.1.zip",
+      "seconds": 2.3,
+      "bytes": 37205535,
+      "sha256": "E219DF72D311CC8F7AED24DF307E74FD465667456B2DE97A94A0436B64C397D9",
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "fdaa0039-3a47-44a7-87cf-a37da6ab3071",
+      "PSShowComputerName": true
+    },
+    "vmInstall": {
+      "exit": 0,
+      "seconds": 72.8,
+      "output": [
+        "Dishonored 2 found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Building the co-op resource packages from your game files...",
+        "Building the corvo movement bank from your game files...",
+        "Building the emily movement bank from your game files...",
+        "Building the prop animation tables from your game files...",
+        "Installed Dishonored 2 co-op 0.8.1: 14 files; originals backed up in d2coop-backup\\20261020-115533",
+        ""
+      ],
+      "receipt": true,
+      "dll": true,
+      "built": [
+        "base\\master.index",
+        "base\\game1voidmod.index",
+        "d2coop\\corvo-choke-bank.bin",
+        "d2coop\\emily-choke-bank.bin",
+        "d2coop\\native-tables.bin"
+      ],
+      "defender": {
+        "realTime": true,
+        "antivirus": true,
+        "steamExcluded": false,
+        "detections": []
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "fdaa0039-3a47-44a7-87cf-a37da6ab3071",
+      "PSShowComputerName": true
+    },
+    "vmProductBoot": true,
+    "hostOnline": {
+      "active": true,
+      "host": true,
+      "phase": 2,
+      "result": "hosting_lobby",
+      "connectionState": 0,
+      "joinRequests": 0,
+      "role": 0,
+      "inviteOpened": false,
+      "lobbyMembers": 1,
+      "steamReady": true
+    },
+    "connected": {
+      "host": {
+        "connectionState": 3,
+        "remoteFresh": true
+      },
+      "vm": {
+        "connectionState": 3,
+        "remoteFresh": true
+      }
+    },
+    "vmKeys": 12,
+    "vmChoice": 4,
+    "vmSkips": 45,
+    "sameMission": {
+      "hostMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmLogic": 1,
+      "same": true
+    },
+    "banks": {
+      "host": {
+        "active": true,
+        "version": 75,
+        "checksum": "4751880941840332537"
+      },
+      "vm": {
+        "active": true,
+        "version": 75,
+        "checksum": "5364239416643914462"
+      }
+    },
+    "walk": {
+      "hostMoved": 6.76,
+      "vmMoved": 7.76,
+      "hostSawVm": 7.76,
+      "vmSawHost": 6.76
+    },
+    "story": {
+      "hostBefore": "239,2,5,2,0,0,0",
+      "vmBefore": "239,2,5,2,0,0,0",
+      "tried": [
+        "ld_trigger_bedroom",
+        "ld_trigger_nearmayhew",
+        "ld_trigger_mayhew",
+        "ld_trigger_saferoom_enter",
+        "ld_trigger_saferoom"
+      ],
+      "hostAfter": "239,2,5,2,0,0,0",
+      "vmAfter": "239,2,5,2,0,0,0",
+      "equal": true,
+      "changed": false
+    },
+    "vmFinal": {
+      "follow": {
+        "enabled": true,
+        "result": "same_mission",
+        "hostMapinfo": "campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo",
+        "hostHigh": 0,
+        "hostMap": "12727000173429924044",
+        "localMap": "12727000173429924044",
+        "sent": 0,
+        "received": 573,
+        "loads": 1,
+        "refused": 0,
+        "role": 1,
+        "warps": 0,
+        "warpDistance": 5.00,
+        "PSComputerName": "D2CoopVM",
+        "RunspaceId": "1f3b18b4-c509-420d-a1b4-8b90de978b90",
+        "PSShowComputerName": true
+      },
+      "online": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 1,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2,
+        "steamReady": true
+      },
+      "logic": 3,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": true
+    },
+    "vmUninstall": {
+      "exit": 0,
+      "receiptGone": true,
+      "dllGone": true,
+      "dataGone": true,
+      "voidmodGone": true,
+      "exeHash": "B671F8249422862B",
+      "masterHash": "E76D1A13AC95F561",
+      "output": [
+        "Co-op installation found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Rolled back: 13 added files removed, 1 originals restored.",
+        ""
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "050b069e-aacb-48f5-afae-76449e9a7fe1",
+      "PSShowComputerName": true
+    },
+    "labAfter": {
+      "host": "logic=1 fresh=True",
+      "client": "logic=1 fresh=True"
+    }
+  },
+  "scope": "Release 0.8.0 clean-PC session (1690), two machines/two accounts: as 1670 plus story progress that reaches the VM and a shared death with both games restarting together; release obtained in the VM (download from GitHub or copied zip), extracted in Downloads, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on); lab host (same DLL) hosts a lobby; the VM joins via steam://joinlobby, follows the host mission, both walk and see each other, the VM leaves with F8; then Uninstall.cmd (rollback) and the lab restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Test-ProductTwoAccount-v1690.ps1:194[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 194 | [0m Get-Content "$out/result.json"; if ($failure) { [36;1mthrow $failure[0m }[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                 ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mStory progress did not reach the VM (host 239,2,5,2,0,0,0, VM 239,2,5,2,0,0,0)[0m
