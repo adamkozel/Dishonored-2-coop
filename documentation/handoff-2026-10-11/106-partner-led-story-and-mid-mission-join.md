@@ -57,4 +57,12 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Fix: [Route-Mission-v1672](../../work/natural-moveset/Route-Mission-v1672.ps1) turns on the host's publishing
     before the partner's follow, and saves both follow statuses at the join and after it. The take is repeated as
     route-dunwall-join-v1672a.
-- Pending: route-dunwall-lead-v1668b (the partner leads Dunwall, route dunwall-full-v1301c).
+- **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
+  1-3 completed in both worlds, with the gameflow counts equal.
+  - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).
+  - The route's settle has no case for logic 7, so it timed out silently. All 40 attacks on Ramsey then went into the
+    journal ("mortimer_ramsey still alive after 40 attacks").
+  - Nothing in the route presses the journal's button. What opened it is not known (hypothesis: a late skip press).
+  - Fix: [Route-Mission-v1673](../../work/natural-moveset/Route-Mission-v1673.ps1) closes the journal with B (counted in
+    `notes.menuClosed`), and an attack settles the leading role whenever it is not in gameplay.
+  - The take is repeated as route-dunwall-lead-v1673a. The remaining takes (1669b, 1671a and 1672a) also run on v1673.
