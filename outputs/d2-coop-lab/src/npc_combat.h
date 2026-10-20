@@ -398,6 +398,8 @@ bool npcCombatRetireBeforeDeath(NpcAuthorityChannel& c){
     // channel as a corpse stream (host body authority for the settle window).
     releaseNpcAiLease(c.lease);{auto& s=npcStreamSessionState;s.released+=c.lease.released;s.retired+=c.lease.retired;s.lost+=c.lease.lost;}
     c.corpse=true;c.corpseAt=GetTickCount64();c.corpseUntil=c.corpseAt+8000;c.result=localRole?"client_corpse":"host_corpse";npcCombat.preDeathReleased+=c.lease.released;
+    // 1214ge (#140, npc_corpse_trace.h): the partner corpse of a combat kill starts its trace here (1710a had none).
+    if(localRole&&!npcCorpseTraceFor(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle))npcCorpseTraceBegin(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle,c.corpseAt,c.localPaired||c.corpseAt<c.pairedUntil);
     return !c.lease.references&&!c.lease.lost&&!c.lease.retired;
 }
 std::uint64_t npcCombatReadMaximumChanged=0;const char* npcCombatReadFailure="none";unsigned npcCombatReadWords[4]{},npcCombatReadGeneration=0;bool npcCombatReadTerminal=false;
