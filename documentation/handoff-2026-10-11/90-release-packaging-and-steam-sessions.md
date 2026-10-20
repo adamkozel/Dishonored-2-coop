@@ -221,6 +221,24 @@ The joiner was still at its main menu when the link came up. Join-follow into th
 
 ## What stage 7 still needs
 
-- **Two-account online validation** (host, join, invite, disconnect and reconnect) needs a second Steam account and the user. It remains outstanding until it is actually performed.
-- **Native in-game UI** for host/join and character choice (the host currently plays Corvo).
-- **Soak attribution**: a vanilla baseline without the proxy and a 2-hour soak (the control soak shows the co-op systems are not the main source).
+Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join, character-choice and recovery flows; packaging and rollback; sustained stability; online validation.
+
+**Done (confirmed runtime unless noted):**
+- **Online validation on two Steam accounts,** with the lab VM's second account (sections above, takes 1221–1225): host, invite, join, leave and reconnect. Clean-PC proofs from each published release: 0.7.0 (1315b), 0.8.0 (1670a) and 0.8.1 (1696a, up to the story step) ([chapter 98](98-release-without-game-files.md)).
+- **Host and join through Steam's own UI:**
+  - F7 creates a friends-only lobby and opens Steam's invite overlay.
+  - The partner accepts the invite or uses *Join Game* in the friends list, from the main menu or a mission.
+  - The partner then loads the host's mission natively (join-follow) and is placed beside the host when joining mid-mission (1214fr, [chapter 106](106-partner-led-story-and-mid-mission-join.md)).
+  - F8 leaves.
+- **Character choice:** the game's own choice at the start of *A Long Day in Dunwall*. The host takes Corvo and the partner Emily; the route harnesses steer it ([chapter 97](97-campaign-map-sequence.md)).
+- **Recovery:** native shared death screens and restarts, checkpoint and autosave pairs, the mission end and level transition mirrors, and the presentation watchdog. The campaign plays through on two accounts ([chapter 97](97-campaign-map-sequence.md)).
+- **Packaging and rollback:** releases 0.7.0, 0.8.0 and 0.8.1. Each installer builds the game-derived files from the player's own copy, and each rollback is byte-identical ([chapter 98](98-release-without-game-files.md)).
+- **Sustained stability:** the 2-hour co-op soak 1316 and its bridge-only control 1664b (above). The co-op systems add no memory growth beyond the game's own rate.
+
+**Still open:**
+- A 2-hour co-op soak on the release binary, so co-op and control are measured on one build (#13; take mission-soak-v1698a on 1214fz).
+- The clean-PC session past the first story step (Test-ProductTwoAccount-v1699; #143).
+- A two-account mid-mission join (#135).
+- The product controller never resets per world: a comment swallowed the reset code, so the arming steps run once per game process (#145). The systems re-arm themselves, and no effect has been seen.
+- Hosting starts with the F7 key. There is no entry in the game's own menus; the invite and join steps are Steam's native overlay and friends list.
+- Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
