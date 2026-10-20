@@ -1,0 +1,12 @@
+{
+  "take": "route-dunwall-join-v1666a",
+  "status": "interrupted, outcome lost",
+  "facts": [
+    "The take started at 01:38:56 on 2026-10-20 (run-script.ps1), right after route-dunwall-lead-v1665a failed because a lab game process (pid 13340) was gone.",
+    "The lab game had stopped responding at about 01:36 during the control soak mission-soak-control-v1664a; Windows logged AppHang events for Dishonored2.exe at 01:38 and closed it.",
+    "The PC was then shut down before the take finished. failure.json and the take log were left zero-filled (223 and 0 bytes of no content): the outcome is lost.",
+    "recovery.json and recovery-note-restoration/ were written at 02:36 by Restart-LabAfterSessionEnd-v1531.ps1 after the reboot (its reason text is the script's generic one); both lab roles were restored to the Dunwall fixture on candidate 1214fq (logic 1, health 56, fresh transport)."
+  ],
+  "likelyCauseOfTheHang": "hypothesis: CPU contention from the bank fit (fit_bank_bases.py, 6 numpy workers) started during the soak",
+  "rerun": "route-dunwall-join-v1666b"
+}
