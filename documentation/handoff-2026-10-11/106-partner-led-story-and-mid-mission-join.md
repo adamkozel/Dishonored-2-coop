@@ -99,6 +99,22 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
       eligibility for Ramsey (`authority` step) before and after the fight. It runs as route-dunwall-lead-v1674a on
       1214fs.
 
+- **route-dunwall-lead-v1674a (pass, 1214fs, Route-Mission-v1674):** the partner led all of A Long Day in Dunwall
+  (route dunwall-full-v1301c), and every story step ended the same in both worlds (confirmed runtime):
+  - her assassination of Ramsey: both worlds to gameflow 237 and `Task_DW_GetRing`;
+  - her loot of his ring: both to [237,1,3,6];
+  - the vault and lockers: both to [236,1,3,7];
+  - the level transition to the streets she started, the balcony and street triggers, and the mission end into the
+    Void (`void_01_p` in both worlds).
+  - Gameflow counts were equal after every step. The host received 5 advance reports and applied 8 nodes, with none
+    refused or expired.
+  - **Ramsey himself stayed alive in Corvo's world.** He was bound in both worlds before the fight (NPC stream arm 10,
+    host authority and client replica, combat channel ready on both sides). Her assassination was captured on arm 10,
+    but her combat session stopped and re-armed between two status samples, so the kill ran only in her world. After
+    it, Corvo's Ramsey stood alive at 50/50 where her corpse lay.
+    - The objectives and the story are unaffected. The kill sharing is tracked as its own combat issue, [#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140) (stage 4).
+    - 1214ft records the session stops with the hit_range geometry; take route-dunwall-lead-v1676a.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
