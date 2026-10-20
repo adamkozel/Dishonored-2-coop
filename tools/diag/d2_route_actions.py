@@ -183,9 +183,24 @@ def done(task):
     return completed(task)
 
 
+def close_modal(limit=20.0):
+    """A tutorial page (logic 12) pauses the game: close it as the route harness's settle does (B, then A).
+
+    campaign-training-vm-v1697a/b: after the first choke attempt failed, the stealth lesson restarted under a tutorial
+    page in both worlds, the trainer never walked again and every later try found no walking NPC."""
+    end, n = time.time() + limit, 0
+    while time.time() < end and status().get('localGameLogicState') == 12:
+        packet(['B'] if n % 2 == 0 else ['A'], 300)
+        n += 1
+        time.sleep(1.5)
+    if n:
+        print(json.dumps({'closedModal': n, 'logic': status().get('localGameLogicState')}), flush=True)
+
+
 def attempts(a, one):
     """Up to a['tries'] attempts; an attempt whose native reads stay unavailable is logged and retried."""
     for k in range(a.get('tries', 6)):
+        close_modal()
         try:
             result = one(a, k)
         except RuntimeError as e:

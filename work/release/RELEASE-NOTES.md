@@ -47,7 +47,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 
 1. Both players start Dishonored 2 from Steam as usual.
 2. **Host (Corvo):** start a new game as Corvo, or load a Corvo save. In game, press **F7**. A friends-only Steam lobby is created and Steam's invite window opens. Invite your friend.
-3. **Partner (Emily):** start the game and wait in the main menu (or anywhere in a mission). Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded. If the host is already further into the mission, you are then placed beside the host.
+3. **Partner (Emily):** start the game, press a key at the title screen, and wait in the main menu (or anywhere in a mission). Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded. If the host is already further into the mission, you are then placed beside the host.
 4. If the game asks who to play (the start of *A Long Day in Dunwall*), the host chooses **Corvo** and the partner **Emily**.
 5. Once both players are in the same mission, every co-op system turns on by itself.
 6. **F8** leaves the session.
@@ -80,6 +80,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 | F7 does nothing | Check that `d2coop\d2coop.cfg` exists in the game folder (re-install). The game window must have focus. |
 | The invite window does not open | Enable the Steam overlay for Dishonored 2. |
 | The partner cannot join | Both players need the same mod version and must be Steam friends. The lobby is friends-only. |
+| The partner's game says "No connected user. You won't be able to save." | The invite was accepted before a key was pressed at the title screen ([#146](https://github.com/adamkozel/Dishonored-2-coop/issues/146)). Press F8, quit the game, start it again, press a key at the title screen, then join again. |
 | Something went wrong during install | Nothing in the game folder changed unless the installer said "Installed". Run `Uninstall.cmd` if a receipt exists. |
 
 ## Known limitations
