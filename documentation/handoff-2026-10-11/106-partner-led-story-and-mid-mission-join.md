@@ -228,6 +228,13 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - route-dunwall-autosave-v1685a clears the guards around Ramsey (host, health hold) before the search. The partner
     still crosses the street balcony autosave alone and dies.
 
+- **route-dunwall-autosave-v1685a (fail, harness; 1214fv):** the host assassinated Ramsey and cleared the guards, and
+  his search of the body still did not register.
+  - After this kill the objectives went to [237,2,7,2]; after fought kills they go to [237,1,4,5].
+  - The partner-crossed autosave on Dunwall stays behind the Ramsey search, so it moves to a mission without that gate
+    (Edge of the World). The mechanism is symmetric: both origins passed with the fixture autosave (1156), and the
+    host-crossed real autosave passed in 1669a.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
