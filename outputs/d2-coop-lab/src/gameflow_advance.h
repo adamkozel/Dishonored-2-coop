@@ -23,6 +23,11 @@ struct GameflowAdvancePacket {
 #pragma pack(pop)
 static_assert(sizeof(GameflowAdvancePacket)==424);
 constexpr std::uint64_t kGameflowAdvanceHoldMs=10000;
+// 1214fy: the age of a timestamp against a frame tick. A packet received during the frame's transport pump is stamped
+// with GetTickCount64() after the frame sampled its tick, so tick-stamp wrapped to a huge age when the clock had moved
+// on: the partner's mission end "expired" at once and its world stayed in Edge of the World while the host loaded The
+// Good Doctor (campaign-eotw-vm-v1689a). A stamp later than the tick has age 0.
+inline std::uint64_t tickAge(std::uint64_t now,std::uint64_t since){return now>since?now-since:0;}
 inline bool gameflowAdvanceAllowed(std::int32_t from,std::int32_t to){
     return from>0&&from<16&&to>0&&to<16&&to!=from;
 }
