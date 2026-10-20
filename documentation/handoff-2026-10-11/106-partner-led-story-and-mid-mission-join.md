@@ -206,6 +206,11 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - For #136, route-dunwall-autosave-v1684a has the host lead to the streets, then the partner alone crosses the
     street balcony autosave and dies.
 
+- **route-dunwall-lead-v1683a (pass, 1214fv, v1677):** the partner led all of Dunwall again.
+  - Her assassination of Ramsey (second press) killed him in **both** worlds: 0/50 for Corvo and for her.
+  - No hit_range stop was recorded, and no replica hit was held back. Every story step ended the same in both worlds,
+    through the mission end into the Void.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
