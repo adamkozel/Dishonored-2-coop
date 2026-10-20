@@ -1,8 +1,12 @@
-# Dishonored 2 Corvo/Emily co-op 0.8.0
+# Dishonored 2 Corvo/Emily co-op 0.8.1
 
 Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.8.1
+
+- When the host finished a mission, the partner's game could stay in the finished mission while the host's moved on. Both games now move on to the next mission together.
 
 ## New in 0.8.0
 
@@ -29,7 +33,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 ## Install (both players)
 
 1. Close Dishonored 2.
-2. Download `d2coop-v0.8.0.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.8.1.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.

@@ -233,18 +233,18 @@ void serviceMissionEndMirror(std::uint64_t tick){
     auto& m=missionEnd;if(!(missionEndMirrorEnabled||productMode)){m.pending=false;return;}
     const unsigned logic=outgoing.gameLogicState;
     serviceMissionEndSender(tick);
-    {const auto& h=transitionHold;if(!h.held&&h.releasedAt&&*h.localMap&&tick-h.releasedAt<30000&&tick-mapReadySentAt>=1000)sendMapReady(tick);}
+    {const auto& h=transitionHold;if(!h.held&&h.releasedAt&&*h.localMap&&tickAge(tick,h.releasedAt)<30000&&tick-mapReadySentAt>=1000)sendMapReady(tick);}
     if(!m.pending){m.serviceAt=0;return;}
     // 1214bx: time without a service call (the pause menu) does not count.
     if(m.serviceAt&&tick-m.serviceAt>1000)m.pendingAt+=tick-m.serviceAt;
     m.serviceAt=tick;
-    if(tick-m.pendingAt>120000){m.pending=false;m.result="expired";return;}
+    if(tickAge(tick,m.pendingAt)>120000){m.pending=false;m.result="expired";return;}
     if(m.appliedEpoch==outgoing.worldEpoch){m.pending=false;m.result="already_applied";return;}
     if(logic==11||logic==15){m.pending=false;m.result="local_already_ending";return;}
     // Only from ordinary gameplay: the native logic switch to Results can
     // refuse from other states. Scenes, prompts and menus wait.
     // 1214bw: as for level transitions, a paused partner keeps the mission end until it resumes (30 min cap).
-    if(logic!=1||outgoing.pendingGameLogicState){m.result="waiting_native_phase";if(tick-m.receivedAt<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
+    if(logic!=1||outgoing.pendingGameLogicState){m.result="waiting_native_phase";if(tickAge(tick,m.receivedAt)<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
     char here[160]{};std::uint32_t high=0;
     if(!readCurrentMapinfo(here,sizeof(here),high)||std::strcmp(here,m.incoming.mapinfo)){++m.notSameMission;m.pending=false;m.result="not_same_mission";return;}
     MissionNodeScan s{};if(!scanMissionNodes(2,s)){++m.scanFailed;m.result="scan_failed";return;}
@@ -544,14 +544,14 @@ void serviceLevelTransitionMirror(std::uint64_t tick){
     // 1214bx: the pause menu stops these services, so time without a service call does not count.
     if(m.serviceAt&&tick-m.serviceAt>1000)m.pendingAt+=tick-m.serviceAt;
     m.serviceAt=tick;
-    if(tick-m.pendingAt>60000){m.pending=false;m.result="expired";return;}
+    if(tickAge(tick,m.pendingAt)>60000){m.pending=false;m.result="expired";return;}
     const unsigned logic=outgoing.gameLogicState;
     if(logic==15){m.pending=false;m.result="local_already_transitioning";return;}
     if(m.incoming.fromMapId!=outgoing.mapId){++m.otherMap;m.pending=false;m.result="other_map";return;}
     // 1214bw: a partner outside gameplay on the source map (the pause menu, a scene) keeps the transition and
     // follows on resuming; the 60 s cap counts gameplay only (take campaign-curator-vm-v1305a: the VM client
     // paused on losing focus and the transition expired), within 30 min of receiving it.
-    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";if(tick-m.receivedAt<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
+    if(logic!=1||outgoing.pendingGameLogicState||!observedGame){m.result="waiting_native_phase";if(tickAge(tick,m.receivedAt)<1800000)m.pendingAt=tick;else{m.pending=false;m.result="expired";}return;}
     if(std::memcmp(gameImage+0x4f1d40,mapTransitionTargetPrefix,sizeof(mapTransitionTargetPrefix))||std::memcmp(gameImage+0x13f9d0,idStrCtorPrefix,sizeof(idStrCtorPrefix))||
        std::memcmp(gameImage+0x13fd10,idStrDtorPrefix,sizeof(idStrDtorPrefix))||!realLogicSwitch){m.pending=false;m.result="code_mismatch";return;}
     alignas(16) unsigned char mapStr[64]{},startStr[64]{};

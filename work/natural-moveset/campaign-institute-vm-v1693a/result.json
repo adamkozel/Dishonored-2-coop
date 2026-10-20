@@ -1,0 +1,102 @@
+{
+  "passed": false,
+  "failure": "Host died at ld_kar_whaleoil_tank_01_3",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214fy",
+      "hostDll": "FB0E097021497CD413D1493D7592B45CD75A308482CC7297773C648B9A76FD2A",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "healthHold": [
+      "clear guard|elite|officer",
+      "ld_kar_whaleoil_tank_01_3"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 95,
+        "pos": [
+          -69.228531,
+          35.150341,
+          6.159025
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 7,
+        "pos": [
+          2.328331,
+          -28.769329,
+          12.691320
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          3,
+          10,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_IS,Obj_IS_Escape,Task_IS_Turn_OFF_the_watchtower"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}

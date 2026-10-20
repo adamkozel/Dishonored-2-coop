@@ -1,6 +1,7 @@
 #pragma once
 #include "gameflow_advance.h"
 void gameflowAdvanceTests(){
+    require(tickAge(1000,400)==600&&tickAge(1000,1000)==0&&tickAge(1000,1016)==0,"1214fy: a stamp taken after the frame tick is age 0, never a wrapped huge age");
     require(gameflowPartnerChanged(2,2,3,2)&&gameflowPartnerChanged(2,2,5,2),"1214fx: the partner moved away from the host's unchanged state");
     require(!gameflowPartnerChanged(2,2,2,3)&&!gameflowPartnerChanged(2,2,5,3)&&!gameflowPartnerChanged(2,3,3,2),
             "1214fx: the host moved first (Ramsey's kill, takes 1678a-1687a): no partner advance, the host wins");
