@@ -22,11 +22,7 @@ bool productPresentationState(ULONGLONG tick,bool& resuming,unsigned& missing);
 bool productPeerStreamWaiting(ULONGLONG tick);
 extern std::uint64_t bulkCongestionSkips;extern long long bulkQueueUsMax;
 bool productAutoArm=false,productLaunchChecked=false;ULONGLONG productSteamRetryAt=0;
-struct ProductArm {
-    std::uint64_t epoch=0,peerEpoch=0,map=0;unsigned step=0,worlds=0;ULONGLONG nextAt=0;
-    std::uint64_t dispatched=0,hostKeys=0,leaveKeys=0,maintenance=0,repairs=0,quickRepairs=0;ULONGLONG lostAt=0,liveSince=0,repairBackoff=0;unsigned missing=0,repairMask=0,repairStep=0;
-    const char* result="idle";const char* last="";
-};
+#include "product_arm.h"
 ProductArm productArm{};
 // 1214cp (#104): power world visuals that were scoped to the isolated lab fixture also run while the product
 // controller holds an armed session (installed release or lab coop_product_auto).
@@ -79,8 +75,7 @@ void serviceProductSession(void* system,ULONGLONG tick){
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&lastReceive&&tick-lastReceive<1000;
     if(!connected||!coopWorldPairReady(outgoing,remote)||outgoing.mapId!=remote.mapId){a.result=connected?"waiting_shared_gameplay":"waiting_partner";return;}
     if(a.epoch!=outgoing.worldEpoch||a.peerEpoch!=remote.worldEpoch||a.map!=outgoing.mapId){
-        const std::uint64_t keep=a.dispatched,hk=a.hostKeys,lk=a.leaveKeys,rp=a.repairs;// repair backoff restarts per worldconst unsigned worlds=a.worlds+1;a={};a.dispatched=keep;a.worlds=worlds;a.hostKeys=hk;a.leaveKeys=lk;a.repairs=rp;
-        a.epoch=outgoing.worldEpoch;a.peerEpoch=remote.worldEpoch;a.map=outgoing.mapId;a.nextAt=tick+3000;a.result="world_settling";return;
+        productNewWorld(a,outgoing.worldEpoch,remote.worldEpoch,outgoing.mapId,tick);return; // 1214ga (#145, product_arm.h)
     }
     if(tick<a.nextAt)return;
     const char* command=productStep(a.step);
@@ -177,7 +172,7 @@ struct MissionFollow {
     char hostMapinfo[160]{};std::uint32_t hostHigh=0;std::uint64_t hostMap=0,sequence=0,peerSequence=0,sent=0,received=0,loads=0,refused=0;
     // 1214fr (#135, join_warp.h): the map this partner loaded by following, the map it was placed on, and when both
     // worlds were last seen in gameplay together.
-    std::uint64_t followedMap=0,warpedMap=0,warps=0;ULONGLONG togetherSince=0;float warpDistance=0;
+    std::uint64_t followedMap=0,warpedMap=0,warps=0;ULONGLONG togetherSince=0;float warpDistance=0;unsigned warpedConnection=0;
     ULONGLONG sentAt=0,loadAt=0;std::uint64_t loadedForMap=0;const char* result="idle";
 };
 MissionFollow missionFollow{};
@@ -232,13 +227,13 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // gameplay or a menu; never while loading or in a cinematic.
     if(!*m.hostMapinfo||!m.hostMap){m.result="waiting_host_mission";return;}
     if(outgoing.mapId==m.hostMap){m.result="same_mission";m.loadedForMap=m.hostMap;
-        if(m.followedMap==outgoing.mapId&&m.warpedMap!=outgoing.mapId){
+        if(joinWarpDue(m.followedMap,outgoing.mapId,m.warpedMap,m.warpedConnection,static_cast<unsigned>(connection))){ // 1214ga (#135): again after a rejoin
             const bool together=outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&remote.gameLogicState==1&&!remote.pendingGameLogicState&&
                 remote.mapId==outgoing.mapId&&tick-lastReceive<500;
             if(!together){m.togetherSince=0;return;}
             if(!m.togetherSince){m.togetherSince=tick;return;}
             if(tick-m.togetherSince<kJoinWarpSettleMs)return;
-            const auto w=joinWarpTarget(outgoing.position,remote.position,remote.orientation);m.warpDistance=w.distance;m.warpedMap=outgoing.mapId;
+            const auto w=joinWarpTarget(outgoing.position,remote.position,remote.orientation);m.warpDistance=w.distance;m.warpedMap=outgoing.mapId;m.warpedConnection=static_cast<unsigned>(connection);
             if(!w.warp){m.result="same_mission_near_host";return;}
             char command[160]{};std::snprintf(command,sizeof(command),"setviewpos %.3f %.3f %.3f %.2f 0",w.x,w.y,w.z,w.yaw);
             dispatchCoopCommand(system,command);++m.warps;m.result="placed_beside_host";}

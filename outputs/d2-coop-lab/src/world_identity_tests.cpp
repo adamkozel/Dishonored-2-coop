@@ -2087,6 +2087,7 @@ void mesmerizeTargetTests(){
 #include "npc_combat_protocol_tests.h"
 #include "breakable_protocol_tests.h"
 #include "gameflow_advance_tests.h"
+#include "product_arm_tests.h"
 #include "join_warp_tests.h"
 #include "npc_attack_protocol_tests.h"
 void mapPathTests(){
@@ -2100,6 +2101,7 @@ int main() {
     npcCombatProtocolTests();
     breakableProtocolTests();
     gameflowAdvanceTests();
+    productArmTests();
     joinWarpTests();
     npcAttackProtocolTests();
     nativeNpcAuthorityTests();

@@ -1,4 +1,5 @@
 #pragma once
+#include "player_scene_probe.h"
 // Host-authored root and final skeleton stream. This carries presentation and
 // native AI ownership, not client hit requests or authoritative damage events.
 struct NpcRenderIdentity {
@@ -583,7 +584,10 @@ void serviceNpcStream(ULONGLONG tick){
     // fast-back lethal 5) and the bound replica it targets.
     unsigned pairedHandle=0,pairedVariant=0;
     if(localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-        if(readNativePlayerStates(memoryRead,base,st)&&readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}}
+        if(readNativePlayerStates(memoryRead,base,st)){
+            if(readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}
+            // 1214ga (#140, player_scene_probe.h): a takedown state whose scene is not recognized.
+            else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);}}
     // 1214ef (#11 enemy_body_size_variants): the host's own native paired takedown. The client's
     // replica follows the victim by this stream alone, and the budget above gave 24 bound NPCs one
     // pose per 400 ms each while the client expires render data at 350 ms: in take 1491a (curator

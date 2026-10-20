@@ -683,6 +683,10 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
             ReleaseSRWLockExclusive(&npcCombatCaptureLock);
             if(!room)stopNpcCombat("world_source_wait_capacity");return true;
         }
+        // 1214ga (#140, player_scene_probe.h): the partner's scenes and states at her assassination or fatality.
+        if(localRole&&(damage==NpcCombatDamage::Assassination||damage==NpcCombatDamage::Fatality)&&GetCurrentThreadId()==engineThread.load()){
+            NativePlayerStates ps{};const auto pb=reinterpret_cast<std::uintptr_t>(gameImage);
+            if(readNativePlayerStates(memoryRead,pb,ps))probePlayerScene(memoryRead,pb,ps,damage==NpcCombatDamage::Assassination?"capture_assassination":"capture_fatality",GetTickCount64(),true);}
         if(damage!=NpcCombatDamage::MapTrigger&&(npcCombatRanged(damage)?!npcCombatNear(*c,localRole,32):!npcCombatSourceNear(*c,world?2:localRole,sourceArm,npcCombatMeleeRange(damage)))){empty();++npcCombat.rejected;
             {auto& d=npcCombatHitRangePending;d={};d.reason="hit_range";d.arm=c->arm;d.sourceArm=sourceArm;d.damage=static_cast<unsigned>(damage);
              std::memcpy(d.self,outgoing.position,12);std::memcpy(d.captured,capture.position,12);d.victimRead=memoryRead(c->lease.binding.npc.actor+0x300,d.victim,12);
@@ -914,6 +918,7 @@ void writeNpcCombat(){
                 i==first?"":",",static_cast<unsigned long long>(r.tick),r.reason,r.arm,r.sourceArm,r.damage,r.distance,r.victimRead?"true":"false",
                 r.self[0],r.self[1],r.self[2],r.captured[0],r.captured[1],r.captured[2],r.victim[0],r.victim[1],r.victim[2]);}
         fputs("]",f);}
+    writePlayerSceneProbes(f); // 1214ga (#140)
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);
     for(unsigned i=0;i<s.sent.size();++i)fprintf(f,"%s%llu",i?",":"",s.sent[i]);
     fputs("],\"received\":[",f);for(unsigned i=0;i<s.received.size();++i)fprintf(f,"%s%llu",i?",":"",s.received[i]);
