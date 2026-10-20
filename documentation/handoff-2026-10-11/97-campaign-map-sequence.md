@@ -244,3 +244,31 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
 - **Passes:** lab takes route-tut-v1310h and route-tut-v1310j and two-account take campaign-training-vm-v1310b, all ending with both worlds at the main menu (`menu_p`) with equal gameflow. Failed and held takes 1310a–1310g, 1310i and campaign-training-vm-v1310a are recorded in the audit.
 
 Co-op therefore needs two native paths, the gameflow mission completion and the script `LevelTransition`, each carried to the partner with the host's map variant and a both-ready barrier. Each player's own character state (inventory, upgrades, chaos) crosses the change in their own world.
+
+## Campaign re-validation on the release binaries (1689, 1692-1701)
+
+Every mission again on two Steam accounts in product mode (host Corvo on this PC, VM Emily on the second account), each with the steps of its earlier passing VM take (Route-MissionVM-v1301). A failed attempt gets one retry (take b).
+
+**On 1214fx (release 0.8.0):**
+- campaign-dunwall-vm-v1689a passed.
+- campaign-eotw-vm-v1689a **failed: the partner's mission end expired at once** (a wrapped tick age; confirmed static), and her world stayed in Edge of the World while the host loaded The Good Doctor.
+  - 1214fy fixes it, and campaign-eotw-vm-v1692a passes on 1214fy with both worlds in The Good Doctor.
+  - Release 0.8.1 (1214fz = 1214fy with 0.8.1 version resources) ships the fix.
+- The Good Doctor failed twice on route steps (1689a: the Meagan talk at the boat; 1693a on 1214fy: the host died at the watchtower tank).
+
+**On 1214fz (release 0.8.1), the evidence take per mission:**
+
+| Mission | Take | Result |
+|---|---|---|
+| A Long Day in Dunwall | campaign-dunwall-vm-v1697a | pass: both worlds in the Void (`void_01_p`), gameflow equal |
+| Edge of the World | campaign-eotw-vm-v1697a | recorded as a pass, but the cable car did not end the mission (both worlds stayed in `eotw_p`; the 1302q steps have no final map check). The re-run campaign-eotw-vm-v1700a ends with an expect on The Good Doctor (pending). 1692a passed this mission end on 1214fy. |
+| The Good Doctor | campaign-institute-vm-v1697a | pass: both worlds on the Clockwork Mansion boat |
+| The Clockwork Mansion | campaign-madinventor-vm-v1697b | pass, both worlds in the Void (`void_02`); 1697a: the opening talk with Meagan did not register |
+| The Royal Conservatory | campaign-curator-vm-v1697b | pass, both worlds on the Dust District boat; 1697a: the archived-journals note use did not register |
+| The Dust District | campaign-dust-vm-v1697a | pass: the Jindosh lock dialled natively (31 presses), both worlds in A Crack in the Slab |
+| A Crack in the Slab | campaign-bunker-vm-v1697a | pass: both worlds on the Grand Palace boat |
+| The Grand Palace | campaign-palace-vm-v1697a | pass: both worlds on the Death to the Empress boat |
+| Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`); the credits gameflow difference is #94 |
+| Memories of Training | campaign-training-vm-v1697a/b | fail twice: after the first choke the stealth lesson restarted under a tutorial page (logic 12), and the route action never closed it. `d2_route_actions.py` now closes it; re-run campaign-training-vm-v1701a pending. |
+
+Every failure on 1214fz was a route step (a use or talk that did not register, a tutorial page). None was a divergence between the worlds: gameflow was equal in both worlds at every failing step.
