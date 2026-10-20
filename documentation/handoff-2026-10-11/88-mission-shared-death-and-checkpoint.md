@@ -100,5 +100,7 @@ Take route-eotw-boatdeath-v1302n (pass): the host falls in Karnaca after the boa
 
 ## Open
 
-- **Real script trigger.** A mission-script autosave crossed by one player alone hasn't been exercised. The same reader observes it, but these takes used the probe fixture.
+- **Real script trigger (done, #136, [chapter 106](106-partner-led-story-and-mid-mission-join.md)).** A real mission-script autosave crossed by either player alone pairs both worlds, and one shared restart brings both back from it (confirmed runtime):
+  - the host alone: route-dunwall-autosave-v1669a (the Dunwall street balcony; the partner mirrored it natively; both restarted from slot 62 in 6.7 s);
+  - the partner alone: route-dunwall-autosave-v1687b (the same trigger; both worlds saved the pair; both restarted in 7.0 s with gameflow equal).
 - **Not started:** manual save and load selection, disconnect and rejoin. Transitions between and within missions are covered in [chapter 97](97-campaign-map-sequence.md).
