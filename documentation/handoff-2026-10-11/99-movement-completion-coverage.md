@@ -520,9 +520,10 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 | completion-audit-v1422-shop | 1: the black market in both roles: walk to the counter, native NPC conversation gestures while the shop is open (bank 75), the partner kept through the post-menu delivery hitch (1214dr/dv; 1402b, 1416b/c) |
 | completion-audit-v1414-hit-reactions | 1: directional hit reactions from the left, front, right and back in both roles on 1214dp/dq (lab blasts 1403c/e/i, 1407a-e; clock weight 1.0 throughout); supersedes the v1377 draft |
 | completion-audit-v1413-pickup-loot-steal | 1: pickups (1261b), pickpocketing (1398c/d) and body loot (1398h on 1214dn, 1398i on 1214dp), both roles, with the native use reach presented |
+| completion-audit-v1571-window | 1: wall and window variants: the window choke (back and left) and the window assassination (back) through an open sash window, both roles. The front and right variants need an NPC that stays unaware facing the window, and Shadow Walk wall chokes are unreachable in retail (cvar 0) |
+| completion-audit-v1572-body-sizes | 1: enemy body sizes: small, tall, female, armored and wolfhound victims, and knocked-down and seated victims, both roles. Gravehound and clockwork outcomes are stage 4 (#118) |
 
-**Still open (2):**
-- paired actions: wall and window variants (window takedowns are not offered from the floor in front of the sill, 1458b/d, or from the sill, 1464; 1510 holds the placed overseer with Corvo's Bend Time; the wall variants are Emily's shadow-form chokes choke_sw_wall_*, 1459), enemy body sizes (small, tall and female presented in both roles: lab guards, 1426b-e, 1448, 1488a, 1496a; armored elites share the tall and female bodies; nonhuman targets (gravehounds 1502/1508, clockworks) and contextual ones (knocked down 1507, seated) open).
+**Still open:** none. The last two items closed with audits v1571 (windows) and v1572 (body sizes).
 
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 
