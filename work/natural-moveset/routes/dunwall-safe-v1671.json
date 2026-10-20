@@ -1,0 +1,215 @@
+[
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "census",
+  "match": "safe_door|ingot_gold",
+  "settle": 1000
+ },
+ {
+  "do": "use",
+  "name": "ld_safe_door_4_1",
+  "role": "host",
+  "z": 65.0,
+  "offsets": [
+   [
+    0.9,
+    0
+   ],
+   [
+    -0.9,
+    0
+   ],
+   [
+    0,
+    0.9
+   ],
+   [
+    0,
+    -0.9
+   ],
+   [
+    0.7,
+    0.5
+   ],
+   [
+    -0.7,
+    0.5
+   ],
+   [
+    0.7,
+    -0.5
+   ],
+   [
+    -0.7,
+    -0.5
+   ]
+  ],
+  "pitches": [
+   0,
+   -10,
+   10
+  ],
+  "yaws": [
+   0,
+   -10,
+   10
+  ],
+  "focus": true,
+  "aim": true,
+  "hold": 400,
+  "heal": true,
+  "settle": 3000,
+  "state": true
+ },
+ {
+  "do": "census",
+  "match": "safe_door|ingot_gold",
+  "settle": 1000
+ },
+ {
+  "do": "use",
+  "name": "pickups_ingot_gold_01",
+  "role": "host",
+  "z": 65.0,
+  "offsets": [
+   [
+    0.9,
+    0
+   ],
+   [
+    -0.9,
+    0
+   ],
+   [
+    0,
+    0.9
+   ],
+   [
+    0,
+    -0.9
+   ],
+   [
+    0.7,
+    0.5
+   ],
+   [
+    -0.7,
+    0.5
+   ],
+   [
+    0.7,
+    -0.5
+   ],
+   [
+    -0.7,
+    -0.5
+   ]
+  ],
+  "pitches": [
+   0,
+   -10,
+   10
+  ],
+  "yaws": [
+   0,
+   -10,
+   10
+  ],
+  "focus": true,
+  "aim": true,
+  "hold": 400,
+  "heal": true,
+  "settle": 3000,
+  "gone": true
+ },
+ {
+  "do": "census",
+  "match": "safe_door|ingot_gold",
+  "settle": 1000
+ },
+ {
+  "do": "use",
+  "name": "ld_safe_door_4_1",
+  "role": "client",
+  "z": 65.0,
+  "offsets": [
+   [
+    0.9,
+    0
+   ],
+   [
+    -0.9,
+    0
+   ],
+   [
+    0,
+    0.9
+   ],
+   [
+    0,
+    -0.9
+   ],
+   [
+    0.7,
+    0.5
+   ],
+   [
+    -0.7,
+    0.5
+   ],
+   [
+    0.7,
+    -0.5
+   ],
+   [
+    -0.7,
+    -0.5
+   ]
+  ],
+  "pitches": [
+   0,
+   -10,
+   10
+  ],
+  "yaws": [
+   0,
+   -10,
+   10
+  ],
+  "focus": true,
+  "aim": true,
+  "hold": 400,
+  "heal": true,
+  "settle": 3000,
+  "state": true
+ },
+ {
+  "do": "census",
+  "match": "safe_door|ingot_gold",
+  "settle": 1000
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 1000
+ }
+]
