@@ -150,6 +150,19 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     This is a gap of the mixed-role route, not of the story path. The fight after a partner-crossed transformation
     trigger is left to the campaign takes.
 
+- **route-dunwall-autosave-v1678a (fail, harness; 1214ft):** the partner led steps 1-4, and the host took Ramsey's two
+  steps.
+  - Corvo also assassinated Ramsey at his first press (50 to 0 health), natively in his own world. Neither world
+    completed `Obj_DW_EliminateRamsey` at the kill.
+  - So after an assassination the elimination completes only with the search of the body, as in 1676a, where both
+    worlds completed it at the loot step.
+  - All five of the host's loot stands missed: no search prompt over the body (frame).
+  - **This revises 1674b:** its failure fits the same loot miss. Whether Ramsey died in Corvo's world there was not
+    recorded. Path (b) above is therefore unconfirmed; path (a), the kill staying in her world, is confirmed (1674a).
+  - [Route-Mission-v1677](../../work/natural-moveset/Route-Mission-v1677.ps1)'s loot step steers by the native use
+    focus. At each stand it sweeps pitch and bearing and presses only while the body is focused (`$tag-lootfocus.json`).
+  - Repeated for #136 as route-dunwall-autosave-v1681a, after the 1214fu take route-dunwall-lead-v1680a.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

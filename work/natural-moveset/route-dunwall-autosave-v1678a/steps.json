@@ -1,0 +1,182 @@
+[
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "attack",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "max": 40,
+  "settle": 4000,
+  "role": "host"
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000,
+  "expect": 6,
+  "role": "host"
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_2_open",
+  "z": 68.0,
+  "settle": 8000,
+  "offsets": [
+   [
+    -0.8,
+    0
+   ],
+   [
+    -0.6,
+    0
+   ],
+   [
+    -1.0,
+    0
+   ],
+   [
+    -0.7,
+    0.3
+   ],
+   [
+    -0.7,
+    -0.3
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_saferoom_enter",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_saferoom",
+  "settle": 4000
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_3",
+  "z": 65.0,
+  "settle": 15000,
+  "offsets": [
+   [
+    0,
+    0.9
+   ],
+   [
+    0.3,
+    0.85
+   ],
+   [
+    -0.3,
+    0.85
+   ],
+   [
+    0,
+    0.7
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_3",
+  "z": 65.0,
+  "settle": 20000,
+  "offsets": [
+   [
+    0,
+    0.9
+   ],
+   [
+    0.3,
+    0.85
+   ],
+   [
+    -0.3,
+    0.85
+   ],
+   [
+    0,
+    0.7
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_balcony",
+  "settle": 5000
+ },
+ {
+  "do": "die",
+  "settle": 5000
+ },
+ {
+  "do": "wait",
+  "ms": 8000,
+  "settle": 3000
+ }
+]
