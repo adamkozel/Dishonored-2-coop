@@ -271,6 +271,21 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Takes route-dunwall-hostkill-v1688a, route-dunwall-autosave-v1688b (#136) and route-dunwall-lead-v1688c (#134
     regression).
 
+- **route-dunwall-autosave-v1687b (pass, 1214fw; #136): a real autosave crossed by the partner alone pairs both worlds,
+  and both restart from it.** Confirmed runtime:
+  - The host led to the streets. The partner alone crossed the street balcony trigger (`ld_trigger_balcony`), 28 m
+    from Corvo.
+  - The pair: host `local_save_originated` (slot 61), partner `mirrored_save_landed` (slot 62), s2/o1/m1 on both sides,
+    0 refused, 0 rejected.
+  - The partner then died, and one shared restart brought both worlds back in 7.0 s from the pair, each player at
+    their own spot, with gameflow equal.
+  - With route-dunwall-autosave-v1669a (the host crossing alone), #136 is covered for either player.
+  - How the partner's crossing became a host-side save (hypothesis): the trigger mirror crossed the balcony trigger in
+    the host's world, and the host's script autosaved there.
+- **route-dunwall-hostkill-v1688a (pass, 1214fx): the Ramsey blocker is fixed.** The host fought Ramsey and finished
+  him (0 health in both worlds), and both worlds completed `Obj_DW_EliminateRamsey` at once (gameflow [237,1,4,5],
+  `Task_DW_GetRing`).
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
