@@ -261,7 +261,7 @@ Every mission again on two Steam accounts in product mode (host Corvo on this PC
 | Mission | Take | Result |
 |---|---|---|
 | A Long Day in Dunwall | campaign-dunwall-vm-v1697a | pass: both worlds in the Void (`void_01_p`), gameflow equal |
-| Edge of the World | campaign-eotw-vm-v1697a | recorded as a pass, but the cable car did not end the mission (both worlds stayed in `eotw_p`; the 1302q steps have no final map check). The re-run campaign-eotw-vm-v1700a ends with an expect on The Good Doctor (pending). 1692a passed this mission end on 1214fy. |
+| Edge of the World | campaign-eotw-vm-v1700a | pass: the cable car ended the mission and both worlds reached The Good Doctor (`institute_p_lowchaos`), gameflow equal at every step. The earlier campaign-eotw-vm-v1697a had been recorded as a pass, but its cable car did not end the mission (the 1302q steps have no final map check); 1700a ends with an expect on The Good Doctor. |
 | The Good Doctor | campaign-institute-vm-v1697a | pass: both worlds on the Clockwork Mansion boat |
 | The Clockwork Mansion | campaign-madinventor-vm-v1697b | pass, both worlds in the Void (`void_02`); 1697a: the opening talk with Meagan did not register |
 | The Royal Conservatory | campaign-curator-vm-v1697b | pass, both worlds on the Dust District boat; 1697a: the archived-journals note use did not register |
