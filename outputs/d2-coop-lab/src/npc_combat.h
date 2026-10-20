@@ -76,6 +76,13 @@ struct NpcCombatCapture {std::uint64_t nonce=0,arm=0;ULONGLONG tick=0;DWORD thre
 SRWLOCK npcCombatCaptureLock=SRWLOCK_INIT;
 std::vector<NpcCombatCaptureBinding> npcCombatCaptureBindings;
 std::vector<NpcCombatCapture> npcCombatCaptures;
+// 1214fu (#140): the client's stream replicas while its combat session is down (stopped, re-arming 3 s later). The
+// capture bindings are cleared with the session, so a client hit on a replica in that gap went native and killed it
+// in the client's world only (route-dunwall-lead-v1674a: the partner's second press after a stop killed Ramsey, and
+// Corvo's Ramsey lived). The host owns a replica's life, so the hit is held back instead; knockout damage still passes
+// (the stream shares unconsciousness).
+struct NpcReplicaGuard {std::uintptr_t component=0,actor=0;unsigned generation=0;};
+std::vector<NpcReplicaGuard> npcReplicaGuards;std::atomic<std::uint64_t> npcCombatReplicaGapSuppressed{0};
 std::array<NpcCombatCapture,8> npcCombatSourceHistory{};std::uint64_t npcCombatSourceCount=0;
 std::atomic<unsigned> npcCombatCaptureFault{0};
 std::atomic<std::uint64_t> npcCombatCaptured{0},npcCombatWorkerCaptured{0};
@@ -154,6 +161,12 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
             npcCombatCaptures.push_back(e);++npcCombatCaptured;if(e.thread!=engineThread.load())++npcCombatWorkerCaptured;}
         break;
     }
+    // 1214fu (#140): a client hit on a stream replica while the combat session is down.
+    if(!handled&&!npcReplicaGuards.empty()){const auto c=reinterpret_cast<std::uintptr_t>(component);
+        for(const auto& g:npcReplicaGuards){if(g.component!=c)continue;std::uintptr_t owner=0,decl=0;unsigned generation=0;
+            if(!memoryRead(c+0x10,&owner,8)||owner!=g.actor||!memoryRead(c+0x18,&generation,4)||generation!=g.generation)break;
+            if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl))break;
+            handled=true;npcCombatReplicaGapSuppressed.fetch_add(1);break;}}
     ReleaseSRWLockExclusive(&npcCombatCaptureLock);
     // The established native empty-result constructor is also used by the
     // friendly-fire filter on worker callbacks. Game mutations happen later
@@ -842,9 +855,19 @@ void serviceNpcCombatTriggerFixture(){
     reinterpret_cast<NativeDamage>(gameImage+0x717950)(reinterpret_cast<void*>(health.component),params.data(),result.data());
     npcCombatTriggerFixtureResult=npcCombatCaptured.load()==count+1?"captured_observed_event_fixture":"capture_unconfirmed";
 }
+// 1214fu (#140): engine thread: publish the client's ready stream replicas while combat is wanted but its session is
+// down; the list is empty while the session runs (its capture bindings cover the same NPCs) and on the host.
+void refreshNpcReplicaGuards(){
+    std::vector<NpcReplicaGuard> next;
+    if(localRole&&npcCombatWanted&&!npcCombat.enabled)for(const auto& c:npcChannels)
+        if(c.enabled&&c.ready&&c.lease.ready&&c.lease.references&&!c.corpse)
+            next.push_back({c.lease.binding.health.component,c.lease.binding.npc.actor,c.lease.binding.healthGeneration});
+    AcquireSRWLockExclusive(&npcCombatCaptureLock);npcReplicaGuards.swap(next);ReleaseSRWLockExclusive(&npcCombatCaptureLock);
+}
 void serviceNpcCombat(ULONGLONG tick){
     if(npcCombatRequest>=0){const auto request=npcCombatRequest;npcCombatRequest=-1;npcCombatWanted=request!=0;if(request)beginNpcCombat();else stopNpcCombat("disabled");}
     serviceNpcCombatFixture(tick);
+    refreshNpcReplicaGuards();
     if(!npcCombat.enabled&&npcCombatWanted&&(productMode||productAutoArm)&&npcAuthorityStreamActive&&tick-npcCombatRearmAt>=3000){npcCombatRearmAt=tick;beginNpcCombat();if(npcCombat.enabled)++npcCombatRearms;}
     if(!npcCombat.enabled)return;
     syncNpcCombatChannels(tick);
@@ -878,6 +901,7 @@ void writeNpcCombat(){
     const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
+    fprintf(f,",\"replicaGapSuppressed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()));
     // 1214ft: the stop and retire histories, oldest first.
     for(int k=0;k<2;++k){const auto* list=k?npcCombatRetires:npcCombatStops;const unsigned count=k?npcCombatRetireCount:npcCombatStopCount;
         fprintf(f,",\"%s\":[",k?"retireHistory":"stopHistory");const unsigned first=count>8?count-8:0;
