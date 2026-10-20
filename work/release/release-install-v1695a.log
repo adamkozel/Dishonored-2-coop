@@ -1,0 +1,51 @@
+{
+  "failure": null,
+  "passed": true,
+  "cases": [
+    {
+      "case": "install",
+      "passed": true,
+      "message": "Building the co-op resource packages from your game files...\nBuilding the corvo movement bank from your game files...\nBuilding the emily movement bank from your game files...\nBuilding the prop animation tables from your game files...\nInstalled Dishonored 2 co-op 0.8.1: 14 files; originals backed up in d2coop-backup\\20261020-114514\r\n\r\n"
+    },
+    {
+      "case": "built_banks_load",
+      "passed": true,
+      "message": "PASS: both actual banks, closed cycles, malformed payloads, layout/root/event guards, angle seam and distance-based phase\r\n"
+    },
+    {
+      "case": "built_tables_parse",
+      "passed": true,
+      "message": "17"
+    },
+    {
+      "case": "reinstall_refused",
+      "passed": true,
+      "message": "Co-op is already installed here (receipt present); uninstall first.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.8.1\\Install-D2Coop.ps1:32 char:41\r\n+ ... eceiptPath){throw 'Co-op is already installed here (receipt present); ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Co-op is alread...ninstall first.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Co-op is already installed here (receipt present); uninstall first.\r\n \r\n\r\n"
+    },
+    {
+      "case": "rollback_byte_identical",
+      "passed": true,
+      "message": "Rolled back: 13 added files removed, 1 originals restored.\r\n\r\n"
+    },
+    {
+      "case": "wrong_exe_refused_unchanged",
+      "passed": true,
+      "message": "Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing changed.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.8.1\\Install-D2Coop.ps1:29 char:95\r\n+ ... ableSha256){throw 'Unsupported Dishonored2.exe build (the mod needs t ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Unsupported Dis...othing changed.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing cha \r\n   nged.\r\n \r\n\r\n"
+    },
+    {
+      "case": "modified_master_refused_unchanged",
+      "passed": true,
+      "message": "base/master.index is not the original; restore it (Steam: Properties > Installed Files > Verify) first.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.8.1\\Install-D2Coop.ps1:33 char:98\r\n+ ... ndexSha256){throw 'base/master.index is not the original; restore it  ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (base/master.ind... Verify) first.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : base/master.index is not the original; restore it (Steam: Properties > Installed Files > \r\n    Verify) first.\r\n \r\n\r\n"
+    },
+    {
+      "case": "steam_install_untouched",
+      "passed": true,
+      "message": null
+    }
+  ],
+  "timing": {
+    "seconds": 56.0,
+    "peakSetupMB": 1277.0
+  },
+  "package": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/outputs/release/d2coop-v0.8.1"
+}
