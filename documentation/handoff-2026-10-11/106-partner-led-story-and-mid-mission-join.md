@@ -141,6 +141,15 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     the partner were 1.7 m apart. So the trigger of the bad paths is still open (#140).
   - 1214ft's stop history covers the next partner-led kills (route-institute-lead-v1677a clears walking guards).
 
+- **route-institute-lead-v1677a (1214ft; the partner leads The Good Doctor, route institute-partner-v1677):** steps 1-14,
+  all by the partner, ended the same in both worlds, with gameflow equal after each (confirmed runtime):
+  - the note on Hypatia's door, the guard clear, Hypatia's key, the glass door and the lab trigger;
+  - the talk scene with Hypatia, the scroll case on her belt, and the transformation trigger (`ld_trigger_transfo_alone_2`).
+  - Step 15, Hypatia's fight given to the host, failed ("still alive after 80 attacks"). The host's lookup teleported
+    Corvo to face a wall. In host-led runs Corvo has crossed the transformation trigger himself and stands in the lab.
+    This is a gap of the mixed-role route, not of the story path. The fight after a partner-crossed transformation
+    trigger is left to the campaign takes.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
