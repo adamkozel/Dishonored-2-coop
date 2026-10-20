@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-20T09:00:00+02:00",
+  "UpdatedAt": "2026-10-20T10:15:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22143,32 +22143,57 @@
       "94-endp-gameflow": {
         "Status": "static check posted; runtime post-credits check pending"
       }
+    },
+    "Revalidation": {
+      "Candidate": "candidate-npc-combat-v1214fx",
+      "Harness": "work/natural-moveset/Route-MissionVM-v1301.ps1",
+      "Takes": "work/natural-moveset/campaign-*-vm-v1689a (each mission with the steps of its earlier passing VM take)",
+      "Status": "running"
     }
   },
   "Release": {
-    "Version": "0.7.0",
-    "Card": 30,
+    "Version": "0.8.0",
+    "Card": 137,
     "Chapter": "documentation/handoff-2026-10-11/98-release-without-game-files.md",
-    "Package": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.7.0 (d2coop-v0.7.0.zip, SHA-256 484FF854DA210A611AC62DCCFCCDB1C8508B3F570A9CCF2B98CA2CBF10946EFF)",
-    "Candidate": "candidate-npc-combat-v1214cf",
-    "Builder": "work/release/build_release_v1313.py",
-    "SetupTool": "work/release/setup-tool-v1313/identity.json",
-    "NoGameFiles": "banks (bank-patches-v1), native tables (native-tables-v1) and decl packages (decl-recipes-v1) are built by d2coop_setup from the player's install",
+    "Package": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.0 (d2coop-v0.8.0.zip, SHA-256 F485423567B0C51CC2C60DE73A2D11CEE8C3BCA36D8F2A9023C420B350A71DE0)",
+    "Candidate": "candidate-npc-combat-v1214fx",
+    "Builder": "work/release/build_release_v1668.py",
+    "SetupTool": "work/release/setup-tool-v1669/identity.json",
+    "NoGameFiles": "banks (bank-patches-v2), native tables (native-tables-v1) and decl packages (decl-recipes-v2) are built by d2coop_setup from the player install",
     "InstallTest": {
-      "Take": "work/release/release-install-v1313d/result.json",
-      "Status": "pass (8/8, final package)"
+      "Take": "work/release/release-install-v1669a/result.json",
+      "Status": "pass (8/8)"
     },
     "CleanPc": {
-      "Harness": "work/release/Test-ProductTwoAccount-v1315.ps1",
-      "Take": "work/release/product-two-account-v1315b/result.json",
-      "Status": "pass: downloaded from GitHub in the VM, Install.cmd alone, Defender on without detection, join, follow into the mission as Emily, both walk, F8 leave, uninstall rollback"
+      "Harness": "work/release/Test-ProductTwoAccount-v1670.ps1",
+      "Take": "work/release/product-two-account-v1670a/result.json",
+      "Status": "pass: downloaded from GitHub in the VM, Install.cmd alone, two-account session (join, follow, walk, F8), uninstall"
     },
-    "NeedsYou": {
-      "98": "repository made public by the user (2026-10-17); Mixamo and history decisions remain",
-      "99": "final human playtest",
-      "25": "Microsoft false-positive submission"
-    },
-    "Merged": "652e8e81 (#97, closes #30)"
+    "Previous": {
+      "Version": "0.7.0",
+      "Card": 30,
+      "Chapter": "documentation/handoff-2026-10-11/98-release-without-game-files.md",
+      "Package": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.7.0 (d2coop-v0.7.0.zip, SHA-256 484FF854DA210A611AC62DCCFCCDB1C8508B3F570A9CCF2B98CA2CBF10946EFF)",
+      "Candidate": "candidate-npc-combat-v1214cf",
+      "Builder": "work/release/build_release_v1313.py",
+      "SetupTool": "work/release/setup-tool-v1313/identity.json",
+      "NoGameFiles": "banks (bank-patches-v1), native tables (native-tables-v1) and decl packages (decl-recipes-v1) are built by d2coop_setup from the player's install",
+      "InstallTest": {
+        "Take": "work/release/release-install-v1313d/result.json",
+        "Status": "pass (8/8, final package)"
+      },
+      "CleanPc": {
+        "Harness": "work/release/Test-ProductTwoAccount-v1315.ps1",
+        "Take": "work/release/product-two-account-v1315b/result.json",
+        "Status": "pass: downloaded from GitHub in the VM, Install.cmd alone, Defender on without detection, join, follow into the mission as Emily, both walk, F8 leave, uninstall rollback"
+      },
+      "NeedsYou": {
+        "98": "repository made public by the user (2026-10-17); Mixamo and history decisions remain",
+        "99": "final human playtest",
+        "25": "Microsoft false-positive submission"
+      },
+      "Merged": "652e8e81 (#97, closes #30)"
+    }
   },
   "MovementCompletion": {
     "Card": 11,
@@ -22443,6 +22468,77 @@
     ],
     "Candidates": [
       "candidate-npc-combat-v1214fq"
+    ]
+  },
+  "PartnerLedStory": {
+    "Card": 134,
+    "Status": "done: the partner leads all of A Long Day in Dunwall with every story step equal in both worlds (1674a, 1680a, 1683a, 1688c); The Good Doctor steps 1-14 (1677a); partner advances travel as D2GV (1214fs) and only from an unchanged host state (1214fx); safes per world with shared contents (1671a)",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Evidence": [
+      "route-dunwall-safe-v1671a",
+      "route-dunwall-lead-v1674a",
+      "route-institute-lead-v1677a",
+      "route-dunwall-lead-v1680a",
+      "route-dunwall-lead-v1683a",
+      "route-dunwall-lead-v1688c"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214fr",
+      "candidate-npc-combat-v1214fs",
+      "candidate-npc-combat-v1214fx"
+    ]
+  },
+  "MidMissionJoin": {
+    "Card": 135,
+    "Status": "lab done: the partner follows from another mission, loads the host mission and is placed beside the host (1679a, 33 m to 0.9 m); the life roster converges earlier kills except Alexi (1682a, known limitation); two-account join and follow in the clean-PC take 1670a",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Evidence": [
+      "route-dunwall-join-v1679a",
+      "route-dunwall-join-v1682a",
+      "product-two-account-v1670a"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214fr",
+      "candidate-npc-combat-v1214fu"
+    ]
+  },
+  "RealAutosavePair": {
+    "Card": 136,
+    "Status": "done: a real script autosave crossed by either player alone pairs both worlds and one shared restart brings both back (host 1669a; partner 1687b, 1688b)",
+    "Chapter": "documentation/handoff-2026-10-11/88-mission-shared-death-and-checkpoint.md",
+    "Evidence": [
+      "route-dunwall-autosave-v1669a",
+      "route-dunwall-autosave-v1687b",
+      "route-dunwall-autosave-v1688b"
+    ]
+  },
+  "PartnerKillsOfHostNpcs": {
+    "Card": 140,
+    "Status": "mostly fixed: an assassination refused at 5.3 m by the 3 m melee range (1680a) now reaches 8 m (1214fv); the partner assassination of Ramsey kills him in both worlds (1683a, 1688c); the partner search of a body she assassinated is intermittent (1683b), a known limitation",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Evidence": [
+      "route-dunwall-lead-v1676a",
+      "route-dunwall-lead-v1680a",
+      "route-dunwall-lead-v1683a",
+      "route-dunwall-autosave-v1683b"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214ft",
+      "candidate-npc-combat-v1214fu",
+      "candidate-npc-combat-v1214fv"
+    ]
+  },
+  "RamseyCampaignBlocker": {
+    "Status": "fixed in 1214fx: the 1214fr partner advance sent false advances back to the host when the host moved first, so a host kill of Ramsey never counted (1678a, 1684a-1687a); a partner advance is now a change away from an unchanged host state (1688a pass); 1214fw also applies the host player own assassination and fatality natively",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Evidence": [
+      "route-dunwall-hostkill-v1686a",
+      "route-dunwall-hostkill-v1687a",
+      "route-dunwall-hostkill-v1688a"
+    ],
+    "Candidates": [
+      "candidate-npc-combat-v1214fw",
+      "candidate-npc-combat-v1214fx"
     ]
   }
 }
