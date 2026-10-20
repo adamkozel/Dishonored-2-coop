@@ -218,6 +218,16 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - So the partner's search of a body she assassinated is intermittent. Hypothesis: the replica corpse is sometimes not
     interactable after the host-committed kill. Tracked in #140.
 
+- **route-dunwall-autosave-v1684a (fail, harness; 1214fv):** the host led, assassinated Ramsey at his first press, and
+  then failed to search the body.
+  - The native focus held the body at 3 of 75 aims, and X was pressed each time, but the search never completed.
+  - The frame shows the two tower guards (`ld_spawner_guard_escape_1` and `_2`, about 5 m from Ramsey) hitting Corvo over
+    the body, so their attacks interrupted the search.
+  - In the host-led takes where Corvo fought Ramsey (1669a, 1679a, 1682a) the search worked; both host assassinations
+    (1678a, 1684a) failed it.
+  - route-dunwall-autosave-v1685a clears the guards around Ramsey (host, health hold) before the search. The partner
+    still crosses the street balcony autosave alone and dies.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
