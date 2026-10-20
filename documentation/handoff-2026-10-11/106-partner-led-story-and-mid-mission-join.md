@@ -115,6 +115,17 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     - The objectives and the story are unaffected. The kill sharing is tracked as its own combat issue, [#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140) (stage 4).
     - 1214ft records the session stops with the hit_range geometry; take route-dunwall-lead-v1676a.
 
+- **route-dunwall-autosave-v1674b (fail, 1214fs, partner-led autosave route):** her attack brought Ramsey to 0 health
+  in her world at press 4, as in 1674a. This time **neither** world completed `Obj_DW_EliminateRamsey`, and the loot failed.
+  - So the partner's kill of Ramsey takes one of two wrong paths:
+    - (a) it stays in her world, her script completes the objective, and the advance reaches the host while Corvo's
+      Ramsey lives (1674a);
+    - (b) no world's story script sees the kill (1674b; hypothesis: the kill reached the host and was applied there in
+      a way the story script does not count as a player kill).
+  - Both are #140. 1214ft's stop history and authority records (take 1676a) will show the path.
+  - For #136, route-dunwall-autosave-v1678a lets the host do Ramsey's two steps, while the partner leads the rest and
+    crosses the street balcony autosave alone.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
