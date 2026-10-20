@@ -16,4 +16,8 @@ git ls-files "$lab" > "$tracked"
   NR == FNR { t[$0] = 1; next }
   $1 == "S" { if (!((lab "/" $2) in t)) { print "check-sources: missing build source " lab "/" $2; bad = 1 } next }
   $1 == "I" { if (!((lab "/src/" $2) in t) && !((lab "/third_party/valve/" $2) in t)) { print "check-sources: unresolved include \"" $2 "\""; bad = 1 } }
-  END { exit bad ? 1 : 0 }' "$tracked" - >&2
+  END { exit bad ? 1 : 0 }' "$tracked" - >&2 || exit 1
+# Every packet struct's default magic is unique. With a shared magic the receiver's dispatch takes one packet type for
+# the other: 1214fr's gameflow advance shared D2GA with the guard body packet, and no advance reached the host.
+dups=$(git grep -h -o -E 'uint32_t magic=0x[0-9A-Fa-f]{8}' -- "$lab/src" | grep -o -E '0x[0-9A-Fa-f]{8}' | tr 'a-f' 'A-F' | sort | uniq -d)
+if [ -n "$dups" ]; then echo "check-sources: duplicate packet magic $dups" >&2; exit 1; fi

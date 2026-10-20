@@ -1031,7 +1031,7 @@ void exchangePoses(ULONGLONG tick) {
             else ++chaosSync.refused;
             messages[i]->Release();continue;
         }
-        if(magic==0x41473244) {
+        if(magic==0x56473244) {
             if(messages[i]->m_cbSize==sizeof(GameflowAdvancePacket)){GameflowAdvancePacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveGameflowAdvance(p);}
             else ++gameflowMirror.partnerRefused;
             messages[i]->Release();continue;

@@ -25,7 +25,8 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
 - **Detection (partner):** a node that differs from a node the host has non-zero, and that the mirror did not set itself,
   is the partner's own advance.
   - It is held against the mirror for 10 s (`kGameflowAdvanceHoldMs`).
-  - It is reported to the host with the host state it advanced from (`D2GA`, 424 bytes, up to 32 entries).
+  - It is reported to the host with the host state it advanced from (`D2GV` since 1214fs, 424 bytes, up to 32
+    entries). 1214fr used `D2GA`, see below.
 - **Rule:** both states are non-zero and below 16, and differ. Activations from 0 and deactivations to 0 are never
   reported, so each world's character branches (the `asCorvo` and `asEmily` nodes) stay in their own world.
 - **Host:** applies an entry through the same native set-state routine when its node still has the `from` state, so the
@@ -66,3 +67,27 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Fix: [Route-Mission-v1673](../../work/natural-moveset/Route-Mission-v1673.ps1) closes the journal with B (counted in
     `notes.menuClosed`), and an attack settles the leading role whenever it is not in gameplay.
   - The take is repeated as route-dunwall-lead-v1673a. The remaining takes (1669b, 1671a and 1672a) also run on v1673.
+- **route-dunwall-lead-v1673a and route-dunwall-autosave-v1669b (fail, both partner-led on 1214fr):** the attack on
+  Ramsey now worked, but the loot of his body never registered ("Loot of mortimer_ramsey not registered").
+  - The host-led take 1669a, at the same point: Corvo's kill completes `Obj_DW_EliminateRamsey` in both worlds at once
+    (gameflow 239 to 237, then `Task_DW_GetRing`).
+  - Emily's kill completed it in neither world at the step's end. A sampler of both worlds' mirror and combat status
+    every 2 s during 1669b (confirmed runtime) showed why:
+    - Emily's kill was an assassination (`assassination_damage`; Ramsey 50 to 0 in one press), and her world completed
+      the objective natively (gameflow 237, `Task_DW_GetRing`).
+    - The partner advances worked on her side: 3 nodes held, 20 reports sent. **The host received 0**, the holds expired
+      after 10 s, and the mirror set her world back.
+  - **Cause 1 (confirmed static): `D2GA` was already the guard body packet's magic** (guard_body_protocol.h). The host's
+    receive dispatch tests that magic first and counted every advance as a rejected guard body.
+    - **1214fs** gives the advance its own magic, `D2GV`.
+    - `tools/repo/check-sources.sh` (run by CI) now refuses two packet structs with one default magic. Only `D2GA` was
+      shared.
+  - **Cause 2 (confirmed runtime, not yet explained): Ramsey's death ran only in Emily's world.**
+    - Her combat channel for him retired with `initial_health_or_nonce_mismatch`, and the assassination stopped her
+      combat session with `hit_range`.
+    - The host's channels kept timing out in negotiation (`negotiation_timeout`), and her session rejected the host's
+      packets from then on.
+    - Corvo's Ramsey stayed alive. Even with the advance delivered, the two worlds would then differ on Ramsey himself.
+    - [Route-Mission-v1674](../../work/natural-moveset/Route-Mission-v1674.ps1) records both worlds' NPC authority
+      eligibility for Ramsey (`authority` step) before and after the fight. It runs as route-dunwall-lead-v1674a on
+      1214fs.
