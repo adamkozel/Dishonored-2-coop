@@ -65,6 +65,11 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Fix: [Route-Mission-v1675](../../work/natural-moveset/Route-Mission-v1675.ps1) settles the partner during the join's
     loading wait (A at the mission card, Emily at a character choice) for up to 240 s. Repeated as
     route-dunwall-join-v1675a on 1214fs.
+- **route-dunwall-join-v1675a (fail, harness; 1214fs, v1675):** the partner loaded Dunwall again and showed the mission
+  card ("Press any key", frame), but with a load still pending (logic 15, pending 5). v1675 pressed only with nothing
+  pending, so the 240 s wait ran out.
+  - [Route-Mission-v1676](../../work/natural-moveset/Route-Mission-v1676.ps1) presses through the card whatever the
+    pending state, as the VM campaign harness does. Repeated as route-dunwall-join-v1679a on 1214ft.
 - **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
   1-3 completed in both worlds, with the gameflow counts equal.
   - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).
