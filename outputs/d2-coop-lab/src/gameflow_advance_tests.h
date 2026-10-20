@@ -1,6 +1,10 @@
 #pragma once
 #include "gameflow_advance.h"
 void gameflowAdvanceTests(){
+    require(gameflowPartnerChanged(2,2,3,2)&&gameflowPartnerChanged(2,2,5,2),"1214fx: the partner moved away from the host's unchanged state");
+    require(!gameflowPartnerChanged(2,2,2,3)&&!gameflowPartnerChanged(2,2,5,3)&&!gameflowPartnerChanged(2,3,3,2),
+            "1214fx: the host moved first (Ramsey's kill, takes 1678a-1687a): no partner advance, the host wins");
+    require(!gameflowPartnerChanged(3,2,3,2)&&!gameflowPartnerChanged(2,2,2,2)&&!gameflowPartnerChanged(2,2,0,2),"1214fx: no change, an old difference, a deactivation");
     require(gameflowAdvanceAllowed(2,3)&&gameflowAdvanceAllowed(3,5),"1214fr: a partner completes or cancels a node the host has active");
     require(!gameflowAdvanceAllowed(0,2)&&!gameflowAdvanceAllowed(2,0)&&!gameflowAdvanceAllowed(3,3)&&!gameflowAdvanceAllowed(2,16)&&!gameflowAdvanceAllowed(-1,2),
             "1214fr: no activations from 0, no deactivations, no unchanged or out-of-range states");

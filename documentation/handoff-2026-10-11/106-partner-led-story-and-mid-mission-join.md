@@ -228,6 +228,73 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - route-dunwall-autosave-v1685a clears the guards around Ramsey (host, health hold) before the search. The partner
     still crosses the street balcony autosave alone and dies.
 
+- **route-dunwall-autosave-v1685a (fail, harness; 1214fv):** the host assassinated Ramsey and cleared the guards, and
+  his search of the body still did not register.
+  - After this kill the objectives went to [237,2,7,2]; after fought kills they go to [237,1,4,5].
+  - The partner-crossed autosave on Dunwall stays behind the Ramsey search, so it moves to a mission without that gate
+    (Edge of the World). The mechanism is symmetric: both origins passed with the fixture autosave (1156), and the
+    host-crossed real autosave passed in 1669a.
+
+- **route-dunwall-hostkill-v1686a (diagnosis, 1214fv): a host assassination or finisher on Ramsey does not count for
+  the story. This is a campaign blocker, found while chasing the #136 takes.**
+  - The host fought Ramsey (50 to 0 in 10 presses) and the killing blow was `assassination_damage`, a finisher.
+  - Ramsey reached 0 health in both worlds (one death each), but the Dunwall script never counted the kill: gameflow
+    [237,2,7,2] with `Task_DW_KillRamsey` and `Task_DW_NonLethal_KnockoutRamsey` active.
+  - So his ring could not be searched (1678a, 1684a and 1685a failed the same way after host assassinations).
+  - The host's kill counts when the killing blow is a sword hit (1669a, 1679a), and when no combat session runs (1682a,
+    the partner on another map).
+  - **Cause (confirmed static; the kill evidence is confirmed runtime):**
+    - the host captures its own player's damage on bound NPCs, empties the native result and replays it;
+    - for an assassination the replay brings health to 0 without the native takedown's story event.
+  - **1214fw:** the host player's own assassination or fatality finisher applies natively on the host, as non-replayable
+    host damage already does, and HostWorld and Dead share it. The partner's path is unchanged. Unit test for the rule.
+  - Takes route-dunwall-hostkill-v1687a, route-dunwall-autosave-v1687b (#136) and route-dunwall-lead-v1687c
+    (regression).
+
+- **route-dunwall-hostkill-v1687a (1214fw): the native host takedown did not fix it, and the real cause is the
+  partner advance (1214fr).**
+  - The host's finisher now applied natively (`hostPairedPassed` 1), and Ramsey died in both worlds. The objectives
+    still stuck at [237,2,7,2].
+  - Which takes counted the host's kill:
+    - counted: 1669a (1214fr, when no advance reached the host), and 1679a and 1682a (partner on another map at the
+      kill);
+    - not counted: every host-led take with the partner present on 1214fs or later (1678a, 1684a-1687a).
+  - **Cause (confirmed static, my 1214fr detection):**
+    - the partner took any node that differed from the host's, unless the mirror had set it, for its own advance;
+    - when the host completed `Obj_DW_EliminateRamsey` first, the partner world still showed the active state it had
+      reached by itself (not set by the mirror);
+    - so a false advance from completed back to active went to the host, and the host applied it.
+  - **1214fx:** a partner advance is a change of the partner's node away from a host state that stayed the same since
+    the previous scan. When the host moves, the host wins: no report, and the mirror applies its state. A held advance
+    whose base state the host left is dropped. Unit tests; the status counts `hostMovedFirst`.
+  - 1214fw's native host takedown is kept: it kills in both worlds and keeps the game's own takedown events.
+  - Takes route-dunwall-hostkill-v1688a, route-dunwall-autosave-v1688b (#136) and route-dunwall-lead-v1688c (#134
+    regression).
+
+- **route-dunwall-autosave-v1687b (pass, 1214fw; #136): a real autosave crossed by the partner alone pairs both worlds,
+  and both restart from it.** Confirmed runtime:
+  - The host led to the streets. The partner alone crossed the street balcony trigger (`ld_trigger_balcony`), 28 m
+    from Corvo.
+  - The pair: host `local_save_originated` (slot 61), partner `mirrored_save_landed` (slot 62), s2/o1/m1 on both sides,
+    0 refused, 0 rejected.
+  - The partner then died, and one shared restart brought both worlds back in 7.0 s from the pair, each player at
+    their own spot, with gameflow equal.
+  - With route-dunwall-autosave-v1669a (the host crossing alone), #136 is covered for either player.
+  - How the partner's crossing became a host-side save (hypothesis): the trigger mirror crossed the balcony trigger in
+    the host's world, and the host's script autosaved there.
+- **route-dunwall-hostkill-v1688a (pass, 1214fx): the Ramsey blocker is fixed.** The host fought Ramsey and finished
+  him (0 health in both worlds), and both worlds completed `Obj_DW_EliminateRamsey` at once (gameflow [237,1,4,5],
+  `Task_DW_GetRing`).
+
+- **route-dunwall-autosave-v1688b (pass, 1214fx; #136 on the release candidate):** the host led steps 1-12, with
+  Ramsey's kill completing the elimination in both worlds, then the search, the vault and the streets.
+  - The partner alone crossed the street balcony autosave. The pair landed in both worlds (slot 62).
+  - She died, and both restarted from slot 62 in 7.3 s, with gameflow equal.
+
+- **route-dunwall-lead-v1688c (pass, 1214fx; #134 regression on the release candidate):** the partner led all of
+  Dunwall. Ramsey died in both worlds (0/50 each), every story step ended the same in both worlds, and both reached the
+  Void with gameflow equal.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

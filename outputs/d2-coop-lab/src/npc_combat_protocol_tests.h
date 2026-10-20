@@ -165,5 +165,9 @@ void npcCombatProtocolTests(){
     p.after=10;require(!validNpcCombat(p,h,c),"client cannot prescribe result health");
     require(npcCombatMeleeRange(NpcCombatDamage::Assassination)==8.f&&npcCombatMeleeRange(NpcCombatDamage::Fatality)==8.f&&
             npcCombatMeleeRange(NpcCombatDamage::Sword)==3.f&&npcCombatMeleeRange(NpcCombatDamage::Kick)==3.f,"1214fv: paired scenes reach 8 m, swings and kicks 3 m");
+    {const auto a=npcDamageKey("components/characters/player/base/damage/assassination_damage.damage"),f=npcDamageKey("components/characters/player/base/damage/generic_fatality.damage"),
+        s=npcDamageKey("components/characters/player/base/damage/player_sword.damage");
+     require(npcCombatHostPairedDeclaration(0,true,a)&&npcCombatHostPairedDeclaration(0,true,f)&&!npcCombatHostPairedDeclaration(0,true,s)&&
+             !npcCombatHostPairedDeclaration(1,true,a)&&!npcCombatHostPairedDeclaration(0,false,a),"1214fw: only the host player's own assassination and fatality apply natively");}
     std::cout<<"PASS: NPC combat authority, exact incarnation, ordered repeated hits, duplicate and malformed result rejection\n";
 }
