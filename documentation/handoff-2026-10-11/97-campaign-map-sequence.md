@@ -269,6 +269,6 @@ Every mission again on two Steam accounts in product mode (host Corvo on this PC
 | A Crack in the Slab | campaign-bunker-vm-v1697a | pass: both worlds on the Grand Palace boat |
 | The Grand Palace | campaign-palace-vm-v1697a | pass: both worlds on the Death to the Empress boat |
 | Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`); the credits gameflow difference is #94 |
-| Memories of Training | campaign-training-vm-v1697a/b | fail twice: after the first choke the stealth lesson restarted under a tutorial page (logic 12), and the route action never closed it. `d2_route_actions.py` now closes it; re-run campaign-training-vm-v1701a pending. |
+| Memories of Training | campaign-training-vm-v1701b | pass: the whole tutorial with gameflow equal at every step, and both worlds back on the main menu (`menu_p`). 1697a/b failed twice when the stealth lesson restarted under a tutorial page (logic 12) that the route action never closed; `d2_route_actions.py` now closes it. 1701a then failed on the pickpocket action (a route step, worlds equal). |
 
 Every failure on 1214fz was a route step (a use or talk that did not register, a tutorial page). None was a divergence between the worlds: gameflow was equal in both worlds at every failing step.
