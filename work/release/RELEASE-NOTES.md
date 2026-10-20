@@ -86,6 +86,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 ## Known limitations
 
 - Two players only. The host is always Corvo and the partner is always Emily.
+- On the first map of *A Long Day in Dunwall* (the tower), a death is not shared: only that player's game shows the game-over screen and restarts ([#148](https://github.com/adamkozel/Dishonored-2-coop/issues/148)). From the streets map on, deaths are shared. The fix is in the next release.
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Occasionally the partner cannot search a body she has just killed with an assassination ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)). If that happens, let the host search it.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
