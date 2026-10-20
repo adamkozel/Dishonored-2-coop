@@ -268,7 +268,7 @@ Every mission again on two Steam accounts in product mode (host Corvo on this PC
 | The Dust District | campaign-dust-vm-v1697a | pass: the Jindosh lock dialled natively (31 presses), both worlds in A Crack in the Slab |
 | A Crack in the Slab | campaign-bunker-vm-v1697a | pass: both worlds on the Grand Palace boat |
 | The Grand Palace | campaign-palace-vm-v1697a | pass: both worlds on the Death to the Empress boat |
-| Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`); the credits gameflow difference is #94 |
+| Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`). campaign-empress-vm-v1704a then followed both through the credits to the title screen (`menu_p`) with identical gameflow, so the credits difference (#94) is discarded with the mission and is harmless |
 | Memories of Training | campaign-training-vm-v1701b | pass: the whole tutorial with gameflow equal at every step, and both worlds back on the main menu (`menu_p`). 1697a/b failed twice when the stealth lesson restarted under a tutorial page (logic 12) that the route action never closed; `d2_route_actions.py` now closes it. 1701a then failed on the pickpocket action (a route step, worlds equal). |
 
 Every failure on 1214fz was a route step (a use or talk that did not register, a tutorial page). None was a divergence between the worlds: gameflow was equal in both worlds at every failing step.
