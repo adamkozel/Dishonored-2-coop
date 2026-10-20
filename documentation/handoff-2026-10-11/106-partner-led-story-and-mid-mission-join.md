@@ -251,6 +251,26 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Takes route-dunwall-hostkill-v1687a, route-dunwall-autosave-v1687b (#136) and route-dunwall-lead-v1687c
     (regression).
 
+- **route-dunwall-hostkill-v1687a (1214fw): the native host takedown did not fix it, and the real cause is the
+  partner advance (1214fr).**
+  - The host's finisher now applied natively (`hostPairedPassed` 1), and Ramsey died in both worlds. The objectives
+    still stuck at [237,2,7,2].
+  - Which takes counted the host's kill:
+    - counted: 1669a (1214fr, when no advance reached the host), and 1679a and 1682a (partner on another map at the
+      kill);
+    - not counted: every host-led take with the partner present on 1214fs or later (1678a, 1684a-1687a).
+  - **Cause (confirmed static, my 1214fr detection):**
+    - the partner took any node that differed from the host's, unless the mirror had set it, for its own advance;
+    - when the host completed `Obj_DW_EliminateRamsey` first, the partner world still showed the active state it had
+      reached by itself (not set by the mirror);
+    - so a false advance from completed back to active went to the host, and the host applied it.
+  - **1214fx:** a partner advance is a change of the partner's node away from a host state that stayed the same since
+    the previous scan. When the host moves, the host wins: no report, and the mirror applies its state. A held advance
+    whose base state the host left is dropped. Unit tests; the status counts `hostMovedFirst`.
+  - 1214fw's native host takedown is kept: it kills in both worlds and keeps the game's own takedown events.
+  - Takes route-dunwall-hostkill-v1688a, route-dunwall-autosave-v1688b (#136) and route-dunwall-lead-v1688c (#134
+    regression).
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

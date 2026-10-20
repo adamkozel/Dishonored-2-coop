@@ -353,6 +353,8 @@ struct GameflowMirror {
     // and on the host the reported advances still to apply.
     struct Held {std::int32_t from=0,to=0;std::uint64_t at=0;};
     std::unordered_map<std::uint32_t,Held> held;std::unordered_map<std::uint32_t,std::int32_t> mirrorSet;
+    // 1214fx: per node, this world's state and the host's state at the previous scan.
+    std::unordered_map<std::uint32_t,std::pair<std::int32_t,std::int32_t>> lastSeen;std::uint64_t hostMovedFirst=0;
     std::uint64_t advanceSequence=0,peerAdvanceSequence=0,partnerSent=0,partnerHeld=0,partnerExpired=0,partnerReceived=0,partnerApplied=0,partnerAlready=0,partnerRefused=0;
     bool advancePending=false;std::uint64_t advanceMap=0;GameflowAdvanceEntry advances[32]{};std::uint32_t advanceCount=0;
 };
@@ -427,10 +429,16 @@ void serviceGameflowMirror(std::uint64_t tick){
     std::vector<GameflowAdvanceEntry> report;
     for(std::uint32_t i=0;i<g.incomingCount;++i){const auto& want=g.incoming[i];
         for(std::size_t j=0;j<nodes.size();++j){if(nodes[j].first.id!=want.id||mission[j])continue;const std::int32_t have=nodes[j].first.state;
+            const auto ls=g.lastSeen.find(want.id);const bool known=ls!=g.lastSeen.end();const auto prev=known?ls->second:std::make_pair(have,want.state);
+            g.lastSeen[want.id]={have,want.state};
             if(have==want.state){g.held.erase(want.id);g.mirrorSet.erase(want.id);break;}
             const auto ms=g.mirrorSet.find(want.id);if(ms!=g.mirrorSet.end()&&ms->second==have)break; // the host moved on
             auto hd=g.held.find(want.id);
-            if(hd==g.held.end()||hd->second.to!=have){if(!gameflowAdvanceAllowed(want.state,have))break;g.held[want.id]={want.state,have,tick};++g.partnerHeld;hd=g.held.find(want.id);}
+            // 1214fx: a held advance whose host state has since changed is dropped; the mirror applies the host.
+            if(hd!=g.held.end()&&hd->second.from!=want.state){g.held.erase(hd);hd=g.held.end();}
+            if(hd==g.held.end()||hd->second.to!=have){
+                if(!known||!gameflowPartnerChanged(prev.first,prev.second,have,want.state)){if(known&&prev.second!=want.state)++g.hostMovedFirst;break;}
+                g.held[want.id]={want.state,have,tick};++g.partnerHeld;hd=g.held.find(want.id);}
             if(tick-hd->second.at<kGameflowAdvanceHoldMs&&report.size()<32)report.push_back({want.id,hd->second.from,hd->second.to});
             break;}}
     for(std::uint32_t i=0;i<g.incomingCount&&changed<16;++i){const auto& want=g.incoming[i];bool found=false;
@@ -568,12 +576,12 @@ void writeMissionEndMirror(){
     if(statesOk){fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],\"gameflowNodes\":[",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);
         for(unsigned i=0;i<gameflowListedCount;++i)fprintf(f,"%s[%u,%d]",i?",":"",gameflowListed[i].id,gameflowListed[i].state);fprintf(f,"],");}
     else fprintf(f,"{\"gameflowStates\":null,\"gameflowNodes\":null,");
-    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"resultsSwitches\":%llu,\"unnamed\":%llu,\"staleDropped\":%llu,\"identity\":\"%s\",\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"reset\":%llu,\"partnerSent\":%llu,\"partnerHeld\":%llu,\"partnerExpired\":%llu,\"partnerReceived\":%llu,\"partnerApplied\":%llu,\"partnerAlready\":%llu,\"partnerRefused\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"resultsSwitches\":%llu,\"unnamed\":%llu,\"staleDropped\":%llu,\"identity\":\"%s\",\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"reset\":%llu,\"partnerSent\":%llu,\"partnerHeld\":%llu,\"partnerExpired\":%llu,\"partnerReceived\":%llu,\"partnerApplied\":%llu,\"partnerAlready\":%llu,\"partnerRefused\":%llu,\"hostMovedFirst\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,static_cast<unsigned long long>(missionResultsSwitches.load()),m.unnamed,m.staleDropped,lastMissionMapinfo,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused,
         (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,gameflowMirror.reset,
-        gameflowMirror.partnerSent,gameflowMirror.partnerHeld,gameflowMirror.partnerExpired,gameflowMirror.partnerReceived,gameflowMirror.partnerApplied,gameflowMirror.partnerAlready,gameflowMirror.partnerRefused,
+        gameflowMirror.partnerSent,gameflowMirror.partnerHeld,gameflowMirror.partnerExpired,gameflowMirror.partnerReceived,gameflowMirror.partnerApplied,gameflowMirror.partnerAlready,gameflowMirror.partnerRefused,gameflowMirror.hostMovedFirst,
         levelMirror.result,levelMirror.observed,levelMirror.sent,levelMirror.received,levelMirror.applied,levelMirror.refused,levelMirror.otherMap,levelMirror.lastMap,levelMirror.lastStart);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

@@ -33,6 +33,15 @@ inline bool validGameflowAdvance(const GameflowAdvancePacket& p,std::uint64_t pe
     for(std::uint32_t i=0;i<p.count;++i)if(!p.entries[i].id||!gameflowAdvanceAllowed(p.entries[i].from,p.entries[i].to))return false;
     return true;
 }
+// 1214fx: a partner advance is a change of this world's node away from a host state that stayed the same since the
+// previous scan. 1214fr took any difference the mirror had not set for one, so when the host moved first (a node
+// completed) and this world still showed the old state it had reached by itself, a "partner advance" back to that
+// old state went to the host and the host applied it: in every host-led Dunwall take with the partner present on
+// 1214fs or later, Ramsey's kill was undone (Obj_DW_EliminateRamsey back to active, gameflow [237,2,7,2]; takes
+// 1678a, 1684a-1687a). When the host moved, the host wins: no report, and the mirror applies its state.
+inline bool gameflowPartnerChanged(std::int32_t prevHave,std::int32_t prevHost,std::int32_t have,std::int32_t host){
+    return prevHave==host&&prevHost==host&&have!=host&&gameflowAdvanceAllowed(host,have);
+}
 // What the host does with one reported advance, given its node's current state.
 enum class GameflowAdvanceDecision {Apply,Already,Refuse};
 inline GameflowAdvanceDecision gameflowAdvanceDecision(std::int32_t hostState,const GameflowAdvanceEntry& e){
