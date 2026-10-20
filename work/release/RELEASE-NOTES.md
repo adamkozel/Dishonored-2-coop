@@ -80,6 +80,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 ## Known limitations
 
 - Two players only. The host is always Corvo and the partner is always Emily.
+- Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
 - Emily's **Mesmerize**, **Doppelganger shades** (Deadly Shade, Baffling Shade) and **Rat Shadow** show their effects, but do not change the NPCs ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):

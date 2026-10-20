@@ -91,3 +91,26 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     - [Route-Mission-v1674](../../work/natural-moveset/Route-Mission-v1674.ps1) records both worlds' NPC authority
       eligibility for Ramsey (`authority` step) before and after the fight. It runs as route-dunwall-lead-v1674a on
       1214fs.
+
+## Multi-state devices and safes (#134)
+
+The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
+- **Static census** (usable censuses 1123 and 1124-1144, confirmed runtime):
+  - Edge of the World has six 10-state combination dials (`script_combinaison_numbers_*`). Their current values are
+    scrambled on every load and differ between the two worlds (1144: host 7/3/1, client 1/9/1), so each world has its
+    own combination, read from its own notes.
+  - The safe doors behind them are 2-state and disabled until dialled. The Dunwall safes (`ld_safe_door_4_1`,
+    `esc_env_safe_door_4`) are plain enabled Open/Close toggles, left out only by their name.
+  - Typewriters (5 states), the piano (3) and audiographs (flags bit 0, role-specific names) carry no shared state.
+- **Take route-dunwall-safe-v1671a (pass, 1214fr, Route-Mission-v1671):**
+  - The host opened `ld_safe_door_4_1`: his safe opened (state 0 to 1), and the partner's stayed closed.
+  - He took the 150-coin gold ingot inside it (`pickups_ingot_gold_01`). The ingot left both worlds (pickup sync,
+    chapter 83).
+  - The partner then opened her own safe (state 0 to 1): it was empty.
+- **Decision:**
+  - Safes and combination dials stay per world. Each player opens the safe in their own world, with that world's
+    combination.
+  - What one player takes from a safe is gone for both.
+  - Typewriters, the piano and audiographs stay per player (no story state; hypothesis for the typewriters and the piano,
+    which only play their own animation and sound).
+  - The release notes list this.

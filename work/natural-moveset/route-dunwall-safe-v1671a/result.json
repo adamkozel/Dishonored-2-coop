@@ -1,0 +1,341 @@
+{
+  "passed": true,
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "autosaves": [
+      {
+        "step": "step01-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-census",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-census",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-census",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-census",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      }
+    ],
+    "census": [
+      {
+        "step": "step05-census",
+        "host": {
+          "pickups": [
+            {
+              "name": "pickups_ingot_gold_01",
+              "quantity": 150,
+              "position": [
+                -53.6774,
+                -169.553,
+                64.4709
+              ]
+            }
+          ],
+          "pickupTotal": 51,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        },
+        "client": {
+          "pickups": [
+            {
+              "name": "pickups_ingot_gold_01",
+              "quantity": 150,
+              "position": [
+                -53.6774,
+                -169.553,
+                64.4709
+              ]
+            }
+          ],
+          "pickupTotal": 51,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        }
+      },
+      {
+        "step": "step07-census",
+        "host": {
+          "pickups": [
+            {
+              "name": "pickups_ingot_gold_01",
+              "quantity": 150,
+              "position": [
+                -53.6774,
+                -169.553,
+                64.4709
+              ]
+            }
+          ],
+          "pickupTotal": 51,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 1,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        },
+        "client": {
+          "pickups": [
+            {
+              "name": "pickups_ingot_gold_01",
+              "quantity": 150,
+              "position": [
+                -53.6774,
+                -169.553,
+                64.4709
+              ]
+            }
+          ],
+          "pickupTotal": 51,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        }
+      },
+      {
+        "step": "step09-census",
+        "host": {
+          "pickups": [],
+          "pickupTotal": 50,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 1,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        },
+        "client": {
+          "pickups": [],
+          "pickupTotal": 50,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        }
+      },
+      {
+        "step": "step11-census",
+        "host": {
+          "pickups": [],
+          "pickupTotal": 50,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 1,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        },
+        "client": {
+          "pickups": [],
+          "pickupTotal": 50,
+          "usables": [
+            {
+              "name": "ld_safe_door_4_1",
+              "current": 1,
+              "enabled": 1,
+              "states": 2
+            },
+            {
+              "name": "esc_env_safe_door_4",
+              "current": 0,
+              "enabled": 1,
+              "states": 2
+            }
+          ]
+        }
+      }
+    ],
+    "healthHold": [
+      "ld_safe_door_4_1",
+      "pickups_ingot_gold_01",
+      "ld_safe_door_4_1"
+    ],
+    "stateUses": [
+      "step06-use host ld_safe_door_4_1 0/1 -> 1/1",
+      "step10-use client ld_safe_door_4_1 0/1 -> 1/1"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 56,
+        "cine": 139,
+        "pos": [
+          -52.599941,
+          -170.291718,
+          63.403549
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/78",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 56,
+        "cine": 108,
+        "pos": [
+          -51.877453,
+          -169.446609,
+          63.858517
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": null
+}
