@@ -121,6 +121,16 @@ Every 5 s it also re-issues the idempotent session commands, so a system refused
 - 1664a, the first attempt, hung while a six-worker bank fit ran beside it on this PC; it is kept as evidence.
 - Next: a 2-hour co-op soak on the 0.8.0 candidate, so co-op and control are measured on the same build.
 
+**2-hour co-op soak on the release binary (1698, candidate 1214fz, release 0.8.1, [take](../../work/natural-moveset/mission-soak-v1698a/result.json), pass, confirmed runtime).** The course of 1316 and 1664 (same mission, route, 30 s moves and a death every 6 minutes), armed only by the product controller.
+- 19 shared deaths, alternating host and client: both death screens appeared and both worlds restarted every time. 690 samples.
+- At the end the transport was fresh. Product and checkpoint were armed, and the door, usable and NPC sessions had renewed after the last shared checkpoint.
+- Handle counts stayed flat or fell (host 1477→1380, client 1491→1400).
+- Private memory grew steadily at 4.64 MB/min (host) and 4.79 MB/min (client), 550 MB over two hours, restarts included.
+- **Result (#13):** the co-op systems add no memory growth beyond the game's own rate.
+  - The bridge-only control 1664b grew 18.3 and 18.0 MB/min, and the earlier co-op soak 1316 grew 7.75 and 7.56 MB/min.
+  - The game's own rate varies between runs (about 5 MB/min in control 1198).
+  - Nothing degraded over two hours, so the release notes' advice stands: restart the game after several hours.
+
 ## Join-follow (candidate 1188, audit 1192)
 
 [Audit 1192](../../work/movement-integration/join-follow-audit-v1192.json).
@@ -233,10 +243,9 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
 - **Character choice:** the game's own choice at the start of *A Long Day in Dunwall*. The host takes Corvo and the partner Emily; the route harnesses steer it ([chapter 97](97-campaign-map-sequence.md)).
 - **Recovery:** native shared death screens and restarts, checkpoint and autosave pairs, the mission end and level transition mirrors, and the presentation watchdog. The campaign plays through on two accounts ([chapter 97](97-campaign-map-sequence.md)).
 - **Packaging and rollback:** releases 0.7.0, 0.8.0 and 0.8.1. Each installer builds the game-derived files from the player's own copy, and each rollback is byte-identical ([chapter 98](98-release-without-game-files.md)).
-- **Sustained stability:** the 2-hour co-op soak 1316 and its bridge-only control 1664b (above). The co-op systems add no memory growth beyond the game's own rate.
+- **Sustained stability:** the 2-hour co-op soaks 1316 and 1698a (the release binary) and their bridge-only control 1664b (above). The co-op systems add no memory growth beyond the game's own rate (#13).
 
 **Still open:**
-- A 2-hour co-op soak on the release binary, so co-op and control are measured on one build (#13; take mission-soak-v1698a on 1214fz).
 - The clean-PC session past the first story step (Test-ProductTwoAccount-v1699; #143).
 - A two-account mid-mission join (#135).
 - The product controller never resets per world: a comment swallowed the reset code, so the arming steps run once per game process (#145). The systems re-arm themselves, and no effect has been seen.

@@ -1,0 +1,165 @@
+{
+  "scope": "120-minute stability soak with the product controller (candidate-npc-combat-v1214fz): movement across the mission, shared deaths/restarts, transport/session/memory sampling; Dunwall fixture restored.",
+  "failure": null,
+  "cases": [
+    {
+      "deaths": [
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 360469
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 737918
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 1115629
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 1492677
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 1870818
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 2248344
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 2626088
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 3003816
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 3381357
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 3752162
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 4129723
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 4506770
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 4884360
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 5255854
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 5633373
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 6010986
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 6388475
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client",
+          "ms": 6766103
+        },
+        {
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host",
+          "ms": 7143526
+        }
+      ],
+      "armedEnd": {
+        "client": {
+          "fresh": true,
+          "usable": "renewed_after_shared_checkpoint",
+          "checkpoint": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "product": "armed",
+          "npc": "renewed_after_shared_checkpoint"
+        },
+        "host": {
+          "fresh": true,
+          "usable": "renewed_after_shared_checkpoint",
+          "checkpoint": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "product": "armed",
+          "npc": "renewed_after_shared_checkpoint"
+        }
+      },
+      "soakMinutes": 120,
+      "memory": {
+        "client": {
+          "handlesEnd": 1400,
+          "endPriv": 7303454720,
+          "growthMB": 565.0,
+          "handlesStart": 1491,
+          "steadyMBPerMin": 4.79,
+          "baselinePriv": 6711013376,
+          "startPriv": 6701899776
+        },
+        "host": {
+          "handlesEnd": 1380,
+          "endPriv": 7279579136,
+          "growthMB": 547.6,
+          "handlesStart": 1477,
+          "steadyMBPerMin": 4.64,
+          "baselinePriv": 6705340416,
+          "startPriv": 6698229760
+        }
+      },
+      "samples": 690
+    }
+  ],
+  "passed": true
+}
