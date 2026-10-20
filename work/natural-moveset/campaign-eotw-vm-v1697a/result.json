@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214fz",
+      "hostDll": "F6EA58C960B1A87EEA6397D4E73A741ABE44E32E93C300402AAA5658E9D8E677",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 31,
+        "cine": 61,
+        "pos": [
+          75.076317,
+          108.037621,
+          24.416176
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          1,
+          5,
+          15,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/3640",
+        "ka": "8/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_04,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 31,
+        "cine": 25,
+        "pos": [
+          -30.813999,
+          192.748001,
+          1.253970
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          1,
+          5,
+          15,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 14,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "5/2/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_04,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}
