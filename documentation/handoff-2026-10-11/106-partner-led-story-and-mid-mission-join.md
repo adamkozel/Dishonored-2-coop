@@ -70,6 +70,20 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   pending, so the 240 s wait ran out.
   - [Route-Mission-v1676](../../work/natural-moveset/Route-Mission-v1676.ps1) presses through the card whatever the
     pending state, as the VM campaign harness does. Repeated as route-dunwall-join-v1679a on 1214ft.
+- **route-dunwall-join-v1679a (pass, 1214ft, v1676): the mid-mission join works.** Confirmed runtime:
+  - The host played Dunwall steps 1-6 alone (Ramsey killed and searched) while the partner waited in Edge of the World.
+  - The partner's game followed the host's mission (`loads` 1), loaded Dunwall from its start and passed the mission
+    card.
+  - **The join placement moved her beside the host: `warps` 1, `warpDistance` 33.25 m, then 0.89 m from Corvo.**
+  - The door, usable and NPC sessions were active on both sides at the join.
+  - Objectives converged by the next step (both [237,3,3,4] after step 7).
+  - Both worlds then played on together through the streets and into the Void.
+  - **Not yet converged at the join (8 s after both settled):** two NPCs the host had killed before the join,
+    `ld_spawner_ramsey_escape` and `ld_spawner_alexi_escape`, were alive in the partner's fresh world.
+    - The life roster (1214ad) sends unbound deaths only while both worlds share the map, so nothing was sent before
+      the join. Whether it caught up after the snapshot was not recorded.
+    - route-dunwall-join-v1682a records Ramsey and Alexi in both worlds, with the roster's counters, after steps 7
+      and 9.
 - **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
   1-3 completed in both worlds, with the gameflow counts equal.
   - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).

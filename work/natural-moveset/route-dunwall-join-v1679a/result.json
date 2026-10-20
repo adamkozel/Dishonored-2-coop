@@ -1,0 +1,185 @@
+{
+  "passed": true,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "autosaves": [
+      {
+        "step": "step01-trigger",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step04-wait",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step05-attack",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step06-loot",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 disabled",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 disabled"
+      },
+      {
+        "step": "step07-use",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-trigger",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-trigger",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-use",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-use",
+        "host": "disabled a0 s6/o1/m5/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s6/o5/m1/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step13-trigger",
+        "host": "mirrored_save_landed a1 s2/o1/m1/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s2/o1/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step14-trigger",
+        "host": "mirrored_save_landed a1 s4/o2/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step15-at",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused"
+      },
+      {
+        "step": "step16-talk",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step17-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      }
+    ],
+    "npcPicks": [
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -45.5,-119.2,61",
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -46.2,-118.1,61",
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -46.4,-119.7,61",
+      "5 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -46.4,-119.7,61",
+      "6 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -46.5,-118.7,61.2"
+    ],
+    "lootStands": [
+      "6 host d=1 at -46.705002,-119.736,61.003647"
+    ],
+    "join": {
+      "distance": 0.89,
+      "gameflowEqual": false,
+      "npcStateDiffs": 2
+    },
+    "step16-talk": "skipped: npc gone (scene already ran)",
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 71,
+        "cine": 195,
+        "pos": [
+          -7.01104,
+          -14.706363,
+          -99.890862
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          2,
+          4,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 20,
+        "lt": "applied/0/1",
+        "hold": "released/15",
+        "ka": "4/4/0",
+        "active": "Mission_Void01,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_LeaveTower"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 56,
+        "cine": 170,
+        "pos": [
+          -7.004889,
+          -15.438032,
+          -99.898796
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          2,
+          4,
+          11,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/15",
+        "ka": "7/0/0",
+        "active": "Mission_Void01,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_LeaveTower"
+      }
+    },
+    "gameflowEqual": false,
+    "restoreRecovery": {
+      "before": [
+        "Both isolated checkpoints did not return to gameplay.",
+        "client: Native query failed client --health"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": null
+}
