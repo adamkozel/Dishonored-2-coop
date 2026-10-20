@@ -58,6 +58,13 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Fix: [Route-Mission-v1672](../../work/natural-moveset/Route-Mission-v1672.ps1) turns on the host's publishing
     before the partner's follow, and saves both follow statuses at the join and after it. The take is repeated as
     route-dunwall-join-v1672a.
+- **route-dunwall-join-v1672a (fail, harness; 1214fr, v1673):** the host now published its mission (182 packets), and
+  the partner received it (179) and loaded Dunwall from Edge of the World (`loads` 1).
+  - Its game then waited at the native mission card (logic 15, "press any key") until the 180 s wait ran out. A
+    player presses a key there; the join's wait only compared maps.
+  - Fix: [Route-Mission-v1675](../../work/natural-moveset/Route-Mission-v1675.ps1) settles the partner during the join's
+    loading wait (A at the mission card, Emily at a character choice) for up to 240 s. Repeated as
+    route-dunwall-join-v1675a on 1214fs.
 - **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
   1-3 completed in both worlds, with the gameflow counts equal.
   - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).
