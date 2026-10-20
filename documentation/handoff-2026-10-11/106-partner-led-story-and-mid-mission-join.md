@@ -191,6 +191,11 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     a unit test. Takes route-dunwall-lead-v1683a and route-dunwall-autosave-v1683b (fully partner-led, her own kill of
     Ramsey) follow.
 
+- **route-dunwall-autosave-v1681a (fail, fight; 1214fu):** the host's Ramsey fight (role host) met an aware Ramsey with
+  guards and ended at 10 health after the route's 40 presses (host-led runs take about 22). This is fight variance.
+  - For #136, route-dunwall-autosave-v1684a has the host lead to the streets, then the partner alone crosses the
+    street balcony autosave and dies.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
