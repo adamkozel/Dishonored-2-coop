@@ -286,6 +286,11 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   him (0 health in both worlds), and both worlds completed `Obj_DW_EliminateRamsey` at once (gameflow [237,1,4,5],
   `Task_DW_GetRing`).
 
+- **route-dunwall-autosave-v1688b (pass, 1214fx; #136 on the release candidate):** the host led steps 1-12, with
+  Ramsey's kill completing the elimination in both worlds, then the search, the vault and the streets.
+  - The partner alone crossed the street balcony autosave. The pair landed in both worlds (slot 62).
+  - She died, and both restarted from slot 62 in 7.3 s, with gameflow equal.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
