@@ -172,8 +172,12 @@ struct MissionFollowPacket {
 #pragma pack(pop)
 static_assert(sizeof(MissionFollowPacket)==200);
 bool followHostEnabled=false;
+#include "join_warp.h"
 struct MissionFollow {
     char hostMapinfo[160]{};std::uint32_t hostHigh=0;std::uint64_t hostMap=0,sequence=0,peerSequence=0,sent=0,received=0,loads=0,refused=0;
+    // 1214fr (#135, join_warp.h): the map this partner loaded by following, the map it was placed on, and when both
+    // worlds were last seen in gameplay together.
+    std::uint64_t followedMap=0,warpedMap=0,warps=0;ULONGLONG togetherSince=0;float warpDistance=0;
     ULONGLONG sentAt=0,loadAt=0;std::uint64_t loadedForMap=0;const char* result="idle";
 };
 MissionFollow missionFollow{};
@@ -227,7 +231,18 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // Joiner: follow the host's mission once per host map, from ordinary
     // gameplay or a menu; never while loading or in a cinematic.
     if(!*m.hostMapinfo||!m.hostMap){m.result="waiting_host_mission";return;}
-    if(outgoing.mapId==m.hostMap){m.result="same_mission";m.loadedForMap=m.hostMap;return;}
+    if(outgoing.mapId==m.hostMap){m.result="same_mission";m.loadedForMap=m.hostMap;
+        if(m.followedMap==outgoing.mapId&&m.warpedMap!=outgoing.mapId){
+            const bool together=outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&remote.gameLogicState==1&&!remote.pendingGameLogicState&&
+                remote.mapId==outgoing.mapId&&tick-lastReceive<500;
+            if(!together){m.togetherSince=0;return;}
+            if(!m.togetherSince){m.togetherSince=tick;return;}
+            if(tick-m.togetherSince<kJoinWarpSettleMs)return;
+            const auto w=joinWarpTarget(outgoing.position,remote.position,remote.orientation);m.warpDistance=w.distance;m.warpedMap=outgoing.mapId;
+            if(!w.warp){m.result="same_mission_near_host";return;}
+            char command[160]{};std::snprintf(command,sizeof(command),"setviewpos %.3f %.3f %.3f %.2f 0",w.x,w.y,w.z,w.yaw);
+            dispatchCoopCommand(system,command);++m.warps;m.result="placed_beside_host";}
+        return;}
     if(m.loadedForMap==m.hostMap&&tick-m.loadAt<60000){m.result="loading_host_mission";return;}
     const unsigned logic=outgoing.gameLogicState;
     // 1214cf: also from the front-end main menu (campaign/menu/menu_p, logic 6), where a partner waits for the
@@ -235,13 +250,13 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     const bool frontEnd=logic==6&&!std::strcmp(mapName,"campaign/menu/menu_p");
     if(outgoing.pendingGameLogicState||(logic!=1&&logic!=2&&logic!=3&&!frontEnd)){m.result="waiting_native_phase";return;}
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
-    dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.result="loading_host_mission";
+    dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }
 void writeMissionFollow(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.follow.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& m=missionFollow;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"hostMapinfo\":\"%s\",\"hostHigh\":%u,\"hostMap\":\"%llu\",\"localMap\":\"%llu\",\"sent\":%llu,\"received\":%llu,\"loads\":%llu,\"refused\":%llu,\"role\":%u}\n",
-        (productMode||followHostEnabled)?"true":"false",m.result,m.hostMapinfo,m.hostHigh,m.hostMap,outgoing.mapId,m.sent,m.received,m.loads,m.refused,localRole);
+    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"hostMapinfo\":\"%s\",\"hostHigh\":%u,\"hostMap\":\"%llu\",\"localMap\":\"%llu\",\"sent\":%llu,\"received\":%llu,\"loads\":%llu,\"refused\":%llu,\"role\":%u,\"warps\":%llu,\"warpDistance\":%.2f}\n",
+        (productMode||followHostEnabled)?"true":"false",m.result,m.hostMapinfo,m.hostHigh,m.hostMap,outgoing.mapId,m.sent,m.received,m.loads,m.refused,localRole,m.warps,m.warpDistance);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
