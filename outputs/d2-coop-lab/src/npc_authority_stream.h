@@ -1,5 +1,6 @@
 #pragma once
 #include "player_scene_probe.h"
+#include "npc_corpse_trace.h"
 // Host-authored root and final skeleton stream. This carries presentation and
 // native AI ownership, not client hit requests or authoritative damage events.
 struct NpcRenderIdentity {
@@ -206,6 +207,14 @@ bool npcCorpseHoldAnimated(NpcAuthorityChannel& c,bool knockedDown=false){
     for(unsigned i=0;i<(flags&0xffffff);++i){std::uintptr_t p=0,vt=0;if(!memoryRead(list+i*8,&p,8)||!p||!memoryRead(p,&vt,8))return false;if(vt==base+0x1c54008){if(physics)return false;physics=p;}}
     if(!physics||!memoryRead(physics+0x238,&mode,4)||(mode!=0&&!(knockedDown&&mode==2))||!memoryRead(physics+0x23c,&pending,4)||pending!=0xffffffff)return false;
     reinterpret_cast<void(*)(void*)>(gameImage+0x736ef0)(reinterpret_cast<void*>(physics));c.corpsePhysics=physics;return true;
+}
+// 1214gd (#140, npc_corpse_trace.h): the corpse physics mode (+0x238), 255 when unreadable.
+unsigned npcCorpsePhysicsMode(const NpcAuthorityChannel& c){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned flags=0,mode=255;
+    if(!memoryRead(c.lease.binding.npc.actor+0x268,&list,8)||!list||!memoryRead(c.lease.binding.npc.actor+0x270,&flags,4)||(flags&0xffffff)>256)return 255;
+    for(unsigned i=0;i<(flags&0xffffff);++i){std::uintptr_t q=0,vt=0;if(!memoryRead(list+i*8,&q,8)||!q||!memoryRead(q,&vt,8))return 255;
+        if(vt==base+0x1c54008){if(!memoryRead(q+0x238,&mode,4))return 255;return mode;}}
+    return 255;
 }
 void stopNpcCombatFixture(const char* reason);
 void clearNpcCombatCapture();
@@ -652,6 +661,7 @@ void serviceNpcStream(ULONGLONG tick){
             const bool same=freshRead&&sameNpcAuthorityIdentity(c.lease.binding,fresh,false);
             const bool dead=same&&fresh.health.logic==1&&std::isfinite(fresh.health.current)&&fresh.health.current<=0&&fresh.health.maximum>0;
             if(!same||(!npcAuthorityLiving(fresh)&&!dead)){
+                if(localRole){if(auto* t=npcCorpseTraceFor(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle)){if(!t->vanished){t->vanished=true;t->vanishedMs=static_cast<unsigned>(tick-t->startedAt);}}} // 1214gd
                 // 1214fb (#118): a killed gravehound's entity is removed (take 1612b: Corvo's native assassination, then the
                 // host NPC was absent and the channel ended without a Dead, so Emily's copy lived on). A host NPC that
                 // vanishes within 10 s of the host's own takedown on it, or while it follows the client's, is dead: the
@@ -664,7 +674,8 @@ void serviceNpcStream(ULONGLONG tick){
                 stopNpcChannel(c,"native_lifecycle_changed");continue;}
             c.lease.binding.health=fresh.health;
             if(!localRole&&!c.unconscious&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0){c.unconscious=true;c.result="host_unconscious";}
-            if(dead&&!c.corpse&&c.ready){c.corpse=true;c.corpseAt=tick;c.corpseUntil=tick+8000;c.result=localRole?"client_corpse":"host_corpse";}
+            if(dead&&!c.corpse&&c.ready){c.corpse=true;c.corpseAt=tick;c.corpseUntil=tick+8000;c.result=localRole?"client_corpse":"host_corpse";
+                if(localRole)npcCorpseTraceBegin(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle,tick,c.localPaired||tick<c.pairedUntil);} // 1214gd
             if(c.corpse){
                 // 1113d: corpses stay host-streamed (budgeted) for the stream lifetime; releasing
                 // the client ragdoll mid-session moved it 0.27-0.86 m (1116).
@@ -673,7 +684,13 @@ void serviceNpcStream(ULONGLONG tick){
                 // ragdoll starts launched the body 7-26 m up (takes 1256f/1256g, 1258l and
                 // finisher-follow-v1258a/f; the host now follows that pose, so both bodies ended
                 // at z 75). The hold applies when the paired window ends.
-                if(localRole&&!c.localPaired)npcCorpseHoldAnimated(c);
+                // 1214gd (#140): trace her corpse; optionally leave the corpse of her own paired kill to native physics.
+                auto* trace=localRole?npcCorpseTraceFor(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle):nullptr;
+                if(trace){float root[3]{};const bool rootRead=memoryRead(c.lease.binding.npc.actor+0x300,root,12);
+                    npcCorpseTraceSample(*trace,tick,rootRead?root:nullptr,c.corpsePhysics!=0,c.localPaired,npcCorpsePhysicsMode(c));}
+                if(localRole&&!c.localPaired){
+                    if(npcSkipOwnPairedCorpseHold&&trace&&trace->ownPaired){if(!trace->holdSkipped){trace->holdSkipped=true;++npcOwnPairedHoldSkips;}}
+                    else npcCorpseHoldAnimated(c);}
             }
             else if(localRole&&(c.unconscious||(c.localPaired&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0))){
                 if(!c.unconscious){c.unconscious=true;c.unconsciousAt=tick;c.pairedResult="client_unconscious_native";}c.result="client_unconscious";}
@@ -736,6 +753,7 @@ void writeNpcStream(){
     const auto& s=npcStreamSessionState;
     fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
-    fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}}\n",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
+    fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
+    writeNpcCorpseTraces(f);fputs("}\n",f); // 1214gd (#140)
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
