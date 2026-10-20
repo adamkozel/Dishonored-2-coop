@@ -235,6 +235,22 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     (Edge of the World). The mechanism is symmetric: both origins passed with the fixture autosave (1156), and the
     host-crossed real autosave passed in 1669a.
 
+- **route-dunwall-hostkill-v1686a (diagnosis, 1214fv): a host assassination or finisher on Ramsey does not count for
+  the story. This is a campaign blocker, found while chasing the #136 takes.**
+  - The host fought Ramsey (50 to 0 in 10 presses) and the killing blow was `assassination_damage`, a finisher.
+  - Ramsey reached 0 health in both worlds (one death each), but the Dunwall script never counted the kill: gameflow
+    [237,2,7,2] with `Task_DW_KillRamsey` and `Task_DW_NonLethal_KnockoutRamsey` active.
+  - So his ring could not be searched (1678a, 1684a and 1685a failed the same way after host assassinations).
+  - The host's kill counts when the killing blow is a sword hit (1669a, 1679a), and when no combat session runs (1682a,
+    the partner on another map).
+  - **Cause (confirmed static; the kill evidence is confirmed runtime):**
+    - the host captures its own player's damage on bound NPCs, empties the native result and replays it;
+    - for an assassination the replay brings health to 0 without the native takedown's story event.
+  - **1214fw:** the host player's own assassination or fatality finisher applies natively on the host, as non-replayable
+    host damage already does, and HostWorld and Dead share it. The partner's path is unchanged. Unit test for the rule.
+  - Takes route-dunwall-hostkill-v1687a, route-dunwall-autosave-v1687b (#136) and route-dunwall-lead-v1687c
+    (regression).
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

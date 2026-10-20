@@ -78,6 +78,21 @@ inline bool npcCombatReplayableDeclaration(std::uint64_t key){
 inline bool npcCombatHostNativeDeclaration(unsigned localRole,unsigned attacker,unsigned inflictor,std::uint64_t key){
     return localRole==0&&attacker!=0x3fff0010u&&inflictor!=0x3fff0010u&&!npcCombatReplayableDeclaration(key);
 }
+// 1214fw: the host player's own assassination or fatality finisher applies natively on the host, as non-replayable
+// host damage does; HostWorld and Dead share the outcome. The capture and replay of that damage kill the NPC without
+// the native takedown's story event: in the host-led takes 1678a, 1684a, 1685a and 1686a, Ramsey reached 0 health
+// in both worlds while the Dunwall script never counted the kill (Task_DW_KillRamsey and Task_DW_NonLethal_KnockoutRamsey
+// stayed active, gameflow [237,2,7,2]), so his ring could not be searched: a campaign blocker. A host kill with no
+// combat session (1682a, the partner on another map) and sword-replay kills (1669a, 1679a) count.
+// The same FNV-1a 64 as npcDamageKey (native_trigger_identity.h), without its world identity dependency.
+constexpr std::uint64_t npcCombatDeclKey(const char* s){std::uint64_t h=14695981039346656037ull;while(*s){h^=static_cast<unsigned char>(*s++);h*=1099511628211ull;}return h;}
+constexpr char kNpcHostPairedDecls[2][72]={"components/characters/player/base/damage/assassination_damage.damage",
+    "components/characters/player/base/damage/generic_fatality.damage"};
+inline bool npcCombatHostPairedDeclaration(unsigned localRole,bool playerOwned,std::uint64_t key){
+    if(localRole!=0||!playerOwned)return false;
+    for(const auto* d:kNpcHostPairedDecls)if(npcCombatDeclKey(d)==key)return true;
+    return false;
+}
 inline bool validNpcPeerNative(const NpcCombatRangedDamage& r){
     return npcDamageDeclarationName(r.declaration)&&!npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&!r.weapon;
 }

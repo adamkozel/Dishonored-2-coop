@@ -55,7 +55,7 @@ const char* npcCombatLastRetire="none";
 struct NpcCombatStopRecord {ULONGLONG tick=0;const char* reason="";std::uint64_t arm=0,sourceArm=0;unsigned damage=0;bool victimRead=false;
     float distance=-1,self[3]{},captured[3]{},victim[3]{};};
 NpcCombatStopRecord npcCombatStops[8]{},npcCombatRetires[8]{},npcCombatHitRangePending{};unsigned npcCombatStopCount=0,npcCombatRetireCount=0;
-std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0},npcCombatHostNativePassed{0},npcCombatHostNativeLastKey{0};std::uint64_t npcCombatFollowSubtractions=0;
+std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0},npcCombatHostNativePassed{0},npcCombatHostNativeLastKey{0},npcCombatHostPairedPassed{0};std::uint64_t npcCombatFollowSubtractions=0;
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
 const char* npcCombatTriggerFixtureResult="unused";
@@ -143,7 +143,10 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
                 // suppressed and retire the NPC; it applies natively and HostWorld/Dead share it.
                 std::uintptr_t name=0;std::string path;
                 if(decl&&memoryRead(decl+8,&name,8)&&worldIdentityString(memoryRead,name,path)&&npcCombatHostNativeDeclaration(localRole,attacker,inflictor,npcDamageKey(path))){
-                    npcCombatHostNativePassed.fetch_add(1);npcCombatHostNativeLastKey.store(npcDamageKey(path));break;}}}
+                    npcCombatHostNativePassed.fetch_add(1);npcCombatHostNativeLastKey.store(npcDamageKey(path));break;}
+                // 1214fw: the host player's own assassination or fatality finisher stays native (its story event).
+                if(!path.empty()&&npcCombatHostPairedDeclaration(localRole,(at.valid&&at.localOwned)||(in.valid&&in.localOwned),npcDamageKey(path))){
+                    npcCombatHostPairedPassed.fetch_add(1);npcCombatHostNativeLastKey.store(npcDamageKey(path));break;}}}
         handled=true;NpcCombatCapture e{};e.nonce=b.nonce;e.arm=b.arm;e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.component=c;
         if(npcCombatCaptures.size()>=64||!memoryRead(reinterpret_cast<std::uintptr_t>(info),e.info.data(),e.info.size())||!memoryRead(n.npc.actor+0x300,e.position,12))npcCombatCaptureFault.store(1);
         else{
@@ -901,7 +904,8 @@ void writeNpcCombat(){
     const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
-    fprintf(f,",\"replicaGapSuppressed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()));
+    fprintf(f,",\"replicaGapSuppressed\":%llu,\"hostPairedPassed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()),
+        static_cast<unsigned long long>(npcCombatHostPairedPassed.load()));
     // 1214ft: the stop and retire histories, oldest first.
     for(int k=0;k<2;++k){const auto* list=k?npcCombatRetires:npcCombatStops;const unsigned count=k?npcCombatRetireCount:npcCombatStopCount;
         fprintf(f,",\"%s\":[",k?"retireHistory":"stopHistory");const unsigned first=count>8?count-8:0;
