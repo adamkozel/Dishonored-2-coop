@@ -1,0 +1,98 @@
+{
+  "afterStep": 6,
+  "joinMs": 120889,
+  "distance": 2.04,
+  "host": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+    "epoch": 46,
+    "cine": 115,
+    "pos": [
+      -38.979252,
+      -124.843758,
+      61.0037
+    ],
+    "fresh": true,
+    "gameflow": [
+      237,
+      1,
+      3,
+      6,
+      0,
+      1,
+      0
+    ],
+    "gfMirror": "disabled",
+    "idHash": "00000000",
+    "gfApplied": 0,
+    "lt": "applied/0/1",
+    "hold": "released/78",
+    "ka": "1/0/0",
+    "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+  },
+  "client": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+    "epoch": 51,
+    "cine": 112,
+    "pos": [
+      -37.160809,
+      -125.518532,
+      61.623749
+    ],
+    "fresh": true,
+    "gameflow": [
+      241,
+      4,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gfMirror": "disabled",
+    "idHash": "00000000",
+    "gfApplied": 0,
+    "lt": "sent/1/0",
+    "hold": "released/0",
+    "ka": "0/0/0",
+    "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+  },
+  "gameflowEqual": false,
+  "npcCounts": {
+    "client": 48,
+    "host": 48
+  },
+  "npcStateDiffs": [
+    {
+      "handle": "0xb580774",
+      "name": "ld_spawner_ramsey_escape",
+      "host": "dead",
+      "client": "alive"
+    },
+    {
+      "handle": "0xb5a0776",
+      "name": "ld_spawner_alexi_escape",
+      "host": "dead",
+      "client": "alive"
+    }
+  ],
+  "sync": {
+    "client": {
+      "door": "active",
+      "usable": "active",
+      "product": "arming",
+      "follow": "same_mission",
+      "npc": "active"
+    },
+    "host": {
+      "door": "active",
+      "usable": "active",
+      "product": "arming",
+      "follow": "publishing",
+      "npc": "active"
+    }
+  }
+}

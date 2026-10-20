@@ -84,6 +84,16 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
       the join. Whether it caught up after the snapshot was not recorded.
     - route-dunwall-join-v1682a records Ramsey and Alexi in both worlds, with the roster's counters, after steps 7
       and 9.
+- **route-dunwall-join-v1682a (pass, 1214fu, v1677):** the same join, now with authority records after steps 7 and 9.
+  - Placement 2.04 m from Corvo. Gameflow equal at the end.
+  - At the join, Ramsey and Alexi were alive in the partner's world, as in 1679a.
+  - **Ramsey converged:** dead in both worlds by step 7. The life roster sent the host's death and the partner applied
+    it natively (`lifeApplied` 1).
+  - **Alexi (`ld_spawner_alexi_escape`) did not converge:** dead in Corvo's world, 40 health in the partner's at steps
+    7 and 9. The partner refused the roster's death 5 times (`lifeRefused` 5, the attempt limit), then stopped trying.
+    Hypothesis: she is held by a coup script in the fresh world, so the native kill is refused.
+  - **Known limitation for the release:** after a mid-mission join, a few NPCs the host has already dealt with can
+    remain in the partner's world.
 - **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
   1-3 completed in both worlds, with the gameflow counts equal.
   - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).
