@@ -1,0 +1,111 @@
+{
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "autosaves": [
+      {
+        "step": "step01-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-attack",
+        "host": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot62 phase0 awaiting_peer"
+      }
+    ],
+    "npcPicks": [
+      "5 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "5 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "5 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -43.8,-119.9,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -46.9,-115.8,61"
+    ],
+    "lootStands": [
+      "6 client d=1 at -47.695976,-115.268021,61.222324",
+      "6 client d=0.8 at -47.664001,-115.450996,61.003647",
+      "6 client d=1.2 at -47.698685,-114.505363,61.003647",
+      "6 client d=0.7 at -47.481434,-115.219543,61.003647",
+      "6 client d=1.4 at -48.784721,-117.13324,61.003647"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 82,
+        "pos": [
+          -39.517696,
+          -161.236237,
+          66.412735
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/78",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 54,
+        "pos": [
+          -48.790855,
+          -118.311752,
+          61.099316
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    }
+  },
+  "failure": "Loot of mortimer_ramsey not registered"
+}

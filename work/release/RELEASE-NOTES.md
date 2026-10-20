@@ -1,8 +1,21 @@
-# Dishonored 2 Corvo/Emily co-op 0.7.0
+# Dishonored 2 Corvo/Emily co-op 0.8.0
 
 Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## New in 0.8.0
+
+- **Shared combat.** The host's game decides what happens to every NPC, and both worlds show the same result:
+  - damage, knockouts, deaths and takedowns by either player;
+  - guards, hounds, clockwork soldiers and scripted civilians;
+  - the partner now takes damage from guards ([#108](https://github.com/adamkozel/Dishonored-2-coop/issues/108)).
+- Counterattacks and knockdowns are shown on the partner ([#9](https://github.com/adamkozel/Dishonored-2-coop/issues/9)).
+- Spyglass, Timepiece, stumbles and recoils are shown on the partner ([#102](https://github.com/adamkozel/Dishonored-2-coop/issues/102), [#122](https://github.com/adamkozel/Dishonored-2-coop/issues/122)).
+- The Doppelganger clone and the Mesmerize spirit are shown to the partner ([#104](https://github.com/adamkozel/Dishonored-2-coop/issues/104)).
+- Far Reach pulls of objects and bodies happen in both worlds ([#115](https://github.com/adamkozel/Dishonored-2-coop/issues/115)).
+- Power upgrades with world outcomes are shared, for example time stops, kills and possessed bodies ([#117](https://github.com/adamkozel/Dishonored-2-coop/issues/117)).
+- Breakable doors, barricades and glass break in both worlds ([#132](https://github.com/adamkozel/Dishonored-2-coop/issues/132)).
 
 ## Requirements
 
@@ -16,7 +29,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 ## Install (both players)
 
 1. Close Dishonored 2.
-2. Download `d2coop-v0.7.0.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.8.0.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -69,7 +82,9 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - Two players only. The host is always Corvo and the partner is always Emily.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
-- A few combat moves are not yet shown on the partner, for example Emily's counterattack and knockdowns ([#9](https://github.com/adamkozel/Dishonored-2-coop/issues/9)).
+- Emily's **Mesmerize**, **Doppelganger shades** (Deadly Shade, Baffling Shade) and **Rat Shadow** show their effects, but do not change the NPCs ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):
+  - no NPC is mesmerized or drawn to her shade;
+  - a Rat Shadow kill leaves the body instead of rats.
 - The partner's movement banks are rebuilt from your game's animations. On a different CPU the values can differ from ours in their last digits, which is invisible.
 - Some partner movement clips are retargeted from Adobe Mixamo motion.
 - The game uses a little more memory over long sessions, with or without the mod. Restart the game after several hours.

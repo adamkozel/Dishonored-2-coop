@@ -111,7 +111,15 @@ Every 5 s it also re-issues the idempotent session commands, so a system refused
 - At the end the transport was fresh. Product and checkpoint were armed, and the door, usable and NPC sessions had renewed after the last shared checkpoint.
 - Handle counts stayed flat (host 1413→1409, client 1394→1394).
 - Private memory grew steadily at 7.75 MB/min (host) and 7.56 MB/min (client), restarts included. That matches the 20-minute run (6.0–7.1) against the game's own rate in control 1198 (about 5 MB/min plus about 60 MB per restart). No degradation over time was seen.
-- Still open (#13): a matched control without the co-op systems or the proxy.
+- Its matched control is 1664b below.
+
+**2-hour control soak (1664, candidate 1214fq, [take](../../work/natural-moveset/mission-soak-control-v1664b/result.json), pass, confirmed runtime).** The 1198 control for 120 minutes on the course of 1316 (same mission, route, 30 s moves and a death every 6 minutes), with every co-op system off: only the bridge transport and the status writers run.
+- 19 shared deaths, alternating host and client: both death screens appeared and both games restarted natively every time. 692 samples.
+- Handle counts stayed flat (host 1375→1373, client 1378→1380).
+- Private memory grew steadily at 18.3 MB/min (host) and 18.0 MB/min (client), 2.1 GB over two hours. The co-op soak 1316 grew 7.6–7.8 MB/min, so the co-op systems add no growth beyond the game's own rate. The game's own rate varies between runs (about 5 MB/min over 20 minutes in 1198).
+- A run without the proxy cannot follow this course: the lab moves the players through the DLL's command file and its simulated controller (`Send-D2Input` publishes a packet the DLL consumes; confirmed static), so the bridge-only run is the closest matched control.
+- 1664a, the first attempt, hung while a six-worker bank fit ran beside it on this PC; it is kept as evidence.
+- Next: a 2-hour co-op soak on the 0.8.0 candidate, so co-op and control are measured on the same build.
 
 ## Join-follow (candidate 1188, audit 1192)
 

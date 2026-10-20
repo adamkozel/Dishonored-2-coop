@@ -1,0 +1,76 @@
+{
+  "passed": false,
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "join": {
+      "distance": 27.47,
+      "gameflowEqual": true,
+      "npcStateDiffs": 16
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 89,
+        "pos": [
+          -7.011043,
+          -14.706364,
+          -99.890862
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/0",
+        "ka": "7/0/0",
+        "active": "Mission_Void01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 31,
+        "cine": 40,
+        "pos": [
+          -7.011043,
+          -14.706364,
+          -99.890862
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 20,
+        "lt": "applied/0/1",
+        "hold": "released/94",
+        "ka": "2/5/0",
+        "active": "Mission_Void01"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "No NPC matches meagan (nearest: models/characters/def/story/the_outsider.def_501@-2,-8 models/characters/def/story/the_outsider.def_498@-8,-8 models/characters/base/human_dead_500@-59,-68 models/characters/def/story/jessamine_kaldwin.def_499@-104,-85)"
+}

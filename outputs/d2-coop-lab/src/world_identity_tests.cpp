@@ -2086,6 +2086,8 @@ void mesmerizeTargetTests(){
 #include "npc_authority_protocol_tests.h"
 #include "npc_combat_protocol_tests.h"
 #include "breakable_protocol_tests.h"
+#include "gameflow_advance_tests.h"
+#include "join_warp_tests.h"
 #include "npc_attack_protocol_tests.h"
 void mapPathTests(){
     char a[]="campaign\\dunwall\\return\\streets\\dunwall_return_streets_p.map";
@@ -2097,6 +2099,8 @@ int main() {
     npcAuthorityProtocolTests();
     npcCombatProtocolTests();
     breakableProtocolTests();
+    gameflowAdvanceTests();
+    joinWarpTests();
     npcAttackProtocolTests();
     nativeNpcAuthorityTests();
     nativeUsableTests();

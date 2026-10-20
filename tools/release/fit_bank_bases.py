@@ -15,7 +15,7 @@ D2BPR001 (little-endian; strings are u32 length + UTF-8):
   clip), u32 index, u8 variant (0 by name, 1 retargeted), u8 mirrored; then frames x parts x
   (u16 source a, f32 time a, u16 source b, f32 time b, f32 weight); source 0 is the bind pose.
 """
-import gzip, json, struct, sys
+import gzip, json, os, struct, sys
 from pathlib import Path
 from multiprocessing import Pool
 import numpy as np
@@ -32,7 +32,9 @@ STEP = 2.0 ** -17
 def setup(role, bank_path):
     global ROLE, META, RIG, BANK, J, PART, NP, MASKS, IDENT
     ROLE = role
-    META = {x['clip']: x for x in json.load(gzip.open(bm.ROOT / 'work/release/payload-classification-v1312/bank-clips.json.gz')) if x['role'] == role}
+    # #137: D2_BANK_CLASSIFICATION names another classification (v1667 adds the clips of banks 72-75).
+    path = os.environ.get('D2_BANK_CLASSIFICATION', 'work/release/payload-classification-v1312/bank-clips.json.gz')
+    META = {x['clip']: x for x in json.load(gzip.open(bm.ROOT / path)) if x['role'] == role}
     RIG = bm.rig(role); J = len(RIG.names)
     BANK = Path(bank_path).read_bytes()
     names = list(PARTS.values()); PART = []
