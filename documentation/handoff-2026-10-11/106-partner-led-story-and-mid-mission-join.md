@@ -177,6 +177,20 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     focus. At each stand it sweeps pitch and bearing and presses only while the body is focused (`$tag-lootfocus.json`).
   - Repeated for #136 as route-dunwall-autosave-v1681a, after the 1214fu take route-dunwall-lead-v1680a.
 
+- **route-dunwall-lead-v1680a (pass, 1214fu, v1677): the partner leads all of Dunwall again, and the cause of #140
+  is measured.**
+  - Every story step ended the same in both worlds, through the mission end into the Void.
+  - Her assassination of Ramsey (damage kind 3, `Assassination`) was refused by her capture as `hit_range` (1214ft stop
+    history): her position was 5.30 m from Ramsey's root against the 3 m melee range. Victim (-43.83,-119.86), partner
+    (-47.11,-124.02).
+  - Her session stopped, the kill completed in her world only (0 health), and Corvo's Ramsey lived (50, then 47).
+  - 1214fu's gap guard never fired (`replicaGapSuppressed` 0). The kill came through the assassination's paired scene,
+    not a hooked damage event in the gap.
+  - **1214fv:** an assassination or fatality finisher is a paired scene bound to its victim that moves both bodies, so
+    the range checks of the partner's capture and the host's apply allow 8 m for them (3 m for swings and kicks), with
+    a unit test. Takes route-dunwall-lead-v1683a and route-dunwall-autosave-v1683b (fully partner-led, her own kill of
+    Ramsey) follow.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.

@@ -276,8 +276,8 @@ NpcAuthorityChannel* npcCombatCorpseSource(std::uint64_t arm,bool peer,NativeHea
         return nullptr;
     }return nullptr;
 }
-bool npcCombatSourceNear(NpcAuthorityChannel& victim,unsigned role,std::uint64_t sourceArm){
-    if(role<2)return !sourceArm&&npcCombatNear(victim,role);
+bool npcCombatSourceNear(NpcAuthorityChannel& victim,unsigned role,std::uint64_t sourceArm,float range=kNpcMeleeRange){
+    if(role<2)return !sourceArm&&npcCombatNear(victim,role,range);
     NativeHealth h{};bool pending=false;auto* source=npcCombatCorpseSource(sourceArm,false,h,pending);
     if(!source||(pending&&!localRole)||source->arm==victim.arm)return false;
     if(localRole)return true; // Host validates contact; replica corpse physics is not authoritative.
@@ -459,7 +459,7 @@ bool npcCombatApply(NpcAuthorityChannel& c,const NativeHealth& before,unsigned s
     npcCombatNativeStage="native_preconditions";
     const bool scripted=damage==NpcCombatDamage::MapTrigger,isRanged=npcCombatRanged(damage);NativeDamageTrigger trigger{};
     if(!swordDamageApiMatches()||!npcCombatGeometry(damage,g)||(before.ownerFlags&8)||
-       (scripted?!npcCombatTrigger(script.trigger,0,trigger):isRanged?!npcCombatNear(c,sourceRole,32):!npcCombatSourceNear(c,sourceRole,sourceArm)))return false;
+       (scripted?!npcCombatTrigger(script.trigger,0,trigger):isRanged?!npcCombatNear(c,sourceRole,32):!npcCombatSourceNear(c,sourceRole,sourceArm,npcCombatMeleeRange(damage))))return false;
     const bool world=npcCombatWorldDamage(damage);if(world!=(sourceRole==2))return false;
     const auto avatar=shadowDamageIdentity();unsigned attacker=scripted?trigger.handle:world?0x3fff0010:sourceRole==localRole?1:avatar.handle;
     if(!world&&attacker!=1&&!validCoopDamageAvatar(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),avatar))return false;
@@ -680,7 +680,7 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
             ReleaseSRWLockExclusive(&npcCombatCaptureLock);
             if(!room)stopNpcCombat("world_source_wait_capacity");return true;
         }
-        if(damage!=NpcCombatDamage::MapTrigger&&(npcCombatRanged(damage)?!npcCombatNear(*c,localRole,32):!npcCombatSourceNear(*c,world?2:localRole,sourceArm))){empty();++npcCombat.rejected;
+        if(damage!=NpcCombatDamage::MapTrigger&&(npcCombatRanged(damage)?!npcCombatNear(*c,localRole,32):!npcCombatSourceNear(*c,world?2:localRole,sourceArm,npcCombatMeleeRange(damage)))){empty();++npcCombat.rejected;
             {auto& d=npcCombatHitRangePending;d={};d.reason="hit_range";d.arm=c->arm;d.sourceArm=sourceArm;d.damage=static_cast<unsigned>(damage);
              std::memcpy(d.self,outgoing.position,12);std::memcpy(d.captured,capture.position,12);d.victimRead=memoryRead(c->lease.binding.npc.actor+0x300,d.victim,12);
              if(d.victimRead){float s=0;for(unsigned i=0;i<3;++i){const float x=d.victim[i]-d.self[i];s+=x*x;}d.distance=std::sqrt(s);}}
