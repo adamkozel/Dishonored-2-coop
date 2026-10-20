@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214fz",
+      "hostDll": "F6EA58C960B1A87EEA6397D4E73A741ABE44E32E93C300402AAA5658E9D8E677",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "step16-talk": "skipped: npc gone (scene already ran)",
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 26,
+        "cine": 29,
+        "pos": [
+          -6.778286,
+          -15.055680,
+          -99.996399
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/1",
+        "hold": "released/906",
+        "ka": "2/5/1",
+        "active": "Mission_Void01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 26,
+        "cine": 63,
+        "pos": [
+          -7.016634,
+          -14.178837,
+          -99.882935
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/0",
+        "ka": "7/0/0",
+        "active": "Mission_Void01"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily)."
+}
