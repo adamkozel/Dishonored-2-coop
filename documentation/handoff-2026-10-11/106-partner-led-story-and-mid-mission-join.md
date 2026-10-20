@@ -211,6 +211,13 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - No hit_range stop was recorded, and no replica hit was held back. Every story step ended the same in both worlds,
     through the mission end into the Void.
 
+- **route-dunwall-autosave-v1683b (fail, 1214fv, v1677; the fully partner-led autosave route):** her assassination of
+  Ramsey worked (50 to 0 at the second press). The focus-steered loot then never saw the body.
+  - The native use focus read none (`0x3fff0010`) at all 75 stands and aims (`step06-loot-lootfocus.json`).
+  - In 1683a, on the same candidate and route opening, she searched the body normally.
+  - So the partner's search of a body she assassinated is intermittent. Hypothesis: the replica corpse is sometimes not
+    interactable after the host-committed kill. Tracked in #140.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
