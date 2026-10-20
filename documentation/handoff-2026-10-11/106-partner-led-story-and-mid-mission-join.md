@@ -45,5 +45,16 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
 
 ## Takes
 
-Pending: route-dunwall-join-v1668a (the partner joins from Edge of the World after the host's six Dunwall steps) and
-route-dunwall-lead-v1668b (the partner leads Dunwall, route dunwall-full-v1301c).
+- **route-dunwall-join-v1668a (fail, harness):** the partner waited in Edge of the World and never loaded the host's
+  Dunwall mission ("The partner did not load the host mission").
+  - **Cause (confirmed static):** a joiner follows only a host that publishes its mission (`D2MF`). A host publishes
+    when it runs in product mode (`D2COOP_PRODUCT=1`) or after `coop_follow_host on`.
+    - The lab runs without product mode, and the join (Route-Mission-v1666, v1667) turned follow on only for the
+      partner. So the host published nothing.
+    - This also explains route-dunwall-join-v1666b, whose partner was already on the host's map: nothing loaded, and
+      the partner stayed 27.5 m away.
+  - A product host always publishes, so this is not a product failure.
+  - Fix: [Route-Mission-v1672](../../work/natural-moveset/Route-Mission-v1672.ps1) turns on the host's publishing
+    before the partner's follow, and saves both follow statuses at the join and after it. The take is repeated as
+    route-dunwall-join-v1672a.
+- Pending: route-dunwall-lead-v1668b (the partner leads Dunwall, route dunwall-full-v1301c).
