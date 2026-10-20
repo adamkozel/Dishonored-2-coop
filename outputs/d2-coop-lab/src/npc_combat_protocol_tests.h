@@ -163,5 +163,7 @@ void npcCombatProtocolTests(){
     std::swap(p.binding.sourceArm,p.binding.targetArm);std::swap(p.binding.sourceHandle,p.binding.targetHandle);p.sourceRole=1;p.request=1;p.event=0;p.before=p.after=p.maximum=p.inflicted=0;
     require(validNpcCombat(p,h,c),"client submits geometry and request ID without prescribing authoritative health");
     p.after=10;require(!validNpcCombat(p,h,c),"client cannot prescribe result health");
+    require(npcCombatMeleeRange(NpcCombatDamage::Assassination)==8.f&&npcCombatMeleeRange(NpcCombatDamage::Fatality)==8.f&&
+            npcCombatMeleeRange(NpcCombatDamage::Sword)==3.f&&npcCombatMeleeRange(NpcCombatDamage::Kick)==3.f,"1214fv: paired scenes reach 8 m, swings and kicks 3 m");
     std::cout<<"PASS: NPC combat authority, exact incarnation, ordered repeated hits, duplicate and malformed result rejection\n";
 }

@@ -43,7 +43,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 
 1. Both players start Dishonored 2 from Steam as usual.
 2. **Host (Corvo):** start a new game as Corvo, or load a Corvo save. In game, press **F7**. A friends-only Steam lobby is created and Steam's invite window opens. Invite your friend.
-3. **Partner (Emily):** start the game and wait in the main menu (or anywhere in a mission). Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded.
+3. **Partner (Emily):** start the game and wait in the main menu (or anywhere in a mission). Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded. If the host is already further into the mission, you are then placed beside the host.
 4. If the game asks who to play (the start of *A Long Day in Dunwall*), the host chooses **Corvo** and the partner **Emily**.
 5. Once both players are in the same mission, every co-op system turns on by itself.
 6. **F8** leaves the session.
@@ -54,6 +54,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 - To continue later, the host loads their save and presses F7, and the partner joins again. The partner's game follows the host's mission.
 - When either player dies, both see the game-over screen. Restarting from the last checkpoint restarts both games together.
 - Cutscenes play for both players. Mission ends take both players to the next mission together.
+- Either player can do the story: objectives, story items and level changes completed by the partner count for both worlds.
 
 ## Uninstall
 
@@ -80,6 +81,9 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 ## Known limitations
 
 - Two players only. The host is always Corvo and the partner is always Emily.
+- After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
+- Occasionally the partner cannot search a body she has just killed with an assassination ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)). If that happens, let the host search it.
+- Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
 - Emily's **Mesmerize**, **Doppelganger shades** (Deadly Shade, Baffling Shade) and **Rat Shadow** show their effects, but do not change the NPCs ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):

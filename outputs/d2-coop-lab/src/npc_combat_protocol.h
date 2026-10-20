@@ -20,6 +20,11 @@ enum class NpcCombatMessage:unsigned {Hello=1,Ready,Request,Commit,Stop};
 // declaration and native amount. The host applies it natively with the partner
 // avatar as attacker; HostWorld and Dead share the outcome. Never a commit.
 enum class NpcCombatDamage:unsigned {None=0,Sword,Fatality,Assassination,Corpse,MapTrigger,RangedSpread,RangedContact,Kick,HostWorld,PeerNative,Linked};
+// 1214fv (#140): the attacker range of a melee hit. An assassination or a fatality finisher is a paired scene bound to
+// its victim, which moves both bodies: route-dunwall-lead-v1680a refused the partner's assassination of Ramsey as
+// hit_range at 5.3 m from his root (1214ft stop history), the kill then ran in her world only and Corvo's Ramsey lived.
+constexpr float kNpcMeleeRange=3.f,kNpcPairedRange=8.f;
+inline float npcCombatMeleeRange(NpcCombatDamage d){return d==NpcCombatDamage::Assassination||d==NpcCombatDamage::Fatality?kNpcPairedRange:kNpcMeleeRange;}
 #pragma pack(push,1)
 struct NpcCombatScriptDamage {std::uint64_t trigger=0,declaration=0;float amount=0;unsigned reserved=0;};
 struct NpcCombatRangedDamage {std::uint64_t declaration=0;float amount=0,distance=0;unsigned weapon=0;};

@@ -1,0 +1,3097 @@
+{
+  "step": "step11-authority",
+  "host": {
+    "npcs": [
+      {
+        "handle": 186844991,
+        "name": "ld_spawner_alexi_audience",
+        "definition": "models/characters/def/story/alexi_mayhew.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -58,
+          45.61,
+          60.9891
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 40,
+        "maximum": 40,
+        "logic": 1,
+        "ownerFlags": 128,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": true,
+        "paused": true,
+        "gamePaused": true,
+        "leaseEligible": true,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354666,
+            "low": 10,
+            "pauseRefs": 1,
+            "mode": 2,
+            "scheduler": false,
+            "tree": true,
+            "live": 15,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354666,
+            "low": 10,
+            "pauseRefs": 1,
+            "mode": 2,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 4
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          }
+        ]
+      },
+      {
+        "handle": 190318452,
+        "name": "ld_spawner_ramsey_escape",
+        "definition": "models/characters/def/story/mortimer_ramsey.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -46.7573,
+          -118.3,
+          61.1722
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 0,
+        "maximum": 50,
+        "logic": 1,
+        "ownerFlags": 136,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": false,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": false,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 15,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          }
+        ]
+      },
+      {
+        "handle": 190449526,
+        "name": "ld_spawner_alexi_escape",
+        "definition": "models/characters/def/story/alexi_mayhew.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -38.9618,
+          -162.847,
+          66.5897
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 0,
+        "maximum": 40,
+        "logic": 1,
+        "ownerFlags": 136,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": false,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": false,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 15,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 4
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          }
+        ]
+      }
+    ],
+    "stream": {
+      "enabled": true,
+      "result": "active",
+      "epoch": 46,
+      "peerEpoch": 51,
+      "rejected": 78,
+      "bodyApplied": 0,
+      "bodyRefused": 0,
+      "framesOwned": 0,
+      "childrenUpdated": 0,
+      "poseIntervalMs": 61,
+      "heldSkips": 0,
+      "corpseReleases": 0,
+      "corpseFreezeFrames": 0,
+      "corpseFreezeEnds": 0,
+      "ashSent": 0,
+      "ashApplied": 0,
+      "ashRefused": 0,
+      "ashEffects": 0,
+      "entries": [
+        {
+          "handle": 190252915,
+          "civilian": false,
+          "arm": 39,
+          "peerArm": 39,
+          "peerHandle": 190252915,
+          "enabled": true,
+          "ready": true,
+          "result": "host_authority",
+          "joints": 223,
+          "rig": "b32eead658d046cc",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 687,
+          "received": 154,
+          "rejected": 0,
+          "poses": 610,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 189269860,
+          "civilian": false,
+          "arm": 40,
+          "peerArm": 40,
+          "peerHandle": 189269860,
+          "enabled": true,
+          "ready": true,
+          "result": "host_authority",
+          "joints": 223,
+          "rig": "4800b5f6cd5fbae9",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 687,
+          "received": 154,
+          "rejected": 0,
+          "poses": 610,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190973822,
+          "civilian": false,
+          "arm": 41,
+          "peerArm": 41,
+          "peerHandle": 190973822,
+          "enabled": true,
+          "ready": true,
+          "result": "host_authority",
+          "joints": 223,
+          "rig": "d7c363ca9cc1a23d",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 615,
+          "received": 138,
+          "rejected": 0,
+          "poses": 546,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        }
+      ],
+      "bodyEntries": [
+        {
+          "arm": 39,
+          "handle": 190252915,
+          "applied": 0,
+          "sequence": 0
+        },
+        {
+          "arm": 40,
+          "handle": 189269860,
+          "applied": 0,
+          "sequence": 0
+        },
+        {
+          "arm": 41,
+          "handle": 190973822,
+          "applied": 0,
+          "sequence": 0
+        }
+      ],
+      "poseDiagnostics": [
+        {
+          "arm": 39,
+          "handle": 190252915,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 40,
+          "handle": 189269860,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 41,
+          "handle": 190973822,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "relevance": {
+        "bound": 3,
+        "scans": 156,
+        "added": 5,
+        "dropped": 1,
+        "evicted": 0,
+        "lifeSent": 75,
+        "lifeReceived": 103,
+        "lifeApplied": 1,
+        "lifeRefused": 0,
+        "clientBound": 0,
+        "clientRefused": 0,
+        "clientDeferred": 0,
+        "clientBoundLive": 0,
+        "clientBusy": 0,
+        "helloCatalogReads": 0,
+        "pairedHolds": 0,
+        "pairedKnockouts": 0,
+        "pairedRefused": 0,
+        "pairedLocal": 0,
+        "pairedCorpses": 0,
+        "pairedFollows": 0,
+        "hostOwnPaired": 1,
+        "priorityPoses": 67,
+        "deadReconciled": 0,
+        "deadSent": 0,
+        "vanishedDead": 0,
+        "combatSharedDeaths": 0,
+        "clientDeadApplied": 0,
+        "clientDeadAlready": 0,
+        "clientDeadRefused": 0,
+        "clientDeadLast": "none",
+        "reconcileDecl": [
+          0.0,
+          0,
+          0,
+          0
+        ],
+        "catalogStale": 0,
+        "workerRequests": 156,
+        "workerCompleted": 156,
+        "workerFailed": 0,
+        "workerLastMs": 17.073,
+        "workerMaxMs": 52.373
+      },
+      "transport": {
+        "available": true,
+        "sendRate": 524288,
+        "pendingUnreliable": 5022,
+        "pendingReliable": 0,
+        "queueUs": 8636
+      },
+      "decodeRejected": 0,
+      "poseScopeRejected": 0,
+      "session": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 0,
+        "released": 0,
+        "retired": 0,
+        "lost": 0
+      }
+    },
+    "combat": {
+      "linkedSleepCaptured": 0,
+      "passedThrough": 0,
+      "lastDecl": "",
+      "channelsAdded": 68,
+      "channelsRetired": 60,
+      "rearms": 12,
+      "lastRetire": "actor_unbound",
+      "wanted": true,
+      "enabled": true,
+      "result": "active_native_melee",
+      "nonce": 13,
+      "localHits": 0,
+      "requests": 0,
+      "committed": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 0,
+      "suppressed": 0,
+      "eventsQueued": 0,
+      "lastOutcome": {
+        "before": 0,
+        "after": 0,
+        "maximum": 0,
+        "inflicted": 0
+      },
+      "entries": [
+        {
+          "arm": 39,
+          "peerArm": 39,
+          "peerNonce": 11,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 40.0
+        },
+        {
+          "arm": 40,
+          "peerArm": 40,
+          "peerNonce": 11,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 40.0
+        },
+        {
+          "arm": 41,
+          "peerArm": 41,
+          "peerNonce": 11,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 40.0
+        }
+      ],
+      "deaths": 0,
+      "preDeathReleased": 0,
+      "replicaGapSuppressed": 0,
+      "stopHistory": [
+        {
+          "tick": 21393453,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21466468,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21554765,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21805859,
+          "reason": "hit_range",
+          "arm": 37,
+          "sourceArm": 0,
+          "damage": 1,
+          "distance": 3.425,
+          "victimRead": true,
+          "self": [
+            -46.282,
+            -129.017,
+            61.004
+          ],
+          "captured": [
+            -46.998,
+            -125.791,
+            61.0
+          ],
+          "victim": [
+            -47.04,
+            -125.677,
+            61.0
+          ]
+        },
+        {
+          "tick": 21809562,
+          "reason": "hit_range",
+          "arm": 38,
+          "sourceArm": 0,
+          "damage": 2,
+          "distance": 3.338,
+          "victimRead": true,
+          "self": [
+            -45.749,
+            -127.737,
+            61.004
+          ],
+          "captured": [
+            -45.543,
+            -124.389,
+            61.0
+          ],
+          "victim": [
+            -45.542,
+            -124.406,
+            61.0
+          ]
+        },
+        {
+          "tick": 21817171,
+          "reason": "hit_range",
+          "arm": 37,
+          "sourceArm": 0,
+          "damage": 1,
+          "distance": 3.717,
+          "victimRead": true,
+          "self": [
+            -43.911,
+            -126.126,
+            61.004
+          ],
+          "captured": [
+            -43.725,
+            -122.415,
+            61.0
+          ],
+          "victim": [
+            -43.725,
+            -122.414,
+            61.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "retireHistory": [
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 31,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 32,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 33,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "actor_unbound",
+          "arm": 34,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "actor_unbound",
+          "arm": 35,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "actor_unbound",
+          "arm": 36,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "actor_unbound",
+          "arm": 37,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21821968,
+          "reason": "actor_unbound",
+          "arm": 38,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "handshake": {
+        "sendFailures": 0,
+        "traceCount": 18,
+        "sent": [
+          0,
+          3,
+          6,
+          0,
+          0,
+          0
+        ],
+        "received": [
+          0,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "trace": [
+          {
+            "tick": 22209843,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209843,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209843,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209843,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209859,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209859,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209890,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 11,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22209890,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 11,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 11,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 11,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22213843,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22213843,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22213875,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22213906,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 11,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22214343,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 11,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          },
+          {
+            "tick": 22214343,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 46,
+            "peerEpoch": 51,
+            "worldReady": true
+          }
+        ]
+      },
+      "captured": 5,
+      "workerCaptured": 5,
+      "lastCaptureThread": 1308,
+      "engineThread": 30696,
+      "nativeAttempt": {
+        "ownerFlags": 0,
+        "declaration": "",
+        "rawInfo": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "nativeOutcome": {
+        "stage": "idle",
+        "inflicted": 0,
+        "after": 0,
+        "healthGeneration": 0,
+        "readFailure": "none",
+        "readTerminal": false,
+        "bindingGeneration": 7030,
+        "resultWords": [
+          1092616192,
+          0,
+          0,
+          0
+        ],
+        "maximumChanged": 0
+      },
+      "fixtureHoldsFrames": true,
+      "fixturePairedFrameReleases": 0,
+      "nativeSubtractions": 0,
+      "nativeLethalSubtractions": 0,
+      "pendingRequests": 0,
+      "pendingHighWater": 0,
+      "sourceHistory": [
+        {
+          "nonce": 9,
+          "arm": 37,
+          "tick": 21784375,
+          "thread": 14440,
+          "rawInfo": "707ab42bc9010000000020410000000080000000000000000100000001000000040000009fd335c25379eec298447b42f7e8f03eaa8c61bf6e9346bd200e44bf9da3af3ee43b0bbf0000000002000000600803000100000000000000caf24971caf24971caf2497100000000000000000000000000000000caf24971caf24971caf249711000ff3f0000000000000000",
+          "inflictor": {
+            "valid": true,
+            "actor": "1ca0965de00",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000b02e4abbc90100000000000000000000000000000000000030de6509ca0100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f00000010f6c5fdc6010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000e00f39f1c901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf68df6509ca010000000000054002000000000000000000000000000000000000000000000000000090df6509ca010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000040b1eb08ca01000004000000040000004100000000000000c063b309ca010000050000413f080000402b5409ca010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000c0768f0dc901000000000000020000000000000000000000eb7133c227b4f0c2c6057b427c15073f3c1cf3bd3253573f700422bfc22437bfb996973e180c113ffc4430bf84bee7be0000803f0000803f0000803f9fcd11c1bf9e82409f17cfc0a8261bc2547dbfc1df11c641000000008079ba09ca0100005ef67509000000000000000000000000000000000000000042fc725d0090008c290410002eca75096003000000000000587d43f5f67f0000000000000000000000000000000000000000000000000000c0e16509ca0100001a000040480000007468726f776e5f6974656d5f65717569706d656e745f323836380000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1c9da67d560",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f00003035c909ca0100000000000000000000000000000000000090d567dac90100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3ff004c609ca010000080000353f10000010f6c5fdc60100000000a0400000000008801c000c0000020000803f000000000000000000000000000000053f000000e0f069dac901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfc8d667dac90100000000000540020000000000000000000000000000000000000000000000000000f0d667dac9010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000f0ca7921c90100005800000080000000410000000000000040cb2321c9010000580000413f580000b0fd39a1c9010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f00000000000000000000007009eb1ac9010000000000002200000000000000000000000a9232c29dc7f1c2c4037442fb07f6beaa81603f00000000aa8160bffb07f6be0000000000000000000000000000803f0000803f0000803f0000803f00000000000000000000000000000000000000000000000000000000e00d7ddac9010000e0f069dac901000000000000000000000000000000000000000000000000000090ec7c09ca01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000901944a1c901000040578f0dc90100000100000000000000dcdd2e8441bac7be"
+          }
+        },
+        {
+          "nonce": 9,
+          "arm": 37,
+          "tick": 21793953,
+          "thread": 18984,
+          "rawInfo": "707ab42bc90100000000204100000000800000000000000001000000010000002000000072e735c2cf27f5c255527b423efe6b3eb8a978bf555a6ebdbdca40beaab6783f2237133e0000000005000000600803000100000000000000caf24971caf24971caf2497100000000000000000000000000000000caf24971caf24971caf249711000ff3f0000000000000000",
+          "inflictor": {
+            "valid": true,
+            "actor": "1ca0965de00",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000b02e4abbc90100000000000000000000000000000000000030de6509ca0100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f00000010f6c5fdc6010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000e00f39f1c901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf68df6509ca010000000000054002000000000000000000000000000000000000000000000000000090df6509ca010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000040b1eb08ca01000004000000040000004100000000000000c063b309ca010000050000413f080000402b5409ca010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000c0768f0dc90100000000000002000000000000000000000077a034c2e1d8f7c2c5ff7a42f1d2413f5cfa23bf316c033e5e8314bf33a511bfed38153fd0c799be5f0a04bf70664dbf0000803f0000803f0000803fff5727c03fe25741fe90ff3fed8de640e40fa13feaf4803e000000008079ba09ca0100005ef67509000000000000000000000000000000000000000042fc725d0090008c290410002eca75096003000000000000587d43f5f67f0000000000000000000000000000000000000000000000000000c0e16509ca0100001a000040480000007468726f776e5f6974656d5f65717569706d656e745f323836380000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1c9da67d560",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f00003035c909ca0100000000000000000000000000000000000090d567dac90100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3ff004c609ca010000080000353f10000010f6c5fdc60100000000a0400000000008801c000c0000020000803f000000000000000000000000000000053f000000e0f069dac901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfc8d667dac90100000000000540020000000000000000000000000000000000000000000000000000f0d667dac9010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000f0ca7921c90100005800000080000000410000000000000040cb2321c9010000580000413f580000b0fd39a1c9010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f00000000000000000000007009eb1ac901000000000000220000000000000000000000128236c2629ff8c2c403744239d010be596d7d3f00000000596d7dbf39d010be0000000000000000000000000000803f0000803f0000803f0000803f00000000000000000000000000000000000000000000000000000000e00d7ddac9010000e0f069dac901000000000000000000000000000000000000000000000000000090ec7c09ca01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000901944a1c901000040578f0dc90100000100000000000000dcdd2e8441bac7be"
+          }
+        },
+        {
+          "nonce": 9,
+          "arm": 37,
+          "tick": 21805859,
+          "thread": 25068,
+          "rawInfo": "707ab42bc90100000000204100000000800000000000000001000000010000002000000077b43bc2b95bfcc26b9079423370c63e0ee46bbfa68ddbbc6d123b3f8916b3bebc1216bf0000000005000000600803000100000000000000caf24971caf24971caf2497100000000000000000000000000000000caf24971caf24971caf249711000ff3f0000000000000000",
+          "inflictor": {
+            "valid": true,
+            "actor": "1ca0965de00",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000b02e4abbc90100000000000000000000000000000000000030de6509ca0100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f00000010f6c5fdc6010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000e00f39f1c901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf68df6509ca010000000000054002000000000000000000000000000000000000000000000000000090df6509ca010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000040b1eb08ca01000004000000040000004100000000000000c063b309ca010000050000413f080000402b5409ca010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000c0768f0dc901000000000000020000000000000000000000b84538c2293800c3a7537942eb1b22bfd387153f57fd013f7feb32bfd25119bea80933bf403aaabe5a394cbf99c7003f0000803f0000803f0000803f9f362b41ffe7a3c0df5909c140e1b0c1c9779abf6562a1c1000000008079ba09ca0100005ef67509000000000000000000000000000000000000000042fc725d0090008c290410002eca75096003000000000000587d43f5f67f0000000000000000000000000000000000000000000000000000c0e16509ca0100001a000040480000007468726f776e5f6974656d5f65717569706d656e745f323836380000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1c9da67d560",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f00003035c909ca0100000000000000000000000000000000000090d567dac90100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3ff004c609ca010000080000353f10000010f6c5fdc60100000000a0400000000008801c000c0000020000803f000000000000000000000000000000053f000000e0f069dac901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfc8d667dac90100000000000540020000000000000000000000000000000000000000000000000000f0d667dac9010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000f0ca7921c90100005800000080000000410000000000000040cb2321c9010000580000413f580000b0fd39a1c9010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f00000000000000000000007009eb1ac9010000000000002200000000000000000000009d3139c250df00c3bc037442295b82be5490773f00000000549077bf295b82be0000000000000000000000000000803f0000803f0000803f0000803f57ee043fd7d594c00000000000000000000000000000000000000000e00d7ddac9010000e0f069dac901000000000000000000000000000000000000000000000000000090ec7c09ca01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000901944a1c901000040578f0dc90100000100000000000000dcdd2e8441bac7be"
+          }
+        },
+        {
+          "nonce": 10,
+          "arm": 38,
+          "tick": 21809562,
+          "thread": 32288,
+          "rawInfo": "d0b6b42bc901000000007a4400000000840000000000000002000000020000000400000080b735c2694af9c2f7527a42aea941beb3437bbfa6e1f33cfe6045bfc8ccfdbe54afcc3e0000000002000000600803000100000000000000caf24971caf24971caf2497100000000000000000000000000000000caf24971caf24971caf249711000ff3f0200000000000000",
+          "inflictor": {
+            "valid": true,
+            "actor": "1ca0965de00",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000b02e4abbc90100000000000000000000000000000000000030de6509ca0100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f00000010f6c5fdc6010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000e00f39f1c901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf68df6509ca010000000000054002000000000000000000000000000000000000000000000000000090df6509ca010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000040b1eb08ca01000004000000040000004100000000000000c063b309ca010000050000413f080000402b5409ca010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000c0768f0dc9010000000000000200000000000000000000001cb137c2666afec28ea27a42b888d73d52be7b3fe88b173eecfc3a3f50b035be18d8283f49c22c3f20761e3dc1a83cbf0000803f0000803f0000803f3f44c6c0fff07ec0ff9a4d40b447874104882e3d95664241000000008079ba09ca0100005ef67509000000000000000000000000000000000000000042fc725d0090008c290410002eca75096003000000000000587d43f5f67f0000000000000000000000000000000000000000000000000000c0e16509ca0100001a000040480000007468726f776e5f6974656d5f65717569706d656e745f323836380000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1c9da67d560",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f00003035c909ca0100000000000000000000000000000000000090d567dac90100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3ff004c609ca010000080000353f10000010f6c5fdc60100000000a0400000000008801c000c0000020000803f000000000000000000000000000000053f000000e0f069dac901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfc8d667dac90100000000000540020000000000000000000000000000000000000000000000000000f0d667dac9010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000f0ca7921c90100005800000080000000410000000000000040cb2321c9010000580000413f580000b0fd39a1c9010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f00000000000000000000007009eb1ac90100000000000022000000000000000000000050ff36c26f79ffc2bb037442b0cb0a3e34a37d3f0000000034a37dbfb0cb0a3e0000000000000000000000000000803f0000803f0000803f0000803f00000000000000000048233800000000000000000000000000000000e00d7ddac9010000e0f069dac901000000000000000000000000000000000000000000000000000090ec7c09ca01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000901944a1c901000040578f0dc90100000100000000000000dcdd2e8441bac7be"
+          }
+        },
+        {
+          "nonce": 11,
+          "arm": 37,
+          "tick": 21817171,
+          "thread": 1308,
+          "rawInfo": "707ab42bc9010000000020410000000080000000000000000100000001000000100000001f662ec236e2f5c2ee25794242ad62be58fd78bf4c0e913d2ddccbbe4c754cbf5806e73e0000000004000000600803000100000000000000caf24971caf24971caf2497100000000000000000000000000000000caf24971caf24971caf249711000ff3f0000000000000000",
+          "inflictor": {
+            "valid": true,
+            "actor": "1ca0965de00",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000b02e4abbc90100000000000000000000000000000000000030de6509ca0100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f00000010f6c5fdc6010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000e00f39f1c901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf68df6509ca010000000000054002000000000000000000000000000000000000000000000000000090df6509ca010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000040b1eb08ca01000004000000040000004100000000000000c063b309ca010000050000413f080000402b5409ca010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000c0768f0dc901000000000000020000000000000000000000efdc30c2064cfbc2c4ef7942258e80be1ec9773fc080253c31fa80bedc739abda7fd763fb3426f3fdc74753eab88863e0000803f0000803f0000803fffa56fbfff59f0bf7fca873f1edfb73faa9f51bf06f98940000000008079ba09ca0100005ef67509000000000000000000000000000000000000000042fc725d0090008c290410002eca75096003000000000000587d43f5f67f0000000000000000000000000000000000000000000000000000c0e16509ca0100001a000040480000007468726f776e5f6974656d5f65717569706d656e745f323836380000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1c9da67d560",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f00003035c909ca0100000000000000000000000000000000000090d567dac90100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3ff004c609ca010000080000353f10000010f6c5fdc60100000000a0400000000008801c000c0000020000803f000000000000000000000000000000053f000000e0f069dac901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfc8d667dac90100000000000540020000000000000000000000000000000000000000000000000000f0d667dac9010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000f0ca7921c90100005800000080000000410000000000000040cb2321c9010000580000413f580000b0fd39a1c9010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f00000000000000000000007009eb1ac901000000000000220000000000000000000000a1a42fc2b140fcc2c403744224d8913ef164753f00000000f16475bf24d8913e0000000000000000000000000000803f0000803f0000803f0000803f00000000000000000000000000000000000000000000000000000000e00d7ddac9010000e0f069dac901000000000000000000000000000000000000000000000000000090ec7c09ca01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000901944a1c901000040578f0dc90100000100000000000000dcdd2e8441bac7be"
+          }
+        }
+      ],
+      "triggerFixture": {
+        "nonce": 0,
+        "result": "unused"
+      },
+      "worldCommitted": 0,
+      "worldApplied": 0,
+      "replicaWorldSuppressed": 0,
+      "hostWorldPassed": 1,
+      "hostWorldCommitted": 0,
+      "hostWorldApplied": 0,
+      "hostWorldGains": 0,
+      "helloFollowed": 0,
+      "helloWaited": 0,
+      "followSubtractions": 0,
+      "hostUnconsciousPassed": 0,
+      "hostNativePassed": 3,
+      "hostNativeLast": "components/equipment/damage/sword_focused.damage",
+      "peerNativeRequests": 0,
+      "peerNativeApplied": 0,
+      "peerNativeBusy": 0,
+      "linkedRequests": 0,
+      "linkedApplied": 0,
+      "impliedReady": 0,
+      "hostWorldRebased": 0,
+      "ordinaryTestUntil": 0,
+      "testAssassinationsRefused": 0,
+      "fixtureFrameHolds": 0,
+      "fixture": {
+        "active": false,
+        "ready": false,
+        "result": "uncoordinated_native_load",
+        "acquired": 0,
+        "released": 0,
+        "lost": 0
+      }
+    }
+  },
+  "client": {
+    "npcs": [
+      {
+        "handle": 186844991,
+        "name": "ld_spawner_alexi_audience",
+        "definition": "models/characters/def/story/alexi_mayhew.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -58,
+          45.61,
+          60.9891
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 40,
+        "maximum": 40,
+        "logic": 1,
+        "ownerFlags": 128,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": true,
+        "paused": true,
+        "gamePaused": true,
+        "leaseEligible": true,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354666,
+            "low": 10,
+            "pauseRefs": 1,
+            "mode": 2,
+            "scheduler": false,
+            "tree": true,
+            "live": 15,
+            "activeCount": 2
+          },
+          {
+            "flags": 2684354666,
+            "low": 10,
+            "pauseRefs": 1,
+            "mode": 2,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 1
+          }
+        ]
+      },
+      {
+        "handle": 190318452,
+        "name": "ld_spawner_ramsey_escape",
+        "definition": "models/characters/def/story/mortimer_ramsey.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -44.2137,
+          -119.969,
+          61.3856
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 0,
+        "maximum": 50,
+        "logic": 1,
+        "ownerFlags": 136,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": false,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": false,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 15,
+            "activeCount": 2
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 1
+          }
+        ]
+      },
+      {
+        "handle": 190449526,
+        "name": "ld_spawner_alexi_escape",
+        "definition": "models/characters/def/story/alexi_mayhew.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -39.0063,
+          -162.966,
+          66.4251
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 40,
+        "maximum": 40,
+        "logic": 1,
+        "ownerFlags": 128,
+        "authority": true,
+        "acquireEligible": true,
+        "hostStreamEligible": true,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": true,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354570,
+            "low": 10,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": true,
+            "tree": true,
+            "live": 15,
+            "activeCount": 2
+          },
+          {
+            "flags": 2684354570,
+            "low": 10,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": true,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 1
+          }
+        ]
+      }
+    ],
+    "stream": {
+      "enabled": true,
+      "result": "active",
+      "epoch": 51,
+      "peerEpoch": 46,
+      "rejected": 42,
+      "bodyApplied": 28127,
+      "bodyRefused": 12,
+      "framesOwned": 68425,
+      "childrenUpdated": 58329,
+      "poseIntervalMs": 61,
+      "heldSkips": 0,
+      "corpseReleases": 0,
+      "corpseFreezeFrames": 0,
+      "corpseFreezeEnds": 0,
+      "ashSent": 0,
+      "ashApplied": 0,
+      "ashRefused": 0,
+      "ashEffects": 0,
+      "entries": [
+        {
+          "handle": 190252915,
+          "civilian": false,
+          "arm": 39,
+          "peerArm": 39,
+          "peerHandle": 190252915,
+          "enabled": true,
+          "ready": true,
+          "result": "client_replica",
+          "joints": 223,
+          "rig": "b32eead658d046cc",
+          "references": 2,
+          "released": 0,
+          "lost": 0,
+          "sent": 154,
+          "received": 688,
+          "rejected": 0,
+          "poses": 611,
+          "roots": 5740,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": true,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 189269860,
+          "civilian": false,
+          "arm": 40,
+          "peerArm": 40,
+          "peerHandle": 189269860,
+          "enabled": true,
+          "ready": true,
+          "result": "client_replica",
+          "joints": 223,
+          "rig": "4800b5f6cd5fbae9",
+          "references": 2,
+          "released": 0,
+          "lost": 0,
+          "sent": 154,
+          "received": 688,
+          "rejected": 0,
+          "poses": 611,
+          "roots": 5740,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": true,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190973822,
+          "civilian": false,
+          "arm": 41,
+          "peerArm": 41,
+          "peerHandle": 190973822,
+          "enabled": true,
+          "ready": true,
+          "result": "client_replica",
+          "joints": 223,
+          "rig": "d7c363ca9cc1a23d",
+          "references": 2,
+          "released": 0,
+          "lost": 0,
+          "sent": 138,
+          "received": 616,
+          "rejected": 0,
+          "poses": 547,
+          "roots": 5089,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": true,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        }
+      ],
+      "bodyEntries": [
+        {
+          "arm": 39,
+          "handle": 190252915,
+          "applied": 2357,
+          "sequence": 395
+        },
+        {
+          "arm": 40,
+          "handle": 189269860,
+          "applied": 2357,
+          "sequence": 395
+        },
+        {
+          "arm": 41,
+          "handle": 190973822,
+          "applied": 3689,
+          "sequence": 619
+        }
+      ],
+      "poseDiagnostics": [
+        {
+          "arm": 39,
+          "handle": 190252915,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 40,
+          "handle": 189269860,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 41,
+          "handle": 190973822,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "relevance": {
+        "bound": 3,
+        "scans": 0,
+        "added": 0,
+        "dropped": 0,
+        "evicted": 0,
+        "lifeSent": 176,
+        "lifeReceived": 75,
+        "lifeApplied": 1,
+        "lifeRefused": 5,
+        "clientBound": 41,
+        "clientRefused": 0,
+        "clientDeferred": 8,
+        "clientBoundLive": 0,
+        "clientBusy": 0,
+        "helloCatalogReads": 0,
+        "pairedHolds": 0,
+        "pairedKnockouts": 0,
+        "pairedRefused": 0,
+        "pairedLocal": 0,
+        "pairedCorpses": 0,
+        "pairedFollows": 0,
+        "hostOwnPaired": 0,
+        "priorityPoses": 0,
+        "deadReconciled": 0,
+        "deadSent": 0,
+        "vanishedDead": 0,
+        "combatSharedDeaths": 0,
+        "clientDeadApplied": 0,
+        "clientDeadAlready": 0,
+        "clientDeadRefused": 0,
+        "clientDeadLast": "none",
+        "reconcileDecl": [
+          0.0,
+          0,
+          0,
+          0
+        ],
+        "catalogStale": 0,
+        "workerRequests": 166,
+        "workerCompleted": 166,
+        "workerFailed": 0,
+        "workerLastMs": 18.17,
+        "workerMaxMs": 53.76
+      },
+      "transport": {
+        "available": true,
+        "sendRate": 524288,
+        "pendingUnreliable": 0,
+        "pendingReliable": 0,
+        "queueUs": 0
+      },
+      "decodeRejected": 0,
+      "poseScopeRejected": 18,
+      "session": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 6,
+        "released": 0,
+        "retired": 0,
+        "lost": 0
+      }
+    },
+    "combat": {
+      "linkedSleepCaptured": 0,
+      "passedThrough": 0,
+      "lastDecl": "",
+      "channelsAdded": 71,
+      "channelsRetired": 53,
+      "rearms": 10,
+      "lastRetire": "actor_unbound",
+      "wanted": true,
+      "enabled": true,
+      "result": "active_native_melee",
+      "nonce": 11,
+      "localHits": 0,
+      "requests": 0,
+      "committed": 0,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 3,
+      "suppressed": 0,
+      "eventsQueued": 0,
+      "lastOutcome": {
+        "before": 0,
+        "after": 0,
+        "maximum": 0,
+        "inflicted": 0
+      },
+      "entries": [
+        {
+          "arm": 39,
+          "peerArm": 39,
+          "peerNonce": 13,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 0.0
+        },
+        {
+          "arm": 40,
+          "peerArm": 40,
+          "peerNonce": 13,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 0.0
+        },
+        {
+          "arm": 41,
+          "peerArm": 41,
+          "peerNonce": 13,
+          "enabled": true,
+          "ready": true,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "none",
+          "health": 0.0
+        }
+      ],
+      "deaths": 0,
+      "preDeathReleased": 0,
+      "replicaGapSuppressed": 0,
+      "stopHistory": [
+        {
+          "tick": 21287468,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21323796,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21362609,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21393421,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21466437,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21554781,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "retireHistory": [
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 31,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 32,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21734953,
+          "reason": "actor_unbound",
+          "arm": 33,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "actor_unbound",
+          "arm": 34,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "actor_unbound",
+          "arm": 35,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "actor_unbound",
+          "arm": 36,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "actor_unbound",
+          "arm": 37,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 21822031,
+          "reason": "actor_unbound",
+          "arm": 38,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "handshake": {
+        "sendFailures": 0,
+        "traceCount": 18,
+        "sent": [
+          0,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "received": [
+          0,
+          3,
+          6,
+          0,
+          0,
+          0
+        ],
+        "trace": [
+          {
+            "tick": 22209828,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209828,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209859,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209859,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209875,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209875,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209875,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22209875,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22210328,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22210328,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 13,
+            "sourceArm": 39,
+            "targetArm": 39,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22210343,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 13,
+            "sourceArm": 40,
+            "targetArm": 40,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22213828,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22213843,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22213890,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 13,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22213890,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 11,
+            "targetNonce": 13,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22214328,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 11,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 51,
+            "targetEpoch": 46,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          },
+          {
+            "tick": 22214359,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 13,
+            "targetNonce": 11,
+            "knownPeerNonce": 13,
+            "sourceArm": 41,
+            "targetArm": 41,
+            "sourceEpoch": 46,
+            "targetEpoch": 51,
+            "localEpoch": 51,
+            "peerEpoch": 46,
+            "worldReady": true
+          }
+        ]
+      },
+      "captured": 1,
+      "workerCaptured": 0,
+      "lastCaptureThread": 30504,
+      "engineThread": 30504,
+      "nativeAttempt": {
+        "ownerFlags": 0,
+        "declaration": "",
+        "rawInfo": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "nativeOutcome": {
+        "stage": "idle",
+        "inflicted": 0,
+        "after": 0,
+        "healthGeneration": 0,
+        "readFailure": "none",
+        "readTerminal": false,
+        "bindingGeneration": 7030,
+        "resultWords": [
+          1092616192,
+          0,
+          0,
+          0
+        ],
+        "maximumChanged": 0
+      },
+      "fixtureHoldsFrames": true,
+      "fixturePairedFrameReleases": 0,
+      "nativeSubtractions": 0,
+      "nativeLethalSubtractions": 0,
+      "pendingRequests": 0,
+      "pendingHighWater": 0,
+      "sourceHistory": [
+        {
+          "nonce": 2,
+          "arm": 10,
+          "tick": 21270000,
+          "thread": 30504,
+          "rawInfo": "909135aa8801000000000000000000008c00000000000000000000000000000000000000caf24971caf24971caf249710000000000000000000000000000000000000000000000000000000001000000600803000100000000000000caf24971caf24971caf24971b0ce0fc9130000005080241a00000000caf24971caf24971caf249711000ff3f00d3431a89010000",
+          "inflictor": {
+            "valid": true,
+            "actor": "18971869f50",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000d0e24ff08801000000000000000000000000000000000000809f8671890100000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f0000002038dc0c87010000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000d09bfd618901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfb8a08671890100000000000540020000000000000000000000000000000000000000000000000000e0a0867189010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000b044096e8901000004000000040000004100000000000000b074ae7189010000050000413f08000020f9757189010000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000e036a98f8801000000000000020000000000000000000000be483bc2f2cdf4c2ee797a426edfdebeae1b8b3e3eba5bbfdd725b3feb34d53e97199bbe8ddb8c3ecc1c5ebf180ed4be0000803f0000803f0000803faf9200c27f47ddc1ffffe03b541f2ebe058fd93c46b16fbe000000004047da7189010000adb4967100000000000000000000000000000000000000007f7be575004d008c290410003d8996716003000000000000587d43f5f67f000000000000000000000000000000000000000000000000000010a38671890100001b00004048000000726567756c61725f6772656e6164655f65717569706d656e745f3600000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "1891c972b40",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f0000b026e8718901000000000000000000000000000000000000702b971c890100000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3f1054c971890100000a0000353f1000002038dc0c87010000000000000000000008801c000c0000020000803f000000000000000000000000000000053f000000f0fcd3458901000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bfa82c971c890100000000000540020000000000000000000000000000000000000000000000000000d02c971c89010000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f000060a9881c8901000058000000800000004100000000000000602d469a88010000580000413f5800001020fd1989010000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf0000000000000000f01ae07189010000020000053f0200000000000000000000000000053f00000000000000000000006023a98f8801000000000000220000000000000000000000f4593bc2ea95f7c2c4037442c69519beac1a7d3f00000000ac1a7dbfc69519be0000000000000000000000000000803f0000803f0000803f0000803faf9200c2bf61ddc10000000000000000000000000000000000000000f019e74589010000f0fcd345890100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000907c9b718901000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007079801c89010000e018a98f880100000200000000000000dcdd2e8441bac7be"
+          }
+        }
+      ],
+      "triggerFixture": {
+        "nonce": 0,
+        "result": "unused"
+      },
+      "worldCommitted": 0,
+      "worldApplied": 0,
+      "replicaWorldSuppressed": 0,
+      "hostWorldPassed": 0,
+      "hostWorldCommitted": 0,
+      "hostWorldApplied": 0,
+      "hostWorldGains": 0,
+      "helloFollowed": 0,
+      "helloWaited": 0,
+      "followSubtractions": 4,
+      "hostUnconsciousPassed": 0,
+      "hostNativePassed": 0,
+      "hostNativeLast": "none",
+      "peerNativeRequests": 0,
+      "peerNativeApplied": 0,
+      "peerNativeBusy": 0,
+      "linkedRequests": 0,
+      "linkedApplied": 0,
+      "impliedReady": 0,
+      "hostWorldRebased": 0,
+      "ordinaryTestUntil": 0,
+      "testAssassinationsRefused": 0,
+      "fixtureFrameHolds": 0,
+      "fixture": {
+        "active": false,
+        "ready": false,
+        "result": "uncoordinated_native_load",
+        "acquired": 0,
+        "released": 0,
+        "lost": 0
+      }
+    }
+  }
+}

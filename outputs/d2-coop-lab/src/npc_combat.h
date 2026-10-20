@@ -49,6 +49,12 @@ NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest
 // only that NPC, and the product controller re-arms a stopped session.
 bool npcCombatWanted=false;ULONGLONG npcCombatRearmAt=0;std::uint64_t npcCombatChannelsAdded=0,npcCombatChannelsRetired=0,npcCombatRearms=0;
 const char* npcCombatLastRetire="none";
+// 1214ft (#134): the last session stops and channel retirements, with the geometry of a hit_range refusal, for the
+// status (route-dunwall-lead-v1674a: the partner's assassination of Ramsey stopped her session and re-armed it between
+// two status samples, so the kill ran only in her world; 1669b caught hit_range).
+struct NpcCombatStopRecord {ULONGLONG tick=0;const char* reason="";std::uint64_t arm=0,sourceArm=0;unsigned damage=0;bool victimRead=false;
+    float distance=-1,self[3]{},captured[3]{},victim[3]{};};
+NpcCombatStopRecord npcCombatStops[8]{},npcCombatRetires[8]{},npcCombatHitRangePending{};unsigned npcCombatStopCount=0,npcCombatRetireCount=0;
 std::atomic<std::uint64_t> npcCombatHostWorldPassed{0},npcCombatHostUnconsciousPassed{0},npcCombatHostNativePassed{0},npcCombatHostNativeLastKey{0};std::uint64_t npcCombatFollowSubtractions=0;
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason);
 bool npcCombatTriggerFixtureRequested=false;std::uint64_t npcCombatTriggerFixtureNonce=0;
@@ -70,6 +76,13 @@ struct NpcCombatCapture {std::uint64_t nonce=0,arm=0;ULONGLONG tick=0;DWORD thre
 SRWLOCK npcCombatCaptureLock=SRWLOCK_INIT;
 std::vector<NpcCombatCaptureBinding> npcCombatCaptureBindings;
 std::vector<NpcCombatCapture> npcCombatCaptures;
+// 1214fu (#140): the client's stream replicas while its combat session is down (stopped, re-arming 3 s later). The
+// capture bindings are cleared with the session, so a client hit on a replica in that gap went native and killed it
+// in the client's world only (route-dunwall-lead-v1674a: the partner's second press after a stop killed Ramsey, and
+// Corvo's Ramsey lived). The host owns a replica's life, so the hit is held back instead; knockout damage still passes
+// (the stream shares unconsciousness).
+struct NpcReplicaGuard {std::uintptr_t component=0,actor=0;unsigned generation=0;};
+std::vector<NpcReplicaGuard> npcReplicaGuards;std::atomic<std::uint64_t> npcCombatReplicaGapSuppressed{0};
 std::array<NpcCombatCapture,8> npcCombatSourceHistory{};std::uint64_t npcCombatSourceCount=0;
 std::atomic<unsigned> npcCombatCaptureFault{0};
 std::atomic<std::uint64_t> npcCombatCaptured{0},npcCombatWorkerCaptured{0};
@@ -148,6 +161,12 @@ bool routeNpcCombatDamage(void* component,void* info,void* result){
             npcCombatCaptures.push_back(e);++npcCombatCaptured;if(e.thread!=engineThread.load())++npcCombatWorkerCaptured;}
         break;
     }
+    // 1214fu (#140): a client hit on a stream replica while the combat session is down.
+    if(!handled&&!npcReplicaGuards.empty()){const auto c=reinterpret_cast<std::uintptr_t>(component);
+        for(const auto& g:npcReplicaGuards){if(g.component!=c)continue;std::uintptr_t owner=0,decl=0;unsigned generation=0;
+            if(!memoryRead(c+0x10,&owner,8)||owner!=g.actor||!memoryRead(c+0x18,&generation,4)||generation!=g.generation)break;
+            if(memoryRead(reinterpret_cast<std::uintptr_t>(info),&decl,8)&&npcCombatPassThroughDecl(decl))break;
+            handled=true;npcCombatReplicaGapSuppressed.fetch_add(1);break;}}
     ReleaseSRWLockExclusive(&npcCombatCaptureLock);
     // The established native empty-result constructor is also used by the
     // friendly-fire filter on worker callbacks. Game mutations happen later
@@ -200,6 +219,8 @@ bool sendNpcCombat(const CoopNpcCombat& p){
     if(p.kind==NpcCombatMessage::Request||p.kind==NpcCombatMessage::Commit)npcCombat.lastSent=p;return true;
 }
 void stopNpcCombat(const char* reason,bool notify=true){
+    {NpcCombatStopRecord r=!std::strcmp(reason,"hit_range")?npcCombatHitRangePending:NpcCombatStopRecord{};r.tick=GetTickCount64();r.reason=reason;
+     npcCombatStops[npcCombatStopCount++%8]=r;npcCombatHitRangePending={};}
     npcCombatTriggerFixtureRequested=false;
     clearNpcCombatCapture();
     stopNpcCombatFixture(reason);
@@ -255,8 +276,8 @@ NpcAuthorityChannel* npcCombatCorpseSource(std::uint64_t arm,bool peer,NativeHea
         return nullptr;
     }return nullptr;
 }
-bool npcCombatSourceNear(NpcAuthorityChannel& victim,unsigned role,std::uint64_t sourceArm){
-    if(role<2)return !sourceArm&&npcCombatNear(victim,role);
+bool npcCombatSourceNear(NpcAuthorityChannel& victim,unsigned role,std::uint64_t sourceArm,float range=kNpcMeleeRange){
+    if(role<2)return !sourceArm&&npcCombatNear(victim,role,range);
     NativeHealth h{};bool pending=false;auto* source=npcCombatCorpseSource(sourceArm,false,h,pending);
     if(!source||(pending&&!localRole)||source->arm==victim.arm)return false;
     if(localRole)return true; // Host validates contact; replica corpse physics is not authoritative.
@@ -438,7 +459,7 @@ bool npcCombatApply(NpcAuthorityChannel& c,const NativeHealth& before,unsigned s
     npcCombatNativeStage="native_preconditions";
     const bool scripted=damage==NpcCombatDamage::MapTrigger,isRanged=npcCombatRanged(damage);NativeDamageTrigger trigger{};
     if(!swordDamageApiMatches()||!npcCombatGeometry(damage,g)||(before.ownerFlags&8)||
-       (scripted?!npcCombatTrigger(script.trigger,0,trigger):isRanged?!npcCombatNear(c,sourceRole,32):!npcCombatSourceNear(c,sourceRole,sourceArm)))return false;
+       (scripted?!npcCombatTrigger(script.trigger,0,trigger):isRanged?!npcCombatNear(c,sourceRole,32):!npcCombatSourceNear(c,sourceRole,sourceArm,npcCombatMeleeRange(damage))))return false;
     const bool world=npcCombatWorldDamage(damage);if(world!=(sourceRole==2))return false;
     const auto avatar=shadowDamageIdentity();unsigned attacker=scripted?trigger.handle:world?0x3fff0010:sourceRole==localRole?1:avatar.handle;
     if(!world&&attacker!=1&&!validCoopDamageAvatar(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),avatar))return false;
@@ -659,7 +680,11 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
             ReleaseSRWLockExclusive(&npcCombatCaptureLock);
             if(!room)stopNpcCombat("world_source_wait_capacity");return true;
         }
-        if(damage!=NpcCombatDamage::MapTrigger&&(npcCombatRanged(damage)?!npcCombatNear(*c,localRole,32):!npcCombatSourceNear(*c,world?2:localRole,sourceArm))){empty();++npcCombat.rejected;stopNpcCombat("hit_range");return true;}
+        if(damage!=NpcCombatDamage::MapTrigger&&(npcCombatRanged(damage)?!npcCombatNear(*c,localRole,32):!npcCombatSourceNear(*c,world?2:localRole,sourceArm,npcCombatMeleeRange(damage)))){empty();++npcCombat.rejected;
+            {auto& d=npcCombatHitRangePending;d={};d.reason="hit_range";d.arm=c->arm;d.sourceArm=sourceArm;d.damage=static_cast<unsigned>(damage);
+             std::memcpy(d.self,outgoing.position,12);std::memcpy(d.captured,capture.position,12);d.victimRead=memoryRead(c->lease.binding.npc.actor+0x300,d.victim,12);
+             if(d.victimRead){float s=0;for(unsigned i=0;i<3;++i){const float x=d.victim[i]-d.self[i];s+=x*x;}d.distance=std::sqrt(s);}}
+            stopNpcCombat("hit_range");return true;}
         if(localRole){
             empty();
             auto p=npcCombatPacket(*c,b,NpcCombatMessage::Request);p.sourceRole=1;p.request=++b.request;p.damage=damage;p.geometry=geometry;p.ranged=ranged;
@@ -690,6 +715,7 @@ void beginNpcCombat(){
 }
 void retireNpcCombatChannel(NpcCombatChannel& b,const char* reason){
     if(!b.enabled)return;b.enabled=b.ready=false;b.retired=reason;b.retiredAt=GetTickCount64();npcCombatLastRetire=reason;++npcCombatChannelsRetired;
+    {NpcCombatStopRecord r{};r.tick=b.retiredAt;r.reason=reason;r.arm=b.arm;npcCombatRetires[npcCombatRetireCount++%8]=r;}
 }
 inline bool npcCombatChannelBlocks(const NpcCombatChannel& b,ULONGLONG tick){
     return npcCombatChannelBlocksRebind(b.enabled,b.terminal,b.deathPending,b.retiredAt,tick);
@@ -829,9 +855,19 @@ void serviceNpcCombatTriggerFixture(){
     reinterpret_cast<NativeDamage>(gameImage+0x717950)(reinterpret_cast<void*>(health.component),params.data(),result.data());
     npcCombatTriggerFixtureResult=npcCombatCaptured.load()==count+1?"captured_observed_event_fixture":"capture_unconfirmed";
 }
+// 1214fu (#140): engine thread: publish the client's ready stream replicas while combat is wanted but its session is
+// down; the list is empty while the session runs (its capture bindings cover the same NPCs) and on the host.
+void refreshNpcReplicaGuards(){
+    std::vector<NpcReplicaGuard> next;
+    if(localRole&&npcCombatWanted&&!npcCombat.enabled)for(const auto& c:npcChannels)
+        if(c.enabled&&c.ready&&c.lease.ready&&c.lease.references&&!c.corpse)
+            next.push_back({c.lease.binding.health.component,c.lease.binding.npc.actor,c.lease.binding.healthGeneration});
+    AcquireSRWLockExclusive(&npcCombatCaptureLock);npcReplicaGuards.swap(next);ReleaseSRWLockExclusive(&npcCombatCaptureLock);
+}
 void serviceNpcCombat(ULONGLONG tick){
     if(npcCombatRequest>=0){const auto request=npcCombatRequest;npcCombatRequest=-1;npcCombatWanted=request!=0;if(request)beginNpcCombat();else stopNpcCombat("disabled");}
     serviceNpcCombatFixture(tick);
+    refreshNpcReplicaGuards();
     if(!npcCombat.enabled&&npcCombatWanted&&(productMode||productAutoArm)&&npcAuthorityStreamActive&&tick-npcCombatRearmAt>=3000){npcCombatRearmAt=tick;beginNpcCombat();if(npcCombat.enabled)++npcCombatRearms;}
     if(!npcCombat.enabled)return;
     syncNpcCombatChannels(tick);
@@ -865,6 +901,15 @@ void writeNpcCombat(){
     const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
+    fprintf(f,",\"replicaGapSuppressed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()));
+    // 1214ft: the stop and retire histories, oldest first.
+    for(int k=0;k<2;++k){const auto* list=k?npcCombatRetires:npcCombatStops;const unsigned count=k?npcCombatRetireCount:npcCombatStopCount;
+        fprintf(f,",\"%s\":[",k?"retireHistory":"stopHistory");const unsigned first=count>8?count-8:0;
+        for(unsigned i=first;i<count;++i){const auto& r=list[i%8];
+            fprintf(f,"%s{\"tick\":%llu,\"reason\":\"%s\",\"arm\":%llu,\"sourceArm\":%llu,\"damage\":%u,\"distance\":%.3f,\"victimRead\":%s,\"self\":[%.3f,%.3f,%.3f],\"captured\":[%.3f,%.3f,%.3f],\"victim\":[%.3f,%.3f,%.3f]}",
+                i==first?"":",",static_cast<unsigned long long>(r.tick),r.reason,r.arm,r.sourceArm,r.damage,r.distance,r.victimRead?"true":"false",
+                r.self[0],r.self[1],r.self[2],r.captured[0],r.captured[1],r.captured[2],r.victim[0],r.victim[1],r.victim[2]);}
+        fputs("]",f);}
     fprintf(f,",\"handshake\":{\"sendFailures\":%llu,\"traceCount\":%llu,\"sent\":[",s.sendFailures,s.traceCount);
     for(unsigned i=0;i<s.sent.size();++i)fprintf(f,"%s%llu",i?",":"",s.sent[i]);
     fputs("],\"received\":[",f);for(unsigned i=0;i<s.received.size();++i)fprintf(f,"%s%llu",i?",":"",s.received[i]);

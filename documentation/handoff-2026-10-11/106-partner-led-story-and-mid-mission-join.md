@@ -58,6 +58,42 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - Fix: [Route-Mission-v1672](../../work/natural-moveset/Route-Mission-v1672.ps1) turns on the host's publishing
     before the partner's follow, and saves both follow statuses at the join and after it. The take is repeated as
     route-dunwall-join-v1672a.
+- **route-dunwall-join-v1672a (fail, harness; 1214fr, v1673):** the host now published its mission (182 packets), and
+  the partner received it (179) and loaded Dunwall from Edge of the World (`loads` 1).
+  - Its game then waited at the native mission card (logic 15, "press any key") until the 180 s wait ran out. A
+    player presses a key there; the join's wait only compared maps.
+  - Fix: [Route-Mission-v1675](../../work/natural-moveset/Route-Mission-v1675.ps1) settles the partner during the join's
+    loading wait (A at the mission card, Emily at a character choice) for up to 240 s. Repeated as
+    route-dunwall-join-v1675a on 1214fs.
+- **route-dunwall-join-v1675a (fail, harness; 1214fs, v1675):** the partner loaded Dunwall again and showed the mission
+  card ("Press any key", frame), but with a load still pending (logic 15, pending 5). v1675 pressed only with nothing
+  pending, so the 240 s wait ran out.
+  - [Route-Mission-v1676](../../work/natural-moveset/Route-Mission-v1676.ps1) presses through the card whatever the
+    pending state, as the VM campaign harness does. Repeated as route-dunwall-join-v1679a on 1214ft.
+- **route-dunwall-join-v1679a (pass, 1214ft, v1676): the mid-mission join works.** Confirmed runtime:
+  - The host played Dunwall steps 1-6 alone (Ramsey killed and searched) while the partner waited in Edge of the World.
+  - The partner's game followed the host's mission (`loads` 1), loaded Dunwall from its start and passed the mission
+    card.
+  - **The join placement moved her beside the host: `warps` 1, `warpDistance` 33.25 m, then 0.89 m from Corvo.**
+  - The door, usable and NPC sessions were active on both sides at the join.
+  - Objectives converged by the next step (both [237,3,3,4] after step 7).
+  - Both worlds then played on together through the streets and into the Void.
+  - **Not yet converged at the join (8 s after both settled):** two NPCs the host had killed before the join,
+    `ld_spawner_ramsey_escape` and `ld_spawner_alexi_escape`, were alive in the partner's fresh world.
+    - The life roster (1214ad) sends unbound deaths only while both worlds share the map, so nothing was sent before
+      the join. Whether it caught up after the snapshot was not recorded.
+    - route-dunwall-join-v1682a records Ramsey and Alexi in both worlds, with the roster's counters, after steps 7
+      and 9.
+- **route-dunwall-join-v1682a (pass, 1214fu, v1677):** the same join, now with authority records after steps 7 and 9.
+  - Placement 2.04 m from Corvo. Gameflow equal at the end.
+  - At the join, Ramsey and Alexi were alive in the partner's world, as in 1679a.
+  - **Ramsey converged:** dead in both worlds by step 7. The life roster sent the host's death and the partner applied
+    it natively (`lifeApplied` 1).
+  - **Alexi (`ld_spawner_alexi_escape`) did not converge:** dead in Corvo's world, 40 health in the partner's at steps
+    7 and 9. The partner refused the roster's death 5 times (`lifeRefused` 5, the attempt limit), then stopped trying.
+    Hypothesis: she is held by a coup script in the fresh world, so the native kill is refused.
+  - **Known limitation for the release:** after a mid-mission join, a few NPCs the host has already dealt with can
+    remain in the partner's world.
 - **route-dunwall-lead-v1668b (fail, harness):** the partner led Dunwall (route dunwall-full-v1301c) on 1214fr. Steps
   1-3 completed in both worlds, with the gameflow counts equal.
   - During step 4 (a 15 s wait) the partner's journal opened (logic 7, Lore & Maps; confirmed runtime from the frame).
@@ -91,3 +127,126 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     - [Route-Mission-v1674](../../work/natural-moveset/Route-Mission-v1674.ps1) records both worlds' NPC authority
       eligibility for Ramsey (`authority` step) before and after the fight. It runs as route-dunwall-lead-v1674a on
       1214fs.
+
+- **route-dunwall-lead-v1674a (pass, 1214fs, Route-Mission-v1674):** the partner led all of A Long Day in Dunwall
+  (route dunwall-full-v1301c), and every story step ended the same in both worlds (confirmed runtime):
+  - her assassination of Ramsey: both worlds to gameflow 237 and `Task_DW_GetRing`;
+  - her loot of his ring: both to [237,1,3,6];
+  - the vault and lockers: both to [236,1,3,7];
+  - the level transition to the streets she started, the balcony and street triggers, and the mission end into the
+    Void (`void_01_p` in both worlds).
+  - Gameflow counts were equal after every step. The host received 5 advance reports and applied 8 nodes, with none
+    refused or expired.
+  - **Ramsey himself stayed alive in Corvo's world.** He was bound in both worlds before the fight (NPC stream arm 10,
+    host authority and client replica, combat channel ready on both sides). Her assassination was captured on arm 10,
+    but her combat session stopped and re-armed between two status samples, so the kill ran only in her world. After
+    it, Corvo's Ramsey stood alive at 50/50 where her corpse lay.
+    - The objectives and the story are unaffected. The kill sharing is tracked as its own combat issue, [#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140) (stage 4).
+    - 1214ft records the session stops with the hit_range geometry; take route-dunwall-lead-v1676a.
+
+- **route-dunwall-autosave-v1674b (fail, 1214fs, partner-led autosave route):** her attack brought Ramsey to 0 health
+  in her world at press 4, as in 1674a. This time **neither** world completed `Obj_DW_EliminateRamsey`, and the loot failed.
+  - So the partner's kill of Ramsey takes one of two wrong paths:
+    - (a) it stays in her world, her script completes the objective, and the advance reaches the host while Corvo's
+      Ramsey lives (1674a);
+    - (b) no world's story script sees the kill (1674b; hypothesis: the kill reached the host and was applied there in
+      a way the story script does not count as a player kill).
+  - Both are #140. 1214ft's stop history and authority records (take 1676a) will show the path.
+  - For #136, route-dunwall-autosave-v1678a lets the host do Ramsey's two steps, while the partner leads the rest and
+    crosses the street balcony autosave alone.
+
+- **route-dunwall-lead-v1676a (pass, 1214ft, steps 1-6 with authority records):** this time the partner's
+  assassination killed Ramsey in **both** worlds, at the same spot (-43.8,-119.8): health 0/50 in Corvo's world too.
+  - Both worlds then completed the elimination and the ring together at the loot step ([237,1,3,6]).
+  - No combat session stop was recorded.
+  - Here Ramsey stood still at his post. In 1674a and 1674b the host's AI had walked him 10-15 m, and the kill came
+    right after the harness teleported the partner next to him.
+  - The probe's NPC position and the range check read the same actor root (+0x300); after 1674a's kill that root and
+    the partner were 1.7 m apart. So the trigger of the bad paths is still open (#140).
+  - 1214ft's stop history covers the next partner-led kills (route-institute-lead-v1677a clears walking guards).
+
+- **route-institute-lead-v1677a (1214ft; the partner leads The Good Doctor, route institute-partner-v1677):** steps 1-14,
+  all by the partner, ended the same in both worlds, with gameflow equal after each (confirmed runtime):
+  - the note on Hypatia's door, the guard clear, Hypatia's key, the glass door and the lab trigger;
+  - the talk scene with Hypatia, the scroll case on her belt, and the transformation trigger (`ld_trigger_transfo_alone_2`).
+  - Step 15, Hypatia's fight given to the host, failed ("still alive after 80 attacks"). The host's lookup teleported
+    Corvo to face a wall. In host-led runs Corvo has crossed the transformation trigger himself and stands in the lab.
+    This is a gap of the mixed-role route, not of the story path. The fight after a partner-crossed transformation
+    trigger is left to the campaign takes.
+
+- **route-dunwall-autosave-v1678a (fail, harness; 1214ft):** the partner led steps 1-4, and the host took Ramsey's two
+  steps.
+  - Corvo also assassinated Ramsey at his first press (50 to 0 health), natively in his own world. Neither world
+    completed `Obj_DW_EliminateRamsey` at the kill.
+  - So after an assassination the elimination completes only with the search of the body, as in 1676a, where both
+    worlds completed it at the loot step.
+  - All five of the host's loot stands missed: no search prompt over the body (frame).
+  - **This revises 1674b:** its failure fits the same loot miss. Whether Ramsey died in Corvo's world there was not
+    recorded. Path (b) above is therefore unconfirmed; path (a), the kill staying in her world, is confirmed (1674a).
+  - [Route-Mission-v1677](../../work/natural-moveset/Route-Mission-v1677.ps1)'s loot step steers by the native use
+    focus. At each stand it sweeps pitch and bearing and presses only while the body is focused (`$tag-lootfocus.json`).
+  - Repeated for #136 as route-dunwall-autosave-v1681a, after the 1214fu take route-dunwall-lead-v1680a.
+
+- **route-dunwall-lead-v1680a (pass, 1214fu, v1677): the partner leads all of Dunwall again, and the cause of #140
+  is measured.**
+  - Every story step ended the same in both worlds, through the mission end into the Void.
+  - Her assassination of Ramsey (damage kind 3, `Assassination`) was refused by her capture as `hit_range` (1214ft stop
+    history): her position was 5.30 m from Ramsey's root against the 3 m melee range. Victim (-43.83,-119.86), partner
+    (-47.11,-124.02).
+  - Her session stopped, the kill completed in her world only (0 health), and Corvo's Ramsey lived (50, then 47).
+  - 1214fu's gap guard never fired (`replicaGapSuppressed` 0). The kill came through the assassination's paired scene,
+    not a hooked damage event in the gap.
+  - **1214fv:** an assassination or fatality finisher is a paired scene bound to its victim that moves both bodies, so
+    the range checks of the partner's capture and the host's apply allow 8 m for them (3 m for swings and kicks), with
+    a unit test. Takes route-dunwall-lead-v1683a and route-dunwall-autosave-v1683b (fully partner-led, her own kill of
+    Ramsey) follow.
+
+- **route-dunwall-autosave-v1681a (fail, fight; 1214fu):** the host's Ramsey fight (role host) met an aware Ramsey with
+  guards and ended at 10 health after the route's 40 presses (host-led runs take about 22). This is fight variance.
+  - For #136, route-dunwall-autosave-v1684a has the host lead to the streets, then the partner alone crosses the
+    street balcony autosave and dies.
+
+- **route-dunwall-lead-v1683a (pass, 1214fv, v1677):** the partner led all of Dunwall again.
+  - Her assassination of Ramsey (second press) killed him in **both** worlds: 0/50 for Corvo and for her.
+  - No hit_range stop was recorded, and no replica hit was held back. Every story step ended the same in both worlds,
+    through the mission end into the Void.
+
+- **route-dunwall-autosave-v1683b (fail, 1214fv, v1677; the fully partner-led autosave route):** her assassination of
+  Ramsey worked (50 to 0 at the second press). The focus-steered loot then never saw the body.
+  - The native use focus read none (`0x3fff0010`) at all 75 stands and aims (`step06-loot-lootfocus.json`).
+  - In 1683a, on the same candidate and route opening, she searched the body normally.
+  - So the partner's search of a body she assassinated is intermittent. Hypothesis: the replica corpse is sometimes not
+    interactable after the host-committed kill. Tracked in #140.
+
+- **route-dunwall-autosave-v1684a (fail, harness; 1214fv):** the host led, assassinated Ramsey at his first press, and
+  then failed to search the body.
+  - The native focus held the body at 3 of 75 aims, and X was pressed each time, but the search never completed.
+  - The frame shows the two tower guards (`ld_spawner_guard_escape_1` and `_2`, about 5 m from Ramsey) hitting Corvo over
+    the body, so their attacks interrupted the search.
+  - In the host-led takes where Corvo fought Ramsey (1669a, 1679a, 1682a) the search worked; both host assassinations
+    (1678a, 1684a) failed it.
+  - route-dunwall-autosave-v1685a clears the guards around Ramsey (host, health hold) before the search. The partner
+    still crosses the street balcony autosave alone and dies.
+
+## Multi-state devices and safes (#134)
+
+The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
+- **Static census** (usable censuses 1123 and 1124-1144, confirmed runtime):
+  - Edge of the World has six 10-state combination dials (`script_combinaison_numbers_*`). Their current values are
+    scrambled on every load and differ between the two worlds (1144: host 7/3/1, client 1/9/1), so each world has its
+    own combination, read from its own notes.
+  - The safe doors behind them are 2-state and disabled until dialled. The Dunwall safes (`ld_safe_door_4_1`,
+    `esc_env_safe_door_4`) are plain enabled Open/Close toggles, left out only by their name.
+  - Typewriters (5 states), the piano (3) and audiographs (flags bit 0, role-specific names) carry no shared state.
+- **Take route-dunwall-safe-v1671a (pass, 1214fr, Route-Mission-v1671):**
+  - The host opened `ld_safe_door_4_1`: his safe opened (state 0 to 1), and the partner's stayed closed.
+  - He took the 150-coin gold ingot inside it (`pickups_ingot_gold_01`). The ingot left both worlds (pickup sync,
+    chapter 83).
+  - The partner then opened her own safe (state 0 to 1): it was empty.
+- **Decision:**
+  - Safes and combination dials stay per world. Each player opens the safe in their own world, with that world's
+    combination.
+  - What one player takes from a safe is gone for both.
+  - Typewriters, the piano and audiographs stay per player (no story state; hypothesis for the typewriters and the piano,
+    which only play their own animation and sound).
+  - The release notes list this.
