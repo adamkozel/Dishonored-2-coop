@@ -291,6 +291,10 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - The partner alone crossed the street balcony autosave. The pair landed in both worlds (slot 62).
   - She died, and both restarted from slot 62 in 7.3 s, with gameflow equal.
 
+- **route-dunwall-lead-v1688c (pass, 1214fx; #134 regression on the release candidate):** the partner led all of
+  Dunwall. Ramsey died in both worlds (0/50 each), every story step ended the same in both worlds, and both reached the
+  Void with gameflow equal.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
