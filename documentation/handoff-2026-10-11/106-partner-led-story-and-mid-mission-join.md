@@ -131,6 +131,16 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - For #136, route-dunwall-autosave-v1678a lets the host do Ramsey's two steps, while the partner leads the rest and
     crosses the street balcony autosave alone.
 
+- **route-dunwall-lead-v1676a (pass, 1214ft, steps 1-6 with authority records):** this time the partner's
+  assassination killed Ramsey in **both** worlds, at the same spot (-43.8,-119.8): health 0/50 in Corvo's world too.
+  - Both worlds then completed the elimination and the ring together at the loot step ([237,1,3,6]).
+  - No combat session stop was recorded.
+  - Here Ramsey stood still at his post. In 1674a and 1674b the host's AI had walked him 10-15 m, and the kill came
+    right after the harness teleported the partner next to him.
+  - The probe's NPC position and the range check read the same actor root (+0x300); after 1674a's kill that root and
+    the partner were 1.7 m apart. So the trigger of the bad paths is still open (#140).
+  - 1214ft's stop history covers the next partner-led kills (route-institute-lead-v1677a clears walking guards).
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
