@@ -113,6 +113,33 @@ The live candidate is 1214fp.
     then they are known limitations for the release notes.
   - The takedowns in 1658a/b failed because the guard had walked off. Kept as evidence.
 
+## Partner world-object powers on the host (#131)
+
+- **Mesmerize: a native spirit in the host world** (lab, Test-MesmerizeHost v1716-v1721, candidates 1214gh-gm):
+  - The host spawns the original object (`models/powers/mesmerize/mesmerize_object.def`), finds its
+    `arkCpntMesmerize` on the following frames (1716a: not attached on the spawn frame) and configures it as
+    `FUN_14072bf30` does.
+  - The anchor must resolve. The world handle `0x3fff0010` does not (1718a), so a static spawner is used (1719a).
+  - State 1 waits on its appear scene, which never ends on the host (1719a, 1720a, 1722a). State 3 is requested
+    directly (1214gl).
+  - State 3 crashed in the NPC AI (`FUN_14040ccf0`, 1721a). The native code finds the spirit through the local
+    player's Mesmerize slot (`player+0x390`, then `+0xd4`; confirmed static), and Corvo has none. The host sets a
+    phantom slot while its object runs (1214gm).
+  - mesmerize-host-v1722b (confirmed runtime): state 3 with no crash, the timer counts down, the two tutorial guards
+    are native targets, and the stop goes to state 2.
+- **Following Emily's own cast** (1214gn; partner-mesmerize-v1723a, Test-PartnerMesmerize-v1723; confirmed runtime):
+  - The host runs its object for her cast. Her world stream places it at her spirit's transform and anchors it to the
+    spawner of the nearest NPC. The host requests state 1, then state 3 once hers is active, and stops it at her
+    retire.
+  - Both spirits took the same NPC (190252915, on the lower floor) in 43 of 44 active host samples. Her stand 5 m
+    behind guard 2 was on the floor below, so guard 2 was taken in neither world.
+  - **Failure:** after the stop, the host object stayed in state 2 for 25 s with the phantom slot set.
+    - The state 2 exit scene never ends on the host either (confirmed runtime).
+    - Natively, its end posts a message (type `1439a6f30`, also posted by entity-removal paths), so the native power
+      spawns a new object per cast (hypothesis).
+    - Next (1214go): return the cached object to the idle state 0, 1.5 s after it enters state 2. State 0's enter only
+      sets bit 0x10 of the owner's `+0xd4` (confirmed static).
+
 ## Possessed bodies (host world; consistent)
 
 - carry-body-v1644b (confirmed runtime): Corvo, with Possession, Parasite and Decayed Harbor granted, possesses the
