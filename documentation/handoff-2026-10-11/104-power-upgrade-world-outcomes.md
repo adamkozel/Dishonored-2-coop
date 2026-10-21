@@ -214,8 +214,23 @@ The live candidate is 1214fp.
   - **partner-shade-v1728b** (control, puppet off; pass): no puppet, and the host guards' attention stayed empty for
     15 s. Guard 1 then noticed Emily herself.
   - So the host's NPCs now perceive and fight her base shade natively.
-  - **Next:** the upgrades (Deadly Shade, Baffling Shade) and the hits: a host hit on the puppet must kill her shade,
-    so its native death outcome runs, and her shade's hits on replicas must reach the host.
+- **The shade upgrades** (1214gt, Test-PartnerShade-v1729; confirmed runtime):
+  - **partner-shade-v1729b** (Baffling Shade; pass):
+    - Both guards perceived the puppet, and a host guard killed it (health 1 to 0; `puppet_lost`).
+    - Her shade in her world kept its health and lived on, so the death diverges between worlds.
+    - Baffling Shade has no code strings; it is data-driven (hypothesis: the decoy's death outcome reads the caster's
+      attribute, which Corvo does not have).
+  - **partner-shade-v1729a** (Deadly Shade; fail): her shade never reached the stream (595 unknown reads at reader
+    stage 3).
+    - The film shows the upgrade's shade: it appears, walks to the guard and engages it.
+    - Its entity is `models/powers/doppelganger/deadlyshadow_entity.def`, with `arkCpntDeadlyShadow`, a combat NPC.
+      The reader accepts only `decoy_entity.def` with the decoy component.
+    - So with Deadly Shade, Corvo sees no shade and no host NPC is touched. Guard health stayed 40 in both worlds.
+- **Shades, still to do:**
+  1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
+     same definition as hers. A deadly shadow on the host fights the host's NPCs natively.
+  2. A host kill of the puppet kills her shade natively, so its death outcome runs in her world.
+  3. Her shade's hits on replicas reach the host.
 
 ## Possessed bodies (host world; consistent)
 
