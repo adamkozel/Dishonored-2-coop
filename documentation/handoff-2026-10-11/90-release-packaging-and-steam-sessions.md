@@ -257,6 +257,11 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
   - install test release-install-v1740a: 8/8;
   - clean-PC proof from the v0.8.3 download: product-two-account-v1740a.
 - A partner who joins from the title screen now waits there until a key is pressed (#146, 1214ha, chapter 106; campaign-titlejoin-vm-v1744a).
+- Release 0.8.4 (#162; the partner's assassinated story target stays and can be searched, #140, chapter 106; the
+  title-screen join, #146):
+  - candidate 1214hm (1214hl with version resources at 0.8.4), setup tool v1754;
+  - install test release-install-v1754b: 8/8;
+  - clean-PC proof from the v0.8.4 download: product-two-account-v1754b.
 
 **Still open:**
 - Hosting starts with the F7 key. There is no entry in the game's own menus; the invite and join steps are Steam's native overlay and friends list.
