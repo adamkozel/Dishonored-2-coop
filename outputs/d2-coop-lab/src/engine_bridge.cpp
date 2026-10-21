@@ -1588,6 +1588,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_spawn_probe emily")||!std::strcmp(text,"coop_spawn_probe corvo")||!std::strcmp(text,"coop_spawn_probe shadow_emily")||!std::strcmp(text,"coop_spawn_probe shadow_corvo"))return true;
     if(!std::strcmp(text,"coop_npc_attack on")||!std::strcmp(text,"coop_npc_attack off")||!std::strcmp(text,"coop_npc_attack duplicate"))return true;
     if(!std::strcmp(text,"coop_corpse_hold own_paired_skip")||!std::strcmp(text,"coop_corpse_hold own_paired_keep"))return true; // 1214gd (#140)
+    if(!std::strcmp(text,"coop_corpse_present unheld")||!std::strcmp(text,"coop_corpse_present held"))return true; // 1214hg (#140)
     if(!std::strcmp(text,"coop_avatar_perception on")||!std::strcmp(text,"coop_avatar_perception off"))return true;
     if(!std::strcmp(text,"coop_probe_follow on")||!std::strcmp(text,"coop_probe_follow exact")||!std::strcmp(text,"coop_probe_follow off"))return true;
     // Native developer campaign loader (exact-image usage string: "campaign
@@ -1977,6 +1978,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_npc_attack duplicate")){repeatNpcAttack();return;}
     if(!std::strcmp(request.command,"coop_corpse_hold own_paired_skip")){npcSkipOwnPairedCorpseHold=true;return;}
     if(!std::strcmp(request.command,"coop_corpse_hold own_paired_keep")){npcSkipOwnPairedCorpseHold=false;return;}
+    if(!std::strcmp(request.command,"coop_corpse_present unheld")){npcPresentUnheldCorpse=true;return;}
+    if(!std::strcmp(request.command,"coop_corpse_present held")){npcPresentUnheldCorpse=false;return;}
     if(!std::strcmp(request.command,"coop_avatar_perception on")||!std::strcmp(request.command,"coop_avatar_perception off")){avatarPerceptionEnabled=!std::strcmp(request.command,"coop_avatar_perception on");writeAvatarPerception();return;}
     if(!std::strcmp(request.command,"coop_probe_follow on")||!std::strcmp(request.command,"coop_probe_follow exact")) {
         stopAvatarWeapon("follow_changed");stopAvatarSword("follow_changed");stopArmProbe("follow_changed");enableProbeFollow(!std::strcmp(request.command,"coop_probe_follow exact"));return;

@@ -114,6 +114,13 @@ struct NpcCorpseSample {unsigned ms=0;float root[3]{};unsigned char held=0,paire
 struct NpcCorpseTrace {unsigned arm=0,handle=0,count=0,vanishedMs=0;bool vanished=false,ownPaired=false,holdSkipped=false;unsigned long long startedAt=0;NpcCorpseSample samples[80]{};};
 NpcCorpseTrace npcCorpseTraces[4]{};unsigned npcCorpseTraceCount=0;
 bool npcSkipOwnPairedCorpseHold=false;unsigned long long npcOwnPairedHoldSkips=0;
+// 1214hg (#140): the cause. In route-dunwall-lead-v1749a (1214hf) the skeleton of her copy of Ramsey exploded when its
+// ragdoll left the animated mode (physics mode 3 to 2, 1.9 s after the death): joints from z 52.8 to 117.6 around a
+// floor at 61, for 300 ms. Before that her game presented the host corpse pose on it every frame (the root moved to
+// the host root, 1 m above her native one, and the bones), while the native ragdoll was not held. Her game now
+// presents a corpse only once the corpse hold (npcCorpseHoldAnimated) holds its physics; until then the corpse is
+// native, as in single player. coop_corpse_present unheld restores the old presentation (lab only).
+bool npcPresentUnheldCorpse=false;unsigned long long npcUnheldCorpsePresentSkips=0;
 // Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
 // trace starts).
 inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;
@@ -135,6 +142,7 @@ inline void npcCorpseTraceSample(NpcCorpseTrace& t,unsigned long long tick,const
                 s.zMin=(std::min)(s.zMin,w[2]);s.zMax=(std::max)(s.zMax,w[2]);}}}}
 inline void writeNpcCorpseTraces(FILE* f){
     writeNpcRemovals(f);
+    fprintf(f,",\"presentUnheldCorpse\":%s,\"unheldCorpsePresentSkips\":%llu",npcPresentUnheldCorpse?"true":"false",npcUnheldCorpsePresentSkips);
     fprintf(f,",\"ownPairedHoldSkip\":%s,\"ownPairedHoldSkips\":%llu,\"corpseTraces\":[",npcSkipOwnPairedCorpseHold?"true":"false",npcOwnPairedHoldSkips);
     bool first=true;
     for(const auto& t:npcCorpseTraces){if(!t.startedAt)continue;

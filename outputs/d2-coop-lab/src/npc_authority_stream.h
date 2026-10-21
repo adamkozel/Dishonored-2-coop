@@ -732,6 +732,7 @@ void presentNpcStream(ULONGLONG tick){
         const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
         const bool hostCorpseFreeze=!hostVictim&&!localRole&&c.enabled&&c.ready&&c.corpse&&!c.corpseFreezeEnded&&c.reversePoses&&c.reversePoseAt&&!c.corpsePhysics;
         if(!hostVictim&&!hostCorpseFreeze&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
+        if(localRole&&c.corpse&&!c.corpsePhysics&&!npcPresentUnheldCorpse){++npcUnheldCorpsePresentSkips;continue;} // 1214hg (#140)
         NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(hostCorpseFreeze){if(!c.buffer.latest(p.pose)||!npcRenderCurrent(p.id))continue;p.until=tick+350;p.sequence=p.pose.h.sequence;++npcCorpseFreezeFrames;next.push_back(std::move(p));continue;}
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
