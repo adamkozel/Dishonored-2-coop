@@ -25,6 +25,21 @@ inline void noteNpcRemoval(void* entity,unsigned path){
     void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
     for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
     AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalRecords[npcRemovalCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);}
+// 1214hc: her copy of Ramsey was removed by the event queue (route-dunwall-lead-v1745d: its dispatch 1408853e8 posts a
+// queued record's event to its entity, 10.2 s after the death), so the removal was queued earlier. The queue insert
+// FUN_1408851f0 (queue, record, entity, delay; the record's event at +8) is hooked too: a queued removal of an arkNPC
+// keeps its delay and caller stack in its own ring (the 24 posted ones were overwritten by the restore's teardown).
+struct NpcRemovalQueued {unsigned long long tick=0;unsigned handle=0,frames=0,thread=0;float delay=0;unsigned rva[12]{};};
+std::array<NpcRemovalQueued,24> npcRemovalQueuedRecords{};std::atomic<std::uint64_t> npcRemovalQueuedCount{0};
+using NativeQueueInsert=void(*)(void*,void*,void*,std::uint32_t);NativeQueueInsert realQueueInsert=nullptr;
+inline void hookQueueInsert(void* queue,void* record,void* entity,std::uint32_t delayBits){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t def=0,vt=0;const auto e=reinterpret_cast<std::uintptr_t>(entity);
+    if(record&&memoryRead(reinterpret_cast<std::uintptr_t>(record)+8,&def,8)&&def==base+0x39a6f30&&e&&memoryRead(e,&vt,8)&&vt==base+0x1c5e108){
+        NpcRemovalQueued r{};r.tick=GetTickCount64();r.thread=GetCurrentThreadId();memoryRead(e+0xa8,&r.handle,4);std::memcpy(&r.delay,&delayBits,4);
+        void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
+        for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
+        AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalQueuedRecords[npcRemovalQueuedCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);}
+    realQueueInsert(queue,record,entity,delayBits);}
 inline void* hookPostNow(void* e,void* buf,void* def,void* args){if(def==gameImage+0x39a6f30)noteNpcRemoval(e,1);return realPostNow(e,buf,def,args);}
 inline void* hookRemoveDelayed(void* e,void* p2,void* p3,float delay){noteNpcRemoval(e,2);return realRemoveDelayed(e,p2,p3,delay);}
 template<class T> bool installNpcRemovalHook(std::uintptr_t rva,const unsigned char* prologue,unsigned len,void* hook,T& real){
@@ -37,9 +52,11 @@ template<class T> bool installNpcRemovalHook(std::uintptr_t rva,const unsigned c
     return VirtualProtect(target,len,old,&unused)!=0;}
 inline bool installNpcRemovalTrace(){
     static const unsigned char now[]={0x48,0x89,0x54,0x24,0x10,0x57,0x41,0x56,0x41,0x57,0x48,0x83,0xec,0x30};
+    static const unsigned char queueInsert[]={0x44,0x89,0x4c,0x24,0x20,0x48,0x89,0x54,0x24,0x10,0x53,0x57,0x48,0x83,0xec,0x38};
     static const unsigned char delayed[]={0x40,0x53,0x48,0x83,0xec,0x20,0xf3,0x0f,0x11,0x5c,0x24,0x48,0x44,0x8b,0x44,0x24,0x48};
     npcRemovalTraceInstalled=installNpcRemovalHook(0x884980,now,sizeof(now),reinterpret_cast<void*>(&hookPostNow),realPostNow)&&
-        installNpcRemovalHook(0x8759c0,delayed,sizeof(delayed),reinterpret_cast<void*>(&hookRemoveDelayed),realRemoveDelayed);
+        installNpcRemovalHook(0x8759c0,delayed,sizeof(delayed),reinterpret_cast<void*>(&hookRemoveDelayed),realRemoveDelayed)&&
+        installNpcRemovalHook(0x8851f0,queueInsert,sizeof(queueInsert),reinterpret_cast<void*>(&hookQueueInsert),realQueueInsert);
     return npcRemovalTraceInstalled;}
 inline void writeNpcRemovals(FILE* f){
     fprintf(f,",\"npcRemovalTrace\":%s,\"npcRemovalCount\":%llu,\"npcRemovals\":[",npcRemovalTraceInstalled?"true":"false",static_cast<unsigned long long>(npcRemovalCount.load()));
@@ -47,6 +64,11 @@ inline void writeNpcRemovals(FILE* f){
     for(std::uint64_t i=n>24?n-24:0;i<n;++i){const auto& r=npcRemovalRecords[i%24];
         fprintf(f,"%s{\"tick\":%llu,\"handle\":%u,\"path\":%u,\"thread\":%u,\"rva\":[",first?"":",",r.tick,r.handle,r.path,r.thread);first=false;
         for(unsigned k=0;k<r.frames;++k)fprintf(f,"%s\"%x\"",k?",":"",r.rva[k]);fputs("]}",f);}
+    fprintf(f,"],\"npcRemovalQueuedCount\":%llu,\"npcRemovalsQueued\":[",static_cast<unsigned long long>(npcRemovalQueuedCount.load()));
+    {const auto q=npcRemovalQueuedCount.load();bool firstQ=true;
+     for(std::uint64_t i=q>24?q-24:0;i<q;++i){const auto& r=npcRemovalQueuedRecords[i%24];
+        fprintf(f,"%s{\"tick\":%llu,\"handle\":%u,\"delay\":%.3f,\"thread\":%u,\"rva\":[",firstQ?"":",",r.tick,r.handle,r.delay,r.thread);firstQ=false;
+        for(unsigned k=0;k<r.frames;++k)fprintf(f,"%s\"%x\"",k?",":"",r.rva[k]);fputs("]}",f);}}
     ReleaseSRWLockShared(&npcRemovalLock);fputs("]",f);}
 struct NpcCorpseSample {unsigned ms=0;float root[3]{};unsigned char held=0,paired=0,mode=0xff;};
 struct NpcCorpseTrace {unsigned arm=0,handle=0,count=0,vanishedMs=0;bool vanished=false,ownPaired=false,holdSkipped=false;unsigned long long startedAt=0;NpcCorpseSample samples[80]{};};
