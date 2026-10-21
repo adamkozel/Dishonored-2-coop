@@ -1,0 +1,135 @@
+{
+  "passed": true,
+  "failure": null,
+  "case": {
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Host follow: begins 1, state 3 requested 1, stops 1, refused 0 (result stopped, anchor 141362311 at 5.28 m)",
+      "Host object in state 3 in 47 samples; host targets in 46 samples (max 2); host guard 2 taken in 33; her own targets in 66",
+      "Guard 2 moved while the host object was active: host 13.34 m, her copy 13.38 m",
+      "Same target set in both worlds in 42 of 47 samples; taken NPCs end: 189269860 0.07 m apart, 190252915 0 m apart",
+      "After her spirit: the host object removed natively (object_removed), phantom slot cleared"
+    ],
+    "guardHandleHost": "0xb480764",
+    "filmed": true,
+    "guardHandleClient": "0xb480764",
+    "guardBefore": {
+      "host": [
+        -38.99,
+        -148.71,
+        66.4
+      ],
+      "client": [
+        -38.99,
+        -148.71,
+        66.4
+      ]
+    },
+    "granted": [
+      {
+        "item": "models/powers/mesmerize/mesmerize.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/mesmerize_incombat.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "castAim": {
+      "target": [
+        -38.99,
+        -148.71,
+        66.4
+      ],
+      "stand": [
+        -43.99,
+        -148.71,
+        61.0036
+      ],
+      "yaw": 0.0,
+      "pitch": -45,
+      "distance": 5.0
+    },
+    "castAt": "2026-10-21T06:38:26.9776433+02:00",
+    "hostCamera": {
+      "at": [
+        -41.25,
+        -148.71,
+        61.0
+      ],
+      "from": [
+        -44.2999,
+        -148.278,
+        61
+      ],
+      "camera": [
+        -35.30929825873359,
+        -149.55146468809704,
+        63.0
+      ],
+      "yaw": 171.93802764680683,
+      "active": true
+    },
+    "summary": {
+      "followBegins": 1,
+      "followForced": 1,
+      "followStops": 1,
+      "followRefused": 0,
+      "followResult": "stopped",
+      "anchor": 141362311,
+      "anchorDistance": 5.28,
+      "activeSamples": 47,
+      "hostTargetSamples": 46,
+      "guardTakenSamples": 33,
+      "maxHostTargets": 2.0,
+      "clientTargetSamples": 66,
+      "guardMoveWhileActive": {
+        "host": 13.34,
+        "client": 13.38
+      },
+      "endState": -1,
+      "endPhantom": false,
+      "endEnded": true,
+      "targetSamples": 47,
+      "sameSetSamples": 42,
+      "takenEnd": [
+        {
+          "handle": 189269860,
+          "spawner": "ld_spawner_guard_tutorial_2",
+          "gap": 0.07,
+          "host": [
+            -51.9369,
+            -145.605,
+            61.0123
+          ],
+          "client": [
+            -52.0014,
+            -145.587,
+            61.0084
+          ]
+        },
+        {
+          "handle": 190252915,
+          "spawner": "ld_spawner_guard_tutorial_1",
+          "gap": 0.0,
+          "host": [
+            -44.2995,
+            -148.277,
+            61
+          ],
+          "client": [
+            -44.2995,
+            -148.277,
+            61
+          ]
+        }
+      ],
+      "removed": 1,
+      "endComponent": false,
+      "endResult": "object_removed"
+    },
+    "restored": true
+  },
+  "scope": "Stage 4 partner Mesmerize (#131): Emily casts her own Mesmerize near the Dunwall tutorial guard 2 under the product controller; the host runs the native Mesmerize object for her cast, takes the same NPCs as her spirit, the taken NPCs stay together in both worlds, and the object ends with her spirit (removed natively, phantom slot cleared); fixture restored."
+}

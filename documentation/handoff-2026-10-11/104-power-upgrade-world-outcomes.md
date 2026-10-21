@@ -147,8 +147,18 @@ The live candidate is 1214fp.
   - **Cause:** the object is removed natively in state 2 (confirmed runtime). State 2's enter `FUN_140728f50` posts
     the message at once when its exit scene does not start (scene id 0), and its update `FUN_14072f370` posts it when
     the scene ends. 1723a's 25 s in state 2 were stale memory.
-  - **Next (1214gp):** the host drops its cached object once the component's owner or the handle no longer match it,
-    clears the phantom slot and spawns a new object per cast, as the native power does.
+  - 1214gp: the host drops its cached object once the component's owner or the handle no longer match it, clears the
+    phantom slot and spawns a new object per cast, as the native power does.
+- **partner-mesmerize-v1725a** (1214gp, Test-PartnerMesmerize-v1725; pass, confirmed runtime):
+  - The host followed her cast: begun, state 3, then stopped. Its object was in state 3 for 47 samples, with a host
+    target in 46 (up to 2).
+  - Guard 2 (189269860) was taken in 33 samples. It walked 13.3 m from the upper floor down to her spirit, in step in
+    both worlds (13.34 and 13.38 m), and ends 0.07 m apart. The lower-floor guard 1 (190252915) ends 0 m apart.
+  - Same target set in both worlds in 42 of 47 samples.
+  - After her spirit, the object was removed natively (`object_removed`) and the phantom slot cleared. Fixture
+    restored.
+  - Next: a control cast with the host object off (1214gq lab switch `coop_mesmerize_native follow_off`), to show the
+    stop and the walk come from the host object; then visual review.
 
 ## Possessed bodies (host world; consistent)
 
