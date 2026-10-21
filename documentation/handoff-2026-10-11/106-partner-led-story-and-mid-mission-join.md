@@ -335,6 +335,21 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
 - **Release 0.8.2** ships the paired key-target finishers: the kill is shared and the worlds no longer diverge. The release notes keep the search limitation, with the host searching as the workaround.
 - **Census 1707:** the table generator (`generate_takedown_table_v1707.py`) now also emits the two helpers that 1214eo and 1214da had added to the generated header by hand (`nativeTakedownKnockdownChoke` and the shadow-form sword exception). The first 1214gc build failed without them.
 
+### The removal trace (1214hb, #140)
+
+- **The removal event** (confirmed static): entity removal is the event `1439a6f30`. Two functions post it:
+  - `FUN_140884980` (entity, buffer, event, args) posts it at once; it hands the event to the entity's own handler.
+  - The event handler `FUN_1408759c0` (entity, ..., float delay) posts it after a delay through the variadic
+    `FUN_140884030`, which is not hooked.
+- **1214hb hooks both functions** in a lab build only (never in product). For an `arkNPC`, it keeps the handle, the path,
+  the thread and the caller stack (image RVAs) of the last 24 removals, written with the corpse traces into the NPC
+  stream status.
+- **route-dunwall-lead-v1745a-c** (Route-Mission-v1710, partner-led, the corpse hold skipped; all pass): her copy of
+  Ramsey (190318452) stayed in all three. The search passed, and the trace saw no removal of it.
+  - The trace recorded 253, 510 and 767 NPC removals. They come in batches with one stack (`884b3a`, `884809`, `75b137`,
+    `7ea9e4`, `8a4962`, ...), at one tick each, which looks like the world teardown of the restore.
+  - The vanish rate on 1214gc-ge was 5 of 7 takes. More takes follow until one vanishes.
+
 ## Multi-state devices and safes (#134)
 
 The shared toggle family (chapter 87) leaves out safes, combination dials, typewriters, the piano and audiographs.
