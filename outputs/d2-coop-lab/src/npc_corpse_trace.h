@@ -38,17 +38,40 @@ inline void noteNpcRemoval(void* entity,unsigned path){
     for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
     AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalRecords[npcRemovalCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);
     NpcRemovalQueued w{};w.tick=r.tick;w.handle=r.handle;w.thread=r.thread;w.delay=-static_cast<float>(path);w.frames=r.frames;std::memcpy(w.rva,r.rva,sizeof(w.rva));npcRemovalWatch(w);}
+// 1214he (#140): the fix. In route-dunwall-lead-v1747b her copy of Ramsey's corpse was removed by a physics callback: the
+// removal was queued (delay 0) from the physics step FUN_140c942d0 (TtPostSolve, TtDispatchCommands; RVAs c942d0-c9478a)
+// through its listener dispatch (cebd30, ce57a0, c96120) to a delegate that posts the removal (883f60), with two other
+// corpses; confirmed runtime. On the partner's game every NPC is a host-owned replica, and the host's corpse stayed, so a
+// local physics removal of a dead replica is a replica-world event, like replica-world damage. During an NPC stream
+// session the partner's game marks such a queued removal (a dead arkNPC, a physics caller) by its record and does not
+// post it when the queue dispatches it (the dispatcher posts record+0x10 as the arguments and frees the record either
+// way). The hooks run in product too; the trace rings stay lab-only.
+std::array<std::uintptr_t,32> npcPhysicsRemovalMarks{};std::atomic<std::uint64_t> npcPhysicsRemovalsMarked{0},npcPhysicsRemovalsSuppressed{0};
+std::atomic<unsigned> npcPhysicsRemovalLastHandle{0};bool npcPhysicsRemovalSuppression=true;
+bool npcStreamReplicaSession();
 using NativeQueueInsert=void(*)(void*,void*,void*,std::uint32_t);NativeQueueInsert realQueueInsert=nullptr;
 inline void hookQueueInsert(void* queue,void* record,void* entity,std::uint32_t delayBits){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t def=0,vt=0;const auto e=reinterpret_cast<std::uintptr_t>(entity);
-    if(record&&memoryRead(reinterpret_cast<std::uintptr_t>(record)+8,&def,8)&&def==base+0x39a6f30&&e&&memoryRead(e,&vt,8)&&vt==base+0x1c5e108){
+    if(record&&memoryRead(reinterpret_cast<std::uintptr_t>(record)+8,&def,8)&&def==base+0x39a6f30&&e&&memoryRead(e,&vt,8)&&vt==base+0x1c5e108&&
+       npcPhysicsRemovalSuppression&&npcStreamReplicaSession()){
+        void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);bool physics=false;
+        for(unsigned i=0;i<n&&!physics;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);physics=f>=base+0xc942d0&&f<base+0xc9478a;}
+        unsigned handle=0;NativeHealth h{};memoryRead(e+0xa8,&handle,4);
+        if(physics&&handle&&readNativeHealth(memoryRead,base,handle,h)&&h.current<=0){
+            npcPhysicsRemovalMarks[npcPhysicsRemovalsMarked.fetch_add(1)%32]=reinterpret_cast<std::uintptr_t>(record);npcPhysicsRemovalLastHandle.store(handle);}}
+    if(!productMode&&record&&memoryRead(reinterpret_cast<std::uintptr_t>(record)+8,&def,8)&&def==base+0x39a6f30&&e&&memoryRead(e,&vt,8)&&vt==base+0x1c5e108){
         NpcRemovalQueued r{};r.tick=GetTickCount64();r.thread=GetCurrentThreadId();memoryRead(e+0xa8,&r.handle,4);std::memcpy(&r.delay,&delayBits,4);
         void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
         for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
         AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalQueuedRecords[npcRemovalQueuedCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);npcRemovalWatch(r);}
     realQueueInsert(queue,record,entity,delayBits);}
-inline void* hookPostNow(void* e,void* buf,void* def,void* args){if(def==gameImage+0x39a6f30)noteNpcRemoval(e,1);return realPostNow(e,buf,def,args);}
-inline void* hookRemoveDelayed(void* e,void* p2,void* p3,float delay){noteNpcRemoval(e,2);return realRemoveDelayed(e,p2,p3,delay);}
+inline void* hookPostNow(void* e,void* buf,void* def,void* args){
+    if(def==gameImage+0x39a6f30){
+        if(args&&npcPhysicsRemovalsMarked.load()){const auto record=reinterpret_cast<std::uintptr_t>(args)-0x10;
+            for(auto& m:npcPhysicsRemovalMarks)if(m&&m==record){m=0;++npcPhysicsRemovalsSuppressed;return buf;}}
+        if(!productMode)noteNpcRemoval(e,1);}
+    return realPostNow(e,buf,def,args);}
+inline void* hookRemoveDelayed(void* e,void* p2,void* p3,float delay){if(!productMode)noteNpcRemoval(e,2);return realRemoveDelayed(e,p2,p3,delay);}
 template<class T> bool installNpcRemovalHook(std::uintptr_t rva,const unsigned char* prologue,unsigned len,void* hook,T& real){
     auto* target=gameImage+rva;if(len<14||len>32||std::memcmp(target,prologue,len))return false;
     auto* tramp=static_cast<unsigned char*>(VirtualAlloc(nullptr,64,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));if(!tramp)return false;
@@ -66,6 +89,8 @@ inline bool installNpcRemovalTrace(){
         installNpcRemovalHook(0x8851f0,queueInsert,sizeof(queueInsert),reinterpret_cast<void*>(&hookQueueInsert),realQueueInsert);
     return npcRemovalTraceInstalled;}
 inline void writeNpcRemovals(FILE* f){
+    fprintf(f,",\"physicsRemovalsMarked\":%llu,\"physicsRemovalsSuppressed\":%llu,\"physicsRemovalLastHandle\":%u",static_cast<unsigned long long>(npcPhysicsRemovalsMarked.load()),
+        static_cast<unsigned long long>(npcPhysicsRemovalsSuppressed.load()),npcPhysicsRemovalLastHandle.load());
     fprintf(f,",\"npcRemovalTrace\":%s,\"npcRemovalCount\":%llu,\"npcRemovals\":[",npcRemovalTraceInstalled?"true":"false",static_cast<unsigned long long>(npcRemovalCount.load()));
     AcquireSRWLockShared(&npcRemovalLock);const auto n=npcRemovalCount.load();bool first=true;
     for(std::uint64_t i=n>24?n-24:0;i<n;++i){const auto& r=npcRemovalRecords[i%24];

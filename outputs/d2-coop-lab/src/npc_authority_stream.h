@@ -123,6 +123,8 @@ struct NpcStreamSession {
 };
 NpcStreamSession npcStreamSessionState{};
 bool doorCheckpointBarrierActive();
+// 1214he (#140): the partner's game in an NPC stream session (its NPCs are host-owned replicas).
+bool npcStreamReplicaSession(){return localRole==1&&npcAuthorityStreamActive&&npcStreamSessionState.enabled;}
 bool npcStreamContext(ULONGLONG tick){
     const auto& s=npcStreamSessionState;
     return npcAuthorityStreamActive&&s.enabled&&!s.reloadPending&&!s.menuSuspended&&!doorCheckpointBarrierActive()&&nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()&&coopNpcPairReady(tick)&&

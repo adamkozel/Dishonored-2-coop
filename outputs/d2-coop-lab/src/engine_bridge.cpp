@@ -2312,7 +2312,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     realExecuteBuffer=reinterpret_cast<ExecuteBuffer>(*slot);
     realCommonScreenUpdate=reinterpret_cast<CommonScreenUpdate>(*screenSlot);
     if(!installEntityActivateObserver()||!installTriggerEventObserver()||!installKisculeDispatchObserver()||!installAvatarPerception()||!installNativeSwitchTrace()||!installReplacementTrace()||!installDamageObserver()||!installMeleeDefenseObserver()||!installObserverCamera()||!installNativeHealthSubtractObserver()||!installCoinRewardObserver()||!installMesmerizePartnerFilter()||!installDominoPartnerFilter()||!installPossessionPartnerFilter()||!installAssassinationPartnerFilter()||!installInteractionPartnerFilter()||!installBodyPoseCapture()||!installMovementFootHooks())return false;
-    if(!productMode)installNpcRemovalTrace(); // 1214hb (#140): lab only, a failure only leaves the trace off
+    installNpcRemovalTrace(); // 1214hb/1214he (#140): the trace records in a lab build only; the replica corpse fix in any
     DWORD old=0,unused=0;
     auto* animationTrampoline=static_cast<unsigned char*>(VirtualAlloc(nullptr,64,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));
     if(!animationTrampoline)return false;
