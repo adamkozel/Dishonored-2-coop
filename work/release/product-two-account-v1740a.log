@@ -1,0 +1,215 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             100 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "labBefore": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": true,
+      "dll": "1A58A4CCF01D0D4A6D69C95FEE75474605561CFC7B95934CC1B76B3934C145B8"
+    },
+    "download": {
+      "url": "https://github.com/adamkozel/Dishonored-2-coop/releases/download/v0.8.3/d2coop-v0.8.3.zip",
+      "seconds": 2.1,
+      "bytes": 37224601,
+      "sha256": "FE9BCB9811C2B4052B4A1DDAEF9F88177ED502C807BB682BD8101A6D5A82B54F",
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "db3bcb83-0071-49ad-ba4d-b166ad498446",
+      "PSShowComputerName": true
+    },
+    "vmInstall": {
+      "exit": 0,
+      "seconds": 72.4,
+      "output": [
+        "Dishonored 2 found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Building the co-op resource packages from your game files...",
+        "Building the corvo movement bank from your game files...",
+        "Building the emily movement bank from your game files...",
+        "Building the prop animation tables from your game files...",
+        "Installed Dishonored 2 co-op 0.8.3: 14 files; originals backed up in d2coop-backup\\20261021-083824",
+        ""
+      ],
+      "receipt": true,
+      "dll": true,
+      "built": [
+        "base\\master.index",
+        "base\\game1voidmod.index",
+        "d2coop\\corvo-choke-bank.bin",
+        "d2coop\\emily-choke-bank.bin",
+        "d2coop\\native-tables.bin"
+      ],
+      "defender": {
+        "realTime": true,
+        "antivirus": true,
+        "steamExcluded": false,
+        "detections": []
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "db3bcb83-0071-49ad-ba4d-b166ad498446",
+      "PSShowComputerName": true
+    },
+    "vmProductBoot": true,
+    "vmTitle": {
+      "logic": 6,
+      "map": "",
+      "keyPressed": true
+    },
+    "hostStart": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "choices": 2,
+      "character": "models/characters/player/corvo/body.def"
+    },
+    "hostOnline": {
+      "active": true,
+      "host": true,
+      "phase": 2,
+      "result": "hosting_lobby",
+      "connectionState": 0,
+      "joinRequests": 0,
+      "role": 0,
+      "inviteOpened": false,
+      "lobbyMembers": 1,
+      "steamReady": true
+    },
+    "connected": {
+      "host": {
+        "connectionState": 3,
+        "remoteFresh": true
+      },
+      "vm": {
+        "connectionState": 3,
+        "remoteFresh": true
+      }
+    },
+    "vmKeys": 12,
+    "vmChoice": 2,
+    "vmSkips": 46,
+    "sameMission": {
+      "hostMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "vmLogic": 1,
+      "same": true
+    },
+    "banks": {
+      "host": {
+        "active": true,
+        "version": 75,
+        "checksum": "4751880941840332537"
+      },
+      "vm": {
+        "active": true,
+        "version": 75,
+        "checksum": "5364239416643914462"
+      }
+    },
+    "walk": {
+      "hostMoved": 8.03,
+      "vmMoved": 8.13,
+      "hostSawVm": 8.13,
+      "vmSawHost": 8.03
+    },
+    "story": {
+      "hostBefore": "241,4,3,0,0,0,0",
+      "vmBefore": "241,4,3,0,0,0,0",
+      "tried": [
+        "ld_trigger_bedroom"
+      ],
+      "trigger": "ld_trigger_bedroom",
+      "vmLogicAfter": 1,
+      "npcCombat": "active_native_melee",
+      "hostAfter": "240,4,3,1,0,0,0",
+      "vmAfter": "240,4,3,1,0,0,0",
+      "equal": true,
+      "changed": true
+    },
+    "death": {
+      "hostGameOver": true,
+      "vmGameOver": true,
+      "presses": 2,
+      "hostBack": true,
+      "vmBack": true,
+      "sameMap": true,
+      "newEpochs": true
+    },
+    "vmLeft": {
+      "active": false,
+      "host": false,
+      "phase": 0,
+      "result": "left_by_player",
+      "connectionState": 0,
+      "joinRequests": 1,
+      "role": 1,
+      "inviteOpened": false,
+      "lobbyMembers": 0,
+      "steamReady": true
+    },
+    "vmFinal": {
+      "follow": {
+        "enabled": true,
+        "result": "same_mission",
+        "hostMapinfo": "campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo",
+        "hostHigh": 0,
+        "hostMap": "12727000173429924044",
+        "localMap": "12727000173429924044",
+        "sent": 0,
+        "received": 529,
+        "loads": 1,
+        "refused": 0,
+        "role": 1,
+        "warps": 0,
+        "warpDistance": 0.56,
+        "PSComputerName": "D2CoopVM",
+        "RunspaceId": "86158c08-4aca-4a64-b7f6-0812777168fb",
+        "PSShowComputerName": true
+      },
+      "online": {
+        "active": false,
+        "host": false,
+        "phase": 0,
+        "result": "left_by_player",
+        "connectionState": 0,
+        "joinRequests": 1,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 0,
+        "steamReady": true
+      },
+      "logic": 2,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": false
+    },
+    "vmUninstall": {
+      "exit": 0,
+      "receiptGone": true,
+      "dllGone": true,
+      "dataGone": true,
+      "voidmodGone": true,
+      "exeHash": "B671F8249422862B",
+      "masterHash": "E76D1A13AC95F561",
+      "output": [
+        "Co-op installation found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Rolled back: 13 added files removed, 1 originals restored.",
+        ""
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "9331ce28-a03e-4391-89c3-366f535179c1",
+      "PSShowComputerName": true
+    },
+    "labAfter": {
+      "host": "logic=2 fresh=True",
+      "client": "logic=1 fresh=True"
+    }
+  },
+  "scope": "Release clean-PC session (1709; the host starts a fresh campaign as Corvo, as a real host does; 1705; 1699 with the VM pressing a key at its title screen like a player, and the Ramsey fallback picking the Ramsey nearest his room with a health trace), two machines/two accounts: as 1670 plus story progress that reaches the VM and a shared death with both games restarting together; release obtained in the VM (download from GitHub or copied zip), extracted in Downloads, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on); lab host (same DLL) hosts a lobby; the VM joins via steam://joinlobby, follows the host mission, both walk and see each other, the VM leaves with F8; then Uninstall.cmd (rollback) and the lab restored."
+}
