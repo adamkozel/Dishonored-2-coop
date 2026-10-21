@@ -349,6 +349,17 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - The trace recorded 253, 510 and 767 NPC removals. They come in batches with one stack (`884b3a`, `884809`, `75b137`,
     `7ea9e4`, `8a4962`, ...), at one tick each, which looks like the world teardown of the restore.
   - The vanish rate on 1214gc-ge was 5 of 7 takes. More takes follow until one vanishes.
+- **route-dunwall-lead-v1745d** (fail, the search found no Ramsey; confirmed runtime): her copy vanished 10.2 s after
+  his death, and the trace caught its removal.
+  - The removal came from the event queue's dispatch at `1408853e8`, with stack `8ad463`, `8ad211`, then the main loop
+    (`45a61`, `451c9`, `e3c21`, `166d9c`).
+  - The dispatch (confirmed static) takes a queued record, posts its event (`record+8`) to its entity
+    (`record+0xe8`) through `FUN_140884980`, and frees it. Other NPCs were removed through the same stack within the
+    next 3 s.
+  - So the removal was queued earlier, about 10 s before, around the death. The queued removals had been overwritten in
+    the 24-entry ring by the restore's teardown.
+  - **Next (1214hc):** also hook the queue insert `FUN_1408851f0` (queue, record, entity, delay; it sets the due time at
+    `record+0xe0`). A queued removal of an `arkNPC` keeps its delay and caller stack in its own ring.
 
 ## Multi-state devices and safes (#134)
 
