@@ -26,6 +26,7 @@ bool productAutoArm=false,productLaunchChecked=false;ULONGLONG productSteamRetry
 ProductArm productArm{};
 // 1214cp (#104): power world visuals that were scoped to the isolated lab fixture also run while the product
 // controller holds an armed session (installed release or lab coop_product_auto).
+bool frontEndTitlePassed=false; // 1214ha (#146): a key was pressed at the title screen since boot
 bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
 const char* productStep(unsigned i){
@@ -244,6 +245,10 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // invite; the 0.7.0 clean-PC take 1314a stayed there (join-follow had only covered gameplay and pause menus).
     const bool frontEnd=logic==6&&!std::strcmp(mapName,"campaign/menu/menu_p");
     if(outgoing.pendingGameLogicState||(logic!=1&&logic!=2&&logic!=3&&!frontEnd)){m.result="waiting_native_phase";return;}
+    // 1214ha (#146): never from the title screen. Its game has no signed-in user until a key is pressed there, and the
+    // followed mission could not save ("No connected user", product-two-account-v1696a/v1699a). It waits, showing the
+    // title, until the player presses a key.
+    if(frontEnd&&!frontEndTitlePassed){m.result="waiting_title_key";return;}
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
     dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }

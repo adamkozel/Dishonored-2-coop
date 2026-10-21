@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-21T09:40:00+02:00",
+  "UpdatedAt": "2026-10-21T10:50:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22589,5 +22589,17 @@
     "Status": "published and validated (install test, clean-PC proof on two accounts); a two-account partner-powers check follows with the next release",
     "Published": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.3",
     "CleanPc": "work/release/product-two-account-v1740a: pass (downloaded from GitHub in the VM, Install.cmd alone, two Steam accounts in the same mission, walk, story trigger and death shared, leave, uninstall)"
+  },
+  "TitleJoin": {
+    "Issue": "#146",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Candidate": "candidate-npc-combat-v1214ha",
+    "Evidence": [
+      "title-signin-v1741a",
+      "title-signin-v1742a",
+      "campaign-titlejoin-vm-v1743a",
+      "campaign-titlejoin-vm-v1744a"
+    ],
+    "Status": "done: join-follow waits at the title screen until a key is pressed (frontEndTitlePassed from the main menu Home section +0x38); two-account take campaign-titlejoin-vm-v1744a passes; ships with the next release"
   }
 }
