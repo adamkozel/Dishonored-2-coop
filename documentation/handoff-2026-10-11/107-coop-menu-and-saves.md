@@ -114,3 +114,42 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
   `HasFinishedCampaign_%d`, `PlayTime_%d(_%d)` and `DeathCount_%d(_%d)`. A co-op New Game would reset those keys for
   its campaign index in the shared profile. Either stash and swap them across a co-op switch (with a stash file for
   crash recovery), or give co-op its own profile (a profile reload at run time).
+
+## The profile (confirmed static unless marked)
+
+**The objects:**
+- `idProfileMgr` is `lu+0x10`: the session (`*(void**)0x142287c78`), then the sign-in manager (vtable +0x38), then
+  the local user `lu` (+0x28(0)). It has the save processor at +0, the load processor at +8 (busy byte +0x3a11 on
+  each) and the profile at +0x18.
+- The profile (`idPlayerProfile`, vtable 0x141ac9e70) has a dirty byte at +8, an achievement bitset at +0x10/+0x18 and
+  an `idDict` of string keys at +0x28.
+- Dict access: get `140657ce0`, read-only `140657c80`, find `140104190`, set `140105040`, set-int `140069b50`,
+  reset `14005a8c0`. Writers hold the lock `1401548e0()` vtable +0x48/+0x50.
+
+**Loading and saving:**
+- `LoadProfile` `1400d37b0(pm)` runs at sign-in. It is synchronous, it is refused when a processor is busy, and it
+  merges into the existing in-memory profile.
+- When the file is found it re-runs `dishonored2Config.cfg` and the bindings (hypothesis: harmless). When it is
+  missing, it saves the in-memory profile.
+- `SaveProfile` `1400d3bd0(pm)` is asynchronous. It runs after each slot save, on `lu+0x3c & 1`, and after a missing
+  or corrupt load.
+- Both read the save root when the job runs, so moving the root also moves `profile.bin`.
+
+**Keys:**
+- Per campaign: `campaignSaveType_%02d`, `HasFinishedCampaign_%d`, `TutorialShouldLaunchCampaign_%d`, `PlayTime_%d`,
+  `DeathCount_%d`, per-chapter `PlayTime_%d_%d` and `DeathCount_%d_%d`, and 26 `difficulty*_%02d`.
+- Global: `campaignIndex`, `HasFinishedNewGamePlus`, the `missionPlus*` keys, `HasSetGamma`, `HasPreorderDLC`,
+  `HasLinkedBnet`, 46 `ARK_PLAYER_STATISTIC_*` stats and the achievement bitset.
+
+**Decision:** co-op has its own `savegame_coop/profile.bin`, seeded once from the player's profile with every
+per-campaign key cleared (global keys, stats and achievements kept). The switch runs on the main menu with both
+processors idle:
+1. Save the profile and wait.
+2. Keep a copy of the dict for rollback.
+3. Swap the root.
+4. Reset the in-memory profile (or, the first time, clear only the campaign keys).
+5. `LoadProfile`; if it is refused, roll back.
+6. Re-list the saves, call `140660210(cm, GetCampaignIndex 140657380())` and the stats reload `14067d3f0(game+0x1f77c8)`,
+   and rebuild the Campaign screen.
+
+Leaving co-op runs the same steps in reverse.
