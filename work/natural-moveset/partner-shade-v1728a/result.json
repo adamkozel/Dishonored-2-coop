@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "failure": null,
+  "case": {
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Her shade present in 19 samples (health 1 to 1); a guard within 3 m of it in her world in 1",
+      "Host guards' attention holds the puppet in 73 samples (any attention in 73); moves continuous 326, teleports 0",
+      "Host puppet: spawned 1, in 21 samples, health 1 to 1, max drift 0.418 m, pins 326, stimuli 1; a host guard within 3 m in 1; removed 1, lost 0 (removed)",
+      "The host puppet followed her shade, was perceived, and ended with it"
+    ],
+    "granted": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      }
+    ],
+    "guard1Before": [
+      -47.8205,
+      -146.709,
+      61
+    ],
+    "castAt4m": [
+      -43.917848000000006,
+      -147.586108,
+      61.0
+    ],
+    "castAim": {
+      "target": [
+        -43.917848000000006,
+        -147.586108,
+        61.0
+      ],
+      "stand": [
+        -53.6745,
+        -145.393,
+        61.0036
+      ],
+      "yaw": -12.668428636128139,
+      "pitch": 2,
+      "distance": 10.000099046947879
+    },
+    "castAt": "2026-10-21T07:16:52.1505186+02:00",
+    "hostCamera": {
+      "at": [
+        -46.833,
+        -146.936,
+        61.0
+      ],
+      "camera": [
+        -51.41231909024267,
+        -144.92855469072282,
+        63.0
+      ],
+      "yaw": -23.671299980871684,
+      "active": true
+    },
+    "filmed": true,
+    "summary": {
+      "delta": {
+        "spawned": 1,
+        "removed": 1,
+        "lost": 0,
+        "pins": 326,
+        "stimuli": 1,
+        "continuous": 326,
+        "teleports": 0
+      },
+      "puppetHandles": [
+        210244106
+      ],
+      "attendedSamples": 73,
+      "attentionSamples": 73,
+      "spawned": 1,
+      "removed": 1,
+      "lost": 0,
+      "pins": 326,
+      "stimuli": 1,
+      "result": "removed",
+      "herPresentSamples": 19,
+      "puppetSamples": 21,
+      "puppetHealthFirst": 1.0,
+      "puppetHealthMin": 1.0,
+      "herHealthFirst": 1.0,
+      "herHealthMin": 1.0,
+      "guardNearPuppetSamples": 1,
+      "guardNearHerShadeSamples": 1,
+      "maxDrift": 0.418,
+      "endPuppet": false,
+      "endHerPresent": 0
+    },
+    "restored": true
+  },
+  "scope": "Stage 4 partner shade (#131): Emily casts her own Doppelganger near the Dunwall lower-floor tutorial guard 1 under the product controller; the host spawns the native shade at her streamed shade, the host NPCs perceive it, and it ends with hers; fixture restored."
+}

@@ -204,6 +204,18 @@ The live candidate is 1214fp.
     - The shade is cast 4 m in front of guard 1.
     - Both guards' native attention (`--ai-targets`) is sampled, and the pass needs the puppet there.
     - The counters are taken as deltas.
+  - **partner-shade-v1728a** (1214gt; pass, confirmed runtime):
+    - The puppet followed her running shade with 326 continuous moves and no teleport, a maximum drift of 0.42 m,
+      and was removed natively when hers ended.
+    - Both host guards perceived the puppet 1.5 s after it appeared (it was in their native attention), and from
+      4.8 s both had it as their combat target. Then they also turned on Emily's avatar (209916411): the shade alerted
+      them, as in single player.
+    - Neither shade was hit: hers fled and was gone after about 10 s.
+  - **partner-shade-v1728b** (control, puppet off; pass): no puppet, and the host guards' attention stayed empty for
+    15 s. Guard 1 then noticed Emily herself.
+  - So the host's NPCs now perceive and fight her base shade natively.
+  - **Next:** the upgrades (Deadly Shade, Baffling Shade) and the hits: a host hit on the puppet must kill her shade,
+    so its native death outcome runs, and her shade's hits on replicas must reach the host.
 
 ## Possessed bodies (host world; consistent)
 

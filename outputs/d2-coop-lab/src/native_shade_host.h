@@ -16,6 +16,12 @@ struct ShadeHostPuppet {std::uintptr_t actor=0,game=0;unsigned handle=0,source=0
 std::array<ShadeHostPuppet,kDoppelgangerWireSlots> shadeHostPuppets{};
 bool shadeHostFollowEnabled=true;
 std::uint64_t shadeHostSpawned=0,shadeHostRemoved=0,shadeHostLost=0,shadeHostPins=0,shadeHostRefused=0,shadeHostStimuli=0;
+// 1214gt: her shade runs (the native decoy flees: 25 m in 7 s in partner-shade-v1727c) while the host puppet stood, so
+// the 1 m pin teleported it 62 times. A native transform is a teleport that refreshes observable membership (1BF/1BE;
+// avatar_perception.h), which would drop the puppet from the guards' perception each time. The puppet now follows her
+// shade every frame: moves under 3 m run inside the partner avatar's continuous-transform scope (the observable refresh
+// keeps its membership for that owner), larger jumps are plain teleports.
+std::uint64_t shadeHostContinuous=0,shadeHostTeleports=0;
 const char* shadeHostResult="idle";
 bool shadeHostApis(){
     static const unsigned char spawn[]={0x40,0x57,0x41,0x56,0x41,0x57,0x48,0x83,0xec,0x40,0x48,0xc7},
@@ -93,7 +99,10 @@ void serviceShadeHost(ULONGLONG tick){
         if(!p.actor){shadeHostSpawn(p,q,tick);continue;}
         float at[3]{};if(!memoryRead(p.actor+0x300,at,12))continue;std::memcpy(p.at,at,12);
         float d=0;for(unsigned i=0;i<3;++i){const float x=at[i]-q.transform[i];d+=x*x;}p.drift=std::sqrt(d);
-        if(p.drift>1.f){reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(p.actor),q.transform.data(),q.transform.data()+3,true,0);++p.pins;++shadeHostPins;}
+        if(p.drift>.05f){const bool continuous=p.drift<3.f;
+            struct Scope{std::uintptr_t previous;explicit Scope(std::uintptr_t owner):previous(continuousAvatarTransformOwner){continuousAvatarTransformOwner=owner;}~Scope(){continuousAvatarTransformOwner=previous;}} scope(continuous?p.actor:0);
+            reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(p.actor),q.transform.data(),q.transform.data()+3,true,0);
+            ++p.pins;++shadeHostPins;if(continuous)++shadeHostContinuous;else ++shadeHostTeleports;}
     }
     bool any=false;for(const auto& p:shadeHostPuppets)any=any||p.actor;
     // The phantom stays 5 s after the last puppet (a late native clone event must not meet a null slot).
@@ -107,6 +116,7 @@ void writeShadeHost(){
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];const auto& q=doppelgangerWorldStreams[k].presented;
         fprintf(f,"%s{\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
-    fprintf(f,"],\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
+    fprintf(f,"],\"continuous\":%llu,\"teleports\":%llu",shadeHostContinuous,shadeHostTeleports);
+    fprintf(f,",\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
