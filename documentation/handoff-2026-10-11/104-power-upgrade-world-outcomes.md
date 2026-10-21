@@ -137,8 +137,18 @@ The live candidate is 1214fp.
     - The state 2 exit scene never ends on the host either (confirmed runtime).
     - Natively, its end posts a message (type `1439a6f30`, also posted by entity-removal paths), so the native power
       spawns a new object per cast (hypothesis).
-    - Next (1214go): return the cached object to the idle state 0, 1.5 s after it enters state 2. State 0's enter only
-      sets bit 0x10 of the owner's `+0xd4` (confirmed static).
+    - 1214go returned the cached object to the idle state 0, 1.5 s after it entered state 2. State 0's enter only sets
+      bit 0x10 of the owner's `+0xd4` (confirmed static).
+- **partner-mesmerize-v1724a** (1214go, Test-PartnerMesmerize-v1724; fail, confirmed runtime):
+  - The host camera was held at her spirit. Same target set in both worlds in 46 of 51 samples. The taken NPC
+    (190252915, `ld_spawner_guard_tutorial_1` on the lower floor) ends 0 m apart in the two worlds.
+  - **Host crash** 1.5 s after the stop, in state 0's enter (`7290b4`, writing through the component's owner `+0x10`,
+    already null). The object's component list read empty afterward.
+  - **Cause:** the object is removed natively in state 2 (confirmed runtime). State 2's enter `FUN_140728f50` posts
+    the message at once when its exit scene does not start (scene id 0), and its update `FUN_14072f370` posts it when
+    the scene ends. 1723a's 25 s in state 2 were stale memory.
+  - **Next (1214gp):** the host drops its cached object once the component's owner or the handle no longer match it,
+    clears the phantom slot and spawns a new object per cast, as the native power does.
 
 ## Possessed bodies (host world; consistent)
 

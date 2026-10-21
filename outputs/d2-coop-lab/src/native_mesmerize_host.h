@@ -90,6 +90,12 @@ bool mesmerizeHostSpawn(ULONGLONG tick,const float* at,const float* axis){
 struct MesmerizeHostFollow {std::uint64_t event=0,token=0,peerToken=0;ULONGLONG seen=0,waitFrom=0,beganAt=0;bool begun=false,forced=false,ended=false;} mesmerizeHostFollow;
 std::uint64_t mesmerizeHostFollowEvents=0,mesmerizeHostFollowBegins=0,mesmerizeHostFollowForced=0,mesmerizeHostFollowStops=0,mesmerizeHostFollowRefused=0;
 const char* mesmerizeHostFollowResult="idle";unsigned mesmerizeHostFollowAnchor=0;float mesmerizeHostFollowAnchorDistance=0;
+// 1214go: the state 2 exit scene never ends on the host either (partner-mesmerize-v1723a: state 2 for 25 s after the
+// stop). Natively its end posts a message to the object (FUN_14072f370 and the enter FUN_140728f50, message type
+// 1439a6f30, which entity removal paths also post: the native power spawns a new object per cast). The cached object
+// instead returns to the idle state 0, whose enter (1407290b0) only sets bit 0x10 of the owner's +0xd4 (confirmed
+// static), 1.5 s after it entered state 2 (her retire lease is 0.7 s).
+ULONGLONG mesmerizeHostState2Since=0;std::uint64_t mesmerizeHostSettles=0;
 unsigned mesmerizeHostNearestSpawner(const float* at,float& distance){
     std::vector<NativeWorldNpc> catalog;unsigned unbound=0;distance=0;
     if(!readWorldNpcCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,unbound))return 0;
@@ -132,7 +138,11 @@ void serviceMesmerizeHostFollow(ULONGLONG tick){
 }
 void serviceMesmerizeHost(ULONGLONG tick){
     auto& h=mesmerizeHost;
-    if(h.actor&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch)){h={};mesmerizeHostOwnedComponent.store(0);mesmerizeHostResult="world_retired";mesmerizeHostPhantomSet=false;mesmerizeHostPhantomPlayer=0;mesmerizeHostFollow={};}
+    if(h.actor&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch)){h={};mesmerizeHostOwnedComponent.store(0);mesmerizeHostResult="world_retired";mesmerizeHostPhantomSet=false;mesmerizeHostPhantomPlayer=0;mesmerizeHostFollow={};mesmerizeHostState2Since=0;}
+    if(h.component&&GetCurrentThreadId()==engineThread.load()&&nativeMutationAllowed){int s=-1;
+        if(memoryRead(h.component+0x2c,&s,4)&&s==2){if(!mesmerizeHostState2Since)mesmerizeHostState2Since=tick;
+            else if(tick-mesmerizeHostState2Since>=1500&&mesmerizeHostApis()){reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,0);++mesmerizeHostSettles;mesmerizeHostState2Since=0;}}
+        else mesmerizeHostState2Since=0;}
     // 1214gm: the phantom slot ends once the object is back in state 0 after a stop.
     if(mesmerizeHostPhantomSet&&h.component&&h.stoppedAt&&tick-h.stoppedAt>3000&&GetCurrentThreadId()==engineThread.load()){int s=-1;if(memoryRead(h.component+0x2c,&s,4)&&s==0)mesmerizeHostPhantomOff();}
     // 1214gi: resolve the object's arkCpntMesmerize once it is attached, and verify it belongs to the object.
@@ -196,10 +206,11 @@ void writeMesmerizeHost(){
     fprintf(f,",\"appearScene\":%u,\"activeScene\":%u,\"activeTimer\":%.3f,\"candidates\":%u",scene1,scene3,timer,candidates);}
     {const auto& w=mesmerizeHostFollow;const auto& s=mesmerizeWorldStream;
      fprintf(f,",\"follow\":{\"result\":\"%s\",\"events\":%llu,\"begins\":%llu,\"forced\":%llu,\"stops\":%llu,\"refused\":%llu,\"event\":%llu,\"begun\":%s,\"forcedNow\":%s,\"ended\":%s,"
-              "\"anchor\":%u,\"anchorDistance\":%.2f,\"partnerState\":%u,\"partnerEvent\":%llu,\"leased\":%s,\"productArmed\":%s}",
+              "\"anchor\":%u,\"anchorDistance\":%.2f,\"partnerState\":%u,\"partnerEvent\":%llu,\"leased\":%s,\"productArmed\":%s,\"at\":[%.2f,%.2f,%.2f]}",
         mesmerizeHostFollowResult,mesmerizeHostFollowEvents,mesmerizeHostFollowBegins,mesmerizeHostFollowForced,mesmerizeHostFollowStops,mesmerizeHostFollowRefused,w.event,
         w.begun?"true":"false",w.forced?"true":"false",w.ended?"true":"false",mesmerizeHostFollowAnchor,mesmerizeHostFollowAnchorDistance,s.presented.state,s.presented.event,
-        s.lease>GetTickCount64()?"true":"false",productSessionArmed()?"true":"false");}
+        s.lease>GetTickCount64()?"true":"false",productSessionArmed()?"true":"false",s.presented.transform[0],s.presented.transform[1],s.presented.transform[2]);}
+    fprintf(f,",\"settles\":%llu,\"state2Since\":%llu",mesmerizeHostSettles,mesmerizeHostState2Since);
     fprintf(f,",\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
               "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu,\"anchorHandle\":%u,\"anchorResolved\":%s,\"selfResolved\":%s}\n",
