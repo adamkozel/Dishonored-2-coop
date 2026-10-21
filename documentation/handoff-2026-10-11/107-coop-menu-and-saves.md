@@ -91,7 +91,16 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
   - FUN_14102a270 (confirmed static): when +0 is empty it converts the key to UTF-8 and calls `+8(data +0x20, {key,
     length}, {out, length})` (or +0x18 when the flag at +0x38 is set), converts the result to UTF-16 and frees it with
     `+0x28(data +0x30, out, length)`.
-  - 1214hu wraps the UTF-8 callback the same way.
+  - 1214hu wraps the UTF-8 callback the same way. Take coop-leave-v1770b passed all its checks: the question reads
+    "Leave the co-op session?" on both sides (confirmed runtime).
+  - The middle button still read "Back To Main Menu". `PauseMenuScreen._onQuitGameClicked` passes the raw keys
+    `ui_common_cancel` and `ui_gameover_button_back_main_menu` as button labels (confirmed static). Their text fields
+    resolve them through Iggy's second translation table (0x143ec08e0, keys prefixed `@`; FUN_1400358c0 →
+    FUN_140034e40), not `IggyFunctions.translate`.
+  - Both tables end in the engine lookup `FUN_140165420(&0x1432c7e98, key)`, which returns the key itself when there
+    is no entry (confirmed static). 1214hv hooks that lookup for the two keys. It applies only during a session while
+    the pause menu (logic 2) or its quit dialog (logic 3 entered from 2) is open. The BackToMain rename now needs the
+    same pause context, so a GameOver screen keeps its native Back to main menu.
 
 ## Save isolation research (confirmed static unless marked)
 

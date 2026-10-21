@@ -136,7 +136,8 @@ inline bool installCoopHubHook(){
 // Campaign screen data (the Campaign section, vtable 1b6d2e8, slot 5 FUN_1404fb3b0(section, movie)). The profile
 // (profile.bin) still follows the root in this candidate (lab test; its keys are decided separately).
 struct CoopSaveSwitch {int phase=0;bool target=false,active=false;ULONGLONG startedAt=0;const char* result="idle";
-    std::uint64_t switches=0,failures=0,rebuilds=0,profileLoads=0,profileSeeds=0,refreshes=0;std::uint32_t listed=0;char folder[MAX_PATH]{};const char* original=nullptr;};
+    std::uint64_t switches=0,failures=0,rebuilds=0,profileLoads=0,profileSeeds=0,refreshes=0,profileSaves=0,profileSkips=0;std::uint32_t listed=0;int lastDirty=-1;
+    char folder[MAX_PATH]{};const char* original=nullptr;};
 CoopSaveSwitch coopSaves{};bool coopSavesEnabled=true;
 static const char kCoopSaveRoot[]="savegame_coop";
 inline void coopSaveFolder(char* out,std::size_t size){
@@ -191,6 +192,12 @@ void serviceCoopSaves(ULONGLONG tick){
     CoopProfileHandles h{};if(!coopProfileHandles(base,h)){s.result="no_profile";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_timeout";}return;}
     std::int32_t enabled=0;memoryRead(base+0x3132e88,&enabled,4);
     if(s.phase==1){if(!enabled||!coopProfileIdle(h)){s.result="save_busy";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="busy_timeout";}return;}
+        // 1214hu: only a changed profile is saved before the swap. coop-saveflow-v1769a: the switch rewrote the player's
+        // savegame/profile.bin with identical keys (only its 16-byte header differed). The writable profile accessor
+        // (FUN_140657ce0, confirmed static) sets the dirty byte at profile+8; while it is clear, memory matches the file.
+        unsigned char dirty=1;memoryRead(h.profile+8,&dirty,1);s.lastDirty=dirty;
+        if(!dirty){++s.profileSkips;s.phase=2;s.startedAt=tick-300;s.result="profile_clean";return;}
+        ++s.profileSaves;
         reinterpret_cast<void(*)(void*)>(gameImage+0xd3bd0)(reinterpret_cast<void*>(h.pm));s.phase=2;s.startedAt=tick;s.result="profile_saving";return;}
     if(s.phase==2){if(tick-s.startedAt<300||!coopProfileIdle(h)){if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_save_timeout";}return;}
         // The target root and its profile.
@@ -247,13 +254,37 @@ inline int hookTranslate16(void* data,IggyText16* in,IggyText16* out){
         if(coopKey16(in,"UI_quitgame_question"))text=kLeaveQuestion16;else if(coopKey16(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton16;
         if(text){out->text=text;out->length=static_cast<std::int32_t>(std::char_traits<char16_t>::length(text));++coopLeaveTranslations;return 1;}}
     return realTranslate16?realTranslate16(data,in,out):0;}
+// 1214hu (#157): coop-leave-v1770a: the engine registers only the UTF-8 callback (+8), so the UTF-16 wrap never ran
+// (translationHooked false) and the dialog kept the stock text. FUN_14102a270 (confirmed static): with +0 empty it
+// converts the key to UTF-8, calls +8(user data +0x20, {key,length}, {out,length}) (+0x18 instead when the flag at
+// +0x38 is set), converts the result to UTF-16 and frees it with +0x28(+0x30, out, length). The mod now wraps +8
+// as well, matches the keys case-insensitively (an optional terminating zero in the length), records the last keys
+// it saw and which callbacks the engine set (mode bits: 1 UTF-16, 2 UTF-8, 4 UTF-16 alternative, 8 UTF-8
+// alternative; the alternatives are not wrapped).
+struct IggyText8 {const char* text=nullptr;std::int32_t length=0;};using IggyTranslate8=int(*)(void*,IggyText8*,IggyText8*);
+IggyTranslate8 realTranslate8=nullptr;int coopTranslationMode=0;std::uint32_t coopTranslationFlag=0;
+static const char kLeaveQuestion8[]="Leave the co-op session?";static const char kLeaveButton8[]="Leave co-op";
+char coopLastKeys[6][48]{};std::atomic<unsigned> coopLastKey{0};std::atomic<std::uint64_t> coopTranslate8Calls{0};
+inline bool coopKey8(const IggyText8* in,const char* key){if(!in||!in->text||in->length<=0)return false;const auto n=static_cast<std::int32_t>(std::strlen(key));
+    if(in->length!=n&&!(in->length==n+1&&!in->text[n]))return false;return !_strnicmp(in->text,key,static_cast<std::size_t>(n));}
+inline int hookTranslate8(void* data,IggyText8* in,IggyText8* out){
+    ++coopTranslate8Calls;
+    if(in&&in->text&&in->length>0){auto& slot=coopLastKeys[coopLastKey.fetch_add(1)%6];const auto n=static_cast<std::size_t>(in->length<47?in->length:47);
+        for(std::size_t i=0;i<n;++i){const char c=in->text[i];slot[i]=(c<32||c=='"'||c=='\\'||c>126)?'_':c;}slot[n]=0;}
+    if(coopInSession()&&out){const char* text=nullptr;
+        if(coopKey8(in,"UI_quitgame_question"))text=kLeaveQuestion8;else if(coopKey8(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton8;
+        if(text){out->text=text;out->length=static_cast<std::int32_t>(std::strlen(text));++coopLeaveTranslations;return 1;}}
+    return realTranslate8?realTranslate8(data,in,out):0;}
 inline void hookTranslateFree(void* data,void* text,int bytes){
-    if(text==kLeaveQuestion16||text==kLeaveButton16)return;if(realTranslateFree)realTranslateFree(data,text,bytes);}
+    if(text==kLeaveQuestion16||text==kLeaveButton16||text==kLeaveQuestion8||text==kLeaveButton8)return;if(realTranslateFree)realTranslateFree(data,text,bytes);}
 inline void installCoopTranslation(){
     if(coopTranslationHooked)return;auto* table=reinterpret_cast<void**>(gameImage+0x3ec0920);
-    if(!table[0])return; // the engine registers a UTF16 callback once the UI is up
-    realTranslate16=reinterpret_cast<IggyTranslate16>(table[0]);realTranslateFree=reinterpret_cast<IggyTranslateFree>(table[5]);
-    table[5]=reinterpret_cast<void*>(&hookTranslateFree);table[0]=reinterpret_cast<void*>(&hookTranslate16);coopTranslationHooked=true;}
+    if(!table[0]&&!table[1])return; // the engine registers its callback once the UI is up
+    coopTranslationMode=(table[0]?1:0)|(table[1]?2:0)|(table[2]?4:0)|(table[3]?8:0);std::memcpy(&coopTranslationFlag,&table[7],4);
+    realTranslateFree=reinterpret_cast<IggyTranslateFree>(table[5]);table[5]=reinterpret_cast<void*>(&hookTranslateFree);
+    if(table[0]){realTranslate16=reinterpret_cast<IggyTranslate16>(table[0]);table[0]=reinterpret_cast<void*>(&hookTranslate16);}
+    if(table[1]){realTranslate8=reinterpret_cast<IggyTranslate8>(table[1]);table[1]=reinterpret_cast<void*>(&hookTranslate8);}
+    coopTranslationHooked=true;}
 void serviceCoopPause(ULONGLONG tick){
     installCoopTranslation();
     if(coopLeaveRequested.exchange(false)){++coopPause.leaves;++productArm.leaveKeys;stopOnlineSession("left_by_player");productArm={};coopPause.result="left_by_pause";}
@@ -293,13 +324,16 @@ void writeCoopMenu(){
         for(int k=0;k<31&&r.name[k];++k)name[k]=(r.name[k]=='"'||r.name[k]=='\\'||r.name[k]<32)?'_':r.name[k];
         for(int k=0;k<31&&r.arg[k];++k)arg[k]=(r.arg[k]=='"'||r.arg[k]=='\\'||r.arg[k]<32)?'_':r.arg[k];
         fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\",\"rawLength\":%llu}",first?"":",",name,r.argc,r.type,arg,static_cast<unsigned long long>(r.rawLength));first=false;}}
-    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu,\"sessionRequests\":%llu,\"refreshes\":%llu,\"listed\":%u}",coopSaves.result,
+    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu,\"sessionRequests\":%llu,\"refreshes\":%llu,\"listed\":%u,\"profileSaves\":%llu,\"profileSkips\":%llu,\"lastDirty\":%d}",coopSaves.result,
         coopSaves.active?"true":"false",coopSaves.phase,static_cast<unsigned long long>(coopSaves.switches),static_cast<unsigned long long>(coopSaves.failures),
         static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds),
-        static_cast<unsigned long long>(coopMenu.sessionRequests),static_cast<unsigned long long>(coopSaves.refreshes),coopSaves.listed);
-    fprintf(f,",\"pause\":{\"result\":\"%s\",\"inSession\":%s,\"labelled\":%s,\"relabels\":%llu,\"restores\":%llu,\"clears\":%llu,\"leaves\":%llu,\"translationHooked\":%s,\"translations\":%llu}",
+        static_cast<unsigned long long>(coopMenu.sessionRequests),static_cast<unsigned long long>(coopSaves.refreshes),coopSaves.listed,
+        static_cast<unsigned long long>(coopSaves.profileSaves),static_cast<unsigned long long>(coopSaves.profileSkips),coopSaves.lastDirty);
+    fprintf(f,",\"pause\":{\"result\":\"%s\",\"inSession\":%s,\"labelled\":%s,\"relabels\":%llu,\"restores\":%llu,\"clears\":%llu,\"leaves\":%llu,\"translationHooked\":%s,\"translations\":%llu,\"translationMode\":%d,\"translationFlag\":%u,\"translate8Calls\":%llu,\"lastKeys\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]}",
         coopPause.result,coopInSession()?"true":"false",coopPause.labelled?"true":"false",static_cast<unsigned long long>(coopPause.relabels),static_cast<unsigned long long>(coopPause.restores),
-        static_cast<unsigned long long>(coopPause.clears),static_cast<unsigned long long>(coopPause.leaves),coopTranslationHooked?"true":"false",static_cast<unsigned long long>(coopLeaveTranslations.load()));
+        static_cast<unsigned long long>(coopPause.clears),static_cast<unsigned long long>(coopPause.leaves),coopTranslationHooked?"true":"false",static_cast<unsigned long long>(coopLeaveTranslations.load()),
+        coopTranslationMode,coopTranslationFlag,static_cast<unsigned long long>(coopTranslate8Calls.load()),
+        coopLastKeys[0],coopLastKeys[1],coopLastKeys[2],coopLastKeys[3],coopLastKeys[4],coopLastKeys[5]);
     fputs("}\n",f);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
