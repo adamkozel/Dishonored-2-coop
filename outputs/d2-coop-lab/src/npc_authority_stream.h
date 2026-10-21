@@ -507,7 +507,9 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
        p.h.rig!=c.rig||p.h.joints!=c.render.joints){++c.rejected;++c.poseRejects[2];return;}
     if(!c.buffer.push(p,presentationClock())){++c.rejected;++c.poseRejects[c.buffer.lastReject==1?3:4];
         if(c.buffer.lastReject==2)c.lastPoseLateMs=presentationClock()-(double(p.sampleUs)*.001+c.buffer.clock.offset);return;}
-    c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);}else{c.poseAt=tick;++c.poses;if(p.h.reserved&1){c.peerDownAt=tick;++c.downReceived;}}
+    c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);
+        if(c.corpse&&c.corpseAt&&tick-c.corpseAt>=3000&&tick>=c.carriedUntil&&!c.corpseFreezeEnded){c.corpseFreezeEnded=true;++npcCorpseFreezeEnds;++npcSettledCorpseFollows;}} // 1214hi
+    else{c.poseAt=tick;++c.poses;if(p.h.reserved&1){c.peerDownAt=tick;++c.downReceived;}}
 }
 // 1214en: engine thread, client: while the host's poses say the NPC is down (within 600 ms), keep the replica's native
 // laying timer (AIPhysicsReaction +0x138) above half of 0.6 s; clear it once the host stops saying so.

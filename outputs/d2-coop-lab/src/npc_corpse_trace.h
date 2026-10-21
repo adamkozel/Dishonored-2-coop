@@ -129,6 +129,12 @@ bool npcPresentUnheldCorpse=false;unsigned long long npcUnheldCorpsePresentSkips
 // 6 s after the death, without the hold or any presentation, so the host corpse settles in her pose. Then her
 // copy takes the normal hold.
 constexpr unsigned long long kNpcOwnPairedCorpseStreamMs=6000;unsigned long long npcOwnPairedCorpseStreamPoses=0,npcOwnPairedCorpses=0;
+// 1214hi (#140): in route-dunwall-lead-v1751a (1214hh) the host corpse followed her settling corpse to within 1 cm,
+// then its hold ended and the 1214fj freeze kept her last bones on the host's native root, which then sank 0.7 m (to
+// z 60.45). Her held copy showed that sunk pose and her search found nothing. A reverse pose that is not a carry and
+// arrives 3 s or more after the host's death is her settle stream, so the freeze ends: the host body falls natively
+// from her settled pose (0x734d90 copies the presented bones into the ragdoll), and her copy then shows that.
+unsigned long long npcSettledCorpseFollows=0;
 // Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
 // trace starts).
 inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;
@@ -151,7 +157,7 @@ inline void npcCorpseTraceSample(NpcCorpseTrace& t,unsigned long long tick,const
 inline void writeNpcCorpseTraces(FILE* f){
     writeNpcRemovals(f);
     fprintf(f,",\"presentUnheldCorpse\":%s,\"unheldCorpsePresentSkips\":%llu",npcPresentUnheldCorpse?"true":"false",npcUnheldCorpsePresentSkips);
-    fprintf(f,",\"ownPairedCorpses\":%llu,\"ownPairedCorpseStreamPoses\":%llu",npcOwnPairedCorpses,npcOwnPairedCorpseStreamPoses);
+    fprintf(f,",\"ownPairedCorpses\":%llu,\"ownPairedCorpseStreamPoses\":%llu,\"settledCorpseFollows\":%llu",npcOwnPairedCorpses,npcOwnPairedCorpseStreamPoses,npcSettledCorpseFollows);
     fprintf(f,",\"ownPairedHoldSkip\":%s,\"ownPairedHoldSkips\":%llu,\"corpseTraces\":[",npcSkipOwnPairedCorpseHold?"true":"false",npcOwnPairedHoldSkips);
     bool first=true;
     for(const auto& t:npcCorpseTraces){if(!t.startedAt)continue;

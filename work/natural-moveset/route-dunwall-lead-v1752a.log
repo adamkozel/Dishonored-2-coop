@@ -1,0 +1,220 @@
+{
+  "passed": true,
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [
+      "coop_corpse_hold own_paired_keep"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-authority",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-attack",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-authority",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-loot",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-authority",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-at",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-use",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step13-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step14-use",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step15-use",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step16-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step17-trigger",
+        "host": "mirrored_save_landed a1 s2/o1/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s2/o1/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step18-trigger",
+        "host": "mirrored_save_landed a1 s4/o2/m2/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s4/o2/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step19-at",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused"
+      },
+      {
+        "step": "step20-talk",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused"
+      },
+      {
+        "step": "step21-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 enable_refused"
+      }
+    ],
+    "authority": [
+      {
+        "step": "step05-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h50/50 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h50/50 acq0 lease1 paused1 gp1 hs1"
+        ]
+      },
+      {
+        "step": "step07-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ]
+      },
+      {
+        "step": "step09-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ]
+      }
+    ],
+    "npcPicks": [
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "8 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-119.2,60.7"
+    ],
+    "lootStands": [
+      "8 client d=0.8 at -44.813999,-118.781998,61.003677"
+    ],
+    "step20-talk": "skipped: npc gone (scene already ran)",
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 26,
+        "cine": 35,
+        "pos": [
+          -7.01371,
+          -14.309393,
+          -99.886795
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          1,
+          2,
+          13,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "3/0/0",
+        "active": "Mission_Void01,Task_DW_TalkToBoatCaptain"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 26,
+        "cine": 59,
+        "pos": [
+          -7.00489,
+          -15.182766,
+          -99.898788
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          1,
+          2,
+          13,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "sent/1/0",
+        "hold": "released/125",
+        "ka": "7/0/0",
+        "active": "Mission_Void01,Task_DW_TalkToBoatCaptain"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": null,
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored."
+}
