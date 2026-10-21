@@ -73,16 +73,7 @@ void serviceCoopMenu(ULONGLONG tick){
 std::atomic<std::uint64_t> coopKisculeHandlerCalls{0}; // 1214ho: calls of the hooked handler
 using NativeKisculeEvent=void*(*)(void*,void*);NativeKisculeEvent realKisculeEvent=nullptr;bool coopKisculeHooked=false;
 inline void* hookKisculeEvent(void* manager,void* args){
-    ++coopKisculeHandlerCalls;std::uintptr_t list=0;
-    if(args&&memoryRead(reinterpret_cast<std::uintptr_t>(args),&list,8)&&list){
-        auto* first=reinterpret_cast<IggyData20*>(list);
-        if(first->type==5&&first->payload){
-            const auto* name=reinterpret_cast<const char*>(first->payload);
-            if(first->length==sizeof(kCoopMenuEvent)-1&&!std::memcmp(name,kCoopMenuEvent,sizeof(kCoopMenuEvent)-1)){
-                coopModeSelected=true;++coopMenu.coopSelected;
-                first->payload=reinterpret_cast<std::uint64_t>(kCampaignMenuEvent);first->length=sizeof(kCampaignMenuEvent)-1;
-                void* r=realKisculeEvent(manager,args);first->payload=reinterpret_cast<std::uint64_t>(name);first->length=sizeof(kCoopMenuEvent)-1;return r;}
-            if(first->length==sizeof(kCampaignMenuEvent)-1&&!std::memcmp(name,kCampaignMenuEvent,sizeof(kCampaignMenuEvent)-1)){coopModeSelected=false;++coopMenu.campaignSelected;}}}
+    ++coopKisculeHandlerCalls; // 1214hp: counts only; the hub hook sets co-op mode
     return realKisculeEvent(manager,args);
 }
 inline bool installCoopKisculeHook(){
@@ -96,7 +87,7 @@ inline bool installCoopKisculeHook(){
 // (char*, length), argc@0x10, IggyDataValue args[]@0x18} (confirmed static; inside the Iggy tick, so plain memory
 // only). Its hook records the last 16 calls and turns KisculeEvent(GotoCoopScreen) into co-op mode plus
 // KisculeEvent(GotoCampaignScreen), in UTF8 (type 5) or UTF16 (type 6); GotoCampaignScreen turns co-op mode off.
-struct CoopHubCall {char name[32]{};int argc=0,type=0;char arg[32]{};};
+struct CoopHubCall {char name[32]{};int argc=0,type=0;char arg[32]{};std::uint64_t rawLength=0;};
 std::array<CoopHubCall,16> coopHubCalls{};std::atomic<std::uint64_t> coopHubCount{0};
 using NativeIggyHub=std::uint64_t(*)(void*,void*,void*);NativeIggyHub realIggyHub=nullptr;bool coopHubHooked=false;
 static const char16_t kCampaignMenuEvent16[]=u"GotoCampaignScreen";
@@ -106,13 +97,16 @@ inline std::uint64_t hookIggyHub(void* main,void* iggy,void* call){
         auto& r=coopHubCalls[coopHubCount.fetch_add(1)%16];r=CoopHubCall{};memoryRead(namePtr,r.name,sizeof(r.name)-1);r.argc=argc;
         if(argc>=1){auto* a=reinterpret_cast<IggyData20*>(c+0x18);r.type=a->type;
             char text[32]{};int n=0;
-            if(a->type==5&&a->payload){n=static_cast<int>((std::min)(a->length,std::uint64_t{31}));memoryRead(a->payload,text,n);}
-            else if(a->type==6&&a->payload){const auto len=static_cast<int>((std::min)(a->length,std::uint64_t{31}));for(;n<len;++n){char16_t ch=0;if(!memoryRead(a->payload+n*2,&ch,2))break;text[n]=ch<128?static_cast<char>(ch):'?';}}
+            r.rawLength=a->length;
+            if(a->type==5&&a->payload){memoryRead(a->payload,text,31);n=static_cast<int>(strnlen(text,31));} // 1214hp
+            else if(a->type==6&&a->payload){for(;n<31;++n){char16_t ch=0;if(!memoryRead(a->payload+n*2,&ch,2)||!ch)break;text[n]=ch<128?static_cast<char>(ch):'?';}}
             std::memcpy(r.arg,text,sizeof(r.arg));
             if(!std::strcmp(r.name,"KisculeEvent")){
                 if(n==static_cast<int>(sizeof(kCoopMenuEvent)-1)&&!std::memcmp(text,kCoopMenuEvent,n)){coopModeSelected=true;++coopMenu.coopSelected;
-                    if(a->type==5){a->payload=reinterpret_cast<std::uint64_t>(kCampaignMenuEvent);a->length=sizeof(kCampaignMenuEvent)-1;}
-                    else{a->payload=reinterpret_cast<std::uint64_t>(kCampaignMenuEvent16);a->length=sizeof(kCampaignMenuEvent16)/2-1;}}
+                    // The length follows the text only where it was the text length (with or without the NUL).
+                    const auto old=a->length;const std::uint64_t delta=sizeof(kCampaignMenuEvent)-sizeof(kCoopMenuEvent);
+                    a->payload=a->type==5?reinterpret_cast<std::uint64_t>(kCampaignMenuEvent):reinterpret_cast<std::uint64_t>(kCampaignMenuEvent16);
+                    if(old==sizeof(kCoopMenuEvent)-1||old==sizeof(kCoopMenuEvent))a->length=old+delta;}
                 else if(n==static_cast<int>(sizeof(kCampaignMenuEvent)-1)&&!std::memcmp(text,kCampaignMenuEvent,n)){coopModeSelected=false;++coopMenu.campaignSelected;}}}}
     return realIggyHub(main,iggy,call);
 }
@@ -135,7 +129,7 @@ void writeCoopMenu(){
     {const auto n=coopHubCount.load();bool first=true;for(std::uint64_t i=n>16?n-16:0;i<n;++i){const auto& r=coopHubCalls[i%16];char name[32]{},arg[32]{};
         for(int k=0;k<31&&r.name[k];++k)name[k]=(r.name[k]=='"'||r.name[k]=='\\'||r.name[k]<32)?'_':r.name[k];
         for(int k=0;k<31&&r.arg[k];++k)arg[k]=(r.arg[k]=='"'||r.arg[k]=='\\'||r.arg[k]<32)?'_':r.arg[k];
-        fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\"}",first?"":",",name,r.argc,r.type,arg);first=false;}}
+        fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\",\"rawLength\":%llu}",first?"":",",name,r.argc,r.type,arg,static_cast<unsigned long long>(r.rawLength));first=false;}}
     fputs("]}\n",f);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
