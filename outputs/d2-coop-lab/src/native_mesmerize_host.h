@@ -13,6 +13,8 @@ constexpr std::uintptr_t kMesmerizeComponentType=0x39dcdc0; // DAT_1439dcdc0, ar
 struct MesmerizeHostObject {std::uintptr_t actor=0,component=0,game=0,definition=0;unsigned handle=0;std::uint64_t epoch=0;ULONGLONG createdAt=0,startedAt=0,stoppedAt=0,componentAt=0;};
 MesmerizeHostObject mesmerizeHost{};
 unsigned mesmerizeHostRequest=0;float mesmerizeHostSpawnAt[3]{};
+// 1214gj: the anchor entity (a static level entity; the world handle 0x3fff0010 did not resolve, take mesmerize-host-v1718a).
+unsigned mesmerizeHostAnchor=0;bool mesmerizeHostAnchorResolved=false,mesmerizeHostSelfResolved=false;
 const char* mesmerizeHostResult="idle";std::uintptr_t mesmerizeHostProbeDefinition=0;
 std::uint64_t mesmerizeHostProbes=0,mesmerizeHostSpawned=0,mesmerizeHostStarts=0,mesmerizeHostStops=0,mesmerizeHostRefused=0;
 bool mesmerizeHostApis(){
@@ -23,14 +25,14 @@ bool mesmerizeHostApis(){
 }
 std::uintptr_t mesmerizeHostResolve(unsigned handle){return reinterpret_cast<std::uintptr_t(*)(unsigned)>(gameImage+0x6dc560)(handle);}
 // FUN_14072bf30 with the world anchor: the object position and its forward in the anchor's frame.
-bool mesmerizeHostConfigure(std::uintptr_t component,std::uintptr_t actor){
-    const auto anchor=mesmerizeHostResolve(0x3fff0010u);if(!anchor)return false;
+bool mesmerizeHostConfigure(std::uintptr_t component,std::uintptr_t actor,unsigned anchorHandle){
+    const auto anchor=mesmerizeHostResolve(anchorHandle);mesmerizeHostAnchorResolved=anchor!=0;if(!anchor)return false;
     float ap[3]{},ar[9]{},op[3]{},orow[3]{};
     if(!memoryRead(anchor+0x300,ap,12)||!memoryRead(anchor+0x30c,ar,36)||!memoryRead(actor+0x300,op,12)||!memoryRead(actor+0x30c,orow,12))return false;
     const float rel[3]{op[0]-ap[0],op[1]-ap[1],op[2]-ap[2]};
     const float offset[3]{rel[0]*ar[0]+rel[1]*ar[1]+rel[2]*ar[2],rel[0]*ar[3]+rel[1]*ar[4]+rel[2]*ar[5],rel[0]*ar[6]+rel[1]*ar[7]+rel[2]*ar[8]};
     const float forward[3]{orow[0]*ar[0]+orow[1]*ar[1]+orow[2]*ar[2],orow[0]*ar[3]+orow[1]*ar[4]+orow[2]*ar[5],orow[0]*ar[6]+orow[1]*ar[7]+orow[2]*ar[8]};
-    *reinterpret_cast<unsigned char*>(component+0x2b2)=1;*reinterpret_cast<unsigned*>(component+0x120)=0x3fff0010u;
+    *reinterpret_cast<unsigned char*>(component+0x2b2)=1;*reinterpret_cast<unsigned*>(component+0x120)=anchorHandle;
     std::memcpy(reinterpret_cast<void*>(component+0x108),offset,12);std::memcpy(reinterpret_cast<void*>(component+0x114),forward,12);
     return true;
 }
@@ -70,7 +72,8 @@ void serviceMesmerizeHost(ULONGLONG tick){
     int state=-1;if(!memoryRead(h.component+0x2c,&state,4)){refuse("component_unreadable");return;}
     if(request==3){
         if(state==1||state==3){refuse("already_started");return;}
-        if(!mesmerizeHostConfigure(h.component,h.actor)){refuse("configure_failed");return;}
+        mesmerizeHostSelfResolved=mesmerizeHostResolve(h.handle)==h.actor;
+        if(!mesmerizeHostConfigure(h.component,h.actor,mesmerizeHostAnchor?mesmerizeHostAnchor:0x3fff0010u)){refuse("configure_failed");return;}
         reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,1);h.startedAt=tick;++mesmerizeHostStarts;mesmerizeHostResult="started";return;
     }
     if(request==4){
@@ -92,9 +95,9 @@ void writeMesmerizeHost(){
     fprintf(f,"{\"components\":%u,\"componentVtables\":[",componentCount);for(unsigned i=0;i<componentCount&&i<12;++i)fprintf(f,"%s\"0x%llx\"",i?",":"",static_cast<unsigned long long>(vtables[i]));
     fprintf(f,"],\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
-              "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu}\n",
+              "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu,\"anchorHandle\":%u,\"anchorResolved\":%s,\"selfResolved\":%s}\n",
         h.componentAt,mesmerizeHostResult,mesmerizeHostProbes,mesmerizeHostProbeDefinition?"true":"false",mesmerizeHostSpawned,mesmerizeHostStarts,mesmerizeHostStops,mesmerizeHostRefused,h.handle,h.component?"true":"false",
         state,previous,committed,anchor,offset[0],offset[1],offset[2],blocking,count,handles[0],handles[1],handles[2],handles[3],handles[4],
-        h.createdAt,h.startedAt,h.stoppedAt,mesmerizeHostPartnerBlocked.load());
+        h.createdAt,h.startedAt,h.stoppedAt,mesmerizeHostPartnerBlocked.load(),mesmerizeHostAnchor,mesmerizeHostAnchorResolved?"true":"false",mesmerizeHostSelfResolved?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

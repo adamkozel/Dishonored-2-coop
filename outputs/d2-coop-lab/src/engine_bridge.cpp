@@ -1837,7 +1837,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     // 1214gh (#131): the native Mesmerize object experiment in the host world (native_mesmerize_host.h).
     if(!std::strcmp(request.command,"coop_mesmerize_native probe")){mesmerizeHostRequest=1;return;}
     if(!std::strncmp(request.command,"coop_mesmerize_native spawn ",28)){float v[3]{};
-        if(std::sscanf(request.command+28,"%f %f %f",&v[0],&v[1],&v[2])==3&&std::isfinite(v[0])&&std::isfinite(v[1])&&std::isfinite(v[2])){std::memcpy(mesmerizeHostSpawnAt,v,12);mesmerizeHostRequest=2;}return;}
+        unsigned anchor=0;const int got=std::sscanf(request.command+28,"%f %f %f %u",&v[0],&v[1],&v[2],&anchor); // 1214gj: optional anchor handle
+        if(got>=3&&std::isfinite(v[0])&&std::isfinite(v[1])&&std::isfinite(v[2])){std::memcpy(mesmerizeHostSpawnAt,v,12);mesmerizeHostAnchor=got==4?anchor:0;mesmerizeHostRequest=2;}return;}
     if(!std::strcmp(request.command,"coop_mesmerize_native start")){mesmerizeHostRequest=3;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_native stop")){mesmerizeHostRequest=4;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_visual loop")){mesmerizeVisualRequest=2;return;}
