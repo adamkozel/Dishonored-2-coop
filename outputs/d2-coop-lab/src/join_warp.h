@@ -19,3 +19,10 @@ inline JoinWarpTarget joinWarpTarget(const float (&self)[3],const float (&host)[
     t.warp=true;t.x=host[0]-kJoinWarpBehind*fx;t.y=host[1]-kJoinWarpBehind*fy;t.z=host[2]+kJoinWarpEye;
     t.yaw=std::atan2(fy,fx)*57.29577951f;return t;
 }
+// 1214ga (#135): the placement is due once per followed map and connection. A partner who leaves (F8) and joins the
+// same lobby again while still in the mission stayed where her world had left her (two-account take
+// campaign-join-vm-v1703a: 69 m from the host after the rejoin), so a new connection makes it due again; it still
+// warps only from 25 m away.
+inline bool joinWarpDue(unsigned long long followedMap,unsigned long long map,unsigned long long warpedMap,unsigned warpedConnection,unsigned connection){
+    return map&&followedMap==map&&connection&&(warpedMap!=map||warpedConnection!=connection);
+}

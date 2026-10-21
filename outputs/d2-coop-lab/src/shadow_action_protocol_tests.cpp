@@ -125,6 +125,12 @@ void chokePresentationTests(){
     native.player.current=12;
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_back.midnightscene","Npc",1333)==5&&
           !nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_fast_front.midnightscene","Npc",1333),"only observed native fast-back lethal admitted");
+    // 1214gc (#140): the partner kill of Ramsey, a key target (takes route-dunwall-lead-v1706a-c, scene probe).
+    check(nativeChokeVariant("midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene","assassination",3266)==123&&
+          nativeChokeVariant("midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene","right_in",333)==123&&
+          nativeTakedownLethal(123)&&nativeTakedownKeyTarget(123)&&nativeTakedownArms(123)==2&&!nativeTakedownKeyTarget(6)&&
+          !nativeChokeVariant("midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene","assassination",3000),
+          "1214gc: the key-target finisher (both subscenes) is a lethal two-arm paired scene");
     check(nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1933)==6&&nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",2200)==6&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","Npc",1933)&&!nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_back.midnightscene","npc",1333)&&
           ChokePresentation::clip(6)==ChokePresentation::clip(5),"observed assassination_back (Corvo 1933 ms in 1248j, Emily 2200 ms in 1248k) presented with the fast-back donor");
     {const auto drop=nativeChokeVariant("midnight/gameplay/player/base/assassination/assassination_drop_back.midnightscene","npc",1800),

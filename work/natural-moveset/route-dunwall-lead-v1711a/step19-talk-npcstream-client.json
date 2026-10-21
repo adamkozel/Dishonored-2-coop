@@ -1,0 +1,1035 @@
+{
+  "enabled": false,
+  "result": "uncoordinated_native_load",
+  "epoch": 21,
+  "peerEpoch": 21,
+  "rejected": 57,
+  "bodyApplied": 19312,
+  "bodyRefused": 9,
+  "framesOwned": 43503,
+  "childrenUpdated": 31910,
+  "poseIntervalMs": 50,
+  "heldSkips": 0,
+  "corpseReleases": 0,
+  "corpseFreezeFrames": 0,
+  "corpseFreezeEnds": 0,
+  "ashSent": 0,
+  "ashApplied": 0,
+  "ashRefused": 0,
+  "ashEffects": 0,
+  "entries": [
+    {
+      "handle": 370545209,
+      "civilian": false,
+      "arm": 20,
+      "peerArm": 24,
+      "peerHandle": 371266116,
+      "enabled": false,
+      "ready": false,
+      "result": "world_or_native_phase_changed",
+      "joints": 223,
+      "rig": "9af9a01dc869a78d",
+      "references": 0,
+      "released": 2,
+      "lost": 0,
+      "sent": 52,
+      "received": 197,
+      "rejected": 0,
+      "poses": 170,
+      "roots": 556,
+      "lifecycleDiff": 0,
+      "localPaired": false,
+      "unconscious": false,
+      "hostPairedLease": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "reverseRoot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "presentedRoot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corpse": false,
+      "deathShare": "none",
+      "deadSends": 0,
+      "carryControls": 0,
+      "carryPoses": 0,
+      "priorityPoses": 0,
+      "downSent": 0,
+      "downReceived": 0,
+      "downApplies": 0,
+      "downApplied": false,
+      "victimHolds": 0,
+      "victimReleases": 0,
+      "leaseReady": false,
+      "poseRejects": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lastPoseLateMs": 0.0
+    },
+    {
+      "handle": 371266116,
+      "civilian": true,
+      "arm": 21,
+      "peerArm": 25,
+      "peerHandle": 371331653,
+      "enabled": false,
+      "ready": false,
+      "result": "peer_stopped",
+      "joints": 222,
+      "rig": "3092585ee103e9ad",
+      "references": 0,
+      "released": 2,
+      "lost": 0,
+      "sent": 8,
+      "received": 30,
+      "rejected": 0,
+      "poses": 25,
+      "roots": 76,
+      "lifecycleDiff": 0,
+      "localPaired": false,
+      "unconscious": false,
+      "hostPairedLease": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "reverseRoot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "presentedRoot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corpse": false,
+      "deathShare": "none",
+      "deadSends": 0,
+      "carryControls": 0,
+      "carryPoses": 0,
+      "priorityPoses": 0,
+      "downSent": 0,
+      "downReceived": 0,
+      "downApplies": 0,
+      "downApplied": false,
+      "victimHolds": 0,
+      "victimReleases": 0,
+      "leaseReady": false,
+      "poseRejects": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lastPoseLateMs": 0.0
+    }
+  ],
+  "bodyEntries": [
+    {
+      "arm": 20,
+      "handle": 370545209,
+      "applied": 466,
+      "sequence": 166
+    },
+    {
+      "arm": 21,
+      "handle": 371266116,
+      "applied": 76,
+      "sequence": 31
+    }
+  ],
+  "poseDiagnostics": [
+    {
+      "arm": 20,
+      "handle": 370545209,
+      "stale": false,
+      "gaps": 0,
+      "recoveries": 0,
+      "failures": 0,
+      "lastFailure": "none",
+      "joint": -1,
+      "matrix": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "root": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "arm": 21,
+      "handle": 371266116,
+      "stale": false,
+      "gaps": 0,
+      "recoveries": 0,
+      "failures": 0,
+      "lastFailure": "none",
+      "joint": -1,
+      "matrix": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "root": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "relevance": {
+    "bound": 0,
+    "scans": 0,
+    "added": 0,
+    "dropped": 0,
+    "evicted": 0,
+    "lifeSent": 108,
+    "lifeReceived": 73,
+    "lifeApplied": 0,
+    "lifeRefused": 0,
+    "clientBound": 21,
+    "clientRefused": 0,
+    "clientDeferred": 10,
+    "clientBoundLive": 1,
+    "clientBusy": 36,
+    "helloCatalogReads": 2,
+    "pairedHolds": 0,
+    "pairedKnockouts": 0,
+    "pairedRefused": 0,
+    "pairedLocal": 1,
+    "pairedCorpses": 0,
+    "pairedFollows": 0,
+    "hostOwnPaired": 0,
+    "priorityPoses": 0,
+    "deadReconciled": 0,
+    "deadSent": 0,
+    "vanishedDead": 0,
+    "combatSharedDeaths": 0,
+    "clientDeadApplied": 0,
+    "clientDeadAlready": 0,
+    "clientDeadRefused": 0,
+    "clientDeadLast": "none",
+    "reconcileDecl": [
+      0.0,
+      0,
+      0,
+      0
+    ],
+    "catalogStale": 0,
+    "workerRequests": 109,
+    "workerCompleted": 109,
+    "workerFailed": 0,
+    "workerLastMs": 47.566,
+    "workerMaxMs": 58.285
+  },
+  "transport": {
+    "available": true,
+    "sendRate": 524288,
+    "pendingUnreliable": 0,
+    "pendingReliable": 0,
+    "queueUs": 0
+  },
+  "decodeRejected": 0,
+  "poseScopeRejected": 7,
+  "session": {
+    "enabled": false,
+    "result": "uncoordinated_native_load",
+    "reloadPending": false,
+    "reloadReady": false,
+    "reloads": 0,
+    "rearms": 0,
+    "menuSuspended": false,
+    "menuSuspensions": 0,
+    "menuResumes": 0,
+    "menuPausedMs": 0,
+    "ignored": 0,
+    "acquired": 4,
+    "released": 4,
+    "retired": 0,
+    "lost": 0
+  },
+  "ownPairedHoldSkip": false,
+  "ownPairedHoldSkips": 0,
+  "corpseTraces": [
+    {
+      "arm": 10,
+      "handle": 190318452,
+      "ownPaired": true,
+      "holdSkipped": false,
+      "vanished": false,
+      "vanishedMs": 0,
+      "samples": [
+        [
+          31,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          1,
+          3
+        ],
+        [
+          156,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          1,
+          3
+        ],
+        [
+          265,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          1,
+          3
+        ],
+        [
+          375,
+          -44.09,
+          -120.1,
+          61.0,
+          0,
+          1,
+          3
+        ],
+        [
+          484,
+          -44.07,
+          -120.07,
+          61.0,
+          0,
+          1,
+          3
+        ],
+        [
+          593,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          718,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          828,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          953,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1062,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1203,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1312,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1422,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1531,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1640,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1765,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          3
+        ],
+        [
+          1875,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          2
+        ],
+        [
+          2000,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          2
+        ],
+        [
+          2109,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          2
+        ],
+        [
+          2250,
+          -44.1,
+          -120.09,
+          61.0,
+          0,
+          0,
+          0
+        ],
+        [
+          2359,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          2
+        ],
+        [
+          2468,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          2
+        ],
+        [
+          2578,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          2718,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          2828,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          2937,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3047,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3172,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3281,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3390,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3500,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3609,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3734,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3843,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          3953,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          4531,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          5109,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          5672,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          6234,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          6797,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          7375,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          7953,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          8547,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          9109,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          9672,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          10234,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          10812,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          11375,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          11953,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          12547,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          13109,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          13687,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          14250,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          14812,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          15375,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          15937,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          16515,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          17078,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          17578,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          18156,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          18734,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          19312,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          19890,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          20453,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          21015,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          21578,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          22140,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          22718,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          23281,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          23890,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          24468,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          25047,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          25625,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          26140,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          26718,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          27297,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          27875,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          28468,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          29015,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ],
+        [
+          29578,
+          -44.1,
+          -120.09,
+          61.0,
+          1,
+          0,
+          0
+        ]
+      ]
+    }
+  ]
+}

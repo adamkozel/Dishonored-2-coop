@@ -81,7 +81,7 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   - Take 1302d: eight actions crossed, including the mission keys the carriage removes.
   - Take 1302e: both players have the Mark and mana from the void to Addermire, and both reach the Good Doctor with equal objectives.
 
-**Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
+**Deaths on campaign maps:** from Edge of the World on, the mission routes include a host fall (`die` step). On Dunwall's first map (the guard map), campaign-dunwall-die-vm-v1707a (1214gb, #148) has a host fall and a partner fall first: each restarted both worlds from the mission autosave (slot 61) in about 10.5 s. A death after a level transition used to leave both players on GameOver; chapter 88 has the fixes (1214bl–1214bo).
 
 ## Named gameflow states (1214bp, [audit 1303](../../work/movement-integration/campaign-institute-audit-v1303.json))
 
@@ -268,7 +268,24 @@ Every mission again on two Steam accounts in product mode (host Corvo on this PC
 | The Dust District | campaign-dust-vm-v1697a | pass: the Jindosh lock dialled natively (31 presses), both worlds in A Crack in the Slab |
 | A Crack in the Slab | campaign-bunker-vm-v1697a | pass: both worlds on the Grand Palace boat |
 | The Grand Palace | campaign-palace-vm-v1697a | pass: both worlds on the Death to the Empress boat |
-| Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`); the credits gameflow difference is #94 |
+| Death to the Empress | campaign-empress-vm-v1697a | pass: both worlds in the credits (`end_p`). campaign-empress-vm-v1704a then followed both through the credits to the title screen (`menu_p`) with identical gameflow, so the credits difference (#94) is discarded with the mission and is harmless |
 | Memories of Training | campaign-training-vm-v1701b | pass: the whole tutorial with gameflow equal at every step, and both worlds back on the main menu (`menu_p`). 1697a/b failed twice when the stealth lesson restarted under a tutorial page (logic 12) that the route action never closed; `d2_route_actions.py` now closes it. 1701a then failed on the pickpocket action (a route step, worlds equal). |
 
 Every failure on 1214fz was a route step (a use or talk that did not register, a tutorial page). None was a divergence between the worlds: gameflow was equal in both worlds at every failing step.
+
+**On 1214gf (release 0.8.2), the evidence take per mission (campaign-*-vm-v1713a/b; steps of each last passing take):**
+
+| Mission | Take | Result |
+|---|---|---|
+| A Long Day in Dunwall | campaign-dunwall-vm-v1713a | pass, with a host death and a partner death on the first map first (#148, route campaign-dunwall-die-v1707): both worlds in the Void |
+| Edge of the World | campaign-eotw-vm-v1713a | pass: both worlds in The Good Doctor |
+| The Good Doctor | campaign-institute-vm-v1713a | pass: both worlds on the Clockwork Mansion boat |
+| The Clockwork Mansion | campaign-madinventor-vm-v1713a | pass: both worlds in the Void (`void_02`) |
+| The Royal Conservatory | campaign-curator-vm-v1713b | pass: both worlds on the Dust District boat (1713a: the archived-journals note use did not register, as in 1697a) |
+| The Dust District | campaign-dust-vm-v1713a | pass: both worlds in A Crack in the Slab |
+| A Crack in the Slab | campaign-bunker-vm-v1713a | pass: both worlds on the Grand Palace boat |
+| The Grand Palace | campaign-palace-vm-v1713a | pass: both worlds on the Death to the Empress boat |
+| Death to the Empress | campaign-empress-vm-v1713a | pass: both worlds through the credits to the title screen (`menu_p`) |
+| Memories of Training | campaign-training-vm-v1713a | pass: both worlds back on the main menu |
+
+Gameflow was equal in both worlds at the end of every take.

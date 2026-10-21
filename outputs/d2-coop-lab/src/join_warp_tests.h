@@ -11,4 +11,7 @@ void joinWarpTests(){
     const float bad[3]{NAN,0,0};require(!joinWarpTarget(bad,host,facingSouth).warp&&!joinWarpTarget(farSelf,bad,facingSouth).warp,"1214fr: unread positions never warp");
     const float flat[9]{0,0,1,0,0,0,0,0,0};const auto u=joinWarpTarget(farSelf,host,flat);
     require(u.warp&&std::fabs(u.x+49.2f)<1e-4f&&std::fabs(u.yaw)<1e-3f,"1214fr: a degenerate host facing falls back to +x");
+    require(joinWarpDue(7,7,0,0,5)&&!joinWarpDue(7,7,7,5,5),"1214fr: due once after a followed load on a connection");
+    require(joinWarpDue(7,7,7,5,6),"1214ga (#135): a rejoin (a new connection) makes the placement due again");
+    require(!joinWarpDue(6,7,0,0,5)&&!joinWarpDue(0,0,0,0,5)&&!joinWarpDue(7,7,0,0,0),"1214ga: never on a map not followed, without a map or without a connection");
 }

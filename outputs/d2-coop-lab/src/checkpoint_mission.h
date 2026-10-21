@@ -1,4 +1,5 @@
 #pragma once
+#include "checkpoint_scope.h"
 #include <bcrypt.h>
 // 1147 mission checkpoints. On a mission map each peer restarts from its OWN
 // last native autosave (per-character worlds), through the game's own
@@ -88,6 +89,6 @@ bool armCheckpointMission() {
     auto& m=checkpointMission;m={};
     std::uintptr_t game=0,name=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!memoryRead(base+0x39a5290,&game,8)||!game||!memoryRead(game+0x337138,&name,8)||!nativeName(name,m.map,sizeof(m.map)))return false;
-    m.mission=std::strcmp(m.map,kGuardMap)!=0;m.mapId=m.mission?outgoing.mapId:coopMapId(kGuardMap);
+    m.mission=checkpointMissionScope(m.map,productMode,onlineSession.active);m.mapId=m.mission?outgoing.mapId:coopMapId(kGuardMap); // 1214gb (#143, checkpoint_scope.h)
     return true;
 }

@@ -148,3 +148,24 @@ What changed since 0.8.0: the partner's mission end and level transition no long
 | [product-two-account-v1699a](../../work/release/product-two-account-v1699a/result.json) | **Failed at the story step again; everything before it passed (confirmed runtime):** download (2.0 s, SHA-256 matches), install (80 s, Defender on, no detection), the Steam join, the same mission, both banks active, each side saw the other walk, and the rollback. <ul><li>The Ramsey fallback attacked 60 times without a story change.</li><li>The VM game showed "No connected user. You won't be able to save." (`vm-story.png`, and the same in 1696a). It had followed the host's mission from its title screen, where nobody had pressed a key, so it had no signed-in user ([#146](https://github.com/adamkozel/Dishonored-2-coop/issues/146)).</li></ul> Test-ProductTwoAccount-v1705 presses a key at the title screen as a player does. Its Ramsey fallback picks the Ramsey nearest his room (the route's rule), traces his health and records the VM's state. The release notes now tell the partner to press a key at the title screen. |
 
 Published as [v0.8.1](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.1) (Latest) from `main` (squash merge a5abe3106 of #142). The campaign re-validation on the 0.8.1 binary is in [chapter 97](97-campaign-map-sequence.md).
+
+## Release 0.8.2 (builder 1712, candidate 1214gf)
+
+What changed since 0.8.1:
+- **#148:** deaths are shared on the first map of the campaign. The guard map is played as a mission in product and online sessions (1214gb).
+- **#140:** the partner's key-target finishers are paired scenes, so her kill of a story target happens in both worlds (census 1707, 1214gc).
+- **#135:** a rejoining partner is placed beside the host (1214ga).
+- **#145:** the product controller counts worlds (1214ga).
+- **Diagnostics (read-only):** the partner scene probe and the corpse trace (1214ga, 1214ge).
+
+1214gf is 1214ge with the version resources set to 0.8.2.
+
+- **Data:** unchanged from 0.8.0 (decl recipes v2, bank patches v2, native tables v1).
+- **Setup tool:** setup-tool-v1712. `d2coop_setup.exe` 0.8.2 from the 1214gf build; only its version resource differs.
+- **Build** ([log](../../work/release/build-release-v1712.log)): `d2coop-v0.8.2.zip`, 37,210,194 bytes, 13 files, SHA-256 `FACF00B04F39ACB5439B25114A71556FDDC2662743EFACE743AB4D31DE644EE5`.
+
+| Take | Result |
+|---|---|
+| [release-install-v1712a](../../work/release/release-install-v1712a/result.json) | **Pass, 8/8,** on scratch copies of the original install: <ul><li>install in 51 s, with a 1.3 GB setup peak;</li><li>the built banks load and the tables parse;</li><li>a reinstall is refused, and rollback is byte-identical;</li><li>a wrong executable and a modified `master.index` are refused unchanged;</li><li>the Steam install is untouched.</li></ul> |
+
+The whole campaign passes on two Steam accounts on this binary: [chapter 97](97-campaign-map-sequence.md), campaign-*-vm-v1713.

@@ -1,8 +1,14 @@
-# Dishonored 2 Corvo/Emily co-op 0.8.1
+# Dishonored 2 Corvo/Emily co-op 0.8.2
 
 Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.8.2
+
+- On the first map of *A Long Day in Dunwall*, a death is now shared: both games show the game-over screen and restart together ([#148](https://github.com/adamkozel/Dishonored-2-coop/issues/148)).
+- When the partner assassinates a story target (for example Ramsey), the kill now happens in both worlds: the host's game holds the target still during her finishing move ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)).
+- A partner who leaves (F8) and joins the same mission again is placed beside the host ([#135](https://github.com/adamkozel/Dishonored-2-coop/issues/135)).
 
 ## Fixed in 0.8.1
 
@@ -33,7 +39,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 ## Install (both players)
 
 1. Close Dishonored 2.
-2. Download `d2coop-v0.8.1.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.8.2.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -87,7 +93,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 
 - Two players only. The host is always Corvo and the partner is always Emily.
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
-- Occasionally the partner cannot search a body she has just killed with an assassination ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)). If that happens, let the host search it.
+- Occasionally the body of a story target the partner has just killed with an assassination disappears from her world, so she cannot search it ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)). If that happens, let the host search it.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
