@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-20T20:10:00+02:00",
+  "UpdatedAt": "2026-10-21T04:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22133,7 +22133,7 @@
         "KnownLimitation": "in end_p the partner keeps the two Corvo end-game gameflow nodes active (the mirror runs only in gameplay)"
       }
     },
-    "NextAction": "Stage 7 and the goal: the clean-PC session from the v0.8.1 release (product-two-account-v1699a), the Edge of the World and Memories of Training re-runs (1700, 1701), #140 partner-led Dunwall repeats (route-dunwall-lead-v1702a-c), #135 two-account mid-mission join and rejoin (campaign-join-vm-v1703a), #94 past the credits (campaign-empress-vm-v1704a); then #145 (candidate 1214ga) and #131 (stage 4, Ghidra and lab experiments).",
+    "NextAction": "Publish v0.8.2 (merge #147), then the clean-PC session from its GitHub download with the host starting a fresh campaign (Test-ProductTwoAccount-v1709, #143). Then #131 (stage 4: Emily Mesmerize, shades and Rat Shadow on host NPCs, Ghidra and lab), #140 (native corpse vanish of a key target in the partner world), #146 (join from the title screen).",
     "FollowUps": {
       "85-dunwall-loadout": {
         "Audit": "work/movement-integration/dunwall-loadout-audit-v1311.json",
@@ -22145,10 +22145,10 @@
       }
     },
     "Revalidation": {
-      "Candidate": "candidate-npc-combat-v1214fz (release 0.8.1)",
+      "Candidate": "candidate-npc-combat-v1214gf (release 0.8.2)",
       "Harness": "work/natural-moveset/Route-MissionVM-v1301.ps1",
-      "Takes": "work/natural-moveset/campaign-*-vm-v1697a/b (chapter 97 table); Edge of the World again as campaign-eotw-vm-v1700a/b (ends with an expect on The Good Doctor), Memories of Training as campaign-training-vm-v1701a/b (tutorial page closed by the route actions)",
-      "Status": "done: all 9 missions passed on 1214fz to the next mission or the credits (Edge of the World as campaign-eotw-vm-v1700a, to The Good Doctor), and the tutorial Memories of Training as campaign-training-vm-v1701b, back to the main menu"
+      "Takes": "work/natural-moveset/campaign-*-vm-v1713a/b (chapter 97 table); 0.8.1 evidence: campaign-*-vm-v1697a/b, v1700a, v1701b",
+      "Status": "done: all 9 missions and the tutorial passed on 1214gf on two Steam accounts, gameflow equal at every end; Dunwall with shared deaths on the first map (#148), Death to the Empress through the credits to the title screen (#94)"
     }
   },
   "Release": {
@@ -22545,5 +22545,17 @@
     "Issue": "#13",
     "Take": "work/natural-moveset/mission-soak-v1698a (Test-MissionSoak-v1316.ps1, 120 min, candidate-npc-combat-v1214fz)",
     "Status": "done: pass; 19 shared deaths with both death screens and restarts; transport fresh and every session armed at the end; handles flat; memory 4.64 (host) and 4.79 (client) MB/min against 18.3 and 18.0 in the bridge-only control mission-soak-control-v1664b, so the co-op systems add no growth beyond the game own rate (chapter 90)"
+  },
+  "Release082": {
+    "Candidate": "candidate-npc-combat-v1214gf",
+    "Package": "outputs/release/d2coop-v0.8.2.zip (local), 37210194 bytes, SHA-256 FACF00B04F39ACB5439B25114A71556FDDC2662743EFACE743AB4D31DE644EE5",
+    "InstallTest": "work/release/release-install-v1712a: pass 8/8",
+    "Fixes": "#148 first map shared deaths (1214gb), #140 key-target finisher paired (1214gc), #135 rejoin placement and #145 worlds counted (1214ga)",
+    "Status": "built and validated; publishing"
+  },
+  "PartnerKeyTargetKill": {
+    "Issue": "#140",
+    "Takes": "route-dunwall-lead-v1702a-c, v1706a-c (1214ga probe), v1708a-c (1214gc), v1710a (1214gd), v1711a-c (1214ge)",
+    "Status": "kill fixed (key-target finisher paired, shared in both worlds); open: the partner copy of the corpse is intermittently removed natively about 10 s after death (ARK_CUE_NPC_DISAPPEARED, ring pickup gone); workaround: the host searches (release notes)"
   }
 }
