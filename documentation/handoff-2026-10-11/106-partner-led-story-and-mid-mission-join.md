@@ -357,3 +357,26 @@ The shared toggle family (chapter 87) leaves out safes, combination dials, typew
   - Typewriters, the piano and audiographs stay per player (no story state; hypothesis for the typewriters and the piano,
     which only play their own animation and sound).
   - The release notes list this.
+
+## Joining from the title screen (#146, 1214ha)
+
+- **The problem:** a partner who accepted the invite at the title screen ("Press any key") had their game follow the
+  host's mission with no signed-in user. Its first save failed with "No connected user. You won't be able to save."
+  (product-two-account-v1696a/v1699a).
+- **Research** (Probe-TitleSignIn-v1741/v1742, read-only, the VM's game):
+  - title-signin-v1741a: the main menu state object (`arkGameLogicStateMainMenu`, vtable RVA 1c60e68) is identical at
+    the title and in the menu.
+  - title-signin-v1742a (confirmed runtime): after the key, the Home section (`arkMainMenuSectionHome`, state+0x98,
+    vtable RVA 1b6e698) sets +0x38 and +0x68 to 1, and the New Game and Difficulty sections fill their lists.
+  - Confirmed static: the Home section's activate `FUN_1404fea30` binds its screen elements (+0x28, +0x58), and its
+    deactivate `FUN_1404fefc0` unbinds them. +0x38 is therefore "Home shown", which first happens when a key is pressed
+    at the title.
+- **1214ha:**
+  - The logic sampler latches `frontEndTitlePassed` once the Home section has been bound, for the life of the process:
+    the title only shows at boot, and the user stays signed in.
+  - Join-follow from the front end waits (`waiting_title_key`) until then.
+- **campaign-titlejoin-vm-v1743a** (Route-MissionVM-v1743 `-TitleJoin`, two Steam accounts):
+  - The VM joined while at its title. It stayed there for 20 s with `waiting_title_key` and no load.
+  - After Enter, it followed and loaded the host's mission (same gameflow, 48 NPCs each, both armed).
+  - It failed only on the harness's 3 m placement check. `join_warp.h` warps only from 25 m, and she was 12.6 m away.
+- **campaign-titlejoin-vm-v1744a** (v1744: a partner within 25 m with no warp is accepted): the acceptance take.

@@ -627,6 +627,12 @@ void sampleLocalPlayer() {
            (id!=1||logicVtable==base+0x1c60478)&&(id!=4||logicVtable==base+0x1c61e68)&&
            memoryRead(manager+0x538,&pending,4)&&pending<17) {
             outgoing.gameLogicState=id;outgoing.pendingGameLogicState=pending;
+            // 1214ha (#146): the title screen. A key pressed there signs in the game's user, and the main menu's Home
+            // section (arkMainMenuSectionHome, state+0x98) binds its screen: +0x38 goes from 0 to 1 (title-signin-v1742a,
+            // confirmed runtime; bound by its activate FUN_1404fea30, cleared by its deactivate, confirmed static). Latched
+            // for the process: the title only shows at boot, and the user stays signed in.
+            if(id==6&&logicVtable==base+0x1c60e68&&!frontEndTitlePassed){std::uintptr_t home=0,homeVtable=0;unsigned char bound=0;
+                if(memoryRead(current+0x98,&home,8)&&home&&memoryRead(home,&homeVtable,8)&&homeVtable==base+0x1b6e698&&memoryRead(home+0x38,&bound,1)&&bound==1)frontEndTitlePassed=true;}
             if(id==5&&logicVtable==base+0x1c60128)sampledCinematicState=current;
         }
     }

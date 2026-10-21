@@ -1,0 +1,185 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+09:05:02 copying lab scripts, tooling and bin
+09:05:08 mod resources (voidmod, master.index) into the game copy
+09:05:12 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : 1B16659516A9D42F
+probe           : 39FF7D3348F49767
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 100
+PSComputerName  : D2CoopVM
+RunspaceId      : 142c04ef-7fba-4503-b334-82f84646bca2
+
+
+09:05:36 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             100 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The VM was not placed beside the host (12.59 m)",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ha",
+      "hostDll": "1B16659516A9D42F5385841116A7F480EFBE72DBDE63AA71CE7437855CF4AF9A",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "join": {
+      "afterStep": 1,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "titleWait": {
+        "samples": 7,
+        "stayedAtTitle": true,
+        "waitingTitleKey": 7,
+        "loads": 0
+      },
+      "titleKeyAt": 28838,
+      "loadMs": 119297,
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 0,
+        "warpDistance": 12.59
+      },
+      "hostPos": [
+        -32.889999,
+        -165.600006,
+        66.403648
+      ],
+      "clientPos": [
+        -28.092138,
+        -153.962173,
+        66.403648
+      ],
+      "distance": 12.59,
+      "gameflow": {
+        "host": "240 4 3 1 0 0 0",
+        "client": "240 4 3 1 0 0 0",
+        "equal": true
+      },
+      "npcCounts": {
+        "host": 48,
+        "client": 48
+      },
+      "npcStateDiffs": [],
+      "armed": {
+        "product": {
+          "host": "armed",
+          "client": "armed"
+        },
+        "banks": {
+          "host": true,
+          "client": true
+        },
+        "ok": true
+      }
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 24,
+        "pos": [
+          -32.889999,
+          -165.600006,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          4,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 18,
+        "pos": [
+          -28.092138,
+          -153.962173,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          4,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 2,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily); 1714/1703 (#135): the VM joins after step 1 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1743.ps1:415[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 415 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe VM was not placed beside the host (12.59 m)[0m

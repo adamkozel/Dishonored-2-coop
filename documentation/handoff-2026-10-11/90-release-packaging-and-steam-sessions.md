@@ -242,7 +242,7 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
   - F8 leaves.
 - **Character choice:** the game's own choice at the start of *A Long Day in Dunwall*. The host takes Corvo and the partner Emily; the route harnesses steer it ([chapter 97](97-campaign-map-sequence.md)).
 - **Recovery:** native shared death screens and restarts, checkpoint and autosave pairs, the mission end and level transition mirrors, and the presentation watchdog. The campaign plays through on two accounts ([chapter 97](97-campaign-map-sequence.md)).
-- **Packaging and rollback:** releases 0.7.0, 0.8.0 and 0.8.1. Each installer builds the game-derived files from the player's own copy, and each rollback is byte-identical ([chapter 98](98-release-without-game-files.md)).
+- **Packaging and rollback:** releases 0.7.0, 0.8.0, 0.8.1, 0.8.2 and 0.8.3. Each installer builds the game-derived files from the player's own copy, and each rollback is byte-identical ([chapter 98](98-release-without-game-files.md)).
 - **Sustained stability:** the 2-hour co-op soaks 1316 and 1698a (the release binary) and their bridge-only control 1664b (above). The co-op systems add no memory growth beyond the game's own rate (#13).
 
 **Found and fixed since (release 0.8.2, candidates 1214ga-1214gf; chapter 106):**
@@ -253,8 +253,11 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
 
 - The clean-PC session from the v0.8.2 download passed with the host starting a fresh campaign: story, a shared death on the first map, leave and rollback (product-two-account-v1709a, chapter 98).
 - The two-account rejoin places the partner beside the host (campaign-join-vm-v1714b, #135).
+- Release 0.8.3 (#152; partner Mesmerize and Doppelganger shades on the host's NPCs, #131):
+  - install test release-install-v1740a: 8/8;
+  - clean-PC proof from the v0.8.3 download: product-two-account-v1740a.
+- A partner who joins from the title screen now waits there until a key is pressed (#146, 1214ha, chapter 106; campaign-titlejoin-vm-v1744a).
 
 **Still open:**
-- A partner who joins from the title screen has no signed-in user (#146): the product does not yet wait for one.
 - Hosting starts with the F7 key. There is no entry in the game's own menus; the invite and join steps are Steam's native overlay and friends list.
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
