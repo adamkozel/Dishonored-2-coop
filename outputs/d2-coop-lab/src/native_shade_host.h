@@ -107,6 +107,11 @@ void serviceShadeKill(){
     std::memcpy(params.data()+0x50,&q.inflictor,4);std::memcpy(params.data()+0x54,&q.attacker,4);
     realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());++shadeKillsApplied;shadeKillResult="kill_applied";
 }
+// 1214gw: Emily's own current shades (the clone handles her game last sent), for the damage source ownership.
+bool coopLocalShadeHandle(std::uint32_t handle){
+    if(localRole!=1||!handle)return false;
+    for(const auto& s:doppelgangerWorldStreams)if(s.sent.present&&s.sent.nativeHandle==handle)return true;
+    return false;}
 bool shadeHostAlive(const ShadeHostPuppet& p){return p.actor&&p.handle&&p.game==observedGame&&p.epoch==outgoing.worldEpoch&&mesmerizeHostResolve(p.handle)==p.actor;}
 void shadeHostRemove(ShadeHostPuppet& p,const char* why){
     if(shadeHostAlive(p)){

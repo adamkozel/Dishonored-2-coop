@@ -254,6 +254,17 @@ The live candidate is 1214fp.
       (`kill_damage`) is suppressed as a replica-world event.
   - **Next (1214gw):** on her game, a hit whose source (or a parent of it) is her current shade counts as hers, so the
     deadly shadow's `kill_damage` goes to the host as a PeerNative request.
+- **Her own shade's hits** (1214gw, Test-PartnerShade-v1731; confirmed runtime):
+  - **partner-shade-v1731b** (Baffling Shade; pass): the shade death is shared.
+    - A host guard killed the puppet at 3.9 s (one recorded hit, health 1 to 0).
+    - The host sent the kill, and her game applied the same native hit to her own clone (`kill_applied`). Her shade
+      ended by 4.4 s.
+  - **partner-shade-v1731a** (Deadly Shade; fail):
+    - Her hit now counts as hers: it was no longer suppressed as a replica-world event.
+    - It was then refused as `hit_damage_parameters`, so no PeerNative request was sent.
+    - Her copy of guard 1 read 0 health while the host guard kept 40: the deadly shadow's kill diverges.
+  - **Next (1214gx):** for a hit by her own shade, the amount is clamped to the PeerNative limit and a world inflictor
+    or attacker is allowed. Her game records these hits.
 - **Shades, still to do:**
   1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
      same definition as hers. A deadly shadow on the host fights the host's NPCs natively.
