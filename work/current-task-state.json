@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-21T16:20:00+02:00",
+  "UpdatedAt": "2026-10-22T00:50:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22632,5 +22632,16 @@
     "Status": "published and validated (install test, clean-PC proof on two accounts)",
     "Published": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.4",
     "CleanPc": "work/release/product-two-account-v1754b: pass (downloaded from GitHub in the VM, Install.cmd alone, the host starts a fresh campaign as Corvo, two Steam accounts in the same mission, walk, story trigger and death shared, leave, uninstall); v1754a stopped at a harness race (the idle Emily fixture read before the fresh campaign loaded), fixed in Test-ProductTwoAccount-v1754 (waits for a new world epoch)"
+  },
+  "CoopMenuSaves": {
+    "Cards": "#156 (co-op entry and isolated saves), #157 (Leave co-op)",
+    "Branch": "stage7/coop-menu (draft PR #164)",
+    "Candidate": "candidate-npc-combat-v1214ht",
+    "Chapter": "documentation/handoff-2026-10-11/107-coop-menu-and-saves.md",
+    "Takes": {
+      "coop-saveflow-v1769a": "fail (probe): after a quit the game returns to the title screen; the Down meant for CO-OP passed the title, Enter opened CAMPAIGN and CONTINUE loaded the VM lab's own campaign save. Co-op entry, new game, quicksave to savegame_coop and the quit worked. The campaign profile.bin was rewritten by the switch with identical keys (only its 16-byte header differed).",
+      "coop-leave-v1770a": "behaviour pass, text fail: two accounts (host lab + VM). LEAVE CO-OP shows in both pause menus during a session, the second dialog button leaves the session and resumes the game in the same world (same map and epoch), the other side sees the leave, Quit Game returns after the session, restoration passed. The confirmation still reads the stock question: the engine registers the UTF-8 translation callback (table +8), not the UTF-16 one the mod wrapped (translationHooked false)."
+    },
+    "Next": "1214hu: wrap the UTF-8 translation callback; skip SaveProfile while the profile dirty byte (+8) is clear. Then Probe-CoopSaveFlow-v1771 (title key after each quit, profile.bin compared without its header) and coop-leave-v1770b."
   }
 }

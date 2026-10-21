@@ -72,6 +72,27 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
 - Plan: during a session the mod relabels `_quitEntry` "Leave co-op", and its hook on the engine-side quit callback
   acts as F8.
 
+### Leave co-op (1214ht; take coop-leave-v1770a, two accounts)
+
+- **The label (confirmed runtime):** during an online session the mod sets `pauseData.quitEntry.label` through the
+  Iggy API whenever the pause screen (logic 2, its movie at state+0x20) shows. Both pause movies read LEAVE CO-OP:
+  Corvo's on the host and Emily's in the VM. After the session a new pause movie shows the native Quit Game.
+- **The leave (confirmed runtime):** the quit dialog's second button sends `BackToMain` through the Iggy hub. During a
+  session the hub hook renames it `ResumeGame` (the same length), so the pause closes as Resume does, and the session
+  is left as F8 leaves it. Both sides were tested: the host leaving (the VM loses its partner and stays in its world)
+  and the partner leaving (the host keeps hosting its lobby and loses its partner). Each player stays on the same map
+  and world epoch.
+- **The dialog text (not yet working):** the confirmation still read the stock question ("Do you want to quit the
+  game?", "Back To Main Menu").
+  - `Localization.translate` in the movie caches each key in a static `_locals` dictionary and calls the native
+    `IggyFunctions.translate` only on a miss (confirmed static). `_C_ClearLocalization` cleared it (clears 1).
+  - The engine registers the **UTF-8** translation callback (table 0x143ec0920 +8), not the UTF-16 one (+0)
+    (`translationHooked` stayed false, confirmed runtime).
+  - FUN_14102a270 (confirmed static): when +0 is empty it converts the key to UTF-8 and calls `+8(data +0x20, {key,
+    length}, {out, length})` (or +0x18 when the flag at +0x38 is set), converts the result to UTF-16 and frees it with
+    `+0x28(data +0x30, out, length)`.
+  - 1214hu wraps the UTF-8 callback the same way.
+
 ## Save isolation research (confirmed static unless marked)
 
 - **The save root:**
@@ -153,3 +174,12 @@ processors idle:
    and rebuild the Campaign screen.
 
 Leaving co-op runs the same steps in reverse.
+
+**The switch in practice (takes coop-saveflow-v1768a and v1769a):**
+- Co-op New Game, the quicksave and the mission-start save are written to `savegame_coop` (SLOT03, SLOT21); the
+  campaign slots are untouched (path, size, time and SHA-256 equal).
+- Each re-visit of the Co-op or Campaign screen re-lists the saves (1214ht; v1768a listed none on the second visit).
+- Leaving a game returns to the title screen (Press Any Key), not straight to the menu.
+- The switch rewrote the player's `profile.bin` with identical keys: only bytes 0-3 and 9-14 of its header differed
+  (hypothesis: a checksum and a time). The writable profile accessor `140657ce0` sets the dirty byte at profile+8
+  (confirmed static), so 1214hu saves the profile before a switch only while that byte is set.
