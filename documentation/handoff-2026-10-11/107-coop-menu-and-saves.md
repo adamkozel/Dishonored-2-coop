@@ -71,3 +71,46 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
   strings at 141b6ac60).
 - Plan: during a session the mod relabels `_quitEntry` "Leave co-op", and its hook on the engine-side quit callback
   acts as F8.
+
+## Save isolation research (confirmed static unless marked)
+
+- **The save root:**
+  - The pointer `0x142286f40` holds `"savegame"` (0x141ac7378). It is not cached: eight paths read it on every call
+    (save 1400e5f90, load 1400e5ac0, enumerate 1400e5150, delete 1400e49e0, delete-all 1400e4ba0, delete files
+    1400e4db0, enumerate files 1400e56d0, screenshot loader 1400d55a0).
+  - The folder is `SLOT%02d` (format pointer 0x142318180).
+- **The dispatcher:** all seven file operations go through `0x1400e5e40` (vtable entry 0x141add460). Its flags are at
+  `*(job+0x68)+0xb0`: slot load 1, slot save 2, `profile.bin` 0x201 and 0x202 (bit 0x200).
+- **Why a sibling folder:** the save listing is recursive. It finds `game.details` under the root, so a subfolder of
+  `savegame` would show in the normal campaign as a slot. Co-op saves therefore go in the sibling `savegame_coop`
+  (hypothesis: it resolves under `<fs_savepath>/base/` like the original), and the profile stays shared.
+- **Slots:** a slot is campaign x 30 + index (3 campaigns).
+
+  | Index | Save |
+  |---|---|
+  | 0 | mission transition |
+  | 1-2 | autosaves |
+  | 3 | quicksave |
+  | 4-20 | manual saves |
+  | 21-29 | mission-start saves (20 + chapter) |
+
+  The lab folders match (SLOT00, 21, 60-62, 81-89).
+- **The save list:**
+  - It belongs to the session (`*(void**)0x142287c78`). It is enumerated by session vtable +0xa0 (1400dae40), which
+    frees `sgm+0xd0` (sgm = `*(session+0x20)`) and clears the ready flag `sgm+0x3920`. Completion (1400db550) sets the
+    flag again.
+  - The save manager (`*(u8**)0x1439a5290 + 0x2e75d8`) rebuilds its per-campaign lists with `140660210(mgr,-1)`.
+  - The Campaign screen builder is 1404fb3b0.
+- **New Game** (140500750, 140466ca0): it resets that campaign's profile keys (140465aa0) and queues the deletion of
+  the campaign's saves (14065cb20).
+- **Switching** (main thread, while idle):
+  1. Check that nothing is saving or loading.
+  2. Clear the screenshot cache (1400d69a0 per entry, then 1400d5ea0; 0x142318198 = -1).
+  3. Swap the pointer.
+  4. Re-enumerate and wait for the ready flag.
+  5. Rebuild the save manager lists.
+  Reverse the same steps when leaving co-op.
+- **The design risk:** campaign progress lives in `profile.bin`: `campaignIndex`, `campaignSaveType_%02d`,
+  `HasFinishedCampaign_%d`, `PlayTime_%d(_%d)` and `DeathCount_%d(_%d)`. A co-op New Game would reset those keys for
+  its campaign index in the shared profile. Either stash and swap them across a co-op switch (with a stash file for
+  crash recovery), or give co-op its own profile (a profile reload at run time).
