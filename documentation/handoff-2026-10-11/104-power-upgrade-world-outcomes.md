@@ -171,6 +171,24 @@ The live candidate is 1214fp.
     spirit with the native link effect on its head, as in single player. Visual acceptance is recorded separately.
 - **Mesmerize status:** done for #131 in the lab (both roles: Emily casts, Corvo's world reacts). Corvo has no
   Mesmerize. Next: the shades and Rat Shadow, then a product two-account check.
+- **Doppelganger shade: a native puppet in the host world** (1214gr, `native_shade_host.h`, Test-PartnerShade-v1727):
+  - Her shade is the native clone `models/powers/doppelganger/decoy_entity.def`: an `arkNPC` in the player faction,
+    with the decoy AI, attention source and health.
+  - The native cast `FUN_14043c950` creates it through `CreateClone` (`FUN_14043cdc0`: `FUN_1408ae9b0(game,
+    definition, aim+0x94, the caster's orientation turned by pi)`). `OnCloneSpawned` (`FUN_14043e0c0`) then posts an AI
+    stimulus (type 0x73, kind 5, the clone position) (confirmed static).
+  - The host spawns the same definition at her streamed shade in the same way and posts the same stimulus. It keeps
+    the puppet at her shade (a native transform when it drifts more than 1 m) and removes it with the native removal
+    message when hers ends.
+  - **partner-shade-v1727a** (fail, confirmed runtime): the host crashed right after the puppet appeared, at `3a9fd8`
+    reading `0xb8`.
+    - The cause: a player component update (`FUN_1403a9f90`; its owner cast to the player by `FUN_1408f2e90`) lists
+      the player's clones through `*(player+0x398)` (the Doppelganger power), its handle array `+0xb8` and count
+      `+0xc0`, with no null check (confirmed static). Corvo has no Doppelganger.
+    - partner-shade-v1727b (the control) found the host already gone. It is kept as an invalid take.
+  - **Next (1214gs):** while puppets exist, the host player gets a phantom power block in that slot, as the Mesmerize
+    phantom slot does. Its `+0xb8` is the live puppets' handle array, `+0xc0` their count and `+0xd4` the last one. It is
+    kept 5 s after the last puppet.
 
 ## Possessed bodies (host world; consistent)
 
