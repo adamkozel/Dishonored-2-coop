@@ -145,6 +145,10 @@ unsigned long long npcSettledHoldFrames=0;
 // servicePartnerHeldObject), which the settled hold's root would undo every frame. A pull of the body ends the settled
 // hold and returns it to the 1214fj freeze (her bones on the moving native root), as validated in mission-coverage-v1636b.
 unsigned long long npcSettledHoldPulls=0;
+// 1214hl (#140, #127): the settle stream no longer ends the 1214fj freeze. In mission-coverage-v1754a (1214hk) the host
+// copy of Emily's lethal takedown of the docks photographer never left physics mode 3 (as in #127), so the hold could
+// not take it, and with the freeze ended its native idle stood it up in Corvo's window. The settled hold presents
+// only a held corpse; an unheld one keeps the freeze, now on her settled bones.
 // Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
 // trace starts).
 inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;

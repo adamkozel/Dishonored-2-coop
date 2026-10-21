@@ -318,7 +318,7 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
 - **End:** both reached the Void with gameflow equal.
 - campaign-join-vm-v1714a did not start, because the previous clean-PC take left the lab host paused (logic 2).
 
-## The partner's kill of a key target (#140, candidates 1214ga-1214ge)
+## The partner's kill of a key target (#140, candidates 1214ga-1214hl)
 
 | Take | Candidate | Finding (confirmed runtime) |
 |---|---|---|
@@ -360,6 +360,57 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
     the 24-entry ring by the restore's teardown.
   - **Next (1214hc):** also hook the queue insert `FUN_1408851f0` (queue, record, entity, delay; it sets the due time at
     `record+0xe0`). A queued removal of an `arkNPC` keeps its delay and caller stack in its own ring.
+
+### The physics removal and the corpse poses (1214hc-hj, #140)
+
+Partner-led Dunwall routes (Route-Mission-v1710, from 1749 on v1749, which also saves both worlds' NPC-stream status at the
+search and on failure). "Hold skipped" is the lab switch `coop_corpse_hold own_paired_skip`; the others use the product
+configuration.
+
+| Take | Candidate | Finding |
+|---|---|---|
+| route-dunwall-lead-v1746a/b | 1214hc (queue insert `FUN_1408851f0` hooked) | 1746b vanished again. It queued 43 NPC removals, all with delay 0 on one job-thread stack, and the 24-entry ring kept other NPCs. |
+| route-dunwall-lead-v1747a/b | 1214hd (a never-overwritten watched list for traced or dead NPCs) | 1747b vanished at 9.9 s (confirmed runtime). Ramsey's removal was queued with delay 0 from the physics step `FUN_140c942d0` (TtPostSolve, TtDispatchCommands). It went through its listener dispatch (`cebd30`, `ce57a0`, the delegate list `c96120`) to a delegate (`883f60`) that posts the removal. Two other dead NPCs went the same way within 1 s. |
+| route-dunwall-lead-v1748a-e | 1214he (her game drops that removal of a dead replica) | a-c: no removal was queued. d failed: her search found the entity at the host's spot, but no body (bare carpet, no use focus). e: the removal was queued 10 s after the death and dropped, and her search passed. Her game then queued it again several times per frame (94441 marks); the host queued none. |
+| route-dunwall-lead-v1749a/b | 1214hf (the trace also samples her copy's skeleton) | 1749a (hold skipped): at 750 ms her game began presenting the host corpse pose on her unheld copy, and its root moved to the host root, 1 m above hers. At 1.9 s her ragdoll left the animated mode (physics mode 3 to 2) under that presentation, and the skeleton exploded: joints from z 52.8 to 117.6 for 300 ms, around a floor at 61. 1749b: the host root stayed at 61.0, and nothing exploded. |
+| route-dunwall-lead-v1750a-f | 1214hg (her game presents a corpse only once its hold holds it) | No explosion and no removal in all six takes. b, d, f (hold skipped): her copy lay flat, native, and the search passed. a, c (the hold) passed. e failed: her held copy showed the host corpse pose, upright and sunk to the waist in the floor, and her press picked the body up. |
+| route-dunwall-lead-v1751a/b | 1214hh (her own paired kill's native corpse streams to the host for 6 s) | Both failed. The host followed her settling corpse to within 1 cm. Then its hold ended, and the 1214fj freeze kept her bones on the host's native root, which sank 0.7 m; her held copy took that pose. |
+| route-dunwall-lead-v1752a/b | 1214hi (her settle stream ends the host's freeze) | Released to its ragdoll from her settled pose, the host body came to rest 0.45 m below her root, sunk into the carpet to the head and one arm (step10-at-host.png). 1752a passed; 1752b failed. |
+| route-dunwall-lead-v1753a-e | 1214hj (the host keeps her settled corpse held and presented) | Her search passed in all five. The host and partner roots coincide at the death (z 61.15-61.29), with no removal and no vanish. The host view (1753a, step10-at-host.png) shows "Mortimer Ramsey (dead)" lying on the carpet. 1753e then failed at the optional end-of-mission talk to Meagan (below). |
+| mission-coverage-v1754a/b | 1214hk (her Far Reach pull of a settled corpse returns it to the freeze) | The #127 regression (Record-MissionCoverage-v1632, Emily's lethal takedown of the Edge of the World docks photographer). b: the pull moved the body 7.33 m in both worlds. a: in Corvo's window the photographer stood up in her native idle again. That host corpse stays in physics mode 3, so the hold cannot take it, and since 1214hi the settle stream had ended the 1214fj freeze. |
+| mission-coverage-v1755a/b, route-dunwall-lead-v1755a-c | 1214hl (the settle stream no longer ends the freeze) | 1755a film: the photographer lies on the deck in both windows. 1755b: the pull moved the body 7.33 m in both worlds, dead in both. Routes b and c passed. Route a passed Ramsey's search, then failed at the Meagan talk. |
+
+- **The explosion** (confirmed runtime): her game presented the host corpse pose on a corpse whose native ragdoll was
+  not held, and the ragdoll started under that pose, as the 1214ak launches did. A body thrown out of the world is
+  then removed by the physics step (hypothesis), or leaves an entity with no visible body (1748d).
+- **The host's frozen pose** (confirmed static, `npc_paired.h`): the host corpse follows her victim pose only until
+  1.6 s after her last PairedHold. Her ragdoll falls at 1.9 s and settles by about 4 s, so the 1214fj freeze held a
+  mid-scene pose on a native root that then moved.
+- **The fix (1214hg-hj):**
+  - Her game presents a corpse only once the corpse hold (`npcCorpseHoldAnimated`) holds it. Until then the corpse is
+    native, as in single player.
+  - After her own paired kill, her game streams her native corpse to the host (PairedHold and PairedPose) for 6 s after
+    the death, without the hold or any presentation. Then her copy takes the normal hold.
+  - The host recognises that settle stream (a reverse pose that is not a carry, 3 s or more after the death). It keeps
+    the corpse held (keyframed) and presents her settled pose with its root, until a carry takes it or the channel
+    stops. Her held copy then shows the same pose.
+  - A host corpse the hold cannot take (physics mode 3, as in #127) keeps the 1214fj freeze, now on her settled
+    bones (1214hl). Her Far Reach pull of a held one returns it to that freeze, whose native root the pull moves
+    (1214hk).
+  - The 1214he drop of a physics removal of a dead replica stays as a backstop.
+  - Lab switches: `coop_corpse_present unheld` (the old presentation), `coop_corpse_hold own_paired_skip` (never hold
+    her own paired kill).
+- **Two observations from these takes:**
+  - The end-of-mission talk to Meagan: route-dunwall-lead-v1753e and v1755a failed it ("Talk to meagan not registered").
+    - On the v1750 steps, which add a host view of the corpse, Emily's arrival on the boat sometimes left the end
+      scene waiting for the talk, and the harness's talk then did not register (1753c passed it).
+    - On the original v1674 steps the scene started on her arrival in about 20 takes, including 1756a and 1756b on
+      1214hl.
+    - So the failures follow the harness step that teleports the host, not the corpse code (hypothesis for why the
+      scene waits).
+  - After her search, the NPC stream session stops on a world or native phase change (`world_or_native_phase_changed`,
+    existing behaviour). That releases both bodies to their ragdolls, and the two copies then lie 0.1-2.5 m apart
+    (1756b: 2.5 m). This is cosmetic, after the search.
 
 ## Multi-state devices and safes (#134)
 
