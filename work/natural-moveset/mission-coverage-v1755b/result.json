@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "source": "client",
+      "case": "takedown",
+      "observer": "host",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Native lethal of models/characters/def/generic/middle_class_female_01.def: source states 0,13; dead in both worlds",
+        "Target physics: host mode 3 then 3, client mode 0 then 0 (0 ragdoll)",
+        "Far Reach body: spots 180:0x2dc029dc; chosen 180; pulled 0x2dc029dc,0x3fff0010; states 0,84; body moved source 7.33 m, host 7.33 m; health client 0/10, host 0/10"
+      ],
+      "target": {
+        "spawner": "script_spawner_docks_photograph",
+        "definition": "models/characters/def/generic/middle_class_female_01.def",
+        "position": [
+          -34.5335,
+          216.344,
+          4.43588
+        ],
+        "forward": [
+          0.13761805166533556,
+          0.9904853718535358
+        ]
+      },
+      "kind": "lethal",
+      "camera": [
+        -37.566884238810005,
+        216.3111357376619,
+        6.035880000000001
+      ],
+      "sourceStart": [
+        -34.712,
+        215.056,
+        4.43751
+      ],
+      "prePitch": 20.0,
+      "replacedAt": 515,
+      "cameraMoved": [
+        -37.73518423881001,
+        216.3341357376619,
+        6.035880000000001
+      ],
+      "targetMoved": 0.17,
+      "actedAt": 515,
+      "pressedWhenReady": {
+        "t": 515,
+        "entry": 0,
+        "name": "models/characters/def/generic/middle_class_female_01.def_10716",
+        "state": 3
+      },
+      "trackSamples": 60,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "sourceStates": [
+        0,
+        13
+      ],
+      "windowScenes": [],
+      "targetPhysics": {
+        "verdict": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -34.9173,
+              217.215,
+              4.5507
+            ],
+            "physics": "0x2029d0e8210",
+            "mode": 3,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -34.9173,
+              217.215,
+              4.5507
+            ],
+            "physics": "0x191297a7210",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        },
+        "later": {
+          "host": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -34.9173,
+              217.215,
+              4.5507
+            ],
+            "physics": "0x2029d0e8210",
+            "mode": 3,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          },
+          "client": {
+            "handle": "0x2dc029dc",
+            "position": [
+              -34.9173,
+              217.215,
+              4.5507
+            ],
+            "physics": "0x191297a7210",
+            "mode": 0,
+            "pending": "0xffffffff",
+            "current": 0,
+            "ownerSuppressed": false,
+            "hidden": false
+          }
+        }
+      },
+      "corpseView": [
+        -35.330154154996,
+        214.2435438844394
+      ],
+      "corpsePoseSamples": 15,
+      "corpseRagdollStatus": {
+        "enabled": null,
+        "ragdolls": null
+      },
+      "farReachGrant": "named_slot_occupied",
+      "farReachCorpseEntry": {
+        "result": "client_corpse",
+        "localPaired": false,
+        "pairedResult": "client_paired_corpse",
+        "waitMs": 4
+      },
+      "farReach": {
+        "body": [
+          -34.9173,
+          217.215,
+          4.5507
+        ],
+        "handle": "0x2dc029dc",
+        "hostBody": [
+          -34.9173,
+          217.215,
+          4.5507
+        ],
+        "hostHandle": "0x2dc029dc",
+        "spots": [
+          {
+            "offset": 180,
+            "at": [
+              -35.53658123249401,
+              212.75781582665908
+            ],
+            "yaw": 82.08996348701626,
+            "aimed": [
+              "0x2dc029dc"
+            ],
+            "hit": 1,
+            "sweep": [
+              0,
+              0
+            ]
+          }
+        ],
+        "chosen": 180,
+        "released": false,
+        "health": {
+          "client": {
+            "current": 0,
+            "maximum": 10,
+            "suppressed": false
+          },
+          "host": {
+            "current": 0,
+            "maximum": 10,
+            "suppressed": false
+          }
+        },
+        "end": {
+          "source": [
+            -35.83,
+            209.947,
+            4.20775
+          ],
+          "host": [
+            -35.83,
+            209.947,
+            4.20778
+          ]
+        },
+        "pulled": [
+          "0x2dc029dc",
+          "0x3fff0010"
+        ],
+        "states": [
+          0,
+          84
+        ],
+        "sourceMoved": 7.33,
+        "hostMoved": 7.33
+      }
+    }
+  ],
+  "scope": "Mission coverage (1328, #11): native swimming, chain climbing and a guard fight (block, hit, attack to the kill) in Edge of the World under the product controller, both source roles, observer free camera, checked from the partner presentation state; Dunwall fixture restored."
+}

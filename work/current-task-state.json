@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-21T10:50:00+02:00",
+  "UpdatedAt": "2026-10-21T15:20:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22555,8 +22555,27 @@
   },
   "PartnerKeyTargetKill": {
     "Issue": "#140",
-    "Takes": "route-dunwall-lead-v1702a-c, v1706a-c (1214ga probe), v1708a-c (1214gc), v1710a (1214gd), v1711a-c (1214ge)",
-    "Status": "kill fixed (key-target finisher paired, shared in both worlds); open: the partner copy of the corpse is intermittently removed natively about 10 s after death (ARK_CUE_NPC_DISAPPEARED, ring pickup gone); workaround: the host searches (release notes)"
+    "Status": "done: her copy of a story target she assassinated stays, lies where it settled in both worlds and can be searched (route-dunwall-lead-v1753a-d, v1755b/c, v1756a/b); the #127 corpse and Far Reach pull regressions pass (mission-coverage-v1755a/b)",
+    "Cause": "her game presented the host corpse pose on an unheld corpse whose native ragdoll then started, and the skeleton exploded (1749a); the physics step then removed it (1747b) or left no body (1748d)",
+    "Fix": "1214hg present a client corpse only once held; 1214hh stream her own paired corpse for 6 s; 1214hj the host holds and presents her settled pose; 1214hk a Far Reach pull returns it to the freeze; 1214hl an unheld host corpse keeps the 1214fj freeze; 1214he drops a physics removal of a dead replica (backstop)",
+    "Candidate": "candidate-npc-combat-v1214hl",
+    "Chapter": "documentation/handoff-2026-10-11/106-partner-led-story-and-mid-mission-join.md",
+    "Evidence": [
+      "route-dunwall-lead-v1747b",
+      "route-dunwall-lead-v1748e",
+      "route-dunwall-lead-v1749a",
+      "route-dunwall-lead-v1750e",
+      "route-dunwall-lead-v1751a",
+      "route-dunwall-lead-v1752a",
+      "route-dunwall-lead-v1753a",
+      "mission-coverage-v1754a",
+      "mission-coverage-v1755a",
+      "mission-coverage-v1755b",
+      "route-dunwall-lead-v1755b",
+      "route-dunwall-lead-v1755c",
+      "route-dunwall-lead-v1756a",
+      "route-dunwall-lead-v1756b"
+    ]
   },
   "PartnerWorldObjectPowers": {
     "Issue": "#131",
