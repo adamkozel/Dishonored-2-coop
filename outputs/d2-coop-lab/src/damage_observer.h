@@ -30,6 +30,7 @@ void armDamageObservation(bool enable){
 bool routeNpcAttackDamage(void* component,void* info,void* result);
 bool routeNpcParryWinDamage(void* component,void* info,void* result);
 bool routeNpcCombatDamage(void* component,void* info,void* result);
+void noteShadeHostHit(void* component,void* info); // 1214gv (#131, native_shade_host.h): read-only
 bool prepareNpcCombatSubtraction(void* component,float amount);
 using NativeHealthSubtract=void(*)(void*,float);
 NativeHealthSubtract realNativeHealthSubtract=nullptr;
@@ -48,6 +49,7 @@ bool installNativeHealthSubtractObserver(){
 }
 void observeNativeDamage(void* component,void* info,void* result){
     noteBreakableDamage(component,info); // 1214fq (#132): read-only, the hit that may break a breakable
+    noteShadeHostHit(component,info);
     // Host-only scoped native parry-win blowback from the owned clone.
     if(routeNpcParryWinDamage(component,info,result))return;
     if(suppressFriendlyFire(component,info,result)||suppressShadowDamage(info,result)||suppressCarryPresentationDamage(info,result))return;

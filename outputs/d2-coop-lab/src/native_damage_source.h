@@ -10,6 +10,14 @@ struct NativeDamageSource {
     std::array<char,96> type{};
     std::array<unsigned char,1024> bytes{};
 };
+// 1214gw (#131): on Emily's game a hit whose source (or a parent of it) is her own current shade counts as hers. Her
+// deadly shadow's kill_damage on a replica was suppressed as a replica-world event (partner-shade-v1729c), so the host
+// never applied it; as hers it goes to the host as a PeerNative request. coopLocalShadeHandle is in native_shade_host.h.
+bool coopLocalShadeHandle(std::uint32_t handle);
+template<class Read> bool coopLocalShadeChain(Read read,std::uintptr_t game,std::uint32_t handle){
+    for(unsigned depth=0;depth<8&&handle&&handle!=0x3fff0010u;++depth){if(coopLocalShadeHandle(handle))return true;
+        const auto entity=worldIdentityEntity(read,game,handle);std::uint32_t parent=0;if(!entity||!read(entity+0xac,&parent,4)||parent==handle)return false;handle=parent;}
+    return false;}
 template<class Read> NativeDamageSource readNativeDamageSource(Read read,std::uintptr_t base,std::uintptr_t game,unsigned handle){
     NativeDamageSource s{};s.handle=handle;s.actor=worldIdentityEntity(read,game,handle);
     if(!s.actor||!read(s.actor,&s.vtable,8)||s.vtable<base||s.vtable>=base+68988928||!read(s.actor+0xac,&s.parent,4))return s;
@@ -19,7 +27,7 @@ template<class Read> NativeDamageSource readNativeDamageSource(Read read,std::ui
             if(!((c>='a'&&c<='z')||(c>='A'&&c<='Z')||(c>='0'&&c<='9')||c=='.'||c=='?'||c=='@'||c=='_'))break;s.type[i]=c;}
     }
     const auto player=worldIdentityEntity(read,game,1);
-    s.localOwned=player&&coopDamageSourceOwned(read,game,handle,1,player);
+    s.localOwned=player&&(coopDamageSourceOwned(read,game,handle,1,player)||coopLocalShadeChain(read,game,handle));
     s.bytesValid=read(s.actor,s.bytes.data(),s.bytes.size());
     s.valid=worldIdentityEntity(read,game,handle)==s.actor;
     if(!s.valid){s.localOwned=false;s.bytesValid=false;}return s;

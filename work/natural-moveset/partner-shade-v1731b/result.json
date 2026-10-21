@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "failure": null,
+  "case": {
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Her clone definition factions/faction_player.cpntfaction; guard health host/client: 1 40->40 / 40->40, 2 40->40 / 40->40",
+      "Her shade present in 4 samples (health 1 to 0); a guard within 3 m of it in her world in 3",
+      "Host guards' attention holds the puppet in 62 samples (any attention in 62); moves continuous 65, teleports 0",
+      "Host puppet: spawned 1, in 4 samples, health 1 to 0, max drift 0.005 m, pins 65, stimuli 1; a host guard within 3 m in 4; removed 0, lost 1 (puppet_lost)",
+      "Shade kill: host hits 1, sent 1 (kill_sent); her game received 1, applied 1, refused 0 (kill_applied); partner kinds 1",
+      "The host killed the puppet at 3925 ms; her shade ended by 4379 ms",
+      "The host puppet followed her shade, was perceived, and ended with it"
+    ],
+    "granted": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/doppelganger_baffling_shade.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "guard1Before": [
+      -49.1808,
+      -146.322,
+      61.0167
+    ],
+    "castAt4m": [
+      -45.31604,
+      -147.353328,
+      61.0167
+    ],
+    "castAim": {
+      "target": [
+        -45.31604,
+        -147.353328,
+        61.0167
+      ],
+      "stand": [
+        -54.9779,
+        -144.775,
+        61.0036
+      ],
+      "yaw": -14.941559381900909,
+      "pitch": 2,
+      "distance": 9.999965696700361
+    },
+    "castAt": "2026-10-21T07:48:35.7256153+02:00",
+    "herDefinition": "factions/faction_player.cpntfaction",
+    "herHandle": 210178549,
+    "hostCamera": {
+      "at": [
+        -48.861,
+        -146.412,
+        61.0
+      ],
+      "camera": [
+        -53.47852642012234,
+        -144.49407149260665,
+        63.0
+      ],
+      "yaw": -22.555966908052923,
+      "active": true
+    },
+    "filmed": true,
+    "summary": {
+      "delta": {
+        "spawned": 1,
+        "removed": 0,
+        "lost": 1,
+        "pins": 65,
+        "stimuli": 1,
+        "continuous": 65,
+        "teleports": 0
+      },
+      "puppetHandles": [
+        210244106
+      ],
+      "attendedSamples": 62,
+      "attentionSamples": 62,
+      "spawned": 1,
+      "removed": 0,
+      "lost": 1,
+      "pins": 65,
+      "stimuli": 1,
+      "result": "puppet_lost",
+      "herPresentSamples": 4,
+      "puppetSamples": 4,
+      "puppetHealthFirst": 1.0,
+      "puppetHealthMin": 0.0,
+      "herHealthFirst": 1.0,
+      "herHealthMin": 0.0,
+      "guardNearPuppetSamples": 4,
+      "guardNearHerShadeSamples": 3,
+      "maxDrift": 0.005,
+      "endPuppet": false,
+      "endHerPresent": 0
+    },
+    "guardHealth": {
+      "2": {
+        "hostFirst": 40,
+        "hostLast": 40,
+        "clientFirst": 40,
+        "clientLast": 40
+      },
+      "1": {
+        "hostFirst": 40,
+        "hostLast": 40,
+        "clientFirst": 40,
+        "clientLast": 40
+      }
+    },
+    "kill": {
+      "hits": 1,
+      "sent": 1,
+      "hostResult": "kill_sent",
+      "received": 1,
+      "applied": 1,
+      "refused": 0,
+      "clientResult": "kill_applied"
+    },
+    "partnerKinds": [
+      1
+    ],
+    "puppetDeadAt": 3925,
+    "herLastPresentAt": 4379,
+    "restored": true
+  },
+  "scope": "Stage 4 partner shade (#131): Emily casts her own Doppelganger near the Dunwall lower-floor tutorial guard 1 under the product controller; the host spawns the native shade at her streamed shade, the host NPCs perceive it, and it ends with hers; fixture restored."
+}

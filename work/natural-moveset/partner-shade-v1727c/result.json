@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "failure": null,
+  "case": {
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Her shade present in 20 samples (health 1 to 1); a guard within 3 m of it in her world in 2",
+      "Host puppet: spawned 1, in 23 samples, health 1 to 1, max drift 1.051 m, pins 62, stimuli 1; a host guard within 3 m in 1; removed 1, lost 0 (removed)",
+      "The host puppet followed her shade, was perceived, and ended with it"
+    ],
+    "granted": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      }
+    ],
+    "guard1Before": [
+      -47.4075,
+      -146.815,
+      61
+    ],
+    "castAim": {
+      "target": [
+        -47.4075,
+        -146.815,
+        61
+      ],
+      "stand": [
+        -53.2222,
+        -145.335,
+        61.0036
+      ],
+      "yaw": -14.280119854301072,
+      "pitch": 4,
+      "distance": 6.000094673419745
+    },
+    "castAt": "2026-10-21T07:07:38.2737804+02:00",
+    "hostCamera": {
+      "at": [
+        -46.569,
+        -147.036,
+        61.0
+      ],
+      "camera": [
+        -51.14636570398048,
+        -145.02410457229425,
+        63.0
+      ],
+      "yaw": -23.726991093964635,
+      "active": true
+    },
+    "filmed": true,
+    "summary": {
+      "spawned": 1,
+      "removed": 1,
+      "lost": 0,
+      "pins": 62,
+      "stimuli": 1,
+      "result": "removed",
+      "herPresentSamples": 20,
+      "puppetSamples": 23,
+      "puppetHealthFirst": 1.0,
+      "puppetHealthMin": 1.0,
+      "herHealthFirst": 1.0,
+      "herHealthMin": 1.0,
+      "guardNearPuppetSamples": 1,
+      "guardNearHerShadeSamples": 2,
+      "maxDrift": 1.051,
+      "endPuppet": false,
+      "endHerPresent": 0
+    },
+    "restored": true
+  },
+  "scope": "Stage 4 partner shade (#131): Emily casts her own Doppelganger near the Dunwall lower-floor tutorial guard 1 under the product controller; the host spawns the native shade at her streamed shade, the host NPCs perceive it, and it ends with hers; fixture restored."
+}

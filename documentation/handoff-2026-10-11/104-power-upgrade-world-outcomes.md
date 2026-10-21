@@ -171,6 +171,151 @@ The live candidate is 1214fp.
     spirit with the native link effect on its head, as in single player. Visual acceptance is recorded separately.
 - **Mesmerize status:** done for #131 in the lab (both roles: Emily casts, Corvo's world reacts). Corvo has no
   Mesmerize. Next: the shades and Rat Shadow, then a product two-account check.
+- **Doppelganger shade: a native puppet in the host world** (1214gr, `native_shade_host.h`, Test-PartnerShade-v1727):
+  - Her shade is the native clone `models/powers/doppelganger/decoy_entity.def`: an `arkNPC` in the player faction,
+    with the decoy AI, attention source and health.
+  - The native cast `FUN_14043c950` creates it through `CreateClone` (`FUN_14043cdc0`: `FUN_1408ae9b0(game,
+    definition, aim+0x94, the caster's orientation turned by pi)`). `OnCloneSpawned` (`FUN_14043e0c0`) then posts an AI
+    stimulus (type 0x73, kind 5, the clone position) (confirmed static).
+  - The host spawns the same definition at her streamed shade in the same way and posts the same stimulus. It keeps
+    the puppet at her shade (a native transform when it drifts more than 1 m) and removes it with the native removal
+    message when hers ends.
+  - **partner-shade-v1727a** (fail, confirmed runtime): the host crashed right after the puppet appeared, at `3a9fd8`
+    reading `0xb8`.
+    - The cause: a player component update (`FUN_1403a9f90`; its owner cast to the player by `FUN_1408f2e90`) lists
+      the player's clones through `*(player+0x398)` (the Doppelganger power), its handle array `+0xb8` and count
+      `+0xc0`, with no null check (confirmed static). Corvo has no Doppelganger.
+    - partner-shade-v1727b (the control) found the host already gone. It is kept as an invalid take.
+  - **Next (1214gs):** while puppets exist, the host player gets a phantom power block in that slot, as the Mesmerize
+    phantom slot does. Its `+0xb8` is the live puppets' handle array, `+0xc0` their count and `+0xd4` the last one. It is
+    kept 5 s after the last puppet.
+  - **partner-shade-v1727c** (1214gs; recorded as a pass, but its perception sign is weak; confirmed runtime):
+    - No crash. The puppet spawned at her shade, followed it and was removed natively when hers ended.
+    - Her shade runs: the native decoy fled 25 m in 7 s and was gone after about 7 s, while the puppet stood. The 1 m
+      pin teleported it 62 times. Each native teleport refreshes observable membership.
+    - Neither shade's health fell (1 of 1). Host guard 1 left its post and walked to where the shade had passed (an
+      investigation, hypothesis), and came within 3 m of the puppet in one sample.
+  - **partner-shade-v1727d** (control, puppet off): no puppet in any sample. Guard 1 kept its patrol and never went
+    toward the shade's path. The harness failed it on the cumulative spawn counter (1 from 1727c), so it is recorded as
+    a fail and read as a valid control.
+  - **Next (1214gt, Test-PartnerShade-v1728):**
+    - The puppet follows her shade every frame, inside the partner avatar's continuous-transform scope (the observable
+      refresh keeps its membership). Jumps over 3 m are teleports.
+    - The shade is cast 4 m in front of guard 1.
+    - Both guards' native attention (`--ai-targets`) is sampled, and the pass needs the puppet there.
+    - The counters are taken as deltas.
+  - **partner-shade-v1728a** (1214gt; pass, confirmed runtime):
+    - The puppet followed her running shade with 326 continuous moves and no teleport, a maximum drift of 0.42 m,
+      and was removed natively when hers ended.
+    - Both host guards perceived the puppet 1.5 s after it appeared (it was in their native attention), and from
+      4.8 s both had it as their combat target. Then they also turned on Emily's avatar (209916411): the shade alerted
+      them, as in single player.
+    - Neither shade was hit: hers fled and was gone after about 10 s.
+  - **partner-shade-v1728b** (control, puppet off; pass): no puppet, and the host guards' attention stayed empty for
+    15 s. Guard 1 then noticed Emily herself.
+  - So the host's NPCs now perceive and fight her base shade natively.
+- **The shade upgrades** (1214gt, Test-PartnerShade-v1729; confirmed runtime):
+  - **partner-shade-v1729b** (Baffling Shade; pass):
+    - Both guards perceived the puppet, and a host guard killed it (health 1 to 0; `puppet_lost`).
+    - Her shade in her world kept its health and lived on, so the death diverges between worlds.
+    - Baffling Shade has no code strings; it is data-driven (hypothesis: the decoy's death outcome reads the caster's
+      attribute, which Corvo does not have).
+  - **partner-shade-v1729a** (Deadly Shade; fail): her shade never reached the stream (595 unknown reads at reader
+    stage 3).
+    - The film shows the upgrade's shade: it appears, walks to the guard and engages it.
+    - Its entity is `models/powers/doppelganger/deadlyshadow_entity.def`, with `arkCpntDeadlyShadow`, a combat NPC.
+      The reader accepts only `decoy_entity.def` with the decoy component.
+    - So with Deadly Shade, Corvo sees no shade and no host NPC is touched. Guard health stayed 40 in both worlds.
+- **The deadly shadow streamed** (1214gu: the reader accepts `deadlyshadow_entity.def` by its actor; the Doppelganger
+  world packet v6 carries a shade kind; the host puppet takes the same definition):
+  - **partner-shade-v1729c** (Deadly Shade; fail, confirmed runtime): her deadly shadow was streamed (kind 2, health
+    40). The host crashed in the host-spawned deadly shadow's AI (`4a404e`): `FUN_1404a3f90` reads a component
+    (`1439e8250`) the free-standing spawn lacks.
+  - Natively, `OnCloneSpawned` replaces the clone through `FUN_14043de90` (a lookup at the caster's position). It
+    spawns that result's clone definition with the result as parent, and removes the decoy (confirmed static). The
+    deadly shadow is therefore tied to a target NPC (hypothesis).
+  - In her world, the replica guard 1 read 0 health by the end (the host had crashed, so this is unexplained).
+  - The base-shade regression take was skipped (host down).
+  - **Next (1214gv):** no host puppet for the deadly shadow; Corvo sees it through the presentation. Her deadly
+    shadow's hits are to be forwarded.
+- **The shade death and the deadly shadow** (1214gv, Test-PartnerShade-v1730; both pass, confirmed runtime):
+  - 1214gv:
+    - The host records hits on a puppet's health component (read-only, in the native damage observer).
+    - When the puppet's health reaches 0, or it is lost within 2 s of a hit, the host sends the kill
+      (`CoopShadeKillPacket`).
+    - Her game applies the same native hit to her own clone, so its native death outcome runs.
+    - There is no puppet for the deadly shadow.
+  - **partner-shade-v1730a** (Baffling Shade): the host guards hit the puppet twice, but its health stayed 1, so no
+    kill was sent; the death sync is still to be shown. The puppet was perceived and removed with her shade.
+  - **partner-shade-v1730b** (Deadly Shade):
+    - Her deadly shadow was streamed (kind 2) for the whole take, so Corvo sees it through the presentation.
+    - No host puppet and no crash.
+    - In her world it engaged the guard in 59 of 67 samples, but the guard's health stayed 40 in both worlds. Her hit
+      (`kill_damage`) is suppressed as a replica-world event.
+  - **Next (1214gw):** on her game, a hit whose source (or a parent of it) is her current shade counts as hers, so the
+    deadly shadow's `kill_damage` goes to the host as a PeerNative request.
+- **Her own shade's hits** (1214gw, Test-PartnerShade-v1731; confirmed runtime):
+  - **partner-shade-v1731b** (Baffling Shade; pass): the shade death is shared.
+    - A host guard killed the puppet at 3.9 s (one recorded hit, health 1 to 0).
+    - The host sent the kill, and her game applied the same native hit to her own clone (`kill_applied`). Her shade
+      ended by 4.4 s.
+  - **partner-shade-v1731a** (Deadly Shade; fail):
+    - Her hit now counts as hers: it was no longer suppressed as a replica-world event.
+    - It was then refused as `hit_damage_parameters`, so no PeerNative request was sent.
+    - Her copy of guard 1 read 0 health while the host guard kept 40: the deadly shadow's kill diverges.
+  - **Next (1214gx):** for a hit by her own shade, the amount is clamped to the PeerNative limit and a world inflictor
+    or attacker is allowed. Her game records these hits.
+- **partner-shade-v1732a** (1214gx, Deadly Shade; pass, confirmed runtime):
+  - Her deadly shadow's hit (attacker her deadly shadow, `kill_damage`) counted as hers and was forwarded as a
+    PeerNative request.
+  - The host applied it natively, and guard 1 died in both worlds (host 40 to 0, her copy 40 to 0). Her deadly shadow
+    was streamed throughout (Corvo sees it), with no host puppet.
+- **Baffling Shade's cloud** (partner-shade-v1731b film; preliminary visual review):
+  - In her world, the shade's death releases a smoke cloud, and her copy of the guard stands in it.
+  - The host has no cloud, and its guard keeps fighting. So the death is shared, but the baffling effect on the host's
+    NPCs is missing.
+  - Next: find what the death spawns (an entity snapshot of her world around the death) and spawn it at the host
+    puppet's death.
+- **Baffling Shade's confusion is a native hit** (confirmed runtime):
+  - In partner-shade-v1731b, her game captured 9 hits of `components/characters/player/base/damage/decoy_baffle.damage`
+    on her copies as her shade died. All 9 were suppressed as replica-world events: their source is no longer her live
+    shade.
+  - In 1733a/b and 1730a (her shade faded, not killed) there was no such hit. The confusion comes with the shade's death
+    only. In 1733a/b, both worlds spawned unnamed FX entities where the shade vanished.
+  - **Next (1214gy):**
+    - On her game a `decoy_baffle` hit counts as hers and goes to the host as a PeerNative request (the declaration is
+      in the shared table and not replayable). The host's NPCs are then baffled natively.
+    - A lab-only fixture, `coop_shade_native kill`, kills the puppet on demand.
+- **Rat Shadow** (corrected):
+  - Discovery takes rat-shadow-local-v1734a and v1735a (Test-RatShadowLocal-v1734/v1735; confirmed runtime): Emily
+    alone, with the products disarmed, made a native Shadow Walk kill on guard 2 with `shadow_walk_rat_shadow` granted.
+  - The corpse stayed present and not hidden for 18 s, and the only new named entities were Shadow Walk's fake arms. No
+    rat appeared.
+  - External guides describe Rat Shadow as a traversal upgrade: in Shadow Walk, Emily moves through rat tunnels (Inverse
+    and GameSpew guides).
+  - So Rat Shadow has no NPC outcome to share. takedown-variants-v1656a's kept corpse is the native result, and #131's
+    Rat Shadow item is not applicable.
+- **Baffling Shade on the host** (1214gy, Test-PartnerShade-v1736-v1738; confirmed runtime):
+  - **partner-shade-v1738a** (pass):
+    - The puppet was killed and the kill reached her shade (`kill_applied`).
+    - Her game forwarded 8 `decoy_baffle` hits as PeerNative requests, and the host applied all 8 natively.
+  - **partner-shade-v1737a** (fail on the harness criterion only): a host guard killed the puppet before the fixture,
+    so the take showed the same chain (9 forwarded, 9 applied). Host guard 1 then stood still for 4.6 s before
+    turning on Emily (consistent with the native confusion).
+  - partner-shade-v1736a: harness flake (observer pitch). 1736c: her stand dropped to a lower floor and no shade was
+    cast. Harness v1737 falls back to a known stand. 1736b (Deadly Shade regression): pass, guard 1 dead in both
+    worlds.
+  - **Preliminary visual review** (1738a host film, 6 s): one shade figure in the doorway. The puppet and the
+    presentation overlap with no visible doubling. Visual acceptance is recorded separately.
+- **#131 status (lab):**
+  - Mesmerize: done.
+  - Doppelganger base shade: perceived and fought by the host's NPCs.
+  - Shade death: shared both ways.
+  - Deadly Shade: its kill is shared. There is no host puppet for the deadly shadow; Corvo sees it through the
+    presentation.
+  - Baffling Shade: its confusion is shared.
+  - Rat Shadow: not applicable (traversal).
+  - The release's two-account check follows with the next release.
 
 ## Possessed bodies (host world; consistent)
 

@@ -635,8 +635,13 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
         if(memoryRead(decl+8,&name,8))worldIdentityString(memoryRead,name,npcCombatLastDecl);
         unsigned inflictor=0,attacker=0;std::memcpy(&inflictor,capture.info.data()+0x50,4);std::memcpy(&attacker,capture.info.data()+0x54,4);
         const auto player=worldIdentityEntity(memoryRead,observedGame,1);
+        // 1214gy (#131): Baffling Shade's confusion is a native hit, decoy_baffle.damage, applied to the NPCs around her
+        // shade as it dies (partner-shade-v1731b: 9 hits on her copies, all suppressed as replica-world events; its source
+        // is no longer her live shade). On her game only her Baffling Shade makes it, so it counts as hers and goes to the
+        // host as a PeerNative request: the host's NPCs are baffled natively.
+        const bool partnerBaffle=localRole==1&&npcCombatLastDecl=="components/characters/player/base/damage/decoy_baffle.damage";
         const bool playerOwned=player&&((capture.attacker.valid&&capture.attacker.handle==attacker&&capture.attacker.localOwned)||
-            (capture.inflictor.valid&&capture.inflictor.handle==inflictor&&capture.inflictor.localOwned));
+            (capture.inflictor.valid&&capture.inflictor.handle==inflictor&&capture.inflictor.localOwned)||partnerBaffle);
         const char* refusal=nullptr;
         if(!npcCombatScope(GetTickCount64()))refusal="hit_scope";
         else if(!b.ready)refusal="hit_not_ready";
@@ -665,8 +670,14 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
                     npcCombat.outgoing.push_back(p);++npcCombat.requests;++npcCombat.linkedRequests;return true;}
             }
             NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
-            if(localRole&&playerOwned&&inflictor!=0x3fff0010u&&attacker!=0x3fff0010u&&validNpcPeerNative(native)){
-                empty();
+            // 1214gx (#131): a hit by Emily's own shade (the deadly shadow's kill_damage) was refused here as
+            // hit_damage_parameters (partner-shade-v1731a). Its amount is clamped to the PeerNative limit (the host applies its
+            // own declaration) and a world inflictor or attacker is allowed when the other one is her shade.
+            const bool shadeOwned=localRole&&(partnerBaffle||(capture.attacker.valid&&coopLocalShadeHandle(attacker))||(capture.inflictor.valid&&coopLocalShadeHandle(inflictor)));
+            if(shadeOwned){++shadeOwnedHit.count;shadeOwnedHit.amount=native.amount;shadeOwnedHit.attacker=attacker;shadeOwnedHit.inflictor=inflictor;shadeOwnedHit.result="refused";
+                if(!std::isfinite(native.amount)||native.amount>1000.f||native.amount<0.f)native.amount=1000.f;}
+            if(localRole&&playerOwned&&(shadeOwned||(inflictor!=0x3fff0010u&&attacker!=0x3fff0010u))&&validNpcPeerNative(native)){
+                empty();if(shadeOwned){++shadeOwnedHit.forwarded;shadeOwnedHit.result="forwarded";}
                 if(b.pendingRequests.count){++npcCombat.peerNativeBusy;return true;}
                 auto p=npcCombatPacket(*c,b,NpcCombatMessage::Request);p.sourceRole=1;p.request=++b.request;p.damage=NpcCombatDamage::PeerNative;p.ranged=native;
                 if(npcCombat.outgoing.size()>=64){stopNpcCombat("request_queue_full");return true;}

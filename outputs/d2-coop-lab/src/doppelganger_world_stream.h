@@ -45,7 +45,7 @@ void sendDoppelgangerWorldSlot(ULONGLONG tick,DoppelgangerWorldStream& s,const N
         const bool poseValid=readPose&&doppelgangerPoseStable&&pose.logic==1&&doppelgangerPoseOwner&&pose.localPose.size()==kDoppelgangerJoints&&doppelgangerPoseRigObserved==kDoppelgangerRig;
         doppelgangerPoseReadMaxMs=(std::max)(doppelgangerPoseReadMaxMs,presentationClock()-poseStart);
         if(!poseValid){++doppelgangerPoseReadFailed;return;}
-        p.nativeHandle=w.handle;p.equipmentHandle=w.equipment.handle;p.generation=w.generation;p.rig=kDoppelgangerRig;
+        p.nativeHandle=w.handle;p.equipmentHandle=w.equipment.handle;p.generation=w.generation;p.rig=kDoppelgangerRig;p.kind=w.kind;
         std::memcpy(p.transform.data(),pose.root,48);
         for(unsigned j=0;j<kDoppelgangerJoints;++j)for(unsigned c=0;c<4;++c)for(unsigned r=0;r<3;++r)p.local[j][c*3+r]=pose.localPose[j][c*4+r];
     }
