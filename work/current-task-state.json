@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-21T15:20:00+02:00",
+  "UpdatedAt": "2026-10-21T15:45:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22620,5 +22620,15 @@
       "campaign-titlejoin-vm-v1744a"
     ],
     "Status": "done: join-follow waits at the title screen until a key is pressed (frontEndTitlePassed from the main menu Home section +0x38); two-account take campaign-titlejoin-vm-v1744a passes; ships with the next release"
+  },
+  "Release084": {
+    "Card": "#162",
+    "Candidate": "candidate-npc-combat-v1214hm",
+    "Package": "outputs/release/d2coop-v0.8.4.zip (local), 37228744 bytes, SHA-256 323269EEC51A0A35700420836AF6B1969329FC26A3AFA3C4CC53F733BAC23C16",
+    "Builder": "work/release/build_release_v1754.py",
+    "SetupTool": "work/release/setup-tool-v1754/identity.json",
+    "InstallTest": "work/release/release-install-v1754b: pass 8/8 (v1754a: the same pass on a first build from 1214hl, whose version resources still said 0.8.3; superseded)",
+    "Fixes": "#140 the partner's assassinated story target stays and lies in both worlds (1214hb-hl); #146 a partner joining from the title screen waits for a key (1214ha)",
+    "Status": "built and install-tested; publishing"
   }
 }
