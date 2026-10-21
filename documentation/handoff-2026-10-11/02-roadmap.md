@@ -20,6 +20,25 @@ Stages overlap where dependencies demand it. A new animation must not independen
 
 Partners must be completely excluded from each other's direct interactions, including powers, damage, prompts and contextual actions. Normal native movement collision between partners is allowed, as explicitly clarified by the user. There are no partner-targeted cooperative abilities. Shared session recovery and progression remain required. The detailed acceptance matrix and findings are in [mutual partner exclusion](34-partner-interaction-exclusion.md).
 
+## Added scope: co-op menu and character roles (2026-10-21)
+
+The user added these to the goal's "done". They come after #140 and release 0.8.4, in this order:
+
+1. **Co-op menu and saves** (stage 7):
+   - a **Co-op** entry under Campaign in the native main menu;
+   - it opens the same save selection and creation screen, with co-op saves isolated from the campaign slots (#156).
+2. **Leave co-op** (stage 7): in a session, the pause menu's Quit game becomes Leave co-op and acts as F8 (#157).
+3. **Character choice** (stage 6): the host chooses Corvo or Emily once per co-op save, when creating it, because the
+   game ties story state to the save's protagonist. The partner chooses on every join (#158).
+4. **All four pairings** (stage 4):
+   - Corvo-Emily, Emily-Corvo, Corvo-Corvo and Emily-Emily (#159);
+   - Corvo's powers used by the partner act on the host's characters, as #131 did for Emily's (#160).
+5. **Validation** (stage 6, #161): the depth is chosen for stable results.
+   - The full campaign on two Steam accounts in at least one new pairing.
+   - A mission sample in each other pairing, per-character power checks on the partner side, and the menu and Leave
+     co-op in the same sessions.
+   - Then a release and the clean-PC proof.
+
 ## Movement families
 
 The catalog covers locomotion; stance changes, crouching and leaning; jumps, falls, landings, slides, mantles, vaults, ladders, water and other traversal; sword attacks/defense/reactions; ranged weapons and items; contextual interactions; paired takedowns and body handling; and both characters' powers. There are 11 locomotion, 10 stance, 19 traversal, 16 combat, 9 ranged/item, 13 interaction, 11 paired-action and 16 power requirements.
