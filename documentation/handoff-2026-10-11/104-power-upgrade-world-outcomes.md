@@ -189,6 +189,21 @@ The live candidate is 1214fp.
   - **Next (1214gs):** while puppets exist, the host player gets a phantom power block in that slot, as the Mesmerize
     phantom slot does. Its `+0xb8` is the live puppets' handle array, `+0xc0` their count and `+0xd4` the last one. It is
     kept 5 s after the last puppet.
+  - **partner-shade-v1727c** (1214gs; recorded as a pass, but its perception sign is weak; confirmed runtime):
+    - No crash. The puppet spawned at her shade, followed it and was removed natively when hers ended.
+    - Her shade runs: the native decoy fled 25 m in 7 s and was gone after about 7 s, while the puppet stood. The 1 m
+      pin teleported it 62 times. Each native teleport refreshes observable membership.
+    - Neither shade's health fell (1 of 1). Host guard 1 left its post and walked to where the shade had passed (an
+      investigation, hypothesis), and came within 3 m of the puppet in one sample.
+  - **partner-shade-v1727d** (control, puppet off): no puppet in any sample. Guard 1 kept its patrol and never went
+    toward the shade's path. The harness failed it on the cumulative spawn counter (1 from 1727c), so it is recorded as
+    a fail and read as a valid control.
+  - **Next (1214gt, Test-PartnerShade-v1728):**
+    - The puppet follows her shade every frame, inside the partner avatar's continuous-transform scope (the observable
+      refresh keeps its membership). Jumps over 3 m are teleports.
+    - The shade is cast 4 m in front of guard 1.
+    - Both guards' native attention (`--ai-targets`) is sampled, and the pass needs the puppet there.
+    - The counters are taken as deltas.
 
 ## Possessed bodies (host world; consistent)
 

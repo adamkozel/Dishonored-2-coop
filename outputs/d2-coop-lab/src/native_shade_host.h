@@ -28,6 +28,33 @@ bool shadeHostApis(){
         !std::memcmp(gameImage+0x882fc0,post,12)&&!std::memcmp(gameImage+0x810240,ai,12)&&!std::memcmp(gameImage+0x8112c0,stimulus,12)&&
         !std::memcmp(gameImage+0x87d200,place,12);
 }
+// 1214gs: a player component update (FUN_1403a9f90, its owner cast to the player by FUN_1408f2e90) lists the player's
+// clones through the player's Doppelganger power: *(player+0x398), its handle array +0xb8 and count +0xc0 (the same
+// fields FUN_14043c950 keeps), with no null check (confirmed static). Corvo has no Doppelganger, so the host crashed there
+// right after its puppet appeared (partner-shade-v1727a: c0000005 at 3a9fd8 reading 0xb8). While host puppets exist
+// the host player gets a phantom power block (zeroed; +0xb8 its own handle array of the live puppets, +0xc0 their
+// count, +0xd4 the last one) in that slot when it is null, as the Mesmerize phantom slot does (1214gm); it is set before
+// a spawn and cleared when no puppet remains, on a world change, or if the slot is no longer ours.
+std::uintptr_t shadeHostPhantom=0,shadeHostPhantomPlayer=0;bool shadeHostPhantomSet=false,shadeHostSlotWasSet=false;
+std::uint64_t shadeHostPhantomOns=0,shadeHostPhantomOffs=0;ULONGLONG shadeHostLastPuppetAt=0;
+bool shadeHostPhantomOn(){
+    const auto player=mesmerizeHostLocalPlayer();std::uintptr_t slot=0;if(!player||!memoryRead(player+0x398,&slot,8))return false;
+    if(slot&&slot!=shadeHostPhantom){shadeHostSlotWasSet=true;return false;} // a real power: never replaced
+    if(!shadeHostPhantom){shadeHostPhantom=reinterpret_cast<std::uintptr_t>(VirtualAlloc(nullptr,0x1000,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));if(!shadeHostPhantom)return false;
+        *reinterpret_cast<std::uintptr_t*>(shadeHostPhantom+0xb8)=shadeHostPhantom+0x800;*reinterpret_cast<unsigned*>(shadeHostPhantom+0xd4)=0x3fff0010;}
+    if(!slot){*reinterpret_cast<std::uintptr_t*>(player+0x398)=shadeHostPhantom;++shadeHostPhantomOns;}
+    shadeHostPhantomPlayer=player;shadeHostPhantomSet=true;return true;}
+void shadeHostPhantomOff(){
+    if(!shadeHostPhantomSet)return;std::uintptr_t slot=0;
+    if(shadeHostPhantomPlayer&&shadeHostPhantomPlayer==mesmerizeHostLocalPlayer()&&memoryRead(shadeHostPhantomPlayer+0x398,&slot,8)&&slot==shadeHostPhantom)
+        *reinterpret_cast<std::uintptr_t*>(shadeHostPhantomPlayer+0x398)=0;
+    shadeHostPhantomSet=false;shadeHostPhantomPlayer=0;++shadeHostPhantomOffs;}
+// The phantom's clone list: the live puppets' handles (the extra handle is a puppet about to be counted).
+void shadeHostPhantomList(unsigned extra=0){
+    if(!shadeHostPhantom)return;unsigned n=0,last=0x3fff0010;auto* list=reinterpret_cast<unsigned*>(shadeHostPhantom+0x800);
+    for(const auto& p:shadeHostPuppets)if(p.actor&&p.handle&&n<8){list[n++]=p.handle;last=p.handle;}
+    if(extra&&n<8){list[n++]=extra;last=extra;}
+    *reinterpret_cast<unsigned*>(shadeHostPhantom+0xc0)=n;*reinterpret_cast<unsigned*>(shadeHostPhantom+0xd4)=last;}
 bool shadeHostAlive(const ShadeHostPuppet& p){return p.actor&&p.handle&&p.game==observedGame&&p.epoch==outgoing.worldEpoch&&mesmerizeHostResolve(p.handle)==p.actor;}
 void shadeHostRemove(ShadeHostPuppet& p,const char* why){
     if(shadeHostAlive(p)){
@@ -38,11 +65,12 @@ void shadeHostRemove(ShadeHostPuppet& p,const char* why){
 }
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){
     const auto definition=lookupEntityDefinition(kShadeHostDefinition);if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
+    if(!shadeHostPhantomOn()){shadeHostResult=shadeHostSlotWasSet?"player_has_doppelganger":"phantom_refused";++shadeHostRefused;return false;}
     void* actor=reinterpret_cast<void*(*)(std::uintptr_t,std::uintptr_t,const float*,const float*,std::uintptr_t,char,std::uintptr_t,std::uintptr_t,std::uintptr_t)>(gameImage+0x8ae9b0)(
         observedGame,definition,q.transform.data(),q.transform.data()+3,0,0,0,0,0);
     if(!actor){shadeHostResult="native_creation_refused";++shadeHostRefused;return false;}
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;p.actor=reinterpret_cast<std::uintptr_t>(actor);p.game=observedGame;p.epoch=outgoing.worldEpoch;p.event=q.event;p.source=q.nativeHandle;
-    p.createdAt=p.seen=tick;memoryRead(p.actor+0xa8,&p.handle,4);std::memcpy(p.at,q.transform.data(),12);++shadeHostSpawned;
+    p.createdAt=p.seen=tick;memoryRead(p.actor+0xa8,&p.handle,4);std::memcpy(p.at,q.transform.data(),12);++shadeHostSpawned;shadeHostPhantomList();
     const auto ai=reinterpret_cast<std::uintptr_t(*)()>(gameImage+0x810240)();
     if(ai&&p.handle){auto* s=reinterpret_cast<unsigned*(*)(std::uintptr_t,unsigned,unsigned,unsigned)>(gameImage+0x8112c0)(ai+0xc8e8,0x73,0x10,p.handle);
         if(s){s[0]=5;std::memcpy(s+1,q.transform.data(),12);++shadeHostStimuli;}}
@@ -50,7 +78,7 @@ bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULON
 }
 void serviceShadeHost(ULONGLONG tick){
     if(GetCurrentThreadId()!=engineThread.load()||!nativeMutationAllowed)return;
-    for(auto& p:shadeHostPuppets)if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};shadeHostResult="world_retired";}
+    for(auto& p:shadeHostPuppets)if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};shadeHostResult="world_retired";shadeHostPhantomSet=false;shadeHostPhantomPlayer=0;}
     if(!shadeHostApis())return;
     const bool streaming=localRole==0&&doppelgangerWorldCurrent(tick)&&movementBankActive()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote);
     const bool scope=streaming&&(shadeHostFollowEnabled||productMode)&&
@@ -67,6 +95,9 @@ void serviceShadeHost(ULONGLONG tick){
         float d=0;for(unsigned i=0;i<3;++i){const float x=at[i]-q.transform[i];d+=x*x;}p.drift=std::sqrt(d);
         if(p.drift>1.f){reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(p.actor),q.transform.data(),q.transform.data()+3,true,0);++p.pins;++shadeHostPins;}
     }
+    bool any=false;for(const auto& p:shadeHostPuppets)any=any||p.actor;
+    // The phantom stays 5 s after the last puppet (a late native clone event must not meet a null slot).
+    if(any){shadeHostPhantomList();shadeHostLastPuppetAt=tick;}else if(shadeHostPhantomSet){shadeHostPhantomList();if(tick-shadeHostLastPuppetAt>5000)shadeHostPhantomOff();}
 }
 void writeShadeHost(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.shade-host.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
@@ -76,6 +107,6 @@ void writeShadeHost(){
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];const auto& q=doppelgangerWorldStreams[k].presented;
         fprintf(f,"%s{\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
-    fputs("]}\n",f);
+    fprintf(f,"],\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
