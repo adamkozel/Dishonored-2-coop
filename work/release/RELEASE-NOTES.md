@@ -1,8 +1,17 @@
-# Dishonored 2 Corvo/Emily co-op 0.8.2
+# Dishonored 2 Corvo/Emily co-op 0.8.3
 
 Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## New in 0.8.3
+
+Emily's powers now act on the host's characters as they do in single player ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):
+
+- **Mesmerize:** the characters it takes walk to her spirit and stand entranced, in both games.
+- **Doppelganger:** the host's guards see her shade and fight it. When they kill it, it dies in her game too.
+- **Deadly Shade:** the shade's kills happen in both games.
+- **Baffling Shade:** the confusion when the shade dies affects the host's guards.
 
 ## Fixed in 0.8.2
 
@@ -39,7 +48,7 @@ Two friends play the Dishonored 2 campaign together. The host plays Corvo, the p
 ## Install (both players)
 
 1. Close Dishonored 2.
-2. Download `d2coop-v0.8.2.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.8.3.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -97,9 +106,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
-- Emily's **Mesmerize**, **Doppelganger shades** (Deadly Shade, Baffling Shade) and **Rat Shadow** show their effects, but do not change the NPCs ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):
-  - no NPC is mesmerized or drawn to her shade;
-  - a Rat Shadow kill leaves the body instead of rats.
+- With **Deadly Shade**, the host's guards do not fight Emily's deadly shadow itself, although its kills happen in both games ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)).
 - The partner's movement banks are rebuilt from your game's animations. On a different CPU the values can differ from ours in their last digits, which is invisible.
 - Some partner movement clips are retargeted from Adobe Mixamo motion.
 - The game uses a little more memory over long sessions, with or without the mod. Restart the game after several hours.
