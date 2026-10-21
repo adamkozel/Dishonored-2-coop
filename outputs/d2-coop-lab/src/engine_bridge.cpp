@@ -820,6 +820,7 @@ bool movementShadowWalkFixtureBusy();
 #include "possession_fx_stream.h"
 #include "swarm_world_stream.h"
 #include "doppelganger_world_stream.h"
+#include "shade_kill_protocol.h"
 #include "swarm_spawn_fx_stream.h"
 #include "swarm_trail_presentation.h"
 #include "domino_mark_presentation.h"
@@ -899,6 +900,11 @@ void exchangePoses(ULONGLONG tick) {
         if(magic==0x53463244){
             if(messages[i]->m_cbSize==sizeof(CoopSwarmSpawnFxPacket)){CoopSwarmSpawnFxPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveSwarmSpawnFx(p,tick);}
             else ++swarmSpawnFxRejected;
+            messages[i]->Release();continue;
+        }
+        if(magic==0x4b533244){
+            if(messages[i]->m_cbSize==sizeof(CoopShadeKillPacket)){CoopShadeKillPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveShadeKill(p);}
+            else ++shadeKillsRefused;
             messages[i]->Release();continue;
         }
         if(magic==0x43443244){

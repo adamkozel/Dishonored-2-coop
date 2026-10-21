@@ -238,6 +238,22 @@ The live candidate is 1214fp.
   - The base-shade regression take was skipped (host down).
   - **Next (1214gv):** no host puppet for the deadly shadow; Corvo sees it through the presentation. Her deadly
     shadow's hits are to be forwarded.
+- **The shade death and the deadly shadow** (1214gv, Test-PartnerShade-v1730; both pass, confirmed runtime):
+  - 1214gv:
+    - The host records hits on a puppet's health component (read-only, in the native damage observer).
+    - When the puppet's health reaches 0, or it is lost within 2 s of a hit, the host sends the kill
+      (`CoopShadeKillPacket`).
+    - Her game applies the same native hit to her own clone, so its native death outcome runs.
+    - There is no puppet for the deadly shadow.
+  - **partner-shade-v1730a** (Baffling Shade): the host guards hit the puppet twice, but its health stayed 1, so no
+    kill was sent; the death sync is still to be shown. The puppet was perceived and removed with her shade.
+  - **partner-shade-v1730b** (Deadly Shade):
+    - Her deadly shadow was streamed (kind 2) for the whole take, so Corvo sees it through the presentation.
+    - No host puppet and no crash.
+    - In her world it engaged the guard in 59 of 67 samples, but the guard's health stayed 40 in both worlds. Her hit
+      (`kill_damage`) is suppressed as a replica-world event.
+  - **Next (1214gw):** on her game, a hit whose source (or a parent of it) is her current shade counts as hers, so the
+    deadly shadow's `kill_damage` goes to the host as a PeerNative request.
 - **Shades, still to do:**
   1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
      same definition as hers. A deadly shadow on the host fights the host's NPCs natively.

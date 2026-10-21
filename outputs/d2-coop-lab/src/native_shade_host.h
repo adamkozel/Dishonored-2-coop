@@ -64,6 +64,49 @@ void shadeHostPhantomList(unsigned extra=0){
     for(const auto& p:shadeHostPuppets)if(p.actor&&p.handle&&n<8){list[n++]=p.handle;last=p.handle;}
     if(extra&&n<8){list[n++]=extra;last=extra;}
     *reinterpret_cast<unsigned*>(shadeHostPhantom+0xc0)=n;*reinterpret_cast<unsigned*>(shadeHostPhantom+0xd4)=last;}
+// 1214gv (#131): the shade's death is shared. A host NPC killed the puppet while her shade lived on in her world
+// (partner-shade-v1729b, Baffling Shade). The host records the hits on a puppet's health component (read-only, in the
+// native damage observer: declaration, attacker, inflictor, amount) and, when the puppet's health reaches 0 (or it is
+// lost natively within 2 s of a hit), sends the kill to the partner (CoopShadeKillPacket, reliable). Emily's game applies
+// the same native hit to her own clone (the declaration when it is a known NPC damage, else npc_sword; her current
+// health as the amount; the same attacker and inflictor handles, NPC handles being equal in both worlds), so its native
+// death outcome runs in her world. Only her current shade (the event and clone handle she sent) is ever hit.
+struct ShadeHostHit {std::uint64_t declaration=0;unsigned attacker=0,inflictor=0;float amount=0;ULONGLONG tick=0;bool valid=false;};
+std::array<ShadeHostHit,kDoppelgangerWireSlots> shadeHostHits{};std::array<bool,kDoppelgangerWireSlots> shadeHostKillSent{};
+void noteShadeHostHit(void* component,void* info){
+    if(localRole||!component||!info)return;std::uintptr_t owner=0;const auto c=reinterpret_cast<std::uintptr_t>(component),i=reinterpret_cast<std::uintptr_t>(info);
+    if(!memoryRead(c+0x10,&owner,8)||!owner)return;
+    for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];if(!p.actor||owner!=p.actor)continue;
+        ShadeHostHit h{};std::uintptr_t decl=0,name=0;std::string text;
+        if(memoryRead(i,&decl,8)&&decl&&memoryRead(decl+8,&name,8))worldIdentityString(memoryRead,name,text);
+        h.declaration=text.empty()?0:npcDamageKey(text);memoryRead(i+0x50,&h.inflictor,4);memoryRead(i+0x54,&h.attacker,4);memoryRead(i+8,&h.amount,4);
+        h.tick=GetTickCount64();h.valid=true;shadeHostHits[k]=h;++shadeHostHitCount;}
+}
+void sendShadeKill(unsigned k,const ShadeHostPuppet& p){
+    if(shadeHostKillSent[k]||!sockets||!connection)return;const auto& h=shadeHostHits[k];
+    CoopShadeKillPacket q{};q.size=sizeof(q);q.sequence=++shadeKillSequence;q.sourceSession=outgoing.session;q.targetSession=remote.session;
+    q.sourceWorldEpoch=outgoing.worldEpoch;q.targetWorldEpoch=remote.worldEpoch;q.mapId=outgoing.mapId;q.event=p.event;q.slot=k;q.clone=p.source;
+    q.declaration=h.valid&&npcDamageDeclarationName(h.declaration)?h.declaration:npcDamageKey("components/equipment/damage/npc_sword.damage");
+    q.attacker=h.valid?h.attacker:0x3fff0010u;q.inflictor=h.valid?h.inflictor:0x3fff0010u;q.amount=h.valid?h.amount:0;
+    if(coopSendMessage(connection,&q,sizeof(q),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){shadeHostKillSent[k]=true;++shadeKillsSent;shadeKillResult="kill_sent";}
+}
+void serviceShadeKill(){
+    if(localRole!=1||!shadeKillPendingValid||GetCurrentThreadId()!=engineThread.load()||!nativeMutationAllowed)return;
+    const auto q=shadeKillPending;shadeKillPendingValid=false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    const auto refuse=[](const char* why){shadeKillResult=why;++shadeKillsRefused;};
+    const auto& s=doppelgangerWorldStreams[q.slot];
+    if(s.sent.event!=q.event||s.sent.nativeHandle!=q.clone||!s.sent.present){refuse("kill_stale");return;}
+    NativeHealth h{};if(!readNativeHealth(memoryRead,base,q.clone,h)||h.current<=0){refuse("kill_no_health");return;}
+    const char* name=npcDamageDeclarationName(q.declaration);if(!name||!realNativeDamage){refuse("kill_declaration");return;}
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,name,false,false);
+    std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138){refuse("kill_declaration_lookup");return;}
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+    const float amount=(std::max)(h.current,q.amount);std::memcpy(params.data()+8,&amount,4);
+    std::memcpy(params.data()+0x50,&q.inflictor,4);std::memcpy(params.data()+0x54,&q.attacker,4);
+    realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());++shadeKillsApplied;shadeKillResult="kill_applied";
+}
 bool shadeHostAlive(const ShadeHostPuppet& p){return p.actor&&p.handle&&p.game==observedGame&&p.epoch==outgoing.worldEpoch&&mesmerizeHostResolve(p.handle)==p.actor;}
 void shadeHostRemove(ShadeHostPuppet& p,const char* why){
     if(shadeHostAlive(p)){
@@ -80,6 +123,7 @@ bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULON
     if(!actor){shadeHostResult="native_creation_refused";++shadeHostRefused;return false;}
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;p.actor=reinterpret_cast<std::uintptr_t>(actor);p.game=observedGame;p.epoch=outgoing.worldEpoch;p.event=q.event;p.source=q.nativeHandle;p.kind=q.kind==2?2u:1u;
     p.createdAt=p.seen=tick;memoryRead(p.actor+0xa8,&p.handle,4);std::memcpy(p.at,q.transform.data(),12);++shadeHostSpawned;shadeHostPhantomList();
+    {const auto k=static_cast<unsigned>(&p-shadeHostPuppets.data());if(k<kDoppelgangerWireSlots){shadeHostHits[k]={};shadeHostKillSent[k]=false;}}
     const auto ai=reinterpret_cast<std::uintptr_t(*)()>(gameImage+0x810240)();
     if(ai&&p.handle){auto* s=reinterpret_cast<unsigned*(*)(std::uintptr_t,unsigned,unsigned,unsigned)>(gameImage+0x8112c0)(ai+0xc8e8,0x73,0x10,p.handle);
         if(s){s[0]=5;std::memcpy(s+1,q.transform.data(),12);++shadeHostStimuli;}}
@@ -87,6 +131,7 @@ bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULON
 }
 void serviceShadeHost(ULONGLONG tick){
     if(GetCurrentThreadId()!=engineThread.load()||!nativeMutationAllowed)return;
+    serviceShadeKill();
     for(auto& p:shadeHostPuppets)if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};shadeHostResult="world_retired";shadeHostPhantomSet=false;shadeHostPhantomPlayer=0;}
     if(!shadeHostApis())return;
     const bool streaming=localRole==0&&doppelgangerWorldCurrent(tick)&&movementBankActive()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote);
@@ -94,8 +139,13 @@ void serviceShadeHost(ULONGLONG tick){
         (productSessionArmed()||(observerIsolation.ready&&observerIsolation.movementFixture&&!std::strcmp(mapName,kGuardMap)));
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){
         auto& p=shadeHostPuppets[k];const auto& s=doppelgangerWorldStreams[k];const auto& q=s.presented;
-        const bool hers=scope&&s.lease>tick&&q.present&&q.event&&validDoppelgangerTransform(q.transform);
-        if(p.actor&&!shadeHostAlive(p)){p.lostEvent=p.event;const auto lost=p.lostEvent;p={};p.lostEvent=lost;++shadeHostLost;shadeHostResult="puppet_lost";}
+        // 1214gv: no puppet for the Deadly Shade's deadly shadow (1214gu crashed the host in its AI, partner-shade-v1729c,
+        // 4a404e: FUN_1404a3f90 reads a component the free-standing spawn lacks; natively OnCloneSpawned spawns it parented
+        // to a target NPC with that NPC's clone definition). Corvo still sees it through the presentation; its hits are next.
+        const bool hers=scope&&s.lease>tick&&q.present&&q.event&&q.kind!=2&&validDoppelgangerTransform(q.transform);
+        if(p.actor&&shadeHostAlive(p)){NativeHealth h{};if(readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),p.handle,h)&&h.current<=0)sendShadeKill(k,p);}
+        if(p.actor&&!shadeHostAlive(p)){if(shadeHostHits[k].valid&&tick-shadeHostHits[k].tick<2000)sendShadeKill(k,p);
+            p.lostEvent=p.event;const auto lost=p.lostEvent;p={};p.lostEvent=lost;++shadeHostLost;shadeHostResult="puppet_lost";}
         if(p.actor&&hers&&q.event==p.event)p.seen=tick;
         if(p.actor&&((hers&&q.event!=p.event)||tick-p.seen>1000)){shadeHostRemove(p,"removed");}
         if(!hers||q.event==p.lostEvent)continue;
@@ -120,6 +170,7 @@ void writeShadeHost(){
         fprintf(f,"%s{\"kind\":%u,\"partnerKind\":%u,\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.kind,q.kind,p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
     fprintf(f,"],\"continuous\":%llu,\"teleports\":%llu",shadeHostContinuous,shadeHostTeleports);
+    fprintf(f,",\"hits\":%llu,\"killsSent\":%llu,\"killsReceived\":%llu,\"killsApplied\":%llu,\"killsRefused\":%llu,\"killResult\":\"%s\"",shadeHostHitCount,shadeKillsSent,shadeKillsReceived,shadeKillsApplied,shadeKillsRefused,shadeKillResult);
     fprintf(f,",\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
