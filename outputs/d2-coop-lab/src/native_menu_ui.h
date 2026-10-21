@@ -26,7 +26,7 @@ using IggyValueRefFromPath=void*(*)(IggyPath28*,int);
 using IggyValueRefFree=void(*)(void*,void*);
 using IggyCallMethod=int(*)(void*,IggyData20*,IggyPath28*,std::uint64_t,std::int32_t,IggyData20*);
 struct CoopMenuState {
-    const char* result="idle";std::uint64_t attempts=0,inserts=0,failures=0,coopSelected=0,campaignSelected=0;
+    const char* result="idle";std::uint64_t attempts=0,inserts=0,failures=0,coopSelected=0,campaignSelected=0,sessionRequests=0;
     int lastCode=0,entries=0;std::uintptr_t file=0;ULONGLONG lastTry=0;char failedStep[32]{};
 };
 CoopMenuState coopMenu{};bool coopMenuEnabled=true;std::atomic<bool> coopModeSelected{false};
@@ -168,7 +168,10 @@ void serviceCoopSaves(ULONGLONG tick){
     if(!coopSavesEnabled)return;auto& s=coopSaves;const bool want=coopModeSelected.load();
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);auto** root=reinterpret_cast<const char**>(base+0x2286f40);
     if(!s.original){const char* current=nullptr;if(!memoryRead(base+0x2286f40,&current,8)||!current){s.result="no_root";return;}s.original=current;}
-    if(s.phase==0){if(want==s.active)return;if(!sampledMainMenuState){s.result="waiting_main_menu";return;}s.target=want;s.phase=1;s.startedAt=tick;}
+    // 1214hs: on the main menu, or in plain gameplay (a partner who joins, or a host who presses F7, mid-mission); never
+    // while loading or in another phase.
+    if(s.phase==0){if(want==s.active)return;const bool gameplay=outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;
+        if(!sampledMainMenuState&&!gameplay){s.result="waiting_menu_or_gameplay";return;}s.target=want;s.phase=1;s.startedAt=tick;}
     CoopProfileHandles h{};if(!coopProfileHandles(base,h)){s.result="no_profile";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_timeout";}return;}
     std::int32_t enabled=0;memoryRead(base+0x3132e88,&enabled,4);
     if(s.phase==1){if(!enabled||!coopProfileIdle(h)){s.result="save_busy";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="busy_timeout";}return;}
@@ -198,6 +201,8 @@ void serviceCoopSaves(ULONGLONG tick){
                     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x4fb3b0)(reinterpret_cast<void*>(section),reinterpret_cast<void*>(file));++s.rebuilds;break;}}}
         s.active=s.target;++s.switches;s.phase=0;s.result=s.active?"coop":"campaign";}
 }
+bool coopSavesReadyForSession(){return !coopSavesEnabled||(coopSaves.active&&!coopSaves.phase);}
+void requestCoopSaves(){if(coopSavesEnabled&&!coopModeSelected.load()){coopModeSelected=true;++coopMenu.sessionRequests;}}
 void writeCoopMenu(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.coop-menu.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
@@ -213,9 +218,10 @@ void writeCoopMenu(){
         for(int k=0;k<31&&r.name[k];++k)name[k]=(r.name[k]=='"'||r.name[k]=='\\'||r.name[k]<32)?'_':r.name[k];
         for(int k=0;k<31&&r.arg[k];++k)arg[k]=(r.arg[k]=='"'||r.arg[k]=='\\'||r.arg[k]<32)?'_':r.arg[k];
         fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\",\"rawLength\":%llu}",first?"":",",name,r.argc,r.type,arg,static_cast<unsigned long long>(r.rawLength));first=false;}}
-    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu}",coopSaves.result,
+    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu,\"sessionRequests\":%llu}",coopSaves.result,
         coopSaves.active?"true":"false",coopSaves.phase,static_cast<unsigned long long>(coopSaves.switches),static_cast<unsigned long long>(coopSaves.failures),
-        static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds));
+        static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds),
+        static_cast<unsigned long long>(coopMenu.sessionRequests));
     fputs("}\n",f);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
