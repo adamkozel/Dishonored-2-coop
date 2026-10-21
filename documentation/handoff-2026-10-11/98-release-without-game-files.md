@@ -169,3 +169,9 @@ What changed since 0.8.1:
 | [release-install-v1712a](../../work/release/release-install-v1712a/result.json) | **Pass, 8/8,** on scratch copies of the original install: <ul><li>install in 51 s, with a 1.3 GB setup peak;</li><li>the built banks load and the tables parse;</li><li>a reinstall is refused, and rollback is byte-identical;</li><li>a wrong executable and a modified `master.index` are refused unchanged;</li><li>the Steam install is untouched.</li></ul> |
 
 The whole campaign passes on two Steam accounts on this binary: [chapter 97](97-campaign-map-sequence.md), campaign-*-vm-v1713.
+
+| Take | Result |
+|---|---|
+| [product-two-account-v1709a](../../work/release/product-two-account-v1709a/result.json) | **Pass (confirmed runtime), the clean-PC proof for 0.8.2:** <ul><li>The VM downloaded the published [v0.8.2 release](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.2) itself (2.0 s; SHA-256 matches the zip).</li><li>`Install.cmd` alone built every file in 78 s, with Defender on and no detection.</li><li>The host started a fresh campaign as Corvo, as a real host does (Test-ProductTwoAccount-v1709).</li><li>The VM pressed a key at its title screen, joined the friends-only lobby through Steam on the second account, and followed the host into *A Long Day in Dunwall*. Both partner banks were active.</li><li>Each side saw the other walk (8.0 m and 8.1 m).</li><li>The bedroom trigger advanced both worlds equally (241,4,3,0 to 240,4,3,1).</li><li>On the first map, the host fell: both games showed GameOver and both restarted together (#148 in product mode).</li><li>F8 left the session (`left_by_player`), and `Uninstall.cmd` restored the originals.</li></ul> |
+
+Published as [v0.8.2](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.2) (Latest) from `main` (squash merge 97b8d317a of #147).

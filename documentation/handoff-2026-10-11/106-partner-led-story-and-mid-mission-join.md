@@ -310,6 +310,14 @@ Harnesses: [Route-Mission-v1665](../../work/natural-moveset/Route-Mission-v1665.
   - In the Void the joined partner's `Mission_DW` stayed 0 while the host's completed (3).
   - The gameflow mirror leaves mission nodes to each world's own script, because setting one natively would drive the mission flow. Non-blocking, like #94.
 
+**[campaign-join-vm-v1714b](../../work/natural-moveset/campaign-join-vm-v1714b/result.json) (pass, 1214gf, release 0.8.2, Route-MissionVM-v1714):** the same join, leave and rejoin. The harness now requires the placement after the rejoin.
+- **Join:** placed 2.38 m from Corvo, with gameflow equal.
+- **Rejoin:** she reconnected in 4.1 s and converged to the host's gameflow (236,1,3,7).
+  - **The placement ran again on the new connection** (`warps` 2, from 36.03 m) and put her **1.34 m** from Corvo.
+  - Both sides rearmed, with banks active.
+- **End:** both reached the Void with gameflow equal.
+- campaign-join-vm-v1714a did not start, because the previous clean-PC take left the lab host paused (logic 2).
+
 ## The partner's kill of a key target (#140, candidates 1214ga-1214ge)
 
 | Take | Candidate | Finding (confirmed runtime) |
