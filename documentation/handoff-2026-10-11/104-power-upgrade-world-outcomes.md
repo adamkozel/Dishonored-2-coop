@@ -295,11 +295,27 @@ The live candidate is 1214fp.
     and GameSpew guides).
   - So Rat Shadow has no NPC outcome to share. takedown-variants-v1656a's kept corpse is the native result, and #131's
     Rat Shadow item is not applicable.
-- **Shades, still to do:**
-  1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
-     same definition as hers. A deadly shadow on the host fights the host's NPCs natively.
-  2. A host kill of the puppet kills her shade natively, so its death outcome runs in her world.
-  3. Her shade's hits on replicas reach the host.
+- **Baffling Shade on the host** (1214gy, Test-PartnerShade-v1736-v1738; confirmed runtime):
+  - **partner-shade-v1738a** (pass):
+    - The puppet was killed and the kill reached her shade (`kill_applied`).
+    - Her game forwarded 8 `decoy_baffle` hits as PeerNative requests, and the host applied all 8 natively.
+  - **partner-shade-v1737a** (fail on the harness criterion only): a host guard killed the puppet before the fixture,
+    so the take showed the same chain (9 forwarded, 9 applied). Host guard 1 then stood still for 4.6 s before
+    turning on Emily (consistent with the native confusion).
+  - partner-shade-v1736a: harness flake (observer pitch). 1736c: her stand dropped to a lower floor and no shade was
+    cast. Harness v1737 falls back to a known stand. 1736b (Deadly Shade regression): pass, guard 1 dead in both
+    worlds.
+  - **Preliminary visual review** (1738a host film, 6 s): one shade figure in the doorway. The puppet and the
+    presentation overlap with no visible doubling. Visual acceptance is recorded separately.
+- **#131 status (lab):**
+  - Mesmerize: done.
+  - Doppelganger base shade: perceived and fought by the host's NPCs.
+  - Shade death: shared both ways.
+  - Deadly Shade: its kill is shared. There is no host puppet for the deadly shadow; Corvo sees it through the
+    presentation.
+  - Baffling Shade: its confusion is shared.
+  - Rat Shadow: not applicable (traversal).
+  - The release's two-account check follows with the next release.
 
 ## Possessed bodies (host world; consistent)
 

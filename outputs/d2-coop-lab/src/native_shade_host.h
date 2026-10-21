@@ -134,11 +134,30 @@ bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULON
         if(s){s[0]=5;std::memcpy(s+1,q.transform.data(),12);++shadeHostStimuli;}}
     shadeHostResult="spawned";return true;
 }
+// 1214gy: a lab-only fixture kill of the host puppet (coop_shade_native kill): a native npc_sword hit as large as its
+// health, so the kill path (the kill message, her shade's native death and Baffling Shade's confusion) runs on demand.
+// A host guard's own kill of the puppet is proven (partner-shade-v1731b) but not repeatable.
+bool shadeHostLabKillRequest=false;std::uint64_t shadeHostLabKills=0;
+void serviceShadeHostLabKill(){
+    if(!shadeHostLabKillRequest)return;shadeHostLabKillRequest=false;
+    if(productMode||localRole||!realNativeDamage){shadeHostResult="lab_kill_refused";return;}
+    for(auto& p:shadeHostPuppets){if(!shadeHostAlive(p))continue;NativeHealth h{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+        if(!readNativeHealth(memoryRead,base,p.handle,h)||h.current<=0)continue;
+        const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,"components/equipment/damage/npc_sword.damage",false,false);
+        std::uintptr_t vt=0;if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138){shadeHostResult="lab_kill_declaration";return;}
+        alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+        reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+        reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+        const float amount=h.current;const unsigned world=0x3fff0010u;std::memcpy(params.data()+8,&amount,4);std::memcpy(params.data()+0x50,&world,4);std::memcpy(params.data()+0x54,&world,4);
+        realNativeDamage(reinterpret_cast<void*>(h.component),params.data(),result.data());++shadeHostLabKills;shadeHostResult="lab_killed";return;}
+    shadeHostResult="lab_kill_no_puppet";
+}
 void serviceShadeHost(ULONGLONG tick){
     if(GetCurrentThreadId()!=engineThread.load()||!nativeMutationAllowed)return;
     serviceShadeKill();
     for(auto& p:shadeHostPuppets)if(p.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};shadeHostResult="world_retired";shadeHostPhantomSet=false;shadeHostPhantomPlayer=0;}
     if(!shadeHostApis())return;
+    serviceShadeHostLabKill();
     const bool streaming=localRole==0&&doppelgangerWorldCurrent(tick)&&movementBankActive()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote);
     const bool scope=streaming&&(shadeHostFollowEnabled||productMode)&&
         (productSessionArmed()||(observerIsolation.ready&&observerIsolation.movementFixture&&!std::strcmp(mapName,kGuardMap)));
@@ -177,6 +196,7 @@ void writeShadeHost(){
     fprintf(f,"],\"continuous\":%llu,\"teleports\":%llu",shadeHostContinuous,shadeHostTeleports);
     fprintf(f,",\"shadeOwnedHits\":%llu,\"shadeOwnedForwarded\":%llu,\"shadeOwnedAmount\":%.3f,\"shadeOwnedAttacker\":%u,\"shadeOwnedInflictor\":%u,\"shadeOwnedResult\":\"%s\"",
         shadeOwnedHit.count,shadeOwnedHit.forwarded,shadeOwnedHit.amount,shadeOwnedHit.attacker,shadeOwnedHit.inflictor,shadeOwnedHit.result);
+    fprintf(f,",\"labKills\":%llu",shadeHostLabKills);
     fprintf(f,",\"hits\":%llu,\"killsSent\":%llu,\"killsReceived\":%llu,\"killsApplied\":%llu,\"killsRefused\":%llu,\"killResult\":\"%s\"",shadeHostHitCount,shadeKillsSent,shadeKillsReceived,shadeKillsApplied,shadeKillsRefused,shadeKillResult);
     fprintf(f,",\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
