@@ -93,6 +93,10 @@ void writeMesmerizeHost(){
     if(h.actor){std::uintptr_t list=0;unsigned flags=0;if(memoryRead(h.actor+0x268,&list,8)&&list&&memoryRead(h.actor+0x270,&flags,4)){componentCount=flags&0xffffff;
         for(unsigned i=0;i<componentCount&&i<12;++i){std::uintptr_t c=0,vt=0;if(memoryRead(list+i*8,&c,8)&&c&&memoryRead(c,&vt,8))vtables[i]=vt-reinterpret_cast<std::uintptr_t>(gameImage);}}}
     fprintf(f,"{\"components\":%u,\"componentVtables\":[",componentCount);for(unsigned i=0;i<componentCount&&i<12;++i)fprintf(f,"%s\"0x%llx\"",i?",":"",static_cast<unsigned long long>(vtables[i]));
+    fprintf(f,"],\"fsm\":[");
+    if(h.component){const auto image=reinterpret_cast<std::uintptr_t>(gameImage);bool first=true;
+        for(unsigned off=0x20;off<0xa8;off+=8){std::uintptr_t v=0;if(!memoryRead(h.component+off,&v,8))break;
+            fprintf(f,"%s{\"off\":\"0x%x\",\"rva\":\"0x%llx\",\"raw\":\"0x%llx\"}",first?"":",",off,v>=image&&v<image+0x4000000?static_cast<unsigned long long>(v-image):0ull,static_cast<unsigned long long>(v));first=false;}}
     fprintf(f,"],\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
               "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu,\"anchorHandle\":%u,\"anchorResolved\":%s,\"selfResolved\":%s}\n",
