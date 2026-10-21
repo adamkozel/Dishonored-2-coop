@@ -1,0 +1,588 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             100 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "checks": {
+    "inserted": true,
+    "entries6": true,
+    "coopSaves": true,
+    "coopMode": true,
+    "campaignSaves": true,
+    "campaignMode": true
+  },
+  "notes": {
+    "title": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "home_not_bound",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 0,
+      "attempts": 0,
+      "inserts": 0,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "hubHooked": true,
+      "hubCalls": 3,
+      "kisculeHandlerCalls": 0,
+      "recentCalls": [
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        }
+      ],
+      "saves": {
+        "result": "idle",
+        "active": false,
+        "phase": 0,
+        "switches": 0,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 0,
+        "profileSeeds": 0
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "f62c704c-73ab-49a4-be8b-18f7e37591e0",
+      "PSShowComputerName": true
+    },
+    "menu": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "hubHooked": true,
+      "hubCalls": 8,
+      "kisculeHandlerCalls": 1,
+      "recentCalls": [
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoHomeScreen",
+          "rawLength": 631360192526
+        }
+      ],
+      "saves": {
+        "result": "idle",
+        "active": false,
+        "phase": 0,
+        "switches": 0,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 0,
+        "profileSeeds": 0
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "ff754a4c-b479-4059-9dfa-f3aa90fe06e6",
+      "PSShowComputerName": true
+    },
+    "coop": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 1,
+      "campaignSelected": 0,
+      "coopMode": true,
+      "hubHooked": true,
+      "hubCalls": 14,
+      "kisculeHandlerCalls": 2,
+      "recentCalls": [
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoHomeScreen",
+          "rawLength": 631360192526
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoCoopScreen",
+          "rawLength": 631360192526
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        }
+      ],
+      "saves": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 1,
+        "profileLoads": 1,
+        "profileSeeds": 1
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "9bcb9df6-6a6f-499f-b9aa-c20c58a98bef",
+      "PSShowComputerName": true
+    },
+    "back": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 1,
+      "campaignSelected": 0,
+      "coopMode": true,
+      "hubHooked": true,
+      "hubCalls": 18,
+      "kisculeHandlerCalls": 3,
+      "recentCalls": [
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "SetFlashFocus",
+          "argc": 0,
+          "type": 0,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 1148846080
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoHomeScreen",
+          "rawLength": 631360192526
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoCoopScreen",
+          "rawLength": 631360192526
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GofromCampaignScreen",
+          "rawLength": 20
+        }
+      ],
+      "saves": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 1,
+        "profileLoads": 1,
+        "profileSeeds": 1
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "20b73407-92f9-4c52-a6bd-48ebae1b1a11",
+      "PSShowComputerName": true
+    },
+    "campaign": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 1,
+      "campaignSelected": 1,
+      "coopMode": false,
+      "hubHooked": true,
+      "hubCalls": 24,
+      "kisculeHandlerCalls": 4,
+      "recentCalls": [
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoCoopScreen",
+          "rawLength": 631360192526
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GofromCampaignScreen",
+          "rawLength": 20
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        },
+        {
+          "name": "KisculeEvent",
+          "argc": 1,
+          "type": 5,
+          "arg": "GotoCampaignScreen",
+          "rawLength": 631360192530
+        },
+        {
+          "name": "PostSoundEvent",
+          "argc": 1,
+          "type": 4,
+          "arg": "",
+          "rawLength": 0
+        }
+      ],
+      "saves": {
+        "result": "campaign",
+        "active": false,
+        "phase": 0,
+        "switches": 2,
+        "failures": 0,
+        "rebuilds": 2,
+        "profileLoads": 2,
+        "profileSeeds": 1
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "63e4851b-2922-4ab2-876d-9acc31ea795f",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Co-op main menu entry probe (VM lab game, keyboard as a player): inserted under Campaign, chooses co-op mode, Campaign turns it off; VM lab role stopped."
+}

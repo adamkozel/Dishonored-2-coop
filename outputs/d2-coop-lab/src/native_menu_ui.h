@@ -125,7 +125,7 @@ inline bool installCoopHubHook(){
 // Campaign screen data (the Campaign section, vtable 1b6d2e8, slot 5 FUN_1404fb3b0(section, movie)). The profile
 // (profile.bin) still follows the root in this candidate (lab test; its keys are decided separately).
 struct CoopSaveSwitch {int phase=0;bool target=false,active=false;ULONGLONG startedAt=0;const char* result="idle";
-    std::uint64_t switches=0,failures=0,rebuilds=0;char folder[MAX_PATH]{};const char* original=nullptr;};
+    std::uint64_t switches=0,failures=0,rebuilds=0,profileLoads=0,profileSeeds=0;char folder[MAX_PATH]{};const char* original=nullptr;};
 CoopSaveSwitch coopSaves{};bool coopSavesEnabled=true;
 static const char kCoopSaveRoot[]="savegame_coop";
 inline void coopSaveFolder(char* out,std::size_t size){
@@ -134,22 +134,64 @@ inline void coopSaveFolder(char* out,std::size_t size){
     // Lab: the instance folder is the game's fs_savepath (the status file sits in it).
     char dir[MAX_PATH]{};std::snprintf(dir,sizeof(dir),"%s",statusPath);char* slash=std::strrchr(dir,'\\');if(!slash)slash=std::strrchr(dir,'/');
     if(slash){*slash=0;std::snprintf(out,size,"%s\\base\\%s",dir,kCoopSaveRoot);}}
+// 1214hr (#156): co-op has its own profile.bin in savegame_coop (chapter 107: the profile follows the root, so the root
+// swap alone would have let a co-op New Game reset the player's campaign keys). A switch now: waits until the save
+// manager and both profile processors are idle; saves the profile under the current root (SaveProfile FUN_1400d3bd0,
+// asynchronous) and waits for it; swaps the root; resets the in-memory profile (FUN_14005a8c0; LoadProfile merges into
+// memory) and, for a first co-op profile, keeps only HasSetGamma; loads the target profile (LoadProfile FUN_1400d37b0,
+// synchronous, result at pm+0x20; a missing file is written from memory); on a refused load it rolls back to the old
+// root and profile. Then the saves are re-listed, the campaign index and the lifetime stats refreshed (FUN_140660210
+// with GetCampaignIndex FUN_140657380; FUN_14067d3f0(game+0x1f77c8)) and the Campaign screen rebuilt.
+struct CoopProfileHandles {std::uintptr_t session=0,sgm=0,pm=0,profile=0;};
+inline bool coopProfileHandles(std::uintptr_t base,CoopProfileHandles& h){
+    if(!memoryRead(base+0x2287c78,&h.session,8)||!h.session||!memoryRead(h.session+0x20,&h.sgm,8)||!h.sgm)return false;
+    std::uintptr_t vt=0,fn=0;if(!memoryRead(h.session,&vt,8)||!vt||!memoryRead(vt+0x38,&fn,8)||!fn)return false;
+    const auto signin=reinterpret_cast<std::uintptr_t(*)(void*)>(fn)(reinterpret_cast<void*>(h.session));if(!signin)return false;
+    std::uintptr_t svt=0,count=0,user=0;if(!memoryRead(signin,&svt,8)||!svt||!memoryRead(svt+0x18,&count,8)||!memoryRead(svt+0x28,&user,8)||!count||!user)return false;
+    if(reinterpret_cast<int(*)(void*)>(count)(reinterpret_cast<void*>(signin))<=0)return false;
+    const auto lu=reinterpret_cast<std::uintptr_t(*)(void*,int)>(user)(reinterpret_cast<void*>(signin),0);if(!lu)return false;
+    h.pm=lu+0x10;return memoryRead(h.pm+0x18,&h.profile,8)&&h.profile;}
+inline bool coopProfileIdle(const CoopProfileHandles& h){
+    std::int32_t busy=0;std::uintptr_t saver=0,loader=0;unsigned char a=1,b=1;
+    return memoryRead(h.sgm,&busy,4)&&!busy&&memoryRead(h.pm,&saver,8)&&saver&&memoryRead(saver+0x3a11,&a,1)&&!a&&
+        memoryRead(h.pm+8,&loader,8)&&loader&&memoryRead(loader+0x3a11,&b,1)&&!b;}
+inline void coopProfileLocked(bool lock){std::uintptr_t obj=reinterpret_cast<std::uintptr_t(*)()>(gameImage+0x1548e0)(),vt=0,fn=0;
+    if(obj&&memoryRead(obj,&vt,8)&&vt&&memoryRead(vt+(lock?0x48:0x50),&fn,8)&&fn)reinterpret_cast<void(*)(void*,int)>(fn)(reinterpret_cast<void*>(obj),0);}
+inline bool coopProfileLoad(const CoopProfileHandles& h,bool seedCoop){
+    coopProfileLocked(true);reinterpret_cast<void(*)(void*)>(gameImage+0x5a8c0)(reinterpret_cast<void*>(h.profile));
+    if(seedCoop)reinterpret_cast<char(*)(void*,const char*,const char*)>(gameImage+0x105040)(reinterpret_cast<void*>(h.profile+0x28),"HasSetGamma","1");
+    coopProfileLocked(false);
+    std::int32_t sentinel=0x7eadbeef;std::memcpy(reinterpret_cast<void*>(h.pm+0x20),&sentinel,4);
+    reinterpret_cast<void(*)(void*)>(gameImage+0xd37b0)(reinterpret_cast<void*>(h.pm));
+    std::int32_t after=0;memoryRead(h.pm+0x20,&after,4);return after!=sentinel;}
 void serviceCoopSaves(ULONGLONG tick){
     if(!coopSavesEnabled)return;auto& s=coopSaves;const bool want=coopModeSelected.load();
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);auto** root=reinterpret_cast<const char**>(base+0x2286f40);
     if(!s.original){const char* current=nullptr;if(!memoryRead(base+0x2286f40,&current,8)||!current){s.result="no_root";return;}s.original=current;}
     if(s.phase==0){if(want==s.active)return;if(!sampledMainMenuState){s.result="waiting_main_menu";return;}s.target=want;s.phase=1;s.startedAt=tick;}
-    std::uintptr_t session=0,sgm=0;if(!memoryRead(base+0x2287c78,&session,8)||!session||!memoryRead(session+0x20,&sgm,8)||!sgm){s.result="no_session";return;}
-    if(s.phase==1){std::int32_t busy=0;if(!memoryRead(sgm,&busy,4)||busy){s.result="save_busy";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="busy_timeout";}return;}
-        if(s.target){coopSaveFolder(s.folder,sizeof(s.folder));if(s.folder[0])CreateDirectoryA(s.folder,nullptr);}
+    CoopProfileHandles h{};if(!coopProfileHandles(base,h)){s.result="no_profile";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_timeout";}return;}
+    std::int32_t enabled=0;memoryRead(base+0x3132e88,&enabled,4);
+    if(s.phase==1){if(!enabled||!coopProfileIdle(h)){s.result="save_busy";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="busy_timeout";}return;}
+        reinterpret_cast<void(*)(void*)>(gameImage+0xd3bd0)(reinterpret_cast<void*>(h.pm));s.phase=2;s.startedAt=tick;s.result="profile_saving";return;}
+    if(s.phase==2){if(tick-s.startedAt<300||!coopProfileIdle(h)){if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_save_timeout";}return;}
+        // The target root and its profile.
+        coopSaveFolder(s.folder,sizeof(s.folder));char target[MAX_PATH]{};
+        if(s.target){if(s.folder[0])CreateDirectoryA(s.folder,nullptr);std::snprintf(target,sizeof(target),"%s\\profile.bin",s.folder);}
+        else{std::snprintf(target,sizeof(target),"%s",s.folder);const auto n=std::strlen(target);if(n>5&&!std::strcmp(target+n-5,"_coop"))target[n-5]=0;
+            std::strncat(target,"\\profile.bin",sizeof(target)-std::strlen(target)-1);}
+        const bool exists=GetFileAttributesA(target)!=INVALID_FILE_ATTRIBUTES;
         *root=s.target?kCoopSaveRoot:s.original;
-        std::uintptr_t vt=0,fn=0;if(!memoryRead(session,&vt,8)||!vt||!memoryRead(vt+0xa0,&fn,8)||!fn){s.result="no_enumerate";s.phase=0;++s.failures;return;}
-        reinterpret_cast<int(*)(void*,void*,void*,void*)>(fn)(reinterpret_cast<void*>(session),nullptr,nullptr,nullptr);
-        s.phase=2;s.startedAt=tick;s.result="listing";return;}
-    if(s.phase==2){unsigned char ready=0;memoryRead(sgm+0x3920,&ready,1);
+        if(!coopProfileLoad(h,s.target&&!exists)){
+            *root=s.target?s.original:kCoopSaveRoot;coopProfileLoad(h,false);s.phase=0;++s.failures;s.result="profile_load_refused";s.target=s.active;return;}
+        ++s.profileLoads;if(s.target&&!exists)++s.profileSeeds;
+        std::uintptr_t vt=0,fn=0;if(!memoryRead(h.session,&vt,8)||!vt||!memoryRead(vt+0xa0,&fn,8)||!fn){s.result="no_enumerate";s.phase=0;++s.failures;return;}
+        reinterpret_cast<int(*)(void*,void*,void*,void*)>(fn)(reinterpret_cast<void*>(h.session),nullptr,nullptr,nullptr);
+        s.phase=3;s.startedAt=tick;s.result="listing";return;}
+    if(s.phase==3){unsigned char ready=0;memoryRead(h.sgm+0x3920,&ready,1);
         if(!ready){if(tick-s.startedAt>10000){s.result="list_timeout";s.phase=0;++s.failures;s.active=s.target;}return;}
-        std::uintptr_t game=0;if(memoryRead(base+0x39a5290,&game,8)&&game)reinterpret_cast<void(*)(void*,int)>(gameImage+0x660210)(reinterpret_cast<void*>(game+0x2e75d8),-1);
-        // The Campaign screen data, when the main menu is up.
+        std::uintptr_t game=0;if(memoryRead(base+0x39a5290,&game,8)&&game){auto* cm=reinterpret_cast<void*>(game+0x2e75d8);
+            const int index=reinterpret_cast<int(*)(void*)>(gameImage+0x657380)(cm);reinterpret_cast<void(*)(void*,int)>(gameImage+0x660210)(cm,index);
+            reinterpret_cast<void(*)(void*)>(gameImage+0x67d3f0)(reinterpret_cast<void*>(game+0x1f77c8));}
         if(const auto state=sampledMainMenuState){std::uintptr_t file=0;memoryRead(state+0x20,&file,8);
             for(std::uintptr_t off=0x98;off<0x100&&file;off+=8){std::uintptr_t section=0,svt=0;
                 if(memoryRead(state+off,&section,8)&&section&&memoryRead(section,&svt,8)&&svt==base+0x1b6d2e8){
@@ -171,9 +213,9 @@ void writeCoopMenu(){
         for(int k=0;k<31&&r.name[k];++k)name[k]=(r.name[k]=='"'||r.name[k]=='\\'||r.name[k]<32)?'_':r.name[k];
         for(int k=0;k<31&&r.arg[k];++k)arg[k]=(r.arg[k]=='"'||r.arg[k]=='\\'||r.arg[k]<32)?'_':r.arg[k];
         fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\",\"rawLength\":%llu}",first?"":",",name,r.argc,r.type,arg,static_cast<unsigned long long>(r.rawLength));first=false;}}
-    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu}",coopSaves.result,
+    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu}",coopSaves.result,
         coopSaves.active?"true":"false",coopSaves.phase,static_cast<unsigned long long>(coopSaves.switches),static_cast<unsigned long long>(coopSaves.failures),
-        static_cast<unsigned long long>(coopSaves.rebuilds));
+        static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds));
     fputs("}\n",f);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
