@@ -10,7 +10,7 @@
 // Lab host on the guard map only; one cached object per world. coop_mesmerize_native probe|spawn x y z|start|stop.
 constexpr const char* kMesmerizeObjectDefinition="models/powers/mesmerize/mesmerize_object.def";
 constexpr std::uintptr_t kMesmerizeComponentType=0x39dcdc0; // DAT_1439dcdc0, arkCpntMesmerize (FUN_1406212e0)
-struct MesmerizeHostObject {std::uintptr_t actor=0,component=0,game=0,definition=0;unsigned handle=0;std::uint64_t epoch=0;ULONGLONG createdAt=0,startedAt=0,stoppedAt=0;};
+struct MesmerizeHostObject {std::uintptr_t actor=0,component=0,game=0,definition=0;unsigned handle=0;std::uint64_t epoch=0;ULONGLONG createdAt=0,startedAt=0,stoppedAt=0,componentAt=0;};
 MesmerizeHostObject mesmerizeHost{};
 unsigned mesmerizeHostRequest=0;float mesmerizeHostSpawnAt[3]{};
 const char* mesmerizeHostResult="idle";std::uintptr_t mesmerizeHostProbeDefinition=0;
@@ -37,6 +37,10 @@ bool mesmerizeHostConfigure(std::uintptr_t component,std::uintptr_t actor){
 void serviceMesmerizeHost(ULONGLONG tick){
     auto& h=mesmerizeHost;
     if(h.actor&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch)){h={};mesmerizeHostOwnedComponent.store(0);mesmerizeHostResult="world_retired";}
+    // 1214gi: resolve the object's arkCpntMesmerize once it is attached, and verify it belongs to the object.
+    if(h.actor&&!h.component&&GetCurrentThreadId()==engineThread.load()&&mesmerizeHostApis()&&tick-h.createdAt<10000){
+        const auto c=nativeComponent(h.actor,kMesmerizeComponentType);std::uintptr_t owner=0;
+        if(c&&memoryRead(c+0x10,&owner,8)&&owner==h.actor){h.component=c;mesmerizeHostOwnedComponent.store(c);h.componentAt=tick;}}
     if(!mesmerizeHostRequest)return;
     const unsigned request=mesmerizeHostRequest;mesmerizeHostRequest=0;
     const auto refuse=[](const char* why){mesmerizeHostResult=why;++mesmerizeHostRefused;};
@@ -58,9 +62,9 @@ void serviceMesmerizeHost(ULONGLONG tick){
         reinterpret_cast<void(*)(void*,void*,int)>(gameImage+0x8aecc0)(reinterpret_cast<void*>(observedGame),actor,-1);
         memoryRead(h.actor+0xa8,&h.handle,4);
         reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(actor);
-        h.component=nativeComponent(h.actor,kMesmerizeComponentType);std::uintptr_t owner=0;
-        if(!h.component||!memoryRead(h.component+0x10,&owner,8)||owner!=h.actor){mesmerizeHostResult="spawned_component_unverified";return;}
-        mesmerizeHostOwnedComponent.store(h.component);mesmerizeHostResult="spawned";return;
+        // 1214gi: the components attach after the spawn frame (take mesmerize-host-v1716a found none at once); the
+        // service resolves the Mesmerize component on the following frames.
+        mesmerizeHostResult="spawned";return;
     }
     if(!h.actor||!h.component){refuse("spawn_required");return;}
     int state=-1;if(!memoryRead(h.component+0x2c,&state,4)){refuse("component_unreadable");return;}
@@ -82,10 +86,14 @@ void writeMesmerizeHost(){
         memoryRead(h.component+0x2b2,&committed,1);memoryRead(h.component+0x2b1,&blocking,1);memoryRead(h.component+0x108,offset,12);
         std::uintptr_t list=0;if(memoryRead(h.component+0x1a8,&list,8)&&list&&memoryRead(h.component+0x1b0,&count,4)){count&=0xffffff;
             for(unsigned i=0;i<count&&i<5;++i)memoryRead(list+i*0x70,&handles[i],4);}}
-    fprintf(f,"{\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
+    std::uintptr_t vtables[12]{};unsigned componentCount=0;
+    if(h.actor){std::uintptr_t list=0;unsigned flags=0;if(memoryRead(h.actor+0x268,&list,8)&&list&&memoryRead(h.actor+0x270,&flags,4)){componentCount=flags&0xffffff;
+        for(unsigned i=0;i<componentCount&&i<12;++i){std::uintptr_t c=0,vt=0;if(memoryRead(list+i*8,&c,8)&&c&&memoryRead(c,&vt,8))vtables[i]=vt-reinterpret_cast<std::uintptr_t>(gameImage);}}}
+    fprintf(f,"{\"components\":%u,\"componentVtables\":[",componentCount);for(unsigned i=0;i<componentCount&&i<12;++i)fprintf(f,"%s\"0x%llx\"",i?",":"",static_cast<unsigned long long>(vtables[i]));
+    fprintf(f,"],\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
               "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu}\n",
-        mesmerizeHostResult,mesmerizeHostProbes,mesmerizeHostProbeDefinition?"true":"false",mesmerizeHostSpawned,mesmerizeHostStarts,mesmerizeHostStops,mesmerizeHostRefused,h.handle,h.component?"true":"false",
+        h.componentAt,mesmerizeHostResult,mesmerizeHostProbes,mesmerizeHostProbeDefinition?"true":"false",mesmerizeHostSpawned,mesmerizeHostStarts,mesmerizeHostStops,mesmerizeHostRefused,h.handle,h.component?"true":"false",
         state,previous,committed,anchor,offset[0],offset[1],offset[2],blocking,count,handles[0],handles[1],handles[2],handles[3],handles[4],
         h.createdAt,h.startedAt,h.stoppedAt,mesmerizeHostPartnerBlocked.load());
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
