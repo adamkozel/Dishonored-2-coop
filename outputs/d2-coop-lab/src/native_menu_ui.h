@@ -36,6 +36,9 @@ CoopMenuState coopMenu{};bool coopMenuEnabled=true;std::atomic<bool> coopModeSel
 std::atomic<bool> coopSavesRefresh{false};
 inline bool coopInSession(){return onlineSession.active;} // 1214ht (#157)
 std::atomic<bool> coopLeaveRequested{false}; // 1214ht (#157): set by the hub, served by serviceCoopPause
+// 1214hv (#157): the pause menu or its quit dialog is open (logic 2, or 3 entered from 2); the Leave co-op text and
+// the BackToMain rename apply only there, so a GameOver screen (logic 13) keeps its native Back to main menu.
+std::atomic<bool> coopPauseContext{false};
 constexpr char kCoopMenuEvent[]="GotoCoopScreen";constexpr char kCampaignMenuEvent[]="GotoCampaignScreen";
 inline bool coopMenuStep(const char* step,bool ok,int code=0){if(!ok){coopMenu.result="step_failed";coopMenu.lastCode=code;
     std::snprintf(coopMenu.failedStep,sizeof(coopMenu.failedStep),"%s",step);++coopMenu.failures;}return ok;}
@@ -116,7 +119,7 @@ inline std::uint64_t hookIggyHub(void* main,void* iggy,void* call){
                     if(old==sizeof(kCoopMenuEvent)-1||old==sizeof(kCoopMenuEvent))a->length=(a->length&0xffffffff00000000ull)|(old+delta);}
                 else if(n==static_cast<int>(sizeof(kCampaignMenuEvent)-1)&&!std::memcmp(text,kCampaignMenuEvent,n)){coopModeSelected=false;coopSavesRefresh=true;++coopMenu.campaignSelected;}}}}
     // 1214ht (#157): Leave co-op (see serviceCoopPause).
-    if(c&&namePtr&&coopInSession()){char name[16]{};memoryRead(namePtr,name,sizeof(name)-1);
+    if(c&&namePtr&&coopInSession()&&coopPauseContext.load()){char name[16]{};memoryRead(namePtr,name,sizeof(name)-1);
         if(!std::strcmp(name,"BackToMain")){static const char kResume[]="ResumeGame";
             *reinterpret_cast<const char**>(c)=kResume; // the same length (10) as BackToMain
             coopLeaveRequested=true;}}
@@ -250,7 +253,7 @@ CoopPauseState coopPause{};
 inline bool coopKey16(const IggyText16* in,const char* key){if(!in||!in->text)return false;const auto n=static_cast<std::int32_t>(std::strlen(key));
     if(in->length!=n)return false;for(std::int32_t i=0;i<n;++i)if(in->text[i]!=static_cast<char16_t>(key[i]))return false;return true;}
 inline int hookTranslate16(void* data,IggyText16* in,IggyText16* out){
-    if(coopInSession()&&out){const char16_t* text=nullptr;
+    if(coopInSession()&&coopPauseContext.load()&&out){const char16_t* text=nullptr;
         if(coopKey16(in,"UI_quitgame_question"))text=kLeaveQuestion16;else if(coopKey16(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton16;
         if(text){out->text=text;out->length=static_cast<std::int32_t>(std::char_traits<char16_t>::length(text));++coopLeaveTranslations;return 1;}}
     return realTranslate16?realTranslate16(data,in,out):0;}
@@ -271,7 +274,7 @@ inline int hookTranslate8(void* data,IggyText8* in,IggyText8* out){
     ++coopTranslate8Calls;
     if(in&&in->text&&in->length>0){auto& slot=coopLastKeys[coopLastKey.fetch_add(1)%6];const auto n=static_cast<std::size_t>(in->length<47?in->length:47);
         for(std::size_t i=0;i<n;++i){const char c=in->text[i];slot[i]=(c<32||c=='"'||c=='\\'||c>126)?'_':c;}slot[n]=0;}
-    if(coopInSession()&&out){const char* text=nullptr;
+    if(coopInSession()&&coopPauseContext.load()&&out){const char* text=nullptr;
         if(coopKey8(in,"UI_quitgame_question"))text=kLeaveQuestion8;else if(coopKey8(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton8;
         if(text){out->text=text;out->length=static_cast<std::int32_t>(std::strlen(text));++coopLeaveTranslations;return 1;}}
     return realTranslate8?realTranslate8(data,in,out):0;}
@@ -285,8 +288,26 @@ inline void installCoopTranslation(){
     if(table[0]){realTranslate16=reinterpret_cast<IggyTranslate16>(table[0]);table[0]=reinterpret_cast<void*>(&hookTranslate16);}
     if(table[1]){realTranslate8=reinterpret_cast<IggyTranslate8>(table[1]);table[1]=reinterpret_cast<void*>(&hookTranslate8);}
     coopTranslationHooked=true;}
+// 1214hv (#157): coop-leave-v1770b: the question was translated, but the buttons kept Back To Main Menu. The dialog's
+// button labels are raw keys (PauseMenuScreen._onQuitGameClicked: ui_common_cancel, ui_gameover_button_back_main_menu)
+// that the button text fields resolve through Iggy's second translation table (0x143ec08e0, keys prefixed '@',
+// FUN_1400358c0 -> FUN_140034e40), not IggyFunctions.translate. Both tables end in the engine lookup
+// FUN_140165420(&0x1432c7e98, key) (confirmed static; it returns the key itself when there is no entry). The mod hooks
+// that lookup: in the pause context of a session the two keys resolve to the co-op text (static strings).
+using CoopLocalize=const char*(*)(void*,const char*);CoopLocalize realCoopLocalize=nullptr;bool coopLocalizeHooked=false;
+std::atomic<std::uint64_t> coopLocalizeSwaps{0};
+inline const char* hookCoopLocalize(void* dict,const char* key){
+    if(key&&coopPauseContext.load()&&coopInSession()){
+        if(!_stricmp(key,"ui_gameover_button_back_main_menu")){++coopLocalizeSwaps;return kLeaveButton8;}
+        if(!_stricmp(key,"UI_quitgame_question")){++coopLocalizeSwaps;return kLeaveQuestion8;}}
+    return realCoopLocalize(dict,key);}
+inline bool installCoopLocalizeHook(){
+    static const unsigned char prologue[]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xda,0x48,0x8b,0xf9};
+    coopLocalizeHooked=installNpcRemovalHook(0x165420,prologue,sizeof(prologue),reinterpret_cast<void*>(&hookCoopLocalize),realCoopLocalize);
+    return coopLocalizeHooked;}
 void serviceCoopPause(ULONGLONG tick){
     installCoopTranslation();
+    {const unsigned logic=outgoing.gameLogicState;if(logic==2)coopPauseContext=true;else if(logic!=3)coopPauseContext=false;}
     if(coopLeaveRequested.exchange(false)){++coopPause.leaves;++productArm.leaveKeys;stopOnlineSession("left_by_player");productArm={};coopPause.result="left_by_pause";}
     const auto state=sampledPauseState;if(!state){coopPause.result=coopPause.leaves?"left_by_pause":"no_pause";return;}
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t file=0,iggy=0;
@@ -329,10 +350,11 @@ void writeCoopMenu(){
         static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds),
         static_cast<unsigned long long>(coopMenu.sessionRequests),static_cast<unsigned long long>(coopSaves.refreshes),coopSaves.listed,
         static_cast<unsigned long long>(coopSaves.profileSaves),static_cast<unsigned long long>(coopSaves.profileSkips),coopSaves.lastDirty);
-    fprintf(f,",\"pause\":{\"result\":\"%s\",\"inSession\":%s,\"labelled\":%s,\"relabels\":%llu,\"restores\":%llu,\"clears\":%llu,\"leaves\":%llu,\"translationHooked\":%s,\"translations\":%llu,\"translationMode\":%d,\"translationFlag\":%u,\"translate8Calls\":%llu,\"lastKeys\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]}",
+    fprintf(f,",\"pause\":{\"result\":\"%s\",\"inSession\":%s,\"labelled\":%s,\"relabels\":%llu,\"restores\":%llu,\"clears\":%llu,\"leaves\":%llu,\"translationHooked\":%s,\"translations\":%llu,\"translationMode\":%d,\"translationFlag\":%u,\"translate8Calls\":%llu,\"localizeHooked\":%s,\"localizeSwaps\":%llu,\"pauseContext\":%s,\"lastKeys\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]}",
         coopPause.result,coopInSession()?"true":"false",coopPause.labelled?"true":"false",static_cast<unsigned long long>(coopPause.relabels),static_cast<unsigned long long>(coopPause.restores),
         static_cast<unsigned long long>(coopPause.clears),static_cast<unsigned long long>(coopPause.leaves),coopTranslationHooked?"true":"false",static_cast<unsigned long long>(coopLeaveTranslations.load()),
         coopTranslationMode,coopTranslationFlag,static_cast<unsigned long long>(coopTranslate8Calls.load()),
+        coopLocalizeHooked?"true":"false",static_cast<unsigned long long>(coopLocalizeSwaps.load()),coopPauseContext.load()?"true":"false",
         coopLastKeys[0],coopLastKeys[1],coopLastKeys[2],coopLastKeys[3],coopLastKeys[4],coopLastKeys[5]);
     fputs("}\n",f);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

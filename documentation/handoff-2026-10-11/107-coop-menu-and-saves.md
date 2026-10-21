@@ -101,6 +101,16 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
     is no entry (confirmed static). 1214hv hooks that lookup for the two keys. It applies only during a session while
     the pause menu (logic 2) or its quit dialog (logic 3 entered from 2) is open. The BackToMain rename now needs the
     same pause context, so a GameOver screen keeps its native Back to main menu.
+  - Take coop-leave-v1770c (1214hv) passed again, but the hook never swapped. The message box is built by the engine
+    (arkMessageBoxManagerLocal at game+0x30f260; its AS3 request handler 0x1404630f0). It turns each button key into
+    a string id with `FUN_140165c80(&id, key)` and the movie shows the label by id (confirmed static). Raw label text
+    is impossible, so 1214hw maps the key `ui_gameover_button_back_main_menu` to the game's own `ui_common_confirm`
+    in that function, in the same pause context. The dialog then reads "Leave the co-op session?" with Cancel,
+    Confirm and Back To Desktop.
+- **The save flow (take coop-saveflow-v1772a, 1214hv, pass):** CO-OP, New Game, quicksave, the title, CO-OP,
+  CONTINUE loads the co-op quicksave, the title again, then CAMPAIGN lists the player's own saves. The campaign slots
+  are unchanged and `profile.bin` keeps every key. The file itself is rewritten at each switch, because its dirty
+  byte was set at every switch (`lastDirty` 1), so 1214hu's skip never applies.
 
 ## Save isolation research (confirmed static unless marked)
 

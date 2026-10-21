@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-22T01:30:00+02:00",
+  "UpdatedAt": "2026-10-22T01:15:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22636,14 +22636,14 @@
   "CoopMenuSaves": {
     "Cards": "#156 (co-op entry and isolated saves), #157 (Leave co-op)",
     "Branch": "stage7/coop-menu (draft PR #164)",
-    "Candidate": "candidate-npc-combat-v1214hu",
+    "Candidate": "candidate-npc-combat-v1214hv",
     "Chapter": "documentation/handoff-2026-10-11/107-coop-menu-and-saves.md",
     "Takes": {
-      "coop-saveflow-v1769a": "fail (probe): after a quit the game returns to the title screen; CAMPAIGN opened instead of CO-OP. The switch rewrote the campaign profile.bin with identical keys (16-byte header only).",
-      "coop-leave-v1770a": "1214ht, behaviour pass, text fail: LEAVE CO-OP label, leave from each side, other side sees it, Quit Game after the session; the dialog kept the stock question (the engine registers the UTF-8 callback only).",
-      "coop-leave-v1770b": "1214hu, pass (all 15 checks, restoration passed): the question reads Leave the co-op session? on both sides; the middle button still reads Back To Main Menu (its key resolves through the second, @-prefixed text-field translation table).",
-      "coop-saveflow-v1771a": "fail (probe): the menu movie inserts the Co-op entry only after the title key; the probe waited at the title."
+      "coop-leave-v1770a": "1214ht, behaviour pass, text fail (the engine registers the UTF-8 translation callback only).",
+      "coop-leave-v1770b": "1214hu, pass: question translated; middle button still Back To Main Menu.",
+      "coop-leave-v1770c": "1214hv, pass (15/15, restoration passed); the FUN_140165420 hook never swapped (localizeSwaps 0): message box button labels are string ids from FUN_140165c80, resolved by id.",
+      "coop-saveflow-v1772a": "1214hv, pass: CO-OP, New Game, quicksave into savegame_coop, title, CO-OP, CONTINUE loads the quicksave, CAMPAIGN lists the player own saves; campaign slots unchanged, profile.bin keys unchanged (the file is rewritten at each switch: its dirty byte was set at every switch)."
     },
-    "Next": "1214hv: hook the engine lookup FUN_140165420 for the two dialog keys in the pause context of a session (also gates the BackToMain rename to the pause). Then Probe-CoopSaveFlow-v1772 and coop-leave-v1770c."
+    "Next": "1214hw: map the button key ui_gameover_button_back_main_menu to the native ui_common_confirm in FUN_140165c80 (pause context of a session). coop-hostsave-v1773a: the host co-op save on two accounts (#156 done criteria)."
   }
 }

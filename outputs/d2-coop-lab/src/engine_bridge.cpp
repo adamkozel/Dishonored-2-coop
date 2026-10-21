@@ -2322,6 +2322,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     if(!installEntityActivateObserver()||!installTriggerEventObserver()||!installKisculeDispatchObserver()||!installAvatarPerception()||!installNativeSwitchTrace()||!installReplacementTrace()||!installDamageObserver()||!installMeleeDefenseObserver()||!installObserverCamera()||!installNativeHealthSubtractObserver()||!installCoinRewardObserver()||!installMesmerizePartnerFilter()||!installDominoPartnerFilter()||!installPossessionPartnerFilter()||!installAssassinationPartnerFilter()||!installInteractionPartnerFilter()||!installBodyPoseCapture()||!installMovementFootHooks())return false;
     installCoopKisculeHook(); // 1214hn (#156): the Co-op entry's event
     installCoopHubHook(); // 1214ho (#156)
+    installCoopLocalizeHook(); // 1214hv (#157): the Leave co-op dialog text
     installNpcRemovalTrace(); // 1214hb/1214he (#140): the trace records in a lab build only; the replica corpse fix in any
     DWORD old=0,unused=0;
     auto* animationTrampoline=static_cast<unsigned char*>(VirtualAlloc(nullptr,64,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));

@@ -1,0 +1,1611 @@
+{
+  "passed": true,
+  "failure": null,
+  "checks": {
+    "hostTranslationHooked": true,
+    "hostInSession": true,
+    "hostLabelled": true,
+    "hostDialogTranslated": true,
+    "hostLeft": true,
+    "hostResumedInWorld": true,
+    "vmSawHostLeave": true,
+    "hostLabelRestored": true,
+    "vmTranslationHooked": true,
+    "vmLabelled": true,
+    "vmDialogTranslated": true,
+    "vmLeft": true,
+    "vmResumedInWorld": true,
+    "hostSawVmLeave": true,
+    "vmLabelRestored": true
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "a0-connected",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 159,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ark_uielement_missionclue_title",
+              "ark_uielement_missionclue_desc",
+              "ui_saving",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_hN_skip"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "a1-host-pause",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "leave_coop",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 187,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_j_tab_mission"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "a2-host-quit-focus",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "leave_coop",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 187,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_j_tab_mission"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "a3-host-dialog",
+        "host": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 192,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title",
+              "ui_demo_welcome_msg",
+              "ui_common_installed"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "a4-host-dialog-button",
+        "host": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 192,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title",
+              "ui_demo_welcome_msg",
+              "ui_common_installed"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "a5-host-left",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 192,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title",
+              "ui_demo_welcome_msg",
+              "ui_common_installed"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 6,
+            "result": "p2p_connection_ended",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 1
+          }
+        }
+      },
+      {
+        "step": "a6-vm-after-host-left",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 192,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title",
+              "ui_demo_welcome_msg",
+              "ui_common_installed"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 6,
+            "result": "p2p_connection_ended",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 1
+          }
+        }
+      },
+      {
+        "step": "a7-host-pause-after",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_movie",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 6,
+            "result": "p2p_connection_ended",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 1
+          }
+        }
+      },
+      {
+        "step": "a8-host-resumed",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 6,
+            "result": "p2p_connection_ended",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 1
+          }
+        }
+      },
+      {
+        "step": "b0-connected",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 0,
+            "restores": 0,
+            "clears": 0,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 155,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_j_tab_notes",
+              "ui_j_tab_travelLog",
+              "ui_main_pressStart",
+              "ui_qaw_filters",
+              "ui_h_objective_updated",
+              "ui_j_tab_bonecharms"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "b1-vm-pause",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "leave_coop",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 183,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_stats_playthrough",
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_j_tab_mission"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "b2-vm-quit-focus",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "leave_coop",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 0,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 183,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_stats_playthrough",
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_j_tab_mission"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "b3-vm-dialog",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 188,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_demo_welcome_msg",
+              "ui_common_installed",
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "b4-vm-dialog-button",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_pause",
+            "inSession": true,
+            "labelled": true,
+            "relabels": 1,
+            "restores": 0,
+            "clears": 1,
+            "leaves": 0,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 188,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_demo_welcome_msg",
+              "ui_common_installed",
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": false,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 2
+          }
+        }
+      },
+      {
+        "step": "b5-vm-left",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 188,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_demo_welcome_msg",
+              "ui_common_installed",
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 1,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 0
+          }
+        }
+      },
+      {
+        "step": "b6-host-after-vm-left",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 188,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_demo_welcome_msg",
+              "ui_common_installed",
+              "ui_stats_playthrough",
+              "UI_quitgame_question",
+              "ui_loading_continue",
+              "ui_demo_welcome_title"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 5,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 0
+          }
+        }
+      },
+      {
+        "step": "b7-vm-pause-after",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "no_movie",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 214,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": true,
+            "lastKeys": [
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_j_tab_mission",
+              "ui_pause_autosave",
+              "ui_pause_devGUI",
+              "ui_stats_chapter"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 1,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 0
+          }
+        }
+      },
+      {
+        "step": "b8-vm-resumed",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": true,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 218,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_pause_autosave",
+              "ui_j_tab_mission",
+              "ui_pause_devGUI",
+              "ui_stats_chapter",
+              "ui_stats_global",
+              "ui_pause_quicksave"
+            ]
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "joinRequests": 0,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "pause": {
+            "result": "left_by_pause",
+            "inSession": false,
+            "labelled": false,
+            "relabels": 1,
+            "restores": 1,
+            "clears": 2,
+            "leaves": 1,
+            "translationHooked": true,
+            "translations": 1,
+            "translationMode": 2,
+            "translationFlag": 0,
+            "translate8Calls": 214,
+            "localizeHooked": true,
+            "localizeSwaps": 0,
+            "pauseContext": false,
+            "lastKeys": [
+              "ui_stats_global",
+              "ui_pause_quicksave",
+              "ui_j_tab_mission",
+              "ui_pause_autosave",
+              "ui_pause_devGUI",
+              "ui_stats_chapter"
+            ]
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "left_by_player",
+            "connectionState": 5,
+            "joinRequests": 0,
+            "role": 1,
+            "lobbyMembers": 0
+          }
+        }
+      }
+    ],
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214hv",
+      "hostDll": "1B14C7C7386881B6E428A7BF927A3ACBBE21F51D60BEC76D359FE1E49A4EE402",
+      "guestDllMatches": true
+    },
+    "join-a": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "lobbyMembers": 2
+      },
+      "vmOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "hostWorld": {
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11
+    },
+    "join-b": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "lobbyMembers": 2
+      },
+      "vmOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    }
+  },
+  "scope": "Leave co-op (#157, 1214ht) on two machines and two Steam accounts: the host and then the partner leave the session from the pause menu (LEAVE CO-OP, the co-op confirmation, Leave co-op), each stays in its world, the other side sees the leave, and the pause menu reads Quit Game again after the session."
+}
