@@ -92,6 +92,7 @@ struct NpcAuthorityChannel {
     // 1214eo: host: the knocked-out body is held animated while a client's knocked-down choke victim pose drives it.
     bool victimHeld=false;std::uint64_t victimHolds=0,victimReleases=0;
     bool corpseFreezeEnded=false; // 1214fj (#127)
+    bool ownPairedCorpse=false;ULONGLONG ownPairedCorpseUntil=0; // 1214hh (#140): client, the corpse of her own paired scene
     // 1214eg: receiver pose rejections by reason: not ready, AI lease not ready, identity, replay, source clock.
     std::array<std::uint64_t,5> poseRejects{};double lastPoseLateMs=0;
     // 1213u (#46): a paired takedown by the CLIENT on this host-owned NPC. Client:
@@ -653,6 +654,10 @@ void serviceNpcStream(ULONGLONG tick){
             if(tick-c.reversePoseAt<350){if(!c.victimHeld&&npcCorpseHoldAnimated(c,true)){c.victimHeld=true;++c.victimHolds;}}
             else if(c.victimHeld&&tick-c.reversePoseAt>=400){npcPhysicsRelease(c);c.victimHeld=false;++c.victimReleases;}}
         if(localRole&&c.localPaired&&c.ready&&(!c.unconscious||tick-c.unconsciousAt<3000)&&tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;}
+        // 1214hh (#140): her own paired kill's native corpse keeps the host corpse following it until it settles.
+        if(localRole&&c.ownPairedCorpse&&c.corpse&&c.ready&&!c.localPaired&&tick<c.ownPairedCorpseUntil&&tick>=c.localCarryUntil){
+            if(tick-c.pairedHoldAt>=200){c.pairedHoldAt=tick;sendNpcControl(c,NpcAuthorityMessage::PairedHold,c.pairedVariant);}
+            if(tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;++npcOwnPairedCorpseStreamPoses;}}
         if(!localRole&&c.unconscious&&c.ready&&c.unconsciousSends<5&&tick-c.unconsciousSentAt>=500){c.unconsciousSentAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Unconscious))++c.unconsciousSends;}
         if(!localRole&&c.corpse&&c.ready&&c.corpseAt&&c.deadSends<5){const unsigned share=npcCombatDeathShare(c.arm);
             if(share==2&&!std::strcmp(c.deathShare,"none")){c.deathShare="combat";++npcCombatSharedDeaths;}
@@ -677,6 +682,7 @@ void serviceNpcStream(ULONGLONG tick){
             c.lease.binding.health=fresh.health;
             if(!localRole&&!c.unconscious&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0){c.unconscious=true;c.result="host_unconscious";}
             if(dead&&!c.corpse&&c.ready){c.corpse=true;c.corpseAt=tick;c.corpseUntil=tick+8000;c.result=localRole?"client_corpse":"host_corpse";
+                if(localRole&&(c.localPaired||tick<c.pairedUntil)&&!c.ownPairedCorpse){c.ownPairedCorpse=true;c.ownPairedCorpseUntil=tick+kNpcOwnPairedCorpseStreamMs;++npcOwnPairedCorpses;} // 1214hh
                 if(localRole)npcCorpseTraceBegin(static_cast<unsigned>(c.arm),c.lease.binding.npc.handle,tick,c.localPaired||tick<c.pairedUntil);} // 1214gd
             if(c.corpse){
                 // 1113d: corpses stay host-streamed (budgeted) for the stream lifetime; releasing
@@ -691,7 +697,8 @@ void serviceNpcStream(ULONGLONG tick){
                 if(trace){float root[3]{};const bool rootRead=memoryRead(c.lease.binding.npc.actor+0x300,root,12);
                     npcCorpseTraceSample(*trace,tick,rootRead?root:nullptr,c.corpsePhysics!=0,c.localPaired,npcCorpsePhysicsMode(c));}
                 if(localRole&&!c.localPaired){
-                    if(npcSkipOwnPairedCorpseHold&&trace&&trace->ownPaired){if(!trace->holdSkipped){trace->holdSkipped=true;++npcOwnPairedHoldSkips;}}
+                    // 1214hh: no hold while her own paired corpse streams to the host (the lab switch skips it for good).
+                    if(c.ownPairedCorpse&&(npcSkipOwnPairedCorpseHold||tick<c.ownPairedCorpseUntil)){if(trace&&!trace->holdSkipped){trace->holdSkipped=true;++npcOwnPairedHoldSkips;}}
                     else npcCorpseHoldAnimated(c);}
             }
             else if(localRole&&(c.unconscious||(c.localPaired&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0))){

@@ -121,6 +121,14 @@ bool npcSkipOwnPairedCorpseHold=false;unsigned long long npcOwnPairedHoldSkips=0
 // presents a corpse only once the corpse hold (npcCorpseHoldAnimated) holds its physics; until then the corpse is
 // native, as in single player. coop_corpse_present unheld restores the old presentation (lab only).
 bool npcPresentUnheldCorpse=false;unsigned long long npcUnheldCorpsePresentSkips=0;
+// 1214hh (#140): the host side. With the hold, her copy then showed the host corpse pose: Ramsey upright and sunk to the
+// waist in the floor (route-dunwall-lead-v1750e), and her search press picked the body up. The host corpse follows
+// her victim pose only until 1.6 s after her last PairedHold, about 1.5 s after her scene, while her native ragdoll
+// falls at 1.9 s and settles by about 4 s; the host corpse then froze in a mid-scene pose (1214fj). After her own
+// paired kill her game now keeps streaming her native corpse (PairedHold every 200 ms, PairedPose every 50 ms) for
+// 6 s after the death, without the hold or any presentation, so the host corpse settles in her pose. Then her
+// copy takes the normal hold.
+constexpr unsigned long long kNpcOwnPairedCorpseStreamMs=6000;unsigned long long npcOwnPairedCorpseStreamPoses=0,npcOwnPairedCorpses=0;
 // Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
 // trace starts).
 inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;
@@ -143,6 +151,7 @@ inline void npcCorpseTraceSample(NpcCorpseTrace& t,unsigned long long tick,const
 inline void writeNpcCorpseTraces(FILE* f){
     writeNpcRemovals(f);
     fprintf(f,",\"presentUnheldCorpse\":%s,\"unheldCorpsePresentSkips\":%llu",npcPresentUnheldCorpse?"true":"false",npcUnheldCorpsePresentSkips);
+    fprintf(f,",\"ownPairedCorpses\":%llu,\"ownPairedCorpseStreamPoses\":%llu",npcOwnPairedCorpses,npcOwnPairedCorpseStreamPoses);
     fprintf(f,",\"ownPairedHoldSkip\":%s,\"ownPairedHoldSkips\":%llu,\"corpseTraces\":[",npcSkipOwnPairedCorpseHold?"true":"false",npcOwnPairedHoldSkips);
     bool first=true;
     for(const auto& t:npcCorpseTraces){if(!t.startedAt)continue;
