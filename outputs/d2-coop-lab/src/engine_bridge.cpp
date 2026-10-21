@@ -1515,7 +1515,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_potion_fixture health")||!std::strcmp(text,"coop_potion_fixture mana")||!std::strcmp(text,"coop_potion_fixture off")||!std::strcmp(text,"coop_potion_fixture use_health")||!std::strcmp(text,"coop_potion_fixture use_mana"))return true;
     if(!std::strcmp(text,"coop_ranged_prop gun")||!std::strcmp(text,"coop_ranged_prop crossbow")||!std::strcmp(text,"coop_ranged_prop off"))return true;
     if(!std::strcmp(text,"coop_mesmerize_visual duplicate"))return true;
-    if(!std::strcmp(text,"coop_mesmerize_native probe")||!std::strcmp(text,"coop_mesmerize_native start")||!std::strcmp(text,"coop_mesmerize_native stop")||!std::strncmp(text,"coop_mesmerize_native spawn ",28))return true; // 1214gh
+    if(!std::strcmp(text,"coop_mesmerize_native probe")||!std::strcmp(text,"coop_mesmerize_native start")||!std::strcmp(text,"coop_mesmerize_native stop")||!std::strcmp(text,"coop_mesmerize_native force3")||!std::strncmp(text,"coop_mesmerize_native spawn ",28))return true; // 1214gh
     if(!std::strcmp(text,"coop_mesmerize_visual in")||!std::strcmp(text,"coop_mesmerize_visual loop")||!std::strcmp(text,"coop_mesmerize_visual out")||!std::strcmp(text,"coop_mesmerize_visual off"))return true;
     if(!std::strcmp(text,"coop_grenade_prop 15000")||!std::strcmp(text,"coop_grenade_prop off"))return true;
     if(!std::strcmp(text,"coop_agility_fixture 30000")||!std::strcmp(text,"coop_agility_fixture off"))return true;
@@ -1841,6 +1841,7 @@ void dispatchCoopCommand(void* system,const char* text) {
         if(got>=3&&std::isfinite(v[0])&&std::isfinite(v[1])&&std::isfinite(v[2])){std::memcpy(mesmerizeHostSpawnAt,v,12);mesmerizeHostAnchor=got==4?anchor:0;mesmerizeHostRequest=2;}return;}
     if(!std::strcmp(request.command,"coop_mesmerize_native start")){mesmerizeHostRequest=3;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_native stop")){mesmerizeHostRequest=4;return;}
+    if(!std::strcmp(request.command,"coop_mesmerize_native force3")){mesmerizeHostRequest=5;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_visual loop")){mesmerizeVisualRequest=2;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_visual out")){mesmerizeVisualRequest=3;return;}
     if(!std::strcmp(request.command,"coop_mesmerize_visual off")){mesmerizeVisualRequest=4;return;}

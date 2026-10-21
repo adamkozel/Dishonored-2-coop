@@ -76,6 +76,11 @@ void serviceMesmerizeHost(ULONGLONG tick){
         if(!mesmerizeHostConfigure(h.component,h.actor,mesmerizeHostAnchor?mesmerizeHostAnchor:0x3fff0010u)){refuse("configure_failed");return;}
         reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,1);h.startedAt=tick;++mesmerizeHostStarts;mesmerizeHostResult="started";return;
     }
+    // 1214gl: request the active state 3 directly (state 1 stayed for 20 s in mesmerize-host-v1719a/v1720a).
+    if(request==5){
+        if(state!=1){refuse("force3_needs_state_1");return;}
+        reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,3);mesmerizeHostResult="forced_3";return;
+    }
     if(request==4){
         if(state!=3){refuse("stop_needs_state_3");return;}
         reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,2);h.stoppedAt=tick;++mesmerizeHostStops;mesmerizeHostResult="stopped";return;
@@ -97,7 +102,11 @@ void writeMesmerizeHost(){
     if(h.component){const auto image=reinterpret_cast<std::uintptr_t>(gameImage);bool first=true;
         for(unsigned off=0x20;off<0xa8;off+=8){std::uintptr_t v=0;if(!memoryRead(h.component+off,&v,8))break;
             fprintf(f,"%s{\"off\":\"0x%x\",\"rva\":\"0x%llx\",\"raw\":\"0x%llx\"}",first?"":",",off,v>=image&&v<image+0x4000000?static_cast<unsigned long long>(v-image):0ull,static_cast<unsigned long long>(v));first=false;}}
-    fprintf(f,"],\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
+    {unsigned scene1=0,scene3=0,candidates=0;float timer=0;std::uintptr_t clist=0;
+     if(h.component){memoryRead(h.component+0x1dc,&scene1,4);memoryRead(h.component+0x1e0,&scene3,4);memoryRead(h.component+0x1e8,&timer,4);
+      if(memoryRead(h.component+0x198,&clist,8)&&clist)memoryRead(h.component+0x1a0,&candidates,4);candidates&=0xffffff;}
+     fprintf(f,"],\"appearScene\":%u,\"activeScene\":%u,\"activeTimer\":%.3f,\"candidates\":%u",scene1,scene3,timer,candidates);}
+    fprintf(f,",\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
               "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu,\"anchorHandle\":%u,\"anchorResolved\":%s,\"selfResolved\":%s}\n",
         h.componentAt,mesmerizeHostResult,mesmerizeHostProbes,mesmerizeHostProbeDefinition?"true":"false",mesmerizeHostSpawned,mesmerizeHostStarts,mesmerizeHostStops,mesmerizeHostRefused,h.handle,h.component?"true":"false",
