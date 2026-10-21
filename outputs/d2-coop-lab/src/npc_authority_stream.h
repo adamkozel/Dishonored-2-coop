@@ -93,6 +93,7 @@ struct NpcAuthorityChannel {
     bool victimHeld=false;std::uint64_t victimHolds=0,victimReleases=0;
     bool corpseFreezeEnded=false; // 1214fj (#127)
     bool ownPairedCorpse=false;ULONGLONG ownPairedCorpseUntil=0; // 1214hh (#140): client, the corpse of her own paired scene
+    bool settledHold=false; // 1214hj (#140): host, the corpse holds her settled pose
     // 1214eg: receiver pose rejections by reason: not ready, AI lease not ready, identity, replay, source clock.
     std::array<std::uint64_t,5> poseRejects{};double lastPoseLateMs=0;
     // 1213u (#46): a paired takedown by the CLIENT on this host-owned NPC. Client:
@@ -508,7 +509,7 @@ void receiveNpcPose(const CoopNpcPose& p,ULONGLONG tick){
     if(!c.buffer.push(p,presentationClock())){++c.rejected;++c.poseRejects[c.buffer.lastReject==1?3:4];
         if(c.buffer.lastReject==2)c.lastPoseLateMs=presentationClock()-(double(p.sampleUs)*.001+c.buffer.clock.offset);return;}
     c.peerAt=tick;if(reverse){c.reversePoseAt=tick;++c.reversePoses;std::memcpy(c.reverseRoot,p.root,12);
-        if(c.corpse&&c.corpseAt&&tick-c.corpseAt>=3000&&tick>=c.carriedUntil&&!c.corpseFreezeEnded){c.corpseFreezeEnded=true;++npcCorpseFreezeEnds;++npcSettledCorpseFollows;}} // 1214hi
+        if(c.corpse&&c.corpseAt&&tick-c.corpseAt>=3000&&tick>=c.carriedUntil&&!c.corpseFreezeEnded){c.corpseFreezeEnded=true;c.settledHold=true;++npcCorpseFreezeEnds;++npcSettledCorpseFollows;}} // 1214hi, 1214hj
     else{c.poseAt=tick;++c.poses;if(p.h.reserved&1){c.peerDownAt=tick;++c.downReceived;}}
 }
 // 1214en: engine thread, client: while the host's poses say the NPC is down (within 600 ms), keep the replica's native
@@ -639,6 +640,7 @@ void serviceNpcStream(ULONGLONG tick){
         if(!localRole)serviceHostNpcPaired(c,tick);
         if(localRole&&c.ready&&carriedHandle&&c.lease.binding.npc.handle==carriedHandle)c.localCarryUntil=tick+2500;
         if(!localRole&&hostCarriedHandle&&c.lease.binding.npc.handle==hostCarriedHandle&&!c.corpseFreezeEnded){c.corpseFreezeEnded=true;++npcCorpseFreezeEnds;}
+        if(!localRole&&c.settledHold&&((hostCarriedHandle&&c.lease.binding.npc.handle==hostCarriedHandle)||tick<c.carriedUntil))c.settledHold=false; // 1214hj: a carry ends it
         if(localRole&&c.ready&&tick<c.localCarryUntil){
             if(tick-c.carryControlAt>=200){c.carryControlAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Carry))++c.carryControls;}
             if(tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;++c.carryPoses;}}
@@ -646,8 +648,8 @@ void serviceNpcStream(ULONGLONG tick){
         // in its idle animation once the client's victim poses stopped (mission-coverage-v1628a, Corvo's window); only a
         // stopped channel released it. It now falls from the last presented pose when the window ends, or when the
         // client's poses have stopped for 300 ms outside a carry.
-        const bool corpseWindow=c.ready&&(tick<c.carriedUntil||(c.corpse&&tick<c.pairedCorpseUntil));
-        if(!localRole&&corpseWindow&&!(c.reversePoseAt&&tick-c.reversePoseAt>=300&&tick>=c.carriedUntil))npcCorpseHoldAnimated(c);
+        const bool corpseWindow=c.ready&&(tick<c.carriedUntil||(c.corpse&&tick<c.pairedCorpseUntil)||(c.corpse&&c.settledHold));
+        if(!localRole&&corpseWindow&&(c.settledHold||!(c.reversePoseAt&&tick-c.reversePoseAt>=300&&tick>=c.carriedUntil)))npcCorpseHoldAnimated(c);
         else if(!localRole&&c.corpsePhysics&&!c.victimHeld&&!npcCarrySuppressed(c,tick)){npcPhysicsRelease(c);++npcCorpseHoldReleases;}
         // 1214eo (#11): a client's knocked-down choke (64-67) knocks the host NPC out at the scene start, and its ragdoll
         // ignored the client's victim pose (take 1535a: 58 victim bodies applied, the host body never moved). The body is
@@ -740,10 +742,14 @@ void presentNpcStream(ULONGLONG tick){
         if(localRole&&shadowHeld.character&&shadowHeld.phase&&shadowHeld.handle==c.lease.binding.npc.handle){++npcHeldPresentSkips;continue;}
         const bool hostVictim=!localRole&&c.enabled&&c.ready&&c.reversePoseAt&&tick-c.reversePoseAt<350;
         const bool hostCorpseFreeze=!hostVictim&&!localRole&&c.enabled&&c.ready&&c.corpse&&!c.corpseFreezeEnded&&c.reversePoses&&c.reversePoseAt&&!c.corpsePhysics;
-        if(!hostVictim&&!hostCorpseFreeze&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
+        const bool hostSettled=!hostVictim&&!localRole&&c.enabled&&c.ready&&c.corpse&&c.settledHold&&c.corpsePhysics&&c.reversePoses; // 1214hj
+        if(!hostVictim&&!hostCorpseFreeze&&!hostSettled&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
         if(localRole&&c.corpse&&!c.corpsePhysics&&!npcPresentUnheldCorpse){++npcUnheldCorpsePresentSkips;continue;} // 1214hg (#140)
         NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(hostCorpseFreeze){if(!c.buffer.latest(p.pose)||!npcRenderCurrent(p.id))continue;p.until=tick+350;p.sequence=p.pose.h.sequence;++npcCorpseFreezeFrames;next.push_back(std::move(p));continue;}
+        if(hostSettled){if(!c.buffer.latest(p.pose)||!npcRenderCurrent(p.id))continue;p.until=tick+350;p.sequence=p.pose.h.sequence;
+            reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
+            ++npcSettledHoldFrames;next.push_back(std::move(p));continue;}
         if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
         ++c.roots;if(hostVictim)std::memcpy(c.presentedRoot,p.pose.root,12);next.push_back(std::move(p));
