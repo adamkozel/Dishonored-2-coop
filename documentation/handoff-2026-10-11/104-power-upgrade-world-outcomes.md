@@ -276,6 +276,25 @@ The live candidate is 1214fp.
     NPCs is missing.
   - Next: find what the death spawns (an entity snapshot of her world around the death) and spawn it at the host
     puppet's death.
+- **Baffling Shade's confusion is a native hit** (confirmed runtime):
+  - In partner-shade-v1731b, her game captured 9 hits of `components/characters/player/base/damage/decoy_baffle.damage`
+    on her copies as her shade died. All 9 were suppressed as replica-world events: their source is no longer her live
+    shade.
+  - In 1733a/b and 1730a (her shade faded, not killed) there was no such hit. The confusion comes with the shade's death
+    only. In 1733a/b, both worlds spawned unnamed FX entities where the shade vanished.
+  - **Next (1214gy):**
+    - On her game a `decoy_baffle` hit counts as hers and goes to the host as a PeerNative request (the declaration is
+      in the shared table and not replayable). The host's NPCs are then baffled natively.
+    - A lab-only fixture, `coop_shade_native kill`, kills the puppet on demand.
+- **Rat Shadow** (corrected):
+  - Discovery takes rat-shadow-local-v1734a and v1735a (Test-RatShadowLocal-v1734/v1735; confirmed runtime): Emily
+    alone, with the products disarmed, made a native Shadow Walk kill on guard 2 with `shadow_walk_rat_shadow` granted.
+  - The corpse stayed present and not hidden for 18 s, and the only new named entities were Shadow Walk's fake arms. No
+    rat appeared.
+  - External guides describe Rat Shadow as a traversal upgrade: in Shadow Walk, Emily moves through rat tunnels (Inverse
+    and GameSpew guides).
+  - So Rat Shadow has no NPC outcome to share. takedown-variants-v1656a's kept corpse is the native result, and #131's
+    Rat Shadow item is not applicable.
 - **Shades, still to do:**
   1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
      same definition as hers. A deadly shadow on the host fights the host's NPCs natively.
