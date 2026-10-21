@@ -113,6 +113,65 @@ The live candidate is 1214fp.
     then they are known limitations for the release notes.
   - The takedowns in 1658a/b failed because the guard had walked off. Kept as evidence.
 
+## Partner world-object powers on the host (#131)
+
+- **Mesmerize: a native spirit in the host world** (lab, Test-MesmerizeHost v1716-v1721, candidates 1214gh-gm):
+  - The host spawns the original object (`models/powers/mesmerize/mesmerize_object.def`), finds its
+    `arkCpntMesmerize` on the following frames (1716a: not attached on the spawn frame) and configures it as
+    `FUN_14072bf30` does.
+  - The anchor must resolve. The world handle `0x3fff0010` does not (1718a), so a static spawner is used (1719a).
+  - State 1 waits on its appear scene, which never ends on the host (1719a, 1720a, 1722a). State 3 is requested
+    directly (1214gl).
+  - State 3 crashed in the NPC AI (`FUN_14040ccf0`, 1721a). The native code finds the spirit through the local
+    player's Mesmerize slot (`player+0x390`, then `+0xd4`; confirmed static), and Corvo has none. The host sets a
+    phantom slot while its object runs (1214gm).
+  - mesmerize-host-v1722b (confirmed runtime): state 3 with no crash, the timer counts down, the two tutorial guards
+    are native targets, and the stop goes to state 2.
+- **Following Emily's own cast** (1214gn; partner-mesmerize-v1723a, Test-PartnerMesmerize-v1723; confirmed runtime):
+  - The host runs its object for her cast. Her world stream places it at her spirit's transform and anchors it to the
+    spawner of the nearest NPC. The host requests state 1, then state 3 once hers is active, and stops it at her
+    retire.
+  - Both spirits took the same NPC (190252915, on the lower floor) in 43 of 44 active host samples. Her stand 5 m
+    behind guard 2 was on the floor below, so guard 2 was taken in neither world.
+  - **Failure:** after the stop, the host object stayed in state 2 for 25 s with the phantom slot set.
+    - The state 2 exit scene never ends on the host either (confirmed runtime).
+    - Natively, its end posts a message (type `1439a6f30`, also posted by entity-removal paths), so the native power
+      spawns a new object per cast (hypothesis).
+    - 1214go returned the cached object to the idle state 0, 1.5 s after it entered state 2. State 0's enter only sets
+      bit 0x10 of the owner's `+0xd4` (confirmed static).
+- **partner-mesmerize-v1724a** (1214go, Test-PartnerMesmerize-v1724; fail, confirmed runtime):
+  - The host camera was held at her spirit. Same target set in both worlds in 46 of 51 samples. The taken NPC
+    (190252915, `ld_spawner_guard_tutorial_1` on the lower floor) ends 0 m apart in the two worlds.
+  - **Host crash** 1.5 s after the stop, in state 0's enter (`7290b4`, writing through the component's owner `+0x10`,
+    already null). The object's component list read empty afterward.
+  - **Cause:** the object is removed natively in state 2 (confirmed runtime). State 2's enter `FUN_140728f50` posts
+    the message at once when its exit scene does not start (scene id 0), and its update `FUN_14072f370` posts it when
+    the scene ends. 1723a's 25 s in state 2 were stale memory.
+  - 1214gp: the host drops its cached object once the component's owner or the handle no longer match it, clears the
+    phantom slot and spawns a new object per cast, as the native power does.
+- **partner-mesmerize-v1725a** (1214gp, Test-PartnerMesmerize-v1725; pass, confirmed runtime):
+  - The host followed her cast: begun, state 3, then stopped. Its object was in state 3 for 47 samples, with a host
+    target in 46 (up to 2).
+  - Guard 2 (189269860) was taken in 33 samples. It walked 13.3 m from the upper floor down to her spirit, in step in
+    both worlds (13.34 and 13.38 m), and ends 0.07 m apart. The lower-floor guard 1 (190252915) ends 0 m apart.
+  - Same target set in both worlds in 42 of 47 samples.
+  - After her spirit, the object was removed natively (`object_removed`) and the phantom slot cleared. Fixture
+    restored.
+- **Control and repeat** (1214gq: the lab-only switch `coop_mesmerize_native follow_off|follow_on`; a product build
+  always follows; Test-PartnerMesmerize-v1726; both pass, confirmed runtime):
+  - **partner-mesmerize-v1726a** (control, host object off): her spirit took guard 1 (52 samples) and guard 2 (25).
+    In the host world they kept walking, 16.2 m and 7.1 m, and her copies followed (0 m apart at the end). The host
+    took no NPC.
+  - **partner-mesmerize-v1726b** (followed): her spirit and the host object took guard 1, the same set in 51 of 52
+    samples. Guard 1 moved 0.55 m while taken, and 0 m apart at the end. The object was removed natively, the
+    phantom slot cleared and the fixture restored.
+  - So the stop and the walk to the spirit come from the host object: the host's AI mesmerizes its NPCs natively, and
+    NPC authority carries the result to Emily.
+  - **Preliminary visual review** (1726b frames at 10, 16 and 22 s): in Corvo's view, the guard stands facing the
+    spirit with the native link effect on its head, as in single player. Visual acceptance is recorded separately.
+- **Mesmerize status:** done for #131 in the lab (both roles: Emily casts, Corvo's world reacts). Corvo has no
+  Mesmerize. Next: the shades and Rat Shadow, then a product two-account check.
+
 ## Possessed bodies (host world; consistent)
 
 - carry-body-v1644b (confirmed runtime): Corvo, with Possession, Parasite and Decayed Harbor granted, possesses the

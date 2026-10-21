@@ -1,0 +1,63 @@
+{
+  "failure": null,
+  "cases": [
+    {
+      "deaths": [
+        {
+          "ms": 360283,
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "host"
+        },
+        {
+          "ms": 737889,
+          "restarted": true,
+          "deathScreens": true,
+          "dying": "client"
+        }
+      ],
+      "armedEnd": {
+        "client": {
+          "product": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "npc": "renewed_after_shared_checkpoint",
+          "fresh": true,
+          "checkpoint": "armed",
+          "usable": "renewed_after_shared_checkpoint"
+        },
+        "host": {
+          "product": "armed",
+          "door": "renewed_after_shared_checkpoint",
+          "npc": "renewed_after_shared_checkpoint",
+          "fresh": true,
+          "checkpoint": "armed",
+          "usable": "renewed_after_shared_checkpoint"
+        }
+      },
+      "samples": 83,
+      "memory": {
+        "client": {
+          "endPriv": 6820081664,
+          "growthMB": 68.7,
+          "handlesEnd": 1478,
+          "baselinePriv": 6748078080,
+          "handlesStart": 1475,
+          "steadyMBPerMin": 5.72,
+          "startPriv": 6734413824
+        },
+        "host": {
+          "endPriv": 6924554240,
+          "growthMB": 52.8,
+          "handlesEnd": 1465,
+          "baselinePriv": 6869139456,
+          "handlesStart": 1473,
+          "steadyMBPerMin": 4.4,
+          "startPriv": 6860906496
+        }
+      },
+      "soakMinutes": 14
+    }
+  ],
+  "passed": true,
+  "scope": "14-minute stability soak with the product controller (candidate-npc-combat-v1214gf): movement across the mission, shared deaths/restarts, transport/session/memory sampling; Dunwall fixture restored."
+}

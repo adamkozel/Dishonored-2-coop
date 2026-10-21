@@ -1,0 +1,77 @@
+{
+  "passed": false,
+  "failure": "After her spirit the host object is in state 2, phantom slot set True",
+  "case": {
+    "passed": false,
+    "failure": "After her spirit the host object is in state 2, phantom slot set True",
+    "checks": [
+      "Host follow: begins 1, state 3 requested 1, stops 1, refused 0 (result stopped, anchor 80412901 at 4.36 m)",
+      "Host object in state 3 in 44 samples; host targets in 43 samples (max 1); host guard 2 taken in 0; her own targets in 59",
+      "Guard 2 moved while the host object was active: host 4.02 m, her copy 4.02 m"
+    ],
+    "guardHandleHost": "0xb480764",
+    "filmed": false,
+    "guardHandleClient": "0xb480764",
+    "guardBefore": {
+      "client": [
+        -38.99,
+        -148.71,
+        66.4
+      ],
+      "host": [
+        -39.0958,
+        -148.442,
+        66.4
+      ]
+    },
+    "granted": [
+      {
+        "item": "models/powers/mesmerize/mesmerize.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/mesmerize_incombat.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "castAim": {
+      "target": [
+        -38.99,
+        -148.71,
+        66.4
+      ],
+      "stand": [
+        -43.99,
+        -148.71,
+        61.0036
+      ],
+      "yaw": 0.0,
+      "pitch": -45,
+      "distance": 5.0
+    },
+    "castAt": "2026-10-21T06:21:00.5868192+02:00",
+    "summary": {
+      "followBegins": 1,
+      "followForced": 1,
+      "followStops": 1,
+      "followRefused": 0,
+      "followResult": "stopped",
+      "anchor": 80412901,
+      "anchorDistance": 4.36,
+      "activeSamples": 44,
+      "hostTargetSamples": 43,
+      "guardTakenSamples": 0,
+      "maxHostTargets": 1.0,
+      "clientTargetSamples": 59,
+      "guardMoveWhileActive": {
+        "host": 4.02,
+        "client": 4.02
+      },
+      "endState": 2,
+      "endPhantom": true,
+      "endEnded": true
+    },
+    "restored": true
+  },
+  "scope": "Stage 4 partner Mesmerize (#131): Emily casts her own Mesmerize at the Dunwall tutorial guard 2 under the product controller; the host runs the native Mesmerize object for her cast, takes host NPCs and ends with her spirit; fixture restored."
+}

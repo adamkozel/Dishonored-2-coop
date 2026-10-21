@@ -4,10 +4,13 @@
 // All unrelated actors/powers receive the original call once, unchanged.
 using NativeMesmerizeEligibility=std::uint64_t(*)(std::uintptr_t,std::uintptr_t,unsigned char);
 NativeMesmerizeEligibility realMesmerizeEligibility=nullptr;
+// 1214gh (#131, native_mesmerize_host.h): the host-owned native Mesmerize object never takes the partner avatar.
+std::atomic<std::uintptr_t> mesmerizeHostOwnedComponent{0};std::atomic<std::uint64_t> mesmerizeHostPartnerBlocked{0};
 std::atomic<std::uint64_t> mesmerizePartnerConsidered{0},mesmerizePartnerBlocked{0},mesmerizePartnerReadFailed{0},mesmerizeEligibilityForwarded{0},mesmerizeOtherAccepted{0};
 std::atomic<std::uint64_t> mesmerizePartnerCacheHit{0},mesmerizePartnerCacheMiss{0},mesmerizePartnerReadTotalUs{0},mesmerizePartnerReadMaxUs{0};
 std::uint64_t filterMesmerizeEligibility(std::uintptr_t component,std::uintptr_t candidate,unsigned char range){
  const auto a=shadowDamageIdentity();
+ if(a.actor&&candidate==a.actor&&component&&component==mesmerizeHostOwnedComponent.load()){++mesmerizeHostPartnerBlocked;return 0;}
  if(a.actor&&candidate==a.actor){
   ++mesmerizePartnerConsidered;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const double start=presentationClock();
   thread_local NativeMesmerizeWorld discovered{};bool blocked=false;
