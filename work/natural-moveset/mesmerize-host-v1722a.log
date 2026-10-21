@@ -1,0 +1,47 @@
+{
+  "passed": false,
+  "failure": "The native object never reached the active state (max state 1)",
+  "notes": {
+    "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+    "probe": "definition_found",
+    "nearest": {
+      "name": "ld_spawner_guard_tutorial_2",
+      "handle": "0xb480764",
+      "position": [
+        -44.14,
+        -142.99,
+        66.4
+      ]
+    },
+    "spawnAt": [
+      -41.908524622090916,
+      -144.99512284855206,
+      66.9
+    ],
+    "anchor": "0x51d0137",
+    "spawn": "spawned",
+    "components": [
+      "0x1c53958",
+      "0x1b94a68",
+      "0x1c59ac8",
+      "0x1c4e588",
+      "0x1b80408",
+      "0x1c573e8",
+      "0x1b99028"
+    ],
+    "componentMs": 330,
+    "start": "started",
+    "anchorResolved": true,
+    "selfResolved": true,
+    "maxState": 1,
+    "maxTargets": 0,
+    "stop": "stop_needs_state_3",
+    "partnerBlocked": 0
+  },
+  "scope": "1716 (#131): the original Mesmerize object spawned and started natively in the lab host world (1214gh), its FSM state and host NPC targets sampled, then stopped; lab restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MesmerizeHost-v1719.ps1:74[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  74 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe native object never reached the active state (max state 1)[0m

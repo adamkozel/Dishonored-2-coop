@@ -17,6 +17,14 @@ unsigned mesmerizeHostRequest=0;float mesmerizeHostSpawnAt[3]{};
 unsigned mesmerizeHostAnchor=0;bool mesmerizeHostAnchorResolved=false,mesmerizeHostSelfResolved=false;
 const char* mesmerizeHostResult="idle";std::uintptr_t mesmerizeHostProbeDefinition=0;
 std::uint64_t mesmerizeHostProbes=0,mesmerizeHostSpawned=0,mesmerizeHostStarts=0,mesmerizeHostStops=0,mesmerizeHostRefused=0;
+// 1214gm: the native Mesmerize code finds the spirit through the local player: FUN_14040ccf0 (the mesmerize spots
+// around the spirit, reached from the NPC AI) reads FUN_1406dc560(*(*(player+0x390)+0xd4)), the player's Mesmerize
+// power and its world object handle (confirmed static). Corvo has no Mesmerize power, so +0x390 is null and forcing
+// state 3 crashed there (take mesmerize-host-v1721a, c0000005 at 40cd3c reading 0xd4). While the host object runs,
+// the player gets a phantom power block (zeroed, +0xd4 = the object's handle) in that slot when it is null; the slot
+// is restored to null when the object is back in state 0, on a world change, or before another spawn.
+std::uintptr_t mesmerizeHostPhantom=0,mesmerizeHostPhantomPlayer=0;bool mesmerizeHostPhantomSet=false,mesmerizeHostSlotWasSet=false;
+std::uint64_t mesmerizeHostPhantomOns=0,mesmerizeHostPhantomOffs=0;
 bool mesmerizeHostApis(){
     static const unsigned char resolve[]={0x89,0x4c,0x24,0x08,0x48,0x83,0xec,0x28},state[]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20},
         component[]={0x48,0x89,0x5c,0x24,0x10,0x44,0x89,0x44,0x24,0x18};
@@ -24,6 +32,21 @@ bool mesmerizeHostApis(){
         !std::memcmp(gameImage+0x877720,component,sizeof(component));
 }
 std::uintptr_t mesmerizeHostResolve(unsigned handle){return reinterpret_cast<std::uintptr_t(*)(unsigned)>(gameImage+0x6dc560)(handle);}
+std::uintptr_t mesmerizeHostLocalPlayer(){
+    static const unsigned char getter[]={0x48,0x81,0xc1,0xb0,0x30,0x31,0x00,0x33,0xd2,0xe9};
+    if(std::memcmp(gameImage+0x8a8ba0,getter,sizeof(getter))||!observedGame)return 0;
+    return reinterpret_cast<std::uintptr_t(*)(std::uintptr_t)>(gameImage+0x8a8ba0)(observedGame);}
+bool mesmerizeHostPhantomOn(unsigned handle){
+    const auto player=mesmerizeHostLocalPlayer();std::uintptr_t slot=0;if(!player||!memoryRead(player+0x390,&slot,8))return false;
+    if(slot&&slot!=mesmerizeHostPhantom){mesmerizeHostSlotWasSet=true;return false;} // a real power: never replaced
+    if(!mesmerizeHostPhantom){mesmerizeHostPhantom=reinterpret_cast<std::uintptr_t>(VirtualAlloc(nullptr,0x1000,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));if(!mesmerizeHostPhantom)return false;}
+    *reinterpret_cast<unsigned*>(mesmerizeHostPhantom+0xd4)=handle;*reinterpret_cast<std::uintptr_t*>(player+0x390)=mesmerizeHostPhantom;
+    mesmerizeHostPhantomPlayer=player;mesmerizeHostPhantomSet=true;++mesmerizeHostPhantomOns;return true;}
+void mesmerizeHostPhantomOff(){
+    if(!mesmerizeHostPhantomSet)return;std::uintptr_t slot=0;
+    if(mesmerizeHostPhantomPlayer&&mesmerizeHostPhantomPlayer==mesmerizeHostLocalPlayer()&&memoryRead(mesmerizeHostPhantomPlayer+0x390,&slot,8)&&slot==mesmerizeHostPhantom)
+        *reinterpret_cast<std::uintptr_t*>(mesmerizeHostPhantomPlayer+0x390)=0;
+    mesmerizeHostPhantomSet=false;mesmerizeHostPhantomPlayer=0;++mesmerizeHostPhantomOffs;}
 // FUN_14072bf30 with the world anchor: the object position and its forward in the anchor's frame.
 bool mesmerizeHostConfigure(std::uintptr_t component,std::uintptr_t actor,unsigned anchorHandle){
     const auto anchor=mesmerizeHostResolve(anchorHandle);mesmerizeHostAnchorResolved=anchor!=0;if(!anchor)return false;
@@ -38,7 +61,9 @@ bool mesmerizeHostConfigure(std::uintptr_t component,std::uintptr_t actor,unsign
 }
 void serviceMesmerizeHost(ULONGLONG tick){
     auto& h=mesmerizeHost;
-    if(h.actor&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch)){h={};mesmerizeHostOwnedComponent.store(0);mesmerizeHostResult="world_retired";}
+    if(h.actor&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch)){h={};mesmerizeHostOwnedComponent.store(0);mesmerizeHostResult="world_retired";mesmerizeHostPhantomSet=false;mesmerizeHostPhantomPlayer=0;}
+    // 1214gm: the phantom slot ends once the object is back in state 0 after a stop.
+    if(mesmerizeHostPhantomSet&&h.component&&h.stoppedAt&&tick-h.stoppedAt>3000&&GetCurrentThreadId()==engineThread.load()){int s=-1;if(memoryRead(h.component+0x2c,&s,4)&&s==0)mesmerizeHostPhantomOff();}
     // 1214gi: resolve the object's arkCpntMesmerize once it is attached, and verify it belongs to the object.
     if(h.actor&&!h.component&&GetCurrentThreadId()==engineThread.load()&&mesmerizeHostApis()&&tick-h.createdAt<10000){
         const auto c=nativeComponent(h.actor,kMesmerizeComponentType);std::uintptr_t owner=0;
@@ -74,6 +99,7 @@ void serviceMesmerizeHost(ULONGLONG tick){
         if(state==1||state==3){refuse("already_started");return;}
         mesmerizeHostSelfResolved=mesmerizeHostResolve(h.handle)==h.actor;
         if(!mesmerizeHostConfigure(h.component,h.actor,mesmerizeHostAnchor?mesmerizeHostAnchor:0x3fff0010u)){refuse("configure_failed");return;}
+        if(!mesmerizeHostPhantomOn(h.handle)){refuse(mesmerizeHostSlotWasSet?"player_has_mesmerize":"phantom_refused");return;}
         reinterpret_cast<void(*)(std::uintptr_t,int)>(gameImage+0x72bed0)(h.component,1);h.startedAt=tick;++mesmerizeHostStarts;mesmerizeHostResult="started";return;
     }
     // 1214gl: request the active state 3 directly (state 1 stayed for 20 s in mesmerize-host-v1719a/v1720a).
@@ -105,7 +131,8 @@ void writeMesmerizeHost(){
     {unsigned scene1=0,scene3=0,candidates=0;float timer=0;std::uintptr_t clist=0;
      if(h.component){memoryRead(h.component+0x1dc,&scene1,4);memoryRead(h.component+0x1e0,&scene3,4);memoryRead(h.component+0x1e8,&timer,4);
       if(memoryRead(h.component+0x198,&clist,8)&&clist)memoryRead(h.component+0x1a0,&candidates,4);candidates&=0xffffff;}
-     fprintf(f,"],\"appearScene\":%u,\"activeScene\":%u,\"activeTimer\":%.3f,\"candidates\":%u",scene1,scene3,timer,candidates);}
+     fprintf(f,"],\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s",mesmerizeHostPhantomSet?"true":"false",mesmerizeHostPhantomOns,mesmerizeHostPhantomOffs,mesmerizeHostSlotWasSet?"true":"false");
+    fprintf(f,",\"appearScene\":%u,\"activeScene\":%u,\"activeTimer\":%.3f,\"candidates\":%u",scene1,scene3,timer,candidates);}
     fprintf(f,",\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"
               "\"createdAt\":%llu,\"startedAt\":%llu,\"stoppedAt\":%llu,\"partnerBlocked\":%llu,\"anchorHandle\":%u,\"anchorResolved\":%s,\"selfResolved\":%s}\n",
