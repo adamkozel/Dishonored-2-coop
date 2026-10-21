@@ -265,6 +265,17 @@ The live candidate is 1214fp.
     - Her copy of guard 1 read 0 health while the host guard kept 40: the deadly shadow's kill diverges.
   - **Next (1214gx):** for a hit by her own shade, the amount is clamped to the PeerNative limit and a world inflictor
     or attacker is allowed. Her game records these hits.
+- **partner-shade-v1732a** (1214gx, Deadly Shade; pass, confirmed runtime):
+  - Her deadly shadow's hit (attacker her deadly shadow, `kill_damage`) counted as hers and was forwarded as a
+    PeerNative request.
+  - The host applied it natively, and guard 1 died in both worlds (host 40 to 0, her copy 40 to 0). Her deadly shadow
+    was streamed throughout (Corvo sees it), with no host puppet.
+- **Baffling Shade's cloud** (partner-shade-v1731b film; preliminary visual review):
+  - In her world, the shade's death releases a smoke cloud, and her copy of the guard stands in it.
+  - The host has no cloud, and its guard keeps fighting. So the death is shared, but the baffling effect on the host's
+    NPCs is missing.
+  - Next: find what the death spawns (an entity snapshot of her world around the death) and spawn it at the host
+    puppet's death.
 - **Shades, still to do:**
   1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
      same definition as hers. A deadly shadow on the host fights the host's NPCs natively.

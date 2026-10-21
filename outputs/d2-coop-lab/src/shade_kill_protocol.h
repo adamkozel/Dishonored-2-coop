@@ -8,6 +8,8 @@ struct CoopShadeKillPacket {
 };
 #pragma pack(pop)
 std::uint64_t shadeHostHitCount=0,shadeKillsSent=0,shadeKillsReceived=0,shadeKillsApplied=0,shadeKillsRefused=0,shadeKillSequence=0;
+// 1214gx: the hits by Emily's own shade on her game (npc_combat.h records them; shade-host.json reports them).
+struct ShadeOwnedHit{std::uint64_t count=0,forwarded=0;float amount=0;unsigned attacker=0,inflictor=0;const char* result="none";} shadeOwnedHit;
 const char* shadeKillResult="idle";CoopShadeKillPacket shadeKillPending{};bool shadeKillPendingValid=false;
 void receiveShadeKill(const CoopShadeKillPacket& q){
     ++shadeKillsReceived;

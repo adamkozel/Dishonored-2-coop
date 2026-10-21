@@ -665,8 +665,14 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
                     npcCombat.outgoing.push_back(p);++npcCombat.requests;++npcCombat.linkedRequests;return true;}
             }
             NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
-            if(localRole&&playerOwned&&inflictor!=0x3fff0010u&&attacker!=0x3fff0010u&&validNpcPeerNative(native)){
-                empty();
+            // 1214gx (#131): a hit by Emily's own shade (the deadly shadow's kill_damage) was refused here as
+            // hit_damage_parameters (partner-shade-v1731a). Its amount is clamped to the PeerNative limit (the host applies its
+            // own declaration) and a world inflictor or attacker is allowed when the other one is her shade.
+            const bool shadeOwned=localRole&&((capture.attacker.valid&&coopLocalShadeHandle(attacker))||(capture.inflictor.valid&&coopLocalShadeHandle(inflictor)));
+            if(shadeOwned){++shadeOwnedHit.count;shadeOwnedHit.amount=native.amount;shadeOwnedHit.attacker=attacker;shadeOwnedHit.inflictor=inflictor;shadeOwnedHit.result="refused";
+                if(!std::isfinite(native.amount)||native.amount>1000.f||native.amount<0.f)native.amount=1000.f;}
+            if(localRole&&playerOwned&&(shadeOwned||(inflictor!=0x3fff0010u&&attacker!=0x3fff0010u))&&validNpcPeerNative(native)){
+                empty();if(shadeOwned){++shadeOwnedHit.forwarded;shadeOwnedHit.result="forwarded";}
                 if(b.pendingRequests.count){++npcCombat.peerNativeBusy;return true;}
                 auto p=npcCombatPacket(*c,b,NpcCombatMessage::Request);p.sourceRole=1;p.request=++b.request;p.damage=NpcCombatDamage::PeerNative;p.ranged=native;
                 if(npcCombat.outgoing.size()>=64){stopNpcCombat("request_queue_full");return true;}

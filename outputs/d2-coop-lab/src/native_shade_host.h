@@ -175,6 +175,8 @@ void writeShadeHost(){
         fprintf(f,"%s{\"kind\":%u,\"partnerKind\":%u,\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.kind,q.kind,p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
     fprintf(f,"],\"continuous\":%llu,\"teleports\":%llu",shadeHostContinuous,shadeHostTeleports);
+    fprintf(f,",\"shadeOwnedHits\":%llu,\"shadeOwnedForwarded\":%llu,\"shadeOwnedAmount\":%.3f,\"shadeOwnedAttacker\":%u,\"shadeOwnedInflictor\":%u,\"shadeOwnedResult\":\"%s\"",
+        shadeOwnedHit.count,shadeOwnedHit.forwarded,shadeOwnedHit.amount,shadeOwnedHit.attacker,shadeOwnedHit.inflictor,shadeOwnedHit.result);
     fprintf(f,",\"hits\":%llu,\"killsSent\":%llu,\"killsReceived\":%llu,\"killsApplied\":%llu,\"killsRefused\":%llu,\"killResult\":\"%s\"",shadeHostHitCount,shadeKillsSent,shadeKillsReceived,shadeKillsApplied,shadeKillsRefused,shadeKillResult);
     fprintf(f,",\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
