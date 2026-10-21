@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-21T15:45:00+02:00",
+  "UpdatedAt": "2026-10-21T16:20:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22629,6 +22629,8 @@
     "SetupTool": "work/release/setup-tool-v1754/identity.json",
     "InstallTest": "work/release/release-install-v1754b: pass 8/8 (v1754a: the same pass on a first build from 1214hl, whose version resources still said 0.8.3; superseded)",
     "Fixes": "#140 the partner's assassinated story target stays and lies in both worlds (1214hb-hl); #146 a partner joining from the title screen waits for a key (1214ha)",
-    "Status": "built and install-tested; publishing"
+    "Status": "published and validated (install test, clean-PC proof on two accounts)",
+    "Published": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.8.4",
+    "CleanPc": "work/release/product-two-account-v1754b: pass (downloaded from GitHub in the VM, Install.cmd alone, the host starts a fresh campaign as Corvo, two Steam accounts in the same mission, walk, story trigger and death shared, leave, uninstall); v1754a stopped at a harness race (the idle Emily fixture read before the fresh campaign loaded), fixed in Test-ProductTwoAccount-v1754 (waits for a new world epoch)"
   }
 }
