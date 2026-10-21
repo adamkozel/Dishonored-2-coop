@@ -18,19 +18,26 @@ struct NpcRemovalRecord {unsigned long long tick=0;unsigned handle=0,path=0,fram
 std::array<NpcRemovalRecord,24> npcRemovalRecords{};std::atomic<std::uint64_t> npcRemovalCount{0};SRWLOCK npcRemovalLock=SRWLOCK_INIT;
 using NativePostNow=void*(*)(void*,void*,void*,void*);using NativeRemoveDelayed=void*(*)(void*,void*,void*,float);
 NativePostNow realPostNow=nullptr;NativeRemoveDelayed realRemoveDelayed=nullptr;bool npcRemovalTraceInstalled=false;
-inline void noteNpcRemoval(void* entity,unsigned path){
-    const auto e=reinterpret_cast<std::uintptr_t>(entity);const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t vt=0;
-    if(!e||!memoryRead(e,&vt,8)||vt!=base+0x1c5e108)return;
-    NpcRemovalRecord r{};r.tick=GetTickCount64();r.path=path;r.thread=GetCurrentThreadId();memoryRead(e+0xa8,&r.handle,4);
-    void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
-    for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
-    AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalRecords[npcRemovalCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);}
 // 1214hc: her copy of Ramsey was removed by the event queue (route-dunwall-lead-v1745d: its dispatch 1408853e8 posts a
 // queued record's event to its entity, 10.2 s after the death), so the removal was queued earlier. The queue insert
 // FUN_1408851f0 (queue, record, entity, delay; the record's event at +8) is hooked too: a queued removal of an arkNPC
 // keeps its delay and caller stack in its own ring (the 24 posted ones were overwritten by the restore's teardown).
 struct NpcRemovalQueued {unsigned long long tick=0;unsigned handle=0,frames=0,thread=0;float delay=0;unsigned rva[12]{};};
 std::array<NpcRemovalQueued,24> npcRemovalQueuedRecords{};std::atomic<std::uint64_t> npcRemovalQueuedCount{0};
+// 1214hd: route-dunwall-lead-v1746b queued 43 NPC removals (delay 0, one job-thread stack 884095 883f6c c96192 ceb149
+// ce583f cebef6 c94431) and the ring kept the last 24, not Ramsey's. Removals (queued or posted) of a handle the corpse
+// trace follows go to a watched list of 8 that is never overwritten.
+std::array<NpcRemovalQueued,8> npcRemovalWatched{};std::atomic<unsigned> npcRemovalWatchedCount{0};
+inline bool npcRemovalWatchedHandle(unsigned handle);
+inline void npcRemovalWatch(const NpcRemovalQueued& r){if(!npcRemovalWatchedHandle(r.handle))return;const auto i=npcRemovalWatchedCount.fetch_add(1);if(i<8)npcRemovalWatched[i]=r;}
+inline void noteNpcRemoval(void* entity,unsigned path){
+    const auto e=reinterpret_cast<std::uintptr_t>(entity);const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t vt=0;
+    if(!e||!memoryRead(e,&vt,8)||vt!=base+0x1c5e108)return;
+    NpcRemovalRecord r{};r.tick=GetTickCount64();r.path=path;r.thread=GetCurrentThreadId();memoryRead(e+0xa8,&r.handle,4);
+    void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
+    for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
+    AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalRecords[npcRemovalCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);
+    NpcRemovalQueued w{};w.tick=r.tick;w.handle=r.handle;w.thread=r.thread;w.delay=-static_cast<float>(path);w.frames=r.frames;std::memcpy(w.rva,r.rva,sizeof(w.rva));npcRemovalWatch(w);}
 using NativeQueueInsert=void(*)(void*,void*,void*,std::uint32_t);NativeQueueInsert realQueueInsert=nullptr;
 inline void hookQueueInsert(void* queue,void* record,void* entity,std::uint32_t delayBits){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t def=0,vt=0;const auto e=reinterpret_cast<std::uintptr_t>(entity);
@@ -38,7 +45,7 @@ inline void hookQueueInsert(void* queue,void* record,void* entity,std::uint32_t 
         NpcRemovalQueued r{};r.tick=GetTickCount64();r.thread=GetCurrentThreadId();memoryRead(e+0xa8,&r.handle,4);std::memcpy(&r.delay,&delayBits,4);
         void* frames[20]{};const auto n=RtlCaptureStackBackTrace(0,20,frames,nullptr);
         for(unsigned i=0;i<n&&r.frames<12;++i){const auto f=reinterpret_cast<std::uintptr_t>(frames[i]);if(f>=base&&f<base+68988928)r.rva[r.frames++]=static_cast<unsigned>(f-base);}
-        AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalQueuedRecords[npcRemovalQueuedCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);}
+        AcquireSRWLockExclusive(&npcRemovalLock);npcRemovalQueuedRecords[npcRemovalQueuedCount.fetch_add(1)%24]=r;ReleaseSRWLockExclusive(&npcRemovalLock);npcRemovalWatch(r);}
     realQueueInsert(queue,record,entity,delayBits);}
 inline void* hookPostNow(void* e,void* buf,void* def,void* args){if(def==gameImage+0x39a6f30)noteNpcRemoval(e,1);return realPostNow(e,buf,def,args);}
 inline void* hookRemoveDelayed(void* e,void* p2,void* p3,float delay){noteNpcRemoval(e,2);return realRemoveDelayed(e,p2,p3,delay);}
@@ -69,11 +76,19 @@ inline void writeNpcRemovals(FILE* f){
      for(std::uint64_t i=q>24?q-24:0;i<q;++i){const auto& r=npcRemovalQueuedRecords[i%24];
         fprintf(f,"%s{\"tick\":%llu,\"handle\":%u,\"delay\":%.3f,\"thread\":%u,\"rva\":[",firstQ?"":",",r.tick,r.handle,r.delay,r.thread);firstQ=false;
         for(unsigned k=0;k<r.frames;++k)fprintf(f,"%s\"%x\"",k?",":"",r.rva[k]);fputs("]}",f);}}
+    fprintf(f,"],\"npcRemovalsWatched\":[");
+    {const auto wn=(std::min)(npcRemovalWatchedCount.load(),8u);for(unsigned i=0;i<wn;++i){const auto& r=npcRemovalWatched[i];
+        fprintf(f,"%s{\"tick\":%llu,\"handle\":%u,\"delay\":%.3f,\"thread\":%u,\"rva\":[",i?",":"",r.tick,r.handle,r.delay,r.thread);
+        for(unsigned k=0;k<r.frames;++k)fprintf(f,"%s\"%x\"",k?",":"",r.rva[k]);fputs("]}",f);}}
     ReleaseSRWLockShared(&npcRemovalLock);fputs("]",f);}
 struct NpcCorpseSample {unsigned ms=0;float root[3]{};unsigned char held=0,paired=0,mode=0xff;};
 struct NpcCorpseTrace {unsigned arm=0,handle=0,count=0,vanishedMs=0;bool vanished=false,ownPaired=false,holdSkipped=false;unsigned long long startedAt=0;NpcCorpseSample samples[80]{};};
 NpcCorpseTrace npcCorpseTraces[4]{};unsigned npcCorpseTraceCount=0;
 bool npcSkipOwnPairedCorpseHold=false;unsigned long long npcOwnPairedHoldSkips=0;
+// Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
+// trace starts).
+inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;
+    NativeHealth h{};return readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),handle,h)&&h.current<=0;}
 inline NpcCorpseTrace* npcCorpseTraceFor(unsigned arm,unsigned handle){for(auto& t:npcCorpseTraces)if(t.startedAt&&t.arm==arm&&t.handle==handle)return &t;return nullptr;}
 inline void npcCorpseTraceBegin(unsigned arm,unsigned handle,unsigned long long tick,bool ownPaired){
     auto& t=npcCorpseTraces[npcCorpseTraceCount++%4];t=NpcCorpseTrace{};t.arm=arm;t.handle=handle;t.startedAt=tick?tick:1;t.ownPaired=ownPaired;}

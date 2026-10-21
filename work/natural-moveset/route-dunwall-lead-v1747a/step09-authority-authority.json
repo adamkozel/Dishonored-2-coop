@@ -1,0 +1,5190 @@
+{
+  "step": "step09-authority",
+  "host": {
+    "npcs": [
+      {
+        "handle": 190318452,
+        "name": "ld_spawner_ramsey_escape",
+        "definition": "models/characters/def/story/mortimer_ramsey.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -44.0843,
+          -119.972,
+          61.3842
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 0,
+        "maximum": 50,
+        "logic": 1,
+        "ownerFlags": 136,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": false,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": false,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 15,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 4
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          }
+        ]
+      }
+    ],
+    "stream": {
+      "enabled": false,
+      "result": "world_or_native_phase_changed",
+      "epoch": 16,
+      "peerEpoch": 16,
+      "rejected": 0,
+      "bodyApplied": 61,
+      "bodyRefused": 0,
+      "framesOwned": 410,
+      "childrenUpdated": 112,
+      "poseIntervalMs": 103,
+      "heldSkips": 0,
+      "corpseReleases": 0,
+      "corpseFreezeFrames": 911,
+      "corpseFreezeEnds": 0,
+      "ashSent": 0,
+      "ashApplied": 0,
+      "ashRefused": 0,
+      "ashEffects": 0,
+      "entries": [
+        {
+          "handle": 190252915,
+          "civilian": false,
+          "arm": 7,
+          "peerArm": 7,
+          "peerHandle": 190252915,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "b32eead658d046cc",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 620,
+          "received": 226,
+          "rejected": 0,
+          "poses": 506,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 189269860,
+          "civilian": false,
+          "arm": 8,
+          "peerArm": 8,
+          "peerHandle": 189269860,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "4800b5f6cd5fbae9",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 620,
+          "received": 226,
+          "rejected": 0,
+          "poses": 506,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190973822,
+          "civilian": false,
+          "arm": 9,
+          "peerArm": 9,
+          "peerHandle": 190973822,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "d7c363ca9cc1a23d",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 607,
+          "received": 226,
+          "rejected": 13,
+          "poses": 493,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190318452,
+          "civilian": false,
+          "arm": 10,
+          "peerArm": 10,
+          "peerHandle": 190318452,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 224,
+          "rig": "1176636ddcef3f4e",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 725,
+          "received": 252,
+          "rejected": 6,
+          "poses": 611,
+          "roots": 72,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 123,
+          "pairedResult": "host_paired_released",
+          "reversePoses": 18,
+          "reverseRoot": [
+            -44.096,
+            -120.091,
+            61.0
+          ],
+          "presentedRoot": [
+            -44.096,
+            -120.091,
+            61.0
+          ],
+          "corpse": true,
+          "deathShare": "combat",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 256,
+          "downSent": 257,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            6,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190777211,
+          "civilian": false,
+          "arm": 11,
+          "peerArm": 11,
+          "peerHandle": 190777211,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "47084305ea5e5f21",
+          "references": 0,
+          "released": 0,
+          "lost": 0,
+          "sent": 612,
+          "received": 226,
+          "rejected": 8,
+          "poses": 498,
+          "roots": 0,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        }
+      ],
+      "bodyEntries": [
+        {
+          "arm": 7,
+          "handle": 190252915,
+          "applied": 0,
+          "sequence": 0
+        },
+        {
+          "arm": 8,
+          "handle": 189269860,
+          "applied": 0,
+          "sequence": 0
+        },
+        {
+          "arm": 9,
+          "handle": 190973822,
+          "applied": 0,
+          "sequence": 0
+        },
+        {
+          "arm": 10,
+          "handle": 190318452,
+          "applied": 61,
+          "sequence": 182
+        },
+        {
+          "arm": 11,
+          "handle": 190777211,
+          "applied": 0,
+          "sequence": 0
+        }
+      ],
+      "poseDiagnostics": [
+        {
+          "arm": 7,
+          "handle": 190252915,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 8,
+          "handle": 189269860,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 9,
+          "handle": 190973822,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 13,
+          "lastFailure": "joint_transform",
+          "joint": 1,
+          "matrix": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            -3.29952717,
+            -0.0238903649,
+            0
+          ],
+          "root": [
+            -44.6080894,
+            -123.454704,
+            61.0000267,
+            -0.680843472,
+            -0.732429385,
+            0,
+            0.732429385,
+            -0.680843472,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "arm": 10,
+          "handle": 190318452,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 11,
+          "handle": 190777211,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 8,
+          "lastFailure": "joint_transform",
+          "joint": 1,
+          "matrix": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            -3.57922411,
+            0.00351638161,
+            0
+          ],
+          "root": [
+            -44.3157806,
+            -121.55246,
+            61.0000267,
+            -0.439261913,
+            -0.898359179,
+            0,
+            0.898359179,
+            -0.439261913,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "relevance": {
+        "bound": 0,
+        "scans": 31,
+        "added": 0,
+        "dropped": 0,
+        "evicted": 0,
+        "lifeSent": 0,
+        "lifeReceived": 34,
+        "lifeApplied": 0,
+        "lifeRefused": 0,
+        "clientBound": 0,
+        "clientRefused": 0,
+        "clientDeferred": 0,
+        "clientBoundLive": 0,
+        "clientBusy": 0,
+        "helloCatalogReads": 0,
+        "pairedHolds": 1,
+        "pairedKnockouts": 0,
+        "pairedRefused": 0,
+        "pairedLocal": 0,
+        "pairedCorpses": 0,
+        "pairedFollows": 0,
+        "hostOwnPaired": 0,
+        "priorityPoses": 256,
+        "deadReconciled": 0,
+        "deadSent": 0,
+        "vanishedDead": 0,
+        "combatSharedDeaths": 1,
+        "clientDeadApplied": 0,
+        "clientDeadAlready": 0,
+        "clientDeadRefused": 0,
+        "clientDeadLast": "none",
+        "reconcileDecl": [
+          0.0,
+          0,
+          0,
+          0
+        ],
+        "catalogStale": 0,
+        "workerRequests": 31,
+        "workerCompleted": 31,
+        "workerFailed": 0,
+        "workerLastMs": 19.181,
+        "workerMaxMs": 21.851
+      },
+      "transport": {
+        "available": true,
+        "sendRate": 524288,
+        "pendingUnreliable": 15714,
+        "pendingReliable": 0,
+        "queueUs": 28068
+      },
+      "decodeRejected": 0,
+      "poseScopeRejected": 0,
+      "session": {
+        "enabled": false,
+        "result": "world_or_native_phase_changed",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 0,
+        "released": 4,
+        "retired": 0,
+        "lost": 0
+      },
+      "npcRemovalTrace": true,
+      "npcRemovalCount": 89,
+      "npcRemovals": [
+        {
+          "tick": 118048156,
+          "handle": 190056304,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 186648380,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 189925230,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 187565898,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 190711674,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 190646137,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 187369287,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 187041602,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048156,
+          "handle": 186517306,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118066093,
+          "handle": 188876638,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066187,
+          "handle": 187107139,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066281,
+          "handle": 189138786,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066390,
+          "handle": 187434824,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066484,
+          "handle": 189073249,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066593,
+          "handle": 190187378,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066687,
+          "handle": 187959120,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066781,
+          "handle": 188942175,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066890,
+          "handle": 186779454,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066984,
+          "handle": 188745564,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067093,
+          "handle": 190383989,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067187,
+          "handle": 189007712,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067281,
+          "handle": 190580600,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067390,
+          "handle": 190121841,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067484,
+          "handle": 187500361,
+          "path": 1,
+          "thread": 31084,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        }
+      ],
+      "npcRemovalQueuedCount": 0,
+      "npcRemovalsQueued": [],
+      "npcRemovalsWatched": [],
+      "ownPairedHoldSkip": false,
+      "ownPairedHoldSkips": 0,
+      "corpseTraces": []
+    },
+    "combat": {
+      "linkedSleepCaptured": 0,
+      "passedThrough": 0,
+      "lastDecl": "",
+      "channelsAdded": 5,
+      "channelsRetired": 11,
+      "rearms": 1,
+      "lastRetire": "actor_unbound",
+      "wanted": true,
+      "enabled": false,
+      "result": "session_or_world_changed",
+      "nonce": 2,
+      "localHits": 0,
+      "requests": 1,
+      "committed": 1,
+      "applied": 0,
+      "duplicates": 0,
+      "rejected": 0,
+      "suppressed": 0,
+      "eventsQueued": 0,
+      "lastOutcome": {
+        "before": 50,
+        "after": 0,
+        "maximum": 50,
+        "inflicted": 50
+      },
+      "entries": [
+        {
+          "arm": 7,
+          "peerArm": 7,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 40.0
+        },
+        {
+          "arm": 8,
+          "peerArm": 8,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 40.0
+        },
+        {
+          "arm": 9,
+          "peerArm": 9,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 40.0
+        },
+        {
+          "arm": 10,
+          "peerArm": 10,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 1,
+          "request": 0,
+          "peerRequest": 1,
+          "pending": 0,
+          "terminal": true,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        },
+        {
+          "arm": 11,
+          "peerArm": 11,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 40.0
+        }
+      ],
+      "deaths": 1,
+      "preDeathReleased": 2,
+      "replicaGapSuppressed": 0,
+      "hostPairedPassed": 0,
+      "stopHistory": [
+        {
+          "tick": 118089593,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "retireHistory": [
+        {
+          "tick": 118089593,
+          "reason": "actor_unbound",
+          "arm": 4,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118089593,
+          "reason": "actor_unbound",
+          "arm": 5,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118089593,
+          "reason": "actor_unbound",
+          "arm": 6,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "actor_unbound",
+          "arm": 7,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "actor_unbound",
+          "arm": 8,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "actor_unbound",
+          "arm": 9,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "actor_unbound",
+          "arm": 10,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156843,
+          "reason": "actor_unbound",
+          "arm": 11,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "sceneProbes": [],
+      "handshake": {
+        "sendFailures": 5,
+        "traceCount": 37,
+        "sent": [
+          0,
+          5,
+          10,
+          0,
+          1,
+          0
+        ],
+        "received": [
+          0,
+          10,
+          5,
+          1,
+          0,
+          0
+        ],
+        "trace": [
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100343,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100343,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100343,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100343,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100343,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100390,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100390,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100390,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100390,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100390,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 2,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 2,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 2,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 2,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 2,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118139828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 3,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118139875,
+            "sent": true,
+            "result": "sent",
+            "kind": 4,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118156843,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156843,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156843,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156843,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156843,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          }
+        ]
+      },
+      "captured": 0,
+      "workerCaptured": 0,
+      "lastCaptureThread": 0,
+      "engineThread": 31084,
+      "nativeAttempt": {
+        "ownerFlags": 0,
+        "declaration": "",
+        "rawInfo": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "nativeOutcome": {
+        "stage": "native_death_complete",
+        "inflicted": 50,
+        "after": 0,
+        "healthGeneration": 7030,
+        "readFailure": "none",
+        "readTerminal": true,
+        "bindingGeneration": 7030,
+        "resultWords": [
+          1112014848,
+          0,
+          0,
+          0
+        ],
+        "maximumChanged": 0
+      },
+      "fixtureHoldsFrames": true,
+      "fixturePairedFrameReleases": 0,
+      "nativeSubtractions": 1,
+      "nativeLethalSubtractions": 1,
+      "pendingRequests": 0,
+      "pendingHighWater": 0,
+      "sourceHistory": [],
+      "triggerFixture": {
+        "nonce": 0,
+        "result": "unused"
+      },
+      "worldCommitted": 0,
+      "worldApplied": 0,
+      "replicaWorldSuppressed": 0,
+      "hostWorldPassed": 0,
+      "hostWorldCommitted": 0,
+      "hostWorldApplied": 0,
+      "hostWorldGains": 0,
+      "helloFollowed": 0,
+      "helloWaited": 0,
+      "followSubtractions": 0,
+      "hostUnconsciousPassed": 0,
+      "hostNativePassed": 0,
+      "hostNativeLast": "none",
+      "peerNativeRequests": 0,
+      "peerNativeApplied": 0,
+      "peerNativeBusy": 0,
+      "linkedRequests": 0,
+      "linkedApplied": 0,
+      "impliedReady": 0,
+      "hostWorldRebased": 0,
+      "ordinaryTestUntil": 0,
+      "testAssassinationsRefused": 0,
+      "fixtureFrameHolds": 0,
+      "fixture": {
+        "active": false,
+        "ready": false,
+        "result": "session_or_world_changed",
+        "acquired": 0,
+        "released": 0,
+        "lost": 0
+      }
+    }
+  },
+  "client": {
+    "npcs": [
+      {
+        "handle": 190318452,
+        "name": "ld_spawner_ramsey_escape",
+        "definition": "models/characters/def/story/mortimer_ramsey.def",
+        "unique": true,
+        "reciprocal": true,
+        "children": 1,
+        "position": [
+          -44.5511,
+          -119.98,
+          61.1975
+        ],
+        "aiTypes": [
+          {
+            "type": ".?AVarkCpntAIDecision@@",
+            "vtableRva": "0x1cc4108"
+          },
+          {
+            "type": ".?AVarkCpntAICombatAttack@@",
+            "vtableRva": "0x1b93a88"
+          },
+          {
+            "type": ".?AVarkCpntAIReflex@@",
+            "vtableRva": "0x1b8a588"
+          }
+        ],
+        "health": 0,
+        "maximum": 50,
+        "logic": 1,
+        "ownerFlags": 136,
+        "authority": true,
+        "acquireEligible": false,
+        "hostStreamEligible": false,
+        "paused": false,
+        "gamePaused": false,
+        "leaseEligible": false,
+        "civilian": false,
+        "ai": [
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 15,
+            "activeCount": 4
+          },
+          {
+            "flags": 2684354562,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 4
+          },
+          {
+            "flags": 536870914,
+            "low": 2,
+            "pauseRefs": 0,
+            "mode": 0,
+            "scheduler": false,
+            "tree": false,
+            "live": 25,
+            "activeCount": 2
+          }
+        ]
+      }
+    ],
+    "stream": {
+      "enabled": false,
+      "result": "world_or_native_phase_changed",
+      "epoch": 16,
+      "peerEpoch": 16,
+      "rejected": 3,
+      "bodyApplied": 6697,
+      "bodyRefused": 6,
+      "framesOwned": 17973,
+      "childrenUpdated": 15695,
+      "poseIntervalMs": 103,
+      "heldSkips": 0,
+      "corpseReleases": 0,
+      "corpseFreezeFrames": 0,
+      "corpseFreezeEnds": 0,
+      "ashSent": 0,
+      "ashApplied": 0,
+      "ashRefused": 0,
+      "ashEffects": 0,
+      "entries": [
+        {
+          "handle": 190252915,
+          "civilian": false,
+          "arm": 7,
+          "peerArm": 7,
+          "peerHandle": 190252915,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "b32eead658d046cc",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 226,
+          "received": 620,
+          "rejected": 0,
+          "poses": 506,
+          "roots": 3007,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 189269860,
+          "civilian": false,
+          "arm": 8,
+          "peerArm": 8,
+          "peerHandle": 189269860,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "4800b5f6cd5fbae9",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 226,
+          "received": 619,
+          "rejected": 0,
+          "poses": 505,
+          "roots": 3007,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190973822,
+          "civilian": false,
+          "arm": 9,
+          "peerArm": 9,
+          "peerHandle": 190973822,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "d7c363ca9cc1a23d",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 226,
+          "received": 606,
+          "rejected": 0,
+          "poses": 492,
+          "roots": 2948,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190318452,
+          "civilian": false,
+          "arm": 10,
+          "peerArm": 10,
+          "peerHandle": 190318452,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 224,
+          "rig": "1176636ddcef3f4e",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 252,
+          "received": 725,
+          "rejected": 0,
+          "poses": 635,
+          "roots": 2927,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 123,
+          "pairedResult": "client_paired_corpse",
+          "reversePoses": 24,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": true,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 257,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        },
+        {
+          "handle": 190777211,
+          "civilian": false,
+          "arm": 11,
+          "peerArm": 11,
+          "peerHandle": 190777211,
+          "enabled": false,
+          "ready": false,
+          "result": "world_or_native_phase_changed",
+          "joints": 223,
+          "rig": "47084305ea5e5f21",
+          "references": 0,
+          "released": 2,
+          "lost": 0,
+          "sent": 226,
+          "received": 611,
+          "rejected": 0,
+          "poses": 497,
+          "roots": 2969,
+          "lifecycleDiff": 0,
+          "localPaired": false,
+          "unconscious": false,
+          "hostPairedLease": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "reverseRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "presentedRoot": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "corpse": false,
+          "deathShare": "none",
+          "deadSends": 0,
+          "carryControls": 0,
+          "carryPoses": 0,
+          "priorityPoses": 0,
+          "downSent": 0,
+          "downReceived": 0,
+          "downApplies": 0,
+          "downApplied": false,
+          "victimHolds": 0,
+          "victimReleases": 0,
+          "leaseReady": false,
+          "poseRejects": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "lastPoseLateMs": 0.0
+        }
+      ],
+      "bodyEntries": [
+        {
+          "arm": 7,
+          "handle": 190252915,
+          "applied": 459,
+          "sequence": 61
+        },
+        {
+          "arm": 8,
+          "handle": 189269860,
+          "applied": 1907,
+          "sequence": 403
+        },
+        {
+          "arm": 9,
+          "handle": 190973822,
+          "applied": 762,
+          "sequence": 613
+        },
+        {
+          "arm": 10,
+          "handle": 190318452,
+          "applied": 818,
+          "sequence": 727
+        },
+        {
+          "arm": 11,
+          "handle": 190777211,
+          "applied": 788,
+          "sequence": 614
+        }
+      ],
+      "poseDiagnostics": [
+        {
+          "arm": 7,
+          "handle": 190252915,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 8,
+          "handle": 189269860,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 9,
+          "handle": 190973822,
+          "stale": false,
+          "gaps": 1,
+          "recoveries": 1,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 10,
+          "handle": 190318452,
+          "stale": false,
+          "gaps": 0,
+          "recoveries": 0,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "arm": 11,
+          "handle": 190777211,
+          "stale": false,
+          "gaps": 1,
+          "recoveries": 1,
+          "failures": 0,
+          "lastFailure": "none",
+          "joint": -1,
+          "matrix": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "root": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "relevance": {
+        "bound": 0,
+        "scans": 0,
+        "added": 0,
+        "dropped": 0,
+        "evicted": 0,
+        "lifeSent": 34,
+        "lifeReceived": 0,
+        "lifeApplied": 0,
+        "lifeRefused": 0,
+        "clientBound": 11,
+        "clientRefused": 0,
+        "clientDeferred": 0,
+        "clientBoundLive": 0,
+        "clientBusy": 0,
+        "helloCatalogReads": 0,
+        "pairedHolds": 0,
+        "pairedKnockouts": 0,
+        "pairedRefused": 0,
+        "pairedLocal": 1,
+        "pairedCorpses": 0,
+        "pairedFollows": 0,
+        "hostOwnPaired": 0,
+        "priorityPoses": 0,
+        "deadReconciled": 0,
+        "deadSent": 0,
+        "vanishedDead": 0,
+        "combatSharedDeaths": 0,
+        "clientDeadApplied": 0,
+        "clientDeadAlready": 0,
+        "clientDeadRefused": 0,
+        "clientDeadLast": "none",
+        "reconcileDecl": [
+          0.0,
+          0,
+          0,
+          0
+        ],
+        "catalogStale": 0,
+        "workerRequests": 33,
+        "workerCompleted": 33,
+        "workerFailed": 0,
+        "workerLastMs": 18.158,
+        "workerMaxMs": 20.685
+      },
+      "transport": {
+        "available": true,
+        "sendRate": 524288,
+        "pendingUnreliable": 0,
+        "pendingReliable": 0,
+        "queueUs": 0
+      },
+      "decodeRejected": 0,
+      "poseScopeRejected": 3,
+      "session": {
+        "enabled": false,
+        "result": "world_or_native_phase_changed",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 10,
+        "released": 12,
+        "retired": 0,
+        "lost": 0
+      },
+      "npcRemovalTrace": true,
+      "npcRemovalCount": 89,
+      "npcRemovals": [
+        {
+          "tick": 118048203,
+          "handle": 190056304,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 186648380,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 189925230,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 187565898,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 190711674,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 190646137,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 187369287,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 187041602,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118048218,
+          "handle": 186517306,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "75b137",
+            "7ea9e4",
+            "8ab70c",
+            "8ad307",
+            "8ad211",
+            "45a61",
+            "451c9",
+            "e3c21",
+            "166d9c"
+          ]
+        },
+        {
+          "tick": 118066109,
+          "handle": 188876638,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066218,
+          "handle": 187107139,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066312,
+          "handle": 187959120,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066406,
+          "handle": 187500361,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066515,
+          "handle": 189073249,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066609,
+          "handle": 188942175,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066703,
+          "handle": 190383989,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066812,
+          "handle": 186779454,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118066906,
+          "handle": 187434824,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067015,
+          "handle": 188745564,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067109,
+          "handle": 189138786,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067218,
+          "handle": 190580600,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067312,
+          "handle": 189007712,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067406,
+          "handle": 190121841,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        },
+        {
+          "tick": 118067515,
+          "handle": 190187378,
+          "path": 1,
+          "thread": 45040,
+          "rva": [
+            "884b3a",
+            "884809",
+            "87986c",
+            "876fde",
+            "8cfb26",
+            "8f2449",
+            "884a4b",
+            "884b3a",
+            "884809",
+            "792ffd",
+            "7c0eab",
+            "7c118f"
+          ]
+        }
+      ],
+      "npcRemovalQueuedCount": 0,
+      "npcRemovalsQueued": [],
+      "npcRemovalsWatched": [],
+      "ownPairedHoldSkip": true,
+      "ownPairedHoldSkips": 1,
+      "corpseTraces": [
+        {
+          "arm": 10,
+          "handle": 190318452,
+          "ownPaired": true,
+          "holdSkipped": true,
+          "vanished": false,
+          "vanishedMs": 0,
+          "samples": [
+            [
+              94,
+              -44.1,
+              -120.09,
+              61.0,
+              0,
+              1,
+              3
+            ],
+            [
+              219,
+              -44.1,
+              -120.09,
+              61.0,
+              0,
+              1,
+              3
+            ],
+            [
+              328,
+              -44.09,
+              -120.1,
+              61.0,
+              0,
+              1,
+              3
+            ],
+            [
+              453,
+              -44.08,
+              -120.08,
+              61.0,
+              0,
+              1,
+              3
+            ],
+            [
+              562,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              672,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              781,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              890,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1015,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1125,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1250,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1359,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1484,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1594,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1719,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1828,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              3
+            ],
+            [
+              1937,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2078,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2187,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2297,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2406,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2547,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2672,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2781,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              2922,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3031,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3140,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3250,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3390,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3500,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3609,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3719,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3859,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              3984,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              4562,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              5125,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              2
+            ],
+            [
+              5687,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              6250,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              6812,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              7375,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              7984,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              8562,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              9125,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              9703,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              10203,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              10765,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              11328,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              11937,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              12500,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              13062,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              13625,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              14187,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              14750,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              15312,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              15890,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ],
+            [
+              16469,
+              -44.06,
+              -120.04,
+              61.87,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "combat": {
+      "linkedSleepCaptured": 0,
+      "passedThrough": 0,
+      "lastDecl": "components/characters/player/base/damage/assassination_damage.damage",
+      "channelsAdded": 5,
+      "channelsRetired": 11,
+      "rearms": 1,
+      "lastRetire": "actor_unbound",
+      "wanted": true,
+      "enabled": false,
+      "result": "session_or_world_changed",
+      "nonce": 2,
+      "localHits": 0,
+      "requests": 1,
+      "committed": 0,
+      "applied": 1,
+      "duplicates": 0,
+      "rejected": 5,
+      "suppressed": 1,
+      "eventsQueued": 0,
+      "lastOutcome": {
+        "before": 0,
+        "after": 0,
+        "maximum": 0,
+        "inflicted": 0
+      },
+      "entries": [
+        {
+          "arm": 7,
+          "peerArm": 7,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        },
+        {
+          "arm": 8,
+          "peerArm": 8,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        },
+        {
+          "arm": 9,
+          "peerArm": 9,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        },
+        {
+          "arm": 10,
+          "peerArm": 10,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 1,
+          "request": 1,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": true,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        },
+        {
+          "arm": 11,
+          "peerArm": 11,
+          "peerNonce": 2,
+          "enabled": false,
+          "ready": false,
+          "event": 0,
+          "request": 0,
+          "peerRequest": 0,
+          "pending": 0,
+          "terminal": false,
+          "deathPending": false,
+          "retired": "actor_unbound",
+          "health": 0.0
+        }
+      ],
+      "deaths": 1,
+      "preDeathReleased": 2,
+      "replicaGapSuppressed": 0,
+      "hostPairedPassed": 0,
+      "stopHistory": [
+        {
+          "tick": 118089578,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "session_or_world_changed",
+          "arm": 0,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "retireHistory": [
+        {
+          "tick": 118089578,
+          "reason": "actor_unbound",
+          "arm": 4,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118089578,
+          "reason": "actor_unbound",
+          "arm": 5,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118089578,
+          "reason": "actor_unbound",
+          "arm": 6,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "actor_unbound",
+          "arm": 7,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "actor_unbound",
+          "arm": 8,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "actor_unbound",
+          "arm": 9,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "actor_unbound",
+          "arm": 10,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "tick": 118156828,
+          "reason": "actor_unbound",
+          "arm": 11,
+          "sourceArm": 0,
+          "damage": 0,
+          "distance": -1.0,
+          "victimRead": false,
+          "self": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "captured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "victim": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "sceneProbes": [
+        {
+          "tick": 118140359,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/oh_ramsey_throneroom.midnightscene",
+              "sub": "loop",
+              "phase": 3,
+              "duration": 9405,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118140609,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/oh_ramsey_throneroom.midnightscene",
+              "sub": "loop",
+              "phase": 3,
+              "duration": 9405,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118140875,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118141125,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+              "sub": "post_fight_loop",
+              "phase": 3,
+              "duration": 12333,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118141390,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+              "sub": "post_fight_loop",
+              "phase": 3,
+              "duration": 12333,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118141656,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+              "sub": "post_fight_loop",
+              "phase": 3,
+              "duration": 12333,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            }
+          ]
+        },
+        {
+          "tick": 118141906,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+              "sub": "post_fight_loop",
+              "phase": 3,
+              "duration": 12333,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            },
+            {
+              "asset": "midnight/gameplay/human/common/ragdoll/activeragdoll_convulsions.midnightscene",
+              "sub": "convulsions",
+              "phase": 3,
+              "duration": 2000,
+              "variant": 0
+            }
+          ]
+        },
+        {
+          "tick": 118142156,
+          "reason": "takedown_state_unrecognized",
+          "logic": 1,
+          "stance": 0,
+          "defaultMode": true,
+          "checks": 2,
+          "states": [
+            {
+              "id": 13,
+              "vtableRva": "0x1c83468"
+            }
+          ],
+          "scenes": [
+            {
+              "asset": "midnight/campaign/dunwall/escape/tower/coup_main_skipped_loop.midnightscene",
+              "sub": "post_fight_loop",
+              "phase": 3,
+              "duration": 12333,
+              "variant": 0
+            },
+            {
+              "asset": "midnight/gameplay/player/base/keytarget_finish/assassination_keytarget_right.midnightscene",
+              "sub": "assassination",
+              "phase": 3,
+              "duration": 3266,
+              "variant": 123
+            },
+            {
+              "asset": "midnight/gameplay/human/common/ragdoll/activeragdoll_convulsions.midnightscene",
+              "sub": "convulsions",
+              "phase": 3,
+              "duration": 2000,
+              "variant": 0
+            }
+          ]
+        }
+      ],
+      "handshake": {
+        "sendFailures": 5,
+        "traceCount": 37,
+        "sent": [
+          0,
+          10,
+          5,
+          1,
+          0,
+          0
+        ],
+        "received": [
+          0,
+          5,
+          10,
+          0,
+          1,
+          0
+        ],
+        "trace": [
+          {
+            "tick": 118100312,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100312,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100312,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100312,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100312,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100328,
+            "sent": false,
+            "result": "receive_nonce",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": false,
+            "result": "hello",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100375,
+            "sent": true,
+            "result": "sent",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100812,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100812,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100812,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100812,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100812,
+            "sent": true,
+            "result": "sent",
+            "kind": 1,
+            "sourceNonce": 2,
+            "targetNonce": 0,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118100828,
+            "sent": false,
+            "result": "accepted",
+            "kind": 2,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118139812,
+            "sent": true,
+            "result": "sent",
+            "kind": 3,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118139906,
+            "sent": false,
+            "result": "accepted",
+            "kind": 4,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 2,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": true
+          },
+          {
+            "tick": 118156828,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 7,
+            "targetArm": 7,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156828,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 8,
+            "targetArm": 8,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156828,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 9,
+            "targetArm": 9,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156828,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 10,
+            "targetArm": 10,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          },
+          {
+            "tick": 118156828,
+            "sent": true,
+            "result": "send_invalid_packet",
+            "kind": 5,
+            "sourceNonce": 2,
+            "targetNonce": 2,
+            "knownPeerNonce": 0,
+            "sourceArm": 11,
+            "targetArm": 11,
+            "sourceEpoch": 16,
+            "targetEpoch": 16,
+            "localEpoch": 16,
+            "peerEpoch": 16,
+            "worldReady": false
+          }
+        ]
+      },
+      "captured": 1,
+      "workerCaptured": 0,
+      "lastCaptureThread": 45040,
+      "engineThread": 45040,
+      "nativeAttempt": {
+        "ownerFlags": 128,
+        "declaration": "components/characters/player/base/damage/assassination_damage.damage",
+        "rawInfo": "30f6e3565f02000000000000000000008c00000000000000000000000000000000000000caf24971caf24971caf249710000000000000000000000000000000000000000000000000000000001000000600803000100000000000000caf24971caf24971caf24971a0d4af58eb0000005070849800000000caf24971caf24971caf249711000ff3f00c3a3985f020000"
+      },
+      "nativeOutcome": {
+        "stage": "native_death_complete",
+        "inflicted": 50,
+        "after": 0,
+        "healthGeneration": 7030,
+        "readFailure": "none",
+        "readTerminal": true,
+        "bindingGeneration": 7030,
+        "resultWords": [
+          1112014848,
+          0,
+          0,
+          0
+        ],
+        "maximumChanged": 0
+      },
+      "fixtureHoldsFrames": true,
+      "fixturePairedFrameReleases": 0,
+      "nativeSubtractions": 1,
+      "nativeLethalSubtractions": 1,
+      "pendingRequests": 0,
+      "pendingHighWater": 1,
+      "sourceHistory": [
+        {
+          "nonce": 2,
+          "arm": 10,
+          "tick": 118139796,
+          "thread": 45040,
+          "rawInfo": "30f6e3565f02000000000000000000008c00000000000000000000000000000000000000caf24971caf24971caf249710000000000000000000000000000000000000000000000000000000001000000600803000100000000000000caf24971caf24971caf24971a0d4af58eb0000005070849800000000caf24971caf24971caf249711000ff3f00c3a3985f020000",
+          "inflictor": {
+            "valid": true,
+            "actor": "25fe4fad6d0",
+            "vtableRva": "1ce1e98",
+            "handle": 198752,
+            "parent": 1,
+            "localOwned": true,
+            "type": ".?AVarkWeapon@@",
+            "bytesValid": true,
+            "raw": "981e49f5f67f0000a0eb78ec5f0200000000000000000000000000000000000000d7fae45f0200000b00004048000000706c795f73776f72645f3300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f60080300010000000000000000000000000000353f000000201762b95c020000000000000000000088801e000c0000000000803f000000000000000000000000000000053f000000f0a15bde5f02000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf38d8fae45f020000000000054002000000000000000000000000000000000000000000000000000060d8fae45f020000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f0000b08186e35f02000004000000040000004100000000000000f01122e55f020000050000413f080000406ee8e45f020000050000413f0800000000000000000000000000413f000000000000000000000000000000000000000000000008000000000000201111a13f000000000000000000000080be9feebf00000000000000000000000000000000000000053f0000000000000000000000000000053f0000000000000000000000403f39105f02000000000000020000000000000000000000347a2fc2b829f0c2e7757a42ec92e1beb450883ed3795bbf142d593f9a24df3ee8e999be1e54963ea2185cbf0af4d5be0000803f0000803f0000803fffffd1bbffbfe43cffbf193ce93f9cbe10250fbc630a78be00000000e0764de55f020000fbfeeae40000000000000000000000000000000000000000e1a3d1380085008c290410006bf2eae46003000000000000587d43f5f67f000000000000000000000000000000000000000000000000000090dafae45f020000110000404800000068656172745f65717569706d656e745f370000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          "attacker": {
+            "valid": true,
+            "actor": "25f98110320",
+            "vtableRva": "1c5e428",
+            "handle": 1,
+            "parent": 1073676304,
+            "localOwned": true,
+            "type": ".?AVarkPlayer@@",
+            "bytesValid": true,
+            "raw": "28e440f5f67f0000f05959e55f02000000000000000000000000000000000000500311985f0200000700004048000000706c61796572310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a4702ec2eb513d42c2f5734217228a35000080bf000000000000803f17228a350000000000000080000000000000803f010000001000ff3f700639e55f0200000a0000353f100000201762b95c020000000000000000000008801c000c0000020000803f000000000000000000000000000000053f000000505fb1af5f02000000000000000000001000000000000000000080bf000000000000803f0000803f0000803f0000803f0000000000000000000000000000803f0000000000000000000000000000803f1000ff3f1000ff3f1000ff3f0000803e00008040000080bf880411985f0200000000000540020000000000000000000000000000000000000000000000000000b00411985f020000000000054002000000000000000000001000ff3f000000000000000000000000000000053f0000000000803f0000803f0000803f000000000000000000000000000000053f000000000000000000000000000000ffffffff709841f5f67f000000000000ffffffff0000000000000000000000000000f03f00000000000000000000002a3f00000000000000000000000000002a3f00000000000000000000000000002a3f0000001000ff3f00000000482826f5f67f00002059b1af5f020000580000008000000041000000000000007089b11d5f020000580000413f580000d044dc955f020000580000413f5800000000000000000000000000413f0000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000080be9feebf0000000000000000a0c39cf35f020000020000053f0200000000000000000000000000053f0000000000000000000000404e39105f020000000000002200000000000000000000004c752fc27ef1f2c2c4037442c35429bec2797c3f00000000c2797cbfc35429be0000000000000000000000000000803f0000803f0000803f0000803f00000000000000000000000000000000000000000000000000000000507cc4af5f020000505fb1af5f0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000102b0fe55f0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000401d29985f020000c05839105f0200000200000000000000dcdd2e8441bac7be"
+          }
+        }
+      ],
+      "triggerFixture": {
+        "nonce": 0,
+        "result": "unused"
+      },
+      "worldCommitted": 0,
+      "worldApplied": 0,
+      "replicaWorldSuppressed": 0,
+      "hostWorldPassed": 0,
+      "hostWorldCommitted": 0,
+      "hostWorldApplied": 0,
+      "hostWorldGains": 0,
+      "helloFollowed": 0,
+      "helloWaited": 0,
+      "followSubtractions": 0,
+      "hostUnconsciousPassed": 0,
+      "hostNativePassed": 0,
+      "hostNativeLast": "none",
+      "peerNativeRequests": 0,
+      "peerNativeApplied": 0,
+      "peerNativeBusy": 0,
+      "linkedRequests": 0,
+      "linkedApplied": 0,
+      "impliedReady": 0,
+      "hostWorldRebased": 0,
+      "ordinaryTestUntil": 0,
+      "testAssassinationsRefused": 0,
+      "fixtureFrameHolds": 0,
+      "fixture": {
+        "active": false,
+        "ready": false,
+        "result": "session_or_world_changed",
+        "acquired": 0,
+        "released": 0,
+        "lost": 0
+      }
+    }
+  }
+}
