@@ -1,0 +1,68 @@
+{
+  "passed": false,
+  "failure": "Host lab instance not in gameplay",
+  "notes": {
+    "failureState": {
+      "client": {
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 21,
+        "cine": 25,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": false,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 26,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/24/16",
+        "active": null
+      },
+      "host": {
+        "logic": 2,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 21,
+        "cine": 25,
+        "pos": [
+          -27.787413,
+          -153.496841,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host Corvo on this PC, VM Emily); 1714/1703 (#135): the VM joins after step 5 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 6 and rejoins after step 7 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1714.ps1:404[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 404 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost lab instance not in gameplay[0m

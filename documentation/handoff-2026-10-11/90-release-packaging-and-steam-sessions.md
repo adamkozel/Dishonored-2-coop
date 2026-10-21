@@ -251,8 +251,10 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
 - The two-account mid-mission join, leave and rejoin passed (campaign-join-vm-v1703a, #135). 1214ga places a rejoining partner beside the host again.
 - The product controller counts every world and restarts its repair backoff there (1214ga, #145).
 
+- The clean-PC session from the v0.8.2 download passed with the host starting a fresh campaign: story, a shared death on the first map, leave and rollback (product-two-account-v1709a, chapter 98).
+- The two-account rejoin places the partner beside the host (campaign-join-vm-v1714b, #135).
+
 **Still open:**
-- The clean-PC session from the 0.8.2 download, with the host starting a fresh campaign (Test-ProductTwoAccount-v1709; #143).
 - A partner who joins from the title screen has no signed-in user (#146): the product does not yet wait for one.
 - Hosting starts with the F7 key. There is no entry in the game's own menus; the invite and join steps are Steam's native overlay and friends list.
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
