@@ -106,7 +106,11 @@ inline void writeNpcRemovals(FILE* f){
         fprintf(f,"%s{\"tick\":%llu,\"handle\":%u,\"delay\":%.3f,\"thread\":%u,\"rva\":[",i?",":"",r.tick,r.handle,r.delay,r.thread);
         for(unsigned k=0;k<r.frames;++k)fprintf(f,"%s\"%x\"",k?",":"",r.rva[k]);fputs("]}",f);}}
     ReleaseSRWLockShared(&npcRemovalLock);fputs("]",f);}
-struct NpcCorpseSample {unsigned ms=0;float root[3]{};unsigned char held=0,paired=0,mode=0xff;};
+// 1214hf (#140, lab only): the root never moves, also in takes where the corpse vanished (1711b, 1747b), and in 1748d
+// (1214he) her search found the entity but no body: the floor at its root was empty. So each sample also reads the
+// skeleton: the world position of joint 0 and the world z range of all joints. A body that fell through the floor
+// shows there before its removal (the 1214gd census had an anonymous entity 70 m below the floor).
+struct NpcCorpseSample {unsigned ms=0;float root[3]{};unsigned char held=0,paired=0,mode=0xff;float joint[3]{},zMin=0,zMax=0;unsigned short bones=0;};
 struct NpcCorpseTrace {unsigned arm=0,handle=0,count=0,vanishedMs=0;bool vanished=false,ownPaired=false,holdSkipped=false;unsigned long long startedAt=0;NpcCorpseSample samples[80]{};};
 NpcCorpseTrace npcCorpseTraces[4]{};unsigned npcCorpseTraceCount=0;
 bool npcSkipOwnPairedCorpseHold=false;unsigned long long npcOwnPairedHoldSkips=0;
@@ -121,7 +125,14 @@ inline void npcCorpseTraceSample(NpcCorpseTrace& t,unsigned long long tick,const
     if(t.vanished||t.count>=80)return;const unsigned ms=static_cast<unsigned>(tick-t.startedAt);
     if(t.count&&ms>4000&&ms-t.samples[t.count-1].ms<500)return;
     auto& s=t.samples[t.count++];s.ms=ms;if(root){s.root[0]=root[0];s.root[1]=root[1];s.root[2]=root[2];}
-    s.held=held?1:0;s.paired=paired?1:0;s.mode=static_cast<unsigned char>(mode>255?255:mode);}
+    s.held=held?1:0;s.paired=paired?1:0;s.mode=static_cast<unsigned char>(mode>255?255:mode);
+    if(!productMode){NativeSkeleton k{};
+        if(readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),t.handle,k)&&!k.globalPose.empty()){
+            s.bones=static_cast<unsigned short>((std::min)(k.globalPose.size(),std::size_t{65535}));s.zMin=1e9f;s.zMax=-1e9f;
+            for(std::size_t j=0;j<k.globalPose.size();++j){float w[3];const auto& g=k.globalPose[j];
+                for(unsigned r=0;r<3;++r){w[r]=k.root[r];for(unsigned c=0;c<3;++c)w[r]+=k.root[3+c*3+r]*g[12+c];}
+                if(!j){s.joint[0]=w[0];s.joint[1]=w[1];s.joint[2]=w[2];}
+                s.zMin=(std::min)(s.zMin,w[2]);s.zMax=(std::max)(s.zMax,w[2]);}}}}
 inline void writeNpcCorpseTraces(FILE* f){
     writeNpcRemovals(f);
     fprintf(f,",\"ownPairedHoldSkip\":%s,\"ownPairedHoldSkips\":%llu,\"corpseTraces\":[",npcSkipOwnPairedCorpseHold?"true":"false",npcOwnPairedHoldSkips);
@@ -129,7 +140,8 @@ inline void writeNpcCorpseTraces(FILE* f){
     for(const auto& t:npcCorpseTraces){if(!t.startedAt)continue;
         fprintf(f,"%s{\"arm\":%u,\"handle\":%u,\"ownPaired\":%s,\"holdSkipped\":%s,\"vanished\":%s,\"vanishedMs\":%u,\"samples\":[",first?"":",",t.arm,t.handle,
             t.ownPaired?"true":"false",t.holdSkipped?"true":"false",t.vanished?"true":"false",t.vanishedMs);first=false;
-        for(unsigned i=0;i<t.count;++i){const auto& s=t.samples[i];fprintf(f,"%s[%u,%.2f,%.2f,%.2f,%u,%u,%u]",i?",":"",s.ms,s.root[0],s.root[1],s.root[2],s.held,s.paired,s.mode);}
+        for(unsigned i=0;i<t.count;++i){const auto& s=t.samples[i];fprintf(f,"%s[%u,%.2f,%.2f,%.2f,%u,%u,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%u]",i?",":"",s.ms,s.root[0],s.root[1],s.root[2],
+            s.held,s.paired,s.mode,s.joint[0],s.joint[1],s.joint[2],s.zMin,s.zMax,s.bones);}
         fputs("]}",f);}
     fputs("]",f);
 }
