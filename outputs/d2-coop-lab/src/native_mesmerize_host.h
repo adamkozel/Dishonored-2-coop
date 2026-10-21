@@ -98,6 +98,9 @@ const char* mesmerizeHostFollowResult="idle";unsigned mesmerizeHostFollowAnchor=
 // (partner-mesmerize-v1724a; 1723a read stale memory, state 2 for 25 s). The host drops its cached object once the
 // component's owner or the handle no longer match it, clears the phantom slot, and spawns a new object per cast.
 std::uint64_t mesmerizeHostRemoved=0;
+// 1214gq: a lab-only switch for a control cast without the host object (coop_mesmerize_native follow_off|follow_on);
+// a product build always follows.
+bool mesmerizeHostFollowEnabled=true;
 unsigned mesmerizeHostNearestSpawner(const float* at,float& distance){
     std::vector<NativeWorldNpc> catalog;unsigned unbound=0;distance=0;
     if(!readWorldNpcCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,unbound))return 0;
@@ -107,6 +110,7 @@ unsigned mesmerizeHostNearestSpawner(const float* at,float& distance){
     if(best)distance=std::sqrt(bestSquared);return best;}
 void serviceMesmerizeHostFollow(ULONGLONG tick){
     auto& f=mesmerizeHostFollow;auto& h=mesmerizeHost;const auto& s=mesmerizeWorldStream;
+    if(!mesmerizeHostFollowEnabled&&!productMode){if(!f.begun||f.ended){f={};mesmerizeHostFollowResult="follow_off";return;}}
     const bool streaming=localRole==0&&mesmerizeWorldStreamCurrent(tick)&&s.lease>tick&&movementBankActive()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote);
     const bool scope=streaming&&(productSessionArmed()||(observerIsolation.ready&&observerIsolation.movementFixture&&!std::strcmp(mapName,kGuardMap)));
     const bool hers=scope&&(s.presented.state==1||s.presented.state==3);
@@ -208,10 +212,10 @@ void writeMesmerizeHost(){
     fprintf(f,",\"appearScene\":%u,\"activeScene\":%u,\"activeTimer\":%.3f,\"candidates\":%u",scene1,scene3,timer,candidates);}
     {const auto& w=mesmerizeHostFollow;const auto& s=mesmerizeWorldStream;
      fprintf(f,",\"follow\":{\"result\":\"%s\",\"events\":%llu,\"begins\":%llu,\"forced\":%llu,\"stops\":%llu,\"refused\":%llu,\"event\":%llu,\"begun\":%s,\"forcedNow\":%s,\"ended\":%s,"
-              "\"anchor\":%u,\"anchorDistance\":%.2f,\"partnerState\":%u,\"partnerEvent\":%llu,\"leased\":%s,\"productArmed\":%s,\"at\":[%.2f,%.2f,%.2f]}",
+              "\"anchor\":%u,\"anchorDistance\":%.2f,\"partnerState\":%u,\"partnerEvent\":%llu,\"leased\":%s,\"productArmed\":%s,\"at\":[%.2f,%.2f,%.2f],\"enabled\":%s}",
         mesmerizeHostFollowResult,mesmerizeHostFollowEvents,mesmerizeHostFollowBegins,mesmerizeHostFollowForced,mesmerizeHostFollowStops,mesmerizeHostFollowRefused,w.event,
         w.begun?"true":"false",w.forced?"true":"false",w.ended?"true":"false",mesmerizeHostFollowAnchor,mesmerizeHostFollowAnchorDistance,s.presented.state,s.presented.event,
-        s.lease>GetTickCount64()?"true":"false",productSessionArmed()?"true":"false",s.presented.transform[0],s.presented.transform[1],s.presented.transform[2]);}
+        s.lease>GetTickCount64()?"true":"false",productSessionArmed()?"true":"false",s.presented.transform[0],s.presented.transform[1],s.presented.transform[2],mesmerizeHostFollowEnabled?"true":"false");}
     fprintf(f,",\"removed\":%llu",mesmerizeHostRemoved);
     fprintf(f,",\"componentAt\":%llu,\"result\":\"%s\",\"probes\":%llu,\"definitionFound\":%s,\"spawned\":%llu,\"starts\":%llu,\"stops\":%llu,\"refused\":%llu,\"handle\":%u,\"component\":%s,"
               "\"state\":%d,\"previousSlot\":%d,\"committed\":%u,\"anchor\":%u,\"offset\":[%.2f,%.2f,%.2f],\"flag2b1\":%u,\"targets\":%u,\"targetHandles\":[%u,%u,%u,%u,%u],"

@@ -157,8 +157,20 @@ The live candidate is 1214fp.
   - Same target set in both worlds in 42 of 47 samples.
   - After her spirit, the object was removed natively (`object_removed`) and the phantom slot cleared. Fixture
     restored.
-  - Next: a control cast with the host object off (1214gq lab switch `coop_mesmerize_native follow_off`), to show the
-    stop and the walk come from the host object; then visual review.
+- **Control and repeat** (1214gq: the lab-only switch `coop_mesmerize_native follow_off|follow_on`; a product build
+  always follows; Test-PartnerMesmerize-v1726; both pass, confirmed runtime):
+  - **partner-mesmerize-v1726a** (control, host object off): her spirit took guard 1 (52 samples) and guard 2 (25).
+    In the host world they kept walking, 16.2 m and 7.1 m, and her copies followed (0 m apart at the end). The host
+    took no NPC.
+  - **partner-mesmerize-v1726b** (followed): her spirit and the host object took guard 1, the same set in 51 of 52
+    samples. Guard 1 moved 0.55 m while taken, and 0 m apart at the end. The object was removed natively, the
+    phantom slot cleared and the fixture restored.
+  - So the stop and the walk to the spirit come from the host object: the host's AI mesmerizes its NPCs natively, and
+    NPC authority carries the result to Emily.
+  - **Preliminary visual review** (1726b frames at 10, 16 and 22 s): in Corvo's view, the guard stands facing the
+    spirit with the native link effect on its head, as in single player. Visual acceptance is recorded separately.
+- **Mesmerize status:** done for #131 in the lab (both roles: Emily casts, Corvo's world reacts). Corvo has no
+  Mesmerize. Next: the shades and Rat Shadow, then a product two-account check.
 
 ## Possessed bodies (host world; consistent)
 
