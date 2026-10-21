@@ -141,6 +141,10 @@ unsigned long long npcSettledCorpseFollows=0;
 // presents her last settled pose with its root, as her game does for the corpses of host kills, until a carry takes
 // it or the channel stops.
 unsigned long long npcSettledHoldFrames=0;
+// 1214hk (#140, #115): her Far Reach pull of that corpse moves the host body through its actor transform (held object,
+// servicePartnerHeldObject), which the settled hold's root would undo every frame. A pull of the body ends the settled
+// hold and returns it to the 1214fj freeze (her bones on the moving native root), as validated in mission-coverage-v1636b.
+unsigned long long npcSettledHoldPulls=0;
 // Watched: a corpse the trace follows, or any NPC already dead (the removal may be queued in the death frame, before the
 // trace starts).
 inline bool npcRemovalWatchedHandle(unsigned handle){if(!handle)return false;for(const auto& t:npcCorpseTraces)if(t.startedAt&&t.handle==handle)return true;
@@ -163,7 +167,7 @@ inline void npcCorpseTraceSample(NpcCorpseTrace& t,unsigned long long tick,const
 inline void writeNpcCorpseTraces(FILE* f){
     writeNpcRemovals(f);
     fprintf(f,",\"presentUnheldCorpse\":%s,\"unheldCorpsePresentSkips\":%llu",npcPresentUnheldCorpse?"true":"false",npcUnheldCorpsePresentSkips);
-    fprintf(f,",\"ownPairedCorpses\":%llu,\"ownPairedCorpseStreamPoses\":%llu,\"settledCorpseFollows\":%llu,\"settledHoldFrames\":%llu",npcOwnPairedCorpses,npcOwnPairedCorpseStreamPoses,npcSettledCorpseFollows,npcSettledHoldFrames);
+    fprintf(f,",\"ownPairedCorpses\":%llu,\"ownPairedCorpseStreamPoses\":%llu,\"settledCorpseFollows\":%llu,\"settledHoldFrames\":%llu,\"settledHoldPulls\":%llu",npcOwnPairedCorpses,npcOwnPairedCorpseStreamPoses,npcSettledCorpseFollows,npcSettledHoldFrames,npcSettledHoldPulls);
     fprintf(f,",\"ownPairedHoldSkip\":%s,\"ownPairedHoldSkips\":%llu,\"corpseTraces\":[",npcSkipOwnPairedCorpseHold?"true":"false",npcOwnPairedHoldSkips);
     bool first=true;
     for(const auto& t:npcCorpseTraces){if(!t.startedAt)continue;

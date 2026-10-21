@@ -641,6 +641,7 @@ void serviceNpcStream(ULONGLONG tick){
         if(localRole&&c.ready&&carriedHandle&&c.lease.binding.npc.handle==carriedHandle)c.localCarryUntil=tick+2500;
         if(!localRole&&hostCarriedHandle&&c.lease.binding.npc.handle==hostCarriedHandle&&!c.corpseFreezeEnded){c.corpseFreezeEnded=true;++npcCorpseFreezeEnds;}
         if(!localRole&&c.settledHold&&((hostCarriedHandle&&c.lease.binding.npc.handle==hostCarriedHandle)||tick<c.carriedUntil))c.settledHold=false; // 1214hj: a carry ends it
+        if(!localRole&&c.settledHold){const auto r=remoteHeld;if(r.phase&&r.handle==c.lease.binding.npc.handle&&r.at&&tick-r.at<=600){c.settledHold=false;c.corpseFreezeEnded=false;++npcSettledHoldPulls;}} // 1214hk
         if(localRole&&c.ready&&tick<c.localCarryUntil){
             if(tick-c.carryControlAt>=200){c.carryControlAt=tick;if(sendNpcControl(c,NpcAuthorityMessage::Carry))++c.carryControls;}
             if(tick-c.reverseSentAt>=50){c.reverseSentAt=tick;sendNpcPose(c,NpcAuthorityMessage::PairedPose);++c.reversePoses;++c.carryPoses;}}
