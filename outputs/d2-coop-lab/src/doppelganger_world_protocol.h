@@ -6,7 +6,7 @@
 // This presentation channel cannot authorize AI, interactions or damage.
 #pragma pack(push,1)
 struct CoopDoppelgangerWorldPacket {
-    std::uint32_t magic=0x43443244;std::uint16_t version=5,size=10716;
+    std::uint32_t magic=0x43443244;std::uint16_t version=6,size=10720;
     std::uint32_t build=0x67a50cde,role=1;
     std::uint64_t sequence=0,sourceSession=0,targetSession=0,sourceWorldEpoch=0,targetWorldEpoch=0,mapId=0;
     std::uint64_t sourceToken=0,targetToken=0,event=0,sampleTimeUs=0;
@@ -19,9 +19,11 @@ struct CoopDoppelgangerWorldPacket {
     std::uint32_t fxKnown=0,fxScene=0,fxVariant=0,fxTimeMs=0;
     // 1214eh (#11 power_upgrade_variants): the clone's slot; each slot is its own ordered stream.
     std::uint32_t slot=0;
+    // 1214gu (#131): the shade kind, 1 the decoy and 2 the Deadly Shade's deadly shadow (0 is read as the decoy).
+    std::uint32_t kind=0;
 };
 #pragma pack(pop)
-static_assert(sizeof(CoopDoppelgangerWorldPacket)==10716);
+static_assert(sizeof(CoopDoppelgangerWorldPacket)==10720);
 constexpr unsigned kDoppelgangerWireSlots=2; // Twin Shade keeps two shades
 inline unsigned doppelgangerFxDuration(unsigned variant){return variant==1?1000:variant==2?466:0;}
 inline std::uint64_t doppelgangerWorldDigest(const CoopDoppelgangerWorldPacket& p){
@@ -30,7 +32,7 @@ inline std::uint64_t doppelgangerWorldDigest(const CoopDoppelgangerWorldPacket& 
 }
 inline bool validDoppelgangerWorldPacket(const CoopDoppelgangerWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer,unsigned* failure=nullptr){
     if(failure)*failure=0;const auto fail=[&](unsigned line){if(failure)*failure=line;return false;};
-    if(p.magic!=0x43443244||p.version!=5||p.slot>=kDoppelgangerWireSlots||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x43443244||p.version!=6||p.kind>2||(!p.present&&p.kind)||p.slot>=kDoppelgangerWireSlots||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return fail(__LINE__);

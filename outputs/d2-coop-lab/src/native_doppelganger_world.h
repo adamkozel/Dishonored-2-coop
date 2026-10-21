@@ -15,6 +15,7 @@ struct NativeDoppelgangerWorld {
     std::uintptr_t registryActor=0;
     std::array<float,12> transform{};
     bool present=false,retired=false;
+    unsigned kind=0; // 1214gu (#131): 1 the decoy shade, 2 the Deadly Shade's deadly shadow
 };
 inline bool validDoppelgangerTransform(const std::array<float,12>& t){
     for(unsigned i=0;i<12;++i)if(!std::isfinite(t[i])||std::fabs(t[i])>(i<3?100000.f:1.01f))return false;
@@ -49,9 +50,17 @@ template<class Read> bool readNativeDoppelgangerWorldFrame(Read read,std::uintpt
     const auto eq=[&](std::uintptr_t p,std::uintptr_t v){std::uintptr_t x=0;return read(p,&x,8)&&x==v;};
     const auto named=[&](std::uintptr_t d,std::uintptr_t vt,const char* name){std::uintptr_t p=0;std::string text;return d&&eq(d,base+vt)&&read(d+8,&p,8)&&worldIdentityString(read,p,text)&&text==name;};
     if(!s.actor||s.actor==s.equipment.entity||!eq(s.actor,base+0x1c5e108)||
-       !read(s.actor+0x2e8,&s.definition,8)||!named(s.definition,0x1ab58f8,"models/powers/doppelganger/decoy_entity.def")||
+       !read(s.actor+0x2e8,&s.definition,8)||
        !read(s.actor+0x268,&s.components,8)||!s.components||!read(s.actor+0x270,&s.componentCount,4)||
        !(s.componentCount&0xffffff)||(s.componentCount&0xffffff)>256)return false;
+    // 1214gu (#131): with Deadly Shade the committed clone is models/powers/doppelganger/deadlyshadow_entity.def, an arkNPC
+    // with arkCpntDeadlyShadow and no Decoy component (partner-shade-v1729a: 595 unknown reads here). It is presented by
+    // its actor alone: no Decoy generation or flags.
+    if(named(s.definition,0x1ab58f8,"models/powers/doppelganger/deadlyshadow_entity.def")){
+        mark(5);if(!read(s.actor+0x300,s.transform.data(),sizeof(s.transform))||!validDoppelgangerTransform(s.transform))return false;
+        s.kind=2;s.present=true;mark(0);return true;}
+    if(!named(s.definition,0x1ab58f8,"models/powers/doppelganger/decoy_entity.def"))return false;
+    s.kind=1;
     std::array<std::uintptr_t,256> componentEntries{};
     if(!read(s.components,componentEntries.data(),(s.componentCount&0xffffff)*8))return false;
     for(unsigned i=0;i<(s.componentCount&0xffffff);++i){std::uintptr_t c=componentEntries[i],vt=0;if(!c||!read(c,&vt,8))return false;

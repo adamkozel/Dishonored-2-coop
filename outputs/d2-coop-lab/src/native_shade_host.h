@@ -12,7 +12,10 @@
 // per clone slot; a puppet lost natively (killed) is not respawned for the same cast. Host only, in an armed product
 // session or the lab movement fixture on the guard map; coop_shade_native follow_off|follow_on (lab) for a control cast.
 constexpr const char* kShadeHostDefinition="models/powers/doppelganger/decoy_entity.def";
-struct ShadeHostPuppet {std::uintptr_t actor=0,game=0;unsigned handle=0,source=0;std::uint64_t epoch=0,event=0,lostEvent=0;ULONGLONG createdAt=0,seen=0;unsigned pins=0;float drift=0,at[3]{};};
+// 1214gu: with Deadly Shade her clone is the deadly shadow (a combat NPC); the puppet uses the same definition, so it
+// fights the host's NPCs natively.
+constexpr const char* kShadeHostDeadlyDefinition="models/powers/doppelganger/deadlyshadow_entity.def";
+struct ShadeHostPuppet {std::uintptr_t actor=0,game=0;unsigned handle=0,source=0,kind=0;std::uint64_t epoch=0,event=0,lostEvent=0;ULONGLONG createdAt=0,seen=0;unsigned pins=0;float drift=0,at[3]{};};
 std::array<ShadeHostPuppet,kDoppelgangerWireSlots> shadeHostPuppets{};
 bool shadeHostFollowEnabled=true;
 std::uint64_t shadeHostSpawned=0,shadeHostRemoved=0,shadeHostLost=0,shadeHostPins=0,shadeHostRefused=0,shadeHostStimuli=0;
@@ -70,12 +73,12 @@ void shadeHostRemove(ShadeHostPuppet& p,const char* why){
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;shadeHostResult=why;
 }
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){
-    const auto definition=lookupEntityDefinition(kShadeHostDefinition);if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
+    const auto definition=lookupEntityDefinition(q.kind==2?kShadeHostDeadlyDefinition:kShadeHostDefinition);if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
     if(!shadeHostPhantomOn()){shadeHostResult=shadeHostSlotWasSet?"player_has_doppelganger":"phantom_refused";++shadeHostRefused;return false;}
     void* actor=reinterpret_cast<void*(*)(std::uintptr_t,std::uintptr_t,const float*,const float*,std::uintptr_t,char,std::uintptr_t,std::uintptr_t,std::uintptr_t)>(gameImage+0x8ae9b0)(
         observedGame,definition,q.transform.data(),q.transform.data()+3,0,0,0,0,0);
     if(!actor){shadeHostResult="native_creation_refused";++shadeHostRefused;return false;}
-    const auto lost=p.lostEvent;p={};p.lostEvent=lost;p.actor=reinterpret_cast<std::uintptr_t>(actor);p.game=observedGame;p.epoch=outgoing.worldEpoch;p.event=q.event;p.source=q.nativeHandle;
+    const auto lost=p.lostEvent;p={};p.lostEvent=lost;p.actor=reinterpret_cast<std::uintptr_t>(actor);p.game=observedGame;p.epoch=outgoing.worldEpoch;p.event=q.event;p.source=q.nativeHandle;p.kind=q.kind==2?2u:1u;
     p.createdAt=p.seen=tick;memoryRead(p.actor+0xa8,&p.handle,4);std::memcpy(p.at,q.transform.data(),12);++shadeHostSpawned;shadeHostPhantomList();
     const auto ai=reinterpret_cast<std::uintptr_t(*)()>(gameImage+0x810240)();
     if(ai&&p.handle){auto* s=reinterpret_cast<unsigned*(*)(std::uintptr_t,unsigned,unsigned,unsigned)>(gameImage+0x8112c0)(ai+0xc8e8,0x73,0x10,p.handle);
@@ -114,8 +117,8 @@ void writeShadeHost(){
     fprintf(f,"{\"result\":\"%s\",\"enabled\":%s,\"spawned\":%llu,\"removed\":%llu,\"lost\":%llu,\"pins\":%llu,\"refused\":%llu,\"stimuli\":%llu,\"slots\":[",
         shadeHostResult,shadeHostFollowEnabled?"true":"false",shadeHostSpawned,shadeHostRemoved,shadeHostLost,shadeHostPins,shadeHostRefused,shadeHostStimuli);
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];const auto& q=doppelgangerWorldStreams[k].presented;
-        fprintf(f,"%s{\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
-            k?",":"",p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
+        fprintf(f,"%s{\"kind\":%u,\"partnerKind\":%u,\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
+            k?",":"",p.kind,q.kind,p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}
     fprintf(f,"],\"continuous\":%llu,\"teleports\":%llu",shadeHostContinuous,shadeHostTeleports);
     fprintf(f,",\"phantomSet\":%s,\"phantomOns\":%llu,\"phantomOffs\":%llu,\"slotWasSet\":%s}\n",shadeHostPhantomSet?"true":"false",shadeHostPhantomOns,shadeHostPhantomOffs,shadeHostSlotWasSet?"true":"false");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

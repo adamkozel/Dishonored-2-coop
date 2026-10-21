@@ -226,6 +226,18 @@ The live candidate is 1214fp.
     - Its entity is `models/powers/doppelganger/deadlyshadow_entity.def`, with `arkCpntDeadlyShadow`, a combat NPC.
       The reader accepts only `decoy_entity.def` with the decoy component.
     - So with Deadly Shade, Corvo sees no shade and no host NPC is touched. Guard health stayed 40 in both worlds.
+- **The deadly shadow streamed** (1214gu: the reader accepts `deadlyshadow_entity.def` by its actor; the Doppelganger
+  world packet v6 carries a shade kind; the host puppet takes the same definition):
+  - **partner-shade-v1729c** (Deadly Shade; fail, confirmed runtime): her deadly shadow was streamed (kind 2, health
+    40). The host crashed in the host-spawned deadly shadow's AI (`4a404e`): `FUN_1404a3f90` reads a component
+    (`1439e8250`) the free-standing spawn lacks.
+  - Natively, `OnCloneSpawned` replaces the clone through `FUN_14043de90` (a lookup at the caster's position). It
+    spawns that result's clone definition with the result as parent, and removes the decoy (confirmed static). The
+    deadly shadow is therefore tied to a target NPC (hypothesis).
+  - In her world, the replica guard 1 read 0 health by the end (the host had crashed, so this is unexplained).
+  - The base-shade regression take was skipped (host down).
+  - **Next (1214gv):** no host puppet for the deadly shadow; Corvo sees it through the presentation. Her deadly
+    shadow's hits are to be forwarded.
 - **Shades, still to do:**
   1. The reader and the stream accept the deadly shadow (a shade kind in the packet), and the host puppet uses the
      same definition as hers. A deadly shadow on the host fights the host's NPCs natively.

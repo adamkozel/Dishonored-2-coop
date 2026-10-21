@@ -1,0 +1,99 @@
+{
+  "passed": false,
+  "failure": "The host spawned no puppet (idle); restore: Cannot find a process with the process identifier 39452.",
+  "case": {
+    "passed": false,
+    "failure": "The host spawned no puppet (idle)",
+    "checks": [
+      "Her clone definition factions/faction_player.cpntfaction; guard health host/client: 1 40-> / 40->0, 2 40-> / 40->40",
+      "Her shade present in 2 samples (health 40 to 40); a guard within 3 m of it in her world in 2",
+      "Host guards' attention holds the puppet in 0 samples (any attention in 42); moves continuous 0, teleports 0",
+      "Host puppet: spawned 0, in 0 samples, health  to , max drift  m, pins 0, stimuli 0; a host guard within 3 m in 0; removed 0, lost 0 (idle)"
+    ],
+    "granted": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/doppelganger_deadlyshade.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "guard1Before": [
+      -49.1356,
+      -146.334,
+      61.0145
+    ],
+    "castAt4m": [
+      -45.270928,
+      -147.36566,
+      61.0145
+    ],
+    "castAim": {
+      "target": [
+        -45.270928,
+        -147.36566,
+        61.0145
+      ],
+      "stand": [
+        -54.9326,
+        -144.787,
+        61.0036
+      ],
+      "yaw": -14.943675042298498,
+      "pitch": 2,
+      "distance": 9.999869660709782
+    },
+    "castAt": "2026-10-21T07:32:30.8872454+02:00",
+    "herDefinition": "factions/faction_player.cpntfaction",
+    "herHandle": 210178549,
+    "summary": {
+      "delta": {
+        "spawned": 0,
+        "removed": 0,
+        "lost": 0,
+        "pins": 0,
+        "stimuli": 0,
+        "continuous": 0,
+        "teleports": 0
+      },
+      "puppetHandles": [],
+      "attendedSamples": 0,
+      "attentionSamples": 42,
+      "spawned": 0,
+      "removed": 0,
+      "lost": 0,
+      "pins": 0,
+      "stimuli": 0,
+      "result": "idle",
+      "herPresentSamples": 2,
+      "puppetSamples": 0,
+      "puppetHealthFirst": null,
+      "puppetHealthMin": null,
+      "herHealthFirst": 40.0,
+      "herHealthMin": 40.0,
+      "guardNearPuppetSamples": 0,
+      "guardNearHerShadeSamples": 2,
+      "maxDrift": null,
+      "endPuppet": false,
+      "endHerPresent": 0
+    },
+    "guardHealth": {
+      "1": {
+        "hostFirst": 40,
+        "hostLast": null,
+        "clientFirst": 40,
+        "clientLast": 0
+      },
+      "2": {
+        "hostFirst": 40,
+        "hostLast": null,
+        "clientFirst": 40,
+        "clientLast": 40
+      }
+    },
+    "restored": false
+  },
+  "scope": "Stage 4 partner shade (#131): Emily casts her own Doppelganger near the Dunwall lower-floor tutorial guard 1 under the product controller; the host spawns the native shade at her streamed shade, the host NPCs perceive it, and it ends with hers; fixture restored."
+}
