@@ -31,7 +31,7 @@ void retirePossessionBodyVisibility(const char* reason){
 void requestPossessionBodyVisibility(bool hide){
     const auto tick=GetTickCount64();
     if(!hide){retirePossessionBodyVisibility("native_context_ended");return;}
-    if(localRole!=1||!shadowStreamCurrent(tick)||!shadowStream.peerReady||tick-shadowStream.lastState>=250||
+    if(!remoteIsCorvo()||!shadowStreamCurrent(tick)||!shadowStream.peerReady||tick-shadowStream.lastState>=250||
        !movementBankActive()||!shadowEquipmentAiReady()||possessionBody.restoreUntil)return;
     NativeHealth h{};
     if(possessionBody.until){

@@ -22,7 +22,7 @@ void stopSwarmTrail(SwarmTrailPresentation::Entry& e){
     e.nativeId=~0u; // sourceId is a tombstone until the whole world/scope changes.
 }
 void serviceSwarmTrails(ULONGLONG tick){
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||localRole!=1||!nativePowerFxApi())return;
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!remoteIsCorvo()||!nativePowerFxApi())return;
     auto& s=swarmTrailPresentation;const auto& w=swarmWorldStream;
     const bool live=swarmWorldCurrent(tick)&&movementBankActive()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&w.lease>tick&&w.presented.present;
     if(!coopGameplayReady(outgoing))return; // Native pause retains ownership until cleanup can resume.

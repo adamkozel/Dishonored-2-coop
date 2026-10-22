@@ -14,7 +14,7 @@ void samplePossessionFx(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=possessionFxStream;
     if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){s={};return;}
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
-    if(localRole!=0||tick<s.nextSample)return;s.nextSample=tick+80;
+    if(localCharacter()!=1||tick<s.nextSample)return;s.nextSample=tick+80; // 1214ia (#159)
     NativePossessionTargetFx native{};const double start=presentationClock();
     const bool valid=readNativePossessionTargetFx(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),native,&possessionFxReadStage);
     possessionFxReadMaxMs=(std::max)(possessionFxReadMaxMs,presentationClock()-start);++possessionFxReads;
@@ -23,7 +23,7 @@ void samplePossessionFx(ULONGLONG tick){
     if(!s.sourceEvent&&!id)return;
     if(target!=s.sourceTarget||id!=s.sourceId||!s.sourceEvent){s.sourceTarget=target;s.sourceId=id;s.sourceEvent=++possessionFxEvent;}
     if(native.actor==probeActor||native.handle==probeHandle)return;
-    CoopPossessionFxPacket p{};p.sequence=++possessionFxSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopPossessionFxPacket p{};p.role=localRole;p.sequence=++possessionFxSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
     p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.target=target;p.id=id;p.present=native.present?1u:0u;
     if(!memoryRead(native.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
@@ -56,7 +56,7 @@ void servicePossessionTargetFx(ULONGLONG tick){
     if(!nativePowerFxApi())return;auto& m=possessionPresentedFx;const auto& s=possessionFxStream;const auto& p=s.presented;
     if(m.sourceId&&(m.fx.game!=observedGame||m.fx.epoch!=outgoing.worldEpoch)){m={};++possessionFxRetired;}
     if(!coopGameplayReady(outgoing))return; // Native pause freezes world; cleanup before resume playback.
-    const bool ready=localRole==1&&possessionFxCurrent(tick)&&s.lease>tick&&movementBankActive()&&coopGameplayReady(remote)&&
+    const bool ready=remoteIsCorvo()&&possessionFxCurrent(tick)&&s.lease>tick&&movementBankActive()&&coopGameplayReady(remote)&&
         // 1214ej: product sessions too, on any paired map.
         ((!std::strcmp(mapName,kGuardMap)&&observerIsolation.ready&&observerIsolation.movementFixture)||productSessionArmed())&&probeDoppelganger&&avatarAiHeld&&probeFollowExact&&
         avatarAiTarget.actor==probeActor&&worldIdentityEntity(memoryRead,observedGame,probeHandle)==probeActor;

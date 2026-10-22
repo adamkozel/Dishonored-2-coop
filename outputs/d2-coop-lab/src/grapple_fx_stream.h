@@ -18,13 +18,13 @@ bool sendGrappleFx(CoopGrappleFxPacket p){
 void sampleNativeGrappleFx(ULONGLONG tick){
     if(!nativeMutationAllowed||!shadowStreamCurrent(tick)||!shadowStream.peerReady)return;
     auto& s=grappleFxStream;if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
-    if(localRole!=1||tick-s.lastSend<20)return;s.lastSend=tick;
+    if(localCharacter()!=2||tick-s.lastSend<20)return;s.lastSend=tick; // 1214ia (#159): whoever plays Emily
     NativePlayerGrapple g{};const bool valid=readNativePlayerGrapple(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),g);
     if(valid)s.lastRead=tick;
     if(valid&&g.present){
         if(s.sourceActive&&s.nativeId!=g.id){auto end=s.last;end.phase=3;sendGrappleFx(end);s.sourceActive=false;}
         const bool first=!s.sourceActive;if(first){s.event=++grappleFxEvent;s.nativeId=g.id;}
-        CoopGrappleFxPacket p{};p.phase=!first&&g.pulling?2:1;p.goal=g.goal;p.impact=g.impact;p.normal=g.normal;
+        CoopGrappleFxPacket p{};p.role=localRole;p.phase=!first&&g.pulling?2:1;p.goal=g.goal;p.impact=g.impact;p.normal=g.normal;
         float full=0,left=0;for(unsigned k=0;k<3;++k){const float a=g.goal[k]-g.hand[k],b=g.goal[k]-g.end[k];full+=a*a;left+=b*b;}
         p.progress=full>.00001f?(std::max)(0.f,(std::min)(1.f,1.f-std::sqrt(left/full))):1.f;
         if(!first&&p.phase<s.last.phase)p.phase=s.last.phase;
@@ -41,7 +41,7 @@ void presentNativeGrapple(const PresentationPose& pose,ULONGLONG tick){
     auto& s=grappleFxStream;s.presentedValid=grappleFxCurrent(tick)&&movementBankActive()&&s.timeline.sample(pose.time,s.presented);
 }
 bool nativeGrappleHand(std::array<float,3>& hand){
-    if(localRole!=0)return false;NativeSkeleton s{};
+    if(remoteIsCorvo())return false;NativeSkeleton s{};
     if(!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s)||!s.stable||s.logic!=1||s.game!=observedGame||
        s.actor!=probeActor||!bodyShadowTarget(s)||s.parents.size()!=219||s.parents[9]!=8||s.parents[10]!=9)return false;
     AcquireSRWLockShared(&movementLock);const bool owned=movementPlayback.end&&movementPlayback.actor==s.actor&&movementPlayback.skeleton==s.skeleton&&movementPlayback.clock.weight>.8f;ReleaseSRWLockShared(&movementLock);
@@ -56,7 +56,7 @@ void stopNativeGrappleBeam(){
 void serviceNativeGrappleFx(ULONGLONG tick){
     if(!nativePowerFxApi())return;auto& s=grappleFxStream;
     if(!grappleFxCurrent(tick)){if(coopGameplayReady(outgoing))stopNativeGrappleBeam();s={};return;}
-    if(localRole!=0)return;
+    if(remoteIsCorvo())return; // 1214ia (#159): the partner plays Emily
     if(!movementBankActive()){stopNativeGrappleBeam();return;}
     if(!s.presentedValid||s.presented.phase==3){stopNativeGrappleBeam();return;}
     std::array<float,3> hand{};if(!nativeGrappleHand(hand))return;const auto& p=s.presented;

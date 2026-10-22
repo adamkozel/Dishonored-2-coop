@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "failure": "Checks failed: doppelganger-presented, mesmerize-presented, grapple-presented",
+  "checks": {
+    "characters": true,
+    "armed": true,
+    "doppelganger-presented": false,
+    "mesmerize-presented": false,
+    "grapple-presented": false,
+    "domino-presented": true
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "armed",
+        "host": {
+          "logic": 1,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "local": 2,
+          "remote": 1,
+          "avatar": 1,
+          "bank": true,
+          "joints": 215
+        },
+        "client": {
+          "logic": 1,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "local": 1,
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Probe-HostPowers-v1783.ps1:84[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  84 | [0m . out/result.json"|Select-Object -First 30;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mChecks failed: doppelganger-presented, mesmerize-presented, grapple-presented[0m

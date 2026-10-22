@@ -14,7 +14,7 @@ void sampleDominoWorld(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=dominoWorldStream;
     if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){s={};return;}
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
-    if(localRole!=1||tick<s.nextSample)return;s.nextSample=tick+80;
+    if(localCharacter()!=2||tick<s.nextSample)return;s.nextSample=tick+80; // 1214ia (#159)
     NativeDominoLinks links{};auto& world=links.network;const bool cached=s.discovered;const double start=presentationClock();
     const bool valid=readNativeDominoLinks(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),links,&dominoReadStage,cached?&s.known:nullptr);
     const double elapsed=presentationClock()-start;dominoReadMaxMs=(std::max)(dominoReadMaxMs,elapsed);++dominoReadCount;
@@ -30,7 +30,7 @@ void sampleDominoWorld(ULONGLONG tick){
     const auto handle=world.present?world.handle:0u;
     if(!s.sourceEvent&&!handle)return;
     if(handle!=s.sourceHandle||!s.sourceEvent){s.sourceHandle=handle;s.sourceEvent=++dominoWorldEvent;}
-    CoopDominoWorldPacket p{};p.sequence=++dominoWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopDominoWorldPacket p{};p.role=localRole;p.sequence=++dominoWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
     p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.nativeHandle=handle;p.present=world.present?1u:0u;
     if(!memoryRead(world.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;

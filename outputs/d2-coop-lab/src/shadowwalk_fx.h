@@ -22,7 +22,7 @@ void serviceShadowWalkFx(ULONGLONG tick){
     if(!nativePowerFxApi()||!nativeMutationAllowed||!coopGameplayReady(outgoing))return;
     auto& fx=shadowWalkFx;unsigned variant=0;float speed=0;std::uintptr_t skeleton=0;
     AcquireSRWLockShared(&movementLock);const auto& p=movementPlayback;
-    if(localRole==0&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
+    if(!remoteIsCorvo()&&p.end>tick&&p.lease>tick&&p.bank.hasShadowWalk()&&p.actor==probeActor&&p.handle==probeHandle&&
        p.clock.weight>.9f&&p.powerWeight>.9f&&p.powerVariant>=32&&p.powerVariant<=36&&!p.presentedDrawn){
         variant=p.powerVariant;speed=p.clock.speed;skeleton=p.skeleton;
     }

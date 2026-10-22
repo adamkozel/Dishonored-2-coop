@@ -14,7 +14,7 @@ struct CoopPossessionFxPacket {
 #pragma pack(pop)
 static_assert(sizeof(CoopPossessionFxPacket)==172);
 inline bool validPossessionFxPacket(const CoopPossessionFxPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x50463244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=0||peer.role!=0||local.role!=1||
+    if(p.magic!=0x50463244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;

@@ -3,7 +3,7 @@
 PowerFailureFxOrder powerFailureFxOrder;
 void servicePowerFailureFx(ULONGLONG tick){
     if(!nativeMutationAllowed||!shadowStreamCurrent(tick)||!shadowStream.peerReady){powerFailureFxOrder={};return;}
-    if(localRole!=1)return; // Only Corvo's failed Bend Time scene is currently verified.
+    if(!remoteIsCorvo())return; // Only Corvo's failed Bend Time scene is currently verified (1214ia: a Corvo partner, either role).
     std::uint64_t event=0;unsigned variant=0;float amount=0;double at=0;bool current=false;
     AcquireSRWLockShared(&movementLock);const auto& p=movementPlayback;
     current=p.end>tick&&p.lease>tick&&p.game==observedGame&&p.epoch==outgoing.worldEpoch&&

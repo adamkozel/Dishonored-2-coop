@@ -15,7 +15,7 @@ struct CoopSwarmSpawnFxPacket {
 #pragma pack(pop)
 static_assert(sizeof(CoopSwarmSpawnFxPacket)==176);
 inline bool validSwarmSpawnFxPacket(const CoopSwarmSpawnFxPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x53463244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role||peer.role||local.role!=1||
+    if(p.magic!=0x53463244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.nativeFxId||p.nativeFxId==~0u||!p.powerEvent||!p.worldEvent||!p.sourceToken||!p.targetToken||
        !p.worldHandle||p.worldHandle==1||p.worldHandle==0x3fff0010||p.worldHandle==~0u||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.castTimeMs>1000||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||

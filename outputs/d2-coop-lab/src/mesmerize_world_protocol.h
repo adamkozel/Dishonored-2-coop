@@ -24,7 +24,7 @@ inline bool mesmerizeRigidTransform(const std::array<float,12>& m){
     return det>.98f&&det<1.02f;
 }
 inline bool validMesmerizeWorldPacket(const CoopMesmerizeWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x4d573244||p.version!=4||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x4d573244||p.version!=4||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.snapshot>1||(p.snapshot&&p.state!=3)||
        !p.nativeHandle||p.nativeHandle==1||p.nativeHandle==0x3fff0010||(p.state!=1&&p.state!=2&&p.state!=3)||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||

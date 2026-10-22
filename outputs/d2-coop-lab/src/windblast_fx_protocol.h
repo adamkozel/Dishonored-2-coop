@@ -16,7 +16,7 @@ struct CoopWindblastFxPacket {
 #pragma pack(pop)
 static_assert(sizeof(CoopWindblastFxPacket)==220);
 inline bool validWindblastFxPacket(const CoopWindblastFxPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x57463244||p.version!=2||p.variant<1||p.variant>3||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role||peer.role||local.role!=1||
+    if(p.magic!=0x57463244||p.version!=2||p.variant<1||p.variant>3||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.nativeFxId||!p.powerEvent||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.castTimeMs>1000||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;

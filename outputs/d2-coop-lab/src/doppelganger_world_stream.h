@@ -27,7 +27,7 @@ std::array<DoppelgangerWorldRecord,128> doppelgangerWorldHistory{};std::uint64_t
 void recordDoppelgangerWorld(const CoopDoppelgangerWorldPacket& p){doppelgangerWorldHistory[doppelgangerWorldHistoryCount++%128]={p.sequence,p.event,doppelgangerWorldDigest(p),p.nativeHandle,p.generation,p.present,p.fxKnown,p.fxScene,p.fxVariant,p.fxTimeMs};}
 bool doppelgangerWorldCurrent(ULONGLONG tick){return shadowStreamCurrent(tick)&&shadowStream.peerReady&&doppelgangerWorldStream.token==shadowStream.token&&doppelgangerWorldStream.peerToken==shadowStream.peerToken;}
 void sendDoppelgangerWorldSlot(ULONGLONG tick,DoppelgangerWorldStream& s,const NativeDoppelgangerWorld& w,unsigned slot){
-    CoopDoppelgangerWorldPacket p{};p.sequence=++doppelgangerWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopDoppelgangerWorldPacket p{};p.role=localRole;p.sequence=++doppelgangerWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
     p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.present=w.present?1u:0u;p.slot=slot;
     if(!memoryRead(w.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
@@ -65,7 +65,7 @@ void sampleDoppelgangerWorld(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;auto& s=doppelgangerWorldStream;
     if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){for(auto& x:doppelgangerWorldStreams)x={};return;}
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){for(auto& x:doppelgangerWorldStreams){x={};x.token=shadowStream.token;x.peerToken=shadowStream.peerToken;}}
-    if(localRole!=1||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500);
+    if(localCharacter()!=2||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500); // 1214ia (#159)
     // Discover from the selected exact power only. Never scan the full mixed
     // inventory on the engine thread. Late join with unequipped clone is pending.
     if(!s.discovered){
@@ -117,14 +117,14 @@ void presentDoppelgangerWorld(ULONGLONG tick){
 }
 void writeDoppelgangerWorld(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.doppelganger-world.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
-    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=doppelgangerWorldStream;const auto& p=localRole==1?s.sent:s.presented;
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=doppelgangerWorldStream;const auto& p=localCharacter()==2?s.sent:s.presented;
     fprintf(f,"{\"transportOnly\":false,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"unknown\":%llu,\"presented\":%llu,\"sequence\":%llu,\"event\":%llu,\"nativeHandle\":%u,\"generation\":%u,\"present\":%u,\"leased\":%s,\"readMaxMs\":%.4f,\"readStage\":%u,\"transform\":[",doppelgangerWorldSent,doppelgangerWorldReceived,doppelgangerWorldRejected,doppelgangerWorldUnknown,doppelgangerWorldPresented,p.sequence,p.event,p.nativeHandle,p.generation,p.present,s.lease>GetTickCount64()?"true":"false",doppelgangerReadMaxMs,doppelgangerReadStage);
     for(unsigned i=0;i<12;++i)fprintf(f,"%s%.6f",i?",":"",p.transform[i]);fputs("],\"history\":[",f);const auto n=(std::min)(doppelgangerWorldHistoryCount,128ull);
     for(std::uint64_t i=0;i<n;++i){const auto& r=doppelgangerWorldHistory[(doppelgangerWorldHistoryCount-n+i)%128];fprintf(f,"%s{\"sequence\":%llu,\"event\":%llu,\"digest\":\"%016llx\",\"handle\":%u,\"generation\":%u,\"present\":%u,\"fxKnown\":%u,\"fxScene\":%u,\"fxVariant\":%u,\"fxTimeMs\":%u}",i?",":"",r.sequence,r.event,r.digest,r.handle,r.generation,r.present,r.fxKnown,r.fxScene,r.fxVariant,r.fxTimeMs);}
     fprintf(f,"],\"sceneReadMaxMs\":%.4f,\"sceneReadLine\":%u,\"sceneUnknown\":%llu,\"fxKnown\":%u,\"fxScene\":%u,\"fxVariant\":%u,\"fxTimeMs\":%u",doppelgangerSceneReadMaxMs,doppelgangerSceneReadLine,doppelgangerSceneUnknown,p.fxKnown,p.fxScene,p.fxVariant,p.fxTimeMs);
     fprintf(f,",\"refusedSequence\":%llu,\"refusedJointMatrix\":[",doppelgangerRefusedSequence);for(unsigned i=0;i<12;++i){if(i)fputs(",",f);if(std::isfinite(doppelgangerRefusedJointMatrix[i]))fprintf(f,"%.9g",doppelgangerRefusedJointMatrix[i]);else fputs("null",f);}fputs("]",f);
     fprintf(f,",\"prepared\":%llu,\"packetRefused\":%llu,\"packetRefusedLine\":%u,\"packetRefusedJoint\":%u,\"sendFailed\":%llu,\"lastSendResult\":%d,\"failureSendRate\":%d,\"failurePendingBytes\":%d,\"failureQueueUs\":%lld",doppelgangerWorldSequence,doppelgangerPacketRefused,doppelgangerPacketRefusedLine,doppelgangerPacketRefusedJoint,doppelgangerSendFailed,doppelgangerLastSendResult,doppelgangerFailedSendStatus.m_nSendRateBytesPerSecond,doppelgangerFailedSendStatus.m_cbPendingUnreliable+doppelgangerFailedSendStatus.m_cbPendingReliable,doppelgangerFailedSendStatus.m_usecQueueTime);
-    fputs(",\"slots\":[",f);for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& x=doppelgangerWorldStreams[k];const auto& q=localRole==1?x.sent:x.presented;
+    fputs(",\"slots\":[",f);for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& x=doppelgangerWorldStreams[k];const auto& q=localCharacter()==2?x.sent:x.presented;
         fprintf(f,"%s{\"present\":%u,\"handle\":%u,\"generation\":%u,\"event\":%llu,\"sequence\":%llu,\"leased\":%s,\"fxScene\":%u,\"fxVariant\":%u}",k?",":"",q.present,q.nativeHandle,q.generation,q.event,q.sequence,x.lease>GetTickCount64()?"true":"false",q.fxScene,q.fxVariant);}
     fputs("]",f);
     fprintf(f,",\"poseReadMaxMs\":%.4f,\"poseReadFailed\":%llu,\"poseReadLine\":%u,\"poseLogic\":%u,\"poseJoints\":%u,\"poseRig\":\"%016llx\",\"poseStable\":%s,\"poseOwner\":%s}\n",doppelgangerPoseReadMaxMs,doppelgangerPoseReadFailed,doppelgangerPoseReadLine,doppelgangerPoseLogic,doppelgangerPoseJoints,doppelgangerPoseRigObserved,doppelgangerPoseStable?"true":"false",doppelgangerPoseOwner?"true":"false");const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);

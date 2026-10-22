@@ -13,7 +13,7 @@ struct CoopGrappleFxPacket {
 #pragma pack(pop)
 static_assert(sizeof(CoopGrappleFxPacket)==144);
 inline bool validGrappleFxPacket(const CoopGrappleFxPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x47503244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x47503244||p.version!=1||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.phase<1||p.phase>3||
        !std::isfinite(p.progress)||p.progress<0||p.progress>1||!coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||
        p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;

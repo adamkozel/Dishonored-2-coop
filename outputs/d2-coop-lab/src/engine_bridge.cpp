@@ -680,7 +680,7 @@ void sampleLocalPlayer() {
     outgoing.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);
     for(float f:transform)if(!std::isfinite(f))return;
     std::memcpy(outgoing.position,transform,12);std::memcpy(outgoing.orientation,transform+3,36);outgoing.flags=1;
-    if(localRole==0&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState){
+    if(localCharacter()==1&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState){ // 1214ia (#159): Blink, whoever plays Corvo
         NativePlayerStates blinkStates{};
         if(readNativePlayerStates(memoryRead,base,blinkStates)&&blinkStates.player.game==game&&blinkStates.player.player==player){
             sampledBlinkStateKnown=true;for(const auto& s:blinkStates.active)if(s.id==12)sampledBlinkStatePresent=true;
