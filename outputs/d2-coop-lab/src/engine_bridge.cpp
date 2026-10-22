@@ -143,6 +143,7 @@ std::uint32_t probeHandle=0;
 bool probeFollow=false;
 bool probeFollowExact=false;
 bool probeDoppelganger=false; // Set only by this lab's successful native spawn.
+int probeSpawnedCharacter=0; // 1214hz (#159): the character of the spawned partner avatar (1 Corvo, 2 Emily)
 bool phaseFollowInvalidated=false;
 std::uint64_t probeRemoteEpoch=0,probeRemoteSession=0;
 float probeOffset[3]{},probeRenderPosition[3]{};
@@ -1290,6 +1291,7 @@ bool spawnProbe(const char* character) {
     reinterpret_cast<void(*)(void*,void*,int)>(gameImage+0x8aecc0)(reinterpret_cast<void*>(observedGame),actor,-1);
     if(!doppelganger)reinterpret_cast<void(*)(void*,void*)>(gameImage+0x759a50)(reinterpret_cast<void*>(spawnerComponent),actor);
     probeActor=reinterpret_cast<std::uintptr_t>(actor);probeGame=observedGame;probeDoppelganger=doppelganger;
+    probeSpawnedCharacter=std::strstr(character,"corvo")?1:2; // 1214hz (#159)
     memoryRead(probeActor+0xa8,&probeHandle,4);
     reinterpret_cast<void(*)(void*,const char*)>(gameImage+0x87b780)(actor,emily?"d2coop_probe_emily":"d2coop_probe_corvo");
     reinterpret_cast<void(*)(void*)>(gameImage+0x87c590)(actor);

@@ -57,14 +57,34 @@ int coopPartnerCharacterForJoin(ULONGLONG tick,std::uint64_t joinKey){
     if(c.state==2)return c.character;
     if(c.state==0){if(openCoopCharacterChoice()){c.state=1;c.openedAt=tick;++c.opens;c.result="open";}else ++c.failures;}
     return 0;}
+// 1214hz (#159): a partner who joins again as the other character in the same host world kept the first avatar
+// (character-render-v1780a: d2coop_probe_corvo stayed for an Emily partner and her bank could not bind its rig).
+// Under the product controller, when the known partner character differs from the avatar's, the avatar is removed
+// natively (the remove event 0x1439a6f30 posted by FUN_1408847f0(entity, args, event), then FUN_140882fc0(args), as
+// the engine's own Remove handler FUN_140876ff0 does; confirmed static) and its identity is cleared as a world change
+// clears it; the arm's repair then spawns the partner's rig (session_product.h).
+std::uint64_t coopAvatarReplacements=0;
+void replaceStaleAvatar(){
+    if(!probeActor||!probeSpawnedCharacter||!remoteCharacterKnown()||probeSpawnedCharacter==remoteCharacter())return;
+    if(!productMode&&!productAutoArm)return; // lab scripts spawn and keep their own avatars
+    alignas(16) unsigned char args[32]{};
+    reinterpret_cast<void(*)(void*,void*,const void*)>(gameImage+0x8847f0)(reinterpret_cast<void*>(probeActor),args,gameImage+0x39a6f30);
+    reinterpret_cast<void(*)(void*)>(gameImage+0x882fc0)(args);
+    stopBodyProbe();mixamoResearch={};stopArmProbe("partner_character_changed");
+    networkFrameOwned.store(false,std::memory_order_release);controlledFrame.store(nullptr);
+    guardFrameUntil.store(0,std::memory_order_release);guardControlledFrame.store(nullptr,std::memory_order_release);
+    retireShadowDamageIdentity();probeActor=probeGame=probeHandle=0;probeFollow=false;phaseFollowInvalidated=false;probeSpawnedCharacter=0;
+    ++coopAvatarReplacements;}
 void serviceCoopCharacter(ULONGLONG tick){
+    replaceStaleAvatar();
     if(!connection)coopRemoteCharacter=0;
     if(tick-coopCharacterSampledAt<500||outgoing.gameLogicState!=1||outgoing.pendingGameLogicState)return;coopCharacterSampledAt=tick;
     NativePlayerSword s{};if(readNativePlayerSword(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s)&&(s.character==1||s.character==2))coopLocalCharacter=static_cast<int>(s.character);}
 void writeCoopCharacter(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.character.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=coopChoice;
-    fprintf(f,"{\"local\":%d,\"remote\":%d,\"localUsed\":%d,\"remoteUsed\":%d,\"role\":%u,\"choiceEnabled\":%s,\"choice\":{\"state\":%d,\"result\":\"%s\",\"character\":%d,\"handle\":%d,\"lastResult\":%d,\"opens\":%llu,\"answers\":%llu,\"others\":%llu,\"failures\":%llu}}\n",
+    fprintf(f,"{\"avatar\":%d,\"avatarReplacements\":%llu,",probeActor?probeSpawnedCharacter:0,static_cast<unsigned long long>(coopAvatarReplacements));
+    fprintf(f,"\"local\":%d,\"remote\":%d,\"localUsed\":%d,\"remoteUsed\":%d,\"role\":%u,\"choiceEnabled\":%s,\"choice\":{\"state\":%d,\"result\":\"%s\",\"character\":%d,\"handle\":%d,\"lastResult\":%d,\"opens\":%llu,\"answers\":%llu,\"others\":%llu,\"failures\":%llu}}\n",
         coopLocalCharacter.load(),coopRemoteCharacter.load(),localCharacter(),remoteCharacter(),localRole,(productMode||coopCharacterChoiceEnabled)?"true":"false",
         c.state,c.result,c.character,c.handle,c.lastResult,static_cast<unsigned long long>(c.opens),static_cast<unsigned long long>(c.answers),
         static_cast<unsigned long long>(c.others),static_cast<unsigned long long>(c.failures));
