@@ -140,3 +140,77 @@ Safe already:
   - `work/release/Enter-PairingFixture-v1790.ps1` loads the pairing slot and plays the same scene. This is a lab
     fixture matter, not a mod one: a real mission start has its sword.
 
+## #160: Corvo's powers used by the partner
+
+A Corvo partner's own world holds replicas of the host's NPCs: their AI is paused, and they follow the host's NPC stream.
+So her powers find nothing to act on there unless the host acts too. Each power needs its own path to the host's world.
+All takes are on the local lab at the Dunwall tutorial guard 2, with the partner loading SLOT80 (Corvo) under the
+product controller (`work/natural-moveset/Test-PartnerCorvoPower-*.ps1`, `Test-PartnerBendTime-*.ps1`).
+
+- **Windblast (no new code):** her copy's `windblast_npc` hit is forwarded and applied natively on the host (the existing
+  PeerNative path). partner-windblast-v1791a: the guard loses the same health (40 -> 26) and is pushed about 3.3 m in both
+  worlds (confirmed runtime).
+- **Devouring Swarm (1214id, `swarm_host.h`):** her rats found no prey in her replica world (partner-corvo-power-v1792a).
+  - While her swarm world stream is present, the host spawns a native swarm at her swarm's origin, as the power does
+    (0x8ae9b0 with `devouring_swarm.def`, the host player as parent, its team index, the AI stimulus 0x73 kind 0xb). The
+    host's cosmetic copy of her rats is hidden meanwhile.
+  - It ends with hers: the swarm's own flee request (0x1406a6650), and the native removal 8 s later.
+  - partner-corvo-power-v1794a: the host's rats kill the host's guard (40 -> 25 -> 10 -> 0), and her copy dies in step.
+    v1794c covers the whole lifecycle: the swarm flees about 3 s after hers ends and is removed 8 s later (confirmed
+    runtime).
+  - Gap: the corpse lies about 1.6 m from where her copy fell.
+- **Possession:** a human needs the upgrade `possession_parasite` (v1794b, without it, never possessed).
+  - Baseline partner-corvo-power-v1795a: her cast reaches the host as effects only (16 possession-fx packets presented),
+    and the host's guard keeps its own AI: her possessed copy walks 5.6 m, and the host's guard ends 1.3 m away.
+  - 1214if sends her Possession of a bound replica as a paired scene (variant 1000): PairedHold every 200 ms and her
+    possessed body as PairedPose, which the host follows as a victim (the AI lease, or without it when the guard is
+    alert; start range 60 m).
+  - 1214ig keeps her channel alive: the native possession takes the replica's AI, and the ownership watchdog stopped
+    the channel at once (partner-corvo-power-v1798a: ai_ownership_changed, 1 reverse pose sent).
+  - partner-corvo-power-v1800a (1214ih): her channel survives (client_possessed), and the host accepts 191 reverse
+    poses in follow mode, but never presents one (presentedRoot 0); its guard walks by its own AI 0.4-2.4 m from her
+    copy. 1214ii counts each refused host victim frame: all 621 were refused by the render identity
+    (`npcRenderCurrent`), which for a live NPC requires our lease's AI pause. The guard was alert (her avatar 4 m in
+    front), so it failed the calm-AI lease eligibility.
+  - 1214ij: her Possession forces the host's AI lease (the game suspends a possessed victim's AI whatever its state),
+    and a possessed render identity passes like a corpse or a knocked-out body.
+  - **Result (1214ij, confirmed runtime):** partner-corvo-power-v1802a passes. The host takes the possession hold
+    (`host_possession_hold`), presents all 659 victim frames, and its guard moves 7.78 m with her copy's 7.61 m, within
+    0.55 m of it (0.0 m once the walk settles).
+- **Bend Time and Stop Time (1214ie-1214ig, `time_bend.h`):** her NPC copies follow the host's stream, so her own time
+  request slows nothing that matters.
+  - Each game samples its own running Bend Time: the player's power component at +0x378 (+0xd0 active, +0xc0 its
+    request id), and that request's factor in the time manager (game+0x1f52e8: clock-3 requests at +0, 12 bytes
+    `{id, factor, persist}`, the smallest last). The pose flags carry it: bit 10, the percent in bits 16-22 (pose
+    version 13).
+  - The host adds the same factor as its own native request, as the game's non-power users do (FUN_14080eb40, persist 0,
+    never saved), with her native blends (0.5 s in, 1.0 s out). It removes the request when hers ends (FUN_14080ede0),
+    and keeps it through 300 ms without her bit, because her Stop Time re-issues its request on a second press.
+  - Both players keep real time through the manager's own exemption (FUN_14080d8c0, 1e30 s). The manager's update
+    rebends every exempted entity while byte +0x1a0 of the engine time object (game+0x2e7428) is 0 (0x14080f18e,
+    confirmed static).
+  - partner-bendtime-v1796a/v1797a (1214ie): the host held her factor 0 for her whole Stop Time and released it about
+    0.5 s after; the host's guard head moved 0 mm (404 mm before), and her copy followed. But the host player froze too
+    (0 m walks).
+  - partner-bendtime-v1798a (1214if) found why: the exemption was dropped in the first frames, while the flag was still
+    0 (exemption seconds 0, clock 0); the flag was 1 by the next sample. The host's own cast keeps 1e30 on the unbent
+    clock. Base Bend Time runs the world at 0.25 and the caster's clock at 0.7 (his walks 1.9/1.4 m against 2.8/2.0).
+  - 1214ig exempts both players again every 100 ms while the request is held. 1214ih passes the exemption seconds as
+    raw bits in R8D: FUN_14080d8c0 spills R8D and stores it (the power passes 0x7149f2ca, 1e30), so a float argument in
+    XMM2 left whatever R8 held (1214ig read 1.97e15).
+  - **Result (1214ih, confirmed runtime):** partner-bendtime-v1800a (Stop Time) and v1800b (base Bend Time, her factor
+    25 percent) pass. The host holds her factor for her whole Bend Time (12/12, 11/11 samples) and releases it after.
+    The host's guard head moves 0 mm in her Stop Time (72.8 mm before) and 126 mm in her Bend Time (282 mm before),
+    and her copy follows. The host player stays on the unbent clock: his walks in her Stop Time cover 2.84/1.92 m,
+    against 2.82/1.96 m before.
+  - The host sees no Bend Time screen effect: that belongs to the caster (the effect mode needs the local player's own
+    component active).
+  - Gap (to film): after her Stop Time ends, her copy's head joint stays still while the host's guard idles (after
+    base Bend Time it moves). Her camera faced the ceiling in these takes.
+- **Blink:** her Blink casts (her blink effect stream sends), and her attack after it is shared:
+  - partner-corvo-power-v1804a: her post-blink sword kill killed the host's guard too (40 -> 0 in both worlds).
+  - Blink Assault's kick has not landed in a take yet. In v1801a-v1803a the guard walked its patrol, or her channel
+    for it had not formed. In v1804a she killed rather than kicked, and the host's corpse lay 6.9 m from hers: her
+    replica was stale before the strike.
+- **Moved to #168 (stage 4):** Blink Assault's kick, her replicas' skeleton after her Stop Time ends, the upgrades
+  (Greater Windblast, Double Swarm, the possession chains) and a framed visual review of each power.
