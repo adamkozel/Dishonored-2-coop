@@ -40,6 +40,8 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
             // check: the guard got up in both worlds and killed her. A lethal scene now
             // follows the client's victim pose without the lease (its root is presented at
             // the client's victim, which also keeps the replay's proximity check true).
+            // 1214ij (#160): her Possession takes the lease even from an alert guard.
+            else if(c.pairedVariant==kNpcPossessionVariant&&(releaseNpcAiLease(c.lease),acquireNpcAiLease(c.lease,true))){c.hostPairedLease=true;++npcPairedHolds;++npcPairedForced;c.pairedResult="host_possession_hold";}
             else{releaseNpcAiLease(c.lease);
                 if(nativeTakedownLethal(c.pairedVariant)||c.pairedVariant==kNpcPossessionVariant){if(!c.hostPairedFollow){c.hostPairedFollow=true;++npcPairedFollows;c.pairedResult="host_paired_follow";}}
                 else{++npcPairedRefused;c.pairedResult="host_paired_hold_refused";}}
